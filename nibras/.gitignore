@@ -1,6 +1,0 @@
-*.jks
-*.keystore
-node_modules/
-android/app/build/
-android/.gradle/
-android/.kotlin/
