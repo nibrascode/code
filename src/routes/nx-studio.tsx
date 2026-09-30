@@ -64,17 +64,18 @@ const CATALOG = [
   { slug: "nibras-plans", name: "Nibras Plans" },
 ] as const;
 
-type DeskTab = "home" | "apps" | "privacy" | "about" | "unutma" | "contact" | "lessons" | "library";
+type DeskTab = "home" | "apps" | "privacy" | "about" | "unutma" | "contact" | "lessons" | "library" | "guides";
 
 const NAV: { id: DeskTab; label: string; icon: typeof Home }[] = [
   { id: "home", label: "Ana səhifə", icon: Home },
   { id: "apps", label: "Tətbiqlər", icon: LayoutGrid },
+  { id: "lessons", label: "Proqramlaşdırma", icon: Code2 },
+  { id: "library", label: "Resurslar", icon: Library },
+  { id: "guides", label: "Bələdçilər", icon: ScrollText },
   { id: "privacy", label: "Məxfilik", icon: FileText },
   { id: "contact", label: "Əlaqə", icon: Mail },
   { id: "unutma", label: "Unutma", icon: ScrollText },
   { id: "about", label: "Haqqımızda", icon: Info },
-  { id: "lessons", label: "Proqramlaşdırma", icon: Code2 },
-  { id: "library", label: "Resurslar", icon: Library },
 ];
 
 const MONTHS = [
@@ -304,7 +305,8 @@ function StudioPage() {
           {ready && session && tab === "about" ? <AboutEditor /> : null}
           {ready && session && tab === "unutma" ? <UnutmaEditor /> : null}
           {ready && session && tab === "lessons" ? <LessonsEditor /> : null}
-          {ready && session && tab === "library" ? <LibraryEditor /> : null}
+          {ready && session && tab === "library" ? <LibraryEditor start="resurs" /> : null}
+          {ready && session && tab === "guides" ? <LibraryEditor start="guide" /> : null}
           {ready && session && tab === "contact" ? <ContactPanel /> : null}
         </section>
       </div>
@@ -435,6 +437,29 @@ function DeskHome({ open, query, token }: { open: (tab: DeskTab) => void; query:
               <img src={ICONS[app.slug]} alt="" />
               <b>{app.name}</b>
               <small>{hits ? `${sumHits(rows, "download", thisMonth, app.slug)} basılma` : app.slug}</small>
+              <ChevronRight size={16} />
+            </button>
+          ))}
+        </div>
+      </div>
+      <div className="dash-panel">
+        <header>
+          <b>Məzmun bölmələri</b>
+        </header>
+        <div className="dash-jumps">
+          {(
+            [
+              ["lessons", "Proqramlaşdırma"],
+              ["library", "Resurslar"],
+              ["guides", "Bələdçilər"],
+              ["about", "Haqqımızda"],
+              ["unutma", "Unutma"],
+              ["privacy", "Məxfilik"],
+              ["contact", "Əlaqə"],
+            ] as const
+          ).map(([id, label]) => (
+            <button key={id} type="button" onClick={() => open(id)}>
+              {label}
               <ChevronRight size={16} />
             </button>
           ))}
@@ -1223,9 +1248,9 @@ function LessonsEditor() {
   );
 }
 
-function LibraryEditor() {
+function LibraryEditor({ start }: { start: LibGroup }) {
   const [rows, setRows] = useState<StudioPrivacyRow[]>([]);
-  const [group, setGroup] = useState<LibGroup>("resurs");
+  const [group, setGroup] = useState<LibGroup>(start);
   const [id, setId] = useState("");
   const [lang, setLang] = useState<Lang>("az");
   const [title, setTitle] = useState("");
@@ -1239,6 +1264,11 @@ function LibraryEditor() {
   }
 
   useEffect(load, []);
+
+  useEffect(() => {
+    setGroup(start);
+    setId("");
+  }, [start]);
 
   const items = libItems(group, rows);
   const custom = id ? !LIB_GROUPS[group].pages.some((item) => item.id === id) : false;

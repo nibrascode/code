@@ -4537,6 +4537,9 @@ body.is-studio {
 .dash-side nav {
   display: grid;
   gap: 4px;
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
 }
 
 .dash-side nav button {
@@ -4906,8 +4909,10 @@ body.is-studio {
 
   .dash-side nav {
     display: flex;
+    flex: none;
+    flex-wrap: wrap;
     gap: 6px;
-    overflow: auto;
+    overflow: visible;
   }
 
   .dash-side nav button {
