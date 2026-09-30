@@ -3,7 +3,7 @@ import { a as deleteApp, c as fetchPage, d as fetchStudioApps, f as saveApp, l a
 import { f as LANGS } from "./ru-resources-CuxB562x.mjs";
 import { H as require_react, b as require_jsx_runtime } from "../_libs/@tanstack/react-router+[...].mjs";
 import { a as ScrollText, c as Mail, d as LayoutGrid, f as Info, g as ChevronRight, h as CodeXml, i as Search, l as LogOut, m as FileText, p as House, s as Moon, u as Library, v as Calendar, y as Bell } from "../_libs/lucide-react.mjs";
-import { T as syncStudioToGithub, w as loadStudioBundle } from "./router-BoZZA4ay.mjs";
+import { T as syncStudioToGithub, w as loadStudioBundle } from "./router-Dtsiv1Tl.mjs";
 import { n as PDF_PRIVACY, t as ARABIC_PRIVACY } from "./pdf-privacy-yrRm7nDf.mjs";
 import { a as libSlug, n as libDefaults, o as savedLib, r as libItems, t as LIB_GROUPS } from "./library-admin-Cbau_BiC.mjs";
 import { i as slugifyLesson, n as lessonSlug, r as pythonSections, t as PYTHON_LESSONS } from "./lessons-lpAbTzEA.mjs";

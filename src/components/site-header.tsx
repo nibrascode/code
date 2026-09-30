@@ -27,9 +27,6 @@ export function SiteHeader() {
           <Link to="/apps" className="back-link">
             {t("b_nav_apps")}
           </Link>
-          <NavMenu section="resources" />
-          <NavMenu section="guides" />
-          <NavMenu section="programming" />
           <Link to="/unutma" className="back-link">
             {t("remind_btn")}
           </Link>
@@ -53,8 +50,15 @@ export function SiteFooter() {
   const { t } = useI18n();
   return (
     <footer className="site-footer">
-      <span className="footer-domain">{t("footer_domain")}</span>
-      <span className="footer-year">©2026</span>
+      <nav className="footer-panels" aria-label="Nibras Code">
+        <NavMenu section="resources" />
+        <NavMenu section="guides" />
+        <NavMenu section="programming" />
+      </nav>
+      <div className="footer-end">
+        <span className="footer-domain">{t("footer_domain")}</span>
+        <span className="footer-year">©2026</span>
+      </div>
     </footer>
   );
 }
