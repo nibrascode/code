@@ -51,21 +51,21 @@ export const PYTHON_LESSONS: readonly { id: string; titles: Titles }[] = [
   {
     id: "javascript",
     titles: {
-      az: "Python və JavaScript fərqi",
-      en: "Python vs JavaScript",
-      tr: "Python ve JavaScript farkı",
-      ar: "الفرق بين بايثون وجافاسكريبت",
-      ru: "Разница Python и JavaScript",
+      az: "Python və JavaScript arasındakı fərq",
+      en: "Difference Between Python and JavaScript",
+      tr: "Python ve JavaScript Arasındaki Fark",
+      ar: "الفرق بين Python وJavaScript",
+      ru: "Разница между Python и JavaScript",
     },
   },
   {
     id: "java",
     titles: {
-      az: "Python və Java fərqi",
-      en: "Python vs Java",
-      tr: "Python ve Java farkı",
-      ar: "الفرق بين بايثون وجافا",
-      ru: "Разница Python и Java",
+      az: "Python və Java arasındakı fərq",
+      en: "Difference Between Python and Java",
+      tr: "Python ve Java Arasındaki Fark",
+      ar: "الفرق بين Python وJava",
+      ru: "Разница между Python и Java",
     },
   },
   {

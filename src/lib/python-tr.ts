@@ -259,4 +259,26 @@ export const PYTHON_TR: readonly ProgrammingSection[] = [
       },
     ],
   },
+  {
+    id: "javascript",
+    title: "Python ve JavaScript Arasındaki Fark",
+    blocks: [
+      {
+        paragraphs: [
+          "Python ve JavaScript yaygın olarak kullanılan programlama dilleridir, ancak kullanım alanları genellikle farklıdır. Python; yapay zekâ, veri analizi, otomasyon ve backend geliştirmede yaygın olarak kullanılır. JavaScript ise özellikle etkileşimli web siteleri ve frontend uygulamaları geliştirmek için kullanılır. Node.js gibi teknolojiler sayesinde backend geliştirmede de kullanılabilir.",
+        ],
+      },
+    ],
+  },
+  {
+    id: "java",
+    title: "Python ve Java Arasındaki Fark",
+    blocks: [
+      {
+        paragraphs: [
+          "Python ve Java farklı amaçlarla kullanılan popüler programlama dilleridir. Python, basit ve okunabilir söz dizimiyle öne çıkar ve yapay zekâ, veri analizi, otomasyon ve backend geliştirmede yaygın olarak kullanılır. Java ise büyük yazılım sistemleri, backend hizmetleri, kurumsal uygulamalar ve farklı platformlarda çalışan yazılımların geliştirilmesinde sıkça kullanılır.",
+        ],
+      },
+    ],
+  },
 ];

@@ -340,32 +340,54 @@ export const PROGRAMMING: readonly ProgrammingPage[] = [
           },
         ],
       },
+      {
+        id: "javascript",
+        title: "Python və JavaScript arasındakı fərq",
+        blocks: [
+          {
+            paragraphs: [
+              "Python və JavaScript hər ikisi geniş istifadə olunan proqramlaşdırma dilləridir, lakin əsas istifadə sahələri fərqlidir. Python daha çox süni intellekt, məlumat analizi, avtomatlaşdırma və backend proqramlaşdırmada istifadə olunur. JavaScript isə əsasən veb səhifələrin interaktivliyini təmin etmək və frontend proqramlaşdırma üçün istifadə edilir. JavaScript backend üçün də Node.js vasitəsilə istifadə oluna bilər.",
+            ],
+          },
+        ],
+      },
+      {
+        id: "java",
+        title: "Python və Java arasındakı fərq",
+        blocks: [
+          {
+            paragraphs: [
+              "Python və Java müxtəlif məqsədlər üçün istifadə olunan məşhur proqramlaşdırma dilləridir. Python sadə və oxunaqlı sintaksisə malikdir və süni intellekt, məlumat analizi, avtomatlaşdırma və backend proqramlaşdırmada geniş istifadə olunur. Java isə böyük proqram sistemləri, backend xidmətləri, müəssisə proqramları və müxtəlif platformalarda işləyən tətbiqlərin hazırlanmasında geniş istifadə edilir.",
+            ],
+          },
+        ],
+      },
     ],
     seo: seo(
       {
         title: "Python nədir? İstifadə sahələri və üstünlükləri — Nibras Code",
         description: "Python proqramlaşdırma dili: harada işlədilir və nə üçün seçilir.",
-        keywords: "Python nədir, Python istifadə sahələri, Python proqramlaşdırma",
+        keywords: "Python nədir, Python istifadə sahələri, Python və JavaScript fərqi, Python və Java fərqi",
       },
       {
         title: "What is Python? Uses and advantages — Nibras Code",
         description: "What the Python programming language is used for, and why people choose it.",
-        keywords: "what is Python, Python uses, Python programming language",
+        keywords: "what is Python, Python vs JavaScript, Python vs Java, Python programming language",
       },
       {
         title: "Python nedir? Kullanım alanları ve avantajları — Nibras Code",
         description: "Python programlama dili nerede kullanılır ve neden tercih edilir.",
-        keywords: "Python nedir, Python kullanım alanları, Python programlama",
+        keywords: "Python nedir, Python JavaScript farkı, Python Java farkı, Python programlama",
       },
       {
         title: "ما هي بايثون؟ استخداماتها ومزاياها — Nibras Code",
         description: "ما هي لغة Python وأين تُستخدم ولماذا يختارها الناس.",
-        keywords: "ما هي بايثون, استخدامات Python, لغة برمجة Python",
+        keywords: "ما هي بايثون, الفرق بين Python وJavaScript, الفرق بين Python وJava",
       },
       {
         title: "Что такое Python? Области применения и преимущества — Nibras Code",
         description: "Где используют язык Python и почему его выбирают.",
-        keywords: "что такое Python, применение Python, язык программирования Python",
+        keywords: "что такое Python, разница Python и JavaScript, разница Python и Java",
       },
     ),
   },

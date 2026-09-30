@@ -281,4 +281,26 @@ export const PYTHON_EN: readonly ProgrammingSection[] = [
       },
     ],
   },
+  {
+    id: "javascript",
+    title: "Difference Between Python and JavaScript",
+    blocks: [
+      {
+        paragraphs: [
+          "Python and JavaScript are both widely used programming languages, but they are commonly used for different purposes. Python is popular for artificial intelligence, data analysis, automation, and backend development. JavaScript is mainly used to create interactive websites and frontend applications. It can also be used for backend development with technologies such as Node.js.",
+        ],
+      },
+    ],
+  },
+  {
+    id: "java",
+    title: "Difference Between Python and Java",
+    blocks: [
+      {
+        paragraphs: [
+          "Python and Java are popular programming languages used for different purposes. Python has a simple and readable syntax and is widely used in artificial intelligence, data analysis, automation, and backend development. Java is commonly used for large software systems, backend services, enterprise applications, and applications designed to run across different platforms.",
+        ],
+      },
+    ],
+  },
 ];
