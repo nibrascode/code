@@ -245,6 +245,7 @@ function Home() {
       </section>
 
       <section className="nx-apps" id="apps">
+        <p className="nx-kicker">{t("nx_apps_k")}</p>
         <div className="nx-grid">
           {cards.map(({ card, live }) => {
             const badge = statusText(
