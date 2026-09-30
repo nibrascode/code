@@ -152,13 +152,6 @@ function Home() {
       </section>
 
       <section className="nx-apps" id="apps">
-        <div className="nx-apps-head">
-          <div>
-            <p className="nx-kicker">{t("nx_apps_k")}</p>
-            <h2>{t("nx_apps_h")}</h2>
-          </div>
-          <Link to="/apps">{t("nx_all")}</Link>
-        </div>
         <div className="nx-grid">
           {cards.map(({ card, live }) => {
             const badge = statusText(

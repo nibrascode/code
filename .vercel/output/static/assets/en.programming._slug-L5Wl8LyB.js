@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-Cltr0gcK.js";import{a as t}from"./index-CdzJFHtJ.js";import{i as n,r}from"./library-page-BaKtNHP-.js";var i=e();function a(){let{page:e,privacy:a}=t.useLoaderData();return e.slug===`python`?(0,i.jsx)(n,{privacy:a}):(0,i.jsx)(r,{title:e.title,sections:e.sections})}export{a as component};
