@@ -51,6 +51,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (urlHasLang) {
+      setLangState(urlLang);
       applyDocumentLang(urlLang);
       return;
     }

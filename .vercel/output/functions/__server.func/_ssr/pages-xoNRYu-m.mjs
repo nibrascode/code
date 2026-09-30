@@ -1,4 +1,4 @@
-import { _ as translations } from "./ru-resources-CVCupnGQ.mjs";
+import { _ as translations } from "./ru-resources-44w1ODBC.mjs";
 //#region node_modules/.nitro/vite/services/ssr/assets/pages-xoNRYu-m.js
 function lines(text) {
 	return text.split(/\n+/).map((line) => line.trim()).filter(Boolean);
