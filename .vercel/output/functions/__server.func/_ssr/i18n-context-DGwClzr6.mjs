@@ -1,6 +1,6 @@
 import { i as __toESM } from "../_runtime.mjs";
-import { H as require_react, b as require_jsx_runtime, d as useRouterState } from "../_libs/@tanstack/react-router+[...].mjs";
 import { _ as programmingLocalePath, a as findProgramming, d as findProgrammingLocale, g as programmingFromPath, h as pdfPairFromPath, i as STORAGE_KEY, l as RESURSLAR, o as translations, r as PROGRAMMING, t as LANGS, u as RU_RESOURCES } from "./programming-DwqnMd8d.mjs";
+import { H as require_react, b as require_jsx_runtime, d as useRouterState } from "../_libs/@tanstack/react-router+[...].mjs";
 //#region node_modules/.nitro/vite/services/ssr/assets/i18n-context-DGwClzr6.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
