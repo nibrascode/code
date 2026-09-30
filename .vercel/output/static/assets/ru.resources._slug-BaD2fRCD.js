@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-Cltr0gcK.js";import{n as t}from"./index-CgVCgF8F.js";import{i as n,o as r}from"./library-admin-B5ebqwRJ.js";import{n as i}from"./resurs-page-DFhlji0p.js";var a=e();function o(){let{page:e,privacy:o,id:s}=t.useLoaderData(),c=r(`resurs`,s,`ru`,o);return(0,a.jsx)(i,{page:e??void 0,title:c?.title,paragraphs:c?n(c.body):void 0})}export{o as component};
