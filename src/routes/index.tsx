@@ -61,20 +61,16 @@ function Logo({ className }: { className?: string }) {
   return <img src="/nibras-icon.png" alt="" className={className} />;
 }
 
-const DRIFT: { id: "apk" | "kotlin" | "java" | "swift" | "js" | "ts" | "dart" | "python" | "cpp" | "ios"; top: string; left: string }[] = [
-  { id: "python", top: "7%", left: "8%" },
-  { id: "js", top: "12%", left: "86%" },
-  { id: "apk", top: "24%", left: "18%" },
-  { id: "ios", top: "20%", left: "72%" },
-  { id: "java", top: "38%", left: "6%" },
-  { id: "ts", top: "42%", left: "90%" },
-  { id: "kotlin", top: "54%", left: "14%" },
-  { id: "swift", top: "58%", left: "80%" },
-  { id: "cpp", top: "70%", left: "10%" },
-  { id: "dart", top: "74%", left: "88%" },
-  { id: "apk", top: "86%", left: "22%" },
-  { id: "ios", top: "90%", left: "70%" },
-];
+const DRIFT_KINDS = ["python", "js", "ts", "java", "kotlin", "swift", "cpp", "dart", "apk", "ios"] as const;
+
+const DRIFT = DRIFT_KINDS.flatMap((id, kind) =>
+  [0, 1, 2, 3].map((copy) => ({
+    id,
+    top: `${6 + ((kind * 13 + copy * 21) % 86)}%`,
+    left: `${3 + ((kind * 31 + copy * 17) % 90)}%`,
+    delay: `${((kind * 3 + copy * 2) % 7) * 0.45}s`,
+  })),
+);
 
 function IosMark() {
   return (
@@ -91,7 +87,11 @@ function HomeDrift() {
   return (
     <div className="nx-drift" aria-hidden="true">
       {DRIFT.map((item, index) => (
-        <span key={`${item.id}-${index}`} className={`is-${item.id}`} style={{ top: item.top, left: item.left }}>
+        <span
+          key={`${item.id}-${index}`}
+          className={`is-${item.id}`}
+          style={{ top: item.top, left: item.left, animationDelay: item.delay }}
+        >
           {item.id === "ios" ? <IosMark /> : <TechMark id={item.id} />}
         </span>
       ))}
