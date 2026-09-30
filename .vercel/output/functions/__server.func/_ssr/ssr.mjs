@@ -87,7 +87,7 @@ var HEADERS = { TSS_SHELL: "X-TSS_SHELL" };
 * the dev styles URL for route-scoped CSS collection.
 */
 async function getStartManifest(matchedRoutes) {
-	const { tsrStartManifest } = await import("../_tanstack-start-manifest_v-3pjSbMXx.mjs");
+	const { tsrStartManifest } = await import("../_tanstack-start-manifest_v-CTBqKVxm.mjs");
 	const startManifest = tsrStartManifest();
 	let routes = startManifest.routes;
 	routes[rootRouteId];
@@ -109,11 +109,15 @@ async function getStartManifest(matchedRoutes) {
 var manifest = {
 	"32767ffa08db701344b383dca8bcfbbfe190c3f4a456643a7499e4f81d98c88c": {
 		functionName: "recordHit_createServerFn_handler",
-		importer: () => import("./studio.functions-9udiFEal.mjs")
+		importer: () => import("./studio.functions-B_gkBizn.mjs")
 	},
 	"519616068c9ea61d7d898c414e7170fbaae397de6c1a2569ed0660f883997ffd": {
 		functionName: "loadStudioBundle_createServerFn_handler",
-		importer: () => import("./studio.functions-9udiFEal.mjs")
+		importer: () => import("./studio.functions-B_gkBizn.mjs")
+	},
+	"eeb2b86ddeb133b0894dbb47463d7981736804ceb2649523d5ecd8d5f2aed4a0": {
+		functionName: "syncStudioToGithub_createServerFn_handler",
+		importer: () => import("./studio.functions-B_gkBizn.mjs")
 	}
 };
 async function getServerFnById(id, access) {
@@ -1383,7 +1387,7 @@ var getBaseManifest = getProdBaseManifest;
 var createEarlyHintsForRequest = createEarlyHintsCollector;
 async function loadEntries() {
 	const [routerEntry, startEntry, pluginAdapters] = await Promise.all([
-		import("./router-fULI7LCk.mjs").then((n) => n.t),
+		import("./router-DghMRicM.mjs").then((n) => n.t),
 		import("./start-5Z2QO8AU.mjs"),
 		import("./empty-plugin-adapters-D9UWiqvJ.mjs")
 	]);

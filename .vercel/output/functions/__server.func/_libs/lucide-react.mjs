@@ -182,6 +182,26 @@ var ChevronRight = createLucideIcon("chevron-right", [["path", {
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
+var CodeXml = createLucideIcon("code-xml", [
+	["path", {
+		d: "m18 16 4-4-4-4",
+		key: "1inbqp"
+	}],
+	["path", {
+		d: "m6 8-4 4 4 4",
+		key: "15zrgr"
+	}],
+	["path", {
+		d: "m14.5 4-5 16",
+		key: "e7oirm"
+	}]
+]);
+/**
+* @license lucide-react v0.510.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
 var FileText = createLucideIcon("file-text", [
 	["path", {
 		d: "M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z",
@@ -277,6 +297,30 @@ var LayoutGrid = createLucideIcon("layout-grid", [
 		y: "14",
 		rx: "1",
 		key: "1bb6yr"
+	}]
+]);
+/**
+* @license lucide-react v0.510.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Library = createLucideIcon("library", [
+	["path", {
+		d: "m16 6 4 14",
+		key: "ji33uf"
+	}],
+	["path", {
+		d: "M12 6v14",
+		key: "1n7gus"
+	}],
+	["path", {
+		d: "M8 8v12",
+		key: "1gg7y9"
+	}],
+	["path", {
+		d: "M4 4v16",
+		key: "6qkkli"
 	}]
 ]);
 /**
@@ -433,4 +477,4 @@ var Zap = createLucideIcon("zap", [["path", {
 	key: "1xq2db"
 }]]);
 //#endregion
-export { Bell as _, ScrollText as a, ArrowLeft as b, Mail as c, Info as d, House as f, Calendar as g, ChevronDown as h, Search as i, LogOut as l, ChevronRight as m, TriangleAlert as n, RefreshCw as o, FileText as p, Shield as r, Moon as s, Zap as t, LayoutGrid as u, BadgeCheck as v, ArrowUpRight as y };
+export { ArrowLeft as S, ChevronDown as _, ScrollText as a, BadgeCheck as b, Mail as c, LayoutGrid as d, Info as f, ChevronRight as g, CodeXml as h, Search as i, LogOut as l, FileText as m, TriangleAlert as n, RefreshCw as o, House as p, Shield as r, Moon as s, Zap as t, Library as u, Calendar as v, ArrowUpRight as x, Bell as y };

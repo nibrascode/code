@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-Cltr0gcK.js";import{B as t,P as n,z as r}from"./index-VZFs6aP8.js";var i=e();function a(){let{t:e}=n();return r({select:e=>e.location.pathname}).replace(/\/$/,``)===`/privacy`?(0,i.jsx)(`main`,{className:`why-page privacy-page`,children:(0,i.jsx)(`h1`,{children:e(`privacy_btn`)})}):(0,i.jsx)(t,{})}export{a as component};

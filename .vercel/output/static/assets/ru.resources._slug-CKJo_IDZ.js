@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-Cltr0gcK.js";import{n as t}from"./index-VZFs6aP8.js";import{n}from"./resurs-page-Bidj96XX.js";var r=e();function i(){return(0,r.jsx)(n,{page:t.useLoaderData()})}export{i as component};
