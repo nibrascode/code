@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useI18n } from "@/lib/i18n-context";
 import type { TKey } from "@/lib/i18n";
@@ -26,43 +25,24 @@ const LABEL = {
 export function AppSuggest() {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
   const { t, lang } = useI18n();
-  const [index, setIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const hidden = pathname === "/" || pathname.startsWith("/nx-studio");
+  if (pathname === "/" || pathname.startsWith("/nx-studio")) return null;
   const cards = CARDS.filter((card) => !pathname.startsWith(`/apps/${card.slug}`));
-  const card = cards[index % cards.length];
-
-  useEffect(() => {
-    setIndex(0);
-  }, [pathname]);
-
-  useEffect(() => {
-    if (hidden || paused || cards.length < 2) return;
-    const timer = window.setInterval(() => setIndex((current) => current + 1), 10000);
-    return () => window.clearInterval(timer);
-  }, [hidden, paused, cards.length]);
-
-  if (hidden || !card) return null;
+  if (!cards.length) return null;
 
   return (
-    <Link
-      key={`${card.slug}-${index}`}
-      to="/apps/$slug"
-      params={{ slug: card.slug }}
-      className="app-suggest"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocus={() => setPaused(true)}
-      onBlur={() => setPaused(false)}
-    >
-      <span className="app-suggest-kicker">{LABEL[lang]}</span>
-      <span className="app-suggest-row">
-        <img src={card.icon} alt="" />
-        <span>
-          <b>{card.name}</b>
-          <em>{t(card.chip)}</em>
-        </span>
-      </span>
-    </Link>
+    <aside className="app-suggest">
+      <p>{LABEL[lang]}</p>
+      <div>
+        {cards.map((card) => (
+          <Link key={card.slug} to="/apps/$slug" params={{ slug: card.slug }}>
+            <img src={card.icon} alt="" />
+            <span>
+              <b>{card.name}</b>
+              <em>{t(card.chip)}</em>
+            </span>
+          </Link>
+        ))}
+      </div>
+    </aside>
   );
 }
