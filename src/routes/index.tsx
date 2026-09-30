@@ -64,12 +64,10 @@ function Logo({ className }: { className?: string }) {
 
 const DRIFT_KINDS = ["python", "js", "ts", "java", "kotlin", "swift", "cpp", "dart", "apk", "ios"] as const;
 
-const DRIFT = DRIFT_KINDS.flatMap((id, kind) =>
-  (kind % 2 === 0 ? [0, 1] : [0]).map((copy) => ({
-    id,
-    size: (kind + copy) % 3 === 0 ? 22 : 28,
-  })),
-);
+const DRIFT = DRIFT_KINDS.map((id, kind) => ({
+  id,
+  size: kind % 3 === 0 ? 22 : 28,
+}));
 
 function HomeDrift() {
   const root = useRef<HTMLDivElement>(null);
