@@ -1,11 +1,11 @@
 import { i as __toESM } from "../_runtime.mjs";
-import { f as LANGS } from "./ru-resources-CVCupnGQ.mjs";
-import { H as require_react, b as require_jsx_runtime } from "../_libs/@tanstack/react-router+[...].mjs";
 import { a as deleteApp, c as fetchPage, d as fetchStudioApps, f as saveApp, l as fetchPrivacyAll, m as signIn, o as deletePrivacy, p as savePrivacy, r as STUDIO_SQL, s as fetchHits, t as STUDIO_EMAIL, v as validSession, y as writeSession } from "./studio-BiKknOvt.mjs";
+import { H as require_react, b as require_jsx_runtime } from "../_libs/@tanstack/react-router+[...].mjs";
+import { f as LANGS } from "./ru-resources-CVCupnGQ.mjs";
 import { a as ScrollText, c as Mail, d as LayoutGrid, f as Info, g as ChevronRight, h as CodeXml, i as Search, l as LogOut, m as FileText, p as House, s as Moon, u as Library, v as Calendar, y as Bell } from "../_libs/lucide-react.mjs";
-import { C as loadStudioBundle, w as syncStudioToGithub } from "./router-DghMRicM.mjs";
-import { a as libSlug, n as libDefaults, o as savedLib, r as libItems, t as LIB_GROUPS } from "./library-admin-3rVzQv4I.mjs";
+import { C as loadStudioBundle, w as syncStudioToGithub } from "./router-BsTzU6cm.mjs";
 import { n as PDF_PRIVACY, t as ARABIC_PRIVACY } from "./pdf-privacy-yrRm7nDf.mjs";
+import { a as libSlug, n as libDefaults, o as savedLib, r as libItems, t as LIB_GROUPS } from "./library-admin-3rVzQv4I.mjs";
 import { i as slugifyLesson, n as lessonSlug, r as pythonSections, t as PYTHON_LESSONS } from "./lessons-Coh5I6PG.mjs";
 import { a as lines, i as defaultUnutma, n as aboutFromRow, o as unutmaBody, r as defaultAbout, s as unutmaFromRow, t as aboutBody } from "./pages-C9ugibxp.mjs";
 //#region node_modules/.nitro/vite/services/ssr/assets/nx-studio-C_RaBQyu.js

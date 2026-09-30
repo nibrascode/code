@@ -4421,8 +4421,10 @@ body.is-home .noise {
   gap: 8px;
 }
 
-.dash-target {
-  margin-inline-end: 8px;
+.dash-target button {
+  min-height: 28px;
+  padding: 0 8px;
+  font-size: 11px;
 }
 
 .dash-tools {
@@ -4484,7 +4486,7 @@ body.is-studio {
 
 .dash {
   display: grid;
-  grid-template-columns: 248px minmax(0, 1fr);
+  grid-template-columns: 220px minmax(0, 1fr);
   min-height: 100vh;
   background:
     radial-gradient(900px 420px at 80% -10%, rgb(47 108 255 / 0.16), transparent 60%),
@@ -4498,7 +4500,7 @@ body.is-studio {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  padding: 22px 14px 16px;
+  padding: 16px 10px 12px;
   background: #0a1222;
   border-right: 1px solid rgb(255 255 255 / 0.06);
 }
@@ -4527,7 +4529,7 @@ body.is-studio {
 }
 
 .dash-kicker {
-  margin: 22px 10px 8px;
+  margin: 14px 8px 6px;
   color: #7f8eab;
   font-size: 11px;
   letter-spacing: 0.14em;
@@ -4536,7 +4538,8 @@ body.is-studio {
 
 .dash-side nav {
   display: grid;
-  gap: 4px;
+  gap: 2px;
+  align-content: start;
   flex: 1;
   min-height: 0;
   overflow: auto;
@@ -4544,14 +4547,16 @@ body.is-studio {
 
 .dash-side nav button {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   align-items: center;
   width: 100%;
-  padding: 11px 12px;
+  min-height: 36px;
+  padding: 7px 10px;
   border: 0;
-  border-radius: 12px;
+  border-radius: 10px;
   background: transparent;
   color: #c5d2ea;
+  font-size: 13.5px;
   text-align: left;
   cursor: pointer;
 }
