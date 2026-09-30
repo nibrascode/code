@@ -341,22 +341,7 @@ function Home() {
       </section>
 
       <footer className="nx-foot">
-        <div>
-          <Link to="/" className="nx-brand" aria-label="Nibras Code">
-            <Logo />
-            <span>
-              Nibras <em>Code</em>
-            </span>
-          </Link>
-          <p>{t("nx_tag")}</p>
-        </div>
-        <nav>
-          <Link to="/">{t("b_nav_home")}</Link>
-          <Link to="/apps">{t("b_nav_apps")}</Link>
-          <Link to="/about">{t("nav_about")}</Link>
-          <Link to="/unutma">{t("remind_btn")}</Link>
-          <Link to="/contact">{t("nx_nav_contact")}</Link>
-        </nav>
+        <p>{t("nx_tag")}</p>
         <Link to="/contact" className="nx-mail" aria-label={t("nx_nav_contact")}>
           <Mail className="size-4" />
         </Link>
@@ -365,9 +350,6 @@ function Home() {
           <NavMenu section="guides" />
           <NavMenu section="programming" />
         </nav>
-        <p className="nx-verse" lang="ar" dir="rtl">
-          {t("remind_verse")}
-        </p>
         <AppSuggest />
         <p className="nx-copy">© 2026 Nibras Code. {t("nx_rights")}</p>
       </footer>
