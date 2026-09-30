@@ -363,7 +363,143 @@ const RU: Record<(typeof ORDER)[number], readonly ProgrammingBlock[]> = {
   ],
 };
 
-const BODIES: Partial<Record<Lang, typeof AZ>> = { az: AZ, ru: RU };
+const TR: Record<(typeof ORDER)[number], readonly ProgrammingBlock[]> = {
+  nedir: [
+    {
+      paragraphs: [
+        "JavaScript, modern web siteleri ve web uygulamaları oluşturmak için yaygın olarak kullanılan popüler bir programlama dilidir. HTML ve CSS ile birlikte web geliştirmenin temel teknolojilerinden biridir.",
+        "JavaScript, web sayfalarını etkileşimli ve dinamik hale getirmek için kullanılan bir programlama dilidir.",
+        "Kullanıcı işlemlerine tepki verme, formları yönetme, animasyonlar oluşturma, sayfa içeriğini değiştirme ve farklı servislerle iletişim kurma gibi işlemler JavaScript ile yapılabilir.",
+        "Günümüzde JavaScript yalnızca tarayıcılarda değil, sunucu tarafında ve farklı ortamlarda da kullanılmaktadır.",
+      ],
+    },
+  ],
+  istifade: [
+    {
+      paragraphs: ["JavaScript şu alanlarda kullanılır:"],
+      list: [
+        "Web sitesi geliştirme",
+        "Etkileşimli web uygulamaları",
+        "Frontend geliştirme",
+        "Backend geliştirme",
+        "API kullanımı",
+        "Mobil uygulamalar",
+        "Masaüstü uygulamaları",
+        "Oyunlar ve interaktif projeler",
+        "Kullanıcı verilerinin işlenmesi",
+      ],
+    },
+    { paragraphs: ["Node.js gibi teknolojiler sayesinde JavaScript sunucu tarafında da çalıştırılabilir."] },
+  ],
+  "ne-etmek": [
+    {
+      paragraphs: [
+        "JavaScript ile etkileşimli web siteleri, hesap makineleri, oyunlar, formlar, menüler ve çeşitli web uygulamaları oluşturulabilir.",
+      ],
+    },
+    {
+      heading: "Örneğin",
+      code: 'const name = "Nibras Code";\nconsole.log("Merhaba, " + name);',
+      after: ["Bu kod konsola bir selamlama mesajı yazdırır."],
+    },
+  ],
+  oyrenmek: [
+    {
+      paragraphs: [
+        "JavaScript'in temel konuları adım adım öğrenilebilir. Ancak dili iyi öğrenmek için düzenli pratik yapmak önemlidir.",
+        "Başlangıçta şu konular öğrenilebilir:",
+      ],
+      list: [
+        "Değişkenler",
+        "Veri türleri",
+        "Koşullar",
+        "Döngüler",
+        "Fonksiyonlar",
+        "Diziler ve nesneler",
+        "DOM",
+        "Olaylar",
+        "Asenkron JavaScript",
+        "API'ler",
+      ],
+      ordered: true,
+    },
+  ],
+  ustunluk: [
+    {
+      heading: "Avantajları",
+      list: [
+        "Tarayıcıda doğrudan çalışabilir",
+        "Web geliştirmede yaygın olarak kullanılır",
+        "Geniş kütüphane ve framework ekosistemine sahiptir",
+        "Frontend ve backend için kullanılabilir",
+        "Büyük bir geliştirici topluluğuna sahiptir",
+        "Farklı platformlarda kullanılabilir",
+      ],
+    },
+    {
+      heading: "Dezavantajları",
+      list: [
+        "Bazı özellikleri yeni başlayanlar için karmaşık olabilir",
+        "Asenkron programlama başlangıçta zor gelebilir",
+        "Büyük projelerde iyi bir kod yapısı gerekir",
+        "Çok sayıda kütüphane ve framework bulunması seçim yapmayı zorlaştırabilir",
+      ],
+    },
+  ],
+  sintaksis: [
+    { heading: "Değişkenler", code: 'const name = "Ali";\nlet age = 20;' },
+    { heading: "Koşul", code: 'if (age >= 18) {\n    console.log("Yetişkin");\n}' },
+    { heading: "Döngü", code: "for (let i = 1; i <= 5; i++) {\n    console.log(i);\n}" },
+    {
+      heading: "Fonksiyon",
+      code: 'function greet(name) {\n    return "Merhaba, " + name;\n}\n\nconsole.log(greet("Ali"));',
+    },
+  ],
+  numuneler: [
+    { heading: "Basit mesaj", code: 'console.log("Merhaba dünya!");' },
+    { heading: "Toplama", code: "let a = 10;\nlet b = 20;\n\nconsole.log(a + b);" },
+    {
+      heading: "Sayı kontrolü",
+      code: 'let number = 10;\n\nif (number > 0) {\n    console.log("Pozitif sayı");\n}',
+    },
+    {
+      heading: "Dizi",
+      code: 'const fruits = ["Apple", "Banana", "Orange"];\n\nfor (const fruit of fruits) {\n    console.log(fruit);\n}',
+    },
+  ],
+  suallar: [
+    {
+      heading: "JavaScript nedir?",
+      paragraphs: [
+        "JavaScript, etkileşimli web siteleri ve uygulamalar oluşturmak için yaygın olarak kullanılan bir programlama dilidir.",
+      ],
+    },
+    {
+      heading: "JavaScript ücretsiz mi?",
+      paragraphs: ["Evet. JavaScript kullanmak için ayrıca bir lisans satın almak gerekmez."],
+    },
+    {
+      heading: "JavaScript ile web sitesi yapılabilir mi?",
+      paragraphs: ["Evet. JavaScript, HTML ve CSS ile birlikte web sitesi geliştirmede yaygın olarak kullanılır."],
+    },
+    {
+      heading: "JavaScript ile mobil uygulama yapılabilir mi?",
+      paragraphs: [
+        "Evet. Çeşitli teknolojiler ve frameworkler kullanılarak JavaScript ile mobil uygulamalar geliştirilebilir.",
+      ],
+    },
+    {
+      heading: "JavaScript sunucuda çalışabilir mi?",
+      paragraphs: ["Evet. Node.js gibi teknolojiler JavaScript'in sunucu tarafında çalışmasını sağlar."],
+    },
+    {
+      heading: "Java ve JavaScript aynı mı?",
+      paragraphs: ["Hayır. Java ve JavaScript birbirinden farklı iki programlama dilidir."],
+    },
+  ],
+};
+
+const BODIES: Partial<Record<Lang, typeof AZ>> = { az: AZ, ru: RU, tr: TR };
 
 export function javascriptSections(lang: Lang): readonly ProgrammingSection[] {
   const body = BODIES[lang];

@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-Cltr0gcK.js";import{c as t}from"./index-CE0I0Gq5.js";import{t as n}from"./library-page-Dm0qA39Y.js";var r=e();function i(){return(0,r.jsx)(n,{section:`resources`,rows:t.useLoaderData().privacy})}export{i as component};

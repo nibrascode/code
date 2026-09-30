@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-Cltr0gcK.js";import{t}from"./library-page-Dm0qA39Y.js";var n=e(),r=()=>(0,n.jsx)(t,{section:`programming`});export{r as component};
