@@ -1,4 +1,4 @@
-import { c as PDF_LOCALE_PAIRS, l as RESURSLAR, p as findRuResource } from "./programming-DWCo1w36.mjs";
+import { c as PDF_LOCALE_PAIRS, l as RESURSLAR, p as findRuResource } from "./programming-DwqnMd8d.mjs";
 //#region node_modules/.nitro/vite/services/ssr/assets/library-admin-DOvxzdtr.js
 var EXTRA_RESOURCES = [
 	page("ereb-dili", [
