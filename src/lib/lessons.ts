@@ -1,5 +1,5 @@
 import type { Lang } from "@/lib/i18n";
-import type { ProgrammingSection } from "@/lib/programming";
+import { findProgramming, type ProgrammingSection } from "@/lib/programming";
 import type { StudioPrivacyRow } from "@/lib/studio";
 
 export const LESSON_PREFIX = "lesson-python-";
@@ -124,25 +124,30 @@ export function slugifyLesson(value: string) {
 
 export function pythonSections(lang: Lang, rows: readonly StudioPrivacyRow[]): ProgrammingSection[] {
   const saved = rows.filter((row) => row.slug.startsWith(LESSON_PREFIX));
-  const ids = PYTHON_LESSONS.map((item) => item.id);
+  const baked = findProgramming("python")?.sections ?? [];
+  const ids = [...PYTHON_LESSONS.map((item) => item.id), ...baked.map((item) => item.id)];
   for (const row of saved) {
     const id = lessonId(row.slug);
     if (id && !ids.includes(id)) ids.push(id);
   }
-  ids.sort((a, b) => lessonSort(a, saved) - lessonSort(b, saved) || a.localeCompare(b));
-  return ids.map((id) => {
+  const unique = [...new Set(ids)];
+  unique.sort((a, b) => lessonSort(a, saved) - lessonSort(b, saved) || a.localeCompare(b));
+  return unique.flatMap((id) => {
     const known = PYTHON_LESSONS.find((item) => item.id === id);
+    const source = baked.find((item) => item.id === id);
     const row = saved.find((item) => lessonId(item.slug) === id && item.lang === lang);
-    const title = row?.title.trim() || known?.titles[lang] || known?.titles.az || id;
-    const paragraphs = (row?.body ?? "")
-      .split(/\n\s*\n/)
-      .map((part) => part.trim())
-      .filter(Boolean);
-    return {
-      id,
-      title,
-      blocks: paragraphs.length ? [{ paragraphs }] : undefined,
-    };
+    const title = row?.title.trim() || (lang === "az" ? source?.title : "") || known?.titles[lang] || known?.titles.az || id;
+    const body = row?.body.trim() ?? "";
+    if (body) {
+      const paragraphs = body
+        .split(/\n\s*\n/)
+        .map((part) => part.trim())
+        .filter(Boolean);
+      return [{ id, title, blocks: paragraphs.length ? [{ paragraphs }] : undefined }];
+    }
+    if (lang === "az" && source?.blocks?.length) return [{ id, title: source.title, blocks: source.blocks }];
+    if (!known && !source) return [];
+    return [{ id, title }];
   });
 }
 
