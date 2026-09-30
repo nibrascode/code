@@ -3544,11 +3544,75 @@ body.is-home .noise {
 }
 
 .nx {
+  position: relative;
+  overflow: hidden;
   min-height: 100dvh;
   color: #e7eefc;
   background:
     radial-gradient(900px 420px at 80% 0%, rgb(37 78 180 / 0.28), transparent 60%),
     #070b16;
+}
+
+.nx-drift {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.nx-drift span {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  opacity: 0.34;
+  animation: nx-drift 18s ease-in-out infinite;
+}
+
+.nx-drift svg {
+  width: 22px;
+  height: 22px;
+}
+
+.nx-drift .is-apk { color: #7dffb2; }
+.nx-drift .is-kotlin { color: #c084fc; }
+.nx-drift .is-java { color: #f6c56b; }
+.nx-drift .is-swift { color: #ff8a6a; }
+.nx-drift .is-js { color: #f7e36b; }
+.nx-drift .is-ts { color: #7eb6ff; }
+.nx-drift .is-dart { color: #6ee0ff; }
+.nx-drift .is-python { color: #8fd0ff; }
+.nx-drift .is-cpp { color: #d7c7ff; }
+.nx-drift .is-ios { color: #e8edf8; }
+
+.nx-drift span:nth-child(odd) {
+  animation-duration: 24s;
+  animation-direction: reverse;
+}
+
+.nx-drift span:nth-child(3n) {
+  width: 22px;
+  height: 22px;
+  opacity: 0.22;
+  animation-duration: 28s;
+}
+
+.nx > :not(.nx-drift) {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes nx-drift {
+  0% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(16px, -36px, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nx-drift span {
+    animation: none;
+  }
 }
 
 .nx-nav,

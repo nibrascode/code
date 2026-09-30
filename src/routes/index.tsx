@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight, BadgeCheck, Mail, RefreshCw, Shield, Zap } from "lucide-react";
 import { AppSuggest } from "@/components/app-suggest";
+import { TechMark } from "@/components/tech-marquee";
 import { LanguageSwitch } from "@/components/language-switch";
 import { NavMenu } from "@/components/nav-menu";
 import { useI18n } from "@/lib/i18n-context";
@@ -60,6 +61,44 @@ function Logo({ className }: { className?: string }) {
   return <img src="/nibras-icon.png" alt="" className={className} />;
 }
 
+const DRIFT: { id: "apk" | "kotlin" | "java" | "swift" | "js" | "ts" | "dart" | "python" | "cpp" | "ios"; top: string; left: string }[] = [
+  { id: "python", top: "7%", left: "8%" },
+  { id: "js", top: "12%", left: "86%" },
+  { id: "apk", top: "24%", left: "18%" },
+  { id: "ios", top: "20%", left: "72%" },
+  { id: "java", top: "38%", left: "6%" },
+  { id: "ts", top: "42%", left: "90%" },
+  { id: "kotlin", top: "54%", left: "14%" },
+  { id: "swift", top: "58%", left: "80%" },
+  { id: "cpp", top: "70%", left: "10%" },
+  { id: "dart", top: "74%", left: "88%" },
+  { id: "apk", top: "86%", left: "22%" },
+  { id: "ios", top: "90%", left: "70%" },
+];
+
+function IosMark() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        fill="currentColor"
+        d="M16.2 12.6c0-2.1 1.7-3.1 1.8-3.2-1-1.4-2.5-1.6-3-1.6-1.3-.1-2.5.8-3.1.8-.7 0-1.7-.7-2.8-.7-1.4 0-2.7.8-3.4 2.1-1.5 2.6-.4 6.4 1 8.4.7 1 1.5 2.1 2.6 2.1 1 0 1.4-.7 2.7-.7s1.6.7 2.7.7 1.8-1 2.5-2c.8-1.1 1.1-2.2 1.1-2.3-.1 0-2.1-.8-2.1-3.6ZM14.6 6.7c.6-.7.9-1.6.8-2.6-.9.1-2 .6-2.6 1.4-.6.7-1.1 1.6-.9 2.6 1 .1 1.9-.5 2.7-1.4Z"
+      />
+    </svg>
+  );
+}
+
+function HomeDrift() {
+  return (
+    <div className="nx-drift" aria-hidden="true">
+      {DRIFT.map((item, index) => (
+        <span key={`${item.id}-${index}`} className={`is-${item.id}`} style={{ top: item.top, left: item.left }}>
+          {item.id === "ios" ? <IosMark /> : <TechMark id={item.id} />}
+        </span>
+      ))}
+    </div>
+  );
+}
+
 function Home() {
   const { t } = useI18n();
   const rows = Route.useLoaderData().apps;
@@ -75,6 +114,7 @@ function Home() {
 
   return (
     <main className="nx">
+      <HomeDrift />
       <header className="nx-nav">
         <Link to="/" className="nx-brand" aria-label="Nibras Code">
           <Logo />

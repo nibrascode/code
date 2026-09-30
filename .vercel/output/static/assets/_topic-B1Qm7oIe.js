@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-Cltr0gcK.js";import{l as t}from"./index-aPoA4c2M.js";import{i as n,n as r}from"./library-page-BS9xo_ds.js";var i=e();function a(){let{topic:e,privacy:a}=t.useLoaderData();return e.slug===`python`?(0,i.jsx)(n,{privacy:a}):(0,i.jsx)(r,{section:`programming`,topic:e})}export{a as component};
