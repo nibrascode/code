@@ -127,19 +127,31 @@
 .site-header {
   position: fixed;
   inset: 0 0 auto;
-  z-index: 30;
+  z-index: 50;
   height: auto;
   min-height: 82px;
+  overflow: visible;
   border-bottom: 1px solid transparent;
-  background: rgb(5 6 12 / 0.28);
-  backdrop-filter: blur(18px);
-  transition-property: background-color, border-color, height;
+  background: transparent;
+  transition-property: border-color, height;
   transition-duration: 250ms;
   transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgb(5 6 12 / 0.28);
+  backdrop-filter: blur(18px);
+}
+
+.site-header.is-scrolled::before {
+  background: rgb(5 6 12 / 0.92);
+}
+
 .site-header.is-scrolled {
-  background: rgb(5 6 12 / 0.78);
   border-bottom-color: var(--color-line);
 }
 
@@ -2275,6 +2287,8 @@ html[dir="rtl"] .rtl-flip {
 }
 
 .prog-top {
+  position: relative;
+  z-index: 8;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -2511,6 +2525,10 @@ body[data-scene] .why-page > *,
 body[data-scene] .simple-app > * {
   position: relative;
   z-index: 1;
+}
+
+body[data-scene] .why-page > .prog-top {
+  z-index: 8;
 }
 
 body[data-scene="hero"] {
