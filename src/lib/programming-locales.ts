@@ -1,6 +1,7 @@
 import type { Lang } from "@/lib/i18n";
 import type { ProgrammingSection } from "@/lib/programming";
 import { PYTHON_EN } from "@/lib/python-en";
+import { PYTHON_TR } from "@/lib/python-tr";
 
 export type ProgrammingLocale = {
   lang: Exclude<Lang, "az">;
@@ -11,7 +12,7 @@ export type ProgrammingLocale = {
 
 const LOCALES: readonly ProgrammingLocale[] = [
   { lang: "en", slug: "python", title: "What is Python? Uses and advantages", sections: PYTHON_EN },
-  { lang: "tr", slug: "python", title: "Python nedir? Kullanım alanları ve avantajları", sections: [] },
+  { lang: "tr", slug: "python", title: "Python nedir? Kullanım alanları ve avantajları", sections: PYTHON_TR },
   { lang: "ar", slug: "python", title: "ما هي بايثون؟ استخداماتها ومزاياها", sections: [] },
   { lang: "ru", slug: "python", title: "Что такое Python? Области применения и преимущества", sections: [] },
 ];
