@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-Cltr0gcK.js";import{d as t}from"./index-VZFs6aP8.js";import{n}from"./library-page-x5E9aYDv.js";var r=e();function i(){let e=t.useLoaderData();return(0,r.jsx)(n,{section:`guides`,topic:e})}export{i as component};

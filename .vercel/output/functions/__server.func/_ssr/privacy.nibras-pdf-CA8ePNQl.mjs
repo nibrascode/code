@@ -1,0 +1,14 @@
+import { b as require_jsx_runtime } from "../_libs/@tanstack/react-router+[...].mjs";
+import { u as Route$12 } from "./router-fULI7LCk.mjs";
+import { t as AppPrivacyView } from "./app-privacy-BodNXYeA.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/privacy.nibras-pdf-CA8ePNQl.js
+var import_jsx_runtime = require_jsx_runtime();
+function NibrasPdfPrivacyPage() {
+	const { privacy } = Route$12.useLoaderData();
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AppPrivacyView, {
+		slug: "nibras-pdf",
+		rows: privacy
+	});
+}
+//#endregion
+export { NibrasPdfPrivacyPage as component };

@@ -1,0 +1,37 @@
+import { n as useI18n } from "./i18n-context-D0YrDquf.mjs";
+import { b as require_jsx_runtime } from "../_libs/@tanstack/react-router+[...].mjs";
+import { g as Route$19 } from "./router-fULI7LCk.mjs";
+import { s as unutmaFromRow } from "./pages-C9ugibxp.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/unutma-D-WewapY.js
+var import_jsx_runtime = require_jsx_runtime();
+function UnutmaPage() {
+	const { lang } = useI18n();
+	const row = Route$19.useLoaderData().privacy.find((item) => item.slug === "unutma" && item.lang === lang);
+	const copy = unutmaFromRow(row, lang);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("main", {
+		className: "why-page",
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				className: "why-glow",
+				"aria-hidden": "true"
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+				className: "eyebrow",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("i", {}), copy.eyebrow]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", { children: copy.title }),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+				className: "who-verse",
+				lang: "ar",
+				dir: "rtl",
+				children: copy.verse
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("ol", {
+				className: "remind-list",
+				children: copy.notes.map((note, index) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: String(index + 1).padStart(2, "0") }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: note })] }, note))
+			})
+		]
+	});
+}
+//#endregion
+export { UnutmaPage as component };
