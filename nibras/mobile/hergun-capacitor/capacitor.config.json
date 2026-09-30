@@ -1,0 +1,21 @@
+{
+  "appId": "com.nibrasarabic.app",
+  "appName": "Nibras Arabic",
+  "webDir": "www",
+  "backgroundColor": "#0E223B",
+  "plugins": {
+    "LocalNotifications": {
+      "smallIcon": "ic_stat_icon",
+      "iconColor": "#0F5973"
+    },
+    "SplashScreen": {
+      "launchShowDuration": 0,
+      "backgroundColor": "#09152D",
+      "androidScaleType": "FIT_XY",
+      "showSpinner": false
+    }
+  },
+  "android": {
+    "allowMixedContent": false
+  }
+}

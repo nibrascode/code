@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Nibras Arabic</string>
+    <string name="title_activity_main">Nibras Arabic</string>
+    <string name="package_name">com.nibrasarabic.app</string>
+    <string name="custom_url_scheme">com.nibrasarabic.app</string>
+</resources>
