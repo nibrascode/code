@@ -3597,7 +3597,7 @@ body.is-home .noise {
 }
 
 .nx-drift {
-  position: absolute;
+  position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
@@ -3605,12 +3605,18 @@ body.is-home .noise {
 
 .nx-drift span {
   position: absolute;
+  top: 0;
+  left: 0;
   display: grid;
   place-items: center;
   width: 28px;
   height: 28px;
   opacity: 0.34;
-  animation: nx-drift 7s ease-in-out infinite;
+  will-change: transform;
+}
+
+.nx-drift span.is-small {
+  opacity: 0.22;
 }
 
 .nx-drift svg {
@@ -3629,18 +3635,6 @@ body.is-home .noise {
 .nx-drift .is-cpp { color: #d7c7ff; }
 .nx-drift .is-ios { color: #e8edf8; }
 
-.nx-drift span:nth-child(odd) {
-  animation-duration: 5.5s;
-  animation-direction: reverse;
-}
-
-.nx-drift span:nth-child(3n) {
-  width: 22px;
-  height: 22px;
-  opacity: 0.22;
-  animation-duration: 8.5s;
-}
-
 .nx > :not(.nx-drift) {
   position: relative;
   z-index: 1;
@@ -3648,18 +3642,6 @@ body.is-home .noise {
 
 .nx > .nx-nav {
   z-index: 40;
-}
-
-@keyframes nx-drift {
-  0% { transform: translate3d(0, 0, 0); }
-  50% { transform: translate3d(22px, -72px, 0); }
-  100% { transform: translate3d(0, 0, 0); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .nx-drift span {
-    animation: none;
-  }
 }
 
 .nx-nav,
