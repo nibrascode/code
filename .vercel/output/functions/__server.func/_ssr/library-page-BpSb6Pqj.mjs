@@ -1,5 +1,5 @@
-import { b as require_jsx_runtime, v as Link } from "../_libs/@tanstack/react-router+[...].mjs";
 import { g as findProgramming } from "./ru-resources-CVCupnGQ.mjs";
+import { b as require_jsx_runtime, v as Link } from "../_libs/@tanstack/react-router+[...].mjs";
 import { o as useI18n } from "./i18n-context-DrTZEB-U.mjs";
 import { x as ArrowUpRight } from "../_libs/lucide-react.mjs";
 import { n as LanguageSwitch, t as LIBRARY } from "./library-D-8zw1RB.mjs";

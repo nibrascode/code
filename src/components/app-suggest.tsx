@@ -25,24 +25,20 @@ const LABEL = {
 export function AppSuggest() {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
   const { t, lang } = useI18n();
-  if (pathname === "/" || pathname.startsWith("/nx-studio")) return null;
-  const cards = CARDS.filter((card) => !pathname.startsWith(`/apps/${card.slug}`));
-  if (!cards.length) return null;
+  if (pathname.startsWith("/nx-studio")) return null;
+  const card = CARDS.find((item) => !pathname.startsWith(`/apps/${item.slug}`));
+  if (!card) return null;
 
   return (
     <aside className="app-suggest">
       <p>{LABEL[lang]}</p>
-      <div>
-        {cards.map((card) => (
-          <Link key={card.slug} to="/apps/$slug" params={{ slug: card.slug }}>
-            <img src={card.icon} alt="" />
-            <span>
-              <b>{card.name}</b>
-              <em>{t(card.chip)}</em>
-            </span>
-          </Link>
-        ))}
-      </div>
+      <Link to="/apps/$slug" params={{ slug: card.slug }}>
+        <img src={card.icon} alt="" />
+        <span>
+          <b>{card.name}</b>
+          <em>{t(card.chip)}</em>
+        </span>
+      </Link>
     </aside>
   );
 }

@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight, BadgeCheck, Mail, RefreshCw, Shield, Zap } from "lucide-react";
+import { AppSuggest } from "@/components/app-suggest";
 import { LanguageSwitch } from "@/components/language-switch";
 import { NavMenu } from "@/components/nav-menu";
 import { useI18n } from "@/lib/i18n-context";
@@ -232,15 +233,16 @@ function Home() {
         <Link to="/contact" className="nx-mail" aria-label={t("nx_nav_contact")}>
           <Mail className="size-4" />
         </Link>
-        <p className="nx-copy">© 2026 Nibras Code. {t("nx_rights")}</p>
-        <p className="nx-verse" lang="ar" dir="rtl">
-          {t("remind_verse")}
-        </p>
         <nav className="nx-foot-extra">
           <NavMenu section="resources" />
           <NavMenu section="guides" />
           <NavMenu section="programming" />
         </nav>
+        <p className="nx-verse" lang="ar" dir="rtl">
+          {t("remind_verse")}
+        </p>
+        <AppSuggest />
+        <p className="nx-copy">© 2026 Nibras Code. {t("nx_rights")}</p>
       </footer>
     </main>
   );

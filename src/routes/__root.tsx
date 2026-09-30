@@ -136,8 +136,8 @@ function RootDocument() {
           <I18nProvider>
             {isHome || isStudio ? null : <SiteHeader />}
             <Outlet />
+            {isHome || isStudio ? null : <AppSuggest />}
             {isHome || isStudio ? null : <SiteFooter />}
-            {isStudio ? null : <AppSuggest />}
           </I18nProvider>
         </AuthProvider>
         <Scripts />
