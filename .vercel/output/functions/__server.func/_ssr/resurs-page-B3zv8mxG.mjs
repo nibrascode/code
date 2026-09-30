@@ -1,5 +1,5 @@
-import { b as require_jsx_runtime, v as Link } from "../_libs/@tanstack/react-router+[...].mjs";
 import { i as RU_RESOURCES, r as RESURSLAR } from "./ru-resources-CVCupnGQ.mjs";
+import { b as require_jsx_runtime, v as Link } from "../_libs/@tanstack/react-router+[...].mjs";
 import { x as ArrowUpRight } from "../_libs/lucide-react.mjs";
 //#region node_modules/.nitro/vite/services/ssr/assets/resurs-page-B3zv8mxG.js
 var import_jsx_runtime = require_jsx_runtime();

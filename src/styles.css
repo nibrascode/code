@@ -4329,6 +4329,16 @@ body.is-home .noise {
   font-size: 1.15rem !important;
 }
 
+.nx-foot-extra {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  width: 100%;
+  margin-top: 8px;
+  padding-top: 14px;
+  border-top: 1px solid rgb(255 255 255 / 0.08);
+}
+
 @media (max-width: 980px) {
   .nx-hero,
   .nx-why,

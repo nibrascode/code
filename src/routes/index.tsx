@@ -83,9 +83,6 @@ function Home() {
         </Link>
         <nav className="nx-links">
           <Link to="/apps">{t("b_nav_apps")}</Link>
-          <NavMenu section="resources" />
-          <NavMenu section="guides" />
-          <NavMenu section="programming" />
           <Link to="/about">{t("nav_about")}</Link>
           <Link to="/unutma">{t("remind_btn")}</Link>
           <Link to="/contact">{t("nx_nav_contact")}</Link>
@@ -228,9 +225,6 @@ function Home() {
         <nav>
           <Link to="/">{t("b_nav_home")}</Link>
           <Link to="/apps">{t("b_nav_apps")}</Link>
-          <Link to="/resources">{t("nav_resources")}</Link>
-          <Link to="/guides">{t("nav_guides")}</Link>
-          <Link to="/programming">{t("nav_programming")}</Link>
           <Link to="/about">{t("nav_about")}</Link>
           <Link to="/unutma">{t("remind_btn")}</Link>
           <Link to="/contact">{t("nx_nav_contact")}</Link>
@@ -242,6 +236,11 @@ function Home() {
         <p className="nx-verse" lang="ar" dir="rtl">
           {t("remind_verse")}
         </p>
+        <nav className="nx-foot-extra">
+          <NavMenu section="resources" />
+          <NavMenu section="guides" />
+          <NavMenu section="programming" />
+        </nav>
       </footer>
     </main>
   );
