@@ -499,7 +499,139 @@ const TR: Record<(typeof ORDER)[number], readonly ProgrammingBlock[]> = {
   ],
 };
 
-const BODIES: Partial<Record<Lang, typeof AZ>> = { az: AZ, ru: RU, tr: TR };
+const AR: Record<(typeof ORDER)[number], readonly ProgrammingBlock[]> = {
+  nedir: [
+    {
+      paragraphs: [
+        "جافاسكريبت (JavaScript) هي لغة برمجة شهيرة تُستخدم على نطاق واسع في إنشاء مواقع الويب وتطبيقات الويب الحديثة. وتُعد مع HTML وCSS من التقنيات الأساسية في تطوير الويب.",
+        "JavaScript هي لغة برمجة تُستخدم لجعل صفحات الويب تفاعلية وديناميكية.",
+        "يمكن استخدامها للاستجابة لتفاعل المستخدم، ومعالجة النماذج، وإنشاء الحركات، وتغيير محتوى الصفحة، والتواصل مع الخدمات المختلفة.",
+        "ولا تقتصر JavaScript اليوم على المتصفحات، بل يمكن استخدامها أيضًا على الخوادم وفي بيئات أخرى.",
+      ],
+    },
+  ],
+  istifade: [
+    {
+      paragraphs: ["تُستخدم JavaScript في العديد من المجالات، منها:"],
+      list: [
+        "تطوير مواقع الويب",
+        "تطبيقات الويب التفاعلية",
+        "تطوير الواجهات الأمامية",
+        "تطوير الواجهات الخلفية",
+        "التعامل مع واجهات API",
+        "تطبيقات الهاتف",
+        "تطبيقات سطح المكتب",
+        "الألعاب والمشاريع التفاعلية",
+        "معالجة بيانات المستخدمين",
+      ],
+    },
+    { paragraphs: ["ومن خلال تقنيات مثل Node.js يمكن تشغيل JavaScript على الخادم أيضًا."] },
+  ],
+  "ne-etmek": [
+    {
+      paragraphs: [
+        "يمكن استخدام JavaScript لإنشاء مواقع تفاعلية، وآلات حاسبة، وألعاب، ونماذج، وقوائم، وتطبيقات ويب مختلفة.",
+      ],
+    },
+    {
+      heading: "مثال",
+      code: 'const name = "Nibras Code";\nconsole.log("مرحبًا، " + name);',
+      after: ["يقوم هذا الكود بعرض رسالة ترحيب في وحدة التحكم."],
+    },
+  ],
+  oyrenmek: [
+    {
+      paragraphs: [
+        "يمكن تعلم أساسيات JavaScript بشكل تدريجي، ولكن الممارسة المستمرة مهمة لفهم اللغة بشكل جيد.",
+        "يمكن للمبتدئ البدء بالمواضيع التالية:",
+      ],
+      list: [
+        "المتغيرات",
+        "أنواع البيانات",
+        "الشروط",
+        "الحلقات",
+        "الدوال",
+        "المصفوفات والكائنات",
+        "DOM",
+        "الأحداث",
+        "JavaScript غير المتزامنة",
+        "واجهات API",
+      ],
+      ordered: true,
+    },
+  ],
+  ustunluk: [
+    {
+      heading: "المميزات",
+      list: [
+        "تعمل مباشرة داخل المتصفح",
+        "تُستخدم على نطاق واسع في تطوير الويب",
+        "لديها منظومة كبيرة من المكتبات وأطر العمل",
+        "يمكن استخدامها في الواجهة الأمامية والخلفية",
+        "لديها مجتمع كبير من المطورين",
+        "يمكن استخدامها على منصات مختلفة",
+      ],
+    },
+    {
+      heading: "العيوب",
+      list: [
+        "بعض خصائص اللغة قد تكون مربكة للمبتدئين",
+        "قد تبدو البرمجة غير المتزامنة صعبة في البداية",
+        "تحتاج المشاريع الكبيرة إلى تنظيم جيد للكود",
+        "كثرة المكتبات وأطر العمل قد تجعل اختيار التقنية المناسبة أكثر صعوبة",
+      ],
+    },
+  ],
+  sintaksis: [
+    { heading: "المتغيرات", code: 'const name = "Ali";\nlet age = 20;' },
+    { heading: "الشرط", code: 'if (age >= 18) {\n    console.log("بالغ");\n}' },
+    { heading: "الحلقة", code: "for (let i = 1; i <= 5; i++) {\n    console.log(i);\n}" },
+    {
+      heading: "الدالة",
+      code: 'function greet(name) {\n    return "مرحبًا، " + name;\n}\n\nconsole.log(greet("Ali"));',
+    },
+  ],
+  numuneler: [
+    { heading: "رسالة بسيطة", code: 'console.log("مرحبًا بالعالم!");' },
+    { heading: "الجمع", code: "let a = 10;\nlet b = 20;\n\nconsole.log(a + b);" },
+    {
+      heading: "التحقق من الرقم",
+      code: 'let number = 10;\n\nif (number > 0) {\n    console.log("رقم موجب");\n}',
+    },
+    {
+      heading: "المصفوفة",
+      code: 'const fruits = ["Apple", "Banana", "Orange"];\n\nfor (const fruit of fruits) {\n    console.log(fruit);\n}',
+    },
+  ],
+  suallar: [
+    {
+      heading: "ما هي JavaScript؟",
+      paragraphs: ["JavaScript هي لغة برمجة تُستخدم على نطاق واسع لإنشاء مواقع وتطبيقات ويب تفاعلية."],
+    },
+    {
+      heading: "هل JavaScript مجانية؟",
+      paragraphs: ["نعم. لا تحتاج إلى شراء ترخيص منفصل لاستخدام JavaScript."],
+    },
+    {
+      heading: "هل يمكن إنشاء مواقع باستخدام JavaScript؟",
+      paragraphs: ["نعم. تُستخدم JavaScript على نطاق واسع مع HTML وCSS في تطوير مواقع الويب."],
+    },
+    {
+      heading: "هل يمكن إنشاء تطبيقات الهاتف باستخدام JavaScript؟",
+      paragraphs: ["نعم. توجد تقنيات وأطر عمل مختلفة تسمح بإنشاء تطبيقات الهاتف باستخدام JavaScript."],
+    },
+    {
+      heading: "هل تعمل JavaScript على الخادم؟",
+      paragraphs: ["نعم. يمكن تشغيلها على الخادم باستخدام تقنيات مثل Node.js."],
+    },
+    {
+      heading: "هل Java وJavaScript لغة واحدة؟",
+      paragraphs: ["لا. Java وJavaScript لغتان مختلفتان في البرمجة."],
+    },
+  ],
+};
+
+const BODIES: Partial<Record<Lang, typeof AZ>> = { az: AZ, ru: RU, tr: TR, ar: AR };
 
 export function javascriptSections(lang: Lang): readonly ProgrammingSection[] {
   const body = BODIES[lang];

@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-Cltr0gcK.js";import{d as t}from"./index-CE0I0Gq5.js";import{t as n}from"./app-privacy-DCW75NYT.js";var r=e();function i(){let{slug:e}=t.useParams(),{privacy:i}=t.useLoaderData();return(0,r.jsx)(n,{slug:e,rows:i})}export{i as component};
