@@ -65,7 +65,7 @@ function Logo({ className }: { className?: string }) {
 const DRIFT_KINDS = ["python", "js", "ts", "java", "kotlin", "swift", "cpp", "dart", "apk", "ios"] as const;
 
 const DRIFT = DRIFT_KINDS.flatMap((id, kind) =>
-  [0, 1, 2, 3, 4].map((copy) => ({
+  [0, 1, 2, 3].map((copy) => ({
     id,
     size: (kind + copy) % 3 === 0 ? 22 : 28,
   })),
