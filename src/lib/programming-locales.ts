@@ -1,5 +1,6 @@
 import type { Lang } from "@/lib/i18n";
 import type { ProgrammingSection } from "@/lib/programming";
+import { javascriptSections } from "@/lib/javascript-sections";
 import { PYTHON_AR } from "@/lib/python-ar";
 import { PYTHON_EN } from "@/lib/python-en";
 import { PYTHON_RU } from "@/lib/python-ru";
@@ -17,6 +18,10 @@ const LOCALES: readonly ProgrammingLocale[] = [
   { lang: "tr", slug: "python", title: "Python nedir? Kullanım alanları ve avantajları", sections: PYTHON_TR },
   { lang: "ar", slug: "python", title: "ما هي بايثون؟ استخداماتها ومزاياها", sections: PYTHON_AR },
   { lang: "ru", slug: "python", title: "Что такое Python? Области применения и преимущества", sections: PYTHON_RU },
+  { lang: "en", slug: "javascript", title: "What is JavaScript and what is it used for?", sections: javascriptSections("en") },
+  { lang: "tr", slug: "javascript", title: "JavaScript nedir? Ne için kullanılır?", sections: javascriptSections("tr") },
+  { lang: "ar", slug: "javascript", title: "ما هي جافاسكريبت ولماذا تُستخدم؟", sections: javascriptSections("ar") },
+  { lang: "ru", slug: "javascript", title: "Что такое JavaScript и зачем он нужен?", sections: javascriptSections("ru") },
 ];
 
 export function programmingLocalePath(lang: Lang, slug: string) {

@@ -1,4 +1,5 @@
 import type { Lang } from "@/lib/i18n";
+import { javascriptSections } from "@/lib/javascript-sections";
 
 type Seo = { title: string; description: string; keywords: string };
 
@@ -371,6 +372,7 @@ export const PROGRAMMING: readonly ProgrammingPage[] = [
   {
     slug: "javascript",
     title: "JavaScript nədir? Nə üçün istifadə olunur?",
+    sections: javascriptSections("az"),
     seo: seo(
       {
         title: "JavaScript nədir? Nə üçün istifadə olunur? — Nibras Code",
