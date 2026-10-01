@@ -10,6 +10,7 @@ import { buildHead, langFromLocation, pageUrl, readLang } from "@/lib/seo";
 import { pdfPairFromPath } from "@/lib/pdf-pairs";
 import { findProgrammingLocale, programmingLocalePath, programmingFromPath } from "@/lib/programming-locales";
 import { LANGS, type Lang } from "@/lib/i18n";
+import { faqFromPath, faqPath } from "@/lib/faq";
 
 export const Route = createRootRoute({
   beforeLoad: ({ location }) => ({
@@ -50,7 +51,7 @@ export const Route = createRootRoute({
 
 function sceneFor(pathname: string) {
   if (pathname.startsWith("/unutma") || pathname.startsWith("/about")) return "mountains";
-  if (pathname.startsWith("/why") || pathname.startsWith("/privacy") || pathname.startsWith("/contact") || pathname.startsWith("/nx-studio") || pathname.startsWith("/resources") || pathname.startsWith("/resurslar") || pathname.startsWith("/ru") || pathname.startsWith("/guides") || pathname.includes("/programming"))
+  if (pathname.startsWith("/why") || pathname.startsWith("/privacy") || pathname.startsWith("/contact") || pathname.startsWith("/nx-studio") || pathname.startsWith("/resources") || pathname.startsWith("/resurslar") || pathname.startsWith("/ru") || pathname.startsWith("/guides") || pathname.includes("/programming") || pathname === "/faq" || pathname.endsWith("/faq"))
     return "study";
   return "hero";
 }
@@ -61,6 +62,18 @@ function SeoLinks() {
   const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : "/";
   const pair = pdfPairFromPath(path);
   const programming = programmingFromPath(path);
+  const faq = faqFromPath(path);
+  if (faq) {
+    return (
+      <>
+        <link rel="canonical" href={`https://nibrascode.com${faq.path}`} />
+        {LANGS.map((code) => (
+          <link key={code} rel="alternate" {...{ hreflang: code }} href={`https://nibrascode.com${faqPath(code)}`} />
+        ))}
+        <link rel="alternate" {...{ hreflang: "x-default" }} href="https://nibrascode.com/faq" />
+      </>
+    );
+  }
   if (programming && (programming.lang !== "az" || findProgrammingLocale("en", programming.slug))) {
     const canonical = programmingLocalePath(programming.lang, programming.slug);
     const alternates = (["az", "en", "tr", "ar", "ru"] as const).filter(

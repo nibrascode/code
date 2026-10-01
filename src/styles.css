@@ -2129,9 +2129,15 @@ html[dir="rtl"] .rtl-flip {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 18px;
+  gap: 8px 18px;
   color: var(--color-muted);
   font-size: 14px;
+}
+
+.footer-faq {
+  color: inherit;
+  font-weight: 600;
+  text-decoration: none;
 }
 
 .footer-end {

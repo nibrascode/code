@@ -570,4 +570,54 @@
     <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/contact?lang=tr"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/contact"/>
   </url>
+  <url>
+    <loc>https://nibrascode.com/faq</loc>
+    <lastmod>2026-10-01</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/faq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/faq"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/faq"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/faq"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/faq"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/faq"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/en/faq</loc>
+    <lastmod>2026-10-01</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/faq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/faq"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/faq"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/faq"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/faq"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/faq"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/tr/faq</loc>
+    <lastmod>2026-10-01</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/faq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/faq"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/faq"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/faq"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/faq"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/faq"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/ar/faq</loc>
+    <lastmod>2026-10-01</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/faq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/faq"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/faq"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/faq"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/faq"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/faq"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/ru/faq</loc>
+    <lastmod>2026-10-01</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/faq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/faq"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/faq"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/faq"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/faq"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/faq"/>
+  </url>
 </urlset>

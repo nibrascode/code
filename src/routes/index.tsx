@@ -5,6 +5,7 @@ import { AppSuggest } from "@/components/app-suggest";
 import { TechMark } from "@/components/tech-marquee";
 import { LanguageSwitch } from "@/components/language-switch";
 import { NavMenu } from "@/components/nav-menu";
+import { faqPath } from "@/lib/faq";
 import { useI18n } from "@/lib/i18n-context";
 import { statusText } from "@/lib/studio";
 import { loadStudioBundle } from "@/lib/studio.functions";
@@ -191,7 +192,7 @@ function IosMark() {
 }
 
 function Home() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const rows = Route.useLoaderData().apps;
   const labels = { soon: t("soon"), building: t("nx_docs_stage") };
   const cards = CARDS.flatMap((card) => {
@@ -347,6 +348,9 @@ function Home() {
           <NavMenu section="resources" />
           <NavMenu section="guides" />
           <NavMenu section="programming" />
+          <a className="footer-faq" href={faqPath(lang)}>
+            {t("faq_nav")}
+          </a>
         </nav>
         <AppSuggest />
         <p className="nx-copy">© 2026 Nibras Code. {t("nx_rights")}</p>

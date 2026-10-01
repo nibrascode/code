@@ -1,4 +1,4 @@
-import { LANGS, type Lang } from "@/lib/i18n";
+import { faqFromPath, faqPath } from "@/lib/faq";
 import { pdfPairFromPath } from "@/lib/pdf-pairs";
 import { findProgramming, PROGRAMMING } from "@/lib/programming";
 import { findProgrammingLocale, programmingFromPath, programmingLocalePath } from "@/lib/programming-locales";
@@ -449,6 +449,8 @@ export function readLang(searchStr: string | undefined): Lang {
 
 function pageCopy(pathname: string, lang: Lang) {
   const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : "/";
+  const faq = faqFromPath(path);
+  if (faq) return { title: faq.title, description: faq.description, keywords: faq.keywords };
   const located = programmingFromPath(path);
   if (located) {
     const article = findProgramming(located.slug);
@@ -475,6 +477,7 @@ export function langFromLocation(pathname: string, searchStr?: string): Lang {
 
 export function canonicalUrl(pathname: string, lang: Lang) {
   const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : "/";
+  if (faqFromPath(path)) return `${SITE}${faqPath(lang)}`;
   const pair = pdfPairFromPath(path);
   if (pair) {
     if (path.startsWith("/ru/") || lang === "ru") return `${SITE}${pair.ru}`;
@@ -555,6 +558,24 @@ function jsonLd(path: string, lang: Lang, copy: PageSeo, url: string) {
     email: "Nibrascode@gmail.com",
     description: (PAGES["/"][lang] ?? PAGES["/"].en).description,
   };
+
+  if (faqFromPath(path)) {
+    const faq = faqFromPath(path)!;
+    return {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      name: faq.heading,
+      description: faq.description,
+      url,
+      inLanguage: faq.lang,
+      mainEntity: faq.items.map((item) => ({
+        "@type": "Question",
+        name: item.q,
+        acceptedAnswer: { "@type": "Answer", text: item.a },
+      })),
+      publisher: org,
+    };
+  }
 
   if (path.startsWith("/apps/")) {
     const names: Record<string, string> = {
