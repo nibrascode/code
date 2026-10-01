@@ -27,7 +27,7 @@ export default async function handler(req, res) {
     if (grokKey) {
       const grok = await askGrok(history, grokKey);
       if (grok.ok) {
-        res.status(200).json({ success: true, reply: grok.reply });
+        res.status(200).json({ success: true, reply: grok.reply, engine: "grok" });
         return;
       }
       const auth = /incorrect|invalid|unauthorized|api key|permission/i.test(grok.detail || "");
@@ -52,7 +52,7 @@ export default async function handler(req, res) {
     if (geminiKey) {
       const gemini = await askGemini(message, geminiKey);
       if (gemini.ok) {
-        res.status(200).json({ success: true, reply: gemini.reply });
+        res.status(200).json({ success: true, reply: gemini.reply, engine: "gemini" });
         return;
       }
       res.status(200).json({
