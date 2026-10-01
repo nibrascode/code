@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nibras AI</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; background: #f4f7f6; display: flex; justify-content: center; }
+        #chat { width: 100%; max-width: 600px; background: white; padding: 20px; border-radius: 12px; }
+        #msgs { height: 400px; overflow-y: auto; background: #fafafa; padding: 15px; margin-bottom: 15px; }
+        .msg { margin-bottom: 15px; padding: 10px; border-radius: 8px; max-width: 80%; }
+        .u-msg { background: #007bff; color: white; margin-left: auto; }
+        .b-msg { background: #e9ecef; color: black; }
+        .in { display: flex; gap: 10px; }
+        input { flex-grow: 1; padding: 10px; }
+        button { padding: 10px; background: #28a745; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div id="chat">
+        <h2 style="text-align:center">Nibras AI</h2>
+        <div id="msgs"></div>
+        <div class="in">
+            <input type="text" id="inp" placeholder="Sual yaz..." onkeypress="if(event.key==='Enter') send()">
+            <button id="btn" onclick="send()">Göndər</button>
+        </div>
+        <p id="warn" style="color:red; display:none; text-align:center;">Limit doldu.</p>
+    </div>
+    <script>
+        let usg = JSON.parse(localStorage.getItem('n_ai')) || { d: new Date().toISOString().split('T')[0], c: 0 };
+        if(usg.d !== new Date().toISOString().split('T')[0]) { usg = { d: new Date().toISOString().split('T')[0], c: 0 }; localStorage.setItem('n_ai', JSON.stringify(usg)); }
+        let msgs = document.getElementById("msgs"), inp = document.getElementById("inp"), btn = document.getElementById("btn"), warn = document.getElementById("warn");
+        
+        function chk() { if(usg.c >= 5) { inp.disabled = btn.disabled = true; warn.style.display = "block"; return false; } return true; } chk();
+
+        async function send() {
+            if(!chk() || !inp.value.trim()) return;
+            let m = inp.value; inp.value = ""; btn.disabled = true;
+            msgs.innerHTML += `<div class="msg u-msg">${m}</div>`;
+            try {
+                let r = await fetch('/api/chat', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({message:m}) });
+                msgs.innerHTML += `<div class="msg b-msg">${(await r.json()).reply || "Xəta"}</div>`;
+                if(r.ok) { usg.c++; localStorage.setItem('n_ai', JSON.stringify(usg)); chk(); }
+            } catch(e) { msgs.innerHTML += `<div class="msg b-msg">Xəta.</div>`; }
+            btn.disabled = false; msgs.scrollTop = msgs.scrollHeight;
+        }
+    </script>
+</body>
+</html>
