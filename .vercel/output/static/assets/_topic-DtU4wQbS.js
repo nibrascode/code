@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-BkSabwWG.js";import{i as t}from"./index-D189CUkK.js";import{n}from"./library-page-KIeW_62i.js";var r=e();function i(){let{topic:e,privacy:i}=t.useLoaderData();return(0,r.jsx)(n,{section:`resources`,topic:e,rows:i})}export{i as component};

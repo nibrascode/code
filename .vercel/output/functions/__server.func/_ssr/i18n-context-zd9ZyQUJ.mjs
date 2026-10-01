@@ -1,7 +1,7 @@
 import { i as __toESM } from "../_runtime.mjs";
+import { H as require_react, b as require_jsx_runtime, d as useRouterState } from "../_libs/@tanstack/react-router+[...].mjs";
 import { n as faqFromPath, r as faqPath } from "./faq-BiVmx2c7.mjs";
 import { _ as programmingLocalePath, a as findProgramming, d as findProgrammingLocale, g as programmingFromPath, h as pdfPairFromPath, i as STORAGE_KEY, l as RESURSLAR, o as translations, r as PROGRAMMING, t as LANGS$1, u as RU_RESOURCES } from "./programming-BuDhMkBF.mjs";
-import { H as require_react, b as require_jsx_runtime, d as useRouterState } from "../_libs/@tanstack/react-router+[...].mjs";
 //#region node_modules/.nitro/vite/services/ssr/assets/i18n-context-zd9ZyQUJ.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();

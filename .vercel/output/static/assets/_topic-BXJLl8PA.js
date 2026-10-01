@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-BkSabwWG.js";import{f as t}from"./index-DpIF1Bta.js";import{n}from"./library-page-CPzDwTV1.js";var r=e();function i(){let{topic:e,privacy:i}=t.useLoaderData();return(0,r.jsx)(n,{section:`guides`,topic:e,rows:i})}export{i as component};

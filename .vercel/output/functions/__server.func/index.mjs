@@ -14,7 +14,7 @@ var install_page_default = "<!DOCTYPE html>\n<html lang=\"en\" class=\"device-de
 var grokOgIdentity = { "site": {
 	"title": "Nibras Code",
 	"card": "custom",
-	"description": "Mobile applications / premium studio",
+	"description": "Sadə, faydalı və istifadəsi rahat mobil tətbiqlər",
 	"image": "/og.jpg"
 } };
 //#endregion

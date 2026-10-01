@@ -206,7 +206,6 @@ function Home() {
 
   return (
     <main className="nx">
-      <HomeDrift />
       <header className="nx-nav">
         <Link to="/" className="nx-brand" aria-label="Nibras Code">
           <Logo />
@@ -224,6 +223,7 @@ function Home() {
       </header>
 
       <section className="nx-hero">
+        <HomeDrift />
         <div className="nx-hero-copy">
           <p className="nx-kicker">{t("nx_kicker")}</p>
           <p>{t("nx_lead")}</p>

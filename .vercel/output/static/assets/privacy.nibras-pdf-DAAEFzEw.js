@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-BkSabwWG.js";import{u as t}from"./index-D189CUkK.js";import{t as n}from"./app-privacy-DPppwRU2.js";var r=e();function i(){let{privacy:e}=t.useLoaderData();return(0,r.jsx)(n,{slug:`nibras-pdf`,rows:e})}export{i as component};

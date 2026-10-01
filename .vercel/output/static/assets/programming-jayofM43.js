@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-BkSabwWG.js";import{t}from"./library-page-KIeW_62i.js";var n=e(),r=()=>(0,n.jsx)(t,{section:`programming`});export{r as component};
