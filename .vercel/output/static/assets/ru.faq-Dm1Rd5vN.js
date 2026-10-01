@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-BkSabwWG.js";import{t}from"./faq-BgORUX6e.js";import{t as n}from"./faq-page-BfA-yISj.js";var r=e(),i=()=>(0,r.jsx)(n,{page:t.ru});export{i as component};
