@@ -1,0 +1,59 @@
+export default function handler(req, res) {
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  res.status(200).send(`
+  <!DOCTYPE html>
+  <html lang="az">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Nibras AI</title>
+      <style>
+          body { font-family: sans-serif; padding: 20px; background: #f4f7f6; display: flex; justify-content: center; margin: 0; }
+          #chat { width: 100%; max-width: 600px; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+          #msgs { height: 400px; overflow-y: auto; background: #fafafa; padding: 15px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 8px; }
+          .msg { margin-bottom: 15px; padding: 10px 15px; border-radius: 8px; max-width: 80%; line-height: 1.4; word-wrap: break-word; }
+          .u-msg { background: #007bff; color: white; margin-left: auto; border-bottom-right-radius: 0; }
+          .b-msg { background: #e9ecef; color: black; border-bottom-left-radius: 0; }
+          .in { display: flex; gap: 10px; }
+          input { flex-grow: 1; padding: 12px; border: 1px solid #ccc; border-radius: 6px; outline: none; }
+          button { padding: 12px 20px; background: #28a745; color: white; border: none; cursor: pointer; border-radius: 6px; font-weight: bold; }
+          button:disabled { background: #888; }
+      </style>
+  </head>
+  <body>
+      <div id="chat">
+          <h2 style="text-align:center; color: #333; margin-top:0;">Nibras AI</h2>
+          <div id="msgs"></div>
+          <div class="in">
+              <input type="text" id="inp" placeholder="Sual yaz..." onkeypress="if(event.key==='Enter') send()">
+              <button id="btn" onclick="send()">Göndər</button>
+          </div>
+          <p id="warn" style="color:red; display:none; text-align:center; font-weight:bold;">⚠️ Gündəlik limit doldu.</p>
+      </div>
+      <script>
+          let usg = JSON.parse(localStorage.getItem('n_ai')) || { d: new Date().toISOString().split('T')[0], c: 0 };
+          if(usg.d !== new Date().toISOString().split('T')[0]) { usg = { d: new Date().toISOString().split('T')[0], c: 0 }; localStorage.setItem('n_ai', JSON.stringify(usg)); }
+          let msgs = document.getElementById("msgs"), inp = document.getElementById("inp"), btn = document.getElementById("btn"), warn = document.getElementById("warn");
+          
+          function chk() { if(usg.c >= 5) { inp.disabled = btn.disabled = true; warn.style.display = "block"; return false; } return true; } chk();
+
+          async function send() {
+              if(!chk() || !inp.value.trim()) return;
+              let m = inp.value; inp.value = ""; btn.disabled = true;
+              msgs.innerHTML += '<div class="msg u-msg">' + m + '</div>';
+              msgs.scrollTop = msgs.scrollHeight;
+              
+              try {
+                  let r = await fetch('/api/chat', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({message:m}) });
+                  let data = await r.json();
+                  msgs.innerHTML += '<div class="msg b-msg">' + (data.reply || "Xəta") + '</div>';
+                  if(r.ok) { usg.c++; localStorage.setItem('n_ai', JSON.stringify(usg)); chk(); }
+              } catch(e) { msgs.innerHTML += '<div class="msg b-msg">Sistemə qoşulmaq mümkün olmadı.</div>'; }
+              btn.disabled = false; msgs.scrollTop = msgs.scrollHeight;
+              inp.focus();
+          }
+      </script>
+  </body>
+  </html>
+  `);
+}
