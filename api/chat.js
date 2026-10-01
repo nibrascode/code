@@ -23,41 +23,30 @@ export default async function handler(req, res) {
     }
     const history = normalizeHistory(body.messages, message);
 
-    const grokKey = findKey([/^XAI_API_KEY$/i, /^GROK_API_KEY$/i, /^GROK_API$/i, /^XAI_KEY$/i, /grok/i, /xai/i]);
-    if (grokKey) {
+    const grokKeys = listGrokKeys();
+    let grokDetail = "";
+    for (const grokKey of grokKeys) {
       const grok = await askGrok(history, grokKey);
       if (grok.ok) {
         res.status(200).json({ success: true, reply: grok.reply, engine: "grok" });
         return;
       }
-      const auth = /incorrect|invalid|unauthorized|api key|permission/i.test(grok.detail || "");
-      if (auth) {
-        res.status(200).json({
-          success: false,
-          reply: "Grok açarı qəbul olunmadı. Vercel-də açarın adını XAI_API_KEY qoyub yenidən deploy edin.",
-        });
-        return;
-      }
+      grokDetail = grok.detail || grokDetail;
     }
 
     const geminiKey = process.env.GEMINI_API_KEY;
-    if (!grokKey && !geminiKey) {
-      res.status(200).json({
-        success: false,
-        reply: "AI açarı serverdə yoxdur. Vercel-də XAI_API_KEY əlavə edin.",
-      });
-      return;
-    }
-
     if (geminiKey) {
       const gemini = await askGemini(message, geminiKey);
       if (gemini.ok) {
         res.status(200).json({ success: true, reply: gemini.reply, engine: "gemini" });
         return;
       }
+    }
+
+    if (grokKeys.length && /incorrect|invalid|unauthorized|api key|permission/i.test(grokDetail)) {
       res.status(200).json({
         success: false,
-        reply: "Süni intellekt indi cavab verə bilmədi. " + (gemini.detail || ""),
+        reply: "Grok açarı qəbul olunmadı. Vercel-də adını XAI_API_KEY qoyun, dəyəri xai- ilə başlasın və Production üçün yenidən deploy edin.",
       });
       return;
     }
@@ -74,13 +63,23 @@ export default async function handler(req, res) {
   }
 }
 
-function findKey(patterns) {
+function listGrokKeys() {
+  const preferred = ["XAI_API_KEY", "GROK_API_KEY", "GROK_API", "XAI_KEY", "GROK_KEY", "XAI_API"];
   const names = Object.keys(process.env);
-  for (const pattern of patterns) {
-    const name = names.find((key) => pattern.test(key) && process.env[key]);
-    if (name) return process.env[name];
+  const values = [];
+  const push = (value) => {
+    const clean = String(value || "").trim().replace(/^Bearer\s+/i, "").replace(/^["']|["']$/g, "").trim();
+    if (clean.length >= 16 && !values.includes(clean)) values.push(clean);
+  };
+  for (const name of preferred) {
+    const hit = names.find((key) => key.toUpperCase() === name);
+    if (hit) push(process.env[hit]);
   }
-  return "";
+  for (const name of names) {
+    if (/grok|xai/i.test(name)) push(process.env[name]);
+  }
+  values.sort((a, b) => Number(b.startsWith("xai-")) - Number(a.startsWith("xai-")));
+  return values;
 }
 
 function normalizeHistory(raw, message) {
