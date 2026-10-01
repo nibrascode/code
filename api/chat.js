@@ -29,42 +29,46 @@ export default async function handler(req, res) {
       return;
     }
 
-    const upstream = await fetch(
-      "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-goog-api-key": apiKey,
-        },
-        body: JSON.stringify({
-          systemInstruction: {
-            parts: [{
-              text: "Sən Nibras AI-san, Nibras Code saytının köməkçisisən. Cavabların qısa, aydın və nəzakətli olsun. İstifadəçi hansı dildə yazırsa, o dildə cavab ver. Tibbi, hüquqi və maliyyə məsləhəti vermə.",
-            }],
+    const models = ["gemini-3.8-flash", "gemini-2.0-flash", "gemini-flash-latest"];
+    let last = "Model cavab qaytarmadı.";
+    for (const model of models) {
+      const upstream = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-goog-api-key": apiKey,
           },
-          contents: [{ role: "user", parts: [{ text: message }] }],
-          generationConfig: { temperature: 0.5, maxOutputTokens: 700 },
-        }),
-      },
-    );
-
-    const data = await upstream.json().catch(() => ({}));
-    const reply = (data.candidates?.[0]?.content?.parts || [])
-      .map((part) => part.text || "")
-      .join("")
-      .trim();
-
-    if (!upstream.ok || !reply) {
-      const detail = data.error?.message || "Model cavab qaytarmadı.";
-      res.status(200).json({
-        success: false,
-        reply: "Süni intellekt indi cavab verə bilmədi. " + detail,
-      });
-      return;
+          body: JSON.stringify({
+            systemInstruction: {
+              parts: [{
+                text: "Sən Nibras AI-san, Nibras Code saytının köməkçisisən. Cavabların qısa, aydın və nəzakətli olsun. İstifadəçi hansı dildə yazırsa, o dildə cavab ver. Tibbi, hüquqi və maliyyə məsləhəti vermə.",
+              }],
+            },
+            contents: [{ role: "user", parts: [{ text: message }] }],
+            generationConfig: { temperature: 0.5, maxOutputTokens: 700 },
+          }),
+        },
+      );
+      const data = await upstream.json().catch(() => ({}));
+      const reply = (data.candidates?.[0]?.content?.parts || [])
+        .map((part) => part.text || "")
+        .join("")
+        .trim();
+      if (upstream.ok && reply) {
+        res.status(200).json({ success: true, reply });
+        return;
+      }
+      last = data.error?.message || last;
+      const retryable = /high demand|unavailable|not found|no longer available|overloaded|quota/i.test(last);
+      if (!retryable) break;
     }
 
-    res.status(200).json({ success: true, reply });
+    res.status(200).json({
+      success: false,
+      reply: "Süni intellekt indi cavab verə bilmədi. " + last,
+    });
   } catch (error) {
     res.status(200).json({
       success: false,
