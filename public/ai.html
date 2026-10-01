@@ -4,98 +4,128 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Nibras AI</title>
-  <meta name="description" content="Nibras AI — Nibras Code köməkçisi. Gündə 5 qısa sual." />
+  <meta name="description" content="Nibras AI — Nibras Code köməkçisi." />
   <link rel="icon" href="/nibras-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Syne:wght@600;700&display=swap" rel="stylesheet" />
   <style>
+    @property --nx-angle {
+      syntax: "<angle>";
+      inherits: false;
+      initial-value: 0deg;
+    }
+    @keyframes nx-edge { to { --nx-angle: 360deg; } }
+    @keyframes blink { 50% { opacity: .25; } }
+
     :root {
       --ink: #05060c;
       --fg: #f4f5fb;
       --muted: #9aa1b8;
-      --faint: #6c738c;
-      --brand: #7c8cff;
+      --faint: #6d748c;
       --ice: #9aebff;
       --line: rgba(255,255,255,.1);
-      --user: #6d84ff;
     }
     * { box-sizing: border-box; }
     html, body { height: 100%; }
     body {
       margin: 0;
       min-height: 100dvh;
+      display: grid;
+      place-items: center;
+      padding: 16px;
       color: var(--fg);
       font-family: "DM Sans", ui-sans-serif, system-ui, sans-serif;
       background:
-        radial-gradient(820px 420px at 100% -10%, rgba(109,132,255,.28), transparent 58%),
-        radial-gradient(640px 380px at -10% 110%, rgba(126,231,255,.1), transparent 52%),
-        var(--ink);
+        radial-gradient(520px 280px at 50% 0%, rgba(109,132,255,.2), transparent 70%),
+        #05060c;
+      overflow: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    .frame {
+      position: relative;
+      isolation: isolate;
+      width: min(520px, 100%);
+      height: min(680px, calc(100dvh - 32px));
+      border-radius: 28px;
+    }
+    .frame::before,
+    .frame::after {
+      content: "";
+      position: absolute;
+      border-radius: inherit;
+      pointer-events: none;
+      background: conic-gradient(
+        from var(--nx-angle),
+        transparent 0deg,
+        rgba(126,231,255,.12) 40deg,
+        #7ee7ff 78deg,
+        #c9a6ff 118deg,
+        #ffd27a 152deg,
+        #ff8eb8 184deg,
+        transparent 230deg,
+        transparent 360deg
+      );
+      animation: nx-edge 5.5s linear infinite;
+    }
+    .frame::before {
+      inset: 0;
+      z-index: 3;
+      padding: 1.5px;
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      mask-composite: exclude;
+    }
+    .frame::after {
+      inset: -14px;
+      z-index: 0;
+      opacity: .72;
+      filter: blur(16px);
+    }
+    .panel {
+      position: absolute;
+      inset: 2px;
+      z-index: 1;
       display: flex;
       flex-direction: column;
+      min-height: 0;
+      border-radius: 26px;
+      background:
+        linear-gradient(180deg, rgba(18,22,38,.96), rgba(8,10,18,.96));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+      overflow: hidden;
     }
-    a { color: inherit; }
     .top {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      padding: 12px 16px;
-      padding-top: max(12px, env(safe-area-inset-top));
-      border-bottom: 1px solid var(--line);
-      background: rgba(5,6,12,.55);
-      backdrop-filter: blur(16px);
-    }
-    .brand {
-      display: flex;
-      align-items: center;
       gap: 10px;
-      text-decoration: none;
-      min-width: 0;
+      padding: 14px 14px 12px;
+      border-bottom: 1px solid var(--line);
     }
+    .brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
     .brand img {
-      width: 38px;
-      height: 38px;
-      border-radius: 11px;
-      object-fit: cover;
+      width: 34px; height: 34px; border-radius: 10px; object-fit: cover;
       outline: 1px solid rgba(255,255,255,.12);
     }
     .brand b {
       display: block;
       font-family: Syne, sans-serif;
-      font-weight: 750;
+      font-size: 15px;
       letter-spacing: -0.04em;
-      font-size: 16px;
     }
-    .brand small {
-      display: block;
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 500;
-    }
+    .brand small { display: block; color: var(--muted); font-size: 12px; }
     .meta { display: flex; align-items: center; gap: 8px; }
     .pill, .home {
       border: 1px solid var(--line);
       background: rgba(255,255,255,.04);
-      color: var(--fg);
       border-radius: 999px;
-      padding: 7px 12px;
+      padding: 6px 10px;
       font-size: 12px;
       font-weight: 600;
-      text-decoration: none;
-      white-space: nowrap;
     }
     .pill em { font-style: normal; color: var(--ice); }
-    main {
-      width: min(760px, 100%);
-      margin: 0 auto;
-      flex: 1;
-      min-height: 0;
-      display: flex;
-      flex-direction: column;
-      padding: 0 14px 14px;
-      padding-bottom: max(14px, env(safe-area-inset-bottom));
-    }
     #msgs {
       flex: 1;
       min-height: 0;
@@ -103,139 +133,126 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
-      padding: 18px 2px 8px;
+      padding: 16px 14px;
     }
-    .hello {
-      margin: auto;
-      text-align: center;
-      max-width: 420px;
-      padding: 12px;
-    }
+    .hello { margin: auto; text-align: center; max-width: 360px; }
     .hello h1 {
-      font-family: Syne, sans-serif;
-      font-size: clamp(28px, 6vw, 42px);
-      letter-spacing: -0.05em;
       margin: 0 0 8px;
+      font-family: Syne, sans-serif;
+      font-size: 28px;
+      letter-spacing: -0.05em;
     }
-    .hello p { margin: 0 0 16px; color: var(--muted); line-height: 1.5; }
+    .hello p { margin: 0 0 14px; color: var(--muted); line-height: 1.45; font-size: 14px; }
     .chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
     .chips button {
       border: 1px solid var(--line);
       background: rgba(255,255,255,.04);
       color: var(--fg);
       border-radius: 999px;
-      padding: 8px 12px;
+      padding: 7px 11px;
       font: inherit;
       font-size: 13px;
       cursor: pointer;
     }
-    .chips button:hover { border-color: rgba(154,235,255,.45); }
+    .chips button:hover { border-color: rgba(154,235,255,.4); }
     .msg {
-      max-width: min(86%, 560px);
-      padding: 11px 14px;
+      max-width: 84%;
+      padding: 10px 13px;
       border-radius: 16px;
       line-height: 1.5;
-      font-size: 15px;
+      font-size: 14.5px;
       white-space: pre-wrap;
       word-break: break-word;
     }
     .u {
       margin-left: auto;
-      background: linear-gradient(180deg, #8496ff, #6d7ff0);
+      background: linear-gradient(180deg, #8b9bff, #6d7ff0);
       color: white;
       border-bottom-right-radius: 5px;
     }
     .b {
       margin-right: auto;
-      background: rgba(255,255,255,.06);
+      background: rgba(255,255,255,.05);
       border: 1px solid var(--line);
       border-bottom-left-radius: 5px;
     }
-    .err { border-color: rgba(255,120,140,.4); color: #ffd0d6; }
-    .dots { display: inline-flex; gap: 5px; padding: 4px 2px; }
+    .err { border-color: rgba(255,120,140,.35); color: #ffd0d6; }
+    .dots { display: inline-flex; gap: 5px; padding: 2px; }
     .dots i {
-      width: 7px; height: 7px; border-radius: 50%;
-      background: var(--ice);
+      width: 6px; height: 6px; border-radius: 50%; background: var(--ice);
       animation: blink 1s infinite;
     }
     .dots i:nth-child(2) { animation-delay: .15s; }
     .dots i:nth-child(3) { animation-delay: .3s; }
-    @keyframes blink { 50% { opacity: .25; } }
+    .dock { padding: 12px 12px 14px; border-top: 1px solid var(--line); }
     form {
       display: flex;
       gap: 8px;
       align-items: center;
-      padding: 8px;
+      padding: 6px 6px 6px 12px;
       border: 1px solid var(--line);
-      border-radius: 18px;
-      background: rgba(8,10,20,.82);
-      box-shadow: 0 16px 50px rgba(0,0,0,.28);
+      border-radius: 16px;
+      background: rgba(5,6,12,.65);
     }
     input {
-      flex: 1;
-      min-width: 0;
-      border: 0;
-      outline: none;
-      background: transparent;
-      color: var(--fg);
-      font: inherit;
-      font-size: 15px;
-      padding: 10px 8px;
+      flex: 1; min-width: 0; border: 0; outline: none;
+      background: transparent; color: var(--fg);
+      font: inherit; font-size: 15px; padding: 8px 0;
     }
     input::placeholder { color: var(--faint); }
     button.send {
-      border: 0;
-      border-radius: 12px;
-      padding: 11px 16px;
-      font: inherit;
-      font-weight: 700;
-      color: #061018;
-      background: linear-gradient(180deg, var(--ice), #b9c4ff);
+      border: 0; border-radius: 12px; padding: 10px 14px;
+      font: inherit; font-weight: 700; color: #071018;
+      background: linear-gradient(180deg, #d7f7ff, #b7c4ff);
       cursor: pointer;
     }
-    button.send:disabled { opacity: .45; cursor: not-allowed; }
-    #warn {
-      display: none;
-      margin: 8px 4px 0;
-      color: #ffb4c0;
-      font-size: 13px;
-      text-align: center;
-    }
+    button.send:disabled { opacity: .4; cursor: not-allowed; }
+    #warn { display: none; margin: 8px 2px 0; text-align: center; color: #ffb4c0; font-size: 12px; }
     #warn.on { display: block; }
+    @media (max-width: 640px) {
+      body { padding: 10px; }
+      .frame { height: calc(100dvh - 20px); border-radius: 22px; }
+      .panel { border-radius: 20px; }
+      .hello h1 { font-size: 24px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .frame::before, .frame::after { animation: none; }
+    }
   </style>
 </head>
 <body>
-  <header class="top">
-    <a class="brand" href="/">
-      <img src="/nibras-icon.png" alt="" />
-      <span>
-        <b>Nibras AI</b>
-        <small>Nibras Code köməkçisi</small>
-      </span>
-    </a>
-    <div class="meta">
-      <span class="pill" id="left"><em>5</em>/5</span>
-      <a class="home" href="/">Sayt</a>
-    </div>
-  </header>
-  <main>
-    <div id="msgs">
-      <div class="hello" id="hello">
-        <h1>Sualını yaz.</h1>
-        <p>Qısa və aydın cavab. Hər gün 5 sual. Limit dolanda sabah yenidən açılır.</p>
-        <div class="chips">
-          <button type="button" data-q="Nibras Code nədir?">Nibras Code nədir?</button>
-          <button type="button" data-q="Nibras Arabic nə üçündür?">Nibras Arabic</button>
-          <button type="button" data-q="PDF fayllarını telefonda necə birləşdirmək olar?">PDF birləşdirmək</button>
+  <div class="frame">
+    <section class="panel">
+      <header class="top">
+        <a class="brand" href="/">
+          <img src="/nibras-icon.png" alt="" />
+          <span><b>Nibras AI</b><small>Nibras Code</small></span>
+        </a>
+        <div class="meta">
+          <span class="pill" id="left"><em>5</em>/5</span>
+          <a class="home" href="/">Sayt</a>
+        </div>
+      </header>
+      <div id="msgs">
+        <div class="hello" id="hello">
+          <h1>Sualını yaz.</h1>
+          <p>Qısa cavab. Gündə 5 sual.</p>
+          <div class="chips">
+            <button type="button" data-q="Nibras Code nədir?">Nibras Code nədir?</button>
+            <button type="button" data-q="Nibras Arabic nə üçündür?">Nibras Arabic</button>
+            <button type="button" data-q="PDF fayllarını telefonda necə birləşdirmək olar?">PDF birləşdirmək</button>
+          </div>
         </div>
       </div>
-    </div>
-    <form id="form">
-      <input id="inp" type="text" maxlength="800" placeholder="Sualınızı yazın..." autocomplete="off" />
-      <button class="send" id="btn" type="submit">Göndər</button>
-    </form>
-    <p id="warn">Gündəlik 5 sual limiti doldu. Sabah yenidən yoxlayın.</p>
-  </main>
+      <div class="dock">
+        <form id="form">
+          <input id="inp" type="text" maxlength="800" placeholder="Sualınızı yazın..." autocomplete="off" />
+          <button class="send" id="btn" type="submit">Göndər</button>
+        </form>
+        <p id="warn">Gündəlik 5 sual limiti doldu. Sabah yenidən yoxlayın.</p>
+      </div>
+    </section>
+  </div>
   <script>
     const LIMIT = 5;
     const KEY = "nibras_ai_v2";
@@ -247,11 +264,12 @@
     const warn = document.getElementById("warn");
     const left = document.getElementById("left");
     const today = new Date().toISOString().slice(0, 10);
+    const thread = [];
 
     function load() {
       let u = { d: today, c: 0 };
       try { u = JSON.parse(localStorage.getItem(KEY)) || u; } catch (e) {}
-      if (u.d !== today) u = { d: today, c: 0 };
+      if (!u || u.d !== today) u = { d: today, c: 0 };
       return u;
     }
     function save(u) { localStorage.setItem(KEY, JSON.stringify(u)); }
@@ -265,25 +283,20 @@
       warn.classList.toggle("on", full);
       inp.placeholder = full ? "Limit doldu" : "Sualınızı yazın...";
     }
-    function esc(s) {
-      return s.replace(/[&<>"']/g, function (c) {
-        return ({ "&": "&", "<": "<", ">": ">", '"': """, "'": "&#39;" })[c];
-      });
-    }
     function bubble(text, kind) {
-      if (hello) hello.remove();
+      if (hello && hello.parentNode) hello.remove();
       const el = document.createElement("div");
       el.className = "msg " + kind;
       el.textContent = text;
       msgs.appendChild(el);
       msgs.scrollTop = msgs.scrollHeight;
-      return el;
     }
     async function send(text) {
       const m = (text || "").trim();
       if (!m || remain() <= 0) return;
       inp.value = "";
       bubble(m, "u");
+      thread.push({ role: "user", text: m });
       btn.disabled = true;
       const wait = document.createElement("div");
       wait.className = "msg b";
@@ -294,7 +307,7 @@
         const r = await fetch("/api/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message: m })
+          body: JSON.stringify({ message: m, messages: thread.slice(-8) })
         });
         const raw = await r.text();
         let data = {};
@@ -303,14 +316,17 @@
         const reply = data.reply || data.message || data.error;
         if (!r.ok || data.success === false || !reply) {
           bubble(reply || "Cavab gəlmədi. Bir az sonra yenidən yoxlayın.", "b err");
+          thread.pop();
         } else {
           bubble(reply, "b");
+          thread.push({ role: "assistant", text: reply });
           const u = load();
           u.c += 1;
           save(u);
         }
       } catch (e) {
         wait.remove();
+        thread.pop();
         bubble("Şəbəkəyə qoşulmaq olmadı.", "b err");
       }
       paint();
