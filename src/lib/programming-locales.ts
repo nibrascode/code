@@ -1,10 +1,6 @@
 import type { Lang } from "@/lib/i18n";
 import type { ProgrammingSection } from "@/lib/programming";
-import { javascriptSections } from "@/lib/javascript-sections";
-import { PYTHON_AR } from "@/lib/python-ar";
-import { PYTHON_EN } from "@/lib/python-en";
-import { PYTHON_RU } from "@/lib/python-ru";
-import { PYTHON_TR } from "@/lib/python-tr";
+import { JAVA_AR, JAVA_EN, JAVA_RU, JAVA_TR } from "@/lib/programming";
 
 export type ProgrammingLocale = {
   lang: Exclude<Lang, "az">;
@@ -14,14 +10,18 @@ export type ProgrammingLocale = {
 };
 
 const LOCALES: readonly ProgrammingLocale[] = [
-  { lang: "en", slug: "python", title: "What is Python? Uses and advantages", sections: PYTHON_EN },
-  { lang: "tr", slug: "python", title: "Python nedir? Kullanım alanları ve avantajları", sections: PYTHON_TR },
-  { lang: "ar", slug: "python", title: "ما هي بايثون؟ استخداماتها ومزاياها", sections: PYTHON_AR },
-  { lang: "ru", slug: "python", title: "Что такое Python? Области применения и преимущества", sections: PYTHON_RU },
+  { lang: "en", slug: "python", title: "What is Python? Uses and advantages", sections: JAVA_EN },
+  { lang: "tr", slug: "python", title: "Python nedir? Kullanım alanları ve avantajları", sections: JAVA_TR },
+  { lang: "ar", slug: "python", title: "ما هي بايثون؟ استخداماتها ومزاياها", sections: JAVA_AR },
+  { lang: "ru", slug: "python", title: "Что такое Python? Области применения и преимущества", sections: JAVA_RU },
   { lang: "en", slug: "javascript", title: "What is JavaScript and what is it used for?", sections: javascriptSections("en") },
   { lang: "tr", slug: "javascript", title: "JavaScript nedir? Ne için kullanılır?", sections: javascriptSections("tr") },
   { lang: "ar", slug: "javascript", title: "ما هي جافاسكريبت ولماذا تُستخدم؟", sections: javascriptSections("ar") },
   { lang: "ru", slug: "javascript", title: "Что такое JavaScript и зачем он нужен?", sections: javascriptSections("ru") },
+  { lang: "en", slug: "java", title: "What is Java and how is it used?", sections: JAVA_EN },
+  { lang: "tr", slug: "java", title: "Java nedir? Ne için kullanılır?", sections: JAVA_TR },
+  { lang: "ar", slug: "java", title: "ما هي Java؟ ولماذا تُستخدم؟", sections: JAVA_AR },
+  { lang: "ru", slug: "java", title: "Что такое Java и для чего она используется?", sections: JAVA_RU },
 ];
 
 export function programmingLocalePath(lang: Lang, slug: string) {

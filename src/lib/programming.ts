@@ -29,6 +29,433 @@ function seo(az: Seo, en: Seo, tr: Seo, ar: Seo, ru: Seo): Record<Lang, Seo> {
   return { az, en, tr, ar, ru };
 }
 
+export const JAVA_AZ: readonly ProgrammingSection[] = [
+  {
+    id: "nedir",
+    title: "📌 Java nədir?",
+    blocks: [
+      {
+        paragraphs: [
+          "Java yüksək səviyyəli, ümumi məqsədli və platformalararası proqramlaşdırma dilidir. O, xüsusilə böyük layihələr, backend xidmətləri, Android tətbiqləri və korporativ proqramlar üçün geniş istifadə olunur.",
+          "Java-nın əsas üstünlüklərindən biri onun 'yaz bir dəfə, hər yerdə işlət' (write once, run anywhere) prinsipi ilə işləməsi və platformalararası uyğunluğudur.",
+          "Java həmçinin güclü obyekt yönümlü modellə, geniş standart kitabxana ekosistemə və əla inkişafetmə alətlərinə malikdir.",
+        ],
+      },
+      {
+        heading: "Qısaca",
+        paragraphs: [
+          "Java təhlükəsizlik, sabitlik və geniş tətbiq sahəsi ilə tanınan, böyük layihələr üçün çox populyar proqramlaşdırma dilidir.",
+        ],
+      },
+    ],
+  },
+  {
+    id: "istifade",
+    title: "💻 Java nə üçün istifadə olunur?",
+    blocks: [
+      {
+        paragraphs: [
+          "Java bir çox sahədə istifadə olunur. O, xüsusilə aşağıdakı sahələrdə güclüdür:",
+        ],
+        list: [
+          "Android tətbiqləri",
+          "Backend və server xidmətləri",
+          "Korporativ sistemlər",
+          "Bank və maliyyə tətbiqləri",
+          "Məlumat bazası ilə işləmə",
+          "İnternet və mikroservis arxitekturaları",
+          "Böyük miqyaslı layihələr",
+          "Elmi və sistem proqramlaşdırması",
+        ],
+      },
+      {
+        heading: "Niyə Java?",
+        paragraphs: [
+          "Java-nın sabitliyi, böyük icması və inkişaf edən ekosistemi onu biznes layihələri, şirkət daxilində tətbiqlər və yüksək etibarlılıq tələb edən sistemlər üçün üstün seçim etməyə kömək edir.",
+        ],
+      },
+    ],
+  },
+  {
+    id: "ne-etmek",
+    title: "🎯 Java ilə nələr etmək olar?",
+    blocks: [
+      {
+        paragraphs: [
+          "Java ilə aşağıdakı işləri etmək mümkündür:",
+        ],
+        list: [
+          "Android tətbiqləri hazırlamaq",
+          "Web backend xidmətləri yazmaq",
+          "REST API yaratmaq",
+          "Məlumat bazası ilə işləmək",
+          "Mikroservis arquitekturası qurmaq",
+          "Korporativ tətbiqlər hazırlamaq",
+          "İşləmə gücü tələb edən sistemlər yazmaq",
+          "İnternet və mobil platformalar üçün proqramlar hazırlamaq",
+        ],
+      },
+      {
+        heading: "Sadə Java nümunəsi",
+        code: 'public class Main {\n  public static void main(String[] args) {\n    System.out.println("Salam, Java!");\n  }\n}',
+        after: ["Bu kod ekranda mesaj çıxarır."],
+      },
+    ],
+  },
+  {
+    id: "oyrenmek",
+    title: "📚 Java öyrənmək çətindirmi?",
+    blocks: [
+      {
+        paragraphs: [
+          "Java öyrənmək mənbə və təcrübə ilə asanlaşan bir dildir. Başlanğıcda bəzi konseptlər qarışıq görünə bilər, lakin qayda-qanunlar anlaşıldıqdan sonra dilin quruluşu nisbi olaraq aydın olur.",
+          "Java öyrənməyə başlamaq üçün aşağıdakı mövzuları öyrənmək faydalıdır:",
+        ],
+        list: [
+          "Dəyişənlər və məlumat tipləri",
+          "Şərtlər və dövrlər",
+          "Funksiyalar və metodlar",
+          "Siniflər və obyektlər",
+          "Miras və inkapsulyasiya",
+          "Kolleksiyalar",
+          "İstisnalar",
+          "Klasslar və paketlər",
+          "Məlumat bazası ilə işləmə",
+        ],
+        ordered: true,
+      },
+      {
+        paragraphs: [
+          "Java öyrənmənin çətinliyi proqramlaşdırmaya başlanğıc səviyyəsindən asılıdır. Düzenli praktika və kiçik layihələr sayəsində dil öyrənmək asanlaşır.",
+        ],
+      },
+    ],
+  },
+  {
+    id: "ustunluk",
+    title: "⚖️ Java-nın üstünlükləri və çatışmazlıqları",
+    blocks: [
+      {
+        heading: "Üstünlükləri",
+        list: [
+          "Platformalararası uyğunluq",
+          "Güclü obyekt yönümlü model",
+          "Böyük icma və dokumentasiya",
+          "Etibarlı və geniş ekosistem",
+          "Android inkişafı üçün uyğunluq",
+          "Böyük korporativ layihələr üçün uyğunluğu",
+        ],
+      },
+      {
+        heading: "Çatışmazlıqları",
+        list: [
+          "Sintaksis və ilkin öyrənmə nisbətən çoxdur",
+          "Bəzi tətbiqlərdə daha çox kod yazmaq lazım ola bilər",
+          "Yüksək performans tələb olunan sahələrdə başqa dillər daha optimal ola bilər",
+          "Başlanğıcda obyekt yönümlü konseptlər qarışıq görüne bilər",
+        ],
+      },
+      {
+        heading: "Qısaca",
+        paragraphs: [
+          "Java-nın üstünlükləri onun etibarlılığı və geniş istifadəsidir. Çatışmazlığı isə öyrənmə əyrisinin nisbi olaraq daha uzun olmasıdır.",
+        ],
+      },
+    ],
+  },
+  {
+    id: "sintaksis",
+    title: "🔤 Java sintaksisi və əsas anlayışlar",
+    blocks: [
+      {
+        paragraphs: [
+          "Java-da proqramlar siniflər və metodlar üzərində qurulur. Əsas anlayışlardan biri də obyekt yönümlü proqramlaşdırmadır.",
+        ],
+      },
+      {
+        heading: "Dəyişənlər",
+        code: 'int age = 25;\nString name = "Ali";',
+      },
+      {
+        heading: "Şərt",
+        code: 'if (age >= 18) {\n    System.out.println("Yetkin");\n} else {\n    System.out.println("Yaşlı deyil");\n}',
+      },
+      {
+        heading: "Dövr",
+        code: 'for (int i = 0; i < 5; i++) {\n    System.out.println(i);\n}',
+      },
+      {
+        heading: "Sinif və metod",
+        code: 'class Main {\n  static void greet(String name) {\n    System.out.println("Salam, " + name);\n  }\n\n  public static void main(String[] args) {\n    greet("Java");\n  }\n}',
+      },
+    ],
+  },
+  {
+    id: "numuneler",
+    title: "🧩 Java kod nümunələri",
+    blocks: [
+      {
+        heading: "Mətn çıxarmaq",
+        code: 'System.out.println("Salam, dünya!");',
+      },
+      {
+        heading: "İki ədədi toplamaq",
+        code: 'int a = 10;\nint b = 20;\nint result = a + b;\nSystem.out.println(result);',
+      },
+      {
+        heading: "Şərtə əsasən nəticə",
+        code: 'int score = 80;\n\nif (score >= 50) {\n    System.out.println("Keçdiniz");\n} else {\n    System.out.println("Keçmədiniz");\n}',
+      },
+      {
+        heading: "Dövr nümunəsi",
+        code: 'for (int i = 1; i <= 5; i++) {\n    System.out.println(i);\n}',
+      },
+      {
+        heading: "Sadə metod",
+        code: 'class Main {\n  static int topla(int a, int b) {\n    return a + b;\n  }\n\n  public static void main(String[] args) {\n    System.out.println(topla(10, 20));\n  }\n}',
+      },
+    ],
+  },
+  {
+    id: "suallar",
+    title: "❓ Java haqqında tez-tez verilən suallar",
+    blocks: [
+      {
+        heading: "Java nədir?",
+        paragraphs: [
+          "Java platformalararası, obyekt yönümlü və müasir proqramlaşdırma dillərindən biridir.",
+        ],
+      },
+      {
+        heading: "Java nə üçün istifadə olunur?",
+        paragraphs: [
+          "Java backend, Android, böyük korporativ sistemlər, bank və maliyyə tətbiqləri üçün istifadə olunur.",
+        ],
+      },
+      {
+        heading: "Java öyrənmək çətindirmi?",
+        paragraphs: [
+          "Java sintaksisi nisbətən formal olsa da, düzgün öyrənmə metoduyla öyrənilə bilər. Təcrübə və kiçik layihələr bu prosesi asanlaşdırır.",
+        ],
+      },
+      {
+        heading: "Java və JavaScript eynidirmi?",
+        paragraphs: [
+          "Xeyr. Java və JavaScript fərqli dillərdir. Java daha çox backend və mobil tətbiqlərdə, JavaScript isə veb tətbiqlərdə istifadə olunur.",
+        ],
+      },
+      {
+        heading: "Java Android üçün çox vacibdirmi?",
+        paragraphs: [
+          "Bəli, Java əvvəllər Android proqramlaşdırmada geniş istifadə olunurdu. Bu gün Kotlin daha çox istifadə olunur, lakin Java hələ də vacib bir dildir.",
+        ],
+      },
+    ],
+  },
+];
+
+export const JAVA_EN: readonly ProgrammingSection[] = [
+  {
+    id: "nedir",
+    title: "What is Java?",
+    blocks: [
+      {
+        paragraphs: [
+          "Java is a high-level, general-purpose programming language designed to be portable, reliable, and scalable.",
+          "It is widely used for Android apps, backend services, enterprise systems, and large software projects.",
+          "Java follows the object-oriented programming model and offers a robust standard library and large ecosystem.",
+        ],
+      },
+      {
+        heading: "In short",
+        paragraphs: [
+          "Java is a powerful and widely used language known for stability, portability, and strong ecosystem support.",
+        ],
+      },
+    ],
+  },
+  {
+    id: "istifade",
+    title: "What is Java used for?",
+    blocks: [
+      {
+        paragraphs: ["Java is used in many fields, including:"],
+        list: [
+          "Android applications",
+          "Backend and server development",
+          "Enterprise software",
+          "Banking and financial systems",
+          "Database-driven applications",
+          "Microservices",
+          "Large-scale software systems",
+        ],
+      },
+    ],
+  },
+  {
+    id: "ne-etmek",
+    title: "What can you do with Java?",
+    blocks: [
+      {
+        paragraphs: ["You can use Java to:"],
+        list: [
+          "Build Android apps",
+          "Create web backend services",
+          "Develop APIs",
+          "Work with databases",
+          "Build enterprise platforms",
+          "Develop large and reliable systems",
+        ],
+      },
+      {
+        heading: "Simple example",
+        code: 'public class Main {\n  public static void main(String[] args) {\n    System.out.println("Hello, Java!");\n  }\n}',
+      },
+    ],
+  },
+  {
+    id: "oyrenmek",
+    title: "Is Java difficult to learn?",
+    blocks: [
+      {
+        paragraphs: [
+          "Java can be learned step by step. New concepts like classes, objects, and methods may feel challenging at first, but the structure becomes clearer with practice.",
+        ],
+      },
+    ],
+  },
+  {
+    id: "ustunluk",
+    title: "Advantages and disadvantages of Java",
+    blocks: [
+      {
+        heading: "Advantages",
+        list: [
+          "Cross-platform support",
+          "Strong object-oriented model",
+          "Good enterprise ecosystem",
+          "High reliability",
+          "Large community",
+        ],
+      },
+      {
+        heading: "Disadvantages",
+        list: [
+          "More verbose syntax",
+          "Longer learning curve",
+          "Can require more code for simple tasks",
+        ],
+      },
+    ],
+  },
+  {
+    id: "sintaksis",
+    title: "Java syntax and basic concepts",
+    blocks: [
+      {
+        paragraphs: ["Java programs are built around classes and methods."],
+      },
+      { heading: "Variables", code: 'int age = 25;\nString name = "Ali";' },
+      { heading: "Condition", code: 'if (age >= 18) {\n  System.out.println("Adult");\n}' },
+      { heading: "Loop", code: 'for (int i = 0; i < 5; i++) {\n  System.out.println(i);\n}' },
+    ],
+  },
+  {
+    id: "numuneler",
+    title: "Java code examples",
+    blocks: [
+      { heading: "Print message", code: 'System.out.println("Hello, world!");' },
+      { heading: "Add numbers", code: 'int a = 10;\nint b = 20;\nSystem.out.println(a + b);' },
+    ],
+  },
+  {
+    id: "suallar",
+    title: "Frequently asked questions about Java",
+    blocks: [
+      { heading: "What is Java?", paragraphs: ["Java is a widely used programming language for enterprise, backend, and Android development."] },
+      { heading: "Is Java difficult to learn?", paragraphs: ["It has a structured syntax and a longer learning curve, but it is manageable with practice."] },
+    ],
+  },
+];
+
+export const JAVA_TR: readonly ProgrammingSection[] = [
+  {
+    id: "nedir",
+    title: "Java nedir?",
+    blocks: [
+      {
+        paragraphs: [
+          "Java, taşınabilir, güvenilir ve ölçeklenebilir bir programlama dilidir.",
+          "Android uygulamaları, sunucu tarafı yazılımlar, kurumsal sistemler ve büyük projelerde yaygın olarak kullanılır.",
+        ],
+      },
+    ],
+  },
+  {
+    id: "istifade",
+    title: "Java ne için kullanılır?",
+    blocks: [
+      { paragraphs: ["Java şu alanlarda kullanılır:"], list: ["Android uygulamaları", "Backend", "Kurumsal yazılım", "Bankacılık sistemleri"] },
+    ],
+  },
+  {
+    id: "ne-etmek",
+    title: "Java ile neler yapılabilir?",
+    blocks: [
+      { paragraphs: ["Java ile şunları yapabilirsiniz:"], list: ["Mobil uygulamalar", "API servisleri", "Veritabanı uygulamaları", "Kurumsal sistemler"] },
+    ],
+  },
+  {
+    id: "oyrenmek",
+    title: "Java öğrenmek zor mu?",
+    blocks: [{ paragraphs: ["Java, düzenli pratikle öğrenilebilen yapılandırılmış bir dildir."] }],
+  },
+  {
+    id: "ustunluk",
+    title: "Java'nın avantajları ve dezavantajları",
+    blocks: [{ heading: "Avantajlar", list: ["Taşınabilirlik", "Güvenilirlik", "Geniş topluluk"] }, { heading: "Dezavantajlar", list: ["Daha uzun öğrenme süreci", "Daha ayrıntılı sentaks"] }],
+  },
+  { id: "sintaksis", title: "Java sözdizimi ve temel kavramlar", blocks: [{ code: 'int yas = 25;\nString ad = "Ali";' }] },
+  { id: "numuneler", title: "Java örnekleri", blocks: [{ code: 'System.out.println("Merhaba Java!");' }] },
+  { id: "suallar", title: "Java hakkında sık sorulan sorular", blocks: [{ heading: "Java nedir?", paragraphs: ["Java, kurumsal ve mobil uygulamalarda sıkça kullanılan bir dildir."] }] },
+];
+
+export const JAVA_RU: readonly ProgrammingSection[] = [
+  {
+    id: "nedir",
+    title: "Что такое Java?",
+    blocks: [
+      {
+        paragraphs: [
+          "Java — популярный объектно-ориентированный язык программирования, который используется в веб-разработке, Android и корпоративных системах.",
+        ],
+      },
+    ],
+  },
+  { id: "istifade", title: "Для чего используется Java?", blocks: [{ paragraphs: ["Java используется для backend, Android, enterprise-приложений и крупных проектов."] }] },
+  { id: "ne-etmek", title: "Что можно делать с Java?", blocks: [{ paragraphs: ["Можно создавать серверы, API, мобильные и корпоративные приложения."] }] },
+  { id: "oyrenmek", title: "Сложно ли изучать Java?", blocks: [{ paragraphs: ["Java учится постепенно, а регулярная практика помогает быстро освоить основы."] }] },
+  { id: "ustunluk", title: "Преимущества и недостатки Java", blocks: [{ heading: "Плюсы", list: ["Портабельность", "Надежность", "Большое сообщество"] }, { heading: "Минусы", list: ["Более длинный синтаксис", "Длинный путь обучения"] }] },
+  { id: "sintaksis", title: "Синтаксис Java и основные понятия", blocks: [{ code: 'int age = 25;\nString name = "Ali";' }] },
+  { id: "numuneler", title: "Примеры кода Java", blocks: [{ code: 'System.out.println("Привет, Java!");' }] },
+  { id: "suallar", title: "Часто задаваемые вопросы о Java", blocks: [{ heading: "Что такое Java?", paragraphs: ["Java — язык программирования для крупных приложений и Android."] }] },
+];
+
+export const JAVA_AR: readonly ProgrammingSection[] = [
+  {
+    id: "nedir",
+    title: "ما هي Java؟",
+    blocks: [{ paragraphs: ["Java لغة برمجة شائعة تُستخدم في تطوير التطبيقات المحمولة والخوادم والنظم المؤسسية."] }],
+  },
+  { id: "istifade", title: "لماذا تُستخدم Java؟", blocks: [{ paragraphs: ["تُستخدم Java في Android والخوادم والتطبيقات واسعة النطاق."] }] },
+  { id: "ne-etmek", title: "ماذا يمكن أن تفعل باستخدام Java؟", blocks: [{ paragraphs: ["يمكنك بناء تطبيقات الهاتف والخدمات الخلفية والواجهات."] }] },
+  { id: "oyrenmek", title: "هل تعلم Java صعب؟", blocks: [{ paragraphs: ["Java تحتاج إلى تدريب منتظم، لكنها قابلة للتعلم خطوة بخطوة."] }] },
+  { id: "ustunluk", title: "مزايا وعيوب Java", blocks: [{ heading: "المزايا", list: ["قابلة للنقل", "موثوقة", "مجتمع كبير"] }, { heading: "العيوب", list: ["بنية أطول", "تعلم أبطأ"] }] },
+  { id: "sintaksis", title: "بنية Java والمفاهيم الأساسية", blocks: [{ code: 'int age = 25;\nString name = "Ali";' }] },
+  { id: "numuneler", title: "أمثلة Java", blocks: [{ code: 'System.out.println("مرحبًا، Java!");' }] },
+  { id: "suallar", title: "أسئلة شائعة حول Java", blocks: [{ heading: "ما هي Java؟", paragraphs: ["Java لغة برمجة تستخدم في Android والخوادم والأنظمة المؤسسية."] }] },
+];
+
 export const PROGRAMMING: readonly ProgrammingPage[] = [
   {
     slug: "python",
@@ -147,7 +574,7 @@ export const PROGRAMMING: readonly ProgrammingPage[] = [
           {
             paragraphs: [
               "Python proqramlaşdırmaya yeni başlayan insanların tez-tez seçdiyi dillərdən biridir. Bunun əsas səbəblərindən biri sintaksisinin oxunaqlı və nisbətən sadə olmasıdır.",
-              "Lakin Python-un sadə başlanğıca malik olması onun tamamilə asan olduğu demək deyil. Daha mürəkkəb proqramlar hazırlamaq üçün dəyişənlər, şərtlər, dövrlər, funksiyalar, obyekt yönümlü proqramlaşdırma və digər anlayışları öyrənmək lazımdır.",
+              "Lakin Python-un sadə başlanğıca malik olması onun tamamilə asan olduğu demək deyil. Daha mürəkkəb proqramlar hazırlamaq üçün dəyişənlər, şərtlər, dövrlər, funksiyalar, məlumat strukturları və obyekt yönümlü proqramlaşdırma kimi mövzuları bilmək lazımdır.",
             ],
           },
           {
@@ -199,7 +626,7 @@ export const PROGRAMMING: readonly ProgrammingPage[] = [
           {
             heading: "Python-un çatışmazlıqları",
             paragraphs: [
-              "Python bütün layihələr üçün ən uyğun seçim olmaya bilər. Bəzi yüksək performans tələb edən və resurs məhdudiyyətlərinin vacib olduğu layihələrdə başqa proqramlaşdırma dillərinə üstünlük verilə bilər.",
+              "Python bütün layihələr üçün ən uyğun seçim olmaya bilər. Bəzi yüksək performans tələb edən və resurs məhdudiyyətlərinin vacib olduğu layihələrdə başqa proqramlaşdırma dilləri daha yaxşı seçim ola bilər.",
               "Bundan əlavə, Python proqramlarının bəzi hallarda kompilyasiya edilmiş dillərlə müqayisədə daha aşağı icra sürəti ola bilər.",
             ],
           },
@@ -303,7 +730,7 @@ export const PROGRAMMING: readonly ProgrammingPage[] = [
           {
             heading: "Python öyrənmək çətindirmi?",
             paragraphs: [
-              "Python-un sintaksisi nisbətən sadə və oxunaqlıdır. Buna görə yeni başlayanlar üçün uyğun proqramlaşdırma dillərindən biri hesab olunur. Yaxşı səviyyəyə çatmaq üçün isə davamlı praktika lazımdır.",
+              "Python-un sintaksisi nisbətən sadə və oxunaqlıdır. Buna görə yeni başlayanlar üçün uyğun proqramlaşdırma dillərindən biri hesab olunur. Yaxşı səviyyəyə çatmağın üçün davamlı təcrübə lazımdır.",
             ],
           },
           {
@@ -323,7 +750,7 @@ export const PROGRAMMING: readonly ProgrammingPage[] = [
           {
             heading: "Python ilə mobil tətbiq hazırlamaq olar?",
             paragraphs: [
-              "Bəli, Python ilə mobil tətbiqlər hazırlamaq üçün müxtəlif vasitələr mövcuddur. Lakin Android və iOS üçün əsas mobil inkişafda başqa dillər və texnologiyalar da geniş istifadə edilir.",
+              "Bəli, Python ilə mobil tətbiqlər hazırlamaq üçün müxtəlif vasitələr mövcuddur. Lakin Android və iOS üçün əsas mobil inkişafda başqa dillər və texnologiyalar də istifadə olunur.",
             ],
           },
           {
@@ -346,7 +773,7 @@ export const PROGRAMMING: readonly ProgrammingPage[] = [
         blocks: [
           {
             paragraphs: [
-              "Python və JavaScript hər ikisi geniş istifadə olunan proqramlaşdırma dilləridir, lakin əsas istifadə sahələri fərqlidir. Python daha çox süni intellekt, məlumat analizi, avtomatlaşdırma və backend proqramlaşdırmada istifadə olunur. JavaScript isə əsasən veb səhifələrin interaktivliyini təmin etmək və frontend proqramlaşdırma üçün istifadə edilir. JavaScript backend üçün də Node.js vasitəsilə istifadə oluna bilər.",
+              "Python və JavaScript hər ikisi geniş istifadə olunan proqramlaşdırma dilləridir, lakin əsas istifadə sahələri fərqlidir. Python daha çox süni intellekt, məlumat analizi və avtomatlaşdırmada istifadə olunur, JavaScript isə əsasən veb və interaktiv interfeys inkişafında istifadə edilir.",
             ],
           },
         ],
@@ -357,7 +784,7 @@ export const PROGRAMMING: readonly ProgrammingPage[] = [
         blocks: [
           {
             paragraphs: [
-              "Python və Java müxtəlif məqsədlər üçün istifadə olunan məşhur proqramlaşdırma dilləridir. Python sadə və oxunaqlı sintaksisə malikdir və süni intellekt, məlumat analizi, avtomatlaşdırma və backend proqramlaşdırmada geniş istifadə olunur. Java isə böyük proqram sistemləri, backend xidmətləri, müəssisə proqramları və müxtəlif platformalarda işləyən tətbiqlərin hazırlanmasında geniş istifadə edilir.",
+              "Python və Java müxtəlif məqsədlər üçün istifadə olunan məşhur proqramlaşdırma dilləridir. Python sadə və oxunaqlı sintaksisə malikdir və süni intellekt, məlumat analizi və avtomatlaşdırma sahələrində çox populyardır. Java isə daha formal və strukturlaşdırılmış sintaksisə malikdir və çox vaxt backend, Android və böyük korporativ layihələrdə istifadə olunur.",
             ],
           },
         ],
@@ -407,7 +834,7 @@ export const PROGRAMMING: readonly ProgrammingPage[] = [
         keywords: "what is JavaScript, JavaScript uses, JavaScript programming",
       },
       {
-        title: "JavaScript nedir? Ne için kullanılır? — Nibras Code",
+        title: "JavaScript nedir? Ne i��in kullanılır? — Nibras Code",
         description: "JavaScript ne işe yarar: sayfa, tarayıcı ve uygulamanın diğer yüzü.",
         keywords: "JavaScript nedir, JavaScript ne için kullanılır, JavaScript programlama",
       },
@@ -426,6 +853,7 @@ export const PROGRAMMING: readonly ProgrammingPage[] = [
   {
     slug: "java",
     title: "Java nədir? Android və proqramlaşdırmada istifadəsi",
+    sections: JAVA_AZ,
     seo: seo(
       {
         title: "Java nədir? Android və proqramlaşdırmada istifadəsi — Nibras Code",
@@ -578,8 +1006,11 @@ export const PROGRAMMING: readonly ProgrammingPage[] = [
       },
     ),
   },
-];
+] as const;
 
 export function findProgramming(slug: string) {
   return PROGRAMMING.find((page) => page.slug === slug) ?? null;
 }
+
+export { javascriptSections };
+
