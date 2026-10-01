@@ -1,9 +1,31 @@
-const { GoogleGenerativeAI } = require('@google/generative-ai');
+import { GoogleGenAI } from '@google/genai';
+
 export default async function handler(req, res) {
-  if (req.method !== 'POST') return res.status(405).json({ message: 'Xeta' });
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Yalnız POST sorğuları dəstəklənir' });
+  }
+
   try {
-    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    const text = (await (await genAI.getGenerativeModel({ model: "gemini-1.5-flash" }).generateContent(req.body.message)).response).text();
-    res.status(200).json({ reply: text });
-  } catch (e) { res.status(500).json({ message: 'Sistem xətası.' }); }
+    const { message } = req.body;
+    if (!message) {
+      return res.status(400).json({ error: 'Mesaj boş ola bilməz' });
+    }
+
+    const apiKey = process.env.GEMINI_API_KEY;
+    if (!apiKey) {
+      return res.status(500).json({ reply: 'Xəta: GEMINI_API_KEY təyin olunmayıb.' });
+    }
+
+    const ai = new GoogleGenAI({ apiKey });
+    const response = await ai.models.generateContent({
+      model: 'gemini-2.5-flash',
+      contents: message,
+    });
+
+    const reply = response.text || 'Cavab alınmadı.';
+    return res.status(200).json({ reply });
+  } catch (error) {
+    console.error('API Xətası:', error);
+    return res.status(500).json({ reply: 'Süni intellekt xidmətinə qoşularkən xəta baş verdi: ' + error.message });
+  }
 }
