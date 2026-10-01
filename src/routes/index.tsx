@@ -5,7 +5,6 @@ import { AppSuggest } from "@/components/app-suggest";
 import { TechMark } from "@/components/tech-marquee";
 import { LanguageSwitch } from "@/components/language-switch";
 import { NavMenu } from "@/components/nav-menu";
-import { faqPath } from "@/lib/faq";
 import { useI18n } from "@/lib/i18n-context";
 import { statusText } from "@/lib/studio";
 import { loadStudioBundle } from "@/lib/studio.functions";
@@ -185,14 +184,14 @@ function IosMark() {
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path
         fill="currentColor"
-        d="M16.2 12.6c0-2.1 1.7-3.1 1.8-3.2-1-1.4-2.5-1.6-3-1.6-1.3-.1-2.5.8-3.1.8-.7 0-1.7-.7-2.8-.7-1.4 0-2.7.8-3.4 2.1-1.5 2.6-.4 6.4 1 8.4.7 1 1.5 2.1 2.6 2.1 1 0 1.4-.7 2.7-.7s1.6.7 2.7.7 1.8-1 2.5-2c.8-1.1 1.1-2.2 1.1-2.3-.1 0-2.1-.8-2.1-3.6ZM14.6 6.7c.6-.7.9-1.6.8-2.6-.9.1-2 .6-2.6 1.4-.6.7-1.1 1.6-.9 2.6 1 .1 1.9-.5 2.7-1.4Z"
+        d="M16.2 12.6c0-2.1 1.7-3.1 1.8-3.2-1-1.4-2.5-1.6-3-1.6-1.3-.1-2.5.8-3.1.8-.7 0-1.7-.7-2.8-.7-1.4 0-2.7.8-3.4 2.1-1.5 2.6-.4 6.4 1 8.4.7 1 1.5 2.1 2.6 2.1 1 0 1.4-.7 2.7-.7s1.6.7 2.7.7 1."
       />
     </svg>
   );
 }
 
 function Home() {
-  const { t, lang } = useI18n();
+  const { t } = useI18n();
   const rows = Route.useLoaderData().apps;
   const labels = { soon: t("soon"), building: t("nx_docs_stage") };
   const cards = CARDS.flatMap((card) => {
@@ -206,6 +205,7 @@ function Home() {
 
   return (
     <main className="nx">
+      <HomeDrift />
       <header className="nx-nav">
         <Link to="/" className="nx-brand" aria-label="Nibras Code">
           <Logo />
@@ -223,7 +223,6 @@ function Home() {
       </header>
 
       <section className="nx-hero">
-        <HomeDrift />
         <div className="nx-hero-copy">
           <p className="nx-kicker">{t("nx_kicker")}</p>
           <p>{t("nx_lead")}</p>
@@ -348,9 +347,6 @@ function Home() {
           <NavMenu section="resources" />
           <NavMenu section="guides" />
           <NavMenu section="programming" />
-          <a className="footer-faq" href={faqPath(lang)}>
-            {t("faq_nav")}
-          </a>
         </nav>
         <AppSuggest />
         <p className="nx-copy">© 2026 Nibras Code. {t("nx_rights")}</p>
