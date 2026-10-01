@@ -2,6 +2,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
 import { LanguageSwitch } from "@/components/language-switch";
 import { NavMenu } from "@/components/nav-menu";
+import { faqPath } from "@/lib/faq";
 import { useI18n } from "@/lib/i18n-context";
 
 export function SiteHeader() {
@@ -47,13 +48,16 @@ export function SiteHeader() {
 }
 
 export function SiteFooter() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   return (
     <footer className="site-footer">
       <nav className="footer-panels" aria-label="Nibras Code">
         <NavMenu section="resources" />
         <NavMenu section="guides" />
         <NavMenu section="programming" />
+        <a className="footer-faq" href={faqPath(lang)}>
+          {t("faq_nav")}
+        </a>
       </nav>
       <div className="footer-end">
         <span className="footer-domain">{t("footer_domain")}</span>

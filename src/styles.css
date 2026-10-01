@@ -1462,7 +1462,8 @@ html[dir="rtl"] .rtl-flip {
   gap: 10px;
   flex: 1 1 auto;
   min-width: 0;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: auto;
 }
 
 .back-link {
@@ -2129,9 +2130,15 @@ html[dir="rtl"] .rtl-flip {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 18px;
+  gap: 8px 18px;
   color: var(--color-muted);
   font-size: 14px;
+}
+
+.footer-faq {
+  color: inherit;
+  font-weight: 600;
+  text-decoration: none;
 }
 
 .footer-end {
@@ -2849,7 +2856,7 @@ body {
 
   .site-header-inner,
   .header-actions {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
   }
 
   .site-header-inner {
@@ -3597,9 +3604,10 @@ body.is-home .noise {
 }
 
 .nx-drift {
-  position: fixed;
+  position: absolute;
   inset: 0;
   z-index: 0;
+  overflow: hidden;
   pointer-events: none;
 }
 
@@ -4092,11 +4100,18 @@ body.is-home .noise {
 }
 
 .nx-hero {
+  position: relative;
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
   gap: 28px;
   align-items: center;
   padding: 28px 0 64px;
+}
+
+.nx-hero-copy,
+.nx-stage {
+  position: relative;
+  z-index: 1;
 }
 
 .nx-kicker {
@@ -4435,8 +4450,10 @@ body.is-home .noise {
 }
 
 .nx-foot {
-  flex-wrap: wrap;
-  align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
   padding: 22px 0 36px;
   border-top: 1px solid rgb(255 255 255 / 0.08);
   color: rgb(214 224 245 / 0.72);
@@ -4489,18 +4506,15 @@ body.is-home .noise {
   }
 
   .nx-nav {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 8px 14px;
   }
 
-  .nx-brand {
-    flex: 0 0 auto;
-  }
-
   .nx-links {
-    flex: 1 1 100%;
+    flex: 1 1 auto;
     min-width: 0;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    overflow-x: auto;
     gap: 8px 12px;
     font-size: 13px;
   }

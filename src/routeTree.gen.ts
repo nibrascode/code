@@ -12,12 +12,15 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as FaqRouteImport } from './routes/faq'
 import { Route as NxStudioRouteImport } from './routes/nx-studio'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as UnutmaRouteImport } from './routes/unutma'
 import { Route as WhyRouteImport } from './routes/why'
 import { Route as AppsIndexRouteImport } from './routes/apps/index'
 import { Route as AppsSlugRouteImport } from './routes/apps/$slug'
+import { Route as ArFaqRouteImport } from './routes/ar.faq'
+import { Route as EnFaqRouteImport } from './routes/en.faq'
 import { Route as GuidesIndexRouteImport } from './routes/guides/index'
 import { Route as GuidesTopicRouteImport } from './routes/guides/$topic'
 import { Route as PrivacySlugRouteImport } from './routes/privacy/$slug'
@@ -27,6 +30,8 @@ import { Route as ProgrammingTopicRouteImport } from './routes/programming/$topi
 import { Route as ResourcesIndexRouteImport } from './routes/resources/index'
 import { Route as ResourcesTopicRouteRouteImport } from './routes/resources/$topic/route'
 import { Route as ResurslarSlugRouteImport } from './routes/resurslar/$slug'
+import { Route as RuFaqRouteImport } from './routes/ru.faq'
+import { Route as TrFaqRouteImport } from './routes/tr.faq'
 import { Route as ArProgrammingSlugRouteImport } from './routes/ar.programming.$slug'
 import { Route as EnProgrammingSlugRouteImport } from './routes/en.programming.$slug'
 import { Route as ResourcesTopicIndexRouteImport } from './routes/resources/$topic/index'
@@ -48,6 +53,11 @@ const AboutRoute = AboutRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NxStudioRoute = NxStudioRouteImport.update({
@@ -78,6 +88,16 @@ const AppsIndexRoute = AppsIndexRouteImport.update({
 const AppsSlugRoute = AppsSlugRouteImport.update({
   id: '/apps/$slug',
   path: '/apps/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArFaqRoute = ArFaqRouteImport.update({
+  id: '/ar/faq',
+  path: '/ar/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnFaqRoute = EnFaqRouteImport.update({
+  id: '/en/faq',
+  path: '/en/faq',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GuidesIndexRoute = GuidesIndexRouteImport.update({
@@ -125,6 +145,16 @@ const ResurslarSlugRoute = ResurslarSlugRouteImport.update({
   path: '/resurslar/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RuFaqRoute = RuFaqRouteImport.update({
+  id: '/ru/faq',
+  path: '/ru/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrFaqRoute = TrFaqRouteImport.update({
+  id: '/tr/faq',
+  path: '/tr/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ArProgrammingSlugRoute = ArProgrammingSlugRouteImport.update({
   id: '/ar/programming/$slug',
   path: '/ar/programming/$slug',
@@ -165,17 +195,22 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/faq': typeof FaqRoute
   '/nx-studio': typeof NxStudioRoute
   '/privacy': typeof PrivacyRouteWithChildren
   '/unutma': typeof UnutmaRoute
   '/why': typeof WhyRoute
   '/resources/$topic': typeof ResourcesTopicRouteRouteWithChildren
   '/apps/$slug': typeof AppsSlugRoute
+  '/ar/faq': typeof ArFaqRoute
+  '/en/faq': typeof EnFaqRoute
   '/guides/$topic': typeof GuidesTopicRoute
   '/privacy/$slug': typeof PrivacySlugRoute
   '/privacy/nibras-pdf': typeof PrivacyNibrasPdfRoute
   '/programming/$topic': typeof ProgrammingTopicRoute
   '/resurslar/$slug': typeof ResurslarSlugRoute
+  '/ru/faq': typeof RuFaqRoute
+  '/tr/faq': typeof TrFaqRoute
   '/apps/': typeof AppsIndexRoute
   '/guides/': typeof GuidesIndexRoute
   '/programming/': typeof ProgrammingIndexRoute
@@ -192,16 +227,21 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/faq': typeof FaqRoute
   '/nx-studio': typeof NxStudioRoute
   '/privacy': typeof PrivacyRouteWithChildren
   '/unutma': typeof UnutmaRoute
   '/why': typeof WhyRoute
   '/apps/$slug': typeof AppsSlugRoute
+  '/ar/faq': typeof ArFaqRoute
+  '/en/faq': typeof EnFaqRoute
   '/guides/$topic': typeof GuidesTopicRoute
   '/privacy/$slug': typeof PrivacySlugRoute
   '/privacy/nibras-pdf': typeof PrivacyNibrasPdfRoute
   '/programming/$topic': typeof ProgrammingTopicRoute
   '/resurslar/$slug': typeof ResurslarSlugRoute
+  '/ru/faq': typeof RuFaqRoute
+  '/tr/faq': typeof TrFaqRoute
   '/apps': typeof AppsIndexRoute
   '/guides': typeof GuidesIndexRoute
   '/programming': typeof ProgrammingIndexRoute
@@ -219,17 +259,22 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/faq': typeof FaqRoute
   '/nx-studio': typeof NxStudioRoute
   '/privacy': typeof PrivacyRouteWithChildren
   '/unutma': typeof UnutmaRoute
   '/why': typeof WhyRoute
   '/resources/$topic': typeof ResourcesTopicRouteRouteWithChildren
   '/apps/$slug': typeof AppsSlugRoute
+  '/ar/faq': typeof ArFaqRoute
+  '/en/faq': typeof EnFaqRoute
   '/guides/$topic': typeof GuidesTopicRoute
   '/privacy/$slug': typeof PrivacySlugRoute
   '/privacy/nibras-pdf': typeof PrivacyNibrasPdfRoute
   '/programming/$topic': typeof ProgrammingTopicRoute
   '/resurslar/$slug': typeof ResurslarSlugRoute
+  '/ru/faq': typeof RuFaqRoute
+  '/tr/faq': typeof TrFaqRoute
   '/apps/': typeof AppsIndexRoute
   '/guides/': typeof GuidesIndexRoute
   '/programming/': typeof ProgrammingIndexRoute
@@ -248,17 +293,22 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
+    | '/faq'
     | '/nx-studio'
     | '/privacy'
     | '/unutma'
     | '/why'
     | '/resources/$topic'
     | '/apps/$slug'
+    | '/ar/faq'
+    | '/en/faq'
     | '/guides/$topic'
     | '/privacy/$slug'
     | '/privacy/nibras-pdf'
     | '/programming/$topic'
     | '/resurslar/$slug'
+    | '/ru/faq'
+    | '/tr/faq'
     | '/apps/'
     | '/guides/'
     | '/programming/'
@@ -275,16 +325,21 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
+    | '/faq'
     | '/nx-studio'
     | '/privacy'
     | '/unutma'
     | '/why'
     | '/apps/$slug'
+    | '/ar/faq'
+    | '/en/faq'
     | '/guides/$topic'
     | '/privacy/$slug'
     | '/privacy/nibras-pdf'
     | '/programming/$topic'
     | '/resurslar/$slug'
+    | '/ru/faq'
+    | '/tr/faq'
     | '/apps'
     | '/guides'
     | '/programming'
@@ -301,17 +356,22 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
+    | '/faq'
     | '/nx-studio'
     | '/privacy'
     | '/unutma'
     | '/why'
     | '/resources/$topic'
     | '/apps/$slug'
+    | '/ar/faq'
+    | '/en/faq'
     | '/guides/$topic'
     | '/privacy/$slug'
     | '/privacy/nibras-pdf'
     | '/programming/$topic'
     | '/resurslar/$slug'
+    | '/ru/faq'
+    | '/tr/faq'
     | '/apps/'
     | '/guides/'
     | '/programming/'
@@ -329,15 +389,20 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
+  FaqRoute: typeof FaqRoute
   NxStudioRoute: typeof NxStudioRoute
   PrivacyRoute: typeof PrivacyRouteWithChildren
   UnutmaRoute: typeof UnutmaRoute
   WhyRoute: typeof WhyRoute
   ResourcesTopicRouteRoute: typeof ResourcesTopicRouteRouteWithChildren
   AppsSlugRoute: typeof AppsSlugRoute
+  ArFaqRoute: typeof ArFaqRoute
+  EnFaqRoute: typeof EnFaqRoute
   GuidesTopicRoute: typeof GuidesTopicRoute
   ProgrammingTopicRoute: typeof ProgrammingTopicRoute
   ResurslarSlugRoute: typeof ResurslarSlugRoute
+  RuFaqRoute: typeof RuFaqRoute
+  TrFaqRoute: typeof TrFaqRoute
   AppsIndexRoute: typeof AppsIndexRoute
   GuidesIndexRoute: typeof GuidesIndexRoute
   ProgrammingIndexRoute: typeof ProgrammingIndexRoute
@@ -370,6 +435,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/nx-studio': {
@@ -412,6 +484,20 @@ declare module '@tanstack/react-router' {
       path: '/apps/$slug'
       fullPath: '/apps/$slug'
       preLoaderRoute: typeof AppsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ar/faq': {
+      id: '/ar/faq'
+      path: '/ar/faq'
+      fullPath: '/ar/faq'
+      preLoaderRoute: typeof ArFaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/faq': {
+      id: '/en/faq'
+      path: '/en/faq'
+      fullPath: '/en/faq'
+      preLoaderRoute: typeof EnFaqRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/guides/': {
@@ -475,6 +561,20 @@ declare module '@tanstack/react-router' {
       path: '/resurslar/$slug'
       fullPath: '/resurslar/$slug'
       preLoaderRoute: typeof ResurslarSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ru/faq': {
+      id: '/ru/faq'
+      path: '/ru/faq'
+      fullPath: '/ru/faq'
+      preLoaderRoute: typeof RuFaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tr/faq': {
+      id: '/tr/faq'
+      path: '/tr/faq'
+      fullPath: '/tr/faq'
+      preLoaderRoute: typeof TrFaqRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/ar/programming/$slug': {
@@ -559,15 +659,20 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
+  FaqRoute: FaqRoute,
   NxStudioRoute: NxStudioRoute,
   PrivacyRoute: PrivacyRouteWithChildren,
   UnutmaRoute: UnutmaRoute,
   WhyRoute: WhyRoute,
   ResourcesTopicRouteRoute: ResourcesTopicRouteRouteWithChildren,
   AppsSlugRoute: AppsSlugRoute,
+  ArFaqRoute: ArFaqRoute,
+  EnFaqRoute: EnFaqRoute,
   GuidesTopicRoute: GuidesTopicRoute,
   ProgrammingTopicRoute: ProgrammingTopicRoute,
   ResurslarSlugRoute: ResurslarSlugRoute,
+  RuFaqRoute: RuFaqRoute,
+  TrFaqRoute: TrFaqRoute,
   AppsIndexRoute: AppsIndexRoute,
   GuidesIndexRoute: GuidesIndexRoute,
   ProgrammingIndexRoute: ProgrammingIndexRoute,

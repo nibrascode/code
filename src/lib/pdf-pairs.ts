@@ -1,4 +1,5 @@
 import type { Lang } from "@/lib/i18n";
+import { faqFromPath, faqPath } from "@/lib/faq";
 import { findProgrammingLocale, programmingFromPath, programmingLocalePath } from "@/lib/programming-locales";
 
 export const PDF_LOCALE_PAIRS = [
@@ -35,6 +36,7 @@ export function pdfPairFromPath(pathname: string) {
 }
 
 export function hrefForLang(pathname: string, lang: Lang) {
+  if (faqFromPath(pathname)) return faqPath(lang);
   const programming = programmingFromPath(pathname);
   if (programming) {
     if (lang === "az") return programmingLocalePath("az", programming.slug);
