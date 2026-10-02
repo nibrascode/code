@@ -33,8 +33,7 @@ export default async function handler(req, res) {
       const result = await ask(name, history, message);
       if (result.skipped) continue;
       if (result.ok) {
-        const label = name.startsWith("groq") ? name + "/" + groqCached : name;
-        res.status(200).json({ success: true, reply: result.reply, via: label, tried: notes });
+        res.status(200).json({ success: true, reply: result.reply });
         return;
       }
       notes.push(name + ": " + String(result.detail || "xəta").slice(0, 140));
@@ -43,7 +42,7 @@ export default async function handler(req, res) {
 
     res.status(200).json({
       success: false,
-      reply: notes.join(" | ") || "Heç bir AI açarı işləmədi.",
+      reply: "İndi cavab alınmadı. Bir az sonra yenidən yoxlayın.",
     });
   } catch {
     res.status(200).json({
@@ -58,7 +57,7 @@ function pickOrder(message) {
   if (/(python|javascript|typescript|\bjava\b|c#|c\+\+|sql|html|css|\bkod\b|funksiya|function|\bbug\b|algoritm|regex|proqramlaş|react|node\.?js)/i.test(q)) {
     return ["mistral-code", "groq", "github", "openrouter", "gemini", "hf", "xai"];
   }
-  if (/(niyə|nədən|neden|почему|hesabla|hesab|riyaz|riyazi|isbat|müqayisə|fərqi|analiz|\d+\s*[\+\-\*\/]\s*\d+|explain|solve)/i.test(q)) {
+  if (/(niyə|nədən|neden|почему|hesabla|hesab|riyaz|riyazi|isbat|müqayisə|fərqi|analiz|\d+\s*[\+\-\*\/]\s*\d+|explain|solve|vur|vurma|çarp|multiply)/i.test(q)) {
     return ["xai", "groq-reason", "mistral", "openrouter", "gemini", "hf"];
   }
   if (/(bu gün|bugün|today|xəbər|xeber|hava |qiymət|latest|dünən|sabah)/i.test(q)) {
