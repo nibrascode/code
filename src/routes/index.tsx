@@ -237,6 +237,10 @@ function Home() {
               <ArrowUpRight className="size-4" />
             </Link>
           </div>
+          <a className="nx-ai-bar" href="/ai">
+            <img src="/nibras-ai.png" alt="" />
+            <span>Yapay Zeka</span>
+          </a>
         </div>
         <div className="nx-stage">
           <img src="/home/hero-desk.jpg" alt="" />

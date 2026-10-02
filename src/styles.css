@@ -4151,6 +4151,91 @@ body.is-home .noise {
   margin-top: 26px;
 }
 
+@property --ai-spin {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes ai-spin {
+  to {
+    --ai-spin: 360deg;
+  }
+}
+
+.nx-ai-bar {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  max-width: 38rem;
+  min-height: 48px;
+  margin-top: 14px;
+  padding: 6px 18px 6px 10px;
+  border-radius: 16px;
+  background: #070b16;
+  color: #f4f7ff;
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.05);
+}
+
+.nx-ai-bar img {
+  width: 40px;
+  height: 36px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px rgb(80 150 255 / 0.55));
+}
+
+.nx-ai-bar span {
+  font-size: 15px;
+  font-weight: 750;
+  letter-spacing: -0.03em;
+}
+
+.nx-ai-bar::before,
+.nx-ai-bar::after {
+  content: "";
+  position: absolute;
+  border-radius: 18px;
+  pointer-events: none;
+  background: conic-gradient(
+    from var(--ai-spin),
+    transparent 0deg,
+    #3b82ff 36deg,
+    #7ee7ff 78deg,
+    #9eb6ff 118deg,
+    transparent 168deg,
+    transparent 360deg
+  );
+  animation: ai-spin 3.6s linear infinite;
+}
+
+.nx-ai-bar::before {
+  inset: -1.5px;
+  z-index: -1;
+  padding: 1.5px;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+
+.nx-ai-bar::after {
+  inset: -7px;
+  z-index: -2;
+  opacity: 0.7;
+  filter: blur(8px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nx-ai-bar::before,
+  .nx-ai-bar::after {
+    animation: none;
+  }
+}
+
 .nx-apps {
   padding-bottom: 28px;
 }
