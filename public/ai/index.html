@@ -10,6 +10,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
+    @property --nx-angle {
+      syntax: "<angle>";
+      inherits: false;
+      initial-value: 0deg;
+    }
+    @keyframes nx-edge { to { --nx-angle: 360deg; } }
+    @keyframes blink { 50% { opacity: .25; } }
     :root {
       --ink: #04060f;
       --fg: #f4f7ff;
@@ -152,29 +159,22 @@
       letter-spacing: .28em;
       color: #aeb6ce;
     }
-    .tag {
-      margin: 10px 0 0;
-      font-size: 13.5px;
-      color: #d5dced;
-    }
     .acts {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-      margin-top: 16px;
+      gap: 6px;
+      margin-top: 10px;
     }
     .act {
-      border: 1px solid rgba(120, 168, 255, .32);
+      border: 1px solid rgba(120, 168, 255, .28);
       background: linear-gradient(180deg, rgba(16, 22, 42, .9), rgba(8, 12, 26, .9));
       color: #d7def2;
-      border-radius: 16px;
-      min-height: 74px;
-      padding: 10px 4px 8px;
+      border-radius: 12px;
+      padding: 6px 2px 5px;
       cursor: pointer;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.04), 0 8px 20px rgba(0,0,0,.25);
     }
-    .act svg { width: 22px; height: 22px; display: block; margin: 0 auto 6px; }
-    .act b { display: block; font-size: 10.5px; font-weight: 600; line-height: 1.2; }
+    .act svg { width: 15px; height: 15px; display: block; margin: 0 auto 3px; }
+    .act b { display: block; font-size: 9px; font-weight: 600; line-height: 1.15; }
     .msg {
       max-width: 86%;
       padding: 10px 13px;
@@ -204,13 +204,51 @@
     }
     .dots i:nth-child(2) { animation-delay: .15s; }
     .dots i:nth-child(3) { animation-delay: .3s; }
-    @keyframes blink { 50% { opacity: .25; } }
     .dock { padding: 4px 16px 8px; }
+    .ring {
+      position: relative;
+      isolation: isolate;
+      border-radius: 24px;
+    }
+    .ring::before,
+    .ring::after {
+      content: "";
+      position: absolute;
+      border-radius: inherit;
+      pointer-events: none;
+      background: conic-gradient(
+        from var(--nx-angle),
+        transparent 0deg,
+        #7ee7ff 55deg,
+        #8d7bff 110deg,
+        #ffd27a 155deg,
+        #ff7eb3 200deg,
+        transparent 255deg,
+        transparent 360deg
+      );
+      animation: nx-edge 4.2s linear infinite;
+    }
+    .ring::before {
+      inset: -1.5px;
+      z-index: 2;
+      padding: 1.5px;
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      mask-composite: exclude;
+    }
+    .ring::after {
+      inset: -8px;
+      z-index: 0;
+      opacity: .55;
+      filter: blur(10px);
+    }
     .composer {
+      position: relative;
+      z-index: 1;
       border-radius: 22px;
-      border: 1px solid rgba(120, 168, 255, .42);
-      background: rgba(7, 10, 22, .88);
-      box-shadow: 0 0 0 1px rgba(80, 120, 255, .12), 0 0 28px rgba(50, 90, 255, .16);
+      border: 1px solid rgba(255,255,255,.06);
+      background: rgba(7, 10, 22, .94);
       padding: 12px 12px 10px;
     }
     textarea {
@@ -250,31 +288,6 @@
       box-shadow: 0 8px 18px rgba(80, 70, 255, .28);
     }
     .send:disabled, textarea:disabled { opacity: .45; cursor: not-allowed; }
-    .limit {
-      display: none;
-      width: 100%;
-      margin-top: 10px;
-      text-align: left;
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,.08);
-      background: rgba(16, 20, 36, .9);
-      color: inherit;
-      padding: 12px 12px;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
-    }
-    .limit.on { display: flex; }
-    .limit .badge {
-      width: 36px; height: 36px; border-radius: 50%;
-      background: #0c0e16;
-      display: grid; place-items: center;
-      flex: none;
-    }
-    .limit b { display: block; font-size: 13.5px; font-weight: 700; }
-    .limit small { display: block; margin-top: 2px; color: var(--muted); font-size: 12px; }
-    .limit .grow { flex: 1; min-width: 0; }
-    .chev { color: #9aa3bd; font-size: 22px; line-height: 1; }
     .foot {
       padding: 8px 16px 14px;
       text-align: center;
@@ -317,10 +330,10 @@
       .script { font-size: 18px; }
       .stage { grid-template-columns: 64px minmax(0,1fr) 78px; }
       .logo { width: 112px; }
-      .act b { font-size: 9.5px; }
+      .act b { font-size: 8.5px; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .dots i { animation: none; }
+      .dots i, .ring::before, .ring::after { animation: none; }
     }
   </style>
 </head>
@@ -375,47 +388,41 @@
         </div>
         <h1>Nibras <span>AI</span></h1>
         <p class="kicker">SƏNİN AI KÖMƏKÇİN</p>
-        <p class="tag">Sual ver. Düzəlt. Həll et. Hər zaman səninlə.</p>
-        <div class="acts">
-          <button class="act" type="button" data-focus="1">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M7 17.5 4.5 20v-4A7.5 7.5 0 1 1 12 19.5H8" stroke="#7ecbff" stroke-width="1.7" stroke-linejoin="round"/><circle cx="9" cy="11" r="1" fill="#7ecbff"/><circle cx="12" cy="11" r="1" fill="#7ecbff"/><circle cx="15" cy="11" r="1" fill="#7ecbff"/></svg>
-            <b>Sual ver</b>
-          </button>
-          <button class="act" type="button" data-q="Yaradıcı bir fikir ver.">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M9 18h6M10 21h4" stroke="#f4f7ff" stroke-width="1.7" stroke-linecap="round"/><path d="M12 3a6.5 6.5 0 0 0-3.2 12.1c.5.4.8 1 .8 1.6V17h5v-.3c0-.6.3-1.2.8-1.6A6.5 6.5 0 0 0 12 3z" stroke="#f4f7ff" stroke-width="1.7"/></svg>
-            <b>Yaradıcı ol</b>
-          </button>
-          <button class="act" type="button" data-q="Kiçik bir kod nümunəsi yaz.">
-            <svg viewBox="0 0 24 24" fill="none"><path d="m8 8-4 4 4 4M16 8l4 4-4 4" stroke="#7ee7ff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <b>Kod yaz</b>
-          </button>
-          <button class="act" type="button" data-fill="Bunu düzəlt: ">
-            <svg viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="14" rx="2" stroke="#d9a6ff" stroke-width="1.7"/><circle cx="9" cy="10" r="1.4" fill="#d9a6ff"/><path d="m8 16 3.2-3.2a1 1 0 0 1 1.4 0L16 16" stroke="#d9a6ff" stroke-width="1.7" stroke-linejoin="round"/></svg>
-            <b>Şəkil düzəlt</b>
-          </button>
-        </div>
       </div>
     </div>
 
     <div class="dock">
-      <form class="composer" id="form">
-        <textarea id="inp" rows="2" maxlength="800" placeholder="Nə ilə kömək edim?"></textarea>
-        <div class="row">
-          <button class="clip" id="clip" type="button" aria-label="Fayl">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="m15.5 7.5-6.8 6.8a2.2 2.2 0 0 0 3.1 3.1l7-7a3.6 3.6 0 0 0-5.1-5.1l-7.2 7.2a5 5 0 0 0 7.1 7.1l5.2-5.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
-          </button>
-          <button class="send" id="btn" type="submit">Göndər
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 12 20 4l-6 16-2.2-6.2L4 12z" stroke="white" stroke-width="1.7" stroke-linejoin="round"/></svg>
-          </button>
-        </div>
-      </form>
-      <button class="limit" id="warn" type="button">
-        <span class="badge" aria-hidden="true">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M3 17h18l-1.6-8.2-4.2 3.4L12 5 8.8 12.2 4.6 8.8 3 17z" fill="#f0c14d" stroke="#f6d789" stroke-width="1"/></svg>
-        </span>
-        <span class="grow"><b>Gündəlik 10 sual limiti doldu.</b><small>Sabah yenidən yoxlayın.</small></span>
-        <span class="chev" aria-hidden="true">›</span>
-      </button>
+      <div class="ring">
+        <form class="composer" id="form">
+          <textarea id="inp" rows="2" maxlength="800" placeholder="Nə ilə kömək edim?"></textarea>
+          <div class="row">
+            <button class="clip" id="clip" type="button" aria-label="Fayl">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="m15.5 7.5-6.8 6.8a2.2 2.2 0 0 0 3.1 3.1l7-7a3.6 3.6 0 0 0-5.1-5.1l-7.2 7.2a5 5 0 0 0 7.1 7.1l5.2-5.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+            </button>
+            <button class="send" id="btn" type="submit">Göndər
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 12 20 4l-6 16-2.2-6.2L4 12z" stroke="white" stroke-width="1.7" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="acts">
+        <button class="act" type="button" data-focus="1">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M7 17.5 4.5 20v-4A7.5 7.5 0 1 1 12 19.5H8" stroke="#7ecbff" stroke-width="1.7" stroke-linejoin="round"/><circle cx="9" cy="11" r="1" fill="#7ecbff"/><circle cx="12" cy="11" r="1" fill="#7ecbff"/><circle cx="15" cy="11" r="1" fill="#7ecbff"/></svg>
+          <b>Sual ver</b>
+        </button>
+        <button class="act" type="button" data-q="Yaradıcı bir fikir ver.">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M9 18h6M10 21h4" stroke="#f4f7ff" stroke-width="1.7" stroke-linecap="round"/><path d="M12 3a6.5 6.5 0 0 0-3.2 12.1c.5.4.8 1 .8 1.6V17h5v-.3c0-.6.3-1.2.8-1.6A6.5 6.5 0 0 0 12 3z" stroke="#f4f7ff" stroke-width="1.7"/></svg>
+          <b>Yaradıcı ol</b>
+        </button>
+        <button class="act" type="button" data-q="Kiçik bir kod nümunəsi yaz.">
+          <svg viewBox="0 0 24 24" fill="none"><path d="m8 8-4 4 4 4M16 8l4 4-4 4" stroke="#7ee7ff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <b>Kod yaz</b>
+        </button>
+        <button class="act" type="button" data-fill="Bunu düzəlt: ">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="14" rx="2" stroke="#d9a6ff" stroke-width="1.7"/><circle cx="9" cy="10" r="1.4" fill="#d9a6ff"/><path d="m8 16 3.2-3.2a1 1 0 0 1 1.4 0L16 16" stroke="#d9a6ff" stroke-width="1.7" stroke-linejoin="round"/></svg>
+          <b>Şəkil düzəlt</b>
+        </button>
+      </div>
     </div>
 
     <footer class="foot">
@@ -433,7 +440,6 @@
     const form = document.getElementById("form");
     const inp = document.getElementById("inp");
     const btn = document.getElementById("btn");
-    const warn = document.getElementById("warn");
     const left = document.getElementById("left");
     const toast = document.getElementById("toast");
     const today = new Date().toISOString().slice(0, 10);
@@ -461,7 +467,6 @@
       const full = n === 0;
       inp.disabled = full;
       btn.disabled = full;
-      warn.classList.toggle("on", full);
       inp.placeholder = full ? "Limit doldu" : "Nə ilə kömək edim?";
     }
     function bubble(text, kind) {
@@ -541,9 +546,6 @@
     });
     document.getElementById("clip").addEventListener("click", function () {
       note("Fayl əlavə etmək tezliklə.");
-    });
-    warn.addEventListener("click", function () {
-      note("Premium bağlıdır. Tezliklə.");
     });
     paint();
   </script>
