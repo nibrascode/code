@@ -1,5 +1,7 @@
 const SYSTEM = "Sən Nibras AI-san, Nibras Code saytının köməkçisisən. Cavabların qısa, aydın və nəzakətli olsun. İstifadəçi hansı dildə yazırsa, o dildə cavab ver. Tibbi, hüquqi və maliyyə məsləhəti vermə.";
 
+export const config = { maxDuration: 25 };
+
 export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
@@ -22,38 +24,24 @@ export default async function handler(req, res) {
       return;
     }
     const history = normalizeHistory(body.messages, message);
+    const order = pickOrder(message);
+    let last = "";
 
-    const grokKeys = listGrokKeys();
-    let grokDetail = "";
-    for (const grokKey of grokKeys) {
-      const grok = await askGrok(history, grokKey);
-      if (grok.ok) {
-        res.status(200).json({ success: true, reply: grok.reply });
+    for (const name of order.slice(0, 3)) {
+      const result = await ask(name, history, message);
+      if (result.skipped) continue;
+      if (result.ok) {
+        res.status(200).json({ success: true, reply: result.reply });
         return;
       }
-      grokDetail = grok.detail || grokDetail;
-    }
-
-    const geminiKey = process.env.GEMINI_API_KEY;
-    if (geminiKey) {
-      const gemini = await askGemini(message, geminiKey);
-      if (gemini.ok) {
-        res.status(200).json({ success: true, reply: gemini.reply });
-        return;
-      }
-    }
-
-    if (grokKeys.length && /incorrect|invalid|unauthorized|api key|permission/i.test(grokDetail)) {
-      res.status(200).json({
-        success: false,
-        reply: "Grok açarı qəbul olunmadı. Vercel-də adını XAI_API_KEY qoyun, dəyəri xai- ilə başlasın və Production üçün yenidən deploy edin.",
-      });
-      return;
+      last = result.detail || last;
     }
 
     res.status(200).json({
       success: false,
-      reply: "Grok indi cavab verə bilmədi. Bir az sonra yenidən yoxlayın.",
+      reply: last
+        ? "İndi cavab alınmadı. Bir az sonra yenidən yoxlayın."
+        : "Heç bir AI açarı işləmədi. Vercel-də Production açarlarından sonra Redeploy edin.",
     });
   } catch {
     res.status(200).json({
@@ -63,82 +51,141 @@ export default async function handler(req, res) {
   }
 }
 
-function listGrokKeys() {
-  const preferred = ["XAI_API_KEY", "GROK_API_KEY", "GROK_API", "XAI_KEY", "GROK_KEY", "XAI_API"];
-  const names = Object.keys(process.env);
-  const values = [];
-  const push = (value) => {
-    const clean = String(value || "").trim().replace(/^Bearer\s+/i, "").replace(/^["']|["']$/g, "").trim();
-    if (clean.length >= 16 && !values.includes(clean)) values.push(clean);
-  };
-  for (const name of preferred) {
-    const hit = names.find((key) => key.toUpperCase() === name);
-    if (hit) push(process.env[hit]);
+function pickOrder(message) {
+  const q = message.toLowerCase();
+  if (/(python|javascript|typescript|\bjava\b|c#|c\+\+|sql|html|css|\bkod\b|funksiya|function|\bbug\b|algoritm|regex|proqramlaş|react|node\.?js)/i.test(q)) {
+    return ["mistral-code", "groq", "github", "openrouter", "gemini", "hf", "xai"];
   }
-  for (const name of names) {
-    if (/grok|xai/i.test(name)) push(process.env[name]);
+  if (/(niyə|nədən|neden|почему|hesabla|hesab|riyaz|riyazi|isbat|müqayisə|fərqi|analiz|\d+\s*[\+\-\*\/]\s*\d+|explain|solve)/i.test(q)) {
+    return ["xai", "groq-reason", "mistral", "openrouter", "gemini", "hf"];
   }
-  values.sort((a, b) => Number(b.startsWith("xai-")) - Number(a.startsWith("xai-")));
-  return values;
+  if (/(bu gün|bugün|today|xəbər|xeber|hava |qiymət|latest|dünən|sabah)/i.test(q)) {
+    return ["xai", "openrouter", "groq", "gemini", "hf"];
+  }
+  if (/(şeir|hekayə|şer|yazı yaz|poem|story|yaradıcı)/i.test(q)) {
+    return ["mistral", "xai", "groq", "gemini", "openrouter"];
+  }
+  return ["groq", "xai", "mistral", "gemini", "openrouter", "hf", "github"];
 }
 
-function normalizeHistory(raw, message) {
-  const list = Array.isArray(raw) ? raw : [];
-  const cleaned = list
-    .map((item) => ({
-      role: item && item.role === "assistant" ? "assistant" : "user",
-      text: String(item && item.text || "").trim().slice(0, 800),
-    }))
-    .filter((item) => item.text)
-    .slice(-8);
-  if (!cleaned.length || cleaned[cleaned.length - 1].text !== message) {
-    cleaned.push({ role: "user", text: message });
-  }
-  return cleaned;
+async function ask(name, history, message) {
+  if (name === "groq") return askGroq(history, "llama-3.3-70b-versatile");
+  if (name === "groq-reason") return askGroq(history, "deepseek-r1-distill-llama-70b", "llama-3.3-70b-versatile");
+  if (name === "xai") return askXai(history);
+  if (name === "mistral") return askMistral(history, ["mistral-small-latest", "mistral-large-latest"]);
+  if (name === "mistral-code") return askMistral(history, ["codestral-latest", "mistral-small-latest"]);
+  if (name === "openrouter") return askOpenRouter(history);
+  if (name === "hf") return askHf(history);
+  if (name === "gemini") return askGemini(message);
+  if (name === "github") return askGithub(history);
+  return { skipped: true };
 }
 
-async function askGrok(history, apiKey) {
-  const models = ["grok-4.5", "grok-3-mini", "grok-3"];
-  let detail = "Model cavab qaytarmadı.";
-  for (const model of models) {
-    const upstream = await fetch("https://api.x.ai/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + apiKey,
-      },
-      body: JSON.stringify({
-        model,
-        temperature: 0.5,
-        max_tokens: 700,
-        messages: [
-          { role: "system", content: SYSTEM },
-          ...history.map((item) => ({ role: item.role, content: item.text })),
-        ],
-      }),
+function env(name) {
+  const hit = Object.keys(process.env).find((key) => key.toUpperCase() === name.toUpperCase());
+  return hit ? String(process.env[hit] || "").trim().replace(/^Bearer\s+/i, "").replace(/^["']|["']$/g, "") : "";
+}
+
+async function askGroq(history, model, fallback) {
+  const apiKey = env("GROQ_API_KEY");
+  if (!apiKey) return { skipped: true };
+  const first = await complete({
+    url: "https://api.groq.com/openai/v1/chat/completions",
+    apiKey,
+    model,
+    history,
+  });
+  if (first.ok || !fallback) return first;
+  return complete({
+    url: "https://api.groq.com/openai/v1/chat/completions",
+    apiKey,
+    model: fallback,
+    history,
+  });
+}
+
+async function askXai(history) {
+  const apiKey = env("XAI_API_KEY");
+  if (!apiKey) return { skipped: true };
+  for (const model of ["grok-4.5", "grok-3-mini", "grok-3"]) {
+    const result = await complete({
+      url: "https://api.x.ai/v1/chat/completions",
+      apiKey,
+      model,
+      history,
     });
-    const data = await upstream.json().catch(() => ({}));
-    const reply = String(data.choices?.[0]?.message?.content || "").trim();
-    if (upstream.ok && reply) return { ok: true, reply };
-    detail = String(data.error?.message || data.error || detail);
-    const retryable = /model|not found|does not exist|high demand|unavailable|overloaded|not supported/i.test(detail) || upstream.status === 404;
-    if (!retryable) break;
+    if (result.ok) return result;
+    if (!/model|not found|does not exist|unsupported/i.test(result.detail || "")) return result;
   }
-  return { ok: false, detail };
+  return { ok: false, detail: "xAI cavab vermədi." };
 }
 
-async function askGemini(message, apiKey) {
+async function askMistral(history, models) {
+  const apiKey = env("MISTRAL_API_KEY");
+  if (!apiKey) return { skipped: true };
+  let last = { ok: false, detail: "Mistral cavab vermədi." };
+  for (const model of models) {
+    last = await complete({
+      url: "https://api.mistral.ai/v1/chat/completions",
+      apiKey,
+      model,
+      history,
+    });
+    if (last.ok) return last;
+    if (!/model|not found|unknown|invalid/i.test(last.detail || "")) return last;
+  }
+  return last;
+}
+
+async function askOpenRouter(history) {
+  const apiKey = env("OPENROUTER_API_KEY");
+  if (!apiKey) return { skipped: true };
+  return complete({
+    url: "https://openrouter.ai/api/v1/chat/completions",
+    apiKey,
+    model: "meta-llama/llama-3.3-70b-instruct",
+    history,
+    extraHeaders: {
+      "HTTP-Referer": "https://www.nibrascode.com",
+      "X-Title": "Nibras AI",
+    },
+  });
+}
+
+async function askHf(history) {
+  const apiKey = env("HF_TOKEN");
+  if (!apiKey) return { skipped: true };
+  return complete({
+    url: "https://router.huggingface.co/v1/chat/completions",
+    apiKey,
+    model: "meta-llama/Llama-3.3-70B-Instruct",
+    history,
+  });
+}
+
+async function askGithub(history) {
+  const apiKey = env("GITHUB_MODELS_TOKEN") || env("GH_MODELS_TOKEN") || env("GITHUB_TOKEN");
+  if (!apiKey) return { skipped: true };
+  return complete({
+    url: "https://models.github.ai/inference/chat/completions",
+    apiKey,
+    model: "openai/gpt-4.1-mini",
+    history,
+  });
+}
+
+async function askGemini(message) {
+  const apiKey = env("GEMINI_API_KEY");
+  if (!apiKey) return { skipped: true };
   const models = ["gemini-3.8-flash", "gemini-2.0-flash", "gemini-flash-latest"];
-  let detail = "Model cavab qaytarmadı.";
+  let detail = "Gemini cavab vermədi.";
   for (const model of models) {
     const upstream = await fetch(
       "https://generativelanguage.googleapis.com/v1beta/models/" + model + ":generateContent",
       {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-goog-api-key": apiKey,
-        },
+        headers: { "Content-Type": "application/json", "x-goog-api-key": apiKey },
+        signal: AbortSignal.timeout(8000),
         body: JSON.stringify({
           systemInstruction: { parts: [{ text: SYSTEM }] },
           contents: [{ role: "user", parts: [{ text: message }] }],
@@ -150,10 +197,54 @@ async function askGemini(message, apiKey) {
     const reply = (data.candidates?.[0]?.content?.parts || []).map((part) => part.text || "").join("").trim();
     if (upstream.ok && reply) return { ok: true, reply };
     detail = String(data.error?.message || detail);
-    const retryable = /high demand|unavailable|not found|no longer available|overloaded|quota/i.test(detail);
-    if (!retryable) break;
+    if (!/high demand|unavailable|not found|no longer available|overloaded|quota/i.test(detail)) break;
   }
   return { ok: false, detail };
+}
+
+async function complete({ url, apiKey, model, history, extraHeaders }) {
+  const upstream = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + apiKey,
+      ...(extraHeaders || {}),
+    },
+    signal: AbortSignal.timeout(8000),
+    body: JSON.stringify({
+      model,
+      temperature: 0.4,
+      max_tokens: 700,
+      messages: [
+        { role: "system", content: SYSTEM },
+        ...history.map((item) => ({ role: item.role, content: item.text })),
+      ],
+    }),
+  });
+  const data = await upstream.json().catch(() => ({}));
+  const reply = stripThink(String(data.choices?.[0]?.message?.content || ""));
+  if (upstream.ok && reply) return { ok: true, reply };
+  const detail = data.error?.message || data.error || data.message || upstream.status;
+  return { ok: false, detail: typeof detail === "string" ? detail : JSON.stringify(detail) };
+}
+
+function stripThink(text) {
+  return text.replace(/<think>[\s\S]*?<\/think>/gi, "").trim();
+}
+
+function normalizeHistory(raw, message) {
+  const list = Array.isArray(raw) ? raw : [];
+  const cleaned = list
+    .map((item) => ({
+      role: item && item.role === "assistant" ? "assistant" : "user",
+      text: String((item && item.text) || "").trim().slice(0, 800),
+    }))
+    .filter((item) => item.text)
+    .slice(-8);
+  if (!cleaned.length || cleaned[cleaned.length - 1].text !== message) {
+    cleaned.push({ role: "user", text: message });
+  }
+  return cleaned;
 }
 
 async function readJson(req) {
