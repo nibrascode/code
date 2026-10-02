@@ -1,0 +1,49 @@
+{
+  "savedAt": "2026-10-02T18:33:21.063Z",
+  "apps": [
+    {
+      "slug": "nibras-arabic",
+      "name": "Nibras Arabic",
+      "status": "ready",
+      "summary": "",
+      "play_url": "https://play.google.com/store/apps/details?id=com.nibrasarabic.app",
+      "huawei_url": "",
+      "appstore_url": "",
+      "galaxy_url": "",
+      "xiaomi_url": "",
+      "icon_url": "/apps/nibras-arabic.jpg",
+      "sort": 200,
+      "visible": true
+    }
+  ],
+  "privacy": [
+    {
+      "slug": "nibras-pdf",
+      "lang": "az",
+      "title": "Nibras PDF məxfilik siyasəti",
+      "updated_label": "Son yenilənmə: 29 sentyabr 2026",
+      "body": "Nibras PDF PDF sənədləri və şəkillərlə işləmək üçün mobil tətbiqdir. Bu siyasət hansı məlumatların istifadə olunduğunu, nəyin cihazdan kənara çıxa bildiyini və hesabı necə silə biləcəyinizi izah edir.\n\nOperator Nibras Code-dur. Suallar üçün nibrascode@gmail.com.\n\nSeçdiyiniz PDF və şəkillər cihazda emal olunur. Birləşdirmə, bölmə, sıxışdırma, döndürmə, su nişanı, imza, səhifə seçimi, Writer, skan, OCR və PDF-dən şəkil əməliyyatları üçün sənəd məzmunu, şəkil və fayl adı Nibras PDF serverlərinə göndərilmir.\n\nKamera yalnız skanı siz başladanda açılır. Şəkilləri sistemin seçici pəncərəsindən siz seçirsiniz. Tətbiq foto qalereyasına daimi giriş istəmir.\n\nGoogle ilə giriş könüllüdür və Clerk vasitəsilə işləyir. Giriş zamanı e-poçt, ad və Clerk istifadəçi identifikatoru hesabı idarə etmək üçün emal oluna bilər. Pro alışını hesaba bağlamaq üçün həmin identifikator RevenueCat-ə ötürülür.\n\nHesabı tətbiqin Məxfilik pəncərəsindəki «Hesabı sil» düyməsi ilə silə bilərsiniz. Bu, Google ilə yaradılmış Clerk hesabını silir. PDF faylları cihazda qalır. Serverdə qalan sayğac və ya kampaniya qeydi üçün nibrascode@gmail.com ünvanına yazın.\n\nBütün alətlər pulsuz planda gündəlik limitlə işləyir: 10 sənəd əməliyyatı, 4 OCR və 5 skan. Pro bu limiti qaldırır və daha böyük fayllara icazə verir. Daxil olmuş pulsuz istifadəçi üçün server əlçatan olanda yalnız Clerk identifikatoru, UTC tarixi və bu üç sayğac saxlanır. Faylın məzmunu və adı saxlanmır. Server əlçatan olmayanda sayğac yalnız cihazda qalır. Qonaq limiti də yalnız cihazdadır.\n\nİstəyə bağlı Premium kampaniyasına qoşulduqda seçilmiş səviyyə və endirim faizi Clerk identifikatoru ilə əlaqələndirilə bilər. Sənəd məzmunu əlavə olunmur.\n\nSon sənədlər, Writer qaralamaları, dil, görünüş, ixrac qovluğu və təhlükəsizlik ayarları cihazda saxlanır. Onları Ayarlardan silə bilərsiniz. Barmaq izi və PIN yalnız bu cihazda yoxlanılır və serverə göndərilmir.\n\nGoogle Drive 1.0.4 versiyasında aktiv deyil və «Tezliklə» kimi göstərilir. Bu versiyada heç bir fayl Google Drive-a göndərilmir və Drive icazəsi istənilmir.\n\nPro alışını Google Play və RevenueCat emal edir. Nibras PDF kart nömrəsini görmür və saxlamır.\n\nPaylaş düyməsində faylın hara gedəcəyini siz seçirsiniz. Nibras PDF həmin tətbiqin sonrakı emalına nəzarət etmir.\n\nServerdəki sayğac və kampaniya qeydləri 90 gün saxlanır, sonra silinir. Bu qeydlərdə sənəd məzmunu yoxdur.\n\nNibras PDF 13 yaşdan kiçik uşaqlar üçün nəzərdə tutulmayıb.\n\nMəxfilik və silmə sorğuları: nibrascode@gmail.com."
+    },
+    {
+      "slug": "lesson-python-javascript",
+      "lang": "az",
+      "title": "Python və JavaScript fərqi",
+      "updated_label": "4",
+      "body": "Python və JavaScript hər ikisi geniş istifadə olunan proqramlaşdırma dilləridir, lakin əsas istifadə sahələri fərqlidir. Python daha çox süni intellekt, məlumat analizi, avtomatlaşdırma və backend proqramlaşdırmada istifadə olunur. JavaScript isə əsasən veb səhifələrin interaktivliyini təmin etmək və frontend proqramlaşdırma üçün istifadə edilir. JavaScript backend üçün də Node.js vasitəsilə istifadə oluna bilər."
+    },
+    {
+      "slug": "lesson-python-javascript",
+      "lang": "ar",
+      "title": "الفرق بين بايثون وجافاسكريبت",
+      "updated_label": "4",
+      "body": "الفرق بين Python وJavaScript\nتُعد Python وJavaScript من لغات البرمجة واسعة الاستخدام، لكن مجالات استعمالهما تختلف غالبًا. تُستخدم Python في الذكاء الاصطناعي وتحليل البيانات والأتمتة وتطوير الواجهات الخلفية. أما JavaScript فتُستخدم بشكل أساسي لإنشاء مواقع ويب تفاعلية وتطبيقات الواجهة الأمامية، ويمكن استخدامها أيضًا في تطوير الواجهات الخلفية من خلال تقنيات مثل Node.js."
+    },
+    {
+      "slug": "nibras-arabic",
+      "lang": "az",
+      "title": "Nibras Arabic — Məxfilik siyasəti",
+      "updated_label": "Tətbiq versiyası: 1.1.0  •  Son yenilənmə: 30 sentyabr 2026",
+      "body": "Nibras Code Nibras Arabic tətbiqinə hörmət edir və şəxsi məlumatların qorunmasına diqqət yetirir. Bu siyasət tətbiqin hansı məlumatları işlədiyini və istifadəçinin seçimlərini izah edir.\n\n1. Toplanan məlumatlar\n\nNibras Arabic hesab, qeydiyyat, ad, telefon nömrəsi, e-poçt, yer məlumatı, kontaktlar, foto və ya ödəniş məlumatı tələb etmir. Tətbiq analitika, reklam izləyicisi və profil yaratma xidmətlərindən istifadə etmir.\n\nÖyrənmə nəticələri, sevimlilər, XP, statistika, mövzu və bildiriş seçimləri yalnız cihazın lokal yaddaşında saxlanılır. Bu məlumatlar Nibras Code serverlərinə göndərilmir.\n\n2. Bildirişlər\n\nGündəlik xatırlatmalar yalnız istifadəçi onları aktiv etdikdə işləyir. Bildirişlər cihazın lokal bildiriş sistemi ilə yaradılır və istifadəçi onları cihaz ayarlarından söndürə bilər.\n\n3. Mətnlərin səsləndirilməsi\n\nTətbiq ərəb mətnlərini cihazın öz mətn-səs mühərriki ilə səsləndirə bilər. Bu səsləndirmə üçün istifadəçi məlumatı serverə göndərilmir və analitika məqsədilə saxlanılmır.\n\n4. Ehtiyat nüsxə və paylaşma\n\nİstifadəçi istəsə, öyrənmə məlumatlarını özü tərəfindən başladılan ehtiyat nüsxə faylı kimi çıxara və Android paylaşma menyusu ilə paylaşa bilər. Bu paylaşım istifadəçinin seçdiyi tətbiqə və ya xidmətə aiddir; Nibras Code həmin faylı qəbul etmir və saxlamır.\n\n5. Məlumatların silinməsi\n\nMəlumatlar cihazda saxlandığı üçün tətbiqin məlumatlarını Android ayarlarından silməklə onları silə bilərsiniz. Tətbiqi silmək də həmin lokal məlumatları silir. Bizdə serverdə saxlanan istifadəçi məlumatı olmadığı üçün ayrıca server silinməsi tələb olunmur.\n\n6. Uşaqların məxfiliyi\n\nTətbiq şəxsi məlumat toplamaq üçün nəzərdə tutulmayıb. Valideynlər uşaqların tətbiqdən istifadəsinə öz nəzarət qaydalarına uyğun nəzarət edə bilərlər.\n\n7. Dəyişikliklər\n\nBu siyasət tətbiqin məlumat davranışında dəyişiklik olduqda yenilənə bilər. Yenilənmiş tarix bu səhifənin yuxarısında göstərilir.\n\n8. Əlaqə\n\nMəxfilik və dəstək sualları üçün: nibrascode@gmail.com\n\nRəsmi sayt: NibrasCode.com"
+    }
+  ]
+}
