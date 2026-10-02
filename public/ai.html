@@ -135,23 +135,24 @@
       gap: 10px;
       padding: 16px 14px;
     }
-    .hello { margin: auto; text-align: center; max-width: 360px; }
+    .hello { margin: auto 0 8px; width: 100%; }
     .hello h1 {
-      margin: 0 0 8px;
+      margin: 0 0 6px;
       font-family: Syne, sans-serif;
-      font-size: 28px;
+      font-size: 32px;
       letter-spacing: -0.05em;
     }
-    .hello p { margin: 0 0 14px; color: var(--muted); line-height: 1.45; font-size: 14px; }
-    .chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+    .hello p { margin: 0 0 16px; color: var(--muted); line-height: 1.45; font-size: 15px; }
+    .chips { display: flex; flex-direction: column; gap: 8px; }
     .chips button {
       border: 1px solid var(--line);
       background: rgba(255,255,255,.04);
       color: var(--fg);
-      border-radius: 999px;
-      padding: 7px 11px;
+      border-radius: 14px;
+      padding: 12px 14px;
       font: inherit;
-      font-size: 13px;
+      font-size: 14px;
+      text-align: left;
       cursor: pointer;
     }
     .chips button:hover { border-color: rgba(154,235,255,.4); }
@@ -229,32 +230,32 @@
           <span><b>Nibras AI</b><small>Nibras Code</small></span>
         </a>
         <div class="meta">
-          <span class="pill" id="left"><em>5</em>/5</span>
+          <span class="pill" id="left"><em>10</em>/10</span>
           <a class="home" href="/">Sayt</a>
         </div>
       </header>
       <div id="msgs">
         <div class="hello" id="hello">
-          <h1>Sualını yaz.</h1>
-          <p>Qısa cavab. Gündə 5 sual.</p>
+          <h1>Salam.</h1>
+          <p>Bu gün nə haqqında danışaq?</p>
           <div class="chips">
-            <button type="button" data-q="Nibras Code nədir?">Nibras Code nədir?</button>
-            <button type="button" data-q="Nibras Arabic nə üçündür?">Nibras Arabic</button>
-            <button type="button" data-q="PDF fayllarını telefonda necə birləşdirmək olar?">PDF birləşdirmək</button>
+            <button type="button" data-q="Bir mövzunu sadə dildə izah et.">Bir mövzunu sadə izah et</button>
+            <button type="button" data-q="Qısa və səliqəli bir mətn yaz.">Qısa mətn yaz</button>
+            <button type="button" data-q="Bu fikri yoxla və daha yaxşısını təklif et.">Fikri yoxla</button>
           </div>
         </div>
       </div>
       <div class="dock">
         <form id="form">
-          <input id="inp" type="text" maxlength="800" placeholder="Sualınızı yazın..." autocomplete="off" />
+          <input id="inp" type="text" maxlength="800" placeholder="Nə soruşmaq istəyirsən?" autocomplete="off" />
           <button class="send" id="btn" type="submit">Göndər</button>
         </form>
-        <p id="warn">Gündəlik 5 sual limiti doldu. Sabah yenidən yoxlayın.</p>
+        <p id="warn">Gündəlik 10 sual limiti doldu. Sabah yenidən yoxlayın.</p>
       </div>
     </section>
   </div>
   <script>
-    const LIMIT = 5;
+    const LIMIT = 10;
     const KEY = "nibras_ai_v2";
     const msgs = document.getElementById("msgs");
     const hello = document.getElementById("hello");
@@ -281,7 +282,7 @@
       inp.disabled = full;
       btn.disabled = full;
       warn.classList.toggle("on", full);
-      inp.placeholder = full ? "Limit doldu" : "Sualınızı yazın...";
+      inp.placeholder = full ? "Limit doldu" : "Nə soruşmaq istəyirsən?";
     }
     function bubble(text, kind) {
       if (hello && hello.parentNode) hello.remove();
