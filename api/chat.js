@@ -25,23 +25,24 @@ export default async function handler(req, res) {
     }
     const history = normalizeHistory(body.messages, message);
     const order = pickOrder(message);
-    let last = "";
+    const notes = [];
+    const started = Date.now();
 
-    for (const name of order.slice(0, 3)) {
+    for (const name of order) {
+      if (Date.now() - started > 18000) break;
       const result = await ask(name, history, message);
       if (result.skipped) continue;
       if (result.ok) {
         res.status(200).json({ success: true, reply: result.reply, via: name });
         return;
       }
-      last = result.detail || last;
+      notes.push(name + ": " + String(result.detail || "xəta").slice(0, 140));
+      if (notes.length >= 5) break;
     }
 
     res.status(200).json({
       success: false,
-      reply: last
-        ? "İndi cavab alınmadı. Bir az sonra yenidən yoxlayın."
-        : "Heç bir AI açarı işləmədi. Vercel-də Production açarlarından sonra Redeploy edin.",
+      reply: notes.join(" | ") || "Heç bir AI açarı işləmədi.",
     });
   } catch {
     res.status(200).json({
@@ -72,7 +73,7 @@ async function ask(name, history, message) {
   if (name === "groq") return askGroq(history, "llama-3.3-70b-versatile");
   if (name === "groq-reason") return askGroq(history, "deepseek-r1-distill-llama-70b", "llama-3.3-70b-versatile");
   if (name === "xai") return askXai(history);
-  if (name === "mistral") return askMistral(history, ["mistral-small-latest", "mistral-large-latest"]);
+  if (name === "mistral") return askMistral(history, ["mistral-small-latest", "codestral-latest"]);
   if (name === "mistral-code") return askMistral(history, ["codestral-latest", "mistral-small-latest"]);
   if (name === "openrouter") return askOpenRouter(history);
   if (name === "hf") return askHf(history);
@@ -185,7 +186,7 @@ async function askGemini(message) {
       {
         method: "POST",
         headers: { "Content-Type": "application/json", "x-goog-api-key": apiKey },
-        signal: AbortSignal.timeout(8000),
+        signal: AbortSignal.timeout(6000),
         body: JSON.stringify({
           systemInstruction: { parts: [{ text: SYSTEM }] },
           contents: [{ role: "user", parts: [{ text: message }] }],
