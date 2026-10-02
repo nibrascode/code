@@ -33,7 +33,8 @@ export default async function handler(req, res) {
       const result = await ask(name, history, message);
       if (result.skipped) continue;
       if (result.ok) {
-        res.status(200).json({ success: true, reply: result.reply, via: name, tried: notes });
+        const label = name.startsWith("groq") ? name + "/" + groqCached : name;
+        res.status(200).json({ success: true, reply: result.reply, via: label, tried: notes });
         return;
       }
       notes.push(name + ": " + String(result.detail || "xəta").slice(0, 140));
@@ -70,8 +71,7 @@ function pickOrder(message) {
 }
 
 async function ask(name, history, message) {
-  if (name === "groq") return askGroq(history, "llama-3.3-70b-versatile");
-  if (name === "groq-reason") return askGroq(history, "deepseek-r1-distill-llama-70b", "llama-3.3-70b-versatile");
+  if (name === "groq" || name === "groq-reason") return askGroq(history);
   if (name === "xai") return askXai(history);
   if (name === "mistral") return askMistral(history, ["mistral-small-latest", "codestral-latest"]);
   if (name === "mistral-code") return askMistral(history, ["codestral-latest", "mistral-small-latest"]);
@@ -87,22 +87,31 @@ function env(name) {
   return hit ? String(process.env[hit] || "").trim().replace(/^Bearer\s+/i, "").replace(/^["']|["']$/g, "") : "";
 }
 
-async function askGroq(history, model, fallback) {
+const GROQ_MODELS = ["openai/gpt-oss-120b", "openai/gpt-oss-20b", "llama-3.1-8b-instant", "llama-3.3-70b-versatile"];
+let groqCached = "";
+
+async function askGroq(history) {
   const apiKey = env("GROQ_API_KEY");
   if (!apiKey) return { skipped: true };
-  const first = await complete({
-    url: "https://api.groq.com/openai/v1/chat/completions",
-    apiKey,
-    model,
-    history,
-  });
-  if (first.ok || !fallback) return first;
-  return complete({
-    url: "https://api.groq.com/openai/v1/chat/completions",
-    apiKey,
-    model: fallback,
-    history,
-  });
+  const models = groqCached ? [groqCached, ...GROQ_MODELS] : GROQ_MODELS;
+  const seen = new Set();
+  let last = { ok: false, detail: "Groq cavab vermədi." };
+  for (const model of models) {
+    if (seen.has(model)) continue;
+    seen.add(model);
+    last = await complete({
+      url: "https://api.groq.com/openai/v1/chat/completions",
+      apiKey,
+      model,
+      history,
+    });
+    if (last.ok) {
+      groqCached = model;
+      return last;
+    }
+    if (!/does not exist|not have access|decommissioned|model/i.test(last.detail || "")) return last;
+  }
+  return last;
 }
 
 async function askXai(history) {
