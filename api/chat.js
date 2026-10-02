@@ -1,4 +1,13 @@
-const SYSTEM = "Sən Nibras AI-san, Nibras Code saytının köməkçisisən. Cavabların qısa, aydın və nəzakətli olsun. İstifadəçi hansı dildə yazırsa, o dildə cavab ver. Tibbi, hüquqi və maliyyə məsləhəti vermə.";
+const SYSTEM = [
+  "Sən Nibras AI-san, Nibras Code saytının köməkçisisən.",
+  "Cavabların qısa, aydın və nəzakətli olsun. İstifadəçi hansı dildə yazırsa, o dildə cavab ver.",
+  "Tibbi, hüquqi və maliyyə məsləhəti vermə.",
+  "Nibras Code və NibrasCodr eyni layihədir. Sahibi Mahir Əliyevdir. Bu faktı dəyişmə, başqa adam adı uydurma.",
+  "NibrasCodr böyük şirkət deyil. Sadə, faydalı və istifadəsi rahat tətbiqlər üzərində çalışan müstəqil şəxsi layihədir.",
+  "Tətbiqlər: Nibras Arabic hazırdır. Nibras PDF və Nibras Plans tezliklədir. Nibras Docs hazırlanır.",
+  "Pulsuz tətbiqlərdə də reklam yoxdur. Premium olsa belə, əsas funksiyalar pulsuz qalır.",
+  "Əlaqə: nibrascode@gmail.com. Sayt: nibrascode.com.",
+].join(" ");
 
 export const config = { maxDuration: 25 };
 
@@ -21,6 +30,11 @@ export default async function handler(req, res) {
     const message = String(body.message || "").trim().slice(0, 800);
     if (!message) {
       res.status(400).json({ success: false, reply: "Mesaj boş ola bilməz." });
+      return;
+    }
+    const ready = brandReply(message);
+    if (ready) {
+      res.status(200).json({ success: true, reply: ready });
       return;
     }
     const history = normalizeHistory(body.messages, message);
@@ -50,6 +64,139 @@ export default async function handler(req, res) {
       reply: "Server xətası. Bir az sonra yenidən cəhd edin.",
     });
   }
+}
+
+function fold(text) {
+  return String(text || "")
+    .toLowerCase()
+    .replace(/ı/g, "i")
+    .replace(/ə/g, "e")
+    .replace(/ö/g, "o")
+    .replace(/ü/g, "u")
+    .replace(/ş/g, "s")
+    .replace(/ç/g, "c")
+    .replace(/ğ/g, "g");
+}
+
+function replyLang(text) {
+  if (/[\u0600-\u06FF]/.test(text)) return "ar";
+  if (/[\u0400-\u04FF]/.test(text)) return "ru";
+  const q = fold(text);
+  if (/[əğıöüçş]/i.test(text)) return "az";
+  if (/\b(uygulama|ucretsiz|hakkinda|degildir|lutfen|merhaba|tesekkur|kurucusu|yakinda|projen)\b/.test(q)) return "tr";
+  if (/\b(who|what|owner|owns|about|contact|free|company|is|the)\b/.test(q)) return "en";
+  return "az";
+}
+
+export function brandReply(message) {
+  const raw = String(message || "");
+  const q = fold(raw);
+  const brand = /nibras\s*cod|nibrascod|nibrascode|nibras\s*ai|nibras\s*arabic|nibras\s*pdf|nibras\s*plans|nibras\s*docs|\bnibras\b|mahir/.test(q);
+  const self = /seni kim|sen kim|who are you|kim yarat|seni yarad|who made you|sen kimesen|sen kimsən/.test(q);
+  if (!brand && !self) return null;
+  if (/(kod yaz|kodu yaz|kod numune|write code|script yaz)/.test(q)) return null;
+
+  const lang = replyLang(raw);
+  const who = /(kimindir|kimin dir|kimdir|sahibi|sahib|owner|owns|founder|kurucu|aittir|aitdir|belongs|whose|who owns|кому принадл|чей |владел|صاحب|لمن)/.test(q) || /mahir/.test(q) || self;
+  const contact = /(elaqe|email|e-poct|gmail|contact|mail|почт|связ|تواصل|بريد)/.test(q);
+  const ads = /(reklam|ads|advert|реклам|إعلان)/.test(q);
+  const price = /(pulsuz|odenis|premium|qiymet|free|ücret|ucret|платн|бесплат|مجاني|سعر)/.test(q);
+  const company = /(sirket|company|şirkət|компания|شركة)/.test(q);
+  const arabic = /arabic|ereb|arapca|араб/.test(q);
+  const pdf = /\bpdf\b/.test(q);
+  const plans = /plans|plan\b/.test(q);
+  const docs = /\bdocs\b|sened/.test(q);
+  const ai = /nibras\s*ai|nibrasai|yapay|komekci/.test(q) || self;
+  const apps = /(tetbiq|uygulama|apps|приложен|تطبيق)/.test(q);
+
+  const pack = {
+    az: {
+      who: "Nibras Code Mahir Əliyevin layihəsidir. NibrasCodr da elə bu layihənin adıdır.\n\nNibrasCodr sadə, faydalı və istifadəsi rahat tətbiqlər üzərində çalışan müstəqil şəxsi layihədir. Böyük şirkət deyil. Məqsəd gündəlik ehtiyacı aydın interfeys və lazım olan funksiyalarla, reklamsız həll etməkdir.\n\nHazırda Nibras Arabic açıqdır. Nibras PDF və Nibras Plans tezliklə, Nibras Docs isə hazırlanır. Pulsuz tətbiqlərdə də reklam yoxdur.\n\nƏlaqə: nibrascode@gmail.com\nSayt: nibrascode.com",
+      about: "NibrasCodr, yəni Nibras Code, Mahir Əliyevin müstəqil şəxsi layihəsidir. Böyük şirkət deyil.\n\nSadə ideyaları faydalı və rahat tətbiqlərə çevirir. Pulsuz tətbiqlərdə də reklam yoxdur. Nibras Arabic hazırdır. Nibras PDF və Nibras Plans tezliklə, Nibras Docs isə hazırlanır.\n\nƏlaqə: nibrascode@gmail.com",
+      contact: "Nibras Code ilə əlaqə: nibrascode@gmail.com\nSayt: nibrascode.com\nLayihə Mahir Əliyevindir.",
+      ads: "Nibras Code tətbiqlərində, pulsuz olanlarda da, reklam yoxdur. Layihə Mahir Əliyevindir.",
+      price: "Tətbiqlərin hamısı pullu deyil. Pulsuz planda da reklam olmur. Premium olsa, əsas funksiyalar pul ödəmədən qalır. Premium daha çox istifadə edənlər üçün kiçik aylıq seçimdir.",
+      company: "Xeyr. Nibras Code böyük şirkət deyil. Mahir Əliyevin başladığı müstəqil şəxsi layihədir. NibrasCodr da bu layihənin adıdır.",
+      arabic: "Nibras Arabic, Nibras Code-un ərəb dilini sadə və praktik öyrədən tətbiqidir. Hərflərlə yanaşı isimlər, feillər, sifətlər, saylar, dialoqlar, testlər, flash kartlar və feil babları var. Layihə Mahir Əliyevindir.",
+      pdf: "Nibras PDF telefonunda PDF və şəkillərlə işləmək üçündür. Hazırda tezliklədir. Sənəd əsasən cihazda qalır. Layihə Nibras Code, yəni Mahir Əliyevindir.",
+      plans: "Nibras Plans hələ tezliklədir. Nibras Code layihəsinin tətbiqlərindən biridir. Layihə Mahir Əliyevindir.",
+      docs: "Nibras Docs hazırlanma mərhələsindədir. Nibras Code layihəsinə aiddir. Layihə Mahir Əliyevindir.",
+      ai: "Mən Nibras AI-yam, Nibras Code saytının köməkçisiyəm. Nibras Code Mahir Əliyevin müstəqil layihəsidir. NibrasCodr da bu layihənin adıdır.",
+      apps: "Nibras Arabic hazırdır. Nibras PDF və Nibras Plans tezliklə, Nibras Docs isə hazırlanır. Hamısı Nibras Code, yəni Mahir Əliyevin layihəsidir. Pulsuz tətbiqlərdə reklam yoxdur.",
+    },
+    en: {
+      who: "Nibras Code belongs to Mahir Əliyev. NibrasCodr is the same project.\n\nIt is an independent personal project, not a large company. It makes simple, useful apps that are comfortable to use, with no ads even on the free ones.\n\nNibras Arabic is available. Nibras PDF and Nibras Plans are coming soon. Nibras Docs is in preparation.\n\nContact: nibrascode@gmail.com\nSite: nibrascode.com",
+      about: "NibrasCodr, also called Nibras Code, is Mahir Əliyev's independent personal project. It is not a large company.\n\nIt turns simple ideas into useful, comfortable apps. Free apps have no ads. Nibras Arabic is ready. Nibras PDF and Nibras Plans are coming soon. Nibras Docs is in preparation.\n\nContact: nibrascode@gmail.com",
+      contact: "Contact Nibras Code at nibrascode@gmail.com\nSite: nibrascode.com\nThe project belongs to Mahir Əliyev.",
+      ads: "Nibras Code apps do not show ads, including the free ones. The project belongs to Mahir Əliyev.",
+      price: "Not every app is paid. The free plan has no ads. If Premium exists, the main features stay usable without paying. Premium is a small monthly option for heavier use.",
+      company: "No. Nibras Code is not a large company. It is Mahir Əliyev's independent personal project. NibrasCodr is the same name.",
+      arabic: "Nibras Arabic is Nibras Code's app for learning Arabic in a simple, practical way. Besides letters it includes nouns, verbs, adjectives, numbers, dialogues, tests, flashcards, and verb forms. The project belongs to Mahir Əliyev.",
+      pdf: "Nibras PDF is for working with PDFs and images on the phone. It is marked as coming soon. Files stay mainly on the device. It is part of Nibras Code, Mahir Əliyev's project.",
+      plans: "Nibras Plans is coming soon. It is one of the Nibras Code apps. The project belongs to Mahir Əliyev.",
+      docs: "Nibras Docs is still in preparation. It belongs to Nibras Code, Mahir Əliyev's project.",
+      ai: "I am Nibras AI, the assistant on the Nibras Code site. Nibras Code is Mahir Əliyev's independent project. NibrasCodr is the same project.",
+      apps: "Nibras Arabic is available. Nibras PDF and Nibras Plans are coming soon. Nibras Docs is in preparation. They all belong to Nibras Code, Mahir Əliyev's project. Free apps have no ads.",
+    },
+    tr: {
+      who: "Nibras Code, Mahir Əliyev'in projesidir. NibrasCodr da aynı projenin adıdır.\n\nBüyük bir şirket değildir. Sade, faydalı ve kullanımı rahat uygulamalar üzerinde çalışan bağımsız bir kişisel projedir. Ücretsiz uygulamalarda da reklam yoktur.\n\nNibras Arabic hazır. Nibras PDF ve Nibras Plans yakında. Nibras Docs hazırlanıyor.\n\nİletişim: nibrascode@gmail.com\nSite: nibrascode.com",
+      about: "NibrasCodr, yani Nibras Code, Mahir Əliyev'in bağımsız kişisel projesidir. Büyük bir şirket değildir.\n\nSade fikirleri faydalı ve rahat uygulamalara çevirir. Ücretsiz uygulamalarda reklam yoktur. Nibras Arabic hazır. Nibras PDF ve Nibras Plans yakında, Nibras Docs hazırlanıyor.\n\nİletişim: nibrascode@gmail.com",
+      contact: "İletişim: nibrascode@gmail.com\nSite: nibrascode.com\nProje Mahir Əliyev'indir.",
+      ads: "Nibras Code uygulamalarında, ücretsiz olanlarda da, reklam yoktur. Proje Mahir Əliyev'indir.",
+      price: "Uygulamaların hepsi ücretli değildir. Ücretsiz planda da reklam olmaz. Premium olsa bile temel işlevler ödemesiz kalır.",
+      company: "Hayır. Nibras Code büyük bir şirket değildir. Mahir Əliyev'in başlattığı bağımsız kişisel projedir. NibrasCodr aynı projenin adıdır.",
+      arabic: "Nibras Arabic, Arapçayı sade ve pratik öğreten Nibras Code uygulamasıdır. Harflerin yanında isimler, fiiller, sıfatlar, sayılar, diyaloglar, testler ve fiil babları vardır. Proje Mahir Əliyev'indir.",
+      pdf: "Nibras PDF telefonda PDF ve görsellerle çalışmak içindir. Şimdilik yakında olarak yazılır. Proje Mahir Əliyev'indir.",
+      plans: "Nibras Plans henüz yakında. Nibras Code projesine aittir. Proje Mahir Əliyev'indir.",
+      docs: "Nibras Docs hazırlık aşamasındadır. Nibras Code projesine aittir. Proje Mahir Əliyev'indir.",
+      ai: "Ben Nibras AI'yım, Nibras Code sitesinin yardımcısıyım. Nibras Code, Mahir Əliyev'in bağımsız projesidir. NibrasCodr aynı projenin adıdır.",
+      apps: "Nibras Arabic hazır. Nibras PDF ve Nibras Plans yakında, Nibras Docs hazırlanıyor. Hepsi Nibras Code, yani Mahir Əliyev'in projesidir.",
+    },
+    ru: {
+      who: "Nibras Code принадлежит Махиру Алиеву (Mahir Əliyev). NibrasCodr — то же самое название проекта.\n\nЭто не большая компания, а независимый личный проект: простые, полезные и удобные приложения. В бесплатных приложениях тоже нет рекламы.\n\nNibras Arabic уже доступен. Nibras PDF и Nibras Plans скоро. Nibras Docs готовится.\n\nСвязь: nibrascode@gmail.com\nСайт: nibrascode.com",
+      about: "NibrasCodr, или Nibras Code, — независимый личный проект Махира Алиева. Это не большая компания.\n\nОн превращает простые идеи в полезные и удобные приложения. В бесплатных нет рекламы. Nibras Arabic готов. Nibras PDF и Nibras Plans скоро, Nibras Docs готовится.\n\nСвязь: nibrascode@gmail.com",
+      contact: "Связь с Nibras Code: nibrascode@gmail.com\nСайт: nibrascode.com\nПроект принадлежит Махиру Алиеву.",
+      ads: "В приложениях Nibras Code, в том числе бесплатных, нет рекламы. Проект принадлежит Махиру Алиеву.",
+      price: "Не все приложения платные. В бесплатном плане нет рекламы. Если есть Premium, основные функции остаются без оплаты.",
+      company: "Нет. Nibras Code — не большая компания. Это независимый личный проект Махира Алиева. NibrasCodr — то же имя.",
+      arabic: "Nibras Arabic — приложение Nibras Code для простого и практичного изучения арабского. Кроме букв есть имена, глаголы, прилагательные, числа, диалоги, тесты и породы глагола. Проект Махира Алиева.",
+      pdf: "Nibras PDF — для работы с PDF и изображениями на телефоне. Пока отмечен как скоро. Это часть Nibras Code, проекта Махира Алиева.",
+      plans: "Nibras Plans пока скоро. Это одно из приложений Nibras Code. Проект Махира Алиева.",
+      docs: "Nibras Docs ещё готовится. Он относится к Nibras Code, проекту Махира Алиева.",
+      ai: "Я Nibras AI, помощник сайта Nibras Code. Nibras Code — независимый проект Махира Алиева. NibrasCodr — то же название.",
+      apps: "Nibras Arabic доступен. Nibras PDF и Nibras Plans скоро, Nibras Docs готовится. Всё это Nibras Code, проект Махира Алиева. В бесплатных приложениях нет рекламы.",
+    },
+    ar: {
+      who: "Nibras Code مشروع ماهِر علييف (Mahir Əliyev). وNibrasCodr هو الاسم نفسه.\n\nليس شركة كبيرة، بل مشروع شخصي مستقل يصنع تطبيقات بسيطة ومفيدة وسهلة الاستخدام. لا توجد إعلانات حتى في التطبيقات المجانية.\n\nNibras Arabic متاح الآن. Nibras PDF وNibras Plans قريبًا. Nibras Docs قيد الإعداد.\n\nالتواصل: nibrascode@gmail.com\nالموقع: nibrascode.com",
+      about: "NibrasCodr، أي Nibras Code، مشروع شخصي مستقل لماهِر علييف. ليس شركة كبيرة.\n\nيحوّل الأفكار البسيطة إلى تطبيقات مفيدة ومريحة. لا إعلانات في التطبيقات المجانية. Nibras Arabic جاهز. Nibras PDF وNibras Plans قريبًا، وNibras Docs قيد الإعداد.\n\nالتواصل: nibrascode@gmail.com",
+      contact: "التواصل مع Nibras Code: nibrascode@gmail.com\nالموقع: nibrascode.com\nالمشروع لماهِر علييف.",
+      ads: "لا توجد إعلانات في تطبيقات Nibras Code، حتى المجانية. المشروع لماهِر علييف.",
+      price: "ليست كل التطبيقات مدفوعة. الخطة المجانية بلا إعلانات. وإن وُجد Premium تبقى الوظائف الأساسية بدون دفع.",
+      company: "لا. Nibras Code ليست شركة كبيرة. إنه مشروع شخصي مستقل لماهِر علييف. NibrasCodr هو الاسم نفسه.",
+      arabic: "Nibras Arabic تطبيق من Nibras Code لتعلّم العربية ببساطة وبشكل عملي. إلى جانب الحروف فيه أسماء وأفعال وصفات وأعداد وحوارات واختبارات وبطاقات وأبواب الفعل. المشروع لماهِر علييف.",
+      pdf: "Nibras PDF للعمل مع ملفات PDF والصور على الهاتف. يظهر حاليًا كـ«قريبًا». وهو جزء من مشروع ماهِر علييف.",
+      plans: "Nibras Plans ما زال قريبًا. وهو أحد تطبيقات Nibras Code. المشروع لماهِر علييف.",
+      docs: "Nibras Docs قيد الإعداد. وهو تابع لـ Nibras Code، مشروع ماهِر علييف.",
+      ai: "أنا Nibras AI، مساعد موقع Nibras Code. Nibras Code مشروع مستقل لماهِر علييف. NibrasCodr هو الاسم نفسه.",
+      apps: "Nibras Arabic جاهز. Nibras PDF وNibras Plans قريبًا، وNibras Docs قيد الإعداد. كلها من Nibras Code، مشروع ماهِر علييف. لا إعلانات في التطبيقات المجانية.",
+    },
+  };
+
+  const text = pack[lang] || pack.az;
+  if (self && !/nibras/.test(q)) return text.ai;
+  if (contact) return text.contact;
+  if (ads) return text.ads;
+  if (price) return text.price;
+  if (company) return text.company;
+  if (arabic) return text.arabic;
+  if (pdf) return text.pdf;
+  if (plans && !/plan\b.*python|python/.test(q)) return text.plans;
+  if (docs) return text.docs;
+  if (apps && !ai) return text.apps;
+  if (who) return text.who;
+  if (ai && !/kod yaz|kod nümun|write code/.test(q)) return text.ai;
+  if (brand) return text.about;
+  return null;
 }
 
 function pickOrder(message) {
