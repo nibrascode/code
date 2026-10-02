@@ -103,25 +103,36 @@
     .hello { margin: auto; width: 100%; text-align: center; padding: 6px 0 10px; }
     .stage {
       display: grid;
-      grid-template-columns: 72px minmax(0, 1fr) 92px;
+      grid-template-columns: minmax(0, 1.15fr) auto minmax(0, 1.05fr);
       align-items: center;
-      gap: 4px;
+      gap: 6px;
     }
     .whisper {
       margin: 0;
       text-align: left;
-      font-size: 9px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      line-height: 1.4;
+      color: rgba(176, 186, 214, .82);
+    }
+    .whisper small {
+      display: block;
+      margin-top: 7px;
+      font-size: 8.5px;
       font-weight: 600;
-      letter-spacing: .16em;
-      line-height: 1.65;
-      color: rgba(176, 186, 214, .72);
+      letter-spacing: .01em;
+      line-height: 1.35;
+      color: rgba(196, 206, 232, .7);
     }
     .script {
       margin: 0;
       text-align: right;
-      font-family: "Great Vibes", cursive;
-      font-size: 22px;
-      line-height: .95;
+      font-family: Manrope, ui-sans-serif, system-ui, sans-serif;
+      font-size: 11px;
+      font-weight: 650;
+      font-style: italic;
+      line-height: 1.35;
       color: #f2f4ff;
     }
     .script span { display: block; }
@@ -134,7 +145,7 @@
       transform: rotate(-6deg);
     }
     .logo {
-      width: min(138px, 34vw);
+      width: min(118px, 30vw);
       height: auto;
       justify-self: center;
       filter: drop-shadow(0 10px 24px rgba(40, 90, 255, .35));
@@ -309,8 +320,9 @@
     .toast.on { opacity: 1; transform: translateX(-50%) translateY(0); }
     @media (max-width: 380px) {
       h1 { font-size: 30px; }
-      .script { font-size: 18px; }
-      .stage { grid-template-columns: 64px minmax(0,1fr) 78px; }
+      .script { font-size: 10px; }
+      .whisper { font-size: 9px; }
+      .stage { gap: 4px; }
       .logo { width: 112px; }
       .act b { font-size: 8.5px; }
     }
@@ -364,9 +376,9 @@
     <div id="msgs">
       <div class="hello" id="hello">
         <div class="stage">
-          <p class="whisper">DAHA AĞILLI<br>DAHA YARADICI<br>SƏNİN ÜÇÜN</p>
+          <p class="whisper">SUAL VER<br>ÖYRƏN<br>İNKİŞAF ET<small>AMMA BİLİK VƏ QÜDRƏTİN ƏSL SAHİBİNİ UNUTMA.</small></p>
           <img class="logo" src="/nibras-ai.png" alt="Nibras AI" />
-          <p class="script"><span>Fikirlər</span><span>həqiqətə çevrilir</span><em></em></p>
+          <p class="script"><span>Fikirlər başlanğıcdır,</span><span>müttəvəffəqiyyət</span><span>isə Allahdandır.</span></p>
         </div>
         <h1>Nibras <span>AI</span></h1>
         <p class="kicker">SƏNİN AI KÖMƏKÇİN</p>
