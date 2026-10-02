@@ -33,7 +33,7 @@ export default async function handler(req, res) {
       const result = await ask(name, history, message);
       if (result.skipped) continue;
       if (result.ok) {
-        res.status(200).json({ success: true, reply: result.reply, via: name });
+        res.status(200).json({ success: true, reply: result.reply, via: name, tried: notes });
         return;
       }
       notes.push(name + ": " + String(result.detail || "xəta").slice(0, 140));
