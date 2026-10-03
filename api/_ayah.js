@@ -951,13 +951,15 @@ export function stripAyahMarkup(text) {
   return String(text || "")
     .replace(/^[ \t]*::\/?ayah[^\n]*::[ \t]*$/gim, "")
     .replace(/^[ \t]*::src::[^\n]*$/gim, "")
-    .replace(/^[ \t]*::(?:tr|note)::[^\n]*$/gim, "")
+    .replace(/^[ \t]*::(?:tr|note|ar)::[^\n]*$/gim, "")
+    .replace(/^[ \t]*::\/?notice::[ \t]*$/gim, "")
     .replace(/::\/?ayah[^:\n]*::/gi, "")
     .replace(/::src::/gi, "");
 }
 // AI-yə göndərilən tarixçədə hazır ayə bloklarını qısa işarə ilə əvəz et (model onları təkrar yazmasın, işarə yazsın)
 export function compactHistory(text) {
-  const out = String(text || "").replace(/::ayah(?: (\d{1,3}):(\d{1,3})(?:-(\d{1,3}))?)?::[\s\S]*?::\/ayah::/g, (m, s, a, b) => (s ? `[[ayah:${s}:${a}${b ? "-" + b : ""}]]` : "[[ayah]]"));
+  // ilk dini cavabın bildiriş bloku modelə göndərilmir
+  const out = String(text || "").replace(/::notice::[\s\S]*?::\/notice::/g, "").replace(/::ayah(?: (\d{1,3}):(\d{1,3})(?:-(\d{1,3}))?)?::[\s\S]*?::\/ayah::/g, (m, s, a, b) => (s ? `[[ayah:${s}:${a}${b ? "-" + b : ""}]]` : "[[ayah]]"));
   return stripAyahMarkup(out).replace(/\n{3,}/g, "\n\n").trim();
 }
 

@@ -233,6 +233,11 @@
     .msg .ay .atr { margin-top: 8px; padding-top: 8px; border-top: 1px dashed rgba(130, 170, 255, .28); font-size: 14px; line-height: 1.6; color: #cfd6e6; unicode-bidi: plaintext; }
     .msg .ay .atr .trl { font-size: 11px; line-height: 1.4; color: #8d96ad; margin-bottom: 3px; }
     .msg .ay .atr .tl { display: block; }
+    .msg .nt { white-space: normal; margin: 0 0 10px; padding: 8px 11px; border-radius: 10px; background: rgba(255, 190, 90, .07); border: 1px solid rgba(255, 190, 90, .38); border-inline-start: 3px solid #ffbe5a; font-size: 12.5px; line-height: 1.55; color: #f3dfb8; unicode-bidi: plaintext; }
+    .msg .nt .nl { display: block; }
+    .msg .nt .nq { display: block; margin-top: 2px; color: #ffe9c2; }
+    .msg .nt .na { display: block; margin-top: 4px; direction: rtl; text-align: right; unicode-bidi: plaintext; font-family: "Amiri", "Scheherazade New", "Noto Naskh Arabic", "Traditional Arabic", "Geeza Pro", serif; font-size: 17px; line-height: 1.9; color: #fff3da; }
+    .msg .nt .ns { display: block; margin-top: 4px; font-size: 10.5px; line-height: 1.4; color: #b9a67c; }
     .msg .an { white-space: normal; margin: 6px 0; font-size: 11.5px; line-height: 1.5; color: #8d96ad; unicode-bidi: plaintext; }
     .msg .ay .as { margin-top: 6px; font-size: 11px; line-height: 1.45; color: #8d96ad; unicode-bidi: plaintext; }
     .msg .ay .as a { color: #8fb4ff; text-decoration: underline; }
@@ -687,7 +692,27 @@
     // Ayə blokları (server yazır): ::ayah 2:255::  ərəbcə sətirlər  [::tr:: etiket + tərcümə sətirləri]  ::src:: mənbə sətri  ::/ayah::
     // Blokdan sonra "::note:: mətn" sətri kiçik boz qeyd kimi çəkilir. Hər şey escape olunur;
     // yalnız mənbə sətrindəki «Tanzil» və «QuranEnc.com» sözləri öz saytlarına linkə çevrilir. Köhnə mesajlar (::tr:: olmayan) əvvəlki kimi çəkilir.
+    // Dini cavabın başındakı bildiriş bloku: ::notice::  sətir  sitat  [::ar:: ərəbcə]  ::src:: mənbə  ::/notice::
+    function noticeHtml(body) {
+      let lead = "", quote = "", ar = "", src = "";
+      body.split("\n").forEach(function (ln) {
+        if (ln.indexOf("::ar::") === 0) ar = ln.replace(/^::ar::[ \t]*/, "");
+        else if (ln.indexOf("::src::") === 0) src = ln.replace(/^::src::[ \t]*/, "");
+        else if (!lead) lead = ln;
+        else quote += (quote ? " " : "") + ln;
+      });
+      return '<div class="nt" dir="auto"><span class="nl">' + escapeHtml(lead) + '</span><span class="nq">' + escapeHtml(quote) + "</span>" +
+        (ar ? '<span class="na" dir="rtl" lang="ar">' + escapeHtml(ar) + "</span>" : "") +
+        (src ? '<span class="ns">' + escapeHtml(src) + "</span>" : "") + "</div>";
+    }
     function ayahHtml(text) {
+      const nre = /(?:^|\n)::notice::\n([\s\S]*?)\n::\/notice::(?=\n|$)/;
+      const nm = nre.exec(text);
+      if (nm) {
+        const before = text.slice(0, nm.index);
+        const after = text.slice(nm.index + nm[0].length).replace(/^\n{1,2}/, "");
+        return (before ? ayahHtml(before) : "") + noticeHtml(nm[1]) + (after ? ayahHtml(after) : "");
+      }
       const re = /(?:^|\n)::ayah( warn)?(?: [0-9:\-]+)?::\n([\s\S]*?)\n::src::[ \t]*([^\n]*)\n::\/ayah::(?=\n|$)/g;
       let out = "";
       let last = 0;
@@ -795,7 +820,7 @@
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(useImage
             ? { prompt: m, image: pendingImage, limitReached: remain() <= 0 }
-            : { message: m, messages: threadOf().slice(-8), mode: sentMode, limitReached: remain() <= 0 })
+            : { message: m, messages: threadOf().slice(-8), mode: sentMode, limitReached: remain() <= 0, noticeShown: noticeShown() })
         });
         const raw = await r.text();
         let data = {};
@@ -952,6 +977,12 @@
       return out;
     }
     // Hər dəyişiklikdə çağırılır: yerli yaddaşa yazır, serverə planlayır
+    // Bu söhbətdə dini cavab bildirişi artıq göstərilibmi? (saxlanan tarixçədən; yeni söhbətdə false; yenidən yükləmədən sonra da işləyir)
+    function noticeShown() {
+      return !!curItem && curItem.msgs.some(function (m) {
+        return m.k === "b" && !m.x && (String(m.t).indexOf("::notice::") >= 0 || String(m.t).indexOf("süni intellektdən din öyrənilməz") >= 0);
+      });
+    }
     function rec(k, t, i, x) {
       if (!curItem) {
         const id = rid();

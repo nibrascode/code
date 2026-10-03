@@ -5,6 +5,8 @@ import { ayahReply, finalizeAi, compactHistory, AYAH_PROMPT } from "./_ayah.js";
 import { snippetReply } from "./_snippets.js";
 import { localReply } from "./_local.js";
 import { track } from "./_stats.js";
+import { isReligious } from "./_religious.js";
+import { withNotice, noticeLang, OLD_AZ_NOTICE } from "./_notice.js";
 
 const SYSTEM = [
   "Sən Nibras AI-san, Nibras Code saytının köməkçisisən.",
@@ -49,7 +51,21 @@ export default async function handler(req, res) {
     // suallarda «Allahın adları» ifadəsi ümumi hazır cavaba düşməsin. Tövhid uyğunlaşdırıcısı yalnız mətndəki suallara cavab verir.
     // Quran ayələrinin mətni yalnız daxili Tanzil məlumatından gəlir (api/_ayah.js): «Bəqərə 255», «İxlas surəsi», «Ayətül-Kürsi».
     // Sözlərin izahı (mənası, izah, söz) sorğuları burada null qaytarır və aşağıdakı quranReply-ə düşür.
-    const fixed = ayahReply(message) || tawhidReply(message) || cannedReply(message) || quranReply(message) || dinReply(message) || brandReply(message);
+    // Hansı idarəçinin cavab verdiyi bilinir: ayə, tövhid, hazır dini cavab, Quran lüğəti və dinReply dini sayılır (brend yox).
+    let fixed = null;
+    let religious = false;
+    for (const [kind, fn] of [["ayah", ayahReply], ["tawhid", tawhidReply], ["canned", cannedReply], ["quran", quranReply], ["din", dinReply], ["brand", brandReply]]) {
+      const r = fn(message);
+      if (r) {
+        fixed = r;
+        religious = kind !== "brand" && !(kind === "din" && body.mode === "code"); // kod rejimində ümumi din-söz uyğunluğu dini sual sayılmır
+        break;
+      }
+    }
+    // Dini suallarda cavabın başında bildiriş (süni intellektdən din öyrənilməz). Yalnız client söhbətdə hələ göstərilmədiyini bildirəndə (noticeShown:false).
+    const wantNotice = body.noticeShown === false;
+    const dressed = (reply, isRel) => (isRel && wantNotice ? withNotice(reply, noticeLang(message)) : reply);
+    const relFlag = (isRel) => (isRel ? { religious: true } : {});
     // Hazır python/html/javascript/sql/css kod nümunələri: AI-yə getmədən (kod rejimi də daxil)
     const snippet = fixed ? null : snippetReply(message, body.mode);
     const ready =
@@ -60,7 +76,11 @@ export default async function handler(req, res) {
     if (ready) {
       track("snippet", snippet ? "hit" : "local"); // yalnız say; mesaj mətni saxlanmır
       // Hazır cavab: xarici AI çağırılmayıb -> limitə sayılmır (usedAI:false)
-      res.status(200).json({ success: true, reply: ready, usedAI: false });
+      const isRel = fixed ? religious : false;
+      // dinReply artıq özü bildirişdir: sonrakı dini suallarda (noticeShown:true) təkrar bildiriş yox, qısa cavab qalır
+      let out = dressed(ready, isRel);
+      if (isRel && body.noticeShown === true && ready.startsWith(OLD_AZ_NOTICE) && ready !== OLD_AZ_NOTICE) out = ready.slice(OLD_AZ_NOTICE.length).replace(/^\s+/, "");
+      res.status(200).json({ success: true, reply: out, usedAI: false, ...relFlag(isRel), ...(isRel && wantNotice ? { notice: true } : {}) });
       return;
     }
     // Gündəlik limit istifadəçi tərəfində sayılır; doluysa yalnız xarici AI tələb edən suallar dayandırılır (hazır cavablar yuxarıda artıq cavablanıb)
@@ -92,7 +112,8 @@ export default async function handler(req, res) {
       if (result.skipped) continue;
       if (result.ok) {
         // AI ayə mətni yazıbsa, ərəbcə hissə Tanzil məlumatı ilə əvəz olunur, [[ayah:S:A]] işarələri açılır
-        res.status(200).json({ success: true, reply: finalizeAi(result.reply, message), usedAI: true });
+        const isRel = isReligious(message, body.mode);
+        res.status(200).json({ success: true, reply: dressed(finalizeAi(result.reply, message), isRel), usedAI: true, ...relFlag(isRel), ...(isRel && wantNotice ? { notice: true } : {}) });
         return;
       }
       notes.push(name + ": " + String(result.detail || "xəta").slice(0, 140));
