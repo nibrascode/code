@@ -1,5 +1,6 @@
 import { cannedReply } from "./_canned.js";
 import { quranReply } from "./_quran.js";
+import { tawhidReply } from "./_tawhid.js";
 import { snippetReply } from "./_snippets.js";
 import { localReply } from "./_local.js";
 import { track } from "./_stats.js";
@@ -40,7 +41,9 @@ export default async function handler(req, res) {
     }
     // Bəqərə surəsi sözlərinin izahı hazır cavabdır (AI-yə getmir). dinReply-dən əvvəl gəlməlidir,
     // yoxsa «ayə»/«təfsir» sözləri olan suallar ümumi dini xəbərdarlığa düşər.
-    const fixed = cannedReply(message) || quranReply(message) || dinReply(message) || brandReply(message);
+    // Tövhid 1 (Əqidə 3001) dərs xülasəsi də hazır cavabdır. cannedReply-dən əvvəl gəlir: «Allahın adları təvqifidir» kimi
+    // suallarda «Allahın adları» ifadəsi ümumi hazır cavaba düşməsin. Tövhid uyğunlaşdırıcısı yalnız mətndəki suallara cavab verir.
+    const fixed = tawhidReply(message) || cannedReply(message) || quranReply(message) || dinReply(message) || brandReply(message);
     // Hazır python/html/javascript/sql/css kod nümunələri: AI-yə getmədən (kod rejimi də daxil)
     const snippet = fixed ? null : snippetReply(message, body.mode);
     const ready =
