@@ -95,11 +95,16 @@ const BOOK_KATHIR = /^(?:k[ae]s[iy]?r|k[ae]th[iy]?r|katir|kasyr)\w*$/;
 const IBN = new Set(["ibn", "ibni", "ibnu", "ebn", "ibnul", "abn", "ибн"]);
 const ARTICLE = new Set(["as", "es", "al", "el", "ul", "us", "ас", "аль", "ал", "əs", "əl"]);
 const FILLER = new Set(["nedir", "nedi", "ne", "nece", "necedir", "izah", "izahi", "izahini", "et", "ele", "eyle", "ver", "mene", "bize", "goster", "yaz", "soyle", "danis", "aciqla", "haqqinda", "hakkinda", "about", "of", "the", "please", "give", "me", "show", "what", "is", "tell", "explain", "for", "and", "ve", "ile", "und", "ayetinin", "ayesinin", "kitabi", "kitab", "book", "by", "in", "from", "mi", "мне", "дай", "покажи", "объясни", "про", "о", "по"]);
-const FILLER_AR = new Set(["لي", "اعطني", "اعرض", "اكتب", "ما", "هو", "هي", "ماهو", "ماهي", "عن", "من", "في", "لل", "ل"]);
+const FILLER_AR = new Set(["لي", "اعطني", "اعطيني", "اعرض", "اكتب", "ما", "هو", "هي", "ماهو", "ماهي", "عن", "من", "في", "لل", "ل", "فضلك", "رجاء", "لو", "سمحت", "ارجو", "اريد", "ابغي", "ابي", "اود", "هات", "ارني", "اشرح", "وضح", "بين", "المعني", "معني", "كلام", "الله", "تعالي", "عز", "وجل", "لماذا", "كيف", "ماذا", "هل", "يا", "اخي", "الكريم", "القران", "قران", "القرآن", "قرآن"]);
 
 /** @returns {null | {book:string|null, hasTafsir:boolean, stripped:string, part:number, lang:string}} */
 export function parseTafsirQuery(message) {
-  const raw0 = digitsAscii(String(message || "")).normalize("NFC");
+  // gizli idarə simvolları (RLM/LRM/ZWNJ...) silinir; ərəb durğu işarələri (، ؛ ؟) boşluğa çevrilir; «تفسيرالبقرة» kimi yapışıq yazı ayrılır
+  const raw0 = digitsAscii(String(message || ""))
+    .normalize("NFC")
+    .replace(/[\u200b-\u200f\u202a-\u202e\u2066-\u2069\ufeff]/g, "")
+    .replace(/[\u060c\u061b\u061e\u061f\u066a-\u066d\u06d4]/g, " ")
+    .replace(/(^|\s)((?:ال)?تفسير)(?=\p{Script=Arabic})/gu, "$1$2 ");
   if (!raw0.trim() || raw0.length > 200) return null;
   // «hissə 2», «part 2», «2-ci hissə», «الجزء 2»: təfsir mətninin hissə nömrəsi (ayə nömrəsi sayılmasın)
   let part = 1;
@@ -140,6 +145,18 @@ export function parseTafsirQuery(message) {
       // əvvəlki tərif (as-/əs-/ас-)
       const p = toks[i - 1];
       if (p && !p.ar && ARTICLE.has(p.f) && drop.size) drop.add(i - 1);
+    }
+  }
+  // «شرح البقرة 17» / «معنى الآية 17 من سورة البقرة»: ayə nömrəsi/«آية» sözü varsa təfsir sorğusudur («سورة الشرح» surə adıdır — toxunulmur)
+  if (!hasTafsir) {
+    const hasRef = toks.some((t) => /^\d+$/.test(t.raw) || (t.ar && /^(?:ال)?(?:ايه|ايات)$/.test(t.f)));
+    if (hasRef) {
+      toks.forEach((t, i) => {
+        if (t.ar && /^(?:شرح|معني|معاني|تاويل|تفصيل)$/.test(t.f) && !(toks[i - 1] && /^سوره$/.test(toks[i - 1].f))) {
+          hasTafsir = true;
+          drop.add(i);
+        }
+      });
     }
   }
   if (!hasTafsir) return null;
@@ -236,6 +253,30 @@ export function paginate(segs, cap = 3500) {
   return pages;
 }
 
+// «17-ci ayə Bəqərə», «الآية 17 من سورة البقرة» kimi sıralar: ayə nömrəsini sona keçir («Bəqərə 17»)
+export function numberLast(t) {
+  const s = String(t);
+  if (/\d\s*[:：]\s*\d/.test(s)) return s;
+  const m = s.match(/(\d{1,3})(?:\s*[-–—]\s*(\d{1,3}))?(?![\d:])/);
+  if (!m) return s;
+  const rest = (s.slice(0, m.index) + " " + s.slice(m.index + m[0].length).replace(/^\s*[-.]?\s*(?:ci|cü|cı|cu|inci|nci|ncu|uncu|th|st|nd|rd|й|ый|ий|-?го)(?![\p{L}])/iu, "")).replace(/\s+/g, " ").trim();
+  return `${rest} ${m[1]}${m[2] ? "-" + m[2] : ""}`.trim();
+}
+/** Ayə/surə istinadını tap. Təfsir sözü güclü siqnaldır: ad tək tanınmasa «surah» işarəsi və nömrə sırası dəyişdirilmiş variantlar da yoxlanılır («Nur 35», «tafsir Nisa 1»). */
+export function resolveRef(stripped) {
+  const nl = numberLast(stripped);
+  const wantsAyah = /\d/.test(stripped) && !/\d\s*[:：]\s*\d/.test(stripped);
+  let fallback = null;
+  for (const c of [stripped, "surah " + stripped, nl, "surah " + nl]) {
+    const r = ayahLookup(c + " yaz");
+    if (!r) continue;
+    // nömrə yazılıbsa, nömrəni ayə kimi oxuyan nəticə üstünlük alır («الآية 4 سورة الفاتحة» surə 4/bütün surə kimi oxunmasın)
+    if (!wantsAyah || r.reps.every((x) => !x.whole)) return r;
+    fallback = fallback || r;
+  }
+  return fallback;
+}
+
 // ------------------------------------------------------------------ cavabın qurulması
 function bookQuery(lang, book, s, a1, a2) {
   const ref = a2 && a2 !== a1 ? `${s}:${a1}-${a2}` : `${s}:${a1}`;
@@ -266,14 +307,13 @@ export async function tafsirReply(message) {
   const q = parseTafsirQuery(message);
   if (!q) return null;
   const { lang } = q;
-  // «Nur 35 təfsiri»: təfsir sözü güclü siqnaldır; ad tək tanınmasa «surə» işarəsi ilə təkrar yoxlanır
-  const look = q.stripped ? ayahLookup(q.stripped + " yaz") || ayahLookup("surə " + q.stripped + " yaz") : null;
+  const look = q.stripped ? resolveRef(q.stripped) : null;
   if (!look) {
     // Ayə/surə tapılmadı: kitab adı yazılıbsa (və ya yalnız «təfsir») kitabları göstər; «təfsir elmi nədir» kimi ümumi suallar başqasına qalır
     const rest = q.stripped.replace(/[^\p{L}\p{M}\d]/gu, "");
     return q.book || !rest ? infoReply(lang, q.book) : null;
   }
-  if (look.reps.some((r) => r.bad)) return ayahReply(q.stripped + " yaz");
+  if (look.reps.some((r) => r.bad)) return ayahReply(q.stripped + " yaz") || ayahReply("surah " + q.stripped + " yaz") || ayahReply(numberLast(q.stripped) + " yaz");
   const book = q.book || "muyassar";
   const L = LABEL[lang] || LABEL.az;
   const tt = T[lang] || T.az;

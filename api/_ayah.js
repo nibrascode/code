@@ -477,6 +477,7 @@ export function ayahLookup(message) {
         for (let k = i; k < toks.length && !AR_LETTER.test(toks[k].raw) && !/^\d+$/.test(toks[k].raw); k++) latToks.push(folded[k]);
         // «Şura» (42) skeleti «surə» cue sözü ilə eynidir: yalnız ş/sh/ш yazılışı ilə tanınır
         if (/^(şura|şûra|şûrâ|şurâ|shura|шура)$/i.test(toks[i].raw)) hit = { len: 1, ns: [42], weak: false };
+        else if (suraCue(i)) hit = null; // «surə/сура/surah» işarə sözüdür, ad deyil («сура Ан-Ниса» «sura an» kimi səhv ada düşməsin)
         else hit = lookupLat(latToks, 0, looseOk);
       }
       if (hit && hit.ns.length) {
