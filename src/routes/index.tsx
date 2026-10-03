@@ -214,7 +214,6 @@ function Home() {
           </span>
         </Link>
         <nav className="nx-links">
-          <Link to="/apps">{t("b_nav_apps")}</Link>
           <Link to="/about">{t("nav_about")}</Link>
           <Link to="/unutma">{t("remind_btn")}</Link>
           <Link to="/contact">{t("nx_nav_contact")}</Link>

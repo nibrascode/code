@@ -4722,8 +4722,8 @@ body.is-home .noise {
   }
 
   .nx-nav {
-    flex-wrap: wrap;
-    gap: 8px 12px;
+    flex-wrap: nowrap;
+    gap: 8px 10px;
     min-height: 0;
     width: min(1180px, calc(100% - 24px));
   }
@@ -4731,10 +4731,10 @@ body.is-home .noise {
   .nx-links {
     flex: 1 1 auto;
     min-width: 0;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     overflow: visible;
-    gap: 6px 12px;
-    font-size: 13px;
+    gap: 6px 10px;
+    font-size: 12.5px;
   }
 
   .nx-nav .lang-trigger {
