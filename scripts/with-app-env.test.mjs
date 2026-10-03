@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { execFile } from "node:child_process";
-import { mkdirSync, mkdtempSync, symlinkSync, writeFileSync } from "node:fs";
+import { copyFileSync, existsSync, mkdirSync, mkdtempSync, symlinkSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
@@ -14,7 +14,7 @@ import {
 } from "./with-app-env.mjs";
 
 const execFileAsync = promisify(execFile);
-const WRAPPER = join(projectRoot(), "scripts/with-app-env.mjs");
+const WRAPPER_SRC = join(projectRoot(), "scripts/with-app-env.mjs");
 const PRINT_FLAG = "process.stdout.write(String(process.env.VITE_AUTH_ENABLED));";
 
 function makeWorkspace(appEnvJson) {
@@ -24,6 +24,19 @@ function makeWorkspace(appEnvJson) {
     writeFileSync(join(root, APP_ENV_REL_PATH), appEnvJson);
   }
   return root;
+}
+
+/**
+ * A throwaway workspace that carries its own copy of the wrapper (it resolves
+ * `.grok/app-env.json` relative to its own location) and a shipped app-env.
+ * The tests below must not depend on whether this particular checkout tracks
+ * `.grok/` (the platform workspace does, the plain git repo does not).
+ */
+function makeShippedWorkspace() {
+  const root = makeWorkspace('{"VITE_AUTH_ENABLED":"false"}');
+  mkdirSync(join(root, "scripts"), { recursive: true });
+  copyFileSync(WRAPPER_SRC, join(root, "scripts/with-app-env.mjs"));
+  return { root, wrapper: join(root, "scripts/with-app-env.mjs") };
 }
 
 test("keeps VITE_-prefixed string entries", () => {
@@ -60,7 +73,10 @@ test("an explicit process-env override wins over the file", () => {
 });
 
 test("the template ships auth off", () => {
-  assert.deepEqual(readAppEnv(projectRoot()), { VITE_AUTH_ENABLED: "false" });
+  // When this checkout carries the template's .grok/app-env.json it must keep
+  // auth off; a checkout without it behaves as "no overrides" (see above).
+  const shipped = existsSync(join(projectRoot(), APP_ENV_REL_PATH));
+  assert.deepEqual(readAppEnv(projectRoot()), shipped ? { VITE_AUTH_ENABLED: "false" } : {});
 });
 
 test("vite loadEnv resolves the wrapped value", () => {
@@ -74,8 +90,9 @@ test("vite loadEnv resolves the wrapped value", () => {
 });
 
 test("the wrapped command runs with the app env applied", async () => {
+  const { wrapper } = makeShippedWorkspace();
   const { stdout } = await execFileAsync(process.execPath, [
-    WRAPPER,
+    wrapper,
     process.execPath,
     "-e",
     PRINT_FLAG,
@@ -84,9 +101,10 @@ test("the wrapped command runs with the app env applied", async () => {
 });
 
 test("the wrapped command sees an explicit override, not the file value", async () => {
+  const { wrapper } = makeShippedWorkspace();
   const { stdout } = await execFileAsync(
     process.execPath,
-    [WRAPPER, process.execPath, "-e", PRINT_FLAG],
+    [wrapper, process.execPath, "-e", PRINT_FLAG],
     { env: { ...process.env, VITE_AUTH_ENABLED: "true" } },
   );
   assert.equal(stdout, "true");
@@ -94,7 +112,7 @@ test("the wrapped command sees an explicit override, not the file value", async 
 
 test("the wrapper propagates the command's exit code", async () => {
   await assert.rejects(
-    execFileAsync(process.execPath, [WRAPPER, process.execPath, "-e", "process.exit(3)"]),
+    execFileAsync(process.execPath, [WRAPPER_SRC, process.execPath, "-e", "process.exit(3)"]),
     (err) => err.code === 3,
   );
 });
@@ -104,7 +122,7 @@ test("a signal-killed command is never reported as success", async () => {
   // a cancelled build reporting exit 0 is a silently passing gate.
   await assert.rejects(
     execFileAsync(process.execPath, [
-      WRAPPER,
+      WRAPPER_SRC,
       process.execPath,
       "-e",
       "process.kill(process.pid, 'SIGTERM');setTimeout(() => {}, 1000);",
@@ -117,7 +135,7 @@ test("the CLI still runs when invoked through a symlinked path", async () => {
   // node realpaths import.meta.url but not process.argv[1], so a raw comparison
   // turns the wrapper into a no-op that exits 0 without starting anything.
   const link = join(mkdtempSync(join(tmpdir(), "app-env-link-")), "scripts");
-  symlinkSync(join(projectRoot(), "scripts"), link);
+  symlinkSync(join(makeShippedWorkspace().root, "scripts"), link);
   const { stdout } = await execFileAsync(process.execPath, [
     join(link, "with-app-env.mjs"),
     process.execPath,

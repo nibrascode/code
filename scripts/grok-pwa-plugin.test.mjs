@@ -21,6 +21,12 @@ import { renderInstallPage } from "./grok-pwa-plugin.mjs";
 
 const TEMPLATE_ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 
+// Hermetic cwd: injectGrokPwaHead() falls back to the workspace in process.cwd()
+// (src/lib/og/site.json, public/og.jpg, .project_id). These unit tests assert
+// the generic fallbacks (document title, host slug, og.grok.me placeholder), so
+// they must not pick up this repo's own branding or card image.
+process.chdir(mkdtempSync(join(tmpdir(), "grok-pwa-cwd-")));
+
 test("injects before </head>", () => {
   const out = injectGrokPwaHead("<html><head><title>x</title></head><body></body></html>");
   assert.match(out, /rel="manifest"/);

@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { execFile } from "node:child_process";
-import { mkdtempSync, symlinkSync } from "node:fs";
+import { mkdirSync, mkdtempSync, symlinkSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
@@ -91,8 +91,14 @@ test("only a divergence warns the smoke verdict", () => {
 });
 
 test("the build side resolves the template's shipped app-env", () => {
-  assert.equal(buildAuthEnabled(projectRoot(), {}), false);
-  assert.equal(buildAuthEnabled(projectRoot(), { VITE_AUTH_ENABLED: "true" }), true);
+  // A workspace shaped like the template: .grok/app-env.json with auth off.
+  const root = mkdtempSync(join(tmpdir(), "auth-invariant-shipped-"));
+  mkdirSync(join(root, ".grok"), { recursive: true });
+  writeFileSync(join(root, ".grok/app-env.json"), '{"VITE_AUTH_ENABLED":"false"}');
+  assert.equal(buildAuthEnabled(root, {}), false);
+  assert.equal(buildAuthEnabled(root, { VITE_AUTH_ENABLED: "true" }), true);
+  // And one without the file: no override, sign-in stays on.
+  assert.equal(buildAuthEnabled(mkdtempSync(join(tmpdir(), "auth-invariant-bare-")), {}), true);
 });
 
 test("the CLI reports rather than silently passing when run via a symlink", async () => {
