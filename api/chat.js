@@ -1,6 +1,7 @@
 import { cannedReply } from "./_canned.js";
 import { quranReply } from "./_quran.js";
 import { tawhidReply } from "./_tawhid.js";
+import { tafsirReply } from "./_tafsir.js";
 import { ayahReply, finalizeAi, compactHistory, AYAH_PROMPT } from "./_ayah.js";
 import { snippetReply } from "./_snippets.js";
 import { localReply } from "./_local.js";
@@ -51,11 +52,12 @@ export default async function handler(req, res) {
     // suallarda «Allahın adları» ifadəsi ümumi hazır cavaba düşməsin. Tövhid uyğunlaşdırıcısı yalnız mətndəki suallara cavab verir.
     // Quran ayələrinin mətni yalnız daxili Tanzil məlumatından gəlir (api/_ayah.js): «Bəqərə 255», «İxlas surəsi», «Ayətül-Kürsi».
     // Sözlərin izahı (mənası, izah, söz) sorğuları burada null qaytarır və aşağıdakı quranReply-ə düşür.
+    // Təfsir sorğuları («Bəqərə 255 təfsiri», «İbn Kəsir təfsiri 2:255») ayə axtarışından əvvəl gəlir (api/_tafsir.js, daxili məlumat, AI-siz).
     // Hansı idarəçinin cavab verdiyi bilinir: ayə, tövhid, hazır dini cavab, Quran lüğəti və dinReply dini sayılır (brend yox).
     let fixed = null;
     let religious = false;
-    for (const [kind, fn] of [["ayah", ayahReply], ["tawhid", tawhidReply], ["canned", cannedReply], ["quran", quranReply], ["din", dinReply], ["brand", brandReply]]) {
-      const r = fn(message);
+    for (const [kind, fn] of [["tafsir", tafsirReply], ["ayah", ayahReply], ["tawhid", tawhidReply], ["canned", cannedReply], ["quran", quranReply], ["din", dinReply], ["brand", brandReply]]) {
+      const r = await fn(message);
       if (r) {
         fixed = r;
         religious = kind !== "brand" && !(kind === "din" && body.mode === "code"); // kod rejimində ümumi din-söz uyğunluğu dini sual sayılmır
