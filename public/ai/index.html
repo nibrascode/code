@@ -434,11 +434,11 @@
         </form>
       </div>
       <div class="acts">
-        <button class="act" type="button" data-focus="1">
+        <button class="act" type="button" data-mode="ask">
           <svg viewBox="0 0 24 24" fill="none"><path d="M7 17.5 4.5 20v-4A7.5 7.5 0 1 1 12 19.5H8" stroke="#7ecbff" stroke-width="1.7" stroke-linejoin="round"/><circle cx="9" cy="11" r="1" fill="#7ecbff"/><circle cx="12" cy="11" r="1" fill="#7ecbff"/><circle cx="15" cy="11" r="1" fill="#7ecbff"/></svg>
           <b>Sual ver</b>
         </button>
-        <button class="act" type="button" data-q="Yaradıcı bir fikir ver.">
+        <button class="act" type="button" data-mode="create">
           <svg viewBox="0 0 24 24" fill="none"><path d="M9 18h6M10 21h4" stroke="#f4f7ff" stroke-width="1.7" stroke-linecap="round"/><path d="M12 3a6.5 6.5 0 0 0-3.2 12.1c.5.4.8 1 .8 1.6V17h5v-.3c0-.6.3-1.2.8-1.6A6.5 6.5 0 0 0 12 3z" stroke="#f4f7ff" stroke-width="1.7"/></svg>
           <b>Yaradıcı ol</b>
         </button>
@@ -506,6 +506,14 @@
         label.hidden = false;
         label.textContent = pendingImage ? "Şəkil düzəlt — nə dəyişsin?" : "Şəkil hazırla — nə çəkim?";
         inp.placeholder = pendingImage ? "Bu şəkildə nəyi dəyişim?" : "Məsələn: qaranlıq masada mavi N loqosu";
+      } else if (next === "create") {
+        label.hidden = false;
+        label.textContent = "Yaradıcı rejim — mövzunu yaz";
+        inp.placeholder = "Məsələn: tətbiq üçün qısa ad fikri";
+      } else if (next === "ask") {
+        label.hidden = false;
+        label.textContent = "Sual rejimi — sualını yaz";
+        inp.placeholder = "Sualını buraya yaz";
       } else {
         label.hidden = true;
         label.textContent = "";
@@ -516,7 +524,8 @@
       return /(şəkil|sekil|resim).{0,30}(hazırla|hazirla|yarat|çək|cek|düzəlt|duzelt|çiz|ciz|et\b)|şəkil hazırla|sekil hazirla|draw an image|generate an image/i.test(text);
     }
     function escapeHtml(text) {
-      return text.replace(/[&<>]/g, function (ch) { return ({ "&": "&", "<": "<", ">": ">" })[ch]; });
+      const map = { "&": "amp", "<": "lt", ">": "gt" };
+      return String(text).replace(/[&<>]/g, function (ch) { return "&" + map[ch] + ";"; });
     }
     function fillBubble(el, text) {
       const parts = String(text || "").split("```");
@@ -547,7 +556,7 @@
       const m = (text || "").trim();
       if (!m || remain() <= 0) return;
       const useImage = mode === "image" || pendingImage || wantsImage(m);
-      const useCode = mode === "code" && !useImage;
+      const sentMode = useImage ? "image" : mode === "code" ? "code" : mode === "create" ? "create" : "ask";
       inp.value = "";
       bubble(m, "u");
       if (!useImage) thread.push({ role: "user", text: m });
@@ -563,7 +572,7 @@
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(useImage
             ? { prompt: m, image: pendingImage }
-            : { message: m, messages: thread.slice(-8), mode: useCode ? "code" : "chat" })
+            : { message: m, messages: thread.slice(-8), mode: sentMode })
         });
         const raw = await r.text();
         let data = {};
@@ -602,12 +611,6 @@
         e.preventDefault();
         form.requestSubmit();
       }
-    });
-    document.querySelectorAll("[data-q]").forEach(function (b) {
-      b.addEventListener("click", function () { send(b.getAttribute("data-q")); });
-    });
-    document.querySelectorAll("[data-focus]").forEach(function (b) {
-      b.addEventListener("click", function () { if (remain() > 0) inp.focus(); });
     });
     document.querySelectorAll("[data-mode]").forEach(function (b) {
       b.addEventListener("click", function () {

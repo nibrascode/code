@@ -43,8 +43,14 @@ export default async function handler(req, res) {
         role: "system",
         text: "İstifadəçi kod istəyir. İşlək və qısa kod yaz. Kodu mütləq ``` dil ``` blokunda ver. İzahı bir-iki cümlə saxla. Kod yazmağı rədd etmə.",
       });
+    } else if (body.mode === "create") {
+      history.unshift({
+        role: "system",
+        text: "İstifadəçi yaradıcı fikir istəyir. Onun yazdığı mövzuya uyğun qısa, konkret və istifadə edilə bilən bir fikir ver. Boş ümumi cümlə ilə keçinmə.",
+      });
     }
-    const order = pickOrder(body.mode === "code" ? message + " kod" : message);
+    const hint = body.mode === "code" ? " kod" : body.mode === "create" ? " yaradıcı" : "";
+    const order = pickOrder(message + hint);
     const notes = [];
     const started = Date.now();
 
