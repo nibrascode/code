@@ -7,6 +7,52 @@ function env(name) {
   return hit ? String(process.env[hit] || "").trim().replace(/^Bearer\s+/i, "").replace(/^["']|["']$/g, "") : "";
 }
 
+
+const LIVING = [
+  // Azərbaycan / Türk
+  "insan", "adam", "kişi", "kisi", "qadın", "qadin", "kadın", "kadin", "xanım", "xanim", "oğlan", "oglan", "qız", "qiz", "uşaq", "usaq", "çocuk", "cocuk", "körpə", "korpe", "bebek", "gənc", "genc", "yaşlı", "yasli", "qoca", "baba", "nənə", "nene", "ana", "ata", "anne", "baba", "üz", "uz", "yüz", "portret", "portre", "selfi", "şəxs", "sexs", "kimse", "kimsə", "insanlar", "camaat", "izdiham", "pərəstişkar", "futbolçu", "futbolcu", "oyunçu", "sürücü", "həkim", "hekim", "müəllim", "muellim", "şagird", "tələbə", "pilot", "əsgər", "esger", "polis", "padşah", "kral", "şahzadə", "pirens", "peyğəmbər", "peygamber", "mələk", "melek", "cin", "şeytan", "zombi", "robot insan", "canlı", "canli", "heyvan", "hayvan", "pişik", "pisik", "kedi", "it", "köpək", "kopek", "at", "ayı", "ayi", "aslan", "pələng", "pelen", "qurd", "kurt", "tülkü", "tulku", "dovşan", "tavsan", "dəvə", "deve", "inək", "inek", "qoyun", "keçi", "keci", "dana", "ceyran", "maral", "fil", "zürafə", "zurafe", "meymun", "maymun", "ilan", "timsah", "kərtənkələ", "quş", "kuş", "qartal", "kartal", "göyərçin", "goyercin", "toyuq", "tavuk", "xoruz", "ördək", "ordek", "qaz", "balıq", "balik", "delfin", "köpəkbalığı", "balina", "kəpənək", "kelebek", "arı", "ari", "milçək", "hörümçək", "horumcek", "həşərat", "hesere", "böcək", "bocek", "dinozavr", "əjdaha", "ejdaha", "ejder", "canavar", "heyvanlar", "kopekler",
+  // English
+  "human", "person", "people", "man", "men", "woman", "women", "boy", "girl", "child", "children", "kid", "baby", "face", "portrait", "selfie", "crowd", "soldier", "doctor", "teacher", "king", "queen", "prophet", "angel", "demon", "zombie", "animal", "animals", "cat", "dog", "horse", "lion", "tiger", "wolf", "fox", "rabbit", "camel", "cow", "sheep", "goat", "deer", "elephant", "giraffe", "monkey", "snake", "crocodile", "bird", "eagle", "pigeon", "chicken", "duck", "fish", "dolphin", "whale", "shark", "butterfly", "bee", "insect", "spider", "dinosaur", "dragon", "creature", "pet", "puppy", "kitten", "bear", "mouse", "rat", "owl", "parrot", "peacock", "turtle", "frog",
+  // Русский
+  "человек", "люди", "мужчина", "женщина", "мальчик", "девочка", "ребёнок", "ребенок", "дети", "лицо", "портрет", "селфи", "толпа", "солдат", "врач", "учитель", "король", "королева", "пророк", "ангел", "демон", "зомби", "животное", "животные", "кошка", "кот", "собака", "пёс", "лошадь", "конь", "лев", "тигр", "волк", "лиса", "кролик", "верблюд", "корова", "овца", "коза", "олень", "слон", "жираф", "обезьяна", "змея", "крокодил", "птица", "орёл", "орел", "голубь", "курица", "утка", "рыба", "дельфин", "кит", "акула", "бабочка", "пчела", "насекомое", "паук", "динозавр", "дракон", "медведь", "мышь", "крыса", "сова", "попугай", "павлин", "черепаха", "лягушка",
+  // العربية
+  "إنسان", "انسان", "شخص", "ناس", "رجل", "امرأة", "امراه", "ولد", "بنت", "طفل", "أطفال", "وجه", "صورة شخصية", "جندي", "طبيب", "معلم", "ملك", "ملكة", "نبي", "ملاك", "شيطان", "حيوان", "حيوانات", "قطة", "قط", "كلب", "حصان", "أسد", "اسد", "نمر", "ذئب", "ثعلب", "أرنب", "جمل", "بقرة", "خروف", "غنم", "ماعز", "غزال", "فيل", "زرافة", "قرد", "ثعبان", "تمساح", "طائر", "طير", "نسر", "حمامة", "دجاجة", "بطة", "سمكة", "دلفين", "حوت", "قرش", "فراشة", "نحلة", "حشرة", "عنكبوت", "ديناصور", "تنين", "دب", "فأر", "بومة", "ببغاء", "طاووس", "سلحفاة", "ضفدع",
+];
+
+function foldWord(text) {
+  return String(text || "")
+    .toLowerCase()
+    .replace(/\u0307/g, "")
+    .replace(/[\u064B-\u065F\u0670\u0640]/g, "")
+    .replace(/[إأآ]/g, "ا")
+    .replace(/ё/g, "е")
+    .replace(/ı/g, "i").replace(/ə/g, "e").replace(/ö/g, "o").replace(/ü/g, "u")
+    .replace(/ş/g, "s").replace(/ç/g, "c").replace(/ğ/g, "g");
+}
+
+const LIVING_SET = new Set(LIVING.map(foldWord));
+const LIVING_PREFIX = LIVING.map(foldWord).filter((w) => w.length >= 4);
+const LIVING_SHORT = LIVING.map(foldWord).filter((w) => w.length >= 2 && w.length <= 3 && /^[a-z]+$/.test(w) && w !== "uz");
+const SHORT_END = /^(lar|ler)?(in|nin|nun|un|i|ni|si|su|a|e|na|ne|da|de|dan|den|la|le|ya|ye|im|in|imiz)?$/;
+
+// İnsan və canlı (heyvan, quş, balıq, həşərat və s.) şəkillərinə icazə verilmir.
+function wantsLiving(prompt) {
+  const text = foldWord(prompt).replace(/[^\p{L}\p{N}]+/gu, " ").trim();
+  if (!text) return false;
+  const words = text.split(" ");
+  for (const w of words) {
+    if (LIVING_SET.has(w)) return true;
+    // Şəkilçili formalar: "pisiyi", "insanlarin", "kishinin" kimi.
+    for (const base of LIVING_SHORT) {
+      if (w.length > base.length && w.startsWith(base) && SHORT_END.test(w.slice(base.length))) return true;
+    }
+    for (const base of LIVING_PREFIX) {
+      if (w.length > base.length && w.startsWith(base) && w.length - base.length <= 5) return true;
+    }
+  }
+  return false;
+}
+
 export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
@@ -34,6 +80,13 @@ export default async function handler(req, res) {
     }
     if (image.length > 2_800_000) {
       res.status(400).json({ success: false, reply: "Şəkil çox böyükdür. Daha kiçik şəkil seç." });
+      return;
+    }
+    if (wantsLiving(prompt)) {
+      res.status(200).json({
+        success: false,
+        reply: "İnsan və canlı (heyvan, quş və s.) şəkilləri hazırlanmır. Başqa mövzu yaz: məsələn, mənzərə, bina, loqo, təbiət, kosmos, əşya.",
+      });
       return;
     }
     const providers = [
