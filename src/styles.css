@@ -3674,17 +3674,24 @@ body.is-home .noise {
 .nx-brand {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  flex: 0 0 auto;
+  gap: 8px;
+  font-size: 15px;
   font-weight: 750;
   letter-spacing: -0.03em;
+  white-space: nowrap;
 }
 
 .nx-brand img {
   width: auto;
-  height: 36px;
+  height: 28px;
   max-width: none;
   border-radius: 0;
   object-fit: contain;
+}
+
+.nx-brand span {
+  white-space: nowrap;
 }
 
 .nx-brand em {
@@ -4715,16 +4722,18 @@ body.is-home .noise {
   }
 
   .nx-nav {
-    flex-wrap: nowrap;
-    gap: 8px 14px;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    min-height: 0;
+    width: min(1180px, calc(100% - 24px));
   }
 
   .nx-links {
     flex: 1 1 auto;
     min-width: 0;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    gap: 8px 12px;
+    flex-wrap: wrap;
+    overflow: visible;
+    gap: 6px 12px;
     font-size: 13px;
   }
 
