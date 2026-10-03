@@ -14,14 +14,14 @@ export const TOPICS = [
  },
  {
   "n": 3,
-  "title_az": "Mərifət və isbat tövhidinin mənası və növləri",
-  "title_az_translated": false,
+  "title_az": "Mə‘rifət və isbat tövhidinin mənası və növləri",
+  "title_az_translated": true,
   "title_ar": "معنى توحيد المعرفة والإثبات، وأنواعه"
  },
  {
   "n": 4,
-  "title_az": "Rübubiyyət tövhidinin tərifi, dəlilləri və Quranın onu bəyan etmə metodu",
-  "title_az_translated": false,
+  "title_az": "Rübubiyyət tövhidinin tərifi, dəlilləri və Qurani-Kərimdə izah üsulları",
+  "title_az_translated": true,
   "title_ar": "تعريف توحيد الربوبية وأدلته، ومنهج القرآن في بيانه"
  },
  {
@@ -75,10 +75,10 @@ export const ENTRIES = [
   "main": true,
   "label": "Rübubiyyət tövhidini gerçəkləşdirmək üçün iman edilməli məsələlər",
   "q_ar": "يلزم المؤمن بتوحيد الربوبية أموراً حتى يكون محققاً لهذا التوحيد، عدد هذه الأمور.",
-  "q_az": "Möminin rübubiyyət tövhidini gerçəkləşdirməsi üçün hansı məsələlərə inanması vacibdir? Onları sadalayın.",
+  "q_az": "Rübubiyyət tövhidini həyata keçirmək üçün neçə məsələni bilmək lazımdır?",
   "a_ar": "1 - أن يؤمن بوجود الله ﷻ.\n٢- أن يوحد الله ﷻ في ربوبيته.\n٣- أن يؤمن بأفعال الله العامة.\n٤- أن يؤمن بقضاء الله تعالى وقدره\n٥- أن يؤمن بألوهية الله تعالى.",
-  "a_az": null,
-  "a_az_partial": "Allahın mövcud olduğuna iman etmək.",
+  "a_az": "Rübubiyyət tövhidini həyata keçirmək üçün beş məsələni bilmək lazımdır:\n\n1. Allahın mövcud olduğuna iman etmək\n\nUca Allahın həqiqətən mövcud olduğuna, Onun yoxdan var edən Yaradan olduğuna iman etmək.\n\n2. Allahı Rübubiyyətində tək bilmək\n\nAllahı Onun Rəbbliyində, yəni yaratmaqda, idarə etməkdə, ruzi verməkdə və bütün işləri həyata keçirməkdə tək bilmək.\n\n3. Allahın kainatda həyata keçirdiyi ümumi işlərə iman etmək\n\nAllahın kainatda yaratmaq, ruzi vermək, diriltmək, öldürmək, fayda və zərər vermək, gecə-gündüzü dəyişmək və digər işləri həyata keçirdiyinə iman etmək.\n\n4. Allahın qəza və qədərinə iman etmək\n\nKainatda baş verən hər şeyin Allahın elmi, yazısı, iradəsi və qüdrəti ilə olduğunu qəbul etmək.\n\n5. Allahın uluhiyyətinə iman etmək\n\nAllahın Rəbb və Yaradan olduğunu qəbul etməklə yanaşı, yalnız Onun ibadətə layiq olduğunu qəbul etmək.",
+  "a_az_partial": null,
   "core": [
    "rübubiyy|rububiy|rububi|ربوب",
    "gerçəkləşd|gerceklesd|gerçəkləş|tətbiq|tehqiq|tahqiq|muhakkak|محقق|تحقيق|يحقق|يلزم|lazım|vacib|şərt|məsələ|mesele|امور|أمور|edilməli|edilmeli"
@@ -111,9 +111,9 @@ export const ENTRIES = [
   "main": true,
   "label": "Allahın varlığına dəlillər və onların növləri",
   "q_ar": "تنقسم الأدلة على وجود الله ﷻ إلى ثلاثة أنواع، عددها وبينها.",
-  "q_az": null,
+  "q_az": "Allahın mövcudluğuna neçə dəlil vardır?",
   "a_ar": "(1) الأدلة الشرعية:\nمن أدلتها :\n١- قال الله تعالى : إِنَّ رَبَّكُمُ اللَّهُ الَّذِي خَلَقَ السَّمَوَاتِ وَالْأَرْضَ فِي سِتَّةِ أَيَّامٍ ثُمَّ اسْتَوَى عَلَى الْعَرْشِ يُغْشِي الَّيْلَ النَّهَارَ يَطْلُبُهُ حَثِيثًا وَالشَّمْسَ وَالْقَمَرَ وَالنُّجُومَ مُسَخَّرَاتِ بِأَمْرِهِ أَلَا لَهُ الْخَلْقُ وَالْأَمْرُ تَبَارَكَ اللَّهُ رَبُّ الْعَالَمِينَ [الأعراف: ٥٤].\nقال الله تعالى: ﴿إِنَّ رَبَّكُمُ اللَّهُ الَّذِي خَلَقَ السَّمَوَاتِ وَالْأَرْضَ فِي سِتَّةِ أَيَّامٍ ثُمَّ اسْتَوَى عَلَى الْعَرْشِ يُدَبِّرُ الْأَمْرَ مَا مِن شَفِيرٍ إِلَّا مِنْ بَعْدِ إِذْنِهِ ذَلِكُمُ اللَّهُ رَبُّكُمْ فَاعْبُدُوهُ أَفَلَا تَذَكَّرُونَ ﴾ [يونس : ٣].\nوجود الشرائع؛ لأن وجود جميع الشرائع دالة على الخالق، وعلى كمال علمه وحكمته ورحمته.\n(٢) الأدلة الفطرية :\nالمراد بها : أصل الخلقة، وهي ما أوجد الله عليه الناس ابتداءً من الإيمان به وتوحيده.\nومن أدلتها :\nالافتقار الذاتي الموجود داخل نفس كل إنسان : ويظهر ذلك عند الابتلاءات والشدائد؛ حيث يلجأ الإنسان عند المصائب والمخاطر إلى الله تعالى وحده، مسلماً كان أو كافراً.\nمثال على ذلك عندما تأتيه المحن والشدائد قوله تعالى : ﴿وَإِذَا غَشِيَهُم مَوْجٌ كَالظُّلَلِ دَعَوُا اللَّهَ مُخْلِصِينَ لَهُ الَّذِينَ فَلَمَّا نَجَتَهُمْ إِلَى الْبَرِّ فَمِنْهُم مُقْتَصِدٌ وَمَا يَجْعَدُ بِعَايَاتِنَا إِلَّا كُلُّ خَتَارٍ كَفُورٍ ﴾ [لقمان: ۳۲].\nوعندما تمر المحنة وتأتي العافية والنعمة يعود الإنسان على ما كان عليه من مخالفة الفطرة، كقوله تعالى: وَإِذَا مَسَّكُمُ الضُّرُّ فِي الْبَحْرِ ضَلَّ مَن تَدْعُونَ إِلَّا إِيَّاهُ فَلَمَّا نَجَنَكُمْ إِلَى الْبَرَ أَعْرَضْتُمْ وَكَانَ الْإِنسَنُ كَفُورًا ﴾ [الإسراء: ٦٧].\n(٣) الأدلة العقلية:\nومن أقوى الأدلة العقلية الدالة على وجود الله دليلان، هما:\nدليل الخلق والإيجاد\nمفاد هذا الدليل أن كل حادث لابد له من محدث، ولابد لكل مخلوق من خالق.\nومن أدلتها قال شيخ الإسلام ابن تيمية رحمه الله : «إن حدوث الحادث بلا محدث أحدثه معلوم البطلان بضرورة العقل. وهذا أمر مركوز في بني آدم حتى الصبيان؛ لو ضُرب الصبي ضربة، فقال: من ضربني؟ فقيل : ما ضربك أحد، لم يصدق عقله أن الضربة حدثت من غير فاعل...».\nيقوم دليل الخلق والإيجاد على مقدمتين أساسيتين، هما:\nأن الكون حادث غير قديم ويراد بها : أن الكون الذي نشهده له بداية في وجوده.\nأن الحادث لابد له من محدث، ويراد بها أن أي فعل يحدث في الوجود، لابد له من فاعل.\nدليل الإحكام والإتقان:\nيقوم دليل الإحكام والإتقان على مقدمتين أساسيتين، وهما :\nأن الكون متقن ومحمكم في خلقه، ويراد بها: أن الكون ركب في صورة معقدة جداً، لا يمكن اختزالها إلى أسباب راجعة إلى الكون نفسه، أو إلى الصدفة.\nأن الإتقان والإحكام لابد له من فاعل حكيم خبير ويراد بها أن مشاهد الإتقان في الوجود يتعذر أن تقع بغير فاعل عالم مريد حكيم قادر، يقوم بتخلقها وتقديرها على التفاصيل التي هي عليها.\nومن الأمثلة على دليل الإحكام والإتقان:\n(1) في الآفاق: قال الله تعالى : سَنُرِيهِمْ ءَايَتِنَا فِي الْآفَاقِ وَفِي أَنفُسِهِمْ حَتَّى يَتَبَيَّنَ لَهُمْ أَنَّهُ الْحَقُّ أَوَلَمْ يَكْفِ بِرَبِّكَ أَنَّهُ عَلَى كُلِّ شَيْءٍ شَهِيدٌ [فصلت: ٥٣].\nالكون لا يسير وحده، ولا يقوم بذاته، بدون مقيم له.\nالزوجية الموجودة في الكون.\nنسبة الأكسجين في الجو ٢١.\nلو كانت مياه المحيطات حلوة لتعفنت، حيث إن وجود الملح يمنع حصول التعفن والفساد.\n(۲) في الأنفس: قال الله تعالى: ﴿وَفِي أَنفُسِكُمْ أَفَلَا تُبْصِرُونَ﴾ [الذاريات: ٢١].\nتعرف الخلية بكونها الوحدة الأساسية لأجسام الكائنات الحية، على اختلاف أنواعها وأشكالها.\n٢ يستهلك جسم الإنسان حوالي ۱۲٥ مليون خلية في كل ثانية، ويعمل الجسم على تعويضها.\nفي داخل كل خلية أجسام دقيقة تحمل عوامل وراثية.",
-  "a_az": null,
+  "a_az": "Allahın mövcudluğuna üç əsas dəlil vardır:\n\n1. Şəri dəlillər\n2. Fitri dəlillər\n3. Əqli dəlillər\n\nBirinci: Şəri dəlillər\n\nQurani-Kərim və səhih sünnə Allahın mövcudluğuna və Onun Rəbbliyinə dəlalət edir.\n\nUca Allah buyurur:\n\n««Həqiqətən, Rəbbiniz göyləri və yeri altı gündə yaradan, sonra Ərşə istiva edən Allahdır. O, gecəni gündüzə bürüyür, gündüz də sürətlə onu izləyir. Günəş, ay və ulduzlar Onun əmrinə boyun əymişdir. Bilin ki, yaratmaq da, əmr etmək də Ona məxsusdur. Aləmlərin Rəbbi olan Allah nə qədər ucadır!»\n(Əraf, 54)»\n\nHəmçinin Uca Allah buyurur:\n\n««Həqiqətən, Rəbbiniz göyləri və yeri altı gündə yaratdı, sonra Ərşə istiva etdi. O, işləri idarə edir...»\n(Yunus, 3)»\n\nAllahın peyğəmbərlər vasitəsilə göndərdiyi şəriətlər də Onun mövcudluğuna dəlildir. Çünki bu şəriətlər Allahın elminə, hikmətinə və qullarına olan mərhəmətinə dəlalət edir.\n\nİkinci: Fitri dəlillər\n\nAllah insanları fitrətən Onu tanımağa və Ona iman etməyə meyilli şəkildə yaratmışdır.\n\nİnsan ağır və çətin vəziyyətə düşdükdə təbii olaraq Allaha yönəlir və Ondan yardım istəyir.\n\nUca Allah buyurur:\n\n««Onları dalğalar kölgələr kimi bürüdükdə dini yalnız Ona məxsus edərək Allaha dua edərlər. Lakin Allah onları xilas edib quruya çıxardıqda onların bir qismi orta yolu tutur...»\n(Loğman, 32)»\n\nHəmçinin buyurur:\n\n««İnsana nemət verdiyimiz zaman Bizdən üz döndərər və uzaqlaşar. Ona bir şər toxunduqda isə uzun-uzadı dua edər».\n(İsra, 67 mənasına uyğun)»\n\nBu, insanın daxilində Yaradanına və Rəbbinə yönəlmək fitrətinin olduğunu göstərir.\n\nÜçüncü: Əqli dəlillər\n\nAğıl da Allahın mövcudluğuna dəlalət edir.\n\nKainatın mövcud olması, onun mükəmməl şəkildə yaradılması, nizamı və bütün hissələrinin bir-biri ilə uyğunluğu onun təsadüfən meydana gəlməsinin mümkün olmadığını göstərir.\n\nBu kainatın:\n\n- Yaradanı,\n- qüdrətli,\n- alim,\n- hikmət sahibi,\n- hər şeydən xəbərdar\n\nolan bir Rəbbi vardır.\n\nİbn Teymiyyə qeyd edir ki, məxluqatın mövcudluğu və onların xüsusiyyətləri Yaradanın mövcudluğuna və Onun kamillik sifətlərinə dəlalət edir.\n\nKainata və insanın özünə nəzər saldıqda Allahın qüdrətinə və hikmətinə çoxsaylı dəlillər görürük.\n\nMəsələn, insanın yaşaması üçün lazım olan havanın tərkibində oksigenin müəyyən nisbətdə olması, dənizlərin və okeanların tərkibi, insan bədənindəki hüceyrələrin quruluşu və onların bir-biri ilə mürəkkəb əlaqəsi təsadüfi ola bilməz.\n\nBütün bunlar hər şeyi bilən, qüdrətli və hikmət sahibi olan Yaradanın mövcudluğuna dəlalət edir.",
   "a_az_partial": null,
   "core": [
    "allah|الله|لله",
@@ -126,7 +126,8 @@ export const ENTRIES = [
   "not": [
    "fitri|fıtri|fitrət|fitret|fıtrat|فطري|فطرية|فطرة",
    "əqli|akli|aklî|عقلي|عقلية",
-   "şəri|şeri|شرعي|شرعية|شرعيه"
+   "şəri|şeri|شرعي|شرعية|شرعيه",
+   "bədəvi|bedevi|bedevinin|أعرابي|اعرابي|الأعرابي|أعرابيا"
   ],
   "amb": null,
   "ask": false,
@@ -152,9 +153,9 @@ export const ENTRIES = [
   "main": false,
   "label": "Allahın varlığına şəri dəlillər",
   "q_ar": "تنقسم الأدلة على وجود الله ﷻ إلى ثلاثة أنواع، عددها وبينها.",
-  "q_az": null,
+  "q_az": "Allahın mövcudluğuna neçə dəlil vardır?",
   "a_ar": "(1) الأدلة الشرعية:\nمن أدلتها :\n١- قال الله تعالى : إِنَّ رَبَّكُمُ اللَّهُ الَّذِي خَلَقَ السَّمَوَاتِ وَالْأَرْضَ فِي سِتَّةِ أَيَّامٍ ثُمَّ اسْتَوَى عَلَى الْعَرْشِ يُغْشِي الَّيْلَ النَّهَارَ يَطْلُبُهُ حَثِيثًا وَالشَّمْسَ وَالْقَمَرَ وَالنُّجُومَ مُسَخَّرَاتِ بِأَمْرِهِ أَلَا لَهُ الْخَلْقُ وَالْأَمْرُ تَبَارَكَ اللَّهُ رَبُّ الْعَالَمِينَ [الأعراف: ٥٤].\nقال الله تعالى: ﴿إِنَّ رَبَّكُمُ اللَّهُ الَّذِي خَلَقَ السَّمَوَاتِ وَالْأَرْضَ فِي سِتَّةِ أَيَّامٍ ثُمَّ اسْتَوَى عَلَى الْعَرْشِ يُدَبِّرُ الْأَمْرَ مَا مِن شَفِيرٍ إِلَّا مِنْ بَعْدِ إِذْنِهِ ذَلِكُمُ اللَّهُ رَبُّكُمْ فَاعْبُدُوهُ أَفَلَا تَذَكَّرُونَ ﴾ [يونس : ٣].\nوجود الشرائع؛ لأن وجود جميع الشرائع دالة على الخالق، وعلى كمال علمه وحكمته ورحمته.",
-  "a_az": null,
+  "a_az": "Birinci: Şəri dəlillər\n\nQurani-Kərim və səhih sünnə Allahın mövcudluğuna və Onun Rəbbliyinə dəlalət edir.\n\nUca Allah buyurur:\n\n««Həqiqətən, Rəbbiniz göyləri və yeri altı gündə yaradan, sonra Ərşə istiva edən Allahdır. O, gecəni gündüzə bürüyür, gündüz də sürətlə onu izləyir. Günəş, ay və ulduzlar Onun əmrinə boyun əymişdir. Bilin ki, yaratmaq da, əmr etmək də Ona məxsusdur. Aləmlərin Rəbbi olan Allah nə qədər ucadır!»\n(Əraf, 54)»\n\nHəmçinin Uca Allah buyurur:\n\n««Həqiqətən, Rəbbiniz göyləri və yeri altı gündə yaratdı, sonra Ərşə istiva etdi. O, işləri idarə edir...»\n(Yunus, 3)»\n\nAllahın peyğəmbərlər vasitəsilə göndərdiyi şəriətlər də Onun mövcudluğuna dəlildir. Çünki bu şəriətlər Allahın elminə, hikmətinə və qullarına olan mərhəmətinə dəlalət edir.",
   "a_az_partial": null,
   "core": [
    "dəlil|delil|ədillə|أدلة|دليل|برهان|kanıt",
@@ -186,9 +187,9 @@ export const ENTRIES = [
   "main": false,
   "label": "Allahın varlığına fitri dəlillər",
   "q_ar": "تنقسم الأدلة على وجود الله ﷻ إلى ثلاثة أنواع، عددها وبينها.",
-  "q_az": null,
+  "q_az": "Allahın mövcudluğuna neçə dəlil vardır?",
   "a_ar": "(٢) الأدلة الفطرية :\nالمراد بها : أصل الخلقة، وهي ما أوجد الله عليه الناس ابتداءً من الإيمان به وتوحيده.\nومن أدلتها :\nالافتقار الذاتي الموجود داخل نفس كل إنسان : ويظهر ذلك عند الابتلاءات والشدائد؛ حيث يلجأ الإنسان عند المصائب والمخاطر إلى الله تعالى وحده، مسلماً كان أو كافراً.\nمثال على ذلك عندما تأتيه المحن والشدائد قوله تعالى : ﴿وَإِذَا غَشِيَهُم مَوْجٌ كَالظُّلَلِ دَعَوُا اللَّهَ مُخْلِصِينَ لَهُ الَّذِينَ فَلَمَّا نَجَتَهُمْ إِلَى الْبَرِّ فَمِنْهُم مُقْتَصِدٌ وَمَا يَجْعَدُ بِعَايَاتِنَا إِلَّا كُلُّ خَتَارٍ كَفُورٍ ﴾ [لقمان: ۳۲].\nوعندما تمر المحنة وتأتي العافية والنعمة يعود الإنسان على ما كان عليه من مخالفة الفطرة، كقوله تعالى: وَإِذَا مَسَّكُمُ الضُّرُّ فِي الْبَحْرِ ضَلَّ مَن تَدْعُونَ إِلَّا إِيَّاهُ فَلَمَّا نَجَنَكُمْ إِلَى الْبَرَ أَعْرَضْتُمْ وَكَانَ الْإِنسَنُ كَفُورًا ﴾ [الإسراء: ٦٧].",
-  "a_az": null,
+  "a_az": "İkinci: Fitri dəlillər\n\nAllah insanları fitrətən Onu tanımağa və Ona iman etməyə meyilli şəkildə yaratmışdır.\n\nİnsan ağır və çətin vəziyyətə düşdükdə təbii olaraq Allaha yönəlir və Ondan yardım istəyir.\n\nUca Allah buyurur:\n\n««Onları dalğalar kölgələr kimi bürüdükdə dini yalnız Ona məxsus edərək Allaha dua edərlər. Lakin Allah onları xilas edib quruya çıxardıqda onların bir qismi orta yolu tutur...»\n(Loğman, 32)»\n\nHəmçinin buyurur:\n\n««İnsana nemət verdiyimiz zaman Bizdən üz döndərər və uzaqlaşar. Ona bir şər toxunduqda isə uzun-uzadı dua edər».\n(İsra, 67 mənasına uyğun)»\n\nBu, insanın daxilində Yaradanına və Rəbbinə yönəlmək fitrətinin olduğunu göstərir.",
   "a_az_partial": null,
   "core": [
    "fitri|fıtri|fitrət|fitret|fıtrat|فطري|فطرية|فطرة",
@@ -224,9 +225,9 @@ export const ENTRIES = [
   "main": false,
   "label": "Allahın varlığına əqli dəlillər",
   "q_ar": "تنقسم الأدلة على وجود الله ﷻ إلى ثلاثة أنواع، عددها وبينها.",
-  "q_az": null,
+  "q_az": "Allahın mövcudluğuna neçə dəlil vardır?",
   "a_ar": "(٣) الأدلة العقلية:\nومن أقوى الأدلة العقلية الدالة على وجود الله دليلان، هما:\nدليل الخلق والإيجاد\nمفاد هذا الدليل أن كل حادث لابد له من محدث، ولابد لكل مخلوق من خالق.\nومن أدلتها قال شيخ الإسلام ابن تيمية رحمه الله : «إن حدوث الحادث بلا محدث أحدثه معلوم البطلان بضرورة العقل. وهذا أمر مركوز في بني آدم حتى الصبيان؛ لو ضُرب الصبي ضربة، فقال: من ضربني؟ فقيل : ما ضربك أحد، لم يصدق عقله أن الضربة حدثت من غير فاعل...».\nيقوم دليل الخلق والإيجاد على مقدمتين أساسيتين، هما:\nأن الكون حادث غير قديم ويراد بها : أن الكون الذي نشهده له بداية في وجوده.\nأن الحادث لابد له من محدث، ويراد بها أن أي فعل يحدث في الوجود، لابد له من فاعل.\nدليل الإحكام والإتقان:\nيقوم دليل الإحكام والإتقان على مقدمتين أساسيتين، وهما :\nأن الكون متقن ومحمكم في خلقه، ويراد بها: أن الكون ركب في صورة معقدة جداً، لا يمكن اختزالها إلى أسباب راجعة إلى الكون نفسه، أو إلى الصدفة.\nأن الإتقان والإحكام لابد له من فاعل حكيم خبير ويراد بها أن مشاهد الإتقان في الوجود يتعذر أن تقع بغير فاعل عالم مريد حكيم قادر، يقوم بتخلقها وتقديرها على التفاصيل التي هي عليها.\nومن الأمثلة على دليل الإحكام والإتقان:\n(1) في الآفاق: قال الله تعالى : سَنُرِيهِمْ ءَايَتِنَا فِي الْآفَاقِ وَفِي أَنفُسِهِمْ حَتَّى يَتَبَيَّنَ لَهُمْ أَنَّهُ الْحَقُّ أَوَلَمْ يَكْفِ بِرَبِّكَ أَنَّهُ عَلَى كُلِّ شَيْءٍ شَهِيدٌ [فصلت: ٥٣].\nالكون لا يسير وحده، ولا يقوم بذاته، بدون مقيم له.\nالزوجية الموجودة في الكون.\nنسبة الأكسجين في الجو ٢١.\nلو كانت مياه المحيطات حلوة لتعفنت، حيث إن وجود الملح يمنع حصول التعفن والفساد.\n(۲) في الأنفس: قال الله تعالى: ﴿وَفِي أَنفُسِكُمْ أَفَلَا تُبْصِرُونَ﴾ [الذاريات: ٢١].\nتعرف الخلية بكونها الوحدة الأساسية لأجسام الكائنات الحية، على اختلاف أنواعها وأشكالها.\n٢ يستهلك جسم الإنسان حوالي ۱۲٥ مليون خلية في كل ثانية، ويعمل الجسم على تعويضها.\nفي داخل كل خلية أجسام دقيقة تحمل عوامل وراثية.",
-  "a_az": null,
+  "a_az": "Üçüncü: Əqli dəlillər\n\nAğıl da Allahın mövcudluğuna dəlalət edir.\n\nKainatın mövcud olması, onun mükəmməl şəkildə yaradılması, nizamı və bütün hissələrinin bir-biri ilə uyğunluğu onun təsadüfən meydana gəlməsinin mümkün olmadığını göstərir.\n\nBu kainatın:\n\n- Yaradanı,\n- qüdrətli,\n- alim,\n- hikmət sahibi,\n- hər şeydən xəbərdar\n\nolan bir Rəbbi vardır.\n\nİbn Teymiyyə qeyd edir ki, məxluqatın mövcudluğu və onların xüsusiyyətləri Yaradanın mövcudluğuna və Onun kamillik sifətlərinə dəlalət edir.\n\nKainata və insanın özünə nəzər saldıqda Allahın qüdrətinə və hikmətinə çoxsaylı dəlillər görürük.\n\nMəsələn, insanın yaşaması üçün lazım olan havanın tərkibində oksigenin müəyyən nisbətdə olması, dənizlərin və okeanların tərkibi, insan bədənindəki hüceyrələrin quruluşu və onların bir-biri ilə mürəkkəb əlaqəsi təsadüfi ola bilməz.\n\nBütün bunlar hər şeyi bilən, qüdrətli və hikmət sahibi olan Yaradanın mövcudluğuna dəlalət edir.",
   "a_az_partial": null,
   "core": [
    "əqli|akli|aklî|عقلي|عقلية",
@@ -328,10 +329,10 @@ export const ENTRIES = [
   "main": true,
   "label": "Kainat sonradan yaranıbsa, onu kim yaradıb?",
   "q_ar": "إذا كان الكون حادثاً، فمن أحدثه؟",
-  "q_az": "Əgər kainat sonradan meydana gəlibsə, bəs onu kim yaradıb?",
+  "q_az": "Kainat sonradan yaranıbsa, onu kim yaradıb?",
   "a_ar": "الجواب لا يخرج عن احتمالين اثنين، هما:\nالاحتمال الأول: أن الكون أوجد نفسه بنفسه:\nوهذا مستحيل لثلاثة أمور :\n١. يلزم من ذلك تقدم الكون على نفسه.\nفاقد الشيء لا يمكن أن يعطيه لنفسه ولا لغيره.\nالشيء المحدث في حال عدمه يستوي في حقه الوجود والعدم.\nالاحتمال الثاني: أن يكون قد أوجد هذا الكون فاعل غيره، خارج عن ذاته.",
-  "a_az": null,
-  "a_az_partial": "Bu suala veriləcək cavab iki ehtimaldan kənara çıxmır:\nBirinci ehtimal: Kainatın öz-özünü yaratması.\nBu, üç səbəbə görə qeyri-mümkündür:\nBu halda kainatın özündən əvvəl mövcud olması lazım gələrdi. Halbuki bir şeyin özündən əvvəl mövcud olması mümkün deyil.\nBir şeyə sahib olmayan kəs onu nə özünə, nə də başqasına verə bilər.\nYaradılmamışdan əvvəl mövcud olmayan bir şey üçün varlıq və yoxluq baxımından hər iki hal mümkündür. Buna görə də onun mövcud olması üçün onu var edən bir səbəb lazımdır.",
+  "a_az": "Əgər kainatın sonradan meydana gəldiyini qəbul ediriksə, onu kimin yaratdığı sualı ortaya çıxır.\n\nBu məsələdə iki ehtimal vardır:\n\nBirinci ehtimal: Kainat özünü özü yaradıb.\n\nBu, əqli baxımdan mümkün deyil.\n\nÇünki bir şey özünü yaratmazdan əvvəl mövcud olmalıdır. Halbuki özünü yaradan bir şey yaradılmamışdan əvvəl mövcud deyil.\n\nMövcud olmayan bir şey özünü necə yarada bilər?\n\nHəmçinin bir şey özündə olmayan bir şeyi başqasına verə bilməz.\n\nKainat yaranmazdan əvvəl mövcud deyildisə, özünü necə mövcud edə bilər?\n\nBundan əlavə, kainatın mövcudluğu ilə yoxluğu arasında heç bir fərq yox idisə, onu mövcudluğa çıxaran xarici bir səbəb olmadan öz-özünə mövcudluğu seçməsi mümkün deyil.\n\nİkinci ehtimal: Kainatı ondan kənarda olan bir Yaradan yaradıb.\n\nBu, doğru və ağla uyğun olan ehtimaldır.\n\nKainat yaradılmışdır və yaradılmış hər bir şeyin Yaradanı vardır.\n\nDeməli, kainatın Yaradanı vardır və həmin Yaradan kainatın özündən fərqli, onu yoxdan var edən Allahdır.",
+  "a_az_partial": null,
   "core": [
    "kainat|kâinat|evren|كون|aləm$|alem$",
    "yarad|yarat|xaliq|xalik|haliq|xaliq|xalq$|خالق|خلق|احداث|أحدث|محدث|ihdas|ehdas"
@@ -364,9 +365,9 @@ export const ENTRIES = [
   "main": true,
   "label": "Quranda insanın yaradıcısı olduğuna əqli dəlil",
   "q_ar": "ذكر في القرآن الكريم دليل عقلي يدل على أن هناك خالق للإنسان، اذكره وبينه.",
-  "q_az": null,
+  "q_az": "Qurani-Kərim bu məsələyə necə cavab verir?",
   "a_ar": "قال الله تعالى : أَمْ خُلِقُوا مِنْ غَيْرِ شَيْءٍ أَمْ هُمُ الْخَالِقُونَ ﴾ [الطور : ٣٥]؛ يعني أن الإنسان لم يخلق من غير خالق، وأنه لم يحدث نفسه.\nاقرأ رد العلامة الشيخ ابن العثيمين رحمه الله على الملاحدة في مسألة وجود الله ص ٦٣.",
-  "a_az": null,
+  "a_az": "Uca Allah buyurur:\n\n««Yoxsa onlar heç nədən yaradılıblar? Yaxud özləri yaradandırlar?»\n(Tur, 35)»\n\nBu ayə Allahın varlığını inkar edənlərin qarşısına açıq və məntiqi bir sual qoyur.\n\nİnsanlar:\n\n- heç bir səbəb olmadan öz-özünə meydana gəlməyiblər;\n- özlərini özləri yaratmayıblar.\n\nElə isə onları yaradan kimdir?\n\nCavab: Onları yaradan Allahdır.",
   "a_az_partial": null,
   "core": [
    "insan|bəşər|beşer|إنسان|انسان|بشر",
@@ -399,9 +400,9 @@ export const ENTRIES = [
   "main": true,
   "label": "Allahın yaradıcı olduğuna əqli dəlillər",
   "q_ar": "أعط أدلة عقلية تبين وجود الله ﷻ وأنه هو الخالق لهذا الكون.",
-  "q_az": null,
+  "q_az": "Bu məsələyə əqli nümunə nədir?",
   "a_ar": "١ - لو حدثك شخص عن قصر مشيد، أحاطت به الحدائق، وجرت بينها الأنهار، وملئ بالفرش والأسرة، وزين بأنواع الزينة، وقال لك: إن هذا القصر قد أوجد نفسه، أو وجد هكذا صدفة بدون موجد، لبادرت إلى إنكار ذلك وتكذيبه، وعددت حديثه سفهاً من القول؛ أفيجوز بعد ذلك أن يكون هذا الكون الواسع، بأرضه وسمائه قد أوجد نفسه، أو وجد هكذا بدون موجد ؟!\n٢ - وقد فهم هذا الدليل العقلي أعرابي يعيش في البادية، فلما سئل بم عرفت ربك ؟ قال : البعرة تدل على البعير، والأثر يدل على المسير، فسماء ذات أبراج، وأرض ذات فجاج، وبحار ذات أمواج ألا تدل على اللطيف الخبير؟",
-  "a_az": null,
+  "a_az": "Məsələn, bir sarayın öz-özünə meydana gəlməsi mümkün deyil.\n\nTəsəvvür edək ki, qarşımızda möhtəşəm bir saray vardır:\n\n- divarları müəyyən ölçüdədir;\n- qapıları müəyyən yerdədir;\n- otaqları müəyyən qaydada yerləşdirilib;\n- pəncərələri müəyyən şəkildə düzəldilib;\n- bütün hissələri bir-biri ilə uyğunlaşdırılıb.\n\nHeç bir ağıl sahibi belə bir sarayın öz-özünə və heç bir qurucusu olmadan meydana gəldiyini qəbul etməz.\n\nƏgər kiçik bir sarayın belə öz-özünə yaranması mümkün deyilsə, bəs bu nəhəng kainat necə öz-özünə yarana bilər?\n\nGöylərin, yerin, günəşin, ayın, ulduzların, dənizlərin, dağların, canlıların və insanın mükəmməl yaradılışı onların bir Yaradan tərəfindən yaradıldığını göstərir.\n\nBir bədəvinin söylədiyi məşhur söz\n\nBir bədəvidən Allahın varlığına necə dəlil gətirdiyi soruşulduqda belə demişdir:\n\n««Peyin dəvəyə, iz isə yolçunun keçməsinə dəlalət edir. Bürclərlə dolu göy, yollarla dolu yer və dalğalı dənizlər Lətif və Xəbərdar Allaha dəlalət etmirmi?»»\n\nBu söz çox mühüm bir əqli dəlili ifadə edir.\n\nÇünki:\n\n- peyin dəvənin olduğuna;\n- ayaq izi yolçunun keçdiyinə\n\ndəlalət edirsə, göydəki və yerdəki saysız-hesabsız əlamətlər də onları yaradan və idarə edən Uca Allahın mövcudluğuna dəlalət edir.\n\nKainatdakı bu möhtəşəm nizam və mükəmməllik onun təsadüfən meydana gəlməsini deyil, qüdrətli, hər şeyi bilən və hikmət sahibi olan Yaradan tərəfindən yaradıldığını göstərir.",
   "a_az_partial": null,
   "core": [
    "yarad|yarat|xaliq|xalik|haliq|xaliq|xalq$|خالق|خلق|احداث|أحدث|محدث|ihdas|ehdas",
@@ -430,14 +431,54 @@ export const ENTRIES = [
   }
  },
  {
+  "id": "t2-bedevi-sozu",
+  "topic": 2,
+  "main": false,
+  "label": "Bədəvinin məşhur sözü (peyin dəvəyə, iz yolçuya dəlalət edir)",
+  "q_ar": "أعط أدلة عقلية تبين وجود الله ﷻ وأنه هو الخالق لهذا الكون.",
+  "q_az": "Bu məsələyə əqli nümunə nədir?",
+  "a_ar": "٢ - وقد فهم هذا الدليل العقلي أعرابي يعيش في البادية، فلما سئل بم عرفت ربك ؟ قال : البعرة تدل على البعير، والأثر يدل على المسير، فسماء ذات أبراج، وأرض ذات فجاج، وبحار ذات أمواج ألا تدل على اللطيف الخبير؟",
+  "a_az": "Bir bədəvinin söylədiyi məşhur söz\n\nBir bədəvidən Allahın varlığına necə dəlil gətirdiyi soruşulduqda belə demişdir:\n\n««Peyin dəvəyə, iz isə yolçunun keçməsinə dəlalət edir. Bürclərlə dolu göy, yollarla dolu yer və dalğalı dənizlər Lətif və Xəbərdar Allaha dəlalət etmirmi?»»\n\nBu söz çox mühüm bir əqli dəlili ifadə edir.\n\nÇünki:\n\n- peyin dəvənin olduğuna;\n- ayaq izi yolçunun keçdiyinə\n\ndəlalət edirsə, göydəki və yerdəki saysız-hesabsız əlamətlər də onları yaradan və idarə edən Uca Allahın mövcudluğuna dəlalət edir.\n\nKainatdakı bu möhtəşəm nizam və mükəmməllik onun təsadüfən meydana gəlməsini deyil, qüdrətli, hər şeyi bilən və hikmət sahibi olan Yaradan tərəfindən yaradıldığını göstərir.",
+  "a_az_partial": null,
+  "core": [
+   "bədəvi|bedevi|bedevinin|أعرابي|اعرابي|الأعرابي|أعرابيا"
+  ],
+  "opt": [
+   "dəlil|delil|ədillə|أدلة|دليل|برهان|kanıt",
+   "allah|الله|لله",
+   "varlığ|varlıq|varlig|mövcud|movcud|vücud|وجود",
+   "dəvə|deve|bəərə|البعرة|البعير"
+  ],
+  "not": [],
+  "amb": null,
+  "ask": false,
+  "triggers": {
+   "az": [
+    "Bədəvi sözü",
+    "Bədəvinin sözü",
+    "Bədəvinin Allahın varlığına dəlili",
+    "Bədəvinin məşhur sözü",
+    "Bədəvi sözü Allahın varlığına necə dəlil gətirdi"
+   ],
+   "tr": [
+    "Bedevinin ünlü sözü",
+    "Bedevi Allah'ın varlığına nasıl delil getirdi"
+   ],
+   "ar": [
+    "قول الأعرابي البعرة تدل على البعير",
+    "دليل الأعرابي على وجود الله"
+   ]
+  }
+ },
+ {
   "id": "t3-tovhid-qismleri",
   "topic": 3,
   "main": true,
   "label": "Tövhidin qisimləri (üç növ)",
   "q_ar": "عدد أقسام التوحيد.",
-  "q_az": null,
+  "q_az": "Tövhidin neçə növü vardır?",
   "a_ar": "١ - توحيد الربوبية.\n٢- توحيد الألوهية.\n٣- توحيد الأسماء والصفات.",
-  "a_az": null,
+  "a_az": "Tövhid üç əsas növə bölünür:\n\n1. Rübubiyyət tövhidi\n\nAllahı Onun Rəbbliyinə aid olan fellərdə tək bilməkdir.\n\nYəni yaratmaq, ruzi vermək, diriltmək, öldürmək, idarə etmək və kainatda baş verən digər işlərin Allahın qüdrəti və iradəsi ilə həyata keçdiyini qəbul etməkdir.\n\n2. Uluhiyyət tövhidi\n\nİbadətin bütün növlərini yalnız Allaha yönəltmək və heç bir ibadəti Allahdan başqasına etməməkdir.\n\n3. Allahın ad və sifətləri tövhidi\n\nAllahın Öz Kitabında və ya Rəsulunun ﷺ dili ilə Özü üçün təsdiq etdiyi bütün ad və sifətləri təsdiq etmək və bu məsələdə Allahı tək bilməkdir.",
   "a_az_partial": null,
   "core": [
    "tövhid|tevhid|tavhid|tauhid|توحيد",
@@ -481,9 +522,9 @@ export const ENTRIES = [
   "main": true,
   "label": "Üç tövhidi bir ayədə cəm edən dəlil",
   "q_ar": "بين دليل من الكتاب يجمع أقسام التوحيد الثلاثة في آية واحدة.",
-  "q_az": null,
+  "q_az": "Qurani-Kərim bu üç növ tövhidi necə birlikdə ifadə etmişdir?",
   "a_ar": "قوله تعالى : رَبُّ السَّمَوَاتِ وَالْأَرْضِ وَمَا بَيْنَهُمَا فَاعْبُدْهُ وَاصْطَبِرْ لِعِبَدَتِهِ، هَلْ تَعْلَمُ لَهُ سَمِيًّا [مريم: ٦٥] .",
-  "a_az": null,
+  "a_az": "Uca Allah buyurur:\n\n««O, göylərin, yerin və onların arasında olanların Rəbbidir. Elə isə Ona ibadət et və Ona ibadətdə səbirli ol. Heç Ona bənzər birini tanıyırsanmı?»\n(Məryəm, 65)»\n\nBu ayədə üç tövhid növünə işarə vardır:\n\n«O, göylərin, yerin və onların arasında olanların Rəbbidir» — Rübubiyyət tövhididir.\n\n«Elə isə Ona ibadət et» — Uluhiyyət tövhididir.\n\n«Heç Ona bənzər birini tanıyırsanmı?» — Allahın zatında, adlarında və sifətlərində heç bir bənzərinin olmadığını göstərir.",
   "a_az_partial": null,
   "core": [
    "tövhid|tevhid|tavhid|tauhid|توحيد",
@@ -513,9 +554,9 @@ export const ENTRIES = [
   "main": true,
   "label": "Peyğəmbərlərin dəvət etdiyi baxımdan tövhidin qisimləri",
   "q_ar": "عدد أقسام التوحيد من حيث ما دعت إليه الرسل.",
-  "q_az": null,
+  "q_az": "Peyğəmbərlərin insanları dəvət etdiyi tövhid hansı iki əsas istiqamətdədir?",
   "a_ar": "١ - توحيد المعرفة والإثبات\n٢ - توحيد القصد والطلب.",
-  "a_az": null,
+  "a_az": "Peyğəmbərlərin dəvət etdiyi tövhid iki əsas istiqamətdə izah edilir:\n\n1. Mə‘rifət və isbat tövhidi\n\nAllahı tanımaq və Onun Özünü bizə tanıtdığı şəkildə Onun zatını, adlarını, sifətlərini və fellərini təsdiq etmək.\n\n2. Qəsd və tələb tövhidi\n\nBütün ibadətləri yalnız Allaha yönəltmək, yalnız Ona dua etmək və yalnız Ondan istəmək.",
   "a_az_partial": null,
   "core": [
    "tövhid|tevhid|tavhid|tauhid|توحيد",
@@ -547,9 +588,9 @@ export const ENTRIES = [
   "main": true,
   "label": "Mərifət və isbat tövhidinin tərifi",
   "q_ar": "عرف توحيد المعرفة والإثبات.",
-  "q_az": null,
+  "q_az": "Mə‘rifət və isbat tövhidi nədir?",
   "a_ar": "هو إثبات حقيقة ذات الرب تعالى وصفاته وأفعاله وأسمائه ليس كمثله شيء في ذلك كله.",
-  "a_az": null,
+  "a_az": "Mə‘rifət və isbat tövhidi — Allahın zatının, sifətlərinin, fellərinin və adlarının həqiqət olduğunu təsdiq etmək və bunların heç birində Allahı məxluqata bənzətməməkdir.\n\nYəni insan Allahı:\n\n- Öz zatında,\n- adlarında,\n- sifətlərində,\n- fellərində\n\ntək bilməli və bunları Qurani-Kərim və səhih sünnədə gəldiyi şəkildə təsdiq etməlidir.\n\nAllahın sifətlərini qəbul edərkən onları təhrif etmək, inkar etmək, necə olduğunu müəyyənləşdirmək və məxluqata bənzətmək olmaz.",
   "a_az_partial": null,
   "core": [
    "mərifət|marifet|merifet|marifat|معرفة",
@@ -564,7 +605,8 @@ export const ENTRIES = [
    "rübubiyy|rububiy|rububi|ربوب",
    "sifət|sifet|sifat|صفة|صفات",
    "qism|bölün|ayrıl|ayril|növ$|növü|növləri|kısım|çeşit|أقسام|قسم|أنواع|نوع|تنقسم|تقسيم",
-   "elmi$|ilmi|علمي"
+   "elmi$|ilmi|علمي",
+   "söz|sözü|sözlərinin|sözləri|kelime|kelimelerinin|كلمة|كلمتي"
   ],
   "amb": null,
   "ask": false,
@@ -622,9 +664,9 @@ export const ENTRIES = [
   "main": true,
   "label": "Mərifət və isbat tövhidinin bu adla adlanma səbəbi",
   "q_ar": "ما سبب تسمية هذا النوع من التوحيد (المعرفة والإثبات) بهذا الاسم؟",
-  "q_az": null,
+  "q_az": "Nə üçün buna “Mə‘rifət və isbat tövhidi” deyilir?",
   "a_ar": "المعرفة: لأن معرفة الله ﷻ إنما تكون بمعرفة أسمائه، وصفاته، وأفعاله ﷻ.\nالإثبات: لأن المطلوب فيه إثبات ما أثبته الله ﷻ لنفسه، أو أثبته له رسوله محمد ﷺ، من الأسماء والصفات، والأفعال.",
-  "a_az": null,
+  "a_az": "Buna mə‘rifət deyilir, çünki bu tövhid Allahı tanımağa əsaslanır.\n\nBuna isbat deyilir, çünki Allahın Öz Kitabında və Rəsulunun ﷺ dili ilə Özünə aid etdiyi:\n\n- adları,\n- sifətləri,\n- felləri\n\ntəsdiq etməkdən ibarətdir.\n\nDeməli, əvvəlcə Allah tanınır, sonra Onun Özünün və Rəsulunun ﷺ xəbər verdiyi xüsusiyyətlər təsdiq edilir.",
   "a_az_partial": null,
   "core": [
    "mərifət|marifet|merifet|marifat|معرفة",
@@ -653,14 +695,56 @@ export const ENTRIES = [
   }
  },
  {
+  "id": "t3-merife-isbat-menasi",
+  "topic": 3,
+  "main": false,
+  "label": "«Mə‘rifət» və «isbat» sözlərinin mənası",
+  "q_ar": "ما سبب تسمية هذا النوع من التوحيد (المعرفة والإثبات) بهذا الاسم؟",
+  "q_az": "“Mə‘rifət” və “isbat” sözlərinin mənası nədir?",
+  "a_ar": "المعرفة: لأن معرفة الله ﷻ إنما تكون بمعرفة أسمائه، وصفاته، وأفعاله ﷻ.\nالإثبات: لأن المطلوب فيه إثبات ما أثبته الله ﷻ لنفسه، أو أثبته له رسوله محمد ﷺ، من الأسماء والصفات، والأفعال.",
+  "a_az": "Mə‘rifət\n\nAllahı Onun adları, sifətləri və felləri vasitəsilə tanımaqdır.\n\nMəsələn, Allahın:\n\n- Ər-Rəhman — Rəhman;\n- Ər-Rəhim — Mərhəmətli;\n- Əl-Əlim — Hər şeyi Bilən;\n- Əs-Səmi — Hər şeyi Eşidən;\n- Əl-Bəsir — Hər şeyi Görən\n\nolduğunu bilmək Allahı Onun adları və sifətləri ilə tanımağa daxildir.\n\nİsbat\n\nAllahın Öz Kitabında və Rəsulunun ﷺ dili ilə təsdiq etdiyi şeyləri təsdiq etməkdir.\n\nYəni Allahın Özü haqqında nə təsdiq etdiyi və Rəsulunun ﷺ Onun haqqında nə xəbər verdiyi sabitdirsə, bunu qəbul etmək və təsdiqləməkdir.",
+  "a_az_partial": null,
+  "core": [
+   "mərifət|marifet|merifet|marifat|معرفة",
+   "isbat|ispat|isbat|إثبات|اثبات",
+   "sözü|sozu|sözün|sözlər|sözlərinin|sözləri|kelime|kelimelerinin|كلمة|كلمتي"
+  ],
+  "opt": [],
+  "not": [
+   "qism|bölün|ayrıl|ayril|növ$|növü|növləri|kısım|çeşit|أقسام|قسم|أنواع|نوع|تنقسم|تقسيم",
+   "səbəb|sebeb|niyə|niye|neden|nicin|nə üçün|why|adlan|anıl|لماذا|سبب|تسمية",
+   "tövhid|tevhid|tavhid|tauhid|توحيد",
+   "rübubiyy|rububiy|rububi|ربوب",
+   "sifət|sifet|sifat|صفة|صفات",
+   "elmi$|ilmi|علمي"
+  ],
+  "amb": null,
+  "ask": false,
+  "triggers": {
+   "az": [
+    "Mərifət və isbat sözlərinin mənası nədir",
+    "Mərifət sözü nədir isbat sözü nədir",
+    "Mərifət və isbat sözləri nə deməkdir"
+   ],
+   "tr": [
+    "Marifet ve isbat kelimelerinin anlamı nedir",
+    "Marifet ve isbat kelimeleri ne demektir"
+   ],
+   "ar": [
+    "معنى كلمتي المعرفة والإثبات",
+    "ما معنى كلمة المعرفة وكلمة الإثبات"
+   ]
+  }
+ },
+ {
   "id": "t3-merife-bolgusu",
   "topic": 3,
   "main": true,
   "label": "Mərifət və isbat bölgüsünə görə tövhidin qisimləri",
   "q_ar": "عدد أقسام التوحيد وفق تقسيم المعرفة والإثبات.",
-  "q_az": null,
+  "q_az": "Mə‘rifət və isbat baxımından tövhid hansı növlərə bölünür?",
   "a_ar": "١ - توحيد علمي خبري.\n٢ - توحيد عملي طلبي.",
-  "a_az": null,
+  "a_az": "Mə‘rifət və isbat tövhidi iki əsas hissəyə bölünür:\n\n1. Elmi-xəbəri tövhid\n\nAllahın zatı, adları, sifətləri və felləri haqqında Qurani-Kərim və sünnədə gələn məlumatları bilmək və təsdiq etməkdir.\n\n2. Əməli-tələb tövhidi\n\nAllahın qul üzərində olan haqqını yerinə yetirmək, yəni bütün ibadətləri yalnız Ona yönəltməkdir.",
   "a_az_partial": null,
   "core": [
    "mərifət|marifet|merifet|marifat|معرفة",
@@ -695,9 +779,9 @@ export const ENTRIES = [
   "main": true,
   "label": "Elmi-xəbəri tövhid niyə mərifət və isbat tövhididir",
   "q_ar": "علل: التوحيد العلمي الخبري هو توحيد المعرفة والإثبات.",
-  "q_az": null,
+  "q_az": "Nə üçün “elmi-xəbəri tövhid” adlandırılır?",
   "a_ar": "لأن مداره متوقف على العلم والخبر من الله ﷻ، ومن رسوله ﷺ.",
-  "a_az": null,
+  "a_az": "Bu tövhid elmi-xəbəri adlanır.\n\nÇünki onun əsasını Allahdan və Onun Rəsulundan ﷺ bizə gələn xəbərlər təşkil edir.\n\nİnsan Allahın:\n\n- zatını,\n- adlarını,\n- sifətlərini,\n- fellərini\n\nöz ağlı ilə müstəqil şəkildə müəyyənləşdirmir. Əksinə, bu barədə Qurani-Kərim və səhih sünnədə gələn xəbərlərə əsaslanır.\n\nBuna görə bu tövhid elmi və xəbər üzərində qurulmuşdur.",
   "a_az_partial": null,
   "core": [
    "elmi$|ilmi|علمي",
@@ -730,9 +814,9 @@ export const ENTRIES = [
   "main": true,
   "label": "Mərifət və isbat tövhidinin növləri",
   "q_ar": "عدد أنواع توحيد المعرفة والإثبات.",
-  "q_az": null,
+  "q_az": "Elmi-xəbəri tövhidin əsas növləri hansılardır?",
   "a_ar": "١ - توحيد الربوبية  ٢- توحيد الأسماء والصفات.",
-  "a_az": null,
+  "a_az": "Elmi-xəbəri tövhidin iki əsas növü vardır:\n\n1. Rübubiyyət tövhidi\n\nAllahı Onun Rəbbliyinə aid olan işlərdə tək bilmək:\n\n- yaratmaq;\n- ruzi vermək;\n- diriltmək;\n- öldürmək;\n- idarə etmək;\n- hökm etmək və s.\n\n2. Allahın ad və sifətləri tövhidi\n\nAllahın Qurani-Kərimdə və səhih sünnədə Özünə aid etdiyi bütün ad və sifətləri təsdiq etmək və Onu bu məsələdə tək bilməkdir.\n\nBeləliklə, Rübubiyyət tövhidi Allahın fellərini, ad və sifətlər tövhidi isə Allahın adlarını və sifətlərini tanımaq və təsdiq etməklə əlaqədardır.\n\nBu iki istiqamət birlikdə mə‘rifət və isbat tövhidinin əsasını təşkil edir.",
   "a_az_partial": null,
   "core": [
    "mərifət|marifet|merifet|marifat|معرفة",
@@ -764,9 +848,9 @@ export const ENTRIES = [
   "main": true,
   "label": "Rübubiyyət tövhidinin tərifi",
   "q_ar": "عرف توحيد الربوبية.",
-  "q_az": null,
+  "q_az": "Rübubiyyət tövhidini tərif edin.",
   "a_ar": "في اللغة الرب يأتي لعدة معان منها : المربي، والمالك. يقال: رب كل شيء: أي مالكه.\nفي الاصطلاح: هو إفراد الله بأفعاله.",
-  "a_az": null,
+  "a_az": "Rübubiyyət sözü ərəb dilində “Rəbb” sözündən götürülmüşdür.\n\n“Rəbb” sözünün mənaları arasında sahib, hökmran, idarə edən, tərbiyə edən və nemət verən mənaları vardır.\n\nTerminoloji baxımdan Rübubiyyət tövhidi — Allahı Özünə məxsus olan fellərində və işlərində tək bilməkdir.\n\nYəni:\n\n- yaratmaq yalnız Allaha məxsusdur;\n- ruzi vermək yalnız Allaha məxsusdur;\n- diriltmək və öldürmək yalnız Allahın əlindədir;\n- fayda və zərər vermək Allahın qüdrətindədir;\n- kainatı idarə edən yalnız Allahdır;\n- bütün işlərin həqiqi sahibi və hökmranı Allahdır.",
   "a_az_partial": null,
   "core": [
    "rübubiyy|rububiy|rububi|ربوب",
@@ -806,9 +890,9 @@ export const ENTRIES = [
   "main": true,
   "label": "Rübubiyyətə Quran və sünnədən dəlil",
   "q_ar": "عدد دليل من الكتاب والسنة على ربوبية الله ﷻ.",
-  "q_az": null,
+  "q_az": "Rübubiyyət tövhidinə hansı dəlillər vardır?",
   "a_ar": "من القرآن الكريم:\nقال الله تعالى : ﴿إِنَّ فِي خَلْقِ السَّمَوَاتِ وَالْأَرْضِ وَاخْتِلَافِ الَّيْلِ وَالنَّهَارِ وَالْفُلْكِ الَّتِي تَجْرِي فِي الْبَحْرِ بِمَا يَنفَعُ النَّاسَ وَمَا أَنزَلَ اللَّهُ مِنَ السَّمَاءِ مِن مَّاءٍ فَأَحْيَا بِهِ الْأَرْضَ بَعْدَ مَوْتِهَا وَبَثَّ فِيهَا مِن كُلِّ دَابَّةٍ وَتَصْرِيفِ الرِّيَاحِ وَالسَّحَابِ الْمُسَخَّرِ بَيْنَ السَّمَاءِ وَالْأَرْضِ لَآيَاتٍ لِقَوْمٍ يَعْقِلُونَ ﴾ [البقرة: ١٦٤].\nمن السنة النبوية:\nعن حذيفة بن اليمان ؓ قال : كان النبي ﷺ إذا أوى إلى فراشه، قال: «باسمك أموت وأحيا». وإذا قام، قال: «الحمد لله الذي أحيانا بعد ما أماتنا، وإليه النشور».",
-  "a_az": null,
+  "a_az": "Qurani-Kərimdə Rübubiyyət tövhidinə çoxlu dəlillər vardır.\n\nUca Allah buyurur:\n\n««Həqiqətən, göylərin və yerin yaradılmasında, gecə ilə gündüzün bir-birini əvəz etməsində, insanlara fayda verən şeylərlə dənizdə üzən gəmilərdə, Allahın göydən endirib onunla ölü torpağı diriltdiyi suda, orada hər cür canlı yaratmasında, küləkləri dəyişdirməsində və göylə yer arasında ram edilmiş buludlarda ağıl sahibləri üçün dəlillər vardır».\n(Bəqərə, 164)»\n\nBu ayədə Allahın Rəbbliyinə və Onun kainatı idarə etməsinə dair bir çox dəlil qeyd edilir.\n\nBunlardan:\n\n- göylərin və yerin yaradılması;\n- gecə ilə gündüzün bir-birini əvəz etməsi;\n- gəmilərin dənizdə üzməsi;\n- göydən yağışın endirilməsi;\n- yağış vasitəsilə ölü torpağın dirildilməsi;\n- müxtəlif canlıların yaradılması;\n- küləklərin müxtəlif istiqamətlərdə hərəkət etdirilməsi;\n- buludların göylə yer arasında idarə edilməsi.\n\nBütün bunlar kainatın öz-özünə idarə olunmadığını, onu yaradan və idarə edən Uca Allahın olduğunu göstərir.\n\nSual 3: Sünnədə Rübubiyyət tövhidinə dair dəlil varmı?\n\nBəli.\n\nHüzeyfə ibn əl-Yəman رضي الله عنه-dan rəvayət olunan hədisdə Peyğəmbərin ﷺ yatarkən belə dediyi bildirilir:\n\n««Sənin adınla ölür və dirilirəm».»\n\nPeyğəmbər ﷺ yuxudan oyandıqda isə belə deyərdi:\n\n««Bizi öldürdükdən sonra dirildən Allaha həmd olsun. Dönüş də yalnız Onadır».»\n\nBu zikr Allahın insanın həyatına və ölümünə sahib olduğunu göstərir.\n\nQul yuxuya getdikdə sanki kiçik bir ölüm halına keçir, oyandıqda isə Allah onu yenidən diriltmiş kimi olur.\n\nBu da Allahın Rəbb, həyat verən və öldürən olduğunu göstərən dəlillərdəndir.",
   "a_az_partial": null,
   "core": [
    "rübubiyy|rububiy|rububi|ربوب",
@@ -835,18 +919,93 @@ export const ENTRIES = [
   }
  },
  {
+  "id": "t4-quran-delil",
+  "topic": 4,
+  "main": false,
+  "label": "Rübubiyyətə Quran dəlili (Bəqərə, 164)",
+  "q_ar": "عدد دليل من الكتاب والسنة على ربوبية الله ﷻ.",
+  "q_az": "Rübubiyyət tövhidinə hansı dəlillər vardır?",
+  "a_ar": "من القرآن الكريم:\nقال الله تعالى : ﴿إِنَّ فِي خَلْقِ السَّمَوَاتِ وَالْأَرْضِ وَاخْتِلَافِ الَّيْلِ وَالنَّهَارِ وَالْفُلْكِ الَّتِي تَجْرِي فِي الْبَحْرِ بِمَا يَنفَعُ النَّاسَ وَمَا أَنزَلَ اللَّهُ مِنَ السَّمَاءِ مِن مَّاءٍ فَأَحْيَا بِهِ الْأَرْضَ بَعْدَ مَوْتِهَا وَبَثَّ فِيهَا مِن كُلِّ دَابَّةٍ وَتَصْرِيفِ الرِّيَاحِ وَالسَّحَابِ الْمُسَخَّرِ بَيْنَ السَّمَاءِ وَالْأَرْضِ لَآيَاتٍ لِقَوْمٍ يَعْقِلُونَ ﴾ [البقرة: ١٦٤].",
+  "a_az": "Qurani-Kərimdə Rübubiyyət tövhidinə çoxlu dəlillər vardır.\n\nUca Allah buyurur:\n\n««Həqiqətən, göylərin və yerin yaradılmasında, gecə ilə gündüzün bir-birini əvəz etməsində, insanlara fayda verən şeylərlə dənizdə üzən gəmilərdə, Allahın göydən endirib onunla ölü torpağı diriltdiyi suda, orada hər cür canlı yaratmasında, küləkləri dəyişdirməsində və göylə yer arasında ram edilmiş buludlarda ağıl sahibləri üçün dəlillər vardır».\n(Bəqərə, 164)»\n\nBu ayədə Allahın Rəbbliyinə və Onun kainatı idarə etməsinə dair bir çox dəlil qeyd edilir.\n\nBunlardan:\n\n- göylərin və yerin yaradılması;\n- gecə ilə gündüzün bir-birini əvəz etməsi;\n- gəmilərin dənizdə üzməsi;\n- göydən yağışın endirilməsi;\n- yağış vasitəsilə ölü torpağın dirildilməsi;\n- müxtəlif canlıların yaradılması;\n- küləklərin müxtəlif istiqamətlərdə hərəkət etdirilməsi;\n- buludların göylə yer arasında idarə edilməsi.\n\nBütün bunlar kainatın öz-özünə idarə olunmadığını, onu yaradan və idarə edən Uca Allahın olduğunu göstərir.",
+  "a_az_partial": null,
+  "core": [
+   "rübubiyy|rububiy|rububi|ربوب",
+   "dəlil|delil|ədillə|أدلة|دليل|برهان|kanıt",
+   "quran|qurandan|qurani|quranda|kitab|القرآن"
+  ],
+  "opt": [],
+  "not": [
+   "şirk|شرك",
+   "qism|bölün|ayrıl|ayril|növ$|növü|növləri|kısım|çeşit|أقسام|قسم|أنواع|نوع|تنقسم|تقسيم",
+   "sünnə|sunne|sünnədə|sünnədən|hədis|hedis|السنة|حديث",
+   "üsul|usul|metod|menhec|mənhəc|منهج|مناهج"
+  ],
+  "amb": null,
+  "ask": false,
+  "triggers": {
+   "az": [
+    "Rübubiyyət tövhidinə Qurandan dəlil",
+    "Allahın rübubiyyətinə Quran dəlili"
+   ],
+   "tr": [
+    "Rububiyet tevhidine Kur'an'dan delil"
+   ],
+   "ar": [
+    "دليل من القرآن على ربوبية الله"
+   ]
+  }
+ },
+ {
+  "id": "t4-sunne-delil",
+  "topic": 4,
+  "main": false,
+  "label": "Rübubiyyətə sünnə dəlili (Hüzeyfənin hədisi)",
+  "q_ar": "عدد دليل من الكتاب والسنة على ربوبية الله ﷻ.",
+  "q_az": "Sünnədə Rübubiyyət tövhidinə dair dəlil varmı?",
+  "a_ar": "من السنة النبوية:\nعن حذيفة بن اليمان ؓ قال : كان النبي ﷺ إذا أوى إلى فراشه، قال: «باسمك أموت وأحيا». وإذا قام، قال: «الحمد لله الذي أحيانا بعد ما أماتنا، وإليه النشور».",
+  "a_az": "Bəli.\n\nHüzeyfə ibn əl-Yəman رضي الله عنه-dan rəvayət olunan hədisdə Peyğəmbərin ﷺ yatarkən belə dediyi bildirilir:\n\n««Sənin adınla ölür və dirilirəm».»\n\nPeyğəmbər ﷺ yuxudan oyandıqda isə belə deyərdi:\n\n««Bizi öldürdükdən sonra dirildən Allaha həmd olsun. Dönüş də yalnız Onadır».»\n\nBu zikr Allahın insanın həyatına və ölümünə sahib olduğunu göstərir.\n\nQul yuxuya getdikdə sanki kiçik bir ölüm halına keçir, oyandıqda isə Allah onu yenidən diriltmiş kimi olur.\n\nBu da Allahın Rəbb, həyat verən və öldürən olduğunu göstərən dəlillərdəndir.",
+  "a_az_partial": null,
+  "core": [
+   "rübubiyy|rububiy|rububi|ربوب",
+   "dəlil|delil|ədillə|أدلة|دليل|برهان|kanıt",
+   "sünnə|sunne|sünnədə|sünnədən|sünnetten|hədis|hedis|السنة|حديث|الحديث"
+  ],
+  "opt": [],
+  "not": [
+   "şirk|شرك",
+   "qism|bölün|ayrıl|ayril|növ$|növü|növləri|kısım|çeşit|أقسام|قسم|أنواع|نوع|تنقسم|تقسيم",
+   "quran|qurandan|quranda|qurani|kur'an|kuran|القرآن|الكتاب"
+  ],
+  "amb": null,
+  "ask": false,
+  "triggers": {
+   "az": [
+    "Sünnədə Rübubiyyət tövhidinə dair dəlil varmı",
+    "Rübubiyyət tövhidinə sünnədən dəlil",
+    "Hüzeyfənin hədisi rübubiyyət dəlili"
+   ],
+   "tr": [
+    "Rububiyet tevhidine sünnetten delil"
+   ],
+   "ar": [
+    "دليل من السنة على ربوبية الله",
+    "دليل حديث حذيفة على ربوبية الله"
+   ]
+  }
+ },
+ {
   "id": "t4-quran-metodlari",
   "topic": 4,
   "main": true,
   "label": "Quranın rübubiyyət tövhidini bəyan etmə metodları",
   "q_ar": "عدد مناهج القرآن الكريم في بيان توحيد الربوبية.",
-  "q_az": null,
+  "q_az": "Qurani-Kərimdə Rübubiyyət tövhidini izah etmə üsulları",
   "a_ar": "(1) الاستدلال باستحالة صدور الوجود من العدم، قال الله تعالى : أَمْ خُلِقُوا مِنْ غَيْرِ شَيْءٍ أَمْ هُمُ الْخَالِقُونَ ) [الطور : ٣٥].\n(۲) الاستدلال بالتغير الذي في خلق الإنسان على خلق الله له، قال تعالى: وَلَقَدْ خَلَقْنَا الْإِنسَانَ مِن سُلَالَةٍ مِّن طِينٍ (٢) ثُمَّ جَعَلْنَهُ نُطْفَةً فِي قَرَارٍ مَّكِينٍ (١٣) ثُمَّ خَلَقْنَا النُّطْفَةَ عَلَقَةً فَخَلَقْنَا الْعَلَقَةَ مُضْغَةً فَخَلَقْنَا الْمُضْغَةَ عِظَامًا فَكَسَوْنَا الْعِظَامَ لَحْمًا ثُمَّ أَنشَأْنَهُ خَلْقَاءَ اخَرَ فَتَبَارَكَ اللَّهُ أَحْسَنُ الْخَالِقِينَ ﴾ [المؤمنون: ١٢-١٤].\n(۳) الاستدلال بإمكان العدم على المخلوقات على حدوثها، قال تعالى: ﴿أَلَمْ تَرَ أَنَّ اللَّهَ خَلَقَ السَّمَوَاتِ وَالْأَرْضَ بِالْحَقِّ إِن يَشَأْ يُذْهِبْكُمْ وَيَأْتِ بِخَلْقٍ جَدِيدٍ (٢) وَمَا ذَلِكَ عَلَى اللَّهِ بِعَزِيزِ [إبراهيم: ١٩-٢٠].\n(٤) الاستدلال بما في الكون من الإتقان على أن له خالقاً حكيماً، قال تعالى : الَّذِي خَلَقَ سَبْعَ سَمَوَاتٍ طِبَاقًا مَا تَرَى فِي خَلْقِ الرَّحْمَنِ مِن تَفَوُتٍ فَارْجِعِ الْبَصَرَ هَلْ تَرَى مِن فُطُورٍ (٣) ثُمَّ ارْجِعِ الْبَصَرَ كَرَّتَيْنِ يَنقَلِبْ إِلَيْكَ الْبَصَرُ خَاسِئًا وَهُوَ حَسِيرٌ [الملك: ٣-٤].\n(٥) الاستدلال بانفراد الرب في الخلق على استحقاقه للعبادة وحده، قال تعالى : مَا اتَّخَذَ اللَّهُ مِن وَلَدٍ وَمَا كَانَ مَعَهُ مِنْ إِلَهِ إِذًا لَّذَهَبَ كُلُّ إِلَهٍ بِمَا خَلَقَ وَلَعَلَا بَعْضُهُمْ عَلَى بَعْضٍ سُبْحَانَ اللَّهِ عَمَّا يَصِفُونَ ﴾ [المؤمنون: ٩١].",
-  "a_az": null,
+  "a_az": "Qurani-Kərim Rübubiyyət tövhidini müxtəlif üsullarla izah etmişdir.\n\nBirinci üsul: Heç nədən yaradılmanın mümkünsüzlüyünü göstərmək\n\nUca Allah buyurur:\n\n««Yoxsa onlar heç nədən yaradılıblar? Yaxud özləri yaradandırlar?»\n(Tur, 35)»\n\nBu ayədə iki ehtimal rədd edilir:\n\nBirinci:\n\nİnsanların heç bir Yaradan olmadan, heç nədən meydana gəlməsi.\n\nİkinci:\n\nİnsanların özlərini özlərinin yaratması.\n\nHər iki ehtimal batildir.\n\nÇünki insan mövcud olmamışdan əvvəl özünü yarada bilməz.\n\nDeməli, insanı yoxdan var edən bir Yaradan vardır və O da Uca Allahdır.\n\nİkinci üsul: İnsanın yaradılış mərhələlərini göstərmək\n\nUca Allah buyurur:\n\n««Həqiqətən, Biz insanı torpağın özündən yaratdıq. Sonra onu nütfə halında möhkəm bir yerdə yerləşdirdik. Sonra nütfəni laxtalanmış qana çevirdik, sonra laxtalanmış qanı bir parça ətə çevirdik, sonra o parçanı sümüklərə çevirdik, sonra sümükləri ətlə örtdük. Daha sonra onu başqa bir yaradılışla yaratdıq. Yaradanların ən gözəli olan Allah necə də ucadır!»\n(Muminun, 12–14)»\n\nİnsanın bu mərhələlərdən keçməsi təsadüfi ola bilməz.\n\nİnsan əvvəl torpaqdan, sonra nütfədən, sonra laxtalanmış qandan, sonra bir parça ətdən yaradılmış, daha sonra sümüklər əmələ gəlmiş və sümüklər ətlə örtülmüşdür.\n\nBütün bunlar Allahın:\n\n- qüdrətinə;\n- hikmətinə;\n- elminə;\n- yaratma qabiliyyətinə\n\ndəlalət edir.\n\nÜçüncü üsul: Yoxluğun mümkün olmasını göstərmək\n\nUca Allah buyurur:\n\n««Məgər görmürlərmi ki, Allah göyləri və yeri haqq olaraq yaratmışdır? Əgər istəsə, sizi yox edib yerinizə yeni bir məxluq gətirər».\n(İbrahim, 19–20)»\n\nBu ayə göstərir ki, insan və digər məxluqlar əzəldən mövcud deyildilər.\n\nOnların mövcud olması Allahın yaratması ilə baş vermişdir.\n\nAllah istəsə, mövcud olan məxluqları yox edib onların yerinə başqalarını gətirə bilər.\n\nBu isə Allahın mütləq qüdrət sahibi olduğuna dəlalət edir.\n\nDördüncü üsul: Kainatdakı kamillik və nizamı göstərmək\n\nUca Allah buyurur:\n\n««O, yeddi göyü təbəqə-təbəqə yaratmışdır. Rəhmanın yaratmasında heç bir uyğunsuzluq görə bilməzsən. Gözünü bir də çevir, görəsən, hər hansı bir çat görəcəksənmi? Sonra gözünü dəfələrlə çevir. Göz sənə aciz və yorğun halda geri dönəcək».\n(Mülk, 3–4)»\n\nKainatdakı nizam və uyğunluq onun hikmətli bir Yaradan tərəfindən yaradıldığını göstərir.\n\nGöylərin quruluşu, yerin yaradılması, gecə və gündüzün bir-birini izləməsi və məxluqatın bir-biri ilə uyğun şəkildə fəaliyyət göstərməsi Allahın kamil hikmətinə və qüdrətinə dəlildir.\n\nİnsan kainata nə qədər diqqətlə baxsa da, Allahın yaratmasında həqiqi bir qüsur tapa bilməz.\n\nBeşinci üsul: Yaratmağın yalnız Allaha məxsus olduğunu göstərmək\n\nUca Allah buyurur:\n\n««Allah heç bir övlad götürməmişdir və Onunla yanaşı heç bir məbud da yoxdur. Əks halda hər bir məbud öz yaratdığını götürüb aparar və onların bəzisi digərlərinə üstün gəlməyə çalışardı. Allah onların aid etdikləri sifətlərdən uzaqdır».\n(Muminun, 91)»\n\nBu ayə göstərir ki, həqiqi Yaradan yalnız Allahdır.\n\nƏgər Allahdan başqa müstəqil yaradan məbudlar olsaydı, hər biri öz yaratdıqlarını ayırıb aparardı və kainatda qarşıdurma və nizamsızlıq yaranardı.\n\nLakin kainatdakı vahid və mükəmməl nizam onun bir Rəbb tərəfindən idarə edildiyini göstərir.\n\nDeməli:\n\nYaradan yalnız Allahdır → Rəbb yalnız Allahdır → ibadətə layiq olan da yalnız Allahdır.\n\nBuna görə Rübubiyyət tövhidi insanı Uluhiyyət tövhidinə aparır.\n\nAllah yaratmaqda və kainatı idarə etməkdə tək olduğu kimi, ibadətdə də tək bilinməlidir.",
   "a_az_partial": null,
   "core": [
    "rübubiyy|rububiy|rububi|ربوب",
-   "metod|menhec|mənhəc|üsul|uslub|üslub|منهج|مناهج|اساليب|أساليب|bəyan|beyan|بيان|açıkla|acikla"
+   "metod|menhec|mənhəc|üsul|uslub|üslub|منهج|مناهج|اساليب|أساليب|bəyan|beyan|بيان|açıkla|acikla|izah"
   ],
   "opt": [],
   "not": [
@@ -857,7 +1016,9 @@ export const ENTRIES = [
   "triggers": {
    "az": [
     "Quran rübubiyyət tövhidini necə bəyan edir",
-    "Quranın rübubiyyət tövhidini bəyan etmə metodları"
+    "Quranın rübubiyyət tövhidini bəyan etmə metodları",
+    "Qurani-Kərimdə Rübubiyyət tövhidini izah etmə üsulları",
+    "Quranda Rübubiyyət tövhidini izah üsulları"
    ],
    "tr": [
     "Kur'an rububiyet tevhidini nasıl açıklar"
@@ -2626,6 +2787,171 @@ export const ENTRIES = [
    "ar": [
     "آثار الإيمان بصفات الله تعالى على العبد",
     "عدد آثار الإيمان بصفات الله"
+   ]
+  }
+ },
+ {
+  "id": "t4-usul-1",
+  "topic": 4,
+  "main": false,
+  "label": "Birinci üsul: heç nədən yaradılmanın mümkünsüzlüyü",
+  "q_ar": "عدد مناهج القرآن الكريم في بيان توحيد الربوبية.",
+  "q_az": "Qurani-Kərimdə Rübubiyyət tövhidini izah etmə üsulları",
+  "a_ar": "(1) الاستدلال باستحالة صدور الوجود من العدم، قال الله تعالى : أَمْ خُلِقُوا مِنْ غَيْرِ شَيْءٍ أَمْ هُمُ الْخَالِقُونَ ) [الطور : ٣٥].",
+  "a_az": "Birinci üsul: Heç nədən yaradılmanın mümkünsüzlüyünü göstərmək\n\nUca Allah buyurur:\n\n««Yoxsa onlar heç nədən yaradılıblar? Yaxud özləri yaradandırlar?»\n(Tur, 35)»\n\nBu ayədə iki ehtimal rədd edilir:\n\nBirinci:\n\nİnsanların heç bir Yaradan olmadan, heç nədən meydana gəlməsi.\n\nİkinci:\n\nİnsanların özlərini özlərinin yaratması.\n\nHər iki ehtimal batildir.\n\nÇünki insan mövcud olmamışdan əvvəl özünü yarada bilməz.\n\nDeməli, insanı yoxdan var edən bir Yaradan vardır və O da Uca Allahdır.",
+  "a_az_partial": null,
+  "core": [
+   "üsul|usul|metod|mənhəc|menhec|dəlil|delil|istidlal|منهج|مناهج|أساليب|اساليب|استدلال",
+   "birinci üsul|birinci usul|heç nədən|hec neden|mümkünsüz|mumkunsuz|mümkünsüzlüy|استحالة|باستحالة"
+  ],
+  "opt": [
+   "rübubiyy|rububiy|rububi|ربوب"
+  ],
+  "not": [],
+  "amb": null,
+  "ask": false,
+  "triggers": {
+   "az": [
+    "Heç nədən yaradılmanın mümkünsüzlüyü dəlili",
+    "Quranın birinci üsulu rübubiyyət tövhidini izah etmək"
+   ],
+   "tr": [
+    "Rububiyet tevhidini açıklamada birinci usul heçten yaratılmanın imkansızlığı"
+   ],
+   "ar": [
+    "الاستدلال باستحالة صدور الوجود من العدم"
+   ]
+  }
+ },
+ {
+  "id": "t4-usul-2",
+  "topic": 4,
+  "main": false,
+  "label": "İkinci üsul: insanın yaradılış mərhələləri",
+  "q_ar": "عدد مناهج القرآن الكريم في بيان توحيد الربوبية.",
+  "q_az": "Qurani-Kərimdə Rübubiyyət tövhidini izah etmə üsulları",
+  "a_ar": "(۲) الاستدلال بالتغير الذي في خلق الإنسان على خلق الله له، قال تعالى: وَلَقَدْ خَلَقْنَا الْإِنسَانَ مِن سُلَالَةٍ مِّن طِينٍ (٢) ثُمَّ جَعَلْنَهُ نُطْفَةً فِي قَرَارٍ مَّكِينٍ (١٣) ثُمَّ خَلَقْنَا النُّطْفَةَ عَلَقَةً فَخَلَقْنَا الْعَلَقَةَ مُضْغَةً فَخَلَقْنَا الْمُضْغَةَ عِظَامًا فَكَسَوْنَا الْعِظَامَ لَحْمًا ثُمَّ أَنشَأْنَهُ خَلْقَاءَ اخَرَ فَتَبَارَكَ اللَّهُ أَحْسَنُ الْخَالِقِينَ ﴾ [المؤمنون: ١٢-١٤].",
+  "a_az": "İkinci üsul: İnsanın yaradılış mərhələlərini göstərmək\n\nUca Allah buyurur:\n\n««Həqiqətən, Biz insanı torpağın özündən yaratdıq. Sonra onu nütfə halında möhkəm bir yerdə yerləşdirdik. Sonra nütfəni laxtalanmış qana çevirdik, sonra laxtalanmış qanı bir parça ətə çevirdik, sonra o parçanı sümüklərə çevirdik, sonra sümükləri ətlə örtdük. Daha sonra onu başqa bir yaradılışla yaratdıq. Yaradanların ən gözəli olan Allah necə də ucadır!»\n(Muminun, 12–14)»\n\nİnsanın bu mərhələlərdən keçməsi təsadüfi ola bilməz.\n\nİnsan əvvəl torpaqdan, sonra nütfədən, sonra laxtalanmış qandan, sonra bir parça ətdən yaradılmış, daha sonra sümüklər əmələ gəlmiş və sümüklər ətlə örtülmüşdür.\n\nBütün bunlar Allahın:\n\n- qüdrətinə;\n- hikmətinə;\n- elminə;\n- yaratma qabiliyyətinə\n\ndəlalət edir.",
+  "a_az_partial": null,
+  "core": [
+   "üsul|usul|metod|mənhəc|menhec|dəlil|delil|istidlal|منهج|مناهج|أساليب|اساليب|استدلال",
+   "ikinci üsul|ikinci usul|mərhələ|merhele|nütfə|nutfe|laxtalanmış|مراحل|التغير|بالتغير"
+  ],
+  "opt": [
+   "rübubiyy|rububiy|rububi|ربوب"
+  ],
+  "not": [],
+  "amb": null,
+  "ask": false,
+  "triggers": {
+   "az": [
+    "İnsanın yaradılış mərhələləri dəlili",
+    "Quranın ikinci üsulu rübubiyyət tövhidini izah etmək"
+   ],
+   "tr": [
+    "Rububiyet tevhidini açıklamada ikinci usul insanın yaratılış evreleri"
+   ],
+   "ar": [
+    "الاستدلال بالتغير الذي في خلق الإنسان"
+   ]
+  }
+ },
+ {
+  "id": "t4-usul-3",
+  "topic": 4,
+  "main": false,
+  "label": "Üçüncü üsul: yoxluğun mümkün olması",
+  "q_ar": "عدد مناهج القرآن الكريم في بيان توحيد الربوبية.",
+  "q_az": "Qurani-Kərimdə Rübubiyyət tövhidini izah etmə üsulları",
+  "a_ar": "(۳) الاستدلال بإمكان العدم على المخلوقات على حدوثها، قال تعالى: ﴿أَلَمْ تَرَ أَنَّ اللَّهَ خَلَقَ السَّمَوَاتِ وَالْأَرْضَ بِالْحَقِّ إِن يَشَأْ يُذْهِبْكُمْ وَيَأْتِ بِخَلْقٍ جَدِيدٍ (٢) وَمَا ذَلِكَ عَلَى اللَّهِ بِعَزِيزِ [إبراهيم: ١٩-٢٠].",
+  "a_az": "Üçüncü üsul: Yoxluğun mümkün olmasını göstərmək\n\nUca Allah buyurur:\n\n««Məgər görmürlərmi ki, Allah göyləri və yeri haqq olaraq yaratmışdır? Əgər istəsə, sizi yox edib yerinizə yeni bir məxluq gətirər».\n(İbrahim, 19–20)»\n\nBu ayə göstərir ki, insan və digər məxluqlar əzəldən mövcud deyildilər.\n\nOnların mövcud olması Allahın yaratması ilə baş vermişdir.\n\nAllah istəsə, mövcud olan məxluqları yox edib onların yerinə başqalarını gətirə bilər.\n\nBu isə Allahın mütləq qüdrət sahibi olduğuna dəlalət edir.",
+  "a_az_partial": null,
+  "core": [
+   "üsul|usul|metod|mənhəc|menhec|dəlil|delil|istidlal|منهج|مناهج|أساليب|اساليب|استدلال",
+   "üçüncü üsul|ucuncu usul|yoxluğun|yoxluq|yoxluğ|mümkünlüy|إمكان|بإمكان"
+  ],
+  "opt": [
+   "rübubiyy|rububiy|rububi|ربوب"
+  ],
+  "not": [],
+  "amb": null,
+  "ask": false,
+  "triggers": {
+   "az": [
+    "Yoxluğun mümkün olması dəlili",
+    "Quranın üçüncü üsulu rübubiyyət tövhidini izah etmək"
+   ],
+   "tr": [
+    "Rububiyet tevhidini açıklamada üçüncü usul yokluğun mümkün olması"
+   ],
+   "ar": [
+    "الاستدلال بإمكان العدم على المخلوقات"
+   ]
+  }
+ },
+ {
+  "id": "t4-usul-4",
+  "topic": 4,
+  "main": false,
+  "label": "Dördüncü üsul: kainatdakı kamillik və nizam",
+  "q_ar": "عدد مناهج القرآن الكريم في بيان توحيد الربوبية.",
+  "q_az": "Qurani-Kərimdə Rübubiyyət tövhidini izah etmə üsulları",
+  "a_ar": "(٤) الاستدلال بما في الكون من الإتقان على أن له خالقاً حكيماً، قال تعالى : الَّذِي خَلَقَ سَبْعَ سَمَوَاتٍ طِبَاقًا مَا تَرَى فِي خَلْقِ الرَّحْمَنِ مِن تَفَوُتٍ فَارْجِعِ الْبَصَرَ هَلْ تَرَى مِن فُطُورٍ (٣) ثُمَّ ارْجِعِ الْبَصَرَ كَرَّتَيْنِ يَنقَلِبْ إِلَيْكَ الْبَصَرُ خَاسِئًا وَهُوَ حَسِيرٌ [الملك: ٣-٤].",
+  "a_az": "Dördüncü üsul: Kainatdakı kamillik və nizamı göstərmək\n\nUca Allah buyurur:\n\n««O, yeddi göyü təbəqə-təbəqə yaratmışdır. Rəhmanın yaratmasında heç bir uyğunsuzluq görə bilməzsən. Gözünü bir də çevir, görəsən, hər hansı bir çat görəcəksənmi? Sonra gözünü dəfələrlə çevir. Göz sənə aciz və yorğun halda geri dönəcək».\n(Mülk, 3–4)»\n\nKainatdakı nizam və uyğunluq onun hikmətli bir Yaradan tərəfindən yaradıldığını göstərir.\n\nGöylərin quruluşu, yerin yaradılması, gecə və gündüzün bir-birini izləməsi və məxluqatın bir-biri ilə uyğun şəkildə fəaliyyət göstərməsi Allahın kamil hikmətinə və qüdrətinə dəlildir.\n\nİnsan kainata nə qədər diqqətlə baxsa da, Allahın yaratmasında həqiqi bir qüsur tapa bilməz.",
+  "a_az_partial": null,
+  "core": [
+   "üsul|usul|metod|mənhəc|menhec|dəlil|delil|istidlal|منهج|مناهج|أساليب|اساليب|استدلال",
+   "dördüncü üsul|dorduncu usul|kamillik|kamilliyi|الكمال|بما في الكون"
+  ],
+  "opt": [
+   "rübubiyy|rububiy|rububi|ربوب"
+  ],
+  "not": [],
+  "amb": null,
+  "ask": false,
+  "triggers": {
+   "az": [
+    "Kainatdakı kamillik rübubiyyət dəlili",
+    "Quranın dördüncü üsulu rübubiyyət tövhidini izah etmək"
+   ],
+   "tr": [
+    "Rububiyet tevhidini açıklamada dördüncü usul kâinattaki kamillik"
+   ],
+   "ar": [
+    "الاستدلال بما في الكون من الإتقان"
+   ]
+  }
+ },
+ {
+  "id": "t4-usul-5",
+  "topic": 4,
+  "main": false,
+  "label": "Beşinci üsul: yaratmağın yalnız Allaha məxsus olması",
+  "q_ar": "عدد مناهج القرآن الكريم في بيان توحيد الربوبية.",
+  "q_az": "Qurani-Kərimdə Rübubiyyət tövhidini izah etmə üsulları",
+  "a_ar": "(٥) الاستدلال بانفراد الرب في الخلق على استحقاقه للعبادة وحده، قال تعالى : مَا اتَّخَذَ اللَّهُ مِن وَلَدٍ وَمَا كَانَ مَعَهُ مِنْ إِلَهِ إِذًا لَّذَهَبَ كُلُّ إِلَهٍ بِمَا خَلَقَ وَلَعَلَا بَعْضُهُمْ عَلَى بَعْضٍ سُبْحَانَ اللَّهِ عَمَّا يَصِفُونَ ﴾ [المؤمنون: ٩١].",
+  "a_az": "Beşinci üsul: Yaratmağın yalnız Allaha məxsus olduğunu göstərmək\n\nUca Allah buyurur:\n\n««Allah heç bir övlad götürməmişdir və Onunla yanaşı heç bir məbud da yoxdur. Əks halda hər bir məbud öz yaratdığını götürüb aparar və onların bəzisi digərlərinə üstün gəlməyə çalışardı. Allah onların aid etdikləri sifətlərdən uzaqdır».\n(Muminun, 91)»\n\nBu ayə göstərir ki, həqiqi Yaradan yalnız Allahdır.\n\nƏgər Allahdan başqa müstəqil yaradan məbudlar olsaydı, hər biri öz yaratdıqlarını ayırıb aparardı və kainatda qarşıdurma və nizamsızlıq yaranardı.\n\nLakin kainatdakı vahid və mükəmməl nizam onun bir Rəbb tərəfindən idarə edildiyini göstərir.\n\nDeməli:\n\nYaradan yalnız Allahdır → Rəbb yalnız Allahdır → ibadətə layiq olan da yalnız Allahdır.\n\nBuna görə Rübubiyyət tövhidi insanı Uluhiyyət tövhidinə aparır.\n\nAllah yaratmaqda və kainatı idarə etməkdə tək olduğu kimi, ibadətdə də tək bilinməlidir.",
+  "a_az_partial": null,
+  "core": [
+   "üsul|usul|metod|mənhəc|menhec|dəlil|delil|istidlal|منهج|مناهج|أساليب|اساليب|استدلال",
+   "beşinci üsul|besinci usul|yaratmağın yalnız|yaratmagin yalniz|infirad|انفراد|بانفراد"
+  ],
+  "opt": [
+   "rübubiyy|rububiy|rububi|ربوب"
+  ],
+  "not": [],
+  "amb": null,
+  "ask": false,
+  "triggers": {
+   "az": [
+    "Yaratmağın yalnız Allaha məxsus olması dəlili",
+    "Quranın beşinci üsulu rübubiyyət tövhidini izah etmək"
+   ],
+   "tr": [
+    "Rububiyet tevhidini açıklamada beşinci usul yaratmada tek olmak"
+   ],
+   "ar": [
+    "الاستدلال بانفراد الرب في الخلق"
    ]
   }
  }

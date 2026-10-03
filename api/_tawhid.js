@@ -283,6 +283,9 @@ function introReply(lang) {
   ].join("\n\n");
 }
 
+// Azərbaycanca sıra sonluğu: 3-cü, 4-cü, 6-cı, 9-cu, 10-cu ...
+const AZ_SUFFIX = { 1: "-ci", 2: "-ci", 3: "-cü", 4: "-cü", 5: "-ci", 6: "-cı", 7: "-ci", 8: "-ci", 9: "-cu", 10: "-cu", 11: "-ci" };
+
 function topicQuestionsReply(n, lang) {
   const t = TOPICS.find((x) => x.n === n);
   const mains = ENTRIES.filter((e) => e.topic === n);
@@ -294,7 +297,7 @@ function topicQuestionsReply(n, lang) {
     const tag = e.a_az ? "" : e.a_az_partial ? " (tərcümə qismən)" : " (ərəbcə)";
     return `${i + 1}. ${e.main ? e.q_az || e.label : e.label}${tag}`;
   });
-  return [`${headerAz()} — ${n}-ci mövzu: ${t.title_az}`, "Bu mövzuda hazır cavabı olan suallar:\n" + items.join("\n"), "Cavabı görmək üçün sualı yaz.", SRC_AZ].join("\n\n");
+  return [`${headerAz()} — ${n}${AZ_SUFFIX[n] || "-ci"} mövzu: ${t.title_az}`, "Bu mövzuda hazır cavabı olan suallar:\n" + items.join("\n"), "Cavabı görmək üçün sualı yaz.", SRC_AZ].join("\n\n");
 }
 
 // ---------- cavabın formatı ----------

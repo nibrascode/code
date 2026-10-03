@@ -92,7 +92,19 @@ function block(topics, t, spec, where) {
     if (rel < 0) throw new Error(`${where}: to tapılmadı: ${spec.to}`);
     end = start + 1 + rel;
   }
-  return trimBlank(ls.slice(start, end));
+  const own = trimBlank(ls.slice(start, end));
+  // through: sonrakı sualları da (öz «Sual K: ...» sətri ilə) bu blokun davamı kimi götür (az.txt-də ardıcıl qalır)
+  if (spec.through && !spec.from && !spec.to) {
+    const out = [...own];
+    for (let k = spec.q + 1; k <= spec.through; k++) {
+      const nq = topics[t]?.questions[k - 1];
+      if (!nq) throw new Error(`${where}: ${t}-ci mövzu ${k}-ci sual tapılmadı`);
+      out.push("", `Sual ${k}: ${nq.text}`, ...nq.lines);
+    }
+    while (out.length && !out[out.length - 1].trim()) out.pop();
+    return out;
+  }
+  return own;
 }
 
 export function build() {

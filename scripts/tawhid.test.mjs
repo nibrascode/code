@@ -44,8 +44,8 @@ test("məlumat: hər girişdə id, sual, ərəbcə cavab, triggerlər var; id-l�
   }
   const withAz = ENTRIES.filter((e) => e.a_az);
   const partial = ENTRIES.filter((e) => e.a_az_partial);
-  assert.ok(withAz.length >= 30, "tərcüməsi olan: " + withAz.length);
-  assert.ok(partial.length >= 2);
+  assert.ok(withAz.length >= 70, "tərcüməsi olan: " + withAz.length);
+  assert.equal(partial.length, 0, "qismən tərcümə qalmayıb");
 });
 
 test("a_az az.txt-dəki blokla eynidir (dəyişdirilməyib)", () => {
@@ -71,8 +71,43 @@ test("a_az az.txt-dəki blokla eynidir (dəyişdirilməyib)", () => {
   }
   assert.ok(AZ_TXT.includes("Dördüncü qayda: Allahın adları həm keçişli") && AZ_TXT.includes("Beşinci qayda: Allahın adları Onun zatına"));
   assert.ok(ENTRIES.filter((x) => x.topic === 9).length >= 7 && ENTRIES.filter((x) => x.topic === 10).length >= 5);
-  // 3 və 4-cü mövzularda hələ tərcümə yoxdur (uydurulmayıb)
-  for (const e of ENTRIES.filter((x) => [3, 4].includes(x.topic))) assert.equal(e.a_az, null, e.id);
+  // 1–4-cü mövzular istifadəçinin son tərcüməsi ilə tamdır; yalnız ərəbcə mənbədə ayrıca olan, Azərbaycan mətnində ayrıca sualı olmayan 3 giriş tərcümə gözləyir
+  const noAz = ENTRIES.filter((x) => !x.a_az && !x.a_az_partial).map((x) => x.id).sort();
+  assert.deepEqual(noAz, ["t1-ihkam-itqan", "t1-xalq-icad", "t3-niye-bir-ad"]);
+  for (const e of ENTRIES.filter((x) => x.topic <= 4 && !noAz.includes(x.id))) assert.ok(e.a_az, e.id);
+  // mövzu başlıqları (Azərbaycanca, tərcümədən)
+  assert.equal(TOPICS[0].title_az, "Rübubiyyət tövhidi və onun dəlilləri");
+  assert.equal(TOPICS[1].title_az, "Allahın varlığını inkar edənlərin iddialarına cavab");
+  assert.equal(TOPICS[2].title_az, "Mə‘rifət və isbat tövhidinin mənası və növləri");
+  assert.equal(TOPICS[3].title_az, "Rübubiyyət tövhidinin tərifi, dəlilləri və Qurani-Kərimdə izah üsulları");
+  for (const t of TOPICS) assert.ok(t.title_az_translated, "mövzu " + t.n);
+  // 1–4-cü mövzu mətnləri sözbəsöz: «» formatı və (Surə, N) sətirləri dəyişməyib
+  const byId = (id) => ENTRIES.find((x) => x.id === id);
+  assert.ok(byId("t1-sheri-delil").a_az.includes("««Həqiqətən, Rəbbiniz göyləri və yeri altı gündə yaradan, sonra Ərşə istiva edən Allahdır."));
+  assert.ok(byId("t1-sheri-delil").a_az.includes("Aləmlərin Rəbbi olan Allah nə qədər ucadır!»\n(Əraf, 54)»"));
+  assert.ok(byId("t1-sheri-delil").a_az.includes("(Yunus, 3)»"));
+  assert.ok(byId("t1-fitri-delil").a_az.includes("(Loğman, 32)»") && byId("t1-fitri-delil").a_az.includes("(İsra, 67 mənasına uyğun)»"));
+  assert.ok(byId("t2-insan-yaradici").a_az.includes("««Yoxsa onlar heç nədən yaradılıblar? Yaxud özləri yaradandırlar?»\n(Tur, 35)»"));
+  assert.ok(byId("t2-bedevi-sozu").a_az.includes("««Peyin dəvəyə, iz isə yolçunun keçməsinə dəlalət edir."));
+  assert.ok(byId("t3-uc-tovhid-bir-ayede").a_az.includes("(Məryəm, 65)»"));
+  assert.ok(byId("t4-quran-delil").a_az.includes("(Bəqərə, 164)»"));
+  assert.ok(byId("t4-sunne-delil").a_az.includes("««Sənin adınla ölür və dirilirəm».»"));
+  assert.ok(byId("t4-usul-2").a_az.includes("(Muminun, 12–14)»"));
+  assert.ok(byId("t4-usul-3").a_az.includes("(İbrahim, 19–20)»"));
+  assert.ok(byId("t4-usul-4").a_az.includes("(Mülk, 3–4)»"));
+  assert.ok(byId("t4-usul-5").a_az.includes("(Muminun, 91)»"));
+  assert.ok(byId("t4-usul-5").a_az.includes("Yaradan yalnız Allahdır → Rəbb yalnız Allahdır → ibadətə layiq olan da yalnız Allahdır."));
+  // "---" ayırıcıları və böyük hərfli başlıqlar az.txt-də qalmayıb
+  assert.ok(!/^---$/m.test(AZ_TXT) && !/MÖVZU:/.test(AZ_TXT));
+  // sual→giriş uyğunluğu (məna üzrə)
+  assert.equal(byId("t1-iman-umur").q_az, "Rübubiyyət tövhidini həyata keçirmək üçün neçə məsələni bilmək lazımdır?");
+  assert.equal(byId("t4-rububiyyet-delil").a_az.split("\n").filter((l) => l.startsWith("Sual 3: ")).length, 1);
+  assert.equal(byId("t4-quran-metodlari").q_az, "Qurani-Kərimdə Rübubiyyət tövhidini izah etmə üsulları");
+  assert.equal(byId("t3-adlanma-sebebi").q_az, "Nə üçün buna “Mə‘rifət və isbat tövhidi” deyilir?");
+  // üsul alt-girişləri öz ərəbcə bəndi ilə
+  assert.ok(byId("t4-usul-1").a_ar.startsWith("(1) الاستدلال باستحالة") && byId("t4-usul-1").a_az.startsWith("Birinci üsul:"));
+  assert.ok(byId("t4-usul-5").a_ar.startsWith("(٥) الاستدلال بانفراد") && byId("t4-usul-5").a_az.startsWith("Beşinci üsul:"));
+  assert.ok(!byId("t4-usul-2").a_az.includes("Üçüncü üsul"));
 });
 
 test("sual və ərəbcə cavab sayları mənbə ilə uyğundur", () => {
@@ -157,6 +192,27 @@ const POSITIVE = [
   ["Allahın felləri keçişli və keçişsiz", ["t11-felleri-novleri"]],
   ["Allahın sifətlərinə iman etməyin təsirləri", ["t11-sifet-tesirleri"]],
   ["ما هي الصفات الذاتية", ["t11-zati-sifetler"]],
+  ["Rübubiyyət tövhidini həyata keçirmək üçün neçə məsələni bilmək lazımdır", ["t1-iman-umur"]],
+  ["Allahın mövcudluğuna neçə dəlil var", ["t1-delil-novleri"]],
+  ["Allahın mövcudluğuna neçə dəlil vardır", ["t1-delil-novleri"]],
+  ["şəri dəlil nədir", ["t1-sheri-delil"]],
+  ["Fitri dəlil nədir", ["t1-fitri-delil", "t7-fitri-delil"]],
+  ["Allahın varlığına əqli dəlillər", ["t1-aqli-delil"]],
+  ["Kainatı kim yaradıb", ["t2-kainat-kim"]],
+  ["Kainat sonradan yaranıbsa onu kim yaradıb", ["t2-kainat-kim"]],
+  ["bədəvi sözü", ["t2-bedevi-sozu"]],
+  ["Allahın kainatın yaradıcısı olduğuna əqli dəlillər", ["t2-aqli-yaradici"]],
+  ["tövhidin neçə növü var", ["t3-tovhid-qismleri"]],
+  ["mə'rifət və isbat tövhidi nədir", ["t3-merife-isbat-terif"]],
+  ["Mərifət və isbat tövhidi niyə bu adla adlanır", ["t3-adlanma-sebebi"]],
+  ["Mərifət və isbat sözlərinin mənası nədir", ["t3-merife-isbat-menasi"]],
+  ["elmi-xəbəri tövhid", ["t3-elmi-xeberi"]],
+  ["Rübubiyyət tövhidini tərif edin", ["t4-rububiyyet-terif"]],
+  ["Quranda Rübubiyyət tövhidini izah üsulları", ["t4-quran-metodlari"]],
+  ["Rübubiyyət tövhidinə Quran və sünnədən dəlil", ["t4-rububiyyet-delil"]],
+  ["Sünnədə Rübubiyyət tövhidinə dair dəlil varmı", ["t4-sunne-delil"]],
+  ["Rübubiyyət tövhidinə Quran dəlili", ["t4-quran-delil"]],
+  ["Birinci üsul rübubiyyət", ["t4-usul-1"]],
   ["tövhid", ["intro"]],
   ["tövhid mövzuları", ["topics"]],
   ["tövhid siyahısı", ["topics"]],
@@ -229,19 +285,25 @@ test("ümumi «Şirk neçə qismə bölünür» hər iki bölgünü göstərir",
 });
 
 test("tərcümə olmayan sual: ərəbcə mətn + qeyd", () => {
-  const r = tawhidReply("Rübubiyyət tövhidi nədir");
+  const r = tawhidReply("Dəlil əl-xalq vəl-icad nədir");
   assert.ok(r.includes(NO_AZ));
-  assert.ok(r.includes("في اللغة الرب يأتي لعدة معان"));
+  assert.ok(r.includes("مفاد هذا الدليل أن كل حادث"));
   assert.ok(r.startsWith("Tövhid 1 (Əqidə 3001) — "));
   assert.ok(r.trimEnd().endsWith(FOOT_AZ));
 });
 
-test("qismən tərcümə: mövcud hissə + ərəbcə tam mətn; [...] göstərilmir", () => {
+test("1–4-cü mövzu: tam Azərbaycanca cavab, ərəbcə qeyd yoxdur, ayə formatı dəyişməyib", () => {
   const r = tawhidReply("Kainatı kim yaradıb?");
-  assert.ok(r.includes("Bu sualın Azərbaycanca tərcüməsi hələ tam deyil."));
-  assert.ok(r.includes("Birinci ehtimal: Kainatın öz-özünü yaratması."));
+  assert.ok(!r.includes(NO_AZ) && !r.includes("hələ tam deyil"));
+  assert.ok(r.includes("Birinci ehtimal: Kainat özünü özü yaradıb."));
   assert.ok(!r.includes("[...]"));
-  assert.ok(r.includes("الاحتمال الأول"));
+  const a = tawhidReply("Rübubiyyət tövhidini həyata keçirmək üçün neçə məsələni bilmək lazımdır");
+  assert.ok(a.includes("Rübubiyyət tövhidini həyata keçirmək üçün beş məsələni bilmək lazımdır:"));
+  assert.ok(a.includes("5. Allahın uluhiyyətinə iman etmək"));
+  const d = tawhidReply("Rübubiyyət tövhidinə hansı dəlillər vardır");
+  assert.ok(d.includes("««Həqiqətən, göylərin və yerin yaradılmasında"));
+  assert.ok(d.includes("Sual 3: Sünnədə Rübubiyyət tövhidinə dair dəlil varmı?"));
+  assert.ok(!d.includes(NO_AZ));
 });
 
 test("ərəbcə sual: ərəbcə cavab (a_ar), ərəbcə başlıq və mənbə", () => {
@@ -266,13 +328,20 @@ test("mövzu siyahısı və mövzunun suallar siyahısı", () => {
   for (let n = 1; n <= 11; n++) assert.ok(list.includes(`${n}. `), "mövzu " + n);
   assert.ok(list.includes("Allahın bəzi sifətlərinin öyrənilməsi"));
   assert.ok(list.includes("Azərbaycanca tam"));
-  assert.ok(list.includes("hələ ərəbcə"));
+  assert.ok(list.includes("1. Rübubiyyət tövhidi və onun dəlilləri (Azərbaycanca tam)"));
+  assert.ok(list.includes("(Azərbaycanca qismən)"), "3-cü mövzuda bir sual hələ ərəbcədir");
+  assert.ok(!list.includes("hələ ərəbcə"));
   const q5 = tawhidReply("tövhid 5-ci mövzu");
   assert.ok(q5.includes("5-ci mövzu: Rübubiyyət tövhidində şirk"));
   assert.ok(q5.includes("Allahın haqqı nədir?"));
   assert.ok(q5.includes("Tətil şirki"));
   const q3 = tawhidReply("tövhid 3-cü mövzu");
-  assert.ok(q3.includes("(ərəbcə)"));
+  assert.ok(q3.includes("3-cü mövzu: Mə‘rifət və isbat tövhidinin mənası və növləri"));
+  assert.ok(q3.includes("Tövhidin neçə növü vardır?"));
+  assert.ok(q3.includes("(ərəbcə)"), "yalnız tərcüməsi olmayan 1 sual ərəbcə qalır");
+  const q4 = tawhidReply("tövhid 4-cü mövzu");
+  assert.ok(q4.includes("Rübubiyyət tövhidini tərif edin?") || q4.includes("Rübubiyyət tövhidini tərif edin."));
+  assert.ok(!q4.includes("(ərəbcə)") && !q4.includes("(tərcümə qismən)"));
   const intro = tawhidReply("tövhid");
   assert.ok(intro.includes("Mövzular:"));
   assert.ok(tawhidReply("التوحيد").includes("المواضيع:"));
