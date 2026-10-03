@@ -1,3 +1,5 @@
+import { cannedReply } from "./_canned.js";
+
 const SYSTEM = [
   "Sən Nibras AI-san, Nibras Code saytının köməkçisisən.",
   "Cavabların qısa, aydın və nəzakətli olsun. İstifadəçi hansı dildə yazırsa, o dildə cavab ver.",
@@ -32,7 +34,7 @@ export default async function handler(req, res) {
       res.status(400).json({ success: false, reply: "Mesaj boş ola bilməz." });
       return;
     }
-    const ready = dinReply(message) || brandReply(message);
+    const ready = cannedReply(message) || dinReply(message) || brandReply(message);
     if (ready) {
       res.status(200).json({ success: true, reply: ready });
       return;
