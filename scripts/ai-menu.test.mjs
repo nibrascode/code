@@ -136,8 +136,9 @@ test("yerelləşdirmə: aria-label az/tr/en/ru/ar", { skip }, () => {
   }
 });
 
-test("RTL: dir=rtl olduqda panel sağdan açılır (CSS qaydası), düymə işləyir", { skip }, () => {
-  assert.match(HTML, /html\[dir="rtl"\] \.drawer \{[^}]*right: 0;[^}]*translateX\(102%\)/);
+test("panel düymənin yanından (sağdan) açılır; RTL-də soldan; düymə işləyir", { skip }, () => {
+  assert.match(HTML, /\.drawer \{\s*position: fixed; top: 0; right: 0;[\s\S]*?transform: translateX\(102%\)/);
+  assert.match(HTML, /html\[dir="rtl"\] \.drawer \{[^}]*left: 0;[^}]*translateX\(-102%\)/);
   assert.match(HTML, /html\[dir="rtl"\] \.drawer\.on \{ transform: none; \}/);
   const p = boot({ lang: "ar", dir: "rtl" });
   assert.equal(p.d.documentElement.getAttribute("dir"), "rtl");
@@ -148,11 +149,22 @@ test("RTL: dir=rtl olduqda panel sağdan açılır (CSS qaydası), düymə işl�
   p.w.close();
 });
 
-test("düzülüş: düymə başlıqda brend ilə eyni sətirdə (.lead), 38px dairəvi, fokus halqası var; köhnə mətn düyməsi stili işlənmir", () => {
-  const lead = HTML.match(/<div class="lead">([\s\S]*?)<\/div>/)[1];
-  assert.ok(lead.indexOf('id="menu"') >= 0 && lead.indexOf('id="menu"') < lead.indexOf('class="brand"'));
+test("düzülüş: ☰ düyməsi başlığın sağ kənarında (.meta-nın sonunda), brenddən sonra; 38px dairəvi, fokus halqası var", () => {
+  const header = HTML.match(/<header class="top">([\s\S]*?)<\/header>/)[1];
+  const lead = header.match(/<div class="lead">([\s\S]*?)<\/a>\s*<\/div>/)[1];
+  assert.doesNotMatch(lead, /id="menu"/, "başlanğıcda deyil");
+  const meta = header.slice(header.indexOf('<div class="meta">'));
+  assert.ok(meta.includes('id="menu"'));
+  assert.ok(meta.indexOf('id="prem"') < meta.indexOf('id="menu"'), "premium düyməsindən sonra, ən sonda");
+  assert.equal((meta.match(/<button/g) || []).length, 2);
+  assert.ok(header.indexOf('class="brand"') < header.indexOf('id="menu"'));
   assert.match(HTML, /\.menu \{[^}]*width: 38px; height: 38px;/);
   assert.match(HTML, /\.menu:focus-visible/);
-  const meta = HTML.match(/<div class="meta">([\s\S]*?)<\/header>/)[1];
-  assert.doesNotMatch(meta, /id="menu"/);
+  assert.match(HTML, /\.top \{[^}]*justify-content: space-between;/);
+});
+
+test("mobil: başlıq eni 320px-də düymələr sığır (flex, sıxılmır): .meta flex:none, brend ellipsis ilə kiçilir", () => {
+  assert.match(HTML, /\.meta \{[^}]*display: flex;[^}]*gap: 8px;/);
+  assert.match(HTML, /\.brand \{[^}]*min-width: 0;/);
+  assert.match(HTML, /\.menu \{[^}]*flex: none;/);
 });
