@@ -260,6 +260,25 @@ function Home() {
             </svg>
             <span>Nibras Studio</span>
           </a>
+          <a
+            className="nx-apk-bar"
+            href="https://nibrasapk.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M8.2 7.2 9.3 5.2M15.8 7.2 14.7 5.2"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+              />
+              <rect x="6" y="8" width="12" height="9.2" rx="3" fill="none" stroke="currentColor" strokeWidth="1.6" />
+              <path d="M9 12.4h6M12 10.2v4.4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+            </svg>
+            <span>Apk Studio</span>
+          </a>
         </div>
         <div className="nx-stage">
           <img src="/home/hero-desk.jpg" alt="" />
