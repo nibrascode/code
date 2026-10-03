@@ -92,9 +92,24 @@ function replyLang(text) {
 const DIN_REPLY =
   "İlk olaraq: süni intellektdən din öyrənilməz. İbn Sirin رحمه الله demişdir: «Həqiqətən, bu elm sizin dininizdir; dininizi kimdən aldığınıza diqqət edin.»";
 
+const ISLAM_DEF = [
+  "Qurana və səhih Sünnəyə möhkəm sarılmaq, dini səhabələrin, tabiinlərin və onların yolunu izləyən ilk nəsillərin anlayışı ilə qəbul etməkdir.",
+  "Bu əqidənin əsası tövhiddir: ibadəti yalnız Allaha yönəltmək, Ona heç bir şərik qoşmamaq və Allahın ad və sifətlərini Quranda və səhih Sünnədə gəldiyi kimi qəbul etməkdir. Həmçinin peyğəmbərlərə, mələklərə, kitablara, axirət gününə və qədərə iman etmək, İslamın əsaslarını və imanın şərtlərini təsdiq etməkdir.",
+  "Sələfin yolu dini şəxsi fikir, fəlsəfə və sonradan ortaya çıxmış etiqadlarla deyil, Quran, səhih Sünnə və ilk nəsillərin anlayışı ilə öyrənməyi əsas tutur. Buna görə müsəlman etiqad məsələlərində etibarlı və elm sahibi alimlərə müraciət etməli, dəlilsiz danışmaqdan çəkinməlidir.",
+].join("\n\n");
+
+function islamDefinition(q, raw) {
+  if (/(ما هو الإسلام|ما هو الاسلام|الإسلام الصحيح|حقيقة الإسلام|ما معنى الإسلام|الإسلام الحق)/.test(raw)) return true;
+  if (/(dogru|heqiqi|heqiqi|esl|sahih|sehih|gercek|hakiki|true|real|correct|истинн|подлинн)\s+islam/.test(q)) return true;
+  if (/islam\w{0,4}\s+(nedir|ne dir|nedemek|ne demek|menasi|terifi|haqqinda|anlami|nədir)/.test(q)) return true;
+  if (/\b(what is islam|whats islam|что такое ислам|истинный ислам)\b/.test(q)) return true;
+  return false;
+}
+
 export function dinReply(message) {
   const raw = String(message || "");
   const q = fold(raw);
+  if (islamDefinition(q, raw)) return DIN_REPLY + "\n\n" + ISLAM_DEF;
   const arabic = /اسلام|قرآن|حديث|صلاة|صوم|زكاة|حج|حلال|حرام|فقه|توحيد|عقيدة|وضوء|صيام/.test(raw);
   const topic =
     /\b(islam\w*|islami|islamic|musluman\w*|muslim\w*|quran\w*|hadis\w*|hedis\w*|hadith\w*|sunnet\w*|sunnah\w*|fiqh\w*|fikh\w*|seriat\w*|shariat\w*|sharia\w*|namaz\w*|salat\w*|salah\w*|oruc\w*|ramazan\w*|ramadan\w*|zekat\w*|zakat\w*|hecc\w*|umre\w*|umrah\w*|destamaz\w*|abdest\w*|wudu\w*|gusl\w*|qusl\w*|taharet\w*|haram\w*|helal\w*|halal\w*|fetva\w*|fatwa\w*|tefsir\w*|mezheb\w*|madhab\w*|peyqember\w*|peygamber\w*|resulullah\w*|muhammed\w*|muhammad\w*|ayet\w*|aye\b|tevhid\w*|tawhid\w*|akaid\w*|aqidah\w*|gunah\w*|sevab\w*|cennet\w*|cehennem\w*)\b/.test(
