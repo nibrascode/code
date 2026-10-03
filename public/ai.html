@@ -800,7 +800,7 @@
     }
     async function send(text) {
       const m = (text || "").trim();
-      if (!m) return;
+      if (!m || btn.disabled) return;
       const useImage = mode === "image" || pendingImage || wantsImage(m);
       const sentMode = useImage ? "image" : mode === "code" ? "code" : mode === "create" ? "create" : "ask";
       inp.value = "";
@@ -854,10 +854,13 @@
         stat("error", "network");
         bubble("Şəbəkəyə qoşulmaq olmadı.", "b err");
         rec("b err", "Şəbəkəyə qoşulmaq olmadı.", "", 1);
+      } finally {
+        // Hər halda (uğur, xəta, render istisnası) göndər düyməsi geri açılmalıdır.
+        busy = false;
+        btn.disabled = false;
+        paint();
+        inp.focus();
       }
-      busy = false;
-      paint();
-      inp.focus();
     }
     form.addEventListener("submit", function (e) {
       e.preventDefault();
