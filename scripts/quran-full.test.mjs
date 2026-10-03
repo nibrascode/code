@@ -238,7 +238,6 @@ test("axtarış: uzun surə məhdudlaşdırılır, aralıq limitlənir, olmayan 
 const NEG = [
   "Bəqərə 1-59 sözlərin izahı",
   "Bəqərə 5-ci ayənin sözləri",
-  "Bəqərə 3-cü ayə",
   "المفلحون mənası",
   "Yasin surəsinin fəziləti nədir",
   "Yasin surəsi nə vaxt nazil olub",
@@ -287,10 +286,12 @@ test("axtarış (mənfi): izah/sual/adi söz/vaxt/başqa mövzu → null (mövcu
 });
 
 test("Bəqərə 1–59 söz izahı (quranReply) toxunulmazdır", () => {
-  for (const q of ["Bəqərə 1-59 sözlərin izahı", "Bəqərə 5 ayə", "Bəqərə 3-cü ayə", "2:5", "المفلحون"]) {
+  for (const q of ["Bəqərə 1-59 sözlərin izahı", "Bəqərə 5 ayənin sözlərinin mənası", "Bəqərə 3-cü ayənin kəlmələri", "المفلحون"]) {
     assert.ok(quranReply(q), q);
     assert.equal(ayahReply(q), null, q);
   }
+  // sadə ayə sorğusu söz izahı deyil, ayə mətnidir (söz izahı yalnız açıq istəklə)
+  for (const q of ["Bəqərə 5 ayə", "Bəqərə 3-cü ayə", "2:5"]) assert.ok(ayahReply(q), q);
   // mətn istəyi ilə eyni ayə verilir
   assert.ok(ayahReply("Bəqərə 5-ci ayəni yaz"));
 });
@@ -426,7 +427,7 @@ test("chat.js: sırf ayə sorğuları AI-yə getmir (fetch çağırılsa test u�
       assert.ok(res.body.reply.includes("Tanzil"), q);
     }
     // əvvəlki hazır cavablar dəyişməyib
-    for (const q of ["Bəqərə 1-59 sözlərin izahı", "Bəqərə 5 ayə", "المفلحون"]) assert.equal((await chat(q)).body.reply, quranReply(q), q);
+    for (const q of ["Bəqərə 1-59 sözlərin izahı", "Bəqərə 5 ayənin sözlərinin mənası", "المفلحون"]) assert.equal((await chat(q)).body.reply, quranReply(q), q);
     for (const q of ["Sələfilik nədir", "bidət nədir", "Allahın adları", "əsmaül hüsna"]) assert.equal((await chat(q)).body.reply, cannedReply(q), q);
     for (const q of ["Şirk neçə qismə bölünür", "tövhid 10-cu mövzu", "Allahın adları təvqifidir nə deməkdir"]) assert.equal((await chat(q)).body.reply, tawhidReply(q), q);
     assert.equal(calls, 0);

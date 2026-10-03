@@ -220,6 +220,98 @@ function lookupAr(tokens, i, maxN = 4) {
   return null;
 }
 
+
+// ---------------------------------------------------------------- yazı səhvlərinə dözümlü surə adı axtarışı
+// Ərəbcə «boş» açar: bütün alef atılır, təkrar hərflər birləşir, əvvəlki «ال» (alefin təkrarı daxil) ayrılır: «االكهف» = «الكهف» = «كهف».
+function arLoose(k) {
+  return String(k || "").replace(/^ا+ل+(?=.)/, "").replace(/ا+/g, "").replace(/(.)\1+/g, "$1");
+}
+// «yüngül» açar (cue olmadan): yalnız təkrar alef/ال və təkrar hərflər; alef atılmır («صفات» ≠ «الصافات»)
+function arLight(k) {
+  return String(k || "").replace(/^ا+ل+(?=.)/, "").replace(/(.)\1+/g, "$1");
+}
+const AR_LOOSE_MAP = new Map(); // boş açar -> Set(n)
+const AR_LIGHT_MAP = new Map();
+function addArLoose(text, n) {
+  const base = arNameKey(arName(text));
+  for (const [map, k] of [[AR_LOOSE_MAP, arLoose(base)], [AR_LIGHT_MAP, arLight(base)]]) {
+    if (k.length < 2) continue;
+    if (!map.has(k)) map.set(k, new Set());
+    map.get(k).add(n);
+  }
+}
+SURA_NAMES_AR.forEach((nm, i) => {
+  addArLoose(nm, i + 1);
+  for (const e of AR_EXTRA[i + 1] || []) addArLoose(e, i + 1);
+});
+// Damerau-Levenshtein (bitişik yerdəyişmə 1 sayılır); limiti aşanda erkən çıxır
+function editDist(a, b, max) {
+  if (Math.abs(a.length - b.length) > max) return max + 1;
+  const d = [];
+  for (let i = 0; i <= a.length; i++) d.push([i]);
+  for (let j = 1; j <= b.length; j++) d[0][j] = j;
+  for (let i = 1; i <= a.length; i++) {
+    let rowMin = Infinity;
+    for (let j = 1; j <= b.length; j++) {
+      const c = a[i - 1] === b[j - 1] ? 0 : 1;
+      let v = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + c);
+      if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) v = Math.min(v, d[i - 2][j - 2] + 1);
+      d[i][j] = v;
+      if (v < rowMin) rowMin = v;
+    }
+    if (rowMin > max) return max + 1;
+  }
+  return d[a.length][b.length];
+}
+const fuzzyMax = (len, strong) => (len >= 9 ? 2 : len >= 5 || (strong && len >= 4) ? 1 : 0);
+/** Xəritədə açarla bərabər (edit=false) və ya ən çox max məsafədə tək-yeganə surəni tapır; birdən çox namizəd varsa null. */
+function nearest(map, key, max) {
+  if (map.has(key)) {
+    const ns = [...map.get(key)];
+    return ns.length === 1 ? ns[0] : null;
+  }
+  if (!max) return null;
+  // namizədlər: n -> ən yaxın məsafə. Qəbul: ən yaxın tək-yeganə surə, başqa surə ona yaxın (məsafə+0) deyil
+  const dist = new Map();
+  for (const [k, ns] of map) {
+    const dd = editDist(key, k, max);
+    if (dd > max) continue;
+    for (const n of ns) if (!(dist.get(n) <= dd)) dist.set(n, dd);
+  }
+  if (!dist.size) return null;
+  const best = Math.min(...dist.values());
+  const top = [...dist].filter(([, dd]) => dd === best);
+  return top.length === 1 ? top[0][0] : null;
+}
+/** Ərəbcə: əvvəl boş açar (yazılış fərqləri), sonra (fuzzy=true olduqda) məsafə 1-2. Hər dəfə yalnız tək-yeganə surə. */
+function lookupArFuzzy(tokens, cue, maxN = 4) {
+  for (let len = Math.min(maxN, tokens.length); len >= 1; len--) {
+    const base = arNameKey(tokens.slice(0, len));
+    const key = cue ? arLoose(base) : arLight(base);
+    if (key.length < 2) continue;
+    const n = nearest(cue ? AR_LOOSE_MAP : AR_LIGHT_MAP, key, cue ? fuzzyMax(key.length, true) : 0);
+    if (n) return { len, ns: [n], weak: false };
+  }
+  return null;
+}
+/** Latın: skelet açarı üzrə məsafə 1-2 (yalnız cue olduqda çağırılır). */
+function lookupLatFuzzy(tokens, strong, maxN = 4) {
+  for (let len = Math.min(maxN, tokens.length); len >= 1; len--) {
+    const slice = tokens.slice(0, len);
+    if (len > 1 && !slice.every((t) => /^[a-z]+$/.test(t))) continue;
+    const cands = [slice];
+    if (len > 1 && ARTICLES.has(slice[0])) cands.push(slice.slice(1));
+    for (const c of cands) {
+      for (const k of skelVariants(c)) {
+        if (k.length < 4) continue;
+        const n = nearest(NAME_MAP, k, fuzzyMax(k.length, strong));
+        if (n) return { len, ns: [n], weak: false };
+      }
+    }
+  }
+  return null;
+}
+
 // ---------------------------------------------------------------- dil və yazılar
 export function detectLang(text) {
   const t = String(text || "");
@@ -354,7 +446,7 @@ const FILLERS = new Set(
 const AR_FILLERS = new Set(["اكتب", "اعطني", "اقرا", "اقرأ", "اريد", "ارني", "اعرض", "من", "في", "فى", "سوره", "ايه", "اية", "الايه", "آيه", "ايات", "الايات", "نص", "كامل", "كامله", "لي", "رجاء", "فضلك", "القران", "القرآن", "قران", "الكريم", "اعطيني", "هات", "عرض", "سورة", "آية", "الآية", "الآيات", "ال", "ثم", "و"].map((x) => arName(x).join("")));
 // Sual/izah/tərcümə kimi sözlər: bunlar ayəni göstərmək yox, mənanı soruşmaqdır -> mövcud cavab zəncirinə (lüğət, hazır, AI) qalır
 const BLOCK_PREFIX = [
-  "mena", "izah", "serh", "tefsir", "tercum", "soz", "kelme", "luget", "meaning", "mean", "translat", "tafs", "explain", "word", "interpret", "why", "neden", "nicin", "niye", "nece", "nedir", "nezaman", "nazil", "sebeb",
+  "mena", "izah", "serh", "tefsir", "tercum", "soz", "kelme", "luget", "meaning", "mean", "translat", "tafs", "explain", "word", "interpret", "vocab", "glossar", "why", "neden", "nicin", "niye", "nece", "nedir", "nezaman", "nazil", "sebeb",
   "hokm", "fezilet", "fayda", "haqqinda", "haqda", "barede", "hakkinda", "about", "virtue", "rule", "ruling", "halal", "haram", "kimdir", "hansi", "kac", "neyi", "kak", "cto", "pocemu", "smisl", "znacen", "perevod", "tolkovan", "slov", "zacem", "kogda", "kto",
 ];
 const BLOCK_EXACT = new Set(["ne", "kim", "nedi", "nec", "how", "what", "who", "when", "is", "are", "does", "do", "kimin", "vaxt", "zaman"]);
@@ -462,6 +554,8 @@ export function ayahLookup(message) {
   } else {
     // 3) surə adları
     const looseOk = hasSuraWord || hasAyahWord || action;
+    // məsafə-əsaslı (fuzzy) axtarış: «surə/ayə» sözü olduqda və ya qısa «ad + nömrə» sorğusunda
+    const fuzzyOk = hasSuraWord || hasAyahWord || (toks.length <= 3 && toks.some((t) => /^\d+$/.test(t.raw)));
     const found = [];
     for (let i = 0; i < toks.length; i++) {
       if (/^\d+$/.test(toks[i].raw)) continue;
@@ -472,13 +566,25 @@ export function ayahLookup(message) {
         for (let k = i; k < toks.length && AR_LETTER.test(toks[k].raw); k++) arToks.push(arName(toks[k].raw).join(""));
         const mArr = lookupAr(arToks, 0);
         if (mArr) hit = mArr;
+        else if (!suraCue(i) && !ayahCue(i) && !AR_FILLERS.has(arToks[0])) {
+          // yazı səhvi: təkrar hərf/alef, ال-siz/artıq ال, hamza-ya variantları həmişə; məsafə 1-2 yalnız «surə/ayə» sözü və ya nömrə ilə
+          const stop = arToks.findIndex((t, k) => k > 0 && (/^(سوره|ايه|اية|الايه|الاية)$/.test(t) || AR_FILLERS.has(t)));
+          const sub = stop > 0 ? arToks.slice(0, stop) : arToks;
+          hit = lookupArFuzzy(sub, hasSuraWord || hasAyahWord);
+        }
       } else {
         const latToks = [];
         for (let k = i; k < toks.length && !AR_LETTER.test(toks[k].raw) && !/^\d+$/.test(toks[k].raw); k++) latToks.push(folded[k]);
         // «Şura» (42) skeleti «surə» cue sözü ilə eynidir: yalnız ş/sh/ш yazılışı ilə tanınır
         if (/^(şura|şûra|şûrâ|şurâ|shura|шура)$/i.test(toks[i].raw)) hit = { len: 1, ns: [42], weak: false };
         else if (suraCue(i)) hit = null; // «surə/сура/surah» işarə sözüdür, ad deyil («сура Ан-Ниса» «sura an» kimi səhv ada düşməsin)
-        else hit = lookupLat(latToks, 0, looseOk);
+        else {
+          hit = lookupLat(latToks, 0, looseOk);
+          if (!hit && fuzzyOk && !FILLERS.has(folded[i]) && !SURA_W.test(folded[i]) && !AYAH_W.test(folded[i])) {
+            const stop = latToks.findIndex((t, k) => k > 0 && (FILLERS.has(t) || SURA_W.test(t) || AYAH_W.test(t)));
+            hit = lookupLatFuzzy(stop > 0 ? latToks.slice(0, stop) : latToks, hasSuraWord);
+          }
+        }
       }
       if (hit && hit.ns.length) {
         found.push({ i, len: hit.len, ns: hit.ns, weak: hit.weak, isAr });
@@ -575,9 +681,6 @@ export function ayahLookup(message) {
   }
 
   if (!reps.length) return null;
-  // Bəqərə 1–59: «Bəqərə 5-ci ayə» kimi çılpaq istinad mövcud söz izahına (quranReply) məxsusdur. Mətn istəyi (yaz, göstər, oxu, ərəbcə, mətn)
-  // varsa ayə mətni verilir.
-  if (!action && !namedHit && reps.length && reps.every((r) => r.s === 2 && !r.whole && r.a2 <= 59 && !r.bad)) return null;
   // Qalan tanınmamış sözlər çoxdursa (adlı ayə və 2:255 üçün də) soruşmaq ehtimalı: rədd
   if (namedHit || colon) {
     let c = 0;

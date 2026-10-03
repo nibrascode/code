@@ -397,7 +397,7 @@ test("chat.js: tövhid sualları AI-yə getmir (fetch çağırılsa test uğursu
       const res = await run(message);
       assert.equal(res.body.reply, cannedReply(message), message);
     }
-    for (const message of ["Bəqərə 3-cü ayə", "المفلحون"]) {
+    for (const message of ["Bəqərə 3-cü ayənin sözlərinin mənası", "المفلحون"]) {
       const res = await run(message);
       assert.equal(res.body.reply, quranReply(message), message);
     }
