@@ -352,7 +352,7 @@ export function suggestQuery(lang, book, s, lo, hi) {
   return `${lead} ${s}:${range}`;
 }
 /** Ayə/surə cavabının sonuna ::sug:: bloku əlavə edir (təfsir cavablarına və ayə bloku olmayanlara yox). */
-export function withTafsirSuggest(reply, message) {
+export function withTafsirSuggest(reply, message, forceLang) {
   const text = String(reply || "");
   if (/^::sug::/m.test(text) || /^::tafsir /m.test(text)) return text;
   const m = text.match(/^::ayah (\d{1,3}):(\d{1,3})(?:-(\d{1,3}))?::$/m);
@@ -361,20 +361,24 @@ export function withTafsirSuggest(reply, message) {
   const a1 = Number(m[2]);
   const a2 = m[3] ? Number(m[3]) : a1;
   if (s < 1 || s > 114 || a1 < 1 || a2 < a1 || a2 > AYAH_COUNT[s - 1]) return text;
-  const lang = detectLang(message);
+  const lang = forceLang || detectLang(message);
   const hi = Math.min(a2, a1 + SUG_MAX - 1);
   const kind = hi < a2 ? "first" : hi > a1 ? "many" : "one";
   const lines = ["::sug::", `::sl:: ${SUG_LEAD[lang][kind]}`];
   for (const b of BOOKS) lines.push(`::sb:: ${CHIP[lang][b]} | ${suggestQuery(lang, b, s, a1, hi)}`);
   lines.push("::/sug::");
-  return text.replace(/\s+$/, "") + "\n\n" + lines.join("\n");
+  // gizli kontekst: sonuncu göstərilən ayə (növbəti ayə üçün); UI və AI tarixçəsi onu göstərmir/göndərmir
+  const hdrs = [...text.matchAll(/^::ayah (\d{1,3}):(\d{1,3})(?:-(\d{1,3}))?::$/gm)];
+  const lh = hdrs[hdrs.length - 1];
+  const ctx = `::ctx:: ${lh[1]}:${lh[2]}-${lh[3] || lh[2]} - 1/1 ${lang}`;
+  return text.replace(/\s+$/, "") + "\n\n" + ctx + "\n\n" + lines.join("\n");
 }
 
 /** @returns {Promise<string|null>} */
-export async function tafsirReply(message) {
+export async function tafsirReply(message, forceLang) {
   const q = parseTafsirQuery(message);
   if (!q) return null;
-  const { lang } = q;
+  const lang = forceLang && T[forceLang] ? forceLang : q.lang;
   const look = q.stripped ? resolveRef(q.stripped) : null;
   if (!look) {
     // Ayə/surə tapılmadı: kitab adı yazılıbsa (və ya yalnız «təfsir») kitabları göstər; «təfsir elmi nədir» kimi ümumi suallar başqasına qalır
@@ -386,6 +390,7 @@ export async function tafsirReply(message) {
   const L = LABEL[lang] || LABEL.az;
   const tt = T[lang] || T.az;
   const out = [];
+  let ctxInfo = null;
   // yalnız ilk istinad üçün tam səhifə; çoxlu istinadda (Muavvizeteyn) hər biri üçün birinci səhifə
   const multiRef = look.reps.length > 1;
   for (const rep of look.reps) {
@@ -400,6 +405,7 @@ export async function tafsirReply(message) {
     const total = pages.length;
     const pno = multiRef ? 1 : Math.min(Math.max(1, q.part), total);
     const page = pages[pno - 1];
+    if (!multiRef) ctxInfo = { s, a1, a2, pno, total };
     // Növbələşmə: hər ayə (və ya Sədi bloku) üçün əvvəl ayə bloku, sonra onun təfsiri; bir səhifədə ən çox MAX_SEGS bölmə
     const label = L[book] + (total > 1 ? ` — ${tt.part} ${lang === "ar" ? toAr(pno) + "/" + toAr(total) : pno + "/" + total}` : "");
     const groups = [];
@@ -434,6 +440,12 @@ export async function tafsirReply(message) {
   if (!q.book) tail.push(tt.others(others.map((b) => `«${LABEL[lang][b]}»`).join(", ")));
   tail.push(tt.nofree);
   out.push("::note:: " + tail.join(" "));
+  if (ctxInfo) out.push(`::ctx:: ${ctxInfo.s}:${ctxInfo.a1}-${ctxInfo.a2} ${book} ${ctxInfo.pno}/${ctxInfo.total} ${lang}`); // gizli: «növbəti ayə» üçün (UI və AI tarixçəsində göstərilmir)
   return out.join("\n\n");
 }
-export { AYAH_COUNT };
+/** «Davam» üçün hazır sorğu: hissə qalıbsa eyni təfsirin növbəti hissəsi, yoxsa eyni kitabla növbəti ayə. */
+export function continuationQuery(lang, book, s, a1, a2, pno, total) {
+  if (pno < total) return `${bookQuery(lang, book, s, a1, a2)} ${T[lang].part} ${lang === "ar" ? toAr(pno + 1) : pno + 1}`;
+  return null;
+}
+export { AYAH_COUNT, bookQuery };

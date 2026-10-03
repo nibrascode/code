@@ -811,7 +811,8 @@
       return out + plain(text.slice(last), last > 0, false);
     }
     function fillBubble(el, text) {
-      const parts = String(text || "").split("```");
+      // gizli kontekst sətri (::ctx:: …) «növbəti ayə» üçündür: göstərilmir
+      const parts = String(text || "").replace(/\n*^::ctx:: [^\n]*$/gm, "").split("```");
       const runs = [];
       chipQ = [];
       el.innerHTML = parts.map(function (part, i) {

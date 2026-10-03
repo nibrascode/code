@@ -483,12 +483,12 @@ const MSG_LIMIT = 16; // sözlə ölçülən qısa sorğu
 /**
  * @returns {null | {kind:'ref', reply:string}}
  */
-export function ayahLookup(message) {
+export function ayahLookup(message, forceLang) {
   const raw = String(message || "").trim();
   if (!raw || raw.length > 160) return null;
   const toks = tokenizeMsg(raw);
   if (!toks.length || toks.length > MSG_LIMIT) return null;
-  const lang = detectLang(raw);
+  const lang = forceLang || detectLang(raw);
   const folded = toks.map((t) => (AR_LETTER.test(t.raw) ? "" : foldLat(t.raw)));
   if (isBlocked(folded)) return null; // «nədir», «neçə», «mənası», «fəziləti» ... ayəni göstərmək yox, sual/izahdır
   const arJoined = toks.filter((t) => AR_LETTER.test(t.raw)).map((t) => arName(t.raw).join("")).join(" ");
@@ -720,8 +720,8 @@ function badRefNote(lang, s, a1, a2) {
   return `${suraName(s, "az")}ndə yalnız ${total} ayə var. ${asked} nömrəli ayə yoxdur.`.replace(/surəsinə?ndə/, "surəsində");
 }
 
-export function ayahReply(message) {
-  const r = ayahLookup(message);
+export function ayahReply(message, forceLang) {
+  const r = ayahLookup(message, forceLang);
   if (!r) return null;
   const { reps, lang } = r;
   const out = [];
@@ -1055,7 +1055,7 @@ export function stripAyahMarkup(text) {
   return String(text || "")
     .replace(/^[ \t]*::\/?ayah[^\n]*::[ \t]*$/gim, "")
     .replace(/^[ \t]*::src::[^\n]*$/gim, "")
-    .replace(/^[ \t]*::(?:tr|note|ar|tl|tv|sl|sb)::[^\n]*$/gim, "")
+    .replace(/^[ \t]*::(?:tr|note|ar|tl|tv|sl|sb|ctx)::[^\n]*$/gim, "")
     .replace(/^[ \t]*::\/?sug::[ \t]*$/gim, "")
     .replace(/^[ \t]*::\/?tafsir[^\n]*::[ \t]*$/gim, "")
     .replace(/^[ \t]*::\/?notice::[ \t]*$/gim, "")
