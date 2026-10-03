@@ -3,6 +3,8 @@
 // Cavab: ayə blokunu (ərəbcə + az mənası, api/_ayah.js) ::tafsir:: bloku izləyir. Uzun təfsir hissələrə bölünür («hissə 2»).
 import { LOADERS } from "./_tafsir/loaders.js";
 import { ayahLookup, ayahReply, buildBlock, detectLang, digitsAscii, foldLat, AYAH_COUNT } from "./_ayah.js";
+import { SURAS } from "./_quran/suras.js";
+import { SURA_NAMES_AR } from "./_quran/quran.js";
 
 export const BOOKS = ["muyassar", "saadi", "ibnkathir"];
 export const PAGE_CHARS = { muyassar: 3500, saadi: 3500, ibnkathir: 4500 }; // bir cavabda təfsir mətninin təxmini ən çox simvolu (kitab üzrə)
@@ -114,7 +116,7 @@ export function parseTafsirQuery(message) {
   raw = raw.replace(new RegExp(`(\\d{1,4})\\s*(?:-?\\s*(?:ci|cü|cı|cu|inci|nci|ncu|uncu|й|-й))?\\s*(?:${partWords})(?![\\p{L}])`, "giu"), (m, n) => ((part = Number(n)), " "));
   if (part < 1 || part > 9999) part = 1;
 
-  const re = /[\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFF]+|[\p{L}\p{M}'’ʻ]+|\d+/gu;
+  const re = /[\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFF]+|[\p{L}\p{M}'’‘ʻʼʿ`´]+|\d+/gu;
   const toks = [...raw.matchAll(re)].map((m) => ({ raw: m[0], idx: m.index, end: m.index + m[0].length, ar: /[\u0600-\u06FF\u0750-\u077F]/.test(m[0]) }));
   for (const t of toks) t.f = t.ar ? arNorm(t.raw) : foldLat(t.raw);
   let hasTafsir = false;
@@ -192,9 +194,18 @@ export async function segments(book, s, a1, a2, whole = false) {
   const out = [];
   if (book === "saadi") {
     if (whole && a1 === 1 && data.i) out.push({ from: 0, to: 0, text: data.i, intro: true });
-    for (const [from, to, text] of data.b) if (to >= a1 && from <= a2) out.push({ from, to, text });
+    // Sədi blokları ayə aralığıdır: blok ilk əhatə etdiyi ayədə bir dəfə verilir; heç bir blokun əhatə etmədiyi ayə «gap»dır
+    const seen = new Set();
+    for (let a = a1; a <= a2; a++) {
+      const blk = data.b.find(([f, t]) => f <= a && a <= t);
+      if (!blk) out.push({ from: a, to: a, text: "", gap: true });
+      else if (!seen.has(blk)) {
+        seen.add(blk);
+        out.push({ from: blk[0], to: blk[1], text: blk[2] });
+      }
+    }
   } else {
-    for (let a = a1; a <= a2; a++) if (data[a - 1]) out.push({ from: a, to: a, text: data[a - 1] });
+    for (let a = a1; a <= a2; a++) out.push(data[a - 1] ? { from: a, to: a, text: data[a - 1] } : { from: a, to: a, text: "", gap: true });
   }
   return out;
 }
@@ -240,6 +251,12 @@ export function paginate(segs, cap = 3500) {
     size = 0;
   };
   for (const seg of segs) {
+    if (seg.gap) {
+      const segsOnPage = new Set(page.map((p) => p.seg)).size + 1;
+      if (page.length && segsOnPage > MAX_SEGS) flush();
+      page.push({ seg, text: "", first: true });
+      continue;
+    }
     const chunks = chunkText(seg.text, cap);
     chunks.forEach((c, ci) => {
       const newSeg = ci === 0;
@@ -302,6 +319,57 @@ function infoReply(lang, book) {
   return lines.join("\n");
 }
 
+
+// ------------------------------------------------------------------ təfsir təklifi (təfsir istənilmədən ayə/surə cavabından sonra)
+const CHIP = {
+  az: { muyassar: "Müyəssər", saadi: "Sədi", ibnkathir: "İbn Kəsir" },
+  tr: { muyassar: "Müyesser", saadi: "Sa‘dî", ibnkathir: "İbn Kesîr" },
+  en: { muyassar: "Muyassar", saadi: "As-Sa'di", ibnkathir: "Ibn Kathir" },
+  ru: { muyassar: "Муяссар", saadi: "Ас-Саади", ibnkathir: "Ибн Касир" },
+  ar: { muyassar: "الميسر", saadi: "السعدي", ibnkathir: "ابن كثير" },
+};
+const SUG_LEAD = {
+  az: { one: "Bu ayənin təfsiri (ərəbcə):", many: "Bu ayələrin təfsiri (ərəbcə):", first: "Bu surənin ilk ayələrinin təfsiri (ərəbcə):" },
+  tr: { one: "Bu âyetin tefsiri (Arapça):", many: "Bu âyetlerin tefsiri (Arapça):", first: "Bu surenin ilk âyetlerinin tefsiri (Arapça):" },
+  en: { one: "Tafsir of this verse (Arabic):", many: "Tafsir of these verses (Arabic):", first: "Tafsir of the first verses of this surah (Arabic):" },
+  ru: { one: "Тафсир этого аята (на арабском):", many: "Тафсир этих аятов (на арабском):", first: "Тафсир первых аятов этой суры (на арабском):" },
+  ar: { one: "تفسير هذه الآية:", many: "تفسير هذه الآيات:", first: "تفسير الآيات الأولى من هذه السورة:" },
+};
+export const SUG_MAX = MAX_SEGS; // təklif olunan sorğu bir səhifəyə sığan ayə sayını əhatə edir
+function sugName(lang, s) {
+  if (lang === "ar") return SURA_NAMES_AR[s - 1];
+  const n = SURAS[s - 1];
+  return lang === "tr" ? n.tr : lang === "en" ? n.en : lang === "ru" ? n.ru : n.az;
+}
+/** Hazır sorğu mətni: «Müyəssər təfsiri Mülk 1-8». Ad tanınmazsa rəqəmli forma («… 67:1-8») işləyir. */
+export function suggestQuery(lang, book, s, lo, hi) {
+  const range = hi > lo ? `${lo}-${hi}` : `${lo}`;
+  const lead = lang === "ar" ? LABEL.ar[book] : T[lang].lead[book];
+  const named = `${lead} ${sugName(lang, s)} ${range}`;
+  const p = parseTafsirQuery(named);
+  const r = p && p.book === book && p.stripped ? resolveRef(p.stripped) : null;
+  if (r && r.reps.length === 1 && r.reps[0].s === s && r.reps[0].a1 === lo && r.reps[0].a2 === hi && !r.reps[0].bad) return named;
+  return `${lead} ${s}:${range}`;
+}
+/** Ayə/surə cavabının sonuna ::sug:: bloku əlavə edir (təfsir cavablarına və ayə bloku olmayanlara yox). */
+export function withTafsirSuggest(reply, message) {
+  const text = String(reply || "");
+  if (/^::sug::/m.test(text) || /^::tafsir /m.test(text)) return text;
+  const m = text.match(/^::ayah (\d{1,3}):(\d{1,3})(?:-(\d{1,3}))?::$/m);
+  if (!m) return text;
+  const s = Number(m[1]);
+  const a1 = Number(m[2]);
+  const a2 = m[3] ? Number(m[3]) : a1;
+  if (s < 1 || s > 114 || a1 < 1 || a2 < a1 || a2 > AYAH_COUNT[s - 1]) return text;
+  const lang = detectLang(message);
+  const hi = Math.min(a2, a1 + SUG_MAX - 1);
+  const kind = hi < a2 ? "first" : hi > a1 ? "many" : "one";
+  const lines = ["::sug::", `::sl:: ${SUG_LEAD[lang][kind]}`];
+  for (const b of BOOKS) lines.push(`::sb:: ${CHIP[lang][b]} | ${suggestQuery(lang, b, s, a1, hi)}`);
+  lines.push("::/sug::");
+  return text.replace(/\s+$/, "") + "\n\n" + lines.join("\n");
+}
+
 /** @returns {Promise<string|null>} */
 export async function tafsirReply(message) {
   const q = parseTafsirQuery(message);
@@ -332,27 +400,30 @@ export async function tafsirReply(message) {
     const total = pages.length;
     const pno = multiRef ? 1 : Math.min(Math.max(1, q.part), total);
     const page = pages[pno - 1];
-    // ayə bloku: səhifədəki seqmentlərin ayə aralığı (davam səhifələrində ayə təkrar göstərilmir)
-    const nums = page.filter((p) => !p.seg.intro).flatMap((p) => [Math.max(a1, p.seg.from), Math.min(a2, p.seg.to)]);
-    const startsNew = page[0].first;
-    if (nums.length && (startsNew || pno === 1)) {
-      const lo = Math.min(...nums);
-      const hi = Math.min(Math.max(...nums), lo + MAX_AYAH_SHOWN - 1);
-      out.push(buildBlock({ s, a1: lo, a2: hi, lang }));
-    }
+    // Növbələşmə: hər ayə (və ya Sədi bloku) üçün əvvəl ayə bloku, sonra onun təfsiri; bir səhifədə ən çox MAX_SEGS bölmə
     const label = L[book] + (total > 1 ? ` — ${tt.part} ${lang === "ar" ? toAr(pno) + "/" + toAr(total) : pno + "/" + total}` : "");
-    const body = [];
-    let lastSeg = null;
-    const multi = new Set(page.map((p) => p.seg)).size > 1 || (page[0].seg.from !== a1 && !page[0].first);
+    const groups = [];
     for (const piece of page) {
-      if (piece.seg !== lastSeg) {
-        const tag = verseTag(piece.seg);
-        if (tag && (multi || piece.seg.from !== piece.seg.to || !piece.first)) body.push(`::tv:: ${tag}`);
-        lastSeg = piece.seg;
-      }
-      body.push(piece.text);
+      const g = groups[groups.length - 1];
+      if (g && g.seg === piece.seg) g.pieces.push(piece);
+      else groups.push({ seg: piece.seg, pieces: [piece] });
     }
-    out.push([`::tafsir ${book}::`, `::tl:: ${label}`, ...body, srcLine(lang, book), "::/tafsir::"].join("\n"));
+    groups.forEach((g, gi) => {
+      const { seg } = g;
+      const lo = Math.max(a1, seg.from);
+      const hi = Math.min(a2, seg.to);
+      if (seg.gap) {
+        out.push(buildBlock({ s, a1: seg.from, a2: seg.from, lang }));
+        out.push("::note:: " + tt.none(`${s}:${seg.from}`));
+        return;
+      }
+      if (!seg.intro && g.pieces[0].first) out.push(buildBlock({ s, a1: lo, a2: Math.min(hi, lo + MAX_AYAH_SHOWN - 1), lang }));
+      const tag = verseTag(seg);
+      const showTag = tag && (seg.from !== seg.to || !g.pieces[0].first);
+      const body = g.pieces.map((p) => p.text);
+      const last = gi === groups.length - 1;
+      out.push([`::tafsir ${book}::`, `::tl:: ${gi === 0 ? label : L[book]}`, ...(showTag ? [`::tv:: ${tag}`] : []), ...body, ...(last ? [srcLine(lang, book)] : []), "::/tafsir::"].join("\n"));
+    });
     if (total > pno) {
       const lo = a1;
       out.push("::note:: " + tt.more(`${bookQuery(lang, book, s, lo, a2)} ${tt.part} ${lang === "ar" ? toAr(pno + 1) : pno + 1}`));

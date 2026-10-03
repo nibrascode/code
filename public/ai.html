@@ -246,6 +246,12 @@
     .msg .tf .tfv { display: block; margin: 6px 0 2px; font-size: 12px; line-height: 1.4; color: #8d96ad; font-family: inherit; }
     .msg .tf .as { margin-top: 6px; font-size: 11px; line-height: 1.45; color: #8d96ad; unicode-bidi: plaintext; }
     .msg .tf .as a { color: #8fb4ff; text-decoration: underline; }
+    .msg .sg { white-space: normal; margin: 10px 0 2px; unicode-bidi: plaintext; }
+    .msg .sg .sgl { font-size: 11.5px; line-height: 1.4; color: #8d96ad; margin-bottom: 5px; unicode-bidi: plaintext; }
+    .msg .sg .sgb { display: flex; flex-wrap: wrap; gap: 6px; }
+    .msg .sg .chip { font: inherit; font-size: 12px; line-height: 1.2; padding: 5px 11px; border-radius: 999px; border: 1px solid rgba(143, 180, 255, .4); background: rgba(143, 180, 255, .08); color: #bcd2ff; cursor: pointer; }
+    .msg .sg .chip:hover { background: rgba(143, 180, 255, .18); }
+    .msg .sg .chip:focus-visible { outline: 2px solid #8fb4ff; outline-offset: 2px; }
     .msg .an { white-space: normal; margin: 6px 0; font-size: 11.5px; line-height: 1.5; color: #8d96ad; unicode-bidi: plaintext; }
     .msg .ay .as { margin-top: 6px; font-size: 11px; line-height: 1.45; color: #8d96ad; unicode-bidi: plaintext; }
     .msg .ay .as a { color: #8fb4ff; text-decoration: underline; }
@@ -731,7 +737,26 @@
       }
       const gh = src.indexOf("spa5k/tafsir_api");
       if (gh >= 0) src = src.slice(0, gh) + '<a href="https://github.com/spa5k/tafsir_api" target="_blank" rel="noopener noreferrer">spa5k/tafsir_api</a>' + src.slice(gh + 16);
-      return '<div class="tf"><div class="tfl" dir="auto">' + escapeHtml(label) + '</div><div class="tft" dir="rtl" lang="ar">' + parts.join("") + '</div><div class="as" dir="auto">' + src + "</div></div>";
+      return '<div class="tf">' + (label ? '<div class="tfl" dir="auto">' + escapeHtml(label) + "</div>" : "") + '<div class="tft" dir="rtl" lang="ar">' + parts.join("") + "</div>" + (src ? '<div class="as" dir="auto">' + src + "</div>" : "") + "</div>";
+    }
+    // Təfsir təklifi: ::sug::  ::sl:: sual  ::sb:: etiket | hazır sorğu (3 dəfə)  ::/sug::. Düymələr data-sq indeksi ilə sorğu massivinə (chipQ) bağlanır; mətn attribut dəyərinə düşmür.
+    let chipQ = [];
+    function sugHtml(body) {
+      let lead = "";
+      const chips = [];
+      body.split("\n").forEach(function (ln) {
+        if (ln.indexOf("::sl::") === 0) lead = ln.replace(/^::sl::[ \t]*/, "");
+        else if (ln.indexOf("::sb::") === 0) {
+          const v = ln.replace(/^::sb::[ \t]*/, "");
+          const k = v.indexOf(" | ");
+          if (k > 0 && k < v.length - 3) {
+            chipQ.push(v.slice(k + 3).trim());
+            chips.push('<button type="button" class="chip" data-sq="' + (chipQ.length - 1) + '">' + escapeHtml(v.slice(0, k)) + "</button>");
+          }
+        }
+      });
+      if (!chips.length) return "";
+      return '<div class="sg">' + (lead ? '<div class="sgl" dir="auto">' + escapeHtml(lead) + "</div>" : "") + '<div class="sgb">' + chips.join("") + "</div></div>";
     }
     function ayahHtml(text) {
       const nre = /(?:^|\n)::notice::\n([\s\S]*?)\n::\/notice::(?=\n|$)/;
@@ -747,6 +772,13 @@
         const before = text.slice(0, tm.index);
         const after = text.slice(tm.index + tm[0].length).replace(/^\n{1,2}/, "");
         return (before ? ayahHtml(before) : "") + tafsirHtml(tm[1], tm[2]) + (after ? ayahHtml(after) : "");
+      }
+      const sre = /(?:^|\n)::sug::\n([\s\S]*?)\n::\/sug::(?=\n|$)/;
+      const sm = sre.exec(text);
+      if (sm) {
+        const before = text.slice(0, sm.index);
+        const after = text.slice(sm.index + sm[0].length).replace(/^\n{1,2}/, "");
+        return (before ? ayahHtml(before) : "") + sugHtml(sm[1]) + (after ? ayahHtml(after) : "");
       }
       const re = /(?:^|\n)::ayah( warn)?(?: [0-9:\-]+)?::\n([\s\S]*?)\n::src::[ \t]*([^\n]*)\n::\/ayah::(?=\n|$)/g;
       let out = "";
@@ -784,6 +816,7 @@
     function fillBubble(el, text) {
       const parts = String(text || "").split("```");
       const runs = [];
+      chipQ = [];
       el.innerHTML = parts.map(function (part, i) {
         if (i % 2 === 0) return ayahHtml(part);
         const head = part.match(/^([a-zA-Z0-9+#-]+)\n/);
@@ -796,6 +829,15 @@
         }
         return '<div class="cb"><pre><code>' + escapeHtml(code) + "</code></pre>" + bar + "</div>";
       }).join("");
+      const queries = chipQ;
+      el.querySelectorAll("button.chip[data-sq]").forEach(function (b) {
+        const q = queries[Number(b.getAttribute("data-sq"))];
+        b.removeAttribute("data-sq");
+        b.addEventListener("click", function () {
+          if (busy || btn.disabled) { note("Cavab gözlənilir"); return; }
+          send(q);
+        });
+      });
       el.querySelectorAll("button.runbtn").forEach(function (b) {
         const r = runs[Number(b.getAttribute("data-run"))];
         b.removeAttribute("data-run");

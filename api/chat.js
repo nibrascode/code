@@ -1,7 +1,7 @@
 import { cannedReply } from "./_canned.js";
 import { quranReply } from "./_quran.js";
 import { tawhidReply } from "./_tawhid.js";
-import { tafsirReply } from "./_tafsir.js";
+import { tafsirReply, withTafsirSuggest } from "./_tafsir.js";
 import { ayahReply, finalizeAi, compactHistory, AYAH_PROMPT } from "./_ayah.js";
 import { snippetReply } from "./_snippets.js";
 import { localReply } from "./_local.js";
@@ -57,8 +57,9 @@ export default async function handler(req, res) {
     let fixed = null;
     let religious = false;
     for (const [kind, fn] of [["tafsir", tafsirReply], ["ayah", ayahReply], ["tawhid", tawhidReply], ["canned", cannedReply], ["quran", quranReply], ["din", dinReply], ["brand", brandReply]]) {
-      const r = await fn(message);
+      let r = await fn(message);
       if (r) {
+        if (kind === "ayah") r = withTafsirSuggest(r, message); // təfsir istənilməyib: ayə/surə cavabına təfsir seçimləri əlavə olunur
         fixed = r;
         religious = kind !== "brand" && !(kind === "din" && body.mode === "code"); // kod rejimində ümumi din-söz uyğunluğu dini sual sayılmır
         break;

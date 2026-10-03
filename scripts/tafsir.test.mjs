@@ -93,6 +93,7 @@ test("cavab: «Bəqərə 255 təfsiri» — ayə (ərəbcə + az mənası), sonr
   const r = await tafsirReply("Bəqərə 255 təfsiri");
   assert.deepEqual(head(r), ["ayah 2:255", "tafsir muyassar"]);
   assert.ok(r.indexOf("::ayah 2:255::") < r.indexOf("::tafsir muyassar::"));
+  assert.doesNotMatch(r, /::sug::/, "təfsir cavabında təklif bloku olmur");
   assert.match(r, /::tr:: Mənaca tərcümə \(Azərbaycan dili\):/);
   assert.equal(label(r), "Təfsir əl-Müyəssər (ərəbcə)");
   assert.match(r, /\nالله الذي لا يستحق الألوهية والعبودية إلا هو/);
@@ -105,20 +106,19 @@ test("cavab: «Bəqərə 255 təfsiri» — ayə (ərəbcə + az mənası), sonr
 
 test("cavab: kitab seçimi və adlı ayələr — Sədi, İbn Kəsir, Müyəssər; ayə axtarışı ilə ziddiyyət yoxdur", async () => {
   const cases = [
-    ["Ayətül-Kürsi təfsiri", "muyassar", "ayah 2:255"],
-    ["İbn Kəsir təfsiri 2:255", "ibnkathir", "ayah 2:255"],
-    ["Sədi təfsiri Fatihə", "saadi", "ayah 1:1-6"],
-    ["Müyəssər təfsiri 112:1", "muyassar", "ayah 112:1"],
-    ["İxlas surəsi təfsiri", "muyassar", "ayah 112:1-4"],
-    ["Nur 35 təfsiri izah et", "muyassar", "ayah 24:35"],
-    ["Bəqərə 5 təfsiri", "muyassar", "ayah 2:5"],
-    ["Bəqərə 255-257 təfsiri", "muyassar", "ayah 2:255-257"],
+    ["Ayətül-Kürsi təfsiri", ["ayah 2:255", "tafsir muyassar"]],
+    ["İbn Kəsir təfsiri 2:255", ["ayah 2:255", "tafsir ibnkathir"]],
+    ["Sədi təfsiri Fatihə", ["tafsir saadi", "ayah 1:1", "tafsir saadi", "ayah 1:2"]], // əvvəl surənin girişi (ayəsiz), sonra növbələşmə
+    ["Müyəssər təfsiri 112:1", ["ayah 112:1", "tafsir muyassar"]],
+    ["İxlas surəsi təfsiri", ["ayah 112:1", "tafsir muyassar", "ayah 112:2", "tafsir muyassar", "ayah 112:3", "tafsir muyassar", "ayah 112:4", "tafsir muyassar"]],
+    ["Nur 35 təfsiri izah et", ["ayah 24:35", "tafsir muyassar"]],
+    ["Bəqərə 5 təfsiri", ["ayah 2:5", "tafsir muyassar"]],
+    ["Bəqərə 255-257 təfsiri", ["ayah 2:255", "tafsir muyassar", "ayah 2:256", "tafsir muyassar", "ayah 2:257", "tafsir muyassar"]],
   ];
-  for (const [q, book, ay] of cases) {
+  for (const [q, exp] of cases) {
     const r = await tafsirReply(q);
     assert.ok(r, q);
-    assert.equal(head(r)[0], ay, q);
-    assert.equal(head(r)[1], "tafsir " + book, q);
+    assert.deepEqual(head(r).slice(0, exp.length), exp, q);
   }
   // təfsir sözü olmayan sorğu yenə yalnız ayədir
   assert.equal(await tafsirReply("Bəqərə 255"), null);

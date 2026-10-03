@@ -11,6 +11,7 @@ import { AYAS, BISMILLAH, SURA_NAMES_AR, SOURCE } from "../api/_quran/quran.js";
 import { SURAS } from "../api/_quran/suras.js";
 import { ayahLookup, ayahReply, finalizeAi, compactHistory, stripAyahMarkup, matchArabic, refLabel, AYAH_PROMPT, digitsAscii, arKey } from "../api/_ayah.js";
 import { quranReply } from "../api/_quran.js";
+import { withTafsirSuggest } from "../api/_tafsir.js";
 import { cannedReply } from "../api/_canned.js";
 import { tawhidReply } from "../api/_tawhid.js";
 import handler from "../api/chat.js";
@@ -421,7 +422,7 @@ test("chat.js: sırf ayə sorğuları AI-yə getmir (fetch çağırılsa test u�
       const res = await chat(q);
       assert.equal(res.code, 200, q);
       assert.equal(res.body.success, true, q);
-      assert.equal(res.body.reply, ayahReply(q), q);
+      assert.equal(res.body.reply, withTafsirSuggest(ayahReply(q), q), q); // ayə cavabı + təfsir seçimləri
       assert.ok(res.body.reply.includes("Tanzil"), q);
     }
     // əvvəlki hazır cavablar dəyişməyib
