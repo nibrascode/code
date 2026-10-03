@@ -1,4 +1,4 @@
-// Nibras AI: python/html kod blokunun yanında «Aç» düyməsi (Studio /run linki) testi.
+// Nibras AI: python/html/javascript kod blokunun yanında «Aç» düyməsi (Studio /run linki) testi.
 // Playwright + Chrome lazımdır; yoxdursa test buraxılır.
 import test from "node:test";
 import assert from "node:assert/strict";
@@ -64,8 +64,8 @@ test("«Aç» düyməsi", { skip, timeout: 120000 }, async (t) => {
     await page.waitForSelector(".msg.b:not(:has(.dots))", { timeout: 15000 });
   }
 
-  for (const [q, lang] of [["python kod nümunəsi", "python"], ["html form nümunəsi", "html"]]) {
-    await t.test(`kitabxana cavabı: ${lang}`, async () => {
+  for (const [q, lang] of [["python kod nümunəsi", "python"], ["html form nümunəsi", "html"], ["javascript massiv nümunə", "javascript"], ["css flexbox nümunə", "html"]]) {
+    await t.test(`kitabxana cavabı: ${q} -> l=${lang}`, async () => {
       const page = await browser.newPage();
       await open(page);
       await ask(page, q);
@@ -90,16 +90,27 @@ test("«Aç» düyməsi", { skip, timeout: 120000 }, async (t) => {
     });
   }
 
-  await t.test("adi AI cavabı: ```python və ```html düymə alır, ```js almır; kodda ``` olmadan", async () => {
+  await t.test("adi AI cavabı: ```python, ```html, ```js düymə alır; ```sql və ```ruby almır", async () => {
     const page = await browser.newPage();
-    await page.route("**/api/chat", (r) => r.fulfill({ contentType: "application/json", body: JSON.stringify({ success: true, reply: "Bax:\n```python\nprint('Salam ə')\n```\nvə\n```html\n<h1>Salam</h1>\n```\nvə\n```js\nconsole.log(1)\n```\nSon." }) }));
+    await page.route("**/api/chat", (r) => r.fulfill({ contentType: "application/json", body: JSON.stringify({ success: true, reply: "Bax:\n```python\nprint('Salam ə')\n```\nvə\n```html\n<h1>Salam</h1>\n```\nvə\n```js\nconsole.log(1)\n```\nvə\n```sql\nSELECT 1;\n```\nvə\n```ruby\nputs 1\n```\nSon." }) }));
     await open(page);
     await ask(page, "kod yaz");
-    assert.equal(await page.locator(".msg.b .runbtn").count(), 2);
-    assert.equal(await page.locator(".msg.b pre").count(), 3);
+    assert.equal(await page.locator(".msg.b .runbtn").count(), 3);
+    assert.equal(await page.locator(".msg.b pre").count(), 5);
     await page.locator(".msg.b .runbtn").nth(1).click();
-    const d = await decode((await page.evaluate(() => window.__opened))[0][0]);
-    assert.deepEqual(d, { lang: "html", code: "<h1>Salam</h1>" });
+    await page.locator(".msg.b .runbtn").nth(2).click();
+    const opened = await page.evaluate(() => window.__opened);
+    assert.deepEqual(await decode(opened[0][0]), { lang: "html", code: "<h1>Salam</h1>" });
+    assert.deepEqual(await decode(opened[1][0]), { lang: "javascript", code: "console.log(1)" });
+    await page.close();
+  });
+
+  await t.test("kitabxana sql cavabında Aç düyməsi yoxdur", async () => {
+    const page = await browser.newPage();
+    await open(page);
+    await ask(page, "sql join nümunə");
+    assert.equal(await page.locator(".msg.b pre").count(), 1);
+    assert.equal(await page.locator(".msg.b .runbtn").count(), 0);
     await page.close();
   });
 

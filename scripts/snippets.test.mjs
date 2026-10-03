@@ -1,4 +1,4 @@
-// Python/HTML kod nümunələri kitabxanası və yerli cavablar üçün testlər.
+// Python/HTML kod nümunələri kitabxanası və yerli cavablar üçün testlər (JavaScript/SQL/CSS: snippets-more.test.mjs).
 import test from "node:test";
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
@@ -56,16 +56,23 @@ test("snippetReply: kod sorğuları cavab alır", () => {
   assert.match(snippetReply("səviyyə 12 html", "ask"), /12\/20/);
 });
 
+test("snippetReply: python/html sorğuları yeni dillərdən təsirlənmir", () => {
+  assert.match(snippetReply("python for dövrü nümunə", "ask"), /```python/);
+  assert.match(snippetReply("html form nümunəsi", "ask"), /```html/);
+  assert.match(snippetReply("python html siyahı", "ask"), /Python kod nümunələri[\s\S]*HTML kod nümunələri/);
+  assert.match(snippetReply("python sqlite nümunə", "ask"), /```python/);
+});
+
 test("snippetReply: siyahı sorğusu", () => {
   const r = snippetReply("python asandan çətinə", "ask");
   assert.ok(r && !r.includes("```"));
 });
 
 test("snippetReply: uyğun olmayanlar null", () => {
-  for (const q of ["javascript kod yaz", "python nədir", "css animasiya", "python flask kod", "python kodum xəta verir", "", "salam necəsən", "java kod nümunəsi", "Azərbaycanın paytaxtı hansıdır"]) {
+  for (const q of ["python nədir", "python flask kod", "python kodum xəta verir", "", "salam necəsən", "java kod nümunəsi", "Azərbaycanın paytaxtı hansıdır", "typescript kod yaz", "python javascript kod"]) {
     assert.equal(snippetReply(q, "ask"), null, q);
   }
-  assert.equal(snippetReply("javascript kod yaz", "code"), null);
+  assert.equal(snippetReply("java kod yaz", "code"), null);
 });
 
 test("localReply: sadə sorğular", () => {
