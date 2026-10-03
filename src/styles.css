@@ -4217,12 +4217,27 @@ body.is-home .noise {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .nx-ai-bar::before {
+  .nx-ai-bar::before,
+  .nx-studio-bar::before {
     animation: none;
   }
 }
 
+@property --studio-spin {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes studio-spin {
+  to {
+    --studio-spin: -360deg;
+  }
+}
+
 .nx-studio-bar {
+  position: relative;
+  isolation: isolate;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -4235,7 +4250,30 @@ body.is-home .noise {
   border-radius: 16px;
   background: #070b16;
   color: #f4f7ff;
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.08);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.05);
+}
+
+.nx-studio-bar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  background: conic-gradient(
+    from var(--studio-spin),
+    transparent 0deg,
+    transparent 210deg,
+    #d8ff8a 258deg,
+    #34d399 286deg,
+    transparent 322deg,
+    transparent 360deg
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  animation: studio-spin 4.4s linear infinite;
 }
 
 .nx-term {
@@ -4243,8 +4281,8 @@ body.is-home .noise {
   height: 36px;
   padding: 6px;
   border-radius: 10px;
-  color: #7ee7ff;
-  background: rgb(40 90 160 / 0.22);
+  color: #c6ff8a;
+  background: rgb(52 180 110 / 0.18);
 }
 
 .nx-studio-bar span {
