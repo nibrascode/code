@@ -268,14 +268,14 @@ function Home() {
           >
             <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true">
               <path
-                d="M8.2 7.2 9.3 5.2M15.8 7.2 14.7 5.2"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.6"
-                strokeLinecap="round"
+                fill="currentColor"
+                d="M7 3.5h7.2L19 8.2V20a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 6 20V5a1.5 1.5 0 0 1 1-1.5Z"
               />
-              <rect x="6" y="8" width="12" height="9.2" rx="3" fill="none" stroke="currentColor" strokeWidth="1.6" />
-              <path d="M9 12.4h6M12 10.2v4.4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+              <path fill="#05060c" d="M14 3.8V8h4.1" />
+              <path
+                fill="#05060c"
+                d="M12 11.2a.8.8 0 0 1 .8.8v2.1h2.1a.8.8 0 0 1 0 1.6h-2.1V18a.8.8 0 0 1-1.6 0v-2.3H8.9a.8.8 0 0 1 0-1.6h2.3V12a.8.8 0 0 1 .8-.8Z"
+              />
             </svg>
             <span>Apk Studio</span>
           </a>
