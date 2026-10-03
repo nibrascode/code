@@ -18,6 +18,8 @@ const SYSTEM = [
   AYAH_PROMPT,
 ].join(" ");
 
+export const LIMIT_REPLY = "Bu gün üçün sual limiti bitdi. Sabah yenidən yaz. Hazır cavabı olan suallar isə bu gün də cavablanır.";
+
 export const config = { maxDuration: 25 };
 
 export default async function handler(req, res) {
@@ -57,7 +59,13 @@ export default async function handler(req, res) {
       (body.mode === "create" ? null : localReply(message));
     if (ready) {
       track("snippet", snippet ? "hit" : "local"); // yalnız say; mesaj mətni saxlanmır
-      res.status(200).json({ success: true, reply: ready });
+      // Hazır cavab: xarici AI çağırılmayıb -> limitə sayılmır (usedAI:false)
+      res.status(200).json({ success: true, reply: ready, usedAI: false });
+      return;
+    }
+    // Gündəlik limit istifadəçi tərəfində sayılır; doluysa yalnız xarici AI tələb edən suallar dayandırılır (hazır cavablar yuxarıda artıq cavablanıb)
+    if (body.limitReached === true) {
+      res.status(200).json({ success: true, reply: LIMIT_REPLY, usedAI: false, limited: true });
       return;
     }
     track("snippet", "ai");
@@ -84,7 +92,7 @@ export default async function handler(req, res) {
       if (result.skipped) continue;
       if (result.ok) {
         // AI ayə mətni yazıbsa, ərəbcə hissə Tanzil məlumatı ilə əvəz olunur, [[ayah:S:A]] işarələri açılır
-        res.status(200).json({ success: true, reply: finalizeAi(result.reply, message) });
+        res.status(200).json({ success: true, reply: finalizeAi(result.reply, message), usedAI: true });
         return;
       }
       notes.push(name + ": " + String(result.detail || "xəta").slice(0, 140));
@@ -95,6 +103,7 @@ export default async function handler(req, res) {
     res.status(200).json({
       success: false,
       reply: "İndi cavab alınmadı. Bir az sonra yenidən yoxlayın.",
+      usedAI: false,
     });
   } catch {
     track("error", "server");

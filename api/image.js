@@ -89,6 +89,10 @@ export default async function handler(req, res) {
       });
       return;
     }
+    if (body.limitReached === true) {
+      res.status(200).json({ success: true, reply: "Bu gün üçün şəkil limiti bitdi. Sabah yenidən yaz.", usedAI: false, limited: true });
+      return;
+    }
     const providers = [
       () => viaXai(prompt, image),
       () => viaGemini(prompt, image),
@@ -107,7 +111,7 @@ export default async function handler(req, res) {
       }
       if (result.skipped) continue;
       if (result.ok) {
-        res.status(200).json({ success: true, url: result.url, reply: image ? "Şəkil düzəldildi." : "Şəkil hazırdır." });
+        res.status(200).json({ success: true, url: result.url, reply: image ? "Şəkil düzəldildi." : "Şəkil hazırdır.", usedAI: true });
         return;
       }
       console.error("image provider failed", result.status, result.detail);

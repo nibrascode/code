@@ -58,19 +58,12 @@
     .brand b { display: block; font-size: 15px; font-weight: 800; letter-spacing: -0.04em; line-height: 1.1; }
     .brand small { display: block; margin-top: 2px; color: var(--muted); font-size: 11px; font-weight: 500; }
     .meta { display: flex; align-items: center; gap: 8px; }
-    .pill, .crown, .home {
+    .crown, .home {
       border: 1px solid rgba(120, 170, 255, .45);
       background: rgba(8, 12, 28, .72);
       color: #eef3ff;
       box-shadow: 0 0 16px rgba(70, 120, 255, .18);
     }
-    .pill {
-      border-radius: 999px;
-      padding: 7px 12px;
-      font-size: 13px;
-      font-weight: 700;
-    }
-    .pill em { font-style: normal; color: #d7e6ff; }
     .crown, .home {
       width: 38px; height: 38px; border-radius: 999px;
       display: grid; place-items: center; padding: 0; cursor: pointer;
@@ -506,7 +499,6 @@
         </a>
       </div>
       <div class="meta">
-        <span class="pill" id="left"><em>0</em>/10</span>
         <button class="crown" id="prem" type="button" aria-label="Premium bağlıdır">
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M3 17h18l-1.6-8.2-4.2 3.4L12 5 8.8 12.2 4.6 8.8 3 17z" fill="url(#g)" stroke="#f6d789" stroke-width="1"/>
@@ -586,7 +578,6 @@
     const form = document.getElementById("form");
     const inp = document.getElementById("inp");
     const btn = document.getElementById("btn");
-    const left = document.getElementById("left");
     const toast = document.getElementById("toast");
     const today = new Date().toISOString().slice(0, 10);
     let toastTimer = 0;
@@ -608,15 +599,10 @@
     }
     function save(u) { localStorage.setItem(KEY, JSON.stringify(u)); }
     function remain() { return Math.max(0, LIMIT - load().c); }
+    // Limit ekranda göstərilmir. Sayğac yalnız xarici AI həqiqətən çağırılanda artır (server usedAI:true qaytarır).
+    // Limit dolubsa giriş bağlanmır: server hazır cavabları (AI-siz) yenə verir, AI tələb edən suala isə sadə mesaj qaytarır.
     function paint() {
-      const used = load().c;
-      const n = remain();
-      left.innerHTML = "<em>" + used + "</em>/" + LIMIT;
-      const full = n === 0;
-      inp.disabled = full;
-      btn.disabled = full;
-      if (full) inp.placeholder = "Limit doldu";
-      else if (mode === "chat") inp.placeholder = "Nə ilə kömək edim?";
+      if (mode === "chat") inp.placeholder = "Nə ilə kömək edim?";
     }
     function setMode(next) {
       mode = next;
@@ -640,7 +626,7 @@
       } else {
         label.hidden = true;
         label.textContent = "";
-        inp.placeholder = remain() ? "Nə ilə kömək edim?" : "Limit doldu";
+        inp.placeholder = "Nə ilə kömək edim?";
       }
       if (!restoring) {
         if (curItem) curItem.mode = next;
@@ -771,7 +757,7 @@
     }
     async function send(text) {
       const m = (text || "").trim();
-      if (!m || remain() <= 0) return;
+      if (!m) return;
       const useImage = mode === "image" || pendingImage || wantsImage(m);
       const sentMode = useImage ? "image" : mode === "code" ? "code" : mode === "create" ? "create" : "ask";
       inp.value = "";
@@ -790,8 +776,8 @@
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(useImage
-            ? { prompt: m, image: pendingImage }
-            : { message: m, messages: threadOf().slice(-8), mode: sentMode })
+            ? { prompt: m, image: pendingImage, limitReached: remain() <= 0 }
+            : { message: m, messages: threadOf().slice(-8), mode: sentMode, limitReached: remain() <= 0 })
         });
         const raw = await r.text();
         let data = {};
@@ -808,9 +794,11 @@
           const rtext = reply || (data.url ? "Şəkil hazırdır." : "");
           bubble(rtext, "b", data.url || "");
           rec("b", rtext, data.url || "", useImage ? 1 : 0);
-          const u = load();
-          u.c += 1;
-          save(u);
+          if (data.usedAI === true) {
+            const u = load();
+            u.c += 1;
+            save(u);
+          }
           pendingImage = "";
           const thumb = document.getElementById("thumb");
           thumb.classList.remove("on");
@@ -826,7 +814,7 @@
       }
       busy = false;
       paint();
-      if (remain() > 0) inp.focus();
+      inp.focus();
     }
     form.addEventListener("submit", function (e) {
       e.preventDefault();
@@ -840,7 +828,6 @@
     });
     document.querySelectorAll("[data-mode]").forEach(function (b) {
       b.addEventListener("click", function () {
-        if (remain() <= 0) return;
         const next = b.getAttribute("data-mode");
         setMode(mode === next ? "chat" : next);
         inp.focus();
@@ -875,7 +862,6 @@
       img.src = url;
     });
     document.getElementById("clip").addEventListener("click", function () {
-      if (remain() <= 0) return;
       document.getElementById("file").click();
     });
 
