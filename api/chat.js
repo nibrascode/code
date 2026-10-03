@@ -1,7 +1,7 @@
 const SYSTEM = [
   "Sən Nibras AI-san, Nibras Code saytının köməkçisisən.",
   "Cavabların qısa, aydın və nəzakətli olsun. İstifadəçi hansı dildə yazırsa, o dildə cavab ver.",
-  "Tibbi, hüquqi və maliyyə məsləhəti vermə.",
+  "İslam dini ilə bağlı sual gələndə dini hökm, ayə izahı və ya dərs vermə. Yalnız bunu yaz: İlk olaraq: süni intellektdən din öyrənilməz. İbn Sirin رحمه الله demişdir: «Həqiqətən, bu elm sizin dininizdir; dininizi kimdən aldığınıza diqqət edin.»",
   "Layihənin adı Nibras Code-dur. NibrasCodr yazma. Sahibi Mahir Əliyevdir. Bu faktı dəyişmə, başqa adam adı uydurma.",
   "Nibras Code böyük şirkət deyil. Sadə, faydalı və istifadəsi rahat tətbiqlər üzərində çalışan müstəqil şəxsi layihədir.",
   "Tətbiqlər: Nibras Arabic hazırdır. Nibras PDF və Nibras Plans tezliklədir. Nibras Docs hazırlanır.",
@@ -32,7 +32,7 @@ export default async function handler(req, res) {
       res.status(400).json({ success: false, reply: "Mesaj boş ola bilməz." });
       return;
     }
-    const ready = brandReply(message);
+    const ready = dinReply(message) || brandReply(message);
     if (ready) {
       res.status(200).json({ success: true, reply: ready });
       return;
@@ -69,6 +69,7 @@ export default async function handler(req, res) {
 function fold(text) {
   return String(text || "")
     .toLowerCase()
+    .replace(/\u0307/g, "")
     .replace(/ı/g, "i")
     .replace(/ə/g, "e")
     .replace(/ö/g, "o")
@@ -86,6 +87,22 @@ function replyLang(text) {
   if (/\b(uygulama|ucretsiz|hakkinda|degildir|lutfen|merhaba|tesekkur|kurucusu|yakinda|projen)\b/.test(q)) return "tr";
   if (/\b(who|what|owner|owns|about|contact|free|company|is|the)\b/.test(q)) return "en";
   return "az";
+}
+
+const DIN_REPLY =
+  "İlk olaraq: süni intellektdən din öyrənilməz. İbn Sirin رحمه الله demişdir: «Həqiqətən, bu elm sizin dininizdir; dininizi kimdən aldığınıza diqqət edin.»";
+
+export function dinReply(message) {
+  const raw = String(message || "");
+  const q = fold(raw);
+  const arabic = /اسلام|قرآن|حديث|صلاة|صوم|زكاة|حج|حلال|حرام|فقه|توحيد|عقيدة|وضوء|صيام/.test(raw);
+  const topic =
+    /\b(islam\w*|islami|islamic|musluman\w*|muslim\w*|quran\w*|hadis\w*|hadith\w*|sunnet\w*|sunnah\w*|fiqh\w*|fikh\w*|seriat\w*|shariat\w*|sharia\w*|namaz\w*|salat\w*|salah\w*|oruc\w*|ramazan\w*|ramadan\w*|zekat\w*|zakat\w*|hecc\w*|umre\w*|umrah\w*|destamaz\w*|abdest\w*|wudu\w*|gusl\w*|qusl\w*|taharet\w*|haram\w*|helal\w*|halal\w*|fetva\w*|fatwa\w*|tefsir\w*|mezheb\w*|madhab\w*|peyqember\w*|peygamber\w*|resulullah\w*|muhammed\w*|muhammad\w*|ayet\w*|aye\b|tevhid\w*|tawhid\w*|akaid\w*|aqidah\w*|gunah\w*|sevab\w*|cennet\w*|cehennem\w*)\b/.test(
+      q,
+    );
+  const din = /\b(din|dini|dinin|dinde)\b/.test(q) && /(islam|oyren|sual|nedir|ne dir|nece|namaz|oruc|haram|helal|quran|hadis)/.test(q);
+  if (arabic || topic || din) return DIN_REPLY;
+  return null;
 }
 
 export function brandReply(message) {
