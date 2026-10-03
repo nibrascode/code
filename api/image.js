@@ -36,31 +36,137 @@ export default async function handler(req, res) {
       res.status(400).json({ success: false, reply: "Şəkil çox böyükdür. Daha kiçik şəkil seç." });
       return;
     }
-    const apiKey = env("XAI_API_KEY");
-    if (!apiKey) {
-      res.status(503).json({ success: false, reply: "Şəkil xidməti hazırda bağlıdır." });
-      return;
-    }
-
-    let last = "Şəkil hazırlanmadı.";
-    for (const model of MODELS) {
-      const result = await imagine(apiKey, model, prompt, image);
+    const providers = [
+      () => viaXai(prompt, image),
+      () => viaGemini(prompt, image),
+      () => viaTogether(prompt, image),
+      () => viaHuggingFace(prompt, image),
+      () => viaOpenAi(prompt, image),
+      () => viaPollinations(prompt, image),
+    ];
+    let last = "";
+    for (const run of providers) {
+      let result;
+      try {
+        result = await run();
+      } catch (error) {
+        result = { ok: false, detail: String(error && error.message || error) };
+      }
+      if (result.skipped) continue;
       if (result.ok) {
         res.status(200).json({ success: true, url: result.url, reply: image ? "Şəkil düzəldildi." : "Şəkil hazırdır." });
         return;
       }
+      console.error("image provider failed", result.status, result.detail);
       last = result.detail || last;
-      console.error("image model failed", model, result.status, last);
-      if (result.status === 401 || result.status === 403 || result.status === 429) break;
     }
-    let reply = "Şəkil hazırlanmadı. Bir az sonra yenidən yoxla.";
-    if (/credit|balance|billing|spending|limit/i.test(last)) reply = "Şəkil xidmətinin balansı və ya limiti bitib. Bir az sonra yenidən yoxla.";
-    else if (/moderation|policy|safety|content/i.test(last)) reply = "Bu təsvirlə şəkil hazırlamaq olmadı. Başqa cür yaz.";
-    else if (/api key|unauthor|invalid.*key|permission/i.test(last)) reply = "Şəkil xidmətinin açarı düzgün deyil.";
+    let reply = image
+      ? "Şəkli düzəltmək olmadı. Bir az sonra yenidən yoxla."
+      : "Şəkil hazırlanmadı. Bir az sonra yenidən yoxla.";
+    if (/moderation|policy|safety|content/i.test(last)) reply = "Bu təsvirlə şəkil hazırlamaq olmadı. Başqa cür yaz.";
     res.status(502).json({ success: false, reply });
   } catch {
     res.status(500).json({ success: false, reply: "Şəkil xidmətinə çatmaq olmadı." });
   }
+}
+
+function dataParts(image) {
+  const m = /^data:(image\/[a-z+]+);base64,(.+)$/i.exec(image);
+  return m ? { mime: m[1], data: m[2] } : null;
+}
+
+async function viaXai(prompt, image) {
+  const apiKey = env("XAI_API_KEY");
+  if (!apiKey) return { skipped: true };
+  let last = { ok: false, detail: "xAI cavab vermədi." };
+  for (const model of MODELS) {
+    last = await imagine(apiKey, model, prompt, image);
+    if (last.ok) return last;
+    if (last.status === 401 || last.status === 403 || last.status === 429) break;
+  }
+  return last;
+}
+
+async function viaGemini(prompt, image) {
+  const apiKey = env("GEMINI_API_KEY");
+  if (!apiKey) return { skipped: true };
+  const parts = [{ text: prompt }];
+  const img = image ? dataParts(image) : null;
+  if (img) parts.push({ inlineData: { mimeType: img.mime, data: img.data } });
+  let detail = "Gemini şəkil vermədi.";
+  for (const model of ["gemini-2.5-flash-image", "gemini-2.0-flash-preview-image-generation", "gemini-2.5-flash-image-preview"]) {
+    const upstream = await fetch("https://generativelanguage.googleapis.com/v1beta/models/" + model + ":generateContent", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "x-goog-api-key": apiKey },
+      signal: AbortSignal.timeout(20000),
+      body: JSON.stringify({ contents: [{ role: "user", parts }], generationConfig: { responseModalities: ["TEXT", "IMAGE"] } }),
+    });
+    const data = await upstream.json().catch(() => ({}));
+    const out = (data.candidates?.[0]?.content?.parts || []).map((x) => x.inlineData || x.inline_data).find((x) => x && x.data);
+    if (upstream.ok && out) return { ok: true, url: "data:" + (out.mimeType || out.mime_type || "image/png") + ";base64," + out.data };
+    detail = String(data.error?.message || detail);
+    if (upstream.status === 429 || upstream.status === 401 || upstream.status === 403) return { ok: false, status: upstream.status, detail };
+  }
+  return { ok: false, detail };
+}
+
+async function viaTogether(prompt, image) {
+  const apiKey = env("TOGETHER_API_KEY");
+  if (!apiKey || image) return { skipped: true };
+  const upstream = await fetch("https://api.together.xyz/v1/images/generations", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Authorization: "Bearer " + apiKey },
+    signal: AbortSignal.timeout(20000),
+    body: JSON.stringify({ model: "black-forest-labs/FLUX.1-schnell", prompt, steps: 4, n: 1, response_format: "b64_json" }),
+  });
+  const data = await upstream.json().catch(() => ({}));
+  const b64 = data.data?.[0]?.b64_json;
+  if (upstream.ok && b64) return { ok: true, url: "data:image/jpeg;base64," + b64 };
+  return { ok: false, status: upstream.status, detail: String(data.error?.message || data.error || upstream.status) };
+}
+
+async function viaHuggingFace(prompt, image) {
+  const apiKey = env("HF_TOKEN");
+  if (!apiKey || image) return { skipped: true };
+  const upstream = await fetch("https://router.huggingface.co/hf-inference/models/black-forest-labs/FLUX.1-schnell", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Authorization: "Bearer " + apiKey },
+    signal: AbortSignal.timeout(25000),
+    body: JSON.stringify({ inputs: prompt }),
+  });
+  const type = upstream.headers.get("content-type") || "";
+  if (upstream.ok && type.startsWith("image/")) {
+    const buf = Buffer.from(await upstream.arrayBuffer());
+    return { ok: true, url: "data:" + type.split(";")[0] + ";base64," + buf.toString("base64") };
+  }
+  const data = await upstream.json().catch(() => ({}));
+  return { ok: false, status: upstream.status, detail: String(data.error?.message || data.error || upstream.status) };
+}
+
+async function viaOpenAi(prompt, image) {
+  const apiKey = env("OPENAI_API_KEY");
+  if (!apiKey || image) return { skipped: true };
+  const upstream = await fetch("https://api.openai.com/v1/images/generations", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Authorization: "Bearer " + apiKey },
+    signal: AbortSignal.timeout(30000),
+    body: JSON.stringify({ model: "gpt-image-1", prompt, size: "1024x1024", quality: "low" }),
+  });
+  const data = await upstream.json().catch(() => ({}));
+  const b64 = data.data?.[0]?.b64_json;
+  if (upstream.ok && b64) return { ok: true, url: "data:image/png;base64," + b64 };
+  return { ok: false, status: upstream.status, detail: String(data.error?.message || upstream.status) };
+}
+
+async function viaPollinations(prompt, image) {
+  if (image) return { skipped: true };
+  const seed = Math.floor(Math.random() * 1e6);
+  const url = "https://image.pollinations.ai/prompt/" + encodeURIComponent(prompt) + "?width=768&height=768&nologo=true&model=flux&seed=" + seed;
+  const upstream = await fetch(url, { signal: AbortSignal.timeout(25000), headers: { "User-Agent": "Mozilla/5.0 (compatible; NibrasAI/1.0)", Accept: "image/*" } });
+  const type = upstream.headers.get("content-type") || "";
+  if (!upstream.ok || !type.startsWith("image/")) return { ok: false, status: upstream.status, detail: "Pollinations " + upstream.status };
+  const buf = Buffer.from(await upstream.arrayBuffer());
+  return { ok: true, url: "data:" + type.split(";")[0] + ";base64," + buf.toString("base64") };
 }
 
 async function imagine(apiKey, model, prompt, image) {
