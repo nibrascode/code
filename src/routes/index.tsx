@@ -241,6 +241,25 @@ function Home() {
             <img src="/nibras-ai.png" alt="" />
             <span>Yapay Zeka</span>
           </a>
+          <a
+            className="nx-studio-bar"
+            href="https://nibrasterminal.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg className="nx-term" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="3" y="4" width="18" height="16" rx="3" fill="none" stroke="currentColor" strokeWidth="1.6" />
+              <path
+                d="M7 9.2 10.2 12 7 14.8M12.2 15h5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            <span>Nibras Studio</span>
+          </a>
         </div>
         <div className="nx-stage">
           <img src="/home/hero-desk.jpg" alt="" />

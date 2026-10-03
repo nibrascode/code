@@ -4222,6 +4222,37 @@ body.is-home .noise {
   }
 }
 
+.nx-studio-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  max-width: 38rem;
+  min-height: 48px;
+  margin-top: 10px;
+  padding: 6px 18px 6px 10px;
+  border-radius: 16px;
+  background: #070b16;
+  color: #f4f7ff;
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.08);
+}
+
+.nx-term {
+  width: 36px;
+  height: 36px;
+  padding: 6px;
+  border-radius: 10px;
+  color: #7ee7ff;
+  background: rgb(40 90 160 / 0.22);
+}
+
+.nx-studio-bar span {
+  font-size: 15px;
+  font-weight: 750;
+  letter-spacing: -0.03em;
+}
+
 .nx-apps {
   padding-bottom: 28px;
 }
