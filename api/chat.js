@@ -1,4 +1,6 @@
 import { cannedReply } from "./_canned.js";
+import { snippetReply } from "./_snippets.js";
+import { localReply } from "./_local.js";
 
 const SYSTEM = [
   "Sən Nibras AI-san, Nibras Code saytının köməkçisisən.",
@@ -34,7 +36,14 @@ export default async function handler(req, res) {
       res.status(400).json({ success: false, reply: "Mesaj boş ola bilməz." });
       return;
     }
-    const ready = cannedReply(message) || dinReply(message) || brandReply(message);
+    const ready =
+      cannedReply(message) ||
+      dinReply(message) ||
+      brandReply(message) ||
+      // Hazır python/html kod nümunələri: AI-yə getmədən (kod rejimi də daxil)
+      snippetReply(message, body.mode) ||
+      // Çox kiçik sorğular (salam, təşəkkür, sadə hesab, saat/tarix) yerli cavablanır
+      (body.mode === "create" ? null : localReply(message));
     if (ready) {
       res.status(200).json({ success: true, reply: ready });
       return;
