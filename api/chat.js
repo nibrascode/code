@@ -38,7 +38,13 @@ export default async function handler(req, res) {
       return;
     }
     const history = normalizeHistory(body.messages, message);
-    const order = pickOrder(message);
+    if (body.mode === "code") {
+      history.unshift({
+        role: "system",
+        text: "İstifadəçi kod istəyir. İşlək və qısa kod yaz. Kodu mütləq ``` dil ``` blokunda ver. İzahı bir-iki cümlə saxla. Kod yazmağı rədd etmə.",
+      });
+    }
+    const order = pickOrder(body.mode === "code" ? message + " kod" : message);
     const notes = [];
     const started = Date.now();
 
