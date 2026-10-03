@@ -1,6 +1,7 @@
 import { cannedReply } from "./_canned.js";
 import { snippetReply } from "./_snippets.js";
 import { localReply } from "./_local.js";
+import { track } from "./_stats.js";
 
 const SYSTEM = [
   "Sən Nibras AI-san, Nibras Code saytının köməkçisisən.",
@@ -36,18 +37,20 @@ export default async function handler(req, res) {
       res.status(400).json({ success: false, reply: "Mesaj boş ola bilməz." });
       return;
     }
+    const fixed = cannedReply(message) || dinReply(message) || brandReply(message);
+    // Hazır python/html/javascript/sql/css kod nümunələri: AI-yə getmədən (kod rejimi də daxil)
+    const snippet = fixed ? null : snippetReply(message, body.mode);
     const ready =
-      cannedReply(message) ||
-      dinReply(message) ||
-      brandReply(message) ||
-      // Hazır python/html kod nümunələri: AI-yə getmədən (kod rejimi də daxil)
-      snippetReply(message, body.mode) ||
+      fixed ||
+      snippet ||
       // Çox kiçik sorğular (salam, təşəkkür, sadə hesab, saat/tarix) yerli cavablanır
       (body.mode === "create" ? null : localReply(message));
     if (ready) {
+      track("snippet", snippet ? "hit" : "local"); // yalnız say; mesaj mətni saxlanmır
       res.status(200).json({ success: true, reply: ready });
       return;
     }
+    track("snippet", "ai");
     const history = normalizeHistory(body.messages, message);
     if (body.mode === "code") {
       history.unshift({
@@ -77,11 +80,13 @@ export default async function handler(req, res) {
       if (notes.length >= 12) break;
     }
 
+    track("error", "ai");
     res.status(200).json({
       success: false,
       reply: "İndi cavab alınmadı. Bir az sonra yenidən yoxlayın.",
     });
   } catch {
+    track("error", "server");
     res.status(200).json({
       success: false,
       reply: "Server xətası. Bir az sonra yenidən cəhd edin.",

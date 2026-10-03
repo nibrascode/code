@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Nibras statistika</title>
+  <link rel="icon" href="/nibras-icon.png" />
+  <style>
+    :root { --bg: #071427; --card: #0d2240; --line: rgba(94, 234, 212, .22); --fg: #eaf2ff; --muted: #8fa3c4; --teal: #2dd4bf; --teal2: #5eead4; --red: #fb7185; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; background: radial-gradient(circle at 50% -10%, #0f2f4d, var(--bg) 60%); color: var(--fg); font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+    main { max-width: 920px; margin: 0 auto; padding: 24px 16px 48px; }
+    h1 { margin: 0 0 4px; font-size: 24px; color: var(--teal2); }
+    .alt { margin: 0 0 22px; color: var(--muted); font-size: 14px; }
+    .kart { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 18px; margin-bottom: 16px; }
+    form { display: flex; gap: 10px; flex-wrap: wrap; }
+    input, select, button { font: inherit; border-radius: 12px; border: 1px solid var(--line); padding: 11px 14px; background: #08182f; color: var(--fg); }
+    input { flex: 1 1 220px; min-width: 0; }
+    input:focus, select:focus { outline: 2px solid var(--teal); outline-offset: 1px; }
+    button { background: var(--teal); color: #042f2e; font-weight: 700; border-color: transparent; cursor: pointer; }
+    button:disabled { opacity: .6; cursor: wait; }
+    .mesaj { margin-top: 12px; font-size: 14px; color: var(--muted); min-height: 1.2em; }
+    .mesaj.xeta { color: var(--red); }
+    .xulase { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 16px; }
+    .xulase div { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px; }
+    .xulase span { display: block; color: var(--muted); font-size: 12px; }
+    .xulase b { display: block; margin-top: 4px; font-size: 26px; color: var(--teal2); }
+    .cedvel { overflow-x: auto; }
+    table { border-collapse: collapse; width: 100%; min-width: 680px; font-size: 14px; }
+    th, td { padding: 9px 10px; text-align: right; border-bottom: 1px solid rgba(143, 163, 196, .15); white-space: nowrap; }
+    th:first-child, td:first-child { text-align: left; }
+    th { color: var(--teal2); font-weight: 600; font-size: 12px; }
+    tbody tr:hover { background: rgba(45, 212, 191, .07); }
+    tfoot td { font-weight: 700; color: var(--teal2); border-bottom: 0; }
+    .sifir { color: rgba(143, 163, 196, .5); }
+    .xeta-say { color: var(--red); }
+    .zolaq { display: inline-block; height: 8px; border-radius: 4px; background: linear-gradient(90deg, var(--teal), #38bdf8); vertical-align: middle; min-width: 2px; }
+    .gizli { display: none; }
+    .qeyd { color: var(--muted); font-size: 12px; line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Nibras statistika</h1>
+    <p class="alt">Yalnız ümumi say göstərilir. IP, ad və yazılan mətnlər saxlanmır.</p>
+
+    <section class="kart">
+      <form id="giris" autocomplete="off">
+        <input id="acar" type="password" placeholder="Statistika açarı" aria-label="Statistika açarı" required />
+        <select id="gun" aria-label="Gün sayı">
+          <option value="7">Son 7 gün</option>
+          <option value="14" selected>Son 14 gün</option>
+          <option value="30">Son 30 gün</option>
+          <option value="90">Son 90 gün</option>
+        </select>
+        <button id="dugme" type="submit">Göstər</button>
+      </form>
+      <div id="mesaj" class="mesaj" role="status"></div>
+    </section>
+
+    <section id="netice" class="gizli">
+      <div class="xulase" id="xulase"></div>
+      <div class="kart cedvel">
+        <table>
+          <thead>
+            <tr>
+              <th>Tarix</th><th>Ziyarət</th><th>Sual</th><th>Kod</th><th>Şəkil</th><th>Fikir</th>
+              <th>Hazır kod</th><th>Yerli</th><th>AI</th><th>Xəta</th><th></th>
+            </tr>
+          </thead>
+          <tbody id="govde"></tbody>
+          <tfoot id="yekun"></tfoot>
+        </table>
+      </div>
+      <p class="qeyd">Gün Bakı vaxtı ilə sayılır. «Hazır kod» kitabxanadan, «Yerli» salam/hesab/sabit cavablardan, «AI» isə süni intellekt xidmətinə gedən sorğulardan ibarətdir.</p>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      var form = document.getElementById("giris");
+      var acar = document.getElementById("acar");
+      var gun = document.getElementById("gun");
+      var dugme = document.getElementById("dugme");
+      var mesaj = document.getElementById("mesaj");
+      var netice = document.getElementById("netice");
+      var COLS = [
+        ["visit:ai", "visit"],
+        ["mode:ask", "mode:chat"],
+        ["mode:code"],
+        ["mode:image"],
+        ["mode:create"],
+        ["snippet:hit"],
+        ["snippet:local"],
+        ["snippet:ai"],
+        ["error"]
+      ];
+
+      function say(counts, spec) {
+        var n = 0;
+        spec.forEach(function (k) {
+          if (k === "error") {
+            Object.keys(counts).forEach(function (f) { if (f.indexOf("error:") === 0) n += counts[f]; });
+          } else if (k === "visit") {
+            Object.keys(counts).forEach(function (f) { if (f.indexOf("visit:") === 0 && f !== "visit:ai") n += counts[f]; });
+          } else {
+            n += counts[k] || 0;
+          }
+        });
+        return n;
+      }
+      function td(text, cls) {
+        var c = document.createElement("td");
+        c.textContent = String(text);
+        if (cls) c.className = cls;
+        return c;
+      }
+      function fmt(n) { return n.toLocaleString("az"); }
+      function setMsg(text, bad) { mesaj.textContent = text; mesaj.className = "mesaj" + (bad ? " xeta" : ""); }
+
+      function render(days) {
+        var body = document.getElementById("govde");
+        var foot = document.getElementById("yekun");
+        body.textContent = "";
+        foot.textContent = "";
+        var totals = COLS.map(function () { return 0; });
+        var rows = days.map(function (d) {
+          var vals = COLS.map(function (spec) { return say(d.counts, spec); });
+          vals.forEach(function (v, i) { totals[i] += v; });
+          return { date: d.date, vals: vals };
+        });
+        var maxVisit = Math.max.apply(null, [1].concat(rows.map(function (r) { return r.vals[0]; })));
+        rows.forEach(function (r) {
+          var tr = document.createElement("tr");
+          tr.appendChild(td(r.date));
+          r.vals.forEach(function (v, i) {
+            tr.appendChild(td(fmt(v), (v === 0 ? "sifir " : "") + (i === 8 && v > 0 ? "xeta-say" : "")));
+          });
+          var bar = document.createElement("td");
+          var z = document.createElement("span");
+          z.className = "zolaq";
+          z.style.width = Math.round((r.vals[0] / maxVisit) * 80) + "px";
+          bar.appendChild(z);
+          tr.appendChild(bar);
+          body.appendChild(tr);
+        });
+        var ft = document.createElement("tr");
+        ft.appendChild(td("Cəmi"));
+        totals.forEach(function (v) { ft.appendChild(td(fmt(v))); });
+        ft.appendChild(td(""));
+        foot.appendChild(ft);
+
+        var sual = totals[1] + totals[2] + totals[3] + totals[4];
+        var ai = totals[7], hazir = totals[5] + totals[6];
+        var xulase = document.getElementById("xulase");
+        xulase.textContent = "";
+        [["Ziyarət", totals[0]], ["Göndərilən sorğu", sual], ["AI-siz cavab", hazir], ["AI-yə gedən", ai], ["Xəta", totals[8]]].forEach(function (p) {
+          var box = document.createElement("div");
+          var s = document.createElement("span");
+          s.textContent = p[0];
+          var b = document.createElement("b");
+          b.textContent = fmt(p[1]);
+          box.appendChild(s);
+          box.appendChild(b);
+          xulase.appendChild(box);
+        });
+        netice.className = "";
+      }
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        dugme.disabled = true;
+        setMsg("Yüklənir...");
+        netice.className = "gizli";
+        fetch("/api/stats?days=" + encodeURIComponent(gun.value), { headers: { "x-stats-key": acar.value.trim() }, cache: "no-store" })
+          .then(function (r) {
+            return r.json().catch(function () { return {}; }).then(function (data) { return { status: r.status, data: data }; });
+          })
+          .then(function (res) {
+            var d = res.data || {};
+            if (res.status === 401) return setMsg("Açar yanlışdır.", true);
+            if (res.status === 503) return setMsg("Server tərəfdə STATS_KEY hələ təyin olunmayıb.", true);
+            if (!d.ok) return setMsg("Statistika alınmadı. Bir az sonra yenidən yoxlayın.", true);
+            if (!d.storage) return setMsg("Saxlama qoşulmayıb: Vercel-də Upstash/KV dəyişənlərini əlavə edin.", true);
+            setMsg("");
+            render(d.days || []);
+          })
+          .catch(function () { setMsg("Şəbəkəyə qoşulmaq olmadı.", true); })
+          .then(function () { dugme.disabled = false; });
+      });
+    })();
+  </script>
+</body>
+</html>

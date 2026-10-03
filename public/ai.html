@@ -548,6 +548,25 @@
       const map = { "&": "amp", "<": "lt", ">": "gt" };
       return String(text).replace(/[&<>]/g, function (ch) { return "&" + map[ch] + ";"; });
     }
+    // Gizlilik dostu say: yalnız hadisə növü və adı göndərilir (IP, cookie, mətn yoxdur). Xəta olsa səssiz keçilir.
+    let statErrors = 0;
+    function stat(type, name) {
+      try {
+        if (navigator.doNotTrack === "1" || window.doNotTrack === "1") return;
+        const body = JSON.stringify({ type: type, name: name });
+        if (navigator.sendBeacon && navigator.sendBeacon("/api/stats", new Blob([body], { type: "application/json" }))) return;
+        fetch("/api/stats", { method: "POST", headers: { "Content-Type": "application/json" }, body: body, keepalive: true }).catch(function () {});
+      } catch (e) {}
+    }
+    try {
+      if (!sessionStorage.getItem("nai_v")) {
+        sessionStorage.setItem("nai_v", "1");
+        stat("visit", "ai");
+      }
+    } catch (e) { stat("visit", "ai"); }
+    window.addEventListener("error", function () {
+      if (statErrors++ < 3) stat("error", "js");
+    });
     const RUN_BASE = "https://nibrasterminal.vercel.app/run";
     const RUN_MAX = 60000;
     const RUN_LANGS = { python: "python", py: "python", py3: "python", javascript: "javascript", js: "javascript", html: "html", htm: "html" };
@@ -628,6 +647,7 @@
       bubble(m, "u");
       if (!useImage) thread.push({ role: "user", text: m });
       btn.disabled = true;
+      stat("mode", sentMode);
       const wait = document.createElement("div");
       wait.className = "msg b";
       wait.innerHTML = '<span class="dots"><i></i><i></i><i></i></span>';
@@ -647,6 +667,7 @@
         wait.remove();
         const reply = data.reply || data.message || data.error;
         if (!r.ok || data.success === false || (!reply && !data.url)) {
+          stat("error", useImage ? "image" : "chat");
           bubble(reply || "Cavab gəlmədi. Bir az sonra yenidən yoxlayın.", "b err");
           if (!useImage) thread.pop();
         } else {
@@ -664,6 +685,7 @@
       } catch (e) {
         wait.remove();
         if (!useImage) thread.pop();
+        stat("error", "network");
         bubble("Şəbəkəyə qoşulmaq olmadı.", "b err");
       }
       paint();

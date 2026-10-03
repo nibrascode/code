@@ -114,6 +114,31 @@ test("«Aç» düyməsi", { skip, timeout: 120000 }, async (t) => {
     await page.close();
   });
 
+  await t.test("sayğac: ziyarət, rejim və xəta hadisələri /api/stats-a gedir (məzmun yoxdur)", async () => {
+    const page = await browser.newPage();
+    const got = [];
+    await page.route("**/api/stats", (r) => { got.push(JSON.parse(r.request().postData() || "{}")); return r.fulfill({ contentType: "application/json", body: '{"ok":true}' }); });
+    await page.route("**/api/chat", (r) => r.fulfill({ contentType: "application/json", body: JSON.stringify({ success: false, reply: "xəta" }) }));
+    await open(page);
+    await ask(page, "gizli sual mətni");
+    await page.waitForFunction(() => true);
+    await new Promise((r) => setTimeout(r, 300));
+    assert.deepEqual(got.filter((e) => e.type === "visit"), [{ type: "visit", name: "ai" }]);
+    assert.ok(got.some((e) => e.type === "mode" && e.name === "ask"));
+    assert.ok(got.some((e) => e.type === "error" && e.name === "chat"));
+    assert.ok(!JSON.stringify(got).includes("gizli"), "mətn göndərilməməlidir");
+    await page.close();
+  });
+
+  await t.test("sayğac sorğusu bloklansa da səhifə işləməyə davam edir", async () => {
+    const page = await browser.newPage();
+    await page.route("**/api/stats", (r) => r.abort());
+    await open(page);
+    await ask(page, "python kod nümunəsi");
+    assert.ok((await page.locator(".msg.b .runbtn").count()) >= 1);
+    await page.close();
+  });
+
   await t.test("çox böyük kod: toast, pəncərə açılmır", async () => {
     const page = await browser.newPage();
     const big = Array.from({ length: 4000 }, (_, i) => `x${i} = "${Math.random().toString(36).slice(2)}${Math.random().toString(36).slice(2)}"`).join("\n");
