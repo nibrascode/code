@@ -51,7 +51,7 @@ export default async function handler(req, res) {
         return;
       }
       notes.push(name + ": " + String(result.detail || "xəta").slice(0, 140));
-      if (notes.length >= 5) break;
+      if (notes.length >= 12) break;
     }
 
     res.status(200).json({
@@ -202,18 +202,18 @@ export function brandReply(message) {
 function pickOrder(message) {
   const q = message.toLowerCase();
   if (/(python|javascript|typescript|\bjava\b|c#|c\+\+|sql|html|css|\bkod\b|funksiya|function|\bbug\b|algoritm|regex|proqramlaş|react|node\.?js)/i.test(q)) {
-    return ["mistral-code", "groq", "github", "openrouter", "gemini", "hf", "xai"];
+    return ["mistral-code", "deepseek", "groq", "cerebras", "github", "nvidia", "openrouter", "gemini", "sambanova", "xai", "hf"];
   }
   if (/(niyə|nədən|neden|почему|hesabla|hesab|riyaz|riyazi|isbat|müqayisə|fərqi|analiz|\d+\s*[\+\-\*\/]\s*\d+|explain|solve|vur|vurma|çarp|multiply)/i.test(q)) {
-    return ["xai", "groq-reason", "mistral", "openrouter", "gemini", "hf"];
+    return ["xai", "deepseek", "groq-reason", "cerebras", "mistral", "openrouter", "gemini", "nvidia", "hf"];
   }
   if (/(bu gün|bugün|today|xəbər|xeber|hava |qiymət|latest|dünən|sabah)/i.test(q)) {
-    return ["xai", "openrouter", "groq", "gemini", "hf"];
+    return ["xai", "openrouter", "groq", "gemini", "deepseek", "hf"];
   }
   if (/(şeir|hekayə|şer|yazı yaz|poem|story|yaradıcı)/i.test(q)) {
-    return ["mistral", "xai", "groq", "gemini", "openrouter"];
+    return ["mistral", "xai", "groq", "gemini", "deepseek", "openrouter", "ollama"];
   }
-  return ["groq", "xai", "mistral", "gemini", "openrouter", "hf", "github"];
+  return ["groq", "xai", "deepseek", "mistral", "gemini", "cerebras", "openrouter", "nvidia", "sambanova", "scaleway", "ollama", "llm7", "airforce", "hf", "github"];
 }
 
 async function ask(name, history, message) {
@@ -225,6 +225,14 @@ async function ask(name, history, message) {
   if (name === "hf") return askHf(history);
   if (name === "gemini") return askGemini(message);
   if (name === "github") return askGithub(history);
+  if (name === "deepseek") return askDeepSeek(history);
+  if (name === "nvidia") return askNvidia(history);
+  if (name === "cerebras") return askCerebras(history);
+  if (name === "sambanova") return askSambaNova(history);
+  if (name === "scaleway") return askScaleway(history);
+  if (name === "ollama") return askOllama(history);
+  if (name === "llm7") return askLlm7(history);
+  if (name === "airforce") return askAirforce(history);
   return { skipped: true };
 }
 
@@ -263,7 +271,9 @@ async function askGroq(history) {
 async function askXai(history) {
   const apiKey = env("XAI_API_KEY");
   if (!apiKey) return { skipped: true };
-  for (const model of ["grok-4.5", "grok-3-mini", "grok-3"]) {
+  const modern = await xaiResponses(apiKey, history);
+  if (modern.ok) return modern;
+  for (const model of ["grok-4.7", "grok-4.5", "grok-3-mini", "grok-3"]) {
     const result = await complete({
       url: "https://api.x.ai/v1/chat/completions",
       apiKey,
@@ -274,6 +284,95 @@ async function askXai(history) {
     if (!/model|not found|does not exist|unsupported/i.test(result.detail || "")) return result;
   }
   return { ok: false, detail: "xAI cavab vermədi." };
+}
+
+async function xaiResponses(apiKey, history) {
+  const upstream = await fetch("https://api.x.ai/v1/responses", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Authorization: "Bearer " + apiKey },
+    signal: AbortSignal.timeout(8000),
+    body: JSON.stringify({
+      model: "grok-4.7",
+      input: [
+        { role: "system", content: SYSTEM },
+        ...history.map((item) => ({ role: item.role, content: item.text })),
+      ],
+    }),
+  });
+  const data = await upstream.json().catch(() => ({}));
+  const reply = stripThink(responseText(data));
+  if (upstream.ok && reply) return { ok: true, reply };
+  return { ok: false, detail: "xAI responses" };
+}
+
+function responseText(data) {
+  if (typeof data.output_text === "string") return data.output_text;
+  const parts = Array.isArray(data.output) ? data.output : [];
+  return parts
+    .map((item) => (Array.isArray(item.content) ? item.content.map((part) => part.text || "").join("") : item.text || ""))
+    .join("");
+}
+
+async function askChain(history, keys, url, models) {
+  const apiKey = keys.map((name) => env(name)).find(Boolean);
+  if (!apiKey) return { skipped: true };
+  let last = { ok: false, detail: "cavab vermədi." };
+  for (const model of models) {
+    last = await complete({ url, apiKey, model, history });
+    if (last.ok) return last;
+    if (!/model|not found|does not exist|unknown|invalid|unavailable|no longer|not supported/i.test(String(last.detail || ""))) {
+      return last;
+    }
+  }
+  return last;
+}
+
+function askDeepSeek(history) {
+  return askChain(history, ["DEEPSEEK_API_KEY"], "https://api.deepseek.com/chat/completions", [
+    "deepseek-v4-flash",
+    "deepseek-flash",
+    "deepseek-chat",
+  ]);
+}
+
+function askNvidia(history) {
+  return askChain(history, ["NVIDIA_API_KEY", "NGC_API_KEY"], "https://integrate.api.nvidia.com/v1/chat/completions", [
+    "meta/llama-3.3-70b-instruct",
+    "nvidia/llama-3.1-nemotron-70b-instruct",
+  ]);
+}
+
+function askCerebras(history) {
+  return askChain(history, ["CEREBRAS_API_KEY"], "https://api.cerebras.ai/v1/chat/completions", [
+    "gpt-oss-120b",
+    "qwen-3.8-27b",
+  ]);
+}
+
+function askSambaNova(history) {
+  return askChain(history, ["SAMBANOVA_API_KEY"], "https://api.sambanova.ai/v1/chat/completions", [
+    "Meta-Llama-3.3-70B-Instruct",
+    "gpt-oss-120b",
+  ]);
+}
+
+function askScaleway(history) {
+  return askChain(history, ["SCALEWAY_SECRET_KEY", "SCALEWAY_API_KEY"], "https://api.scaleway.ai/v1/chat/completions", [
+    "llama-3.3-70b-instruct",
+    "gemma-4-26b-a4b-it",
+  ]);
+}
+
+function askOllama(history) {
+  return askChain(history, ["OLLAMA_API_KEY"], "https://ollama.com/v1/chat/completions", ["gemma4:31b", "gpt-oss:20b"]);
+}
+
+function askLlm7(history) {
+  return askChain(history, ["LLM7_API_KEY"], "https://api.llm7.io/v1/chat/completions", ["fast", "default"]);
+}
+
+function askAirforce(history) {
+  return askChain(history, ["AIRFORCE_API_KEY"], "https://api.airforce/v1/chat/completions", ["gpt-4.1-mini", "gpt-4o-mini"]);
 }
 
 async function askMistral(history, models) {
