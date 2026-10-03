@@ -1,6 +1,7 @@
 // Təfsir məlumatı: xam yükləmə (scripts/download-tafsir.sh -> /workspace/tafsir_raw) -> api/_tafsir/{muyassar,saadi,ibnkathir}/<surə>.js + loaders.js
-// Mətn olduğu kimi saxlanılır (yalnız HTML -> sadə mətn, Sədi üçün). İşlətmək: node scripts/build-tafsir.mjs [xam-qovluq]
+// Mətn olduğu kimi saxlanılır (yalnız HTML -> sadə mətn, Sədi üçün); fayllar brotli+base64 ilə sıxılır (~9 MB, açılmış ~98 MB). İşlətmək: node scripts/build-tafsir.mjs [xam-qovluq]
 import fs from "node:fs";
+import zlib from "node:zlib";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { AYAH_COUNT as COUNTS } from "../api/_ayah.js";
@@ -47,10 +48,18 @@ export function parseSaadi(html, nAyas) {
   }
   return { intro: intro.join("\n"), blocks };
 }
-const js = (v) => JSON.stringify(v).replace(/\u2028/g, "\\u2028").replace(/\u2029/g, "\\u2029");
+// Hər surə faylı: brotli ilə sıxılmış JSON (base64). api/_tafsir/_unpack.js açır. Mətn bit-bit eynidir (JSON gediş-gəliş testi build-də yoxlanır).
+const pack = (v) => {
+  const json = JSON.stringify(v);
+  const buf = zlib.brotliCompressSync(Buffer.from(json, "utf8"), {
+    params: { [zlib.constants.BROTLI_PARAM_QUALITY]: 11, [zlib.constants.BROTLI_PARAM_LGWIN]: 24, [zlib.constants.BROTLI_PARAM_SIZE_HINT]: json.length },
+  });
+  if (JSON.stringify(JSON.parse(zlib.brotliDecompressSync(buf).toString("utf8"))) !== json) throw new Error("sıxma gediş-gəliş xətası");
+  return buf.toString("base64");
+};
 function write(dir, n, banner, data) {
   fs.mkdirSync(path.join(OUT, dir), { recursive: true });
-  fs.writeFileSync(path.join(OUT, dir, n + ".js"), `// ${banner}\nexport default ${js(data)};\n`);
+  fs.writeFileSync(path.join(OUT, dir, n + ".js"), `// ${banner}\nimport { unpack } from "../_unpack.js";\nexport default unpack("${pack(data)}");\n`);
 }
 
 export function build() {

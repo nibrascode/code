@@ -1,2 +1,3 @@
 // Tafsir al-Muyassar — QuranEnc.com (arabic_moyassar). Mətn dəyişdirilməyib. Avtomatik: node scripts/build-tafsir.mjs
-export default ["قل -أيها الرسول-: هو الله المتفرد بالألوهية والربوبية والأسماء والصفات، لا يشاركه أحد فيها.","الله الذي كَمُل في صفات الشَّرَف والمجد والعظمة، الذي يقصده الخلائق في قضاء الحوائج والرغائب.","ليس له ولد ولا والد ولا صاحبة.","ولم يكن له مماثلا ولا مشابهًا أحد من خلقه، لا في أسمائه ولا في صفاته، ولا في أفعاله، تبارك وتعالى وتقدَّس."];
+import { unpack } from "../_unpack.js";
+export default unpack("H1ACAJwJdizEZBjy90SFnaQX/2+8pE1BfQdkTp/j8XkMCQXVMcJcsjl1Cq3LYBCe9LnQLxCRgdPpzsXhbIBzf4/O+fSow4saBhZJoFmaesPTRUSe1i0qov7yBdztV44FlpXgfbGc37n8qxqmLJYFJiis+QQEsFNmvpWKoh7Zx0SjBjCZriwW3zeID4m+Ph35rlvnWPLijA6VWnx6fLa0JhfUKod8fPCuvAa6L3SKgS4vjBTGoKEX6eqWJm1JmP1G1TxeolZLpOhRBTmFjegs2lnelwnSXMeFWIqiGUQgVYTdZewJLeTO8xaYW44ecQZM9ekBvHF9DhpBGb9AdRpnwSfZIjhDCQXhRT1/");

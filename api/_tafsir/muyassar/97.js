@@ -1,2 +1,3 @@
 // Tafsir al-Muyassar — QuranEnc.com (arabic_moyassar). Mətn dəyişdirilməyib. Avtomatik: node scripts/build-tafsir.mjs
-export default ["إنا أنزلنا القرآن في ليلة الشرف والفضل، وهي إحدى ليالي شهر رمضان.","وما أدراك -أيها النبي- ما ليلة القدر والشرف؟","ليلة القدر ليلة مباركة، العمل الصالح فيها خير من عمل ألف شهر ليس فيها ليلة قدر.","يكثر نزول الملائكة وجبريل عليه السلام فيها، بإذن ربهم من كل أمر قضاه في تلك السنة.","هي أمن كلها، لا شرَّ فيها إلى مطلع الفجر."];
+import { unpack } from "../_unpack.js";
+export default unpack("Hz8CAJwJdizEZBjy90SFXqQXb4vyeVCfhdK5ZVg67AwNXhsh9RUxQs6m0JrnWviKJRN6WYhY3qqWhVD/7DfBZjNJyIogKEwqWrOZaEISC93mJ9Ed2maHpPvz+TPGszsy/vuvqrIoIYewqFqLqOxg8kChm6obhr8CZIYNJRv5nZHCBVeEetdXGhKpRbnzbLfUUcSErHZr15HPfapmg2QdTYLwLjNbF4w6YspzFu6rjDDw4CBGAzqlWaR20t43bNi1Ao5arjUEleiWiFD+BBLKEZvQXXkkmsTR1bYXrWOjWVW0nKqsE7Vsyni4ApgHZlFvDzLkmnXyhX+IykhT/w==");
