@@ -51,13 +51,13 @@ export const TOPICS = [
  {
   "n": 9,
   "title_az": "Əhli-sünnə vəl-cəmaatın Allahın sifətləri ilə bağlı qaydaları",
-  "title_az_translated": false,
+  "title_az_translated": true,
   "title_ar": "قواعد أهل السنة والجماعة في صفات الله تعالى"
  },
  {
   "n": 10,
-  "title_az": "Quran və sünnədə gələn bəzi Allah adları və onları ihsa etmənin mənası",
-  "title_az_translated": false,
+  "title_az": "Allahın bəzi adlarının öyrənilməsi və onları \"ihsa\" etməyin mənası",
+  "title_az_translated": true,
   "title_ar": "استعراض بعض أسماء الله عَزَّوَجَلَّ الواردة في الكتاب والسنة، ومعنى إحصائها"
  },
  {
@@ -1526,8 +1526,8 @@ export const ENTRIES = [
   "q_ar": "عدد قواعد أهل السنة والجماعة في أسماء الله ﷻ، مع تبيانها.",
   "q_az": "Əhli-sünnə vəl-cəmaatın Allahın adları ilə bağlı qaydalarını sadalayın və izah edin.",
   "a_ar": "القاعدة الأولى: أسماء الله ﷻ كلها حسنى.\nمعنى الحسنى في اللغة والاصطلاح\nفي اللغة: تأنيث أحسن.\nفي الاصطلاح أنها بلغت الغاية والنهاية في الكمال والجمال.\nالدليل على أن أسماء الله تعالى كلها حسنى أربعة أدلة في كتاب الله :\n١. قول الله ﷻ : وَلِلَّهِ الْأَسْمَاءُ الْحُسْنَى فَادْعُوهُ بِهَا ﴾ [الأعراف: ١٨٠].\n٢. قول الله ﷻ : قُلِ ادْعُوا اللَّهَ أَوِ ادْعُوا الرَّحْمَنَ أَيَّا مَا تَدْعُوا فَلَهُ الْأَسْمَاءُ الْحُسْنَى [الإسراء: ١١٠].\n٣. قول الله ﷻ : هُوَ اللَّهُ الْخَالِقُ الْبَارِئُ الْمُصَوِّرُ لَهُ الْأَسْمَاءُ الْحُسْنَى [الحشر: ٢٤].\n٤. قول الله ﷻ : اللَّهُ لَا إِلَهَ إِلَّا هُوَ لَهُ الْأَسْمَاءُ الْحُسْنَى ﴾ [طه: ٨].\nلماذا كانت أسماء الله ﷻ كلها حسنى؟\n١ - لأنها أسماء أجل وأعظم موجود، وهو الله ﷻ.\n٢ - لأن الله تعالى يدعى بهذه الأسماء.\n٣ - لأن أسماء الله ﷻ متضمنة للصفات.\nمثال على أن أسماء الله متضمنة للصفات: اجتماع اسم الله (العزيز) باسم الله (الحكيم) ﷻ. كما في قوله تعالى : إن تُعَذِّبْهُمْ فَإِنَّهُمْ عِبَادُكَ وَإِن تَغْفِرْ لَهُمْ فَإِنَّكَ أَنتَ الْعَزِيزُ الْحَكِيمُ [المائدة : ۱۱۸]، فإذا اقترن اسم الله (العزيز) باسم الله (الحكيم) دل على أن الله وإن كان لا يعجزه شيء في السماوات والأرض لقوته.\nالقاعدة الثانية: أسماء الله ﷻ غير محصورة بعدد معين.\nالدليل على أن أسماء الله غير محصورة في تسعة وتسعين : قول النبي ﷺ : (أسألك بكل اسم هو لك، سميت به نفسك، أو علمته أحداً من خلقك أو أنزلته في كتابك أو استأثرت به في علم الغيب عندك...)\nاستأثرت به: أي انفردت بعلمه.\nالقاعدة الثالثة: أسماء الله ﷻ توقيفية.\nمن الأدلة على أن أسماء الله ﷻ توقيفية:\n١. قول الله ﷻ : وَلِلَّهِ الْأَسْمَاءُ الْحُسْنَى فَادْعُوهُ بِهَا وَذَرُوا الَّذِينَ يُلْحِدُونَ فِي أَسْمَبِهِ سَيُجْزَوْنَ مَا كَانُوا يَعْمَلُونَ ) [الأعراف: ۱۸۰] .\nوجه الاستدلال :\nأ - أن الألف واللام في قوله : الْأَسْمَاءُ هي للعهد.\nب - أن قوله : الحُسْنَى ، أي : التي بلغت الغاية في الحسن.\nج - في قوله : فَادْعُوهُ بِهَا دليل على أن الأسماء توقيفية؛ لأن الدعاء عبادة.\nد - في قوله : ﴿وَذَرُوا الَّذِينَ يُلْحِدُونَ فِي أَسْمَائِهِ﴾ دليل على أن الأسماء توقيفية؛ إذ من الإلحاد تسمية الله بما لم يسم به نفسه.\n٢. قول الله ﷻ : قُلْ إِنَّمَا حَرَّمَ رَبِّيَ الْفَوَاحِشَ مَا ظَهَرَ مِنْهَا وَمَا بَطَنَ وَالْإِثْمَ وَالْبَغْيَ بِغَيْرِ الْحَقِّ وَأَن تُشْرِكُوا بِاللَّهِ مَا لَمْ يُنَزِّلْ بِهِ سُلْطَانًا وَأَن تَقُولُوا عَلَى اللَّهِ مَا لَا تَعْلَمُونَ [الأعراف: ٣٣].\nوجه الاستدلال: أن من قال إن هذا اسم الله ﷻ، أو صفة الله بغير دليل، فقد قال على الله بغير علم.\n٣. قول الله ﷻ : ﴿وَلَا تَقْفُ مَا لَيْسَ لَكَ بِهِ عِلْمٌ إِنَّ السَّمْعَ وَالْبَصَرَ وَالْفُؤَادَ كُلُّ أُولَبِكَ كَانَ عَنْهُ مَسْئُولًا ﴾ [الإسراء: ٣٦].\nوجه الاستدلال: أن من سمى الله تعالى باسم أو وصفه بصفة من غير دليل، فقد اتبع ما ليس له به علم.\nالقاعدة الرابعة: أسماء الله تعالى تدل على وصف متعد وغير متعد.\nإن دلت أسماءه على وصف متعد، تضمنت ثلاثة أمور :\n۱. ثبوت ذلك الاسم لله ﷻ.\n٢. ثبوت الصفة التي تضمنها لله ﷻ.\n٣. ثبوت حكمها ومقتضاها.\nمثال ذلك: اسم الله (السميع) يتضمن إثبات: السميع اسماً لله، وإثبات السمع صفة له ﷻ، وإثبات: حكم ذلك ومقتضاه.\nوإن دلت أسماءه على وصف غير متعد، تضمنت أمرين:\n١. ثبوت ذلك الاسم لله ﷻ.\n٢. ثبوت الصفة التي تضمنها لله ﷻ.\nمثال ذلك: اسم الله (الحي)، يتضمن إثبات الحي اسماً لله ﷻ، وإثبات: الحياة صفة له ﷻ.\nالقاعدة الخامسة: دلالة أسماء الله تعالى على ذاته وصفاته تكون بالمطابقة، وبالتضمن، وبالالتزام.\nدلالة أسماء الله ﷻ في ذاته وصفاته على ثلاثة أنواع:\nالنوع الأول: دلالة مطابقة: هي دلالة اللفظ على تمام وكمال معناه الذي وضع له. مثال: دلالة البيت على الجدران والسقف.\nالنوع الثاني: دلالة تضمن: إذا فسرنا الاسم ببعض مدلوله. فهي دلالة اللفظ على جزء معناه الذي وضع له.\nالنوع الثالث : دلالة التزام: إذا استدللنا به على غيره من الأسماء التي يتوقف هذا الاسم عليها. فهي دلالة اللفظ على معنى خارج اللفظ، يلزم منه هذا اللفظ.",
-  "a_az": null,
-  "a_az_partial": "Birinci qayda: Allahın bütün adları gözəldir\n\"Hüsnə\" sözü lüğəvi olaraq «ən gözəl» mənasını verir.\nTerminoloji mənada isə ən yüksək kamilliyə və gözəlliyə çatmış deməkdir.\nAllahın bütün adlarının gözəl olduğuna Qurani-Kərimdən dörd dəlil qeyd olunur:\n1.\nUca Allah buyurur:\n«Ən gözəl adlar Allaha məxsusdur. Ona bu adlarla dua edin». (Əraf, 180)\n2.\nUca Allah buyurur:\n«De: \"İstər Allah deyə çağırın, istər Rəhman deyə çağırın. Hansı adla çağırsanız da, ən gözəl adlar Ona məxsusdur\"». (İsra, 110)\n3.\nUca Allah buyurur:\n«O, Allahdır — Yaradan, yoxdan var edən, surət verən. Ən gözəl adlar Ona məxsusdur». (Həşr, 24)\n4.\nUca Allah buyurur:\n«Allah — Ondan başqa ibadətə layiq məbud yoxdur. Ən gözəl adlar Ona məxsusdur». (Taha, 8)\nAllahın bütün adları nə üçün gözəldir?\n1. Çünki bu adlar mövcud olanların ən ucasına və ən əzəmətlisinə — uca Allaha aiddir.\n2. Çünki Allah bu adlarla çağırılır.\n3. Çünki Allahın adlarının hər biri Onun sifətlərini özündə ehtiva edir.\nMəsələn\nAllahın Əl-Əziz (العزيز) və Əl-Həkim (الحكيم) adlarının birlikdə işlənməsi Onun həm qüdrətli, həm də hikmət sahibi olduğunu göstərir.\nUca Allah buyurur:\n«Əgər onlara əzab versən, şübhəsiz ki, onlar Sənin qullarındır. Əgər onları bağışlasan, həqiqətən, Sən Əzizsən, Hikmət sahibisən». (Maidə, 118)\nBurada \"Əl-Əziz\" adı Allahın məğlubedilməz qüdrətinə, \"Əl-Həkim\" adı isə Onun hikmətinə dəlalət edir.\nİkinci qayda: Allahın adları müəyyən sayla məhdudlaşdırılmayıb\nAllahın adları yalnız 99 adla məhdudlaşmır.\nPeyğəmbər ﷺ duasında belə buyurmuşdur:\n«Sənə məxsus olan hər bir adınla Səndən istəyirəm; Özünə verdiyin, yaratdıqlarından birinə öyrətdiyin, Kitabında nazil etdiyin və ya qeyb elmində Öz yanında saxladığın adınla...»\nBuradakı \"Öz yanında saxladığın\" ifadəsinin mənası: Allahın yalnız Özünün bildiyi və heç bir məxluqa bildirmədiyi adların olmasıdır.\nDeməli, hədisdə 99 adın qeyd edilməsi Allahın bütün adlarının yalnız 99 olması demək deyil.\nÜçüncü qayda: Allahın adları təvqifidir\nTəvqifilik — Allahın adlarını yalnız Qurani-Kərim və səhih sünnədə gələn dəlillər əsasında qəbul etmək deməkdir.\nDəlil 1\nUca Allah buyurur:\n«Ən gözəl adlar Allaha məxsusdur. Ona bu adlarla dua edin və Onun adları barəsində doğru yoldan çıxanları tərk edin. Onlar etdiklərinin cəzasını alacaqlar». (Əraf, 180)\nBu ayədən aşağıdakılar anlaşılır:\n«Adlar» ifadəsi müəyyən edilmiş adlara işarə edir.\n«Ən gözəl» ifadəsi həmin adların kamilliyinə dəlalət edir.\n«Ona bu adlarla dua edin» ifadəsi adların təvqifilik prinsipinə dəlalət edir. Çünki dua ibadətdir.\n«Onun adları barəsində doğru yoldan çıxanları tərk edin» ifadəsi Allahı Onun Özünün adlandırmadığı bir adla adlandırmağın yanlış olduğunu göstərir.\nDəlil 2\nUca Allah buyurur:\n«De: \"Rəbbim yalnız aşkar və gizli çirkin əməlləri, günahı, haqsız yerə zülm etməyi, haqqında heç bir dəlil nazil etmədiyi şeyi Allaha şərik qoşmağınızı və Allah barəsində bilmədiyiniz şeyi söyləməyinizi haram etmişdir\"». (Əraf, 33)\nDeməli, heç bir dəlil olmadan Allahın adını və ya sifətini müəyyən etmək Allah haqqında elmsiz danışmaqdır.\nDəlil 3\nUca Allah buyurur:\n«Bilmədiyin şeyin ardınca getmə. Çünki qulaq, göz və qəlb — bunların hamısı sorğu-sual olunacaq». (İsra, 36)\nDeməli, heç bir dəlil olmadan Allahı adlandıran və ya Ona bir sifət aid edən şəxs bilmədiyi bir şeyin ardınca getmiş olur.",
+  "a_az": "Birinci qayda: Allahın bütün adları gözəldir\n\"Hüsnə\" sözü lüğəvi olaraq «ən gözəl» mənasını verir.\nTerminoloji mənada isə ən yüksək kamilliyə və gözəlliyə çatmış deməkdir.\nAllahın bütün adlarının gözəl olduğuna Qurani-Kərimdən dörd dəlil qeyd olunur:\n1.\nUca Allah buyurur:\n«Ən gözəl adlar Allaha məxsusdur. Ona bu adlarla dua edin». (Əraf, 180)\n2.\nUca Allah buyurur:\n«De: \"İstər Allah deyə çağırın, istər Rəhman deyə çağırın. Hansı adla çağırsanız da, ən gözəl adlar Ona məxsusdur\"». (İsra, 110)\n3.\nUca Allah buyurur:\n«O, Allahdır — Yaradan, yoxdan var edən, surət verən. Ən gözəl adlar Ona məxsusdur». (Həşr, 24)\n4.\nUca Allah buyurur:\n«Allah — Ondan başqa ibadətə layiq məbud yoxdur. Ən gözəl adlar Ona məxsusdur». (Taha, 8)\nAllahın bütün adları nə üçün gözəldir?\n1. Çünki bu adlar mövcud olanların ən ucasına və ən əzəmətlisinə — uca Allaha aiddir.\n2. Çünki Allah bu adlarla çağırılır.\n3. Çünki Allahın adlarının hər biri Onun sifətlərini özündə ehtiva edir.\nMəsələn\nAllahın Əl-Əziz (العزيز) və Əl-Həkim (الحكيم) adlarının birlikdə işlənməsi Onun həm qüdrətli, həm də hikmət sahibi olduğunu göstərir.\nUca Allah buyurur:\n«Əgər onlara əzab versən, şübhəsiz ki, onlar Sənin qullarındır. Əgər onları bağışlasan, həqiqətən, Sən Əzizsən, Hikmət sahibisən». (Maidə, 118)\nBurada \"Əl-Əziz\" adı Allahın məğlubedilməz qüdrətinə, \"Əl-Həkim\" adı isə Onun hikmətinə dəlalət edir.\nİkinci qayda: Allahın adları müəyyən sayla məhdudlaşdırılmayıb\nAllahın adları yalnız 99 adla məhdudlaşmır.\nPeyğəmbər ﷺ duasında belə buyurmuşdur:\n«Sənə məxsus olan hər bir adınla Səndən istəyirəm; Özünə verdiyin, yaratdıqlarından birinə öyrətdiyin, Kitabında nazil etdiyin və ya qeyb elmində Öz yanında saxladığın adınla...»\nBuradakı \"Öz yanında saxladığın\" ifadəsinin mənası: Allahın yalnız Özünün bildiyi və heç bir məxluqa bildirmədiyi adların olmasıdır.\nDeməli, hədisdə 99 adın qeyd edilməsi Allahın bütün adlarının yalnız 99 olması demək deyil.\nÜçüncü qayda: Allahın adları təvqifidir\nTəvqifilik — Allahın adlarını yalnız Qurani-Kərim və səhih sünnədə gələn dəlillər əsasında qəbul etmək deməkdir.\nDəlil 1\nUca Allah buyurur:\n«Ən gözəl adlar Allaha məxsusdur. Ona bu adlarla dua edin və Onun adları barəsində doğru yoldan çıxanları tərk edin. Onlar etdiklərinin cəzasını alacaqlar». (Əraf, 180)\nBu ayədən aşağıdakılar anlaşılır:\n«Adlar» ifadəsi müəyyən edilmiş adlara işarə edir.\n«Ən gözəl» ifadəsi həmin adların kamilliyinə dəlalət edir.\n«Ona bu adlarla dua edin» ifadəsi adların təvqifilik prinsipinə dəlalət edir. Çünki dua ibadətdir.\n«Onun adları barəsində doğru yoldan çıxanları tərk edin» ifadəsi Allahı Onun Özünün adlandırmadığı bir adla adlandırmağın yanlış olduğunu göstərir.\nDəlil 2\nUca Allah buyurur:\n«De: \"Rəbbim yalnız aşkar və gizli çirkin əməlləri, günahı, haqsız yerə zülm etməyi, haqqında heç bir dəlil nazil etmədiyi şeyi Allaha şərik qoşmağınızı və Allah barəsində bilmədiyiniz şeyi söyləməyinizi haram etmişdir\"». (Əraf, 33)\nDeməli, heç bir dəlil olmadan Allahın adını və ya sifətini müəyyən etmək Allah haqqında elmsiz danışmaqdır.\nDəlil 3\nUca Allah buyurur:\n«Bilmədiyin şeyin ardınca getmə. Çünki qulaq, göz və qəlb — bunların hamısı sorğu-sual olunacaq». (İsra, 36)\nDeməli, heç bir dəlil olmadan Allahı adlandıran və ya Ona bir sifət aid edən şəxs bilmədiyi bir şeyin ardınca getmiş olur.\n\nDördüncü qayda: Allahın adları həm keçişli, həm də keçişsiz sifətlərə dəlalət edir\n\nƏgər Allahın adı keçişli (mütəəddi) bir sifətə dəlalət edirsə, həmin addan üç şey anlaşılır:\n\n1. Adın özü\n2. Adın dəlalət etdiyi sifət\n3. Həmin sifətin tələb etdiyi və ortaya çıxardığı məna\n\nMəsələn, Əs-Səmi (السميع) — \"Hər şeyi Eşidən\" adı:\n\n- Ad: Əs-Səmi\n- Sifət: eşitmək\n- Tələb etdiyi məna: Allah eşidilən hər şeyi eşidir.\n\nƏgər Allahın adı keçişsiz (qeyri-mütəəddi) bir sifətə dəlalət edirsə, ondan iki şey anlaşılır:\n\n1. Adın özü\n2. Adın dəlalət etdiyi sifət\n\nMəsələn, Əl-Həyy (الحي) — \"Diri\" adı:\n\n- Ad: Əl-Həyy\n- Sifət: həyat\n\nBeşinci qayda: Allahın adları Onun zatına və sifətlərinə üç cür dəlalət edir\n\nAllahın adları üç cür dəlalətə malikdir:\n\n1. Mutabəqə yolu ilə dəlalət\n\nLəfz özünün ifadə etmək üçün qoyulduğu tam mənaya dəlalət edir.\n\nMəsələn, \"ev\" sözü evin divarlarını, damını və bütövlükdə onun özünü ifadə edir.\n\n2. Təzəmmün yolu ilə dəlalət\n\nLəfz öz mənasının bir hissəsinə dəlalət edir.\n\nMəsələn, \"ev\" sözü deyildikdə onun divarlarının ayrıca nəzərdə tutulması kimi.\n\n3. İltizam yolu ilə dəlalət\n\nLəfz özündə birbaşa ifadə olunmayan, lakin həmin mənadan zəruri şəkildə nəticələnən başqa bir mənaya dəlalət edir.\n\nBeləliklə, Allahın adları həm Allahın zatına, həm də adların ehtiva etdiyi kamil sifətlərə müxtəlif dəlalət yolları ilə işarə edir.",
+  "a_az_partial": null,
   "core": [
    "əsma|esma|asma|isim|ad$|adı$|adları|adlar$|adlarını|اسماء|أسماء|اسم",
    "qayda|kaide|kaid|قاعدة|قواعد"
@@ -1704,9 +1704,9 @@ export const ENTRIES = [
   "main": false,
   "label": "Dördüncü qayda: Allahın adları keçişli və keçişsiz sifətə dəlalət edir",
   "q_ar": "عدد قواعد أهل السنة والجماعة في أسماء الله ﷻ، مع تبيانها.",
-  "q_az": null,
+  "q_az": "Əhli-sünnə vəl-cəmaatın Allahın adları ilə bağlı qaydalarını sadalayın və izah edin.",
   "a_ar": "القاعدة الرابعة: أسماء الله تعالى تدل على وصف متعد وغير متعد.\nإن دلت أسماءه على وصف متعد، تضمنت ثلاثة أمور :\n۱. ثبوت ذلك الاسم لله ﷻ.\n٢. ثبوت الصفة التي تضمنها لله ﷻ.\n٣. ثبوت حكمها ومقتضاها.\nمثال ذلك: اسم الله (السميع) يتضمن إثبات: السميع اسماً لله، وإثبات السمع صفة له ﷻ، وإثبات: حكم ذلك ومقتضاه.\nوإن دلت أسماءه على وصف غير متعد، تضمنت أمرين:\n١. ثبوت ذلك الاسم لله ﷻ.\n٢. ثبوت الصفة التي تضمنها لله ﷻ.\nمثال ذلك: اسم الله (الحي)، يتضمن إثبات الحي اسماً لله ﷻ، وإثبات: الحياة صفة له ﷻ.",
-  "a_az": null,
+  "a_az": "Dördüncü qayda: Allahın adları həm keçişli, həm də keçişsiz sifətlərə dəlalət edir\n\nƏgər Allahın adı keçişli (mütəəddi) bir sifətə dəlalət edirsə, həmin addan üç şey anlaşılır:\n\n1. Adın özü\n2. Adın dəlalət etdiyi sifət\n3. Həmin sifətin tələb etdiyi və ortaya çıxardığı məna\n\nMəsələn, Əs-Səmi (السميع) — \"Hər şeyi Eşidən\" adı:\n\n- Ad: Əs-Səmi\n- Sifət: eşitmək\n- Tələb etdiyi məna: Allah eşidilən hər şeyi eşidir.\n\nƏgər Allahın adı keçişsiz (qeyri-mütəəddi) bir sifətə dəlalət edirsə, ondan iki şey anlaşılır:\n\n1. Adın özü\n2. Adın dəlalət etdiyi sifət\n\nMəsələn, Əl-Həyy (الحي) — \"Diri\" adı:\n\n- Ad: Əl-Həyy\n- Sifət: həyat",
   "a_az_partial": null,
   "core": [
    "əsma|esma|asma|isim|ad$|adı$|adları|adlar$|adlarını|اسماء|أسماء|اسم",
@@ -1735,22 +1735,25 @@ export const ENTRIES = [
   "main": false,
   "label": "Beşinci qayda: adların zata və sifətlərə mütabiqət, təzəmmün və iltizam dəlaləti",
   "q_ar": "عدد قواعد أهل السنة والجماعة في أسماء الله ﷻ، مع تبيانها.",
-  "q_az": null,
+  "q_az": "Əhli-sünnə vəl-cəmaatın Allahın adları ilə bağlı qaydalarını sadalayın və izah edin.",
   "a_ar": "القاعدة الخامسة: دلالة أسماء الله تعالى على ذاته وصفاته تكون بالمطابقة، وبالتضمن، وبالالتزام.\nدلالة أسماء الله ﷻ في ذاته وصفاته على ثلاثة أنواع:\nالنوع الأول: دلالة مطابقة: هي دلالة اللفظ على تمام وكمال معناه الذي وضع له. مثال: دلالة البيت على الجدران والسقف.\nالنوع الثاني: دلالة تضمن: إذا فسرنا الاسم ببعض مدلوله. فهي دلالة اللفظ على جزء معناه الذي وضع له.\nالنوع الثالث : دلالة التزام: إذا استدللنا به على غيره من الأسماء التي يتوقف هذا الاسم عليها. فهي دلالة اللفظ على معنى خارج اللفظ، يلزم منه هذا اللفظ.",
-  "a_az": null,
+  "a_az": "Beşinci qayda: Allahın adları Onun zatına və sifətlərinə üç cür dəlalət edir\n\nAllahın adları üç cür dəlalətə malikdir:\n\n1. Mutabəqə yolu ilə dəlalət\n\nLəfz özünün ifadə etmək üçün qoyulduğu tam mənaya dəlalət edir.\n\nMəsələn, \"ev\" sözü evin divarlarını, damını və bütövlükdə onun özünü ifadə edir.\n\n2. Təzəmmün yolu ilə dəlalət\n\nLəfz öz mənasının bir hissəsinə dəlalət edir.\n\nMəsələn, \"ev\" sözü deyildikdə onun divarlarının ayrıca nəzərdə tutulması kimi.\n\n3. İltizam yolu ilə dəlalət\n\nLəfz özündə birbaşa ifadə olunmayan, lakin həmin mənadan zəruri şəkildə nəticələnən başqa bir mənaya dəlalət edir.\n\nBeləliklə, Allahın adları həm Allahın zatına, həm də adların ehtiva etdiyi kamil sifətlərə müxtəlif dəlalət yolları ilə işarə edir.",
   "a_az_partial": null,
   "core": [
-   "əsma|esma|asma|isim|ad$|adı$|adları|adlar$|adlarını|اسماء|أسماء|اسم",
-   "dəlalət|delalet|dəlalət|دلالة|mütabiqət|mutabiqet|مطابقة|təzəmmün|tezemmun|تضمن|iltizam|التزام"
+   "mütabiqət|mutabiqet|mütabəqə|mutabeqe|mutabaqa|mutabakat|مطابقة|təzəmmün|tezemmun|tazammun|تضمن|iltizam|التزام",
+   "dəlalət|delalet|dalalet|ləfz|lefz|دلالة"
   ],
-  "opt": [],
+  "opt": [
+   "əsma|esma|asma|isim|ad$|adı$|adları|adlar$|adlarını|اسماء|أسماء|اسم"
+  ],
   "not": [],
   "amb": null,
   "ask": false,
   "triggers": {
    "az": [
     "Allahın adlarının mütabiqət təzəmmün və iltizam dəlaləti",
-    "Allahın adlarının mütabiqət dəlaləti nədir"
+    "Allahın adlarının mütabiqət dəlaləti nədir",
+    "Mütabəqə təzəmmün iltizam dəlalət"
    ],
    "tr": [
     "Allah'ın isimlerinin mutabakat tazammun ve iltizam delaleti"
@@ -1766,9 +1769,9 @@ export const ENTRIES = [
   "main": true,
   "label": "Əhli-sünnənin Allahın sifətləri ilə bağlı qaydaları",
   "q_ar": "عدد قواعد أهل السنة والجماعة في صفات الله ﷻ.",
-  "q_az": null,
+  "q_az": "Əhli-sünnə vəl-cəmaatın Allahın sifətləri ilə bağlı qaydalarını sadalayın və izah edin.",
   "a_ar": "القاعدة الأولى: صفات الله ﷻ توقيفية :\nالصفات تؤخذ من الكتاب والسنة.\nأهل السنة والجماعة لا ينفون عن الله تعالى صفات الكمال التي وصف بها نفسه، أو وصفته بها رسله ﷺ.\nأهل السنة لا ينفون ما أثبته الله ورسوله من الأسماء والصفات.\nأهل السنة لا يكيفون صفات الله تعالى.\nموقف أهل السنة مما سكت عنه الشرع؛ فلم يثبته، ولم ينفه فإنهم يسكتون عنه، فلا يثبتونه ولا ينفونه.\nالقاعدة الثانية: الله ﷻ ليس كمثله شيء:\nالله ﷻ ليس كمثله شيء بوجه من الوجوه؛ لا في ذاته، ولا في صفاته، ولا في أفعاله.\nتنزيه الله ﷻ يكون عن أمرين:\n۱. تنزيهه عن النقص المناقض لكماله.\n٢. تنزيهه في كماله عن أن يكون له مثل.\nالقاعدة الثالثة: النفي المجمل، والإثبات المفصل:\nأثبت الله ﷻ في كتابه أنه : (حي قيوم عليم قدير سميع بصير عزيز حكيم، الاستواء، الغضب، الحب، الرضى، الخلق، ونحو ذلك).\nونفى الله عزوجل في كتابه بأن قال : لَيْسَ كَمِثْلِهِ شَيْءٌ ﴾ [الشورى: ١١].\nإيمان العبد بصفات الله تعالى يدور مع هذين الأصلين:\n١. الإثبات المفصل: لأنه كلما كثرت صفات الكمال الثبوتية، ظهر من كمال الموصوف بها، وهو الله.\n٢. النفي المجمل : لأنه كلما أجمل النفي، كان أدل على التنزيه من كل وجه.\nالقاعدة الرابعة: اتفاق المسميين ليس هو التمثيل المنفي:\nاتفاق المسميين لا يقتضي التماثل مطلقاً.\nمثال ذلك: لفظ (الوجود).\nوجود مخلوقين يشتركان في اسم (مخلوق) واسم (موجود) لا يقتضي اشتراكهما في نفس الوجود، أو في نفس الخلق في الخارج.\nأن الأسماء والصفات لها ثلاث اعتبارات:\n١. إما أن تكون مضافة إلى الرب تعالى.\n٢. وإما أن تكون مضافة إلى العبد.\n٣. وإما أن تكون مطلقة لا تختص بالرب ولا بالعبد.\nليس في اتفاق المسميات تشبيه الله بخلقه، ولا تمثيل لصفاته بصفاتهم.\nأن اتفاق المسميات في القدر المشترك لا يستلزم التشبيه في أصلين ومثلين مضروبين:\nأما الأصلان هما :\n١. القول في الصفات كالقول في الذات.\n٢. القول في بعض الصفات كالقول في بعضها الآخر.\nأما المثالان المضروبان فهما:\n١. نعيم الجنة (وهو خاص بالأسماء).\n٢. الروح (وهو خاص بالصفات).\nراجع المذكرة ص ۱۰۸ - ۱۱۳.\nالقاعدة الخامسة : القول في الصفات كالقول في الذات: وهذا هو أحد الأصلين اللذين بني عليهما إثبات الحقيقة القائلة: أن اتفاق المسميين ليس هو التشبيه.\nالقاعدة السادسة: القول في بعض الصفات كالقول في بعضها الآخر: وهذا هو الأصل الثاني من الأصلين اللذين بني عليهما إثبات الحقيقة التي نصت على أن اتفاق المسميين ليس هو التشبيه.",
-  "a_az": null,
+  "a_az": "Birinci qayda: Allahın sifətləri təvqifidir\n\nAllahın sifətləri yalnız Qurani-Kərim və səhih sünnədə gələn dəlillər əsasında qəbul edilir.\n\nƏhli-sünnə vəl-cəmaat:\n\n- Allahın Özündə və ya Rəsulunun dilində təsdiq etdiyi sifətləri inkar etmir.\n- Allahın Özündə və ya Rəsulunun dilində təsdiq etdiyi ad və sifətləri rədd etmir.\n- Allahın sifətlərinin necə olduğunu (keyfiyyətini) soruşmur və müəyyən etmir.\n- Vəhyin haqqında heç bir məlumat vermədiyi sifətlər barədə isə dəlil olmadan nə təsdiq, nə də inkar hökmü vermir.\n\nİkinci qayda: «Onun heç bir bənzəri yoxdur»\n\nUca Allah buyurur:\n\n««Onun heç bir bənzəri yoxdur. O, Eşidəndir, Görəndir».\n(Şura, 11)»\n\nAllah Öz zatında, sifətlərində və əməllərində yaradılmışların heç birinə bənzəmir.\n\nBurada tənzih — Allahı Onun kamilliyinə zidd olan bütün nöqsanlardan və məxluqata bənzəməkdən uzaq tutmaq — iki əsas məna daşıyır:\n\n1. Allahın kamilliyinə zidd olan bütün qüsurları Ondan uzaqlaşdırmaq.\n2. Allahın bütün kamil sifətlərə sahib olduğunu, lakin bunların heç birinin yaradılmışların sifətlərinə bənzəmədiyini təsdiq etmək.\n\nÜçüncü qayda: Ümumi şəkildə inkar, təfsilatlı şəkildə təsdiq edilir\n\nQurani-Kərimdə Allah Özünün çoxsaylı kamil sifətlərini təfsilatlı şəkildə təsdiq etmişdir.\n\nMəsələn:\n\n- həyat,\n- Qəyyumluq,\n- elm,\n- qüdrət,\n- eşitmək,\n- görmək,\n- izzət,\n- hikmət,\n- Ərşə istiva etmək,\n- qəzəb,\n- məhəbbət,\n- razılıq,\n- yaratmaq və s.\n\nAllahın Özündən inkar etdiyi sifətlər isə ümumi və əhatəli şəkildə ifadə olunur.\n\nMəsələn:\n\n««Onun heç bir bənzəri yoxdur».\n(Şura, 11)»\n\nBu ayə Allahın hər cür bənzərdən və oxşardan uzaq olduğunu ümumi şəkildə bildirir.\n\nBu məsələdə iman iki əsas istiqamət üzərində qurulur:\n\n1. Təfsilatlı təsdiq\n\nAllahın kamillik sifətləri nə qədər çox və ətraflı təsdiq edilərsə, Onun kamilliyi bir o qədər aydın görünür.\n\n2. Ümumi inkar\n\nAllahdan bütün nöqsan və qüsurların ümumi şəkildə uzaqlaşdırılması Onun hər cəhətdən pak və kamil olduğunu göstərir.\n\nDördüncü qayda: Adların eyni olması qadağan olunmuş bənzətməni tələb etmir\n\nBəzən Allah ilə məxluqat arasında eyni ad işlənir. Lakin adın eyni olması onların həqiqətlərinin və xüsusiyyətlərinin eyni olması demək deyil.\n\nMəsələn, həm Allah, həm də məxluq haqqında \"mövcud olmaq\" ifadəsi işlədilə bilər. Lakin Allahın mövcudluğu ilə məxluqun mövcudluğu eyni deyil.\n\nEyni şəkildə Allahın sifətləri ilə məxluqatın sifətləri arasında sadəcə ümumi ad və ümumi məna baxımından uyğunluq olması onların bir-birinə bənzəməsini tələb etmir.\n\nAllahın ad və sifətləri üç baxımdan nəzərdən keçirilə bilər:\n\n1. Rəbbə aid edildikdə\n2. Qula aid edildikdə\n3. Mütləq və ümumi şəkildə işlədildikdə\n\nBuna görə də Allah və məxluq haqqında eyni sözün işlənməsi öz-özlüyündə təşbih — yəni Allahı məxluqa bənzətmək — demək deyil.\n\nBu məsələnin başa düşülməsi üçün iki əsas prinsip vardır.\n\nBeşinci qayda: Sifətlər haqqında danışmaq zat haqqında danışmaq kimidir\n\nBu, Allahın adlarının məxluqatın adları ilə eyni olmasının təşbihi tələb etmədiyini göstərən əsas prinsiplərdən biridir.\n\nƏgər Allahın zatı məxluqatın zatına bənzəmirsə, Allahın sifətləri də məxluqatın sifətlərinə bənzəmir.\n\nMəsələn, Allahın elmi ilə insanın elmi eyni deyil. Hər ikisinə \"elm\" deyilməsi onların həqiqətinin eyni olduğunu göstərmir.\n\nAltıncı qayda: Bəzi sifətlər haqqında danışmaq digər sifətlər haqqında danışmaq kimidir\n\nAllahın bir sifətini təsdiq edərkən əsas götürdüyümüz prinsip digər sifətlərə də tətbiq olunur.\n\nMəsələn, Allahın elmini təsdiq edirik və Onun elminin məxluqatın elminə bənzəmədiyini deyirik.\n\nEyni qayda Allahın:\n\n- eşitməsinə,\n- görməsinə,\n- qüdrətinə,\n- həyatına,\n- digər sifətlərinə\n\ndə aiddir.\n\nDeməli, bir sifətin həqiqi olması onun məxluqatın sifətinə bənzəməsini tələb etmir. Allahın bütün sifətləri Ona layiq şəkildə həqiqidir və heç biri yaradılmışların sifətlərinə bənzəmir.",
   "a_az_partial": null,
   "core": [
    "sifət|sifet|sifat|صفة|صفات",
@@ -1809,9 +1812,9 @@ export const ENTRIES = [
   "main": false,
   "label": "Birinci qayda: Allahın sifətləri təvqifidir",
   "q_ar": "عدد قواعد أهل السنة والجماعة في صفات الله ﷻ.",
-  "q_az": null,
+  "q_az": "Əhli-sünnə vəl-cəmaatın Allahın sifətləri ilə bağlı qaydalarını sadalayın və izah edin.",
   "a_ar": "القاعدة الأولى: صفات الله ﷻ توقيفية :\nالصفات تؤخذ من الكتاب والسنة.\nأهل السنة والجماعة لا ينفون عن الله تعالى صفات الكمال التي وصف بها نفسه، أو وصفته بها رسله ﷺ.\nأهل السنة لا ينفون ما أثبته الله ورسوله من الأسماء والصفات.\nأهل السنة لا يكيفون صفات الله تعالى.\nموقف أهل السنة مما سكت عنه الشرع؛ فلم يثبته، ولم ينفه فإنهم يسكتون عنه، فلا يثبتونه ولا ينفونه.",
-  "a_az": null,
+  "a_az": "Birinci qayda: Allahın sifətləri təvqifidir\n\nAllahın sifətləri yalnız Qurani-Kərim və səhih sünnədə gələn dəlillər əsasında qəbul edilir.\n\nƏhli-sünnə vəl-cəmaat:\n\n- Allahın Özündə və ya Rəsulunun dilində təsdiq etdiyi sifətləri inkar etmir.\n- Allahın Özündə və ya Rəsulunun dilində təsdiq etdiyi ad və sifətləri rədd etmir.\n- Allahın sifətlərinin necə olduğunu (keyfiyyətini) soruşmur və müəyyən etmir.\n- Vəhyin haqqında heç bir məlumat vermədiyi sifətlər barədə isə dəlil olmadan nə təsdiq, nə də inkar hökmü vermir.",
   "a_az_partial": null,
   "core": [
    "sifət|sifet|sifat|صفة|صفات",
@@ -1826,7 +1829,8 @@ export const ENTRIES = [
   "triggers": {
    "az": [
     "Allahın sifətləri təvqifidir nə deməkdir",
-    "Sifətlərin təvqifi olması nə deməkdir"
+    "Sifətlərin təvqifi olması nə deməkdir",
+    "Allahın sifətləri təvqifidir"
    ],
    "tr": [
     "Allah'ın sıfatları tevkifidir ne demek"
@@ -1842,9 +1846,9 @@ export const ENTRIES = [
   "main": false,
   "label": "İkinci qayda: Allaha bənzər heç nə yoxdur",
   "q_ar": "عدد قواعد أهل السنة والجماعة في صفات الله ﷻ.",
-  "q_az": null,
+  "q_az": "Əhli-sünnə vəl-cəmaatın Allahın sifətləri ilə bağlı qaydalarını sadalayın və izah edin.",
   "a_ar": "القاعدة الثانية: الله ﷻ ليس كمثله شيء:\nالله ﷻ ليس كمثله شيء بوجه من الوجوه؛ لا في ذاته، ولا في صفاته، ولا في أفعاله.\nتنزيه الله ﷻ يكون عن أمرين:\n۱. تنزيهه عن النقص المناقض لكماله.\n٢. تنزيهه في كماله عن أن يكون له مثل.",
-  "a_az": null,
+  "a_az": "İkinci qayda: «Onun heç bir bənzəri yoxdur»\n\nUca Allah buyurur:\n\n««Onun heç bir bənzəri yoxdur. O, Eşidəndir, Görəndir».\n(Şura, 11)»\n\nAllah Öz zatında, sifətlərində və əməllərində yaradılmışların heç birinə bənzəmir.\n\nBurada tənzih — Allahı Onun kamilliyinə zidd olan bütün nöqsanlardan və məxluqata bənzəməkdən uzaq tutmaq — iki əsas məna daşıyır:\n\n1. Allahın kamilliyinə zidd olan bütün qüsurları Ondan uzaqlaşdırmaq.\n2. Allahın bütün kamil sifətlərə sahib olduğunu, lakin bunların heç birinin yaradılmışların sifətlərinə bənzəmədiyini təsdiq etmək.",
   "a_az_partial": null,
   "core": [
    "leyse|leysə|kəmislihi|kemislihi|ليس كمثله|كمثله|bənzəri yoxdur|benzeri yok|benzeri yoktur|misli yoxdur|misli yoktur"
@@ -1877,13 +1881,13 @@ export const ENTRIES = [
   "main": false,
   "label": "Üçüncü qayda: ümumi inkar, təfsilatlı isbat",
   "q_ar": "عدد قواعد أهل السنة والجماعة في صفات الله ﷻ.",
-  "q_az": null,
+  "q_az": "Əhli-sünnə vəl-cəmaatın Allahın sifətləri ilə bağlı qaydalarını sadalayın və izah edin.",
   "a_ar": "القاعدة الثالثة: النفي المجمل، والإثبات المفصل:\nأثبت الله ﷻ في كتابه أنه : (حي قيوم عليم قدير سميع بصير عزيز حكيم، الاستواء، الغضب، الحب، الرضى، الخلق، ونحو ذلك).\nونفى الله عزوجل في كتابه بأن قال : لَيْسَ كَمِثْلِهِ شَيْءٌ ﴾ [الشورى: ١١].\nإيمان العبد بصفات الله تعالى يدور مع هذين الأصلين:\n١. الإثبات المفصل: لأنه كلما كثرت صفات الكمال الثبوتية، ظهر من كمال الموصوف بها، وهو الله.\n٢. النفي المجمل : لأنه كلما أجمل النفي، كان أدل على التنزيه من كل وجه.",
-  "a_az": null,
+  "a_az": "Üçüncü qayda: Ümumi şəkildə inkar, təfsilatlı şəkildə təsdiq edilir\n\nQurani-Kərimdə Allah Özünün çoxsaylı kamil sifətlərini təfsilatlı şəkildə təsdiq etmişdir.\n\nMəsələn:\n\n- həyat,\n- Qəyyumluq,\n- elm,\n- qüdrət,\n- eşitmək,\n- görmək,\n- izzət,\n- hikmət,\n- Ərşə istiva etmək,\n- qəzəb,\n- məhəbbət,\n- razılıq,\n- yaratmaq və s.\n\nAllahın Özündən inkar etdiyi sifətlər isə ümumi və əhatəli şəkildə ifadə olunur.\n\nMəsələn:\n\n««Onun heç bir bənzəri yoxdur».\n(Şura, 11)»\n\nBu ayə Allahın hər cür bənzərdən və oxşardan uzaq olduğunu ümumi şəkildə bildirir.\n\nBu məsələdə iman iki əsas istiqamət üzərində qurulur:\n\n1. Təfsilatlı təsdiq\n\nAllahın kamillik sifətləri nə qədər çox və ətraflı təsdiq edilərsə, Onun kamilliyi bir o qədər aydın görünür.\n\n2. Ümumi inkar\n\nAllahdan bütün nöqsan və qüsurların ümumi şəkildə uzaqlaşdırılması Onun hər cəhətdən pak və kamil olduğunu göstərir.",
   "a_az_partial": null,
   "core": [
    "mücməl|mucmel|müfəssəl|mufessel|ümumi|təfsilatlı|tefsilatli|مجمل|مفصل|المجمل|المفصل|إجمالي",
-   "nəfy|nefy|inkar|isbat|إثبات|نفي|ispat"
+   "nəfy|nefy|inkar|isbat|təsdiq|tesdiq|إثبات|نفي|ispat"
   ],
   "opt": [],
   "not": [],
@@ -1908,13 +1912,13 @@ export const ENTRIES = [
   "main": false,
   "label": "Dördüncü qayda: adların uyğunluğu bənzətmə deyil",
   "q_ar": "عدد قواعد أهل السنة والجماعة في صفات الله ﷻ.",
-  "q_az": null,
+  "q_az": "Əhli-sünnə vəl-cəmaatın Allahın sifətləri ilə bağlı qaydalarını sadalayın və izah edin.",
   "a_ar": "القاعدة الرابعة: اتفاق المسميين ليس هو التمثيل المنفي:\nاتفاق المسميين لا يقتضي التماثل مطلقاً.\nمثال ذلك: لفظ (الوجود).\nوجود مخلوقين يشتركان في اسم (مخلوق) واسم (موجود) لا يقتضي اشتراكهما في نفس الوجود، أو في نفس الخلق في الخارج.\nأن الأسماء والصفات لها ثلاث اعتبارات:\n١. إما أن تكون مضافة إلى الرب تعالى.\n٢. وإما أن تكون مضافة إلى العبد.\n٣. وإما أن تكون مطلقة لا تختص بالرب ولا بالعبد.\nليس في اتفاق المسميات تشبيه الله بخلقه، ولا تمثيل لصفاته بصفاتهم.\nأن اتفاق المسميات في القدر المشترك لا يستلزم التشبيه في أصلين ومثلين مضروبين:\nأما الأصلان هما :\n١. القول في الصفات كالقول في الذات.\n٢. القول في بعض الصفات كالقول في بعضها الآخر.\nأما المثالان المضروبان فهما:\n١. نعيم الجنة (وهو خاص بالأسماء).\n٢. الروح (وهو خاص بالصفات).\nراجع المذكرة ص ۱۰۸ - ۱۱۳.",
-  "a_az": null,
+  "a_az": "Dördüncü qayda: Adların eyni olması qadağan olunmuş bənzətməni tələb etmir\n\nBəzən Allah ilə məxluqat arasında eyni ad işlənir. Lakin adın eyni olması onların həqiqətlərinin və xüsusiyyətlərinin eyni olması demək deyil.\n\nMəsələn, həm Allah, həm də məxluq haqqında \"mövcud olmaq\" ifadəsi işlədilə bilər. Lakin Allahın mövcudluğu ilə məxluqun mövcudluğu eyni deyil.\n\nEyni şəkildə Allahın sifətləri ilə məxluqatın sifətləri arasında sadəcə ümumi ad və ümumi məna baxımından uyğunluq olması onların bir-birinə bənzəməsini tələb etmir.\n\nAllahın ad və sifətləri üç baxımdan nəzərdən keçirilə bilər:\n\n1. Rəbbə aid edildikdə\n2. Qula aid edildikdə\n3. Mütləq və ümumi şəkildə işlədildikdə\n\nBuna görə də Allah və məxluq haqqında eyni sözün işlənməsi öz-özlüyündə təşbih — yəni Allahı məxluqa bənzətmək — demək deyil.\n\nBu məsələnin başa düşülməsi üçün iki əsas prinsip vardır.",
   "a_az_partial": null,
   "core": [
-   "ittifaq|اتفاق|ittifaqı",
-   "müsəmmə|musemma|müsəmməyeyn|musemmeyn|مسميين|المسميين|مسميات|المسميات"
+   "ittifaq|اتفاق|ittifaqı|eyni",
+   "bənzətmə|benzetme|təşbih|tesbih|teshbih|تشبيه|müsəmmə|musemma|müsəmməyeyn|musemmeyn|مسميين|المسميين|مسميات|المسميات"
   ],
   "opt": [],
   "not": [],
@@ -1923,7 +1927,9 @@ export const ENTRIES = [
   "triggers": {
    "az": [
     "Müsəmmaların ittifaqı bənzətmə deyil qaydası",
-    "Müsəmmaların ittifaqı bənzətmə demək deyil"
+    "Müsəmmaların ittifaqı bənzətmə demək deyil",
+    "Adların eyni olması bənzətməni tələb edirmi",
+    "Allah və məxluq haqqında eyni adın işlənməsi təşbihdir"
    ],
    "tr": [
     "Müsemmaların ittifakı teşbih değildir"
@@ -1939,14 +1945,14 @@ export const ENTRIES = [
   "main": false,
   "label": "Beşinci qayda: sifətlərdə söz zatda sözə bənzəyir",
   "q_ar": "عدد قواعد أهل السنة والجماعة في صفات الله ﷻ.",
-  "q_az": null,
+  "q_az": "Əhli-sünnə vəl-cəmaatın Allahın sifətləri ilə bağlı qaydalarını sadalayın və izah edin.",
   "a_ar": "القاعدة الخامسة : القول في الصفات كالقول في الذات: وهذا هو أحد الأصلين اللذين بني عليهما إثبات الحقيقة القائلة: أن اتفاق المسميين ليس هو التشبيه.",
-  "a_az": null,
+  "a_az": "Beşinci qayda: Sifətlər haqqında danışmaq zat haqqında danışmaq kimidir\n\nBu, Allahın adlarının məxluqatın adları ilə eyni olmasının təşbihi tələb etmədiyini göstərən əsas prinsiplərdən biridir.\n\nƏgər Allahın zatı məxluqatın zatına bənzəmirsə, Allahın sifətləri də məxluqatın sifətlərinə bənzəmir.\n\nMəsələn, Allahın elmi ilə insanın elmi eyni deyil. Hər ikisinə \"elm\" deyilməsi onların həqiqətinin eyni olduğunu göstərmir.",
   "a_az_partial": null,
   "core": [
    "sifət|sifet|sifat|صفة|صفات",
    "zat$|zata|zatda|zatı|ذات",
-   "söz|soz|qövl|قول|kimidir|كالقول"
+   "söz|soz|danış|danis|qövl|قول|kimidir|كالقول"
   ],
   "opt": [],
   "not": [
@@ -1971,14 +1977,14 @@ export const ENTRIES = [
   "main": false,
   "label": "Altıncı qayda: bəzi sifətlər haqqında söz digərləri kimidir",
   "q_ar": "عدد قواعد أهل السنة والجماعة في صفات الله ﷻ.",
-  "q_az": null,
+  "q_az": "Əhli-sünnə vəl-cəmaatın Allahın sifətləri ilə bağlı qaydalarını sadalayın və izah edin.",
   "a_ar": "القاعدة السادسة: القول في بعض الصفات كالقول في بعضها الآخر: وهذا هو الأصل الثاني من الأصلين اللذين بني عليهما إثبات الحقيقة التي نصت على أن اتفاق المسميين ليس هو التشبيه.",
-  "a_az": null,
+  "a_az": "Altıncı qayda: Bəzi sifətlər haqqında danışmaq digər sifətlər haqqında danışmaq kimidir\n\nAllahın bir sifətini təsdiq edərkən əsas götürdüyümüz prinsip digər sifətlərə də tətbiq olunur.\n\nMəsələn, Allahın elmini təsdiq edirik və Onun elminin məxluqatın elminə bənzəmədiyini deyirik.\n\nEyni qayda Allahın:\n\n- eşitməsinə,\n- görməsinə,\n- qüdrətinə,\n- həyatına,\n- digər sifətlərinə\n\ndə aiddir.\n\nDeməli, bir sifətin həqiqi olması onun məxluqatın sifətinə bənzəməsini tələb etmir. Allahın bütün sifətləri Ona layiq şəkildə həqiqidir və heç biri yaradılmışların sifətlərinə bənzəmir.",
   "a_az_partial": null,
   "core": [
    "sifət|sifet|sifat|صفة|صفات",
    "bəzi|bezi|بعض|digər|diger|الآخر",
-   "söz|soz|qövl|قول|kimidir|كالقول"
+   "söz|soz|danış|danis|qövl|قول|kimidir|كالقول"
   ],
   "opt": [],
   "not": [],
@@ -2001,9 +2007,9 @@ export const ENTRIES = [
   "main": true,
   "label": "Müsəlmanlar niyə Allahın gözəl adlarını ihsa etməyə əhəmiyyət verir?",
   "q_ar": "علل: عني المسلمون بإحصاء أسماء الله الحسنى؟",
-  "q_az": null,
+  "q_az": "Nə üçün Allahın gözəl adlarını öyrənir və onları ihsa edirik?",
   "a_ar": "لأن العلم بها أشرف العلوم، ولدلالتها على ذات الله ﷻ، وصفاته، وأفعاله، وإلهيته.",
-  "a_az": null,
+  "a_az": "Çünki Allahın adlarını bilmək ən şərəfli elmlərdən biridir.\n\nAllahın adlarını öyrənmək insana:\n\n- Allahın zatını,\n- sifətlərini,\n- əməllərini,\n- ilah olduğunu\n\ndaha yaxşı tanımağa kömək edir.\n\nAllahın adlarını bilmək Allahı tanımağın ən mühüm yollarından biridir.",
   "a_az_partial": null,
   "core": [
    "ihsa|ehsa|إحصاء|احصاء",
@@ -2032,9 +2038,9 @@ export const ENTRIES = [
   "main": true,
   "label": "Allahın gözəl adlarını ihsa etmənin mərtəbələri",
   "q_ar": "عدد مراتب إحصاء أسماء الله الحسنى.",
-  "q_az": null,
+  "q_az": "Allahın adlarını \"ihsa\" etməyin neçə mərtəbəsi vardır?",
   "a_ar": "١ - إحصاء ألفاظها، وعدها.\n٢- حفظها.\n٣- فهم معانيها ومدلولها.\n٤- دعاء الله ﷻ بها.",
-  "a_az": null,
+  "a_az": "Allahın adlarını ihsa etməyin üç əsas mərtəbəsi vardır:\n\n1. Adları saymaq və yadda saxlamaq\n\nAllahın adlarını öyrənmək, onları düzgün şəkildə yadda saxlamaq və qorumaq.\n\n2. Adları əzbərləmək\n\nAllahın adlarını qəlbdə və yaddaşda qorumaq, onları unutmamaq.\n\n3. Adların mənalarını və tələb etdiklərini anlamaq\n\nSadəcə adları əzbərləməklə kifayətlənməmək, hər bir adın mənasını və həmin adın Allahın sifətləri və qulların həyatına olan təsirlərini anlamaq.\n\nMəsələn, Allahın Ər-Rəhim olduğunu bilən insan Allahın mərhəmətini düşünür və Ondan mərhəmət diləyir.",
   "a_az_partial": null,
   "core": [
    "ihsa|ehsa|إحصاء|احصاء",
@@ -2061,9 +2067,9 @@ export const ENTRIES = [
   "main": true,
   "label": "«Kim onları ihsa edərsə cənnətə girər» hədisində ihsanın mənası",
   "q_ar": "ما معنى الإحصاء في قول النبي ﷺ: (من أحصاها دخل الجنة)؟",
-  "q_az": null,
+  "q_az": "«Kim Allahın 99 adını ihsa edərsə, Cənnətə daxil olar» hədisində \"ihsa\" nə deməkdir?",
   "a_ar": "هو وعد بدخول الجنة لمن قام بإحصاء تسعة وتسعين اسماً لله ﷻ، وليس خبراً بحصر الأسماء جميعاً في تسعة وتسعين.",
-  "a_az": null,
+  "a_az": "Peyğəmbər ﷺ buyurmuşdur:\n\n«Allahın doxsan doqquz adı vardır. Kim onları ihsa edərsə, Cənnətə daxil olar».\n\nBuradakı \"ihsa\" yalnız adları saymaq mənasında deyil. Buraya onları bilmək, yadda saxlamaq, mənalarını anlamaq və onlarla Allaha dua etmək kimi mənalar daxildir.\n\nBu hədis Allahın bütün adlarının yalnız 99 adla məhdudlaşdığını bildirmir.\n\nƏksinə, əvvəlki mövzuda qeyd etdiyimiz kimi, Allahın Öz yanında saxladığı və məxluqatına bildirmədiyi adları da vardır.",
   "a_az_partial": null,
   "core": [
    "ihsa|ehsa|إحصاء|احصاء",
@@ -2090,9 +2096,9 @@ export const ENTRIES = [
   "main": true,
   "label": "İhsa niyə səadətin və nicatın mərkəzidir?",
   "q_ar": "علل: الإحصاء الذي أراده النبي ﷺ هو قطب السعادة ومدار النجاة والفلاح؟",
-  "q_az": null,
+  "q_az": "Nə üçün Allahın adlarını ihsa etmək səadət və nicatın əsaslarından biridir?",
   "a_ar": "لأن العلم بالله وأسمائه وصفاته أشرف العلوم وأجلها على الإطلاق.",
-  "a_az": null,
+  "a_az": "Çünki Allahı, Onun adlarını və sifətlərini tanımaq ən şərəfli və ən faydalı elmlərdəndir.\n\nİnsan Allahı nə qədər yaxşı tanıyarsa:\n\n- Ona sevgisi artır;\n- Ona olan qorxusu və ümidi düzgün istiqamətlənir;\n- Ona təvəkkülü güclənir;\n- duası və ibadəti gözəlləşir;\n- tövhidi möhkəmlənir.\n\nBuna görə Allahın ad və sifətlərini öyrənmək insanın dünya və axirət səadətinə aparan mühüm səbəblərdəndir.",
   "a_az_partial": null,
   "core": [
    "ihsa|ehsa|إحصاء|احصاء",
@@ -2119,9 +2125,9 @@ export const ENTRIES = [
   "main": true,
   "label": "Duanın növləri (mərtəbələri)",
   "q_ar": "عدد مراتب الدعاء.",
-  "q_az": null,
+  "q_az": "Dua neçə növdür?",
   "a_ar": "۱ - دعاء ثناء وعبادة.\n۲ - دعاء طلب ومسألة.",
-  "a_az": null,
+  "a_az": "Dua iki əsas növə bölünür:\n\n1. İbadət duası\n\nBurada qul Allahı tərifləyir, Ona ibadət edir və Onun ad və sifətlərinin tələb etdiyi şəkildə Ona itaət edir.\n\n2. İstək və dilək duası\n\nQul Allahdan ehtiyaclarını istəyir. Məsələn:\n\n- bağışlanma diləyir;\n- ruzi istəyir;\n- şəfa istəyir;\n- yardım istəyir;\n- Allahdan qorunma diləyir.\n\nBeləliklə, Allahın adlarını öyrənmək və onların mənalarını dərk etmək insanın həm ibadətini, həm də duasını düzgün istiqamətləndirir.",
   "a_az_partial": null,
   "core": [
    "dua$|duanın|duanin|duaları|دعاء",

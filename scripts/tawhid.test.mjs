@@ -64,8 +64,15 @@ test("a_az az.txt-dəki blokla eynidir (dəyişdirilməyib)", () => {
   assert.ok(ik.a_ar.includes("قَالَ فِرْعَوْنُ وَمَا رَبُّ الْعَالَمِينَ"));
   // 11-ci mövzunun bütün cavabları tərcümə olunub
   for (const e of ENTRIES.filter((x) => x.topic === 11)) assert.ok(e.a_az, e.id);
-  // 3, 4, 9, 10-cu mövzularda hələ tərcümə yoxdur (uydurulmayıb)
-  for (const e of ENTRIES.filter((x) => [3, 4, 9, 10].includes(x.topic))) assert.equal(e.a_az, null, e.id);
+  // 8, 9, 10-cu mövzular tam tərcümə olunub (qismən yox)
+  for (const e of ENTRIES.filter((x) => [8, 9, 10].includes(x.topic))) {
+    assert.ok(e.a_az, e.id);
+    assert.ok(!e.a_az_partial, e.id);
+  }
+  assert.ok(AZ_TXT.includes("Dördüncü qayda: Allahın adları həm keçişli") && AZ_TXT.includes("Beşinci qayda: Allahın adları Onun zatına"));
+  assert.ok(ENTRIES.filter((x) => x.topic === 9).length >= 7 && ENTRIES.filter((x) => x.topic === 10).length >= 5);
+  // 3 və 4-cü mövzularda hələ tərcümə yoxdur (uydurulmayıb)
+  for (const e of ENTRIES.filter((x) => [3, 4].includes(x.topic))) assert.equal(e.a_az, null, e.id);
 });
 
 test("sual və ərəbcə cavab sayları mənbə ilə uyğundur", () => {
@@ -127,6 +134,16 @@ const POSITIVE = [
   ["Allahın sifətləri ilə bağlı qaydalar", ["t9-sifetler-qaydalar"]],
   ["Allahın sifətləri təvqifidir nə deməkdir", ["t9-q1-tevqifi"]],
   ["leysə kəmislihi şey nə deməkdir", ["t9-q2-leyse"]],
+  ["Allahın sifətləri təvqifidir", ["t9-q1-tevqifi"]],
+  ["Allahın adları keçişli sifətlərə necə dəlalət edir", ["t8-q4-muteaddi"]],
+  ["mutabəqə təzəmmün iltizam dəlalət", ["t8-q5-delalet"]],
+  ["ihsa nə deməkdir", ["t10-ihsa-hedis"]],
+  ["dua neçə növdür", ["t10-dua-mertebeleri"]],
+  ["Ümumi inkar təfsilatlı təsdiq qaydası nədir", ["t9-q3-nefy-isbat"]],
+  ["Adların eyni olması bənzətməni tələb edirmi", ["t9-q4-ittifaq"]],
+  ["Sifətlər haqqında danışmaq zat haqqında danışmaq kimidir", ["t9-q5-zat-kimi"]],
+  ["Allahın adlarını ihsa etmənin neçə mərtəbəsi var", ["t10-ihsa-mertebeleri"]],
+  ["Allahın adlarını ihsa etmək niyə səadət əsasıdır", ["t10-ihsa-seadet"]],
   ["Allahın adlarını ihsa etmənin mərtəbələri", ["t10-ihsa-mertebeleri"]],
   ["Duanın növləri", ["t10-dua-mertebeleri"]],
   ["Sifət sözünün lüğəvi mənası nədir", ["t11-sifet-lugevi"]],
@@ -145,6 +162,8 @@ const POSITIVE = [
   ["tövhid siyahısı", ["topics"]],
   ["tövhid 5-ci mövzu", ["topic5"]],
   ["tövhid səkkizinci mövzu", ["topic8"]],
+  ["tövhid 10-cu mövzu", ["topic10"]],
+  ["tövhid 9-cu mövzu", ["topic9"]],
   ["التوحيد", ["intro"]],
 ];
 
