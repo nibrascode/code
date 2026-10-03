@@ -370,7 +370,72 @@
       transition: .2s ease;
     }
     .toast.on { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .menu {
+      width: 38px; height: 38px; border-radius: 999px; padding: 0; cursor: pointer;
+      display: grid; place-items: center; flex: none;
+      border: 1px solid rgba(94, 234, 212, .45);
+      background: rgba(8, 12, 28, .72);
+      color: #8ff5e4;
+      box-shadow: 0 0 16px rgba(45, 212, 191, .16);
+    }
+    .menu svg { width: 18px; height: 18px; display: block; }
+    .lead { display: flex; align-items: center; gap: 10px; min-width: 0; }
+    .scrim {
+      position: fixed; inset: 0; z-index: 19;
+      background: rgba(2, 4, 12, .62);
+      opacity: 0; visibility: hidden; transition: opacity .2s ease, visibility .2s;
+    }
+    .scrim.on { opacity: 1; visibility: visible; }
+    .drawer {
+      position: fixed; top: 0; left: 0; bottom: 0; z-index: 20;
+      width: min(320px, 86vw);
+      display: flex; flex-direction: column; gap: 10px;
+      padding: calc(14px + env(safe-area-inset-top)) 14px calc(14px + env(safe-area-inset-bottom));
+      background: linear-gradient(180deg, #08112a, #050918);
+      border-right: 1px solid rgba(94, 234, 212, .28);
+      box-shadow: 12px 0 40px rgba(0, 0, 0, .5);
+      transform: translateX(-102%); visibility: hidden;
+      transition: transform .22s ease, visibility .22s;
+    }
+    .drawer.on { transform: none; visibility: visible; }
+    .dh { display: flex; align-items: center; justify-content: space-between; }
+    .dh b { font-size: 16px; font-weight: 800; letter-spacing: -0.02em; }
+    .dx {
+      width: 34px; height: 34px; border-radius: 10px; cursor: pointer; padding: 0;
+      border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.05); color: #d5dced;
+      font-size: 20px; line-height: 1;
+    }
+    .newchat {
+      min-height: 42px; border-radius: 12px; cursor: pointer; font-weight: 700; font-size: 14px;
+      border: 1px solid rgba(94, 234, 212, .5);
+      background: linear-gradient(180deg, rgba(45, 212, 191, .24), rgba(20, 184, 166, .12));
+      color: #b8fbef;
+    }
+    .newchat:hover { border-color: #5eead4; }
+    .dlist { flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; }
+    .ditem {
+      display: flex; align-items: stretch; gap: 6px;
+      border: 1px solid rgba(130, 170, 255, .2); border-radius: 12px;
+      background: rgba(255,255,255,.035);
+    }
+    .ditem.cur { border-color: rgba(94, 234, 212, .6); background: rgba(45, 212, 191, .09); }
+    .dopen {
+      flex: 1; min-width: 0; text-align: left; cursor: pointer;
+      border: 0; background: transparent; color: var(--fg);
+      padding: 10px 6px 10px 12px; font-size: 13.5px; font-weight: 600;
+    }
+    .dopen span { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .dopen small { display: block; margin-top: 2px; color: var(--muted); font-size: 11px; font-weight: 500; }
+    .ddel {
+      flex: none; min-width: 40px; border: 0; background: transparent; cursor: pointer;
+      color: #9aa3bd; font-size: 18px; border-radius: 0 12px 12px 0; padding: 0 8px;
+    }
+    .ddel.sure { color: #ffb3bf; font-size: 12px; font-weight: 700; }
+    .dempty { margin: 18px 4px; color: var(--muted); font-size: 13px; text-align: center; }
+    .dnote { margin: 0; text-align: center; color: #8fd9cd; font-size: 12px; font-weight: 600; }
     @media (max-width: 380px) {
+      .brand small { display: none; }
+      .top { padding-left: 12px; padding-right: 12px; }
       h1 { font-size: 30px; }
       .script { font-size: 10px; }
       .whisper { font-size: 9px; }
@@ -380,6 +445,7 @@
     }
     @media (prefers-reduced-motion: reduce) {
       .dots i, .ring::before, .ring::after { animation: none; }
+      .drawer, .scrim { transition: none; }
     }
   </style>
 </head>
@@ -406,10 +472,15 @@
 
   <div class="app">
     <header class="top">
-      <a class="brand" href="/">
-        <img src="/nibras-ai.png" alt="" />
-        <span><b>Nibras AI</b><small>Nibras Code</small></span>
-      </a>
+      <div class="lead">
+        <button class="menu" id="menu" type="button" aria-label="Söhbətlər" aria-controls="drawer" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+        <a class="brand" href="/">
+          <img src="/nibras-ai.png" alt="" />
+          <span><b>Nibras AI</b><small>Nibras Code</small></span>
+        </a>
+      </div>
       <div class="meta">
         <span class="pill" id="left"><em>0</em>/10</span>
         <button class="crown" id="prem" type="button" aria-label="Premium bağlıdır">
@@ -474,6 +545,13 @@
       </div>
     </div>
   </div>
+  <div class="scrim" id="scrim"></div>
+  <aside class="drawer" id="drawer" aria-label="Söhbətlər" aria-hidden="true">
+    <div class="dh"><b>Söhbətlər</b><button class="dx" id="dclose" type="button" aria-label="Bağla">&times;</button></div>
+    <button class="newchat" id="newchat" type="button">+ Yeni söhbət</button>
+    <div class="dlist" id="dlist"></div>
+    <p class="dnote">Söhbətlər 24 saat saxlanılır</p>
+  </aside>
   <div class="toast" id="toast" role="status"></div>
 
   <script>
@@ -487,9 +565,9 @@
     const left = document.getElementById("left");
     const toast = document.getElementById("toast");
     const today = new Date().toISOString().slice(0, 10);
-    const thread = [];
     let toastTimer = 0;
     let mode = "chat";
+    let restoring = false;
     let pendingImage = "";
 
     function note(text) {
@@ -539,6 +617,11 @@
         label.hidden = true;
         label.textContent = "";
         inp.placeholder = remain() ? "Nə ilə kömək edim?" : "Limit doldu";
+      }
+      if (!restoring) {
+        if (curItem) curItem.mode = next;
+        else store.pm = next === "chat" ? null : { m: next, t: Date.now() };
+        writeStore();
       }
     }
     function wantsImage(text) {
@@ -617,6 +700,7 @@
             note(url ? "Kod çox böyükdür" : "Kodu açmaq alınmadı");
             return;
           }
+          flushNow();
           window.open(url, "_blank", "noopener");
         });
       });
@@ -644,8 +728,9 @@
       const useImage = mode === "image" || pendingImage || wantsImage(m);
       const sentMode = useImage ? "image" : mode === "code" ? "code" : mode === "create" ? "create" : "ask";
       inp.value = "";
+      busy = true;
       bubble(m, "u");
-      if (!useImage) thread.push({ role: "user", text: m });
+      const um = rec("u", m, "", useImage ? 1 : 0);
       btn.disabled = true;
       stat("mode", sentMode);
       const wait = document.createElement("div");
@@ -659,7 +744,7 @@
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(useImage
             ? { prompt: m, image: pendingImage }
-            : { message: m, messages: thread.slice(-8), mode: sentMode })
+            : { message: m, messages: threadOf().slice(-8), mode: sentMode })
         });
         const raw = await r.text();
         let data = {};
@@ -668,11 +753,14 @@
         const reply = data.reply || data.message || data.error;
         if (!r.ok || data.success === false || (!reply && !data.url)) {
           stat("error", useImage ? "image" : "chat");
-          bubble(reply || "Cavab gəlmədi. Bir az sonra yenidən yoxlayın.", "b err");
-          if (!useImage) thread.pop();
+          const etext = reply || "Cavab gəlmədi. Bir az sonra yenidən yoxlayın.";
+          bubble(etext, "b err");
+          if (!useImage) um.x = 1;
+          rec("b err", etext, "", 1);
         } else {
-          bubble(reply || (data.url ? "Şəkil hazırdır." : ""), "b", data.url || "");
-          if (!useImage) thread.push({ role: "assistant", text: reply });
+          const rtext = reply || (data.url ? "Şəkil hazırdır." : "");
+          bubble(rtext, "b", data.url || "");
+          rec("b", rtext, data.url || "", useImage ? 1 : 0);
           const u = load();
           u.c += 1;
           save(u);
@@ -684,10 +772,12 @@
         }
       } catch (e) {
         wait.remove();
-        if (!useImage) thread.pop();
+        if (!useImage) um.x = 1;
         stat("error", "network");
         bubble("Şəbəkəyə qoşulmaq olmadı.", "b err");
+        rec("b err", "Şəbəkəyə qoşulmaq olmadı.", "", 1);
       }
+      busy = false;
       paint();
       if (remain() > 0) inp.focus();
     }
@@ -741,6 +831,326 @@
       if (remain() <= 0) return;
       document.getElementById("file").click();
     });
+
+    // ---- Söhbətlərin saxlanması: dərhal localStorage (24 saat) + Supabase (/api/chats, imkan varsa)
+    const CH_KEY = "nibras_chats_v1";
+    const DEV_KEY = "nibras_device_v1";
+    const KEEP_MS = 24 * 3600 * 1000;
+    const TITLE_MAX = 40;
+    const SYNC_MAX = 190000;
+    let store = { cur: "", items: {} };
+    let curItem = null;
+    let busy = false;
+    let serverOffUntil = 0;
+    let syncTimer = 0;
+    const dirty = {};
+    const remoteList = [];
+
+    function rid() {
+      try { if (crypto.randomUUID) return crypto.randomUUID(); } catch (e) {}
+      let s = "";
+      for (let i = 0; i < 32; i++) s += Math.floor(Math.random() * 16).toString(16);
+      return s;
+    }
+    function deviceId() {
+      let d = "";
+      try { d = localStorage.getItem(DEV_KEY) || ""; } catch (e) {}
+      if (!/^[A-Za-z0-9_-]{16,64}$/.test(d)) {
+        d = rid();
+        try { localStorage.setItem(DEV_KEY, d); } catch (e) {}
+      }
+      return d;
+    }
+    function prune() {
+      const lim = Date.now() - KEEP_MS;
+      Object.keys(store.items).forEach(function (id) {
+        const it = store.items[id];
+        if (!it || !Array.isArray(it.msgs) || !(it.t > lim)) delete store.items[id];
+      });
+      if (!store.items[store.cur]) store.cur = "";
+    }
+    function readStore() {
+      let o = null;
+      try { o = JSON.parse(localStorage.getItem(CH_KEY)); } catch (e) {}
+      store = o && typeof o === "object" && o.items && typeof o.items === "object" ? { cur: String(o.cur || ""), items: o.items, pm: o.pm || null } : { cur: "", items: {}, pm: null };
+      prune();
+    }
+    function writeStore() {
+      prune();
+      for (let tries = 0; tries < 6; tries++) {
+        try { localStorage.setItem(CH_KEY, JSON.stringify(store)); return; } catch (e) {
+          // yer qurtarıb: ən köhnə (cari olmayan) söhbəti atırıq
+          const ids = Object.keys(store.items).filter(function (k) { return k !== store.cur; }).sort(function (a, b) { return store.items[a].t - store.items[b].t; });
+          if (!ids.length) return;
+          delete store.items[ids[0]];
+        }
+      }
+    }
+    function mkTitle(text) {
+      const t = String(text || "").replace(/\s+/g, " ").trim();
+      const a = Array.from(t);
+      return a.length > TITLE_MAX ? a.slice(0, TITLE_MAX).join("").trim() + "…" : t;
+    }
+    function threadOf() {
+      const out = [];
+      if (curItem) curItem.msgs.forEach(function (m) {
+        if (m.x) return;
+        if (m.k === "u") out.push({ role: "user", text: m.t });
+        else if (m.k === "b") out.push({ role: "assistant", text: m.t });
+      });
+      return out;
+    }
+    // Hər dəyişiklikdə çağırılır: yerli yaddaşa yazır, serverə planlayır
+    function rec(k, t, i, x) {
+      if (!curItem) {
+        const id = rid();
+        curItem = { id: id, title: mkTitle(t), mode: mode, msgs: [], t: Date.now() };
+        store.items[id] = curItem;
+        store.cur = id;
+      }
+      const m = { k: k, t: String(t) };
+      if (i && /^https?:\/\//i.test(i) && i.length <= 2000) m.i = i;
+      if (x) m.x = 1;
+      curItem.msgs.push(m);
+      curItem.mode = mode;
+      curItem.t = Date.now();
+      store.cur = curItem.id;
+      writeStore();
+      schedule(curItem.id);
+      return m;
+    }
+    function serverOk() { return Date.now() >= serverOffUntil; }
+    function schedule(id) {
+      if (!serverOk()) return;
+      dirty[id] = 1;
+      clearTimeout(syncTimer);
+      syncTimer = setTimeout(flushNow, 800);
+    }
+    function apiHeaders(json) {
+      const h = { "x-device-id": deviceId() };
+      if (json) h["Content-Type"] = "application/json";
+      return h;
+    }
+    function noteReply(r) {
+      return r.json().then(function (d) {
+        if (!d || d.storage === false || d.ok === false && r.status >= 500) serverOffUntil = Date.now() + 5 * 60 * 1000;
+        return d;
+      });
+    }
+    function fitForServer(msgs) {
+      const out = msgs.map(function (m) {
+        const c = { k: m.k, t: m.t.slice(0, 20000) };
+        if (m.i) c.i = m.i;
+        if (m.x) c.x = 1;
+        return c;
+      }).slice(-200);
+      while (out.length > 1 && JSON.stringify(out).length > SYNC_MAX) out.shift();
+      return out;
+    }
+    function flushNow() {
+      clearTimeout(syncTimer);
+      const ids = Object.keys(dirty);
+      ids.forEach(function (id) { delete dirty[id]; });
+      if (!serverOk()) return;
+      ids.forEach(function (id) {
+        const it = store.items[id];
+        if (!it || !it.msgs.length) return;
+        const body = JSON.stringify({ title: it.title, messages: fitForServer(it.msgs) });
+        try {
+          fetch("/api/chats?id=" + encodeURIComponent(id), { method: "PUT", headers: apiHeaders(true), body: body, keepalive: body.length < 60000 })
+            .then(noteReply).catch(function () {});
+        } catch (e) {}
+      });
+    }
+    function renderItem(it) {
+      msgs.innerHTML = "";
+      if (!it || !it.msgs.length) {
+        msgs.appendChild(hello);
+        return;
+      }
+      it.msgs.forEach(function (m) { bubble(m.t, m.k, m.i || ""); });
+      msgs.scrollTop = msgs.scrollHeight;
+    }
+    function restoreCurrent() {
+      readStore();
+      writeStore();
+      const it = store.items[store.cur];
+      if (!it) {
+        curItem = null;
+        const pm = store.pm;
+        if (pm && pm.t > Date.now() - KEEP_MS && (pm.m === "ask" || pm.m === "code" || pm.m === "create")) {
+          restoring = true;
+          setMode(pm.m);
+          restoring = false;
+        }
+        return;
+      }
+      curItem = it;
+      renderItem(it);
+      restoring = true;
+      setMode(it.mode === "ask" || it.mode === "code" || it.mode === "create" ? it.mode : "chat");
+      restoring = false;
+    }
+
+    // ---- Söhbətlər paneli
+    const drawer = document.getElementById("drawer");
+    const scrim = document.getElementById("scrim");
+    const dlist = document.getElementById("dlist");
+    const menuBtn = document.getElementById("menu");
+    function ago(t) {
+      const m = Math.max(0, Math.round((Date.now() - t) / 60000));
+      if (m < 1) return "indi";
+      if (m < 60) return m + " dəq əvvəl";
+      return Math.round(m / 60) + " saat əvvəl";
+    }
+    function listEntries() {
+      const lim = Date.now() - KEEP_MS;
+      const map = {};
+      remoteList.forEach(function (r) { const t = Date.parse(r.updated_at); if (t > lim) map[r.id] = { id: r.id, title: r.title, t: t }; });
+      Object.keys(store.items).forEach(function (id) {
+        const it = store.items[id];
+        if (it.t > lim) map[id] = { id: id, title: it.title, t: it.t };
+      });
+      return Object.keys(map).map(function (k) { return map[k]; }).sort(function (a, b) { return b.t - a.t; });
+    }
+    function renderList() {
+      const rows = listEntries();
+      dlist.innerHTML = "";
+      if (!rows.length) {
+        const p = document.createElement("p");
+        p.className = "dempty";
+        p.textContent = "Hələ söhbət yoxdur";
+        dlist.appendChild(p);
+        return;
+      }
+      rows.forEach(function (r) {
+        const row = document.createElement("div");
+        row.className = "ditem" + (curItem && curItem.id === r.id ? " cur" : "");
+        row.setAttribute("data-id", r.id);
+        const open = document.createElement("button");
+        open.type = "button";
+        open.className = "dopen";
+        const t = document.createElement("span");
+        t.textContent = r.title || "Söhbət";
+        const sm = document.createElement("small");
+        sm.textContent = ago(r.t);
+        open.appendChild(t);
+        open.appendChild(sm);
+        open.addEventListener("click", function () { openChat(r.id); });
+        const del = document.createElement("button");
+        del.type = "button";
+        del.className = "ddel";
+        del.setAttribute("aria-label", "Söhbəti sil");
+        del.textContent = "×";
+        let armed = 0;
+        del.addEventListener("click", function () {
+          if (!del.classList.contains("sure")) {
+            del.classList.add("sure");
+            del.textContent = "Sil?";
+            clearTimeout(armed);
+            armed = setTimeout(function () { del.classList.remove("sure"); del.textContent = "×"; }, 3000);
+            return;
+          }
+          deleteChat(r.id);
+        });
+        row.appendChild(open);
+        row.appendChild(del);
+        dlist.appendChild(row);
+      });
+    }
+    function refreshRemote() {
+      if (!serverOk()) return Promise.resolve();
+      return fetch("/api/chats", { headers: apiHeaders(false) }).then(noteReply).then(function (d) {
+        if (d && d.ok && d.storage && Array.isArray(d.chats)) {
+          remoteList.length = 0;
+          d.chats.forEach(function (c) { if (c && typeof c.id === "string") remoteList.push(c); });
+          renderList();
+        }
+      }).catch(function () {});
+    }
+    function setDrawer(on) {
+      drawer.classList.toggle("on", on);
+      scrim.classList.toggle("on", on);
+      drawer.setAttribute("aria-hidden", on ? "false" : "true");
+      menuBtn.setAttribute("aria-expanded", on ? "true" : "false");
+      if (on) {
+        prune();
+        renderList();
+        refreshRemote();
+      }
+    }
+    function resetView() {
+      restoring = true;
+      setMode("chat");
+      restoring = false;
+      pendingImage = "";
+      const thumb = document.getElementById("thumb");
+      thumb.classList.remove("on");
+      thumb.removeAttribute("src");
+      inp.value = "";
+    }
+    function newChat() {
+      if (busy) { note("Cavab gözlənilir"); return; }
+      flushNow();
+      curItem = null;
+      store.cur = "";
+      store.pm = null;
+      writeStore();
+      renderItem(null);
+      resetView();
+      setDrawer(false);
+    }
+    async function openChat(id) {
+      if (busy) { note("Cavab gözlənilir"); return; }
+      flushNow();
+      let it = store.items[id];
+      if (!it) {
+        try {
+          const r = await fetch("/api/chats?id=" + encodeURIComponent(id), { headers: apiHeaders(false) });
+          const d = await r.json();
+          const c = d && d.ok && d.chat;
+          if (!c || !Array.isArray(c.messages)) { note("Söhbət tapılmadı"); return; }
+          it = { id: id, title: c.title || "Söhbət", mode: "chat", msgs: c.messages, t: Date.parse(c.updated_at) || Date.now() };
+          store.items[id] = it;
+        } catch (e) { note("Söhbət açılmadı"); return; }
+      }
+      curItem = it;
+      store.cur = id;
+      writeStore();
+      renderItem(it);
+      resetView();
+      restoring = true;
+      setMode(it.mode === "ask" || it.mode === "code" || it.mode === "create" ? it.mode : "chat");
+      restoring = false;
+      setDrawer(false);
+    }
+    function deleteChat(id) {
+      if (busy && curItem && curItem.id === id) { note("Cavab gözlənilir"); return; }
+      delete store.items[id];
+      delete dirty[id];
+      for (let i = remoteList.length - 1; i >= 0; i--) if (remoteList[i].id === id) remoteList.splice(i, 1);
+      if (curItem && curItem.id === id) {
+        curItem = null;
+        store.cur = "";
+        renderItem(null);
+        resetView();
+      }
+      writeStore();
+      renderList();
+      if (serverOk()) {
+        try { fetch("/api/chats?id=" + encodeURIComponent(id), { method: "DELETE", headers: apiHeaders(false) }).then(noteReply).catch(function () {}); } catch (e) {}
+      }
+      note("Söhbət silindi");
+    }
+    menuBtn.addEventListener("click", function () { setDrawer(!drawer.classList.contains("on")); });
+    document.getElementById("dclose").addEventListener("click", function () { setDrawer(false); });
+    scrim.addEventListener("click", function () { setDrawer(false); });
+    document.getElementById("newchat").addEventListener("click", newChat);
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") setDrawer(false); });
+    document.addEventListener("visibilitychange", function () { if (document.visibilityState === "hidden") flushNow(); });
+    window.addEventListener("pagehide", flushNow);
+    window.nibrasChats = { open: openChat, newChat: newChat, remove: deleteChat, flush: flushNow };
+    restoreCurrent();
     paint();
   </script>
 </body>
