@@ -1,6 +1,6 @@
-export const config = { maxDuration: 25 };
+export const config = { maxDuration: 60 };
 
-const MODELS = ["grok-imagine-image-2.0", "grok-imagine-image"];
+const MODELS = ["grok-imagine-image", "grok-imagine-image-2.0", "grok-imagine-image-quality"];
 
 function env(name) {
   const hit = Object.keys(process.env).find((key) => key.toUpperCase() === name.toUpperCase());
@@ -50,9 +50,14 @@ export default async function handler(req, res) {
         return;
       }
       last = result.detail || last;
-      if (!/model|not found|does not exist|unknown|unsupported/i.test(last)) break;
+      console.error("image model failed", model, result.status, last);
+      if (result.status === 401 || result.status === 403 || result.status === 429) break;
     }
-    res.status(502).json({ success: false, reply: "Şəkil hazırlanmadı. Bir az sonra yenidən yoxla." });
+    let reply = "Şəkil hazırlanmadı. Bir az sonra yenidən yoxla.";
+    if (/credit|balance|billing|spending|limit/i.test(last)) reply = "Şəkil xidmətinin balansı və ya limiti bitib. Bir az sonra yenidən yoxla.";
+    else if (/moderation|policy|safety|content/i.test(last)) reply = "Bu təsvirlə şəkil hazırlamaq olmadı. Başqa cür yaz.";
+    else if (/api key|unauthor|invalid.*key|permission/i.test(last)) reply = "Şəkil xidmətinin açarı düzgün deyil.";
+    res.status(502).json({ success: false, reply });
   } catch {
     res.status(500).json({ success: false, reply: "Şəkil xidmətinə çatmaq olmadı." });
   }
@@ -67,7 +72,7 @@ async function imagine(apiKey, model, prompt, image) {
     body: JSON.stringify(
       editing
         ? { model, prompt, image: { url: image, type: "image_url" } }
-        : { model, prompt, n: 1, quality: "low" },
+        : model === "grok-imagine-image-2.0" ? { model, prompt, n: 1, quality: "low" } : { model, prompt, n: 1 },
     ),
   });
   const data = await upstream.json().catch(() => ({}));
@@ -75,7 +80,7 @@ async function imagine(apiKey, model, prompt, image) {
   const url = first?.url || data.url || (first?.b64_json ? "data:image/png;base64," + first.b64_json : "");
   if (upstream.ok && url) return { ok: true, url };
   const detail = data.error?.message || data.error || data.message || String(upstream.status);
-  return { ok: false, detail: typeof detail === "string" ? detail : JSON.stringify(detail) };
+  return { ok: false, status: upstream.status, detail: typeof detail === "string" ? detail : JSON.stringify(detail) };
 }
 
 async function readJson(req) {
