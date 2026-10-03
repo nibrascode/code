@@ -3,6 +3,7 @@ import { quranReply } from "./_quran.js";
 import { tawhidReply } from "./_tawhid.js";
 import { tafsirReply, withTafsirSuggest } from "./_tafsir.js";
 import { nextReply } from "./_next.js";
+import { gameReply } from "./_game.js";
 import { ayahReply, finalizeAi, compactHistory, AYAH_PROMPT } from "./_ayah.js";
 import { snippetReply } from "./_snippets.js";
 import { localReply } from "./_local.js";
@@ -57,12 +58,12 @@ export default async function handler(req, res) {
     // Hansı idarəçinin cavab verdiyi bilinir: ayə, tövhid, hazır dini cavab, Quran lüğəti və dinReply dini sayılır (brend yox).
     let fixed = null;
     let religious = false;
-    for (const [kind, fn] of [["next", (m) => nextReply(m, body.messages)], ["tafsir", tafsirReply], ["ayah", ayahReply], ["tawhid", tawhidReply], ["canned", cannedReply], ["quran", quranReply], ["din", dinReply], ["brand", brandReply]]) {
+    for (const [kind, fn] of [["game", (m) => gameReply(m, body.messages)], ["next", (m) => nextReply(m, body.messages)], ["tafsir", tafsirReply], ["ayah", ayahReply], ["tawhid", tawhidReply], ["canned", cannedReply], ["quran", quranReply], ["din", dinReply], ["brand", brandReply]]) {
       let r = await fn(message);
       if (r) {
         if (kind === "ayah") r = withTafsirSuggest(r, message); // təfsir istənilməyib: ayə/surə cavabına təfsir seçimləri əlavə olunur
         fixed = r;
-        religious = kind !== "brand" && !(kind === "din" && body.mode === "code"); // kod rejimində ümumi din-söz uyğunluğu dini sual sayılmır
+        religious = kind !== "brand" && kind !== "game" && !(kind === "din" && body.mode === "code"); // kod rejimində ümumi din-söz uyğunluğu dini sual sayılmır
         break;
       }
     }

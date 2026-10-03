@@ -820,7 +820,15 @@
     }
     function fillBubble(el, text) {
       // gizli kontekst sətri (::ctx:: …) «növbəti ayə» üçündür: göstərilmir
-      const parts = String(text || "").replace(/\n*^::ctx:: [^\n]*$/gm, "").split("```");
+      let src = String(text || "").replace(/\n*^::ctx:: [^\n]*$/gm, "");
+      // hazır oyun: gizli «::game:: slug | Ad» sətri göstərilmir; kod bloku yoxdursa (serverdən bərpa) «yenidən göstər» düyməsi
+      if (src.indexOf("::game::") >= 0) {
+        const hasCode = src.indexOf("```") >= 0;
+        src = src.replace(/^::game:: ([a-z0-9-]+) \| ([^\n]+)$/gm, function (all, slug, title) {
+          return hasCode ? "" : "::sug::\n::sl:: Oyunun kodu serverdə saxlanmır:\n::sb:: Oyunu yenidən göstər | " + title + " oyun kodu yaz\n::/sug::";
+        });
+      }
+      const parts = src.split("```");
       const runs = [];
       chipQ = [];
       el.innerHTML = parts.map(function (part, i) {
@@ -1058,7 +1066,7 @@
       if (curItem) curItem.msgs.forEach(function (m) {
         if (m.x) return;
         if (m.k === "u") out.push({ role: "user", text: m.t });
-        else if (m.k === "b") out.push({ role: "assistant", text: m.t });
+        else if (m.k === "b") out.push({ role: "assistant", text: m.t.indexOf("::game::") >= 0 ? m.t.replace(/```[\s\S]*?```/, "") : m.t }); // oyun kodu (40-90KB) hər sorğuda göndərilmir; yalnız gizli işarə qalır
       });
       return out;
     }
@@ -1107,7 +1115,7 @@
     }
     function fitForServer(msgs) {
       const out = msgs.map(function (m) {
-        const c = { k: m.k, t: m.t.slice(0, 20000) };
+        const c = { k: m.k, t: (m.k === "b" && m.t.indexOf("::game::") >= 0 ? m.t.replace(/```[\s\S]*?```/, "") : m.t).slice(0, 20000) }; // serverdə mesaj limiti 20000: oyun kodu saxlanmır, işarə qalır
         if (m.i) c.i = m.i;
         if (m.x) c.x = 1;
         return c;
