@@ -8,7 +8,7 @@
   <link rel="icon" href="/nibras-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Great+Vibes&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     @property --nx-angle {
       syntax: "<angle>";
@@ -218,6 +218,30 @@
       font-size: 12px;
       line-height: 1.45;
     }
+    .msg .ay {
+      white-space: normal;
+      margin: 8px 0;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(120, 170, 255, .08);
+      border: 1px solid rgba(130, 170, 255, .28);
+      border-inline-start: 3px solid #7aa7ff;
+    }
+    .msg .ay .at {
+      direction: rtl;
+      text-align: right;
+      unicode-bidi: plaintext;
+      font-family: "Amiri Quran", "Scheherazade New", "Noto Naskh Arabic", "Traditional Arabic", "Geeza Pro", serif;
+      font-size: 23px;
+      line-height: 2.1;
+      color: #f4f7ff;
+    }
+    .msg .ay .al { display: block; }
+    .msg .ay .as { margin-top: 6px; font-size: 11px; line-height: 1.45; color: #8d96ad; unicode-bidi: plaintext; }
+    .msg .ay .as a { color: #8fb4ff; text-decoration: underline; }
+    .msg .ay.warn { border-color: rgba(255, 190, 90, .5); background: rgba(255, 190, 90, .07); border-inline-start-color: #ffbe5a; }
+    .msg .ay.warn .at { font-size: 17px; line-height: 1.9; opacity: .85; }
+    .msg .ay.warn .as { color: #ffd08a; }
     .msg .cb { margin-top: 8px; white-space: normal; }
     .msg .cb pre { margin: 0; white-space: pre; }
     .msg .cb .bar { display: flex; justify-content: flex-end; margin-top: 6px; }
@@ -670,11 +694,34 @@
       }
       return RUN_BASE + "#l=" + lang + "&c=" + best + z;
     }
+    // Ayə blokları (server yazır): ::ayah 2:255::  ərəbcə sətirlər  ::src:: mənbə sətri  ::/ayah::
+    // Hər şey escape olunur; yalnız mənbə sətrindəki «Tanzil» sözü tanzil.net linkinə çevrilir.
+    function ayahHtml(text) {
+      const re = /(?:^|\n)::ayah( warn)?(?: [0-9:\-]+)?::\n([\s\S]*?)\n::src::[ \t]*([^\n]*)\n::\/ayah::(?=\n|$)/g;
+      let out = "";
+      let last = 0;
+      let m;
+      const plain = function (seg, trimStart, trimEnd) {
+        if (trimStart) seg = seg.replace(/^\n{1,2}/, "");
+        if (trimEnd) seg = seg.replace(/\n{1,2}$/, "");
+        return escapeHtml(seg);
+      };
+      while ((m = re.exec(text))) {
+        out += plain(text.slice(last, m.index), last > 0, true);
+        const lines = m[2].split("\n").map(function (ln) { return '<span class="al">' + escapeHtml(ln) + "</span>"; }).join("");
+        let src = escapeHtml(m[3]);
+        const at = src.lastIndexOf("Tanzil");
+        if (at >= 0) src = src.slice(0, at) + '<a href="https://tanzil.net/" target="_blank" rel="noopener noreferrer">Tanzil</a>' + src.slice(at + 6);
+        out += '<div class="ay' + (m[1] ? " warn" : "") + '"><div class="at" dir="rtl" lang="ar">' + lines + '</div><div class="as" dir="auto">' + src + "</div></div>";
+        last = m.index + m[0].length;
+      }
+      return out + plain(text.slice(last), last > 0, false);
+    }
     function fillBubble(el, text) {
       const parts = String(text || "").split("```");
       const runs = [];
       el.innerHTML = parts.map(function (part, i) {
-        if (i % 2 === 0) return escapeHtml(part);
+        if (i % 2 === 0) return ayahHtml(part);
         const head = part.match(/^([a-zA-Z0-9+#-]+)\n/);
         const code = head ? part.slice(head[0].length) : part;
         const lang = head ? RUN_LANGS[head[1].toLowerCase()] : "";

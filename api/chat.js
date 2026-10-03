@@ -1,6 +1,7 @@
 import { cannedReply } from "./_canned.js";
 import { quranReply } from "./_quran.js";
 import { tawhidReply } from "./_tawhid.js";
+import { ayahReply, finalizeAi, compactHistory, AYAH_PROMPT } from "./_ayah.js";
 import { snippetReply } from "./_snippets.js";
 import { localReply } from "./_local.js";
 import { track } from "./_stats.js";
@@ -14,6 +15,7 @@ const SYSTEM = [
   "Tətbiqlər: Nibras Arabic hazırdır. Nibras PDF və Nibras Plans tezliklədir. Nibras Docs hazırlanır.",
   "Pulsuz tətbiqlərdə də reklam yoxdur. Premium olsa belə, əsas funksiyalar pulsuz qalır.",
   "Əlaqə: nibrascode@gmail.com. Sayt: nibrascode.com.",
+  AYAH_PROMPT,
 ].join(" ");
 
 export const config = { maxDuration: 25 };
@@ -43,7 +45,9 @@ export default async function handler(req, res) {
     // yoxsa «ayə»/«təfsir» sözləri olan suallar ümumi dini xəbərdarlığa düşər.
     // Tövhid 1 (Əqidə 3001) dərs xülasəsi də hazır cavabdır. cannedReply-dən əvvəl gəlir: «Allahın adları təvqifidir» kimi
     // suallarda «Allahın adları» ifadəsi ümumi hazır cavaba düşməsin. Tövhid uyğunlaşdırıcısı yalnız mətndəki suallara cavab verir.
-    const fixed = tawhidReply(message) || cannedReply(message) || quranReply(message) || dinReply(message) || brandReply(message);
+    // Quran ayələrinin mətni yalnız daxili Tanzil məlumatından gəlir (api/_ayah.js): «Bəqərə 255», «İxlas surəsi», «Ayətül-Kürsi».
+    // Sözlərin izahı (mənası, izah, söz) sorğuları burada null qaytarır və aşağıdakı quranReply-ə düşür.
+    const fixed = ayahReply(message) || tawhidReply(message) || cannedReply(message) || quranReply(message) || dinReply(message) || brandReply(message);
     // Hazır python/html/javascript/sql/css kod nümunələri: AI-yə getmədən (kod rejimi də daxil)
     const snippet = fixed ? null : snippetReply(message, body.mode);
     const ready =
@@ -79,7 +83,8 @@ export default async function handler(req, res) {
       const result = await ask(name, history, message);
       if (result.skipped) continue;
       if (result.ok) {
-        res.status(200).json({ success: true, reply: result.reply });
+        // AI ayə mətni yazıbsa, ərəbcə hissə Tanzil məlumatı ilə əvəz olunur, [[ayah:S:A]] işarələri açılır
+        res.status(200).json({ success: true, reply: finalizeAi(result.reply, message) });
         return;
       }
       notes.push(name + ": " + String(result.detail || "xəta").slice(0, 140));
@@ -558,7 +563,7 @@ function normalizeHistory(raw, message) {
   const cleaned = list
     .map((item) => ({
       role: item && item.role === "assistant" ? "assistant" : "user",
-      text: String((item && item.text) || "").trim().slice(0, 800),
+      text: compactHistory(String((item && item.text) || "")).trim().slice(0, 800),
     }))
     .filter((item) => item.text)
     .slice(-8);
