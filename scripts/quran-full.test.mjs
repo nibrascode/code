@@ -87,7 +87,7 @@ const textOf = (reply) => {
   let inside = false;
   for (const ln of lines(reply)) {
     if (/^::ayah/.test(ln)) inside = true;
-    else if (/^::src::/.test(ln)) inside = false;
+    else if (/^::tr::/.test(ln) || /^::src::/.test(ln)) inside = false; // Azərbaycanca tərcümə sətirləri ərəbcə sətirlərə daxil deyil
     else if (inside) out.push(ln.replace(/ ﴿[٠-٩]+﴾$/, ""));
   }
   return out;
@@ -191,7 +191,7 @@ test("axtarış: cavab mətni data ilə hərfbəhərf eynidir (AI yoxdur)", () =
   const r = ayahReply("Bəqərə 255");
   assert.deepEqual(textOf(r), [AYAS[1][254]]);
   assert.match(r, /^::ayah 2:255::\n/);
-  assert.match(r, /\n::src:: ﴿ Bəqərə surəsi, 255-ci ayə ﴾ · Mənbə: Tanzil\n::\/ayah::$/);
+  assert.match(r, /\n::src:: ﴿ Bəqərə surəsi, 255-ci ayə ﴾ · Mənbə: Tanzil · Tərcümə: QuranEnc\.com\n::\/ayah::\n\n::note:: Quran başqa dillərə yalnız mənaca tərcümə oluna bilər; tərcümə ayənin bütün mənasını tam ifadə etməyə bilər\.$/);
   const r2 = ayahReply("Bəqərə 255-257");
   assert.deepEqual(textOf(r2), [255, 256, 257].map((a) => AYAS[1][a - 1] + ` ﴿${String(a).replace(/\d/g, (d) => "٠١٢٣٤٥٦٧٨٩"[d])}﴾`).map((x) => x.replace(/ ﴿[٠-٩]+﴾$/, "")));
   assert.match(r2, /255–257-ci ayələr ﴾ · Mənbə: Tanzil/);
@@ -540,7 +540,7 @@ test("səhifə: ayə bloku RTL, Tanzil linki ilə render olunur; HTML escape edi
   assert.equal(at.querySelectorAll(".al").length, 2);
   assert.ok(at.textContent.includes(flatAya(2, 255)) && at.textContent.includes(flatAya(2, 256)));
   const src = blocks[0].querySelector(".as");
-  assert.match(src.textContent, /^﴿ Bəqərə surəsi, 255–256-cı ayələr ﴾ · Mənbə: Tanzil$/);
+  assert.match(src.textContent, /^﴿ Bəqərə surəsi, 255–256-cı ayələr ﴾ · Mənbə: Tanzil · Tərcümə: QuranEnc\.com$/);
   const a = src.querySelector("a");
   assert.equal(a.getAttribute("href"), "https://tanzil.net/");
   assert.equal(a.getAttribute("rel"), "noopener noreferrer");

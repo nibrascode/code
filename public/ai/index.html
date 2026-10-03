@@ -230,6 +230,10 @@
       color: #f4f7ff;
     }
     .msg .ay .al { display: block; }
+    .msg .ay .atr { margin-top: 8px; padding-top: 8px; border-top: 1px dashed rgba(130, 170, 255, .28); font-size: 14px; line-height: 1.6; color: #cfd6e6; unicode-bidi: plaintext; }
+    .msg .ay .atr .trl { font-size: 11px; line-height: 1.4; color: #8d96ad; margin-bottom: 3px; }
+    .msg .ay .atr .tl { display: block; }
+    .msg .an { white-space: normal; margin: 6px 0; font-size: 11.5px; line-height: 1.5; color: #8d96ad; unicode-bidi: plaintext; }
     .msg .ay .as { margin-top: 6px; font-size: 11px; line-height: 1.45; color: #8d96ad; unicode-bidi: plaintext; }
     .msg .ay .as a { color: #8fb4ff; text-decoration: underline; }
     .msg .ay.warn { border-color: rgba(255, 190, 90, .5); background: rgba(255, 190, 90, .07); border-inline-start-color: #ffbe5a; }
@@ -680,8 +684,9 @@
       }
       return RUN_BASE + "#l=" + lang + "&c=" + best + z;
     }
-    // Ayə blokları (server yazır): ::ayah 2:255::  ərəbcə sətirlər  ::src:: mənbə sətri  ::/ayah::
-    // Hər şey escape olunur; yalnız mənbə sətrindəki «Tanzil» sözü tanzil.net linkinə çevrilir.
+    // Ayə blokları (server yazır): ::ayah 2:255::  ərəbcə sətirlər  [::tr:: etiket + tərcümə sətirləri]  ::src:: mənbə sətri  ::/ayah::
+    // Blokdan sonra "::note:: mətn" sətri kiçik boz qeyd kimi çəkilir. Hər şey escape olunur;
+    // yalnız mənbə sətrindəki «Tanzil» və «QuranEnc.com» sözləri öz saytlarına linkə çevrilir. Köhnə mesajlar (::tr:: olmayan) əvvəlki kimi çəkilir.
     function ayahHtml(text) {
       const re = /(?:^|\n)::ayah( warn)?(?: [0-9:\-]+)?::\n([\s\S]*?)\n::src::[ \t]*([^\n]*)\n::\/ayah::(?=\n|$)/g;
       let out = "";
@@ -690,15 +695,28 @@
       const plain = function (seg, trimStart, trimEnd) {
         if (trimStart) seg = seg.replace(/^\n{1,2}/, "");
         if (trimEnd) seg = seg.replace(/\n{1,2}$/, "");
-        return escapeHtml(seg);
+        return escapeHtml(seg).replace(/(^|\n)::note::[ \t]*([^\n]*)(?=\n|$)/g, function (all, pre, t) {
+          return pre + '<div class="an" dir="auto">' + t + "</div>";
+        });
       };
       while ((m = re.exec(text))) {
         out += plain(text.slice(last, m.index), last > 0, true);
-        const lines = m[2].split("\n").map(function (ln) { return '<span class="al">' + escapeHtml(ln) + "</span>"; }).join("");
+        let body = m[2];
+        let trHtml = "";
+        const ti = body.indexOf("\n::tr::");
+        if (ti >= 0) {
+          const trPart = body.slice(ti + 1).split("\n");
+          body = body.slice(0, ti);
+          const label = trPart.shift().replace(/^::tr::[ \t]*/, "");
+          trHtml = '<div class="atr" dir="auto"><div class="trl">' + escapeHtml(label) + "</div>" + trPart.map(function (ln) { return '<span class="tl">' + escapeHtml(ln) + "</span>"; }).join("") + "</div>";
+        }
+        const lines = body.split("\n").map(function (ln) { return '<span class="al">' + escapeHtml(ln) + "</span>"; }).join("");
         let src = escapeHtml(m[3]);
         const at = src.lastIndexOf("Tanzil");
         if (at >= 0) src = src.slice(0, at) + '<a href="https://tanzil.net/" target="_blank" rel="noopener noreferrer">Tanzil</a>' + src.slice(at + 6);
-        out += '<div class="ay' + (m[1] ? " warn" : "") + '"><div class="at" dir="rtl" lang="ar">' + lines + '</div><div class="as" dir="auto">' + src + "</div></div>";
+        const qe = src.lastIndexOf("QuranEnc.com");
+        if (qe >= 0) src = src.slice(0, qe) + '<a href="https://quranenc.com/en/browse/azeri_musayev" target="_blank" rel="noopener noreferrer">QuranEnc.com</a>' + src.slice(qe + 12);
+        out += '<div class="ay' + (m[1] ? " warn" : "") + '"><div class="at" dir="rtl" lang="ar">' + lines + "</div>" + trHtml + '<div class="as" dir="auto">' + src + "</div></div>";
         last = m.index + m[0].length;
       }
       return out + plain(text.slice(last), last > 0, false);

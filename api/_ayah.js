@@ -5,10 +5,13 @@
 // Çıxış formatı (səhifə bunu təhlükəsiz render edir; HTML yoxdur):
 //   ::ayah 2:255::            (təsdiqlənməyən üçün ::ayah warn::, birdən çox yer üçün ::ayah::)
 //   <ərəbcə mətn, hər sətir bir ayə>
+//   ::tr:: Mənaca tərcümə (Azərbaycan dili):   (yalnız dil «az» olanda, tam ayələr üçün; ardınca tərcümə sətirləri; QuranEnc azeri_musayev)
 //   ::src:: ﴿ Bəqərə surəsi, 255-ci ayə ﴾ · Mənbə: Tanzil
 //   ::/ayah::
+//   ::note:: Quran başqa dillərə yalnız mənaca tərcümə oluna bilər; ...   (blokdan sonra, cavabda bir dəfə)
 import { AYAS, BISMILLAH, SURA_NAMES_AR } from "./_quran/quran.js";
 import { SURAS } from "./_quran/suras.js";
+import { AZ } from "./_quran/az.js";
 
 export const AYAH_COUNT = AYAS.map((a) => a.length);
 export const MAX_SURA_AYAS = 15; // uzun surədə ilk N ayə
@@ -281,8 +284,21 @@ export function refLabel(lang, s, a1, a2, partial) {
   }
   return `﴿ ${name}${lang === "ar" || lang === "en" || lang === "ru" ? "، " : ", "}${part} ﴾`.replace("،", lang === "ar" ? "،" : ",");
 }
-function srcLine(lang, label) {
-  return `::src:: ${label} · ${L[lang].source}: Tanzil`;
+// ---- Azərbaycanca mənaca tərcümə (QuranEnc, azeri_musayev). Yalnız dil «az» olanda göstərilir.
+export const TR_LABEL = "Mənaca tərcümə (Azərbaycan dili):";
+export const TR_NOTE = "Quran başqa dillərə yalnız mənaca tərcümə oluna bilər; tərcümə ayənin bütün mənasını tam ifadə etməyə bilər.";
+// [n] haşiyə işarələri göstərilmir; sətir keçidləri boşluğa çevrilir (mətn başqa cəhətdən dəyişmir)
+export function azText(s, a) {
+  const raw = AZ[s - 1] && AZ[s - 1][a - 1];
+  if (!raw) return "";
+  return raw.replace(/\s*\[\d+\]/g, "").replace(/\s*\n\s*/g, " ").trim();
+}
+function srcLine(lang, label, withTr = false) {
+  return `::src:: ${label} · ${L[lang].source}: Tanzil` + (withTr && lang === "az" ? " · Tərcümə: QuranEnc.com" : "");
+}
+function addTrNote(text, lang) {
+  if (lang !== "az" || !/^::tr::/m.test(text) || text.includes("::note:: " + TR_NOTE)) return text;
+  return text.replace(/\s+$/, "") + "\n\n::note:: " + TR_NOTE;
 }
 
 // ---------------------------------------------------------------- blok qurucu
@@ -301,7 +317,17 @@ export function buildBlock({ s, a1, a2, lang = "az", bismillah = false, partialT
   }
   const label = ambiguous ? ambiguous : refLabel(lang, s, a1, a2, partialText != null);
   const head = ambiguous ? "::ayah::" : `::ayah ${s}:${a1}${multi ? "-" + a2 : ""}::`;
-  return [head, ...lines, srcLine(lang, label), "::/ayah::"].join("\n");
+  // Azərbaycan dilində: ərəbcə ayənin altında mənaca tərcümə (tam ayələr üçün; hissə/çoxmənalı bloklarda yox)
+  const tr = [];
+  if (lang === "az" && partialText == null && !ambiguous) {
+    if (bismillah && BISMILLAH[s - 1] && s !== 1) tr.push(azText(1, 1));
+    for (let a = a1; a <= a2; a++) {
+      const t = azText(s, a);
+      if (t) tr.push(multi ? `(${a}) ${t}` : t);
+    }
+    if (tr.length) tr.unshift(`::tr:: ${TR_LABEL}`);
+  }
+  return [head, ...lines, ...tr, srcLine(lang, label, tr.length > 0), "::/ayah::"].join("\n");
 }
 export function warnBlock(text, lang = "az") {
   return ["::ayah warn::", String(text).replace(/\s*\n\s*/g, " ").trim(), `::src:: ${L[lang].warn}`, "::/ayah::"].join("\n");
@@ -618,7 +644,7 @@ export function ayahReply(message) {
     }
     if (note) out.push(note);
   }
-  return out.join("\n\n");
+  return addTrNote(out.join("\n\n"), lang);
 }
 
 // ======================================================================== (b) AI cavabının işlənməsi
@@ -925,13 +951,14 @@ export function stripAyahMarkup(text) {
   return String(text || "")
     .replace(/^[ \t]*::\/?ayah[^\n]*::[ \t]*$/gim, "")
     .replace(/^[ \t]*::src::[^\n]*$/gim, "")
+    .replace(/^[ \t]*::(?:tr|note)::[^\n]*$/gim, "")
     .replace(/::\/?ayah[^:\n]*::/gi, "")
     .replace(/::src::/gi, "");
 }
 // AI-yə göndərilən tarixçədə hazır ayə bloklarını qısa işarə ilə əvəz et (model onları təkrar yazmasın, işarə yazsın)
 export function compactHistory(text) {
   const out = String(text || "").replace(/::ayah(?: (\d{1,3}):(\d{1,3})(?:-(\d{1,3}))?)?::[\s\S]*?::\/ayah::/g, (m, s, a, b) => (s ? `[[ayah:${s}:${a}${b ? "-" + b : ""}]]` : "[[ayah]]"));
-  return stripAyahMarkup(out);
+  return stripAyahMarkup(out).replace(/\n{3,}/g, "\n\n").trim();
 }
 
 export const AYAH_PROMPT =
@@ -1019,5 +1046,5 @@ export function finalizeAi(reply, message = "") {
   for (let pass = 0; pass < 3; pass++) text = text.replace(/\u0001(\d+)\u0002/g, (m, i) => holders[Number(i)]);
   text = text.replace(/(::\/ayah::)\n*[ \t]*[.,;:،؛]+[ \t]*(?=\S)/g, "$1\n\n");
   text = text.replace(/\n{3,}/g, "\n\n").replace(/[ \t]+\n/g, "\n").trim();
-  return text;
+  return addTrNote(text, lang);
 }
