@@ -319,6 +319,87 @@ export function formatEntry(e, lang) {
   return [head, qBlock, NO_AZ, e.a_ar, SRC_AZ].join("\n\n");
 }
 
+// ---------- ərəbcə sual uyğunlaşdırması (ar.txt-dəki sual mətninə görə) ----------
+// İstifadəçi ərəbcə yazanda ar.txt-dəki sual (alt bölmələr üçün başlıq) və ərəbcə trigger ifadələri ilə sözlərin örtülməsi ölçülür.
+// Yüksək dəqiqlik üçün: sorğunun məzmun sözlərinin ≥75%-i sualda olmalı, sualın məzmun sözlərinin isə ≥50–60%-i sorğuda.
+const AR_FILL_EXTRA = ["ذلك", "التالي", "سؤال", "اجب", "أجب", "اجابه", "إجابة", "جواب", "الجواب", "السؤال", "لو", "سمحت", "ارجو", "أرجو", "اريد", "أريد", "حول", "بخصوص", "اخبرني", "أخبرني", "علمني", "فيما", "التي", "الذي", "الذين", "هذه", "هذا", "ثم", "اي", "أي", "ايضا", "أيضا", "بما", "مما", "عما", "وهو", "وهي", "يا", "اخي", "أخي", "شيخ", "بارك", "جزاك", "خيرا", "وضح", "اشرح", "فسر", "بين", "عرّف", "أريد", "ارجوك", "ممكن", "لي", "عن", "ما", "هو", "هي", "ماذا", "هل", "كم", "كيف", "لماذا", "اذكر", "عدد", "علل", "اعط", "أعط", "قل", "اكتب"]
+  .map((w) => normAr(w).replace(/ّ/g, ""));
+const AR_FILL = new Set(AR_FILL_EXTRA);
+const AR_GENERIC = new Set(["الله", "توحيد", "تعالي", "القران", "الكريم", "الرب", "اسماء", "صفات", "الحسني", "حسني"].map((w) => normAr(w)));
+const LIG = /^[\uFDFA\uFDFB\uFDFD\u200f\u200e]+$/u;
+
+function isArFill(tok) {
+  return !tok.ar || LIG.test(tok.t) || AR_FILL.has(tok.t) || tok.v.some((v) => AR_FILL.has(v)) || /^\d+$/.test(tok.t);
+}
+
+function arContent(text) {
+  return tokenize(text).filter((t) => t.ar && !isArFill(t));
+}
+
+// Alt bölmənin ərəbcə başlığı: ərəbcə blokun ilk sətrindən nömrə və ayə/şərh hissəsi atılır
+export function arHeading(a) {
+  let h = String(a || "").split("\n")[0].trim();
+  h = h.replace(/^[\s(\[]*[0-9٠-٩۰-۹]+[\s)\].\-–:]*/, "").trim();
+  const cut = (x) => x.split(/[:：،﴿]|\sقال\s|\[/)[0].trim();
+  let out = cut(h);
+  if (/^النوع\s/.test(out) || out.split(/\s+/).length < 2) {
+    const m = h.match(/[:：]\s*(.+)$/);
+    if (m) out = cut(m[1]);
+  }
+  return out;
+}
+
+const AR_FORMS = ENTRIES.map((e) => {
+  // trigger ifadələri (strict) yalnız demək olar ki, sözbəsöz uyğunluqda işləyir: «أسماء الله الحسنى» kimi hazır cavab sorğuları oğurlanmasın
+  const phrases = [[e.main ? e.q_ar : arHeading(e.a_ar), false], ...(e.triggers.ar || []).map((t) => [t, true])];
+  const forms = [];
+  for (const [ph, strict] of phrases) {
+    const toks = arContent(ph);
+    if (toks.length >= 2) forms.push({ toks, strict });
+  }
+  return { e, forms };
+});
+
+function arScore(qTokens, formObj) {
+  const form = formObj.toks;
+  const used = new Set();
+  let m = 0;
+  let nonGeneric = 0;
+  for (const q of qTokens) {
+    const j = form.findIndex((f, i) => !used.has(i) && tokEq(q, f));
+    if (j >= 0) {
+      used.add(j);
+      m++;
+      if (!q.v.some((v) => AR_GENERIC.has(v))) nonGeneric++;
+    }
+  }
+  const exactForm = m === form.length && m === qTokens.length;
+  if (m < 2 || nonGeneric < (m >= 4 || exactForm ? 1 : 2)) return 0;
+  const cq = m / qTokens.length;
+  const ce = m / form.length;
+  if (cq < 0.75) return 0;
+  if (formObj.strict && (cq < 0.9 || ce < 0.9)) return 0;
+  if (!((ce >= 0.6 && m >= 2) || (ce >= 0.5 && m >= 3))) return 0;
+  return (2 * cq * ce) / (cq + ce);
+}
+
+function arMatch(tokens) {
+  const q = tokens.filter((t) => !isArFill(t));
+  const latin = tokens.filter((t) => !t.ar && !isFill(t)).length;
+  if (q.length < 2 || q.length > 40 || latin > 1) return null;
+  const scored = [];
+  for (const { e, forms } of AR_FORMS) {
+    let best = 0;
+    for (const f of forms) best = Math.max(best, arScore(q, f));
+    if (best) scored.push({ e, score: best });
+  }
+  if (!scored.length) return null;
+  scored.sort((a, b) => b.score - a.score || Number(b.e.main) - Number(a.e.main));
+  const top = scored[0];
+  const ties = scored.filter((x) => top.score - x.score < 0.03).slice(0, 3);
+  return { top, ids: ties.map((x) => x.e.id), score: top.score };
+}
+
 // ---------- əsas giriş ----------
 export function tawhidMatch(message) {
   const raw = String(message || "").trim();
@@ -344,7 +425,9 @@ export function tawhidMatch(message) {
     const r = evaluate(p, tokens, raw);
     if (r) found.push(r);
   }
-  if (!found.length) return null;
+  // Ərəbcə sual: ar.txt-dəki suala sözlərin örtülməsi (açar söz qrupları tapmadıqda və ya daha dəqiq giriş varsa)
+  const arm = lang === "ar" ? arMatch(tokens) : null;
+  if (!found.length) return arm ? { kind: "entry", ids: arm.ids, lang, score: arm.score } : null;
   found.sort((a, b) => b.score - a.score || b.coreN - a.coreN || Number(b.p.e.main) - Number(a.p.e.main));
   const top = found[0];
   const picks = [top];
@@ -352,7 +435,10 @@ export function tawhidMatch(message) {
     const second = found.find((f) => f !== top && f.p.e.amb === top.p.e.amb && top.score - f.score < 1.5);
     if (second) picks.push(second);
   }
-  return { kind: "entry", ids: picks.map((x) => x.p.e.id), lang, score: top.score };
+  const ids = picks.map((x) => x.p.e.id);
+  // sualın özünə demək olar ki, sözbəsöz uyğun gələn başqa giriş varsa, ona üstünlük verilir
+  if (arm && arm.score >= 0.8 && !ids.includes(arm.top.e.id)) return { kind: "entry", ids: arm.ids, lang, score: arm.score };
+  return { kind: "entry", ids, lang, score: top.score };
 }
 
 export function tawhidReply(message) {
