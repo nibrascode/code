@@ -1,4 +1,5 @@
 import { cannedReply } from "./_canned.js";
+import { quranReply } from "./_quran.js";
 import { snippetReply } from "./_snippets.js";
 import { localReply } from "./_local.js";
 import { track } from "./_stats.js";
@@ -37,7 +38,9 @@ export default async function handler(req, res) {
       res.status(400).json({ success: false, reply: "Mesaj boş ola bilməz." });
       return;
     }
-    const fixed = cannedReply(message) || dinReply(message) || brandReply(message);
+    // Bəqərə surəsi sözlərinin izahı hazır cavabdır (AI-yə getmir). dinReply-dən əvvəl gəlməlidir,
+    // yoxsa «ayə»/«təfsir» sözləri olan suallar ümumi dini xəbərdarlığa düşər.
+    const fixed = cannedReply(message) || quranReply(message) || dinReply(message) || brandReply(message);
     // Hazır python/html/javascript/sql/css kod nümunələri: AI-yə getmədən (kod rejimi də daxil)
     const snippet = fixed ? null : snippetReply(message, body.mode);
     const ready =
