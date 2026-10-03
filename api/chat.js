@@ -97,7 +97,7 @@ export function dinReply(message) {
   const q = fold(raw);
   const arabic = /اسلام|قرآن|حديث|صلاة|صوم|زكاة|حج|حلال|حرام|فقه|توحيد|عقيدة|وضوء|صيام/.test(raw);
   const topic =
-    /\b(islam\w*|islami|islamic|musluman\w*|muslim\w*|quran\w*|hadis\w*|hadith\w*|sunnet\w*|sunnah\w*|fiqh\w*|fikh\w*|seriat\w*|shariat\w*|sharia\w*|namaz\w*|salat\w*|salah\w*|oruc\w*|ramazan\w*|ramadan\w*|zekat\w*|zakat\w*|hecc\w*|umre\w*|umrah\w*|destamaz\w*|abdest\w*|wudu\w*|gusl\w*|qusl\w*|taharet\w*|haram\w*|helal\w*|halal\w*|fetva\w*|fatwa\w*|tefsir\w*|mezheb\w*|madhab\w*|peyqember\w*|peygamber\w*|resulullah\w*|muhammed\w*|muhammad\w*|ayet\w*|aye\b|tevhid\w*|tawhid\w*|akaid\w*|aqidah\w*|gunah\w*|sevab\w*|cennet\w*|cehennem\w*)\b/.test(
+    /\b(islam\w*|islami|islamic|musluman\w*|muslim\w*|quran\w*|hadis\w*|hedis\w*|hadith\w*|sunnet\w*|sunnah\w*|fiqh\w*|fikh\w*|seriat\w*|shariat\w*|sharia\w*|namaz\w*|salat\w*|salah\w*|oruc\w*|ramazan\w*|ramadan\w*|zekat\w*|zakat\w*|hecc\w*|umre\w*|umrah\w*|destamaz\w*|abdest\w*|wudu\w*|gusl\w*|qusl\w*|taharet\w*|haram\w*|helal\w*|halal\w*|fetva\w*|fatwa\w*|tefsir\w*|mezheb\w*|madhab\w*|peyqember\w*|peygamber\w*|resulullah\w*|muhammed\w*|muhammad\w*|ayet\w*|aye\b|tevhid\w*|tawhid\w*|akaid\w*|aqidah\w*|gunah\w*|sevab\w*|cennet\w*|cehennem\w*)\b/.test(
       q,
     );
   const din = /\b(din|dini|dinin|dinde)\b/.test(q) && /(islam|oyren|sual|nedir|ne dir|nece|namaz|oruc|haram|helal|quran|hadis)/.test(q);
