@@ -4194,44 +4194,30 @@ body.is-home .noise {
   letter-spacing: -0.03em;
 }
 
-.nx-ai-bar::before,
-.nx-ai-bar::after {
+.nx-ai-bar::before {
   content: "";
   position: absolute;
-  border-radius: 18px;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
   pointer-events: none;
   background: conic-gradient(
     from var(--ai-spin),
     transparent 0deg,
-    #3b82ff 36deg,
-    #7ee7ff 78deg,
-    #9eb6ff 118deg,
-    transparent 168deg,
+    transparent 250deg,
+    #7ee7ff 300deg,
+    #3b82ff 328deg,
     transparent 360deg
   );
-  animation: ai-spin 3.6s linear infinite;
-}
-
-.nx-ai-bar::before {
-  inset: -1.5px;
-  z-index: -1;
-  padding: 1.5px;
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   mask-composite: exclude;
-}
-
-.nx-ai-bar::after {
-  inset: -7px;
-  z-index: -2;
-  opacity: 0.7;
-  filter: blur(8px);
+  animation: ai-spin 2.8s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .nx-ai-bar::before,
-  .nx-ai-bar::after {
+  .nx-ai-bar::before {
     animation: none;
   }
 }
