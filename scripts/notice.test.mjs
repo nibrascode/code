@@ -89,13 +89,24 @@ test("dini / qeyri-dini aşkarlama", () => {
   assert.equal(isReligious("namaz vaxtı üçün python kod", "chat"), false);
 });
 
+// Əl ilə yazılmış hazır cavablar: bildiriş davranışı dəyişməyib
 const RELIGIOUS_FIXED = [
-  ["tövhid (tawhidReply)", "Şirk neçə qismə bölünür"],
-  ["ayə (ayahReply)", "Bəqərə 255"],
   ["hazır dini cavab (cannedReply)", "Sələfilik nədir"],
-  ["Quran lüğəti (quranReply)", "Bəqərə 1-59 sözlərin izahı"],
   ["dinReply", "namaz necə qılınır"],
   ["dinReply İslam tərifi", "İslam nədir"],
+];
+// Daxili mənbədən gələn (AI-siz) cavablar: bildiriş HEÇ VAXT verilmir
+const SOURCE_BASED = [
+  ["tövhid (tawhidReply)", "Şirk neçə qismə bölünür"],
+  ["ayə (ayahReply)", "Bəqərə 255"],
+  ["Ayətül-Kürsi", "Ayətül Kürsi"],
+  ["surə", "İxlas surəsi"],
+  ["mənaca tərcümə (tr)", "Bakara suresi 255"],
+  ["Quran lüğəti (quranReply)", "Bəqərə 1-59 sözlərin izahı"],
+  ["təfsir Müyəssər", "Bəqərə 255 təfsiri"],
+  ["təfsir Sədi", "Sədi təfsiri 2:255"],
+  ["təfsir İbn Kəsir", "İbn Kəsir təfsiri 2:255"],
+  ["ərəbcə təfsir", "تفسير الفاتحة"],
 ];
 
 test("server: ilk dini cavab (noticeShown:false) bildirişlə BAŞLAYIR; cavab onun altındadır; AI çağırılmır", async () => {
@@ -111,10 +122,34 @@ test("server: ilk dini cavab (noticeShown:false) bildirişlə BAŞLAYIR; cavab o
     assert.equal(r.sent.length, 0);
   }
   // cavab bildirişin altında və dəyişməyib
-  const t = await run({ message: "Şirk neçə qismə bölünür", noticeShown: false });
-  assert.equal(t.reply, noticeBlock("az") + "\n\n" + tawhidReply("Şirk neçə qismə bölünür"));
   const c = await run({ message: "Sələfilik nədir", noticeShown: false });
   assert.equal(c.reply, noticeBlock("az") + "\n\n" + cannedReply("Sələfilik nədir"));
+});
+
+test("server: daxili mənbədən gələn cavablarda (ayə, surə, tərcümə, təfsir, tövhid, Quran lüğəti) bildiriş YOXDUR, notice:true də yoxdur", async () => {
+  for (const [name, q] of SOURCE_BASED) {
+    for (const extra of [{ noticeShown: false }, { noticeShown: true }, {}]) {
+      const r = await run({ message: q, ...extra });
+      assert.equal(r.success, true, name);
+      assert.equal(r.usedAI, false, name);
+      assert.equal(r.sent.length, 0, name);
+      assert.equal(r.religious, true, name + ": dini bayraq qalır");
+      assert.ok(!r.notice, name);
+      assert.ok(!hasNotice(r.reply), name);
+      assert.ok(!r.reply.includes("::notice::") && !r.reply.includes("süni intellektdən"), name);
+      assert.ok(!/ibn sirin/i.test(r.reply), name);
+    }
+  }
+  // cavab mənbə mətninin özüdür (bildiriş başlığı yoxdur)
+  const t = await run({ message: "Şirk neçə qismə bölünür", noticeShown: false });
+  assert.equal(t.reply, tawhidReply("Şirk neçə qismə bölünür"));
+  const a = await run({ message: "Ayətül Kürsi", noticeShown: false });
+  assert.ok(a.reply.startsWith("::ayah 2:255::") && a.reply.includes("::tr::") && a.reply.includes("::note::"));
+  // mənbə cavabı noticeShown-u dəyişmir: sonra AI-nin dini cavabı hələ də bildirişlə başlayır
+  const ai = await run({ message: "Allahın rəhməti haqqında hikmətli bir söz de", noticeShown: false }, "Allahın rəhməti hər şeyi əhatə edib.");
+  assert.ok(ai.usedAI && ai.notice && ai.reply.startsWith("::notice::\n"));
+  // nəzarət: bildiriş mənbə olmayan hazır cavablarda saxlanıb
+  assert.equal((await run({ message: "namaz necə qılınır", noticeShown: false })).notice, true);
 });
 
 test("server: ikinci dini sual (noticeShown:true) və köhnə client (flag yoxdur) cavabı dəyişmir", async () => {
@@ -181,24 +216,32 @@ test("server: qeyri-dini cavablarda bildiriş YOXDUR (kod, salam, hesab, vaxt, s
   assert.ok(!code.reply.includes("::notice::"));
 });
 
-test("server: bildiriş istifadəçinin dilində (az/tr/en/ru/ar)", async () => {
+test("server: bildiriş istifadəçinin dilində (az/tr/en/ru/ar) — hazır dini cavab və AI cavabı", async () => {
   const cases = [
-    ["Mənə namaz haqqında de", "az", /^::notice::\nİlk olaraq:/],
-    ["Bakara suresi 255", "tr", /^::notice::\nÖncelikle: din, yapay zekâdan öğrenilmez\./],
-    ["Surah Baqarah verse 255", "en", /^::notice::\nFirst of all: religion is not learned/],
-    ["Бакара 255", "ru", /^::notice::\nПрежде всего:/],
-    ["سورة البقرة آية 255", "ar", /^::notice::\nأولًا:/],
+    ["Mənə namaz haqqında de", /^::notice::\nİlk olaraq:/],
+    ["что такое салафизм", /^::notice::\nПрежде всего:/],
+    ["ما هي السلفية", /^::notice::\nأولًا:/],
   ];
-  for (const [q, , re] of cases) {
+  for (const [q, re] of cases) {
     const r = await run({ message: q, noticeShown: false });
     assert.match(r.reply, re, q);
-    assert.ok(r.reply.includes("::ayah ") || r.reply.includes("süni"), q);
+  }
+  // AI cavabı (ingilis): bildiriş istifadəçinin dilindədir
+  const en = await run({ message: "Tell me a nice saying about the mercy of Allah", noticeShown: false }, "Allah's mercy encompasses all things.");
+  assert.equal(en.usedAI, true);
+  assert.match(en.reply, /^::notice::\nFirst of all: religion is not learned/);
+  // daxili mənbədən gələn ayə cavabları hər dildə bildirişsizdir
+  for (const q of ["Bakara suresi 255", "Surah Baqarah verse 255", "Бакара 255", "سورة البقرة آية 255"]) {
+    const r = await run({ message: q, noticeShown: false });
+    assert.ok(r.reply.includes("::ayah "), q);
+    assert.ok(!r.notice && !hasNotice(r.reply), q);
   }
 });
 
-test("server: yalnız ayə sorğusu da dinidir; qeyd və tərcümə bildirişin altında qalır", async () => {
+test("server: yalnız ayə sorğusu dinidir, amma bildirişsiz gəlir; qeyd və tərcümə yerindədir", async () => {
   const r = await run({ message: "Ayətül Kürsi", noticeShown: false });
-  assert.ok(r.reply.startsWith(noticeBlock("az") + "\n\n::ayah 2:255::"));
+  assert.equal(r.religious, true);
+  assert.ok(r.reply.startsWith("::ayah 2:255::"));
   assert.ok(r.reply.includes("::tr::") && r.reply.includes("::note::"));
 });
 
@@ -261,7 +304,7 @@ test("səhifə: ilk dini sualda bildiriş (RTL ərəbcə, escape), ikincidə yox
   await p.say("salam");
   assert.equal(p.requests.at(-1).noticeShown, false);
   assert.equal(p.notices(), 0, "qeyri-dini cavabda bildiriş yoxdur");
-  await p.say("Şirk neçə qismə bölünür");
+  await p.say("Sələfilik nədir");
   assert.equal(p.requests.at(-1).noticeShown, false, "söhbətdə hələ dini cavab olmayıb");
   assert.equal(p.notices(), 1);
   const nt = p.d.querySelector("#msgs .msg.b .nt");
@@ -273,7 +316,7 @@ test("səhifə: ilk dini sualda bildiriş (RTL ərəbcə, escape), ikincidə yox
   assert.ok(!p.d.querySelector("#msgs").textContent.includes("::"));
   // cavab bildirişin altındadır
   const bubble = nt.parentElement;
-  assert.ok(bubble.textContent.indexOf("Şirk müxtəlif baxımlardan") > bubble.textContent.indexOf("Mənbə: Müslim"));
+  assert.ok(bubble.textContent.indexOf("Sələfilik") > bubble.textContent.indexOf("Mənbə: Müslim"));
   // ikinci dini sual: bildiriş yox
   await p.say("Tətil şirki nədir");
   assert.equal(p.requests.at(-1).noticeShown, true);
@@ -287,10 +330,35 @@ test("səhifə: ilk dini sualda bildiriş (RTL ərəbcə, escape), ikincidə yox
   // yeni söhbət: yenidən false → bildiriş yenə gəlir
   q.d.querySelector("#newchat").click();
   await wait(30);
-  await q.say("Şirk neçə qismə bölünür");
+  await q.say("Sələfilik nədir");
   assert.equal(q.requests.at(-1).noticeShown, false);
   assert.equal(q.notices(), 1);
   assert.ok(q.d.querySelector("#msgs .msg.b .nt"));
+  p.w.close(); q.w.close();
+});
+
+test("səhifə: mənbə cavabları (ayə, təfsir, tövhid) bildirişsizdir və noticeShown-u dəyişmir; sonrakı hazır/AI dini cavab bildirişlə gəlir", { skip }, async () => {
+  const p = boot();
+  for (const q of ["Bəqərə 255", "Bəqərə 255 təfsiri", "Şirk neçə qismə bölünür"]) {
+    await p.say(q);
+    assert.equal(p.requests.at(-1).noticeShown, false, q + ": mənbə cavabı noticeShown-u true etmir");
+    assert.equal(p.notices(), 0, q);
+    assert.ok(!p.d.querySelector("#msgs").textContent.includes("süni intellektdən din öyrənilməz"), q);
+    assert.ok(!p.d.querySelector("#msgs").textContent.includes("::"), q);
+  }
+  assert.ok(p.d.querySelectorAll("#msgs .msg.b").length >= 3);
+  // ilk dini hazır cavab hələ də bildirişlə gəlir, ondan sonra yox
+  await p.say("Sələfilik nədir");
+  assert.equal(p.requests.at(-1).noticeShown, false);
+  assert.equal(p.notices(), 1);
+  await p.say("Bidət nədir");
+  assert.equal(p.requests.at(-1).noticeShown, true);
+  assert.equal(p.notices(), 1);
+  // yenidən yükləmədən sonra da düzgün
+  const q = boot({ storage: p.snapshot() });
+  await q.say("Bəqərə 255");
+  assert.equal(q.requests.at(-1).noticeShown, true);
+  assert.equal(q.notices(), 1);
   p.w.close(); q.w.close();
 });
 

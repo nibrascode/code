@@ -9,7 +9,7 @@ import { snippetReply } from "./_snippets.js";
 import { localReply } from "./_local.js";
 import { track } from "./_stats.js";
 import { isReligious } from "./_religious.js";
-import { withNotice, noticeLang, OLD_AZ_NOTICE } from "./_notice.js";
+import { withNotice, noticeLang, isSourceKind, OLD_AZ_NOTICE } from "./_notice.js";
 
 const SYSTEM = [
   "Sən Nibras AI-san, Nibras Code saytının köməkçisisən.",
@@ -58,6 +58,7 @@ export default async function handler(req, res) {
     // Hansı idarəçinin cavab verdiyi bilinir: ayə, tövhid, hazır dini cavab, Quran lüğəti və dinReply dini sayılır (brend yox).
     let fixed = null;
     let religious = false;
+    let fromSource = false; // cavab daxili mənbədən (ayə, təfsir, tövhid, kitab) gəlir: AI-siz, bildiriş verilmir
     // söhbət tarixçəsi: client «messages» göndərir ({role,text}); «history» və «content» də qəbul olunur
     const hist = (Array.isArray(body.messages) ? body.messages : Array.isArray(body.history) ? body.history : []).map((i) => (i && i.text == null && typeof i.content === "string" ? { ...i, text: i.content } : i));
     // client bütün söhbətdə göstərilmiş oyunların slug-larını ayrıca göndərir (tarixçə yalnız son mesajları saxlayır); sıra qorunur
@@ -69,12 +70,14 @@ export default async function handler(req, res) {
       if (r) {
         if (kind === "ayah") r = withTafsirSuggest(r, message); // təfsir istənilməyib: ayə/surə cavabına təfsir seçimləri əlavə olunur
         fixed = r;
+        fromSource = isSourceKind(kind);
         religious = kind !== "brand" && kind !== "game" && !(kind === "din" && body.mode === "code"); // kod rejimində ümumi din-söz uyğunluğu dini sual sayılmır
         break;
       }
     }
     // Dini suallarda cavabın başında bildiriş (süni intellektdən din öyrənilməz). Yalnız client söhbətdə hələ göstərilmədiyini bildirəndə (noticeShown:false).
-    const wantNotice = body.noticeShown === false;
+    // Daxili mənbədən gələn cavablarda (fromSource) bildiriş heç vaxt verilmir və notice:true qoyulmur.
+    const wantNotice = body.noticeShown === false && !fromSource;
     const dressed = (reply, isRel) => (isRel && wantNotice ? withNotice(reply, noticeLang(message)) : reply);
     const relFlag = (isRel) => (isRel ? { religious: true } : {});
     // Hazır python/html/javascript/sql/css kod nümunələri: AI-yə getmədən (kod rejimi də daxil)

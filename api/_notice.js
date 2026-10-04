@@ -37,6 +37,13 @@ export const NOTICE_START = "::notice::";
 // Köhnə az mətni (DIN_REPLY) də bildiriş sayılır: təkrar yazılmasın
 export const OLD_AZ_NOTICE = "İlk olaraq: süni intellektdən din öyrənilməz. İbn Sirin رحمه الله demişdir: «Həqiqətən, bu elm sizin dininizdir; dininizi kimdən aldığınıza diqqət edin.»";
 
+// Bildiriş YALNIZ süni intellektin özünün yazdığı dini cavablara aiddir. Daxili mənbədən (AI-siz) gələn cavablarda bildiriş verilmir:
+// Quran ayə/surə (mənaca tərcümə daxil), təfsir (Müyəssər, Sədi, İbn Kəsir), tövhid dərsləri, Quran lüğəti (Bəqərə sözləri),
+// «davam» (növbəti ayə/təfsir) və gələcəkdə əlavə olunacaq kitab (Şamilə) çıxarışları. Yeni daxili mənbə «book» adı ilə qoşulur.
+// Əl ilə yazılmış hazır cavablar («canned»), dinReply və İbn Sirin xəbərdarlığı bura daxil deyil: davranışları dəyişməyib.
+export const SOURCE_KINDS = new Set(["ayah", "tafsir", "tawhid", "quran", "next", "book"]);
+export const isSourceKind = (kind) => SOURCE_KINDS.has(kind);
+
 export function noticeLang(message) {
   const l = detectLang(message);
   return T[l] ? l : "az";

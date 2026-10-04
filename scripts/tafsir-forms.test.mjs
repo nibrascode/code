@@ -48,7 +48,7 @@ test("«تفسير البقرة 17» (dəqiq istifadəçi yazısı) real chat z�
     const r = await chat({ message: "تفسير البقرة 17", ...extra });
     assert.equal(r.usedAI, false, JSON.stringify(extra));
     assert.ok(isTafsir(r.reply, 2, 17, /muyassar/), JSON.stringify(extra) + " " + r.reply.slice(0, 120));
-    assert.equal(/::notice::/.test(r.reply), extra.noticeShown === false);
+    assert.ok(!/::notice::/.test(r.reply) && !r.notice, "təfsir daxili mənbədir: bildiriş yoxdur");
   }
 });
 

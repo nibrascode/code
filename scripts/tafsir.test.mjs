@@ -210,12 +210,11 @@ test("kitab adı yazılıb ayə yoxdur: kitabların siyahısı və nümunə (AI-
   assert.match(c, /• Təfsir İbn Kəsir/);
 });
 
-test("server: tövhid/ayə qaydası dəyişmir, təfsir sorğusu AI-siz cavablanır; ilk dini cavabda bildiriş, ikincidə yox; yeni söhbətdə yenə", async () => {
+test("server: tövhid/ayə qaydası dəyişmir, təfsir sorğusu AI-siz cavablanır; daxili mənbə olduğundan heç vaxt bildiriş yoxdur (noticeShown:false də)", async () => {
   const first = await chat({ message: "Bəqərə 255 təfsiri", noticeShown: false });
   assert.equal(first.usedAI, false);
   assert.equal(first.religious, true);
-  assert.ok(hasNotice(first.reply) && first.reply.startsWith("::notice::"));
-  assert.ok(first.reply.indexOf("::/notice::") < first.reply.indexOf("::ayah 2:255::"));
+  assert.ok(!hasNotice(first.reply) && !first.notice && first.reply.startsWith("::ayah 2:255::"));
   assert.ok(first.reply.indexOf("::ayah 2:255::") < first.reply.indexOf("::tafsir muyassar::"));
   const second = await chat({ message: "Sədi təfsiri 2:255", noticeShown: true });
   assert.ok(!hasNotice(second.reply) && !second.notice);
@@ -223,7 +222,7 @@ test("server: tövhid/ayə qaydası dəyişmir, təfsir sorğusu AI-siz cavablan
   const legacy = await chat({ message: "Bəqərə 255 təfsiri" });
   assert.ok(!hasNotice(legacy.reply));
   const again = await chat({ message: "İbn Kəsir təfsiri 2:255", noticeShown: false });
-  assert.ok(hasNotice(again.reply));
+  assert.ok(!hasNotice(again.reply) && !again.notice);
   // əvvəlki davranış: ayə və tövhid dəyişmir
   assert.match((await chat({ message: "Bəqərə 255" })).reply, /^::ayah 2:255::/);
   assert.match((await chat({ message: "Şirk neçə qismə bölünür" })).reply, /şirk/i);
@@ -292,7 +291,7 @@ test("səhifə: təfsir bloku render (kiçik boz ad, RTL ərəbcə, escape, mən
   assert.equal(tf.querySelector(".tft").getAttribute("dir"), "rtl");
   assert.match(tf.querySelector(".tft").textContent, /الله الذي لا يستحق الألوهية/);
   assert.ok(tf.querySelector(".as a[href^='https://quranenc.com/']"));
-  assert.equal(d.querySelectorAll("#msgs .nt").length, 1, "bildiriş yalnız ilk dini cavabda");
+  assert.equal(d.querySelectorAll("#msgs .nt").length, 0, "təfsir daxili mənbədir: bildiriş yoxdur");
   assert.equal(d.querySelectorAll("#msgs img").length, 0, "HTML escape olunmalıdır");
   assert.equal(d.querySelector("#btn").disabled, false);
   assert.ok(d.querySelector("#msgs .msg.b .ay .at"), "ayə bloku də var");

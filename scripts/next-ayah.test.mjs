@@ -148,11 +148,11 @@ test("ctx gizli sətri: AI tarixçəsinə və markup təmizləməyə düşmür; 
   const t = await tafsirReply("Bəqərə 255 təfsiri");
   assert.match(t, /^::ctx:: 2:255-255 muyassar 1\/1 az$/m);
   assert.doesNotMatch(compactHistory(t), /ctx|::/);
-  // bildiriş: ilk dini cavabda başda, davam cavabında (noticeShown:true) yoxdur; noticeShown:false olsa yenə başda
+  // ayə və «davam» daxili mənbədir: noticeShown:false olsa da bildiriş yoxdur
   const first = await chat({ message: "Bəqərə 255", noticeShown: false });
-  assert.ok(hasNotice(first.reply) && first.reply.startsWith("::notice::"));
+  assert.ok(!hasNotice(first.reply) && !first.notice && first.reply.startsWith("::ayah 2:255::"));
   const nx = await chat({ message: "davam", messages: [{ role: "assistant", text: first.reply }], noticeShown: false });
-  assert.ok(hasNotice(nx.reply) && nx.reply.indexOf("::/notice::") < nx.reply.indexOf("::ayah 2:256::"));
+  assert.ok(!hasNotice(nx.reply) && !nx.notice && nx.reply.startsWith("::ayah 2:256::"));
   const nx2 = await chat({ message: "davam", messages: [{ role: "assistant", text: first.reply }], noticeShown: true });
   assert.ok(!hasNotice(nx2.reply) && nx2.reply.startsWith("::ayah 2:256::"));
   // AI-yə gedən sorğuda ctx yoxdur
@@ -240,5 +240,5 @@ test("səhifə: ayə sonra «ثم», «davam», «sonra» dəfələrlə — hər
   assert.ok(lastBot.querySelector(".tf"), "təfsir də gəlir");
   assert.match(lastBot.querySelector(".ay").textContent, /Bəqərə surəsi, 261-c[iıuü] ayə/);
   assert.equal(lastBot.querySelectorAll(".sg").length, 0);
-  assert.equal(d.querySelectorAll("#msgs .nt").length, 1, "bildiriş yalnız ilk dini cavabda");
+  assert.equal(d.querySelectorAll("#msgs .nt").length, 0, "ayə/təfsir daxili mənbədir: bildiriş yoxdur");
 });

@@ -221,11 +221,11 @@ test("təklif: tafsir cavabında, məlumat qeydində və ayəsiz cavabda yoxdur;
   for (const q of ["Şirk neçə qismə bölünür", "Sələfilik nədir", "Allahın adları"]) assert.doesNotMatch((await chat({ message: q })).reply, /::sug::/, q);
 });
 
-test("server: ayə cavabına təklif əlavə olunur, bildiriş başda qalır (ilk dini cavab), ikincidə bildiriş yox; AI-siz", async () => {
+test("server: ayə cavabına təklif əlavə olunur; daxili mənbə olduğundan bildiriş heç vaxt yoxdur; AI-siz", async () => {
   const first = await chat({ message: "سورة الملك", noticeShown: false });
   assert.equal(first.usedAI, false);
-  assert.ok(first.reply.startsWith("::notice::") && hasNotice(first.reply));
-  assert.ok(first.reply.indexOf("::/notice::") < first.reply.indexOf("::ayah 67:"));
+  assert.ok(!hasNotice(first.reply) && !first.notice && first.religious === true);
+  assert.ok(first.reply.startsWith("::ayah 67:"));
   assert.ok(first.reply.trimEnd().endsWith("::/sug::"));
   assert.equal((first.reply.match(/::sug::/g) || []).length, 1);
   const second = await chat({ message: "سورة ملك", noticeShown: true });
@@ -234,9 +234,9 @@ test("server: ayə cavabına təklif əlavə olunur, bildiriş başda qalır (il
   const legacy = await chat({ message: "Mülk surəsi" });
   assert.ok(!hasNotice(legacy.reply));
   assert.ok(sugOf(legacy.reply));
-  // təfsir sorğusu: bildiriş qaydası dəyişməyib, təklif yoxdur
+  // təfsir sorğusu: bildiriş yoxdur (daxili mənbə), təklif yoxdur
   const t = await chat({ message: "Bəqərə 255 təfsiri", noticeShown: false });
-  assert.ok(hasNotice(t.reply));
+  assert.ok(!hasNotice(t.reply) && !t.notice);
   assert.doesNotMatch(t.reply, /::sug::/);
 });
 
@@ -327,7 +327,7 @@ test("səhifə: təklif düymələri 3 kiçik düymə kimi çəkilir; kliklə ha
   assert.ok(last.querySelector(".tf"), "təfsir gəldi");
   assert.match(last.querySelector(".ay .at").textContent, /تَبَارَكَ|تبارك/);
   assert.equal(last.querySelectorAll(".sg").length, 0);
-  assert.equal(d.querySelectorAll("#msgs .nt").length, 1, "bildiriş təkrarlanmır");
+  assert.equal(d.querySelectorAll("#msgs .nt").length, 0, "daxili mənbə cavablarında bildiriş yoxdur");
   assert.equal(d.querySelector("#btn").disabled, false);
   // sonrakı klik: Sədi
   d.querySelectorAll("#msgs .msg.b")[0].querySelectorAll(".sg button.chip")[1].click();
