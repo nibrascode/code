@@ -484,8 +484,8 @@ function rangeReply(lo, hi, lang, narrowed) {
     const nextEnd = Math.min(hi, nextStart + 9);
     note =
       lang === "ar"
-        ? `ظهرت الآيات حتى ${shownLast} فقط. للمتابعة ضيّق النطاق، مثل: «البقرة ${nextStart}-${nextEnd}».`
-        : `Cavabın uzunluğuna görə ${ord(shownLast)} ayəyə qədər göstərildi. Davamı üçün aralığı daralt, məsələn: «Bəqərə ${nextStart}-${nextEnd}».`;
+        ? `ظهرت الآيات حتى ${shownLast} فقط.\n::sug::\n::sb:: المتابعة: البقرة ${nextStart}-${nextEnd} | البقرة ${nextStart}-${nextEnd}\n::/sug::`
+        : `Cavabın uzunluğuna görə ${ord(shownLast)} ayəyə qədər göstərildi.\n::sug::\n::sb:: Davamı: Bəqərə ${nextStart}-${nextEnd} | Bəqərə ${nextStart}-${nextEnd}\n::/sug::`;
     hits = shown;
   }
   const first = hits[0].ayah;

@@ -820,6 +820,20 @@
       if (!chips.length) return "";
       return '<div class="sg">' + (lead ? '<div class="sgl" dir="auto">' + escapeHtml(lead) + "</div>" : "") + '<div class="sgb">' + chips.join("") + "</div></div>";
     }
+    // Köhnə (saxlanmış) söhbətlər: «Davamı üçün yaz: «…»» kimi düz mətn göstərişlərini kliklənən düyməyə çevirir (yeni cavablar artıq ::sug:: ilə gəlir).
+    const HINT_LABEL = { "Davamı üçün yaz": "Davamı", "Devamı için yaz": "Devamı", "For the rest, write": "Continue", "Продолжение: напишите": "Продолжение", "للمتابعة اكتب": "المتابعة", "Davamı üçün aralıq yaz": "Davamı", "Davamı üçün aralığı daralt": "Davamı", "Aralık yazın": "Devamı", "Specify a range": "Continue", "Укажите диапазон": "Продолжение", "اكتب نطاق الآيات": "المتابعة", "للمتابعة ضيّق النطاق": "المتابعة" };
+    const HINT_RE = /(Davamı üçün yaz|Devamı için yaz|For the rest, write|Продолжение: напишите|للمتابعة اكتب|Davamı üçün aralıq yaz|Davamı üçün aralığı daralt|Aralık yazın|Specify a range|Укажите диапазон|اكتب نطاق الآيات|للمتابعة ضيّق النطاق)(?::|,|،)?(?: (?:məsələn|örneğin|e\.g\.|например|مثل):?)? ?«([^»\n]{1,160})»\.?/g;
+    function unesc(t) {
+      return t.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, "&");
+    }
+    function legacyHint(html) {
+      return html.replace(HINT_RE, function (all, lead, q, off, whole) {
+        const query = unesc(q).trim();
+        if (!query) return all;
+        const pre = off === 0 || whole.charAt(off - 1) === "\n" ? "" : "\n";
+        return pre + sugHtml("::sb:: " + HINT_LABEL[lead] + ": " + query + " | " + query);
+      }).replace(/(^|\n)::note::[ \t]*(?=<div class="sg">)/g, "$1");
+    }
     function ayahHtml(text) {
       const nre = /(?:^|\n)::notice::\n([\s\S]*?)\n::\/notice::(?=\n|$)/;
       const nm = nre.exec(text);
@@ -849,7 +863,7 @@
       const plain = function (seg, trimStart, trimEnd) {
         if (trimStart) seg = seg.replace(/^\n{1,2}/, "");
         if (trimEnd) seg = seg.replace(/\n{1,2}$/, "");
-        return escapeHtml(seg).replace(/(^|\n)::note::[ \t]*([^\n]*)(?=\n|$)/g, function (all, pre, t) {
+        return legacyHint(escapeHtml(seg)).replace(/(^|\n)::note::[ \t]*([^\n]*)(?=\n|$)/g, function (all, pre, t) {
           return pre + '<div class="an" dir="auto">' + t + "</div>";
         });
       };

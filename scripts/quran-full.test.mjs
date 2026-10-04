@@ -219,7 +219,8 @@ test("axtarış: cavab mətni data ilə hərfbəhərf eynidir (AI yoxdur)", () =
 test("axtarış: uzun surə məhdudlaşdırılır, aralıq limitlənir, olmayan ayə uydurulmur", () => {
   const y = ayahReply("Yasin surəsi");
   assert.equal(textOf(y).length, 1 + 15); // bismillah + 15 ayə
-  assert.match(y, /Surə uzundur \(83 ayə\): yalnız ilk 15 ayə göstərildi\. Davamı üçün aralıq yaz, məsələn: «Yasin 16-30»\./);
+  assert.match(y, /Surə uzundur \(83 ayə\): yalnız ilk 15 ayə göstərildi\.\n::sug::\n::sb:: Davamı: Yasin 16-30 \| Yasin 16-30\n::\/sug::/);
+  assert.ok(!y.includes("Davamı üçün aralıq yaz"));
   assert.match(y, /Yasin surəsi, 1–15-ci ayələr/);
   const b = ayahReply("Bəqərə surəsi");
   assert.match(b, /286 ayə/);

@@ -143,7 +143,7 @@ test("cavab: tr/en/ru/ar üçün ad və mənbə; ərəb UI ərəbcə ad; az mən
   assert.match(ar, /::src:: المصدر: QuranEnc\.com/);
   const ar2 = await tafsirReply("تفسير السعدي سورة الفاتحة");
   assert.match(label(ar2), /^تفسير السعدي — الجزء ١\/٢$/);
-  assert.match(ar2, /::note:: للمتابعة اكتب: «تفسير السعدي 1:1-7 الجزء ٢»/);
+  assert.match(ar2, /^::sug::\n::sb:: المتابعة: تفسير السعدي 1:1-7 الجزء ٢ \| تفسير السعدي 1:1-7 الجزء ٢\n::\/sug::$/m);
   const ik = await tafsirReply("تفسير ابن كثير 2:255");
   assert.equal(head(ik)[1], "tafsir ibnkathir");
 });
@@ -153,7 +153,7 @@ test("uzun təfsir hissələrə bölünür; «hissə N» davamı verir; mətn it
   const m = label(r1).match(/hissə 1\/(\d+)$/);
   assert.ok(m && Number(m[1]) > 3, label(r1));
   const N = Number(m[1]);
-  assert.match(r1, new RegExp(`::note:: Davamı üçün yaz: «İbn Kəsir təfsiri 2:255 hissə 2»`));
+  assert.match(r1, /^::sug::\n::sb:: Davamı: İbn Kəsir təfsiri 2:255 hissə 2 \| İbn Kəsir təfsiri 2:255 hissə 2\n::\/sug::$/m);
   const body = (r) => r.split("::tafsir ibnkathir::")[1].split("::/tafsir::")[0].split("\n").filter((l) => !/^::(tl|src|tv)::/.test(l)).join("\n");
   let all = [body(r1)];
   for (let p = 2; p <= N; p++) {
@@ -162,7 +162,7 @@ test("uzun təfsir hissələrə bölünür; «hissə N» davamı verir; mətn it
     assert.doesNotMatch(r, /^::ayah /m, "davam hissədə ayə təkrar göstərilmir");
     assert.ok(body(r).length <= PAGE_CHARS.ibnkathir + 200);
     all.push(body(r));
-    if (p === N) assert.doesNotMatch(r, /Davamı üçün yaz/);
+    if (p === N) assert.doesNotMatch(r, /Davamı üçün yaz|::sb:: Davamı:/);
   }
   // bütün hissələr birləşdikdə orijinal ayə təfsirinin bütün sözləri qalır
   const orig = (await LOADERS.ibnkathir[1]()).default[254];

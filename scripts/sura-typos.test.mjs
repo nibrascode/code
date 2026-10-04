@@ -19,7 +19,7 @@ const one = (q) => {
   const r = ayahLookup(q);
   return r && r.reps.length === 1 ? r.reps[0].s : null;
 };
-const hasChips = (r) => /\n::sug::\n[\s\S]*::\/sug::$/.test(r) && (r.match(/^::sb:: /gm) || []).length === 3;
+const hasChips = (r) => /\n::sug::\n[\s\S]*::\/sug::$/.test(r) && (r.match(/^::sb:: (?!(?:Davamı|المتابعة): )/gm) || []).length === 3; // «Davamı» düyməsi (uzun surə) sayılmır
 
 test("canlı hesabatlar: «Bəqərə 2» və s. söz izahı yox, ayə + təfsir düymələri; «سورة االكهف» Kəhf surəsidir (AI-yə getmir)", async () => {
   for (const [q, s, a] of [["Bəqərə 2", 2, 2], ["Bəqərə ayə 2", 2, 2], ["سورة البقرة الآية 2", 2, 2], ["البقرة 2", 2, 2], ["بقرة 2", 2, 2], ["Bəqərə 5-ci ayə", 2, 5], ["Bəqərə 1-5", 2, 1]]) {
@@ -43,7 +43,7 @@ test("söz izahı yalnız açıq istəkdə: «كلمات», «معاني الك�
     const r = await chat(q);
     assert.equal(r.usedAI, false, q);
     assert.doesNotMatch(r.reply, /^::ayah/, q);
-    assert.doesNotMatch(r.reply, /::sug::/, q);
+    assert.doesNotMatch(r.reply, /::sug::\n::sl::/, q); // təfsir təklifləri yoxdur (söz izahının öz «Davamı» düyməsi ola bilər)
     assert.match(r.reply, /الْكِتَابُ|الٓمٓ|ٱلۡ|[\u0600-\u06FF]/, q);
   }
 });

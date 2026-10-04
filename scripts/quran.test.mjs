@@ -110,7 +110,8 @@ test("aralıq: 1-59 qısaldılır və davamı təklif edilir", () => {
   assert.ok(r);
   const words = (r.match(/^\d+\) /gm) || []).length;
   assert.ok(words <= 25 && words >= 10, `söz sayı: ${words}`);
-  assert.ok(r.includes("aralığı daralt"));
+  assert.match(r, /\n::sug::\n::sb:: Davamı: Bəqərə \d+-\d+ \| Bəqərə \d+-\d+\n::\/sug::/);
+  assert.ok(!r.includes("aralığı daralt"));
   assert.ok(r.includes(FOOTER));
 });
 

@@ -27,11 +27,13 @@ const SRC = {
   ru: { source: "Источник" },
   ar: { source: "المصدر" },
 };
+/** «Davamı» təklifi düymə kimi (::sug::): etiket «Davamı: <sorğu>», basanda həmin sorğu göndərilir. */
+const contChip = (word, q) => `::sug::\n::sb:: ${word}: ${q} | ${q}\n::/sug::`;
 const T = {
   az: {
     part: "hissə",
     nofree: "Təfsir ərəbcə orijinalda verilir; Azərbaycancaya tərcümə edilməyib.",
-    more: (q) => `Davamı üçün yaz: «${q}»`,
+    more: (q) => contChip("Davamı", q),
     others: (list) => `Digər təfsirlər: ${list}.`,
     none: (what) => `Bu təfsirdə ${what} üçün ayrıca şərh yoxdur.`,
     intro: "Nibras AI-də 3 ərəb təfsiri daxili məlumatdan göstərilir (AI olmadan, mətn dəyişdirilmədən):",
@@ -42,7 +44,7 @@ const T = {
   tr: {
     part: "bölüm",
     nofree: "Tefsir Arapça aslıyla verilir; Türkçeye çevrilmemiştir.",
-    more: (q) => `Devamı için yaz: «${q}»`,
+    more: (q) => contChip("Devamı", q),
     others: (list) => `Diğer tefsirler: ${list}.`,
     none: (what) => `Bu tefsirde ${what} için ayrı bir açıklama yoktur.`,
     intro: "Nibras AI'de 3 Arapça tefsir iç veriden gösterilir (yapay zekâ olmadan, metin değiştirilmeden):",
@@ -53,7 +55,7 @@ const T = {
   en: {
     part: "part",
     nofree: "The tafsir is given in its original Arabic; it has not been translated.",
-    more: (q) => `For the rest, write: «${q}»`,
+    more: (q) => contChip("Continue", q),
     others: (list) => `Other tafsirs: ${list}.`,
     none: (what) => `This tafsir has no separate commentary for ${what}.`,
     intro: "Nibras AI shows 3 Arabic tafsirs from built-in data (no AI, text unchanged):",
@@ -64,7 +66,7 @@ const T = {
   ru: {
     part: "часть",
     nofree: "Тафсир приводится на арабском в оригинале; перевод не делался.",
-    more: (q) => `Продолжение: напишите «${q}»`,
+    more: (q) => contChip("Продолжение", q),
     others: (list) => `Другие тафсиры: ${list}.`,
     none: (what) => `В этом тафсире нет отдельного толкования для ${what}.`,
     intro: "В Nibras AI доступны 3 арабских тафсира из встроенных данных (без ИИ, текст без изменений):",
@@ -75,7 +77,7 @@ const T = {
   ar: {
     part: "الجزء",
     nofree: "التفسير بنصه العربي الأصلي دون تغيير.",
-    more: (q) => `للمتابعة اكتب: «${q}»`,
+    more: (q) => contChip("المتابعة", q),
     others: (list) => `تفاسير أخرى: ${list}.`,
     none: (what) => `لا يوجد في هذا التفسير شرح مستقل لـ${what}.`,
     intro: "يعرض Nibras AI ثلاثة تفاسير عربية من بيانات داخلية (دون ذكاء اصطناعي ودون تغيير النص):",
@@ -355,7 +357,7 @@ export function suggestQuery(lang, book, s, lo, hi) {
 /** Ayə/surə cavabının sonuna ::sug:: bloku əlavə edir (təfsir cavablarına və ayə bloku olmayanlara yox). */
 export function withTafsirSuggest(reply, message, forceLang) {
   const text = String(reply || "");
-  if (/^::sug::/m.test(text) || /^::tafsir /m.test(text)) return text;
+  if (/^::sug::\n::sl::/m.test(text) || /^::tafsir /m.test(text)) return text; // «Davamı» düyməsi (::sl:: yoxdur) təfsir təkliflərinə mane olmur
   const m = text.match(/^::ayah (\d{1,3}):(\d{1,3})(?:-(\d{1,3}))?::$/m);
   if (!m) return text;
   const s = Number(m[1]);
@@ -434,7 +436,7 @@ export async function tafsirReply(message, forceLang) {
     });
     if (total > pno) {
       const lo = a1;
-      out.push("::note:: " + tt.more(`${bookQuery(lang, book, s, lo, a2)} ${tt.part} ${lang === "ar" ? toAr(pno + 1) : pno + 1}`));
+      out.push(tt.more(`${bookQuery(lang, book, s, lo, a2)} ${tt.part} ${lang === "ar" ? toAr(pno + 1) : pno + 1}`));
     }
   }
   const others = BOOKS.filter((b) => b !== book);

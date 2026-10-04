@@ -14,7 +14,8 @@ import { hasNotice } from "../api/_notice.js";
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const head = (r) => [...r.matchAll(/^::(ayah [\d:-]+|tafsir \w+)::$/gm)].map((m) => m[1]);
 const sugOf = (r) => {
-  const m = r.match(/\n::sug::\n([\s\S]*?)\n::\/sug::$/);
+  const at = r.lastIndexOf("\n::sug::\n"); // sonuncu blok: tafsir təklifləri (qabaqda «Davamı» düyməsi ola bilər)
+  const m = at < 0 ? null : r.slice(at).match(/^\n::sug::\n([\s\S]*?)\n::\/sug::$/);
   if (!m) return null;
   const lines = m[1].split("\n");
   return { lead: lines[0].replace(/^::sl:: /, ""), chips: lines.slice(1).map((l) => l.replace(/^::sb:: /, "").split(" | ")) };
@@ -28,11 +29,14 @@ async function chat(body) {
   return res.body;
 }
 
+/** «Davamı» düyməsi: ::sb:: Davamı: <sorğu> | <sorğu> (5 dil). */
+const CONT_RE = /^::sb:: (?:Davamı|Devamı|Continue|Продолжение|المتابعة): .+ \| (.+)$/m;
+
 /** Bütün səhifələri ardıcıl alır (davam qeydi bitənə qədər). */
 async function allPages(q, hint) {
   const pages = [await tafsirReply(q)];
-  while (/::note:: (Davamı üçün yaz|للمتابعة اكتب)/.test(pages.at(-1))) {
-    const m = pages.at(-1).match(/::note:: (?:Davamı üçün yaz|للمتابعة اكتب): «([^»]+)»/);
+  while (CONT_RE.test(pages.at(-1))) {
+    const m = pages.at(-1).match(CONT_RE);
     pages.push(await tafsirReply(m[1]));
     assert.ok(pages.length < 60, "sonsuz davam");
   }
@@ -66,11 +70,11 @@ test("növbələşmə: «تفسير الملك 1-10» — bir səhifədə 8 ayə
     assert.equal(h1[2 * i + 1], "tafsir muyassar");
   }
   assert.match(p1, /^::tl:: التفسير الميسر — الجزء ١\/٢$/m);
-  assert.match(p1, /::note:: للمتابعة اكتب: «التفسير الميسر 67:1-10 الجزء ٢»/);
+  assert.match(p1, /^::sug::\n::sb:: المتابعة: التفسير الميسر 67:1-10 الجزء ٢ \| التفسير الميسر 67:1-10 الجزء ٢\n::\/sug::$/m);
   const pages = await allPages("تفسير الملك 1-10");
   assert.equal(pages.length, 2);
   assert.deepEqual(head(pages[1]), ["ayah 67:9", "tafsir muyassar", "ayah 67:10", "tafsir muyassar"]);
-  assert.doesNotMatch(pages[1], /للمتابعة اكتب/);
+  assert.doesNotMatch(pages[1], /::sb:: المتابعة:/);
   // tafsir mətni itmir: hər ayənin Müyəssər şərhi cavabda tam var
   const data = (await LOADERS.muyassar[66]()).default;
   const all = pages.join("\n");
@@ -110,7 +114,7 @@ test("növbələşmə: İbn Kəsir limiti — uzun ayə hissələrə bölünür,
   const body = (r) => (r.match(/::tafsir ibnkathir::[\s\S]*?::\/tafsir::/g) || []).join("\n").split("\n").filter((l) => !/^::/.test(l)).join("\n");
   for (const p of pages) assert.ok(body(p).length <= PAGE_CHARS.ibnkathir + 400, "səhifə limiti " + body(p).length);
   assert.deepEqual(head(pages[0]).slice(0, 2), ["ayah 2:255", "tafsir ibnkathir"]);
-  assert.match(pages[0], /::note:: Davamı üçün yaz: «İbn Kəsir təfsiri 2:255-257 hissə 2»/);
+  assert.match(pages[0], /^::sug::\n::sb:: Davamı: İbn Kəsir təfsiri 2:255-257 hissə 2 \| İbn Kəsir təfsiri 2:255-257 hissə 2\n::\/sug::$/m);
   // 2-ci hissə ayə ilə başlamır (255-in davamı), davam etiketi var
   assert.equal(head(pages[1])[0], "tafsir ibnkathir");
   assert.match(pages[1], /^::tv:: \(255\)$/m);
@@ -218,7 +222,7 @@ test("təklif: tafsir cavabında, məlumat qeydində və ayəsiz cavabda yoxdur;
     const c = (await chat({ message: q })).reply;
     if (q === "Müyəssər təfsiri") assert.doesNotMatch(c, /::sug::/, q); // ayəsiz məlumat cavabı
     else {
-      assert.equal((c.match(/::sug::/g) || []).length, 1, q); // yalnız «digər təfsirlər» düymələri (2 ədəd)
+      assert.equal((c.match(/::sug::\n::sl::/g) || []).length, 1, q); // yalnız «digər təfsirlər» düymələri (2 ədəd); «Davamı» düyməsi (::sl:: yoxdur) ayrıca ola bilər
       assert.equal(sugOf(c).chips.length, 2, q);
     }
   }
@@ -236,7 +240,9 @@ test("server: ayə cavabına təklif əlavə olunur; daxili mənbə olduğundan 
   assert.ok(!hasNotice(first.reply) && !first.notice && first.religious === true);
   assert.ok(first.reply.startsWith("::ayah 67:"));
   assert.ok(first.reply.trimEnd().endsWith("::/sug::"));
-  assert.equal((first.reply.match(/::sug::/g) || []).length, 1);
+  assert.equal((first.reply.match(/::sug::\n::sl::/g) || []).length, 1);
+  assert.match(first.reply, /\n::sug::\n::sb:: المتابعة: الملك 16-30 \| الملك 16-30\n::\/sug::/); // uzun surə: «Davamı» düyməsi (düz mətn göstərişi yox)
+  assert.doesNotMatch(first.reply, /اكتب نطاق/);
   const second = await chat({ message: "سورة ملك", noticeShown: true });
   assert.ok(!hasNotice(second.reply) && !second.notice);
   assert.ok(sugOf(second.reply));
@@ -326,7 +332,9 @@ test("səhifə: növbələşmiş təfsir — ayə və təfsir bloku növbə ilə
 test("səhifə: təklif düymələri 3 kiçik düymə kimi çəkilir; kliklə hazır sorğu göndərilir, təfsir gəlir, təklif təkrarlanmır", { skip }, async () => {
   const { d, send, sent } = makePage();
   await send("Mülk surəsi");
-  const chips = [...d.querySelectorAll("#msgs .msg.b .sg button.chip")];
+  const allChips = [...d.querySelectorAll("#msgs .msg.b .sg button.chip")];
+  assert.equal(allChips[0].textContent, "Davamı: Mülk 16-30", "uzun surə: «Davamı» düyməsi");
+  const chips = allChips.slice(1);
   assert.deepEqual(chips.map((b) => b.textContent), ["Müyəssər", "Sədi", "İbn Kəsir"]);
   assert.ok(chips.every((b) => b.type === "button" && !b.hasAttribute("data-sq")));
   assert.ok(d.querySelector("#msgs .msg.b .sg .sgl").textContent.length > 5);
@@ -341,7 +349,7 @@ test("səhifə: təklif düymələri 3 kiçik düymə kimi çəkilir; kliklə ha
   assert.equal(d.querySelectorAll("#msgs .nt").length, 0, "daxili mənbə cavablarında bildiriş yoxdur");
   assert.equal(d.querySelector("#btn").disabled, false);
   // sonrakı klik: Sədi
-  d.querySelectorAll("#msgs .msg.b")[0].querySelectorAll(".sg button.chip")[1].click();
+  d.querySelectorAll("#msgs .msg.b")[0].querySelectorAll(".sg button.chip")[2].click();
   await wait(200);
   assert.equal(sent.at(-1).message, "Sədi təfsiri Mülk 1-8");
   // ikinci tək ayə cavabı: düymə tək ayə sorğusu göndərir
@@ -398,4 +406,65 @@ test("səhifə: təklif bloku tam escape olunur (HTML/attribut inyeksiyası işl
   chips[1].click();
   await wait(100);
   assert.equal(sent.at(-1).message, "sorğu 2");
+});
+
+// ------------------------------------------------------------------ «Davamı» düymələri (düz mətn göstərişi əvəzinə)
+test("davam: 5 dildə «Davamı» düyməsi (::sug::), düz «yaz:» göstərişi yoxdur, sorğu işləyir", async () => {
+  const cases = [
+    ["Sədi təfsiri Fatihə", "az", "Davamı", /hissə 2$/],
+    ["Sadi tefsiri Fatiha", "tr", "Devamı", /hissə 2$/],
+    ["Tafsir as-Sadi Al-Fatiha", "en", "Continue", /hissə 2$/],
+    ["тафсир ас-Саади Аль-Фатиха", "ru", "Продолжение", /hissə 2$/],
+    ["تفسير السعدي سورة الفاتحة", "ar", "المتابعة", /الجزء ٢$/],
+  ];
+  for (const [q, lang, word, _p] of cases) {
+    const r = await tafsirReply(q, lang);
+    const m = r.match(new RegExp(`^::sug::\\n::sb:: ${word}: (.+) \\| (.+)\\n::/sug::$`, "m"));
+    assert.ok(m, `${lang}: düymə var`);
+    assert.equal(m[1], m[2], "etiket = göndərilən sorğu");
+    assert.match(m[2], /[2٢]$/, lang); // növbəti hissə nömrəsi
+    assert.doesNotMatch(r, /Davamı üçün yaz|Devamı için yaz|For the rest, write|Продолжение: напишите|للمتابعة اكتب/, `${lang}: düz mətn göstərişi qalmayıb`);
+    assert.doesNotMatch(r, /::note:: [^\n]*«/, lang);
+    const next = await tafsirReply(m[2]); // düymənin sorğusu növbəti hissəni gətirir
+    assert.match(next, /::tafsir saadi::/, lang);
+  }
+});
+
+test("səhifə: «Davamı» düyməsi kliklənir, dəqiq əmri göndərir, növbəti hissə gəlir; düz göstəriş mətni yoxdur", { skip }, async () => {
+  const { d, send, sent } = makePage();
+  await send("Sədi təfsiri Fatihə");
+  const bot = d.querySelector("#msgs .msg.b");
+  const chip = [...bot.querySelectorAll(".sg button.chip")].find((b) => /^Davamı: /.test(b.textContent));
+  assert.ok(chip, "düymə var");
+  assert.equal(chip.textContent, "Davamı: Sədi təfsiri 1:1-7 hissə 2");
+  assert.doesNotMatch(bot.textContent, /Davamı üçün yaz/);
+  chip.click();
+  await wait(250);
+  assert.equal(sent.at(-1).message, "Sədi təfsiri 1:1-7 hissə 2");
+  const bots = d.querySelectorAll("#msgs .msg.b");
+  assert.match(bots[bots.length - 1].querySelector(".tfl").textContent, /2\/2$/);
+});
+
+test("səhifə: köhnə (saxlanmış) düz mətn göstərişləri render zamanı düyməyə çevrilir; təkrarlanmır", { skip }, async () => {
+  const legacy = [
+    "::tafsir saadi::\n::tl:: Sədi\n::ar:: x\n::/tafsir::\n\n::note:: Davamı üçün yaz: «Sədi təfsiri 1:1-7 hissə 2»",
+    "Surə uzundur (83 ayə): yalnız ilk 15 ayə göstərildi. Davamı üçün aralıq yaz, məsələn: «Yasin 16-30».",
+    "This surah is long (114 verses); only the first 15 are shown. Specify a range, e.g. «Al-Isra 16-30».",
+    "::note:: للمتابعة اكتب: «تفسير السعدي 1:1-7 الجزء ٢»",
+  ];
+  const override = {};
+  legacy.forEach((t, i) => (override["k" + i] = { success: true, reply: t, usedAI: false }));
+  const { d, send, sent } = makePage(override);
+  for (let i = 0; i < legacy.length; i++) await send("k" + i);
+  const bots = [...d.querySelectorAll("#msgs .msg.b")];
+  const want = ["Davamı: Sədi təfsiri 1:1-7 hissə 2", "Davamı: Yasin 16-30", "Continue: Al-Isra 16-30", "المتابعة: تفسير السعدي 1:1-7 الجزء ٢"];
+  bots.forEach((b, i) => {
+    const chips = b.querySelectorAll("button.chip");
+    assert.equal(chips.length, 1, `#${i}`);
+    assert.equal(chips[0].textContent, want[i]);
+    assert.doesNotMatch(b.textContent, /Davamı üçün|For the rest|Specify a range|اكتب|Aralık/);
+  });
+  bots[1].querySelector("button.chip").click();
+  await wait(150);
+  assert.equal(sent.at(-1).message, "Yasin 16-30");
 });
