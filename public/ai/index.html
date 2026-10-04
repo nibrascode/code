@@ -872,7 +872,13 @@
         });
       });
     }
-    function bubble(text, kind, imageUrl) {
+    // Yeni cavab: uzun cavabın BAŞI (balonun üstü) görünür; ekrana tam sığan qısa cavab tam görünür. İstifadəçinin öz mesajı isə həmişə aşağıya çəkilir.
+    function revealAnswer(el) {
+      if (el.offsetHeight <= msgs.clientHeight) { msgs.scrollTop = msgs.scrollHeight; return; }
+      const delta = el.getBoundingClientRect().top - msgs.getBoundingClientRect().top;
+      msgs.scrollTop = Math.max(0, msgs.scrollTop + delta - 8);
+    }
+    function bubble(text, kind, imageUrl, restore) {
       if (hello && hello.parentNode) hello.remove();
       const el = document.createElement("div");
       el.className = "msg " + kind;
@@ -886,7 +892,9 @@
         el.appendChild(img);
       }
       msgs.appendChild(el);
-      msgs.scrollTop = msgs.scrollHeight;
+      if (restore) return el; // söhbət bərpasında renderItem özü sona çəkir
+      if (kind.charAt(0) === "b") revealAnswer(el);
+      else msgs.scrollTop = msgs.scrollHeight;
       return el;
     }
     async function send(text) {
@@ -1153,7 +1161,7 @@
         msgs.appendChild(hello);
         return;
       }
-      it.msgs.forEach(function (m) { bubble(m.t, m.k, m.i || ""); });
+      it.msgs.forEach(function (m) { bubble(m.t, m.k, m.i || "", true); });
       msgs.scrollTop = msgs.scrollHeight;
     }
     function restoreCurrent() {
