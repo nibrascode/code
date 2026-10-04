@@ -274,7 +274,6 @@ const T = {
     noNum: (b, max) => `${b} kitabında belə nömrə tapılmadı (ən böyük nömrə: ${max}).`,
     usage: "Hədis axtarmaq üçün ərəbcə söz və ya ifadə yaz, məsələn: «hədis axtar: إنما الأعمال بالنيات» və ya «hədis niyyət haqqında». Nömrə ilə də olar: «Buxari 1».",
     cut: "(mətn qısaldılıb)",
-    edNote: "Hədislər kitablardan sözbəsöz çıxarışdır, süni intellektsiz. Dərəcələr nəşr redaktorlarının (Albani / Arnaut) hökmləridir; «Səhih»dəki hədislər kitabın şərtinə görə səhih sayılır. Buxari nömrələri Buğa nəşrinə görədir.",
     more: (a, b, n) => `Daha çox göstər (${a}–${b} / ${n})`,
     moreQ: "davam",
     sl: "Daha çox hədis var:",
@@ -291,7 +290,6 @@ const T = {
     noNum: (b, max) => `${b} kitabında böyle bir numara yok (en büyük numara: ${max}).`,
     usage: "Hadis aramak için Arapça bir kelime veya ifade yazın, örneğin: «hadis ara: إنما الأعمال بالنيات» ya da «hadis niyet hakkında». Numara ile de olur: «Buhari 1».",
     cut: "(metin kısaltıldı)",
-    edNote: "Hadisler kitaplardan kelimesi kelimesine alıntıdır, yapay zekâsız. Dereceler neşir muhakkiklerinin (Albânî / Arnaût) hükümleridir; «Sahîh»teki hadisler kitabın şartına göre sahih sayılır. Buhârî numaraları Buğa neşrine göredir.",
     more: (a, b, n) => `Daha fazla göster (${a}–${b} / ${n})`,
     moreQ: "devam",
     sl: "Daha fazla hadis var:",
@@ -308,7 +306,6 @@ const T = {
     noNum: (b, max) => `No such number in ${b} (highest number: ${max}).`,
     usage: "To search hadith, write an Arabic word or phrase, e.g. «hadith search: إنما الأعمال بالنيات» or «hadith about intention». You can also look up by number: «Bukhari 1».",
     cut: "(text shortened)",
-    edNote: "Hadith are verbatim extracts from the books, without AI. Gradings are those of the edition's editors (al-Albani / al-Arna'ut); hadith in the two Sahihs are sahih by the books' own condition. Bukhari numbers follow the al-Bugha edition.",
     more: (a, b, n) => `Show more (${a}–${b} of ${n})`,
     moreQ: "more",
     sl: "More hadith available:",
@@ -325,7 +322,6 @@ const T = {
     noNum: (b, max) => `В книге ${b} нет такого номера (наибольший номер: ${max}).`,
     usage: "Для поиска хадисов напишите арабское слово или фразу, например: «хадис поиск: إنما الأعمال بالنيات» или «хадис о намерении». Можно и по номеру: «Бухари 1».",
     cut: "(текст сокращён)",
-    edNote: "Хадисы приведены дословно из книг, без ИИ. Степени достоверности принадлежат редакторам издания (аль-Албани / аль-Арнаут); хадисы из двух Сахихов считаются достоверными по условию этих книг. Номера Бухари — по изданию аль-Буги.",
     more: (a, b, n) => `Показать ещё (${a}–${b} из ${n})`,
     moreQ: "дальше",
     sl: "Есть ещё хадисы:",
@@ -342,7 +338,6 @@ const T = {
     noNum: (b, max) => `لا يوجد هذا الرقم في ${b} (أكبر رقم: ${max}).`,
     usage: "للبحث في الأحاديث اكتب كلمة أو عبارة، مثل: «حديث إنما الأعمال بالنيات». ويمكن البحث بالرقم: «صحيح البخاري 1».",
     cut: "(النص مختصر)",
-    edNote: "الأحاديث منقولة من الكتب حرفيًا دون ذكاء اصطناعي. الأحكام هي أحكام محققي النشرة (الألباني / الأرنؤوط)، وأحاديث الصحيحين صحيحة بشرط الكتابين. ترقيم البخاري وفق نشرة البغا.",
     more: (a, b, n) => `عرض المزيد (${a}–${b} من ${n})`,
     moreQ: "تابع",
     sl: "هناك المزيد من الأحاديث:",
@@ -543,13 +538,12 @@ async function render({ mode, key, ids, offset, total, exact, lang, head }) {
     const h = await getHadith(idx, slice[i]);
     out.push(block(h, offset + i + 1, total, termSet, lang));
   }
-  out.push("::note:: " + t.edNote);
   if (b < total) {
     const nb = Math.min(total, b + PAGE);
     out.push(`::sug::\n::sl:: ${t.sl}\n::sb:: ${t.more(b + 1, nb, total)} | ${t.moreQ}\n::/sug::`);
   }
   out.push(`::ctx:: hadith ${mode} ${b} ${lang} ${b64u(key)}`);
-  return out.join("\n\n").replace(/\n\n(::note::|::sug::|::ctx::)/g, "\n$1").replace(/\n(::note::)/, "\n\n$1");
+  return out.join("\n\n").replace(/\n\n(::sug::|::ctx::)/g, "\n$1");
 }
 
 async function runQuery(phrase, lang, { bare = false } = {}) {

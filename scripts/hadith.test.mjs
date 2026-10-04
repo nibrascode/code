@@ -219,3 +219,16 @@ test("Müslim: yanlış nömrələnmiş hədislər düzəldildi (822 — 6 hədi
   assert.match(r.reply, /822: 6 حديثًا/);
   assert.match((await run({ message: "مسلم 2183", noticeShown: false })).reply, /::tl:: 1\/2 · مسلم · رقم 2183/);
 });
+
+test("çərçivə qeydi (edNote) heç bir dildə və heç bir səhifədə çıxmır", async () => {
+  for (const lang of ["az", "tr", "en", "ru", "ar"]) {
+    const r = await run({ message: "حديث إنما الأعمال بالنيات", lang, history: [], noticeShown: false });
+    assert.ok(/::ctx:: hadith q 5 /.test(r.reply));
+    assert.ok(!r.reply.includes("::note::"), lang + ": ::note::");
+    assert.ok(!/Albani|Arnaut|Arna'ut|Албани|Арнаут|süni intellektsiz|without AI|без ИИ|دون ذكاء/i.test(r.reply), lang);
+    const m = r.reply.match(/::ctx:: hadith q 5 \S+ \S+/);
+    const r2 = await run({ message: "davam", lang, messages: [{ role: "user", text: "hədis axtar: إنما الأعمال بالنيات" }, { role: "assistant", text: r.reply }], noticeShown: true });
+    assert.ok(/::ctx:: hadith q 10 /.test(r2.reply), lang + " p2 ctx");
+    assert.ok(!String(r2.reply).includes("::note::"), lang + " p2");
+  }
+});
