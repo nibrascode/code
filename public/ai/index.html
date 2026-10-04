@@ -911,7 +911,7 @@
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(useImage
             ? { prompt: m, image: pendingImage, limitReached: remain() <= 0 }
-            : { message: m, messages: threadOf().slice(-8), mode: sentMode, limitReached: remain() <= 0, noticeShown: noticeShown() })
+            : { message: m, messages: threadOf().slice(-8), games: gamesShown(), mode: sentMode, limitReached: remain() <= 0, noticeShown: noticeShown() })
         });
         const raw = await r.text();
         let data = {};
@@ -1060,6 +1060,15 @@
       const t = String(text || "").replace(/\s+/g, " ").trim();
       const a = Array.from(t);
       return a.length > TITLE_MAX ? a.slice(0, TITLE_MAX).join("").trim() + "…" : t;
+    }
+    // Bu söhbətdə artıq göstərilmiş hazır oyunlar (slug-lar, ardıcıllıqla): serverə yalnız son 8 mesaj getdiyi üçün ayrıca göndərilir
+    function gamesShown() {
+      const out = [];
+      if (curItem) curItem.msgs.forEach(function (m) {
+        if (m.x || m.k !== "b") return;
+        String(m.t).replace(/^::game:: ([a-z0-9-]+) \|/gm, function (all, slug) { out.push(slug); return all; });
+      });
+      return out.slice(-60);
     }
     function threadOf() {
       const out = [];

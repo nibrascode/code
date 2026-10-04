@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Yaddaş kartları</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%;background:radial-gradient(circle at 50% 0,#17224a,#070b18 70%);color:#e8f0ff;font-family:system-ui,"Segoe UI",Roboto,Arial,sans-serif;-webkit-user-select:none;user-select:none}
+body{display:flex;justify-content:center;padding:10px}
+.wrap{width:100%;max-width:460px;text-align:center}
+h1{margin:6px 0 8px;font-size:24px;letter-spacing:.5px}
+.hud{display:flex;justify-content:space-between;gap:8px;margin:6px 0;font-size:15px}
+.hud span{flex:1;background:#ffffff12;border:1px solid #ffffff22;border-radius:10px;padding:6px 8px}
+canvas{display:block;margin:0 auto;width:100%;height:auto;border-radius:14px;border:2px solid #4cc9f0;background:#0a1128;touch-action:none;box-shadow:0 0 24px #4cc9f044}
+button{font:inherit;color:#fff;background:linear-gradient(#3a86ff,#2563eb);border:0;border-radius:12px;padding:10px 16px;cursor:pointer;box-shadow:0 3px 0 #1b3f9a}
+button:active{transform:translateY(2px);box-shadow:none}
+.row{display:flex;gap:8px;justify-content:center;margin:10px 0;flex-wrap:wrap}
+.hint{opacity:.7;font-size:13px;margin:6px 0}
+.msg{min-height:24px;font-weight:700;color:#ffd166;margin:6px 0}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px auto;max-width:380px}
+.card{aspect-ratio:1;position:relative;padding:0;background:none;box-shadow:none;perspective:600px;border-radius:12px}
+.card i{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border-radius:12px;font-style:normal;backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:transform .35s}
+.card .f{background:linear-gradient(135deg,#3a86ff,#7b2ff7);font-size:26px;border:2px solid #ffffff44}
+.card .b{background:#16204a;border:2px solid #4cc9f0;font-size:clamp(28px,10vw,44px);transform:rotateY(180deg)}
+.card.on .f{transform:rotateY(180deg)}.card.on .b{transform:rotateY(0)}
+.card.ok .b{background:#2d6a4f;border-color:#7ae582}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>🧠 Yaddaş kartları</h1>
+<div class="hud"><span>Gediş: <b id="mv">0</b></span><span>Vaxt: <b id="tm">0</b> san</span><span>Rekord: <b id="bs">-</b></span></div>
+<div class="grid" id="g"></div>
+<div class="msg" id="msg"></div>
+<div class="row"><button id="re">Yenidən başla</button></div>
+<p class="hint">Eyni şəkilli kartların cütlərini tap</p>
+</div>
+<script>
+const ICONS = ['🍎', '🚀', '🐱', '⚽', '🎧', '🌙', '🍕', '🔥'];
+const $ = id => document.getElementById(id);
+let open, lock, moves, found, secs, timer, best = 0;
+try { best = +localStorage.getItem('nibras_yaddas') || 0; } catch (e) {}
+if (best) $('bs').textContent = best + ' gediş';
+
+function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function start() {
+  clearInterval(timer); open = []; lock = false; moves = 0; found = 0; secs = 0; timer = null;
+  $('mv').textContent = 0; $('tm').textContent = 0; $('msg').textContent = '';
+  const g = $('g'); g.innerHTML = '';
+  shuffle(ICONS.concat(ICONS)).forEach((ic, i) => {
+    const c = document.createElement('button'); c.className = 'card'; c.dataset.v = ic;
+    c.setAttribute('aria-label', 'Kart ' + (i + 1));
+    c.innerHTML = '<i class="f">?</i><i class="b">' + ic + '</i>';
+    c.onclick = () => flip(c); g.appendChild(c);
+  });
+}
+function flip(c) {
+  if (lock || c.classList.contains('on')) return;
+  if (!timer) timer = setInterval(() => { secs++; $('tm').textContent = secs; }, 1000);
+  c.classList.add('on'); open.push(c);
+  if (open.length < 2) return;
+  moves++; $('mv').textContent = moves;
+  const [a, b] = open;
+  if (a.dataset.v === b.dataset.v) {
+    a.classList.add('ok'); b.classList.add('ok'); open = []; found++;
+    if (found === ICONS.length) win();
+  } else {
+    lock = true;
+    setTimeout(() => { a.classList.remove('on'); b.classList.remove('on'); open = []; lock = false; }, 800);
+  }
+}
+function win() {
+  clearInterval(timer);
+  $('msg').textContent = 'Əla! ' + moves + ' gedişdə ' + secs + ' saniyəyə tapdın 🎉';
+  if (!best || moves < best) { best = moves; $('bs').textContent = best + ' gediş'; try { localStorage.setItem('nibras_yaddas', best); } catch (e) {} }
+}
+$('re').onclick = start;
+start();
+
+</script>
+</body>
+</html>

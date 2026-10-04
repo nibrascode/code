@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>X • O</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%;background:radial-gradient(circle at 50% 0,#17224a,#070b18 70%);color:#e8f0ff;font-family:system-ui,"Segoe UI",Roboto,Arial,sans-serif;-webkit-user-select:none;user-select:none}
+body{display:flex;justify-content:center;padding:10px}
+.wrap{width:100%;max-width:460px;text-align:center}
+h1{margin:6px 0 8px;font-size:24px;letter-spacing:.5px}
+.hud{display:flex;justify-content:space-between;gap:8px;margin:6px 0;font-size:15px}
+.hud span{flex:1;background:#ffffff12;border:1px solid #ffffff22;border-radius:10px;padding:6px 8px}
+canvas{display:block;margin:0 auto;width:100%;height:auto;border-radius:14px;border:2px solid #4cc9f0;background:#0a1128;touch-action:none;box-shadow:0 0 24px #4cc9f044}
+button{font:inherit;color:#fff;background:linear-gradient(#3a86ff,#2563eb);border:0;border-radius:12px;padding:10px 16px;cursor:pointer;box-shadow:0 3px 0 #1b3f9a}
+button:active{transform:translateY(2px);box-shadow:none}
+.row{display:flex;gap:8px;justify-content:center;margin:10px 0;flex-wrap:wrap}
+.hint{opacity:.7;font-size:13px;margin:6px 0}
+.msg{min-height:24px;font-weight:700;color:#ffd166;margin:6px 0}
+.board{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px auto;max-width:340px}
+.cell{aspect-ratio:1;font-size:clamp(40px,14vw,64px);font-weight:800;padding:0;background:#16204a;box-shadow:0 3px 0 #0a1230;border:2px solid #2c3d7a;color:#fff}
+.cell.x{color:#4cc9f0}.cell.o{color:#ff6b9d}
+.cell.w{background:#2d6a4f;border-color:#7ae582}
+.seg button{background:#16204a;box-shadow:none;border:2px solid #2c3d7a;padding:6px 14px}
+.seg button.on{background:#3a86ff;border-color:#9ec1ff}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>❌⭕ X • O</h1>
+<div class="hud"><span>Sən (X): <b id="sx">0</b></span><span>Bərabər: <b id="sd">0</b></span><span>Kompüter (O): <b id="so">0</b></span></div>
+<div class="row seg"><button data-l="easy">Asan</button><button data-l="hard" class="on">Çətin</button></div>
+<div class="board" id="bd"></div>
+<div class="msg" id="msg"></div>
+<div class="row"><button id="re">Yeni oyun</button></div>
+<p class="hint">Xanaya toxun və ya kliklə. Kompüter ağıllı oynayır!</p>
+</div>
+<script>
+const LINES = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+const $ = id => document.getElementById(id);
+let gid = 0, b, over, level = 'hard', starter = 'X', busy = false, wins = { X: 0, O: 0, D: 0 };
+const cells = [];
+for (let i = 0; i < 9; i++) {
+  const c = document.createElement('button'); c.className = 'cell'; c.setAttribute('aria-label', 'Xana ' + (i + 1));
+  c.onclick = () => play(i); $('bd').appendChild(c); cells.push(c);
+}
+function winner(bd) { for (const l of LINES) if (bd[l[0]] && bd[l[0]] === bd[l[1]] && bd[l[0]] === bd[l[2]]) return l; return null; }
+function minimax(bd, isO, depth) {
+  const w = winner(bd);
+  if (w) return bd[w[0]] === 'O' ? 10 - depth : depth - 10;
+  if (bd.every(Boolean)) return 0;
+  let best = isO ? -99 : 99;
+  for (let i = 0; i < 9; i++) if (!bd[i]) {
+    bd[i] = isO ? 'O' : 'X';
+    const v = minimax(bd, !isO, depth + 1);
+    bd[i] = '';
+    best = isO ? Math.max(best, v) : Math.min(best, v);
+  }
+  return best;
+}
+function aiMove() {
+  const free = []; for (let i = 0; i < 9; i++) if (!b[i]) free.push(i);
+  if (level === 'easy' && Math.random() < 0.6) return free[Math.random() * free.length | 0];
+  let bi = free[0], bv = -99;
+  for (const i of free) {
+    b[i] = 'O'; const v = minimax(b, false, 1); b[i] = '';
+    if (v > bv || (v === bv && Math.random() < 0.3)) { bv = v; bi = i; }
+  }
+  return bi;
+}
+function render() {
+  cells.forEach((c, i) => { c.textContent = b[i]; c.className = 'cell ' + b[i].toLowerCase(); });
+}
+function finish() {
+  const w = winner(b);
+  if (w) {
+    over = true; const who = b[w[0]]; wins[who]++;
+    w.forEach(i => cells[i].classList.add('w'));
+    $('msg').textContent = who === 'X' ? 'Təbrik edirik, qazandın! 🎉' : 'Kompüter qazandı 🤖';
+  } else if (b.every(Boolean)) { over = true; wins.D++; $('msg').textContent = 'Bərabərlik 🤝'; }
+  $('sx').textContent = wins.X; $('sd').textContent = wins.D; $('so').textContent = wins.O;
+  return over;
+}
+function play(i) {
+  if (over || busy || b[i]) return;
+  b[i] = 'X'; render();
+  if (finish()) return;
+  busy = true; $('msg').textContent = 'Kompüter düşünür…';
+  const g = gid;
+  setTimeout(() => { if (g !== gid) return; b[aiMove()] = 'O'; busy = false; $('msg').textContent = ''; render(); finish(); }, 350);
+}
+function reset() {
+  gid++; b = Array(9).fill(''); over = false; busy = false; $('msg').textContent = '';
+  starter = starter === 'X' ? 'O' : 'X'; render();
+  if (starter === 'O') { busy = true; const g = gid; setTimeout(() => { if (g !== gid) return; b[aiMove()] = 'O'; busy = false; render(); }, 350); }
+}
+document.querySelectorAll('.seg button').forEach(s => s.onclick = () => {
+  level = s.dataset.l; document.querySelectorAll('.seg button').forEach(o => o.classList.toggle('on', o === s));
+  starter = 'O'; reset();
+});
+$('re').onclick = reset;
+starter = 'O'; reset();
+
+</script>
+</body>
+</html>

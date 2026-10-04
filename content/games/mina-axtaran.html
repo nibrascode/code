@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Mina axtaran</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%;background:radial-gradient(circle at 50% 0,#17224a,#070b18 70%);color:#e8f0ff;font-family:system-ui,"Segoe UI",Roboto,Arial,sans-serif;-webkit-user-select:none;user-select:none}
+body{display:flex;justify-content:center;padding:10px}
+.wrap{width:100%;max-width:460px;text-align:center}
+h1{margin:6px 0 8px;font-size:24px;letter-spacing:.5px}
+.hud{display:flex;justify-content:space-between;gap:8px;margin:6px 0;font-size:15px}
+.hud span{flex:1;background:#ffffff12;border:1px solid #ffffff22;border-radius:10px;padding:6px 8px}
+canvas{display:block;margin:0 auto;width:100%;height:auto;border-radius:14px;border:2px solid #4cc9f0;background:#0a1128;touch-action:none;box-shadow:0 0 24px #4cc9f044}
+button{font:inherit;color:#fff;background:linear-gradient(#3a86ff,#2563eb);border:0;border-radius:12px;padding:10px 16px;cursor:pointer;box-shadow:0 3px 0 #1b3f9a}
+button:active{transform:translateY(2px);box-shadow:none}
+.row{display:flex;gap:8px;justify-content:center;margin:10px 0;flex-wrap:wrap}
+.hint{opacity:.7;font-size:13px;margin:6px 0}
+.msg{min-height:24px;font-weight:700;color:#ffd166;margin:6px 0}
+.board{display:grid;grid-template-columns:repeat(9,1fr);gap:3px;margin:10px auto;width:min(94vw,400px);touch-action:manipulation}
+.m{aspect-ratio:1;padding:0;border-radius:6px;background:#3a4a8a;box-shadow:0 2px 0 #1b2650;font-weight:800;font-size:clamp(14px,5vw,22px);display:flex;align-items:center;justify-content:center;color:#fff}
+.m.o{background:#16204a;box-shadow:none}
+.m.x{background:#7f1d1d}
+.n1{color:#4cc9f0}.n2{color:#7ae582}.n3{color:#ff6b6b}.n4{color:#a78bfa}.n5{color:#ff9f43}.n6{color:#2dd4bf}.n7{color:#fff}.n8{color:#94a3b8}
+#mode.on{background:linear-gradient(#ff9f43,#f97316);box-shadow:0 3px 0 #9a4a0a}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>💣 Mina axtaran</h1>
+<div class="hud"><span>💣 <b id="left">10</b></span><span>⏱ <b id="tm">0</b></span></div>
+<div class="board" id="bd"></div>
+<div class="msg" id="msg"></div>
+<div class="row"><button id="mode">🚩 Bayraq rejimi: söndürülü</button><button id="re">Yeni oyun</button></div>
+<p class="hint">Aç: toxun / sol klik. Bayraq: uzun basma / sağ klik / bayraq rejimi</p>
+</div>
+<script>
+const R = 9, C = 9, MINES = 10;
+const $ = id => document.getElementById(id);
+let cells, started, over, opened, flags, secs, timer, flagMode = false, lpFired = false;
+
+function neighbors(i) {
+  const r = i / C | 0, c = i % C, out = [];
+  for (let dr = -1; dr <= 1; dr++) for (let dc = -1; dc <= 1; dc++) {
+    const nr = r + dr, nc = c + dc;
+    if ((dr || dc) && nr >= 0 && nr < R && nc >= 0 && nc < C) out.push(nr * C + nc);
+  }
+  return out;
+}
+function start() {
+  clearInterval(timer); started = false; over = false; opened = 0; flags = 0; secs = 0;
+  cells = Array.from({ length: R * C }, () => ({ mine: false, adj: 0, open: false, flag: false }));
+  const bd = $('bd'); bd.innerHTML = '';
+  cells.forEach((cell, i) => {
+    const b = document.createElement('button'); b.className = 'm'; cell.el = b; b.setAttribute('aria-label', 'Xana ' + (i + 1));
+    b.onclick = () => { if (lpFired) { lpFired = false; return; } flagMode ? toggle(i) : reveal(i); };
+    b.oncontextmenu = e => { e.preventDefault(); if (lpFired) return; toggle(i); };
+    let lp = null;
+    b.onpointerdown = e => { lpFired = false; if (e.pointerType !== 'mouse') lp = setTimeout(() => { lpFired = true; toggle(i); }, 420); };
+    const stop = () => { clearTimeout(lp); };
+    b.onpointerup = stop; b.onpointerleave = stop; b.onpointercancel = stop;
+    bd.appendChild(b);
+  });
+  $('msg').textContent = ''; $('left').textContent = MINES; $('tm').textContent = 0;
+}
+function plant(safe) {
+  const banned = new Set([safe, ...neighbors(safe)]);
+  let n = 0;
+  while (n < MINES) {
+    const i = Math.random() * R * C | 0;
+    if (!cells[i].mine && !banned.has(i)) { cells[i].mine = true; n++; }
+  }
+  cells.forEach((cell, i) => { cell.adj = neighbors(i).filter(j => cells[j].mine).length; });
+}
+function toggle(i) {
+  const cell = cells[i];
+  if (over || cell.open) return;
+  cell.flag = !cell.flag; flags += cell.flag ? 1 : -1;
+  cell.el.textContent = cell.flag ? '🚩' : ''; $('left').textContent = MINES - flags;
+}
+function show(i) {
+  const cell = cells[i], el = cell.el;
+  cell.open = true; opened++; el.classList.add('o');
+  el.textContent = cell.adj ? cell.adj : ''; if (cell.adj) el.classList.add('n' + cell.adj);
+}
+function reveal(i) {
+  if (over || cells[i].open || cells[i].flag) return;
+  if (!started) {
+    started = true; plant(i);
+    timer = setInterval(() => { secs++; $('tm').textContent = secs; }, 1000);
+  }
+  if (cells[i].mine) return lose(i);
+  const stack = [i];
+  while (stack.length) {
+    const k = stack.pop();
+    if (cells[k].open || cells[k].flag) continue;
+    show(k);
+    if (!cells[k].adj) neighbors(k).forEach(j => { if (!cells[j].open) stack.push(j); });
+  }
+  if (opened === R * C - MINES) {
+    over = true; clearInterval(timer); $('msg').textContent = 'Təbrik edirik! ' + secs + ' saniyəyə təmizlədin 🎉';
+    cells.forEach(cell => { if (cell.mine) cell.el.textContent = '🚩'; });
+  }
+}
+function lose(i) {
+  over = true; clearInterval(timer); $('msg').textContent = 'Mina partladı! 💥';
+  cells.forEach((cell, k) => {
+    if (cell.mine) { cell.el.textContent = '💣'; cell.el.classList.add('o'); }
+    if (k === i) cell.el.classList.add('x');
+  });
+}
+$('mode').onclick = () => {
+  flagMode = !flagMode; $('mode').classList.toggle('on', flagMode);
+  $('mode').textContent = '🚩 Bayraq rejimi: ' + (flagMode ? 'aktiv' : 'söndürülü');
+};
+$('re').onclick = start;
+start();
+
+</script>
+</body>
+</html>

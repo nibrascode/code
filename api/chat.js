@@ -58,7 +58,13 @@ export default async function handler(req, res) {
     // Hansı idarəçinin cavab verdiyi bilinir: ayə, tövhid, hazır dini cavab, Quran lüğəti və dinReply dini sayılır (brend yox).
     let fixed = null;
     let religious = false;
-    for (const [kind, fn] of [["game", (m) => gameReply(m, body.messages)], ["next", (m) => nextReply(m, body.messages)], ["tafsir", tafsirReply], ["ayah", ayahReply], ["tawhid", tawhidReply], ["canned", cannedReply], ["quran", quranReply], ["din", dinReply], ["brand", brandReply]]) {
+    // söhbət tarixçəsi: client «messages» göndərir ({role,text}); «history» və «content» də qəbul olunur
+    const hist = (Array.isArray(body.messages) ? body.messages : Array.isArray(body.history) ? body.history : []).map((i) => (i && i.text == null && typeof i.content === "string" ? { ...i, text: i.content } : i));
+    // client bütün söhbətdə göstərilmiş oyunların slug-larını ayrıca göndərir (tarixçə yalnız son mesajları saxlayır); sıra qorunur
+    const gameHist = Array.isArray(body.games) && body.games.length
+      ? body.games.filter((x) => typeof x === "string" && /^[a-z0-9-]{1,40}$/.test(x)).slice(-60).map((x) => ({ role: "assistant", text: `::game:: ${x} | x` }))
+      : hist;
+    for (const [kind, fn] of [["game", (m) => gameReply(m, gameHist)], ["next", (m) => nextReply(m, hist)], ["tafsir", tafsirReply], ["ayah", ayahReply], ["tawhid", tawhidReply], ["canned", cannedReply], ["quran", quranReply], ["din", dinReply], ["brand", brandReply]]) {
       let r = await fn(message);
       if (r) {
         if (kind === "ayah") r = withTafsirSuggest(r, message); // təfsir istənilməyib: ayə/surə cavabına təfsir seçimləri əlavə olunur
@@ -94,7 +100,7 @@ export default async function handler(req, res) {
       return;
     }
     track("snippet", "ai");
-    const history = normalizeHistory(body.messages, message);
+    const history = normalizeHistory(hist, message);
     if (body.mode === "code") {
       history.unshift({
         role: "system",

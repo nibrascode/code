@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Pinq-Ponq</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%;background:radial-gradient(circle at 50% 0,#17224a,#070b18 70%);color:#e8f0ff;font-family:system-ui,"Segoe UI",Roboto,Arial,sans-serif;-webkit-user-select:none;user-select:none}
+body{display:flex;justify-content:center;padding:10px}
+.wrap{width:100%;max-width:460px;text-align:center}
+h1{margin:6px 0 8px;font-size:24px;letter-spacing:.5px}
+.hud{display:flex;justify-content:space-between;gap:8px;margin:6px 0;font-size:15px}
+.hud span{flex:1;background:#ffffff12;border:1px solid #ffffff22;border-radius:10px;padding:6px 8px}
+canvas{display:block;margin:0 auto;width:100%;height:auto;border-radius:14px;border:2px solid #4cc9f0;background:#0a1128;touch-action:none;box-shadow:0 0 24px #4cc9f044}
+button{font:inherit;color:#fff;background:linear-gradient(#3a86ff,#2563eb);border:0;border-radius:12px;padding:10px 16px;cursor:pointer;box-shadow:0 3px 0 #1b3f9a}
+button:active{transform:translateY(2px);box-shadow:none}
+.row{display:flex;gap:8px;justify-content:center;margin:10px 0;flex-wrap:wrap}
+.hint{opacity:.7;font-size:13px;margin:6px 0}
+.msg{min-height:24px;font-weight:700;color:#ffd166;margin:6px 0}
+canvas{max-width:460px;cursor:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>🏓 Pinq-Ponq</h1>
+<div class="hud"><span>Sən: <b id="a">0</b></span><span>Kompüter: <b id="b">0</b></span></div>
+<canvas id="c" width="600" height="400"></canvas>
+<div class="row"><button id="re">Yenidən başla</button></div>
+<p class="hint">Barmaqla / siçanla sürüşdür və ya W-S, ↑-↓ düymələri. İlk 7 xalı toplayan qalib gəlir. Başlamaq üçün toxun.</p>
+</div>
+<script>
+const W = 600, H = 400, PH = 80, PWD = 12, WIN = 7;
+const cv = document.getElementById('c'), ctx = cv.getContext('2d');
+const $ = id => document.getElementById(id);
+let me, ai, ball, sa, sb, state, msg, keys = {}, acc = 0, last = 0, level = 3.2;
+
+function serve(dirn) {
+  ball = { x: W / 2, y: H / 2, vx: 4.6 * dirn, vy: (Math.random() * 4 - 2), r: 8 };
+  state = 'ready';
+}
+function reset() {
+  me = { x: 20, y: H / 2 - PH / 2 }; ai = { x: W - 20 - PWD, y: H / 2 - PH / 2 };
+  sa = sb = 0; msg = ''; level = 3.2; $('a').textContent = 0; $('b').textContent = 0; serve(1);
+}
+function clampP(p) { p.y = Math.max(0, Math.min(H - PH, p.y)); }
+function hit(p, dirn) {
+  if (ball.y + ball.r < p.y || ball.y - ball.r > p.y + PH) return;
+  const rel = (ball.y - (p.y + PH / 2)) / (PH / 2);
+  const sp = Math.min(11, Math.hypot(ball.vx, ball.vy) * 1.05);
+  const ang = rel * 0.9;
+  ball.vx = dirn * sp * Math.cos(ang); ball.vy = sp * Math.sin(ang);
+  ball.x = dirn > 0 ? p.x + PWD + ball.r : p.x - ball.r;
+}
+function update() {
+  if (keys.ArrowUp || keys.w) me.y -= 6;
+  if (keys.ArrowDown || keys.s) me.y += 6;
+  clampP(me);
+  const target = ball.y - PH / 2 + (state === 'play' && ball.vx > 0 ? 0 : (H / 2 - ball.y) * 0.8);
+  const d = target - ai.y; ai.y += Math.max(-level, Math.min(level, d * 0.25)); clampP(ai);
+  if (state !== 'play') return;
+  ball.x += ball.vx; ball.y += ball.vy;
+  if (ball.y < ball.r) { ball.y = ball.r; ball.vy = Math.abs(ball.vy); }
+  if (ball.y > H - ball.r) { ball.y = H - ball.r; ball.vy = -Math.abs(ball.vy); }
+  if (ball.vx < 0 && ball.x - ball.r < me.x + PWD && ball.x > me.x - 10) hit(me, 1);
+  if (ball.vx > 0 && ball.x + ball.r > ai.x && ball.x < ai.x + PWD + 10) hit(ai, -1);
+  if (ball.x < -20) point('b'); else if (ball.x > W + 20) point('a');
+}
+function point(who) {
+  if (who === 'a') sa++; else sb++;
+  $('a').textContent = sa; $('b').textContent = sb; level = Math.min(5.2, level + 0.15);
+  if (sa >= WIN || sb >= WIN) { state = 'over'; msg = sa > sb ? 'Təbrik edirik, qazandın! 🎉' : 'Kompüter qazandı 🤖'; }
+  else serve(who === 'a' ? -1 : 1);
+}
+function draw() {
+  ctx.fillStyle = '#0a1128'; ctx.fillRect(0, 0, W, H);
+  ctx.strokeStyle = '#ffffff33'; ctx.setLineDash([10, 12]); ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.moveTo(W / 2, 0); ctx.lineTo(W / 2, H); ctx.stroke(); ctx.setLineDash([]);
+  ctx.fillStyle = '#4cc9f0'; ctx.fillRect(me.x, me.y, PWD, PH);
+  ctx.fillStyle = '#ff6b9d'; ctx.fillRect(ai.x, ai.y, PWD, PH);
+  ctx.fillStyle = '#fff'; ctx.shadowColor = '#fff'; ctx.shadowBlur = 12;
+  ctx.beginPath(); ctx.arc(ball.x, ball.y, ball.r, 0, 7); ctx.fill(); ctx.shadowBlur = 0;
+  ctx.textAlign = 'center'; ctx.fillStyle = '#fff'; ctx.font = 'bold 34px system-ui';
+  ctx.fillText(sa, W / 2 - 60, 50); ctx.fillText(sb, W / 2 + 60, 50);
+  ctx.font = 'bold 22px system-ui';
+  if (state === 'ready') ctx.fillText('Başlamaq üçün toxun', W / 2, H - 40);
+  if (state === 'over') { ctx.fillStyle = '#000a'; ctx.fillRect(0, 130, W, 120); ctx.fillStyle = '#ffd166'; ctx.font = 'bold 30px system-ui'; ctx.fillText(msg, W / 2, 190); ctx.fillStyle = '#fff'; ctx.font = '20px system-ui'; ctx.fillText('Yenidən başlamaq üçün toxun', W / 2, 225); }
+}
+function loop(t) {
+  acc += Math.min(100, t - last); last = t;
+  while (acc >= 1000 / 60) { update(); acc -= 1000 / 60; }
+  draw(); requestAnimationFrame(loop);
+}
+function moveTo(e) {
+  const r = cv.getBoundingClientRect();
+  me.y = (e.clientY - r.top) * (H / r.height) - PH / 2; clampP(me);
+}
+cv.addEventListener('pointermove', moveTo);
+cv.addEventListener('pointerdown', e => {
+  moveTo(e); e.preventDefault();
+  if (state === 'ready') state = 'play'; else if (state === 'over') reset();
+});
+addEventListener('keydown', e => {
+  keys[e.key] = true;
+  if (['ArrowUp', 'ArrowDown', ' '].includes(e.key)) e.preventDefault();
+  if (e.key === ' ') { if (state === 'ready') state = 'play'; else if (state === 'over') reset(); }
+});
+addEventListener('keyup', e => { keys[e.key] = false; });
+$('re').onclick = reset;
+reset(); requestAnimationFrame(t => { last = t; loop(t); });
+
+</script>
+</body>
+</html>

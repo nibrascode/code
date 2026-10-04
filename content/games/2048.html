@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>2048</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%;background:radial-gradient(circle at 50% 0,#17224a,#070b18 70%);color:#e8f0ff;font-family:system-ui,"Segoe UI",Roboto,Arial,sans-serif;-webkit-user-select:none;user-select:none}
+body{display:flex;justify-content:center;padding:10px}
+.wrap{width:100%;max-width:460px;text-align:center}
+h1{margin:6px 0 8px;font-size:24px;letter-spacing:.5px}
+.hud{display:flex;justify-content:space-between;gap:8px;margin:6px 0;font-size:15px}
+.hud span{flex:1;background:#ffffff12;border:1px solid #ffffff22;border-radius:10px;padding:6px 8px}
+canvas{display:block;margin:0 auto;width:100%;height:auto;border-radius:14px;border:2px solid #4cc9f0;background:#0a1128;touch-action:none;box-shadow:0 0 24px #4cc9f044}
+button{font:inherit;color:#fff;background:linear-gradient(#3a86ff,#2563eb);border:0;border-radius:12px;padding:10px 16px;cursor:pointer;box-shadow:0 3px 0 #1b3f9a}
+button:active{transform:translateY(2px);box-shadow:none}
+.row{display:flex;gap:8px;justify-content:center;margin:10px 0;flex-wrap:wrap}
+.hint{opacity:.7;font-size:13px;margin:6px 0}
+.msg{min-height:24px;font-weight:700;color:#ffd166;margin:6px 0}
+.board{position:relative;margin:10px auto;width:min(92vw,380px);aspect-ratio:1;background:#2b3358;border-radius:14px;padding:10px;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(4,1fr);gap:10px;touch-action:none}
+.t{display:flex;align-items:center;justify-content:center;border-radius:10px;font-weight:800;font-size:clamp(20px,7vw,34px);background:#3a4372;color:#fff;transition:background .12s}
+.t.n{animation:pop .15s}
+@keyframes pop{from{transform:scale(.4)}to{transform:scale(1)}}
+.t2{background:#eee4da;color:#776e65}.t4{background:#ede0c8;color:#776e65}.t8{background:#f2b179}.t16{background:#f59563}
+.t32{background:#f67c5f}.t64{background:#f65e3b}.t128{background:#edcf72;font-size:clamp(18px,6vw,28px)}.t256{background:#edcc61;font-size:clamp(18px,6vw,28px)}
+.t512{background:#edc850;font-size:clamp(18px,6vw,28px)}.t1024{background:#edc53f;font-size:clamp(15px,5vw,24px)}.t2048{background:#edc22e;font-size:clamp(15px,5vw,24px)}.tbig{background:#3c3a32;font-size:clamp(14px,4.5vw,22px)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>🔢 2048</h1>
+<div class="hud"><span>Xal: <b id="sc">0</b></span><span>Rekord: <b id="bs">0</b></span></div>
+<div class="board" id="bd"></div>
+<div class="msg" id="msg"></div>
+<div class="row"><button id="re">Yeni oyun</button></div>
+<p class="hint">Ox düymələri / WASD və ya sürüşdür. Eyni rəqəmləri birləşdir və 2048-ə çat!</p>
+</div>
+<script>
+const $ = id => document.getElementById(id);
+let g, score, best = 0, won, over, fresh = [];
+try { best = +localStorage.getItem('nibras_2048') || 0; } catch (e) {}
+$('bs').textContent = best;
+
+function addTile() {
+  const free = [];
+  for (let r = 0; r < 4; r++) for (let c = 0; c < 4; c++) if (!g[r][c]) free.push([r, c]);
+  if (!free.length) return;
+  const [r, c] = free[Math.random() * free.length | 0];
+  g[r][c] = Math.random() < 0.9 ? 2 : 4; fresh.push(r * 4 + c);
+}
+function start() {
+  g = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]; score = 0; won = false; over = false; fresh = [];
+  $('msg').textContent = ''; addTile(); addTile(); render();
+}
+function render() {
+  const bd = $('bd'); bd.innerHTML = '';
+  for (let r = 0; r < 4; r++) for (let c = 0; c < 4; c++) {
+    const v = g[r][c], d = document.createElement('div');
+    d.className = 't' + (v ? ' t' + (v > 2048 ? 'big' : v) : '') + (fresh.includes(r * 4 + c) ? ' n' : '');
+    d.textContent = v || ''; bd.appendChild(d);
+  }
+  fresh = []; $('sc').textContent = score;
+  if (score > best) { best = score; $('bs').textContent = best; try { localStorage.setItem('nibras_2048', best); } catch (e) {} }
+}
+function slide(line) {
+  const a = line.filter(Boolean), out = []; let gain = 0;
+  for (let i = 0; i < a.length; i++) {
+    if (a[i] === a[i + 1]) { out.push(a[i] * 2); gain += a[i] * 2; i++; } else out.push(a[i]);
+  }
+  while (out.length < 4) out.push(0);
+  return [out, gain];
+}
+function coords(i, d) {
+  const l = [];
+  for (let j = 0; j < 4; j++) l.push(d === 0 ? [i, j] : d === 2 ? [i, 3 - j] : d === 1 ? [j, i] : [3 - j, i]);
+  return l;
+}
+function canMove() {
+  for (let r = 0; r < 4; r++) for (let c = 0; c < 4; c++) {
+    if (!g[r][c] || (c < 3 && g[r][c] === g[r][c + 1]) || (r < 3 && g[r][c] === g[r + 1][c])) return true;
+  }
+  return false;
+}
+function move(d) {
+  if (over) return;
+  let changed = false;
+  for (let i = 0; i < 4; i++) {
+    const cs = coords(i, d), [nl, gain] = slide(cs.map(([r, c]) => g[r][c]));
+    cs.forEach(([r, c], k) => { if (g[r][c] !== nl[k]) { changed = true; g[r][c] = nl[k]; } });
+    score += gain;
+  }
+  if (!changed) return;
+  addTile(); render();
+  if (!won && g.some(row => row.includes(2048))) { won = true; $('msg').textContent = '2048-ə çatdın! 🎉 İstəsən davam edə bilərsən.'; }
+  if (!canMove()) { over = true; $('msg').textContent = 'Gediş qalmadı. Xalın: ' + score; }
+}
+const KEYS = { ArrowLeft: 0, ArrowUp: 1, ArrowRight: 2, ArrowDown: 3, a: 0, w: 1, d: 2, s: 3 };
+addEventListener('keydown', e => { if (e.key in KEYS) { e.preventDefault(); move(KEYS[e.key]); } });
+let sx = 0, sy = 0;
+$('bd').addEventListener('pointerdown', e => { sx = e.clientX; sy = e.clientY; });
+$('bd').addEventListener('pointerup', e => {
+  const dx = e.clientX - sx, dy = e.clientY - sy;
+  if (Math.max(Math.abs(dx), Math.abs(dy)) < 24) return;
+  move(Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 2 : 0) : (dy > 0 ? 3 : 1));
+});
+$('re').onclick = start;
+start();
+
+</script>
+</body>
+</html>

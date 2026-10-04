@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Sonsuz qaçış</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%;background:radial-gradient(circle at 50% 0,#17224a,#070b18 70%);color:#e8f0ff;font-family:system-ui,"Segoe UI",Roboto,Arial,sans-serif;-webkit-user-select:none;user-select:none}
+body{display:flex;justify-content:center;padding:10px}
+.wrap{width:100%;max-width:460px;text-align:center}
+h1{margin:6px 0 8px;font-size:24px;letter-spacing:.5px}
+.hud{display:flex;justify-content:space-between;gap:8px;margin:6px 0;font-size:15px}
+.hud span{flex:1;background:#ffffff12;border:1px solid #ffffff22;border-radius:10px;padding:6px 8px}
+canvas{display:block;margin:0 auto;width:100%;height:auto;border-radius:14px;border:2px solid #4cc9f0;background:#0a1128;touch-action:none;box-shadow:0 0 24px #4cc9f044}
+button{font:inherit;color:#fff;background:linear-gradient(#3a86ff,#2563eb);border:0;border-radius:12px;padding:10px 16px;cursor:pointer;box-shadow:0 3px 0 #1b3f9a}
+button:active{transform:translateY(2px);box-shadow:none}
+.row{display:flex;gap:8px;justify-content:center;margin:10px 0;flex-wrap:wrap}
+.hint{opacity:.7;font-size:13px;margin:6px 0}
+.msg{min-height:24px;font-weight:700;color:#ffd166;margin:6px 0}
+canvas{max-width:460px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>🏃 Sonsuz qaçış</h1>
+<div class="hud"><span>Xal: <b id="sc">0</b></span><span>Rekord: <b id="bs">0</b></span></div>
+<canvas id="c" width="640" height="220"></canvas>
+<p class="hint">Tullanmaq üçün toxun, kliklə, Boşluq və ya ↑ düyməsini bas. Kaktuslardan qaç!</p>
+</div>
+<script>
+const W = 640, H = 220, GY = 175;
+const cv = document.getElementById('c'), ctx = cv.getContext('2d');
+const $ = id => document.getElementById(id);
+let p, obs, speed, score, best = 0, state, frame, nextGap, acc = 0, last = 0, deadT = 0;
+try { best = +localStorage.getItem('nibras_qacis') || 0; } catch (e) {}
+$('bs').textContent = best;
+
+function reset() {
+  p = { x: 60, y: GY - 36, w: 28, h: 36, vy: 0, on: true };
+  obs = []; speed = 6; score = 0; frame = 0; nextGap = 60; state = 'ready'; deadT = 0; $('sc').textContent = 0;
+}
+function jump() {
+  if (state === 'dead') { if (deadT > 25) reset(); return; }
+  if (state === 'ready') state = 'play';
+  if (p.on) { p.vy = -12.5; p.on = false; }
+}
+function spawn() {
+  const n = Math.random() < 0.25 ? 2 : 1, h = 30 + Math.random() * 26;
+  for (let i = 0; i < n; i++) obs.push({ x: W + i * 24, w: 16 + Math.random() * 8, h: h - i * 6 });
+  nextGap = 60 + Math.random() * 70 + speed * 6;
+}
+function update() {
+  frame++;
+  if (state === 'dead') { deadT++; return; }
+  if (state === 'ready') return;
+  p.vy += 0.65; p.y += p.vy;
+  if (p.y >= GY - p.h) { p.y = GY - p.h; p.vy = 0; p.on = true; }
+  nextGap--; if (nextGap <= 0) spawn();
+  for (const o of obs) o.x -= speed;
+  obs = obs.filter(o => o.x > -40);
+  speed = Math.min(14, speed + 0.0015);
+  score += speed / 40; $('sc').textContent = Math.floor(score);
+  for (const o of obs) {
+    if (p.x + p.w - 5 > o.x + 2 && p.x + 5 < o.x + o.w - 2 && p.y + p.h - 3 > GY - o.h) {
+      state = 'dead'; deadT = 0;
+      if (Math.floor(score) > best) { best = Math.floor(score); $('bs').textContent = best; try { localStorage.setItem('nibras_qacis', best); } catch (e) {} }
+    }
+  }
+}
+function cactus(o) {
+  ctx.fillStyle = '#4ade80'; ctx.fillRect(o.x, GY - o.h, o.w, o.h);
+  ctx.fillRect(o.x - 6, GY - o.h * 0.65, 6, 5); ctx.fillRect(o.x - 6, GY - o.h * 0.65 - 10, 5, 12);
+  ctx.fillRect(o.x + o.w, GY - o.h * 0.5, 6, 5); ctx.fillRect(o.x + o.w + 1, GY - o.h * 0.5 - 12, 5, 14);
+  ctx.fillStyle = '#16a34a'; ctx.fillRect(o.x + o.w - 4, GY - o.h, 4, o.h);
+}
+function draw() {
+  ctx.fillStyle = '#0a1128'; ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = '#ffffff55';
+  for (let i = 0; i < 12; i++) ctx.fillRect(((i * 97 - frame * 0.3) % W + W) % W, (i * 37) % 90 + 10, 2, 2);
+  ctx.fillStyle = '#ffd166'; ctx.beginPath(); ctx.arc(540, 45, 18, 0, 7); ctx.fill();
+  ctx.fillStyle = '#334155'; ctx.fillRect(0, GY, W, 3);
+  ctx.fillStyle = '#475569'; for (let x = -(frame * speed) % 60; x < W; x += 60) ctx.fillRect(x, GY + 12, 18, 3);
+  obs.forEach(cactus);
+  const leg = state === 'play' && p.on ? Math.floor(frame / 5) % 2 : 0;
+  ctx.fillStyle = '#4cc9f0'; ctx.beginPath(); (ctx.roundRect || ctx.rect).call(ctx, p.x, p.y, p.w, p.h - 8, 6); ctx.fill();
+  ctx.fillRect(p.x + 4 + leg * 10, p.y + p.h - 9, 7, 9); ctx.fillRect(p.x + 17 - leg * 10, p.y + p.h - 9, 7, 9);
+  ctx.fillStyle = '#fff'; ctx.fillRect(p.x + 17, p.y + 6, 8, 8);
+  ctx.fillStyle = '#111'; ctx.fillRect(p.x + 21, p.y + 8, 4, 4);
+  ctx.textAlign = 'center'; ctx.fillStyle = '#fff'; ctx.font = 'bold 20px system-ui';
+  if (state === 'ready') ctx.fillText('Başlamaq üçün toxun', W / 2, 110);
+  if (state === 'dead') {
+    ctx.fillStyle = '#000a'; ctx.fillRect(0, 60, W, 80); ctx.fillStyle = '#ffd166'; ctx.font = 'bold 28px system-ui';
+    ctx.fillText('Oyun bitdi — ' + Math.floor(score) + ' xal', W / 2, 98); ctx.fillStyle = '#fff'; ctx.font = '18px system-ui';
+    ctx.fillText('Yenidən başlamaq üçün toxun', W / 2, 126);
+  }
+}
+function loop(t) {
+  acc += Math.min(100, t - last); last = t;
+  while (acc >= 1000 / 60) { update(); acc -= 1000 / 60; }
+  draw(); requestAnimationFrame(loop);
+}
+cv.addEventListener('pointerdown', e => { e.preventDefault(); jump(); });
+addEventListener('keydown', e => { if (e.key === ' ' || e.key === 'ArrowUp' || e.key === 'w') { e.preventDefault(); if (!e.repeat) jump(); } });
+reset(); requestAnimationFrame(t => { last = t; loop(t); });
+
+</script>
+</body>
+</html>

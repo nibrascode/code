@@ -299,6 +299,8 @@ test("səhifə: oyun cavabı kod bloku + «Aç» düyməsi kimi çəkilir, gizli
     await p.send("oyun kodu yaz");
     const req = p.sent.at(-1);
     assert.ok(req.messages.some((m) => /::game:: fx-/.test(m.text)));
+    assert.equal(req.games.length, 2, "client bütün söhbətdəki göstərilmiş oyunların slug-larını göndərir");
+    assert.ok(req.games.every((x) => /^fx-/.test(x)) && new Set(req.games).size === 2);
     assert.ok(req.messages.every((m) => !/```|<!doctype/i.test(m.text)), "xam tarixçədə oyun kodu yoxdur");
     const titles = [...p.d.querySelectorAll("#msgs .msg.b")].map((b) => b.textContent.match(/Hazır oyun: (FX \S+)/)[1]);
     assert.equal(new Set(titles).size, 3, titles.join());

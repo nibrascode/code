@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="az">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Kərpic qırma</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%;background:radial-gradient(circle at 50% 0,#17224a,#070b18 70%);color:#e8f0ff;font-family:system-ui,"Segoe UI",Roboto,Arial,sans-serif;-webkit-user-select:none;user-select:none}
+body{display:flex;justify-content:center;padding:10px}
+.wrap{width:100%;max-width:460px;text-align:center}
+h1{margin:6px 0 8px;font-size:24px;letter-spacing:.5px}
+.hud{display:flex;justify-content:space-between;gap:8px;margin:6px 0;font-size:15px}
+.hud span{flex:1;background:#ffffff12;border:1px solid #ffffff22;border-radius:10px;padding:6px 8px}
+canvas{display:block;margin:0 auto;width:100%;height:auto;border-radius:14px;border:2px solid #4cc9f0;background:#0a1128;touch-action:none;box-shadow:0 0 24px #4cc9f044}
+button{font:inherit;color:#fff;background:linear-gradient(#3a86ff,#2563eb);border:0;border-radius:12px;padding:10px 16px;cursor:pointer;box-shadow:0 3px 0 #1b3f9a}
+button:active{transform:translateY(2px);box-shadow:none}
+.row{display:flex;gap:8px;justify-content:center;margin:10px 0;flex-wrap:wrap}
+.hint{opacity:.7;font-size:13px;margin:6px 0}
+.msg{min-height:24px;font-weight:700;color:#ffd166;margin:6px 0}
+canvas{max-width:380px;cursor:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>🧱 Kərpic qırma</h1>
+<div class="hud"><span>Xal: <b id="sc">0</b></span><span>Səviyyə: <b id="lv">1</b></span><span>Can: <b id="lf">3</b></span></div>
+<canvas id="c" width="360" height="480"></canvas>
+<div class="row"><button id="re">Yenidən başla</button></div>
+<p class="hint">Barmaqla / siçanla sürüşdür və ya ← → düymələri. Topu buraxmaq üçün toxun.</p>
+</div>
+<script>
+const W = 360, H = 480, COLS = 8, BW = 38, BH = 16, GAP = 5, OX = 15, OY = 50;
+const COLORS = ['#ff6b6b', '#ff9f43', '#ffd166', '#7ae582', '#4cc9f0', '#a78bfa', '#f472b6', '#94a3b8'];
+const cv = document.getElementById('c'), ctx = cv.getContext('2d');
+const $ = id => document.getElementById(id);
+let pad, ball, bricks, score, level, lives, state, keys = {}, acc = 0, last = 0;
+
+function build() {
+  bricks = []; const rows = Math.min(8, 3 + level);
+  for (let r = 0; r < rows; r++) for (let c = 0; c < COLS; c++)
+    bricks.push({ x: OX + c * (BW + GAP), y: OY + r * (BH + GAP), color: COLORS[r % COLORS.length], alive: true });
+}
+function stick() { ball = { x: pad.x + pad.w / 2, y: H - 40, vx: 0, vy: 0, r: 7 }; state = 'ready'; }
+function reset() {
+  pad = { x: W / 2 - 38, y: H - 30, w: 76, h: 12 }; score = 0; level = 1; lives = 3; build(); stick(); hud();
+}
+function hud() { $('sc').textContent = score; $('lv').textContent = level; $('lf').textContent = lives; }
+function launch() {
+  if (state === 'ready') { const sp = 5 + level * 0.4; ball.vx = (Math.random() < 0.5 ? -1 : 1) * sp * 0.5; ball.vy = -sp * 0.87; state = 'play'; }
+  else if (state === 'over') reset();
+}
+function update() {
+  if (keys.ArrowLeft || keys.a) pad.x -= 6;
+  if (keys.ArrowRight || keys.d) pad.x += 6;
+  pad.x = Math.max(0, Math.min(W - pad.w, pad.x));
+  if (state === 'ready') { ball.x = pad.x + pad.w / 2; return; }
+  if (state !== 'play') return;
+  ball.x += ball.vx; ball.y += ball.vy;
+  if (ball.x < ball.r) { ball.x = ball.r; ball.vx = Math.abs(ball.vx); }
+  if (ball.x > W - ball.r) { ball.x = W - ball.r; ball.vx = -Math.abs(ball.vx); }
+  if (ball.y < ball.r) { ball.y = ball.r; ball.vy = Math.abs(ball.vy); }
+  if (ball.vy > 0 && ball.y + ball.r >= pad.y && ball.y - ball.r <= pad.y + pad.h && ball.x >= pad.x - 4 && ball.x <= pad.x + pad.w + 4) {
+    const rel = (ball.x - (pad.x + pad.w / 2)) / (pad.w / 2), sp = Math.hypot(ball.vx, ball.vy);
+    ball.vx = sp * rel * 0.8; ball.vy = -Math.sqrt(Math.max(sp * sp - ball.vx * ball.vx, 4)); ball.y = pad.y - ball.r;
+  }
+  for (const b of bricks) {
+    if (!b.alive) continue;
+    const nx = Math.max(b.x, Math.min(ball.x, b.x + BW)), ny = Math.max(b.y, Math.min(ball.y, b.y + BH));
+    const dx = ball.x - nx, dy = ball.y - ny;
+    if (dx * dx + dy * dy > ball.r * ball.r) continue;
+    b.alive = false; score += 10; hud();
+    if (Math.abs(dx) > Math.abs(dy)) ball.vx = dx > 0 ? Math.abs(ball.vx) : -Math.abs(ball.vx);
+    else ball.vy = dy > 0 ? Math.abs(ball.vy) : -Math.abs(ball.vy);
+    break;
+  }
+  if (!bricks.some(b => b.alive)) { level++; score += 50; build(); stick(); hud(); return; }
+  if (ball.y > H + 20) { lives--; hud(); if (lives <= 0) state = 'over'; else stick(); }
+}
+function draw() {
+  ctx.fillStyle = '#0a1128'; ctx.fillRect(0, 0, W, H);
+  for (const b of bricks) if (b.alive) {
+    ctx.fillStyle = b.color; ctx.fillRect(b.x, b.y, BW, BH);
+    ctx.fillStyle = '#ffffff44'; ctx.fillRect(b.x, b.y, BW, 4);
+  }
+  ctx.fillStyle = '#4cc9f0'; ctx.beginPath(); (ctx.roundRect || ctx.rect).call(ctx, pad.x, pad.y, pad.w, pad.h, 6); ctx.fill();
+  ctx.fillStyle = '#fff'; ctx.shadowColor = '#fff'; ctx.shadowBlur = 10;
+  ctx.beginPath(); ctx.arc(ball.x, ball.y, ball.r, 0, 7); ctx.fill(); ctx.shadowBlur = 0;
+  ctx.textAlign = 'center'; ctx.font = 'bold 20px system-ui';
+  if (state === 'ready') { ctx.fillStyle = '#fff'; ctx.fillText('Buraxmaq üçün toxun', W / 2, H / 2 + 60); }
+  if (state === 'over') {
+    ctx.fillStyle = '#000b'; ctx.fillRect(0, 170, W, 130); ctx.fillStyle = '#ffd166'; ctx.font = 'bold 30px system-ui';
+    ctx.fillText('Oyun bitdi', W / 2, 220); ctx.fillStyle = '#fff'; ctx.font = '20px system-ui';
+    ctx.fillText('Xal: ' + score + ' — yenidən başlamaq üçün toxun', W / 2, 255);
+  }
+}
+function loop(t) {
+  acc += Math.min(100, t - last); last = t;
+  while (acc >= 1000 / 60) { update(); acc -= 1000 / 60; }
+  draw(); requestAnimationFrame(loop);
+}
+function moveTo(e) { const r = cv.getBoundingClientRect(); pad.x = Math.max(0, Math.min(W - pad.w, (e.clientX - r.left) * (W / r.width) - pad.w / 2)); }
+cv.addEventListener('pointermove', moveTo);
+cv.addEventListener('pointerdown', e => { e.preventDefault(); moveTo(e); launch(); });
+addEventListener('keydown', e => {
+  keys[e.key] = true;
+  if (['ArrowLeft', 'ArrowRight', ' '].includes(e.key)) e.preventDefault();
+  if (e.key === ' ') launch();
+});
+addEventListener('keyup', e => { keys[e.key] = false; });
+$('re').onclick = reset;
+reset(); requestAnimationFrame(t => { last = t; loop(t); });
+
+</script>
+</body>
+</html>
