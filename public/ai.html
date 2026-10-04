@@ -5,6 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Nibras AI</title>
   <meta name="description" content="Nibras AI — Nibras Code köməkçisi. Sual ver, düzəlt, həll et." />
+  <link rel="canonical" href="https://nibrascode.com/ai" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Nibras Code" />
+  <meta property="og:locale" content="az_AZ" />
+  <meta property="og:title" content="Nibras AI" />
+  <meta property="og:description" content="Nibras AI — Nibras Code köməkçisi. Sual ver, öyrən, kod və fikir üçün kömək al." />
+  <meta property="og:url" content="https://nibrascode.com/ai" />
+  <meta property="og:image" content="https://nibrascode.com/nibras-ai.png" />
+  <meta property="og:image:width" content="734" />
+  <meta property="og:image:height" content="697" />
+  <meta property="og:image:alt" content="Nibras AI" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Nibras AI" />
+  <meta name="twitter:description" content="Nibras AI — Nibras Code köməkçisi. Sual ver, öyrən, kod və fikir üçün kömək al." />
+  <meta name="twitter:image" content="https://nibrascode.com/nibras-ai.png" />
   <link rel="icon" href="/nibras-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -278,6 +293,17 @@
     .runbtn svg { width: 12px; height: 12px; display: block; }
     .runbtn:hover { border-color: #5eead4; color: #d6fff7; }
     .runbtn:disabled { opacity: .5; cursor: wait; }
+    .msg.b.ht { position: relative; padding-top: 32px; }
+    .msg .tools { position: absolute; top: 0; right: 3px; display: flex; gap: 0; white-space: normal; user-select: none; -webkit-user-select: none; }
+    .msg .tools button { width: 32px; height: 32px; padding: 0; display: grid; place-items: center; border: 0; border-radius: 10px; background: transparent; color: #8d96ad; cursor: pointer; opacity: .75; -webkit-tap-highlight-color: transparent; }
+    .msg .tools button svg { width: 15px; height: 15px; display: block; }
+    .msg .tools button:hover, .msg .tools button:focus-visible { opacity: 1; color: #cfe0ff; background: rgba(143, 180, 255, .12); }
+    .msg .tools button:focus-visible { outline: 2px solid #8fb4ff; outline-offset: -2px; }
+    .msg .tools button.ok { color: #8ff5e4; opacity: 1; }
+    .shm { position: fixed; z-index: 6; width: 188px; padding: 5px; border-radius: 14px; background: rgba(12, 16, 32, .98); border: 1px solid rgba(160, 140, 255, .35); box-shadow: 0 12px 40px rgba(0, 0, 0, .5); }
+    .shm[hidden] { display: none; }
+    .shm a, .shm button { display: flex; align-items: center; width: 100%; min-height: 40px; padding: 0 12px; border: 0; border-radius: 9px; background: transparent; color: #e6ecfb; font: inherit; font-size: 13.5px; text-align: left; text-decoration: none; cursor: pointer; }
+    .shm a:hover, .shm button:hover, .shm a:focus-visible, .shm button:focus-visible { background: rgba(143, 180, 255, .14); outline: none; }
     .msg img.shot {
       display: block;
       width: 100%;
@@ -866,6 +892,180 @@
         });
       });
     }
+    // Kopyala / Paylaş: hər cavab balonunun yuxarı sağ küncündə iki kiçik ikon düyməsi (xəta və qarşılama ekranında yoxdur).
+    // Kopyala: cavabın sadə mətni (gizli ::ctx:: / ::game:: sətirləri və blok işarələri olmadan). Paylaş: mətnin sonuna həmişə «Nibras AI: https://nibrascode.com/ai» sətri əlavə olunur;
+    // oyun kodu cavablarında kod paylaşılmır — yalnız giriş sətri / oyunun adı və link.
+    const SHARE_LINK = "https://nibrascode.com/ai";
+    const SHARE_MAX = 1500;
+    const IC_COPY = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15V6.5A2.5 2.5 0 0 1 7.5 4H15"/></svg>';
+    const IC_OK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+    const IC_SHARE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="M8.3 10.7l7.4-4.4M8.3 13.3l7.4 4.4"/></svg>';
+    function plainAnswer(raw) {
+      let s = String(raw || "").replace(/\r/g, "");
+      s = s.replace(/^::ctx:: [^\n]*$/gm, "").replace(/^::game:: [^\n]*$/gm, "");
+      s = s.replace(/(^|\n)::sug::\n[\s\S]*?\n::\/sug::(?=\n|$)/g, "$1");
+      s = s.replace(/(^|\n)::(?:notice|tafsir [a-z]+|ayah(?: warn)?(?: [0-9:\-]+)?)::\n([\s\S]*?)\n::\/(?:notice|tafsir|ayah)::(?=\n|$)/g, function (all, pre, body) {
+        return pre + body.split("\n").map(function (ln) { return ln.replace(/^::(?:ar|tl|tv|src|tr)::[ \t]*/, ""); }).join("\n");
+      });
+      s = s.replace(/^::note::[ \t]*/gm, "");
+      return s.replace(/[ \t]+$/gm, "").replace(/\n{3,}/g, "\n\n").trim();
+    }
+    function cutText(t, max) {
+      if (t.length <= max) return t;
+      let c = t.slice(0, max - 1);
+      const sp = c.search(/\s\S*$/);
+      if (sp > max * 0.6) c = c.slice(0, sp);
+      return c.replace(/\s+$/, "") + "…";
+    }
+    // Paylaşılacaq mətn (linksiz gövdə): oyun kodu cavablarında yalnız giriş sətri / ad
+    function shareBody(raw) {
+      const src = String(raw || "");
+      const plain = plainAnswer(src);
+      const gm = /^::game:: [a-z0-9-]+ \| ([^\n]+)$/m.exec(src);
+      const fi = plain.indexOf("```");
+      let bigHtml = false;
+      src.split("```").forEach(function (part, i) {
+        if (i % 2 === 1 && /^html?\n/i.test(part) && part.length > SHARE_MAX) bigHtml = true;
+      });
+      if (gm || bigHtml) {
+        const intro = (fi >= 0 ? plain.slice(0, fi) : plain).split("\n").map(function (x) { return x.trim(); }).filter(Boolean)[0] || "";
+        return cutText(intro || (gm ? "Oyun: " + gm[1].trim() : "Nibras AI oyun kodu"), 300);
+      }
+      return cutText(plain, SHARE_MAX);
+    }
+    function shareText(raw) {
+      const b = shareBody(raw);
+      return (b ? b + "\n\n" : "") + "Nibras AI: " + SHARE_LINK;
+    }
+    function copyText(t) {
+      return new Promise(function (resolve, reject) {
+        const old = function () {
+          try {
+            const ta = document.createElement("textarea");
+            ta.value = t;
+            ta.setAttribute("readonly", "");
+            ta.setAttribute("aria-hidden", "true");
+            ta.style.cssText = "position:fixed;top:0;left:-9999px;opacity:0;font-size:16px";
+            document.body.appendChild(ta);
+            ta.focus();
+            ta.select();
+            ta.setSelectionRange(0, t.length);
+            const ok = document.execCommand("copy");
+            ta.remove();
+            ok ? resolve() : reject(new Error("copy"));
+          } catch (e) { reject(e); }
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(resolve, old);
+        else old();
+      });
+    }
+    function copyWithNote(t, okBtn) {
+      copyText(t).then(function () {
+        note("Kopyalandı ✓");
+        if (okBtn) {
+          okBtn.innerHTML = IC_OK;
+          okBtn.classList.add("ok");
+          setTimeout(function () { okBtn.innerHTML = IC_COPY; okBtn.classList.remove("ok"); }, 1600);
+        }
+      }, function () { note("Kopyalamaq alınmadı"); });
+    }
+    let shm = null, shmBtn = null;
+    function closeShare() {
+      if (shm) shm.hidden = true;
+      if (shmBtn) { shmBtn.setAttribute("aria-expanded", "false"); shmBtn = null; }
+    }
+    function openShare(btnEl, raw) {
+      const full = shareText(raw);
+      const body = shareBody(raw);
+      const enc = encodeURIComponent;
+      if (!shm) {
+        shm = document.createElement("div");
+        shm.className = "shm";
+        shm.setAttribute("role", "menu");
+        shm.setAttribute("aria-label", "Paylaş");
+        shm.hidden = true;
+        document.body.appendChild(shm);
+        document.addEventListener("click", function (e) { if (shm && !shm.hidden && !shm.contains(e.target) && !(shmBtn && shmBtn.contains(e.target))) closeShare(); });
+        document.addEventListener("keydown", function (e) { if (e.key === "Escape" && shm && !shm.hidden) { const b = shmBtn; closeShare(); if (b) b.focus(); } });
+        window.addEventListener("resize", closeShare);
+        msgs.addEventListener("scroll", closeShare, { passive: true });
+      }
+      if (shmBtn === btnEl && !shm.hidden) { closeShare(); return; }
+      closeShare();
+      const items = [
+        ["WhatsApp", "https://wa.me/?text=" + enc(full)],
+        ["Telegram", "https://t.me/share/url?url=" + enc(SHARE_LINK) + "&text=" + enc(body)],
+        ["X (Twitter)", "https://twitter.com/intent/tweet?text=" + enc(cutText(body, 200)) + "&url=" + enc(SHARE_LINK)],
+        ["Facebook", "https://www.facebook.com/sharer/sharer.php?u=" + enc(SHARE_LINK) + "&quote=" + enc(cutText(body, 400))]
+      ];
+      shm.innerHTML = "";
+      items.forEach(function (it) {
+        const a = document.createElement("a");
+        a.href = it[1];
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.setAttribute("role", "menuitem");
+        a.textContent = it[0];
+        a.addEventListener("click", function () { closeShare(); });
+        shm.appendChild(a);
+      });
+      const cb = document.createElement("button");
+      cb.type = "button";
+      cb.setAttribute("role", "menuitem");
+      cb.textContent = "Kopyala (link ilə)";
+      cb.addEventListener("click", function () { closeShare(); copyWithNote(full, null); });
+      shm.appendChild(cb);
+      shm.hidden = false;
+      const r = btnEl.getBoundingClientRect();
+      const h = shm.offsetHeight || 220;
+      const w = shm.offsetWidth || 188;
+      let top = r.bottom + 4;
+      if (top + h > window.innerHeight - 8) top = Math.max(8, r.top - h - 4);
+      shm.style.top = top + "px";
+      shm.style.left = Math.max(8, Math.min(r.right - w, window.innerWidth - w - 8)) + "px";
+      shmBtn = btnEl;
+      btnEl.setAttribute("aria-expanded", "true");
+      const first = shm.querySelector("a");
+      if (first) first.focus();
+    }
+    function addTools(el, raw) {
+      const wrap = document.createElement("div");
+      wrap.className = "tools";
+      wrap.setAttribute("role", "group");
+      wrap.setAttribute("aria-label", "Cavab əməliyyatları");
+      const c = document.createElement("button");
+      c.type = "button";
+      c.className = "cpbtn";
+      c.title = "Kopyala";
+      c.setAttribute("aria-label", "Kopyala");
+      c.innerHTML = IC_COPY;
+      c.addEventListener("click", function (e) {
+        e.stopPropagation();
+        const t = plainAnswer(raw);
+        copyWithNote(t, c);
+      });
+      const s = document.createElement("button");
+      s.type = "button";
+      s.className = "shbtn";
+      s.title = "Paylaş";
+      s.setAttribute("aria-label", "Paylaş");
+      s.setAttribute("aria-haspopup", "menu");
+      s.setAttribute("aria-expanded", "false");
+      s.innerHTML = IC_SHARE;
+      s.addEventListener("click", function (e) {
+        e.stopPropagation();
+        if (navigator.share) {
+          navigator.share({ title: "Nibras AI", text: shareText(raw) }).catch(function (err) {
+            if (err && err.name === "AbortError") return;
+            openShare(s, raw);
+          });
+        } else openShare(s, raw);
+      });
+      wrap.appendChild(c);
+      wrap.appendChild(s);
+      el.classList.add("ht");
+      el.appendChild(wrap);
+    }
     // Yeni cavab: uzun cavabın BAŞI (balonun üstü) görünür; ekrana tam sığan qısa cavab tam görünür. İstifadəçinin öz mesajı isə həmişə aşağıya çəkilir.
     function revealAnswer(el) {
       if (el.offsetHeight <= msgs.clientHeight) { msgs.scrollTop = msgs.scrollHeight; return; }
@@ -885,6 +1085,7 @@
         img.src = imageUrl;
         el.appendChild(img);
       }
+      if (kind === "b") addTools(el, text);
       msgs.appendChild(el);
       if (restore) return el; // söhbət bərpasında renderItem özü sona çəkir
       if (kind.charAt(0) === "b") revealAnswer(el);
