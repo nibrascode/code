@@ -26,7 +26,7 @@ test("OG/Twitter meta: başlıq, təsvir, url, şəkil", () => {
     /property="og:title" content="Nibras AI"/,
     /property="og:description" content="[^"]+"/,
     /property="og:url" content="https:\/\/nibrascode\.com\/ai"/,
-    /property="og:image" content="https:\/\/nibrascode\.com\/nibras-ai\.png"/,
+    /property="og:image" content="https:\/\/nibrascode\.com\/nibras-ai-icon\.png"/,
     /name="twitter:card" content="summary"/,
     /rel="canonical" href="https:\/\/nibrascode\.com\/ai"/,
   ]) assert.match(h, re);
