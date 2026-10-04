@@ -400,7 +400,7 @@ const AR_RUN = /[\u0621-\u064A\u0671-\u06D3\u064B-\u065F\u0670\u06D6-\u06ED\u064
 const LEAD_AR = new Set(["عن", "في", "حول", "بشان", "بخصوص", "عند", "حديث", "الحديث", "احاديث", "ابحث", "بحث", "عنه", "ما", "ماورد", "ورد", "اريد", "اعطني", "اذكر", "لي", "عن", "في", "من"]);
 
 // qısa mövzu lüğəti (sabit cədvəl, AI deyil): latın/kiril sözü -> ərəbcə axtarış sözü
-const TOPICS = [
+export const TOPICS = [
   [["niyyet", "niyyat", "niyet", "intention", "намерен", "ният", "ниет"], "النية"],
   [["sabr", "sabir", "patience", "терпен", "сабр"], "الصبر"],
   [["namaz", "salah", "salat", "prayer", "молитв", "намаз", "салят"], "الصلاة"],
