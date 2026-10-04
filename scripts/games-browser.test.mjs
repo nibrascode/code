@@ -130,6 +130,79 @@ setTimeout(() => OUT({ state, score: Math.floor(score), obs: obs.length }), 2000
 `,
     ok: (r) => r[0].state === 'play' && r[0].score > 5,
   },
+  "dan-yerine-qeder": {
+    ms: 30000,
+    run: `
+$('go').click();
+K('d');
+setTimeout(() => { pend = 1; openPick(); OUT({ phase: 'pick', st, cards: $('cards').children.length, shown: !$('pk').hidden }); }, 3000);
+setTimeout(() => { document.querySelector('.cd').click(); }, 3500);
+setTimeout(() => OUT({ phase: 'end', st, t: Math.floor(t), x: Math.round(P.x), en: en.length, over: !$('ov').hidden }), 15000);
+`,
+    ok: (r) => r[0].cards >= 1 && r[0].shown && r[1].t >= 5 && ['play', 'pick', 'end'].includes(r[1].st) && r[1].x > 20,
+  },
+  "baki-gecesi": {
+    ms: 30000,
+    run: `
+$('go').click();
+K('ArrowRight');
+setTimeout(() => KU('ArrowRight'), 800);
+setTimeout(() => K(' '), 1000);
+setTimeout(() => OUT({ st, score: Math.floor(score), speed: Math.round(eff), cars: en.length, ovHidden: $('ov').hidden }), 12000);
+`,
+    ok: (r) => ['play', 'over'].includes(r[0].st) && r[0].score > 20 && r[0].speed >= 45,
+  },
+  "qala-kesikcisi": {
+    ms: 40000,
+    run: `
+$('go').click();
+const b = cv.getBoundingClientRect();
+selT = 0;
+PE(cv, 'pointerdown', b.left + 0.5 * cell, b.top + 0.5 * cell, 'mouse'); // 0,0 yol deyil
+selT = 0;
+PE(cv, 'pointerdown', b.left + 2.5 * cell, b.top + 2.5 * cell, 'mouse');
+nextWave();
+setTimeout(() => OUT({ st, towers: Tw.length, wave, waveOn, enemies: en.length, kills, gold, lives }), 15000);
+`,
+    ok: (r) => r[0].st === 'play' && r[0].towers >= 1 && r[0].wave === 1 && (r[0].kills >= 1 || r[0].enemies >= 1) && r[0].lives === 20,
+  },
+  "neon-drive": {
+    ms: 30000,
+    run: `
+document.getElementById('startBtn').click();
+K('ArrowRight');
+setTimeout(() => KU('ArrowRight'), 400);
+setTimeout(() => K('Shift'), 600);
+setTimeout(() => OUT({ menuHidden: document.getElementById('menu').classList.contains('hidden'), score: +document.getElementById('score').textContent, speed: +document.getElementById('speed').textContent, hud: document.getElementById('hud').classList.contains('on') || !document.getElementById('gameover').classList.contains('hidden') }), 8000);
+`,
+    ok: (r) => r[0].menuHidden && r[0].score > 0 && r[0].speed > 0 && r[0].hud,
+  },
+  "neon-void": {
+    ms: 30000,
+    run: `
+document.getElementById('startBtn').click();
+K('ArrowLeft');
+setTimeout(() => KU('ArrowLeft'), 500);
+setTimeout(() => K('ArrowRight'), 700);
+setTimeout(() => OUT({ menuHidden: document.getElementById('menu').classList.contains('hidden'), lives: document.getElementById('lives').children.length, hud: document.getElementById('hud').classList.contains('on') || !document.getElementById('gameover').classList.contains('hidden') }), 8000);
+`,
+    ok: (r) => r[0].menuHidden && r[0].lives >= 1 && r[0].hud,
+  },
+  "neon-breakout": {
+    ms: 40000,
+    run: `
+const KD = (k) => document.dispatchEvent(new KeyboardEvent('keydown', { key: k, bubbles: true, cancelable: true }));
+const KDU = (k) => document.dispatchEvent(new KeyboardEvent('keyup', { key: k, bubbles: true }));
+const hid = (id) => document.getElementById(id).classList.contains('hidden');
+KD(' ');
+const started = hid('overlay-menu');
+setTimeout(() => KD(' '), 300);
+setTimeout(() => KD('ArrowRight'), 600);
+setTimeout(() => KDU('ArrowRight'), 900);
+setTimeout(() => OUT({ started, score: document.getElementById('hud-score').textContent, lives: document.getElementById('hud-lives').children.length || document.getElementById('hud-lives').textContent, overlays: ['overlay-menu', 'overlay-gameover', 'overlay-pause'].map(hid) }), 12000);
+`,
+    ok: (r) => r[0].started === true && r[0].lives && r[0].overlays[0] === true && r[0].overlays[2] === true,
+  },
 };
 
 function runPage(html, ms) {
@@ -157,7 +230,7 @@ for (const f of files) {
     assert.ok(!/yarat/i.test(src), "yarat sözü olmamalıdır");
     assert.ok(!src.includes("```"));
     const sc = SCEN[slug];
-    const html = src.replace("<head>", "<head>" + HOOK).replace("</body>", `<script>${HELP}\n${sc.run}</script></body>`);
+    const html = src.replace("<head>", "<head>" + HOOK).replace("</body>", `<script>(() => {${HELP}\n${sc.run}\n})();</script></body>`);
     const logs = runPage(html, sc.ms);
     const errs = logs.filter((l) => l.level === "ERROR" || /JSERR|Uncaught/.test(l.text));
     assert.deepEqual(errs, [], "JS xətaları: " + JSON.stringify(errs));

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>NEON VOID — Premium Arcade</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; overflow: hidden; background: #050508; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    display: flex; align-items: center; justify-content: center;
+    background: radial-gradient(ellipse at 50% 120%, #1a0b2e 0%, #050508 60%);
+    touch-action: none; user-select: none; -webkit-user-select: none;
+  }
+  #wrap { position: relative; width: 100vw; height: 100vh; }
+  canvas { display: block; width: 100%; height: 100%; }
+
+  .overlay {
+    position: absolute; inset: 0; z-index: 10;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: rgba(5,5,8,.72); backdrop-filter: blur(14px);
+    transition: opacity .5s ease; text-align: center; padding: 24px;
+  }
+  .overlay.hidden { opacity: 0; pointer-events: none; }
+
+  .logo {
+    font-size: clamp(44px, 10vw, 96px); font-weight: 900; letter-spacing: .12em;
+    background: linear-gradient(180deg, #fff 0%, #a855f7 55%, #22d3ee 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    filter: drop-shadow(0 0 30px rgba(168,85,247,.55));
+    animation: float 3.2s ease-in-out infinite;
+  }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+  .tagline {
+    margin-top: 10px; color: #8b8ba3; font-size: clamp(13px, 2.4vw, 16px);
+    letter-spacing: .35em; text-transform: uppercase;
+  }
+  .btn {
+    margin-top: 42px; padding: 16px 58px; font-size: 18px; font-weight: 700;
+    letter-spacing: .2em; text-transform: uppercase; color: #050508;
+    background: linear-gradient(90deg, #22d3ee, #a855f7);
+    border: none; border-radius: 999px; cursor: pointer;
+    box-shadow: 0 0 32px rgba(34,211,238,.45), 0 0 64px rgba(168,85,247,.25);
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover { transform: scale(1.06); box-shadow: 0 0 48px rgba(34,211,238,.7), 0 0 96px rgba(168,85,247,.4); }
+  .btn:active { transform: scale(.97); }
+
+  .hint { margin-top: 26px; color: #55556e; font-size: 13px; letter-spacing: .1em; line-height: 1.9; }
+  .hint b { color: #9d9dbd; }
+
+  #gameover .logo {
+    background: linear-gradient(180deg, #fff 0%, #f43f5e 55%, #f97316 100%);
+    -webkit-background-clip: text; background-clip: text;
+    filter: drop-shadow(0 0 30px rgba(244,63,94,.5));
+  }
+  .score-big { margin-top: 18px; font-size: clamp(36px, 8vw, 64px); font-weight: 800; color: #fff; text-shadow: 0 0 24px rgba(34,211,238,.6); }
+  .score-label { color: #8b8ba3; letter-spacing: .3em; font-size: 12px; text-transform: uppercase; margin-top: 4px; }
+  #best { margin-top: 10px; color: #fbbf24; font-size: 15px; letter-spacing: .15em; }
+  #newbest { display: none; margin-top: 8px; color: #4ade80; font-weight: 700; letter-spacing: .25em; font-size: 13px; animation: pulse 1s infinite; }
+  @keyframes pulse { 50% { opacity: .4; } }
+
+  #hud {
+    position: absolute; top: 0; left: 0; right: 0; z-index: 5;
+    display: flex; justify-content: space-between; align-items: flex-start;
+    padding: 18px 22px; pointer-events: none; opacity: 0; transition: opacity .4s;
+  }
+  #hud.on { opacity: 1; }
+  .hud-score { font-size: 30px; font-weight: 800; color: #fff; text-shadow: 0 0 16px rgba(34,211,238,.7); font-variant-numeric: tabular-nums; }
+  .hud-label { font-size: 10px; letter-spacing: .3em; color: #8b8ba3; text-transform: uppercase; }
+  #lives { display: flex; gap: 6px; margin-top: 6px; justify-content: flex-end; }
+  .life { width: 14px; height: 14px; transform: rotate(45deg); background: linear-gradient(135deg, #f43f5e, #fb7185); box-shadow: 0 0 10px rgba(244,63,94,.8); border-radius: 3px; transition: opacity .3s, transform .3s; }
+  .life.lost { opacity: .15; transform: rotate(45deg) scale(.7); box-shadow: none; }
+  #combo { position: absolute; top: 84px; left: 50%; transform: translateX(-50%); font-size: 22px; font-weight: 800; color: #fbbf24; text-shadow: 0 0 18px rgba(251,191,36,.8); opacity: 0; transition: opacity .2s; letter-spacing: .1em; }
+  #muteBtn { position: absolute; bottom: 16px; right: 16px; z-index: 20; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); color: #9d9dbd; width: 44px; height: 44px; border-radius: 12px; font-size: 18px; cursor: pointer; backdrop-filter: blur(6px); }
+</style>
+</head>
+<body>
+<div id="wrap">
+  <canvas id="game"></canvas>
+
+  <div id="hud">
+    <div>
+      <div class="hud-label">Skor</div>
+      <div class="hud-score" id="score">0</div>
+    </div>
+    <div style="text-align:right">
+      <div class="hud-label">Can</div>
+      <div id="lives"></div>
+    </div>
+  </div>
+  <div id="combo"></div>
+
+  <div class="overlay" id="menu">
+    <div class="logo">NEON VOID</div>
+    <div class="tagline">Premium Arcade Deneyimi</div>
+    <button class="btn" id="startBtn">Başla</button>
+    <div class="hint">
+      <b>← →</b> veya <b>A / D</b> ile hareket et &nbsp;•&nbsp; Mobilde parmağını sürükle<br>
+      Kristalleri topla, meteorlardan kaçın. Kombo yap, skoru katla!
+    </div>
+  </div>
+
+  <div class="overlay hidden" id="gameover">
+    <div class="logo">OYUN BİTTİ</div>
+    <div class="score-big" id="finalScore">0</div>
+    <div class="score-label">Final Skoru</div>
+    <div id="best">En İyi: 0</div>
+    <div id="newbest">★ YENİ REKOR ★</div>
+    <button class="btn" id="retryBtn">Tekrar Oyna</button>
+  </div>
+
+  <button id="muteBtn" title="Ses">🔊</button>
+</div>
+
+<script>
+(() => {
+  "use strict";
+  const canvas = document.getElementById("game");
+  const ctx = canvas.getContext("2d");
+  let W = 0, H = 0, DPR = Math.min(window.devicePixelRatio || 1, 2);
+
+  function resize() {
+    W = window.innerWidth; H = window.innerHeight;
+    canvas.width = W * DPR; canvas.height = H * DPR;
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+  window.addEventListener("resize", resize);
+  resize();
+
+  // ---------- SES (WebAudio, dosyasız) ----------
+  let audioCtx = null, muted = false;
+  function ac() {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === "suspended") audioCtx.resume();
+    return audioCtx;
+  }
+  function tone(freq, dur, type, vol, slide) {
+    if (muted) return;
+    try {
+      const a = ac(), o = a.createOscillator(), g = a.createGain();
+      o.type = type || "sine"; o.frequency.setValueAtTime(freq, a.currentTime);
+      if (slide) o.frequency.exponentialRampToValueAtTime(slide, a.currentTime + dur);
+      g.gain.setValueAtTime(vol || 0.15, a.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.0001, a.currentTime + dur);
+      o.connect(g); g.connect(a.destination);
+      o.start(); o.stop(a.currentTime + dur);
+    } catch (e) {}
+  }
+  const sfx = {
+    pickup: (c) => { tone(500 + Math.min(c, 20) * 40, 0.12, "sine", 0.14, 900 + c * 40); },
+    hit:    () => { tone(160, 0.35, "sawtooth", 0.22, 40); tone(90, 0.4, "square", 0.12, 30); },
+    start:  () => { tone(220, 0.15, "sine", 0.15, 440); setTimeout(() => tone(440, 0.2, "sine", 0.15, 880), 120); },
+    over:   () => { tone(400, 0.5, "sawtooth", 0.18, 60); },
+  };
+  document.getElementById("muteBtn").addEventListener("click", (e) => {
+    muted = !muted; e.target.textContent = muted ? "🔇" : "🔊";
+  });
+
+  // ---------- DURUM ----------
+  const STATE = { MENU: 0, PLAY: 1, OVER: 2 };
+  let state = STATE.MENU;
+  let score = 0, best = +(localStorage.getItem("neonvoid_best") || 0);
+  let lives = 3, combo = 0, comboTimer = 0, invuln = 0, shake = 0, time = 0;
+  let difficulty = 1;
+
+  const ship = { x: 0, y: 0, vx: 0, w: 46, h: 34, targetX: null };
+  const keys = {};
+  let gems = [], rocks = [], parts = [], stars = [];
+
+  // Yıldız arka planı
+  for (let i = 0; i < 120; i++) {
+    stars.push({ x: Math.random(), y: Math.random(), z: Math.random() * 0.8 + 0.2, s: Math.random() * 1.8 + 0.4 });
+  }
+
+  function reset() {
+    score = 0; lives = 3; combo = 0; comboTimer = 0; invuln = 120; shake = 0; difficulty = 1;
+    gems = []; rocks = []; parts = [];
+    ship.x = W / 2; ship.y = H - 110; ship.vx = 0; ship.targetX = null;
+    updateHUD();
+  }
+
+  function updateHUD() {
+    document.getElementById("score").textContent = score;
+    const lv = document.getElementById("lives");
+    lv.innerHTML = "";
+    for (let i = 0; i < 3; i++) {
+      const d = document.createElement("div");
+      d.className = "life" + (i < lives ? "" : " lost");
+      lv.appendChild(d);
+    }
+  }
+
+  function showCombo() {
+    const el = document.getElementById("combo");
+    if (combo >= 3) {
+      el.textContent = "KOMBO x" + combo;
+      el.style.opacity = 1;
+      clearTimeout(el._t);
+      el._t = setTimeout(() => el.style.opacity = 0, 700);
+    }
+  }
+
+  // ---------- OLUŞTURUCULAR ----------
+  function spawnGem() {
+    gems.push({
+      x: 30 + Math.random() * (W - 60), y: -30,
+      vy: (1.6 + Math.random() * 1.4) * difficulty,
+      r: 13, rot: Math.random() * Math.PI * 2, vr: (Math.random() - .5) * .1,
+      hue: Math.random() < .5 ? 185 : 285,
+    });
+  }
+  function spawnRock() {
+    const r = 16 + Math.random() * 22;
+    rocks.push({
+      x: r + Math.random() * (W - r * 2), y: -r - 10,
+      vy: (2 + Math.random() * 2.2) * difficulty,
+      vx: (Math.random() - .5) * 1.4,
+      r, rot: Math.random() * Math.PI * 2, vr: (Math.random() - .5) * .08,
+      verts: Array.from({ length: 9 }, () => 0.72 + Math.random() * 0.5),
+    });
+  }
+  function burst(x, y, color, n, pow) {
+    for (let i = 0; i < n; i++) {
+      const a = Math.random() * Math.PI * 2, sp = (Math.random() * 0.7 + 0.3) * (pow || 4);
+      parts.push({ x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, life: 1, decay: 0.02 + Math.random() * 0.03, color, size: Math.random() * 3.5 + 1.5 });
+    }
+  }
+
+  // ---------- GİRİŞ ----------
+  window.addEventListener("keydown", (e) => {
+    keys[e.key.toLowerCase()] = true;
+    if (state !== STATE.PLAY && (e.key === " " || e.key === "Enter")) startGame();
+  });
+  window.addEventListener("keyup", (e) => keys[e.key.toLowerCase()] = false);
+
+  function pointerX(e) {
+    const t = e.touches ? e.touches[0] : e;
+    return t.clientX;
+  }
+  canvas.addEventListener("pointermove", (e) => { if (state === STATE.PLAY) ship.targetX = e.clientX; });
+  canvas.addEventListener("pointerdown", (e) => { if (state === STATE.PLAY) ship.targetX = e.clientX; });
+  canvas.addEventListener("touchmove", (e) => { e.preventDefault(); if (state === STATE.PLAY) ship.targetX = pointerX(e); }, { passive: false });
+  canvas.addEventListener("touchstart", (e) => { if (state === STATE.PLAY) ship.targetX = pointerX(e); }, { passive: true });
+
+  // ---------- OYUN AKIŞI ----------
+  function startGame() {
+    reset();
+    state = STATE.PLAY;
+    document.getElementById("menu").classList.add("hidden");
+    document.getElementById("gameover").classList.add("hidden");
+    document.getElementById("hud").classList.add("on");
+    sfx.start();
+  }
+  function endGame() {
+    state = STATE.OVER;
+    sfx.over();
+    const isNew = score > best;
+    if (isNew) { best = score; localStorage.setItem("neonvoid_best", best); }
+    document.getElementById("finalScore").textContent = score;
+    document.getElementById("best").textContent = "En İyi: " + best;
+    document.getElementById("newbest").style.display = isNew && score > 0 ? "block" : "none";
+    document.getElementById("hud").classList.remove("on");
+    setTimeout(() => document.getElementById("gameover").classList.remove("hidden"), 500);
+  }
+  document.getElementById("startBtn").addEventListener("click", startGame);
+  document.getElementById("retryBtn").addEventListener("click", startGame);
+
+  // ---------- GÜNCELLE ----------
+  let spawnG = 0, spawnR = 0;
+  function update(dt) {
+    time += dt;
+    difficulty = 1 + Math.min(score / 400, 2.2);
+
+    // Gemi
+    const speed = 9;
+    if (keys["arrowleft"] || keys["a"]) { ship.vx = -speed; ship.targetX = null; }
+    else if (keys["arrowright"] || keys["d"]) { ship.vx = speed; ship.targetX = null; }
+    else if (ship.targetX != null) {
+      const dx = ship.targetX - ship.x;
+      ship.vx = Math.max(-speed * 1.4, Math.min(speed * 1.4, dx * 0.18));
+      if (Math.abs(dx) < 3) ship.vx = 0;
+    } else ship.vx *= 0.82;
+    ship.x = Math.max(ship.w / 2, Math.min(W - ship.w / 2, ship.x + ship.vx));
+
+    // Üretim
+    spawnG -= dt; spawnR -= dt;
+    if (spawnG <= 0) { spawnGem(); spawnG = Math.max(0.35, 0.9 - difficulty * 0.12); }
+    if (spawnR <= 0) { spawnRock(); spawnR = Math.max(0.4, 1.3 - difficulty * 0.22); }
+
+    // Kristaller
+    for (let i = gems.length - 1; i >= 0; i--) {
+      const g = gems[i];
+      g.y += g.vy; g.rot += g.vr;
+      const dx = g.x - ship.x, dy = g.y - ship.y;
+      if (Math.abs(dx) < ship.w / 2 + g.r && Math.abs(dy) < ship.h / 2 + g.r) {
+        combo++; comboTimer = 2.2;
+        const gain = 10 * Math.min(combo, 10);
+        score += gain;
+        burst(g.x, g.y, "hsl(" + g.hue + ",100%,65%)", 16, 4);
+        sfx.pickup(combo);
+        showCombo();
+        gems.splice(i, 1);
+        updateHUD();
+        continue;
+      }
+      if (g.y > H + 40) { gems.splice(i, 1); if (combo > 0) { combo = 0; } }
+    }
+    if (comboTimer > 0) { comboTimer -= dt; if (comboTimer <= 0) combo = 0; }
+
+    // Meteorlar
+    for (let i = rocks.length - 1; i >= 0; i--) {
+      const r = rocks[i];
+      r.y += r.vy; r.x += r.vx; r.rot += r.vr;
+      if (r.x < r.r || r.x > W - r.r) r.vx *= -1;
+      const dx = r.x - ship.x, dy = r.y - ship.y;
+      const dist = Math.hypot(dx, dy);
+      if (invuln <= 0 && dist < r.r * 0.82 + ship.w * 0.36) {
+        lives--; combo = 0; invuln = 110; shake = 22;
+        burst(ship.x, ship.y, "#f43f5e", 34, 7);
+        burst(r.x, r.y, "#f97316", 20, 5);
+        sfx.hit();
+        rocks.splice(i, 1);
+        updateHUD();
+        if (lives <= 0) { endGame(); return; }
+        continue;
+      }
+      if (r.y > H + 60) rocks.splice(i, 1);
+    }
+
+    // Parçacıklar
+    for (let i = parts.length - 1; i >= 0; i--) {
+      const p = parts[i];
+      p.x += p.vx; p.y += p.vy; p.vy += 0.05; p.life -= p.decay;
+      if (p.life <= 0) parts.splice(i, 1);
+    }
+
+    if (invuln > 0) invuln--;
+    if (shake > 0) shake *= 0.88;
+  }
+
+  // ---------- ÇİZ ----------
+  function drawShip() {
+    const blink = invuln > 0 && Math.floor(time * 14) % 2 === 0;
+    ctx.save();
+    ctx.translate(ship.x, ship.y);
+    ctx.rotate(ship.vx * 0.03);
+    if (blink) ctx.globalAlpha = 0.35;
+
+    // Motor alevi
+    const fl = 14 + Math.sin(time * 30) * 5 + Math.abs(ship.vx) * 1.2;
+    const fg = ctx.createLinearGradient(0, ship.h / 2, 0, ship.h / 2 + fl + 14);
+    fg.addColorStop(0, "rgba(34,211,238,.95)");
+    fg.addColorStop(1, "rgba(168,85,247,0)");
+    ctx.fillStyle = fg;
+    ctx.beginPath();
+    ctx.moveTo(-8, ship.h / 2 - 4);
+    ctx.lineTo(0, ship.h / 2 + fl + 12);
+    ctx.lineTo(8, ship.h / 2 - 4);
+    ctx.closePath(); ctx.fill();
+
+    // Gövde
+    const bg = ctx.createLinearGradient(0, -ship.h / 2, 0, ship.h / 2);
+    bg.addColorStop(0, "#e0f2fe");
+    bg.addColorStop(0.5, "#22d3ee");
+    bg.addColorStop(1, "#7c3aed");
+    ctx.fillStyle = bg;
+    ctx.shadowColor = "rgba(34,211,238,.8)"; ctx.shadowBlur = 22;
+    ctx.beginPath();
+    ctx.moveTo(0, -ship.h / 2);
+    ctx.lineTo(ship.w / 2, ship.h / 2);
+    ctx.lineTo(ship.w / 5, ship.h / 2 - 8);
+    ctx.lineTo(-ship.w / 5, ship.h / 2 - 8);
+    ctx.lineTo(-ship.w / 2, ship.h / 2);
+    ctx.closePath(); ctx.fill();
+    ctx.shadowBlur = 0;
+
+    // Kokpit
+    ctx.fillStyle = "rgba(255,255,255,.9)";
+    ctx.beginPath(); ctx.ellipse(0, -4, 5, 9, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.restore();
+  }
+
+  function drawGem(g) {
+    ctx.save();
+    ctx.translate(g.x, g.y);
+    ctx.rotate(g.rot);
+    const c = "hsl(" + g.hue + ",100%,65%)";
+    ctx.shadowColor = c; ctx.shadowBlur = 18;
+    const grad = ctx.createLinearGradient(-g.r, -g.r, g.r, g.r);
+    grad.addColorStop(0, "#fff");
+    grad.addColorStop(0.4, c);
+    grad.addColorStop(1, "hsl(" + g.hue + ",90%,40%)");
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.moveTo(0, -g.r); ctx.lineTo(g.r * .8, 0); ctx.lineTo(0, g.r); ctx.lineTo(-g.r * .8, 0);
+    ctx.closePath(); ctx.fill();
+    ctx.shadowBlur = 0;
+    ctx.fillStyle = "rgba(255,255,255,.75)";
+    ctx.beginPath();
+    ctx.moveTo(0, -g.r * .55); ctx.lineTo(g.r * .35, 0); ctx.lineTo(0, g.r * .25); ctx.lineTo(-g.r * .35, 0);
+    ctx.closePath(); ctx.fill();
+    ctx.restore();
+  }
+
+  function drawRock(r) {
+    ctx.save();
+    ctx.translate(r.x, r.y);
+    ctx.rotate(r.rot);
+    ctx.shadowColor = "rgba(249,115,22,.5)"; ctx.shadowBlur = 12;
+    const grad = ctx.createRadialGradient(-r.r * .3, -r.r * .3, r.r * .1, 0, 0, r.r);
+    grad.addColorStop(0, "#57534e");
+    grad.addColorStop(0.7, "#292524");
+    grad.addColorStop(1, "#1c1917");
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    for (let i = 0; i < r.verts.length; i++) {
+      const a = (i / r.verts.length) * Math.PI * 2;
+      const rr = r.r * r.verts[i];
+      i === 0 ? ctx.moveTo(Math.cos(a) * rr, Math.sin(a) * rr) : ctx.lineTo(Math.cos(a) * rr, Math.sin(a) * rr);
+    }
+    ctx.closePath(); ctx.fill();
+    ctx.shadowBlur = 0;
+    ctx.strokeStyle = "rgba(249,115,22,.35)"; ctx.lineWidth = 1.5; ctx.stroke();
+    ctx.restore();
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.save();
+    if (shake > 0.5) ctx.translate((Math.random() - .5) * shake, (Math.random() - .5) * shake);
+
+    // Yıldızlar
+    for (const s of stars) {
+      s.y += 0.0006 * s.z * (state === STATE.PLAY ? difficulty : 0.4);
+      if (s.y > 1) s.y = 0;
+      ctx.globalAlpha = 0.25 + s.z * 0.6;
+      ctx.fillStyle = "#c7d2fe";
+      ctx.fillRect(s.x * W, s.y * H, s.s, s.s);
+    }
+    ctx.globalAlpha = 1;
+
+    if (state === STATE.PLAY || state === STATE.OVER) {
+      for (const g of gems) drawGem(g);
+      for (const r of rocks) drawRock(r);
+      for (const p of parts) {
+        ctx.globalAlpha = Math.max(p.life, 0);
+        ctx.fillStyle = p.color;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+      if (state === STATE.PLAY) drawShip();
+    } else {
+      // Menüde süs gemisi
+      ship.x = W / 2 + Math.sin(time * 0.8) * 60;
+      ship.y = H * 0.72 + Math.sin(time * 1.7) * 10;
+      ship.vx = Math.cos(time * 0.8) * 4;
+      drawShip();
+    }
+    ctx.restore();
+
+    // Vinyet
+    const v = ctx.createRadialGradient(W / 2, H / 2, Math.min(W, H) * 0.35, W / 2, H / 2, Math.max(W, H) * 0.75);
+    v.addColorStop(0, "rgba(0,0,0,0)");
+    v.addColorStop(1, "rgba(0,0,0,.5)");
+    ctx.fillStyle = v;
+    ctx.fillRect(0, 0, W, H);
+  }
+
+  // ---------- DÖNGÜ ----------
+  let last = performance.now();
+  function loop(now) {
+    const dt = Math.min((now - last) / 1000, 0.05);
+    last = now;
+    if (state === STATE.PLAY) update(dt); else time += dt;
+    draw();
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

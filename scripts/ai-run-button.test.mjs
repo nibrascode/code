@@ -141,7 +141,7 @@ test("«Aç» düyməsi", { skip, timeout: 120000 }, async (t) => {
 
   await t.test("çox böyük kod: toast, pəncərə açılmır", async () => {
     const page = await browser.newPage();
-    const big = Array.from({ length: 4000 }, (_, i) => `x${i} = "${Math.random().toString(36).slice(2)}${Math.random().toString(36).slice(2)}"`).join("\n");
+    const big = Array.from({ length: 12000 }, (_, i) => `x${i} = "${Math.random().toString(36).slice(2)}${Math.random().toString(36).slice(2)}"`).join("\n");
     await page.route("**/api/chat", (r) => r.fulfill({ contentType: "application/json", body: JSON.stringify({ success: true, reply: "```python\n" + big + "\n```" }) }));
     await open(page);
     await ask(page, "böyük kod");

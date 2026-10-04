@@ -743,7 +743,7 @@
       if (statErrors++ < 3) stat("error", "js");
     });
     const RUN_BASE = "https://nibrasterminal.vercel.app/run";
-    const RUN_MAX = 60000;
+    const RUN_MAX = 100000; // fragment (#) serverə getmir; 45 KB-lıq oyun CompressionStream olmayan brauzerdə də açılsın
     const CODE_CHARS = 900; // sətir sayından asılı olmayaraq bu qədər simvoldan uzun kod da yığılır
     const CODE_LINES = 16; // bundan uzun kod bloku yığılı (max hündürlük) göstərilir
     const RUN_LANGS = { python: "python", py: "python", py3: "python", javascript: "javascript", js: "javascript", html: "html", htm: "html" };

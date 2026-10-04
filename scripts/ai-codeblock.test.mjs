@@ -158,7 +158,7 @@ for (const file of ["public/ai/index.html", "public/ai.html"]) {
       await wait(60);
       assert.equal(p.log.opened.length, 1, g.slug);
       const url = p.log.opened[0];
-      assert.ok(url.length <= 60000 + 200, g.slug + " URL həddi");
+      assert.ok(url.length <= 100000 + 200, g.slug + " URL həddi");
       assert.equal(un(/c=([A-Za-z0-9_-]+)$/.exec(url)[1]), code, g.slug + ": «Aç» tam oyun");
       p.w.close();
     }

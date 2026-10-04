@@ -1,4 +1,4 @@
-// Real 10 oyunluq kolleksiya: index ↔ content/games ↔ api/_games/*.js, chat.js-də «oyun kodu yaz» axını (AI çağırılmadan), rotasiya, konkret növ, hijack yoxdur.
+// Real 16 oyunluq kolleksiya: index ↔ content/games ↔ api/_games/*.js, chat.js-də «oyun kodu yaz» axını (AI çağırılmadan), rotasiya, konkret növ, hijack yoxdur.
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
@@ -10,7 +10,9 @@ import { pickGame, shownGames } from "../api/_game.js";
 import { toModule } from "./build-games.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const SLUGS = ["2048", "ilan", "kerpic-qirma", "kostebek-vur", "mina-axtaran", "pinq-ponq", "qus-ucusu", "sonsuz-qacis", "xox", "yaddas-kartlari"];
+const SLUGS = ["2048", "baki-gecesi", "dan-yerine-qeder", "ilan", "kerpic-qirma", "kostebek-vur", "mina-axtaran", "neon-breakout", "neon-drive", "neon-void", "pinq-ponq", "qala-kesikcisi", "qus-ucusu", "sonsuz-qacis", "xox", "yaddas-kartlari"];
+// İstifadəçinin özünün yüklədiyi (olduğu kimi saxlanan) oyunlar: daha böyük ola bilər; kənar resurs yalnız Google Fonts (fallback şriftlə də işləyir) və <meta> şəkil ünvanı
+const USER_GAMES = ["baki-gecesi", "dan-yerine-qeder", "neon-breakout", "neon-drive", "neon-void", "qala-kesikcisi"];
 
 async function chat(body) {
   const res = { setHeader() {}, status(c) { this.code = c; return this; }, json(b) { this.body = b; return this; }, end() {} };
@@ -22,19 +24,27 @@ async function chat(body) {
 const codeOf = (reply) => /```html\n([\s\S]*)```$/.exec(reply)?.[1];
 const slugOf = (reply) => /^::game:: ([a-z0-9-]+) \| /m.exec(reply)?.[1];
 
-test("kolleksiya: 10 oyun, hər biri content/*.html ilə bayt-bayt eyni generated modulda", async () => {
+test("kolleksiya: 16 oyun, hər biri content/*.html ilə bayt-bayt eyni generated modulda", async () => {
   assert.deepEqual(GAMES.map((g) => g.slug).sort(), SLUGS);
-  assert.equal(new Set(GAMES.map((g) => g.title)).size, 10);
+  assert.equal(new Set(GAMES.map((g) => g.title)).size, 16);
   for (const g of GAMES) {
     const src = fs.readFileSync(path.join(ROOT, "content/games", g.slug + ".html"), "utf8");
     const mod = (await g.load()).default;
     assert.equal(mod, src, g.slug);
     assert.equal(fs.readFileSync(path.join(ROOT, "api/_games", g.slug + ".js"), "utf8"), toModule(src), g.slug + " generated köhnəlib: node scripts/build-games.mjs");
-    assert.ok(src.startsWith("<!doctype html>") && src.trimEnd().endsWith("</html>"));
+    if (USER_GAMES.includes(g.slug)) {
+      assert.ok(!/<script[^>]+src=/i.test(src), g.slug + ": kənar skript olmamalıdır");
+      const urls = (src.match(/https?:\/\/[^\s"'<>)]+/g) || []).filter((u) => !/^https:\/\/fonts\.(googleapis|gstatic)\.com\//.test(u) && !/^https:\/\/bolt\.new\/static\/og_default\.png$/.test(u));
+      assert.deepEqual(urls, [], g.slug + ": gözlənilməz kənar resurs");
+      assert.ok(src.length > 3000 && src.length < 100000, g.slug + " ölçü " + src.length);
+      assert.ok(/^<!doctype html>/i.test(src.replace(/^\uFEFF/, "").trimStart()) && src.trimEnd().endsWith("</html>"));
+    } else {
+      assert.ok(src.startsWith("<!doctype html>") && src.trimEnd().endsWith("</html>"));
+      assert.ok(!/<script[^>]+src=|https?:\/\//i.test(src), g.slug + ": kənar resurs olmamalıdır");
+      assert.ok(src.length > 3000 && src.length < 30000, g.slug + " ölçü " + src.length);
+      assert.ok(src.split("\n").length >= 80 && src.split("\n").length <= 250, g.slug + " sətir sayı");
+    }
     assert.ok(!src.includes("```") && !/yarat/i.test(src));
-    assert.ok(!/<script[^>]+src=|https?:\/\//i.test(src), g.slug + ": kənar resurs olmamalıdır");
-    assert.ok(src.length > 3000 && src.length < 30000, g.slug + " ölçü " + src.length);
-    assert.ok(src.split("\n").length >= 80 && src.split("\n").length <= 250, g.slug + " sətir sayı");
     assert.match(src, /touch-action|pointerdown|click/);
   }
 });
@@ -54,10 +64,10 @@ test("chat: «oyun kodu yaz» (AZ/TR/EN/RU/AR) — AI-siz tam kod, ```html bloku
   }
 });
 
-test("rotasiya: hər sorğu fərqli oyun (history böyüyür), 10-dan sonra təsadüfi amma sonuncu təkrarlanmır; «history»/«content» sahələri də qəbul olunur", async () => {
+test("rotasiya: hər sorğu fərqli oyun (history böyüyür), 16-dan sonra təsadüfi amma sonuncu təkrarlanmır; «history»/«content» sahələri də qəbul olunur", async () => {
   let messages = [];
   const seen = [];
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 16; i++) {
     const r = await chat({ message: "oyun kodu yaz", lang: "az", messages });
     const slug = slugOf(r.reply);
     assert.ok(!seen.includes(slug), `təkrar: ${slug} (${i}. sorğu)`);
@@ -72,7 +82,7 @@ test("rotasiya: hər sorğu fərqli oyun (history böyüyür), 10-dan sonra təs
     seen.push(slug);
     messages = [...messages, { role: "user", text: "oyun kodu yaz" }, { role: "assistant", text: r.reply }];
   }
-  assert.ok(new Set(seen.slice(10)).size > 3, "təsadüfilik");
+  assert.ok(new Set(seen.slice(16)).size > 3, "təsadüfilik");
 });
 
 test("konkret növ: açar söz uyğun oyunu verir (5 dildə)", async () => {
@@ -87,6 +97,10 @@ test("konkret növ: açar söz uyğun oyunu verir (5 dildə)", async () => {
     ["memory game code", "yaddas-kartlari"], ["yaddaş oyunu kodu yaz", "yaddas-kartlari"],
     ["köstəbək oyun kodu yaz", "kostebek-vur"], ["whack a mole game code", "kostebek-vur"],
     ["dino runner game code", "sonsuz-qacis"], ["sonsuz qaçış oyunu yaz", "sonsuz-qacis"],
+    ["dan yerinə qədər oyun kodu yaz", "dan-yerine-qeder"], ["Dan yerinə qədər kodu yaz", "dan-yerine-qeder"], ["survivors game code", "dan-yerine-qeder"],
+    ["bakı gecəsi oyun kodu yaz", "baki-gecesi"], ["Bakı gecəsi oyunu yaz", "baki-gecesi"],
+    ["qala keşikçisi oyun kodu yaz", "qala-kesikcisi"], ["tower defense game code", "qala-kesikcisi"], ["qala keşikçisi kodu ver", "qala-kesikcisi"],
+    ["neon drive oyun kodu yaz", "neon-drive"], ["neon void oyun kodu yaz", "neon-void"], ["neon breakout oyun kodu yaz", "neon-breakout"], ["write neon breakout game code", "neon-breakout"],
   ];
   for (const [q, want] of cases) assert.equal(pickGame(q, [])?.slug, want, q);
   // konkret istək təkrar olsa da verilir
@@ -94,6 +108,9 @@ test("konkret növ: açar söz uyğun oyunu verir (5 dildə)", async () => {
   const again = await chat({ message: "ilan oyun kodu yaz", messages: [{ role: "user", text: "x" }, { role: "assistant", text: first.reply }] });
   assert.equal(slugOf(again.reply), "ilan");
   assert.deepEqual(shownGames([{ role: "assistant", text: first.reply }]), ["ilan"]);
+  // «neon» və «yarış» bir neçə oyuna aiddir — onlardan biri
+  assert.ok(["neon-drive", "neon-void", "neon-breakout"].includes(pickGame("neon oyun kodu yaz", [])?.slug));
+  assert.ok(["baki-gecesi", "neon-drive"].includes(pickGame("yarış oyunu kodu yaz", [])?.slug));
   // kateqoriya
   assert.ok(["xox", "2048", "mina-axtaran", "yaddas-kartlari"].includes(pickGame("puzzle oyun kodu yaz", [])?.slug));
 });
@@ -107,14 +124,14 @@ test("hijack yoxdur: əlaqəsiz və ya bizdə olmayan sorğular oyun kodu qaytar
 
 test("body.games (client bütün söhbətdəki oyunları göndərir): tarixçə 8 mesajla kəsilsə də təkrar olmur", async () => {
   const seen = [];
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 16; i++) {
     const r = await chat({ message: "oyun kodu yaz", messages: [], games: seen.slice() });
     const slug = slugOf(r.reply);
     assert.ok(!seen.includes(slug), "təkrar " + slug);
     seen.push(slug);
   }
   const r = await chat({ message: "oyun kodu yaz", messages: [], games: seen });
-  assert.notEqual(slugOf(r.reply), seen[9]);
+  assert.notEqual(slugOf(r.reply), seen[15]);
   const bad = await chat({ message: "oyun kodu yaz", games: [1, "../x", "A B", "ilan"] });
   assert.ok(slugOf(bad.reply));
 });

@@ -132,7 +132,9 @@ export function pickGame(message, history, rand = Math.random, games = GAMES) {
   const toks = norm(raw).split(" ").filter(Boolean);
   if (!toks.length || toks.length > 14) return null;
   const isGame = (t) => GAME_W.has(t) || GAME_W.has(arBase(t));
-  const hasGame = toks.some(isGame);
+  // «oyun» sözü olmasa da, oyunun çoxsözlü adı/açar ifadəsi tam yazılıbsa («Qala keşikçisi kodu yaz», «tower defense kodu yaz») bu oyun istəyidir
+  const namedGame = !toks.some(isGame) && usable.some((g) => [g.title, ...(g.keywords || [])].some((kw) => { const p = prep(kw); return p.length >= 2 && !!matchPhrase(p, toks); }));
+  const hasGame = toks.some(isGame) || namedGame;
   const hasCode = toks.some((t) => CODE_W.has(t));
   const hasAction = toks.some((t) => ACTION_RE.some((re) => re.test(t)));
   if (!hasGame || !(hasCode || hasAction)) return null;
