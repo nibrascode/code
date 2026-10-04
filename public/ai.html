@@ -273,8 +273,33 @@
     .msg .ay.warn .at { font-size: 17px; line-height: 1.9; opacity: .85; }
     .msg .ay.warn .as { color: #ffd08a; }
     .msg .cb { margin-top: 8px; white-space: normal; }
-    .msg .cb pre { margin: 0; white-space: pre; }
-    .msg .cb .bar { display: flex; justify-content: flex-end; margin-top: 6px; }
+    .msg .cb pre { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+    .msg .cb .cw { position: relative; }
+    .msg .cb pre { box-sizing: border-box; }
+    .msg .cb.col pre { max-height: 300px; overflow-y: hidden; }
+    .msg .cb .fade { display: none; position: absolute; left: 0; right: 0; bottom: 0; height: 72px; border-radius: 0 0 10px 10px; background: linear-gradient(to bottom, rgba(7, 11, 22, 0), #070b16 88%); pointer-events: none; }
+    .msg .cb.col .fade { display: block; }
+    .msg .cb .bar { display: flex; align-items: center; justify-content: flex-end; gap: 8px; margin-top: 6px; }
+    .msg .cb .bar .runbtn { margin-left: auto; }
+    .morebtn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+      min-width: 34px;
+      padding: 0 12px;
+      border: 1px solid rgba(143, 180, 255, .4);
+      border-radius: 10px;
+      background: rgba(143, 180, 255, .1);
+      color: #bcd1ff;
+      font: inherit;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .morebtn[hidden] { display: none; }
+    .morebtn:hover, .morebtn:focus-visible { border-color: #8fb4ff; color: #e6efff; }
     .runbtn {
       display: inline-flex;
       align-items: center;
@@ -710,6 +735,8 @@
     });
     const RUN_BASE = "https://nibrasterminal.vercel.app/run";
     const RUN_MAX = 60000;
+    const CODE_CHARS = 900; // sətir sayından asılı olmayaraq bu qədər simvoldan uzun kod da yığılır
+    const CODE_LINES = 16; // bundan uzun kod bloku yığılı (max hündürlük) göstərilir
     const RUN_LANGS = { python: "python", py: "python", py3: "python", javascript: "javascript", js: "javascript", html: "html", htm: "html" };
     function b64u(bytes) {
       let s = "";
@@ -857,11 +884,17 @@
         const code = head ? part.slice(head[0].length) : part;
         const lang = head ? RUN_LANGS[head[1].toLowerCase()] : "";
         let bar = "";
+        let run = "";
         if (lang && code.trim()) {
           runs.push({ lang: lang, code: code.replace(/\n$/, "") });
-          bar = '<div class="bar"><button type="button" class="runbtn" data-run="' + (runs.length - 1) + '" aria-label="Kodu işlət və nəticəyə bax"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12-7.5a1 1 0 0 0 0-1.72l-12-7.5A1 1 0 0 0 7 4.5z"/></svg>Aç</button></div>';
+          run = '<button type="button" class="runbtn" data-run="' + (runs.length - 1) + '" aria-label="Kodu işlət və nəticəyə bax"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12-7.5a1 1 0 0 0 0-1.72l-12-7.5A1 1 0 0 0 7 4.5z"/></svg>Aç</button>';
         }
-        return '<div class="cb"><pre><code>' + escapeHtml(code) + "</code></pre>" + bar + "</div>";
+        // uzun kod (CODE_LINES sətirdən çox) yığılı göstərilir: solma + «Davamını aç ▾»; kodun özü DOM-da, «Aç», kopya və paylaşma isə həmişə TAM kodla işləyir
+        // uzun sətirlər qatlanır (pre-wrap), ona görə sətir sayı + simvol sayı ilə qiymətləndirilir; qalan blokların real hündürlüyü armCode ilə ekranda ölçülür
+        const long = code.replace(/\n$/, "").split("\n").length > CODE_LINES || code.length > CODE_CHARS;
+        const more = '<button type="button" class="morebtn" aria-expanded="false" aria-label="Kodun davamını aç"' + (long ? "" : " hidden") + ">Davamını aç ▾</button>";
+        bar = '<div class="bar">' + more + run + "</div>";
+        return '<div class="cb' + (long ? " col" : "") + '"><div class="cw"><pre><code>' + escapeHtml(code) + "</code></pre>" + '<div class="fade" aria-hidden="true"></div>' + "</div>" + bar + "</div>";
       }).join("");
       const queries = chipQ;
       el.querySelectorAll("button.chip[data-sq]").forEach(function (b) {
@@ -870,6 +903,18 @@
         b.addEventListener("click", function () {
           if (busy || btn.disabled) { note("Cavab gözlənilir"); return; }
           send(q);
+        });
+      });
+      el.querySelectorAll("button.morebtn").forEach(function (b) {
+        b.addEventListener("click", function () {
+          const cb = b.closest(".cb");
+          if (!cb) return;
+          const opening = cb.classList.contains("col");
+          cb.classList.toggle("col", !opening);
+          b.setAttribute("aria-expanded", opening ? "true" : "false");
+          b.setAttribute("aria-label", opening ? "Kodu bağla" : "Kodun davamını aç");
+          b.textContent = opening ? "Bağla ▴" : "Davamını aç ▾";
+          if (!opening && cb.scrollIntoView) cb.scrollIntoView({ block: "nearest" });
         });
       });
       el.querySelectorAll("button.runbtn").forEach(function (b) {
@@ -1072,6 +1117,15 @@
       const delta = el.getBoundingClientRect().top - msgs.getBoundingClientRect().top;
       msgs.scrollTop = Math.max(0, msgs.scrollTop + delta - 8);
     }
+    // Real hündürlük 300px-dən çoxdursa (uzun sətirlər qatlandıqda), blok yığılır və «Davamını aç ▾» göstərilir. Kod mətni dəyişmir.
+    function armCode(el) {
+      el.querySelectorAll(".cb:not(.col)").forEach(function (cb) {
+        const pre = cb.querySelector("pre");
+        const more = cb.querySelector(".morebtn");
+        if (!pre || !more || !more.hidden || cb.getAttribute("data-open")) return;
+        if (pre.scrollHeight > 304) { cb.classList.add("col"); more.hidden = false; }
+      });
+    }
     function bubble(text, kind, imageUrl, restore) {
       if (hello && hello.parentNode) hello.remove();
       const el = document.createElement("div");
@@ -1087,6 +1141,7 @@
       }
       if (kind === "b") addTools(el, text);
       msgs.appendChild(el);
+      armCode(el);
       if (restore) return el; // söhbət bərpasında renderItem özü sona çəkir
       if (kind.charAt(0) === "b") revealAnswer(el);
       else msgs.scrollTop = msgs.scrollHeight;

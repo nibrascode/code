@@ -1,3 +1,4 @@
+import { AsyncLocalStorage } from "node:async_hooks";
 import { cannedReply } from "./_canned.js";
 import { quranReply } from "./_quran.js";
 import { tawhidReply } from "./_tawhid.js";
@@ -31,7 +32,30 @@ const LEXICAL_HINT =
 
 export const LIMIT_REPLY = "Bu gün üçün sual limiti bitdi. Sabah yenidən yaz. Hazır cavabı olan suallar isə bu gün də cavablanır.";
 
-export const config = { maxDuration: 25 };
+export const config = { maxDuration: 45 };
+
+// Uzun kod (oyun, proqram) soruşulanda cavab 700 tokenda kəsilib yarımçıq qalırdı: belə sorğularda token/vaxt həddi böyüdülür.
+// Hədd sorğu daxilində (AsyncLocalStorage) saxlanır ki, provayder funksiyalarının imzası dəyişməsin.
+const budget = new AsyncLocalStorage();
+export const SHORT_TOKENS = 700;
+export const CODE_TOKENS = 3500;
+export function wantsLongCode(message, mode) {
+  if (mode === "code") return true;
+  const q = String(message || "").toLowerCase();
+  return /(^|[^\p{L}])(kod\w*|code\w*|coding|oyun\w*|game\w*|html|script\w*|skript\w*|proqram\w*|program\w*|canvas|javascript|python|код\w*|игр\w*|скрипт\w*)/u.test(q) || /(كود|لعبة|لعبه|برنامج|سكريبت)/.test(q);
+}
+function tokenLimit() { return budget.getStore()?.long ? CODE_TOKENS : SHORT_TOKENS; }
+function timeoutFor(base) {
+  const st = budget.getStore();
+  if (!st || !st.long) return AbortSignal.timeout(base);
+  return AbortSignal.timeout(Math.max(3000, Math.min(20000, st.deadline - Date.now())));
+}
+// Kəsilmiş (açıq qalmış ```) kod bloku bağlanır və istifadəçiyə xəbər verilir
+export function closeTruncatedFence(text) {
+  const t = String(text || "");
+  if ((t.match(/```/g) || []).length % 2 === 0) return t;
+  return t.replace(/\s+$/, "") + "\n```\n\nKod uzunluq həddinə çatdığı üçün yarımçıq qala bilər. Davamı üçün «davam et» yaz.";
+}
 
 export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -119,7 +143,7 @@ export default async function handler(req, res) {
     if (body.mode === "code") {
       history.unshift({
         role: "system",
-        text: "İstifadəçi kod istəyir. İşlək və qısa kod yaz. Kodu mütləq ``` dil ``` blokunda ver. İzahı bir-iki cümlə saxla. Kod yazmağı rədd etmə.",
+        text: "İstifadəçi kod istəyir. İşlək kod yaz. Kodu mütləq ``` dil ``` blokunda ver və bloku sonadək bağla; kodu yarımçıq buraxma (html oyun/səhifə üçün tək faylda, </html> ilə bitən tam kod). İzahı bir-iki cümlə saxla. Kod yazmağı rədd etmə.",
       });
     } else if (body.mode === "create") {
       history.unshift({
@@ -135,14 +159,16 @@ export default async function handler(req, res) {
     const notes = [];
     const started = Date.now();
 
+    const long = wantsLongCode(message, body.mode);
+    const ctx = { long, deadline: started + 40000 };
     for (const name of order) {
-      if (Date.now() - started > 18000) break;
-      const result = await ask(name, history, lexicalLoose ? LEXICAL_HINT + "\n\n" + message : message);
+      if (Date.now() - started > (long ? 30000 : 18000)) break;
+      const result = await budget.run(ctx, () => ask(name, history, lexicalLoose ? LEXICAL_HINT + "\n\n" + message : message));
       if (result.skipped) continue;
       if (result.ok) {
         // AI ayə mətni yazıbsa, ərəbcə hissə Tanzil məlumatı ilə əvəz olunur, [[ayah:S:A]] işarələri açılır
         const isRel = isReligious(message, body.mode) && !lexicalLoose;
-        let aiReply = finalizeAi(result.reply, message);
+        let aiReply = closeTruncatedFence(finalizeAi(result.reply, message));
         if (lexicalLoose) aiReply = stripNotice(aiReply); // AI özü də xəbərdarlıq yazarsa, silinir
         if (!aiReply.trim()) {
           notes.push(name + ": boş cavab");
@@ -426,7 +452,7 @@ async function xaiResponses(apiKey, history) {
   const upstream = await fetch("https://api.x.ai/v1/responses", {
     method: "POST",
     headers: { "Content-Type": "application/json", Authorization: "Bearer " + apiKey },
-    signal: AbortSignal.timeout(8000),
+    signal: timeoutFor(8000),
     body: JSON.stringify({
       model: "grok-4.7",
       input: [
@@ -576,11 +602,11 @@ async function askGemini(message) {
       {
         method: "POST",
         headers: { "Content-Type": "application/json", "x-goog-api-key": apiKey },
-        signal: AbortSignal.timeout(6000),
+        signal: timeoutFor(6000),
         body: JSON.stringify({
           systemInstruction: { parts: [{ text: SYSTEM }] },
           contents: [{ role: "user", parts: [{ text: message }] }],
-          generationConfig: { temperature: 0.5, maxOutputTokens: 700 },
+          generationConfig: { temperature: 0.5, maxOutputTokens: tokenLimit() },
         }),
       },
     );
@@ -601,11 +627,11 @@ async function complete({ url, apiKey, model, history, extraHeaders }) {
       Authorization: "Bearer " + apiKey,
       ...(extraHeaders || {}),
     },
-    signal: AbortSignal.timeout(8000),
+    signal: timeoutFor(8000),
     body: JSON.stringify({
       model,
       temperature: 0.4,
-      max_tokens: 700,
+      max_tokens: tokenLimit(),
       messages: [
         { role: "system", content: SYSTEM },
         ...history.map((item) => ({ role: item.role, content: item.text })),

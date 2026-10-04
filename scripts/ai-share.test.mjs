@@ -214,7 +214,7 @@ for (const file of ["public/ai/index.html", "public/ai.html"]) {
     const p = boot({ share: "ok", reply: () => GAME_REPLY });
     await p.say("oyun kodu yaz");
     assert.equal(p.d.querySelectorAll("#msgs .msg.b button.runbtn").length, 1, "Aç düyməsi yerindədir");
-    assert.equal(p.d.querySelectorAll("#msgs .msg.b .cb .bar button").length, 1, "alət düymələri kod blokunun içində deyil");
+    assert.equal(p.d.querySelectorAll("#msgs .msg.b .cb .bar button:not(.morebtn)").length, 1, "alət düymələri kod blokunun içində deyil");
     p.btn(".shbtn").click();
     await wait(10);
     const t = p.log.shared[0].text;
