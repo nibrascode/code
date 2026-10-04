@@ -258,3 +258,21 @@ test("çərçivə qeydi (edNote) heç bir dildə və heç bir səhifədə çıxm
     assert.ok(!String(r2.reply).includes("::note::"), lang + " p2");
   }
 });
+
+test("Təhvil işarəsi «ح»: mətndə (ح) kimi qalır və isnadı yeni sətrə bölmür (Müslim 90, 1, 8; Əbu Davud; Nəsai)", async () => {
+  const m90 = (await run({ message: "صحيح مسلم 90", noticeShown: false })).reply;
+  const m90n = m90.replace(/[\u064B-\u0652\u0670]/g, "");
+  assert.ok(m90n.includes("عن محمد بن جعفر. عن شعبة. (ح) وحدثني"), "Müslim 90: (ح) yerindədir, isnad bir sətirdədir");
+  assert.ok(!m90n.includes("جعفر.\nعن شعبة"), "Müslim 90: səhifə sonu yeni sətir yaratmır");
+  for (const q of ["صحيح مسلم 1", "صحيح مسلم 8", "سنن النسائي 5", "سنن أبي داود 226"]) {
+    const r = (await run({ message: q, noticeShown: false })).reply;
+    assert.ok(!/(^|[\s.،])ح(?![\u0621-\u064A\u064B-\u0652])/m.test(r.replace(/\(ح\)/g, "")), q + ": çılpaq «ح» qalmayıb");
+    assert.ok(!/\n\(ح\)|\(ح\)\n/.test(r), q + ": (ح) ayrı sətirdə deyil");
+  }
+  // bütün 6 kitabda təhvil işarəsi (ح) kimi: çılpaq ح qalmayıb, (ح) hər kitabda var
+  const idx = await __loadIndex();
+  for (const g of [0, 2000, 9000, 12000, 20000, 28000]) {
+    const h = await getHadith(idx, Math.min(g, idx.N - 1));
+    assert.ok(!/(^|[\s.،:])ح(?![\u0621-\u064A\u064B-\u0652)])/.test(h.text), "çılpaq ح: " + g);
+  }
+});
