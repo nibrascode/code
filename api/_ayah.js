@@ -286,6 +286,8 @@ function nearest(map, key, max) {
 }
 /** Ərəbcə: əvvəl boş açar (yazılış fərqləri), sonra (fuzzy=true olduqda) məsafə 1-2. Hər dəfə yalnız tək-yeganə surə. */
 function lookupArFuzzy(tokens, cue, maxN = 4) {
+  const blk = tokens.findIndex((t) => NOT_SURA_AR.has(arLight(t)) || NOT_SURA_AR.has(t));
+  if (blk >= 0) tokens = tokens.slice(0, blk);
   for (let len = Math.min(maxN, tokens.length); len >= 1; len--) {
     const base = arNameKey(tokens.slice(0, len));
     const key = cue ? arLoose(base) : arLight(base);
@@ -296,7 +298,25 @@ function lookupArFuzzy(tokens, cue, maxN = 4) {
   return null;
 }
 /** Latın: skelet açarı üzrə məsafə 1-2 (yalnız cue olduqda çağırılır). */
+// Surə adı olmayan, lakin yazılış baxımından surə adlarına yaxın gündəlik/sayt sözləri (fuzzy uyğunlaşdırmadan çıxarılır):
+// fetava→Fatihə, hədis→Hədid, namaza→Hümazə, zəkat→Zariyat, salat→Saffat, angel→Ənfal, buxari→Bəqərə …
+const NOT_SURA_LAT = new Set(
+  `fetava fatawa fatava fatawah fetawa fetavalar fatawalar fetva fatwa fetvalar fatwas fatwaa fetvo fatvo fatvalar fetvasi
+   hadis hadith hadiths hadits hadisler hedis hadisi hadisin hadisleri
+   namaz namaza namazi namazin namazlar zakat zekat zekati zekata salat salavat salawat selat salatu
+   angel angels melek melekler buxari bukhari bukari buhari muslim muslimin tirmizi tirmidhi nesai nasai
+   kitab kitabi kitablar kitap kitaplar book books tefsir tafsir tefsiri tafseer tefsirler nahv nahw nehv sarf serf lugha luga lugat lugati
+   fiqh fikih fikhi fiqhi akida akide aqida aqeedah tevhid tawhid sunnet sunnah sunna bidet bidah
+   sual sorgu cavab soru cevap question answer ruling rulings volume page cild cilt sehife sayfa
+   islam islom iman imam alim alimler elm ilm dua zikr dhikr rehmet rahmet tovbe tevbe tawba
+   macmu majmu mecmu mejmu macmuu macmuk mecmua teymiyye taymiyyah taymiyya ibni`
+    .split(/\s+/)
+    .filter(Boolean),
+);
+const NOT_SURA_CYR = new Set("фатва фетва фатвы фетвы фатавы фетавы хадис хадисы хадиса тафсир намаз закят закят салават ангел ангелы книга книги вопрос ответ сунна ислам иман дуа зикр".split(" "));
+const NOT_SURA_AR = new Set("فتاوي فتوي الفتاوي الفتوي حديث الحديث احاديث كتاب الكتاب تفسير التفسير نحو الصلاه صلاه زكاه الزكاه سنه السنه عقيده فقه لغه".split(" "));
 function lookupLatFuzzy(tokens, strong, maxN = 4) {
+  if (tokens.some((t) => NOT_SURA_LAT.has(t) || NOT_SURA_CYR.has(t))) tokens = tokens.slice(0, Math.max(0, tokens.findIndex((t) => NOT_SURA_LAT.has(t) || NOT_SURA_CYR.has(t))));
   for (let len = Math.min(maxN, tokens.length); len >= 1; len--) {
     const slice = tokens.slice(0, len);
     if (len > 1 && !slice.every((t) => /^[a-z]+$/.test(t))) continue;
@@ -704,12 +724,14 @@ export function ayahLookup(message, forceLang) {
 
 function limitNote(lang, s, total, shown, kind) {
   const nm = SURAS[s - 1];
-  const sample = `${nm.az} ${shown + 1}-${Math.min(total, shown + 15)}`;
-  if (lang === "ar") return kind === "range" ? `هذا النطاق طويل، عُرضت أول ${toArDigits(shown)} آية. اكتب نطاقًا أصغر.` : `السورة طويلة (${toArDigits(total)} آية)، عُرضت أول ${toArDigits(shown)} آية فقط. اكتب نطاق الآيات، مثل: «${SURA_NAMES_AR[s - 1]} ${shown + 1}-${Math.min(total, shown + 15)}».`;
-  if (lang === "en") return kind === "range" ? `This range is long; the first ${shown} verses are shown. Please specify a smaller range.` : `This surah is long (${total} verses); only the first ${shown} are shown. Specify a range, e.g. «${nm.en} ${shown + 1}-${Math.min(total, shown + 15)}».`;
-  if (lang === "tr") return kind === "range" ? `Bu aralık uzun; ilk ${shown} âyet gösterildi. Daha dar bir aralık yazın.` : `Bu sure uzun (${total} âyet); yalnız ilk ${shown} âyet gösterildi. Aralık yazın, örneğin: «${nm.tr} ${shown + 1}-${Math.min(total, shown + 15)}».`;
-  if (lang === "ru") return kind === "range" ? `Диапазон длинный; показаны первые ${shown} аятов. Укажите диапазон поменьше.` : `Сура длинная (${total} аятов); показаны только первые ${shown}. Укажите диапазон, например: «${nm.ru} ${shown + 1}-${Math.min(total, shown + 15)}».`;
-  return kind === "range" ? `Aralıq uzundur: ilk ${shown} ayə göstərildi. Daha kiçik aralıq yaz.` : `Surə uzundur (${total} ayə): yalnız ilk ${shown} ayə göstərildi. Davamı üçün aralıq yaz, məsələn: «${sample}».`;
+  const next = (name) => `${name} ${shown + 1}-${Math.min(total, shown + 15)}`;
+  // «Davamı» təklifi düymə kimi (::sug::): basanda həmin aralıq sorğusu göndərilir
+  const chip = (word, q) => `\n::sug::\n::sb:: ${word}: ${q} | ${q}\n::/sug::`;
+  if (lang === "ar") return kind === "range" ? `هذا النطاق طويل، عُرضت أول ${toArDigits(shown)} آية. اكتب نطاقًا أصغر.` : `السورة طويلة (${toArDigits(total)} آية)، عُرضت أول ${toArDigits(shown)} آية فقط.` + chip("المتابعة", next(SURA_NAMES_AR[s - 1]));
+  if (lang === "en") return kind === "range" ? `This range is long; the first ${shown} verses are shown. Please specify a smaller range.` : `This surah is long (${total} verses); only the first ${shown} are shown.` + chip("Continue", next(nm.en));
+  if (lang === "tr") return kind === "range" ? `Bu aralık uzun; ilk ${shown} âyet gösterildi. Daha dar bir aralık yazın.` : `Bu sure uzun (${total} âyet); yalnız ilk ${shown} âyet gösterildi.` + chip("Devamı", next(nm.tr));
+  if (lang === "ru") return kind === "range" ? `Диапазон длинный; показаны первые ${shown} аятов. Укажите диапазон поменьше.` : `Сура длинная (${total} аятов); показаны только первые ${shown}.` + chip("Продолжение", next(nm.ru));
+  return kind === "range" ? `Aralıq uzundur: ilk ${shown} ayə göstərildi. Daha kiçik aralıq yaz.` : `Surə uzundur (${total} ayə): yalnız ilk ${shown} ayə göstərildi.` + chip("Davamı", next(nm.az));
 }
 function badRefNote(lang, s, a1, a2) {
   const total = AYAH_COUNT[s - 1];
