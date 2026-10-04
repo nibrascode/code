@@ -93,7 +93,7 @@ test("sorğunun aşkarlanması: ərəbcə sözün mənası (ar/az/tr/en/ru)", ()
     "معنى آية الكرسي", "ما معنى قوله تعالى الحمد لله رب العالمين", "ما معنى كلمة في الآية ٢:٢٥٥", "تفسير كلمة الصبر", "تفسير سورة الفاتحة",
     "Bəqərə 3 ayəsində صبر sözünün mənası", "ما معنى لن في النحو", "ما إعراب كلمة علم", "ما معنى الحمد لله رب العالمين", "salam necəsən",
     "meaning of life", "Python nədir", "bu cümlənin mənası nədir", "ما هو الفاعل", "علم", "سلام عليكم", "ما معنى هذا الحديث", "fail nədir ərəbcə",
-    "صبر nədir", "kitab sözünün mənası", "qalb nə deməkdir", "what does sabr mean", "ما معنى كلمة التوحيد", "Quranda صبر sözünün mənası",
+    "صبر nədir", "kitab sözünün mənası", "ما معنى كلمة التوحيد", "Quranda صبر sözünün mənası",
     "What is the meaning of the word صبر in the Quran", "hədis nə deməkdir", "", "   ",
   ];
   for (const q of no) assert.equal(parseLughaQuery(q), null, q);

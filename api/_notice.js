@@ -70,3 +70,14 @@ export function withNotice(reply, lang) {
   body = body.split(OLD_AZ_NOTICE).join("").replace(/^\s+/, "").replace(/\n{3,}/g, "\n\n");
   return noticeBlock(lang) + (body.trim() ? "\n\n" + body.trim() : "");
 }
+
+// Bildirişi (::notice:: bloku, köhnə az mətni və AI-nin özünün yazdığı eyni xəbərdarlığı) mətndən çıxarır. Lüğət suallarında istifadə olunur.
+export function stripNotice(text) {
+  let body = String(text || "").replace(/(^|\n)::notice::\n[\s\S]*?\n::\/notice::(?=\n|$)/g, "$1");
+  body = body.split(OLD_AZ_NOTICE).join("");
+  // AI-nin sərbəst yazdığı variantlar (4 dildə «lead» + sitat)
+  for (const l of Object.keys(T)) {
+    body = body.split(T[l].lead + " " + T[l].quote).join("").split(T[l].lead).join("");
+  }
+  return body.replace(/^\s+/, "").replace(/\n{3,}/g, "\n\n").trim();
+}

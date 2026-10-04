@@ -5,13 +5,13 @@ import { tafsirReply, withTafsirSuggest } from "./_tafsir.js";
 import { nextReply } from "./_next.js";
 import { gameReply } from "./_game.js";
 import { ayahReply, finalizeAi, compactHistory, AYAH_PROMPT } from "./_ayah.js";
-import { lughaReply } from "./_lugha.js";
+import { lughaReply, isLexicalQuestion, lexicalFollowup } from "./_lugha.js";
 import { nahwReply } from "./_nahw.js";
 import { snippetReply } from "./_snippets.js";
 import { localReply } from "./_local.js";
 import { track } from "./_stats.js";
 import { isReligious } from "./_religious.js";
-import { withNotice, noticeLang, isSourceKind, OLD_AZ_NOTICE } from "./_notice.js";
+import { withNotice, noticeLang, isSourceKind, stripNotice, OLD_AZ_NOTICE } from "./_notice.js";
 
 const SYSTEM = [
   "Sən Nibras AI-san, Nibras Code saytının köməkçisisən.",
@@ -25,6 +25,9 @@ const SYSTEM = [
   "Əlaqə: nibrascode@gmail.com. Sayt: nibrascode.com.",
   AYAH_PROMPT,
 ].join(" ");
+
+const LEXICAL_HINT =
+  "DİQQƏT, bu sual üçün yuxarıdakı «dini sual gələndə yalnız xəbərdarlığı yaz» qaydası keçərli DEYİL. Bu, ərəbcə (və ya dini) sözün mənası (lüğət) sualıdır, dini hökm və ya fətva sualı deyil. Sözün mənasını qısa və düz izah et (kökü, əsas mənası). «Süni intellektdən din öyrənilməz» xəbərdarlığı və İbn Sirin sitatı YAZMA. Allahın sifətlərini təvil etmə.";
 
 export const LIMIT_REPLY = "Bu gün üçün sual limiti bitdi. Sabah yenidən yaz. Hazır cavabı olan suallar isə bu gün də cavablanır.";
 
@@ -68,19 +71,25 @@ export default async function handler(req, res) {
     const gameHist = Array.isArray(body.games) && body.games.length
       ? body.games.filter((x) => typeof x === "string" && /^[a-z0-9-]{1,40}$/.test(x)).slice(-60).map((x) => ({ role: "assistant", text: `::game:: ${x} | x` }))
       : hist;
-    for (const [kind, fn] of [["game", (m) => gameReply(m, gameHist)], ["next", (m) => nextReply(m, hist)], ["tafsir", tafsirReply], ["ayah", ayahReply], ["tawhid", tawhidReply], ["canned", cannedReply], ["quran", quranReply], ["book", lughaReply], ["book", nahwReply], ["din", dinReply], ["brand", brandReply]]) {
+    // Sözün mənası (lüğət) sualı dini məsləhət deyil: bildiriş verilmir, dinReply-ə düşmür, AI də xəbərdarlıq yazmır.
+    // strict: ərəb yazılı söz / «söz» işarəsi / tanış transliterasiya; loose: «what is the meaning of ihlas» kimi qısa sual (yalnız dinReply/AI üçün).
+    // Əvvəlki mesaj söz mənası sualı idisə və indi yalnız ərəbcə söz yazılıbsa («والصبر؟»), bu da lüğət sualıdır.
+    const follow = lexicalFollowup(message, hist);
+    const lexical = isLexicalQuestion(message) || !!follow;
+    const lexicalLoose = lexical || isLexicalQuestion(message, { loose: true });
+    for (const [kind, fn] of [["game", (m) => gameReply(m, gameHist)], ["next", (m) => nextReply(m, hist)], ["tafsir", tafsirReply], ["ayah", ayahReply], ["tawhid", tawhidReply], ["canned", cannedReply], ["quran", quranReply], ["book", (m) => lughaReply(follow || m)], ["book", nahwReply], ["din", (m) => (lexicalLoose ? null : dinReply(m))], ["brand", brandReply]]) {
       let r = await fn(message);
       if (r) {
         if (kind === "ayah") r = withTafsirSuggest(r, message); // təfsir istənilməyib: ayə/surə cavabına təfsir seçimləri əlavə olunur
         fixed = r;
         fromSource = isSourceKind(kind);
-        religious = kind !== "brand" && kind !== "game" && !(kind === "din" && body.mode === "code"); // kod rejimində ümumi din-söz uyğunluğu dini sual sayılmır
+        religious = kind !== "brand" && kind !== "game" && !lexical && !(kind === "din" && body.mode === "code"); // kod rejimində ümumi din-söz uyğunluğu dini sual sayılmır
         break;
       }
     }
     // Dini suallarda cavabın başında bildiriş (süni intellektdən din öyrənilməz). Yalnız client söhbətdə hələ göstərilmədiyini bildirəndə (noticeShown:false).
     // Daxili mənbədən gələn cavablarda (fromSource) bildiriş heç vaxt verilmir və notice:true qoyulmur.
-    const wantNotice = body.noticeShown === false && !fromSource;
+    const wantNotice = body.noticeShown === false && !fromSource && !lexicalLoose;
     const dressed = (reply, isRel) => (isRel && wantNotice ? withNotice(reply, noticeLang(message)) : reply);
     const relFlag = (isRel) => (isRel ? { religious: true } : {});
     // Hazır python/html/javascript/sql/css kod nümunələri: AI-yə getmədən (kod rejimi də daxil)
@@ -95,7 +104,7 @@ export default async function handler(req, res) {
       // Hazır cavab: xarici AI çağırılmayıb -> limitə sayılmır (usedAI:false)
       const isRel = fixed ? religious : false;
       // dinReply artıq özü bildirişdir: sonrakı dini suallarda (noticeShown:true) təkrar bildiriş yox, qısa cavab qalır
-      let out = dressed(ready, isRel);
+      let out = dressed(lexical ? stripNotice(ready) : ready, isRel);
       if (isRel && body.noticeShown === true && ready.startsWith(OLD_AZ_NOTICE) && ready !== OLD_AZ_NOTICE) out = ready.slice(OLD_AZ_NOTICE.length).replace(/^\s+/, "");
       res.status(200).json({ success: true, reply: out, usedAI: false, ...relFlag(isRel), ...(isRel && wantNotice ? { notice: true } : {}) });
       return;
@@ -118,6 +127,9 @@ export default async function handler(req, res) {
         text: "İstifadəçi yaradıcı fikir istəyir. Onun yazdığı mövzuya uyğun qısa, konkret və istifadə edilə bilən bir fikir ver. Boş ümumi cümlə ilə keçinmə.",
       });
     }
+    if (lexicalLoose && body.mode !== "code") {
+      history.unshift({ role: "system", text: LEXICAL_HINT });
+    }
     const hint = body.mode === "code" ? " kod" : body.mode === "create" ? " yaradıcı" : "";
     const order = pickOrder(message + hint);
     const notes = [];
@@ -125,12 +137,18 @@ export default async function handler(req, res) {
 
     for (const name of order) {
       if (Date.now() - started > 18000) break;
-      const result = await ask(name, history, message);
+      const result = await ask(name, history, lexicalLoose ? LEXICAL_HINT + "\n\n" + message : message);
       if (result.skipped) continue;
       if (result.ok) {
         // AI ayə mətni yazıbsa, ərəbcə hissə Tanzil məlumatı ilə əvəz olunur, [[ayah:S:A]] işarələri açılır
-        const isRel = isReligious(message, body.mode);
-        res.status(200).json({ success: true, reply: dressed(finalizeAi(result.reply, message), isRel), usedAI: true, ...relFlag(isRel), ...(isRel && wantNotice ? { notice: true } : {}) });
+        const isRel = isReligious(message, body.mode) && !lexicalLoose;
+        let aiReply = finalizeAi(result.reply, message);
+        if (lexicalLoose) aiReply = stripNotice(aiReply); // AI özü də xəbərdarlıq yazarsa, silinir
+        if (!aiReply.trim()) {
+          notes.push(name + ": boş cavab");
+          continue;
+        }
+        res.status(200).json({ success: true, reply: dressed(aiReply, isRel), usedAI: true, ...relFlag(isRel), ...(isRel && wantNotice ? { notice: true } : {}) });
         return;
       }
       notes.push(name + ": " + String(result.detail || "xəta").slice(0, 140));

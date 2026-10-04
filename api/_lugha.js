@@ -56,7 +56,7 @@ const LEAD = new Set(["ا", "م", "ت", "ي", "ن", "س", "ست", "است", "م�
 const WEAK = ["ا", "و", "ي"];
 const WEAKX = ["ا", "و", "ي", "ء"]; // həmzə də dəyişə bilər: «سال» ~ سأل
 // «الله» və s. üçün xüsusi hal
-const SPECIAL = new Map([["الله", "ءله"], ["لله", "ءله"], ["بالله", "ءله"], ["والله", "ءله"], ["تالله", "ءله"], ["اللهم", "ءله"], ["فالله", "ءله"], ["ءيمان", "ءمن"], ["ايمان", "ءمن"], ["الايمان", "ءمن"], ["الءيمان", "ءمن"], ["بالايمان", "ءمن"]]);
+const SPECIAL = new Map([["الله", "ءله"], ["لله", "ءله"], ["بالله", "ءله"], ["والله", "ءله"], ["تالله", "ءله"], ["اللهم", "ءله"], ["فالله", "ءله"], ["ءيمان", "ءمن"], ["ايمان", "ءمن"], ["الايمان", "ءمن"], ["الءيمان", "ءمن"], ["بالايمان", "ءمن"], ["ملائكه", "ءلك"], ["الملائكه", "ءلك"], ["ملاءكه", "ءلك"], ["الملاءكه", "ءلك"], ["ملائكه", "ءلك"], ["الءنبياء", "نبء"], ["ءنبياء", "نبء"], ["الانبياء", "نبء"], ["انبياء", "نبء"]]);
 
 const PFX_W = { "و": 0.8, "ف": 0.8, "ب": 1.2, "ل": 1.2, "ك": 2.5, "س": 2 };
 function prefixCost(p) {
@@ -178,6 +178,10 @@ export function rootCandidates(word, map) {
       continue;
     }
     add(stem, base); // dəqiq
+    // تَفْعَل (تقوى): ت başda و əvəzinə gəlir, sonu zəif: تقوى -> وقي (yalnız 4 hərfli, 2 zəif: «تسمى/تعالى» kimi feillərə toxunmur)
+    if (stem[0] === "ت" && n === 4 && WEAK.includes(stem[2]) && WEAK.includes(stem[3])) add("و" + stem[1] + stem[3], base + 0.4);
+    // أفعلاء (أنبياء، أولياء، أصفياء): kök = 2-ci, 3-cü hərf + zəif/həmzə (نبأ، ولي، صفو)
+    if (n === 4 && stem[0] === "ء" && stem[3] === "ي" && /ياء$/.test(word)) for (const [i, x] of ["ء", "ي", "و"].entries()) add(stem[1] + stem[2] + x, base + 1.2 + i * 0.1);
     // افتعال/متقين/اتقوا: ت əvəzinə و/ء (وقي، وعد، أخذ)
     if (n >= 3 && n <= 5 && "امينء".includes(stem[0]) && stem[1] === "ت") {
       const r = stem.slice(2);
@@ -205,6 +209,140 @@ export function rootCandidates(word, map) {
   return [...best].map(([root, cost]) => ({ root, cost })).sort((a, b) => a.cost - b.cost || a.root.length - b.root.length);
 }
 
+
+// ---------------------------------------------------------------- «söz mənası» sualının aşkarlanması (bildiriş və AI üçün)
+// Sual lüğət sualıdır (sözün mənası), yəni dini məsləhət/fətva deyil: bu halda «süni intellektdən din öyrənilməz» bildirişi verilmir.
+const foldLat = (t) =>
+  String(t || "")
+    .toLowerCase()
+    .replace(/\u0307/g, "")
+    .replace(/[əÆ]/g, "e").replace(/ı/g, "i").replace(/ö/g, "o").replace(/ü/g, "u").replace(/ş/g, "s").replace(/ç/g, "c").replace(/ğ/g, "g")
+    .replace(/[’'`´ʻʼ‘ʿʾ]/g, "");
+const CUE_LAT = /\b(menasi\w*|menasini|mena\b|manasi\w*|manasini|anlami\w*|anlam\w*|ne demek\w*|nə demək\w*|demekdir|meaning\w*|means?\b|mean\b|translat\w*|definition|define)\b/;
+const CUE_RU = /значени|значит|означа|смысл|перевод/i;
+const CUE_AR = /معنى|معني|المعنى|تعني|تعنى|يعني|يعنى|معناها|معناه|المراد|المقصود|مدلول/;
+const LEX_EXCL_QURAN = /(?:آي[ةه]|ايه|ايات|آيات|سور[ةه]|قرآن|القرآن|قران|تفسير|تفاسير|حديث|الحديث|﴿|﴾|\d\s*[:：]\s*\d)|\b(ay[eə]t?\w*|ayah|ayat|sur[eə]\w*|surah|quran\w*|kur'?an\w*|tef?sir\w*|tafsir\w*|verse|verses|hadis\w*|hədis\w*|hadith)\b|аят|сура|коран|тафсир|хадис/i;
+const LEX_EXCL_RULING = /\b(hokm\w*|hukm\w*|caiz\w*|cayiz\w*|olarmi|olar mi|edebilerem|eder mi|mumkundur|mumkun mu|fetva\w*|fatwa\w*|ruling|permissible|allowed|can i|should i|is it (ok|halal|haram|permitted)|sifat\w*|sifet\w*|esma\w*|asma\w*|attributes|names of allah)\b|нужно ли|можно ли|разрешено|допустимо|как поступить|ما (?:هو )?حكم|يجوز|فتوى|صفات الله|صفة الله|أسماء الله|(?:^|\s)هل\s|كيف أ/i;
+const LEX_WORD_MARK = /\b(soz\w*|kelme\w*|kelime\w*|word|words|term|lugat|lugah|luget\w*|slovo)\b|слов[оа]|термин|كلمة|كلمه|لفظ|مفردة/;
+const LEX_STOP = new Set([
+  "what","whats","is","are","the","of","does","do","a","an","in","arabic","how","to","say","this","that","word","term","meaning","mean","means","me","tell","please","define","definition","translate","translation",
+  "ne","nedir","nece","menasi","menasini","mena","manasi","anlami","anlam","demek","demekdir","dir","sozu","sozun","sozunun","soz","kelime","kelimesi","kelimenin","kelimesinin","kelmenin","kelmesi","kelme","erebce","arapca","ereb","arab","bu","bir","ve","ile","olarak","nin","nun","hansi",
+  "что","такое","значит","означает","значение","слова","слово","какое","смысл","перевод","на","арабском","у","это","в","и","как","переводится","есть","ли",
+]);
+function stripSuffixCue(f) {
+  return f.replace(/ne demek\w*/g, " ").replace(/ne demek/g, " ");
+}
+export function lexicalCue(message) {
+  const raw = String(message || "").replace(MARKS, "");
+  const f = foldLat(raw);
+  return CUE_LAT.test(f) || CUE_RU.test(raw) || CUE_AR.test(raw);
+}
+/** Mesaj «sözün mənası» (lüğət) sualıdır? strict: yalnız ərəb yazılı söz / «söz» işarəsi olan; loose: ≤2 məzmun sözü qalan qısa sual da sayılır. */
+export function isLexicalQuestion(message, { loose = false } = {}) {
+  const raw = String(message || "").replace(MARKS, "").replace(/\s+/g, " ").trim();
+  if (!raw || raw.length > 160) return false;
+  if (!lexicalCue(raw)) return false;
+  if (LEX_EXCL_QURAN.test(raw) || LEX_EXCL_RULING.test(foldLat(raw)) || LEX_EXCL_RULING.test(raw)) return false;
+  if (raw.split(/\s+/).length > 14 || /\d/.test(raw)) return false;
+  const f = foldLat(raw);
+  // ərəb yazılı söz olan mesajda yalnız lüğət sorğusu kimi təyin olunan forma sayılır («كلمة التوحيد», «معنى لا إله إلا الله» yox)
+  if (isAr(raw)) return parseLughaQuery(raw) !== null;
+  if (translitWord(raw, true)) return true;
+  const toks = stripSuffixCue(f).replace(/[^a-z\u0400-\u04FF\s]+/g, " ").split(/\s+/).filter((t) => t && !LEX_STOP.has(t));
+  if (LEX_WORD_MARK.test(f) || LEX_WORD_MARK.test(raw)) return toks.length >= 1 && toks.length <= 3;
+  if (!loose) return false;
+  return toks.length >= 1 && toks.length <= 2;
+}
+
+/**
+ * Əvvəlki istifadəçi mesajı söz mənası sualı idisə və indiki mesajda yalnız ərəbcə söz (1-2 token, işarəsiz) varsa,
+ * «ما معنى X» qaytarır (lüğət davamı: «والصبر؟»), yoxsa null.
+ */
+export function lexicalFollowup(message, hist) {
+  const raw = String(message || "").replace(MARKS, "").trim();
+  if (!raw || raw.length > 40 || !Array.isArray(hist)) return null;
+  const toks = cleanTokens(raw);
+  if (!toks.length || toks.length > 2 || !toks.every((t) => isAr(t) && !/[A-Za-z0-9]/.test(t))) return null;
+  if (toks.every((t) => FILLER.has(t) || FILLER.has(key(t)))) return null;
+  const users = hist.filter((m) => m && m.role !== "assistant" && String(m.text || "").trim());
+  // history-də cari mesaj da ola bilər: ondan əvvəlkini götür
+  const prev = users.filter((m) => String(m.text).trim() !== String(message).trim()).pop();
+  if (!prev || !isLexicalQuestion(String(prev.text), { loose: true })) return null;
+  return "ما معنى " + toks.join(" ");
+}
+
+// ---------------------------------------------------------------- tanış dini sözlərin latın/kiril yazılışı -> ərəbcə (yalnız lüğət sorğuları üçün)
+const TRANSLIT = {
+  "تقوى": "taqwa teqva takva taqva tekva takwa таква",
+  "صبر": "sabr sebr sabir sabr səbr сабр",
+  "إيمان": "iman imen iman иман",
+  "إسلام": "islam ислам",
+  "إحسان": "ihsan ehsan ihsan ихсан",
+  "زكاة": "zakat zekat zakah zekah закят",
+  "صلاة": "salat salah namaz salaat салят намаз",
+  "صيام": "siyam sawm oruc oruj сиям",
+  "حج": "hajj hacc hecc hac хадж",
+  "توحيد": "tawhid tevhid tovhid tawheed таухид тавхид",
+  "شرك": "shirk sirk şirk ширк",
+  "كفر": "kufr kufur kufr куфр",
+  "نفاق": "nifaq nifak нифак",
+  "توبة": "tawba tovbe tevbe tawbah тауба",
+  "شكر": "shukr sukr shukur şükr шукр",
+  "حكمة": "hikma hikmet hikmah хикма",
+  "علم": "ilm ilim ilm ильм",
+  "رحمة": "rahma rahmet rehmet rahmah рахма",
+  "قلب": "qalb kalb калб",
+  "جنة": "jannah cennet cennet jenna",
+  "جهنم": "jahannam cehennem cehenem",
+  "نبي": "nabi nebi",
+  "رسول": "rasul resul rasool расул",
+  "وحي": "wahy vahy vehy вахй",
+  "الله": "allah аллах",
+  "رحمن": "rahman rehman рахман",
+  "دعاء": "dua duaa",
+  "ظلم": "zulm zulm зульм",
+  "عدل": "adl adalet adl",
+  "أمانة": "amanah emanet amana",
+  "جهاد": "jihad cihad джихад",
+  "هجرة": "hijra hicret hijrah",
+  "سنة": "sunnah sunnet sunna",
+  "فقه": "fiqh fikih fikh фикх",
+  "عقيدة": "aqidah akide aqeedah акыда",
+  "بدعة": "bidah bidat bidʿah",
+  "ذكر": "dhikr zikr zikir",
+  "خشوع": "khushu husu",
+  "إخلاص": "ikhlas ihlas ikhlas ихлас",
+  "يقين": "yaqin yakin якин",
+};
+const TR_MAP = new Map();
+for (const [ar, list] of Object.entries(TRANSLIT)) for (const w of list.split(/\s+/)) TR_MAP.set(foldLat(w).replace(/ʿ/g, ""), ar);
+function translitLang(m) {
+  if (/[\u0400-\u04FF]/.test(m)) return "ru";
+  const f = foldLat(m);
+  if (/\b(what|meaning|mean|means|does|word)\b/.test(f)) return "en";
+  if (/\b(anlami|anlam|kelime\w*|ne demek|nedir|manasi)\b/.test(f) && !/[əƏ]/.test(m)) return "tr";
+  return detectLang(m);
+}
+/** Mesajda tanış latın/kiril yazılışlı söz varsa ərəbcə qarşılığı, yoxsa null (söz + ≤4 hərflik şəkilçi). */
+export function translitWord(message, exact = false) {
+  const toks = foldLat(String(message || "")).replace(/[^a-z\u0400-\u04FF\s]+/g, " ").split(/\s+/).filter(Boolean);
+  let found = null;
+  let others = 0;
+  for (const t of toks) {
+    let hit = null;
+    if (TR_MAP.has(t)) hit = TR_MAP.get(t);
+    else
+      for (let cut = 1; cut <= 4 && t.length - cut >= 4 && !hit; cut++) {
+        const base = t.slice(0, t.length - cut);
+        if (TR_MAP.has(base)) hit = TR_MAP.get(base);
+      }
+    if (hit && !found) found = hit;
+    else if (!LEX_STOP.has(t)) others++;
+  }
+  // exact: sorğuda başqa məzmun sözü olmamalıdır («Allahın sifətləri sözünün mənası» tək «الله» sorğusu deyil)
+  return found && (!exact || others === 0) ? found : null;
+}
+
 // ---------------------------------------------------------------- sorğunun aşkarlanması
 const QURAN_AR = /آي[ةه]|ايه|ايات|آيات|سور[ةه]|قرآن|القرآن|قران|تفسير|تفاسير|﴿|﴾|\d\s*[:：]\s*\d/;
 const QURAN_LAT = /\b(ay[eə]t?\w*|ayah|ayat|aya|sur[eə]\w*|surah|sura|quran\w*|qur'?an|kur'?an\w*|koran|tef?sir\w*|tafsir\w*|verse|verses|bəqərə|beqere|bakara|hadis\w*|hədis\w*|hadith)\b/i;
@@ -230,8 +368,16 @@ function cleanTokens(str) {
 export function parseLughaQuery(message) {
   let raw = String(message || "").replace(MARKS, "").replace(/\s+/g, " ").trim();
   if (!raw || raw.length > 200) return null;
-  if (!isAr(raw)) return null; // yalnız ərəb yazılı söz
+  let latinWord = null; // latın/kiril yazılışlı tanış söz (təqva, sabr, таква ...) -> ərəbcə
+  if (!isAr(raw)) {
+    latinWord = translitWord(raw, true);
+    if (!latinWord) return null; // yalnız ərəb yazılı söz (və ya tanış transliterasiya)
+  }
   if (QURAN_AR.test(raw) || QURAN_LAT.test(raw) || QURAN_RU.test(raw)) return null;
+  if (latinWord) {
+    if (!lexicalCue(raw)) return null;
+    return { word: latinWord, key: key(latinWord), second: null, lang: translitLang(message), translit: true };
+  }
   const arLetters = (raw.match(/[\u0621-\u064A\u0671-\u06D3]/g) || []).length;
   const latLetters = (raw.match(/[A-Za-zƏəĞğİıÖöŞşÜüÇç]/g) || []).length;
   const cyr = (raw.match(/[\u0400-\u04FF]/g) || []).length;
@@ -274,7 +420,7 @@ export function parseLughaQuery(message) {
   if (!tail) return null;
   // «هذا الحديث» (nəyə işarə olduğu bilinmir) və «كلمة التوحيد» kimi ifadələr lüğət sualı deyil
   if (/^(هذا|هذه|ذلك|تلك|هاذا|هؤلاء)(\s|$)/.test(tail.trim())) return null;
-  if (/كلم[ةه]\s+(?:ال)?(?:توحيد|اخلاص|إخلاص|شهاد[ةه]|سواء|تقوى)(\s|$)/.test(raw)) return null;
+  if (/كلم[ةه]\s+(?:ال)?(?:توحيد|اخلاص|إخلاص|شهاد[ةه]|سواء)(\s|$)/.test(raw)) return null;
   const toks = cleanTokens(tail).filter((t) => isAr(t));
   const core = toks.filter((t) => !FILLER.has(t) && !FILLER.has(key(t)));
   if (!core.length || core.length > 2 || toks.length > 3) return null;
