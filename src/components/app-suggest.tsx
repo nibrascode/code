@@ -53,10 +53,7 @@ export function AppSuggest() {
               </g>
               <rect x="3.1" y="4.4" width="9.8" height="8.6" rx="3" fill="#e7eefc" />
               <rect x="4.2" y="5.8" width="7.6" height="4.6" rx="2" fill="#16203a" />
-              <g className="bot-eyes">
-                <ellipse className="bot-eye bot-eye-l" cx="6.2" cy="8.1" rx="0.95" ry="1.2" fill="#7fe3ff" />
-                <ellipse className="bot-eye bot-eye-r" cx="9.8" cy="8.1" rx="0.95" ry="1.2" fill="#7fe3ff" />
-              </g>
+              <rect className="bot-face-glow" x="4.2" y="5.8" width="7.6" height="4.6" rx="2" fill="#7fe3ff" />
               <rect x="6.6" y="11.3" width="2.8" height="0.8" rx="0.4" fill="#8ea6cc" />
             </g>
           </g>

@@ -4810,12 +4810,9 @@ html[dir="rtl"] .suggest-bot {
   animation: bot-glow 1.6s ease-in-out infinite;
 }
 
-.bot-eyes {
-  animation: bot-look 6s ease-in-out infinite;
-}
-
-.bot-eye {
-  animation: bot-blink 4.2s ease-in-out infinite;
+.bot-face-glow {
+  opacity: 0.08;
+  animation: bot-face 3.6s ease-in-out infinite;
 }
 
 .bot-arm-r {
@@ -4852,11 +4849,10 @@ html[dir="rtl"] .suggest-bot {
   animation: bot-jump 0.62s cubic-bezier(0.3, 0.7, 0.4, 1) infinite;
 }
 
-.app-suggest a:hover .bot-eye,
-.app-suggest a:focus-visible .bot-eye,
-.app-suggest a:active .bot-eye {
-  animation: none;
-  transform: translateY(0.25px) scaleY(0.45) scaleX(1.25);
+.app-suggest a:hover .bot-face-glow,
+.app-suggest a:focus-visible .bot-face-glow,
+.app-suggest a:active .bot-face-glow {
+  animation-duration: 0.9s;
 }
 
 .app-suggest a:hover .bot-arm-r,
@@ -4941,43 +4937,26 @@ html[dir="rtl"] .suggest-bot {
   }
 }
 
-@keyframes bot-look {
+@keyframes bot-face {
   0%,
-  30%,
   100% {
-    transform: translateX(0);
+    opacity: 0.08;
   }
-  38%,
-  52% {
-    transform: translateX(-0.9px);
+  35%,
+  60% {
+    opacity: 0.95;
   }
-  62%,
-  80% {
-    transform: translateX(0.9px);
+  70% {
+    opacity: 0.4;
+  }
+  76% {
+    opacity: 0.95;
+  }
+  82% {
+    opacity: 0.25;
   }
   88% {
-    transform: translateX(0);
-  }
-}
-
-@keyframes bot-blink {
-  0%,
-  44%,
-  50%,
-  100% {
-    transform: scaleY(1);
-  }
-  47% {
-    transform: scaleY(0.08);
-  }
-  90% {
-    transform: scaleY(1);
-  }
-  92% {
-    transform: scaleY(0.08);
-  }
-  94% {
-    transform: scaleY(1);
+    opacity: 0.9;
   }
 }
 
@@ -5060,6 +5039,16 @@ html[dir="rtl"] .suggest-bot {
   }
 }
 
+@keyframes bot-face-calm {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .app-suggest a::before,
   .app-suggest img,
@@ -5074,6 +5063,11 @@ html[dir="rtl"] .suggest-bot {
 
   .suggest-bot .bot-spark {
     opacity: 0;
+  }
+
+  .suggest-bot .bot-face-glow {
+    opacity: 0.6;
+    animation: bot-face-calm 5s ease-in-out infinite !important;
   }
 }
 
