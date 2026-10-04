@@ -4723,25 +4723,54 @@ body.is-home .noise {
 
   .nx-nav {
     flex-wrap: nowrap;
-    gap: 8px 10px;
+    align-items: center;
+    gap: 8px;
     min-height: 0;
-    width: min(1180px, calc(100% - 24px));
+    width: min(1180px, calc(100% - 16px));
+  }
+
+  .nx-brand {
+    gap: 6px;
+    font-size: 13px;
+  }
+
+  .nx-brand img {
+    height: 22px;
   }
 
   .nx-links {
     flex: 1 1 auto;
+    justify-content: flex-end;
     min-width: 0;
     flex-wrap: nowrap;
     overflow: visible;
-    gap: 6px 10px;
-    font-size: 12.5px;
+    gap: 8px;
+    font-size: 12px;
+  }
+
+  .nx-links a {
+    white-space: nowrap;
+  }
+
+  .nx-nav .lang-menu {
+    flex: 0 0 auto;
   }
 
   .nx-nav .lang-trigger {
     flex: 0 0 auto;
-    min-width: 44px;
-    min-height: 32px;
-    padding-inline: 8px;
+    min-width: 0;
+    min-height: 30px;
+    padding: 0 7px;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+  }
+
+  .nx-nav .lang-pop {
+    position: fixed;
+    top: 48px;
+    inset-inline-end: 8px;
+    inset-inline-start: auto;
+    max-width: calc(100vw - 16px);
   }
 
   .nx-stage img {
