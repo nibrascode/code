@@ -4428,64 +4428,88 @@ body.is-home .noise {
   margin-top: 22px;
 }
 
-.app-suggest {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 14px;
-  align-items: center;
-  width: min(920px, calc(100% - 32px));
-  margin: 18px auto 10px;
-  color: #f4f7ff;
+@property --suggest-spin {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
 }
 
-.app-suggest p {
-  margin: 0;
-  color: #9eb6ef;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+@keyframes suggest-spin {
+  to {
+    --suggest-spin: 360deg;
+  }
+}
+
+.app-suggest {
+  position: relative;
+  width: min(38rem, calc(100% - 32px));
+  margin: 0 auto 20px;
 }
 
 .app-suggest a {
+  position: relative;
+  isolation: isolate;
   display: flex;
   align-items: center;
-  gap: 10px;
-  min-width: 0;
-  color: inherit;
+  gap: 12px;
+  width: 100%;
+  min-height: 48px;
+  padding: 6px 16px 6px 8px;
+  border-radius: 16px;
+  background: #070b16;
+  color: #f4f7ff;
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.05);
+}
+
+.app-suggest a::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  background: conic-gradient(
+    from var(--suggest-spin),
+    transparent 0deg,
+    transparent 230deg,
+    #9fd6ff 286deg,
+    #8d7bff 318deg,
+    transparent 352deg
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  animation: suggest-spin 3.6s linear infinite;
 }
 
 .app-suggest img {
-  width: 32px;
-  height: 32px;
+  position: relative;
+  z-index: 1;
+  width: 34px;
+  height: 34px;
   flex: 0 0 auto;
-  border-radius: 9px;
+  border-radius: 10px;
   object-fit: cover;
 }
 
-.app-suggest b,
-.app-suggest em {
-  display: block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
 .app-suggest b {
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.app-suggest em {
-  margin-top: 1px;
-  color: rgb(214 224 245 / 0.72);
-  font-size: 12px;
-  font-style: normal;
+  position: relative;
+  z-index: 1;
+  font-size: 15px;
+  font-weight: 750;
+  letter-spacing: -0.03em;
 }
 
 .nx-foot .app-suggest {
-  width: 100%;
-  margin: 4px 0 2px;
+  width: min(38rem, 100%);
+  margin: 2px 0 18px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-suggest a::before {
+    animation: none;
+  }
 }
 
 .nx-card {
