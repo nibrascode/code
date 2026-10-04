@@ -4653,6 +4653,10 @@ body.is-home .noise {
   font-weight: 900;
 }
 
+.suggest-bubble[data-kind="ok"] .suggest-bubble-badge {
+  background: #7de3a1;
+}
+
 .suggest-bot[data-act="alert"] .bot-arm-r {
   animation: bot-wave-fast 0.45s ease-in-out infinite;
 }

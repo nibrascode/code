@@ -32,6 +32,10 @@ const BEHAVIORS: [Behavior, number][] = [
   ["sulk", 1],
 ];
 const STEP = 8;
+const INTRO_MS = 10000; // səhifə açılandan (görünən vaxtla) bu qədər sonra bir dəfəlik giriş ssenarisi
+const ASK_TEXT = "Niyə yükləmirsən tətbiqi?";
+const OK_TEXT = "Deyəsən yüklədin";
+let introState = 0; // 0: başlamayıb, 1: gedir, 2: bitib (səhifə yüklənməsi başına bir dəfə)
 const BLEND = 8;
 
 const rand = (min: number, max: number) => min + Math.random() * (max - min);
@@ -78,13 +82,19 @@ function startWalker(bot: SVGSVGElement, host: HTMLElement, bubble: HTMLElement 
   let dir = 1;
   let lastAct: Act | null = null;
   let stopped = false;
-  let paused = false;
+  let paused = document.hidden;
   let timer = 0;
   let due = 0;
   let remaining = 0;
   let pending: (() => void) | null = null;
   let anim: Animation | null = null;
   let inView = true;
+  let curMove: { s0: number; s1: number } | null = null;
+  let introLeft = INTRO_MS;
+  let introAt = 0;
+  let introTimer = 0;
+  let introWaiting = false;
+  let busy = false; // təsadüfi qabarcıq/küsmə gedir: giriş ssenarisi gözləyir
 
   const dims = () => [Math.max(host.offsetWidth, 40), Math.max(host.offsetHeight, 20)] as const;
   const setPose = () => {
@@ -113,9 +123,15 @@ function startWalker(bot: SVGSVGElement, host: HTMLElement, bubble: HTMLElement 
         timer = 0;
         remaining = Math.max(0, due - performance.now());
       }
+      if (introTimer) {
+        window.clearTimeout(introTimer);
+        introTimer = 0;
+        introLeft = Math.max(0, introAt - performance.now());
+      }
       anim?.pause();
     } else {
       if (pending) timer = window.setTimeout(fire, remaining);
+      if (introState === 0 && !introTimer && !introWaiting && !stopped) armIntro();
       anim?.play();
     }
   };
@@ -124,15 +140,26 @@ function startWalker(bot: SVGSVGElement, host: HTMLElement, bubble: HTMLElement 
   let walked = 0; // son dayanmadan bəri yeriyiş vaxtı (ms)
   let lastBehavior: Behavior | null = null;
   let afterRun: (() => void) | null = null;
+  let sulkAway: [number, number] = [3600, 4600];
+  let sulkBack: (() => void) | null = null;
   let lastBubble = performance.now() - 20000; // ilk 25 san qabarcıq yoxdur
 
-  /** Dayananda bəzən «tətbiqi yüklə» qabarcığı, sonra qısa fasilə və küsüb getmə. */
-  const bubbleStop = () => {
+  const bubbleText = bubble?.querySelector<HTMLElement>(".suggest-bubble-text") ?? null;
+  const bubbleBadge = bubble?.querySelector<HTMLElement>(".suggest-bubble-badge") ?? null;
+
+  const hideBubble = () => bubble?.classList.remove("on");
+
+  /** Qabarcığı robotun üstündə (üst xətt), altında (alt xətt) və ya yan xətdə kartın üstündə göstərir. */
+  const showBubble = (text: string, ok: boolean, force: boolean) => {
     if (!bubble) return false;
     const [W, H] = dims();
     const { x, y } = poseAt(s, W, H);
     const top = y < 1;
-    if (!top && y < H - 1) return false; // yalnız üst/alt xətdə: kartın mətnini örtməsin
+    const bottom = y > H - 1;
+    if (!top && !bottom && !force) return false; // təsadüfi qabarcıq: kartın mətnini örtməsin
+    if (bubbleText) bubbleText.textContent = text;
+    if (bubbleBadge) bubbleBadge.textContent = ok ? "✓" : "!";
+    bubble.dataset.kind = ok ? "ok" : "ask";
     const bw = bubble.offsetWidth;
     const bh = bubble.offsetHeight;
     const rect = host.getBoundingClientRect();
@@ -141,17 +168,24 @@ function startWalker(bot: SVGSVGElement, host: HTMLElement, bubble: HTMLElement 
     const maxL = vw - 8 - rect.left - bw;
     const left = Math.min(Math.max(x - bw / 2, minL), Math.max(minL, maxL));
     bubble.style.left = `${left.toFixed(1)}px`;
-    bubble.style.top = `${(top ? -bh - 14 : H + 14).toFixed(1)}px`;
+    bubble.style.top = `${(bottom ? H + 14 : top ? -bh - 14 : -bh - 8).toFixed(1)}px`;
     bubble.style.setProperty("--tail", `${Math.min(Math.max(x - left, 12), bw - 12).toFixed(1)}px`);
-    bubble.dataset.side = top ? "top" : "bottom";
+    bubble.dataset.side = bottom ? "bottom" : "top";
     bubble.classList.add("on");
+    return true;
+  };
+
+  /** Dayananda bəzən «tətbiqi yüklə» qabarcığı, sonra qısa fasilə və küsüb getmə. */
+  const bubbleStop = () => {
+    if (!showBubble(ASK_TEXT, false, false)) return false;
+    busy = true;
     lastBubble = performance.now();
     lastAct = null;
     bot.dataset.act = "alert";
     bot.style.removeProperty("--gait");
     walked = 0;
     later(() => {
-      bubble.classList.remove("on");
+      hideBubble();
       later(() => {
         lastBehavior = "sulk";
         sulk();
@@ -184,6 +218,7 @@ function startWalker(bot: SVGSVGElement, host: HTMLElement, bubble: HTMLElement 
     let delta = (((target - s) % P) + P) % P;
     if (delta > P / 2) delta -= P;
     dir = delta < 0 ? -1 : 1;
+    busy = true;
     bot.dataset.act = "sulk";
     afterRun = leave;
     run([{ len: Math.max(Math.abs(delta), 1), speed: Math.max(34, Math.abs(delta) / 7), easing: "ease-in-out" }], 0);
@@ -215,6 +250,8 @@ function startWalker(bot: SVGSVGElement, host: HTMLElement, bubble: HTMLElement 
       "linear",
       () => {
         bot.style.transform = at(x1, up);
+        const [awayMin, awayMax] = sulkAway;
+        sulkAway = [3600, 4600];
         later(() => {
           if (stopped) return;
           const back = Math.max(3500, (out / 30) * 1000);
@@ -231,22 +268,118 @@ function startWalker(bot: SVGSVGElement, host: HTMLElement, bubble: HTMLElement 
               setPose();
               bot.style.removeProperty("--gait");
               walked = 0;
-              idle();
+              const back2 = sulkBack ?? idle;
+              sulkBack = null;
+              back2();
             },
           );
-        }, rand(3600, 4600));
+        }, rand(awayMin, awayMax));
       },
     );
   };
 
   const idle = () => {
-    if (performance.now() - lastBubble > 45000 && Math.random() < 0.3 && bubbleStop()) return;
+    busy = false;
+    if (introWaiting) {
+      introWaiting = false;
+      startIntro();
+      return;
+    }
+    if (introState === 2 && performance.now() - lastBubble > 45000 && Math.random() < 0.3 && bubbleStop()) return;
     const act = pick(ACTS.filter((x) => x !== lastAct));
     lastAct = act;
     bot.dataset.act = act;
     bot.style.removeProperty("--gait");
     walked = 0;
     later(() => plan(true), rand(800, act === "rest" ? 4000 : 3200));
+  };
+
+  /** Gedişi olduğu yerdə dondurur (animasiya, taymerlər), mövqeyi s-ə yazır. */
+  const interrupt = () => {
+    window.clearTimeout(timer);
+    timer = 0;
+    pending = null;
+    afterRun = null;
+    if (anim) {
+      if (curMove) {
+        const p = anim.effect?.getComputedTiming().progress ?? 0;
+        s = curMove.s0 + (curMove.s1 - curMove.s0) * Math.min(Math.max(p, 0), 1);
+      }
+      anim.cancel();
+      anim = null;
+    }
+    curMove = null;
+    setPose();
+  };
+
+  const introBubble1 = () => {
+    if (stopped) return;
+    bot.dataset.act = "alert";
+    bot.style.removeProperty("--gait");
+    showBubble(ASK_TEXT, false, true);
+    later(() => {
+      hideBubble();
+      later(() => {
+        lastBehavior = "sulk";
+        sulkAway = [4600, 5400];
+        sulkBack = introReturned;
+        sulk();
+      }, 900);
+    }, 2800);
+  };
+
+  const introReturned = () => {
+    if (stopped) return;
+    bot.dataset.act = "cheer";
+    bot.style.removeProperty("--gait");
+    showBubble(OK_TEXT, true, true);
+    later(() => {
+      hideBubble();
+      introState = 2;
+      busy = false;
+      walked = 0;
+      lastBubble = performance.now();
+      later(() => plan(true), 800);
+    }, 3000);
+  };
+
+  const startIntro = () => {
+    introTimer = 0;
+    if (stopped || introState !== 0) return;
+    if (busy) {
+      introWaiting = true; // təsadüfi qabarcıq/küsmə bitəndə başlayacaq
+      return;
+    }
+    introState = 1;
+    interrupt();
+    const [W, H] = dims();
+    const P = 2 * (W + H);
+    const { y } = poseAt(s, W, H);
+    if (y < 1 || y > H - 1) {
+      introBubble1();
+      return;
+    }
+    // yan xətdədirsə, ən yaxın üst/alt nöqtəyə yeriyir
+    let best = 0;
+    let bestAbs = Infinity;
+    for (const c of [24, W - 24, W + H + 24, 2 * W + H - 24]) {
+      let d = (((c - s) % P) + P) % P;
+      if (d > P / 2) d -= P;
+      if (Math.abs(d) < bestAbs) {
+        bestAbs = Math.abs(d);
+        best = d;
+      }
+    }
+    s = ((s % P) + P) % P;
+    dir = best < 0 ? -1 : 1;
+    bot.dataset.act = "walk";
+    afterRun = introBubble1;
+    run([{ len: Math.max(bestAbs, 1), speed: Math.max(90, bestAbs / 2.5), easing: "ease-in-out" }], 0);
+  };
+
+  const armIntro = () => {
+    introAt = performance.now() + introLeft;
+    introTimer = window.setTimeout(startIntro, introLeft);
   };
 
   const pickBehavior = (): Behavior => {
@@ -364,7 +497,9 @@ function startWalker(bot: SVGSVGElement, host: HTMLElement, bubble: HTMLElement 
       frames.push({ transform: poseCss(s + ((s1 - s) * k) / n, W, H), offset: k / n });
     }
     bot.style.setProperty("--gait", `${Math.max(0.12, 0.25 + 18 / speed - (speed > 300 ? 0.2 : 0)).toFixed(2)}s`);
+    curMove = { s0: s, s1 };
     play(frames, Math.max(500, (len / speed) * 1000), easing, () => {
+      curMove = null;
       s = s1;
       setPose();
       walked += (len / speed) * 1000;
@@ -383,6 +518,7 @@ function startWalker(bot: SVGSVGElement, host: HTMLElement, bubble: HTMLElement 
   setPose();
   bot.dataset.act = "rest";
   later(() => plan(true), rand(600, 1500));
+  if (introState === 0 && !paused) armIntro();
 
   const onVis = () => sync();
   document.addEventListener("visibilitychange", onVis);
@@ -399,6 +535,8 @@ function startWalker(bot: SVGSVGElement, host: HTMLElement, bubble: HTMLElement 
     stopped = true;
     window.clearTimeout(timer);
     anim?.cancel();
+    window.clearTimeout(introTimer);
+    if (introState === 1) introState = 2;
     bubble?.classList.remove("on");
     document.removeEventListener("visibilitychange", onVis);
     io?.disconnect();
@@ -448,7 +586,7 @@ export function AppSuggest() {
         <small>{LABEL[lang]}</small>
         <span ref={bubbleRef} className="suggest-bubble" aria-hidden="true">
           <span className="suggest-bubble-badge">!</span>
-          Niyə yükləmirsən tətbiqi?
+          <span className="suggest-bubble-text">Niyə yükləmirsən tətbiqi?</span>
         </span>
         <svg ref={botRef} className="suggest-bot" viewBox="-1.5 -2 19 21" aria-hidden="true">
           <g className="bot-sparks" fill="#fff6c2">
