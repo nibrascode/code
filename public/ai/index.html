@@ -332,19 +332,16 @@
       animation: nx-edge 4.2s linear infinite;
     }
     .ring::before {
-      inset: -1.5px;
+      inset: 0;
       z-index: 2;
-      padding: 1.5px;
+      padding: 1px;
       -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
       -webkit-mask-composite: xor;
       mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
       mask-composite: exclude;
     }
     .ring::after {
-      inset: -8px;
-      z-index: 0;
-      opacity: .55;
-      filter: blur(10px);
+      display: none;
     }
     .composer {
       position: relative;
