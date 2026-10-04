@@ -58,7 +58,7 @@ export async function providerHealth(req, { timeoutMs = 12_000 } = {}) {
         if (full && !r.ok) row.detail = r.detail.replace(/\s+/g, " ").slice(0, 160);
       }
       if (ALIASES[id]) row.otherEnvPresent = Object.fromEntries(ALIASES[id].filter((n) => !PROVIDER_KEYS[id].includes(n)).map((n) => [n, Boolean(env(n))]));
-      if (full || !present) row.expects = PROVIDER_KEYS[id];
+      row.expects = PROVIDER_KEYS[id]; // gözlənilən dəyişən adları (sirr deyil), sıra = üstünlük
       return row;
     }),
   );

@@ -10,6 +10,7 @@ Hər tərcümənin altında kiçik sətir (`footer`) qaytarılır: `Nibras Tərc
 | Mənbə | Nə üçün | Şərt |
 |---|---|---|
 | [HadeethEnc.com](https://hadeethenc.com) (IslamHouse) | 3574 seçilmiş hədis: ərəbcə + az (475) / tr (2150) / en (2328) / ru (2249) hazır insan tərcümələri, hökm və mənbə qeydi | «Mətn dəyişdirilmədən, HadeethEnc.com göstərilməklə» (HadeethEnc API şərtləri) – mətn olduğu kimi saxlanılır |
+| [IslamHouse.com](https://islamhouse.com/az/books/2831432/) «Şərh Riyadus-Salihin» (ən-Nəvəvi; şərh: M. ibn Saleh əl-Useymin), az tərcümə: Əlixan Musayev | 106 hədis üçün **azərbaycanca** hazır insan tərcüməsi (Riyadus-Salihin №1–239 aralığı); ərəbcə mətn Şamilə (Riyad as-Salihin, Şuayb əl-Arnaut nəşri) | IslamHouse: mətn dəyişdirilmədən, mənbə göstərilməklə. Yalnız hədis mətninin tərcüməsi + mənbə cümləsi götürülür (şərh atılır); PDF şriftindəki ﷺ/رضي الله عنه simvolları bərpa edilib. Hizalama: PDF haşiyəsindəki mənbə nömrəsi (Buxari/Muslim) ilə Şamilə mətninin söz üst-üstə düşməsi (≥75% və ya eyni nömrədə ≥50%) |
 | Korpusdan çıxarılmış sabit ifadələr | `صلى الله عليه وسلم`, `رضي الله عنه/عنها/عنهما` – hər dildə ən çox işlənən qarşılıq (say göstərilir) | HadeethEnc korpusu |
 
 Quran ayələri bu sistemə **daxil deyil**. Hədis kitablarının hazır tərcümələri olan başqa dəstlər (fawazahmed0/hadith-api: Muhsin Khan, Siddiqui və s.) tərcüməçi müəllif hüququ aydın olmadığı üçün **qoşulmayıb**.
@@ -64,6 +65,11 @@ Mühərrik cavabı `method: "model"` olaraq qayıdır və «Maşın tərcüməsi
 
 ### Host mühərriki: `setDefaultEngine` + `method: "ensemble"`
 Host tətbiq (məs. Nibras AI saytı) `setDefaultEngine(async ({ text, from, to, ui, ctx }) => …)` ilə öz mühərrikini qeydiyyata alır; cavab `{ translation, engine, confidence, method?: "ensemble", noteKeys?: [...], meta? }` və ya `{ limited: "rate"|"budget" }` və ya `null`. `translate({ ctx })` və `handleTranslate(body, makeCtx(ip))` sorğu konteksti (IP, `engineChars` simvol limiti, `deadlineAt`) ötürür. Nibras saytında bu mühərrik `api/_translate-ensemble.js`-dir (saytın artıq qoşulmuş AI provayderlərinin konsensusu, tərcümə yaddaşı, limitlər). Nəticə həmişə `machine: true`, `flags: [...]` ilə qayıdır; `debug: true` göndərilsə `diagnostics` (provayder id-ləri, gecikmə) əlavə olunur (UI göstərmir). Mətn limiti: 3000 simvol (`MAX_TEXT`, `maxChars` ilə dəyişir). Mətn daha uzun hadisənin içində hazır hədisi ehtiva edir və örtük <60%-dirsə, bütün mətn mühərrikə gedir, hədisin hazır tərcüməsi `parallel[]`-də qalır.
+
+## Əlavə mənbələr (`src/data/ext.js`)
+`node scripts/build-ext.mjs <items.json>` hazır tərcümələri `ext.js`-ə yığır (id ≥ 900000). `loadPart('ar'|'az'|…)` onları HadeethEnc sətirlərinin sonuna əlavə edir, axtarış kodu eyni qalır; eyni hədis iki mənbədə olarsa hədəf dildə hazır tərcüməsi olan seçilir. `coverage()` HadeethEnc saylarını dəyişmir, əlavələr `extra` sahəsindədir.
+
+**Qoşulmayan mənbələr (səbəb):** Kütübü-sittənin tr/ru/en tərcümələri (fawazahmed0/sunnah.com/i-muslim: tərcüməçi müəllif hüququ, açıq lisenziya yoxdur); IslamHouse az PDF-ləri «Müxtəsər Səhih əl-Buxari», «Səhih Müslim», «Qırx hədis» (şrift kodlaşdırması itkili/şifrəli – ə, ı, ş, ğ itir; təmiz çıxarış mümkün deyil); USC-MSA, Sunnah.com (qeyri-kommersiya/müəllif hüququ).
 
 ## Məlumatın yenilənməsi
 `node scripts/fetch-hadeethenc.mjs <RAW>` → `node scripts/build-data.mjs <RAW>`. Mətn dəyişdirilmir.

@@ -4,7 +4,7 @@
 //  3) tapılmasa: method "no-source" (heç vaxt uydurma yoxdur);
 //  4) İSTƏYƏ BAĞLI: mühərrik adapteri (setDefaultEngine / opts.engine / TRANSLATE_ENGINE_URL, src/adapter.js). 1-3 nəticə vermədisə (və ya hədəf dildə insan tərcüməsi yoxdursa) çağırılır:
 //     method "model" (tək mühərrik) və ya "ensemble" (bir neçə modelin konsensusu; adapter özü method qaytarır). Həmişə «maşın tərcüməsi» kimi etiketlənir, insan tərcümələri parallel[]-də qalır.
-import { loadPart } from "./data.js";
+import { loadPart, extSource } from "./data.js";
 import { tokens, quotedCore, numbersIn, detectScript, normAr, normLat } from "./normalize.js";
 import { msg, footerFor, BRAND, UI_LANGS } from "./messages.js";
 import { envEngine } from "./adapter.js";
@@ -150,7 +150,12 @@ async function langRow(lang, i) {
   }
   return (await loadPart(lang))[i] || null;
 }
-const srcOf = (lang, id) => ({ name: SOURCE_NAME, url: hadithUrl(lang === "ru" || lang === "en" || lang === "ar" || lang === "tr" || lang === "az" ? lang : "en", id), lang, license: SOURCE_LICENSE });
+const srcOf = (lang, id) => {
+  const x = id >= 900000 ? extSource(id, lang) : null;
+  if (x) return { name: x.name, url: x.url, lang, license: x.license };
+  return srcOfHe(lang, id);
+};
+const srcOfHe = (lang, id) => ({ name: SOURCE_NAME, url: hadithUrl(lang === "ru" || lang === "en" || lang === "ar" || lang === "tr" || lang === "az" ? lang : "en", id), lang, license: SOURCE_LICENSE });
 
 /** Sabit ifadələr: tam bərabərlik (normallaşdırılmış) -> cavab. Bir neçə ifadə eyni mətni verirsə (məs. az «Allah ondan razı olsun» həm عنه, həm عنها) hamısı qaytarılır. */
 async function lexiconLookup(text, from, to) {
@@ -291,6 +296,17 @@ export async function translate(opts = {}) {
   }
   if (!best) return noSource({ from: fromLangs[0] });
 
+  // Eyni hədis bir neçə mənbədə ola bilər (HadeethEnc + əlavə mənbə): bərabər uyğunluqlar arasında hədəf dildə hazır tərcüməsi olan seçilir
+  if (best.length > 1 && best[0].type !== "partial") {
+    const t0 = best[0];
+    const tie = best.filter((c) => c.type === t0.type && c.conf === t0.conf && c.Lc >= t0.Lc * 0.95 && c.cq >= t0.cq * 0.95);
+    if (tie.length > 1) {
+      const has = [];
+      for (const c of tie) has.push(Boolean(await langRow(to, c.i)));
+      const k = has.findIndex(Boolean);
+      if (k > 0) best = [tie[k], ...best.filter((c) => c !== tie[k])];
+    }
+  }
   const top = best[0];
   const rowAr = await arRow(top.i);
   const id = rowAr[0];
@@ -303,7 +319,7 @@ export async function translate(opts = {}) {
     grade_ar: rowAr[3],
     reference: rowAr[4],
     covered_words: top.L,
-    url: hadithUrl("ar", id),
+    url: id >= 900000 ? extSource(id, "ar")?.url || hadithUrl("ar", id) : hadithUrl("ar", id),
   };
   const sameTier = best.filter((c) => c.type === top.type && c.Lc >= top.Lc * 0.95 && c.cq >= top.cq * 0.95);
   const candidates = [];
@@ -382,7 +398,19 @@ export async function formulaHints(to) {
 export async function coverage() {
   const out = {};
   const ar = await loadPart("ar");
-  out.ar = ar.length;
-  for (const l of ["az", "tr", "en", "ru"]) out[l] = Object.keys(await loadPart(l)).length;
+  const he = ar.filter((r) => r[0] < 900000).length;
+  out.ar = he;
+  for (const l of ["az", "tr", "en", "ru"]) {
+    const d = await loadPart(l);
+    out[l] = Object.keys(d).filter((k) => ar[k] && ar[k][0] < 900000).length;
+  }
+  // əlavə mənbələr (HadeethEnc-dən kənar): dil -> say
+  const extra = {};
+  for (const l of ["az", "tr", "en", "ru"]) {
+    const d = await loadPart(l);
+    const n = Object.keys(d).filter((k) => ar[k] && ar[k][0] >= 900000).length;
+    if (n) extra[l] = n;
+  }
+  if (ar.length > he) out.extra = { hadiths: ar.length - he, ...extra };
   return out;
 }

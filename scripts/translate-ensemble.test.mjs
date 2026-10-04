@@ -317,6 +317,7 @@ test("sağlamlıq diaqnostikası: açarsız yalnız kateqoriya, açarlı (x-debu
     assert.deepEqual([sc.keyPresent, sc.reason], [false, "no-key"]);
     assert.deepEqual(sc.otherEnvPresent, { SCALEWAY_ACCESS_KEY: true });
     assert.deepEqual(sc.expects, ["SCALEWAY_SECRET_KEY", "SCALEWAY_API_KEY"]);
+    assert.deepEqual(open.providers.find((p) => p.provider === "github").expects, ["GITHUB_MODELS_TOKEN", "GH_MODELS_TOKEN", "GITHUB_TOKEN"]);
     assert.equal(d.detail, undefined);
     assert.equal(open.detailed, false);
     const json = JSON.stringify(open);
