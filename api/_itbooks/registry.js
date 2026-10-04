@@ -1,0 +1,103 @@
+// İbn Teymiyyə kitabları: 28 kitablıq mərhələli siyahı (asandan çətinə). Tək məlumat mənbəyi: həm tövsiyə siyahısı (api/_itbooks.js),
+// həm də məlumat qurucusu (scripts/build-itbooks.mjs) buradan oxuyur. Yeni mərhələ əlavə etmək: kitabların Şamilə fayllarını
+// yükləyib `node scripts/build-itbooks.mjs` işə salmaq kifayətdir — mövcud kitablar avtomatik «mövcud» (düymə) olur (api/_itbooks/avail.js).
+// Sahələr: n (1-28), stage (1-4), slug, ar (ərəbcə ad), names {az,tr,en,ru}, alias (əlavə yazılışlar, latın/kiril/ərəb), needCue (adı adi sözdür: kitab/İbn Teymiyyə sözü tələb olunur),
+// desc [az,tr,en,ar] (bir cümlə), shamela (Şamilə kitab id-si), file (id əvəzinə xüsusi fayl adı; stageN/ qovluğunda),
+// maxId (Şamilə səhifə id-si bu rəqəmdən böyük olanlar atılır: məs. 1512 «Əmrad əl-qulub» nəşrinin sonunda 6827 «Ət-Tuhfə»nin tam təkrarı var).
+export const STAGES = {
+  1: { az: "Qəlbin islahı və əsasların mənimsənilməsi", tr: "Kalbin ıslahı ve temellerin kavranması", en: "Reform of the heart and mastering the fundamentals", ru: "Исправление сердца и освоение основ", ar: "إصلاح القلب وإتقان الأصول" },
+  2: { az: "Dəqiqləşdirmə və istinbat", tr: "Tahrir ve istinbat", en: "Refinement and deduction", ru: "Уточнение и вывод", ar: "التحرير والاستنباط" },
+  3: { az: "Orta səviyyəli kitablar", tr: "Orta seviye kitaplar", en: "Intermediate books", ru: "Книги среднего уровня", ar: "الكتب المتوسطة" },
+  4: { az: "Böyük (irəli səviyyə) kitablar", tr: "Büyük (ileri seviye) kitaplar", en: "Major (advanced) books", ru: "Большие (продвинутые) книги", ar: "الكتب الكبرى" },
+};
+
+const B = (n, stage, slug, ar, names, extra = {}) => ({ n, stage, slug, ar, names, ...extra });
+
+export const BOOKS = [
+  // ------------------------------------------------ 1-ci mərhələ
+  B(1, 1, "ubudiyyah", "العبودية", { az: "Əl-Ubudiyyə", tr: "el-Ubûdiyye", en: "Al-'Ubudiyyah", ru: "Аль-Убудийя" },
+    { needCue: true, shamela: 22647, alias: ["ubudiyyet", "ubudiyyat", "ubudiyye", "ubudiya", "ubudiyyah", "al ubudiyyah", "Убудийя", "العبودية", "عبودية"],
+      desc: ["Qulluğun (ibadətin) həqiqəti haqqında risalə: məhəbbət, qorxu və ümid üzərində qurulan qulluq.", "İbadetin ve kulluğun hakikati üzerine risale: sevgi, korku ve ümit üzerine kurulan kulluk.", "A short treatise on the reality of worship and servitude to Allah, built on love, fear and hope.", "رسالة في حقيقة العبادة والعبودية لله، وأركانها: المحبة والخوف والرجاء."] }),
+  B(2, 1, "wasiyya-sughra", "الوصية الصغرى", { az: "Əl-Vəsiyyə əs-Suğra", tr: "el-Vasiyyetü's-Suğra", en: "Al-Wasiyyah al-Sughra", ru: "Аль-Васыййа ас-Сугра" },
+    { file: "r5370", alias: ["vesiyye sugra", "vasiyye sugra", "wasiyya sughra", "wasiyyah sughra", "wasiyya al sughra", "vesiyyet", "الوصية الصغرى", "وصية شيخ الاسلام لابي القاسم السبتي"],
+      desc: ["İbn Teymiyyənin Əbu Qasim əs-Səbtiyə cavabı: təqva, sünnəyə bağlılıq, zikr və gündəlik əməllər üzrə nəsihətlər.", "İbn Teymiyye'nin Ebû'l-Kâsım es-Sebtî'ye cevabı: takva, sünnete bağlılık, zikir ve günlük ameller üzerine öğütler.", "Ibn Taymiyyah's reply to Abu al-Qasim al-Sabti: advice on taqwa, following the Sunnah, dhikr and daily deeds.", "جواب شيخ الإسلام لأبي القاسم السبتي: وصايا في التقوى ولزوم السنة والذكر والأعمال."] }),
+  B(3, 1, "kalim-tayyib", "الكلم الطيب", { az: "Əl-Kəlim ət-Təyyib", tr: "el-Kelimü't-Tayyib", en: "Al-Kalim al-Tayyib", ru: "Аль-Калим ат-Таййиб" },
+    { needCue: true, shamela: 21578, alias: ["kelim tayyib", "kalim tayyib", "kelimut tayyib", "kalimut tayyib", "kelim tayyeb", "kalim tayyeb", "kelimu tayyib", "الكلم الطيب"],
+      desc: ["Zikr və dua kitabı: gecə-gündüz zikrləri və Peyğəmbərdən ﷺ gələn dualar.", "Zikir ve dua kitabı: gece-gündüz zikirleri ve Peygamber'den ﷺ gelen dualar.", "A book of dhikr and supplications: daily remembrances and duas reported from the Prophet ﷺ.", "كتاب في الأذكار والأدعية: أذكار اليوم والليلة وما ورد عن النبي ﷺ."] }),
+  B(4, 1, "tuhfa-iraqiyya", "التحفة العراقية في الأعمال القلبية", { az: "Ət-Tuhfə əl-İraqiyyə fil-əmal əl-qəlbiyyə", tr: "et-Tuhfetü'l-Irâkıyye fi'l-A'mâli'l-Kalbiyye", en: "Al-Tuhfah al-'Iraqiyyah fi al-A'mal al-Qalbiyyah", ru: "Ат-Тухфа аль-Ираукыййа фи аль-амаль аль-калбиййа" },
+    { shamela: 6827, alias: ["tuhfe iraqiyye", "tuhfa iraqiyya", "tuhfa iraqiyyah", "tuhfetul iraqiyye", "amal qalbiyya", "التحفة العراقية"],
+      desc: ["Qəlb əməlləri (məqamlar və hallar) haqqında: iman, təvəkkül, səbr, şükr, məhəbbət və razılıq.", "Kalp amelleri (makamlar ve haller): iman, tevekkül, sabır, şükür, sevgi ve rıza.", "On the deeds of the heart (stations and states): faith, trust in Allah, patience, gratitude, love and contentment.", "في أعمال القلوب (المقامات والأحوال): الإيمان والتوكل والصبر والشكر والمحبة والرضا."] }),
+  B(5, 1, "amrad-qulub", "أمراض القلوب وشفاؤها", { az: "Əmrad əl-qulub və şifa'uha", tr: "Emrâdü'l-Kulûb ve Şifâuhâ", en: "Amrad al-Qulub wa Shifa'uha", ru: "Амрад аль-кулюб ва шифауха" },
+    { shamela: 1512, maxId: 33, alias: ["emrad el qulub", "amrad al qulub", "emrazul qulub", "emrad qulub", "qelb xesteliyi", "kalp hastaliklari", "diseases of the heart", "болезни сердца", "أمراض القلوب"],
+      desc: ["Qəlbin xəstəlikləri (şübhə, şəhvət, həsəd, riya) və onların şəri müalicəsi.", "Kalbin hastalıkları (şüphe, şehvet, haset, riya) ve şer'î tedavisi.", "The diseases of the heart (doubt, desire, envy, showing off) and their cure according to the Sharia.", "أمراض القلب (الشبهة والشهوة والحسد والرياء) وعلاجها الشرعي."] }),
+  B(6, 1, "wasitiyya", "العقيدة الواسطية", { az: "Əl-Əqidə əl-Vasitiyyə", tr: "el-Akîdetü'l-Vâsıtıyye", en: "Al-'Aqidah al-Wasitiyyah", ru: "Аль-Акыда аль-Васытыйя" },
+    { shamela: 18098, alias: ["vasitiyye", "vasitiyya", "wasitiyya", "wasitiyyah", "wasitiyah", "vasitiyye eqidesi", "vasitiyyah", "wasitiya", "васытыйя", "واسطية", "العقيدة الواسطية"],
+      desc: ["Əhli sünnə vəl-camaətin əqidəsinin qısa mötəbər xülasəsi: Allahın adları və sifətləri, axirət, qədər, səhabələr.", "Ehl-i sünnet akîdesinin kısa ve güvenilir özeti: Allah'ın isim ve sıfatları, âhiret, kader, sahabe.", "A concise, authoritative summary of Ahl al-Sunnah creed: Allah's names and attributes, the Hereafter, destiny, the Companions.", "ملخص موجز لعقيدة أهل السنة والجماعة: الأسماء والصفات واليوم الآخر والقدر والصحابة."] }),
+  B(7, 1, "wasita", "الواسطة بين الحق والخلق", { az: "Əl-Vasitə bəynəl-həqq vəl-xalq", tr: "el-Vâsıta beyne'l-Hakk ve'l-Halk", en: "Al-Wasitah bayna al-Haqq wa al-Khalq", ru: "Аль-Васыта байна аль-хакк ва аль-халк" },
+    { shamela: 8983, alias: ["vasite beynel heqq vel xalq", "wasita bayna al haqq wa al khalq", "wasitah bayna", "الواسطة بين الحق والخلق"],
+      desc: ["Peyğəmbərlərin vasitəliyinin təbliğ olduğu, şirk olan vasitələr ilə şəri səbəblərin fərqi haqqında.", "Peygamberlerin aracılığının tebliğden ibaret olduğu; şirk olan vasıtalar ile meşru sebeplerin farkı üzerine.", "On the Messengers' role as intermediaries of conveyance only, and the difference between false (shirk) intermediaries and lawful means.", "في أن واسطة الرسل هي التبليغ، والفرق بين الوسائط الشركية والأسباب المشروعة."] }),
+  B(8, 1, "raful-malam", "رفع الملام عن الأئمة الأعلام", { az: "Rəf'ul-ləm 'ənil-əimmətil-əlam", tr: "Raf'u'l-Melâm ani'l-Eimmeti'l-A'lâm", en: "Raf' al-Malam 'an al-A'immah al-A'lam", ru: "Раф аль-лям ан аль-аимма аль-аляам" },
+    { shamela: 4118, alias: ["raful melam", "raf al malam", "rafu malam", "raful lam", "raf'ul malam", "رفع الملام", "رفع الملام عن الأئمة"],
+      desc: ["Müctəhid imamların səhih hədisi tərk etməsinin üzrlü səbəbləri və onlara hörmət borcu.", "Müctehid imamların sahih bir hadisi terk etmelerinin mazeretli sebepleri ve onlara saygı.", "The valid excuses by which the great imams left a sound hadith, and the duty of respecting them.", "أسباب ترك الأئمة المجتهدين لبعض الأحاديث وأعذارهم، ووجوب احترامهم."] }),
+  // ------------------------------------------------ 2-ci mərhələ
+  B(9, 2, "furqan", "الفرقان بين أولياء الرحمن وأولياء الشيطان", { az: "Əl-Furqan bəynə övliyair-Rəhman və övliyaiş-Şeytan", tr: "el-Furkân beyne Evliyâi'r-Rahmân ve Evliyâi'ş-Şeytân", en: "Al-Furqan bayna Awliya' al-Rahman wa Awliya' al-Shaytan", ru: "Аль-Фуркан байна авлийя ар-Рахман ва авлийя аш-шайтан" },
+    { needCue: true, shamela: 21499, alias: ["furqan", "furkan", "furqan beyne", "الفرقان بين أولياء الرحمن", "الفرقان"],
+      desc: ["Allahın övliyaları ilə şeytanın övliyalarını ayıran meyarlar; kərəmət və şeytani hallar.", "Allah'ın dostları ile şeytanın dostlarını ayıran ölçüler; kerametler ve şeytanî haller.", "The criteria that separate Allah's friends from the Devil's friends; karamat versus satanic states.", "معيار التفريق بين أولياء الله وأولياء الشيطان، والكرامات والأحوال الشيطانية."] }),
+  B(10, 2, "siyasa-shariyya", "السياسة الشرعية", { az: "Əs-Siyasətüş-şər'iyyə", tr: "es-Siyâsetü'ş-Şer'iyye", en: "Al-Siyasah al-Shar'iyyah", ru: "Ас-Сияса аш-шаръийя" },
+    { shamela: 31237, alias: ["siyaset serriyye", "siyasetus seriyye", "siyaset sheriyye", "siyasa shariyya", "siyasah shariyyah", "siyasa shar'iyya", "السياسة الشرعية", "السياسة الشرعية في اصلاح الراعي والرعية"],
+      desc: ["İdarəçilik: əmanət və ədalət, vəzifələrə ən layiqlərin təyini, cəza və mal-vəsait qaydaları.", "Yönetim: emanet ve adalet, görevlere en layık olanların atanması, ceza ve mal düzeni.", "On governance: trust and justice, appointing the most fit, and the rules of punishment and public wealth.", "في إصلاح الراعي والرعية: الأمانة والعدل وتولية الأصلح وأحكام العقوبات والأموال."] }),
+  B(11, 2, "hisba", "الحسبة في الإسلام", { az: "Əl-Hisbə fil-İslam", tr: "el-Hisbe fi'l-İslâm", en: "Al-Hisbah fi al-Islam", ru: "Аль-Хисба фи аль-ислям" },
+    { needCue: true, shamela: 7263, alias: ["hisbe", "hisba", "hisbah", "hisbe fil islam", "الحسبة في الإسلام", "الحسبة"],
+      desc: ["Yaxşılığı əmr, pislikdən çəkindirmə və bazar-ticarətə nəzarət (müxtəsib vəzifəsi).", "İyiliği emretme, kötülükten sakındırma ve çarşı-pazar denetimi (muhtesib görevi).", "Commanding good, forbidding evil and supervising the markets (the office of the muhtasib).", "الأمر بالمعروف والنهي عن المنكر والرقابة على الأسواق (وظيفة المحتسب)."] }),
+  B(12, 2, "muqaddima-tafsir", "مقدمة في أصول التفسير", { az: "Müqəddimə fi usulit-təfsir", tr: "Mukaddime fî Usûli't-Tefsîr", en: "Muqaddimah fi Usul al-Tafsir", ru: "Мукаддима фи усуль ат-тафсир" },
+    { shamela: 12081, alias: ["tefsir usulu mukaddime", "muqaddima usul tafsir", "muqaddimah fi usul al tafsir", "mukaddime usulut tefsir", "مقدمة في أصول التفسير", "مقدمة التفسير"],
+      desc: ["Təfsir üsulu: Quranı Quranla, sünnə və səhabə-tabiin sözləri ilə təfsir; ixtilaf növləri.", "Tefsir usulü: Kur'an'ı Kur'an, sünnet ve sahabe-tabiîn sözleriyle tefsir; ihtilaf türleri.", "Principles of tafsir: explaining the Quran by the Quran, the Sunnah and the Companions and Followers; kinds of disagreement.", "أصول التفسير: تفسير القرآن بالقرآن والسنة وأقوال الصحابة والتابعين وأنواع الخلاف."] }),
+  B(13, 2, "qaida-tawassul", "قاعدة جليلة في التوسل والوسيلة", { az: "Qaidə cəlilə fit-təvəssül vəl-vəsilə", tr: "Kâide Celîle fi't-Tevessül ve'l-Vesîle", en: "Qa'idah Jalilah fi al-Tawassul wa al-Wasilah", ru: "Каида джалиля фи ат-тавассуль ва аль-василя" },
+    { shamela: 22649, alias: ["tevessul qaidesi", "qaida jalila", "qaidah jalilah", "kaide celile", "قاعدة جليلة", "قاعدة جليلة في التوسل والوسيلة"],
+      desc: ["Təvəssül və vəsilə: şəri və qeyri-şəri növləri; Peyğəmbərlə ﷺ təvəssül məsələsi.", "Tevessül ve vesîle: meşru ve gayri meşru çeşitleri; Peygamber'le ﷺ tevessül meselesi.", "Tawassul and wasilah: the lawful and unlawful kinds, and the question of tawassul through the Prophet ﷺ.", "في التوسل والوسيلة: المشروع منه وغير المشروع، ومسألة التوسل بالنبي ﷺ."] }),
+  B(14, 2, "hamawiyya", "الفتوى الحموية الكبرى", { az: "Əl-Fətva əl-Həməviyyə əl-kubra", tr: "el-Fetvâ'l-Hamevîyye el-Kübrâ", en: "Al-Fatwa al-Hamawiyyah al-Kubra", ru: "Аль-Фатва аль-Хамавиййа аль-кубра" },
+    { shamela: 18381, alias: ["hamaviyye", "hamawiyya", "hamawiyyah", "hamawiyye", "hemeviyye", "hamaviyya", "fetva hamaviyye", "الفتوى الحموية", "الحموية"],
+      desc: ["Həma əhlinin sualına cavab: Allahın sifətləri, sələfin yolu, təvil və təfviz haqqında.", "Hama halkının sorusuna cevap: Allah'ın sıfatları, selefin yolu, te'vil ve tefviz.", "The reply to the people of Hama: Allah's attributes, the way of the Salaf, and the positions of ta'wil and tafwid.", "جواب أهل حماة في الصفات: طريقة السلف والتأويل والتفويض."] }),
+  B(15, 2, "tadmuriyya", "الرسالة التدمرية", { az: "Ər-Risalə ət-Tədmuriyyə", tr: "er-Risâletü't-Tedmüriyye", en: "Al-Risalah al-Tadmuriyyah", ru: "Ар-Рисаля ат-Тадмурийя" },
+    { shamela: 22666, alias: ["tedmuriyye", "tadmuriyya", "tadmuriyyah", "tadmuriya", "tedmuriyya", "тадмурийя", "التدمرية", "الرسالة التدمرية"],
+      desc: ["Əsma və sifətlər üzrə sələfin qaydaları və qədər məsələsinin şəriətlə uzlaşması.", "Esma ve sıfat konusunda selefin kaideleri ve kader meselesinin şeriatla uyumu.", "The Salaf's rules on the divine names and attributes, and reconciling destiny with the Sharia.", "قواعد السلف في الأسماء والصفات، والجمع بين القدر والشرع."] }),
+  B(16, 2, "hadith-nuzul", "شرح حديث النزول", { az: "Şərhu hədisin-nüzul", tr: "Şerhu Hadîsi'n-Nüzûl", en: "Sharh Hadith al-Nuzul", ru: "Шарх хадис ан-нузуль" },
+    { shamela: 11258, alias: ["hedisin nuzul", "hadith nuzul", "sharh hadith al nuzul", "nuzul hadisi", "şerhu hadisin nuzul", "شرح حديث النزول"],
+      desc: ["«Rəbbimiz hər gecə dünya səmasına enir» hədisinin şərhi və Allahın sifətləri.", "«Rabbimiz her gece dünya semasına iner» hadisinin şerhi ve Allah'ın sıfatları.", "Commentary on the hadith 'Our Lord descends every night to the lowest heaven' and Allah's attributes.", "شرح حديث «ينزل ربنا كل ليلة إلى السماء الدنيا» ومسائل الصفات."] }),
+  B(17, 2, "iman", "كتاب الإيمان", { az: "Kitabül-İman", tr: "Kitâbü'l-Îmân", en: "Kitab al-Iman", ru: "Китаб аль-иман" },
+    { needCue: true, shamela: 7564, alias: ["kitabul iman", "kitab al iman", "iman kitabi", "kitabu'l iman", "كتاب الإيمان", "الإيمان لابن تيمية"],
+      desc: ["İman: söz və əməl, artıb-azalması, günahkarın hökmü; mürciə və xəvaricə rədd.", "İman: söz ve amel, artıp eksilmesi, günahkârın hükmü; mürcie ve hâricîlere reddiye.", "Faith: speech and action, its increase and decrease, the ruling on the sinner; refuting the Murji'ah and Khawarij.", "في الإيمان: قول وعمل، يزيد وينقص، وحكم صاحب الكبيرة، والرد على المرجئة والخوارج."] }),
+  // ------------------------------------------------ 3-cü mərhələ
+  B(18, 3, "iqtida", "اقتضاء الصراط المستقيم", { az: "İqtidaüs-sırat əl-müstəqim", tr: "İktizâü's-Sırâti'l-Müstakîm", en: "Iqtida' al-Sirat al-Mustaqim", ru: "Иктида ас-сырат аль-мустакым" },
+    { shamela: 11620, alias: ["iktiza", "iqtida", "iqtida sirat", "iktizau sirat", "اقتضاء الصراط المستقيم"],
+      desc: ["Kafirlərə bənzəməmək: bayram və adətlərdə müxalifət.", "Kâfirlere benzememe: bayram ve âdetlerde muhalefet.", "Distinguishing from the disbelievers in festivals and customs.", "مخالفة أصحاب الجحيم."] }),
+  B(19, 3, "qawaid-nuraniyya", "القواعد النورانية", { az: "Əl-Qəvaid ən-Nuraniyyə", tr: "el-Kavâidü'n-Nûrâniyye", en: "Al-Qawa'id al-Nuraniyyah", ru: "Аль-Кава'ид ан-нураниййа" },
+    { shamela: 21729, alias: ["nuraniyye", "nuraniyya", "qawaid nuraniyya", "kavaid nuraniyye", "القواعد النورانية"], desc: ["Fiqh qaydaları.", "Fıkıh kaideleri.", "Fiqh principles.", "القواعد الفقهية."] }),
+  B(20, 3, "istiqama", "الاستقامة", { az: "Əl-İstiqamə", tr: "el-İstikâme", en: "Al-Istiqamah", ru: "Аль-Истикама" },
+    { needCue: true, shamela: 6820, alias: ["istiqame", "istiqama", "istikame", "الاستقامة"], desc: ["İstiqamət və bidətlərə rədd.", "İstikamet ve bid'atlere reddiye.", "Steadfastness and refuting innovations.", "الاستقامة والرد على المبتدعة."] }),
+  B(21, 3, "sarim-maslul", "الصارم المسلول على شاتم الرسول", { az: "Əs-Sarimul-məslul ələ şatimir-Rəsul", tr: "es-Sârimü'l-Meslûl", en: "Al-Sarim al-Maslul 'ala Shatim al-Rasul", ru: "Ас-Сарим аль-маслюль" },
+    { shamela: 7344, alias: ["sarimul meslul", "sarim maslul", "sarim al maslul", "sarimul maslul", "الصارم المسلول"], desc: ["Peyğəmbərə ﷺ söyənin hökmü.", "Peygamber'e ﷺ sövenin hükmü.", "The ruling on one who insults the Prophet ﷺ.", "حكم شاتم الرسول ﷺ."] }),
+  B(22, 3, "jawab-sahih", "الجواب الصحيح لمن بدل دين المسيح", { az: "Əl-Cəvabus-səhih", tr: "el-Cevâbü's-Sahîh", en: "Al-Jawab al-Sahih", ru: "Аль-Джаваб ас-сахих" },
+    { shamela: 170, alias: ["cevabus sehih", "jawab sahih", "javab sahih", "al jawab al sahih", "الجواب الصحيح"], desc: ["Xristianlığa rədd.", "Hristiyanlığa reddiye.", "A refutation of Christianity.", "الرد على النصارى."] }),
+  B(23, 3, "asfahaniyya", "شرح العقيدة الأصفهانية", { az: "Şərhul-Əqidə əl-Əsfəhaniyyə", tr: "Şerhu'l-Akîdeti'l-İsfahâniyye", en: "Sharh al-'Aqidah al-Asfahaniyyah", ru: "Шарх аль-акыда аль-Асфаханийя" },
+    { shamela: 11248, alias: ["esfehaniyye", "asfahaniyya", "isfahaniyye", "asfahaniyyah", "الأصفهانية"], desc: ["Əsfəhani əqidəsinin şərhi.", "İsfahânî akîdesinin şerhi.", "Commentary on the Asfahaniyyah creed.", "شرح العقيدة الأصفهانية."] }),
+  B(24, 3, "nubuwwat", "النبوات", { az: "Ən-Nübüvvat", tr: "en-Nübüvvât", en: "Al-Nubuwwat", ru: "Ан-Нубувват" },
+    { needCue: true, shamela: 11817, alias: ["nubuvvat", "nubuwwat", "nubuvvet", "النبوات"], desc: ["Peyğəmbərliyin dəlilləri.", "Nübüvvetin delilleri.", "Proofs of prophethood.", "في النبوات."] }),
+  // ------------------------------------------------ 4-cü mərhələ
+  B(25, 4, "radd-mantiqiyyin", "الرد على المنطقيين", { az: "Ər-Rəddu ələl-mantiqiyyin", tr: "er-Reddü ale'l-Mantıkıyyîn", en: "Al-Radd 'ala al-Mantiqiyyin", ru: "Ар-Радд аля аль-мантыкыййин" },
+    { shamela: 7626, alias: ["reddu ale mantiqiyyin", "radd mantiqiyyin", "radd ala al mantiqiyyin", "الرد على المنطقيين"], desc: ["Məntiqçilərə rədd.", "Mantıkçılara reddiye.", "A refutation of the logicians.", "الرد على المنطقيين."] }),
+  B(26, 4, "minhaj-sunna", "منهاج السنة النبوية", { az: "Minhacüs-sünnə ən-nəbəviyyə", tr: "Minhâcü's-Sünneti'n-Nebeviyye", en: "Minhaj al-Sunnah al-Nabawiyyah", ru: "Минхадж ас-Сунна" },
+    { shamela: 927, alias: ["minhaj sunna", "minhaj al sunnah", "minhacus sunne", "منهاج السنة"], desc: ["Şiələrə rəd.", "Şiîlere reddiye.", "A refutation of the Shia.", "الرد على الشيعة."] }),
+  B(27, 4, "talbis-jahmiyya", "بيان تلبيس الجهمية", { az: "Bəyanu təlbisil-Cəhmiyyə", tr: "Beyânü Telbîsi'l-Cehmiyye", en: "Bayan Talbis al-Jahmiyyah", ru: "Баян тальбис аль-джахмиййа" },
+    { shamela: 2864, alias: ["telbis cehmiyye", "talbis jahmiyya", "bayan talbis", "بيان تلبيس الجهمية"], desc: ["Cəhmiyyənin şübhələrinə rədd.", "Cehmiyye'nin şüphelerine reddiye.", "A refutation of the Jahmiyyah's doubts.", "الرد على الجهمية."] }),
+  B(28, 4, "dar-taarud", "درء تعارض العقل والنقل", { az: "Dər'u təaruzil-əql vən-nəql", tr: "Der'u Teâruzi'l-Akl ve'n-Nakl", en: "Dar' Ta'arud al-'Aql wa al-Naql", ru: "Дар' та'аруд аль-акль ва ан-накль" },
+    { shamela: 21506, alias: ["der u tearuz", "dar taarud", "dar ta'arud al aql", "تعارض العقل والنقل", "درء التعارض"], desc: ["Əqllə nəqlin ziddiyyəti iddiasına rədd.", "Akıl ile nakil çelişir iddiasına reddiye.", "Refuting the claim of conflict between reason and revelation.", "رد دعوى التعارض بين العقل والنقل."] }),
+];
+
+export const MAJMU = { slug: "majmu", ar: "مجموع الفتاوى", names: { az: "Məcmuu əl-Fətava", tr: "Mecmûu'l-Fetâvâ", en: "Majmu' al-Fatawa", ru: "Маджму аль-фатава", ar: "مجموع الفتاوى" }, query: "مجموع الفتاوى" };
+export const bySlug = (s) => BOOKS.find((b) => b.slug === s) || null;
+export const LANGS = ["az", "tr", "en", "ru", "ar"];
+/** kitabın verilmiş dildəki adı (ərəbcə üçün ərəbcə ad) */
+export const bookName = (b, lang) => (lang === "ar" ? b.ar : b.names[lang] || b.names.az);
+/** bir cümləlik təsvir: az,tr,en,ar; ru üçün en */
+export const bookDesc = (b, lang) => (!b.desc ? "" : lang === "az" ? b.desc[0] : lang === "tr" ? b.desc[1] : lang === "ar" ? b.desc[3] : b.desc[2]);
