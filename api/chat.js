@@ -5,6 +5,7 @@ import { tafsirReply, withTafsirSuggest } from "./_tafsir.js";
 import { nextReply } from "./_next.js";
 import { gameReply } from "./_game.js";
 import { ayahReply, finalizeAi, compactHistory, AYAH_PROMPT } from "./_ayah.js";
+import { lughaReply } from "./_lugha.js";
 import { snippetReply } from "./_snippets.js";
 import { localReply } from "./_local.js";
 import { track } from "./_stats.js";
@@ -65,7 +66,7 @@ export default async function handler(req, res) {
     const gameHist = Array.isArray(body.games) && body.games.length
       ? body.games.filter((x) => typeof x === "string" && /^[a-z0-9-]{1,40}$/.test(x)).slice(-60).map((x) => ({ role: "assistant", text: `::game:: ${x} | x` }))
       : hist;
-    for (const [kind, fn] of [["game", (m) => gameReply(m, gameHist)], ["next", (m) => nextReply(m, hist)], ["tafsir", tafsirReply], ["ayah", ayahReply], ["tawhid", tawhidReply], ["canned", cannedReply], ["quran", quranReply], ["din", dinReply], ["brand", brandReply]]) {
+    for (const [kind, fn] of [["game", (m) => gameReply(m, gameHist)], ["next", (m) => nextReply(m, hist)], ["tafsir", tafsirReply], ["ayah", ayahReply], ["tawhid", tawhidReply], ["canned", cannedReply], ["quran", quranReply], ["book", lughaReply], ["din", dinReply], ["brand", brandReply]]) {
       let r = await fn(message);
       if (r) {
         if (kind === "ayah") r = withTafsirSuggest(r, message); // təfsir istənilməyib: ayə/surə cavabına təfsir seçimləri əlavə olunur
