@@ -293,7 +293,7 @@ test("səhifə: oyun cavabı kod bloku + «Aç» düyməsi kimi çəkilir, gizli
     assert.ok(first.querySelector("button.runbtn"), "«Aç» düyməsi");
     assert.doesNotMatch(first.textContent.replace(first.querySelector("pre").textContent, ""), /::game::/);
     assert.match(first.textContent, /Hazır oyun: FX /);
-    assert.match(first.querySelector("pre code").textContent, /^<!doctype html>/i);
+    assert.match(first.querySelector("pre code").textContent, /^\uFEFF?<!doctype html>/i);
     assert.equal(p.d.querySelectorAll("#msgs .nt").length, 0, "dini bildiriş yoxdur");
     await p.send("oyun kodu yaz");
     await p.send("oyun kodu yaz");
