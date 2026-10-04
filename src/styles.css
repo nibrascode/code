@@ -4548,8 +4548,8 @@ body.is-home .noise {
 .suggest-bot {
   position: absolute;
   z-index: 4;
-  width: 15px;
-  height: 17px;
+  width: 18px;
+  height: 20px;
   left: 12%;
   top: 0;
   pointer-events: none;
@@ -4781,11 +4781,299 @@ html[dir="rtl"] .suggest-bot {
   margin: 2px 0 18px;
 }
 
+/* Robot hərəkətləri: yalnız transform/opacity, SVG daxili qruplar (layout dəyişmir) */
+.suggest-bot * {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.bot-hop {
+  transform-origin: 50% 100%;
+  animation: bot-bob 2.4s ease-in-out infinite;
+}
+
+.bot-shadow {
+  animation: bot-shadow 2.4s ease-in-out infinite;
+}
+
+.bot-head {
+  transform-origin: 50% 100%;
+  animation: bot-tilt 7s ease-in-out infinite;
+}
+
+.bot-antenna {
+  transform-origin: 50% 100%;
+  animation: bot-wiggle 3.2s ease-in-out infinite;
+}
+
+.bot-tip {
+  animation: bot-glow 1.6s ease-in-out infinite;
+}
+
+.bot-eyes {
+  animation: bot-look 6s ease-in-out infinite;
+}
+
+.bot-eye {
+  animation: bot-blink 4.2s ease-in-out infinite;
+}
+
+.bot-arm-r {
+  transform-origin: 50% 0;
+  animation: bot-wave 6s ease-in-out infinite;
+}
+
+.bot-arm-l {
+  transform-origin: 50% 0;
+  animation: bot-swing 2.4s ease-in-out infinite;
+}
+
+.bot-foot-l {
+  animation: bot-step 1.2s ease-in-out infinite;
+}
+
+.bot-foot-r {
+  animation: bot-step 1.2s ease-in-out -0.6s infinite;
+}
+
+.bot-spark {
+  opacity: 0;
+  animation: bot-spark 6s ease-in-out infinite;
+}
+
+.bot-spark-b {
+  animation-delay: -3s;
+}
+
+/* Toxunma/üzərinə gəlmə: sevinc hoppanışı, şən gözlər, qığılcım */
+.app-suggest a:hover .bot-hop,
+.app-suggest a:focus-visible .bot-hop,
+.app-suggest a:active .bot-hop {
+  animation: bot-jump 0.62s cubic-bezier(0.3, 0.7, 0.4, 1) infinite;
+}
+
+.app-suggest a:hover .bot-eye,
+.app-suggest a:focus-visible .bot-eye,
+.app-suggest a:active .bot-eye {
+  animation: none;
+  transform: translateY(0.25px) scaleY(0.45) scaleX(1.25);
+}
+
+.app-suggest a:hover .bot-arm-r,
+.app-suggest a:focus-visible .bot-arm-r,
+.app-suggest a:active .bot-arm-r {
+  animation: bot-cheer 0.62s ease-in-out infinite;
+}
+
+.app-suggest a:hover .bot-spark,
+.app-suggest a:focus-visible .bot-spark,
+.app-suggest a:active .bot-spark {
+  animation-duration: 1.2s;
+}
+
+@keyframes bot-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-0.9px);
+  }
+}
+
+@keyframes bot-shadow {
+  0%,
+  100% {
+    transform: scaleX(1);
+    opacity: 0.35;
+  }
+  50% {
+    transform: scaleX(0.78);
+    opacity: 0.2;
+  }
+}
+
+@keyframes bot-tilt {
+  0%,
+  42%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50%,
+  62% {
+    transform: rotate(-7deg);
+  }
+  72%,
+  86% {
+    transform: rotate(6deg);
+  }
+}
+
+@keyframes bot-wiggle {
+  0%,
+  60%,
+  100% {
+    transform: rotate(0deg);
+  }
+  68% {
+    transform: rotate(14deg);
+  }
+  76% {
+    transform: rotate(-12deg);
+  }
+  84% {
+    transform: rotate(8deg);
+  }
+  92% {
+    transform: rotate(-4deg);
+  }
+}
+
+@keyframes bot-glow {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.3);
+  }
+}
+
+@keyframes bot-look {
+  0%,
+  30%,
+  100% {
+    transform: translateX(0);
+  }
+  38%,
+  52% {
+    transform: translateX(-0.9px);
+  }
+  62%,
+  80% {
+    transform: translateX(0.9px);
+  }
+  88% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes bot-blink {
+  0%,
+  44%,
+  50%,
+  100% {
+    transform: scaleY(1);
+  }
+  47% {
+    transform: scaleY(0.08);
+  }
+  90% {
+    transform: scaleY(1);
+  }
+  92% {
+    transform: scaleY(0.08);
+  }
+  94% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes bot-wave {
+  0%,
+  62%,
+  100% {
+    transform: rotate(0deg);
+  }
+  68% {
+    transform: rotate(-150deg);
+  }
+  72% {
+    transform: rotate(-120deg);
+  }
+  76% {
+    transform: rotate(-155deg);
+  }
+  80% {
+    transform: rotate(-120deg);
+  }
+  84% {
+    transform: rotate(-150deg);
+  }
+  90% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes bot-swing {
+  0%,
+  100% {
+    transform: rotate(4deg);
+  }
+  50% {
+    transform: rotate(-6deg);
+  }
+}
+
+@keyframes bot-step {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-0.7px);
+  }
+}
+
+@keyframes bot-spark {
+  0%,
+  8%,
+  100% {
+    opacity: 0;
+    transform: scale(0.2) rotate(0deg);
+  }
+  4% {
+    opacity: 1;
+    transform: scale(1.1) rotate(45deg);
+  }
+}
+
+@keyframes bot-jump {
+  0%,
+  100% {
+    transform: translateY(0) scale(1.05, 0.92);
+  }
+  45% {
+    transform: translateY(-2.2px) scale(0.95, 1.06);
+  }
+}
+
+@keyframes bot-cheer {
+  0%,
+  100% {
+    transform: rotate(-150deg);
+  }
+  50% {
+    transform: rotate(-110deg);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .app-suggest a::before,
   .app-suggest img,
-  .suggest-bot {
-    animation: none;
+  .suggest-bot,
+  .suggest-bot * {
+    animation: none !important;
+  }
+
+  .suggest-bot .bot-hop {
+    animation: bot-bob 3.6s ease-in-out infinite !important;
+  }
+
+  .suggest-bot .bot-spark {
+    opacity: 0;
   }
 }
 
