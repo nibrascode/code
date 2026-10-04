@@ -57,7 +57,7 @@
     .brand img { width: 38px; height: 34px; object-fit: contain; filter: drop-shadow(0 0 8px rgba(80,140,255,.55)); }
     .brand b { display: block; font-size: 15px; font-weight: 800; letter-spacing: -0.04em; line-height: 1.1; }
     .brand small { display: block; margin-top: 2px; color: var(--muted); font-size: 11px; font-weight: 500; }
-    .meta { display: flex; align-items: center; gap: 8px; }
+    .meta { display: flex; align-items: center; gap: 8px; flex: none; }
     .crown, .home {
       border: 1px solid rgba(120, 170, 255, .45);
       background: rgba(8, 12, 28, .72);
@@ -418,7 +418,13 @@
       color: #8ff5e4;
       box-shadow: 0 0 16px rgba(45, 212, 191, .16);
     }
-    .menu svg { width: 18px; height: 18px; display: block; }
+    .menu svg { width: 20px; height: 20px; display: block; }
+    .menu:hover { border-color: #5eead4; }
+    .menu:focus-visible, .dx:focus-visible, .newchat:focus-visible, .dopen:focus-visible, .ddel:focus-visible { outline: 2px solid #8fb4ff; outline-offset: 2px; }
+    html[dir="rtl"] .drawer { right: auto; left: 0; transform: translateX(-102%); border-left: 0; border-right: 1px solid rgba(94, 234, 212, .28); box-shadow: 12px 0 40px rgba(0, 0, 0, .5); }
+    html[dir="rtl"] .drawer.on { transform: none; }
+    html[dir="rtl"] .dopen { text-align: right; padding: 10px 12px 10px 6px; }
+    html[dir="rtl"] .ddel { border-radius: 12px 0 0 12px; }
     .lead { display: flex; align-items: center; gap: 10px; min-width: 0; }
     .scrim {
       position: fixed; inset: 0; z-index: 19;
@@ -427,14 +433,14 @@
     }
     .scrim.on { opacity: 1; visibility: visible; }
     .drawer {
-      position: fixed; top: 0; left: 0; bottom: 0; z-index: 20;
+      position: fixed; top: 0; right: 0; bottom: 0; z-index: 20;
       width: min(320px, 86vw);
       display: flex; flex-direction: column; gap: 10px;
       padding: calc(14px + env(safe-area-inset-top)) 14px calc(14px + env(safe-area-inset-bottom));
       background: linear-gradient(180deg, #08112a, #050918);
-      border-right: 1px solid rgba(94, 234, 212, .28);
-      box-shadow: 12px 0 40px rgba(0, 0, 0, .5);
-      transform: translateX(-102%); visibility: hidden;
+      border-left: 1px solid rgba(94, 234, 212, .28);
+      box-shadow: -12px 0 40px rgba(0, 0, 0, .5);
+      transform: translateX(102%); visibility: hidden;
       transition: transform .22s ease, visibility .22s;
     }
     .drawer.on { transform: none; visibility: visible; }
@@ -528,8 +534,8 @@
             <svg viewBox="0 0 24 24" fill="none"><rect x="6" y="11" width="12" height="9" rx="2" stroke="#d7deef" stroke-width="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3" stroke="#d7deef" stroke-width="2"/></svg>
           </i>
         </button>
-        <button class="menu" id="menu" type="button" aria-label="Söhbətlər" aria-controls="drawer" aria-expanded="false">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <button class="menu" id="menu" type="button" aria-label="Söhbətlər" title="Söhbətlər" aria-controls="drawer" aria-expanded="false" aria-haspopup="dialog">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
         </button>
       </div>
     </header>
@@ -813,7 +819,16 @@
       return out + plain(text.slice(last), last > 0, false);
     }
     function fillBubble(el, text) {
-      const parts = String(text || "").split("```");
+      // gizli kontekst sətri (::ctx:: …) «növbəti ayə» üçündür: göstərilmir
+      let src = String(text || "").replace(/\n*^::ctx:: [^\n]*$/gm, "");
+      // hazır oyun: gizli «::game:: slug | Ad» sətri göstərilmir; kod bloku yoxdursa (serverdən bərpa) «yenidən göstər» düyməsi
+      if (src.indexOf("::game::") >= 0) {
+        const hasCode = src.indexOf("```") >= 0;
+        src = src.replace(/^::game:: ([a-z0-9-]+) \| ([^\n]+)$/gm, function (all, slug, title) {
+          return hasCode ? "" : "::sug::\n::sl:: Oyunun kodu serverdə saxlanmır:\n::sb:: Oyunu yenidən göstər | " + title + " oyun kodu yaz\n::/sug::";
+        });
+      }
+      const parts = src.split("```");
       const runs = [];
       chipQ = [];
       el.innerHTML = parts.map(function (part, i) {
@@ -857,7 +872,13 @@
         });
       });
     }
-    function bubble(text, kind, imageUrl) {
+    // Yeni cavab: uzun cavabın BAŞI (balonun üstü) görünür; ekrana tam sığan qısa cavab tam görünür. İstifadəçinin öz mesajı isə həmişə aşağıya çəkilir.
+    function revealAnswer(el) {
+      if (el.offsetHeight <= msgs.clientHeight) { msgs.scrollTop = msgs.scrollHeight; return; }
+      const delta = el.getBoundingClientRect().top - msgs.getBoundingClientRect().top;
+      msgs.scrollTop = Math.max(0, msgs.scrollTop + delta - 8);
+    }
+    function bubble(text, kind, imageUrl, restore) {
       if (hello && hello.parentNode) hello.remove();
       const el = document.createElement("div");
       el.className = "msg " + kind;
@@ -871,7 +892,9 @@
         el.appendChild(img);
       }
       msgs.appendChild(el);
-      msgs.scrollTop = msgs.scrollHeight;
+      if (restore) return el; // söhbət bərpasında renderItem özü sona çəkir
+      if (kind.charAt(0) === "b") revealAnswer(el);
+      else msgs.scrollTop = msgs.scrollHeight;
       return el;
     }
     async function send(text) {
@@ -896,7 +919,7 @@
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(useImage
             ? { prompt: m, image: pendingImage, limitReached: remain() <= 0 }
-            : { message: m, messages: threadOf().slice(-8), mode: sentMode, limitReached: remain() <= 0, noticeShown: noticeShown() })
+            : { message: m, messages: threadOf().slice(-8), games: gamesShown(), mode: sentMode, limitReached: remain() <= 0, noticeShown: noticeShown() })
         });
         const raw = await r.text();
         let data = {};
@@ -1046,12 +1069,21 @@
       const a = Array.from(t);
       return a.length > TITLE_MAX ? a.slice(0, TITLE_MAX).join("").trim() + "…" : t;
     }
+    // Bu söhbətdə artıq göstərilmiş hazır oyunlar (slug-lar, ardıcıllıqla): serverə yalnız son 8 mesaj getdiyi üçün ayrıca göndərilir
+    function gamesShown() {
+      const out = [];
+      if (curItem) curItem.msgs.forEach(function (m) {
+        if (m.x || m.k !== "b") return;
+        String(m.t).replace(/^::game:: ([a-z0-9-]+) \|/gm, function (all, slug) { out.push(slug); return all; });
+      });
+      return out.slice(-60);
+    }
     function threadOf() {
       const out = [];
       if (curItem) curItem.msgs.forEach(function (m) {
         if (m.x) return;
         if (m.k === "u") out.push({ role: "user", text: m.t });
-        else if (m.k === "b") out.push({ role: "assistant", text: m.t });
+        else if (m.k === "b") out.push({ role: "assistant", text: m.t.indexOf("::game::") >= 0 ? m.t.replace(/```[\s\S]*?```/, "") : m.t }); // oyun kodu (40-90KB) hər sorğuda göndərilmir; yalnız gizli işarə qalır
       });
       return out;
     }
@@ -1100,7 +1132,7 @@
     }
     function fitForServer(msgs) {
       const out = msgs.map(function (m) {
-        const c = { k: m.k, t: m.t.slice(0, 20000) };
+        const c = { k: m.k, t: (m.k === "b" && m.t.indexOf("::game::") >= 0 ? m.t.replace(/```[\s\S]*?```/, "") : m.t).slice(0, 20000) }; // serverdə mesaj limiti 20000: oyun kodu saxlanmır, işarə qalır
         if (m.i) c.i = m.i;
         if (m.x) c.x = 1;
         return c;
@@ -1129,7 +1161,7 @@
         msgs.appendChild(hello);
         return;
       }
-      it.msgs.forEach(function (m) { bubble(m.t, m.k, m.i || ""); });
+      it.msgs.forEach(function (m) { bubble(m.t, m.k, m.i || "", true); });
       msgs.scrollTop = msgs.scrollHeight;
     }
     function restoreCurrent() {
@@ -1229,7 +1261,26 @@
         }
       }).catch(function () {});
     }
+    // Menyu düyməsinin adı (ekran oxuyucu üçün): səhifə dili / brauzer dili — az, tr, en, ru, ar
+    const MENU_LABELS = { az: "Söhbətlər", tr: "Sohbetler", en: "Chats", ru: "Чаты", ar: "المحادثات" };
+    const CLOSE_LABELS = { az: "Bağla", tr: "Kapat", en: "Close", ru: "Закрыть", ar: "إغلاق" };
+    function uiLang() {
+      const cand = [document.documentElement.getAttribute("lang"), navigator.language, (navigator.languages || [])[0]];
+      for (let i = 0; i < cand.length; i++) {
+        const c = String(cand[i] || "").toLowerCase().slice(0, 2);
+        if (MENU_LABELS[c]) return c;
+      }
+      return "az";
+    }
+    (function () {
+      const l = uiLang();
+      menuBtn.setAttribute("aria-label", MENU_LABELS[l]);
+      menuBtn.setAttribute("title", MENU_LABELS[l]);
+      drawer.setAttribute("aria-label", MENU_LABELS[l]);
+      document.getElementById("dclose").setAttribute("aria-label", CLOSE_LABELS[l]);
+    })();
     function setDrawer(on) {
+      const was = drawer.classList.contains("on");
       drawer.classList.toggle("on", on);
       scrim.classList.toggle("on", on);
       drawer.setAttribute("aria-hidden", on ? "false" : "true");
@@ -1238,6 +1289,9 @@
         prune();
         renderList();
         refreshRemote();
+        if (!was) { try { document.getElementById("dclose").focus(); } catch (e) {} }
+      } else if (was && drawer.contains(document.activeElement)) {
+        try { menuBtn.focus(); } catch (e) {} // klaviatura fokusu menyu düyməsinə qayıdır
       }
     }
     function resetView() {
