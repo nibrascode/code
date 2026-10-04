@@ -775,13 +775,14 @@
     function tafsirHtml(book, body) {
       let label = "", src = "", cur = "";
       const parts = [];
+      const srcs = [];
       body.split("\n").forEach(function (ln) {
         if (ln.indexOf("::tl::") === 0) label = ln.replace(/^::tl::[ \t]*/, "");
-        else if (ln.indexOf("::src::") === 0) src = ln.replace(/^::src::[ \t]*/, "");
+        else if (ln.indexOf("::src::") === 0) { src = ln.replace(/^::src::[ \t]*/, ""); srcs.push(src); }
         else if (ln.indexOf("::tv::") === 0) parts.push('<span class="tfv" dir="auto">' + escapeHtml(ln.replace(/^::tv::[ \t]*/, "")) + "</span>");
         else if (ln.trim()) parts.push('<span class="tfp">' + escapeHtml(ln) + "</span>");
       });
-      src = escapeHtml(src);
+      src = srcs.length > 1 ? srcs.map(escapeHtml).join("<br>") : escapeHtml(src);
       const qe = src.indexOf("QuranEnc.com");
       if (qe >= 0) {
         const key = book === "saadi" ? "arabic_saadi" : "arabic_moyassar";
