@@ -1,5 +1,6 @@
 // Bəqərə surəsi sözlərinin izahı: AI-yə getmədən hazır cavab.
 // Məlumat: api/_quran/baqara.js (davamı gələndə SOURCES siyahısına yeni fayl əlavə edin).
+import { namesFatawaBook } from "./_fatawa-name.js";
 import BAQARA from "./_quran/baqara.js";
 
 const SOURCES = [BAQARA];
@@ -498,6 +499,7 @@ function rangeReply(lo, hi, lang, narrowed) {
 
 // ---------- əsas giriş ----------
 export function quranReply(message) {
+  if (namesFatawaBook(message)) return null; // «Məcmuu əl-Fətava» adı surə adına (Fatihə) bənzədilməsin
   const raw = String(message || "").trim();
   if (!raw || raw.length > 800) return null;
   const lang = /[\u0600-\u06FF]/.test(raw) ? "ar" : "az";

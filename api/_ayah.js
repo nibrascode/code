@@ -9,6 +9,7 @@
 //   ::src:: ﴿ Bəqərə surəsi, 255-ci ayə ﴾ · Mənbə: Tanzil
 //   ::/ayah::
 //   ::note:: Quran başqa dillərə yalnız mənaca tərcümə oluna bilər; ...   (blokdan sonra, cavabda bir dəfə)
+import { namesFatawaBook } from "./_fatawa-name.js";
 import { AYAS, BISMILLAH, SURA_NAMES_AR } from "./_quran/quran.js";
 import { SURAS } from "./_quran/suras.js";
 import { AZ } from "./_quran/az.js";
@@ -721,6 +722,7 @@ function badRefNote(lang, s, a1, a2) {
 }
 
 export function ayahReply(message, forceLang) {
+  if (namesFatawaBook(message)) return null; // «Məcmuu əl-Fətava» adı surə adına (Fatihə) bənzədilməsin
   const r = ayahLookup(message, forceLang);
   if (!r) return null;
   const { reps, lang } = r;

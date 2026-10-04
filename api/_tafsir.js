@@ -1,6 +1,7 @@
 // Quran təfsirləri (daxili məlumat, AI-siz): Müyəssər, Sədi (QuranEnc.com), İbn Kəsir (ərəbcə, spa5k/tafsir_api).
 // Təfsir mətni ərəbcə orijinalda, DƏYİŞDİRİLMƏDƏN verilir; Azərbaycancaya tərcümə UYDURULMUR.
 // Cavab: ayə blokunu (ərəbcə + az mənası, api/_ayah.js) ::tafsir:: bloku izləyir. Uzun təfsir hissələrə bölünür («hissə 2»).
+import { namesFatawaBook } from "./_fatawa-name.js";
 import { LOADERS } from "./_tafsir/loaders.js";
 import { ayahLookup, ayahReply, buildBlock, detectLang, digitsAscii, foldLat, AYAH_COUNT } from "./_ayah.js";
 import { SURAS } from "./_quran/suras.js";
@@ -376,6 +377,7 @@ export function withTafsirSuggest(reply, message, forceLang) {
 
 /** @returns {Promise<string|null>} */
 export async function tafsirReply(message, forceLang) {
+  if (namesFatawaBook(message)) return null; // «Məcmuu əl-Fətava» adı surə adına (Fatihə) bənzədilməsin
   const q = parseTafsirQuery(message);
   if (!q) return null;
   const lang = forceLang && T[forceLang] ? forceLang : q.lang;

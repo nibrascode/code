@@ -9,7 +9,7 @@ import { ayahReply, finalizeAi, compactHistory, AYAH_PROMPT } from "./_ayah.js";
 import { lughaReply, lughaNotFoundNote, isLexicalQuestion, lexicalFollowup } from "./_lugha.js";
 import { nahwReply } from "./_nahw.js";
 import { hadithReply, hadithBare } from "./_hadith.js";
-import { fatawaReply } from "./_fatawa.js";
+import { fatawaReply, fatawaNaturalReply } from "./_fatawa.js";
 import { snippetReply } from "./_snippets.js";
 import { localReply } from "./_local.js";
 import { track } from "./_stats.js";
@@ -105,7 +105,7 @@ export default async function handler(req, res) {
     const lexical = isLexicalQuestion(message) || !!follow;
     const lexicalLoose = lexical || isLexicalQuestion(message, { loose: true });
     // Məcmuu əl-Fətava (İbn Teymiyyə) axtarışı yalnız açıq «فتاوى ابن تيمية»/«مجموع الفتاوى»/«İbn Teymiyyə fətvası» sorğusunda işləyir; hədis, ayə, nəhv, lüğət idarəçilərindən əvvəl gəlir, çünki onlar həmin ifadələri tanımır.
-    for (const [kind, fn] of [["game", (m) => gameReply(m, gameHist)], ["book", (m) => fatawaReply(m, hist)], ["book", (m) => hadithReply(m, hist)], ["next", (m) => nextReply(m, hist)], ["tafsir", tafsirReply], ["ayah", ayahReply], ["tawhid", tawhidReply], ["canned", cannedReply], ["quran", quranReply], ["book", (m) => lughaReply(follow || m)], ["book", nahwReply], ["book", hadithBare], ["din", (m) => (lexicalLoose ? null : dinReply(m))], ["brand", brandReply]]) {
+    for (const [kind, fn] of [["game", (m) => gameReply(m, gameHist)], ["book", (m) => fatawaReply(m, hist)], ["book", (m) => hadithReply(m, hist)], ["next", (m) => nextReply(m, hist)], ["tafsir", tafsirReply], ["ayah", ayahReply], ["tawhid", tawhidReply], ["canned", cannedReply], ["quran", quranReply], ["book", (m) => lughaReply(follow || m)], ["book", nahwReply], ["book", hadithBare], ["book", (m) => (lexicalLoose || body.mode === "code" || body.mode === "create" ? null : fatawaNaturalReply(m))], ["din", (m) => (lexicalLoose ? null : dinReply(m))], ["brand", brandReply]]) {
       let r = await fn(message);
       if (r) {
         if (kind === "ayah") r = withTafsirSuggest(r, message); // təfsir istənilməyib: ayə/surə cavabına təfsir seçimləri əlavə olunur

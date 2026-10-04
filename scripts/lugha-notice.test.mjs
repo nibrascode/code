@@ -104,13 +104,13 @@ test("chat.js AI yolu: lüğət sualı (İbn Farisdə tapılmasa da) bildirişsi
 });
 
 test("chat.js: həqiqi dini AI cavabında bildiriş qalır; dinReply lüğət sualında işə düşmür", async () => {
-  for (const q of ["Namazda əl qaldırmaq caizdirmi?", "ما حكم الصلاة في الثوب النجس", "is music haram in islam", "Allahın sifətləri sözünün mənası"]) {
+  for (const q of ["Namazda saqqız çeynəmək caizdirmi?", "ما حكم الصلاة بالتيشرت المطبوع", "is crypto trading haram in islam", "Allahın sifətləri sözünün mənası"]) {
     const r = await run({ message: q, history: [], noticeShown: false }, "Cavab.");
     assert.equal(r.notice, true, q);
     assert.ok(r.reply.startsWith("::notice::"), q);
   }
   // noticeShown:true -> bildiriş yoxdur (əvvəlki qayda dəyişməyib)
-  const r = await run({ message: "Namazda əl qaldırmaq caizdirmi?", history: [], noticeShown: true }, "Cavab.");
+  const r = await run({ message: "Namazda saqqız çeynəmək caizdirmi?", history: [], noticeShown: true }, "Cavab.");
   assert.ok(!r.notice);
   // lüğət sualında dinReply (توحيد, حرام sözləri) AI-ə getmir/bildiriş vermir
   const d = await run({ message: "الحرام ne demek", history: [], noticeShown: false });

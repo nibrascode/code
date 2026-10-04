@@ -4,7 +4,8 @@ import assert from "node:assert/strict";
 import handler from "../api/chat.js";
 import { norm, tokens } from "../api/_hadith/tok.js";
 import { cleanPage } from "./fatawa-clean.mjs";
-import { fatawaReply, parseFatawaQuery, searchFatawa, getPage, excerpt, sourceLines, __loadIndex, PAGE } from "../api/_fatawa.js";
+import { topicCount, topicAlts, matchTopics } from "../api/_fatawa/topicmatch.js";
+import { fatawaReply, fatawaNaturalReply, parseNaturalQuery, parseFatawaQuery, searchFatawa, getPage, excerpt, sourceLines, __loadIndex, PAGE } from "../api/_fatawa.js";
 
 async function run(body, ai = null) {
   const res = { setHeader() {}, status(c) { this.code = c; return this; }, json(b) { this.body = b; return this; }, end() {} };
@@ -45,7 +46,7 @@ test("normallaşdırma hədis ilə eynidir", () => {
 });
 
 test("sorğunun aşkarlanması: tetikleyicilər (ar/az/tr/en/ru) və cild/səhifə", () => {
-  const q = (m) => parseFatawaQuery(m);
+  const q = (m) => { const r = parseFatawaQuery(m); if (r) delete r.alts; return r; };
   assert.deepEqual(q("فتاوى ابن تيمية الاستغاثة بالنبي"), { mode: "q", phrase: "الاستغاثة بالنبي" });
   assert.deepEqual(q("مجموع الفتاوى: التوسل"), { mode: "q", phrase: "التوسل" });
   assert.deepEqual(q("Məcmuu əl-Fətava istiğasə"), { mode: "q", phrase: "الاستغاثة" });
@@ -207,4 +208,82 @@ test("digər handlerləri oğurlamır: hədis, ayə, nəhv, lüğət", async () 
   assert.ok(!n.reply.includes("::tafsir fatawa::"));
   const hn = await run({ message: "Buxari 1", noticeShown: false });
   assert.ok(hn.reply.includes("::tafsir hadith::"));
+});
+
+// ---------------------------------------------------------------- kitab adının yazılışı və təbii dil mövzu axtarışı
+const chat = (message, extra = {}) => run({ message, lang: "az", history: [], noticeShown: false, ...extra });
+const isFatawa = (r) => r && /::tafsir fatawa::/.test(r.reply) && r.usedAI !== true && !r.notice && !/\u26A0|süni intellekt/i.test(r.reply.split("::tafsir")[0]);
+
+test("kitab adının yazılış variantları: bələdçi cavab (surə cavabı və AI yox)", async () => {
+  for (const m of ["Macmuuk fetava", "Macmu fetava", "mejmu al-fatawa", "Mecmuu fetava", "Məcmuu əl-Fətava", "مجموع الفتاوى", "Majmu fatawa", "Mecmuul fetava", "Маджму аль-фатава"]) {
+    assert.equal(parseFatawaQuery(m).mode, "usage", m);
+    const r = await chat(m);
+    assert.ok(!/::tafsir/.test(r.reply), m);
+    assert.ok(!r.usedAI && !r.notice, m);
+    assert.ok(/مجموع الفتاوى المجلد 3 صفحة 10/.test(r.reply) && /35/.test(r.reply), m + " bələdçi");
+  }
+  const f = await chat("Fatihə surəsi");
+  assert.ok(/::ayah 1:1-7::/.test(f.reply) && !/fatawa/.test(f.reply));
+});
+
+test("təbii sual: mövzu + hökm sualı (az/tr/en/ru/ar) — fətva blokları, bildiriş və AI yoxdur", async () => {
+  const cases = [
+    ["namaz qılmayanın hökmü nədir", "تارك الصلاة"],
+    ["faiz haramdır?", "الربا"],
+    ["təvəssül caizdirmi", "التوسل"],
+    ["mövlud", "المولد"],
+    ["zəkat kimlərə verilir", "مصارف الزكاة"],
+    ["oruc pozan şeylər", "مفطرات الصيام"],
+    ["qəbir ziyarəti", "زيارة القبور"],
+    ["sihr", "السحر"],
+    ["tövbə", "التوبة"],
+    ["talaq", "الطلاق"],
+    ["musiqi dinləmək caizdirmi", "الغناء"],
+    ["namaz kılmayanın hükmü nedir", "تارك الصلاة"],
+    ["mevlid kandili kutlamak caiz mi", "المولد"],
+    ["what is the ruling on interest from a bank", "الربا"],
+    ["is it permissible to shave the beard", "اللحية"],
+    ["Какой хукм у колдовства", "السحر"],
+    ["Макрух ли бороду брить", "اللحية"],
+    ["что нарушает пост", "مفطرات"],
+    ["ما حكم الربا", "الربا"],
+    ["هل يجوز التوسل بالنبي", "التوسل"],
+  ];
+  for (const [m, topic] of cases) {
+    const r = await chat(m);
+    assert.ok(isFatawa(r), m + " → " + String(r.reply).slice(0, 80));
+    assert.ok(blocks(r.reply).length >= 1 && blocks(r.reply).every((b) => b.src.length === 2), m);
+  }
+  // mövzu doğru seçilir
+  for (const [m, topic] of cases.filter((c) => /[\u0621-\u064A]/.test(c[1]))) {
+    assert.ok(topicAlts(m).alts.some((a) => a.includes(topic) || topic.includes(a)) || /[\u0621-\u064A]/.test(m), m + " topic " + topic);
+  }
+});
+
+test("təbii sual tetiklənmir: salam, kod, oyun, bilinməyən mövzu, ayə, hədis, söz mənası", async () => {
+  for (const m of ["salam", "bank hesabı açmaq üçün kod yaz", "is it haram to cheat in exams", "kürək ağrısı", "what is the ruling on bitcoin", "bu gün hava necədir", "Bəqərə 255", "hədis niyyət haqqında", "معنى الصبر", "ihlas nə deməkdir"]) {
+    assert.equal(parseNaturalQuery(m), null, m);
+    const r = await chat(m, m.includes("kod") ? { mode: "code" } : {});
+    assert.ok(!/::tafsir fatawa::/.test(r.reply), m);
+  }
+  assert.equal(await fatawaNaturalReply("faiz haramdır?").then((x) => /::tafsir fatawa::/.test(x)), true);
+  // kod və yaradıcı rejimdə təbii fətva axtarışı işləmir
+  assert.ok(!/::tafsir fatawa::/.test((await chat("faiz haramdır?", { mode: "code" })).reply));
+  assert.ok(!/::tafsir fatawa::/.test((await chat("namaz qılmayanın hökmü nədir", { mode: "create" })).reply));
+});
+
+test("mövcud canned/din/hədis/təfsir cavabları oğurlanmır", async () => {
+  for (const m of ["hədis niyyət haqqında", "Bəqərə 255 təfsiri", "Fatihə surəsi", "ayətəl kürsi", "الفاتحة", "إعراب الحمد لله"]) {
+    const r = await chat(m);
+    assert.ok(!/::tafsir fatawa::/.test(r.reply), m);
+  }
+});
+
+test("mövzu lüğəti: 400+ mövzu, açarlar ümumi söz deyil, təbii sorğu yenə də «davam» ilə davam edir", async () => {
+  assert.ok(topicCount() >= 400, "topicCount " + topicCount());
+  for (const w of ["ve", "bu", "the", "and", "islam", "allah", "namaz", "haram", "halal"]) assert.equal(matchTopics(w).hits.filter((h) => !h.weak).length === 0 || w === "namaz", true, w);
+  const first = await chat("talaq");
+  assert.ok(/::sug::/.test(first.reply));
+  const second = await chat("davam", { history: [{ role: "user", text: "talaq" }, { role: "assistant", text: first.reply }] });
+  assert.ok(/::tafsir fatawa::/.test(second.reply) && !second.reply.includes("nəticə tapıldı"));
 });
