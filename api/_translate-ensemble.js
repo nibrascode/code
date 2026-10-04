@@ -92,6 +92,8 @@ function tokensFor(len) {
   return Math.max(1500, Math.min(4000, len * 2 + 1000)); // gizli «düşünmə» tokenləri də bura daxildir
 }
 
+const clip = (v) => String(v == null ? "" : v).replace(/\s+/g, " ").replace(/(key|token|bearer)[^\s"]*/gi, "$1…").slice(0, 120);
+
 async function callProvider(ask, id, { system, user, maxTokens, deadlineAt, perCallMs }) {
   const t0 = Date.now();
   const cfg = {
@@ -104,9 +106,9 @@ async function callProvider(ask, id, { system, user, maxTokens, deadlineAt, perC
     const r = await aiConfig.run(cfg, () => ask(id, [{ role: "user", text: user }], user));
     if (r && r.ok && r.reply) return { id, ok: true, text: r.reply, ms: Date.now() - t0 };
     if (r && r.skipped) return { id, ok: false, reason: "skipped", ms: Date.now() - t0 };
-    return { id, ok: false, reason: "error", ms: Date.now() - t0 };
+    return { id, ok: false, reason: "error", detail: clip(r && r.detail), ms: Date.now() - t0 };
   } catch (e) {
-    return { id, ok: false, reason: /abort|timeout/i.test(String(e && (e.name || e.message))) ? "timeout" : "error", ms: Date.now() - t0 };
+    return { id, ok: false, reason: /abort|timeout/i.test(String(e && (e.name || e.message))) ? "timeout" : "error", detail: clip(e && e.message), ms: Date.now() - t0 };
   }
 }
 
@@ -186,7 +188,7 @@ export function createEnsemble(opts = {}) {
         diag.attempted.push(r.id);
         if (r.valid) {
           cands.push({ id: r.id, text: r.text, rank: STRONG.includes(r.id) ? STRONG.indexOf(r.id) : 10 + WEAK.indexOf(r.id), ms: r.ms });
-        } else diag.failed.push({ id: r.id, reason: r.reason || "invalid" });
+        } else diag.failed.push({ id: r.id, reason: r.reason || "invalid", ...(r.detail ? { detail: r.detail } : {}), ms: r.ms });
       }
     };
     const first = pickProviders(avail, o.n, used, offset);
