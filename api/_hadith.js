@@ -8,6 +8,7 @@ import { detectLang, foldLat } from "./_ayah.js";
 import { isLexicalQuestion } from "./_lugha.js";
 import { norm, stem, tokens, tokenSpans } from "./_hadith/tok.js";
 import { LOADERS, SHARD } from "./_hadith/loaders.js";
+import { sentenceStart, sentenceEnd } from "./_excerpt.js";
 
 export const PAGE = 5; // bir mesajda göstərilən hədis sayı
 export const MAX_LIST = 800; // bundan çox uyğunluq: siyahı verilmir, dəqiqləşdirmə istənir
@@ -248,16 +249,9 @@ export function excerpt(text, termSet) {
     const sp = tokenSpans(text).find((x) => termSet.has(x.t));
     if (sp) pos = sp.start;
   }
-  let a = pos > 1000 ? pos - 500 : 0;
+  let a = pos > 1000 ? sentenceStart(text, pos, 600) : 0;
   let b = Math.min(text.length, a + MAX_CHARS);
-  if (a > 0) {
-    const sp = text.indexOf(" ", a);
-    if (sp > 0 && sp - a < 80) a = sp + 1;
-  }
-  if (b < text.length) {
-    const sp = text.lastIndexOf(" ", b);
-    if (sp > b - 120) b = sp;
-  }
+  if (b < text.length) b = sentenceEnd(text, b, { minPos: a + Math.floor(MAX_CHARS * 0.6), maxFwd: 400 });
   return { text: (a > 0 ? "« ... » " : "") + text.slice(a, b).trim() + (b < text.length ? " « ... »" : ""), cut: true };
 }
 

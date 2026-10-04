@@ -10,6 +10,7 @@ import { norm, tokens, tokenSpans } from "./_hadith/tok.js";
 import { topicAlts, matchTopics } from "./_fatawa/topicmatch.js";
 import { LOADERS, SHARD } from "./_fatawa/loaders.js";
 import { namesFatawaBook } from "./_fatawa-name.js";
+import { sentenceStart, sentenceEnd } from "./_excerpt.js";
 
 export const PAGE = 5; // bir mesajda göstərilən nəticə sayı
 export const MAX_RANK = 500; // siyahıda saxlanan ən yaxşı nəticə sayı
@@ -274,21 +275,11 @@ export function excerpt(text, termSet, phraseToks, max = EXCERPT, full = FULL_MA
     }
     anchor = found;
   }
-  let a = Math.max(0, anchor - 160);
-  if (a > 0) {
-    const nl = text.lastIndexOf("\n", anchor);
-    if (nl >= a - 300 && nl < anchor) a = nl + 1;
-    else {
-      const sp = text.indexOf(" ", a);
-      if (sp > 0 && sp - a < 80) a = sp + 1;
-    }
-  }
+  // başlanğıc: uyğunluq yerini əhatə edən cümlənin (paraqrafın) əvvəli; çox uzaqdırsa vergül/söz sərhədi
+  const a = sentenceStart(text, anchor, 600);
   let b = Math.min(text.length, a + max);
   if (text.length - b < 120) b = text.length;
-  else {
-    const sp = text.lastIndexOf(" ", b);
-    if (sp > b - 150) b = sp;
-  }
+  else b = sentenceEnd(text, b, { minPos: a + Math.floor(max * 0.6), maxFwd: 200 });
   return { text: (a > 0 ? "« ... » " : "") + text.slice(a, b).trim() + (b < text.length ? " « ... »" : ""), cut: a > 0 || b < text.length };
 }
 

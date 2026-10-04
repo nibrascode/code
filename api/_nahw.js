@@ -10,6 +10,7 @@ import { PHRASES, UNIQUE_SINGLE, AMBIG_SINGLE, PARTICLES, PARTICLE_EXPAND, LAT_T
 import { AUTHOR_BOOST, DIDACTIC, DIDACTIC_BOOST, ADVANCED_RE, MAX_RESULTS, EXCERPT_CHARS, MIN_COVERAGE } from "./_nahw/config.js";
 import { LOADERS } from "./_nahw/loaders.js";
 import { checkExcerpt, isLanQuery, gkey } from "./_nahw/guard.js";
+import { sentenceStart, sentenceEnd } from "./_excerpt.js";
 
 const AR_LETTER = /[\u0621-\u064A\u0671-\u06D3]/;
 const MARKS = /[\u064B-\u065F\u0670\u06D6-\u06ED\u0640\u0610-\u061A\u200c-\u200f]/g;
@@ -274,27 +275,11 @@ export function bestWindow(text, termSet, maxChars = EXCERPT_CHARS, anchor = nul
   }
   let start = hits.length ? best.a : 0;
   if (anchor != null) start = anchor;
-  // ~250 simvol əvvələ qədər paraqraf/cümlə başına çək
-  const back = anchor != null ? "" : text.slice(Math.max(0, start - 260), start);
-  const nl = back.lastIndexOf("\n");
-  const dot = Math.max(back.lastIndexOf(". "), back.lastIndexOf("؟ "), back.lastIndexOf(": "));
-  if (nl >= 0) start = start - (back.length - nl - 1);
-  else if (dot >= 0) start = start - (back.length - dot - 2);
-  else {
-    const sp = back.lastIndexOf(" ");
-    if (sp >= 0 && start - 260 > 0) start = start - (back.length - sp - 1);
-  }
+  // başlanğıc: uyğunluq yerini əhatə edən cümlənin/paraqrafın əvvəli (anchor = bölmə başlığı, olduğu kimi qalır)
+  if (anchor == null) start = sentenceStart(text, start, 600);
   start = Math.max(0, start);
   let end = Math.min(text.length, start + maxChars);
-  if (end < text.length) {
-    const seg = text.slice(start, end);
-    const cut = Math.max(seg.lastIndexOf(". "), seg.lastIndexOf(".\n"), seg.lastIndexOf("\n"), seg.lastIndexOf("؟"));
-    if (cut > maxChars * 0.6) end = start + cut + 1;
-    else {
-      const sp = seg.lastIndexOf(" ");
-      if (sp > maxChars * 0.5) end = start + sp;
-    }
-  }
+  if (end < text.length) end = sentenceEnd(text, end, { minPos: start + Math.floor(maxChars * 0.6), maxFwd: 300 });
   let out = text.slice(start, end).trim();
   if (start > 0 && anchor == null) out = "... " + out;
   if (end < text.length) out = out + " ...";
