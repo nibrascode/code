@@ -438,12 +438,16 @@ export async function tafsirReply(message, forceLang) {
     }
   }
   const others = BOOKS.filter((b) => b !== book);
-  const tail = [];
-  if (!q.book) tail.push(tt.others(others.map((b) => `«${LABEL[lang][b]}»`).join(", ")));
-  tail.push(tt.nofree);
-  out.push("::note:: " + tail.join(" "));
+  out.push("::note:: " + tt.nofree);
   if (ctxInfo) out.push(`::ctx:: ${ctxInfo.s}:${ctxInfo.a1}-${ctxInfo.a2} ${book} ${ctxInfo.pno}/${ctxInfo.total} ${lang}`); // gizli: «növbəti ayə» üçün (UI və AI tarixçəsində göstərilmir)
-  return out.join("\n\n");
+  // Digər təfsirlər: klikləmə düymələri (::sug::); düymə eyni ayə/aralıq üçün həmin təfsirin birinci hissəsini sorğulayır (AI-siz, mənbə kitabdır).
+  // Sıra BOOKS sırasıdır (Müyəssər, Sədi, İbn Kəsir): heç bir təfsirə üstünlük verilmir.
+  const chipRef = (b) => (multiRef || !ctxInfo ? `${tt.lead[b] && lang !== "ar" ? tt.lead[b] : LABEL.ar[b]} ${q.stripped}`.replace(/\s+/g, " ").trim() : bookQuery(lang, b, ctxInfo.s, ctxInfo.a1, ctxInfo.a2));
+  const sugLines = ["::sug::", `::sl:: ${tt.others("").replace(/\s*\.$/, "")}`];
+  for (const b of others) sugLines.push(`::sb:: ${L[b]} | ${chipRef(b)}`);
+  sugLines.push("::/sug::");
+  out.push(sugLines.join("\n"));
+  return out.join("\n\n").replace(/\n\n(::sug::|::ctx::)/g, "\n$1");
 }
 /** «Davam» üçün hazır sorğu: hissə qalıbsa eyni təfsirin növbəti hissəsi, yoxsa eyni kitabla növbəti ayə. */
 export function continuationQuery(lang, book, s, a1, a2, pno, total) {

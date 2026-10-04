@@ -73,14 +73,14 @@ test("surə sonu: növbəti surənin 1-ci ayəsi; 114:6-dan sonra nəzakətli da
   }
 });
 
-test("təfsirdən sonra: eyni kitabla növbəti ayə + təfsiri (interleaved); dil davam edir; təklif düymələri olmur", async () => {
+test("təfsirdən sonra: eyni kitabla növbəti ayə + təfsiri (interleaved); dil davam edir; yalnız digər 2 təfsirin düymələri", async () => {
   const say = convo();
   const r0 = await say("Bəqərə 255 təfsiri");
   assert.deepEqual(head(r0.reply), ["ayah 2:255", "tafsir muyassar"]);
   for (const [w, a] of [["davam", 256], ["ثم", 257], ["sonra", 258]]) {
     const r = await say(w);
     assert.deepEqual(head(r.reply), [`ayah 2:${a}`, "tafsir muyassar"], w);
-    assert.doesNotMatch(r.reply, /::sug::/);
+    assert.equal((r.reply.match(/^::sb:: /gm) || []).length, 2, "yalnız digər təfsirlər");
     assert.match(r.reply, /::tl:: Təfsir əl-Müyəssər \(ərəbcə\)/);
   }
   const s2 = convo();
@@ -239,6 +239,6 @@ test("səhifə: ayə sonra «ثم», «davam», «sonra» dəfələrlə — hər
   const lastBot = all[all.length - 1];
   assert.ok(lastBot.querySelector(".tf"), "təfsir də gəlir");
   assert.match(lastBot.querySelector(".ay").textContent, /Bəqərə surəsi, 261-c[iıuü] ayə/);
-  assert.equal(lastBot.querySelectorAll(".sg").length, 0);
+  assert.equal(lastBot.querySelectorAll(".sg button.chip").length, 2, "təfsirdən sonra yalnız digər 2 təfsirin düymələri");
   assert.equal(d.querySelectorAll("#msgs .nt").length, 0, "ayə/təfsir daxili mənbədir: bildiriş yoxdur");
 });

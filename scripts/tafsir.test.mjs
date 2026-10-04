@@ -93,12 +93,12 @@ test("cavab: «Bəqərə 255 təfsiri» — ayə (ərəbcə + az mənası), sonr
   const r = await tafsirReply("Bəqərə 255 təfsiri");
   assert.deepEqual(head(r), ["ayah 2:255", "tafsir muyassar"]);
   assert.ok(r.indexOf("::ayah 2:255::") < r.indexOf("::tafsir muyassar::"));
-  assert.doesNotMatch(r, /::sug::/, "təfsir cavabında təklif bloku olmur");
+  assert.match(r, /::sug::\n::sl:: Digər təfsirlər:\n::sb:: Təfsir əs-Sədi \(ərəbcə\) \| Sədi təfsiri 2:255\n::sb:: Təfsir İbn Kəsir \(ərəbcə\) \| İbn Kəsir təfsiri 2:255\n::\/sug::/, "digər təfsirlər düymə kimi");
   assert.match(r, /::tr:: Mənaca tərcümə \(Azərbaycan dili\):/);
   assert.equal(label(r), "Təfsir əl-Müyəssər (ərəbcə)");
   assert.match(r, /\nالله الذي لا يستحق الألوهية والعبودية إلا هو/);
   assert.match(r, /::src:: Mənbə: QuranEnc\.com · التفسير الميسر\n::\/tafsir::/);
-  assert.match(r, /::note:: Digər təfsirlər: «Təfsir əs-Sədi \(ərəbcə\)», «Təfsir İbn Kəsir \(ərəbcə\)»\. Təfsir ərəbcə orijinalda verilir; Azərbaycancaya tərcümə edilməyib\./);
+  assert.match(r, /::note:: Təfsir ərəbcə orijinalda verilir; Azərbaycancaya tərcümə edilməyib\./);
   // tərcümə uydurulmur: tafsir blokunda Azərbaycan mətni yoxdur
   const taf = r.split("::tafsir muyassar::")[1].split("::/tafsir::")[0];
   assert.doesNotMatch(taf.replace(/::(tl|src)::[^\n]*/g, ""), /[a-zA-ZəıöüçşğƏİÖÜÇŞĞ]{3}/);
@@ -131,11 +131,11 @@ test("cavab: tr/en/ru/ar üçün ad və mənbə; ərəb UI ərəbcə ad; az mən
   const tr = await tafsirReply("Kur'an Bakara 255 tefsiri");
   assert.equal(label(tr), "Tefsîr el-Müyesser (Arapça)");
   assert.doesNotMatch(tr, /::tr::/);
-  assert.match(tr, /::note:: Diğer tefsirler:/);
+  assert.match(tr, /::sl:: Diğer tefsirler:/);
   const en = await tafsirReply("Tafsir of Ayat al-Kursi");
   assert.equal(label(en), "Tafsir al-Muyassar (Arabic)");
   assert.match(en, /::src:: Source: QuranEnc\.com/);
-  assert.match(en, /Other tafsirs:/);
+  assert.match(en, /::sl:: Other tafsirs:/);
   const ru = await tafsirReply("тафсир Ибн Касир 2:255");
   assert.match(label(ru), /^Тафсир Ибн Касир \(на арабском\) — часть 1\/\d+$/);
   const ar = await tafsirReply("تفسير الآية 255 البقرة");

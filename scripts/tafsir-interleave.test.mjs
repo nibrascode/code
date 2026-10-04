@@ -49,9 +49,12 @@ test("növbələşmə: «Bəqərə 255-257 təfsiri» — ayə, təfsiri, ayə, 
   for (const b of ayahBlocks) assert.match(b, /::tr:: Mənaca tərcümə \(Azərbaycan dili\):/);
   // yalnız bir ədəd mənbə sətri tafsir bloku sonunda; ad hər blokda
   assert.equal((r.match(/^::tl:: /gm) || []).length, 3);
-  assert.match(r, /::src:: Mənbə: QuranEnc\.com · التفسير الميسر\n::\/tafsir::\n\n::note:: Digər təfsirlər/);
+  assert.match(r, /::src:: Mənbə: QuranEnc\.com · التفسير الميسر\n::\/tafsir::\n\n::note:: Təfsir ərəbcə orijinalda/);
   assert.equal((r.match(/^::src:: Mənbə: QuranEnc\.com · التفسير الميسر$/gm) || []).length, 1);
-  assert.doesNotMatch(r, /::sug::/);
+  const sg = sugOf(r);
+  assert.ok(sg && sg.chips.length === 2, "digər 2 təfsir üçün düymə");
+  assert.deepEqual(sg.chips.map((c) => c[0]), ["Təfsir əs-Sədi (ərəbcə)", "Təfsir İbn Kəsir (ərəbcə)"]);
+  assert.deepEqual(sg.chips.map((c) => c[1]), ["Sədi təfsiri 2:255-257", "İbn Kəsir təfsiri 2:255-257"]);
 });
 
 test("növbələşmə: «تفسير الملك 1-10» — bir səhifədə 8 ayə, davamı «الجزء ٢»; hər ayə bir dəfə, sıra pozulmur", async () => {
@@ -197,7 +200,9 @@ test("təklif olunan sorğu işləyir: 114 surə × 5 dil × 3 kitab — tanın�
           assert.ok(t, query);
           assert.ok(head(t).includes(`ayah ${s}:${lo}`) || head(t).some((h) => h.startsWith(`ayah ${s}:${lo}-`)), query);
           assert.ok(head(t).includes("tafsir " + BOOKS[i]), query);
-          assert.doesNotMatch(t, /::sug::/);
+          const tg = sugOf(t);
+          assert.ok(tg && tg.chips.length === 2, query);
+          assert.deepEqual(tg.chips.map((c) => parseTafsirQuery(c[1]).book), BOOKS.filter((b) => b !== BOOKS[i]), query);
         }
       }
       checked++;
@@ -211,7 +216,11 @@ test("təklif: tafsir cavabında, məlumat qeydində və ayəsiz cavabda yoxdur;
     const t = await tafsirReply(q);
     assert.equal(withTafsirSuggest(t, q), t, q);
     const c = (await chat({ message: q })).reply;
-    assert.doesNotMatch(c, /::sug::/, q);
+    if (q === "Müyəssər təfsiri") assert.doesNotMatch(c, /::sug::/, q); // ayəsiz məlumat cavabı
+    else {
+      assert.equal((c.match(/::sug::/g) || []).length, 1, q); // yalnız «digər təfsirlər» düymələri (2 ədəd)
+      assert.equal(sugOf(c).chips.length, 2, q);
+    }
   }
   assert.equal(withTafsirSuggest("Salam, necəsən?", "salam"), "Salam, necəsən?");
   const bad = ayahReply("Bəqərə 500");
@@ -234,10 +243,11 @@ test("server: ayə cavabına təklif əlavə olunur; daxili mənbə olduğundan 
   const legacy = await chat({ message: "Mülk surəsi" });
   assert.ok(!hasNotice(legacy.reply));
   assert.ok(sugOf(legacy.reply));
-  // təfsir sorğusu: bildiriş yoxdur (daxili mənbə), təklif yoxdur
+  // təfsir sorğusu: bildiriş yoxdur (daxili mənbə); yalnız digər 2 təfsir düyməsi var
   const t = await chat({ message: "Bəqərə 255 təfsiri", noticeShown: false });
   assert.ok(!hasNotice(t.reply) && !t.notice);
-  assert.doesNotMatch(t.reply, /::sug::/);
+  assert.equal(t.usedAI, false);
+  assert.equal(sugOf(t.reply).chips.length, 2);
 });
 
 test("təklif AI tarixçəsinə düşmür", () => {
@@ -308,7 +318,8 @@ test("səhifə: növbələşmiş təfsir — ayə və təfsir bloku növbə ilə
   const kids = [...bubble.children].filter((e) => e.classList.contains("ay") || e.classList.contains("tf")).map((e) => (e.classList.contains("ay") ? "ay" : "tf"));
   assert.deepEqual(kids, ["ay", "tf", "ay", "tf", "ay", "tf"]);
   assert.equal(bubble.querySelectorAll(".tf .tfl").length, 3);
-  assert.equal(bubble.querySelectorAll(".sg").length, 0, "təfsir cavabında təklif yoxdur");
+  assert.equal(bubble.querySelectorAll(".sg").length, 1, "təfsir cavabında yalnız «digər təfsirlər» düymələri");
+  assert.equal(bubble.querySelectorAll(".sg button.chip").length, 2);
   assert.equal(d.querySelector("#btn").disabled, false);
 });
 
@@ -326,7 +337,7 @@ test("səhifə: təklif düymələri 3 kiçik düymə kimi çəkilir; kliklə ha
   const last = bots[bots.length - 1];
   assert.ok(last.querySelector(".tf"), "təfsir gəldi");
   assert.match(last.querySelector(".ay .at").textContent, /تَبَارَكَ|تبارك/);
-  assert.equal(last.querySelectorAll(".sg").length, 0);
+  assert.deepEqual([...last.querySelectorAll(".sg button.chip")].map((b) => b.textContent), ["Təfsir əs-Sədi (ərəbcə)", "Təfsir İbn Kəsir (ərəbcə)"]);
   assert.equal(d.querySelectorAll("#msgs .nt").length, 0, "daxili mənbə cavablarında bildiriş yoxdur");
   assert.equal(d.querySelector("#btn").disabled, false);
   // sonrakı klik: Sədi
