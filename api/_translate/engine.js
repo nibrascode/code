@@ -2,17 +2,24 @@
 //  1) sabit ifadə lüğəti (formulae): dua/salavat ifadələri, qarşılıqları korpusdan sayla çıxarılıb;
 //  2) hədis uyğunlaşdırması: giriş mətni HadeethEnc hədis mətnləri ilə (ən uzun ortaq söz ardıcıllığı) tutuşdurulur, tapılan hədisin hazır tərcüməsi qaytarılır;
 //  3) tapılmasa: method "no-source" (heç vaxt uydurma yoxdur);
-//  4) İSTƏYƏ BAĞLI: TRANSLATE_ENGINE_URL təyin olunubsa (src/adapter.js) və 1-3 nəticə vermədisə, model mühərriki çağırılır (method "model").
+//  4) İSTƏYƏ BAĞLI: mühərrik adapteri (setDefaultEngine / opts.engine / TRANSLATE_ENGINE_URL, src/adapter.js). 1-3 nəticə vermədisə (və ya hədəf dildə insan tərcüməsi yoxdursa) çağırılır:
+//     method "model" (tək mühərrik) və ya "ensemble" (bir neçə modelin konsensusu; adapter özü method qaytarır). Həmişə «maşın tərcüməsi» kimi etiketlənir, insan tərcümələri parallel[]-də qalır.
 import { loadPart } from "./data.js";
 import { tokens, quotedCore, numbersIn, detectScript, normAr, normLat } from "./normalize.js";
 import { msg, footerFor, BRAND, UI_LANGS } from "./messages.js";
 import { envEngine } from "./adapter.js";
 
 export const LANGS = ["ar", "az", "tr", "en", "ru"];
-export const MAX_TEXT = 4000;
+export const MAX_TEXT = 3000;
 const SOURCE_NAME = "HadeethEnc.com";
 const SOURCE_LICENSE = "Mətn dəyişdirilmədən, mənbə göstərilməklə istifadə olunur (HadeethEnc şərtləri)";
 const hadithUrl = (lang, id) => `https://hadeethenc.com/${lang}/browse/hadith/${id}`;
+let defaultEngine = null;
+/** Host tətbiqi (məs. Nibras AI saytı) öz mühərrikini qeydiyyata alır: async ({text, from, to, ui, ctx}) => {translation, engine?, confidence?, method?, noteKeys?, meta?} | {limited:"rate"|"budget"} | null */
+export function setDefaultEngine(fn) {
+  defaultEngine = typeof fn === "function" ? fn : null;
+}
+export const hasDefaultEngine = () => Boolean(defaultEngine);
 const LANG_NAME = { ar: "ərəbcə", az: "azərbaycanca", tr: "türkcə", en: "ingiliscə", ru: "rusca" };
 
 // ------------------------------------------------------------ indekslər (tənbəl)
@@ -189,7 +196,8 @@ export async function translate(opts = {}) {
   const withFooter = (r) => (r.translation || r.method === "lookup-alt-lang" ? { ...r, footer: footerFor(ui) } : r);
   const fail = (key, vars) => ({ ...base, ok: false, error: msg(ui, key, vars), notes: [msg(ui, key, vars)] });
   if (!text) return fail("empty");
-  if (text.length > MAX_TEXT) return fail("tooLong", { n: MAX_TEXT });
+  const maxChars = Number(opts.maxChars) > 0 ? Number(opts.maxChars) : MAX_TEXT;
+  if (text.length > maxChars) return fail("tooLong", { n: maxChars });
   if (!LANGS.includes(to) || (from !== "auto" && !LANGS.includes(from))) return fail("badLang");
   if (from === to) return fail("sameLang");
 
@@ -203,19 +211,40 @@ export async function translate(opts = {}) {
   else fromLangs = [];
 
   // İstəyə bağlı model mühərriki (yalnız hazır mənbə nəticə verməyəndə və ya hədəf dildə yoxdursa)
-  const engine = opts.model === false ? null : opts.engine || envEngine();
+  const engines = opts.model === false ? [] : opts.engine ? [opts.engine] : [defaultEngine, envEngine()].filter(Boolean);
+  const engine = engines.length
+    ? async (a) => {
+        for (const e of engines) {
+          const m = await e(a);
+          if (m) return m;
+        }
+        return null;
+      }
+    : null;
   const viaModel = async (res) => {
     if (!engine) return null;
-    const m = await engine({ text, from: from !== "auto" ? from : script === "latin" ? "auto" : script || "auto", to });
+    let m = null;
+    try {
+      m = await engine({ text, from: from !== "auto" ? from : script === "latin" ? "auto" : script || "auto", to, ui, ctx: opts.ctx });
+    } catch {
+      m = null;
+    }
+    if (m && m.limited) {
+      return { ...res, limited: m.limited, notes: [msg(ui, m.limited === "rate" ? "rateLimited" : "budget"), ...(res.notes || []).filter((n) => n !== msg(ui, "noSource"))] };
+    }
     if (!m || !m.translation) return null;
+    const method = m.method === "ensemble" ? "ensemble" : "model";
     return withFooter({
       ...res,
-      method: "model",
+      method,
       translation: m.translation,
       translation_lang: to,
       confidence: m.confidence ?? 0.5,
-      sources: [{ name: m.engine, type: "model", lang: to, ...(m.pivot ? { pivot: m.pivot } : {}) }],
-      notes: [msg(ui, "model"), ...(res.notes || []).filter((n) => n !== msg(ui, "noSource"))],
+      machine: true,
+      flags: m.noteKeys || [],
+      sources: [{ name: m.engine, type: method === "ensemble" ? "machine" : "model", lang: to, ...(m.pivot ? { pivot: m.pivot } : {}) }],
+      notes: [msg(ui, "model"), ...(m.noteKeys || []).map((k) => msg(ui, k)), ...(res.notes || []).filter((n) => n !== msg(ui, "noSource"))],
+      ...(opts.debug && m.meta ? { diagnostics: m.meta } : {}),
     });
   };
   const noSource = async (res = {}) => {
@@ -304,6 +333,12 @@ export async function translate(opts = {}) {
   if (chosenFrom !== "ar") crossMap[chosenFrom] = text;
   result.crosscheck = Object.keys(crossMap).length ? crossCheck(crossMap, rowAr[1]) : null;
   const wantRows = Object.keys(rows).filter((l) => l !== to);
+  // Hədis daha uzun mətnin kiçik hissəsidir (məs. fətva içində sitat): hazır tərcümə yalnız o hissəni əhatə edir, qalanı üçün mühərrik; hazır insan tərcüməsi parallel[]-də qalır
+  if (engine && chosenFrom === "ar" && top.type === "contains" && top.cq < 0.6 && tokens("ar", text).length >= 12) {
+    const humanParts = Object.keys(rows).map((l) => row(l));
+    const m = await viaModel({ ...result, parallel: opts.parallel === false ? [] : humanParts, notes: [msg(ui, "humanPart")], sources: [] });
+    if (m && m.translation) return m;
+  }
   if (opts.parallel !== false || !rows[to]) result.parallel = wantRows.map((l) => row(l));
   const shape = [];
   if (top.type === "fragment" || top.type === "matn") shape.push(msg(ui, "fragment"));
@@ -334,6 +369,14 @@ export async function translate(opts = {}) {
     return (await viaModel(result)) || withFooter(result);
   }
   return noSource({ from: chosenFrom, match, candidates });
+}
+
+/** Sabit ifadə cədvəli (mühərrik göstərişləri üçün): [{ar, text}] verilmiş hədəf dilində. */
+export async function formulaHints(to) {
+  const f = await loadPart("formulae");
+  return Object.entries(f)
+    .map(([ar, e]) => ({ ar, text: e.forms?.[to]?.text }))
+    .filter((x) => x.text);
 }
 
 export async function coverage() {

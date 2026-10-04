@@ -3,7 +3,7 @@
 //   POST -> { text, from?, to, ui?, parallel? }  və ya  { texts: [...], from?, to }  (ən çox 20)
 // CORS açıqdır. TRANSLATE_API_KEY mühit dəyişəni təyin olunubdursa: "Authorization: Bearer <key>" və ya "X-API-Key: <key>" tələb olunur.
 import { timingSafeEqual } from "node:crypto";
-import { translate, coverage, LANGS, MAX_TEXT } from "./engine.js";
+import { translate, coverage, hasDefaultEngine, LANGS, MAX_TEXT } from "./engine.js";
 import { BRAND, UI_LANGS } from "./messages.js";
 
 const BATCH_MAX = 20;
@@ -20,8 +20,12 @@ function keyOk(req) {
   return a.length === b.length && timingSafeEqual(a, b);
 }
 
+export function clientIp(req) {
+  return String((req.headers && (req.headers["x-forwarded-for"] || req.headers["x-real-ip"])) || req.socket?.remoteAddress || "?").split(",")[0].trim();
+}
+
 function limited(req) {
-  const ip = String((req.headers && (req.headers["x-forwarded-for"] || req.headers["x-real-ip"])) || req.socket?.remoteAddress || "?").split(",")[0].trim();
+  const ip = clientIp(req);
   const now = Date.now();
   const rec = hits.get(ip) || { t: now, n: 0 };
   if (now - rec.t > RATE.windowMs) {
@@ -57,26 +61,37 @@ export const INFO = {
   service: "nibras-translate-core",
   brand: BRAND,
   version: "0.1.0",
-  model_free: true,
-  description: "Mövcud insan tərcümələrindən axtarış/uyğunlaşdırma ilə tərcümə. LLM və xarici tərcümə API-si işlətmir; uydurma tərcümə yoxdur.",
+  description: "Əvvəl mövcud insan tərcümələrindən axtarış/uyğunlaşdırma. Hədəf dildə insan tərcüməsi yoxdursa və host tətbiq mühərrik qoşubsa: maşın tərcüməsi (method ensemble/model, həmişə etiketlənir). Uydurma «insan tərcüməsi» yoxdur.",
   languages: LANGS,
   max_text_chars: MAX_TEXT,
   max_batch: BATCH_MAX,
   usage: { method: "POST", body: { text: "string", from: "auto|ar|az|tr|en|ru", to: "ar|az|tr|en|ru", ui: "az|tr|en|ru|ar (footer və qeydlərin dili)", parallel: "true|false (digər dillər də qaytarılsın)" } },
   ui_languages: UI_LANGS,
-  methods: { lookup: "hədəf dildə hazır insan tərcüməsi tapıldı", "lookup-alt-lang": "hədəf dildə yoxdur; digər dillərdəki hazır tərcümələr ayrıca etiketlə qaytarıldı", lexicon: "sabit ifadə lüğəti", model: "yalnız TRANSLATE_ENGINE_URL qoşulubsa: model mühərrikinin tərcüməsi (maşın tərcüməsi kimi etiketlənir)", "no-source": "mənbə yoxdur; heç nə uydurulmur" },
-  engine_connected: Boolean(process.env.TRANSLATE_ENGINE_URL),
+  methods: { lookup: "hədəf dildə hazır insan tərcüməsi tapıldı", "lookup-alt-lang": "hədəf dildə yoxdur; digər dillərdəki hazır tərcümələr ayrıca etiketlə qaytarıldı", lexicon: "sabit ifadə lüğəti", model: "yalnız TRANSLATE_ENGINE_URL qoşulubsa: tək model mühərrikinin tərcüməsi (maşın tərcüməsi kimi etiketlənir)", ensemble: "bir neçə modelin müstəqil tərcümələrinin konsensusu (maşın tərcüməsi kimi etiketlənir); yalnız hədəf dildə insan tərcüməsi yoxdursa və host mühərrik qoşubsa", "no-source": "mənbə yoxdur; heç nə uydurulmur" },
+  get engine_connected() {
+    return Boolean(process.env.TRANSLATE_ENGINE_URL) || hasDefaultEngine();
+  },
+  get model_free() {
+    return !this.engine_connected;
+  },
   sources: [{ name: "HadeethEnc.com", url: "https://hadeethenc.com", terms: "Mətn dəyişdirilmədən, mənbə göstərilməklə istifadə" }],
 };
 
-export async function handleTranslate(body) {
+// Bir HTTP sorğusu üçün ortaq kontekst: IP, maşın tərcüməsi üçün simvol limiti, ümumi son vaxt.
+export const REQUEST_ENGINE_CHARS = 6000;
+export function makeCtx(ip, { engineChars = REQUEST_ENGINE_CHARS, budgetMs = 40_000 } = {}) {
+  return { ip: ip || "?", engineChars, deadlineAt: Date.now() + budgetMs };
+}
+
+export async function handleTranslate(body, ctx = makeCtx("?")) {
+  const debug = body && body.debug === true;
   if (Array.isArray(body.texts)) {
     const texts = body.texts.slice(0, BATCH_MAX);
-    const results = [];
-    for (const t of texts) results.push(await translate({ ...body, text: t, texts: undefined }));
+    // paralel: hazır mənbə axtarışı ani, maşın tərcüməsi (varsa) bir-birini gözləməsin
+    const results = await Promise.all(texts.map((t) => translate({ ...body, text: t, texts: undefined, ctx, debug })));
     return { ok: true, results };
   }
-  return translate(body);
+  return translate({ ...body, ctx, debug });
 }
 
 export default async function handler(req, res) {
@@ -99,8 +114,8 @@ export default async function handler(req, res) {
     return send(res, 400, { ok: false, error: "JSON oxunmadı." });
   }
   try {
-    const out = await handleTranslate(body || {});
-    return send(res, out.ok === false && !out.results ? 400 : 200, out);
+    const out = await handleTranslate(body || {}, makeCtx(clientIp(req)));
+    return send(res, out.limited === "rate" ? 429 : out.ok === false && !out.results ? 400 : 200, out);
   } catch (e) {
     return send(res, 500, { ok: false, error: "Daxili xəta." });
   }

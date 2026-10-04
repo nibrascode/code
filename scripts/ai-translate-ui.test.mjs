@@ -112,6 +112,24 @@ for (const file of ["public/ai/index.html", "public/ai.html"]) {
     await wait(40);
     assert.match(q.bubble().querySelector(".trn .trl").textContent, /Maşın tərcüməsi · nllb-600m/);
     q.w.close();
+    // ensemble: provayder adı yoxdur, footer var, fikir ayrılığında xəbərdarlıq, limit mesajı
+    const results2 = [
+      { ok: true, method: "ensemble", translation: "ENS-TEXT", sources: [{ name: "Nibras Tərcümə", type: "machine" }], flags: [], footer: "Nibras Tərcümə ilə tərcümə olunub, xətalar ola bilər" },
+      { ok: true, method: "ensemble", translation: "ENS-2", flags: ["disagree"], footer: "F2" },
+      { ok: true, method: "no-source", translation: null, limited: "budget", notes: ["Bir sorğuda maşın tərcüməsi üçün limit dolub. Bu hissəni ayrıca tərcümə edin."] },
+    ];
+    const e = boot({ reply: () => BLOCKS, translate: (t, i) => results2[i] });
+    await e.say("x");
+    e.trBtn().click();
+    await wait(40);
+    const [n1, n2, n3] = e.bubble().querySelectorAll(".trn");
+    assert.equal(n1.querySelector(".trl").textContent, "Maşın tərcüməsi");
+    assert.equal(n1.querySelector(".trx").textContent, "ENS-TEXT");
+    assert.equal(n1.querySelector(".trf").textContent, "Nibras Tərcümə ilə tərcümə olunub, xətalar ola bilər");
+    assert.equal(n1.querySelector(".trw"), null);
+    assert.match(n2.querySelector(".trw").textContent, /fərqləndi/);
+    if (n3) assert.match(n3.textContent, /limit dolub/);
+    e.w.close();
   });
 
   test(`${file}: Quran ayəsi və adi mətn cavablarında düymə yoxdur; ərəbcə abzas cavabında var (ayə atılır); UI dili`, { skip }, async () => {

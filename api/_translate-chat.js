@@ -3,6 +3,8 @@
 // Yalnız aydın əmr sözü + (iki nöqtə və ya ərəbcə mətn) olanda işləyir. Mənbə tapılmayanda: ərəb yazılı mətn üçün dürüst «mənbə yoxdur» cavabı;
 // qeyri-ərəb mətn üçün null (adi söhbət/AI davam edir ki, adi tərcümə istəkləri pozulmasın).
 import { translate } from "./_translate/engine.js";
+import { makeCtx } from "./_translate/http.js";
+import "./_translate-ensemble.js"; // maşın tərcüməsi mühərriki (hazır tərcümə olmayanda)
 
 const CUES = [
   { re: /^\s*(?:tercüme\s+et|tercüme|çeviri)(?=[\s:：]|$)/i, ui: "tr", def: "tr" },
@@ -81,10 +83,10 @@ export function formatReply(r, ui) {
   const foot = r.footer ? `_${r.footer}_` : "";
   if (r.method === "lexicon") {
     out.push(`**${t.formula}**: ${r.match.key} → ${r.translation}`, r.notes.join(" "), foot);
-  } else if (r.method === "lookup" || r.method === "model") {
+  } else if (r.method === "lookup" || r.method === "model" || r.method === "ensemble") {
     out.push(`**${t.head(t.langs[r.translation_lang])}**`, r.translation);
     const meta = r.translation_meta;
-    const bits = r.method === "model" ? [] : [`${t.src}: HadeethEnc.com — ${r.sources[0].url}`];
+    const bits = r.method === "model" || r.method === "ensemble" ? [] : [`${t.src}: HadeethEnc.com — ${r.sources[0].url}`];
     if (meta?.grade) bits.push(`${t.grade}: ${meta.grade}${meta.attribution ? " · " + meta.attribution : ""}`);
     if (bits.length) out.push(bits.join("\n"));
     out.push(r.notes.join(" "), foot);
@@ -101,14 +103,14 @@ export function formatReply(r, ui) {
   return out.filter(Boolean).join("\n\n");
 }
 
-export async function translateReply(message) {
+export async function translateReply(message, { ip } = {}) {
   const p = parseTranslate(message);
   if (!p) return null;
   const arabic = AR_RE.test(p.text);
   const to = p.to || (arabic ? p.def : "ar");
   let r;
   try {
-    r = await translate({ text: p.text, from: "auto", to, ui: p.ui });
+    r = await translate({ text: p.text, from: "auto", to, ui: p.ui, ctx: makeCtx(ip || "chat", { budgetMs: 36_000 }) });
   } catch {
     return null;
   }

@@ -330,6 +330,7 @@
     .msg .trn .trl a { color: #8fb4ff; text-decoration: underline; }
     .msg .trn .trx { white-space: pre-wrap; }
     .msg .trn .trx + .trl { margin-top: 8px; }
+    .msg .trn .trw { margin-top: 5px; font-size: 11.5px; line-height: 1.4; color: #d9b36a; }
     .msg .trn .trf { margin-top: 5px; font-size: 10.5px; line-height: 1.4; color: #7b8499; }
     .msg .trn.none { background: transparent; border-style: dashed; color: #8d96ad; font-size: 12.5px; }
     .msg .tools button.busy { opacity: .5; cursor: wait; }
@@ -1086,14 +1087,21 @@
     // nəticə hər blokun altında göstərilir. Dil: səhifə/brauzer dili (defolt az). Hazır tərcümə yoxdursa dürüst «mənbə tapılmadı»; başqa dildə olan hazır tərcümə dil etiketi ilə göstərilir.
     const IC_TR = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h9M8.5 3v2M6 5c.6 3.2 2.6 5.6 5.5 7M12 5c-.7 3.7-3.4 6.6-7.5 8.2"/><path d="M12.5 20l3.7-9 3.8 9M13.8 17h4.8"/></svg>';
     const TRN_T = {
-      az: { btn: "Tərcümə et", off: "Tərcüməni gizlət", busy: "Tərcümə olunur…", none: "Bu mətn üçün hazır tərcümə mənbəsi tapılmadı.", err: "Tərcümə alınmadı", human: "Hazır insan tərcüməsi", fixed: "Sabit ifadə", model: "Maşın tərcüməsi", noAz: "{l} dilində hazır tərcümə (azərbaycanca yoxdur)", noTo: "{l} dilində hazır tərcümə", footer: "Nibras Tərcümə ilə tərcümə olunub, xətalar ola bilər" },
-      tr: { btn: "Çevir", off: "Çeviriyi gizle", busy: "Çevriliyor…", none: "Bu metin için hazır çeviri kaynağı bulunamadı.", err: "Çeviri alınamadı", human: "Hazır insan çevirisi", fixed: "Sabit ifade", model: "Makine çevirisi", noAz: "{l} dilinde hazır çeviri (Azerbaycanca yok)", noTo: "{l} dilinde hazır çeviri", footer: "Nibras Tərcümə ile çevrilmiştir, hatalar olabilir" },
-      en: { btn: "Translate", off: "Hide translation", busy: "Translating…", none: "No ready translation source was found for this text.", err: "Translation failed", human: "Existing human translation", fixed: "Fixed phrase", model: "Machine translation", noAz: "Ready translation in {l} (none in Azerbaijani)", noTo: "Ready translation in {l}", footer: "Translated with Nibras Tərcümə; errors are possible" },
-      ru: { btn: "Перевести", off: "Скрыть перевод", busy: "Перевод…", none: "Для этого текста не найден готовый источник перевода.", err: "Не удалось перевести", human: "Готовый человеческий перевод", fixed: "Устойчивое выражение", model: "Машинный перевод", noAz: "Готовый перевод на язык: {l} (азербайджанского нет)", noTo: "Готовый перевод на язык: {l}", footer: "Переведено с помощью Nibras Tərcümə, возможны ошибки" },
-      ar: { btn: "ترجمة", off: "إخفاء الترجمة", busy: "جارٍ الترجمة…", none: "لم يُعثر على مصدر ترجمة جاهز لهذا النص.", err: "تعذّرت الترجمة", human: "ترجمة بشرية جاهزة", fixed: "عبارة ثابتة", model: "ترجمة آلية", noAz: "ترجمة جاهزة بلغة: {l} (لا توجد بالأذربيجانية)", noTo: "ترجمة جاهزة بلغة: {l}", footer: "تمت الترجمة بواسطة Nibras Tərcümə، وقد تحدث أخطاء" },
+      az: { btn: "Tərcümə et", off: "Tərcüməni gizlət", busy: "Tərcümə olunur…", none: "Bu mətn üçün hazır tərcümə mənbəsi tapılmadı.", err: "Tərcümə alınmadı", human: "Hazır insan tərcüməsi", fixed: "Sabit ifadə", model: "Maşın tərcüməsi", noAz: "{l} dilində hazır tərcümə (azərbaycanca yoxdur)", noTo: "{l} dilində hazır tərcümə", warn: "Tərcümələr bir-birindən xeyli fərqləndi; nəticəni yoxlayın.", footer: "Nibras Tərcümə ilə tərcümə olunub, xətalar ola bilər" },
+      tr: { btn: "Çevir", off: "Çeviriyi gizle", busy: "Çevriliyor…", none: "Bu metin için hazır çeviri kaynağı bulunamadı.", err: "Çeviri alınamadı", human: "Hazır insan çevirisi", fixed: "Sabit ifade", model: "Makine çevirisi", noAz: "{l} dilinde hazır çeviri (Azerbaycanca yok)", noTo: "{l} dilinde hazır çeviri", warn: "Çeviriler birbirinden belirgin biçimde farklıydı; sonucu kontrol edin.", footer: "Nibras Tərcümə ile çevrilmiştir, hatalar olabilir" },
+      en: { btn: "Translate", off: "Hide translation", busy: "Translating…", none: "No ready translation source was found for this text.", err: "Translation failed", human: "Existing human translation", fixed: "Fixed phrase", model: "Machine translation", noAz: "Ready translation in {l} (none in Azerbaijani)", noTo: "Ready translation in {l}", warn: "Independent translations differed noticeably; please double-check.", footer: "Translated with Nibras Tərcümə; errors are possible" },
+      ru: { btn: "Перевести", off: "Скрыть перевод", busy: "Перевод…", none: "Для этого текста не найден готовый источник перевода.", err: "Не удалось перевести", human: "Готовый человеческий перевод", fixed: "Устойчивое выражение", model: "Машинный перевод", noAz: "Готовый перевод на язык: {l} (азербайджанского нет)", noTo: "Готовый перевод на язык: {l}", warn: "Независимые переводы заметно расходились; проверьте результат.", footer: "Переведено с помощью Nibras Tərcümə, возможны ошибки" },
+      ar: { btn: "ترجمة", off: "إخفاء الترجمة", busy: "جارٍ الترجمة…", none: "لم يُعثر على مصدر ترجمة جاهز لهذا النص.", err: "تعذّرت الترجمة", human: "ترجمة بشرية جاهزة", fixed: "عبارة ثابتة", model: "ترجمة آلية", noAz: "ترجمة جاهزة بلغة: {l} (لا توجد بالأذربيجانية)", noTo: "ترجمة جاهزة بلغة: {l}", warn: "اختلفت الترجمات المستقلة اختلافًا واضحًا؛ يُرجى التحقق من النتيجة.", footer: "تمت الترجمة بواسطة Nibras Tərcümə، وقد تحدث أخطاء" },
     };
     const TRN_LANGS = { az: "azərbaycanca", tr: "türkcə", en: "ingiliscə", ru: "rusca", ar: "ərəbcə" };
     const TRN_MAX = 8;
+    // Serverin həddi 3000 simvoldur: uzun mətn cümlə sonunda kəsilir
+    function trnCut(t) {
+      if (t.length <= 3000) return t;
+      const head = t.slice(0, 3000);
+      const k = Math.max(head.lastIndexOf("\n"), head.lastIndexOf("."), head.lastIndexOf("؟"), head.lastIndexOf("؛"), head.lastIndexOf("!"));
+      return (k > 1500 ? head.slice(0, k + 1) : head).trim();
+    }
     function arabicWords(t) { return (String(t || "").match(/[\u0621-\u064A\u0671-\u06D3]+/g) || []).length; }
     function arabicRatio(t) {
       const letters = (String(t || "").match(/[A-Za-z\u0400-\u04FF\u0621-\u064A\u0671-\u06D3]/g) || []);
@@ -1105,7 +1113,7 @@
       const out = [];
       el.querySelectorAll(".tf").forEach(function (tf) {
         const t = Array.prototype.map.call(tf.querySelectorAll(".tft .tfp"), function (x) { return x.textContent; }).join("\n").trim();
-        if (arabicWords(t) >= 3) out.push({ text: t.slice(0, 3900), after: tf });
+        if (arabicWords(t) >= 3) out.push({ text: trnCut(t), after: tf });
       });
       if (out.length) return out.slice(0, TRN_MAX);
       // blok yoxdur: ərəbcə abzaslar (Quran ayə/bildiriş/təklif blokları atılır)
@@ -1113,7 +1121,7 @@
       src = src.replace(/(^|\n)::(?:ayah|notice|sug)[^\n]*::\n[\s\S]*?\n::\/(?:ayah|notice|sug)::(?=\n|$)/g, "$1").replace(/^::[a-z]+::[^\n]*$/gm, "");
       src.split(/\n{2,}/).forEach(function (para) {
         const t = para.trim();
-        if (t && arabicWords(t) >= 4 && arabicRatio(t) >= 0.6) out.push({ text: t.slice(0, 3900), after: null });
+        if (t && arabicWords(t) >= 4 && arabicRatio(t) >= 0.6) out.push({ text: trnCut(t), after: null });
       });
       return out.slice(0, TRN_MAX);
     }
@@ -1134,6 +1142,12 @@
       const foot = function () { add("trf", res.footer || T.footer); };
       if (res && res.translation && res.method === "lookup") { label(T.human, res.sources && res.sources[0] && res.sources[0].url); add("trx", res.translation); foot(); }
       else if (res && res.translation && res.method === "lexicon") { label(T.fixed); add("trx", res.translation); foot(); }
+      else if (res && res.translation && res.method === "ensemble") {
+        label(T.model);
+        add("trx", res.translation);
+        if (res.flags && (res.flags.indexOf("disagree") >= 0 || res.flags.indexOf("unverified") >= 0)) add("trw", T.warn);
+        foot();
+      }
       else if (res && res.translation && res.method === "model") { label(T.model + (res.sources && res.sources[0] && res.sources[0].name ? " · " + res.sources[0].name : "")); add("trx", res.translation); foot(); }
       else if (res && res.method === "lookup-alt-lang" && res.parallel && res.parallel.length) {
         // az üstünlüklüdür, sonra səhifə dili, sonra qalanlar
@@ -1141,7 +1155,7 @@
         const list = res.parallel.slice().sort(function (a, b) { return order.indexOf(a.lang) - order.indexOf(b.lang); }).slice(0, 2);
         list.forEach(function (p) { label((lang === "az" ? T.noAz : T.noTo).replace("{l}", (TRN_LANGS[p.lang] || p.lang)), p.source && p.source.url); add("trx", p.text); });
         foot();
-      } else { box.classList.add("none"); add("trx", T.none); }
+      } else { box.classList.add("none"); add("trx", res && res.limited && res.notes && res.notes[0] ? res.notes[0] : T.none); }
       return box;
     }
     function trnLang() { try { const l = uiLang(); return TRN_T[l] ? l : "az"; } catch (e) { return "az"; } }

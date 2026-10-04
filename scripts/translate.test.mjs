@@ -122,7 +122,7 @@ test("səhv girişlər: boş, eyni dil, naməlum dil, uzun mətn", async () => {
   assert.equal((await translate({ text: "", to: "az" })).ok, false);
   assert.equal((await translate({ text: "abc", from: "az", to: "az" })).ok, false);
   assert.equal((await translate({ text: "abc", to: "xx" })).ok, false);
-  assert.equal((await translate({ text: "ا".repeat(4001), to: "az" })).ok, false);
+  assert.equal((await translate({ text: "ا".repeat(3001), to: "az" })).ok, false);
 });
 
 test("model adapteri: opts.engine ilə method:model, maşın tərcüməsi etiketi; hazır tərcümə varsa model çağırılmır", async () => {
@@ -176,7 +176,7 @@ test("HTTP: GET məlumat, POST tək və toplu, CORS, API açarı, səhv JSON", a
   const info = await http("GET");
   assert.equal(info.code, 200);
   assert.equal(info.json.brand, "Nibras Tərcümə");
-  assert.equal(info.json.model_free, true);
+  assert.equal(info.json.model_free, !info.json.engine_connected);
   assert.equal(info.json.coverage.ar, 3574);
   const one = await http("POST", { text: HE, to: "ru" });
   assert.equal(one.code, 200);

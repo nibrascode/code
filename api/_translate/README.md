@@ -62,10 +62,13 @@ POST $TRANSLATE_ENGINE_URL   { "text": "…", "from": "ar", "to": "az" }
 ```
 Mühərrik cavabı `method: "model"` olaraq qayıdır və «Maşın tərcüməsidir» qeydi ilə etiketlənir; hazır insan tərcümələri `parallel`-da qalır. Mühərrik xəta versə/boş qaytarsa sistem `no-source` cavabına qayıdır. Adapter kodu: `src/adapter.js` (testdə `translate({ engine: async ({text,from,to}) => … })` ilə dəyişdirilə bilər).
 
+### Host mühərriki: `setDefaultEngine` + `method: "ensemble"`
+Host tətbiq (məs. Nibras AI saytı) `setDefaultEngine(async ({ text, from, to, ui, ctx }) => …)` ilə öz mühərrikini qeydiyyata alır; cavab `{ translation, engine, confidence, method?: "ensemble", noteKeys?: [...], meta? }` və ya `{ limited: "rate"|"budget" }` və ya `null`. `translate({ ctx })` və `handleTranslate(body, makeCtx(ip))` sorğu konteksti (IP, `engineChars` simvol limiti, `deadlineAt`) ötürür. Nibras saytında bu mühərrik `api/_translate-ensemble.js`-dir (saytın artıq qoşulmuş AI provayderlərinin konsensusu, tərcümə yaddaşı, limitlər). Nəticə həmişə `machine: true`, `flags: [...]` ilə qayıdır; `debug: true` göndərilsə `diagnostics` (provayder id-ləri, gecikmə) əlavə olunur (UI göstərmir). Mətn limiti: 3000 simvol (`MAX_TEXT`, `maxChars` ilə dəyişir). Mətn daha uzun hadisənin içində hazır hədisi ehtiva edir və örtük <60%-dirsə, bütün mətn mühərrikə gedir, hədisin hazır tərcüməsi `parallel[]`-də qalır.
+
 ## Məlumatın yenilənməsi
 `node scripts/fetch-hadeethenc.mjs <RAW>` → `node scripts/build-data.mjs <RAW>`. Mətn dəyişdirilmir.
 
 ## Məhdudiyyətlər
 - Yalnız HadeethEnc-də olan hədislər tərcümə olunur (3574 hədis; Kütübü-sittənin kiçik hissəsi). Eyni mənalı, lakin fərqli rəvayət sözləri olan hədis `partial` olur və tərcümə verilmir.
 - Azərbaycanca hədis tərcüməsi yalnız 475 hədis üçün var; qalanlar üçün tr/en/ru hazır tərcümələri ayrıca etiketlə qaytarılır.
-- Fətva, nəhv, lüğət, təfsir mətnləri üçün hazır tərcümə mənbəsi yoxdur → `no-source` (model mərhələsi lazımdır).
+- Fətva, nəhv, lüğət, təfsir mətnləri üçün hazır insan tərcüməsi yoxdur → mühərrik qoşulmayıbsa `no-source`, qoşulubsa maşın tərcüməsi (`ensemble`/`model`), xətalar ola bilər.
