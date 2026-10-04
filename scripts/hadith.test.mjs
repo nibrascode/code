@@ -203,6 +203,32 @@ test("Buxari: doldurulmuş boşluq nömrələri (yalnız alt qeyd qalmış olanl
   }
 });
 
+test("Buxari: son 13 çatışmayan nömrə (1847, 1848, 3296 …, 7070) Buğa nömrəsi ilə tapılır; Fuad nömrələməsindəki fərq mənbə qeydində göstərilir", async () => {
+  const frags = {
+    1847: "نزل رمضان فشق عليهم", 1848: "هي منسوخه", 3296: "اذا لم تستحي فاصنع ما شيت", 3842: "وعن حنظله بن ابي سفيان",
+    4367: "عبد الله بن براد", 4428: "هم اهل الكتاب", 4552: "اخبرنا معاويه بن ابي المزرد بهذا", 4561: "في البول في المغتسل",
+    4571: "وادبار السجود", 4985: "واثني عشر رجلا", 6407: "حدثنا عمران بن ميسره", 6643: "سحقا سحقا لمن بدل بعدي", 7070: "فسره قتاده لم يدخر",
+  };
+  for (const [n, frag] of Object.entries(frags)) {
+    const r = await run({ message: "صحيح البخاري " + n, noticeShown: false });
+    assert.match(r.reply, new RegExp("::tl:: 1/1 · البخاري · رقم " + n + "\\n"), "Buxari " + n);
+    assert.ok(norm(r.reply).includes(frag), "mətn " + n);
+    assert.match(r.reply, new RegExp("رقم " + n + " \\(ت البغا — نص مكمَّل من نشرة أخرى"), "mənbə " + n);
+    assert.ok(!/PageV|@QB@|@QE@|\bms\d+\b/.test(r.reply), "sızan işarə " + n);
+  }
+  // 7070, 7069-un davamı kimi təkrar olunmur
+  const a = await run({ message: "صحيح البخاري 7069", noticeShown: false });
+  assert.ok(norm(a.reply).includes("او كما حدث") && !norm(a.reply).includes("فسره قتاده لم يدخر"));
+  // əvvəlki doldurmalardan JK işarələri (səhifə/qeyd/Quran) sızmır
+  for (const n of [1723, 3179, 4209]) {
+    const r = await run({ message: "صحيح البخاري " + n, noticeShown: false });
+    assert.match(r.reply, new RegExp("::tl:: 1/1 · البخاري · رقم " + n + "\\n"));
+    assert.ok(!/PageV|@QB@|@QE@|\bms\d+\b/.test(r.reply), "sızan işarə " + n);
+  }
+  // 7123 (son nömrə) və Buxari-də boşluq qalmayıb: 1..7123 bütün nömrələr tapılır (nümunə)
+  for (const n of [1846, 1849, 3295, 3297, 7071]) assert.match((await run({ message: "صحيح البخاري " + n, noticeShown: false })).reply, new RegExp("رقم " + n + "\\n"));
+});
+
 test("Əbu Davud: alt qeyd blokunda qalmış hədislər (1114, 1938, 3382, 5220) tapılır, 594 yoxdur", async () => {
   for (const [n, frag] of [[1114, "فلياخُذ بأنفه"], [1938, "كان أهلُ الجاهلية لا يُفِيضُونَ"], [3382, "سيأتي على الناس زمانٌ عَضُوضٌ"]]) {
     const r = await run({ message: "أبو داود " + n, noticeShown: false });
