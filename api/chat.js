@@ -6,7 +6,7 @@ import { tafsirReply, withTafsirSuggest } from "./_tafsir.js";
 import { nextReply } from "./_next.js";
 import { gameReply } from "./_game.js";
 import { ayahReply, finalizeAi, compactHistory, AYAH_PROMPT } from "./_ayah.js";
-import { lughaReply, isLexicalQuestion, lexicalFollowup } from "./_lugha.js";
+import { lughaReply, lughaNotFoundNote, isLexicalQuestion, lexicalFollowup } from "./_lugha.js";
 import { nahwReply } from "./_nahw.js";
 import { snippetReply } from "./_snippets.js";
 import { localReply } from "./_local.js";
@@ -28,7 +28,8 @@ const SYSTEM = [
 ].join(" ");
 
 const LEXICAL_HINT =
-  "DİQQƏT, bu sual üçün yuxarıdakı «dini sual gələndə yalnız xəbərdarlığı yaz» qaydası keçərli DEYİL. Bu, ərəbcə (və ya dini) sözün mənası (lüğət) sualıdır, dini hökm və ya fətva sualı deyil. Sözün mənasını qısa və düz izah et (kökü, əsas mənası). «Süni intellektdən din öyrənilməz» xəbərdarlığı və İbn Sirin sitatı YAZMA. Allahın sifətlərini təvil etmə.";
+  "DİQQƏT, bu sual üçün yuxarıdakı «dini sual gələndə yalnız xəbərdarlığı yaz» qaydası keçərli DEYİL. Bu, ərəbcə (və ya dini) sözün mənası (lüğət) sualıdır, dini hökm və ya fətva sualı deyil. Sözün mənasını qısa və düz izah et. «Süni intellektdən din öyrənilməz» xəbərdarlığı və İbn Sirin sitatı YAZMA. Allahın sifətlərini təvil etmə. " +
+  "SƏRT QAYDALAR: kök, məna, etimologiya və ya feil formalarını UYDURMA; dəqiq bilmirsənsə, bunu açıq yaz (məsələn «dəqiq bilmirəm»). Quran ayəsi və ya Quranın ərəbcə mətnini, ﴿ ﴾ içində heç nə, [[ayah:..]] işarəsini YAZMA, ayə nömrəsi də göstərmə. Cavab qısa olsun (2-4 cümlə).";
 
 export const LIMIT_REPLY = "Bu gün üçün sual limiti bitdi. Sabah yenidən yaz. Hazır cavabı olan suallar isə bu gün də cavablanır.";
 
@@ -168,8 +169,11 @@ export default async function handler(req, res) {
       if (result.ok) {
         // AI ayə mətni yazıbsa, ərəbcə hissə Tanzil məlumatı ilə əvəz olunur, [[ayah:S:A]] işarələri açılır
         const isRel = isReligious(message, body.mode) && !lexicalLoose;
-        let aiReply = closeTruncatedFence(finalizeAi(result.reply, message));
+        let aiReply = closeTruncatedFence(finalizeAi(result.reply, message, { noBlocks: lexicalLoose }));
         if (lexicalLoose) aiReply = stripNotice(aiReply); // AI özü də xəbərdarlıq yazarsa, silinir
+        // Söz mənası lüğətdə tapılmadı, cavabı AI yazıb: dəqiq olmaya bilər qeydi (dini bildiriş yox)
+        const nf = lexical ? lughaNotFoundNote(follow || message) : null;
+        if (nf && aiReply.trim()) aiReply = aiReply.replace(/\s+$/, "") + "\n\n" + nf;
         if (!aiReply.trim()) {
           notes.push(name + ": boş cavab");
           continue;

@@ -10,6 +10,7 @@ const MAX_CHARS = 1500; // bundan uzun maddə kəsilir
 const SLACK = 150; // MAX_CHARS-dan bu qədər uzun olmayan maddə tam verilir
 const MAX_ENTRIES = 2; // eyni kök üçün bir neçə maddə varsa ən çox
 const TOTAL_CAP = 2400;
+const MAX_COST = 7; // bundan baha (qeyri-dəqiq) kök təxmini göstərilmir
 
 // ---------------------------------------------------------------- normallaşdırma
 const MARKS = /[\u064B-\u065F\u0670\u06D6-\u06ED\u0640\u0610-\u061A\u08D3-\u08FF\u200c\u200d\u200e\u200f]/g;
@@ -178,6 +179,8 @@ export function rootCandidates(word, map) {
       continue;
     }
     add(stem, base); // dəqiq
+    // أفعل + ikihərfli/zəif kök (أسأ ~ أساء، أضا): ilk həmzə artırmadır, qalan 2 hərfə zəif hərf əlavə olunur (سء -> سوء)
+    if (n === 3 && stem[0] === "ء" && !WEAKX.includes(stem[1])) for (const [i, w] of ["و", "ي", "ا"].entries()) { add(stem[1] + w + stem[2], base + 0.9 + i * 0.1); add(stem[1] + stem[2] + w, base + 1.1 + i * 0.1); }
     // تَفْعَل (تقوى): ت başda و əvəzinə gəlir, sonu zəif: تقوى -> وقي (yalnız 4 hərfli, 2 zəif: «تسمى/تعالى» kimi feillərə toxunmur)
     if (stem[0] === "ت" && n === 4 && WEAK.includes(stem[2]) && WEAK.includes(stem[3])) add("و" + stem[1] + stem[3], base + 0.4);
     // أفعلاء (أنبياء، أولياء، أصفياء): kök = 2-ci, 3-cü hərf + zəif/həmzə (نبأ، ولي، صفو)
@@ -432,7 +435,7 @@ export function parseLughaQuery(message) {
   const w = key(core[0]);
   if (w.length < 2) return null;
   if (core.length === 1 && GRAMMAR_PARTICLES.has(w)) return null;
-  return { word: core[0].replace(MARKS, ""), key: w, second: core[1] ? key(core[1]) : null, lang: detectLang(message) };
+  return { word: core[0].replace(MARKS, ""), key: w, second: core[1] ? key(core[1]) : null, lang: translitLang(message) };
 }
 
 // ---------------------------------------------------------------- axtarış
@@ -450,7 +453,7 @@ function subseq(root, word) {
 }
 
 function findIn(db, k) {
-  const cands = rootCandidates(k, db.map).filter((c) => c.cost <= 7);
+  const cands = rootCandidates(k, db.map).filter((c) => c.cost <= MAX_COST);
   if (!cands.length) return null;
   const len = (r) => Math.max(...db.map.get(r).map((i) => db.rows[i][4].length));
   // dəqiq uyğunluq üstündür; qalanlarda xərc eyni olanda daha geniş (daha məşhur) maddə seçilir
@@ -580,4 +583,19 @@ export async function lughaReply(message) {
   // göstəriləcək kök yazısı: kitabdakı orijinal yazılış
   const first = hit.db.rows[hit.idxs[0]][0];
   return formatLugha({ ...hit, root: first }, q);
+}
+
+// ---------------------------------------------------------------- tapılmadı: AI cavabına əlavə olunan sabit qeyd
+const NOT_FOUND_NOTE = {
+  az: "Qeyd: bu söz İbn Farisin lüğətində tapılmadı, cavab dəqiq olmaya bilər.",
+  tr: "Not: bu kelime İbn Fâris'in sözlüğünde bulunamadı, cevap kesin olmayabilir.",
+  en: "Note: this word was not found in Ibn Faris's dictionary, so the answer may not be accurate.",
+  ru: "Примечание: это слово не найдено в словаре Ибн Фариса, ответ может быть неточным.",
+  ar: "ملاحظة: لم تُوجد هذه الكلمة في معجم ابن فارس، فقد لا تكون الإجابة دقيقة.",
+};
+/** Söz mənası sualıdır (ərəbcə söz və ya tanış transliterasiya) və lüğətdə tapılmadı: AI cavabının sonuna əlavə olunacaq sabit qeyd (istifadəçinin dilində). Başqa halda null. */
+export function lughaNotFoundNote(message) {
+  const q = parseLughaQuery(message);
+  if (!q) return null;
+  return NOT_FOUND_NOTE[q.lang] || NOT_FOUND_NOTE.az;
 }

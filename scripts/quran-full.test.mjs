@@ -323,7 +323,7 @@ test("AI cavabı: düzgün (diakritikli) ayə də data ilə eyni qalır; diakrit
   assert.ok(bare.includes(flatAya(112, 1)) && bare.includes(flatAya(112, 2)));
   assert.match(bare, /::ayah 112:1-2::/);
   // mötərizəsiz, bütöv ayə
-  const unb = finalizeAi(`Budur: ${flatAya(1, 2).replace(/[\u064B-\u0652\u0670]/g, "")} deməkdir ki...`, "salam");
+  const unb = finalizeAi(`Budur: ${flatAya(1, 2).replace(/[\u064B-\u0652\u0670]/g, "")} deməkdir ki...`, "Fatihə ayəsini izah et");
   assert.match(unb, /::ayah 1:2::/);
   assert.ok(unb.includes(flatAya(1, 2)));
 });

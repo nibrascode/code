@@ -1079,7 +1079,21 @@ export const AYAH_PROMPT =
  * @param {string} reply AI cavabı
  * @param {string} message istifadəçi mesajı (dil üçün)
  */
-export function finalizeAi(reply, message = "") {
+// İstifadəçi ayə/surə/Quran barədə soruşub? Yalnız belə olanda (və ya cavabda istinad olanda) istinadsız ərəbcə mətn ayə blokuna çevrilir.
+const ASKS_AYAH = /(?:آي[ةه]|ايه|آيات|ايات|سور[ةه]|قرآن|القرآن|قران|تفسير|﴿|﴾|\d\s*[:：]\s*\d)|\b(?:ay[eə]\w*|ayah|ayat|sur[eə]\w*|surah|quran\w*|kur'?an\w*|kuran\w*|tef?sir\w*|təfsir\w*|tafsir\w*|verse|verses)\b|аят|сура|коран|тафсир/i;
+export function asksAyah(message) {
+  const m = String(message || "");
+  return ASKS_AYAH.test(m) || ASKS_AYAH.test(foldLat(m));
+}
+
+/**
+ * opts.noBlocks: ayə blokları qadağandır (məs. söz mənası sualı): [[ayah:..]] işarələri və ərəbcə sitatlar bloka çevrilmir.
+ * Ərəbcə mətn yalnız aşağıdakı hallarda ayə blokuna çevrilir: [[ayah:S:A]] işarəsi, ﴿…﴾ sitatı, (surə + nömrə) istinadı,
+ * və ya istifadəçi özü ayə/surə/Quran soruşubdursa. Sözlərə görə uyğunlaşdırma ilə istinadsız, soruşulmamış ayə əlavə olunmur.
+ */
+export function finalizeAi(reply, message = "", opts = {}) {
+  const noBlocks = !!opts.noBlocks;
+  const asked = !noBlocks && asksAyah(message);
   let text = stripAyahMarkup(String(reply || "")).replace(/[\u0001-\u0003]/g, "");
   if (!text.trim()) return text;
   let lang = detectLang(message);
@@ -1093,6 +1107,10 @@ export function finalizeAi(reply, message = "") {
   text = text.replace(/```[\s\S]*?```|`[^`\n]*`/g, (m) => hold(m));
 
   // 1) [[ayah:S:A(-B)]] işarələri
+  if (noBlocks) {
+    // söz mənası cavabında Quran sitatı olmur: işarələr və ﴿ … ﴾ mətnləri silinir
+    text = text.replace(/\[\[\s*ayah[^\]\n]*\]\]/gi, "").replace(/[﴿﴾]([^﴿﴾]{0,4000})[﴿﴾]/g, (m, inner) => (/[\u0600-\u06FF]/.test(inner) && !/^[\d٠-٩۰-۹\s.,:;()-]+$/.test(inner.trim()) ? "" : m)).replace(/[ \t]+([.,;:،])/g, "$1");
+  }
   text = text.replace(/\[\[\s*ayah\s*:\s*(\d{1,3})\s*[:.]\s*(\d{1,3})(?:\s*[-–—]\s*(\d{1,3}))?\s*\]\]/gi, (m, s, a, b) => {
     const S = Number(s);
     const A1 = Number(a);
@@ -1109,7 +1127,7 @@ export function finalizeAi(reply, message = "") {
   text = text.replace(/\[\[\s*ayah[^\]\n]*\]\]/gi, ""); // yanlış işarələr silinir
 
   // 2) ﴿ … ﴾ (yaxud tərs sıra ﴾ … ﴿), ardınca gələn «(Bəqərə: 255)» istinadı ilə birlikdə
-  text = text.replace(/([﴿﴾])([^﴿﴾]{1,4000})([﴿﴾])([ \t]*[\(\[（][^\)\]）\n]{1,70}[\)\]）])?/g, (m, o, inner, c, refPart) => {
+  if (!noBlocks) text = text.replace(/([﴿﴾])([^﴿﴾]{1,4000})([﴿﴾])([ \t]*[\(\[（][^\)\]）\n]{1,70}[\)\]）])?/g, (m, o, inner, c, refPart) => {
     const body = inner.trim();
     const tail = refPart || "";
     if (!body) return m;
@@ -1126,7 +1144,7 @@ export function finalizeAi(reply, message = "") {
   });
 
   // 3) « … » ərəbcə sitat: yalnız data ilə uyğundursa əvəz et
-  text = text.replace(/«([^«»]{8,3000})»/g, (m, inner) => {
+  if (asked) text = text.replace(/«([^«»]{8,3000})»/g, (m, inner) => {
     const body = inner.trim();
     if (arabicRatio(body) < 0.8) return m;
     const mr = matchArabic(body, { minWords: 4, minScore: 0.9, strict: true });
@@ -1141,6 +1159,12 @@ export function finalizeAi(reply, message = "") {
     const tail = refPart || "";
     const refInfo = tail ? parseRefText(tail.replace(/^[ \t]*[\(\[（]|[\)\]）]$/g, "")) : null;
     const hint = validHint(refInfo);
+    if (noBlocks) {
+      // söz mənası cavabı: Quran mətni (bütöv ayə) göstərilmir, silinir
+      const nb = matchArabic(body, { minWords: 4, minScore: 0.9, strict: true });
+      return nb && nb.refs.every((r) => r.whole) ? "" : m;
+    }
+    if (!hint && !asked) return m; // istinad yoxdur və istifadəçi ayə soruşmayıb: söz uyğunluğuna görə ayə əlavə olunmur
     const mr = matchArabic(body, { hint, minWords: 4, minScore: 0.9, strict: true });
     if (!mr || !mr.refs.every((r) => r.whole)) return m;
     const lead = run.match(/^\s*/)[0];
