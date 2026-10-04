@@ -4,7 +4,7 @@ import assert from "node:assert/strict";
 import { translate } from "../api/_translate/engine.js";
 import handler from "../api/translate.js";
 import { aiConfig } from "../api/_ai.js";
-import { createEnsemble, buildSystem, pickProviders, ipAllowed, resetHealth, resetLimits } from "../api/_translate-ensemble.js";
+import { createEnsemble, buildSystem, pickProviders, markProvider, ipAllowed, resetHealth, resetLimits } from "../api/_translate-ensemble.js";
 import { splitChunks, maskVerses, unmaskVerses, consensus, similarity, cleanCandidate, validateCandidate } from "../api/_translate-consensus.js";
 import { memoryStore, seedStore, layeredStore, cacheKey } from "../api/_translate-cache.js";
 
@@ -275,13 +275,63 @@ test("API: açar yoxdursa /api/translate ərəbcə sərbəst mətn üçün no-so
   assert.equal(out.method, "no-source");
 });
 
-test("provayder seçimi: yalnız sağlamlar, fırlanma, xəstələr sona", () => {
+test("provayder seçimi: açarı olan hamı fırlanmada; son vaxt cavab verənlər və hələ yoxlanmamışlar növbələşir; uğursuzlar sona", () => {
   const all = ["gemini", "xai", "mistral", "groq", "nvidia", "llm7"];
-  const a = pickProviders(all, 3, new Set(), 0);
-  const b = pickProviders(all, 3, new Set(), 1);
-  assert.deepEqual(a, ["gemini", "xai", "mistral"]);
-  assert.deepEqual(b, ["xai", "mistral", "groq"]);
-  assert.deepEqual(pickProviders(all, 5, new Set(["gemini"]), 0).includes("gemini"), false);
+  const a = pickProviders(all, 6, new Set(), 0);
+  assert.deepEqual([...a].sort(), [...all].sort(), "hamısı siyahıdadır");
+  assert.equal(pickProviders(all, 5, new Set(["gemini"]), 0).includes("gemini"), false);
+  // weak (nvidia, llm7) provayderlər də ilk 4-ə düşür (yalnız güclülər deyil)
+  const seen = new Set();
+  for (let o = 0; o < 6; o++) pickProviders(all, 3, new Set(), o).forEach((x) => seen.add(x));
+  assert.ok(seen.has("nvidia") && seen.has("llm7"));
+  // son vaxt OK olan öndədir; ardıcıl uğursuz olan sona düşür
+  markProvider("groq", true);
+  markProvider("xai", false);
+  markProvider("xai", false);
+  const c = pickProviders(all, 6, new Set(), 0);
+  assert.equal(c[0], "groq");
+  assert.equal(c[c.length - 1], "xai");
+});
+
+test("sağlamlıq diaqnostikası: açarsız yalnız kateqoriya, açarlı (x-debug-key) detail; hər provayder yoxlanır, sirr yoxdur", async () => {
+  const { providerHealth, classify } = await import("../api/_translate-health.js");
+  const saved = { ...process.env };
+  const realFetch = globalThis.fetch;
+  try {
+    for (const k of Object.keys(process.env)) if (/^(GROQ|XAI|MISTRAL|OPENROUTER|HF_|GEMINI|GITHUB|GH_|DEEPSEEK|NVIDIA|NGC|CEREBRAS|SAMBANOVA|SCALEWAY|OLLAMA|LLM7|AIRFORCE|DEBUG_KEY|STATS_KEY)/i.test(k)) delete process.env[k];
+    process.env.GROQ_API_KEY = "gsk_SECRET1";
+    process.env.DEEPSEEK_API_KEY = "sk-SECRET2";
+    process.env.SCALEWAY_ACCESS_KEY = "SCWACCESS";
+    process.env.DEBUG_KEY = "dbg";
+    globalThis.fetch = async (url, init) => {
+      if (String(url).includes("groq")) return { ok: true, status: 200, json: async () => ({ choices: [{ message: { content: "OK" } }] }) };
+      return { ok: false, status: 402, json: async () => ({ error: { message: "Insufficient Balance (request_id: x)" } }) };
+    };
+    const open = await providerHealth({ headers: {} });
+    assert.equal(open.providers.length, 15);
+    const g = open.providers.find((p) => p.provider === "groq");
+    const d = open.providers.find((p) => p.provider === "deepseek");
+    const sc = open.providers.find((p) => p.provider === "scaleway");
+    assert.deepEqual([g.keyPresent, g.ok, g.reason], [true, true, "ok"]);
+    assert.deepEqual([d.keyPresent, d.ok, d.reason], [true, false, "no-credit-or-quota"]);
+    assert.deepEqual([sc.keyPresent, sc.reason], [false, "no-key"]);
+    assert.deepEqual(sc.otherEnvPresent, { SCALEWAY_ACCESS_KEY: true });
+    assert.deepEqual(sc.expects, ["SCALEWAY_SECRET_KEY", "SCALEWAY_API_KEY"]);
+    assert.equal(d.detail, undefined);
+    assert.equal(open.detailed, false);
+    const json = JSON.stringify(open);
+    for (const secret of ["SECRET1", "SECRET2", "SCWACCESS", "Insufficient"]) assert.ok(!json.includes(secret), secret);
+    const full = await providerHealth({ headers: { "x-debug-key": "dbg" } });
+    assert.equal(full.detailed, true);
+    assert.match(full.providers.find((p) => p.provider === "deepseek").detail, /Insufficient Balance/);
+    assert.equal(classify("Wrong API Key"), "invalid-key");
+    assert.equal(classify("Rate limit exceeded"), "rate-limited");
+    assert.equal(classify("Your team has either used all available credits"), "no-credit-or-quota");
+  } finally {
+    globalThis.fetch = realFetch;
+    for (const k of Object.keys(process.env)) if (!(k in saved)) delete process.env[k];
+    Object.assign(process.env, saved);
+  }
 });
 
 test("oxşarlıq və təmizləmə", () => {

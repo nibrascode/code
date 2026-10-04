@@ -38,6 +38,15 @@ function limited(req) {
   return rec.n > RATE.max;
 }
 
+const healthHits = new Map();
+function healthAllowed(ip, now = Date.now()) {
+  const arr = (healthHits.get(ip) || []).filter((t) => now - t < 60_000);
+  if (arr.length >= 3) return false;
+  arr.push(now);
+  healthHits.set(ip, arr);
+  return true;
+}
+
 async function readJson(req) {
   if (req.body && typeof req.body === "object" && !Buffer.isBuffer(req.body)) return req.body;
   if (typeof req.body === "string") return JSON.parse(req.body || "{}");
@@ -55,6 +64,12 @@ function send(res, code, obj) {
   res.statusCode = code;
   res.setHeader("Content-Type", "application/json; charset=utf-8");
   res.end(JSON.stringify(obj));
+}
+
+// Host tətbiq diaqnostika qarmağı qeydiyyata alır (məs. provayder sağlamlığı): async (body, req, ip) => obyekt
+let healthHook = null;
+export function setHealthHook(fn) {
+  healthHook = typeof fn === "function" ? fn : null;
 }
 
 export const INFO = {
@@ -114,6 +129,11 @@ export default async function handler(req, res) {
     return send(res, 400, { ok: false, error: "JSON oxunmadı." });
   }
   try {
+    if (body && body.health === true && healthHook) {
+      const ip = clientIp(req);
+      if (!healthAllowed(ip)) return send(res, 429, { ok: false, error: "Diaqnostika limiti: dəqiqədə ən çox 3 sorğu." });
+      return send(res, 200, await healthHook(body, req, ip));
+    }
     const out = await handleTranslate(body || {}, makeCtx(clientIp(req)));
     return send(res, out.limited === "rate" ? 429 : out.ok === false && !out.results ? 400 : 200, out);
   } catch (e) {

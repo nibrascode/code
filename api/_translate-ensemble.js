@@ -44,28 +44,43 @@ const VERIFY_SYSTEM =
   'You are a strict Arabic bilingual checker. Given an Arabic text and its translation, decide whether the translation is faithful: same meaning, nothing added, nothing omitted, numbers and names preserved, [[Qn]] placeholders intact. Answer ONLY with JSON: {"faithful": true|false, "issues": "short reason or empty"}';
 
 // ------------------------------------------------------------------ sağlamlıq və fırlanma
-const health = new Map(); // id -> {fails, last}
+const health = new Map(); // id -> {fails, last, lastOk}
 let rr = 0;
+const RECENT_OK_MS = 30 * 60_000;
 const isHealthy = (id) => {
   const h = health.get(id);
   return !h || h.fails < 2 || Date.now() - h.last > 5 * 60_000;
 };
-const mark = (id, ok) => {
-  const h = health.get(id) || { fails: 0, last: 0 };
-  health.set(id, ok ? { fails: 0, last: Date.now() } : { fails: h.fails + 1, last: Date.now() });
+const recentlyOk = (id) => {
+  const h = health.get(id);
+  return Boolean(h && h.lastOk && Date.now() - h.lastOk < RECENT_OK_MS);
 };
+export const markProvider = (id, ok) => {
+  const h = health.get(id) || { fails: 0, last: 0, lastOk: 0 };
+  health.set(id, ok ? { fails: 0, last: Date.now(), lastOk: Date.now() } : { fails: h.fails + 1, last: Date.now(), lastOk: h.lastOk });
+};
+const mark = markProvider;
 export function resetHealth() {
   health.clear();
   rr = 0;
 }
 
+const rotate = (arr, k) => (arr.length ? [...arr.slice(k % arr.length), ...arr.slice(0, k % arr.length)] : []);
+const tierIndex = (id) => (STRONG.includes(id) ? STRONG.indexOf(id) : 100 + Math.max(0, WEAK.indexOf(id)));
+
+/** Açarı olan HƏR provayder fırlanmaya daxildir. Sağlam olanlar arasında «son vaxt cavab verənlər» (30 dəq) ilə hələ yoxlanmamışlar növbələşir; ardıcıl uğursuzlar sona. */
 export function pickProviders(available, count, exclude = new Set(), offset = 0) {
   const ok = available.filter((id) => !exclude.has(id));
-  const strong = ok.filter((id) => STRONG.includes(id) && isHealthy(id)).sort((a, b) => STRONG.indexOf(a) - STRONG.indexOf(b));
-  const weak = ok.filter((id) => !STRONG.includes(id) && isHealthy(id)).sort((a, b) => WEAK.indexOf(a) - WEAK.indexOf(b));
+  const healthy = ok.filter(isHealthy).sort((a, b) => tierIndex(a) - tierIndex(b));
+  const good = rotate(healthy.filter(recentlyOk), offset);
+  const unknown = rotate(healthy.filter((id) => !recentlyOk(id)), offset);
+  const mixed = [];
+  for (let i = 0; i < Math.max(good.length, unknown.length); i++) {
+    if (i < good.length) mixed.push(good[i]);
+    if (i < unknown.length) mixed.push(unknown[i]);
+  }
   const sick = ok.filter((id) => !isHealthy(id));
-  const rot = strong.length ? [...strong.slice(offset % strong.length), ...strong.slice(0, offset % strong.length)] : [];
-  return [...rot, ...weak, ...sick].slice(0, count);
+  return [...mixed, ...sick].slice(0, count);
 }
 
 // ------------------------------------------------------------------ limitlər (IP başına, yaddaş içi; hər isti nüsxə üçün)
