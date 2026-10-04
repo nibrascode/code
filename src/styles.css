@@ -4582,6 +4582,95 @@ body.is-home .noise {
   margin: 2px 0 18px;
 }
 
+/* Robotun «tətbiqi yüklə» qabarcığı: absolute, pointer-events yoxdur, layout dəyişmir */
+.suggest-bubble {
+  position: absolute;
+  z-index: 5;
+  left: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: max-content;
+  max-width: min(210px, calc(100vw - 16px));
+  padding: 4px 10px 4px 4px;
+  border: 1px solid rgb(159 214 255 / 0.5);
+  border-radius: 12px;
+  background: #15213d;
+  color: #eaf1ff;
+  font-size: 11px;
+  font-weight: 650;
+  line-height: 1.25;
+  letter-spacing: 0;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(4px) scale(0.9);
+  transform-origin: var(--tail, 50%) 100%;
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+.suggest-bubble.on {
+  opacity: 1;
+  transform: none;
+}
+
+.suggest-bubble[data-side="bottom"] {
+  transform-origin: var(--tail, 50%) 0;
+}
+
+.suggest-bubble::after {
+  content: "";
+  position: absolute;
+  left: var(--tail, 50%);
+  bottom: -5px;
+  width: 8px;
+  height: 8px;
+  margin-left: -4px;
+  background: #15213d;
+  border-right: 1px solid rgb(159 214 255 / 0.5);
+  border-bottom: 1px solid rgb(159 214 255 / 0.5);
+  transform: rotate(45deg);
+}
+
+.suggest-bubble[data-side="bottom"]::after {
+  bottom: auto;
+  top: -5px;
+  transform: rotate(225deg);
+}
+
+.suggest-bubble-badge {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ffcf5c;
+  color: #231800;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.suggest-bot[data-act="alert"] .bot-arm-r {
+  animation: bot-wave-fast 0.45s ease-in-out infinite;
+}
+
+.suggest-bot[data-act="alert"] .bot-hop {
+  animation: bot-jump 0.8s cubic-bezier(0.3, 0.7, 0.4, 1) infinite;
+}
+
+.suggest-bot[data-act="alert"] .bot-face-glow {
+  animation-duration: 0.7s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .suggest-bubble {
+    display: none;
+  }
+}
+
 /* Robot hərəkətləri: yalnız transform/opacity, SVG daxili qruplar (layout dəyişmir) */
 .suggest-bot * {
   transform-box: fill-box;
@@ -4849,6 +4938,27 @@ body.is-home .noise {
   animation: bot-step var(--gait, 0.5s) ease-in-out calc(var(--gait, 0.5s) / -2) infinite;
 }
 
+.suggest-bot[data-act="sprint"] .bot-foot-l {
+  animation: bot-step var(--gait, 0.14s) linear infinite;
+}
+
+.suggest-bot[data-act="sprint"] .bot-foot-r {
+  animation: bot-step var(--gait, 0.14s) linear calc(var(--gait, 0.14s) / -2) infinite;
+}
+
+.suggest-bot[data-act="sprint"] .bot-hop {
+  animation: bot-bob 0.28s ease-in-out infinite;
+}
+
+.suggest-bot[data-act="sprint"] .bot-arm-l,
+.suggest-bot[data-act="sprint"] .bot-arm-r {
+  animation: bot-swing 0.2s ease-in-out infinite;
+}
+
+.suggest-bot[data-act="sprint"] .bot-face-glow {
+  animation-duration: 0.8s;
+}
+
 .suggest-bot[data-act="walk"] .bot-hop {
   animation-duration: 1s;
 }
@@ -4863,6 +4973,41 @@ body.is-home .noise {
 
 .suggest-bot[data-act="look"] .bot-head {
   animation: bot-lookaround 2.4s ease-in-out infinite;
+}
+
+/* Küsmə: baş aşağı, antena sallanır, qollar asılı, üz solğun, ayaqlar yavaş */
+.suggest-bot[data-act="sulk"] .bot-head {
+  animation: bot-droop 3s ease-in-out infinite;
+}
+
+.suggest-bot[data-act="sulk"] .bot-antenna {
+  animation: none;
+  transform: rotate(38deg);
+}
+
+.suggest-bot[data-act="sulk"] .bot-arm-l,
+.suggest-bot[data-act="sulk"] .bot-arm-r {
+  animation: bot-swing 3s ease-in-out infinite;
+}
+
+.suggest-bot[data-act="sulk"] .bot-hop {
+  animation: bot-bob 4s ease-in-out infinite;
+}
+
+.suggest-bot[data-act="sulk"] .bot-face-glow {
+  animation: bot-face-sulk 3.4s ease-in-out infinite;
+}
+
+.suggest-bot[data-act="sulk"] .bot-foot-l {
+  animation: bot-step var(--gait, 1.1s) ease-in-out infinite;
+}
+
+.suggest-bot[data-act="sulk"] .bot-foot-r {
+  animation: bot-step var(--gait, 1.1s) ease-in-out calc(var(--gait, 1.1s) / -2) infinite;
+}
+
+.suggest-bot[data-act="spin"] .bot-hop {
+  animation: bot-spin 0.9s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 .suggest-bot[data-act="turn"] .bot-hop {
@@ -4905,6 +5050,36 @@ body.is-home .noise {
   }
   80% {
     transform: rotate(-5deg);
+  }
+}
+
+@keyframes bot-droop {
+  0%,
+  100% {
+    transform: translateY(0.9px) rotate(16deg);
+  }
+  50% {
+    transform: translateY(1.3px) rotate(21deg);
+  }
+}
+
+@keyframes bot-face-sulk {
+  0%,
+  100% {
+    opacity: 0.05;
+  }
+  50% {
+    opacity: 0.28;
+  }
+}
+
+@keyframes bot-spin {
+  0%,
+  35% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
 

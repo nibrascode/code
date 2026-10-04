@@ -17,13 +17,26 @@ const LABEL = {
   ru: "Рекомендуем",
 } as const;
 
-type Act = "wave" | "hop" | "look" | "turn" | "cheer" | "rest";
-const ACTS: Act[] = ["wave", "hop", "look", "turn", "cheer", "rest"];
-const SPEEDS = [150, 70, 32, 14]; // px/san: sürətli, orta, yavaş, daha yavaş
+type Act = "wave" | "hop" | "look" | "turn" | "cheer" | "rest" | "spin";
+const ACTS: Act[] = ["wave", "hop", "look", "turn", "cheer", "rest", "spin"];
+type Behavior = "cruise" | "zigzag" | "dash" | "creep" | "skip" | "sprint" | "reverse" | "midpause" | "sulk";
+const BEHAVIORS: [Behavior, number][] = [
+  ["cruise", 5],
+  ["zigzag", 3],
+  ["dash", 3],
+  ["creep", 2],
+  ["skip", 2],
+  ["sprint", 2],
+  ["reverse", 3],
+  ["midpause", 1],
+  ["sulk", 1],
+];
 const STEP = 8;
 const BLEND = 8;
 
 const rand = (min: number, max: number) => min + Math.random() * (max - min);
+/** Loqarifmik təsadüfi sürət: yavaşdan çox sürətliyə qədər fərqli ritmlər. */
+const speedIn = (min: number, max: number) => Math.exp(rand(Math.log(min), Math.log(max)));
 const pick = <T,>(list: readonly T[]): T => list[Math.floor(Math.random() * list.length)];
 
 /** Kartın haşiyəsi boyunca (saat əqrəbi istiqamətində) s məsafəsindəki mövqe və bucaq. */
@@ -60,7 +73,7 @@ const poseCss = (s: number, W: number, H: number) => {
  * istiqaməti dəyişir, irəli atlayır, geri qayıdır. Yalnız transform (WAAPI), bir taymer.
  * Tab gizli və ya kart görünməzdirsə dayanır. Qaytarılan funksiya hər şeyi təmizləyir.
  */
-function startWalker(bot: SVGSVGElement, host: HTMLElement) {
+function startWalker(bot: SVGSVGElement, host: HTMLElement, bubble: HTMLElement | null) {
   let s = host.offsetWidth * 0.12;
   let dir = 1;
   let lastAct: Act | null = null;
@@ -107,89 +120,269 @@ function startWalker(bot: SVGSVGElement, host: HTMLElement) {
     }
   };
 
+  type Seg = { len: number; speed: number; easing: string; step?: number; pause?: number };
+  let walked = 0; // son dayanmadan bəri yeriyiş vaxtı (ms)
+  let lastBehavior: Behavior | null = null;
+  let afterRun: (() => void) | null = null;
+  let lastBubble = performance.now() - 20000; // ilk 25 san qabarcıq yoxdur
+
+  /** Dayananda bəzən «tətbiqi yüklə» qabarcığı, sonra qısa fasilə və küsüb getmə. */
+  const bubbleStop = () => {
+    if (!bubble) return false;
+    const [W, H] = dims();
+    const { x, y } = poseAt(s, W, H);
+    const top = y < 1;
+    if (!top && y < H - 1) return false; // yalnız üst/alt xətdə: kartın mətnini örtməsin
+    const bw = bubble.offsetWidth;
+    const bh = bubble.offsetHeight;
+    const rect = host.getBoundingClientRect();
+    const vw = document.documentElement.clientWidth;
+    const minL = 8 - rect.left;
+    const maxL = vw - 8 - rect.left - bw;
+    const left = Math.min(Math.max(x - bw / 2, minL), Math.max(minL, maxL));
+    bubble.style.left = `${left.toFixed(1)}px`;
+    bubble.style.top = `${(top ? -bh - 14 : H + 14).toFixed(1)}px`;
+    bubble.style.setProperty("--tail", `${Math.min(Math.max(x - left, 12), bw - 12).toFixed(1)}px`);
+    bubble.dataset.side = top ? "top" : "bottom";
+    bubble.classList.add("on");
+    lastBubble = performance.now();
+    lastAct = null;
+    bot.dataset.act = "alert";
+    bot.style.removeProperty("--gait");
+    walked = 0;
+    later(() => {
+      bubble.classList.remove("on");
+      later(() => {
+        lastBehavior = "sulk";
+        sulk();
+      }, 900);
+    }, 2800);
+    return true;
+  };
+
+  /** Bir WAAPI animasiyasını işə salır; tab gizlidirsə dayanıq saxlayır. */
+  const play = (frames: Keyframe[], duration: number, easing: string, done: () => void) => {
+    const a = bot.animate(frames, { duration, easing, fill: "forwards" });
+    anim = a;
+    if (paused) a.pause();
+    a.onfinish = () => {
+      if (stopped) return;
+      a.cancel();
+      anim = null;
+      done();
+    };
+  };
+
+  /** Küsmə: haşiyədə kənara yürüyür, ekrandan çıxır, ~4 san kənarda qalır, yavaşca qayıdır. */
+  const sulk = () => {
+    const [W, H] = dims();
+    const P = 2 * (W + H);
+    const rtl = document.documentElement.dir === "rtl";
+    // yalnız "qeyri-sürüşən" tərəfə çıxır: LTR-də sola, RTL-də sağa (üfüqi scroll yaranmasın)
+    const target = rtl ? W + H / 2 : 2 * W + H + H / 2;
+    s = ((s % P) + P) % P;
+    let delta = (((target - s) % P) + P) % P;
+    if (delta > P / 2) delta -= P;
+    dir = delta < 0 ? -1 : 1;
+    bot.dataset.act = "sulk";
+    afterRun = leave;
+    run([{ len: Math.max(Math.abs(delta), 1), speed: Math.max(34, Math.abs(delta) / 7), easing: "ease-in-out" }], 0);
+  };
+
+  const leave = () => {
+    if (stopped) return;
+    const [W, H] = dims();
+    const rtl = document.documentElement.dir === "rtl";
+    const rect = host.getBoundingClientRect();
+    const out = rtl ? window.innerWidth - rect.right + 40 : rect.left + 40;
+    const x0 = rtl ? W : 0;
+    const x1 = rtl ? W + out : -out;
+    const y = H / 2;
+    const a0 = poseAt(s, W, H).a;
+    const up = Math.round(a0 / 360) * 360; // dik duruş
+    const at = (x: number, a: number) => `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) translate(-50%, -50%) rotate(${a.toFixed(1)}deg)`;
+    const turnMs = 700;
+    const walkMs = Math.max(2500, (out / 40) * 1000);
+    const total = turnMs + walkMs;
+    bot.style.setProperty("--gait", "1.1s");
+    play(
+      [
+        { transform: at(x0, a0), offset: 0, easing: "ease-in-out" },
+        { transform: at(x0, up), offset: turnMs / total, easing: "ease-in" },
+        { transform: at(x1, up), offset: 1 },
+      ],
+      total,
+      "linear",
+      () => {
+        bot.style.transform = at(x1, up);
+        later(() => {
+          if (stopped) return;
+          const back = Math.max(3500, (out / 30) * 1000);
+          const total2 = back + turnMs;
+          play(
+            [
+              { transform: at(x1, up), offset: 0, easing: "ease-out" },
+              { transform: at(x0, up), offset: back / total2, easing: "ease-in-out" },
+              { transform: at(x0, a0), offset: 1 },
+            ],
+            total2,
+            "linear",
+            () => {
+              setPose();
+              bot.style.removeProperty("--gait");
+              walked = 0;
+              idle();
+            },
+          );
+        }, rand(3600, 4600));
+      },
+    );
+  };
+
   const idle = () => {
-    let act = pick(ACTS);
-    if (act === lastAct) act = pick(ACTS);
+    if (performance.now() - lastBubble > 45000 && Math.random() < 0.3 && bubbleStop()) return;
+    const act = pick(ACTS.filter((x) => x !== lastAct));
     lastAct = act;
     bot.dataset.act = act;
     bot.style.removeProperty("--gait");
-    later(plan, rand(900, act === "rest" ? 4200 : 3200));
+    walked = 0;
+    later(() => plan(true), rand(800, act === "rest" ? 4000 : 3200));
   };
 
-  const plan = () => {
+  const pickBehavior = (): Behavior => {
+    const pool = BEHAVIORS.filter(([b]) => b !== lastBehavior);
+    let total = 0;
+    for (const [, w] of pool) total += w;
+    let r = Math.random() * total;
+    for (const [b, w] of pool) {
+      r -= w;
+      if (r <= 0) return b;
+    }
+    return pool[0][0];
+  };
+
+  const plan = (afterStop = false) => {
     const [W, H] = dims();
     const P = 2 * (W + H);
-    const r = Math.random();
-    let dist: number;
-    if (r < 0.35) dist = rand(70, 170); // eyni istiqamətdə davam
-    else if (r < 0.65) {
-      dir = -dir; // dönüb geri
-      dist = rand(40, 150);
-    } else if (r < 0.82) {
-      dir = Math.random() < 0.5 ? 1 : -1; // irəli atlayır
-      dist = rand(P * 0.25, P * 0.6);
-    } else if (r < 0.92) {
-      dir = -dir; // bir addım geri
-      dist = rand(18, 45);
-    } else dist = rand(200, 300);
-    const parts = pick([1, 1, 2, 3]);
-    const segs: { len: number; speed: number }[] = [];
-    for (let k = 0; k < parts; k++) {
-      let speed = pick(SPEEDS);
-      const len = dist / parts;
-      speed = Math.max(speed, len / 7); // bir hissə 7 saniyədən uzun çəkməsin
-      segs.push({ len, speed });
+    let behavior = pickBehavior();
+    if (afterStop && behavior === "sprint" && Math.random() < 0.5) behavior = "cruise";
+    lastBehavior = behavior;
+    if (behavior === "sulk") {
+      sulk();
+      return;
     }
-    bot.dataset.act = "walk";
-    run(segs, 0);
+    const segs: Seg[] = [];
+    let forceStop = false;
+    let flip = false;
+    if (Math.random() < 0.3) dir = -dir; // istiqamət də təsadüfidir
+    switch (behavior) {
+      case "sprint": {
+        // çox sürətli: 1-5 tam dövrə, sonra yavaşlayıb dayanır
+        const laps = pick([1, 2, 2, 3, 3, 4, 5]);
+        const dist = laps * P;
+        segs.push({ len: dist, speed: Math.max(speedIn(380, 800), dist / 13), easing: "ease-in-out", step: 12 });
+        forceStop = true;
+        break;
+      }
+      case "dash": {
+        // qəfil qısa atılma
+        segs.push({ len: rand(100, 420), speed: speedIn(260, 560), easing: "linear" });
+        break;
+      }
+      case "creep": {
+        segs.push({ len: rand(35, 110), speed: speedIn(7, 18), easing: "ease-in-out" });
+        break;
+      }
+      case "skip": {
+        segs.push({ len: rand(P * 0.2, P * 0.65), speed: speedIn(120, 260), easing: "ease-in-out" });
+        break;
+      }
+      case "zigzag": {
+        // sürət növbə ilə artıb azalır
+        const parts = Math.floor(rand(4, 8));
+        let fast = Math.random() < 0.5;
+        for (let k = 0; k < parts; k++) {
+          const len = rand(25, 110);
+          segs.push({ len, speed: fast ? speedIn(110, 300) : speedIn(10, 34), easing: "linear" });
+          fast = !fast;
+        }
+        break;
+      }
+      case "reverse": {
+        // gedir, dönüb əks istiqamətə gedir
+        segs.push({ len: rand(50, 160), speed: speedIn(30, 160), easing: "ease-out" });
+        flip = true;
+        segs.push({ len: rand(80, 260), speed: speedIn(40, 220), easing: "ease-in" });
+        break;
+      }
+      case "midpause": {
+        const parts = Math.floor(rand(2, 4));
+        for (let k = 0; k < parts; k++) {
+          segs.push({
+            len: rand(60, 200),
+            speed: speedIn(25, 160),
+            easing: k === 0 ? "ease-in" : "ease-in-out",
+            pause: k < parts - 1 ? rand(250, 900) : 0,
+          });
+        }
+        break;
+      }
+      default: {
+        const parts = Math.floor(rand(2, 5));
+        for (let k = 0; k < parts; k++) {
+          segs.push({ len: rand(60, 240), speed: speedIn(18, 170), easing: "linear" });
+        }
+      }
+    }
+    // dayanma nadirdir: uzun yeriyişdən sonra, ehtimalla
+    const stopAfter = forceStop || (walked > 9000 && Math.random() < 0.3) || walked > 38000;
+    if (stopAfter && segs[segs.length - 1].easing === "linear") segs[segs.length - 1].easing = "ease-out";
+    bot.dataset.act = behavior === "sprint" ? "sprint" : "walk";
+    run(segs, 0, stopAfter, flip);
   };
 
-  const run = (segs: { len: number; speed: number }[], idx: number) => {
+  const run = (segs: Seg[], idx: number, stopAfter = false, flip = false) => {
     if (stopped) return;
     if (idx >= segs.length) {
-      idle();
+      if (afterRun) {
+        const f = afterRun;
+        afterRun = null;
+        f();
+      } else if (stopAfter) idle();
+      else plan();
       return;
     }
     const [W, H] = dims();
     const P = 2 * (W + H);
     s = ((s % P) + P) % P;
-    const { len, speed } = segs[idx];
+    const { len, speed, easing, step, pause } = segs[idx];
+    if (flip && idx === 1) dir = -dir;
     const s1 = s + dir * len;
-    const n = Math.max(2, Math.ceil(len / STEP));
+    const n = Math.max(2, Math.ceil(len / (step ?? STEP)));
     const frames: Keyframe[] = [];
     for (let k = 0; k <= n; k++) {
       frames.push({ transform: poseCss(s + ((s1 - s) * k) / n, W, H), offset: k / n });
     }
-    bot.style.setProperty("--gait", `${(0.25 + 18 / speed).toFixed(2)}s`);
-    const a = bot.animate(frames, {
-      duration: Math.max(500, (len / speed) * 1000),
-      easing: speed > 100 ? "linear" : "ease-in-out",
-      fill: "forwards",
-    });
-    anim = a;
-    if (paused) a.pause();
-    a.onfinish = () => {
-      if (stopped) return;
+    bot.style.setProperty("--gait", `${Math.max(0.12, 0.25 + 18 / speed - (speed > 300 ? 0.2 : 0)).toFixed(2)}s`);
+    play(frames, Math.max(500, (len / speed) * 1000), easing, () => {
       s = s1;
       setPose();
-      a.cancel();
-      anim = null;
-      if (idx + 1 < segs.length && Math.random() < 0.5) {
-        // yolun ortasında qısa dayanma
+      walked += (len / speed) * 1000;
+      if (pause) {
         bot.dataset.act = "rest";
         later(() => {
           bot.dataset.act = "walk";
-          run(segs, idx + 1);
-        }, rand(300, 900));
-      } else run(segs, idx + 1);
-    };
+          run(segs, idx + 1, stopAfter, flip);
+        }, pause);
+      } else run(segs, idx + 1, stopAfter, flip);
+    });
   };
 
   bot.style.left = "0";
   bot.style.top = "0";
   setPose();
   bot.dataset.act = "rest";
-  later(plan, rand(600, 1500));
+  later(() => plan(true), rand(600, 1500));
 
   const onVis = () => sync();
   document.addEventListener("visibilitychange", onVis);
@@ -206,6 +399,7 @@ function startWalker(bot: SVGSVGElement, host: HTMLElement) {
     stopped = true;
     window.clearTimeout(timer);
     anim?.cancel();
+    bubble?.classList.remove("on");
     document.removeEventListener("visibilitychange", onVis);
     io?.disconnect();
     bot.style.left = "";
@@ -220,6 +414,7 @@ export function AppSuggest() {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
   const { lang } = useI18n();
   const botRef = useRef<SVGSVGElement>(null);
+  const bubbleRef = useRef<HTMLSpanElement>(null);
   const card = pathname.startsWith("/nx-studio")
     ? undefined
     : CARDS.find((item) => !pathname.startsWith(`/apps/${item.slug}`));
@@ -233,7 +428,7 @@ export function AppSuggest() {
     let stop: (() => void) | null = null;
     const apply = () => {
       stop?.();
-      stop = mq.matches ? null : startWalker(bot, host);
+      stop = mq.matches ? null : startWalker(bot, host, bubbleRef.current);
     };
     apply();
     mq.addEventListener("change", apply);
@@ -251,6 +446,10 @@ export function AppSuggest() {
         <img src={card.icon} alt="" />
         <b>{card.name}</b>
         <small>{LABEL[lang]}</small>
+        <span ref={bubbleRef} className="suggest-bubble" aria-hidden="true">
+          <span className="suggest-bubble-badge">!</span>
+          Niyə yükləmirsən tətbiqi?
+        </span>
         <svg ref={botRef} className="suggest-bot" viewBox="-1.5 -2 19 21" aria-hidden="true">
           <g className="bot-sparks" fill="#fff6c2">
             <path className="bot-spark bot-spark-a" d="M14.6 1.2l.45 1.1 1.1.45-1.1.45-.45 1.1-.45-1.1-1.1-.45 1.1-.45z" />
