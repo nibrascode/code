@@ -1,0 +1,71 @@
+# Nibras Tərcümə (nibras-translate-core)
+
+Ərəb / Azərbaycan / Türk / İngilis / Rus dilləri arasında **modelsiz** tərcümə xidməti. Defoltda LLM və xarici tərcümə API-si **işlətmir**:
+tərcümə hazır insan tərcümələrindən **axtarış və uyğunlaşdırma** ilə tapılır, tapılmayanda heç nə uydurmur (`method: "no-source"`).
+Sonradan öz serverinizdə işləyən NMT modeli **bir adapter** ilə qoşula bilər (aşağıda), zəng edən kodlar dəyişmir.
+
+Hər tərcümənin altında kiçik sətir (`footer`) qaytarılır: `Nibras Tərcümə ilə tərcümə olunub, xətalar ola bilər` (az/tr/en/ru/ar).
+
+## Mənbələr (cari)
+| Mənbə | Nə üçün | Şərt |
+|---|---|---|
+| [HadeethEnc.com](https://hadeethenc.com) (IslamHouse) | 3574 seçilmiş hədis: ərəbcə + az (475) / tr (2150) / en (2328) / ru (2249) hazır insan tərcümələri, hökm və mənbə qeydi | «Mətn dəyişdirilmədən, HadeethEnc.com göstərilməklə» (HadeethEnc API şərtləri) – mətn olduğu kimi saxlanılır |
+| Korpusdan çıxarılmış sabit ifadələr | `صلى الله عليه وسلم`, `رضي الله عنه/عنها/عنهما` – hər dildə ən çox işlənən qarşılıq (say göstərilir) | HadeethEnc korpusu |
+
+Quran ayələri bu sistemə **daxil deyil**. Hədis kitablarının hazır tərcümələri olan başqa dəstlər (fawazahmed0/hadith-api: Muhsin Khan, Siddiqui və s.) tərcüməçi müəllif hüququ aydın olmadığı üçün **qoşulmayıb**.
+
+## Necə işləyir
+1. **Sabit ifadə**: giriş tam bir formul ifadədirsə (`ﷺ`, `رضي الله عنه`…) → lüğətdən qarşılıq (`method: "lexicon"`).
+2. **Hədis uyğunlaşdırması**: giriş hərəkələrdən/hamzə-alif variantlarından təmizlənir, hədis mətnləri ilə ən uzun ortaq söz ardıcıllığı tapılır (rəvayət boilerplate-i «قال رسول الله ﷺ» sayılmır).
+   - `exact` / `normalized` – eyni mətn; `matn` – yalnız «…» içindəki hədis mətni; `contains` – mətn hədis + əlavə söz (isnad);
+   - `fragment` – giriş hədisin bir parçasıdır (hədisin tam tərcüməsi qaytarılır, `notes`-da yazılır);
+   - `partial` – yalnız qismən oxşarlıq: **tərcümə verilmir**, `closest` sahəsində ən yaxın hədis göstərilir.
+3. Hədəf dildə hazır tərcümə varsa → `method: "lookup"`. Yoxdursa digər dillərdəki hazır tərcümələr `parallel` siyahısında (dil etiketi ilə) qaytarılır, `method: "lookup-alt-lang"`; **onlar hədəf dilə çevrilmir**.
+4. Çarpaz yoxlama: eyni hədisin dillərdəki mətnlərində rəqəmlər müqayisə olunur (`crosscheck.agree`); uyğunsuzluqda `confidence` azalır. Bu zəif siqnaldır, dəqiqlik zəmanəti deyil.
+5. Heç nə tapılmadı → `method: "no-source"`. `TRANSLATE_ENGINE_URL` qoşulubsa → `method: "model"` (maşın tərcüməsi kimi etiketlənir).
+
+## HTTP API
+`POST /api/translate` (CORS açıq), `GET /api/translate` → xidmət məlumatı + əhatə.
+```bash
+curl -X POST https://nibrascode.com/api/translate -H 'Content-Type: application/json' \
+  -d '{"text":"سل الله العافية في الدنيا والآخرة","from":"auto","to":"az","ui":"az"}'
+```
+Sorğu: `{ text | texts[≤20], from: "auto|ar|az|tr|en|ru", to, ui: "az|tr|en|ru|ar", parallel: true }`.
+Cavab:
+```jsonc
+{
+  "ok": true, "brand": "Nibras Tərcümə",
+  "method": "lookup",            // lookup | lookup-alt-lang | lexicon | model | no-source
+  "translation": "…", "translation_lang": "az",
+  "confidence": 0.75,            // exact 1, normalized .97, matn .92, contains .9, fragment .6-.85, partial .4 (tərcümə verilmir)
+  "match": { "type": "fragment", "kind": "hadith", "id": 2932, "ar_text": "…", "reference": "…", "url": "…" },
+  "sources": [{ "name": "HadeethEnc.com", "url": "https://hadeethenc.com/az/browse/hadith/2932", "lang": "az", "license": "…" }],
+  "translation_meta": { "attribution": "…", "grade": "…" },   // mənbədəki hökm/qeyd (olduğu kimi)
+  "parallel": [{ "lang": "tr", "label": "türkcə", "text": "…", "source": { … } }],
+  "candidates": [], "crosscheck": { "check": "numbers", "agree": null, … },
+  "notes": ["Hazır insan tərcüməsi, dəyişdirilməyib."],
+  "footer": "Nibras Tərcümə ilə tərcümə olunub, xətalar ola bilər"
+}
+```
+Mənbə yoxdursa: `{"ok":true,"method":"no-source","translation":null,"notes":["Bu mətn üçün hazır tərcümə mənbəsi tapılmadı."]}`. Xəta: `ok:false`, `error`.
+
+Təhlükəsizlik: `TRANSLATE_API_KEY` təyin olunsa `Authorization: Bearer <key>` və ya `X-API-Key` tələb olunur (təyin olunmayıbsa açıqdır). Sorğu limiti: IP başına dəqiqədə 120 (yaddaşda, best-effort).
+
+## Başqa layihədə istifadə
+Paket kimi: `import { translate } from "nibras-translate-core"` → `await translate({ text, to: "az" })`. Və ya `src/` qovluğunu köçürün (`node scripts/vendor.mjs <hədəf>/_translate`), `http.js` default export `(req,res)` Vercel/Node/Express ilə uyğundur. Məlumat `src/data/*.js` (brotli+base64, tənbəl yüklənir, cəmi ≈2 MB).
+
+## Model mühərrikinin qoşulması (gələcək mərhələ)
+`TRANSLATE_ENGINE_URL` (+ ixtiyari `TRANSLATE_ENGINE_KEY`, `TRANSLATE_ENGINE_TIMEOUT_MS`) təyin edin. Sistem hazır mənbə tapmayanda və ya hədəf dildə hazır tərcümə olmayanda mühərrikə sorğu göndərir:
+```
+POST $TRANSLATE_ENGINE_URL   { "text": "…", "from": "ar", "to": "az" }
+→ 200 { "translation": "…", "engine": "nllb-600m-ct2", "confidence": 0.0-1.0 (ixtiyari), "pivot": ["en"] (ixtiyari) }
+```
+Mühərrik cavabı `method: "model"` olaraq qayıdır və «Maşın tərcüməsidir» qeydi ilə etiketlənir; hazır insan tərcümələri `parallel`-da qalır. Mühərrik xəta versə/boş qaytarsa sistem `no-source` cavabına qayıdır. Adapter kodu: `src/adapter.js` (testdə `translate({ engine: async ({text,from,to}) => … })` ilə dəyişdirilə bilər).
+
+## Məlumatın yenilənməsi
+`node scripts/fetch-hadeethenc.mjs <RAW>` → `node scripts/build-data.mjs <RAW>`. Mətn dəyişdirilmir.
+
+## Məhdudiyyətlər
+- Yalnız HadeethEnc-də olan hədislər tərcümə olunur (3574 hədis; Kütübü-sittənin kiçik hissəsi). Eyni mənalı, lakin fərqli rəvayət sözləri olan hədis `partial` olur və tərcümə verilmir.
+- Azərbaycanca hədis tərcüməsi yalnız 475 hədis üçün var; qalanlar üçün tr/en/ru hazır tərcümələri ayrıca etiketlə qaytarılır.
+- Fətva, nəhv, lüğət, təfsir mətnləri üçün hazır tərcümə mənbəsi yoxdur → `no-source` (model mərhələsi lazımdır).
