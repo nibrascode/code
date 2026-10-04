@@ -152,8 +152,10 @@ function askDeepSeek(history) {
 
 function askNvidia(history) {
   return askChain(history, ["NVIDIA_API_KEY", "NGC_API_KEY"], "https://integrate.api.nvidia.com/v1/chat/completions", [
-    "meta/llama-3.3-70b-instruct",
+    // meta/llama-3.3-70b-instruct NVIDIA tərəfindən 2026-08-26-da söndürülüb (HTTP 410), ona görə siyahıdan çıxarıldı
+    "mistralai/mistral-large-2-instruct",
     "nvidia/llama-3.1-nemotron-70b-instruct",
+    "google/gemma-3-12b-it",
   ]);
 }
 
@@ -294,7 +296,7 @@ async function complete({ url, apiKey, model, history, extraHeaders }) {
   const data = await upstream.json().catch(() => ({}));
   const reply = stripThink(String(data.choices?.[0]?.message?.content || ""));
   if (upstream.ok && reply) return { ok: true, reply };
-  const detail = data.error?.message || data.error || data.message || upstream.status;
+  const detail = data.error?.message || data.error || data.message || data.detail || upstream.status;
   return { ok: false, detail: typeof detail === "string" ? detail : JSON.stringify(detail) };
 }
 

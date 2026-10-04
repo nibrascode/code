@@ -12,10 +12,12 @@ const ALIASES = { scaleway: ["SCALEWAY_ACCESS_KEY"], github: ["GITHUB_MODELS_TOK
 export function classify(detail) {
   const d = String(detail || "");
   if (/timeout|abort/i.test(d)) return "timeout";
-  if (/wrong api key|invalid api key|incorrect api key|unauthori[sz]ed|invalid.*(key|token)|authentication|forbidden|\b40[13]\b|permission/i.test(d)) return "invalid-key";
+  if (/^\s*200\s*$/.test(d)) return "empty-reply";
+  if (/^\s*(4\d\d|5\d\d)\s*$/.test(d) && !/^\s*(401|403|404|410|429|50[0-4])\s*$/.test(d)) return "http-" + d.trim();
+  if (/wrong api key|authorization failed|bad credentials|invalid api key|incorrect api key|unauthori[sz]ed|invalid.*(key|token)|authentication|forbidden|\b40[13]\b|permission/i.test(d)) return "invalid-key";
   if (/credit|balance|billing|spending|payment|quota|insufficient|exceeded your|out of/i.test(d)) return "no-credit-or-quota";
   if (/rate.?limit|too many|\b429\b/i.test(d)) return "rate-limited";
-  if (/model|not found|does not exist|unsupported|decommission|\b404\b/i.test(d)) return "model-unavailable";
+  if (/model|not found|does not exist|unsupported|decommission|end of life|\bgone\b|\b(404|410)\b/i.test(d)) return "model-unavailable";
   if (/overload|unavailable|high demand|\b50[0-4]\b|capacity/i.test(d)) return "provider-down";
   return "error";
 }

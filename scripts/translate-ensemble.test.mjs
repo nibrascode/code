@@ -325,6 +325,10 @@ test("sağlamlıq diaqnostikası: açarsız yalnız kateqoriya, açarlı (x-debu
     assert.equal(full.detailed, true);
     assert.match(full.providers.find((p) => p.provider === "deepseek").detail, /Insufficient Balance/);
     assert.equal(classify("Wrong API Key"), "invalid-key");
+    assert.equal(classify("Authorization failed"), "invalid-key");
+    assert.equal(classify("The model 'x' has reached its end of life and is no longer available."), "model-unavailable");
+    assert.equal(classify("200"), "empty-reply");
+    assert.equal(classify("422"), "http-422");
     assert.equal(classify("Rate limit exceeded"), "rate-limited");
     assert.equal(classify("Your team has either used all available credits"), "no-credit-or-quota");
   } finally {
