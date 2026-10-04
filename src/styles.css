@@ -4403,6 +4403,34 @@ body.is-home .noise {
   letter-spacing: -0.03em;
 }
 
+.nx-ai-bar .nx-bar-text,
+.nx-studio-bar .nx-bar-text,
+.nx-apk-bar .nx-bar-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  min-width: 0;
+  text-align: right;
+  font-size: inherit;
+  letter-spacing: normal;
+}
+
+.nx-bar-text strong {
+  font-size: 15px;
+  font-weight: 750;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+
+.nx-bar-text small {
+  margin-top: 1px;
+  font-size: 10.5px;
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: 0;
+  color: rgb(244 247 255 / 0.55);
+}
+
 .nx-apps {
   padding-bottom: 28px;
 }

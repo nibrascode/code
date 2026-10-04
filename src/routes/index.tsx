@@ -238,7 +238,10 @@ function Home() {
           </div>
           <a className="nx-ai-bar" href="/ai">
             <img src="/nibras-ai.png" alt="" />
-            <span>Yapay Zeka</span>
+            <span className="nx-bar-text">
+              <strong>Nibras AI</strong>
+              <small>Süni intellekt alətləri, AI çat, kod yazma və mətn emalı üçün.</small>
+            </span>
           </a>
           <a
             className="nx-studio-bar"
@@ -257,7 +260,10 @@ function Home() {
                 strokeLinejoin="round"
               />
             </svg>
-            <span>Nibras Studio</span>
+            <span className="nx-bar-text">
+              <strong>Nibras Dev</strong>
+              <small>Kod redaktoru, proqramlaşdırma və layihələrin hazırlanması üçün.</small>
+            </span>
           </a>
           <a
             className="nx-apk-bar"
@@ -276,7 +282,10 @@ function Home() {
                 d="M12 11.2a.8.8 0 0 1 .8.8v2.1h2.1a.8.8 0 0 1 0 1.6h-2.1V18a.8.8 0 0 1-1.6 0v-2.3H8.9a.8.8 0 0 1 0-1.6h2.3V12a.8.8 0 0 1 .8-.8Z"
               />
             </svg>
-            <span>Apk Studio</span>
+            <span className="nx-bar-text">
+              <strong>Nibras APK</strong>
+              <small>Android APK hazırlamaq, layihələri APK formatına çevirmək üçün.</small>
+            </span>
           </a>
         </div>
         <div className="nx-stage">
