@@ -182,3 +182,40 @@ test("hədis cavabında dini bildiriş yoxdur (noticeShown:false), AI sorğusuna
   assert.ok(r2.reply.includes("::tafsir hadith::") && r2.reply.includes("6/"));
   assert.ok(!r2.notice);
 });
+
+// ---- Çatışan hədislərin doldurulması (Buxari: Buğa 1407 + Tavq; Əbu Davud: alt qeyddən; Müslim: düzgün nömrələmə)
+test("Buxari 25 (Şamilədə mətni yox idi) nömrə ilə və sözlə tapılır, mənbə sətrində tamamlama qeydi var", async () => {
+  const r = await run({ message: "صحيح البخاري 25", noticeShown: false });
+  assert.match(r.reply, /::tl:: 1\/1 · البخاري · رقم 25/);
+  assert.ok(norm(r.reply).includes("امرت ان اقاتل الناس حتي يشهدوا"));
+  assert.match(r.reply, /::src:: [^\n]*رقم 25 \(ت البغا — نص مكمَّل من نشرة أخرى[^\n]*\)/);
+  assert.ok(!/::src:: [^\n]*رقم 1 \(ت البغا — /.test((await run({ message: "صحيح البخاري 1", noticeShown: false })).reply));
+  const w = await run({ message: "حديث أمرت أن أقاتل الناس حتى يشهدوا أن لا إله إلا الله", noticeShown: false });
+  assert.match(w.reply, /رقم 25\b/);
+  assert.ok(!/AI|openai/i.test(w.reply));
+});
+
+test("Buxari: doldurulmuş boşluq nömrələri (yalnız alt qeyd qalmış olanlar) mətnlə gəlir", async () => {
+  for (const n of [26, 3299, 7050]) {
+    const r = await run({ message: "صحيح البخاري " + n, noticeShown: false });
+    assert.match(r.reply, new RegExp("::tl:: 1/1 · البخاري · رقم " + n + "\\n"), "Buxari " + n);
+    assert.match(r.reply, new RegExp("رقم " + n + " \\(ت البغا"));
+  }
+});
+
+test("Əbu Davud: alt qeyd blokunda qalmış hədislər (1114, 1938, 3382, 5220) tapılır, 594 yoxdur", async () => {
+  for (const [n, frag] of [[1114, "فلياخُذ بأنفه"], [1938, "كان أهلُ الجاهلية لا يُفِيضُونَ"], [3382, "سيأتي على الناس زمانٌ عَضُوضٌ"]]) {
+    const r = await run({ message: "أبو داود " + n, noticeShown: false });
+    assert.ok(r.reply.includes(frag), "Əbu Davud " + n);
+    assert.match(r.reply, new RegExp("رقم " + n + " \\(ت الأرنؤوط\\)"));
+  }
+  assert.match((await run({ message: "سنن أبي داود 5220", noticeShown: false })).reply, /::tl:: 1\/1 · أبو داود · رقم 5220/);
+  const none = await run({ message: "Ebu Davud 594", noticeShown: false });
+  assert.ok(!/::tl::/.test(none.reply));
+});
+
+test("Müslim: yanlış nömrələnmiş hədislər düzəldildi (822 — 6 hədis, 2183)", async () => {
+  const r = await run({ message: "مسلم 822", noticeShown: false });
+  assert.match(r.reply, /822: 6 حديثًا/);
+  assert.match((await run({ message: "مسلم 2183", noticeShown: false })).reply, /::tl:: 1\/2 · مسلم · رقم 2183/);
+});

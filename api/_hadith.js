@@ -124,7 +124,7 @@ export async function getHadith(idx, g) {
   const { book, local } = locate(idx, g);
   const shard = await loadShard(book.id, Math.floor(local / SHARD));
   const r = shard[local % SHARD];
-  return { id: g, bookId: book.id, kitab: r[0], bab: r[1], no: r[2], noInt: r[3], grading: r[4], text: r[5] };
+  return { id: g, bookId: book.id, kitab: r[0], bab: r[1], no: r[2], noInt: r[3], grading: r[4], text: r[5], src: r[6] || "" };
 }
 
 // ---------------------------------------------------------------- axtarış
@@ -229,7 +229,8 @@ export function sourceLine(h) {
   if (k && !/كتاب|كِتَاب|كِتاب|أبواب|أَبْوَاب|ابواب|أَبْوَابِ|أَبْوَاب/.test(k)) k = "كتاب " + k;
   let b = clean1(h.bab);
   if (b && norm(b).split(" ")[0] !== "باب" && !/^باب/.test(norm(b))) b = "باب " + b;
-  return [m.author, m.title, k, b, "رقم " + asciiDigits(h.no)].filter(Boolean).join("، ") + ` (${m.ed})`;
+  // h.src: نص مكمَّل من نشرة أخرى (الصفوف التي سقط نصها من الشاملة) — يُذكر صراحةً
+  return [m.author, m.title, k, b, "رقم " + asciiDigits(h.no)].filter(Boolean).join("، ") + ` (${m.ed}${h.src ? " — " + h.src : ""})`;
 }
 export function gradeLine(h) {
   const m = BOOK_META[h.bookId];
@@ -359,7 +360,7 @@ const NUM_FILLER = new Set(["hedis", "hadis", "hadith", "hadees", "hadiths", "ha
 const BOOK_RE = [
   ["735", /(?:sehih\s+|sahih\s+|sahihi\s+)?(?:(?:el|al)[- ]?)?(?:buxari|bukhari|bukari|buhari|buhari)\b|(?:صحيح\s+)?(?:ال)?بخاري|(?:сахих\s+)?бухари/],
   ["1727", /(?:sehih\s+|sahih\s+|sahihi\s+)?(?:(?:el|al)[- ]?)?muslim\b|(?:صحيح\s+)?مسلم|(?:сахих\s+)?муслим/],
-  ["117359", /(?:sunen\s+|sunan\s+|sunni\s+)?(?:ebu|abu|ebi|abi)\s*(?:davud|dawud|dawood|davut|daud|dawood)\b|(?:سنن\s+)?(?:ابي|ابو)\s+داود|(?:сунан\s+)?абу\s+дауд/],
+  ["117359", /(?:sunen\s+|sunan\s+|sunni\s+)?(?:ebu|abu|ebi|abi)\s*(?:davud|dawud|dawood|davut|daud|dawood)\b|(?:سنن\s+)?(?:[اأإ]بي|[اأإ]بو)\s+داود|(?:сунан\s+)?абу\s+дауд/],
   ["1363", /(?:sunen\s+|sunan\s+|cami\s+|jami\s+)?(?:(?:et|at|el|al)[- ]?)?(?:tirmizi|tirmidhi|tirmidzi|termizi|tirmiziy)\b|(?:سنن\s+|جامع\s+)?(?:ال)?ترمذي|(?:джами\s+)?тирмизи/],
   ["1339", /(?:sunen\s+|sunan\s+)?(?:(?:en|an|el|al)[- ]?)?(?:nesai|nasai|nesei|nesaiy)\b|(?:سنن\s+)?(?:ال)?نسائي|(?:сунан\s+)?насаи/],
   ["1194", /(?:sunen\s+|sunan\s+)?ibn\s*(?:mace|majah|maja|maca|macah)\b|(?:سنن\s+)?ابن\s+ماجه?|(?:сунан\s+)?ибн\s+маджа/],

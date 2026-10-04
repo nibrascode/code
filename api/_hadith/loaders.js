@@ -23,6 +23,9 @@ export const LOADERS = {
     () => import("./books/h735_18.js"),
     () => import("./books/h735_19.js"),
     () => import("./books/h735_20.js"),
+    () => import("./books/h735_21.js"),
+    () => import("./books/h735_22.js"),
+    () => import("./books/h735_23.js"),
   ],
   "1727": [
     () => import("./books/h1727_0.js"),
