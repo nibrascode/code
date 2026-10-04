@@ -4,6 +4,7 @@
 // Sözün kökü namizəd yaradılması + lüğət axtarışı ilə tapılır; tapılmasa maddə mətnində söz axtarılır; yenə tapılmasa null (adi davranış).
 import { unpack } from "./_tafsir/_unpack.js";
 import { detectLang } from "./_ayah.js";
+import { PARTICLES } from "./_nahw/terms.js";
 
 const MAX_CHARS = 1500; // bundan uzun maddə kəsilir
 const SLACK = 150; // MAX_CHARS-dan bu qədər uzun olmayan maddə tam verilir
@@ -208,6 +209,8 @@ export function rootCandidates(word, map) {
 const QURAN_AR = /آي[ةه]|ايه|ايات|آيات|سور[ةه]|قرآن|القرآن|قران|تفسير|تفاسير|﴿|﴾|\d\s*[:：]\s*\d/;
 const QURAN_LAT = /\b(ay[eə]t?\w*|ayah|ayat|aya|sur[eə]\w*|surah|sura|quran\w*|qur'?an|kur'?an\w*|koran|tef?sir\w*|tafsir\w*|verse|verses|bəqərə|beqere|bakara|hadis\w*|hədis\w*|hadith)\b/i;
 const QURAN_RU = /аят|сура|коран|тафсир|хадис/i;
+// Nəhv hərfləri: «معنى لن» kimi suallar qrammatika idarəçisinə (api/_nahw.js) aiddir, lüğət maddəsinə yox
+const GRAMMAR_PARTICLES = new Set(["لن", "لم", "لما", "لا", "إن", "أن", "كي", "حتى", "إذن", "إذا", "لعل", "ليت", "كأن", "لكن", "ثم", "أو", "بل", "هل", "قد", "سوف"].filter((p) => PARTICLES.includes(p)).map((p) => key(p)));
 const GRAMMAR_AR = /نحو|إعراب|اعراب|صرف|النحو|الصرف|مبتدأ|مبتدا|فاعل|مفعول|حروف|فعل|اسم\s+(?:ال)?(?:فاعل|مفعول)|مضاف|معرب|مبني/;
 const GRAMMAR_LAT = /\b(n[eə]hv\w*|qramat\w*|grammat\w*|qrammat\w*|ƏRƏB qram\w*|syntax|i'?rab|sarf|gramer\w*|грамматик\w*)\b/i;
 
@@ -282,6 +285,7 @@ export function parseLughaQuery(message) {
   if (GRAMMAR_AR.test(gtext) || GRAMMAR_LAT.test(gtext)) return null;
   const w = key(core[0]);
   if (w.length < 2) return null;
+  if (core.length === 1 && GRAMMAR_PARTICLES.has(w)) return null;
   return { word: core[0].replace(MARKS, ""), key: w, second: core[1] ? key(core[1]) : null, lang: detectLang(message) };
 }
 

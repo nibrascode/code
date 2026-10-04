@@ -6,6 +6,7 @@ import { nextReply } from "./_next.js";
 import { gameReply } from "./_game.js";
 import { ayahReply, finalizeAi, compactHistory, AYAH_PROMPT } from "./_ayah.js";
 import { lughaReply } from "./_lugha.js";
+import { nahwReply } from "./_nahw.js";
 import { snippetReply } from "./_snippets.js";
 import { localReply } from "./_local.js";
 import { track } from "./_stats.js";
@@ -16,6 +17,7 @@ const SYSTEM = [
   "Sən Nibras AI-san, Nibras Code saytının köməkçisisən.",
   "Cavabların qısa, aydın və nəzakətli olsun. İstifadəçi hansı dildə yazırsa, o dildə cavab ver.",
   "İslam dini ilə bağlı sual gələndə dini hökm, ayə izahı və ya dərs vermə. Yalnız bunu yaz: İlk olaraq: süni intellektdən din öyrənilməz. İbn Sirin رحمه الله demişdir: «Həqiqətən, bu elm sizin dininizdir; dininizi kimdən aldığınıza diqqət edin.»",
+  "Ərəb qrammatikasında «لن» ədatı əbədi inkar bildirmir; bununla axirətdə Allahı görməyi inkar etmək olmaz. Sələfə (əhli-sünnə əqidəsinə) zidd qrammatik təvillər vermə.",
   "Layihənin adı Nibras Code-dur. NibrasCodr yazma. Sahibi Mahir Əliyevdir. Bu faktı dəyişmə, başqa adam adı uydurma.",
   "Nibras Code böyük şirkət deyil. Sadə, faydalı və istifadəsi rahat tətbiqlər üzərində çalışan müstəqil şəxsi layihədir.",
   "Tətbiqlər: Nibras Arabic hazırdır. Nibras PDF və Nibras Plans tezliklədir. Nibras Docs hazırlanır.",
@@ -66,7 +68,7 @@ export default async function handler(req, res) {
     const gameHist = Array.isArray(body.games) && body.games.length
       ? body.games.filter((x) => typeof x === "string" && /^[a-z0-9-]{1,40}$/.test(x)).slice(-60).map((x) => ({ role: "assistant", text: `::game:: ${x} | x` }))
       : hist;
-    for (const [kind, fn] of [["game", (m) => gameReply(m, gameHist)], ["next", (m) => nextReply(m, hist)], ["tafsir", tafsirReply], ["ayah", ayahReply], ["tawhid", tawhidReply], ["canned", cannedReply], ["quran", quranReply], ["book", lughaReply], ["din", dinReply], ["brand", brandReply]]) {
+    for (const [kind, fn] of [["game", (m) => gameReply(m, gameHist)], ["next", (m) => nextReply(m, hist)], ["tafsir", tafsirReply], ["ayah", ayahReply], ["tawhid", tawhidReply], ["canned", cannedReply], ["quran", quranReply], ["book", lughaReply], ["book", nahwReply], ["din", dinReply], ["brand", brandReply]]) {
       let r = await fn(message);
       if (r) {
         if (kind === "ayah") r = withTafsirSuggest(r, message); // təfsir istənilməyib: ayə/surə cavabına təfsir seçimləri əlavə olunur
