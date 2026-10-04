@@ -1134,11 +1134,50 @@ html[dir="rtl"] .marquee-track {
   opacity: 0.62;
 }
 
+.download-stores .play-btn small {
+  color: inherit;
+}
+
 .play-btn b {
   display: block;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: -0.02em;
+}
+
+.download-stores .store-play_url,
+.download-stores .store-play_url:hover {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+}
+
+.download-stores .store-huawei_url,
+.download-stores .store-huawei_url:hover {
+  background: #cf0a2c;
+  color: #fff;
+  border-color: #cf0a2c;
+}
+
+.download-stores .store-appstore_url,
+.download-stores .store-appstore_url:hover {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+.download-stores .store-galaxy_url,
+.download-stores .store-galaxy_url:hover {
+  background: #1428a0;
+  color: #fff;
+  border-color: #1428a0;
+}
+
+.download-stores .store-xiaomi_url,
+.download-stores .store-xiaomi_url:hover {
+  background: #ff6900;
+  color: #fff;
+  border-color: #ff6900;
 }
 
 .app-icon-xl {
