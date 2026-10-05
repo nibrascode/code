@@ -3,6 +3,7 @@ import type { ProgrammingSection } from "@/lib/programming";
 import { csharpSections } from "@/lib/csharp-sections";
 import { javaSections } from "@/lib/java-sections";
 import { javascriptSections } from "@/lib/javascript-sections";
+import { typescriptSections } from "@/lib/typescript-sections";
 import { PYTHON_AR } from "@/lib/python-ar";
 import { PYTHON_EN } from "@/lib/python-en";
 import { PYTHON_RU } from "@/lib/python-ru";
@@ -32,6 +33,10 @@ const LOCALES: readonly ProgrammingLocale[] = [
   { lang: "tr", slug: "csharp", title: "C# nedir? Kullanım alanları ve özellikleri", sections: csharpSections("tr") },
   { lang: "ar", slug: "csharp", title: "ما هي C#؟ استخداماتها وخصائصها", sections: csharpSections("ar") },
   { lang: "ru", slug: "csharp", title: "Что такое C#? Области применения и особенности", sections: csharpSections("ru") },
+  { lang: "en", slug: "typescript", title: "What is TypeScript? How it differs from JavaScript", sections: typescriptSections("en") },
+  { lang: "tr", slug: "typescript", title: "TypeScript nedir? JavaScript'ten farkı", sections: typescriptSections("tr") },
+  { lang: "ar", slug: "typescript", title: "ما هو TypeScript؟ اختلافه عن JavaScript", sections: typescriptSections("ar") },
+  { lang: "ru", slug: "typescript", title: "Что такое TypeScript? Отличие от JavaScript", sections: typescriptSections("ru") },
 ];
 
 export function programmingLocalePath(lang: Lang, slug: string) {

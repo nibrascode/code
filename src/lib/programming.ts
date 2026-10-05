@@ -2,6 +2,7 @@ import type { Lang } from "@/lib/i18n";
 import { csharpSections } from "@/lib/csharp-sections";
 import { javaSections } from "@/lib/java-sections";
 import { javascriptSections } from "@/lib/javascript-sections";
+import { typescriptSections } from "@/lib/typescript-sections";
 
 type Seo = { title: string; description: string; keywords: string };
 
@@ -492,6 +493,7 @@ export const PROGRAMMING: readonly ProgrammingPage[] = [
   {
     slug: "typescript",
     title: "TypeScript nədir? JavaScript-dən fərqi",
+    sections: typescriptSections("az"),
     seo: seo(
       {
         title: "TypeScript nədir? JavaScript-dən fərqi — Nibras Code",
