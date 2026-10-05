@@ -139,6 +139,8 @@ export function parseNahwQuery(message) {
   const raw = String(message || "").replace(MARKS, " ").replace(/\s+/g, " ").trim();
   if (!raw || raw.length > 200) return null;
   if (QURAN_AR.test(raw) || QURAN_LAT.test(raw) || QURAN_RU.test(raw)) return null;
+  // salamlaşma: «كيف الحال»، «كيف حالك» qrammatika sualı deyil
+  if (/^\s*(?:كيف|كيفك|شو|ما)\s+(?:ال)?حال(?:ك|كم|ه)?\s*[؟?!.]*\s*$/.test(raw.replace(/[أإآ]/g, "ا"))) return null;
   const arN = (raw.match(/[\u0621-\u064A]/g) || []).length;
   const latN = (raw.match(/[A-Za-zƏəĞğİıÖöŞşÜüÇç]/g) || []).length + (raw.match(/[\u0400-\u04FF]/g) || []).length;
   const lang = detectLang(message);
@@ -179,7 +181,10 @@ export function parseNahwQuery(message) {
     const cue = LAT_CUE.test(f) || LAT_CUE.test(raw);
     const hits = LAT_TERMS.filter((x) => x.re.test(f));
     const arRuns = gkey(raw).match(/[\u0621-\u064A]+/g) || [];
-    if (cue && arRuns.length === 1 && PARTS.has(arRuns[0]) && !hits.length) {
+    const latLan = /(?:^|\s)(?:ərəbcə|erebce|arapça|arapca|ərəb\s+dilində)\s+l[eə]n(?:\s|$|[?.!])|\bl[eə]n\s+h[eə]rfi?\b/i.test(raw);
+    if (latLan) {
+      terms = [];
+    } else if (cue && arRuns.length === 1 && PARTS.has(arRuns[0]) && !hits.length) {
       // «Ərəb dilində لن nə bildirir nəhv»: latın sual + tək ərəb hərfi
       particle = PARTS.get(arRuns[0]);
       lan = arRuns[0] === "لن";
@@ -194,10 +199,10 @@ export function parseNahwQuery(message) {
       if (!uniq && !cue) return null;
       const arq = hits.slice(0, 3).map((h) => h.ar).join(" ");
       terms = tokens(arq);
-      if (/لن/.test(arq)) lan = true;
+      if (/(?:^|\s)لن(?:\s|$)/.test(arq)) lan = true;
     }
     // Latın yazılışda «lan/len» hərfi: «ərəbcə lən nədir»
-    if (/\b(?:ərəbcə|erebce|arapca)\s+l[eə]n\b|\bl[eə]n\s+h[eə]rfi?\b/i.test(raw)) {
+    if (latLan) {
       terms = tokens("لن النفي الاستقبال تأبيد");
       lan = true;
       particle = "لن";
