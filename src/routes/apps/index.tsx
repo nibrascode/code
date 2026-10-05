@@ -16,7 +16,7 @@ const ORDER: AppSlug[] = ["nibras-arabic", "nibras-pdf", "nibras-docs", "nibras-
 const STATUS: Partial<Record<AppSlug, TKey>> = {
   "nibras-pdf": "soon",
   "nibras-plans": "soon",
-  "nibras-docs": "nx_docs_stage",
+  "nibras-docs": "soon",
 };
 
 function AppsPage() {
@@ -41,7 +41,11 @@ function AppsPage() {
           if (!app) return null;
           const live = rows?.find((row) => row.slug === slug);
           if (live?.visible === false) return null;
-          const badge = statusText(live?.status, STATUS[slug] ? t(STATUS[slug]!) : null, labels);
+          const badge = statusText(
+            slug === "nibras-docs" && live?.status !== "ready" ? "soon" : live?.status,
+            STATUS[slug] ? t(STATUS[slug]!) : null,
+            labels,
+          );
           return (
             <Link key={slug} to="/apps/$slug" params={{ slug }} className="app-row">
               <img src={live?.icon_url || app.icon} alt="" />

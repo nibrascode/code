@@ -19,7 +19,7 @@ export const Route = createFileRoute("/")({
 const STATUS: Partial<Record<"nibras-arabic" | "nibras-pdf" | "nibras-plans" | "nibras-docs", TKey>> = {
   "nibras-pdf": "soon",
   "nibras-plans": "soon",
-  "nibras-docs": "nx_docs_stage",
+  "nibras-docs": "soon",
 };
 
 const CARDS: {
@@ -298,7 +298,7 @@ function Home() {
         <div className="nx-grid">
           {cards.map(({ card, live }) => {
             const badge = statusText(
-              live?.status,
+              card.slug === "nibras-docs" && live?.status !== "ready" ? "soon" : live?.status,
               STATUS[card.slug] ? t(STATUS[card.slug]!) : null,
               labels,
             );

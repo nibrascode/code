@@ -9,13 +9,13 @@ import { statusText, type StudioAppRow } from "@/lib/studio";
 const STATUS: Partial<Record<AppSlug, TKey>> = {
   "nibras-pdf": "soon",
   "nibras-plans": "soon",
-  "nibras-docs": "nx_docs_stage",
+  "nibras-docs": "soon",
 };
 
 export function SimpleAppPage({ app, live }: { app: StudioApp; live?: StudioAppRow | null }) {
   const { t } = useI18n();
   const badge = statusText(
-    live?.status,
+    app.slug === "nibras-docs" && live?.status !== "ready" ? "soon" : live?.status,
     STATUS[app.slug] ? t(STATUS[app.slug]!) : null,
     { soon: t("soon"), building: t("nx_docs_stage") },
   );
