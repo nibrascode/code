@@ -631,7 +631,157 @@ const AR: Record<(typeof ORDER)[number], readonly ProgrammingBlock[]> = {
   ],
 };
 
-const BODIES: Partial<Record<Lang, typeof AZ>> = { az: AZ, ru: RU, tr: TR, ar: AR };
+const EN: Record<(typeof ORDER)[number], readonly ProgrammingBlock[]> = {
+  nedir: [
+    {
+      paragraphs: [
+        "JavaScript is a widely used programming language for building modern websites and web applications. Together with HTML and CSS, it is one of the main parts of web technology. JavaScript can add interaction to a page and can also be used to build different kinds of applications.",
+        "It is mainly used to make web pages interactive and dynamic. It used to be seen mostly in the browser. Today it is also used on the server and in other application environments.",
+        "With JavaScript you can react to buttons, handle forms, run animations, change what is on the page, and respond to the user.",
+      ],
+    },
+  ],
+  istifade: [
+    {
+      paragraphs: ["JavaScript is used in several areas:"],
+      list: [
+        "Building websites",
+        "Interactive web applications",
+        "Frontend programming",
+        "Backend programming",
+        "Working with APIs",
+        "Mobile applications",
+        "Desktop applications",
+        "Games and interactive projects",
+        "Handling forms and user input",
+      ],
+    },
+    {
+      paragraphs: ["Through technologies such as Node.js, JavaScript can also run on the server."],
+    },
+  ],
+  "ne-etmek": [
+    {
+      paragraphs: [
+        "With JavaScript you can build interactive websites, calculators, games, forms, menus, and other web applications.",
+      ],
+    },
+    {
+      heading: "For example",
+      code: 'const name = "Nibras Code";\nconsole.log("Hello, " + name);',
+      after: ['This code uses the name "Nibras Code" and writes a greeting to the console.'],
+    },
+  ],
+  oyrenmek: [
+    {
+      paragraphs: [
+        "You can learn the basics of JavaScript, but using the language well takes steady practice.",
+        "At the start, these topics are useful:",
+      ],
+      list: [
+        "Variables",
+        "Data types",
+        "Conditions",
+        "Loops",
+        "Functions",
+        "Arrays and objects",
+        "Working with the DOM",
+        "Events",
+        "Asynchronous JavaScript",
+        "APIs",
+      ],
+      ordered: true,
+    },
+  ],
+  ustunluk: [
+    {
+      heading: "Advantages",
+      list: [
+        "It can run directly in the browser",
+        "It is widely used in web programming",
+        "It has a large ecosystem of libraries and frameworks",
+        "It can be used for frontend and backend work",
+        "It has a large programmer community",
+        "It can be used on many platforms",
+      ],
+    },
+    {
+      heading: "Disadvantages",
+      list: [
+        "Some features of the language can confuse a beginner",
+        "Asynchronous programming can look difficult at first",
+        "A large project needs a clear code structure",
+        "The number of libraries and frameworks can make the first choice hard",
+      ],
+    },
+  ],
+  sintaksis: [
+    {
+      paragraphs: ['In JavaScript, variables are created with keywords such as "let" and "const".'],
+      code: 'const name = "Ali";\nlet age = 20;',
+    },
+    {
+      heading: "Condition",
+      code: 'if (age >= 18) {\n    console.log("Adult");\n}',
+    },
+    {
+      heading: "Loop",
+      code: "for (let i = 1; i <= 5; i++) {\n    console.log(i);\n}",
+    },
+    {
+      heading: "Function",
+      code: 'function greet(name) {\n    return "Hello, " + name;\n}\n\nconsole.log(greet("Ali"));',
+    },
+  ],
+  numuneler: [
+    {
+      heading: "A simple message",
+      code: 'console.log("Hello, world!");',
+    },
+    {
+      heading: "Addition",
+      code: "let a = 10;\nlet b = 20;\n\nconsole.log(a + b);",
+    },
+    {
+      heading: "Checking a number",
+      code: 'let number = 10;\n\nif (number > 0) {\n    console.log("Positive number");\n}',
+    },
+    {
+      heading: "An array",
+      code: 'const fruits = ["Apple", "Banana", "Orange"];\n\nfor (const fruit of fruits) {\n    console.log(fruit);\n}',
+    },
+  ],
+  suallar: [
+    {
+      heading: "What is JavaScript?",
+      paragraphs: ["JavaScript is a programming language mainly used to build interactive and dynamic websites."],
+    },
+    {
+      heading: "Is JavaScript free?",
+      paragraphs: ["Yes. Using JavaScript does not require a separate license fee."],
+    },
+    {
+      heading: "Can you build a website with JavaScript?",
+      paragraphs: ["Yes. Together with HTML and CSS, JavaScript is widely used to build modern websites."],
+    },
+    {
+      heading: "Can you build a mobile app with JavaScript?",
+      paragraphs: ["Yes. Various frameworks and technologies make it possible to build mobile applications with JavaScript."],
+    },
+    {
+      heading: "Can JavaScript run on the server?",
+      paragraphs: ["Yes. For example, Node.js can run JavaScript on the server."],
+    },
+    {
+      heading: "Are JavaScript and Java the same?",
+      paragraphs: ["No. The names are similar, but Java and JavaScript are different programming languages."],
+    },
+  ],
+};
+
+const BODIES: Partial<Record<Lang, typeof AZ>> = { az: AZ, en: EN, ru: RU, tr: TR, ar: AR };
+
+
 
 export function javascriptSections(lang: Lang): readonly ProgrammingSection[] {
   const body = BODIES[lang];
