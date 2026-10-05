@@ -28,10 +28,10 @@ const LOCALES: readonly ProgrammingLocale[] = [
   { lang: "tr", slug: "java", title: "Java nedir? Android ve programlamada kullanımı", sections: javaSections("tr") },
   { lang: "ar", slug: "java", title: "ما هي Java؟ استخدامها في أندرويد والبرمجة", sections: javaSections("ar") },
   { lang: "ru", slug: "java", title: "Что такое Java? Применение в Android и программировании", sections: javaSections("ru") },
-  { lang: "en", slug: "csharp", title: "C# Programming Language", sections: csharpSections("en") },
-  { lang: "tr", slug: "csharp", title: "C# Programlama Dili", sections: csharpSections("tr") },
-  { lang: "ar", slug: "csharp", title: "لغة البرمجة C#", sections: csharpSections("ar") },
-  { lang: "ru", slug: "csharp", title: "Язык программирования C#", sections: csharpSections("ru") },
+  { lang: "en", slug: "csharp", title: "What is C#? Uses and characteristics", sections: csharpSections("en") },
+  { lang: "tr", slug: "csharp", title: "C# nedir? Kullanım alanları ve özellikleri", sections: csharpSections("tr") },
+  { lang: "ar", slug: "csharp", title: "ما هي C#؟ استخداماتها وخصائصها", sections: csharpSections("ar") },
+  { lang: "ru", slug: "csharp", title: "Что такое C#? Области применения и особенности", sections: csharpSections("ru") },
 ];
 
 export function programmingLocalePath(lang: Lang, slug: string) {
