@@ -248,10 +248,15 @@ test("axtarış çıxarışı cümlə əvvəlindən: uzun səhifələrdə kəsil
   const rep = await itbooksReply("كتب ابن تيمية الصبر", []);
   let verified = 0;
   for (const b of blocks(rep)) {
-    const m = /· ص (\d+)/.exec(b.tl);
+    const m = /(?:ج (\d+)[،,]\s*)?ص (\d+)/.exec(b.tl);
+    if (!m) continue;
+    const vol = Number(m[1] || 1);
+    const page = Number(m[2]);
     const slugAr = b.tl.split(" · ")[1];
     const bk = BOOKS.find((x) => x.ar === slugAr);
-    const d = idx.byPage.get(idx.bookIdx.get(bk.slug) + ":1:" + Number(m[1]));
+    if (!bk) continue;
+    const d = idx.byPage.get(idx.bookIdx.get(bk.slug) + ":" + vol + ":" + page);
+    if (!d) continue;
     const p = await getPage(idx, d);
     const body = b.body.replace(/^« \.\.\. » /, "").replace(/ « \.\.\. »$/, "").split("\n")[0];
     const at = p.text.indexOf(body.slice(0, 30));
@@ -323,6 +328,31 @@ test("2-ci mərhələ: 9 kitab mövcuddur; adla açılır, səhifə/axtarış i�
   }
   const s = await itbooksReply("الفتوى الحموية الكبرى لابن تيمية الاستواء", []);
   assert.ok(blocks(s).length > 0 && blocks(s).every((b) => b.tl.includes("الفتوى الحموية")));
+});
+
+test("3-cü mərhələ: 7 kitab mövcuddur; adla açılır, səhifə/axtarış işləyir; mərhələ siyahısında düymə", async () => {
+  const stage3 = BOOKS.filter((b) => b.stage === 3);
+  assert.equal(stage3.length, 7);
+  for (const b of stage3) assert.ok(b.desc.every((d) => d.length > 40 && !/TODO|placeholder/i.test(d)), b.slug + " təsvir");
+  if (!stage3.every((b) => isAvailable(b.slug))) return; // 3-cü mərhələ məlumatı build olunmayıbsa
+  for (const b of stage3) {
+    const r = await itbooksReply(`كتاب ${b.ar} لابن تيمية`, []);
+    assert.ok(r.includes("::tafsir itbooks::") && r.includes("::src:: ابن تيمية، " + b.ar), b.slug);
+    const start = chips(r).find(([, q]) => /ص \d+$/.test(q));
+    assert.ok(start, b.slug + " oxu düyməsi");
+    const pr = await itbooksReply(start[1], []);
+    assert.equal(blocks(pr).length, 1, b.slug);
+    assert.ok(blocks(pr)[0].body.length > 20);
+  }
+  for (const [q, slug] of [["İqtidaüs-sırat əl-müstəqim", "iqtida"], ["Qawaid Nuraniyya", "qawaid-nuraniyya"], ["Kitab əl-İstiqamə", "istiqama"], ["Əs-Sarimul-Məslul", "sarim-maslul"], ["Al-Jawab al-Sahih", "jawab-sahih"], ["Sharh al-Asfahaniyyah", "asfahaniyya"], ["Kitab al-Nubuwwat", "nubuwwat"]]) {
+    const p = parseBookQuery(q);
+    assert.ok(p && p.slug === slug, `${q} -> ${JSON.stringify(p)}`);
+  }
+  const s = await itbooksReply("الصارم المسلول على شاتم الرسول لابن تيمية الردة", []);
+  assert.ok(blocks(s).length > 0 && blocks(s).every((b) => b.tl.includes("الصارم المسلول")));
+  const r3 = recommendReply("az", 3);
+  for (const b of stage3) assert.ok(chips(r3).some(([, q]) => q === `كتاب ${b.ar} لابن تيمية`), b.slug + " siyahı düyməsi");
+  assert.ok(!r3.includes("tezliklə\n") || count(r3, /tezliklə/g) <= BOOKS.filter((b) => b.stage === 4).length + 1);
 });
 
 test("tövsiyə: 2-ci mərhələ kitabları mövcud olanda düymə alır (mövcudluq avail.js ilə avtomatik)", () => {
