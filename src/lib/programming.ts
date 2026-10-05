@@ -2,6 +2,7 @@ import type { Lang } from "@/lib/i18n";
 import { csharpSections } from "@/lib/csharp-sections";
 import { javaSections } from "@/lib/java-sections";
 import { javascriptSections } from "@/lib/javascript-sections";
+import { htmlCssSections } from "@/lib/html-css-sections";
 import { typescriptSections } from "@/lib/typescript-sections";
 
 type Seo = { title: string; description: string; keywords: string };
@@ -525,6 +526,7 @@ export const PROGRAMMING: readonly ProgrammingPage[] = [
   {
     slug: "html-css",
     title: "HTML və CSS nədir?",
+    sections: htmlCssSections("az"),
     seo: seo(
       {
         title: "HTML və CSS nədir? — Nibras Code",

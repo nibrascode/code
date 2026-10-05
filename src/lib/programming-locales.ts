@@ -3,6 +3,7 @@ import type { ProgrammingSection } from "@/lib/programming";
 import { csharpSections } from "@/lib/csharp-sections";
 import { javaSections } from "@/lib/java-sections";
 import { javascriptSections } from "@/lib/javascript-sections";
+import { htmlCssSections } from "@/lib/html-css-sections";
 import { typescriptSections } from "@/lib/typescript-sections";
 import { PYTHON_AR } from "@/lib/python-ar";
 import { PYTHON_EN } from "@/lib/python-en";
@@ -37,6 +38,10 @@ const LOCALES: readonly ProgrammingLocale[] = [
   { lang: "tr", slug: "typescript", title: "TypeScript nedir? JavaScript'ten farkı", sections: typescriptSections("tr") },
   { lang: "ar", slug: "typescript", title: "ما هو TypeScript؟ اختلافه عن JavaScript", sections: typescriptSections("ar") },
   { lang: "ru", slug: "typescript", title: "Что такое TypeScript? Отличие от JavaScript", sections: typescriptSections("ru") },
+  { lang: "en", slug: "html-css", title: "What are HTML and CSS?", sections: htmlCssSections("en") },
+  { lang: "tr", slug: "html-css", title: "HTML ve CSS nedir?", sections: htmlCssSections("tr") },
+  { lang: "ar", slug: "html-css", title: "ما هما HTML وCSS؟", sections: htmlCssSections("ar") },
+  { lang: "ru", slug: "html-css", title: "Что такое HTML и CSS?", sections: htmlCssSections("ru") },
 ];
 
 export function programmingLocalePath(lang: Lang, slug: string) {
