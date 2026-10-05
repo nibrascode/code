@@ -77,7 +77,7 @@ test("tövsiyə tetikleyiciləri: ümumi və İbn Teymiyyə sorğuları (az/tr/e
 test("tövsiyə tetikleyiciləri: başqa mövzu / adi söhbət oğurlanmır", () => {
   const no = [
     "nəhv kitabı məsləhət et", "hədis kitabı tövsiyə et", "təfsir kitabı məsləhət et", "fiqh kitabı məsləhət et", "recommend a grammar book", "recommend a hadith book", "посоветуй книги по хадису", "انصحني بكتب في النحو",
-    "salam", "kitab oxumaq istəyirəm", "oyun kodu yaz", "python kitabı məsləhət et", "roman tövsiyə et", "bu kitabı oxuya bilərəm?", "Əl-Ubudiyyə nədir", "ubudiyyət nədir", "معنى العبودية", "stage 2", "next stage",
+    "salam", "kitab oxumaq istəyirəm", "oyun kodu yaz", "python kitabı məsləhət et", "roman tövsiyə et", "bu kitabı oxuya bilərəm?", "Əl-Ubudiyyə nədir", "ubudiyyət nədir", "معنى العبودية",
     "Bəqərə 255", "مجموع الفتاوى المجلد 3 صفحة 10", "İbn Teymiyyə kimdir",
   ];
   for (const q of no) assert.equal(parseRecQuery(q, []), null, q);
@@ -104,7 +104,7 @@ test("tövsiyə cavabı: 4 mərhələ, 28 kitab, mövcudlar düymə, qalanı «t
   assert.equal(count(az, /— ✓ açıqdır/g), BOOKS.filter((b) => isAvailable(b.slug)).length);
 });
 
-test("«növbəti mərhələ»: ctx-dən sonrakı mərhələ; sonuncuda bildiriş; ctx yoxdursa tetiklənmir", async () => {
+test("«növbəti mərhələ»: ctx-dən sonrakı mərhələ; sonuncuda bildiriş; ctx yoxdursa tək mərhələ sorğusu da işləyir", async () => {
   const r1 = recommendReply("az", null);
   const r2 = await itbooksReply("Növbəti mərhələ", [asst(r1)]);
   assert.ok(r2.startsWith("2-ci mərhələ — " + STAGES[2].az), r2.slice(0, 80));
@@ -119,7 +119,10 @@ test("«növbəti mərhələ»: ctx-dən sonrakı mərhələ; sonuncuda bildiri�
   assert.ok(ru.startsWith("Этап 2 — "), ru.slice(0, 40));
   const ar = await itbooksReply("المرحلة التالية", [asst(recommendReply("ar", null))]);
   assert.ok(ar.startsWith("المرحلة 2 — "), ar.slice(0, 40));
-  assert.equal(await itbooksReply("next stage", []), null);
+  assert.ok((await itbooksReply("next stage", [])).startsWith("Stage 2 — "));
+  assert.ok((await itbooksReply("3-cü mərhələ", [])).startsWith("3-cü mərhələ — " + STAGES[3].az));
+  assert.ok((await itbooksReply("stage 4", [])).startsWith("Stage 4 — "));
+  assert.equal(await itbooksReply("Nibras Docs hansı mərhələdədir", []), null);
   const st3 = await itbooksReply("3-cü mərhələ", [asst(r1)]);
   assert.ok(st3.includes(STAGES[3].az));
 });
@@ -133,7 +136,7 @@ test("kitab adı (az/tr/en/ru/ar): ümumi baxış + fihrist + mənbə + oxu düy
     "amrad-qulub": ["Əmrad əl-qulub", "amrad al qulub", "أمراض القلوب وشفاؤها", "болезни сердца Ибн Таймии"],
     wasitiyya: ["Əl-Əqidə əl-Vasitiyyə", "Vasitiyyə", "wasitiyyah", "العقيدة الواسطية", "العقيدة الواسطية"],
     wasita: ["Əl-Vasitə bəynəl-həqq vəl-xalq", "Wasitah bayna al-haqq wa al-khalq", "الواسطة بين الحق والخلق"],
-    "raful-malam": ["Rəf'ul-ləm", "Raf al-Malam", "رفع الملام عن الأئمة الأعلام"],
+    "raful-malam": ["Rəf'ul-məlam", "Rəf'ul-ləm", "Raf al-Malam", "رفع الملام عن الأئمة الأعلام"],
   };
   for (const [slug, qs] of Object.entries(names)) {
     const b = BOOKS.find((x) => x.slug === slug);
@@ -369,4 +372,17 @@ test("adi sözlər kitab adı sanılmır: «vasitə ilə», «ما حكم الو
   }
   const r = await chat("təvəssül caizdirmi");
   assert.ok(r.reply.includes("::tafsir fatawa::") && !r.reply.includes("itbooks"));
+});
+
+test("transliterasiya variantları və dil: «İqtidaus-siratil-mustəqim», «Sarim maslul»; az ı/ş/ğ türkcə sayılmır", async () => {
+  for (const [q, slug] of [["İqtidaus-siratil-mustəqim kitabı", "iqtida"], ["İqtidaus-sirat kitabı", "iqtida"], ["İqtida kitabı", "iqtida"], ["Sarim maslul", "sarim-maslul"], ["Əs-Sarimul-məslul kitabı", "sarim-maslul"], ["Nübüvvat kitabı", "nubuwwat"], ["Rəf'ul-məlam", "raful-malam"]]) {
+    const r = parseBookQuery(q);
+    assert.ok(r && r.slug === slug, q + " -> " + JSON.stringify(r));
+  }
+  const az1 = await itbooksReply("İqtida kitabı", []);
+  assert.ok(az1.includes("3-cü mərhələ"), az1.slice(0, 100));
+  const az2 = await itbooksReply("Nübüvvat kitabı", []);
+  assert.ok(az2.includes("səhifə"), az2.slice(0, 100));
+  const tr = await itbooksReply("Hangi kitapları okuyayım", []);
+  assert.ok(/aşama/.test(tr), tr.slice(0, 80));
 });

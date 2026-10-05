@@ -239,6 +239,7 @@ export function sourceLines(p) {
 
 // ---------------------------------------------------------------- mətnlər
 const SHORT_Q = { az: "İbn Teymiyyənin kitablarını məsləhət et", tr: "İbn Teymiyye'nin kitaplarını tavsiye et", en: "Recommend Ibn Taymiyyah's books", ru: "Посоветуй книги Ибн Таймии", ar: "كتب ابن تيمية تنصح بها" };
+const AZORD = { 1: "ci", 2: "ci", 3: "cü", 4: "cü" };
 const NEXT_Q = { az: "Növbəti mərhələ", tr: "Sonraki aşama", en: "Next stage", ru: "Следующий этап", ar: "المرحلة التالية" };
 const T = {
   az: {
@@ -250,7 +251,7 @@ const T = {
     moreQ: "davam",
     sl: "Daha çox nəticə var:",
     ended: "Başqa nəticə qalmayıb. Yeni axtarış üçün söz və ya ifadə yaz.",
-    ovHead: (name, ar, st, stt, pages) => `${name} (${ar}) — İbn Teymiyyə (ö. 728h). ${st}-ci mərhələ: ${stt}. ${pages} səhifə.`,
+    ovHead: (name, ar, st, stt, pages) => `${name} (${ar}) — İbn Teymiyyə (ö. 728h). ${st}-${AZORD[st]} mərhələ: ${stt}. ${pages} səhifə.`,
     ovSearch: (ar) => `Kitabda axtarmaq üçün ərəbcə söz yaz: «${ar} الصبر». Səhifəni açmaq üçün: «${ar} ص 5».`,
     toc: "الفهرس:",
     start: (p) => `Oxumağa başla (səh. ${p})`,
@@ -258,15 +259,15 @@ const T = {
     next: (p) => `Növbəti səhifə (${p})`,
     list: "Tövsiyə siyahısı",
     lastPage: "Bu kitabın son səhifəsidir.",
-    soonBook: (name, st) => `«${name}» — ${st}-ci mərhələ kitabıdır, tezliklə əlavə olunacaq. İndi 1-ci mərhələ kitabları və Məcmuu əl-Fətava açıqdır.`,
+    soonBook: (name, st) => `«${name}» — ${st}-${AZORD[st]} mərhələ kitabıdır, tezliklə əlavə olunacaq. Hazırda açıq olan kitabları görmək üçün «kitab məsləhət et» yaz.`,
     recHead: "İbn Teymiyyənin kitablarını addım-addım, asandan çətinə oxumaq məsləhətdir. 4 mərhələ var; Məcmuu əl-Fətava bütün mərhələlərdə yoldaş mənbədir.",
-    recStage: (s, t, a, b) => `${s}-ci mərhələ — ${t} (${a}–${b})`,
+    recStage: (s, t, a, b) => `${s}-${AZORD[s]} mərhələ — ${t} (${a}–${b})`,
     soon: "tezliklə",
     avail: "açıqdır",
     recPick: "Açmaq üçün seç:",
     recMajmu: "Yoldaş mənbə: Məcmuu əl-Fətava (35 cild) — hər mərhələdə mövzu axtarışı və müraciət üçün.",
     recFoot: "Əvvəlcə 1-ci mərhələni bitir, sonra növbəti mərhələyə keç.",
-    stageHead: (s, t) => `${s}-ci mərhələ — ${t}`,
+    stageHead: (s, t) => `${s}-${AZORD[s]} mərhələ — ${t}`,
     lastStage: "Bu sonuncu (4-cü) mərhələdir. Başqa mərhələni görmək üçün «2-ci mərhələ» və ya «kitab məsləhət et» yaz.",
     majmu: "Məcmuu əl-Fətava",
   },
@@ -287,7 +288,7 @@ const T = {
     next: (p) => `Sonraki sayfa (${p})`,
     list: "Tavsiye listesi",
     lastPage: "Bu kitabın son sayfası.",
-    soonBook: (name, st) => `«${name}» ${st}. aşama kitabıdır, yakında eklenecek. Şimdilik 1. aşama kitapları ve Mecmûu'l-Fetâvâ açık.`,
+    soonBook: (name, st) => `«${name}» ${st}. aşama kitabıdır, yakında eklenecek. Açık kitapları görmek için «kitap tavsiye et» yazın.`,
     recHead: "İbn Teymiyye'nin kitaplarını adım adım, kolaydan zora okumanız önerilir. 4 aşama var; Mecmûu'l-Fetâvâ tüm aşamalarda yoldaş kaynaktır.",
     recStage: (s, t, a, b) => `${s}. aşama — ${t} (${a}–${b})`,
     soon: "yakında",
@@ -316,7 +317,7 @@ const T = {
     next: (p) => `Next page (${p})`,
     list: "Reading list",
     lastPage: "This is the last page of the book.",
-    soonBook: (name, st) => `«${name}» is a Stage ${st} book and will be added soon. Stage 1 books and Majmu' al-Fatawa are open now.`,
+    soonBook: (name, st) => `«${name}» is a Stage ${st} book and will be added soon. Write «recommend books» to see the books open now.`,
     recHead: "Read Ibn Taymiyyah's books step by step, from easiest to hardest. There are 4 stages; Majmu' al-Fatawa is the companion source throughout all stages.",
     recStage: (s, t, a, b) => `Stage ${s} — ${t} (${a}–${b})`,
     soon: "coming soon",
@@ -345,7 +346,7 @@ const T = {
     next: (p) => `Следующая страница (${p})`,
     list: "Список для чтения",
     lastPage: "Это последняя страница книги.",
-    soonBook: (name, st) => `«${name}» — книга ${st}-го этапа, будет добавлена скоро. Сейчас открыты книги 1-го этапа и «Маджму аль-фатава».`,
+    soonBook: (name, st) => `«${name}» — книга ${st}-го этапа, будет добавлена скоро. Напишите «посоветуй книги», чтобы увидеть доступные книги.`,
     recHead: "Читайте книги Ибн Таймии шаг за шагом, от простого к сложному. Всего 4 этапа; «Маджму аль-фатава» — спутник на всех этапах.",
     recStage: (s, t, a, b) => `Этап ${s} — ${t} (${a}–${b})`,
     soon: "скоро",
@@ -374,7 +375,7 @@ const T = {
     next: (p) => `الصفحة التالية (${p})`,
     list: "قائمة الكتب",
     lastPage: "هذه آخر صفحة في الكتاب.",
-    soonBook: (name, st) => `«${name}» من كتب المرحلة ${st} وستضاف قريبًا. المتاح الآن كتب المرحلة الأولى ومجموع الفتاوى.`,
+    soonBook: (name, st) => `«${name}» من كتب المرحلة ${st} وستضاف قريبًا. اكتب «كتب تنصح بها» لرؤية الكتب المتاحة.`,
     recHead: "يُنصح بقراءة كتب ابن تيمية بالتدرج من الأسهل إلى الأصعب، في 4 مراحل، ومجموع الفتاوى رفيق لك في جميع المراحل.",
     recStage: (s, t, a, b) => `المرحلة ${s} — ${t} (${a}–${b})`,
     soon: "قريبًا",
@@ -408,7 +409,9 @@ function tkey(t) {
     .replace(/c/g, "j")
     .replace(/e/g, "a")
     .replace(/o/g, "u")
-    .replace(/(.)\1+/g, "$1");
+    .replace(/(.)\1+/g, "$1")
+    // yapışıq artikl şəkilçisi: «iqtidaus», «siratil», «sarimul» → «iqtida», «sirat», «sarim» (hər iki tərəfdə eyni tətbiq olunur)
+    .replace(/^(.{4,}?)[ui][sltdrnz]$/, "$1");
 }
 /** latın/kiril mətn -> açar tokenlər [{k, i}] (artikl və «kitab» sözləri atılır; i = orijinal token indeksi) */
 function latKeyed(s) {
@@ -502,7 +505,8 @@ function langOf(message, hist) {
   const f = foldLat(raw);
   if (/[əƏ]/.test(raw)) return "az";
   if (/\b(?:recommend|suggest|which|where|start|books?|stage|next|read|reading|please|show|page|about|what)\b/.test(f)) return "en";
-  if (/\b(?:tavsiye|hangi|kitaplar\w*|okuyayim|okumali|asama|sonraki|sayfa|nedir|yakinda|okuma)\b/.test(f) || /[ışğ]/.test(raw)) return "tr";
+  // ı/ş/ğ azərbaycanca da var — türkcəni yalnız türkcə sözlərdən tanı
+  if (/\b(?:tavsiye|hangi|kitap\w*|okuyayim|okumali|asama|sonraki|sayfa|nedir|yakinda|okuma|eser\w*|hakkinda)\b/.test(f)) return "tr";
   return "az";
 }
 
@@ -557,7 +561,9 @@ export function parseRecQuery(message, hist) {
   // ---- mərhələ: «növbəti mərhələ», «3-cü mərhələ», «stage 2»
   const ar = asciiDigits(nplain);
   const hasStage = STAGE_WORD.test(f) || STAGE_WORD.test(raw.toLowerCase()) || STAGE_WORD.test(ar);
-  if (hasStage && (inRec || name) && raw.length <= 80) {
+  // tək «3-cü mərhələ» / «növbəti mərhələ» / «stage 2» (saytda başqa mərhələli siyahı yoxdur)
+  const bareStage = hasStage && raw.length <= 30 && raw.split(" ").length <= 3 && /^(?:\d\s*[-.]?\s*\S*\s*\S+|\S+\s*\d|\S+\s+\S+)$/.test(raw) && (/\d/.test(raw) || NEXT_RE.test(" " + f + " ") || /(?:novbeti|sonraki|next|следующ|التال)/.test(f + " " + raw.toLowerCase() + " " + ar));
+  if (hasStage && (inRec || name || bareStage) && raw.length <= 80) {
     const mm = /(\d)\s*[-.]?\s*(?:ci|cu|cü|cı|inci|nci|üncü|uncu|ncu|st|nd|rd|th|й|-?я|-?й|ه)?\s*(?:merhele|marhale|asama|stage|level|этап|ступен|مرحل)/.exec(f + " " + ar) || /(?:merhele|marhale|asama|stage|level|этап|مرحل\w*)\s*(\d)/.exec(f + " " + ar) || /(?:stage|этап|مرحل\w*)\s*(\d)/i.exec(ar);
     if (mm && +mm[1] >= 1 && +mm[1] <= 4) return { kind: "rec", stage: +mm[1] };
     if (NEXT_RE.test(" " + f + " ") || NEXT_RE.test(" " + ar + " ") || /(?:novbeti|sonraki|next)/.test(f) || /следующ/.test(raw.toLowerCase()) || /التال/.test(ar)) return { kind: "next" };
