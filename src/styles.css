@@ -2165,13 +2165,13 @@ html[dir="rtl"] .rtl-flip {
 }
 
 .footer-panels {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 8px 18px;
-  color: var(--color-muted);
-  font-size: 14px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  width: min(22rem, 100%);
+  margin-inline: auto;
+  color: #f4f7ff;
+  font-size: 13px;
 }
 
 .footer-faq {
@@ -5385,14 +5385,39 @@ body.is-home .noise {
   font-size: 1.15rem !important;
 }
 
-.nx-foot-extra {
+.nx-foot .nx-foot-extra,
+.footer-panels {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  width: min(22rem, 100%);
+  margin-top: 4px;
+  padding-top: 0;
+  border-top: 0;
+}
+
+.nx-foot-extra .nav-drop,
+.footer-panels .nav-drop,
+.nx-foot-extra .footer-faq,
+.footer-panels .footer-faq {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px 18px;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
-  margin-top: 8px;
-  padding-top: 14px;
-  border-top: 1px solid rgb(255 255 255 / 0.08);
+  min-height: 38px;
+  padding: 0 8px 0 12px;
+  border-radius: 12px;
+  border: 1px solid rgb(255 255 255 / 0.1);
+  background: #070b16;
+  color: #f4f7ff;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.nx-foot-extra .nav-pop,
+.footer-panels .nav-pop {
+  top: auto;
+  bottom: calc(100% + 8px);
 }
 
 @media (max-width: 980px) {
