@@ -4,6 +4,7 @@ import { pdfPairFromPath } from "@/lib/pdf-pairs";
 import { findProgramming, PROGRAMMING } from "@/lib/programming";
 import { findProgrammingLocale, programmingFromPath, programmingLocalePath } from "@/lib/programming-locales";
 import { RESURSLAR } from "@/lib/resurslar";
+import { findResourceTopic, resourceArticleFromPath } from "@/lib/resource-topics";
 import { RU_RESOURCES } from "@/lib/ru-resources";
 
 export const SITE = "https://nibrascode.com";
@@ -457,6 +458,32 @@ function pageCopy(pathname: string, lang: Lang) {
     const article = findProgramming(located.slug);
     if (article) return article.seo[located.lang === "az" ? lang : located.lang] ?? article.seo.en;
   }
+  const resourceArticle = resourceArticleFromPath(path);
+  if (resourceArticle) {
+    return {
+      title: `${resourceArticle.title[lang]} — Nibras Code`,
+      description: resourceArticle.description[lang],
+      keywords: resourceArticle.keywords[lang],
+    };
+  }
+  const resourceTopic = path.match(/^\/resources\/([^/]+)$/);
+  const topicCopy = resourceTopic ? findResourceTopic(resourceTopic[1]) : null;
+  if (topicCopy) {
+    const slug = resourceTopic?.[1] ?? "";
+    const trTitle: Record<string, string> = {
+      "ereb-dili": "Arapça — Kaynaklar — Nibras Code",
+      android: "Android — Kaynaklar — Nibras Code",
+      "fayl-aletleri": "Dosya araçları — Kaynaklar — Nibras Code",
+      tehsil: "Eğitim — Kaynaklar — Nibras Code",
+      senedler: "Belgeler — Kaynaklar — Nibras Code",
+    };
+    const known = PAGES[path]?.[lang] ?? PAGES[path]?.en;
+    return {
+      title: lang === "tr" ? (trTitle[slug] ?? known?.title ?? `${slug} — Nibras Code`) : (known?.title ?? `${slug} — Nibras Code`),
+      description: topicCopy.description[lang],
+      keywords: topicCopy.keywords[lang],
+    };
+  }
   const page = PAGES[path] ?? PAGES["/"];
   return page[lang] ?? page.en;
 }
@@ -606,7 +633,7 @@ function jsonLd(path: string, lang: Lang, copy: PageSeo, url: string) {
     };
   }
 
-  if (path.startsWith("/resurslar/") || path.startsWith("/ru/resources/") || programmingFromPath(path)) {
+  if (path.startsWith("/resurslar/") || path.startsWith("/ru/resources/") || programmingFromPath(path) || resourceArticleFromPath(path)) {
     return {
       "@context": "https://schema.org",
       "@type": "Article",

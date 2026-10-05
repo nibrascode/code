@@ -5,6 +5,7 @@ import { LIBRARY, type LibrarySection, type LibraryTopic } from "@/lib/library";
 import { findProgramming, type ProgrammingSection } from "@/lib/programming";
 import { pythonSections } from "@/lib/lessons";
 import { libItems, libParagraphs, savedLib, type LibGroup } from "@/lib/library-admin";
+import { articlesForTopic, findResourceTopic } from "@/lib/resource-topics";
 import type { StudioPrivacyRow } from "@/lib/studio";
 import { useI18n } from "@/lib/i18n-context";
 
@@ -147,8 +148,11 @@ export function LibraryTopicPage({
   if (page) return <ProgrammingArticle title={page.title} sections={page.sections} />;
   const group: LibGroup | null = section === "resources" ? "resurs" : section === "guides" ? "guide" : null;
   const saved = group ? savedLib(group, topic.slug, lang, rows) : null;
+  const topicCopy = section === "resources" ? findResourceTopic(topic.slug) : null;
+  const articles = topicCopy ? articlesForTopic(topic.slug) : [];
   const heading = saved?.title || t(topic.label);
-  const paragraphs = saved ? libParagraphs(saved.body) : [];
+  const paragraphs = saved ? libParagraphs(saved.body) : topicCopy ? [topicCopy.intro[lang]] : [];
+  const moreLabel = { az: "Yazılar", en: "Articles", tr: "Yazılar", ar: "مقالات", ru: "Статьи" }[lang];
 
   return (
     <main className="why-page">
@@ -161,6 +165,21 @@ export function LibraryTopicPage({
       {paragraphs.map((paragraph) => (
         <p key={paragraph}>{paragraph}</p>
       ))}
+      {articles.length ? (
+        <section>
+          <h2>{moreLabel}</h2>
+          <ul className="lib-list">
+            {articles.map((article) => (
+              <li key={article.slug}>
+                <Link to="/resources/$topic/$article" params={{ topic: topic.slug, article: article.slug }}>
+                  {article.title[lang]}
+                  <ArrowUpRight className="rtl-flip size-4" />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
     </main>
   );
 }

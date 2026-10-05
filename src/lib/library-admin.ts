@@ -1,6 +1,7 @@
 import type { Lang } from "@/lib/i18n";
 import { PDF_LOCALE_PAIRS } from "@/lib/pdf-pairs";
 import { RESURSLAR } from "@/lib/resurslar";
+import { RESOURCE_ARTICLES } from "@/lib/resource-topics";
 import { findRuResource } from "@/lib/ru-resources";
 import type { StudioPrivacyRow } from "@/lib/studio";
 
@@ -44,19 +45,34 @@ function ruText(azSlug: string) {
   return page ? textOf(page.paragraphs, page.steps) : "";
 }
 
-const ARTICLES: LibPage[] = RESURSLAR.map((item) =>
-  page(
-    item.slug,
-    [
-      item.title,
-      item.seo.en.title.replace(/ — Nibras Code$/, ""),
-      item.seo.tr.title.replace(/ — Nibras Code$/, ""),
-      item.seo.ar.title.replace(/ — Nibras Code$/, ""),
-      item.seo.ru.title.replace(/ — Nibras Code$/, ""),
-    ],
-    { az: textOf(item.paragraphs, item.steps), ru: ruText(item.slug) },
+const ARTICLES: LibPage[] = [
+  ...RESURSLAR.map((item) =>
+    page(
+      item.slug,
+      [
+        item.title,
+        item.seo.en.title.replace(/ — Nibras Code$/, ""),
+        item.seo.tr.title.replace(/ — Nibras Code$/, ""),
+        item.seo.ar.title.replace(/ — Nibras Code$/, ""),
+        item.seo.ru.title.replace(/ — Nibras Code$/, ""),
+      ],
+      { az: textOf(item.paragraphs, item.steps), ru: ruText(item.slug) },
+    ),
   ),
-);
+  ...RESOURCE_ARTICLES.map((item) =>
+    page(
+      item.slug,
+      [item.title.az, item.title.en, item.title.tr, item.title.ar, item.title.ru],
+      {
+        az: textOf(item.paragraphs.az, item.steps?.az),
+        en: textOf(item.paragraphs.en, item.steps?.en),
+        tr: textOf(item.paragraphs.tr, item.steps?.tr),
+        ar: textOf(item.paragraphs.ar, item.steps?.ar),
+        ru: textOf(item.paragraphs.ru, item.steps?.ru),
+      },
+    ),
+  ),
+];
 
 export const LIB_GROUPS: Record<LibGroup, { label: string; pages: readonly LibPage[] }> = {
   resurs: { label: "Resurslar", pages: [...ARTICLES, ...EXTRA_RESOURCES] },

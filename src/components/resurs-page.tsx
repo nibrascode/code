@@ -1,7 +1,9 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { RESURSLAR, type ResursPage } from "@/lib/resurslar";
+import { articlesForTopic, type ResourceArticle } from "@/lib/resource-topics";
 import { RU_RESOURCES, type RuResource } from "@/lib/ru-resources";
+import type { Lang } from "@/lib/i18n";
 
 function ArticleBody({
   title,
@@ -11,6 +13,7 @@ function ArticleBody({
   moreLabel,
   others,
   to,
+  topic,
 }: {
   title: string;
   paragraphs: readonly string[];
@@ -18,7 +21,8 @@ function ArticleBody({
   backLabel: string;
   moreLabel: string;
   others: readonly { slug: string; title: string }[];
-  to: "/resurslar/$slug" | "/ru/resources/$slug";
+  to: "/resurslar/$slug" | "/ru/resources/$slug" | "/resources/$topic/$article";
+  topic?: string;
 }) {
   return (
     <main className="why-page">
@@ -45,10 +49,22 @@ function ArticleBody({
         <ul className="lib-list">
           {others.map((item) => (
             <li key={item.slug}>
-              <Link to={to} params={{ slug: item.slug }}>
-                {item.title}
-                <ArrowUpRight className="rtl-flip size-4" />
-              </Link>
+              {topic ? (
+                <Link to="/resources/$topic/$article" params={{ topic, article: item.slug }}>
+                  {item.title}
+                  <ArrowUpRight className="rtl-flip size-4" />
+                </Link>
+              ) : to === "/ru/resources/$slug" ? (
+                <Link to="/ru/resources/$slug" params={{ slug: item.slug }}>
+                  {item.title}
+                  <ArrowUpRight className="rtl-flip size-4" />
+                </Link>
+              ) : (
+                <Link to="/resurslar/$slug" params={{ slug: item.slug }}>
+                  {item.title}
+                  <ArrowUpRight className="rtl-flip size-4" />
+                </Link>
+              )}
             </li>
           ))}
         </ul>
@@ -81,6 +97,21 @@ export function ResursPageView({
   );
 }
 
+export function ResourceArticleView({ article, lang }: { article: ResourceArticle; lang: Lang }) {
+  const siblings = articlesForTopic(article.topic).filter((item) => item.slug !== article.slug);
+  return (
+    <ArticleBody
+      title={article.title[lang]}
+      paragraphs={article.paragraphs[lang]}
+      steps={article.steps?.[lang]}
+      backLabel={lang === "ru" ? "Ресурсы" : lang === "en" ? "Resources" : lang === "tr" ? "Kaynaklar" : lang === "ar" ? "موارد" : "Resurslar"}
+      moreLabel={lang === "ru" ? "Другие статьи" : lang === "en" ? "Other articles" : lang === "tr" ? "Diğer yazılar" : lang === "ar" ? "مقالات أخرى" : "Digər yazılar"}
+      others={siblings.map((item) => ({ slug: item.slug, title: item.title[lang] }))}
+      to="/resources/$topic/$article"
+      topic={article.topic}
+    />
+  );
+}
 export function RuResourcePage({
   page,
   title,
