@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
-import { ArrowUpRight, BadgeCheck, Mail, RefreshCw, Shield, Zap } from "lucide-react";
+import { ArrowUpRight, BadgeCheck, RefreshCw, Shield, Zap } from "lucide-react";
 import { AppSuggest } from "@/components/app-suggest";
 import { TechMark } from "@/components/tech-marquee";
 import { LanguageSwitch } from "@/components/language-switch";
@@ -390,10 +390,6 @@ function Home() {
       </section>
 
       <footer className="nx-foot">
-        <p>{t("nx_tag")}</p>
-        <Link to="/contact" className="nx-mail" aria-label={t("nx_nav_contact")}>
-          <Mail className="size-4" />
-        </Link>
         <nav className="nx-foot-extra">
           <NavMenu section="resources" />
           <NavMenu section="guides" />
