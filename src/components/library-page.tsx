@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { LIBRARY, type LibrarySection, type LibraryTopic } from "@/lib/library";
@@ -140,6 +141,41 @@ const PROGRAM_NAMES: Record<string, string> = {
   firewall: "Firewall",
 };
 
+const HTML_TRIES = [
+  `<h1>Hello</h1>\n<p>HTML test</p>`,
+  `<button type="button">Button</button>`,
+  `<ul>\n  <li>One</li>\n  <li>Two</li>\n  <li>Three</li>\n</ul>`,
+] as const;
+
+const HTML_TEST_URL = "https://dev.nibrascode.com/html";
+
+function HtmlTry({ code }: { code: string }) {
+  const { t } = useI18n();
+  const [copied, setCopied] = useState(false);
+
+  return (
+    <div className="code-try">
+      <div className="code-try-bar">
+        <button
+          type="button"
+          onClick={() => {
+            void navigator.clipboard.writeText(code).then(() => {
+              setCopied(true);
+              window.setTimeout(() => setCopied(false), 1600);
+            });
+          }}
+        >
+          {copied ? t("code_copied") : t("code_copy")}
+        </button>
+        <a href={HTML_TEST_URL} target="_blank" rel="noopener noreferrer">
+          {t("code_test")}
+        </a>
+      </div>
+      <pre dir="ltr">{code}</pre>
+    </div>
+  );
+}
+
 export function CodeSamplePage({ slug }: { slug: string }) {
   const { t, lang } = useI18n();
   const item = CODE_SAMPLES.find((entry) => entry.slug === slug) ?? (slug === SITE_CODE.slug ? SITE_CODE : undefined);
@@ -159,7 +195,11 @@ export function CodeSamplePage({ slug }: { slug: string }) {
       </p>
       <h1>{item ? t(item.label) : t("code_samples")}</h1>
       {item ? (
-        <p>{t("code_sample_wait")}</p>
+        <div className="code-tries">
+          {HTML_TRIES.map((code) => (
+            <HtmlTry key={code} code={code} />
+          ))}
+        </div>
       ) : (
         <>
           <p>{t("code_samples_note")}</p>
