@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { LIBRARY, type LibrarySection, type LibraryTopic } from "@/lib/library";
-import { CODE_SAMPLE_HUB, CODE_SAMPLES } from "@/lib/code-samples";
+import { CODE_SAMPLE_HUB, CODE_SAMPLES, SITE_CODE } from "@/lib/code-samples";
 import { findProgramming, type ProgrammingSection } from "@/lib/programming";
 import { findProgrammingLocale, programmingLocalePath } from "@/lib/programming-locales";
 import { pythonSections } from "@/lib/lessons";
@@ -142,7 +142,9 @@ const PROGRAM_NAMES: Record<string, string> = {
 
 export function CodeSamplePage({ slug }: { slug: string }) {
   const { t, lang } = useI18n();
-  const item = CODE_SAMPLES.find((entry) => entry.slug === slug);
+  const item = CODE_SAMPLES.find((entry) => entry.slug === slug) ?? (slug === SITE_CODE.slug ? SITE_CODE : undefined);
+  const parentHref = slug === SITE_CODE.slug ? programmingLocalePath(lang, "html-css") : programmingLocalePath(lang, CODE_SAMPLE_HUB);
+  const parentLabel = slug === SITE_CODE.slug ? "HTML/CSS" : t("code_samples");
 
   return (
     <main className="why-page">
@@ -150,7 +152,7 @@ export function CodeSamplePage({ slug }: { slug: string }) {
       <p className="eyebrow">
         <i />
         {item ? (
-          <a href={programmingLocalePath(lang, CODE_SAMPLE_HUB)}>{t("code_samples")}</a>
+          <a href={parentHref}>{parentLabel}</a>
         ) : (
           <Link to="/programming">{t("nav_programming")}</Link>
         )}
@@ -186,7 +188,7 @@ export function ProgrammingArticle({
   title: string;
   sections?: readonly ProgrammingSection[];
 }) {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const heading = (slug && PROGRAM_NAMES[slug]) || title;
 
   return (
@@ -235,6 +237,16 @@ export function ProgrammingArticle({
           </details>
         ))}
       </div>
+      {slug === "html-css" ? (
+        <ul className="lib-list">
+          <li className="is-section">
+            <a href={programmingLocalePath(lang, SITE_CODE.slug)}>
+              {t(SITE_CODE.label)}
+              <ArrowUpRight className="rtl-flip size-4" />
+            </a>
+          </li>
+        </ul>
+      ) : null}
     </main>
   );
 }

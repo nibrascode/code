@@ -5,15 +5,16 @@ export const CODE_SAMPLE_HUB = "numune-kod";
 export const CODE_SAMPLES: readonly { slug: string; label: TKey }[] = [
   { slug: "oyun-kodu", label: "code_game" },
   { slug: "tetbiq-kodu", label: "code_app" },
-  { slug: "sayt-kodu", label: "code_site" },
 ];
 
+export const SITE_CODE = { slug: "sayt-kodu", label: "code_site" } as const;
+
 export function isCodeSampleSlug(slug: string) {
-  return slug === CODE_SAMPLE_HUB || CODE_SAMPLES.some((item) => item.slug === slug);
+  return slug === CODE_SAMPLE_HUB || slug === SITE_CODE.slug || CODE_SAMPLES.some((item) => item.slug === slug);
 }
 
 export function isCodeSampleChild(slug: string) {
-  return CODE_SAMPLES.some((item) => item.slug === slug);
+  return slug === SITE_CODE.slug || CODE_SAMPLES.some((item) => item.slug === slug);
 }
 
 type Seo = { title: string; description: string; keywords: string };
@@ -24,11 +25,11 @@ function row(title: string, description: string, keywords: string): Seo {
 
 export const CODE_SAMPLE_SEO: Record<string, Record<Lang, Seo>> = {
   "numune-kod": {
-    az: row("Nümunə kod", "Oyun kodu, tətbiq kodu və sayt kodu üçün nümunə səhifələr.", "nümunə kod, oyun kodu, tətbiq kodu, sayt kodu"),
-    en: row("Sample code", "Sample pages for game code, app code, and website code.", "sample code, game code, app code, website code"),
-    tr: row("Örnek kod", "Oyun kodu, uygulama kodu ve site kodu için örnek sayfalar.", "örnek kod, oyun kodu, uygulama kodu, site kodu"),
-    ar: row("كود نموذجي", "صفحات نموذجية لكود اللعبة وكود التطبيق وكود الموقع.", "كود نموذجي, كود اللعبة, كود التطبيق, كود الموقع"),
-    ru: row("Примеры кода", "Страницы с примерами кода игры, приложения и сайта.", "примеры кода, код игры, код приложения, код сайта"),
+    az: row("Nümunə kod", "Oyun kodu və tətbiq kodu üçün nümunə səhifələr.", "nümunə kod, oyun kodu, tətbiq kodu"),
+    en: row("Sample code", "Sample pages for game code and app code.", "sample code, game code, app code"),
+    tr: row("Örnek kod", "Oyun kodu ve uygulama kodu için örnek sayfalar.", "örnek kod, oyun kodu, uygulama kodu"),
+    ar: row("كود نموذجي", "صفحات نموذجية لكود اللعبة وكود التطبيق.", "كود نموذجي, كود اللعبة, كود التطبيق"),
+    ru: row("Примеры кода", "Страницы с примерами кода игры и приложения.", "примеры кода, код игры, код приложения"),
   },
   "oyun-kodu": {
     az: row("Oyun kodu", "Oyun üçün nümunə kod. İzah bu səhifəyə əlavə olunacaq.", "oyun kodu, nümunə kod"),
