@@ -2480,6 +2480,12 @@ html[dir="rtl"] .rtl-flip {
   background: rgb(8 12 24 / 0.55);
 }
 
+.code-try-level {
+  margin: 0;
+  padding: 12px 14px 0;
+  font-weight: 650;
+}
+
 .code-try-bar {
   display: flex;
   align-items: center;

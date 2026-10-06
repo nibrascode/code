@@ -150,14 +150,119 @@ const HTML_TRIES = [
   `<ul>\n  <li>One</li>\n  <li>Two</li>\n  <li>Three</li>\n</ul>`,
 ] as const;
 
+const SITE_SIMPLE = `<style>
+  body { margin: 0; font-family: Georgia, serif; background: #f6f3ec; color: #1c1917; }
+  main { max-width: 36rem; margin: 48px auto; padding: 0 20px; }
+  h1 { margin: 0 0 12px; font-size: 2rem; }
+  p { line-height: 1.6; }
+</style>
+<main>
+  <h1>Sadə səhifə</h1>
+  <p>Bir başlıq və bir abzas. Başqa heç nə yoxdur.</p>
+</main>`;
+
+const SITE_MEDIUM = `<style>
+  body { margin: 0; font-family: sans-serif; background: #0f172a; color: #e2e8f0; }
+  header { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; border-bottom: 1px solid #334155; }
+  nav a { color: #94a3b8; margin-left: 16px; text-decoration: none; }
+  main { max-width: 640px; margin: 0 auto; padding: 24px; display: grid; gap: 12px; }
+  article { background: #1e293b; border-radius: 12px; padding: 16px; }
+  h2 { margin: 0 0 8px; font-size: 1.1rem; }
+  button { border: 0; border-radius: 8px; padding: 8px 12px; background: #38bdf8; color: #082f49; font-weight: 700; }
+</style>
+<header>
+  <strong>Qeydlər</strong>
+  <nav>
+    <a href="#yeni">Yeni</a>
+    <a href="#kohne">Köhnə</a>
+  </nav>
+</header>
+<main>
+  <article id="yeni">
+    <h2>Birinci qeyd</h2>
+    <p>Qısa mətn. Düymə ilə növbəti addım açılır.</p>
+    <button type="button">Aç</button>
+  </article>
+  <article id="kohne">
+    <h2>İkinci qeyd</h2>
+    <p>Bir az daha çox məzmun: siyahı və ikinci düymə.</p>
+    <ul>
+      <li>Oxu</li>
+      <li>Yaz</li>
+      <li>Yadda saxla</li>
+    </ul>
+    <button type="button">Saxla</button>
+  </article>
+</main>`;
+
+const SITE_LARGE = `<style>
+  body { margin: 0; font-family: sans-serif; background: #f8fafc; color: #0f172a; }
+  header { display: flex; justify-content: space-between; align-items: center; padding: 16px 28px; background: #0f172a; color: #fff; }
+  header a { color: #cbd5e1; margin-left: 16px; text-decoration: none; }
+  .hero { padding: 56px 28px; background: #e0f2fe; }
+  .hero h1 { margin: 0 0 8px; font-size: 2.4rem; }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 28px; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .card { background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 16px; }
+  .card h2 { margin: 0 0 8px; font-size: 1.05rem; }
+  form { display: grid; gap: 10px; margin-top: 22px; max-width: 420px; }
+  input, textarea { border: 1px solid #cbd5e1; border-radius: 8px; padding: 10px; font: inherit; }
+  button { border: 0; border-radius: 8px; padding: 10px 14px; background: #0284c7; color: #fff; font-weight: 700; }
+  footer { padding: 18px 28px; color: #64748b; border-top: 1px solid #e2e8f0; }
+  @media (max-width: 700px) { .grid { grid-template-columns: 1fr; } }
+</style>
+<header>
+  <strong>Nümunə sayt</strong>
+  <nav>
+    <a href="#haqqinda">Haqqında</a>
+    <a href="#isler">İşlər</a>
+    <a href="#yazi">Yaz</a>
+  </nav>
+</header>
+<section class="hero">
+  <h1>Böyük nümunə</h1>
+  <p>Başlıq, üç kart, forma və alt hissə bir səhifədədir.</p>
+</section>
+<div class="wrap" id="haqqinda">
+  <div class="grid" id="isler">
+    <article class="card">
+      <h2>Birinci iş</h2>
+      <p>Qısa təsvir. Kart öz qutusundadır.</p>
+    </article>
+    <article class="card">
+      <h2>İkinci iş</h2>
+      <p>Eyni ölçü, fərqli mətn. Şəbəkə üç sütundur.</p>
+    </article>
+    <article class="card">
+      <h2>Üçüncü iş</h2>
+      <p>Telefonda kartlar alt-alta düşür.</p>
+    </article>
+  </div>
+  <form id="yazi">
+    <h2>Qısa məktub</h2>
+    <input type="text" name="ad" placeholder="Ad">
+    <input type="email" name="poct" placeholder="E-poçt">
+    <textarea name="metn" rows="4" placeholder="Mətn"></textarea>
+    <button type="button">Göndər</button>
+  </form>
+</div>
+<footer>Nümunə saytın alt hissəsi.</footer>`;
+
+const SITE_TRIES = [
+  { level: "code_level_simple" as const, code: SITE_SIMPLE },
+  { level: "code_level_medium" as const, code: SITE_MEDIUM },
+  { level: "code_level_large" as const, code: SITE_LARGE },
+];
+
 const HTML_TEST_URL = "https://dev.nibrascode.com/html";
 
-function HtmlTry({ code }: { code: string }) {
+function HtmlTry({ code, label }: { code: string; label?: string }) {
   const { t } = useI18n();
   const [copied, setCopied] = useState(false);
 
   return (
     <div className="code-try">
+      {label ? <p className="code-try-level">{label}</p> : null}
       <div className="code-try-bar">
         <button
           type="button"
@@ -199,9 +304,9 @@ export function CodeSamplePage({ slug }: { slug: string }) {
       <h1>{item ? t(item.label) : t("code_samples")}</h1>
       {item ? (
         <div className="code-tries">
-          {HTML_TRIES.map((code) => (
-            <HtmlTry key={code} code={code} />
-          ))}
+          {item.slug === SITE_CODE.slug
+            ? SITE_TRIES.map((entry) => <HtmlTry key={entry.level} code={entry.code} label={t(entry.level)} />)
+            : HTML_TRIES.map((code) => <HtmlTry key={code} code={code} />)}
         </div>
       ) : (
         <>
