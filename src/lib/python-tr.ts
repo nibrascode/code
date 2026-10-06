@@ -208,6 +208,49 @@ export const PYTHON_TR: readonly ProgrammingSection[] = [
     ],
   },
   {
+    id: "islek",
+    title: "Çalışan örnekler",
+    blocks: [
+      {
+        paragraphs: [
+          "Yukarıdaki satırlar bir şeyi gösterir. Buradaki örnekler küçük bir işi baştan sona götürür. Her birini olduğu gibi çalıştırabilirsin. Önce sonuca bak, sonra sayıyı ya da adı değiştirip yeniden çalıştır.",
+        ],
+      },
+      {
+        heading: "Listeden adları yazdırmak",
+        paragraphs: [
+          "Birkaç ad bir yerde durur. Bu yere liste denir. for her adı sırayla alır ve ekrana yazar. Listeye ad eklersen döngü onu da yazar. Her ad için ayrı print yazmak gerekmez.",
+        ],
+        code: 'adlar = ["Aysel", "Murad", "Nigar"]\nfor ad in adlar:\n    print("Merhaba,", ad)',
+        after: ["Çıktı üç satırdır: Merhaba, Aysel, sonra Murad, sonra Nigar."],
+      },
+      {
+        heading: "Bir öğrenciyi hatırlamak",
+        paragraphs: [
+          "Sözlük bir şeyin birkaç özelliğini tutar. Burada ad ve not bir yerdedir. Anahtarı yazarsın, değer gelir. Not 50 veya daha çoksa Geçti yazılır. 50'den az olunca bu koşul bir şey yazmaz. Bunu görmek için notu 40 yap.",
+        ],
+        code: 'ogrenci = {"ad": "Aysel", "not": 85}\nprint(ogrenci["ad"])\nif ogrenci["not"] >= 50:\n    print("Geçti")',
+        after: ["Önce Aysel gelir, sonra Geçti. Anahtarı yanlış yazarsan Python o adı bulmaz."],
+      },
+      {
+        heading: "Ortalama notu bulmak",
+        paragraphs: [
+          "Notlar listededir. toplam sıfırdan başlar ve her not onun üstüne gelir. Sonda toplam, sayıya bölünür. len listede kaç sayı olduğunu söyler. 70, 80 ve 90'ın ortalaması 80'dir. Dördüncü not eklersen bölen de kendiliğinden değişir.",
+        ],
+        code: "notlar = [70, 80, 90]\ntoplam = 0\nfor notu in notlar:\n    toplam = toplam + notu\nortalama = toplam / len(notlar)\nprint(ortalama)",
+        after: ["Ekranda 80.0 görünür. Bu örnek sayıyı yuvarlamaz."],
+      },
+      {
+        heading: "Geçti mi kontrolünü fonksiyona vermek",
+        paragraphs: [
+          "Aynı kontrolü iki yere yazmak yerine bir fonksiyon yazılır. O, notu alır ve bir söz döndürür. return sözü fonksiyondan çıkarır. Alttaki print fonksiyonu çağırır ve gelen sözü gösterir. Kural değişince yalnız fonksiyonun içini değiştirirsin.",
+        ],
+        code: 'def gecti(notu):\n    if notu >= 50:\n        return "Geçti"\n    return "Kaldı"\n\nprint(gecti(40))\nprint(gecti(75))',
+        after: ["Önce Kaldı, sonra Geçti çıkar. 50'nin kendisi geçti sayılır, çünkü koşul büyük veya eşittir."],
+      },
+    ],
+  },
+  {
     id: "suallar",
     title: "Python hakkında sık sorulan sorular",
     blocks: [

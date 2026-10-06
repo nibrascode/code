@@ -291,6 +291,49 @@ export const PROGRAMMING: readonly ProgrammingPage[] = [
         ],
       },
       {
+        id: "islek",
+        title: "🧪 İşlək nümunələr",
+        blocks: [
+          {
+            paragraphs: [
+              "Yuxarıdakı sətirlər bir şeyi göstərir. Buradakı nümunələr isə kiçik bir işi başdan sona aparır. Hər birini olduğu kimi terminalda işə salmaq olar. Əvvəl nəticəyə bax, sonra rəqəmi və adı dəyişib yenidən işə sal.",
+            ],
+          },
+          {
+            heading: "Siyahıdan adları çıxarmaq",
+            paragraphs: [
+              "Bir neçə ad bir yerdə durur. Bu yerə siyahı deyilir. for hər adı növbə ilə götürür və ekrana yazır. Siyahıya ad əlavə etsən, dövr onu da yazacaq. Əl ilə hər ad üçün ayrı print yazmaq lazım deyil.",
+            ],
+            code: 'adlar = ["Aysel", "Murad", "Nigar"]\nfor ad in adlar:\n    print("Salam,", ad)',
+            after: ["Çıxış üç sətirdir: Salam, Aysel və sonra Murad, sonra Nigar."],
+          },
+          {
+            heading: "Bir tələbəni yadda saxlamaq",
+            paragraphs: [
+              "Lüğət bir şeyin bir neçə xüsusiyyətini saxlayır. Burada ad və bal bir yerdədir. Açarı yazırsan, qiyməti gəlir. Bal 50 və ya çoxdursa, keçdi yazılır. 50-dən az olanda bu şərt işləmir və heç nə çıxmır. Bunu görmək üçün balı 40 et.",
+            ],
+            code: 'telebe = {"ad": "Aysel", "bal": 85}\nprint(telebe["ad"])\nif telebe["bal"] >= 50:\n    print("Keçdi")',
+            after: ["Əvvəl Aysel çıxır, sonra Keçdi. Açarı səhv yazsan, Python həmin adı tapmır."],
+          },
+          {
+            heading: "Orta balı hesablamaq",
+            paragraphs: [
+              "Ballar siyahıdadır. cem sıfırdan başlayır və hər balın üstünə gəlir. Sonda cəmi sayına bölürük. len siyahıda neçə ədəd olduğunu deyir. 70, 80 və 90-ın ortası 80-dir. Siyahıya dördüncü bal əlavə etsən, bölən də özü dəyişir.",
+            ],
+            code: "ballar = [70, 80, 90]\ncem = 0\nfor bal in ballar:\n    cem = cem + bal\norta = cem / len(ballar)\nprint(orta)",
+            after: ["Ekranda 80.0 görünür. Tam ədəd istəsən, bölmədən əvvəl cəmi yuvarlaqlaşdırmaq lazımdır. Bu nümunədə yuvarlaq yoxdur."],
+          },
+          {
+            heading: "Keçib-keçməməyi funksiyaya vermək",
+            paragraphs: [
+              "Eyni yoxlamanı iki yerdə yazmaq əvəzinə bir funksiya yazılır. O, balı alır və söz qaytarır. return sözü funksiyadan çıxarır. Aşağıdakı print funksiyanı çağırır və gələn sözü göstərir. Qaydanı dəyişmək lazım olanda yalnız funksiyanın içini dəyişirsən.",
+            ],
+            code: 'def kecdi(bal):\n    if bal >= 50:\n        return "Keçdi"\n    return "Qaldı"\n\nprint(kecdi(40))\nprint(kecdi(75))',
+            after: ["Əvvəl Qaldı, sonra Keçdi çıxır. 50-nin özü keçdi sayılır, çünki şərt böyük və ya bərabərdir."],
+          },
+        ],
+      },
+      {
         id: "suallar",
         title: "❓ Tez-tez verilən suallar",
         blocks: [

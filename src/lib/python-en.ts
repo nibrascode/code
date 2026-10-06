@@ -228,6 +228,49 @@ export const PYTHON_EN: readonly ProgrammingSection[] = [
     ],
   },
   {
+    id: "islek",
+    title: "Working examples",
+    blocks: [
+      {
+        paragraphs: [
+          "The short lines above show one idea. These examples carry a small job from the start to the end. You can run each one as it is. Look at the result first, then change a number or a name and run it again.",
+        ],
+      },
+      {
+        heading: "Print names from a list",
+        paragraphs: [
+          "Several names stand in one place. That place is a list. for takes each name in turn and writes it. If you add a name, the loop writes that too. You do not write a separate print for every name.",
+        ],
+        code: 'names = ["Aysel", "Murad", "Nigar"]\nfor name in names:\n    print("Hello,", name)',
+        after: ["The output is three lines: Hello, Aysel, then Murad, then Nigar."],
+      },
+      {
+        heading: "Remember one student",
+        paragraphs: [
+          "A dictionary keeps several facts about one thing. Here the name and the score stay together. You write the key, and the value comes back. If the score is 50 or more, Passed is written. Below 50 this condition does nothing. Set the score to 40 to see that.",
+        ],
+        code: 'student = {"name": "Aysel", "score": 85}\nprint(student["name"])\nif student["score"] >= 50:\n    print("Passed")',
+        after: ["Aysel comes first, then Passed. If the key is wrong, Python does not find that name."],
+      },
+      {
+        heading: "Find the average score",
+        paragraphs: [
+          "The scores are in a list. total starts at zero and each score is added to it. At the end the total is divided by the count. len tells how many numbers are in the list. The average of 70, 80, and 90 is 80. If you add a fourth score, the divisor changes by itself.",
+        ],
+        code: "scores = [70, 80, 90]\ntotal = 0\nfor score in scores:\n    total = total + score\naverage = total / len(scores)\nprint(average)",
+        after: ["80.0 appears on the screen. This example does not round the number."],
+      },
+      {
+        heading: "Give the pass check to a function",
+        paragraphs: [
+          "Instead of writing the same check in two places, you write one function. It takes a score and returns a word. return sends that word out of the function. The print below calls the function and shows what came back. When the rule changes, you only change the inside of the function.",
+        ],
+        code: 'def passed(score):\n    if score >= 50:\n        return "Passed"\n    return "Failed"\n\nprint(passed(40))\nprint(passed(75))',
+        after: ["Failed comes first, then Passed. 50 itself counts as passed, because the check is greater than or equal."],
+      },
+    ],
+  },
+  {
     id: "suallar",
     title: "Frequently asked questions about Python",
     blocks: [

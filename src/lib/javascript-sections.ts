@@ -1,5 +1,6 @@
 import type { Lang } from "@/lib/i18n";
 import type { ProgrammingBlock, ProgrammingSection } from "@/lib/programming";
+import { jsWorking } from "@/lib/js-working";
 
 const TITLES: Record<string, Record<Lang, string>> = {
   nedir: {
@@ -781,13 +782,14 @@ const EN: Record<(typeof ORDER)[number], readonly ProgrammingBlock[]> = {
 
 const BODIES: Partial<Record<Lang, typeof AZ>> = { az: AZ, en: EN, ru: RU, tr: TR, ar: AR };
 
-
-
 export function javascriptSections(lang: Lang): readonly ProgrammingSection[] {
   const body = BODIES[lang];
-  return ORDER.map((id) => ({
+  const sections: ProgrammingSection[] = ORDER.map((id) => ({
     id,
     title: TITLES[id][lang],
     blocks: body?.[id],
   }));
+  const at = sections.findIndex((item) => item.id === "suallar");
+  sections.splice(at < 0 ? sections.length : at, 0, jsWorking(lang));
+  return sections;
 }

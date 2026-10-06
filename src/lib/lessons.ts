@@ -134,6 +134,12 @@ export function pythonSections(lang: Lang, rows: readonly StudioPrivacyRow[]): P
   }
   const unique = [...new Set(ids)];
   unique.sort((a, b) => lessonSort(a, saved) - lessonSort(b, saved) || a.localeCompare(b));
+  const workAt = unique.indexOf("islek");
+  const askAt = unique.indexOf("suallar");
+  if (workAt >= 0 && askAt >= 0 && workAt !== askAt - 1) {
+    unique.splice(workAt, 1);
+    unique.splice(unique.indexOf("suallar"), 0, "islek");
+  }
   return unique.flatMap((id) => {
     const known = PYTHON_LESSONS.find((item) => item.id === id);
     const source = baked.find((item) => item.id === id);
