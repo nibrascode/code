@@ -560,3 +560,61 @@ export function faqFromPath(pathname: string) {
   const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname;
   return Object.values(FAQ).find((page) => page.path === path) ?? null;
 }
+
+export const FAQ_SLUGS: Record<string, string> = {
+  nedir: "nibras-code",
+  sirket: "nibras-code-layihe",
+  tetbiqler: "nibras-code-tetbiqleri",
+  arabic: "nibras-arabic",
+  pdf: "nibras-pdf",
+  plans: "nibras-plans",
+  docs: "nibras-docs",
+  pulsuz: "pulsuz-ve-reklam",
+  yukleme: "tetbiq-yuklemek",
+  mexfilik: "mexfilik-siyaseti",
+  diller: "sayt-dilleri",
+  elaqe: "elaqe",
+  sayt: "resurslar-ve-proqramlasdirma",
+  ai: "nibras-ai",
+  dev: "nibras-dev",
+  apk: "nibras-apk",
+  yeni: "yeni-tetbiqler",
+};
+
+const TOPIC_HREF: Record<string, string> = {
+  tetbiqler: "/apps",
+  arabic: "/apps/nibras-arabic",
+  pdf: "/apps/nibras-pdf",
+  plans: "/apps/nibras-plans",
+  docs: "/apps/nibras-docs",
+  mexfilik: "/privacy/nibras-arabic",
+  elaqe: "/contact",
+  sayt: "/programming",
+  ai: "https://www.nibrascode.com/ai",
+  dev: "https://dev.nibrascode.com/",
+  apk: "https://studio.nibrascode.com/",
+};
+
+export function faqSlug(id: string) {
+  return FAQ_SLUGS[id] ?? id;
+}
+
+export function faqTopicPath(lang: Lang, idOrSlug: string) {
+  const slug = FAQ_SLUGS[idOrSlug] ?? idOrSlug;
+  return `${faqPath(lang)}/${slug}`;
+}
+
+export function faqTopicHref(id: string) {
+  return TOPIC_HREF[id] ?? null;
+}
+
+export function faqTopicFromPath(pathname: string) {
+  const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname;
+  const match = path.match(/^\/(?:(en|tr|ar|ru)\/)?faq\/([^/]+)$/);
+  if (!match) return null;
+  const lang = (match[1] ?? "az") as Lang;
+  const page = FAQ[lang];
+  const item = page.items.find((entry) => faqSlug(entry.id) === match[2]);
+  if (!item) return null;
+  return { page, item };
+}

@@ -21,6 +21,7 @@ import { Route as AppsIndexRouteImport } from './routes/apps/index'
 import { Route as AppsSlugRouteImport } from './routes/apps/$slug'
 import { Route as ArFaqRouteImport } from './routes/ar.faq'
 import { Route as EnFaqRouteImport } from './routes/en.faq'
+import { Route as FaqSlugRouteImport } from './routes/faq.$slug'
 import { Route as GuidesIndexRouteImport } from './routes/guides/index'
 import { Route as GuidesTopicRouteImport } from './routes/guides/$topic'
 import { Route as PrivacySlugRouteImport } from './routes/privacy/$slug'
@@ -32,12 +33,16 @@ import { Route as ResourcesTopicRouteRouteImport } from './routes/resources/$top
 import { Route as ResurslarSlugRouteImport } from './routes/resurslar/$slug'
 import { Route as RuFaqRouteImport } from './routes/ru.faq'
 import { Route as TrFaqRouteImport } from './routes/tr.faq'
+import { Route as ArFaqSlugRouteImport } from './routes/ar.faq.$slug'
 import { Route as ArProgrammingSlugRouteImport } from './routes/ar.programming.$slug'
+import { Route as EnFaqSlugRouteImport } from './routes/en.faq.$slug'
 import { Route as EnProgrammingSlugRouteImport } from './routes/en.programming.$slug'
 import { Route as ResourcesTopicIndexRouteImport } from './routes/resources/$topic/index'
 import { Route as ResourcesTopicArticleRouteImport } from './routes/resources/$topic/$article'
+import { Route as RuFaqSlugRouteImport } from './routes/ru.faq.$slug'
 import { Route as RuProgrammingSlugRouteImport } from './routes/ru.programming.$slug'
 import { Route as RuResourcesSlugRouteImport } from './routes/ru.resources.$slug'
+import { Route as TrFaqSlugRouteImport } from './routes/tr.faq.$slug'
 import { Route as TrProgrammingSlugRouteImport } from './routes/tr.programming.$slug'
 
 const IndexRoute = IndexRouteImport.update({
@@ -100,6 +105,11 @@ const EnFaqRoute = EnFaqRouteImport.update({
   path: '/en/faq',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FaqSlugRoute = FaqSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => FaqRoute,
+} as any)
 const GuidesIndexRoute = GuidesIndexRouteImport.update({
   id: '/guides/',
   path: '/guides/',
@@ -155,10 +165,20 @@ const TrFaqRoute = TrFaqRouteImport.update({
   path: '/tr/faq',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ArFaqSlugRoute = ArFaqSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ArFaqRoute,
+} as any)
 const ArProgrammingSlugRoute = ArProgrammingSlugRouteImport.update({
   id: '/ar/programming/$slug',
   path: '/ar/programming/$slug',
   getParentRoute: () => rootRouteImport,
+} as any)
+const EnFaqSlugRoute = EnFaqSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => EnFaqRoute,
 } as any)
 const EnProgrammingSlugRoute = EnProgrammingSlugRouteImport.update({
   id: '/en/programming/$slug',
@@ -175,6 +195,11 @@ const ResourcesTopicArticleRoute = ResourcesTopicArticleRouteImport.update({
   path: '/$article',
   getParentRoute: () => ResourcesTopicRouteRoute,
 } as any)
+const RuFaqSlugRoute = RuFaqSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => RuFaqRoute,
+} as any)
 const RuProgrammingSlugRoute = RuProgrammingSlugRouteImport.update({
   id: '/ru/programming/$slug',
   path: '/ru/programming/$slug',
@@ -184,6 +209,11 @@ const RuResourcesSlugRoute = RuResourcesSlugRouteImport.update({
   id: '/ru/resources/$slug',
   path: '/ru/resources/$slug',
   getParentRoute: () => rootRouteImport,
+} as any)
+const TrFaqSlugRoute = TrFaqSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => TrFaqRoute,
 } as any)
 const TrProgrammingSlugRoute = TrProgrammingSlugRouteImport.update({
   id: '/tr/programming/$slug',
@@ -195,31 +225,36 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/faq': typeof FaqRoute
+  '/faq': typeof FaqRouteWithChildren
   '/nx-studio': typeof NxStudioRoute
   '/privacy': typeof PrivacyRouteWithChildren
   '/unutma': typeof UnutmaRoute
   '/why': typeof WhyRoute
   '/resources/$topic': typeof ResourcesTopicRouteRouteWithChildren
   '/apps/$slug': typeof AppsSlugRoute
-  '/ar/faq': typeof ArFaqRoute
-  '/en/faq': typeof EnFaqRoute
+  '/ar/faq': typeof ArFaqRouteWithChildren
+  '/en/faq': typeof EnFaqRouteWithChildren
+  '/faq/$slug': typeof FaqSlugRoute
   '/guides/$topic': typeof GuidesTopicRoute
   '/privacy/$slug': typeof PrivacySlugRoute
   '/privacy/nibras-pdf': typeof PrivacyNibrasPdfRoute
   '/programming/$topic': typeof ProgrammingTopicRoute
   '/resurslar/$slug': typeof ResurslarSlugRoute
-  '/ru/faq': typeof RuFaqRoute
-  '/tr/faq': typeof TrFaqRoute
+  '/ru/faq': typeof RuFaqRouteWithChildren
+  '/tr/faq': typeof TrFaqRouteWithChildren
   '/apps/': typeof AppsIndexRoute
   '/guides/': typeof GuidesIndexRoute
   '/programming/': typeof ProgrammingIndexRoute
   '/resources/': typeof ResourcesIndexRoute
+  '/ar/faq/$slug': typeof ArFaqSlugRoute
   '/ar/programming/$slug': typeof ArProgrammingSlugRoute
+  '/en/faq/$slug': typeof EnFaqSlugRoute
   '/en/programming/$slug': typeof EnProgrammingSlugRoute
   '/resources/$topic/$article': typeof ResourcesTopicArticleRoute
+  '/ru/faq/$slug': typeof RuFaqSlugRoute
   '/ru/programming/$slug': typeof RuProgrammingSlugRoute
   '/ru/resources/$slug': typeof RuResourcesSlugRoute
+  '/tr/faq/$slug': typeof TrFaqSlugRoute
   '/tr/programming/$slug': typeof TrProgrammingSlugRoute
   '/resources/$topic/': typeof ResourcesTopicIndexRoute
 }
@@ -227,30 +262,35 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/faq': typeof FaqRoute
+  '/faq': typeof FaqRouteWithChildren
   '/nx-studio': typeof NxStudioRoute
   '/privacy': typeof PrivacyRouteWithChildren
   '/unutma': typeof UnutmaRoute
   '/why': typeof WhyRoute
   '/apps/$slug': typeof AppsSlugRoute
-  '/ar/faq': typeof ArFaqRoute
-  '/en/faq': typeof EnFaqRoute
+  '/ar/faq': typeof ArFaqRouteWithChildren
+  '/en/faq': typeof EnFaqRouteWithChildren
+  '/faq/$slug': typeof FaqSlugRoute
   '/guides/$topic': typeof GuidesTopicRoute
   '/privacy/$slug': typeof PrivacySlugRoute
   '/privacy/nibras-pdf': typeof PrivacyNibrasPdfRoute
   '/programming/$topic': typeof ProgrammingTopicRoute
   '/resurslar/$slug': typeof ResurslarSlugRoute
-  '/ru/faq': typeof RuFaqRoute
-  '/tr/faq': typeof TrFaqRoute
+  '/ru/faq': typeof RuFaqRouteWithChildren
+  '/tr/faq': typeof TrFaqRouteWithChildren
   '/apps': typeof AppsIndexRoute
   '/guides': typeof GuidesIndexRoute
   '/programming': typeof ProgrammingIndexRoute
   '/resources': typeof ResourcesIndexRoute
+  '/ar/faq/$slug': typeof ArFaqSlugRoute
   '/ar/programming/$slug': typeof ArProgrammingSlugRoute
+  '/en/faq/$slug': typeof EnFaqSlugRoute
   '/en/programming/$slug': typeof EnProgrammingSlugRoute
   '/resources/$topic/$article': typeof ResourcesTopicArticleRoute
+  '/ru/faq/$slug': typeof RuFaqSlugRoute
   '/ru/programming/$slug': typeof RuProgrammingSlugRoute
   '/ru/resources/$slug': typeof RuResourcesSlugRoute
+  '/tr/faq/$slug': typeof TrFaqSlugRoute
   '/tr/programming/$slug': typeof TrProgrammingSlugRoute
   '/resources/$topic': typeof ResourcesTopicIndexRoute
 }
@@ -259,31 +299,36 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/faq': typeof FaqRoute
+  '/faq': typeof FaqRouteWithChildren
   '/nx-studio': typeof NxStudioRoute
   '/privacy': typeof PrivacyRouteWithChildren
   '/unutma': typeof UnutmaRoute
   '/why': typeof WhyRoute
   '/resources/$topic': typeof ResourcesTopicRouteRouteWithChildren
   '/apps/$slug': typeof AppsSlugRoute
-  '/ar/faq': typeof ArFaqRoute
-  '/en/faq': typeof EnFaqRoute
+  '/ar/faq': typeof ArFaqRouteWithChildren
+  '/en/faq': typeof EnFaqRouteWithChildren
+  '/faq/$slug': typeof FaqSlugRoute
   '/guides/$topic': typeof GuidesTopicRoute
   '/privacy/$slug': typeof PrivacySlugRoute
   '/privacy/nibras-pdf': typeof PrivacyNibrasPdfRoute
   '/programming/$topic': typeof ProgrammingTopicRoute
   '/resurslar/$slug': typeof ResurslarSlugRoute
-  '/ru/faq': typeof RuFaqRoute
-  '/tr/faq': typeof TrFaqRoute
+  '/ru/faq': typeof RuFaqRouteWithChildren
+  '/tr/faq': typeof TrFaqRouteWithChildren
   '/apps/': typeof AppsIndexRoute
   '/guides/': typeof GuidesIndexRoute
   '/programming/': typeof ProgrammingIndexRoute
   '/resources/': typeof ResourcesIndexRoute
+  '/ar/faq/$slug': typeof ArFaqSlugRoute
   '/ar/programming/$slug': typeof ArProgrammingSlugRoute
+  '/en/faq/$slug': typeof EnFaqSlugRoute
   '/en/programming/$slug': typeof EnProgrammingSlugRoute
   '/resources/$topic/$article': typeof ResourcesTopicArticleRoute
+  '/ru/faq/$slug': typeof RuFaqSlugRoute
   '/ru/programming/$slug': typeof RuProgrammingSlugRoute
   '/ru/resources/$slug': typeof RuResourcesSlugRoute
+  '/tr/faq/$slug': typeof TrFaqSlugRoute
   '/tr/programming/$slug': typeof TrProgrammingSlugRoute
   '/resources/$topic/': typeof ResourcesTopicIndexRoute
 }
@@ -302,6 +347,7 @@ export interface FileRouteTypes {
     | '/apps/$slug'
     | '/ar/faq'
     | '/en/faq'
+    | '/faq/$slug'
     | '/guides/$topic'
     | '/privacy/$slug'
     | '/privacy/nibras-pdf'
@@ -313,11 +359,15 @@ export interface FileRouteTypes {
     | '/guides/'
     | '/programming/'
     | '/resources/'
+    | '/ar/faq/$slug'
     | '/ar/programming/$slug'
+    | '/en/faq/$slug'
     | '/en/programming/$slug'
     | '/resources/$topic/$article'
+    | '/ru/faq/$slug'
     | '/ru/programming/$slug'
     | '/ru/resources/$slug'
+    | '/tr/faq/$slug'
     | '/tr/programming/$slug'
     | '/resources/$topic/'
   fileRoutesByTo: FileRoutesByTo
@@ -333,6 +383,7 @@ export interface FileRouteTypes {
     | '/apps/$slug'
     | '/ar/faq'
     | '/en/faq'
+    | '/faq/$slug'
     | '/guides/$topic'
     | '/privacy/$slug'
     | '/privacy/nibras-pdf'
@@ -344,11 +395,15 @@ export interface FileRouteTypes {
     | '/guides'
     | '/programming'
     | '/resources'
+    | '/ar/faq/$slug'
     | '/ar/programming/$slug'
+    | '/en/faq/$slug'
     | '/en/programming/$slug'
     | '/resources/$topic/$article'
+    | '/ru/faq/$slug'
     | '/ru/programming/$slug'
     | '/ru/resources/$slug'
+    | '/tr/faq/$slug'
     | '/tr/programming/$slug'
     | '/resources/$topic'
   id:
@@ -365,6 +420,7 @@ export interface FileRouteTypes {
     | '/apps/$slug'
     | '/ar/faq'
     | '/en/faq'
+    | '/faq/$slug'
     | '/guides/$topic'
     | '/privacy/$slug'
     | '/privacy/nibras-pdf'
@@ -376,11 +432,15 @@ export interface FileRouteTypes {
     | '/guides/'
     | '/programming/'
     | '/resources/'
+    | '/ar/faq/$slug'
     | '/ar/programming/$slug'
+    | '/en/faq/$slug'
     | '/en/programming/$slug'
     | '/resources/$topic/$article'
+    | '/ru/faq/$slug'
     | '/ru/programming/$slug'
     | '/ru/resources/$slug'
+    | '/tr/faq/$slug'
     | '/tr/programming/$slug'
     | '/resources/$topic/'
   fileRoutesById: FileRoutesById
@@ -389,20 +449,20 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
-  FaqRoute: typeof FaqRoute
+  FaqRoute: typeof FaqRouteWithChildren
   NxStudioRoute: typeof NxStudioRoute
   PrivacyRoute: typeof PrivacyRouteWithChildren
   UnutmaRoute: typeof UnutmaRoute
   WhyRoute: typeof WhyRoute
   ResourcesTopicRouteRoute: typeof ResourcesTopicRouteRouteWithChildren
   AppsSlugRoute: typeof AppsSlugRoute
-  ArFaqRoute: typeof ArFaqRoute
-  EnFaqRoute: typeof EnFaqRoute
+  ArFaqRoute: typeof ArFaqRouteWithChildren
+  EnFaqRoute: typeof EnFaqRouteWithChildren
   GuidesTopicRoute: typeof GuidesTopicRoute
   ProgrammingTopicRoute: typeof ProgrammingTopicRoute
   ResurslarSlugRoute: typeof ResurslarSlugRoute
-  RuFaqRoute: typeof RuFaqRoute
-  TrFaqRoute: typeof TrFaqRoute
+  RuFaqRoute: typeof RuFaqRouteWithChildren
+  TrFaqRoute: typeof TrFaqRouteWithChildren
   AppsIndexRoute: typeof AppsIndexRoute
   GuidesIndexRoute: typeof GuidesIndexRoute
   ProgrammingIndexRoute: typeof ProgrammingIndexRoute
@@ -500,6 +560,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EnFaqRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/faq/$slug': {
+      id: '/faq/$slug'
+      path: '/$slug'
+      fullPath: '/faq/$slug'
+      preLoaderRoute: typeof FaqSlugRouteImport
+      parentRoute: typeof FaqRoute
+    }
     '/guides/': {
       id: '/guides/'
       path: '/guides'
@@ -577,12 +644,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TrFaqRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ar/faq/$slug': {
+      id: '/ar/faq/$slug'
+      path: '/$slug'
+      fullPath: '/ar/faq/$slug'
+      preLoaderRoute: typeof ArFaqSlugRouteImport
+      parentRoute: typeof ArFaqRoute
+    }
     '/ar/programming/$slug': {
       id: '/ar/programming/$slug'
       path: '/ar/programming/$slug'
       fullPath: '/ar/programming/$slug'
       preLoaderRoute: typeof ArProgrammingSlugRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/en/faq/$slug': {
+      id: '/en/faq/$slug'
+      path: '/$slug'
+      fullPath: '/en/faq/$slug'
+      preLoaderRoute: typeof EnFaqSlugRouteImport
+      parentRoute: typeof EnFaqRoute
     }
     '/en/programming/$slug': {
       id: '/en/programming/$slug'
@@ -605,6 +686,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResourcesTopicArticleRouteImport
       parentRoute: typeof ResourcesTopicRouteRoute
     }
+    '/ru/faq/$slug': {
+      id: '/ru/faq/$slug'
+      path: '/$slug'
+      fullPath: '/ru/faq/$slug'
+      preLoaderRoute: typeof RuFaqSlugRouteImport
+      parentRoute: typeof RuFaqRoute
+    }
     '/ru/programming/$slug': {
       id: '/ru/programming/$slug'
       path: '/ru/programming/$slug'
@@ -619,6 +707,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RuResourcesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tr/faq/$slug': {
+      id: '/tr/faq/$slug'
+      path: '/$slug'
+      fullPath: '/tr/faq/$slug'
+      preLoaderRoute: typeof TrFaqSlugRouteImport
+      parentRoute: typeof TrFaqRoute
+    }
     '/tr/programming/$slug': {
       id: '/tr/programming/$slug'
       path: '/tr/programming/$slug'
@@ -628,6 +723,16 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface FaqRouteChildren {
+  FaqSlugRoute: typeof FaqSlugRoute
+}
+
+const FaqRouteChildren: FaqRouteChildren = {
+  FaqSlugRoute: FaqSlugRoute,
+}
+
+const FaqRouteWithChildren = FaqRoute._addFileChildren(FaqRouteChildren)
 
 interface PrivacyRouteChildren {
   PrivacySlugRoute: typeof PrivacySlugRoute
@@ -655,24 +760,64 @@ const ResourcesTopicRouteRouteChildren: ResourcesTopicRouteRouteChildren = {
 const ResourcesTopicRouteRouteWithChildren =
   ResourcesTopicRouteRoute._addFileChildren(ResourcesTopicRouteRouteChildren)
 
+interface ArFaqRouteChildren {
+  ArFaqSlugRoute: typeof ArFaqSlugRoute
+}
+
+const ArFaqRouteChildren: ArFaqRouteChildren = {
+  ArFaqSlugRoute: ArFaqSlugRoute,
+}
+
+const ArFaqRouteWithChildren = ArFaqRoute._addFileChildren(ArFaqRouteChildren)
+
+interface EnFaqRouteChildren {
+  EnFaqSlugRoute: typeof EnFaqSlugRoute
+}
+
+const EnFaqRouteChildren: EnFaqRouteChildren = {
+  EnFaqSlugRoute: EnFaqSlugRoute,
+}
+
+const EnFaqRouteWithChildren = EnFaqRoute._addFileChildren(EnFaqRouteChildren)
+
+interface RuFaqRouteChildren {
+  RuFaqSlugRoute: typeof RuFaqSlugRoute
+}
+
+const RuFaqRouteChildren: RuFaqRouteChildren = {
+  RuFaqSlugRoute: RuFaqSlugRoute,
+}
+
+const RuFaqRouteWithChildren = RuFaqRoute._addFileChildren(RuFaqRouteChildren)
+
+interface TrFaqRouteChildren {
+  TrFaqSlugRoute: typeof TrFaqSlugRoute
+}
+
+const TrFaqRouteChildren: TrFaqRouteChildren = {
+  TrFaqSlugRoute: TrFaqSlugRoute,
+}
+
+const TrFaqRouteWithChildren = TrFaqRoute._addFileChildren(TrFaqRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
-  FaqRoute: FaqRoute,
+  FaqRoute: FaqRouteWithChildren,
   NxStudioRoute: NxStudioRoute,
   PrivacyRoute: PrivacyRouteWithChildren,
   UnutmaRoute: UnutmaRoute,
   WhyRoute: WhyRoute,
   ResourcesTopicRouteRoute: ResourcesTopicRouteRouteWithChildren,
   AppsSlugRoute: AppsSlugRoute,
-  ArFaqRoute: ArFaqRoute,
-  EnFaqRoute: EnFaqRoute,
+  ArFaqRoute: ArFaqRouteWithChildren,
+  EnFaqRoute: EnFaqRouteWithChildren,
   GuidesTopicRoute: GuidesTopicRoute,
   ProgrammingTopicRoute: ProgrammingTopicRoute,
   ResurslarSlugRoute: ResurslarSlugRoute,
-  RuFaqRoute: RuFaqRoute,
-  TrFaqRoute: TrFaqRoute,
+  RuFaqRoute: RuFaqRouteWithChildren,
+  TrFaqRoute: TrFaqRouteWithChildren,
   AppsIndexRoute: AppsIndexRoute,
   GuidesIndexRoute: GuidesIndexRoute,
   ProgrammingIndexRoute: ProgrammingIndexRoute,

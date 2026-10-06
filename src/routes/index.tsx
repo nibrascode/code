@@ -5,7 +5,7 @@ import { AppSuggest } from "@/components/app-suggest";
 import { TechMark } from "@/components/tech-marquee";
 import { LanguageSwitch } from "@/components/language-switch";
 import { NavMenu } from "@/components/nav-menu";
-import { FAQ, faqPath } from "@/lib/faq";
+import { FAQ, faqPath, faqTopicPath } from "@/lib/faq";
 import { useI18n } from "@/lib/i18n-context";
 import { statusText } from "@/lib/studio";
 import { loadStudioBundle } from "@/lib/studio.functions";
@@ -238,10 +238,7 @@ function Home() {
           </div>
           <a className="nx-ai-bar" href="/ai">
             <img src="/nibras-ai.png" alt="" />
-            <span className="nx-bar-text">
-              <strong>Nibras AI</strong>
-              <small>Süni intellekt alətləri, AI çat, kod yazma və mətn emalı üçün.</small>
-            </span>
+            <span>Yapay Zeka</span>
           </a>
           <a
             className="nx-studio-bar"
@@ -260,10 +257,7 @@ function Home() {
                 strokeLinejoin="round"
               />
             </svg>
-            <span className="nx-bar-text">
-              <strong>Nibras Dev</strong>
-              <small>Kod redaktoru, proqramlaşdırma və layihələrin hazırlanması üçün.</small>
-            </span>
+            <span>Nibras Dev</span>
           </a>
           <a
             className="nx-apk-bar"
@@ -282,10 +276,7 @@ function Home() {
                 d="M12 11.2a.8.8 0 0 1 .8.8v2.1h2.1a.8.8 0 0 1 0 1.6h-2.1V18a.8.8 0 0 1-1.6 0v-2.3H8.9a.8.8 0 0 1 0-1.6h2.3V12a.8.8 0 0 1 .8-.8Z"
               />
             </svg>
-            <span className="nx-bar-text">
-              <strong>Nibras APK</strong>
-              <small>Android APK hazırlamaq, layihələri APK formatına çevirmək üçün.</small>
-            </span>
+            <span>Nibras Apk</span>
           </a>
         </div>
         <div className="nx-stage">
@@ -395,8 +386,10 @@ function Home() {
         <p>{FAQ[lang].intro}</p>
         <div className="nx-faq-list">
           {FAQ[lang].items.map((item) => (
-            <details key={item.id} id={`home-${item.id}`}>
-              <summary>{item.q}</summary>
+            <details key={item.id}>
+              <summary>
+                <a href={faqTopicPath(lang, item.id)}>{item.q}</a>
+              </summary>
               <p>{item.a}</p>
             </details>
           ))}

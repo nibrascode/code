@@ -1,5 +1,5 @@
 import { LANGS, type Lang } from "@/lib/i18n";
-import { FAQ, faqFromPath, faqPath } from "@/lib/faq";
+import { FAQ, faqFromPath, faqPath, faqTopicFromPath, faqTopicPath } from "@/lib/faq";
 import { pdfPairFromPath } from "@/lib/pdf-pairs";
 import { findProgramming, PROGRAMMING } from "@/lib/programming";
 import { findProgrammingLocale, programmingFromPath, programmingLocalePath } from "@/lib/programming-locales";
@@ -451,6 +451,14 @@ export function readLang(searchStr: string | undefined): Lang {
 
 function pageCopy(pathname: string, lang: Lang) {
   const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : "/";
+  const topic = faqTopicFromPath(path);
+  if (topic) {
+    return {
+      title: `${topic.item.q} — Nibras Code`,
+      description: topic.item.a,
+      keywords: `${topic.item.q}, Nibras Code`,
+    };
+  }
   const faq = faqFromPath(path);
   if (faq) return { title: faq.title, description: faq.description, keywords: faq.keywords };
   const located = programmingFromPath(path);
@@ -505,6 +513,10 @@ export function langFromLocation(pathname: string, searchStr?: string): Lang {
 
 export function canonicalUrl(pathname: string, lang: Lang) {
   const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : "/";
+  if (faqTopicFromPath(path)) {
+    const topic = faqTopicFromPath(path)!;
+    return `${SITE}${faqTopicPath(topic.page.lang, topic.item.id)}`;
+  }
   if (faqFromPath(path)) return `${SITE}${faqPath(lang)}`;
   const pair = pdfPairFromPath(path);
   if (pair) {
@@ -586,6 +598,26 @@ function jsonLd(path: string, lang: Lang, copy: PageSeo, url: string) {
     email: "Nibrascode@gmail.com",
     description: (PAGES["/"][lang] ?? PAGES["/"].en).description,
   };
+
+  const topic = faqTopicFromPath(path);
+  if (topic) {
+    return {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      name: topic.item.q,
+      description: topic.item.a,
+      url,
+      inLanguage: topic.page.lang,
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: topic.item.q,
+          acceptedAnswer: { "@type": "Answer", text: topic.item.a },
+        },
+      ],
+      publisher: org,
+    };
+  }
 
   if (faqFromPath(path)) {
     const faq = faqFromPath(path)!;

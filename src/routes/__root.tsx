@@ -10,7 +10,7 @@ import { buildHead, langFromLocation, pageUrl, readLang } from "@/lib/seo";
 import { pdfPairFromPath } from "@/lib/pdf-pairs";
 import { findProgrammingLocale, programmingLocalePath, programmingFromPath } from "@/lib/programming-locales";
 import { LANGS, type Lang } from "@/lib/i18n";
-import { faqFromPath, faqPath } from "@/lib/faq";
+import { faqFromPath, faqPath, faqTopicFromPath, faqTopicPath } from "@/lib/faq";
 
 export const Route = createRootRoute({
   beforeLoad: ({ location }) => ({
@@ -63,6 +63,23 @@ function SeoLinks() {
   const pair = pdfPairFromPath(path);
   const programming = programmingFromPath(path);
   const faq = faqFromPath(path);
+  const topic = faqTopicFromPath(path);
+  if (topic) {
+    return (
+      <>
+        <link rel="canonical" href={`https://nibrascode.com${faqTopicPath(topic.page.lang, topic.item.id)}`} />
+        {LANGS.map((code) => (
+          <link
+            key={code}
+            rel="alternate"
+            {...{ hreflang: code }}
+            href={`https://nibrascode.com${faqTopicPath(code, topic.item.id)}`}
+          />
+        ))}
+        <link rel="alternate" {...{ hreflang: "x-default" }} href={`https://nibrascode.com${faqTopicPath("az", topic.item.id)}`} />
+      </>
+    );
+  }
   if (faq) {
     return (
       <>

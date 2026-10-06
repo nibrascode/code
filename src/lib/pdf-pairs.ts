@@ -1,5 +1,5 @@
 import type { Lang } from "@/lib/i18n";
-import { faqFromPath, faqPath } from "@/lib/faq";
+import { faqFromPath, faqPath, faqTopicFromPath, faqTopicPath } from "@/lib/faq";
 import { findProgrammingLocale, programmingFromPath, programmingLocalePath } from "@/lib/programming-locales";
 
 export const PDF_LOCALE_PAIRS = [
@@ -36,6 +36,8 @@ export function pdfPairFromPath(pathname: string) {
 }
 
 export function hrefForLang(pathname: string, lang: Lang) {
+  const topic = faqTopicFromPath(pathname);
+  if (topic) return faqTopicPath(lang, topic.item.id);
   if (faqFromPath(pathname)) return faqPath(lang);
   const programming = programmingFromPath(pathname);
   if (programming) {
@@ -50,5 +52,14 @@ export function hrefForLang(pathname: string, lang: Lang) {
     return `${pair.az}?lang=${lang}`;
   }
   const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname;
+  if (
+    path === "/resources" ||
+    path.startsWith("/resources/") ||
+    path === "/guides" ||
+    path.startsWith("/guides/") ||
+    path === "/programming"
+  ) {
+    return lang === "az" ? path : `${path}?lang=${lang}`;
+  }
   return lang === "az" ? path : `${path}?lang=${lang}`;
 }
