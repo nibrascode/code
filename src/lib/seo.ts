@@ -314,28 +314,28 @@ const PAGES: Record<string, Copy> = {
   "/programming": {
     az: {
       title: "Proqramlaşdırma — Nibras Code",
-      description: "Python, Java, React, npm, Redis, cron, Linux, Docker və digər dillər və alətlər.",
-      keywords: "proqramlaşdırma, npm, Redis, cron, Linux, Docker, React",
+      description: "Python, Java, React, pip, SQLite, curl, npm, Linux və digər dillər və alətlər.",
+      keywords: "proqramlaşdırma, pip, SQLite, curl, npm, Linux, React",
     },
     en: {
       title: "Programming — Nibras Code",
-      description: "Pages on Python, Java, React, npm, Redis, cron, Linux, Docker, and other languages and tools.",
-      keywords: "programming, npm, Redis, cron, Linux, Docker, React",
+      description: "Pages on Python, Java, React, pip, SQLite, curl, npm, Linux, and other languages and tools.",
+      keywords: "programming, pip, SQLite, curl, npm, Linux, React",
     },
     tr: {
       title: "Programlama — Nibras Code",
-      description: "Python, Java, React, npm, Redis, cron, Linux, Docker ve diğer diller ile araçlar.",
-      keywords: "programlama, npm, Redis, cron, Linux, Docker, React",
+      description: "Python, Java, React, pip, SQLite, curl, npm, Linux ve diğer diller ile araçlar.",
+      keywords: "programlama, pip, SQLite, curl, npm, Linux, React",
     },
     ar: {
       title: "برمجة — Nibras Code",
-      description: "صفحات عن Python وJava وReact وnpm وRedis وcron وLinux وDocker وأدوات أخرى.",
-      keywords: "برمجة, npm, Redis, cron, Linux, Docker, React",
+      description: "صفحات عن Python وJava وReact وpip وSQLite وcurl وnpm وLinux وأدوات أخرى.",
+      keywords: "برمجة, pip, SQLite, curl, npm, Linux, React",
     },
     ru: {
       title: "Программирование — Nibras Code",
-      description: "Страницы о Python, Java, React, npm, Redis, cron, Linux, Docker и других языках и инструментах.",
-      keywords: "программирование, npm, Redis, cron, Linux, Docker, React",
+      description: "Страницы о Python, Java, React, pip, SQLite, curl, npm, Linux и других языках и инструментах.",
+      keywords: "программирование, pip, SQLite, curl, npm, Linux, React",
     },
   },
   ...Object.fromEntries(PROGRAMMING.map((page) => [`/programming/${page.slug}`, page.seo])),

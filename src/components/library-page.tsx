@@ -152,6 +152,9 @@ const PROGRAM_NAMES: Record<string, string> = {
   npm: "npm",
   redis: "Redis",
   cron: "cron",
+  pip: "pip",
+  sqlite: "SQLite",
+  curl: "curl",
 };
 
 const HTML_TRIES = [
