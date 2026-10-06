@@ -3726,9 +3726,79 @@ body.is-home .noise {
 .nx-hero,
 .nx-apps,
 .nx-split,
+.nx-home-faq,
 .nx-foot {
   width: min(1180px, calc(100% - 40px));
   margin-inline: auto;
+}
+
+.nx-home-faq {
+  margin-top: 10px;
+  margin-bottom: 28px;
+}
+
+.nx-home-faq h2 {
+  margin: 8px 0 8px;
+  font-size: clamp(26px, 4vw, 36px);
+  letter-spacing: -0.03em;
+}
+
+.nx-home-faq > p {
+  max-width: 62ch;
+  color: rgb(214 224 245 / 0.78);
+  line-height: 1.5;
+}
+
+.nx-faq-list {
+  display: grid;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.nx-faq-list details {
+  border-radius: 14px;
+  border: 1px solid rgb(255 255 255 / 0.1);
+  background: rgb(8 14 28 / 0.72);
+  padding: 0 14px;
+}
+
+.nx-faq-list summary {
+  cursor: pointer;
+  min-height: 46px;
+  display: flex;
+  align-items: center;
+  font-weight: 650;
+}
+
+.nx-faq-list p {
+  margin: 0 0 14px;
+  color: rgb(214 224 245 / 0.82);
+  line-height: 1.55;
+}
+
+.nx-faq-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+  color: #8eb6ff;
+  font-weight: 650;
+}
+
+.faq-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 4px 0 18px;
+}
+
+.faq-links a {
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgb(255 255 255 / 0.12);
+  background: rgb(255 255 255 / 0.04);
+  font-size: 13px;
+  font-weight: 650;
 }
 
 .nx-nav {
@@ -5476,12 +5546,16 @@ body.is-home .noise {
     grid-template-columns: 1fr;
   }
 
+  .nx-nav,
+  .nx-home-faq {
+    width: min(1180px, calc(100% - 16px));
+  }
+
   .nx-nav {
     flex-wrap: nowrap;
     align-items: center;
     gap: 8px;
     min-height: 0;
-    width: min(1180px, calc(100% - 16px));
   }
 
   .nx-brand {

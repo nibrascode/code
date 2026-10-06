@@ -5,7 +5,7 @@ import { AppSuggest } from "@/components/app-suggest";
 import { TechMark } from "@/components/tech-marquee";
 import { LanguageSwitch } from "@/components/language-switch";
 import { NavMenu } from "@/components/nav-menu";
-import { faqPath } from "@/lib/faq";
+import { FAQ, faqPath } from "@/lib/faq";
 import { useI18n } from "@/lib/i18n-context";
 import { statusText } from "@/lib/studio";
 import { loadStudioBundle } from "@/lib/studio.functions";
@@ -387,6 +387,24 @@ function Home() {
             {t("remind_verse")}
           </p>
         </aside>
+      </section>
+
+      <section className="nx-home-faq" id="faq">
+        <p className="nx-kicker">{t("faq_nav")}</p>
+        <h2>{FAQ[lang].heading}</h2>
+        <p>{FAQ[lang].intro}</p>
+        <div className="nx-faq-list">
+          {FAQ[lang].items.map((item) => (
+            <details key={item.id} id={`home-${item.id}`}>
+              <summary>{item.q}</summary>
+              <p>{item.a}</p>
+            </details>
+          ))}
+        </div>
+        <a className="nx-faq-more" href={faqPath(lang)}>
+          {FAQ[lang].more}
+          <ArrowUpRight className="size-4" />
+        </a>
       </section>
 
       <footer className="nx-foot">
