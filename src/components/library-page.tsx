@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
+import { ApkLab } from "@/components/apk-lab";
 import { LIBRARY, type LibrarySection, type LibraryTopic } from "@/lib/library";
 import { CODE_SAMPLE_HUB, CODE_SAMPLES, SITE_CODE } from "@/lib/code-samples";
 import { findProgramming, type ProgrammingSection } from "@/lib/programming";
@@ -382,6 +383,7 @@ const PROGRAM_NAMES: Record<string, string> = {
   framework: "Framework",
   terminal: "Terminal",
   deploy: "Deploy",
+  "apk-hazirla": "APK hazırla",
 };
 
 function toolName(slug: string) {
@@ -647,6 +649,7 @@ export function ProgrammingArticle({
           </li>
         </ul>
       ) : null}
+      {slug === "apk-hazirla" ? <ApkLab /> : null}
     </main>
   );
 }

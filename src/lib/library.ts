@@ -36,6 +36,7 @@ export const LIBRARY: Record<LibrarySection, { title: TKey; topics: readonly Lib
       { slug: "csharp", label: "prog_csharp" },
       { slug: "typescript", label: "prog_typescript" },
       { slug: "html-css", label: "prog_html" },
+      { slug: "apk-hazirla", label: "prog_apk_make" },
       { slug: "sql", label: "prog_sql" },
       { slug: "go", label: "prog_go" },
       { slug: "php", label: "prog_php" },

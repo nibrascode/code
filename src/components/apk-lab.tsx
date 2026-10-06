@@ -1,0 +1,183 @@
+import { useState } from "react";
+import type { Lang } from "@/lib/i18n";
+import { useI18n } from "@/lib/i18n-context";
+
+const COPY: Record<
+  Lang,
+  {
+    shots: string;
+    edit: string;
+    name: string;
+    line: string;
+    button: string;
+    files: string;
+    filesNote: string;
+    download: string;
+    zip: string;
+    zipNote: string;
+    picked: string;
+    studio: string;
+    caps: [string, string, string, string];
+  }
+> = {
+  az: {
+    shots: "Qara ekranda nümunələr",
+    edit: "Yazını dəyiş",
+    name: "Tətbiqin adı",
+    line: "Birinci sətir",
+    button: "Düymənin yazısı",
+    files: "Hazır tətbiq faylları",
+    filesNote: "Bu zipin kökündə index.html durur. Yanında css və js qovluqları var. Onu olduğu kimi Studio-ya vermək olar.",
+    download: "Qeyd zipini endir",
+    zip: "Öz zipini seç",
+    zipNote: "Zip bu səhifədə saxlanmır. Faylı seçəndən sonra eyni zipi Nibras Studio-da ver.",
+    picked: "Zip seçildi",
+    studio: "Nibras Studio-ya keç",
+    caps: ["Veb qeyd", "Sayğac", "Səhifə içində", "Üç kart"],
+  },
+  en: {
+    shots: "Samples on a black screen",
+    edit: "Change the words",
+    name: "App name",
+    line: "First line",
+    button: "Button text",
+    files: "Ready app files",
+    filesNote: "index.html stands at the root of this zip. The css and js folders sit beside it. You can give it to Studio as it is.",
+    download: "Download the notes zip",
+    zip: "Choose your own zip",
+    zipNote: "The zip is not stored on this page. After you choose the file, give the same zip to Nibras Studio.",
+    picked: "Zip chosen",
+    studio: "Open Nibras Studio",
+    caps: ["Web notes", "Counter", "Page inside", "Three cards"],
+  },
+  tr: {
+    shots: "Kara ekranda örnekler",
+    edit: "Yazıyı değiştir",
+    name: "Uygulamanın adı",
+    line: "İlk satır",
+    button: "Düğmenin yazısı",
+    files: "Hazır uygulama dosyaları",
+    filesNote: "Bu zipin kökünde index.html durur. Yanında css ve js klasörleri vardır. Olduğu gibi Studio'ya verilebilir.",
+    download: "Not zipini indir",
+    zip: "Kendi zipini seç",
+    zipNote: "Zip bu sayfada saklanmaz. Dosyayı seçtikten sonra aynı zipi Nibras Studio'ya ver.",
+    picked: "Zip seçildi",
+    studio: "Nibras Studio'ya geç",
+    caps: ["Web not", "Sayaç", "Sayfa içinde", "Üç kart"],
+  },
+  ar: {
+    shots: "أمثلة على شاشة سوداء",
+    edit: "غيّر الكتابة",
+    name: "اسم التطبيق",
+    line: "السطر الأول",
+    button: "كتابة الزر",
+    files: "ملفات تطبيق جاهزة",
+    filesNote: "index.html يقف في جذر هذا الـ zip. بجانبه مجلدا css وjs. يمكن إعطاؤه إلى Studio كما هو.",
+    download: "تنزيل zip الملاحظات",
+    zip: "اختر zip الخاص بك",
+    zipNote: "الـ zip لا يُحفظ في هذه الصفحة. بعد اختيار الملف أعطِ الـ zip نفسه إلى Nibras Studio.",
+    picked: "تم اختيار zip",
+    studio: "افتح Nibras Studio",
+    caps: ["ملاحظة ويب", "عدّاد", "صفحة في الداخل", "ثلاث بطاقات"],
+  },
+  ru: {
+    shots: "Примеры на чёрном экране",
+    edit: "Измени текст",
+    name: "Имя приложения",
+    line: "Первая строка",
+    button: "Текст кнопки",
+    files: "Готовые файлы приложения",
+    filesNote: "В корне этого zip стоит index.html. Рядом папки css и js. Его можно отдать Studio как есть.",
+    download: "Скачать zip заметок",
+    zip: "Выбери свой zip",
+    zipNote: "Zip на этой странице не хранится. После выбора файла отдай тот же zip в Nibras Studio.",
+    picked: "Zip выбран",
+    studio: "Открыть Nibras Studio",
+    caps: ["Веб-заметки", "Счётчик", "Страница внутри", "Три карточки"],
+  },
+};
+
+const SHOTS = [
+  { src: "/apk/qeyd.jpg", alt: "Qeyd" },
+  { src: "/apk/saygac.jpg", alt: "Sayğac" },
+  { src: "/apk/sehife.jpg", alt: "Səhifə" },
+  { src: "/apk/kartlar.jpg", alt: "Kartlar" },
+];
+
+export function ApkLab() {
+  const { lang } = useI18n();
+  const copy = COPY[lang];
+  const [name, setName] = useState(lang === "en" ? "Note" : lang === "tr" ? "Not" : lang === "ru" ? "Заметка" : lang === "ar" ? "ملاحظة" : "Qeyd");
+  const [line, setLine] = useState(
+    lang === "en" ? "Write one line today." : lang === "tr" ? "Bugün bir satır yaz." : lang === "ru" ? "Напиши сегодня одну строку." : lang === "ar" ? "اكتب سطراً اليوم." : "Bu gün bir sətir yaz.",
+  );
+  const [button, setButton] = useState(lang === "en" ? "Save" : lang === "tr" ? "Kaydet" : lang === "ru" ? "Сохранить" : lang === "ar" ? "احفظ" : "Saxla");
+  const [zipName, setZipName] = useState("");
+
+  return (
+    <div className="apk-lab">
+      <h2>{copy.shots}</h2>
+      <div className="apk-shots">
+        {SHOTS.map((shot, index) => (
+          <figure key={shot.src}>
+            <img src={shot.src} alt={copy.caps[index]} />
+            <figcaption>{copy.caps[index]}</figcaption>
+          </figure>
+        ))}
+      </div>
+
+      <h2>{copy.edit}</h2>
+      <div className="apk-edit">
+        <form className="apk-fields" onSubmit={(event) => event.preventDefault()}>
+          <label>
+            {copy.name}
+            <input value={name} maxLength={24} onChange={(event) => setName(event.target.value)} />
+          </label>
+          <label>
+            {copy.line}
+            <input value={line} maxLength={80} onChange={(event) => setLine(event.target.value)} />
+          </label>
+          <label>
+            {copy.button}
+            <input value={button} maxLength={18} onChange={(event) => setButton(event.target.value)} />
+          </label>
+        </form>
+        <div className="apk-stage" aria-hidden="true">
+          <div className="apk-phone">
+            <p>{name || " "}</p>
+            <span>{line || " "}</span>
+            <b>{button || " "}</b>
+          </div>
+        </div>
+      </div>
+
+      <h2>{copy.files}</h2>
+      <p>{copy.filesNote}</p>
+      <p>
+        <a className="apk-down" href="/apk/nibras-qeyd.zip" download>
+          {copy.download}
+        </a>
+      </p>
+
+      <h2>{copy.zip}</h2>
+      <p>{copy.zipNote}</p>
+      <label className="apk-file">
+        <input
+          type="file"
+          accept=".zip,application/zip"
+          onChange={(event) => setZipName(event.target.files?.[0]?.name ?? "")}
+        />
+      </label>
+      {zipName ? (
+        <div className="apk-next">
+          <p>
+            {copy.picked}: {zipName}
+          </p>
+          <a href="https://studio.nibrascode.com/" target="_blank" rel="noopener noreferrer">
+            {copy.studio}
+          </a>
+        </div>
+      ) : null}
+    </div>
+  );
+}

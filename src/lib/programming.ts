@@ -1,4 +1,5 @@
 import type { Lang } from "@/lib/i18n";
+import { apkSections } from "@/lib/apk-guide";
 import { csharpSections } from "@/lib/csharp-sections";
 import { javaSections } from "@/lib/java-sections";
 import { javascriptSections } from "@/lib/javascript-sections";
@@ -630,6 +631,38 @@ export const PROGRAMMING: readonly ProgrammingPage[] = [
         title: "Что такое SQL? — Nibras Code",
         description: "SQL — язык запросов и работы с данными.",
         keywords: "что такое SQL, запрос SQL, база данных SQL",
+      },
+    ),
+  },
+  {
+    slug: "apk-hazirla",
+    title: "APK hazırla: öz tətbiqini telefona qoy",
+    sections: apkSections("az"),
+    seo: seo(
+      {
+        title: "APK hazırla: öz tətbiqini telefona qoy — Nibras Code",
+        description: "APK nədir, necə düzəldilir, hansı qovluq lazımdır və hazır zip necə Nibras Studio-ya verilir.",
+        keywords: "APK hazırlamaq, APK nədir, APK necə düzəldilir, Android APK",
+      },
+      {
+        title: "Build an APK: put your own app on the phone — Nibras Code",
+        description: "What an APK is, how it is built, which folders you need, and how a ready zip goes to Nibras Studio.",
+        keywords: "how to make an APK, what is an APK, build an Android APK",
+      },
+      {
+        title: "APK hazırla: kendi uygulamanı telefona koy — Nibras Code",
+        description: "APK nedir, nasıl yapılır, hangi klasör gerekir ve hazır zip Nibras Studio'ya nasıl verilir.",
+        keywords: "APK yapmak, APK nedir, APK nasıl yapılır, Android APK",
+      },
+      {
+        title: "اصنع APK: ضع تطبيقك على الهاتف — Nibras Code",
+        description: "ما هو APK وكيف يُصنع وأي مجلد يلزم وكيف يُعطى zip الجاهز إلى Nibras Studio.",
+        keywords: "صنع APK, ما هو APK, كيف أصنع APK, Android APK",
+      },
+      {
+        title: "Собери APK: поставь своё приложение на телефон — Nibras Code",
+        description: "Что такое APK, как его собирают, какие папки нужны и как готовый zip отдают в Nibras Studio.",
+        keywords: "как сделать APK, что такое APK, собрать Android APK",
       },
     ),
   },

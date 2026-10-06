@@ -1,5 +1,6 @@
 import type { Lang } from "@/lib/i18n";
 import type { ProgrammingSection } from "@/lib/programming";
+import { apkSections } from "@/lib/apk-guide";
 import { csharpSections } from "@/lib/csharp-sections";
 import { javaSections } from "@/lib/java-sections";
 import { javascriptSections } from "@/lib/javascript-sections";
@@ -49,6 +50,10 @@ const LOCALES: readonly ProgrammingLocale[] = [
   { lang: "tr", slug: "sql", title: "SQL nedir?", sections: sqlSections("tr") },
   { lang: "ar", slug: "sql", title: "ما هو SQL؟", sections: sqlSections("ar") },
   { lang: "ru", slug: "sql", title: "Что такое SQL?", sections: sqlSections("ru") },
+  { lang: "en", slug: "apk-hazirla", title: "Build an APK: put your own app on the phone", sections: apkSections("en") },
+  { lang: "tr", slug: "apk-hazirla", title: "APK hazırla: kendi uygulamanı telefona koy", sections: apkSections("tr") },
+  { lang: "ar", slug: "apk-hazirla", title: "اصنع APK: ضع تطبيقك على الهاتف", sections: apkSections("ar") },
+  { lang: "ru", slug: "apk-hazirla", title: "Собери APK: поставь своё приложение на телефон", sections: apkSections("ru") },
   ...ALL_STACK.flatMap((item) =>
     (["en", "tr", "ar", "ru"] as const).map((lang) => ({
       lang,

@@ -6451,3 +6451,93 @@ body.is-studio {
   }
 }
 
+
+.apk-lab { margin-top: 28px; }
+.apk-lab h2 { margin: 28px 0 12px; }
+.apk-shots {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+.apk-shots figure { margin: 0; }
+.apk-shots img {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: 16px;
+  background: #000;
+}
+.apk-shots figcaption {
+  margin-top: 6px;
+  color: #9aabc8;
+  font-size: 13px;
+}
+.apk-edit {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 220px;
+  gap: 18px;
+  align-items: center;
+}
+.apk-fields { display: grid; gap: 10px; }
+.apk-fields label, .apk-file {
+  display: grid;
+  gap: 6px;
+  color: #c5d0e6;
+  font-size: 14px;
+}
+.apk-fields input, .apk-file input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgb(140 170 230 / 0.28);
+  background: rgb(8 12 24 / 0.85);
+  color: #f4f7ff;
+  font: inherit;
+}
+.apk-stage {
+  display: grid;
+  place-items: center;
+  min-height: 360px;
+  border-radius: 24px;
+  background: #000;
+}
+.apk-phone {
+  width: 168px;
+  min-height: 300px;
+  padding: 28px 14px 16px;
+  border-radius: 28px;
+  background: #12182b;
+  color: #f4f7ff;
+  box-shadow: inset 0 0 0 2px #2a3554;
+}
+.apk-phone p { margin: 0 0 10px; font-size: 22px; font-weight: 700; overflow-wrap: anywhere; }
+.apk-phone span { display: block; color: #c5d0e6; font-size: 14px; overflow-wrap: anywhere; }
+.apk-phone b {
+  display: block;
+  margin-top: 18px;
+  padding: 10px 8px;
+  border-radius: 12px;
+  background: #2f6bff;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+.apk-down, .apk-next a {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  background: #2f6bff;
+  color: white;
+  font-weight: 700;
+  text-decoration: none;
+}
+.apk-next {
+  margin-top: 14px;
+  padding: 14px;
+  border-radius: 16px;
+  background: rgb(8 12 24 / 0.85);
+}
+@media (max-width: 800px) {
+  .apk-shots { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .apk-edit { grid-template-columns: 1fr; }
+}
