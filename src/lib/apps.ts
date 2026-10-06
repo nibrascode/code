@@ -23,7 +23,7 @@ export const STUDIO_APPS: StudioApp[] = [
     playStoreUrl: null,
     leadKey: "arabic_lead",
     bodyKey: "arabic_body",
-    features: ["arabic_f2", "arabic_f3", "arabic_f4", "arabic_f5", "arabic_f6"],
+    features: ["arabic_f1", "arabic_f2", "arabic_f3", "arabic_f4", "arabic_f5", "arabic_f6"],
     shots: [
       "/shots/nibras-arabic-1.jpg",
       "/shots/nibras-arabic-2.jpg",

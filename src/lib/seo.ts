@@ -120,37 +120,47 @@ const PAGES: Record<string, Copy> = {
     az: {
       title: "Nibras Arabic — ərəb dilini sadə öyrən",
       description:
-        "Nibras Arabic ərəb dilini sadə və praktik öyrədən Android tətbiqidir. İsim, feil, sifət və saylar, dialoqlar, testlər, flash kartlar və ətraflı feil babları bir yerdədir. Nibras Code layihəsidir.",
+        "Nibras Arabic Azərbaycan dilini bilən birinin ərəb dilini daha asan öyrənməsi üçündür. Şüar: Ərəb dili - daha yaxın. 704 feil, dialoqlar, testlər, 4400 kart və yazı məşqi. Nibras Code layihəsidir.",
       features: [
-        "İsim, feil, sifət və saylar",
-        "Ətraflı feil babları",
-        "Dialoqlar, testlər və flash kartlar",
+        "704 feil, 200 isim, 100 sifət və saylar",
+        "186 dialoq, testlər və 4400 flash kart",
+        "28 hərf yazı məşqi. Məlumat cihazda qalır",
       ],
     },
     en: {
       title: "Nibras Arabic — learn Arabic simply",
       description:
-        "Nibras Arabic is an Android app for learning Arabic in a simple, practical way. Nouns, verbs, adjectives and numbers, dialogues, tests, flashcards, and detailed verb forms. An app by Nibras Code.",
+        "Nibras Arabic helps someone who knows Azerbaijani learn Arabic more easily. Slogan: Ərəb dili - daha yaxın. 704 verbs, dialogues, tests, 4400 cards, and writing practice. An app by Nibras Code.",
       features: [
-        "Nouns, verbs, adjectives, and numbers",
-        "Detailed verb forms",
-        "Dialogues, tests, and flashcards",
+        "704 verbs, 200 nouns, 100 adjectives, and numbers",
+        "186 dialogues, tests, and 4400 flashcards",
+        "Writing practice for 28 letters. Data stays on the device",
+      ],
+    },
+    tr: {
+      title: "Nibras Arabic — Arapçayı sade öğren",
+      description:
+        "Nibras Arabic, Azerbaycan Türkçesini bilen birinin Arapçayı daha kolay öğrenmesi içindir. Slogan: Ərəb dili - daha yaxın. 704 fiil, diyaloglar, testler, 4400 kart ve yazı alıştırması. Nibras Code projesidir.",
+      features: [
+        "704 fiil, 200 isim, 100 sıfat ve sayılar",
+        "186 diyalog, testler ve 4400 kart",
+        "28 harf yazı alıştırması. Bilgi cihazda kalır",
       ],
     },
     ar: {
       title: "Nibras Arabic — تعلّم العربية ببساطة",
       description:
-        "Nibras Arabic تطبيق أندرويد لتعلّم العربية بطريقة بسيطة وعملية. فيه الاسم والفعل والصفة والعدد، والحوارات والاختبارات والبطاقات وأبواب الفعل المفصّلة. من مشروع Nibras Code.",
-      features: ["الاسم والفعل والصفة والعدد", "أبواب الفعل المفصّلة", "حوارات واختبارات وبطاقات"],
+        "Nibras Arabic لمن يعرف الأذربيجانية ليتعلّم العربية بسهولة أكبر. الشعار: Ərəb dili - daha yaxın. 704 أفعال وحوارات واختبارات و4400 بطاقة وتدريب كتابة. من مشروع Nibras Code.",
+      features: ["704 أفعال و200 اسم و100 صفة", "186 حوارًا واختبارات و4400 بطاقة", "تدريب كتابة 28 حرفًا. البيانات على الجهاز"],
     },
     ru: {
       title: "Nibras Arabic — учите арабский просто",
       description:
-        "Nibras Arabic — приложение для Android, чтобы учить арабский просто и практично. Имена, глаголы, прилагательные и числительные, диалоги, тесты, карточки и подробные породы глагола. Проект Nibras Code.",
+        "Nibras Arabic помогает знающему азербайджанский учить арабский легче. Девиз: Ərəb dili - daha yaxın. 704 глагола, диалоги, тесты, 4400 карточек и письмо. Проект Nibras Code.",
       features: [
-        "Имена, глаголы, прилагательные и числа",
-        "Подробные породы глагола",
-        "Диалоги, тесты и карточки",
+        "704 глагола, 200 имён, 100 прилагательных и числа",
+        "186 диалогов, тесты и 4400 карточек",
+        "Письмо 28 букв. Данные остаются на устройстве",
       ],
     },
   },
