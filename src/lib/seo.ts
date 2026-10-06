@@ -1,5 +1,5 @@
 import { LANGS, type Lang } from "@/lib/i18n";
-import { FAQ, faqFromPath, faqPath, faqTopicFromPath, faqTopicPath } from "@/lib/faq";
+import { faqFromPath, faqPath, faqTopicFromPath, faqTopicPath } from "@/lib/faq";
 import { pdfPairFromPath } from "@/lib/pdf-pairs";
 import { findProgramming, PROGRAMMING } from "@/lib/programming";
 import { findProgrammingLocale, programmingFromPath, programmingLocalePath } from "@/lib/programming-locales";
@@ -677,36 +677,6 @@ function jsonLd(path: string, lang: Lang, copy: PageSeo, url: string) {
       mainEntityOfPage: url,
       author: org,
       publisher: org,
-    };
-  }
-
-  if (path === "/") {
-    const faq = FAQ[lang];
-    return {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "WebPage",
-          name: copy.title,
-          description: copy.description,
-          url,
-          inLanguage: lang,
-          isPartOf: { "@type": "WebSite", name: "Nibras Code", url: SITE },
-          publisher: org,
-        },
-        {
-          "@type": "FAQPage",
-          name: faq.heading,
-          description: faq.description,
-          url,
-          inLanguage: lang,
-          mainEntity: faq.items.map((item) => ({
-            "@type": "Question",
-            name: item.q,
-            acceptedAnswer: { "@type": "Answer", text: item.a },
-          })),
-        },
-      ],
     };
   }
 
