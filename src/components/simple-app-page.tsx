@@ -28,7 +28,7 @@ export function SimpleAppPage({ app, live }: { app: StudioApp; live?: StudioAppR
         </div>
         <div>
           {badge ? <p className="nx-status">{badge}</p> : null}
-          <h1>{live?.name || app.name}</h1>
+          <h1>{app.name}</h1>
         </div>
       </div>
       <div className="simple-app-copy">
@@ -36,7 +36,7 @@ export function SimpleAppPage({ app, live }: { app: StudioApp; live?: StudioAppR
           <i />
           {t("app_family_kicker")}
         </div>
-        <p className="simple-lead">{live?.summary || t(app.leadKey)}</p>
+        <p className="simple-lead">{t(app.leadKey)}</p>
         <p className="simple-body">{t(app.bodyKey)}</p>
         <ul className="simple-feats">
           {app.features.map((key) => (

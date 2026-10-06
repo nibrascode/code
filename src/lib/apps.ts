@@ -54,7 +54,7 @@ export const STUDIO_APPS: StudioApp[] = [
   },
   {
     slug: "nibras-pdf",
-    name: "Nibras PDF Tools",
+    name: "Nibras PDF",
     icon: "/apps/nibras-pdf.jpg",
     playStoreUrl: null,
     leadKey: "pdf_lead",

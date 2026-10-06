@@ -310,7 +310,7 @@ function Home() {
                   </span>
                   <span>
                     {badge ? <em className="nx-status">{badge}</em> : null}
-                    <b>{live?.name || card.name}</b>
+                    <b>{card.name}</b>
                   </span>
                 </span>
                 <span className="nx-chips">

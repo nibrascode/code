@@ -70,8 +70,27 @@ export function LibraryIndex({
   );
 }
 
-export function ProgrammingArticle({ title, sections }: { title: string; sections?: readonly ProgrammingSection[] }) {
+const PROGRAM_NAMES: Record<string, string> = {
+  python: "Python",
+  javascript: "JavaScript",
+  java: "Java",
+  csharp: "C#",
+  typescript: "TypeScript",
+  "html-css": "HTML/CSS",
+  sql: "SQL",
+};
+
+export function ProgrammingArticle({
+  slug,
+  title,
+  sections,
+}: {
+  slug?: string;
+  title: string;
+  sections?: readonly ProgrammingSection[];
+}) {
   const { t } = useI18n();
+  const heading = (slug && PROGRAM_NAMES[slug]) || title;
 
   return (
     <main className="why-page">
@@ -80,7 +99,7 @@ export function ProgrammingArticle({ title, sections }: { title: string; section
         <i />
         <Link to="/programming">{t("nav_programming")}</Link>
       </p>
-      <h1>{title}</h1>
+      <h1>{heading}</h1>
       <div className="prog-sections">
         {sections?.map((item) => (
           <details key={item.id} id={item.id} className="prog-fold">
@@ -127,7 +146,7 @@ export function PythonArticle({ privacy }: { privacy: readonly StudioPrivacyRow[
   const { lang } = useI18n();
   const page = findProgramming("python");
   const title = page?.seo[lang]?.title.replace(/ — Nibras Code$/, "") ?? page?.title ?? "Python";
-  return <ProgrammingArticle title={title} sections={pythonSections(lang, privacy)} />;
+  return <ProgrammingArticle slug="python" title={title} sections={pythonSections(lang, privacy)} />;
 }
 
 export function LibraryTopicPage({
@@ -141,7 +160,7 @@ export function LibraryTopicPage({
 }) {
   const { t, lang } = useI18n();
   const page = section === "programming" && topic.slug !== "python" ? findProgramming(topic.slug) : null;
-  if (page) return <ProgrammingArticle title={page.title} sections={page.sections} />;
+  if (page) return <ProgrammingArticle slug={topic.slug} title={page.title} sections={page.sections} />;
   const group: LibGroup | null = section === "resources" ? "resurs" : section === "guides" ? "guide" : null;
   const saved = group ? savedLib(group, topic.slug, lang, rows) : null;
   const topicCopy = section === "resources" ? findResourceTopic(topic.slug) : null;

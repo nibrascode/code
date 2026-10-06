@@ -51,8 +51,8 @@ function AppsPage() {
               <img src={live?.icon_url || app.icon} alt="" />
               <span>
                 {badge ? <em>{badge}</em> : null}
-                <b>{(live?.name || app.name).replace(" Tools", "")}</b>
-                <p>{live?.summary || t(app.leadKey)}</p>
+                <b>{app.name}</b>
+                <p>{t(app.leadKey)}</p>
               </span>
               <ArrowUpRight className="rtl-flip size-4" />
             </Link>

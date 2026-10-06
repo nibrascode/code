@@ -16,5 +16,5 @@ export const Route = createFileRoute("/en/programming/$slug")({
 function LocaleRoute() {
   const { page, privacy } = Route.useLoaderData();
   if (page.slug === "python") return <PythonArticle privacy={privacy} />;
-  return <ProgrammingArticle title={page.title} sections={page.sections} />;
+  return <ProgrammingArticle slug={page.slug} title={page.title} sections={page.sections} />;
 }
