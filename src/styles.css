@@ -4044,9 +4044,25 @@ body.is-home .noise {
 }
 
 .nx-links {
-  margin: 0;
+  margin: 0 0 0 auto;
+  min-width: 0;
   color: rgb(214 224 245 / 0.78);
   font-size: 14px;
+  gap: 14px;
+}
+
+.nx-nav .lang-pick {
+  height: 30px;
+  width: 48px;
+  min-width: 48px;
+  max-width: 48px;
+  padding: 0 14px 0 7px;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  background-position:
+    calc(100% - 8px) 12px,
+    calc(100% - 4px) 12px;
+  background-size: 4px 4px, 4px 4px;
 }
 
 .nx-links button,
@@ -5483,12 +5499,24 @@ body.is-home .noise {
     min-width: 0;
     flex-wrap: nowrap;
     overflow: visible;
-    gap: 8px;
+    gap: 6px;
     font-size: 12px;
   }
 
   .nx-links a {
     white-space: nowrap;
+  }
+
+  .nx-nav .lang-pick {
+    height: 28px;
+    width: 44px;
+    min-width: 44px;
+    max-width: 44px;
+    padding: 0 12px 0 6px;
+    font-size: 10px;
+    background-position:
+      calc(100% - 7px) 11px,
+      calc(100% - 4px) 11px;
   }
 
   .nx-nav .lang-menu {
