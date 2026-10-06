@@ -26,14 +26,18 @@ export function FaqView({ page }: { page: FaqCopy }) {
           </a>
         ))}
       </nav>
-      {page.items.map((item) => (
-        <section key={item.id} id={item.id}>
-          <h2>
-            <a href={faqTopicPath(page.lang, item.id)}>{item.q}</a>
-          </h2>
-          <p>{item.a}</p>
-        </section>
-      ))}
+      <div className="prog-sections">
+        {page.items.map((item) => (
+          <details key={item.id} id={item.id} className="prog-fold">
+            <summary>
+              <h2>{item.q}</h2>
+            </summary>
+            <div className="prog-fold-body">
+              <p>{item.a}</p>
+            </div>
+          </details>
+        ))}
+      </div>
     </main>
   );
 }
