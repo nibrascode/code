@@ -4324,16 +4324,26 @@ body.is-home .noise {
   margin: 0;
   padding: 0;
   list-style: none;
+  width: 100%;
+}
+
+.prog-start li {
+  min-width: 0;
+  max-width: 100%;
 }
 
 .prog-start a {
   display: flex;
   align-items: flex-start;
   gap: 8px;
+  width: 100%;
+  max-width: 100%;
   min-width: 0;
+  height: 100%;
   padding: 8px 10px;
   border-radius: 12px;
   border: 1px solid transparent;
+  overflow: hidden;
 }
 
 .prog-start i {
@@ -4351,16 +4361,23 @@ body.is-home .noise {
 
 .prog-start .step-copy {
   min-width: 0;
+  max-width: 100%;
+}
+
+.prog-start b,
+.prog-start .step-copy span {
+  display: block;
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .prog-start b {
-  display: block;
   font-size: 13px;
   line-height: 1.2;
 }
 
 .prog-start .step-copy span {
-  display: block;
   margin-top: 2px;
   color: rgb(198 208 226);
   font-size: 11.5px;
@@ -4444,18 +4461,14 @@ body.is-home .noise {
   font-weight: 700;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 720px) {
+  .prog-start ol {
+    grid-template-columns: 1fr;
+  }
+
   .prog-start a {
-    gap: 6px;
-    padding: 7px 8px;
-  }
-
-  .prog-start b {
-    font-size: 12px;
-  }
-
-  .prog-start .step-copy span {
-    font-size: 10.5px;
+    gap: 8px;
+    padding: 8px 10px;
   }
 }
 
