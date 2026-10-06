@@ -66,7 +66,7 @@ export function LibraryIndex({
         Nibras Code
       </p>
       <h1>{t(page.title)}</h1>
-      <ul className="lib-list">
+      <ul className={section === "programming" ? "lib-list lib-list-2" : "lib-list"}>
         {page.topics.map((topic) => {
           if (section === "programming") {
             return (
