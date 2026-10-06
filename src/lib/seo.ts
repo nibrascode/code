@@ -1,5 +1,5 @@
 import { LANGS, type Lang } from "@/lib/i18n";
-import { faqFromPath, faqPath, faqTopicFromPath, faqTopicPath } from "@/lib/faq";
+import { faqAnswerText, faqFromPath, faqPath, faqTopicFromPath, faqTopicPath } from "@/lib/faq";
 import { pdfPairFromPath } from "@/lib/pdf-pairs";
 import { findProgramming, PROGRAMMING } from "@/lib/programming";
 import { findProgrammingLocale, programmingFromPath, programmingLocalePath } from "@/lib/programming-locales";
@@ -158,25 +158,25 @@ const PAGES: Record<string, Copy> = {
     az: {
       title: "Nibras PDF — PDF və şəkillərlə iş",
       description:
-        "Nibras PDF telefonunuzda PDF və şəkillərlə işləmək üçün Android tətbiqidir. Sənədləri birləşdirmək, bölmək, sıxmaq, döndərmək, imzalamaq və skan etmək olar. Fayllar əsasən cihazda qalır. Nibras Code layihəsidir.",
+        "Nibras PDF telefonunuzda PDF və şəkillərlə işləmək üçün Android tətbiqidir. 18 alət var: birləşdir, böl, sıxışdır, çevir, qoru, imza, skan, Word və mətn. Fayllar cihazınızda qalır. Nibras Code layihəsidir.",
       features: ["PDF birləşdirmək və bölmək", "Sıxmaq, döndərmək və imzalamaq", "Sənəd skanı və şəkillər"],
     },
     en: {
       title: "Nibras PDF — PDFs and images on your phone",
       description:
-        "Nibras PDF is an Android app for working with PDFs and images on your phone. Merge, split, compress, rotate, sign, and scan documents. Files stay on the device. An app by Nibras Code.",
+        "Nibras PDF is an Android app for working with PDFs and images on your phone. It has 18 tools: merge, split, compress, rotate, protect, sign, scan, Word, and text. Your files stay on your device. An app by Nibras Code.",
       features: ["Merge and split PDFs", "Compress, rotate, and sign", "Scan documents and images"],
     },
     ar: {
       title: "Nibras PDF — ملفات PDF والصور على هاتفك",
       description:
-        "Nibras PDF تطبيق أندرويد للعمل مع ملفات PDF والصور على هاتفك. ادمج الملفات وقسّمها واضغطها وأدرها ووقّعها وامسح المستندات. تبقى الملفات على الجهاز. من مشروع Nibras Code.",
+        "Nibras PDF تطبيق أندرويد للعمل مع ملفات PDF والصور على هاتفك. فيه 18 أداة: دمج وتقسيم وضغط وتدوير وحماية وتوقيع ومسح وWord ونص. ملفاتك تبقى على جهازك. من مشروع Nibras Code.",
       features: ["دمج وتقسيم PDF", "ضغط وتدوير وتوقيع", "مسح المستندات والصور"],
     },
     ru: {
       title: "Nibras PDF — PDF и изображения на телефоне",
       description:
-        "Nibras PDF — приложение для Android, чтобы работать с PDF и изображениями на телефоне. Объединяйте, делите, сжимайте, поворачивайте, подписывайте и сканируйте документы. Файлы остаются на устройстве. Проект Nibras Code.",
+        "Nibras PDF — приложение для Android, чтобы работать с PDF и изображениями на телефоне. В нём 18 инструментов: объединение, разделение, сжатие, поворот, защита, подпись, скан, Word и текст. Ваши файлы остаются на устройстве. Проект Nibras Code.",
       features: ["Объединять и делить PDF", "Сжимать, поворачивать и подписывать", "Скан документов и изображений"],
     },
   },
@@ -605,14 +605,14 @@ function jsonLd(path: string, lang: Lang, copy: PageSeo, url: string) {
       "@context": "https://schema.org",
       "@type": "FAQPage",
       name: topic.item.q,
-      description: topic.item.a,
+      description: faqAnswerText(topic.item),
       url,
       inLanguage: topic.page.lang,
       mainEntity: [
         {
           "@type": "Question",
           name: topic.item.q,
-          acceptedAnswer: { "@type": "Answer", text: topic.item.a },
+          acceptedAnswer: { "@type": "Answer", text: faqAnswerText(topic.item) },
         },
       ],
       publisher: org,
@@ -631,7 +631,7 @@ function jsonLd(path: string, lang: Lang, copy: PageSeo, url: string) {
       mainEntity: faq.items.map((item) => ({
         "@type": "Question",
         name: item.q,
-        acceptedAnswer: { "@type": "Answer", text: item.a },
+        acceptedAnswer: { "@type": "Answer", text: faqAnswerText(item) },
       })),
       publisher: org,
     };

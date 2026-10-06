@@ -3760,6 +3760,21 @@ body.is-home .noise {
   margin-inline: auto;
 }
 
+.faq-points {
+  margin: 10px 0 12px;
+  padding-inline-start: 18px;
+  display: grid;
+  gap: 6px;
+  color: rgb(214 224 245 / 0.9);
+  line-height: 1.45;
+}
+
+.faq-note {
+  margin: 0 0 10px;
+  color: rgb(214 224 245 / 0.82);
+  line-height: 1.55;
+}
+
 .faq-links {
   display: flex;
   flex-wrap: wrap;

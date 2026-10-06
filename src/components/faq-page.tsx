@@ -9,6 +9,26 @@ const RELATED: Record<FaqCopy["lang"], string> = {
   ru: "Официальная страница",
 };
 
+function FaqBody({ item }: { item: FaqItem }) {
+  return (
+    <>
+      <p>{item.a}</p>
+      {item.points?.length ? (
+        <ul className="faq-points">
+          {item.points.map((point) => (
+            <li key={point}>{point}</li>
+          ))}
+        </ul>
+      ) : null}
+      {item.notes?.map((note) => (
+        <p key={note} className="faq-note">
+          {note}
+        </p>
+      ))}
+    </>
+  );
+}
+
 export function FaqView({ page }: { page: FaqCopy }) {
   return (
     <main className="why-page" lang={page.lang} dir={page.lang === "ar" ? "rtl" : "ltr"}>
@@ -33,7 +53,7 @@ export function FaqView({ page }: { page: FaqCopy }) {
               <h2>{item.q}</h2>
             </summary>
             <div className="prog-fold-body">
-              <p>{item.a}</p>
+              <FaqBody item={item} />
             </div>
           </details>
         ))}
@@ -53,7 +73,9 @@ export function FaqTopic({ page, item }: { page: FaqCopy; item: FaqItem }) {
         <a href={page.path}>{page.heading}</a>
       </p>
       <h1>{item.q}</h1>
-      <p className="why-lead">{item.a}</p>
+      <div className="why-lead">
+        <FaqBody item={item} />
+      </div>
       <nav className="faq-links" aria-label={page.heading}>
         {related ? (
           <a href={related} {...(related.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}>

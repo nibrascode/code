@@ -1,6 +1,12 @@
 import type { Lang } from "@/lib/i18n";
 
-export type FaqItem = { id: string; q: string; a: string };
+export type FaqItem = {
+  id: string;
+  q: string;
+  a: string;
+  points?: readonly string[];
+  notes?: readonly string[];
+};
 export type FaqLink = { href: string; label: string };
 
 export type FaqCopy = {
@@ -86,7 +92,32 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "pdf",
         q: "Nibras PDF nədir?",
-        a: "Nibras PDF sənədlər və şəkillərlə işləmək üçün hazırlanan mobil tətbiqdir. Birləşdirmə, bölmə, sıxışdırma və gündəlik PDF işləri üçün nəzərdə tutulub. Hazırda tezliklədir.",
+        a: "Nibras PDF sənədlər və şəkillərlə işləmək üçün mobil tətbiqdir. Şüarı: Sadə · Sürətli · Güclü. Aşağı menyuda Əsas və Alətlər var. Üstdə istifadəçi profili, Premium təcrübə və Parametrlər yerləşir. Alətlər bölməsində 18 alət var.",
+        points: [
+          "Birləşdir: bir neçə PDF-i bir faylda topla",
+          "Böl: səhifələri ayrıca fayllara ayır",
+          "Sıxışdır: fayl ölçüsünü kiçilt",
+          "Şəkildən PDF: şəkilləri PDF sənədinə çevir",
+          "PDF-dən şəkil: səhifələri şəkil kimi saxla",
+          "Dönüşdür: PDF-i sola və ya sağa çevir",
+          "Qoru: parol ilə təhlükəsizləşdir",
+          "Su nişanı: sənədə yazı və ya nişan əlavə et",
+          "Səhifələri idarə et: səhifələri sil və sırasını dəyiş",
+          "Skan et: kamera ilə sənədi PDF-ə çevir",
+          "İmza əlavə et: PDF-ə elektron imza yerləşdir",
+          "Mətni tanı: şəkildən mətni cihazda çıxar",
+          "PDF-dən mətn çıxar: PDF səhifələrindəki mətni çıxar",
+          "PDF-dən Word: məzmunu redaktə etmək üçün",
+          "PDF önizləmə: səhifələrə bax və böyüt",
+          "Toplu əməliyyatlar: bir neçə PDF-i eyni anda emal et",
+          "Səhifə seç və çıxar: seçilmiş səhifələrdən yeni fayl çıxar",
+          "Word-dan PDF: DOCX faylını PDF sənədinə çevir",
+        ],
+        notes: [
+          "Əsas ekranda son sənədlər görünür: əməliyyat növü və tarix, məsələn Birləşdir.",
+          "Fayl hazırdır ekranında yeni faylın adı göstərilir. Paylaş, Qovluğa saxla və Qovluğu dəyiş var. Drive hələlik Tezliklədir.",
+          "Tətbiq dili: Azərbaycan dili, English, Türkçe, Русский və العربية. Tətbiq kilidi PIN və ya biometrik ola bilər. Kilidi sıfırlamaq, son sənədlərdə adları gizlətmək və paylaşmadan əvvəl təsdiq istəmək mümkündür. Fayllarınız cihazınızda qalır.",
+        ],
       },
       {
         id: "plans",
@@ -186,7 +217,32 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "pdf",
         q: "What is Nibras PDF?",
-        a: "Nibras PDF is a mobile app for working with documents and images. It is meant for merge, split, compress, and everyday PDF work. It is coming soon.",
+        a: "Nibras PDF is a mobile app for working with documents and images. Its line is Simple · Fast · Powerful. The bottom menu has Home and Tools. The top has the user profile, Premium experience, and Settings. The Tools section has 18 tools.",
+        points: [
+          "Merge: combine several PDFs into one file",
+          "Split: separate pages into their own files",
+          "Compress: reduce the file size",
+          "Image to PDF: turn images into a PDF document",
+          "PDF to image: save pages as images",
+          "Rotate: turn the PDF left or right",
+          "Protect: secure it with a password",
+          "Watermark: add text or a mark to the document",
+          "Manage pages: delete pages and change their order",
+          "Scan: turn a document into a PDF with the camera",
+          "Add signature: place an electronic signature on the PDF",
+          "Recognize text: extract text from an image on the device",
+          "Extract text from PDF: pull the text out of PDF pages",
+          "PDF to Word: for editing the content",
+          "PDF preview: view pages and zoom in",
+          "Batch actions: process several PDFs at once",
+          "Pick pages and extract: make a new file from selected pages",
+          "Word to PDF: convert a DOCX file into a PDF",
+        ],
+        notes: [
+          "The home screen lists recent documents, with the action and the date, such as Merge.",
+          "The File is ready screen shows the new file name. Share, Save to folder, and Change folder are available. Drive is still Coming soon.",
+          "App language: Azərbaycan dili, English, Türkçe, Русский, and العربية. The app lock can be a PIN or biometrics. You can reset the lock, hide names in recent documents, and ask for confirmation before sharing. Your files stay on your device.",
+        ],
       },
       {
         id: "plans",
@@ -286,7 +342,32 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "pdf",
         q: "Nibras PDF nedir?",
-        a: "Nibras PDF, belgeler ve görsellerle çalışmak için hazırlanan bir mobil uygulamadır. Birleştirme, bölme, sıkıştırma ve günlük PDF işleri için düşünülmüştür. Şu anda yakındadır.",
+        a: "Nibras PDF belgeler ve görsellerle çalışmak için bir mobil uygulamadır. Sloganı: Sade · Hızlı · Güçlü. Alt menüde Ana sayfa ve Araçlar vardır. Üstte kullanıcı profili, Premium deneyim ve Ayarlar durur. Araçlar bölümünde 18 araç vardır.",
+        points: [
+          "Birleştir: birkaç PDF’i tek dosyada topla",
+          "Böl: sayfaları ayrı dosyalara ayır",
+          "Sıkıştır: dosya boyutunu küçült",
+          "Görselden PDF: görselleri PDF belgesine çevir",
+          "PDF’den görsel: sayfaları görsel olarak kaydet",
+          "Döndür: PDF’i sola veya sağa çevir",
+          "Koruma: parola ile güvene al",
+          "Filigran: belgeye yazı veya işaret ekle",
+          "Sayfaları yönet: sayfaları sil ve sırasını değiştir",
+          "Tara: kamerayla belgeyi PDF’e çevir",
+          "İmza ekle: PDF’e elektronik imza yerleştir",
+          "Metni tanı: görselden metni cihazda çıkar",
+          "PDF’den metin çıkar: PDF sayfalarındaki metni çıkar",
+          "PDF’den Word: içeriği düzenlemek için",
+          "PDF önizleme: sayfalara bak ve yakınlaştır",
+          "Toplu işlemler: birkaç PDF’i aynı anda işle",
+          "Sayfa seç ve çıkar: seçilen sayfalardan yeni dosya çıkar",
+          "Word’dan PDF: DOCX dosyasını PDF belgesine çevir",
+        ],
+        notes: [
+          "Ana ekranda son belgeler görünür: işlem türü ve tarih, örneğin Birleştir.",
+          "Dosya hazır ekranında yeni dosyanın adı gösterilir. Paylaş, Klasöre kaydet ve Klasörü değiştir vardır. Drive şimdilik Yakında.",
+          "Uygulama dili: Azərbaycan dili, English, Türkçe, Русский ve العربية. Uygulama kilidi PIN veya biyometrik olabilir. Kilidi sıfırlamak, son belgelerde adları gizlemek ve paylaşmadan önce onay istemek mümkündür. Dosyalarınız cihazınızda kalır.",
+        ],
       },
       {
         id: "plans",
@@ -386,7 +467,32 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "pdf",
         q: "ما هو Nibras PDF؟",
-        a: "Nibras PDF تطبيق هاتف للعمل مع المستندات والصور. أُعدّ للدمج والتقسيم والضغط وأعمال PDF اليومية. وهو قريبًا.",
+        a: "Nibras PDF تطبيق هاتف للعمل مع المستندات والصور. شعاره: بسيط · سريع · قوي. القائمة السفلية فيها الرئيسية والأدوات. في الأعلى ملف المستخدم وتجربة Premium والإعدادات. قسم الأدوات فيه 18 أداة.",
+        points: [
+          "دمج: اجمع عدة ملفات PDF في ملف واحد",
+          "تقسيم: افصل الصفحات في ملفات مستقلة",
+          "ضغط: صغّر حجم الملف",
+          "من صورة إلى PDF: حوّل الصور إلى مستند PDF",
+          "من PDF إلى صورة: احفظ الصفحات كصور",
+          "تدوير: أدر ملف PDF يمينًا أو يسارًا",
+          "حماية: أمّنه بكلمة مرور",
+          "علامة مائية: أضف كتابة أو علامة إلى المستند",
+          "إدارة الصفحات: احذف الصفحات وغيّر ترتيبها",
+          "مسح: حوّل المستند إلى PDF بالكاميرا",
+          "إضافة توقيع: ضع توقيعًا إلكترونيًا على PDF",
+          "التعرّف على النص: استخرج النص من الصورة على الجهاز",
+          "استخراج النص من PDF: أخرج النص من صفحات PDF",
+          "من PDF إلى Word: لتحرير المحتوى",
+          "معاينة PDF: اعرض الصفحات وكبّرها",
+          "عمليات دفعة: عالج عدة ملفات PDF معًا",
+          "اختر صفحات واستخرج: أخرج ملفًا جديدًا من الصفحات المختارة",
+          "من Word إلى PDF: حوّل ملف DOCX إلى مستند PDF",
+        ],
+        notes: [
+          "تعرض الشاشة الرئيسية المستندات الأخيرة، مع نوع العملية والتاريخ، مثل دمج.",
+          "شاشة الملف جاهز تعرض اسم الملف الجديد. المشاركة والحفظ في مجلد وتغيير المجلد متاحة. Drive ما زال قريبًا.",
+          "لغة التطبيق: Azərbaycan dili وEnglish وTürkçe وРусский والعربية. قفل التطبيق يمكن أن يكون PIN أو بصمة. يمكن إعادة تعيين القفل وإخفاء الأسماء في المستندات الأخيرة وطلب تأكيد قبل المشاركة. ملفاتك تبقى على جهازك.",
+        ],
       },
       {
         id: "plans",
@@ -486,7 +592,32 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "pdf",
         q: "Что такое Nibras PDF?",
-        a: "Nibras PDF — мобильное приложение для работы с документами и изображениями. Оно задумано для объединения, разделения, сжатия и повседневной работы с PDF. Сейчас оно скоро появится.",
+        a: "Nibras PDF — мобильное приложение для работы с документами и изображениями. Его линия: Просто · Быстро · Сильно. В нижнем меню есть Главная и Инструменты. Сверху — профиль, Premium и Настройки. В разделе инструментов 18 средств.",
+        points: [
+          "Объединить: собрать несколько PDF в один файл",
+          "Разделить: вынести страницы в отдельные файлы",
+          "Сжать: уменьшить размер файла",
+          "Из изображения в PDF: превратить изображения в документ PDF",
+          "Из PDF в изображение: сохранить страницы как картинки",
+          "Повернуть: повернуть PDF влево или вправо",
+          "Защитить: закрыть паролем",
+          "Водяной знак: добавить на документ текст или знак",
+          "Управлять страницами: удалять страницы и менять их порядок",
+          "Сканировать: превратить документ в PDF камерой",
+          "Добавить подпись: поставить на PDF электронную подпись",
+          "Распознать текст: извлечь текст из изображения на устройстве",
+          "Извлечь текст из PDF: вынуть текст со страниц PDF",
+          "Из PDF в Word: чтобы править содержание",
+          "Просмотр PDF: смотреть страницы и увеличивать",
+          "Пакетные действия: обработать несколько PDF сразу",
+          "Выбрать страницы и извлечь: сделать новый файл из выбранных страниц",
+          "Из Word в PDF: превратить файл DOCX в документ PDF",
+        ],
+        notes: [
+          "На главном экране видны недавние документы: тип действия и дата, например Объединить.",
+          "На экране Файл готов показано имя нового файла. Есть Поделиться, Сохранить в папку и Сменить папку. Drive пока Скоро.",
+          "Язык приложения: Azərbaycan dili, English, Türkçe, Русский и العربية. Блокировка приложения может быть PIN или биометрией. Можно сбросить блокировку, скрыть имена в недавних документах и спрашивать подтверждение перед отправкой. Ваши файлы остаются на устройстве.",
+        ],
       },
       {
         id: "plans",
@@ -594,6 +725,10 @@ const TOPIC_HREF: Record<string, string> = {
   dev: "https://dev.nibrascode.com/",
   apk: "https://studio.nibrascode.com/",
 };
+
+export function faqAnswerText(item: FaqItem) {
+  return [item.a, ...(item.points ?? []), ...(item.notes ?? [])].join(" ");
+}
 
 export function faqSlug(id: string) {
   return FAQ_SLUGS[id] ?? id;
