@@ -74,6 +74,9 @@ export const LIBRARY: Record<LibrarySection, { title: TKey; topics: readonly Lib
       { slug: "maven", label: "prog_maven" },
       { slug: "yaml", label: "prog_yaml" },
       { slug: "systemd", label: "prog_systemd" },
+      { slug: "postgresql", label: "prog_postgresql" },
+      { slug: "markdown", label: "prog_markdown" },
+      { slug: "rsync", label: "prog_rsync" },
     ],
   },
 };

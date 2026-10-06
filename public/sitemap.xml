@@ -4000,5 +4000,155 @@
     <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/systemd"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/systemd"/>
   </url>
+  <url>
+    <loc>https://www.nibrascode.com/programming/postgresql</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/postgresql"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/postgresql"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/postgresql"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/postgresql"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/postgresql"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/postgresql"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/en/programming/postgresql</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/postgresql"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/postgresql"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/postgresql"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/postgresql"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/postgresql"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/postgresql"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/tr/programming/postgresql</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/postgresql"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/postgresql"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/postgresql"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/postgresql"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/postgresql"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/postgresql"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/ar/programming/postgresql</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/postgresql"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/postgresql"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/postgresql"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/postgresql"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/postgresql"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/postgresql"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/ru/programming/postgresql</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/postgresql"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/postgresql"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/postgresql"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/postgresql"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/postgresql"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/postgresql"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/programming/markdown</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/markdown"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/markdown"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/markdown"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/markdown"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/markdown"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/markdown"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/en/programming/markdown</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/markdown"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/markdown"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/markdown"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/markdown"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/markdown"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/markdown"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/tr/programming/markdown</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/markdown"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/markdown"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/markdown"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/markdown"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/markdown"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/markdown"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/ar/programming/markdown</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/markdown"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/markdown"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/markdown"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/markdown"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/markdown"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/markdown"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/ru/programming/markdown</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/markdown"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/markdown"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/markdown"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/markdown"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/markdown"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/markdown"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/programming/rsync</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/rsync"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/rsync"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/rsync"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/rsync"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/rsync"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/rsync"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/en/programming/rsync</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/rsync"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/rsync"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/rsync"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/rsync"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/rsync"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/rsync"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/tr/programming/rsync</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/rsync"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/rsync"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/rsync"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/rsync"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/rsync"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/rsync"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/ar/programming/rsync</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/rsync"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/rsync"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/rsync"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/rsync"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/rsync"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/rsync"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/ru/programming/rsync</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/rsync"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/rsync"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/rsync"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/rsync"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/rsync"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/rsync"/>
+  </url>
 </urlset>
 

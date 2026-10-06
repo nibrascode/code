@@ -314,28 +314,28 @@ const PAGES: Record<string, Copy> = {
   "/programming": {
     az: {
       title: "Proqramlaşdırma — Nibras Code",
-      description: "Python, Java, React, Maven, YAML, systemd, Composer, Linux və digər dillər və alətlər.",
-      keywords: "proqramlaşdırma, Maven, YAML, systemd, Composer, Linux, React",
+      description: "Python, Java, React, PostgreSQL, Markdown, rsync, Maven, Linux və digər dillər və alətlər.",
+      keywords: "proqramlaşdırma, PostgreSQL, Markdown, rsync, Maven, Linux, React",
     },
     en: {
       title: "Programming — Nibras Code",
-      description: "Pages on Python, Java, React, Maven, YAML, systemd, Composer, Linux, and other languages and tools.",
-      keywords: "programming, Maven, YAML, systemd, Composer, Linux, React",
+      description: "Pages on Python, Java, React, PostgreSQL, Markdown, rsync, Maven, Linux, and other languages and tools.",
+      keywords: "programming, PostgreSQL, Markdown, rsync, Maven, Linux, React",
     },
     tr: {
       title: "Programlama — Nibras Code",
-      description: "Python, Java, React, Maven, YAML, systemd, Composer, Linux ve diğer diller ile araçlar.",
-      keywords: "programlama, Maven, YAML, systemd, Composer, Linux, React",
+      description: "Python, Java, React, PostgreSQL, Markdown, rsync, Maven, Linux ve diğer diller ile araçlar.",
+      keywords: "programlama, PostgreSQL, Markdown, rsync, Maven, Linux, React",
     },
     ar: {
       title: "برمجة — Nibras Code",
-      description: "صفحات عن Python وJava وReact وMaven وYAML وsystemd وComposer وLinux وأدوات أخرى.",
-      keywords: "برمجة, Maven, YAML, systemd, Composer, Linux, React",
+      description: "صفحات عن Python وJava وReact وPostgreSQL وMarkdown وrsync وMaven وLinux وأدوات أخرى.",
+      keywords: "برمجة, PostgreSQL, Markdown, rsync, Maven, Linux, React",
     },
     ru: {
       title: "Программирование — Nibras Code",
-      description: "Страницы о Python, Java, React, Maven, YAML, systemd, Composer, Linux и других языках и инструментах.",
-      keywords: "программирование, Maven, YAML, systemd, Composer, Linux, React",
+      description: "Страницы о Python, Java, React, PostgreSQL, Markdown, rsync, Maven, Linux и других языках и инструментах.",
+      keywords: "программирование, PostgreSQL, Markdown, rsync, Maven, Linux, React",
     },
   },
   ...Object.fromEntries(PROGRAMMING.map((page) => [`/programming/${page.slug}`, page.seo])),

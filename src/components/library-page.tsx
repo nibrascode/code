@@ -153,6 +153,9 @@ const PROGRAM_NAMES: Record<string, string> = {
   maven: "Maven",
   yaml: "YAML",
   systemd: "systemd",
+  postgresql: "PostgreSQL",
+  markdown: "Markdown",
+  rsync: "rsync",
 };
 
 const HTML_TRIES = [
