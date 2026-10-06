@@ -374,6 +374,10 @@ const PROGRAM_NAMES: Record<string, string> = {
   postgresql: "PostgreSQL",
   markdown: "Markdown",
   rsync: "rsync",
+  "git-github": "Git və GitHub",
+  api: "API",
+  "python-javascript": "Python və JavaScript",
+  localhost: "Localhost",
 };
 
 function toolName(slug: string) {
