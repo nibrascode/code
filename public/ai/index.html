@@ -535,17 +535,22 @@
     .ddel.sure { color: #ffb3bf; font-size: 12px; font-weight: 700; }
     .dempty { margin: 18px 4px; color: var(--muted); font-size: 13px; text-align: center; }
     .dnote { margin: 0; text-align: center; color: #8fd9cd; font-size: 12px; font-weight: 600; }
-    .dtools { display: flex; gap: 8px; }
-    .dtools .newchat.on { border-color: #8fb4ff; color: #e6efff; }
-    .langs { display: flex; gap: 6px; }
-    .langs button {
-      flex: 1; min-height: 32px; border-radius: 9px; cursor: pointer; padding: 0;
+    .dtools { display: flex; flex-direction: column; gap: 8px; }
+    .dtools .newchat.on { border-color: #8fb4ff; color: #e6efff; background: rgba(143, 180, 255, .16); }
+    .langhead, .langlist button {
+      min-height: 40px; border-radius: 12px; cursor: pointer; text-align: start; padding: 0 12px;
       border: 1px solid rgba(130, 170, 255, .28);
-      background: transparent; color: #c9d4ee; font-size: 12px; font-weight: 800;
+      background: rgba(8, 12, 28, .55); color: #d5def3; font-size: 14px; font-weight: 700;
     }
-    .langs button.on { border-color: #5eead4; color: #b8fbef; background: rgba(45, 212, 191, .12); }
-    .aboutin { flex: 1; min-height: 0; overflow: auto; }
-    .aboutin[hidden] { display: none; }
+    .langhead { display: flex; align-items: center; justify-content: space-between; }
+    .langhead::after { content: "▾"; color: #8fd9cd; font-size: 12px; }
+    .langhead[aria-expanded="true"]::after { content: "▴"; }
+    .langlist { display: none; flex-direction: column; gap: 6px; }
+    .langlist.on { display: flex; }
+    .langlist button.on { border-color: #5eead4; color: #b8fbef; background: rgba(45, 212, 191, .12); }
+    .dlist.is-off { display: none !important; }
+    .aboutin { display: none; flex: 1; min-height: 0; overflow: auto; }
+    .drawer.show-about .aboutin { display: block; }
     .aboutin h2 { margin: 14px 0 6px; font-size: 15px; letter-spacing: -0.02em; }
     .aboutin p { margin: 0 0 8px; color: #d5dced; font-size: 13.5px; line-height: 1.55; }
     .aboutin .leadline { color: #f4f7ff; }
@@ -663,16 +668,17 @@
     <div class="dtools">
       <button class="newchat" id="newchat" type="button">+ Yeni söhbət</button>
       <button class="newchat" id="aboutbtn" type="button">Haqqında</button>
-    </div>
-    <div class="langs" id="langs">
-      <button type="button" data-lang="az">AZ</button>
-      <button type="button" data-lang="en">EN</button>
-      <button type="button" data-lang="tr">TR</button>
-      <button type="button" data-lang="ar">AR</button>
-      <button type="button" data-lang="ru">RU</button>
+      <button class="langhead" id="langhead" type="button" aria-expanded="false">Azərbaycan</button>
+      <div class="langlist" id="langs">
+        <button type="button" data-lang="az">Azərbaycan</button>
+        <button type="button" data-lang="en">English</button>
+        <button type="button" data-lang="tr">Türkçe</button>
+        <button type="button" data-lang="ar">العربية</button>
+        <button type="button" data-lang="ru">Русский</button>
+      </div>
     </div>
     <div class="dlist" id="dlist"></div>
-    <div class="aboutin" id="aboutin" hidden></div>
+    <div class="aboutin" id="aboutin"></div>
     <p class="dnote" id="dnote">Söhbət bu brauzerdə 24 saat qalır</p>
   </aside>
   <div class="toast" id="toast" role="status"></div>
@@ -681,6 +687,7 @@
     const LIMIT = 40;
     const KEY = "nibras_ai_v2";
     const LANG_KEY = "nibras_ai_lang";
+    const LANG_NAME = { az: "Azərbaycan", en: "English", tr: "Türkçe", ar: "العربية", ru: "Русский" };
     const UI = {
       az: { chats: "Söhbətlər", close: "Bağla", newChat: "+ Yeni söhbət", about: "Haqqında", note: "Söhbət bu brauzerdə 24 saat qalır", empty: "Hələ söhbət yoxdur", chat: "Söhbət", del: "Söhbəti sil", sure: "Sil?", deleted: "Söhbət silindi", missing: "Söhbət tapılmadı", noopen: "Söhbət açılmadı", wait: "Cavab gözlənilir", now: "indi", min: " dəq əvvəl", hour: " saat əvvəl", kicker: "SƏNİN AI KÖMƏKÇİN", ask: "Sual ver", create: "Fikir ver", code: "Kod yaz", image: "Şəkil düzəlt", ph: "Nə ilə kömək edim?", codeL: "Kod rejimi — nə yazım?", codeP: "Məsələn: Python-da iki ədədi toplayan funksiya", imgL: "Şəkil hazırla — nə çəkim?", imgE: "Şəkil düzəlt — nə dəyişsin?", imgP: "Məsələn: qaranlıq masada mavi N loqosu", imgEp: "Bu şəkildə nəyi dəyişim?", createL: "Fikir rejimi — mövzunu yaz", createP: "Məsələn: tətbiq üçün qısa ad fikri", askL: "Sual rejimi — sualını yaz", askP: "Sualını buraya yaz", limit: "Limit", model: "Model", privacy: "Məxfilik", lead: "Nibras AI Nibras Code-un ayrıca köməkçisidir. Tətbiq siyahısından ayrıdır: burada sual verilir, fikir alınır, kod yazılır və şəkil hazırlanır. Layihə Mahir Əliyevin müstəqil işidir.", lim1: "Modelə gedən sual gündə 40-dır. Sayğac yalnız model həqiqətən çağırılanda artır. Quran ayəsi, təfsir, hədis, lüğət və saytda hazır duran cavab bu 40-a düşmür.", lim2: "Limit dolanda model sabaha qədər dayanır. Hazır cavablar isə həmin gün də gəlir. Bir mesaj 800 simvoldan uzun olsa, server artığını kəsir.", lim3: "Şəkil PNG, JPG və ya WEBP ola bilər. Göndərilməzdən əvvəl ən uzun tərəfi 1024 pikselə endirilir.", mod1: "Bir modelin adı yoxdur. Hazır mənbə varsa model çağırılmır: ayə, təfsir, hədis, lüğət və saytın öz cavabı buradan gəlir.", mod2: "Qalan sual serverdə növbə ilə xarici modellərə gedir. Kod, hesab və adi söhbət eyni sıranı işlətmir. Ona görə cavab hər dəfə eyni yerdən gəlmir.", pri1: "Söhbət bu brauzerdə 24 saat qalır, sonra silinir. Hesab açılmır. Bu brauzer üçün təsadüfi nömrə də burada saxlanır.", pri2: "Model lazım olanda mesaj və son söhbət serverə, oradan seçilən modelə gedir. Hazır cavabda mesajın mətni saxlanmır. Sayğac yalnız hadisənin növünü göndərir, yazdığın cümləni yox. Brauzerdə izləmə bağlıdırsa sayğac getmir.", pri3: "Server söhbəti qəbul edirsə, eyni mətn həmin cihaz nömrəsi ilə orada da saxlanmağa çalışılır. 24 saatdan sonra siyahıdan düşür." },
       en: { chats: "Chats", close: "Close", newChat: "+ New chat", about: "About", note: "A chat stays in this browser for 24 hours", empty: "No chat yet", chat: "Chat", del: "Delete chat", sure: "Delete?", deleted: "Chat deleted", missing: "Chat was not found", noopen: "Chat did not open", wait: "Waiting for a reply", now: "now", min: " min ago", hour: " h ago", kicker: "YOUR AI ASSISTANT", ask: "Ask", create: "Ideas", code: "Write code", image: "Edit image", ph: "How can I help?", codeL: "Code mode — what should I write?", codeP: "For example: a Python function that adds two numbers", imgL: "Make an image — what should I draw?", imgE: "Edit image — what should change?", imgP: "For example: a blue N logo on a dark desk", imgEp: "What should change in this image?", createL: "Idea mode — write the topic", createP: "For example: a short name for an app", askL: "Question mode — write your question", askP: "Write your question here", limit: "Limit", model: "Model", privacy: "Privacy", lead: "Nibras AI is Nibras Code’s separate assistant. It is apart from the app list: here you ask, get an idea, write code, and make an image. The project is Mahir Əliyev’s independent work.", lim1: "A question that reaches a model is limited to 40 a day. The counter grows only when a model is really called. A Quran verse, tafsir, hadith, a word meaning, and a ready answer on the site do not use those 40.", lim2: "When the limit is full, the model stops until tomorrow. Ready answers still come that day. If one message is longer than 800 characters, the server cuts the rest.", lim3: "An image can be PNG, JPG, or WEBP. Before it is sent, the long side is reduced to 1024 pixels.", mod1: "There is no single model name. If a ready source exists, no model is called: a verse, tafsir, hadith, a word meaning, and the site’s own answer come from there.", mod2: "The remaining question goes to outside models in turn. Code, a calculation, and an ordinary chat do not use the same order. That is why an answer does not come from the same place every time.", pri1: "A chat stays in this browser for 24 hours, then it is deleted. No account is opened. A random number for this browser is also kept here.", pri2: "When a model is needed, the message and the recent chat go to the server, then to the chosen model. A ready answer does not keep the message text. The counter sends only the kind of event, not the sentence you wrote. If tracking is off in the browser, the counter does not go.", pri3: "If the server accepts the chat, the same text is also kept there with that device number. After 24 hours it drops off the list." },
@@ -1727,6 +1734,7 @@
       document.getElementById("kicker").textContent = t("kicker");
       document.querySelectorAll("[data-ui]").forEach(function (el) { el.textContent = t(el.getAttribute("data-ui")); });
       document.querySelectorAll("#langs button").forEach(function (el) { el.classList.toggle("on", el.getAttribute("data-lang") === code); });
+      document.getElementById("langhead").textContent = LANG_NAME[code];
       menuBtn.setAttribute("aria-label", t("chats"));
       menuBtn.setAttribute("title", t("chats"));
       drawer.setAttribute("aria-label", t("chats"));
@@ -1817,18 +1825,27 @@
     document.getElementById("dclose").addEventListener("click", function () { setDrawer(false); });
     const aboutBtn = document.getElementById("aboutbtn");
     const aboutIn = document.getElementById("aboutin");
+    const langHead = document.getElementById("langhead");
+    const langList = document.getElementById("langs");
     let aboutOn = false;
+    function setLangOpen(on) {
+      langList.classList.toggle("on", on);
+      langHead.setAttribute("aria-expanded", on ? "true" : "false");
+    }
     function setAbout(on) {
       aboutOn = on;
-      aboutIn.hidden = !on;
-      dlist.hidden = on;
+      drawer.classList.toggle("show-about", on);
+      dlist.classList.toggle("is-off", on);
       aboutBtn.classList.toggle("on", on);
+      if (on) { setLangOpen(false); aboutIn.scrollTop = 0; }
     }
     aboutBtn.addEventListener("click", function () { setAbout(!aboutOn); });
-    document.getElementById("langs").addEventListener("click", function (e) {
+    langHead.addEventListener("click", function () { setLangOpen(!langList.classList.contains("on")); });
+    langList.addEventListener("click", function (e) {
       const btn = e.target.closest("button");
       if (!btn) return;
       applyLang(btn.getAttribute("data-lang"));
+      setLangOpen(false);
     });
     scrim.addEventListener("click", function () { setDrawer(false); });
     document.getElementById("newchat").addEventListener("click", newChat);
