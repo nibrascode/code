@@ -17,7 +17,7 @@ const COPY: Record<
     zipNote: string;
     picked: string;
     studio: string;
-    caps: [string, string, string, string];
+    caps: [string, string, string, string, string];
   }
 > = {
   az: {
@@ -33,7 +33,7 @@ const COPY: Record<
     zipNote: "Zip seçilən kimi Nibras Studio özü açılır.",
     picked: "Studio açıldı",
     studio: "Nibras Studio-nu aç",
-    caps: ["Veb qeyd", "Sayğac", "Səhifə içində", "Üç kart"],
+    caps: ["Veb qeyd", "Sayğac", "Səhifə içində", "Üç kart", "İnkişaf etmiş"],
   },
   en: {
     shots: "Samples on a black screen",
@@ -48,7 +48,7 @@ const COPY: Record<
     zipNote: "Nibras Studio opens by itself as soon as you choose the zip.",
     picked: "Studio opened",
     studio: "Open Nibras Studio",
-    caps: ["Web notes", "Counter", "Page inside", "Three cards"],
+    caps: ["Web notes", "Counter", "Page inside", "Three cards", "Advanced"],
   },
   tr: {
     shots: "Kara ekranda örnekler",
@@ -63,7 +63,7 @@ const COPY: Record<
     zipNote: "Zip seçilir seçilmez Nibras Studio kendi açılır.",
     picked: "Studio açıldı",
     studio: "Nibras Studio'yu aç",
-    caps: ["Web not", "Sayaç", "Sayfa içinde", "Üç kart"],
+    caps: ["Web not", "Sayaç", "Sayfa içinde", "Üç kart", "Gelişmiş"],
   },
   ar: {
     shots: "أمثلة على شاشة سوداء",
@@ -78,7 +78,7 @@ const COPY: Record<
     zipNote: "يفتح Nibras Studio وحده فور اختيار الـ zip.",
     picked: "فُتح Studio",
     studio: "افتح Nibras Studio",
-    caps: ["ملاحظة ويب", "عدّاد", "صفحة في الداخل", "ثلاث بطاقات"],
+    caps: ["ملاحظة ويب", "عدّاد", "صفحة في الداخل", "ثلاث بطاقات", "متقدّم"],
   },
   ru: {
     shots: "Примеры на чёрном экране",
@@ -93,11 +93,12 @@ const COPY: Record<
     zipNote: "Nibras Studio открывается сам, как только выбран zip.",
     picked: "Studio открылся",
     studio: "Открыть Nibras Studio",
-    caps: ["Веб-заметки", "Счётчик", "Страница внутри", "Три карточки"],
+    caps: ["Веб-заметки", "Счётчик", "Страница внутри", "Три карточки", "Развитый"],
   },
 };
 
 const SHOTS = [
+  { src: "/apk/inkisaf.jpg", alt: "İnkişaf etmiş" },
   { src: "/apk/qeyd.jpg", alt: "Qeyd" },
   { src: "/apk/saygac.jpg", alt: "Sayğac" },
   { src: "/apk/sehife.jpg", alt: "Səhifə" },

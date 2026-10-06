@@ -1,10 +1,26 @@
 import type { Lang } from "@/lib/i18n";
 import type { ProgrammingSection } from "@/lib/programming";
 
-const FOLDERS = `app/src/main/AndroidManifest.xml
-app/src/main/java/.../ekranlar/
-app/src/main/res/layout/
-server/  (telefonun özündə deyil)`;
+const FOLDERS = `Qeyd/
+  settings.gradle
+  build.gradle
+  gradle.properties
+  gradlew
+  gradle/wrapper/
+  app/
+    build.gradle
+    src/main/
+      AndroidManifest.xml
+      java/az/studio/qeyd/
+        MainActivity.kt
+        SiyahiEkran.kt
+        QeydEkran.kt
+        GirisEkran.kt
+      res/layout/
+      res/values/
+      res/mipmap-hdpi/
+      assets/
+  server/          (ayrı ünvanda)`;
 
 export function apkAdvanced(lang: Lang): ProgrammingSection[] {
   const all: Record<Lang, ProgrammingSection[]> = {
@@ -93,9 +109,11 @@ export function apkAdvanced(lang: Lang): ProgrammingSection[] {
             ],
           },
           {
-            heading: "Qovluqlar böyüyəndə",
+            heading: "Gradle qovluqları",
             paragraphs: [
-              "Sadə native tətbiqdə bir ekran activity_main içində durur. İnkişaf etmiş tətbiqdə hər ekranın öz faylı olur. Server qovluğu telefon layihəsinin içində olmaya bilər. O, başqa ünvanda işləyir. APK yalnız ona sorğu göndərir.",
+              "Sadə tətbiqdə bir ekran activity_main içində durur. İnkişaf etmiş layihədə hər ekranın öz faylı olur və Gradle onları bir APK-ya yığır. Kökdə settings.gradle hansı modulun olduğunu deyir, adətən app. build.gradle yığımın qaydasıdır. gradle/wrapper və gradlew Gradle-ın özünü layihə ilə birlikdə saxlayır ki, başqa kompüterdə eyni versiya işləsin. gradle.properties kiçik ayarlardır.",
+              "Əsas kod app qovluğundadır. app/build.gradle kitabxanaları və SDK versiyasını yazır. src/main/java altında paket qovluqları durur: siyahı, bir qeydin içi və giriş ayrı fayllardır. res/layout ekranın düzümüdür, res/mipmap ikondur, assets içinə qoyulan səhifə və ya şriftdir. app/build və .gradle qovluqları yığım zamanı özü yaranır. Onları əlinlə yazmırsan və Git-ə qoymursan.",
+              "Server qovluğu telefon layihəsinin içində olmaya bilər. O, başqa ünvanda işləyir. APK yalnız ona sorğu göndərir. Aşağıdakı qara ekran bu qovluqların verdiyi tətbiqdir: siyahı, şəkil yeri və alt menyu.",
             ],
             code: FOLDERS,
             after: [
@@ -222,9 +240,11 @@ export function apkAdvanced(lang: Lang): ProgrammingSection[] {
             ],
           },
           {
-            heading: "When the folders grow",
+            heading: "Gradle folders",
             paragraphs: [
-              "In a simple native app one screen stands in activity_main. In an advanced app each screen has its own file. The server folder may not sit inside the phone project. It runs at another address. The APK only sends it a request.",
+              "In a simple app one screen stands in activity_main. In an advanced project each screen has its own file, and Gradle packs them into one APK. At the root, settings.gradle says which module exists, usually app. build.gradle is the rule of the build. gradle/wrapper and gradlew keep Gradle itself with the project, so another computer uses the same version. gradle.properties holds small settings.",
+              "The real code sits in the app folder. app/build.gradle writes the libraries and the SDK version. Under src/main/java the package folders stand: the list, the inside of one note, and login are separate files. res/layout is the screen arrangement, res/mipmap is the icon, and assets is a page or a font you put inside. The app/build and .gradle folders appear by themselves during the build. You do not write them by hand and you do not put them in Git.",
+              "The server folder may not sit inside the phone project. It runs at another address. The APK only sends it a request. The black screen below is the app these folders produce: a list, a place for a picture, and a bottom menu.",
             ],
             code: FOLDERS,
             after: [
@@ -336,9 +356,11 @@ export function apkAdvanced(lang: Lang): ProgrammingSection[] {
             ],
           },
           {
-            heading: "Klasörler büyüyünce",
+            heading: "Gradle klasörleri",
             paragraphs: [
-              "Basit native uygulamada bir ekran activity_main içinde durur. Gelişmiş uygulamada her ekranın kendi dosyası olur. Sunucu klasörü telefon projesinin içinde olmayabilir. O, başka adreste çalışır. APK yalnız ona sorgu gönderir.",
+              "Basit uygulamada bir ekran activity_main içinde durur. Gelişmiş projede her ekranın kendi dosyası olur ve Gradle onları bir APK'ya toplar. Kökte settings.gradle hangi modülün olduğunu söyler, genellikle app. build.gradle derlemenin kuralıdır. gradle/wrapper ve gradlew Gradle'ın kendisini projeyle birlikte tutar ki başka bilgisayarda aynı sürüm çalışsın. gradle.properties küçük ayarlardır.",
+              "Asıl kod app klasöründedir. app/build.gradle kütüphaneleri ve SDK sürümünü yazar. src/main/java altında paket klasörleri durur: liste, bir notun içi ve giriş ayrı dosyalardır. res/layout ekranın düzenidir, res/mipmap ikondur, assets içine konan sayfa ya da yazı tipidir. app/build ve .gradle klasörleri derleme sırasında kendi oluşur. Onları elle yazmazsın ve Git'e koymazsın.",
+              "Sunucu klasörü telefon projesinin içinde olmayabilir. O, başka adreste çalışır. APK yalnız ona sorgu gönderir. Aşağıdaki kara ekran bu klasörlerin verdiği uygulamadır: liste, resim yeri ve alt menü.",
             ],
             code: FOLDERS,
             after: [
@@ -450,9 +472,11 @@ export function apkAdvanced(lang: Lang): ProgrammingSection[] {
             ],
           },
           {
-            heading: "حين تكبر المجلدات",
+            heading: "مجلدات Gradle",
             paragraphs: [
-              "في التطبيق الأصلي البسيط تقف شاشة واحدة داخل activity_main. في التطبيق المتقدّم لكل شاشة ملفها. مجلد الخادم قد لا يقف داخل مشروع الهاتف. هو يعمل على عنوان آخر. APK يرسل إليه طلباً فقط.",
+              "في التطبيق البسيط تقف شاشة واحدة داخل activity_main. في المشروع المتقدّم لكل شاشة ملفها ويجمعها Gradle في APK واحد. في الجذر يقول settings.gradle أي وحدة موجودة، عادة app. build.gradle قاعدة الجمع. gradle/wrapper وgradlew يبقيان Gradle نفسه مع المشروع كي تعمل النسخة نفسها على حاسوب آخر. gradle.properties إعدادات صغيرة.",
+              "الكود الحقيقي في مجلد app. app/build.gradle يكتب المكتبات وإصدار SDK. تحت src/main/java تقف مجلدات الحزمة: القائمة وداخل الملاحظة والدخول ملفات منفصلة. res/layout ترتيب الشاشة وres/mipmap الأيقونة وassets صفحة أو خط تضعه في الداخل. مجلدا app/build و.gradle يظهران وحدهما أثناء الجمع. لا تكتبهما باليد ولا تضعهما في Git.",
+              "مجلد الخادم قد لا يقف داخل مشروع الهاتف. هو يعمل على عنوان آخر. APK يرسل إليه طلباً فقط. الشاشة السوداء في الأسفل هي التطبيق الذي تعطيه هذه المجلدات: قائمة ومكان للصورة وقائمة سفلية.",
             ],
             code: FOLDERS,
             after: [
@@ -564,9 +588,11 @@ export function apkAdvanced(lang: Lang): ProgrammingSection[] {
             ],
           },
           {
-            heading: "Когда папки растут",
+            heading: "Папки Gradle",
             paragraphs: [
-              "В простом нативном приложении один экран стоит в activity_main. В развитом у каждого экрана свой файл. Папка сервера может не стоять внутри проекта телефона. Она работает по другому адресу. APK только шлёт ей запрос.",
+              "В простом приложении один экран стоит в activity_main. В развитом проекте у каждого экрана свой файл, и Gradle собирает их в один APK. В корне settings.gradle говорит, какой модуль есть, обычно app. build.gradle — правило сборки. gradle/wrapper и gradlew держат сам Gradle вместе с проектом, чтобы на другом компьютере работала та же версия. gradle.properties — мелкие настройки.",
+              "Настоящий код лежит в папке app. app/build.gradle пишет библиотеки и версию SDK. Под src/main/java стоят папки пакета: список, внутренность заметки и вход — отдельные файлы. res/layout — раскладка экрана, res/mipmap — значок, assets — страница или шрифт, который кладут внутрь. Папки app/build и .gradle появляются сами во время сборки. Их не пишут руками и не кладут в Git.",
+              "Папка сервера может не стоять внутри проекта телефона. Она работает по другому адресу. APK только шлёт ей запрос. Чёрный экран ниже — приложение, которое дают эти папки: список, место для картинки и нижнее меню.",
             ],
             code: FOLDERS,
             after: [
