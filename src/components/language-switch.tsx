@@ -33,7 +33,7 @@ export function LanguageSwitch() {
       >
         {LANGS.map((code) => (
           <option key={code} value={code}>
-            {LANG_META[code].label} · {LANG_META[code].native}
+            {LANG_META[code].label}
           </option>
         ))}
       </select>
