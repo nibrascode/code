@@ -7,7 +7,7 @@ import { RESURSLAR } from "@/lib/resurslar";
 import { findResourceTopic, resourceArticleFromPath } from "@/lib/resource-topics";
 import { RU_RESOURCES } from "@/lib/ru-resources";
 
-export const SITE = "https://nibrascode.com";
+export const SITE = "https://www.nibrascode.com";
 
 type PageSeo = {
   title: string;
@@ -358,25 +358,92 @@ const PAGES: Record<string, Copy> = {
       return [`/ru/resources/${page.slug}`, { az: copy, en: copy, tr: copy, ar: copy, ru: copy }];
     }),
   ),
-  "/guides/pdf": seoLeaf("PDF necə... — Bələdçilər", "How to PDF... — Guides", "كيف PDF... — أدلة", "Как PDF... — Руководства"),
-  "/guides/android": seoLeaf("Android-də necə... — Bələdçilər", "How to on Android... — Guides", "كيف على أندرويد... — أدلة", "Как на Android... — Руководства"),
-  "/guides/ereb-dili": seoLeaf("Ərəb dili necə... — Bələdçilər", "How to Arabic... — Guides", "كيف العربية... — أدلة", "Как арабский... — Руководства"),
+  "/guides/pdf": {
+    az: {
+      title: "PDF bələdçisi — Nibras Code",
+      description: "PDF faylını birləşdirmək, bölmək və sıxışdırmaq üçün qısa bələdçi. Ətraflı addımlar Nibras PDF çıxanda bu səhifədə olacaq.",
+    },
+    en: {
+      title: "PDF guide — Nibras Code",
+      description: "A short guide to merging, splitting, and compressing a PDF. Detailed steps will be added here when Nibras PDF is released.",
+    },
+    tr: {
+      title: "PDF rehberi — Nibras Code",
+      description: "PDF birleştirme, bölme ve sıkıştırma için kısa rehber. Ayrıntılı adımlar Nibras PDF çıkınca bu sayfada olacak.",
+    },
+    ar: {
+      title: "دليل PDF — Nibras Code",
+      description: "دليل قصير لدمج PDF وتقسيمه وضغطه. الخطوات المفصّلة تُضاف هنا عند إصدار Nibras PDF.",
+    },
+    ru: {
+      title: "Руководство по PDF — Nibras Code",
+      description: "Короткое руководство: объединить, разделить и сжать PDF. Подробные шаги появятся здесь, когда выйдет Nibras PDF.",
+    },
+  },
+  "/guides/android": {
+    az: {
+      title: "Android bələdçisi — Nibras Code",
+      description: "Nibras Code tətbiqlərini Android telefonda tapmaq və quraşdırmaq üçün qısa bələdçi.",
+    },
+    en: {
+      title: "Android guide — Nibras Code",
+      description: "A short guide to finding and installing Nibras Code apps on an Android phone.",
+    },
+    tr: {
+      title: "Android rehberi — Nibras Code",
+      description: "Nibras Code uygulamalarını Android telefonda bulmak ve kurmak için kısa rehber.",
+    },
+    ar: {
+      title: "دليل Android — Nibras Code",
+      description: "دليل قصير للعثور على تطبيقات Nibras Code وتثبيتها على هاتف أندرويد.",
+    },
+    ru: {
+      title: "Руководство по Android — Nibras Code",
+      description: "Короткое руководство: как найти и установить приложения Nibras Code на телефон Android.",
+    },
+  },
+  "/guides/ereb-dili": {
+    az: {
+      title: "Ərəb dili bələdçisi — Nibras Code",
+      description: "Ərəb dilinə Azərbaycan dilindən başlamaq üçün qısa bələdçi. Əsas tətbiq Nibras Arabic-dir.",
+    },
+    en: {
+      title: "Arabic guide — Nibras Code",
+      description: "A short guide to starting Arabic from Azerbaijani. The main app is Nibras Arabic.",
+    },
+    tr: {
+      title: "Arapça rehberi — Nibras Code",
+      description: "Azerbaycan Türkçesinden Arapçaya başlamak için kısa rehber. Ana uygulama Nibras Arabic'tir.",
+    },
+    ar: {
+      title: "دليل العربية — Nibras Code",
+      description: "دليل قصير لبدء العربية من الأذربيجانية. التطبيق الأساسي هو Nibras Arabic.",
+    },
+    ru: {
+      title: "Руководство по арабскому — Nibras Code",
+      description: "Короткое руководство: начать арабский с азербайджанского. Основное приложение — Nibras Arabic.",
+    },
+  },
   "/contact": {
     az: {
       title: "Əlaqə — Nibras Code",
-      description: "Nibras Code ilə əlaqə: NIBRASCODE@GMAIL.COM",
+      description: "Nibras Code ilə əlaqə üçün e-poçt: nibrascode@gmail.com. Tətbiq, səhifə və ya məxfilik haqqında sual yaza bilərsiniz.",
     },
     en: {
       title: "Contact — Nibras Code",
-      description: "Contact Nibras Code: NIBRASCODE@GMAIL.COM",
+      description: "Contact Nibras Code by email at nibrascode@gmail.com. You can ask about an app, a page, or a privacy policy.",
     },
     ar: {
       title: "تواصل — Nibras Code",
-      description: "للتواصل مع Nibras Code: NIBRASCODE@GMAIL.COM",
+      description: "للتواصل مع Nibras Code عبر البريد nibrascode@gmail.com. يمكن السؤال عن تطبيق أو صفحة أو سياسة خصوصية.",
     },
     ru: {
       title: "Контакт — Nibras Code",
-      description: "Связаться с Nibras Code: NIBRASCODE@GMAIL.COM",
+      description: "Написать Nibras Code на nibrascode@gmail.com. Можно спросить о приложении, странице или политике конфиденциальности.",
+    },
+    tr: {
+      title: "İletişim — Nibras Code",
+      description: "Nibras Code ile iletişim için e-posta: nibrascode@gmail.com. Uygulama, sayfa veya gizlilik hakkında soru yazabilirsiniz.",
     },
   },
   "/privacy": {
@@ -422,6 +489,60 @@ const PAGES: Record<string, Copy> = {
       title: "Gizlilik politikası — Nibras Arabic",
       description:
         "Nibras Arabic gizlilik politikası, sürüm 1.1.0, 30 Eylül 2026: hesap istenmez, öğrenme verisi yalnızca cihazda kalır.",
+    },
+  },
+  "/privacy/nibras-docs": {
+    az: {
+      title: "Məxfilik siyasəti — Nibras Docs",
+      description:
+        "Nibras Docs hələ çıxmayıb. Tam məxfilik siyasəti tətbiq hazır olanda bu səhifədə dərc olunacaq. İndi hesab və izləmə yoxdur.",
+    },
+    en: {
+      title: "Privacy policy — Nibras Docs",
+      description:
+        "Nibras Docs is not released yet. The full privacy policy will be published here when the app is ready. There is no account or tracking now.",
+    },
+    tr: {
+      title: "Gizlilik politikası — Nibras Docs",
+      description:
+        "Nibras Docs henüz çıkmadı. Tam gizlilik politikası uygulama hazır olunca bu sayfada yayımlanacak. Şimdilik hesap ve izleme yok.",
+    },
+    ar: {
+      title: "سياسة الخصوصية — Nibras Docs",
+      description:
+        "Nibras Docs لم يصدر بعد. تُنشر سياسة الخصوصية الكاملة هنا عندما يجهز التطبيق. لا حساب ولا تتبّع الآن.",
+    },
+    ru: {
+      title: "Политика конфиденциальности — Nibras Docs",
+      description:
+        "Nibras Docs ещё не вышел. Полная политика будет опубликована здесь, когда приложение будет готово. Сейчас нет аккаунта и отслеживания.",
+    },
+  },
+  "/privacy/nibras-plans": {
+    az: {
+      title: "Məxfilik siyasəti — Nibras Plans",
+      description:
+        "Nibras Plans hələ çıxmayıb. Tam məxfilik siyasəti tətbiq hazır olanda bu səhifədə dərc olunacaq. İndi hesab və izləmə yoxdur.",
+    },
+    en: {
+      title: "Privacy policy — Nibras Plans",
+      description:
+        "Nibras Plans is not released yet. The full privacy policy will be published here when the app is ready. There is no account or tracking now.",
+    },
+    tr: {
+      title: "Gizlilik politikası — Nibras Plans",
+      description:
+        "Nibras Plans henüz çıkmadı. Tam gizlilik politikası uygulama hazır olunca bu sayfada yayımlanacak. Şimdilik hesap ve izleme yok.",
+    },
+    ar: {
+      title: "سياسة الخصوصية — Nibras Plans",
+      description:
+        "Nibras Plans لم يصدر بعد. تُنشر سياسة الخصوصية الكاملة هنا عندما يجهز التطبيق. لا حساب ولا تتبّع الآن.",
+    },
+    ru: {
+      title: "Политика конфиденциальности — Nibras Plans",
+      description:
+        "Nibras Plans ещё не вышел. Полная политика будет опубликована здесь, когда приложение будет готово. Сейчас нет аккаунта и отслеживания.",
     },
   },
   "/privacy/nibras-pdf": {

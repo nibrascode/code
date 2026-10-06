@@ -371,7 +371,7 @@ export const PROGRAMMING: readonly ProgrammingPage[] = [
     seo: seo(
       {
         title: "Python nədir? İstifadə sahələri və üstünlükləri — Nibras Code",
-        description: "Python proqramlaşdırma dili: harada işlədilir və nə üçün seçilir.",
+        description: "Python proqramlaşdırma dili harada işlədilir, nə üçün seçilir və hansı işlərə uyğundur.",
         keywords: "Python nədir, Python istifadə sahələri, Python və JavaScript fərqi, Python və Java fərqi",
       },
       {
@@ -391,7 +391,7 @@ export const PROGRAMMING: readonly ProgrammingPage[] = [
       },
       {
         title: "Что такое Python? Области применения и преимущества — Nibras Code",
-        description: "Где используют язык Python и почему его выбирают.",
+        description: "Где используют язык Python, почему его выбирают и для каких задач он подходит.",
         keywords: "что такое Python, разница Python и JavaScript, разница Python и Java",
       },
     ),
@@ -482,12 +482,12 @@ export const PROGRAMMING: readonly ProgrammingPage[] = [
       },
       {
         title: "ما هي C#؟ استخداماتها وخصائصها — Nibras Code",
-        description: "أين تُستخدم لغة C# وما الذي يميزها.",
+        description: "أين تُستخدم لغة C#، وما الذي يميزها في تطبيقات سطح المكتب والويب.",
         keywords: "ما هي C#, استخدامات C#, برمجة C#",
       },
       {
         title: "Что такое C#? Области применения и особенности — Nibras Code",
-        description: "Где используют язык C# и чем он отличается.",
+        description: "Где используют язык C# и чем он отличается в настольных и веб-приложениях.",
         keywords: "что такое C#, применение C#, язык C#",
       },
     ),
@@ -531,7 +531,7 @@ export const PROGRAMMING: readonly ProgrammingPage[] = [
     seo: seo(
       {
         title: "HTML və CSS nədir? — Nibras Code",
-        description: "HTML və CSS: səhifənin quruluşu və görünüşü.",
+        description: "HTML səhifənin quruluşunu, CSS isə onun görünüşünü və düzülüşünü verir.",
         keywords: "HTML nədir, CSS nədir, HTML və CSS",
       },
       {
@@ -563,7 +563,7 @@ export const PROGRAMMING: readonly ProgrammingPage[] = [
     seo: seo(
       {
         title: "SQL nədir? — Nibras Code",
-        description: "SQL: məlumatla sorğu və işləmə dili.",
+        description: "SQL verilənlər bazasından məlumat sorğulamaq və onu dəyişmək üçün dildir.",
         keywords: "SQL nədir, SQL sorğu, SQL verilənlər bazası",
       },
       {

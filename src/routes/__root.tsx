@@ -6,7 +6,7 @@ import { I18nProvider } from "@/lib/i18n-context";
 import { SiteFooter, SiteHeader } from "@/components/site-header";
 import { AppSuggest } from "@/components/app-suggest";
 import appCss from "../styles.css?url";
-import { buildHead, langFromLocation, pageUrl, readLang } from "@/lib/seo";
+import { buildHead, langFromLocation, pageUrl, readLang, SITE } from "@/lib/seo";
 import { pdfPairFromPath } from "@/lib/pdf-pairs";
 import { findProgrammingLocale, programmingLocalePath, programmingFromPath } from "@/lib/programming-locales";
 import { LANGS, type Lang } from "@/lib/i18n";
@@ -51,7 +51,7 @@ export const Route = createRootRoute({
 
 function sceneFor(pathname: string) {
   if (pathname.startsWith("/unutma") || pathname.startsWith("/about")) return "mountains";
-  if (pathname.startsWith("/why") || pathname.startsWith("/privacy") || pathname.startsWith("/contact") || pathname.startsWith("/nx-studio") || pathname.startsWith("/resources") || pathname.startsWith("/resurslar") || pathname.startsWith("/ru") || pathname.startsWith("/guides") || pathname.includes("/programming") || pathname === "/faq" || pathname.endsWith("/faq"))
+  if (pathname.startsWith("/why") || pathname.startsWith("/privacy") || pathname.startsWith("/contact") || pathname.startsWith("/nx-studio") || pathname.startsWith("/resources") || pathname.startsWith("/resurslar") || pathname.startsWith("/ru") || pathname.startsWith("/guides") || pathname.includes("/programming") || pathname.includes("/faq"))
     return "study";
   return "hero";
 }
@@ -67,27 +67,27 @@ function SeoLinks() {
   if (topic) {
     return (
       <>
-        <link rel="canonical" href={`https://nibrascode.com${faqTopicPath(topic.page.lang, topic.item.id)}`} />
+        <link rel="canonical" href={`${SITE}${faqTopicPath(topic.page.lang, topic.item.id)}`} />
         {LANGS.map((code) => (
           <link
             key={code}
             rel="alternate"
             {...{ hreflang: code }}
-            href={`https://nibrascode.com${faqTopicPath(code, topic.item.id)}`}
+            href={`${SITE}${faqTopicPath(code, topic.item.id)}`}
           />
         ))}
-        <link rel="alternate" {...{ hreflang: "x-default" }} href={`https://nibrascode.com${faqTopicPath("az", topic.item.id)}`} />
+        <link rel="alternate" {...{ hreflang: "x-default" }} href={`${SITE}${faqTopicPath("az", topic.item.id)}`} />
       </>
     );
   }
   if (faq) {
     return (
       <>
-        <link rel="canonical" href={`https://nibrascode.com${faq.path}`} />
+        <link rel="canonical" href={`${SITE}${faq.path}`} />
         {LANGS.map((code) => (
-          <link key={code} rel="alternate" {...{ hreflang: code }} href={`https://nibrascode.com${faqPath(code)}`} />
+          <link key={code} rel="alternate" {...{ hreflang: code }} href={`${SITE}${faqPath(code)}`} />
         ))}
-        <link rel="alternate" {...{ hreflang: "x-default" }} href="https://nibrascode.com/faq" />
+        <link rel="alternate" {...{ hreflang: "x-default" }} href={`${SITE}/faq`} />
       </>
     );
   }
@@ -98,16 +98,16 @@ function SeoLinks() {
     );
     return (
       <>
-        <link rel="canonical" href={`https://nibrascode.com${canonical}`} />
+        <link rel="canonical" href={`${SITE}${canonical}`} />
         {alternates.map((code) => (
           <link
             key={code}
             rel="alternate"
             {...{ hreflang: code }}
-            href={`https://nibrascode.com${programmingLocalePath(code, programming.slug)}`}
+            href={`${SITE}${programmingLocalePath(code, programming.slug)}`}
           />
         ))}
-        <link rel="alternate" {...{ hreflang: "x-default" }} href={`https://nibrascode.com${programmingLocalePath("az", programming.slug)}`} />
+        <link rel="alternate" {...{ hreflang: "x-default" }} href={`${SITE}${programmingLocalePath("az", programming.slug)}`} />
       </>
     );
   }
@@ -122,11 +122,11 @@ function SeoLinks() {
     ] as const;
     return (
       <>
-        <link rel="canonical" href={`https://nibrascode.com${canonical}`} />
+        <link rel="canonical" href={`${SITE}${canonical}`} />
         {alternates.map(([code, href]) => (
-          <link key={code} rel="alternate" {...{ hreflang: code }} href={`https://nibrascode.com${href}`} />
+          <link key={code} rel="alternate" {...{ hreflang: code }} href={`${SITE}${href}`} />
         ))}
-        <link rel="alternate" {...{ hreflang: "x-default" }} href={`https://nibrascode.com${pair.az}`} />
+        <link rel="alternate" {...{ hreflang: "x-default" }} href={`${SITE}${pair.az}`} />
       </>
     );
   }

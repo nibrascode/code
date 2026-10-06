@@ -2,11 +2,37 @@ import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { LIBRARY, type LibrarySection, type LibraryTopic } from "@/lib/library";
 import { findProgramming, type ProgrammingSection } from "@/lib/programming";
+import { findProgrammingLocale, programmingLocalePath } from "@/lib/programming-locales";
 import { pythonSections } from "@/lib/lessons";
 import { libItems, libParagraphs, savedLib, type LibGroup } from "@/lib/library-admin";
 import { articlesForTopic, findResourceTopic } from "@/lib/resource-topics";
 import type { StudioPrivacyRow } from "@/lib/studio";
 import { useI18n } from "@/lib/i18n-context";
+import type { Lang } from "@/lib/i18n";
+
+const GUIDE_INTRO: Record<string, Record<Lang, string>> = {
+  pdf: {
+    az: "PDF faylını birləşdirmək, bölmək və sıxışdırmaq üçün qısa bələdçi. Ətraflı addımlar Nibras PDF çıxanda bu səhifədə olacaq.",
+    en: "A short guide to merging, splitting, and compressing a PDF. Detailed steps will be added here when Nibras PDF is released.",
+    tr: "PDF birleştirme, bölme ve sıkıştırma için kısa rehber. Ayrıntılı adımlar Nibras PDF çıkınca bu sayfada olacak.",
+    ar: "دليل قصير لدمج PDF وتقسيمه وضغطه. الخطوات المفصّلة تُضاف هنا عند إصدار Nibras PDF.",
+    ru: "Короткое руководство: объединить, разделить и сжать PDF. Подробные шаги появятся здесь, когда выйдет Nibras PDF.",
+  },
+  android: {
+    az: "Nibras Code tətbiqlərini Android telefonda rəsmi səhifədən tapıb quraşdırmaq olar. Mağaza linki hazır olanda bu səhifədə göstəriləcək.",
+    en: "Nibras Code apps can be found and installed on an Android phone from the official page. The store link will be shown here when it is ready.",
+    tr: "Nibras Code uygulamaları Android telefonda resmi sayfadan bulunup kurulabilir. Mağaza bağlantısı hazır olunca bu sayfada gösterilecek.",
+    ar: "يمكن العثور على تطبيقات Nibras Code وتثبيتها على هاتف أندرويد من الصفحة الرسمية. يظهر رابط المتجر هنا عندما يجهز.",
+    ru: "Приложения Nibras Code можно найти и установить на телефон Android с официальной страницы. Ссылка на магазин появится здесь, когда будет готова.",
+  },
+  "ereb-dili": {
+    az: "Ərəb dilinə Azərbaycan dilindən başlamaq üçün əsas tətbiq Nibras Arabic-dir. Feil, isim, dialoq, test, kart və yazı məşqi bir yerdədir.",
+    en: "The main app for starting Arabic from Azerbaijani is Nibras Arabic. Verbs, nouns, dialogues, tests, cards, and writing practice are in one place.",
+    tr: "Azerbaycan Türkçesinden Arapçaya başlamak için ana uygulama Nibras Arabic'tir. Fiil, isim, diyalog, test, kart ve yazı alıştırması bir aradadır.",
+    ar: "التطبيق الأساسي لبدء العربية من الأذربيجانية هو Nibras Arabic. فيه الفعل والاسم والحوار والاختبار والبطاقات وتدريب الكتابة.",
+    ru: "Основное приложение, чтобы начать арабский с азербайджанского, — Nibras Arabic. Глаголы, имена, диалоги, тесты, карточки и письмо в одном месте.",
+  },
+};
 
 function topicLink(section: LibrarySection, slug: string, lang: string) {
   if (section === "resources" && slug === "pdf") {
@@ -40,6 +66,16 @@ export function LibraryIndex({
       <h1>{t(page.title)}</h1>
       <ul className="lib-list">
         {page.topics.map((topic) => {
+          if (section === "programming") {
+            return (
+              <li key={topic.slug}>
+                <a href={programmingLocalePath(lang, topic.slug)}>
+                  {t(topic.label)}
+                  <ArrowUpRight className="rtl-flip size-4" />
+                </a>
+              </li>
+            );
+          }
           const link = topicLink(section, topic.slug, lang);
           return (
             <li key={topic.slug}>
@@ -160,13 +196,23 @@ export function LibraryTopicPage({
 }) {
   const { t, lang } = useI18n();
   const page = section === "programming" && topic.slug !== "python" ? findProgramming(topic.slug) : null;
-  if (page) return <ProgrammingArticle slug={topic.slug} title={page.title} sections={page.sections} />;
+  if (page) {
+    const locale = lang === "az" ? null : findProgrammingLocale(lang, topic.slug);
+    const title = locale?.title ?? page.seo[lang]?.title.replace(/ — Nibras Code$/, "") ?? page.title;
+    return <ProgrammingArticle slug={topic.slug} title={title} sections={locale?.sections ?? page.sections} />;
+  }
   const group: LibGroup | null = section === "resources" ? "resurs" : section === "guides" ? "guide" : null;
   const saved = group ? savedLib(group, topic.slug, lang, rows) : null;
   const topicCopy = section === "resources" ? findResourceTopic(topic.slug) : null;
   const articles = topicCopy ? articlesForTopic(topic.slug) : [];
   const heading = saved?.title || t(topic.label);
-  const paragraphs = saved ? libParagraphs(saved.body) : topicCopy ? [topicCopy.intro[lang]] : [];
+  const paragraphs = saved
+    ? libParagraphs(saved.body)
+    : topicCopy
+      ? [topicCopy.intro[lang]]
+      : section === "guides" && GUIDE_INTRO[topic.slug]
+        ? [GUIDE_INTRO[topic.slug][lang]]
+        : [];
   const moreLabel = { az: "Yazılar", en: "Articles", tr: "Yazılar", ar: "مقالات", ru: "Статьи" }[lang];
 
   return (
