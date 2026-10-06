@@ -4,22 +4,18 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Nibras AI</title>
-  <meta name="description" content="Nibras AI — Nibras Code köməkçisi. Sual ver, düzəlt, həll et." />
-  <link rel="canonical" href="https://nibrascode.com/ai" />
+  <meta name="description" content="Nibras AI Nibras Code-un ayrıca köməkçisidir. Sual, fikir, kod və şəkil. Modelə gedən sual gündə 10-dur. Söhbət 24 saat qalır." />
+  <link rel="canonical" href="https://www.nibrascode.com/ai" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Nibras Code" />
-  <meta property="og:locale" content="az_AZ" />
   <meta property="og:title" content="Nibras AI" />
-  <meta property="og:description" content="Nibras AI — Nibras Code köməkçisi. Sual ver, öyrən, kod və fikir üçün kömək al." />
-  <meta property="og:url" content="https://nibrascode.com/ai" />
-  <meta property="og:image" content="https://nibrascode.com/nibras-ai-icon.png" />
-  <meta property="og:image:width" content="512" />
-  <meta property="og:image:height" content="512" />
-  <meta property="og:image:alt" content="Nibras AI" />
-  <meta name="twitter:card" content="summary" />
+  <meta property="og:description" content="Nibras AI Nibras Code-un ayrıca köməkçisidir. Sual, fikir, kod və şəkil. Modelə gedən sual gündə 10-dur. Söhbət 24 saat qalır." />
+  <meta property="og:url" content="https://www.nibrascode.com/ai" />
+  <meta property="og:image" content="https://www.nibrascode.com/nibras-ai.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Nibras AI" />
-  <meta name="twitter:description" content="Nibras AI — Nibras Code köməkçisi. Sual ver, öyrən, kod və fikir üçün kömək al." />
-  <meta name="twitter:image" content="https://nibrascode.com/nibras-ai-icon.png" />
+  <meta name="twitter:description" content="Nibras AI Nibras Code-un ayrıca köməkçisidir. Sual, fikir, kod və şəkil." />
+  <meta name="twitter:image" content="https://www.nibrascode.com/nibras-ai.jpg" />
   <link rel="icon" href="/nibras-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -110,9 +106,10 @@
     }
     .hello { margin: auto; width: 100%; text-align: center; padding: 6px 0 10px; }
     .stage {
-      display: flex;
-      justify-content: center;
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) auto minmax(0, 1.05fr);
       align-items: center;
+      gap: 6px;
     }
     .whisper {
       margin: 0;
@@ -273,33 +270,8 @@
     .msg .ay.warn .at { font-size: 17px; line-height: 1.9; opacity: .85; }
     .msg .ay.warn .as { color: #ffd08a; }
     .msg .cb { margin-top: 8px; white-space: normal; }
-    .msg .cb pre { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
-    .msg .cb .cw { position: relative; }
-    .msg .cb pre { box-sizing: border-box; }
-    .msg .cb.col pre { max-height: 300px; overflow-y: hidden; }
-    .msg .cb .fade { display: none; position: absolute; left: 0; right: 0; bottom: 0; height: 72px; border-radius: 0 0 10px 10px; background: linear-gradient(to bottom, rgba(7, 11, 22, 0), #070b16 88%); pointer-events: none; }
-    .msg .cb.col .fade { display: block; }
-    .msg .cb .bar { display: flex; align-items: center; justify-content: flex-end; gap: 8px; margin-top: 6px; }
-    .msg .cb .bar .runbtn { margin-left: auto; }
-    .morebtn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 34px;
-      min-width: 34px;
-      padding: 0 12px;
-      border: 1px solid rgba(143, 180, 255, .4);
-      border-radius: 10px;
-      background: rgba(143, 180, 255, .1);
-      color: #bcd1ff;
-      font: inherit;
-      font-size: 12.5px;
-      font-weight: 600;
-      cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .morebtn[hidden] { display: none; }
-    .morebtn:hover, .morebtn:focus-visible { border-color: #8fb4ff; color: #e6efff; }
+    .msg .cb pre { margin: 0; white-space: pre; }
+    .msg .cb .bar { display: flex; justify-content: flex-end; margin-top: 6px; }
     .runbtn {
       display: inline-flex;
       align-items: center;
@@ -318,26 +290,6 @@
     .runbtn svg { width: 12px; height: 12px; display: block; }
     .runbtn:hover { border-color: #5eead4; color: #d6fff7; }
     .runbtn:disabled { opacity: .5; cursor: wait; }
-    .msg.b.ht { position: relative; padding-top: 32px; }
-    .msg .tools { position: absolute; top: 0; right: 3px; display: flex; gap: 0; white-space: normal; user-select: none; -webkit-user-select: none; }
-    .msg .tools button { width: 32px; height: 32px; padding: 0; display: grid; place-items: center; border: 0; border-radius: 10px; background: transparent; color: #8d96ad; cursor: pointer; opacity: .75; -webkit-tap-highlight-color: transparent; }
-    .msg .tools button svg { width: 15px; height: 15px; display: block; }
-    .msg .tools button:hover, .msg .tools button:focus-visible { opacity: 1; color: #cfe0ff; background: rgba(143, 180, 255, .12); }
-    .msg .tools button:focus-visible { outline: 2px solid #8fb4ff; outline-offset: -2px; }
-    .msg .tools button.ok { color: #8ff5e4; opacity: 1; }
-    .msg .trn { white-space: normal; margin: 6px 0 10px; padding: 8px 12px; border-radius: 10px; background: rgba(143, 180, 255, .06); border: 1px solid rgba(143, 180, 255, .16); border-inline-start: 3px solid #8fb4ff; font-size: 14px; line-height: 1.6; color: #dfe6f7; unicode-bidi: plaintext; }
-    .msg .trn .trl { font-size: 11px; line-height: 1.4; color: #8d96ad; margin-bottom: 3px; }
-    .msg .trn .trl a { color: #8fb4ff; text-decoration: underline; }
-    .msg .trn .trx { white-space: pre-wrap; }
-    .msg .trn .trx + .trl { margin-top: 8px; }
-    .msg .trn .trw { margin-top: 5px; font-size: 11.5px; line-height: 1.4; color: #d9b36a; }
-    .msg .trn .trf { margin-top: 5px; font-size: 10.5px; line-height: 1.4; color: #7b8499; }
-    .msg .trn.none { background: transparent; border-style: dashed; color: #8d96ad; font-size: 12.5px; }
-    .msg .tools button.busy { opacity: .5; cursor: wait; }
-    .shm { position: fixed; z-index: 6; width: 188px; padding: 5px; border-radius: 14px; background: rgba(12, 16, 32, .98); border: 1px solid rgba(160, 140, 255, .35); box-shadow: 0 12px 40px rgba(0, 0, 0, .5); }
-    .shm[hidden] { display: none; }
-    .shm a, .shm button { display: flex; align-items: center; width: 100%; min-height: 40px; padding: 0 12px; border: 0; border-radius: 9px; background: transparent; color: #e6ecfb; font: inherit; font-size: 13.5px; text-align: left; text-decoration: none; cursor: pointer; }
-    .shm a:hover, .shm button:hover, .shm a:focus-visible, .shm button:focus-visible { background: rgba(143, 180, 255, .14); outline: none; }
     .msg img.shot {
       display: block;
       width: 100%;
@@ -535,6 +487,23 @@
     .ddel.sure { color: #ffb3bf; font-size: 12px; font-weight: 700; }
     .dempty { margin: 18px 4px; color: var(--muted); font-size: 13px; text-align: center; }
     .dnote { margin: 0; text-align: center; color: #8fd9cd; font-size: 12px; font-weight: 600; }
+    .about {
+      position: fixed; top: 0; right: 0; bottom: 0; z-index: 21;
+      width: min(440px, 92vw);
+      overflow: auto;
+      padding: calc(14px + env(safe-area-inset-top)) 16px calc(18px + env(safe-area-inset-bottom));
+      background: linear-gradient(180deg, #08112a, #050918);
+      border-left: 1px solid rgba(130, 170, 255, .28);
+      box-shadow: -12px 0 40px rgba(0, 0, 0, .5);
+      transform: translateX(102%); visibility: hidden;
+      transition: transform .22s ease, visibility .22s;
+    }
+    .about.on { transform: none; visibility: visible; }
+    .about h2 { margin: 16px 0 6px; font-size: 15px; letter-spacing: -0.02em; }
+    .about p { margin: 0 0 8px; color: #d5dced; font-size: 13.5px; line-height: 1.55; }
+    .about .leadline { margin-top: 4px; color: #f4f7ff; }
+    html[dir="rtl"] .about { right: auto; left: 0; transform: translateX(-102%); border-left: 0; border-right: 1px solid rgba(130, 170, 255, .28); }
+    html[dir="rtl"] .about.on { transform: none; }
     @media (max-width: 380px) {
       .brand small { display: none; }
       .top { padding-left: 12px; padding-right: 12px; }
@@ -547,7 +516,7 @@
     }
     @media (prefers-reduced-motion: reduce) {
       .dots i, .ring::before, .ring::after { animation: none; }
-      .drawer, .scrim { transition: none; }
+      .drawer, .about, .scrim { transition: none; }
     }
   </style>
 </head>
@@ -581,6 +550,7 @@
         </a>
       </div>
       <div class="meta">
+        <button class="home" id="aboutbtn" type="button">Haqqında</button>
         <button class="crown" id="prem" type="button" aria-label="Premium bağlıdır">
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M3 17h18l-1.6-8.2-4.2 3.4L12 5 8.8 12.2 4.6 8.8 3 17z" fill="url(#g)" stroke="#f6d789" stroke-width="1"/>
@@ -599,7 +569,9 @@
     <div id="msgs">
       <div class="hello" id="hello">
         <div class="stage">
+          <p class="whisper">SUAL VER<br>ÖYRƏN<br>İNKİŞAF ET<small>AMMA BİLİK VƏ QÜDRƏTİN ƏSL SAHİBİNİ UNUTMA.</small></p>
           <img class="logo" src="/nibras-ai.png" alt="Nibras AI" />
+          <p class="script"><span>Fikirlər başlanğıcdır,</span><span>müttəvəffəqiyyət</span><span>isə Allahdandır.</span></p>
         </div>
         <h1>Nibras <span>AI</span></h1>
         <p class="kicker">SƏNİN AI KÖMƏKÇİN</p>
@@ -648,7 +620,22 @@
     <div class="dh"><b>Söhbətlər</b><button class="dx" id="dclose" type="button" aria-label="Bağla">&times;</button></div>
     <button class="newchat" id="newchat" type="button">+ Yeni söhbət</button>
     <div class="dlist" id="dlist"></div>
-    <p class="dnote">Söhbətlər 24 saat saxlanılır</p>
+    <p class="dnote">Söhbət bu brauzerdə 24 saat qalır</p>
+  </aside>
+  <aside class="about" id="about" aria-label="Nibras AI haqqında" aria-hidden="true">
+    <div class="dh"><b>Nibras AI</b><button class="dx" id="aboutclose" type="button" aria-label="Bağla">&times;</button></div>
+    <p class="leadline">Nibras AI Nibras Code-un ayrıca köməkçisidir. Tətbiq siyahısından ayrıdır: burada sual verilir, fikir alınır, kod yazılır və şəkil hazırlanır. Layihə Mahir Əliyevin müstəqil işidir.</p>
+    <h2>Limit</h2>
+    <p>Modelə gedən sual gündə 10-dur. Sayğac yalnız model həqiqətən çağırılanda artır. Quran ayəsi, təfsir, hədis, lüğət və saytda hazır duran cavab bu 10-a düşmür.</p>
+    <p>Limit dolanda model sabaha qədər dayanır. Hazır cavablar isə həmin gün də gəlir. Bir mesaj 800 simvoldan uzun olsa, server artığını kəsir.</p>
+    <p>Şəkil PNG, JPG və ya WEBP ola bilər. Göndərilməzdən əvvəl ən uzun tərəfi 1024 pikselə endirilir.</p>
+    <h2>Model</h2>
+    <p>Bir modelin adı yoxdur. Hazır mənbə varsa model çağırılmır: ayə, təfsir, hədis, lüğət və saytın öz cavabı buradan gəlir.</p>
+    <p>Qalan sual serverdə növbə ilə xarici modellərə gedir. Kod, hesab və adi söhbət eyni sıranı işlətmir. Ona görə cavab hər dəfə eyni yerdən gəlmir.</p>
+    <h2>Məxfilik</h2>
+    <p>Söhbət bu brauzerdə 24 saat qalır, sonra silinir. Hesab açılmır. Bu brauzer üçün təsadüfi nömrə də burada saxlanır.</p>
+    <p>Model lazım olanda mesaj və son söhbət serverə, oradan seçilən modelə gedir. Hazır cavabda mesajın mətni saxlanmır. Sayğac yalnız hadisənin növünü göndərir, yazdığın cümləni yox. Brauzerdə izləmə bağlıdırsa sayğac getmir.</p>
+    <p>Server söhbəti qəbul edirsə, eyni mətn həmin cihaz nömrəsi ilə orada da saxlanmağa çalışılır. 24 saatdan sonra siyahıdan düşür.</p>
   </aside>
   <div class="toast" id="toast" role="status"></div>
 
@@ -743,9 +730,7 @@
       if (statErrors++ < 3) stat("error", "js");
     });
     const RUN_BASE = "https://nibrasterminal.vercel.app/run";
-    const RUN_MAX = 100000; // fragment (#) serverə getmir; 45 KB-lıq oyun CompressionStream olmayan brauzerdə də açılsın
-    const CODE_CHARS = 900; // sətir sayından asılı olmayaraq bu qədər simvoldan uzun kod da yığılır
-    const CODE_LINES = 16; // bundan uzun kod bloku yığılı (max hündürlük) göstərilir
+    const RUN_MAX = 60000;
     const RUN_LANGS = { python: "python", py: "python", py3: "python", javascript: "javascript", js: "javascript", html: "html", htm: "html" };
     function b64u(bytes) {
       let s = "";
@@ -784,14 +769,13 @@
     function tafsirHtml(book, body) {
       let label = "", src = "", cur = "";
       const parts = [];
-      const srcs = [];
       body.split("\n").forEach(function (ln) {
         if (ln.indexOf("::tl::") === 0) label = ln.replace(/^::tl::[ \t]*/, "");
-        else if (ln.indexOf("::src::") === 0) { src = ln.replace(/^::src::[ \t]*/, ""); srcs.push(src); }
+        else if (ln.indexOf("::src::") === 0) src = ln.replace(/^::src::[ \t]*/, "");
         else if (ln.indexOf("::tv::") === 0) parts.push('<span class="tfv" dir="auto">' + escapeHtml(ln.replace(/^::tv::[ \t]*/, "")) + "</span>");
         else if (ln.trim()) parts.push('<span class="tfp">' + escapeHtml(ln) + "</span>");
       });
-      src = srcs.length > 1 ? srcs.map(escapeHtml).join("<br>") : escapeHtml(src);
+      src = escapeHtml(src);
       const qe = src.indexOf("QuranEnc.com");
       if (qe >= 0) {
         const key = book === "saadi" ? "arabic_saadi" : "arabic_moyassar";
@@ -819,20 +803,6 @@
       });
       if (!chips.length) return "";
       return '<div class="sg">' + (lead ? '<div class="sgl" dir="auto">' + escapeHtml(lead) + "</div>" : "") + '<div class="sgb">' + chips.join("") + "</div></div>";
-    }
-    // Köhnə (saxlanmış) söhbətlər: «Davamı üçün yaz: «…»» kimi düz mətn göstərişlərini kliklənən düyməyə çevirir (yeni cavablar artıq ::sug:: ilə gəlir).
-    const HINT_LABEL = { "Davamı üçün yaz": "Davamı", "Devamı için yaz": "Devamı", "For the rest, write": "Continue", "Продолжение: напишите": "Продолжение", "للمتابعة اكتب": "المتابعة", "Davamı üçün aralıq yaz": "Davamı", "Davamı üçün aralığı daralt": "Davamı", "Aralık yazın": "Devamı", "Specify a range": "Continue", "Укажите диапазон": "Продолжение", "اكتب نطاق الآيات": "المتابعة", "للمتابعة ضيّق النطاق": "المتابعة" };
-    const HINT_RE = /(Davamı üçün yaz|Devamı için yaz|For the rest, write|Продолжение: напишите|للمتابعة اكتب|Davamı üçün aralıq yaz|Davamı üçün aralığı daralt|Aralık yazın|Specify a range|Укажите диапазон|اكتب نطاق الآيات|للمتابعة ضيّق النطاق)(?::|,|،)?(?: (?:məsələn|örneğin|e\.g\.|например|مثل):?)? ?«([^»\n]{1,160})»\.?/g;
-    function unesc(t) {
-      return t.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, "&");
-    }
-    function legacyHint(html) {
-      return html.replace(HINT_RE, function (all, lead, q, off, whole) {
-        const query = unesc(q).trim();
-        if (!query) return all;
-        const pre = off === 0 || whole.charAt(off - 1) === "\n" ? "" : "\n";
-        return pre + sugHtml("::sb:: " + HINT_LABEL[lead] + ": " + query + " | " + query);
-      }).replace(/(^|\n)::note::[ \t]*(?=<div class="sg">)/g, "$1");
     }
     function ayahHtml(text) {
       const nre = /(?:^|\n)::notice::\n([\s\S]*?)\n::\/notice::(?=\n|$)/;
@@ -863,7 +833,7 @@
       const plain = function (seg, trimStart, trimEnd) {
         if (trimStart) seg = seg.replace(/^\n{1,2}/, "");
         if (trimEnd) seg = seg.replace(/\n{1,2}$/, "");
-        return legacyHint(escapeHtml(seg)).replace(/(^|\n)::note::[ \t]*([^\n]*)(?=\n|$)/g, function (all, pre, t) {
+        return escapeHtml(seg).replace(/(^|\n)::note::[ \t]*([^\n]*)(?=\n|$)/g, function (all, pre, t) {
           return pre + '<div class="an" dir="auto">' + t + "</div>";
         });
       };
@@ -908,17 +878,11 @@
         const code = head ? part.slice(head[0].length) : part;
         const lang = head ? RUN_LANGS[head[1].toLowerCase()] : "";
         let bar = "";
-        let run = "";
         if (lang && code.trim()) {
           runs.push({ lang: lang, code: code.replace(/\n$/, "") });
-          run = '<button type="button" class="runbtn" data-run="' + (runs.length - 1) + '" aria-label="Kodu işlət və nəticəyə bax"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12-7.5a1 1 0 0 0 0-1.72l-12-7.5A1 1 0 0 0 7 4.5z"/></svg>Aç</button>';
+          bar = '<div class="bar"><button type="button" class="runbtn" data-run="' + (runs.length - 1) + '" aria-label="Kodu işlət və nəticəyə bax"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12-7.5a1 1 0 0 0 0-1.72l-12-7.5A1 1 0 0 0 7 4.5z"/></svg>Aç</button></div>';
         }
-        // uzun kod (CODE_LINES sətirdən çox) yığılı göstərilir: solma + «Davamını aç ▾»; kodun özü DOM-da, «Aç», kopya və paylaşma isə həmişə TAM kodla işləyir
-        // uzun sətirlər qatlanır (pre-wrap), ona görə sətir sayı + simvol sayı ilə qiymətləndirilir; qalan blokların real hündürlüyü armCode ilə ekranda ölçülür
-        const long = code.replace(/\n$/, "").split("\n").length > CODE_LINES || code.length > CODE_CHARS;
-        const more = '<button type="button" class="morebtn" aria-expanded="false" aria-label="Kodun davamını aç"' + (long ? "" : " hidden") + ">Davamını aç ▾</button>";
-        bar = '<div class="bar">' + more + run + "</div>";
-        return '<div class="cb' + (long ? " col" : "") + '"><div class="cw"><pre><code>' + escapeHtml(code) + "</code></pre>" + '<div class="fade" aria-hidden="true"></div>' + "</div>" + bar + "</div>";
+        return '<div class="cb"><pre><code>' + escapeHtml(code) + "</code></pre>" + bar + "</div>";
       }).join("");
       const queries = chipQ;
       el.querySelectorAll("button.chip[data-sq]").forEach(function (b) {
@@ -927,18 +891,6 @@
         b.addEventListener("click", function () {
           if (busy || btn.disabled) { note("Cavab gözlənilir"); return; }
           send(q);
-        });
-      });
-      el.querySelectorAll("button.morebtn").forEach(function (b) {
-        b.addEventListener("click", function () {
-          const cb = b.closest(".cb");
-          if (!cb) return;
-          const opening = cb.classList.contains("col");
-          cb.classList.toggle("col", !opening);
-          b.setAttribute("aria-expanded", opening ? "true" : "false");
-          b.setAttribute("aria-label", opening ? "Kodu bağla" : "Kodun davamını aç");
-          b.textContent = opening ? "Bağla ▴" : "Davamını aç ▾";
-          if (!opening && cb.scrollIntoView) cb.scrollIntoView({ block: "nearest" });
         });
       });
       el.querySelectorAll("button.runbtn").forEach(function (b) {
@@ -961,308 +913,11 @@
         });
       });
     }
-    // Kopyala / Paylaş: hər cavab balonunun yuxarı sağ küncündə iki kiçik ikon düyməsi (xəta və qarşılama ekranında yoxdur).
-    // Kopyala: cavabın sadə mətni (gizli ::ctx:: / ::game:: sətirləri və blok işarələri olmadan). Paylaş: mətnin sonuna həmişə «Nibras AI: https://nibrascode.com/ai» sətri əlavə olunur;
-    // oyun kodu cavablarında kod paylaşılmır — yalnız giriş sətri / oyunun adı və link.
-    const SHARE_LINK = "https://nibrascode.com/ai";
-    const SHARE_MAX = 1500;
-    const IC_COPY = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15V6.5A2.5 2.5 0 0 1 7.5 4H15"/></svg>';
-    const IC_OK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
-    const IC_SHARE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="M8.3 10.7l7.4-4.4M8.3 13.3l7.4 4.4"/></svg>';
-    function plainAnswer(raw) {
-      let s = String(raw || "").replace(/\r/g, "");
-      s = s.replace(/^::ctx:: [^\n]*$/gm, "").replace(/^::game:: [^\n]*$/gm, "");
-      s = s.replace(/(^|\n)::sug::\n[\s\S]*?\n::\/sug::(?=\n|$)/g, "$1");
-      s = s.replace(/(^|\n)::(?:notice|tafsir [a-z]+|ayah(?: warn)?(?: [0-9:\-]+)?)::\n([\s\S]*?)\n::\/(?:notice|tafsir|ayah)::(?=\n|$)/g, function (all, pre, body) {
-        return pre + body.split("\n").map(function (ln) { return ln.replace(/^::(?:ar|tl|tv|src|tr)::[ \t]*/, ""); }).join("\n");
-      });
-      s = s.replace(/^::note::[ \t]*/gm, "");
-      return s.replace(/[ \t]+$/gm, "").replace(/\n{3,}/g, "\n\n").trim();
-    }
-    function cutText(t, max) {
-      if (t.length <= max) return t;
-      let c = t.slice(0, max - 1);
-      const sp = c.search(/\s\S*$/);
-      if (sp > max * 0.6) c = c.slice(0, sp);
-      return c.replace(/\s+$/, "") + "…";
-    }
-    // Paylaşılacaq mətn (linksiz gövdə): oyun kodu cavablarında yalnız giriş sətri / ad
-    function shareBody(raw) {
-      const src = String(raw || "");
-      const plain = plainAnswer(src);
-      const gm = /^::game:: [a-z0-9-]+ \| ([^\n]+)$/m.exec(src);
-      const fi = plain.indexOf("```");
-      let bigHtml = false;
-      src.split("```").forEach(function (part, i) {
-        if (i % 2 === 1 && /^html?\n/i.test(part) && part.length > SHARE_MAX) bigHtml = true;
-      });
-      if (gm || bigHtml) {
-        const intro = (fi >= 0 ? plain.slice(0, fi) : plain).split("\n").map(function (x) { return x.trim(); }).filter(Boolean)[0] || "";
-        return cutText(intro || (gm ? "Oyun: " + gm[1].trim() : "Nibras AI oyun kodu"), 300);
-      }
-      return cutText(plain, SHARE_MAX);
-    }
-    function shareText(raw) {
-      const b = shareBody(raw);
-      return (b ? b + "\n\n" : "") + "Nibras AI: " + SHARE_LINK;
-    }
-    function copyText(t) {
-      return new Promise(function (resolve, reject) {
-        const old = function () {
-          try {
-            const ta = document.createElement("textarea");
-            ta.value = t;
-            ta.setAttribute("readonly", "");
-            ta.setAttribute("aria-hidden", "true");
-            ta.style.cssText = "position:fixed;top:0;left:-9999px;opacity:0;font-size:16px";
-            document.body.appendChild(ta);
-            ta.focus();
-            ta.select();
-            ta.setSelectionRange(0, t.length);
-            const ok = document.execCommand("copy");
-            ta.remove();
-            ok ? resolve() : reject(new Error("copy"));
-          } catch (e) { reject(e); }
-        };
-        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(resolve, old);
-        else old();
-      });
-    }
-    function copyWithNote(t, okBtn) {
-      copyText(t).then(function () {
-        note("Kopyalandı ✓");
-        if (okBtn) {
-          okBtn.innerHTML = IC_OK;
-          okBtn.classList.add("ok");
-          setTimeout(function () { okBtn.innerHTML = IC_COPY; okBtn.classList.remove("ok"); }, 1600);
-        }
-      }, function () { note("Kopyalamaq alınmadı"); });
-    }
-    let shm = null, shmBtn = null;
-    function closeShare() {
-      if (shm) shm.hidden = true;
-      if (shmBtn) { shmBtn.setAttribute("aria-expanded", "false"); shmBtn = null; }
-    }
-    function openShare(btnEl, raw) {
-      const full = shareText(raw);
-      const body = shareBody(raw);
-      const enc = encodeURIComponent;
-      if (!shm) {
-        shm = document.createElement("div");
-        shm.className = "shm";
-        shm.setAttribute("role", "menu");
-        shm.setAttribute("aria-label", "Paylaş");
-        shm.hidden = true;
-        document.body.appendChild(shm);
-        document.addEventListener("click", function (e) { if (shm && !shm.hidden && !shm.contains(e.target) && !(shmBtn && shmBtn.contains(e.target))) closeShare(); });
-        document.addEventListener("keydown", function (e) { if (e.key === "Escape" && shm && !shm.hidden) { const b = shmBtn; closeShare(); if (b) b.focus(); } });
-        window.addEventListener("resize", closeShare);
-        msgs.addEventListener("scroll", closeShare, { passive: true });
-      }
-      if (shmBtn === btnEl && !shm.hidden) { closeShare(); return; }
-      closeShare();
-      const items = [
-        ["WhatsApp", "https://wa.me/?text=" + enc(full)],
-        ["Telegram", "https://t.me/share/url?url=" + enc(SHARE_LINK) + "&text=" + enc(body)],
-        ["X (Twitter)", "https://twitter.com/intent/tweet?text=" + enc(cutText(body, 200)) + "&url=" + enc(SHARE_LINK)],
-        ["Facebook", "https://www.facebook.com/sharer/sharer.php?u=" + enc(SHARE_LINK) + "&quote=" + enc(cutText(body, 400))]
-      ];
-      shm.innerHTML = "";
-      items.forEach(function (it) {
-        const a = document.createElement("a");
-        a.href = it[1];
-        a.target = "_blank";
-        a.rel = "noopener noreferrer";
-        a.setAttribute("role", "menuitem");
-        a.textContent = it[0];
-        a.addEventListener("click", function () { closeShare(); });
-        shm.appendChild(a);
-      });
-      const cb = document.createElement("button");
-      cb.type = "button";
-      cb.setAttribute("role", "menuitem");
-      cb.textContent = "Kopyala (link ilə)";
-      cb.addEventListener("click", function () { closeShare(); copyWithNote(full, null); });
-      shm.appendChild(cb);
-      shm.hidden = false;
-      const r = btnEl.getBoundingClientRect();
-      const h = shm.offsetHeight || 220;
-      const w = shm.offsetWidth || 188;
-      let top = r.bottom + 4;
-      if (top + h > window.innerHeight - 8) top = Math.max(8, r.top - h - 4);
-      shm.style.top = top + "px";
-      shm.style.left = Math.max(8, Math.min(r.right - w, window.innerWidth - w - 8)) + "px";
-      shmBtn = btnEl;
-      btnEl.setAttribute("aria-expanded", "true");
-      const first = shm.querySelector("a");
-      if (first) first.focus();
-    }
-    // «Tərcümə et»: cavabdakı ərəbcə mənbə mətnləri (təfsir/kitab blokları .tf və ya ərəbcə abzaslar; Quran ayəsi YOX) /api/translate xidmətinə (Nibras Tərcümə) göndərilir,
-    // nəticə hər blokun altında göstərilir. Dil: səhifə/brauzer dili (defolt az). Hazır tərcümə yoxdursa dürüst «mənbə tapılmadı»; başqa dildə olan hazır tərcümə dil etiketi ilə göstərilir.
-    const IC_TR = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h9M8.5 3v2M6 5c.6 3.2 2.6 5.6 5.5 7M12 5c-.7 3.7-3.4 6.6-7.5 8.2"/><path d="M12.5 20l3.7-9 3.8 9M13.8 17h4.8"/></svg>';
-    const TRN_T = {
-      az: { btn: "Tərcümə et", off: "Tərcüməni gizlət", busy: "Tərcümə olunur…", none: "Bu mətn üçün hazır tərcümə mənbəsi tapılmadı.", err: "Tərcümə alınmadı", human: "Hazır insan tərcüməsi", fixed: "Sabit ifadə", model: "Maşın tərcüməsi", noAz: "{l} dilində hazır tərcümə (azərbaycanca yoxdur)", noTo: "{l} dilində hazır tərcümə", warn: "Tərcümələr bir-birindən xeyli fərqləndi; nəticəni yoxlayın.", footer: "Nibras Tərcümə ilə tərcümə olunub, xətalar ola bilər" },
-      tr: { btn: "Çevir", off: "Çeviriyi gizle", busy: "Çevriliyor…", none: "Bu metin için hazır çeviri kaynağı bulunamadı.", err: "Çeviri alınamadı", human: "Hazır insan çevirisi", fixed: "Sabit ifade", model: "Makine çevirisi", noAz: "{l} dilinde hazır çeviri (Azerbaycanca yok)", noTo: "{l} dilinde hazır çeviri", warn: "Çeviriler birbirinden belirgin biçimde farklıydı; sonucu kontrol edin.", footer: "Nibras Tərcümə ile çevrilmiştir, hatalar olabilir" },
-      en: { btn: "Translate", off: "Hide translation", busy: "Translating…", none: "No ready translation source was found for this text.", err: "Translation failed", human: "Existing human translation", fixed: "Fixed phrase", model: "Machine translation", noAz: "Ready translation in {l} (none in Azerbaijani)", noTo: "Ready translation in {l}", warn: "Independent translations differed noticeably; please double-check.", footer: "Translated with Nibras Tərcümə; errors are possible" },
-      ru: { btn: "Перевести", off: "Скрыть перевод", busy: "Перевод…", none: "Для этого текста не найден готовый источник перевода.", err: "Не удалось перевести", human: "Готовый человеческий перевод", fixed: "Устойчивое выражение", model: "Машинный перевод", noAz: "Готовый перевод на язык: {l} (азербайджанского нет)", noTo: "Готовый перевод на язык: {l}", warn: "Независимые переводы заметно расходились; проверьте результат.", footer: "Переведено с помощью Nibras Tərcümə, возможны ошибки" },
-      ar: { btn: "ترجمة", off: "إخفاء الترجمة", busy: "جارٍ الترجمة…", none: "لم يُعثر على مصدر ترجمة جاهز لهذا النص.", err: "تعذّرت الترجمة", human: "ترجمة بشرية جاهزة", fixed: "عبارة ثابتة", model: "ترجمة آلية", noAz: "ترجمة جاهزة بلغة: {l} (لا توجد بالأذربيجانية)", noTo: "ترجمة جاهزة بلغة: {l}", warn: "اختلفت الترجمات المستقلة اختلافًا واضحًا؛ يُرجى التحقق من النتيجة.", footer: "تمت الترجمة بواسطة Nibras Tərcümə، وقد تحدث أخطاء" },
-    };
-    const TRN_LANGS = { az: "azərbaycanca", tr: "türkcə", en: "ingiliscə", ru: "rusca", ar: "ərəbcə" };
-    const TRN_MAX = 8;
-    // Serverin həddi 3000 simvoldur: uzun mətn cümlə sonunda kəsilir
-    function trnCut(t) {
-      if (t.length <= 3000) return t;
-      const head = t.slice(0, 3000);
-      const k = Math.max(head.lastIndexOf("\n"), head.lastIndexOf("."), head.lastIndexOf("؟"), head.lastIndexOf("؛"), head.lastIndexOf("!"));
-      return (k > 1500 ? head.slice(0, k + 1) : head).trim();
-    }
-    function arabicWords(t) { return (String(t || "").match(/[\u0621-\u064A\u0671-\u06D3]+/g) || []).length; }
-    function arabicRatio(t) {
-      const letters = (String(t || "").match(/[A-Za-z\u0400-\u04FF\u0621-\u064A\u0671-\u06D3]/g) || []);
-      if (!letters.length) return 0;
-      return letters.filter(function (c) { return /[\u0621-\u064A\u0671-\u06D3]/.test(c); }).length / letters.length;
-    }
-    // Cavabdakı tərcümə oluna bilən ərəbcə hissələr: [{text, title, anchor(düymədən sonra yeri), after: element|null}]
-    function trnPassages(el, raw) {
-      const out = [];
-      el.querySelectorAll(".tf").forEach(function (tf) {
-        const t = Array.prototype.map.call(tf.querySelectorAll(".tft .tfp"), function (x) { return x.textContent; }).join("\n").trim();
-        if (arabicWords(t) >= 3) out.push({ text: trnCut(t), after: tf });
-      });
-      if (out.length) return out.slice(0, TRN_MAX);
-      // blok yoxdur: ərəbcə abzaslar (Quran ayə/bildiriş/təklif blokları atılır)
-      let src = String(raw || "").replace(/\r/g, "");
-      src = src.replace(/(^|\n)::(?:ayah|notice|sug)[^\n]*::\n[\s\S]*?\n::\/(?:ayah|notice|sug)::(?=\n|$)/g, "$1").replace(/^::[a-z]+::[^\n]*$/gm, "");
-      src.split(/\n{2,}/).forEach(function (para) {
-        const t = para.trim();
-        if (t && arabicWords(t) >= 4 && arabicRatio(t) >= 0.6) out.push({ text: trnCut(t), after: null });
-      });
-      return out.slice(0, TRN_MAX);
-    }
-    function trnNode(res, lang, T, source) {
-      const box = document.createElement("div");
-      box.className = "trn";
-      box.setAttribute("dir", "auto");
-      const add = function (cls, text) { const d = document.createElement("div"); d.className = cls; d.textContent = text; box.appendChild(d); return d; };
-      const label = function (text, url) {
-        const d = add("trl", text);
-        if (url && /^https:\/\/hadeethenc\.com\//.test(url)) {
-          d.appendChild(document.createTextNode(" · "));
-          const a = document.createElement("a");
-          a.href = url; a.target = "_blank"; a.rel = "noopener noreferrer"; a.textContent = "HadeethEnc.com";
-          d.appendChild(a);
-        }
-      };
-      const foot = function () { add("trf", res.footer || T.footer); };
-      if (res && res.translation && res.method === "lookup") { label(T.human, res.sources && res.sources[0] && res.sources[0].url); add("trx", res.translation); foot(); }
-      else if (res && res.translation && res.method === "lexicon") { label(T.fixed); add("trx", res.translation); foot(); }
-      else if (res && res.translation && res.method === "ensemble") {
-        label(T.model);
-        add("trx", res.translation);
-        if (res.flags && (res.flags.indexOf("disagree") >= 0 || res.flags.indexOf("unverified") >= 0)) add("trw", T.warn);
-        foot();
-      }
-      else if (res && res.translation && res.method === "model") { label(T.model + (res.sources && res.sources[0] && res.sources[0].name ? " · " + res.sources[0].name : "")); add("trx", res.translation); foot(); }
-      else if (res && res.method === "lookup-alt-lang" && res.parallel && res.parallel.length) {
-        // az üstünlüklüdür, sonra səhifə dili, sonra qalanlar
-        const order = ["az", lang, "tr", "en", "ru"];
-        const list = res.parallel.slice().sort(function (a, b) { return order.indexOf(a.lang) - order.indexOf(b.lang); }).slice(0, 2);
-        list.forEach(function (p) { label((lang === "az" ? T.noAz : T.noTo).replace("{l}", (TRN_LANGS[p.lang] || p.lang)), p.source && p.source.url); add("trx", p.text); });
-        foot();
-      } else { box.classList.add("none"); add("trx", res && res.limited && res.notes && res.notes[0] ? res.notes[0] : T.none); }
-      return box;
-    }
-    function trnLang() { try { const l = uiLang(); return TRN_T[l] ? l : "az"; } catch (e) { return "az"; } }
-    function armTranslate(el, raw, wrap) {
-      const items = trnPassages(el, raw);
-      if (!items.length) return;
-      const b = document.createElement("button");
-      b.type = "button";
-      b.className = "trbtn";
-      b.setAttribute("aria-label", TRN_T[trnLang()].btn);
-      b.title = TRN_T[trnLang()].btn;
-      b.innerHTML = IC_TR;
-      b.addEventListener("click", function (e) {
-        e.stopPropagation();
-        if (b.classList.contains("busy")) return;
-        const lang = trnLang();
-        const T = TRN_T[lang];
-        const old = el.querySelectorAll(".trn");
-        if (old.length) { old.forEach(function (n) { n.remove(); }); b.classList.remove("ok"); b.title = T.btn; b.setAttribute("aria-label", T.btn); return; }
-        b.classList.add("busy");
-        note(T.busy);
-        fetch("/api/translate", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ texts: items.map(function (x) { return x.text; }), from: "ar", to: lang, ui: lang }) })
-          .then(function (r) { return r.json(); })
-          .then(function (d) {
-            if (!d || !Array.isArray(d.results)) throw new Error("bad");
-            let tail = null;
-            items.forEach(function (x, i) {
-              const node = trnNode(d.results[i], lang, T);
-              if (x.after) x.after.insertAdjacentElement("afterend", node);
-              else { el.insertBefore(node, wrap); tail = node; }
-            });
-            b.classList.add("ok");
-            b.title = T.off;
-            b.setAttribute("aria-label", T.off);
-          })
-          .catch(function () { note(T.err); })
-          .then(function () { b.classList.remove("busy"); });
-      });
-      wrap.insertBefore(b, wrap.firstChild);
-    }
-    function addTools(el, raw) {
-      const wrap = document.createElement("div");
-      wrap.className = "tools";
-      wrap.setAttribute("role", "group");
-      wrap.setAttribute("aria-label", "Cavab əməliyyatları");
-      const c = document.createElement("button");
-      c.type = "button";
-      c.className = "cpbtn";
-      c.title = "Kopyala";
-      c.setAttribute("aria-label", "Kopyala");
-      c.innerHTML = IC_COPY;
-      c.addEventListener("click", function (e) {
-        e.stopPropagation();
-        const t = plainAnswer(raw);
-        copyWithNote(t, c);
-      });
-      const s = document.createElement("button");
-      s.type = "button";
-      s.className = "shbtn";
-      s.title = "Paylaş";
-      s.setAttribute("aria-label", "Paylaş");
-      s.setAttribute("aria-haspopup", "menu");
-      s.setAttribute("aria-expanded", "false");
-      s.innerHTML = IC_SHARE;
-      s.addEventListener("click", function (e) {
-        e.stopPropagation();
-        if (navigator.share) {
-          navigator.share({ title: "Nibras AI", text: shareText(raw) }).catch(function (err) {
-            if (err && err.name === "AbortError") return;
-            openShare(s, raw);
-          });
-        } else openShare(s, raw);
-      });
-      wrap.appendChild(c);
-      wrap.appendChild(s);
-      armTranslate(el, raw, wrap);
-      el.classList.add("ht");
-      el.appendChild(wrap);
-    }
     // Yeni cavab: uzun cavabın BAŞI (balonun üstü) görünür; ekrana tam sığan qısa cavab tam görünür. İstifadəçinin öz mesajı isə həmişə aşağıya çəkilir.
     function revealAnswer(el) {
       if (el.offsetHeight <= msgs.clientHeight) { msgs.scrollTop = msgs.scrollHeight; return; }
       const delta = el.getBoundingClientRect().top - msgs.getBoundingClientRect().top;
       msgs.scrollTop = Math.max(0, msgs.scrollTop + delta - 8);
-    }
-    // Real hündürlük 300px-dən çoxdursa (uzun sətirlər qatlandıqda), blok yığılır və «Davamını aç ▾» göstərilir. Kod mətni dəyişmir.
-    function armCode(el) {
-      el.querySelectorAll(".cb:not(.col)").forEach(function (cb) {
-        const pre = cb.querySelector("pre");
-        const more = cb.querySelector(".morebtn");
-        if (!pre || !more || !more.hidden || cb.getAttribute("data-open")) return;
-        if (pre.scrollHeight > 304) { cb.classList.add("col"); more.hidden = false; }
-      });
     }
     function bubble(text, kind, imageUrl, restore) {
       if (hello && hello.parentNode) hello.remove();
@@ -1277,9 +932,7 @@
         img.src = imageUrl;
         el.appendChild(img);
       }
-      if (kind === "b") addTools(el, text);
       msgs.appendChild(el);
-      armCode(el);
       if (restore) return el; // söhbət bərpasında renderItem özü sona çəkir
       if (kind.charAt(0) === "b") revealAnswer(el);
       else msgs.scrollTop = msgs.scrollHeight;
@@ -1669,6 +1322,10 @@
     })();
     function setDrawer(on) {
       const was = drawer.classList.contains("on");
+      if (on) {
+        about.classList.remove("on");
+        about.setAttribute("aria-hidden", "true");
+      }
       drawer.classList.toggle("on", on);
       scrim.classList.toggle("on", on);
       drawer.setAttribute("aria-hidden", on ? "false" : "true");
@@ -1747,9 +1404,21 @@
     }
     menuBtn.addEventListener("click", function () { setDrawer(!drawer.classList.contains("on")); });
     document.getElementById("dclose").addEventListener("click", function () { setDrawer(false); });
-    scrim.addEventListener("click", function () { setDrawer(false); });
+    const about = document.getElementById("about");
+    const aboutBtn = document.getElementById("aboutbtn");
+    function setAbout(on) {
+      if (on) setDrawer(false);
+      about.classList.toggle("on", on);
+      about.setAttribute("aria-hidden", on ? "false" : "true");
+      scrim.classList.toggle("on", on || drawer.classList.contains("on"));
+      if (on) { try { document.getElementById("aboutclose").focus(); } catch (e) {} }
+      else if (about.contains(document.activeElement)) { try { aboutBtn.focus(); } catch (e) {} }
+    }
+    aboutBtn.addEventListener("click", function () { setAbout(!about.classList.contains("on")); });
+    document.getElementById("aboutclose").addEventListener("click", function () { setAbout(false); });
+    scrim.addEventListener("click", function () { setDrawer(false); setAbout(false); });
     document.getElementById("newchat").addEventListener("click", newChat);
-    document.addEventListener("keydown", function (e) { if (e.key === "Escape") setDrawer(false); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") { setDrawer(false); setAbout(false); } });
     document.addEventListener("visibilitychange", function () { if (document.visibilityState === "hidden") flushNow(); });
     window.addEventListener("pagehide", flushNow);
     window.nibrasChats = { open: openChat, newChat: newChat, remove: deleteChat, flush: flushNow };

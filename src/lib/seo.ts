@@ -679,6 +679,14 @@ const LOCALES: Record<Lang, string> = {
   ru: "ru_RU",
 };
 
+function ogImage(path: string) {
+  const bare = stripLocalePrefix(path).path;
+  if (bare === "/ai" || bare.startsWith("/ai/")) return `${SITE}/nibras-ai.jpg`;
+  if (bare.startsWith("/apps/") && bare !== "/apps") return `${SITE}/apps/${bare.split("/").pop()}.jpg`;
+  if (bare === "/programming" || bare.startsWith("/programming/")) return `${SITE}/home/hero-desk.jpg`;
+  return `${SITE}/og.jpg`;
+}
+
 export function buildHead(pathname: string, lang: Lang) {
   const raw = pathname.length > 1 ? pathname.replace(/\/$/, "") : "/";
   const split = stripLocalePrefix(raw);
@@ -697,9 +705,7 @@ export function buildHead(pathname: string, lang: Lang) {
   const samplePath = programmingFromPath(raw);
   const hideSample = Boolean(samplePath && isCodeSampleChild(samplePath.slug));
   const url = canonicalUrl(path, pageLang);
-  const image = path.startsWith("/apps/")
-    ? `${SITE}/apps/${path.split("/").pop()}.jpg`
-    : `${SITE}/home/bg-hero.jpg`;
+  const image = ogImage(path);
 
   return {
     meta: [

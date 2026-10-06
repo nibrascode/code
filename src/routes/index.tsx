@@ -246,7 +246,7 @@ function Home() {
           </a>
           <a
             className="nx-studio-bar"
-            href="http://dev.nibrascode.com"
+            href="https://dev.nibrascode.com"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -265,7 +265,7 @@ function Home() {
           </a>
           <a
             className="nx-apk-bar"
-            href="http://studio.nibrascode.com"
+            href="https://studio.nibrascode.com"
             target="_blank"
             rel="noopener noreferrer"
           >
