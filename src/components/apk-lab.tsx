@@ -30,9 +30,9 @@ const COPY: Record<
     filesNote: "Bu zipin kökündə index.html durur. Yanında css və js qovluqları var. Onu olduğu kimi Studio-ya vermək olar.",
     download: "Qeyd zipini endir",
     zip: "Öz zipini seç",
-    zipNote: "Zip bu səhifədə saxlanmır. Faylı seçəndən sonra eyni zipi Nibras Studio-da ver.",
-    picked: "Zip seçildi",
-    studio: "Nibras Studio-ya keç",
+    zipNote: "Zip seçilən kimi Nibras Studio özü açılır.",
+    picked: "Studio açıldı",
+    studio: "Nibras Studio-nu aç",
     caps: ["Veb qeyd", "Sayğac", "Səhifə içində", "Üç kart"],
   },
   en: {
@@ -45,8 +45,8 @@ const COPY: Record<
     filesNote: "index.html stands at the root of this zip. The css and js folders sit beside it. You can give it to Studio as it is.",
     download: "Download the notes zip",
     zip: "Choose your own zip",
-    zipNote: "The zip is not stored on this page. After you choose the file, give the same zip to Nibras Studio.",
-    picked: "Zip chosen",
+    zipNote: "Nibras Studio opens by itself as soon as you choose the zip.",
+    picked: "Studio opened",
     studio: "Open Nibras Studio",
     caps: ["Web notes", "Counter", "Page inside", "Three cards"],
   },
@@ -60,9 +60,9 @@ const COPY: Record<
     filesNote: "Bu zipin kökünde index.html durur. Yanında css ve js klasörleri vardır. Olduğu gibi Studio'ya verilebilir.",
     download: "Not zipini indir",
     zip: "Kendi zipini seç",
-    zipNote: "Zip bu sayfada saklanmaz. Dosyayı seçtikten sonra aynı zipi Nibras Studio'ya ver.",
-    picked: "Zip seçildi",
-    studio: "Nibras Studio'ya geç",
+    zipNote: "Zip seçilir seçilmez Nibras Studio kendi açılır.",
+    picked: "Studio açıldı",
+    studio: "Nibras Studio'yu aç",
     caps: ["Web not", "Sayaç", "Sayfa içinde", "Üç kart"],
   },
   ar: {
@@ -75,8 +75,8 @@ const COPY: Record<
     filesNote: "index.html يقف في جذر هذا الـ zip. بجانبه مجلدا css وjs. يمكن إعطاؤه إلى Studio كما هو.",
     download: "تنزيل zip الملاحظات",
     zip: "اختر zip الخاص بك",
-    zipNote: "الـ zip لا يُحفظ في هذه الصفحة. بعد اختيار الملف أعطِ الـ zip نفسه إلى Nibras Studio.",
-    picked: "تم اختيار zip",
+    zipNote: "يفتح Nibras Studio وحده فور اختيار الـ zip.",
+    picked: "فُتح Studio",
     studio: "افتح Nibras Studio",
     caps: ["ملاحظة ويب", "عدّاد", "صفحة في الداخل", "ثلاث بطاقات"],
   },
@@ -90,8 +90,8 @@ const COPY: Record<
     filesNote: "В корне этого zip стоит index.html. Рядом папки css и js. Его можно отдать Studio как есть.",
     download: "Скачать zip заметок",
     zip: "Выбери свой zip",
-    zipNote: "Zip на этой странице не хранится. После выбора файла отдай тот же zip в Nibras Studio.",
-    picked: "Zip выбран",
+    zipNote: "Nibras Studio открывается сам, как только выбран zip.",
+    picked: "Studio открылся",
     studio: "Открыть Nibras Studio",
     caps: ["Веб-заметки", "Счётчик", "Страница внутри", "Три карточки"],
   },
@@ -113,6 +113,13 @@ export function ApkLab() {
   );
   const [button, setButton] = useState(lang === "en" ? "Save" : lang === "tr" ? "Kaydet" : lang === "ru" ? "Сохранить" : lang === "ar" ? "احفظ" : "Saxla");
   const [zipName, setZipName] = useState("");
+
+  function openStudio(file: File | undefined) {
+    if (!file) return;
+    setZipName(file.name);
+    const opened = window.open("https://studio.nibrascode.com/studio", "_blank", "noopener,noreferrer");
+    if (!opened) window.location.assign("https://studio.nibrascode.com/studio");
+  }
 
   return (
     <div className="apk-lab">
@@ -165,7 +172,7 @@ export function ApkLab() {
         <input
           type="file"
           accept=".zip,application/zip"
-          onChange={(event) => setZipName(event.target.files?.[0]?.name ?? "")}
+          onChange={(event) => openStudio(event.target.files?.[0])}
         />
       </label>
       {zipName ? (
