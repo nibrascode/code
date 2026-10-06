@@ -114,6 +114,21 @@ const PROGRAM_NAMES: Record<string, string> = {
   typescript: "TypeScript",
   "html-css": "HTML/CSS",
   sql: "SQL",
+  go: "Go",
+  php: "PHP",
+  kotlin: "Kotlin",
+  cpp: "C++",
+  rust: "Rust",
+  ubuntu: "Ubuntu",
+  "java-17": "Java 17",
+  nodejs: "Node.js",
+  "android-sdk": "Android SDK",
+  gradle: "Gradle",
+  capacitor: "Capacitor",
+  docker: "Docker",
+  nginx: "Nginx",
+  ssl: "SSL / HTTPS",
+  firewall: "Firewall",
 };
 
 export function ProgrammingArticle({

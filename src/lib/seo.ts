@@ -313,28 +313,28 @@ const PAGES: Record<string, Copy> = {
   "/programming": {
     az: {
       title: "Proqramlaşdırma — Nibras Code",
-      description: "Python, JavaScript, Java, C#, TypeScript, HTML/CSS və SQL haqqında səhifələr.",
-      keywords: "proqramlaşdırma, Python, JavaScript, Java, C#, TypeScript, HTML, CSS, SQL",
+      description: "Python, Java, Go, PHP, Kotlin, Node.js, Docker, Nginx, Ubuntu və digər dillər və alətlər.",
+      keywords: "proqramlaşdırma, Go, PHP, Kotlin, Node.js, Docker, Nginx, Ubuntu, Java 17",
     },
     en: {
       title: "Programming — Nibras Code",
-      description: "Pages on Python, JavaScript, Java, C#, TypeScript, HTML/CSS, and SQL.",
-      keywords: "programming, Python, JavaScript, Java, C#, TypeScript, HTML, CSS, SQL",
+      description: "Pages on Python, Java, Go, PHP, Kotlin, Node.js, Docker, Nginx, Ubuntu, and other languages and tools.",
+      keywords: "programming, Go, PHP, Kotlin, Node.js, Docker, Nginx, Ubuntu, Java 17",
     },
     tr: {
       title: "Programlama — Nibras Code",
-      description: "Python, JavaScript, Java, C#, TypeScript, HTML/CSS ve SQL sayfaları.",
-      keywords: "programlama, Python, JavaScript, Java, C#, TypeScript, HTML, CSS, SQL",
+      description: "Python, Java, Go, PHP, Kotlin, Node.js, Docker, Nginx, Ubuntu ve diğer diller ile araçlar.",
+      keywords: "programlama, Go, PHP, Kotlin, Node.js, Docker, Nginx, Ubuntu, Java 17",
     },
     ar: {
       title: "برمجة — Nibras Code",
-      description: "صفحات عن Python وJavaScript وJava وC# وTypeScript وHTML/CSS وSQL.",
-      keywords: "برمجة, Python, JavaScript, Java, C#, TypeScript, HTML, CSS, SQL",
+      description: "صفحات عن Python وJava وGo وPHP وKotlin وNode.js وDocker وNginx وUbuntu وأدوات أخرى.",
+      keywords: "برمجة, Go, PHP, Kotlin, Node.js, Docker, Nginx, Ubuntu, Java 17",
     },
     ru: {
       title: "Программирование — Nibras Code",
-      description: "Страницы о Python, JavaScript, Java, C#, TypeScript, HTML/CSS и SQL.",
-      keywords: "программирование, Python, JavaScript, Java, C#, TypeScript, HTML, CSS, SQL",
+      description: "Страницы о Python, Java, Go, PHP, Kotlin, Node.js, Docker, Nginx, Ubuntu и других языках и инструментах.",
+      keywords: "программирование, Go, PHP, Kotlin, Node.js, Docker, Nginx, Ubuntu, Java 17",
     },
   },
   ...Object.fromEntries(PROGRAMMING.map((page) => [`/programming/${page.slug}`, page.seo])),

@@ -10,6 +10,7 @@ import { PYTHON_AR } from "@/lib/python-ar";
 import { PYTHON_EN } from "@/lib/python-en";
 import { PYTHON_RU } from "@/lib/python-ru";
 import { PYTHON_TR } from "@/lib/python-tr";
+import { ALL_STACK } from "@/lib/stack-all";
 
 export type ProgrammingLocale = {
   lang: Exclude<Lang, "az">;
@@ -47,6 +48,14 @@ const LOCALES: readonly ProgrammingLocale[] = [
   { lang: "tr", slug: "sql", title: "SQL nedir?", sections: sqlSections("tr") },
   { lang: "ar", slug: "sql", title: "ما هو SQL؟", sections: sqlSections("ar") },
   { lang: "ru", slug: "sql", title: "Что такое SQL?", sections: sqlSections("ru") },
+  ...ALL_STACK.flatMap((item) =>
+    (["en", "tr", "ar", "ru"] as const).map((lang) => ({
+      lang,
+      slug: item.slug,
+      title: item.title[lang],
+      sections: item.sections[lang],
+    })),
+  ),
 ];
 
 export function programmingLocalePath(lang: Lang, slug: string) {
