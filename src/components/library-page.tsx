@@ -245,11 +245,15 @@ export function LibraryIndex({
           <ol>
             {START_STEPS.map((step, index) => (
               <li key={step.slug}>
-                <a href={step.slug === "ai" ? "/ai" : programmingLocalePath(lang, step.slug)}>
-                  <b>
-                    {index + 1}. {step.text[lang].title}
-                  </b>
-                  <span>{step.text[lang].note}</span>
+                <a
+                  className={step.slug === "html-css" ? "step-html" : step.slug === "python" ? "step-py" : "step-ai"}
+                  href={step.slug === "ai" ? "/ai" : programmingLocalePath(lang, step.slug)}
+                >
+                  <i>{index + 1}</i>
+                  <span className="step-copy">
+                    <b>{step.text[lang].title}</b>
+                    <span>{step.text[lang].note}</span>
+                  </span>
                 </a>
               </li>
             ))}
