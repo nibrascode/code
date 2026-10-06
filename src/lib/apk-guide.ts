@@ -1,5 +1,6 @@
 import type { Lang } from "@/lib/i18n";
 import type { ProgrammingSection } from "@/lib/programming";
+import { apkAdvanced } from "@/lib/apk-advanced";
 
 const WEB = `qeyd/
   index.html
@@ -552,5 +553,5 @@ export function apkSections(lang: Lang): ProgrammingSection[] {
   pages.tr = tr;
   pages.ar = ar;
   pages.ru = ru;
-  return pages[lang];
+  return [...pages[lang], ...apkAdvanced(lang)];
 }

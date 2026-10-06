@@ -1,0 +1,598 @@
+import type { Lang } from "@/lib/i18n";
+import type { ProgrammingSection } from "@/lib/programming";
+
+const FOLDERS = `app/src/main/AndroidManifest.xml
+app/src/main/java/.../ekranlar/
+app/src/main/res/layout/
+server/  (telefonun özündə deyil)`;
+
+export function apkAdvanced(lang: Lang): ProgrammingSection[] {
+  const all: Record<Lang, ProgrammingSection[]> = {
+    az: [
+      {
+        id: "inside",
+        title: "APK-nın içində nə dayanır?",
+        blocks: [
+          {
+            paragraphs: [
+              "APK əslində başqa adlı bir arxivdir. Adı .apk ilə bitir, amma içi qovluq və fayllardan ibarətdir. Telefon həmin bir faylı açır, imzanı yoxlayır, sonra içindəki proqramı işə salır. İçini dəyişib yenidən bağlamaq tətbiqi sənin etmir. İmza pozulur və telefon faylı rədd edir.",
+              "Çöldən iki APK eyni görünə bilər. Biri içində bir səhifə saxlayır, o biri isə çox ekran, şəkil və kitabxana. Ölçü yazının uzunluğundan yox, şəkillərdən və əlavə olunmuş alətlərdən böyüyür.",
+            ],
+            list: [
+              "AndroidManifest.xml tətbiqin adını, paketini, açılış ekranını və istəyə biləcəyi icazələri deyir.",
+              "classes.dex telefonun işlətdiyi proqramdır. Kotlin və Java yığılanda buna çevrilir. Veb APK-da öz məntiqi az olur, səhifə ayrıca durur.",
+              "res qovluğu şəkil, yazı və ekran düzümünü saxlayır.",
+              "resources.arsc hansı adın hansı şəkilə və yazıya bağlandığını deyən cədvəldir.",
+              "META-INF imzadır. İçəridə bir fayl dəyişsə və imza yenilənməsə, quraşdırma dayanır.",
+              "Veb APK-da saytın özü assets və ya buna bənzər qovluqda durur. Pəncərə həmin faylları açır.",
+            ],
+          },
+        ],
+      },
+      {
+        id: "permissions",
+        title: "İcazələr nə üçündür?",
+        blocks: [
+          {
+            paragraphs: [
+              "APK telefonda durur deyə kamera, rehber və ya yer öz-özünə açılmır. Manifest yalnız tətbiqin nə istəyə biləcəyini yazır. Adam razılığı çox vaxt həmin ekran ilk dəfə açılınca verir. Razılıq yoxdursa, həmin iş getmir, tətbiqin qalanı isə qala bilər.",
+              "Yalnız ekranın işlətdiyini istə. Qeyd tətbiqinə mikrofon lazım deyil. Xəritə yer istəyir. Serverlə danışan ekran internet istəyir. Artıq icazə adamı qorxudur və mağaza baxışında da sual doğurur.",
+              "Veb APK saytı açırsa, internet lazımdır. Kamera öz-özünə gəlmir. Həm qabıq, həm səhifə kameranı istəməli, adam da razı olmalıdır. İcazəni ilk açılışa yox, kameranın durduğu ekrana saxla.",
+            ],
+          },
+        ],
+      },
+      {
+        id: "sign",
+        title: "Debug, release və AAB",
+        blocks: [
+          {
+            paragraphs: [
+              "Debug APK yoxlama üçündür. Nibras Studio-nun yığdığı APK debug imzalıdır. Onu öz telefonuna quraşdırıb düyməni sınamaq olar. Mağaza bu faylı adətən son buraxılış kimi qəbul etmir. Dostuna test üçün vermək olar, telefon isə tanınmayan mənbə barədə xəbərdarlıq göstərə bilər.",
+              "Release APK sənin öz açarınla imzalanır. Həmin açar növbəti yeniləmənin səndən gəldiyini göstərir. Açarı itirsən, eyni tətbiqin üstünə yenisini qoya bilməzsən. Yeni paket adı başqa tətbiq sayılır və köhnəsinin yanında ayrıca durur.",
+              "versionCode tam ədəddir. Hər yeni faylda bu ədəd böyüməlidir. versionName adamın gördüyü addır, məsələn 1.2. Ədəd artmasa, telefon yenini köhnənin yerinə qoymur.",
+              "AAB mağazanın çox vaxt istədiyi bağlamadır. APK telefonun quraşdırdığı fayldır. Mağaza AAB-ni telefonun növünə görə kiçik APK-lara bölə bilər. Özün birbaşa quraşdırırsansa, əlində APK olmalıdır.",
+            ],
+          },
+        ],
+      },
+      {
+        id: "advanced",
+        title: "İnkişaf etmiş APK nədir?",
+        blocks: [
+          {
+            paragraphs: [
+              "Sadə APK bir ekrandır. Bir sətri telefonda saxlayır. Adamın kim olduğunu bilmir. Bağlayıb açanda sətir yerindədir və bu bəs edir. Qeyd, sayğac və bir düyməlik səhifə bu növdür. Onu bir gündə yığmaq olar.",
+              "İnkişaf etmiş APK çox ekrandır. Hesab var. Məlumat başqa telefonda da görünməlidir. Siyahı internetdən gəlir. Şəkil göndərilir. Tətbiq bağlı olanda bildiriş gələ bilər. İki adam eyni dəyişikliyi görür. Bu artıq bir faylın içinə sıxılmış səhifə deyil. Telefon, server və saxlanan məlumat birlikdə işləyir.",
+              "İnkişaf etmiş tətbiq birinci gün böyük başlamır. Əvvəl sadə ekran bitir. Sonra ikinci ekran gəlir. Sonra saxlama serverə keçir. Sonra giriş. Hamısını ilk gündə yazmaq boş qabıq verir: düymələr var, iş yoxdur.",
+              "Veb yolunda çətin hissə çox vaxt saytın özüdür. Giriş, siyahı və server saytda olur. APK yalnız pəncərədir. Nibras Studio həmin saytı tətbiqə çevirə bilər. Kameranın, faylın və arxa planda işin səhifədən dərin olması lazımdırsa, native və ya Flutter seçilir. Pəncərə bəs edirsə, ikinci proqram yazmaq vaxt itkisidir.",
+            ],
+          },
+        ],
+      },
+      {
+        id: "advanced-how",
+        title: "İnkişaf etmiş APK necə düzəldilir?",
+        blocks: [
+          {
+            paragraphs: [
+              "Böyük tətbiq bir cümlə ilə başlamır. «Hər şeyi edən proqram» yazısı heç bir ekranı bitirmir. Əvvəl işi kiçik cümlələrə böl. Məsələn: adam girir, öz qeydlərini görür, birini əlavə edir, həmin qeyd ikinci telefonda da görünür. Bu dörd cümlə dörd işdir. Hər birinin ekranı və faylı var.",
+            ],
+            ordered: true,
+            list: [
+              "Ekranları ayır. Siyahı, bir qeydin içi, yazma forması və giriş. Hər ekranın bir işi olsun.",
+              "Məlumatın yerini seç. Yalnız bu telefona lazım olan sətir telefonda qala bilər. Başqa telefon görməlidirsə, server lazımdır.",
+              "Telefon serverə qısa sorğu göndərir. Server məlumat qaytarır. Baza APK-nın içində durmur.",
+              "Şifrəni və gizli açarı koda yazma. APK-nı açan adam onu oxuya bilər. Server yoxlayır, telefon yalnız icazə nişanı saxlayır.",
+              "Giriş ayrı ekrandır. Server nişan verir. Nişan şifrənin özü deyil.",
+              "İcazəni işin durduğu ekrana qoy. Kamera kamera ekranında istənilir, birinci açılışda yox.",
+              "İnternet kəsiləndə nəyin açıq qalacağına qərar ver. Son siyahının surəti görünə bilər. Yeni yazı gözləyib sonra gedə bilər. Bunu düşünməsən, ekran sadəcə dayanır.",
+              "Dar telefonda yoxla. Sənin ekranına sığan düymə başqa telefonda kənara çıxa bilər.",
+              "versionCode-u artır. Köhnə release ilə eyni açarla imzala. Paket adı eyni qalmalıdır.",
+              "Mağaza səhifəsi APK-dan ayrıdır. Ad, şəkillər, qısa mətn və məxfilik ünvanı faylın özündə bitmir.",
+            ],
+          },
+          {
+            heading: "Qovluqlar böyüyəndə",
+            paragraphs: [
+              "Sadə native tətbiqdə bir ekran activity_main içində durur. İnkişaf etmiş tətbiqdə hər ekranın öz faylı olur. Server qovluğu telefon layihəsinin içində olmaya bilər. O, başqa ünvanda işləyir. APK yalnız ona sorğu göndərir.",
+            ],
+            code: FOLDERS,
+            after: [
+              "Əvvəl bir ekranı telefonda gör. Sonra ikincini əlavə et. Serveri lap sonda, ikinci telefon eyni sətri görməlidirsə, bağla. Tərsinə başlasan, düyməsiz bir baza və boş bir APK qalır.",
+            ],
+          },
+        ],
+      },
+      {
+        id: "fresh",
+        title: "Yeniləmə və tez-tez verilən suallar",
+        blocks: [
+          {
+            paragraphs: [
+              "Telefon köhnə tətbiqi ancaq üç şey üst-üstə düşəndə əvəz edir. Paket adı eyni olmalıdır. İmza eyni açardan gəlməlidir. versionCode böyük olmalıdır. Biri çatışmırsa, yeni fayl ya qurulmur, ya da köhnəsinin yanında ikinci tətbiq kimi durur.",
+              "Öz tətbiqini qur. Başqasının APK-sını açıb içinə öz ekranını qoymaq sənin tətbiqin olmur. İmza pozulur, fayl qurulmur və o proqram sənə aid deyil.",
+            ],
+          },
+          {
+            heading: "APK ilə AAB eynidirmi?",
+            paragraphs: ["Xeyr. APK telefonun açdığı fayldır. AAB mağazaya verilən bağlamadır. Mağaza onu telefona uyğun APK-ya çevirə bilər."],
+          },
+          {
+            heading: "APK iPhone-da açılır?",
+            paragraphs: ["Xeyr. iPhone başqa fayl və başqa qayda istifadə edir. Android üçün yığılan APK orada qurulmur."],
+          },
+          {
+            heading: "Fayl niyə böyükdür?",
+            paragraphs: ["Ekrandakı bir cümlə faylı böyütmür. Şəkillər, şriftlər və əlavə kitabxanalar böyüdür. Lazım olmayan şəkli içəri qoyma."],
+          },
+          {
+            heading: "Veb APK internetsiz işləyir?",
+            paragraphs: ["Zipin içinə qoyduğun səhifə telefonda qalır və aça bilər. Ünvandan yüklənən səhifə isə internet istəyir. Şəkil də çöldən gəlirsə, şəbəkə kəsiləndə boş qalır."],
+          },
+          {
+            heading: "Debug faylı mağazaya qoyulur?",
+            paragraphs: ["Xeyr. O, yoxlama üçündür. Mağaza üçün release imzası, böyüyən versiya və çox vaxt AAB lazımdır."],
+          },
+        ],
+      },
+    ],
+    en: [
+      {
+        id: "inside",
+        title: "What is inside an APK?",
+        blocks: [
+          {
+            paragraphs: [
+              "An APK is an archive with another name. The name ends in .apk, but the inside is folders and files. The phone opens that one file, checks the signature, then runs the program inside. Changing the inside and packing it again does not make the app yours. The signature breaks and the phone refuses the file.",
+              "Two APKs can look the same from the outside. One holds a page. The other holds many screens, pictures, and libraries. The size grows from pictures and added tools, not from the length of a sentence.",
+            ],
+            list: [
+              "AndroidManifest.xml says the app name, the package, the opening screen, and the permissions it may ask for.",
+              "classes.dex is the program the phone runs. Kotlin and Java become this when they are built. A web APK has less of its own logic. The page stands separately.",
+              "The res folder holds pictures, words, and screen layout.",
+              "resources.arsc is the table that ties a name to a picture and a line of text.",
+              "META-INF is the signature. If a file inside changes and the signature is not made again, install stops.",
+              "In a web APK the site itself stands in assets or a folder like it. The window opens those files.",
+            ],
+          },
+        ],
+      },
+      {
+        id: "permissions",
+        title: "What are permissions for?",
+        blocks: [
+          {
+            paragraphs: [
+              "The camera, the contacts, and the location do not open just because an APK is on the phone. The manifest only lists what the app may ask. The person usually agrees the first time that screen opens. Without a yes, that job does not run. The rest of the app can stay.",
+              "Ask only for what the screen uses. A notes app does not need the microphone. A map needs location. A screen that talks to a server needs the internet. An extra permission frightens the person and raises a question in a store review.",
+              "A web APK that opens your site needs the internet. The camera does not arrive by itself. The shell and the page both have to ask, and the person has to agree. Keep the permission on the camera screen, not on the first open.",
+            ],
+          },
+        ],
+      },
+      {
+        id: "sign",
+        title: "Debug, release, and AAB",
+        blocks: [
+          {
+            paragraphs: [
+              "A debug APK is for a test. The APK that Nibras Studio builds is debug-signed. You can install it on your own phone and try the button. A store usually will not take this file as the final release. You can hand it to a friend for a test. The phone may warn about an unknown source.",
+              "A release APK is signed with your own key. That key shows that the next update came from you. Lose the key and you cannot put a new file on top of the same app. A new package name counts as another app and stands beside the old one.",
+              "versionCode is a whole number. Each new file must raise it. versionName is the name a person sees, such as 1.2. If the number does not rise, the phone does not replace the old file.",
+              "An AAB is the bundle a store often wants. An APK is the file the phone installs. The store can split an AAB into smaller APKs for each kind of phone. If you install it yourself, you need an APK in your hand.",
+            ],
+          },
+        ],
+      },
+      {
+        id: "advanced",
+        title: "What is an advanced APK?",
+        blocks: [
+          {
+            paragraphs: [
+              "A simple APK is one screen. It keeps a line on the phone. It does not know who the person is. Close it and open it, and the line is still there. That is enough. A note, a counter, and a one-button page are this kind. You can build one in a day.",
+              "An advanced APK has many screens. There is an account. The data has to appear on another phone. A list comes from the internet. A picture is sent. A notification can arrive while the app is closed. Two people see the same change. This is no longer a page squeezed into a file. The phone, a server, and stored data work together.",
+              "An advanced app does not start big on the first day. The simple screen is finished first. Then a second screen arrives. Then saving moves to a server. Then login. Writing all of it on day one gives an empty shell: buttons, and no job.",
+              "On the web path the hard part is often the site itself. Login, the list, and the server live on the site. The APK is only the window. Nibras Studio can turn that site into an app. Choose native or Flutter when the camera, the files, or background work must go deeper than a page. If a window is enough, a second program wastes time.",
+            ],
+          },
+        ],
+      },
+      {
+        id: "advanced-how",
+        title: "How do you build an advanced APK?",
+        blocks: [
+          {
+            paragraphs: [
+              "A large app does not start with one sentence. The words \"a program that does everything\" finish no screen. Split the job into small sentences. For example: a person signs in, sees their notes, adds one, and that note appears on a second phone. Those are four jobs. Each one has a screen and a file.",
+            ],
+            ordered: true,
+            list: [
+              "Separate the screens. A list, the inside of one note, a writing form, and login. Give each screen one job.",
+              "Choose where the data sits. A line that only this phone needs can stay on the phone. If another phone must see it, you need a server.",
+              "The phone sends a short request. The server returns data. The database does not sit inside the APK.",
+              "Do not write a password or a secret key into the code. A person who opens the APK can read it. The server checks. The phone keeps only a permit token.",
+              "Login is its own screen. The server gives a token. The token is not the password itself.",
+              "Put the permission on the screen that does the job. The camera is asked on the camera screen, not on the first open.",
+              "Decide what stays open when the internet drops. A copy of the last list can show. A new line can wait and leave later. If you do not plan this, the screen simply stops.",
+              "Test on a narrow phone. A button that fits your screen can fall off another phone.",
+              "Raise versionCode. Sign with the same key as the old release. The package name must stay the same.",
+              "The store page is separate from the APK. The name, the pictures, the short text, and the privacy address do not end inside the file.",
+            ],
+          },
+          {
+            heading: "When the folders grow",
+            paragraphs: [
+              "In a simple native app one screen stands in activity_main. In an advanced app each screen has its own file. The server folder may not sit inside the phone project. It runs at another address. The APK only sends it a request.",
+            ],
+            code: FOLDERS,
+            after: [
+              "See one screen on a phone first. Then add the second. Connect the server at the end, and only if a second phone must see the same line. Start the other way and you keep a database with no button and an empty APK.",
+            ],
+          },
+        ],
+      },
+      {
+        id: "fresh",
+        title: "Updates and common questions",
+        blocks: [
+          {
+            paragraphs: [
+              "The phone replaces the old app only when three things match. The package name is the same. The signature comes from the same key. versionCode is higher. If one is missing, the new file either does not install, or it stands beside the old one as a second app.",
+              "Build your own app. Opening someone else's APK and putting your screen inside it does not make it yours. The signature breaks, the file does not install, and that program is not yours.",
+            ],
+          },
+          { heading: "Are APK and AAB the same?", paragraphs: ["No. An APK is the file the phone opens. An AAB is the bundle you give a store. The store can turn it into an APK that fits the phone."] },
+          { heading: "Does an APK open on an iPhone?", paragraphs: ["No. An iPhone uses another file and another rule. An APK built for Android does not install there."] },
+          { heading: "Why is the file large?", paragraphs: ["One sentence on the screen does not grow the file. Pictures, fonts, and extra libraries do. Do not put a picture inside if you do not need it."] },
+          { heading: "Does a web APK work offline?", paragraphs: ["A page you put inside the zip stays on the phone and can open. A page that loads from an address needs the internet. If a picture also comes from outside, it stays empty when the network drops."] },
+          { heading: "Does a debug file go to a store?", paragraphs: ["No. It is for a test. A store wants a release signature, a rising version, and often an AAB."] },
+        ],
+      },
+    ],
+    tr: [
+      {
+        id: "inside",
+        title: "APK'nın içinde ne durur?",
+        blocks: [
+          {
+            paragraphs: [
+              "APK aslında başka adlı bir arşivdir. Adı .apk ile biter, ama içi klasör ve dosyalardan oluşur. Telefon o tek dosyayı açar, imzayı yoklar, sonra içindeki programı çalıştırır. İçini değiştirip yeniden kapatmak uygulamayı senin yapmaz. İmza bozulur ve telefon dosyayı reddeder.",
+              "Dışarıdan iki APK aynı görünebilir. Biri içinde bir sayfa tutar, öteki çok ekran, resim ve kütüphane. Boy yazının uzunluğundan değil, resimlerden ve eklenen araçlardan büyür.",
+            ],
+            list: [
+              "AndroidManifest.xml uygulamanın adını, paketini, açılış ekranını ve isteyebileceği izinleri söyler.",
+              "classes.dex telefonun çalıştırdığı programdır. Kotlin ve Java derlenince buna döner. Web APK'da kendi mantığı azdır, sayfa ayrıca durur.",
+              "res klasörü resim, yazı ve ekran düzenini tutar.",
+              "resources.arsc hangi adın hangi resme ve yazıya bağlandığını söyleyen tablodur.",
+              "META-INF imzadır. İçerde bir dosya değişir ve imza yenilenmezse kurulum durur.",
+              "Web APK'da sitenin kendisi assets ya da buna benzer bir klasörde durur. Pencere o dosyaları açar.",
+            ],
+          },
+        ],
+      },
+      {
+        id: "permissions",
+        title: "İzinler ne içindir?",
+        blocks: [
+          {
+            paragraphs: [
+              "APK telefonda duruyor diye kamera, rehber ya da konum kendiliğinden açılmaz. Manifest yalnız uygulamanın ne isteyebileceğini yazar. Kişi onayı çoğu zaman o ekran ilk kez açılınca verir. Onay yoksa o iş gitmez, uygulamanın kalanı kalabilir.",
+              "Yalnız ekranın kullandığını iste. Not uygulamasına mikrofon gerekmez. Harita konum ister. Sunucuyla konuşan ekran internet ister. Fazla izin kişiyi korkutur ve mağaza bakışında da soru doğurur.",
+              "Web APK siteyi açıyorsa internet gerekir. Kamera kendiliğinden gelmez. Hem kabuk hem sayfa kamerayı istemeli, kişi de onaylamalıdır. İzni ilk açılışa değil, kameranın durduğu ekrana bırak.",
+            ],
+          },
+        ],
+      },
+      {
+        id: "sign",
+        title: "Debug, release ve AAB",
+        blocks: [
+          {
+            paragraphs: [
+              "Debug APK yoklama içindir. Nibras Studio'nun derlediği APK debug imzalıdır. Onu kendi telefonuna kurup düğmeyi denemek olur. Mağaza bu dosyayı genellikle son sürüm olarak kabul etmez. Arkadaşına deneme için vermek olur, telefon ise tanınmayan kaynak uyarısı gösterebilir.",
+              "Release APK senin kendi anahtarınla imzalanır. O anahtar sonraki güncellemenin senden geldiğini gösterir. Anahtarı kaybedersen aynı uygulamanın üstüne yenisini koyamazsın. Yeni paket adı başka uygulama sayılır ve eskisinin yanında ayrı durur.",
+              "versionCode tam sayıdır. Her yeni dosyada bu sayı büyümeli. versionName kişinin gördüğü addır, örneğin 1.2. Sayı artmazsa telefon yenisini eskinin yerine koymaz.",
+              "AAB mağazanın çoğu zaman istediği pakettir. APK telefonun kurduğu dosyadır. Mağaza AAB'yi telefonun türüne göre küçük APK'lara bölebilir. Kendin doğrudan kuruyorsan elinde APK olmalıdır.",
+            ],
+          },
+        ],
+      },
+      {
+        id: "advanced",
+        title: "Gelişmiş APK nedir?",
+        blocks: [
+          {
+            paragraphs: [
+              "Basit APK bir ekrandır. Bir satırı telefonda tutar. Kişinin kim olduğunu bilmez. Kapatıp açınca satır yerindedir ve bu yeter. Not, sayaç ve bir düğmelik sayfa bu türdür. Onu bir günde derlemek olur.",
+              "Gelişmiş APK çok ekrandır. Hesap vardır. Veri başka telefonda da görünmelidir. Liste internetten gelir. Resim gönderilir. Uygulama kapalıyken bildirim gelebilir. İki kişi aynı değişikliği görür. Bu artık bir dosyanın içine sıkışmış sayfa değildir. Telefon, sunucu ve saklanan veri birlikte çalışır.",
+              "Gelişmiş uygulama ilk gün büyük başlamaz. Önce basit ekran biter. Sonra ikinci ekran gelir. Sonra kayıt sunucuya geçer. Sonra giriş. Hepsini ilk gün yazmak boş kabuk verir: düğmeler vardır, iş yoktur.",
+              "Web yolunda zor kısım çoğu zaman sitenin kendisidir. Giriş, liste ve sunucu sitededir. APK yalnız penceredir. Nibras Studio o siteyi uygulamaya çevirebilir. Kameranın, dosyanın ve arka planda işin sayfadan derin olması gerekiyorsa native ya da Flutter seçilir. Pencere yetiyorsa ikinci program yazmak vakit kaybıdır.",
+            ],
+          },
+        ],
+      },
+      {
+        id: "advanced-how",
+        title: "Gelişmiş APK nasıl yapılır?",
+        blocks: [
+          {
+            paragraphs: [
+              "Büyük uygulama bir cümleyle başlamaz. «Her şeyi yapan program» yazısı hiçbir ekranı bitirmez. Önce işi küçük cümlelere böl. Örneğin: kişi girer, kendi notlarını görür, birini ekler, o not ikinci telefonda da görünür. Bu dört cümle dört iştir. Her birinin ekranı ve dosyası vardır.",
+            ],
+            ordered: true,
+            list: [
+              "Ekranları ayır. Liste, bir notun içi, yazma formu ve giriş. Her ekranın bir işi olsun.",
+              "Verinin yerini seç. Yalnız bu telefona lazım olan satır telefonda kalabilir. Başka telefon görmeliyse sunucu gerekir.",
+              "Telefon sunucuya kısa sorgu gönderir. Sunucu veri döndürür. Veritabanı APK'nın içinde durmaz.",
+              "Parolayı ve gizli anahtarı koda yazma. APK'yı açan kişi onu okuyabilir. Sunucu yoklar, telefon yalnız izin nişanı saklar.",
+              "Giriş ayrı ekrandır. Sunucu nişan verir. Nişan parolanın kendisi değildir.",
+              "İzni işin durduğu ekrana koy. Kamera kamera ekranında istenir, ilk açılışta değil.",
+              "İnternet kesilince neyin açık kalacağına karar ver. Son listenin kopyası görünebilir. Yeni yazı bekleyip sonra gidebilir. Bunu düşünmezsen ekran yalnızca durur.",
+              "Dar telefonda yokla. Senin ekranına sığan düğme başka telefonda kenara çıkabilir.",
+              "versionCode'u yükselt. Eski release ile aynı anahtarla imzala. Paket adı aynı kalmalıdır.",
+              "Mağaza sayfası APK'dan ayrıdır. Ad, resimler, kısa metin ve gizlilik adresi dosyanın kendisinde bitmez.",
+            ],
+          },
+          {
+            heading: "Klasörler büyüyünce",
+            paragraphs: [
+              "Basit native uygulamada bir ekran activity_main içinde durur. Gelişmiş uygulamada her ekranın kendi dosyası olur. Sunucu klasörü telefon projesinin içinde olmayabilir. O, başka adreste çalışır. APK yalnız ona sorgu gönderir.",
+            ],
+            code: FOLDERS,
+            after: [
+              "Önce bir ekranı telefonda gör. Sonra ikincisini ekle. Sunucuyu en sonda, ikinci telefon aynı satırı görmeliyse bağla. Tersine başlarsan düğmesiz bir veritabanı ve boş bir APK kalır.",
+            ],
+          },
+        ],
+      },
+      {
+        id: "fresh",
+        title: "Güncelleme ve sık sorulan sorular",
+        blocks: [
+          {
+            paragraphs: [
+              "Telefon eski uygulamayı ancak üç şey üst üste gelince değiştirir. Paket adı aynı olmalıdır. İmza aynı anahtardan gelmelidir. versionCode büyük olmalıdır. Biri eksikse yeni dosya ya kurulmaz ya da eskisinin yanında ikinci uygulama gibi durur.",
+              "Kendi uygulamanı kur. Başkasının APK'sını açıp içine kendi ekranını koymak onu senin uygulaman yapmaz. İmza bozulur, dosya kurulmaz ve o program sana ait değildir.",
+            ],
+          },
+          { heading: "APK ile AAB aynı mı?", paragraphs: ["Hayır. APK telefonun açtığı dosyadır. AAB mağazaya verilen pakettir. Mağaza onu telefona uygun APK'ya çevirebilir."] },
+          { heading: "APK iPhone'da açılır mı?", paragraphs: ["Hayır. iPhone başka dosya ve başka kural kullanır. Android için derlenen APK orada kurulmaz."] },
+          { heading: "Dosya neden büyüktür?", paragraphs: ["Ekrandaki bir cümle dosyayı büyütmez. Resimler, yazı tipleri ve ek kütüphaneler büyütür. Gerekmeyen resmi içeri koyma."] },
+          { heading: "Web APK internetsiz çalışır mı?", paragraphs: ["Zipin içine koyduğun sayfa telefonda kalır ve açılabilir. Adresten yüklenen sayfa ise internet ister. Resim de dışarıdan geliyorsa ağ kesilince boş kalır."] },
+          { heading: "Debug dosyası mağazaya konur mu?", paragraphs: ["Hayır. O, yoklama içindir. Mağaza için release imzası, yükselen sürüm ve çoğu zaman AAB gerekir."] },
+        ],
+      },
+    ],
+    ar: [
+      {
+        id: "inside",
+        title: "ماذا يقف داخل APK؟",
+        blocks: [
+          {
+            paragraphs: [
+              "APK في الحقيقة أرشيف باسم آخر. الاسم ينتهي بـ .apk لكن الداخل مجلدات وملفات. الهاتف يفتح ذلك الملف الواحد ويفحص التوقيع ثم يشغّل البرنامج الذي بداخله. تغيير الداخل وإغلاقه من جديد لا يجعل التطبيق لك. ينكسر التوقيع ويرفض الهاتف الملف.",
+              "قد يبدو ملفان APK متشابهين من الخارج. أحدهما يمسك صفحة والآخر يمسك شاشات كثيرة وصوراً ومكتبات. الحجم يكبر من الصور والأدوات المضافة لا من طول الجملة.",
+            ],
+            list: [
+              "AndroidManifest.xml يقول اسم التطبيق والحزمة وشاشة الفتح والصلاحيات التي قد يطلبها.",
+              "classes.dex هو البرنامج الذي يشغّله الهاتف. Kotlin وJava يصيران هذا عند الجمع. في APK الويب المنطق الخاص أقل والصفحة تقف وحدها.",
+              "مجلد res يمسك الصور والكتابة وترتيب الشاشة.",
+              "resources.arsc جدول يقول أي اسم مربوط بأي صورة وكتابة.",
+              "META-INF هو التوقيع. إذا تغيّر ملف في الداخل ولم يُجدَّد التوقيع يتوقف التثبيت.",
+              "في APK الويب يقف الموقع نفسه في assets أو مجلد يشبهه. النافذة تفتح تلك الملفات.",
+            ],
+          },
+        ],
+      },
+      {
+        id: "permissions",
+        title: "لماذا الصلاحيات؟",
+        blocks: [
+          {
+            paragraphs: [
+              "وجود APK على الهاتف لا يفتح الكاميرا ولا جهات الاتصال ولا المكان وحده. الـ manifest يكتب فقط ماذا قد يطلب التطبيق. الشخص يعطي الموافقة غالباً حين تُفتح تلك الشاشة أول مرة. بلا موافقة ذلك العمل لا يمضي وباقي التطبيق قد يبقى.",
+              "اطلب فقط ما تستعمله الشاشة. تطبيق الملاحظات لا يحتاج الميكروفون. الخريطة تحتاج المكان. الشاشة التي تكلّم الخادم تحتاج الإنترنت. الصلاحية الزائدة تخيف الشخص وتثير سؤالاً في مراجعة المتجر.",
+              "إذا فتح APK الويب موقعك فالإنترنت لازم. الكاميرا لا تأتي وحدها. يجب أن يطلبها الغلاف والصفحة معاً وأن يوافق الشخص. اترك الصلاحية على شاشة الكاميرا لا في أول فتح.",
+            ],
+          },
+        ],
+      },
+      {
+        id: "sign",
+        title: "Debug وrelease وAAB",
+        blocks: [
+          {
+            paragraphs: [
+              "APK التجريبي للاختبار. ملف APK الذي يجمعه Nibras Studio موقّع توقيعاً تجريبياً. يمكن تثبيته على هاتفك وتجربة الزر. المتجر عادة لا يقبل هذا الملف كإصدار أخير. يمكن إعطاؤه لصديق للاختبار وقد يُظهر الهاتف تحذيراً عن مصدر غير معروف.",
+              "APK الإصدار يُوقَّع بمفتاحك. ذلك المفتاح يُظهر أن التحديث التالي جاء منك. إذا ضاع المفتاح لا تستطيع وضع ملف جديد فوق التطبيق نفسه. اسم حزمة جديد يُحسب تطبيقاً آخر ويقف بجانب القديم.",
+              "versionCode عدد صحيح. يجب أن يكبر في كل ملف جديد. versionName هو الاسم الذي يراه الإنسان مثل 1.2. إذا لم يكبر العدد فالهاتف لا يضع الجديد مكان القديم.",
+              "AAB هو الحزمة التي يريدها المتجر غالباً. APK هو الملف الذي يثبّته الهاتف. المتجر قد يقسم AAB إلى ملفات APK صغيرة حسب نوع الهاتف. إذا ثبّت بنفسك فيجب أن يكون في يدك APK.",
+            ],
+          },
+        ],
+      },
+      {
+        id: "advanced",
+        title: "ما هو APK المتقدّم؟",
+        blocks: [
+          {
+            paragraphs: [
+              "APK البسيط شاشة واحدة. يحفظ سطراً على الهاتف. لا يعرف من الشخص. إذا أغلقته وفتحته فالسطر في مكانه وهذا يكفي. الملاحظة والعدّاد وصفحة الزر الواحد من هذا النوع. يمكن جمعه في يوم.",
+              "APK المتقدّم شاشات كثيرة. فيه حساب. البيانات يجب أن تظهر على هاتف آخر. القائمة تأتي من الإنترنت. تُرسل صورة. قد يصل إشعار والتطبيق مغلق. شخصان يريان التغيير نفسه. هذا لم يعد صفحة مضغوطة في ملف. الهاتف والخادم والبيانات المحفوظة تعمل معاً.",
+              "التطبيق المتقدّم لا يبدأ كبيراً في اليوم الأول. تنتهي الشاشة البسيطة أولاً. ثم تأتي شاشة ثانية. ثم ينتقل الحفظ إلى الخادم. ثم الدخول. كتابة كل هذا في اليوم الأول يعطي قشرة فارغة: أزرار بلا عمل.",
+              "في طريق الويب الجزء الصعب غالباً هو الموقع نفسه. الدخول والقائمة والخادم على الموقع. APK مجرد نافذة. يستطيع Nibras Studio تحويل ذلك الموقع إلى تطبيق. يُختار الأصلي أو Flutter حين يجب أن تكون الكاميرا والملفات والعمل في الخلفية أعمق من صفحة. إذا كفت النافذة فكتابة برنامج ثانٍ ضياع وقت.",
+            ],
+          },
+        ],
+      },
+      {
+        id: "advanced-how",
+        title: "كيف يُصنع APK المتقدّم؟",
+        blocks: [
+          {
+            paragraphs: [
+              "التطبيق الكبير لا يبدأ بجملة واحدة. عبارة «برنامج يفعل كل شيء» لا تنهي أي شاشة. قسّم العمل إلى جمل صغيرة. مثلاً: يدخل الشخص ويرى ملاحظاته ويضيف واحدة وتظهر تلك الملاحظة على هاتف ثانٍ. هذه أربع جمل وأربعة أعمال. لكل واحد شاشته وملفه.",
+            ],
+            ordered: true,
+            list: [
+              "افصل الشاشات. قائمة وداخل ملاحظة ونموذج كتابة ودخول. لكل شاشة عمل واحد.",
+              "اختر مكان البيانات. السطر الذي يحتاجه هذا الهاتف فقط يمكن أن يبقى عليه. إذا وجب أن يراه هاتف آخر فيلزم خادم.",
+              "الهاتف يرسل طلباً قصيراً إلى الخادم. الخادم يرجع بيانات. القاعدة لا تقف داخل APK.",
+              "لا تكتب كلمة المرور ولا المفتاح السري في الكود. من يفتح APK يستطيع قراءته. الخادم يفحص والهاتف يحفظ علامة الإذن فقط.",
+              "الدخول شاشة وحدها. الخادم يعطي علامة. العلامة ليست كلمة المرور نفسها.",
+              "ضع الصلاحية على الشاشة التي تقوم بالعمل. الكاميرا تُطلب في شاشة الكاميرا لا في أول فتح.",
+              "قرّر ماذا يبقى مفتوحاً حين ينقطع الإنترنت. قد تظهر نسخة آخر قائمة. الكتابة الجديدة قد تنتظر ثم تذهب. إذا لم تفكر في هذا فالشاشة تقف فقط.",
+              "افحص على هاتف ضيق. الزر الذي يتسع لشاشتك قد يخرج على هاتف آخر.",
+              "ارفع versionCode. وقّع بالمفتاح نفسه الذي للإصدار القديم. اسم الحزمة يجب أن يبقى.",
+              "صفحة المتجر منفصلة عن APK. الاسم والصور والنص القصير وعنوان الخصوصية لا تنتهي داخل الملف.",
+            ],
+          },
+          {
+            heading: "حين تكبر المجلدات",
+            paragraphs: [
+              "في التطبيق الأصلي البسيط تقف شاشة واحدة داخل activity_main. في التطبيق المتقدّم لكل شاشة ملفها. مجلد الخادم قد لا يقف داخل مشروع الهاتف. هو يعمل على عنوان آخر. APK يرسل إليه طلباً فقط.",
+            ],
+            code: FOLDERS,
+            after: [
+              "انظر إلى شاشة واحدة على الهاتف أولاً. ثم أضف الثانية. اربط الخادم في الأخير وفقط إذا وجب أن يرى الهاتف الثاني السطر نفسه. إذا بدأت بالعكس تبقى قاعدة بلا زر وAPK فارغ.",
+            ],
+          },
+        ],
+      },
+      {
+        id: "fresh",
+        title: "التحديث والأسئلة الشائعة",
+        blocks: [
+          {
+            paragraphs: [
+              "الهاتف يستبدل التطبيق القديم فقط حين تجتمع ثلاثة أشياء. اسم الحزمة واحد. التوقيع من المفتاح نفسه. versionCode أكبر. إذا نقص واحد فالملف الجديد إما لا يُثبَّت أو يقف بجانب القديم كتطبيق ثانٍ.",
+              "ابنِ تطبيقك. فتح APK غيرك ووضع شاشتك داخله لا يجعله تطبيقك. ينكسر التوقيع ولا يُثبَّت الملف وذلك البرنامج ليس لك.",
+            ],
+          },
+          { heading: "هل APK وAAB الشيء نفسه؟", paragraphs: ["لا. APK هو الملف الذي يفتحه الهاتف. AAB حزمة تُعطى للمتجر. المتجر قد يحوّلها إلى APK يناسب الهاتف."] },
+          { heading: "هل يُفتح APK على iPhone؟", paragraphs: ["لا. iPhone يستعمل ملفاً آخر وقاعدة أخرى. APK المجمّع لأندرويد لا يُثبَّت هناك."] },
+          { heading: "لماذا الملف كبير؟", paragraphs: ["جملة واحدة على الشاشة لا تكبّر الملف. الصور والخطوط والمكتبات الإضافية تكبّره. لا تضع صورة في الداخل إذا لم تحتجها."] },
+          { heading: "هل يعمل APK الويب بلا إنترنت؟", paragraphs: ["الصفحة التي وضعتها داخل الـ zip تبقى على الهاتف ويمكن أن تُفتح. الصفحة التي تُحمَّل من عنوان تحتاج الإنترنت. إذا جاءت الصورة من الخارج أيضاً تبقى فارغة حين تنقطع الشبكة."] },
+          { heading: "هل يُوضع ملف debug في المتجر؟", paragraphs: ["لا. هو للاختبار. المتجر يريد توقيع إصدار ونسخة تكبر وغالباً AAB."] },
+        ],
+      },
+    ],
+    ru: [
+      {
+        id: "inside",
+        title: "Что лежит внутри APK?",
+        blocks: [
+          {
+            paragraphs: [
+              "APK на самом деле архив с другим именем. Имя кончается на .apk, но внутри папки и файлы. Телефон открывает этот один файл, проверяет подпись и потом запускает программу внутри. Изменить нутро и закрыть снова не делает приложение твоим. Подпись ломается, и телефон отклоняет файл.",
+              "Снаружи два APK могут выглядеть одинаково. Один держит страницу, другой — много экранов, картинок и библиотек. Размер растёт от картинок и добавленных инструментов, а не от длины фразы.",
+            ],
+            list: [
+              "AndroidManifest.xml говорит имя приложения, пакет, экран открытия и разрешения, которые оно может спросить.",
+              "classes.dex — программа, которую запускает телефон. Kotlin и Java при сборке становятся этим. В веб-APK своей логики меньше, страница стоит отдельно.",
+              "Папка res хранит картинки, текст и раскладку экрана.",
+              "resources.arsc — таблица, которая связывает имя с картинкой и строкой.",
+              "META-INF — это подпись. Если файл внутри изменился и подпись не обновлена, установка останавливается.",
+              "В веб-APK сам сайт стоит в assets или похожей папке. Окно открывает эти файлы.",
+            ],
+          },
+        ],
+      },
+      {
+        id: "permissions",
+        title: "Зачем разрешения?",
+        blocks: [
+          {
+            paragraphs: [
+              "Камера, контакты и место не открываются только потому, что APK лежит на телефоне. Манифест лишь пишет, что приложение может спросить. Человек обычно соглашается, когда этот экран открывается первый раз. Без согласия эта работа не идёт, остальное приложение может остаться.",
+              "Проси только то, чем пользуется экран. Приложению заметок микрофон не нужен. Карте нужно место. Экрану, который говорит с сервером, нужен интернет. Лишнее разрешение пугает человека и вызывает вопрос при проверке магазина.",
+              "Если веб-APK открывает твой сайт, нужен интернет. Камера сама не приходит. И оболочка, и страница должны её спросить, и человек должен согласиться. Оставь разрешение на экране камеры, а не на первом открытии.",
+            ],
+          },
+        ],
+      },
+      {
+        id: "sign",
+        title: "Debug, release и AAB",
+        blocks: [
+          {
+            paragraphs: [
+              "Debug APK нужен для проверки. APK, который собирает Nibras Studio, подписан отладочной подписью. Его можно поставить на свой телефон и нажать кнопку. Магазин обычно не берёт этот файл как окончательный выпуск. Другу для теста отдать можно, телефон может предупредить о неизвестном источнике.",
+              "Release APK подписывается твоим ключом. Этот ключ показывает, что следующее обновление пришло от тебя. Потеряешь ключ — не сможешь положить новый файл поверх того же приложения. Новое имя пакета считается другим приложением и стоит рядом со старым.",
+              "versionCode — целое число. В каждом новом файле оно должно вырасти. versionName — имя, которое видит человек, например 1.2. Если число не выросло, телефон не ставит новый файл на место старого.",
+              "AAB — пакет, который магазин часто хочет. APK — файл, который ставит телефон. Магазин может разрезать AAB на маленькие APK под вид телефона. Если ставишь сам, в руках должен быть APK.",
+            ],
+          },
+        ],
+      },
+      {
+        id: "advanced",
+        title: "Что такое развитый APK?",
+        blocks: [
+          {
+            paragraphs: [
+              "Простой APK — это один экран. Он хранит строку на телефоне. Он не знает, кто человек. Закрой и открой — строка на месте, и этого хватает. Заметка, счётчик и страница с одной кнопкой такого вида. Его можно собрать за день.",
+              "Развитый APK — это много экранов. Есть учётная запись. Данные должны быть видны и на другом телефоне. Список приходит из интернета. Картинка отправляется. Уведомление может прийти, когда приложение закрыто. Двое видят одно изменение. Это уже не страница, сжатая в файл. Телефон, сервер и сохранённые данные работают вместе.",
+              "Развитое приложение не начинается большим в первый день. Сначала заканчивается простой экран. Потом приходит второй. Потом сохранение переходит на сервер. Потом вход. Написать всё это в первый день — получить пустую оболочку: кнопки есть, работы нет.",
+              "На веб-пути трудная часть часто сам сайт. Вход, список и сервер живут на сайте. APK — только окно. Nibras Studio может превратить этот сайт в приложение. Native или Flutter выбирают, когда камера, файлы и фоновая работа должны быть глубже страницы. Если окна хватает, вторая программа — потеря времени.",
+            ],
+          },
+        ],
+      },
+      {
+        id: "advanced-how",
+        title: "Как собирают развитый APK?",
+        blocks: [
+          {
+            paragraphs: [
+              "Большое приложение не начинается одной фразой. Слова «программа, которая делает всё» не заканчивают ни один экран. Раздели работу на короткие фразы. Например: человек входит, видит свои заметки, добавляет одну, и эта заметка видна на втором телефоне. Это четыре фразы и четыре работы. У каждой свой экран и свой файл.",
+            ],
+            ordered: true,
+            list: [
+              "Раздели экраны. Список, внутренность одной заметки, форма записи и вход. У каждого экрана одна работа.",
+              "Выбери, где лежат данные. Строка, которая нужна только этому телефону, может остаться на нём. Если её должен видеть другой телефон, нужен сервер.",
+              "Телефон шлёт серверу короткий запрос. Сервер возвращает данные. База не лежит внутри APK.",
+              "Не пиши пароль и тайный ключ в код. Человек, который откроет APK, сможет это прочитать. Проверяет сервер. Телефон хранит только знак разрешения.",
+              "Вход — отдельный экран. Сервер даёт знак. Знак — это не сам пароль.",
+              "Положи разрешение на экран, где работа. Камеру спрашивают на экране камеры, не при первом открытии.",
+              "Реши, что остаётся открытым, когда интернет пропал. Может показаться копия последнего списка. Новая запись может подождать и уйти позже. Если этого не продумать, экран просто встанет.",
+              "Проверь на узком телефоне. Кнопка, которая помещается на твоём экране, может вылезти на другом.",
+              "Подними versionCode. Подпиши тем же ключом, что и старый release. Имя пакета должно остаться тем же.",
+              "Страница магазина отдельно от APK. Имя, картинки, короткий текст и адрес политики не кончаются внутри файла.",
+            ],
+          },
+          {
+            heading: "Когда папки растут",
+            paragraphs: [
+              "В простом нативном приложении один экран стоит в activity_main. В развитом у каждого экрана свой файл. Папка сервера может не стоять внутри проекта телефона. Она работает по другому адресу. APK только шлёт ей запрос.",
+            ],
+            code: FOLDERS,
+            after: [
+              "Сначала увидь один экран на телефоне. Потом добавь второй. Сервер подключай в конце и только если второй телефон должен видеть ту же строку. Начнёшь наоборот — останется база без кнопки и пустой APK.",
+            ],
+          },
+        ],
+      },
+      {
+        id: "fresh",
+        title: "Обновление и частые вопросы",
+        blocks: [
+          {
+            paragraphs: [
+              "Телефон заменяет старое приложение, только когда сходятся три вещи. Имя пакета одно. Подпись от того же ключа. versionCode больше. Если одного нет, новый файл либо не ставится, либо стоит рядом со старым как второе приложение.",
+              "Собирай своё приложение. Открыть чужой APK и положить внутрь свой экран не делает его твоим. Подпись ломается, файл не ставится, и эта программа не твоя.",
+            ],
+          },
+          { heading: "APK и AAB — одно и то же?", paragraphs: ["Нет. APK — файл, который открывает телефон. AAB — пакет, который отдают магазину. Магазин может превратить его в APK под телефон."] },
+          { heading: "APK открывается на iPhone?", paragraphs: ["Нет. iPhone использует другой файл и другое правило. APK, собранный для Android, там не ставится."] },
+          { heading: "Почему файл большой?", paragraphs: ["Одна фраза на экране файл не растит. Растят картинки, шрифты и лишние библиотеки. Не клади внутрь картинку, которая не нужна."] },
+          { heading: "Веб-APK работает без интернета?", paragraphs: ["Страница, которую ты положил в zip, остаётся на телефоне и может открыться. Страница, которая грузится с адреса, хочет интернет. Если картинка тоже приходит снаружи, при обрыве сети она пустая."] },
+          { heading: "Debug-файл кладут в магазин?", paragraphs: ["Нет. Он для проверки. Магазину нужна подпись release, растущая версия и часто AAB."] },
+        ],
+      },
+    ],
+  };
+  return all[lang];
+}
