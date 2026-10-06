@@ -6,6 +6,7 @@ import { htmlCssSections } from "@/lib/html-css-sections";
 import { sqlSections } from "@/lib/sql-sections";
 import { typescriptSections } from "@/lib/typescript-sections";
 import { ALL_STACK } from "@/lib/stack-all";
+import { withStackWorking } from "@/lib/stack-working";
 
 type Seo = { title: string; description: string; keywords: string };
 
@@ -635,7 +636,7 @@ export const PROGRAMMING: readonly ProgrammingPage[] = [
   ...ALL_STACK.map((item) => ({
     slug: item.slug,
     title: item.title.az,
-    sections: item.sections.az,
+    sections: withStackWorking(item.slug, "az", item.sections.az),
     seo: seo(
       { title: `${item.title.az} — Nibras Code`, description: item.description.az, keywords: item.keywords.az },
       { title: `${item.title.en} — Nibras Code`, description: item.description.en, keywords: item.keywords.en },

@@ -11,6 +11,7 @@ import { PYTHON_EN } from "@/lib/python-en";
 import { PYTHON_RU } from "@/lib/python-ru";
 import { PYTHON_TR } from "@/lib/python-tr";
 import { ALL_STACK } from "@/lib/stack-all";
+import { withStackWorking } from "@/lib/stack-working";
 
 export type ProgrammingLocale = {
   lang: Exclude<Lang, "az">;
@@ -53,7 +54,7 @@ const LOCALES: readonly ProgrammingLocale[] = [
       lang,
       slug: item.slug,
       title: item.title[lang],
-      sections: item.sections[lang],
+      sections: withStackWorking(item.slug, lang, item.sections[lang]),
     })),
   ),
 ];
