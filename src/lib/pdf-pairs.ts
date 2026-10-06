@@ -41,12 +41,14 @@ export function hrefForLang(pathname: string, lang: Lang) {
   if (programming) {
     if (lang === "az") return programmingLocalePath("az", programming.slug);
     if (findProgrammingLocale(lang, programming.slug)) return programmingLocalePath(lang, programming.slug);
-    if (programming.lang !== "az") return `${programmingLocalePath("az", programming.slug)}?lang=${lang}`;
-    return null;
+    return `${programmingLocalePath("az", programming.slug)}?lang=${lang}`;
   }
   const pair = pdfPairFromPath(pathname);
-  if (!pair) return null;
-  if (lang === "ru") return pair.ru;
-  if (lang === "az") return pair.az;
-  return `${pair.az}?lang=${lang}`;
+  if (pair) {
+    if (lang === "ru") return pair.ru;
+    if (lang === "az") return pair.az;
+    return `${pair.az}?lang=${lang}`;
+  }
+  const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname;
+  return lang === "az" ? path : `${path}?lang=${lang}`;
 }

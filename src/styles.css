@@ -1539,6 +1539,36 @@ html[dir="rtl"] .rtl-flip {
   position: relative;
 }
 
+.lang-pick {
+  appearance: none;
+  -webkit-appearance: none;
+  display: block;
+  height: 36px;
+  max-width: 148px;
+  padding: 0 28px 0 12px;
+  border-radius: 999px;
+  border: 1px solid var(--color-line-strong);
+  background-color: rgb(255 255 255 / 0.06);
+  background-image:
+    linear-gradient(45deg, transparent 50%, #9aa3bd 50%),
+    linear-gradient(135deg, #9aa3bd 50%, transparent 50%);
+  background-position:
+    calc(100% - 16px) 15px,
+    calc(100% - 11px) 15px;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  color: var(--color-fg);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+}
+
+.lang-pick option {
+  color: #10131c;
+  font-weight: 650;
+}
+
 .lang-trigger {
   display: inline-flex;
   align-items: center;

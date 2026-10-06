@@ -1,6 +1,5 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
-import { LanguageSwitch } from "@/components/language-switch";
 import { LIBRARY, type LibrarySection, type LibraryTopic } from "@/lib/library";
 import { findProgramming, type ProgrammingSection } from "@/lib/programming";
 import { pythonSections } from "@/lib/lessons";
@@ -77,13 +76,10 @@ export function ProgrammingArticle({ title, sections }: { title: string; section
   return (
     <main className="why-page">
       <div className="why-glow" aria-hidden="true" />
-      <div className="prog-top">
-        <p className="eyebrow">
-          <i />
-          <Link to="/programming">{t("nav_programming")}</Link>
-        </p>
-        <LanguageSwitch />
-      </div>
+      <p className="eyebrow">
+        <i />
+        <Link to="/programming">{t("nav_programming")}</Link>
+      </p>
       <h1>{title}</h1>
       <div className="prog-sections">
         {sections?.map((item) => (
