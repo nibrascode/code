@@ -314,28 +314,28 @@ const PAGES: Record<string, Copy> = {
   "/programming": {
     az: {
       title: "Proqramlaşdırma — Nibras Code",
-      description: "Python, Java, Go, PHP, Kotlin, Node.js, Docker, Nginx, Ubuntu və digər dillər və alətlər.",
-      keywords: "proqramlaşdırma, Go, PHP, Kotlin, Node.js, Docker, Nginx, Ubuntu, Java 17",
+      description: "Python, Java, Go, PHP, Git, Bash, JSON, Docker, Nginx, Ubuntu və digər dillər və alətlər.",
+      keywords: "proqramlaşdırma, Git, Bash, JSON, Go, PHP, Docker, Nginx, Ubuntu",
     },
     en: {
       title: "Programming — Nibras Code",
-      description: "Pages on Python, Java, Go, PHP, Kotlin, Node.js, Docker, Nginx, Ubuntu, and other languages and tools.",
-      keywords: "programming, Go, PHP, Kotlin, Node.js, Docker, Nginx, Ubuntu, Java 17",
+      description: "Pages on Python, Java, Go, PHP, Git, Bash, JSON, Docker, Nginx, Ubuntu, and other languages and tools.",
+      keywords: "programming, Git, Bash, JSON, Go, PHP, Docker, Nginx, Ubuntu",
     },
     tr: {
       title: "Programlama — Nibras Code",
-      description: "Python, Java, Go, PHP, Kotlin, Node.js, Docker, Nginx, Ubuntu ve diğer diller ile araçlar.",
-      keywords: "programlama, Go, PHP, Kotlin, Node.js, Docker, Nginx, Ubuntu, Java 17",
+      description: "Python, Java, Go, PHP, Git, Bash, JSON, Docker, Nginx, Ubuntu ve diğer diller ile araçlar.",
+      keywords: "programlama, Git, Bash, JSON, Go, PHP, Docker, Nginx, Ubuntu",
     },
     ar: {
       title: "برمجة — Nibras Code",
-      description: "صفحات عن Python وJava وGo وPHP وKotlin وNode.js وDocker وNginx وUbuntu وأدوات أخرى.",
-      keywords: "برمجة, Go, PHP, Kotlin, Node.js, Docker, Nginx, Ubuntu, Java 17",
+      description: "صفحات عن Python وJava وGo وPHP وGit وBash وJSON وDocker وNginx وUbuntu وأدوات أخرى.",
+      keywords: "برمجة, Git, Bash, JSON, Go, PHP, Docker, Nginx, Ubuntu",
     },
     ru: {
       title: "Программирование — Nibras Code",
-      description: "Страницы о Python, Java, Go, PHP, Kotlin, Node.js, Docker, Nginx, Ubuntu и других языках и инструментах.",
-      keywords: "программирование, Go, PHP, Kotlin, Node.js, Docker, Nginx, Ubuntu, Java 17",
+      description: "Страницы о Python, Java, Go, PHP, Git, Bash, JSON, Docker, Nginx, Ubuntu и других языках и инструментах.",
+      keywords: "программирование, Git, Bash, JSON, Go, PHP, Docker, Nginx, Ubuntu",
     },
   },
   ...Object.fromEntries(PROGRAMMING.map((page) => [`/programming/${page.slug}`, page.seo])),

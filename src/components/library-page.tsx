@@ -139,6 +139,9 @@ const PROGRAM_NAMES: Record<string, string> = {
   nginx: "Nginx",
   ssl: "SSL / HTTPS",
   firewall: "Firewall",
+  git: "Git",
+  bash: "Bash",
+  json: "JSON",
 };
 
 const HTML_TRIES = [

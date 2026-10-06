@@ -52,6 +52,9 @@ export const LIBRARY: Record<LibrarySection, { title: TKey; topics: readonly Lib
       { slug: "nginx", label: "prog_nginx" },
       { slug: "ssl", label: "prog_ssl" },
       { slug: "firewall", label: "prog_firewall" },
+      { slug: "git", label: "prog_git" },
+      { slug: "bash", label: "prog_bash" },
+      { slug: "json", label: "prog_json" },
     ],
   },
 };
