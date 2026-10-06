@@ -17,13 +17,12 @@ import { snippetReply } from "./_snippets.js";
 import { localReply } from "./_local.js";
 import { track } from "./_stats.js";
 import { isReligious } from "./_religious.js";
-import { withNotice, noticeLang, isSourceKind, stripNotice, OLD_AZ_NOTICE } from "./_notice.js";
+import { isSourceKind, stripNotice, OLD_AZ_NOTICE } from "./_notice.js";
 
 const SYSTEM = [
   "Sən Nibras AI-san, Nibras Code saytının köməkçisisən.",
   "Cavabların qısa, aydın və nəzakətli olsun. İstifadəçi hansı dildə yazırsa, o dildə cavab ver.",
-  "İslam dini ilə bağlı sual gələndə dini hökm, ayə izahı və ya dərs vermə. Yalnız bunu yaz: İlk olaraq: süni intellektdən din öyrənilməz. İbn Sirin رحمه الله demişdir: «Həqiqətən, bu elm sizin dininizdir; dininizi kimdən aldığınıza diqqət edin.»",
-  "Ərəb qrammatikasında «لن» ədatı əbədi inkar bildirmir; bununla axirətdə Allahı görməyi inkar etmək olmaz. Sələfə (əhli-sünnə əqidəsinə) zidd qrammatik təvillər vermə.",
+  "Cavaba İbn Sirin sitatı, «süni intellektdən din öyrənilməz» xəbərdarlığı və «لن» ədatı haqqında qrammatik təvil yazma.",
   "Layihənin adı Nibras Code-dur. NibrasCodr yazma. Sahibi Mahir Əliyevdir. Bu faktı dəyişmə, başqa adam adı uydurma.",
   "Nibras Code böyük şirkət deyil. Sadə, faydalı və istifadəsi rahat tətbiqlər üzərində çalışan müstəqil şəxsi layihədir.",
   "Tətbiqlər: Nibras Arabic hazırdır. Nibras PDF və Nibras Plans tezliklədir. Nibras Docs hazırlanır.",
@@ -33,7 +32,7 @@ const SYSTEM = [
 ].join(" ");
 
 const LEXICAL_HINT =
-  "DİQQƏT, bu sual üçün yuxarıdakı «dini sual gələndə yalnız xəbərdarlığı yaz» qaydası keçərli DEYİL. Bu, ərəbcə (və ya dini) sözün mənası (lüğət) sualıdır, dini hökm və ya fətva sualı deyil. Sözün mənasını qısa və düz izah et. «Süni intellektdən din öyrənilməz» xəbərdarlığı və İbn Sirin sitatı YAZMA. Allahın sifətlərini təvil etmə. " +
+  "Bu, ərəbcə (və ya dini) sözün mənası (lüğət) sualıdır, dini hökm və ya fətva sualı deyil. Sözün mənasını qısa və düz izah et. Xəbərdarlıq sitatı yazma. Allahın sifətlərini təvil etmə. " +
   "SƏRT QAYDALAR: kök, məna, etimologiya və ya feil formalarını UYDURMA; dəqiq bilmirsənsə, bunu açıq yaz (məsələn «dəqiq bilmirəm»). Quran ayəsi və ya Quranın ərəbcə mətnini, ﴿ ﴾ içində heç nə, [[ayah:..]] işarəsini YAZMA, ayə nömrəsi də göstərmə. Cavab qısa olsun (2-4 cümlə).";
 
 export const LIMIT_REPLY = "Bu gün üçün sual limiti bitdi. Sabah yenidən yaz. Hazır cavabı olan suallar isə bu gün də cavablanır.";
@@ -119,10 +118,8 @@ export default async function handler(req, res) {
         break;
       }
     }
-    // Dini suallarda cavabın başında bildiriş (süni intellektdən din öyrənilməz). Yalnız client söhbətdə hələ göstərilmədiyini bildirəndə (noticeShown:false).
-    // Daxili mənbədən gələn cavablarda (fromSource) bildiriş heç vaxt verilmir və notice:true qoyulmur.
-    const wantNotice = body.noticeShown === false && !fromSource && !lexicalLoose;
-    const dressed = (reply, isRel) => (isRel && wantNotice ? withNotice(reply, noticeLang(message)) : reply);
+    // Köhnə İbn Sirin bildirişi və «لن» qrammatika xəbərdarlığı artıq əlavə olunmur. Model yazsa belə, silinir.
+    const cleaned = (reply) => stripLanWarning(stripNotice(reply));
     const relFlag = (isRel) => (isRel ? { religious: true } : {});
     // Hazır python/html/javascript/sql/css kod nümunələri: AI-yə getmədən (kod rejimi də daxil)
     const snippet = fixed ? null : snippetReply(message, body.mode);
@@ -136,9 +133,9 @@ export default async function handler(req, res) {
       // Hazır cavab: xarici AI çağırılmayıb -> limitə sayılmır (usedAI:false)
       const isRel = fixed ? religious : false;
       // dinReply artıq özü bildirişdir: sonrakı dini suallarda (noticeShown:true) təkrar bildiriş yox, qısa cavab qalır
-      let out = dressed(lexical ? stripNotice(ready) : ready, isRel);
-      if (isRel && body.noticeShown === true && ready.startsWith(OLD_AZ_NOTICE) && ready !== OLD_AZ_NOTICE) out = ready.slice(OLD_AZ_NOTICE.length).replace(/^\s+/, "");
-      res.status(200).json({ success: true, reply: out, usedAI: false, ...relFlag(isRel), ...(isRel && wantNotice ? { notice: true } : {}) });
+      let out = cleaned(ready);
+      if (isRel && ready.startsWith(OLD_AZ_NOTICE)) out = cleaned(ready.slice(OLD_AZ_NOTICE.length));
+      res.status(200).json({ success: true, reply: out, usedAI: false, ...relFlag(isRel) });
       return;
     }
     // Gündəlik limit istifadəçi tərəfində sayılır; doluysa yalnız xarici AI tələb edən suallar dayandırılır (hazır cavablar yuxarıda artıq cavablanıb)
@@ -176,8 +173,7 @@ export default async function handler(req, res) {
       if (result.ok) {
         // AI ayə mətni yazıbsa, ərəbcə hissə Tanzil məlumatı ilə əvəz olunur, [[ayah:S:A]] işarələri açılır
         const isRel = isReligious(message, body.mode) && !lexicalLoose;
-        let aiReply = closeTruncatedFence(finalizeAi(result.reply, message, { noBlocks: lexicalLoose }));
-        if (lexicalLoose) aiReply = stripNotice(aiReply); // AI özü də xəbərdarlıq yazarsa, silinir
+        let aiReply = cleaned(closeTruncatedFence(finalizeAi(result.reply, message, { noBlocks: lexicalLoose })));
         // Söz mənası lüğətdə tapılmadı, cavabı AI yazıb: dəqiq olmaya bilər qeydi (dini bildiriş yox)
         const nf = lexical ? lughaNotFoundNote(follow || message) : null;
         if (nf && aiReply.trim()) aiReply = aiReply.replace(/\s+$/, "") + "\n\n" + nf;
@@ -185,7 +181,7 @@ export default async function handler(req, res) {
           notes.push(name + ": boş cavab");
           continue;
         }
-        res.status(200).json({ success: true, reply: dressed(aiReply, isRel), usedAI: true, ...relFlag(isRel), ...(isRel && wantNotice ? { notice: true } : {}) });
+        res.status(200).json({ success: true, reply: aiReply, usedAI: true, ...relFlag(isRel) });
         return;
       }
       notes.push(name + ": " + String(result.detail || "xəta").slice(0, 140));
@@ -230,8 +226,13 @@ function replyLang(text) {
   return "az";
 }
 
-const DIN_REPLY =
-  "İlk olaraq: süni intellektdən din öyrənilməz. İbn Sirin رحمه الله demişdir: «Həqiqətən, bu elm sizin dininizdir; dininizi kimdən aldığınıza diqqət edin.»";
+function stripLanWarning(text) {
+  return String(text || "")
+    .replace(/Ərəb qrammatikasında\s*[«"]?لن[»"]?[\s\S]{0,500}?təvillər vermə\.?\s*/g, "")
+    .replace(/[^\n]*«لن»[^\n]*(əbədi inkar|Allahı görm|təvil)[^\n]*\n?/gi, "")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
 
 const ISLAM_DEF = [
   "Qurana və səhih Sünnəyə möhkəm sarılmaq, dini səhabələrin, tabiinlərin və onların yolunu izləyən ilk nəsillərin anlayışı ilə qəbul etməkdir.",
@@ -250,14 +251,7 @@ function islamDefinition(q, raw) {
 export function dinReply(message) {
   const raw = String(message || "");
   const q = fold(raw);
-  if (islamDefinition(q, raw)) return DIN_REPLY + "\n\n" + ISLAM_DEF;
-  const arabic = /اسلام|قرآن|حديث|صلاة|صوم|زكاة|حج|حلال|حرام|فقه|توحيد|عقيدة|وضوء|صيام/.test(raw);
-  const topic =
-    /\b(islam\w*|islami|islamic|musluman\w*|muslim\w*|quran\w*|hadis\w*|hedis\w*|hadith\w*|sunnet\w*|sunnah\w*|fiqh\w*|fikh\w*|seriat\w*|shariat\w*|sharia\w*|namaz\w*|salat\w*|salah\w*|oruc\w*|ramazan\w*|ramadan\w*|zekat\w*|zakat\w*|hecc\w*|umre\w*|umrah\w*|destamaz\w*|abdest\w*|wudu\w*|gusl\w*|qusl\w*|taharet\w*|haram\w*|helal\w*|halal\w*|fetva\w*|fatwa\w*|tefsir\w*|mezheb\w*|madhab\w*|peyqember\w*|peygamber\w*|resulullah\w*|muhammed\w*|muhammad\w*|ayet\w*|aye\b|tevhid\w*|tawhid\w*|akaid\w*|aqidah\w*|gunah\w*|sevab\w*|cennet\w*|cehennem\w*)\b/.test(
-      q,
-    );
-  const din = /\b(din|dini|dinin|dinde)\b/.test(q) && /(islam|oyren|sual|nedir|ne dir|nece|namaz|oruc|haram|helal|quran|hadis)/.test(q);
-  if (arabic || topic || din) return DIN_REPLY;
+  if (islamDefinition(q, raw)) return ISLAM_DEF;
   return null;
 }
 

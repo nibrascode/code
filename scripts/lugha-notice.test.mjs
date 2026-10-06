@@ -103,27 +103,26 @@ test("chat.js AI yolu: lüğət sualı (İbn Farisdə tapılmasa da) bildirişsi
   assert.equal(r.reply, "İxlas səmimiyyət deməkdir.");
 });
 
-test("chat.js: həqiqi dini AI cavabında bildiriş qalır; dinReply lüğət sualında işə düşmür", async () => {
+test("chat.js: dini AI cavabında da İbn Sirin bildirişi yoxdur", async () => {
   for (const q of ["Namazda saqqız çeynəmək caizdirmi?", "ما حكم الصلاة بالتيشرت المطبوع", "is crypto trading haram in islam", "Allahın sifətləri sözünün mənası"]) {
     const r = await run({ message: q, history: [], noticeShown: false }, "Cavab.");
-    assert.equal(r.notice, true, q);
-    assert.ok(r.reply.startsWith("::notice::"), q);
+    assert.ok(!r.notice, q);
+    assert.ok(!String(r.reply).includes("::notice::"), q);
+    assert.ok(!/sirin|din öyrənilməz/i.test(String(r.reply)), q);
   }
-  // noticeShown:true -> bildiriş yoxdur (əvvəlki qayda dəyişməyib)
-  const r = await run({ message: "Namazda saqqız çeynəmək caizdirmi?", history: [], noticeShown: true }, "Cavab.");
-  assert.ok(!r.notice);
-  // lüğət sualında dinReply (توحيد, حرام sözləri) AI-ə getmir/bildiriş vermir
   const d = await run({ message: "الحرام ne demek", history: [], noticeShown: false });
   clean(d, "الحرام");
 });
 
-test("chat.js: hazır (canned/tövhid) lüğət sualları bildirişsiz, lakin adi hazır dini cavab bildirişlə", async () => {
+test("chat.js: hazır dini cavab da bildirişsizdir", async () => {
   const a = await run({ message: "Selefilik nədir", history: [], noticeShown: false });
-  assert.equal(a.notice, true);
-  assert.ok(a.reply.startsWith("::notice::"));
-  // «sifətlər/adlar» etiqad sualı lüğət sayılmır (kitab/AI yolu dəyişməyib)
+  assert.ok(!a.notice);
+  assert.ok(!a.reply.startsWith("::notice::"));
+  assert.ok(!/sirin/i.test(a.reply));
   const b = await run({ message: "Allahın sifətləri sözünün mənası", history: [], noticeShown: false }, "Cavab.");
-  assert.equal(b.notice, true);
+  assert.ok(!b.notice);
+  assert.ok(!b.reply.includes("::notice::"));
+  assert.ok(!/sirin/i.test(b.reply));
 });
 
 test("davam: əvvəlki mesaj söz mənası idisə, təkcə ərəbcə söz də lüğət sualıdır (history ilə)", async () => {

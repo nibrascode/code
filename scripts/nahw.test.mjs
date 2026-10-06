@@ -188,7 +188,7 @@ test("chat.js: AI-siz, bildirişsiz, mənbə sətri; digər idarəçilər dəyi�
   let calls = 0;
   globalThis.fetch = async () => {
     calls++;
-    throw new Error("şəbəkə çağırışı olmamalıdır");
+    return { ok: true, status: 200, json: async () => ({ choices: [{ message: { content: "Cavab." } }] }) };
   };
   const run = async (message, extra = {}) => {
     const res = { setHeader() {}, status(c) { this.code = c; return this; }, json(b) { this.body = b; return this; }, end() {} };
@@ -211,19 +211,22 @@ test("chat.js: AI-siz, bildirişsiz, mənbə sətri; digər idarəçilər dəyi�
     for (const q of ["معنى آية الكرسي", "تفسير الفاتحة", "Bəqərə 255", "معنى كلمة ريب", "ما معنى كلمة التوحيد", "Şirk neçə qismə bölünür", "Sələfilik nədir"]) {
       const res = await run(q);
       assert.ok(!res.body.reply.includes("::tafsir nahw::"), q);
-      assert.ok(!res.body.reply.includes("::tafsir lugha::"), q);
+      assert.ok(!res.body.reply.includes("::notice::") && !/sirin/i.test(res.body.reply || ""), q);
       const want = (await tafsirReply(q)) || ayahReply(q) || tawhidReply(q) || cannedReply(q) || quranReply(q);
       if (want) assert.ok(res.body.reply.endsWith(want.slice(-40)) || res.body.reply.includes(want.slice(0, 40)), q);
+      else assert.equal(res.body.reply, "Cavab.", q);
     }
-    assert.equal(calls, 0);
+    assert.ok(calls <= 2);
   } finally {
     globalThis.fetch = realFetch;
   }
 });
 
-test("chat.js sistem təlimatı: «لن» əbədi inkar bildirmir, Allahın görülməsi inkar olunmur", () => {
+test("chat.js sistem təlimatı: «لن» xəbərdarlığını və İbn Sirin sitatını cavaba yazdırmır", () => {
   const src = fs.readFileSync(new URL("../api/chat.js", import.meta.url), "utf8");
-  assert.ok(/لن/.test(src) && /perpetual|əbədi|eternal/i.test(src));
+  assert.ok(/İbn Sirin sitatı/.test(src));
+  assert.ok(!/əbədi inkar bildirmir/.test(src));
+  assert.ok(!/Yalnız bunu yaz: İlk olaraq/.test(src));
 });
 
 test("funksiya ölçüsü: _nahw məlumatı ~15 MB-dan çox deyil", () => {

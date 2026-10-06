@@ -109,21 +109,19 @@ const SOURCE_BASED = [
   ["ərəbcə təfsir", "تفسير الفاتحة"],
 ];
 
-test("server: ilk dini cavab (noticeShown:false) bildirişlə BAŞLAYIR; cavab onun altındadır; AI çağırılmır", async () => {
-  for (const [name, q] of RELIGIOUS_FIXED) {
-    const r = await run({ message: q, noticeShown: false });
-    assert.equal(r.success, true, name);
-    assert.equal(r.usedAI, false, name);
-    assert.equal(r.religious, true, name);
-    assert.equal(r.notice, true, name);
-    assert.ok(r.reply.startsWith("::notice::\n"), name);
-    assert.equal(r.reply.split("::notice::").length, 2, name + ": bildiriş bir dəfə");
-    assert.equal((r.reply.match(/süni intellektdən din öyrənilməz/g) || []).length, 1, name);
-    assert.equal(r.sent.length, 0);
-  }
-  // cavab bildirişin altında və dəyişməyib
+test("server: dini cavaba İbn Sirin bildirişi əlavə olunmur", async () => {
   const c = await run({ message: "Sələfilik nədir", noticeShown: false });
-  assert.equal(c.reply, noticeBlock("az") + "\n\n" + cannedReply("Sələfilik nədir"));
+  assert.equal(c.success, true);
+  assert.equal(c.usedAI, false);
+  assert.equal(c.reply, cannedReply("Sələfilik nədir"));
+  assert.ok(!c.reply.includes("::notice::"));
+  assert.ok(!/sirin/i.test(c.reply));
+  const def = await run({ message: "İslam nədir", noticeShown: false });
+  assert.ok(def.reply.includes("Qurana və səhih Sünnəyə"));
+  assert.ok(!def.reply.includes("süni intellektdən din öyrənilməz"));
+  const namaz = await run({ message: "namaz necə qılınır", noticeShown: false }, "Namaz beş vaxt qılınır.");
+  assert.equal(namaz.reply, "Namaz beş vaxt qılınır.");
+  assert.ok(!namaz.notice && !/sirin/i.test(namaz.reply));
 });
 
 test("server: daxili mənbədən gələn cavablarda (ayə, surə, tərcümə, təfsir, tövhid, Quran lüğəti) bildiriş YOXDUR, notice:true də yoxdur", async () => {
@@ -145,49 +143,38 @@ test("server: daxili mənbədən gələn cavablarda (ayə, surə, tərcümə, t�
   assert.equal(t.reply, tawhidReply("Şirk neçə qismə bölünür"));
   const a = await run({ message: "Ayətül Kürsi", noticeShown: false });
   assert.ok(a.reply.startsWith("::ayah 2:255::") && a.reply.includes("::tr::") && a.reply.includes("::note::"));
-  // mənbə cavabı noticeShown-u dəyişmir: sonra AI-nin dini cavabı hələ də bildirişlə başlayır
   const ai = await run({ message: "Allahın rəhməti haqqında hikmətli bir söz de", noticeShown: false }, "Allahın rəhməti hər şeyi əhatə edib.");
-  assert.ok(ai.usedAI && ai.notice && ai.reply.startsWith("::notice::\n"));
-  // nəzarət: bildiriş mənbə olmayan hazır cavablarda saxlanıb
-  assert.equal((await run({ message: "namaz necə qılınır", noticeShown: false })).notice, true);
+  assert.ok(ai.usedAI && !ai.notice && ai.reply === "Allahın rəhməti hər şeyi əhatə edib.");
+  assert.ok(!/sirin/i.test(ai.reply));
 });
 
-test("server: ikinci dini sual (noticeShown:true) və köhnə client (flag yoxdur) cavabı dəyişmir", async () => {
-  for (const [name, q] of RELIGIOUS_FIXED) {
-    const second = await run({ message: q, noticeShown: true });
-    const legacy = await run({ message: q });
-    assert.ok(!second.reply.includes("::notice::"), name);
-    assert.ok(!legacy.reply.includes("::notice::"), name);
-    assert.equal(second.religious, true, name);
-    assert.ok(!second.notice, name);
-  }
+test("server: dini sualda bildiriş nə birinci, nə ikinci cavabda yoxdur", async () => {
+  const c = await run({ message: "Sələfilik nədir", noticeShown: true });
+  assert.equal(c.reply, cannedReply("Sələfilik nədir"));
+  assert.ok(!c.reply.includes("::notice::"));
+  const legacy = await run({ message: "Sələfilik nədir" });
+  assert.equal(legacy.reply, cannedReply("Sələfilik nədir"));
   assert.equal((await run({ message: "Şirk neçə qismə bölünür", noticeShown: true })).reply, tawhidReply("Şirk neçə qismə bölünür"));
-  assert.equal((await run({ message: "Sələfilik nədir" })).reply, cannedReply("Sələfilik nədir"));
-  // dinReply: bildiriş artıq göstərilibsə İslam tərifi bildirişsiz gəlir; sadə dini sual yenə qısa cavab alır (boş qalmır)
   const def = await run({ message: "İslam nədir", noticeShown: true });
   assert.ok(!def.reply.includes("süni intellektdən din öyrənilməz") && def.reply.includes("Qurana və səhih Sünnəyə"));
-  const short = await run({ message: "namaz necə qılınır", noticeShown: true });
-  assert.ok(short.reply.length > 20);
+  const short = await run({ message: "namaz necə qılınır", noticeShown: true }, "Namaz beş vaxt qılınır.");
+  assert.equal(short.reply, "Namaz beş vaxt qılınır.");
 });
 
-test("server: AI-nin cavabladığı dini sual da bildirişlə başlayır (yalnız ilk dəfə); AI çağırışı eyni qalır", async () => {
+test("server: AI dini cavaba bildiriş yapışdırmır; model özü sitat yazsa silinir", async () => {
   const q = "Allahın rəhməti haqqında hikmətli bir söz de";
   const first = await run({ message: q, noticeShown: false }, "Allahın rəhməti hər şeyi əhatə edib.");
   assert.equal(first.usedAI, true);
-  assert.equal(first.religious, true);
-  assert.ok(first.reply.startsWith("::notice::\n"));
-  assert.ok(first.reply.endsWith("\n\nAllahın rəhməti hər şeyi əhatə edib."));
+  assert.equal(first.reply, "Allahın rəhməti hər şeyi əhatə edib.");
+  assert.ok(!first.reply.includes("::notice::"));
   const second = await run({ message: q, noticeShown: true }, "Allahın rəhməti hər şeyi əhatə edib.");
   assert.equal(second.reply, "Allahın rəhməti hər şeyi əhatə edib.");
-  // AI çağırışları dəyişmir: eyni sayda və eyni sistem/mesaj; bildiriş modelə getmir
   assert.equal(first.sent.length, second.sent.length);
-  assert.deepEqual(first.sent[0], second.sent[0]);
   assert.ok(!JSON.stringify(first.sent).includes("::notice::"));
-  // AI özü köhnə cümləni yazıbsa təkrar olmur
-  const dup = await run({ message: q, noticeShown: false }, OLD_AZ_NOTICE);
-  assert.equal((dup.reply.match(/süni intellektdən din öyrənilməz/g) || []).length, 1);
-  assert.equal(dup.reply, noticeBlock("az"));
-  // tarixçədəki bildiriş bloku modelə getmir
+  assert.ok(!JSON.stringify(first.sent).includes("Yalnız bunu yaz"));
+  const dup = await run({ message: q, noticeShown: false }, OLD_AZ_NOTICE + "\n\nQısa cavab.");
+  assert.ok(!dup.reply.includes("süni intellektdən din öyrənilməz"));
+  assert.ok(dup.reply.includes("Qısa cavab."));
   const hist = await run({ message: q, noticeShown: true, messages: [{ role: "user", text: "namaz" }, { role: "assistant", text: noticeBlock("az") + "\n\nCavab" }, { role: "user", text: q }] }, "ok");
   assert.ok(!JSON.stringify(hist.sent).includes("Müslim"));
   assert.equal(compactHistory(noticeBlock("az") + "\n\nCavab"), "Cavab");
@@ -216,21 +203,15 @@ test("server: qeyri-dini cavablarda bildiriş YOXDUR (kod, salam, hesab, vaxt, s
   assert.ok(!code.reply.includes("::notice::"));
 });
 
-test("server: bildiriş istifadəçinin dilində (az/tr/en/ru/ar) — hazır dini cavab və AI cavabı", async () => {
-  const cases = [
-    ["Mənə namaz haqqında de", /^::notice::\nİlk olaraq:/],
-    ["что такое салафизм", /^::notice::\nПрежде всего:/],
-    ["ما هي السلفية", /^::notice::\nأولًا:/],
-  ];
-  for (const [q, re] of cases) {
-    const r = await run({ message: q, noticeShown: false });
-    assert.match(r.reply, re, q);
+test("server: cavablar bildirişsizdir, dildə fərq etmədən", async () => {
+  for (const q of ["Mənə namaz haqqında de", "что такое салафизм", "ما هي السلفية"]) {
+    const r = await run({ message: q, noticeShown: false }, "Qısa cavab.");
+    assert.ok(!r.reply.includes("::notice::"), q);
+    assert.ok(!/sirin|İbn Sîrîn|ابن سيرين|Ибн Сирин/i.test(r.reply), q);
   }
-  // AI cavabı (ingilis): bildiriş istifadəçinin dilindədir
   const en = await run({ message: "Tell me a nice saying about the mercy of Allah", noticeShown: false }, "Allah's mercy encompasses all things.");
   assert.equal(en.usedAI, true);
-  assert.match(en.reply, /^::notice::\nFirst of all: religion is not learned/);
-  // daxili mənbədən gələn ayə cavabları hər dildə bildirişsizdir
+  assert.equal(en.reply, "Allah's mercy encompasses all things.");
   for (const q of ["Bakara suresi 255", "Surah Baqarah verse 255", "Бакара 255", "سورة البقرة آية 255"]) {
     const r = await run({ message: q, noticeShown: false });
     assert.ok(r.reply.includes("::ayah "), q);
