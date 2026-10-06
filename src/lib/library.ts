@@ -81,6 +81,10 @@ export const LIBRARY: Record<LibrarySection, { title: TKey; topics: readonly Lib
       { slug: "api", label: "prog_api" },
       { slug: "python-javascript", label: "prog_python_js" },
       { slug: "localhost", label: "prog_localhost" },
+      { slug: "frontend-backend", label: "prog_frontend" },
+      { slug: "framework", label: "prog_framework" },
+      { slug: "terminal", label: "prog_terminal" },
+      { slug: "deploy", label: "prog_deploy" },
     ],
   },
 };

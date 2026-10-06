@@ -378,6 +378,10 @@ const PROGRAM_NAMES: Record<string, string> = {
   api: "API",
   "python-javascript": "Python və JavaScript",
   localhost: "Localhost",
+  "frontend-backend": "Frontend və backend",
+  framework: "Framework",
+  terminal: "Terminal",
+  deploy: "Deploy",
 };
 
 function toolName(slug: string) {
