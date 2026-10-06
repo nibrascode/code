@@ -68,6 +68,9 @@ export const LIBRARY: Record<LibrarySection, { title: TKey; topics: readonly Lib
       { slug: "pip", label: "prog_pip" },
       { slug: "sqlite", label: "prog_sqlite" },
       { slug: "curl", label: "prog_curl" },
+      { slug: "composer", label: "prog_composer" },
+      { slug: "cargo", label: "prog_cargo" },
+      { slug: "make", label: "prog_make" },
     ],
   },
 };

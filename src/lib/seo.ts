@@ -314,28 +314,28 @@ const PAGES: Record<string, Copy> = {
   "/programming": {
     az: {
       title: "Proqramlaşdırma — Nibras Code",
-      description: "Python, Java, React, pip, SQLite, curl, npm, Linux və digər dillər və alətlər.",
-      keywords: "proqramlaşdırma, pip, SQLite, curl, npm, Linux, React",
+      description: "Python, Java, React, Composer, Cargo, Make, pip, Linux və digər dillər və alətlər.",
+      keywords: "proqramlaşdırma, Composer, Cargo, Make, pip, Linux, React",
     },
     en: {
       title: "Programming — Nibras Code",
-      description: "Pages on Python, Java, React, pip, SQLite, curl, npm, Linux, and other languages and tools.",
-      keywords: "programming, pip, SQLite, curl, npm, Linux, React",
+      description: "Pages on Python, Java, React, Composer, Cargo, Make, pip, Linux, and other languages and tools.",
+      keywords: "programming, Composer, Cargo, Make, pip, Linux, React",
     },
     tr: {
       title: "Programlama — Nibras Code",
-      description: "Python, Java, React, pip, SQLite, curl, npm, Linux ve diğer diller ile araçlar.",
-      keywords: "programlama, pip, SQLite, curl, npm, Linux, React",
+      description: "Python, Java, React, Composer, Cargo, Make, pip, Linux ve diğer diller ile araçlar.",
+      keywords: "programlama, Composer, Cargo, Make, pip, Linux, React",
     },
     ar: {
       title: "برمجة — Nibras Code",
-      description: "صفحات عن Python وJava وReact وpip وSQLite وcurl وnpm وLinux وأدوات أخرى.",
-      keywords: "برمجة, pip, SQLite, curl, npm, Linux, React",
+      description: "صفحات عن Python وJava وReact وComposer وCargo وMake وpip وLinux وأدوات أخرى.",
+      keywords: "برمجة, Composer, Cargo, Make, pip, Linux, React",
     },
     ru: {
       title: "Программирование — Nibras Code",
-      description: "Страницы о Python, Java, React, pip, SQLite, curl, npm, Linux и других языках и инструментах.",
-      keywords: "программирование, pip, SQLite, curl, npm, Linux, React",
+      description: "Страницы о Python, Java, React, Composer, Cargo, Make, pip, Linux и других языках и инструментах.",
+      keywords: "программирование, Composer, Cargo, Make, pip, Linux, React",
     },
   },
   ...Object.fromEntries(PROGRAMMING.map((page) => [`/programming/${page.slug}`, page.seo])),

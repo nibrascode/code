@@ -155,6 +155,9 @@ const PROGRAM_NAMES: Record<string, string> = {
   pip: "pip",
   sqlite: "SQLite",
   curl: "curl",
+  composer: "Composer",
+  cargo: "Cargo",
+  make: "Make",
 };
 
 const HTML_TRIES = [
