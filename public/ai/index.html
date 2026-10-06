@@ -535,22 +535,22 @@
     .ddel.sure { color: #ffb3bf; font-size: 12px; font-weight: 700; }
     .dempty { margin: 18px 4px; color: var(--muted); font-size: 13px; text-align: center; }
     .dnote { margin: 0; text-align: center; color: #8fd9cd; font-size: 12px; font-weight: 600; }
-    .dtools { display: flex; flex-direction: column; gap: 8px; }
-    .dtools .newchat.on { border-color: #8fb4ff; color: #e6efff; background: rgba(143, 180, 255, .16); }
-    .langhead, .langlist button {
+    .dtools { display: flex; flex-direction: column; gap: 8px; flex: 1; min-height: 0; overflow: auto; }
+    .fold, .langlist button {
       min-height: 40px; border-radius: 12px; cursor: pointer; text-align: start; padding: 0 12px;
       border: 1px solid rgba(130, 170, 255, .28);
       background: rgba(8, 12, 28, .55); color: #d5def3; font-size: 14px; font-weight: 700;
     }
-    .langhead { display: flex; align-items: center; justify-content: space-between; }
-    .langhead::after { content: "▾"; color: #8fd9cd; font-size: 12px; }
-    .langhead[aria-expanded="true"]::after { content: "▴"; }
-    .langlist { display: none; flex-direction: column; gap: 6px; }
-    .langlist.on { display: flex; }
+    .fold { display: flex; align-items: center; justify-content: space-between; }
+    .fold::after { content: "▾"; color: #8fd9cd; font-size: 12px; }
+    .fold[aria-expanded="true"]::after { content: "▴"; }
+    .fold.on { border-color: #8fb4ff; color: #e6efff; background: rgba(143, 180, 255, .16); }
+    .langlist, .chatbox, .aboutin { display: none; }
+    .langlist.on, .chatbox.on { display: flex; flex-direction: column; gap: 8px; }
+    .aboutin.on { display: block; }
+    .chatbox.on { flex: 1; min-height: 0; }
+    .chatbox .dlist { flex: 1; min-height: 120px; overflow-y: auto; }
     .langlist button.on { border-color: #5eead4; color: #b8fbef; background: rgba(45, 212, 191, .12); }
-    .dlist.is-off { display: none !important; }
-    .aboutin { display: none; flex: 1; min-height: 0; overflow: auto; }
-    .drawer.show-about .aboutin { display: block; }
     .aboutin h2 { margin: 14px 0 6px; font-size: 15px; letter-spacing: -0.02em; }
     .aboutin p { margin: 0 0 8px; color: #d5dced; font-size: 13.5px; line-height: 1.55; }
     .aboutin .leadline { color: #f4f7ff; }
@@ -664,11 +664,16 @@
   </div>
   <div class="scrim" id="scrim"></div>
   <aside class="drawer" id="drawer" aria-label="Söhbətlər" aria-hidden="true">
-    <div class="dh"><b id="dtitle">Söhbətlər</b><button class="dx" id="dclose" type="button" aria-label="Bağla">&times;</button></div>
+    <div class="dh"><b id="dtitle">Nibras AI</b><button class="dx" id="dclose" type="button" aria-label="Bağla">&times;</button></div>
     <div class="dtools">
-      <button class="newchat" id="newchat" type="button">+ Yeni söhbət</button>
-      <button class="newchat" id="aboutbtn" type="button">Haqqında</button>
-      <button class="langhead" id="langhead" type="button" aria-expanded="false">Azərbaycan</button>
+      <button class="fold" id="aboutbtn" type="button" aria-expanded="false">Haqqında</button>
+      <div class="aboutin" id="aboutin"></div>
+      <button class="fold" id="chathead" type="button" aria-expanded="false">Söhbətlər</button>
+      <div class="chatbox" id="chatbox">
+        <button class="newchat" id="newchat" type="button">+ Yeni söhbət</button>
+        <div class="dlist" id="dlist"></div>
+      </div>
+      <button class="fold" id="langhead" type="button" aria-expanded="false">Azərbaycan</button>
       <div class="langlist" id="langs">
         <button type="button" data-lang="az">Azərbaycan</button>
         <button type="button" data-lang="en">English</button>
@@ -677,8 +682,6 @@
         <button type="button" data-lang="ru">Русский</button>
       </div>
     </div>
-    <div class="dlist" id="dlist"></div>
-    <div class="aboutin" id="aboutin"></div>
     <p class="dnote" id="dnote">Söhbət bu brauzerdə 24 saat qalır</p>
   </aside>
   <div class="toast" id="toast" role="status"></div>
@@ -1727,9 +1730,9 @@
       try { localStorage.setItem(LANG_KEY, code); } catch (e) {}
       document.documentElement.lang = code;
       document.documentElement.dir = code === "ar" ? "rtl" : "ltr";
-      document.getElementById("dtitle").textContent = t("chats");
-      document.getElementById("newchat").textContent = t("newChat");
       document.getElementById("aboutbtn").textContent = t("about");
+      document.getElementById("chathead").textContent = t("chats");
+      document.getElementById("newchat").textContent = t("newChat");
       document.getElementById("dnote").textContent = t("note");
       document.getElementById("kicker").textContent = t("kicker");
       document.querySelectorAll("[data-ui]").forEach(function (el) { el.textContent = t(el.getAttribute("data-ui")); });
@@ -1825,22 +1828,50 @@
     document.getElementById("dclose").addEventListener("click", function () { setDrawer(false); });
     const aboutBtn = document.getElementById("aboutbtn");
     const aboutIn = document.getElementById("aboutin");
+    const chatHead = document.getElementById("chathead");
+    const chatBox = document.getElementById("chatbox");
     const langHead = document.getElementById("langhead");
     const langList = document.getElementById("langs");
     let aboutOn = false;
     function setLangOpen(on) {
       langList.classList.toggle("on", on);
       langHead.setAttribute("aria-expanded", on ? "true" : "false");
+      langHead.classList.toggle("on", on);
+    }
+    function closeFolds() {
+      aboutOn = false;
+      aboutIn.classList.remove("on");
+      aboutBtn.setAttribute("aria-expanded", "false");
+      aboutBtn.classList.remove("on");
+      chatBox.classList.remove("on");
+      chatHead.setAttribute("aria-expanded", "false");
+      chatHead.classList.remove("on");
+      setLangOpen(false);
     }
     function setAbout(on) {
-      aboutOn = on;
-      drawer.classList.toggle("show-about", on);
-      dlist.classList.toggle("is-off", on);
-      aboutBtn.classList.toggle("on", on);
-      if (on) { setLangOpen(false); aboutIn.scrollTop = 0; }
+      closeFolds();
+      if (!on) return;
+      aboutOn = true;
+      aboutIn.classList.add("on");
+      aboutBtn.setAttribute("aria-expanded", "true");
+      aboutBtn.classList.add("on");
+      aboutIn.scrollTop = 0;
+    }
+    function setChats(on) {
+      closeFolds();
+      if (!on) return;
+      chatBox.classList.add("on");
+      chatHead.setAttribute("aria-expanded", "true");
+      chatHead.classList.add("on");
+      renderList();
     }
     aboutBtn.addEventListener("click", function () { setAbout(!aboutOn); });
-    langHead.addEventListener("click", function () { setLangOpen(!langList.classList.contains("on")); });
+    chatHead.addEventListener("click", function () { setChats(!chatBox.classList.contains("on")); });
+    langHead.addEventListener("click", function () {
+      const open = !langList.classList.contains("on");
+      closeFolds();
+      if (open) setLangOpen(true);
+    });
     langList.addEventListener("click", function (e) {
       const btn = e.target.closest("button");
       if (!btn) return;
