@@ -242,7 +242,7 @@ function Home() {
           </div>
           <a className="nx-ai-bar" href="/ai">
             <img src="/nibras-ai.png" alt="" />
-            <span>Yapay Zeka</span>
+            <span>Nibras AI</span>
           </a>
           <a
             className="nx-studio-bar"
