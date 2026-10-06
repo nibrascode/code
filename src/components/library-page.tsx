@@ -149,6 +149,9 @@ const PROGRAM_NAMES: Record<string, string> = {
   linux: "Linux",
   ssh: "SSH",
   dns: "DNS",
+  npm: "npm",
+  redis: "Redis",
+  cron: "cron",
 };
 
 const HTML_TRIES = [

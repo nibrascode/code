@@ -62,6 +62,9 @@ export const LIBRARY: Record<LibrarySection, { title: TKey; topics: readonly Lib
       { slug: "linux", label: "prog_linux" },
       { slug: "ssh", label: "prog_ssh" },
       { slug: "dns", label: "prog_dns" },
+      { slug: "npm", label: "prog_npm" },
+      { slug: "redis", label: "prog_redis" },
+      { slug: "cron", label: "prog_cron" },
     ],
   },
 };

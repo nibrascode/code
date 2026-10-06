@@ -314,28 +314,28 @@ const PAGES: Record<string, Copy> = {
   "/programming": {
     az: {
       title: "Proqramlaşdırma — Nibras Code",
-      description: "Python, Java, React, Linux, SSH, DNS, Docker, Nginx və digər dillər və alətlər.",
-      keywords: "proqramlaşdırma, Linux, SSH, DNS, React, Docker, Nginx",
+      description: "Python, Java, React, npm, Redis, cron, Linux, Docker və digər dillər və alətlər.",
+      keywords: "proqramlaşdırma, npm, Redis, cron, Linux, Docker, React",
     },
     en: {
       title: "Programming — Nibras Code",
-      description: "Pages on Python, Java, React, Linux, SSH, DNS, Docker, Nginx, and other languages and tools.",
-      keywords: "programming, Linux, SSH, DNS, React, Docker, Nginx",
+      description: "Pages on Python, Java, React, npm, Redis, cron, Linux, Docker, and other languages and tools.",
+      keywords: "programming, npm, Redis, cron, Linux, Docker, React",
     },
     tr: {
       title: "Programlama — Nibras Code",
-      description: "Python, Java, React, Linux, SSH, DNS, Docker, Nginx ve diğer diller ile araçlar.",
-      keywords: "programlama, Linux, SSH, DNS, React, Docker, Nginx",
+      description: "Python, Java, React, npm, Redis, cron, Linux, Docker ve diğer diller ile araçlar.",
+      keywords: "programlama, npm, Redis, cron, Linux, Docker, React",
     },
     ar: {
       title: "برمجة — Nibras Code",
-      description: "صفحات عن Python وJava وReact وLinux وSSH وDNS وDocker وNginx وأدوات أخرى.",
-      keywords: "برمجة, Linux, SSH, DNS, React, Docker, Nginx",
+      description: "صفحات عن Python وJava وReact وnpm وRedis وcron وLinux وDocker وأدوات أخرى.",
+      keywords: "برمجة, npm, Redis, cron, Linux, Docker, React",
     },
     ru: {
       title: "Программирование — Nibras Code",
-      description: "Страницы о Python, Java, React, Linux, SSH, DNS, Docker, Nginx и других языках и инструментах.",
-      keywords: "программирование, Linux, SSH, DNS, React, Docker, Nginx",
+      description: "Страницы о Python, Java, React, npm, Redis, cron, Linux, Docker и других языках и инструментах.",
+      keywords: "программирование, npm, Redis, cron, Linux, Docker, React",
     },
   },
   ...Object.fromEntries(PROGRAMMING.map((page) => [`/programming/${page.slug}`, page.seo])),

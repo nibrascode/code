@@ -3400,5 +3400,155 @@
     <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/dns"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/dns"/>
   </url>
+  <url>
+    <loc>https://www.nibrascode.com/programming/npm</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/npm"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/npm"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/npm"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/npm"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/npm"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/npm"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/en/programming/npm</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/npm"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/npm"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/npm"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/npm"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/npm"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/npm"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/tr/programming/npm</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/npm"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/npm"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/npm"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/npm"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/npm"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/npm"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/ar/programming/npm</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/npm"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/npm"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/npm"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/npm"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/npm"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/npm"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/ru/programming/npm</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/npm"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/npm"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/npm"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/npm"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/npm"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/npm"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/programming/redis</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/redis"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/redis"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/redis"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/redis"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/redis"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/redis"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/en/programming/redis</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/redis"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/redis"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/redis"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/redis"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/redis"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/redis"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/tr/programming/redis</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/redis"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/redis"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/redis"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/redis"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/redis"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/redis"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/ar/programming/redis</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/redis"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/redis"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/redis"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/redis"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/redis"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/redis"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/ru/programming/redis</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/redis"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/redis"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/redis"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/redis"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/redis"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/redis"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/programming/cron</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/cron"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/cron"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/cron"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/cron"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/cron"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/cron"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/en/programming/cron</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/cron"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/cron"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/cron"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/cron"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/cron"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/cron"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/tr/programming/cron</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/cron"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/cron"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/cron"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/cron"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/cron"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/cron"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/ar/programming/cron</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/cron"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/cron"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/cron"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/cron"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/cron"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/cron"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/ru/programming/cron</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/cron"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/cron"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/cron"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/cron"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/cron"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/cron"/>
+  </url>
 </urlset>
 
