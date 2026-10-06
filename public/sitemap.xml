@@ -271,6 +271,26 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/resurslar/pdf-scanner"/>
   </url>
   <url>
+    <loc>https://www.nibrascode.com/resurslar/nibras-pdf</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/resurslar/nibras-pdf"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/resurslar/nibras-pdf?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/resurslar/nibras-pdf?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/resurslar/nibras-pdf?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/resources/nibras-pdf"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/resurslar/nibras-pdf"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/ru/resources/nibras-pdf</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/resurslar/nibras-pdf"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/resurslar/nibras-pdf?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/resurslar/nibras-pdf?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/resurslar/nibras-pdf?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/resources/nibras-pdf"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/resurslar/nibras-pdf"/>
+  </url>
+  <url>
     <loc>https://www.nibrascode.com/ru/resources/pdf</loc>
     <lastmod>2026-09-30</lastmod>
     <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/resurslar/pdf"/>

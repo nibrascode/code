@@ -1,14 +1,24 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
+import { NIBRAS_PDF_GUIDE, type PdfGuideSection } from "@/lib/nibras-pdf-guide";
 import { RESURSLAR, type ResursPage } from "@/lib/resurslar";
 import { articlesForTopic, type ResourceArticle } from "@/lib/resource-topics";
 import { RU_RESOURCES, type RuResource } from "@/lib/ru-resources";
 import type { Lang } from "@/lib/i18n";
+import { useI18n } from "@/lib/i18n-context";
+
+const BACK = { az: "Resurslar", en: "Resources", tr: "Kaynaklar", ar: "موارد", ru: "Ресурсы" } as const;
+const MORE = { az: "Digər yazılar", en: "Other articles", tr: "Diğer yazılar", ar: "مقالات أخرى", ru: "Другие статьи" } as const;
+
+function plainTitle(title: string) {
+  return title.replace(/ — Nibras Code$/, "");
+}
 
 function ArticleBody({
   title,
   paragraphs,
   steps,
+  sections,
   backLabel,
   moreLabel,
   others,
@@ -18,6 +28,7 @@ function ArticleBody({
   title: string;
   paragraphs: readonly string[];
   steps?: readonly string[];
+  sections?: readonly PdfGuideSection[];
   backLabel: string;
   moreLabel: string;
   others: readonly { slug: string; title: string }[];
@@ -44,6 +55,21 @@ function ArticleBody({
           ))}
         </ol>
       ) : null}
+      {sections?.map((section) => (
+        <section key={section.title}>
+          <h2>{section.title}</h2>
+          {section.paragraphs.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
+          {section.points ? (
+            <ol className="lib-steps">
+              {section.points.map((point) => (
+                <li key={point}>{point}</li>
+              ))}
+            </ol>
+          ) : null}
+        </section>
+      ))}
       <section>
         <h2>{moreLabel}</h2>
         <ul className="lib-list">
@@ -82,16 +108,23 @@ export function ResursPageView({
   title?: string;
   paragraphs?: readonly string[];
 }) {
-  const shown = paragraphs ?? page?.paragraphs ?? [];
-  const heading = title || page?.title || "";
+  const { lang } = useI18n();
+  const guide = page?.slug === "nibras-pdf" && !paragraphs ? NIBRAS_PDF_GUIDE[lang] : null;
+  const seo = page?.seo[lang];
+  const heading = title || guide?.title || (lang === "az" ? page?.title : seo ? plainTitle(seo.title) : page?.title) || "";
+  const shown = paragraphs ?? guide?.lead ?? (lang === "az" || !seo ? page?.paragraphs : [seo.description]) ?? [];
   return (
     <ArticleBody
       title={heading}
       paragraphs={shown}
-      steps={paragraphs ? undefined : page?.steps}
-      backLabel="Resurslar"
-      moreLabel={page?.slug === "pdf" ? "PDF haqqında yazılar" : "Digər PDF yazıları"}
-      others={RESURSLAR.filter((item) => item.slug !== page?.slug)}
+      steps={paragraphs || lang !== "az" || guide ? undefined : page?.steps}
+      sections={guide?.sections}
+      backLabel={BACK[lang]}
+      moreLabel={lang === "az" && page?.slug === "pdf" ? "PDF haqqında yazılar" : MORE[lang]}
+      others={RESURSLAR.filter((item) => item.slug !== page?.slug).map((item) => ({
+        slug: item.slug,
+        title: lang === "az" ? item.title : plainTitle(item.seo[lang].title),
+      }))}
       to="/resurslar/$slug"
     />
   );
@@ -104,8 +137,8 @@ export function ResourceArticleView({ article, lang }: { article: ResourceArticl
       title={article.title[lang]}
       paragraphs={article.paragraphs[lang]}
       steps={article.steps?.[lang]}
-      backLabel={lang === "ru" ? "Ресурсы" : lang === "en" ? "Resources" : lang === "tr" ? "Kaynaklar" : lang === "ar" ? "موارد" : "Resurslar"}
-      moreLabel={lang === "ru" ? "Другие статьи" : lang === "en" ? "Other articles" : lang === "tr" ? "Diğer yazılar" : lang === "ar" ? "مقالات أخرى" : "Digər yazılar"}
+      backLabel={BACK[lang]}
+      moreLabel={MORE[lang]}
       others={siblings.map((item) => ({ slug: item.slug, title: item.title[lang] }))}
       to="/resources/$topic/$article"
       topic={article.topic}
@@ -121,11 +154,13 @@ export function RuResourcePage({
   title?: string;
   paragraphs?: readonly string[];
 }) {
+  const guide = page?.slug === "nibras-pdf" && !paragraphs ? NIBRAS_PDF_GUIDE.ru : null;
   return (
     <ArticleBody
-      title={title || page?.title || ""}
-      paragraphs={paragraphs ?? page?.paragraphs ?? []}
-      steps={paragraphs ? undefined : page?.steps}
+      title={title || guide?.title || page?.title || ""}
+      paragraphs={paragraphs ?? guide?.lead ?? page?.paragraphs ?? []}
+      steps={paragraphs || guide ? undefined : page?.steps}
+      sections={guide?.sections}
       backLabel="Ресурсы"
       moreLabel={page?.slug === "pdf" ? "Статьи о PDF" : "Другие статьи о PDF"}
       others={RU_RESOURCES.filter((item) => item.slug !== page?.slug)}

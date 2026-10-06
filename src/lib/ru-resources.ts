@@ -1,3 +1,5 @@
+import { NIBRAS_PDF_GUIDE } from "@/lib/nibras-pdf-guide";
+
 export type RuResource = {
   slug: string;
   title: string;
@@ -204,6 +206,14 @@ export const RU_RESOURCES: readonly RuResource[] = [
       "Края листа должны попасть в рамку. Обрезанная строка потом не читается.",
       "Несколько страниц сканируйте по порядку и в конце сохраните один PDF.",
     ],
+  },
+  {
+    slug: "nibras-pdf",
+    title: NIBRAS_PDF_GUIDE.ru.title,
+    keyword: "Nibras PDF",
+    description: NIBRAS_PDF_GUIDE.ru.description,
+    keywords: NIBRAS_PDF_GUIDE.ru.keywords,
+    paragraphs: NIBRAS_PDF_GUIDE.ru.lead,
   },
 ];
 

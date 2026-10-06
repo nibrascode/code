@@ -1,4 +1,5 @@
 import type { Lang } from "@/lib/i18n";
+import { NIBRAS_PDF_GUIDE } from "@/lib/nibras-pdf-guide";
 
 export type LocaleSeo = {
   title: string;
@@ -622,6 +623,39 @@ export const RESURSLAR: readonly ResursPage[] = [
         title: "Что такое PDF-сканер и как он работает — Nibras Code",
         description: "PDF-сканер делает из бумаги PDF через камеру. Свет, края и порядок страниц решают, будет ли текст читаться.",
         keywords: "PDF scanner, что такое PDF сканер, сканировать бумагу в PDF",
+      },
+    ),
+  },
+  {
+    slug: "nibras-pdf",
+    title: NIBRAS_PDF_GUIDE.az.title,
+    keyword: "Nibras PDF",
+    paragraphs: NIBRAS_PDF_GUIDE.az.lead,
+    seo: seo(
+      {
+        title: `${NIBRAS_PDF_GUIDE.az.title} — Nibras Code`,
+        description: NIBRAS_PDF_GUIDE.az.description,
+        keywords: NIBRAS_PDF_GUIDE.az.keywords,
+      },
+      {
+        title: `${NIBRAS_PDF_GUIDE.en.title} — Nibras Code`,
+        description: NIBRAS_PDF_GUIDE.en.description,
+        keywords: NIBRAS_PDF_GUIDE.en.keywords,
+      },
+      {
+        title: `${NIBRAS_PDF_GUIDE.tr.title} — Nibras Code`,
+        description: NIBRAS_PDF_GUIDE.tr.description,
+        keywords: NIBRAS_PDF_GUIDE.tr.keywords,
+      },
+      {
+        title: `${NIBRAS_PDF_GUIDE.ar.title} — Nibras Code`,
+        description: NIBRAS_PDF_GUIDE.ar.description,
+        keywords: NIBRAS_PDF_GUIDE.ar.keywords,
+      },
+      {
+        title: `${NIBRAS_PDF_GUIDE.ru.title} — Nibras Code`,
+        description: NIBRAS_PDF_GUIDE.ru.description,
+        keywords: NIBRAS_PDF_GUIDE.ru.keywords,
       },
     ),
   },

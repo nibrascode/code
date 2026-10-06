@@ -19,6 +19,7 @@ export const PDF_LOCALE_PAIRS = [
   { az: "pdf-e-sifre-qoymaq", ru: "parol-na-pdf" },
   { az: "pdf-den-metn-cixarmaq", ru: "izvlech-tekst-iz-pdf" },
   { az: "pdf-scanner", ru: "pdf-scanner" },
+  { az: "nibras-pdf", ru: "nibras-pdf" },
 ] as const;
 
 export function pdfPairFromPath(pathname: string) {
