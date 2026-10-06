@@ -384,5 +384,411 @@ export function storeSections(lang: Lang): ProgrammingSection[] {
       },
     ],
   };
-  return all[lang];
+  return [...all[lang], rejectSection(lang)];
+}
+
+function rejectSection(lang: Lang): ProgrammingSection {
+  const sections: Record<Lang, ProgrammingSection> = {
+    az: {
+      id: "reject",
+      title: "Hansı hallarda tətbiq təsdiqlənməyə bilər?",
+      blocks: [
+        {
+          paragraphs: [
+            "Mağaza faylı açıldığı üçün yox, qaydaya uyğun olmadığı üçün rədd edə bilər. Rədd həmişə hesabı bağlamır. Cavabda səbəb yazılır. Onu düzəldib eyni paket adı və daha böyük versionCode ilə yenidən göndərmək olar. Eyni səhvi ikinci dəfə göndərmək yoxlamanı uzadır. Yanıltmaq isə hesabı riskə qoyur.",
+            "Play və Huawei eyni sözü işlətmir, amma rəddin kökü oxşardır. Səhifə yalan danışır, tətbiq açılmır, icazə izah olunmur və ya fayl mağazanın istədiyi yığım deyil. Aşağıdakı hallar ən çox rast gələnlərdir.",
+          ],
+        },
+        {
+          heading: "Səhifə tətbiqlə uyğun gəlmir",
+          paragraphs: [
+            "Yoxlayan əvvəl mağaza səhifəsinə baxır, sonra tətbiqi açır. İkisi eyni işi demirsə, rədd gəlir. Ekran şəkli başqa proqramdan kəsilibsə, ikon başqa markanın işarəsidirsə və ya mətndə olmayan düymə vəd olunursa, səhifə yalan sayılır.",
+          ],
+          list: [
+            "Qısa və uzun mətn boşdur, başqa tətbiqdən köçürülüb və ya yalnız açar söz yığınıdır.",
+            "Ekran şəkilləri tətbiqin öz ekranı deyil. Ölçü səhvdir və ya şəkil bulanıqdır.",
+            "Adda «rəsmi», «ən yaxşı» və ya başqa şirkətin adı var, sən həmin şirkət deyilsən.",
+            "Məxfilik ünvanı açılmır, boş səhifədir və ya tətbiqin yığdığı məlumatı demir.",
+            "Dil qarışıqdır. Səhifə bir dildədir, tətbiqin içi başqa dildədir və yoxlayan işi başa düşmür.",
+            "Kateqoriya səhvdir. Oyun alət kimi, uşaq tətbiqi isə böyük üçün kimi yazılır.",
+          ],
+        },
+        {
+          heading: "Tətbiq açılmır və ya boşdur",
+          paragraphs: [
+            "Yoxlayan bir neçə dəqiqə içində əsas işi görməlidir. İlk ekranda çökən, ağ qalan və ya düyməsi heç nə etməyən fayl təsdiqlənmir. Sənin telefonunda açılması bəs etmir. Onların test cihazında da açılmalıdır.",
+          ],
+          list: [
+            "Açılışda xəta verir və ya dərhal bağlanır.",
+            "Giriş istəyir, amma yoxlayan üçün test adı və şifrəsi qeyddə yazılmayıb. Öz hesabın olmadan içəri baxa bilmir.",
+            "Server sönükdür. Siyahı boşdur, şəkil gəlmir və səhifə dayanır.",
+            "Düymə basılanda heç bir cavab yoxdur. Forma göndərilmir.",
+            "İcazə sorğusu əsassızdır. Kamera istəyirsən, amma kameradan istifadə edən ekran yoxdur.",
+          ],
+        },
+        {
+          heading: "Yalnız sayt pəncərəsidir",
+          paragraphs: [
+            "Google Play sadəcə bir saytı pəncərəyə qoyan tətbiqi tez-tez rədd edir. İçində bildiriş, telefonda saxlanan iş, kamera və ya səhifədən artıq bir düymə yoxdursa, yoxlayan bunu ayrıca tətbiq saymaya bilər. Saytın ünvanını brauzerdə açmaq eyni işi görürsə, mağaza faylı artıq sayır.",
+            "Huawei də boş pəncərəni və açılmayan ünvanı rədd edə bilər. Saytın özü doludursa və telefonda işləyirsə, şans daha yüksəkdir, amma zəmanət deyil. Nibras Studio-nun debug APK-sı bu yoxlamaya göndərilmir. Mağazaya release yığım lazımdır.",
+            "Pəncərəni tətbiq etmək istəyirsənsə, ən azı bir telefon işi əlavə et. Son açılan səhifəni saxla, bildiriş göndər və ya kameradan bir şəkil al. Bunu etmədən göndərmək rədd riskini böyüdür.",
+          ],
+        },
+        {
+          heading: "Məlumat, reklam və pul",
+          paragraphs: [
+            "Forma ilə tətbiqin içi üst-üstə düşməlidir. Data safety anketində «heç nə yığmıram» deyib hesab və reklam nömrəsi saxlamaq rədd səbəbidir. Məxfilik səhifəsi həmin siyahını açıq yazmalıdır.",
+          ],
+          list: [
+            "Rəqəmsal mal mağazanın öz ödənişindən keçmir. Play üçün Play Billing, Huawei üçün onun tətbiq içi ödənişi gözlənilir.",
+            "Abunə gizlidir. Qiymət və nə vaxt yeniləndiyi düymənin yanında yoxdur.",
+            "Reklam bağlanmır, sistem xəbərdarlığı kimi görünür və ya əsas düymənin üstünü örtür.",
+            "Uşaqlar üçün deyirsən, amma böyüklər üçün reklam və alış var. Yaş qrupu səhv seçilib.",
+            "İzləmə razılığı soruşulmur, halbuki reklam şəbəkəsi bunu istəyir.",
+          ],
+        },
+        {
+          heading: "Başqasının adı və faylın özü",
+          paragraphs: [
+            "Sənə aid olmayan ad, ikon, musiqi, şəkil və ya mətn təsdiqi dayandırır. Başqa tətbiqin ekranını öz adına qoymaq həm rədd, həm də hesab riskidir. Öz ekranını çək.",
+          ],
+          list: [
+            "Debug imza. Mağaza yoxlama açarını son buraxılış kimi qəbul etmir.",
+            "Köhnə targetSdk. 31 avqust 2026-dan telefon tətbiqi API 36 hədəfləməlidir. Aşağı hədəf faylı geri qaytarır.",
+            "Yeniləmədə versionCode böyümür və ya paket adı əvvəlki faylla uyğun gəlmir.",
+            "Açar əvvəlki release ilə eyni deyil. Mağaza bunu yeni tətbiq və ya pozulmuş yeniləmə sayır.",
+            "Huawei-də Google kitabxanası açılışı çökdürür. Xəritə, Google giriş və ya Play bildirişi olmayan telefonda boş və ya qapalı ekran qalır.",
+          ],
+        },
+        {
+          heading: "Rədd gələndə nə etməli",
+          paragraphs: [
+            "Hesabatı axıra qədər oxu. Çox vaxt bir sətir deyil, bir neçə bənd olur. Hamısını düzəlt, birini buraxıb yenidən göndərmə. Ekran şəklini tətbiqin özündən yenə çək. Məxfilik səhifəsini telefonda və kompüterdə açılıb-açılmadığını yoxla. Test hesabını qeyd sahəsinə yaz.",
+            "Düzəlişdən sonra öz telefonunda və bir başqa telefonda aç. Huawei üçündürsə, Google-suz cihazda və ya bulud testində aç. Sonra daha böyük versionCode ilə göndər. Üç dəfə eyni səbəblə qayıdırsa, mətnini qısalt və vəd etdiyin işi tətbiqdən çıxar. Olmayan düyməni səhifədə saxlamaq növbəti rəddi gətirir.",
+          ],
+        },
+      ],
+    },
+    en: {
+      id: "reject",
+      title: "When can an app be refused?",
+      blocks: [
+        {
+          paragraphs: [
+            "A store can refuse a file not because it opened, but because it does not follow the rule. A refusal does not always close the account. The reply writes the reason. You can fix it and send again with the same package name and a higher versionCode. Sending the same mistake twice makes the review longer. Misleading the store puts the account at risk.",
+            "Play and Huawei do not use the same words, but the root is similar. The page lies, the app does not open, a permission is not explained, or the file is not the build the store asked for. The cases below are the ones that happen most.",
+          ],
+        },
+        {
+          heading: "The page does not match the app",
+          paragraphs: [
+            "The reviewer looks at the store page first, then opens the app. If the two do not describe the same job, a refusal comes. A screenshot cut from another program, an icon that is another brand's mark, or a button promised in the text but missing in the app makes the page a lie.",
+          ],
+          list: [
+            "The short and long text are empty, copied from another app, or only a pile of keywords.",
+            "The screenshots are not the app's own screen. The size is wrong or the picture is blurry.",
+            "The name says official, best, or another company's name, and you are not that company.",
+            "The privacy address does not open, the page is empty, or it does not say what the app collects.",
+            "The language is mixed. The page is in one language, the inside of the app is in another, and the reviewer cannot follow the job.",
+            "The category is wrong. A game is filed as a tool, or a children's app is filed as one for adults.",
+          ],
+        },
+        {
+          heading: "The app does not open, or it is empty",
+          paragraphs: [
+            "The reviewer should see the main job within a few minutes. A file that crashes on the first screen, stays white, or has a button that does nothing is not approved. Opening on your phone is not enough. It has to open on their test device too.",
+          ],
+          list: [
+            "It errors on open or closes at once.",
+            "It asks for a login, but a test name and password are not written in the notes. They cannot look inside without your account.",
+            "The server is down. The list is empty, the picture does not arrive, and the page stops.",
+            "A press on the button gets no answer. The form is not sent.",
+            "The permission request has no reason. You ask for the camera, but no screen uses it.",
+          ],
+        },
+        {
+          heading: "It is only a window onto a site",
+          paragraphs: [
+            "Google Play often refuses an app that only puts a site in a window. If there is no notification, no job saved on the phone, no camera, and no button beyond the page, the reviewer may not count it as its own app. If opening the site's address in a browser does the same job, the store treats the file as extra.",
+            "Huawei can also refuse an empty window and an address that does not open. If the site itself is full and works on a phone, the chance is higher, but it is not a promise. The debug APK from Nibras Studio is not sent to this review. The store needs a release build.",
+            "If you want the window to become an app, add at least one phone job. Save the last opened page, send a notification, or take one picture from the camera. Sending it without that raises the chance of a refusal.",
+          ],
+        },
+        {
+          heading: "Data, ads, and money",
+          paragraphs: [
+            "The form and the inside of the app must match. Saying \"I collect nothing\" on the data safety form while the app keeps an account and an ad number is a reason for refusal. The privacy page must write that list in the open.",
+          ],
+          list: [
+            "A digital good does not pass through the store's own payment. Play expects Play Billing. Huawei expects its in-app payment.",
+            "The subscription is hidden. The price and the renewal are not next to the button.",
+            "An ad cannot be closed, looks like a system warning, or covers the main button.",
+            "You say it is for children, but there are adult ads and purchases. The age group is wrong.",
+            "Tracking consent is not asked, while the ad network requires it.",
+          ],
+        },
+        {
+          heading: "Someone else's name, and the file itself",
+          paragraphs: [
+            "A name, icon, song, picture, or text that is not yours stops approval. Putting another app's screen under your name is both a refusal and a risk to the account. Shoot your own screen.",
+          ],
+          list: [
+            "A debug signature. The store does not take a test key as the final release.",
+            "An old targetSdk. From 31 August 2026 a phone app must target API 36. A lower target sends the file back.",
+            "On an update versionCode does not rise, or the package name does not match the previous file.",
+            "The key is not the same as the previous release. The store treats this as a new app or a broken update.",
+            "On Huawei a Google library crashes the open. A phone without maps, Google sign-in, or Play notifications is left with an empty or closed screen.",
+          ],
+        },
+        {
+          heading: "What to do when a refusal comes",
+          paragraphs: [
+            "Read the report to the end. It is often several points, not one line. Fix all of them. Do not leave one and send again. Shoot the screenshot from the app again. Open the privacy page on a phone and on a computer. Write the test account in the notes field.",
+            "After the fix, open it on your phone and on one other phone. If it is for Huawei, open it on a device without Google or in the cloud test. Then send it with a higher versionCode. If it comes back three times for the same reason, shorten the text and remove the job you promised but the app does not do. Keeping a missing button on the page brings the next refusal.",
+          ],
+        },
+      ],
+    },
+    tr: {
+      id: "reject",
+      title: "Uygulama hangi hallerde onaylanmayabilir?",
+      blocks: [
+        {
+          paragraphs: [
+            "Mağaza dosyayı açıldığı için değil, kurala uymadığı için reddedebilir. Ret her zaman hesabı kapatmaz. Yanıtta sebep yazar. Onu düzeltip aynı paket adı ve daha büyük versionCode ile yeniden göndermek olur. Aynı hatayı ikinci kez göndermek incelemeyi uzatır. Yanıltmak ise hesabı riske koyar.",
+            "Play ve Huawei aynı sözü kullanmaz, ama reddin kökü benzerdir. Sayfa yalan söyler, uygulama açılmaz, izin açıklanmaz ya da dosya mağazanın istediği derleme değildir. Aşağıdaki haller en sık görülenlerdir.",
+          ],
+        },
+        {
+          heading: "Sayfa uygulamayla uyuşmaz",
+          paragraphs: [
+            "İnceleyen önce mağaza sayfasına bakar, sonra uygulamayı açar. İkisi aynı işi demiyorsa ret gelir. Ekran görüntüsü başka programdan kesildiyse, ikon başka markanın işaretiyse ya da metinde olmayan düğme vadeliyorsa sayfa yalan sayılır.",
+          ],
+          list: [
+            "Kısa ve uzun metin boştur, başka uygulamadan kopyalanmıştır ya da yalnız anahtar söz yığınıdır.",
+            "Ekran görüntüleri uygulamanın kendi ekranı değildir. Ölçü yanlıştır ya da resim bulanıktır.",
+            "Adında resmi, en iyi ya da başka şirketin adı vardır, sen o şirket değilsin.",
+            "Gizlilik adresi açılmaz, sayfa boştur ya da uygulamanın topladığı veriyi söylemez.",
+            "Dil karışıktır. Sayfa bir dildedir, uygulamanın içi başka dildedir ve inceleyen işi anlamaz.",
+            "Kategori yanlıştır. Oyun araç gibi, çocuk uygulaması ise büyükler için gibi yazılır.",
+          ],
+        },
+        {
+          heading: "Uygulama açılmaz ya da boştur",
+          paragraphs: [
+            "İnceleyen birkaç dakika içinde ana işi görmelidir. İlk ekranda çöken, ak kalan ya da düğmesi hiçbir şey yapmayan dosya onaylanmaz. Senin telefonunda açılması yetmez. Onların test cihazında da açılmalıdır.",
+          ],
+          list: [
+            "Açılışta hata verir ya da hemen kapanır.",
+            "Giriş ister, ama inceleyen için deneme adı ve parolası notta yazılmamıştır. Kendi hesabın olmadan içeri bakamaz.",
+            "Sunucu kapalıdır. Liste boştur, resim gelmez ve sayfa durur.",
+            "Düğmeye basılınca hiçbir cevap yoktur. Form gönderilmez.",
+            "İzin isteği gerekçesizdir. Kamera istersin, ama kamerayı kullanan ekran yoktur.",
+          ],
+        },
+        {
+          heading: "Yalnızca site penceresidir",
+          paragraphs: [
+            "Google Play yalnızca bir siteyi pencereye koyan uygulamayı sık sık reddeder. İçinde bildirim, telefonda saklanan iş, kamera ya da sayfadan fazla bir düğme yoksa inceleyen bunu ayrı uygulama saymayabilir. Sitenin adresini tarayıcıda açmak aynı işi görüyorsa mağaza dosyayı fazla sayar.",
+            "Huawei de boş pencereyi ve açılmayan adresi reddedebilir. Sitenin kendisi doluysa ve telefonda çalışıyorsa şans daha yüksektir, ama söz değildir. Nibras Studio'nun debug APK'sı bu incelemeye gönderilmez. Mağazaya release derleme gerekir.",
+            "Pencereyi uygulama yapmak istiyorsan en az bir telefon işi ekle. Son açılan sayfayı sakla, bildirim gönder ya da kameradan bir resim al. Bunu etmeden göndermek ret riskini büyütür.",
+          ],
+        },
+        {
+          heading: "Veri, reklam ve para",
+          paragraphs: [
+            "Form ile uygulamanın içi üst üste gelmelidir. Data safety anketinde «hiçbir şey toplamıyorum» deyip hesap ve reklam numarası saklamak ret sebebidir. Gizlilik sayfası o listeyi açık yazmalıdır.",
+          ],
+          list: [
+            "Sayısal mal mağazanın kendi ödemesinden geçmez. Play için Play Billing, Huawei için onun uygulama içi ödemesi beklenir.",
+            "Abonelik gizlidir. Fiyat ve ne zaman yenilendiği düğmenin yanında yoktur.",
+            "Reklam kapanmaz, sistem uyarısı gibi görünür ya da ana düğmenin üstünü örter.",
+            "Çocuklar için dersin, ama büyükler için reklam ve alış vardır. Yaş grubu yanlış seçilmiştir.",
+            "İzleme onayı sorulmaz, oysa reklam ağı bunu ister.",
+          ],
+        },
+        {
+          heading: "Başkasının adı ve dosyanın kendisi",
+          paragraphs: [
+            "Sana ait olmayan ad, ikon, müzik, resim ya da metin onayı durdurur. Başka uygulamanın ekranını kendi adına koymak hem ret hem hesap riskidir. Kendi ekranını çek.",
+          ],
+          list: [
+            "Debug imza. Mağaza yoklama anahtarını son sürüm olarak kabul etmez.",
+            "Eski targetSdk. 31 Ağustos 2026'dan telefon uygulaması API 36 hedeflemelidir. Düşük hedef dosyayı geri çevirir.",
+            "Güncellemede versionCode büyümez ya da paket adı önceki dosyayla uyuşmaz.",
+            "Anahtar önceki release ile aynı değildir. Mağaza bunu yeni uygulama ya da bozuk güncelleme sayar.",
+            "Huawei'de Google kütüphanesi açılışı çökertir. Harita, Google girişi ya da Play bildirimi olmayan telefonda boş ya da kapalı ekran kalır.",
+          ],
+        },
+        {
+          heading: "Ret gelince ne yapmalı",
+          paragraphs: [
+            "Raporu sonuna kadar oku. Çoğu zaman bir satır değil, birkaç maddedir. Hepsini düzelt, birini bırakıp yeniden gönderme. Ekran görüntüsünü uygulamanın kendisinden yeniden çek. Gizlilik sayfasının telefonda ve bilgisayarda açıldığını yokla. Deneme hesabını not alanına yaz.",
+            "Düzeltmeden sonra kendi telefonunda ve bir başka telefonda aç. Huawei içinse Google'suz cihazda ya da bulut testinde aç. Sonra daha büyük versionCode ile gönder. Üç kez aynı sebeple dönerse metnini kısalt ve vadettiğin ama uygulamanın yapmadığı işi çıkar. Olmayan düğmeyi sayfada tutmak sonraki reddi getirir.",
+          ],
+        },
+      ],
+    },
+    ar: {
+      id: "reject",
+      title: "في أي حال قد لا يُوافَق على التطبيق؟",
+      blocks: [
+        {
+          paragraphs: [
+            "المتجر قد يرفض الملف لا لأنه فُتح بل لأنه لا يتبع القاعدة. الرفض لا يغلق الحساب دائماً. الرد يكتب السبب. يمكن إصلاحه وإعادة الإرسال باسم الحزمة نفسه وversionCode أكبر. إرسال الخطأ نفسه مرة ثانية يطيل المراجعة. التضليل يضع الحساب في خطر.",
+            "Play وHuawei لا يستعملان الكلمة نفسها، لكن جذر الرفض متشابه. الصفحة تكذب أو التطبيق لا يُفتح أو الصلاحية غير مشروحة أو الملف ليس التجميع الذي طلبه المتجر. الحالات أدناه هي الأكثر.",
+          ],
+        },
+        {
+          heading: "الصفحة لا تطابق التطبيق",
+          paragraphs: [
+            "المراجع ينظر إلى صفحة المتجر أولاً ثم يفتح التطبيق. إذا لم يصفا العمل نفسه يأتي الرفض. لقطة مقصوصة من برنامج آخر أو أيقونة هي علامة ماركة أخرى أو زر موعود في النص وليس في التطبيق تجعل الصفحة كذباً.",
+          ],
+          list: [
+            "النص القصير والطويل فارغان أو منسوخان من تطبيق آخر أو مجرد كومة كلمات مفتاح.",
+            "لقطات الشاشة ليست شاشة التطبيق نفسه. المقاس خطأ أو الصورة مشوشة.",
+            "في الاسم «رسمي» أو «الأفضل» أو اسم شركة أخرى وأنت لست تلك الشركة.",
+            "عنوان الخصوصية لا يُفتح أو الصفحة فارغة أو لا تقول ماذا يجمع التطبيق.",
+            "اللغة مختلطة. الصفحة بلغة وداخل التطبيق بلغة أخرى والمراجع لا يفهم العمل.",
+            "الفئة خطأ. اللعبة تُكتب كأداة وتطبيق الأطفال كأنه للكبار.",
+          ],
+        },
+        {
+          heading: "التطبيق لا يُفتح أو فارغ",
+          paragraphs: [
+            "يجب أن يرى المراجع العمل الرئيسي خلال دقائق. الملف الذي يسقط في الشاشة الأولى أو يبقى أبيض أو زرّه لا يفعل شيئاً لا يُوافَق عليه. فتحه على هاتفك لا يكفي. يجب أن يُفتح على جهاز الاختبار عندهم أيضاً.",
+          ],
+          list: [
+            "يعطي خطأ عند الفتح أو يُغلق فوراً.",
+            "يطلب دخولاً لكن اسم التجربة وكلمة المرور غير مكتوبين في الملاحظة. لا يستطيع النظر إلى الداخل بلا حسابك.",
+            "الخادم مطفأ. القائمة فارغة والصورة لا تأتي والصفحة تقف.",
+            "الضغط على الزر بلا جواب. النموذج لا يُرسل.",
+            "طلب الصلاحية بلا سبب. تطلب الكاميرا ولا توجد شاشة تستعملها.",
+          ],
+        },
+        {
+          heading: "مجرد نافذة موقع",
+          paragraphs: [
+            "Google Play غالباً يرفض تطبيقاً يضع موقعاً في نافذة فقط. إذا لم يكن فيه إشعار ولا عمل محفوظ على الهاتف ولا كاميرا ولا زر زائد على الصفحة فقد لا يحسبه المراجع تطبيقاً مستقلاً. إذا كان فتح عنوان الموقع في المتصفح يؤدي العمل نفسه فالمتجر يعدّ الملف زيادة.",
+            "Huawei أيضاً قد يرفض النافذة الفارغة والعنوان الذي لا يُفتح. إذا كان الموقع نفسه مليئاً ويعمل على الهاتف فالفرصة أعلى لكنها ليست وعداً. ملف APK التجريبي من Nibras Studio لا يُرسل إلى هذه المراجعة. المتجر يحتاج تجميع إصدار.",
+            "إذا أردت أن تصير النافذة تطبيقاً فأضف عملاً واحداً على الأقل للهاتف. احفظ آخر صفحة فُتحت أو أرسل إشعاراً أو خذ صورة واحدة من الكاميرا. الإرسال بلا ذلك يكبّر خطر الرفض.",
+          ],
+        },
+        {
+          heading: "البيانات والإعلان والمال",
+          paragraphs: [
+            "النموذج وداخل التطبيق يجب أن يتطابقا. قول «لا أجمع شيئاً» في نموذج سلامة البيانات مع حفظ حساب ورقم إعلان سبب رفض. صفحة الخصوصية يجب أن تكتب تلك القائمة علناً.",
+          ],
+          list: [
+            "السلعة الرقمية لا تمر بدفع المتجر نفسه. Play ينتظر Play Billing وHuawei ينتظر دفعه الداخلي.",
+            "الاشتراك مخفي. السعر وموعد التجدد ليسا بجانب الزر.",
+            "الإعلان لا يُغلق أو يبدو كتحذير النظام أو يغطّي الزر الرئيسي.",
+            "تقول إنه للأطفال وفيه إعلان وشراء للكبار. فئة العمر مختارة خطأ.",
+            "موافقة التتبع لا تُسأل بينما شبكة الإعلان تطلبها.",
+          ],
+        },
+        {
+          heading: "اسم غيرك والملف نفسه",
+          paragraphs: [
+            "اسم أو أيقونة أو موسيقى أو صورة أو نص ليس لك يوقف الموافقة. وضع شاشة تطبيق آخر باسمك رفض وخطر على الحساب. صوّر شاشتك.",
+          ],
+          list: [
+            "توقيع تجريبي. المتجر لا يقبل مفتاح الاختبار كإصدار أخير.",
+            "targetSdk قديم. من 31 أغسطس 2026 تطبيق الهاتف يجب أن يستهدف API 36. الهدف الأدنى يعيد الملف.",
+            "في التحديث versionCode لا يكبر أو اسم الحزمة لا يطابق الملف السابق.",
+            "المفتاح ليس هو مفتاح الإصدار السابق. المتجر يحسب هذا تطبيقاً جديداً أو تحديثاً مكسوراً.",
+            "على Huawei مكتبة Google تُسقط الفتح. الهاتف بلا خرائط أو دخول Google أو إشعارات Play يبقى بشاشة فارغة أو مغلقة.",
+          ],
+        },
+        {
+          heading: "ماذا تفعل حين يأتي الرفض",
+          paragraphs: [
+            "اقرأ التقرير حتى آخره. غالباً عدة بنود لا سطر واحد. أصلحها كلها ولا تترك واحداً وتعيد الإرسال. صوّر لقطة الشاشة من التطبيق من جديد. افتح صفحة الخصوصية على الهاتف وعلى الحاسوب. اكتب حساب التجربة في حقل الملاحظة.",
+            "بعد الإصلاح افتحه على هاتفك وعلى هاتف آخر. إذا كان لـ Huawei فافتحه على جهاز بلا Google أو في الاختبار السحابي. ثم أرسله مع versionCode أكبر. إذا عاد ثلاث مرات للسبب نفسه فقصّر النص واحذف العمل الذي وعدته والتطبيق لا يفعله. إبقاء زر غير موجود في الصفحة يأتي بالرفض التالي.",
+          ],
+        },
+      ],
+    },
+    ru: {
+      id: "reject",
+      title: "В каких случаях приложение могут не одобрить?",
+      blocks: [
+        {
+          paragraphs: [
+            "Магазин может отказать не потому, что файл открылся, а потому что он не следует правилу. Отказ не всегда закрывает аккаунт. В ответе пишут причину. Её можно исправить и отправить снова с тем же именем пакета и большим versionCode. Вторая отправка той же ошибки удлиняет проверку. Обман ставит аккаунт под риск.",
+            "Play и Huawei не говорят одними словами, но корень отказа похож. Страница лжёт, приложение не открывается, разрешение не объяснено или файл — не та сборка, которую просил магазин. Ниже случаи, которые встречаются чаще всего.",
+          ],
+        },
+        {
+          heading: "Страница не совпадает с приложением",
+          paragraphs: [
+            "Проверяющий сначала смотрит страницу магазина, потом открывает приложение. Если они не говорят об одной работе, приходит отказ. Снимок, вырезанный из другой программы, значок чужой марки или кнопка, обещанная в тексте и отсутствующая в приложении, делают страницу ложью.",
+          ],
+          list: [
+            "Короткий и длинный текст пустые, скопированы из другого приложения или это только куча ключевых слов.",
+            "Снимки экрана — не экран самого приложения. Размер неверный или картинка мутная.",
+            "В имени есть «официальное», «лучшее» или имя чужой компании, а ты не эта компания.",
+            "Адрес политики не открывается, страница пустая или не говорит, что приложение собирает.",
+            "Язык смешан. Страница на одном языке, внутри приложения другой, и проверяющий не понимает работу.",
+            "Категория неверная. Игра записана как инструмент, а детское приложение — как для взрослых.",
+          ],
+        },
+        {
+          heading: "Приложение не открывается или пустое",
+          paragraphs: [
+            "Проверяющий должен увидеть главную работу за несколько минут. Файл, который падает на первом экране, остаётся белым или имеет кнопку, которая ничего не делает, не одобряют. Открытия на твоём телефоне мало. Он должен открыться и на их тестовом устройстве.",
+          ],
+          list: [
+            "При открытии даёт ошибку или сразу закрывается.",
+            "Просит вход, но пробное имя и пароль не написаны в заметке. Без твоего аккаунта внутрь не заглянуть.",
+            "Сервер выключен. Список пуст, картинка не приходит, страница стоит.",
+            "Нажатие на кнопку не даёт ответа. Форма не уходит.",
+            "Запрос разрешения без причины. Просишь камеру, а экрана, который ею пользуется, нет.",
+          ],
+        },
+        {
+          heading: "Это только окно сайта",
+          paragraphs: [
+            "Google Play часто отказывает приложению, которое лишь кладёт сайт в окно. Если нет уведомления, работы, сохранённой на телефоне, камеры и кнопки сверх страницы, проверяющий может не счесть это отдельным приложением. Если открыть адрес сайта в браузере — та же работа, магазин считает файл лишним.",
+            "Huawei тоже может отказать пустому окну и адресу, который не открывается. Если сам сайт полный и работает на телефоне, шанс выше, но это не обещание. Debug APK от Nibras Studio на эту проверку не отправляют. Магазину нужна сборка release.",
+            "Если хочешь сделать из окна приложение, добавь хотя бы одну телефонную работу. Сохрани последнюю открытую страницу, пошли уведомление или возьми одну картинку с камеры. Отправка без этого повышает шанс отказа.",
+          ],
+        },
+        {
+          heading: "Данные, реклама и деньги",
+          paragraphs: [
+            "Форма и нутро приложения должны совпасть. Фраза «ничего не собираю» в анкете безопасности данных при сохранённом аккаунте и номере рекламы — причина отказа. Страница политики должна написать этот список открыто.",
+          ],
+          list: [
+            "Цифровой товар не проходит через оплату самого магазина. Play ждёт Play Billing, Huawei — свою внутреннюю оплату.",
+            "Подписка спрятана. Цена и срок обновления не стоят рядом с кнопкой.",
+            "Рекламу нельзя закрыть, она выглядит как системное предупреждение или закрывает главную кнопку.",
+            "Пишешь, что для детей, а внутри взрослая реклама и покупки. Возрастная группа выбрана неверно.",
+            "Согласие на слежение не спрашивают, хотя рекламная сеть этого требует.",
+          ],
+        },
+        {
+          heading: "Чужое имя и сам файл",
+          paragraphs: [
+            "Чужое имя, значок, музыка, картинка или текст останавливают одобрение. Положить экран чужого приложения под своё имя — и отказ, и риск для аккаунта. Сними свой экран.",
+          ],
+          list: [
+            "Отладочная подпись. Магазин не берёт тестовый ключ как окончательный выпуск.",
+            "Старый targetSdk. С 31 августа 2026 приложение для телефона должно целиться в API 36. Более низкая цель возвращает файл.",
+            "В обновлении versionCode не растёт или имя пакета не совпадает с прошлым файлом.",
+            "Ключ не тот, что у прошлого release. Магазин считает это новым приложением или сломанным обновлением.",
+            "На Huawei библиотека Google роняет открытие. Телефон без карт, входа Google или уведомлений Play остаётся с пустым или закрытым экраном.",
+          ],
+        },
+        {
+          heading: "Что делать, когда пришёл отказ",
+          paragraphs: [
+            "Дочитай отчёт до конца. Часто это несколько пунктов, а не одна строка. Исправь все. Не оставляй один и не отправляй снова. Сними экран заново из самого приложения. Открой страницу политики на телефоне и на компьютере. Напиши тестовый аккаунт в поле заметки.",
+            "После правки открой на своём телефоне и ещё на одном. Если это для Huawei, открой на устройстве без Google или в облачном тесте. Потом отправь с большим versionCode. Если три раза возвращается по той же причине, укороти текст и убери работу, которую обещал, а приложение не делает. Кнопка, которой нет, оставленная на странице, приносит следующий отказ.",
+          ],
+        },
+      ],
+    },
+  };
+  return sections[lang];
 }
