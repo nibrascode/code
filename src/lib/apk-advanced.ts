@@ -620,5 +620,293 @@ export function apkAdvanced(lang: Lang): ProgrammingSection[] {
       },
     ],
   };
-  return all[lang];
+  return [...all[lang], moneySection(lang)];
+}
+
+function moneySection(lang: Lang): ProgrammingSection {
+  const sections: Record<Lang, ProgrammingSection> = {
+    az: {
+      id: "money",
+      title: "Mobil tətbiqdən pul necə qazanılır?",
+      blocks: [
+        {
+          paragraphs: [
+            "Pul tətbiqin içində özü yaranmır. Əvvəl adamın işinə yarayan bir ekran olmalıdır. Sonra o işin bir hissəsini ödənişli edirsən və ya reklam göstərirsən. Boş tətbiqə ödəniş düyməsi qoymaq pul gətirmir. Adam səbəbi görmürsə, basmır.",
+            "Qazanc adətən az başlayır. Əvvəl on nəfər tətbiqi açıb işini bitirməlidir. Sonra ödəniş və ya reklam əlavə olunur. İlk gündə reklam şəbəkəsi, mağaza hesabı və bank qoşmaq olar, amma gələn pul istifadəçidən asılıdır.",
+          ],
+        },
+        {
+          heading: "Pullu yollar",
+          paragraphs: [
+            "Bir neçə düz yol var. Hamısını eyni vaxtda doldurmaq ekranı korlayır. Birini seç, işlədiyini gör, sonra ikincini əlavə et.",
+          ],
+          list: [
+            "Ödənişli quraşdırma. Adam tətbiqi mağazadan alanda bir dəfə ödəyir. Kiçik və bitmiş alət üçün uyğundur.",
+            "Tətbiqin içində bir dəfəlik alış. Əlavə səhifə, reklamsız rejim və ya bir paket. Rəqəmsal mal mağazada satılırsa, mağazanın öz ödənişindən keçməlidir.",
+            "Abunə. Hər ay və ya hər il yenilənir. Adam nə vaxt bitəcəyini və necə dayandıracağını görməlidir.",
+            "Reklam. Baner ekranın kənarında durur. Tam ekran reklam işin arasını kəsməməlidir. Mükafatlı reklamda adam özü baxır və qarşılığında bir şey alır.",
+            "Öz xidmətin. Tətbiq saytının pəncərəsidir. Dərs, yer bronu və ya səndən kənarda görülən iş saytda ödənilə bilər. Tətbiqin içində sərf olunan rəqəmsal mal üçün mağaza çox vaxt öz ödənişini istəyir.",
+          ],
+        },
+        {
+          heading: "Nəyi qoşmalısan",
+          paragraphs: [
+            "Pulun sənə çatması üçün tətbiqdən kənar hesablar da lazımdır. Onlar APK-nın qovluğunda durmur. Sən saytda qeydiyyatdan keçirsən, tətbiq isə həmin hesabın nömrəsini saxlayır.",
+          ],
+          list: [
+            "Mağaza hesabı. Google Play-ə çıxarmaq üçün Play Console lazımdır. Açılışında bir dəfəlik ödəniş olur.",
+            "Satıcı profili və bank. Mağaza pulu hara köçürəcəyini bilməlidir. Vergi məlumatı da soruşulur.",
+            "Rəqəmsal alış üçün Play Billing. Tətbiqin içinə kitabxana qoşulur. Qiymət mağazada məhsul kimi açılır, kodun içinə gizli qiymət yazılmır.",
+            "Reklam üçün reklam şəbəkəsinin hesabı. Tətbiqə reklam vahidinin nömrəsi verilir. Avropa istifadəçisi varsa, razılıq pəncərəsi də lazımdır.",
+            "Məxfilik səhifəsi. Nə yığdığını, reklam və ödənişi bir ünvanda yaz. Mağaza həmin ünvanı istəyir.",
+            "Yoxlama istifadəçisi. Öz kartınla ilk alış etmə. Mağazanın lisenziya yoxlayıcısı saxta ödənişlə düyməni sınamağa imkan verir.",
+          ],
+          after: [
+            "Nibras Studio-nun debug APK-sı yoxlama üçündür. Onunla mağaza ödənişi açılmır. Saytın özündə ödəniş varsa, pəncərə həmin səhifəni aça bilər. Mağazaya qoyanda isə release imza, böyüyən versiya və mağazanın qaydası lazımdır.",
+          ],
+        },
+        {
+          heading: "Nəyə diqqət etməlisən",
+          paragraphs: [
+            "Mağaza satışın bir hissəsini özündə saxlayır, qalanı sənə keçir. Dəqiq pay mağazanın öz səhifəsində yazılır və dəyişə bilər. Gələn məbləğdən vergini öz ölkənin qaydası ilə hesablamaq lazımdır.",
+          ],
+          list: [
+            "Qiyməti gizlətmə. Düymənin yanında məbləğ və müddət görünsün. Abunədə nə vaxt yeniləndiyi yazılsın.",
+            "Dayandırma çətin olmasın. Adam abunəni mağazanın abunə səhifəsindən bağlaya bilməlidir.",
+            "Reklam sistem düyməsi kimi görünməsin. Bağlamaq işarəsi kiçik və yalançı olmasın. Ekranın əsas düyməsinin üstünü örtmə.",
+            "Uşaqlara xüsusi qayda var. Uşaq tətbiqində reklam və alış daha sərt yoxlanılır. Yaşını bilmirsənsə, uşaq üçün hazırlamış kimi doldurma.",
+            "Sənə aid olmayan malı satma. Başqasının kursunu, musiqisini və ya şəklini öz adına ödənişli etmə.",
+            "Gizli açarı və ödəniş sirrini APK-nın içinə yazma. Onu açan adam oxuya bilər. Yoxlama serverdə qalsın.",
+            "İlk pulu vəd etmə. Reklamın gəliri göstərişdən asılıdır. Heç kim açmırsa, şəbəkə də ödəmir.",
+            "Qaydanı pozan tətbiqin hesabı bağlana bilər. Yanıltıcı düymə, gizli abunə və işləməyən ödəniş buna aiddir.",
+          ],
+        },
+      ],
+    },
+    en: {
+      id: "money",
+      title: "How can a mobile app earn money?",
+      blocks: [
+        {
+          paragraphs: [
+            "Money does not appear inside the app by itself. First there must be a screen that does a job for a person. Then you charge for a part of that job, or you show an ad. A pay button on an empty app brings nothing. If the person does not see a reason, they do not press it.",
+            "The income usually starts small. First ten people should open the app and finish their job. Then you add a payment or an ad. You can connect a store account, an ad network, and a bank on the first day, but the money still depends on users.",
+          ],
+        },
+        {
+          heading: "Ways to charge",
+          paragraphs: ["There are a few straight paths. Filling all of them at once ruins the screen. Pick one, see that it works, then add the second."],
+          list: [
+            "A paid install. The person pays once when they take the app from the store. This fits a small finished tool.",
+            "A one-time purchase inside the app. An extra page, a mode without ads, or a pack. If the digital good is sold in the store, it has to pass through the store's own payment.",
+            "A subscription. It renews every month or every year. The person should see when it ends and how to stop it.",
+            "Ads. A banner stands at the edge of the screen. A full-screen ad should not cut through the job. In a rewarded ad the person chooses to watch and gets something in return.",
+            "Your own service. The app is a window onto the site. A lesson, a booking, or work done outside the phone can be paid on the site. For a digital good used inside the app, the store often wants its own payment.",
+          ],
+        },
+        {
+          heading: "What you have to connect",
+          paragraphs: [
+            "For the money to reach you, accounts outside the app are needed too. They do not sit in the APK folder. You register on a site, and the app keeps that account's number.",
+          ],
+          list: [
+            "A store account. To ship on Google Play you need Play Console. Opening it has a one-time fee.",
+            "A merchant profile and a bank. The store has to know where to send the money. It also asks for tax information.",
+            "Play Billing for a digital purchase. A library is connected inside the app. The price is opened as a product in the store. You do not hide the price in the code.",
+            "An ad network account for ads. The app is given the ad unit number. If a user is in Europe, a consent window is needed too.",
+            "A privacy page. Write what you collect, and mention ads and payment, at one address. The store asks for that address.",
+            "A test user. Do not make the first purchase with your own card. The store's license tester lets you try the button with a fake payment.",
+          ],
+          after: [
+            "The debug APK from Nibras Studio is for a test. Store payment does not open with it. If the site itself has payment, the window can open that page. Putting it in a store still needs a release signature, a rising version, and the store's rule.",
+          ],
+        },
+        {
+          heading: "What to watch",
+          paragraphs: [
+            "The store keeps a part of the sale and the rest comes to you. The exact share is written on the store's own page and can change. Tax on the amount that arrives is counted by your own country's rule.",
+          ],
+          list: [
+            "Do not hide the price. The amount and the period should show next to the button. A subscription should say when it renews.",
+            "Stopping should not be hard. The person should be able to close the subscription from the store's subscription page.",
+            "An ad should not look like a system button. The close mark should not be tiny or fake. Do not cover the screen's main button.",
+            "Children have a stricter rule. Ads and purchases in a children's app are checked more tightly. If you do not know the age, do not fill the app as if it were made for children.",
+            "Do not sell a good that is not yours. Do not put someone else's course, music, or picture behind your own pay button.",
+            "Do not write a secret key or a payment secret inside the APK. A person who opens it can read that. Leave the check on the server.",
+            "Do not promise the first money. Ad income depends on views. If nobody opens the app, the network does not pay either.",
+            "An app that breaks the rule can lose the account. A misleading button, a hidden subscription, and a payment that does not work belong here.",
+          ],
+        },
+      ],
+    },
+    tr: {
+      id: "money",
+      title: "Mobil uygulamadan nasıl para kazanılır?",
+      blocks: [
+        {
+          paragraphs: [
+            "Para uygulamanın içinde kendi oluşmaz. Önce kişinin işine yarayan bir ekran olmalıdır. Sonra o işin bir kısmını ücretli yaparsın ya da reklam gösterirsin. Boş uygulamaya ödeme düğmesi koymak para getirmez. Kişi sebebi görmezse basmaz.",
+            "Kazanç genellikle az başlar. Önce on kişi uygulamayı açıp işini bitirmelidir. Sonra ödeme ya da reklam eklenir. İlk gün reklam ağı, mağaza hesabı ve banka bağlanabilir, ama gelen para kullanıcıya bağlıdır.",
+          ],
+        },
+        {
+          heading: "Ücretli yollar",
+          paragraphs: ["Birkaç düz yol vardır. Hepsini aynı anda doldurmak ekranı bozar. Birini seç, çalıştığını gör, sonra ikincisini ekle."],
+          list: [
+            "Ücretli kurulum. Kişi uygulamayı mağazadan alınca bir kez öder. Küçük ve bitmiş araç için uygundur.",
+            "Uygulamanın içinde bir kerelik alış. Ek sayfa, reklamsız kip ya da bir paket. Sayısal mal mağazada satılıyorsa mağazanın kendi ödemesinden geçmelidir.",
+            "Abonelik. Her ay ya da her yıl yenilenir. Kişi ne zaman biteceğini ve nasıl durduracağını görmelidir.",
+            "Reklam. Şerit ekranın kenarında durur. Tam ekran reklam işin arasını kesmemelidir. Ödüllü reklamda kişi kendi bakar ve karşılığında bir şey alır.",
+            "Kendi hizmetin. Uygulama sitenin penceresidir. Ders, yer ayırtma ya da telefondan uzakta görülen iş sitede ödenebilir. Uygulamanın içinde tüketilen sayısal mal için mağaza çoğu zaman kendi ödemesini ister.",
+          ],
+        },
+        {
+          heading: "Neyi bağlamalısın",
+          paragraphs: [
+            "Paranın sana ulaşması için uygulamanın dışında hesaplar da gerekir. Onlar APK klasöründe durmaz. Sen sitede kayıt olursun, uygulama ise o hesabın numarasını saklar.",
+          ],
+          list: [
+            "Mağaza hesabı. Google Play'e çıkmak için Play Console gerekir. Açılışında bir kerelik ücret olur.",
+            "Satıcı profili ve banka. Mağaza parayı nereye göndereceğini bilmelidir. Vergi bilgisi de sorulur.",
+            "Sayısal alış için Play Billing. Uygulamanın içine kütüphane bağlanır. Fiyat mağazada ürün olarak açılır, kodun içine gizli fiyat yazılmaz.",
+            "Reklam için reklam ağının hesabı. Uygulamaya reklam biriminin numarası verilir. Avrupa kullanıcısı varsa onay penceresi de gerekir.",
+            "Gizlilik sayfası. Ne topladığını, reklamı ve ödemeyi bir adreste yaz. Mağaza o adresi ister.",
+            "Deneme kullanıcısı. İlk alışı kendi kartınla yapma. Mağazanın lisans denemesi sahte ödemeyle düğmeyi sınamaya izin verir.",
+          ],
+          after: [
+            "Nibras Studio'nun debug APK'sı yoklama içindir. Onunla mağaza ödemesi açılmaz. Sitenin kendisinde ödeme varsa pencere o sayfayı açabilir. Mağazaya koyunca ise release imza, yükselen sürüm ve mağazanın kuralı gerekir.",
+          ],
+        },
+        {
+          heading: "Neye dikkat etmelisin",
+          paragraphs: [
+            "Mağaza satışın bir kısmını kendinde tutar, kalanı sana geçer. Kesin pay mağazanın kendi sayfasında yazar ve değişebilir. Gelen tutarın vergisini kendi ülkenin kuralıyla hesaplamak gerekir.",
+          ],
+          list: [
+            "Fiyatı gizleme. Düğmenin yanında tutar ve süre görünsün. Abonelikte ne zaman yenilendiği yazılsın.",
+            "Durdurmak zor olmasın. Kişi aboneliği mağazanın abonelik sayfasından kapatabilmelidir.",
+            "Reklam sistem düğmesi gibi görünmesin. Kapatma işareti küçük ve sahte olmasın. Ekranın ana düğmesinin üstünü örtme.",
+            "Çocuklar için ayrı kural vardır. Çocuk uygulamasında reklam ve alış daha sıkı yoklanır. Yaşını bilmiyorsan çocuk için yapılmış gibi doldurma.",
+            "Sana ait olmayan malı satma. Başkasının dersini, müziğini ya da resmini kendi adına ücretli etme.",
+            "Gizli anahtarı ve ödeme sırrını APK'nın içine yazma. Onu açan kişi okuyabilir. Yoklama sunucuda kalsın.",
+            "İlk parayı vadetme. Reklamın geliri gösterime bağlıdır. Kimse açmıyorsa ağ da ödemez.",
+            "Kuralı bozan uygulamanın hesabı kapanabilir. Yanıltıcı düğme, gizli abonelik ve çalışmayan ödeme buna girer.",
+          ],
+        },
+      ],
+    },
+    ar: {
+      id: "money",
+      title: "كيف يُكسب المال من تطبيق الهاتف؟",
+      blocks: [
+        {
+          paragraphs: [
+            "المال لا يظهر داخل التطبيق وحده. أولاً يجب أن تكون هناك شاشة تنفع الشخص. ثم تجعل جزءاً من ذلك العمل مدفوعاً أو تعرض إعلاناً. زر دفع على تطبيق فارغ لا يأتي بمال. إذا لم يرَ الشخص سبباً فلن يضغط.",
+            "الكسب يبدأ عادة قليلاً. أولاً يجب أن يفتح عشرة أشخاص التطبيق وينهوا عملهم. ثم يُضاف الدفع أو الإعلان. يمكن ربط شبكة إعلان وحساب متجر وبنك في اليوم الأول، لكن المال الآتي يعتمد على المستخدم.",
+          ],
+        },
+        {
+          heading: "طرق الدفع",
+          paragraphs: ["هناك بضع طرق مستقيمة. ملؤها كلها معاً يفسد الشاشة. اختر واحدة وانظر أنها تعمل ثم أضف الثانية."],
+          list: [
+            "تثبيت مدفوع. يدفع الشخص مرة حين يأخذ التطبيق من المتجر. هذا يناسب أداة صغيرة جاهزة.",
+            "شراء لمرة واحدة داخل التطبيق. صفحة إضافية أو وضع بلا إعلان أو حزمة. إذا بِيعت السلعة الرقمية في المتجر فيجب أن تمر بدفع المتجر نفسه.",
+            "اشتراك. يتجدد كل شهر أو كل سنة. يجب أن يرى الشخص متى ينتهي وكيف يوقفه.",
+            "إعلان. الشريط يقف في طرف الشاشة. الإعلان بملء الشاشة لا ينبغي أن يقطع العمل. في الإعلان المكافأ الشخص يختار أن يشاهد ويأخذ شيئاً في المقابل.",
+            "خدمتك أنت. التطبيق نافذة الموقع. الدرس أو الحجز أو العمل الذي يُنجز خارج الهاتف يمكن دفعه على الموقع. للسلعة الرقمية التي تُستهلك داخل التطبيق غالباً ما يريد المتجر دفعه الخاص.",
+          ],
+        },
+        {
+          heading: "ماذا يجب أن تربط",
+          paragraphs: [
+            "كي يصل المال إليك يلزم حسابات خارج التطبيق أيضاً. هي لا تقف في مجلد APK. أنت تسجّل على موقع والتطبيق يحفظ رقم ذلك الحساب.",
+          ],
+          list: [
+            "حساب متجر. للخروج على Google Play يلزم Play Console. في فتحه رسم لمرة واحدة.",
+            "ملف بائع وبنك. يجب أن يعرف المتجر أين يرسل المال. ويسأل عن معلومات الضريبة أيضاً.",
+            "Play Billing للشراء الرقمي. تُربط مكتبة داخل التطبيق. يُفتح السعر كمنتج في المتجر ولا يُكتب سعر خفي في الكود.",
+            "حساب شبكة إعلان للإعلانات. يُعطى التطبيق رقم وحدة الإعلان. إذا كان المستخدم في أوروبا فلزم نافذة موافقة أيضاً.",
+            "صفحة خصوصية. اكتب ماذا تجمع واذكر الإعلان والدفع في عنوان واحد. المتجر يطلب ذلك العنوان.",
+            "مستخدم تجربة. لا تجعل أول شراء ببطاقتك. مُجرِّب الترخيص في المتجر يسمح بتجربة الزر بدفع غير حقيقي.",
+          ],
+          after: [
+            "ملف APK التجريبي من Nibras Studio للاختبار. دفع المتجر لا يُفتح به. إذا كان في الموقع نفسه دفع فتستطيع النافذة فتح تلك الصفحة. وضعه في المتجر ما زال يحتاج توقيع إصدار ونسخة تكبر وقاعدة المتجر.",
+          ],
+        },
+        {
+          heading: "إلى ماذا تنتبه",
+          paragraphs: [
+            "المتجر يُبقي جزءاً من البيع والباقي يأتي إليك. الحصة الدقيقة مكتوبة في صفحة المتجر نفسه وقد تتغير. ضريبة المبلغ الذي يصل تُحسب بقاعدة بلدك.",
+          ],
+          list: [
+            "لا تخفِ السعر. يظهر المبلغ والمدة بجانب الزر. في الاشتراك يُكتب متى يتجدد.",
+            "الإيقاف لا يكون صعباً. يجب أن يستطيع الشخص إغلاق الاشتراك من صفحة اشتراكات المتجر.",
+            "الإعلان لا يبدو كزر النظام. علامة الإغلاق لا تكون صغيرة ولا كاذبة. لا تغطِ الزر الرئيسي للشاشة.",
+            "للأطفال قاعدة أشد. الإعلان والشراء في تطبيق الأطفال يُفحصان بشدة أكبر. إذا كنت لا تعرف العمر فلا تملأ التطبيق كأنه صُنع للأطفال.",
+            "لا تبع سلعة ليست لك. لا تجعل درس غيرك أو موسيقاه أو صورته مدفوعة باسمك.",
+            "لا تكتب المفتاح السري ولا سر الدفع داخل APK. من يفتحه يستطيع القراءة. اترك الفحص على الخادم.",
+            "لا تعد بأول مال. دخل الإعلان يعتمد على المشاهدات. إذا لم يفتح أحد فالشبكة لا تدفع أيضاً.",
+            "التطبيق الذي يخالف القاعدة قد يُغلق حسابه. الزر المضلِّل والاشتراك المخفي والدفع الذي لا يعمل من هذا.",
+          ],
+        },
+      ],
+    },
+    ru: {
+      id: "money",
+      title: "Как заработать на мобильном приложении?",
+      blocks: [
+        {
+          paragraphs: [
+            "Деньги сами внутри приложения не появляются. Сначала должен быть экран, который делает дело для человека. Потом ты берёшь плату за часть этой работы или показываешь рекламу. Кнопка оплаты на пустом приложении денег не приносит. Если человек не видит причины, он не нажимает.",
+            "Доход обычно начинается с малого. Сначала десять человек должны открыть приложение и закончить своё дело. Потом добавляется оплата или реклама. Сеть рекламы, аккаунт магазина и банк можно подключить в первый день, но пришедшие деньги зависят от пользователей.",
+          ],
+        },
+        {
+          heading: "Платные пути",
+          paragraphs: ["Есть несколько прямых путей. Заполнить все сразу портит экран. Выбери один, увидь, что он работает, потом добавь второй."],
+          list: [
+            "Платная установка. Человек платит один раз, когда берёт приложение из магазина. Это подходит маленькому готовому инструменту.",
+            "Разовая покупка внутри приложения. Дополнительная страница, режим без рекламы или набор. Если цифровой товар продаётся в магазине, он должен пройти через оплату самого магазина.",
+            "Подписка. Она обновляется каждый месяц или каждый год. Человек должен видеть, когда она кончается и как её остановить.",
+            "Реклама. Полоса стоит у края экрана. Реклама на весь экран не должна резать дело. В рекламе с наградой человек сам смотрит и получает что-то взамен.",
+            "Своя услуга. Приложение — окно сайта. Урок, бронь или работа вне телефона могут оплачиваться на сайте. За цифровой товар, который тратится внутри приложения, магазин часто хочет свою оплату.",
+          ],
+        },
+        {
+          heading: "Что нужно подключить",
+          paragraphs: [
+            "Чтобы деньги дошли до тебя, нужны и аккаунты вне приложения. Они не лежат в папке APK. Ты регистрируешься на сайте, а приложение хранит номер этого аккаунта.",
+          ],
+          list: [
+            "Аккаунт магазина. Чтобы выйти в Google Play, нужен Play Console. При открытии есть разовый взнос.",
+            "Профиль продавца и банк. Магазин должен знать, куда слать деньги. Спрашивают и налоговые сведения.",
+            "Play Billing для цифровой покупки. Внутрь приложения подключается библиотека. Цена открывается как товар в магазине, скрытую цену в код не пишут.",
+            "Аккаунт рекламной сети для рекламы. Приложению дают номер рекламного блока. Если пользователь в Европе, нужно и окно согласия.",
+            "Страница политики. На одном адресе напиши, что собираешь, и упомяни рекламу и оплату. Магазин просит этот адрес.",
+            "Тестовый пользователь. Первую покупку не делай своей картой. Проверка лицензии магазина даёт нажать кнопку поддельной оплатой.",
+          ],
+          after: [
+            "Debug APK от Nibras Studio нужен для проверки. Оплата магазина им не открывается. Если оплата есть на самом сайте, окно может открыть ту страницу. Чтобы положить в магазин, всё равно нужны подпись release, растущая версия и правило магазина.",
+          ],
+        },
+        {
+          heading: "На что смотреть",
+          paragraphs: [
+            "Магазин оставляет себе часть продажи, остальное приходит тебе. Точная доля написана на странице самого магазина и может меняться. Налог с пришедшей суммы считают по правилу своей страны.",
+          ],
+          list: [
+            "Не прячь цену. Сумма и срок должны быть видны рядом с кнопкой. У подписки должно быть написано, когда она обновляется.",
+            "Остановка не должна быть трудной. Человек должен закрыть подписку со страницы подписок магазина.",
+            "Реклама не должна выглядеть как системная кнопка. Знак закрытия не должен быть крошечным или фальшивым. Не закрывай главную кнопку экрана.",
+            "Для детей правило строже. Рекламу и покупки в детском приложении проверяют жёстче. Если не знаешь возраст, не заполняй приложение так, будто оно сделано для детей.",
+            "Не продавай чужое. Не ставь чужой курс, музыку или картинку за свою кнопку оплаты.",
+            "Не пиши тайный ключ и секрет оплаты внутрь APK. Человек, который откроет файл, сможет это прочитать. Проверку оставь на сервере.",
+            "Не обещай первые деньги. Доход рекламы зависит от показов. Если никто не открывает, сеть тоже не платит.",
+            "Приложение, которое ломает правило, может потерять аккаунт. Сюда входят обманная кнопка, скрытая подписка и оплата, которая не работает.",
+          ],
+        },
+      ],
+    },
+  };
+  return sections[lang];
 }
