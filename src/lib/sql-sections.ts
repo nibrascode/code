@@ -1,5 +1,6 @@
 import type { Lang } from "@/lib/i18n";
 import type { ProgrammingBlock, ProgrammingSection } from "@/lib/programming";
+import { sqlWorking } from "@/lib/sql-working";
 
 const TITLES: Record<string, Record<Lang, string>> = {
   "what-is-sql": {
@@ -575,9 +576,12 @@ WHERE year = 2026;`,
 };
 
 export function sqlSections(lang: Lang): readonly ProgrammingSection[] {
-  return ORDER.map((id) => ({
+  const sections: ProgrammingSection[] = ORDER.map((id) => ({
     id,
     title: TITLES[id][lang],
     blocks: BODIES[lang][id],
   }));
+  const at = sections.findIndex((item) => item.id === "faq");
+  sections.splice(at < 0 ? sections.length : at, 0, sqlWorking(lang));
+  return sections;
 }
