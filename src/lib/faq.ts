@@ -174,7 +174,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "ai",
         q: "Nibras AI nədir?",
-        a: "Nibras AI Nibras Code-un ayrıca köməkçisidir: nibrascode.com/ai. Sual vermək, fikir vermək, kod yazmaq və şəkil düzəltmək olar. Modelə gedən sual gündə 10-dur. Hazır cavablar bu limitə düşmür. Bir sabit model adı yoxdur. Söhbət brauzerdə 24 saat qalır.",
+        a: "Nibras AI Nibras Code-un ayrıca köməkçisidir: nibrascode.com/ai. Sual vermək, fikir vermək, kod yazmaq və şəkil düzəltmək olar. Modelə gedən sual gündə 40-dır. Hazır cavablar bu limitə düşmür. Bir sabit model adı yoxdur. Söhbət brauzerdə 24 saat qalır.",
       },
       {
         id: "dev",
@@ -311,7 +311,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "ai",
         q: "What is Nibras AI?",
-        a: "Nibras AI is Nibras Code’s separate assistant at nibrascode.com/ai. You can ask a question, share an idea, write code, and edit an image. A question that reaches a model is limited to 10 a day. Ready answers do not use that limit. There is no single model name. A chat stays in the browser for 24 hours.",
+        a: "Nibras AI is Nibras Code’s separate assistant at nibrascode.com/ai. You can ask a question, share an idea, write code, and edit an image. A question that reaches a model is limited to 40 a day. Ready answers do not use that limit. There is no single model name. A chat stays in the browser for 24 hours.",
       },
       {
         id: "dev",
@@ -448,7 +448,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "ai",
         q: "Nibras AI nedir?",
-        a: "Nibras AI, Nibras Code’un ayrı yardımcısıdır: nibrascode.com/ai. Soru sorulabilir, fikir verilebilir, kod yazılabilir ve görsel düzeltilebilir. Modele giden soru günde 10’dur. Hazır cevaplar bu limite düşmez. Tek bir model adı yoktur. Sohbet tarayıcıda 24 saat kalır.",
+        a: "Nibras AI, Nibras Code’un ayrı yardımcısıdır: nibrascode.com/ai. Soru sorulabilir, fikir verilebilir, kod yazılabilir ve görsel düzeltilebilir. Modele giden soru günde 40’tır. Hazır cevaplar bu limite düşmez. Tek bir model adı yoktur. Sohbet tarayıcıda 24 saat kalır.",
       },
       {
         id: "dev",
@@ -585,7 +585,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "ai",
         q: "ما هو Nibras AI؟",
-        a: "Nibras AI مساعد منفصل لـ Nibras Code على nibrascode.com/ai. يمكن طرح سؤال، وإعطاء فكرة، وكتابة كود، وتعديل صورة. السؤال الذي يصل إلى نموذج محدود بعشرة في اليوم. الأجوبة الجاهزة لا تدخل في هذا الحد. لا اسم نموذج واحد ثابت. تبقى المحادثة في المتصفح 24 ساعة.",
+        a: "Nibras AI مساعد منفصل لـ Nibras Code على nibrascode.com/ai. يمكن طرح سؤال، وإعطاء فكرة، وكتابة كود، وتعديل صورة. السؤال الذي يصل إلى نموذج محدود بأربعين في اليوم. الأجوبة الجاهزة لا تدخل في هذا الحد. لا اسم نموذج واحد ثابت. تبقى المحادثة في المتصفح 24 ساعة.",
       },
       {
         id: "dev",
@@ -722,7 +722,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "ai",
         q: "Что такое Nibras AI?",
-        a: "Nibras AI — отдельный помощник Nibras Code на nibrascode.com/ai. Можно задать вопрос, предложить идею, написать код и поправить изображение. Вопрос, который доходит до модели, ограничен десятью в день. Готовые ответы в этот предел не входят. Одного постоянного имени модели нет. Разговор остаётся в браузере 24 часа.",
+        a: "Nibras AI — отдельный помощник Nibras Code на nibrascode.com/ai. Можно задать вопрос, предложить идею, написать код и поправить изображение. Вопрос, который доходит до модели, ограничен сорока в день. Готовые ответы в этот предел не входят. Одного постоянного имени модели нет. Разговор остаётся в браузере 24 часа.",
       },
       {
         id: "dev",
