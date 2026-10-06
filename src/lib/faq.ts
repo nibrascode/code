@@ -55,9 +55,9 @@ export const FAQ: Record<Lang, FaqCopy> = {
     path: "/faq",
     title: "Tez-tez verilən suallar — Nibras Code",
     description:
-      "Nibras Code nədir, hansı tətbiqləri var, Nibras Arabic, Nibras PDF, Nibras Plans və Nibras Docs haqqında suallar. Pulsuz istifadə, reklam, məxfilik və əlaqə.",
+      "Nibras Code nədir, hansı tətbiqləri var, Nibras Arabic, Nibras PDF, Nibras Plans və Nibras Docs haqqında suallar. Nibras AI, Nibras Dev, Nibras Apk, pulsuz istifadə, reklam, məxfilik və əlaqə.",
     keywords:
-      "Nibras Code nədir, Nibras Arabic nədir, Nibras PDF, Nibras Plans, Nibras Docs, Nibras Code pulsuzdur, Nibras Code əlaqə",
+      "Nibras Code nədir, Nibras Arabic, Nibras PDF, Nibras AI, Nibras Dev, Nibras Apk, APK Studio, Nibras Code pulsuzdur",
     heading: "Tez-tez verilən suallar",
     intro: "Nibras Code, tətbiqləri və sayt haqqında ən çox verilən sualların cavabları.",
     more: "Bütün suallar",
@@ -129,9 +129,19 @@ export const FAQ: Record<Lang, FaqCopy> = {
         a: "Resurslar, bələdçilər və proqramlaşdırma bölmələri var. Proqramlaşdırmada Python, JavaScript, Java, C#, TypeScript, HTML/CSS və SQL haqqında ayrıca səhifələr var.",
       },
       {
-        id: "diger",
-        q: "Nibras AI, Nibras Dev və Nibras Apk nədir?",
-        a: "Bunlar ana səhifədəki əlavə bölmələrdir. Nibras AI saytdakı səhifədir. Nibras Dev dev.nibrascode.com ünvanındadır. Nibras Apk studio.nibrascode.com ünvanındadır.",
+        id: "ai",
+        q: "Nibras AI nədir?",
+        a: "Nibras AI Nibras Code-un süni intellekt köməkçisidir: nibrascode.com/ai. Sual vermək, fikir vermək, kod yazmaq və şəkil düzəltmək olar. Söhbətlər 24 saat saxlanılır.",
+      },
+      {
+        id: "dev",
+        q: "Nibras Dev nədir?",
+        a: "Nibras Dev brauzerdə işləyən kod studiyasıdır: dev.nibrascode.com. Python, HTML/CSS, JavaScript, SQL, C, C++, Java, PHP, Go, Rust və başqa dillərdə kod yazılır, nəticə yeni səhifədə açılır, kod telefona və ya ZIP kimi yüklənir. Ctrl+Enter ilə işə düşür və yazılan kod avtomatik yadda saxlanılır.",
+      },
+      {
+        id: "apk",
+        q: "Nibras Apk nədir?",
+        a: "Nibras Apk, yəni APK Studio, saytı Android tətbiqinə çevirən sistemdir: studio.nibrascode.com. Sayt linki və ya index.html olan statik ZIP verilir, ad, ikon və paket adı seçilir, sonra APK yığılır. Qeydiyyat, Android Studio və kod bilgisi tələb olunmur. Hazır APK test və birbaşa quraşdırma üçün debug imzalıdır. Zərərli tətbiq hazırlamaq qadağandır.",
       },
       {
         id: "yeni",
@@ -145,9 +155,9 @@ export const FAQ: Record<Lang, FaqCopy> = {
     path: "/en/faq",
     title: "Frequently asked questions — Nibras Code",
     description:
-      "What Nibras Code is, which apps it makes, and answers about Nibras Arabic, Nibras PDF, Nibras Plans, and Nibras Docs. Free use, ads, privacy, and contact.",
+      "What Nibras Code is, which apps it makes, and answers about Nibras Arabic, Nibras PDF, Nibras Plans, Nibras Docs, Nibras AI, Nibras Dev, and Nibras Apk.",
     keywords:
-      "what is Nibras Code, what is Nibras Arabic, Nibras PDF, Nibras Plans, Nibras Docs, is Nibras Code free, Nibras Code contact",
+      "what is Nibras Code, Nibras Arabic, Nibras PDF, Nibras AI, Nibras Dev, Nibras Apk, APK Studio, is Nibras Code free",
     heading: "Frequently asked questions",
     intro: "Answers to the questions people ask most about Nibras Code, its apps, and this site.",
     more: "All questions",
@@ -219,9 +229,19 @@ export const FAQ: Record<Lang, FaqCopy> = {
         a: "There are resources, guides, and a programming section. Programming has separate pages for Python, JavaScript, Java, C#, TypeScript, HTML/CSS, and SQL.",
       },
       {
-        id: "diger",
-        q: "What are Nibras AI, Nibras Dev, and Nibras Apk?",
-        a: "They are extra sections on the homepage. Nibras AI is a page on this site. Nibras Dev is at dev.nibrascode.com. Nibras Apk is at studio.nibrascode.com.",
+        id: "ai",
+        q: "What is Nibras AI?",
+        a: "Nibras AI is Nibras Code’s assistant at nibrascode.com/ai. You can ask a question, share an idea, write code, and edit an image. Conversations are kept for 24 hours.",
+      },
+      {
+        id: "dev",
+        q: "What is Nibras Dev?",
+        a: "Nibras Dev is a code studio that runs in the browser at dev.nibrascode.com. You can write Python, HTML/CSS, JavaScript, SQL, C, C++, Java, PHP, Go, Rust, and other languages, open the result in a new page, and download the code to a phone or as a ZIP. Ctrl+Enter runs it, and the code is saved automatically.",
+      },
+      {
+        id: "apk",
+        q: "What is Nibras Apk?",
+        a: "Nibras Apk, also called APK Studio, turns a website into an Android app at studio.nibrascode.com. You give a site link or a static ZIP that contains index.html, choose the name, icon, and package name, and the APK is built. No account, Android Studio, or coding knowledge is required. The finished APK is debug-signed for testing and direct install. Making harmful apps is not allowed.",
       },
       {
         id: "yeni",
@@ -235,9 +255,9 @@ export const FAQ: Record<Lang, FaqCopy> = {
     path: "/tr/faq",
     title: "Sık sorulan sorular — Nibras Code",
     description:
-      "Nibras Code nedir, hangi uygulamaları vardır, Nibras Arabic, Nibras PDF, Nibras Plans ve Nibras Docs hakkında sorular. Ücretsiz kullanım, reklam, gizlilik ve iletişim.",
+      "Nibras Code nedir, hangi uygulamaları vardır ve Nibras Arabic, Nibras PDF, Nibras Plans, Nibras Docs, Nibras AI, Nibras Dev ile Nibras Apk hakkında sorular.",
     keywords:
-      "Nibras Code nedir, Nibras Arabic nedir, Nibras PDF, Nibras Plans, Nibras Docs, Nibras Code ücretsiz mi, Nibras Code iletişim",
+      "Nibras Code nedir, Nibras Arabic, Nibras PDF, Nibras AI, Nibras Dev, Nibras Apk, APK Studio, Nibras Code ücretsiz mi",
     heading: "Sık sorulan sorular",
     intro: "Nibras Code, uygulamaları ve site hakkında en çok sorulan soruların cevapları.",
     more: "Tüm sorular",
@@ -309,9 +329,19 @@ export const FAQ: Record<Lang, FaqCopy> = {
         a: "Kaynaklar, rehberler ve programlama bölümleri vardır. Programlamada Python, JavaScript, Java, C#, TypeScript, HTML/CSS ve SQL için ayrı sayfalar vardır.",
       },
       {
-        id: "diger",
-        q: "Nibras AI, Nibras Dev ve Nibras Apk nedir?",
-        a: "Bunlar ana sayfadaki ek bölümlerdir. Nibras AI sitedeki bir sayfadır. Nibras Dev dev.nibrascode.com adresindedir. Nibras Apk studio.nibrascode.com adresindedir.",
+        id: "ai",
+        q: "Nibras AI nedir?",
+        a: "Nibras AI, Nibras Code’un yapay zeka yardımcısıdır: nibrascode.com/ai. Soru sorulabilir, fikir verilebilir, kod yazılabilir ve görsel düzeltilebilir. Sohbetler 24 saat saklanır.",
+      },
+      {
+        id: "dev",
+        q: "Nibras Dev nedir?",
+        a: "Nibras Dev tarayıcıda çalışan bir kod stüdyosudur: dev.nibrascode.com. Python, HTML/CSS, JavaScript, SQL, C, C++, Java, PHP, Go, Rust ve başka dillerde kod yazılır, sonuç yeni sayfada açılır, kod telefona veya ZIP olarak indirilir. Ctrl+Enter ile çalışır ve yazılan kod otomatik kaydedilir.",
+      },
+      {
+        id: "apk",
+        q: "Nibras Apk nedir?",
+        a: "Nibras Apk, yani APK Studio, siteyi Android uygulamasına çeviren sistemdir: studio.nibrascode.com. Site bağlantısı veya index.html bulunan statik bir ZIP verilir, ad, ikon ve paket adı seçilir, sonra APK hazırlanır. Kayıt, Android Studio ve kod bilgisi gerekmez. Hazır APK test ve doğrudan kurulum için debug imzalıdır. Zararlı uygulama yapmak yasaktır.",
       },
       {
         id: "yeni",
@@ -325,9 +355,9 @@ export const FAQ: Record<Lang, FaqCopy> = {
     path: "/ar/faq",
     title: "أسئلة شائعة — Nibras Code",
     description:
-      "ما هو Nibras Code، وما تطبيقاته، وإجابات عن Nibras Arabic وNibras PDF وNibras Plans وNibras Docs. الاستخدام المجاني، والإعلانات، والخصوصية، والتواصل.",
+      "ما هو Nibras Code، وما تطبيقاته، وإجابات عن Nibras Arabic وNibras PDF وNibras Plans وNibras Docs وNibras AI وNibras Dev وNibras Apk.",
     keywords:
-      "ما هو Nibras Code, ما هو Nibras Arabic, Nibras PDF, Nibras Plans, Nibras Docs, Nibras Code مجاني, تواصل Nibras Code",
+      "ما هو Nibras Code, Nibras Arabic, Nibras PDF, Nibras AI, Nibras Dev, Nibras Apk, APK Studio, Nibras Code مجاني",
     heading: "أسئلة شائعة",
     intro: "إجابات عن أكثر الأسئلة حول Nibras Code وتطبيقاته وهذا الموقع.",
     more: "كل الأسئلة",
@@ -399,9 +429,19 @@ export const FAQ: Record<Lang, FaqCopy> = {
         a: "توجد أقسام للموارد والأدلة والبرمجة. وفي البرمجة صفحات مستقلة عن Python وJavaScript وJava وC# وTypeScript وHTML/CSS وSQL.",
       },
       {
-        id: "diger",
-        q: "ما هي Nibras AI وNibras Dev وNibras Apk؟",
-        a: "هذه أقسام إضافية في الصفحة الرئيسية. Nibras AI صفحة في هذا الموقع. Nibras Dev على dev.nibrascode.com. وNibras Apk على studio.nibrascode.com.",
+        id: "ai",
+        q: "ما هو Nibras AI؟",
+        a: "Nibras AI مساعد Nibras Code على nibrascode.com/ai. يمكن طرح سؤال، وإعطاء فكرة، وكتابة كود، وتعديل صورة. تُحفظ المحادثات لمدة 24 ساعة.",
+      },
+      {
+        id: "dev",
+        q: "ما هو Nibras Dev؟",
+        a: "Nibras Dev استوديو كود يعمل في المتصفح على dev.nibrascode.com. يُكتب فيه Python وHTML/CSS وJavaScript وSQL وC وC++ وJava وPHP وGo وRust ولغات أخرى، وتُفتح النتيجة في صفحة جديدة، ويمكن تنزيل الكود إلى الهاتف أو كملف ZIP. يعمل بـ Ctrl+Enter، والكود يُحفظ تلقائيًا.",
+      },
+      {
+        id: "apk",
+        q: "ما هو Nibras Apk؟",
+        a: "Nibras Apk، وهو APK Studio، نظام يحوّل الموقع إلى تطبيق أندرويد على studio.nibrascode.com. يُعطى رابط الموقع أو ملف ZIP ثابت فيه index.html، ثم يُختار الاسم والأيقونة واسم الحزمة، ويُبنى ملف APK. لا يلزم حساب ولا Android Studio ولا معرفة بالبرمجة. ملف APK الجاهز موقّع للتوقيع التجريبي من أجل الاختبار والتثبيت المباشر. صنع تطبيقات ضارة ممنوع.",
       },
       {
         id: "yeni",
@@ -415,9 +455,9 @@ export const FAQ: Record<Lang, FaqCopy> = {
     path: "/ru/faq",
     title: "Частые вопросы — Nibras Code",
     description:
-      "Что такое Nibras Code, какие у него приложения, и ответы о Nibras Arabic, Nibras PDF, Nibras Plans и Nibras Docs. Бесплатное использование, реклама, конфиденциальность и контакт.",
+      "Что такое Nibras Code, какие у него приложения, и ответы о Nibras Arabic, Nibras PDF, Nibras Plans, Nibras Docs, Nibras AI, Nibras Dev и Nibras Apk.",
     keywords:
-      "что такое Nibras Code, что такое Nibras Arabic, Nibras PDF, Nibras Plans, Nibras Docs, Nibras Code бесплатно, контакт Nibras Code",
+      "что такое Nibras Code, Nibras Arabic, Nibras PDF, Nibras AI, Nibras Dev, Nibras Apk, APK Studio, Nibras Code бесплатно",
     heading: "Частые вопросы",
     intro: "Ответы на вопросы, которые чаще всего задают о Nibras Code, его приложениях и этом сайте.",
     more: "Все вопросы",
@@ -489,9 +529,19 @@ export const FAQ: Record<Lang, FaqCopy> = {
         a: "Есть разделы ресурсов, руководств и программирования. В программировании отдельные страницы о Python, JavaScript, Java, C#, TypeScript, HTML/CSS и SQL.",
       },
       {
-        id: "diger",
-        q: "Что такое Nibras AI, Nibras Dev и Nibras Apk?",
-        a: "Это дополнительные разделы на главной странице. Nibras AI — страница на этом сайте. Nibras Dev находится на dev.nibrascode.com. Nibras Apk — на studio.nibrascode.com.",
+        id: "ai",
+        q: "Что такое Nibras AI?",
+        a: "Nibras AI — помощник Nibras Code на nibrascode.com/ai. Можно задать вопрос, предложить идею, написать код и поправить изображение. Разговоры хранятся 24 часа.",
+      },
+      {
+        id: "dev",
+        q: "Что такое Nibras Dev?",
+        a: "Nibras Dev — студия кода в браузере на dev.nibrascode.com. Можно писать на Python, HTML/CSS, JavaScript, SQL, C, C++, Java, PHP, Go, Rust и других языках, открыть результат на новой странице и скачать код на телефон или как ZIP. Запуск — Ctrl+Enter, код сохраняется автоматически.",
+      },
+      {
+        id: "apk",
+        q: "Что такое Nibras Apk?",
+        a: "Nibras Apk, он же APK Studio, превращает сайт в приложение Android на studio.nibrascode.com. Нужна ссылка на сайт или статический ZIP с index.html, затем выбираются имя, значок и имя пакета, и собирается APK. Регистрация, Android Studio и знание кода не нужны. Готовый APK подписан отладочной подписью для теста и прямой установки. Вредные приложения делать запрещено.",
       },
       {
         id: "yeni",
