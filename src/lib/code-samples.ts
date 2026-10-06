@@ -5,7 +5,7 @@ export const CODE_SAMPLE_HUB = "numune-kod";
 export const CODE_SAMPLES: readonly { slug: string; label: TKey }[] = [
   { slug: "oyun-kodu", label: "code_game" },
   { slug: "tetbiq-kodu", label: "code_app" },
-  { slug: "klaviatura", label: "code_keyboard" },
+  { slug: "sayt-kodu", label: "code_site" },
 ];
 
 export function isCodeSampleSlug(slug: string) {
@@ -24,11 +24,11 @@ function row(title: string, description: string, keywords: string): Seo {
 
 export const CODE_SAMPLE_SEO: Record<string, Record<Lang, Seo>> = {
   "numune-kod": {
-    az: row("Nümunə kod", "Oyun kodu, tətbiq kodu və klaviatura üçün nümunə səhifələr.", "nümunə kod, oyun kodu, tətbiq kodu, klaviatura"),
-    en: row("Sample code", "Sample pages for game code, app code, and the keyboard.", "sample code, game code, app code, keyboard"),
-    tr: row("Örnek kod", "Oyun kodu, uygulama kodu ve klavye için örnek sayfalar.", "örnek kod, oyun kodu, uygulama kodu, klavye"),
-    ar: row("كود نموذجي", "صفحات نموذجية لكود اللعبة وكود التطبيق ولوحة المفاتيح.", "كود نموذجي, كود اللعبة, كود التطبيق, لوحة المفاتيح"),
-    ru: row("Примеры кода", "Страницы с примерами кода игры, приложения и клавиатуры.", "примеры кода, код игры, код приложения, клавиатура"),
+    az: row("Nümunə kod", "Oyun kodu, tətbiq kodu və sayt kodu üçün nümunə səhifələr.", "nümunə kod, oyun kodu, tətbiq kodu, sayt kodu"),
+    en: row("Sample code", "Sample pages for game code, app code, and website code.", "sample code, game code, app code, website code"),
+    tr: row("Örnek kod", "Oyun kodu, uygulama kodu ve site kodu için örnek sayfalar.", "örnek kod, oyun kodu, uygulama kodu, site kodu"),
+    ar: row("كود نموذجي", "صفحات نموذجية لكود اللعبة وكود التطبيق وكود الموقع.", "كود نموذجي, كود اللعبة, كود التطبيق, كود الموقع"),
+    ru: row("Примеры кода", "Страницы с примерами кода игры, приложения и сайта.", "примеры кода, код игры, код приложения, код сайта"),
   },
   "oyun-kodu": {
     az: row("Oyun kodu", "Oyun üçün nümunə kod. İzah bu səhifəyə əlavə olunacaq.", "oyun kodu, nümunə kod"),
@@ -44,11 +44,11 @@ export const CODE_SAMPLE_SEO: Record<string, Record<Lang, Seo>> = {
     ar: row("كود التطبيق", "كود نموذجي للتطبيق. سيُضاف الشرح في هذه الصفحة.", "كود التطبيق, كود نموذجي"),
     ru: row("Код приложения", "Пример кода для приложения. Пояснение будет добавлено на эту страницу.", "код приложения, пример кода"),
   },
-  klaviatura: {
-    az: row("Klaviatura", "Klaviatura üçün nümunə. İzah bu səhifəyə əlavə olunacaq.", "klaviatura, nümunə kod"),
-    en: row("Keyboard", "A sample for the keyboard. The explanation will be added on this page.", "keyboard, sample code"),
-    tr: row("Klavye", "Klavye için örnek. Açıklama bu sayfaya eklenecek.", "klavye, örnek kod"),
-    ar: row("لوحة المفاتيح", "مثال للوحة المفاتيح. سيُضاف الشرح في هذه الصفحة.", "لوحة المفاتيح, كود نموذجي"),
-    ru: row("Клавиатура", "Пример для клавиатуры. Пояснение будет добавлено на эту страницу.", "клавиатура, пример кода"),
+  "sayt-kodu": {
+    az: row("Sayt kodu", "Sayt üçün nümunə kod. İzah bu səhifəyə əlavə olunacaq.", "sayt kodu, nümunə kod"),
+    en: row("Website code", "Sample code for a website. The explanation will be added on this page.", "website code, sample code"),
+    tr: row("Site kodu", "Site için örnek kod. Açıklama bu sayfaya eklenecek.", "site kodu, örnek kod"),
+    ar: row("كود الموقع", "كود نموذجي للموقع. سيُضاف الشرح في هذه الصفحة.", "كود الموقع, كود نموذجي"),
+    ru: row("Код сайта", "Пример кода для сайта. Пояснение будет добавлено на эту страницу.", "код сайта, пример кода"),
   },
 };
