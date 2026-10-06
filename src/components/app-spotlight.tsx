@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "@tanstack/react-router";
 import { countDownload } from "@/components/visit-meter";
 import { STUDIO_APPS, type StudioApp } from "@/lib/apps";
+import { localeHref } from "@/lib/locale-path";
 import { useI18n } from "@/lib/i18n-context";
 
 const FRAME_MS = 2000;
@@ -54,7 +54,7 @@ function PhonePreview({ app, frame }: { app: StudioApp; frame: number }) {
 }
 
 export function AppSpotlight() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const [index, setIndex] = useState(0);
   const [frame, setFrame] = useState(0);
   const app = STUDIO_APPS[index];
@@ -133,9 +133,9 @@ export function AppSpotlight() {
                 </span>
               </div>
             )}
-            <Link to="/apps/$slug" params={{ slug: app.slug }} className="spot-open">
+            <a href={localeHref(lang, `/apps/${app.slug}`)} className="spot-open">
               {t("spot_open")}
-            </Link>
+            </a>
           </div>
         </div>
         <PhonePreview app={app} frame={frame} />

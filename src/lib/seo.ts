@@ -1,4 +1,5 @@
 import { LANGS, type Lang } from "@/lib/i18n";
+import { isSplitPage, localeHref, stripLocalePrefix } from "@/lib/locale-path";
 import { faqAnswerText, faqFromPath, faqPath, faqTopicFromPath, faqTopicPath } from "@/lib/faq";
 import { pdfPairFromPath } from "@/lib/pdf-pairs";
 import { findProgramming, PROGRAMMING } from "@/lib/programming";
@@ -628,7 +629,8 @@ function pageCopy(pathname: string, lang: Lang) {
 }
 
 export function pageUrl(pathname: string, lang: Lang) {
-  const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : "/";
+  const path = stripLocalePrefix(pathname).path;
+  if (isSplitPage(path)) return `${SITE}${localeHref(lang, path)}`;
   const base = `${SITE}${path === "/" ? "" : path}`;
   if (lang === "az") return base || SITE;
   return `${base || SITE}?lang=${lang}`;
@@ -674,7 +676,10 @@ const LOCALES: Record<Lang, string> = {
 };
 
 export function buildHead(pathname: string, lang: Lang) {
-  const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : "/";
+  const raw = pathname.length > 1 ? pathname.replace(/\/$/, "") : "/";
+  const split = stripLocalePrefix(raw);
+  const path = isSplitPage(split.path) ? split.path : raw;
+  const pageLang = isSplitPage(split.path) && split.lang ? split.lang : lang;
   if (path === "/nx-studio") {
     return {
       meta: [
@@ -684,8 +689,8 @@ export function buildHead(pathname: string, lang: Lang) {
       scripts: [],
     };
   }
-  const copy = pageCopy(path, lang);
-  const url = canonicalUrl(path, lang);
+  const copy = pageCopy(path, pageLang);
+  const url = canonicalUrl(path, pageLang);
   const image = path.startsWith("/apps/")
     ? `${SITE}/apps/${path.split("/").pop()}.jpg`
     : `${SITE}/home/bg-hero.jpg`;
@@ -701,8 +706,8 @@ export function buildHead(pathname: string, lang: Lang) {
       { property: "og:title", content: copy.title },
       { property: "og:description", content: copy.description },
       { property: "og:url", content: url },
-      { property: "og:locale", content: LOCALES[lang] },
-      ...LANGS.filter((code) => code !== lang).map((code) => ({
+      { property: "og:locale", content: LOCALES[pageLang] },
+      ...LANGS.filter((code) => code !== pageLang).map((code) => ({
         property: "og:locale:alternate",
         content: LOCALES[code],
       })),
@@ -715,7 +720,7 @@ export function buildHead(pathname: string, lang: Lang) {
     scripts: [
       {
         type: "application/ld+json",
-        children: JSON.stringify(jsonLd(path, lang, copy, url)),
+        children: JSON.stringify(jsonLd(path, pageLang, copy, url)),
       },
     ],
   };

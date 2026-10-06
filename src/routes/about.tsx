@@ -1,16 +1,24 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
+import { localeHref } from "@/lib/locale-path";
 import { aboutFromRow } from "@/lib/pages";
+import { readLang } from "@/lib/seo";
+import type { StudioPrivacyRow } from "@/lib/studio";
 import { loadStudioBundle } from "@/lib/studio.functions";
 import { useI18n } from "@/lib/i18n-context";
 
 export const Route = createFileRoute("/about")({
+  beforeLoad: ({ location }) => {
+    const lang = readLang(location.searchStr);
+    if (lang === "az") return;
+    throw redirect({ href: localeHref(lang, "/about"), replace: true });
+  },
   loader: () => loadStudioBundle(),
   component: AboutPage,
 });
 
-function AboutPage() {
+export function AboutView({ privacy }: { privacy: readonly StudioPrivacyRow[] }) {
   const { lang } = useI18n();
-  const row = Route.useLoaderData().privacy.find((item) => item.slug === "about" && item.lang === lang);
+  const row = privacy.find((item) => item.slug === "about" && item.lang === lang);
   const copy = aboutFromRow(row, lang);
 
   return (
@@ -41,4 +49,8 @@ function AboutPage() {
       <p className="who-verse-tr">{copy.verseTr}</p>
     </main>
   );
+}
+
+function AboutPage() {
+  return <AboutView privacy={Route.useLoaderData().privacy} />;
 }

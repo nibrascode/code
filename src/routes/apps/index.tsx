@@ -1,12 +1,19 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { STUDIO_APPS, type AppSlug } from "@/lib/apps";
 import { useI18n } from "@/lib/i18n-context";
-import { statusText } from "@/lib/studio";
-import { loadStudioBundle } from "@/lib/studio.functions";
 import type { TKey } from "@/lib/i18n";
+import { localeHref } from "@/lib/locale-path";
+import { readLang } from "@/lib/seo";
+import { statusText, type StudioAppRow } from "@/lib/studio";
+import { loadStudioBundle } from "@/lib/studio.functions";
 
 export const Route = createFileRoute("/apps/")({
+  beforeLoad: ({ location }) => {
+    const lang = readLang(location.searchStr);
+    if (lang === "az") return;
+    throw redirect({ href: localeHref(lang, "/apps"), replace: true });
+  },
   loader: () => loadStudioBundle(),
   component: AppsPage,
 });
@@ -19,9 +26,9 @@ const STATUS: Partial<Record<AppSlug, TKey>> = {
   "nibras-docs": "soon",
 };
 
-function AppsPage() {
-  const { t } = useI18n();
-  const rows = Route.useLoaderData().apps;
+export function AppsIndex({ apps }: { apps: readonly StudioAppRow[] | null | undefined }) {
+  const { t, lang } = useI18n();
+  const rows = apps;
   const labels = { soon: t("soon"), building: t("nx_docs_stage") };
   const extras = (rows ?? []).filter(
     (row) => row.visible !== false && !ORDER.includes(row.slug as AppSlug),
@@ -47,7 +54,7 @@ function AppsPage() {
             labels,
           );
           return (
-            <Link key={slug} to="/apps/$slug" params={{ slug }} className="app-row">
+            <a key={slug} href={localeHref(lang, `/apps/${slug}`)} className="app-row">
               <img src={live?.icon_url || app.icon} alt="" />
               <span>
                 {badge ? <em>{badge}</em> : null}
@@ -55,13 +62,13 @@ function AppsPage() {
                 <p>{t(app.leadKey)}</p>
               </span>
               <ArrowUpRight className="rtl-flip size-4" />
-            </Link>
+            </a>
           );
         })}
         {extras.map((row) => {
           const badge = statusText(row.status, null, labels);
           return (
-            <Link key={row.slug} to="/apps/$slug" params={{ slug: row.slug }} className="app-row">
+            <a key={row.slug} href={localeHref(lang, `/apps/${row.slug}`)} className="app-row">
               <img src={row.icon_url || "/nibras-icon.png"} alt="" />
               <span>
                 {badge ? <em>{badge}</em> : null}
@@ -69,10 +76,14 @@ function AppsPage() {
                 <p>{row.summary}</p>
               </span>
               <ArrowUpRight className="rtl-flip size-4" />
-            </Link>
+            </a>
           );
         })}
       </div>
     </main>
   );
+}
+
+function AppsPage() {
+  return <AppsIndex apps={Route.useLoaderData().apps} />;
 }

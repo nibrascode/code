@@ -4,9 +4,10 @@ import { LanguageSwitch } from "@/components/language-switch";
 import { NavMenu } from "@/components/nav-menu";
 import { faqPath } from "@/lib/faq";
 import { useI18n } from "@/lib/i18n-context";
+import { localeHref } from "@/lib/locale-path";
 
 export function SiteHeader() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const isHome = pathname === "/";
 
@@ -18,28 +19,30 @@ export function SiteHeader() {
             <img src="/nibras-icon.png" alt="Nibras Code" className="brand-icon" />
           </Link>
           {isHome ? (
-            <Link to="/about" className="nav-link about-link">
+            <a href={localeHref(lang, "/about")} className="nav-link about-link">
               {t("nav_about")}
-            </Link>
+            </a>
           ) : null}
         </div>
 
         <div className="header-actions">
-          <Link to="/apps" className="back-link">
-            {t("b_nav_apps")}
-          </Link>
-          <Link to="/unutma" className="back-link">
-            {t("remind_btn")}
-          </Link>
-          <Link to="/contact" className="back-link">
-            {t("nx_nav_contact")}
-          </Link>
-          {!isHome ? (
-            <Link to="/" className="back-link">
-              <ArrowLeft className="rtl-flip size-3.5" />
-              {t("b_nav_home")}
+          <div className="header-links">
+            <a href={localeHref(lang, "/apps")} className="back-link">
+              {t("b_nav_apps")}
+            </a>
+            <Link to="/unutma" className="back-link">
+              {t("remind_btn")}
             </Link>
-          ) : null}
+            <a href={localeHref(lang, "/contact")} className="back-link">
+              {t("nx_nav_contact")}
+            </a>
+            {!isHome ? (
+              <Link to="/" className="back-link">
+                <ArrowLeft className="rtl-flip size-3.5" />
+                {t("b_nav_home")}
+              </Link>
+            ) : null}
+          </div>
           <LanguageSwitch />
         </div>
       </div>

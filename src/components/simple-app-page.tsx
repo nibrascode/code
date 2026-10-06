@@ -1,9 +1,9 @@
-import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { AppDownload } from "@/components/app-download";
 import type { TKey } from "@/lib/i18n";
 import type { AppSlug, StudioApp } from "@/lib/apps";
 import { useI18n } from "@/lib/i18n-context";
+import { localeHref } from "@/lib/locale-path";
 import { statusText, type StudioAppRow } from "@/lib/studio";
 
 const STATUS: Partial<Record<AppSlug, TKey>> = {
@@ -13,7 +13,7 @@ const STATUS: Partial<Record<AppSlug, TKey>> = {
 };
 
 export function SimpleAppPage({ app, live }: { app: StudioApp; live?: StudioAppRow | null }) {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const badge = statusText(
     app.slug === "nibras-docs" && live?.status !== "ready" ? "soon" : live?.status,
     STATUS[app.slug] ? t(STATUS[app.slug]!) : null,
@@ -46,18 +46,14 @@ export function SimpleAppPage({ app, live }: { app: StudioApp; live?: StudioAppR
             </li>
           ))}
         </ul>
-        <Link to="/apps" className="simple-more">
+        <a href={localeHref(lang, "/apps")} className="simple-more">
           {t("app_other")}
           <ArrowUpRight className="rtl-flip size-3.5" />
-        </Link>
+        </a>
         <AppDownload app={app} live={live} />
-        <Link
-          to="/privacy/$slug"
-          params={{ slug: app.slug }}
-          className="privacy-btn"
-        >
+        <a href={`/privacy/${app.slug}`} className="privacy-btn">
           {t("privacy_btn")}
-        </Link>
+        </a>
       </div>
     </main>
   );

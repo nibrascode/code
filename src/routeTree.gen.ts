@@ -19,7 +19,13 @@ import { Route as UnutmaRouteImport } from './routes/unutma'
 import { Route as WhyRouteImport } from './routes/why'
 import { Route as AppsIndexRouteImport } from './routes/apps/index'
 import { Route as AppsSlugRouteImport } from './routes/apps/$slug'
+import { Route as ArAboutRouteImport } from './routes/ar.about'
+import { Route as ArAppsRouteImport } from './routes/ar.apps'
+import { Route as ArContactRouteImport } from './routes/ar.contact'
 import { Route as ArFaqRouteImport } from './routes/ar.faq'
+import { Route as EnAboutRouteImport } from './routes/en.about'
+import { Route as EnAppsRouteImport } from './routes/en.apps'
+import { Route as EnContactRouteImport } from './routes/en.contact'
 import { Route as EnFaqRouteImport } from './routes/en.faq'
 import { Route as FaqSlugRouteImport } from './routes/faq.$slug'
 import { Route as GuidesIndexRouteImport } from './routes/guides/index'
@@ -31,17 +37,27 @@ import { Route as ProgrammingTopicRouteImport } from './routes/programming/$topi
 import { Route as ResourcesIndexRouteImport } from './routes/resources/index'
 import { Route as ResourcesTopicRouteRouteImport } from './routes/resources/$topic/route'
 import { Route as ResurslarSlugRouteImport } from './routes/resurslar/$slug'
+import { Route as RuAboutRouteImport } from './routes/ru.about'
+import { Route as RuAppsRouteImport } from './routes/ru.apps'
+import { Route as RuContactRouteImport } from './routes/ru.contact'
 import { Route as RuFaqRouteImport } from './routes/ru.faq'
+import { Route as TrAboutRouteImport } from './routes/tr.about'
+import { Route as TrAppsRouteImport } from './routes/tr.apps'
+import { Route as TrContactRouteImport } from './routes/tr.contact'
 import { Route as TrFaqRouteImport } from './routes/tr.faq'
+import { Route as ArAppsSlugRouteImport } from './routes/ar.apps.$slug'
 import { Route as ArFaqSlugRouteImport } from './routes/ar.faq.$slug'
 import { Route as ArProgrammingSlugRouteImport } from './routes/ar.programming.$slug'
+import { Route as EnAppsSlugRouteImport } from './routes/en.apps.$slug'
 import { Route as EnFaqSlugRouteImport } from './routes/en.faq.$slug'
 import { Route as EnProgrammingSlugRouteImport } from './routes/en.programming.$slug'
 import { Route as ResourcesTopicIndexRouteImport } from './routes/resources/$topic/index'
 import { Route as ResourcesTopicArticleRouteImport } from './routes/resources/$topic/$article'
+import { Route as RuAppsSlugRouteImport } from './routes/ru.apps.$slug'
 import { Route as RuFaqSlugRouteImport } from './routes/ru.faq.$slug'
 import { Route as RuProgrammingSlugRouteImport } from './routes/ru.programming.$slug'
 import { Route as RuResourcesSlugRouteImport } from './routes/ru.resources.$slug'
+import { Route as TrAppsSlugRouteImport } from './routes/tr.apps.$slug'
 import { Route as TrFaqSlugRouteImport } from './routes/tr.faq.$slug'
 import { Route as TrProgrammingSlugRouteImport } from './routes/tr.programming.$slug'
 
@@ -95,9 +111,39 @@ const AppsSlugRoute = AppsSlugRouteImport.update({
   path: '/apps/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ArAboutRoute = ArAboutRouteImport.update({
+  id: '/ar/about',
+  path: '/ar/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArAppsRoute = ArAppsRouteImport.update({
+  id: '/ar/apps',
+  path: '/ar/apps',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArContactRoute = ArContactRouteImport.update({
+  id: '/ar/contact',
+  path: '/ar/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ArFaqRoute = ArFaqRouteImport.update({
   id: '/ar/faq',
   path: '/ar/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnAboutRoute = EnAboutRouteImport.update({
+  id: '/en/about',
+  path: '/en/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnAppsRoute = EnAppsRouteImport.update({
+  id: '/en/apps',
+  path: '/en/apps',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnContactRoute = EnContactRouteImport.update({
+  id: '/en/contact',
+  path: '/en/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EnFaqRoute = EnFaqRouteImport.update({
@@ -155,15 +201,50 @@ const ResurslarSlugRoute = ResurslarSlugRouteImport.update({
   path: '/resurslar/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RuAboutRoute = RuAboutRouteImport.update({
+  id: '/ru/about',
+  path: '/ru/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RuAppsRoute = RuAppsRouteImport.update({
+  id: '/ru/apps',
+  path: '/ru/apps',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RuContactRoute = RuContactRouteImport.update({
+  id: '/ru/contact',
+  path: '/ru/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RuFaqRoute = RuFaqRouteImport.update({
   id: '/ru/faq',
   path: '/ru/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrAboutRoute = TrAboutRouteImport.update({
+  id: '/tr/about',
+  path: '/tr/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrAppsRoute = TrAppsRouteImport.update({
+  id: '/tr/apps',
+  path: '/tr/apps',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrContactRoute = TrContactRouteImport.update({
+  id: '/tr/contact',
+  path: '/tr/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TrFaqRoute = TrFaqRouteImport.update({
   id: '/tr/faq',
   path: '/tr/faq',
   getParentRoute: () => rootRouteImport,
+} as any)
+const ArAppsSlugRoute = ArAppsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ArAppsRoute,
 } as any)
 const ArFaqSlugRoute = ArFaqSlugRouteImport.update({
   id: '/$slug',
@@ -174,6 +255,11 @@ const ArProgrammingSlugRoute = ArProgrammingSlugRouteImport.update({
   id: '/ar/programming/$slug',
   path: '/ar/programming/$slug',
   getParentRoute: () => rootRouteImport,
+} as any)
+const EnAppsSlugRoute = EnAppsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => EnAppsRoute,
 } as any)
 const EnFaqSlugRoute = EnFaqSlugRouteImport.update({
   id: '/$slug',
@@ -195,6 +281,11 @@ const ResourcesTopicArticleRoute = ResourcesTopicArticleRouteImport.update({
   path: '/$article',
   getParentRoute: () => ResourcesTopicRouteRoute,
 } as any)
+const RuAppsSlugRoute = RuAppsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => RuAppsRoute,
+} as any)
 const RuFaqSlugRoute = RuFaqSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -209,6 +300,11 @@ const RuResourcesSlugRoute = RuResourcesSlugRouteImport.update({
   id: '/ru/resources/$slug',
   path: '/ru/resources/$slug',
   getParentRoute: () => rootRouteImport,
+} as any)
+const TrAppsSlugRoute = TrAppsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => TrAppsRoute,
 } as any)
 const TrFaqSlugRoute = TrFaqSlugRouteImport.update({
   id: '/$slug',
@@ -232,7 +328,13 @@ export interface FileRoutesByFullPath {
   '/why': typeof WhyRoute
   '/resources/$topic': typeof ResourcesTopicRouteRouteWithChildren
   '/apps/$slug': typeof AppsSlugRoute
+  '/ar/about': typeof ArAboutRoute
+  '/ar/apps': typeof ArAppsRouteWithChildren
+  '/ar/contact': typeof ArContactRoute
   '/ar/faq': typeof ArFaqRouteWithChildren
+  '/en/about': typeof EnAboutRoute
+  '/en/apps': typeof EnAppsRouteWithChildren
+  '/en/contact': typeof EnContactRoute
   '/en/faq': typeof EnFaqRouteWithChildren
   '/faq/$slug': typeof FaqSlugRoute
   '/guides/$topic': typeof GuidesTopicRoute
@@ -240,20 +342,30 @@ export interface FileRoutesByFullPath {
   '/privacy/nibras-pdf': typeof PrivacyNibrasPdfRoute
   '/programming/$topic': typeof ProgrammingTopicRoute
   '/resurslar/$slug': typeof ResurslarSlugRoute
+  '/ru/about': typeof RuAboutRoute
+  '/ru/apps': typeof RuAppsRouteWithChildren
+  '/ru/contact': typeof RuContactRoute
   '/ru/faq': typeof RuFaqRouteWithChildren
+  '/tr/about': typeof TrAboutRoute
+  '/tr/apps': typeof TrAppsRouteWithChildren
+  '/tr/contact': typeof TrContactRoute
   '/tr/faq': typeof TrFaqRouteWithChildren
   '/apps/': typeof AppsIndexRoute
   '/guides/': typeof GuidesIndexRoute
   '/programming/': typeof ProgrammingIndexRoute
   '/resources/': typeof ResourcesIndexRoute
+  '/ar/apps/$slug': typeof ArAppsSlugRoute
   '/ar/faq/$slug': typeof ArFaqSlugRoute
   '/ar/programming/$slug': typeof ArProgrammingSlugRoute
+  '/en/apps/$slug': typeof EnAppsSlugRoute
   '/en/faq/$slug': typeof EnFaqSlugRoute
   '/en/programming/$slug': typeof EnProgrammingSlugRoute
   '/resources/$topic/$article': typeof ResourcesTopicArticleRoute
+  '/ru/apps/$slug': typeof RuAppsSlugRoute
   '/ru/faq/$slug': typeof RuFaqSlugRoute
   '/ru/programming/$slug': typeof RuProgrammingSlugRoute
   '/ru/resources/$slug': typeof RuResourcesSlugRoute
+  '/tr/apps/$slug': typeof TrAppsSlugRoute
   '/tr/faq/$slug': typeof TrFaqSlugRoute
   '/tr/programming/$slug': typeof TrProgrammingSlugRoute
   '/resources/$topic/': typeof ResourcesTopicIndexRoute
@@ -268,7 +380,13 @@ export interface FileRoutesByTo {
   '/unutma': typeof UnutmaRoute
   '/why': typeof WhyRoute
   '/apps/$slug': typeof AppsSlugRoute
+  '/ar/about': typeof ArAboutRoute
+  '/ar/apps': typeof ArAppsRouteWithChildren
+  '/ar/contact': typeof ArContactRoute
   '/ar/faq': typeof ArFaqRouteWithChildren
+  '/en/about': typeof EnAboutRoute
+  '/en/apps': typeof EnAppsRouteWithChildren
+  '/en/contact': typeof EnContactRoute
   '/en/faq': typeof EnFaqRouteWithChildren
   '/faq/$slug': typeof FaqSlugRoute
   '/guides/$topic': typeof GuidesTopicRoute
@@ -276,20 +394,30 @@ export interface FileRoutesByTo {
   '/privacy/nibras-pdf': typeof PrivacyNibrasPdfRoute
   '/programming/$topic': typeof ProgrammingTopicRoute
   '/resurslar/$slug': typeof ResurslarSlugRoute
+  '/ru/about': typeof RuAboutRoute
+  '/ru/apps': typeof RuAppsRouteWithChildren
+  '/ru/contact': typeof RuContactRoute
   '/ru/faq': typeof RuFaqRouteWithChildren
+  '/tr/about': typeof TrAboutRoute
+  '/tr/apps': typeof TrAppsRouteWithChildren
+  '/tr/contact': typeof TrContactRoute
   '/tr/faq': typeof TrFaqRouteWithChildren
   '/apps': typeof AppsIndexRoute
   '/guides': typeof GuidesIndexRoute
   '/programming': typeof ProgrammingIndexRoute
   '/resources': typeof ResourcesIndexRoute
+  '/ar/apps/$slug': typeof ArAppsSlugRoute
   '/ar/faq/$slug': typeof ArFaqSlugRoute
   '/ar/programming/$slug': typeof ArProgrammingSlugRoute
+  '/en/apps/$slug': typeof EnAppsSlugRoute
   '/en/faq/$slug': typeof EnFaqSlugRoute
   '/en/programming/$slug': typeof EnProgrammingSlugRoute
   '/resources/$topic/$article': typeof ResourcesTopicArticleRoute
+  '/ru/apps/$slug': typeof RuAppsSlugRoute
   '/ru/faq/$slug': typeof RuFaqSlugRoute
   '/ru/programming/$slug': typeof RuProgrammingSlugRoute
   '/ru/resources/$slug': typeof RuResourcesSlugRoute
+  '/tr/apps/$slug': typeof TrAppsSlugRoute
   '/tr/faq/$slug': typeof TrFaqSlugRoute
   '/tr/programming/$slug': typeof TrProgrammingSlugRoute
   '/resources/$topic': typeof ResourcesTopicIndexRoute
@@ -306,7 +434,13 @@ export interface FileRoutesById {
   '/why': typeof WhyRoute
   '/resources/$topic': typeof ResourcesTopicRouteRouteWithChildren
   '/apps/$slug': typeof AppsSlugRoute
+  '/ar/about': typeof ArAboutRoute
+  '/ar/apps': typeof ArAppsRouteWithChildren
+  '/ar/contact': typeof ArContactRoute
   '/ar/faq': typeof ArFaqRouteWithChildren
+  '/en/about': typeof EnAboutRoute
+  '/en/apps': typeof EnAppsRouteWithChildren
+  '/en/contact': typeof EnContactRoute
   '/en/faq': typeof EnFaqRouteWithChildren
   '/faq/$slug': typeof FaqSlugRoute
   '/guides/$topic': typeof GuidesTopicRoute
@@ -314,20 +448,30 @@ export interface FileRoutesById {
   '/privacy/nibras-pdf': typeof PrivacyNibrasPdfRoute
   '/programming/$topic': typeof ProgrammingTopicRoute
   '/resurslar/$slug': typeof ResurslarSlugRoute
+  '/ru/about': typeof RuAboutRoute
+  '/ru/apps': typeof RuAppsRouteWithChildren
+  '/ru/contact': typeof RuContactRoute
   '/ru/faq': typeof RuFaqRouteWithChildren
+  '/tr/about': typeof TrAboutRoute
+  '/tr/apps': typeof TrAppsRouteWithChildren
+  '/tr/contact': typeof TrContactRoute
   '/tr/faq': typeof TrFaqRouteWithChildren
   '/apps/': typeof AppsIndexRoute
   '/guides/': typeof GuidesIndexRoute
   '/programming/': typeof ProgrammingIndexRoute
   '/resources/': typeof ResourcesIndexRoute
+  '/ar/apps/$slug': typeof ArAppsSlugRoute
   '/ar/faq/$slug': typeof ArFaqSlugRoute
   '/ar/programming/$slug': typeof ArProgrammingSlugRoute
+  '/en/apps/$slug': typeof EnAppsSlugRoute
   '/en/faq/$slug': typeof EnFaqSlugRoute
   '/en/programming/$slug': typeof EnProgrammingSlugRoute
   '/resources/$topic/$article': typeof ResourcesTopicArticleRoute
+  '/ru/apps/$slug': typeof RuAppsSlugRoute
   '/ru/faq/$slug': typeof RuFaqSlugRoute
   '/ru/programming/$slug': typeof RuProgrammingSlugRoute
   '/ru/resources/$slug': typeof RuResourcesSlugRoute
+  '/tr/apps/$slug': typeof TrAppsSlugRoute
   '/tr/faq/$slug': typeof TrFaqSlugRoute
   '/tr/programming/$slug': typeof TrProgrammingSlugRoute
   '/resources/$topic/': typeof ResourcesTopicIndexRoute
@@ -345,7 +489,13 @@ export interface FileRouteTypes {
     | '/why'
     | '/resources/$topic'
     | '/apps/$slug'
+    | '/ar/about'
+    | '/ar/apps'
+    | '/ar/contact'
     | '/ar/faq'
+    | '/en/about'
+    | '/en/apps'
+    | '/en/contact'
     | '/en/faq'
     | '/faq/$slug'
     | '/guides/$topic'
@@ -353,20 +503,30 @@ export interface FileRouteTypes {
     | '/privacy/nibras-pdf'
     | '/programming/$topic'
     | '/resurslar/$slug'
+    | '/ru/about'
+    | '/ru/apps'
+    | '/ru/contact'
     | '/ru/faq'
+    | '/tr/about'
+    | '/tr/apps'
+    | '/tr/contact'
     | '/tr/faq'
     | '/apps/'
     | '/guides/'
     | '/programming/'
     | '/resources/'
+    | '/ar/apps/$slug'
     | '/ar/faq/$slug'
     | '/ar/programming/$slug'
+    | '/en/apps/$slug'
     | '/en/faq/$slug'
     | '/en/programming/$slug'
     | '/resources/$topic/$article'
+    | '/ru/apps/$slug'
     | '/ru/faq/$slug'
     | '/ru/programming/$slug'
     | '/ru/resources/$slug'
+    | '/tr/apps/$slug'
     | '/tr/faq/$slug'
     | '/tr/programming/$slug'
     | '/resources/$topic/'
@@ -381,7 +541,13 @@ export interface FileRouteTypes {
     | '/unutma'
     | '/why'
     | '/apps/$slug'
+    | '/ar/about'
+    | '/ar/apps'
+    | '/ar/contact'
     | '/ar/faq'
+    | '/en/about'
+    | '/en/apps'
+    | '/en/contact'
     | '/en/faq'
     | '/faq/$slug'
     | '/guides/$topic'
@@ -389,20 +555,30 @@ export interface FileRouteTypes {
     | '/privacy/nibras-pdf'
     | '/programming/$topic'
     | '/resurslar/$slug'
+    | '/ru/about'
+    | '/ru/apps'
+    | '/ru/contact'
     | '/ru/faq'
+    | '/tr/about'
+    | '/tr/apps'
+    | '/tr/contact'
     | '/tr/faq'
     | '/apps'
     | '/guides'
     | '/programming'
     | '/resources'
+    | '/ar/apps/$slug'
     | '/ar/faq/$slug'
     | '/ar/programming/$slug'
+    | '/en/apps/$slug'
     | '/en/faq/$slug'
     | '/en/programming/$slug'
     | '/resources/$topic/$article'
+    | '/ru/apps/$slug'
     | '/ru/faq/$slug'
     | '/ru/programming/$slug'
     | '/ru/resources/$slug'
+    | '/tr/apps/$slug'
     | '/tr/faq/$slug'
     | '/tr/programming/$slug'
     | '/resources/$topic'
@@ -418,7 +594,13 @@ export interface FileRouteTypes {
     | '/why'
     | '/resources/$topic'
     | '/apps/$slug'
+    | '/ar/about'
+    | '/ar/apps'
+    | '/ar/contact'
     | '/ar/faq'
+    | '/en/about'
+    | '/en/apps'
+    | '/en/contact'
     | '/en/faq'
     | '/faq/$slug'
     | '/guides/$topic'
@@ -426,20 +608,30 @@ export interface FileRouteTypes {
     | '/privacy/nibras-pdf'
     | '/programming/$topic'
     | '/resurslar/$slug'
+    | '/ru/about'
+    | '/ru/apps'
+    | '/ru/contact'
     | '/ru/faq'
+    | '/tr/about'
+    | '/tr/apps'
+    | '/tr/contact'
     | '/tr/faq'
     | '/apps/'
     | '/guides/'
     | '/programming/'
     | '/resources/'
+    | '/ar/apps/$slug'
     | '/ar/faq/$slug'
     | '/ar/programming/$slug'
+    | '/en/apps/$slug'
     | '/en/faq/$slug'
     | '/en/programming/$slug'
     | '/resources/$topic/$article'
+    | '/ru/apps/$slug'
     | '/ru/faq/$slug'
     | '/ru/programming/$slug'
     | '/ru/resources/$slug'
+    | '/tr/apps/$slug'
     | '/tr/faq/$slug'
     | '/tr/programming/$slug'
     | '/resources/$topic/'
@@ -456,12 +648,24 @@ export interface RootRouteChildren {
   WhyRoute: typeof WhyRoute
   ResourcesTopicRouteRoute: typeof ResourcesTopicRouteRouteWithChildren
   AppsSlugRoute: typeof AppsSlugRoute
+  ArAboutRoute: typeof ArAboutRoute
+  ArAppsRoute: typeof ArAppsRouteWithChildren
+  ArContactRoute: typeof ArContactRoute
   ArFaqRoute: typeof ArFaqRouteWithChildren
+  EnAboutRoute: typeof EnAboutRoute
+  EnAppsRoute: typeof EnAppsRouteWithChildren
+  EnContactRoute: typeof EnContactRoute
   EnFaqRoute: typeof EnFaqRouteWithChildren
   GuidesTopicRoute: typeof GuidesTopicRoute
   ProgrammingTopicRoute: typeof ProgrammingTopicRoute
   ResurslarSlugRoute: typeof ResurslarSlugRoute
+  RuAboutRoute: typeof RuAboutRoute
+  RuAppsRoute: typeof RuAppsRouteWithChildren
+  RuContactRoute: typeof RuContactRoute
   RuFaqRoute: typeof RuFaqRouteWithChildren
+  TrAboutRoute: typeof TrAboutRoute
+  TrAppsRoute: typeof TrAppsRouteWithChildren
+  TrContactRoute: typeof TrContactRoute
   TrFaqRoute: typeof TrFaqRouteWithChildren
   AppsIndexRoute: typeof AppsIndexRoute
   GuidesIndexRoute: typeof GuidesIndexRoute
@@ -546,11 +750,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ar/about': {
+      id: '/ar/about'
+      path: '/ar/about'
+      fullPath: '/ar/about'
+      preLoaderRoute: typeof ArAboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ar/apps': {
+      id: '/ar/apps'
+      path: '/ar/apps'
+      fullPath: '/ar/apps'
+      preLoaderRoute: typeof ArAppsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ar/contact': {
+      id: '/ar/contact'
+      path: '/ar/contact'
+      fullPath: '/ar/contact'
+      preLoaderRoute: typeof ArContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/ar/faq': {
       id: '/ar/faq'
       path: '/ar/faq'
       fullPath: '/ar/faq'
       preLoaderRoute: typeof ArFaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/about': {
+      id: '/en/about'
+      path: '/en/about'
+      fullPath: '/en/about'
+      preLoaderRoute: typeof EnAboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/apps': {
+      id: '/en/apps'
+      path: '/en/apps'
+      fullPath: '/en/apps'
+      preLoaderRoute: typeof EnAppsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/contact': {
+      id: '/en/contact'
+      path: '/en/contact'
+      fullPath: '/en/contact'
+      preLoaderRoute: typeof EnContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/en/faq': {
@@ -630,11 +876,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResurslarSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ru/about': {
+      id: '/ru/about'
+      path: '/ru/about'
+      fullPath: '/ru/about'
+      preLoaderRoute: typeof RuAboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ru/apps': {
+      id: '/ru/apps'
+      path: '/ru/apps'
+      fullPath: '/ru/apps'
+      preLoaderRoute: typeof RuAppsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ru/contact': {
+      id: '/ru/contact'
+      path: '/ru/contact'
+      fullPath: '/ru/contact'
+      preLoaderRoute: typeof RuContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/ru/faq': {
       id: '/ru/faq'
       path: '/ru/faq'
       fullPath: '/ru/faq'
       preLoaderRoute: typeof RuFaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tr/about': {
+      id: '/tr/about'
+      path: '/tr/about'
+      fullPath: '/tr/about'
+      preLoaderRoute: typeof TrAboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tr/apps': {
+      id: '/tr/apps'
+      path: '/tr/apps'
+      fullPath: '/tr/apps'
+      preLoaderRoute: typeof TrAppsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tr/contact': {
+      id: '/tr/contact'
+      path: '/tr/contact'
+      fullPath: '/tr/contact'
+      preLoaderRoute: typeof TrContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tr/faq': {
@@ -643,6 +931,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/tr/faq'
       preLoaderRoute: typeof TrFaqRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/ar/apps/$slug': {
+      id: '/ar/apps/$slug'
+      path: '/$slug'
+      fullPath: '/ar/apps/$slug'
+      preLoaderRoute: typeof ArAppsSlugRouteImport
+      parentRoute: typeof ArAppsRoute
     }
     '/ar/faq/$slug': {
       id: '/ar/faq/$slug'
@@ -657,6 +952,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/ar/programming/$slug'
       preLoaderRoute: typeof ArProgrammingSlugRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/en/apps/$slug': {
+      id: '/en/apps/$slug'
+      path: '/$slug'
+      fullPath: '/en/apps/$slug'
+      preLoaderRoute: typeof EnAppsSlugRouteImport
+      parentRoute: typeof EnAppsRoute
     }
     '/en/faq/$slug': {
       id: '/en/faq/$slug'
@@ -686,6 +988,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResourcesTopicArticleRouteImport
       parentRoute: typeof ResourcesTopicRouteRoute
     }
+    '/ru/apps/$slug': {
+      id: '/ru/apps/$slug'
+      path: '/$slug'
+      fullPath: '/ru/apps/$slug'
+      preLoaderRoute: typeof RuAppsSlugRouteImport
+      parentRoute: typeof RuAppsRoute
+    }
     '/ru/faq/$slug': {
       id: '/ru/faq/$slug'
       path: '/$slug'
@@ -706,6 +1015,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/ru/resources/$slug'
       preLoaderRoute: typeof RuResourcesSlugRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/tr/apps/$slug': {
+      id: '/tr/apps/$slug'
+      path: '/$slug'
+      fullPath: '/tr/apps/$slug'
+      preLoaderRoute: typeof TrAppsSlugRouteImport
+      parentRoute: typeof TrAppsRoute
     }
     '/tr/faq/$slug': {
       id: '/tr/faq/$slug'
@@ -760,6 +1076,17 @@ const ResourcesTopicRouteRouteChildren: ResourcesTopicRouteRouteChildren = {
 const ResourcesTopicRouteRouteWithChildren =
   ResourcesTopicRouteRoute._addFileChildren(ResourcesTopicRouteRouteChildren)
 
+interface ArAppsRouteChildren {
+  ArAppsSlugRoute: typeof ArAppsSlugRoute
+}
+
+const ArAppsRouteChildren: ArAppsRouteChildren = {
+  ArAppsSlugRoute: ArAppsSlugRoute,
+}
+
+const ArAppsRouteWithChildren =
+  ArAppsRoute._addFileChildren(ArAppsRouteChildren)
+
 interface ArFaqRouteChildren {
   ArFaqSlugRoute: typeof ArFaqSlugRoute
 }
@@ -769,6 +1096,17 @@ const ArFaqRouteChildren: ArFaqRouteChildren = {
 }
 
 const ArFaqRouteWithChildren = ArFaqRoute._addFileChildren(ArFaqRouteChildren)
+
+interface EnAppsRouteChildren {
+  EnAppsSlugRoute: typeof EnAppsSlugRoute
+}
+
+const EnAppsRouteChildren: EnAppsRouteChildren = {
+  EnAppsSlugRoute: EnAppsSlugRoute,
+}
+
+const EnAppsRouteWithChildren =
+  EnAppsRoute._addFileChildren(EnAppsRouteChildren)
 
 interface EnFaqRouteChildren {
   EnFaqSlugRoute: typeof EnFaqSlugRoute
@@ -780,6 +1118,17 @@ const EnFaqRouteChildren: EnFaqRouteChildren = {
 
 const EnFaqRouteWithChildren = EnFaqRoute._addFileChildren(EnFaqRouteChildren)
 
+interface RuAppsRouteChildren {
+  RuAppsSlugRoute: typeof RuAppsSlugRoute
+}
+
+const RuAppsRouteChildren: RuAppsRouteChildren = {
+  RuAppsSlugRoute: RuAppsSlugRoute,
+}
+
+const RuAppsRouteWithChildren =
+  RuAppsRoute._addFileChildren(RuAppsRouteChildren)
+
 interface RuFaqRouteChildren {
   RuFaqSlugRoute: typeof RuFaqSlugRoute
 }
@@ -789,6 +1138,17 @@ const RuFaqRouteChildren: RuFaqRouteChildren = {
 }
 
 const RuFaqRouteWithChildren = RuFaqRoute._addFileChildren(RuFaqRouteChildren)
+
+interface TrAppsRouteChildren {
+  TrAppsSlugRoute: typeof TrAppsSlugRoute
+}
+
+const TrAppsRouteChildren: TrAppsRouteChildren = {
+  TrAppsSlugRoute: TrAppsSlugRoute,
+}
+
+const TrAppsRouteWithChildren =
+  TrAppsRoute._addFileChildren(TrAppsRouteChildren)
 
 interface TrFaqRouteChildren {
   TrFaqSlugRoute: typeof TrFaqSlugRoute
@@ -811,12 +1171,24 @@ const rootRouteChildren: RootRouteChildren = {
   WhyRoute: WhyRoute,
   ResourcesTopicRouteRoute: ResourcesTopicRouteRouteWithChildren,
   AppsSlugRoute: AppsSlugRoute,
+  ArAboutRoute: ArAboutRoute,
+  ArAppsRoute: ArAppsRouteWithChildren,
+  ArContactRoute: ArContactRoute,
   ArFaqRoute: ArFaqRouteWithChildren,
+  EnAboutRoute: EnAboutRoute,
+  EnAppsRoute: EnAppsRouteWithChildren,
+  EnContactRoute: EnContactRoute,
   EnFaqRoute: EnFaqRouteWithChildren,
   GuidesTopicRoute: GuidesTopicRoute,
   ProgrammingTopicRoute: ProgrammingTopicRoute,
   ResurslarSlugRoute: ResurslarSlugRoute,
+  RuAboutRoute: RuAboutRoute,
+  RuAppsRoute: RuAppsRouteWithChildren,
+  RuContactRoute: RuContactRoute,
   RuFaqRoute: RuFaqRouteWithChildren,
+  TrAboutRoute: TrAboutRoute,
+  TrAppsRoute: TrAppsRouteWithChildren,
+  TrContactRoute: TrContactRoute,
   TrFaqRoute: TrFaqRouteWithChildren,
   AppsIndexRoute: AppsIndexRoute,
   GuidesIndexRoute: GuidesIndexRoute,

@@ -6,6 +6,7 @@ import { TechMark } from "@/components/tech-marquee";
 import { LanguageSwitch } from "@/components/language-switch";
 import { NavMenu } from "@/components/nav-menu";
 import { faqPath } from "@/lib/faq";
+import { localeHref } from "@/lib/locale-path";
 import { useI18n } from "@/lib/i18n-context";
 import { statusText } from "@/lib/studio";
 import { loadStudioBundle } from "@/lib/studio.functions";
@@ -214,9 +215,9 @@ function Home() {
           </span>
         </Link>
         <nav className="nx-links">
-          <Link to="/about">{t("nav_about")}</Link>
+          <a href={localeHref(lang, "/about")}>{t("nav_about")}</a>
           <Link to="/unutma">{t("remind_btn")}</Link>
-          <Link to="/contact">{t("nx_nav_contact")}</Link>
+          <a href={localeHref(lang, "/contact")}>{t("nx_nav_contact")}</a>
           <LanguageSwitch />
         </nav>
       </header>
@@ -230,14 +231,14 @@ function Home() {
           </h1>
           <p>{t("nx_lead")}</p>
           <div className="nx-actions">
-            <Link className="nx-cta" to="/apps">
+            <a className="nx-cta" href={localeHref(lang, "/apps")}>
               {t("b_hero_cta")}
               <ArrowUpRight className="size-4" />
-            </Link>
-            <Link to="/about" className="nx-ghost">
+            </a>
+            <a href={localeHref(lang, "/about")} className="nx-ghost">
               {t("nav_about")}
               <ArrowUpRight className="size-4" />
-            </Link>
+            </a>
           </div>
           <a className="nx-ai-bar" href="/ai">
             <img src="/nibras-ai.png" alt="" />
@@ -297,7 +298,7 @@ function Home() {
               labels,
             );
             return (
-              <Link key={card.slug} to="/apps/$slug" params={{ slug: card.slug }} className="nx-card">
+              <a key={card.slug} href={localeHref(lang, `/apps/${card.slug}`)} className="nx-card">
                 <span className="nx-card-top">
                   <span className="nx-ico">
                     <img src={live?.icon_url || card.icon} alt="" />
@@ -313,11 +314,11 @@ function Home() {
                   ))}
                 </span>
                 <ArrowUpRight className="nx-go" />
-              </Link>
+              </a>
             );
           })}
           {extras.map((row) => (
-            <Link key={row.slug} to="/apps/$slug" params={{ slug: row.slug }} className="nx-card">
+            <a key={row.slug} href={localeHref(lang, `/apps/${row.slug}`)} className="nx-card">
               <span className="nx-card-top">
                 <span className="nx-ico">
                   <img src={row.icon_url || "/nibras-icon.png"} alt="" />
@@ -330,7 +331,7 @@ function Home() {
                 </span>
               </span>
               <ArrowUpRight className="nx-go" />
-            </Link>
+            </a>
           ))}
         </div>
       </section>
@@ -344,10 +345,10 @@ function Home() {
               <span>{t("nx_why_b")}</span>
             </h2>
             <p>{t("nx_why_p")}</p>
-            <Link className="nx-cta" to="/apps">
+            <a className="nx-cta" href={localeHref(lang, "/apps")}>
               {t("b_hero_cta")}
               <ArrowUpRight className="size-4" />
-            </Link>
+            </a>
           </div>
           <ul>
             <li>

@@ -1,4 +1,5 @@
 import type { Lang } from "@/lib/i18n";
+import { isSplitPage, localeHref, stripLocalePrefix } from "@/lib/locale-path";
 import { faqFromPath, faqPath, faqTopicFromPath, faqTopicPath } from "@/lib/faq";
 import { findProgrammingLocale, programmingFromPath, programmingLocalePath } from "@/lib/programming-locales";
 
@@ -52,6 +53,8 @@ export function hrefForLang(pathname: string, lang: Lang) {
     return `${pair.az}?lang=${lang}`;
   }
   const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname;
+  const split = stripLocalePrefix(path);
+  if (isSplitPage(split.path)) return localeHref(lang, split.path);
   if (
     path === "/resources" ||
     path.startsWith("/resources/") ||

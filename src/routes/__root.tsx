@@ -6,7 +6,7 @@ import { I18nProvider } from "@/lib/i18n-context";
 import { SiteFooter, SiteHeader } from "@/components/site-header";
 import { AppSuggest } from "@/components/app-suggest";
 import appCss from "../styles.css?url";
-import { buildHead, langFromLocation, pageUrl, readLang, SITE } from "@/lib/seo";
+import { buildHead, langFromLocation, pageUrl, SITE } from "@/lib/seo";
 import { pdfPairFromPath } from "@/lib/pdf-pairs";
 import { findProgrammingLocale, programmingLocalePath, programmingFromPath } from "@/lib/programming-locales";
 import { LANGS, type Lang } from "@/lib/i18n";
@@ -50,8 +50,9 @@ export const Route = createRootRoute({
 });
 
 function sceneFor(pathname: string) {
-  if (pathname.startsWith("/unutma") || pathname.startsWith("/about")) return "mountains";
-  if (pathname.startsWith("/why") || pathname.startsWith("/privacy") || pathname.startsWith("/contact") || pathname.startsWith("/nx-studio") || pathname.startsWith("/resources") || pathname.startsWith("/resurslar") || pathname.startsWith("/ru") || pathname.startsWith("/guides") || pathname.includes("/programming") || pathname.includes("/faq"))
+  const path = pathname.replace(/^\/(en|tr|ar|ru)(?=\/)/, "");
+  if (path.startsWith("/unutma") || path.startsWith("/about")) return "mountains";
+  if (path.startsWith("/why") || path.startsWith("/privacy") || path.startsWith("/contact") || path.startsWith("/nx-studio") || path.startsWith("/resources") || path.startsWith("/resurslar") || path.startsWith("/ru") || path.startsWith("/guides") || path.includes("/programming") || path.includes("/faq") || path.startsWith("/apps"))
     return "study";
   return "hero";
 }
@@ -130,7 +131,7 @@ function SeoLinks() {
       </>
     );
   }
-  const lang = readLang(searchStr);
+  const lang = langFromLocation(pathname, searchStr);
   const langs: Lang[] = [...LANGS];
   return (
     <>
