@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { LIBRARY, type LibrarySection, type LibraryTopic } from "@/lib/library";
+import { CODE_SAMPLE_HUB, CODE_SAMPLES } from "@/lib/code-samples";
 import { findProgramming, type ProgrammingSection } from "@/lib/programming";
 import { findProgrammingLocale, programmingLocalePath } from "@/lib/programming-locales";
 import { pythonSections } from "@/lib/lessons";
@@ -101,6 +102,14 @@ export function LibraryIndex({
             )}
           </li>
         ))}
+        {section === "programming" ? (
+          <li className="is-section">
+            <a href={programmingLocalePath(lang, CODE_SAMPLE_HUB)}>
+              {t("code_samples")}
+              <ArrowUpRight className="rtl-flip size-4" />
+            </a>
+          </li>
+        ) : null}
       </ul>
     </main>
   );
@@ -130,6 +139,43 @@ const PROGRAM_NAMES: Record<string, string> = {
   ssl: "SSL / HTTPS",
   firewall: "Firewall",
 };
+
+export function CodeSamplePage({ slug }: { slug: string }) {
+  const { t, lang } = useI18n();
+  const item = CODE_SAMPLES.find((entry) => entry.slug === slug);
+
+  return (
+    <main className="why-page">
+      <div className="why-glow" aria-hidden="true" />
+      <p className="eyebrow">
+        <i />
+        {item ? (
+          <a href={programmingLocalePath(lang, CODE_SAMPLE_HUB)}>{t("code_samples")}</a>
+        ) : (
+          <Link to="/programming">{t("nav_programming")}</Link>
+        )}
+      </p>
+      <h1>{item ? t(item.label) : t("code_samples")}</h1>
+      {item ? (
+        <p>{t("code_sample_wait")}</p>
+      ) : (
+        <>
+          <p>{t("code_samples_note")}</p>
+          <ul className="lib-list">
+            {CODE_SAMPLES.map((entry) => (
+              <li key={entry.slug}>
+                <a href={programmingLocalePath(lang, entry.slug)}>
+                  {t(entry.label)}
+                  <ArrowUpRight className="rtl-flip size-4" />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+    </main>
+  );
+}
 
 export function ProgrammingArticle({
   slug,

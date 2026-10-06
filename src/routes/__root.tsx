@@ -9,6 +9,7 @@ import appCss from "../styles.css?url";
 import { buildHead, langFromLocation, pageUrl, SITE } from "@/lib/seo";
 import { pdfPairFromPath } from "@/lib/pdf-pairs";
 import { findProgrammingLocale, programmingLocalePath, programmingFromPath } from "@/lib/programming-locales";
+import { isCodeSampleSlug } from "@/lib/code-samples";
 import { LANGS, type Lang } from "@/lib/i18n";
 import { faqFromPath, faqPath, faqTopicFromPath, faqTopicPath } from "@/lib/faq";
 
@@ -92,10 +93,10 @@ function SeoLinks() {
       </>
     );
   }
-  if (programming && (programming.lang !== "az" || findProgrammingLocale("en", programming.slug))) {
+  if (programming && (isCodeSampleSlug(programming.slug) || programming.lang !== "az" || findProgrammingLocale("en", programming.slug))) {
     const canonical = programmingLocalePath(programming.lang, programming.slug);
     const alternates = (["az", "en", "tr", "ar", "ru"] as const).filter(
-      (code) => code === "az" || findProgrammingLocale(code, programming.slug),
+      (code) => code === "az" || isCodeSampleSlug(programming.slug) || findProgrammingLocale(code, programming.slug),
     );
     return (
       <>

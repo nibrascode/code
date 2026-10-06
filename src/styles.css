@@ -4196,6 +4196,10 @@ body.is-home .noise {
   list-style: none;
 }
 
+.lib-list .is-section {
+  margin-top: 22px;
+}
+
 .lib-list a {
   display: flex;
   align-items: center;

@@ -3,6 +3,7 @@ import { isSplitPage, localeHref, stripLocalePrefix } from "@/lib/locale-path";
 import { faqAnswerText, faqFromPath, faqPath, faqTopicFromPath, faqTopicPath } from "@/lib/faq";
 import { pdfPairFromPath } from "@/lib/pdf-pairs";
 import { findProgramming, PROGRAMMING } from "@/lib/programming";
+import { CODE_SAMPLE_SEO, isCodeSampleChild, isCodeSampleSlug } from "@/lib/code-samples";
 import { findProgrammingLocale, programmingFromPath, programmingLocalePath } from "@/lib/programming-locales";
 import { RESURSLAR } from "@/lib/resurslar";
 import { findResourceTopic, resourceArticleFromPath } from "@/lib/resource-topics";
@@ -596,7 +597,10 @@ function pageCopy(pathname: string, lang: Lang) {
   const located = programmingFromPath(path);
   if (located) {
     const article = findProgramming(located.slug);
-    if (article) return article.seo[located.lang === "az" ? lang : located.lang] ?? article.seo.en;
+    const articleLang = located.lang === "az" ? lang : located.lang;
+    if (article) return article.seo[articleLang] ?? article.seo.en;
+    const sample = CODE_SAMPLE_SEO[located.slug];
+    if (sample) return sample[articleLang] ?? sample.en;
   }
   const resourceArticle = resourceArticleFromPath(path);
   if (resourceArticle) {
@@ -660,7 +664,7 @@ export function canonicalUrl(pathname: string, lang: Lang) {
   const located = programmingFromPath(path);
   if (located) {
     const articleLang = located.lang === "az" ? lang : located.lang;
-    if (articleLang === "az" || findProgrammingLocale(articleLang, located.slug)) {
+    if (articleLang === "az" || isCodeSampleSlug(located.slug) || findProgrammingLocale(articleLang, located.slug)) {
       return `${SITE}${programmingLocalePath(articleLang, located.slug)}`;
     }
   }
@@ -690,6 +694,8 @@ export function buildHead(pathname: string, lang: Lang) {
     };
   }
   const copy = pageCopy(path, pageLang);
+  const samplePath = programmingFromPath(raw);
+  const hideSample = Boolean(samplePath && isCodeSampleChild(samplePath.slug));
   const url = canonicalUrl(path, pageLang);
   const image = path.startsWith("/apps/")
     ? `${SITE}/apps/${path.split("/").pop()}.jpg`
@@ -700,7 +706,7 @@ export function buildHead(pathname: string, lang: Lang) {
       { title: copy.title },
       { name: "description", content: copy.description },
       ...(copy.keywords ? [{ name: "keywords", content: copy.keywords }] : []),
-      { name: "robots", content: "index, follow" },
+      { name: "robots", content: hideSample ? "noindex, follow" : "index, follow" },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "Nibras Code" },
       { property: "og:title", content: copy.title },

@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { ChevronDown } from "lucide-react";
 import { LIBRARY, type LibrarySection } from "@/lib/library";
+import { CODE_SAMPLE_HUB } from "@/lib/code-samples";
+import { programmingLocalePath } from "@/lib/programming-locales";
 import { useI18n } from "@/lib/i18n-context";
 import { cn } from "@/lib/utils";
 
@@ -65,6 +67,9 @@ export function NavMenu({ section }: { section: LibrarySection }) {
               </Link>
             ),
           )}
+          {section === "programming" ? (
+            <a href={programmingLocalePath(lang, CODE_SAMPLE_HUB)}>{t("code_samples")}</a>
+          ) : null}
         </div>
       ) : null}
     </div>
