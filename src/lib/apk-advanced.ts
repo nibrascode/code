@@ -1,5 +1,6 @@
 import type { Lang } from "@/lib/i18n";
 import type { ProgrammingSection } from "@/lib/programming";
+import { storeSections } from "@/lib/apk-stores";
 
 const FOLDERS = `Qeyd/
   settings.gradle
@@ -620,7 +621,7 @@ export function apkAdvanced(lang: Lang): ProgrammingSection[] {
       },
     ],
   };
-  return [...all[lang], moneySection(lang)];
+  return [...all[lang], moneySection(lang), ...storeSections(lang)];
 }
 
 function moneySection(lang: Lang): ProgrammingSection {
