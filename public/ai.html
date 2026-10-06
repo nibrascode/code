@@ -535,23 +535,20 @@
     .ddel.sure { color: #ffb3bf; font-size: 12px; font-weight: 700; }
     .dempty { margin: 18px 4px; color: var(--muted); font-size: 13px; text-align: center; }
     .dnote { margin: 0; text-align: center; color: #8fd9cd; font-size: 12px; font-weight: 600; }
-    .about {
-      position: fixed; top: 0; right: 0; bottom: 0; z-index: 21;
-      width: min(440px, 92vw);
-      overflow: auto;
-      padding: calc(14px + env(safe-area-inset-top)) 16px calc(18px + env(safe-area-inset-bottom));
-      background: linear-gradient(180deg, #08112a, #050918);
-      border-left: 1px solid rgba(130, 170, 255, .28);
-      box-shadow: -12px 0 40px rgba(0, 0, 0, .5);
-      transform: translateX(102%); visibility: hidden;
-      transition: transform .22s ease, visibility .22s;
+    .dtools { display: flex; gap: 8px; }
+    .dtools .newchat.on { border-color: #8fb4ff; color: #e6efff; }
+    .langs { display: flex; gap: 6px; }
+    .langs button {
+      flex: 1; min-height: 32px; border-radius: 9px; cursor: pointer; padding: 0;
+      border: 1px solid rgba(130, 170, 255, .28);
+      background: transparent; color: #c9d4ee; font-size: 12px; font-weight: 800;
     }
-    .about.on { transform: none; visibility: visible; }
-    .about h2 { margin: 16px 0 6px; font-size: 15px; letter-spacing: -0.02em; }
-    .about p { margin: 0 0 8px; color: #d5dced; font-size: 13.5px; line-height: 1.55; }
-    .about .leadline { margin-top: 4px; color: #f4f7ff; }
-    html[dir="rtl"] .about { right: auto; left: 0; transform: translateX(-102%); border-left: 0; border-right: 1px solid rgba(130, 170, 255, .28); }
-    html[dir="rtl"] .about.on { transform: none; }
+    .langs button.on { border-color: #5eead4; color: #b8fbef; background: rgba(45, 212, 191, .12); }
+    .aboutin { flex: 1; min-height: 0; overflow: auto; }
+    .aboutin[hidden] { display: none; }
+    .aboutin h2 { margin: 14px 0 6px; font-size: 15px; letter-spacing: -0.02em; }
+    .aboutin p { margin: 0 0 8px; color: #d5dced; font-size: 13.5px; line-height: 1.55; }
+    .aboutin .leadline { color: #f4f7ff; }
     @media (max-width: 380px) {
       .brand small { display: none; }
       .top { padding-left: 12px; padding-right: 12px; }
@@ -598,7 +595,6 @@
         </a>
       </div>
       <div class="meta">
-        <button class="home" id="aboutbtn" type="button">Haqqında</button>
         <button class="crown" id="prem" type="button" aria-label="Premium bağlıdır">
           <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M3 17h18l-1.6-8.2-4.2 3.4L12 5 8.8 12.2 4.6 8.8 3 17z" fill="url(#g)" stroke="#f6d789" stroke-width="1"/>
@@ -620,7 +616,7 @@
           <img class="logo" src="/nibras-ai.png" alt="Nibras AI" />
         </div>
         <h1>Nibras <span>AI</span></h1>
-        <p class="kicker">SƏNİN AI KÖMƏKÇİN</p>
+        <p class="kicker" id="kicker">SƏNİN AI KÖMƏKÇİN</p>
       </div>
     </div>
 
@@ -644,50 +640,56 @@
       <div class="acts">
         <button class="act" type="button" data-mode="ask">
           <svg viewBox="0 0 24 24" fill="none"><path d="M7 17.5 4.5 20v-4A7.5 7.5 0 1 1 12 19.5H8" stroke="#7ecbff" stroke-width="1.7" stroke-linejoin="round"/><circle cx="9" cy="11" r="1" fill="#7ecbff"/><circle cx="12" cy="11" r="1" fill="#7ecbff"/><circle cx="15" cy="11" r="1" fill="#7ecbff"/></svg>
-          <b>Sual ver</b>
+          <b data-ui="ask">Sual ver</b>
         </button>
         <button class="act" type="button" data-mode="create">
           <svg viewBox="0 0 24 24" fill="none"><path d="M9 18h6M10 21h4" stroke="#f4f7ff" stroke-width="1.7" stroke-linecap="round"/><path d="M12 3a6.5 6.5 0 0 0-3.2 12.1c.5.4.8 1 .8 1.6V17h5v-.3c0-.6.3-1.2.8-1.6A6.5 6.5 0 0 0 12 3z" stroke="#f4f7ff" stroke-width="1.7"/></svg>
-          <b>Fikir ver</b>
+          <b data-ui="create">Fikir ver</b>
         </button>
         <button class="act" type="button" data-mode="code">
           <svg viewBox="0 0 24 24" fill="none"><path d="m8 8-4 4 4 4M16 8l4 4-4 4" stroke="#7ee7ff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <b>Kod yaz</b>
+          <b data-ui="code">Kod yaz</b>
         </button>
         <button class="act" type="button" data-mode="image">
           <svg viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="14" rx="2" stroke="#d9a6ff" stroke-width="1.7"/><circle cx="9" cy="10" r="1.4" fill="#d9a6ff"/><path d="m8 16 3.2-3.2a1 1 0 0 1 1.4 0L16 16" stroke="#d9a6ff" stroke-width="1.7" stroke-linejoin="round"/></svg>
-          <b>Şəkil düzəlt</b>
+          <b data-ui="image">Şəkil düzəlt</b>
         </button>
       </div>
     </div>
   </div>
   <div class="scrim" id="scrim"></div>
   <aside class="drawer" id="drawer" aria-label="Söhbətlər" aria-hidden="true">
-    <div class="dh"><b>Söhbətlər</b><button class="dx" id="dclose" type="button" aria-label="Bağla">&times;</button></div>
-    <button class="newchat" id="newchat" type="button">+ Yeni söhbət</button>
+    <div class="dh"><b id="dtitle">Söhbətlər</b><button class="dx" id="dclose" type="button" aria-label="Bağla">&times;</button></div>
+    <div class="dtools">
+      <button class="newchat" id="newchat" type="button">+ Yeni söhbət</button>
+      <button class="newchat" id="aboutbtn" type="button">Haqqında</button>
+    </div>
+    <div class="langs" id="langs">
+      <button type="button" data-lang="az">AZ</button>
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="tr">TR</button>
+      <button type="button" data-lang="ar">AR</button>
+      <button type="button" data-lang="ru">RU</button>
+    </div>
     <div class="dlist" id="dlist"></div>
-    <p class="dnote">Söhbət bu brauzerdə 24 saat qalır</p>
-  </aside>
-  <aside class="about" id="about" aria-label="Nibras AI haqqında" aria-hidden="true">
-    <div class="dh"><b>Nibras AI</b><button class="dx" id="aboutclose" type="button" aria-label="Bağla">&times;</button></div>
-    <p class="leadline">Nibras AI Nibras Code-un ayrıca köməkçisidir. Tətbiq siyahısından ayrıdır: burada sual verilir, fikir alınır, kod yazılır və şəkil hazırlanır. Layihə Mahir Əliyevin müstəqil işidir.</p>
-    <h2>Limit</h2>
-    <p>Modelə gedən sual gündə 40-dır. Sayğac yalnız model həqiqətən çağırılanda artır. Quran ayəsi, təfsir, hədis, lüğət və saytda hazır duran cavab bu 40-a düşmür.</p>
-    <p>Limit dolanda model sabaha qədər dayanır. Hazır cavablar isə həmin gün də gəlir. Bir mesaj 800 simvoldan uzun olsa, server artığını kəsir.</p>
-    <p>Şəkil PNG, JPG və ya WEBP ola bilər. Göndərilməzdən əvvəl ən uzun tərəfi 1024 pikselə endirilir.</p>
-    <h2>Model</h2>
-    <p>Bir modelin adı yoxdur. Hazır mənbə varsa model çağırılmır: ayə, təfsir, hədis, lüğət və saytın öz cavabı buradan gəlir.</p>
-    <p>Qalan sual serverdə növbə ilə xarici modellərə gedir. Kod, hesab və adi söhbət eyni sıranı işlətmir. Ona görə cavab hər dəfə eyni yerdən gəlmir.</p>
-    <h2>Məxfilik</h2>
-    <p>Söhbət bu brauzerdə 24 saat qalır, sonra silinir. Hesab açılmır. Bu brauzer üçün təsadüfi nömrə də burada saxlanır.</p>
-    <p>Model lazım olanda mesaj və son söhbət serverə, oradan seçilən modelə gedir. Hazır cavabda mesajın mətni saxlanmır. Sayğac yalnız hadisənin növünü göndərir, yazdığın cümləni yox. Brauzerdə izləmə bağlıdırsa sayğac getmir.</p>
-    <p>Server söhbəti qəbul edirsə, eyni mətn həmin cihaz nömrəsi ilə orada da saxlanmağa çalışılır. 24 saatdan sonra siyahıdan düşür.</p>
+    <div class="aboutin" id="aboutin" hidden></div>
+    <p class="dnote" id="dnote">Söhbət bu brauzerdə 24 saat qalır</p>
   </aside>
   <div class="toast" id="toast" role="status"></div>
 
   <script>
     const LIMIT = 40;
     const KEY = "nibras_ai_v2";
+    const LANG_KEY = "nibras_ai_lang";
+    const UI = {
+      az: { chats: "Söhbətlər", close: "Bağla", newChat: "+ Yeni söhbət", about: "Haqqında", note: "Söhbət bu brauzerdə 24 saat qalır", empty: "Hələ söhbət yoxdur", chat: "Söhbət", del: "Söhbəti sil", sure: "Sil?", deleted: "Söhbət silindi", missing: "Söhbət tapılmadı", noopen: "Söhbət açılmadı", wait: "Cavab gözlənilir", now: "indi", min: " dəq əvvəl", hour: " saat əvvəl", kicker: "SƏNİN AI KÖMƏKÇİN", ask: "Sual ver", create: "Fikir ver", code: "Kod yaz", image: "Şəkil düzəlt", ph: "Nə ilə kömək edim?", codeL: "Kod rejimi — nə yazım?", codeP: "Məsələn: Python-da iki ədədi toplayan funksiya", imgL: "Şəkil hazırla — nə çəkim?", imgE: "Şəkil düzəlt — nə dəyişsin?", imgP: "Məsələn: qaranlıq masada mavi N loqosu", imgEp: "Bu şəkildə nəyi dəyişim?", createL: "Fikir rejimi — mövzunu yaz", createP: "Məsələn: tətbiq üçün qısa ad fikri", askL: "Sual rejimi — sualını yaz", askP: "Sualını buraya yaz", limit: "Limit", model: "Model", privacy: "Məxfilik", lead: "Nibras AI Nibras Code-un ayrıca köməkçisidir. Tətbiq siyahısından ayrıdır: burada sual verilir, fikir alınır, kod yazılır və şəkil hazırlanır. Layihə Mahir Əliyevin müstəqil işidir.", lim1: "Modelə gedən sual gündə 40-dır. Sayğac yalnız model həqiqətən çağırılanda artır. Quran ayəsi, təfsir, hədis, lüğət və saytda hazır duran cavab bu 40-a düşmür.", lim2: "Limit dolanda model sabaha qədər dayanır. Hazır cavablar isə həmin gün də gəlir. Bir mesaj 800 simvoldan uzun olsa, server artığını kəsir.", lim3: "Şəkil PNG, JPG və ya WEBP ola bilər. Göndərilməzdən əvvəl ən uzun tərəfi 1024 pikselə endirilir.", mod1: "Bir modelin adı yoxdur. Hazır mənbə varsa model çağırılmır: ayə, təfsir, hədis, lüğət və saytın öz cavabı buradan gəlir.", mod2: "Qalan sual serverdə növbə ilə xarici modellərə gedir. Kod, hesab və adi söhbət eyni sıranı işlətmir. Ona görə cavab hər dəfə eyni yerdən gəlmir.", pri1: "Söhbət bu brauzerdə 24 saat qalır, sonra silinir. Hesab açılmır. Bu brauzer üçün təsadüfi nömrə də burada saxlanır.", pri2: "Model lazım olanda mesaj və son söhbət serverə, oradan seçilən modelə gedir. Hazır cavabda mesajın mətni saxlanmır. Sayğac yalnız hadisənin növünü göndərir, yazdığın cümləni yox. Brauzerdə izləmə bağlıdırsa sayğac getmir.", pri3: "Server söhbəti qəbul edirsə, eyni mətn həmin cihaz nömrəsi ilə orada da saxlanmağa çalışılır. 24 saatdan sonra siyahıdan düşür." },
+      en: { chats: "Chats", close: "Close", newChat: "+ New chat", about: "About", note: "A chat stays in this browser for 24 hours", empty: "No chat yet", chat: "Chat", del: "Delete chat", sure: "Delete?", deleted: "Chat deleted", missing: "Chat was not found", noopen: "Chat did not open", wait: "Waiting for a reply", now: "now", min: " min ago", hour: " h ago", kicker: "YOUR AI ASSISTANT", ask: "Ask", create: "Ideas", code: "Write code", image: "Edit image", ph: "How can I help?", codeL: "Code mode — what should I write?", codeP: "For example: a Python function that adds two numbers", imgL: "Make an image — what should I draw?", imgE: "Edit image — what should change?", imgP: "For example: a blue N logo on a dark desk", imgEp: "What should change in this image?", createL: "Idea mode — write the topic", createP: "For example: a short name for an app", askL: "Question mode — write your question", askP: "Write your question here", limit: "Limit", model: "Model", privacy: "Privacy", lead: "Nibras AI is Nibras Code’s separate assistant. It is apart from the app list: here you ask, get an idea, write code, and make an image. The project is Mahir Əliyev’s independent work.", lim1: "A question that reaches a model is limited to 40 a day. The counter grows only when a model is really called. A Quran verse, tafsir, hadith, a word meaning, and a ready answer on the site do not use those 40.", lim2: "When the limit is full, the model stops until tomorrow. Ready answers still come that day. If one message is longer than 800 characters, the server cuts the rest.", lim3: "An image can be PNG, JPG, or WEBP. Before it is sent, the long side is reduced to 1024 pixels.", mod1: "There is no single model name. If a ready source exists, no model is called: a verse, tafsir, hadith, a word meaning, and the site’s own answer come from there.", mod2: "The remaining question goes to outside models in turn. Code, a calculation, and an ordinary chat do not use the same order. That is why an answer does not come from the same place every time.", pri1: "A chat stays in this browser for 24 hours, then it is deleted. No account is opened. A random number for this browser is also kept here.", pri2: "When a model is needed, the message and the recent chat go to the server, then to the chosen model. A ready answer does not keep the message text. The counter sends only the kind of event, not the sentence you wrote. If tracking is off in the browser, the counter does not go.", pri3: "If the server accepts the chat, the same text is also kept there with that device number. After 24 hours it drops off the list." },
+      tr: { chats: "Sohbetler", close: "Kapat", newChat: "+ Yeni sohbet", about: "Hakkında", note: "Sohbet bu tarayıcıda 24 saat kalır", empty: "Henüz sohbet yok", chat: "Sohbet", del: "Sohbeti sil", sure: "Sil?", deleted: "Sohbet silindi", missing: "Sohbet bulunamadı", noopen: "Sohbet açılmadı", wait: "Cevap bekleniyor", now: "şimdi", min: " dk önce", hour: " saat önce", kicker: "SENİN YAPAY ZEKA YARDIMCIN", ask: "Soru sor", create: "Fikir ver", code: "Kod yaz", image: "Görseli düzelt", ph: "Nasıl yardım edeyim?", codeL: "Kod modu — ne yazayım?", codeP: "Örneğin: Python’da iki sayıyı toplayan fonksiyon", imgL: "Görsel hazırla — ne çizeyim?", imgE: "Görseli düzelt — ne değişsin?", imgP: "Örneğin: koyu masada mavi N logosu", imgEp: "Bu görselde neyi değişeyim?", createL: "Fikir modu — konuyu yaz", createP: "Örneğin: uygulama için kısa ad", askL: "Soru modu — sorunu yaz", askP: "Sorunu buraya yaz", limit: "Limit", model: "Model", privacy: "Gizlilik", lead: "Nibras AI, Nibras Code’un ayrı yardımcısıdır. Uygulama listesinden ayrıdır: burada soru sorulur, fikir alınır, kod yazılır ve görsel hazırlanır. Proje, Mahir Əliyev’in bağımsız işidir.", lim1: "Modele giden soru günde 40’tır. Sayacı yalnız model gerçekten çağrılınca artar. Kuran ayeti, tefsir, hadis, sözlük ve sitede hazır duran cevap bu 40’a düşmez.", lim2: "Limit dolunca model yarına kadar durur. Hazır cevaplar o gün de gelir. Bir mesaj 800 karakterden uzunsa sunucu fazlasını keser.", lim3: "Görsel PNG, JPG veya WEBP olabilir. Gönderilmeden önce uzun kenarı 1024 piksele indirilir.", mod1: "Tek bir model adı yoktur. Hazır kaynak varsa model çağrılmaz: ayet, tefsir, hadis, sözlük ve sitenin kendi cevabı oradan gelir.", mod2: "Kalan soru sunucuda sırayla dış modellere gider. Kod, hesap ve olağan sohbet aynı sırayı kullanmaz. Bu yüzden cevap her sefer aynı yerden gelmez.", pri1: "Sohbet bu tarayıcıda 24 saat kalır, sonra silinir. Hesap açılmaz. Bu tarayıcı için rastgele numara da burada tutulur.", pri2: "Model gerekince mesaj ve son sohbet sunucuya, oradan seçilen modele gider. Hazır cevapta mesajın metni saklanmaz. Sayacı yalnız olayın türünü gönderir, yazdığın cümleyi değil. Tarayıcıda izleme kapalıysa sayacı gitmez.", pri3: "Sunucu sohbeti kabul ederse aynı metin o cihaz numarasıyla orada da tutulmaya çalışılır. 24 saatten sonra listeden düşer." },
+      ar: { chats: "المحادثات", close: "إغلاق", newChat: "+ محادثة جديدة", about: "حول", note: "تبقى المحادثة في هذا المتصفح 24 ساعة", empty: "لا محادثة بعد", chat: "محادثة", del: "احذف المحادثة", sure: "حذف؟", deleted: "حُذفت المحادثة", missing: "لم تُوجد المحادثة", noopen: "لم تُفتح المحادثة", wait: "يُنتظر الجواب", now: "الآن", min: " د قبل", hour: " س قبل", kicker: "مساعدك", ask: "اسأل", create: "فكرة", code: "اكتب كوداً", image: "عدّل صورة", ph: "كيف أساعد؟", codeL: "وضع الكود — ماذا أكتب؟", codeP: "مثلاً: دالة بايثون تجمع عددين", imgL: "جهّز صورة — ماذا أرسم؟", imgE: "عدّل الصورة — ماذا يتغير؟", imgP: "مثلاً: شعار N أزرق على طاولة داكنة", imgEp: "ماذا أغيّر في هذه الصورة؟", createL: "وضع الفكرة — اكتب الموضوع", createP: "مثلاً: اسم قصير لتطبيق", askL: "وضع السؤال — اكتب سؤالك", askP: "اكتب سؤالك هنا", limit: "الحد", model: "النموذج", privacy: "الخصوصية", lead: "Nibras AI مساعد منفصل لـ Nibras Code. هو بعيد عن قائمة التطبيقات: هنا يُطرح سؤال وتُؤخذ فكرة ويُكتب كود وتُجهَّز صورة. المشروع عمل مستقل لماهِر علييف.", lim1: "السؤال الذي يصل إلى نموذج محدود بأربعين في اليوم. العداد يزيد فقط حين يُستدعى النموذج فعلاً. آية القرآن والتفسير والحديث ومعنى الكلمة والجواب الجاهز في الموقع لا تدخل في هذه الأربعين.", lim2: "حين يمتلئ الحد يتوقف النموذج إلى الغد. الأجوبة الجاهزة تبقى في ذلك اليوم. إذا زادت رسالة عن 800 حرف يقطع الخادم الباقي.", lim3: "الصورة تكون PNG أو JPG أو WEBP. قبل الإرسال يُقصَر أطول ضلع إلى 1024 بكسل.", mod1: "لا اسم واحد للنموذج. إذا وُجد مصدر جاهز لا يُستدعى نموذج: الآية والتفسير والحديث ومعنى الكلمة وجواب الموقع نفسه تأتي من هناك.", mod2: "السؤال الباقي يذهب بالدور إلى نماذج خارجية. الكود والحساب والمحادثة العادية لا تستخدم الترتيب نفسه. لذلك لا يأتي الجواب من المكان نفسه كل مرة.", pri1: "تبقى المحادثة في هذا المتصفح 24 ساعة ثم تُحذف. لا يُفتح حساب. رقم عشوائي لهذا المتصفح يُحفظ هنا أيضاً.", pri2: "حين يُحتاج نموذج تذهب الرسالة وآخر المحادثة إلى الخادم ثم إلى النموذج المختار. الجواب الجاهز لا يحفظ نص الرسالة. العداد يرسل نوع الحدث فقط لا الجملة التي كتبتها. إذا كان التتبع مغلقاً في المتصفح لا يذهب العداد.", pri3: "إذا قبل الخادم المحادثة يُحاول حفظ النص نفسه هناك برقم ذلك الجهاز. بعد 24 ساعة يسقط من القائمة." },
+      ru: { chats: "Чаты", close: "Закрыть", newChat: "+ Новый чат", about: "О сервисе", note: "Разговор остаётся в этом браузере 24 часа", empty: "Чатов пока нет", chat: "Чат", del: "Удалить чат", sure: "Удалить?", deleted: "Чат удалён", missing: "Чат не найден", noopen: "Чат не открылся", wait: "Ждём ответ", now: "сейчас", min: " мин назад", hour: " ч назад", kicker: "ТВОЙ ПОМОЩНИК", ask: "Спросить", create: "Идея", code: "Написать код", image: "Править картинку", ph: "Чем помочь?", codeL: "Режим кода — что написать?", codeP: "Например: функция Python, которая складывает два числа", imgL: "Сделать картинку — что нарисовать?", imgE: "Править картинку — что изменить?", imgP: "Например: синий знак N на тёмном столе", imgEp: "Что изменить на этой картинке?", createL: "Режим идеи — напиши тему", createP: "Например: короткое имя для приложения", askL: "Режим вопроса — напиши вопрос", askP: "Напиши вопрос сюда", limit: "Лимит", model: "Модель", privacy: "Конфиденциальность", lead: "Nibras AI — отдельный помощник Nibras Code. Он отдельно от списка приложений: здесь задают вопрос, берут идею, пишут код и делают картинку. Проект — самостоятельная работа Махира Алиева.", lim1: "Вопрос, который доходит до модели, ограничен сорока в день. Счётчик растёт только когда модель действительно вызвана. Аят Корана, тафсир, хадис, значение слова и готовый ответ сайта в эти 40 не входят.", lim2: "Когда лимит полон, модель останавливается до завтра. Готовые ответы в тот день ещё приходят. Если сообщение длиннее 800 знаков, сервер отрезает остальное.", lim3: "Картинка может быть PNG, JPG или WEBP. Перед отправкой длинная сторона уменьшается до 1024 пикселей.", mod1: "Одного имени модели нет. Если есть готовый источник, модель не вызывается: аят, тафсир, хадис, значение слова и собственный ответ сайта приходят оттуда.", mod2: "Остальной вопрос идёт по очереди к внешним моделям. Код, счёт и обычный разговор не используют один и тот же порядок. Поэтому ответ не каждый раз приходит из одного места.", pri1: "Разговор остаётся в этом браузере 24 часа, потом удаляется. Счёт не открывается. Случайный номер этого браузера тоже хранится здесь.", pri2: "Когда нужна модель, сообщение и недавний разговор идут на сервер, а оттуда к выбранной модели. Готовый ответ не хранит текст сообщения. Счётчик шлёт только вид события, не написанное предложение. Если в браузере слежение выключено, счётчик не уходит.", pri3: "Если сервер принимает разговор, тот же текст пытаются сохранить и там с номером этого устройства. Через 24 часа он выпадает из списка." }
+    };
+    let uiLangCode = "az";
+    function t(key) { return (UI[uiLangCode] || UI.az)[key]; }
     const msgs = document.getElementById("msgs");
     const hello = document.getElementById("hello");
     const form = document.getElementById("form");
@@ -717,31 +719,31 @@
     // Limit ekranda göstərilmir. Sayğac yalnız xarici AI həqiqətən çağırılanda artır (server usedAI:true qaytarır).
     // Limit dolubsa giriş bağlanmır: server hazır cavabları (AI-siz) yenə verir, AI tələb edən suala isə sadə mesaj qaytarır.
     function paint() {
-      if (mode === "chat") inp.placeholder = "Nə ilə kömək edim?";
+      if (mode === "chat") inp.placeholder = t("ph");
     }
     function setMode(next) {
       mode = next;
       const label = document.getElementById("mode");
       if (next === "code") {
         label.hidden = false;
-        label.textContent = "Kod rejimi — nə yazım?";
-        inp.placeholder = "Məsələn: Python-da iki ədədi toplayan funksiya";
+        label.textContent = t("codeL");
+        inp.placeholder = t("codeP");
       } else if (next === "image") {
         label.hidden = false;
-        label.textContent = pendingImage ? "Şəkil düzəlt — nə dəyişsin?" : "Şəkil hazırla — nə çəkim?";
-        inp.placeholder = pendingImage ? "Bu şəkildə nəyi dəyişim?" : "Məsələn: qaranlıq masada mavi N loqosu";
+        label.textContent = pendingImage ? t("imgE") : t("imgL");
+        inp.placeholder = pendingImage ? t("imgEp") : t("imgP");
       } else if (next === "create") {
         label.hidden = false;
-        label.textContent = "Fikir rejimi — mövzunu yaz";
-        inp.placeholder = "Məsələn: tətbiq üçün qısa ad fikri";
+        label.textContent = t("createL");
+        inp.placeholder = t("createP");
       } else if (next === "ask") {
         label.hidden = false;
-        label.textContent = "Sual rejimi — sualını yaz";
-        inp.placeholder = "Sualını buraya yaz";
+        label.textContent = t("askL");
+        inp.placeholder = t("askP");
       } else {
         label.hidden = true;
         label.textContent = "";
-        inp.placeholder = "Nə ilə kömək edim?";
+        inp.placeholder = t("ph");
       }
       if (!restoring) {
         if (curItem) curItem.mode = next;
@@ -1611,11 +1613,11 @@
     const scrim = document.getElementById("scrim");
     const dlist = document.getElementById("dlist");
     const menuBtn = document.getElementById("menu");
-    function ago(t) {
-      const m = Math.max(0, Math.round((Date.now() - t) / 60000));
-      if (m < 1) return "indi";
-      if (m < 60) return m + " dəq əvvəl";
-      return Math.round(m / 60) + " saat əvvəl";
+    function ago(t0) {
+      const m = Math.max(0, Math.round((Date.now() - t0) / 60000));
+      if (m < 1) return t("now");
+      if (m < 60) return m + t("min");
+      return Math.round(m / 60) + t("hour");
     }
     function listEntries() {
       const lim = Date.now() - KEEP_MS;
@@ -1633,7 +1635,7 @@
       if (!rows.length) {
         const p = document.createElement("p");
         p.className = "dempty";
-        p.textContent = "Hələ söhbət yoxdur";
+        p.textContent = t("empty");
         dlist.appendChild(p);
         return;
       }
@@ -1644,23 +1646,23 @@
         const open = document.createElement("button");
         open.type = "button";
         open.className = "dopen";
-        const t = document.createElement("span");
-        t.textContent = r.title || "Söhbət";
+        const title = document.createElement("span");
+        title.textContent = r.title || t("chat");
         const sm = document.createElement("small");
         sm.textContent = ago(r.t);
-        open.appendChild(t);
+        open.appendChild(title);
         open.appendChild(sm);
         open.addEventListener("click", function () { openChat(r.id); });
         const del = document.createElement("button");
         del.type = "button";
         del.className = "ddel";
-        del.setAttribute("aria-label", "Söhbəti sil");
+        del.setAttribute("aria-label", t("del"));
         del.textContent = "×";
         let armed = 0;
         del.addEventListener("click", function () {
           if (!del.classList.contains("sure")) {
             del.classList.add("sure");
-            del.textContent = "Sil?";
+            del.textContent = t("sure");
             clearTimeout(armed);
             armed = setTimeout(function () { del.classList.remove("sure"); del.textContent = "×"; }, 3000);
             return;
@@ -1682,30 +1684,59 @@
         }
       }).catch(function () {});
     }
-    // Menyu düyməsinin adı (ekran oxuyucu üçün): səhifə dili / brauzer dili — az, tr, en, ru, ar
-    const MENU_LABELS = { az: "Söhbətlər", tr: "Sohbetler", en: "Chats", ru: "Чаты", ar: "المحادثات" };
-    const CLOSE_LABELS = { az: "Bağla", tr: "Kapat", en: "Close", ru: "Закрыть", ar: "إغلاق" };
-    function uiLang() {
-      const cand = [document.documentElement.getAttribute("lang"), navigator.language, (navigator.languages || [])[0]];
+    function guessLang() {
+      const cand = [localStorage.getItem(LANG_KEY), navigator.language, (navigator.languages || [])[0]];
       for (let i = 0; i < cand.length; i++) {
         const c = String(cand[i] || "").toLowerCase().slice(0, 2);
-        if (MENU_LABELS[c]) return c;
+        if (UI[c]) return c;
       }
       return "az";
     }
-    (function () {
-      const l = uiLang();
-      menuBtn.setAttribute("aria-label", MENU_LABELS[l]);
-      menuBtn.setAttribute("title", MENU_LABELS[l]);
-      drawer.setAttribute("aria-label", MENU_LABELS[l]);
-      document.getElementById("dclose").setAttribute("aria-label", CLOSE_LABELS[l]);
-    })();
+    function fillAbout() {
+      const box = document.getElementById("aboutin");
+      box.innerHTML = "";
+      function p(cls, text) {
+        const el = document.createElement(cls === "h2" ? "h2" : "p");
+        if (cls === "lead") el.className = "leadline";
+        el.textContent = text;
+        box.appendChild(el);
+      }
+      p("lead", t("lead"));
+      p("h2", t("limit"));
+      p("p", t("lim1"));
+      p("p", t("lim2"));
+      p("p", t("lim3"));
+      p("h2", t("model"));
+      p("p", t("mod1"));
+      p("p", t("mod2"));
+      p("h2", t("privacy"));
+      p("p", t("pri1"));
+      p("p", t("pri2"));
+      p("p", t("pri3"));
+    }
+    function applyLang(code) {
+      if (!UI[code]) code = "az";
+      uiLangCode = code;
+      try { localStorage.setItem(LANG_KEY, code); } catch (e) {}
+      document.documentElement.lang = code;
+      document.documentElement.dir = code === "ar" ? "rtl" : "ltr";
+      document.getElementById("dtitle").textContent = t("chats");
+      document.getElementById("newchat").textContent = t("newChat");
+      document.getElementById("aboutbtn").textContent = t("about");
+      document.getElementById("dnote").textContent = t("note");
+      document.getElementById("kicker").textContent = t("kicker");
+      document.querySelectorAll("[data-ui]").forEach(function (el) { el.textContent = t(el.getAttribute("data-ui")); });
+      document.querySelectorAll("#langs button").forEach(function (el) { el.classList.toggle("on", el.getAttribute("data-lang") === code); });
+      menuBtn.setAttribute("aria-label", t("chats"));
+      menuBtn.setAttribute("title", t("chats"));
+      drawer.setAttribute("aria-label", t("chats"));
+      document.getElementById("dclose").setAttribute("aria-label", t("close"));
+      fillAbout();
+      setMode(mode);
+      if (typeof renderList === "function") renderList();
+    }
     function setDrawer(on) {
       const was = drawer.classList.contains("on");
-      if (on) {
-        about.classList.remove("on");
-        about.setAttribute("aria-hidden", "true");
-      }
       drawer.classList.toggle("on", on);
       scrim.classList.toggle("on", on);
       drawer.setAttribute("aria-hidden", on ? "false" : "true");
@@ -1730,7 +1761,7 @@
       inp.value = "";
     }
     function newChat() {
-      if (busy) { note("Cavab gözlənilir"); return; }
+      if (busy) { note(t("wait")); return; }
       flushNow();
       curItem = null;
       store.cur = "";
@@ -1741,7 +1772,7 @@
       setDrawer(false);
     }
     async function openChat(id) {
-      if (busy) { note("Cavab gözlənilir"); return; }
+      if (busy) { note(t("wait")); return; }
       flushNow();
       let it = store.items[id];
       if (!it) {
@@ -1749,10 +1780,10 @@
           const r = await fetch("/api/chats?id=" + encodeURIComponent(id), { headers: apiHeaders(false) });
           const d = await r.json();
           const c = d && d.ok && d.chat;
-          if (!c || !Array.isArray(c.messages)) { note("Söhbət tapılmadı"); return; }
-          it = { id: id, title: c.title || "Söhbət", mode: "chat", msgs: c.messages, t: Date.parse(c.updated_at) || Date.now() };
+          if (!c || !Array.isArray(c.messages)) { note(t("missing")); return; }
+          it = { id: id, title: c.title || t("chat"), mode: "chat", msgs: c.messages, t: Date.parse(c.updated_at) || Date.now() };
           store.items[id] = it;
-        } catch (e) { note("Söhbət açılmadı"); return; }
+        } catch (e) { note(t("noopen")); return; }
       }
       curItem = it;
       store.cur = id;
@@ -1765,7 +1796,7 @@
       setDrawer(false);
     }
     function deleteChat(id) {
-      if (busy && curItem && curItem.id === id) { note("Cavab gözlənilir"); return; }
+      if (busy && curItem && curItem.id === id) { note(t("wait")); return; }
       delete store.items[id];
       delete dirty[id];
       for (let i = remoteList.length - 1; i >= 0; i--) if (remoteList[i].id === id) remoteList.splice(i, 1);
@@ -1780,29 +1811,33 @@
       if (serverOk()) {
         try { fetch("/api/chats?id=" + encodeURIComponent(id), { method: "DELETE", headers: apiHeaders(false) }).then(noteReply).catch(function () {}); } catch (e) {}
       }
-      note("Söhbət silindi");
+      note(t("deleted"));
     }
     menuBtn.addEventListener("click", function () { setDrawer(!drawer.classList.contains("on")); });
     document.getElementById("dclose").addEventListener("click", function () { setDrawer(false); });
-    const about = document.getElementById("about");
     const aboutBtn = document.getElementById("aboutbtn");
+    const aboutIn = document.getElementById("aboutin");
+    let aboutOn = false;
     function setAbout(on) {
-      if (on) setDrawer(false);
-      about.classList.toggle("on", on);
-      about.setAttribute("aria-hidden", on ? "false" : "true");
-      scrim.classList.toggle("on", on || drawer.classList.contains("on"));
-      if (on) { try { document.getElementById("aboutclose").focus(); } catch (e) {} }
-      else if (about.contains(document.activeElement)) { try { aboutBtn.focus(); } catch (e) {} }
+      aboutOn = on;
+      aboutIn.hidden = !on;
+      dlist.hidden = on;
+      aboutBtn.classList.toggle("on", on);
     }
-    aboutBtn.addEventListener("click", function () { setAbout(!about.classList.contains("on")); });
-    document.getElementById("aboutclose").addEventListener("click", function () { setAbout(false); });
-    scrim.addEventListener("click", function () { setDrawer(false); setAbout(false); });
+    aboutBtn.addEventListener("click", function () { setAbout(!aboutOn); });
+    document.getElementById("langs").addEventListener("click", function (e) {
+      const btn = e.target.closest("button");
+      if (!btn) return;
+      applyLang(btn.getAttribute("data-lang"));
+    });
+    scrim.addEventListener("click", function () { setDrawer(false); });
     document.getElementById("newchat").addEventListener("click", newChat);
-    document.addEventListener("keydown", function (e) { if (e.key === "Escape") { setDrawer(false); setAbout(false); } });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") setDrawer(false); });
     document.addEventListener("visibilitychange", function () { if (document.visibilityState === "hidden") flushNow(); });
     window.addEventListener("pagehide", flushNow);
     window.nibrasChats = { open: openChat, newChat: newChat, remove: deleteChat, flush: flushNow };
     restoreCurrent();
+    applyLang(guessLang());
     paint();
   </script>
 </body>
