@@ -4285,6 +4285,107 @@ body.is-home .noise {
   white-space: nowrap;
 }
 
+.lib-search {
+  display: block;
+  width: 100%;
+  margin: 0 0 14px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgb(140 170 230 / 0.28);
+  background: rgb(8 12 24 / 0.72);
+  color: #f4f7ff;
+  font-size: 15px;
+}
+
+.lib-search:focus {
+  outline: none;
+  border-color: #5eead4;
+}
+
+.lib-empty {
+  margin: 0 0 12px;
+  color: rgb(180 190 214);
+}
+
+.prog-start,
+.prog-compare {
+  margin: 0 0 18px;
+}
+
+.prog-start h2,
+.prog-compare h2 {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+}
+
+.prog-start ol {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.prog-start a,
+.prog-compare details {
+  display: block;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgb(140 170 230 / 0.2);
+  background: rgb(16 22 40 / 0.65);
+}
+
+.prog-start b {
+  display: block;
+}
+
+.prog-start span,
+.prog-try span {
+  display: block;
+  margin-top: 4px;
+  color: rgb(186 198 220);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.prog-compare {
+  margin-top: 22px;
+}
+
+.prog-compare details + details {
+  margin-top: 8px;
+}
+
+.prog-compare summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.prog-compare p {
+  margin: 8px 0 0;
+}
+
+.prog-try {
+  margin: 0 0 16px;
+}
+
+.prog-try a {
+  display: inline-flex;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid rgb(94 234 212 / 0.5);
+  background: rgb(20 184 166 / 0.14);
+  color: #b8fbef;
+  font-weight: 700;
+}
+
+@media (max-width: 720px) {
+  .prog-start ol {
+    grid-template-columns: 1fr;
+  }
+}
+
 .lib-steps {
   display: grid;
   gap: 8px;

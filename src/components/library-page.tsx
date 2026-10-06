@@ -36,6 +36,167 @@ const GUIDE_INTRO: Record<string, Record<Lang, string>> = {
   },
 };
 
+const FIND_UI: Record<Lang, { search: string; empty: string; start: string; diff: string; tryNote: string }> = {
+  az: {
+    search: "Alət axtar",
+    empty: "Bu adla səhifə yoxdur.",
+    start: "Haradan başlayım",
+    diff: "Fərqi nədir",
+    tryNote: "Bu səhifəni oxuduqdan sonra kodu Nibras Dev-də yoxlaya bilərsən.",
+  },
+  en: {
+    search: "Search a tool",
+    empty: "No page with that name.",
+    start: "Where to start",
+    diff: "What is the difference",
+    tryNote: "After this page, you can try the code in Nibras Dev.",
+  },
+  tr: {
+    search: "Araç ara",
+    empty: "Bu adda sayfa yok.",
+    start: "Nereden başlamalı",
+    diff: "Farkı ne",
+    tryNote: "Bu sayfadan sonra kodu Nibras Dev içinde deneyebilirsin.",
+  },
+  ar: {
+    search: "ابحث عن أداة",
+    empty: "لا صفحة بهذا الاسم.",
+    start: "من أين تبدأ",
+    diff: "ما الفرق",
+    tryNote: "بعد هذه الصفحة يمكنك تجربة الكود في Nibras Dev.",
+  },
+  ru: {
+    search: "Найти инструмент",
+    empty: "Такой страницы нет.",
+    start: "С чего начать",
+    diff: "В чём разница",
+    tryNote: "После этой страницы код можно проверить в Nibras Dev.",
+  },
+};
+
+const START_STEPS: readonly { slug: "html-css" | "python" | "ai"; text: Record<Lang, { title: string; note: string }> }[] = [
+  {
+    slug: "html-css",
+    text: {
+      az: { title: "HTML/CSS", note: "Səhifənin üzü. Əvvəl bunu oxu." },
+      en: { title: "HTML/CSS", note: "The face of a page. Read this first." },
+      tr: { title: "HTML/CSS", note: "Sayfanın yüzü. Önce bunu oku." },
+      ar: { title: "HTML/CSS", note: "وجه الصفحة. اقرأ هذا أولاً." },
+      ru: { title: "HTML/CSS", note: "Лицо страницы. Сначала прочитай это." },
+    },
+  },
+  {
+    slug: "python",
+    text: {
+      az: { title: "Python", note: "İlk dil. Qısa proqram buradan başlayır." },
+      en: { title: "Python", note: "A first language. A short program starts here." },
+      tr: { title: "Python", note: "İlk dil. Kısa program buradan başlar." },
+      ar: { title: "Python", note: "اللغة الأولى. البرنامج القصير يبدأ من هنا." },
+      ru: { title: "Python", note: "Первый язык. Короткая программа начинается здесь." },
+    },
+  },
+  {
+    slug: "ai",
+    text: {
+      az: { title: "Nibras AI", note: "İlişəndə sual ver." },
+      en: { title: "Nibras AI", note: "Ask when you get stuck." },
+      tr: { title: "Nibras AI", note: "Takılınca soru sor." },
+      ar: { title: "Nibras AI", note: "اسأل حين تقف." },
+      ru: { title: "Nibras AI", note: "Спроси, когда застрянешь." },
+    },
+  },
+];
+
+const COMPARES: readonly { title: Record<Lang, string>; body: Record<Lang, readonly string[]> }[] = [
+  {
+    title: {
+      az: "pip və npm",
+      en: "pip and npm",
+      tr: "pip ve npm",
+      ar: "pip و npm",
+      ru: "pip и npm",
+    },
+    body: {
+      az: [
+        "Pip Python üçün paket gətirən alətdir. npm isə Node.js üçün paket gətirən alətdir. İkisi də hazır kodu layihəyə qoyur, amma eyni yerdə işləmir.",
+        "Python bir dildir. Onunla proqram yazılır. Pip həmin dilə hazır kitabxana quraşdırır. Məsələn hesab, şəkil və ya sayt üçün hazır kod gəlir.",
+        "Node.js JavaScript-i kompüterdə işlədən mühitdir. npm həmin mühitə hazır paketi gətirir. Pip-i Node layihəsində işlətmək olmur. npm-i də Python layihəsində işlətmək olmur.",
+        "Python quraşdırılanda pip çox vaxt onunla birlikdə gəlir. Node quraşdırılanda npm də gəlir. Alət dildən ayrıdır: dil kodu işlədir, alət paketi gətirir.",
+      ],
+      en: [
+        "pip brings a package for Python. npm brings a package for Node.js. Both put ready code into a project, but they do not work in the same place.",
+        "Python is a language. A program is written with it. pip installs a ready library for that language. A library for numbers, an image, or a site can come that way.",
+        "Node.js is the place that runs JavaScript on a computer. npm brings a ready package into that place. pip does not belong in a Node project. npm does not belong in a Python project.",
+        "When Python is installed, pip often comes with it. When Node is installed, npm comes too. The tool is separate from the language: the language runs the code, the tool brings the package.",
+      ],
+      tr: [
+        "pip Python için paket getiren araçtır. npm ise Node.js için paket getiren araçtır. İkisi de hazır kodu projeye koyar, ama aynı yerde çalışmaz.",
+        "Python bir dildir. Onunla program yazılır. pip o dile hazır kitaplık kurar. Hesap, görsel veya site için hazır kod gelebilir.",
+        "Node.js, JavaScript’i bilgisayarda çalıştıran yerdir. npm o yere hazır paketi getirir. pip bir Node projesinde kullanılmaz. npm de bir Python projesinde kullanılmaz.",
+        "Python kurulunca pip çoğu zaman onunla gelir. Node kurulunca npm de gelir. Araç dilden ayrıdır: dil kodu çalıştırır, araç paketi getirir.",
+      ],
+      ar: [
+        "pip يجلب حزمة لبايثون. npm يجلب حزمة لـ Node.js. كلاهما يضع كوداً جاهزاً في المشروع، لكنهما لا يعملان في المكان نفسه.",
+        "بايثون لغة. يُكتب بها البرنامج. pip يثبّت مكتبة جاهزة لتلك اللغة. قد تأتي مكتبة للحساب أو الصورة أو الموقع.",
+        "Node.js هو المكان الذي يشغّل جافاسكريبت على الحاسوب. npm يجلب الحزمة الجاهزة إلى ذلك المكان. pip لا يُستخدم في مشروع Node. وnpm لا يُستخدم في مشروع بايثون.",
+        "حين يُثبَّت بايثون يأتي pip معه غالباً. وحين يُثبَّت Node يأتي npm معه. الأداة منفصلة عن اللغة: اللغة تشغّل الكود، والأداة تجلب الحزمة.",
+      ],
+      ru: [
+        "pip приносит пакет для Python. npm приносит пакет для Node.js. Оба кладут готовый код в проект, но работают не в одном месте.",
+        "Python — это язык. На нём пишут программу. pip ставит готовую библиотеку для этого языка. Так может прийти код для счёта, картинки или сайта.",
+        "Node.js — это место, где JavaScript работает на компьютере. npm приносит туда готовый пакет. pip не ставят в проект Node. npm не ставят в проект Python.",
+        "Когда ставят Python, pip часто приходит с ним. Когда ставят Node, приходит и npm. Инструмент отдельно от языка: язык выполняет код, инструмент приносит пакет.",
+      ],
+    },
+  },
+  {
+    title: {
+      az: "Composer və PHP",
+      en: "Composer and PHP",
+      tr: "Composer ve PHP",
+      ar: "Composer و PHP",
+      ru: "Composer и PHP",
+    },
+    body: {
+      az: [
+        "PHP saytın server tərəfində işləyən dildir. Composer dil deyil. O, PHP kitabxanasını layihəyə yığan alətdir.",
+        "PHP kodu oxuyur və işlədir. Composer isə lazım olan hazır kodu internetdən endirib layihənin qovluğuna qoyur. Düyməni PHP işlədir. Composer yalnız paketi gətirir.",
+        "Composer olmasa da PHP işləyir. Kiçik bir səhifə üçün o lazım olmaya bilər. Böyük layihədə hər kitabxananı əl ilə yığmaq çətin olur. Composer bunu bir əmrlə edir.",
+        "Qısa desək: PHP dildir. Composer həmin dilin paket alətidir. npm Node üçündür, pip Python üçündür, Composer PHP üçündür.",
+      ],
+      en: [
+        "PHP is a language that runs on the server side of a site. Composer is not a language. It is the tool that brings a PHP library into a project.",
+        "PHP reads the code and runs it. Composer downloads the ready code you need and puts it in the project folder. PHP runs the button. Composer only brings the package.",
+        "PHP still runs without Composer. A small page may not need it. In a large project it is hard to collect every library by hand. Composer does that with one command.",
+        "In short: PHP is the language. Composer is the package tool for that language. npm is for Node, pip is for Python, and Composer is for PHP.",
+      ],
+      tr: [
+        "PHP, sitenin sunucu tarafında çalışan dildir. Composer dil değildir. PHP kitaplığını projeye getiren araçtır.",
+        "PHP kodu okur ve çalıştırır. Composer ise gereken hazır kodu indirip projenin klasörüne koyar. Düğmeyi PHP çalıştırır. Composer yalnız paketi getirir.",
+        "Composer olmasa da PHP çalışır. Küçük bir sayfa için gerekmez. Büyük projede her kitaplığı elle toplamak zordur. Composer bunu bir komutla yapar.",
+        "Kısaca: PHP dildir. Composer o dilin paket aracıdır. npm Node içindir, pip Python içindir, Composer PHP içindir.",
+      ],
+      ar: [
+        "PHP لغة تعمل في جهة الخادم من الموقع. Composer ليس لغة. هو الأداة التي تجمع مكتبة PHP في المشروع.",
+        "PHP يقرأ الكود ويشغّله. Composer ينزّل الكود الجاهز الذي تحتاجه ويضعه في مجلد المشروع. PHP يشغّل الزر. Composer يجلب الحزمة فقط.",
+        "PHP يعمل حتى من غير Composer. صفحة صغيرة قد لا تحتاجه. في مشروع كبير يصعب جمع كل مكتبة باليد. Composer يفعل ذلك بأمر واحد.",
+        "باختصار: PHP هو اللغة. Composer أداة الحزم لتلك اللغة. npm لـ Node، وpip لبايثون، وComposer لـ PHP.",
+      ],
+      ru: [
+        "PHP — язык, который работает на серверной стороне сайта. Composer — не язык. Это инструмент, который приносит библиотеку PHP в проект.",
+        "PHP читает код и выполняет его. Composer скачивает нужный готовый код и кладёт его в папку проекта. Кнопку выполняет PHP. Composer только приносит пакет.",
+        "PHP работает и без Composer. Маленькой странице он может не понадобиться. В большом проекте трудно собрать каждую библиотеку руками. Composer делает это одной командой.",
+        "Коротко: PHP — это язык. Composer — инструмент пакетов для этого языка. npm для Node, pip для Python, Composer для PHP.",
+      ],
+    },
+  },
+];
+
+const DEV_TRY: Record<string, string> = {
+  python: "https://dev.nibrascode.com/python",
+  javascript: "https://dev.nibrascode.com/javascript",
+};
+
 function topicLink(section: LibrarySection, slug: string, lang: string) {
   if (section === "resources" && slug === "pdf") {
     return {
@@ -57,6 +218,18 @@ export function LibraryIndex({
   const page = LIBRARY[section];
   const group: LibGroup | null = section === "resources" ? "resurs" : section === "guides" ? "guide" : null;
   const extras = group ? libItems(group, rows).filter((item) => item.custom) : [];
+  const [query, setQuery] = useState("");
+  const needle = query.trim().toLowerCase();
+  const topics = page.topics.filter((topic) => {
+    if (section !== "programming" || !needle) return true;
+    const label = t(topic.label).toLowerCase();
+    const slug = topic.slug.toLowerCase();
+    const name = toolName(topic.slug).toLowerCase();
+    const flat = (slug + name).replace(/[^a-z0-9]+/g, "");
+    const qflat = needle.replace(/[^a-z0-9]+/g, "");
+    return label.includes(needle) || slug.includes(needle) || name.includes(needle) || (qflat.length > 1 && flat.includes(qflat));
+  });
+  const copy = FIND_UI[lang];
 
   return (
     <main className="why-page">
@@ -66,8 +239,36 @@ export function LibraryIndex({
         Nibras Code
       </p>
       <h1>{t(page.title)}</h1>
+      {section === "programming" ? (
+        <section className="prog-start">
+          <h2>{copy.start}</h2>
+          <ol>
+            {START_STEPS.map((step, index) => (
+              <li key={step.slug}>
+                <a href={step.slug === "ai" ? "/ai" : programmingLocalePath(lang, step.slug)}>
+                  <b>
+                    {index + 1}. {step.text[lang].title}
+                  </b>
+                  <span>{step.text[lang].note}</span>
+                </a>
+              </li>
+            ))}
+          </ol>
+        </section>
+      ) : null}
+      {section === "programming" ? (
+        <input
+          className="lib-search"
+          type="search"
+          value={query}
+          placeholder={copy.search}
+          aria-label={copy.search}
+          onChange={(event) => setQuery(event.target.value)}
+        />
+      ) : null}
+      {section === "programming" && needle && topics.length === 0 ? <p className="lib-empty">{copy.empty}</p> : null}
       <ul className={section === "programming" ? "lib-list lib-list-2" : "lib-list"}>
-        {page.topics.map((topic) => {
+        {topics.map((topic) => {
           if (section === "programming") {
             return (
               <li key={topic.slug}>
@@ -104,6 +305,19 @@ export function LibraryIndex({
           </li>
         ))}
       </ul>
+      {section === "programming" ? (
+        <section className="prog-compare">
+          <h2>{copy.diff}</h2>
+          {COMPARES.map((item) => (
+            <details key={item.title.en}>
+              <summary>{item.title[lang]}</summary>
+              {item.body[lang].map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </details>
+          ))}
+        </section>
+      ) : null}
     </main>
   );
 }
@@ -157,6 +371,10 @@ const PROGRAM_NAMES: Record<string, string> = {
   markdown: "Markdown",
   rsync: "rsync",
 };
+
+function toolName(slug: string) {
+  return PROGRAM_NAMES[slug] || "";
+}
 
 const HTML_TRIES = [
   `<h1>Hello</h1>\n<p>HTML test</p>`,
@@ -361,6 +579,14 @@ export function ProgrammingArticle({
         <Link to="/programming">{t("nav_programming")}</Link>
       </p>
       <h1>{heading}</h1>
+      {slug && DEV_TRY[slug] ? (
+        <p className="prog-try">
+          <a href={DEV_TRY[slug]} target="_blank" rel="noopener noreferrer">
+            {t("code_test")} · Nibras Dev
+          </a>
+          <span>{FIND_UI[lang].tryNote}</span>
+        </p>
+      ) : null}
       <div className="prog-sections">
         {sections?.map((item) => (
           <details key={item.id} id={item.id} className="prog-fold">
