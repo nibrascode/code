@@ -55,6 +55,10 @@ export const LIBRARY: Record<LibrarySection, { title: TKey; topics: readonly Lib
       { slug: "git", label: "prog_git" },
       { slug: "bash", label: "prog_bash" },
       { slug: "json", label: "prog_json" },
+      { slug: "react", label: "prog_react" },
+      { slug: "c", label: "prog_c" },
+      { slug: "mysql", label: "prog_mysql" },
+      { slug: "http", label: "prog_http" },
     ],
   },
 };

@@ -142,6 +142,10 @@ const PROGRAM_NAMES: Record<string, string> = {
   git: "Git",
   bash: "Bash",
   json: "JSON",
+  react: "React",
+  c: "C",
+  mysql: "MySQL",
+  http: "HTTP",
 };
 
 const HTML_TRIES = [

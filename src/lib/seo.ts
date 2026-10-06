@@ -314,28 +314,28 @@ const PAGES: Record<string, Copy> = {
   "/programming": {
     az: {
       title: "Proqramlaşdırma — Nibras Code",
-      description: "Python, Java, Go, PHP, Git, Bash, JSON, Docker, Nginx, Ubuntu və digər dillər və alətlər.",
-      keywords: "proqramlaşdırma, Git, Bash, JSON, Go, PHP, Docker, Nginx, Ubuntu",
+      description: "Python, Java, React, C, MySQL, HTTP, Git, Docker, Nginx və digər dillər və alətlər.",
+      keywords: "proqramlaşdırma, React, C, MySQL, HTTP, Git, Docker, Nginx",
     },
     en: {
       title: "Programming — Nibras Code",
-      description: "Pages on Python, Java, Go, PHP, Git, Bash, JSON, Docker, Nginx, Ubuntu, and other languages and tools.",
-      keywords: "programming, Git, Bash, JSON, Go, PHP, Docker, Nginx, Ubuntu",
+      description: "Pages on Python, Java, React, C, MySQL, HTTP, Git, Docker, Nginx, and other languages and tools.",
+      keywords: "programming, React, C, MySQL, HTTP, Git, Docker, Nginx",
     },
     tr: {
       title: "Programlama — Nibras Code",
-      description: "Python, Java, Go, PHP, Git, Bash, JSON, Docker, Nginx, Ubuntu ve diğer diller ile araçlar.",
-      keywords: "programlama, Git, Bash, JSON, Go, PHP, Docker, Nginx, Ubuntu",
+      description: "Python, Java, React, C, MySQL, HTTP, Git, Docker, Nginx ve diğer diller ile araçlar.",
+      keywords: "programlama, React, C, MySQL, HTTP, Git, Docker, Nginx",
     },
     ar: {
       title: "برمجة — Nibras Code",
-      description: "صفحات عن Python وJava وGo وPHP وGit وBash وJSON وDocker وNginx وUbuntu وأدوات أخرى.",
-      keywords: "برمجة, Git, Bash, JSON, Go, PHP, Docker, Nginx, Ubuntu",
+      description: "صفحات عن Python وJava وReact وC وMySQL وHTTP وGit وDocker وNginx وأدوات أخرى.",
+      keywords: "برمجة, React, C, MySQL, HTTP, Git, Docker, Nginx",
     },
     ru: {
       title: "Программирование — Nibras Code",
-      description: "Страницы о Python, Java, Go, PHP, Git, Bash, JSON, Docker, Nginx, Ubuntu и других языках и инструментах.",
-      keywords: "программирование, Git, Bash, JSON, Go, PHP, Docker, Nginx, Ubuntu",
+      description: "Страницы о Python, Java, React, C, MySQL, HTTP, Git, Docker, Nginx и других языках и инструментах.",
+      keywords: "программирование, React, C, MySQL, HTTP, Git, Docker, Nginx",
     },
   },
   ...Object.fromEntries(PROGRAMMING.map((page) => [`/programming/${page.slug}`, page.seo])),
