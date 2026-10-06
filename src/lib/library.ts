@@ -71,6 +71,9 @@ export const LIBRARY: Record<LibrarySection, { title: TKey; topics: readonly Lib
       { slug: "composer", label: "prog_composer" },
       { slug: "cargo", label: "prog_cargo" },
       { slug: "make", label: "prog_make" },
+      { slug: "maven", label: "prog_maven" },
+      { slug: "yaml", label: "prog_yaml" },
+      { slug: "systemd", label: "prog_systemd" },
     ],
   },
 };

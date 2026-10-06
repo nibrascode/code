@@ -103,14 +103,6 @@ export function LibraryIndex({
             )}
           </li>
         ))}
-        {section === "programming" ? (
-          <li className="is-section">
-            <a href={programmingLocalePath(lang, CODE_SAMPLE_HUB)}>
-              {t("code_samples")}
-              <ArrowUpRight className="rtl-flip size-4" />
-            </a>
-          </li>
-        ) : null}
       </ul>
     </main>
   );
@@ -158,6 +150,9 @@ const PROGRAM_NAMES: Record<string, string> = {
   composer: "Composer",
   cargo: "Cargo",
   make: "Make",
+  maven: "Maven",
+  yaml: "YAML",
+  systemd: "systemd",
 };
 
 const HTML_TRIES = [

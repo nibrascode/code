@@ -314,28 +314,28 @@ const PAGES: Record<string, Copy> = {
   "/programming": {
     az: {
       title: "Proqramlaşdırma — Nibras Code",
-      description: "Python, Java, React, Composer, Cargo, Make, pip, Linux və digər dillər və alətlər.",
-      keywords: "proqramlaşdırma, Composer, Cargo, Make, pip, Linux, React",
+      description: "Python, Java, React, Maven, YAML, systemd, Composer, Linux və digər dillər və alətlər.",
+      keywords: "proqramlaşdırma, Maven, YAML, systemd, Composer, Linux, React",
     },
     en: {
       title: "Programming — Nibras Code",
-      description: "Pages on Python, Java, React, Composer, Cargo, Make, pip, Linux, and other languages and tools.",
-      keywords: "programming, Composer, Cargo, Make, pip, Linux, React",
+      description: "Pages on Python, Java, React, Maven, YAML, systemd, Composer, Linux, and other languages and tools.",
+      keywords: "programming, Maven, YAML, systemd, Composer, Linux, React",
     },
     tr: {
       title: "Programlama — Nibras Code",
-      description: "Python, Java, React, Composer, Cargo, Make, pip, Linux ve diğer diller ile araçlar.",
-      keywords: "programlama, Composer, Cargo, Make, pip, Linux, React",
+      description: "Python, Java, React, Maven, YAML, systemd, Composer, Linux ve diğer diller ile araçlar.",
+      keywords: "programlama, Maven, YAML, systemd, Composer, Linux, React",
     },
     ar: {
       title: "برمجة — Nibras Code",
-      description: "صفحات عن Python وJava وReact وComposer وCargo وMake وpip وLinux وأدوات أخرى.",
-      keywords: "برمجة, Composer, Cargo, Make, pip, Linux, React",
+      description: "صفحات عن Python وJava وReact وMaven وYAML وsystemd وComposer وLinux وأدوات أخرى.",
+      keywords: "برمجة, Maven, YAML, systemd, Composer, Linux, React",
     },
     ru: {
       title: "Программирование — Nibras Code",
-      description: "Страницы о Python, Java, React, Composer, Cargo, Make, pip, Linux и других языках и инструментах.",
-      keywords: "программирование, Composer, Cargo, Make, pip, Linux, React",
+      description: "Страницы о Python, Java, React, Maven, YAML, systemd, Composer, Linux и других языках и инструментах.",
+      keywords: "программирование, Maven, YAML, systemd, Composer, Linux, React",
     },
   },
   ...Object.fromEntries(PROGRAMMING.map((page) => [`/programming/${page.slug}`, page.seo])),
