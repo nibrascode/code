@@ -1241,6 +1241,8 @@ export const translations: Record<Lang, Record<TKey, string>> = {
     b_nav_apps: "Uygulamalar",
     remind_btn: "Unutma",
     nx_nav_contact: "İletişim",
+    contact_title: "Bize ulaşın",
+    contact_note: "Bir satır yazın, cevap verelim.",
     download_title: "Mağazalar",
     soon: "Yakında",
     nx_kicker: "Sade uygulamalar / gerçek fayda",
