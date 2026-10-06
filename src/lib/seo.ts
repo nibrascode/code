@@ -314,28 +314,28 @@ const PAGES: Record<string, Copy> = {
   "/programming": {
     az: {
       title: "Proqramlaşdırma — Nibras Code",
-      description: "Python, Java, React, C, MySQL, HTTP, Git, Docker, Nginx və digər dillər və alətlər.",
-      keywords: "proqramlaşdırma, React, C, MySQL, HTTP, Git, Docker, Nginx",
+      description: "Python, Java, React, Linux, SSH, DNS, Docker, Nginx və digər dillər və alətlər.",
+      keywords: "proqramlaşdırma, Linux, SSH, DNS, React, Docker, Nginx",
     },
     en: {
       title: "Programming — Nibras Code",
-      description: "Pages on Python, Java, React, C, MySQL, HTTP, Git, Docker, Nginx, and other languages and tools.",
-      keywords: "programming, React, C, MySQL, HTTP, Git, Docker, Nginx",
+      description: "Pages on Python, Java, React, Linux, SSH, DNS, Docker, Nginx, and other languages and tools.",
+      keywords: "programming, Linux, SSH, DNS, React, Docker, Nginx",
     },
     tr: {
       title: "Programlama — Nibras Code",
-      description: "Python, Java, React, C, MySQL, HTTP, Git, Docker, Nginx ve diğer diller ile araçlar.",
-      keywords: "programlama, React, C, MySQL, HTTP, Git, Docker, Nginx",
+      description: "Python, Java, React, Linux, SSH, DNS, Docker, Nginx ve diğer diller ile araçlar.",
+      keywords: "programlama, Linux, SSH, DNS, React, Docker, Nginx",
     },
     ar: {
       title: "برمجة — Nibras Code",
-      description: "صفحات عن Python وJava وReact وC وMySQL وHTTP وGit وDocker وNginx وأدوات أخرى.",
-      keywords: "برمجة, React, C, MySQL, HTTP, Git, Docker, Nginx",
+      description: "صفحات عن Python وJava وReact وLinux وSSH وDNS وDocker وNginx وأدوات أخرى.",
+      keywords: "برمجة, Linux, SSH, DNS, React, Docker, Nginx",
     },
     ru: {
       title: "Программирование — Nibras Code",
-      description: "Страницы о Python, Java, React, C, MySQL, HTTP, Git, Docker, Nginx и других языках и инструментах.",
-      keywords: "программирование, React, C, MySQL, HTTP, Git, Docker, Nginx",
+      description: "Страницы о Python, Java, React, Linux, SSH, DNS, Docker, Nginx и других языках и инструментах.",
+      keywords: "программирование, Linux, SSH, DNS, React, Docker, Nginx",
     },
   },
   ...Object.fromEntries(PROGRAMMING.map((page) => [`/programming/${page.slug}`, page.seo])),

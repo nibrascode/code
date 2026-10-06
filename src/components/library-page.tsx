@@ -146,6 +146,9 @@ const PROGRAM_NAMES: Record<string, string> = {
   c: "C",
   mysql: "MySQL",
   http: "HTTP",
+  linux: "Linux",
+  ssh: "SSH",
+  dns: "DNS",
 };
 
 const HTML_TRIES = [

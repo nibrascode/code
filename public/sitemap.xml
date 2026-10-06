@@ -3250,5 +3250,155 @@
     <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/http"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/http"/>
   </url>
+  <url>
+    <loc>https://www.nibrascode.com/programming/linux</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/linux"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/linux"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/linux"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/linux"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/linux"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/linux"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/en/programming/linux</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/linux"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/linux"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/linux"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/linux"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/linux"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/linux"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/tr/programming/linux</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/linux"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/linux"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/linux"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/linux"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/linux"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/linux"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/ar/programming/linux</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/linux"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/linux"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/linux"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/linux"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/linux"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/linux"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/ru/programming/linux</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/linux"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/linux"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/linux"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/linux"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/linux"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/linux"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/programming/ssh</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/ssh"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/ssh"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/ssh"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/ssh"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/ssh"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/ssh"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/en/programming/ssh</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/ssh"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/ssh"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/ssh"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/ssh"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/ssh"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/ssh"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/tr/programming/ssh</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/ssh"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/ssh"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/ssh"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/ssh"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/ssh"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/ssh"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/ar/programming/ssh</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/ssh"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/ssh"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/ssh"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/ssh"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/ssh"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/ssh"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/ru/programming/ssh</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/ssh"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/ssh"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/ssh"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/ssh"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/ssh"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/ssh"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/programming/dns</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/dns"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/dns"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/dns"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/dns"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/dns"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/dns"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/en/programming/dns</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/dns"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/dns"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/dns"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/dns"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/dns"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/dns"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/tr/programming/dns</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/dns"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/dns"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/dns"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/dns"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/dns"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/dns"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/ar/programming/dns</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/dns"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/dns"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/dns"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/dns"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/dns"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/dns"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/ru/programming/dns</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/programming/dns"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/programming/dns"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/programming/dns"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/programming/dns"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/programming/dns"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/programming/dns"/>
+  </url>
 </urlset>
 
