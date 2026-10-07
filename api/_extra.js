@@ -32,7 +32,7 @@ function guessLang(raw) {
   if (/[əƏ]/.test(raw)) return "az";
   const q = raw.toLowerCase();
   if (hasWord(q, ["hava", "merhaba", "kaç", "kac", "nasıl", "nasil", "nerede", "nedir", "hakkında", "hakkinda", "kısaca", "bugün", "lira", "dolar", "vakti"])) return "tr";
-  if (hasWord(q, ["weather", "how", "about", "what", "who", "where", "package", "briefly", "dollar", "dollars", "prayer", "salah"])) return "en";
+  if (hasWord(q, ["weather", "how", "about", "what", "who", "where", "package", "briefly", "dollar", "dollars", "prayer", "salah", "time", "hijri", "today", "date"])) return "en";
   return "az";
 }
 
@@ -313,10 +313,91 @@ export async function prayerReply(message) {
   return (hit.name || city) + "\n" + body + "\n" + (note[lang] || note.az);
 }
 
+const HIJRI_MONTH = {
+  az: ["Məhərrəm", "Səfər", "Rəbiüləvvəl", "Rəbiülaxir", "Cəmadiyələvvəl", "Cəmadiyəlaxir", "Rəcəb", "Şaban", "Ramazan", "Şəvval", "Zilqədə", "Zilhiccə"],
+  en: ["Muharram", "Safar", "Rabi al-Awwal", "Rabi al-Thani", "Jumada al-Awwal", "Jumada al-Thani", "Rajab", "Shaban", "Ramadan", "Shawwal", "Dhu al-Qidah", "Dhu al-Hijjah"],
+  tr: ["Muharrem", "Safer", "Rebiülevvel", "Rebiülahir", "Cemaziyelevvel", "Cemaziyelahir", "Recep", "Şaban", "Ramazan", "Şevval", "Zilkade", "Zilhicce"],
+  ru: ["Мухаррам", "Сафар", "Раби аль-авваль", "Раби ас-сани", "Джумада аль-уля", "Джумада ас-сани", "Раджаб", "Шабан", "Рамадан", "Шавваль", "Зу-ль-када", "Зу-ль-хиджа"],
+  ar: ["محرم", "صفر", "ربيع الأول", "ربيع الثاني", "جمادى الأولى", "جمادى الآخرة", "رجب", "شعبان", "رمضان", "شوال", "ذو القعدة", "ذو الحجة"],
+};
+
+function cleanPlace(raw, words) {
+  let text = raw.replace(/[()?؟!]/g, " ").replace(words, " ");
+  text = text.replace(/bu\s+gün|bugün|bugun|today|сегодня|сейчас|اليوم/gi, " ");
+  text = text.replace(/\b(in|at|üçün|ucun|icin|için|indi|now)\b/gi, " ");
+  text = text.replace(/(?:^|\s)(?:في|в)(?=\s|$)/gi, " ");
+  return stripPlace(text).replace(/\s+/g, " ").trim();
+}
+
+async function findPlace(name, lang) {
+  const geo = await getJson("https://geocoding-api.open-meteo.com/v1/search?count=1&language=" + (lang === "az" ? "az" : lang) + "&name=" + encodeURIComponent(name));
+  return geo?.results?.[0] || null;
+}
+
+function zoneNow(zone) {
+  const parts = new Intl.DateTimeFormat("en-GB", { timeZone: zone, hour: "2-digit", minute: "2-digit", hourCycle: "h23", day: "2-digit", month: "2-digit", year: "numeric" }).formatToParts(new Date());
+  const get = (type) => parts.find((p) => p.type === type)?.value || "";
+  return { time: get("hour") + ":" + get("minute"), date: get("day") + "-" + get("month") + "-" + get("year") };
+}
+
+function isClockAsk(message) {
+  return /(saat\s+ne[cç][əe]|saat\s+kaç|saat\s+kac|what\s+time|current\s+time|который\s+час|сколько\s+времени|كم\s+الساعة|الساعة\s+كم|ما\s+الوقت)/i.test(message);
+}
+
+export async function clockReply(message) {
+  if (!isClockAsk(message)) return null;
+  const lang = guessLang(message);
+  const city = cleanPlace(message, /saat\s+ne[cç][əe]\w*|saat\s+kaç\w*|saat\s+kac\w*|what\s+time(?:\s+is\s+it)?|current\s+time|который\s+час|сколько\s+времени|كم\s+الساعة|الساعة\s+كم|ما\s+الوقت/gi);
+  let zone = "Asia/Baku";
+  let label = { az: "Bakı", en: "Baku", tr: "Bakü", ru: "Баку", ar: "باكو" }[lang] || "Bakı";
+  if (city.length >= 2) {
+    const hit = await findPlace(city, lang);
+    if (!hit?.timezone) return null;
+    zone = hit.timezone;
+    label = hit.name || city;
+  }
+  return label + "\n" + zoneNow(zone).time;
+}
+
+function isHijriAsk(message) {
+  if (!/(hicri|hijri|хиджр|هجر)/i.test(message)) return false;
+  if (/(nədir|nedir|what is|что такое|ما هو|ما هي)/i.test(message) && !/(neçə|nece|bugün|today|tarix|tarih|сегодня|اليوم|كم)/i.test(message)) return false;
+  return true;
+}
+
+export async function hijriReply(message) {
+  if (!isHijriAsk(message)) return null;
+  const lang = guessLang(message);
+  const city = cleanPlace(message, /الهجري|hicri\w*|hijri\w*|хиджр\w*|هجري\w*|tarixi|tarix\w*|tarih\w*|neçədir|necedir|neçə|nece|nədir|nedir|date|число|كم|ما|هو|هي|هذا|التاريخ|какой|какая|какое|какие|what|which|how/gi);
+  let zone = "Asia/Baku";
+  let label = "";
+  if (city.length >= 2) {
+    const hit = await findPlace(city, lang);
+    if (!hit?.timezone) return null;
+    zone = hit.timezone;
+    label = hit.name || city;
+  }
+  const data = await getJson("https://api.aladhan.com/v1/gToH?date=" + zoneNow(zone).date);
+  const h = data?.data?.hijri;
+  const monthNo = Number(h?.month?.number);
+  const names = HIJRI_MONTH[lang] || HIJRI_MONTH.az;
+  if (!h?.day || !names[monthNo - 1] || !h?.year) return null;
+  const line = h.day + " " + names[monthNo - 1] + " " + h.year;
+  return label ? label + "\n" + line : line;
+}
+
 export async function extraReply(message) {
   const raw = String(message || "").trim();
   if (raw.length < 3 || raw.length > 180) return null;
   if (/(quran|qurani|hədis|hadis|təfsir|tefsir|fətva|fetva|nibras)/i.test(raw)) return null;
+  try {
+    const clock = await clockReply(raw);
+    if (clock) return clock;
+  } catch { /* növbəti mənbə */ }
+  try {
+    const hijri = await hijriReply(raw);
+    if (hijri) return hijri;
+  } catch { /* növbəti mənbə */ }
   try {
     const prayer = await prayerReply(raw);
     if (prayer) return prayer;
