@@ -8,6 +8,7 @@ import { NavMenu } from "@/components/nav-menu";
 import { faqPath } from "@/lib/faq";
 import { localeHref } from "@/lib/locale-path";
 import { SEARCH, searchPath } from "@/lib/search-pages";
+import { toolsPath, TOOLS_PAGE } from "@/lib/tools";
 import { useI18n } from "@/lib/i18n-context";
 import { statusText } from "@/lib/studio";
 import { loadStudioBundle } from "@/lib/studio.functions";
@@ -282,6 +283,16 @@ function Home() {
               />
             </svg>
             <span>Nibras Apk</span>
+          </a>
+          <a className="nx-apk-bar" href={toolsPath(lang)}>
+            <svg className="nx-apk nx-tools" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                fill="currentColor"
+                d="M14.2 3.2a2 2 0 0 1 2.8 0l1.2 1.2a2 2 0 0 1 0 2.8l-.7.7-4-4 .7-.7Zm-1.8 2.2 4 4-6.8 6.8H5.6v-4l6.8-6.8Z"
+              />
+              <path fill="currentColor" d="M4 18.2h8.5v1.6H4z" />
+            </svg>
+            <span>{TOOLS_PAGE.heading[lang]}</span>
           </a>
         </div>
         <div className="nx-stage">

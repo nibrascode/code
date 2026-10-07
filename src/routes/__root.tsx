@@ -15,6 +15,7 @@ import { faqFromPath, faqPath, faqTopicFromPath, faqTopicPath } from "@/lib/faq"
 import { searchFromPath, searchPath, searchTopicFromPath, searchTopicPath } from "@/lib/search-pages";
 import { compareFromPath, comparePath, compareTopicFromPath, compareTopicPath } from "@/lib/learn-pages";
 import { paketFromPath, paketPath } from "@/lib/paket";
+import { toolsFromPath, toolsPath } from "@/lib/tools";
 
 export const Route = createRootRoute({
   beforeLoad: ({ location }) => ({
@@ -118,6 +119,18 @@ function SeoLinks() {
           <link key={code} rel="alternate" {...{ hreflang: code }} href={`${SITE}${paketPath(code)}`} />
         ))}
         <link rel="alternate" {...{ hreflang: "x-default" }} href={`${SITE}${paketPath("az")}`} />
+      </>
+    );
+  }
+  const tools = toolsFromPath(path);
+  if (tools) {
+    return (
+      <>
+        <link rel="canonical" href={`${SITE}${toolsPath(tools)}`} />
+        {LANGS.map((code) => (
+          <link key={code} rel="alternate" {...{ hreflang: code }} href={`${SITE}${toolsPath(code)}`} />
+        ))}
+        <link rel="alternate" {...{ hreflang: "x-default" }} href={`${SITE}${toolsPath("az")}`} />
       </>
     );
   }

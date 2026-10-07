@@ -20,6 +20,7 @@ import { Route as NxStudioRouteImport } from './routes/nx-studio'
 import { Route as PaketRouteImport } from './routes/paket'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as SozRouteImport } from './routes/soz'
+import { Route as ToolsRouteImport } from './routes/tools'
 import { Route as UnutmaRouteImport } from './routes/unutma'
 import { Route as WhyRouteImport } from './routes/why'
 import { Route as XetaRouteImport } from './routes/xeta'
@@ -34,6 +35,7 @@ import { Route as ArMuqayiseRouteImport } from './routes/ar.muqayise'
 import { Route as ArNeceRouteImport } from './routes/ar.nece'
 import { Route as ArPaketRouteImport } from './routes/ar.paket'
 import { Route as ArSozRouteImport } from './routes/ar.soz'
+import { Route as ArToolsRouteImport } from './routes/ar.tools'
 import { Route as ArXetaRouteImport } from './routes/ar.xeta'
 import { Route as EnAboutRouteImport } from './routes/en.about'
 import { Route as EnAppsRouteImport } from './routes/en.apps'
@@ -44,6 +46,7 @@ import { Route as EnMuqayiseRouteImport } from './routes/en.muqayise'
 import { Route as EnNeceRouteImport } from './routes/en.nece'
 import { Route as EnPaketRouteImport } from './routes/en.paket'
 import { Route as EnSozRouteImport } from './routes/en.soz'
+import { Route as EnToolsRouteImport } from './routes/en.tools'
 import { Route as EnXetaRouteImport } from './routes/en.xeta'
 import { Route as FaqSlugRouteImport } from './routes/faq.$slug'
 import { Route as GuidesIndexRouteImport } from './routes/guides/index'
@@ -67,6 +70,7 @@ import { Route as RuMuqayiseRouteImport } from './routes/ru.muqayise'
 import { Route as RuNeceRouteImport } from './routes/ru.nece'
 import { Route as RuPaketRouteImport } from './routes/ru.paket'
 import { Route as RuSozRouteImport } from './routes/ru.soz'
+import { Route as RuToolsRouteImport } from './routes/ru.tools'
 import { Route as RuXetaRouteImport } from './routes/ru.xeta'
 import { Route as SozSlugRouteImport } from './routes/soz.$slug'
 import { Route as TrAboutRouteImport } from './routes/tr.about'
@@ -78,6 +82,7 @@ import { Route as TrMuqayiseRouteImport } from './routes/tr.muqayise'
 import { Route as TrNeceRouteImport } from './routes/tr.nece'
 import { Route as TrPaketRouteImport } from './routes/tr.paket'
 import { Route as TrSozRouteImport } from './routes/tr.soz'
+import { Route as TrToolsRouteImport } from './routes/tr.tools'
 import { Route as TrXetaRouteImport } from './routes/tr.xeta'
 import { Route as XetaSlugRouteImport } from './routes/xeta.$slug'
 import { Route as ArAppsSlugRouteImport } from './routes/ar.apps.$slug'
@@ -171,6 +176,11 @@ const SozRoute = SozRouteImport.update({
   path: '/soz',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ToolsRoute = ToolsRouteImport.update({
+  id: '/tools',
+  path: '/tools',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const UnutmaRoute = UnutmaRouteImport.update({
   id: '/unutma',
   path: '/unutma',
@@ -241,6 +251,11 @@ const ArSozRoute = ArSozRouteImport.update({
   path: '/ar/soz',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ArToolsRoute = ArToolsRouteImport.update({
+  id: '/ar/tools',
+  path: '/ar/tools',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ArXetaRoute = ArXetaRouteImport.update({
   id: '/ar/xeta',
   path: '/ar/xeta',
@@ -289,6 +304,11 @@ const EnPaketRoute = EnPaketRouteImport.update({
 const EnSozRoute = EnSozRouteImport.update({
   id: '/en/soz',
   path: '/en/soz',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnToolsRoute = EnToolsRouteImport.update({
+  id: '/en/tools',
+  path: '/en/tools',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EnXetaRoute = EnXetaRouteImport.update({
@@ -406,6 +426,11 @@ const RuSozRoute = RuSozRouteImport.update({
   path: '/ru/soz',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RuToolsRoute = RuToolsRouteImport.update({
+  id: '/ru/tools',
+  path: '/ru/tools',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RuXetaRoute = RuXetaRouteImport.update({
   id: '/ru/xeta',
   path: '/ru/xeta',
@@ -459,6 +484,11 @@ const TrPaketRoute = TrPaketRouteImport.update({
 const TrSozRoute = TrSozRouteImport.update({
   id: '/tr/soz',
   path: '/tr/soz',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrToolsRoute = TrToolsRouteImport.update({
+  id: '/tr/tools',
+  path: '/tr/tools',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TrXetaRoute = TrXetaRouteImport.update({
@@ -659,6 +689,7 @@ export interface FileRoutesByFullPath {
   '/paket': typeof PaketRoute
   '/privacy': typeof PrivacyRouteWithChildren
   '/soz': typeof SozRouteWithChildren
+  '/tools': typeof ToolsRoute
   '/unutma': typeof UnutmaRoute
   '/why': typeof WhyRoute
   '/xeta': typeof XetaRouteWithChildren
@@ -673,6 +704,7 @@ export interface FileRoutesByFullPath {
   '/ar/nece': typeof ArNeceRouteWithChildren
   '/ar/paket': typeof ArPaketRoute
   '/ar/soz': typeof ArSozRouteWithChildren
+  '/ar/tools': typeof ArToolsRoute
   '/ar/xeta': typeof ArXetaRouteWithChildren
   '/en/about': typeof EnAboutRoute
   '/en/apps': typeof EnAppsRouteWithChildren
@@ -683,6 +715,7 @@ export interface FileRoutesByFullPath {
   '/en/nece': typeof EnNeceRouteWithChildren
   '/en/paket': typeof EnPaketRoute
   '/en/soz': typeof EnSozRouteWithChildren
+  '/en/tools': typeof EnToolsRoute
   '/en/xeta': typeof EnXetaRouteWithChildren
   '/faq/$slug': typeof FaqSlugRoute
   '/guides/$topic': typeof GuidesTopicRoute
@@ -702,6 +735,7 @@ export interface FileRoutesByFullPath {
   '/ru/nece': typeof RuNeceRouteWithChildren
   '/ru/paket': typeof RuPaketRoute
   '/ru/soz': typeof RuSozRouteWithChildren
+  '/ru/tools': typeof RuToolsRoute
   '/ru/xeta': typeof RuXetaRouteWithChildren
   '/soz/$slug': typeof SozSlugRoute
   '/tr/about': typeof TrAboutRoute
@@ -713,6 +747,7 @@ export interface FileRoutesByFullPath {
   '/tr/nece': typeof TrNeceRouteWithChildren
   '/tr/paket': typeof TrPaketRoute
   '/tr/soz': typeof TrSozRouteWithChildren
+  '/tr/tools': typeof TrToolsRoute
   '/tr/xeta': typeof TrXetaRouteWithChildren
   '/xeta/$slug': typeof XetaSlugRoute
   '/apps/': typeof AppsIndexRoute
@@ -767,6 +802,7 @@ export interface FileRoutesByTo {
   '/paket': typeof PaketRoute
   '/privacy': typeof PrivacyRouteWithChildren
   '/soz': typeof SozRouteWithChildren
+  '/tools': typeof ToolsRoute
   '/unutma': typeof UnutmaRoute
   '/why': typeof WhyRoute
   '/xeta': typeof XetaRouteWithChildren
@@ -780,6 +816,7 @@ export interface FileRoutesByTo {
   '/ar/nece': typeof ArNeceRouteWithChildren
   '/ar/paket': typeof ArPaketRoute
   '/ar/soz': typeof ArSozRouteWithChildren
+  '/ar/tools': typeof ArToolsRoute
   '/ar/xeta': typeof ArXetaRouteWithChildren
   '/en/about': typeof EnAboutRoute
   '/en/apps': typeof EnAppsRouteWithChildren
@@ -790,6 +827,7 @@ export interface FileRoutesByTo {
   '/en/nece': typeof EnNeceRouteWithChildren
   '/en/paket': typeof EnPaketRoute
   '/en/soz': typeof EnSozRouteWithChildren
+  '/en/tools': typeof EnToolsRoute
   '/en/xeta': typeof EnXetaRouteWithChildren
   '/faq/$slug': typeof FaqSlugRoute
   '/guides/$topic': typeof GuidesTopicRoute
@@ -809,6 +847,7 @@ export interface FileRoutesByTo {
   '/ru/nece': typeof RuNeceRouteWithChildren
   '/ru/paket': typeof RuPaketRoute
   '/ru/soz': typeof RuSozRouteWithChildren
+  '/ru/tools': typeof RuToolsRoute
   '/ru/xeta': typeof RuXetaRouteWithChildren
   '/soz/$slug': typeof SozSlugRoute
   '/tr/about': typeof TrAboutRoute
@@ -820,6 +859,7 @@ export interface FileRoutesByTo {
   '/tr/nece': typeof TrNeceRouteWithChildren
   '/tr/paket': typeof TrPaketRoute
   '/tr/soz': typeof TrSozRouteWithChildren
+  '/tr/tools': typeof TrToolsRoute
   '/tr/xeta': typeof TrXetaRouteWithChildren
   '/xeta/$slug': typeof XetaSlugRoute
   '/apps': typeof AppsIndexRoute
@@ -875,6 +915,7 @@ export interface FileRoutesById {
   '/paket': typeof PaketRoute
   '/privacy': typeof PrivacyRouteWithChildren
   '/soz': typeof SozRouteWithChildren
+  '/tools': typeof ToolsRoute
   '/unutma': typeof UnutmaRoute
   '/why': typeof WhyRoute
   '/xeta': typeof XetaRouteWithChildren
@@ -889,6 +930,7 @@ export interface FileRoutesById {
   '/ar/nece': typeof ArNeceRouteWithChildren
   '/ar/paket': typeof ArPaketRoute
   '/ar/soz': typeof ArSozRouteWithChildren
+  '/ar/tools': typeof ArToolsRoute
   '/ar/xeta': typeof ArXetaRouteWithChildren
   '/en/about': typeof EnAboutRoute
   '/en/apps': typeof EnAppsRouteWithChildren
@@ -899,6 +941,7 @@ export interface FileRoutesById {
   '/en/nece': typeof EnNeceRouteWithChildren
   '/en/paket': typeof EnPaketRoute
   '/en/soz': typeof EnSozRouteWithChildren
+  '/en/tools': typeof EnToolsRoute
   '/en/xeta': typeof EnXetaRouteWithChildren
   '/faq/$slug': typeof FaqSlugRoute
   '/guides/$topic': typeof GuidesTopicRoute
@@ -918,6 +961,7 @@ export interface FileRoutesById {
   '/ru/nece': typeof RuNeceRouteWithChildren
   '/ru/paket': typeof RuPaketRoute
   '/ru/soz': typeof RuSozRouteWithChildren
+  '/ru/tools': typeof RuToolsRoute
   '/ru/xeta': typeof RuXetaRouteWithChildren
   '/soz/$slug': typeof SozSlugRoute
   '/tr/about': typeof TrAboutRoute
@@ -929,6 +973,7 @@ export interface FileRoutesById {
   '/tr/nece': typeof TrNeceRouteWithChildren
   '/tr/paket': typeof TrPaketRoute
   '/tr/soz': typeof TrSozRouteWithChildren
+  '/tr/tools': typeof TrToolsRoute
   '/tr/xeta': typeof TrXetaRouteWithChildren
   '/xeta/$slug': typeof XetaSlugRoute
   '/apps/': typeof AppsIndexRoute
@@ -985,6 +1030,7 @@ export interface FileRouteTypes {
     | '/paket'
     | '/privacy'
     | '/soz'
+    | '/tools'
     | '/unutma'
     | '/why'
     | '/xeta'
@@ -999,6 +1045,7 @@ export interface FileRouteTypes {
     | '/ar/nece'
     | '/ar/paket'
     | '/ar/soz'
+    | '/ar/tools'
     | '/ar/xeta'
     | '/en/about'
     | '/en/apps'
@@ -1009,6 +1056,7 @@ export interface FileRouteTypes {
     | '/en/nece'
     | '/en/paket'
     | '/en/soz'
+    | '/en/tools'
     | '/en/xeta'
     | '/faq/$slug'
     | '/guides/$topic'
@@ -1028,6 +1076,7 @@ export interface FileRouteTypes {
     | '/ru/nece'
     | '/ru/paket'
     | '/ru/soz'
+    | '/ru/tools'
     | '/ru/xeta'
     | '/soz/$slug'
     | '/tr/about'
@@ -1039,6 +1088,7 @@ export interface FileRouteTypes {
     | '/tr/nece'
     | '/tr/paket'
     | '/tr/soz'
+    | '/tr/tools'
     | '/tr/xeta'
     | '/xeta/$slug'
     | '/apps/'
@@ -1093,6 +1143,7 @@ export interface FileRouteTypes {
     | '/paket'
     | '/privacy'
     | '/soz'
+    | '/tools'
     | '/unutma'
     | '/why'
     | '/xeta'
@@ -1106,6 +1157,7 @@ export interface FileRouteTypes {
     | '/ar/nece'
     | '/ar/paket'
     | '/ar/soz'
+    | '/ar/tools'
     | '/ar/xeta'
     | '/en/about'
     | '/en/apps'
@@ -1116,6 +1168,7 @@ export interface FileRouteTypes {
     | '/en/nece'
     | '/en/paket'
     | '/en/soz'
+    | '/en/tools'
     | '/en/xeta'
     | '/faq/$slug'
     | '/guides/$topic'
@@ -1135,6 +1188,7 @@ export interface FileRouteTypes {
     | '/ru/nece'
     | '/ru/paket'
     | '/ru/soz'
+    | '/ru/tools'
     | '/ru/xeta'
     | '/soz/$slug'
     | '/tr/about'
@@ -1146,6 +1200,7 @@ export interface FileRouteTypes {
     | '/tr/nece'
     | '/tr/paket'
     | '/tr/soz'
+    | '/tr/tools'
     | '/tr/xeta'
     | '/xeta/$slug'
     | '/apps'
@@ -1200,6 +1255,7 @@ export interface FileRouteTypes {
     | '/paket'
     | '/privacy'
     | '/soz'
+    | '/tools'
     | '/unutma'
     | '/why'
     | '/xeta'
@@ -1214,6 +1270,7 @@ export interface FileRouteTypes {
     | '/ar/nece'
     | '/ar/paket'
     | '/ar/soz'
+    | '/ar/tools'
     | '/ar/xeta'
     | '/en/about'
     | '/en/apps'
@@ -1224,6 +1281,7 @@ export interface FileRouteTypes {
     | '/en/nece'
     | '/en/paket'
     | '/en/soz'
+    | '/en/tools'
     | '/en/xeta'
     | '/faq/$slug'
     | '/guides/$topic'
@@ -1243,6 +1301,7 @@ export interface FileRouteTypes {
     | '/ru/nece'
     | '/ru/paket'
     | '/ru/soz'
+    | '/ru/tools'
     | '/ru/xeta'
     | '/soz/$slug'
     | '/tr/about'
@@ -1254,6 +1313,7 @@ export interface FileRouteTypes {
     | '/tr/nece'
     | '/tr/paket'
     | '/tr/soz'
+    | '/tr/tools'
     | '/tr/xeta'
     | '/xeta/$slug'
     | '/apps/'
@@ -1309,6 +1369,7 @@ export interface RootRouteChildren {
   PaketRoute: typeof PaketRoute
   PrivacyRoute: typeof PrivacyRouteWithChildren
   SozRoute: typeof SozRouteWithChildren
+  ToolsRoute: typeof ToolsRoute
   UnutmaRoute: typeof UnutmaRoute
   WhyRoute: typeof WhyRoute
   XetaRoute: typeof XetaRouteWithChildren
@@ -1323,6 +1384,7 @@ export interface RootRouteChildren {
   ArNeceRoute: typeof ArNeceRouteWithChildren
   ArPaketRoute: typeof ArPaketRoute
   ArSozRoute: typeof ArSozRouteWithChildren
+  ArToolsRoute: typeof ArToolsRoute
   ArXetaRoute: typeof ArXetaRouteWithChildren
   EnAboutRoute: typeof EnAboutRoute
   EnAppsRoute: typeof EnAppsRouteWithChildren
@@ -1333,6 +1395,7 @@ export interface RootRouteChildren {
   EnNeceRoute: typeof EnNeceRouteWithChildren
   EnPaketRoute: typeof EnPaketRoute
   EnSozRoute: typeof EnSozRouteWithChildren
+  EnToolsRoute: typeof EnToolsRoute
   EnXetaRoute: typeof EnXetaRouteWithChildren
   GuidesTopicRoute: typeof GuidesTopicRoute
   ProgrammingTopicRoute: typeof ProgrammingTopicRoute
@@ -1346,6 +1409,7 @@ export interface RootRouteChildren {
   RuNeceRoute: typeof RuNeceRouteWithChildren
   RuPaketRoute: typeof RuPaketRoute
   RuSozRoute: typeof RuSozRouteWithChildren
+  RuToolsRoute: typeof RuToolsRoute
   RuXetaRoute: typeof RuXetaRouteWithChildren
   TrAboutRoute: typeof TrAboutRoute
   TrAppsRoute: typeof TrAppsRouteWithChildren
@@ -1356,6 +1420,7 @@ export interface RootRouteChildren {
   TrNeceRoute: typeof TrNeceRouteWithChildren
   TrPaketRoute: typeof TrPaketRoute
   TrSozRoute: typeof TrSozRouteWithChildren
+  TrToolsRoute: typeof TrToolsRoute
   TrXetaRoute: typeof TrXetaRouteWithChildren
   AppsIndexRoute: typeof AppsIndexRoute
   GuidesIndexRoute: typeof GuidesIndexRoute
@@ -1445,6 +1510,13 @@ declare module '@tanstack/react-router' {
       path: '/soz'
       fullPath: '/soz'
       preLoaderRoute: typeof SozRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools': {
+      id: '/tools'
+      path: '/tools'
+      fullPath: '/tools'
+      preLoaderRoute: typeof ToolsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/unutma': {
@@ -1545,6 +1617,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArSozRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ar/tools': {
+      id: '/ar/tools'
+      path: '/ar/tools'
+      fullPath: '/ar/tools'
+      preLoaderRoute: typeof ArToolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/ar/xeta': {
       id: '/ar/xeta'
       path: '/ar/xeta'
@@ -1613,6 +1692,13 @@ declare module '@tanstack/react-router' {
       path: '/en/soz'
       fullPath: '/en/soz'
       preLoaderRoute: typeof EnSozRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/tools': {
+      id: '/en/tools'
+      path: '/en/tools'
+      fullPath: '/en/tools'
+      preLoaderRoute: typeof EnToolsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/en/xeta': {
@@ -1776,6 +1862,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RuSozRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ru/tools': {
+      id: '/ru/tools'
+      path: '/ru/tools'
+      fullPath: '/ru/tools'
+      preLoaderRoute: typeof RuToolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/ru/xeta': {
       id: '/ru/xeta'
       path: '/ru/xeta'
@@ -1851,6 +1944,13 @@ declare module '@tanstack/react-router' {
       path: '/tr/soz'
       fullPath: '/tr/soz'
       preLoaderRoute: typeof TrSozRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tr/tools': {
+      id: '/tr/tools'
+      path: '/tr/tools'
+      fullPath: '/tr/tools'
+      preLoaderRoute: typeof TrToolsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tr/xeta': {
@@ -2519,6 +2619,7 @@ const rootRouteChildren: RootRouteChildren = {
   PaketRoute: PaketRoute,
   PrivacyRoute: PrivacyRouteWithChildren,
   SozRoute: SozRouteWithChildren,
+  ToolsRoute: ToolsRoute,
   UnutmaRoute: UnutmaRoute,
   WhyRoute: WhyRoute,
   XetaRoute: XetaRouteWithChildren,
@@ -2533,6 +2634,7 @@ const rootRouteChildren: RootRouteChildren = {
   ArNeceRoute: ArNeceRouteWithChildren,
   ArPaketRoute: ArPaketRoute,
   ArSozRoute: ArSozRouteWithChildren,
+  ArToolsRoute: ArToolsRoute,
   ArXetaRoute: ArXetaRouteWithChildren,
   EnAboutRoute: EnAboutRoute,
   EnAppsRoute: EnAppsRouteWithChildren,
@@ -2543,6 +2645,7 @@ const rootRouteChildren: RootRouteChildren = {
   EnNeceRoute: EnNeceRouteWithChildren,
   EnPaketRoute: EnPaketRoute,
   EnSozRoute: EnSozRouteWithChildren,
+  EnToolsRoute: EnToolsRoute,
   EnXetaRoute: EnXetaRouteWithChildren,
   GuidesTopicRoute: GuidesTopicRoute,
   ProgrammingTopicRoute: ProgrammingTopicRoute,
@@ -2556,6 +2659,7 @@ const rootRouteChildren: RootRouteChildren = {
   RuNeceRoute: RuNeceRouteWithChildren,
   RuPaketRoute: RuPaketRoute,
   RuSozRoute: RuSozRouteWithChildren,
+  RuToolsRoute: RuToolsRoute,
   RuXetaRoute: RuXetaRouteWithChildren,
   TrAboutRoute: TrAboutRoute,
   TrAppsRoute: TrAppsRouteWithChildren,
@@ -2566,6 +2670,7 @@ const rootRouteChildren: RootRouteChildren = {
   TrNeceRoute: TrNeceRouteWithChildren,
   TrPaketRoute: TrPaketRoute,
   TrSozRoute: TrSozRouteWithChildren,
+  TrToolsRoute: TrToolsRoute,
   TrXetaRoute: TrXetaRouteWithChildren,
   AppsIndexRoute: AppsIndexRoute,
   GuidesIndexRoute: GuidesIndexRoute,

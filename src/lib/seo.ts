@@ -11,6 +11,7 @@ import { RU_RESOURCES } from "@/lib/ru-resources";
 import { searchFromPath, searchTopicFromPath, searchPath, searchTopicPath } from "@/lib/search-pages";
 import { COMPARE, compareFromPath, compareTopicFromPath, comparePath, compareTopicPath } from "@/lib/learn-pages";
 import { PAKET, paketFromPath } from "@/lib/paket";
+import { TOOLS_PAGE, toolsFromPath } from "@/lib/tools";
 
 export const SITE = "https://www.nibrascode.com";
 
@@ -617,6 +618,14 @@ function pageCopy(pathname: string, lang: Lang) {
       title: `${PAKET.title[paket]} — Nibras Code`,
       description: PAKET.description[paket],
       keywords: PAKET.heading[paket],
+    };
+  }
+  const tools = toolsFromPath(path);
+  if (tools) {
+    return {
+      title: `${TOOLS_PAGE.title[tools]} — Nibras Code`,
+      description: TOOLS_PAGE.description[tools],
+      keywords: TOOLS_PAGE.heading[tools],
     };
   }
   const compared = compareTopicFromPath(path);
