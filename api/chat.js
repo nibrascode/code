@@ -16,6 +16,7 @@ import { translateReply } from "./_translate-chat.js";
 import { snippetReply } from "./_snippets.js";
 import { localReply } from "./_local.js";
 import { wikidataReply } from "./_wikidata.js";
+import { extraReply } from "./_extra.js";
 import { track } from "./_stats.js";
 import { isReligious } from "./_religious.js";
 import { isSourceKind, stripNotice, OLD_AZ_NOTICE } from "./_notice.js";
@@ -117,6 +118,15 @@ export default async function handler(req, res) {
         fromSource = isSourceKind(kind);
         religious = kind !== "brand" && kind !== "game" && !lexical && !(kind === "din" && body.mode === "code"); // kod rejimində ümumi din-söz uyğunluğu dini sual sayılmır
         break;
+      }
+    }
+    // Hava, məzənnə, qısa izah və paket modeli çağırmır. Qalan fakt Wikidata-ya düşür.
+    if (!fixed && body.mode !== "code" && body.mode !== "create") {
+      try {
+        const extra = await extraReply(message);
+        if (extra) fixed = extra;
+      } catch {
+        /* mənbə susursa, sual Wikidata-ya və ya modelə düşür */
       }
     }
     // Wikidata faktı modelə getmir: şəhər, adam, ölkə kimi aydın sualı server özü oxuyur.
