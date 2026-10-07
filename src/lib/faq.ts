@@ -27,31 +27,26 @@ const LINKS: Record<Lang, readonly FaqLink[]> = {
     { href: "/apps", label: "Tətbiqlər" },
     { href: "/programming", label: "Proqramlaşdırma" },
     { href: "/contact", label: "Əlaqə" },
-    { href: "/privacy/nibras-arabic", label: "Məxfilik" },
   ],
   en: [
     { href: "/en/apps", label: "Apps" },
     { href: "/programming", label: "Programming" },
     { href: "/en/contact", label: "Contact" },
-    { href: "/privacy/nibras-arabic", label: "Privacy" },
   ],
   tr: [
     { href: "/tr/apps", label: "Uygulamalar" },
     { href: "/programming", label: "Programlama" },
     { href: "/tr/contact", label: "İletişim" },
-    { href: "/privacy/nibras-arabic", label: "Gizlilik" },
   ],
   ar: [
     { href: "/ar/apps", label: "التطبيقات" },
     { href: "/programming", label: "البرمجة" },
     { href: "/ar/contact", label: "تواصل" },
-    { href: "/privacy/nibras-arabic", label: "الخصوصية" },
   ],
   ru: [
     { href: "/ru/apps", label: "Приложения" },
     { href: "/programming", label: "Программирование" },
     { href: "/ru/contact", label: "Контакт" },
-    { href: "/privacy/nibras-arabic", label: "Конфиденциальность" },
   ],
 };
 
@@ -778,7 +773,6 @@ const TOPIC_HREF: Record<string, string> = {
   pdf: "/apps/nibras-pdf",
   plans: "/apps/nibras-plans",
   docs: "/apps/nibras-docs",
-  mexfilik: "/privacy/nibras-arabic",
   elaqe: "/contact",
   sayt: "/programming",
   ai: "https://www.nibrascode.com/ai",
