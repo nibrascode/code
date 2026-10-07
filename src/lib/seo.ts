@@ -11,7 +11,8 @@ import { RU_RESOURCES } from "@/lib/ru-resources";
 import { searchFromPath, searchTopicFromPath, searchPath, searchTopicPath } from "@/lib/search-pages";
 import { COMPARE, compareFromPath, compareTopicFromPath, comparePath, compareTopicPath } from "@/lib/learn-pages";
 import { PAKET, paketFromPath } from "@/lib/paket";
-import { TOOLS_PAGE, toolsFromPath } from "@/lib/tools";
+import { TOOLS, TOOLS_PAGE, toolFromPath, toolsFromPath, toolPath, toolsPath } from "@/lib/tools";
+import { TOOL_LEAD } from "@/lib/tools-seo";
 
 export const SITE = "https://www.nibrascode.com";
 
@@ -620,6 +621,15 @@ function pageCopy(pathname: string, lang: Lang) {
       keywords: PAKET.heading[paket],
     };
   }
+  const tool = toolFromPath(path);
+  if (tool) {
+    const item = TOOLS.find((entry) => entry.id === tool.id)!;
+    return {
+      title: `${item.label[tool.lang]} — Nibras Code`,
+      description: TOOL_LEAD[tool.id][tool.lang],
+      keywords: item.label[tool.lang],
+    };
+  }
   const tools = toolsFromPath(path);
   if (tools) {
     return {
@@ -714,6 +724,10 @@ export function canonicalUrl(pathname: string, lang: Lang) {
   if (compared) return `${SITE}${compareTopicPath(compared.lang, compared.item.slug)}`;
   const compareIndex = compareFromPath(path);
   if (compareIndex) return `${SITE}${comparePath(compareIndex.lang)}`;
+  const tool = toolFromPath(path);
+  if (tool) return `${SITE}${toolPath(tool.lang, tool.id)}`;
+  const tools = toolsFromPath(path);
+  if (tools) return `${SITE}${toolsPath(tools)}`;
   if (faqFromPath(path)) return `${SITE}${faqPath(lang)}`;
   const pair = pdfPairFromPath(path);
   if (pair) {

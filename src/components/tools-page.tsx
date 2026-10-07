@@ -27,7 +27,8 @@ import {
   WholeWord,
 } from "lucide-react";
 import type { Lang } from "@/lib/i18n";
-import { TOOLS, TOOLS_PAGE, TOOL_GROUPS, type ToolId } from "@/lib/tools";
+import { TOOLS, TOOLS_PAGE, TOOL_GROUPS, toolPath, toolsPath, type ToolId } from "@/lib/tools";
+import { TOOL_LEAD } from "@/lib/tools-seo";
 import {
   decodeBase64,
   decodeHtml,
@@ -193,8 +194,8 @@ function undo(id: ToolId, text: string) {
   return decodeHtml(text);
 }
 
-export function ToolsPage({ lang }: { lang: Lang }) {
-  const [openId, setOpenId] = useState<ToolId | null>(null);
+export function ToolsPage({ lang, focus }: { lang: Lang; focus?: ToolId }) {
+  const current = focus ?? null;
   const [text, setText] = useState("");
   const [extra, setExtra] = useState("");
   const [count, setCount] = useState("3");
@@ -205,12 +206,12 @@ export function ToolsPage({ lang }: { lang: Lang }) {
   const copy = TOOLS_PAGE;
 
   async function make(mode: "do" | "undo") {
-    if (!openId) return;
+    if (!current) return;
     setNote("");
     try {
-      if (openId === "hash") setOutput(await sha(text, "SHA-1"));
-      else if (openId === "sha256") setOutput(await sha(text, "SHA-256"));
-      else setOutput(mode === "undo" ? undo(openId, text) : runSync(openId, text, count, low, high, extra, lang));
+      if (current === "hash") setOutput(await sha(text, "SHA-1"));
+      else if (current === "sha256") setOutput(await sha(text, "SHA-256"));
+      else setOutput(mode === "undo" ? undo(current, text) : runSync(current, text, count, low, high, extra, lang));
     } catch {
       setOutput("");
       setNote(copy.bad[lang]);
@@ -221,14 +222,21 @@ export function ToolsPage({ lang }: { lang: Lang }) {
     <main className="why-page" lang={lang} dir={lang === "ar" ? "rtl" : "ltr"}>
       <div className="why-glow" aria-hidden="true" />
       <p className="eyebrow">
-        <i />
-        Nibras Code
+        {focus ? (
+          <a href={toolsPath(lang)}>{copy.heading[lang]}</a>
+        ) : (
+          <>
+            <i />
+            Nibras Code
+          </>
+        )}
       </p>
-      <h1>{copy.heading[lang]}</h1>
+      <h1>{focus ? TOOLS.find((item) => item.id === focus)!.label[lang] : copy.heading[lang]}</h1>
+      <p>{focus ? TOOL_LEAD[focus][lang] : copy.description[lang]}</p>
+      {focus ? null : (
       <div className="prog-sections">
         {TOOL_GROUPS.map((group) => {
           const tools = group.ids.map((id) => TOOLS.find((tool) => tool.id === id)!);
-          const here = openId != null && group.ids.includes(openId);
           const GroupIcon = GROUP_ICONS[group.id];
           return (
             <details key={group.id} className="prog-fold tool-fold">
@@ -244,26 +252,23 @@ export function ToolsPage({ lang }: { lang: Lang }) {
                     const Icon = ICONS[tool.id];
                     return (
                       <li key={tool.id}>
-                        <button
-                          type="button"
-                          className={openId === tool.id ? "is-on" : undefined}
-                          onClick={() => {
-                            setOpenId(tool.id);
-                            setOutput("");
-                            setNote("");
-                            setExtra("");
-                          }}
-                        >
+                        <a href={toolPath(lang, tool.id)}>
                           <span className="tool-name">
                             <Icon aria-hidden="true" />
                             {tool.label[lang]}
                           </span>
-                        </button>
+                        </a>
                       </li>
                     );
                   })}
                 </ul>
-                {here && openId ? (
+              </div>
+            </details>
+          );
+        })}
+      </div>
+      )}
+      {current ? (
               <form
                 className="paket-form"
                 onSubmit={(event) => {
@@ -271,18 +276,18 @@ export function ToolsPage({ lang }: { lang: Lang }) {
                   void make("do");
                 }}
               >
-                {openId === "number" ? (
+                {current === "number" ? (
                   <div className="tool-row">
                     <input value={low} inputMode="numeric" aria-label="min" onChange={(event) => setLow(event.target.value)} />
                     <input value={high} inputMode="numeric" aria-label="max" onChange={(event) => setHigh(event.target.value)} />
                   </div>
                 ) : null}
-                {openId === "lorem" || openId === "text" || openId === "password" ? (
+                {current === "lorem" || current === "text" || current === "password" ? (
                   <input value={count} inputMode="numeric" aria-label="count" onChange={(event) => setCount(event.target.value)} />
                 ) : null}
-                {NEEDS_TEXT.has(openId) ? (
+                {NEEDS_TEXT.has(current) ? (
                   <>
-                    {openId === "regex" ? (
+                    {current === "regex" ? (
                       <textarea
                         value={extra}
                         spellCheck={false}
@@ -296,9 +301,9 @@ export function ToolsPage({ lang }: { lang: Lang }) {
                       <input
                         type="file"
                         accept={
-                          openId === "xml"
+                          current === "xml"
                             ? ".xml,.txt,text/plain,application/xml,text/xml"
-                            : openId === "csv"
+                            : current === "csv"
                               ? ".csv,.json,.txt,text/plain,text/csv,application/json"
                               : ".txt,text/plain"
                         }
@@ -310,7 +315,7 @@ export function ToolsPage({ lang }: { lang: Lang }) {
                       />
                     </label>
                     <textarea value={text} spellCheck={false} onChange={(event) => setText(event.target.value)} />
-                    {openId === "diff" ? (
+                    {current === "diff" ? (
                       <textarea
                         value={extra}
                         spellCheck={false}
@@ -323,7 +328,7 @@ export function ToolsPage({ lang }: { lang: Lang }) {
                 ) : null}
                 <div className="tool-row">
                   <button type="submit">{copy.run[lang]}</button>
-                  {PAIR.has(openId) ? (
+                  {PAIR.has(current) ? (
                     <button type="button" onClick={() => void make("undo")}>
                       {lang === "en" ? "Read" : lang === "tr" ? "Aç" : lang === "ar" ? "اقرأ" : lang === "ru" ? "Прочитать" : "Aç"}
                     </button>
@@ -343,19 +348,14 @@ export function ToolsPage({ lang }: { lang: Lang }) {
                       >
                         {copy.copy[lang]}
                       </button>
-                      <button type="button" onClick={() => saveFile(openId, output)}>
+                      <button type="button" onClick={() => saveFile(current, output)}>
                         {copy.save[lang]}
                       </button>
                     </div>
                   </>
                 ) : null}
               </form>
-                ) : null}
-              </div>
-            </details>
-          );
-        })}
-      </div>
+      ) : null}
     </main>
   );
 }

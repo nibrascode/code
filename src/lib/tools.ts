@@ -1,4 +1,5 @@
 import type { Lang } from "@/lib/i18n";
+import { TOOL_SLUG, toolIdFromSlug } from "@/lib/tools-seo";
 
 const PREFIX: Record<Lang, string> = { az: "", en: "/en", tr: "/tr", ar: "/ar", ru: "/ru" };
 
@@ -134,9 +135,23 @@ export function toolsPath(lang: Lang) {
   return `${PREFIX[lang]}/tools`;
 }
 
+export function toolPath(lang: Lang, id: ToolId) {
+  return `${PREFIX[lang]}/tools/${TOOL_SLUG[id]}`;
+}
+
 export function toolsFromPath(pathname: string) {
   const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname;
   const match = path.match(/^\/(?:(en|tr|ar|ru)\/)?tools$/);
   if (!match) return null;
   return (match[1] ?? "az") as Lang;
+}
+
+export function toolFromPath(pathname: string) {
+  const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname;
+  const match = path.match(/^\/(?:(en|tr|ar|ru)\/)?tools\/([^/]+)$/);
+  if (!match) return null;
+  const id = toolIdFromSlug(match[2]);
+  if (!id) return null;
+  const lang = (match[1] ?? "az") as Lang;
+  return { lang, id, slug: match[2] };
 }

@@ -1,6 +1,7 @@
 import type { Lang } from "@/lib/i18n";
 import { isSplitPage, localeHref, stripLocalePrefix } from "@/lib/locale-path";
 import { faqFromPath, faqPath, faqTopicFromPath, faqTopicPath } from "@/lib/faq";
+import { toolFromPath, toolPath, toolsFromPath, toolsPath } from "@/lib/tools";
 import { findProgrammingLocale, programmingFromPath, programmingLocalePath } from "@/lib/programming-locales";
 
 export const PDF_LOCALE_PAIRS = [
@@ -38,6 +39,9 @@ export function pdfPairFromPath(pathname: string) {
 }
 
 export function hrefForLang(pathname: string, lang: Lang) {
+  const tool = toolFromPath(pathname);
+  if (tool) return toolPath(lang, tool.id);
+  if (toolsFromPath(pathname)) return toolsPath(lang);
   const topic = faqTopicFromPath(pathname);
   if (topic) return faqTopicPath(lang, topic.item.id);
   if (faqFromPath(pathname)) return faqPath(lang);

@@ -73,6 +73,7 @@ import { Route as RuSozRouteImport } from './routes/ru.soz'
 import { Route as RuToolsRouteImport } from './routes/ru.tools'
 import { Route as RuXetaRouteImport } from './routes/ru.xeta'
 import { Route as SozSlugRouteImport } from './routes/soz.$slug'
+import { Route as ToolsSlugRouteImport } from './routes/tools.$slug'
 import { Route as TrAboutRouteImport } from './routes/tr.about'
 import { Route as TrAppsRouteImport } from './routes/tr.apps'
 import { Route as TrContactRouteImport } from './routes/tr.contact'
@@ -92,6 +93,7 @@ import { Route as ArMuqayiseSlugRouteImport } from './routes/ar.muqayise.$slug'
 import { Route as ArNeceSlugRouteImport } from './routes/ar.nece.$slug'
 import { Route as ArProgrammingSlugRouteImport } from './routes/ar.programming.$slug'
 import { Route as ArSozSlugRouteImport } from './routes/ar.soz.$slug'
+import { Route as ArToolsSlugRouteImport } from './routes/ar.tools.$slug'
 import { Route as ArXetaSlugRouteImport } from './routes/ar.xeta.$slug'
 import { Route as EnAppsSlugRouteImport } from './routes/en.apps.$slug'
 import { Route as EnFaqSlugRouteImport } from './routes/en.faq.$slug'
@@ -100,6 +102,7 @@ import { Route as EnMuqayiseSlugRouteImport } from './routes/en.muqayise.$slug'
 import { Route as EnNeceSlugRouteImport } from './routes/en.nece.$slug'
 import { Route as EnProgrammingSlugRouteImport } from './routes/en.programming.$slug'
 import { Route as EnSozSlugRouteImport } from './routes/en.soz.$slug'
+import { Route as EnToolsSlugRouteImport } from './routes/en.tools.$slug'
 import { Route as EnXetaSlugRouteImport } from './routes/en.xeta.$slug'
 import { Route as ResourcesTopicIndexRouteImport } from './routes/resources/$topic/index'
 import { Route as ResourcesTopicArticleRouteImport } from './routes/resources/$topic/$article'
@@ -111,6 +114,7 @@ import { Route as RuNeceSlugRouteImport } from './routes/ru.nece.$slug'
 import { Route as RuProgrammingSlugRouteImport } from './routes/ru.programming.$slug'
 import { Route as RuResourcesSlugRouteImport } from './routes/ru.resources.$slug'
 import { Route as RuSozSlugRouteImport } from './routes/ru.soz.$slug'
+import { Route as RuToolsSlugRouteImport } from './routes/ru.tools.$slug'
 import { Route as RuXetaSlugRouteImport } from './routes/ru.xeta.$slug'
 import { Route as TrAppsSlugRouteImport } from './routes/tr.apps.$slug'
 import { Route as TrFaqSlugRouteImport } from './routes/tr.faq.$slug'
@@ -119,6 +123,7 @@ import { Route as TrMuqayiseSlugRouteImport } from './routes/tr.muqayise.$slug'
 import { Route as TrNeceSlugRouteImport } from './routes/tr.nece.$slug'
 import { Route as TrProgrammingSlugRouteImport } from './routes/tr.programming.$slug'
 import { Route as TrSozSlugRouteImport } from './routes/tr.soz.$slug'
+import { Route as TrToolsSlugRouteImport } from './routes/tr.tools.$slug'
 import { Route as TrXetaSlugRouteImport } from './routes/tr.xeta.$slug'
 
 const IndexRoute = IndexRouteImport.update({
@@ -441,6 +446,11 @@ const SozSlugRoute = SozSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => SozRoute,
 } as any)
+const ToolsSlugRoute = ToolsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ToolsRoute,
+} as any)
 const TrAboutRoute = TrAboutRouteImport.update({
   id: '/tr/about',
   path: '/tr/about',
@@ -536,6 +546,11 @@ const ArSozSlugRoute = ArSozSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => ArSozRoute,
 } as any)
+const ArToolsSlugRoute = ArToolsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ArToolsRoute,
+} as any)
 const ArXetaSlugRoute = ArXetaSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -575,6 +590,11 @@ const EnSozSlugRoute = EnSozSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => EnSozRoute,
+} as any)
+const EnToolsSlugRoute = EnToolsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => EnToolsRoute,
 } as any)
 const EnXetaSlugRoute = EnXetaSlugRouteImport.update({
   id: '/$slug',
@@ -631,6 +651,11 @@ const RuSozSlugRoute = RuSozSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => RuSozRoute,
 } as any)
+const RuToolsSlugRoute = RuToolsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => RuToolsRoute,
+} as any)
 const RuXetaSlugRoute = RuXetaSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -671,6 +696,11 @@ const TrSozSlugRoute = TrSozSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => TrSozRoute,
 } as any)
+const TrToolsSlugRoute = TrToolsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => TrToolsRoute,
+} as any)
 const TrXetaSlugRoute = TrXetaSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -689,7 +719,7 @@ export interface FileRoutesByFullPath {
   '/paket': typeof PaketRoute
   '/privacy': typeof PrivacyRouteWithChildren
   '/soz': typeof SozRouteWithChildren
-  '/tools': typeof ToolsRoute
+  '/tools': typeof ToolsRouteWithChildren
   '/unutma': typeof UnutmaRoute
   '/why': typeof WhyRoute
   '/xeta': typeof XetaRouteWithChildren
@@ -704,7 +734,7 @@ export interface FileRoutesByFullPath {
   '/ar/nece': typeof ArNeceRouteWithChildren
   '/ar/paket': typeof ArPaketRoute
   '/ar/soz': typeof ArSozRouteWithChildren
-  '/ar/tools': typeof ArToolsRoute
+  '/ar/tools': typeof ArToolsRouteWithChildren
   '/ar/xeta': typeof ArXetaRouteWithChildren
   '/en/about': typeof EnAboutRoute
   '/en/apps': typeof EnAppsRouteWithChildren
@@ -715,7 +745,7 @@ export interface FileRoutesByFullPath {
   '/en/nece': typeof EnNeceRouteWithChildren
   '/en/paket': typeof EnPaketRoute
   '/en/soz': typeof EnSozRouteWithChildren
-  '/en/tools': typeof EnToolsRoute
+  '/en/tools': typeof EnToolsRouteWithChildren
   '/en/xeta': typeof EnXetaRouteWithChildren
   '/faq/$slug': typeof FaqSlugRoute
   '/guides/$topic': typeof GuidesTopicRoute
@@ -735,9 +765,10 @@ export interface FileRoutesByFullPath {
   '/ru/nece': typeof RuNeceRouteWithChildren
   '/ru/paket': typeof RuPaketRoute
   '/ru/soz': typeof RuSozRouteWithChildren
-  '/ru/tools': typeof RuToolsRoute
+  '/ru/tools': typeof RuToolsRouteWithChildren
   '/ru/xeta': typeof RuXetaRouteWithChildren
   '/soz/$slug': typeof SozSlugRoute
+  '/tools/$slug': typeof ToolsSlugRoute
   '/tr/about': typeof TrAboutRoute
   '/tr/apps': typeof TrAppsRouteWithChildren
   '/tr/contact': typeof TrContactRoute
@@ -747,7 +778,7 @@ export interface FileRoutesByFullPath {
   '/tr/nece': typeof TrNeceRouteWithChildren
   '/tr/paket': typeof TrPaketRoute
   '/tr/soz': typeof TrSozRouteWithChildren
-  '/tr/tools': typeof TrToolsRoute
+  '/tr/tools': typeof TrToolsRouteWithChildren
   '/tr/xeta': typeof TrXetaRouteWithChildren
   '/xeta/$slug': typeof XetaSlugRoute
   '/apps/': typeof AppsIndexRoute
@@ -761,6 +792,7 @@ export interface FileRoutesByFullPath {
   '/ar/nece/$slug': typeof ArNeceSlugRoute
   '/ar/programming/$slug': typeof ArProgrammingSlugRoute
   '/ar/soz/$slug': typeof ArSozSlugRoute
+  '/ar/tools/$slug': typeof ArToolsSlugRoute
   '/ar/xeta/$slug': typeof ArXetaSlugRoute
   '/en/apps/$slug': typeof EnAppsSlugRoute
   '/en/faq/$slug': typeof EnFaqSlugRoute
@@ -769,6 +801,7 @@ export interface FileRoutesByFullPath {
   '/en/nece/$slug': typeof EnNeceSlugRoute
   '/en/programming/$slug': typeof EnProgrammingSlugRoute
   '/en/soz/$slug': typeof EnSozSlugRoute
+  '/en/tools/$slug': typeof EnToolsSlugRoute
   '/en/xeta/$slug': typeof EnXetaSlugRoute
   '/resources/$topic/$article': typeof ResourcesTopicArticleRoute
   '/ru/apps/$slug': typeof RuAppsSlugRoute
@@ -779,6 +812,7 @@ export interface FileRoutesByFullPath {
   '/ru/programming/$slug': typeof RuProgrammingSlugRoute
   '/ru/resources/$slug': typeof RuResourcesSlugRoute
   '/ru/soz/$slug': typeof RuSozSlugRoute
+  '/ru/tools/$slug': typeof RuToolsSlugRoute
   '/ru/xeta/$slug': typeof RuXetaSlugRoute
   '/tr/apps/$slug': typeof TrAppsSlugRoute
   '/tr/faq/$slug': typeof TrFaqSlugRoute
@@ -787,6 +821,7 @@ export interface FileRoutesByFullPath {
   '/tr/nece/$slug': typeof TrNeceSlugRoute
   '/tr/programming/$slug': typeof TrProgrammingSlugRoute
   '/tr/soz/$slug': typeof TrSozSlugRoute
+  '/tr/tools/$slug': typeof TrToolsSlugRoute
   '/tr/xeta/$slug': typeof TrXetaSlugRoute
   '/resources/$topic/': typeof ResourcesTopicIndexRoute
 }
@@ -802,7 +837,7 @@ export interface FileRoutesByTo {
   '/paket': typeof PaketRoute
   '/privacy': typeof PrivacyRouteWithChildren
   '/soz': typeof SozRouteWithChildren
-  '/tools': typeof ToolsRoute
+  '/tools': typeof ToolsRouteWithChildren
   '/unutma': typeof UnutmaRoute
   '/why': typeof WhyRoute
   '/xeta': typeof XetaRouteWithChildren
@@ -816,7 +851,7 @@ export interface FileRoutesByTo {
   '/ar/nece': typeof ArNeceRouteWithChildren
   '/ar/paket': typeof ArPaketRoute
   '/ar/soz': typeof ArSozRouteWithChildren
-  '/ar/tools': typeof ArToolsRoute
+  '/ar/tools': typeof ArToolsRouteWithChildren
   '/ar/xeta': typeof ArXetaRouteWithChildren
   '/en/about': typeof EnAboutRoute
   '/en/apps': typeof EnAppsRouteWithChildren
@@ -827,7 +862,7 @@ export interface FileRoutesByTo {
   '/en/nece': typeof EnNeceRouteWithChildren
   '/en/paket': typeof EnPaketRoute
   '/en/soz': typeof EnSozRouteWithChildren
-  '/en/tools': typeof EnToolsRoute
+  '/en/tools': typeof EnToolsRouteWithChildren
   '/en/xeta': typeof EnXetaRouteWithChildren
   '/faq/$slug': typeof FaqSlugRoute
   '/guides/$topic': typeof GuidesTopicRoute
@@ -847,9 +882,10 @@ export interface FileRoutesByTo {
   '/ru/nece': typeof RuNeceRouteWithChildren
   '/ru/paket': typeof RuPaketRoute
   '/ru/soz': typeof RuSozRouteWithChildren
-  '/ru/tools': typeof RuToolsRoute
+  '/ru/tools': typeof RuToolsRouteWithChildren
   '/ru/xeta': typeof RuXetaRouteWithChildren
   '/soz/$slug': typeof SozSlugRoute
+  '/tools/$slug': typeof ToolsSlugRoute
   '/tr/about': typeof TrAboutRoute
   '/tr/apps': typeof TrAppsRouteWithChildren
   '/tr/contact': typeof TrContactRoute
@@ -859,7 +895,7 @@ export interface FileRoutesByTo {
   '/tr/nece': typeof TrNeceRouteWithChildren
   '/tr/paket': typeof TrPaketRoute
   '/tr/soz': typeof TrSozRouteWithChildren
-  '/tr/tools': typeof TrToolsRoute
+  '/tr/tools': typeof TrToolsRouteWithChildren
   '/tr/xeta': typeof TrXetaRouteWithChildren
   '/xeta/$slug': typeof XetaSlugRoute
   '/apps': typeof AppsIndexRoute
@@ -873,6 +909,7 @@ export interface FileRoutesByTo {
   '/ar/nece/$slug': typeof ArNeceSlugRoute
   '/ar/programming/$slug': typeof ArProgrammingSlugRoute
   '/ar/soz/$slug': typeof ArSozSlugRoute
+  '/ar/tools/$slug': typeof ArToolsSlugRoute
   '/ar/xeta/$slug': typeof ArXetaSlugRoute
   '/en/apps/$slug': typeof EnAppsSlugRoute
   '/en/faq/$slug': typeof EnFaqSlugRoute
@@ -881,6 +918,7 @@ export interface FileRoutesByTo {
   '/en/nece/$slug': typeof EnNeceSlugRoute
   '/en/programming/$slug': typeof EnProgrammingSlugRoute
   '/en/soz/$slug': typeof EnSozSlugRoute
+  '/en/tools/$slug': typeof EnToolsSlugRoute
   '/en/xeta/$slug': typeof EnXetaSlugRoute
   '/resources/$topic/$article': typeof ResourcesTopicArticleRoute
   '/ru/apps/$slug': typeof RuAppsSlugRoute
@@ -891,6 +929,7 @@ export interface FileRoutesByTo {
   '/ru/programming/$slug': typeof RuProgrammingSlugRoute
   '/ru/resources/$slug': typeof RuResourcesSlugRoute
   '/ru/soz/$slug': typeof RuSozSlugRoute
+  '/ru/tools/$slug': typeof RuToolsSlugRoute
   '/ru/xeta/$slug': typeof RuXetaSlugRoute
   '/tr/apps/$slug': typeof TrAppsSlugRoute
   '/tr/faq/$slug': typeof TrFaqSlugRoute
@@ -899,6 +938,7 @@ export interface FileRoutesByTo {
   '/tr/nece/$slug': typeof TrNeceSlugRoute
   '/tr/programming/$slug': typeof TrProgrammingSlugRoute
   '/tr/soz/$slug': typeof TrSozSlugRoute
+  '/tr/tools/$slug': typeof TrToolsSlugRoute
   '/tr/xeta/$slug': typeof TrXetaSlugRoute
   '/resources/$topic': typeof ResourcesTopicIndexRoute
 }
@@ -915,7 +955,7 @@ export interface FileRoutesById {
   '/paket': typeof PaketRoute
   '/privacy': typeof PrivacyRouteWithChildren
   '/soz': typeof SozRouteWithChildren
-  '/tools': typeof ToolsRoute
+  '/tools': typeof ToolsRouteWithChildren
   '/unutma': typeof UnutmaRoute
   '/why': typeof WhyRoute
   '/xeta': typeof XetaRouteWithChildren
@@ -930,7 +970,7 @@ export interface FileRoutesById {
   '/ar/nece': typeof ArNeceRouteWithChildren
   '/ar/paket': typeof ArPaketRoute
   '/ar/soz': typeof ArSozRouteWithChildren
-  '/ar/tools': typeof ArToolsRoute
+  '/ar/tools': typeof ArToolsRouteWithChildren
   '/ar/xeta': typeof ArXetaRouteWithChildren
   '/en/about': typeof EnAboutRoute
   '/en/apps': typeof EnAppsRouteWithChildren
@@ -941,7 +981,7 @@ export interface FileRoutesById {
   '/en/nece': typeof EnNeceRouteWithChildren
   '/en/paket': typeof EnPaketRoute
   '/en/soz': typeof EnSozRouteWithChildren
-  '/en/tools': typeof EnToolsRoute
+  '/en/tools': typeof EnToolsRouteWithChildren
   '/en/xeta': typeof EnXetaRouteWithChildren
   '/faq/$slug': typeof FaqSlugRoute
   '/guides/$topic': typeof GuidesTopicRoute
@@ -961,9 +1001,10 @@ export interface FileRoutesById {
   '/ru/nece': typeof RuNeceRouteWithChildren
   '/ru/paket': typeof RuPaketRoute
   '/ru/soz': typeof RuSozRouteWithChildren
-  '/ru/tools': typeof RuToolsRoute
+  '/ru/tools': typeof RuToolsRouteWithChildren
   '/ru/xeta': typeof RuXetaRouteWithChildren
   '/soz/$slug': typeof SozSlugRoute
+  '/tools/$slug': typeof ToolsSlugRoute
   '/tr/about': typeof TrAboutRoute
   '/tr/apps': typeof TrAppsRouteWithChildren
   '/tr/contact': typeof TrContactRoute
@@ -973,7 +1014,7 @@ export interface FileRoutesById {
   '/tr/nece': typeof TrNeceRouteWithChildren
   '/tr/paket': typeof TrPaketRoute
   '/tr/soz': typeof TrSozRouteWithChildren
-  '/tr/tools': typeof TrToolsRoute
+  '/tr/tools': typeof TrToolsRouteWithChildren
   '/tr/xeta': typeof TrXetaRouteWithChildren
   '/xeta/$slug': typeof XetaSlugRoute
   '/apps/': typeof AppsIndexRoute
@@ -987,6 +1028,7 @@ export interface FileRoutesById {
   '/ar/nece/$slug': typeof ArNeceSlugRoute
   '/ar/programming/$slug': typeof ArProgrammingSlugRoute
   '/ar/soz/$slug': typeof ArSozSlugRoute
+  '/ar/tools/$slug': typeof ArToolsSlugRoute
   '/ar/xeta/$slug': typeof ArXetaSlugRoute
   '/en/apps/$slug': typeof EnAppsSlugRoute
   '/en/faq/$slug': typeof EnFaqSlugRoute
@@ -995,6 +1037,7 @@ export interface FileRoutesById {
   '/en/nece/$slug': typeof EnNeceSlugRoute
   '/en/programming/$slug': typeof EnProgrammingSlugRoute
   '/en/soz/$slug': typeof EnSozSlugRoute
+  '/en/tools/$slug': typeof EnToolsSlugRoute
   '/en/xeta/$slug': typeof EnXetaSlugRoute
   '/resources/$topic/$article': typeof ResourcesTopicArticleRoute
   '/ru/apps/$slug': typeof RuAppsSlugRoute
@@ -1005,6 +1048,7 @@ export interface FileRoutesById {
   '/ru/programming/$slug': typeof RuProgrammingSlugRoute
   '/ru/resources/$slug': typeof RuResourcesSlugRoute
   '/ru/soz/$slug': typeof RuSozSlugRoute
+  '/ru/tools/$slug': typeof RuToolsSlugRoute
   '/ru/xeta/$slug': typeof RuXetaSlugRoute
   '/tr/apps/$slug': typeof TrAppsSlugRoute
   '/tr/faq/$slug': typeof TrFaqSlugRoute
@@ -1013,6 +1057,7 @@ export interface FileRoutesById {
   '/tr/nece/$slug': typeof TrNeceSlugRoute
   '/tr/programming/$slug': typeof TrProgrammingSlugRoute
   '/tr/soz/$slug': typeof TrSozSlugRoute
+  '/tr/tools/$slug': typeof TrToolsSlugRoute
   '/tr/xeta/$slug': typeof TrXetaSlugRoute
   '/resources/$topic/': typeof ResourcesTopicIndexRoute
 }
@@ -1079,6 +1124,7 @@ export interface FileRouteTypes {
     | '/ru/tools'
     | '/ru/xeta'
     | '/soz/$slug'
+    | '/tools/$slug'
     | '/tr/about'
     | '/tr/apps'
     | '/tr/contact'
@@ -1102,6 +1148,7 @@ export interface FileRouteTypes {
     | '/ar/nece/$slug'
     | '/ar/programming/$slug'
     | '/ar/soz/$slug'
+    | '/ar/tools/$slug'
     | '/ar/xeta/$slug'
     | '/en/apps/$slug'
     | '/en/faq/$slug'
@@ -1110,6 +1157,7 @@ export interface FileRouteTypes {
     | '/en/nece/$slug'
     | '/en/programming/$slug'
     | '/en/soz/$slug'
+    | '/en/tools/$slug'
     | '/en/xeta/$slug'
     | '/resources/$topic/$article'
     | '/ru/apps/$slug'
@@ -1120,6 +1168,7 @@ export interface FileRouteTypes {
     | '/ru/programming/$slug'
     | '/ru/resources/$slug'
     | '/ru/soz/$slug'
+    | '/ru/tools/$slug'
     | '/ru/xeta/$slug'
     | '/tr/apps/$slug'
     | '/tr/faq/$slug'
@@ -1128,6 +1177,7 @@ export interface FileRouteTypes {
     | '/tr/nece/$slug'
     | '/tr/programming/$slug'
     | '/tr/soz/$slug'
+    | '/tr/tools/$slug'
     | '/tr/xeta/$slug'
     | '/resources/$topic/'
   fileRoutesByTo: FileRoutesByTo
@@ -1191,6 +1241,7 @@ export interface FileRouteTypes {
     | '/ru/tools'
     | '/ru/xeta'
     | '/soz/$slug'
+    | '/tools/$slug'
     | '/tr/about'
     | '/tr/apps'
     | '/tr/contact'
@@ -1214,6 +1265,7 @@ export interface FileRouteTypes {
     | '/ar/nece/$slug'
     | '/ar/programming/$slug'
     | '/ar/soz/$slug'
+    | '/ar/tools/$slug'
     | '/ar/xeta/$slug'
     | '/en/apps/$slug'
     | '/en/faq/$slug'
@@ -1222,6 +1274,7 @@ export interface FileRouteTypes {
     | '/en/nece/$slug'
     | '/en/programming/$slug'
     | '/en/soz/$slug'
+    | '/en/tools/$slug'
     | '/en/xeta/$slug'
     | '/resources/$topic/$article'
     | '/ru/apps/$slug'
@@ -1232,6 +1285,7 @@ export interface FileRouteTypes {
     | '/ru/programming/$slug'
     | '/ru/resources/$slug'
     | '/ru/soz/$slug'
+    | '/ru/tools/$slug'
     | '/ru/xeta/$slug'
     | '/tr/apps/$slug'
     | '/tr/faq/$slug'
@@ -1240,6 +1294,7 @@ export interface FileRouteTypes {
     | '/tr/nece/$slug'
     | '/tr/programming/$slug'
     | '/tr/soz/$slug'
+    | '/tr/tools/$slug'
     | '/tr/xeta/$slug'
     | '/resources/$topic'
   id:
@@ -1304,6 +1359,7 @@ export interface FileRouteTypes {
     | '/ru/tools'
     | '/ru/xeta'
     | '/soz/$slug'
+    | '/tools/$slug'
     | '/tr/about'
     | '/tr/apps'
     | '/tr/contact'
@@ -1327,6 +1383,7 @@ export interface FileRouteTypes {
     | '/ar/nece/$slug'
     | '/ar/programming/$slug'
     | '/ar/soz/$slug'
+    | '/ar/tools/$slug'
     | '/ar/xeta/$slug'
     | '/en/apps/$slug'
     | '/en/faq/$slug'
@@ -1335,6 +1392,7 @@ export interface FileRouteTypes {
     | '/en/nece/$slug'
     | '/en/programming/$slug'
     | '/en/soz/$slug'
+    | '/en/tools/$slug'
     | '/en/xeta/$slug'
     | '/resources/$topic/$article'
     | '/ru/apps/$slug'
@@ -1345,6 +1403,7 @@ export interface FileRouteTypes {
     | '/ru/programming/$slug'
     | '/ru/resources/$slug'
     | '/ru/soz/$slug'
+    | '/ru/tools/$slug'
     | '/ru/xeta/$slug'
     | '/tr/apps/$slug'
     | '/tr/faq/$slug'
@@ -1353,6 +1412,7 @@ export interface FileRouteTypes {
     | '/tr/nece/$slug'
     | '/tr/programming/$slug'
     | '/tr/soz/$slug'
+    | '/tr/tools/$slug'
     | '/tr/xeta/$slug'
     | '/resources/$topic/'
   fileRoutesById: FileRoutesById
@@ -1369,7 +1429,7 @@ export interface RootRouteChildren {
   PaketRoute: typeof PaketRoute
   PrivacyRoute: typeof PrivacyRouteWithChildren
   SozRoute: typeof SozRouteWithChildren
-  ToolsRoute: typeof ToolsRoute
+  ToolsRoute: typeof ToolsRouteWithChildren
   UnutmaRoute: typeof UnutmaRoute
   WhyRoute: typeof WhyRoute
   XetaRoute: typeof XetaRouteWithChildren
@@ -1384,7 +1444,7 @@ export interface RootRouteChildren {
   ArNeceRoute: typeof ArNeceRouteWithChildren
   ArPaketRoute: typeof ArPaketRoute
   ArSozRoute: typeof ArSozRouteWithChildren
-  ArToolsRoute: typeof ArToolsRoute
+  ArToolsRoute: typeof ArToolsRouteWithChildren
   ArXetaRoute: typeof ArXetaRouteWithChildren
   EnAboutRoute: typeof EnAboutRoute
   EnAppsRoute: typeof EnAppsRouteWithChildren
@@ -1395,7 +1455,7 @@ export interface RootRouteChildren {
   EnNeceRoute: typeof EnNeceRouteWithChildren
   EnPaketRoute: typeof EnPaketRoute
   EnSozRoute: typeof EnSozRouteWithChildren
-  EnToolsRoute: typeof EnToolsRoute
+  EnToolsRoute: typeof EnToolsRouteWithChildren
   EnXetaRoute: typeof EnXetaRouteWithChildren
   GuidesTopicRoute: typeof GuidesTopicRoute
   ProgrammingTopicRoute: typeof ProgrammingTopicRoute
@@ -1409,7 +1469,7 @@ export interface RootRouteChildren {
   RuNeceRoute: typeof RuNeceRouteWithChildren
   RuPaketRoute: typeof RuPaketRoute
   RuSozRoute: typeof RuSozRouteWithChildren
-  RuToolsRoute: typeof RuToolsRoute
+  RuToolsRoute: typeof RuToolsRouteWithChildren
   RuXetaRoute: typeof RuXetaRouteWithChildren
   TrAboutRoute: typeof TrAboutRoute
   TrAppsRoute: typeof TrAppsRouteWithChildren
@@ -1420,7 +1480,7 @@ export interface RootRouteChildren {
   TrNeceRoute: typeof TrNeceRouteWithChildren
   TrPaketRoute: typeof TrPaketRoute
   TrSozRoute: typeof TrSozRouteWithChildren
-  TrToolsRoute: typeof TrToolsRoute
+  TrToolsRoute: typeof TrToolsRouteWithChildren
   TrXetaRoute: typeof TrXetaRouteWithChildren
   AppsIndexRoute: typeof AppsIndexRoute
   GuidesIndexRoute: typeof GuidesIndexRoute
@@ -1883,6 +1943,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SozSlugRouteImport
       parentRoute: typeof SozRoute
     }
+    '/tools/$slug': {
+      id: '/tools/$slug'
+      path: '/$slug'
+      fullPath: '/tools/$slug'
+      preLoaderRoute: typeof ToolsSlugRouteImport
+      parentRoute: typeof ToolsRoute
+    }
     '/tr/about': {
       id: '/tr/about'
       path: '/tr/about'
@@ -2016,6 +2083,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArSozSlugRouteImport
       parentRoute: typeof ArSozRoute
     }
+    '/ar/tools/$slug': {
+      id: '/ar/tools/$slug'
+      path: '/$slug'
+      fullPath: '/ar/tools/$slug'
+      preLoaderRoute: typeof ArToolsSlugRouteImport
+      parentRoute: typeof ArToolsRoute
+    }
     '/ar/xeta/$slug': {
       id: '/ar/xeta/$slug'
       path: '/$slug'
@@ -2071,6 +2145,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/en/soz/$slug'
       preLoaderRoute: typeof EnSozSlugRouteImport
       parentRoute: typeof EnSozRoute
+    }
+    '/en/tools/$slug': {
+      id: '/en/tools/$slug'
+      path: '/$slug'
+      fullPath: '/en/tools/$slug'
+      preLoaderRoute: typeof EnToolsSlugRouteImport
+      parentRoute: typeof EnToolsRoute
     }
     '/en/xeta/$slug': {
       id: '/en/xeta/$slug'
@@ -2149,6 +2230,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RuSozSlugRouteImport
       parentRoute: typeof RuSozRoute
     }
+    '/ru/tools/$slug': {
+      id: '/ru/tools/$slug'
+      path: '/$slug'
+      fullPath: '/ru/tools/$slug'
+      preLoaderRoute: typeof RuToolsSlugRouteImport
+      parentRoute: typeof RuToolsRoute
+    }
     '/ru/xeta/$slug': {
       id: '/ru/xeta/$slug'
       path: '/$slug'
@@ -2204,6 +2292,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/tr/soz/$slug'
       preLoaderRoute: typeof TrSozSlugRouteImport
       parentRoute: typeof TrSozRoute
+    }
+    '/tr/tools/$slug': {
+      id: '/tr/tools/$slug'
+      path: '/$slug'
+      fullPath: '/tr/tools/$slug'
+      preLoaderRoute: typeof TrToolsSlugRouteImport
+      parentRoute: typeof TrToolsRoute
     }
     '/tr/xeta/$slug': {
       id: '/tr/xeta/$slug'
@@ -2279,6 +2374,16 @@ const SozRouteChildren: SozRouteChildren = {
 }
 
 const SozRouteWithChildren = SozRoute._addFileChildren(SozRouteChildren)
+
+interface ToolsRouteChildren {
+  ToolsSlugRoute: typeof ToolsSlugRoute
+}
+
+const ToolsRouteChildren: ToolsRouteChildren = {
+  ToolsSlugRoute: ToolsSlugRoute,
+}
+
+const ToolsRouteWithChildren = ToolsRoute._addFileChildren(ToolsRouteChildren)
 
 interface XetaRouteChildren {
   XetaSlugRoute: typeof XetaSlugRoute
@@ -2368,6 +2473,17 @@ const ArSozRouteChildren: ArSozRouteChildren = {
 
 const ArSozRouteWithChildren = ArSozRoute._addFileChildren(ArSozRouteChildren)
 
+interface ArToolsRouteChildren {
+  ArToolsSlugRoute: typeof ArToolsSlugRoute
+}
+
+const ArToolsRouteChildren: ArToolsRouteChildren = {
+  ArToolsSlugRoute: ArToolsSlugRoute,
+}
+
+const ArToolsRouteWithChildren =
+  ArToolsRoute._addFileChildren(ArToolsRouteChildren)
+
 interface ArXetaRouteChildren {
   ArXetaSlugRoute: typeof ArXetaSlugRoute
 }
@@ -2443,6 +2559,17 @@ const EnSozRouteChildren: EnSozRouteChildren = {
 }
 
 const EnSozRouteWithChildren = EnSozRoute._addFileChildren(EnSozRouteChildren)
+
+interface EnToolsRouteChildren {
+  EnToolsSlugRoute: typeof EnToolsSlugRoute
+}
+
+const EnToolsRouteChildren: EnToolsRouteChildren = {
+  EnToolsSlugRoute: EnToolsSlugRoute,
+}
+
+const EnToolsRouteWithChildren =
+  EnToolsRoute._addFileChildren(EnToolsRouteChildren)
 
 interface EnXetaRouteChildren {
   EnXetaSlugRoute: typeof EnXetaSlugRoute
@@ -2520,6 +2647,17 @@ const RuSozRouteChildren: RuSozRouteChildren = {
 
 const RuSozRouteWithChildren = RuSozRoute._addFileChildren(RuSozRouteChildren)
 
+interface RuToolsRouteChildren {
+  RuToolsSlugRoute: typeof RuToolsSlugRoute
+}
+
+const RuToolsRouteChildren: RuToolsRouteChildren = {
+  RuToolsSlugRoute: RuToolsSlugRoute,
+}
+
+const RuToolsRouteWithChildren =
+  RuToolsRoute._addFileChildren(RuToolsRouteChildren)
+
 interface RuXetaRouteChildren {
   RuXetaSlugRoute: typeof RuXetaSlugRoute
 }
@@ -2596,6 +2734,17 @@ const TrSozRouteChildren: TrSozRouteChildren = {
 
 const TrSozRouteWithChildren = TrSozRoute._addFileChildren(TrSozRouteChildren)
 
+interface TrToolsRouteChildren {
+  TrToolsSlugRoute: typeof TrToolsSlugRoute
+}
+
+const TrToolsRouteChildren: TrToolsRouteChildren = {
+  TrToolsSlugRoute: TrToolsSlugRoute,
+}
+
+const TrToolsRouteWithChildren =
+  TrToolsRoute._addFileChildren(TrToolsRouteChildren)
+
 interface TrXetaRouteChildren {
   TrXetaSlugRoute: typeof TrXetaSlugRoute
 }
@@ -2619,7 +2768,7 @@ const rootRouteChildren: RootRouteChildren = {
   PaketRoute: PaketRoute,
   PrivacyRoute: PrivacyRouteWithChildren,
   SozRoute: SozRouteWithChildren,
-  ToolsRoute: ToolsRoute,
+  ToolsRoute: ToolsRouteWithChildren,
   UnutmaRoute: UnutmaRoute,
   WhyRoute: WhyRoute,
   XetaRoute: XetaRouteWithChildren,
@@ -2634,7 +2783,7 @@ const rootRouteChildren: RootRouteChildren = {
   ArNeceRoute: ArNeceRouteWithChildren,
   ArPaketRoute: ArPaketRoute,
   ArSozRoute: ArSozRouteWithChildren,
-  ArToolsRoute: ArToolsRoute,
+  ArToolsRoute: ArToolsRouteWithChildren,
   ArXetaRoute: ArXetaRouteWithChildren,
   EnAboutRoute: EnAboutRoute,
   EnAppsRoute: EnAppsRouteWithChildren,
@@ -2645,7 +2794,7 @@ const rootRouteChildren: RootRouteChildren = {
   EnNeceRoute: EnNeceRouteWithChildren,
   EnPaketRoute: EnPaketRoute,
   EnSozRoute: EnSozRouteWithChildren,
-  EnToolsRoute: EnToolsRoute,
+  EnToolsRoute: EnToolsRouteWithChildren,
   EnXetaRoute: EnXetaRouteWithChildren,
   GuidesTopicRoute: GuidesTopicRoute,
   ProgrammingTopicRoute: ProgrammingTopicRoute,
@@ -2659,7 +2808,7 @@ const rootRouteChildren: RootRouteChildren = {
   RuNeceRoute: RuNeceRouteWithChildren,
   RuPaketRoute: RuPaketRoute,
   RuSozRoute: RuSozRouteWithChildren,
-  RuToolsRoute: RuToolsRoute,
+  RuToolsRoute: RuToolsRouteWithChildren,
   RuXetaRoute: RuXetaRouteWithChildren,
   TrAboutRoute: TrAboutRoute,
   TrAppsRoute: TrAppsRouteWithChildren,
@@ -2670,7 +2819,7 @@ const rootRouteChildren: RootRouteChildren = {
   TrNeceRoute: TrNeceRouteWithChildren,
   TrPaketRoute: TrPaketRoute,
   TrSozRoute: TrSozRouteWithChildren,
-  TrToolsRoute: TrToolsRoute,
+  TrToolsRoute: TrToolsRouteWithChildren,
   TrXetaRoute: TrXetaRouteWithChildren,
   AppsIndexRoute: AppsIndexRoute,
   GuidesIndexRoute: GuidesIndexRoute,
