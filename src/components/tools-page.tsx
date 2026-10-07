@@ -1,10 +1,14 @@
 import { useState } from "react";
 import {
+  ArrowLeftRight,
   Binary,
   Braces,
+  CaseSensitive,
+  Clock,
   Code,
   Database,
   Dices,
+  Diff,
   Fingerprint,
   FileCode,
   Hash,
@@ -13,10 +17,14 @@ import {
   LockKeyhole,
   Minimize2,
   Palette,
+  Pipette,
+  Regex,
   Sparkles,
+  Table,
   TextQuote,
   Type,
   UserRound,
+  WholeWord,
 } from "lucide-react";
 import type { Lang } from "@/lib/i18n";
 import { TOOLS, TOOLS_PAGE, TOOL_GROUPS, type ToolId } from "@/lib/tools";
@@ -42,9 +50,38 @@ import {
   randomNumber,
   randomPassword,
   randomText,
+  caseForms,
+  convertColor,
+  convertTable,
+  diffText,
+  testRegex,
+  textStats,
+  unixConvert,
 } from "@/lib/tools-run";
 
-const NEEDS_TEXT = new Set<ToolId>(["hash", "md5", "sha256", "base64", "url", "html", "json", "json-min", "xml", "sql", "js", "css", "html-min", "css-min"]);
+const NEEDS_TEXT = new Set<ToolId>([
+  "hash",
+  "md5",
+  "sha256",
+  "base64",
+  "url",
+  "html",
+  "json",
+  "json-min",
+  "xml",
+  "sql",
+  "js",
+  "css",
+  "html-min",
+  "css-min",
+  "unix",
+  "case",
+  "count",
+  "csv",
+  "regex",
+  "color",
+  "diff",
+]);
 const PAIR = new Set<ToolId>(["base64", "url", "html"]);
 
 const GROUP_ICONS: Record<string, typeof Braces> = {
@@ -52,6 +89,8 @@ const GROUP_ICONS: Record<string, typeof Braces> = {
   code: Binary,
   crypt: LockKeyhole,
   format: Braces,
+  text: Type,
+  turn: ArrowLeftRight,
 };
 
 const ICONS: Record<ToolId, typeof Braces> = {
@@ -75,6 +114,13 @@ const ICONS: Record<ToolId, typeof Braces> = {
   sql: Database,
   text: Type,
   name: UserRound,
+  case: CaseSensitive,
+  count: WholeWord,
+  diff: Diff,
+  regex: Regex,
+  unix: Clock,
+  color: Pipette,
+  csv: Table,
 };
 
 async function sha(text: string, name: "SHA-1" | "SHA-256") {
@@ -82,7 +128,7 @@ async function sha(text: string, name: "SHA-1" | "SHA-256") {
   return Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, "0")).join("");
 }
 
-function runSync(id: ToolId, text: string, count: string, low: string, high: string) {
+function runSync(id: ToolId, text: string, count: string, low: string, high: string, extra: string, lang: Lang) {
   if (id === "lorem") return lorem(Number(count));
   if (id === "text") return randomText(Number(count));
   if (id === "number") return randomNumber(Number(low), Number(high));
@@ -101,16 +147,38 @@ function runSync(id: ToolId, text: string, count: string, low: string, high: str
   if (id === "css") return formatCss(text);
   if (id === "html-min") return minifyHtml(text);
   if (id === "css-min") return minifyCss(text);
+  if (id === "unix") return unixConvert(text);
+  if (id === "case") {
+    const forms = caseForms(text);
+    return [`${TOOLS_PAGE.upper[lang]}: ${forms.upper}`, `${TOOLS_PAGE.lower[lang]}: ${forms.lower}`, `camelCase: ${forms.camel}`, `snake_case: ${forms.snake}`, `slug: ${forms.slug}`].join("\n");
+  }
+  if (id === "count") {
+    const stats = textStats(text);
+    return [`${TOOLS_PAGE.words[lang]}: ${stats.words}`, `${TOOLS_PAGE.chars[lang]}: ${stats.chars}`, `${TOOLS_PAGE.nospace[lang]}: ${stats.nospace}`, `${TOOLS_PAGE.lines[lang]}: ${stats.lines}`].join("\n");
+  }
+  if (id === "csv") return convertTable(text);
+  if (id === "color") return convertColor(text);
+  if (id === "regex") {
+    const found = testRegex(extra, text);
+    return found.length ? found.join("\n") : TOOLS_PAGE.none[lang];
+  }
+  if (id === "diff") return diffText(text, extra);
   return "";
 }
 
-function fileKind(id: ToolId) {
-  return id === "xml" ? "xml" : "txt";
+function fileKind(id: ToolId, body: string) {
+  if (id === "xml") return "xml";
+  const raw = body.trim();
+  if (id === "csv" && (raw.startsWith("{") || raw.startsWith("["))) return "json";
+  if (id === "csv") return "csv";
+  return "txt";
 }
 
 function saveFile(id: ToolId, body: string) {
-  const kind = fileKind(id);
-  const blob = new Blob([body], { type: kind === "xml" ? "application/xml;charset=utf-8" : "text/plain;charset=utf-8" });
+  const kind = fileKind(id, body);
+  const blob = new Blob([body], {
+    type: kind === "xml" ? "application/xml;charset=utf-8" : kind === "json" ? "application/json;charset=utf-8" : kind === "csv" ? "text/csv;charset=utf-8" : "text/plain;charset=utf-8",
+  });
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;
@@ -128,6 +196,7 @@ function undo(id: ToolId, text: string) {
 export function ToolsPage({ lang }: { lang: Lang }) {
   const [openId, setOpenId] = useState<ToolId | null>(null);
   const [text, setText] = useState("");
+  const [extra, setExtra] = useState("");
   const [count, setCount] = useState("3");
   const [low, setLow] = useState("1");
   const [high, setHigh] = useState("100");
@@ -141,7 +210,7 @@ export function ToolsPage({ lang }: { lang: Lang }) {
     try {
       if (openId === "hash") setOutput(await sha(text, "SHA-1"));
       else if (openId === "sha256") setOutput(await sha(text, "SHA-256"));
-      else setOutput(mode === "undo" ? undo(openId, text) : runSync(openId, text, count, low, high));
+      else setOutput(mode === "undo" ? undo(openId, text) : runSync(openId, text, count, low, high, extra, lang));
     } catch {
       setOutput("");
       setNote(copy.bad[lang]);
@@ -182,6 +251,7 @@ export function ToolsPage({ lang }: { lang: Lang }) {
                             setOpenId(tool.id);
                             setOutput("");
                             setNote("");
+                            setExtra("");
                           }}
                         >
                           <span className="tool-name">
@@ -212,11 +282,26 @@ export function ToolsPage({ lang }: { lang: Lang }) {
                 ) : null}
                 {NEEDS_TEXT.has(openId) ? (
                   <>
+                    {openId === "regex" ? (
+                      <textarea
+                        value={extra}
+                        spellCheck={false}
+                        aria-label={copy.pattern[lang]}
+                        placeholder={copy.pattern[lang]}
+                        onChange={(event) => setExtra(event.target.value)}
+                      />
+                    ) : null}
                     <label className="tool-file">
                       {copy.load[lang]}
                       <input
                         type="file"
-                        accept={openId === "xml" ? ".xml,.txt,text/plain,application/xml,text/xml" : ".txt,text/plain"}
+                        accept={
+                          openId === "xml"
+                            ? ".xml,.txt,text/plain,application/xml,text/xml"
+                            : openId === "csv"
+                              ? ".csv,.json,.txt,text/plain,text/csv,application/json"
+                              : ".txt,text/plain"
+                        }
                         onChange={(event) => {
                           const file = event.target.files?.[0];
                           if (!file) return;
@@ -225,6 +310,15 @@ export function ToolsPage({ lang }: { lang: Lang }) {
                       />
                     </label>
                     <textarea value={text} spellCheck={false} onChange={(event) => setText(event.target.value)} />
+                    {openId === "diff" ? (
+                      <textarea
+                        value={extra}
+                        spellCheck={false}
+                        aria-label={copy.second[lang]}
+                        placeholder={copy.second[lang]}
+                        onChange={(event) => setExtra(event.target.value)}
+                      />
+                    ) : null}
                   </>
                 ) : null}
                 <div className="tool-row">

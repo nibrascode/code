@@ -199,3 +199,221 @@ export function minifyCss(text: string) {
   if (!next.includes("{")) throw new Error("css");
   return next;
 }
+
+const AZ: Record<string, string> = {
+  ə: "e",
+  ö: "o",
+  ü: "u",
+  ı: "i",
+  ğ: "g",
+  ş: "s",
+  ç: "c",
+  Ə: "e",
+  Ö: "o",
+  Ü: "u",
+  I: "i",
+  İ: "i",
+  Ğ: "g",
+  Ş: "s",
+  Ç: "c",
+};
+
+function wordsOf(text: string) {
+  return text
+    .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
+    .split(/[^0-9A-Za-zəöüğıışçƏÖÜĞIİŞÇ]+/)
+    .filter(Boolean);
+}
+
+export function caseForms(text: string) {
+  const words = wordsOf(text.trim());
+  if (!words.length) throw new Error("empty");
+  const lowerWords = words.map((word) => word.toLowerCase());
+  const camel = lowerWords.map((word, index) => (index === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1))).join("");
+  const snake = lowerWords.join("_");
+  const slug = [...text]
+    .map((char) => AZ[char] ?? char)
+    .join("")
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+  return { upper: text.toUpperCase(), lower: text.toLowerCase(), camel, snake, slug };
+}
+
+export function textStats(text: string) {
+  const chars = Array.from(text).length;
+  const nospace = Array.from(text.replace(/\s/g, "")).length;
+  const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+  const lines = text.length ? text.split(/\n/).length : 0;
+  return { words, chars, nospace, lines };
+}
+
+export function unixConvert(text: string) {
+  const raw = text.trim();
+  if (/^-?\d+(\.\d+)?$/.test(raw)) {
+    const value = Number(raw);
+    const ms = Math.abs(value) < 1e11 ? value * 1000 : value;
+    const date = new Date(ms);
+    if (Number.isNaN(date.getTime())) throw new Error("time");
+    return date.toISOString().replace(".000Z", " UTC").replace("T", " ").replace("Z", " UTC");
+  }
+  const date = new Date(raw);
+  if (Number.isNaN(date.getTime())) throw new Error("time");
+  return String(Math.floor(date.getTime() / 1000));
+}
+
+function parseCsv(text: string) {
+  const rows: string[][] = [];
+  let row: string[] = [];
+  let cell = "";
+  let quote = false;
+  const source = text.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+  for (let i = 0; i < source.length; i += 1) {
+    const char = source[i];
+    if (quote) {
+      if (char === '"') {
+        if (source[i + 1] === '"') {
+          cell += '"';
+          i += 1;
+        } else quote = false;
+      } else cell += char;
+      continue;
+    }
+    if (char === '"') quote = true;
+    else if (char === ",") {
+      row.push(cell);
+      cell = "";
+    } else if (char === "\n") {
+      row.push(cell);
+      rows.push(row);
+      row = [];
+      cell = "";
+    } else cell += char;
+  }
+  if (cell || row.length) {
+    row.push(cell);
+    rows.push(row);
+  }
+  return rows.filter((line) => line.some((part) => part.trim()));
+}
+
+function csvEscape(value: string) {
+  return /[",\n]/.test(value) ? `"${value.replace(/"/g, '""')}"` : value;
+}
+
+export function convertTable(text: string) {
+  const raw = text.trim();
+  if (!raw) throw new Error("empty");
+  if (raw.startsWith("{") || raw.startsWith("[")) {
+    const data = JSON.parse(raw) as unknown;
+    const rows = Array.isArray(data) ? data : [data];
+    if (!rows.length || rows.some((row) => !row || typeof row !== "object" || Array.isArray(row))) throw new Error("json");
+    const keys = [...new Set(rows.flatMap((row) => Object.keys(row as Record<string, unknown>)))];
+    const body = rows.map((row) =>
+      keys
+        .map((key) => {
+          const value = (row as Record<string, unknown>)[key];
+          if (value == null) return "";
+          return csvEscape(typeof value === "object" ? JSON.stringify(value) : String(value));
+        })
+        .join(","),
+    );
+    return [keys.join(","), ...body].join("\n");
+  }
+  const table = parseCsv(raw);
+  if (table.length < 2) throw new Error("csv");
+  const [head, ...rest] = table;
+  return JSON.stringify(
+    rest.map((line) => Object.fromEntries(head.map((key, index) => [key, line[index] ?? ""]))),
+    null,
+    2,
+  );
+}
+
+export function testRegex(pattern: string, text: string) {
+  const wrapped = pattern.trim().match(/^\/(.+)\/([a-z]*)$/);
+  const source = wrapped ? wrapped[1] : pattern;
+  const flags = wrapped ? wrapped[2] : "g";
+  if (!source) throw new Error("regex");
+  const re = new RegExp(source, flags.includes("g") ? flags : `${flags}g`);
+  return [...text.matchAll(re)].map((match) => match[0]).filter((part) => part !== "");
+}
+
+function clampColor(value: number) {
+  return Math.max(0, Math.min(255, Math.round(value)));
+}
+
+function hslToRgb(h: number, s: number, l: number) {
+  const hue = ((h % 360) + 360) % 360;
+  const c = (1 - Math.abs(2 * l - 1)) * s;
+  const x = c * (1 - Math.abs(((hue / 60) % 2) - 1));
+  const m = l - c / 2;
+  const part =
+    hue < 60 ? [c, x, 0] : hue < 120 ? [x, c, 0] : hue < 180 ? [0, c, x] : hue < 240 ? [0, x, c] : hue < 300 ? [x, 0, c] : [c, 0, x];
+  return part.map((channel) => clampColor((channel + m) * 255));
+}
+
+function rgbToHsl(r: number, g: number, b: number) {
+  const rn = r / 255;
+  const gn = g / 255;
+  const bn = b / 255;
+  const max = Math.max(rn, gn, bn);
+  const min = Math.min(rn, gn, bn);
+  const l = (max + min) / 2;
+  if (max === min) return [0, 0, Math.round(l * 100)];
+  const d = max - min;
+  const s = d / (1 - Math.abs(2 * l - 1));
+  const h = max === rn ? ((gn - bn) / d) % 6 : max === gn ? (bn - rn) / d + 2 : (rn - gn) / d + 4;
+  return [Math.round((h * 60 + 360) % 360), Math.round(s * 100), Math.round(l * 100)];
+}
+
+export function convertColor(text: string) {
+  const raw = text.trim();
+  let channels: number[] | null = null;
+  const hex = raw.match(/^#?([0-9a-f]{6})$/i);
+  const short = raw.match(/^#?([0-9a-f]{3})$/i);
+  const rgb = raw.match(/^rgba?\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})/i);
+  const hsl = raw.match(/^hsla?\(\s*(-?\d+(?:\.\d+)?)\s*,\s*(\d{1,3})%\s*,\s*(\d{1,3})%/i);
+  if (hex) channels = [0, 2, 4].map((at) => parseInt(hex[1].slice(at, at + 2), 16));
+  else if (short) channels = [...short[1]].map((char) => parseInt(char + char, 16));
+  else if (rgb) channels = [Number(rgb[1]), Number(rgb[2]), Number(rgb[3])];
+  else if (hsl) channels = hslToRgb(Number(hsl[1]), Number(hsl[2]) / 100, Number(hsl[3]) / 100);
+  if (!channels || channels.some((part) => part < 0 || part > 255 || Number.isNaN(part))) throw new Error("color");
+  const [r, g, b] = channels;
+  const hexOut = `#${[r, g, b].map((part) => part.toString(16).padStart(2, "0")).join("")}`;
+  const [h, s, l] = rgbToHsl(r, g, b);
+  return `${hexOut}\nrgb(${r}, ${g}, ${b})\nhsl(${h}, ${s}%, ${l}%)`;
+}
+
+export function diffText(leftText: string, rightText: string) {
+  const left = leftText.replace(/\r\n/g, "\n").split("\n");
+  const right = rightText.replace(/\r\n/g, "\n").split("\n");
+  if (left.length * right.length > 40000) throw new Error("big");
+  const dp = Array.from({ length: left.length + 1 }, () => new Uint16Array(right.length + 1));
+  for (let i = left.length - 1; i >= 0; i -= 1) {
+    for (let j = right.length - 1; j >= 0; j -= 1) {
+      dp[i][j] = left[i] === right[j] ? dp[i + 1][j + 1] + 1 : Math.max(dp[i + 1][j], dp[i][j + 1]);
+    }
+  }
+  const out: string[] = [];
+  let i = 0;
+  let j = 0;
+  while (i < left.length && j < right.length) {
+    if (left[i] === right[j]) {
+      out.push(`  ${left[i]}`);
+      i += 1;
+      j += 1;
+    } else if (dp[i + 1][j] >= dp[i][j + 1]) {
+      out.push(`- ${left[i]}`);
+      i += 1;
+    } else {
+      out.push(`+ ${right[j]}`);
+      j += 1;
+    }
+  }
+  while (i < left.length) out.push(`- ${left[i++]}`);
+  while (j < right.length) out.push(`+ ${right[j++]}`);
+  return out.join("\n");
+}

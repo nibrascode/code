@@ -22,7 +22,14 @@ export type ToolId =
   | "js"
   | "css"
   | "html-min"
-  | "css-min";
+  | "css-min"
+  | "unix"
+  | "case"
+  | "count"
+  | "csv"
+  | "regex"
+  | "color"
+  | "diff";
 
 const L = (az: string, en: string, tr: string, ar: string, ru: string): Record<Lang, string> => ({ az, en, tr, ar, ru });
 
@@ -36,11 +43,11 @@ export const TOOLS_PAGE = {
     "Услуги — инструменты кода",
   ),
   description: L(
-    "Lorem Ipsum, təsadüfi mətn, şifrə, UUID, MD5, SHA-256, Base64, JSON, XML, SQL, HTML və CSS alətləri.",
-    "Lorem Ipsum, random text, a password, UUID, MD5, SHA-256, Base64, JSON, XML, SQL, HTML, and CSS tools.",
-    "Lorem Ipsum, rastgele metin, parola, UUID, MD5, SHA-256, Base64, JSON, XML, SQL, HTML ve CSS araçları.",
-    "Lorem Ipsum ونص عشوائي وكلمة سر وUUID وMD5 وSHA-256 وBase64 وJSON وXML وSQL وHTML وCSS.",
-    "Lorem Ipsum, случайный текст, пароль, UUID, MD5, SHA-256, Base64, JSON, XML, SQL, HTML и CSS.",
+    "Lorem Ipsum, təsadüfi mətn, şifrə, UUID, MD5, SHA-256, Base64, JSON, XML, Unix vaxtı, hərf forması, söz sayı, rəng və regex.",
+    "Lorem Ipsum, random text, a password, UUID, MD5, SHA-256, Base64, JSON, XML, Unix time, letter case, a word count, color, and regex.",
+    "Lorem Ipsum, rastgele metin, parola, UUID, MD5, SHA-256, Base64, JSON, XML, Unix zamanı, harf biçimi, söz sayısı, renk ve regex.",
+    "Lorem Ipsum ونص عشوائي وكلمة سر وUUID وMD5 وSHA-256 وBase64 وJSON وXML ووقت يونكس وشكل الحرف وعدّاد الكلمات واللون وregex.",
+    "Lorem Ipsum, случайный текст, пароль, UUID, MD5, SHA-256, Base64, JSON, XML, время Unix, регистр, счётчик слов, цвет и regex.",
   ),
   group: L("Kod alətləri", "Code tools", "Kod araçları", "أدوات الكود", "Инструменты кода"),
   run: L("Yarat", "Make", "Üret", "أنشئ", "Сделать"),
@@ -49,6 +56,15 @@ export const TOOLS_PAGE = {
   save: L("Faylı yüklə", "Download the file", "Dosyayı indir", "نزّل الملف", "Скачать файл"),
   load: L("Fayl seç", "Choose a file", "Dosya seç", "اختر ملفًا", "Выбрать файл"),
   bad: L("Mətn bu alətə uyğun deyil.", "This text does not fit the tool.", "Metin bu araca uymaz.", "هذا النص لا يناسب الأداة.", "Этот текст инструменту не подходит."),
+  none: L("Uyğun gəlmədi.", "Nothing matched.", "Eşleşme yok.", "لا يوجد تطابق.", "Совпадений нет."),
+  pattern: L("Nümunə", "Pattern", "Kalıp", "النمط", "Шаблон"),
+  second: L("İkinci mətn", "Second text", "İkinci metin", "النص الثاني", "Второй текст"),
+  upper: L("Böyük", "Upper", "Büyük", "كبير", "Верхний"),
+  lower: L("Kiçik", "Lower", "Küçük", "صغير", "Нижний"),
+  words: L("Söz", "Words", "Söz", "كلمات", "Слова"),
+  chars: L("Simvol", "Characters", "Karakter", "حروف", "Символы"),
+  nospace: L("Boşluqsuz", "No spaces", "Boşluksuz", "بلا فراغ", "Без пробелов"),
+  lines: L("Sətir", "Lines", "Satır", "أسطر", "Строки"),
 };
 
 export const TOOLS: readonly { id: ToolId; label: Record<Lang, string> }[] = [
@@ -72,6 +88,13 @@ export const TOOLS: readonly { id: ToolId; label: Record<Lang, string> }[] = [
   { id: "sql", label: L("SQL düzəlt", "SQL formatter", "SQL düzenle", "تنسيق SQL", "Формат SQL") },
   { id: "text", label: L("Təsadüfi mətn", "Random text", "Rastgele metin", "نص عشوائي", "Случайный текст") },
   { id: "name", label: L("Təsadüfi ad", "Random name", "Rastgele ad", "اسم عشوائي", "Случайное имя") },
+  { id: "case", label: L("Hərf forması", "Letter case", "Harf biçimi", "شكل الحرف", "Регистр") },
+  { id: "count", label: L("Söz sayğacı", "Word count", "Söz sayacı", "عدّاد الكلمات", "Счётчик слов") },
+  { id: "diff", label: L("Mətn fərqi", "Text difference", "Metin farkı", "فرق النص", "Разница текста") },
+  { id: "regex", label: L("Regex", "Regex", "Regex", "Regex", "Regex") },
+  { id: "unix", label: L("Unix vaxtı", "Unix time", "Unix zamanı", "وقت يونكس", "Время Unix") },
+  { id: "color", label: L("Rəng kodu", "Color code", "Renk kodu", "رمز اللون", "Код цвета") },
+  { id: "csv", label: L("JSON və CSV", "JSON and CSV", "JSON ve CSV", "JSON و CSV", "JSON и CSV") },
 ];
 
 export const TOOL_GROUPS: readonly { id: string; title: Record<Lang, string>; ids: readonly ToolId[] }[] = [
@@ -94,6 +117,16 @@ export const TOOL_GROUPS: readonly { id: string; title: Record<Lang, string>; id
     id: "format",
     title: L("Düzəltmə", "Formatting", "Düzenleme", "تنسيق", "Оформление"),
     ids: ["json", "json-min", "css", "js", "html-min", "css-min", "xml", "sql"],
+  },
+  {
+    id: "text",
+    title: L("Mətn", "Text", "Metin", "نص", "Текст"),
+    ids: ["case", "count", "diff", "regex"],
+  },
+  {
+    id: "turn",
+    title: L("Çevirici", "Converter", "Dönüştürücü", "محوّل", "Конвертер"),
+    ids: ["unix", "color", "csv"],
   },
 ];
 
