@@ -265,8 +265,8 @@ export async function wikidataReply(message) {
     }
     if (!facts.desc && !lines.length) continue;
     const head = facts.desc ? facts.title + " — " + facts.desc + "." : facts.title + ".";
-    const src = names.source + ": Wikidata API · " + hit.id + "\nhttps://www.wikidata.org/wiki/" + hit.id;
-    return [head, lines.slice(0, 5).join("\n"), src].filter(Boolean).join("\n\n");
+    const body = lines.slice(0, 5).join("\n");
+    return body ? head + "\n\n" + body : head;
   }
   const ids = hits.map((h) => h.id).filter(Boolean).slice(0, 4);
   const packed = await getJson(
@@ -322,6 +322,5 @@ export async function wikidataReply(message) {
   if (!desc && !lines.length) return null;
   const head = desc ? title + " — " + desc + "." : title + ".";
   const body = lines.slice(0, 5).join("\n");
-  const src = names.source + ": Wikidata · " + entity.id + "\nhttps://www.wikidata.org/wiki/" + entity.id;
-  return [head, body, src].filter(Boolean).join("\n\n");
+  return body ? head + "\n\n" + body : head;
 }
