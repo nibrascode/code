@@ -5779,6 +5779,10 @@ body.is-home .noise {
   border-top: 0;
 }
 
+.nx-foot .nx-foot-extra > :nth-child(3) {
+  grid-column: 1 / -1;
+}
+
 .nx-foot-extra .nav-drop,
 .footer-panels .nav-drop,
 .nx-foot-extra .footer-faq,

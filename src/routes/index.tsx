@@ -7,6 +7,7 @@ import { LanguageSwitch } from "@/components/language-switch";
 import { NavMenu } from "@/components/nav-menu";
 import { faqPath } from "@/lib/faq";
 import { localeHref } from "@/lib/locale-path";
+import { SEARCH, searchPath } from "@/lib/search-pages";
 import { useI18n } from "@/lib/i18n-context";
 import { statusText } from "@/lib/studio";
 import { loadStudioBundle } from "@/lib/studio.functions";
@@ -389,6 +390,9 @@ function Home() {
           <NavMenu section="resources" />
           <NavMenu section="guides" />
           <NavMenu section="programming" />
+          <a className="footer-faq" href={searchPath(lang, "movzu")}>
+            {SEARCH.movzu.heading[lang]}
+          </a>
           <a className="footer-faq" href={faqPath(lang)}>
             FAQ
           </a>
