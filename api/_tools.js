@@ -1,6 +1,6 @@
 import { createHash, randomBytes, randomInt } from "node:crypto";
 
-const SITE = "https://www.nibrascode.com/tools";
+const SECRET = new Set(["password", "md5", "sha256", "hash", "jwt", "base64"]);
 
 function tail(slug) {
   return `\n\nXidmət: ${SITE}/${slug}`;
@@ -151,7 +151,8 @@ export function toolsReply(message) {
   try {
     const out = tool.run(body, text);
     if (!out) return null;
-    return `${out}${tail(tool.slug)}`;
+    const bodyText = `${out}${tail(tool.slug)}`;
+    return SECRET.has(tool.id) ? `::vault::\n${bodyText}` : bodyText;
   } catch {
     return null;
   }

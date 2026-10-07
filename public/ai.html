@@ -466,6 +466,14 @@
       transition: .2s ease;
     }
     .toast.on { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .vault { position: fixed; inset: 0; z-index: 40; display: grid; place-items: center; padding: 18px; background: rgb(4 8 16 / 0.72); }
+    .vault[hidden] { display: none; }
+    .vault-card { width: min(520px, 100%); padding: 16px; border-radius: 16px; border: 1px solid rgb(140 170 230 / 0.28); background: #10182a; color: #eef4ff; }
+    .vault-card h2 { margin: 0 0 6px; font-size: 1.05rem; }
+    .vault-card p { margin: 0 0 10px; color: #c5d0e6; font-size: 14px; }
+    .vault-card textarea { width: 100%; min-height: 140px; padding: 10px; border-radius: 12px; border: 1px solid rgb(140 170 230 / 0.28); background: #070d18; color: #eef4ff; font: 14px/1.45 ui-monospace, monospace; }
+    .vault-acts { display: flex; gap: 8px; margin-top: 10px; }
+    .vault-acts button { padding: 8px 12px; border: 0; border-radius: 10px; background: #2f5bff; color: #fff; font-weight: 700; cursor: pointer; }
     .menu {
       width: 38px; height: 38px; border-radius: 999px; padding: 0; cursor: pointer;
       display: grid; place-items: center; flex: none;
@@ -685,6 +693,17 @@
     <p class="dnote" id="dnote">Söhbət bu brauzerdə 24 saat qalır</p>
   </aside>
   <div class="toast" id="toast" role="status"></div>
+  <div class="vault" id="vault" hidden>
+    <div class="vault-card" role="dialog" aria-modal="true" aria-labelledby="vault-title">
+      <h2 id="vault-title">Nəticə saxlanmır</h2>
+      <p id="vault-note">Bu mətn söhbətə yazılmır. Pəncərə bağlananda silinir.</p>
+      <textarea id="vault-text" readonly></textarea>
+      <div class="vault-acts">
+        <button type="button" id="vault-copy">Kopyala</button>
+        <button type="button" id="vault-close">Bağla</button>
+      </div>
+    </div>
+  </div>
 
   <script>
     const LIMIT = 40;
@@ -1365,8 +1384,11 @@
           rec("b err", etext, "", 1);
         } else {
           const rtext = reply || (data.url ? "Şəkil hazırdır." : "");
-          bubble(rtext, "b", data.url || "");
-          rec("b", rtext, data.url || "", useImage ? 1 : 0);
+          if (rtext.indexOf("::vault::") === 0) openVault(rtext.replace(/^::vault::\n?/, ""), um);
+          else {
+            bubble(rtext, "b", data.url || "");
+            rec("b", rtext, data.url || "", useImage ? 1 : 0);
+          }
           if (data.usedAI === true) {
             const u = load();
             u.c += 1;
@@ -1392,6 +1414,36 @@
         inp.focus();
       }
     }
+    function openVault(text, userMsg) {
+      const copy = {
+        az: ["Nəticə saxlanmır", "Bu mətn söhbətə yazılmır. Pəncərə bağlananda silinir.", "Kopyala", "Bağla", "Şifrələmə pəncərədə açıldı. Mətn saxlanmadı."],
+        en: ["Result is not saved", "This text is not written into the chat. It is deleted when the window closes.", "Copy", "Close", "Encryption opened in a window. The text was not saved."],
+        tr: ["Sonuç kaydedilmez", "Bu metin sohbete yazılmaz. Pencere kapanınca silinir.", "Kopyala", "Kapat", "Şifreleme pencerede açıldı. Metin kaydedilmedi."],
+        ar: ["النتيجة لا تُحفظ", "هذا النص لا يُكتب في الدردشة. يُحذف عند إغلاق النافذة.", "نسخ", "إغلاق", "فُتح التشفير في نافذة. لم يُحفظ النص."],
+        ru: ["Результат не сохраняется", "Этот текст не пишется в чат. При закрытии окна он удаляется.", "Копировать", "Закрыть", "Шифрование открыто в окне. Текст не сохранён."]
+      }[uiLangCode] || ["Nəticə saxlanmır", "Bu mətn söhbətə yazılmır. Pəncərə bağlananda silinir.", "Kopyala", "Bağla", "Şifrələmə pəncərədə açıldı. Mətn saxlanmadı."];
+      if (userMsg) userMsg.t = copy[4];
+      if (curItem) curItem.title = copy[4].slice(0, 40);
+      const lastUser = msgs.querySelector(".msg.u:last-of-type");
+      if (lastUser) lastUser.textContent = copy[4];
+      writeStore();
+      document.getElementById("vault-title").textContent = copy[0];
+      document.getElementById("vault-note").textContent = copy[1];
+      document.getElementById("vault-copy").textContent = copy[2];
+      document.getElementById("vault-close").textContent = copy[3];
+      document.getElementById("vault-text").value = text;
+      document.getElementById("vault").hidden = false;
+      bubble(copy[4], "b");
+      rec("b", copy[4], "", 0);
+    }
+    document.getElementById("vault-close").addEventListener("click", function () {
+      document.getElementById("vault-text").value = "";
+      document.getElementById("vault").hidden = true;
+    });
+    document.getElementById("vault-copy").addEventListener("click", function () {
+      const value = document.getElementById("vault-text").value;
+      if (navigator.clipboard) navigator.clipboard.writeText(value);
+    });
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       send(inp.value);
