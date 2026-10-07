@@ -1,6 +1,6 @@
 import type { Lang } from "@/lib/i18n";
 
-export type SearchKind = "soz" | "xeta";
+export type SearchKind = "soz" | "xeta" | "movzu";
 
 export type SearchPiece = {
   title: string;
@@ -387,6 +387,157 @@ const ERRORS: readonly SearchItem[] = [
   },
 ];
 
+const TOPICS: readonly SearchItem[] = [
+  {
+    slug: "chatgpt-nedir",
+    piece: piece(
+      L("ChatGPT nədir?", "What is ChatGPT?", "ChatGPT nedir?", "ما هو ChatGPT؟", "Что такое ChatGPT?"),
+      L(
+        "ChatGPT söhbət proqramıdır. Sən yazırsan, o cavab yazır. Bu il Google-da ən çox axtarılan proqram adlarından biridir.",
+        "ChatGPT is a chat program. You write, and it writes back. It is one of the most searched program names on Google this year.",
+        "ChatGPT bir sohbet programıdır. Sen yazarsın, o cevap yazar. Bu yıl Google'da en çok aranan program adlarından biridir.",
+        "ChatGPT برنامج محادثة. تكتب فيكتب الجواب. هو من أكثر أسماء البرامج بحثًا في Google هذا العام.",
+        "ChatGPT — это программа для разговора. Ты пишешь, она отвечает. В этом году это одно из самых искомых имён программ в Google.",
+      ),
+      {
+        az: ["Onu OpenAI hazırlayır. Səhifədə və telefonda ayrıca tətbiq kimi durur.", "Mətn, kod və sadə izah üçün istifadə olunur.", "Sənin faylını özü görmür. Yapışdırmadığın şeyi bilmir.", "Rəqəm, tarix və kod səhv çıxa bilər. İşlətməzdən əvvəl yoxla."],
+        en: ["OpenAI makes it. It stands as its own app on the web and on the phone.", "People use it for text, code, and a plain explanation.", "It does not see your files by itself. It does not know what you did not paste.", "A number, a date, or a piece of code can come out wrong. Check it before you use it."],
+        tr: ["Onu OpenAI hazırlar. Sitede ve telefonda ayrı bir uygulama olarak durur.", "Metin, kod ve sade bir açıklama için kullanılır.", "Dosyanı kendisi görmez. Yapıştırmadığın şeyi bilmez.", "Sayı, tarih ve kod yanlış çıkabilir. Kullanmadan önce kontrol et."],
+        ar: ["تصنعه OpenAI. يقف كتطبيق مستقل على الويب وعلى الهاتف.", "يُستخدم للنص والرمز والشرح البسيط.", "لا يرى ملفاتك بنفسه. لا يعرف ما لم تلصقه.", "قد يخرج الرقم أو التاريخ أو الرمز خطأ. افحصه قبل أن تستخدمه."],
+        ru: ["Его делает OpenAI. Он стоит отдельным приложением на сайте и на телефоне.", "Им пользуются для текста, кода и простого объяснения.", "Твои файлы сам он не видит. Чего ты не вставил, того он не знает.", "Число, дата и код могут выйти неверно. Проверь, прежде чем пользоваться."],
+      },
+      L(
+        "Nibras AI bu saytın öz söhbətidir. ChatGPT deyil.",
+        "Nibras AI is this site's own chat. It is not ChatGPT.",
+        "Nibras AI bu sitenin kendi sohbetidir. ChatGPT değildir.",
+        "Nibras AI محادثة هذا الموقع. ليست ChatGPT.",
+        "Nibras AI — это разговор этого сайта. Это не ChatGPT.",
+      ),
+    ),
+  },
+  {
+    slug: "gemini-nedir",
+    piece: piece(
+      L("Gemini nədir?", "What is Gemini?", "Gemini nedir?", "ما هو Gemini؟", "Что такое Gemini?"),
+      L(
+        "Gemini Google-un söhbət proqramıdır. ChatGPT ilə eyni işi görür: sual yazırsan, cavab gəlir.",
+        "Gemini is Google's chat program. It does the same job as ChatGPT: you write a question and an answer comes back.",
+        "Gemini, Google'ın sohbet programıdır. ChatGPT ile aynı işi görür: soru yazarsın, cevap gelir.",
+        "Gemini برنامج محادثة Google. يؤدي عمل ChatGPT نفسه: تكتب سؤالًا فيأتي الجواب.",
+        "Gemini — это программа Google для разговора. Она делает ту же работу, что ChatGPT: пишешь вопрос, приходит ответ.",
+      ),
+      {
+        az: ["Axtarışın, Gmail-in və Android-in yanında durur.", "Adını bir çox dildə axtarırlar. Mənası dəyişmir: Google-un söhbəti.", "Şəkil və səs də qəbul edə bilir. Yenə də yazdığın söz cavabı yönəldir.", "Cavab mənbəsiz ola bilər. Vacib bir şeyi başqa yerdən yoxla."],
+        en: ["It sits beside Search, Gmail, and Android.", "People search the name in many languages. The meaning does not change: it is Google's chat.", "It can also take a picture and a voice. The words you write still steer the answer.", "An answer can come without a source. Check an important fact somewhere else."],
+        tr: ["Aramanın, Gmail'in ve Android'in yanında durur.", "Adını birçok dilde ararlar. Anlamı değişmez: Google'ın sohbetidir.", "Resim ve ses de alabilir. Yine de yazdığın söz cevabı yönlendirir.", "Cevap kaynaksız olabilir. Önemli bir şeyi başka yerden kontrol et."],
+        ar: ["يقف بجانب البحث وGmail وAndroid.", "يُبحث الاسم بلغات كثيرة. المعنى لا يتغير: إنه محادثة Google.", "يستطيع أيضًا أن يأخذ صورة وصوتًا. والكلمات التي تكتبها ما زالت توجّه الجواب.", "قد يأتي الجواب بلا مصدر. افحص الأمر المهم من مكان آخر."],
+        ru: ["Он стоит рядом с Поиском, Gmail и Android.", "Имя ищут на многих языках. Смысл не меняется: это разговор Google.", "Он умеет принять и картинку, и голос. Слова, которые ты пишешь, всё равно ведут ответ.", "Ответ может прийти без источника. Важное проверь в другом месте."],
+      },
+    ),
+  },
+  {
+    slug: "claude-nedir",
+    piece: piece(
+      L("Claude nədir?", "What is Claude?", "Claude nedir?", "ما هو Claude؟", "Что такое Claude?"),
+      L(
+        "Claude Anthropic-in söhbət proqramıdır. Adamlar onu ChatGPT və Gemini-nin yanında axtarır.",
+        "Claude is Anthropic's chat program. People search for it next to ChatGPT and Gemini.",
+        "Claude, Anthropic'in sohbet programıdır. İnsanlar onu ChatGPT ve Gemini'nin yanında arar.",
+        "Claude برنامج محادثة Anthropic. يبحث الناس عنه بجانب ChatGPT وGemini.",
+        "Claude — это программа Anthropic для разговора. Её ищут рядом с ChatGPT и Gemini.",
+      ),
+      {
+        az: ["Uzun mətn və kod üçün istifadə olunur.", "Üç ad, bir iş: sən yazırsan, model cavab yazır.", "Biri digərinin içi deyil. Hesabın və limiti ayrıdır.", "Hansını seçəcəyin mətnin uzunluğundan və sənin öyrəşdiyin ünvandan asılıdır."],
+        en: ["People use it for a long text and for code.", "Three names, one job: you write, and a model writes back.", "One is not the inside of another. The account and the limit are separate.", "Which you pick depends on the length of the text and the address you already know."],
+        tr: ["Uzun metin ve kod için kullanılır.", "Üç ad, bir iş: sen yazarsın, model cevap yazar.", "Biri diğerinin içi değildir. Hesap ve limit ayrıdır.", "Hangisini seçeceğin metnin uzunluğuna ve alıştığın adrese bağlıdır."],
+        ar: ["يُستخدم للنص الطويل وللرمز.", "ثلاثة أسماء وعمل واحد: تكتب فيكتب النموذج الجواب.", "أحدها ليس داخل الآخر. الحساب والحد منفصلان.", "أيها تختار يعتمد على طول النص وعلى العنوان الذي تعرفه."],
+        ru: ["Им пользуются для длинного текста и для кода.", "Три имени, одна работа: ты пишешь, модель отвечает.", "Одно не сидит внутри другого. Учётная запись и лимит отдельные.", "Что выбрать, зависит от длины текста и от адреса, который ты уже знаешь."],
+      },
+    ),
+  },
+  {
+    slug: "prompt-nedir",
+    piece: piece(
+      L("Prompt nədir?", "What is a prompt?", "Prompt nedir?", "ما هو prompt؟", "Что такое prompt?"),
+      L(
+        "Prompt modelə göndərdiyin yazıdır. Sual da odu, tapşırıq da. Qısa və boş yazı qeyri-müəyyən cavab gətirir.",
+        "A prompt is the text you send to a model. It can be a question or a task. A short, empty line brings a vague answer.",
+        "Prompt, modele gönderdiğin yazıdır. Soru da odur, görev de. Kısa ve boş yazı belirsiz cevap getirir.",
+        "Prompt هو النص الذي ترسله إلى النموذج. قد يكون سؤالًا أو مهمة. السطر القصير الفارغ يأتي بجواب غامض.",
+        "Prompt — это текст, который ты отправляешь модели. Это и вопрос, и задание. Короткая пустая строка приносит расплывчатый ответ.",
+      ),
+      {
+        az: ["Dili, uzunluğu və əlinin altında olanı yaz. «Bunu izah et» azdır.", "«Bu Python kodunu üç cümlə ilə izah et» daha düz işləyir.", "Nümunə versən, cavab o nümunəyə yaxın gəlir.", "Şifrəni və gizli açarı yapışdırma. Model onu yadda saxlaya bilər."],
+        en: ["Write the language, the length, and what you already have. \"Explain this\" is too little.", "\"Explain this Python code in three sentences\" works better.", "If you give an example, the answer comes closer to that example.", "Do not paste a password or a private key. The model may keep it."],
+        tr: ["Dili, uzunluğu ve elinde olanı yaz. «Bunu açıkla» azdır.", "«Bu Python kodunu üç cümleyle açıkla» daha düzgün işler.", "Örnek verirsen cevap o örneğe yakın gelir.", "Şifreyi ve gizli anahtarı yapıştırma. Model onu saklayabilir."],
+        ar: ["اكتب اللغة والطول وما هو تحت يدك. «اشرح هذا» قليل.", "«اشرح رمز Python هذا في ثلاث جمل» يعمل بشكل أفضل.", "إذا أعطيت مثالًا اقترب الجواب من ذلك المثال.", "لا تلصق كلمة السر ولا المفتاح السري. قد يحتفظ به النموذج."],
+        ru: ["Напиши язык, длину и то, что уже есть. «Объясни это» — мало.", "«Объясни этот код Python тремя предложениями» работает точнее.", "Если дашь пример, ответ придёт ближе к этому примеру.", "Не вставляй пароль и секретный ключ. Модель может его сохранить."],
+      },
+      L(
+        "Model baxdığın səhifəni görmür. Görməsini istəyirsənsə, mətnin özünü yaz.",
+        "The model does not see the page you are looking at. If you want it to see the text, write the text itself.",
+        "Model baktığın sayfayı görmez. Görmesini istiyorsan metnin kendisini yaz.",
+        "النموذج لا يرى الصفحة التي تنظر إليها. إذا أردت أن يراه فاكتب النص نفسه.",
+        "Модель не видит страницу, на которую ты смотришь. Если хочешь, чтобы она увидела текст, напиши сам текст.",
+      ),
+    ),
+  },
+  {
+    slug: "ai-ile-tetbiq",
+    piece: piece(
+      L("Süni intellektlə tətbiq hazırlamaq", "Making an app with AI", "Yapay zeka ile uygulama yapmak", "صنع تطبيق بالذكاء الاصطناعي", "Сделать приложение с ИИ"),
+      L(
+        "2026-da bir cümlə Android tətbiqinin başlanğıcı ola bilir. Bu, mağazaya hazır tətbiq deyil.",
+        "In 2026 one sentence can start an Android app. That is not an app ready for the store.",
+        "2026'da bir cümle bir Android uygulamasının başlangıcı olabilir. Bu, mağazaya hazır uygulama değildir.",
+        "في 2026 يمكن لجملة واحدة أن تبدأ تطبيق Android. هذا ليس تطبيقًا جاهزًا للمتجر.",
+        "В 2026 одно предложение может начать приложение Android. Это не приложение, готовое для магазина.",
+      ),
+      {
+        az: ["Alət sənə layihə verir. Ad, ikon, imza və real telefonda yoxlama səndə qalır.", "İçində yenə kod durur. Bu, Kotlin ola bilər və ya səhifənin APK-ya yığılması.", "Düzəlmiş düyməni və icazəni oxu. Model onları buraxa bilər.", "Paket adı və imza köhnə qaydadır. Süni intellekt onları ləğv etmir."],
+        en: ["The tool gives you a project. The name, the icon, the signature, and a test on a real phone stay with you.", "There is still code inside. It may be Kotlin, or a page packed into an APK.", "Read the generated button and the permission. A model can leave them out.", "The package name and the signature are the old rules. AI does not cancel them."],
+        tr: ["Araç sana bir proje verir. Ad, simge, imza ve gerçek telefonda deneme sende kalır.", "İçinde yine kod durur. Bu Kotlin olabilir ya da sayfanın APK'ya paketlenmesi.", "Üretilen düğmeyi ve izni oku. Model onları atlayabilir.", "Paket adı ve imza eski kuraldır. Yapay zeka onları kaldırmaz."],
+        ar: ["الأداة تعطيك مشروعًا. الاسم والأيقونة والتوقيع والتجربة على هاتف حقيقي تبقى عندك.", "في الداخل ما زال هناك رمز. قد يكون Kotlin أو صفحة تُجمع في APK.", "اقرأ الزر المولَّد والإذن. قد يتركهما النموذج.", "اسم الحزمة والتوقيع قاعدة قديمة. الذكاء الاصطناعي لا يلغيها."],
+        ru: ["Инструмент даёт тебе проект. Имя, значок, подпись и проверка на настоящем телефоне остаются на тебе.", "Внутри всё ещё код. Это может быть Kotlin или страница, собранная в APK.", "Прочитай готовую кнопку и разрешение. Модель может их пропустить.", "Имя пакета и подпись — старое правило. ИИ их не отменяет."],
+      },
+      L(
+        "APK xətaları bu yolda da eynidir: qurulmur, parse error, imza və paket adı.",
+        "The APK errors are the same on this road: it will not install, parse error, signature, and package name.",
+        "APK hataları bu yolda da aynıdır: kurulmuyor, parse error, imza ve paket adı.",
+        "أخطاء APK هي نفسها في هذا الطريق: لا يُثبَّت، وparse error، والتوقيع، واسم الحزمة.",
+        "Ошибки APK на этой дороге те же: не устанавливается, parse error, подпись и имя пакета.",
+      ),
+    ),
+  },
+  {
+    slug: "python-2026",
+    piece: piece(
+      L("2026-da Python öyrənməyə dəyərmi?", "Is Python still worth learning in 2026?", "2026'da Python öğrenmeye değer mi?", "هل يستحق Python التعلم في 2026؟", "Стоит ли учить Python в 2026?"),
+      L(
+        "Dəyər. İlk dil üçün və süni intellekti proqramdan çağırmaq üçün Python hələ düz başlanğıcdır.",
+        "Yes. For a first language, and for calling an AI from a program, Python is still a straight start.",
+        "Değer. İlk dil için ve yapay zekayı programdan çağırmak için Python hâlâ düz bir başlangıçtır.",
+        "نعم. للغة الأولى ولنداء الذكاء الاصطناعي من برنامج، Python ما زالت بداية مستقيمة.",
+        "Да. Для первого языка и чтобы вызвать ИИ из программы Python всё ещё прямой старт.",
+      ),
+      {
+        az: ["Süni intellekt alətlərinin nümunəsi çox vaxt Python-dadır.", "Modelin yazdığı kodu oxumağı öyrən. Səhv sətir model yazdı deyə düz olmur.", "Səhifə düzəltmək istəyirsənsə, JavaScript daha yaxındır.", "Telefon tətbiqinin öz kodu üçün Java və ya Kotlin gəlir."],
+        en: ["The examples for AI tools are often in Python.", "Learn to read the code a model writes. A wrong line does not become right because a model wrote it.", "If you want to make a page, JavaScript is closer.", "For a phone app's own code, Java or Kotlin comes in."],
+        tr: ["Yapay zeka araçlarının örneği çoğu zaman Python'dadır.", "Modelin yazdığı kodu okumayı öğren. Yanlış satır, model yazdı diye doğru olmaz.", "Sayfa yapmak istiyorsan JavaScript daha yakındır.", "Telefon uygulamasının kendi kodu için Java veya Kotlin gelir."],
+        ar: ["أمثلة أدوات الذكاء الاصطناعي غالبًا بـ Python.", "تعلّم أن تقرأ الرمز الذي يكتبه النموذج. السطر الخطأ لا يصبح صحيحًا لأن نموذجًا كتبه.", "إذا أردت صنع صفحة فـ JavaScript أقرب.", "لرمز تطبيق الهاتف نفسه يأتي Java أو Kotlin."],
+        ru: ["Примеры инструментов ИИ часто на Python.", "Учись читать код, который пишет модель. Неверная строка не становится верной оттого, что её написала модель.", "Если хочешь делать страницу, ближе JavaScript.", "Для собственного кода приложения телефона приходят Java или Kotlin."],
+      },
+      L(
+        "Bir dili kiçik proqramı düzəldəcək qədər öyrən. Modeli köməkçi tut, oxumadığın müəllif yox.",
+        "Learn one language far enough to fix a small program. Keep the model as a helper, not as an author you never read.",
+        "Bir dili küçük programı düzeltecek kadar öğren. Modeli yardımcı tut, okumadığın yazar değil.",
+        "تعلّم لغة واحدة بما يكفي لإصلاح برنامج صغير. اجعل النموذج مساعدًا، لا مؤلفًا لا تقرأه.",
+        "Выучи один язык настолько, чтобы починить маленькую программу. Держи модель помощником, а не автором, которого ты не читаешь.",
+      ),
+    ),
+  },
+];
+
 export const SEARCH: Record<SearchKind, SearchSection> = {
   soz: {
     kind: "soz",
@@ -440,6 +591,32 @@ export const SEARCH: Record<SearchKind, SearchSection> = {
     ),
     items: ERRORS,
   },
+  movzu: {
+    kind: "movzu",
+    heading: L("Bu il axtarılanlar", "Searched this year", "Bu yıl arananlar", "ما يُبحث هذا العام", "Что ищут в этом году"),
+    intro: L(
+      "2026-da Google-da ən çox axtarılan proqram adları və onlara yaxın suallar. Hər birinin öz səhifəsi var.",
+      "The program names people search most on Google in 2026, and the questions next to them. Each one has its own page.",
+      "2026'da Google'da en çok aranan program adları ve onlara yakın sorular. Her birinin kendi sayfası var.",
+      "أسماء البرامج التي تُبحث أكثر في Google في 2026، والأسئلة التي بجانبها. لكل واحد صفحته.",
+      "Имена программ, которые в 2026 больше всего ищут в Google, и вопросы рядом с ними. У каждого своя страница.",
+    ),
+    title: L(
+      "Bu il axtarılanlar — ChatGPT, Gemini, Claude, prompt",
+      "Searched this year — ChatGPT, Gemini, Claude, prompt",
+      "Bu yıl arananlar — ChatGPT, Gemini, Claude, prompt",
+      "ما يُبحث هذا العام — ChatGPT وGemini وClaude وprompt",
+      "Что ищут в этом году — ChatGPT, Gemini, Claude, prompt",
+    ),
+    description: L(
+      "ChatGPT nədir, Gemini nədir, Claude nədir, prompt nədir, süni intellektlə tətbiq hazırlamaq və 2026-da Python öyrənməyə dəyərmi.",
+      "What is ChatGPT, Gemini, and Claude, what is a prompt, making an app with AI, and whether Python is still worth learning in 2026.",
+      "ChatGPT nedir, Gemini nedir, Claude nedir, prompt nedir, yapay zeka ile uygulama yapmak ve 2026'da Python öğrenmeye değer mi.",
+      "ما هو ChatGPT وGemini وClaude، وما هو prompt، وصنع تطبيق بالذكاء الاصطناعي، وهل يستحق Python التعلم في 2026.",
+      "Что такое ChatGPT, Gemini и Claude, что такое prompt, как сделать приложение с ИИ и стоит ли учить Python в 2026.",
+    ),
+    items: TOPICS,
+  },
 };
 
 const LANG_PREFIX: Record<Lang, string> = { az: "", en: "/en", tr: "/tr", ar: "/ar", ru: "/ru" };
@@ -454,7 +631,7 @@ export function searchTopicPath(lang: Lang, kind: SearchKind, slug: string) {
 
 export function searchFromPath(pathname: string) {
   const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname;
-  const match = path.match(/^\/(?:(en|tr|ar|ru)\/)?(soz|xeta)$/);
+  const match = path.match(/^\/(?:(en|tr|ar|ru)\/)?(soz|xeta|movzu)$/);
   if (!match) return null;
   const lang = (match[1] ?? "az") as Lang;
   const kind = match[2] as SearchKind;
@@ -463,7 +640,7 @@ export function searchFromPath(pathname: string) {
 
 export function searchTopicFromPath(pathname: string) {
   const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname;
-  const match = path.match(/^\/(?:(en|tr|ar|ru)\/)?(soz|xeta)\/([^/]+)$/);
+  const match = path.match(/^\/(?:(en|tr|ar|ru)\/)?(soz|xeta|movzu)\/([^/]+)$/);
   if (!match) return null;
   const lang = (match[1] ?? "az") as Lang;
   const kind = match[2] as SearchKind;

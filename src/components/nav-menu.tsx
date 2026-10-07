@@ -73,6 +73,7 @@ export function NavMenu({ section }: { section: LibrarySection }) {
             <>
               <a href={searchPath(lang, "soz")}>{SEARCH.soz.heading[lang]}</a>
               <a href={searchPath(lang, "xeta")}>{SEARCH.xeta.heading[lang]}</a>
+              <a href={searchPath(lang, "movzu")}>{SEARCH.movzu.heading[lang]}</a>
               <a href={comparePath(lang)}>{COMPARE.heading[lang]}</a>
               <a href={programmingLocalePath(lang, CODE_SAMPLE_HUB)}>{t("code_samples")}</a>
             </>

@@ -238,6 +238,7 @@ export function LibraryIndex({
       ? [
           { href: searchPath(lang, "soz"), label: SEARCH.soz.heading[lang] },
           { href: searchPath(lang, "xeta"), label: SEARCH.xeta.heading[lang] },
+          { href: searchPath(lang, "movzu"), label: SEARCH.movzu.heading[lang] },
           { href: comparePath(lang), label: COMPARE.heading[lang] },
         ].filter((item) => !needle || item.label.toLowerCase().includes(needle))
       : [];
