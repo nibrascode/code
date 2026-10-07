@@ -13,7 +13,7 @@ import { isCodeSampleSlug } from "@/lib/code-samples";
 import { LANGS, type Lang } from "@/lib/i18n";
 import { faqFromPath, faqPath, faqTopicFromPath, faqTopicPath } from "@/lib/faq";
 import { searchFromPath, searchPath, searchTopicFromPath, searchTopicPath } from "@/lib/search-pages";
-import { compareFromPath, comparePath, compareTopicFromPath, compareTopicPath, qiblaFromPath, qiblaPath } from "@/lib/learn-pages";
+import { compareFromPath, comparePath, compareTopicFromPath, compareTopicPath } from "@/lib/learn-pages";
 
 export const Route = createRootRoute({
   beforeLoad: ({ location }) => ({
@@ -105,18 +105,6 @@ function SeoLinks() {
           <link key={code} rel="alternate" {...{ hreflang: code }} href={`${SITE}${searchPath(code, searchIndex.kind)}`} />
         ))}
         <link rel="alternate" {...{ hreflang: "x-default" }} href={`${SITE}${searchPath("az", searchIndex.kind)}`} />
-      </>
-    );
-  }
-  const qibla = qiblaFromPath(path);
-  if (qibla) {
-    return (
-      <>
-        <link rel="canonical" href={`${SITE}${qiblaPath(qibla.lang)}`} />
-        {LANGS.map((code) => (
-          <link key={code} rel="alternate" {...{ hreflang: code }} href={`${SITE}${qiblaPath(code)}`} />
-        ))}
-        <link rel="alternate" {...{ hreflang: "x-default" }} href={`${SITE}${qiblaPath("az")}`} />
       </>
     );
   }

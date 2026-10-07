@@ -7,7 +7,7 @@ import { CODE_SAMPLE_HUB, CODE_SAMPLES, SITE_CODE } from "@/lib/code-samples";
 import { findProgramming, type ProgrammingSection } from "@/lib/programming";
 import { findProgrammingLocale, programmingLocalePath } from "@/lib/programming-locales";
 import { SEARCH, searchPath } from "@/lib/search-pages";
-import { COMPARE, QIBLA, comparePath, qiblaPath } from "@/lib/learn-pages";
+import { COMPARE, comparePath } from "@/lib/learn-pages";
 import { pythonSections } from "@/lib/lessons";
 import { libItems, libParagraphs, savedLib, type LibGroup } from "@/lib/library-admin";
 import { articlesForTopic, findResourceTopic } from "@/lib/resource-topics";
@@ -233,6 +233,14 @@ export function LibraryIndex({
     return label.includes(needle) || slug.includes(needle) || name.includes(needle) || (qflat.length > 1 && flat.includes(qflat));
   });
   const copy = FIND_UI[lang];
+  const programLinks =
+    section === "programming"
+      ? [
+          { href: searchPath(lang, "soz"), label: SEARCH.soz.heading[lang] },
+          { href: searchPath(lang, "xeta"), label: SEARCH.xeta.heading[lang] },
+          { href: comparePath(lang), label: COMPARE.heading[lang] },
+        ].filter((item) => !needle || item.label.toLowerCase().includes(needle))
+      : [];
 
   return (
     <main className="why-page">
@@ -264,14 +272,6 @@ export function LibraryIndex({
         </section>
       ) : null}
       {section === "programming" ? (
-        <nav className="faq-links" aria-label={SEARCH.soz.heading[lang]}>
-          <a href={searchPath(lang, "soz")}>{SEARCH.soz.heading[lang]}</a>
-          <a href={searchPath(lang, "xeta")}>{SEARCH.xeta.heading[lang]}</a>
-          <a href={qiblaPath(lang)}>{QIBLA.heading[lang]}</a>
-          <a href={comparePath(lang)}>{COMPARE.heading[lang]}</a>
-        </nav>
-      ) : null}
-      {section === "programming" ? (
         <input
           className="lib-search"
           type="search"
@@ -281,8 +281,16 @@ export function LibraryIndex({
           onChange={(event) => setQuery(event.target.value)}
         />
       ) : null}
-      {section === "programming" && needle && topics.length === 0 ? <p className="lib-empty">{copy.empty}</p> : null}
+      {section === "programming" && needle && topics.length === 0 && programLinks.length === 0 ? <p className="lib-empty">{copy.empty}</p> : null}
       <ul className={section === "programming" ? "lib-list lib-list-2" : "lib-list"}>
+        {programLinks.map((item) => (
+          <li key={item.href}>
+            <a href={item.href}>
+              {item.label}
+              <ArrowUpRight className="rtl-flip size-4" />
+            </a>
+          </li>
+        ))}
         {topics.map((topic) => {
           if (section === "programming") {
             return (

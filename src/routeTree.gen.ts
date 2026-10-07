@@ -16,7 +16,6 @@ import { Route as FaqRouteImport } from './routes/faq'
 import { Route as MuqayiseRouteImport } from './routes/muqayise'
 import { Route as NxStudioRouteImport } from './routes/nx-studio'
 import { Route as PrivacyRouteImport } from './routes/privacy'
-import { Route as QibleRouteImport } from './routes/qible'
 import { Route as SozRouteImport } from './routes/soz'
 import { Route as UnutmaRouteImport } from './routes/unutma'
 import { Route as WhyRouteImport } from './routes/why'
@@ -28,7 +27,6 @@ import { Route as ArAppsRouteImport } from './routes/ar.apps'
 import { Route as ArContactRouteImport } from './routes/ar.contact'
 import { Route as ArFaqRouteImport } from './routes/ar.faq'
 import { Route as ArMuqayiseRouteImport } from './routes/ar.muqayise'
-import { Route as ArQibleRouteImport } from './routes/ar.qible'
 import { Route as ArSozRouteImport } from './routes/ar.soz'
 import { Route as ArXetaRouteImport } from './routes/ar.xeta'
 import { Route as EnAboutRouteImport } from './routes/en.about'
@@ -36,7 +34,6 @@ import { Route as EnAppsRouteImport } from './routes/en.apps'
 import { Route as EnContactRouteImport } from './routes/en.contact'
 import { Route as EnFaqRouteImport } from './routes/en.faq'
 import { Route as EnMuqayiseRouteImport } from './routes/en.muqayise'
-import { Route as EnQibleRouteImport } from './routes/en.qible'
 import { Route as EnSozRouteImport } from './routes/en.soz'
 import { Route as EnXetaRouteImport } from './routes/en.xeta'
 import { Route as FaqSlugRouteImport } from './routes/faq.$slug'
@@ -55,7 +52,6 @@ import { Route as RuAppsRouteImport } from './routes/ru.apps'
 import { Route as RuContactRouteImport } from './routes/ru.contact'
 import { Route as RuFaqRouteImport } from './routes/ru.faq'
 import { Route as RuMuqayiseRouteImport } from './routes/ru.muqayise'
-import { Route as RuQibleRouteImport } from './routes/ru.qible'
 import { Route as RuSozRouteImport } from './routes/ru.soz'
 import { Route as RuXetaRouteImport } from './routes/ru.xeta'
 import { Route as SozSlugRouteImport } from './routes/soz.$slug'
@@ -64,7 +60,6 @@ import { Route as TrAppsRouteImport } from './routes/tr.apps'
 import { Route as TrContactRouteImport } from './routes/tr.contact'
 import { Route as TrFaqRouteImport } from './routes/tr.faq'
 import { Route as TrMuqayiseRouteImport } from './routes/tr.muqayise'
-import { Route as TrQibleRouteImport } from './routes/tr.qible'
 import { Route as TrSozRouteImport } from './routes/tr.soz'
 import { Route as TrXetaRouteImport } from './routes/tr.xeta'
 import { Route as XetaSlugRouteImport } from './routes/xeta.$slug'
@@ -131,11 +126,6 @@ const PrivacyRoute = PrivacyRouteImport.update({
   path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
-const QibleRoute = QibleRouteImport.update({
-  id: '/qible',
-  path: '/qible',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const SozRoute = SozRouteImport.update({
   id: '/soz',
   path: '/soz',
@@ -191,11 +181,6 @@ const ArMuqayiseRoute = ArMuqayiseRouteImport.update({
   path: '/ar/muqayise',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ArQibleRoute = ArQibleRouteImport.update({
-  id: '/ar/qible',
-  path: '/ar/qible',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ArSozRoute = ArSozRouteImport.update({
   id: '/ar/soz',
   path: '/ar/soz',
@@ -229,11 +214,6 @@ const EnFaqRoute = EnFaqRouteImport.update({
 const EnMuqayiseRoute = EnMuqayiseRouteImport.update({
   id: '/en/muqayise',
   path: '/en/muqayise',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EnQibleRoute = EnQibleRouteImport.update({
-  id: '/en/qible',
-  path: '/en/qible',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EnSozRoute = EnSozRouteImport.update({
@@ -326,11 +306,6 @@ const RuMuqayiseRoute = RuMuqayiseRouteImport.update({
   path: '/ru/muqayise',
   getParentRoute: () => rootRouteImport,
 } as any)
-const RuQibleRoute = RuQibleRouteImport.update({
-  id: '/ru/qible',
-  path: '/ru/qible',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const RuSozRoute = RuSozRouteImport.update({
   id: '/ru/soz',
   path: '/ru/soz',
@@ -369,11 +344,6 @@ const TrFaqRoute = TrFaqRouteImport.update({
 const TrMuqayiseRoute = TrMuqayiseRouteImport.update({
   id: '/tr/muqayise',
   path: '/tr/muqayise',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TrQibleRoute = TrQibleRouteImport.update({
-  id: '/tr/qible',
-  path: '/tr/qible',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TrSozRoute = TrSozRouteImport.update({
@@ -535,7 +505,6 @@ export interface FileRoutesByFullPath {
   '/muqayise': typeof MuqayiseRouteWithChildren
   '/nx-studio': typeof NxStudioRoute
   '/privacy': typeof PrivacyRouteWithChildren
-  '/qible': typeof QibleRoute
   '/soz': typeof SozRouteWithChildren
   '/unutma': typeof UnutmaRoute
   '/why': typeof WhyRoute
@@ -547,7 +516,6 @@ export interface FileRoutesByFullPath {
   '/ar/contact': typeof ArContactRoute
   '/ar/faq': typeof ArFaqRouteWithChildren
   '/ar/muqayise': typeof ArMuqayiseRouteWithChildren
-  '/ar/qible': typeof ArQibleRoute
   '/ar/soz': typeof ArSozRouteWithChildren
   '/ar/xeta': typeof ArXetaRouteWithChildren
   '/en/about': typeof EnAboutRoute
@@ -555,7 +523,6 @@ export interface FileRoutesByFullPath {
   '/en/contact': typeof EnContactRoute
   '/en/faq': typeof EnFaqRouteWithChildren
   '/en/muqayise': typeof EnMuqayiseRouteWithChildren
-  '/en/qible': typeof EnQibleRoute
   '/en/soz': typeof EnSozRouteWithChildren
   '/en/xeta': typeof EnXetaRouteWithChildren
   '/faq/$slug': typeof FaqSlugRoute
@@ -570,7 +537,6 @@ export interface FileRoutesByFullPath {
   '/ru/contact': typeof RuContactRoute
   '/ru/faq': typeof RuFaqRouteWithChildren
   '/ru/muqayise': typeof RuMuqayiseRouteWithChildren
-  '/ru/qible': typeof RuQibleRoute
   '/ru/soz': typeof RuSozRouteWithChildren
   '/ru/xeta': typeof RuXetaRouteWithChildren
   '/soz/$slug': typeof SozSlugRoute
@@ -579,7 +545,6 @@ export interface FileRoutesByFullPath {
   '/tr/contact': typeof TrContactRoute
   '/tr/faq': typeof TrFaqRouteWithChildren
   '/tr/muqayise': typeof TrMuqayiseRouteWithChildren
-  '/tr/qible': typeof TrQibleRoute
   '/tr/soz': typeof TrSozRouteWithChildren
   '/tr/xeta': typeof TrXetaRouteWithChildren
   '/xeta/$slug': typeof XetaSlugRoute
@@ -623,7 +588,6 @@ export interface FileRoutesByTo {
   '/muqayise': typeof MuqayiseRouteWithChildren
   '/nx-studio': typeof NxStudioRoute
   '/privacy': typeof PrivacyRouteWithChildren
-  '/qible': typeof QibleRoute
   '/soz': typeof SozRouteWithChildren
   '/unutma': typeof UnutmaRoute
   '/why': typeof WhyRoute
@@ -634,7 +598,6 @@ export interface FileRoutesByTo {
   '/ar/contact': typeof ArContactRoute
   '/ar/faq': typeof ArFaqRouteWithChildren
   '/ar/muqayise': typeof ArMuqayiseRouteWithChildren
-  '/ar/qible': typeof ArQibleRoute
   '/ar/soz': typeof ArSozRouteWithChildren
   '/ar/xeta': typeof ArXetaRouteWithChildren
   '/en/about': typeof EnAboutRoute
@@ -642,7 +605,6 @@ export interface FileRoutesByTo {
   '/en/contact': typeof EnContactRoute
   '/en/faq': typeof EnFaqRouteWithChildren
   '/en/muqayise': typeof EnMuqayiseRouteWithChildren
-  '/en/qible': typeof EnQibleRoute
   '/en/soz': typeof EnSozRouteWithChildren
   '/en/xeta': typeof EnXetaRouteWithChildren
   '/faq/$slug': typeof FaqSlugRoute
@@ -657,7 +619,6 @@ export interface FileRoutesByTo {
   '/ru/contact': typeof RuContactRoute
   '/ru/faq': typeof RuFaqRouteWithChildren
   '/ru/muqayise': typeof RuMuqayiseRouteWithChildren
-  '/ru/qible': typeof RuQibleRoute
   '/ru/soz': typeof RuSozRouteWithChildren
   '/ru/xeta': typeof RuXetaRouteWithChildren
   '/soz/$slug': typeof SozSlugRoute
@@ -666,7 +627,6 @@ export interface FileRoutesByTo {
   '/tr/contact': typeof TrContactRoute
   '/tr/faq': typeof TrFaqRouteWithChildren
   '/tr/muqayise': typeof TrMuqayiseRouteWithChildren
-  '/tr/qible': typeof TrQibleRoute
   '/tr/soz': typeof TrSozRouteWithChildren
   '/tr/xeta': typeof TrXetaRouteWithChildren
   '/xeta/$slug': typeof XetaSlugRoute
@@ -711,7 +671,6 @@ export interface FileRoutesById {
   '/muqayise': typeof MuqayiseRouteWithChildren
   '/nx-studio': typeof NxStudioRoute
   '/privacy': typeof PrivacyRouteWithChildren
-  '/qible': typeof QibleRoute
   '/soz': typeof SozRouteWithChildren
   '/unutma': typeof UnutmaRoute
   '/why': typeof WhyRoute
@@ -723,7 +682,6 @@ export interface FileRoutesById {
   '/ar/contact': typeof ArContactRoute
   '/ar/faq': typeof ArFaqRouteWithChildren
   '/ar/muqayise': typeof ArMuqayiseRouteWithChildren
-  '/ar/qible': typeof ArQibleRoute
   '/ar/soz': typeof ArSozRouteWithChildren
   '/ar/xeta': typeof ArXetaRouteWithChildren
   '/en/about': typeof EnAboutRoute
@@ -731,7 +689,6 @@ export interface FileRoutesById {
   '/en/contact': typeof EnContactRoute
   '/en/faq': typeof EnFaqRouteWithChildren
   '/en/muqayise': typeof EnMuqayiseRouteWithChildren
-  '/en/qible': typeof EnQibleRoute
   '/en/soz': typeof EnSozRouteWithChildren
   '/en/xeta': typeof EnXetaRouteWithChildren
   '/faq/$slug': typeof FaqSlugRoute
@@ -746,7 +703,6 @@ export interface FileRoutesById {
   '/ru/contact': typeof RuContactRoute
   '/ru/faq': typeof RuFaqRouteWithChildren
   '/ru/muqayise': typeof RuMuqayiseRouteWithChildren
-  '/ru/qible': typeof RuQibleRoute
   '/ru/soz': typeof RuSozRouteWithChildren
   '/ru/xeta': typeof RuXetaRouteWithChildren
   '/soz/$slug': typeof SozSlugRoute
@@ -755,7 +711,6 @@ export interface FileRoutesById {
   '/tr/contact': typeof TrContactRoute
   '/tr/faq': typeof TrFaqRouteWithChildren
   '/tr/muqayise': typeof TrMuqayiseRouteWithChildren
-  '/tr/qible': typeof TrQibleRoute
   '/tr/soz': typeof TrSozRouteWithChildren
   '/tr/xeta': typeof TrXetaRouteWithChildren
   '/xeta/$slug': typeof XetaSlugRoute
@@ -801,7 +756,6 @@ export interface FileRouteTypes {
     | '/muqayise'
     | '/nx-studio'
     | '/privacy'
-    | '/qible'
     | '/soz'
     | '/unutma'
     | '/why'
@@ -813,7 +767,6 @@ export interface FileRouteTypes {
     | '/ar/contact'
     | '/ar/faq'
     | '/ar/muqayise'
-    | '/ar/qible'
     | '/ar/soz'
     | '/ar/xeta'
     | '/en/about'
@@ -821,7 +774,6 @@ export interface FileRouteTypes {
     | '/en/contact'
     | '/en/faq'
     | '/en/muqayise'
-    | '/en/qible'
     | '/en/soz'
     | '/en/xeta'
     | '/faq/$slug'
@@ -836,7 +788,6 @@ export interface FileRouteTypes {
     | '/ru/contact'
     | '/ru/faq'
     | '/ru/muqayise'
-    | '/ru/qible'
     | '/ru/soz'
     | '/ru/xeta'
     | '/soz/$slug'
@@ -845,7 +796,6 @@ export interface FileRouteTypes {
     | '/tr/contact'
     | '/tr/faq'
     | '/tr/muqayise'
-    | '/tr/qible'
     | '/tr/soz'
     | '/tr/xeta'
     | '/xeta/$slug'
@@ -889,7 +839,6 @@ export interface FileRouteTypes {
     | '/muqayise'
     | '/nx-studio'
     | '/privacy'
-    | '/qible'
     | '/soz'
     | '/unutma'
     | '/why'
@@ -900,7 +849,6 @@ export interface FileRouteTypes {
     | '/ar/contact'
     | '/ar/faq'
     | '/ar/muqayise'
-    | '/ar/qible'
     | '/ar/soz'
     | '/ar/xeta'
     | '/en/about'
@@ -908,7 +856,6 @@ export interface FileRouteTypes {
     | '/en/contact'
     | '/en/faq'
     | '/en/muqayise'
-    | '/en/qible'
     | '/en/soz'
     | '/en/xeta'
     | '/faq/$slug'
@@ -923,7 +870,6 @@ export interface FileRouteTypes {
     | '/ru/contact'
     | '/ru/faq'
     | '/ru/muqayise'
-    | '/ru/qible'
     | '/ru/soz'
     | '/ru/xeta'
     | '/soz/$slug'
@@ -932,7 +878,6 @@ export interface FileRouteTypes {
     | '/tr/contact'
     | '/tr/faq'
     | '/tr/muqayise'
-    | '/tr/qible'
     | '/tr/soz'
     | '/tr/xeta'
     | '/xeta/$slug'
@@ -976,7 +921,6 @@ export interface FileRouteTypes {
     | '/muqayise'
     | '/nx-studio'
     | '/privacy'
-    | '/qible'
     | '/soz'
     | '/unutma'
     | '/why'
@@ -988,7 +932,6 @@ export interface FileRouteTypes {
     | '/ar/contact'
     | '/ar/faq'
     | '/ar/muqayise'
-    | '/ar/qible'
     | '/ar/soz'
     | '/ar/xeta'
     | '/en/about'
@@ -996,7 +939,6 @@ export interface FileRouteTypes {
     | '/en/contact'
     | '/en/faq'
     | '/en/muqayise'
-    | '/en/qible'
     | '/en/soz'
     | '/en/xeta'
     | '/faq/$slug'
@@ -1011,7 +953,6 @@ export interface FileRouteTypes {
     | '/ru/contact'
     | '/ru/faq'
     | '/ru/muqayise'
-    | '/ru/qible'
     | '/ru/soz'
     | '/ru/xeta'
     | '/soz/$slug'
@@ -1020,7 +961,6 @@ export interface FileRouteTypes {
     | '/tr/contact'
     | '/tr/faq'
     | '/tr/muqayise'
-    | '/tr/qible'
     | '/tr/soz'
     | '/tr/xeta'
     | '/xeta/$slug'
@@ -1065,7 +1005,6 @@ export interface RootRouteChildren {
   MuqayiseRoute: typeof MuqayiseRouteWithChildren
   NxStudioRoute: typeof NxStudioRoute
   PrivacyRoute: typeof PrivacyRouteWithChildren
-  QibleRoute: typeof QibleRoute
   SozRoute: typeof SozRouteWithChildren
   UnutmaRoute: typeof UnutmaRoute
   WhyRoute: typeof WhyRoute
@@ -1077,7 +1016,6 @@ export interface RootRouteChildren {
   ArContactRoute: typeof ArContactRoute
   ArFaqRoute: typeof ArFaqRouteWithChildren
   ArMuqayiseRoute: typeof ArMuqayiseRouteWithChildren
-  ArQibleRoute: typeof ArQibleRoute
   ArSozRoute: typeof ArSozRouteWithChildren
   ArXetaRoute: typeof ArXetaRouteWithChildren
   EnAboutRoute: typeof EnAboutRoute
@@ -1085,7 +1023,6 @@ export interface RootRouteChildren {
   EnContactRoute: typeof EnContactRoute
   EnFaqRoute: typeof EnFaqRouteWithChildren
   EnMuqayiseRoute: typeof EnMuqayiseRouteWithChildren
-  EnQibleRoute: typeof EnQibleRoute
   EnSozRoute: typeof EnSozRouteWithChildren
   EnXetaRoute: typeof EnXetaRouteWithChildren
   GuidesTopicRoute: typeof GuidesTopicRoute
@@ -1096,7 +1033,6 @@ export interface RootRouteChildren {
   RuContactRoute: typeof RuContactRoute
   RuFaqRoute: typeof RuFaqRouteWithChildren
   RuMuqayiseRoute: typeof RuMuqayiseRouteWithChildren
-  RuQibleRoute: typeof RuQibleRoute
   RuSozRoute: typeof RuSozRouteWithChildren
   RuXetaRoute: typeof RuXetaRouteWithChildren
   TrAboutRoute: typeof TrAboutRoute
@@ -1104,7 +1040,6 @@ export interface RootRouteChildren {
   TrContactRoute: typeof TrContactRoute
   TrFaqRoute: typeof TrFaqRouteWithChildren
   TrMuqayiseRoute: typeof TrMuqayiseRouteWithChildren
-  TrQibleRoute: typeof TrQibleRoute
   TrSozRoute: typeof TrSozRouteWithChildren
   TrXetaRoute: typeof TrXetaRouteWithChildren
   AppsIndexRoute: typeof AppsIndexRoute
@@ -1167,13 +1102,6 @@ declare module '@tanstack/react-router' {
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/qible': {
-      id: '/qible'
-      path: '/qible'
-      fullPath: '/qible'
-      preLoaderRoute: typeof QibleRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/soz': {
@@ -1253,13 +1181,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArMuqayiseRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/ar/qible': {
-      id: '/ar/qible'
-      path: '/ar/qible'
-      fullPath: '/ar/qible'
-      preLoaderRoute: typeof ArQibleRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/ar/soz': {
       id: '/ar/soz'
       path: '/ar/soz'
@@ -1307,13 +1228,6 @@ declare module '@tanstack/react-router' {
       path: '/en/muqayise'
       fullPath: '/en/muqayise'
       preLoaderRoute: typeof EnMuqayiseRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/en/qible': {
-      id: '/en/qible'
-      path: '/en/qible'
-      fullPath: '/en/qible'
-      preLoaderRoute: typeof EnQibleRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/en/soz': {
@@ -1442,13 +1356,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RuMuqayiseRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/ru/qible': {
-      id: '/ru/qible'
-      path: '/ru/qible'
-      fullPath: '/ru/qible'
-      preLoaderRoute: typeof RuQibleRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/ru/soz': {
       id: '/ru/soz'
       path: '/ru/soz'
@@ -1503,13 +1410,6 @@ declare module '@tanstack/react-router' {
       path: '/tr/muqayise'
       fullPath: '/tr/muqayise'
       preLoaderRoute: typeof TrMuqayiseRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/tr/qible': {
-      id: '/tr/qible'
-      path: '/tr/qible'
-      fullPath: '/tr/qible'
-      preLoaderRoute: typeof TrQibleRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tr/soz': {
@@ -2017,7 +1917,6 @@ const rootRouteChildren: RootRouteChildren = {
   MuqayiseRoute: MuqayiseRouteWithChildren,
   NxStudioRoute: NxStudioRoute,
   PrivacyRoute: PrivacyRouteWithChildren,
-  QibleRoute: QibleRoute,
   SozRoute: SozRouteWithChildren,
   UnutmaRoute: UnutmaRoute,
   WhyRoute: WhyRoute,
@@ -2029,7 +1928,6 @@ const rootRouteChildren: RootRouteChildren = {
   ArContactRoute: ArContactRoute,
   ArFaqRoute: ArFaqRouteWithChildren,
   ArMuqayiseRoute: ArMuqayiseRouteWithChildren,
-  ArQibleRoute: ArQibleRoute,
   ArSozRoute: ArSozRouteWithChildren,
   ArXetaRoute: ArXetaRouteWithChildren,
   EnAboutRoute: EnAboutRoute,
@@ -2037,7 +1935,6 @@ const rootRouteChildren: RootRouteChildren = {
   EnContactRoute: EnContactRoute,
   EnFaqRoute: EnFaqRouteWithChildren,
   EnMuqayiseRoute: EnMuqayiseRouteWithChildren,
-  EnQibleRoute: EnQibleRoute,
   EnSozRoute: EnSozRouteWithChildren,
   EnXetaRoute: EnXetaRouteWithChildren,
   GuidesTopicRoute: GuidesTopicRoute,
@@ -2048,7 +1945,6 @@ const rootRouteChildren: RootRouteChildren = {
   RuContactRoute: RuContactRoute,
   RuFaqRoute: RuFaqRouteWithChildren,
   RuMuqayiseRoute: RuMuqayiseRouteWithChildren,
-  RuQibleRoute: RuQibleRoute,
   RuSozRoute: RuSozRouteWithChildren,
   RuXetaRoute: RuXetaRouteWithChildren,
   TrAboutRoute: TrAboutRoute,
@@ -2056,7 +1952,6 @@ const rootRouteChildren: RootRouteChildren = {
   TrContactRoute: TrContactRoute,
   TrFaqRoute: TrFaqRouteWithChildren,
   TrMuqayiseRoute: TrMuqayiseRouteWithChildren,
-  TrQibleRoute: TrQibleRoute,
   TrSozRoute: TrSozRouteWithChildren,
   TrXetaRoute: TrXetaRouteWithChildren,
   AppsIndexRoute: AppsIndexRoute,

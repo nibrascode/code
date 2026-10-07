@@ -9,7 +9,7 @@ import { RESURSLAR } from "@/lib/resurslar";
 import { findResourceTopic, resourceArticleFromPath } from "@/lib/resource-topics";
 import { RU_RESOURCES } from "@/lib/ru-resources";
 import { searchFromPath, searchTopicFromPath, searchPath, searchTopicPath } from "@/lib/search-pages";
-import { COMPARE, QIBLA, compareFromPath, compareTopicFromPath, comparePath, compareTopicPath, qiblaFromPath, qiblaPath } from "@/lib/learn-pages";
+import { COMPARE, compareFromPath, compareTopicFromPath, comparePath, compareTopicPath } from "@/lib/learn-pages";
 
 export const SITE = "https://www.nibrascode.com";
 
@@ -610,14 +610,6 @@ function pageCopy(pathname: string, lang: Lang) {
       keywords: searchIndex.section.title[searchIndex.lang],
     };
   }
-  const qibla = qiblaFromPath(path);
-  if (qibla) {
-    return {
-      title: `${QIBLA.title[qibla.lang]} — Nibras Code`,
-      description: QIBLA.description[qibla.lang],
-      keywords: QIBLA.title[qibla.lang],
-    };
-  }
   const compared = compareTopicFromPath(path);
   if (compared) {
     return {
@@ -700,8 +692,6 @@ export function canonicalUrl(pathname: string, lang: Lang) {
   if (searched) return `${SITE}${searchTopicPath(searched.lang, searched.kind, searched.item.slug)}`;
   const searchIndex = searchFromPath(path);
   if (searchIndex) return `${SITE}${searchPath(searchIndex.lang, searchIndex.kind)}`;
-  const qibla = qiblaFromPath(path);
-  if (qibla) return `${SITE}${qiblaPath(qibla.lang)}`;
   const compared = compareTopicFromPath(path);
   if (compared) return `${SITE}${compareTopicPath(compared.lang, compared.item.slug)}`;
   const compareIndex = compareFromPath(path);
@@ -830,21 +820,6 @@ function jsonLd(path: string, lang: Lang, copy: PageSeo, url: string) {
       url,
       inLanguage: searched.lang,
       mainEntity: [{ "@type": "Question", name: searched.piece.title, acceptedAnswer: { "@type": "Answer", text: answer } }],
-      publisher: org,
-    };
-  }
-
-  const qibla = qiblaFromPath(path);
-  if (qibla) {
-    const answer = [QIBLA.intro[qibla.lang], ...QIBLA.points[qibla.lang], QIBLA.note[qibla.lang]].join(" ");
-    return {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      name: QIBLA.heading[qibla.lang],
-      description: QIBLA.description[qibla.lang],
-      url,
-      inLanguage: qibla.lang,
-      mainEntity: [{ "@type": "Question", name: QIBLA.heading[qibla.lang], acceptedAnswer: { "@type": "Answer", text: answer } }],
       publisher: org,
     };
   }

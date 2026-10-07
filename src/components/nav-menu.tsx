@@ -4,6 +4,8 @@ import { ChevronDown } from "lucide-react";
 import { LIBRARY, type LibrarySection } from "@/lib/library";
 import { CODE_SAMPLE_HUB } from "@/lib/code-samples";
 import { programmingLocalePath } from "@/lib/programming-locales";
+import { SEARCH, searchPath } from "@/lib/search-pages";
+import { COMPARE, comparePath } from "@/lib/learn-pages";
 import { useI18n } from "@/lib/i18n-context";
 import { cn } from "@/lib/utils";
 
@@ -68,7 +70,12 @@ export function NavMenu({ section }: { section: LibrarySection }) {
             ),
           )}
           {section === "programming" ? (
-            <a href={programmingLocalePath(lang, CODE_SAMPLE_HUB)}>{t("code_samples")}</a>
+            <>
+              <a href={searchPath(lang, "soz")}>{SEARCH.soz.heading[lang]}</a>
+              <a href={searchPath(lang, "xeta")}>{SEARCH.xeta.heading[lang]}</a>
+              <a href={comparePath(lang)}>{COMPARE.heading[lang]}</a>
+              <a href={programmingLocalePath(lang, CODE_SAMPLE_HUB)}>{t("code_samples")}</a>
+            </>
           ) : null}
         </div>
       ) : null}
