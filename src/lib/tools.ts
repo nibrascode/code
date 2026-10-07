@@ -74,6 +74,29 @@ export const TOOLS: readonly { id: ToolId; label: Record<Lang, string> }[] = [
   { id: "name", label: L("Təsadüfi ad", "Random name", "Rastgele ad", "اسم عشوائي", "Случайное имя") },
 ];
 
+export const TOOL_GROUPS: readonly { id: string; title: Record<Lang, string>; ids: readonly ToolId[] }[] = [
+  {
+    id: "gen",
+    title: L("Generatorlar", "Generators", "Üreteçler", "مولدات", "Генераторы"),
+    ids: ["uuid", "lorem", "number", "text", "name"],
+  },
+  {
+    id: "code",
+    title: L("Kodlaşdırma", "Encoding", "Kodlama", "ترميز", "Кодирование"),
+    ids: ["base64", "url", "html"],
+  },
+  {
+    id: "crypt",
+    title: L("Şifrələmə", "Encryption", "Şifreleme", "تشفير", "Шифрование"),
+    ids: ["password", "md5", "sha256", "hash"],
+  },
+  {
+    id: "format",
+    title: L("Düzəltmə", "Formatting", "Düzenleme", "تنسيق", "Оформление"),
+    ids: ["json", "json-min", "css", "js", "html-min", "css-min", "xml", "sql"],
+  },
+];
+
 export function toolsPath(lang: Lang) {
   return `${PREFIX[lang]}/tools`;
 }

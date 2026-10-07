@@ -18,7 +18,7 @@ import {
   UserRound,
 } from "lucide-react";
 import type { Lang } from "@/lib/i18n";
-import { TOOLS, TOOLS_PAGE, type ToolId } from "@/lib/tools";
+import { TOOLS, TOOLS_PAGE, TOOL_GROUPS, type ToolId } from "@/lib/tools";
 import {
   decodeBase64,
   decodeHtml,
@@ -149,35 +149,39 @@ export function ToolsPage({ lang }: { lang: Lang }) {
       </p>
       <h1>{copy.heading[lang]}</h1>
       <div className="prog-sections">
-        <details className="prog-fold">
-          <summary>
-            <h2>{copy.group[lang]}</h2>
-          </summary>
-          <div className="prog-fold-body">
-            <ul className="lib-list">
-              {TOOLS.map((tool) => {
-                const Icon = ICONS[tool.id];
-                return (
-                <li key={tool.id}>
-                  <button
-                    type="button"
-                    className={openId === tool.id ? "is-on" : undefined}
-                    onClick={() => {
-                      setOpenId(tool.id);
-                      setOutput("");
-                      setNote("");
-                    }}
-                  >
-                    <span className="tool-name">
-                      <Icon aria-hidden="true" />
-                      {tool.label[lang]}
-                    </span>
-                  </button>
-                </li>
-                );
-              })}
-            </ul>
-            {openId ? (
+        {TOOL_GROUPS.map((group) => {
+          const tools = group.ids.map((id) => TOOLS.find((tool) => tool.id === id)!);
+          const here = openId != null && group.ids.includes(openId);
+          return (
+            <details key={group.id} className="prog-fold">
+              <summary>
+                <h2>{group.title[lang]}</h2>
+              </summary>
+              <div className="prog-fold-body">
+                <ul className="lib-list">
+                  {tools.map((tool) => {
+                    const Icon = ICONS[tool.id];
+                    return (
+                      <li key={tool.id}>
+                        <button
+                          type="button"
+                          className={openId === tool.id ? "is-on" : undefined}
+                          onClick={() => {
+                            setOpenId(tool.id);
+                            setOutput("");
+                            setNote("");
+                          }}
+                        >
+                          <span className="tool-name">
+                            <Icon aria-hidden="true" />
+                            {tool.label[lang]}
+                          </span>
+                        </button>
+                      </li>
+                    );
+                  })}
+                </ul>
+                {here && openId ? (
               <form
                 className="paket-form"
                 onSubmit={(event) => {
@@ -240,9 +244,11 @@ export function ToolsPage({ lang }: { lang: Lang }) {
                   </>
                 ) : null}
               </form>
-            ) : null}
-          </div>
-        </details>
+                ) : null}
+              </div>
+            </details>
+          );
+        })}
       </div>
     </main>
   );
