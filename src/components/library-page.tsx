@@ -284,7 +284,7 @@ export function LibraryIndex({
       {section === "programming" && needle && topics.length === 0 && programLinks.length === 0 ? <p className="lib-empty">{copy.empty}</p> : null}
       <ul className={section === "programming" ? "lib-list lib-list-2" : "lib-list"}>
         {programLinks.map((item) => (
-          <li key={item.href}>
+          <li key={item.href} className={item.label.length > 16 ? "is-wide" : undefined}>
             <a href={item.href}>
               {item.label}
               <ArrowUpRight className="rtl-flip size-4" />
@@ -293,10 +293,11 @@ export function LibraryIndex({
         ))}
         {topics.map((topic) => {
           if (section === "programming") {
+            const label = t(topic.label);
             return (
-              <li key={topic.slug}>
+              <li key={topic.slug} className={label.length > 16 ? "is-wide" : undefined}>
                 <a href={programmingLocalePath(lang, topic.slug)}>
-                  {t(topic.label)}
+                  {label}
                   <ArrowUpRight className="rtl-flip size-4" />
                 </a>
               </li>
