@@ -31,8 +31,8 @@ function guessLang(raw) {
   if (/[\u0400-\u04FF]/.test(raw)) return "ru";
   if (/[əƏ]/.test(raw)) return "az";
   const q = raw.toLowerCase();
-  if (hasWord(q, ["hava", "merhaba", "kaç", "kac", "nasıl", "nasil", "nerede", "nedir", "hakkında", "hakkinda", "kısaca", "bugün", "lira", "dolar", "vakti"])) return "tr";
-  if (hasWord(q, ["weather", "how", "about", "what", "who", "where", "package", "briefly", "dollar", "dollars", "prayer", "salah", "time", "hijri", "today", "date"])) return "en";
+  if (hasWord(q, ["hava", "merhaba", "kaç", "kac", "nasıl", "nasil", "nerede", "nedir", "hakkında", "hakkinda", "kısaca", "bugün", "lira", "dolar", "vakti"]) || /k[ıi]ble/i.test(q)) return "tr";
+  if (hasWord(q, ["weather", "how", "about", "what", "who", "where", "package", "briefly", "dollar", "dollars", "prayer", "salah", "time", "hijri", "today", "date"]) || /qibla/i.test(q)) return "en";
   return "az";
 }
 
@@ -386,6 +386,67 @@ export async function hijriReply(message) {
   return label ? label + "\n" + line : line;
 }
 
+const QIBLA_DIR = {
+  az: ["şimal", "şimal-şərq", "şərq", "cənub-şərq", "cənub", "cənub-qərb", "qərb", "şimal-qərb"],
+  en: ["north", "northeast", "east", "southeast", "south", "southwest", "west", "northwest"],
+  tr: ["kuzey", "kuzeydoğu", "doğu", "güneydoğu", "güney", "güneybatı", "batı", "kuzeybatı"],
+  ru: ["север", "северо-восток", "восток", "юго-восток", "юг", "юго-запад", "запад", "северо-запад"],
+  ar: ["شمال", "شمال شرق", "شرق", "جنوب شرق", "جنوب", "جنوب غرب", "غرب", "شمال غرب"],
+};
+
+function qiblaDegree(lat, lon) {
+  const p1 = (lat * Math.PI) / 180;
+  const l1 = (lon * Math.PI) / 180;
+  const p2 = (21.4225 * Math.PI) / 180;
+  const l2 = (39.8262 * Math.PI) / 180;
+  const y = Math.sin(l2 - l1);
+  const x = Math.cos(p1) * Math.tan(p2) - Math.sin(p1) * Math.cos(l2 - l1);
+  return Math.round(((Math.atan2(y, x) * 180) / Math.PI + 360) % 360);
+}
+
+function isQiblaAsk(message) {
+  return /(qibl[əe]|qibla|k[ıi]ble|кибл|قبل)/i.test(message);
+}
+
+export async function qiblaReply(message) {
+  if (!isQiblaAsk(message)) return null;
+  const lang = guessLang(message);
+  const city = cleanPlace(
+    message,
+    /qibl[əe]\p{L}*|qibla\p{L}*|k[ıi]ble\p{L}*|кибл\p{L}*|قبل\p{L}*|hansı|hansi|tərəf\p{L}*|teref\p{L}*|direction|which|way|hangi|taraf\p{L}*|куда|где|сторона|جهة|وين|اين|what|nədir|nedir|\b(?:of|the|is)\b/giu,
+  ).replace(/(?:['’])?(?:nın|nin|nun|nün|ın|in|un|ün)$/iu, "");
+  let label = { az: "Bakı", en: "Baku", tr: "Bakü", ru: "Баку", ar: "باكو" }[lang] || "Bakı";
+  let lat = 40.4093;
+  let lon = 49.8671;
+  if (city.length >= 2) {
+    let hit = await findPlace(city, lang);
+    if (!hit && /ы$/i.test(city)) hit = await findPlace(city.slice(0, -1) + "а", lang);
+    if (!hit && /[ая]$/i.test(city)) hit = await findPlace(city.slice(0, -1), lang);
+    if (hit?.latitude == null || hit?.longitude == null) return null;
+    lat = hit.latitude;
+    lon = hit.longitude;
+    label = hit.name || city;
+  }
+  const deg = qiblaDegree(lat, lon);
+  const dirs = QIBLA_DIR[lang] || QIBLA_DIR.az;
+  const side = dirs[Math.round(deg / 45) % 8];
+  const line = {
+    az: "Qiblə " + deg + "°, " + side + ".",
+    en: "Qibla is " + deg + "°, " + side + ".",
+    tr: "Kıble " + deg + "°, " + side + ".",
+    ru: "Кибла " + deg + "°, " + side + ".",
+    ar: "القبلة " + deg + "°، " + side + ".",
+  };
+  const note = {
+    az: "Üzünü Məkkəyə tutan tərəfdir.",
+    en: "It is the direction that faces Makkah.",
+    tr: "Yüzünü Mekke'ye çeviren yöndür.",
+    ru: "Это сторона, которой встают лицом к Мекке.",
+    ar: "هي الجهة التي تستقبل بها مكة.",
+  };
+  return label + "\n" + (line[lang] || line.az) + "\n" + (note[lang] || note.az);
+}
+
 export async function extraReply(message) {
   const raw = String(message || "").trim();
   if (raw.length < 3 || raw.length > 180) return null;
@@ -397,6 +458,10 @@ export async function extraReply(message) {
   try {
     const hijri = await hijriReply(raw);
     if (hijri) return hijri;
+  } catch { /* növbəti mənbə */ }
+  try {
+    const qibla = await qiblaReply(raw);
+    if (qibla) return qibla;
   } catch { /* növbəti mənbə */ }
   try {
     const prayer = await prayerReply(raw);
