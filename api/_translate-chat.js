@@ -125,7 +125,14 @@ export function formatReply(r, ui) {
 
 function googleReply(text, ui, to) {
   const t = L[ui] || L.az;
-  return `**${t.head(t.langs[to] || to)}**\n${text}`;
+  const note = {
+    az: "Qısa xəta ola bilər.",
+    en: "A small error is possible.",
+    tr: "Kısa bir hata olabilir.",
+    ru: "Возможна небольшая ошибка.",
+    ar: "قد يكون هناك خطأ بسيط.",
+  };
+  return `**${t.head(t.langs[to] || to)}**\n${text}\n\n${note[ui] || note.az}`;
 }
 
 export async function translateReply(message, { ip } = {}) {
