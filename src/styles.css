@@ -2426,10 +2426,21 @@ html[dir="rtl"] .rtl-flip {
 }
 
 .prog-fold summary h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   margin: 0;
   font-size: 1.05rem;
   font-weight: 650;
   letter-spacing: -0.02em;
+}
+
+.prog-fold summary h2 svg,
+.topic-name svg {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  color: #9ec5ff;
 }
 
 .prog-fold summary::after {
@@ -4268,6 +4279,24 @@ body.is-home .noise {
   border-radius: 16px;
   background: rgb(255 255 255 / 0.04);
   box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.08);
+}
+
+.topic-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.why-page h1 .topic-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.why-page h1 .topic-name svg {
+  width: 26px;
+  height: 26px;
 }
 
 .why-page .lib-list-2 {

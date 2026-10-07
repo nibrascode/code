@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, BookOpen, Boxes, Braces, Briefcase, Bug, CircleHelp, Code, Database, FileCode, GitCompare, GraduationCap, ListChecks, MessageCircleQuestion, Package, Server, Shield, Sparkles, Terminal, Wrench } from "lucide-react";
 import { ApkLab } from "@/components/apk-lab";
 import { LIBRARY, type LibrarySection, type LibraryTopic } from "@/lib/library";
 import { CODE_SAMPLE_HUB, CODE_SAMPLES, SITE_CODE } from "@/lib/code-samples";
@@ -293,7 +293,13 @@ export function LibraryIndex({
           .map((item) => (
             <li key={item.href}>
               <a href={item.href}>
-                {item.label}
+                <span className="topic-name">
+                  {(() => {
+                    const Icon = linkIcon(item.href);
+                    return <Icon aria-hidden="true" />;
+                  })()}
+                  {item.label}
+                </span>
                 <ArrowUpRight className="rtl-flip size-4" />
               </a>
             </li>
@@ -304,7 +310,13 @@ export function LibraryIndex({
             return (
               <li key={topic.slug}>
                 <a href={programmingLocalePath(lang, topic.slug)}>
-                  {label}
+                  <span className="topic-name">
+                    {(() => {
+                      const Icon = topicIcon(topic.slug);
+                      return <Icon aria-hidden="true" />;
+                    })()}
+                    {label}
+                  </span>
                   <ArrowUpRight className="rtl-flip size-4" />
                 </a>
               </li>
@@ -326,7 +338,13 @@ export function LibraryIndex({
               .map((item) => (
                 <li key={item.href} className="is-wide">
                   <a href={item.href}>
-                    {item.label}
+                    <span className="topic-name">
+                      {(() => {
+                        const Icon = linkIcon(item.href);
+                        return <Icon aria-hidden="true" />;
+                      })()}
+                      {item.label}
+                    </span>
                     <ArrowUpRight className="rtl-flip size-4" />
                   </a>
                 </li>
@@ -338,7 +356,13 @@ export function LibraryIndex({
               .map((topic) => (
                 <li key={topic.slug} className="is-wide">
                   <a href={programmingLocalePath(lang, topic.slug)}>
-                    {t(topic.label)}
+                    <span className="topic-name">
+                      {(() => {
+                        const Icon = topicIcon(topic.slug);
+                        return <Icon aria-hidden="true" />;
+                      })()}
+                      {t(topic.label)}
+                    </span>
                     <ArrowUpRight className="rtl-flip size-4" />
                   </a>
                 </li>
@@ -365,7 +389,12 @@ export function LibraryIndex({
           <h2>{copy.diff}</h2>
           {COMPARES.map((item) => (
             <details key={item.title.en}>
-              <summary>{item.title[lang]}</summary>
+              <summary>
+                <span className="topic-name">
+                  <GitCompare aria-hidden="true" />
+                  {item.title[lang]}
+                </span>
+              </summary>
               {item.body[lang].map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
@@ -375,6 +404,89 @@ export function LibraryIndex({
       ) : null}
     </main>
   );
+}
+
+const SECTION_ICONS: Record<string, typeof Code> = {
+  nedir: CircleHelp,
+  istifade: Boxes,
+  "ne-etmek": Wrench,
+  oyrenmek: GraduationCap,
+  ustunluk: Sparkles,
+  sintaksis: Braces,
+  numuneler: Code,
+  islek: Briefcase,
+  suallar: MessageCircleQuestion,
+};
+
+const TOPIC_ICONS: Record<string, typeof Code> = {
+  python: Code,
+  javascript: FileCode,
+  java: Code,
+  csharp: Code,
+  typescript: FileCode,
+  "html-css": Braces,
+  "apk-hazirla": Package,
+  sql: Database,
+  go: Code,
+  php: Code,
+  kotlin: Code,
+  cpp: Code,
+  rust: Code,
+  ubuntu: Server,
+  "java-17": Code,
+  nodejs: Server,
+  "android-sdk": Package,
+  gradle: Wrench,
+  capacitor: Package,
+  docker: Boxes,
+  nginx: Server,
+  ssl: Shield,
+  firewall: Shield,
+  git: GitCompare,
+  bash: Terminal,
+  json: Braces,
+  react: Code,
+  c: Code,
+  mysql: Database,
+  http: Server,
+  linux: Terminal,
+  ssh: Terminal,
+  dns: Server,
+  npm: Package,
+  redis: Database,
+  cron: ListChecks,
+  pip: Package,
+  sqlite: Database,
+  curl: Terminal,
+  composer: Package,
+  cargo: Package,
+  make: Wrench,
+  maven: Package,
+  yaml: FileCode,
+  systemd: Server,
+  postgresql: Database,
+  markdown: BookOpen,
+  rsync: Server,
+  "git-github": GitCompare,
+  api: Server,
+};
+
+const LINK_ICONS: Record<string, typeof Code> = {
+  soz: BookOpen,
+  xeta: Bug,
+  movzu: Sparkles,
+  nece: ListChecks,
+  paket: Package,
+  muqayise: GitCompare,
+};
+
+function topicIcon(slug: string) {
+  return TOPIC_ICONS[slug] ?? Code;
+}
+
+function linkIcon(href: string) {
+  const key = href.split("/").filter(Boolean).pop() ?? "";
+  return LINK_ICONS[key] ?? BookOpen;
 }
 
 const PROGRAM_NAMES: Record<string, string> = {
@@ -642,7 +754,19 @@ export function ProgrammingArticle({
         <i />
         <Link to="/programming">{t("nav_programming")}</Link>
       </p>
-      <h1>{heading}</h1>
+      <h1>
+        {slug ? (
+          <span className="topic-name">
+            {(() => {
+              const Icon = topicIcon(slug);
+              return <Icon aria-hidden="true" />;
+            })()}
+            {heading}
+          </span>
+        ) : (
+          heading
+        )}
+      </h1>
       {slug && DEV_TRY[slug] ? (
         <p className="prog-try">
           <a href={DEV_TRY[slug]} target="_blank" rel="noopener noreferrer">
@@ -655,7 +779,13 @@ export function ProgrammingArticle({
         {sections?.map((item) => (
           <details key={item.id} id={item.id} className="prog-fold">
             <summary>
-              <h2>{item.title}</h2>
+              <h2>
+                {(() => {
+                  const Icon = SECTION_ICONS[item.id] ?? BookOpen;
+                  return <Icon aria-hidden="true" />;
+                })()}
+                {item.title}
+              </h2>
             </summary>
             <div className="prog-fold-body">
               {item.blocks?.map((block) => (
