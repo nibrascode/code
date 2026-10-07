@@ -389,13 +389,13 @@ function Home() {
         <nav className="nx-foot-extra">
           <NavMenu section="resources" />
           <NavMenu section="guides" />
-          <NavMenu section="programming" />
           <a className="footer-faq" href={searchPath(lang, "movzu")}>
             {SEARCH.movzu.heading[lang]}
           </a>
           <a className="footer-faq" href={faqPath(lang)}>
             FAQ
           </a>
+          <NavMenu section="programming" />
         </nav>
         <AppSuggest />
         <p className="nx-copy">© 2026 Nibras Code. {t("nx_rights")}</p>
