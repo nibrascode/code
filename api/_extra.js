@@ -251,10 +251,23 @@ export function ishaUmmalQura(maghrib, isha, place) {
   return clockText(start + (place?.country === "SA" ? 120 : 90));
 }
 
+const PRAYER_WORD = /(?:sübh|subh|fəcr|fecr|fajr|imsak|zöhr|zohr|zuhr|dhuhr|öğle|ogle|əsr|esr|asr|ikindi|məğrib|maghrib|magrib|axşam|aksam|akşam|işa|isha|yatsı|yatsi|xüftən|xaftan|namaz|vaxt|vakit|prayer|salah|times?|saat)[^\s]*/giu;
+
+function prayerFocus(raw) {
+  const rules = [
+    [/sübh|subh|fəcr|fecr|fajr|imsak/i, 0],
+    [/zöhr|zohr|zuhr|dhuhr|öğle|ogle/i, 1],
+    [/əsr|asr|ikindi/i, 2],
+    [/məğrib|maghrib|magrib|axşam|aksam|akşam/i, 3],
+    [/işa|isha|yatsı|yatsi|xüftən|xaftan/i, 4],
+  ];
+  for (const [re, index] of rules) if (re.test(raw)) return index;
+  return -1;
+}
+
 function prayerCity(raw) {
-  let text = raw.replace(/[?؟!]/g, " ").replace(/\s+/g, " ").trim();
-  text = text.replace(/namaz\s+vaxt[ıi](?:lar[ıi])?|namaz\s+vakti|prayer\s+times?|salah\s+times?|время\s+намаза|مواقيت(?:\s+الصلاة)?|أوقات\s+الصلاة|اوقات\s+الصلاة/gi, " ");
-  text = text.replace(/\b(in|at|üçün|ucun|icin|için|bugün|bugun|today|сегодня|اليوم)\b/gi, " ");
+  let text = raw.replace(/[?؟!]/g, " ").replace(PRAYER_WORD, " ");
+  text = text.replace(/\b(in|at|üçün|ucun|icin|için|bugün|bugun|today|сегодня|اليوم|neçədir|necedir|nedir|nədir)\b/gi, " ");
   text = text.replace(/(?:^|\s)(?:في|в)(?=\s|$)/gi, " ");
   return stripPlace(text).replace(/\s+/g, " ").trim();
 }
@@ -263,6 +276,7 @@ export async function prayerReply(message) {
   if (!/(namaz\s+vaxt|namaz\s+vakti|prayer\s+times?|salah\s+times?|время\s+намаза|مواقيت|أوقات\s+الصلاة|اوقات\s+الصلاة)/i.test(message)) return null;
   const city = prayerCity(message);
   if (city.length < 2) return null;
+  const focus = prayerFocus(message);
   const lang = guessLang(message);
   const geo = await getJson("https://geocoding-api.open-meteo.com/v1/search?count=1&language=" + (lang === "az" ? "az" : lang) + "&name=" + encodeURIComponent(city));
   const hit = geo?.results?.[0];
@@ -278,7 +292,8 @@ export async function prayerReply(message) {
   const isha = ishaUmmalQura(t.Maghrib, t.Isha, { country: hit.country_code });
   const names = PRAYER_NAMES[lang] || PRAYER_NAMES.az;
   const times = [t.Fajr, t.Dhuhr, t.Asr, t.Maghrib, isha].map((value) => String(value).slice(0, 5));
-  const lines = names.map((name, i) => name + " " + times[i]).join("\n");
+  const lines = names.map((name, i) => name + " " + times[i]);
+  const body = focus >= 0 ? lines[focus] + "\n\n" + lines.filter((_, i) => i !== focus).join("\n") : lines.join("\n");
   const gap = hit.country_code === "SA" ? 120 : 90;
   const note = {
     az: "İşa məğribdən " + gap + " dəqiqə sonra. Üsul: Ummul-Qura.",
@@ -287,7 +302,7 @@ export async function prayerReply(message) {
     ru: "Иша через " + gap + " минут после магриба. Метод: Умм аль-Кура.",
     ar: "العشاء بعد المغرب بـ" + gap + " دقيقة. الطريقة: أم القرى.",
   };
-  return (hit.name || city) + "\n" + lines + "\n" + (note[lang] || note.az);
+  return (hit.name || city) + "\n" + body + "\n" + (note[lang] || note.az);
 }
 
 export async function extraReply(message) {
