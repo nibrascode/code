@@ -15,6 +15,7 @@ import { itbooksReply } from "./_itbooks.js";
 import { translateReply } from "./_translate-chat.js";
 import { snippetReply } from "./_snippets.js";
 import { localReply } from "./_local.js";
+import { wikidataReply } from "./_wikidata.js";
 import { track } from "./_stats.js";
 import { isReligious } from "./_religious.js";
 import { isSourceKind, stripNotice, OLD_AZ_NOTICE } from "./_notice.js";
@@ -116,6 +117,15 @@ export default async function handler(req, res) {
         fromSource = isSourceKind(kind);
         religious = kind !== "brand" && kind !== "game" && !lexical && !(kind === "din" && body.mode === "code"); // kod rejimində ümumi din-söz uyğunluğu dini sual sayılmır
         break;
+      }
+    }
+    // Wikidata faktı modelə getmir: şəhər, adam, ölkə kimi aydın sualı server özü oxuyur.
+    if (!fixed && body.mode !== "code" && body.mode !== "create") {
+      try {
+        const wiki = await wikidataReply(message);
+        if (wiki) fixed = wiki;
+      } catch {
+        /* Wikidata susursa, sual hazır cavaba və ya modelə düşür */
       }
     }
     // Köhnə İbn Sirin bildirişi və «لن» qrammatika xəbərdarlığı artıq əlavə olunmur. Model yazsa belə, silinir.
