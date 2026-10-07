@@ -12,6 +12,8 @@ import { findProgrammingLocale, programmingLocalePath, programmingFromPath } fro
 import { isCodeSampleSlug } from "@/lib/code-samples";
 import { LANGS, type Lang } from "@/lib/i18n";
 import { faqFromPath, faqPath, faqTopicFromPath, faqTopicPath } from "@/lib/faq";
+import { searchFromPath, searchPath, searchTopicFromPath, searchTopicPath } from "@/lib/search-pages";
+import { compareFromPath, comparePath, compareTopicFromPath, compareTopicPath, qiblaFromPath, qiblaPath } from "@/lib/learn-pages";
 
 export const Route = createRootRoute({
   beforeLoad: ({ location }) => ({
@@ -79,6 +81,66 @@ function SeoLinks() {
           />
         ))}
         <link rel="alternate" {...{ hreflang: "x-default" }} href={`${SITE}${faqTopicPath("az", topic.item.id)}`} />
+      </>
+    );
+  }
+  const searched = searchTopicFromPath(path);
+  if (searched) {
+    return (
+      <>
+        <link rel="canonical" href={`${SITE}${searchTopicPath(searched.lang, searched.kind, searched.item.slug)}`} />
+        {LANGS.map((code) => (
+          <link key={code} rel="alternate" {...{ hreflang: code }} href={`${SITE}${searchTopicPath(code, searched.kind, searched.item.slug)}`} />
+        ))}
+        <link rel="alternate" {...{ hreflang: "x-default" }} href={`${SITE}${searchTopicPath("az", searched.kind, searched.item.slug)}`} />
+      </>
+    );
+  }
+  const searchIndex = searchFromPath(path);
+  if (searchIndex) {
+    return (
+      <>
+        <link rel="canonical" href={`${SITE}${searchPath(searchIndex.lang, searchIndex.kind)}`} />
+        {LANGS.map((code) => (
+          <link key={code} rel="alternate" {...{ hreflang: code }} href={`${SITE}${searchPath(code, searchIndex.kind)}`} />
+        ))}
+        <link rel="alternate" {...{ hreflang: "x-default" }} href={`${SITE}${searchPath("az", searchIndex.kind)}`} />
+      </>
+    );
+  }
+  const qibla = qiblaFromPath(path);
+  if (qibla) {
+    return (
+      <>
+        <link rel="canonical" href={`${SITE}${qiblaPath(qibla.lang)}`} />
+        {LANGS.map((code) => (
+          <link key={code} rel="alternate" {...{ hreflang: code }} href={`${SITE}${qiblaPath(code)}`} />
+        ))}
+        <link rel="alternate" {...{ hreflang: "x-default" }} href={`${SITE}${qiblaPath("az")}`} />
+      </>
+    );
+  }
+  const compared = compareTopicFromPath(path);
+  if (compared) {
+    return (
+      <>
+        <link rel="canonical" href={`${SITE}${compareTopicPath(compared.lang, compared.item.slug)}`} />
+        {LANGS.map((code) => (
+          <link key={code} rel="alternate" {...{ hreflang: code }} href={`${SITE}${compareTopicPath(code, compared.item.slug)}`} />
+        ))}
+        <link rel="alternate" {...{ hreflang: "x-default" }} href={`${SITE}${compareTopicPath("az", compared.item.slug)}`} />
+      </>
+    );
+  }
+  const compareIndex = compareFromPath(path);
+  if (compareIndex) {
+    return (
+      <>
+        <link rel="canonical" href={`${SITE}${comparePath(compareIndex.lang)}`} />
+        {LANGS.map((code) => (
+          <link key={code} rel="alternate" {...{ hreflang: code }} href={`${SITE}${comparePath(code)}`} />
+        ))}
+        <link rel="alternate" {...{ hreflang: "x-default" }} href={`${SITE}${comparePath("az")}`} />
       </>
     );
   }

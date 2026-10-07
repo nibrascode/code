@@ -6,6 +6,8 @@ import { TechMark } from "@/components/tech-marquee";
 import { LanguageSwitch } from "@/components/language-switch";
 import { NavMenu } from "@/components/nav-menu";
 import { faqPath } from "@/lib/faq";
+import { SEARCH, searchPath } from "@/lib/search-pages";
+import { COMPARE, QIBLA, comparePath, qiblaPath } from "@/lib/learn-pages";
 import { localeHref } from "@/lib/locale-path";
 import { useI18n } from "@/lib/i18n-context";
 import { statusText } from "@/lib/studio";
@@ -391,6 +393,18 @@ function Home() {
           <NavMenu section="programming" />
           <a className="footer-faq" href={faqPath(lang)}>
             FAQ
+          </a>
+          <a className="footer-faq" href={searchPath(lang, "soz")}>
+            {SEARCH.soz.heading[lang]}
+          </a>
+          <a className="footer-faq" href={searchPath(lang, "xeta")}>
+            {SEARCH.xeta.heading[lang]}
+          </a>
+          <a className="footer-faq" href={qiblaPath(lang)}>
+            {QIBLA.heading[lang]}
+          </a>
+          <a className="footer-faq" href={comparePath(lang)}>
+            {COMPARE.heading[lang]}
           </a>
         </nav>
         <AppSuggest />
