@@ -113,7 +113,7 @@ export function ToolsPage({ lang }: { lang: Lang }) {
             <h2>{copy.group[lang]}</h2>
           </summary>
           <div className="prog-fold-body">
-            <ul className="lib-list lib-list-2">
+            <ul className="lib-list">
               {TOOLS.map((tool) => (
                 <li key={tool.id}>
                   <button
