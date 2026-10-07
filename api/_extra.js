@@ -251,12 +251,18 @@ export function ishaUmmalQura(maghrib, isha, place) {
   return clockText(start + (place?.country === "SA" ? 120 : 90));
 }
 
-const PRAYER_WORD = /(?:sübh|subh|fəcr|fecr|fajr|imsak|zöhr|zohr|zuhr|dhuhr|öğle|ogle|əsr|esr|asr|ikindi|məğrib|maghrib|magrib|axşam|aksam|akşam|işa|isha|yatsı|yatsi|xüftən|xaftan|namaz|vaxt|vakit|prayer|salah|times?|saat)[^\s]*/giu;
+const PRAYER_WORD = /(?:sübh|subh|fəcr|fecr|fajr|imsak|zöhr|zohr|zuhr|dhuhr|öğle|ogle|günorta|gunorta|əsr|esr|asr|ikindi|məğrib|maghrib|magrib|axşam|aksam|akşam|işa|isha|yatsı|yatsi|xüftən|xaftan|namaz|vaxt|vakit|prayer|salah|times?|saat)[^\s]*/giu;
+
+function isPrayerAsk(message) {
+  const slot = /(sübh|subh|fajr|zöhr|zohr|zuhr|dhuhr|öğle|ogle|günorta|gunorta|əsr|asr|ikindi|məğrib|maghrib|axşam|akşam|işa|isha|yatsı)/i.test(message);
+  const when = /(namaz|vaxt|vakit|prayer|salah|مواقيت|أوقات|намаз)/i.test(message);
+  return (slot && when) || /(namaz\w*\s+vaxt|namaz\s+vakti|prayer\s+times?|salah\s+times?|время\s+намаза|مواقيت|أوقات\s+الصلاة|اوقات\s+الصلاة)/i.test(message);
+}
 
 function prayerFocus(raw) {
   const rules = [
     [/sübh|subh|fəcr|fecr|fajr|imsak/i, 0],
-    [/zöhr|zohr|zuhr|dhuhr|öğle|ogle/i, 1],
+    [/zöhr|zohr|zuhr|dhuhr|öğle|ogle|günorta|gunorta/i, 1],
     [/əsr|asr|ikindi/i, 2],
     [/məğrib|maghrib|magrib|axşam|aksam|akşam/i, 3],
     [/işa|isha|yatsı|yatsi|xüftən|xaftan/i, 4],
@@ -266,14 +272,16 @@ function prayerFocus(raw) {
 }
 
 function prayerCity(raw) {
-  let text = raw.replace(/[?؟!]/g, " ").replace(PRAYER_WORD, " ");
-  text = text.replace(/\b(in|at|üçün|ucun|icin|için|bugün|bugun|today|сегодня|اليوم|neçədir|necedir|nedir|nədir)\b/gi, " ");
+  let text = raw.replace(/[()（）[\]"?؟!]/g, " ");
+  text = text.replace(PRAYER_WORD, " ");
+  text = text.replace(/bu\s+gün|bugün|bugun|today|сегодня|اليوم|neçədir|necedir|nədir|nedir|təxminən|taxminen/gi, " ");
+  text = text.replace(/\b(in|at|üçün|ucun|icin|için)\b/gi, " ");
   text = text.replace(/(?:^|\s)(?:في|в)(?=\s|$)/gi, " ");
   return stripPlace(text).replace(/\s+/g, " ").trim();
 }
 
 export async function prayerReply(message) {
-  if (!/(namaz\s+vaxt|namaz\s+vakti|prayer\s+times?|salah\s+times?|время\s+намаза|مواقيت|أوقات\s+الصلاة|اوقات\s+الصلاة)/i.test(message)) return null;
+  if (!isPrayerAsk(message)) return null;
   const city = prayerCity(message);
   if (city.length < 2) return null;
   const focus = prayerFocus(message);

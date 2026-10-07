@@ -30,6 +30,7 @@ const SYSTEM = [
   "Tətbiqlər: Nibras Arabic hazırdır. Nibras PDF və Nibras Plans tezliklədir. Nibras Docs hazırlanır.",
   "Pulsuz tətbiqlərdə də reklam yoxdur. Premium olsa belə, əsas funksiyalar pulsuz qalır.",
   "Əlaqə: nibrascode@gmail.com. Sayt: nibrascode.com.",
+  "Nibras Code, tətbiq siyahısı və əlaqə ünvanını yalnız istifadəçi Nibras, tətbiq, reklam və ya əlaqə haqqında soruşanda yaz. Başqa cavabın sonuna imza, reklam və ya əlaqə əlavə etmə.",
   AYAH_PROMPT,
 ].join(" ");
 
