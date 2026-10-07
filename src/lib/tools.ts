@@ -30,7 +30,10 @@ export type ToolId =
   | "csv"
   | "regex"
   | "color"
-  | "diff";
+  | "diff"
+  | "base"
+  | "pxrem"
+  | "jwt";
 
 const L = (az: string, en: string, tr: string, ar: string, ru: string): Record<Lang, string> => ({ az, en, tr, ar, ru });
 
@@ -66,6 +69,15 @@ export const TOOLS_PAGE = {
   chars: L("Simvol", "Characters", "Karakter", "حروف", "Символы"),
   nospace: L("Boşluqsuz", "No spaces", "Boşluksuz", "بلا فراغ", "Без пробелов"),
   lines: L("Sətir", "Lines", "Satır", "أسطر", "Строки"),
+  related: L("Yaxın alətlər", "Nearby tools", "Yakın araçlar", "أدوات قريبة", "Близкие инструменты"),
+  root: L("Kök ölçü", "Root size", "Kök ölçü", "حجم الجذر", "Корневой размер"),
+  jwtNote: L(
+    "İmza yoxlanmır. Token bu səhifədən kənara getmir.",
+    "The signature is not checked. The token does not leave this page.",
+    "İmza kontrol edilmez. Token bu sayfadan çıkmaz.",
+    "لا يُفحص التوقيع. الرمز لا يغادر هذه الصفحة.",
+    "Подпись не проверяется. Токен не уходит с этой страницы.",
+  ),
 };
 
 export const TOOLS: readonly { id: ToolId; label: Record<Lang, string> }[] = [
@@ -96,6 +108,9 @@ export const TOOLS: readonly { id: ToolId; label: Record<Lang, string> }[] = [
   { id: "unix", label: L("Unix vaxtı", "Unix time", "Unix zamanı", "وقت يونكس", "Время Unix") },
   { id: "color", label: L("Rəng kodu", "Color code", "Renk kodu", "رمز اللون", "Код цвета") },
   { id: "csv", label: L("JSON və CSV", "JSON and CSV", "JSON ve CSV", "JSON و CSV", "JSON и CSV") },
+  { id: "base", label: L("İkilik və onaltılıq", "Binary and hex", "İkilik ve onaltılık", "ثنائي وست عشري", "Двоичный и шестнадцатеричный") },
+  { id: "pxrem", label: L("px və rem", "px and rem", "px ve rem", "px و rem", "px и rem") },
+  { id: "jwt", label: L("JWT oxuma", "Read a JWT", "JWT oku", "قراءة JWT", "Чтение JWT") },
 ];
 
 export const TOOL_GROUPS: readonly { id: string; title: Record<Lang, string>; ids: readonly ToolId[] }[] = [
@@ -112,7 +127,7 @@ export const TOOL_GROUPS: readonly { id: string; title: Record<Lang, string>; id
   {
     id: "crypt",
     title: L("Şifrələmə", "Encryption", "Şifreleme", "تشفير", "Шифрование"),
-    ids: ["password", "md5", "sha256", "hash"],
+    ids: ["password", "md5", "sha256", "hash", "jwt"],
   },
   {
     id: "format",
@@ -127,9 +142,19 @@ export const TOOL_GROUPS: readonly { id: string; title: Record<Lang, string>; id
   {
     id: "turn",
     title: L("Çevirici", "Converter", "Dönüştürücü", "محوّل", "Конвертер"),
-    ids: ["unix", "color", "csv"],
+    ids: ["base", "pxrem", "unix", "color", "csv"],
   },
 ];
+
+export function relatedTools(id: ToolId) {
+  const group = TOOL_GROUPS.find((item) => item.ids.includes(id));
+  if (!group) return [];
+  const at = group.ids.indexOf(id);
+  const nearby = [...group.ids.slice(at + 1), ...group.ids.slice(0, at)];
+  if (nearby.length >= 3) return nearby.slice(0, 3);
+  const rest = TOOL_GROUPS.flatMap((item) => item.ids).filter((item) => item !== id && !nearby.includes(item));
+  return [...nearby, ...rest].slice(0, 3);
+}
 
 export function toolsPath(lang: Lang) {
   return `${PREFIX[lang]}/tools`;

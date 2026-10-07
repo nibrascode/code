@@ -31,15 +31,18 @@ export const TOOL_SLUG: Record<ToolId, string> = {
   unix: "unix-time",
   color: "color",
   csv: "json-csv",
+  base: "binary-hex",
+  pxrem: "px-rem",
+  jwt: "jwt",
 };
 
 export const TOOL_LEAD: Record<ToolId, Record<Lang, string>> = {
   json: L(
-    "JSON mətnini sətirlərə ayırır. Səhv mötərizə və ya vergül burada görünür.",
-    "Breaks JSON onto separate lines. A bad bracket or comma shows up here.",
-    "JSON metnini satırlara ayırır. Hatalı parantez veya virgül burada görünür.",
-    "يفصل JSON على أسطر. القوس أو الفاصلة الخطأ تظهر هنا.",
-    "Разбивает JSON на строки. Плохая скобка или запятая видны здесь.",
+    "JSON mətnini sətirlərə ayırır. Səhv mötərizə və ya vergül burada görünür.\n\nNümunə: {\"ad\":\"Aysel\",\"yaş\":20}. Yaradan sonra hər sahə öz sətirində olur. Vergül unudulsa və ya dırnaq çatışmasa, alət mətni qəbul etmir.\n\nBu səhifə yalnız düzəldir. Boşluqları çıxarmaq üçün JSON sıx aləti var. Nəticəni kopyalamaq və ya .txt kimi yükləmək olur.",
+    "Breaks JSON onto separate lines. A bad bracket or comma shows up here.\n\nExample: {\"name\":\"Aysel\",\"age\":20}. After you press Make, each field sits on its own line. A missing comma or quote is rejected.\n\nThis page only formats. The JSON minifier removes the spaces. You can copy the result or download it as .txt.",
+    "JSON metnini satırlara ayırır. Hatalı parantez veya virgül burada görünür.\n\nÖrnek: {\"ad\":\"Aysel\",\"yaş\":20}. Üret dedikten sonra her alan kendi satırında durur. Virgül ya da tırnak eksikse metin kabul edilmez.\n\nBu sayfa yalnız düzenler. Boşlukları çıkarmak için JSON sıkıştır aracı vardır. Sonucu kopyalayabilir ya da .txt olarak indirebilirsin.",
+    "يفصل JSON على أسطر. القوس أو الفاصلة الخطأ تظهر هنا.\n\nمثال: {\"ad\":\"Aysel\",\"yaş\":20}. بعد الإنشاء يقف كل حقل في سطره. إذا نقصت فاصلة أو علامة اقتباس يُرفض النص.\n\nهذه الصفحة تنسّق فقط. ضغط JSON يحذف الفراغات. يمكن نسخ النتيجة أو تنزيلها كملف txt.",
+    "Разбивает JSON на строки. Плохая скобка или запятая видны здесь.\n\nПример: {\"ad\":\"Aysel\",\"yaş\":20}. После кнопки каждое поле стоит на своей строке. Пропущенная запятая или кавычка отклоняется.\n\nЭта страница только оформляет. Сжатие JSON убирает пробелы. Результат можно скопировать или скачать как .txt.",
   ),
   "json-min": L(
     "JSON mətnindən boşluqları çıxarır. Bir sətirdə qalır.",
@@ -49,11 +52,11 @@ export const TOOL_LEAD: Record<ToolId, Record<Lang, string>> = {
     "Убирает пробелы из JSON. Остаётся одна строка.",
   ),
   base64: L(
-    "Mətni Base64 koduna çevirir və kodu geri oxuyur.",
-    "Turns text into Base64 and reads a Base64 code back.",
-    "Metni Base64 koduna çevirir ve kodu geri okur.",
-    "يحوّل النص إلى Base64 ويقرأ الرمز مرة أخرى.",
-    "Переводит текст в Base64 и читает код обратно.",
+    "Mətni Base64 koduna çevirir və kodu geri oxuyur.\n\nNümunə: Salam yazılanda kod U2FsYW0= olur. Aç düyməsi kodu yenidən mətnə qaytarır.\n\nBase64 şifrə deyil. Mətni gizlətmir, yalnız başqa formada saxlayır. Şəkil və fayl burada oxunmur, yalnız mətn.",
+    "Turns text into Base64 and reads a Base64 code back.\n\nExample: Salam becomes U2FsYW0=. Read turns the code back into text.\n\nBase64 is not a cipher. It does not hide the text, it only stores it in another form. Pictures and files are not read here, only text.",
+    "Metni Base64 koduna çevirir ve kodu geri okur.\n\nÖrnek: Salam yazılınca kod U2FsYW0= olur. Aç düğmesi kodu yeniden metne çevirir.\n\nBase64 şifre değildir. Metni gizlemez, yalnız başka biçimde saklar. Resim ve dosya burada okunmaz, yalnız metin.",
+    "يحوّل النص إلى Base64 ويقرأ الرمز مرة أخرى.\n\nمثال: Salam تصبح U2FsYW0=. زر القراءة يعيد الرمز إلى نص.\n\nBase64 ليس تشفيرًا. لا يخفي النص، بل يحفظه بشكل آخر. الصور والملفات لا تُقرأ هنا، النص فقط.",
+    "Переводит текст в Base64 и читает код обратно.\n\nПример: Salam становится U2FsYW0=. Кнопка чтения возвращает текст.\n\nBase64 — не шифр. Он не прячет текст, только хранит его в другом виде. Картинки и файлы здесь не читаются, только текст.",
   ),
   uuid: L(
     "Təsadüfi UUID yaradır. Hər basışda yeni identifikator çıxır.",
@@ -77,11 +80,11 @@ export const TOOL_LEAD: Record<ToolId, Record<Lang, string>> = {
     "Кодирует пробел и знак в адресе и открывает код обратно.",
   ),
   md5: L(
-    "Mətndən MD5 hash çıxarır. Eyni mətn həmişə eyni kodu verir.",
-    "Makes an MD5 hash from text. The same text always gives the same code.",
-    "Metinden MD5 hash çıkarır. Aynı metin her zaman aynı kodu verir.",
-    "يخرج MD5 من النص. النص نفسه يعطي الرمز نفسه دائمًا.",
-    "Делает MD5 из текста. Один и тот же текст всегда даёт тот же код.",
+    "Mətndən MD5 hash çıxarır. Eyni mətn həmişə eyni kodu verir.\n\nNümunə: Salam yazılanda nəticə e0c0587b2f05f1a546894eae0424339f olur. Bir hərf dəyişsə, kod tamam başqa olur.\n\nMD5 köhnə üsuldur. Yeni şifrə saxlamaq üçün SHA-256 daha uyğundur. Bu səhifə kodu yoxlamır, yalnız hesablayır.",
+    "Makes an MD5 hash from text. The same text always gives the same code.\n\nExample: Salam becomes e0c0587b2f05f1a546894eae0424339f. Change one letter and the code is different.\n\nMD5 is an old method. SHA-256 is a better fit for a new password store. This page does not check a code, it only calculates one.",
+    "Metinden MD5 hash çıkarır. Aynı metin her zaman aynı kodu verir.\n\nÖrnek: Salam yazılınca sonuç e0c0587b2f05f1a546894eae0424339f olur. Bir harf değişirse kod bütünüyle değişir.\n\nMD5 eski bir yoldur. Yeni parola saklamak için SHA-256 daha uygundur. Bu sayfa kodu kontrol etmez, yalnız hesaplar.",
+    "يخرج MD5 من النص. النص نفسه يعطي الرمز نفسه دائمًا.\n\nمثال: Salam تعطي e0c0587b2f05f1a546894eae0424339f. إذا تغيّر حرف يتغيّر الرمز كله.\n\nMD5 طريقة قديمة. SHA-256 أنسب لحفظ كلمة سر جديدة. هذه الصفحة لا تفحص رمزًا، بل تحسبه فقط.",
+    "Делает MD5 из текста. Один и тот же текст всегда даёт тот же код.\n\nПример: Salam даёт e0c0587b2f05f1a546894eae0424339f. Одна другая буква — и код другой.\n\nMD5 — старый способ. Для нового хранения пароля лучше SHA-256. Страница код не проверяет, только считает.",
   ),
   sha256: L(
     "Mətndən SHA-256 hash çıxarır. Nəticə 64 simvolluq onaltılıq koddur.",
@@ -182,11 +185,11 @@ export const TOOL_LEAD: Record<ToolId, Record<Lang, string>> = {
     "Показывает текст в верхнем и нижнем регистре, camelCase, snake_case и slug.",
   ),
   count: L(
-    "Mətndə sözün, simvolun, boşluqsuz simvolun və sətrin sayını göstərir.",
-    "Shows how many words, characters, characters without spaces, and lines are in the text.",
-    "Metindeki söz, karakter, boşluksuz karakter ve satır sayısını gösterir.",
-    "يعرض عدد الكلمات والحروف والحروف بلا فراغ والأسطر.",
-    "Показывает число слов, символов, символов без пробелов и строк.",
+    "Mətndə sözün, simvolun, boşluqsuz simvolun və sətrin sayını göstərir.\n\nNümunə: bir iki üç yazılanda söz 3, simvol 11 olur. Boşluq simvola daxildir, boşluqsuz sayda çıxır.\n\nSətir sayı Enter ilə ayrılan sətirlərdir. Boş mətn sıfır verir. Say özü hazır cavabdır, kopyalamaq olur.",
+    "Shows how many words, characters, characters without spaces, and lines are in the text.\n\nExample: one two three gives 3 words and 13 characters. A space counts as a character, and the no-space count leaves it out.\n\nA line is what Enter separates. Empty text gives zero. The count can be copied.",
+    "Metindeki söz, karakter, boşluksuz karakter ve satır sayısını gösterir.\n\nÖrnek: bir iki üç yazılınca söz 3, karakter 11 olur. Boşluk karaktere girer, boşluksuz sayıda çıkmaz.\n\nSatır sayısı Enter ile ayrılan satırlardır. Boş metin sıfır verir. Sayı kopyalanabilir.",
+    "يعرض عدد الكلمات والحروف والحروف بلا فراغ والأسطر.\n\nمثال: bir iki üç تعطي 3 كلمات و11 حرفًا. الفراغ يُحسب حرفًا، ويخرج من العدد بلا فراغ.\n\nالسطر ما يفصله Enter. النص الفارغ يعطي صفرًا. يمكن نسخ العدد.",
+    "Показывает число слов, символов, символов без пробелов и строк.\n\nПример: bir iki üç даёт 3 слова и 11 символов. Пробел входит в символы и выходит из счёта без пробелов.\n\nСтрока — то, что отделяет Enter. Пустой текст даёт ноль. Число можно скопировать.",
   ),
   diff: L(
     "İki mətni sətir-sətir tutuşdurur. Çıxan sətir minus, gələn sətir plus ilə görünür.",
@@ -203,11 +206,11 @@ export const TOOL_LEAD: Record<ToolId, Record<Lang, string>> = {
     "Ищет шаблон в тексте. Совпавшие куски пишет один под другим.",
   ),
   unix: L(
-    "Saniyəni tarixə, tarixi Unix saniyəsinə çevirir. Qısa ədəd saniyə sayılır.",
-    "Turns seconds into a date, and a date into Unix seconds. A short number is treated as seconds.",
-    "Saniyeyi tarihe, tarihi Unix saniyesine çevirir. Kısa sayı saniye sayılır.",
-    "يحوّل الثواني إلى تاريخ، والتاريخ إلى ثوان يونكس. العدد القصير يُحسب ثواني.",
-    "Переводит секунды в дату, а дату в секунды Unix. Короткое число считается секундами.",
+    "Saniyəni tarixə, tarixi Unix saniyəsinə çevirir. Qısa ədəd saniyə sayılır.\n\nNümunə: 0 yazılanda nəticə 1970-01-01 00:00:00 UTC olur. 2026-10-07 yazılanda saniyə çıxır.\n\n10 rəqəmli ədəd saniyə sayılır. 13 rəqəmli ədəd millisaniyə sayılır. Tarix UTC-dir, yerli saat deyil.",
+    "Turns seconds into a date, and a date into Unix seconds. A short number is treated as seconds.\n\nExample: 0 becomes 1970-01-01 00:00:00 UTC. 2026-10-07 becomes a second count.\n\nA 10-digit number is seconds. A 13-digit number is milliseconds. The date is UTC, not local time.",
+    "Saniyeyi tarihe, tarihi Unix saniyesine çevirir. Kısa sayı saniye sayılır.\n\nÖrnek: 0 yazılınca sonuç 1970-01-01 00:00:00 UTC olur. 2026-10-07 yazılınca saniye çıkar.\n\n10 basamaklı sayı saniyedir. 13 basamaklı sayı milisaniyedir. Tarih UTC'dir, yerel saat değildir.",
+    "يحوّل الثواني إلى تاريخ، والتاريخ إلى ثوان يونكس. العدد القصير يُحسب ثواني.\n\nمثال: 0 تعطي 1970-01-01 00:00:00 UTC. 2026-10-07 تعطي عدد الثواني.\n\nالعدد من 10 أرقام هو ثوان. العدد من 13 رقمًا هو أجزاء من الثانية. التاريخ بتوقيت UTC، وليس التوقيت المحلي.",
+    "Переводит секунды в дату, а дату в секунды Unix. Короткое число считается секундами.\n\nПример: 0 даёт 1970-01-01 00:00:00 UTC. 2026-10-07 даёт число секунд.\n\nЧисло из 10 цифр — секунды. Число из 13 цифр — миллисекунды. Дата в UTC, не местное время.",
   ),
   color: L(
     "HEX, RGB və HSL rəng kodunu bir-birinə çevirir.",
@@ -222,6 +225,27 @@ export const TOOL_LEAD: Record<ToolId, Record<Lang, string>> = {
     "JSON listesini CSV tablosuna, CSV tablosunu JSON listesine çevirir.",
     "يحوّل قائمة JSON إلى جدول CSV، وجدول CSV إلى قائمة JSON.",
     "Переводит список JSON в таблицу CSV, а таблицу CSV в список JSON.",
+  ),
+  base: L(
+    "Ədədi 10-luq, 2-lik və 16-lıq formada göstərir.\n\nNümunə: 42 yazılanda 2-lik 101010, 16-lıq 2a olur. 0b101010 və 0x2a da eyni ədəddir.\n\nHərf olan kod onaltılıq sayılır. Mənfi ədəd və vergül qəbul olunmur.",
+    "Shows a number in decimal, binary, and hex.\n\nExample: 42 becomes binary 101010 and hex 2a. 0b101010 and 0x2a are the same number.\n\nA code with a letter is read as hex. A minus and a comma are not accepted.",
+    "Sayıyı 10'luk, 2'lik ve 16'lık biçimde gösterir.\n\nÖrnek: 42 yazılınca 2'lik 101010, 16'lık 2a olur. 0b101010 ve 0x2a aynı sayıdır.\n\nHarf olan kod onaltılık sayılır. Eksi sayı ve virgül kabul edilmez.",
+    "يعرض العدد بالنظام العشري والثنائي والست عشري.\n\nمثال: 42 تعطي الثنائي 101010 والست عشري 2a. 0b101010 و0x2a هما العدد نفسه.\n\nالرمز الذي فيه حرف يُقرأ ست عشريًا. العدد السالب والفاصلة لا يُقبلان.",
+    "Показывает число в десятичном, двоичном и шестнадцатеричном виде.\n\nПример: 42 даёт двоичное 101010 и шестнадцатеричное 2a. 0b101010 и 0x2a — то же число.\n\nКод с буквой читается как шестнадцатеричный. Минус и запятая не принимаются.",
+  ),
+  pxrem: L(
+    "Piksel və rem ölçüsünü bir-birinə çevirir. Kök ölçü adətən 16-dır.\n\nNümunə: 16px yazılanda 1rem olur. 1.5rem yazılanda 24px olur.\n\nKök ölçünü dəyişsən, nəticə də dəyişir. 32px kökü 32 olanda 1rem edir.",
+    "Converts pixels and rem. The root size is usually 16.\n\nExample: 16px becomes 1rem. 1.5rem becomes 24px.\n\nChange the root size and the result changes. 32px is 1rem when the root is 32.",
+    "Piksel ve rem ölçüsünü birbirine çevirir. Kök ölçü genelde 16'dır.\n\nÖrnek: 16px yazılınca 1rem olur. 1.5rem yazılınca 24px olur.\n\nKök ölçüyü değiştirirsen sonuç da değişir. Kök 32 iken 32px 1rem eder.",
+    "يحوّل البكسل وrem. حجم الجذر عادة 16.\n\nمثال: 16px تصبح 1rem. 1.5rem تصبح 24px.\n\nإذا غيّرت حجم الجذر تغيّرت النتيجة. 32px تساوي 1rem حين يكون الجذر 32.",
+    "Переводит пиксели и rem. Корневой размер обычно 16.\n\nПример: 16px становится 1rem. 1.5rem становится 24px.\n\nСменишь корневой размер — сменится результат. 32px равны 1rem, когда корень 32.",
+  ),
+  jwt: L(
+    "JWT tokenin başlığını və içini oxuyur. İmzanı yoxlamır və tokeni heç yerə göndərmir.\n\nToken üç hissədən ibarətdir: başlıq, iç və imza. Burada yalnız ilk iki hissə mətn olur.\n\nİmza yoxlanmadığı üçün bu səhifə tokenin doğru olduğunu demir. Şifrə və gizli açar bura yapışdırılmamalıdır.",
+    "Reads the header and the inside of a JWT. It does not check the signature and does not send the token anywhere.\n\nA token has three parts: header, payload, and signature. Only the first two become text here.\n\nBecause the signature is not checked, this page does not say the token is valid. Do not paste a password or a secret key.",
+    "JWT tokenin başlığını ve içini okur. İmzayı kontrol etmez ve tokeni hiçbir yere göndermez.\n\nToken üç parçadır: başlık, iç ve imza. Burada yalnız ilk iki parça metin olur.\n\nİmza kontrol edilmediği için bu sayfa tokenin doğru olduğunu söylemez. Parola ve gizli anahtar buraya yapıştırılmamalıdır.",
+    "يقرأ رأس JWT وداخله. لا يفحص التوقيع ولا يرسل الرمز إلى أي مكان.\n\nالرمز ثلاثة أجزاء: الرأس والداخل والتوقيع. هنا يصبح الجزءان الأولان نصًا فقط.\n\nلأن التوقيع لا يُفحص، هذه الصفحة لا تقول إن الرمز صحيح. لا تلصق كلمة سر أو مفتاحًا سريًا.",
+    "Читает заголовок и содержимое JWT. Подпись не проверяет и токен никуда не отправляет.\n\nУ токена три части: заголовок, содержимое и подпись. Здесь текстом становятся только первые две.\n\nПодпись не проверяется, поэтому страница не говорит, что токен верный. Пароль и секретный ключ сюда вставлять не нужно.",
   ),
 };
 

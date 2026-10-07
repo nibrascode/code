@@ -417,3 +417,48 @@ export function diffText(leftText: string, rightText: string) {
   while (j < right.length) out.push(`+ ${right[j++]}`);
   return out.join("\n");
 }
+
+export function convertBase(text: string) {
+  const raw = text.trim().toLowerCase().replace(/[\s_]/g, "");
+  if (!raw) throw new Error("base");
+  let value: bigint;
+  if (raw.startsWith("0b")) value = BigInt(raw);
+  else if (raw.startsWith("0x")) value = BigInt(raw);
+  else if (/^[0-9]+$/.test(raw)) value = BigInt(raw);
+  else if (/^[0-9a-f]+$/.test(raw) && /[a-f]/.test(raw)) value = BigInt(`0x${raw}`);
+  else throw new Error("base");
+  return `10: ${value.toString(10)}\n2: ${value.toString(2)}\n16: ${value.toString(16)}`;
+}
+
+function trimNumber(value: number) {
+  return String(Math.round(value * 1000) / 1000);
+}
+
+export function convertPxRem(text: string, root: string) {
+  const base = Number(root);
+  if (!Number.isFinite(base) || base <= 0) throw new Error("px");
+  const raw = text.trim().toLowerCase();
+  const px = raw.match(/^(-?\d+(?:\.\d+)?)\s*px$/);
+  const rem = raw.match(/^(-?\d+(?:\.\d+)?)\s*rem$/);
+  const plain = raw.match(/^(-?\d+(?:\.\d+)?)$/);
+  if (px) return `${px[1]}px\n${trimNumber(Number(px[1]) / base)}rem`;
+  if (rem) return `${trimNumber(Number(rem[1]) * base)}px\n${rem[1]}rem`;
+  if (plain) return `${plain[1]}px\n${trimNumber(Number(plain[1]) / base)}rem`;
+  throw new Error("px");
+}
+
+function readBase64Url(part: string) {
+  const pad = part.replace(/-/g, "+").replace(/_/g, "/");
+  const padded = pad + "=".repeat((4 - (pad.length % 4)) % 4);
+  const binary = atob(padded);
+  const bytes = Uint8Array.from(binary, (char) => char.charCodeAt(0));
+  return new TextDecoder().decode(bytes);
+}
+
+export function readJwt(token: string) {
+  const parts = token.trim().split(".");
+  if (parts.length < 2) throw new Error("jwt");
+  const header = JSON.stringify(JSON.parse(readBase64Url(parts[0])), null, 2);
+  const payload = JSON.stringify(JSON.parse(readBase64Url(parts[1])), null, 2);
+  return `header\n${header}\n\npayload\n${payload}`;
+}

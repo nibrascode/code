@@ -19,6 +19,8 @@ import {
   Palette,
   Pipette,
   Regex,
+  Ruler,
+  Scan,
   Sparkles,
   Table,
   TextQuote,
@@ -27,7 +29,7 @@ import {
   WholeWord,
 } from "lucide-react";
 import type { Lang } from "@/lib/i18n";
-import { TOOLS, TOOLS_PAGE, TOOL_GROUPS, toolPath, toolsPath, type ToolId } from "@/lib/tools";
+import { TOOLS, TOOLS_PAGE, TOOL_GROUPS, relatedTools, toolPath, toolsPath, type ToolId } from "@/lib/tools";
 import { TOOL_LEAD } from "@/lib/tools-seo";
 import {
   decodeBase64,
@@ -55,9 +57,12 @@ import {
   convertColor,
   convertTable,
   diffText,
+  readJwt,
   testRegex,
   textStats,
   unixConvert,
+  convertBase,
+  convertPxRem,
 } from "@/lib/tools-run";
 
 const NEEDS_TEXT = new Set<ToolId>([
@@ -82,6 +87,9 @@ const NEEDS_TEXT = new Set<ToolId>([
   "regex",
   "color",
   "diff",
+  "base",
+  "pxrem",
+  "jwt",
 ]);
 const PAIR = new Set<ToolId>(["base64", "url", "html"]);
 
@@ -122,6 +130,9 @@ const ICONS: Record<ToolId, typeof Braces> = {
   unix: Clock,
   color: Pipette,
   csv: Table,
+  base: Binary,
+  pxrem: Ruler,
+  jwt: Scan,
 };
 
 async function sha(text: string, name: "SHA-1" | "SHA-256") {
@@ -164,6 +175,9 @@ function runSync(id: ToolId, text: string, count: string, low: string, high: str
     return found.length ? found.join("\n") : TOOLS_PAGE.none[lang];
   }
   if (id === "diff") return diffText(text, extra);
+  if (id === "base") return convertBase(text);
+  if (id === "pxrem") return convertPxRem(text, count);
+  if (id === "jwt") return readJwt(text);
   return "";
 }
 
@@ -198,7 +212,7 @@ export function ToolsPage({ lang, focus }: { lang: Lang; focus?: ToolId }) {
   const current = focus ?? null;
   const [text, setText] = useState("");
   const [extra, setExtra] = useState("");
-  const [count, setCount] = useState("3");
+  const [count, setCount] = useState(focus === "pxrem" ? "16" : "3");
   const [low, setLow] = useState("1");
   const [high, setHigh] = useState("100");
   const [output, setOutput] = useState("");
@@ -211,7 +225,10 @@ export function ToolsPage({ lang, focus }: { lang: Lang; focus?: ToolId }) {
     try {
       if (current === "hash") setOutput(await sha(text, "SHA-1"));
       else if (current === "sha256") setOutput(await sha(text, "SHA-256"));
-      else setOutput(mode === "undo" ? undo(current, text) : runSync(current, text, count, low, high, extra, lang));
+      else {
+        const next = mode === "undo" ? undo(current, text) : runSync(current, text, count, low, high, extra, lang);
+        setOutput(current === "jwt" && mode === "do" ? `${next}\n\n${copy.jwtNote[lang]}` : next);
+      }
     } catch {
       setOutput("");
       setNote(copy.bad[lang]);
@@ -232,7 +249,9 @@ export function ToolsPage({ lang, focus }: { lang: Lang; focus?: ToolId }) {
         )}
       </p>
       <h1>{focus ? TOOLS.find((item) => item.id === focus)!.label[lang] : copy.heading[lang]}</h1>
-      <p>{focus ? TOOL_LEAD[focus][lang] : copy.description[lang]}</p>
+      {(focus ? TOOL_LEAD[focus][lang] : copy.description[lang]).split("\n\n").map((part) => (
+        <p key={part}>{part}</p>
+      ))}
       {focus ? null : (
       <div className="prog-sections">
         {TOOL_GROUPS.map((group) => {
@@ -282,8 +301,13 @@ export function ToolsPage({ lang, focus }: { lang: Lang; focus?: ToolId }) {
                     <input value={high} inputMode="numeric" aria-label="max" onChange={(event) => setHigh(event.target.value)} />
                   </div>
                 ) : null}
-                {current === "lorem" || current === "text" || current === "password" ? (
-                  <input value={count} inputMode="numeric" aria-label="count" onChange={(event) => setCount(event.target.value)} />
+                {current === "lorem" || current === "text" || current === "password" || current === "pxrem" ? (
+                  <input
+                    value={count}
+                    inputMode="decimal"
+                    aria-label={current === "pxrem" ? copy.root[lang] : "count"}
+                    onChange={(event) => setCount(event.target.value)}
+                  />
                 ) : null}
                 {NEEDS_TEXT.has(current) ? (
                   <>
@@ -355,6 +379,27 @@ export function ToolsPage({ lang, focus }: { lang: Lang; focus?: ToolId }) {
                   </>
                 ) : null}
               </form>
+      ) : null}
+      {focus ? (
+        <div className="prog-fold-body">
+          <h2>{copy.related[lang]}</h2>
+          <ul className="lib-list">
+            {relatedTools(focus).map((id) => {
+              const tool = TOOLS.find((item) => item.id === id)!;
+              const Icon = ICONS[id];
+              return (
+                <li key={id}>
+                  <a href={toolPath(lang, id)}>
+                    <span className="tool-name">
+                      <Icon aria-hidden="true" />
+                      {tool.label[lang]}
+                    </span>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       ) : null}
     </main>
   );

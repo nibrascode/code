@@ -626,7 +626,7 @@ function pageCopy(pathname: string, lang: Lang) {
     const item = TOOLS.find((entry) => entry.id === tool.id)!;
     return {
       title: `${item.label[tool.lang]} — Nibras Code`,
-      description: TOOL_LEAD[tool.id][tool.lang],
+      description: TOOL_LEAD[tool.id][tool.lang].split("\n\n")[0],
       keywords: item.label[tool.lang],
     };
   }

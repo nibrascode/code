@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Outlet, useRouterState } from "@tanstack/react-router";
 import { ToolsPage } from "@/components/tools-page";
 
 export const Route = createFileRoute("/ar/tools")({
@@ -6,5 +6,7 @@ export const Route = createFileRoute("/ar/tools")({
 });
 
 function Page() {
+  const here = useRouterState({ select: (state) => state.location.pathname }).replace(/\/$/, "");
+  if (here !== "/ar/tools") return <Outlet />;
   return <ToolsPage lang="ar" />;
 }
