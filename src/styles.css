@@ -5852,6 +5852,24 @@ body.is-home .noise {
   flex: 1;
 }
 
+.tool-file {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 46px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid rgb(255 255 255 / 0.14);
+  background: #070b16;
+  color: #f4f7ff;
+  cursor: pointer;
+}
+
+.tool-file input {
+  max-width: 16rem;
+}
+
 .nx-tools {
   color: #9ec5ff;
   background: rgb(16 32 64 / 0.9);

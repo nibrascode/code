@@ -55,6 +55,21 @@ function runSync(id: ToolId, text: string, count: string, low: string, high: str
   return "";
 }
 
+function fileKind(id: ToolId) {
+  return id === "xml" ? "xml" : "txt";
+}
+
+function saveFile(id: ToolId, body: string) {
+  const kind = fileKind(id);
+  const blob = new Blob([body], { type: kind === "xml" ? "application/xml;charset=utf-8" : "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `nibras-${id}.${kind}`;
+  link.click();
+  URL.revokeObjectURL(url);
+}
+
 function undo(id: ToolId, text: string) {
   if (id === "base64") return decodeBase64(text);
   if (id === "url") return decodeUrl(text);
@@ -133,7 +148,21 @@ export function ToolsPage({ lang }: { lang: Lang }) {
                   <input value={count} inputMode="numeric" aria-label="count" onChange={(event) => setCount(event.target.value)} />
                 ) : null}
                 {NEEDS_TEXT.has(openId) ? (
-                  <textarea value={text} spellCheck={false} onChange={(event) => setText(event.target.value)} />
+                  <>
+                    <label className="tool-file">
+                      {copy.load[lang]}
+                      <input
+                        type="file"
+                        accept={openId === "xml" ? ".xml,.txt,text/plain,application/xml,text/xml" : ".txt,text/plain"}
+                        onChange={(event) => {
+                          const file = event.target.files?.[0];
+                          if (!file) return;
+                          void file.text().then((value) => setText(value));
+                        }}
+                      />
+                    </label>
+                    <textarea value={text} spellCheck={false} onChange={(event) => setText(event.target.value)} />
+                  </>
                 ) : null}
                 <div className="tool-row">
                   <button type="submit">{copy.run[lang]}</button>
@@ -147,15 +176,20 @@ export function ToolsPage({ lang }: { lang: Lang }) {
                 {output ? (
                   <>
                     <textarea readOnly value={output} />
-                    <button
-                      type="button"
-                      onClick={() => {
-                        void navigator.clipboard.writeText(output);
-                        setNote(copy.copied[lang]);
-                      }}
-                    >
-                      {copy.copy[lang]}
-                    </button>
+                    <div className="tool-row">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          void navigator.clipboard.writeText(output);
+                          setNote(copy.copied[lang]);
+                        }}
+                      >
+                        {copy.copy[lang]}
+                      </button>
+                      <button type="button" onClick={() => saveFile(openId, output)}>
+                        {copy.save[lang]}
+                      </button>
+                    </div>
                   </>
                 ) : null}
               </form>

@@ -46,6 +46,8 @@ export const TOOLS_PAGE = {
   run: L("Yarat", "Make", "Üret", "أنشئ", "Сделать"),
   copy: L("Kopyala", "Copy", "Kopyala", "انسخ", "Копировать"),
   copied: L("Kopyalandı", "Copied", "Kopyalandı", "نُسخ", "Скопировано"),
+  save: L("Faylı yüklə", "Download the file", "Dosyayı indir", "نزّل الملف", "Скачать файл"),
+  load: L("Fayl seç", "Choose a file", "Dosya seç", "اختر ملفًا", "Выбрать файл"),
   bad: L("Mətn bu alətə uyğun deyil.", "This text does not fit the tool.", "Metin bu araca uymaz.", "هذا النص لا يناسب الأداة.", "Этот текст инструменту не подходит."),
 };
 
