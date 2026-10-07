@@ -3,6 +3,9 @@
 
 const UA = "NibrasAI/1.0 (https://www.nibrascode.com; nibrascode@gmail.com)";
 
+const FRANKFURTER = "https://api.frankfurter.dev/v1/latest";
+const RATES = "https://open.er-api.com/v6/latest/";
+
 const WX = {
   az: ["açıq", "az buludlu", "buludlu", "dumanlı", "çiskin", "yağışlı", "qarlı", "leysan", "qar leysanı", "ildırımlı"],
   en: ["clear", "partly cloudy", "cloudy", "foggy", "drizzle", "rain", "snow", "showers", "snow showers", "thunder"],
@@ -115,41 +118,24 @@ function rateAsk(message) {
   return { from, to, amount };
 }
 
-function bakuStamp(daysAgo) {
-  const parts = new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Baku", day: "2-digit", month: "2-digit", year: "numeric" }).format(new Date(Date.now() - daysAgo * 86400000));
-  const [day, month, year] = parts.split("/");
-  return { file: day + "." + month + "." + year, show: day + "." + month + "." + year };
+function dotDate(raw) {
+  const d = new Date(raw);
+  if (Number.isNaN(d.getTime())) return "";
+  const [day, month, year] = new Intl.DateTimeFormat("en-GB", { timeZone: "UTC", day: "2-digit", month: "2-digit", year: "numeric" }).format(d).split("/");
+  return day + "." + month + "." + year;
 }
 
-async function cbarRate(from, to) {
-  for (let ago = 0; ago < 7; ago++) {
-    const stamp = bakuStamp(ago);
-    const res = await fetch("https://www.cbar.az/currencies/" + stamp.file + ".xml", {
-      headers: { "User-Agent": UA },
-      signal: AbortSignal.timeout(7000),
-    });
-    const xml = await res.text();
-    if (!res.ok || !xml.includes("<Valute")) continue;
-    const read = (code) => {
-      const block = xml.match(new RegExp('<Valute Code="' + code + '">([\\s\\S]*?)</Valute>', "i"));
-      if (!block) return null;
-      const nominal = Number(block[1].match(/<Nominal>([\d.]+)<\/Nominal>/)?.[1] || 1);
-      const value = Number(String(block[1].match(/<Value>([^<]+)<\/Value>/)?.[1] || "").replace(",", "."));
-      if (!nominal || !value) return null;
-      return value / nominal;
-    };
-    const aznPer = { azn: 1, usd: read("USD"), eur: read("EUR"), try: read("TRY"), gbp: read("GBP"), rub: read("RUB") };
-    if (from !== "azn" && aznPer[from] == null) return null;
-    if (to !== "azn" && aznPer[to] == null) return null;
-    const date = xml.match(/Date="([^"]+)"/)?.[1] || stamp.show;
-    return { rate: aznPer[from] / aznPer[to], date };
+async function directRate(from, to) {
+  const base = from.toUpperCase();
+  const quote = to.toUpperCase();
+  if (base === "AZN" || quote === "AZN") {
+    const data = await getJson(RATES + base);
+    const rate = data?.rates?.[quote];
+    if (!rate) return null;
+    return { rate, date: dotDate(data.time_last_update_utc) };
   }
-  return null;
-}
-
-async function frankfurterRate(from, to) {
-  const data = await getJson("https://api.frankfurter.app/latest?from=" + from.toUpperCase() + "&to=" + to.toUpperCase());
-  const rate = data?.rates?.[to.toUpperCase()];
+  const data = await getJson(FRANKFURTER + "?from=" + base + "&to=" + quote);
+  const rate = data?.rates?.[quote];
   if (!rate) return null;
   return { rate, date: String(data.date || "").split("-").reverse().join(".") };
 }
@@ -159,11 +145,11 @@ async function rateReply(message) {
   if (!ask) return null;
   const lang = guessLang(message);
   const names = RATE_WORD[lang] || RATE_WORD.az;
-  const quote = ask.from === "azn" || ask.to === "azn" ? await cbarRate(ask.from, ask.to) : await frankfurterRate(ask.from, ask.to);
+  const quote = await directRate(ask.from, ask.to);
   if (!quote) return null;
   const value = (ask.amount * quote.rate).toLocaleString("en-US", { maximumFractionDigits: 4 }).replace(/,/g, " ");
   const left = (ask.amount === 1 ? "1" : String(ask.amount)) + " " + names[ask.from];
-  return left + " = " + value + " " + names[ask.to] + " (" + quote.date + ")";
+  return left + " = " + value + " " + names[ask.to] + (quote.date ? " (" + quote.date + ")" : "");
 }
 
 function wikiTopic(raw) {
