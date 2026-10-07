@@ -1,5 +1,6 @@
 import type { Lang } from "@/lib/i18n";
 import type { ProgrammingSection } from "@/lib/programming";
+import { identitySections } from "@/lib/apk-identity";
 import { installSections } from "@/lib/apk-install";
 import { storeSections } from "@/lib/apk-stores";
 
@@ -622,7 +623,7 @@ export function apkAdvanced(lang: Lang): ProgrammingSection[] {
       },
     ],
   };
-  return [...all[lang], ...installSections(lang), moneySection(lang), ...storeSections(lang)];
+  return [...all[lang], ...installSections(lang), ...identitySections(lang), moneySection(lang), ...storeSections(lang)];
 }
 
 function moneySection(lang: Lang): ProgrammingSection {

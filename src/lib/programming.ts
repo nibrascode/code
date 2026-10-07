@@ -642,7 +642,7 @@ export const PROGRAMMING: readonly ProgrammingPage[] = [
       {
         title: "APK hazırla: öz tətbiqini telefona qoy — Nibras Code",
         description: "APK nədir, necə düzəldilir, hansı qovluq lazımdır və hazır zip necə Nibras Studio-ya verilir.",
-        keywords: "APK qurmaq, APK açılmır, APK telefona quraşdırmaq, Play Market, Huawei AppGallery",
+        keywords: "APK ikon, paket adı, keystore, APK qurmaq, APK açılmır",
       },
       {
         title: "Build an APK: put your own app on the phone — Nibras Code",
