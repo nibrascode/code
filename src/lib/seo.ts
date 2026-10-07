@@ -10,6 +10,7 @@ import { findResourceTopic, resourceArticleFromPath } from "@/lib/resource-topic
 import { RU_RESOURCES } from "@/lib/ru-resources";
 import { searchFromPath, searchTopicFromPath, searchPath, searchTopicPath } from "@/lib/search-pages";
 import { COMPARE, compareFromPath, compareTopicFromPath, comparePath, compareTopicPath } from "@/lib/learn-pages";
+import { PAKET, paketFromPath } from "@/lib/paket";
 
 export const SITE = "https://www.nibrascode.com";
 
@@ -598,7 +599,7 @@ function pageCopy(pathname: string, lang: Lang) {
   if (searched) {
     return {
       title: `${searched.piece.title} — Nibras Code`,
-      description: searched.piece.lead,
+      description: searched.piece.lead.split("\n\n")[0],
       keywords: `${searched.piece.title}, Nibras Code`,
     };
   }
@@ -608,6 +609,14 @@ function pageCopy(pathname: string, lang: Lang) {
       title: `${searchIndex.section.title[searchIndex.lang]} — Nibras Code`,
       description: searchIndex.section.description[searchIndex.lang],
       keywords: searchIndex.section.title[searchIndex.lang],
+    };
+  }
+  const paket = paketFromPath(path);
+  if (paket) {
+    return {
+      title: `${PAKET.title[paket]} — Nibras Code`,
+      description: PAKET.description[paket],
+      keywords: PAKET.heading[paket],
     };
   }
   const compared = compareTopicFromPath(path);
@@ -816,7 +825,7 @@ function jsonLd(path: string, lang: Lang, copy: PageSeo, url: string) {
       "@context": "https://schema.org",
       "@type": "FAQPage",
       name: searched.piece.title,
-      description: searched.piece.lead,
+      description: searched.piece.lead.split("\n\n")[0],
       url,
       inLanguage: searched.lang,
       mainEntity: [{ "@type": "Question", name: searched.piece.title, acceptedAnswer: { "@type": "Answer", text: answer } }],

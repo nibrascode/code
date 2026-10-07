@@ -5783,6 +5783,31 @@ body.is-home .noise {
   grid-column: 1 / -1;
 }
 
+.paket-form {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.paket-form input {
+  width: 100%;
+  min-height: 46px;
+  border-radius: 12px;
+  border: 1px solid rgb(255 255 255 / 0.14);
+  background: #070b16;
+  color: #f4f7ff;
+  padding: 0 12px;
+  font: inherit;
+}
+
+.paket-ok {
+  color: #86efac;
+}
+
+.paket-bad {
+  color: #fca5a5;
+}
+
 .nx-foot-extra .nav-drop,
 .footer-panels .nav-drop,
 .nx-foot-extra .footer-faq,

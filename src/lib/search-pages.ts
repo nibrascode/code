@@ -1,6 +1,6 @@
 import type { Lang } from "@/lib/i18n";
 
-export type SearchKind = "soz" | "xeta" | "movzu";
+export type SearchKind = "soz" | "xeta" | "movzu" | "nece";
 
 export type SearchPiece = {
   title: string;
@@ -512,6 +512,90 @@ const TOPICS: readonly SearchItem[] = [
 
 ];
 
+const HOWS: readonly SearchItem[] = [
+  {
+    slug: "ilk-html",
+    piece: piece(
+      L("İlk HTML səhifə", "The first HTML page", "İlk HTML sayfası", "أول صفحة HTML", "Первая страница HTML"),
+      L(
+        "İlk səhifə bir fayldır. Adı `index.html` olsun. Brauzer onu özü açır. Əvvəl çərçivə, kitabxana və sayt qurucusu lazım deyil.\n\nFaylın içində üç yer durur. `html` hamısını tutur. `head` səhifənin adını saxlayır. `body` adamın gördüyüdür. Görünən yazını `body` içinə qoy.\n\nFaylı saxla və üzərinə iki dəfə bas. Brauzer açılır. Yazı görünürsə, səhifə hazırdır. Rəng və düzülüş sonra gəlir. O, CSS-dir.",
+        "The first page is one file. Name it `index.html`. The browser opens it by itself. You do not need a framework, a library, or a site builder first.\n\nThree places stand inside the file. `html` holds all of it. `head` keeps the name of the page. `body` is what the person sees. Put the visible text inside `body`.\n\nSave the file and press it twice. The browser opens. If the text shows, the page is ready. Color and layout come later. That is CSS.",
+        "İlk sayfa bir dosyadır. Adı `index.html` olsun. Tarayıcı onu kendi açar. Önce çerçeve, kitaplık ve site kurucu gerekmez.\n\nDosyanın içinde üç yer durur. `html` hepsini tutar. `head` sayfanın adını saklar. `body` insanın gördüğüdür. Görünen yazıyı `body` içine koy.\n\nDosyayı kaydet ve üzerine iki kez bas. Tarayıcı açılır. Yazı görünüyorsa sayfa hazırdır. Renk ve diziliş sonra gelir. O, CSS'tir.",
+        "الصفحة الأولى ملف واحد. سمّه `index.html`. المتصفح يفتحه بنفسه. لا تحتاج إطارًا ولا مكتبة ولا بانٍ مواقع أولًا.\n\nفي داخل الملف ثلاثة مواضع. `html` يمسك الكل. `head` يحفظ اسم الصفحة. `body` هو ما يراه الشخص. ضع النص الظاهر داخل `body`.\n\nاحفظ الملف واضغطه مرتين. يفتح المتصفح. إذا ظهر النص فالصفحة جاهزة. اللون والترتيب يأتيان بعد ذلك. ذلك CSS.",
+        "Первая страница — это один файл. Назови его `index.html`. Браузер открывает его сам. Сначала не нужны каркас, библиотека и конструктор сайтов.\n\nВнутри файла три места. `html` держит всё. `head` хранит имя страницы. `body` — это то, что видит человек. Видимый текст клади внутрь `body`.\n\nСохрани файл и нажми на него дважды. Откроется браузер. Если текст виден, страница готова. Цвет и раскладка приходят потом. Это CSS.",
+      ),
+      {
+        az: ["Faylı masaüstündə saxla ki, tapa biləsən.", "`<h1>Salam</h1>` başlıqdır. `<p>Bu ilk səhifədir.</p>` abzasdır.", "Faylın sonu `.html` olmalıdır. `.txt` brauzerdə kod kimi açılır.", "Şəkil eyni qovluqda durursa, `img` onun adını göstərir.", "Düymə qoymaq olar. İş görməsi üçün JavaScript lazımdır.", "Hazır şablonu kopyalama. Əvvəl bu üç sətri özün yaz."],
+        en: ["Save the file on the desktop so you can find it.", "`<h1>Hello</h1>` is a heading. `<p>This is the first page.</p>` is a paragraph.", "The file must end in `.html`. A `.txt` file opens as code in the browser.", "If a picture sits in the same folder, `img` points at its name.", "You can put a button. It needs JavaScript before it does work.", "Do not copy a ready template. Write these three lines yourself first."],
+        tr: ["Dosyayı masaüstüne kaydet ki bulabilesin.", "`<h1>Merhaba</h1>` başlıktır. `<p>Bu ilk sayfadır.</p>` paragraftır.", "Dosyanın sonu `.html` olmalıdır. `.txt` tarayıcıda kod gibi açılır.", "Resim aynı klasörde duruyorsa `img` onun adını gösterir.", "Düğme koymak olur. İş görmesi için JavaScript gerekir.", "Hazır şablonu kopyalama. Önce bu üç satırı kendin yaz."],
+        ar: ["احفظ الملف على سطح المكتب كي تجده.", "`<h1>مرحبا</h1>` عنوان. `<p>هذه أول صفحة.</p>` فقرة.", "يجب أن ينتهي الملف بـ `.html`. ملف `.txt` يُفتح كرمز في المتصفح.", "إذا وقفت الصورة في المجلد نفسه فإن `img` يشير إلى اسمها.", "تستطيع وضع زر. يحتاج JavaScript قبل أن يعمل.", "لا تنسخ قالبًا جاهزًا. اكتب هذه الأسطر الثلاثة بنفسك أولًا."],
+        ru: ["Сохрани файл на рабочем столе, чтобы найти его.", "`<h1>Салам</h1>` — это заголовок. `<p>Это первая страница.</p>` — абзац.", "Файл должен кончаться на `.html`. `.txt` открывается в браузере как код.", "Если картинка лежит в той же папке, `img` показывает её имя.", "Кнопку поставить можно. Чтобы она работала, нужен JavaScript.", "Не копируй готовый шаблон. Сначала напиши эти три строки сам."],
+      },
+      L(
+        "Səhifə açılmırsa, faylın adının sonuna bax. `.html` deyilsə, brauzer onu səhifə saymır.",
+        "If the page does not open, look at the end of the file name. If it is not `.html`, the browser does not treat it as a page.",
+        "Sayfa açılmıyorsa dosya adının sonuna bak. `.html` değilse tarayıcı onu sayfa saymaz.",
+        "إذا لم تُفتح الصفحة فانظر إلى آخر اسم الملف. إذا لم يكن `.html` فالمتصفح لا يعدّه صفحة.",
+        "Если страница не открывается, посмотри на конец имени файла. Если это не `.html`, браузер не считает его страницей.",
+      ),
+    ),
+  },
+  {
+    slug: "python-ilk-proqram",
+    piece: piece(
+      L("Python-da ilk proqram", "The first Python program", "Python'da ilk program", "أول برنامج Python", "Первая программа на Python"),
+      L(
+        "İlk proqram bir sətirdir. Faylın adı `salam.py` olsun. İçində `print(\"Salam\")` yaz. Bu, ekrana Salam çıxarır.\n\nPython kompüterdə quraşdırılmalıdır. python.org-dan götür. Qurandan sonra terminalı aç. Faylın durduğu qovluğa keç və `python salam.py` yaz.\n\n`python` tapılmırsa, quraşdırma yolu əlavə etməyib. Qurucunu yenidən aç və yolu əlavə etməyi seç. Başqa redaktor lazım deyil. Bir mətn faylı kifayətdir.",
+        "The first program is one line. Name the file `salam.py`. Inside it write `print(\"Hello\")`. That prints Hello on the screen.\n\nPython has to be installed on the computer. Take it from python.org. After it is installed, open the terminal. Go to the folder where the file sits and write `python salam.py`.\n\nIf `python` is not found, the install did not add the path. Open the installer again and choose to add the path. You do not need another editor. One text file is enough.",
+        "İlk program bir satırdır. Dosyanın adı `salam.py` olsun. İçine `print(\"Merhaba\")` yaz. Bu, ekrana Merhaba basar.\n\nPython bilgisayara kurulmalıdır. python.org'dan al. Kurulunca terminali aç. Dosyanın durduğu klasöre geç ve `python salam.py` yaz.\n\n`python` bulunmazsa kurulum yolu eklememiştir. Kurucuyu yeniden aç ve yolu eklemeyi seç. Başka düzenleyici gerekmez. Bir metin dosyası yeter.",
+        "البرنامج الأول سطر واحد. سمّ الملف `salam.py`. اكتب داخله `print(\"مرحبا\")`. هذا يطبع مرحبا على الشاشة.\n\nيجب تثبيت Python على الحاسوب. خذه من python.org. بعد التثبيت افتح الطرفية. اذهب إلى المجلد الذي فيه الملف واكتب `python salam.py`.\n\nإذا لم يُوجد `python` فالتثبيت لم يُضف المسار. افتح المثبّت من جديد واختر إضافة المسار. لا تحتاج محررًا آخر. ملف نص واحد يكفي.",
+        "Первая программа — одна строка. Назови файл `salam.py`. Внутри напиши `print(\"Салам\")`. Это выводит Салам на экран.\n\nPython надо установить на компьютер. Возьми его с python.org. После установки открой терминал. Перейди в папку, где лежит файл, и напиши `python salam.py`.\n\nЕсли `python` не находится, установка не добавила путь. Открой установщик снова и выбери добавить путь. Другой редактор не нужен. Хватает одного текстового файла.",
+      ),
+      {
+        az: ["Windows-da əmr `py salam.py` da ola bilər.", "Faylın sonu `.py` olmalıdır. `.txt` işləməz.", "Dırnaq düz olmalıdır: `\"Salam\"`. Əyri dırnaq səhv sayılır.", "İkinci sətir `ad = \"Nibras\"` ola bilər. Sonra `print(ad)`.", "Səhv çıxsa, son sətri oxu. Orada sətrin nömrəsi yazılır.", "Böyük layihə açma. Bir fayl işləyənə qədər orada qal."],
+        en: ["On Windows the command can also be `py salam.py`.", "The file must end in `.py`. A `.txt` file will not run.", "The quote must be straight: `\"Hello\"`. A curved quote counts as a mistake.", "The second line can be `name = \"Nibras\"`. Then `print(name)`.", "If an error comes out, read the last line. The line number is written there.", "Do not open a big project. Stay with one file until it runs."],
+        tr: ["Windows'ta komut `py salam.py` da olabilir.", "Dosyanın sonu `.py` olmalıdır. `.txt` çalışmaz.", "Tırnak düz olmalıdır: `\"Merhaba\"`. Eğri tırnak hata sayılır.", "İkinci satır `ad = \"Nibras\"` olabilir. Sonra `print(ad)`.", "Hata çıkarsa son satırı oku. Orada satırın numarası yazar.", "Büyük proje açma. Bir dosya çalışana kadar orada kal."],
+        ar: ["في Windows قد يكون الأمر `py salam.py` أيضًا.", "يجب أن ينتهي الملف بـ `.py`. ملف `.txt` لا يعمل.", "علامة التنصيص يجب أن تكون مستقيمة: `\"مرحبا\"`. العلامة المنحنية تُعد خطأ.", "السطر الثاني يمكن أن يكون `ad = \"Nibras\"`. ثم `print(ad)`.", "إذا خرج خطأ فاقرأ السطر الأخير. رقم السطر مكتوب هناك.", "لا تفتح مشروعًا كبيرًا. ابقَ في ملف واحد حتى يعمل."],
+        ru: ["В Windows команда может быть и `py salam.py`.", "Файл должен кончаться на `.py`. `.txt` не запустится.", "Кавычка должна быть прямой: `\"Салам\"`. Кривая кавычка считается ошибкой.", "Вторая строка может быть `ad = \"Nibras\"`. Потом `print(ad)`.", "Если вышла ошибка, прочитай последнюю строку. Там написан номер строки.", "Не открывай большой проект. Останься на одном файле, пока он не заработает."],
+      },
+      L(
+        "Proqram heç nə yazmırsa, `print` yoxdur. Python faylı özü pəncərə açmır.",
+        "If the program writes nothing, there is no `print`. A Python file does not open a window by itself.",
+        "Program hiçbir şey yazmıyorsa `print` yoktur. Python dosyası kendi pencere açmaz.",
+        "إذا لم يكتب البرنامج شيئًا فلا يوجد `print`. ملف Python لا يفتح نافذة بنفسه.",
+        "Если программа ничего не пишет, нет `print`. Файл Python сам окно не открывает.",
+      ),
+    ),
+  },
+  {
+    slug: "play-console",
+    piece: piece(
+      L("Play Console hesabı necə açılır", "How to open a Play Console account", "Play Console hesabı nasıl açılır", "كيف يُفتح حساب Play Console", "Как открыть аккаунт Play Console"),
+      L(
+        "Play Console tətbiqi mağazaya göndərdiyin saytdır. Ünvanı `play.google.com/console` olmalıdır. Başqa saytdakı oxşar forma pul istəməməlidir.\n\nGoogle hesabın olmalıdır. Console açılınca sayt bir dəfəlik ödəniş göstərir. Məbləğ səhifənin özündə yazılır. Ödəniş tətbiqi dərc etmir. Yalnız hesabı açır.\n\nÖdənişdən sonra ad, ünvan və əlaqə soruşulur. Bəzən kimlik də istənir. Hesab açılan kimi tətbiq çıxmır. İmzalı APK, məxfilik ünvanı, ikon və telefon şəkilləri hələ səndədir.",
+        "Play Console is the site where you send an app to the store. The address must be `play.google.com/console`. A similar form on another site should not ask you for money.\n\nYou need a Google account. When Console opens, the site shows a one-time payment. The amount is written on that page. The payment does not publish the app. It only opens the account.\n\nAfter the payment it asks for a name, an address, and a contact. Sometimes it also asks for an identity. The app does not come out the moment the account opens. A signed APK, a privacy address, an icon, and phone pictures are still yours to add.",
+        "Play Console, uygulamayı mağazaya gönderdiğin sitedir. Adresi `play.google.com/console` olmalıdır. Başka sitedeki benzer form para istememelidir.\n\nGoogle hesabın olmalıdır. Console açılınca site bir kerelik ödeme gösterir. Tutar sayfanın kendisinde yazar. Ödeme uygulamayı yayınlamaz. Yalnızca hesabı açar.\n\nÖdemeden sonra ad, adres ve iletişim sorulur. Bazen kimlik de istenir. Hesap açılır açılmaz uygulama çıkmaz. İmzalı APK, gizlilik adresi, simge ve telefon resimleri hâlâ sendedir.",
+        "Play Console هو الموقع الذي ترسل منه التطبيق إلى المتجر. يجب أن يكون العنوان `play.google.com/console`. نموذج شبيه على موقع آخر لا ينبغي أن يطلب منك مالًا.\n\nتحتاج حساب Google. حين يُفتح Console يُظهر الموقع دفعة واحدة. المبلغ مكتوب في تلك الصفحة. الدفعة لا تنشر التطبيق. تفتح الحساب فقط.\n\nبعد الدفعة يسأل عن اسم وعنوان واتصال. أحيانًا يطلب هوية أيضًا. التطبيق لا يخرج لحظة فتح الحساب. APK الموقَّع وعنوان الخصوصية والأيقونة وصور الهاتف ما زالت عليك.",
+        "Play Console — это сайт, с которого ты отправляешь приложение в магазин. Адрес должен быть `play.google.com/console`. Похожая форма на другом сайте не должна просить у тебя деньги.\n\nНужен аккаунт Google. Когда Console открывается, сайт показывает разовую оплату. Сумма написана на той странице. Оплата не публикует приложение. Она только открывает аккаунт.\n\nПосле оплаты спрашивают имя, адрес и связь. Иногда просят и удостоверение. Приложение не выходит в миг открытия аккаунта. Подписанный APK, адрес конфиденциальности, значок и снимки телефона всё ещё на тебе.",
+      ),
+      {
+        az: ["Ünvan `play.google.com` deyilsə, kartı yazma.", "Bir dəfəlik ödəniş hər tətbiq üçün təkrarlanmır. Hesab üçündür.", "Ödənişi başqasının hesabı ilə etsən, tətbiq onun adına düşür.", "Hazır APK-n yoxdursa, hesabı açmaq tələsmə.", "Məxfilik səhifəsinin ünvanı açılmalıdır. Boş səhifə tətbiqi saxlaya bilər.", "Şəkilləri tətbiqin öz ekranından çək. Başqa tətbiqin şəklini qoyma."],
+        en: ["If the address is not `play.google.com`, do not type the card.", "The one-time payment is not repeated for every app. It is for the account.", "If you pay with someone else's account, the app lands in that name.", "If you do not have a finished APK yet, do not rush to open the account.", "The privacy page address has to open. An empty page can hold the app back.", "Take the pictures from the app's own screen. Do not put another app's picture."],
+        tr: ["Adres `play.google.com` değilse kartı yazma.", "Bir kerelik ödeme her uygulama için tekrarlanmaz. Hesap içindir.", "Ödemeyi başkasının hesabıyla yaparsan uygulama onun adına düşer.", "Hazır APK'n yoksa hesabı açmaya acele etme.", "Gizlilik sayfasının adresi açılmalıdır. Boş sayfa uygulamayı tutabilir.", "Resimleri uygulamanın kendi ekranından çek. Başka uygulamanın resmini koyma."],
+        ar: ["إذا لم يكن العنوان `play.google.com` فلا تكتب البطاقة.", "الدفعة الواحدة لا تتكرر لكل تطبيق. هي للحساب.", "إذا دفعت بحساب غيرك وقع التطبيق باسمه.", "إذا لم يكن عندك APK جاهز فلا تستعجل فتح الحساب.", "يجب أن يُفتح عنوان صفحة الخصوصية. الصفحة الفارغة قد تُبقي التطبيق.", "صوّر من شاشة التطبيق نفسه. لا تضع صورة تطبيق آخر."],
+        ru: ["Если адрес не `play.google.com`, карту не пиши.", "Разовая оплата не повторяется для каждого приложения. Она для аккаунта.", "Если платишь чужим аккаунтом, приложение падает на его имя.", "Если готового APK ещё нет, не спеши открывать аккаунт.", "Адрес страницы конфиденциальности должен открываться. Пустая страница может задержать приложение.", "Снимки снимай с экрана самого приложения. Чужой снимок не ставь."],
+      },
+      L(
+        "Hesab açılması tətbiqin qəbul olması demək deyil. İmzalı fayl və səhifə hələ yoxlanılır.",
+        "An open account does not mean the app is accepted. The signed file and the page are still checked.",
+        "Hesabın açılması uygulamanın kabul edilmesi demek değildir. İmzalı dosya ve sayfa hâlâ kontrol edilir.",
+        "فتح الحساب لا يعني قبول التطبيق. الملف الموقَّع والصفحة ما زالا يُفحصان.",
+        "Открытый аккаунт не значит, что приложение принято. Подписанный файл и страница ещё проверяются.",
+      ),
+    ),
+  },
+];
+
 export const SEARCH: Record<SearchKind, SearchSection> = {
   soz: {
     kind: "soz",
@@ -591,6 +675,32 @@ export const SEARCH: Record<SearchKind, SearchSection> = {
     ),
     items: TOPICS,
   },
+  nece: {
+    kind: "nece",
+    heading: L("Necə", "How to start", "Nasıl", "كيف", "Как начать"),
+    intro: L(
+      "İlk səhifə, ilk Python proqramı və Play Console hesabı. Hər biri öz addımları ilə.",
+      "The first page, the first Python program, and a Play Console account. Each one with its own steps.",
+      "İlk sayfa, ilk Python programı ve Play Console hesabı. Her biri kendi adımlarıyla.",
+      "الصفحة الأولى وبرنامج Python الأول وحساب Play Console. كل واحد بخطواته.",
+      "Первая страница, первая программа Python и аккаунт Play Console. У каждого свои шаги.",
+    ),
+    title: L(
+      "Necə — ilk HTML, ilk Python, Play Console",
+      "How to start — first HTML, first Python, Play Console",
+      "Nasıl — ilk HTML, ilk Python, Play Console",
+      "كيف — أول HTML وأول Python وPlay Console",
+      "Как начать — первый HTML, первый Python, Play Console",
+    ),
+    description: L(
+      "İlk HTML səhifəni necə yazmaq, Python-da ilk proqramı necə işə salmaq və Play Console hesabını necə açmaq olar.",
+      "How to write a first HTML page, run a first Python program, and open a Play Console account.",
+      "İlk HTML sayfası nasıl yazılır, Python'da ilk program nasıl çalıştırılır ve Play Console hesabı nasıl açılır.",
+      "كيف تُكتب أول صفحة HTML، وكيف يُشغَّل أول برنامج Python، وكيف يُفتح حساب Play Console.",
+      "Как написать первую страницу HTML, запустить первую программу Python и открыть аккаунт Play Console.",
+    ),
+    items: HOWS,
+  },
 };
 
 const LANG_PREFIX: Record<Lang, string> = { az: "", en: "/en", tr: "/tr", ar: "/ar", ru: "/ru" };
@@ -605,7 +715,7 @@ export function searchTopicPath(lang: Lang, kind: SearchKind, slug: string) {
 
 export function searchFromPath(pathname: string) {
   const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname;
-  const match = path.match(/^\/(?:(en|tr|ar|ru)\/)?(soz|xeta|movzu)$/);
+  const match = path.match(/^\/(?:(en|tr|ar|ru)\/)?(soz|xeta|movzu|nece)$/);
   if (!match) return null;
   const lang = (match[1] ?? "az") as Lang;
   const kind = match[2] as SearchKind;
@@ -614,7 +724,7 @@ export function searchFromPath(pathname: string) {
 
 export function searchTopicFromPath(pathname: string) {
   const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname;
-  const match = path.match(/^\/(?:(en|tr|ar|ru)\/)?(soz|xeta|movzu)\/([^/]+)$/);
+  const match = path.match(/^\/(?:(en|tr|ar|ru)\/)?(soz|xeta|movzu|nece)\/([^/]+)$/);
   if (!match) return null;
   const lang = (match[1] ?? "az") as Lang;
   const kind = match[2] as SearchKind;

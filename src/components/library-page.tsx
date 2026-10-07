@@ -8,6 +8,7 @@ import { findProgramming, type ProgrammingSection } from "@/lib/programming";
 import { findProgrammingLocale, programmingLocalePath } from "@/lib/programming-locales";
 import { SEARCH, searchPath } from "@/lib/search-pages";
 import { COMPARE, comparePath } from "@/lib/learn-pages";
+import { PAKET, paketPath } from "@/lib/paket";
 import { pythonSections } from "@/lib/lessons";
 import { libItems, libParagraphs, savedLib, type LibGroup } from "@/lib/library-admin";
 import { articlesForTopic, findResourceTopic } from "@/lib/resource-topics";
@@ -239,6 +240,8 @@ export function LibraryIndex({
           { href: searchPath(lang, "soz"), label: SEARCH.soz.heading[lang] },
           { href: searchPath(lang, "xeta"), label: SEARCH.xeta.heading[lang] },
           { href: searchPath(lang, "movzu"), label: SEARCH.movzu.heading[lang] },
+          { href: searchPath(lang, "nece"), label: SEARCH.nece.heading[lang] },
+          { href: paketPath(lang), label: PAKET.heading[lang] },
           { href: comparePath(lang), label: COMPARE.heading[lang] },
         ].filter((item) => !needle || item.label.toLowerCase().includes(needle))
       : [];

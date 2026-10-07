@@ -6,6 +6,7 @@ import { CODE_SAMPLE_HUB } from "@/lib/code-samples";
 import { programmingLocalePath } from "@/lib/programming-locales";
 import { SEARCH, searchPath } from "@/lib/search-pages";
 import { COMPARE, comparePath } from "@/lib/learn-pages";
+import { PAKET, paketPath } from "@/lib/paket";
 import { useI18n } from "@/lib/i18n-context";
 import { cn } from "@/lib/utils";
 
@@ -74,6 +75,8 @@ export function NavMenu({ section }: { section: LibrarySection }) {
               <a href={searchPath(lang, "soz")}>{SEARCH.soz.heading[lang]}</a>
               <a href={searchPath(lang, "xeta")}>{SEARCH.xeta.heading[lang]}</a>
               <a href={searchPath(lang, "movzu")}>{SEARCH.movzu.heading[lang]}</a>
+              <a href={searchPath(lang, "nece")}>{SEARCH.nece.heading[lang]}</a>
+              <a href={paketPath(lang)}>{PAKET.heading[lang]}</a>
               <a href={comparePath(lang)}>{COMPARE.heading[lang]}</a>
               <a href={programmingLocalePath(lang, CODE_SAMPLE_HUB)}>{t("code_samples")}</a>
             </>
