@@ -1,4 +1,22 @@
 import { useState } from "react";
+import {
+  Binary,
+  Braces,
+  Code,
+  Database,
+  Dices,
+  Fingerprint,
+  FileCode,
+  Hash,
+  KeyRound,
+  Link2,
+  LockKeyhole,
+  Minimize2,
+  Palette,
+  TextQuote,
+  Type,
+  UserRound,
+} from "lucide-react";
 import type { Lang } from "@/lib/i18n";
 import { TOOLS, TOOLS_PAGE, type ToolId } from "@/lib/tools";
 import {
@@ -27,6 +45,29 @@ import {
 
 const NEEDS_TEXT = new Set<ToolId>(["hash", "md5", "sha256", "base64", "url", "html", "json", "json-min", "xml", "sql", "js", "css", "html-min", "css-min"]);
 const PAIR = new Set<ToolId>(["base64", "url", "html"]);
+
+const ICONS: Record<ToolId, typeof Braces> = {
+  json: Braces,
+  base64: Binary,
+  uuid: Fingerprint,
+  password: KeyRound,
+  url: Link2,
+  md5: Hash,
+  sha256: LockKeyhole,
+  lorem: TextQuote,
+  "json-min": Minimize2,
+  html: Code,
+  hash: Hash,
+  css: Palette,
+  js: FileCode,
+  "html-min": Minimize2,
+  "css-min": Minimize2,
+  number: Dices,
+  xml: Code,
+  sql: Database,
+  text: Type,
+  name: UserRound,
+};
 
 async function sha(text: string, name: "SHA-1" | "SHA-256") {
   const digest = await crypto.subtle.digest(name, new TextEncoder().encode(text));
@@ -114,7 +155,9 @@ export function ToolsPage({ lang }: { lang: Lang }) {
           </summary>
           <div className="prog-fold-body">
             <ul className="lib-list">
-              {TOOLS.map((tool) => (
+              {TOOLS.map((tool) => {
+                const Icon = ICONS[tool.id];
+                return (
                 <li key={tool.id}>
                   <button
                     type="button"
@@ -125,10 +168,14 @@ export function ToolsPage({ lang }: { lang: Lang }) {
                       setNote("");
                     }}
                   >
-                    {tool.label[lang]}
+                    <span className="tool-name">
+                      <Icon aria-hidden="true" />
+                      {tool.label[lang]}
+                    </span>
                   </button>
                 </li>
-              ))}
+                );
+              })}
             </ul>
             {openId ? (
               <form
