@@ -60,9 +60,11 @@ export function SearchTopic({
       </p>
       <h1>{text.title}</h1>
       <div className="why-lead">
-        <p>
-          <Rich text={text.lead} />
-        </p>
+        {text.lead.split(/\n\n+/).map((para) => (
+          <p key={para}>
+            <Rich text={para} />
+          </p>
+        ))}
         <ul className="faq-points">
           {text.points.map((point) => (
             <li key={point}>
