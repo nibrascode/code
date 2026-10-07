@@ -4,6 +4,7 @@
 // qeyri-ərəb mətn üçün null (adi söhbət/AI davam edir ki, adi tərcümə istəkləri pozulmasın).
 import { translate } from "./_translate/engine.js";
 import { makeCtx } from "./_translate/http.js";
+import { googleTranslate } from "./_google.js";
 import "./_translate-ensemble.js"; // maşın tərcüməsi mühərriki (hazır tərcümə olmayanda)
 
 const CUES = [
@@ -48,23 +49,42 @@ export function parseTranslate(message) {
     }
   }
   if (!body) {
-    // iki nöqtəsiz: yalnız ərəbcə mətn başlayırsa
     const ai = rest.search(AR_RE);
-    if (ai < 0) return null;
-    const p = rest.slice(0, ai);
-    if (p.trim().split(/\s+/).filter(Boolean).length > 5) return null;
-    prefix = p;
-    body = rest.slice(ai);
-    const ar = /^\s*(?:إلى|الى)\s+(\S+)\s+(.+)$/s.exec(rest);
-    if (ar) {
-      prefix = ar[1];
-      body = ar[2];
-    }
+    if (ai >= 0) {
+      const p = rest.slice(0, ai);
+      if (p.trim().split(/\s+/).filter(Boolean).length > 5) return null;
+      prefix = p;
+      body = rest.slice(ai);
+      const ar = /^\s*(?:إلى|الى)\s+(\S+)\s+(.+)$/s.exec(rest);
+      if (ar) {
+        prefix = ar[1];
+        body = ar[2];
+      }
+    } else body = rest.trim();
   }
   body = body.trim().replace(/^["“«]+|["”»]+$/g, "").trim();
   if (!body) return null;
-  let to = null;
-  for (const [l, re] of TARGETS) if (re.test(prefix)) { to = l; break; }
+  const tokens = body.split(/\s+/);
+  let cutAt = 0;
+  let leadTo = null;
+  while (cutAt < Math.min(4, tokens.length)) {
+    const word = tokens[cutAt];
+    const hit = TARGETS.find(([, re]) => re.test(word));
+    if (hit) {
+      leadTo = hit[0];
+      cutAt++;
+      continue;
+    }
+    if (/^(to|into|на|dilin[əe]|diline|dilinde)$/i.test(word)) {
+      cutAt++;
+      continue;
+    }
+    break;
+  }
+  if (leadTo) body = tokens.slice(cutAt).join(" ").trim();
+  if (!body) return null;
+  let to = leadTo;
+  for (const [l, re] of TARGETS) if (!to && re.test(prefix)) to = l;
   return { ui: cue.ui, to, def: cue.def, text: body };
 }
 
@@ -103,18 +123,32 @@ export function formatReply(r, ui) {
   return out.filter(Boolean).join("\n\n");
 }
 
+function googleReply(text, ui, to) {
+  const t = L[ui] || L.az;
+  return `**${t.head(t.langs[to] || to)}**\n${text}`;
+}
+
 export async function translateReply(message, { ip } = {}) {
   const p = parseTranslate(message);
   if (!p) return null;
   const arabic = AR_RE.test(p.text);
-  const to = p.to || (arabic ? p.def : "ar");
-  let r;
-  try {
-    r = await translate({ text: p.text, from: "auto", to, ui: p.ui, ctx: makeCtx(ip || "chat", { budgetMs: 36_000 }) });
-  } catch {
-    return null;
+  const to = p.to || p.def;
+  if (arabic) {
+    try {
+      const r = await translate({ text: p.text, from: "ar", to, ui: p.ui, model: false, ctx: makeCtx(ip || "chat", { budgetMs: 12_000 }) });
+      if (r?.ok && r.translation && r.method !== "no-source") return formatReply(r, p.ui);
+    } catch { /* hazır mənbə yoxdursa Google */ }
   }
-  if (!r.ok) return null;
-  if (r.method === "no-source" && !r.closest && !arabic) return null; // adi (qeyri-ərəb) tərcümə istəyi: köhnə yol
-  return formatReply(r, p.ui);
+  let target = to;
+  let g = await googleTranslate(p.text, target);
+  if (g?.from === target) {
+    const alt = target === "en" ? "az" : "en";
+    const second = await googleTranslate(p.text, alt, g.from);
+    if (second?.text) {
+      g = second;
+      target = alt;
+    }
+  }
+  if (!g?.text) return null;
+  return googleReply(g.text, p.ui, target);
 }
