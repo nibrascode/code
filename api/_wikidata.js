@@ -118,10 +118,10 @@ function topicFromRaw(raw, normalizedTopic) {
   return cleanTopic(words.slice(start, start + target.length).join(" "));
 }
 
-async function getJson(url) {
+async function getJson(url, accept = "application/json") {
   const res = await fetch(url, {
-    headers: { "User-Agent": UA, Accept: "application/json" },
-    signal: AbortSignal.timeout(5000),
+    headers: { "User-Agent": UA, Accept: accept },
+    signal: AbortSignal.timeout(7000),
   });
   if (!res.ok) return null;
   return res.json();
@@ -134,7 +134,7 @@ async function searchEntity(topic, lang) {
   let bestScore = 0;
   for (const cand of cands) {
     for (const code of langs) {
-      const url = "https://www.wikidata.org/w/api.php?action=wbsearchentities&format=json&type=item&limit=4&language=" + code + "&uselang=" + code + "&search=" + encodeURIComponent(cand);
+      const url = "https://www.wikidata.org/w/api.php?action=wbsearchentities&format=json&type=item&limit=5&strictlanguage=false&language=" + code + "&uselang=" + code + "&search=" + encodeURIComponent(cand);
       const data = await getJson(url);
       const hits = (data?.search || []).slice().sort((a, b) => hitScore(b, cands) - hitScore(a, cands));
       const score = hits.reduce((n, hit) => Math.max(n, hitScore(hit, cands)), 0);
@@ -149,11 +149,65 @@ async function searchEntity(topic, lang) {
 }
 
 function hitScore(hit, cands) {
-  const label = norm(hit?.label || hit?.display?.label?.value || "");
+  const label = norm(hit?.label || hit?.display?.label?.value || hit?.match?.text || "");
+  const match = norm(hit?.match?.text || "");
   const wanted = cands.map(norm);
-  if (wanted.includes(label)) return 100;
+  if (wanted.includes(label) || wanted.includes(match)) return hit?.match?.type === "alias" ? 90 : 100;
   if (wanted.some((c) => label.startsWith(c + " ") || c.startsWith(label + " "))) return 30;
   return 10;
+}
+
+const PID = Object.fromEntries(Object.entries(PROP).map(([key, pid]) => [pid, key]));
+
+function sparqlLiteral(value) {
+  const raw = String(value || "");
+  if (/^[+-]?\d+(\.\d+)?$/.test(raw)) return formatQty({ amount: raw });
+  const time = raw.match(/^[+-]?(\d{4})-(\d{2})-(\d{2})/);
+  if (time) return formatTime({ time: raw, precision: raw.endsWith("-01-01T00:00:00Z") ? 9 : 11 });
+  return raw;
+}
+
+function prettyFact(text) {
+  const raw = String(text || "");
+  if (/^[+-]?\d{4,}$/.test(raw)) return formatQty({ amount: raw });
+  const date = raw.match(/^([+-]?\d{4})-(\d{2})-(\d{2})/);
+  if (!date) return raw;
+  const year = String(Number(date[1]));
+  if (date[2] === "01" && date[3] === "01") return year;
+  return year + "-" + date[2] + "-" + date[3];
+}
+
+async function sparqlFacts(id, lang, topic) {
+  if (!/^Q\d+$/.test(id)) return null;
+  const languages = [...new Set([lang, "en", "az"])].join(",");
+  const query = `
+SELECT ?itemLabel ?itemDescription ?prop ?value ?valueLabel WHERE {
+  BIND(wd:${id} AS ?item)
+  OPTIONAL {
+    VALUES ?prop { wdt:P31 wdt:P17 wdt:P36 wdt:P37 wdt:P131 wdt:P569 wdt:P570 wdt:P19 wdt:P106 wdt:P27 wdt:P1082 wdt:P571 wdt:P2046 }
+    ?item ?prop ?value .
+  }
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "${languages}". }
+}`;
+  const data = await getJson("https://query.wikidata.org/sparql?format=json&query=" + encodeURIComponent(query), "application/sparql-results+json");
+  const rows = data?.results?.bindings || [];
+  if (!rows.length) return null;
+  const title = rows[0].itemLabel?.value || topic;
+  const desc = rows[0].itemDescription?.value || "";
+  if (/^Q\d+$/.test(title)) return null;
+  const grouped = {};
+  for (const row of rows) {
+    const pid = String(row.prop?.value || "").split("/").pop();
+    const key = PID[pid];
+    if (!key) continue;
+    const literal = row.value?.type === "literal" ? sparqlLiteral(row.value.value) : "";
+    const named = row.valueLabel?.value && !/^Q\d+$/.test(row.valueLabel.value) ? prettyFact(row.valueLabel.value) : "";
+    const text = named || literal;
+    if (!text) continue;
+    grouped[key] = grouped[key] || [];
+    if (!grouped[key].includes(text)) grouped[key].push(text);
+  }
+  return { title, desc, grouped };
 }
 
 function claimsOf(entity, pid) {
@@ -196,6 +250,24 @@ export async function wikidataReply(message) {
   if (!query) return null;
   const hits = await searchEntity(query.topic, query.lang);
   if (!hits.length) return null;
+  const names = LABEL[query.lang] || LABEL.az;
+  const wanted = FOCUS_PROPS[query.focus] || FOCUS_PROPS.about;
+  const show = [...new Set([...wanted, ...FOCUS_PROPS.about])];
+  for (const hit of hits.slice(0, 3)) {
+    const facts = await sparqlFacts(hit.id, query.lang, query.topic);
+    if (!facts) continue;
+    const kind = facts.grouped.kind || [];
+    if (kind.some((text) => /disambiguation|çoxmənalı|неоднознач|توضيح/i.test(text))) continue;
+    const lines = [];
+    for (const key of show) {
+      const text = (facts.grouped[key] || []).slice(0, key === "job" || key === "kind" ? 2 : 1).join(", ");
+      if (text && names[key]) lines.push(names[key] + ": " + text);
+    }
+    if (!facts.desc && !lines.length) continue;
+    const head = facts.desc ? facts.title + " — " + facts.desc + "." : facts.title + ".";
+    const src = names.source + ": Wikidata API · " + hit.id + "\nhttps://www.wikidata.org/wiki/" + hit.id;
+    return [head, lines.slice(0, 5).join("\n"), src].filter(Boolean).join("\n\n");
+  }
   const ids = hits.map((h) => h.id).filter(Boolean).slice(0, 4);
   const packed = await getJson(
     "https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&props=labels|descriptions|claims&languages=az|en|tr|ru|ar&ids=" + ids.join("|"),
@@ -211,7 +283,6 @@ export async function wikidataReply(message) {
     break;
   }
   if (!entity) return null;
-  const wanted = FOCUS_PROPS[query.focus] || FOCUS_PROPS.about;
   const keys = [...new Set([...wanted, ...FOCUS_PROPS.about])].filter((k) => PROP[k]);
   const qids = new Set();
   const picked = {};
@@ -229,11 +300,9 @@ export async function wikidataReply(message) {
     linked = extra?.entities || {};
   }
   const lang = query.lang;
-  const names = LABEL[lang] || LABEL.az;
   const title = labelOf(entity, lang) || query.topic;
   const desc = descriptionOf(entity, lang);
   const lines = [];
-  const show = [...new Set([...wanted, ...FOCUS_PROPS.about])];
   for (const key of show) {
     const values = picked[key];
     if (!values?.length || !names[key]) continue;
