@@ -2444,8 +2444,17 @@ html[dir="rtl"] .rtl-flip {
   content: "–";
 }
 
-.prog-fold-body {
-  padding: 0 18px 18px;
+.tool-fold summary h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tool-fold summary h2 svg {
+  width: 20px;
+  height: 20px;
+  flex: none;
+  color: #9ec5ff;
 }
 
 .why-page h3 {

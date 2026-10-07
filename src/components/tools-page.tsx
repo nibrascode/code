@@ -13,6 +13,7 @@ import {
   LockKeyhole,
   Minimize2,
   Palette,
+  Sparkles,
   TextQuote,
   Type,
   UserRound,
@@ -45,6 +46,13 @@ import {
 
 const NEEDS_TEXT = new Set<ToolId>(["hash", "md5", "sha256", "base64", "url", "html", "json", "json-min", "xml", "sql", "js", "css", "html-min", "css-min"]);
 const PAIR = new Set<ToolId>(["base64", "url", "html"]);
+
+const GROUP_ICONS: Record<string, typeof Braces> = {
+  gen: Sparkles,
+  code: Binary,
+  crypt: LockKeyhole,
+  format: Braces,
+};
 
 const ICONS: Record<ToolId, typeof Braces> = {
   json: Braces,
@@ -152,10 +160,14 @@ export function ToolsPage({ lang }: { lang: Lang }) {
         {TOOL_GROUPS.map((group) => {
           const tools = group.ids.map((id) => TOOLS.find((tool) => tool.id === id)!);
           const here = openId != null && group.ids.includes(openId);
+          const GroupIcon = GROUP_ICONS[group.id];
           return (
-            <details key={group.id} className="prog-fold">
+            <details key={group.id} className="prog-fold tool-fold">
               <summary>
-                <h2>{group.title[lang]}</h2>
+                <h2>
+                  <GroupIcon aria-hidden="true" />
+                  {group.title[lang]}
+                </h2>
               </summary>
               <div className="prog-fold-body">
                 <ul className="lib-list">
