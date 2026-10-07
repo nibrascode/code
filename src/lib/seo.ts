@@ -614,7 +614,7 @@ function pageCopy(pathname: string, lang: Lang) {
   if (compared) {
     return {
       title: `${compared.item.title[compared.lang]} — Nibras Code`,
-      description: compared.item.lead[compared.lang],
+      description: compared.item.lead[compared.lang].split("\n\n")[0],
       keywords: compared.item.title[compared.lang],
     };
   }
@@ -831,7 +831,7 @@ function jsonLd(path: string, lang: Lang, copy: PageSeo, url: string) {
       "@context": "https://schema.org",
       "@type": "FAQPage",
       name: compared.item.title[compared.lang],
-      description: compared.item.lead[compared.lang],
+      description: compared.item.lead[compared.lang].split("\n\n")[0],
       url,
       inLanguage: compared.lang,
       mainEntity: [{ "@type": "Question", name: compared.item.title[compared.lang], acceptedAnswer: { "@type": "Answer", text: answer } }],

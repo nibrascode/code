@@ -54,7 +54,9 @@ export function CompareTopic({ lang, slug }: { lang: Lang; slug: string }) {
       </p>
       <h1>{item.title[lang]}</h1>
       <div className="why-lead">
-        <p>{item.lead[lang]}</p>
+        {item.lead[lang].split(/\n\n+/).map((para) => (
+          <p key={para}>{para}</p>
+        ))}
         <ul className="faq-points">
           {item.points[lang].map((point) => (
             <li key={point}>{point}</li>

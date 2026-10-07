@@ -205,16 +205,41 @@ export const COMPARE_ITEMS: readonly CompareItem[] = [
       "Если не знаешь ни того ни другого, начни с Kotlin. Если старый код на Java, прочитай и его.",
     ),
   },
+  {
+    slug: "python-2026",
+    title: L("2026-da Python öyrənməyə dəyərmi?", "Is Python still worth learning in 2026?", "2026'da Python öğrenmeye değer mi?", "هل يستحق Python التعلم في 2026؟", "Стоит ли учить Python в 2026?"),
+    lead: L(
+        "Dəyər. Model kod yaza bilir deyə Python bitməyib. İlk dil üçün və süni intellekti öz proqramından çağırmaq üçün hələ düz başlanğıcdır.\n\nSəbəb budur: bir çox alətin nümunəsi Python-dadır. Sən nümunəni oxuya bilmirsənsə, modeli köməkçi yox, müəllif kimi işlədirsən. Səhv sətir o zaman sənin layihəndə qalır.\n\nÖyrənməyin özü dəyişib. Əvvəl kitabı səhifə-səhifə oxuyub sonra kod yazırdın. İndi qısa proqram yazıb modeldən həmin sətiri izah etdirmək olar. İzahı yoxlamadan növbəti sətirə keçmə.\n\nHər iş üçün Python lazım deyil. Səhifə düzəltmək istəyirsənsə, JavaScript daha yaxındır. Telefon tətbiqinin öz kodu üçün Java və ya Kotlin gəlir. Python o yolu bağlamır. Sadəcə o yolun dili deyil.",
+        "Yes. Python is not finished because a model can write code. For a first language, and for calling an AI from your own program, it is still a straight start.\n\nThe reason is this: the examples of many tools are in Python. If you cannot read the example, you are using the model as the author, not as a helper. A wrong line then stays in your project.\n\nThe learning itself has changed. You used to read a book page by page and then write code. Now you can write a short program and ask a model to explain that line. Do not go to the next line before you check the explanation.\n\nPython is not needed for every job. If you want to make a page, JavaScript is closer. For a phone app's own code, Java or Kotlin comes in. Python does not close that road. It is just not the language of that road.",
+        "Değer. Model kod yazabiliyor diye Python bitmedi. İlk dil için ve yapay zekayı kendi programından çağırmak için hâlâ düz bir başlangıçtır.\n\nSebep şudur: birçok aracın örneği Python'dadır. Örneği okuyamıyorsan modeli yardımcı değil, yazar gibi kullanıyorsun. Yanlış satır o zaman senin projende kalır.\n\nÖğrenmenin kendisi değişti. Eskiden kitabı sayfa sayfa okuyup sonra kod yazardın. Şimdi kısa program yazıp modelden o satırı açıklatabilirsin. Açıklamayı kontrol etmeden sonraki satıra geçme.\n\nHer iş için Python gerekmez. Sayfa yapmak istiyorsan JavaScript daha yakındır. Telefon uygulamasının kendi kodu için Java veya Kotlin gelir. Python o yolu kapatmaz. Sadece o yolun dili değildir.",
+        "نعم. Python لم تنتهِ لأن النموذج يستطيع أن يكتب رمزًا. للغة الأولى ولنداء الذكاء الاصطناعي من برنامجك ما زالت بداية مستقيمة.\n\nالسبب هذا: أمثلة كثير من الأدوات بـ Python. إذا لم تستطع قراءة المثال فأنت تستخدم النموذج مؤلفًا لا مساعدًا. السطر الخطأ يبقى حينها في مشروعك.\n\nالتعلم نفسه تغيّر. كنت تقرأ الكتاب صفحة صفحة ثم تكتب الرمز. الآن تستطيع أن تكتب برنامجًا قصيرًا وتطلب من النموذج شرح ذلك السطر. لا تنتقل إلى السطر التالي قبل أن تفحص الشرح.\n\nPython ليست لازمة لكل عمل. إذا أردت صنع صفحة فـ JavaScript أقرب. لرمز تطبيق الهاتف نفسه يأتي Java أو Kotlin. Python لا تغلق ذلك الطريق. هي ليست لغة ذلك الطريق فقط.",
+        "Да. Python не кончился оттого, что модель умеет писать код. Для первого языка и чтобы вызвать ИИ из своей программы это всё ещё прямой старт.\n\nПричина такая: примеры многих инструментов на Python. Если пример прочитать не можешь, ты держишь модель автором, а не помощником. Неверная строка тогда остаётся в твоём проекте.\n\nСамо учение изменилось. Раньше книгу читали страница за страницей и потом писали код. Теперь можно написать короткую программу и попросить модель объяснить эту строку. Не переходи к следующей, пока не проверишь объяснение.\n\nPython нужен не для всякой работы. Если хочешь делать страницу, ближе JavaScript. Для собственного кода приложения телефона приходят Java или Kotlin. Python эту дорогу не закрывает. Просто это не язык той дороги.",
+      ),
+    points: {
+        az: ["Əvvəl dəyişən, şərt və döngünü özün yaz. Bunu modelsiz yaza bilməlisən.", "Sonra kiçik bir proqramı sındır və səhvi özün tap. Modelə yalnız ilişdiyin sətri göstər.", "Süni intellektə sorğu göndərmək adətən bir ünvana mətn yollamaqdır. Bu, API-dir.", "Hazır kodu başa düşmürsənsə, layihəyə yapışdırma.", "Python sətirin sonuna nöqtəli vergül qoymur. Boşluq blokun özüdür.", "Bir dili kiçik proqramı düzəldəcək qədər apar. Sonra ikinci dilə keç."],
+        en: ["First write a variable, a condition, and a loop yourself. You should be able to write that without a model.", "Then break a small program and find the mistake yourself. Show the model only the line where you got stuck.", "Sending a request to an AI is usually sending text to an address. That is an API.", "If you do not understand generated code, do not paste it into the project.", "Python does not put a semicolon at the end of a line. The space is the block itself.", "Take one language far enough to fix a small program. Then move to a second language."],
+        tr: ["Önce değişkeni, koşulu ve döngüyü kendin yaz. Bunu modelsiz yazabilmelisin.", "Sonra küçük bir programı boz ve hatayı kendin bul. Modele yalnız takıldığın satırı göster.", "Yapay zekaya istek göndermek genellikle bir adrese metin yollamaktır. Bu, API'dir.", "Üretilen kodu anlamıyorsan projeye yapıştırma.", "Python satır sonuna noktalı virgül koymaz. Boşluk bloğun kendisidir.", "Bir dili küçük programı düzeltecek kadar götür. Sonra ikinci dile geç."],
+        ar: ["اكتب أولًا المتغير والشرط والحلقة بنفسك. ينبغي أن تستطيع كتابة ذلك بلا نموذج.", "ثم اكسر برنامجًا صغيرًا وجِد الخطأ بنفسك. أظهر للنموذج السطر الذي علقت فيه فقط.", "إرسال طلب إلى الذكاء الاصطناعي عادة إرسال نص إلى عنوان. هذه API.", "إذا لم تفهم الرمز المولَّد فلا تلصقه في المشروع.", "Python لا تضع فاصلة منقوطة في آخر السطر. الفراغ هو الكتلة نفسها.", "أوصل لغة واحدة بما يكفي لإصلاح برنامج صغير. ثم انتقل إلى لغة ثانية."],
+        ru: ["Сначала напиши переменную, условие и цикл сам. Это ты должен уметь писать без модели.", "Потом сломай маленькую программу и найди ошибку сам. Модели показывай только строку, на которой застрял.", "Отправить запрос к ИИ — обычно отправить текст по адресу. Это API.", "Если готовый код не понимаешь, не вставляй его в проект.", "Python не ставит точку с запятой в конце строки. Пробел и есть блок.", "Доведи один язык до того, чтобы чинить маленькую программу. Потом переходи ко второму."],
+      },
+    note: L(
+        "Modeli köməkçi tut. Oxumadığın müəllif yox.",
+        "Keep the model as a helper, not as an author you never read.",
+        "Modeli yardımcı tut. Okumadığın yazar değil.",
+        "اجعل النموذج مساعدًا، لا مؤلفًا لا تقرأه.",
+        "Держи модель помощником, а не автором, которого ты не читаешь.",
+      ),
+  },
 ];
 
 export const COMPARE = {
   heading: L("Hansı dil?", "Which language?", "Hangi dil?", "أي لغة؟", "Какой язык?"),
   intro: L(
-    "İki seçim ayrıca yazılıb. Birincisi ilk dil üçündür. İkincisi telefon tətbiqi üçündür.",
-    "Two choices are written separately. The first is for a first language. The second is for a phone app.",
-    "İki seçim ayrı yazıldı. Birincisi ilk dil içindir. İkincisi telefon uygulaması içindir.",
-    "خياران مكتوبان على حدة. الأول للغة الأولى. الثاني لتطبيق الهاتف.",
-    "Два выбора написаны отдельно. Первый — для первого языка. Второй — для приложения телефона.",
+    "Python, JavaScript və telefonun dili ayrıca yazılıb. Python-un öz sualı da buradadır.",
+    "Python, JavaScript, and the phone's language are written separately. The question about Python itself is here too.",
+    "Python, JavaScript ve telefonun dili ayrı yazıldı. Python'un kendi sorusu da burada.",
+    "Python وJavaScript ولغة الهاتف مكتوبة على حدة. سؤال Python نفسه هنا أيضًا.",
+    "Python, JavaScript и язык телефона написаны отдельно. Вопрос о самом Python тоже здесь.",
   ),
   title: L(
     "Hansı dil? Python, JavaScript, Java, Kotlin",
@@ -224,11 +249,11 @@ export const COMPARE = {
     "Какой язык? Python, JavaScript, Java, Kotlin",
   ),
   description: L(
-    "Python, yoxsa JavaScript? Java, yoxsa Kotlin? İlk dil və telefon tətbiqi üçün qısa seçim.",
-    "Python or JavaScript? Java or Kotlin? A short choice for a first language and for a phone app.",
-    "Python mu, JavaScript mi? Java mı, Kotlin mi? İlk dil ve telefon uygulaması için kısa seçim.",
-    "Python أم JavaScript؟ Java أم Kotlin؟ اختيار قصير للغة الأولى ولتطبيق الهاتف.",
-    "Python или JavaScript? Java или Kotlin? Короткий выбор для первого языка и для приложения телефона.",
+    "Python, yoxsa JavaScript? Java, yoxsa Kotlin? 2026-da Python öyrənməyə dəyərmi?",
+    "Python or JavaScript? Java or Kotlin? Is Python still worth learning in 2026?",
+    "Python mu, JavaScript mi? Java mı, Kotlin mi? 2026'da Python öğrenmeye değer mi?",
+    "Python أم JavaScript؟ Java أم Kotlin؟ هل يستحق Python التعلم في 2026؟",
+    "Python или JavaScript? Java или Kotlin? Стоит ли учить Python в 2026?",
   ),
 };
 
