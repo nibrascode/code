@@ -283,19 +283,21 @@ export function LibraryIndex({
       ) : null}
       {section === "programming" && needle && topics.length === 0 && programLinks.length === 0 ? <p className="lib-empty">{copy.empty}</p> : null}
       <ul className={section === "programming" ? "lib-list lib-list-2" : "lib-list"}>
-        {programLinks.map((item) => (
-          <li key={item.href} className={item.label.length > 16 ? "is-wide" : undefined}>
-            <a href={item.href}>
-              {item.label}
-              <ArrowUpRight className="rtl-flip size-4" />
-            </a>
-          </li>
-        ))}
-        {topics.map((topic) => {
+        {programLinks
+          .filter((item) => item.label.length <= 16)
+          .map((item) => (
+            <li key={item.href}>
+              <a href={item.href}>
+                {item.label}
+                <ArrowUpRight className="rtl-flip size-4" />
+              </a>
+            </li>
+          ))}
+        {(section === "programming" ? topics.filter((topic) => t(topic.label).length <= 16) : topics).map((topic) => {
           if (section === "programming") {
             const label = t(topic.label);
             return (
-              <li key={topic.slug} className={label.length > 16 ? "is-wide" : undefined}>
+              <li key={topic.slug}>
                 <a href={programmingLocalePath(lang, topic.slug)}>
                   {label}
                   <ArrowUpRight className="rtl-flip size-4" />
@@ -313,6 +315,30 @@ export function LibraryIndex({
             </li>
           );
         })}
+        {section === "programming"
+          ? programLinks
+              .filter((item) => item.label.length > 16)
+              .map((item) => (
+                <li key={item.href} className="is-wide">
+                  <a href={item.href}>
+                    {item.label}
+                    <ArrowUpRight className="rtl-flip size-4" />
+                  </a>
+                </li>
+              ))
+          : null}
+        {section === "programming"
+          ? topics
+              .filter((topic) => t(topic.label).length > 16)
+              .map((topic) => (
+                <li key={topic.slug} className="is-wide">
+                  <a href={programmingLocalePath(lang, topic.slug)}>
+                    {t(topic.label)}
+                    <ArrowUpRight className="rtl-flip size-4" />
+                  </a>
+                </li>
+              ))
+          : null}
         {extras.map((item) => (
           <li key={item.id}>
             {section === "resources" ? (
