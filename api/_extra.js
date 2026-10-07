@@ -22,13 +22,17 @@ const RATE_WORD = {
   ar: { usd: "دولار", eur: "يورو", azn: "مانات", try: "ليرة", gbp: "جنيه", rub: "روبل" },
 };
 
+function hasWord(text, words) {
+  return words.some((word) => new RegExp("(^|[^\\p{L}\\p{N}])" + word + "([^\\p{L}\\p{N}]|$)", "iu").test(text));
+}
+
 function guessLang(raw) {
   if (/[\u0600-\u06FF]/.test(raw)) return "ar";
   if (/[\u0400-\u04FF]/.test(raw)) return "ru";
   if (/[əƏ]/.test(raw)) return "az";
   const q = raw.toLowerCase();
-  if (/\b(hava|merhaba|kac|nasil|hakkinda|paket)\b/.test(q)) return "tr";
-  if (/\b(weather|how much|about|what is|package)\b/.test(q)) return "en";
+  if (hasWord(q, ["hava", "merhaba", "kaç", "kac", "nasıl", "nasil", "nerede", "nedir", "hakkında", "hakkinda", "kısaca", "bugün", "lira", "dolar"])) return "tr";
+  if (hasWord(q, ["weather", "how", "about", "what", "who", "where", "package", "briefly", "dollar", "dollars"])) return "en";
   return "az";
 }
 
@@ -59,10 +63,12 @@ function stripPlace(name) {
 
 function weatherCity(raw) {
   const text = raw.replace(/[?؟!]/g, " ").replace(/\s+/g, " ").trim();
-  let m = text.match(/^(.{2,40}?)\s+(?:bugünkü|bugunku|indiki|today|сегодня)?\s*(?:hava|havası|havasi|hava durumu|weather|погода|الطقس)\b/i);
+  let m = text.match(/(?:^|\s)(?:in|в|في)\s+(\S{2,40})\s*$/i);
+  if (/(hava|weather|погода|طقس)/i.test(text) && m) return stripPlace(m[1]);
+  m = text.match(/^(.{2,40}?)\s+(?:bugünkü|bugunku|indiki|today|сегодня)?\s*(?:hava|havası|havasi|hava durumu|weather|погода|الطقس)\b/i);
   if (m) return stripPlace(m[1]);
-  m = text.match(/\b(?:hava|weather|погода|الطقس)\b\s+(?:indiki|bugün|bugun|necədir|necedir|nasıl|nasil|how is|какая|في)?\s*(.{2,40})/i);
-  if (m) return stripPlace(m[1].replace(/\b(necədir|necedir|nasıl|nasil|bugün|indi|now)\b/gi, "").trim());
+  m = text.match(/\b(?:hava|weather|погода|الطقس)\b\s+(?:indiki|bugün|bugun|necədir|necedir|nasıl|nasil|how is|какая)?\s*(.{2,40})/i);
+  if (m) return stripPlace(m[1].replace(/^(?:in|at|в|في)\s+/i, "").replace(/\b(necədir|necedir|nasıl|nasil|bugün|indi|now)\b/gi, "").trim());
   return "";
 }
 
@@ -178,17 +184,22 @@ async function wikiReply(message) {
 }
 
 const PY_NAMES = new Set(["requests", "flask", "django", "numpy", "pandas", "scipy", "pillow", "matplotlib", "fastapi", "beautifulsoup4"]);
+const CODE_NAMES = new Set([...PY_NAMES, "react", "vue", "express", "vite", "lodash", "axios", "webpack", "next", "redux", "jquery", "typescript"]);
 const SKIP_PKG = new Set(["apk", "html", "css", "sql", "git", "api", "json", "python", "javascript", "typescript", "java", "php", "node", "npm", "pip", "android", "ios", "hava", "dollar", "manat"]);
 
 function packageTopic(raw) {
   const text = raw.replace(/[?؟!]/g, " ").replace(/\s+/g, " ").trim();
   const hinted = /(npm|pypi|pip\b|paket|package|kitabxana|kütüphane|kutuphane|библиотека|حزمة)/i.test(text);
-  const name = (
+  const asked = (
     text.match(/(?:npm|pypi|pip)\s+([A-Za-z][A-Za-z0-9._-]{1,40})/i)?.[1] ||
+    text.match(/(?:what is|что такое|ما هو|ما هي)\s+([A-Za-z][A-Za-z0-9._-]{1,40})/i)?.[1] ||
     text.match(/([A-Za-z][A-Za-z0-9._-]{1,40})\s+(?:nədir|nedir|nedır|paketi|package)/i)?.[1] ||
     ""
-  ).toLowerCase();
+  );
+  const name = asked.toLowerCase();
   if (!name || SKIP_PKG.has(name)) return null;
+  const codeLike = CODE_NAMES.has(name) || /[.\-]/.test(name);
+  if (!hinted && !codeLike && /[A-Z]/.test(asked)) return null;
   if (!hinted && !/(nədir|nedir|nedır|what is|что такое|ما هو|ما هي)/i.test(text)) return null;
   const py = /(pypi|pip\b|python)/i.test(text) || PY_NAMES.has(name);
   const node = /(npm|node|javascript)/i.test(text);

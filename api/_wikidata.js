@@ -59,7 +59,7 @@ function guessLang(raw) {
   if (/[\u0400-\u04FF]/.test(raw)) return "ru";
   if (/[əƏ]/.test(raw)) return "az";
   const q = norm(raw);
-  if (/\b(merhaba|baskent\w*|nufus\w*|nerededir|hakkinda)\b/.test(q)) return "tr";
+  if (/\b(merhaba|baskent\w*|nufus\w*|nerede\w*|nedir|hakkinda)\b/.test(q)) return "tr";
   if (/\b(who|where|what|capital|population|born|about)\b/.test(q)) return "en";
   if (/\b(kim|harada|paytaxt|ehali|haqqinda|dogul)\w*/.test(q)) return "az";
   return "az";
@@ -88,7 +88,8 @@ export function wikiQuery(message) {
   const rules = [
     [/^(?:who is|who was|kimdir|kim idi|кто так(?:ой|ая)|من هو|من هي)\s+(.{2,80})$/, "who"],
     [/(.{2,80}?)\s+(?:kimdir|kim idi)$/, "who"],
-    [/(.{2,80}?)\s+(?:haradadir|harada yerlesir|nerededir|где находится|где это)$/, "where"],
+    [/^(?:where is|where are|nerede|neresi)\s+(.{2,80})$/, "where"],
+    [/(.{2,80}?)\s+(?:where is|nerede|neresi|haradadir|harada yerlesir|nerededir|где находится|где это)$/, "where"],
     [/^(?:capital of|paytaxti|baskenti|столица|عاصمة)\s+(.{2,80})$/, "capital"],
     [/(.{2,60}?)\s+(?:paytaxti(?: nedir)?|baskenti(?: nedir)?|столица)$/, "capital"],
     [/^(?:population of|ehalisi|nufusu|население)\s+(.{2,80})$/, "population"],
