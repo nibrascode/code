@@ -9,6 +9,7 @@ import { findProgrammingLocale, programmingLocalePath } from "@/lib/programming-
 import { SEARCH, searchPath } from "@/lib/search-pages";
 import { COMPARE, comparePath } from "@/lib/learn-pages";
 import { PAKET, paketPath } from "@/lib/paket";
+import { TOOLS, TOOLS_PAGE, pageTools, toolPath } from "@/lib/tools";
 import { pythonSections } from "@/lib/lessons";
 import { libItems, libParagraphs, savedLib, type LibGroup } from "@/lib/library-admin";
 import { articlesForTopic, findResourceTopic } from "@/lib/resource-topics";
@@ -688,6 +689,18 @@ export function ProgrammingArticle({
           </details>
         ))}
       </div>
+      {slug && pageTools(slug).length ? (
+        <div className="prog-fold-body">
+          <h2>{TOOLS_PAGE.toolsFor[lang]}</h2>
+          <ul className="lib-list">
+            {pageTools(slug).map((id) => (
+              <li key={id}>
+                <a href={toolPath(lang, id)}>{TOOLS.find((tool) => tool.id === id)!.label[lang]}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
       {slug === "html-css" ? (
         <ul className="lib-list">
           <li className="is-section">

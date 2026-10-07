@@ -21,6 +21,7 @@ import {
   Regex,
   Ruler,
   Scan,
+  Shield,
   Sparkles,
   Table,
   TextQuote,
@@ -30,7 +31,7 @@ import {
 } from "lucide-react";
 import type { Lang } from "@/lib/i18n";
 import { TOOLS, TOOLS_PAGE, TOOL_GROUPS, relatedTools, toolPath, toolsPath, type ToolId } from "@/lib/tools";
-import { TOOL_LEAD } from "@/lib/tools-seo";
+import { TOOL_LEAD, TOOL_SAMPLE } from "@/lib/tools-seo";
 import {
   decodeBase64,
   decodeHtml,
@@ -63,6 +64,8 @@ import {
   unixConvert,
   convertBase,
   convertPxRem,
+  convertChmod,
+  explainCron,
 } from "@/lib/tools-run";
 
 const NEEDS_TEXT = new Set<ToolId>([
@@ -90,6 +93,8 @@ const NEEDS_TEXT = new Set<ToolId>([
   "base",
   "pxrem",
   "jwt",
+  "cron",
+  "chmod",
 ]);
 const PAIR = new Set<ToolId>(["base64", "url", "html"]);
 
@@ -133,6 +138,8 @@ const ICONS: Record<ToolId, typeof Braces> = {
   base: Binary,
   pxrem: Ruler,
   jwt: Scan,
+  cron: Clock,
+  chmod: Shield,
 };
 
 async function sha(text: string, name: "SHA-1" | "SHA-256") {
@@ -178,6 +185,8 @@ function runSync(id: ToolId, text: string, count: string, low: string, high: str
   if (id === "base") return convertBase(text);
   if (id === "pxrem") return convertPxRem(text, count);
   if (id === "jwt") return readJwt(text);
+  if (id === "cron") return explainCron(text);
+  if (id === "chmod") return convertChmod(text);
   return "";
 }
 
@@ -252,6 +261,25 @@ export function ToolsPage({ lang, focus }: { lang: Lang; focus?: ToolId }) {
       {(focus ? TOOL_LEAD[focus][lang] : copy.description[lang]).split("\n\n").map((part) => (
         <p key={part}>{part}</p>
       ))}
+      {focus && TOOL_SAMPLE[focus] ? (
+        <p>
+          <button
+            type="button"
+            className="tool-file"
+            onClick={() => {
+              const sample = TOOL_SAMPLE[focus];
+              if (!sample) return;
+              if (sample.text != null) setText(sample.text);
+              if (sample.extra != null) setExtra(sample.extra);
+              if (sample.count != null) setCount(sample.count);
+              setOutput("");
+              setNote("");
+            }}
+          >
+            {copy.sample[lang]}
+          </button>
+        </p>
+      ) : null}
       {focus ? null : (
       <div className="prog-sections">
         {TOOL_GROUPS.map((group) => {

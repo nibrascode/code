@@ -1,5 +1,6 @@
 import type { Lang } from "@/lib/i18n";
 import { SEARCH, searchPath, searchTopicPath, type SearchKind } from "@/lib/search-pages";
+import { TOOLS, TOOLS_PAGE, pageTools, toolPath } from "@/lib/tools";
 
 function Rich({ text }: { text: string }) {
   const parts = text.split(/`([^`]+)`/g);
@@ -78,6 +79,18 @@ export function SearchTopic({
           </p>
         ) : null}
       </div>
+      {pageTools(slug).length ? (
+        <div className="prog-fold-body">
+          <h2>{TOOLS_PAGE.toolsFor[lang]}</h2>
+          <ul className="lib-list">
+            {pageTools(slug).map((id) => (
+              <li key={id}>
+                <a href={toolPath(lang, id)}>{TOOLS.find((tool) => tool.id === id)!.label[lang]}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
       <ul className="lib-list">
         {others.map((entry) => (
           <li key={entry.slug}>

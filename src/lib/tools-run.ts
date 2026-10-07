@@ -462,3 +462,45 @@ export function readJwt(token: string) {
   const payload = JSON.stringify(JSON.parse(readBase64Url(parts[1])), null, 2);
   return `header\n${header}\n\npayload\n${payload}`;
 }
+
+const WEEK = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const MONTH = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+function cronPart(part: string, names?: string[]) {
+  if (part === "*") return "*";
+  if (part.startsWith("*/")) return `*/${part.slice(2)}`;
+  if (names && /^\d+$/.test(part)) {
+    const at = Number(part);
+    return names[at] ? `${part} (${names[at]})` : part;
+  }
+  return part;
+}
+
+export function explainCron(text: string) {
+  const parts = text.trim().split(/\s+/);
+  if (parts.length !== 5 || parts.some((part) => !/^[\d*,/-]+$/.test(part))) throw new Error("cron");
+  const [minute, hour, day, month, weekday] = parts;
+  return [
+    `minute: ${cronPart(minute)}`,
+    `hour: ${cronPart(hour)}`,
+    `day: ${cronPart(day)}`,
+    `month: ${cronPart(month, ["", ...MONTH])}`,
+    `weekday: ${cronPart(weekday, WEEK)}`,
+  ].join("\n");
+}
+
+const CHMOD_BITS = ["---", "--x", "-w-", "-wx", "r--", "r-x", "rw-", "rwx"];
+
+export function convertChmod(text: string) {
+  const raw = text.trim().toLowerCase();
+  if (/^[0-7]{3,4}$/.test(raw)) {
+    const oct = raw.slice(-3);
+    return `${raw}\n${[...oct].map((digit) => CHMOD_BITS[Number(digit)]).join("")}`;
+  }
+  if (/^[rwx-]{9}$/.test(raw)) {
+    const oct = raw.match(/.{3}/g)!.map((group) => CHMOD_BITS.indexOf(group)).join("");
+    if (oct.includes("-1")) throw new Error("chmod");
+    return `${oct}\n${raw}`;
+  }
+  throw new Error("chmod");
+}

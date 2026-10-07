@@ -33,7 +33,9 @@ export type ToolId =
   | "diff"
   | "base"
   | "pxrem"
-  | "jwt";
+  | "jwt"
+  | "cron"
+  | "chmod";
 
 const L = (az: string, en: string, tr: string, ar: string, ru: string): Record<Lang, string> => ({ az, en, tr, ar, ru });
 
@@ -78,6 +80,8 @@ export const TOOLS_PAGE = {
     "لا يُفحص التوقيع. الرمز لا يغادر هذه الصفحة.",
     "Подпись не проверяется. Токен не уходит с этой страницы.",
   ),
+  sample: L("Nümunəni doldur", "Fill the example", "Örneği doldur", "املأ المثال", "Вставить пример"),
+  toolsFor: L("Bu mövzunun aləti", "Tool for this topic", "Bu konunun aracı", "أداة هذا الموضوع", "Инструмент этой темы"),
 };
 
 export const TOOLS: readonly { id: ToolId; label: Record<Lang, string> }[] = [
@@ -111,6 +115,8 @@ export const TOOLS: readonly { id: ToolId; label: Record<Lang, string> }[] = [
   { id: "base", label: L("İkilik və onaltılıq", "Binary and hex", "İkilik ve onaltılık", "ثنائي وست عشري", "Двоичный и шестнадцатеричный") },
   { id: "pxrem", label: L("px və rem", "px and rem", "px ve rem", "px و rem", "px и rem") },
   { id: "jwt", label: L("JWT oxuma", "Read a JWT", "JWT oku", "قراءة JWT", "Чтение JWT") },
+  { id: "cron", label: L("Cron izahı", "Cron explainer", "Cron açıklaması", "شرح Cron", "Пояснение Cron") },
+  { id: "chmod", label: L("chmod", "chmod", "chmod", "chmod", "chmod") },
 ];
 
 export const TOOL_GROUPS: readonly { id: string; title: Record<Lang, string>; ids: readonly ToolId[] }[] = [
@@ -142,9 +148,25 @@ export const TOOL_GROUPS: readonly { id: string; title: Record<Lang, string>; id
   {
     id: "turn",
     title: L("Çevirici", "Converter", "Dönüştürücü", "محوّل", "Конвертер"),
-    ids: ["base", "pxrem", "unix", "color", "csv"],
+    ids: ["cron", "chmod", "base", "pxrem", "unix", "color", "csv"],
   },
 ];
+
+export function pageTools(slug: string) {
+  const map: Record<string, ToolId[]> = {
+    "html-css": ["css", "html", "html-min"],
+    javascript: ["js"],
+    sql: ["sql"],
+    python: ["json", "csv"],
+    "json-nedir": ["json", "json-min", "csv"],
+    "css-nedir": ["css", "css-min", "color"],
+    "html-nedir": ["html", "html-min"],
+    "javascript-nedir": ["js"],
+    "python-nedir": ["json"],
+    "ilk-html": ["html", "css"],
+  };
+  return map[slug] ?? [];
+}
 
 export function relatedTools(id: ToolId) {
   const group = TOOL_GROUPS.find((item) => item.ids.includes(id));

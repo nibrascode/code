@@ -34,6 +34,8 @@ export const TOOL_SLUG: Record<ToolId, string> = {
   base: "binary-hex",
   pxrem: "px-rem",
   jwt: "jwt",
+  cron: "cron",
+  chmod: "chmod",
 };
 
 export const TOOL_LEAD: Record<ToolId, Record<Lang, string>> = {
@@ -59,18 +61,18 @@ export const TOOL_LEAD: Record<ToolId, Record<Lang, string>> = {
     "Переводит текст в Base64 и читает код обратно.\n\nПример: Salam становится U2FsYW0=. Кнопка чтения возвращает текст.\n\nBase64 — не шифр. Он не прячет текст, только хранит его в другом виде. Картинки и файлы здесь не читаются, только текст.",
   ),
   uuid: L(
-    "Təsadüfi UUID yaradır. Hər basışda yeni identifikator çıxır.",
-    "Makes a random UUID. Each press gives a new identifier.",
-    "Rastgele UUID üretir. Her basışta yeni bir kimlik çıkar.",
-    "ينشئ UUID عشوائيًا. كل ضغطة تعطي معرفًا جديدًا.",
-    "Создаёт случайный UUID. Каждое нажатие даёт новый идентификатор.",
+    "Təsadüfi UUID yaradır. Hər basışda yeni identifikator çıxır.\n\nNümunə: 3f1c0a2e-7b44-4d1a-9c6e-1a0b8e5d2f77 kimi 36 simvolluq kod olur. Eyni kodun təkrar çıxma ehtimalı praktiki olaraq yoxdur.\n\nBu səhifə bazaya yazmır. Kodu kopyalayıb öz layihəndə işlədə bilərsən. Uzunluq seçimi yoxdur, UUID həmişə eyni formadadır.",
+    "Makes a random UUID. Each press gives a new identifier.\n\nExample: a code like 3f1c0a2e-7b44-4d1a-9c6e-1a0b8e5d2f77, 36 characters. The chance of the same code twice is practically none.\n\nThis page does not write to a database. Copy the code into your own project. There is no length choice: a UUID always has the same shape.",
+    "Rastgele UUID üretir. Her basışta yeni bir kimlik çıkar.\n\nÖrnek: 3f1c0a2e-7b44-4d1a-9c6e-1a0b8e5d2f77 gibi 36 karakterlik kod olur. Aynı kodun yeniden çıkma ihtimali pratikte yoktur.\n\nBu sayfa veritabanına yazmaz. Kodu kopyalayıp kendi projende kullanabilirsin. Uzunluk seçimi yoktur, UUID hep aynı biçimdedir.",
+    "ينشئ UUID عشوائيًا. كل ضغطة تعطي معرفًا جديدًا.\n\nمثال: رمز مثل 3f1c0a2e-7b44-4d1a-9c6e-1a0b8e5d2f77 من 36 حرفًا. احتمال تكرار الرمز نفسه شبه معدوم.\n\nهذه الصفحة لا تكتب في قاعدة بيانات. انسخ الرمز إلى مشروعك. لا يوجد اختيار للطول، شكل UUID ثابت.",
+    "Создаёт случайный UUID. Каждое нажатие даёт новый идентификатор.\n\nПример: код вроде 3f1c0a2e-7b44-4d1a-9c6e-1a0b8e5d2f77, 36 знаков. Шанс повтора практически нулевой.\n\nСтраница ничего не пишет в базу. Код можно скопировать в свой проект. Длину не выбирают: вид UUID всегда один.",
   ),
   password: L(
-    "Hərflərdən, rəqəmlərdən və işarələrdən şifrə düzəldir. Uzunluğu özün seçirsən.",
-    "Builds a password from letters, digits, and signs. You choose the length.",
-    "Harflerden, rakamlardan ve işaretlerden parola kurar. Uzunluğu sen seçersin.",
-    "يبني كلمة سر من حروف وأرقام وعلامات. أنت تختار الطول.",
-    "Собирает пароль из букв, цифр и знаков. Длину выбираешь сам.",
+    "Hərflərdən, rəqəmlərdən və işarələrdən şifrə düzəldir. Uzunluğu özün seçirsən.\n\nNümunə: uzunluq 12 olanda 12 simvolluq şifrə çıxır. Hər basışda başqa şifrə olur.\n\nBu səhifə şifrəni yadda saxlamır. Özün kopyala. Qısa şifrə zəifdir, 12 və ya daha uzun daha uyğundur.",
+    "Builds a password from letters, digits, and signs. You choose the length.\n\nExample: length 12 gives a 12-character password. Each press gives another password.\n\nThis page does not store the password. Copy it yourself. A short password is weak. 12 or more is a better fit.",
+    "Harflerden, rakamlardan ve işaretlerden parola kurar. Uzunluğu sen seçersin.\n\nÖrnek: uzunluk 12 olunca 12 karakterlik parola çıkar. Her basışta başka parola olur.\n\nBu sayfa parolayı saklamaz. Kendin kopyala. Kısa parola zayıftır, 12 ya da daha uzun daha uygundur.",
+    "يبني كلمة سر من حروف وأرقام وعلامات. أنت تختار الطول.\n\nمثال: الطول 12 يعطي كلمة من 12 حرفًا. كل ضغطة تعطي كلمة أخرى.\n\nهذه الصفحة لا تحفظ كلمة السر. انسخها بنفسك. الكلمة القصيرة ضعيفة، و12 أو أكثر أنسب.",
+    "Собирает пароль из букв, цифр и знаков. Длину выбираешь сам.\n\nПример: длина 12 даёт пароль из 12 знаков. Каждое нажатие даёт другой пароль.\n\nСтраница пароль не хранит. Скопируй сам. Короткий пароль слаб, 12 и больше лучше.",
   ),
   url: L(
     "Ünvandakı boşluğu və işarəni kodlayır, kodu geri açır.",
@@ -115,11 +117,11 @@ export const TOOL_LEAD: Record<ToolId, Record<Lang, string>> = {
     "Делает SHA-1 из текста. MD5 и SHA-256 на отдельных страницах.",
   ),
   css: L(
-    "CSS qaydalarını sətirlərə ayırır. Mötərizənin içi içəri çəkilir.",
-    "Breaks CSS rules onto lines. The inside of a brace is indented.",
-    "CSS kurallarını satırlara ayırır. Parantezin içi içeri çekilir.",
-    "يفصل قواعد CSS على أسطر. داخل القوس يتراجع.",
-    "Разбивает правила CSS на строки. Внутри скобки делается отступ.",
+    "CSS qaydalarını sətirlərə ayırır. Mötərizənin içi içəri çəkilir.\n\nNümunə: body{color:red;margin:0} yazılanda hər qayda öz sətirində olur.\n\nBu səhifə rəngi dəyişmir, yalnız oxumağı asanlaşdırır. Boşluqları çıxarmaq üçün CSS sıx aləti var.",
+    "Breaks CSS rules onto lines. The inside of a brace is indented.\n\nExample: body{color:red;margin:0} puts each rule on its own line.\n\nThis page does not change the color. It only makes the text easier to read. The CSS minifier removes the spaces.",
+    "CSS kurallarını satırlara ayırır. Parantezin içi içeri çekilir.\n\nÖrnek: body{color:red;margin:0} yazılınca her kural kendi satırında olur.\n\nBu sayfa rengi değiştirmez, yalnız okumayı kolaylaştırır. Boşlukları çıkarmak için CSS sıkıştır aracı vardır.",
+    "يفصل قواعد CSS على أسطر. داخل القوس يتراجع.\n\nمثال: body{color:red;margin:0} يضع كل قاعدة في سطرها.\n\nهذه الصفحة لا تغيّر اللون. تسهّل القراءة فقط. ضغط CSS يحذف الفراغات.",
+    "Разбивает правила CSS на строки. Внутри скобки делается отступ.\n\nПример: body{color:red;margin:0} ставит каждое правило на свою строку.\n\nСтраница цвет не меняет, только облегчает чтение. Сжатие CSS убирает пробелы.",
   ),
   js: L(
     "JavaScript mətnini sətirlərə ayırır. Mötərizə və nöqtəli vergül yeni sətir açır.",
@@ -199,11 +201,11 @@ export const TOOL_LEAD: Record<ToolId, Record<Lang, string>> = {
     "Сравнивает два текста построчно. Ушедшая строка с минусом, новая с плюсом.",
   ),
   regex: L(
-    "Nümunəni mətnin içində axtarır. Uyğun gələn parçaları alt-alta yazır.",
-    "Looks for a pattern inside text. Matching pieces are listed one under another.",
-    "Kalıbı metnin içinde arar. Eşleşen parçaları alt alta yazar.",
-    "يبحث عن نمط داخل النص. الأجزاء المطابقة تُكتب واحدًا تحت الآخر.",
-    "Ищет шаблон в тексте. Совпавшие куски пишет один под другим.",
+    "Nümunəni mətnin içində axtarır. Uyğun gələn parçaları alt-alta yazır.\n\nNümunə: nümunə a+, mətn baac. Nəticə aa olur. Nöqtə istənilən simvol, ulduz təkrar deməkdir.\n\nSəhv nümunə qəbul olunmur. Heç nə uyğun gəlməsə, səhifə bunu ayrıca yazır.",
+    "Looks for a pattern inside text. Matching pieces are listed one under another.\n\nExample: pattern a+, text baac. The result is aa. A dot means any character, a star means a repeat.\n\nA bad pattern is rejected. If nothing matches, the page says so.",
+    "Kalıbı metnin içinde arar. Eşleşen parçaları alt alta yazar.\n\nÖrnek: kalıp a+, metin baac. Sonuç aa olur. Nokta herhangi bir karakter, yıldız tekrar demektir.\n\nHatalı kalıp kabul edilmez. Hiçbir şey eşleşmezse sayfa bunu ayrıca yazar.",
+    "يبحث عن نمط داخل النص. الأجزاء المطابقة تُكتب واحدًا تحت الآخر.\n\nمثال: النمط a+ والنص baac. النتيجة aa. النقطة أي حرف، والنجمة تكرار.\n\nالنمط الخطأ يُرفض. إذا لم يطابق شيء تكتب الصفحة ذلك.",
+    "Ищет шаблон в тексте. Совпавшие куски пишет один под другим.\n\nПример: шаблон a+, текст baac. Результат aa. Точка — любой знак, звёздочка — повтор.\n\nПлохой шаблон отклоняется. Если ничего не совпало, страница пишет об этом.",
   ),
   unix: L(
     "Saniyəni tarixə, tarixi Unix saniyəsinə çevirir. Qısa ədəd saniyə sayılır.\n\nNümunə: 0 yazılanda nəticə 1970-01-01 00:00:00 UTC olur. 2026-10-07 yazılanda saniyə çıxır.\n\n10 rəqəmli ədəd saniyə sayılır. 13 rəqəmli ədəd millisaniyə sayılır. Tarix UTC-dir, yerli saat deyil.",
@@ -213,11 +215,11 @@ export const TOOL_LEAD: Record<ToolId, Record<Lang, string>> = {
     "Переводит секунды в дату, а дату в секунды Unix. Короткое число считается секундами.\n\nПример: 0 даёт 1970-01-01 00:00:00 UTC. 2026-10-07 даёт число секунд.\n\nЧисло из 10 цифр — секунды. Число из 13 цифр — миллисекунды. Дата в UTC, не местное время.",
   ),
   color: L(
-    "HEX, RGB və HSL rəng kodunu bir-birinə çevirir.",
-    "Converts a HEX, RGB, and HSL color code into the others.",
-    "HEX, RGB ve HSL renk kodunu birbirine çevirir.",
-    "يحوّل رمز اللون بين HEX وRGB وHSL.",
-    "Переводит код цвета между HEX, RGB и HSL.",
+    "HEX, RGB və HSL rəng kodunu bir-birinə çevirir.\n\nNümunə: #1d4ed8 yazılanda rgb və hsl də çıxır. rgb(29, 78, 216) yazsan, HEX geri gəlir.\n\nQısa HEX də olur: #abc uzun formaya açılır. Ad rəng, məsələn red, burada oxunmur.",
+    "Converts a HEX, RGB, and HSL color code into the others.\n\nExample: #1d4ed8 also gives rgb and hsl. rgb(29, 78, 216) comes back as HEX.\n\nA short HEX works too: #abc opens into the long form. A name such as red is not read here.",
+    "HEX, RGB ve HSL renk kodunu birbirine çevirir.\n\nÖrnek: #1d4ed8 yazılınca rgb ve hsl de çıkar. rgb(29, 78, 216) yazarsan HEX geri gelir.\n\nKısa HEX de olur: #abc uzun biçime açılır. red gibi ad burada okunmaz.",
+    "يحوّل رمز اللون بين HEX وRGB وHSL.\n\nمثال: #1d4ed8 يعطي RGB وHSL أيضًا. rgb(29, 78, 216) يعود HEX.\n\nHEX القصير يعمل: #abc يُفتح إلى الشكل الطويل. اسم مثل red لا يُقرأ هنا.",
+    "Переводит код цвета между HEX, RGB и HSL.\n\nПример: #1d4ed8 даёт ещё rgb и hsl. rgb(29, 78, 216) возвращается как HEX.\n\nКороткий HEX тоже работает: #abc раскрывается в длинный вид. Имя вроде red здесь не читается.",
   ),
   csv: L(
     "JSON siyahısını CSV cədvəlinə, CSV cədvəlini JSON siyahısına çevirir.",
@@ -247,6 +249,37 @@ export const TOOL_LEAD: Record<ToolId, Record<Lang, string>> = {
     "يقرأ رأس JWT وداخله. لا يفحص التوقيع ولا يرسل الرمز إلى أي مكان.\n\nالرمز ثلاثة أجزاء: الرأس والداخل والتوقيع. هنا يصبح الجزءان الأولان نصًا فقط.\n\nلأن التوقيع لا يُفحص، هذه الصفحة لا تقول إن الرمز صحيح. لا تلصق كلمة سر أو مفتاحًا سريًا.",
     "Читает заголовок и содержимое JWT. Подпись не проверяет и токен никуда не отправляет.\n\nУ токена три части: заголовок, содержимое и подпись. Здесь текстом становятся только первые две.\n\nПодпись не проверяется, поэтому страница не говорит, что токен верный. Пароль и секретный ключ сюда вставлять не нужно.",
   ),
+  cron: L(
+    "Cron sətrini insan dilinə çevirir. Beş yer olur: dəqiqə, saat, gün, ay, həftənin günü.\n\nNümunə: 0 9 * * 1 hər bazar ertəsi saat 09:00 deməkdir. Ulduz hər deməkdir.\n\nBu səhifə işi işlətmir, yalnız oxuyur. Serverə göndərmir.",
+    "Turns a cron line into plain words. Five places: minute, hour, day, month, weekday.\n\nExample: 0 9 * * 1 means every Monday at 09:00. A star means every.\n\nThis page does not run the job. It only reads the line and does not send it anywhere.",
+    "Cron satırını insan diline çevirir. Beş yer vardır: dakika, saat, gün, ay, haftanın günü.\n\nÖrnek: 0 9 * * 1 her pazartesi saat 09:00 demektir. Yıldız her demektir.\n\nBu sayfa işi çalıştırmaz, yalnız okur. Sunucuya göndermez.",
+    "يحوّل سطر Cron إلى كلام واضح. خمسة مواضع: الدقيقة والساعة واليوم والشهر ويوم الأسبوع.\n\nمثال: 0 9 * * 1 يعني كل اثنين الساعة 09:00. النجمة تعني كل.\n\nهذه الصفحة لا تشغّل العمل. تقرأ السطر فقط ولا ترسله.",
+    "Переводит строку cron на обычный язык. Пять мест: минута, час, день, месяц, день недели.\n\nПример: 0 9 * * 1 значит каждый понедельник в 09:00. Звезда значит каждый.\n\nСтраница работу не запускает. Только читает строку и никуда её не отправляет.",
+  ),
+  chmod: L(
+    "755 və rwxr-xr-x bir-birinə çevirir. Üç rəqəm üç qrupdur: sahibi, qrup, qalanlar.\n\nNümunə: 755 yazılanda rwxr-xr-x olur. 7 oxu, yaz və işlət deməkdir. 5 oxu və işlət deməkdir.\n\nBu səhifə faylın icazəsini dəyişmir. Yalnız kodu göstərir.",
+    "Converts 755 and rwxr-xr-x. Three digits are three groups: owner, group, others.\n\nExample: 755 becomes rwxr-xr-x. 7 means read, write, and run. 5 means read and run.\n\nThis page does not change a file. It only shows the code.",
+    "755 ve rwxr-xr-x birbirine çevirir. Üç rakam üç gruptur: sahip, grup, diğerleri.\n\nÖrnek: 755 yazılınca rwxr-xr-x olur. 7 oku, yaz ve çalıştır demektir. 5 oku ve çalıştır demektir.\n\nBu sayfa dosyanın iznini değiştirmez. Yalnız kodu gösterir.",
+    "يحوّل 755 وrwxr-xr-x. ثلاثة أرقام ثلاث مجموعات: المالك والمجموعة والباقون.\n\nمثال: 755 تصبح rwxr-xr-x. 7 تعني اقرأ واكتب وشغّل. 5 تعني اقرأ وشغّل.\n\nهذه الصفحة لا تغيّر إذن الملف. تعرض الرمز فقط.",
+    "Переводит 755 и rwxr-xr-x. Три цифры — три группы: владелец, группа, остальные.\n\nПример: 755 становится rwxr-xr-x. 7 значит читать, писать и запускать. 5 значит читать и запускать.\n\nСтраница права файла не меняет. Только показывает код.",
+  ),
+};
+
+
+
+export const TOOL_SAMPLE: Partial<Record<ToolId, { text?: string; extra?: string; count?: string }>> = {
+  json: { text: '{"ad":"Aysel","yaş":20}' },
+  base64: { text: "Salam" },
+  md5: { text: "Salam" },
+  unix: { text: "0" },
+  count: { text: "bir iki üç" },
+  uuid: {},
+  password: { count: "12" },
+  regex: { extra: "a+", text: "baac" },
+  color: { text: "#1d4ed8" },
+  css: { text: "body{color:red;margin:0}" },
+  cron: { text: "0 9 * * 1" },
+  chmod: { text: "755" },
 };
 
 export function toolIdFromSlug(slug: string) {
