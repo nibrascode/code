@@ -1441,8 +1441,19 @@
       document.getElementById("vault").hidden = true;
     });
     document.getElementById("vault-copy").addEventListener("click", function () {
-      const value = document.getElementById("vault-text").value;
-      if (navigator.clipboard) navigator.clipboard.writeText(value);
+      const box = document.getElementById("vault-text");
+      const value = box.value.replace(/\n+Xidmət: https?:\/\/\S+\s*$/i, "").trim();
+      box.focus();
+      box.select();
+      box.setSelectionRange(0, value.length);
+      const btn = this;
+      copyText(value).then(function () {
+        const old = btn.textContent;
+        btn.textContent = "Kopyalandı";
+        setTimeout(function () { btn.textContent = old; }, 1400);
+      }, function () {
+        note("Kopyalamaq alınmadı");
+      });
     });
     form.addEventListener("submit", function (e) {
       e.preventDefault();
