@@ -1,6 +1,7 @@
 import { createHash, randomBytes, randomInt } from "node:crypto";
 
 const SECRET = new Set(["password", "md5", "sha256", "hash", "jwt", "base64"]);
+const SITE = "https://www.nibrascode.com/tools";
 
 function tail(slug) {
   return `\n\nXidmət: ${SITE}/${slug}`;
