@@ -693,3 +693,49 @@ export function htmlTable(text: string) {
     .join("\n");
   return `<table>\n${body}\n</table>`;
 }
+
+export function cssRadius(text: string) {
+  const raw = text.trim();
+  if (!/^\d{1,3}$/.test(raw)) throw new Error("radius");
+  return `border-radius: ${raw}px;`;
+}
+
+export function trimSpaces(text: string) {
+  const lines = text.split(/\n/).map((line) => line.trim().replace(/[ \t]{2,}/g, " "));
+  return lines.join("\n").trim();
+}
+
+export function lineNumbers(text: string) {
+  const lines = text.replace(/\n$/, "").split("\n");
+  if (!lines.length || (lines.length === 1 && !lines[0])) throw new Error("lines");
+  const width = String(lines.length).length;
+  return lines.map((line, index) => `${String(index + 1).padStart(width, " ")}  ${line}`).join("\n");
+}
+
+export function jsonToCsv(text: string) {
+  const data = JSON.parse(text);
+  const rows = Array.isArray(data) ? data : [data];
+  if (!rows.length || rows.some((row) => !row || typeof row !== "object" || Array.isArray(row))) throw new Error("jsoncsv");
+  const keys = [...new Set(rows.flatMap((row) => Object.keys(row)))];
+  const cell = (value: unknown) => {
+    const shown = value == null ? "" : String(value);
+    return /[",\n]/.test(shown) ? `"${shown.replace(/"/g, '""')}"` : shown;
+  };
+  return [keys.join(","), ...rows.map((row) => keys.map((key) => cell((row as Record<string, unknown>)[key])).join(","))].join("\n");
+}
+
+function mix(hex: string, toward: number, amount: number) {
+  const parts = [0, 2, 4].map((at) => {
+    const value = parseInt(hex.slice(at, at + 2), 16);
+    return Math.round(value + (toward - value) * amount).toString(16).padStart(2, "0");
+  });
+  return `#${parts.join("")}`;
+}
+
+export function colorPalette(text: string) {
+  const hex = text.trim().replace("#", "");
+  const full = hex.length === 3 ? hex.split("").map((part) => part + part).join("") : hex;
+  if (!/^[0-9a-f]{6}$/i.test(full)) throw new Error("palette");
+  const base = full.toLowerCase();
+  return [`#${base}`, mix(base, 255, 0.35), mix(base, 0, 0.35)].join("\n");
+}

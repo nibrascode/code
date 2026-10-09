@@ -49,7 +49,12 @@ export type ToolId =
   | "htaccess"
   | "gradient"
   | "strength"
-  | "table";
+  | "table"
+  | "radius"
+  | "trim"
+  | "lines"
+  | "jsoncsv"
+  | "palette";
 
 const L = (az: string, en: string, tr: string, ar: string, ru: string): Record<Lang, string> => ({ az, en, tr, ar, ru });
 
@@ -153,6 +158,11 @@ export const TOOLS: readonly { id: ToolId; label: Record<Lang, string> }[] = [
   { id: "gradient", label: L("CSS gradient", "CSS gradient", "CSS gradient", "تدرج CSS", "Градиент CSS") },
   { id: "strength", label: L("Şifrə gücü", "Password strength", "Parola gücü", "قوة كلمة السر", "Надёжность пароля") },
   { id: "table", label: L("HTML cədvəl", "HTML table", "HTML tablo", "جدول HTML", "Таблица HTML") },
+  { id: "radius", label: L("CSS radius", "CSS radius", "CSS radius", "انحناء CSS", "Радиус CSS") },
+  { id: "trim", label: L("Boşluq təmizlə", "Trim spaces", "Boşluk temizle", "تنظيف الفراغ", "Убрать пробелы") },
+  { id: "lines", label: L("Sətir nömrəsi", "Line numbers", "Satır numarası", "أرقام الأسطر", "Номера строк") },
+  { id: "jsoncsv", label: L("JSON-dan CSV", "JSON to CSV", "JSON'dan CSV", "من JSON إلى CSV", "JSON в CSV") },
+  { id: "palette", label: L("Rəng palitrası", "Color palette", "Renk paleti", "لوحة الألوان", "Палитра") },
 ];
 
 export const TOOL_GROUPS: readonly { id: string; title: Record<Lang, string>; ids: readonly ToolId[] }[] = [
@@ -184,7 +194,7 @@ export const TOOL_GROUPS: readonly { id: string; title: Record<Lang, string>; id
   {
     id: "turn",
     title: L("Çevirici", "Converter", "Dönüştürücü", "محوّل", "Конвертер"),
-    ids: ["htaccess", "gradient", "strength", "table", "meta", "sitemap", "utm", "robots", "slug", "mime", "percent", "contrast", "days", "shadow", "cron", "chmod", "base", "pxrem", "unix", "color", "csv"],
+    ids: ["radius", "trim", "lines", "jsoncsv", "palette", "htaccess", "gradient", "strength", "table", "meta", "sitemap", "utm", "robots", "slug", "mime", "percent", "contrast", "days", "shadow", "cron", "chmod", "base", "pxrem", "unix", "color", "csv"],
   },
 ];
 

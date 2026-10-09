@@ -50,6 +50,11 @@ export const TOOL_SLUG: Record<ToolId, string> = {
   gradient: "css-gradient",
   strength: "password-strength",
   table: "html-table",
+  radius: "css-radius",
+  trim: "trim-spaces",
+  lines: "line-numbers",
+  jsoncsv: "json-to-csv",
+  palette: "color-palette",
 };
 
 export const TOOL_LEAD: Record<ToolId, Record<Lang, string>> = {
@@ -375,7 +380,43 @@ export const TOOL_LEAD: Record<ToolId, Record<Lang, string>> = {
     "يصنع جدول HTML من نص مفصول بفواصل.\n\nمثال: ad,yaş ثم Aysel,20. السطر الأول يصبح عنوانًا.\n\nهذه الصفحة لا تضع الجدول في الموقع. انسخ الكود إلى HTML.",
     "Делает таблицу HTML из текста через запятую.\n\nПример: ad,yaş затем Aysel,20. Первая строка становится заголовком.\n\nСтраница таблицу на сайт не ставит. Скопируй код в HTML.",
   ),
+  radius: L(
+    "Rəqəmdən border-radius sətri çıxarır.\n\nNümunə: 12 yazılanda border-radius: 12px; olur. Düymə və kartın küncünü yuvarlaq etmək üçün işlənir.\n\nBu səhifə CSS faylını dəyişmir. Sətri kopyalayıb qaydaya qoyursan.",
+    "Makes a border-radius line from a number.\n\nExample: 12 becomes border-radius: 12px;. It rounds the corner of a button or a card.\n\nThis page does not change a CSS file. Copy the line into a rule.",
+    "Rakamdan border-radius satırı çıkarır.\n\nÖrnek: 12 yazılınca border-radius: 12px; olur. Düğme ve kartın köşesini yuvarlamak için kullanılır.\n\nBu sayfa CSS dosyasını değiştirmez. Satırı kopyalayıp kurala koyarsın.",
+    "يصنع سطر border-radius من رقم.\n\nمثال: 12 تصبح border-radius: 12px;. تُستخدم لتدوير زاوية زر أو بطاقة.\n\nهذه الصفحة لا تغيّر ملف CSS. انسخ السطر إلى قاعدة.",
+    "Делает строку border-radius из числа.\n\nПример: 12 становится border-radius: 12px;. Скругляет угол кнопки или карточки.\n\nСтраница CSS-файл не меняет. Скопируй строку в правило.",
+  ),
+  trim: L(
+    "Mətnin əvvəlindəki, sonundakı və sətir arasındakı artıq boşluğu silir.\n\nNümunə: iki boşluqla yazılmış Salam dünya bir boşluqla qalır.\n\nSətirlərin özü silinmir. Yalnız artıq boşluq gedir.",
+    "Removes extra spaces at the start, at the end, and between words.\n\nExample: Salam dünya written with two spaces stays with one space.\n\nThe lines themselves stay. Only the extra space goes.",
+    "Metnin başındaki, sonundaki ve satır arasındaki fazla boşluğu siler.\n\nÖrnek: iki boşlukla yazılmış Salam dünya bir boşlukla kalır.\n\nSatırların kendisi silinmez. Yalnız fazla boşluk gider.",
+    "يحذف الفراغ الزائد في أول النص وآخره وبين الكلمات.\n\nمثال: Salam dünya المكتوبة بفراغين تبقى بفراغ واحد.\n\nالأسطر نفسها لا تُحذف. يذهب الفراغ الزائد فقط.",
+    "Убирает лишние пробелы в начале, в конце и между словами.\n\nПример: Salam dünya с двумя пробелами остаётся с одним.\n\nСами строки не удаляются. Уходит только лишний пробел.",
+  ),
+  lines: L(
+    "Hər sətirin əvvəlinə nömrə qoyur.\n\nNümunə: üç sətir 1, 2 və 3 olur. Səhvi göstərəndə sətir nömrəsini demək üçün işlənir.\n\nBu səhifə kodu işlətmir. Yalnız nömrə yazır.",
+    "Puts a number at the start of each line.\n\nExample: three lines become 1, 2 and 3. It is used when you need to point at a line.\n\nThis page does not run the code. It only writes the numbers.",
+    "Her satırın başına numara koyar.\n\nÖrnek: üç satır 1, 2 ve 3 olur. Hatayı gösterirken satır numarasını söylemek için kullanılır.\n\nBu sayfa kodu çalıştırmaz. Yalnız numara yazar.",
+    "يضع رقمًا في أول كل سطر.\n\nمثال: ثلاثة أسطر تصبح 1 و2 و3. يُستخدم عند الإشارة إلى سطر.\n\nهذه الصفحة لا تشغّل الكود. تكتب الأرقام فقط.",
+    "Ставит номер в начало каждой строки.\n\nПример: три строки становятся 1, 2 и 3. Нужно, когда указываешь на строку.\n\nСтраница код не запускает. Только пишет номера.",
+  ),
+  jsoncsv: L(
+    "JSON siyahısından CSV cədvəli çıxarır.\n\nNümunə: ad və yaş olan bir obyekt birinci sətirdə ad,yaş, ikinci sətirdə dəyərləri olur.\n\nCSV-dən JSON ayrıca alətdir. Bu onun əksidir.",
+    "Makes a CSV table from a JSON list.\n\nExample: an object with name and age puts name,age on the first line and the values on the second.\n\nCSV to JSON is a separate tool. This is the other way.",
+    "JSON listesinden CSV tablosu çıkarır.\n\nÖrnek: ad ve yaş olan bir nesne ilk satırda ad,yaş, ikinci satırda değerleri olur.\n\nCSV'den JSON ayrı araçtır. Bu onun tersidir.",
+    "يصنع جدول CSV من قائمة JSON.\n\nمثال: كائن فيه اسم وعمر يضع ad,yaş في السطر الأول والقيم في الثاني.\n\nمن CSV إلى JSON أداة منفصلة. هذه هي الجهة الأخرى.",
+    "Делает таблицу CSV из списка JSON.\n\nПример: объект с именем и возрастом ставит ad,yaş в первую строку, значения во вторую.\n\nCSV в JSON — отдельный инструмент. Это обратная сторона.",
+  ),
+  palette: L(
+    "Bir rəngdən açıq və tünd variant çıxarır.\n\nNümunə: #1d4ed8. Birinci sətir özüdür, ikinci açıq, üçüncü tünddür.\n\nBu səhifə şəkli dəyişmir. Yalnız üç kod göstərir.",
+    "Makes a lighter and a darker variant from one color.\n\nExample: #1d4ed8. The first line is the color, the second is lighter, the third is darker.\n\nThis page does not change a picture. It only shows three codes.",
+    "Bir renkten açık ve koyu varyant çıkarır.\n\nÖrnek: #1d4ed8. İlk satır kendisi, ikinci açık, üçüncü koyudur.\n\nBu sayfa resmi değiştirmez. Yalnız üç kod gösterir.",
+    "يصنع درجة أفتح وأغمق من لون واحد.\n\nمثال: #1d4ed8. السطر الأول اللون نفسه والثاني أفتح والثالث أغمق.\n\nهذه الصفحة لا تغيّر صورة. تُظهر ثلاثة رموز فقط.",
+    "Делает более светлый и более тёмный вариант из одного цвета.\n\nПример: #1d4ed8. Первая строка — сам цвет, вторая светлее, третья темнее.\n\nСтраница картинку не меняет. Только показывает три кода.",
+  ),
 };
+
 
 
 
@@ -409,6 +450,11 @@ export const TOOL_SAMPLE: Partial<Record<ToolId, { text?: string; extra?: string
   gradient: { text: "#111111", extra: "#ffffff" },
   strength: { text: "123456" },
   table: { text: "ad,yaş\nAysel,20" },
+  radius: { text: "12" },
+  trim: { text: "  Salam   dünya  " },
+  lines: { text: "bir\niki\nüç" },
+  jsoncsv: { text: "[{\"ad\":\"Aysel\",\"yaş\":20}]" },
+  palette: { text: "#1d4ed8" },
 };
 
 export function toolIdFromSlug(slug: string) {
