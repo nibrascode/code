@@ -504,3 +504,96 @@ export function convertChmod(text: string) {
   }
   throw new Error("chmod");
 }
+
+export function makeRobots(text: string) {
+  const paths = text
+    .split(/\n+/)
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line) => (line.startsWith("/") ? line : `/${line}`));
+  const body = paths.length ? paths.map((path) => `Disallow: ${path}`).join("\n") : "Allow: /";
+  return `User-agent: *\n${body}`;
+}
+
+function channel(hex: string, at: number) {
+  const value = parseInt(hex.slice(at, at + 2), 16) / 255;
+  return value <= 0.03928 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+}
+
+function luminance(hex: string) {
+  return 0.2126 * channel(hex, 0) + 0.7152 * channel(hex, 2) + 0.0722 * channel(hex, 4);
+}
+
+export function colorContrast(front: string, back: string) {
+  const read = (value: string) => {
+    const hex = value.trim().replace("#", "");
+    const full = hex.length === 3 ? hex.split("").map((part) => part + part).join("") : hex;
+    if (!/^[0-9a-f]{6}$/i.test(full)) throw new Error("color");
+    return full.toLowerCase();
+  };
+  const a = read(front);
+  const b = read(back);
+  const light = Math.max(luminance(a), luminance(b));
+  const dark = Math.min(luminance(a), luminance(b));
+  const ratio = (light + 0.05) / (dark + 0.05);
+  const shown = Math.round(ratio * 100) / 100;
+  return `#${a} / #${b}\n${shown}:1\nAA: ${ratio >= 4.5 ? "ok" : "no"}\nAAA: ${ratio >= 7 ? "ok" : "no"}`;
+}
+
+export function makeSlug(text: string) {
+  const map: Record<string, string> = { ə: "e", ı: "i", ö: "o", ü: "u", ğ: "g", ş: "s", ç: "c", â: "a", î: "i", û: "u" };
+  const slug = text
+    .trim()
+    .toLowerCase()
+    .replace(/[əıöüğşçâîû]/g, (letter) => map[letter] || letter)
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+  if (!slug) throw new Error("slug");
+  return slug;
+}
+
+export function percentOf(text: string) {
+  const raw = text.trim().replace(/,/g, ".");
+  const ratio = raw.match(/^(-?\d+(?:\.\d+)?)\s*(?:\/|of)\s*(-?\d+(?:\.\d+)?)$/i);
+  if (ratio) {
+    const part = Number(ratio[1]);
+    const whole = Number(ratio[2]);
+    if (!whole) throw new Error("percent");
+    return `${part} / ${whole}\n${Math.round((part / whole) * 10000) / 100}%`;
+  }
+  const pct = raw.match(/^(-?\d+(?:\.\d+)?)\s*%?\s+(?:of\s+)?(-?\d+(?:\.\d+)?)$/i);
+  if (!pct) throw new Error("percent");
+  const rate = Number(pct[1]);
+  const whole = Number(pct[2]);
+  return `${rate}% of ${whole}\n${Math.round(whole * rate) / 100}`;
+}
+
+const MIME: Record<string, string> = {
+  png: "image/png",
+  jpg: "image/jpeg",
+  jpeg: "image/jpeg",
+  gif: "image/gif",
+  webp: "image/webp",
+  svg: "image/svg+xml",
+  pdf: "application/pdf",
+  json: "application/json",
+  xml: "application/xml",
+  html: "text/html",
+  css: "text/css",
+  js: "text/javascript",
+  txt: "text/plain",
+  csv: "text/csv",
+  zip: "application/zip",
+  mp3: "audio/mpeg",
+  mp4: "video/mp4",
+  woff2: "font/woff2",
+};
+
+export function mimeType(text: string) {
+  const ext = text.trim().toLowerCase().replace(/^\./, "").split(".").pop() || "";
+  const type = MIME[ext];
+  if (!type) throw new Error("mime");
+  return `.${ext}\n${type}`;
+}

@@ -22,6 +22,10 @@ import {
   Ruler,
   Scan,
   Shield,
+  Bot,
+  Contrast,
+  Percent,
+  FileType,
   Sparkles,
   Table,
   TextQuote,
@@ -66,6 +70,11 @@ import {
   convertPxRem,
   convertChmod,
   explainCron,
+  makeRobots,
+  colorContrast,
+  makeSlug,
+  percentOf,
+  mimeType,
 } from "@/lib/tools-run";
 
 const NEEDS_TEXT = new Set<ToolId>([
@@ -95,6 +104,11 @@ const NEEDS_TEXT = new Set<ToolId>([
   "jwt",
   "cron",
   "chmod",
+  "robots",
+  "contrast",
+  "slug",
+  "percent",
+  "mime",
 ]);
 const PAIR = new Set<ToolId>(["base64", "url", "html"]);
 
@@ -140,6 +154,11 @@ const ICONS: Record<ToolId, typeof Braces> = {
   jwt: Scan,
   cron: Clock,
   chmod: Shield,
+  robots: Bot,
+  contrast: Contrast,
+  slug: Link2,
+  percent: Percent,
+  mime: FileType,
 };
 
 async function sha(text: string, name: "SHA-1" | "SHA-256") {
@@ -187,6 +206,11 @@ function runSync(id: ToolId, text: string, count: string, low: string, high: str
   if (id === "jwt") return readJwt(text);
   if (id === "cron") return explainCron(text);
   if (id === "chmod") return convertChmod(text);
+  if (id === "robots") return makeRobots(text);
+  if (id === "contrast") return colorContrast(text, extra || "#ffffff");
+  if (id === "slug") return makeSlug(text);
+  if (id === "percent") return percentOf(text);
+  if (id === "mime") return mimeType(text);
   return "";
 }
 
@@ -339,12 +363,12 @@ export function ToolsPage({ lang, focus }: { lang: Lang; focus?: ToolId }) {
                 ) : null}
                 {NEEDS_TEXT.has(current) ? (
                   <>
-                    {current === "regex" ? (
+                    {current === "regex" || current === "contrast" ? (
                       <textarea
                         value={extra}
                         spellCheck={false}
-                        aria-label={copy.pattern[lang]}
-                        placeholder={copy.pattern[lang]}
+                        aria-label={current === "contrast" ? "#ffffff" : copy.pattern[lang]}
+                        placeholder={current === "contrast" ? "#ffffff" : copy.pattern[lang]}
                         onChange={(event) => setExtra(event.target.value)}
                       />
                     ) : null}

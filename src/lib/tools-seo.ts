@@ -36,6 +36,11 @@ export const TOOL_SLUG: Record<ToolId, string> = {
   jwt: "jwt",
   cron: "cron",
   chmod: "chmod",
+  robots: "robots-txt",
+  contrast: "color-contrast",
+  slug: "slug",
+  percent: "percent",
+  mime: "mime",
 };
 
 export const TOOL_LEAD: Record<ToolId, Record<Lang, string>> = {
@@ -263,7 +268,43 @@ export const TOOL_LEAD: Record<ToolId, Record<Lang, string>> = {
     "يحوّل 755 وrwxr-xr-x. ثلاثة أرقام ثلاث مجموعات: المالك والمجموعة والباقون.\n\nمثال: 755 تصبح rwxr-xr-x. 7 تعني اقرأ واكتب وشغّل. 5 تعني اقرأ وشغّل.\n\nهذه الصفحة لا تغيّر إذن الملف. تعرض الرمز فقط.",
     "Переводит 755 и rwxr-xr-x. Три цифры — три группы: владелец, группа, остальные.\n\nПример: 755 становится rwxr-xr-x. 7 значит читать, писать и запускать. 5 значит читать и запускать.\n\nСтраница права файла не меняет. Только показывает код.",
   ),
+  robots: L(
+    "Saytın robots.txt faylını yazır. Boş buraxsan, bütün səhifələr açıq qalır.\n\nNümunə: /admin yazılanda bu yol bağlı olur. Hər yol ayrı sətirdədir.\n\nBu səhifə faylı serverə qoymur. Nəticəni kopyalayıb saytın kök qovluğuna robots.txt adı ilə qoyursan.",
+    "Writes a site's robots.txt file. Leave it empty and every page stays open.\n\nExample: /admin closes that path. Each path is on its own line.\n\nThis page does not put the file on a server. Copy the result and save it as robots.txt in the site root.",
+    "Sitenin robots.txt dosyasını yazar. Boş bırakırsan bütün sayfalar açık kalır.\n\nÖrnek: /admin yazılınca bu yol kapanır. Her yol ayrı satırdadır.\n\nBu sayfa dosyayı sunucuya koymaz. Sonucu kopyalayıp site köküne robots.txt adıyla koyarsın.",
+    "يكتب ملف robots.txt للموقع. إذا تركته فارغًا تبقى كل الصفحات مفتوحة.\n\nمثال: /admin يغلق هذا المسار. كل مسار في سطر.\n\nهذه الصفحة لا تضع الملف على الخادم. انسخ النتيجة واحفظها باسم robots.txt في جذر الموقع.",
+    "Пишет файл robots.txt сайта. Если оставить пустым, все страницы открыты.\n\nПример: /admin закрывает этот путь. Каждый путь на своей строке.\n\nСтраница не кладёт файл на сервер. Скопируй результат и сохрани как robots.txt в корне сайта.",
+  ),
+  contrast: L(
+    "İki rəngin yazı üçün oxunub-oxunmadığını göstərir.\n\nNümunə: #111111 və #ffffff. Nəticə 4.5-dən böyükdürsə, adi yazı üçün AA keçir.\n\nBu səhifə rəngi dəyişmir. Yalnız fərqi hesablayır.",
+    "Shows whether two colors are readable as text.\n\nExample: #111111 and #ffffff. If the result is over 4.5, normal text passes AA.\n\nThis page does not change the color. It only calculates the difference.",
+    "İki rengin yazı için okunup okunmadığını gösterir.\n\nÖrnek: #111111 ve #ffffff. Sonuç 4.5'ten büyükse normal yazı AA geçer.\n\nBu sayfa rengi değiştirmez. Yalnız farkı hesaplar.",
+    "يبيّن هل اللونان يُقرآن كنص.\n\nمثال: #111111 و#ffffff. إذا كانت النتيجة أكبر من 4.5 يجتاز النص العادي AA.\n\nهذه الصفحة لا تغيّر اللون. تحسب الفرق فقط.",
+    "Показывает, читаются ли два цвета как текст.\n\nПример: #111111 и #ffffff. Если результат больше 4.5, обычный текст проходит AA.\n\nСтраница цвет не меняет. Только считает разницу.",
+  ),
+  slug: L(
+    "Başlıqdan ünvan düzəldir. Boşluq xətt olur, böyük hərf kiçilir.\n\nNümunə: Mənim ilk səhifəm yazılanda menim-ilk-sehifem olur.\n\nə, ö, ü, ş, ç, ğ latın hərfə keçir. Bu səhifə ünvanı sayta yazmır.",
+    "Makes an address from a title. A space becomes a hyphen and capitals become small.\n\nExample: Mənim ilk səhifəm becomes menim-ilk-sehifem.\n\nə, ö, ü, ş, ç and ğ become Latin letters. This page does not write the address onto a site.",
+    "Başlıktan adres kurar. Boşluk çizgi olur, büyük harf küçülür.\n\nÖrnek: Mənim ilk səhifəm yazılınca menim-ilk-sehifem olur.\n\nə, ö, ü, ş, ç, ğ Latin harfe döner. Bu sayfa adresi siteye yazmaz.",
+    "يصنع عنوانًا من العنوان. الفراغ يصبح شرطة والحرف الكبير يصغر.\n\nمثال: Mənim ilk səhifəm تصبح menim-ilk-sehifem.\n\nə وö وü وş وç وğ تصبح حروفًا لاتينية. هذه الصفحة لا تكتب العنوان في الموقع.",
+    "Делает адрес из заголовка. Пробел становится чёрточкой, большие буквы маленькими.\n\nПример: Mənim ilk səhifəm становится menim-ilk-sehifem.\n\nə, ö, ü, ş, ç, ğ переходят в латиницу. Страница адрес на сайт не пишет.",
+  ),
+  percent: L(
+    "Faiz hesablayır. 15 200 yazsan, 200-ün 15 faizi çıxır. 80/100 yazsan, 80-in 100-ə nisbəti çıxır.\n\nNümunə: 15 200 nəticəsi 30 olur. 80/100 nəticəsi 80% olur.\n\nBu səhifə pul saxlamır. Yalnız rəqəmi hesablayır.",
+    "Calculates a percent. 15 200 is 15 percent of 200. 80/100 is how much 80 is of 100.\n\nExample: 15 200 gives 30. 80/100 gives 80%.\n\nThis page does not store money. It only calculates the number.",
+    "Yüzde hesaplar. 15 200 yazarsan 200'ün yüzde 15'i çıkar. 80/100 yazarsan 80'in 100'e oranı çıkar.\n\nÖrnek: 15 200 sonucu 30 olur. 80/100 sonucu %80 olur.\n\nBu sayfa para saklamaz. Yalnız sayıyı hesaplar.",
+    "يحسب النسبة. 15 200 تعني 15 بالمئة من 200. 80/100 تعني كم 80 من 100.\n\nمثال: 15 200 تعطي 30. 80/100 تعطي 80%.\n\nهذه الصفحة لا تحفظ مالًا. تحسب الرقم فقط.",
+    "Считает процент. 15 200 — это 15 процентов от 200. 80/100 — сколько 80 от 100.\n\nПример: 15 200 даёт 30. 80/100 даёт 80%.\n\nСтраница деньги не хранит. Только считает число.",
+  ),
+  mime: L(
+    "Fayl sonundan MIME kodunu göstərir.\n\nNümunə: png yazılanda image/png olur. pdf yazılanda application/pdf olur.\n\nBurada tanınan sonlar: png, jpg, gif, webp, svg, pdf, json, xml, html, css, js, txt, csv, zip, mp3, mp4, woff2.",
+    "Shows the MIME code from a file ending.\n\nExample: png becomes image/png. pdf becomes application/pdf.\n\nKnown endings here: png, jpg, gif, webp, svg, pdf, json, xml, html, css, js, txt, csv, zip, mp3, mp4, woff2.",
+    "Dosya sonundan MIME kodunu gösterir.\n\nÖrnek: png yazılınca image/png olur. pdf yazılınca application/pdf olur.\n\nBurada bilinen sonlar: png, jpg, gif, webp, svg, pdf, json, xml, html, css, js, txt, csv, zip, mp3, mp4, woff2.",
+    "يُظهر رمز MIME من نهاية الملف.\n\nمثال: png تصبح image/png. pdf تصبح application/pdf.\n\nالنهايات المعروفة هنا: png وjpg وgif وwebp وsvg وpdf وjson وxml وhtml وcss وjs وtxt وcsv وzip وmp3 وmp4 وwoff2.",
+    "Показывает код MIME по окончанию файла.\n\nПример: png становится image/png. pdf становится application/pdf.\n\nЗдесь известны: png, jpg, gif, webp, svg, pdf, json, xml, html, css, js, txt, csv, zip, mp3, mp4, woff2.",
+  ),
 };
+
 
 
 
@@ -280,6 +321,11 @@ export const TOOL_SAMPLE: Partial<Record<ToolId, { text?: string; extra?: string
   css: { text: "body{color:red;margin:0}" },
   cron: { text: "0 9 * * 1" },
   chmod: { text: "755" },
+  robots: { text: "/admin" },
+  contrast: { text: "#111111", extra: "#ffffff" },
+  slug: { text: "Mənim ilk səhifəm" },
+  percent: { text: "15 200" },
+  mime: { text: "png" },
 };
 
 export function toolIdFromSlug(slug: string) {

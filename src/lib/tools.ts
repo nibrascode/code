@@ -35,7 +35,12 @@ export type ToolId =
   | "pxrem"
   | "jwt"
   | "cron"
-  | "chmod";
+  | "chmod"
+  | "robots"
+  | "contrast"
+  | "slug"
+  | "percent"
+  | "mime";
 
 const L = (az: string, en: string, tr: string, ar: string, ru: string): Record<Lang, string> => ({ az, en, tr, ar, ru });
 
@@ -117,6 +122,11 @@ export const TOOLS: readonly { id: ToolId; label: Record<Lang, string> }[] = [
   { id: "jwt", label: L("JWT oxuma", "Read a JWT", "JWT oku", "قراءة JWT", "Чтение JWT") },
   { id: "cron", label: L("Cron izahı", "Cron explainer", "Cron açıklaması", "شرح Cron", "Пояснение Cron") },
   { id: "chmod", label: L("chmod", "chmod", "chmod", "chmod", "chmod") },
+  { id: "robots", label: L("robots.txt", "robots.txt", "robots.txt", "robots.txt", "robots.txt") },
+  { id: "contrast", label: L("Rəng kontrastı", "Color contrast", "Renk kontrastı", "تباين اللون", "Контраст цвета") },
+  { id: "slug", label: L("Slug", "Slug", "Slug", "Slug", "Slug") },
+  { id: "percent", label: L("Faiz", "Percent", "Yüzde", "نسبة مئوية", "Процент") },
+  { id: "mime", label: L("MIME", "MIME", "MIME", "MIME", "MIME") },
 ];
 
 export const TOOL_GROUPS: readonly { id: string; title: Record<Lang, string>; ids: readonly ToolId[] }[] = [
@@ -148,7 +158,7 @@ export const TOOL_GROUPS: readonly { id: string; title: Record<Lang, string>; id
   {
     id: "turn",
     title: L("Çevirici", "Converter", "Dönüştürücü", "محوّل", "Конвертер"),
-    ids: ["cron", "chmod", "base", "pxrem", "unix", "color", "csv"],
+    ids: ["robots", "slug", "mime", "percent", "contrast", "cron", "chmod", "base", "pxrem", "unix", "color", "csv"],
   },
 ];
 
