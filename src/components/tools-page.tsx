@@ -30,6 +30,11 @@ import {
   Map,
   CalendarRange,
   Square,
+  CornerDownRight,
+  Blend,
+  ShieldAlert,
+  Table2,
+  Cake,
   Sparkles,
   Table,
   TextQuote,
@@ -84,6 +89,11 @@ import {
   makeUtm,
   dateDiff,
   cssShadow,
+  makeRedirect,
+  cssGradient,
+  passwordStrength,
+  htmlTable,
+  ageFrom,
 } from "@/lib/tools-run";
 
 const NEEDS_TEXT = new Set<ToolId>([
@@ -123,6 +133,11 @@ const NEEDS_TEXT = new Set<ToolId>([
   "utm",
   "days",
   "shadow",
+  "htaccess",
+  "gradient",
+  "strength",
+  "table",
+  "age",
 ]);
 const PAIR = new Set<ToolId>(["base64", "url", "html"]);
 
@@ -178,6 +193,11 @@ const ICONS: Record<ToolId, typeof Braces> = {
   utm: Link2,
   days: CalendarRange,
   shadow: Square,
+  htaccess: CornerDownRight,
+  gradient: Blend,
+  strength: ShieldAlert,
+  table: Table2,
+  age: Cake,
 };
 
 async function sha(text: string, name: "SHA-1" | "SHA-256") {
@@ -235,6 +255,23 @@ function runSync(id: ToolId, text: string, count: string, low: string, high: str
   if (id === "utm") return makeUtm(text, extra, count);
   if (id === "days") return dateDiff(text, extra);
   if (id === "shadow") return cssShadow(text);
+  if (id === "htaccess") return makeRedirect(text, extra);
+  if (id === "gradient") return cssGradient(text, extra);
+  if (id === "strength") {
+    const notes = passwordStrength(text).split("\n");
+    const labels: Record<string, string> = {
+      short: TOOLS_PAGE.short[lang],
+      case: TOOLS_PAGE.mixed[lang],
+      digit: TOOLS_PAGE.digit[lang],
+      symbol: TOOLS_PAGE.symbol[lang],
+      repeat: TOOLS_PAGE.repeat[lang],
+      common: TOOLS_PAGE.common[lang],
+      ok: TOOLS_PAGE.strong[lang],
+    };
+    return notes.map((note) => labels[note] || note).join("\n");
+  }
+  if (id === "table") return htmlTable(text);
+  if (id === "age") return ageFrom(text);
   return "";
 }
 
@@ -387,7 +424,7 @@ export function ToolsPage({ lang, focus }: { lang: Lang; focus?: ToolId }) {
                 ) : null}
                 {NEEDS_TEXT.has(current) ? (
                   <>
-                    {current === "regex" || current === "contrast" || current === "meta" || current === "utm" || current === "days" ? (
+                    {current === "regex" || current === "contrast" || current === "meta" || current === "utm" || current === "days" || current === "htaccess" || current === "gradient" ? (
                       <textarea
                         value={extra}
                         spellCheck={false}

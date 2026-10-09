@@ -45,7 +45,12 @@ export type ToolId =
   | "sitemap"
   | "utm"
   | "days"
-  | "shadow";
+  | "shadow"
+  | "htaccess"
+  | "gradient"
+  | "strength"
+  | "table"
+  | "age";
 
 const L = (az: string, en: string, tr: string, ar: string, ru: string): Record<Lang, string> => ({ az, en, tr, ar, ru });
 
@@ -76,6 +81,13 @@ export const TOOLS_PAGE = {
   pattern: L("Nümunə", "Pattern", "Kalıp", "النمط", "Шаблон"),
   second: L("İkinci mətn", "Second text", "İkinci metin", "النص الثاني", "Второй текст"),
   third: L("Şəkil və ya kampaniya", "Image or campaign", "Resim veya kampanya", "صورة أو حملة", "Картинка или кампания"),
+  short: L("Qısadır, ən az 8 simvol olsun.", "It is short. Use at least 8 characters.", "Kısa. En az 8 karakter olsun.", "قصيرة. اجعلها 8 أحرف على الأقل.", "Короткий. Нужно хотя бы 8 символов."),
+  mixed: L("Böyük və kiçik hərf yoxdur.", "It has no mix of big and small letters.", "Büyük ve küçük harf yok.", "لا يوجد حرف كبير وصغير.", "Нет больших и маленьких букв."),
+  digit: L("Rəqəm yoxdur.", "It has no digit.", "Rakam yok.", "لا يوجد رقم.", "Нет цифры."),
+  symbol: L("Xüsusi simvol yoxdur.", "It has no special character.", "Özel karakter yok.", "لا يوجد رمز خاص.", "Нет особого символа."),
+  repeat: L("Eyni simvol təkrarlanır.", "The same character repeats.", "Aynı karakter tekrar eder.", "يتكرر الحرف نفسه.", "Один символ повторяется."),
+  common: L("Çox işlənən şifrədir.", "It is a common password.", "Çok kullanılan paroladır.", "كلمة سر شائعة.", "Это частый пароль."),
+  strong: L("Qısa yoxlamadan keçdi.", "It passed the short check.", "Kısa kontrolden geçti.", "اجتاز الفحص القصير.", "Прошёл короткую проверку."),
   upper: L("Böyük", "Upper", "Büyük", "كبير", "Верхний"),
   lower: L("Kiçik", "Lower", "Küçük", "صغير", "Нижний"),
   words: L("Söz", "Words", "Söz", "كلمات", "Слова"),
@@ -138,6 +150,11 @@ export const TOOLS: readonly { id: ToolId; label: Record<Lang, string> }[] = [
   { id: "utm", label: L("UTM", "UTM", "UTM", "UTM", "UTM") },
   { id: "days", label: L("Tarix fərqi", "Date difference", "Tarih farkı", "فرق التاريخ", "Разница дат") },
   { id: "shadow", label: L("CSS kölgə", "CSS shadow", "CSS gölge", "ظل CSS", "Тень CSS") },
+  { id: "htaccess", label: L("htaccess", "htaccess", "htaccess", "htaccess", "htaccess") },
+  { id: "gradient", label: L("CSS gradient", "CSS gradient", "CSS gradient", "تدرج CSS", "Градиент CSS") },
+  { id: "strength", label: L("Şifrə gücü", "Password strength", "Parola gücü", "قوة كلمة السر", "Надёжность пароля") },
+  { id: "table", label: L("HTML cədvəl", "HTML table", "HTML tablo", "جدول HTML", "Таблица HTML") },
+  { id: "age", label: L("Yaş", "Age", "Yaş", "العمر", "Возраст") },
 ];
 
 export const TOOL_GROUPS: readonly { id: string; title: Record<Lang, string>; ids: readonly ToolId[] }[] = [
@@ -169,7 +186,7 @@ export const TOOL_GROUPS: readonly { id: string; title: Record<Lang, string>; id
   {
     id: "turn",
     title: L("Çevirici", "Converter", "Dönüştürücü", "محوّل", "Конвертер"),
-    ids: ["meta", "sitemap", "utm", "robots", "slug", "mime", "percent", "contrast", "days", "shadow", "cron", "chmod", "base", "pxrem", "unix", "color", "csv"],
+    ids: ["htaccess", "gradient", "strength", "table", "age", "meta", "sitemap", "utm", "robots", "slug", "mime", "percent", "contrast", "days", "shadow", "cron", "chmod", "base", "pxrem", "unix", "color", "csv"],
   },
 ];
 

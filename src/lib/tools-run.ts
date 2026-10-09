@@ -646,3 +646,62 @@ export function cssShadow(text: string) {
   if ([x, y, blur].some((part) => !/^-?\d+$/.test(part))) throw new Error("shadow");
   return `box-shadow: ${x}px ${y}px ${blur}px ${color};`;
 }
+
+export function makeRedirect(from: string, to: string) {
+  const oldUrl = from.trim();
+  const next = to.trim();
+  if (!oldUrl || !next) throw new Error("redirect");
+  return `Redirect 301 ${oldUrl} ${next}`;
+}
+
+export function cssGradient(from: string, to: string) {
+  const read = (value: string) => {
+    const hex = value.trim().replace("#", "");
+    const full = hex.length === 3 ? hex.split("").map((part) => part + part).join("") : hex;
+    if (!/^[0-9a-f]{6}$/i.test(full)) throw new Error("gradient");
+    return `#${full.toLowerCase()}`;
+  };
+  return `background: linear-gradient(90deg, ${read(from)}, ${read(to)});`;
+}
+
+export function passwordStrength(text: string) {
+  const raw = text.trim();
+  if (!raw) throw new Error("strength");
+  const notes = [];
+  if (raw.length < 8) notes.push("short");
+  if (!/[a-z]/.test(raw) || !/[A-Z]/.test(raw)) notes.push("case");
+  if (!/\d/.test(raw)) notes.push("digit");
+  if (!/[^A-Za-z0-9]/.test(raw)) notes.push("symbol");
+  if (/(.)\1{2,}/.test(raw)) notes.push("repeat");
+  const weak = new Set(["123456", "password", "qwerty", "111111", "sifre", "parol"]);
+  if (weak.has(raw.toLowerCase())) notes.push("common");
+  return notes.length ? notes.join("\n") : "ok";
+}
+
+export function htmlTable(text: string) {
+  const rows = text
+    .split(/\n+/)
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line) => line.split(",").map((cell) => cell.trim()));
+  if (!rows.length) throw new Error("table");
+  const body = rows
+    .map((row, index) => {
+      const tag = index === 0 ? "th" : "td";
+      return `  <tr>${row.map((cell) => `<${tag}>${esc(cell)}</${tag}>`).join("")}</tr>`;
+    })
+    .join("\n");
+  return `<table>\n${body}\n</table>`;
+}
+
+export function ageFrom(text: string) {
+  const born = new Date(text.trim());
+  if (Number.isNaN(born.getTime())) throw new Error("age");
+  const now = new Date();
+  let years = now.getFullYear() - born.getFullYear();
+  const before = now.getMonth() < born.getMonth() || (now.getMonth() === born.getMonth() && now.getDate() < born.getDate());
+  if (before) years -= 1;
+  const days = Math.floor((now.getTime() - born.getTime()) / 86400000);
+  if (days < 0) throw new Error("age");
+  return `${years}\n${days}`;
+}

@@ -46,6 +46,11 @@ export const TOOL_SLUG: Record<ToolId, string> = {
   utm: "utm",
   days: "date-diff",
   shadow: "css-shadow",
+  htaccess: "htaccess",
+  gradient: "css-gradient",
+  strength: "password-strength",
+  table: "html-table",
+  age: "age",
 };
 
 export const TOOL_LEAD: Record<ToolId, Record<Lang, string>> = {
@@ -343,7 +348,43 @@ export const TOOL_LEAD: Record<ToolId, Record<Lang, string>> = {
     "يصنع سطر box-shadow من أرقام.\n\nمثال: 8 16 24 #111111. الأول للجانب والثاني للأسفل والثالث للانتشار والأخير للون.\n\nهذه الصفحة لا تغيّر ملف CSS. انسخ السطر إلى قاعدة.",
     "Делает строку box-shadow из чисел.\n\nПример: 8 16 24 #111111. Первое вбок, второе вниз, третье размытие, последнее цвет.\n\nСтраница CSS-файл не меняет. Скопируй строку в правило.",
   ),
+  htaccess: L(
+    "Köhnə ünvandan yeni ünvana Redirect 301 sətri yazır.\n\nNümunə: /eski və /yeni. Nəticəni .htaccess faylına qoyursan.\n\nBu səhifə serveri dəyişmir. Sətri özün əlavə edirsən.",
+    "Writes a Redirect 301 line from an old address to a new one.\n\nExample: /eski and /yeni. You put the result in the .htaccess file.\n\nThis page does not change a server. You add the line yourself.",
+    "Eski adresten yeni adrese Redirect 301 satırı yazar.\n\nÖrnek: /eski ve /yeni. Sonucu .htaccess dosyasına koyarsın.\n\nBu sayfa sunucuyu değiştirmez. Satırı sen eklersin.",
+    "يكتب سطر Redirect 301 من عنوان قديم إلى جديد.\n\nمثال: /eski و/yeni. تضع النتيجة في ملف htaccess.\n\nهذه الصفحة لا تغيّر الخادم. أنت تضيف السطر.",
+    "Пишет строку Redirect 301 со старого адреса на новый.\n\nПример: /eski и /yeni. Результат кладут в файл .htaccess.\n\nСтраница сервер не меняет. Строку добавляешь сам.",
+  ),
+  gradient: L(
+    "İki rəngdən linear-gradient sətri çıxarır.\n\nNümunə: #111111 və #ffffff. Nəticə soldan sağa keçid olur.\n\nBu səhifə CSS faylını dəyişmir. Sətri kopyalayıb qaydaya qoyursan.",
+    "Makes a linear-gradient line from two colors.\n\nExample: #111111 and #ffffff. The result goes from left to right.\n\nThis page does not change a CSS file. Copy the line into a rule.",
+    "İki renkten linear-gradient satırı çıkarır.\n\nÖrnek: #111111 ve #ffffff. Sonuç soldan sağa geçer.\n\nBu sayfa CSS dosyasını değiştirmez. Satırı kopyalayıp kurala koyarsın.",
+    "يصنع سطر linear-gradient من لونين.\n\nمثال: #111111 و#ffffff. النتيجة تنتقل من اليسار إلى اليمين.\n\nهذه الصفحة لا تغيّر ملف CSS. انسخ السطر إلى قاعدة.",
+    "Делает строку linear-gradient из двух цветов.\n\nПример: #111111 и #ffffff. Результат идёт слева направо.\n\nСтраница CSS-файл не меняет. Скопируй строку в правило.",
+  ),
+  strength: L(
+    "Şifrənin qısa, təkrar və ya zəif olduğunu göstərir. Şifrəni saxlamır.\n\nNümunə: 123456 zəif sayılır. Uzun, böyük hərf, rəqəm və simvol olan şifrə yoxlamadan keçir.\n\nBu səhifə şifrəni heç yerə göndərmir.",
+    "Shows if a password is short, repeated, or weak. It does not save the password.\n\nExample: 123456 counts as weak. A long password with a capital, a digit, and a symbol passes the check.\n\nThis page does not send the password anywhere.",
+    "Parolanın kısa, tekrarlı veya zayıf olduğunu gösterir. Parolayı saklamaz.\n\nÖrnek: 123456 zayıf sayılır. Uzun, büyük harf, rakam ve simvol olan parola kontrolden geçer.\n\nBu sayfa parolayı hiçbir yere göndermez.",
+    "يُظهر إن كانت كلمة السر قصيرة أو مكررة أو ضعيفة. لا يحفظها.\n\nمثال: 123456 تُعد ضعيفة. كلمة طويلة فيها حرف كبير ورقم ورمز تجتاز الفحص.\n\nهذه الصفحة لا ترسل كلمة السر إلى أي مكان.",
+    "Показывает, короткий, повторный или слабый пароль. Пароль не сохраняет.\n\nПример: 123456 считается слабым. Длинный пароль с большой буквой, цифрой и символом проходит проверку.\n\nСтраница пароль никуда не отправляет.",
+  ),
+  table: L(
+    "Vergüllə ayrılmış mətndən HTML cədvəli çıxarır.\n\nNümunə: ad,yaş sonra Aysel,20. Birinci sətir başlıq olur.\n\nBu səhifə cədvəli sayta qoymur. Kodu kopyalayıb HTML içinə qoyursan.",
+    "Makes an HTML table from comma-separated text.\n\nExample: name,age then Aysel,20. The first line becomes the heading.\n\nThis page does not put the table on a site. Copy the code into HTML.",
+    "Virgülle ayrılmış metinden HTML tablosu çıkarır.\n\nÖrnek: ad,yaş sonra Aysel,20. İlk satır başlık olur.\n\nBu sayfa tabloyu siteye koymaz. Kodu kopyalayıp HTML içine koyarsın.",
+    "يصنع جدول HTML من نص مفصول بفواصل.\n\nمثال: ad,yaş ثم Aysel,20. السطر الأول يصبح عنوانًا.\n\nهذه الصفحة لا تضع الجدول في الموقع. انسخ الكود إلى HTML.",
+    "Делает таблицу HTML из текста через запятую.\n\nПример: ad,yaş затем Aysel,20. Первая строка становится заголовком.\n\nСтраница таблицу на сайт не ставит. Скопируй код в HTML.",
+  ),
+  age: L(
+    "Doğum tarixindən bu günə qədər ili və günü göstərir.\n\nNümunə: 2000-01-01. Birinci sətir ildir, ikinci sətir gün sayıdır.\n\nTarix il-ay-gün şəklində yazılır. Bu səhifə tarixi saxlamır.",
+    "Shows the years and days from a birth date to today.\n\nExample: 2000-01-01. The first line is years, the second line is the day count.\n\nWrite the date as year-month-day. This page does not save the date.",
+    "Doğum tarihinden bugüne yılı ve günü gösterir.\n\nÖrnek: 2000-01-01. İlk satır yıldır, ikinci satır gün sayısıdır.\n\nTarih yıl-ay-gün biçiminde yazılır. Bu sayfa tarihi saklamaz.",
+    "يُظهر السنوات والأيام من تاريخ الميلاد إلى اليوم.\n\nمثال: 2000-01-01. السطر الأول السنوات والثاني عدد الأيام.\n\nيُكتب التاريخ سنة-شهر-يوم. هذه الصفحة لا تحفظ التاريخ.",
+    "Показывает годы и дни от даты рождения до сегодня.\n\nПример: 2000-01-01. Первая строка — годы, вторая — число дней.\n\nДата пишется год-месяц-день. Страница дату не хранит.",
+  ),
 };
+
 
 
 
@@ -372,6 +413,11 @@ export const TOOL_SAMPLE: Partial<Record<ToolId, { text?: string; extra?: string
   utm: { text: "https://www.nibrascode.com", extra: "google", count: "ders" },
   days: { text: "2026-01-01", extra: "2026-01-31" },
   shadow: { text: "8 16 24 #111111" },
+  htaccess: { text: "/eski", extra: "/yeni" },
+  gradient: { text: "#111111", extra: "#ffffff" },
+  strength: { text: "123456" },
+  table: { text: "ad,yaş\nAysel,20" },
+  age: { text: "2000-01-01" },
 };
 
 export function toolIdFromSlug(slug: string) {
