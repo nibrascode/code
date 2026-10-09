@@ -34,7 +34,6 @@ import {
   Blend,
   ShieldAlert,
   Table2,
-  Cake,
   Sparkles,
   Table,
   TextQuote,
@@ -93,7 +92,6 @@ import {
   cssGradient,
   passwordStrength,
   htmlTable,
-  ageFrom,
 } from "@/lib/tools-run";
 
 const NEEDS_TEXT = new Set<ToolId>([
@@ -137,7 +135,6 @@ const NEEDS_TEXT = new Set<ToolId>([
   "gradient",
   "strength",
   "table",
-  "age",
 ]);
 const PAIR = new Set<ToolId>(["base64", "url", "html"]);
 
@@ -197,7 +194,6 @@ const ICONS: Record<ToolId, typeof Braces> = {
   gradient: Blend,
   strength: ShieldAlert,
   table: Table2,
-  age: Cake,
 };
 
 async function sha(text: string, name: "SHA-1" | "SHA-256") {
@@ -271,7 +267,6 @@ function runSync(id: ToolId, text: string, count: string, low: string, high: str
     return notes.map((note) => labels[note] || note).join("\n");
   }
   if (id === "table") return htmlTable(text);
-  if (id === "age") return ageFrom(text);
   return "";
 }
 

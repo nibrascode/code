@@ -50,7 +50,6 @@ export const TOOL_SLUG: Record<ToolId, string> = {
   gradient: "css-gradient",
   strength: "password-strength",
   table: "html-table",
-  age: "age",
 };
 
 export const TOOL_LEAD: Record<ToolId, Record<Lang, string>> = {
@@ -376,13 +375,6 @@ export const TOOL_LEAD: Record<ToolId, Record<Lang, string>> = {
     "يصنع جدول HTML من نص مفصول بفواصل.\n\nمثال: ad,yaş ثم Aysel,20. السطر الأول يصبح عنوانًا.\n\nهذه الصفحة لا تضع الجدول في الموقع. انسخ الكود إلى HTML.",
     "Делает таблицу HTML из текста через запятую.\n\nПример: ad,yaş затем Aysel,20. Первая строка становится заголовком.\n\nСтраница таблицу на сайт не ставит. Скопируй код в HTML.",
   ),
-  age: L(
-    "Doğum tarixindən bu günə qədər ili və günü göstərir.\n\nNümunə: 2000-01-01. Birinci sətir ildir, ikinci sətir gün sayıdır.\n\nTarix il-ay-gün şəklində yazılır. Bu səhifə tarixi saxlamır.",
-    "Shows the years and days from a birth date to today.\n\nExample: 2000-01-01. The first line is years, the second line is the day count.\n\nWrite the date as year-month-day. This page does not save the date.",
-    "Doğum tarihinden bugüne yılı ve günü gösterir.\n\nÖrnek: 2000-01-01. İlk satır yıldır, ikinci satır gün sayısıdır.\n\nTarih yıl-ay-gün biçiminde yazılır. Bu sayfa tarihi saklamaz.",
-    "يُظهر السنوات والأيام من تاريخ الميلاد إلى اليوم.\n\nمثال: 2000-01-01. السطر الأول السنوات والثاني عدد الأيام.\n\nيُكتب التاريخ سنة-شهر-يوم. هذه الصفحة لا تحفظ التاريخ.",
-    "Показывает годы и дни от даты рождения до сегодня.\n\nПример: 2000-01-01. Первая строка — годы, вторая — число дней.\n\nДата пишется год-месяц-день. Страница дату не хранит.",
-  ),
 };
 
 
@@ -417,7 +409,6 @@ export const TOOL_SAMPLE: Partial<Record<ToolId, { text?: string; extra?: string
   gradient: { text: "#111111", extra: "#ffffff" },
   strength: { text: "123456" },
   table: { text: "ad,yaş\nAysel,20" },
-  age: { text: "2000-01-01" },
 };
 
 export function toolIdFromSlug(slug: string) {

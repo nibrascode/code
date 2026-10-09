@@ -693,15 +693,3 @@ export function htmlTable(text: string) {
     .join("\n");
   return `<table>\n${body}\n</table>`;
 }
-
-export function ageFrom(text: string) {
-  const born = new Date(text.trim());
-  if (Number.isNaN(born.getTime())) throw new Error("age");
-  const now = new Date();
-  let years = now.getFullYear() - born.getFullYear();
-  const before = now.getMonth() < born.getMonth() || (now.getMonth() === born.getMonth() && now.getDate() < born.getDate());
-  if (before) years -= 1;
-  const days = Math.floor((now.getTime() - born.getTime()) / 86400000);
-  if (days < 0) throw new Error("age");
-  return `${years}\n${days}`;
-}

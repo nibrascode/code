@@ -49,8 +49,7 @@ export type ToolId =
   | "htaccess"
   | "gradient"
   | "strength"
-  | "table"
-  | "age";
+  | "table";
 
 const L = (az: string, en: string, tr: string, ar: string, ru: string): Record<Lang, string> => ({ az, en, tr, ar, ru });
 
@@ -154,7 +153,6 @@ export const TOOLS: readonly { id: ToolId; label: Record<Lang, string> }[] = [
   { id: "gradient", label: L("CSS gradient", "CSS gradient", "CSS gradient", "تدرج CSS", "Градиент CSS") },
   { id: "strength", label: L("Şifrə gücü", "Password strength", "Parola gücü", "قوة كلمة السر", "Надёжность пароля") },
   { id: "table", label: L("HTML cədvəl", "HTML table", "HTML tablo", "جدول HTML", "Таблица HTML") },
-  { id: "age", label: L("Yaş", "Age", "Yaş", "العمر", "Возраст") },
 ];
 
 export const TOOL_GROUPS: readonly { id: string; title: Record<Lang, string>; ids: readonly ToolId[] }[] = [
@@ -186,7 +184,7 @@ export const TOOL_GROUPS: readonly { id: string; title: Record<Lang, string>; id
   {
     id: "turn",
     title: L("Çevirici", "Converter", "Dönüştürücü", "محوّل", "Конвертер"),
-    ids: ["htaccess", "gradient", "strength", "table", "age", "meta", "sitemap", "utm", "robots", "slug", "mime", "percent", "contrast", "days", "shadow", "cron", "chmod", "base", "pxrem", "unix", "color", "csv"],
+    ids: ["htaccess", "gradient", "strength", "table", "meta", "sitemap", "utm", "robots", "slug", "mime", "percent", "contrast", "days", "shadow", "cron", "chmod", "base", "pxrem", "unix", "color", "csv"],
   },
 ];
 
