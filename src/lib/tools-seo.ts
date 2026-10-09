@@ -41,6 +41,11 @@ export const TOOL_SLUG: Record<ToolId, string> = {
   slug: "slug",
   percent: "percent",
   mime: "mime",
+  meta: "meta",
+  sitemap: "sitemap",
+  utm: "utm",
+  days: "date-diff",
+  shadow: "css-shadow",
 };
 
 export const TOOL_LEAD: Record<ToolId, Record<Lang, string>> = {
@@ -303,7 +308,43 @@ export const TOOL_LEAD: Record<ToolId, Record<Lang, string>> = {
     "يُظهر رمز MIME من نهاية الملف.\n\nمثال: png تصبح image/png. pdf تصبح application/pdf.\n\nالنهايات المعروفة هنا: png وjpg وgif وwebp وsvg وpdf وjson وxml وhtml وcss وjs وtxt وcsv وzip وmp3 وmp4 وwoff2.",
     "Показывает код MIME по окончанию файла.\n\nПример: png становится image/png. pdf становится application/pdf.\n\nЗдесь известны: png, jpg, gif, webp, svg, pdf, json, xml, html, css, js, txt, csv, zip, mp3, mp4, woff2.",
   ),
+  meta: L(
+    "Başlıq və təsvirdən title və Open Graph sətirlərini yazır.\n\nNümunə: başlıq Nibras Code, təsvir Pulsuz kod alətləri. Şəkil ünvanı boş qala bilər.\n\nBu səhifə səhifəni dərc etmir. Sətirləri kopyalayıb head içinə qoyursan.",
+    "Writes title and Open Graph lines from a title and a description.\n\nExample: title Nibras Code, description Free code tools. The image address can stay empty.\n\nThis page does not publish the page. Copy the lines into head.",
+    "Başlık ve açıklamadan title ve Open Graph satırlarını yazar.\n\nÖrnek: başlık Nibras Code, açıklama Ücretsiz kod araçları. Resim adresi boş kalabilir.\n\nBu sayfa sayfayı yayınlamaz. Satırları kopyalayıp head içine koyarsın.",
+    "يكتب أسطر title وOpen Graph من عنوان ووصف.\n\nمثال: العنوان Nibras Code والوصف أدوات كود مجانية. عنوان الصورة يمكن أن يبقى فارغًا.\n\nهذه الصفحة لا تنشر الصفحة. انسخ الأسطر إلى head.",
+    "Пишет строки title и Open Graph из заголовка и описания.\n\nПример: заголовок Nibras Code, описание Бесплатные инструменты. Адрес картинки можно оставить пустым.\n\nСтраница не публикует сайт. Скопируй строки в head.",
+  ),
+  sitemap: L(
+    "Səhifə ünvanlarından sitemap.xml yazır. Hər ünvan ayrı sətirdədir.\n\nNümunə: https://www.nibrascode.com/tools. Yalnız http və https qəbul olunur.\n\nBu səhifə faylı serverə qoymur. Nəticəni sitemap.xml adı ilə yükləyə bilərsən.",
+    "Writes sitemap.xml from page addresses. Each address is on its own line.\n\nExample: https://www.nibrascode.com/tools. Only http and https are accepted.\n\nThis page does not put the file on a server. You can download the result as sitemap.xml.",
+    "Sayfa adreslerinden sitemap.xml yazar. Her adres ayrı satırdadır.\n\nÖrnek: https://www.nibrascode.com/tools. Yalnız http ve https kabul edilir.\n\nBu sayfa dosyayı sunucuya koymaz. Sonucu sitemap.xml adıyla indirebilirsin.",
+    "يكتب sitemap.xml من عناوين الصفحات. كل عنوان في سطر.\n\nمثال: https://www.nibrascode.com/tools. لا يُقبل إلا http وhttps.\n\nهذه الصفحة لا تضع الملف على الخادم. يمكن تنزيل النتيجة باسم sitemap.xml.",
+    "Пишет sitemap.xml из адресов страниц. Каждый адрес на своей строке.\n\nПример: https://www.nibrascode.com/tools. Принимаются только http и https.\n\nСтраница не кладёт файл на сервер. Результат можно скачать как sitemap.xml.",
+  ),
+  utm: L(
+    "Linkə utm_source və utm_campaign əlavə edir.\n\nNümunə: https://www.nibrascode.com, mənbə google, kampaniya ders. Nəticə linkin sonuna bu iki sözü qoyur.\n\nBu səhifə linki açmır və heç yerə göndərmir.",
+    "Adds utm_source and utm_campaign to a link.\n\nExample: https://www.nibrascode.com, source google, campaign ders. The result puts those two words on the end of the link.\n\nThis page does not open the link and does not send it anywhere.",
+    "Linke utm_source ve utm_campaign ekler.\n\nÖrnek: https://www.nibrascode.com, kaynak google, kampanya ders. Sonuç bu iki sözü linkin sonuna koyar.\n\nBu sayfa linki açmaz ve hiçbir yere göndermez.",
+    "يضيف utm_source وutm_campaign إلى الرابط.\n\nمثال: https://www.nibrascode.com والمصدر google والحملة ders. النتيجة تضع الكلمتين في آخر الرابط.\n\nهذه الصفحة لا تفتح الرابط ولا ترسله إلى أي مكان.",
+    "Добавляет utm_source и utm_campaign к ссылке.\n\nПример: https://www.nibrascode.com, источник google, кампания ders. Результат ставит эти два слова в конец ссылки.\n\nСтраница ссылку не открывает и никуда не отправляет.",
+  ),
+  days: L(
+    "İki tarixin arasındakı günü göstərir.\n\nNümunə: 2026-01-01 və 2026-01-31. Nəticə 30 gündür.\n\nTarix il-ay-gün şəklində yazılır. Bu səhifə təqvim saxlamır.",
+    "Shows the days between two dates.\n\nExample: 2026-01-01 and 2026-01-31. The result is 30 days.\n\nWrite the date as year-month-day. This page does not keep a calendar.",
+    "İki tarihin arasındaki günü gösterir.\n\nÖrnek: 2026-01-01 ve 2026-01-31. Sonuç 30 gündür.\n\nTarih yıl-ay-gün biçiminde yazılır. Bu sayfa takvim saklamaz.",
+    "يُظهر الأيام بين تاريخين.\n\nمثال: 2026-01-01 و2026-01-31. النتيجة 30 يومًا.\n\nيُكتب التاريخ سنة-شهر-يوم. هذه الصفحة لا تحفظ تقويمًا.",
+    "Показывает дни между двумя датами.\n\nПример: 2026-01-01 и 2026-01-31. Результат — 30 дней.\n\nДата пишется год-месяц-день. Страница календарь не хранит.",
+  ),
+  shadow: L(
+    "Rəqəmlərdən box-shadow sətri çıxarır.\n\nNümunə: 8 16 24 #111111. Birinci yana, ikinci aşağı, üçüncü yayılma, sonuncu rəngdir.\n\nBu səhifə CSS faylını dəyişmir. Sətri kopyalayıb qaydaya qoyursan.",
+    "Makes a box-shadow line from numbers.\n\nExample: 8 16 24 #111111. The first is sideways, the second is down, the third is blur, the last is the color.\n\nThis page does not change a CSS file. Copy the line into a rule.",
+    "Rakamlardan box-shadow satırı çıkarır.\n\nÖrnek: 8 16 24 #111111. Birinci yana, ikinci aşağı, üçüncü yayılma, sonuncu renktir.\n\nBu sayfa CSS dosyasını değiştirmez. Satırı kopyalayıp kurala koyarsın.",
+    "يصنع سطر box-shadow من أرقام.\n\nمثال: 8 16 24 #111111. الأول للجانب والثاني للأسفل والثالث للانتشار والأخير للون.\n\nهذه الصفحة لا تغيّر ملف CSS. انسخ السطر إلى قاعدة.",
+    "Делает строку box-shadow из чисел.\n\nПример: 8 16 24 #111111. Первое вбок, второе вниз, третье размытие, последнее цвет.\n\nСтраница CSS-файл не меняет. Скопируй строку в правило.",
+  ),
 };
+
 
 
 
@@ -326,6 +367,11 @@ export const TOOL_SAMPLE: Partial<Record<ToolId, { text?: string; extra?: string
   slug: { text: "Mənim ilk səhifəm" },
   percent: { text: "15 200" },
   mime: { text: "png" },
+  meta: { text: "Nibras Code", extra: "Pulsuz kod alətləri" },
+  sitemap: { text: "https://www.nibrascode.com/tools" },
+  utm: { text: "https://www.nibrascode.com", extra: "google", count: "ders" },
+  days: { text: "2026-01-01", extra: "2026-01-31" },
+  shadow: { text: "8 16 24 #111111" },
 };
 
 export function toolIdFromSlug(slug: string) {

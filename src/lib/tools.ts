@@ -40,7 +40,12 @@ export type ToolId =
   | "contrast"
   | "slug"
   | "percent"
-  | "mime";
+  | "mime"
+  | "meta"
+  | "sitemap"
+  | "utm"
+  | "days"
+  | "shadow";
 
 const L = (az: string, en: string, tr: string, ar: string, ru: string): Record<Lang, string> => ({ az, en, tr, ar, ru });
 
@@ -70,6 +75,7 @@ export const TOOLS_PAGE = {
   none: L("Uyğun gəlmədi.", "Nothing matched.", "Eşleşme yok.", "لا يوجد تطابق.", "Совпадений нет."),
   pattern: L("Nümunə", "Pattern", "Kalıp", "النمط", "Шаблон"),
   second: L("İkinci mətn", "Second text", "İkinci metin", "النص الثاني", "Второй текст"),
+  third: L("Şəkil və ya kampaniya", "Image or campaign", "Resim veya kampanya", "صورة أو حملة", "Картинка или кампания"),
   upper: L("Böyük", "Upper", "Büyük", "كبير", "Верхний"),
   lower: L("Kiçik", "Lower", "Küçük", "صغير", "Нижний"),
   words: L("Söz", "Words", "Söz", "كلمات", "Слова"),
@@ -127,6 +133,11 @@ export const TOOLS: readonly { id: ToolId; label: Record<Lang, string> }[] = [
   { id: "slug", label: L("Slug", "Slug", "Slug", "Slug", "Slug") },
   { id: "percent", label: L("Faiz", "Percent", "Yüzde", "نسبة مئوية", "Процент") },
   { id: "mime", label: L("MIME", "MIME", "MIME", "MIME", "MIME") },
+  { id: "meta", label: L("Meta", "Meta", "Meta", "Meta", "Meta") },
+  { id: "sitemap", label: L("Sitemap", "Sitemap", "Sitemap", "Sitemap", "Sitemap") },
+  { id: "utm", label: L("UTM", "UTM", "UTM", "UTM", "UTM") },
+  { id: "days", label: L("Tarix fərqi", "Date difference", "Tarih farkı", "فرق التاريخ", "Разница дат") },
+  { id: "shadow", label: L("CSS kölgə", "CSS shadow", "CSS gölge", "ظل CSS", "Тень CSS") },
 ];
 
 export const TOOL_GROUPS: readonly { id: string; title: Record<Lang, string>; ids: readonly ToolId[] }[] = [
@@ -158,7 +169,7 @@ export const TOOL_GROUPS: readonly { id: string; title: Record<Lang, string>; id
   {
     id: "turn",
     title: L("Çevirici", "Converter", "Dönüştürücü", "محوّل", "Конвертер"),
-    ids: ["robots", "slug", "mime", "percent", "contrast", "cron", "chmod", "base", "pxrem", "unix", "color", "csv"],
+    ids: ["meta", "sitemap", "utm", "robots", "slug", "mime", "percent", "contrast", "days", "shadow", "cron", "chmod", "base", "pxrem", "unix", "color", "csv"],
   },
 ];
 

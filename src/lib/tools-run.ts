@@ -597,3 +597,52 @@ export function mimeType(text: string) {
   if (!type) throw new Error("mime");
   return `.${ext}\n${type}`;
 }
+
+function esc(value: string) {
+  return value.split("&").join("\u0026amp;").split("<").join("\u0026lt;").split(">").join("\u0026gt;").split('"').join("\u0026quot;");
+}
+
+export function makeMeta(title: string, description: string, image: string) {
+  const name = title.trim();
+  const about = description.trim();
+  if (!name) throw new Error("meta");
+  const picture = image.trim();
+  const lines = [`<title>${esc(name)}</title>`, `<meta name="description" content="${esc(about)}">`, `<meta property="og:title" content="${esc(name)}">`, `<meta property="og:description" content="${esc(about)}">`];
+  if (picture) lines.push(`<meta property="og:image" content="${esc(picture)}">`);
+  return lines.join("\n");
+}
+
+export function makeSitemap(text: string) {
+  const urls = text
+    .split(/\n+/)
+    .map((line) => line.trim())
+    .filter((line) => /^https?:\/\//i.test(line));
+  if (!urls.length) throw new Error("sitemap");
+  const body = urls.map((url) => `  <url>\n    <loc>${esc(url)}</loc>\n  </url>`).join("\n");
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${body}\n</urlset>`;
+}
+
+export function makeUtm(url: string, source: string, campaign: string) {
+  const raw = url.trim();
+  if (!/^https?:\/\//i.test(raw)) throw new Error("utm");
+  const link = new URL(raw);
+  if (source.trim()) link.searchParams.set("utm_source", source.trim());
+  if (campaign.trim()) link.searchParams.set("utm_campaign", campaign.trim());
+  return link.toString();
+}
+
+export function dateDiff(start: string, end: string) {
+  const a = new Date(start.trim());
+  const b = new Date(end.trim());
+  if (Number.isNaN(a.getTime()) || Number.isNaN(b.getTime())) throw new Error("date");
+  const days = Math.round((b.getTime() - a.getTime()) / 86400000);
+  return `${start.trim()} → ${end.trim()}\n${days}`;
+}
+
+export function cssShadow(text: string) {
+  const parts = text.trim().split(/\s+/);
+  if (parts.length < 3) throw new Error("shadow");
+  const [x, y, blur, color = "#111111"] = parts;
+  if ([x, y, blur].some((part) => !/^-?\d+$/.test(part))) throw new Error("shadow");
+  return `box-shadow: ${x}px ${y}px ${blur}px ${color};`;
+}

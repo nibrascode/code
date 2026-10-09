@@ -26,6 +26,10 @@ import {
   Contrast,
   Percent,
   FileType,
+  Tags,
+  Map,
+  CalendarRange,
+  Square,
   Sparkles,
   Table,
   TextQuote,
@@ -75,6 +79,11 @@ import {
   makeSlug,
   percentOf,
   mimeType,
+  makeMeta,
+  makeSitemap,
+  makeUtm,
+  dateDiff,
+  cssShadow,
 } from "@/lib/tools-run";
 
 const NEEDS_TEXT = new Set<ToolId>([
@@ -109,6 +118,11 @@ const NEEDS_TEXT = new Set<ToolId>([
   "slug",
   "percent",
   "mime",
+  "meta",
+  "sitemap",
+  "utm",
+  "days",
+  "shadow",
 ]);
 const PAIR = new Set<ToolId>(["base64", "url", "html"]);
 
@@ -159,6 +173,11 @@ const ICONS: Record<ToolId, typeof Braces> = {
   slug: Link2,
   percent: Percent,
   mime: FileType,
+  meta: Tags,
+  sitemap: Map,
+  utm: Link2,
+  days: CalendarRange,
+  shadow: Square,
 };
 
 async function sha(text: string, name: "SHA-1" | "SHA-256") {
@@ -211,11 +230,16 @@ function runSync(id: ToolId, text: string, count: string, low: string, high: str
   if (id === "slug") return makeSlug(text);
   if (id === "percent") return percentOf(text);
   if (id === "mime") return mimeType(text);
+  if (id === "meta") return makeMeta(text, extra, count);
+  if (id === "sitemap") return makeSitemap(text);
+  if (id === "utm") return makeUtm(text, extra, count);
+  if (id === "days") return dateDiff(text, extra);
+  if (id === "shadow") return cssShadow(text);
   return "";
 }
 
 function fileKind(id: ToolId, body: string) {
-  if (id === "xml") return "xml";
+  if (id === "xml" || id === "sitemap") return "xml";
   const raw = body.trim();
   if (id === "csv" && (raw.startsWith("{") || raw.startsWith("["))) return "json";
   if (id === "csv") return "csv";
@@ -363,14 +387,17 @@ export function ToolsPage({ lang, focus }: { lang: Lang; focus?: ToolId }) {
                 ) : null}
                 {NEEDS_TEXT.has(current) ? (
                   <>
-                    {current === "regex" || current === "contrast" ? (
+                    {current === "regex" || current === "contrast" || current === "meta" || current === "utm" || current === "days" ? (
                       <textarea
                         value={extra}
                         spellCheck={false}
-                        aria-label={current === "contrast" ? "#ffffff" : copy.pattern[lang]}
-                        placeholder={current === "contrast" ? "#ffffff" : copy.pattern[lang]}
+                        aria-label={copy.second[lang]}
+                        placeholder={copy.second[lang]}
                         onChange={(event) => setExtra(event.target.value)}
                       />
+                    ) : null}
+                    {current === "meta" || current === "utm" ? (
+                      <input value={count} aria-label={copy.third[lang]} placeholder={copy.third[lang]} onChange={(event) => setCount(event.target.value)} />
                     ) : null}
                     <label className="tool-file">
                       {copy.load[lang]}
