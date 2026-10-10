@@ -912,11 +912,6 @@ export function checkIp(text: string) {
   return `${raw}\nok`;
 }
 
-export function reverseText(text: string) {
-  if (!text.trim()) throw new Error("reverse");
-  return Array.from(text).reverse().join("");
-}
-
 export function sortLines(text: string) {
   const lines = text.split(/\n/).map((line) => line.trim()).filter(Boolean);
   if (!lines.length) throw new Error("sort");

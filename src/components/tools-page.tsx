@@ -48,7 +48,6 @@ import {
   Link,
   Mail,
   Globe,
-  Undo2,
   ArrowDownAZ,
   ListX,
   WholeWord,
@@ -123,7 +122,6 @@ import {
   checkEmail,
   numberWords,
   checkIp,
-  reverseText,
   sortLines,
   uniqueLines,
   jsonKeys,
@@ -190,7 +188,6 @@ const NEEDS_TEXT = new Set<ToolId>([
   "email",
   "words",
   "ip",
-  "reverse",
   "sort",
   "unique",
   "keys",
@@ -273,7 +270,6 @@ const ICONS: Record<ToolId, typeof Braces> = {
   email: Mail,
   words: Hash,
   ip: Globe,
-  reverse: Undo2,
   sort: ArrowDownAZ,
   unique: ListX,
   keys: Braces,
@@ -395,7 +391,6 @@ function runSync(id: ToolId, text: string, count: string, low: string, high: str
     checkIp(text);
     return `${text.trim()}\n${TOOLS_PAGE.ipOk[lang]}`;
   }
-  if (id === "reverse") return reverseText(text);
   if (id === "sort") return sortLines(text);
   if (id === "unique") return uniqueLines(text);
   if (id === "keys") return jsonKeys(text);
