@@ -73,6 +73,11 @@ export const TOOL_SLUG: Record<ToolId, string> = {
   unique: "remove-duplicates",
   keys: "json-keys",
   strip: "html-to-text",
+  qr: "qr-code",
+  jsonyaml: "json-to-yaml",
+  yamljson: "yaml-to-json",
+  roman: "roman-numeral",
+  morse: "morse-code",
 };
 
 export const TOOL_LEAD: Record<ToolId, Record<Lang, string>> = {
@@ -559,7 +564,43 @@ export const TOOL_LEAD: Record<ToolId, Record<Lang, string>> = {
     "يحذف وسم HTML ويبقي النص.\n\nمثال: <p>Salam</p> تترك Salam.\n\nعنوان الصورة أو الرابط لا يبقى. يبقى النص الظاهر فقط.",
     "Удаляет тег HTML и оставляет текст.\n\nПример: <p>Salam</p> оставляет Salam.\n\nАдрес картинки или ссылки не остаётся. Остаётся только видимый текст.",
   ),
+  qr: L(
+    "Mətndən və ya ünvandan QR kod çıxarır. Şəkil sənin brauzerində hazırlanır.\n\nNümunə: https://www.nibrascode.com yazılanda kvadrat şəkil çıxır.\n\nBu səhifə mətni heç yerə göndərmir. Şəkli saxlaya bilərsən.",
+    "Makes a QR code from text or an address. The picture is made in your browser.\n\nExample: https://www.nibrascode.com gives a square picture.\n\nThis page does not send the text anywhere. You can save the picture.",
+    "Metinden veya adresten QR kod çıkarır. Resim senin tarayıcında hazırlanır.\n\nÖrnek: https://www.nibrascode.com yazılınca kare resim çıkar.\n\nBu sayfa metni hiçbir yere göndermez. Resmi kaydedebilirsin.",
+    "يصنع رمز QR من نص أو عنوان. الصورة تُصنع في متصفحك.\n\nمثال: https://www.nibrascode.com يعطي صورة مربعة.\n\nهذه الصفحة لا ترسل النص إلى أي مكان. يمكنك حفظ الصورة.",
+    "Делает QR-код из текста или адреса. Картинка готовится в твоём браузере.\n\nПример: https://www.nibrascode.com даёт квадратную картинку.\n\nСтраница текст никуда не отправляет. Картинку можно сохранить.",
+  ),
+  jsonyaml: L(
+    "JSON-dan YAML çıxarır. Açar və dəyər ayrı sətirə düşür.\n\nNümunə: {\"ad\":\"Aysel\"} yazılanda ad: Aysel olur.\n\nYAML-dan JSON ayrıca alətdir. Bu onun əksidir.",
+    "Makes YAML from JSON. A key and a value go on separate lines.\n\nExample: {\"ad\":\"Aysel\"} becomes ad: Aysel.\n\nYAML to JSON is a separate tool. This is the other way.",
+    "JSON'dan YAML çıkarır. Anahtar ve değer ayrı satıra düşer.\n\nÖrnek: {\"ad\":\"Aysel\"} yazılınca ad: Aysel olur.\n\nYAML'dan JSON ayrı araçtır. Bu onun tersidir.",
+    "يصنع YAML من JSON. المفتاح والقيمة يذهبان إلى سطرين.\n\nمثال: {\"ad\":\"Aysel\"} تصبح ad: Aysel.\n\nمن YAML إلى JSON أداة منفصلة. هذه هي الجهة الأخرى.",
+    "Делает YAML из JSON. Ключ и значение идут на разные строки.\n\nПример: {\"ad\":\"Aysel\"} становится ad: Aysel.\n\nYAML в JSON — отдельный инструмент. Это обратная сторона.",
+  ),
+  yamljson: L(
+    "YAML-dan JSON çıxarır.\n\nNümunə: ad: Aysel yazılanda {\"ad\":\"Aysel\"} olur.\n\nJSON-dan YAML ayrıca alətdir. Bu onun əksidir.",
+    "Makes JSON from YAML.\n\nExample: ad: Aysel becomes {\"ad\":\"Aysel\"}.\n\nJSON to YAML is a separate tool. This is the other way.",
+    "YAML'dan JSON çıkarır.\n\nÖrnek: ad: Aysel yazılınca {\"ad\":\"Aysel\"} olur.\n\nJSON'dan YAML ayrı araçtır. Bu onun tersidir.",
+    "يصنع JSON من YAML.\n\nمثال: ad: Aysel تصبح {\"ad\":\"Aysel\"}.\n\nمن JSON إلى YAML أداة منفصلة. هذه هي الجهة الأخرى.",
+    "Делает JSON из YAML.\n\nПример: ad: Aysel становится {\"ad\":\"Aysel\"}.\n\nJSON в YAML — отдельный инструмент. Это обратная сторона.",
+  ),
+  roman: L(
+    "Ədədi Roma rəqəminə və Roma rəqəmini ədədə çevirir.\n\nNümunə: 14 yazılanda XIV olur. XIV yazılanda 14 olur.\n\n1 ilə 3999 arası işləyir. Aç düyməsi əksinə çevirir.",
+    "Turns a number into a Roman numeral and a Roman numeral into a number.\n\nExample: 14 becomes XIV. XIV becomes 14.\n\nIt works from 1 to 3999. The other button goes the other way.",
+    "Sayıyı Roma rakamına ve Roma rakamını sayıya çevirir.\n\nÖrnek: 14 yazılınca XIV olur. XIV yazılınca 14 olur.\n\n1 ile 3999 arası çalışır. Aç düğmesi tersine çevirir.",
+    "يحوّل الرقم إلى رقم روماني والرقم الروماني إلى رقم.\n\nمثال: 14 تصبح XIV. XIV تصبح 14.\n\nيعمل من 1 إلى 3999. الزر الآخر يعكس الجهة.",
+    "Переводит число в римское и римское в число.\n\nПример: 14 становится XIV. XIV становится 14.\n\nРаботает от 1 до 3999. Другая кнопка идёт обратно.",
+  ),
+  morse: L(
+    "Mətni Morze koduna və Morze kodunu mətnə çevirir.\n\nNümunə: salam yazılanda nöqtə və xətt çıxır. Aç düyməsi geri çevirir.\n\nBu səhifə səs çıxarmır. Yalnız işarə göstərir.",
+    "Turns text into Morse code and Morse code into text.\n\nExample: salam becomes dots and dashes. The other button goes back.\n\nThis page makes no sound. It only shows the signs.",
+    "Metni Mors koduna ve Mors kodunu metne çevirir.\n\nÖrnek: salam yazılınca nokta ve çizgi çıkar. Aç düğmesi geri çevirir.\n\nBu sayfa ses çıkarmaz. Yalnız işaret gösterir.",
+    "يحوّل النص إلى مورس ومورس إلى نص.\n\nمثال: salam تصبح نقاطًا وخطوطًا. الزر الآخر يرجع.\n\nهذه الصفحة لا تصدر صوتًا. تُظهر العلامات فقط.",
+    "Переводит текст в Морзе и Морзе в текст.\n\nПример: salam становится точками и тире. Другая кнопка возвращает назад.\n\nСтраница звук не издаёт. Только показывает знаки.",
+  ),
 };
+
 
 
 
@@ -621,6 +662,11 @@ export const TOOL_SAMPLE: Partial<Record<ToolId, { text?: string; extra?: string
   unique: { text: "alma\nalma\narmud" },
   keys: { text: "{\"ad\":\"Aysel\",\"yaş\":20}" },
   strip: { text: "<p>Salam</p>" },
+  qr: { text: "https://www.nibrascode.com" },
+  jsonyaml: { text: "{\"ad\":\"Aysel\"}" },
+  yamljson: { text: "ad: Aysel" },
+  roman: { text: "14" },
+  morse: { text: "salam" },
 };
 
 export function toolIdFromSlug(slug: string) {

@@ -935,3 +935,101 @@ export function stripHtml(text: string) {
   if (!text.includes("<")) throw new Error("strip");
   return text.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
 }
+
+function yamlValue(value: unknown, pad = 0): string {
+  const space = "  ".repeat(pad);
+  if (value == null) return "null";
+  if (typeof value === "string") return /[:#\n]/.test(value) ? JSON.stringify(value) : value;
+  if (typeof value !== "object") return String(value);
+  if (Array.isArray(value)) return value.map((item) => `\n${space}- ${yamlValue(item, pad + 1).trimStart()}`).join("");
+  return Object.entries(value)
+    .map(([key, item]) => {
+      const shown = yamlValue(item, pad + 1);
+      return shown.startsWith("\n") ? `\n${space}${key}:${shown}` : `\n${space}${key}: ${shown}`;
+    })
+    .join("");
+}
+
+export function jsonToYaml(text: string) {
+  const data = JSON.parse(text) as unknown;
+  return yamlValue(data).replace(/^\n/, "");
+}
+
+function parseYamlValue(raw: string): unknown {
+  if (raw === "true") return true;
+  if (raw === "false") return false;
+  if (raw === "null") return null;
+  if (/^-?\d+(\.\d+)?$/.test(raw)) return Number(raw);
+  if (raw.startsWith('"') || raw.startsWith("'")) return raw.slice(1, -1);
+  return raw;
+}
+
+export function yamlToJson(text: string) {
+  const lines = text.replace(/\t/g, "  ").split(/\n/).filter((line) => line.trim() && !line.trim().startsWith("#"));
+  if (!lines.length) throw new Error("yaml");
+  const root: Record<string, unknown> = {};
+  const stack: { pad: number; target: Record<string, unknown> | unknown[] }[] = [{ pad: -1, target: root }];
+  for (const line of lines) {
+    const pad = line.match(/^ */)?.[0].length ?? 0;
+    while (stack.length > 1 && pad <= stack[stack.length - 1].pad) stack.pop();
+    const parent = stack[stack.length - 1].target;
+    const body = line.trim();
+    if (body.startsWith("- ")) {
+      if (!Array.isArray(parent)) throw new Error("yaml");
+      parent.push(parseYamlValue(body.slice(2)));
+      continue;
+    }
+    const cut = body.indexOf(":");
+    if (cut < 1 || Array.isArray(parent)) throw new Error("yaml");
+    const key = body.slice(0, cut).trim();
+    const rest = body.slice(cut + 1).trim();
+    if (!rest) {
+      const next = {};
+      parent[key] = next;
+      stack.push({ pad, target: next });
+    } else parent[key] = parseYamlValue(rest);
+  }
+  return JSON.stringify(root, null, 2);
+}
+
+const ROMAN: [number, string][] = [[1000, "M"], [900, "CM"], [500, "D"], [400, "CD"], [100, "C"], [90, "XC"], [50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
+
+export function romanConvert(text: string) {
+  const raw = text.trim();
+  if (/^\d+$/.test(raw)) {
+    const value = Number(raw);
+    if (value < 1 || value > 3999) throw new Error("roman");
+    let left = value;
+    return ROMAN.map(([num, sign]) => {
+      const count = Math.floor(left / num);
+      left -= count * num;
+      return sign.repeat(count);
+    }).join("");
+  }
+  const upper = raw.toUpperCase();
+  if (!/^[IVXLCDM]+$/.test(upper)) throw new Error("roman");
+  let total = 0;
+  for (let i = 0; i < upper.length; i += 1) {
+    const now = ROMAN.find((item) => item[1] === upper[i])?.[0] ?? 0;
+    const next = ROMAN.find((item) => item[1] === upper[i + 1])?.[0] ?? 0;
+    total += now < next ? -now : now;
+  }
+  return String(total);
+}
+
+const MORSE: Record<string, string> = {
+  a: ".-", b: "-...", c: "-.-.", d: "-..", e: ".", f: "..-.", g: "--.", h: "....", i: "..", j: ".---",
+  k: "-.-", l: ".-..", m: "--", n: "-.", o: "---", p: ".--.", q: "--.-", r: ".-.", s: "...", t: "-",
+  u: "..-", v: "...-", w: ".--", x: "-..-", y: "-.--", z: "--..",
+  "0": "-----", "1": ".----", "2": "..---", "3": "...--", "4": "....-", "5": ".....", "6": "-....", "7": "--...", "8": "---..", "9": "----.",
+};
+const FROM_MORSE = Object.fromEntries(Object.entries(MORSE).map(([letter, code]) => [code, letter]));
+
+export function morseConvert(text: string, back = false) {
+  const raw = text.trim();
+  if (!raw) throw new Error("morse");
+  if (back || /^[.\- /]+$/.test(raw)) {
+    return raw.split(" / ").map((word) => word.split(" ").map((code) => FROM_MORSE[code] ?? "").join("")).join(" ");
+  }
+  return raw.toLowerCase().split(/\s+/).map((word) => [...word].map((letter) => MORSE[letter] ?? "").filter(Boolean).join(" ")).join(" / ");
+}

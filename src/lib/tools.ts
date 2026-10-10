@@ -72,7 +72,12 @@ export type ToolId =
   | "sort"
   | "unique"
   | "keys"
-  | "strip";
+  | "strip"
+  | "qr"
+  | "jsonyaml"
+  | "yamljson"
+  | "roman"
+  | "morse";
 
 const L = (az: string, en: string, tr: string, ar: string, ru: string): Record<Lang, string> => ({ az, en, tr, ar, ru });
 
@@ -210,6 +215,11 @@ export const TOOLS: readonly { id: ToolId; label: Record<Lang, string> }[] = [
   { id: "unique", label: L("Təkrarı sil", "Remove duplicates", "Tekrarı sil", "حذف التكرار", "Убрать повторы") },
   { id: "keys", label: L("JSON açarları", "JSON keys", "JSON anahtarları", "مفاتيح JSON", "Ключи JSON") },
   { id: "strip", label: L("HTML-dən mətn", "Text from HTML", "HTML'den metin", "نص من HTML", "Текст из HTML") },
+  { id: "qr", label: L("QR kod", "QR code", "QR kod", "رمز QR", "QR-код") },
+  { id: "jsonyaml", label: L("JSON-dan YAML", "JSON to YAML", "JSON'dan YAML", "من JSON إلى YAML", "JSON в YAML") },
+  { id: "yamljson", label: L("YAML-dan JSON", "YAML to JSON", "YAML'dan JSON", "من YAML إلى JSON", "YAML в JSON") },
+  { id: "roman", label: L("Roma rəqəmi", "Roman numeral", "Roma rakamı", "رقم روماني", "Римское число") },
+  { id: "morse", label: L("Morze", "Morse code", "Mors kodu", "شفرة مورس", "Азбука Морзе") },
 ];
 
 export const TOOL_GROUPS: readonly { id: string; title: Record<Lang, string>; ids: readonly ToolId[] }[] = [
@@ -231,7 +241,7 @@ export const TOOL_GROUPS: readonly { id: string; title: Record<Lang, string>; id
   {
     id: "format",
     title: L("Düzəltmə", "Formatting", "Düzenleme", "تنسيق", "Оформление"),
-    ids: ["sort", "unique", "keys", "strip", "yaml", "markdown", "email", "words", "ip", "sql-min", "xml-min", "cssvar", "link", "chars", "htmlfmt", "js-min", "python", "php", "json", "json-min", "css", "js", "html-min", "css-min", "xml", "sql"],
+    ids: ["qr", "jsonyaml", "yamljson", "roman", "morse", "sort", "unique", "keys", "strip", "yaml", "markdown", "email", "words", "ip", "sql-min", "xml-min", "cssvar", "link", "chars", "htmlfmt", "js-min", "python", "php", "json", "json-min", "css", "js", "html-min", "css-min", "xml", "sql"],
   },
   {
     id: "text",

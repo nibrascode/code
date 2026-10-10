@@ -50,6 +50,8 @@ import {
   Globe,
   ArrowDownAZ,
   ListX,
+  QrCode,
+  Radio,
   WholeWord,
 } from "lucide-react";
 import type { Lang } from "@/lib/i18n";
@@ -126,6 +128,10 @@ import {
   uniqueLines,
   jsonKeys,
   stripHtml,
+  jsonToYaml,
+  yamlToJson,
+  romanConvert,
+  morseConvert,
 } from "@/lib/tools-run";
 
 const NEEDS_TEXT = new Set<ToolId>([
@@ -192,8 +198,13 @@ const NEEDS_TEXT = new Set<ToolId>([
   "unique",
   "keys",
   "strip",
+  "qr",
+  "jsonyaml",
+  "yamljson",
+  "roman",
+  "morse",
 ]);
-const PAIR = new Set<ToolId>(["base64", "url", "html"]);
+const PAIR = new Set<ToolId>(["base64", "url", "html", "roman", "morse", "jsonyaml", "yamljson"]);
 
 const GROUP_ICONS: Record<string, typeof Braces> = {
   gen: Sparkles,
@@ -274,6 +285,11 @@ const ICONS: Record<ToolId, typeof Braces> = {
   unique: ListX,
   keys: Braces,
   strip: FileCode,
+  qr: QrCode,
+  jsonyaml: FileCode,
+  yamljson: FileCode,
+  roman: Hash,
+  morse: Radio,
 };
 
 async function sha(text: string, name: "SHA-1" | "SHA-256") {
@@ -395,6 +411,10 @@ function runSync(id: ToolId, text: string, count: string, low: string, high: str
   if (id === "unique") return uniqueLines(text);
   if (id === "keys") return jsonKeys(text);
   if (id === "strip") return stripHtml(text);
+  if (id === "jsonyaml") return jsonToYaml(text);
+  if (id === "yamljson") return yamlToJson(text);
+  if (id === "roman") return romanConvert(text);
+  if (id === "morse") return morseConvert(text);
   return "";
 }
 
@@ -442,8 +462,19 @@ export function ToolsPage({ lang, focus }: { lang: Lang; focus?: ToolId }) {
     try {
       if (current === "hash") setOutput(await sha(text, "SHA-1"));
       else if (current === "sha256") setOutput(await sha(text, "SHA-256"));
-      else {
-        const next = mode === "undo" ? undo(current, text) : runSync(current, text, count, low, high, extra, lang);
+      else if (current === "qr") {
+        const { default: QR } = await import("qrcode") as { default: { toDataURL: (text: string, opts: { margin: number; width: number }) => Promise<string> } };
+        setOutput(await QR.toDataURL(text.trim() || "https://www.nibrascode.com", { margin: 1, width: 280 }));
+      } else {
+        const next = mode === "undo"
+          ? current === "roman" || current === "morse"
+            ? (current === "roman" ? romanConvert(text) : morseConvert(text, true))
+            : current === "jsonyaml"
+              ? yamlToJson(text)
+              : current === "yamljson"
+                ? jsonToYaml(text)
+                : undo(current, text)
+          : runSync(current, text, count, low, high, extra, lang);
         setOutput(current === "jwt" && mode === "do" ? `${next}\n\n${copy.jwtNote[lang]}` : next);
       }
     } catch {
@@ -600,7 +631,7 @@ export function ToolsPage({ lang, focus }: { lang: Lang; focus?: ToolId }) {
                 {note ? <p className="paket-bad">{note}</p> : null}
                 {output ? (
                   <>
-                    <textarea readOnly value={output} />
+                    {output.startsWith("data:image") ? <img src={output} alt="QR" width={280} height={280} /> : <textarea readOnly value={output} />}
                     <div className="tool-row">
                       <button
                         type="button"
