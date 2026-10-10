@@ -59,6 +59,11 @@ export const TOOL_SLUG: Record<ToolId, string> = {
   "js-min": "javascript-minifier",
   python: "python",
   php: "php",
+  "sql-min": "sql-minifier",
+  "xml-min": "xml-minifier",
+  cssvar: "css-variable",
+  link: "link-check",
+  chars: "character-count",
 };
 
 export const TOOL_LEAD: Record<ToolId, Record<Lang, string>> = {
@@ -447,7 +452,43 @@ export const TOOL_LEAD: Record<ToolId, Record<Lang, string>> = {
     "يفصل PHP على أسطر. القوس يقف في سطره.\n\nمثال: <?php echo \"Salam\"; ينقسم على أسطر.\n\nهذه الصفحة لا تشغّل PHP. تنسّق فقط.",
     "Разбивает PHP на строки. Скобка стоит на своей строке.\n\nПример: <?php echo \"Salam\"; делится на строки.\n\nСтраница PHP не запускает. Только оформляет.",
   ),
+  "sql-min": L(
+    "SQL mətnindən boşluq və şərhi çıxarır. Bir sətirdə qalır.\n\nNümunə: select ad from istifadeci yazılanda boşluqlar birə enir.\n\nSQL düzəlt aləti sətirlərə ayırır. Bu səhifə sıxır.",
+    "Removes spaces and comments from SQL. It stays on one line.\n\nExample: select ad from istifadeci keeps one space between words.\n\nThe SQL formatter breaks lines. This page minifies.",
+    "SQL metninden boşluk ve yorumu çıkarır. Tek satırda kalır.\n\nÖrnek: select ad from istifadeci yazılınca boşluklar bire iner.\n\nSQL düzenle aracı satırlara ayırır. Bu sayfa sıkıştırır.",
+    "يحذف الفراغ والتعليق من SQL. يبقى في سطر واحد.\n\nمثال: select ad from istifadeci يبقى فراغ واحد بين الكلمات.\n\nأداة تنسيق SQL تفصل الأسطر. هذه الصفحة تضغط.",
+    "Убирает пробелы и комментарии из SQL. Остаётся одна строка.\n\nПример: select ad from istifadeci оставляет один пробел между словами.\n\nФормат SQL разбивает строки. Эта страница сжимает.",
+  ),
+  "xml-min": L(
+    "XML mətnindən boşluğu və şərhi çıxarır.\n\nNümunə: <ad>Aysel</ad> bir sətirdə qalır.\n\nXML düzəlt aləti sətirlərə ayırır. Bu səhifə sıxır.",
+    "Removes spaces and comments from XML.\n\nExample: <ad>Aysel</ad> stays on one line.\n\nThe XML formatter breaks lines. This page minifies.",
+    "XML metninden boşluğu ve yorumu çıkarır.\n\nÖrnek: <ad>Aysel</ad> tek satırda kalır.\n\nXML düzenle aracı satırlara ayırır. Bu sayfa sıkıştırır.",
+    "يحذف الفراغ والتعليق من XML.\n\nمثال: <ad>Aysel</ad> يبقى في سطر واحد.\n\nأداة تنسيق XML تفصل الأسطر. هذه الصفحة تضغط.",
+    "Убирает пробелы и комментарии из XML.\n\nПример: <ad>Aysel</ad> остаётся одной строкой.\n\nФормат XML разбивает строки. Эта страница сжимает.",
+  ),
+  cssvar: L(
+    "Rəngdən CSS dəyişən sətri çıxarır.\n\nNümunə: #1d4ed8 yazılanda --reng: #1d4ed8; olur.\n\nBu səhifə CSS faylını dəyişmir. Sətri kopyalayıb :root içinə qoyursan.",
+    "Makes a CSS variable line from a color.\n\nExample: #1d4ed8 becomes --reng: #1d4ed8;.\n\nThis page does not change a CSS file. Copy the line into :root.",
+    "Renkten CSS değişken satırı çıkarır.\n\nÖrnek: #1d4ed8 yazılınca --reng: #1d4ed8; olur.\n\nBu sayfa CSS dosyasını değiştirmez. Satırı kopyalayıp :root içine koyarsın.",
+    "يصنع سطر متغير CSS من لون.\n\nمثال: #1d4ed8 تصبح --reng: #1d4ed8;.\n\nهذه الصفحة لا تغيّر ملف CSS. انسخ السطر إلى :root.",
+    "Делает строку переменной CSS из цвета.\n\nПример: #1d4ed8 становится --reng: #1d4ed8;.\n\nСтраница CSS-файл не меняет. Скопируй строку в :root.",
+  ),
+  link: L(
+    "Ünvanın http ilə başlayıb-başlamadığını və boşluq olub-olmadığını göstərir. Saytı açmır.\n\nNümunə: https://www.nibrascode.com yoxlamadan keçir. nibrascode.com http olmadığı üçün keçmir.\n\nBu səhifə linki heç yerə göndərmir.",
+    "Shows whether an address starts with http and whether it has a space. It does not open the site.\n\nExample: https://www.nibrascode.com passes. nibrascode.com fails because it has no http.\n\nThis page does not send the link anywhere.",
+    "Adresin http ile başlayıp başlamadığını ve boşluk olup olmadığını gösterir. Siteyi açmaz.\n\nÖrnek: https://www.nibrascode.com kontrolden geçer. nibrascode.com http olmadığı için geçmez.\n\nBu sayfa linki hiçbir yere göndermez.",
+    "يُظهر هل يبدأ العنوان بـ http وهل فيه فراغ. لا يفتح الموقع.\n\nمثال: https://www.nibrascode.com يجتاز. nibrascode.com لا يجتاز لأنه بلا http.\n\nهذه الصفحة لا ترسل الرابط إلى أي مكان.",
+    "Показывает, начинается ли адрес с http и есть ли в нём пробел. Сайт не открывает.\n\nПример: https://www.nibrascode.com проходит. nibrascode.com не проходит, потому что нет http.\n\nСтраница ссылку никуда не отправляет.",
+  ),
+  chars: L(
+    "Mətnin simvol sayını və 160 limitini göstərir. Meta təsviri üçün işlənir.\n\nNümunə: Salam 5 simvoldur və limitin içindədir.\n\nSöz sayğacı sözü sayır. Bu səhifə simvolu sayır.",
+    "Shows the character count and a limit of 160. It is used for a meta description.\n\nExample: Salam is 5 characters and inside the limit.\n\nThe word counter counts words. This page counts characters.",
+    "Metnin karakter sayısını ve 160 limitini gösterir. Meta açıklaması için kullanılır.\n\nÖrnek: Salam 5 karakterdir ve limitin içindedir.\n\nSöz sayacı sözü sayar. Bu sayfa karakteri sayar.",
+    "يُظهر عدد الحروف وحد 160. يُستخدم لوصف meta.\n\nمثال: Salam خمسة حروف وداخل الحد.\n\nعدّاد الكلمات يعد الكلمات. هذه الصفحة تعد الحروف.",
+    "Показывает число символов и лимит 160. Нужно для meta-описания.\n\nПример: Salam — 5 символов и внутри лимита.\n\nСчётчик слов считает слова. Эта страница считает символы.",
+  ),
 };
+
 
 
 
@@ -492,6 +533,11 @@ export const TOOL_SAMPLE: Partial<Record<ToolId, { text?: string; extra?: string
   "js-min": { text: "function salam() { return 1; }" },
   python: { text: "print(\"Salam\")\n" },
   php: { text: "<?php echo \"Salam\";" },
+  "sql-min": { text: "select ad from istifadeci" },
+  "xml-min": { text: "<ad>Aysel</ad>" },
+  cssvar: { text: "#1d4ed8" },
+  link: { text: "https://www.nibrascode.com" },
+  chars: { text: "Salam" },
 };
 
 export function toolIdFromSlug(slug: string) {

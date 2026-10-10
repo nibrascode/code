@@ -58,7 +58,12 @@ export type ToolId =
   | "htmlfmt"
   | "js-min"
   | "python"
-  | "php";
+  | "php"
+  | "sql-min"
+  | "xml-min"
+  | "cssvar"
+  | "link"
+  | "chars";
 
 const L = (az: string, en: string, tr: string, ar: string, ru: string): Record<Lang, string> => ({ az, en, tr, ar, ru });
 
@@ -96,6 +101,13 @@ export const TOOLS_PAGE = {
   repeat: L("Eyni simvol təkrarlanır.", "The same character repeats.", "Aynı karakter tekrar eder.", "يتكرر الحرف نفسه.", "Один символ повторяется."),
   common: L("Çox işlənən şifrədir.", "It is a common password.", "Çok kullanılan paroladır.", "كلمة سر شائعة.", "Это частый пароль."),
   strong: L("Qısa yoxlamadan keçdi.", "It passed the short check.", "Kısa kontrolden geçti.", "اجتاز الفحص القصير.", "Прошёл короткую проверку."),
+  space: L("Ünvanda boşluq var.", "The address has a space.", "Adreste boşluk var.", "في العنوان فراغ.", "В адресе есть пробел."),
+  http: L("http və ya https ilə başlamır.", "It does not start with http or https.", "http veya https ile başlamıyor.", "لا يبدأ بـ http أو https.", "Не начинается с http или https."),
+  host: L("Domen nöqtəsizdir.", "The domain has no dot.", "Alan adında nokta yok.", "النطاق بلا نقطة.", "В домене нет точки."),
+  linkBad: L("Ünvan açılmır.", "The address does not open.", "Adres açılmıyor.", "العنوان لا يفتح.", "Адрес не открывается."),
+  linkOk: L("Qısa yoxlamadan keçdi.", "It passed the short check.", "Kısa kontrolden geçti.", "اجتاز الفحص القصير.", "Прошёл короткую проверку."),
+  over: L("Limitdən uzundur.", "It is over the limit.", "Limitten uzun.", "أطول من الحد.", "Длиннее лимита."),
+  under: L("Limitin içindədir.", "It is inside the limit.", "Limitin içinde.", "داخل الحد.", "Внутри лимита."),
   upper: L("Böyük", "Upper", "Büyük", "كبير", "Верхний"),
   lower: L("Kiçik", "Lower", "Küçük", "صغير", "Нижний"),
   words: L("Söz", "Words", "Söz", "كلمات", "Слова"),
@@ -171,6 +183,11 @@ export const TOOLS: readonly { id: ToolId; label: Record<Lang, string> }[] = [
   { id: "js-min", label: L("JavaScript sıx", "JavaScript minifier", "JavaScript sıkıştır", "ضغط JavaScript", "Сжатие JavaScript") },
   { id: "python", label: L("Python düzəlt", "Python formatter", "Python düzenle", "تنسيق Python", "Формат Python") },
   { id: "php", label: L("PHP düzəlt", "PHP formatter", "PHP düzenle", "تنسيق PHP", "Формат PHP") },
+  { id: "sql-min", label: L("SQL sıx", "SQL minifier", "SQL sıkıştır", "ضغط SQL", "Сжатие SQL") },
+  { id: "xml-min", label: L("XML sıx", "XML minifier", "XML sıkıştır", "ضغط XML", "Сжатие XML") },
+  { id: "cssvar", label: L("CSS dəyişən", "CSS variable", "CSS değişken", "متغير CSS", "Переменная CSS") },
+  { id: "link", label: L("Link yoxla", "Check a link", "Link kontrol", "فحص الرابط", "Проверка ссылки") },
+  { id: "chars", label: L("Simvol sayğacı", "Character count", "Karakter sayacı", "عدّاد الحروف", "Счётчик символов") },
 ];
 
 export const TOOL_GROUPS: readonly { id: string; title: Record<Lang, string>; ids: readonly ToolId[] }[] = [
@@ -192,7 +209,7 @@ export const TOOL_GROUPS: readonly { id: string; title: Record<Lang, string>; id
   {
     id: "format",
     title: L("Düzəltmə", "Formatting", "Düzenleme", "تنسيق", "Оформление"),
-    ids: ["htmlfmt", "js-min", "python", "php", "json", "json-min", "css", "js", "html-min", "css-min", "xml", "sql"],
+    ids: ["sql-min", "xml-min", "cssvar", "link", "chars", "htmlfmt", "js-min", "python", "php", "json", "json-min", "css", "js", "html-min", "css-min", "xml", "sql"],
   },
   {
     id: "text",

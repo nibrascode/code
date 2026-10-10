@@ -786,3 +786,42 @@ export function formatPhp(text: string) {
   if (!/<\?php|\$[A-Za-z_]/.test(text)) throw new Error("php");
   return walkCode(text, "{", "}");
 }
+
+export function minifySql(text: string) {
+  const next = text.replace(/--.*$/gm, "").replace(/\/\*[\s\S]*?\*\//g, "").replace(/\s+/g, " ").trim();
+  if (!/\b(select|insert|update|delete|create)\b/i.test(next)) throw new Error("sql");
+  return next;
+}
+
+export function minifyXml(text: string) {
+  const next = text.replace(/<!--[\s\S]*?-->/g, "").replace(/>\s+</g, "><").trim();
+  if (!next.includes("<")) throw new Error("xml");
+  return next;
+}
+
+export function cssVariable(text: string) {
+  const hex = text.trim().replace("#", "");
+  const full = hex.length === 3 ? hex.split("").map((part) => part + part).join("") : hex;
+  if (!/^[0-9a-f]{6}$/i.test(full)) throw new Error("cssvar");
+  return `--reng: #${full.toLowerCase()};`;
+}
+
+export function checkLink(text: string) {
+  const raw = text.trim();
+  const notes = [];
+  if (!raw) throw new Error("link");
+  if (/\s/.test(raw)) notes.push("space");
+  if (!/^https?:\/\//i.test(raw)) notes.push("http");
+  try {
+    const url = new URL(raw);
+    if (!url.hostname.includes(".")) notes.push("host");
+  } catch {
+    notes.push("bad");
+  }
+  return notes.length ? notes.join("\n") : "ok";
+}
+
+export function charCount(text: string, limit = 160) {
+  const count = Array.from(text).length;
+  return `${count}\n${limit}\n${count <= limit ? "ok" : "over"}`;
+}

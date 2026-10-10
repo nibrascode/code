@@ -44,6 +44,8 @@ import {
   TextQuote,
   Type,
   UserRound,
+  Variable,
+  Link,
   WholeWord,
 } from "lucide-react";
 import type { Lang } from "@/lib/i18n";
@@ -106,6 +108,11 @@ import {
   minifyJs,
   formatPython,
   formatPhp,
+  minifySql,
+  minifyXml,
+  cssVariable,
+  checkLink,
+  charCount,
 } from "@/lib/tools-run";
 
 const NEEDS_TEXT = new Set<ToolId>([
@@ -158,6 +165,11 @@ const NEEDS_TEXT = new Set<ToolId>([
   "js-min",
   "python",
   "php",
+  "sql-min",
+  "xml-min",
+  "cssvar",
+  "link",
+  "chars",
 ]);
 const PAIR = new Set<ToolId>(["base64", "url", "html"]);
 
@@ -226,6 +238,11 @@ const ICONS: Record<ToolId, typeof Braces> = {
   "js-min": Minimize2,
   python: FileCode,
   php: FileCode,
+  "sql-min": Minimize2,
+  "xml-min": Minimize2,
+  cssvar: Variable,
+  link: Link,
+  chars: WholeWord,
 };
 
 async function sha(text: string, name: "SHA-1" | "SHA-256") {
@@ -308,6 +325,24 @@ function runSync(id: ToolId, text: string, count: string, low: string, high: str
   if (id === "js-min") return minifyJs(text);
   if (id === "python") return formatPython(text);
   if (id === "php") return formatPhp(text);
+  if (id === "sql-min") return minifySql(text);
+  if (id === "xml-min") return minifyXml(text);
+  if (id === "cssvar") return cssVariable(text);
+  if (id === "link") {
+    const notes = checkLink(text).split("\n");
+    const labels: Record<string, string> = {
+      space: TOOLS_PAGE.space[lang],
+      http: TOOLS_PAGE.http[lang],
+      host: TOOLS_PAGE.host[lang],
+      bad: TOOLS_PAGE.linkBad[lang],
+      ok: TOOLS_PAGE.linkOk[lang],
+    };
+    return notes.map((note) => labels[note] || note).join("\n");
+  }
+  if (id === "chars") {
+    const [count, limit, state] = charCount(text).split("\n");
+    return `${count} / ${limit}\n${state === "ok" ? TOOLS_PAGE.under[lang] : TOOLS_PAGE.over[lang]}`;
+  }
   return "";
 }
 
