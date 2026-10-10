@@ -1,7 +1,7 @@
 // Dini suallarda cavabın BAŞINDA verilən xəbərdarlıq: «süni intellektdən din öyrənilməz» + İbn Sirinin sözü.
 // Söhbətdə yalnız İLK dini cavabda göstərilir: client {noticeShown:false} göndərir (söhbət tarixçəsində bildiriş yoxdursa),
 // server isə yalnız bu halda bloku əlavə edir (server vəziyyət saxlamır). noticeShown göndərilməyibsə (köhnə client) cavab dəyişmir.
-import { detectLang } from "./_ayah.js";
+import { detectLang } from "./_text.js";
 
 export const NOTICE_AR = "إنَّ هذا العلمَ دِينٌ، فانظروا عمَّن تأخذون دينكم";
 

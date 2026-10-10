@@ -1,17 +1,9 @@
 import { AsyncLocalStorage } from "node:async_hooks";
 import { askProvider, aiConfig } from "./_ai.js";
-import { cannedReply } from "./_canned.js";
-import { quranReply } from "./_quran.js";
-import { tawhidReply } from "./_tawhid.js";
-import { tafsirReply, withTafsirSuggest } from "./_tafsir.js";
-import { nextReply } from "./_next.js";
 import { gameReply } from "./_game.js";
-import { ayahReply, finalizeAi, compactHistory, AYAH_PROMPT } from "./_ayah.js";
-import { lughaReply, lughaNotFoundNote, isLexicalQuestion, lexicalFollowup } from "./_lugha.js";
-import { nahwReply } from "./_nahw.js";
-import { hadithReply, hadithBare } from "./_hadith.js";
-import { fatawaReply, fatawaNaturalReply } from "./_fatawa.js";
-import { itbooksReply } from "./_itbooks.js";
+import { compactHistory, AYAH_PROMPT, stripAyahMarkup, detectLang } from "./_text.js";
+// Kitab, Quran, təfsir, tövhid, hədis, fətva, lüğət və nəhv cavabları Nibras Library-dən gəlir (api/_library.js); məlumat bu saytda saxlanmır
+import { libraryReply, libraryMeta, libraryFinalize, libraryDownReply, BOOK_CUE } from "./_library.js";
 import { translateReply } from "./_translate-chat.js";
 import { snippetReply } from "./_snippets.js";
 import { localReply } from "./_local.js";
@@ -20,7 +12,7 @@ import { wikidataReply } from "./_wikidata.js";
 import { extraReply, prayerReply } from "./_extra.js";
 import { track } from "./_stats.js";
 import { isReligious } from "./_religious.js";
-import { isSourceKind, stripNotice, OLD_AZ_NOTICE } from "./_notice.js";
+import { stripNotice, OLD_AZ_NOTICE } from "./_notice.js";
 
 const SYSTEM = [
   "Sən Nibras AI-san, Nibras Code saytının köməkçisisən.",
@@ -107,9 +99,24 @@ export default async function handler(req, res) {
     // Sözün mənası (lüğət) sualı dini məsləhət deyil: bildiriş verilmir, dinReply-ə düşmür, AI də xəbərdarlıq yazmır.
     // strict: ərəb yazılı söz / «söz» işarəsi / tanış transliterasiya; loose: «what is the meaning of ihlas» kimi qısa sual (yalnız dinReply/AI üçün).
     // Əvvəlki mesaj söz mənası sualı idisə və indi yalnız ərəbcə söz yazılıbsa («والصبر؟»), bu da lüğət sualıdır.
-    const follow = lexicalFollowup(message, hist);
-    const lexical = isLexicalQuestion(message) || !!follow;
-    const lexicalLoose = lexical || isLexicalQuestion(message, { loose: true });
+    // Lüğət sualı əlamətləri library-dən gəlir (lüğət məlumatı orada): kitab sorğusu ilə birlikdə və ya ayrıca «meta» sorğusu ilə
+    let lexical = false;
+    let lexicalLoose = false;
+    let libraryDown = false;
+    const setMeta = (j) => {
+      if (!j) return;
+      lexical = !!j.lexical;
+      lexicalLoose = !!j.lexicalLoose;
+    };
+    const fromLibrary = async () => {
+      const j = await libraryReply({ message, lang: body.lang, history: hist, noticeShown: body.noticeShown, mode: body.mode });
+      if (!j) {
+        libraryDown = true;
+        return null;
+      }
+      setMeta(j);
+      return j.reply ? { reply: j.reply, kind: j.kind || "book" } : null;
+    };
     // Tərcümə («tərcümə et: …», «translate: …», «переведи: …», «ترجم: …»): modelsiz, hazır insan tərcümələrindən (api/_translate); yalnız aydın əmr + ərəbcə mətn/iki nöqtə olanda, game-dən sonra.
     // Məcmuu əl-Fətava (İbn Teymiyyə) axtarışı yalnız açıq «فتاوى ابن تيمية»/«مجموع الفتاوى»/«İbn Teymiyyə fətvası» sorğusunda işləyir; hədis, ayə, nəhv, lüğət idarəçilərindən əvvəl gəlir, çünki onlar həmin ifadələri tanımır.
     if (!fixed && body.mode !== "code" && body.mode !== "create") {
@@ -120,16 +127,30 @@ export default async function handler(req, res) {
         /* namaz vaxtı tapılmazsa, sual öz axınında qalır */
       }
     }
-    if (!fixed) for (const [kind, fn] of [["game", (m) => gameReply(m, gameHist)], ["book", (m) => translateReply(m, { ip: String(req.headers?.["x-forwarded-for"] || req.headers?.["x-real-ip"] || "").split(",")[0].trim() || "chat" })], ["book", (m) => fatawaReply(m, hist)], ["book", (m) => (body.mode === "code" || body.mode === "create" ? null : itbooksReply(m, hist))], ["book", (m) => hadithReply(m, hist)], ["next", (m) => nextReply(m, hist)], ["tafsir", tafsirReply], ["ayah", ayahReply], ["tawhid", tawhidReply], ["canned", cannedReply], ["quran", quranReply], ["book", (m) => lughaReply(follow || m)], ["book", nahwReply], ["book", hadithBare], ["book", (m) => (lexicalLoose || body.mode === "code" || body.mode === "create" ? null : fatawaNaturalReply(m))], ["din", (m) => (lexicalLoose ? null : dinReply(m))], ["brand", brandReply]]) {
-      let r = await fn(message);
-      if (r) {
-        if (kind === "ayah") r = withTafsirSuggest(r, message); // təfsir istənilməyib: ayə/surə cavabına təfsir seçimləri əlavə olunur
+    let libraryAsked = false;
+    if (!fixed)
+      for (const [kind, fn] of [
+        ["game", (m) => gameReply(m, gameHist)],
+        ["book", (m) => translateReply(m, { ip: String(req.headers?.["x-forwarded-for"] || req.headers?.["x-real-ip"] || "").split(",")[0].trim() || "chat" })],
+        // fətava, İbn Teymiyyə kitabları, hədis, ayə davamı, təfsir, ayə, tövhid, hazır cavab, Quran lüğəti, ərəb lüğəti, nəhv — library (eyni sıra)
+        ["library", () => ((libraryAsked = true), fromLibrary())],
+        ["din", (m) => (lexicalLoose ? null : dinReply(m))],
+        ["brand", brandReply],
+      ]) {
+        let r = await fn(message);
+        if (!r) continue;
+        let k = kind;
+        if (kind === "library") {
+          k = r.kind;
+          r = r.reply;
+        }
+        // tərcümə library-dən əvvəl cavab veribsə, lüğət əlaməti ayrıca soruşulur (dini bayraq üçün)
+        if (!libraryAsked && k === "book") setMeta(await libraryMeta({ message, history: hist }));
         fixed = r;
-        fromSource = isSourceKind(kind);
-        religious = kind !== "brand" && kind !== "game" && !lexical && !(kind === "din" && body.mode === "code"); // kod rejimində ümumi din-söz uyğunluğu dini sual sayılmır
+        fromSource = k === "ayah" || k === "tafsir" || k === "tawhid" || k === "quran" || k === "next" || k === "book";
+        religious = k !== "brand" && k !== "game" && !lexical && !(k === "din" && body.mode === "code"); // kod rejimində ümumi din-söz uyğunluğu dini sual sayılmır
         break;
       }
-    }
     // Hava, məzənnə, qısa izah və paket modeli çağırmır. Qalan fakt Wikidata-ya düşür.
     if (!fixed && body.mode !== "code" && body.mode !== "create") {
       try {
@@ -170,6 +191,11 @@ export default async function handler(req, res) {
       res.status(200).json({ success: true, reply: out, usedAI: false, ...relFlag(isRel) });
       return;
     }
+    // Library əlçatan deyil və sual kitab/Quran/din sualıdır: AI-yə göndərilmir, qısa nəzakətli cavab
+    if (libraryDown && body.mode !== "code" && body.mode !== "create" && (isReligious(message, body.mode) || BOOK_CUE.test(fold(message)) || /[\u0621-\u064A]{2}/.test(message) || /^\s*[\p{L}'’ -]{2,40}\s+\d{1,4}(?:\s*[-–:.]\s*\d{1,4})?\s*[?.!]*\s*$/u.test(message))) {
+      res.status(200).json({ success: false, reply: libraryDownReply(detectLang(message)), usedAI: false });
+      return;
+    }
     // Gündəlik limit istifadəçi tərəfində sayılır; doluysa yalnız xarici AI tələb edən suallar dayandırılır (hazır cavablar yuxarıda artıq cavablanıb)
     if (body.limitReached === true) {
       res.status(200).json({ success: true, reply: LIMIT_REPLY, usedAI: false, limited: true });
@@ -205,9 +231,12 @@ export default async function handler(req, res) {
       if (result.ok) {
         // AI ayə mətni yazıbsa, ərəbcə hissə Tanzil məlumatı ilə əvəz olunur, [[ayah:S:A]] işarələri açılır
         const isRel = isReligious(message, body.mode) && !lexicalLoose;
-        let aiReply = cleaned(closeTruncatedFence(finalizeAi(result.reply, message, { noBlocks: lexicalLoose })));
+        // son emal library-dədir (Quran mətni orada); əlçatan deyilsə ayə işarələri sadəcə silinir (model yazdığı ayə mətni göstərilmir)
+        const fin = await libraryFinalize({ text: result.reply, message, history: hist });
+        const finText = fin ? fin.text : stripAyahMarkup(String(result.reply || "")).replace(/[\u0001-\u0003]/g, "").replace(/\[\[\s*ayah[^\]\n]*\]\]/gi, "").replace(/[﴿﴾][^﴿﴾]{0,4000}[﴿﴾]/g, "");
+        let aiReply = cleaned(closeTruncatedFence(finText));
         // Söz mənası lüğətdə tapılmadı, cavabı AI yazıb: dəqiq olmaya bilər qeydi (dini bildiriş yox)
-        const nf = lexical ? lughaNotFoundNote(follow || message) : null;
+        const nf = lexical && fin ? fin.note : null;
         if (nf && aiReply.trim()) aiReply = aiReply.replace(/\s+$/, "") + "\n\n" + nf;
         if (!aiReply.trim()) {
           notes.push(name + ": boş cavab");

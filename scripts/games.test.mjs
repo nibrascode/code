@@ -11,7 +11,7 @@ import handler from "../api/chat.js";
 import { GAMES } from "../api/_games/index.js";
 import { createGameReply, pickGame, shownGames, langOf } from "../api/_game.js";
 import { buildGames, toModule, HEADER } from "./build-games.mjs";
-import { compactHistory, stripAyahMarkup } from "../api/_ayah.js";
+import { compactHistory, stripAyahMarkup } from "../api/_text.js";
 import { hasNotice } from "../api/_notice.js";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");

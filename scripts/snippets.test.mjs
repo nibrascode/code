@@ -9,7 +9,6 @@ import py from "../api/_snippets/python.js";
 import html from "../api/_snippets/html.js";
 import { snippetReply } from "../api/_snippets.js";
 import { localReply } from "../api/_local.js";
-import { cannedReply } from "../api/_canned.js";
 
 for (const [lang, list] of [["python", py], ["html", html]]) {
   test(`${lang}: 100 nümunə, 20 səviyyə x 5, unikal`, () => {
@@ -83,7 +82,3 @@ test("localReply: sadə sorğular", () => {
   for (const q of ["2024-10-03", "3:30", "salam python kod yaz", "python nədir", "salam, mənə həyat haqqında izah et"]) assert.equal(localReply(q), null, q);
 });
 
-test("cannedReply dəyişməyib", () => {
-  assert.equal(typeof cannedReply, "function");
-  assert.equal(cannedReply("python kod nümunəsi"), null);
-});
