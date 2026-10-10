@@ -395,7 +395,7 @@ const FATWA_AR = /فتاوي|فتوي|فتاوا|فتوا/;
 const FATWA_LAT = /\b(?:fet(?:va|eva|wa|ava)\w*|fatw\w*|fatawa\w*|fetvalar\w*|fetwa\w*)\b/;
 const FATWA_RU = /фетв[а-яё]*|фатв[а-яё]*|фатав[а-яё]*/i;
 const INTENT_AR = /(?:^|\s)(?:رايه|راي|اراء|آراء|قوله|قول|يقول|قال|ماذا\s+قال|ما\s+قال|حكم|موقف|موقفه|مذهب|مذهبه|كلام|كلامه)(?=\s|$)/;
-const INTENT_LAT = /\b(?:fikr\w*|rey\w*|gorus\w*|nə?\s*deyir|ne\s*deyir|ne\s*diyor|ne\s*der|deyib|demisdir|demis|dedi|opinion|view|views|say|says|said|ruling|stance|position|mevqe\w*|mövqe\w*|hokm\w*|hükm\w*|hukm\w*|kanaat\w*)\b/;
+const INTENT_LAT = /\b(?:haqqinda|haqqında|hakkinda|haqda|barede\w*|baresinde\w*|about|fikr\w*|rey\w*|gorus\w*|nə?\s*deyir|ne\s*deyir|ne\s*diyor|ne\s*der|deyib|demisdir|demis|dedi|opinion|view|views|say|says|said|ruling|stance|position|mevqe\w*|mövqe\w*|hokm\w*|hükm\w*|hukm\w*|kanaat\w*)\b/;
 const INTENT_RU = /мнени[а-яё]*|говорит|сказал|считает|позици[а-яё]*|взгляд[а-яё]*|что\s+говорит/i;
 const BIO_AR = /من\s+هو|ترجمه|سيره|حياته|ولد|وفاته/;
 const BIO_LAT = /\b(?:kimdir|kimdi|who\s+is|who\s+was|biograph\w*|biyograf\w*|hayati|heyati|həyatı|doğum|dogum|born|died|vəfat|vefat)\b/;
@@ -503,7 +503,7 @@ export function parseNaturalQuery(message) {
     const alts = extractAlts(raw, { natural: true });
     return alts.length ? { mode: "q", phrase: alts[0], alts, natural: true } : null;
   }
-  const cue = RULING_LAT.test(f) || RULING_RU.test(raw);
+  const cue = RULING_LAT.test(f) || RULING_RU.test(raw) || FATWA_LAT.test(f) || FATWA_RU.test(raw);
   const t = topicAlts(raw);
   if (!t.alts.length) return null;
   if (!cue && !t.bare) return null;
@@ -512,7 +512,7 @@ export function parseNaturalQuery(message) {
     const m = matchTopics(raw);
     let extra = 0;
     m.tokens.forEach((tk, i) => {
-      if (m.used[i] || STOP.has(tk) || RULING_LAT.test(tk) || RULING_RU.test(tk)) return;
+      if (m.used[i] || STOP.has(tk) || RULING_LAT.test(tk) || RULING_RU.test(tk) || FATWA_LAT.test(tk) || /^(?:haqqinda|hakkinda|haqda|barede|baresinde|about)$/.test(tk)) return;
       extra++;
     });
     if (extra > 1) return null;

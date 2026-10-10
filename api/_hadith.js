@@ -9,6 +9,7 @@ import { isLexicalQuestion } from "./_lugha.js";
 import { norm, stem, tokens, tokenSpans } from "./_hadith/tok.js";
 import { LOADERS, SHARD } from "./_hadith/loaders.js";
 import { sentenceStart, sentenceEnd } from "./_excerpt.js";
+import { topicAlts } from "./_fatawa/topicmatch.js";
 
 export const PAGE = 5; // bir mesajda göstərilən hədis sayı
 export const MAX_LIST = 800; // bundan çox uyğunluq: siyahı verilmir, dəqiqləşdirmə istənir
@@ -439,11 +440,116 @@ export const TOPICS = [
   [["comertlik", "cömertlik", "sexavet", "generosity", "щедрост"], "الكرم"],
   [["qonaq", "misafir", "guest", "гост"], "الضيف"],
 ];
+// yalnız hədis axtarışı üçün əlavə mövzular (fətva lüğətinə qoşulmur: «salam» kimi ümumi sözlər orada təbii sual sayılmasın)
+export const TOPICS_EXTRA = [
+  [["ana", "anne", "anaya", "anani", "anam", "mother", "мать", "матер"], "أمك"],
+  [["ata", "baba", "father", "отец", "отца"], "الوالد"],
+  [["qohum", "akraba", "sile", "sileyi", "relatives", "kinship", "родствен"], "الرحم"],
+  [["usaq", "cocuk", "ovlad", "evlat", "children", "дети", "детей"], "الولد"],
+  [["qadin", "kadin", "arvad", "women", "женщин"], "النساء"],
+  [["elm", "ilm", "alim", "scholar", "учен"], "العلم"],
+  [["quran", "kuran", "qurani", "koran", "коран"], "القرآن"],
+  [["zikr", "dhikr", "зикр"], "الذكر"],
+  [["salavat", "salavat", "salawat", "салават"], "الصلاة على النبي"],
+  [["sukur", "sukr", "shukr", "gratitude", "благодар"], "الشكر"],
+  [["tebessum", "gulus", "smile", "улыб"], "تبسمك"],
+  [["salam", "selam", "greeting", "салям", "приветств"], "السلام"],
+  [["hicab", "tesettur", "hijab", "хиджаб"], "الحجاب"],
+  [["ticaret", "alver", "trade", "торгов"], "البيع"],
+  [["borc", "debt", "долг"], "الدين"],
+  [["xestelik", "hastalik", "xeste", "sickness", "illness", "болезн"], "المريض"],
+  [["cenaze", "janaza", "funeral", "похорон"], "الجنازة"],
+  [["mescid", "mescit", "masjid", "mosque", "мечет"], "المسجد"],
+  [["cume", "cuma", "jumuah", "jumma", "friday", "пятниц", "джума"], "الجمعة"],
+  [["sunnet", "sunnah", "сунн"], "السنة"],
+  [["bidet", "bidat", "bidah", "innovation", "нововвед"], "بدعة"],
+  [["sirk", "shirk", "ширк"], "الشرك"],
+  [["tovhid", "tevhid", "tawhid", "таухид"], "التوحيد"],
+  [["dil", "lisan", "tongue", "язык"], "اللسان"],
+  [["yuxu", "ruya", "dream", "сон"], "الرؤيا"],
+  [["deccal", "dajjal", "даджжал"], "الدجال"],
+  [["mehdi", "mahdi", "махди"], "المهدي"],
+  [["isa", "jesus", "иса"], "عيسى ابن مريم"],
+  [["mələk", "melek", "angel", "ангел"], "الملائكة"],
+  [["seytan", "shaytan", "satan", "шайтан"], "الشيطان"],
+  [["cin", "jinn", "джинн"], "الجن"],
+  [["sehr", "sihr", "sihir", "magic", "колдов"], "السحر"],
+  [["dunya", "world", "мир"], "الدنيا"],
+  [["axiret", "ahiret", "akhirah", "hereafter", "ахира"], "الآخرة"],
+  [["sedaqet", "dostluq", "dost", "friend", "друг"], "الخليل"],
+  [["temizlik", "taharet", "tahara", "purity", "чистот"], "الطهور"],
+  [["qusl", "gusul", "ghusl", "гусль"], "الغسل"],
+  [["teyemmum", "tayammum", "таяммум"], "التيمم"],
+  [["ezan", "azan", "adhan", "азан"], "الأذان"],
+  [["sehur", "suhur", "sahur", "сухур"], "السحور"],
+  [["iftar", "ифтар"], "الفطر"],
+  [["qurban", "kurban", "udhiyah", "курбан"], "الأضحية"],
+  [["umre", "umra", "umrah", "умра"], "العمرة"],
+  [["itaet", "obedience", "повинов"], "الطاعة"],
+  [["hakim", "emir", "ruler", "правител"], "الأمير"],
+  [["sexavet", "comerd"], "الجود"],
+  [["paxilliq", "cimrilik", "xesislik", "stinginess", "скуп"], "البخل"],
+  [["oğurluq", "ogurluq", "hirsizlik", "theft", "краж"], "السرقة"],
+  [["qetl", "oldurmek", "murder", "killing", "убийств"], "القتل"],
+  [["şəhid", "sehid", "shahid", "martyr", "шахид"], "الشهيد"],
+  [["heyvan", "hayvan", "animal", "животн"], "البهائم"],
+  [["it", "kopek", "dog", "собак"], "الكلب"],
+  [["pisik", "kedi", "cat", "кошк"], "الهرة"],
+  [["yemek", "food", "eating", "еда"], "الطعام"],
+  [["su", "water", "вода"], "الماء"],
+  [["paltar", "elbise", "geyim", "clothes", "одежд"], "الثوب"],
+  [["qizil", "altin", "gold", "золот"], "الذهب"],
+  [["ipek", "ipək", "silk", "шелк"], "الحرير"],
+  [["saqqal", "sakal", "beard", "бород"], "اللحى"],
+  [["misvak", "miswak", "мисвак"], "السواك"],
+];
+// çoxsözlü mövzular (tək sözdən əvvəl yoxlanır): ardıcıl söz prefiksləri -> ərəbcə ifadə
+export const TOPIC_PHRASES = [
+  [["namaz terk", "namazi terk", "namazı tərk", "namaz qilmayan", "namaz kilmayan", "terk namaz", "abandon prayer", "leaving prayer", "оставлен намаз"], "ترك الصلاة"],
+  [["ana haqq", "ana hakk", "anaya hormet", "anaya yaxsiliq", "rights of mother"], "أمك"],
+  [["valideyn haqq", "ata ana haqq", "ataya anaya", "valideyne yaxsiliq", "valideyne hormet", "ebeveyn hakk", "kindness to parents", "birr al walidayn"], "بر الوالدين"],
+  [["valideyne asi", "valideyne qarsi", "anaya asi", "disobedience to parents", "uquq"], "عقوق الوالدين"],
+  [["qohumluq elaqe", "qohumlarla elaqe", "sile rehm", "sileyi rehm", "silat rahim", "akraba ziyaret"], "الرحم"],
+  [["əməllər niyyət", "emeller niyyet", "ameller niyet", "deeds intention", "actions intention"], "إنما الأعمال بالنيات"],
+  [["gece namaz", "tehecud", "teheccud", "tahajjud", "qiyamul leyl", "night prayer"], "قيام الليل"],
+  [["cemaat namaz", "cemaatle namaz", "camaat namaz", "congregational prayer", "jamaah prayer"], "صلاة الجماعة"],
+  [["cume namaz", "cuma namaz", "friday prayer", "jumuah prayer"], "الجمعة"],
+  [["bayram namaz", "eid prayer"], "العيدين"],
+  [["oruc fezilet", "orucun fezilet", "virtue of fasting"], "الصيام جنة"],
+  [["quran oxu", "quran oxumaq", "kuran okumak", "reciting quran", "quranin fezilet", "quran fezilet"], "القرآن"],
+  [["dilini qoru", "dilin qorunmasi", "dil qoru", "guarding tongue"], "اللسان"],
+  [["xos soz", "gozel soz", "yaxsi soz", "good word"], "الكلمة الطيبة"],
+  [["elm oyren", "elm talib", "seeking knowledge", "ilim ogren"], "طلب العلم"],
+  [["qiyamet elamet", "kiyamet alamet", "signs of the hour", "qiyametin elamet"], "أشراط الساعة"],
+  [["qebir ezab", "kabir azab", "punishment of grave"], "عذاب القبر"],
+  [["qonsu haqq", "komsu hakk", "rights of neighbour", "rights of neighbor"], "الجار"],
+  [["yetime baxmaq", "yetim baxan", "caring for orphan"], "كافل اليتيم"],
+  [["insanlara yaxsiliq", "xalqa yaxsiliq", "helping people"], "أحب الناس إلى الله"],
+  [["guzgu", "aynaya bax"], "المرآة"],
+];
+function phraseTopic(message) {
+  const toks = foldLat(message).split(/[^a-z\u0400-\u04FF]+/).filter(Boolean);
+  for (const [keys, ar] of TOPIC_PHRASES) {
+    for (const k0 of keys) {
+      const kw = foldLat(k0).split(/\s+/).filter(Boolean);
+      for (let i = 0; i + kw.length <= toks.length; i++) {
+        let ok = true;
+        for (let j = 0; j < kw.length; j++) {
+          const t = toks[i + j];
+          const k = kw[j];
+          if (!(t === k || (k.length >= 3 && t.startsWith(k)))) { ok = false; break; }
+        }
+        if (ok) return ar;
+      }
+    }
+  }
+  return null;
+}
 function topicTerms(message) {
   const f = foldLat(message);
   const toks = f.split(/[^a-z\u0400-\u04FF-]+/).filter((t) => t.length >= 3);
   const found = [];
-  for (const [keys, ar] of TOPICS) {
+  for (const [keys, ar] of [...TOPICS, ...TOPICS_EXTRA]) {
     if (toks.some((t) => keys.some((k0) => { const k = foldLat(k0); return t === k || (k.length >= 4 && t.startsWith(k)); }))) found.push(ar);
   }
   return found.slice(0, 2);
@@ -478,16 +584,28 @@ export function parseHadithQuery(message) {
     while (ws.length > 1 && /^(?:حديث|الحديث|احاديث)$/.test(norm(ws[ws.length - 1]))) ws.pop();
     phrase = ws.join(" ");
   }
+  let alts = null;
   if (!phrase || !tokens(phrase).length) {
+    const ph = phraseTopic(raw);
     const tp = topicTerms(raw);
-    if (tp.length) phrase = tp.join(" ");
+    const list = [];
+    if (ph) list.push(ph);
+    if (tp.length >= 2) list.push(tp.join(" "));
+    list.push(...tp);
+    try {
+      list.push(...topicAlts(raw).alts.flatMap((a) => a.split("/").map((x) => x.trim())));
+    } catch {
+      /* lüğət yüklənmədi */
+    }
+    alts = [...new Set(list.filter(Boolean))];
+    if (alts.length) phrase = alts[0];
   }
   if (!phrase) {
     // axtarış fel sözü var, amma ifadə yoxdur: qısa istifadə qeydi; ümumi sual («hədis nədir») -> null
     const f = foldLat(raw);
     return SEARCH_VERB.test(f) || SEARCH_VERB.test(raw) ? { mode: "usage" } : null;
   }
-  return { mode: "q", phrase };
+  return alts && alts.length > 1 ? { mode: "q", phrase, alts } : { mode: "q", phrase };
 }
 
 /** Cümləvi (yalnız ərəbcə) uzun mesaj: hədisin dəqiq ifadəsi ola bilər */
@@ -631,6 +749,17 @@ export async function hadithReply(message, hist) {
   const lang = toLang(message);
   if (q.mode === "usage") return tx(lang).usage;
   if (q.mode === "n") return runNumber(q.book, q.num, lang);
+  if (q.alts) {
+    // mövzu lüğətindən bir neçə variant: nəticəsi olan və çox geniş olmayan ilk variant
+    let fallback = null;
+    for (const ph of q.alts) {
+      const r = await searchHadith(ph);
+      if (!r.list.length) continue;
+      if (r.list.length <= MAX_LIST || (r.terms.length >= 2 && r.exact > 0 && r.exact <= MAX_LIST)) return runQuery(ph, lang);
+      if (!fallback) fallback = ph;
+    }
+    return runQuery(fallback || q.phrase, lang);
+  }
   return runQuery(q.phrase, lang);
 }
 
