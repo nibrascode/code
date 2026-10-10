@@ -55,6 +55,10 @@ export const TOOL_SLUG: Record<ToolId, string> = {
   lines: "line-numbers",
   jsoncsv: "json-to-csv",
   palette: "color-palette",
+  htmlfmt: "html-formatter",
+  "js-min": "javascript-minifier",
+  python: "python",
+  php: "php",
 };
 
 export const TOOL_LEAD: Record<ToolId, Record<Lang, string>> = {
@@ -415,7 +419,36 @@ export const TOOL_LEAD: Record<ToolId, Record<Lang, string>> = {
     "يصنع درجة أفتح وأغمق من لون واحد.\n\nمثال: #1d4ed8. السطر الأول اللون نفسه والثاني أفتح والثالث أغمق.\n\nهذه الصفحة لا تغيّر صورة. تُظهر ثلاثة رموز فقط.",
     "Делает более светлый и более тёмный вариант из одного цвета.\n\nПример: #1d4ed8. Первая строка — сам цвет, вторая светлее, третья темнее.\n\nСтраница картинку не меняет. Только показывает три кода.",
   ),
+  htmlfmt: L(
+    "HTML kodunu sətirlərə ayırır. Hər etiket öz yerində durur.\n\nNümunə: <p><b>Salam</b></p> yazılanda p və b ayrı sətirə düşür.\n\nHTML kodu aləti işarəni gizlədir. Bu səhifə yalnız düzəldir.",
+    "Breaks HTML onto lines. Each tag sits in its place.\n\nExample: <p><b>Salam</b></p> puts p and b on separate lines.\n\nThe HTML code tool hides a sign. This page only formats.",
+    "HTML kodunu satırlara ayırır. Her etiket kendi yerinde durur.\n\nÖrnek: <p><b>Salam</b></p> yazılınca p ve b ayrı satıra düşer.\n\nHTML kodu aracı işareti gizler. Bu sayfa yalnız düzenler.",
+    "يفصل HTML على أسطر. كل وسم يقف في مكانه.\n\nمثال: <p><b>Salam</b></p> يضع p وb في سطرين.\n\nأداة كود HTML تخفي العلامة. هذه الصفحة تنسّق فقط.",
+    "Разбивает HTML на строки. Каждый тег стоит на своём месте.\n\nПример: <p><b>Salam</b></p> ставит p и b на разные строки.\n\nИнструмент кода HTML прячет знак. Эта страница только оформляет.",
+  ),
+  "js-min": L(
+    "JavaScript-dən boşluq və şərhi çıxarır. Bir sətirdə qalır.\n\nNümunə: function salam() { return 1; } yazılanda boşluqlar gedir.\n\nBu səhifə kodu işlətmir. Yalnız sıxır.",
+    "Removes spaces and comments from JavaScript. It stays on one line.\n\nExample: function salam() { return 1; } loses the spaces.\n\nThis page does not run the code. It only minifies.",
+    "JavaScript'ten boşluk ve yorumu çıkarır. Tek satırda kalır.\n\nÖrnek: function salam() { return 1; } yazılınca boşluklar gider.\n\nBu sayfa kodu çalıştırmaz. Yalnız sıkıştırır.",
+    "يحذف الفراغ والتعليق من JavaScript. يبقى في سطر واحد.\n\nمثال: function salam() { return 1; } تفقد الفراغات.\n\nهذه الصفحة لا تشغّل الكود. تضغط فقط.",
+    "Убирает пробелы и комментарии из JavaScript. Остаётся одна строка.\n\nПример: function salam() { return 1; } теряет пробелы.\n\nСтраница код не запускает. Только сжимает.",
+  ),
+  python: L(
+    "Python kodunun sətir sonundakı boşluğu silir və tabı dörd boşluğa çevirir.\n\nNümunə: print(\"Salam\") olduğu kimi qalır, artıq boşluq gedir.\n\nBu səhifə Python-u işlətmir. Yalnız sətiri düzəldir.",
+    "Removes the space at the end of a Python line and turns a tab into four spaces.\n\nExample: print(\"Salam\") stays as it is, the extra space goes.\n\nThis page does not run Python. It only cleans the lines.",
+    "Python kodunun satır sonundaki boşluğu siler ve tabı dört boşluğa çevirir.\n\nÖrnek: print(\"Salam\") olduğu gibi kalır, fazla boşluk gider.\n\nBu sayfa Python'u çalıştırmaz. Yalnız satırı düzeltir.",
+    "يحذف الفراغ في آخر سطر Python ويحوّل tab إلى أربعة فراغات.\n\nمثال: print(\"Salam\") يبقى كما هو ويذهب الفراغ الزائد.\n\nهذه الصفحة لا تشغّل Python. تنظّف الأسطر فقط.",
+    "Убирает пробел в конце строки Python и превращает tab в четыре пробела.\n\nПример: print(\"Salam\") остаётся как есть, лишний пробел уходит.\n\nСтраница Python не запускает. Только чистит строки.",
+  ),
+  php: L(
+    "PHP kodunu sətirlərə ayırır. Mötərizə öz sətirində durur.\n\nNümunə: <?php echo \"Salam\"; yazılanda sətirlər ayrılır.\n\nBu səhifə PHP-ni işlətmir. Yalnız düzəldir.",
+    "Breaks PHP onto lines. A brace sits on its own line.\n\nExample: <?php echo \"Salam\"; gets split onto lines.\n\nThis page does not run PHP. It only formats.",
+    "PHP kodunu satırlara ayırır. Parantez kendi satırında durur.\n\nÖrnek: <?php echo \"Salam\"; yazılınca satırlar ayrılır.\n\nBu sayfa PHP'yi çalıştırmaz. Yalnız düzenler.",
+    "يفصل PHP على أسطر. القوس يقف في سطره.\n\nمثال: <?php echo \"Salam\"; ينقسم على أسطر.\n\nهذه الصفحة لا تشغّل PHP. تنسّق فقط.",
+    "Разбивает PHP на строки. Скобка стоит на своей строке.\n\nПример: <?php echo \"Salam\"; делится на строки.\n\nСтраница PHP не запускает. Только оформляет.",
+  ),
 };
+
 
 
 
@@ -455,6 +488,10 @@ export const TOOL_SAMPLE: Partial<Record<ToolId, { text?: string; extra?: string
   lines: { text: "bir\niki\nüç" },
   jsoncsv: { text: "[{\"ad\":\"Aysel\",\"yaş\":20}]" },
   palette: { text: "#1d4ed8" },
+  htmlfmt: { text: "<p><b>Salam</b></p>" },
+  "js-min": { text: "function salam() { return 1; }" },
+  python: { text: "print(\"Salam\")\n" },
+  php: { text: "<?php echo \"Salam\";" },
 };
 
 export function toolIdFromSlug(slug: string) {

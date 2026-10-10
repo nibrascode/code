@@ -102,6 +102,10 @@ import {
   lineNumbers,
   jsonToCsv,
   colorPalette,
+  formatHtml,
+  minifyJs,
+  formatPython,
+  formatPhp,
 } from "@/lib/tools-run";
 
 const NEEDS_TEXT = new Set<ToolId>([
@@ -150,6 +154,10 @@ const NEEDS_TEXT = new Set<ToolId>([
   "lines",
   "jsoncsv",
   "palette",
+  "htmlfmt",
+  "js-min",
+  "python",
+  "php",
 ]);
 const PAIR = new Set<ToolId>(["base64", "url", "html"]);
 
@@ -214,6 +222,10 @@ const ICONS: Record<ToolId, typeof Braces> = {
   lines: ListOrdered,
   jsoncsv: Sheet,
   palette: SwatchBook,
+  htmlfmt: Code,
+  "js-min": Minimize2,
+  python: FileCode,
+  php: FileCode,
 };
 
 async function sha(text: string, name: "SHA-1" | "SHA-256") {
@@ -292,6 +304,10 @@ function runSync(id: ToolId, text: string, count: string, low: string, high: str
   if (id === "lines") return lineNumbers(text);
   if (id === "jsoncsv") return jsonToCsv(text);
   if (id === "palette") return colorPalette(text);
+  if (id === "htmlfmt") return formatHtml(text);
+  if (id === "js-min") return minifyJs(text);
+  if (id === "python") return formatPython(text);
+  if (id === "php") return formatPhp(text);
   return "";
 }
 

@@ -54,7 +54,11 @@ export type ToolId =
   | "trim"
   | "lines"
   | "jsoncsv"
-  | "palette";
+  | "palette"
+  | "htmlfmt"
+  | "js-min"
+  | "python"
+  | "php";
 
 const L = (az: string, en: string, tr: string, ar: string, ru: string): Record<Lang, string> => ({ az, en, tr, ar, ru });
 
@@ -163,6 +167,10 @@ export const TOOLS: readonly { id: ToolId; label: Record<Lang, string> }[] = [
   { id: "lines", label: L("Sətir nömrəsi", "Line numbers", "Satır numarası", "أرقام الأسطر", "Номера строк") },
   { id: "jsoncsv", label: L("JSON-dan CSV", "JSON to CSV", "JSON'dan CSV", "من JSON إلى CSV", "JSON в CSV") },
   { id: "palette", label: L("Rəng palitrası", "Color palette", "Renk paleti", "لوحة الألوان", "Палитра") },
+  { id: "htmlfmt", label: L("HTML düzəlt", "HTML formatter", "HTML düzenle", "تنسيق HTML", "Формат HTML") },
+  { id: "js-min", label: L("JavaScript sıx", "JavaScript minifier", "JavaScript sıkıştır", "ضغط JavaScript", "Сжатие JavaScript") },
+  { id: "python", label: L("Python düzəlt", "Python formatter", "Python düzenle", "تنسيق Python", "Формат Python") },
+  { id: "php", label: L("PHP düzəlt", "PHP formatter", "PHP düzenle", "تنسيق PHP", "Формат PHP") },
 ];
 
 export const TOOL_GROUPS: readonly { id: string; title: Record<Lang, string>; ids: readonly ToolId[] }[] = [
@@ -184,7 +192,7 @@ export const TOOL_GROUPS: readonly { id: string; title: Record<Lang, string>; id
   {
     id: "format",
     title: L("Düzəltmə", "Formatting", "Düzenleme", "تنسيق", "Оформление"),
-    ids: ["json", "json-min", "css", "js", "html-min", "css-min", "xml", "sql"],
+    ids: ["htmlfmt", "js-min", "python", "php", "json", "json-min", "css", "js", "html-min", "css-min", "xml", "sql"],
   },
   {
     id: "text",
@@ -200,16 +208,16 @@ export const TOOL_GROUPS: readonly { id: string; title: Record<Lang, string>; id
 
 export function pageTools(slug: string) {
   const map: Record<string, ToolId[]> = {
-    "html-css": ["css", "html", "html-min"],
-    javascript: ["js"],
+    "html-css": ["htmlfmt", "css", "html", "html-min"],
+    javascript: ["js", "js-min"],
     sql: ["sql"],
-    python: ["json", "csv"],
+    python: ["python", "json", "csv"],
     "json-nedir": ["json", "json-min", "csv"],
     "css-nedir": ["css", "css-min", "color"],
-    "html-nedir": ["html", "html-min"],
-    "javascript-nedir": ["js"],
-    "python-nedir": ["json"],
-    "ilk-html": ["html", "css"],
+    "html-nedir": ["htmlfmt", "html", "html-min"],
+    "javascript-nedir": ["js", "js-min"],
+    "python-nedir": ["python", "json"],
+    "ilk-html": ["htmlfmt", "html", "css"],
   };
   return map[slug] ?? [];
 }

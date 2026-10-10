@@ -739,3 +739,50 @@ export function colorPalette(text: string) {
   const base = full.toLowerCase();
   return [`#${base}`, mix(base, 255, 0.35), mix(base, 0, 0.35)].join("\n");
 }
+
+export function formatHtml(text: string) {
+  const raw = text.trim();
+  if (!raw.includes("<")) throw new Error("html");
+  const tokens = raw.replace(/>\s+</g, "><").split(/(<[^>]+>)/).filter(Boolean);
+  let pad = 0;
+  const lines: string[] = [];
+  for (const token of tokens) {
+    if (!token.startsWith("<")) {
+      const value = token.trim();
+      if (value) lines.push(`${"  ".repeat(pad)}${value}`);
+      continue;
+    }
+    const close = /^<\//.test(token);
+    const empty = /\/>$/.test(token) || /^<(area|base|br|col|embed|hr|img|input|link|meta|source|track|wbr)\b/i.test(token);
+    if (close) pad = Math.max(0, pad - 1);
+    lines.push(`${"  ".repeat(pad)}${token}`);
+    if (!close && !empty && !token.startsWith("<!")) pad += 1;
+  }
+  return lines.join("\n");
+}
+
+export function minifyJs(text: string) {
+  const next = text
+    .replace(/\/\*[\s\S]*?\*\//g, "")
+    .replace(/(^|[^:])\/\/.*$/gm, "$1")
+    .replace(/\s+/g, " ")
+    .replace(/\s*([{}();,=+\-*/<>])\s*/g, "$1")
+    .trim();
+  if (!next) throw new Error("js");
+  return next;
+}
+
+export function formatPython(text: string) {
+  const raw = text.replace(/\t/g, "    ").replace(/\r/g, "");
+  if (!raw.trim()) throw new Error("python");
+  const lines = raw.split("\n").map((line) => line.trimEnd());
+  return lines
+    .filter((line, index, all) => line.trim() || (index > 0 && all[index - 1].trim()))
+    .join("\n")
+    .trim();
+}
+
+export function formatPhp(text: string) {
+  if (!/<\?php|\$[A-Za-z_]/.test(text)) throw new Error("php");
+  return walkCode(text, "{", "}");
+}
