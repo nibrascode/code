@@ -242,58 +242,60 @@ function Home() {
               <ArrowUpRight className="size-4" />
             </a>
           </div>
-          <a className="nx-ai-bar" href="/ai">
-            <img src="/nibras-ai.png" alt="" />
-            <span>Nibras AI</span>
-          </a>
-          <a
-            className="nx-studio-bar"
-            href="https://dev.nibrascode.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <svg className="nx-term" viewBox="0 0 24 24" aria-hidden="true">
-              <rect x="3" y="4" width="18" height="16" rx="3" fill="none" stroke="currentColor" strokeWidth="1.6" />
-              <path
-                d="M7 9.2 10.2 12 7 14.8M12.2 15h5"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.6"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-            <span>Nibras Dev</span>
-          </a>
-          <a
-            className="nx-apk-bar"
-            href="https://studio.nibrascode.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                fill="currentColor"
-                d="M7 3.5h7.2L19 8.2V20a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 6 20V5a1.5 1.5 0 0 1 1-1.5Z"
-              />
-              <path fill="#05060c" d="M14 3.8V8h4.1" />
-              <path
-                fill="#05060c"
-                d="M12 11.2a.8.8 0 0 1 .8.8v2.1h2.1a.8.8 0 0 1 0 1.6h-2.1V18a.8.8 0 0 1-1.6 0v-2.3H8.9a.8.8 0 0 1 0-1.6h2.3V12a.8.8 0 0 1 .8-.8Z"
-              />
-            </svg>
-            <span>Nibras Apk</span>
-          </a>
-          <a className="nx-apk-bar" href={toolsPath(lang)}>
-            <svg className="nx-apk nx-tools" viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                fill="currentColor"
-                d="M14.2 3.2a2 2 0 0 1 2.8 0l1.2 1.2a2 2 0 0 1 0 2.8l-.7.7-4-4 .7-.7Zm-1.8 2.2 4 4-6.8 6.8H5.6v-4l6.8-6.8Z"
-              />
-              <path fill="currentColor" d="M4 18.2h8.5v1.6H4z" />
-            </svg>
-            <span>{TOOLS_PAGE.heading[lang]}</span>
-          </a>
+          <div className="nx-bars">
+            <a className="nx-ai-bar" href="/ai">
+              <img src="/nibras-ai.png" alt="" />
+              <span>Nibras AI</span>
+            </a>
+            <a
+              className="nx-studio-bar"
+              href="https://dev.nibrascode.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <svg className="nx-term" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="4" width="18" height="16" rx="3" fill="none" stroke="currentColor" strokeWidth="1.6" />
+                <path
+                  d="M7 9.2 10.2 12 7 14.8M12.2 15h5"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              <span>Nibras Dev</span>
+            </a>
+            <a
+              className="nx-apk-bar"
+              href="https://studio.nibrascode.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  fill="currentColor"
+                  d="M7 3.5h7.2L19 8.2V20a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 6 20V5a1.5 1.5 0 0 1 1-1.5Z"
+                />
+                <path fill="#05060c" d="M14 3.8V8h4.1" />
+                <path
+                  fill="#05060c"
+                  d="M12 11.2a.8.8 0 0 1 .8.8v2.1h2.1a.8.8 0 0 1 0 1.6h-2.1V18a.8.8 0 0 1-1.6 0v-2.3H8.9a.8.8 0 0 1 0-1.6h2.3V12a.8.8 0 0 1 .8-.8Z"
+                />
+              </svg>
+              <span>Nibras Apk</span>
+            </a>
+            <a className="nx-apk-bar" href={toolsPath(lang)}>
+              <svg className="nx-apk nx-tools" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  fill="currentColor"
+                  d="M14.2 3.2a2 2 0 0 1 2.8 0l1.2 1.2a2 2 0 0 1 0 2.8l-.7.7-4-4 .7-.7Zm-1.8 2.2 4 4-6.8 6.8H5.6v-4l6.8-6.8Z"
+                />
+                <path fill="currentColor" d="M4 18.2h8.5v1.6H4z" />
+              </svg>
+              <span>{TOOLS_PAGE.heading[lang]}</span>
+            </a>
+          </div>
         </div>
         <div className="nx-stage">
           <img src="/home/hero-desk.jpg" alt="" />

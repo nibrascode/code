@@ -6695,3 +6695,30 @@ body.is-studio {
   .apk-shots { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .apk-edit { grid-template-columns: 1fr; }
 }
+
+/* ana səhifə: 4 keçid kartı 2×2 */
+.nx-bars {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  width: 100%;
+  max-width: 38rem;
+  margin-top: 14px;
+}
+.nx-bars > a {
+  margin-top: 0;
+  max-width: none;
+  min-width: 0;
+  padding: 6px 12px 6px 8px;
+}
+.nx-bars > a > span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+@media (max-width: 360px) {
+  .nx-bars > a { gap: 6px; padding: 6px 8px 6px 6px; }
+  .nx-bars > a > span { font-size: 13px; }
+  .nx-bars > a > img, .nx-bars > a > svg { width: 32px; height: 30px; }
+}
