@@ -46,6 +46,8 @@ import {
   UserRound,
   Variable,
   Link,
+  Mail,
+  Globe,
   WholeWord,
 } from "lucide-react";
 import type { Lang } from "@/lib/i18n";
@@ -113,6 +115,11 @@ import {
   cssVariable,
   checkLink,
   charCount,
+  formatYaml,
+  markdownHtml,
+  checkEmail,
+  numberWords,
+  checkIp,
 } from "@/lib/tools-run";
 
 const NEEDS_TEXT = new Set<ToolId>([
@@ -170,6 +177,11 @@ const NEEDS_TEXT = new Set<ToolId>([
   "cssvar",
   "link",
   "chars",
+  "yaml",
+  "markdown",
+  "email",
+  "words",
+  "ip",
 ]);
 const PAIR = new Set<ToolId>(["base64", "url", "html"]);
 
@@ -243,6 +255,11 @@ const ICONS: Record<ToolId, typeof Braces> = {
   cssvar: Variable,
   link: Link,
   chars: WholeWord,
+  yaml: FileCode,
+  markdown: FileCode,
+  email: Mail,
+  words: Hash,
+  ip: Globe,
 };
 
 async function sha(text: string, name: "SHA-1" | "SHA-256") {
@@ -342,6 +359,23 @@ function runSync(id: ToolId, text: string, count: string, low: string, high: str
   if (id === "chars") {
     const [count, limit, state] = charCount(text).split("\n");
     return `${count} / ${limit}\n${state === "ok" ? TOOLS_PAGE.under[lang] : TOOLS_PAGE.over[lang]}`;
+  }
+  if (id === "yaml") return formatYaml(text);
+  if (id === "markdown") return markdownHtml(text);
+  if (id === "email") {
+    const notes = checkEmail(text).split("\n");
+    const labels: Record<string, string> = {
+      at: TOOLS_PAGE.at[lang],
+      dot: TOOLS_PAGE.dot[lang],
+      space: TOOLS_PAGE.space[lang],
+      ok: TOOLS_PAGE.emailOk[lang],
+    };
+    return notes.map((note) => labels[note] || note).join("\n");
+  }
+  if (id === "words") return numberWords(text, lang);
+  if (id === "ip") {
+    checkIp(text);
+    return `${text.trim()}\n${TOOLS_PAGE.ipOk[lang]}`;
   }
   return "";
 }

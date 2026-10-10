@@ -63,7 +63,12 @@ export type ToolId =
   | "xml-min"
   | "cssvar"
   | "link"
-  | "chars";
+  | "chars"
+  | "yaml"
+  | "markdown"
+  | "email"
+  | "words"
+  | "ip";
 
 const L = (az: string, en: string, tr: string, ar: string, ru: string): Record<Lang, string> => ({ az, en, tr, ar, ru });
 
@@ -108,6 +113,10 @@ export const TOOLS_PAGE = {
   linkOk: L("Qısa yoxlamadan keçdi.", "It passed the short check.", "Kısa kontrolden geçti.", "اجتاز الفحص القصير.", "Прошёл короткую проверку."),
   over: L("Limitdən uzundur.", "It is over the limit.", "Limitten uzun.", "أطول من الحد.", "Длиннее лимита."),
   under: L("Limitin içindədir.", "It is inside the limit.", "Limitin içinde.", "داخل الحد.", "Внутри лимита."),
+  at: L("@ işarəsi yoxdur.", "There is no @ sign.", "@ işareti yok.", "لا توجد علامة @.", "Нет знака @."),
+  dot: L("Domendə nöqtə yoxdur.", "The domain has no dot.", "Alanda nokta yok.", "النطاق بلا نقطة.", "В домене нет точки."),
+  emailOk: L("Qısa yoxlamadan keçdi.", "It passed the short check.", "Kısa kontrolden geçti.", "اجتاز الفحص القصير.", "Прошёл короткую проверку."),
+  ipOk: L("Dörd hissə düzgündür.", "The four parts are valid.", "Dört parça doğru.", "الأجزاء الأربعة صحيحة.", "Четыре части верны."),
   upper: L("Böyük", "Upper", "Büyük", "كبير", "Верхний"),
   lower: L("Kiçik", "Lower", "Küçük", "صغير", "Нижний"),
   words: L("Söz", "Words", "Söz", "كلمات", "Слова"),
@@ -188,6 +197,11 @@ export const TOOLS: readonly { id: ToolId; label: Record<Lang, string> }[] = [
   { id: "cssvar", label: L("CSS dəyişən", "CSS variable", "CSS değişken", "متغير CSS", "Переменная CSS") },
   { id: "link", label: L("Link yoxla", "Check a link", "Link kontrol", "فحص الرابط", "Проверка ссылки") },
   { id: "chars", label: L("Simvol sayğacı", "Character count", "Karakter sayacı", "عدّاد الحروف", "Счётчик символов") },
+  { id: "yaml", label: L("YAML düzəlt", "YAML formatter", "YAML düzenle", "تنسيق YAML", "Формат YAML") },
+  { id: "markdown", label: L("Markdown-dan HTML", "Markdown to HTML", "Markdown'dan HTML", "من Markdown إلى HTML", "Markdown в HTML") },
+  { id: "email", label: L("E-poçt yoxla", "Check an email", "E-posta kontrol", "فحص البريد", "Проверка почты") },
+  { id: "words", label: L("Ədəd sözə", "Number to words", "Sayıdan söze", "من رقم إلى كلمة", "Число словами") },
+  { id: "ip", label: L("IP yoxla", "Check an IP", "IP kontrol", "فحص IP", "Проверка IP") },
 ];
 
 export const TOOL_GROUPS: readonly { id: string; title: Record<Lang, string>; ids: readonly ToolId[] }[] = [
@@ -209,7 +223,7 @@ export const TOOL_GROUPS: readonly { id: string; title: Record<Lang, string>; id
   {
     id: "format",
     title: L("Düzəltmə", "Formatting", "Düzenleme", "تنسيق", "Оформление"),
-    ids: ["sql-min", "xml-min", "cssvar", "link", "chars", "htmlfmt", "js-min", "python", "php", "json", "json-min", "css", "js", "html-min", "css-min", "xml", "sql"],
+    ids: ["yaml", "markdown", "email", "words", "ip", "sql-min", "xml-min", "cssvar", "link", "chars", "htmlfmt", "js-min", "python", "php", "json", "json-min", "css", "js", "html-min", "css-min", "xml", "sql"],
   },
   {
     id: "text",

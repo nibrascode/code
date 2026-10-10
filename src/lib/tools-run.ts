@@ -825,3 +825,89 @@ export function charCount(text: string, limit = 160) {
   const count = Array.from(text).length;
   return `${count}\n${limit}\n${count <= limit ? "ok" : "over"}`;
 }
+
+export function formatYaml(text: string) {
+  const lines = text.replace(/\t/g, "  ").split(/\n/).map((line) => line.trimEnd());
+  if (!lines.some((line) => line.includes(":"))) throw new Error("yaml");
+  return lines.join("\n").trim();
+}
+
+export function markdownHtml(text: string) {
+  const raw = text.trim();
+  if (!raw) throw new Error("markdown");
+  const escHtml = (value: string) => value.split("&").join("\u0026amp;").split("<").join("\u0026lt;").split(">").join("\u0026gt;");
+  const inline = (value: string) =>
+    escHtml(value)
+      .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+      .replace(/\*(.+?)\*/g, "<em>$1</em>")
+      .replace(/\[(.+?)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2">$1</a>');
+  return raw
+    .split(/\n{2,}/)
+    .map((block) => {
+      const line = block.trim();
+      const head = line.match(/^(#{1,3})\s+(.+)$/);
+      if (head) return `<h${head[1].length}>${inline(head[2])}</h${head[1].length}>`;
+      return `<p>${inline(line).replace(/\n/g, "<br>")}</p>`;
+    })
+    .join("\n");
+}
+
+export function checkEmail(text: string) {
+  const raw = text.trim();
+  if (!raw) throw new Error("email");
+  const notes = [];
+  if (!raw.includes("@")) notes.push("at");
+  if ((raw.split("@")[1] || "").indexOf(".") < 1) notes.push("dot");
+  if (/\s/.test(raw)) notes.push("space");
+  return notes.length ? notes.join("\n") : "ok";
+}
+
+const SMALL: Record<string, string[]> = {
+  az: ["sıfır", "bir", "iki", "üç", "dörd", "beş", "altı", "yeddi", "səkkiz", "doqquz", "on", "on bir", "on iki", "on üç", "on dörd", "on beş", "on altı", "on yeddi", "on səkkiz", "on doqquz"],
+  en: ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"],
+  tr: ["sıfır", "bir", "iki", "üç", "dört", "beş", "altı", "yedi", "sekiz", "dokuz", "on", "on bir", "on iki", "on üç", "on dört", "on beş", "on altı", "on yedi", "on sekiz", "on dokuz"],
+  ar: ["صفر", "واحد", "اثنان", "ثلاثة", "أربعة", "خمسة", "ستة", "سبعة", "ثمانية", "تسعة", "عشرة", "أحد عشر", "اثنا عشر", "ثلاثة عشر", "أربعة عشر", "خمسة عشر", "ستة عشر", "سبعة عشر", "ثمانية عشر", "تسعة عشر"],
+  ru: ["ноль", "один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять", "десять", "одиннадцать", "двенадцать", "тринадцать", "четырнадцать", "пятнадцать", "шестнадцать", "семнадцать", "восемнадцать", "девятнадцать"],
+};
+const TENS: Record<string, string[]> = {
+  az: ["", "", "iyirmi", "otuz", "qırx", "əlli", "altmış", "yetmiş", "səksən", "doxsan"],
+  en: ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"],
+  tr: ["", "", "yirmi", "otuz", "kırk", "elli", "altmış", "yetmiş", "seksen", "doksan"],
+  ar: ["", "", "عشرون", "ثلاثون", "أربعون", "خمسون", "ستون", "سبعون", "ثمانون", "تسعون"],
+  ru: ["", "", "двадцать", "тридцать", "сорок", "пятьдесят", "шестьдесят", "семьдесят", "восемьдесят", "девяносто"],
+};
+
+function underHundred(value: number, lang: string) {
+  if (value < 20) return SMALL[lang][value];
+  const ten = TENS[lang][Math.floor(value / 10)];
+  const one = value % 10;
+  if (!one) return ten;
+  return lang === "ar" ? `${SMALL[lang][one]} و${ten}` : `${ten} ${SMALL[lang][one]}`;
+}
+
+export function numberWords(text: string, lang: string): string {
+  const raw = text.trim();
+  if (!/^\d{1,6}$/.test(raw)) throw new Error("words");
+  const value = Number(raw);
+  const code = SMALL[lang] ? lang : "az";
+  if (value < 100) return underHundred(value, code);
+  if (value < 1000) {
+    const hundred = Math.floor(value / 100);
+    const rest = value % 100;
+    const word = code === "en" ? "hundred" : code === "tr" ? "yüz" : code === "ar" ? "مئة" : code === "ru" ? "сто" : "yüz";
+    const head = hundred === 1 && code !== "en" ? word : `${underHundred(hundred, code)} ${word}`;
+    return rest ? `${head} ${underHundred(rest, code)}` : head;
+  }
+  const thousand = Math.floor(value / 1000);
+  const rest = value % 1000;
+  const word = code === "en" ? "thousand" : code === "ar" ? "ألف" : code === "ru" ? "тысяча" : "min";
+  const head = `${underHundred(thousand, code)} ${word}`;
+  return rest ? `${head} ${numberWords(String(rest), code)}` : head;
+}
+
+export function checkIp(text: string) {
+  const raw = text.trim();
+  const parts = raw.split(".");
+  if (parts.length !== 4 || parts.some((part) => !/^\d{1,3}$/.test(part) || Number(part) > 255)) throw new Error("ip");
+  return `${raw}\nok`;
+}

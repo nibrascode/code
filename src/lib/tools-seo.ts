@@ -64,6 +64,11 @@ export const TOOL_SLUG: Record<ToolId, string> = {
   cssvar: "css-variable",
   link: "link-check",
   chars: "character-count",
+  yaml: "yaml",
+  markdown: "markdown-html",
+  email: "email-check",
+  words: "number-words",
+  ip: "ip-check",
 };
 
 export const TOOL_LEAD: Record<ToolId, Record<Lang, string>> = {
@@ -487,7 +492,43 @@ export const TOOL_LEAD: Record<ToolId, Record<Lang, string>> = {
     "يُظهر عدد الحروف وحد 160. يُستخدم لوصف meta.\n\nمثال: Salam خمسة حروف وداخل الحد.\n\nعدّاد الكلمات يعد الكلمات. هذه الصفحة تعد الحروف.",
     "Показывает число символов и лимит 160. Нужно для meta-описания.\n\nПример: Salam — 5 символов и внутри лимита.\n\nСчётчик слов считает слова. Эта страница считает символы.",
   ),
+  yaml: L(
+    "YAML mətninin sətir sonundakı boşluğu silir və tabı iki boşluğa çevirir.\n\nNümunə: ad: Aysel olduğu kimi qalır, artıq boşluq gedir.\n\nBu səhifə YAML-ı işlətmir. Yalnız sətiri düzəldir.",
+    "Removes the space at the end of a YAML line and turns a tab into two spaces.\n\nExample: ad: Aysel stays as it is, the extra space goes.\n\nThis page does not run YAML. It only cleans the lines.",
+    "YAML satırının sonundaki boşluğu siler ve tabı iki boşluğa çevirir.\n\nÖrnek: ad: Aysel olduğu gibi kalır, fazla boşluk gider.\n\nBu sayfa YAML'ı çalıştırmaz. Yalnız satırı düzeltir.",
+    "يحذف الفراغ في آخر سطر YAML ويحوّل tab إلى فراغين.\n\nمثال: ad: Aysel يبقى كما هو ويذهب الفراغ الزائد.\n\nهذه الصفحة لا تشغّل YAML. تنظّف الأسطر فقط.",
+    "Убирает пробел в конце строки YAML и превращает tab в два пробела.\n\nПример: ad: Aysel остаётся как есть, лишний пробел уходит.\n\nСтраница YAML не запускает. Только чистит строки.",
+  ),
+  markdown: L(
+    "Markdown-dan sadə HTML çıxarır. Başlıq, qalın və əlaqə tanınır.\n\nNümunə: # Salam yazılanda h1 olur. **qalın** strong olur.\n\nBu səhifə səhifəni dərc etmir. Kodu kopyalayıb HTML içinə qoyursan.",
+    "Makes simple HTML from Markdown. A heading, bold text, and a link are recognized.\n\nExample: # Salam becomes h1. **bold** becomes strong.\n\nThis page does not publish a page. Copy the code into HTML.",
+    "Markdown'dan basit HTML çıkarır. Başlık, kalın ve bağlantı tanınır.\n\nÖrnek: # Salam yazılınca h1 olur. **kalın** strong olur.\n\nBu sayfa sayfayı yayınlamaz. Kodu kopyalayıp HTML içine koyarsın.",
+    "يصنع HTML بسيطًا من Markdown. يُعرف العنوان والخط العريض والرابط.\n\nمثال: # Salam تصبح h1. **qalın** تصبح strong.\n\nهذه الصفحة لا تنشر صفحة. انسخ الكود إلى HTML.",
+    "Делает простой HTML из Markdown. Заголовок, жирный текст и ссылка узнаются.\n\nПример: # Salam становится h1. **qalın** становится strong.\n\nСтраница сайт не публикует. Скопируй код в HTML.",
+  ),
+  email: L(
+    "E-poçtda @ və nöqtə olub-olmadığını göstərir. Məktub göndərmir.\n\nNümunə: aysel@nibrascode.com yoxlamadan keçir. aysel@sayt keçmir, çünki domendə nöqtə yoxdur.\n\nBu səhifə ünvanı heç yerə göndərmir.",
+    "Shows whether an email has @ and a dot. It does not send a letter.\n\nExample: aysel@nibrascode.com passes. aysel@sayt fails because the domain has no dot.\n\nThis page does not send the address anywhere.",
+    "E-postada @ ve nokta olup olmadığını gösterir. Mektup göndermez.\n\nÖrnek: aysel@nibrascode.com kontrolden geçer. aysel@sayt geçmez, çünkü alanda nokta yoktur.\n\nBu sayfa adresi hiçbir yere göndermez.",
+    "يُظهر هل في البريد @ ونقطة. لا يرسل رسالة.\n\nمثال: aysel@nibrascode.com يجتاز. aysel@sayt لا يجتاز لأن النطاق بلا نقطة.\n\nهذه الصفحة لا ترسل العنوان إلى أي مكان.",
+    "Показывает, есть ли в почте @ и точка. Письмо не отправляет.\n\nПример: aysel@nibrascode.com проходит. aysel@sayt не проходит, потому что в домене нет точки.\n\nСтраница адрес никуда не отправляет.",
+  ),
+  words: L(
+    "Ədədi sözə çevirir. Səhifənin dilində yazır.\n\nNümunə: 120 Azərbaycan dilində yüz iyirmi olur.\n\nMinə qədər və bir az yuxarı işləyir. Bu səhifə pul saxlamır.",
+    "Turns a number into words. It writes in the language of the page.\n\nExample: 120 is one hundred twenty in English.\n\nIt works up to a thousand and a little above. This page does not store money.",
+    "Sayıyı söze çevirir. Sayfanın dilinde yazar.\n\nÖrnek: 120 Türkçede yüz yirmi olur.\n\nBine kadar ve biraz yukarı çalışır. Bu sayfa para saklamaz.",
+    "يحوّل الرقم إلى كلمات. يكتب بلغة الصفحة.\n\nمثال: 120 تصبح مئة وعشرون بالعربية.\n\nيعمل حتى الألف وفوقه قليلًا. هذه الصفحة لا تحفظ مالًا.",
+    "Переводит число в слова. Пишет на языке страницы.\n\nПример: 120 по-русски сто двадцать.\n\nРаботает до тысячи и немного выше. Страница деньги не хранит.",
+  ),
+  ip: L(
+    "IP ünvanının dörd hissəsinin 0 ilə 255 arasında olduğunu göstərir.\n\nNümunə: 192.168.1.1 düzgündür. 192.168.1 keçmir, çünki dörd hissə yoxdur.\n\nBu səhifə şəbəkəyə qoşulmur.",
+    "Shows whether the four parts of an IP address are between 0 and 255.\n\nExample: 192.168.1.1 is valid. 192.168.1 fails because there are not four parts.\n\nThis page does not connect to a network.",
+    "IP adresinin dört parçasının 0 ile 255 arasında olduğunu gösterir.\n\nÖrnek: 192.168.1.1 doğrudur. 192.168.1 geçmez, çünkü dört parça yoktur.\n\nBu sayfa ağa bağlanmaz.",
+    "يُظهر هل أجزاء عنوان IP الأربعة بين 0 و255.\n\nمثال: 192.168.1.1 صحيح. 192.168.1 لا يجتاز لأنه بلا أربعة أجزاء.\n\nهذه الصفحة لا تتصل بشبكة.",
+    "Показывает, что четыре части IP-адреса между 0 и 255.\n\nПример: 192.168.1.1 верный. 192.168.1 не проходит, потому что нет четырёх частей.\n\nСтраница к сети не подключается.",
+  ),
 };
+
 
 
 
@@ -538,6 +579,11 @@ export const TOOL_SAMPLE: Partial<Record<ToolId, { text?: string; extra?: string
   cssvar: { text: "#1d4ed8" },
   link: { text: "https://www.nibrascode.com" },
   chars: { text: "Salam" },
+  yaml: { text: "ad: Aysel\nyaş: 20" },
+  markdown: { text: "# Salam\n\n**Qalın** mətn" },
+  email: { text: "aysel@nibrascode.com" },
+  words: { text: "120" },
+  ip: { text: "192.168.1.1" },
 };
 
 export function toolIdFromSlug(slug: string) {
