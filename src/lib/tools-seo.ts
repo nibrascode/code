@@ -69,6 +69,11 @@ export const TOOL_SLUG: Record<ToolId, string> = {
   email: "email-check",
   words: "number-words",
   ip: "ip-check",
+  reverse: "reverse-text",
+  sort: "sort-lines",
+  unique: "remove-duplicates",
+  keys: "json-keys",
+  strip: "html-to-text",
 };
 
 export const TOOL_LEAD: Record<ToolId, Record<Lang, string>> = {
@@ -527,7 +532,43 @@ export const TOOL_LEAD: Record<ToolId, Record<Lang, string>> = {
     "يُظهر هل أجزاء عنوان IP الأربعة بين 0 و255.\n\nمثال: 192.168.1.1 صحيح. 192.168.1 لا يجتاز لأنه بلا أربعة أجزاء.\n\nهذه الصفحة لا تتصل بشبكة.",
     "Показывает, что четыре части IP-адреса между 0 и 255.\n\nПример: 192.168.1.1 верный. 192.168.1 не проходит, потому что нет четырёх частей.\n\nСтраница к сети не подключается.",
   ),
+  reverse: L(
+    "Mətni tərsinə çevirir. Hərflər sondan əvvələ düzülür.\n\nNümunə: Salam yazılanda malaS olur.\n\nBu səhifə mənasını dəyişmir. Yalnız sıranı çevirir.",
+    "Reverses the text. The letters go from the end to the start.\n\nExample: Salam becomes malaS.\n\nThis page does not change the meaning. It only reverses the order.",
+    "Metni tersine çevirir. Harfler sondan başa dizilir.\n\nÖrnek: Salam yazılınca malaS olur.\n\nBu sayfa anlamı değiştirmez. Yalnız sırayı çevirir.",
+    "يعكس النص. الحروف تترتب من الآخر إلى الأول.\n\nمثال: Salam تصبح malaS.\n\nهذه الصفحة لا تغيّر المعنى. تعكس الترتيب فقط.",
+    "Переворачивает текст. Буквы идут с конца к началу.\n\nПример: Salam становится malaS.\n\nСтраница смысл не меняет. Только порядок.",
+  ),
+  sort: L(
+    "Sətirləri əlifba sırasına düzür.\n\nNümunə: alma, armud, banan ayrı sətirlərdə yazılanda əlifba sırası çıxır.\n\nBoş sətirlər silinir. Bu səhifə faylı dəyişmir.",
+    "Sorts lines in alphabet order.\n\nExample: apple, pear and banana on separate lines come out in alphabet order.\n\nEmpty lines are removed. This page does not change a file.",
+    "Satırları alfabe sırasına dizer.\n\nÖrnek: elma, armut, muz ayrı satırlarda yazılınca alfabe sırası çıkar.\n\nBoş satırlar silinir. Bu sayfa dosyayı değiştirmez.",
+    "يرتّب الأسطر حسب الأبجدية.\n\nمثال: كلمات في أسطر منفصلة تخرج مرتبة.\n\nالأسطر الفارغة تُحذف. هذه الصفحة لا تغيّر ملفًا.",
+    "Сортирует строки по алфавиту.\n\nПример: слова на отдельных строках выходят по алфавиту.\n\nПустые строки удаляются. Страница файл не меняет.",
+  ),
+  unique: L(
+    "Eyni sətiri bir dəfə saxlayır. Təkrarları silir.\n\nNümunə: alma iki dəfə yazılsa, bir dəfə qalır.\n\nSıra ilk görünənə görə qalır. Bu səhifə siyahını saxlamır.",
+    "Keeps the same line once. It removes repeats.\n\nExample: apple written twice stays once.\n\nThe order follows the first time it appears. This page does not save the list.",
+    "Aynı satırı bir kez tutar. Tekrarları siler.\n\nÖrnek: elma iki kez yazılırsa bir kez kalır.\n\nSıra ilk göründüğüne göre kalır. Bu sayfa listeyi saklamaz.",
+    "يبقي السطر نفسه مرة واحدة. يحذف التكرار.\n\nمثال: إذا كُتبت كلمة مرتين تبقى مرة.\n\nالترتيب حسب أول ظهور. هذه الصفحة لا تحفظ القائمة.",
+    "Оставляет одинаковую строку один раз. Повторы удаляет.\n\nПример: слово, написанное дважды, остаётся один раз.\n\nПорядок по первому появлению. Страница список не хранит.",
+  ),
+  keys: L(
+    "JSON obyektinin açarlarını siyahıya çıxarır.\n\nNümunə: {\"ad\":\"Aysel\",\"yaş\":20} yazılanda ad və yaş ayrı sətir olur.\n\nDəyərlər göstərilmir. Yalnız açar adları çıxır.",
+    "Lists the keys of a JSON object.\n\nExample: {\"ad\":\"Aysel\",\"yaş\":20} puts ad and yaş on separate lines.\n\nValues are not shown. Only the key names come out.",
+    "JSON nesnesinin anahtarlarını listeye çıkarır.\n\nÖrnek: {\"ad\":\"Aysel\",\"yaş\":20} yazılınca ad ve yaş ayrı satır olur.\n\nDeğerler gösterilmez. Yalnız anahtar adları çıkar.",
+    "يسرد مفاتيح كائن JSON.\n\nمثال: {\"ad\":\"Aysel\",\"yaş\":20} يضع ad وyaş في سطرين.\n\nالقيم لا تُعرض. تخرج أسماء المفاتيح فقط.",
+    "Выводит ключи объекта JSON списком.\n\nПример: {\"ad\":\"Aysel\",\"yaş\":20} ставит ad и yaş на разные строки.\n\nЗначения не показываются. Выходят только имена ключей.",
+  ),
+  strip: L(
+    "HTML etiketini silir, mətni saxlayır.\n\nNümunə: <p>Salam</p> yazılanda Salam qalır.\n\nŞəkil və əlaqənin ünvanı getmir, yalnız görünən mətn qalır.",
+    "Removes HTML tags and keeps the text.\n\nExample: <p>Salam</p> leaves Salam.\n\nThe address of a picture or a link does not stay. Only the visible text remains.",
+    "HTML etiketini siler, metni tutar.\n\nÖrnek: <p>Salam</p> yazılınca Salam kalır.\n\nResim ve bağlantının adresi gitmez, yalnız görünen metin kalır.",
+    "يحذف وسم HTML ويبقي النص.\n\nمثال: <p>Salam</p> تترك Salam.\n\nعنوان الصورة أو الرابط لا يبقى. يبقى النص الظاهر فقط.",
+    "Удаляет тег HTML и оставляет текст.\n\nПример: <p>Salam</p> оставляет Salam.\n\nАдрес картинки или ссылки не остаётся. Остаётся только видимый текст.",
+  ),
 };
+
 
 
 
@@ -584,6 +625,11 @@ export const TOOL_SAMPLE: Partial<Record<ToolId, { text?: string; extra?: string
   email: { text: "aysel@nibrascode.com" },
   words: { text: "120" },
   ip: { text: "192.168.1.1" },
+  reverse: { text: "Salam" },
+  sort: { text: "banan\nalma\narmud" },
+  unique: { text: "alma\nalma\narmud" },
+  keys: { text: "{\"ad\":\"Aysel\",\"yaş\":20}" },
+  strip: { text: "<p>Salam</p>" },
 };
 
 export function toolIdFromSlug(slug: string) {

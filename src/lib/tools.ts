@@ -68,7 +68,12 @@ export type ToolId =
   | "markdown"
   | "email"
   | "words"
-  | "ip";
+  | "ip"
+  | "reverse"
+  | "sort"
+  | "unique"
+  | "keys"
+  | "strip";
 
 const L = (az: string, en: string, tr: string, ar: string, ru: string): Record<Lang, string> => ({ az, en, tr, ar, ru });
 
@@ -202,6 +207,11 @@ export const TOOLS: readonly { id: ToolId; label: Record<Lang, string> }[] = [
   { id: "email", label: L("E-poçt yoxla", "Check an email", "E-posta kontrol", "فحص البريد", "Проверка почты") },
   { id: "words", label: L("Ədəd sözə", "Number to words", "Sayıdan söze", "من رقم إلى كلمة", "Число словами") },
   { id: "ip", label: L("IP yoxla", "Check an IP", "IP kontrol", "فحص IP", "Проверка IP") },
+  { id: "reverse", label: L("Tərs mətn", "Reverse text", "Ters metin", "عكس النص", "Обратный текст") },
+  { id: "sort", label: L("Sətir sırala", "Sort lines", "Satır sırala", "ترتيب الأسطر", "Сортировка строк") },
+  { id: "unique", label: L("Təkrarı sil", "Remove duplicates", "Tekrarı sil", "حذف التكرار", "Убрать повторы") },
+  { id: "keys", label: L("JSON açarları", "JSON keys", "JSON anahtarları", "مفاتيح JSON", "Ключи JSON") },
+  { id: "strip", label: L("HTML-dən mətn", "Text from HTML", "HTML'den metin", "نص من HTML", "Текст из HTML") },
 ];
 
 export const TOOL_GROUPS: readonly { id: string; title: Record<Lang, string>; ids: readonly ToolId[] }[] = [
@@ -223,7 +233,7 @@ export const TOOL_GROUPS: readonly { id: string; title: Record<Lang, string>; id
   {
     id: "format",
     title: L("Düzəltmə", "Formatting", "Düzenleme", "تنسيق", "Оформление"),
-    ids: ["yaml", "markdown", "email", "words", "ip", "sql-min", "xml-min", "cssvar", "link", "chars", "htmlfmt", "js-min", "python", "php", "json", "json-min", "css", "js", "html-min", "css-min", "xml", "sql"],
+    ids: ["reverse", "sort", "unique", "keys", "strip", "yaml", "markdown", "email", "words", "ip", "sql-min", "xml-min", "cssvar", "link", "chars", "htmlfmt", "js-min", "python", "php", "json", "json-min", "css", "js", "html-min", "css-min", "xml", "sql"],
   },
   {
     id: "text",

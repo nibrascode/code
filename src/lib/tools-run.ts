@@ -911,3 +911,32 @@ export function checkIp(text: string) {
   if (parts.length !== 4 || parts.some((part) => !/^\d{1,3}$/.test(part) || Number(part) > 255)) throw new Error("ip");
   return `${raw}\nok`;
 }
+
+export function reverseText(text: string) {
+  if (!text.trim()) throw new Error("reverse");
+  return Array.from(text).reverse().join("");
+}
+
+export function sortLines(text: string) {
+  const lines = text.split(/\n/).map((line) => line.trim()).filter(Boolean);
+  if (!lines.length) throw new Error("sort");
+  return [...lines].sort((a, b) => a.localeCompare(b)).join("\n");
+}
+
+export function uniqueLines(text: string) {
+  const lines = text.split(/\n/).map((line) => line.trim()).filter(Boolean);
+  if (!lines.length) throw new Error("unique");
+  return [...new Set(lines)].join("\n");
+}
+
+export function jsonKeys(text: string) {
+  const data = JSON.parse(text) as unknown;
+  const row = Array.isArray(data) ? data[0] : data;
+  if (!row || typeof row !== "object" || Array.isArray(row)) throw new Error("keys");
+  return Object.keys(row).join("\n");
+}
+
+export function stripHtml(text: string) {
+  if (!text.includes("<")) throw new Error("strip");
+  return text.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+}
