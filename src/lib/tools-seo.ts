@@ -83,6 +83,11 @@ export const TOOL_SLUG: Record<ToolId, string> = {
   hex: "hex-text",
   temp: "temperature",
   domain: "extract-domain",
+  length: "centimeter",
+  weight: "weight",
+  join: "join-lines",
+  escape: "json-escape",
+  blank: "remove-blank-lines",
 };
 
 export const TOOL_LEAD: Record<ToolId, Record<Lang, string>> = {
@@ -639,7 +644,43 @@ export const TOOL_LEAD: Record<ToolId, Record<Lang, string>> = {
     "يستخرج اسم النطاق من العنوان.\n\nمثال: https://www.nibrascode.com/tools تترك nibrascode.com.\n\nهذه الصفحة لا تفتح الموقع. تُظهر الاسم فقط.",
     "Достаёт имя домена из адреса.\n\nПример: https://www.nibrascode.com/tools оставляет nibrascode.com.\n\nСтраница сайт не открывает. Только показывает имя.",
   ),
+  length: L(
+    "Santimetr və düym arasında çevirir.\n\nNümunə: 10 yazılanda 3.94 in olur. 10 in yazılanda 25.40 cm olur.\n\nBu səhifə ölçünü saxlamır. Yalnız rəqəmi çevirir.",
+    "Converts between centimeters and inches.\n\nExample: 10 becomes 3.94 in. 10 in becomes 25.40 cm.\n\nThis page does not store the size. It only converts the number.",
+    "Santimetre ve inç arasında çevirir.\n\nÖrnek: 10 yazılınca 3.94 in olur. 10 in yazılınca 25.40 cm olur.\n\nBu sayfa ölçüyü saklamaz. Yalnız sayıyı çevirir.",
+    "يحوّل بين سنتيمتر وإنش.\n\nمثال: 10 تصبح 3.94 in. 10 in تصبح 25.40 cm.\n\nهذه الصفحة لا تحفظ القياس. تحوّل الرقم فقط.",
+    "Переводит между сантиметрами и дюймами.\n\nПример: 10 становится 3.94 in. 10 in становится 25.40 cm.\n\nСтраница размер не хранит. Только переводит число.",
+  ),
+  weight: L(
+    "Kiloqram və funt arasında çevirir.\n\nNümunə: 1 yazılanda 2.20 lb olur. 2 lb yazılanda 0.91 kg olur.\n\nBu səhifə çəkini saxlamır. Yalnız rəqəmi çevirir.",
+    "Converts between kilograms and pounds.\n\nExample: 1 becomes 2.20 lb. 2 lb becomes 0.91 kg.\n\nThis page does not store the weight. It only converts the number.",
+    "Kilogram ve libre arasında çevirir.\n\nÖrnek: 1 yazılınca 2.20 lb olur. 2 lb yazılınca 0.91 kg olur.\n\nBu sayfa ağırlığı saklamaz. Yalnız sayıyı çevirir.",
+    "يحوّل بين كيلوغرام ورطل.\n\nمثال: 1 تصبح 2.20 lb. 2 lb تصبح 0.91 kg.\n\nهذه الصفحة لا تحفظ الوزن. تحوّل الرقم فقط.",
+    "Переводит между килограммами и фунтами.\n\nПример: 1 становится 2.20 lb. 2 lb становится 0.91 kg.\n\nСтраница вес не хранит. Только переводит число.",
+  ),
+  join: L(
+    "Sətirləri bir sətirdə vergüllə birləşdirir.\n\nNümunə: alma və armud ayrı sətirlərdə yazılanda alma, armud olur.\n\nBoş sətirlər silinir. Bu səhifə siyahını saxlamır.",
+    "Joins lines into one line with commas.\n\nExample: apple and pear on separate lines become apple, pear.\n\nEmpty lines are removed. This page does not save the list.",
+    "Satırları tek satırda virgülle birleştirir.\n\nÖrnek: elma ve armut ayrı satırlarda yazılınca elma, armut olur.\n\nBoş satırlar silinir. Bu sayfa listeyi saklamaz.",
+    "يدمج الأسطر في سطر واحد بفواصل.\n\nمثال: كلمتان في سطرين تصبحان كلمة، كلمة.\n\nالأسطر الفارغة تُحذف. هذه الصفحة لا تحفظ القائمة.",
+    "Склеивает строки в одну через запятую.\n\nПример: два слова на разных строках становятся слово, слово.\n\nПустые строки удаляются. Страница список не хранит.",
+  ),
+  escape: L(
+    "Mətni JSON sətirinə qaçırır. Dırnaq və əks xətt gizlənir.\n\nNümunə: salam \"dünya\" yazılanda salam \\\"dünya\\\" olur.\n\nAç düyməsi geri çevirir. Bu səhifə JSON faylını dəyişmir.",
+    "Escapes text for a JSON string. A quote and a backslash are hidden.\n\nExample: salam \"dünya\" becomes salam \\\"dünya\\\".\n\nThe other button goes back. This page does not change a JSON file.",
+    "Metni JSON dizisine kaçırır. Tırnak ve ters çizgi gizlenir.\n\nÖrnek: salam \"dünya\" yazılınca salam \\\"dünya\\\" olur.\n\nAç düğmesi geri çevirir. Bu sayfa JSON dosyasını değiştirmez.",
+    "يهرب النص لسلسلة JSON. علامة الاقتباس والشرطة المائلة تُخفيان.\n\nمثال: salam \"dünya\" تصبح salam \\\"dünya\\\".\n\nالزر الآخر يرجع. هذه الصفحة لا تغيّر ملف JSON.",
+    "Экранирует текст для строки JSON. Кавычка и обратная косая прячутся.\n\nПример: salam \"dünya\" становится salam \\\"dünya\\\".\n\nДругая кнопка возвращает назад. Страница JSON-файл не меняет.",
+  ),
+  blank: L(
+    "Boş sətirləri silir. Yazısı olan sətirlər qalır.\n\nNümunə: iki mətn arasında boş sətir varsa, o sətir gedir.\n\nBu səhifə faylı dəyişmir. Yalnız boşluğu çıxarır.",
+    "Removes blank lines. Lines with writing stay.\n\nExample: if there is an empty line between two texts, that line goes.\n\nThis page does not change a file. It only removes the gap.",
+    "Boş satırları siler. Yazısı olan satırlar kalır.\n\nÖrnek: iki metin arasında boş satır varsa, o satır gider.\n\nBu sayfa dosyayı değiştirmez. Yalnız boşluğu çıkarır.",
+    "يحذف الأسطر الفارغة. الأسطر المكتوبة تبقى.\n\nمثال: إذا كان بين نصين سطر فارغ، يذهب ذلك السطر.\n\nهذه الصفحة لا تغيّر ملفًا. تحذف الفراغ فقط.",
+    "Удаляет пустые строки. Строки с текстом остаются.\n\nПример: если между двумя текстами пустая строка, она уходит.\n\nСтраница файл не меняет. Только убирает пробел.",
+  ),
 };
+
 
 
 
@@ -713,6 +754,11 @@ export const TOOL_SAMPLE: Partial<Record<ToolId, { text?: string; extra?: string
   hex: { text: "A" },
   temp: { text: "20" },
   domain: { text: "https://www.nibrascode.com/tools" },
+  length: { text: "10" },
+  weight: { text: "1" },
+  join: { text: "alma\narmud" },
+  escape: { text: "salam \"dünya\"" },
+  blank: { text: "bir\n\niki" },
 };
 
 export function toolIdFromSlug(slug: string) {

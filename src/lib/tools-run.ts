@@ -1086,3 +1086,41 @@ export function extractDomain(text: string) {
     throw new Error("domain");
   }
 }
+
+export function convertLength(text: string) {
+  const raw = text.trim().toLowerCase();
+  const match = raw.match(/^(-?\d+(?:\.\d+)?)\s*(cm|in|inch)?$/);
+  if (!match) throw new Error("length");
+  const value = Number(match[1]);
+  const fromCm = match[2] !== "in" && match[2] !== "inch";
+  const next = fromCm ? value / 2.54 : value * 2.54;
+  return fromCm ? `${next.toFixed(2)} in` : `${next.toFixed(2)} cm`;
+}
+
+export function convertWeight(text: string) {
+  const raw = text.trim().toLowerCase();
+  const match = raw.match(/^(-?\d+(?:\.\d+)?)\s*(kg|lb|lbs)?$/);
+  if (!match) throw new Error("weight");
+  const value = Number(match[1]);
+  const fromKg = match[2] !== "lb" && match[2] !== "lbs";
+  const next = fromKg ? value * 2.20462 : value / 2.20462;
+  return fromKg ? `${next.toFixed(2)} lb` : `${next.toFixed(2)} kg`;
+}
+
+export function joinLines(text: string) {
+  const lines = text.split(/\n/).map((line) => line.trim()).filter(Boolean);
+  if (!lines.length) throw new Error("join");
+  return lines.join(", ");
+}
+
+export function escapeJson(text: string, back = false) {
+  if (!text) throw new Error("escape");
+  if (back) return JSON.parse(`"${text.replace(/^"|"$/g, "")}"`);
+  return JSON.stringify(text).slice(1, -1);
+}
+
+export function removeBlank(text: string) {
+  const lines = text.split(/\n/).filter((line) => line.trim());
+  if (!lines.length) throw new Error("blank");
+  return lines.join("\n");
+}

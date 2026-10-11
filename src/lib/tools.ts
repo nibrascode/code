@@ -82,7 +82,12 @@ export type ToolId =
   | "binary"
   | "hex"
   | "temp"
-  | "domain";
+  | "domain"
+  | "length"
+  | "weight"
+  | "join"
+  | "escape"
+  | "blank";
 
 const L = (az: string, en: string, tr: string, ar: string, ru: string): Record<Lang, string> => ({ az, en, tr, ar, ru });
 
@@ -230,6 +235,11 @@ export const TOOLS: readonly { id: ToolId; label: Record<Lang, string> }[] = [
   { id: "hex", label: L("Hex kod", "Hex text", "Hex kod", "نص سداسي", "Шестнадцатеричный текст") },
   { id: "temp", label: L("Temperatur", "Temperature", "Sıcaklık", "درجة الحرارة", "Температура") },
   { id: "domain", label: L("Domen çıxar", "Extract domain", "Alan adı çıkar", "استخراج النطاق", "Домен из ссылки") },
+  { id: "length", label: L("Santimetr", "Centimeter", "Santimetre", "سنتيمتر", "Сантиметр") },
+  { id: "weight", label: L("Çəki", "Weight", "Ağırlık", "وزن", "Вес") },
+  { id: "join", label: L("Sətir birləşdir", "Join lines", "Satır birleştir", "دمج الأسطر", "Склеить строки") },
+  { id: "escape", label: L("JSON qaçış", "JSON escape", "JSON kaçış", "تهريب JSON", "Экранирование JSON") },
+  { id: "blank", label: L("Boş sətir sil", "Remove blank lines", "Boş satır sil", "حذف الأسطر الفارغة", "Убрать пустые строки") },
 ];
 
 export const TOOL_GROUPS: readonly { id: string; title: Record<Lang, string>; ids: readonly ToolId[] }[] = [
@@ -251,7 +261,7 @@ export const TOOL_GROUPS: readonly { id: string; title: Record<Lang, string>; id
   {
     id: "format",
     title: L("Düzəltmə", "Formatting", "Düzenleme", "تنسيق", "Оформление"),
-    ids: ["read", "binary", "hex", "temp", "domain", "qr", "jsonyaml", "yamljson", "roman", "morse", "sort", "unique", "keys", "strip", "yaml", "markdown", "email", "words", "ip", "sql-min", "xml-min", "cssvar", "link", "chars", "htmlfmt", "js-min", "python", "php", "json", "json-min", "css", "js", "html-min", "css-min", "xml", "sql"],
+    ids: ["length", "weight", "join", "escape", "blank", "read", "binary", "hex", "temp", "domain", "qr", "jsonyaml", "yamljson", "roman", "morse", "sort", "unique", "keys", "strip", "yaml", "markdown", "email", "words", "ip", "sql-min", "xml-min", "cssvar", "link", "chars", "htmlfmt", "js-min", "python", "php", "json", "json-min", "css", "js", "html-min", "css-min", "xml", "sql"],
   },
   {
     id: "text",

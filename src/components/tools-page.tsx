@@ -53,6 +53,9 @@ import {
   QrCode,
   Radio,
   Thermometer,
+  Scale,
+  Quote,
+  Eraser,
   WholeWord,
 } from "lucide-react";
 import type { Lang } from "@/lib/i18n";
@@ -138,6 +141,11 @@ import {
   textHex,
   convertTemp,
   extractDomain,
+  convertLength,
+  convertWeight,
+  joinLines,
+  escapeJson,
+  removeBlank,
 } from "@/lib/tools-run";
 
 const NEEDS_TEXT = new Set<ToolId>([
@@ -214,8 +222,13 @@ const NEEDS_TEXT = new Set<ToolId>([
   "hex",
   "temp",
   "domain",
+  "length",
+  "weight",
+  "join",
+  "escape",
+  "blank",
 ]);
-const PAIR = new Set<ToolId>(["base64", "url", "html", "roman", "morse", "jsonyaml", "yamljson", "binary", "hex"]);
+const PAIR = new Set<ToolId>(["base64", "url", "html", "roman", "morse", "jsonyaml", "yamljson", "binary", "hex", "escape"]);
 
 const GROUP_ICONS: Record<string, typeof Braces> = {
   gen: Sparkles,
@@ -306,6 +319,11 @@ const ICONS: Record<ToolId, typeof Braces> = {
   hex: Hash,
   temp: Thermometer,
   domain: Globe,
+  length: Ruler,
+  weight: Scale,
+  join: ListOrdered,
+  escape: Quote,
+  blank: Eraser,
 };
 
 async function sha(text: string, name: "SHA-1" | "SHA-256") {
@@ -436,6 +454,11 @@ function runSync(id: ToolId, text: string, count: string, low: string, high: str
   if (id === "hex") return textHex(text);
   if (id === "temp") return convertTemp(text);
   if (id === "domain") return extractDomain(text);
+  if (id === "length") return convertLength(text);
+  if (id === "weight") return convertWeight(text);
+  if (id === "join") return joinLines(text);
+  if (id === "escape") return escapeJson(text);
+  if (id === "blank") return removeBlank(text);
   return "";
 }
 
@@ -488,14 +511,16 @@ export function ToolsPage({ lang, focus }: { lang: Lang; focus?: ToolId }) {
         setOutput(await QR.toDataURL(text.trim() || "https://www.nibrascode.com", { margin: 1, width: 280 }));
       } else {
         const next = mode === "undo"
-          ? current === "roman" || current === "morse" || current === "binary" || current === "hex"
+          ? current === "roman" || current === "morse" || current === "binary" || current === "hex" || current === "escape"
             ? current === "roman"
               ? romanConvert(text)
               : current === "morse"
                 ? morseConvert(text, true)
                 : current === "binary"
                   ? textBinary(text, true)
-                  : textHex(text, true)
+                  : current === "hex"
+                    ? textHex(text, true)
+                    : escapeJson(text, true)
             : current === "jsonyaml"
               ? yamlToJson(text)
               : current === "yamljson"
