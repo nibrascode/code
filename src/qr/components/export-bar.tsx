@@ -95,25 +95,26 @@ export function ExportBar({
     await copy();
   };
 
+  const btn = "h-10 w-full min-w-0 gap-1.5 px-2 text-xs [&_svg]:size-3.5";
   return (
-    <div className="flex flex-wrap gap-2">
-      <Button type="button" variant="secondary" onClick={() => void exportPng(false)}>
+    <div className="grid grid-cols-3 gap-2" data-testid="qr-export">
+      <Button type="button" variant="secondary" className={btn} onClick={() => void exportPng(false)}>
         <Download /> {t.export.png}
       </Button>
-      <Button type="button" variant="outline" onClick={() => void exportPng(true)}>
-        {t.export.jpg}
+      <Button type="button" variant="outline" className={btn} onClick={() => void exportPng(true)}>
+        <Download /> {t.export.jpg}
       </Button>
-      <Button type="button" variant="outline" onClick={exportSvg}>
-        {!limits.svg && <Lock className="size-3.5" />} {t.export.svg}
+      <Button type="button" variant="outline" className={btn} onClick={exportSvg}>
+        {limits.svg ? <Download /> : <Lock />} {t.export.svg}
       </Button>
-      <Button type="button" variant="outline" onClick={() => void exportPdf()}>
-        {!limits.pdf && <Lock className="size-3.5" />} {t.export.pdf}
+      <Button type="button" variant="outline" className={btn} onClick={() => void exportPdf()}>
+        {limits.pdf ? <Download /> : <Lock />} {t.export.pdf}
       </Button>
-      <Button type="button" variant="ghost" size="icon" onClick={() => void copy()} aria-label={t.export.copy}>
-        <Copy />
+      <Button type="button" variant="outline" className={btn} onClick={() => void copy()} aria-label={t.export.copy} title={t.export.copy}>
+        <Copy /> <span className="truncate">{t.export.copy}</span>
       </Button>
-      <Button type="button" variant="ghost" size="icon" onClick={() => void share()} aria-label={t.export.share}>
-        <Share2 />
+      <Button type="button" variant="outline" className={btn} onClick={() => void share()} aria-label={t.export.share} title={t.export.share}>
+        <Share2 /> <span className="truncate">{t.export.share}</span>
       </Button>
     </div>
   );

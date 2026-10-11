@@ -189,7 +189,7 @@ function CreatePanel({ pro }: { pro: boolean }) {
   return (
     <div>
       <TypePicker />
-      <div className="mt-5 grid gap-5 lg:grid-cols-[minmax(0,1fr)_18rem_17rem]">
+      <div className="mt-5 grid gap-5 lg:grid-cols-[minmax(0,1fr)_19rem_17rem]">
         <section className="space-y-4 rounded-2xl bg-bg-elevated p-4 shadow-[var(--shadow-border)] md:p-5">
           <TypeForm />
           <div className="space-y-1.5">
@@ -212,11 +212,11 @@ function CreatePanel({ pro }: { pro: boolean }) {
           </Button>
         </section>
 
-        <section className="lg:sticky lg:top-24 lg:self-start">
-          <div data-testid="qr-preview">
-            <QrPreview value={payload || "https://www.nibrascode.com"} design={gen.design} branded={limits.branded} />
+        <section className="rounded-2xl border border-border/60 bg-bg-elevated p-4 shadow-[var(--shadow-border)] lg:sticky lg:top-24 lg:self-start">
+          <div data-testid="qr-preview" className="mx-auto w-full max-w-[220px] lg:max-w-[272px]">
+            <QrPreview value={payload || "https://www.nibrascode.com"} design={gen.design} branded={limits.branded} className="rounded-xl p-2 shadow-[0_1px_3px_rgb(0_0_0/0.12)]" />
           </div>
-          <div className="mt-4">
+          <div className="mx-auto mt-4 w-full max-w-[320px] lg:max-w-none">
             <ExportBar value={payload || "https://www.nibrascode.com"} design={gen.design} name={name} plan={plan} onLocked={showLock} />
           </div>
         </section>
