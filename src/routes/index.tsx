@@ -12,12 +12,20 @@ import { toolsPath, TOOLS_PAGE } from "@/lib/tools";
 import { useI18n } from "@/lib/i18n-context";
 import { statusText } from "@/lib/studio";
 import { loadStudioBundle } from "@/lib/studio.functions";
-import type { TKey } from "@/lib/i18n";
+import type { Lang, TKey } from "@/lib/i18n";
 
 export const Route = createFileRoute("/")({
   loader: () => loadStudioBundle(),
   component: Home,
 });
+
+const QR_CARD: Record<Lang, string> = {
+  az: "QR kod yarat, dizayn et və skan et — pulsuz, brauzerində",
+  en: "Create, design and scan QR codes — free, in your browser",
+  tr: "QR kod oluştur, tasarla ve tara — ücretsiz, tarayıcında",
+  ar: "أنشئ رموز QR وصمّمها وامسحها — مجاناً في متصفحك",
+  ru: "Создавайте, оформляйте и сканируйте QR-коды — бесплатно, в браузере",
+};
 
 const STATUS: Partial<Record<"nibras-arabic" | "nibras-pdf" | "nibras-qr" | "nibras-plans" | "nibras-docs", TKey>> = {
   "nibras-pdf": "soon",
@@ -302,6 +310,14 @@ function Home() {
                 <path fill="currentColor" d="M4 18.2h8.5v1.6H4z" />
               </svg>
               <span>{TOOLS_PAGE.heading[lang]}</span>
+            </a>
+            <a className="nx-ai-bar nx-qr-bar" href="/qr">
+              <img src="/apps/nibras-qr-v2.jpg" alt="" width={36} height={36} />
+              <span className="nx-qr-text">
+                <b>Nibras QR</b>
+                <small>{QR_CARD[lang]}</small>
+              </span>
+              <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
             </a>
           </div>
         </div>

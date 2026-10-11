@@ -1,4 +1,5 @@
-import { Crown, Lock, X } from "lucide-react";
+import { useState } from "react";
+import { Check, Crown, Loader2, Lock, X } from "lucide-react";
 import { create } from "zustand";
 import { useI18n } from "@/qr/lib/i18n";
 import { useQrAuth } from "@/qr/lib/auth";
@@ -26,15 +27,31 @@ export function ProBadge({ className }: { className?: string }) {
   );
 }
 
-/** "Pro coming soon on web / get Pro in the app" dialog. */
+type Plan = "1y" | "lifetime";
+
+/** Web paywall: one-time Lemon Squeezy purchase (sign-in required). */
 export function LockDialog() {
   const { w } = useI18n();
   const { open, hide } = useLock();
-  const { user, signIn, busy } = useQrAuth();
+  const { user, pro, signIn, busy, buy } = useQrAuth();
+  const [plan, setPlan] = useState<Plan>("1y");
+  const [err, setErr] = useState(false);
   if (!open) return null;
+  const plans: { id: Plan; name: string; note: string; price: string }[] = [
+    { id: "1y", name: w.plan1y, note: w.plan1yNote, price: "$9.99" },
+    { id: "lifetime", name: w.planLife, note: w.planLifeNote, price: "$19.99" },
+  ];
+  const onBuy = async () => {
+    setErr(false);
+    try {
+      await buy(plan);
+    } catch {
+      setErr(true);
+    }
+  };
   return (
-    <div className="fixed inset-0 z-[100] grid place-items-center bg-black/70 p-4 backdrop-blur-sm" role="dialog" aria-modal="true" onClick={hide}>
-      <div className="relative w-full max-w-sm rounded-2xl bg-bg-elevated p-6 shadow-[var(--shadow-border)]" onClick={(e) => e.stopPropagation()}>
+    <div className="fixed inset-0 z-[100] grid place-items-center overflow-y-auto bg-black/70 p-4 backdrop-blur-sm" role="dialog" aria-modal="true" onClick={hide}>
+      <div className="relative w-full max-w-md rounded-2xl bg-bg-elevated p-6 shadow-[var(--shadow-border)]" onClick={(e) => e.stopPropagation()}>
         <button type="button" className="absolute end-3 top-3 text-muted hover:text-fg" onClick={hide} aria-label="Close">
           <X className="size-5" />
         </button>
@@ -43,20 +60,61 @@ export function LockDialog() {
         </span>
         <h2 className="mt-4 font-display text-xl font-bold">{w.lockTitle}</h2>
         <p className="mt-2 text-sm text-muted">{w.lockBody}</p>
-        <div className="mt-5 grid gap-2">
-          <Button asChild>
-            <a href={PLAY_URL} target="_blank" rel="noreferrer">
-              {w.getApp}
-            </a>
-          </Button>
-          {!user && (
-            <>
-              <p className="mt-2 text-xs text-subtle">{w.lockSignIn}</p>
-              <Button variant="outline" disabled={busy} onClick={() => void signIn()}>
-                {w.signIn}
-              </Button>
-            </>
-          )}
+        {pro ? (
+          <p className="mt-5 rounded-xl bg-bg-subtle p-3 text-sm font-semibold">{w.proActive} ✓</p>
+        ) : (
+          <>
+            <div className="mt-5 grid gap-2" role="radiogroup">
+              {plans.map((p) => (
+                <button
+                  key={p.id}
+                  type="button"
+                  role="radio"
+                  aria-checked={plan === p.id}
+                  data-plan={p.id}
+                  onClick={() => setPlan(p.id)}
+                  className={cn(
+                    "relative flex items-center justify-between gap-3 rounded-xl border-2 p-3 text-start transition-colors",
+                    plan === p.id ? "border-fuchsia-500 bg-fuchsia-500/5" : "border-border hover:border-fg/30",
+                  )}
+                >
+                  <span>
+                    <span className="block font-semibold">{p.name}</span>
+                    <span className={cn("block text-xs", p.id === "1y" ? "font-semibold text-fuchsia-600 dark:text-fuchsia-400" : "text-muted")}>
+                      {p.id === "1y" && <Check className="me-1 inline size-3" />}
+                      {p.note}
+                    </span>
+                  </span>
+                  <span className="text-end">
+                    <span className="block font-display text-lg font-bold">{p.price}</span>
+                    <span className="block text-[11px] text-subtle">{w.oneTime}</span>
+                  </span>
+                </button>
+              ))}
+            </div>
+            <div className="mt-4 grid gap-2">
+              {user ? (
+                <Button disabled={busy} onClick={() => void onBuy()} data-testid="qr-buy">
+                  {busy && <Loader2 className="size-4 animate-spin" />} {w.buy} · {plans.find((p) => p.id === plan)!.price}
+                </Button>
+              ) : (
+                <>
+                  <p className="text-xs text-subtle">{w.lockSignIn}</p>
+                  <Button disabled={busy} onClick={() => void signIn()}>
+                    {w.signIn}
+                  </Button>
+                </>
+              )}
+              {err && <p className="text-xs text-red-600">{w.payError}</p>}
+              <p className="text-xs text-muted">{w.appNote}</p>
+              <p className="text-[11px] text-subtle">{w.securePay}</p>
+            </div>
+          </>
+        )}
+        <div className="mt-4 border-t border-border pt-3">
+          <a href={PLAY_URL} target="_blank" rel="noreferrer" className="text-xs text-muted underline-offset-2 hover:underline">
+            {w.getApp} (Android)
+          </a>
         </div>
       </div>
     </div>

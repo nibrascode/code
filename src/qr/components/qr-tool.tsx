@@ -35,12 +35,25 @@ export function QrTool() {
   const auth = useQrAuth();
   const pro = auth.pro;
   const [tab, setTabState] = useState<Tab>("create");
+  const [thanks, setThanks] = useState(false);
 
   useEffect(() => {
     setTabState(tabFromHash());
     const on = () => setTabState(tabFromHash());
     window.addEventListener("hashchange", on);
-    void useQrAuth.getState().init();
+    const purchased = new URLSearchParams(window.location.search).get("purchase") === "success";
+    void useQrAuth.getState().init().then(async () => {
+      if (!purchased) return;
+      setThanks(true);
+      const u = new URL(window.location.href);
+      u.searchParams.delete("purchase");
+      window.history.replaceState(null, "", u.pathname + u.search + u.hash);
+      // The Lemon webhook usually lands within seconds; poll briefly.
+      for (let i = 0; i < 10; i++) {
+        if (await useQrAuth.getState().refreshPro().catch(() => false)) return;
+        await new Promise((r) => setTimeout(r, 3000));
+      }
+    });
     return () => window.removeEventListener("hashchange", on);
   }, []);
 
@@ -84,6 +97,14 @@ export function QrTool() {
         <AccountChip />
       </div>
 
+      {thanks && (
+        <div className="mb-4 flex items-center justify-between gap-3 rounded-2xl bg-gradient-to-r from-amber-400/15 to-fuchsia-500/15 p-4 text-sm" role="status">
+          <span className="font-medium">{pro ? `${w.proActive} 🎉` : w.purchaseThanks}</span>
+          <button type="button" className="text-muted hover:text-fg" onClick={() => setThanks(false)} aria-label="Close">
+            ×
+          </button>
+        </div>
+      )}
       {tab === "create" && <CreatePanel pro={pro} />}
       {tab === "templates" && <Templates pro={pro} onUse={() => setTab("create")} />}
       <Suspense fallback={<div className="h-64 animate-pulse rounded-2xl bg-bg-elevated" />}>
@@ -104,9 +125,14 @@ function AccountChip() {
   if (!ready) return <span className="h-9 w-32" />;
   if (!user)
     return (
-      <Button size="sm" variant="outline" disabled={busy} onClick={() => void signIn()}>
-        {w.signIn}
-      </Button>
+      <div className="flex items-center gap-2">
+        <Button size="sm" variant="outline" disabled={busy} onClick={() => void signIn()}>
+          {w.signIn}
+        </Button>
+        <Button size="sm" data-testid="qr-get-pro" onClick={() => useLock.getState().show()}>
+          <Crown className="size-3.5" /> Pro
+        </Button>
+      </div>
     );
   return (
     <div className="flex items-center gap-2 text-sm">
@@ -122,6 +148,11 @@ function AccountChip() {
           w.freePlan
         )}
       </span>
+      {!pro && (
+        <Button size="sm" data-testid="qr-get-pro" onClick={() => useLock.getState().show()}>
+          <Crown className="size-3.5" /> Pro
+        </Button>
+      )}
       <Button size="icon" variant="ghost" aria-label={w.signOut} disabled={busy} onClick={() => void signOut()}>
         <LogOut />
       </Button>

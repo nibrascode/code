@@ -38,9 +38,13 @@ type State = {
   init: () => Promise<void>;
   signIn: () => Promise<void>;
   signOut: () => Promise<void>;
+  /** Signed-in only: open a Lemon Squeezy checkout for the plan. */
+  buy: (plan: "1y" | "lifetime") => Promise<void>;
+  /** Re-read Pro from public.entitlements (e.g. after ?purchase=success). */
+  refreshPro: () => Promise<boolean>;
 };
 
-export const useQrAuth = create<State>((set) => ({
+export const useQrAuth = create<State>((set, get) => ({
   ready: false,
   busy: false,
   user: null,
@@ -86,6 +90,24 @@ export const useQrAuth = create<State>((set) => ({
     } finally {
       set({ busy: false });
     }
+  },
+  buy: async (plan) => {
+    set({ busy: true });
+    try {
+      const c = await sb();
+      const { data, error } = await c.functions.invoke<{ url?: string }>("lemon-checkout", { body: { plan } });
+      if (error || !data?.url) throw new Error("checkout failed");
+      window.location.assign(data.url);
+    } finally {
+      set({ busy: false });
+    }
+  },
+  refreshPro: async () => {
+    const u = get().user;
+    if (!u) return false;
+    const pro = await proFor(await sb(), u.id);
+    set({ pro });
+    return pro;
   },
   signOut: async () => {
     set({ busy: true });
