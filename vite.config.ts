@@ -179,7 +179,7 @@ export default defineConfig(({ command, isPreview }) => ({
               "/**": {
                 headers: {
                   "Content-Security-Policy":
-                    "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; media-src 'self' blob:; connect-src 'self' https://qvwqqpxrvnrnwvyckwlo.supabase.co wss://qvwqqpxrvnrnwvyckwlo.supabase.co https://api.github.com; worker-src 'self' blob:; frame-src 'self'; upgrade-insecure-requests",
+                    "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; media-src 'self' blob:; connect-src 'self' https://qvwqqpxrvnrnwvyckwlo.supabase.co wss://qvwqqpxrvnrnwvyckwlo.supabase.co https://rbnhwyvpuobdmgqjdiyj.supabase.co https://api.github.com; worker-src 'self' blob:; frame-src 'self'; upgrade-insecure-requests",
                   "X-Content-Type-Options": "nosniff",
                   "Referrer-Policy": "strict-origin-when-cross-origin",
                   "X-Frame-Options": "DENY",

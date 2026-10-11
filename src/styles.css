@@ -19,6 +19,18 @@
   --color-brand-2: #7a6bff;
   --color-ice: #7ee7ff;
 
+  /* Nibras QR tool (/qr) tokens, mapped onto the site palette. */
+  --color-bg: #05060c;
+  --color-bg-elevated: #0d101c;
+  --color-bg-subtle: #141828;
+  --color-subtle: #6b7290;
+  --color-primary: #6d84ff;
+  --color-primary-fg: #ffffff;
+  --color-border: rgb(255 255 255 / 0.12);
+  --color-danger: #f87171;
+  --color-ring: #6d84ff;
+  --shadow-border: 0 0 0 1px rgb(255 255 255 / 0.08);
+
   --text-micro: 0.625rem;
   --text-2xs: 0.6875rem;
   --text-xs: 0.75rem;
@@ -6721,4 +6733,18 @@ body.is-studio {
   .nx-bars > a { gap: 6px; padding: 6px 8px 6px 6px; }
   .nx-bars > a > span { font-size: 13px; }
   .nx-bars > a > img, .nx-bars > a > svg { width: 32px; height: 30px; }
+}
+
+/* Nibras QR tool: tighter radii than the marketing pages (utilities read these vars). */
+.qr-page {
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 22px;
+}
+
+@media (max-width: 640px) {
+  .header-links .qr-nav-link {
+    display: none;
+  }
 }

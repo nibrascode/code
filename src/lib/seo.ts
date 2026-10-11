@@ -576,6 +576,28 @@ const PAGES: Record<string, Copy> = {
         "Nibras QR — Android-приложение для QR-кодов и штрихкодов: 11 типов, дизайн с логотипом и рамкой, шаблоны и умный безопасный сканер. Основное работает офлайн. Проект Nibras Code.",
     },
   },
+  "/qr": {
+    az: {
+      title: "QR kod generatoru — Nibras QR onlayn",
+      description: "Pulsuz onlayn QR kod generatoru: link, Wi-Fi, vizit kartı, WhatsApp və daha çox. Rəng, nöqtə və göz formaları, şablonlar, PNG/JPG export, kamera və şəkildən skan. Hər şey brauzerdə işləyir.",
+    },
+    en: {
+      title: "QR code generator — Nibras QR online",
+      description: "Free online QR code generator: links, Wi-Fi, business cards, WhatsApp and more. Colours, dot and eye shapes, templates, PNG/JPG export, scan from camera or image. Runs entirely in your browser.",
+    },
+    ar: {
+      title: "مولّد رموز QR — Nibras QR عبر الإنترنت",
+      description: "مولّد رموز QR مجاني: روابط وWi-Fi وبطاقات عمل وواتساب وغيرها. ألوان وأشكال وقوالب وتصدير PNG/JPG ومسح من الكاميرا أو صورة. يعمل بالكامل في متصفحك.",
+    },
+    ru: {
+      title: "Генератор QR-кодов — Nibras QR онлайн",
+      description: "Бесплатный онлайн-генератор QR-кодов: ссылки, Wi-Fi, визитки, WhatsApp и другое. Цвета, формы, шаблоны, экспорт PNG/JPG, сканирование с камеры или изображения. Работает в браузере.",
+    },
+    tr: {
+      title: "QR kod oluşturucu — Nibras QR çevrimiçi",
+      description: "Ücretsiz çevrimiçi QR kod oluşturucu: link, Wi-Fi, kartvizit, WhatsApp ve daha fazlası. Renkler, şekiller, şablonlar, PNG/JPG dışa aktarma, kamera veya görselden tarama. Tamamen tarayıcıda çalışır.",
+    },
+  },
   "/privacy/nibras-qr": {
     az: {
       title: "Məxfilik siyasəti — Nibras QR",

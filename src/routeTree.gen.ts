@@ -19,6 +19,7 @@ import { Route as NeceRouteImport } from './routes/nece'
 import { Route as NxStudioRouteImport } from './routes/nx-studio'
 import { Route as PaketRouteImport } from './routes/paket'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as QrRouteImport } from './routes/qr'
 import { Route as SozRouteImport } from './routes/soz'
 import { Route as ToolsRouteImport } from './routes/tools'
 import { Route as UnutmaRouteImport } from './routes/unutma'
@@ -175,6 +176,11 @@ const PaketRoute = PaketRouteImport.update({
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const QrRoute = QrRouteImport.update({
+  id: '/qr',
+  path: '/qr',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SozRoute = SozRouteImport.update({
@@ -725,6 +731,7 @@ export interface FileRoutesByFullPath {
   '/nx-studio': typeof NxStudioRoute
   '/paket': typeof PaketRoute
   '/privacy': typeof PrivacyRouteWithChildren
+  '/qr': typeof QrRoute
   '/soz': typeof SozRouteWithChildren
   '/tools': typeof ToolsRouteWithChildren
   '/unutma': typeof UnutmaRoute
@@ -844,6 +851,7 @@ export interface FileRoutesByTo {
   '/nx-studio': typeof NxStudioRoute
   '/paket': typeof PaketRoute
   '/privacy': typeof PrivacyRouteWithChildren
+  '/qr': typeof QrRoute
   '/soz': typeof SozRouteWithChildren
   '/tools': typeof ToolsRouteWithChildren
   '/unutma': typeof UnutmaRoute
@@ -963,6 +971,7 @@ export interface FileRoutesById {
   '/nx-studio': typeof NxStudioRoute
   '/paket': typeof PaketRoute
   '/privacy': typeof PrivacyRouteWithChildren
+  '/qr': typeof QrRoute
   '/soz': typeof SozRouteWithChildren
   '/tools': typeof ToolsRouteWithChildren
   '/unutma': typeof UnutmaRoute
@@ -1084,6 +1093,7 @@ export interface FileRouteTypes {
     | '/nx-studio'
     | '/paket'
     | '/privacy'
+    | '/qr'
     | '/soz'
     | '/tools'
     | '/unutma'
@@ -1203,6 +1213,7 @@ export interface FileRouteTypes {
     | '/nx-studio'
     | '/paket'
     | '/privacy'
+    | '/qr'
     | '/soz'
     | '/tools'
     | '/unutma'
@@ -1321,6 +1332,7 @@ export interface FileRouteTypes {
     | '/nx-studio'
     | '/paket'
     | '/privacy'
+    | '/qr'
     | '/soz'
     | '/tools'
     | '/unutma'
@@ -1441,6 +1453,7 @@ export interface RootRouteChildren {
   NxStudioRoute: typeof NxStudioRoute
   PaketRoute: typeof PaketRoute
   PrivacyRoute: typeof PrivacyRouteWithChildren
+  QrRoute: typeof QrRoute
   SozRoute: typeof SozRouteWithChildren
   ToolsRoute: typeof ToolsRouteWithChildren
   UnutmaRoute: typeof UnutmaRoute
@@ -1576,6 +1589,13 @@ declare module '@tanstack/react-router' {
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/qr': {
+      id: '/qr'
+      path: '/qr'
+      fullPath: '/qr'
+      preLoaderRoute: typeof QrRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/soz': {
@@ -2789,6 +2809,7 @@ const rootRouteChildren: RootRouteChildren = {
   NxStudioRoute: NxStudioRoute,
   PaketRoute: PaketRoute,
   PrivacyRoute: PrivacyRouteWithChildren,
+  QrRoute: QrRoute,
   SozRoute: SozRouteWithChildren,
   ToolsRoute: ToolsRouteWithChildren,
   UnutmaRoute: UnutmaRoute,
