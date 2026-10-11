@@ -31,6 +31,8 @@ const az = {
   payError: "Ödəniş səhifəsi açılmadı. Bir az sonra yenidən cəhd et.",
   purchaseThanks: "Təşəkkürlər! Ödəniş təsdiqlənən kimi Pro aktivləşəcək.",
   securePay: "Təhlükəsiz ödəniş: Lemon Squeezy",
+  camBlocked: "Kameraya icazə bloklanıb. Ünvan sətrindəki kilid işarəsinə toxun → Kamera → İcazə ver, sonra yenidən cəhd et.",
+  camNone: "Kamera tapılmadı. Şəkil yükləyərək skan et.",
 };
 type WebDict = typeof az;
 
@@ -64,6 +66,8 @@ const en: WebDict = {
   payError: "Couldn't open checkout. Please try again in a moment.",
   purchaseThanks: "Thank you! Pro will activate as soon as the payment is confirmed.",
   securePay: "Secure checkout by Lemon Squeezy",
+  camBlocked: "Camera access is blocked. Tap the lock icon in the address bar → Camera → Allow, then try again.",
+  camNone: "No camera found. Scan by uploading an image instead.",
 };
 
 const tr: WebDict = {
@@ -96,6 +100,8 @@ const tr: WebDict = {
   payError: "Ödeme sayfası açılamadı. Lütfen birazdan tekrar dene.",
   purchaseThanks: "Teşekkürler! Ödeme onaylanır onaylanmaz Pro etkinleşecek.",
   securePay: "Güvenli ödeme: Lemon Squeezy",
+  camBlocked: "Kamera erişimi engellendi. Adres çubuğundaki kilit simgesine dokun → Kamera → İzin ver, sonra tekrar dene.",
+  camNone: "Kamera bulunamadı. Bunun yerine resim yükleyerek tara.",
 };
 
 const ar: WebDict = {
@@ -128,6 +134,8 @@ const ar: WebDict = {
   payError: "تعذّر فتح صفحة الدفع. حاول مجدداً بعد قليل.",
   purchaseThanks: "شكراً لك! سيتم تفعيل Pro فور تأكيد الدفع.",
   securePay: "دفع آمن عبر Lemon Squeezy",
+  camBlocked: "الوصول إلى الكاميرا محظور. اضغط على رمز القفل في شريط العنوان ← الكاميرا ← سماح، ثم حاول مجدداً.",
+  camNone: "لم يتم العثور على كاميرا. امسح برفع صورة بدلاً من ذلك.",
 };
 
 const ru: WebDict = {
@@ -160,6 +168,8 @@ const ru: WebDict = {
   payError: "Не удалось открыть оплату. Попробуйте ещё раз чуть позже.",
   purchaseThanks: "Спасибо! Pro активируется сразу после подтверждения оплаты.",
   securePay: "Безопасная оплата через Lemon Squeezy",
+  camBlocked: "Доступ к камере заблокирован. Нажмите на значок замка в адресной строке → Камера → Разрешить и попробуйте снова.",
+  camNone: "Камера не найдена. Отсканируйте, загрузив изображение.",
 };
 
 export const WEB_STRINGS: Record<Lang, WebDict> = { az, en, tr, ar, ru };

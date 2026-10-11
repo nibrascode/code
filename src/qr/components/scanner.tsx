@@ -37,7 +37,7 @@ function decodeCanvas(canvas: HTMLCanvasElement): string | null {
 
 export function Scanner({ pro = false }: { pro?: boolean }) {
   const maxHistory = pro ? LIMITS.pro.history : LIMITS.free.history;
-  const { t, m } = useI18n();
+  const { t, m, w } = useI18n();
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [live, setLive] = useState(false);
@@ -87,6 +87,7 @@ export function Scanner({ pro = false }: { pro?: boolean }) {
     setError(null);
     setResult(null);
     try {
+      if (!navigator.mediaDevices?.getUserMedia) throw new Error("no media devices");
       const stream = await navigator.mediaDevices.getUserMedia({
         video: { facingMode: { ideal: "environment" } },
         audio: false,
@@ -98,8 +99,17 @@ export function Scanner({ pro = false }: { pro?: boolean }) {
       }
       setLive(true);
       raf.current = requestAnimationFrame(loop);
-    } catch {
-      setError(t.scan.denied);
+    } catch (err) {
+      const name = err instanceof DOMException ? err.name : "";
+      setError(
+        !navigator.mediaDevices?.getUserMedia
+          ? w.camNone
+          : name === "NotAllowedError" || name === "SecurityError"
+            ? w.camBlocked
+            : name === "NotFoundError" || name === "OverconstrainedError"
+              ? w.camNone
+              : t.scan.denied,
+      );
     }
   };
 

@@ -184,7 +184,7 @@ export default defineConfig(({ command, isPreview }) => ({
                   "Referrer-Policy": "strict-origin-when-cross-origin",
                   "X-Frame-Options": "DENY",
                   "Permissions-Policy":
-                    "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()",
+                    "accelerometer=(), camera=(self), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()",
                   "Strict-Transport-Security": "max-age=63072000; includeSubDomains",
                 },
               },
