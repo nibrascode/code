@@ -96,7 +96,9 @@ const PENDING: Record<string, Record<Lang, Policy>> = {
 
 export function AppPrivacyView({ slug, rows }: { slug: string; rows: StudioPrivacyRow[] }) {
   const { lang } = useI18n();
-  const live = rows.find((row) => row.slug === slug && row.lang === lang);
+  // Nibras PDF ships its policy with the code (src/lib/pdf-privacy.ts) so the page
+  // always matches the released app version; studio rows apply to other apps.
+  const live = slug === "nibras-pdf" ? undefined : rows.find((row) => row.slug === slug && row.lang === lang);
   const fallback =
     slug === "nibras-pdf" ? PDF_PRIVACY[lang] : slug === "nibras-arabic" ? ARABIC_PRIVACY : PENDING[slug]?.[lang] ?? null;
   const copy = live

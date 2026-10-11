@@ -556,27 +556,27 @@ const PAGES: Record<string, Copy> = {
     az: {
       title: "Məxfilik siyasəti — Nibras PDF",
       description:
-        "Nibras PDF məxfilik siyasəti, 29 sentyabr 2026: sənədlər telefonda qalır, Google Drive 1.0.4-də bağlıdır, hesab Clerk ilə könüllüdür.",
+        "Nibras PDF 1.0.5 məxfilik siyasəti, 11 oktyabr 2026: sənədlər telefonda qalır, Google Drive 1.0.5-də bağlıdır, hesab Clerk ilə könüllüdür.",
     },
     en: {
       title: "Privacy policy — Nibras PDF",
       description:
-        "Nibras PDF privacy policy, 29 September 2026: files stay on the phone. Free daily limit is 10 document actions, 4 OCR, and 5 scans.",
+        "Nibras PDF 1.0.5 privacy policy, 11 October 2026: files stay on the phone. Free daily limit is 10 document actions, 4 OCR, and 5 scans.",
     },
     ar: {
       title: "سياسة الخصوصية — Nibras PDF",
       description:
-        "سياسة خصوصية Nibras PDF بتاريخ 29 سبتمبر 2026: تبقى الملفات على الهاتف. الحد اليومي 10 عمليات و4 OCR و5 عمليات مسح.",
+        "سياسة خصوصية Nibras PDF 1.0.5 بتاريخ 11 أكتوبر 2026: تبقى الملفات على الهاتف. الحد اليومي 10 عمليات و4 OCR و5 عمليات مسح.",
     },
     ru: {
       title: "Политика конфиденциальности — Nibras PDF",
       description:
-        "Политика Nibras PDF от 29 сентября 2026: документы остаются на телефоне, дневной лимит 10 действий, 4 OCR и 5 сканов.",
+        "Политика Nibras PDF 1.0.5 от 11 октября 2026: документы остаются на телефоне, дневной лимит 10 действий, 4 OCR и 5 сканов.",
     },
     tr: {
       title: "Gizlilik politikası — Nibras PDF",
       description:
-        "Nibras PDF gizlilik politikası, 29 Eylül 2026: belgeler cihazda kalır, günlük sınır 10 işlem, 4 OCR ve 5 tarama.",
+        "Nibras PDF 1.0.5 gizlilik politikası, 11 Ekim 2026: belgeler cihazda kalır, günlük sınır 10 işlem, 4 OCR ve 5 tarama.",
     },
   },
 };
