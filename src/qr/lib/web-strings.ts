@@ -3,8 +3,8 @@ import type { Lang } from "./dict";
 /** Strings that only exist on the web QR tool. */
 const az = {
   title: "Nibras QR — onlayn QR generator",
-  lead: "QR kod yarat, dizayn et, skan et. Hər şey brauzerində işləyir — heç nə serverə göndərilmir.",
-  tabCreate: "Yarat",
+  lead: "QR kod düzəlt, dizayn et, skan et. Hər şey brauzerində işləyir — heç nə serverə göndərilmir.",
+  tabCreate: "Düzəlt",
   tabTemplates: "Şablonlar",
   tabScan: "Skan",
   tabBarcode: "Barkod",

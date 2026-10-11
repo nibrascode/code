@@ -20,7 +20,7 @@ const az = {
   brand: "Nibras QR",
   tagline: "QR-ni bir dəfə çap et. Linki istədiyin vaxt dəyiş.",
   nav: {
-    create: "Yarat",
+    create: "Düzəlt",
     scan: "Skaner",
     templates: "Şablonlar",
     dashboard: "QR-lərim",
@@ -31,7 +31,7 @@ const az = {
     kicker: "QR Toolkit · Dynamic QR · Statistika",
     title: "Biznes üçün QR — çap et, sonra dəyiş.",
     body: "Restoran menyusu, Wi-Fi, WhatsApp və ödəniş. Eyni QR qalır, panelindən linki və dizaynı idarə edirsən. Skan sayı, ölkə və cihaz statistikası daxildir.",
-    cta: "QR yarat",
+    cta: "QR düzəlt",
     secondary: "Skaneri aç",
     point1: "11 növ QR",
     point2: "Dinamik link",
@@ -39,7 +39,7 @@ const az = {
   },
   features: {
     title: "Sadə generator yox, biznes aləti",
-    create: "Yarat",
+    create: "Düzəlt",
     createBody: "URL, mətn, telefon, email, WhatsApp, Wi-Fi, vCard, məkan, SMS, tədbir və app linki.",
     dynamic: "Dinamik QR",
     dynamicBody: "QR eyni qalır. Menyunu, kampaniyanı və ya WhatsApp nömrəsini paneldən dəyişirsən.",
@@ -93,7 +93,7 @@ const az = {
     name: "QR adı",
   },
   create: {
-    title: "QR yarat",
+    title: "QR düzəlt",
     static: "Statik",
     dynamic: "Dinamik",
     dynamicHint: "QR eyni qalır, link sonradan dəyişir. Premium tələb olunur.",
@@ -155,7 +155,7 @@ const az = {
   },
   dash: {
     title: "QR-lərim",
-    empty: "Hələ QR yoxdur. Birini yarat, burada idarə et.",
+    empty: "Hələ QR yoxdur. Birini düzəlt, burada idarə et.",
     scans: "skan",
     active: "Aktiv",
     paused: "Deaktiv",
@@ -169,7 +169,7 @@ const az = {
     all: "Hamısı",
     newFolder: "Yeni qovluq",
     stats: "Statistika",
-    created: "Yaradılıb",
+    created: "Düzəldilib",
     type: "Növ",
     dynamic: "Dinamik",
     static: "Statik",

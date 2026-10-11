@@ -20,7 +20,7 @@ export const Route = createFileRoute("/")({
 });
 
 const QR_CARD: Record<Lang, string> = {
-  az: "QR kod yarat, dizayn et və skan et — pulsuz, brauzerində",
+  az: "QR kod düzəlt, dizayn et və skan et — pulsuz, brauzerində",
   en: "Create, design and scan QR codes — free, in your browser",
   tr: "QR kod oluştur, tasarla ve tara — ücretsiz, tarayıcında",
   ar: "أنشئ رموز QR وصمّمها وامسحها — مجاناً في متصفحك",

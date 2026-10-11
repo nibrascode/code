@@ -554,7 +554,7 @@ const PAGES: Record<string, Copy> = {
   },
   "/apps/nibras-qr": {
     az: {
-      title: "Nibras QR — QR kod yarat, dizayn et, skan et",
+      title: "Nibras QR — QR kod düzəlt, dizayn et, skan et",
       description:
         "Nibras QR QR kod və barkodlar üçün Android tətbiqidir: 11 növ QR, loqo və çərçivəli dizayn, şablonlar, ağıllı və təhlükəsiz skaner. Əsas funksiyalar internetsiz işləyir. Pro: dinamik QR və statistika. Nibras Code layihəsidir.",
       features: ["11 növ QR və dizayn", "Ağıllı, təhlükəsiz skaner", "Dinamik QR və statistika (Pro)"],
