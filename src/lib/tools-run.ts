@@ -1033,3 +1033,56 @@ export function morseConvert(text: string, back = false) {
   }
   return raw.toLowerCase().split(/\s+/).map((word) => [...word].map((letter) => MORSE[letter] ?? "").filter(Boolean).join(" ")).join(" / ");
 }
+
+export function readingTime(text: string, lang: string) {
+  const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+  if (!words) throw new Error("read");
+  const minutes = Math.max(1, Math.round(words / 200));
+  const label = lang === "en" ? "min" : lang === "tr" ? "dk" : lang === "ar" ? "د" : lang === "ru" ? "мин" : "dəq";
+  return `${words}\n${minutes} ${label}`;
+}
+
+export function textBinary(text: string, back = false) {
+  const raw = text.trim();
+  if (!raw) throw new Error("binary");
+  if (back || /^[01 ]+$/.test(raw)) {
+    const bytes = raw.split(/\s+/).map((part) => parseInt(part, 2));
+    if (bytes.some((byte) => Number.isNaN(byte) || byte > 255)) throw new Error("binary");
+    return new TextDecoder().decode(new Uint8Array(bytes));
+  }
+  return [...new TextEncoder().encode(raw)].map((byte) => byte.toString(2).padStart(8, "0")).join(" ");
+}
+
+export function textHex(text: string, back = false) {
+  const raw = text.trim();
+  if (!raw) throw new Error("hex");
+  if (back || /^(?:[0-9a-f]{2}\s*)+$/i.test(raw)) {
+    const hex = raw.replace(/\s+/g, "");
+    if (hex.length % 2) throw new Error("hex");
+    const bytes = hex.match(/../g)!.map((part) => parseInt(part, 16));
+    return new TextDecoder().decode(new Uint8Array(bytes));
+  }
+  return [...new TextEncoder().encode(raw)].map((byte) => byte.toString(16).padStart(2, "0")).join(" ");
+}
+
+export function convertTemp(text: string) {
+  const raw = text.trim().toLowerCase();
+  const match = raw.match(/^(-?\d+(?:\.\d+)?)\s*([cf])?$/);
+  if (!match) throw new Error("temp");
+  const value = Number(match[1]);
+  const fromC = match[2] !== "f";
+  const next = fromC ? (value * 9) / 5 + 32 : ((value - 32) * 5) / 9;
+  return fromC ? `${next.toFixed(1)} F` : `${next.toFixed(1)} C`;
+}
+
+export function extractDomain(text: string) {
+  const raw = text.trim();
+  if (!raw) throw new Error("domain");
+  try {
+    const url = new URL(/^https?:\/\//i.test(raw) ? raw : `https://${raw}`);
+    if (!url.hostname.includes(".")) throw new Error("domain");
+    return url.hostname.replace(/^www\./, "");
+  } catch {
+    throw new Error("domain");
+  }
+}

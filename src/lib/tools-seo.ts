@@ -78,6 +78,11 @@ export const TOOL_SLUG: Record<ToolId, string> = {
   yamljson: "yaml-to-json",
   roman: "roman-numeral",
   morse: "morse-code",
+  read: "reading-time",
+  binary: "binary-text",
+  hex: "hex-text",
+  temp: "temperature",
+  domain: "extract-domain",
 };
 
 export const TOOL_LEAD: Record<ToolId, Record<Lang, string>> = {
@@ -599,7 +604,43 @@ export const TOOL_LEAD: Record<ToolId, Record<Lang, string>> = {
     "يحوّل النص إلى مورس ومورس إلى نص.\n\nمثال: salam تصبح نقاطًا وخطوطًا. الزر الآخر يرجع.\n\nهذه الصفحة لا تصدر صوتًا. تُظهر العلامات فقط.",
     "Переводит текст в Морзе и Морзе в текст.\n\nПример: salam становится точками и тире. Другая кнопка возвращает назад.\n\nСтраница звук не издаёт. Только показывает знаки.",
   ),
+  read: L(
+    "Mətnin söz sayını və oxuma vaxtını göstərir. Dəqiqədə 200 söz sayılır.\n\nNümunə: yüz söz bir dəqiqədən az olsa belə 1 dəqiqə yazılır.\n\nBu səhifə mətni saxlamır. Yalnız sayır.",
+    "Shows the word count and the reading time. It counts 200 words a minute.\n\nExample: a hundred words still shows 1 minute.\n\nThis page does not save the text. It only counts.",
+    "Metnin söz sayısını ve okuma süresini gösterir. Dakikada 200 söz sayılır.\n\nÖrnek: yüz söz bir dakikadan az olsa bile 1 dakika yazılır.\n\nBu sayfa metni saklamaz. Yalnız sayar.",
+    "يُظهر عدد الكلمات ووقت القراءة. يحسب 200 كلمة في الدقيقة.\n\nمثال: مئة كلمة تُظهر دقيقة واحدة.\n\nهذه الصفحة لا تحفظ النص. تعد فقط.",
+    "Показывает число слов и время чтения. Считает 200 слов в минуту.\n\nПример: сто слов всё равно показывают 1 минуту.\n\nСтраница текст не хранит. Только считает.",
+  ),
+  binary: L(
+    "Mətni ikili koda və ikili kodu mətnə çevirir.\n\nNümunə: A yazılanda 01000001 olur. Aç düyməsi geri çevirir.\n\nBu səhifə faylı dəyişmir. Yalnız sətir göstərir.",
+    "Turns text into binary and binary into text.\n\nExample: A becomes 01000001. The other button goes back.\n\nThis page does not change a file. It only shows the line.",
+    "Metni ikili koda ve ikili kodu metne çevirir.\n\nÖrnek: A yazılınca 01000001 olur. Aç düğmesi geri çevirir.\n\nBu sayfa dosyayı değiştirmez. Yalnız satır gösterir.",
+    "يحوّل النص إلى ثنائي والثنائي إلى نص.\n\nمثال: A تصبح 01000001. الزر الآخر يرجع.\n\nهذه الصفحة لا تغيّر ملفًا. تُظهر السطر فقط.",
+    "Переводит текст в двоичный код и двоичный код в текст.\n\nПример: A становится 01000001. Другая кнопка возвращает назад.\n\nСтраница файл не меняет. Только показывает строку.",
+  ),
+  hex: L(
+    "Mətni hex koda və hex kodu mətnə çevirir.\n\nNümunə: A yazılanda 41 olur. Aç düyməsi geri çevirir.\n\nBu səhifə faylı dəyişmir. Yalnız sətir göstərir.",
+    "Turns text into hex and hex into text.\n\nExample: A becomes 41. The other button goes back.\n\nThis page does not change a file. It only shows the line.",
+    "Metni hex koda ve hex kodu metne çevirir.\n\nÖrnek: A yazılınca 41 olur. Aç düğmesi geri çevirir.\n\nBu sayfa dosyayı değiştirmez. Yalnız satır gösterir.",
+    "يحوّل النص إلى سداسي والسداسي إلى نص.\n\nمثال: A تصبح 41. الزر الآخر يرجع.\n\nهذه الصفحة لا تغيّر ملفًا. تُظهر السطر فقط.",
+    "Переводит текст в hex и hex в текст.\n\nПример: A становится 41. Другая кнопка возвращает назад.\n\nСтраница файл не меняет. Только показывает строку.",
+  ),
+  temp: L(
+    "Selsi və Farengeyt arasında çevirir.\n\nNümunə: 20 yazılanda 68.0 F olur. 68 f yazılanda 20.0 C olur.\n\nBu səhifə hava göstərmir. Yalnız rəqəmi çevirir.",
+    "Converts between Celsius and Fahrenheit.\n\nExample: 20 becomes 68.0 F. 68 f becomes 20.0 C.\n\nThis page does not show the weather. It only converts the number.",
+    "Selsiyus ve Fahrenhayt arasında çevirir.\n\nÖrnek: 20 yazılınca 68.0 F olur. 68 f yazılınca 20.0 C olur.\n\nBu sayfa hava göstermez. Yalnız sayıyı çevirir.",
+    "يحوّل بين مئوية وفهرنهايت.\n\nمثال: 20 تصبح 68.0 F. 68 f تصبح 20.0 C.\n\nهذه الصفحة لا تُظهر الطقس. تحوّل الرقم فقط.",
+    "Переводит между Цельсием и Фаренгейтом.\n\nПример: 20 становится 68.0 F. 68 f становится 20.0 C.\n\nСтраница погоду не показывает. Только переводит число.",
+  ),
+  domain: L(
+    "Ünvandan domen adını çıxarır.\n\nNümunə: https://www.nibrascode.com/tools yazılanda nibrascode.com qalır.\n\nBu səhifə saytı açmır. Yalnız adı göstərir.",
+    "Takes the domain name out of an address.\n\nExample: https://www.nibrascode.com/tools leaves nibrascode.com.\n\nThis page does not open the site. It only shows the name.",
+    "Adresten alan adını çıkarır.\n\nÖrnek: https://www.nibrascode.com/tools yazılınca nibrascode.com kalır.\n\nBu sayfa siteyi açmaz. Yalnız adı gösterir.",
+    "يستخرج اسم النطاق من العنوان.\n\nمثال: https://www.nibrascode.com/tools تترك nibrascode.com.\n\nهذه الصفحة لا تفتح الموقع. تُظهر الاسم فقط.",
+    "Достаёт имя домена из адреса.\n\nПример: https://www.nibrascode.com/tools оставляет nibrascode.com.\n\nСтраница сайт не открывает. Только показывает имя.",
+  ),
 };
+
 
 
 
@@ -667,6 +708,11 @@ export const TOOL_SAMPLE: Partial<Record<ToolId, { text?: string; extra?: string
   yamljson: { text: "ad: Aysel" },
   roman: { text: "14" },
   morse: { text: "salam" },
+  read: { text: "Bu mətn oxuma vaxtını göstərmək üçündür." },
+  binary: { text: "A" },
+  hex: { text: "A" },
+  temp: { text: "20" },
+  domain: { text: "https://www.nibrascode.com/tools" },
 };
 
 export function toolIdFromSlug(slug: string) {
