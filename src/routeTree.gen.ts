@@ -104,6 +104,7 @@ import { Route as EnProgrammingSlugRouteImport } from './routes/en.programming.$
 import { Route as EnSozSlugRouteImport } from './routes/en.soz.$slug'
 import { Route as EnToolsSlugRouteImport } from './routes/en.tools.$slug'
 import { Route as EnXetaSlugRouteImport } from './routes/en.xeta.$slug'
+import { Route as PrivacyNibrasQrDeleteAccountRouteImport } from './routes/privacy/nibras-qr.delete-account'
 import { Route as ResourcesTopicIndexRouteImport } from './routes/resources/$topic/index'
 import { Route as ResourcesTopicArticleRouteImport } from './routes/resources/$topic/$article'
 import { Route as RuAppsSlugRouteImport } from './routes/ru.apps.$slug'
@@ -601,6 +602,12 @@ const EnXetaSlugRoute = EnXetaSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => EnXetaRoute,
 } as any)
+const PrivacyNibrasQrDeleteAccountRoute =
+  PrivacyNibrasQrDeleteAccountRouteImport.update({
+    id: '/nibras-qr/delete-account',
+    path: '/nibras-qr/delete-account',
+    getParentRoute: () => PrivacyRoute,
+  } as any)
 const ResourcesTopicIndexRoute = ResourcesTopicIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -803,6 +810,7 @@ export interface FileRoutesByFullPath {
   '/en/soz/$slug': typeof EnSozSlugRoute
   '/en/tools/$slug': typeof EnToolsSlugRoute
   '/en/xeta/$slug': typeof EnXetaSlugRoute
+  '/privacy/nibras-qr/delete-account': typeof PrivacyNibrasQrDeleteAccountRoute
   '/resources/$topic/$article': typeof ResourcesTopicArticleRoute
   '/ru/apps/$slug': typeof RuAppsSlugRoute
   '/ru/faq/$slug': typeof RuFaqSlugRoute
@@ -920,6 +928,7 @@ export interface FileRoutesByTo {
   '/en/soz/$slug': typeof EnSozSlugRoute
   '/en/tools/$slug': typeof EnToolsSlugRoute
   '/en/xeta/$slug': typeof EnXetaSlugRoute
+  '/privacy/nibras-qr/delete-account': typeof PrivacyNibrasQrDeleteAccountRoute
   '/resources/$topic/$article': typeof ResourcesTopicArticleRoute
   '/ru/apps/$slug': typeof RuAppsSlugRoute
   '/ru/faq/$slug': typeof RuFaqSlugRoute
@@ -1039,6 +1048,7 @@ export interface FileRoutesById {
   '/en/soz/$slug': typeof EnSozSlugRoute
   '/en/tools/$slug': typeof EnToolsSlugRoute
   '/en/xeta/$slug': typeof EnXetaSlugRoute
+  '/privacy/nibras-qr/delete-account': typeof PrivacyNibrasQrDeleteAccountRoute
   '/resources/$topic/$article': typeof ResourcesTopicArticleRoute
   '/ru/apps/$slug': typeof RuAppsSlugRoute
   '/ru/faq/$slug': typeof RuFaqSlugRoute
@@ -1159,6 +1169,7 @@ export interface FileRouteTypes {
     | '/en/soz/$slug'
     | '/en/tools/$slug'
     | '/en/xeta/$slug'
+    | '/privacy/nibras-qr/delete-account'
     | '/resources/$topic/$article'
     | '/ru/apps/$slug'
     | '/ru/faq/$slug'
@@ -1276,6 +1287,7 @@ export interface FileRouteTypes {
     | '/en/soz/$slug'
     | '/en/tools/$slug'
     | '/en/xeta/$slug'
+    | '/privacy/nibras-qr/delete-account'
     | '/resources/$topic/$article'
     | '/ru/apps/$slug'
     | '/ru/faq/$slug'
@@ -1394,6 +1406,7 @@ export interface FileRouteTypes {
     | '/en/soz/$slug'
     | '/en/tools/$slug'
     | '/en/xeta/$slug'
+    | '/privacy/nibras-qr/delete-account'
     | '/resources/$topic/$article'
     | '/ru/apps/$slug'
     | '/ru/faq/$slug'
@@ -2160,6 +2173,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EnXetaSlugRouteImport
       parentRoute: typeof EnXetaRoute
     }
+    '/privacy/nibras-qr/delete-account': {
+      id: '/privacy/nibras-qr/delete-account'
+      path: '/nibras-qr/delete-account'
+      fullPath: '/privacy/nibras-qr/delete-account'
+      preLoaderRoute: typeof PrivacyNibrasQrDeleteAccountRouteImport
+      parentRoute: typeof PrivacyRoute
+    }
     '/resources/$topic/': {
       id: '/resources/$topic/'
       path: '/'
@@ -2355,11 +2375,13 @@ const NeceRouteWithChildren = NeceRoute._addFileChildren(NeceRouteChildren)
 interface PrivacyRouteChildren {
   PrivacySlugRoute: typeof PrivacySlugRoute
   PrivacyNibrasPdfRoute: typeof PrivacyNibrasPdfRoute
+  PrivacyNibrasQrDeleteAccountRoute: typeof PrivacyNibrasQrDeleteAccountRoute
 }
 
 const PrivacyRouteChildren: PrivacyRouteChildren = {
   PrivacySlugRoute: PrivacySlugRoute,
   PrivacyNibrasPdfRoute: PrivacyNibrasPdfRoute,
+  PrivacyNibrasQrDeleteAccountRoute: PrivacyNibrasQrDeleteAccountRoute,
 }
 
 const PrivacyRouteWithChildren =

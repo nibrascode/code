@@ -552,6 +552,68 @@ const PAGES: Record<string, Copy> = {
         "Nibras Plans ещё не вышел. Полная политика будет опубликована здесь, когда приложение будет готово. Сейчас нет аккаунта и отслеживания.",
     },
   },
+  "/apps/nibras-qr": {
+    az: {
+      title: "Nibras QR — QR kod yarat, dizayn et, skan et",
+      description:
+        "Nibras QR QR kod və barkodlar üçün Android tətbiqidir: 11 növ QR, loqo və çərçivəli dizayn, şablonlar, ağıllı və təhlükəsiz skaner. Əsas funksiyalar internetsiz işləyir. Pro: dinamik QR və statistika. Nibras Code layihəsidir.",
+      features: ["11 növ QR və dizayn", "Ağıllı, təhlükəsiz skaner", "Dinamik QR və statistika (Pro)"],
+    },
+    en: {
+      title: "Nibras QR — create, design and scan QR codes",
+      description:
+        "Nibras QR is an Android app for QR codes and barcodes: 11 QR types, logo and frame designs, templates and a smart, safe scanner. Core features work offline. Pro: dynamic QR with stats. An app by Nibras Code.",
+      features: ["11 QR types and designs", "Smart, safe scanner", "Dynamic QR and stats (Pro)"],
+    },
+    ar: {
+      title: "Nibras QR — أنشئ وصمّم وامسح رموز QR",
+      description:
+        "Nibras QR تطبيق أندرويد لرموز QR والباركود: 11 نوعاً، تصاميم بشعار وإطار، قوالب وماسح ذكي وآمن. الميزات الأساسية تعمل دون إنترنت. من Nibras Code.",
+    },
+    ru: {
+      title: "Nibras QR — создавайте, оформляйте и сканируйте QR-коды",
+      description:
+        "Nibras QR — Android-приложение для QR-кодов и штрихкодов: 11 типов, дизайн с логотипом и рамкой, шаблоны и умный безопасный сканер. Основное работает офлайн. Проект Nibras Code.",
+    },
+  },
+  "/privacy/nibras-qr": {
+    az: {
+      title: "Məxfilik siyasəti — Nibras QR",
+      description:
+        "Nibras QR məxfilik siyasəti, 11 oktyabr 2026: skan cihazda oflayn, kodlar cihazda saxlanılır, Google ilə giriş könüllüdür (Supabase), reklam yoxdur, ödənişlər Google Play ilə.",
+    },
+    en: {
+      title: "Privacy policy — Nibras QR",
+      description:
+        "Nibras QR privacy policy, 11 October 2026: scanning on-device and offline, codes stored on the device, optional Google sign-in (Supabase), no ads, payments via Google Play.",
+    },
+    ar: {
+      title: "سياسة الخصوصية — Nibras QR",
+      description: "سياسة خصوصية Nibras QR، 11 أكتوبر 2026: المسح على الجهاز دون إنترنت، لا إعلانات، الدفع عبر Google Play.",
+    },
+    ru: {
+      title: "Политика конфиденциальности — Nibras QR",
+      description: "Политика Nibras QR, 11 октября 2026: сканирование на устройстве офлайн, без рекламы, оплата через Google Play.",
+    },
+  },
+  "/privacy/nibras-qr/delete-account": {
+    az: {
+      title: "Hesabın silinməsi — Nibras QR",
+      description: "Nibras QR hesabını tətbiqdə (Hesab › Hesabı sil) və ya nibrascode@gmail.com ünvanına e-poçtla necə silmək olar; nələr silinir, nələr qalır.",
+    },
+    en: {
+      title: "Delete your account — Nibras QR",
+      description: "How to delete your Nibras QR account in the app (Account › Delete account) or by email to nibrascode@gmail.com; what is deleted and what is kept.",
+    },
+    ar: {
+      title: "حذف الحساب — Nibras QR",
+      description: "كيفية حذف حساب Nibras QR من التطبيق أو بالبريد إلى nibrascode@gmail.com.",
+    },
+    ru: {
+      title: "Удаление аккаунта — Nibras QR",
+      description: "Как удалить аккаунт Nibras QR в приложении или письмом на nibrascode@gmail.com.",
+    },
+  },
   "/privacy/nibras-pdf": {
     az: {
       title: "Məxfilik siyasəti — Nibras PDF",
@@ -893,12 +955,14 @@ function jsonLd(path: string, lang: Lang, copy: PageSeo, url: string) {
     const names: Record<string, string> = {
       "/apps/nibras-arabic": "Nibras Arabic",
       "/apps/nibras-pdf": "Nibras PDF",
+      "/apps/nibras-qr": "Nibras QR",
       "/apps/nibras-docs": "Nibras Docs",
       "/apps/nibras-plans": "Nibras Plans",
     };
     const categories: Record<string, string> = {
       "/apps/nibras-arabic": "EducationalApplication",
       "/apps/nibras-pdf": "UtilitiesApplication",
+      "/apps/nibras-qr": "UtilitiesApplication",
       "/apps/nibras-docs": "BusinessApplication",
       "/apps/nibras-plans": "BusinessApplication",
     };

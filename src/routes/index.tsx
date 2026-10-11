@@ -19,14 +19,15 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-const STATUS: Partial<Record<"nibras-arabic" | "nibras-pdf" | "nibras-plans" | "nibras-docs", TKey>> = {
+const STATUS: Partial<Record<"nibras-arabic" | "nibras-pdf" | "nibras-qr" | "nibras-plans" | "nibras-docs", TKey>> = {
   "nibras-pdf": "soon",
+  "nibras-qr": "soon",
   "nibras-plans": "soon",
   "nibras-docs": "soon",
 };
 
 const CARDS: {
-  slug: "nibras-arabic" | "nibras-pdf" | "nibras-docs" | "nibras-plans";
+  slug: "nibras-arabic" | "nibras-pdf" | "nibras-qr" | "nibras-docs" | "nibras-plans";
   name: string;
   icon: string;
   desc: TKey;
@@ -45,6 +46,13 @@ const CARDS: {
     icon: "/apps/nibras-pdf.jpg",
     desc: "nx_pdf_d",
     chips: ["nx_pdf_1", "nx_pdf_2", "nx_pdf_3"],
+  },
+  {
+    slug: "nibras-qr",
+    name: "Nibras QR",
+    icon: "/apps/nibras-qr.jpg",
+    desc: "nx_qr_d",
+    chips: ["nx_qr_1", "nx_qr_2", "nx_qr_3"],
   },
   {
     slug: "nibras-docs",

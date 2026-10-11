@@ -1,6 +1,6 @@
 import type { TKey } from "@/lib/i18n";
 
-export type AppSlug = "nibras-arabic" | "nibras-docs" | "nibras-plans" | "nibras-pdf";
+export type AppSlug = "nibras-arabic" | "nibras-docs" | "nibras-plans" | "nibras-pdf" | "nibras-qr";
 
 export type StudioApp = {
   slug: AppSlug;
@@ -60,6 +60,16 @@ export const STUDIO_APPS: StudioApp[] = [
     leadKey: "pdf_lead",
     bodyKey: "pdf_body",
     features: ["pdf_f1", "pdf_f2", "pdf_f3"],
+    shots: [],
+  },
+  {
+    slug: "nibras-qr",
+    name: "Nibras QR",
+    icon: "/apps/nibras-qr.jpg",
+    playStoreUrl: "https://play.google.com/store/apps/details?id=com.nibras.qr",
+    leadKey: "qr_lead",
+    bodyKey: "qr_body",
+    features: ["qr_f1", "qr_f2", "qr_f3"],
     shots: [],
   },
 ];

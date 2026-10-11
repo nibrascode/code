@@ -1,5 +1,6 @@
 import { ARABIC_PRIVACY } from "@/lib/arabic-privacy";
 import { PDF_PRIVACY } from "@/lib/pdf-privacy";
+import { QR_PRIVACY } from "@/lib/qr-privacy";
 import type { Lang } from "@/lib/i18n";
 import type { StudioPrivacyRow } from "@/lib/studio";
 import { useI18n } from "@/lib/i18n-context";
@@ -33,6 +34,7 @@ function RichText({ text }: { text: string }) {
 const NAMES: Record<string, string> = {
   "nibras-arabic": "Nibras Arabic",
   "nibras-pdf": "Nibras PDF",
+  "nibras-qr": "Nibras QR",
   "nibras-docs": "Nibras Docs",
   "nibras-plans": "Nibras Plans",
 };
@@ -98,9 +100,11 @@ export function AppPrivacyView({ slug, rows }: { slug: string; rows: StudioPriva
   const { lang } = useI18n();
   // Nibras PDF ships its policy with the code (src/lib/pdf-privacy.ts) so the page
   // always matches the released app version; studio rows apply to other apps.
-  const live = slug === "nibras-pdf" ? undefined : rows.find((row) => row.slug === slug && row.lang === lang);
+  // Nibras QR ships its policy with the code too (src/lib/qr-privacy.ts, AZ + EN).
+  const codePolicy = slug === "nibras-pdf" || slug === "nibras-qr";
+  const live = codePolicy ? undefined : rows.find((row) => row.slug === slug && row.lang === lang);
   const fallback =
-    slug === "nibras-pdf" ? PDF_PRIVACY[lang] : slug === "nibras-arabic" ? ARABIC_PRIVACY : PENDING[slug]?.[lang] ?? null;
+    slug === "nibras-pdf" ? PDF_PRIVACY[lang] : slug === "nibras-qr" ? (lang === "az" ? QR_PRIVACY.az : QR_PRIVACY.en) : slug === "nibras-arabic" ? ARABIC_PRIVACY : PENDING[slug]?.[lang] ?? null;
   const copy = live
     ? {
         title: live.title,
@@ -129,6 +133,13 @@ export function AppPrivacyView({ slug, rows }: { slug: string; rows: StudioPriva
           </p>
         ),
       )}
+      {slug === "nibras-qr" ? (
+        <p>
+          <a href="/privacy/nibras-qr/delete-account">
+            {lang === "az" ? "Hesabın silinməsi — Nibras QR" : "Delete your account — Nibras QR"}
+          </a>
+        </p>
+      ) : null}
     </main>
   );
 }

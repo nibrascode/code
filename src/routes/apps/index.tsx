@@ -18,10 +18,11 @@ export const Route = createFileRoute("/apps/")({
   component: AppsPage,
 });
 
-const ORDER: AppSlug[] = ["nibras-arabic", "nibras-pdf", "nibras-docs", "nibras-plans"];
+const ORDER: AppSlug[] = ["nibras-arabic", "nibras-pdf", "nibras-qr", "nibras-docs", "nibras-plans"];
 
 const STATUS: Partial<Record<AppSlug, TKey>> = {
   "nibras-pdf": "soon",
+  "nibras-qr": "soon",
   "nibras-plans": "soon",
   "nibras-docs": "soon",
 };
