@@ -88,6 +88,11 @@ export const TOOL_SLUG: Record<ToolId, string> = {
   join: "join-lines",
   escape: "json-escape",
   blank: "remove-blank-lines",
+  speed: "speed",
+  area: "area",
+  vat: "vat",
+  weekday: "weekday",
+  prefix: "add-to-lines",
 };
 
 export const TOOL_LEAD: Record<ToolId, Record<Lang, string>> = {
@@ -679,7 +684,43 @@ export const TOOL_LEAD: Record<ToolId, Record<Lang, string>> = {
     "يحذف الأسطر الفارغة. الأسطر المكتوبة تبقى.\n\nمثال: إذا كان بين نصين سطر فارغ، يذهب ذلك السطر.\n\nهذه الصفحة لا تغيّر ملفًا. تحذف الفراغ فقط.",
     "Удаляет пустые строки. Строки с текстом остаются.\n\nПример: если между двумя текстами пустая строка, она уходит.\n\nСтраница файл не меняет. Только убирает пробел.",
   ),
+  speed: L(
+    "Kilometr və mil arasında çevirir.\n\nNümunə: 100 yazılanda 62.14 mph olur. 60 mph yazılanda 96.56 km/h olur.\n\nBu səhifə yolu ölçmür. Yalnız rəqəmi çevirir.",
+    "Converts between kilometers and miles.\n\nExample: 100 becomes 62.14 mph. 60 mph becomes 96.56 km/h.\n\nThis page does not measure a road. It only converts the number.",
+    "Kilometre ve mil arasında çevirir.\n\nÖrnek: 100 yazılınca 62.14 mph olur. 60 mph yazılınca 96.56 km/h olur.\n\nBu sayfa yolu ölçmez. Yalnız sayıyı çevirir.",
+    "يحوّل بين كيلومتر وميل.\n\nمثال: 100 تصبح 62.14 mph. 60 mph تصبح 96.56 km/h.\n\nهذه الصفحة لا تقيس الطريق. تحوّل الرقم فقط.",
+    "Переводит между километрами и милями.\n\nПример: 100 становится 62.14 mph. 60 mph становится 96.56 km/h.\n\nСтраница дорогу не мерит. Только переводит число.",
+  ),
+  area: L(
+    "Kvadrat metr və kvadrat fut arasında çevirir.\n\nNümunə: 10 yazılanda 107.64 ft2 olur. 100 ft2 yazılanda 9.29 m2 olur.\n\nBu səhifə otağı ölçmür. Yalnız rəqəmi çevirir.",
+    "Converts between square meters and square feet.\n\nExample: 10 becomes 107.64 ft2. 100 ft2 becomes 9.29 m2.\n\nThis page does not measure a room. It only converts the number.",
+    "Metrekare ve fit kare arasında çevirir.\n\nÖrnek: 10 yazılınca 107.64 ft2 olur. 100 ft2 yazılınca 9.29 m2 olur.\n\nBu sayfa odayı ölçmez. Yalnız sayıyı çevirir.",
+    "يحوّل بين متر مربع وقدم مربع.\n\nمثال: 10 تصبح 107.64 ft2. 100 ft2 تصبح 9.29 m2.\n\nهذه الصفحة لا تقيس الغرفة. تحوّل الرقم فقط.",
+    "Переводит между квадратными метрами и квадратными футами.\n\nПример: 10 становится 107.64 ft2. 100 ft2 становится 9.29 m2.\n\nСтраница комнату не мерит. Только переводит число.",
+  ),
+  vat: L(
+    "Məbləğə ƏDV əlavə edir. İkinci yer faizdir, boşdursa 18 sayılır.\n\nNümunə: 100 və 18 yazılanda vergi 18.00, cəm 118.00 olur.\n\nBu səhifə pul saxlamır. Yalnız hesablayır.",
+    "Adds VAT to an amount. The second box is the percent. Empty means 18.\n\nExample: 100 and 18 give a tax of 18.00 and a total of 118.00.\n\nThis page does not store money. It only calculates.",
+    "Tutara KDV ekler. İkinci yer yüzdedir, boşsa 18 sayılır.\n\nÖrnek: 100 ve 18 yazılınca vergi 18.00, toplam 118.00 olur.\n\nBu sayfa para saklamaz. Yalnız hesaplar.",
+    "يضيف الضريبة إلى مبلغ. الخانة الثانية النسبة، وإذا فرغت تُحسب 18.\n\nمثال: 100 و18 يعطيان ضريبة 18.00 ومجموع 118.00.\n\nهذه الصفحة لا تحفظ مالًا. تحسب فقط.",
+    "Добавляет НДС к сумме. Второе поле — процент, пустое значит 18.\n\nПример: 100 и 18 дают налог 18.00 и сумму 118.00.\n\nСтраница деньги не хранит. Только считает.",
+  ),
+  weekday: L(
+    "Tarixin həftə gününü göstərir.\n\nNümunə: 2026-10-11 yazılanda səhifənin dilində gün adı çıxır.\n\nBu səhifə təqvimi dəyişmir. Yalnız günü yazır.",
+    "Shows the weekday of a date.\n\nExample: 2026-10-11 writes the day name in the language of the page.\n\nThis page does not change a calendar. It only writes the day.",
+    "Tarihin haftanın gününü gösterir.\n\nÖrnek: 2026-10-11 yazılınca sayfanın dilinde gün adı çıkar.\n\nBu sayfa takvimi değiştirmez. Yalnız günü yazar.",
+    "يُظهر يوم الأسبوع لتاريخ.\n\nمثال: 2026-10-11 يكتب اسم اليوم بلغة الصفحة.\n\nهذه الصفحة لا تغيّر التقويم. تكتب اليوم فقط.",
+    "Показывает день недели даты.\n\nПример: 2026-10-11 пишет имя дня на языке страницы.\n\nСтраница календарь не меняет. Только пишет день.",
+  ),
+  prefix: L(
+    "Hər sətirin əvvəlinə yazı qoyur. İkinci yer əlavədir.\n\nNümunə: mətn və - yazılanda hər sətir - ilə başlayır.\n\nBu səhifə faylı dəyişmir. Yalnız sətiri düzəldir.",
+    "Puts text at the start of each line. The second box is the addition.\n\nExample: text and - make each line start with -.\n\nThis page does not change a file. It only edits the lines.",
+    "Her satırın başına yazı koyar. İkinci yer ektir.\n\nÖrnek: metin ve - yazılınca her satır - ile başlar.\n\nBu sayfa dosyayı değiştirmez. Yalnız satırı düzeltir.",
+    "يضع نصًا في أول كل سطر. الخانة الثانية هي الإضافة.\n\nمثال: نص و- يجعل كل سطر يبدأ بـ -.\n\nهذه الصفحة لا تغيّر ملفًا. تعدّل الأسطر فقط.",
+    "Ставит текст в начало каждой строки. Второе поле — добавка.\n\nПример: текст и - делают так, что каждая строка начинается с -.\n\nСтраница файл не меняет. Только правит строки.",
+  ),
 };
+
 
 
 
@@ -759,6 +800,11 @@ export const TOOL_SAMPLE: Partial<Record<ToolId, { text?: string; extra?: string
   join: { text: "alma\narmud" },
   escape: { text: "salam \"dünya\"" },
   blank: { text: "bir\n\niki" },
+  speed: { text: "100" },
+  area: { text: "10" },
+  vat: { text: "100", extra: "18" },
+  weekday: { text: "2026-10-11" },
+  prefix: { text: "alma\narmud", extra: "- " },
 };
 
 export function toolIdFromSlug(slug: string) {

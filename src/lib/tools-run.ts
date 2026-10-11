@@ -1124,3 +1124,49 @@ export function removeBlank(text: string) {
   if (!lines.length) throw new Error("blank");
   return lines.join("\n");
 }
+
+export function convertSpeed(text: string) {
+  const raw = text.trim().toLowerCase();
+  const match = raw.match(/^(-?\d+(?:\.\d+)?)\s*(km|mph|mi)?$/);
+  if (!match) throw new Error("speed");
+  const value = Number(match[1]);
+  const fromKm = match[2] !== "mph" && match[2] !== "mi";
+  const next = fromKm ? value * 0.621371 : value / 0.621371;
+  return fromKm ? `${next.toFixed(2)} mph` : `${next.toFixed(2)} km/h`;
+}
+
+export function convertArea(text: string) {
+  const raw = text.trim().toLowerCase();
+  const match = raw.match(/^(-?\d+(?:\.\d+)?)\s*(m2|ft2|m|ft)?$/);
+  if (!match) throw new Error("area");
+  const value = Number(match[1]);
+  const fromM = match[2] !== "ft2" && match[2] !== "ft";
+  const next = fromM ? value * 10.7639 : value / 10.7639;
+  return fromM ? `${next.toFixed(2)} ft2` : `${next.toFixed(2)} m2`;
+}
+
+export function calcVat(text: string, rate = 18) {
+  const value = Number(text.trim().replace(",", "."));
+  if (!Number.isFinite(value)) throw new Error("vat");
+  const tax = (value * rate) / 100;
+  return `${tax.toFixed(2)}\n${(value + tax).toFixed(2)}`;
+}
+
+export function weekdayOf(text: string, lang: string) {
+  const date = new Date(text.trim());
+  if (Number.isNaN(date.getTime())) throw new Error("weekday");
+  const names: Record<string, string[]> = {
+    az: ["bazar", "bazar ertəsi", "çərşənbə axşamı", "çərşənbə", "cümə axşamı", "cümə", "şənbə"],
+    en: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    tr: ["pazar", "pazartesi", "salı", "çarşamba", "perşembe", "cuma", "cumartesi"],
+    ar: ["الأحد", "الاثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"],
+    ru: ["воскресенье", "понедельник", "вторник", "среда", "четверг", "пятница", "суббота"],
+  };
+  return (names[lang] ?? names.az)[date.getUTCDay()];
+}
+
+export function prefixLines(text: string, extra: string) {
+  const lines = text.split(/\n/);
+  if (!lines.some((line) => line.trim()) || !extra.trim()) throw new Error("prefix");
+  return lines.map((line) => (line.trim() ? `${extra}${line}` : line)).join("\n");
+}

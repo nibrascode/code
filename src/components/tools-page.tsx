@@ -56,6 +56,8 @@ import {
   Scale,
   Quote,
   Eraser,
+  Gauge,
+  ListPlus,
   WholeWord,
 } from "lucide-react";
 import type { Lang } from "@/lib/i18n";
@@ -146,6 +148,11 @@ import {
   joinLines,
   escapeJson,
   removeBlank,
+  convertSpeed,
+  convertArea,
+  calcVat,
+  weekdayOf,
+  prefixLines,
 } from "@/lib/tools-run";
 
 const NEEDS_TEXT = new Set<ToolId>([
@@ -227,6 +234,11 @@ const NEEDS_TEXT = new Set<ToolId>([
   "join",
   "escape",
   "blank",
+  "speed",
+  "area",
+  "vat",
+  "weekday",
+  "prefix",
 ]);
 const PAIR = new Set<ToolId>(["base64", "url", "html", "roman", "morse", "jsonyaml", "yamljson", "binary", "hex", "escape"]);
 
@@ -324,6 +336,11 @@ const ICONS: Record<ToolId, typeof Braces> = {
   join: ListOrdered,
   escape: Quote,
   blank: Eraser,
+  speed: Gauge,
+  area: Square,
+  vat: Percent,
+  weekday: CalendarRange,
+  prefix: ListPlus,
 };
 
 async function sha(text: string, name: "SHA-1" | "SHA-256") {
@@ -459,6 +476,11 @@ function runSync(id: ToolId, text: string, count: string, low: string, high: str
   if (id === "join") return joinLines(text);
   if (id === "escape") return escapeJson(text);
   if (id === "blank") return removeBlank(text);
+  if (id === "speed") return convertSpeed(text);
+  if (id === "area") return convertArea(text);
+  if (id === "vat") return calcVat(text, Number(extra) || 18);
+  if (id === "weekday") return weekdayOf(text, lang);
+  if (id === "prefix") return prefixLines(text, extra);
   return "";
 }
 
@@ -630,7 +652,7 @@ export function ToolsPage({ lang, focus }: { lang: Lang; focus?: ToolId }) {
                 ) : null}
                 {NEEDS_TEXT.has(current) ? (
                   <>
-                    {current === "regex" || current === "contrast" || current === "meta" || current === "utm" || current === "days" || current === "htaccess" || current === "gradient" ? (
+                    {current === "regex" || current === "contrast" || current === "meta" || current === "utm" || current === "days" || current === "htaccess" || current === "gradient" || current === "vat" || current === "prefix" ? (
                       <textarea
                         value={extra}
                         spellCheck={false}
