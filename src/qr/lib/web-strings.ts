@@ -33,6 +33,8 @@ const az = {
   securePay: "Təhlükəsiz ödəniş: Lemon Squeezy",
   camBlocked: "Kameraya icazə bloklanıb. Ünvan sətrindəki kilid işarəsinə toxun → Kamera → İcazə ver, sonra yenidən cəhd et.",
   camNone: "Kamera tapılmadı. Şəkil yükləyərək skan et.",
+  term1y: "1 il üçün",
+  termLife: "həmişəlik",
 };
 type WebDict = typeof az;
 
@@ -68,6 +70,8 @@ const en: WebDict = {
   securePay: "Secure checkout by Lemon Squeezy",
   camBlocked: "Camera access is blocked. Tap the lock icon in the address bar → Camera → Allow, then try again.",
   camNone: "No camera found. Scan by uploading an image instead.",
+  term1y: "for 1 year",
+  termLife: "forever",
 };
 
 const tr: WebDict = {
@@ -102,6 +106,8 @@ const tr: WebDict = {
   securePay: "Güvenli ödeme: Lemon Squeezy",
   camBlocked: "Kamera erişimi engellendi. Adres çubuğundaki kilit simgesine dokun → Kamera → İzin ver, sonra tekrar dene.",
   camNone: "Kamera bulunamadı. Bunun yerine resim yükleyerek tara.",
+  term1y: "1 yıl için",
+  termLife: "ömür boyu",
 };
 
 const ar: WebDict = {
@@ -136,6 +142,8 @@ const ar: WebDict = {
   securePay: "دفع آمن عبر Lemon Squeezy",
   camBlocked: "الوصول إلى الكاميرا محظور. اضغط على رمز القفل في شريط العنوان ← الكاميرا ← سماح، ثم حاول مجدداً.",
   camNone: "لم يتم العثور على كاميرا. امسح برفع صورة بدلاً من ذلك.",
+  term1y: "لمدة سنة",
+  termLife: "مدى الحياة",
 };
 
 const ru: WebDict = {
@@ -170,6 +178,8 @@ const ru: WebDict = {
   securePay: "Безопасная оплата через Lemon Squeezy",
   camBlocked: "Доступ к камере заблокирован. Нажмите на значок замка в адресной строке → Камера → Разрешить и попробуйте снова.",
   camNone: "Камера не найдена. Отсканируйте, загрузив изображение.",
+  term1y: "на 1 год",
+  termLife: "навсегда",
 };
 
 export const WEB_STRINGS: Record<Lang, WebDict> = { az, en, tr, ar, ru };

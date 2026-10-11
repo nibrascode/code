@@ -37,9 +37,9 @@ export function LockDialog() {
   const [plan, setPlan] = useState<Plan>("1y");
   const [err, setErr] = useState(false);
   if (!open) return null;
-  const plans: { id: Plan; name: string; note: string; price: string }[] = [
-    { id: "1y", name: w.plan1y, note: w.plan1yNote, price: "$9.99" },
-    { id: "lifetime", name: w.planLife, note: w.planLifeNote, price: "$19.99" },
+  const plans: { id: Plan; name: string; note: string; price: string; term: string }[] = [
+    { id: "1y", name: w.plan1y, note: w.plan1yNote, price: "$9.99", term: w.term1y },
+    { id: "lifetime", name: w.planLife, note: w.planLifeNote, price: "$19.99", term: w.termLife },
   ];
   const onBuy = async () => {
     setErr(false);
@@ -87,7 +87,7 @@ export function LockDialog() {
                   </span>
                   <span className="text-end">
                     <span className="block font-display text-lg font-bold">{p.price}</span>
-                    <span className="block text-[11px] text-subtle">{w.oneTime}</span>
+                    <span className="block text-[11px] text-subtle">{p.term}</span>
                   </span>
                 </button>
               ))}
