@@ -65,7 +65,7 @@ export const STUDIO_APPS: StudioApp[] = [
   {
     slug: "nibras-qr",
     name: "Nibras QR",
-    icon: "/apps/nibras-qr.jpg",
+    icon: "/apps/nibras-qr-v2.jpg",
     playStoreUrl: "https://play.google.com/store/apps/details?id=com.nibras.qr",
     leadKey: "qr_lead",
     bodyKey: "qr_body",

@@ -50,7 +50,7 @@ const CARDS: {
   {
     slug: "nibras-qr",
     name: "Nibras QR",
-    icon: "/apps/nibras-qr.jpg",
+    icon: "/apps/nibras-qr-v2.jpg",
     desc: "nx_qr_d",
     chips: ["nx_qr_1", "nx_qr_2", "nx_qr_3"],
   },
