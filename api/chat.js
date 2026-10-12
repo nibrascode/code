@@ -8,6 +8,7 @@ import { translateReply } from "./_translate-chat.js";
 import { snippetReply } from "./_snippets.js";
 import { localReply } from "./_local.js";
 import { toolsReply } from "./_tools.js";
+import { searchReply } from "./_search.js";
 import { wikidataReply } from "./_wikidata.js";
 import { extraReply, prayerReply } from "./_extra.js";
 import { track } from "./_stats.js";
@@ -174,10 +175,12 @@ export default async function handler(req, res) {
     const relFlag = (isRel) => (isRel ? { religious: true } : {});
     // Hazır python/html/javascript/sql/css kod nümunələri: AI-yə getmədən (kod rejimi də daxil)
     const snippet = fixed ? null : snippetReply(message, body.mode);
-    const tools = fixed || snippet || body.mode === "create" ? null : toolsReply(message);
+    const search = fixed || snippet || body.mode === "create" ? null : searchReply(message);
+    const tools = fixed || snippet || search || body.mode === "create" ? null : toolsReply(message);
     const ready =
       fixed ||
       snippet ||
+      search ||
       tools ||
       // Çox kiçik sorğular (salam, təşəkkür, sadə hesab, saat/tarix) yerli cavablanır
       (body.mode === "create" ? null : localReply(message));
