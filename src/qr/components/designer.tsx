@@ -167,7 +167,7 @@ export function Designer({
             <button
               key={s}
               type="button"
-              onClick={() => gate(s === "square" || canPro, { dotStyle: s })}
+              onClick={() => setDesign({ dotStyle: s })}
               className={cn(
                 "h-10 rounded-lg border text-[10px]",
                 design.dotStyle === s
@@ -190,7 +190,7 @@ export function Designer({
             <button
               key={s}
               type="button"
-              onClick={() => gate(s === "square" || canPro, { eyeStyle: s })}
+              onClick={() => setDesign({ eyeStyle: s })}
               className={cn(
                 "h-10 rounded-lg border text-[10px]",
                 design.eyeStyle === s

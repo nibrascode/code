@@ -118,6 +118,10 @@ function chmod(text) {
 }
 
 const TOOLS = [
+  { id: "qr", slug: "qr-code", test: /\bqr\b|qr kod|qr code|باركود|кьюар/i, run: (text) => {
+    const value = payload(text) || text;
+    return `QR hazırdır. Aç və yüklə:\nhttps://www.nibrascode.com/qr?text=${encodeURIComponent(value)}`;
+  } },
   { id: "json", slug: "json", test: /(?:json)\s*(?:düzəlt|duzelt|format|formatter|düzəld|beautify)/i, run: jsonFormat },
   { id: "json-min", slug: "json-minifier", test: /json\s*(?:sıx|six|minify|minifier)/i, run: jsonMin },
   { id: "md5", slug: "md5", test: /\bmd5\b/i, run: (text) => hash(text, "md5") },
@@ -139,6 +143,28 @@ const TOOLS = [
   { id: "jwt", slug: "jwt", test: /\bjwt\b|eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+/i, run: (text) => jwt(pick(text, /eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+(?:\.[A-Za-z0-9_-]+)?/)) },
   { id: "cron", slug: "cron", test: /\bcron\b/i, run: (text) => cron(pick(text, /(?:\S+\s+){4}\S+/)) },
   { id: "chmod", slug: "chmod", test: /\bchmod\b|\brwx[r-][w-][x-]/i, run: (text) => chmod(pick(text, /[0-7]{3,4}|[rwx-]{9}/i)) },
+  { id: "url", slug: "url", test: /url\s*(?:kod|encode|decode)/i, run: (text, all) => /aç|decode/i.test(all) ? decodeURIComponent(text) : encodeURIComponent(text) },
+  { id: "html", slug: "html", test: /html\s*(?:kod|encode|entity)/i, run: (text) => text.replace(/[&<>"']/g, (c) => ({ "&": "&", "<": "<", ">": ">", '"': """, "'": "&#39;" })[c]) },
+  { id: "lorem", slug: "lorem-ipsum", test: /lorem/i, run: () => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." },
+  { id: "roman", slug: "roman-numeral", test: /roma|roman numeral|римск/i, run: (text) => {
+    const n = Number(text.trim());
+    if (!n || n > 3999) throw new Error("roman");
+    const map = [[1000,"M"],[900,"CM"],[500,"D"],[400,"CD"],[100,"C"],[90,"XC"],[50,"L"],[40,"XL"],[10,"X"],[9,"IX"],[5,"V"],[4,"IV"],[1,"I"]];
+    let left = n;
+    return map.map(([num, sign]) => { const c = Math.floor(left / num); left -= c * num; return sign.repeat(c); }).join("");
+  } },
+  { id: "morse", slug: "morse-code", test: /morze|morse|морзе/i, run: (text) => {
+    const code = { a:".-",b:"-...",c:"-.-.",d:"-..",e:".",f:"..-.",g:"--.",h:"....",i:"..",j:".---",k:"-.-",l:".-..",m:"--",n:"-.",o:"---",p:".--.",q:"--.-",r:".-.",s:"...",t:"-",u:"..-",v:"...-",w:".--",x:"-..-",y:"-.--",z:"--.." };
+    return text.toLowerCase().split(/\s+/).map((word) => [...word].map((ch) => code[ch] || "").filter(Boolean).join(" ")).join(" / ");
+  } },
+  { id: "temp", slug: "temperature", test: /selsi|celsius|fahrenheit|farengeyt|°[cf]/i, run: (text) => {
+    const n = Number(text.match(/-?\d+(?:\.\d+)?/)?.[0]);
+    if (!Number.isFinite(n)) throw new Error("temp");
+    return /f/i.test(text) && /f$|fahrenheit|farengeyt/i.test(text) ? `${(((n - 32) * 5) / 9).toFixed(1)} C` : `${((n * 9) / 5 + 32).toFixed(1)} F`;
+  } },
+  { id: "domain", slug: "extract-domain", test: /domen|domain|alan adı/i, run: (text) => new URL(/^https?:\/\//i.test(text) ? text : `https://${text}`).hostname.replace(/^www\./, "") },
+  { id: "slug", slug: "slug", test: /\bslug\b/i, run: (text) => text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") },
+  { id: "email", slug: "email-check", test: /e-?poçt|email|e-posta/i, run: (text) => /@/.test(text) && text.split("@")[1]?.includes(".") ? "Qısa yoxlamadan keçdi." : "Ünvan tam deyil." },
 ];
 
 export function toolsReply(message) {

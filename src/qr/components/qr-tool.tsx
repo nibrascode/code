@@ -8,7 +8,7 @@ import { TypeForm, TypePicker } from "@/qr/components/type-form";
 import { useQrAuth } from "@/qr/lib/auth";
 import { useI18n } from "@/qr/lib/i18n";
 import { deleteCode, LIMITS, listCodes, newLocalId, upsertCode, type LocalQr } from "@/qr/lib/local";
-import { buildPayload, defaultName } from "@/qr/lib/payload";
+import { buildPayload, defaultFields, defaultName } from "@/qr/lib/payload";
 import { useGenerator } from "@/qr/lib/store";
 import { PLAN_LIMITS, type Plan } from "@/qr/lib/types";
 import { cn } from "@/qr/lib/utils";
@@ -168,6 +168,22 @@ function CreatePanel({ pro }: { pro: boolean }) {
   const limits = PLAN_LIMITS[plan];
   const payload = useMemo(() => buildPayload(gen.type, gen.fields), [gen.type, gen.fields]);
   const name = gen.name.trim() || defaultName(gen.type, gen.fields);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const text = params.get("text") || params.get("url") || "";
+    const type = params.get("type");
+    if (!text && !type) return;
+    const nextType = type && ["url", "text", "phone", "email", "whatsapp", "wifi", "vcard", "location", "sms", "event", "app"].includes(type) ? (type as typeof gen.type) : /^https?:\/\//i.test(text) ? "url" : "text";
+    const fields = { ...defaultFields(nextType) };
+    if (nextType === "url") fields.url = text;
+    else if (nextType === "phone" || nextType === "whatsapp") fields.phone = text;
+    else if (nextType === "email") fields.email = text;
+    else if (nextType === "wifi") fields.ssid = text;
+    else fields.text = text;
+    useGenerator.getState().setType(nextType);
+    useGenerator.getState().setFields(fields);
+  }, []);
 
   const onSave = () => {
     if (!payload) return toast.error(t.create.empty);
