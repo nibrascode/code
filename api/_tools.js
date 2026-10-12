@@ -144,7 +144,7 @@ const TOOLS = [
   { id: "cron", slug: "cron", test: /\bcron\b/i, run: (text) => cron(pick(text, /(?:\S+\s+){4}\S+/)) },
   { id: "chmod", slug: "chmod", test: /\bchmod\b|\brwx[r-][w-][x-]/i, run: (text) => chmod(pick(text, /[0-7]{3,4}|[rwx-]{9}/i)) },
   { id: "url", slug: "url", test: /url\s*(?:kod|encode|decode)/i, run: (text, all) => /aç|decode/i.test(all) ? decodeURIComponent(text) : encodeURIComponent(text) },
-  { id: "html", slug: "html", test: /html\s*(?:kod|encode|entity)/i, run: (text) => text.replace(/[&<>"']/g, (c) => ({ "&": "&", "<": "<", ">": ">", '"': """, "'": "&#39;" })[c]) },
+  { id: "html", slug: "html", test: /html\s*(?:kod|encode|entity)/i, run: (text) => text.replace(/[&<>"\']/g, (c) => ({ "&": String.fromCharCode(38)+"amp;", "<": String.fromCharCode(38)+"lt;", ">": String.fromCharCode(38)+"gt;", '"': String.fromCharCode(38)+"quot;", "'": String.fromCharCode(38)+"#39;" })[c]) },
   { id: "lorem", slug: "lorem-ipsum", test: /lorem/i, run: () => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." },
   { id: "roman", slug: "roman-numeral", test: /roma|roman numeral|римск/i, run: (text) => {
     const n = Number(text.trim());
