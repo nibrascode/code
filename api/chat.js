@@ -326,6 +326,7 @@ export function brandReply(message) {
   const self = /seni kim|sen kim|who are you|kim yarat|seni yarad|who made you|sen kimesen|sen kimsən/.test(q);
   if (!brand && !self) return null;
   if (/(kod yaz|kodu yaz|kod numune|write code|script yaz)/.test(q)) return null;
+  if (/\bqr\b|qr kod|qr code/.test(q)) return null;
 
   const lang = replyLang(raw);
   const who = /(kimindir|kimin dir|kimdir|sahibi|sahib|owner|owns|founder|kurucu|aittir|aitdir|belongs|whose|who owns|кому принадл|чей |владел|صاحب|لمن)/.test(q) || /mahir/.test(q) || self;
