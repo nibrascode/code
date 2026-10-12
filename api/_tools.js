@@ -118,8 +118,9 @@ function chmod(text) {
 }
 
 const TOOLS = [
-  { id: "qr", slug: "qr-code", test: /\bqr\b|qr kod|qr code|باركود|кьюар/i, run: (text) => {
-    const value = payload(text) || text;
+  { id: "qr", slug: "qr-code", test: /\bqr\b|qr kod|qr code|باركود|кьюар/i, run: (text, all) => {
+    const url = String(all || text).match(/https?:\/\/\S+/i);
+    const value = url ? url[0] : (payload(text) || text);
     return `QR hazırdır. Aç və yüklə:\nhttps://www.nibrascode.com/qr?text=${encodeURIComponent(value)}`;
   } },
   { id: "json", slug: "json", test: /(?:json)\s*(?:düzəlt|duzelt|format|formatter|düzəld|beautify)/i, run: jsonFormat },
