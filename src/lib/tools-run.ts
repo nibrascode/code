@@ -1170,3 +1170,71 @@ export function prefixLines(text: string, extra: string) {
   if (!lines.some((line) => line.trim()) || !extra.trim()) throw new Error("prefix");
   return lines.map((line) => (line.trim() ? `${extra}${line}` : line)).join("\n");
 }
+
+export function findReplace(text: string, extra: string) {
+  const cut = extra.indexOf("=>");
+  if (cut < 1) throw new Error("replace");
+  const from = extra.slice(0, cut);
+  const to = extra.slice(cut + 2);
+  if (!from) throw new Error("replace");
+  return text.split(from).join(to);
+}
+
+export function wordFrequency(text: string) {
+  const words = text.toLowerCase().match(/[0-9A-Za-zəöüğıışçƏÖÜĞIİŞÇ]+/g) ?? [];
+  if (!words.length) throw new Error("freq");
+  const count = new Map<string, number>();
+  for (const word of words) count.set(word, (count.get(word) ?? 0) + 1);
+  return [...count.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).map(([word, times]) => `${word} ${times}`).join("\n");
+}
+
+export function htmlToMarkdown(text: string) {
+  if (!text.includes("<")) throw new Error("htmlmd");
+  return text
+    .replace(/<h1[^>]*>([\s\S]*?)<\/h1>/gi, "# $1\n")
+    .replace(/<h2[^>]*>([\s\S]*?)<\/h2>/gi, "## $1\n")
+    .replace(/<h3[^>]*>([\s\S]*?)<\/h3>/gi, "### $1\n")
+    .replace(/<strong[^>]*>([\s\S]*?)<\/strong>/gi, "**$1**")
+    .replace(/<b[^>]*>([\s\S]*?)<\/b>/gi, "**$1**")
+    .replace(/<em[^>]*>([\s\S]*?)<\/em>/gi, "*$1*")
+    .replace(/<a[^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/gi, "[$2]($1)")
+    .replace(/<br\s*\/?>/gi, "\n")
+    .replace(/<\/p>/gi, "\n")
+    .replace(/<[^>]+>/g, "")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
+export function calcDiscount(text: string, extra: string) {
+  const value = Number(text.trim());
+  const rate = Number(extra.trim());
+  if (!Number.isFinite(value) || !Number.isFinite(rate)) throw new Error("discount");
+  return (value - (value * rate) / 100).toFixed(2);
+}
+
+export function calcTip(text: string, extra: string) {
+  const value = Number(text.trim());
+  const rate = Number(extra.trim() || "10");
+  if (!Number.isFinite(value)) throw new Error("tip");
+  return ((value * rate) / 100).toFixed(2);
+}
+
+export function splitBill(text: string, extra: string) {
+  const value = Number(text.trim());
+  const people = Number(extra.trim() || "2");
+  if (!Number.isFinite(value) || people < 1) throw new Error("split");
+  return (value / people).toFixed(2);
+}
+
+export function leapYear(text: string) {
+  const year = Number(text.trim());
+  if (!Number.isInteger(year) || year < 1) throw new Error("leap");
+  return year % 400 === 0 || (year % 4 === 0 && year % 100 !== 0) ? "yes" : "no";
+}
+
+export function queryString(text: string) {
+  const raw = text.trim();
+  const url = new URL(/^https?:\/\//i.test(raw) ? raw : `https://nibrascode.com/${raw}`);
+  if (!url.search) throw new Error("query");
+  return [...url.searchParams.entries()].map(([key, value]) => `${key}=${value}`).join("\n");
+}

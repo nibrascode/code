@@ -92,7 +92,15 @@ export type ToolId =
   | "area"
   | "vat"
   | "weekday"
-  | "prefix";
+  | "prefix"
+  | "replace"
+  | "freq"
+  | "htmlmd"
+  | "discount"
+  | "tip"
+  | "split"
+  | "leap"
+  | "query";
 
 const L = (az: string, en: string, tr: string, ar: string, ru: string): Record<Lang, string> => ({ az, en, tr, ar, ru });
 
@@ -137,6 +145,8 @@ export const TOOLS_PAGE = {
   linkOk: L("Qısa yoxlamadan keçdi.", "It passed the short check.", "Kısa kontrolden geçti.", "اجتاز الفحص القصير.", "Прошёл короткую проверку."),
   over: L("Limitdən uzundur.", "It is over the limit.", "Limitten uzun.", "أطول من الحد.", "Длиннее лимита."),
   under: L("Limitin içindədir.", "It is inside the limit.", "Limitin içinde.", "داخل الحد.", "Внутри лимита."),
+  yes: L("Artıq ildir.", "It is a leap year.", "Artık yıldır.", "سنة كبيسة.", "Високосный год."),
+  no: L("Artıq il deyil.", "It is not a leap year.", "Artık yıl değil.", "ليست سنة كبيسة.", "Не високосный год."),
   at: L("@ işarəsi yoxdur.", "There is no @ sign.", "@ işareti yok.", "لا توجد علامة @.", "Нет знака @."),
   dot: L("Domendə nöqtə yoxdur.", "The domain has no dot.", "Alanda nokta yok.", "النطاق بلا نقطة.", "В домене нет точки."),
   emailOk: L("Qısa yoxlamadan keçdi.", "It passed the short check.", "Kısa kontrolden geçti.", "اجتاز الفحص القصير.", "Прошёл короткую проверку."),
@@ -250,6 +260,14 @@ export const TOOLS: readonly { id: ToolId; label: Record<Lang, string> }[] = [
   { id: "vat", label: L("ƏDV", "VAT", "KDV", "ضريبة", "НДС") },
   { id: "weekday", label: L("Həftə günü", "Weekday", "Haftanın günü", "يوم الأسبوع", "День недели") },
   { id: "prefix", label: L("Sətirə əlavə", "Add to lines", "Satıra ekle", "إضافة للأسطر", "Добавить к строкам") },
+  { id: "replace", label: L("Tap və dəyiş", "Find and replace", "Bul ve değiştir", "ابحث واستبدل", "Найти и заменить") },
+  { id: "freq", label: L("Söz tezliyi", "Word frequency", "Söz sıklığı", "تكرار الكلمات", "Частота слов") },
+  { id: "htmlmd", label: L("HTML-dən Markdown", "HTML to Markdown", "HTML'den Markdown", "من HTML إلى Markdown", "HTML в Markdown") },
+  { id: "discount", label: L("Endirim", "Discount", "İndirim", "خصم", "Скидка") },
+  { id: "tip", label: L("Çay pulu", "Tip", "Bahşiş", "بقشيش", "Чаевые") },
+  { id: "split", label: L("Hesab böl", "Split a bill", "Hesap böl", "تقسيم الحساب", "Разделить счёт") },
+  { id: "leap", label: L("Artıq il", "Leap year", "Artık yıl", "سنة كبيسة", "Високосный год") },
+  { id: "query", label: L("Sorğu çıxar", "Query string", "Sorgu çıkar", "استخراج الاستعلام", "Параметры ссылки") },
 ];
 
 export const TOOL_GROUPS: readonly { id: string; title: Record<Lang, string>; ids: readonly ToolId[] }[] = [
@@ -271,7 +289,7 @@ export const TOOL_GROUPS: readonly { id: string; title: Record<Lang, string>; id
   {
     id: "format",
     title: L("Düzəltmə", "Formatting", "Düzenleme", "تنسيق", "Оформление"),
-    ids: ["speed", "area", "vat", "weekday", "prefix", "length", "weight", "join", "escape", "blank", "read", "binary", "hex", "temp", "domain", "qr", "jsonyaml", "yamljson", "roman", "morse", "sort", "unique", "keys", "strip", "yaml", "markdown", "email", "words", "ip", "sql-min", "xml-min", "cssvar", "link", "chars", "htmlfmt", "js-min", "python", "php", "json", "json-min", "css", "js", "html-min", "css-min", "xml", "sql"],
+    ids: ["replace", "freq", "htmlmd", "discount", "tip", "split", "leap", "query", "speed", "area", "vat", "weekday", "prefix", "length", "weight", "join", "escape", "blank", "read", "binary", "hex", "temp", "domain", "qr", "jsonyaml", "yamljson", "roman", "morse", "sort", "unique", "keys", "strip", "yaml", "markdown", "email", "words", "ip", "sql-min", "xml-min", "cssvar", "link", "chars", "htmlfmt", "js-min", "python", "php", "json", "json-min", "css", "js", "html-min", "css-min", "xml", "sql"],
   },
   {
     id: "text",

@@ -58,6 +58,7 @@ import {
   Eraser,
   Gauge,
   ListPlus,
+  Replace,
   WholeWord,
 } from "lucide-react";
 import type { Lang } from "@/lib/i18n";
@@ -153,6 +154,14 @@ import {
   calcVat,
   weekdayOf,
   prefixLines,
+  findReplace,
+  wordFrequency,
+  htmlToMarkdown,
+  calcDiscount,
+  calcTip,
+  splitBill,
+  leapYear,
+  queryString,
 } from "@/lib/tools-run";
 
 const NEEDS_TEXT = new Set<ToolId>([
@@ -239,6 +248,14 @@ const NEEDS_TEXT = new Set<ToolId>([
   "vat",
   "weekday",
   "prefix",
+  "replace",
+  "freq",
+  "htmlmd",
+  "discount",
+  "tip",
+  "split",
+  "leap",
+  "query",
 ]);
 const PAIR = new Set<ToolId>(["base64", "url", "html", "roman", "morse", "jsonyaml", "yamljson", "binary", "hex", "escape"]);
 
@@ -341,6 +358,14 @@ const ICONS: Record<ToolId, typeof Braces> = {
   vat: Percent,
   weekday: CalendarRange,
   prefix: ListPlus,
+  replace: Replace,
+  freq: WholeWord,
+  htmlmd: FileCode,
+  discount: Percent,
+  tip: Percent,
+  split: Scale,
+  leap: CalendarRange,
+  query: Link,
 };
 
 async function sha(text: string, name: "SHA-1" | "SHA-256") {
@@ -481,6 +506,14 @@ function runSync(id: ToolId, text: string, count: string, low: string, high: str
   if (id === "vat") return calcVat(text, Number(extra) || 18);
   if (id === "weekday") return weekdayOf(text, lang);
   if (id === "prefix") return prefixLines(text, extra);
+  if (id === "replace") return findReplace(text, extra);
+  if (id === "freq") return wordFrequency(text);
+  if (id === "htmlmd") return htmlToMarkdown(text);
+  if (id === "discount") return calcDiscount(text, extra);
+  if (id === "tip") return calcTip(text, extra);
+  if (id === "split") return splitBill(text, extra);
+  if (id === "leap") return leapYear(text) === "yes" ? TOOLS_PAGE.yes[lang] : TOOLS_PAGE.no[lang];
+  if (id === "query") return queryString(text);
   return "";
 }
 
@@ -652,7 +685,7 @@ export function ToolsPage({ lang, focus }: { lang: Lang; focus?: ToolId }) {
                 ) : null}
                 {NEEDS_TEXT.has(current) ? (
                   <>
-                    {current === "regex" || current === "contrast" || current === "meta" || current === "utm" || current === "days" || current === "htaccess" || current === "gradient" || current === "vat" || current === "prefix" ? (
+                    {current === "regex" || current === "contrast" || current === "meta" || current === "utm" || current === "days" || current === "htaccess" || current === "gradient" || current === "vat" || current === "prefix" || current === "replace" || current === "discount" || current === "tip" || current === "split" ? (
                       <textarea
                         value={extra}
                         spellCheck={false}

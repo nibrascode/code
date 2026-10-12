@@ -93,6 +93,14 @@ export const TOOL_SLUG: Record<ToolId, string> = {
   vat: "vat",
   weekday: "weekday",
   prefix: "add-to-lines",
+  replace: "find-replace",
+  freq: "word-frequency",
+  htmlmd: "html-to-markdown",
+  discount: "discount",
+  tip: "tip",
+  split: "split-bill",
+  leap: "leap-year",
+  query: "query-string",
 };
 
 export const TOOL_LEAD: Record<ToolId, Record<Lang, string>> = {
@@ -719,7 +727,65 @@ export const TOOL_LEAD: Record<ToolId, Record<Lang, string>> = {
     "يضع نصًا في أول كل سطر. الخانة الثانية هي الإضافة.\n\nمثال: نص و- يجعل كل سطر يبدأ بـ -.\n\nهذه الصفحة لا تغيّر ملفًا. تعدّل الأسطر فقط.",
     "Ставит текст в начало каждой строки. Второе поле — добавка.\n\nПример: текст и - делают так, что каждая строка начинается с -.\n\nСтраница файл не меняет. Только правит строки.",
   ),
+  replace: L(
+    "Mətndə bir sözü başqası ilə əvəz edir. İkinci yer köhnə=>yeni şəklində yazılır.\n\nNümunə: Salam dünya və dünya=>yer yazılanda Salam yer olur.\n\nBu səhifə faylı dəyişmir. Yalnız mətni düzəldir.",
+    "Replaces one word with another in the text. The second box is old=>new.\n\nExample: Salam dünya and dünya=>yer become Salam yer.\n\nThis page does not change a file. It only edits the text.",
+    "Metinde bir sözü başkasıyla değiştirir. İkinci yer eski=>yeni biçiminde yazılır.\n\nÖrnek: Salam dünya ve dünya=>yer yazılınca Salam yer olur.\n\nBu sayfa dosyayı değiştirmez. Yalnız metni düzeltir.",
+    "يستبدل كلمة بأخرى في النص. الخانة الثانية تُكتب قديم=>جديد.\n\nمثال: Salam dünya و dünya=>yer تصبح Salam yer.\n\nهذه الصفحة لا تغيّر ملفًا. تعدّل النص فقط.",
+    "Заменяет одно слово другим в тексте. Второе поле пишется как старое=>новое.\n\nПример: Salam dünya и dünya=>yer становятся Salam yer.\n\nСтраница файл не меняет. Только правит текст.",
+  ),
+  freq: L(
+    "Hansı sözün neçə dəfə keçdiyini göstərir. Ən çox keçən yuxarıda durur.\n\nNümunə: alma alma armud yazılanda alma 2, armud 1 olur.\n\nBu səhifə mətni saxlamır. Yalnız sayır.",
+    "Shows how many times each word appears. The most common one stays on top.\n\nExample: alma alma armud becomes alma 2, armud 1.\n\nThis page does not save the text. It only counts.",
+    "Hangi sözün kaç kez geçtiğini gösterir. En çok geçen üstte durur.\n\nÖrnek: alma alma armud yazılınca alma 2, armud 1 olur.\n\nBu sayfa metni saklamaz. Yalnız sayar.",
+    "يُظهر كم مرة تظهر كل كلمة. الأكثر ظهورًا يبقى في الأعلى.\n\nمثال: alma alma armud تصبح alma 2 وarmud 1.\n\nهذه الصفحة لا تحفظ النص. تعد فقط.",
+    "Показывает, сколько раз встречается каждое слово. Самое частое стоит сверху.\n\nПример: alma alma armud становится alma 2, armud 1.\n\nСтраница текст не хранит. Только считает.",
+  ),
+  htmlmd: L(
+    "HTML-dən sadə Markdown çıxarır. Başlıq, qalın və əlaqə tanınır.\n\nNümunə: <h1>Salam</h1> yazılanda # Salam olur.\n\nMarkdown-dan HTML ayrıca alətdir. Bu onun əksidir.",
+    "Makes simple Markdown from HTML. A heading, bold text, and a link are recognized.\n\nExample: <h1>Salam</h1> becomes # Salam.\n\nMarkdown to HTML is a separate tool. This is the other way.",
+    "HTML'den basit Markdown çıkarır. Başlık, kalın ve bağlantı tanınır.\n\nÖrnek: <h1>Salam</h1> yazılınca # Salam olur.\n\nMarkdown'dan HTML ayrı araçtır. Bu onun tersidir.",
+    "يصنع Markdown بسيطًا من HTML. يُعرف العنوان والخط العريض والرابط.\n\nمثال: <h1>Salam</h1> تصبح # Salam.\n\nمن Markdown إلى HTML أداة منفصلة. هذه هي الجهة الأخرى.",
+    "Делает простой Markdown из HTML. Заголовок, жирный текст и ссылка узнаются.\n\nПример: <h1>Salam</h1> становится # Salam.\n\nMarkdown в HTML — отдельный инструмент. Это обратная сторона.",
+  ),
+  discount: L(
+    "Məbləğdən endirim çıxır. İkinci yer faizdir.\n\nNümunə: 100 və 20 yazılanda 80.00 qalır.\n\nBu səhifə pul saxlamır. Yalnız hesablayır.",
+    "Takes a discount off an amount. The second box is the percent.\n\nExample: 100 and 20 leave 80.00.\n\nThis page does not store money. It only calculates.",
+    "Tutardan indirim çıkarır. İkinci yer yüzdedir.\n\nÖrnek: 100 ve 20 yazılınca 80.00 kalır.\n\nBu sayfa para saklamaz. Yalnız hesaplar.",
+    "يخصم من المبلغ. الخانة الثانية هي النسبة.\n\nمثال: 100 و20 يبقيان 80.00.\n\nهذه الصفحة لا تحفظ مالًا. تحسب فقط.",
+    "Снимает скидку с суммы. Второе поле — процент.\n\nПример: 100 и 20 оставляют 80.00.\n\nСтраница деньги не хранит. Только считает.",
+  ),
+  tip: L(
+    "Məbləğə çay pulu əlavə edir. İkinci yer faizdir, boşdursa 10 sayılır.\n\nNümunə: 50 və 10 yazılanda 5.00 olur.\n\nBu səhifə pul saxlamır. Yalnız hesablayır.",
+    "Adds a tip to an amount. The second box is the percent. Empty means 10.\n\nExample: 50 and 10 give 5.00.\n\nThis page does not store money. It only calculates.",
+    "Tutara bahşiş ekler. İkinci yer yüzdedir, boşsa 10 sayılır.\n\nÖrnek: 50 ve 10 yazılınca 5.00 olur.\n\nBu sayfa para saklamaz. Yalnız hesaplar.",
+    "يضيف بقشيشًا إلى المبلغ. الخانة الثانية النسبة، وإذا فرغت تُحسب 10.\n\nمثال: 50 و10 يعطيان 5.00.\n\nهذه الصفحة لا تحفظ مالًا. تحسب فقط.",
+    "Добавляет чаевые к сумме. Второе поле — процент, пустое значит 10.\n\nПример: 50 и 10 дают 5.00.\n\nСтраница деньги не хранит. Только считает.",
+  ),
+  split: L(
+    "Hesabı adama bölür. İkinci yer adam sayıdır, boşdursa 2 sayılır.\n\nNümunə: 90 və 3 yazılanda 30.00 olur.\n\nBu səhifə pul saxlamır. Yalnız bölür.",
+    "Splits a bill by people. The second box is the number of people. Empty means 2.\n\nExample: 90 and 3 give 30.00.\n\nThis page does not store money. It only splits.",
+    "Hesabı kişiye böler. İkinci yer kişi sayısıdır, boşsa 2 sayılır.\n\nÖrnek: 90 ve 3 yazılınca 30.00 olur.\n\nBu sayfa para saklamaz. Yalnız böler.",
+    "يقسم الحساب على الأشخاص. الخانة الثانية عدد الأشخاص، وإذا فرغت تُحسب 2.\n\nمثال: 90 و3 يعطيان 30.00.\n\nهذه الصفحة لا تحفظ مالًا. تقسم فقط.",
+    "Делит счёт на людей. Второе поле — число людей, пустое значит 2.\n\nПример: 90 и 3 дают 30.00.\n\nСтраница деньги не хранит. Только делит.",
+  ),
+  leap: L(
+    "İlin artıq il olub-olmadığını göstərir.\n\nNümunə: 2024 artıq ildir. 2026 deyil.\n\nBu səhifə təqvimi dəyişmir. Yalnız yoxlayır.",
+    "Shows whether a year is a leap year.\n\nExample: 2024 is a leap year. 2026 is not.\n\nThis page does not change a calendar. It only checks.",
+    "Yılın artık yıl olup olmadığını gösterir.\n\nÖrnek: 2024 artık yıldır. 2026 değil.\n\nBu sayfa takvimi değiştirmez. Yalnız kontrol eder.",
+    "يُظهر هل السنة كبيسة.\n\nمثال: 2024 كبيسة. 2026 ليست كذلك.\n\nهذه الصفحة لا تغيّر التقويم. تفحص فقط.",
+    "Показывает, високосный ли год.\n\nПример: 2024 високосный. 2026 нет.\n\nСтраница календарь не меняет. Только проверяет.",
+  ),
+  query: L(
+    "Ünvandan sorğu hissəsini çıxarır. ? işarəsindən sonrakı cütlər ayrı sətir olur.\n\nNümunə: https://www.nibrascode.com/?q=kod yazılanda q=kod olur.\n\nBu səhifə saytı açmır. Yalnız sorğunu göstərir.",
+    "Takes the query part out of an address. Pairs after ? go on separate lines.\n\nExample: https://www.nibrascode.com/?q=kod becomes q=kod.\n\nThis page does not open the site. It only shows the query.",
+    "Adresten sorgu kısmını çıkarır. ? işaretinden sonraki çiftler ayrı satır olur.\n\nÖrnek: https://www.nibrascode.com/?q=kod yazılınca q=kod olur.\n\nBu sayfa siteyi açmaz. Yalnız sorguyu gösterir.",
+    "يستخرج جزء الاستعلام من العنوان. الأزواج بعد ? تذهب إلى أسطر.\n\nمثال: https://www.nibrascode.com/?q=kod تصبح q=kod.\n\nهذه الصفحة لا تفتح الموقع. تُظهر الاستعلام فقط.",
+    "Достаёт часть запроса из адреса. Пары после ? идут на разные строки.\n\nПример: https://www.nibrascode.com/?q=kod становится q=kod.\n\nСтраница сайт не открывает. Только показывает запрос.",
+  ),
 };
+
+
 
 
 
@@ -805,6 +871,14 @@ export const TOOL_SAMPLE: Partial<Record<ToolId, { text?: string; extra?: string
   vat: { text: "100", extra: "18" },
   weekday: { text: "2026-10-11" },
   prefix: { text: "alma\narmud", extra: "- " },
+  replace: { text: "Salam dünya", extra: "dünya=>yer" },
+  freq: { text: "alma alma armud" },
+  htmlmd: { text: "<h1>Salam</h1>" },
+  discount: { text: "100", extra: "20" },
+  tip: { text: "50", extra: "10" },
+  split: { text: "90", extra: "3" },
+  leap: { text: "2024" },
+  query: { text: "https://www.nibrascode.com/?q=kod" },
 };
 
 export function toolIdFromSlug(slug: string) {
