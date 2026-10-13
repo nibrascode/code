@@ -4,6 +4,7 @@ import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { VisitMeter } from "@/components/visit-meter";
 import { I18nProvider } from "@/lib/i18n-context";
 import { SiteFooter, SiteHeader } from "@/components/site-header";
+import { SiteBackdrop } from "@/components/site-backdrop";
 import { AppSuggest } from "@/components/app-suggest";
 import appCss from "../styles.css?url";
 import { buildHead, langFromLocation, pageUrl, SITE } from "@/lib/seo";
@@ -262,6 +263,7 @@ function RootDocument() {
         data-scene={isHome || isStudio ? undefined : sceneFor(pathname)}
       >
         <PreviewHostBridge />
+        <SiteBackdrop />
         <VisitMeter />
         <AuthProvider>
           <I18nProvider>
