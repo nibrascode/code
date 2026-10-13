@@ -839,9 +839,12 @@ const LOCALES: Record<Lang, string> = {
 
 function ogImage(path: string) {
   const bare = stripLocalePrefix(path).path;
-  if (bare === "/ai" || bare.startsWith("/ai/")) return `${SITE}/nibras-ai.jpg`;
+  if (bare === "/ai" || bare.startsWith("/ai/")) return `${SITE}/og-ai.jpg`;
+  if (bare === "/qr" || bare.startsWith("/qr/")) return `${SITE}/og-qr.jpg`;
+  if (bare === "/tools" || bare.startsWith("/tools/")) return `${SITE}/og-tools.jpg`;
+  if (bare === "/faq" || bare.startsWith("/faq/")) return `${SITE}/og-faq.jpg`;
+  if (bare === "/programming" || bare.startsWith("/programming/")) return `${SITE}/og-programming.jpg`;
   if (bare.startsWith("/apps/") && bare !== "/apps") return `${SITE}/apps/${bare.split("/").pop()}.jpg`;
-  if (bare === "/programming" || bare.startsWith("/programming/")) return `${SITE}/home/hero-desk.jpg`;
   return `${SITE}/og.jpg`;
 }
 

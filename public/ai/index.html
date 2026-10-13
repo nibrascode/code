@@ -3,23 +3,31 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Nibras AI</title>
-  <meta name="description" content="Nibras AI Nibras Code-un ayrıca köməkçisidir. Sual, fikir, kod və şəkil. Modelə gedən sual gündə 40-dır. Söhbət 24 saat qalır." />
+  <title>Nibras AI — sual, kod və şəkil köməkçisi</title>
+  <meta name="description" content="Nibras AI Nibras Code-un ayrıca köməkçisidir. Sual ver, kod yaz, şəkil hazırla. Modelə gedən sual gündə 40-dır. Söhbət 24 saat bu brauzerdə qalır. Tək model adı yoxdur." />
+  <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.nibrascode.com/ai" />
+  <link rel="alternate" hreflang="az" href="https://www.nibrascode.com/ai" />
+  <link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/ai" />
+  <link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/ai" />
+  <link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/ai" />
+  <link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/ai" />
+  <link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/ai" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Nibras Code" />
   <meta property="og:locale" content="az_AZ" />
-  <meta property="og:title" content="Nibras AI" />
-  <meta property="og:description" content="Nibras AI Nibras Code-un ayrıca köməkçisidir. Sual, fikir, kod və şəkil. Modelə gedən sual gündə 40-dır. Söhbət 24 saat qalır." />
+  <meta property="og:title" content="Nibras AI — sual, kod və şəkil köməkçisi" />
+  <meta property="og:description" content="Sual ver, kod yaz, şəkil hazırla. Gündə 40 model sualı. Söhbət 24 saat qalır." />
   <meta property="og:url" content="https://www.nibrascode.com/ai" />
-  <meta property="og:image" content="https://www.nibrascode.com/nibras-ai-icon.png" />
-  <meta property="og:image:width" content="512" />
-  <meta property="og:image:height" content="512" />
+  <meta property="og:image" content="https://www.nibrascode.com/og-ai.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="Nibras AI" />
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Nibras AI" />
-  <meta name="twitter:description" content="Nibras AI Nibras Code-un ayrıca köməkçisidir. Sual, fikir, kod və şəkil." />
-  <meta name="twitter:image" content="https://www.nibrascode.com/nibras-ai-icon.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Nibras AI — sual, kod və şəkil köməkçisi" />
+  <meta name="twitter:description" content="Sual ver, kod yaz, şəkil hazırla. Gündə 40 model sualı." />
+  <meta name="twitter:image" content="https://www.nibrascode.com/og-ai.jpg" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Nibras AI","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","url":"https://www.nibrascode.com/ai","description":"Nibras Code-un ayrıca köməkçisi: sual, kod və şəkil.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
   <link rel="icon" href="/nibras-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -1984,7 +1992,8 @@
       }).catch(function () {});
     }
     function guessLang() {
-      const cand = [localStorage.getItem(LANG_KEY), navigator.language, (navigator.languages || [])[0]];
+      const fromPath = String(location.pathname || "").match(/^\/(en|tr|ar|ru)\/ai\/?$/);
+      const cand = [fromPath && fromPath[1], localStorage.getItem(LANG_KEY), navigator.language, (navigator.languages || [])[0]];
       for (let i = 0; i < cand.length; i++) {
         const c = String(cand[i] || "").toLowerCase().slice(0, 2);
         if (UI[c]) return c;

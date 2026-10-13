@@ -8,7 +8,7 @@ export function stripLocalePrefix(pathname: string): { lang: Lang | null; path: 
 }
 
 export function isSplitPage(path: string) {
-  return path === "/about" || path === "/contact" || path === "/apps" || /^\/apps\/[^/]+$/.test(path);
+  return path === "/about" || path === "/contact" || path === "/apps" || path === "/qr" || /^\/apps\/[^/]+$/.test(path);
 }
 
 export function localeHref(lang: Lang, path: string) {

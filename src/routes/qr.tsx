@@ -6,10 +6,10 @@ import { useI18n } from "@/qr/lib/i18n";
 const QrTool = lazy(() => import("@/qr/components/qr-tool").then((m) => ({ default: m.QrTool })));
 
 export const Route = createFileRoute("/qr")({
-  component: QrPage,
+  component: QrRoutePage,
 });
 
-function QrPage() {
+export function QrRoutePage() {
   const { w } = useI18n();
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);

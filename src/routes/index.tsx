@@ -311,7 +311,7 @@ function Home() {
               </svg>
               <span>{TOOLS_PAGE.heading[lang]}</span>
             </a>
-            <a className="nx-ai-bar nx-qr-bar" href="/qr">
+            <a className="nx-ai-bar nx-qr-bar" href={localeHref(lang, "/qr")}>
               <img src="/apps/nibras-qr-v2.jpg" alt="" width={36} height={36} />
               <span className="nx-qr-text">
                 <b>Nibras QR</b>

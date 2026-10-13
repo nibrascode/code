@@ -20,6 +20,10 @@ import { Route as NxStudioRouteImport } from './routes/nx-studio'
 import { Route as PaketRouteImport } from './routes/paket'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as QrRouteImport } from './routes/qr'
+import { Route as EnQrRouteImport } from './routes/en.qr'
+import { Route as TrQrRouteImport } from './routes/tr.qr'
+import { Route as ArQrRouteImport } from './routes/ar.qr'
+import { Route as RuQrRouteImport } from './routes/ru.qr'
 import { Route as SozRouteImport } from './routes/soz'
 import { Route as ToolsRouteImport } from './routes/tools'
 import { Route as UnutmaRouteImport } from './routes/unutma'
@@ -181,6 +185,26 @@ const PrivacyRoute = PrivacyRouteImport.update({
 const QrRoute = QrRouteImport.update({
   id: '/qr',
   path: '/qr',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnQrRoute = EnQrRouteImport.update({
+  id: '/en/qr',
+  path: '/en/qr',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrQrRoute = TrQrRouteImport.update({
+  id: '/tr/qr',
+  path: '/tr/qr',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArQrRoute = ArQrRouteImport.update({
+  id: '/ar/qr',
+  path: '/ar/qr',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RuQrRoute = RuQrRouteImport.update({
+  id: '/ru/qr',
+  path: '/ru/qr',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SozRoute = SozRouteImport.update({
@@ -732,6 +756,10 @@ export interface FileRoutesByFullPath {
   '/paket': typeof PaketRoute
   '/privacy': typeof PrivacyRouteWithChildren
   '/qr': typeof QrRoute
+  '/en/qr': typeof EnQrRoute
+  '/tr/qr': typeof TrQrRoute
+  '/ar/qr': typeof ArQrRoute
+  '/ru/qr': typeof RuQrRoute
   '/soz': typeof SozRouteWithChildren
   '/tools': typeof ToolsRouteWithChildren
   '/unutma': typeof UnutmaRoute
@@ -852,6 +880,10 @@ export interface FileRoutesByTo {
   '/paket': typeof PaketRoute
   '/privacy': typeof PrivacyRouteWithChildren
   '/qr': typeof QrRoute
+  '/en/qr': typeof EnQrRoute
+  '/tr/qr': typeof TrQrRoute
+  '/ar/qr': typeof ArQrRoute
+  '/ru/qr': typeof RuQrRoute
   '/soz': typeof SozRouteWithChildren
   '/tools': typeof ToolsRouteWithChildren
   '/unutma': typeof UnutmaRoute
@@ -972,6 +1004,10 @@ export interface FileRoutesById {
   '/paket': typeof PaketRoute
   '/privacy': typeof PrivacyRouteWithChildren
   '/qr': typeof QrRoute
+  '/en/qr': typeof EnQrRoute
+  '/tr/qr': typeof TrQrRoute
+  '/ar/qr': typeof ArQrRoute
+  '/ru/qr': typeof RuQrRoute
   '/soz': typeof SozRouteWithChildren
   '/tools': typeof ToolsRouteWithChildren
   '/unutma': typeof UnutmaRoute
@@ -1094,6 +1130,10 @@ export interface FileRouteTypes {
     | '/paket'
     | '/privacy'
     | '/qr'
+    | '/en/qr'
+    | '/tr/qr'
+    | '/ar/qr'
+    | '/ru/qr'
     | '/soz'
     | '/tools'
     | '/unutma'
@@ -1214,6 +1254,10 @@ export interface FileRouteTypes {
     | '/paket'
     | '/privacy'
     | '/qr'
+    | '/en/qr'
+    | '/tr/qr'
+    | '/ar/qr'
+    | '/ru/qr'
     | '/soz'
     | '/tools'
     | '/unutma'
@@ -1333,6 +1377,10 @@ export interface FileRouteTypes {
     | '/paket'
     | '/privacy'
     | '/qr'
+    | '/en/qr'
+    | '/tr/qr'
+    | '/ar/qr'
+    | '/ru/qr'
     | '/soz'
     | '/tools'
     | '/unutma'
@@ -1454,6 +1502,10 @@ export interface RootRouteChildren {
   PaketRoute: typeof PaketRoute
   PrivacyRoute: typeof PrivacyRouteWithChildren
   QrRoute: typeof QrRoute
+  EnQrRoute: typeof EnQrRoute
+  TrQrRoute: typeof TrQrRoute
+  ArQrRoute: typeof ArQrRoute
+  RuQrRoute: typeof RuQrRoute
   SozRoute: typeof SozRouteWithChildren
   ToolsRoute: typeof ToolsRouteWithChildren
   UnutmaRoute: typeof UnutmaRoute
@@ -1596,6 +1648,34 @@ declare module '@tanstack/react-router' {
       path: '/qr'
       fullPath: '/qr'
       preLoaderRoute: typeof QrRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/qr': {
+      id: '/en/qr'
+      path: '/en/qr'
+      fullPath: '/en/qr'
+      preLoaderRoute: typeof EnQrRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tr/qr': {
+      id: '/tr/qr'
+      path: '/tr/qr'
+      fullPath: '/tr/qr'
+      preLoaderRoute: typeof TrQrRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ar/qr': {
+      id: '/ar/qr'
+      path: '/ar/qr'
+      fullPath: '/ar/qr'
+      preLoaderRoute: typeof ArQrRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ru/qr': {
+      id: '/ru/qr'
+      path: '/ru/qr'
+      fullPath: '/ru/qr'
+      preLoaderRoute: typeof RuQrRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/soz': {
@@ -2810,6 +2890,10 @@ const rootRouteChildren: RootRouteChildren = {
   PaketRoute: PaketRoute,
   PrivacyRoute: PrivacyRouteWithChildren,
   QrRoute: QrRoute,
+  EnQrRoute: EnQrRoute,
+  TrQrRoute: TrQrRoute,
+  ArQrRoute: ArQrRoute,
+  RuQrRoute: RuQrRoute,
   SozRoute: SozRouteWithChildren,
   ToolsRoute: ToolsRouteWithChildren,
   UnutmaRoute: UnutmaRoute,
