@@ -628,19 +628,20 @@ export function ToolsPage({ lang, focus }: { lang: Lang; focus?: ToolId }) {
       ) : null}
       {focus ? null : (
       <div className="prog-sections">
-        {TOOL_GROUPS.map((group) => {
+        {TOOL_GROUPS.map((group, index) => {
           const tools = group.ids.map((id) => TOOLS.find((tool) => tool.id === id)!);
           const GroupIcon = GROUP_ICONS[group.id];
           return (
-            <details key={group.id} className="prog-fold tool-fold">
+            <details key={group.id} className="prog-fold tool-fold" open={index === 0}>
               <summary>
                 <h2>
                   <GroupIcon aria-hidden="true" />
                   {group.title[lang]}
+                  <span className="tool-count">{tools.length}</span>
                 </h2>
               </summary>
               <div className="prog-fold-body">
-                <ul className="lib-list">
+                <ul className="tool-grid">
                   {tools.map((tool) => {
                     const Icon = ICONS[tool.id];
                     return (
@@ -760,7 +761,7 @@ export function ToolsPage({ lang, focus }: { lang: Lang; focus?: ToolId }) {
       {focus ? (
         <div className="prog-fold-body">
           <h2>{copy.related[lang]}</h2>
-          <ul className="lib-list">
+          <ul className="tool-grid">
             {relatedTools(focus).map((id) => {
               const tool = TOOLS.find((item) => item.id === id)!;
               const Icon = ICONS[id];
