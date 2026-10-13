@@ -63,7 +63,7 @@ export function FaqView({ page }: { page: FaqCopy }) {
 }
 
 export function FaqTopic({ page, item }: { page: FaqCopy; item: FaqItem }) {
-  const related = faqTopicHref(item.id);
+  const related = faqTopicHref(item.id, page.lang);
   const others = page.items.filter((entry) => entry.id !== item.id);
   return (
     <main className="why-page" lang={page.lang} dir={page.lang === "ar" ? "rtl" : "ltr"}>

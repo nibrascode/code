@@ -25,26 +25,36 @@ export type FaqCopy = {
 const LINKS: Record<Lang, readonly FaqLink[]> = {
   az: [
     { href: "/apps", label: "Tətbiqlər" },
+    { href: "/tools", label: "Xidmətlər" },
+    { href: "/qr", label: "QR" },
     { href: "/programming", label: "Proqramlaşdırma" },
     { href: "/contact", label: "Əlaqə" },
   ],
   en: [
     { href: "/en/apps", label: "Apps" },
+    { href: "/en/tools", label: "Services" },
+    { href: "/qr", label: "QR" },
     { href: "/programming", label: "Programming" },
     { href: "/en/contact", label: "Contact" },
   ],
   tr: [
     { href: "/tr/apps", label: "Uygulamalar" },
+    { href: "/tr/tools", label: "Hizmetler" },
+    { href: "/qr", label: "QR" },
     { href: "/programming", label: "Programlama" },
     { href: "/tr/contact", label: "İletişim" },
   ],
   ar: [
     { href: "/ar/apps", label: "التطبيقات" },
+    { href: "/ar/tools", label: "الخدمات" },
+    { href: "/qr", label: "QR" },
     { href: "/programming", label: "البرمجة" },
     { href: "/ar/contact", label: "تواصل" },
   ],
   ru: [
     { href: "/ru/apps", label: "Приложения" },
+    { href: "/ru/tools", label: "Сервисы" },
+    { href: "/qr", label: "QR" },
     { href: "/programming", label: "Программирование" },
     { href: "/ru/contact", label: "Контакт" },
   ],
@@ -56,9 +66,9 @@ export const FAQ: Record<Lang, FaqCopy> = {
     path: "/faq",
     title: "Tez-tez verilən suallar — Nibras Code",
     description:
-      "Nibras Code nədir, hansı tətbiqləri var, Nibras Arabic, Nibras PDF, Nibras Plans və Nibras Docs haqqında suallar. Nibras AI, Nibras Dev, Nibras Apk, pulsuz istifadə, reklam, məxfilik və əlaqə.",
+      "Nibras Code nədir, hansı tətbiqləri var, Nibras Arabic, Nibras PDF, Nibras Plans və Nibras Docs haqqında suallar. Nibras AI, Nibras Dev, Nibras Apk, Xidmətlər, Nibras QR, pulsuz istifadə, reklam, məxfilik və əlaqə.",
     keywords:
-      "Nibras Code nədir, Nibras Arabic, Nibras PDF, Nibras AI, Nibras Dev, Nibras Apk, APK Studio, Nibras Code pulsuzdur",
+      "Nibras Code nədir, Nibras Arabic, Nibras PDF, Nibras AI, Nibras Dev, Nibras Apk, Xidmətlər, Nibras QR, APK Studio, Nibras Code pulsuzdur",
     heading: "Tez-tez verilən suallar",
     intro: "Nibras Code, tətbiqləri və sayt haqqında ən çox verilən sualların cavabları.",
     more: "Bütün suallar",
@@ -164,7 +174,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "sayt",
         q: "Saytda tətbiqlərdən başqa nə var?",
-        a: "Resurslar, bələdçilər və proqramlaşdırma bölmələri var. Proqramlaşdırmada Python, JavaScript, Java, C#, TypeScript, HTML/CSS və SQL haqqında ayrıca səhifələr var.",
+        a: "Resurslar, bələdçilər, proqramlaşdırma, Xidmətlər və QR bölmələri var. Proqramlaşdırmada Python, JavaScript, Java, C#, TypeScript, HTML/CSS və SQL haqqında ayrıca səhifələr var. Xidmətlərdə kod alətləri, QR-də isə kod hazırlamaq və skan etmək olur.",
       },
       {
         id: "ai",
@@ -182,6 +192,16 @@ export const FAQ: Record<Lang, FaqCopy> = {
         a: "Nibras Apk, yəni APK Studio, saytı Android tətbiqinə çevirən sistemdir: studio.nibrascode.com. Sayt linki və ya index.html olan statik ZIP verilir, ad, ikon və paket adı seçilir, sonra APK yığılır. Qeydiyyat, Android Studio və kod bilgisi tələb olunmur. Hazır APK test və birbaşa quraşdırma üçün debug imzalıdır. Zərərli tətbiq hazırlamaq qadağandır.",
       },
       {
+        id: "tools",
+        q: "Xidmətlər nədir?",
+        a: "Xidmətlər Nibras Code-un pulsuz onlayn alətləridir: nibrascode.com/tools. Lorem, təsadüfi mətn və ad, şifrə, UUID, MD5, SHA-256, Base64, JSON, XML, CSS, JavaScript, SQL, söz sayı, faiz, tarix və başqa alətlər var. Nəticəni kopyalamaq və ya fayl kimi yükləmək olur. Nibras AI-də alətin adını yazanda da hazır nəticə gəlir.",
+      },
+      {
+        id: "qr",
+        q: "Nibras QR nədir?",
+        a: "Nibras QR kod hazırlayan, dizayn edən və skan edən pulsuz xidmətdir: nibrascode.com/qr. Ünvan, mətn, telefon, e-poçt, WhatsApp, Wi-Fi, vizit kartı, SMS, yer və tədbir növləri var. Rəng, nöqtə və göz stilini dəyişmək olur. Nibras AI-də «QR hazırla» yazanda növ seçilir, şəkil və yükləmə düyməsi açılır.",
+      },
+      {
         id: "yeni",
         q: "Yeni tətbiqlər nə vaxt çıxacaq?",
         a: "Dəqiq çıxış tarixi elan olunmur. Nibras Arabic hazırdır. Nibras PDF, Nibras Plans və Nibras Docs tezliklədir. Gələcəkdə veb saytlar və dini bilikləri etibarlı mənbələrdən öyrənməyə kömək edən tətbiqlər də düşünülə bilər.",
@@ -193,7 +213,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
     path: "/en/faq",
     title: "Frequently asked questions — Nibras Code",
     description:
-      "What Nibras Code is, which apps it makes, and answers about Nibras Arabic, Nibras PDF, Nibras Plans, Nibras Docs, Nibras AI, Nibras Dev, and Nibras Apk.",
+      "What Nibras Code is, which apps it makes, and answers about Nibras Arabic, Nibras PDF, Nibras Plans, Nibras Docs, Nibras AI, Nibras Dev, Nibras Apk, Services, and Nibras QR.",
     keywords:
       "what is Nibras Code, Nibras Arabic, Nibras PDF, Nibras AI, Nibras Dev, Nibras Apk, APK Studio, is Nibras Code free",
     heading: "Frequently asked questions",
@@ -301,7 +321,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "sayt",
         q: "What else is on the site besides the apps?",
-        a: "There are resources, guides, and a programming section. Programming has separate pages for Python, JavaScript, Java, C#, TypeScript, HTML/CSS, and SQL.",
+        a: "There are resources, guides, a programming section, Services, and QR. Programming has separate pages for Python, JavaScript, Java, C#, TypeScript, HTML/CSS, and SQL. Services has code tools. QR creates and scans codes.",
       },
       {
         id: "ai",
@@ -317,6 +337,16 @@ export const FAQ: Record<Lang, FaqCopy> = {
         id: "apk",
         q: "What is Nibras Apk?",
         a: "Nibras Apk, also called APK Studio, turns a website into an Android app at studio.nibrascode.com. You give a site link or a static ZIP that contains index.html, choose the name, icon, and package name, and the APK is built. No account, Android Studio, or coding knowledge is required. The finished APK is debug-signed for testing and direct install. Making harmful apps is not allowed.",
+      },
+      {
+        id: "tools",
+        q: "What are Services?",
+        a: "Services are Nibras Code’s free online tools at nibrascode.com/tools. They include Lorem, random text and names, a password, UUID, MD5, SHA-256, Base64, JSON, XML, CSS, JavaScript, SQL, a word count, percent, dates, and more. The result can be copied or downloaded. In Nibras AI, writing the tool’s name also returns a ready result.",
+      },
+      {
+        id: "qr",
+        q: "What is Nibras QR?",
+        a: "Nibras QR is a free service that creates, designs, and scans QR codes at nibrascode.com/qr. It supports a URL, text, phone, email, WhatsApp, Wi-Fi, a vCard, SMS, a location, and an event. Colors, dots, and eye style can be changed. In Nibras AI, writing “make a QR” opens the type, the image, and a download button.",
       },
       {
         id: "yeni",
@@ -438,7 +468,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "sayt",
         q: "Sitede uygulamalardan başka ne var?",
-        a: "Kaynaklar, rehberler ve programlama bölümleri vardır. Programlamada Python, JavaScript, Java, C#, TypeScript, HTML/CSS ve SQL için ayrı sayfalar vardır.",
+        a: "Kaynaklar, rehberler, programlama, Hizmetler ve QR bölümleri vardır. Programlamada Python, JavaScript, Java, C#, TypeScript, HTML/CSS ve SQL için ayrı sayfalar vardır. Hizmetlerde kod araçları, QR’de kod oluşturma ve tarama vardır.",
       },
       {
         id: "ai",
@@ -454,6 +484,16 @@ export const FAQ: Record<Lang, FaqCopy> = {
         id: "apk",
         q: "Nibras Apk nedir?",
         a: "Nibras Apk, yani APK Studio, siteyi Android uygulamasına çeviren sistemdir: studio.nibrascode.com. Site bağlantısı veya index.html bulunan statik bir ZIP verilir, ad, ikon ve paket adı seçilir, sonra APK hazırlanır. Kayıt, Android Studio ve kod bilgisi gerekmez. Hazır APK test ve doğrudan kurulum için debug imzalıdır. Zararlı uygulama yapmak yasaktır.",
+      },
+      {
+        id: "tools",
+        q: "Hizmetler nedir?",
+        a: "Hizmetler, Nibras Code’un ücretsiz çevrimiçi araçlarıdır: nibrascode.com/tools. Lorem, rastgele metin ve ad, parola, UUID, MD5, SHA-256, Base64, JSON, XML, CSS, JavaScript, SQL, söz sayısı, yüzde, tarih ve başka araçlar vardır. Sonuç kopyalanabilir veya dosya olarak indirilebilir. Nibras AI’de aracın adı yazılınca da hazır sonuç gelir.",
+      },
+      {
+        id: "qr",
+        q: "Nibras QR nedir?",
+        a: "Nibras QR, QR kod oluşturan, tasarlayan ve tarayan ücretsiz hizmettir: nibrascode.com/qr. Adres, metin, telefon, e-posta, WhatsApp, Wi-Fi, kartvizit, SMS, konum ve etkinlik türleri vardır. Renk, nokta ve göz stili değiştirilebilir. Nibras AI’de «QR hazırla» yazılınca tür seçilir, görsel ve indirme düğmesi açılır.",
       },
       {
         id: "yeni",
@@ -575,7 +615,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "sayt",
         q: "ماذا يوجد في الموقع غير التطبيقات؟",
-        a: "توجد أقسام للموارد والأدلة والبرمجة. وفي البرمجة صفحات مستقلة عن Python وJavaScript وJava وC# وTypeScript وHTML/CSS وSQL.",
+        a: "توجد أقسام للموارد والأدلة والبرمجة والخدمات وQR. وفي البرمجة صفحات مستقلة عن Python وJavaScript وJava وC# وTypeScript وHTML/CSS وSQL. في الخدمات أدوات للكود، وفي QR إنشاء الرموز ومسحها.",
       },
       {
         id: "ai",
@@ -591,6 +631,16 @@ export const FAQ: Record<Lang, FaqCopy> = {
         id: "apk",
         q: "ما هو Nibras Apk؟",
         a: "Nibras Apk، وهو APK Studio، نظام يحوّل الموقع إلى تطبيق أندرويد على studio.nibrascode.com. يُعطى رابط الموقع أو ملف ZIP ثابت فيه index.html، ثم يُختار الاسم والأيقونة واسم الحزمة، ويُبنى ملف APK. لا يلزم حساب ولا Android Studio ولا معرفة بالبرمجة. ملف APK الجاهز موقّع للتوقيع التجريبي من أجل الاختبار والتثبيت المباشر. صنع تطبيقات ضارة ممنوع.",
+      },
+      {
+        id: "tools",
+        q: "ما هي الخدمات؟",
+        a: "الخدمات أدوات Nibras Code المجانية على الإنترنت: nibrascode.com/tools. فيها Lorem ونص واسم عشوائي وكلمة سر وUUID وMD5 وSHA-256 وBase64 وJSON وXML وCSS وJavaScript وSQL وعدّاد كلمات ونسبة وتاريخ وغيرها. يمكن نسخ النتيجة أو تنزيلها ملفًا. وفي Nibras AI كتابة اسم الأداة تعطي نتيجة جاهزة.",
+      },
+      {
+        id: "qr",
+        q: "ما هو Nibras QR؟",
+        a: "Nibras QR خدمة مجانية لإنشاء رموز QR وتصميمها ومسحها: nibrascode.com/qr. تدعم العنوان والنص والهاتف والبريد وWhatsApp وWi-Fi وبطاقة الزيارة وSMS والموقع والفعالية. يمكن تغيير اللون والنقاط وشكل العين. وفي Nibras AI كتابة «QR hazırla» تفتح النوع والصورة وزر التنزيل.",
       },
       {
         id: "yeni",
@@ -712,7 +762,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "sayt",
         q: "Что ещё есть на сайте кроме приложений?",
-        a: "Есть разделы ресурсов, руководств и программирования. В программировании отдельные страницы о Python, JavaScript, Java, C#, TypeScript, HTML/CSS и SQL.",
+        a: "Есть разделы ресурсов, руководств, программирования, сервисов и QR. В программировании отдельные страницы о Python, JavaScript, Java, C#, TypeScript, HTML/CSS и SQL. В сервисах инструменты для кода, в QR — создание и сканирование кодов.",
       },
       {
         id: "ai",
@@ -728,6 +778,16 @@ export const FAQ: Record<Lang, FaqCopy> = {
         id: "apk",
         q: "Что такое Nibras Apk?",
         a: "Nibras Apk, он же APK Studio, превращает сайт в приложение Android на studio.nibrascode.com. Нужна ссылка на сайт или статический ZIP с index.html, затем выбираются имя, значок и имя пакета, и собирается APK. Регистрация, Android Studio и знание кода не нужны. Готовый APK подписан отладочной подписью для теста и прямой установки. Вредные приложения делать запрещено.",
+      },
+      {
+        id: "tools",
+        q: "Что такое сервисы?",
+        a: "Сервисы — бесплатные онлайн-инструменты Nibras Code: nibrascode.com/tools. Там есть Lorem, случайный текст и имя, пароль, UUID, MD5, SHA-256, Base64, JSON, XML, CSS, JavaScript, SQL, счётчик слов, процент, дата и другие. Результат можно скопировать или скачать. В Nibras AI название инструмента тоже даёт готовый результат.",
+      },
+      {
+        id: "qr",
+        q: "Что такое Nibras QR?",
+        a: "Nibras QR — бесплатный сервис, который создаёт, оформляет и сканирует QR-коды: nibrascode.com/qr. Есть адрес, текст, телефон, почта, WhatsApp, Wi-Fi, визитка, SMS, место и событие. Можно менять цвет, точки и стиль глаз. В Nibras AI «QR hazırla» открывает тип, картинку и кнопку скачивания.",
       },
       {
         id: "yeni",
@@ -764,6 +824,8 @@ export const FAQ_SLUGS: Record<string, string> = {
   ai: "nibras-ai",
   dev: "nibras-dev",
   apk: "nibras-apk",
+  tools: "xidmetler",
+  qr: "nibras-qr",
   yeni: "yeni-tetbiqler",
 };
 
@@ -778,6 +840,8 @@ const TOPIC_HREF: Record<string, string> = {
   ai: "https://www.nibrascode.com/ai",
   dev: "https://dev.nibrascode.com/",
   apk: "https://studio.nibrascode.com/",
+  tools: "/tools",
+  qr: "/qr",
 };
 
 export function faqAnswerText(item: FaqItem) {
@@ -793,7 +857,10 @@ export function faqTopicPath(lang: Lang, idOrSlug: string) {
   return `${faqPath(lang)}/${slug}`;
 }
 
-export function faqTopicHref(id: string) {
+export function faqTopicHref(id: string, lang: Lang = "az") {
+  const prefix = lang === "az" ? "" : `/${lang}`;
+  if (id === "tools") return `${prefix}/tools`;
+  if (id === "qr") return "/qr";
   return TOPIC_HREF[id] ?? null;
 }
 
