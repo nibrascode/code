@@ -66,22 +66,22 @@ const PAGES: Record<string, Copy> = {
     az: {
       title: "Biz kimik — Nibras Code",
       description:
-        "Nibras Code böyük şirkət deyil. Faydalı ideyaları sadə tətbiqlərə çevirən müstəqil şəxsi layihədir. Hazırda Nibras Arabic mövcuddur.",
+        "Nibras Code müstəqil şəxsi layihədir. Nibras Arabic açıqdır. Saytda Nibras AI, Nibras Dev, Nibras Apk, Nibras QR, Nibras Erase və Xidmətlər var.",
     },
     en: {
       title: "Who we are — Nibras Code",
       description:
-        "Nibras Code is not a large company. It is an independent personal project turning useful ideas into simple apps. Nibras Arabic is available now.",
+        "Nibras Code is an independent personal project. Nibras Arabic is available. The site also has Nibras AI, Nibras Dev, Nibras Apk, Nibras QR, Nibras Erase, and Tools.",
     },
     ar: {
       title: "من نحن — Nibras Code",
       description:
-        "Nibras Code ليست شركة كبيرة. هي مشروع شخصي مستقل يحوّل الأفكار المفيدة إلى تطبيقات بسيطة. تطبيق Nibras Arabic متاح الآن.",
+        "Nibras Code مشروع شخصي مستقل. Nibras Arabic متاح. وفي الموقع أيضًا Nibras AI وNibras Dev وNibras Apk وNibras QR وNibras Erase والخدمات.",
     },
     ru: {
       title: "Кто мы — Nibras Code",
       description:
-        "Nibras Code — не большая компания, а независимый личный проект, который превращает полезные идеи в простые приложения. Сейчас доступен Nibras Arabic.",
+        "Nibras Code — независимый личный проект. Nibras Arabic доступен. На сайте также есть Nibras AI, Nibras Dev, Nibras Apk, Nibras QR, Nibras Erase и Сервисы.",
     },
   },
   "/why": {

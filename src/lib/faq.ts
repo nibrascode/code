@@ -87,7 +87,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "tetbiqler",
         q: "Nibras Code hansı tətbiqləri hazırlayır?",
-        a: "Hazırda Nibras Arabic istifadəyə açıqdır. Nibras PDF, Nibras Plans və Nibras Docs tezliklədir. Hər tətbiqin öz səhifəsində adı, qısa məlumatı və yükləmə vəziyyəti göstərilir. Tətbiq adları dildən asılı olmayaraq eyni qalır.",
+        a: "Hazırda Nibras Arabic açıqdır. Nibras PDF, Nibras Plans və Nibras Docs hazırlanır. Saytda ayrıca Nibras AI, Nibras Dev, Nibras Apk, Nibras QR, Nibras Erase və Xidmətlər var. Hər tətbiqin öz səhifəsində adı və yükləmə vəziyyəti göstərilir.",
       },
       {
         id: "arabic",
@@ -159,7 +159,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "mexfilik",
         q: "Məxfilik siyasəti haradadır?",
-        a: "Hər tətbiqin səhifəsində Məxfilik siyasəti düyməsi var. Nibras Arabic və Nibras PDF üçün siyasət mətnləri saytda ayrıca səhifə kimi açıqdır.",
+        a: "Hər tətbiqin səhifəsində Məxfilik siyasəti düyməsi var. Əsas sayt və Nibras AI üçün mətn /privacy səhifəsindədir. Nibras Arabic və Nibras PDF üçün ayrıca səhifə də var.",
       },
       {
         id: "diller",
@@ -179,7 +179,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "ai",
         q: "Nibras AI nədir?",
-        a: "Nibras AI Nibras Code-un ayrıca köməkçisidir: nibrascode.com/ai. Sual vermək, fikir vermək, kod yazmaq və şəkil düzəltmək olar. Modelə gedən sual gündə 40-dır. Hazır cavablar bu limitə düşmür. Bir sabit model adı yoxdur. Söhbət brauzerdə 24 saat qalır.",
+        a: "Nibras AI Nibras Code-un ayrıca köməkçisidir: www.nibrascode.com/ai. Sual vermək, fikir vermək, kod yazmaq və şəkil düzəltmək olar. Modelə gedən sual gündə 40-dır və xarici süni intellekt xidmətinə (xAI və ya Groq) göndərilir. Hazır cavablar bu limitə düşmür. Bir sabit model adı yoxdur. Söhbət 24 saat saxlanır, sonra silinir.",
       },
       {
         id: "dev",
@@ -234,7 +234,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "tetbiqler",
         q: "Which apps does Nibras Code make?",
-        a: "Nibras Arabic is available now. Nibras PDF, Nibras Plans, and Nibras Docs are coming soon. Each app page shows the name, a short description, and the download status. App names stay the same in every language.",
+        a: "Nibras Arabic is available now. Nibras PDF, Nibras Plans, and Nibras Docs are in preparation. The site also has Nibras AI, Nibras Dev, Nibras Apk, Nibras QR, Nibras Erase, and Tools. Each app page shows the name and download status.",
       },
       {
         id: "arabic",
@@ -306,7 +306,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "mexfilik",
         q: "Where is the privacy policy?",
-        a: "Every app page has a Privacy policy button. The Nibras Arabic and Nibras PDF policies are published as their own pages on this site.",
+        a: "Every app page has a Privacy policy button. The main site and Nibras AI are covered on /privacy. Nibras Arabic and Nibras PDF also have their own pages.",
       },
       {
         id: "diller",
@@ -326,7 +326,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "ai",
         q: "What is Nibras AI?",
-        a: "Nibras AI is Nibras Code’s separate assistant at nibrascode.com/ai. You can ask a question, share an idea, write code, and edit an image. A question that reaches a model is limited to 40 a day. Ready answers do not use that limit. There is no single model name. A chat stays in the browser for 24 hours.",
+        a: "Nibras AI is Nibras Code’s separate assistant at www.nibrascode.com/ai. You can ask a question, share an idea, write code, and edit an image. A question that reaches a model is limited to 40 a day and is sent to an external AI service (xAI or Groq). Ready answers do not use that limit. There is no single model name. A chat is kept for 24 hours, then deleted.",
       },
       {
         id: "dev",
@@ -381,7 +381,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "tetbiqler",
         q: "Nibras Code hangi uygulamaları hazırlıyor?",
-        a: "Şu anda Nibras Arabic kullanıma açıktır. Nibras PDF, Nibras Plans ve Nibras Docs yakındadır. Her uygulamanın sayfasında adı, kısa bilgisi ve indirme durumu yer alır. Uygulama adları dil değişince aynı kalır.",
+        a: "Şu anda Nibras Arabic açık. Nibras PDF, Nibras Plans ve Nibras Docs hazırlanıyor. Sitede ayrıca Nibras AI, Nibras Dev, Nibras Apk, Nibras QR, Nibras Erase ve Hizmetler var. Her uygulamanın sayfasında adı ve indirme durumu yer alır.",
       },
       {
         id: "arabic",
@@ -453,7 +453,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "mexfilik",
         q: "Gizlilik politikası nerede?",
-        a: "Her uygulamanın sayfasında Gizlilik politikası düğmesi vardır. Nibras Arabic ve Nibras PDF politikaları sitede ayrı sayfa olarak açıktır.",
+        a: "Her uygulamanın sayfasında Gizlilik politikası düğmesi vardır. Ana site ve Nibras AI /privacy sayfasında anlatılır. Nibras Arabic ve Nibras PDF için ayrı sayfa da vardır.",
       },
       {
         id: "diller",
@@ -473,7 +473,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "ai",
         q: "Nibras AI nedir?",
-        a: "Nibras AI, Nibras Code’un ayrı yardımcısıdır: nibrascode.com/ai. Soru sorulabilir, fikir verilebilir, kod yazılabilir ve görsel düzeltilebilir. Modele giden soru günde 40’tır. Hazır cevaplar bu limite düşmez. Tek bir model adı yoktur. Sohbet tarayıcıda 24 saat kalır.",
+        a: "Nibras AI, Nibras Code’un ayrı yardımcısıdır: www.nibrascode.com/ai. Soru sorulabilir, fikir verilebilir, kod yazılabilir ve görsel düzeltilebilir. Modele giden soru günde 40’tır ve dış bir yapay zeka hizmetine (xAI veya Groq) gider. Hazır cevaplar bu limite düşmez. Tek bir model adı yoktur. Sohbet 24 saat saklanır, sonra silinir.",
       },
       {
         id: "dev",
@@ -528,7 +528,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "tetbiqler",
         q: "ما التطبيقات التي يُعدّها Nibras Code؟",
-        a: "Nibras Arabic متاح الآن. Nibras PDF وNibras Plans وNibras Docs قريبًا. في صفحة كل تطبيق الاسم ووصف قصير وحالة التحميل. أسماء التطبيقات تبقى كما هي في كل اللغات.",
+        a: "Nibras Arabic متاح الآن. Nibras PDF وNibras Plans وNibras Docs قيد الإعداد. وفي الموقع أيضًا Nibras AI وNibras Dev وNibras Apk وNibras QR وNibras Erase والخدمات. في صفحة كل تطبيق الاسم وحالة التحميل.",
       },
       {
         id: "arabic",
@@ -600,7 +600,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "mexfilik",
         q: "أين سياسة الخصوصية؟",
-        a: "في صفحة كل تطبيق زر لسياسة الخصوصية. سياستا Nibras Arabic وNibras PDF منشورتان كصفحتين مستقلتين في الموقع.",
+        a: "في صفحة كل تطبيق زر لسياسة الخصوصية. الموقع الرئيسي وNibras AI مذكوران في /privacy. ولـ Nibras Arabic وNibras PDF صفحة مستقلة أيضًا.",
       },
       {
         id: "diller",
@@ -620,7 +620,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "ai",
         q: "ما هو Nibras AI؟",
-        a: "Nibras AI مساعد منفصل لـ Nibras Code على nibrascode.com/ai. يمكن طرح سؤال، وإعطاء فكرة، وكتابة كود، وتعديل صورة. السؤال الذي يصل إلى نموذج محدود بأربعين في اليوم. الأجوبة الجاهزة لا تدخل في هذا الحد. لا اسم نموذج واحد ثابت. تبقى المحادثة في المتصفح 24 ساعة.",
+        a: "Nibras AI مساعد منفصل لـ Nibras Code على www.nibrascode.com/ai. يمكن طرح سؤال، وإعطاء فكرة، وكتابة كود، وتعديل صورة. السؤال الذي يصل إلى نموذج محدود بأربعين في اليوم ويُرسل إلى خدمة ذكاء اصطناعي خارجية (xAI أو Groq). الأجوبة الجاهزة لا تدخل في هذا الحد. لا اسم نموذج واحد ثابت. تبقى المحادثة 24 ساعة ثم تُحذف.",
       },
       {
         id: "dev",
@@ -675,7 +675,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "tetbiqler",
         q: "Какие приложения делает Nibras Code?",
-        a: "Сейчас доступен Nibras Arabic. Nibras PDF, Nibras Plans и Nibras Docs скоро появятся. На странице каждого приложения есть имя, короткое описание и статус загрузки. Названия приложений не меняются ни на одном языке.",
+        a: "Сейчас доступен Nibras Arabic. Nibras PDF, Nibras Plans и Nibras Docs готовятся. На сайте также есть Nibras AI, Nibras Dev, Nibras Apk, Nibras QR, Nibras Erase и Сервисы. На странице каждого приложения есть имя и статус загрузки.",
       },
       {
         id: "arabic",
@@ -747,7 +747,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "mexfilik",
         q: "Где политика конфиденциальности?",
-        a: "На странице каждого приложения есть кнопка политики конфиденциальности. Политики Nibras Arabic и Nibras PDF опубликованы на сайте отдельными страницами.",
+        a: "На странице каждого приложения есть кнопка политики конфиденциальности. Основной сайт и Nibras AI описаны на /privacy. У Nibras Arabic и Nibras PDF есть и отдельные страницы.",
       },
       {
         id: "diller",
@@ -767,7 +767,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "ai",
         q: "Что такое Nibras AI?",
-        a: "Nibras AI — отдельный помощник Nibras Code на nibrascode.com/ai. Можно задать вопрос, предложить идею, написать код и поправить изображение. Вопрос, который доходит до модели, ограничен сорока в день. Готовые ответы в этот предел не входят. Одного постоянного имени модели нет. Разговор остаётся в браузере 24 часа.",
+        a: "Nibras AI — отдельный помощник Nibras Code на www.nibrascode.com/ai. Можно задать вопрос, предложить идею, написать код и поправить изображение. Вопрос, который доходит до модели, ограничен сорока в день и уходит во внешний сервис ИИ (xAI или Groq). Готовые ответы в этот предел не входят. Одного постоянного имени модели нет. Разговор хранится 24 часа, затем удаляется.",
       },
       {
         id: "dev",

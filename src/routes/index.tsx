@@ -288,7 +288,10 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
                   strokeLinejoin="round"
                 />
               </svg>
-              <span>Nibras Dev</span>
+              <span className="nx-bar-text">
+                <strong>Nibras Dev</strong>
+                <small>NibrasCode Studio</small>
+              </span>
             </a>
             <a
               className="nx-apk-bar"
@@ -307,7 +310,10 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
                   d="M12 11.2a.8.8 0 0 1 .8.8v2.1h2.1a.8.8 0 0 1 0 1.6h-2.1V18a.8.8 0 0 1-1.6 0v-2.3H8.9a.8.8 0 0 1 0-1.6h2.3V12a.8.8 0 0 1 .8-.8Z"
                 />
               </svg>
-              <span>Nibras Apk</span>
+              <span className="nx-bar-text">
+                <strong>Nibras Apk</strong>
+                <small>APK Studio</small>
+              </span>
             </a>
             <a className="nx-apk-bar" href={toolsPath(lang)}>
               <svg className="nx-apk nx-tools" viewBox="0 0 24 24" aria-hidden="true">

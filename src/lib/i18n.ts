@@ -355,9 +355,9 @@ const az = {
   who_p3:
     "Bizim məqsədimiz çoxlu tətbiq hazırlamaq və ya yalnız kommersiya yönümlü bir layihə qurmaq deyil. İnsanların həqiqətən ehtiyac duyduğu, istifadəsi asan və faydalı tətbiqlər üzərində çalışmaq istəyirik.",
   who_p4:
-    "Hazırda Nibras Code layihəsində ərəb dilini sadə şəkildə öyrənməyə kömək etmək üçün Nibras Arabic adlı tətbiq mövcuddur.",
+    "Hazırda Nibras Arabic tətbiqi açıqdır. Saytda isə Nibras AI, Nibras Dev, Nibras Apk, Nibras QR, Nibras Erase və Xidmətlər işləyir.",
   who_p5:
-    "Gələcəkdə isə dini bilikləri sağlam və etibarlı mənbələrdən öyrənməyə kömək edəcək digər tətbiqlər üzərində də çalışmağı düşünürük.",
+    "Nibras PDF, Nibras Plans və Nibras Docs hazırlanır. Gələcəkdə dini bilikləri sağlam mənbədən öyrənməyə kömək edən tətbiqlər də ola bilər.",
   who_approach: "Bizim yanaşmamız",
   who_a1: "Tətbiqlərimizin hər biri pullu deyil.",
   who_a2:
@@ -738,9 +738,9 @@ const dictionaries = {
     who_p3:
       "Our aim is not to make a large number of apps, or to build a project that is only commercially driven. We want to work on apps people truly need — easy to use, and useful.",
     who_p4:
-      "Right now, the Nibras Code project includes an app called Nibras Arabic, made to help people learn Arabic in a simple way.",
+      "Nibras Arabic is available now. The site also has Nibras AI, Nibras Dev, Nibras Apk, Nibras QR, Nibras Erase, and Tools.",
     who_p5:
-      "In the future, we also hope to work on other apps that help people learn religious knowledge from sound and reliable sources.",
+      "Nibras PDF, Nibras Plans, and Nibras Docs are in preparation. Later there may also be apps that help people learn religious knowledge from sound sources.",
     who_approach: "Our approach",
     who_a1: "Not every one of our apps is paid.",
     who_a2:
@@ -1113,9 +1113,9 @@ const dictionaries = {
     who_p3:
       "هدفنا ليس صنع عدد كبير من التطبيقات، ولا بناء مشروع تجاري فقط. نريد أن نعمل على تطبيقات يحتاجها الناس حقًا، سهلة الاستخدام ومفيدة.",
     who_p4:
-      "حاليًا يتضمن مشروع Nibras Code تطبيقًا باسم Nibras Arabic، لمساعدة الناس على تعلّم العربية بطريقة بسيطة.",
+      "تطبيق Nibras Arabic متاح الآن. وفي الموقع أيضًا Nibras AI وNibras Dev وNibras Apk وNibras QR وNibras Erase والخدمات.",
     who_p5:
-      "وفي المستقبل ننوي أيضًا العمل على تطبيقات أخرى تساعد على تعلّم المعارف الدينية من مصادر سليمة وموثوقة.",
+      "Nibras PDF وNibras Plans وNibras Docs قيد الإعداد. وقد تأتي لاحقًا تطبيقات تساعد على تعلّم المعارف الدينية من مصادر سليمة.",
     who_approach: "نهجنا",
     who_a1: "ليست كل تطبيقاتنا مدفوعة.",
     who_a2:
@@ -1488,9 +1488,9 @@ const dictionaries = {
     who_p3:
       "Наша цель — не выпускать как можно больше приложений и не строить проект только ради коммерции. Мы хотим работать над приложениями, которые людям действительно нужны: простыми в использовании и полезными.",
     who_p4:
-      "Сейчас в проекте Nibras Code есть приложение Nibras Arabic — оно помогает учить арабский простым способом.",
+      "Сейчас доступно приложение Nibras Arabic. На сайте также есть Nibras AI, Nibras Dev, Nibras Apk, Nibras QR, Nibras Erase и Сервисы.",
     who_p5:
-      "В будущем мы также думаем работать над другими приложениями, которые помогут изучать религиозные знания из здоровых и надёжных источников.",
+      "Nibras PDF, Nibras Plans и Nibras Docs готовятся. Позже могут появиться и приложения для изучения религиозных знаний из надёжных источников.",
     who_approach: "Наш подход",
     who_a1: "Не каждое наше приложение платное.",
     who_a2:
@@ -1535,6 +1535,10 @@ export const translations: Record<Lang, Record<TKey, string>> = {
     nx_nav_contact: "İletişim",
     contact_title: "Bize ulaşın",
     contact_note: "Bir satır yazın, cevap verelim.",
+    who_p4:
+      "Nibras Arabic şu anda açık. Sitede ayrıca Nibras AI, Nibras Dev, Nibras Apk, Nibras QR, Nibras Erase ve Hizmetler var.",
+    who_p5:
+      "Nibras PDF, Nibras Plans ve Nibras Docs hazırlanıyor. İleride dini bilgileri sağlam kaynaktan öğrenmeye yardım eden uygulamalar da olabilir.",
     code_samples: "Örnek kod",
     code_samples_note: "Oyun ve uygulama için örnek kod.",
     code_game: "Oyun kodu",
