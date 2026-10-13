@@ -6,11 +6,11 @@ import { TechMark } from "@/components/tech-marquee";
 import { LanguageSwitch } from "@/components/language-switch";
 import { NavMenu } from "@/components/nav-menu";
 import { faqPath } from "@/lib/faq";
-import { localeHref } from "@/lib/locale-path";
+import { homePath, localeHref } from "@/lib/locale-path";
 import { SEARCH, searchPath } from "@/lib/search-pages";
 import { toolsPath, TOOLS_PAGE } from "@/lib/tools";
 import { useI18n } from "@/lib/i18n-context";
-import { statusText } from "@/lib/studio";
+import { statusText, type StudioAppRow } from "@/lib/studio";
 import { loadStudioBundle } from "@/lib/studio.functions";
 import type { Lang, TKey } from "@/lib/i18n";
 
@@ -210,9 +210,9 @@ function IosMark() {
   );
 }
 
-function Home() {
+export function HomeView({ apps }: { apps: StudioAppRow[] }) {
   const { t, lang } = useI18n();
-  const rows = Route.useLoaderData().apps;
+  const rows = apps;
   const labels = { soon: t("soon"), building: t("nx_docs_stage") };
   const cards = CARDS.flatMap((card) => {
     const live = rows?.find((row) => row.slug === card.slug);
@@ -226,7 +226,7 @@ function Home() {
   return (
     <main className="nx">
       <header className="nx-nav">
-        <Link to="/" className="nx-brand" aria-label="Nibras Code">
+        <Link to={homePath(lang)} className="nx-brand" aria-label="Nibras Code">
           <Logo />
           <span>
             Nibras <em>Code</em>
@@ -439,4 +439,8 @@ function Home() {
       </footer>
     </main>
   );
+}
+
+function Home() {
+  return <HomeView apps={Route.useLoaderData().apps} />;
 }

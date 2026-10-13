@@ -236,7 +236,7 @@ function SeoLinks() {
 function RootDocument() {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
   const searchStr = useRouterState({ select: (state) => state.location.searchStr });
-  const isHome = pathname === "/";
+  const isHome = pathname === "/" || /^\/(en|tr|ar|ru)\/?$/.test(pathname);
   const isStudio = pathname.startsWith("/nx-studio");
   const lang = langFromLocation(pathname, searchStr);
 

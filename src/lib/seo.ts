@@ -1,5 +1,5 @@
 import { LANGS, type Lang } from "@/lib/i18n";
-import { isSplitPage, localeHref, stripLocalePrefix } from "@/lib/locale-path";
+import { isSplitPage, localeHref, stripLocalePrefix, homePath } from "@/lib/locale-path";
 import { faqAnswerText, faqFromPath, faqPath, faqTopicFromPath, faqTopicPath } from "@/lib/faq";
 import { pdfPairFromPath } from "@/lib/pdf-pairs";
 import { findProgramming, PROGRAMMING } from "@/lib/programming";
@@ -780,6 +780,7 @@ function pageCopy(pathname: string, lang: Lang) {
 
 export function pageUrl(pathname: string, lang: Lang) {
   const path = stripLocalePrefix(pathname).path;
+  if (path === "/") return `${SITE}${homePath(lang) === "/" ? "" : homePath(lang)}`;
   if (isSplitPage(path)) return `${SITE}${localeHref(lang, path)}`;
   const base = `${SITE}${path === "/" ? "" : path}`;
   if (lang === "az") return base || SITE;
@@ -851,8 +852,8 @@ function ogImage(path: string) {
 export function buildHead(pathname: string, lang: Lang) {
   const raw = pathname.length > 1 ? pathname.replace(/\/$/, "") : "/";
   const split = stripLocalePrefix(raw);
-  const path = isSplitPage(split.path) ? split.path : raw;
-  const pageLang = isSplitPage(split.path) && split.lang ? split.lang : lang;
+  const path = split.path === "/" || isSplitPage(split.path) ? split.path : raw;
+  const pageLang = split.lang ?? lang;
   if (path === "/nx-studio") {
     return {
       meta: [

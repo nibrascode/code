@@ -10,6 +10,10 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as EnIndexRouteImport } from './routes/en'
+import { Route as TrIndexRouteImport } from './routes/tr'
+import { Route as ArIndexRouteImport } from './routes/ar'
+import { Route as RuIndexRouteImport } from './routes/ru'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as FaqRouteImport } from './routes/faq'
@@ -135,6 +139,26 @@ import { Route as TrXetaSlugRouteImport } from './routes/tr.xeta.$slug'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnIndexRoute = EnIndexRouteImport.update({
+  id: '/en',
+  path: '/en',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrIndexRoute = TrIndexRouteImport.update({
+  id: '/tr',
+  path: '/tr',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArIndexRoute = ArIndexRouteImport.update({
+  id: '/ar',
+  path: '/ar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RuIndexRoute = RuIndexRouteImport.update({
+  id: '/ru',
+  path: '/ru',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -746,6 +770,10 @@ const TrXetaSlugRoute = TrXetaSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/en': typeof EnIndexRoute
+  '/tr': typeof TrIndexRoute
+  '/ar': typeof ArIndexRoute
+  '/ru': typeof RuIndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRouteWithChildren
@@ -870,6 +898,10 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/en': typeof EnIndexRoute
+  '/tr': typeof TrIndexRoute
+  '/ar': typeof ArIndexRoute
+  '/ru': typeof RuIndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRouteWithChildren
@@ -994,6 +1026,10 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/en': typeof EnIndexRoute
+  '/tr': typeof TrIndexRoute
+  '/ar': typeof ArIndexRoute
+  '/ru': typeof RuIndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRouteWithChildren
@@ -1120,6 +1156,10 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/en'
+    | '/tr'
+    | '/ar'
+    | '/ru'
     | '/about'
     | '/contact'
     | '/faq'
@@ -1244,6 +1284,10 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/en'
+    | '/tr'
+    | '/ar'
+    | '/ru'
     | '/about'
     | '/contact'
     | '/faq'
@@ -1367,6 +1411,10 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/en'
+    | '/tr'
+    | '/ar'
+    | '/ru'
     | '/about'
     | '/contact'
     | '/faq'
@@ -1492,6 +1540,10 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  EnIndexRoute: typeof EnIndexRoute
+  TrIndexRoute: typeof TrIndexRoute
+  ArIndexRoute: typeof ArIndexRoute
+  RuIndexRoute: typeof RuIndexRoute
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRouteWithChildren
@@ -1578,6 +1630,34 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en': {
+      id: '/en'
+      path: '/en'
+      fullPath: '/en'
+      preLoaderRoute: typeof EnIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tr': {
+      id: '/tr'
+      path: '/tr'
+      fullPath: '/tr'
+      preLoaderRoute: typeof TrIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ar': {
+      id: '/ar'
+      path: '/ar'
+      fullPath: '/ar'
+      preLoaderRoute: typeof ArIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ru': {
+      id: '/ru'
+      path: '/ru'
+      fullPath: '/ru'
+      preLoaderRoute: typeof RuIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -2880,6 +2960,10 @@ const TrXetaRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  EnIndexRoute: EnIndexRoute,
+  TrIndexRoute: TrIndexRoute,
+  ArIndexRoute: ArIndexRoute,
+  RuIndexRoute: RuIndexRoute,
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
   FaqRoute: FaqRouteWithChildren,

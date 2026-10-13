@@ -2,6 +2,8 @@ import type { Lang } from "@/lib/i18n";
 
 export function stripLocalePrefix(pathname: string): { lang: Lang | null; path: string } {
   const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname || "/";
+  const bare = path.match(/^\/(en|tr|ar|ru)$/);
+  if (bare) return { lang: bare[1] as Lang, path: "/" };
   const match = path.match(/^\/(en|tr|ar|ru)(\/.*)$/);
   if (!match) return { lang: null, path };
   return { lang: match[1] as Lang, path: match[2] };
@@ -9,6 +11,10 @@ export function stripLocalePrefix(pathname: string): { lang: Lang | null; path: 
 
 export function isSplitPage(path: string) {
   return path === "/about" || path === "/contact" || path === "/apps" || path === "/qr" || /^\/apps\/[^/]+$/.test(path);
+}
+
+export function homePath(lang: Lang) {
+  return lang === "az" ? "/" : `/${lang}`;
 }
 
 export function localeHref(lang: Lang, path: string) {
