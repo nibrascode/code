@@ -30,6 +30,7 @@ export const Route = createRootRoute({
         { charSet: "utf-8" },
         { name: "viewport", content: "width=device-width, initial-scale=1" },
         { name: "theme-color", content: "#10203a" },
+        { name: "msvalidate.01", content: "68E3EDC6C5786EFB6CA2F8908BEBD488" },
         ...seo.meta,
       ],
       links: [
