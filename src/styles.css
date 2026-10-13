@@ -6183,27 +6183,6 @@ body.is-home .noise {
   }
 }
 
-@media (max-width: 640px) {
-  .nx-nav {
-    flex-wrap: wrap;
-    row-gap: 10px;
-    padding-top: 8px;
-  }
-
-  .nx-links {
-    flex: 1 0 100%;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    overflow: visible;
-    gap: 10px 14px;
-    font-size: 13px;
-  }
-
-  .nx-nav .lang-menu {
-    margin-left: auto;
-  }
-}
-
 .studio-page {
   max-width: 760px;
 }
