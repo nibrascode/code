@@ -135,29 +135,29 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(120% 70% at 62% -10%, #1a4ec4 0%, rgb(18 58 160 / 0.35) 28%, transparent 58%),
-    radial-gradient(90% 55% at 50% 108%, #071433 0%, transparent 60%),
-    linear-gradient(180deg, #071a4a 0%, #04102c 28%, #020814 62%, #01040c 100%);
+    radial-gradient(90% 42% at 70% -8%, rgb(26 78 196 / 0.42) 0%, transparent 58%),
+    linear-gradient(180deg, #061433 0%, #030b1c 22%, #020814 58%, #01040c 100%);
 }
 
 .site-bg-shaft {
   position: absolute;
   top: -8%;
-  left: 38%;
-  width: 34%;
-  height: 62%;
-  background: linear-gradient(180deg, rgb(120 180 255 / 0.28), rgb(40 90 200 / 0.05) 42%, transparent 72%);
-  filter: blur(18px);
+  left: 46%;
+  width: 22%;
+  height: 46%;
+  background: linear-gradient(180deg, rgb(90 150 255 / 0.16), transparent 70%);
+  filter: blur(22px);
   transform: rotate(8deg);
   transform-origin: top center;
 }
 
 .site-bg-tl {
   position: absolute;
-  top: -4%;
-  left: -6%;
-  width: min(62vw, 820px);
+  top: -8%;
+  left: -8%;
+  width: min(46vw, 560px);
   height: auto;
+  opacity: 0.72;
 }
 
 .site-bg-tr {
@@ -184,6 +184,16 @@
   left: -5%;
   width: 112%;
   height: auto;
+  opacity: 0.8;
+}
+
+.site-backdrop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgb(2 6 16 / 0.78) 0%, rgb(2 6 16 / 0.5) 38%, transparent 62%),
+    radial-gradient(75% 65% at 32% 36%, rgb(2 6 16 / 0.62), transparent 70%);
 }
 
 .page-spotlight {
@@ -4704,6 +4714,12 @@ body.is-home .noise {
   z-index: 1;
 }
 
+.nx-hero-copy h1,
+.nx-hero-copy .nx-kicker,
+.nx-hero-copy > p {
+  text-shadow: 0 1px 2px rgb(2 6 16 / 0.9), 0 8px 28px rgb(2 6 16 / 0.8);
+}
+
 .nx-kicker {
   margin: 0 0 12px;
   color: #7eb0ff;
@@ -4735,6 +4751,15 @@ body.is-home .noise {
   color: rgb(214 224 245 / 0.78);
   font-size: 16px;
   line-height: 1.65;
+}
+
+.nx-hero-copy > p {
+  color: rgb(236 242 255 / 0.94);
+}
+
+.nx-hero-copy .nx-kicker,
+.nx-hero-copy h1 span {
+  color: #e7f0ff;
 }
 
 .nx-actions {
