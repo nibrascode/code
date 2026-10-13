@@ -10,11 +10,11 @@ const TITLE = {
 } as const;
 
 const LEAD = {
-  az: "Şəkil yüklə, fon getsin, şəffaf PNG yüklə. Pulsuz, hesab olmadan, brauzerdə.",
-  en: "Upload a photo, remove the background, download a transparent PNG. Free, no account, in your browser.",
-  tr: "Fotoğraf yükle, arka plan gitsin, şeffaf PNG indir. Ücretsiz, hesap yok, tarayıcıda.",
-  ar: "ارفع صورة، تُزال الخلفية، نزّل PNG شفافاً. مجاناً، بلا حساب، في المتصفح.",
-  ru: "Загрузите фото, уберите фон, скачайте прозрачный PNG. Бесплатно, без аккаунта, в браузере.",
+  az: "Fon sil, rəng və ya bulanıq fon qoy, kölgə əlavə et, PNG, JPG və ya WebP yüklə. Pulsuz, brauzerdə.",
+  en: "Remove the background, add a color or blur, a shadow, then download PNG, JPG or WebP. Free, in your browser.",
+  tr: "Arka planı sil, renk veya bulanık fon koy, gölge ekle, PNG, JPG veya WebP indir. Ücretsiz, tarayıcıda.",
+  ar: "أزل الخلفية، أضف لوناً أو ضباباً وظلاً، ثم نزّل PNG أو JPG أو WebP. مجاناً في المتصفح.",
+  ru: "Уберите фон, поставьте цвет или размытие, тень, скачайте PNG, JPG или WebP. Бесплатно, в браузере.",
 } as const;
 
 export function ErasePage() {

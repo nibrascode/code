@@ -6857,6 +6857,22 @@ body.is-studio {
 .files-note { margin-top: 12px; font-size: 14px; }
 .files-lead { margin: 0 0 12px; color: rgb(244 247 255 / 0.7); }
 .files-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+.erase-row, .erase-slider, .erase-check { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 12px; font-size: 13px; }
+.erase-row > span, .erase-slider > span { min-width: 72px; color: rgb(244 247 255 / 0.7); }
+.erase-row button, .erase-slider select {
+  border: 1px solid rgb(255 255 255 / 0.12);
+  background: rgb(255 255 255 / 0.04);
+  color: inherit;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font: inherit;
+  cursor: pointer;
+}
+.erase-row button.is-on { background: #fff; color: #111; }
+.erase-slider input[type="range"] { flex: 1; }
+.erase-check input { accent-color: #fff; }
+.erase-bar { height: 6px; margin-top: 12px; border-radius: 99px; background: rgb(255 255 255 / 0.08); overflow: hidden; }
+.erase-bar span { display: block; height: 100%; background: #fff; }
 .files-ghost {
   border: 1px solid rgb(255 255 255 / 0.16);
   background: transparent;

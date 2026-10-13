@@ -584,11 +584,11 @@ const PAGES: Record<string, Copy> = {
   "/erase": {
     az: {
       title: "Nibras Erase — fon sil, şəffaf PNG",
-      description: "Şəkil yüklə, fonu sil, şəffaf PNG yüklə. Pulsuz, hesab olmadan, brauzerdə. Fayl serverə getmir.",
+      description: "Fon sil, rəng və ya bulanıq fon qoy, kölgə əlavə et. PNG, JPG və WebP. Pulsuz, brauzerdə.",
     },
     en: {
       title: "Nibras Erase — remove background, free PNG",
-      description: "Upload a photo, remove the background, download a transparent PNG. Free, no account, in your browser.",
+      description: "Remove a background, add color or blur, a shadow, then download PNG, JPG or WebP. Free, in your browser.",
     },
     tr: {
       title: "Nibras Erase — arka plan sil, şeffaf PNG",
