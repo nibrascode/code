@@ -358,6 +358,36 @@
       font-weight: 700;
       text-decoration: none;
     }
+    .qrform { margin-top: 10px; }
+    .qrform .kinds, .qrform .fields { display: flex; flex-wrap: wrap; gap: 6px; }
+    .qrform .kinds button, .qrform .go {
+      min-height: 34px;
+      padding: 0 12px;
+      border: 0;
+      border-radius: 10px;
+      background: rgba(143, 180, 255, .16);
+      color: #e6ecfb;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 650;
+      cursor: pointer;
+    }
+    .qrform .kinds button.on { background: #8fb4ff; color: #0c1020; }
+    .qrform .fields { display: grid; gap: 6px; margin-top: 8px; }
+    .qrform input, .qrform textarea {
+      width: 100%;
+      box-sizing: border-box;
+      min-height: 36px;
+      padding: 8px 10px;
+      border: 1px solid rgba(160, 140, 255, .28);
+      border-radius: 10px;
+      background: rgba(12, 16, 32, .7);
+      color: #e6ecfb;
+      font: inherit;
+      font-size: 13.5px;
+    }
+    .qrform .go { margin-top: 8px; background: #8fb4ff; color: #0c1020; }
+    .qrform .err { margin-top: 6px; color: #ffb4b4; font-size: 12px; }
     .mode {
       margin: 0 4px 8px;
       color: #9fd6ff;
@@ -967,7 +997,7 @@
     }
     function fillBubble(el, text) {
       // gizli kontekst sətri (::ctx:: …) «növbəti ayə» üçündür: göstərilmir
-      let src = String(text || "").replace(/\n*^::ctx:: [^\n]*$/gm, "");
+      let src = String(text || "").replace(/\n*^::ctx:: [^\n]*$/gm, "").replace(/::qrform::[a-z]*/g, "");
       // hazır oyun: gizli «::game:: slug | Ad» sətri göstərilmir; kod bloku yoxdursa (serverdən bərpa) «yenidən göstər» düyməsi
       if (src.indexOf("::game::") >= 0) {
         const hasCode = src.indexOf("```") >= 0;
@@ -1036,6 +1066,105 @@
           window.open(url, "_blank", "noopener");
         });
       });
+      const formHit = String(text || "").match(/::qrform::([a-z]*)/);
+      if (formHit) mountQrForm(el, formHit[1] || "");
+    }
+    const QR_KINDS = [
+      { id: "url", label: "Ünvan", fields: [{ k: "url", l: "Ünvan", ph: "https://", req: true }] },
+      { id: "text", label: "Mətn", fields: [{ k: "text", l: "Mətn", ph: "Yazı", req: true, area: true }] },
+      { id: "phone", label: "Telefon", fields: [{ k: "phone", l: "Telefon", ph: "+994", req: true }] },
+      { id: "email", label: "E-poçt", fields: [{ k: "email", l: "E-poçt", ph: "ad@mail.com", req: true }, { k: "subject", l: "Mövzu" }, { k: "body", l: "Mətn", area: true }] },
+      { id: "whatsapp", label: "WhatsApp", fields: [{ k: "phone", l: "Telefon", ph: "994501112233", req: true }, { k: "text", l: "Mesaj", area: true }] },
+      { id: "wifi", label: "Wi-Fi", fields: [{ k: "ssid", l: "Şəbəkə adı", req: true }, { k: "password", l: "Şifrə" }] },
+      { id: "vcard", label: "Vizit kartı", fields: [{ k: "firstName", l: "Ad", req: true }, { k: "lastName", l: "Soyad" }, { k: "phone", l: "Telefon" }, { k: "email", l: "E-poçt" }, { k: "org", l: "Şirkət" }] }
+    ];
+    function mountQrForm(el, preset) {
+      const box = document.createElement("div");
+      box.className = "qrform";
+      const kinds = document.createElement("div");
+      kinds.className = "kinds";
+      const fields = document.createElement("div");
+      fields.className = "fields";
+      const go = document.createElement("button");
+      go.type = "button";
+      go.className = "go";
+      go.textContent = "QR hazırla";
+      go.hidden = true;
+      const err = document.createElement("div");
+      err.className = "err";
+      let current = "";
+      function show(id) {
+        current = id;
+        const kind = QR_KINDS.find(function (k) { return k.id === id; });
+        kinds.querySelectorAll("button").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-k") === id); });
+        fields.innerHTML = "";
+        kind.fields.forEach(function (f) {
+          const input = document.createElement(f.area ? "textarea" : "input");
+          input.placeholder = f.l + (f.req ? " *" : "");
+          if (f.ph) input.placeholder = f.l + (f.req ? " *" : "") + " — " + f.ph;
+          input.setAttribute("data-f", f.k);
+          if (f.req) input.required = true;
+          fields.appendChild(input);
+        });
+        go.hidden = false;
+        err.textContent = "";
+      }
+      QR_KINDS.forEach(function (k) {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.textContent = k.label;
+        b.setAttribute("data-k", k.id);
+        b.addEventListener("click", function () { show(k.id); });
+        kinds.appendChild(b);
+      });
+      go.addEventListener("click", function () {
+        const kind = QR_KINDS.find(function (k) { return k.id === current; });
+        const data = {};
+        let missing = "";
+        kind.fields.forEach(function (f) {
+          const input = fields.querySelector('[data-f="' + f.k + '"]');
+          data[f.k] = (input.value || "").trim();
+          if (f.req && !data[f.k]) missing = f.l;
+        });
+        if (missing) { err.textContent = missing + " boş qala bilməz."; return; }
+        const value = buildQrValue(current, data);
+        if (!value) { err.textContent = "Məlumat tam deyil."; return; }
+        err.textContent = "";
+        let img = box.querySelector("img.shot");
+        let a = box.querySelector("a.qrdl");
+        if (!img) {
+          img = document.createElement("img");
+          img.className = "shot";
+          img.alt = "QR";
+          a = document.createElement("a");
+          a.className = "qrdl";
+          a.download = "nibras-qr.png";
+          a.target = "_blank";
+          a.rel = "noopener";
+          a.textContent = "Yüklə";
+          box.appendChild(img);
+          box.appendChild(a);
+        }
+        const url = "/api/qr?text=" + encodeURIComponent(value);
+        img.src = url;
+        a.href = url;
+      });
+      box.appendChild(kinds);
+      box.appendChild(fields);
+      box.appendChild(go);
+      box.appendChild(err);
+      el.appendChild(box);
+      if (preset && QR_KINDS.some(function (k) { return k.id === preset; })) show(preset);
+    }
+    function buildQrValue(kind, data) {
+      if (kind === "url") return /^https?:\/\//i.test(data.url) ? data.url : "https://" + data.url;
+      if (kind === "text") return data.text;
+      if (kind === "phone") return "tel:" + data.phone.replace(/[^\d+]/g, "");
+      if (kind === "email") return "mailto:" + data.email + (data.subject ? "?subject=" + encodeURIComponent(data.subject) : "") + (data.body ? (data.subject ? "&" : "?") + "body=" + encodeURIComponent(data.body) : "");
+      if (kind === "whatsapp") return "https://wa.me/" + data.phone.replace(/\D/g, "") + (data.text ? "?text=" + encodeURIComponent(data.text) : "");
+      if (kind === "wifi") return "WIFI:T:WPA;S:" + data.ssid + ";P:" + (data.password || "") + ";;";
+      if (kind === "vcard") return ["BEGIN:VCARD", "VERSION:3.0", "N:" + (data.lastName || "") + ";" + (data.firstName || ""), "FN:" + ((data.firstName || "") + " " + (data.lastName || "")).trim(), data.phone ? "TEL:" + data.phone : "", data.email ? "EMAIL:" + data.email : "", data.org ? "ORG:" + data.org : "", "END:VCARD"].filter(Boolean).join("\n");
+      return "";
     }
     // Kopyala / Paylaş: hər cavab balonunun yuxarı sağ küncündə iki kiçik ikon düyməsi (xəta və qarşılama ekranında yoxdur).
     // Kopyala: cavabın sadə mətni (gizli ::ctx:: / ::game:: sətirləri və blok işarələri olmadan). Paylaş: mətnin sonuna həmişə «Nibras AI: https://nibrascode.com/ai» sətri əlavə olunur;
@@ -1047,7 +1176,7 @@
     const IC_SHARE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="M8.3 10.7l7.4-4.4M8.3 13.3l7.4 4.4"/></svg>';
     function plainAnswer(raw) {
       let s = String(raw || "").replace(/\r/g, "");
-      s = s.replace(/^::ctx:: [^\n]*$/gm, "").replace(/^::game:: [^\n]*$/gm, "");
+      s = s.replace(/^::ctx:: [^\n]*$/gm, "").replace(/^::game:: [^\n]*$/gm, "").replace(/::qrform::[a-z]*/g, "");
       s = s.replace(/(^|\n)::sug::\n[\s\S]*?\n::\/sug::(?=\n|$)/g, "$1");
       s = s.replace(/(^|\n)::(?:notice|tafsir [a-z]+|ayah(?: warn)?(?: [0-9:\-]+)?)::\n([\s\S]*?)\n::\/(?:notice|tafsir|ayah)::(?=\n|$)/g, function (all, pre, body) {
         return pre + body.split("\n").map(function (ln) { return ln.replace(/^::(?:ar|tl|tv|src|tr)::[ \t]*/, ""); }).join("\n");

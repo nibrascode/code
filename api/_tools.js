@@ -118,20 +118,7 @@ function chmod(text) {
 }
 
 const TOOLS = [
-  { id: "qr", slug: "qr-code", test: /\bqr\b|qr kod|qr code|باركود|кьюар/i, run: (text, all) => {
-    const raw = String(all || text).trim();
-    const url = raw.match(/https?:\/\/\S+/i);
-    const rest = raw
-      .replace(/https?:\/\/\S+/gi, " ")
-      .replace(/\b(qr\s*kod(?:u)?|qr\s*code|qr|باركود|кьюар)\b/gi, " ")
-      .replace(/\b(hazırla|hazirla|yarat|düzəlt|duzelt|et|make|create|generate|oluştur|olustur)\b/gi, " ")
-      .replace(/[?:：]+/g, " ")
-      .replace(/\s+/g, " ")
-      .trim();
-    const value = url ? url[0] : rest;
-    if (!value) return "QR səhifəsi açıqdır. Ünvanı və ya mətni orada yaz:\nhttps://www.nibrascode.com/qr";
-    return `::qrimg::${value}`;
-  } },
+  { id: "qr", slug: "qr-code", test: /\bqr\b|qr kod|qr code|باركود|кьюар/i, run: () => null },
   { id: "json", slug: "json", test: /(?:json)\s*(?:düzəlt|duzelt|format|formatter|düzəld|beautify)/i, run: jsonFormat },
   { id: "json-min", slug: "json-minifier", test: /json\s*(?:sıx|six|minify|minifier)/i, run: jsonMin },
   { id: "md5", slug: "md5", test: /\bmd5\b/i, run: (text) => hash(text, "md5") },
@@ -182,47 +169,53 @@ export function qrReply(message, hist) {
   if (!raw || raw.length > 800) return null;
   const prev = [...(hist || [])].reverse().find((item) => item && (item.role === "assistant" || item.role === "b"));
   const prevText = String(prev?.text || "");
-  const waiting = /QR hazırlamaq üçün iki şey lazımdır/.test(prevText);
+  const waiting = /::qrform::|QR hazırlamaq üçün növü seç/.test(prevText);
   const wants = /\bqr\b|qr kod|qr code|باركود|кьюар/i.test(raw);
   if (!wants && !waiting) return null;
-  if (wants && /nədir|nedir|necə|nece|how|what is|barədə|barede|haqqında|about/i.test(raw) && !/https?:\/\/|@|\d{8,}/.test(raw)) return explainQr();
 
-  const value = extractQr(raw);
-  if (value && !isOnlyKind(value)) {
+  const kind = qrKind(raw);
+  const complete = completeQr(raw, kind);
+  if (complete) {
     const why = purposeOf(raw);
-    return `::qrimg::${value}\n${why ? `${why} üçün QR hazırdır.` : "QR hazırdır."}`;
+    return `::qrimg::${complete}\n${why ? `${why} üçün QR hazırdır.` : "QR hazırdır."}`;
   }
-  if (!wants && waiting) return askAgain(raw);
-  if (/nədir|nedir|necə|nece|how|what is/i.test(raw)) return explainQr();
-  return askQr();
+  if (kind) return `::qrform::${kind}\n${kindLabel(kind)} üçün xanaları doldur.`;
+  if (wants && /nədir|nedir|necə|nece|how|what is|barədə|barede|haqqında|about/i.test(raw) && !/https?:\/\/|@|\d{8,}/.test(raw)) return explainQr();
+  if (wants || waiting) return askQr();
+  return null;
 }
 
-function extractQr(raw) {
+function qrKind(raw) {
+  const text = String(raw || "").toLowerCase();
+  if (/whatsapp|whats\s*app|vatsap|vat?sap/.test(text)) return "whatsapp";
+  if (/wi-?fi|wifi/.test(text)) return "wifi";
+  if (/vizit|vcard|kontakt/.test(text)) return "vcard";
+  if (/e-?po[cç]t|email|e-posta/.test(text)) return "email";
+  if (/telefon|phone|nömrə|nomre/.test(text)) return "phone";
+  if (/\burl\b|ünvan|unvan|link|sayt/.test(text)) return "url";
+  if (/\bmətn\b|\bmetn\b|\bmetin\b|\btext\b/.test(text)) return "text";
+  return "";
+}
+
+function completeQr(raw, kind) {
   const text = String(raw || "").trim();
   const url = text.match(/https?:\/\/\S+/i);
-  if (url) return url[0].replace(/[.,)]+$/, "");
+  if (url && (!kind || kind === "url")) return url[0].replace(/[.,)]+$/, "");
   const email = text.match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i);
-  if (email) return `mailto:${email[0]}`;
+  if (email && kind === "email") return `mailto:${email[0]}`;
   const phone = text.match(/(?:\+|00)?\d[\d\s\-()]{7,}/);
-  if (phone && /telefon|whatsapp|wp|nömrə|nomre|phone|numara/i.test(text)) {
-    const n = phone[0].replace(/[^\d+]/g, "");
-    return /whatsapp|wp/i.test(text) ? `https://wa.me/${n.replace(/^\+/, "")}` : `tel:${n}`;
-  }
-  if (/wi-?fi|wifi/i.test(text)) {
+  if (phone && kind === "whatsapp") return `https://wa.me/${phone[0].replace(/[^\d]/g, "")}`;
+  if (phone && kind === "phone") return `tel:${phone[0].replace(/[^\d+]/g, "")}`;
+  if (kind === "wifi") {
     const ssid = text.match(/(?:ad[ıi]?|ssid|name|şəbəkə|sebeke)\s*[:=]?\s*([^\s,]+)/i);
     const pass = text.match(/(?:şifrə|sifre|parol|password|pass)\s*[:=]?\s*(\S+)/i);
     if (ssid) return `WIFI:T:WPA;S:${ssid[1]};P:${pass ? pass[1] : ""};;`;
   }
-  return text
-    .replace(/\b(qr\s*kod(?:u)?|qr\s*code|qr|باركود|кьюар)\b/gi, " ")
-    .replace(/\b(hazırla(?:maq|maqdır)?|hazirla|yarat|düzəlt|duzelt|et|make|create|generate|oluştur|olustur|istəyirəm|isteyirem|lazımdır|lazimdir|barədə|barede|haqqında|about)\b/gi, " ")
-    .replace(/[?:：]+/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
+  return "";
 }
 
-function isOnlyKind(text) {
-  return /^(ünvan|unvan|url|link|mətn|metin|metn|telefon|e-?poçt|email|e-posta|whatsapp|wi-?fi|wifi|vizit(?:\s*kartı)?)$/i.test(String(text || "").trim());
+function kindLabel(kind) {
+  return { whatsapp: "WhatsApp", wifi: "Wi-Fi", vcard: "Vizit kartı", email: "E-poçt", phone: "Telefon", url: "Ünvan", text: "Mətn" }[kind] || "QR";
 }
 
 function purposeOf(raw) {
@@ -232,27 +225,21 @@ function purposeOf(raw) {
 
 function askQr() {
   return [
-    "QR hazırlamaq üçün iki şey lazımdır.",
+    "QR hazırlamaq üçün növü seç.",
     "",
-    "1. Növü nə olsun: ünvan, mətn, telefon, e-poçt, WhatsApp, Wi-Fi, yoxsa vizit kartı?",
-    "2. İçində nə yazılsın və nə üçün lazımdır?",
-    "",
-    "Yaz, mən hazırlayım. Məsələn: «saytım üçün https://nibrascode.com» və ya «Wi-Fi, ad Nibras, şifrə 12345678».",
+    "Ünvan, mətn, telefon, e-poçt, WhatsApp, Wi-Fi və ya vizit kartı.",
+    "::qrform::",
   ].join("\n");
 }
 
 function explainQr() {
   return [
-    "QR kod bir ünvanı, mətni və ya telefonu kiçik şəklə yığır. Telefon kamerası onu oxuyur və içindəki yeri açır.",
+    "QR kod bir ünvanı, mətni və ya telefonu kiçik şəklə yığır. Telefon kamerası onu oxuyur.",
     "",
     askQr(),
   ].join("\n");
 }
 
-function askAgain(raw) {
-  if (isOnlyKind(raw)) return `«${raw}» seçdin. İçində nə olsun? Ünvanı, mətni və ya nömrəni yaz.`;
-  return askQr();
-}
 export function toolsReply(message) {
   const text = String(message || "").trim();
   if (!text || text.length > 5000) return null;
