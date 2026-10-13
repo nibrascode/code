@@ -164,6 +164,11 @@ export default async function handler(req, res) {
         /* mənbə susursa, sual Wikidata-ya və ya modelə düşür */
       }
     }
+    // Söz bazası Wikidata-dan əvvəl gəlir: «git nədir» kimi sual hazır izahla cavablanır.
+    if (!fixed && body.mode !== "code" && body.mode !== "create") {
+      const known = searchReply(message);
+      if (known) fixed = known;
+    }
     // Wikidata faktı modelə getmir: şəhər, adam, ölkə kimi aydın sualı server özü oxuyur.
     if (!fixed && body.mode !== "code" && body.mode !== "create") {
       try {
