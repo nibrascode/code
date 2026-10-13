@@ -176,11 +176,22 @@ function CreatePanel({ pro }: { pro: boolean }) {
     if (!text && !type) return;
     const nextType = type && ["url", "text", "phone", "email", "whatsapp", "wifi", "vcard", "location", "sms", "event", "app"].includes(type) ? (type as typeof gen.type) : /^https?:\/\//i.test(text) ? "url" : "text";
     const fields = { ...defaultFields(nextType) };
-    if (nextType === "url") fields.url = text;
-    else if (nextType === "phone" || nextType === "whatsapp") fields.phone = text;
-    else if (nextType === "email") fields.email = text;
-    else if (nextType === "wifi") fields.ssid = text;
-    else fields.text = text;
+    let fromFields = false;
+    for (const key of Object.keys(fields)) {
+      const value = params.get(key);
+      if (value) {
+        fields[key as keyof typeof fields] = value;
+        fromFields = true;
+      }
+    }
+    if (!fromFields && text) {
+      if (nextType === "url") fields.url = text;
+      else if (nextType === "phone" || nextType === "whatsapp" || nextType === "sms") fields.phone = text;
+      else if (nextType === "email") fields.email = text;
+      else if (nextType === "wifi") fields.ssid = text;
+      else if (nextType === "app") fields.url = text;
+      else fields.text = text;
+    }
     useGenerator.getState().setType(nextType);
     useGenerator.getState().setFields(fields);
   }, []);

@@ -345,18 +345,19 @@
       border-radius: 12px;
       background: #fff;
     }
-    .msg a.qrdl {
+    .msg a.qropen {
       display: inline-flex;
       align-items: center;
       min-height: 34px;
-      margin-top: 8px;
+      margin: 8px 0 0 8px;
       padding: 0 12px;
       border-radius: 10px;
-      background: #8fb4ff;
-      color: #0c1020;
+      background: transparent;
+      color: #8fb4ff;
       font-size: 13px;
       font-weight: 700;
       text-decoration: none;
+      border: 1px solid #8fb4ff;
     }
     .qrform { margin-top: 10px; }
     .qrform .kinds, .qrform .fields { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -1076,7 +1077,11 @@
       { id: "email", label: "E-poçt", fields: [{ k: "email", l: "E-poçt", ph: "ad@mail.com", req: true }, { k: "subject", l: "Mövzu" }, { k: "body", l: "Mətn", area: true }] },
       { id: "whatsapp", label: "WhatsApp", fields: [{ k: "phone", l: "Telefon", ph: "994501112233", req: true }, { k: "text", l: "Mesaj", area: true }] },
       { id: "wifi", label: "Wi-Fi", fields: [{ k: "ssid", l: "Şəbəkə adı", req: true }, { k: "password", l: "Şifrə" }] },
-      { id: "vcard", label: "Vizit kartı", fields: [{ k: "firstName", l: "Ad", req: true }, { k: "lastName", l: "Soyad" }, { k: "phone", l: "Telefon" }, { k: "email", l: "E-poçt" }, { k: "org", l: "Şirkət" }] }
+      { id: "vcard", label: "Vizit kartı", fields: [{ k: "firstName", l: "Ad", req: true }, { k: "lastName", l: "Soyad" }, { k: "phone", l: "Telefon" }, { k: "email", l: "E-poçt" }, { k: "org", l: "Şirkət" }] },
+      { id: "sms", label: "SMS", fields: [{ k: "phone", l: "Telefon", ph: "+994", req: true }, { k: "text", l: "Mesaj", area: true }] },
+      { id: "location", label: "Yer", fields: [{ k: "lat", l: "Enlik", req: true }, { k: "lng", l: "Uzunluq", req: true }] },
+      { id: "event", label: "Tədbir", fields: [{ k: "title", l: "Ad", req: true }, { k: "start", l: "Başlanğıc", req: true }, { k: "location", l: "Yer" }] },
+      { id: "app", label: "Tətbiq", fields: [{ k: "url", l: "Ünvan", ph: "https://", req: true }] }
     ];
     function mountQrForm(el, preset) {
       const box = document.createElement("div");
@@ -1128,10 +1133,11 @@
         });
         if (missing) { err.textContent = missing + " boş qala bilməz."; return; }
         const value = buildQrValue(current, data);
-        if (!value) { err.textContent = "Məlumat tam deyil."; return; }
-        err.textContent = "";
+        if (!value) { err.textContent = "Bu məlumatla QR hazırlanmır."; return; }
+        const page = qrPageUrl(current, data);
         let img = box.querySelector("img.shot");
         let a = box.querySelector("a.qrdl");
+        let open = box.querySelector("a.qropen");
         if (!img) {
           img = document.createElement("img");
           img.className = "shot";
@@ -1142,12 +1148,19 @@
           a.target = "_blank";
           a.rel = "noopener";
           a.textContent = "Yüklə";
+          open = document.createElement("a");
+          open.className = "qropen";
+          open.target = "_blank";
+          open.rel = "noopener";
+          open.textContent = "QR səhifəsində aç";
           box.appendChild(img);
           box.appendChild(a);
+          box.appendChild(open);
         }
         const url = "/api/qr?text=" + encodeURIComponent(value);
         img.src = url;
         a.href = url;
+        open.href = page;
       });
       box.appendChild(kinds);
       box.appendChild(fields);
@@ -1156,13 +1169,22 @@
       el.appendChild(box);
       if (preset && QR_KINDS.some(function (k) { return k.id === preset; })) show(preset);
     }
+    function qrPageUrl(kind, data) {
+      const u = new URL("https://www.nibrascode.com/qr");
+      u.searchParams.set("type", kind);
+      Object.keys(data).forEach(function (k) { if (data[k]) u.searchParams.set(k, data[k]); });
+      return u.toString();
+    }
     function buildQrValue(kind, data) {
-      if (kind === "url") return /^https?:\/\//i.test(data.url) ? data.url : "https://" + data.url;
+      if (kind === "url" || kind === "app") return /^https?:\/\//i.test(data.url) ? data.url : "https://" + data.url;
       if (kind === "text") return data.text;
       if (kind === "phone") return "tel:" + data.phone.replace(/[^\d+]/g, "");
+      if (kind === "sms") return "sms:" + data.phone.replace(/[^\d+]/g, "") + (data.text ? "?body=" + encodeURIComponent(data.text) : "");
       if (kind === "email") return "mailto:" + data.email + (data.subject ? "?subject=" + encodeURIComponent(data.subject) : "") + (data.body ? (data.subject ? "&" : "?") + "body=" + encodeURIComponent(data.body) : "");
       if (kind === "whatsapp") return "https://wa.me/" + data.phone.replace(/\D/g, "") + (data.text ? "?text=" + encodeURIComponent(data.text) : "");
       if (kind === "wifi") return "WIFI:T:WPA;S:" + data.ssid + ";P:" + (data.password || "") + ";;";
+      if (kind === "location") return "https://maps.google.com/?q=" + encodeURIComponent(data.lat + "," + data.lng);
+      if (kind === "event") return ["BEGIN:VCALENDAR", "VERSION:2.0", "BEGIN:VEVENT", "SUMMARY:" + data.title, data.start ? "DTSTART:" + data.start : "", data.location ? "LOCATION:" + data.location : "", "END:VEVENT", "END:VCALENDAR"].filter(Boolean).join("\n");
       if (kind === "vcard") return ["BEGIN:VCARD", "VERSION:3.0", "N:" + (data.lastName || "") + ";" + (data.firstName || ""), "FN:" + ((data.firstName || "") + " " + (data.lastName || "")).trim(), data.phone ? "TEL:" + data.phone : "", data.email ? "EMAIL:" + data.email : "", data.org ? "ORG:" + data.org : "", "END:VCARD"].filter(Boolean).join("\n");
       return "";
     }
@@ -1489,6 +1511,15 @@
         a.rel = "noopener";
         a.textContent = "Yüklə";
         el.appendChild(a);
+        if (/\/api\/qr\?text=/.test(imageUrl)) {
+          const open = document.createElement("a");
+          open.className = "qropen";
+          open.target = "_blank";
+          open.rel = "noopener";
+          open.textContent = "QR səhifəsində aç";
+          open.href = "https://www.nibrascode.com/qr?text=" + imageUrl.split("text=")[1];
+          el.appendChild(open);
+        }
       }
       if (kind === "b") addTools(el, text);
       msgs.appendChild(el);

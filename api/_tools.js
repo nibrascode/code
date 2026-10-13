@@ -225,9 +225,10 @@ function purposeOf(raw) {
 
 function askQr() {
   return [
-    "QR hazırlamaq üçün növü seç.",
+    "QR xidməti açıqdır. Növü seç, xanaları doldur.",
     "",
-    "Ünvan, mətn, telefon, e-poçt, WhatsApp, Wi-Fi və ya vizit kartı.",
+    "Ünvan, mətn, telefon, e-poçt, WhatsApp, Wi-Fi, vizit kartı, SMS, yer və ya tədbir.",
+    "Boş xana ilə hazırlanmır. Dolan kimi şəkil və QR səhifəsi açılır.",
     "::qrform::",
   ].join("\n");
 }
