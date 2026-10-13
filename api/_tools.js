@@ -130,7 +130,7 @@ const TOOLS = [
       .trim();
     const value = url ? url[0] : rest;
     if (!value) return "QR səhifəsi açıqdır. Ünvanı və ya mətni orada yaz:\nhttps://www.nibrascode.com/qr";
-    return `QR hazırdır. Aç və yüklə:\nhttps://www.nibrascode.com/qr?text=${encodeURIComponent(value)}`;
+    return `::qrimg::${value}`;
   } },
   { id: "json", slug: "json", test: /(?:json)\s*(?:düzəlt|duzelt|format|formatter|düzəld|beautify)/i, run: jsonFormat },
   { id: "json-min", slug: "json-minifier", test: /json\s*(?:sıx|six|minify|minifier)/i, run: jsonMin },
@@ -188,6 +188,7 @@ export function toolsReply(message) {
   try {
     const out = tool.run(body, text);
     if (!out) return null;
+    if (String(out).startsWith("::qrimg::")) return out;
     const bodyText = `${out}${tail(tool.slug)}`;
     return SECRET.has(tool.id) ? `::vault::\n${bodyText}` : bodyText;
   } catch {

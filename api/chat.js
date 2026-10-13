@@ -191,6 +191,12 @@ export default async function handler(req, res) {
       // dinReply artıq özü bildirişdir: sonrakı dini suallarda (noticeShown:true) təkrar bildiriş yox, qısa cavab qalır
       let out = cleaned(ready);
       if (isRel && ready.startsWith(OLD_AZ_NOTICE)) out = cleaned(ready.slice(OLD_AZ_NOTICE.length));
+      if (out.startsWith("::qrimg::")) {
+        const value = out.slice("::qrimg::".length).trim().slice(0, 500);
+        const url = `https://www.nibrascode.com/api/qr?text=${encodeURIComponent(value)}`;
+        res.status(200).json({ success: true, reply: "QR hazırdır.", url, usedAI: false });
+        return;
+      }
       res.status(200).json({ success: true, reply: out, usedAI: false, ...relFlag(isRel) });
       return;
     }

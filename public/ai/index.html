@@ -340,9 +340,23 @@
     .shm a:hover, .shm button:hover, .shm a:focus-visible, .shm button:focus-visible { background: rgba(143, 180, 255, .14); outline: none; }
     .msg img.shot {
       display: block;
-      width: 100%;
+      width: min(240px, 100%);
       margin-top: 8px;
       border-radius: 12px;
+      background: #fff;
+    }
+    .msg a.qrdl {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      margin-top: 8px;
+      padding: 0 12px;
+      border-radius: 10px;
+      background: #8fb4ff;
+      color: #0c1020;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
     }
     .mode {
       margin: 0 4px 8px;
@@ -1335,9 +1349,17 @@
       if (imageUrl) {
         const img = document.createElement("img");
         img.className = "shot";
-        img.alt = "Nibras AI şəkli";
+        img.alt = "QR";
         img.src = imageUrl;
         el.appendChild(img);
+        const a = document.createElement("a");
+        a.className = "qrdl";
+        a.href = imageUrl;
+        a.download = "nibras-qr.png";
+        a.target = "_blank";
+        a.rel = "noopener";
+        a.textContent = "Yüklə";
+        el.appendChild(a);
       }
       if (kind === "b") addTools(el, text);
       msgs.appendChild(el);
