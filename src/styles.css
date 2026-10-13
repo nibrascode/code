@@ -6884,5 +6884,8 @@ body.is-studio {
 }
 .files-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
 .files-compare img { width: 100%; border-radius: 12px; background: #111; }
-.files-compare .is-cut { background: repeating-conic-gradient(#2a2a2a 0 25%, #161616 0 50%) 0 0 / 16px 16px; }
+.erase-stage { position: relative; }
+.erase-stage img, .erase-stage canvas { width: 100%; border-radius: 12px; display: block; }
+.erase-stage canvas { position: absolute; inset: 0; height: 100%; touch-action: none; cursor: crosshair; }
+.erase-stage.is-cut, .files-compare .is-cut { background: repeating-conic-gradient(#2a2a2a 0 25%, #161616 0 50%) 0 0 / 16px 16px; }
 @media (max-width: 640px) { .files-compare { grid-template-columns: 1fr; } }
