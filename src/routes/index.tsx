@@ -328,7 +328,7 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
               <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
             </a>
             <a className="nx-ai-bar nx-qr-bar" href={localeHref(lang, "/erase")}>
-              <img src="/apps/nibras-pdf.jpg" alt="" width={36} height={36} />
+              <img src="/apps/nibras-erase.png" alt="" width={36} height={36} />
               <span className="nx-qr-text">
                 <b>Nibras Erase</b>
                 <small>{FILES_CARD[lang]}</small>
