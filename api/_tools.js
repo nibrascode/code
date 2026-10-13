@@ -177,6 +177,82 @@ const TOOLS = [
   { id: "email", slug: "email-check", test: /e-?poçt|email|e-posta/i, run: (text) => /@/.test(text) && text.split("@")[1]?.includes(".") ? "Qısa yoxlamadan keçdi." : "Ünvan tam deyil." },
 ];
 
+export function qrReply(message, hist) {
+  const raw = String(message || "").trim();
+  if (!raw || raw.length > 800) return null;
+  const prev = [...(hist || [])].reverse().find((item) => item && (item.role === "assistant" || item.role === "b"));
+  const prevText = String(prev?.text || "");
+  const waiting = /QR hazırlamaq üçün iki şey lazımdır/.test(prevText);
+  const wants = /\bqr\b|qr kod|qr code|باركود|кьюар/i.test(raw);
+  if (!wants && !waiting) return null;
+  if (wants && /nədir|nedir|necə|nece|how|what is|barədə|barede|haqqında|about/i.test(raw) && !/https?:\/\/|@|\d{8,}/.test(raw)) return explainQr();
+
+  const value = extractQr(raw);
+  if (value && !isOnlyKind(value)) {
+    const why = purposeOf(raw);
+    return `::qrimg::${value}\n${why ? `${why} üçün QR hazırdır.` : "QR hazırdır."}`;
+  }
+  if (!wants && waiting) return askAgain(raw);
+  if (/nədir|nedir|necə|nece|how|what is/i.test(raw)) return explainQr();
+  return askQr();
+}
+
+function extractQr(raw) {
+  const text = String(raw || "").trim();
+  const url = text.match(/https?:\/\/\S+/i);
+  if (url) return url[0].replace(/[.,)]+$/, "");
+  const email = text.match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i);
+  if (email) return `mailto:${email[0]}`;
+  const phone = text.match(/(?:\+|00)?\d[\d\s\-()]{7,}/);
+  if (phone && /telefon|whatsapp|wp|nömrə|nomre|phone|numara/i.test(text)) {
+    const n = phone[0].replace(/[^\d+]/g, "");
+    return /whatsapp|wp/i.test(text) ? `https://wa.me/${n.replace(/^\+/, "")}` : `tel:${n}`;
+  }
+  if (/wi-?fi|wifi/i.test(text)) {
+    const ssid = text.match(/(?:ad[ıi]?|ssid|name|şəbəkə|sebeke)\s*[:=]?\s*([^\s,]+)/i);
+    const pass = text.match(/(?:şifrə|sifre|parol|password|pass)\s*[:=]?\s*(\S+)/i);
+    if (ssid) return `WIFI:T:WPA;S:${ssid[1]};P:${pass ? pass[1] : ""};;`;
+  }
+  return text
+    .replace(/\b(qr\s*kod(?:u)?|qr\s*code|qr|باركود|кьюар)\b/gi, " ")
+    .replace(/\b(hazırla(?:maq|maqdır)?|hazirla|yarat|düzəlt|duzelt|et|make|create|generate|oluştur|olustur|istəyirəm|isteyirem|lazımdır|lazimdir|barədə|barede|haqqında|about)\b/gi, " ")
+    .replace(/[?:：]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function isOnlyKind(text) {
+  return /^(ünvan|unvan|url|link|mətn|metin|metn|telefon|e-?poçt|email|e-posta|whatsapp|wi-?fi|wifi|vizit(?:\s*kartı)?)$/i.test(String(text || "").trim());
+}
+
+function purposeOf(raw) {
+  const hit = String(raw || "").match(/(sayt(?:ım|im)?|mağaza|magaza|menyu|menu|kart|vizit|wifi|wi-fi|instagram|whatsapp|telefon|e-?poçt)/i);
+  return hit ? hit[1] : "";
+}
+
+function askQr() {
+  return [
+    "QR hazırlamaq üçün iki şey lazımdır.",
+    "",
+    "1. Növü nə olsun: ünvan, mətn, telefon, e-poçt, WhatsApp, Wi-Fi, yoxsa vizit kartı?",
+    "2. İçində nə yazılsın və nə üçün lazımdır?",
+    "",
+    "Yaz, mən hazırlayım. Məsələn: «saytım üçün https://nibrascode.com» və ya «Wi-Fi, ad Nibras, şifrə 12345678».",
+  ].join("\n");
+}
+
+function explainQr() {
+  return [
+    "QR kod bir ünvanı, mətni və ya telefonu kiçik şəklə yığır. Telefon kamerası onu oxuyur və içindəki yeri açır.",
+    "",
+    askQr(),
+  ].join("\n");
+}
+
+function askAgain(raw) {
+  if (isOnlyKind(raw)) return `«${raw}» seçdin. İçində nə olsun? Ünvanı, mətni və ya nömrəni yaz.`;
+  return askQr();
+}
 export function toolsReply(message) {
   const text = String(message || "").trim();
   if (!text || text.length > 5000) return null;

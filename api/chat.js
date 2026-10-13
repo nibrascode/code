@@ -7,7 +7,7 @@ import { libraryReply, libraryMeta, libraryFinalize, libraryDownReply, BOOK_CUE 
 import { translateReply } from "./_translate-chat.js";
 import { snippetReply } from "./_snippets.js";
 import { localReply } from "./_local.js";
-import { toolsReply } from "./_tools.js";
+import { toolsReply, qrReply } from "./_tools.js";
 import { searchReply } from "./_search.js";
 import { wikidataReply } from "./_wikidata.js";
 import { extraReply, prayerReply } from "./_extra.js";
@@ -176,11 +176,13 @@ export default async function handler(req, res) {
     // Hazır python/html/javascript/sql/css kod nümunələri: AI-yə getmədən (kod rejimi də daxil)
     const snippet = fixed ? null : snippetReply(message, body.mode);
     const search = fixed || snippet || body.mode === "create" ? null : searchReply(message);
-    const tools = fixed || snippet || search || body.mode === "create" ? null : toolsReply(message);
+    const qr = fixed || snippet || search || body.mode === "create" ? null : qrReply(message, hist);
+    const tools = fixed || snippet || search || qr || body.mode === "create" ? null : toolsReply(message);
     const ready =
       fixed ||
       snippet ||
       search ||
+      qr ||
       tools ||
       // Çox kiçik sorğular (salam, təşəkkür, sadə hesab, saat/tarix) yerli cavablanır
       (body.mode === "create" ? null : localReply(message));
@@ -192,9 +194,10 @@ export default async function handler(req, res) {
       let out = cleaned(ready);
       if (isRel && ready.startsWith(OLD_AZ_NOTICE)) out = cleaned(ready.slice(OLD_AZ_NOTICE.length));
       if (out.startsWith("::qrimg::")) {
-        const value = out.slice("::qrimg::".length).trim().slice(0, 500);
+        const [first, ...rest] = out.split("\n");
+        const value = first.slice("::qrimg::".length).trim().slice(0, 500);
         const url = `https://www.nibrascode.com/api/qr?text=${encodeURIComponent(value)}`;
-        res.status(200).json({ success: true, reply: "QR hazırdır.", url, usedAI: false });
+        res.status(200).json({ success: true, reply: rest.join("\n").trim() || "QR hazırdır.", url, usedAI: false });
         return;
       }
       res.status(200).json({ success: true, reply: out, usedAI: false, ...relFlag(isRel) });
