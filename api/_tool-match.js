@@ -1,15 +1,33 @@
 import * as R from "./_tool-run.js";
 
+const STAT = {
+  az: ["Söz", "Simvol", "Boşluqsuz", "Sətir"],
+  en: ["Words", "Characters", "No spaces", "Lines"],
+  tr: ["Söz", "Karakter", "Boşluksuz", "Satır"],
+  ar: ["كلمات", "حروف", "بدون فراغ", "أسطر"],
+  ru: ["Слова", "Символы", "Без пробелов", "Строки"],
+};
+const LEAP_YES = { az: "Bəli, artıq ildir.", en: "Yes, it is a leap year.", tr: "Evet, artık yıl.", ar: "نعم، سنة كبيسة.", ru: "Да, високосный год." };
+const LEAP_NO = { az: "Xeyr, artıq il deyil.", en: "No, it is not a leap year.", tr: "Hayır, artık yıl değil.", ar: "لا، ليست سنة كبيسة.", ru: "Нет, не високосный." };
+const LINK = { az: "Xidmət", en: "Service", tr: "Hizmet", ar: "الخدمة", ru: "Сервис" };
+const LIST = {
+  az: "Xidmətlər açıqdır. Adını və mətni yaz, məsələn «JSON düzəlt: {\"a\":1}» və ya «UUID yarat».",
+  en: "Services are open. Write the name and the text, for example «JSON format: {\"a\":1}» or «make a UUID».",
+  tr: "Hizmetler açık. Adını ve metni yaz, örneğin «JSON düzenle: {\"a\":1}» veya «UUID üret».",
+  ar: "الخدمات مفتوحة. اكتب الاسم والنص، مثل «تنسيق JSON: {\"a\":1}» أو «أنشئ UUID».",
+  ru: "Сервисы открыты. Напиши название и текст, например «формат JSON: {\"a\":1}» или «создай UUID».",
+};
+
 const SITE = "https://www.nibrascode.com/tools";
 const SECRET = new Set(["password", "md5", "sha256", "hash", "jwt", "base64"]);
 
 const TOOLS = [
-  { id: "json-min", slug: "json-minifier", test: /json\s*(?:sıx|six|minify|minifier|sıkıştır|ضغط)/i, run: (t) => R.minifyJson(t) },
-  { id: "json", slug: "json", test: /json\s*(?:düzəlt|duzelt|format|formatter|düzəld|beautify|düzenle|تنسيق)/i, run: (t) => R.formatJson(t) },
-  { id: "jsonyaml", slug: "json-to-yaml", test: /json\s*(?:dan|dən|-)?\s*yaml|json to yaml/i, run: (t) => R.jsonToYaml(t) },
-  { id: "yamljson", slug: "yaml-to-json", test: /yaml\s*(?:dan|dən|-)?\s*json|yaml to json/i, run: (t) => R.yamlToJson(t) },
+  { id: "json-min", slug: "json-minifier", test: /(?:sıx|six|minify|minifier|sıkıştır|ضغط|сожми|сжатие)\s*json|json\s*(?:sıx|six|minify|minifier|sıkıştır|ضغط|сожми|сжатие)/i, run: (t) => R.minifyJson(t) },
+  { id: "json", slug: "json", test: /(?:düzəlt|duzelt|format|formatter|düzəld|beautify|düzenle|تنسيق|формат|отформатируй)\s*json|json\s*(?:düzəlt|duzelt|format|formatter|düzəld|beautify|düzenle|تنسيق|формат|отформатируй)/i, run: (t) => R.formatJson(t) },
+  { id: "jsonyaml", slug: "json-to-yaml", test: /json\s*(?:dan|dən|'dan|to|-)?\s*yaml|json to yaml|из json в yaml|من json إلى yaml/i, run: (t) => R.jsonToYaml(t) },
+  { id: "yamljson", slug: "yaml-to-json", test: /yaml\s*(?:dan|dən|'dan|to|-)?\s*json|yaml to json|из yaml в json|من yaml إلى json/i, run: (t) => R.yamlToJson(t) },
   { id: "jsoncsv", slug: "json-to-csv", test: /json\s*(?:dan|dən|-)?\s*csv|json to csv/i, run: (t) => R.jsonToCsv(t) },
-  { id: "keys", slug: "json-keys", test: /json\s*(?:açar|acar|keys|açarlar)/i, run: (t) => R.jsonKeys(t) },
+  { id: "keys", slug: "json-keys", test: /json\s*(?:açar|acar|keys|açarlar|anahtar|مفاتيح|ключи)/i, run: (t) => R.jsonKeys(t) },
   { id: "escape", slug: "json-escape", test: /json\s*(?:qaçış|qacis|escape)/i, run: (t) => R.escapeJson(t) },
   { id: "sha256", slug: "sha-256", test: /sha-?256/i, run: (t) => hash(t, "sha256") },
   { id: "md5", slug: "md5", test: /\bmd5\b/i, run: (t) => R.md5Hex(t) },
@@ -35,14 +53,14 @@ const TOOLS = [
   { id: "yaml", slug: "yaml", test: /yaml\s*(?:düzəlt|duzelt|format|formatter|düzenle)/i, run: (t) => R.formatYaml(t) },
   { id: "markdown", slug: "markdown-html", test: /markdown\s*(?:dan|dən|-)?\s*html|markdown to html/i, run: (t) => R.markdownHtml(t) },
   { id: "uuid", slug: "uuid", test: /\buuid\b/i, none: true, run: () => R.makeUuid() },
-  { id: "password", slug: "password", test: /(?:təsadüfi|tesadufi|random)\s*(?:şifrə|sifre|parol|password)|şifrə\s*(?:yarat|ver|generate)/i, none: true, run: () => R.randomPassword(16) },
+  { id: "password", slug: "password", test: /(?:təsadüfi|tesadufi|random|rastgele|عشوائية|случайный)\s*(?:şifrə|sifre|parol|password|parola|كلمة سر|пароль)|(?:şifrə|password|parola|пароль)\s*(?:yarat|ver|generate|üret|oluştur|أنشئ|создай)/i, none: true, run: () => R.randomPassword(16) },
   { id: "lorem", slug: "lorem-ipsum", test: /lorem/i, none: true, run: () => R.lorem(2) },
-  { id: "name", slug: "random-name", test: /(?:təsadüfi|tesadufi|random)\s*(?:ad|isim|name)/i, none: true, run: () => R.randomName() },
-  { id: "text", slug: "random-text", test: /(?:təsadüfi|tesadufi|random)\s*(?:mətn|metin|text)/i, none: true, run: () => R.randomText(12) },
-  { id: "number", slug: "random-number", test: /(?:təsadüfi|tesadufi|random)\s*(?:rəqəm|reqem|sayı|number|ədəd)/i, none: true, run: () => R.randomNumber(1, 100) },
-  { id: "count", slug: "word-count", test: /söz\s*say|soz\s*say|word\s*count|söz sayğacı/i, run: (t) => fmt(R.textStats(t), ["words", "chars", "nospace", "lines"], ["Söz", "Simvol", "Boşluqsuz", "Sətir"]) },
+  { id: "name", slug: "random-name", test: /(?:təsadüfi|tesadufi|random|rastgele|عشوائي|случайное)\s*(?:ad|isim|name|имя)/i, none: true, run: () => R.randomName() },
+  { id: "text", slug: "random-text", test: /(?:təsadüfi|tesadufi|random|rastgele|عشوائي|случайный)\s*(?:mətn|metin|text|نص|текст)/i, none: true, run: () => R.randomText(12) },
+  { id: "number", slug: "random-number", test: /(?:təsadüfi|tesadufi|random|rastgele|عشوائي|случайное)\s*(?:rəqəm|reqem|sayı|number|ədəd|رقم|число)/i, none: true, run: () => R.randomNumber(1, 100) },
+  { id: "count", slug: "word-count", test: /söz\s*say|soz\s*say|word\s*count|söz sayğacı|kelime say|عدّاد الكلمات|счётчик слов|счетчик слов/i, run: (t, raw, lang) => fmt(R.textStats(t), ["words", "chars", "nospace", "lines"], STAT[lang]) },
   { id: "chars", slug: "character-count", test: /simvol\s*say|character\s*count/i, run: (t) => fmt(R.charCount(t), ["chars"], ["Simvol"]) },
-  { id: "case", slug: "letter-case", test: /hərf\s*forma|herf\s*forma|letter\s*case|camelcase|snake_case/i, run: (t) => fmt(R.caseForms(t), ["upper", "lower", "camel", "snake", "slug"], ["Böyük", "Kiçik", "camelCase", "snake_case", "slug"]) },
+  { id: "case", slug: "letter-case", test: /hərf\s*forma|herf\s*forma|letter\s*case|camelcase|snake_case|harf biçimi|شكل الحرف|регистр/i, run: (t) => fmt(R.caseForms(t), ["upper", "lower", "camel", "snake", "slug"], ["Upper", "Lower", "camelCase", "snake_case", "slug"]) },
   { id: "unix", slug: "unix-time", test: /unix\s*(?:vaxt|zaman|time)/i, run: (t) => R.unixConvert(t) },
   { id: "color", slug: "color", test: /rəng\s*kod|reng\s*kod|color\s*code|#(?:[0-9a-f]{6})/i, run: (t) => R.convertColor(t) },
   { id: "base", slug: "binary-hex", test: /ikilik|onaltılıq|binary|hex(?:adecimal)?\s*(?:çevir|convert)/i, run: (t) => R.convertBase(t) },
@@ -52,7 +70,7 @@ const TOOLS = [
   { id: "chmod", slug: "chmod", test: /\bchmod\b/i, run: (t) => R.convertChmod(t) },
   { id: "robots", slug: "robots-txt", test: /robots\.txt/i, run: (t) => R.makeRobots(t) },
   { id: "slug", slug: "slug", test: /\bslug\b/i, run: (t) => R.makeSlug(t) },
-  { id: "percent", slug: "percent", test: /faiz|percent|\d+(?:\.\d+)?%\s*(?:of|dən|den)?\s*\d+/i, run: (t) => R.percentOf((t.match(/\d+(?:\.\d+)?%?\s+\d+/) || [t])[0]) },
+  { id: "percent", slug: "percent", test: /faiz|percent|yüzde|نسبة|процент|\d+(?:\.\d+)?%\s*(?:of|dən|den)?\s*\d+/i, run: (t) => R.percentOf((t.match(/\d+(?:\.\d+)?%?\s+\d+/) || [t])[0]) },
   { id: "mime", slug: "mime", test: /\bmime\b/i, run: (t) => R.mimeType(t) },
   { id: "meta", slug: "meta", test: /\bmeta\s*(?:tag|yarat|ver)/i, run: (t) => R.makeMeta(t, "", "") },
   { id: "sitemap", slug: "sitemap", test: /\bsitemap\b/i, run: (t) => R.makeSitemap(t) },
@@ -68,33 +86,33 @@ const TOOLS = [
   { id: "lines", slug: "line-numbers", test: /sətir\s*nömr|setir\s*nomr|line\s*number/i, run: (t) => R.lineNumbers(t) },
   { id: "palette", slug: "color-palette", test: /rəng\s*palitr|reng\s*palitr|color palette/i, run: (t) => R.colorPalette(t) },
   { id: "link", slug: "link-check", test: /link\s*yoxla|link check/i, run: (t) => R.checkLink(t) },
-  { id: "email", slug: "email-check", test: /e-?poçt\s*yoxla|email\s*yoxla|email check/i, run: (t) => R.checkEmail(t) },
-  { id: "words", slug: "number-words", test: /ədəd\s*söz|eded\s*soz|number\s*words|rəqəm\s*söz/i, run: (t) => R.numberWords(t, "az") },
-  { id: "ip", slug: "ip-check", test: /\bip\s*yoxla|ip check|\b\d{1,3}(?:\.\d{1,3}){3}\b/i, run: (t) => R.checkIp(t) },
+  { id: "email", slug: "email-check", test: /e-?poçt\s*yoxla|email\s*yoxla|email check|e-posta kontrol|فحص البريد|проверка почты/i, run: (t) => R.checkEmail(t) },
+  { id: "words", slug: "number-words", test: /ədəd\s*söz|eded\s*soz|number\s*words|rəqəm\s*söz|sayıdan söze|من رقم إلى كلمة|число словами/i, run: (t, raw, lang) => R.numberWords(t, lang) },
+  { id: "ip", slug: "ip-check", test: /\bip\s*yoxla|ip check|ip kontrol|فحص ip|проверка ip|\b\d{1,3}(?:\.\d{1,3}){3}\b/i, run: (t) => R.checkIp(t) },
   { id: "sort", slug: "sort-lines", test: /sətir\s*sırala|setir\s*sirala|sort lines/i, run: (t) => R.sortLines(t) },
   { id: "unique", slug: "remove-duplicates", test: /təkrarı\s*sil|tekrari\s*sil|remove duplicates/i, run: (t) => R.uniqueLines(t) },
   { id: "roman", slug: "roman-numeral", test: /roma\s*rəqəm|roma\s*reqem|roman numeral/i, run: (t) => R.romanConvert(t) },
   { id: "morse", slug: "morse-code", test: /morze|morse|морзе/i, run: (t) => R.morseConvert(t) },
-  { id: "read", slug: "reading-time", test: /oxuma\s*vaxt|reading time/i, run: (t) => R.readingTime(t, "az") },
+  { id: "read", slug: "reading-time", test: /oxuma\s*vaxt|reading time|okuma süresi|وقت القراءة|время чтения/i, run: (t, raw, lang) => R.readingTime(t, lang) },
   { id: "binary", slug: "binary-text", test: /ikili\s*kod|binary text/i, run: (t) => R.textBinary(t) },
   { id: "hex", slug: "hex-text", test: /hex\s*kod|hex text/i, run: (t) => R.textHex(t) },
-  { id: "temp", slug: "temperature", test: /selsi|celsius|fahrenheit|farengeyt|°[cf]/i, run: (t) => R.convertTemp(t) },
-  { id: "domain", slug: "extract-domain", test: /domen\s*çıx|domen\s*cix|extract domain|alan adı/i, run: (t) => R.extractDomain(t) },
+  { id: "temp", slug: "temperature", test: /selsi|celsius|fahrenheit|farengeyt|sıcaklık|درجة الحرارة|температур|°[cf]/i, run: (t) => R.convertTemp(t) },
+  { id: "domain", slug: "extract-domain", test: /domen\s*çıx|domen\s*cix|extract domain|alan adı|استخراج النطاق|домен из/i, run: (t) => R.extractDomain(t) },
   { id: "length", slug: "centimeter", test: /santimetr|centimeter|\bcm\b.*\bin\b/i, run: (t) => R.convertLength(t) },
   { id: "weight", slug: "weight", test: /çəki|ceki|weight|\bkg\b.*\blb\b/i, run: (t) => R.convertWeight(t) },
   { id: "join", slug: "join-lines", test: /sətir\s*birləş|setir\s*birles|join lines/i, run: (t) => R.joinLines(t) },
   { id: "blank", slug: "remove-blank-lines", test: /boş\s*sətir\s*sil|bos\s*setir\s*sil|remove blank/i, run: (t) => R.removeBlank(t) },
   { id: "speed", slug: "speed", test: /sürət|suret|km\/h|mph/i, run: (t) => R.convertSpeed(t) },
   { id: "area", slug: "area", test: /\bsahə\b|\bsahe\b|area/i, run: (t) => R.convertArea(t) },
-  { id: "vat", slug: "vat", test: /\bədv\b|\bvat\b|кдс/i, run: (t) => R.calcVat(t) },
-  { id: "weekday", slug: "weekday", test: /həftə\s*günü|hefte\s*gunu|weekday/i, run: (t) => R.weekdayOf(t, "az") },
+  { id: "vat", slug: "vat", test: /\bədv\b|\bvat\b|\bkdv\b|ضريبة|\bндс\b/i, run: (t) => R.calcVat(t) },
+  { id: "weekday", slug: "weekday", test: /həftə\s*günü|hefte\s*gunu|weekday|haftanın günü|يوم الأسبوع|день недели/i, run: (t, raw, lang) => R.weekdayOf(t, lang) },
   { id: "prefix", slug: "add-to-lines", test: /sətirə\s*əlavə|setire\s*elave|prefix lines/i, run: (t) => R.prefixLines(t, extraOf(t) || "- ") },
   { id: "replace", slug: "find-replace", test: /tap\s*və\s*dəyiş|tap\s*ve\s*deyis|find.?replace/i, run: (t) => R.findReplace(t, extraOf(t)) },
   { id: "freq", slug: "word-frequency", test: /söz\s*tezli|soz\s*tezli|word frequency/i, run: (t) => R.wordFrequency(t) },
-  { id: "discount", slug: "discount", test: /endirim|discount/i, run: (t) => R.calcDiscount(...nums(t)) },
+  { id: "discount", slug: "discount", test: /endirim|discount|indirim|خصم|скидк/i, run: (t) => R.calcDiscount(...nums(t)) },
   { id: "tip", slug: "tip", test: /çay\s*pul|cay\s*pul|tip/i, run: (t) => R.calcTip(...nums(t)) },
   { id: "split", slug: "split-bill", test: /hesab\s*böl|hesab\s*bol|split bill/i, run: (t) => R.splitBill(...nums(t)) },
-  { id: "leap", slug: "leap-year", test: /artıq\s*il|artiq\s*il|leap year/i, run: (t) => R.leapYear((t.match(/\d{3,4}/) || [t])[0]) === "yes" ? "Bəli, artıq ildir." : "Xeyr, artıq il deyil." },
+  { id: "leap", slug: "leap-year", test: /artıq\s*il|artiq\s*il|leap year|artık yıl|سنة كبيسة|високосный/i, run: (t, raw, lang) => R.leapYear((t.match(/\d{3,4}/) || [t])[0]) === "yes" ? LEAP_YES[lang] : LEAP_NO[lang] },
   { id: "query", slug: "query-string", test: /sorğu\s*çıx|sorgu\s*cix|query string/i, run: (t) => R.queryString(t) },
   { id: "regex", slug: "regex", test: /\bregex\b|regular expression/i, run: (t) => R.testRegex(extraOf(t) || t, t) },
   { id: "diff", slug: "text-diff", test: /mətn\s*fərq|metin\s*ferq|text diff/i, run: (t) => R.diffText(...two(t)) },
@@ -134,22 +152,36 @@ function tail(slug) {
   return `\n\nXidmət: ${SITE}/${slug}`;
 }
 
+
+function langOf(text) {
+  if (/[\u0600-\u06FF]/.test(text)) return "ar";
+  if (/[\u0400-\u04FF]/.test(text)) return "ru";
+  if (/\b(the|format|make|generate|count|what|please|random|services|leap|year|word|password|create)\b/i.test(text)) return "en";
+  if (/\b(düzenle|sıkıştır|üret|rastgele|lütfen|hizmet|artık|parola|hizmetler)\b/i.test(text)) return "tr";
+  if (/[əöüğışç]/i.test(text)) return "az";
+  return "az";
+}
+function prefixOf(lang) {
+  return lang === "az" ? "" : `/${lang}`;
+}
+
 export function toolsReply(message) {
   const text = String(message || "").trim();
   if (!text || text.length > 5000) return null;
-  if (/xidmətlər|xidmetler|hansı alət|hansi alet|services list/i.test(text) && text.length < 60) {
-    return `Xidmətlər açıqdır. Adını və mətni yaz, məsələn «JSON düzəlt: {"a":1}» və ya «UUID yarat».\n\nSəhifə: ${SITE}`;
+  const lang = langOf(text);
+  if (/xidmətlər|xidmetler|hansı alət|hansi alet|services|hizmetler|خدمات|услуги|tools list/i.test(text) && text.length < 70) {
+    return `${LIST[lang]}\n\n${LINK[lang]}: https://www.nibrascode.com${prefixOf(lang)}/tools`;
   }
-  if (/nədir|nedir|what is|necə işləyir|ne ise yarar/i.test(text) && !/[:：]/.test(text) && text.length < 80) return null;
+  if (/nədir|nedir|what is|necə işləyir|ne ise yarar|nasıl çalışır|что такое|ما هو|ما هي/i.test(text) && !/[:：]/.test(text) && text.length < 90) return null;
   const tool = TOOLS.find((item) => item.test.test(text));
   if (!tool) return null;
   const body = tool.none ? "" : payload(text, tool);
   if (!tool.none && body.length < 1) return null;
   try {
-    let out = tool.run(body, text);
+    let out = tool.run(body, text, lang);
     if (out == null || out === false) return null;
     if (typeof out === "object") out = JSON.stringify(out, null, 2);
-    const bodyText = `${out}${tail(tool.slug)}`;
+    const bodyText = `${out}\n\n${LINK[lang]}: https://www.nibrascode.com${prefixOf(lang)}/tools/${tool.slug}`;
     return SECRET.has(tool.id) ? `::vault::\n${bodyText}` : bodyText;
   } catch {
     return null;
