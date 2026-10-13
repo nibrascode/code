@@ -359,36 +359,71 @@
       text-decoration: none;
       border: 1px solid #8fb4ff;
     }
-    .qrform { margin-top: 10px; }
-    .qrform .kinds, .qrform .fields { display: flex; flex-wrap: wrap; gap: 6px; }
-    .qrform .kinds button, .qrform .go {
-      min-height: 34px;
-      padding: 0 12px;
-      border: 0;
-      border-radius: 10px;
-      background: rgba(143, 180, 255, .16);
-      color: #e6ecfb;
+    .msg.qrcard { padding: 6px; background: transparent; }
+    .msg.qrcard > :not(.qrform):not(.tools) { display: none; }
+    .qrform {
+      margin: 0;
+      padding: 14px;
+      border-radius: 18px;
+      background:
+        radial-gradient(120% 80% at 0% 0%, rgba(143, 180, 255, .16), transparent 55%),
+        linear-gradient(180deg, rgba(18, 24, 42, .96), rgba(12, 16, 32, .96));
+      border: 1px solid rgba(143, 180, 255, .28);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .28);
+    }
+    .qrform .head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .qrform .mark {
+      display: grid; place-items: center; width: 36px; height: 36px; border-radius: 12px;
+      background: #8fb4ff; color: #0c1020; font-weight: 800; font-size: 13px;
+    }
+    .qrform .ttl { font-size: 15px; font-weight: 750; color: #f4f7ff; }
+    .qrform .sub { margin-top: 2px; font-size: 12px; line-height: 1.35; color: #9aa6c3; }
+    .qrform .kinds { display: flex; flex-wrap: wrap; gap: 6px; }
+    .qrform .kinds button {
+      min-height: 32px;
+      padding: 0 10px;
+      border: 1px solid rgba(143, 180, 255, .22);
+      border-radius: 999px;
+      background: rgba(143, 180, 255, .08);
+      color: #d7e2fb;
       font: inherit;
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 650;
       cursor: pointer;
     }
-    .qrform .kinds button.on { background: #8fb4ff; color: #0c1020; }
-    .qrform .fields { display: grid; gap: 6px; margin-top: 8px; }
+    .qrform .kinds button.on { background: #8fb4ff; color: #0c1020; border-color: #8fb4ff; }
+    .qrform .fields { display: grid; gap: 8px; margin-top: 12px; }
+    .qrform label { display: grid; gap: 4px; font-size: 11.5px; color: #9aa6c3; }
     .qrform input, .qrform textarea {
       width: 100%;
       box-sizing: border-box;
-      min-height: 36px;
-      padding: 8px 10px;
+      min-height: 38px;
+      padding: 8px 11px;
       border: 1px solid rgba(160, 140, 255, .28);
-      border-radius: 10px;
-      background: rgba(12, 16, 32, .7);
+      border-radius: 12px;
+      background: rgba(8, 12, 24, .72);
       color: #e6ecfb;
       font: inherit;
       font-size: 13.5px;
     }
-    .qrform .go { margin-top: 8px; background: #8fb4ff; color: #0c1020; }
-    .qrform .err { margin-top: 6px; color: #ffb4b4; font-size: 12px; }
+    .qrform textarea { min-height: 72px; resize: vertical; }
+    .qrform .acts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .qrform .go, .qrform a.qrdl, .qrform a.qropen {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 36px;
+      padding: 0 14px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 750;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .qrform .go, .qrform a.qrdl { border: 0; background: #8fb4ff; color: #0c1020; }
+    .qrform a.qropen { background: transparent; color: #8fb4ff; border: 1px solid #8fb4ff; }
+    .qrform .err { margin-top: 8px; color: #ffb4b4; font-size: 12px; }
+    .qrform img.shot { width: min(200px, 100%); margin: 12px auto 0; border-radius: 14px; background: #fff; }
     .mode {
       margin: 0 4px 8px;
       color: #9fd6ff;
@@ -1071,30 +1106,37 @@
       if (formHit) mountQrForm(el, formHit[1] || "");
     }
     const QR_KINDS = [
-      { id: "url", label: "Ünvan", fields: [{ k: "url", l: "Ünvan", ph: "https://", req: true }] },
-      { id: "text", label: "Mətn", fields: [{ k: "text", l: "Mətn", ph: "Yazı", req: true, area: true }] },
-      { id: "phone", label: "Telefon", fields: [{ k: "phone", l: "Telefon", ph: "+994", req: true }] },
-      { id: "email", label: "E-poçt", fields: [{ k: "email", l: "E-poçt", ph: "ad@mail.com", req: true }, { k: "subject", l: "Mövzu" }, { k: "body", l: "Mətn", area: true }] },
-      { id: "whatsapp", label: "WhatsApp", fields: [{ k: "phone", l: "Telefon", ph: "994501112233", req: true }, { k: "text", l: "Mesaj", area: true }] },
-      { id: "wifi", label: "Wi-Fi", fields: [{ k: "ssid", l: "Şəbəkə adı", req: true }, { k: "password", l: "Şifrə" }] },
-      { id: "vcard", label: "Vizit kartı", fields: [{ k: "firstName", l: "Ad", req: true }, { k: "lastName", l: "Soyad" }, { k: "phone", l: "Telefon" }, { k: "email", l: "E-poçt" }, { k: "org", l: "Şirkət" }] },
-      { id: "sms", label: "SMS", fields: [{ k: "phone", l: "Telefon", ph: "+994", req: true }, { k: "text", l: "Mesaj", area: true }] },
-      { id: "location", label: "Yer", fields: [{ k: "lat", l: "Enlik", req: true }, { k: "lng", l: "Uzunluq", req: true }] },
-      { id: "event", label: "Tədbir", fields: [{ k: "title", l: "Ad", req: true }, { k: "start", l: "Başlanğıc", req: true }, { k: "location", l: "Yer" }] },
-      { id: "app", label: "Tətbiq", fields: [{ k: "url", l: "Ünvan", ph: "https://", req: true }] }
+      { id: "url", label: "Ünvan", icon: "🔗", fields: [{ k: "url", l: "Ünvan", ph: "https://", req: true }] },
+      { id: "text", label: "Mətn", icon: "✎", fields: [{ k: "text", l: "Mətn", ph: "Yazı", req: true, area: true }] },
+      { id: "phone", label: "Telefon", icon: "☎", fields: [{ k: "phone", l: "Telefon", ph: "+994", req: true }] },
+      { id: "email", label: "E-poçt", icon: "✉", fields: [{ k: "email", l: "E-poçt", ph: "ad@mail.com", req: true }, { k: "subject", l: "Mövzu" }, { k: "body", l: "Mətn", area: true }] },
+      { id: "whatsapp", label: "WhatsApp", icon: "💬", fields: [{ k: "phone", l: "Telefon", ph: "994501112233", req: true }, { k: "text", l: "Mesaj", area: true }] },
+      { id: "wifi", label: "Wi-Fi", icon: "📶", fields: [{ k: "ssid", l: "Şəbəkə adı", req: true }, { k: "password", l: "Şifrə" }] },
+      { id: "vcard", label: "Vizit", icon: "👤", fields: [{ k: "firstName", l: "Ad", req: true }, { k: "lastName", l: "Soyad" }, { k: "phone", l: "Telefon" }, { k: "email", l: "E-poçt" }, { k: "org", l: "Şirkət" }] },
+      { id: "sms", label: "SMS", icon: "💬", fields: [{ k: "phone", l: "Telefon", ph: "+994", req: true }, { k: "text", l: "Mesaj", area: true }] },
+      { id: "location", label: "Yer", icon: "📍", fields: [{ k: "lat", l: "Enlik", req: true }, { k: "lng", l: "Uzunluq", req: true }] },
+      { id: "event", label: "Tədbir", icon: "📅", fields: [{ k: "title", l: "Ad", req: true }, { k: "start", l: "Başlanğıc", req: true }, { k: "location", l: "Yer" }] },
+      { id: "app", label: "Tətbiq", icon: "▣", fields: [{ k: "url", l: "Ünvan", ph: "https://", req: true }] }
     ];
     function mountQrForm(el, preset) {
+      el.classList.add("qrcard");
       const box = document.createElement("div");
       box.className = "qrform";
+      const head = document.createElement("div");
+      head.className = "head";
+      head.innerHTML = '<div class="mark">QR</div><div><div class="ttl">QR xidməti</div><div class="sub">Növü seç, xanaları doldur. Boş xana ilə hazırlanmır.</div></div>';
       const kinds = document.createElement("div");
       kinds.className = "kinds";
       const fields = document.createElement("div");
       fields.className = "fields";
+      const acts = document.createElement("div");
+      acts.className = "acts";
       const go = document.createElement("button");
       go.type = "button";
       go.className = "go";
       go.textContent = "QR hazırla";
       go.hidden = true;
+      acts.appendChild(go);
       const err = document.createElement("div");
       err.className = "err";
       let current = "";
@@ -1104,12 +1146,14 @@
         kinds.querySelectorAll("button").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-k") === id); });
         fields.innerHTML = "";
         kind.fields.forEach(function (f) {
+          const label = document.createElement("label");
+          label.textContent = f.l + (f.req ? " *" : "");
           const input = document.createElement(f.area ? "textarea" : "input");
-          input.placeholder = f.l + (f.req ? " *" : "");
-          if (f.ph) input.placeholder = f.l + (f.req ? " *" : "") + " — " + f.ph;
+          input.placeholder = f.ph || f.l;
           input.setAttribute("data-f", f.k);
           if (f.req) input.required = true;
-          fields.appendChild(input);
+          label.appendChild(input);
+          fields.appendChild(label);
         });
         go.hidden = false;
         err.textContent = "";
@@ -1117,7 +1161,7 @@
       QR_KINDS.forEach(function (k) {
         const b = document.createElement("button");
         b.type = "button";
-        b.textContent = k.label;
+        b.textContent = (k.icon ? k.icon + " " : "") + k.label;
         b.setAttribute("data-k", k.id);
         b.addEventListener("click", function () { show(k.id); });
         kinds.appendChild(b);
@@ -1136,8 +1180,8 @@
         if (!value) { err.textContent = "Bu məlumatla QR hazırlanmır."; return; }
         const page = qrPageUrl(current, data);
         let img = box.querySelector("img.shot");
-        let a = box.querySelector("a.qrdl");
-        let open = box.querySelector("a.qropen");
+        let a = acts.querySelector("a.qrdl");
+        let open = acts.querySelector("a.qropen");
         if (!img) {
           img = document.createElement("img");
           img.className = "shot";
@@ -1153,18 +1197,20 @@
           open.target = "_blank";
           open.rel = "noopener";
           open.textContent = "QR səhifəsində aç";
-          box.appendChild(img);
-          box.appendChild(a);
-          box.appendChild(open);
+          box.insertBefore(img, acts);
+          acts.appendChild(a);
+          acts.appendChild(open);
         }
         const url = "/api/qr?text=" + encodeURIComponent(value);
         img.src = url;
         a.href = url;
         open.href = page;
+        err.textContent = "";
       });
+      box.appendChild(head);
       box.appendChild(kinds);
       box.appendChild(fields);
-      box.appendChild(go);
+      box.appendChild(acts);
       box.appendChild(err);
       el.appendChild(box);
       if (preset && QR_KINDS.some(function (k) { return k.id === preset; })) show(preset);
