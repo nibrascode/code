@@ -345,14 +345,15 @@ export function grokOgHeadTags({
   site = {},
   documentTitle = "",
   cwd = process.cwd(),
+  page = {},
 } = {}) {
-  const title = resolveOgTitle(site, appName, host, documentTitle);
+  const title = page["og:title"] || resolveOgTitle(site, appName, host, documentTitle);
   const publicHost = resolvePublicHost(host);
   const tags = [
     `<meta name="twitter:card" content="summary_large_image">`,
     `<meta property="og:title" content="${escapeHtml(title)}">`,
   ];
-  const description = String(site.description ?? "").trim();
+  const description = page["og:description"] || String(site.description ?? "").trim();
   if (description) {
     tags.push(`<meta property="og:description" content="${escapeHtml(description)}">`);
   }
@@ -362,10 +363,10 @@ export function grokOgHeadTags({
   if (publicHost) {
     const asset = resolveOgCardAsset(site, cwd);
     const custom = Boolean(asset);
-    let image = custom
+    let image = page["og:image"] || (custom
       ? `https://${publicHost}${asset.startsWith("/") ? asset : `/${asset}`}`
-      : `${ogServiceUrl()}/v1/card.png?host=${encodeURIComponent(publicHost)}&title=${encodeURIComponent(title)}`;
-    const color = !custom ? placeholderCardColor(site) : "";
+      : `${ogServiceUrl()}/v1/card.png?host=${encodeURIComponent(publicHost)}&title=${encodeURIComponent(title)}`);
+    const color = !custom && !page["og:image"] ? placeholderCardColor(site) : "";
     if (color) image += `&color=${encodeURIComponent(color)}`;
     tags.push(`<meta property="og:image" content="${escapeHtml(image)}">`);
     tags.push(`<meta property="og:image:width" content="1200">`);
@@ -396,6 +397,24 @@ export function stripShareMetaTags(html) {
     }
     return tag;
   });
+}
+
+function shareAttr(tag, name) {
+  const re = new RegExp(`\\b${name}\\s*=\\s*["']([^"']*)["']`, "i");
+  const match = tag.match(re);
+  return match ? unescapeHtml(match[1]).trim() : "";
+}
+
+/** Page-authored share tags win over the site-wide card. */
+export function readPageShare(html) {
+  const found = {};
+  for (const tag of String(html).match(/<meta\b[^>]*>/gi) ?? []) {
+    const key = (shareAttr(tag, "property") || shareAttr(tag, "name")).toLowerCase();
+    const content = shareAttr(tag, "content");
+    if (!key || !content || !SHARE_META_KEYS.has(key) || found[key]) continue;
+    found[key] = content;
+  }
+  return found;
 }
 
 function insertAfterHeadOpen(html, snippet) {
@@ -439,11 +458,12 @@ export function injectGrokPwaHead(html, ctx = {}) {
   if (typeof html !== "string") return html;
   const { site, projectId, creator, creatorId, host, cwd } = normalizeHeadContext(ctx);
   const documentTitle = titleFromDocument(html);
+  const page = readPageShare(html);
   const appName = resolveOgTitle(
     site,
     ctx.appName ?? DEFAULT_APP_NAME,
     host,
-    documentTitle,
+    page["og:title"] || documentTitle,
   );
   let next = stripShareMetaTags(html);
   if (!readGrokExtensionsEnabled()) next = stripGrokExtensionsScript(next);
@@ -458,7 +478,7 @@ export function injectGrokPwaHead(html, ctx = {}) {
 
   next = insertAfterHeadOpen(
     next,
-    grokOgHeadTags({ host, appName, site, documentTitle, cwd }).join(""),
+    grokOgHeadTags({ host, appName, site, documentTitle, cwd, page }).join(""),
   );
 
   if (readGrokExtensionsEnabled() && !next.includes("/grok-app-builder/extensions.js")) {

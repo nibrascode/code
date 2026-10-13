@@ -108,17 +108,16 @@ test("does not duplicate x:creator tags", () => {
   assert.equal(twice.split('property="x:creator:id"').length - 1, 1);
 });
 
-test("platform chrome overwrites share-card metas and always sets og:title", () => {
+test("page share tags win over the site card", () => {
   const html =
-    '<html><head><title>Hello World</title><meta property="og:title" content="Old"><meta name="twitter:card" content="summary"></head></html>';
-  const out = injectGrokPwaHead(html, { appName: "Wild Race" });
+    '<html><head><title>Hello World</title><meta property="og:title" content="QR kod generatoru"><meta property="og:image" content="https://www.nibrascode.com/og-qr.jpg"><meta name="twitter:card" content="summary"></head></html>';
+  const out = injectGrokPwaHead(html, { appName: "Nibras Code", host: "www.nibrascode.com" });
   assert.match(out, /name="twitter:card" content="summary_large_image"/);
-  assert.match(out, /property="og:title" content="Hello World"/);
-  assert.doesNotMatch(out, /content="Old"/);
+  assert.match(out, /property="og:title" content="QR kod generatoru"/);
+  assert.match(out, /property="og:image" content="https:\/\/www\.nibrascode\.com\/og-qr\.jpg"/);
   assert.doesNotMatch(out, /content="summary"/);
   assert.equal(out.split('name="twitter:card"').length - 1, 1);
   assert.equal(out.split('property="og:title"').length - 1, 1);
-  assert.doesNotMatch(out, /property="og:image"/);
 });
 
 test("does not duplicate twitter:card or og:title", () => {
