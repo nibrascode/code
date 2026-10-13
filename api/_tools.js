@@ -119,8 +119,17 @@ function chmod(text) {
 
 const TOOLS = [
   { id: "qr", slug: "qr-code", test: /\bqr\b|qr kod|qr code|باركود|кьюар/i, run: (text, all) => {
-    const url = String(all || text).match(/https?:\/\/\S+/i);
-    const value = url ? url[0] : (payload(text) || text);
+    const raw = String(all || text).trim();
+    const url = raw.match(/https?:\/\/\S+/i);
+    const rest = raw
+      .replace(/https?:\/\/\S+/gi, " ")
+      .replace(/\b(qr\s*kod(?:u)?|qr\s*code|qr|باركود|кьюар)\b/gi, " ")
+      .replace(/\b(hazırla|hazirla|yarat|düzəlt|duzelt|et|make|create|generate|oluştur|olustur)\b/gi, " ")
+      .replace(/[?:：]+/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+    const value = url ? url[0] : rest;
+    if (!value) return "QR səhifəsi açıqdır. Ünvanı və ya mətni orada yaz:\nhttps://www.nibrascode.com/qr";
     return `QR hazırdır. Aç və yüklə:\nhttps://www.nibrascode.com/qr?text=${encodeURIComponent(value)}`;
   } },
   { id: "json", slug: "json", test: /(?:json)\s*(?:düzəlt|duzelt|format|formatter|düzəld|beautify)/i, run: jsonFormat },
