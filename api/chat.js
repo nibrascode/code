@@ -155,6 +155,11 @@ export default async function handler(req, res) {
         religious = k !== "brand" && k !== "game" && !lexical && !(k === "din" && body.mode === "code"); // kod rejimində ümumi din-söz uyğunluğu dini sual sayılmır
         break;
       }
+    // Söz bazası hava və paket axtarışından əvvəl gəlir: «seo nədir» npm paketinə düşməsin.
+    if (!fixed && body.mode !== "code" && body.mode !== "create") {
+      const known = searchReply(message);
+      if (known) fixed = known;
+    }
     // Hava, məzənnə, qısa izah və paket modeli çağırmır. Qalan fakt Wikidata-ya düşür.
     if (!fixed && body.mode !== "code" && body.mode !== "create") {
       try {
@@ -163,11 +168,6 @@ export default async function handler(req, res) {
       } catch {
         /* mənbə susursa, sual Wikidata-ya və ya modelə düşür */
       }
-    }
-    // Söz bazası Wikidata-dan əvvəl gəlir: «git nədir» kimi sual hazır izahla cavablanır.
-    if (!fixed && body.mode !== "code" && body.mode !== "create") {
-      const known = searchReply(message);
-      if (known) fixed = known;
     }
     // Wikidata faktı modelə getmir: şəhər, adam, ölkə kimi aydın sualı server özü oxuyur.
     if (!fixed && body.mode !== "code" && body.mode !== "create") {
