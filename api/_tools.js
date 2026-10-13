@@ -1,4 +1,5 @@
 import { createHash, randomBytes, randomInt } from "node:crypto";
+import { toolsReply as matchTools } from "./_tool-match.js";
 
 const SECRET = new Set(["password", "md5", "sha256", "hash", "jwt", "base64"]);
 const SITE = "https://www.nibrascode.com/tools";
@@ -242,22 +243,7 @@ function explainQr() {
 }
 
 export function toolsReply(message) {
-  const text = String(message || "").trim();
-  if (!text || text.length > 5000) return null;
-  if (/nədir|nedir|what is|nedir\?|necə işləyir|ne ise yarar/i.test(text) && !/[:：]/.test(text) && text.length < 80) return null;
-  const tool = TOOLS.find((item) => item.test.test(text));
-  if (!tool) return null;
-  const body = tool.id === "uuid" ? "" : payload(text) || text;
-  if (tool.id !== "uuid" && tool.id !== "password" && body.length < 1) return null;
-  try {
-    const out = tool.run(body, text);
-    if (!out) return null;
-    if (String(out).startsWith("::qrimg::")) return out;
-    const bodyText = `${out}${tail(tool.slug)}`;
-    return SECRET.has(tool.id) ? `::vault::\n${bodyText}` : bodyText;
-  } catch {
-    return null;
-  }
+  return matchTools(message);
 }
 
 // chat import fix
