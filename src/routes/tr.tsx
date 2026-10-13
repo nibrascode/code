@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Outlet, useRouterState } from "@tanstack/react-router";
 import { HomeView } from "@/routes/index";
 import { loadStudioBundle } from "@/lib/studio.functions";
 
@@ -8,5 +8,9 @@ export const Route = createFileRoute("/tr")({
 });
 
 function Page() {
-  return <HomeView apps={Route.useLoaderData().apps} />;
+  const { apps } = Route.useLoaderData();
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+  const bare = pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname;
+  if (bare !== "/tr") return <Outlet />;
+  return <HomeView apps={apps} />;
 }
