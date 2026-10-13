@@ -10,7 +10,7 @@ const TITLE = {
 } as const;
 
 const LEAD = {
-  az: "Fon sil, rəng və ya bulanıq fon qoy, kölgə əlavə et, PNG, JPG və ya WebP yüklə. Pulsuz, brauzerdə.",
+  az: "Fon sil, öz şəklini fon qoy, dairə profil düzəlt, əl ilə düzəlt. PNG, JPG və ya WebP. Pulsuz, brauzerdə.",
   en: "Remove the background, add a color or blur, a shadow, then download PNG, JPG or WebP. Free, in your browser.",
   tr: "Arka planı sil, renk veya bulanık fon koy, gölge ekle, PNG, JPG veya WebP indir. Ücretsiz, tarayıcıda.",
   ar: "أزل الخلفية، أضف لوناً أو ضباباً وظلاً، ثم نزّل PNG أو JPG أو WebP. مجاناً في المتصفح.",

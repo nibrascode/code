@@ -3,7 +3,7 @@ import { useI18n } from "@/lib/i18n-context";
 import type { Lang } from "@/lib/i18n";
 
 type Quality = "small" | "medium" | "large";
-type Bg = "clear" | "white" | "black" | "color" | "blur";
+type Bg = "clear" | "white" | "black" | "color" | "blur" | "photo";
 type Format = "png" | "jpeg" | "webp";
 type Hand = "off" | "erase" | "restore";
 
@@ -13,8 +13,8 @@ const COPY: Record<Lang, Record<string, string>> = {
     private: "Şəkil cihazda qalır. Hesab lazım deyil.", again: "Başqa şəkil", download: "Yüklə",
     wait: "Dəqiq model yüklənir…", fail: "Fon silinmədi. Başqa şəkil yoxla.",
     quality: "Keyfiyyət", qSmall: "Sürətli", qMedium: "Orta", qLarge: "Ən yaxşı",
-    background: "Fon", clear: "Şəffaf", white: "Ağ", black: "Qara", color: "Rəng", blur: "Bulanıq",
-    format: "Format", pad: "Boşluq", shadow: "Kölgə", size: "Ölçü",
+    background: "Fon", clear: "Şəffaf", white: "Ağ", black: "Qara", color: "Rəng", blur: "Bulanıq", photo: "Şəkil",
+    format: "Format", pad: "Boşluq", shadow: "Kölgə", size: "Ölçü", circle: "Dairə", flip: "Çevir", trim: "Kəs", copy: "Kopyala",
     hand: "Əl ilə", erase: "Sil", restore: "Qaytar", brush: "Fırça", edge: "Kənar",
     hint: "Qalan fonu barmaq və ya siçanla sil. Səhv getsə, qaytar.",
   },
@@ -23,8 +23,8 @@ const COPY: Record<Lang, Record<string, string>> = {
     private: "The photo stays on your device. No account.", again: "Another photo", download: "Download",
     wait: "Loading the precise model…", fail: "Could not remove the background. Try another photo.",
     quality: "Quality", qSmall: "Fast", qMedium: "Medium", qLarge: "Best",
-    background: "Background", clear: "Clear", white: "White", black: "Black", color: "Color", blur: "Blur",
-    format: "Format", pad: "Padding", shadow: "Shadow", size: "Size",
+    background: "Background", clear: "Clear", white: "White", black: "Black", color: "Color", blur: "Blur", photo: "Photo",
+    format: "Format", pad: "Padding", shadow: "Shadow", size: "Size", circle: "Circle", flip: "Flip", trim: "Trim", copy: "Copy",
     hand: "By hand", erase: "Erase", restore: "Restore", brush: "Brush", edge: "Edge",
     hint: "Paint away leftover background. Restore if you erase too much.",
   },
@@ -33,8 +33,8 @@ const COPY: Record<Lang, Record<string, string>> = {
     private: "Fotoğraf cihazda kalır. Hesap gerekmez.", again: "Başka fotoğraf", download: "İndir",
     wait: "Hassas model yükleniyor…", fail: "Arka plan silinemedi. Başka fotoğraf dene.",
     quality: "Kalite", qSmall: "Hızlı", qMedium: "Orta", qLarge: "En iyi",
-    background: "Arka plan", clear: "Şeffaf", white: "Beyaz", black: "Siyah", color: "Renk", blur: "Bulanık",
-    format: "Biçim", pad: "Boşluk", shadow: "Gölge", size: "Boyut",
+    background: "Arka plan", clear: "Şeffaf", white: "Beyaz", black: "Siyah", color: "Renk", blur: "Bulanık", photo: "Foto",
+    format: "Biçim", pad: "Boşluk", shadow: "Gölge", size: "Boyut", circle: "Daire", flip: "Çevir", trim: "Kırp", copy: "Kopyala",
     hand: "Elle", erase: "Sil", restore: "Geri al", brush: "Fırça", edge: "Kenar",
     hint: "Kalan arka planı parmak veya fareyle sil. Fazla silersen geri al.",
   },
@@ -43,8 +43,8 @@ const COPY: Record<Lang, Record<string, string>> = {
     private: "الصورة تبقى على جهازك. بلا حساب.", again: "صورة أخرى", download: "تنزيل",
     wait: "يتم تحميل النموذج الأدق…", fail: "تعذّرت إزالة الخلفية. جرّب صورة أخرى.",
     quality: "الجودة", qSmall: "سريع", qMedium: "متوسط", qLarge: "الأفضل",
-    background: "الخلفية", clear: "شفاف", white: "أبيض", black: "أسود", color: "لون", blur: "ضبابي",
-    format: "الصيغة", pad: "هامش", shadow: "ظل", size: "الحجم",
+    background: "الخلفية", clear: "شفاف", white: "أبيض", black: "أسود", color: "لون", blur: "ضبابي", photo: "صورة",
+    format: "الصيغة", pad: "هامش", shadow: "ظل", size: "الحجم", circle: "دائرة", flip: "اقلب", trim: "قص", copy: "انسخ",
     hand: "باليد", erase: "امسح", restore: "أعد", brush: "الفرشاة", edge: "الحافة",
     hint: "امسح الخلفية المتبقية بإصبعك أو الفأرة. أعد ما مُسح بالخطأ.",
   },
@@ -53,8 +53,8 @@ const COPY: Record<Lang, Record<string, string>> = {
     private: "Фото остаётся на устройстве. Аккаунт не нужен.", again: "Другое фото", download: "Скачать",
     wait: "Загрузка точной модели…", fail: "Не удалось убрать фон. Попробуйте другое фото.",
     quality: "Качество", qSmall: "Быстро", qMedium: "Средне", qLarge: "Лучшее",
-    background: "Фон", clear: "Прозрачный", white: "Белый", black: "Чёрный", color: "Цвет", blur: "Размытие",
-    format: "Формат", pad: "Отступ", shadow: "Тень", size: "Размер",
+    background: "Фон", clear: "Прозрачный", white: "Белый", black: "Чёрный", color: "Цвет", blur: "Размытие", photo: "Фото",
+    format: "Формат", pad: "Отступ", shadow: "Тень", size: "Размер", circle: "Круг", flip: "Отразить", trim: "Обрезать", copy: "Копировать",
     hand: "Вручную", erase: "Стереть", restore: "Вернуть", brush: "Кисть", edge: "Край",
     hint: "Сотрите остатки фона пальцем или мышью. Лишнее верните.",
   },
@@ -149,6 +149,10 @@ export function EraseTool() {
   const [hand, setHand] = useState<Hand>("erase");
   const [brush, setBrush] = useState(28);
   const [edge, setEdge] = useState(0);
+  const [bgPhoto, setBgPhoto] = useState("");
+  const [circle, setCircle] = useState(false);
+  const [flip, setFlip] = useState(false);
+  const [trim, setTrim] = useState(false);
 
   const mime = format === "jpeg" ? "image/jpeg" : format === "webp" ? "image/webp" : "image/png";
   const canClear = bg === "clear" && format === "png";
@@ -165,7 +169,11 @@ export function EraseTool() {
     setPreview("");
     setProgress(0);
     setNote("");
-    setEdge(0);
+    if (bgPhoto) URL.revokeObjectURL(bgPhoto);
+    setBgPhoto("");
+    setCircle(false);
+    setFlip(false);
+    setTrim(false);
   }
 
   async function compose() {
@@ -179,7 +187,13 @@ export function EraseTool() {
     canvas.width = width;
     canvas.height = height;
     const ctx = canvas.getContext("2d")!;
-    if (bg === "blur") {
+    if (bg === "photo" && bgPhoto) {
+      const backdrop = await loadImage(bgPhoto);
+      const cover = Math.max(width / backdrop.width, height / backdrop.height);
+      const dw = backdrop.width * cover;
+      const dh = backdrop.height * cover;
+      ctx.drawImage(backdrop, (width - dw) / 2, (height - dh) / 2, dw, dh);
+    } else if (bg === "blur") {
       ctx.filter = "blur(18px)";
       ctx.drawImage(original, -20, -20, width + 40, height + 40);
       ctx.filter = "none";
@@ -195,13 +209,60 @@ export function EraseTool() {
       ctx.restore();
     }
     ctx.drawImage(subject, padPx, padPx);
-    let out = canvas;
-    if (size > 0 && Math.max(width, height) > size) {
-      const scale = size / Math.max(width, height);
+    let current = canvas;
+    if (trim && bg === "clear") {
+      const data = current.getContext("2d")!.getImageData(0, 0, current.width, current.height).data;
+      let minX = current.width;
+      let minY = current.height;
+      let maxX = 0;
+      let maxY = 0;
+      for (let y = 0; y < current.height; y++) {
+        for (let x = 0; x < current.width; x++) {
+          if (data[(y * current.width + x) * 4 + 3] > 8) {
+            minX = Math.min(minX, x);
+            minY = Math.min(minY, y);
+            maxX = Math.max(maxX, x);
+            maxY = Math.max(maxY, y);
+          }
+        }
+      }
+      if (maxX > minX && maxY > minY) {
+        const cropped = document.createElement("canvas");
+        cropped.width = maxX - minX + 1;
+        cropped.height = maxY - minY + 1;
+        cropped.getContext("2d")!.drawImage(current, minX, minY, cropped.width, cropped.height, 0, 0, cropped.width, cropped.height);
+        current = cropped;
+      }
+    }
+    if (flip) {
+      const flipped = document.createElement("canvas");
+      flipped.width = current.width;
+      flipped.height = current.height;
+      const fctx = flipped.getContext("2d")!;
+      fctx.translate(flipped.width, 0);
+      fctx.scale(-1, 1);
+      fctx.drawImage(current, 0, 0);
+      current = flipped;
+    }
+    if (circle) {
+      const side = Math.min(current.width, current.height);
+      const round = document.createElement("canvas");
+      round.width = side;
+      round.height = side;
+      const rctx = round.getContext("2d")!;
+      rctx.beginPath();
+      rctx.arc(side / 2, side / 2, side / 2, 0, Math.PI * 2);
+      rctx.clip();
+      rctx.drawImage(current, (current.width - side) / 2, (current.height - side) / 2, side, side, 0, 0, side, side);
+      current = round;
+    }
+    let out = current;
+    if (size > 0 && Math.max(current.width, current.height) > size) {
+      const scale = size / Math.max(current.width, current.height);
       const resized = document.createElement("canvas");
-      resized.width = Math.round(width * scale);
-      resized.height = Math.round(height * scale);
-      resized.getContext("2d")!.drawImage(canvas, 0, 0, resized.width, resized.height);
+      resized.width = Math.round(current.width * scale);
+      resized.height = Math.round(current.height * scale);
+      resized.getContext("2d")!.drawImage(current, 0, 0, resized.width, resized.height);
       out = resized;
     }
     const blob = await canvasBlob(out, canClear ? "image/png" : mime, 0.92);
@@ -214,7 +275,7 @@ export function EraseTool() {
     if (!readyCut || busy) return;
     compose();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [readyCut, bg, color, pad, shadow, size, format]);
+  }, [readyCut, bg, color, bgPhoto, pad, shadow, size, format, circle, flip, trim]);
 
   function paintAt(clientX: number, clientY: number) {
     const view = paintRef.current;
@@ -326,6 +387,17 @@ export function EraseTool() {
     if (blob) download(`nibras-erase.${canClear ? "png" : format}`, blob);
   }
 
+  async function copyNow() {
+    const blob = await compose();
+    if (!blob) return;
+    try {
+      await navigator.clipboard.write([new ClipboardItem({ [blob.type]: blob })]);
+      setNote(t.copy);
+    } catch {
+      setNote(t.fail);
+    }
+  }
+
   return (
     <div className="files-tool">
       <section className="files-card">
@@ -344,10 +416,21 @@ export function EraseTool() {
         </div>
         <div className="erase-row">
           <span>{t.background}</span>
-          {(["clear", "white", "black", "color", "blur"] as Bg[]).map((id) => (
+          {(["clear", "white", "black", "color", "blur", "photo"] as Bg[]).map((id) => (
             <button key={id} type="button" className={bg === id ? "is-on" : ""} onClick={() => setBg(id)}>{t[id]}</button>
           ))}
           {bg === "color" ? <input type="color" value={color} onChange={(e) => setColor(e.target.value)} aria-label={t.color} /> : null}
+          {bg === "photo" ? (
+            <label className="files-ghost">
+              {t.photo}
+              <input type="file" accept="image/*" hidden onChange={(e) => {
+                const next = e.target.files?.[0];
+                if (!next) return;
+                if (bgPhoto) URL.revokeObjectURL(bgPhoto);
+                setBgPhoto(URL.createObjectURL(next));
+              }} />
+            </label>
+          ) : null}
         </div>
         <div className="erase-row">
           <span>{t.format}</span>
@@ -364,6 +447,9 @@ export function EraseTool() {
           </select>
         </label>
         <label className="erase-check"><input type="checkbox" checked={shadow} onChange={(e) => setShadow(e.target.checked)} />{t.shadow}</label>
+        <label className="erase-check"><input type="checkbox" checked={circle} onChange={(e) => setCircle(e.target.checked)} />{t.circle}</label>
+        <label className="erase-check"><input type="checkbox" checked={flip} onChange={(e) => setFlip(e.target.checked)} />{t.flip}</label>
+        <label className="erase-check"><input type="checkbox" checked={trim} onChange={(e) => setTrim(e.target.checked)} />{t.trim}</label>
         {readyCut ? (
           <>
             <div className="erase-row">
@@ -398,6 +484,7 @@ export function EraseTool() {
         <div className="files-actions">
           <button type="button" className="files-run" disabled={busy || !file} onClick={run}>{busy ? t.working : t.run}</button>
           {readyCut ? <button type="button" className="files-ghost" onClick={exportNow}>{t.download}</button> : null}
+          {readyCut ? <button type="button" className="files-ghost" onClick={copyNow}>{t.copy}</button> : null}
           {file ? <button type="button" className="files-ghost" onClick={() => pick(null)}>{t.again}</button> : null}
         </div>
       </section>
