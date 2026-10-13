@@ -581,6 +581,28 @@ const PAGES: Record<string, Copy> = {
         "Nibras QR — Android-приложение для QR-кодов и штрихкодов: 11 типов, дизайн с логотипом и рамкой, шаблоны и умный безопасный сканер. Основное работает офлайн. Проект Nibras Code.",
     },
   },
+  "/files": {
+    az: {
+      title: "Nibras Files — PDF və fon silmə",
+      description: "PDF birləşdir, ayır, şəkilləri PDF et və şəklin fonunu sil. Hamısı brauzerdə, fayl serverə getmir.",
+    },
+    en: {
+      title: "Nibras Files — PDF tools and background removal",
+      description: "Merge PDFs, split pages, turn images into a PDF, and remove a background. All in your browser.",
+    },
+    tr: {
+      title: "Nibras Files — PDF ve arka plan silme",
+      description: "PDF birleştirin, ayırın, resimleri PDF yapın ve arka planı silin. Hepsi tarayıcıda.",
+    },
+    ar: {
+      title: "Nibras Files — أدوات PDF وإزالة الخلفية",
+      description: "ادمج ملفات PDF، افصل الصفحات، حوّل الصور إلى PDF، وأزل الخلفية. كل ذلك في المتصفح.",
+    },
+    ru: {
+      title: "Nibras Files — PDF и удаление фона",
+      description: "Объединяйте PDF, разделяйте страницы, делайте PDF из фото и удаляйте фон. Всё в браузере.",
+    },
+  },
   "/qr": {
     az: {
       title: "QR kod generatoru — Nibras QR onlayn",
@@ -847,6 +869,7 @@ function ogImage(path: string) {
   const bare = stripLocalePrefix(path).path;
   if (bare === "/ai" || bare.startsWith("/ai/")) return `${SITE}/og-ai.jpg`;
   if (bare === "/qr" || bare.startsWith("/qr/")) return `${SITE}/og-qr.jpg`;
+  if (bare === "/files" || bare.startsWith("/files/")) return `${SITE}/og-tools.jpg`;
   if (bare === "/tools" || bare.startsWith("/tools/")) return `${SITE}/og-tools.jpg`;
   if (bare === "/faq" || bare.startsWith("/faq/")) return `${SITE}/og-faq.jpg`;
   if (bare === "/programming" || bare.startsWith("/programming/")) return `${SITE}/og-programming.jpg`;

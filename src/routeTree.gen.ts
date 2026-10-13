@@ -23,6 +23,11 @@ import { Route as NeceRouteImport } from './routes/nece'
 import { Route as NxStudioRouteImport } from './routes/nx-studio'
 import { Route as PaketRouteImport } from './routes/paket'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as FilesRouteImport } from './routes/files'
+import { Route as EnFilesRouteImport } from './routes/en.files'
+import { Route as TrFilesRouteImport } from './routes/tr.files'
+import { Route as ArFilesRouteImport } from './routes/ar.files'
+import { Route as RuFilesRouteImport } from './routes/ru.files'
 import { Route as QrRouteImport } from './routes/qr'
 import { Route as EnQrRouteImport } from './routes/en.qr'
 import { Route as TrQrRouteImport } from './routes/tr.qr'
@@ -204,6 +209,31 @@ const PaketRoute = PaketRouteImport.update({
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FilesRoute = FilesRouteImport.update({
+  id: '/files',
+  path: '/files',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnFilesRoute = EnFilesRouteImport.update({
+  id: '/en/files',
+  path: '/en/files',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrFilesRoute = TrFilesRouteImport.update({
+  id: '/tr/files',
+  path: '/tr/files',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArFilesRoute = ArFilesRouteImport.update({
+  id: '/ar/files',
+  path: '/ar/files',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RuFilesRoute = RuFilesRouteImport.update({
+  id: '/ru/files',
+  path: '/ru/files',
   getParentRoute: () => rootRouteImport,
 } as any)
 const QrRoute = QrRouteImport.update({
@@ -783,6 +813,11 @@ export interface FileRoutesByFullPath {
   '/nx-studio': typeof NxStudioRoute
   '/paket': typeof PaketRoute
   '/privacy': typeof PrivacyRouteWithChildren
+  '/files': typeof FilesRoute
+  '/en/files': typeof EnFilesRoute
+  '/tr/files': typeof TrFilesRoute
+  '/ar/files': typeof ArFilesRoute
+  '/ru/files': typeof RuFilesRoute
   '/qr': typeof QrRoute
   '/en/qr': typeof EnQrRoute
   '/tr/qr': typeof TrQrRoute
@@ -911,6 +946,11 @@ export interface FileRoutesByTo {
   '/nx-studio': typeof NxStudioRoute
   '/paket': typeof PaketRoute
   '/privacy': typeof PrivacyRouteWithChildren
+  '/files': typeof FilesRoute
+  '/en/files': typeof EnFilesRoute
+  '/tr/files': typeof TrFilesRoute
+  '/ar/files': typeof ArFilesRoute
+  '/ru/files': typeof RuFilesRoute
   '/qr': typeof QrRoute
   '/en/qr': typeof EnQrRoute
   '/tr/qr': typeof TrQrRoute
@@ -1039,6 +1079,11 @@ export interface FileRoutesById {
   '/nx-studio': typeof NxStudioRoute
   '/paket': typeof PaketRoute
   '/privacy': typeof PrivacyRouteWithChildren
+  '/files': typeof FilesRoute
+  '/en/files': typeof EnFilesRoute
+  '/tr/files': typeof TrFilesRoute
+  '/ar/files': typeof ArFilesRoute
+  '/ru/files': typeof RuFilesRoute
   '/qr': typeof QrRoute
   '/en/qr': typeof EnQrRoute
   '/tr/qr': typeof TrQrRoute
@@ -1169,6 +1214,11 @@ export interface FileRouteTypes {
     | '/nx-studio'
     | '/paket'
     | '/privacy'
+    | '/files'
+    | '/en/files'
+    | '/tr/files'
+    | '/ar/files'
+    | '/ru/files'
     | '/qr'
     | '/en/qr'
     | '/tr/qr'
@@ -1297,6 +1347,11 @@ export interface FileRouteTypes {
     | '/nx-studio'
     | '/paket'
     | '/privacy'
+    | '/files'
+    | '/en/files'
+    | '/tr/files'
+    | '/ar/files'
+    | '/ru/files'
     | '/qr'
     | '/en/qr'
     | '/tr/qr'
@@ -1424,6 +1479,11 @@ export interface FileRouteTypes {
     | '/nx-studio'
     | '/paket'
     | '/privacy'
+    | '/files'
+    | '/en/files'
+    | '/tr/files'
+    | '/ar/files'
+    | '/ru/files'
     | '/qr'
     | '/en/qr'
     | '/tr/qr'
@@ -1553,6 +1613,11 @@ export interface RootRouteChildren {
   NxStudioRoute: typeof NxStudioRoute
   PaketRoute: typeof PaketRoute
   PrivacyRoute: typeof PrivacyRouteWithChildren
+  FilesRoute: typeof FilesRoute
+  EnFilesRoute: typeof EnFilesRoute
+  TrFilesRoute: typeof TrFilesRoute
+  ArFilesRoute: typeof ArFilesRoute
+  RuFilesRoute: typeof RuFilesRoute
   QrRoute: typeof QrRoute
   EnQrRoute: typeof EnQrRoute
   TrQrRoute: typeof TrQrRoute
@@ -1721,6 +1786,41 @@ declare module '@tanstack/react-router' {
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/files': {
+      id: '/files'
+      path: '/files'
+      fullPath: '/files'
+      preLoaderRoute: typeof FilesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en/files': {
+      id: '/en/files'
+      path: '/en/files'
+      fullPath: '/en/files'
+      preLoaderRoute: typeof EnFilesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tr/files': {
+      id: '/tr/files'
+      path: '/tr/files'
+      fullPath: '/tr/files'
+      preLoaderRoute: typeof TrFilesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ar/files': {
+      id: '/ar/files'
+      path: '/ar/files'
+      fullPath: '/ar/files'
+      preLoaderRoute: typeof ArFilesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ru/files': {
+      id: '/ru/files'
+      path: '/ru/files'
+      fullPath: '/ru/files'
+      preLoaderRoute: typeof RuFilesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/qr': {
@@ -2973,6 +3073,11 @@ const rootRouteChildren: RootRouteChildren = {
   NxStudioRoute: NxStudioRoute,
   PaketRoute: PaketRoute,
   PrivacyRoute: PrivacyRouteWithChildren,
+  FilesRoute: FilesRoute,
+  EnFilesRoute: EnFilesRoute,
+  TrFilesRoute: TrFilesRoute,
+  ArFilesRoute: ArFilesRoute,
+  RuFilesRoute: RuFilesRoute,
   QrRoute: QrRoute,
   EnQrRoute: EnQrRoute,
   TrQrRoute: TrQrRoute,

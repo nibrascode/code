@@ -11159,4 +11159,55 @@
     <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/qr"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/qr"/>
   </url>
+
+  <url>
+    <loc>https://www.nibrascode.com/files</loc>
+    <lastmod>2026-10-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/files"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/files"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/files"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/files"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/files"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/files"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/en/files</loc>
+    <lastmod>2026-10-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/files"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/files"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/files"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/files"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/files"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/files"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/tr/files</loc>
+    <lastmod>2026-10-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/files"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/files"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/files"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/files"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/files"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/files"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/ar/files</loc>
+    <lastmod>2026-10-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/files"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/files"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/files"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/files"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/files"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/files"/>
+  </url>
+  <url>
+    <loc>https://www.nibrascode.com/ru/files</loc>
+    <lastmod>2026-10-13</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.nibrascode.com/files"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.nibrascode.com/en/files"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.nibrascode.com/tr/files"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.nibrascode.com/ar/files"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.nibrascode.com/ru/files"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.nibrascode.com/files"/>
+  </url>
 </urlset>

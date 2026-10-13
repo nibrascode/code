@@ -27,6 +27,14 @@ const QR_CARD: Record<Lang, string> = {
   ru: "Создавайте, оформляйте и сканируйте QR-коды — бесплатно, в браузере",
 };
 
+const FILES_CARD: Record<Lang, string> = {
+  az: "PDF birləşdir, ayır, fon sil — brauzerdə, pulsuz",
+  en: "Merge PDFs, split pages, remove a background — free, in your browser",
+  tr: "PDF birleştir, ayır, arka plan sil — ücretsiz, tarayıcıda",
+  ar: "ادمج PDF، افصل الصفحات، أزل الخلفية — مجاناً في المتصفح",
+  ru: "Объединяйте PDF, разделяйте страницы, удаляйте фон — бесплатно, в браузере",
+};
+
 const STATUS: Partial<Record<"nibras-arabic" | "nibras-pdf" | "nibras-qr" | "nibras-plans" | "nibras-docs", TKey>> = {
   "nibras-pdf": "soon",
   "nibras-qr": "soon",
@@ -316,6 +324,14 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
               <span className="nx-qr-text">
                 <b>Nibras QR</b>
                 <small>{QR_CARD[lang]}</small>
+              </span>
+              <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
+            </a>
+            <a className="nx-ai-bar nx-qr-bar" href={localeHref(lang, "/files")}>
+              <img src="/apps/nibras-pdf.jpg" alt="" width={36} height={36} />
+              <span className="nx-qr-text">
+                <b>Nibras Files</b>
+                <small>{FILES_CARD[lang]}</small>
               </span>
               <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
             </a>

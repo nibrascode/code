@@ -6813,3 +6813,52 @@ body.is-studio {
 .nx-bars > .nx-qr-bar > .nx-qr-text { display: flex; flex: 1; flex-direction: column; gap: 1px; white-space: normal; font-size: inherit; letter-spacing: normal; }
 .nx-qr-text b { font-size: 15px; font-weight: 750; letter-spacing: -0.03em; }
 .nx-qr-text small { font-size: 12px; font-weight: 500; color: rgb(244 247 255 / 0.65); line-height: 1.3; }
+
+.files-page { --radius-md: 10px; }
+.files-tabs, .files-jobs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+.files-tabs button, .files-jobs button {
+  border: 1px solid rgb(255 255 255 / 0.12);
+  background: rgb(255 255 255 / 0.04);
+  color: inherit;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font: inherit;
+  cursor: pointer;
+}
+.files-tabs button.is-on, .files-jobs button.is-on { background: #fff; color: #111; }
+.files-card {
+  border: 1px solid rgb(255 255 255 / 0.1);
+  background: rgb(255 255 255 / 0.03);
+  border-radius: 18px;
+  padding: 16px;
+}
+.files-drop {
+  display: grid;
+  gap: 4px;
+  border: 1px dashed rgb(255 255 255 / 0.2);
+  border-radius: 14px;
+  padding: 18px;
+  cursor: pointer;
+}
+.files-drop input { display: none; }
+.files-drop span { color: rgb(244 247 255 / 0.65); font-size: 13px; }
+.files-run {
+  margin-top: 14px;
+  border: 0;
+  border-radius: 12px;
+  background: #fff;
+  color: #111;
+  font: inherit;
+  font-weight: 700;
+  padding: 10px 16px;
+  cursor: pointer;
+}
+.files-run:disabled { opacity: 0.6; }
+.files-note { margin-top: 12px; font-size: 14px; }
+.files-lead { margin: 0 0 12px; color: rgb(244 247 255 / 0.7); }
+.files-preview {
+  margin-top: 12px;
+  max-width: 100%;
+  border-radius: 12px;
+  background: repeating-conic-gradient(#222 0 25%, #111 0 50%) 0 0 / 16px 16px;
+}
