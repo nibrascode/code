@@ -46,6 +46,11 @@ const PAGES: Record<string, Copy> = {
       description:
         "Nibras Code is an independent project making simple, useful mobile apps: Nibras Arabic, Nibras PDF, Nibras Docs, and Nibras Plans.",
     },
+    tr: {
+      title: "Nibras Code — sade uygulamalar, gerçek fayda",
+      description:
+        "Nibras Code bağımsız bir projedir. Günlük hayatı kolaylaştıran sade mobil uygulamalar hazırlar: Nibras Arabic, Nibras PDF, Nibras Docs ve Nibras Plans.",
+    },
     ar: {
       title: "Nibras Code — تطبيقات بسيطة، فائدة حقيقية",
       description:
@@ -789,9 +794,9 @@ export function pageUrl(pathname: string, lang: Lang) {
 
 export function langFromLocation(pathname: string, searchStr?: string): Lang {
   if (pathname === "/ru" || pathname.startsWith("/ru/")) return "ru";
-  if (pathname.startsWith("/en/")) return "en";
-  if (pathname.startsWith("/tr/")) return "tr";
-  if (pathname.startsWith("/ar/")) return "ar";
+  if (pathname === "/en" || pathname.startsWith("/en/")) return "en";
+  if (pathname === "/tr" || pathname.startsWith("/tr/")) return "tr";
+  if (pathname === "/ar" || pathname.startsWith("/ar/")) return "ar";
   return readLang(searchStr);
 }
 

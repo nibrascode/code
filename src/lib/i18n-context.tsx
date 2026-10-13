@@ -41,11 +41,14 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
   const urlLang = langFromLocation(pathname, searchStr);
   const pathLocked =
+    pathname === "/en" ||
+    pathname === "/tr" ||
+    pathname === "/ar" ||
     pathname === "/ru" ||
-    pathname.startsWith("/ru/") ||
     pathname.startsWith("/en/") ||
     pathname.startsWith("/tr/") ||
-    pathname.startsWith("/ar/");
+    pathname.startsWith("/ar/") ||
+    pathname.startsWith("/ru/");
   const urlHasLang = pathLocked || new URLSearchParams(searchStr.replace(/^\?/, "")).has("lang");
   const [lang, setLangState] = useState<Lang>(urlLang);
 
