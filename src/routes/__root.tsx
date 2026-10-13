@@ -48,7 +48,17 @@ export const Route = createRootRoute({
           href: "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Scheherazade+New:wght@500;700&family=Syne:wght@500;600;700;800&display=swap",
         },
       ],
-      scripts: seo.scripts,
+      scripts: [
+        {
+          src: "https://www.googletagmanager.com/gtag/js?id=G-F1DMB5BCCD",
+          async: true,
+        },
+        {
+          children:
+            "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-F1DMB5BCCD');",
+        },
+        ...seo.scripts,
+      ],
     };
   },
   component: RootDocument,
