@@ -10,7 +10,7 @@ export function stripLocalePrefix(pathname: string): { lang: Lang | null; path: 
 }
 
 export function isSplitPage(path: string) {
-  return path === "/about" || path === "/contact" || path === "/apps" || path === "/qr" || path === "/files" || /^\/apps\/[^/]+$/.test(path);
+  return path === "/about" || path === "/contact" || path === "/apps" || path === "/qr" || path === "/erase" || /^\/apps\/[^/]+$/.test(path);
 }
 
 export function homePath(lang: Lang) {

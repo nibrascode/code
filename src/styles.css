@@ -6856,9 +6856,17 @@ body.is-studio {
 .files-run:disabled { opacity: 0.6; }
 .files-note { margin-top: 12px; font-size: 14px; }
 .files-lead { margin: 0 0 12px; color: rgb(244 247 255 / 0.7); }
-.files-preview {
-  margin-top: 12px;
-  max-width: 100%;
+.files-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+.files-ghost {
+  border: 1px solid rgb(255 255 255 / 0.16);
+  background: transparent;
+  color: inherit;
   border-radius: 12px;
-  background: repeating-conic-gradient(#222 0 25%, #111 0 50%) 0 0 / 16px 16px;
+  padding: 10px 14px;
+  font: inherit;
+  cursor: pointer;
 }
+.files-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+.files-compare img { width: 100%; border-radius: 12px; background: #111; }
+.files-compare .is-cut { background: repeating-conic-gradient(#2a2a2a 0 25%, #161616 0 50%) 0 0 / 16px 16px; }
+@media (max-width: 640px) { .files-compare { grid-template-columns: 1fr; } }

@@ -581,26 +581,26 @@ const PAGES: Record<string, Copy> = {
         "Nibras QR — Android-приложение для QR-кодов и штрихкодов: 11 типов, дизайн с логотипом и рамкой, шаблоны и умный безопасный сканер. Основное работает офлайн. Проект Nibras Code.",
     },
   },
-  "/files": {
+  "/erase": {
     az: {
-      title: "Nibras Files — PDF və fon silmə",
-      description: "PDF birləşdir, ayır, şəkilləri PDF et və şəklin fonunu sil. Hamısı brauzerdə, fayl serverə getmir.",
+      title: "Nibras Erase — fon sil, şəffaf PNG",
+      description: "Şəkil yüklə, fonu sil, şəffaf PNG yüklə. Pulsuz, hesab olmadan, brauzerdə. Fayl serverə getmir.",
     },
     en: {
-      title: "Nibras Files — PDF tools and background removal",
-      description: "Merge PDFs, split pages, turn images into a PDF, and remove a background. All in your browser.",
+      title: "Nibras Erase — remove background, free PNG",
+      description: "Upload a photo, remove the background, download a transparent PNG. Free, no account, in your browser.",
     },
     tr: {
-      title: "Nibras Files — PDF ve arka plan silme",
-      description: "PDF birleştirin, ayırın, resimleri PDF yapın ve arka planı silin. Hepsi tarayıcıda.",
+      title: "Nibras Erase — arka plan sil, şeffaf PNG",
+      description: "Fotoğraf yükle, arka planı sil, şeffaf PNG indir. Ücretsiz, hesap yok, tarayıcıda.",
     },
     ar: {
-      title: "Nibras Files — أدوات PDF وإزالة الخلفية",
-      description: "ادمج ملفات PDF، افصل الصفحات، حوّل الصور إلى PDF، وأزل الخلفية. كل ذلك في المتصفح.",
+      title: "Nibras Erase — إزالة الخلفية",
+      description: "ارفع صورة، أزل الخلفية، نزّل PNG شفافاً. مجاناً، بلا حساب، في المتصفح.",
     },
     ru: {
-      title: "Nibras Files — PDF и удаление фона",
-      description: "Объединяйте PDF, разделяйте страницы, делайте PDF из фото и удаляйте фон. Всё в браузере.",
+      title: "Nibras Erase — удалить фон",
+      description: "Загрузите фото, уберите фон, скачайте прозрачный PNG. Бесплатно, без аккаунта, в браузере.",
     },
   },
   "/qr": {
@@ -869,7 +869,7 @@ function ogImage(path: string) {
   const bare = stripLocalePrefix(path).path;
   if (bare === "/ai" || bare.startsWith("/ai/")) return `${SITE}/og-ai.jpg`;
   if (bare === "/qr" || bare.startsWith("/qr/")) return `${SITE}/og-qr.jpg`;
-  if (bare === "/files" || bare.startsWith("/files/")) return `${SITE}/og-tools.jpg`;
+  if (bare === "/erase" || bare.startsWith("/erase/")) return `${SITE}/og-tools.jpg`;
   if (bare === "/tools" || bare.startsWith("/tools/")) return `${SITE}/og-tools.jpg`;
   if (bare === "/faq" || bare.startsWith("/faq/")) return `${SITE}/og-faq.jpg`;
   if (bare === "/programming" || bare.startsWith("/programming/")) return `${SITE}/og-programming.jpg`;
