@@ -43,6 +43,14 @@ const IMAGE_CARD: Record<Lang, string> = {
   ru: "Сожмите фото, переведите JPG, PNG и WebP",
 };
 
+const CALC_CARD: Record<Lang, string> = {
+  az: "Elmi hesab, vahid, kredit və BKİ",
+  en: "Scientific math, units, loan and BMI",
+  tr: "Bilimsel hesap, birim, kredi ve VKİ",
+  ar: "حساب علمي ووحدات وقرض ومؤشر كتلة",
+  ru: "Научный счёт, единицы, кредит и ИМТ",
+};
+
 const STATUS: Partial<Record<"nibras-arabic" | "nibras-pdf" | "nibras-qr" | "nibras-plans" | "nibras-docs", TKey>> = {
   "nibras-pdf": "soon",
   "nibras-qr": "soon",
@@ -384,6 +392,17 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
               <span className="nx-qr-text">
                 <b>{lang === "az" ? "Şəkil sıx" : lang === "tr" ? "Foto sıkıştır" : lang === "ar" ? "ضغط الصورة" : lang === "ru" ? "Сжать фото" : "Compress photo"}</b>
                 <small>{IMAGE_CARD[lang]}</small>
+              </span>
+              <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
+            </a>
+            <a className="nx-ai-bar nx-qr-bar" href={localeHref(lang, "/calc")}>
+              <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="4" y="2.5" width="16" height="19" rx="2.2" fill="none" stroke="currentColor" strokeWidth="1.6" />
+                <path fill="currentColor" d="M7 5.5h10v3.2H7zM7.2 11h2.3v2.2H7.2zm3.6 0h2.3v2.2h-2.3zm3.7 0H17v2.2h-2.5zM7.2 14.6h2.3V16.8H7.2zm3.6 0h2.3V16.8h-2.3zm3.7 0H17V16.8h-2.5z" />
+              </svg>
+              <span className="nx-qr-text">
+                <b>ProCalc</b>
+                <small>{CALC_CARD[lang]}</small>
               </span>
               <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
             </a>
