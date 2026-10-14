@@ -483,6 +483,37 @@
     .sqform a.dl[hidden], .sqform .after-fig[hidden] { display: none !important; }
     .sqform .pick input { display: none; }
     .sqform .note { min-height: 1.2em; margin-top: 8px; color: #f3e7c4; font-size: 12.5px; font-weight: 650; }
+
+    .msg.calccard { max-width: min(520px, 100%); padding: 0; background: transparent; border: 0; white-space: normal; }
+    .msg.calccard > :not(.calcform) { display: none; }
+    .calcform {
+      padding: 12px; border-radius: 20px;
+      background:
+        linear-gradient(180deg, rgba(16, 20, 36, .96), rgba(8, 10, 18, .96)) padding-box,
+        linear-gradient(135deg, #a5b4fc, rgba(126, 182, 255, .55) 48%, rgba(255,255,255,.14)) border-box;
+      border: 1px solid transparent;
+    }
+    .calcform .head { display: flex; gap: 10px; align-items: center; }
+    .calcform .mark {
+      width: 36px; height: 36px; border-radius: 12px; display: grid; place-items: center;
+      background: radial-gradient(circle at 30% 20%, #dbe4ff, #6366f1 46%, #312e81);
+      color: #fff; font-size: 12px; font-weight: 800;
+    }
+    .calcform .ttl { font-size: 15px; font-weight: 750; color: #f4f7ff; }
+    .calcform .sub { margin-top: 2px; font-size: 12px; color: #b7c3de; }
+    .calcform .res { margin-top: 12px; font-size: clamp(26px, 6vw, 34px); font-weight: 750; letter-spacing: -0.04em; color: #fff; word-break: break-all; }
+    .calcform .expr { margin-top: 2px; color: #b7c3de; font-size: 13px; word-break: break-all; }
+    .calcform .row { display: flex; gap: 8px; margin-top: 12px; }
+    .calcform input {
+      flex: 1; min-width: 0; min-height: 40px; border-radius: 12px; padding: 0 12px;
+      border: 1px solid rgba(255,255,255,.14); background: rgba(0,0,0,.28); color: #fff; font: inherit;
+    }
+    .calcform .go {
+      border: 0; min-height: 40px; padding: 0 14px; border-radius: 12px; cursor: pointer;
+      background: linear-gradient(180deg, #fff, #e7eaf2); color: #111; font: inherit; font-weight: 750;
+    }
+    .calcform .open { display: inline-block; margin-top: 10px; color: #c9d4ff; font-size: 12.5px; font-weight: 700; text-decoration: none; }
+    .calcform .note { min-height: 1.2em; margin-top: 8px; color: #f3e7c4; font-size: 12.5px; font-weight: 650; }
     .mode {
       margin: 0 4px 8px;
       color: #9fd6ff;
@@ -934,6 +965,243 @@
       const bare = s.replace(/\b(bu|bunu|onu|zehmet|olmasa|please|this|my|bir|de|da|ele|bele|artiq|indi|sekli|sekil|foto)\b/g, " ").replace(/[^a-z0-9]+/g, " ").trim();
       return /^(six(?:sin|dir|in|ib|iram)?|compress|squeeze|shrink)$/.test(bare);
     }
+
+    function foldCalc(s) {
+      return String(s || "").toLowerCase()
+        .replace(/ı/g, "i").replace(/ə/g, "e").replace(/ö/g, "o").replace(/ü/g, "u")
+        .replace(/ş/g, "s").replace(/ç/g, "c").replace(/ğ/g, "g");
+    }
+    function tidyCalc(n) {
+      if (typeof n !== "number" || !isFinite(n)) return null;
+      const t = Number(n.toPrecision(12));
+      return Object.is(t, -0) ? 0 : t;
+    }
+    function showCalc(n) {
+      const t = tidyCalc(n);
+      return t === null ? null : String(t);
+    }
+    function factCalc(n) {
+      if (n < 0 || !Number.isInteger(n)) return NaN;
+      if (n > 170) return Infinity;
+      let r = 1;
+      for (let i = 2; i <= n; i++) r *= i;
+      return r;
+    }
+    function evalCalc(raw) {
+      let expr = String(raw || "").replace(/\s+/g, "");
+      if (!expr) return null;
+      expr = expr.replace(/(sin|cos|tan|log|ln|sqrt)(?=\d)/g, "$1(");
+      const openCount = (expr.match(/\(/g) || []).length;
+      const closeCount = (expr.match(/\)/g) || []).length;
+      if (openCount > closeCount) expr += ")".repeat(openCount - closeCount);
+      const tokens = [];
+      for (let i = 0; i < expr.length; ) {
+        const c = expr[i];
+        if ((c >= "0" && c <= "9") || c === ".") {
+          let n = "";
+          while (i < expr.length && ((expr[i] >= "0" && expr[i] <= "9") || expr[i] === ".")) n += expr[i++];
+          const v = Number(n);
+          if (!isFinite(v)) return null;
+          tokens.push(["n", v]);
+          continue;
+        }
+        if (c === "π") { tokens.push(["id", "pi"]); i++; continue; }
+        if (c >= "a" && c <= "z") {
+          let id = "";
+          while (i < expr.length && /[a-z]/.test(expr[i])) id += expr[i++];
+          tokens.push(["id", id]);
+          continue;
+        }
+        if ("+-*/^()%!".indexOf(c) >= 0) { tokens.push(["op", c]); i++; continue; }
+        if (c === "×") { tokens.push(["op", "*"]); i++; continue; }
+        if (c === "÷") { tokens.push(["op", "/"]); i++; continue; }
+        return null;
+      }
+      if (!tokens.length) return null;
+      let p = 0;
+      const peek = () => tokens[p];
+      const eat = () => tokens[p++];
+      const startsValue = (tok) => !!tok && (tok[0] === "n" || tok[0] === "id" || (tok[0] === "op" && tok[1] === "("));
+      function applyFn(name, x) {
+        const rad = (x * Math.PI) / 180;
+        if (name === "sin") return Math.sin(rad);
+        if (name === "cos") return Math.cos(rad);
+        if (name === "tan") return Math.tan(rad);
+        if (name === "log") return Math.log10(x);
+        if (name === "ln") return Math.log(x);
+        if (name === "sqrt") return Math.sqrt(x);
+        return NaN;
+      }
+      function parseAdd() {
+        let left = parseMul();
+        while (peek() && peek()[0] === "op" && (peek()[1] === "+" || peek()[1] === "-")) {
+          const op = eat()[1];
+          const right = parseMul();
+          left = op === "+" ? left + right : left - right;
+        }
+        return left;
+      }
+      function parseMul() {
+        let left = parsePow();
+        while (peek() && ((peek()[0] === "op" && (peek()[1] === "*" || peek()[1] === "/")) || startsValue(peek()))) {
+          if (peek()[0] === "op" && (peek()[1] === "*" || peek()[1] === "/")) {
+            const op = eat()[1];
+            const right = parsePow();
+            left = op === "*" ? left * right : left / right;
+          } else left *= parsePow();
+        }
+        return left;
+      }
+      function parsePow() {
+        const left = parseUnary();
+        if (peek() && peek()[0] === "op" && peek()[1] === "^") { eat(); return Math.pow(left, parsePow()); }
+        return left;
+      }
+      function parseUnary() {
+        if (peek() && peek()[0] === "op" && (peek()[1] === "+" || peek()[1] === "-")) {
+          const op = eat()[1];
+          const v = parseUnary();
+          return op === "-" ? -v : v;
+        }
+        return parsePost();
+      }
+      function parsePrimary() {
+        const tok = eat();
+        if (!tok) throw new Error("end");
+        if (tok[0] === "n") return tok[1];
+        if (tok[0] === "op" && tok[1] === "(") {
+          const v = parseAdd();
+          if (!peek() || peek()[1] !== ")") throw new Error(")");
+          eat();
+          return v;
+        }
+        if (tok[0] === "id") {
+          if (tok[1] === "pi") return Math.PI;
+          if (tok[1] === "e") return Math.E;
+          if (["sin", "cos", "tan", "log", "ln", "sqrt"].indexOf(tok[1]) >= 0) {
+            if (!peek() || peek()[1] !== "(") throw new Error("(");
+            eat();
+            const arg = parseAdd();
+            if (!peek() || peek()[1] !== ")") throw new Error(")");
+            eat();
+            return applyFn(tok[1], arg);
+          }
+        }
+        throw new Error("tok");
+      }
+      function parsePost() {
+        let v = parsePrimary();
+        while (peek() && peek()[0] === "op" && (peek()[1] === "%" || peek()[1] === "!")) {
+          const op = eat()[1];
+          if (op === "%") v /= 100;
+          else v = factCalc(v);
+        }
+        return v;
+      }
+      try {
+        const out = parseAdd();
+        if (peek()) return null;
+        return showCalc(out);
+      } catch (e) { return null; }
+    }
+    const CALC_UNITS = [
+      ["kilometr", "length", 1000, "km"], ["km", "length", 1000, "km"],
+      ["santimetr", "length", 0.01, "sm"], ["sm", "length", 0.01, "sm"], ["cm", "length", 0.01, "sm"],
+      ["millimetr", "length", 0.001, "mm"], ["mm", "length", 0.001, "mm"],
+      ["metr", "length", 1, "m"], ["m", "length", 1, "m"],
+      ["mil", "length", 1609.344, "mil"], ["fut", "length", 0.3048, "fut"], ["ft", "length", 0.3048, "fut"],
+      ["duym", "length", 0.0254, "in"], ["inch", "length", 0.0254, "in"],
+      ["kiloqram", "weight", 1, "kq"], ["kq", "weight", 1, "kq"], ["kg", "weight", 1, "kq"],
+      ["qram", "weight", 0.001, "q"], ["gram", "weight", 0.001, "q"],
+      ["ton", "weight", 1000, "t"], ["funt", "weight", 0.45359237, "lb"], ["lb", "weight", 0.45359237, "lb"],
+      ["terabayt", "data", 1073741824, "TB"], ["tb", "data", 1073741824, "TB"],
+      ["giqabayt", "data", 1048576, "GB"], ["gb", "data", 1048576, "GB"],
+      ["meqabayt", "data", 1024, "MB"], ["mb", "data", 1024, "MB"],
+      ["kilobayt", "data", 1, "KB"], ["kb", "data", 1, "KB"]
+    ].sort(function (a, b) { return b[0].length - a[0].length; });
+    function calcNums(s) { return (s.match(/\d+(?:[.,]\d+)?/g) || []).map(function (n) { return Number(n.replace(",", ".")); }); }
+    function solveCalc(raw) {
+      const text = String(raw || "").trim();
+      const s = foldCalc(text).replace(/\byuzde\b/g, "%");
+      if (!text) return null;
+      const nums = calcNums(s);
+      if ((/(bki|bmi)/.test(s) || (/boy|height/.test(s) && /ceki|kilo|weight/.test(s))) && nums.length >= 2) {
+        let h = nums[0] > 3 ? nums[0] / 100 : nums[0];
+        const w = nums[1];
+        if (h > 0 && w > 0) {
+          const bmi = w / (h * h);
+          const band = bmi < 18.5 ? "low" : bmi < 25 ? "ok" : bmi < 30 ? "high" : "obese";
+          return { expr: text, result: showCalc(bmi), note: "bmi:" + band };
+        }
+      }
+      if (/(kredit|loan|ayliq)/.test(s) && /(ay|month)/.test(s) && nums.length >= 3) {
+        const P = nums[0], rate = nums[1], n = nums[2];
+        if (n > 0) {
+          const r = rate / 12 / 100;
+          const emi = r === 0 ? P / n : (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+          return { expr: text, result: showCalc(emi), note: "loan" };
+        }
+      }
+      if (/(endirim|discount)/.test(s) && nums.length >= 2) {
+        const price = nums[0], d = nums[1], tax = nums[2] || 0;
+        return { expr: text, result: showCalc(price * (1 - d / 100) * (1 + tax / 100)), note: "off" };
+      }
+      const temps = [];
+      [["fahrenheit", "F"], ["farenheyt", "F"], ["selsi", "C"], ["celsius", "C"], ["kelvin", "K"]].forEach(function (pair) {
+        if (s.indexOf(pair[0]) >= 0 && temps.indexOf(pair[1]) < 0) temps.push(pair[1]);
+      });
+      if (temps.length && nums.length) {
+        const from = temps[0];
+        const to = temps[1] || (from === "C" ? "F" : "C");
+        let celsius = nums[0];
+        if (from === "F") celsius = (nums[0] - 32) * 5 / 9;
+        if (from === "K") celsius = nums[0] - 273.15;
+        let out = celsius;
+        if (to === "F") out = celsius * 9 / 5 + 32;
+        if (to === "K") out = celsius + 273.15;
+        return { expr: nums[0] + " " + from, result: showCalc(out) + " " + to, note: "temp" };
+      }
+      const padded = " " + s + " ";
+      const hits = [];
+      for (let i = 0; i < padded.length; i++) {
+        for (let u = 0; u < CALC_UNITS.length; u++) {
+          const name = CALC_UNITS[u][0];
+          if (padded.slice(i, i + name.length) !== name) continue;
+          if (/[a-z0-9]/.test(padded.charAt(i - 1)) || /[a-z0-9]/.test(padded.charAt(i + name.length))) continue;
+          hits.push(CALC_UNITS[u]);
+          i += name.length - 1;
+          break;
+        }
+      }
+      if (nums.length && hits.length >= 2 && hits[0][1] === hits[1][1]) {
+        return { expr: nums[0] + " " + hits[0][3], result: showCalc(nums[0] * hits[0][2] / hits[1][2]) + " " + hits[1][3], note: "unit" };
+      }
+      let percent = s.match(/(\d+(?:[.,]\d+)?)\s*(?:faiz\w*|percent\w*|%)\D{0,16}(\d+(?:[.,]\d+)?)/);
+      if (percent) return { expr: percent[1] + "% × " + percent[2], result: showCalc(Number(percent[1].replace(",", ".")) / 100 * Number(percent[2].replace(",", "."))), note: "percent" };
+      percent = s.match(/(\d+(?:[.,]\d+)?)\D{1,16}(\d+(?:[.,]\d+)?)\s*(?:faiz\w*|percent\w*|%)/);
+      if (percent) return { expr: percent[1] + " × " + percent[2] + "%", result: showCalc(Number(percent[1].replace(",", ".")) * Number(percent[2].replace(",", ".")) / 100), note: "percent" };
+      let expr = s;
+      expr = expr.replace(/(\d)\s*(?:ustegel|ustune|plus|arti)\s*(?=\d)/g, "$1+");
+      expr = expr.replace(/(\d)\s*(?:cixar|eksi|minus)\s*(?=\d)/g, "$1-");
+      expr = expr.replace(/(\d)\s*(?:vurulsun|vur|carpi)\s*(?=\d)/g, "$1*");
+      expr = expr.replace(/(\d)\s*(?:bolunsun|bol)\s*(?=\d)/g, "$1/");
+      expr = expr.replace(/\b(necedir|nedir|ne kadar|hesabla|hesab et|hesapla|calculate|compute|please|procalc|kalkulyator|calculator|cavab|sonuc|nece|eder|necedi)\b/g, " ");
+      expr = expr.replace(/,/g, ".").replace(/×/g, "*").replace(/÷/g, "/").replace(/π/g, "pi");
+      if (/[a-z]{3,}/.test(expr.replace(/\b(sin|cos|tan|log|ln|sqrt|pi)\b/g, ""))) return null;
+      expr = expr.replace(/\s+/g, "");
+      if (!/\d/.test(expr)) return null;
+      if (!/[+\-*/^%!]/.test(expr) && !/(sin|cos|tan|log|ln|sqrt)/.test(expr)) return null;
+      const value = evalCalc(expr);
+      if (value === null) return null;
+      return { expr: expr, result: value, note: "math" };
+    }
+    function wantsCalc(text) {
+      const raw = String(text || "").trim();
+      if (!raw || raw.length > 240 || wantsImage(raw)) return false;
+      const s = foldCalc(raw);
+      if (/(procalc|kalkulyator|calculator|hesabla|hesab et|hesapla|calculate|compute)/.test(s) || /калькулятор|посчитай|احسب/.test(raw)) return true;
+      return !!solveCalc(raw);
+    }
     function escapeHtml(text) {
       const map = { "&": "amp", "<": "lt", ">": "gt" };
       return String(text).replace(/[&<>]/g, function (ch) { return "&" + map[ch] + ";"; });
@@ -1105,6 +1373,10 @@
       return out + plain(text.slice(last), last > 0, false);
     }
     function fillBubble(el, text) {
+      if (String(text || "").indexOf("::calc::") === 0) {
+        mountCalc(el, text.slice(8));
+        return;
+      }
       if (String(text || "").indexOf("::sqform::") >= 0) {
         mountSqueeze(el);
         return;
@@ -1434,6 +1706,58 @@
       paint();
       el.appendChild(box);
     }
+
+    function calcCopy() {
+      const all = {
+        az: { title: "ProCalc", sub: "Hesab cihazda gedir.", ph: "2+2, 5 km, 15 faiz", go: "Hesabla", open: "ProCalc-ı aç", fail: "Bunu hesablaya bilmədim.", bmi: "BKİ", loan: "Aylıq ödəniş", off: "Endirimdən sonra", temp: "Temperatur", unit: "Vahid", percent: "Faiz", math: "İfadə", low: "Çəki azlığı", ok: "Normal", high: "Artıq çəki", obese: "Piylənmə" },
+        en: { title: "ProCalc", sub: "The math stays on this device.", ph: "2+2, 5 km, 15 percent", go: "Calculate", open: "Open ProCalc", fail: "I could not calculate that.", bmi: "BMI", loan: "Monthly payment", off: "After discount", temp: "Temperature", unit: "Unit", percent: "Percent", math: "Expression", low: "Underweight", ok: "Normal", high: "Overweight", obese: "Obese" },
+        tr: { title: "ProCalc", sub: "Hesap cihazda yapılır.", ph: "2+2, 5 km, yüzde 15", go: "Hesapla", open: "ProCalc'ı aç", fail: "Bunu hesaplayamadım.", bmi: "VKİ", loan: "Aylık ödeme", off: "İndirimden sonra", temp: "Sıcaklık", unit: "Birim", percent: "Yüzde", math: "İfade", low: "Zayıf", ok: "Normal", high: "Fazla kilolu", obese: "Obez" },
+        ar: { title: "ProCalc", sub: "الحساب يبقى على الجهاز.", ph: "2+2 أو 5 كم", go: "احسب", open: "افتح ProCalc", fail: "تعذّر حساب هذا.", bmi: "مؤشر الكتلة", loan: "القسط الشهري", off: "بعد الخصم", temp: "الحرارة", unit: "الوحدة", percent: "النسبة", math: "عبارة", low: "نقص", ok: "طبيعي", high: "زيادة", obese: "سمنة" },
+        ru: { title: "ProCalc", sub: "Счёт идёт на устройстве.", ph: "2+2, 5 км, 15 процентов", go: "Считать", open: "Открыть ProCalc", fail: "Это не посчиталось.", bmi: "ИМТ", loan: "Платёж в месяц", off: "После скидки", temp: "Температура", unit: "Единица", percent: "Процент", math: "Выражение", low: "Недостаток", ok: "Норма", high: "Избыток", obese: "Ожирение" }
+      };
+      return all[uiLangCode] || all.az;
+    }
+    function calcNote(hit, c) {
+      if (!hit) return "";
+      if (hit.note.indexOf("bmi:") === 0) return c.bmi + " · " + (c[hit.note.slice(4)] || "");
+      return c[hit.note] || "";
+    }
+    function mountCalc(el, query) {
+      el.classList.add("calccard");
+      const c = calcCopy();
+      const box = document.createElement("div");
+      box.className = "calcform";
+      box.innerHTML = '<div class="head"><div class="mark">fx</div><div><div class="ttl"></div><div class="sub"></div></div></div><div class="res"></div><div class="expr"></div><form class="row"><input type="text" enterkeyhint="done" /><button class="go" type="submit"></button></form><a class="open" href="/calc"></a><div class="note"></div>';
+      const title = box.querySelector(".ttl");
+      const sub = box.querySelector(".sub");
+      const res = box.querySelector(".res");
+      const expr = box.querySelector(".expr");
+      const input = box.querySelector("input");
+      const go = box.querySelector(".go");
+      const open = box.querySelector(".open");
+      const note = box.querySelector(".note");
+      title.textContent = c.title;
+      sub.textContent = c.sub;
+      go.textContent = c.go;
+      open.textContent = c.open;
+      input.placeholder = c.ph;
+      input.value = query || "";
+      function show(q) {
+        const hit = solveCalc(q);
+        const figure = /\d/.test(q || "");
+        expr.textContent = hit ? hit.expr : "";
+        res.textContent = hit ? hit.result : (figure ? c.fail : "0");
+        note.textContent = hit ? calcNote(hit, c) : "";
+      }
+      show(query || "");
+      box.querySelector("form").addEventListener("submit", function (event) {
+        event.preventDefault();
+        show(input.value.trim());
+        const scroller = document.getElementById("msgs");
+        if (scroller) scroller.scrollTop = scroller.scrollHeight;
+      });
+      el.appendChild(box);
+    }
     function qrPageUrl(kind, data) {
       const u = new URL("https://www.nibrascode.com/qr");
       u.searchParams.set("type", kind);
@@ -1463,7 +1787,7 @@
     const IC_SHARE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="M8.3 10.7l7.4-4.4M8.3 13.3l7.4 4.4"/></svg>';
     function plainAnswer(raw) {
       let s = String(raw || "").replace(/\r/g, "");
-      s = s.replace(/^::ctx:: [^\n]*$/gm, "").replace(/^::game:: [^\n]*$/gm, "").replace(/::qrform::[a-z]*/g, "").replace(/::sqform::/g, "");
+      s = s.replace(/^::ctx:: [^\n]*$/gm, "").replace(/^::game:: [^\n]*$/gm, "").replace(/::qrform::[a-z]*/g, "").replace(/::sqform::/g, "").replace(/::calc::([^\n]*)/g, function (_, q) { const hit = solveCalc(q); return hit ? hit.expr + " = " + hit.result : q; });
       s = s.replace(/(^|\n)::sug::\n[\s\S]*?\n::\/sug::(?=\n|$)/g, "$1");
       s = s.replace(/(^|\n)::(?:notice|tafsir [a-z]+|ayah(?: warn)?(?: [0-9:\-]+)?)::\n([\s\S]*?)\n::\/(?:notice|tafsir|ayah)::(?=\n|$)/g, function (all, pre, body) {
         return pre + body.split("\n").map(function (ln) { return ln.replace(/^::(?:ar|tl|tv|src|tr)::[ \t]*/, ""); }).join("\n");
@@ -1790,7 +2114,7 @@
       msgs.appendChild(el);
       armCode(el);
       if (restore) return el; // söhbət bərpasında renderItem özü sona çəkir
-      if (String(text || "").indexOf("::sqform::") >= 0 || kind.charAt(0) !== "b") msgs.scrollTop = msgs.scrollHeight;
+      if (String(text || "").indexOf("::sqform::") >= 0 || String(text || "").indexOf("::calc::") === 0 || kind.charAt(0) !== "b") msgs.scrollTop = msgs.scrollHeight;
       else if (kind.charAt(0) === "b") revealAnswer(el);
       return el;
     }
@@ -1810,6 +2134,14 @@
         thumb.classList.remove("on");
         thumb.removeAttribute("src");
         setMode("chat");
+        return;
+      }
+      if (wantsCalc(m)) {
+        inp.value = "";
+        bubble(m, "u");
+        rec("u", m, "", 0);
+        bubble("::calc::" + m, "b");
+        rec("b", "::calc::" + m, "", 0);
         return;
       }
       const useImage = mode === "image" || pendingImage || wantsImage(m);
