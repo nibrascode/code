@@ -921,12 +921,14 @@
       return /(şəkil|sekil|resim).{0,30}(hazırla|hazirla|yarat|çək|cek|düzəlt|duzelt|çiz|ciz|et\b)|şəkil hazırla|sekil hazirla|draw an image|generate an image/i.test(text);
     }
     function wantsSqueeze(text, hasImage) {
-      const s = String(text || "").trim();
-      const verb = /(^|[^\p{L}\p{N}])(sıx|compress|sıkıştır|sikistir|küçült|kucult|сожми|сожмите|اضغط)(?=$|[^\p{L}\p{N}])/iu.test(s);
-      const photo = /(şəkil|sekil|şəkl|foto|photo|image|resim|картин|фото|صور)/i.test(s);
-      if (hasImage && (verb || /^six[.!?]?$/i.test(s)) && s.length <= 120) return true;
-      if (/^(sıx|compress|sıkıştır|сожми)[.!?]?$/iu.test(s)) return true;
-      return verb && photo;
+      const raw = String(text || "").trim();
+      const s = raw.toLowerCase()
+        .replace(/ı/g, "i").replace(/ə/g, "e").replace(/ö/g, "o").replace(/ü/g, "u")
+        .replace(/ş/g, "s").replace(/ç/g, "c").replace(/ğ/g, "g");
+      const verb = /(^|[^a-z0-9])(six(?:sin|dir)?|compress|sikistir|kucult)(?=$|[^a-z0-9])/.test(s) || /сожми|сожмите|اضغط/.test(raw);
+      const photo = /(sekil|sekl|foto|photo|image|resim)/.test(s) || /картин|фото|صور/.test(raw);
+      if (/^(six(?:sin|dir)?|compress|sikistir|kucult)[.!?]?$/.test(s) || /^(сожми|сожмите|اضغط)[.!?]?$/.test(raw)) return true;
+      return verb && (photo || hasImage);
     }
     function escapeHtml(text) {
       const map = { "&": "amp", "<": "lt", ">": "gt" };
