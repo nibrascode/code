@@ -121,6 +121,39 @@ function HomeDrift() {
         r,
       };
     });
+    const keepOffCopy = () => {
+      const copy = box.parentElement?.querySelector(".nx-hero-copy");
+      if (!copy) return;
+      const host = box.getBoundingClientRect();
+      const area = copy.getBoundingClientRect();
+      const pad = 18;
+      const left = area.left - host.left - pad;
+      const top = area.top - host.top - pad;
+      const right = area.right - host.left + pad;
+      const bottom = area.bottom - host.top + pad;
+      if (right - left < 40 || bottom - top < 40) return;
+      for (const part of parts) {
+        if (part.x <= left || part.x >= right || part.y <= top || part.y >= bottom) continue;
+        const toLeft = part.x - left;
+        const toRight = right - part.x;
+        const toTop = part.y - top;
+        const toBottom = bottom - part.y;
+        const near = Math.min(toLeft, toRight, toTop, toBottom);
+        if (near === toLeft) {
+          part.x = left;
+          part.vx = -Math.abs(part.vx);
+        } else if (near === toRight) {
+          part.x = right;
+          part.vx = Math.abs(part.vx);
+        } else if (near === toTop) {
+          part.y = top;
+          part.vy = -Math.abs(part.vy);
+        } else {
+          part.y = bottom;
+          part.vy = Math.abs(part.vy);
+        }
+      }
+    };
     const paint = () => {
       parts.forEach((part, index) => {
         const node = nodes.current[index];
@@ -128,6 +161,7 @@ function HomeDrift() {
       });
     };
     if (reduce) {
+      keepOffCopy();
       paint();
       return;
     }
@@ -181,9 +215,11 @@ function HomeDrift() {
           b.vy += rel * ny;
         }
       }
+      keepOffCopy();
       paint();
       frame = requestAnimationFrame(tick);
     };
+    keepOffCopy();
     paint();
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);

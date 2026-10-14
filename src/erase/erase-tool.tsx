@@ -139,7 +139,7 @@ export function EraseTool() {
   const [busy, setBusy] = useState(false);
   const [progress, setProgress] = useState(0);
   const [note, setNote] = useState("");
-  const [quality, setQuality] = useState<Quality>("large");
+  const [quality, setQuality] = useState<Quality>("medium");
   const [bg, setBg] = useState<Bg>("clear");
   const [color, setColor] = useState("#f4f1ea");
   const [format, setFormat] = useState<Format>("png");
