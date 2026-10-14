@@ -433,6 +433,56 @@
     .qrform a.qropen { background: transparent; color: #8fb4ff; border: 1px solid #8fb4ff; }
     .qrform .err { margin-top: 8px; color: #ffb4b4; font-size: 12px; }
     .qrform img.shot { width: min(200px, 100%); margin: 12px auto 0; border-radius: 14px; background: #fff; }
+    .msg.sqcard { max-width: min(520px, 100%); padding: 0; background: transparent; border: 0; white-space: normal; }
+    .msg.sqcard > :not(.sqform) { display: none; }
+    .sqform {
+      padding: 12px; border-radius: 20px;
+      background:
+        linear-gradient(180deg, rgba(16, 20, 36, .96), rgba(8, 10, 18, .96)) padding-box,
+        linear-gradient(135deg, #f0d48a, rgba(126, 182, 255, .5) 48%, rgba(255,255,255,.14)) border-box;
+      border: 1px solid transparent;
+    }
+    .sqform .head { display: flex; gap: 10px; align-items: center; }
+    .sqform .mark {
+      width: 36px; height: 36px; border-radius: 12px; display: grid; place-items: center;
+      background: radial-gradient(circle at 30% 20%, #ffe7a8, #c8922a 46%, #6d4a12);
+      color: #1a1206; font-size: 11px; font-weight: 800;
+    }
+    .sqform .ttl { font-size: 15px; font-weight: 750; color: #f4f7ff; }
+    .sqform .sub { margin-top: 2px; font-size: 12px; color: #b7c3de; }
+    .sqform .stage[hidden] { display: none !important; }
+    .sqform .stage {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; min-height: 120px;
+      border-radius: 14px; overflow: hidden;
+      background: repeating-conic-gradient(#1b2333 0 25%, #10151f 0 50%) 0 0 / 16px 16px;
+    }
+    .sqform .stage.one { grid-template-columns: 1fr; }
+    .sqform .stage figure { margin: 0; position: relative; }
+    .sqform .stage img { width: 100%; height: 180px; object-fit: contain; display: block; }
+    .sqform .stage figcaption {
+      position: absolute; left: 8px; top: 8px; padding: 2px 8px; border-radius: 999px;
+      background: rgba(6, 8, 14, .72); color: #f4f7ff; font-size: 11px;
+    }
+    .sqform .kinds { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 10px; }
+    .sqform .kinds span, .sqform .q span { min-width: 74px; color: #9aa6c3; font-size: 12px; }
+    .sqform .kinds button {
+      min-height: 30px; padding: 0 10px; border: 0; border-radius: 999px;
+      background: rgba(255,255,255,.06); color: #e8eeff; font: inherit; font-size: 12.5px; font-weight: 700; cursor: pointer;
+    }
+    .sqform .kinds button.on { background: #fff; color: #111; }
+    .sqform .q { display: flex; gap: 8px; align-items: center; margin-top: 10px; }
+    .sqform .q input { flex: 1; accent-color: #f0d48a; }
+    .sqform .acts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .sqform .go, .sqform .pick, .sqform a.dl {
+      min-height: 36px; padding: 0 14px; border-radius: 12px; font: inherit; font-weight: 750;
+      display: inline-flex; align-items: center; cursor: pointer; text-decoration: none;
+    }
+    .sqform .go { border: 0; background: linear-gradient(180deg, #fff, #e7eaf2); color: #111; }
+    .sqform .pick, .sqform a.dl { border: 1px solid rgba(255,255,255,.16); background: transparent; color: #f4f7ff; }
+    .sqform .go:disabled { opacity: .5; }
+    .sqform a.dl[hidden], .sqform .after-fig[hidden] { display: none !important; }
+    .sqform .pick input { display: none; }
+    .sqform .note { min-height: 1.2em; margin-top: 8px; color: #f3e7c4; font-size: 12.5px; font-weight: 650; }
     .mode {
       margin: 0 4px 8px;
       color: #9fd6ff;
@@ -870,6 +920,14 @@
     function wantsImage(text) {
       return /(şəkil|sekil|resim).{0,30}(hazırla|hazirla|yarat|çək|cek|düzəlt|duzelt|çiz|ciz|et\b)|şəkil hazırla|sekil hazirla|draw an image|generate an image/i.test(text);
     }
+    function wantsSqueeze(text, hasImage) {
+      const s = String(text || "").trim();
+      const verb = /(^|[^\p{L}\p{N}])(sıx|compress|sıkıştır|sikistir|küçült|kucult|сожми|сожмите|اضغط)(?=$|[^\p{L}\p{N}])/iu.test(s);
+      const photo = /(şəkil|sekil|şəkl|foto|photo|image|resim|картин|фото|صور)/i.test(s);
+      if (hasImage && (verb || /^six[.!?]?$/i.test(s)) && s.length <= 120) return true;
+      if (/^(sıx|compress|sıkıştır|сожми)[.!?]?$/iu.test(s)) return true;
+      return verb && photo;
+    }
     function escapeHtml(text) {
       const map = { "&": "amp", "<": "lt", ">": "gt" };
       return String(text).replace(/[&<>]/g, function (ch) { return "&" + map[ch] + ";"; });
@@ -1041,6 +1099,10 @@
       return out + plain(text.slice(last), last > 0, false);
     }
     function fillBubble(el, text) {
+      if (String(text || "").indexOf("::sqform::") >= 0) {
+        mountSqueeze(el);
+        return;
+      }
       // gizli kontekst sətri (::ctx:: …) «növbəti ayə» üçündür: göstərilmir
       let src = String(text || "").replace(/\n*^::ctx:: [^\n]*$/gm, "").replace(/::qrform::[a-z]*/g, "");
       // hazır oyun: gizli «::game:: slug | Ad» sətri göstərilmir; kod bloku yoxdursa (serverdən bərpa) «yenidən göstər» düyməsi
@@ -1224,6 +1286,148 @@
       el.appendChild(box);
       if (preset && QR_KINDS.some(function (k) { return k.id === preset; })) show(preset);
     }
+    function squeezeCopy() {
+      const all = {
+        az: { title: "Şəkil sıx", sub: "Şəkil cihazdan çıxmır.", pick: "Şəkil seç", again: "Başqa şəkil", quality: "Keyfiyyət", format: "Format", side: "Uzun tərəf", original: "Orijinal", run: "Sıx", working: "Sıxılır…", save: "Yüklə", ready: "Hazırdır.", fail: "Bu şəkil açılmadı.", need: "Əvvəl şəkil seç.", before: "Əvvəl", after: "Sonra", bigger: "Bu format kiçilmədi. JPG və ya WebP seç." },
+        en: { title: "Compress photo", sub: "The photo stays on this device.", pick: "Choose a photo", again: "Another photo", quality: "Quality", format: "Format", side: "Long side", original: "Original", run: "Compress", working: "Compressing…", save: "Download", ready: "Done.", fail: "This photo did not open.", need: "Choose a photo first.", before: "Before", after: "After", bigger: "This format did not get smaller. Choose JPG or WebP." },
+        tr: { title: "Fotoğrafı sıkıştır", sub: "Fotoğraf cihazdan çıkmaz.", pick: "Fotoğraf seç", again: "Başka fotoğraf", quality: "Kalite", format: "Biçim", side: "Uzun kenar", original: "Orijinal", run: "Sıkıştır", working: "Sıkıştırılıyor…", save: "İndir", ready: "Hazır.", fail: "Bu fotoğraf açılmadı.", need: "Önce fotoğraf seç.", before: "Önce", after: "Sonra", bigger: "Bu biçim küçülmedi. JPG veya WebP seç." },
+        ar: { title: "اضغط الصورة", sub: "الصورة لا تغادر الجهاز.", pick: "اختر صورة", again: "صورة أخرى", quality: "الجودة", format: "الصيغة", side: "الضلع", original: "الأصل", run: "اضغط", working: "جارٍ الضغط…", save: "تنزيل", ready: "تم.", fail: "لم تُفتح الصورة.", need: "اختر صورة أولاً.", before: "قبل", after: "بعد", bigger: "هذه الصيغة لم تصغر. اختر JPG أو WebP." },
+        ru: { title: "Сжать фото", sub: "Фото не уходит с устройства.", pick: "Выберите фото", again: "Другое фото", quality: "Качество", format: "Формат", side: "Сторона", original: "Оригинал", run: "Сжать", working: "Сжимается…", save: "Скачать", ready: "Готово.", fail: "Фото не открылось.", need: "Сначала выберите фото.", before: "До", after: "После", bigger: "Этот формат не стал меньше. Выберите JPG или WebP." }
+      };
+      return all[uiLangCode] || all.az;
+    }
+    function mountSqueeze(el) {
+      el.classList.add("sqcard");
+      const c = squeezeCopy();
+      const box = document.createElement("div");
+      box.className = "sqform";
+      let source = "";
+      let format = "webp";
+      let side = 1280;
+      let resultUrl = "";
+      box.innerHTML = '<div class="head"><div class="mark">IMG</div><div><div class="ttl"></div><div class="sub"></div></div></div>'
+        + '<div class="stage one"><figure><img class="before" alt="" /><figcaption></figcaption></figure><figure class="after-fig" hidden><img class="after" alt="" /><figcaption></figcaption></figure></div>'
+        + '<div class="kinds formats"><span></span></div><label class="q"><span></span><input class="quality" type="range" min="40" max="95" value="72" /></label>'
+        + '<div class="kinds sides"><span></span></div><div class="acts"><button type="button" class="go"></button><label class="pick"><input type="file" accept="image/png,image/jpeg,image/webp" /><b></b></label><a class="dl" hidden></a></div><div class="note"></div>';
+      const title = box.querySelector(".ttl");
+      const sub = box.querySelector(".sub");
+      const stage = box.querySelector(".stage");
+      const before = box.querySelector(".before");
+      const beforeCap = stage.querySelector("figcaption");
+      const afterFig = box.querySelector(".after-fig");
+      const after = box.querySelector(".after");
+      const afterCap = afterFig.querySelector("figcaption");
+      const formats = box.querySelector(".formats");
+      const sides = box.querySelector(".sides");
+      const quality = box.querySelector(".quality");
+      const qLabel = box.querySelector(".q span");
+      const go = box.querySelector(".go");
+      const pick = box.querySelector(".pick b");
+      const file = box.querySelector(".pick input");
+      const dl = box.querySelector(".dl");
+      const noteBox = box.querySelector(".note");
+      function kb(n) { return n < 1024 ? n + " B" : n < 1048576 ? Math.max(1, Math.round(n / 1024)) + " KB" : (n / 1048576).toFixed(1) + " MB"; }
+      function paint() {
+        title.textContent = c.title;
+        sub.textContent = c.sub;
+        qLabel.textContent = c.quality + " " + quality.value;
+        go.textContent = c.run;
+        pick.textContent = source ? c.again : c.pick;
+        dl.textContent = c.save;
+        beforeCap.textContent = c.before;
+        if (afterFig.hidden) afterCap.textContent = c.after;
+        stage.hidden = !source;
+        formats.querySelector("span").textContent = c.format;
+        sides.querySelector("span").textContent = c.side;
+      }
+      function pills(parent, items, current, set) {
+        items.forEach(function (item) {
+          const b = document.createElement("button");
+          b.type = "button";
+          b.textContent = item.label;
+          b.className = item.value === current ? "on" : "";
+          b.addEventListener("click", function () {
+            set(item.value);
+            parent.querySelectorAll("button").forEach(function (x) { x.classList.toggle("on", x === b); });
+          });
+          parent.appendChild(b);
+        });
+      }
+      pills(formats, [{ value: "webp", label: "WEBP" }, { value: "jpeg", label: "JPG" }, { value: "png", label: "PNG" }], format, function (v) { format = v; });
+      pills(sides, [{ value: 0, label: c.original }, { value: 1280, label: "1280" }, { value: 1920, label: "1920" }, { value: 640, label: "640" }], side, function (v) { side = v; });
+      function dataBytes(url) {
+        const i = url.indexOf(",");
+        if (i < 0) return 0;
+        return Math.floor(atob(url.slice(i + 1)).length);
+      }
+      async function run() {
+        if (!source) { noteBox.textContent = c.need; return; }
+        go.disabled = true;
+        go.textContent = c.working;
+        noteBox.textContent = "";
+        try {
+          const image = await new Promise(function (resolve, reject) {
+            const pic = new Image();
+            pic.onload = function () { resolve(pic); };
+            pic.onerror = function () { reject(new Error("image")); };
+            pic.src = source;
+          });
+          const scale = side > 0 ? Math.min(1, side / Math.max(image.width, image.height)) : 1;
+          const canvas = document.createElement("canvas");
+          canvas.width = Math.max(1, Math.round(image.width * scale));
+          canvas.height = Math.max(1, Math.round(image.height * scale));
+          const ctx = canvas.getContext("2d");
+          if (format === "jpeg") { ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, canvas.width, canvas.height); }
+          ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+          const mime = format === "png" ? "image/png" : format === "webp" ? "image/webp" : "image/jpeg";
+          const blob = await new Promise(function (resolve, reject) {
+            canvas.toBlob(function (b) { b ? resolve(b) : reject(new Error("blob")); }, mime, format === "png" ? 1 : Number(quality.value) / 100);
+          });
+          if (resultUrl) URL.revokeObjectURL(resultUrl);
+          resultUrl = URL.createObjectURL(blob);
+          after.src = resultUrl;
+          afterFig.hidden = false;
+          stage.classList.remove("one");
+          afterCap.textContent = c.after + " · " + canvas.width + "×" + canvas.height + " · " + kb(blob.size);
+          dl.href = resultUrl;
+          dl.download = "nibras-image." + (format === "jpeg" ? "jpg" : format);
+          dl.hidden = false;
+          const from = dataBytes(source);
+          noteBox.textContent = c.ready + (from ? " " + kb(from) + " → " + kb(blob.size) : "") + (from && blob.size >= from ? " " + c.bigger : "");
+        } catch (e) {
+          noteBox.textContent = c.fail;
+        } finally {
+          go.disabled = false;
+          go.textContent = c.run;
+          const scroller = document.getElementById("msgs");
+          if (scroller) scroller.scrollTop = scroller.scrollHeight;
+        }
+      }
+      file.addEventListener("change", function () {
+        const f = file.files && file.files[0];
+        if (!f) return;
+        const reader = new FileReader();
+        reader.onload = function () { el._sq.load(String(reader.result), false); };
+        reader.readAsDataURL(f);
+      });
+      go.addEventListener("click", run);
+      quality.addEventListener("input", paint);
+      el._sq = {
+        load: function (dataUrl, auto) {
+          source = dataUrl;
+          before.src = dataUrl;
+          stage.hidden = false;
+          beforeCap.textContent = c.before;
+          afterFig.hidden = true;
+          stage.classList.add("one");
+          dl.hidden = true;
+          pick.textContent = c.again;
+          if (auto) run();
+        }
+      };
+      paint();
+      el.appendChild(box);
+    }
     function qrPageUrl(kind, data) {
       const u = new URL("https://www.nibrascode.com/qr");
       u.searchParams.set("type", kind);
@@ -1253,7 +1457,7 @@
     const IC_SHARE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="M8.3 10.7l7.4-4.4M8.3 13.3l7.4 4.4"/></svg>';
     function plainAnswer(raw) {
       let s = String(raw || "").replace(/\r/g, "");
-      s = s.replace(/^::ctx:: [^\n]*$/gm, "").replace(/^::game:: [^\n]*$/gm, "").replace(/::qrform::[a-z]*/g, "");
+      s = s.replace(/^::ctx:: [^\n]*$/gm, "").replace(/^::game:: [^\n]*$/gm, "").replace(/::qrform::[a-z]*/g, "").replace(/::sqform::/g, "");
       s = s.replace(/(^|\n)::sug::\n[\s\S]*?\n::\/sug::(?=\n|$)/g, "$1");
       s = s.replace(/(^|\n)::(?:notice|tafsir [a-z]+|ayah(?: warn)?(?: [0-9:\-]+)?)::\n([\s\S]*?)\n::\/(?:notice|tafsir|ayah)::(?=\n|$)/g, function (all, pre, body) {
         return pre + body.split("\n").map(function (ln) { return ln.replace(/^::(?:ar|tl|tv|src|tr)::[ \t]*/, ""); }).join("\n");
@@ -1580,13 +1784,28 @@
       msgs.appendChild(el);
       armCode(el);
       if (restore) return el; // söhbət bərpasında renderItem özü sona çəkir
-      if (kind.charAt(0) === "b") revealAnswer(el);
-      else msgs.scrollTop = msgs.scrollHeight;
+      if (String(text || "").indexOf("::sqform::") >= 0 || kind.charAt(0) !== "b") msgs.scrollTop = msgs.scrollHeight;
+      else if (kind.charAt(0) === "b") revealAnswer(el);
       return el;
     }
     async function send(text) {
       const m = (text || "").trim();
       if (!m || btn.disabled) return;
+      if (wantsSqueeze(m, !!pendingImage)) {
+        const src = pendingImage;
+        inp.value = "";
+        bubble(m, "u");
+        rec("u", m, "", 0);
+        const card = bubble("::sqform::", "b");
+        rec("b", "::sqform::", "", 0);
+        if (src && card._sq) card._sq.load(src, true);
+        pendingImage = "";
+        const thumb = document.getElementById("thumb");
+        thumb.classList.remove("on");
+        thumb.removeAttribute("src");
+        setMode("chat");
+        return;
+      }
       const useImage = mode === "image" || pendingImage || wantsImage(m);
       const sentMode = useImage ? "image" : mode === "code" ? "code" : mode === "create" ? "create" : "ask";
       inp.value = "";
