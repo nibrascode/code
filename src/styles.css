@@ -4035,16 +4035,166 @@ body.is-home .noise {
   display: none;
 }
 
-.nx-stage img {
+.nx-5d {
+  --mx: 50%;
+  --my: 38%;
   position: relative;
   z-index: 1;
-  display: block;
+  display: grid;
+  place-items: center;
   width: 100%;
-  height: 100%;
-  min-height: 420px;
+  aspect-ratio: 1;
+  overflow: hidden;
   border-radius: 27px;
-  object-fit: cover;
-  object-position: 62% center;
+  perspective: 900px;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  background: radial-gradient(circle at 50% 42%, #1a1c4d 0%, #0b0c26 52%, #05050f 100%);
+}
+
+.nx-5d:active { cursor: grabbing; }
+
+.nx-5d::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at var(--mx) var(--my), rgb(130 170 255 / 0.26), transparent 46%);
+}
+
+.nx-5d-floor {
+  position: absolute;
+  bottom: 12%;
+  left: 50%;
+  width: 58%;
+  height: 9%;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(closest-side, rgb(95 216 255 / 0.5), rgb(143 107 255 / 0.22) 60%, transparent);
+  filter: blur(5px);
+  transform: translateX(-50%);
+}
+
+.nx-5d-hint {
+  position: absolute;
+  right: 16px;
+  bottom: 14px;
+  left: 16px;
+  margin: 0;
+  color: rgb(205 218 255 / 0.72);
+  font-size: 13px;
+  text-align: center;
+  pointer-events: none;
+}
+
+.nx-5d-scene {
+  --S: 140px;
+  position: relative;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+}
+
+.nx-5d-world,
+.nx-5d-dust,
+.nx-5d-cube,
+.nx-5d-orb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+}
+
+.nx-5d-shell { --s: var(--S); --g: 0px; }
+.nx-5d.hot .nx-5d-shell { --g: calc(var(--S) * 0.3); }
+.nx-5d-core {
+  --s: calc(var(--S) * 0.4);
+  --g: 0px;
+  animation: nx5d-spin 11s linear infinite;
+}
+
+.nx-5d-face {
+  position: absolute;
+  top: calc(var(--s) / -2);
+  left: calc(var(--s) / -2);
+  display: grid;
+  place-items: center;
+  width: var(--s);
+  height: var(--s);
+  border: 2px solid hsl(var(--h) 95% 72% / 0.85);
+  border-radius: calc(var(--s) * 0.1);
+  background: linear-gradient(135deg, hsl(var(--h) 95% 62% / 0.24), hsl(calc(var(--h) + 60) 95% 60% / 0.16));
+  box-shadow: inset 0 0 calc(var(--s) * 0.3) hsl(var(--h) 95% 66% / 0.4), 0 0 22px hsl(var(--h) 95% 60% / 0.45);
+  color: #f2f9ff;
+  font: 700 calc(var(--s) * 0.33) / 1 ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  text-shadow: 0 0 14px hsl(var(--h) 100% 70%), 0 0 30px hsl(var(--h) 100% 60%);
+  backface-visibility: hidden;
+  transition: transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1.25), border-color 0.4s;
+}
+
+.nx-5d.hot .nx-5d-shell .nx-5d-face { border-color: #fff; }
+
+.nx-5d-core .nx-5d-face {
+  border: 0;
+  border-radius: 3px;
+  background: radial-gradient(circle at 35% 30%, #fff, hsl(var(--h) 100% 72%) 45%, hsl(calc(var(--h) + 50) 100% 58%));
+  box-shadow: 0 0 30px hsl(var(--h) 100% 66% / 0.9);
+  backface-visibility: visible;
+  animation: nx5d-pulse 2.2s ease-in-out infinite alternate;
+}
+
+.nx-5d-ring {
+  position: absolute;
+  top: calc(var(--S) * -1.15);
+  left: calc(var(--S) * -1.15);
+  width: calc(var(--S) * 2.3);
+  height: calc(var(--S) * 2.3);
+  border: 1.5px solid hsl(var(--h) 95% 68% / 0.5);
+  border-radius: 50%;
+  box-shadow: 0 0 16px hsl(var(--h) 95% 60% / 0.45), inset 0 0 16px hsl(var(--h) 95% 60% / 0.25);
+  animation: nx5d-ring 10s linear infinite;
+}
+
+.nx-5d-ring::after {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  width: 11px;
+  height: 11px;
+  margin-left: -5.5px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 14px 4px hsl(var(--h) 100% 68%);
+}
+
+.nx-5d-p {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--z);
+  height: var(--z);
+  margin: calc(var(--z) / -2) 0 0 calc(var(--z) / -2);
+  border-radius: 50%;
+  background: hsl(var(--h) 100% 78%);
+  box-shadow: 0 0 9px hsl(var(--h) 100% 70%);
+  animation: nx5d-twinkle 3s ease-in-out infinite alternate;
+}
+
+@keyframes nx5d-ring { to { transform: rotate(360deg); } }
+@keyframes nx5d-spin { to { transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg); } }
+@keyframes nx5d-pulse { from { opacity: 0.72; } to { opacity: 1; } }
+@keyframes nx5d-twinkle { from { opacity: 0.2; } to { opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .nx-5d,
+  .nx-5d * {
+    animation: none !important;
+    transition: none !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -6178,8 +6328,8 @@ body.is-home .noise {
     max-width: calc(100vw - 16px);
   }
 
-  .nx-stage img {
-    min-height: 240px;
+  .nx-5d {
+    aspect-ratio: 1;
   }
 }
 
