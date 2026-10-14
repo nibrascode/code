@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" href="/apps/nibras-image.png" />
   <title>Şəkil sıx və çevir — Nibras</title>
-  <meta name="description" content="Şəkli sıx, JPG, PNG və WebP arasında çevir, ölçüsünü qısalt. Şəkil cihazdan çıxmır." />
+  <meta name="description" content="Şəkli sıx, çevir, kəs, fırlat və ölçüsünü qısalt. Şəkil cihazdan çıxmır." />
   <style>
     :root { color-scheme: dark; }
     * { box-sizing: border-box; }
@@ -132,6 +132,26 @@
       white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
     .seg button.on { background: #fff; color: #111; }
+    #jobs { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    #jobs button { font-size: 12px; letter-spacing: -0.03em; }
+    #ratios { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .turn { margin-top: 8px; }
+    .turn .ghost { flex: 1; }
+    .view figure { position: relative; }
+    #shade { position: absolute; z-index: 2; touch-action: none; }
+    #box {
+      position: absolute; border: 2px solid #fff; border-radius: 2px;
+      box-shadow: 0 0 0 999px rgb(0 0 0 / 0.5);
+      cursor: move; touch-action: none;
+    }
+    #box i {
+      position: absolute; width: 16px; height: 16px; border-radius: 50%;
+      background: #fff; border: 2px solid #111; touch-action: none;
+    }
+    #box i[data-h="nw"] { left: -9px; top: -9px; cursor: nwse-resize; }
+    #box i[data-h="ne"] { right: -9px; top: -9px; cursor: nesw-resize; }
+    #box i[data-h="sw"] { left: -9px; bottom: -9px; cursor: nesw-resize; }
+    #box i[data-h="se"] { right: -9px; bottom: -9px; cursor: nwse-resize; }
     .slide { display: grid; gap: 6px; margin-top: 12px; }
     .slide input { width: 100%; accent-color: #f0d48a; }
     #side-wrap select {
@@ -149,7 +169,8 @@
       .view, .view img, .stage { min-height: 220px; height: auto; }
       .view img { height: 220px; }
       .head { align-items: flex-start; }
-      .seg button { font-size: 12.5px; }
+      .seg button { font-size: 12px; }
+      #jobs button { font-size: 11px; }
       main { width: min(920px, calc(100% - 20px)); }
     }
   </style>
@@ -179,7 +200,11 @@
     <section class="studio">
       <div class="stage">
         <div class="view" id="view" hidden>
-          <figure><img id="before" alt="" /><figcaption id="before-cap"></figcaption></figure>
+          <figure>
+            <img id="before" alt="" />
+            <div id="shade" hidden><div id="box"><i data-h="nw"></i><i data-h="ne"></i><i data-h="sw"></i><i data-h="se"></i></div></div>
+            <figcaption id="before-cap"></figcaption>
+          </figure>
           <figure id="after-fig" hidden><img id="after" alt="" /><figcaption id="after-cap"></figcaption></figure>
         </div>
         <label class="drop">
@@ -194,11 +219,19 @@
           <div class="seg" id="jobs"></div>
         </div>
         <label class="slide" id="quality-wrap"><span id="quality-label"></span><input id="quality" type="range" min="40" max="95" value="72" /></label>
-        <div class="field">
+        <div class="field" id="format-wrap">
           <span id="format-label"></span>
           <div class="seg" id="formats"></div>
         </div>
         <div class="field" id="side-wrap"><span id="side-label"></span><select id="side"></select></div>
+        <div class="field" id="crop-wrap" hidden>
+          <span id="ratio-label"></span>
+          <div class="seg" id="ratios"></div>
+        </div>
+        <div class="acts turn" id="turn-wrap" hidden>
+          <button class="ghost" id="turn-left" type="button"></button>
+          <button class="ghost" id="turn-right" type="button"></button>
+        </div>
         <div class="acts">
           <button class="run" id="run" type="button" disabled></button>
           <button class="ghost" id="save" type="button" hidden></button>
@@ -219,11 +252,11 @@
   </div>
   <script>
     var UI = {
-      az: { title: "Nibras Image", lead: "Şəkli sıx, JPG, PNG və WebP arasında çevir, uzun tərəfi qısalt. Şəkil cihazdan çıxmır.", drop: "Şəkil seç", empty: "Şəkil cihazda qalır. Hesab lazım deyil.", job: "İş", compress: "Sıx", convert: "Çevir", resize: "Ölçü", quality: "Keyfiyyət", format: "Format", side: "Uzun tərəf", original: "Orijinal", run: "Hazırla", working: "Hazırlanır…", save: "Yüklə", reset: "Başqa şəkil", ready: "Hazırdır.", fail: "Bu şəkil açılmadı. JPG, PNG və ya WebP yoxla.", bigger: "Bu format kiçilmədi. JPG və ya WebP seç.", before: "Əvvəl", after: "Sonra" },
-      en: { title: "Nibras Image", lead: "Compress a photo, convert JPG, PNG and WebP, and shorten the long side. The photo never leaves the device.", drop: "Choose a photo", empty: "The photo stays on this device.", job: "Job", compress: "Compress", convert: "Convert", resize: "Resize", quality: "Quality", format: "Format", side: "Long side", original: "Original", run: "Make it", working: "Working…", save: "Download", reset: "Another photo", ready: "Done.", fail: "This photo did not open. Try JPG, PNG or WebP.", bigger: "This format did not get smaller. Choose JPG or WebP.", before: "Before", after: "After" },
-      tr: { title: "Nibras Image", lead: "Fotoğrafı sıkıştır, JPG, PNG ve WebP arasında çevir, uzun kenarı kısalt. Fotoğraf cihazdan çıkmaz.", drop: "Fotoğraf seç", empty: "Fotoğraf cihazda kalır.", job: "İş", compress: "Sıkıştır", convert: "Çevir", resize: "Boyut", quality: "Kalite", format: "Biçim", side: "Uzun kenar", original: "Orijinal", run: "Hazırla", working: "Hazırlanıyor…", save: "İndir", reset: "Başka fotoğraf", ready: "Hazır.", fail: "Bu fotoğraf açılmadı. JPG, PNG veya WebP dene.", bigger: "Bu biçim küçülmedi. JPG veya WebP seç.", before: "Önce", after: "Sonra" },
-      ar: { title: "Nibras Image", lead: "اضغط الصورة، حوّل بين JPG وPNG وWebP، وقصّر الضلع الطويل. الصورة لا تغادر الجهاز.", drop: "اختر صورة", empty: "تبقى الصورة على الجهاز.", job: "العمل", compress: "اضغط", convert: "حوّل", resize: "الحجم", quality: "الجودة", format: "الصيغة", side: "الضلع الطويل", original: "الأصل", run: "جهّز", working: "جارٍ التجهيز…", save: "تنزيل", reset: "صورة أخرى", ready: "تم.", fail: "لم تُفتح الصورة. جرّب JPG أو PNG أو WebP.", bigger: "هذه الصيغة لم تصغر. اختر JPG أو WebP.", before: "قبل", after: "بعد" },
-      ru: { title: "Nibras Image", lead: "Сожмите фото, переведите JPG, PNG и WebP и укоротите длинную сторону. Фото не уходит с устройства.", drop: "Выберите фото", empty: "Фото остаётся на устройстве.", job: "Задача", compress: "Сжать", convert: "Формат", resize: "Размер", quality: "Качество", format: "Формат", side: "Длинная сторона", original: "Оригинал", run: "Сделать", working: "Готовится…", save: "Скачать", reset: "Другое фото", ready: "Готово.", fail: "Фото не открылось. Попробуйте JPG, PNG или WebP.", bigger: "Этот формат не стал меньше. Выберите JPG или WebP.", before: "До", after: "После" }
+      az: { title: "Nibras Image", lead: "Şəkli sıx, çevir, kəs, fırlat və uzun tərəfi qısalt. Şəkil cihazdan çıxmır.", drop: "Şəkil seç", empty: "Şəkil cihazda qalır. Hesab lazım deyil.", job: "İş", compress: "Sıx", convert: "Çevir", resize: "Ölçü", crop: "Kəs", rotate: "Fırlat", quality: "Keyfiyyət", format: "Format", side: "Uzun tərəf", original: "Orijinal", ratio: "Nisbət", free: "Sərbəst", left: "Sola", right: "Sağa", run: "Hazırla", working: "Hazırlanır…", save: "Yüklə", reset: "Başqa şəkil", ready: "Hazırdır.", fail: "Bu şəkil açılmadı. JPG, PNG və ya WebP yoxla.", bigger: "Bu format kiçilmədi. JPG və ya WebP seç.", before: "Əvvəl", after: "Sonra" },
+      en: { title: "Nibras Image", lead: "Compress, convert, crop, turn and shorten a photo. The photo never leaves the device.", drop: "Choose a photo", empty: "The photo stays on this device.", job: "Job", compress: "Compress", convert: "Convert", resize: "Resize", crop: "Crop", rotate: "Turn", quality: "Quality", format: "Format", side: "Long side", original: "Original", ratio: "Ratio", free: "Free", left: "Left", right: "Right", run: "Make it", working: "Working…", save: "Download", reset: "Another photo", ready: "Done.", fail: "This photo did not open. Try JPG, PNG or WebP.", bigger: "This format did not get smaller. Choose JPG or WebP.", before: "Before", after: "After" },
+      tr: { title: "Nibras Image", lead: "Fotoğrafı sıkıştır, çevir, kırp, döndür ve uzun kenarı kısalt. Fotoğraf cihazdan çıkmaz.", drop: "Fotoğraf seç", empty: "Fotoğraf cihazda kalır.", job: "İş", compress: "Sıkıştır", convert: "Çevir", resize: "Boyut", crop: "Kırp", rotate: "Döndür", quality: "Kalite", format: "Biçim", side: "Uzun kenar", original: "Orijinal", ratio: "Oran", free: "Serbest", left: "Sola", right: "Sağa", run: "Hazırla", working: "Hazırlanıyor…", save: "İndir", reset: "Başka fotoğraf", ready: "Hazır.", fail: "Bu fotoğraf açılmadı. JPG, PNG veya WebP dene.", bigger: "Bu biçim küçülmedi. JPG veya WebP seç.", before: "Önce", after: "Sonra" },
+      ar: { title: "Nibras Image", lead: "اضغط الصورة أو حوّلها أو قصّها أو أدرها. الصورة لا تغادر الجهاز.", drop: "اختر صورة", empty: "تبقى الصورة على الجهاز.", job: "العمل", compress: "اضغط", convert: "حوّل", resize: "الحجم", crop: "قص", rotate: "أدر", quality: "الجودة", format: "الصيغة", side: "الضلع الطويل", original: "الأصل", ratio: "النسبة", free: "حر", left: "يسار", right: "يمين", run: "جهّز", working: "جارٍ التجهيز…", save: "تنزيل", reset: "صورة أخرى", ready: "تم.", fail: "لم تُفتح الصورة. جرّب JPG أو PNG أو WebP.", bigger: "هذه الصيغة لم تصغر. اختر JPG أو WebP.", before: "قبل", after: "بعد" },
+      ru: { title: "Nibras Image", lead: "Сожмите, переведите, обрежьте и поверните фото. Фото не уходит с устройства.", drop: "Выберите фото", empty: "Фото остаётся на устройстве.", job: "Задача", compress: "Сжать", convert: "Формат", resize: "Размер", crop: "Кадр", rotate: "Поворот", quality: "Качество", format: "Формат", side: "Длинная сторона", original: "Оригинал", ratio: "Пропорция", free: "Своя", left: "Влево", right: "Вправо", run: "Сделать", working: "Готовится…", save: "Скачать", reset: "Другое фото", ready: "Готово.", fail: "Фото не открылось. Попробуйте JPG, PNG или WebP.", bigger: "Этот формат не стал меньше. Выберите JPG или WebP.", before: "До", after: "После" },
     };
     var INFO = {
       az: {
@@ -242,7 +275,7 @@
         ],
         about: [
           "Ad: Nibras Image. Versiya: V 1.0.0. Hazırlayan: Nibras Code. Bu, Mahir Əliyevin müstəqil layihəsidir.",
-          "Nə edir: şəklin həcmini kiçildir, JPG, PNG və WebP arasında çevirir, uzun tərəfi 640, 1280 və ya 1920 pikselə endirir. Orijinal ölçü də seçilə bilər.",
+          "Nə edir: şəklin həcmini kiçildir, JPG, PNG və WebP arasında çevirir, kəsir, 90 dərəcə fırladır və uzun tərəfi qısaldır.",
           "Necə işlədilir: şəkli seçin, işi seçin (sıx, çevir və ya ölçü), keyfiyyəti və formatı yoxlayın, Hazırla düyməsinə basın, sonra Yüklə.",
           "Keyfiyyət 40 ilə 95 arasındadır. Aşağı rəqəm faylı daha çox kiçildir, şəkil bir az yumşalır. 72 gündəlik paylaşım üçün başlanğıc nöqtədir.",
           "PNG itkisizdir və bəzən kiçilmir. Kiçik fayl üçün WebP və ya JPG seçin. JPG ağ fonla saxlanır, çünki şəffaflığı daşımır.",
@@ -267,7 +300,7 @@
         ],
         about: [
           "Name: Nibras Image. Version: V 1.0.0. Maker: Nibras Code, an independent project by Mahir Əliyev.",
-          "What it does: makes a photo smaller, converts JPG, PNG and WebP, and can limit the long side to 640, 1280 or 1920 pixels. Original size can stay.",
+          "What it does: makes a photo smaller, converts JPG, PNG and WebP, crops, turns by 90 degrees and can limit the long side.",
           "How to use it: choose a photo, pick the job (compress, convert or resize), check quality and format, press Make it, then Download.",
           "Quality runs from 40 to 95. A lower number makes a smaller file and a slightly softer photo. 72 is the starting point for everyday sharing.",
           "PNG is lossless and sometimes does not get smaller. For a small file, choose WebP or JPG. JPG is saved with a white background, because it cannot keep transparency.",
@@ -357,6 +390,8 @@
     var lang = pathLang ? pathLang[1] : "az";
     if (!UI[lang]) lang = "az";
     var job = "compress", format = "webp", file = null, result = null, beforeUrl = "";
+    var angle = 0, oriented = null, ratio = 0, drag = null, spinUrl = "";
+    var crop = { x: 0.08, y: 0.08, w: 0.84, h: 0.84 };
     var fileInput = document.getElementById("file");
     var quality = document.getElementById("quality");
     var side = document.getElementById("side");
@@ -393,6 +428,11 @@
       document.getElementById("after-cap").textContent = c.after;
       document.getElementById("quality-wrap").hidden = job === "resize";
       document.getElementById("side-wrap").hidden = job !== "resize";
+      document.getElementById("crop-wrap").hidden = job !== "crop";
+      document.getElementById("turn-wrap").hidden = job !== "crop" && job !== "rotate";
+      document.getElementById("ratio-label").textContent = c.ratio;
+      document.getElementById("turn-left").textContent = c.left;
+      document.getElementById("turn-right").textContent = c.right;
       document.getElementById("langbtn").textContent = lang.toUpperCase();
       document.getElementById("langmenu").innerHTML = ["az", "en", "tr", "ar", "ru"].map(function (id) {
         return '<button type="button" data-lang="' + id + '"' + (id === lang ? ' class="on"' : "") + ">" + id.toUpperCase() + "</button>";
@@ -409,8 +449,12 @@
       document.getElementById("about").innerHTML = info.about.map(para).join("");
       document.getElementById("job-label").textContent = c.job;
       document.getElementById("format-label").textContent = c.format;
-      document.getElementById("jobs").innerHTML = ["compress", "convert", "resize"].map(function (id) {
+      document.getElementById("jobs").innerHTML = ["compress", "convert", "resize", "crop", "rotate"].map(function (id) {
         return '<button type="button" data-job="' + id + '"' + (id === job ? ' class="on"' : "") + ">" + c[id] + "</button>";
+      }).join("");
+      document.getElementById("ratios").innerHTML = [["0", c.free], ["1", "1:1"], ["0.8", "4:5"], ["1.7778", "16:9"]].map(function (pair) {
+        var on = String(ratio) === pair[0] || (ratio === 0 && pair[0] === "0");
+        return '<button type="button" data-ratio="' + pair[0] + '"' + (on ? ' class="on"' : "") + ">" + pair[1] + "</button>";
       }).join("");
       document.getElementById("formats").innerHTML = ["webp", "jpeg", "png"].map(function (id) {
         return '<button type="button" data-format="' + id + '"' + (id === format ? ' class="on"' : "") + ">" + (id === "jpeg" ? "JPG" : id.toUpperCase()) + "</button>";
@@ -418,6 +462,7 @@
       side.innerHTML = [0, 640, 1280, 1920].map(function (px) {
         return '<option value="' + px + '"' + (Number(side.value || 1280) === px ? " selected" : "") + ">" + (px ? px + "px" : c.original) + "</option>";
       }).join("");
+      placeShade();
     }
     function loadImage(blob) {
       return new Promise(function (resolve, reject) {
@@ -427,6 +472,75 @@
         image.onerror = function () { URL.revokeObjectURL(url); reject(new Error("image")); };
         image.src = url;
       });
+    }
+    function clearFrame() {
+      angle = 0;
+      oriented = null;
+      ratio = 0;
+      crop = { x: 0.08, y: 0.08, w: 0.84, h: 0.84 };
+    }
+    function frameSize() {
+      if (oriented) return { w: oriented.width, h: oriented.height };
+      var img = document.getElementById("before");
+      if (img.naturalWidth) return { w: img.naturalWidth, h: img.naturalHeight };
+      return null;
+    }
+    function lockRatio() {
+      if (!ratio) return;
+      var size = frameSize();
+      if (!size) return;
+      var h = (crop.w * size.w) / (ratio * size.h);
+      if (h > 1) {
+        h = 1;
+        crop.w = Math.min(1, (ratio * size.h) / size.w);
+      }
+      crop.h = h;
+      crop.x = Math.min(Math.max(0, crop.x), 1 - crop.w);
+      crop.y = Math.min(Math.max(0, crop.y), 1 - crop.h);
+    }
+    function placeShade() {
+      var img = document.getElementById("before");
+      var shade = document.getElementById("shade");
+      if (job !== "crop" || !file || !img.naturalWidth) { shade.hidden = true; return; }
+      var parent = img.parentElement.getBoundingClientRect();
+      var rect = img.getBoundingClientRect();
+      var scale = Math.min(rect.width / img.naturalWidth, rect.height / img.naturalHeight);
+      var dw = img.naturalWidth * scale;
+      var dh = img.naturalHeight * scale;
+      shade.hidden = false;
+      shade.style.left = (rect.left - parent.left + (rect.width - dw) / 2) + "px";
+      shade.style.top = (rect.top - parent.top + (rect.height - dh) / 2) + "px";
+      shade.style.width = dw + "px";
+      shade.style.height = dh + "px";
+      var box = document.getElementById("box");
+      box.style.left = (crop.x * 100) + "%";
+      box.style.top = (crop.y * 100) + "%";
+      box.style.width = (crop.w * 100) + "%";
+      box.style.height = (crop.h * 100) + "%";
+    }
+    async function spin(delta) {
+      if (!file) return;
+      angle = (angle + delta + 360) % 360;
+      if (angle === 0) {
+        oriented = null;
+        if (spinUrl) { URL.revokeObjectURL(spinUrl); spinUrl = ""; }
+        document.getElementById("before").src = beforeUrl;
+        return;
+      }
+      var image = await loadImage(file);
+      var swap = angle % 180 !== 0;
+      var canvas = document.createElement("canvas");
+      canvas.width = Math.max(1, swap ? image.height : image.width);
+      canvas.height = Math.max(1, swap ? image.width : image.height);
+      var ctx = canvas.getContext("2d");
+      ctx.translate(canvas.width / 2, canvas.height / 2);
+      ctx.rotate(angle * Math.PI / 180);
+      ctx.drawImage(image, -image.width / 2, -image.height / 2);
+      oriented = canvas;
+      var blob = await canvasBlob(canvas, "image/png", 1);
+      if (spinUrl) URL.revokeObjectURL(spinUrl);
+      spinUrl = URL.createObjectURL(blob);
+      document.getElementById("before").src = spinUrl;
     }
     function canvasBlob(canvas, mime, q) {
       return new Promise(function (resolve, reject) {
@@ -441,14 +555,30 @@
       document.getElementById("note").textContent = "";
       try {
         var image = await loadImage(file);
+        var base = oriented;
+        if (!base) {
+          base = document.createElement("canvas");
+          base.width = image.width;
+          base.height = image.height;
+          base.getContext("2d").drawImage(image, 0, 0);
+        }
+        var sx = 0, sy = 0, sw = base.width, sh = base.height;
+        if (job === "crop") {
+          sx = Math.round(crop.x * base.width);
+          sy = Math.round(crop.y * base.height);
+          sw = Math.max(1, Math.round(crop.w * base.width));
+          sh = Math.max(1, Math.round(crop.h * base.height));
+          if (sx + sw > base.width) sw = base.width - sx;
+          if (sy + sh > base.height) sh = base.height - sy;
+        }
         var limit = job === "resize" ? Number(side.value) : job === "compress" ? 2560 : 0;
-        var scale = limit > 0 ? Math.min(1, limit / Math.max(image.width, image.height)) : 1;
+        var scale = limit > 0 ? Math.min(1, limit / Math.max(sw, sh)) : 1;
         var canvas = document.createElement("canvas");
-        canvas.width = Math.max(1, Math.round(image.width * scale));
-        canvas.height = Math.max(1, Math.round(image.height * scale));
+        canvas.width = Math.max(1, Math.round(sw * scale));
+        canvas.height = Math.max(1, Math.round(sh * scale));
         var ctx = canvas.getContext("2d");
         if (format === "jpeg") { ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, canvas.width, canvas.height); }
-        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+        ctx.drawImage(base, sx, sy, sw, sh, 0, 0, canvas.width, canvas.height);
         var mime = format === "png" ? "image/png" : format === "webp" ? "image/webp" : "image/jpeg";
         var blob = await canvasBlob(canvas, mime, format === "png" ? 1 : Number(quality.value) / 100);
         result = { blob: blob, name: "nibras-image." + (format === "jpeg" ? "jpg" : format), mime: mime };
@@ -506,10 +636,19 @@
       if (el.id === "sheet-close") document.getElementById("sheet").hidden = true;
       if (el.dataset.job) { job = el.dataset.job; paint(); }
       if (el.dataset.format) { format = el.dataset.format; paint(); }
+      if (el.dataset.ratio) {
+        ratio = Number(el.dataset.ratio);
+        lockRatio();
+        paint();
+      }
+      if (el.id === "turn-left" || el.id === "turn-right") {
+        spin(el.id === "turn-left" ? -90 : 90).then(function () { lockRatio(); });
+      }
       if (el.id === "run") run();
       if (el.id === "save") save();
       if (el.id === "reset") {
         file = null; result = null; fileInput.value = "";
+        clearFrame();
         document.getElementById("view").hidden = true;
         document.getElementById("after-fig").hidden = true;
         document.getElementById("save").hidden = true;
@@ -522,6 +661,7 @@
     fileInput.addEventListener("change", function () {
       file = fileInput.files && fileInput.files[0];
       result = null;
+      clearFrame();
       document.getElementById("save").hidden = true;
       document.getElementById("reset").hidden = !file;
       document.getElementById("run").disabled = !file;
@@ -540,6 +680,53 @@
     document.getElementById("sheet").addEventListener("click", function (event) {
       if (event.target.id === "sheet") this.hidden = true;
     });
+    var shadeEl = document.getElementById("shade");
+    shadeEl.addEventListener("pointerdown", function (event) {
+      if (event.target === shadeEl) return;
+      var handle = event.target.dataset ? event.target.dataset.h || "" : "";
+      var rect = shadeEl.getBoundingClientRect();
+      drag = { handle: handle, x: event.clientX, y: event.clientY, crop: { x: crop.x, y: crop.y, w: crop.w, h: crop.h }, w: rect.width, h: rect.height };
+      shadeEl.setPointerCapture(event.pointerId);
+      event.preventDefault();
+    });
+    shadeEl.addEventListener("pointermove", function (event) {
+      if (!drag) return;
+      var dx = (event.clientX - drag.x) / drag.w;
+      var dy = (event.clientY - drag.y) / drag.h;
+      var next = { x: drag.crop.x, y: drag.crop.y, w: drag.crop.w, h: drag.crop.h };
+      if (!drag.handle) {
+        next.x = Math.min(Math.max(0, drag.crop.x + dx), 1 - next.w);
+        next.y = Math.min(Math.max(0, drag.crop.y + dy), 1 - next.h);
+      } else {
+        var left = drag.handle.indexOf("w") >= 0;
+        var up = drag.handle.indexOf("n") >= 0;
+        if (left) {
+          next.x = Math.max(0, Math.min(drag.crop.x + drag.crop.w - 0.05, drag.crop.x + dx));
+          next.w = drag.crop.x + drag.crop.w - next.x;
+        } else next.w = Math.max(0.05, Math.min(1 - drag.crop.x, drag.crop.w + dx));
+        if (up) {
+          next.y = Math.max(0, Math.min(drag.crop.y + drag.crop.h - 0.05, drag.crop.y + dy));
+          next.h = drag.crop.y + drag.crop.h - next.y;
+        } else next.h = Math.max(0.05, Math.min(1 - drag.crop.y, drag.crop.h + dy));
+        if (ratio) {
+          var size = frameSize();
+          if (size) {
+            next.h = (next.w * size.w) / (ratio * size.h);
+            if (next.y + next.h > 1) {
+              next.h = 1 - next.y;
+              next.w = Math.max(0.05, (next.h * size.h * ratio) / size.w);
+            }
+            if (next.x + next.w > 1) next.x = Math.max(0, 1 - next.w);
+          }
+        }
+      }
+      crop = next;
+      placeShade();
+    });
+    shadeEl.addEventListener("pointerup", function () { drag = null; });
+    shadeEl.addEventListener("pointercancel", function () { drag = null; });
+    document.getElementById("before").addEventListener("load", placeShade);
+    window.addEventListener("resize", placeShade);
     quality.addEventListener("input", paint);
     side.value = "1280";
     paint();
