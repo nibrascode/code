@@ -4084,6 +4084,10 @@ body.is-home .noise {
   transform-style: preserve-3d;
 }
 
+@media (min-width: 981px) {
+  .nx-hero { align-items: end; }
+}
+
 .nx-5d-world,
 .nx-5d-dust,
 .nx-5d-cube,
