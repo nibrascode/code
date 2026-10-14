@@ -20,17 +20,45 @@ const kerpicOlculeri: Record<string, [number, number, number]> = {
   qazbeton: [600, 200, 300],
 };
 
-const stageDefs: { name: string; parts: string[]; keys: StageKey[] }[] = [
-  { name: "1/5 — Təməl", parts: ["bottom"], keys: [] },
-  { name: "2/5 — Divarlar (kərpic hörgüsü)", parts: ["bottom", "walls"], keys: ["kerpic"] },
-  { name: "3/5 — Dam", parts: ["bottom", "walls", "roof"], keys: ["kerpic"] },
+const stageDefs: {
+  name: string;
+  short: string;
+  blurb: string;
+  parts: string[];
+  keys: StageKey[];
+}[] = [
   {
-    name: "4/5 — Otaq bölmələri (suvaq)",
+    name: "1/5 — Təməl",
+    short: "Təməl",
+    blurb: "3D həcm başlayır. Beton əsas görünür, divar hələ qalxmayıb.",
+    parts: ["bottom"],
+    keys: [],
+  },
+  {
+    name: "2/5 — Divarlar",
+    short: "Divar",
+    blurb: "Kərpic hörgüsü qalxır. Bu andan kərpic xərci smetaya düşür.",
+    parts: ["bottom", "walls"],
+    keys: ["kerpic"],
+  },
+  {
+    name: "3/5 — Dam",
+    short: "Dam",
+    blurb: "Kirəmit örtük bağlanır. Ev bağlanır, xərc hələ hörgü ilə eynidir.",
+    parts: ["bottom", "walls", "roof"],
+    keys: ["kerpic"],
+  },
+  {
+    name: "4/5 — Bölmələr",
+    short: "Suvaq",
+    blurb: "Otaq divarları və suvaq gəlir. Sement xərci əlavə olunur.",
     parts: ["bottom", "walls", "roof", "interior"],
     keys: ["kerpic", "suvaq"],
   },
   {
-    name: "5/5 — Bitirmə (boya, kafel)",
+    name: "5/5 — Bitirmə",
+    short: "Bitirmə",
+    blurb: "Boya və döşəmə. Model hazır evdir, tam smeta buradadır.",
     parts: ["bottom", "walls", "roof", "interior"],
     keys: ["kerpic", "suvaq", "bitirme"],
   },
@@ -115,7 +143,7 @@ export function mountPlanner(root: HTMLElement): () => void {
   };
   const spinLoop = () => {
     rafId = requestAnimationFrame(spinLoop);
-    if (autoSpin && !dragging && activePointers.size === 0) rotY += 0.12;
+    if (autoSpin && !dragging && activePointers.size === 0) rotY += 0.07;
     cube.style.transform = `scale(${zoomScale}) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
   };
 
@@ -246,23 +274,36 @@ export function mountPlanner(root: HTMLElement): () => void {
     if (!def) return;
     const show = (part: string) => def.parts.includes(part);
     must("f-bottom").style.opacity = show("bottom") ? "1" : "0";
+    must("f-plinth").style.opacity = show("bottom") ? "1" : "0";
     cube.querySelectorAll<HTMLElement>(".ext-wall").forEach((el) => {
       el.style.opacity = show("walls") ? "1" : "0";
     });
     must("f-top").style.opacity = show("roof") ? "1" : "0";
+    must("f-ridge").style.opacity = show("roof") ? "1" : "0";
     cube.querySelectorAll<HTMLElement>(".iface").forEach((el) => {
       el.style.opacity = show("interior") ? "1" : "0";
     });
-    cube.style.filter = stage === 5 ? "saturate(0.85) brightness(1.08)" : "none";
+    cube.dataset.stage = String(stage);
+    must("scene").dataset.stage = String(stage);
+    const rail = must("stageRail");
+    rail.dataset.stage = String(stage);
+    rail.querySelectorAll<HTMLElement>("[data-stage]").forEach((btn) => {
+      const n = parseInt(btn.dataset.stage || "0", 10);
+      btn.classList.toggle("is-on", n <= stage);
+      btn.classList.toggle("is-current", n === stage);
+    });
     const sum = def.keys.reduce((s, key) => s + (stageCosts[key] || 0), 0);
-    const skipped: string[] = [];
-    if (stage <= 1) skipped.push("təməl");
-    if (stage === 3) skipped.push("dam");
+    must("fiveCostAmt").textContent = sum.toFixed(2);
+    must("sceneBadge").textContent = `${stage}/5 · ${def.short}`;
+    const note =
+      stage <= 1
+        ? " Təməl xərci bu smetada yoxdur."
+        : stage === 3
+          ? " Dam ayrıca qiymətlənməyib."
+          : "";
     must("stageLabel").innerHTML =
-      `<b>${def.name}</b><br>Bu mərhələyə qədər xərc: <b>${sum.toFixed(2)} AZN</b>` +
-      (skipped.length
-        ? ` <span style="opacity:.7">(${skipped.join(", ")} xərci hesablanmır)</span>`
-        : "");
+      `<b>${def.name}</b> — ${def.blurb}<br>Bu mərhələyə qədər: <b>${sum.toFixed(2)} AZN</b>` +
+      (note ? `<span class="stage-note">${note}</span>` : "");
   };
 
   const update3D = (
@@ -291,8 +332,12 @@ export function mountPlanner(root: HTMLElement): () => void {
     cube.style.marginTop = `${-hp / 2}px`;
 
     const bwStyle = `border-width:${bw}px;`;
-    const texFront = brickTexture(scale, kL, kH, tikis, "#a8562e");
-    const texSide = brickTexture(scale, kL, kH, tikis, "#8a4423");
+    const stageNow = parseInt(must<HTMLInputElement>("stageSlider").value, 10) || 5;
+    const finish = stageNow >= 5;
+    const plaster =
+      "background:linear-gradient(180deg,#f8f3ea 0%,#efe4d2 100%);box-shadow:inset 0 0 0 1px rgba(90,60,30,.12);";
+    const texFront = finish ? plaster : brickTexture(scale, kL, kH, tikis, "#a8562e");
+    const texSide = finish ? plaster : brickTexture(scale, kL, kH, tikis, "#8a4423");
     cube.querySelectorAll(".iface, .ext-wall").forEach((el) => el.remove());
 
     const gapColor = (item: PlanItem) =>
@@ -344,10 +389,21 @@ export function mountPlanner(root: HTMLElement): () => void {
       lp / 2 - wp / 2,
     );
 
+    const overhang = Math.max(8, bw);
+    const tile =
+      "background-color:#7a3428;background-image:linear-gradient(90deg,rgba(0,0,0,.22) 1px,transparent 1px),linear-gradient(rgba(255,236,210,.18) 1px,transparent 1px);background-size:16px 100%,100% 11px;border:none;box-shadow:0 10px 16px rgba(40,16,8,.28);";
     must("f-top").style.cssText =
-      `width:${lp}px;height:${wp}px;top:${hp / 2 - wp / 2}px;transform:rotateX(90deg) translateZ(${hp / 2}px);border-width:${bw * 0.4}px;background:#8a8478;`;
+      `width:${lp + overhang * 2}px;height:${wp + overhang * 2}px;left:${-overhang}px;top:${hp / 2 - (wp + overhang * 2) / 2}px;transform:rotateX(90deg) translateZ(${hp / 2 + 2}px);border-width:0;${tile}`;
+    const floor = finish
+      ? "background-color:#e6d3ae;background-image:linear-gradient(rgba(120,80,40,.28) 1px,transparent 1px),linear-gradient(90deg,rgba(120,80,40,.28) 1px,transparent 1px);background-size:16px 16px;border:none;"
+      : "background:linear-gradient(160deg,#c5c2bb,#8e8b85);border:none;box-shadow:inset 0 0 0 2px rgba(255,255,255,.25);";
     must("f-bottom").style.cssText =
-      `width:${lp}px;height:${wp}px;top:${hp / 2 - wp / 2}px;transform:rotateX(-90deg) translateZ(${hp / 2}px);border-width:${bw * 0.4}px;background:#c9b79c;`;
+      `width:${lp}px;height:${wp}px;top:${hp / 2 - wp / 2}px;transform:rotateX(-90deg) translateZ(${hp / 2}px);border-width:0;${floor}`;
+    const plinth = Math.max(7, hp * 0.07);
+    must("f-plinth").style.cssText =
+      `width:${lp + bw * 3}px;height:${wp + bw * 3}px;left:${-bw * 1.5}px;top:${hp / 2 - (wp + bw * 3) / 2}px;transform:rotateX(-90deg) translateZ(${hp / 2 + plinth}px);border:none;background:linear-gradient(180deg,#d9d4cc,#8a867f);box-shadow:0 14px 20px rgba(30,20,10,.28);`;
+    must("f-ridge").style.cssText =
+      `width:${lp + overhang * 2}px;height:${Math.max(6, bw * 0.7)}px;left:${-overhang}px;top:${hp / 2}px;transform:translateZ(${wp / 2 + 2}px) translateY(-${Math.max(6, bw * 0.7) / 2}px);background:linear-gradient(180deg,#f2e2c8,#c4a27a);border:none;border-radius:6px;`;
 
     const n = Math.max(1, Math.round(roomCount) || 1);
     if (n !== planState.n) resetPlanGrid(n);
@@ -375,7 +431,6 @@ export function mountPlanner(root: HTMLElement): () => void {
 
     must("dimsLabel").innerHTML =
       `Uzunluq: <b>${L || 0}</b> m · En: <b>${W || 0}</b> m · Hündürlük: <b>${H || 0}</b> m · Otaq: <b>${n}</b>`;
-    updateStageDisplay();
   };
 
   const openWallEditor = (id: string) => {
@@ -672,6 +727,7 @@ export function mountPlanner(root: HTMLElement): () => void {
           `<div class="line"><span>${name}</span><span>${cost.toFixed(2)} AZN</span></div>`,
       )
       .join("");
+    updateStageDisplay();
   };
 
   on(root.querySelector('[data-act="yeni"]'), "click", yeniLayihe);
@@ -683,6 +739,13 @@ export function mountPlanner(root: HTMLElement): () => void {
   });
   on(root.querySelector('[data-act="zoom-in"]'), "click", () => zoomBy(0.2));
   on(root.querySelector('[data-act="zoom-out"]'), "click", () => zoomBy(-0.2));
+  root.querySelectorAll<HTMLElement>("#stageRail [data-stage]").forEach((btn) => {
+    on(btn, "click", () => {
+      const slider = must<HTMLInputElement>("stageSlider");
+      slider.value = btn.dataset.stage || "5";
+      slider.dispatchEvent(new Event("input", { bubbles: true }));
+    });
+  });
   root.querySelectorAll<HTMLElement>("[data-mat]").forEach((el) => {
     const id = el.dataset.mat;
     if (id) on(el, "click", () => toggleMat(id));
