@@ -15,7 +15,6 @@ import { Route as ArRouteImport } from './routes/ar'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as EnRouteImport } from './routes/en'
 import { Route as EraseRouteImport } from './routes/erase'
-import { Route as ImageRouteImport } from './routes/image'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as MovzuRouteImport } from './routes/movzu'
 import { Route as MuqayiseRouteImport } from './routes/muqayise'
@@ -37,7 +36,6 @@ import { Route as ArAboutRouteImport } from './routes/ar.about'
 import { Route as ArAppsRouteImport } from './routes/ar.apps'
 import { Route as ArContactRouteImport } from './routes/ar.contact'
 import { Route as ArEraseRouteImport } from './routes/ar.erase'
-import { Route as ArImageRouteImport } from './routes/ar.image'
 import { Route as ArFaqRouteImport } from './routes/ar.faq'
 import { Route as ArMovzuRouteImport } from './routes/ar.movzu'
 import { Route as ArMuqayiseRouteImport } from './routes/ar.muqayise'
@@ -51,7 +49,6 @@ import { Route as EnAboutRouteImport } from './routes/en.about'
 import { Route as EnAppsRouteImport } from './routes/en.apps'
 import { Route as EnContactRouteImport } from './routes/en.contact'
 import { Route as EnEraseRouteImport } from './routes/en.erase'
-import { Route as EnImageRouteImport } from './routes/en.image'
 import { Route as EnFaqRouteImport } from './routes/en.faq'
 import { Route as EnMovzuRouteImport } from './routes/en.movzu'
 import { Route as EnMuqayiseRouteImport } from './routes/en.muqayise'
@@ -78,7 +75,6 @@ import { Route as RuAboutRouteImport } from './routes/ru.about'
 import { Route as RuAppsRouteImport } from './routes/ru.apps'
 import { Route as RuContactRouteImport } from './routes/ru.contact'
 import { Route as RuEraseRouteImport } from './routes/ru.erase'
-import { Route as RuImageRouteImport } from './routes/ru.image'
 import { Route as RuFaqRouteImport } from './routes/ru.faq'
 import { Route as RuMovzuRouteImport } from './routes/ru.movzu'
 import { Route as RuMuqayiseRouteImport } from './routes/ru.muqayise'
@@ -94,7 +90,6 @@ import { Route as TrAboutRouteImport } from './routes/tr.about'
 import { Route as TrAppsRouteImport } from './routes/tr.apps'
 import { Route as TrContactRouteImport } from './routes/tr.contact'
 import { Route as TrEraseRouteImport } from './routes/tr.erase'
-import { Route as TrImageRouteImport } from './routes/tr.image'
 import { Route as TrFaqRouteImport } from './routes/tr.faq'
 import { Route as TrMovzuRouteImport } from './routes/tr.movzu'
 import { Route as TrMuqayiseRouteImport } from './routes/tr.muqayise'
@@ -174,11 +169,6 @@ const EnRoute = EnRouteImport.update({
 const EraseRoute = EraseRouteImport.update({
   id: '/erase',
   path: '/erase',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ImageRoute = ImageRouteImport.update({
-  id: '/image',
-  path: '/image',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaqRoute = FaqRouteImport.update({
@@ -286,11 +276,6 @@ const ArEraseRoute = ArEraseRouteImport.update({
   path: '/erase',
   getParentRoute: () => ArRoute,
 } as any)
-const ArImageRoute = ArImageRouteImport.update({
-  id: '/image',
-  path: '/image',
-  getParentRoute: () => ArRoute,
-} as any)
 const ArFaqRoute = ArFaqRouteImport.update({
   id: '/faq',
   path: '/faq',
@@ -354,11 +339,6 @@ const EnContactRoute = EnContactRouteImport.update({
 const EnEraseRoute = EnEraseRouteImport.update({
   id: '/erase',
   path: '/erase',
-  getParentRoute: () => EnRoute,
-} as any)
-const EnImageRoute = EnImageRouteImport.update({
-  id: '/image',
-  path: '/image',
   getParentRoute: () => EnRoute,
 } as any)
 const EnFaqRoute = EnFaqRouteImport.update({
@@ -491,11 +471,6 @@ const RuEraseRoute = RuEraseRouteImport.update({
   path: '/erase',
   getParentRoute: () => RuRoute,
 } as any)
-const RuImageRoute = RuImageRouteImport.update({
-  id: '/image',
-  path: '/image',
-  getParentRoute: () => RuRoute,
-} as any)
 const RuFaqRoute = RuFaqRouteImport.update({
   id: '/faq',
   path: '/faq',
@@ -569,11 +544,6 @@ const TrContactRoute = TrContactRouteImport.update({
 const TrEraseRoute = TrEraseRouteImport.update({
   id: '/erase',
   path: '/erase',
-  getParentRoute: () => TrRoute,
-} as any)
-const TrImageRoute = TrImageRouteImport.update({
-  id: '/image',
-  path: '/image',
   getParentRoute: () => TrRoute,
 } as any)
 const TrFaqRoute = TrFaqRouteImport.update({
@@ -835,7 +805,6 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/en': typeof EnRouteWithChildren
   '/erase': typeof EraseRoute
-  '/image': typeof ImageRoute
   '/faq': typeof FaqRouteWithChildren
   '/movzu': typeof MovzuRouteWithChildren
   '/muqayise': typeof MuqayiseRouteWithChildren
@@ -857,7 +826,6 @@ export interface FileRoutesByFullPath {
   '/ar/apps': typeof ArAppsRouteWithChildren
   '/ar/contact': typeof ArContactRoute
   '/ar/erase': typeof ArEraseRoute
-  '/ar/image': typeof ArImageRoute
   '/ar/faq': typeof ArFaqRouteWithChildren
   '/ar/movzu': typeof ArMovzuRouteWithChildren
   '/ar/muqayise': typeof ArMuqayiseRouteWithChildren
@@ -871,7 +839,6 @@ export interface FileRoutesByFullPath {
   '/en/apps': typeof EnAppsRouteWithChildren
   '/en/contact': typeof EnContactRoute
   '/en/erase': typeof EnEraseRoute
-  '/en/image': typeof EnImageRoute
   '/en/faq': typeof EnFaqRouteWithChildren
   '/en/movzu': typeof EnMovzuRouteWithChildren
   '/en/muqayise': typeof EnMuqayiseRouteWithChildren
@@ -894,7 +861,6 @@ export interface FileRoutesByFullPath {
   '/ru/apps': typeof RuAppsRouteWithChildren
   '/ru/contact': typeof RuContactRoute
   '/ru/erase': typeof RuEraseRoute
-  '/ru/image': typeof RuImageRoute
   '/ru/faq': typeof RuFaqRouteWithChildren
   '/ru/movzu': typeof RuMovzuRouteWithChildren
   '/ru/muqayise': typeof RuMuqayiseRouteWithChildren
@@ -910,7 +876,6 @@ export interface FileRoutesByFullPath {
   '/tr/apps': typeof TrAppsRouteWithChildren
   '/tr/contact': typeof TrContactRoute
   '/tr/erase': typeof TrEraseRoute
-  '/tr/image': typeof TrImageRoute
   '/tr/faq': typeof TrFaqRouteWithChildren
   '/tr/movzu': typeof TrMovzuRouteWithChildren
   '/tr/muqayise': typeof TrMuqayiseRouteWithChildren
@@ -973,7 +938,6 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/en': typeof EnRouteWithChildren
   '/erase': typeof EraseRoute
-  '/image': typeof ImageRoute
   '/faq': typeof FaqRouteWithChildren
   '/movzu': typeof MovzuRouteWithChildren
   '/muqayise': typeof MuqayiseRouteWithChildren
@@ -994,7 +958,6 @@ export interface FileRoutesByTo {
   '/ar/apps': typeof ArAppsRouteWithChildren
   '/ar/contact': typeof ArContactRoute
   '/ar/erase': typeof ArEraseRoute
-  '/ar/image': typeof ArImageRoute
   '/ar/faq': typeof ArFaqRouteWithChildren
   '/ar/movzu': typeof ArMovzuRouteWithChildren
   '/ar/muqayise': typeof ArMuqayiseRouteWithChildren
@@ -1008,7 +971,6 @@ export interface FileRoutesByTo {
   '/en/apps': typeof EnAppsRouteWithChildren
   '/en/contact': typeof EnContactRoute
   '/en/erase': typeof EnEraseRoute
-  '/en/image': typeof EnImageRoute
   '/en/faq': typeof EnFaqRouteWithChildren
   '/en/movzu': typeof EnMovzuRouteWithChildren
   '/en/muqayise': typeof EnMuqayiseRouteWithChildren
@@ -1031,7 +993,6 @@ export interface FileRoutesByTo {
   '/ru/apps': typeof RuAppsRouteWithChildren
   '/ru/contact': typeof RuContactRoute
   '/ru/erase': typeof RuEraseRoute
-  '/ru/image': typeof RuImageRoute
   '/ru/faq': typeof RuFaqRouteWithChildren
   '/ru/movzu': typeof RuMovzuRouteWithChildren
   '/ru/muqayise': typeof RuMuqayiseRouteWithChildren
@@ -1047,7 +1008,6 @@ export interface FileRoutesByTo {
   '/tr/apps': typeof TrAppsRouteWithChildren
   '/tr/contact': typeof TrContactRoute
   '/tr/erase': typeof TrEraseRoute
-  '/tr/image': typeof TrImageRoute
   '/tr/faq': typeof TrFaqRouteWithChildren
   '/tr/movzu': typeof TrMovzuRouteWithChildren
   '/tr/muqayise': typeof TrMuqayiseRouteWithChildren
@@ -1111,7 +1071,6 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/en': typeof EnRouteWithChildren
   '/erase': typeof EraseRoute
-  '/image': typeof ImageRoute
   '/faq': typeof FaqRouteWithChildren
   '/movzu': typeof MovzuRouteWithChildren
   '/muqayise': typeof MuqayiseRouteWithChildren
@@ -1133,7 +1092,6 @@ export interface FileRoutesById {
   '/ar/apps': typeof ArAppsRouteWithChildren
   '/ar/contact': typeof ArContactRoute
   '/ar/erase': typeof ArEraseRoute
-  '/ar/image': typeof ArImageRoute
   '/ar/faq': typeof ArFaqRouteWithChildren
   '/ar/movzu': typeof ArMovzuRouteWithChildren
   '/ar/muqayise': typeof ArMuqayiseRouteWithChildren
@@ -1147,7 +1105,6 @@ export interface FileRoutesById {
   '/en/apps': typeof EnAppsRouteWithChildren
   '/en/contact': typeof EnContactRoute
   '/en/erase': typeof EnEraseRoute
-  '/en/image': typeof EnImageRoute
   '/en/faq': typeof EnFaqRouteWithChildren
   '/en/movzu': typeof EnMovzuRouteWithChildren
   '/en/muqayise': typeof EnMuqayiseRouteWithChildren
@@ -1170,7 +1127,6 @@ export interface FileRoutesById {
   '/ru/apps': typeof RuAppsRouteWithChildren
   '/ru/contact': typeof RuContactRoute
   '/ru/erase': typeof RuEraseRoute
-  '/ru/image': typeof RuImageRoute
   '/ru/faq': typeof RuFaqRouteWithChildren
   '/ru/movzu': typeof RuMovzuRouteWithChildren
   '/ru/muqayise': typeof RuMuqayiseRouteWithChildren
@@ -1186,7 +1142,6 @@ export interface FileRoutesById {
   '/tr/apps': typeof TrAppsRouteWithChildren
   '/tr/contact': typeof TrContactRoute
   '/tr/erase': typeof TrEraseRoute
-  '/tr/image': typeof TrImageRoute
   '/tr/faq': typeof TrFaqRouteWithChildren
   '/tr/movzu': typeof TrMovzuRouteWithChildren
   '/tr/muqayise': typeof TrMuqayiseRouteWithChildren
@@ -1251,7 +1206,6 @@ export interface FileRouteTypes {
     | '/contact'
     | '/en'
     | '/erase'
-    | '/image'
     | '/faq'
     | '/movzu'
     | '/muqayise'
@@ -1273,7 +1227,6 @@ export interface FileRouteTypes {
     | '/ar/apps'
     | '/ar/contact'
     | '/ar/erase'
-    | '/ar/image'
     | '/ar/faq'
     | '/ar/movzu'
     | '/ar/muqayise'
@@ -1287,7 +1240,6 @@ export interface FileRouteTypes {
     | '/en/apps'
     | '/en/contact'
     | '/en/erase'
-    | '/en/image'
     | '/en/faq'
     | '/en/movzu'
     | '/en/muqayise'
@@ -1310,7 +1262,6 @@ export interface FileRouteTypes {
     | '/ru/apps'
     | '/ru/contact'
     | '/ru/erase'
-    | '/ru/image'
     | '/ru/faq'
     | '/ru/movzu'
     | '/ru/muqayise'
@@ -1326,7 +1277,6 @@ export interface FileRouteTypes {
     | '/tr/apps'
     | '/tr/contact'
     | '/tr/erase'
-    | '/tr/image'
     | '/tr/faq'
     | '/tr/movzu'
     | '/tr/muqayise'
@@ -1389,7 +1339,6 @@ export interface FileRouteTypes {
     | '/contact'
     | '/en'
     | '/erase'
-    | '/image'
     | '/faq'
     | '/movzu'
     | '/muqayise'
@@ -1410,7 +1359,6 @@ export interface FileRouteTypes {
     | '/ar/apps'
     | '/ar/contact'
     | '/ar/erase'
-    | '/ar/image'
     | '/ar/faq'
     | '/ar/movzu'
     | '/ar/muqayise'
@@ -1424,7 +1372,6 @@ export interface FileRouteTypes {
     | '/en/apps'
     | '/en/contact'
     | '/en/erase'
-    | '/en/image'
     | '/en/faq'
     | '/en/movzu'
     | '/en/muqayise'
@@ -1447,7 +1394,6 @@ export interface FileRouteTypes {
     | '/ru/apps'
     | '/ru/contact'
     | '/ru/erase'
-    | '/ru/image'
     | '/ru/faq'
     | '/ru/movzu'
     | '/ru/muqayise'
@@ -1463,7 +1409,6 @@ export interface FileRouteTypes {
     | '/tr/apps'
     | '/tr/contact'
     | '/tr/erase'
-    | '/tr/image'
     | '/tr/faq'
     | '/tr/movzu'
     | '/tr/muqayise'
@@ -1526,7 +1471,6 @@ export interface FileRouteTypes {
     | '/contact'
     | '/en'
     | '/erase'
-    | '/image'
     | '/faq'
     | '/movzu'
     | '/muqayise'
@@ -1548,7 +1492,6 @@ export interface FileRouteTypes {
     | '/ar/apps'
     | '/ar/contact'
     | '/ar/erase'
-    | '/ar/image'
     | '/ar/faq'
     | '/ar/movzu'
     | '/ar/muqayise'
@@ -1562,7 +1505,6 @@ export interface FileRouteTypes {
     | '/en/apps'
     | '/en/contact'
     | '/en/erase'
-    | '/en/image'
     | '/en/faq'
     | '/en/movzu'
     | '/en/muqayise'
@@ -1585,7 +1527,6 @@ export interface FileRouteTypes {
     | '/ru/apps'
     | '/ru/contact'
     | '/ru/erase'
-    | '/ru/image'
     | '/ru/faq'
     | '/ru/movzu'
     | '/ru/muqayise'
@@ -1601,7 +1542,6 @@ export interface FileRouteTypes {
     | '/tr/apps'
     | '/tr/contact'
     | '/tr/erase'
-    | '/tr/image'
     | '/tr/faq'
     | '/tr/movzu'
     | '/tr/muqayise'
@@ -1665,7 +1605,6 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   EnRoute: typeof EnRouteWithChildren
   EraseRoute: typeof EraseRoute
-  ImageRoute: typeof ImageRoute
   FaqRoute: typeof FaqRouteWithChildren
   MovzuRoute: typeof MovzuRouteWithChildren
   MuqayiseRoute: typeof MuqayiseRouteWithChildren
@@ -1734,13 +1673,6 @@ declare module '@tanstack/react-router' {
       path: '/erase'
       fullPath: '/erase'
       preLoaderRoute: typeof EraseRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/image': {
-      id: '/image'
-      path: '/image'
-      fullPath: '/image'
-      preLoaderRoute: typeof ImageRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/faq': {
@@ -1890,13 +1822,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArEraseRouteImport
       parentRoute: typeof ArRoute
     }
-    '/ar/image': {
-      id: '/ar/image'
-      path: '/image'
-      fullPath: '/ar/image'
-      preLoaderRoute: typeof ArImageRouteImport
-      parentRoute: typeof ArRoute
-    }
     '/ar/faq': {
       id: '/ar/faq'
       path: '/faq'
@@ -1986,13 +1911,6 @@ declare module '@tanstack/react-router' {
       path: '/erase'
       fullPath: '/en/erase'
       preLoaderRoute: typeof EnEraseRouteImport
-      parentRoute: typeof EnRoute
-    }
-    '/en/image': {
-      id: '/en/image'
-      path: '/image'
-      fullPath: '/en/image'
-      preLoaderRoute: typeof EnImageRouteImport
       parentRoute: typeof EnRoute
     }
     '/en/faq': {
@@ -2177,13 +2095,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RuEraseRouteImport
       parentRoute: typeof RuRoute
     }
-    '/ru/image': {
-      id: '/ru/image'
-      path: '/image'
-      fullPath: '/ru/image'
-      preLoaderRoute: typeof RuImageRouteImport
-      parentRoute: typeof RuRoute
-    }
     '/ru/faq': {
       id: '/ru/faq'
       path: '/faq'
@@ -2287,13 +2198,6 @@ declare module '@tanstack/react-router' {
       path: '/erase'
       fullPath: '/tr/erase'
       preLoaderRoute: typeof TrEraseRouteImport
-      parentRoute: typeof TrRoute
-    }
-    '/tr/image': {
-      id: '/tr/image'
-      path: '/image'
-      fullPath: '/tr/image'
-      preLoaderRoute: typeof TrImageRouteImport
       parentRoute: typeof TrRoute
     }
     '/tr/faq': {
@@ -2741,7 +2645,6 @@ interface ArRouteChildren {
   ArAppsRoute: typeof ArAppsRouteWithChildren
   ArContactRoute: typeof ArContactRoute
   ArEraseRoute: typeof ArEraseRoute
-  ArImageRoute: typeof ArImageRoute
   ArFaqRoute: typeof ArFaqRouteWithChildren
   ArMovzuRoute: typeof ArMovzuRouteWithChildren
   ArMuqayiseRoute: typeof ArMuqayiseRouteWithChildren
@@ -2759,7 +2662,6 @@ const ArRouteChildren: ArRouteChildren = {
   ArAppsRoute: ArAppsRouteWithChildren,
   ArContactRoute: ArContactRoute,
   ArEraseRoute: ArEraseRoute,
-  ArImageRoute: ArImageRoute,
   ArFaqRoute: ArFaqRouteWithChildren,
   ArMovzuRoute: ArMovzuRouteWithChildren,
   ArMuqayiseRoute: ArMuqayiseRouteWithChildren,
@@ -2866,7 +2768,6 @@ interface EnRouteChildren {
   EnAppsRoute: typeof EnAppsRouteWithChildren
   EnContactRoute: typeof EnContactRoute
   EnEraseRoute: typeof EnEraseRoute
-  EnImageRoute: typeof EnImageRoute
   EnFaqRoute: typeof EnFaqRouteWithChildren
   EnMovzuRoute: typeof EnMovzuRouteWithChildren
   EnMuqayiseRoute: typeof EnMuqayiseRouteWithChildren
@@ -2884,7 +2785,6 @@ const EnRouteChildren: EnRouteChildren = {
   EnAppsRoute: EnAppsRouteWithChildren,
   EnContactRoute: EnContactRoute,
   EnEraseRoute: EnEraseRoute,
-  EnImageRoute: EnImageRoute,
   EnFaqRoute: EnFaqRouteWithChildren,
   EnMovzuRoute: EnMovzuRouteWithChildren,
   EnMuqayiseRoute: EnMuqayiseRouteWithChildren,
@@ -3048,7 +2948,6 @@ interface RuRouteChildren {
   RuAppsRoute: typeof RuAppsRouteWithChildren
   RuContactRoute: typeof RuContactRoute
   RuEraseRoute: typeof RuEraseRoute
-  RuImageRoute: typeof RuImageRoute
   RuFaqRoute: typeof RuFaqRouteWithChildren
   RuMovzuRoute: typeof RuMovzuRouteWithChildren
   RuMuqayiseRoute: typeof RuMuqayiseRouteWithChildren
@@ -3067,7 +2966,6 @@ const RuRouteChildren: RuRouteChildren = {
   RuAppsRoute: RuAppsRouteWithChildren,
   RuContactRoute: RuContactRoute,
   RuEraseRoute: RuEraseRoute,
-  RuImageRoute: RuImageRoute,
   RuFaqRoute: RuFaqRouteWithChildren,
   RuMovzuRoute: RuMovzuRouteWithChildren,
   RuMuqayiseRoute: RuMuqayiseRouteWithChildren,
@@ -3195,7 +3093,6 @@ interface TrRouteChildren {
   TrAppsRoute: typeof TrAppsRouteWithChildren
   TrContactRoute: typeof TrContactRoute
   TrEraseRoute: typeof TrEraseRoute
-  TrImageRoute: typeof TrImageRoute
   TrFaqRoute: typeof TrFaqRouteWithChildren
   TrMovzuRoute: typeof TrMovzuRouteWithChildren
   TrMuqayiseRoute: typeof TrMuqayiseRouteWithChildren
@@ -3213,7 +3110,6 @@ const TrRouteChildren: TrRouteChildren = {
   TrAppsRoute: TrAppsRouteWithChildren,
   TrContactRoute: TrContactRoute,
   TrEraseRoute: TrEraseRoute,
-  TrImageRoute: TrImageRoute,
   TrFaqRoute: TrFaqRouteWithChildren,
   TrMovzuRoute: TrMovzuRouteWithChildren,
   TrMuqayiseRoute: TrMuqayiseRouteWithChildren,
@@ -3258,7 +3154,6 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   EnRoute: EnRouteWithChildren,
   EraseRoute: EraseRoute,
-  ImageRoute: ImageRoute,
   FaqRoute: FaqRouteWithChildren,
   MovzuRoute: MovzuRouteWithChildren,
   MuqayiseRoute: MuqayiseRouteWithChildren,
