@@ -1,13 +1,4 @@
 import { useEffect, useRef } from "react";
-import type { Lang } from "@/lib/i18n";
-
-const HINT: Record<Lang, string> = {
-  az: "Üzərinə gəl və ya sürüşdür. Toxunsan sürətlə fırlanır.",
-  en: "Hover or drag. Tap and it spins fast.",
-  tr: "Üzerine gel veya sürükle. Dokununca hızlı döner.",
-  ar: "مرّر أو اسحب. اللمس يدوّره بسرعة.",
-  ru: "Наведите или проведите. Нажатие быстро вращает.",
-};
 
 const FACES: [string, number, string][] = [
   ["N", 190, ""],
@@ -18,7 +9,7 @@ const FACES: [string, number, string][] = [
   ["✦", 250, "rotateX(-90deg)"],
 ];
 
-export function HeroMark({ lang }: { lang: Lang }) {
+export function HeroMark() {
   const stage = useRef<HTMLDivElement>(null);
   const scene = useRef<HTMLDivElement>(null);
   const world = useRef<HTMLDivElement>(null);
@@ -206,13 +197,12 @@ export function HeroMark({ lang }: { lang: Lang }) {
   }, []);
 
   return (
-    <div className="nx-5d" ref={stage} role="img" aria-label={HINT[lang]}>
+    <div className="nx-5d" ref={stage} role="img" aria-label="Nibras">
       <div className="nx-5d-floor" />
       <div className="nx-5d-scene" ref={scene}>
         <div className="nx-5d-dust" ref={dust} />
         <div className="nx-5d-world" ref={world} />
       </div>
-      <p className="nx-5d-hint">{HINT[lang]}</p>
     </div>
   );
 }

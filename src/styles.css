@@ -4076,18 +4076,6 @@ body.is-home .noise {
   transform: translateX(-50%);
 }
 
-.nx-5d-hint {
-  position: absolute;
-  right: 16px;
-  bottom: 14px;
-  left: 16px;
-  margin: 0;
-  color: rgb(205 218 255 / 0.72);
-  font-size: 13px;
-  text-align: center;
-  pointer-events: none;
-}
-
 .nx-5d-scene {
   --S: 140px;
   position: relative;

@@ -410,7 +410,7 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
           </div>
         </div>
         <div className="nx-stage">
-          <HeroMark lang={lang} />
+          <HeroMark />
         </div>
       </section>
 
