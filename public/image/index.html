@@ -8,52 +8,97 @@
   <style>
     :root { color-scheme: dark; }
     * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
     body {
-      margin: 0; min-height: 100dvh; color: #e7eefc;
-      font: 16px/1.45 Manrope, ui-sans-serif, system-ui, sans-serif;
+      margin: 0; min-height: 100dvh; color: #eef3ff;
+      font: 16px/1.45 ui-sans-serif, system-ui, sans-serif;
       background:
-        radial-gradient(900px 420px at 80% -10%, rgb(70 110 255 / 0.28), transparent 60%),
-        radial-gradient(700px 380px at 0% 100%, rgb(40 180 255 / 0.16), transparent 55%),
-        #070b16;
+        radial-gradient(80% 50% at 100% 0%, rgb(37 78 180 / 0.45), transparent 55%),
+        radial-gradient(50% 40% at 0% 100%, rgb(20 60 140 / 0.35), transparent 60%),
+        #05070f;
     }
-    .bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 18px; }
-    .brand { color: inherit; text-decoration: none; font-weight: 800; letter-spacing: -0.03em; }
-    .brand em { color: #8eb6ff; font-style: normal; }
+    .top { display: flex; align-items: center; justify-content: space-between; padding: 18px 22px 0; }
+    .home { color: #d7e4ff; text-decoration: none; font-weight: 800; letter-spacing: -0.04em; }
     .langs { display: flex; gap: 6px; }
-    .langs button, .row button, .acts button, select {
-      border: 1px solid rgb(150 180 255 / 0.28); background: rgb(12 18 36 / 0.8);
-      color: #d7e2fb; border-radius: 999px; min-height: 34px; padding: 0 12px; font: inherit; font-size: 13px; cursor: pointer;
+    .langs button {
+      width: 36px; height: 32px; padding: 0; border-radius: 999px;
+      border: 1px solid rgb(255 255 255 / 0.14); background: rgb(255 255 255 / 0.04);
+      color: #d5def2; font: inherit; font-size: 12px; font-weight: 700; cursor: pointer;
     }
-    .langs button.on, .row button.on { background: #f4f7ff; color: #10131c; border-color: transparent; }
-    main { width: min(720px, calc(100% - 28px)); margin: 0 auto 40px; }
-    h1 { margin: 8px 0 6px; font-size: clamp(28px, 5vw, 40px); letter-spacing: -0.04em; }
-    .lead { margin: 0 0 16px; color: #b7c3de; }
-    .card { padding: 16px; border-radius: 22px; border: 1px solid rgb(150 180 255 / 0.22); background: rgb(8 12 24 / 0.72); }
-    .drop { display: grid; gap: 4px; padding: 18px; border: 1px dashed rgb(160 190 255 / 0.4); border-radius: 16px; cursor: pointer; }
+    .langs button.on { background: #fff; color: #111; border-color: transparent; }
+    main { width: min(760px, calc(100% - 32px)); margin: 28px auto 48px; }
+    .head { display: flex; gap: 14px; align-items: center; margin-bottom: 18px; }
+    .mark {
+      width: 58px; height: 58px; flex: none; border-radius: 16px;
+      display: grid; place-items: center;
+      background: radial-gradient(circle at 30% 20%, #ffe7a8, #c8922a 42%, #6d4a12);
+      box-shadow: 0 10px 30px rgb(0 0 0 / 0.35);
+    }
+    .mark svg { width: 34px; height: 34px; }
+    h1 { margin: 0; font-size: clamp(32px, 5vw, 44px); letter-spacing: -0.045em; line-height: 1; }
+    .lead { margin: 6px 0 0; color: rgb(244 247 255 / 0.72); font-size: 15px; }
+    .card {
+      border: 1px solid rgb(255 255 255 / 0.1);
+      background: rgb(255 255 255 / 0.035);
+      border-radius: 22px;
+      padding: 16px;
+      backdrop-filter: blur(8px);
+    }
+    .drop {
+      display: grid; gap: 4px; padding: 22px 18px; cursor: pointer;
+      border: 1px dashed rgb(255 255 255 / 0.22); border-radius: 16px;
+    }
     .drop input { display: none; }
-    .row, .acts { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 12px; }
-    .row span, label.slide span { color: #9aabc8; font-size: 13px; }
-    label.slide { display: grid; gap: 6px; margin-top: 12px; }
-    input[type="range"] { width: 100%; accent-color: #7eb6ff; }
-    select { border-radius: 12px; }
-    .run { background: #2f6bff; color: white; border: 0; border-radius: 12px; min-height: 42px; padding: 0 16px; font: inherit; font-weight: 700; cursor: pointer; }
-    .run:disabled { opacity: 0.45; cursor: default; }
-    .note { min-height: 1.4em; margin: 12px 0 0; color: #9ef0d8; font-weight: 650; }
-    .view { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+    .drop b { font-size: 16px; }
+    .drop span { color: rgb(244 247 255 / 0.65); font-size: 13px; }
+    .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 14px; }
+    .row > span, .slide > span { min-width: 88px; color: rgb(244 247 255 / 0.7); font-size: 14px; }
+    .row button, select {
+      border: 1px solid rgb(255 255 255 / 0.12);
+      background: rgb(255 255 255 / 0.04);
+      color: inherit; border-radius: 999px; padding: 7px 12px;
+      font: inherit; font-size: 14px; cursor: pointer;
+    }
+    .row button.on { background: #fff; color: #111; border-color: transparent; }
+    .slide { display: flex; gap: 8px; align-items: center; margin-top: 14px; }
+    .slide input { flex: 1; accent-color: #fff; }
+    .view { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
+    .view:not(:has(#after-fig:not([hidden]))) { grid-template-columns: 1fr; }
     .view figure { margin: 0; }
-    .view img { width: 100%; max-height: 280px; object-fit: contain; border-radius: 14px; background: repeating-conic-gradient(#1a2233 0% 25%, #101621 0% 50%) 50% / 16px 16px; }
-    .view figcaption { margin-top: 4px; color: #9aabc8; font-size: 12px; }
-    @media (max-width: 640px) { .view { grid-template-columns: 1fr; } }
+    .view img {
+      width: 100%; height: 220px; object-fit: contain; border-radius: 14px; display: block;
+      background: repeating-conic-gradient(#2a2a2a 0 25%, #141414 0 50%) 0 0 / 18px 18px;
+    }
+    .view figcaption { margin-top: 6px; color: rgb(244 247 255 / 0.62); font-size: 12px; }
+    .acts { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+    .run, .ghost {
+      border-radius: 12px; padding: 10px 16px; font: inherit; font-weight: 700; cursor: pointer;
+    }
+    .run { border: 0; background: #fff; color: #111; }
+    .run:disabled { opacity: 0.55; cursor: default; }
+    .ghost { border: 1px solid rgb(255 255 255 / 0.16); background: transparent; color: inherit; }
+    .note { min-height: 1.3em; margin: 12px 2px 0; color: #d5fff3; font-size: 14px; }
+    @media (max-width: 640px) {
+      .view { grid-template-columns: 1fr; }
+      .head { align-items: flex-start; }
+    }
   </style>
 </head>
 <body>
-  <header class="bar">
-    <a class="brand" href="/">Nibras <em>Image</em></a>
+  <header class="top">
+    <a class="home" href="/">Nibras Code</a>
     <div class="langs" id="langs"></div>
   </header>
   <main>
-    <h1 id="title"></h1>
-    <p class="lead" id="lead"></p>
+    <div class="head">
+      <div class="mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path fill="#1a1206" d="M4 7.2A2.2 2.2 0 0 1 6.2 5h11.6A2.2 2.2 0 0 1 20 7.2v9.6a2.2 2.2 0 0 1-2.2 2.2H6.2A2.2 2.2 0 0 1 4 16.8V7.2Z"/><circle cx="9" cy="9.2" r="1.3" fill="#f6e7c1"/><path fill="#f6e7c1" d="M6.8 16.2 10 12.2l2.1 2.2 1.5-1.5 3.6 3.3H6.8Z"/></svg>
+      </div>
+      <div>
+        <h1 id="title"></h1>
+        <p class="lead" id="lead"></p>
+      </div>
+    </div>
     <section class="card">
       <label class="drop">
         <input id="file" type="file" accept="image/jpeg,image/png,image/webp" />
@@ -63,28 +108,26 @@
       <div class="row" id="jobs"></div>
       <label class="slide" id="quality-wrap"><span id="quality-label"></span><input id="quality" type="range" min="40" max="95" value="72" /></label>
       <div class="row" id="formats"></div>
-      <label class="slide" id="side-wrap"><span id="side-label"></span>
-        <select id="side"></select>
-      </label>
+      <div class="row" id="side-wrap"><span id="side-label"></span><select id="side"></select></div>
       <div class="view" id="view" hidden>
         <figure><img id="before" alt="" /><figcaption id="before-cap"></figcaption></figure>
-        <figure><img id="after" alt="" /><figcaption id="after-cap"></figcaption></figure>
+        <figure id="after-fig" hidden><img id="after" alt="" /><figcaption id="after-cap"></figcaption></figure>
       </div>
       <div class="acts">
         <button class="run" id="run" type="button" disabled></button>
-        <button id="save" type="button" hidden></button>
-        <button id="reset" type="button" hidden></button>
+        <button class="ghost" id="save" type="button" hidden></button>
+        <button class="ghost" id="reset" type="button" hidden></button>
       </div>
     </section>
     <p class="note" id="note"></p>
   </main>
   <script>
     var UI = {
-      az: { title: "Şəkil sıx və çevir", lead: "Şəkli sıx, JPG, PNG və WebP arasında çevir, uzun tərəfi qısalt. Şəkil cihazdan çıxmır.", drop: "Şəkil seç", empty: "Şəkil cihazda qalır.", job: "İş", compress: "Sıx", convert: "Çevir", resize: "Ölçü", quality: "Keyfiyyət", format: "Format", side: "Uzun tərəf", original: "Orijinal", run: "Hazırla", working: "Hazırlanır…", save: "Yüklə", reset: "Başqa şəkil", ready: "Hazırdır.", fail: "Bu şəkil açılmadı. JPG, PNG və ya WebP yoxla.", bigger: "Bu format kiçilmədi. JPG və ya WebP seç.", before: "Əvvəl", after: "Sonra" },
-      en: { title: "Compress and convert", lead: "Compress a photo, convert JPG, PNG and WebP, and shorten the long side. The photo never leaves the device.", drop: "Choose a photo", empty: "The photo stays on this device.", job: "Job", compress: "Compress", convert: "Convert", resize: "Resize", quality: "Quality", format: "Format", side: "Long side", original: "Original", run: "Make it", working: "Working…", save: "Download", reset: "Another photo", ready: "Done.", fail: "This photo did not open. Try JPG, PNG or WebP.", bigger: "This format did not get smaller. Choose JPG or WebP.", before: "Before", after: "After" },
-      tr: { title: "Fotoğraf sıkıştır ve çevir", lead: "Fotoğrafı sıkıştır, JPG, PNG ve WebP arasında çevir, uzun kenarı kısalt. Fotoğraf cihazdan çıkmaz.", drop: "Fotoğraf seç", empty: "Fotoğraf cihazda kalır.", job: "İş", compress: "Sıkıştır", convert: "Çevir", resize: "Boyut", quality: "Kalite", format: "Biçim", side: "Uzun kenar", original: "Orijinal", run: "Hazırla", working: "Hazırlanıyor…", save: "İndir", reset: "Başka fotoğraf", ready: "Hazır.", fail: "Bu fotoğraf açılmadı. JPG, PNG veya WebP dene.", bigger: "Bu biçim küçülmedi. JPG veya WebP seç.", before: "Önce", after: "Sonra" },
-      ar: { title: "اضغط الصورة وحوّلها", lead: "اضغط الصورة، حوّل بين JPG وPNG وWebP، وقصّر الضلع الطويل. الصورة لا تغادر الجهاز.", drop: "اختر صورة", empty: "تبقى الصورة على الجهاز.", job: "العمل", compress: "اضغط", convert: "حوّل", resize: "الحجم", quality: "الجودة", format: "الصيغة", side: "الضلع الطويل", original: "الأصل", run: "جهّز", working: "جارٍ التجهيز…", save: "تنزيل", reset: "صورة أخرى", ready: "تم.", fail: "لم تُفتح الصورة. جرّب JPG أو PNG أو WebP.", bigger: "هذه الصيغة لم تصغر. اختر JPG أو WebP.", before: "قبل", after: "بعد" },
-      ru: { title: "Сжать и конвертировать", lead: "Сожмите фото, переведите JPG, PNG и WebP и укоротите длинную сторону. Фото не уходит с устройства.", drop: "Выберите фото", empty: "Фото остаётся на устройстве.", job: "Задача", compress: "Сжать", convert: "Конвертировать", resize: "Размер", quality: "Качество", format: "Формат", side: "Длинная сторона", original: "Оригинал", run: "Сделать", working: "Готовится…", save: "Скачать", reset: "Другое фото", ready: "Готово.", fail: "Фото не открылось. Попробуйте JPG, PNG или WebP.", bigger: "Этот формат не стал меньше. Выберите JPG или WebP.", before: "До", after: "После" }
+      az: { title: "Nibras Image", lead: "Şəkli sıx, JPG, PNG və WebP arasında çevir, uzun tərəfi qısalt. Şəkil cihazdan çıxmır.", drop: "Şəkil seç", empty: "Şəkil cihazda qalır. Hesab lazım deyil.", job: "İş", compress: "Sıx", convert: "Çevir", resize: "Ölçü", quality: "Keyfiyyət", format: "Format", side: "Uzun tərəf", original: "Orijinal", run: "Hazırla", working: "Hazırlanır…", save: "Yüklə", reset: "Başqa şəkil", ready: "Hazırdır.", fail: "Bu şəkil açılmadı. JPG, PNG və ya WebP yoxla.", bigger: "Bu format kiçilmədi. JPG və ya WebP seç.", before: "Əvvəl", after: "Sonra" },
+      en: { title: "Nibras Image", lead: "Compress a photo, convert JPG, PNG and WebP, and shorten the long side. The photo never leaves the device.", drop: "Choose a photo", empty: "The photo stays on this device.", job: "Job", compress: "Compress", convert: "Convert", resize: "Resize", quality: "Quality", format: "Format", side: "Long side", original: "Original", run: "Make it", working: "Working…", save: "Download", reset: "Another photo", ready: "Done.", fail: "This photo did not open. Try JPG, PNG or WebP.", bigger: "This format did not get smaller. Choose JPG or WebP.", before: "Before", after: "After" },
+      tr: { title: "Nibras Image", lead: "Fotoğrafı sıkıştır, JPG, PNG ve WebP arasında çevir, uzun kenarı kısalt. Fotoğraf cihazdan çıkmaz.", drop: "Fotoğraf seç", empty: "Fotoğraf cihazda kalır.", job: "İş", compress: "Sıkıştır", convert: "Çevir", resize: "Boyut", quality: "Kalite", format: "Biçim", side: "Uzun kenar", original: "Orijinal", run: "Hazırla", working: "Hazırlanıyor…", save: "İndir", reset: "Başka fotoğraf", ready: "Hazır.", fail: "Bu fotoğraf açılmadı. JPG, PNG veya WebP dene.", bigger: "Bu biçim küçülmedi. JPG veya WebP seç.", before: "Önce", after: "Sonra" },
+      ar: { title: "Nibras Image", lead: "اضغط الصورة، حوّل بين JPG وPNG وWebP، وقصّر الضلع الطويل. الصورة لا تغادر الجهاز.", drop: "اختر صورة", empty: "تبقى الصورة على الجهاز.", job: "العمل", compress: "اضغط", convert: "حوّل", resize: "الحجم", quality: "الجودة", format: "الصيغة", side: "الضلع الطويل", original: "الأصل", run: "جهّز", working: "جارٍ التجهيز…", save: "تنزيل", reset: "صورة أخرى", ready: "تم.", fail: "لم تُفتح الصورة. جرّب JPG أو PNG أو WebP.", bigger: "هذه الصيغة لم تصغر. اختر JPG أو WebP.", before: "قبل", after: "بعد" },
+      ru: { title: "Nibras Image", lead: "Сожмите фото, переведите JPG, PNG и WebP и укоротите длинную сторону. Фото не уходит с устройства.", drop: "Выберите фото", empty: "Фото остаётся на устройстве.", job: "Задача", compress: "Сжать", convert: "Конвертировать", resize: "Размер", quality: "Качество", format: "Формат", side: "Длинная сторона", original: "Оригинал", run: "Сделать", working: "Готовится…", save: "Скачать", reset: "Другое фото", ready: "Готово.", fail: "Фото не открылось. Попробуйте JPG, PNG или WebP.", bigger: "Этот формат не стал меньше. Выберите JPG или WebP.", before: "До", after: "После" }
     };
     var lang = localStorage.getItem("nibras-image-lang") || ((navigator.language || "az").slice(0, 2));
     if (!UI[lang]) lang = "az";
@@ -162,6 +205,7 @@
         var after = document.getElementById("after");
         if (after.src && after.src.indexOf("blob:") === 0) URL.revokeObjectURL(after.src);
         after.src = URL.createObjectURL(blob);
+        document.getElementById("after-fig").hidden = false;
         document.getElementById("view").hidden = false;
         document.getElementById("save").hidden = false;
         document.getElementById("after-cap").textContent = t().after + " · " + canvas.width + "×" + canvas.height + " · " + kb(blob.size);
@@ -202,6 +246,7 @@
       if (el.id === "reset") {
         file = null; result = null; fileInput.value = "";
         document.getElementById("view").hidden = true;
+        document.getElementById("after-fig").hidden = true;
         document.getElementById("save").hidden = true;
         document.getElementById("reset").hidden = true;
         document.getElementById("run").disabled = true;
@@ -222,6 +267,7 @@
         document.getElementById("before").src = beforeUrl;
         document.getElementById("before-cap").textContent = t().before + " · " + kb(file.size);
         document.getElementById("after").removeAttribute("src");
+        document.getElementById("after-fig").hidden = true;
         document.getElementById("view").hidden = false;
       }
       paint();
