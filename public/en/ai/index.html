@@ -925,10 +925,14 @@
       const s = raw.toLowerCase()
         .replace(/ı/g, "i").replace(/ə/g, "e").replace(/ö/g, "o").replace(/ü/g, "u")
         .replace(/ş/g, "s").replace(/ç/g, "c").replace(/ğ/g, "g");
-      const verb = /(^|[^a-z0-9])(six(?:sin|dir)?|compress|sikistir|kucult)(?=$|[^a-z0-9])/.test(s) || /сожми|сожмите|اضغط/.test(raw);
-      const photo = /(sekil|sekl|foto|photo|image|resim)/.test(s) || /картин|фото|صور/.test(raw);
-      if (/^(six(?:sin|dir)?|compress|sikistir|kucult)[.!?]?$/.test(s) || /^(сожми|сожмите|اضغط)[.!?]?$/.test(raw)) return true;
-      return verb && (photo || hasImage);
+      const strong = /(sixma|sixmaq|sixici|sixisdir|sixistdir|sixilsin|sikistir|kucult|kicilt|kiciklesdir|balacalasdir|yungullesdir|compress|squeeze|shrink|minify|kompress|kompres|hecmini azalt|olcusunu kicilt|olcunu kicilt|kicik et|balaca et)/.test(s)
+        || /сожми|сожмите|ужми|уменьш|اضغط|ضغط|تصغير|صغّر|صغر/.test(raw);
+      if (strong) return true;
+      const six = /(^|[^a-z0-9])six(?:sin|dir|in|ib|iram)?(?=$|[^a-z0-9])/.test(s);
+      const photo = /(sekil|sekl|foto|fayl|photo|image|resim|picture)/.test(s) || /картин|фото|صور/.test(raw);
+      if (six && (photo || hasImage)) return true;
+      const bare = s.replace(/\b(bu|bunu|onu|zehmet|olmasa|please|this|my|bir|de|da|ele|bele|artiq|indi|sekli|sekil|foto)\b/g, " ").replace(/[^a-z0-9]+/g, " ").trim();
+      return /^(six(?:sin|dir|in|ib|iram)?|compress|squeeze|shrink)$/.test(bare);
     }
     function escapeHtml(text) {
       const map = { "&": "amp", "<": "lt", ">": "gt" };
