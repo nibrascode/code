@@ -26,7 +26,7 @@
       color: #d5def2; font: inherit; font-size: 12px; font-weight: 700; cursor: pointer;
     }
     .langs button.on { background: #fff; color: #111; border-color: transparent; }
-    main { width: min(760px, calc(100% - 32px)); margin: 28px auto 48px; }
+    main { width: min(920px, calc(100% - 32px)); margin: 28px auto 56px; }
     .head { display: flex; gap: 14px; align-items: center; margin-bottom: 18px; }
     .mark {
       width: 58px; height: 58px; flex: none; border-radius: 16px;
@@ -37,49 +37,81 @@
     .mark svg { width: 34px; height: 34px; }
     h1 { margin: 0; font-size: clamp(32px, 5vw, 44px); letter-spacing: -0.045em; line-height: 1; }
     .lead { margin: 6px 0 0; color: rgb(244 247 255 / 0.72); font-size: 15px; }
-    .card {
-      border: 1px solid rgb(255 255 255 / 0.1);
-      background: rgb(255 255 255 / 0.035);
-      border-radius: 22px;
-      padding: 16px;
-      backdrop-filter: blur(8px);
+    .studio {
+      padding: 10px;
+      border-radius: 28px;
+      background:
+        linear-gradient(180deg, rgb(14 18 32 / 0.92), rgb(8 10 18 / 0.92)) padding-box,
+        linear-gradient(135deg, #f0d48a, rgb(126 182 255 / 0.55) 46%, rgb(255 255 255 / 0.12)) border-box;
+      border: 1px solid transparent;
+      box-shadow: 0 24px 70px rgb(0 0 0 / 0.45);
+    }
+    .stage {
+      position: relative;
+      min-height: 360px;
+      border-radius: 20px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 35%, rgb(90 130 255 / 0.16), transparent 58%),
+        repeating-conic-gradient(#1b2333 0 25%, #10151f 0 50%) 0 0 / 22px 22px;
+    }
+    .view { display: grid; grid-template-columns: 1fr 1fr; min-height: 360px; }
+    .view:not(:has(#after-fig:not([hidden]))) { grid-template-columns: 1fr; }
+    .view figure { margin: 0; position: relative; }
+    .view img { width: 100%; height: 360px; object-fit: contain; display: block; }
+    .view figcaption {
+      position: absolute; left: 12px; top: 12px;
+      padding: 4px 10px; border-radius: 999px;
+      background: rgb(6 8 14 / 0.72); color: #f4f7ff; font-size: 12px; font-weight: 650;
     }
     .drop {
-      display: grid; gap: 4px; padding: 22px 18px; cursor: pointer;
-      border: 1px dashed rgb(255 255 255 / 0.22); border-radius: 16px;
+      position: absolute; inset: 0; margin: 0;
+      display: grid; place-content: center; text-align: center; gap: 6px;
+      cursor: pointer; border: 0; background: transparent;
     }
     .drop input { display: none; }
-    .drop b { font-size: 16px; }
-    .drop span { color: rgb(244 247 255 / 0.65); font-size: 13px; }
-    .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 14px; }
-    .row > span, .slide > span { min-width: 88px; color: rgb(244 247 255 / 0.7); font-size: 14px; }
+    .drop b { font-size: 18px; letter-spacing: -0.03em; }
+    .drop span { color: rgb(244 247 255 / 0.68); font-size: 13px; }
+    .stage:has(#view:not([hidden])) .drop {
+      inset: auto 14px 14px auto;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgb(8 12 20 / 0.78);
+      border: 1px solid rgb(255 255 255 / 0.16);
+    }
+    .stage:has(#view:not([hidden])) .drop b { display: none; }
+    .dock {
+      margin-top: 10px; padding: 14px 14px 12px;
+      border-radius: 18px;
+      background: rgb(255 255 255 / 0.035);
+      border: 1px solid rgb(255 255 255 / 0.06);
+    }
+    .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 12px; }
+    .row:first-child { margin-top: 0; }
+    .row > span, .slide > span { min-width: 88px; color: rgb(244 247 255 / 0.62); font-size: 13px; }
     .row button, select {
-      border: 1px solid rgb(255 255 255 / 0.12);
-      background: rgb(255 255 255 / 0.04);
-      color: inherit; border-radius: 999px; padding: 7px 12px;
-      font: inherit; font-size: 14px; cursor: pointer;
+      border: 0; background: transparent; color: inherit;
+      border-radius: 999px; padding: 7px 12px;
+      font: inherit; font-size: 14px; font-weight: 650; cursor: pointer;
     }
-    .row button.on { background: #fff; color: #111; border-color: transparent; }
-    .slide { display: flex; gap: 8px; align-items: center; margin-top: 14px; }
-    .slide input { flex: 1; accent-color: #fff; }
-    .view { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
-    .view:not(:has(#after-fig:not([hidden]))) { grid-template-columns: 1fr; }
-    .view figure { margin: 0; }
-    .view img {
-      width: 100%; height: 220px; object-fit: contain; border-radius: 14px; display: block;
-      background: repeating-conic-gradient(#2a2a2a 0 25%, #141414 0 50%) 0 0 / 18px 18px;
+    #jobs, #formats, #side-wrap {
+      width: fit-content; max-width: 100%;
+      padding: 4px; border-radius: 999px;
+      background: rgb(0 0 0 / 0.28);
+      border: 1px solid rgb(255 255 255 / 0.06);
     }
-    .view figcaption { margin-top: 6px; color: rgb(244 247 255 / 0.62); font-size: 12px; }
-    .acts { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
-    .run, .ghost {
-      border-radius: 12px; padding: 10px 16px; font: inherit; font-weight: 700; cursor: pointer;
-    }
-    .run { border: 0; background: #fff; color: #111; }
-    .run:disabled { opacity: 0.55; cursor: default; }
+    .row button.on { background: #fff; color: #111; }
+    .slide { display: flex; gap: 10px; align-items: center; margin-top: 12px; }
+    .slide input { flex: 1; accent-color: #f0d48a; }
+    .acts { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+    .run, .ghost { border-radius: 12px; padding: 11px 18px; font: inherit; font-weight: 750; cursor: pointer; }
+    .run { border: 0; background: linear-gradient(180deg, #fff, #e7eaf2); color: #111; }
+    .run:disabled { opacity: 0.45; cursor: default; }
     .ghost { border: 1px solid rgb(255 255 255 / 0.16); background: transparent; color: inherit; }
-    .note { min-height: 1.3em; margin: 12px 2px 0; color: #d5fff3; font-size: 14px; }
-    @media (max-width: 640px) {
-      .view { grid-template-columns: 1fr; }
+    .note { min-height: 1.3em; margin: 12px 4px 0; color: #f3e7c4; font-size: 14px; font-weight: 650; }
+    @media (max-width: 720px) {
+      .view, .view img, .stage { min-height: 240px; height: auto; }
+      .view img { height: 240px; }
       .head { align-items: flex-start; }
     }
   </style>
@@ -99,24 +131,28 @@
         <p class="lead" id="lead"></p>
       </div>
     </div>
-    <section class="card">
-      <label class="drop">
-        <input id="file" type="file" accept="image/jpeg,image/png,image/webp" />
-        <b id="drop"></b>
-        <span id="meta"></span>
-      </label>
-      <div class="row" id="jobs"></div>
-      <label class="slide" id="quality-wrap"><span id="quality-label"></span><input id="quality" type="range" min="40" max="95" value="72" /></label>
-      <div class="row" id="formats"></div>
-      <div class="row" id="side-wrap"><span id="side-label"></span><select id="side"></select></div>
-      <div class="view" id="view" hidden>
-        <figure><img id="before" alt="" /><figcaption id="before-cap"></figcaption></figure>
-        <figure id="after-fig" hidden><img id="after" alt="" /><figcaption id="after-cap"></figcaption></figure>
+    <section class="studio">
+      <div class="stage">
+        <div class="view" id="view" hidden>
+          <figure><img id="before" alt="" /><figcaption id="before-cap"></figcaption></figure>
+          <figure id="after-fig" hidden><img id="after" alt="" /><figcaption id="after-cap"></figcaption></figure>
+        </div>
+        <label class="drop">
+          <input id="file" type="file" accept="image/jpeg,image/png,image/webp" />
+          <b id="drop"></b>
+          <span id="meta"></span>
+        </label>
       </div>
-      <div class="acts">
-        <button class="run" id="run" type="button" disabled></button>
-        <button class="ghost" id="save" type="button" hidden></button>
-        <button class="ghost" id="reset" type="button" hidden></button>
+      <div class="dock">
+        <div class="row" id="jobs"></div>
+        <label class="slide" id="quality-wrap"><span id="quality-label"></span><input id="quality" type="range" min="40" max="95" value="72" /></label>
+        <div class="row" id="formats"></div>
+        <div class="row" id="side-wrap"><span id="side-label"></span><select id="side"></select></div>
+        <div class="acts">
+          <button class="run" id="run" type="button" disabled></button>
+          <button class="ghost" id="save" type="button" hidden></button>
+          <button class="ghost" id="reset" type="button" hidden></button>
+        </div>
       </div>
     </section>
     <p class="note" id="note"></p>
