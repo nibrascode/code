@@ -6,6 +6,7 @@ import { TechMark } from "@/components/tech-marquee";
 import { LanguageSwitch } from "@/components/language-switch";
 import { NavMenu } from "@/components/nav-menu";
 import { HeroMark } from "@/components/hero-mark";
+import { faqPath } from "@/lib/faq";
 import { homePath, localeHref } from "@/lib/locale-path";
 import { SEARCH, searchPath } from "@/lib/search-pages";
 import { toolsPath, TOOLS_PAGE } from "@/lib/tools";
