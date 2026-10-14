@@ -19,13 +19,40 @@
     }
     .top { display: flex; align-items: center; justify-content: space-between; padding: 18px 22px 0; }
     .home { color: #d7e4ff; text-decoration: none; font-weight: 800; letter-spacing: -0.04em; }
-    .langs { display: flex; gap: 6px; }
-    .langs button {
-      width: 36px; height: 32px; padding: 0; border-radius: 999px;
-      border: 1px solid rgb(255 255 255 / 0.14); background: rgb(255 255 255 / 0.04);
-      color: #d5def2; font: inherit; font-size: 12px; font-weight: 700; cursor: pointer;
+    .end { display: flex; align-items: center; gap: 8px; }
+    .ver { color: rgb(243 231 196 / 0.9); font-size: 12px; font-weight: 750; letter-spacing: 0.04em; }
+    .langbox { position: relative; }
+    .langbox > button, .key {
+      min-width: 40px; height: 36px; padding: 0 10px; border-radius: 999px;
+      border: 1px solid rgb(255 255 255 / 0.16); background: rgb(255 255 255 / 0.05);
+      color: #f4f7ff; font: inherit; font-size: 12px; font-weight: 800; cursor: pointer;
     }
-    .langs button.on { background: #fff; color: #111; border-color: transparent; }
+    .key { display: grid; place-items: center; padding: 0; }
+    .key svg { width: 18px; height: 18px; }
+    .langmenu {
+      position: absolute; top: calc(100% + 6px); inset-inline-end: 0; z-index: 5;
+      display: grid; gap: 4px; min-width: 92px; padding: 6px;
+      border-radius: 14px; background: rgb(10 14 26 / 0.98);
+      border: 1px solid rgb(255 255 255 / 0.12);
+      box-shadow: 0 16px 40px rgb(0 0 0 / 0.45);
+    }
+    .langmenu button {
+      min-height: 34px; border: 0; border-radius: 10px; background: transparent;
+      color: #e8eeff; font: inherit; font-size: 13px; font-weight: 700; cursor: pointer;
+    }
+    .langmenu button.on { background: #fff; color: #111; }
+    .sheet { position: fixed; inset: 0; z-index: 30; display: grid; place-items: end center; padding: 12px; background: rgb(2 4 10 / 0.72); }
+    .sheet-card {
+      width: min(640px, 100%); max-height: min(86dvh, 820px); overflow: auto;
+      padding: 18px 18px 22px; border-radius: 20px;
+      background: #0c1220; color: #eef3ff;
+      border: 1px solid rgb(240 212 138 / 0.35);
+    }
+    .sheet-card h2 { margin: 18px 0 8px; font-size: 18px; }
+    .sheet-card h2:first-child { margin-top: 0; }
+    .sheet-card p { margin: 0 0 10px; color: #d5def0; font-size: 14px; line-height: 1.55; }
+    .sheet-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .sheet-top button { border: 0; background: transparent; color: #f4f7ff; font-size: 26px; line-height: 1; cursor: pointer; }
     main { width: min(920px, calc(100% - 32px)); margin: 28px auto 56px; }
     .head { display: flex; gap: 14px; align-items: center; margin-bottom: 18px; }
     .mark {
@@ -131,7 +158,16 @@
 <body>
   <header class="top">
     <a class="home" href="/">Nibras Code</a>
-    <div class="langs" id="langs"></div>
+    <div class="end">
+      <span class="ver">V 1.0.0</span>
+      <div class="langbox">
+        <button type="button" id="langbtn" aria-expanded="false" aria-haspopup="listbox">AZ</button>
+        <div class="langmenu" id="langmenu" hidden></div>
+      </div>
+      <button class="key" id="keybtn" type="button" aria-label="Məxfilik və məlumat">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="15" r="3.2"/><path d="M10.8 13.4 20 5.2M16.2 7.4l2.1 2.1M13.8 9.8l2.1 2.1"/></svg>
+      </button>
+    </div>
   </header>
   <main>
     <div class="head">
@@ -175,6 +211,15 @@
     </section>
     <p class="note" id="note"></p>
   </main>
+  <div class="sheet" id="sheet" hidden>
+    <div class="sheet-card" role="dialog" aria-modal="true" aria-labelledby="sheet-privacy">
+      <div class="sheet-top"><span class="ver">V 1.0.0</span><button type="button" id="sheet-close" aria-label="Bağla">&times;</button></div>
+      <h2 id="sheet-privacy"></h2>
+      <div id="privacy"></div>
+      <h2 id="sheet-about"></h2>
+      <div id="about"></div>
+    </div>
+  </div>
   <script>
     var UI = {
       az: { title: "Nibras Image", lead: "Şəkli sıx, JPG, PNG və WebP arasında çevir, uzun tərəfi qısalt. Şəkil cihazdan çıxmır.", drop: "Şəkil seç", empty: "Şəkil cihazda qalır. Hesab lazım deyil.", job: "İş", compress: "Sıx", convert: "Çevir", resize: "Ölçü", quality: "Keyfiyyət", format: "Format", side: "Uzun tərəf", original: "Orijinal", run: "Hazırla", working: "Hazırlanır…", save: "Yüklə", reset: "Başqa şəkil", ready: "Hazırdır.", fail: "Bu şəkil açılmadı. JPG, PNG və ya WebP yoxla.", bigger: "Bu format kiçilmədi. JPG və ya WebP seç.", before: "Əvvəl", after: "Sonra" },
@@ -182,6 +227,133 @@
       tr: { title: "Nibras Image", lead: "Fotoğrafı sıkıştır, JPG, PNG ve WebP arasında çevir, uzun kenarı kısalt. Fotoğraf cihazdan çıkmaz.", drop: "Fotoğraf seç", empty: "Fotoğraf cihazda kalır.", job: "İş", compress: "Sıkıştır", convert: "Çevir", resize: "Boyut", quality: "Kalite", format: "Biçim", side: "Uzun kenar", original: "Orijinal", run: "Hazırla", working: "Hazırlanıyor…", save: "İndir", reset: "Başka fotoğraf", ready: "Hazır.", fail: "Bu fotoğraf açılmadı. JPG, PNG veya WebP dene.", bigger: "Bu biçim küçülmedi. JPG veya WebP seç.", before: "Önce", after: "Sonra" },
       ar: { title: "Nibras Image", lead: "اضغط الصورة، حوّل بين JPG وPNG وWebP، وقصّر الضلع الطويل. الصورة لا تغادر الجهاز.", drop: "اختر صورة", empty: "تبقى الصورة على الجهاز.", job: "العمل", compress: "اضغط", convert: "حوّل", resize: "الحجم", quality: "الجودة", format: "الصيغة", side: "الضلع الطويل", original: "الأصل", run: "جهّز", working: "جارٍ التجهيز…", save: "تنزيل", reset: "صورة أخرى", ready: "تم.", fail: "لم تُفتح الصورة. جرّب JPG أو PNG أو WebP.", bigger: "هذه الصيغة لم تصغر. اختر JPG أو WebP.", before: "قبل", after: "بعد" },
       ru: { title: "Nibras Image", lead: "Сожмите фото, переведите JPG, PNG и WebP и укоротите длинную сторону. Фото не уходит с устройства.", drop: "Выберите фото", empty: "Фото остаётся на устройстве.", job: "Задача", compress: "Сжать", convert: "Формат", resize: "Размер", quality: "Качество", format: "Формат", side: "Длинная сторона", original: "Оригинал", run: "Сделать", working: "Готовится…", save: "Скачать", reset: "Другое фото", ready: "Готово.", fail: "Фото не открылось. Попробуйте JPG, PNG или WebP.", bigger: "Этот формат не стал меньше. Выберите JPG или WebP.", before: "До", after: "После" }
+    };
+    var INFO = {
+      az: {
+        key: "Məxfilik və məlumat", close: "Bağla",
+        privacyTitle: "Məxfilik siyasəti", aboutTitle: "Tətbiq məlumatı",
+        privacy: [
+          "Bu siyasət Nibras Image tətbiqinə aiddir. Versiya V 1.0.0. Tətbiqi Nibras Code hazırlayır. Əlaqə: nibrascode@gmail.com. Açıq ünvan: https://www.nibrascode.com/image/privacy",
+          "Nibras Image şəkli telefonun və ya kompüterin özündə sıxır, JPG, PNG və WebP arasında çevirir və uzun tərəfi qısaldır. Şəkil Nibras Code serverinə göndərilmir.",
+          "Şəkil yalnız siz faylı seçəndə oxunur. Emal brauzerin və ya tətbiqin içində, cihazınızda gedir. Nəticəni siz yükləyəndə fayl sizin seçdiyiniz qovluğa yazılır. Bizdə surət qalmır.",
+          "Toplamadığımız məlumat: ad, e-poçt, telefon, hesab, əlaqələr, dəqiq yer, reklam kimliyi, ödəniş və sağlamlıq məlumatı. Hesab açılmır. Reklam izləyicisi, analitik SDK və üçüncü tərəf çerezi yoxdur.",
+          "Cihazda qalan tək seçim dilidir. O, yalnız bu cihazda saxlanır və serverə getmir. Tətbiq məlumatını siləndə o da silinir.",
+          "İcazə: şəkil seçmək və nəticəni saxlamaq üçün fayl seçimi. Kamera, mikrofon, əlaqə və yer icazəsi istənmir. İcazəni verməsəniz, sadəcə şəkil aça bilməzsiniz.",
+          "Məlumat satılmır və paylaşılmır, çünki şəxsi məlumat bizə çatmır. Üçüncü tərəfə şəkil göndərilmir.",
+          "Tətbiq 13 yaşdan kiçik uşaqlara yönəlmir. Uşaqlardan bilərəkdən şəxsi məlumat toplanmır.",
+          "Siyasət dəyişəndə bu mətn və https://www.nibrascode.com/image/privacy ünvanı yenilənir. Sualınız varsa nibrascode@gmail.com ünvanına yazın. Yenilənmə: 14 oktyabr 2026."
+        ],
+        about: [
+          "Ad: Nibras Image. Versiya: V 1.0.0. Hazırlayan: Nibras Code. Bu, Mahir Əliyevin müstəqil layihəsidir.",
+          "Nə edir: şəklin həcmini kiçildir, JPG, PNG və WebP arasında çevirir, uzun tərəfi 640, 1280 və ya 1920 pikselə endirir. Orijinal ölçü də seçilə bilər.",
+          "Necə işlədilir: şəkli seçin, işi seçin (sıx, çevir və ya ölçü), keyfiyyəti və formatı yoxlayın, Hazırla düyməsinə basın, sonra Yüklə.",
+          "Keyfiyyət 40 ilə 95 arasındadır. Aşağı rəqəm faylı daha çox kiçildir, şəkil bir az yumşalır. 72 gündəlik paylaşım üçün başlanğıc nöqtədir.",
+          "PNG itkisizdir və bəzən kiçilmir. Kiçik fayl üçün WebP və ya JPG seçin. JPG ağ fonla saxlanır, çünki şəffaflığı daşımır.",
+          "Şəkil cihazdan çıxmır. Səhifə bir dəfə açıldıqdan sonra emal internetsiz də gedir. Süni intellektlə şəkil yaratmır və fon silmir. Fon silmək Nibras Erase tətbiqindədir.",
+          "Hesab, ödəniş və reklam yoxdur. Pulsuzdur. Dillər: Azərbaycan, English, Türkçe, العربية, Русский. Düymə yuxarıda yalnız seçilmiş dili göstərir, basanda qalanları açılır.",
+          "Dəstək: nibrascode@gmail.com. Məxfilik ünvanı: https://www.nibrascode.com/image/privacy"
+        ]
+      },
+      en: {
+        key: "Privacy and about", close: "Close",
+        privacyTitle: "Privacy policy", aboutTitle: "About this app",
+        privacy: [
+          "This policy covers Nibras Image, version V 1.0.0, made by Nibras Code. Contact: nibrascode@gmail.com. Public address: https://www.nibrascode.com/image/privacy",
+          "Nibras Image compresses a photo, converts JPG, PNG and WebP, and shortens the long side. The photo is not sent to a Nibras Code server.",
+          "The file is read only when you pick it. Processing happens on your device, inside the browser or the app. When you download, the result is written where you choose. We keep no copy.",
+          "We do not collect your name, email, phone, account, contacts, precise location, advertising ID, payment data, or health data. There is no account, no ad tracker, no analytics SDK, and no third-party cookie.",
+          "The only thing kept on the device is the language you pick. It stays on that device and is not sent to a server. Clearing the app data deletes it.",
+          "Permission: a file picker, so you can open a photo and save the result. The app does not ask for the camera, microphone, contacts, or location. If you refuse files, you simply cannot open a photo.",
+          "We do not sell or share personal data, because personal data does not reach us. The photo is not sent to a third party.",
+          "The app is not directed at children under 13. We do not knowingly collect personal information from children.",
+          "If this policy changes, this text and https://www.nibrascode.com/image/privacy are updated. Questions: nibrascode@gmail.com. Updated: 14 October 2026."
+        ],
+        about: [
+          "Name: Nibras Image. Version: V 1.0.0. Maker: Nibras Code, an independent project by Mahir Əliyev.",
+          "What it does: makes a photo smaller, converts JPG, PNG and WebP, and can limit the long side to 640, 1280 or 1920 pixels. Original size can stay.",
+          "How to use it: choose a photo, pick the job (compress, convert or resize), check quality and format, press Make it, then Download.",
+          "Quality runs from 40 to 95. A lower number makes a smaller file and a slightly softer photo. 72 is the starting point for everyday sharing.",
+          "PNG is lossless and sometimes does not get smaller. For a small file, choose WebP or JPG. JPG is saved with a white background, because it cannot keep transparency.",
+          "The photo never leaves the device. After the page has opened once, processing still works offline. It does not generate a picture with AI and it does not remove a background. Background removal is Nibras Erase.",
+          "There is no account, no payment and no advertising. It is free. Languages: Azerbaijani, English, Turkish, Arabic and Russian. The button shows only the current language. Press it to open the others.",
+          "Support: nibrascode@gmail.com. Privacy address: https://www.nibrascode.com/image/privacy"
+        ]
+      },
+      tr: {
+        key: "Gizlilik ve bilgi", close: "Kapat",
+        privacyTitle: "Gizlilik politikası", aboutTitle: "Uygulama bilgisi",
+        privacy: [
+          "Bu politika Nibras Image içindir. Sürüm V 1.0.0. Hazırlayan Nibras Code. İletişim: nibrascode@gmail.com. Açık adres: https://www.nibrascode.com/image/privacy",
+          "Nibras Image fotoğrafı cihazda sıkıştırır, JPG, PNG ve WebP arasında çevirir, uzun kenarı kısaltır. Fotoğraf Nibras Code sunucusuna gitmez.",
+          "Dosya yalnız siz seçince okunur. İşlem tarayıcıda veya uygulamada, cihazınızda olur. İndirince sonuç sizin seçtiğiniz yere yazılır. Bizde kopya kalmaz.",
+          "Ad, e-posta, telefon, hesap, kişiler, konum, reklam kimliği ve ödeme bilgisi toplanmaz. Hesap yok. Reklam izleyici, analitik SDK ve üçüncü taraf çerezi yok.",
+          "Cihazda kalan tek seçim dildir. Sunucuya gitmez. Uygulama verisi silinince o da silinir.",
+          "İzin: fotoğraf seçmek ve sonucu kaydetmek için dosya seçici. Kamera, mikrofon, kişiler ve konum istenmez.",
+          "Kişisel veri bize ulaşmadığı için satılmaz ve paylaşılmaz. Fotoğraf üçüncü tarafa gitmez.",
+          "Uygulama 13 yaş altındaki çocuklara yönelik değildir. Çocuklardan bilerek kişisel veri toplanmaz.",
+          "Politika değişirse bu metin ve https://www.nibrascode.com/image/privacy yenilenir. Soru: nibrascode@gmail.com. Güncelleme: 14 Ekim 2026."
+        ],
+        about: [
+          "Ad: Nibras Image. Sürüm: V 1.0.0. Hazırlayan: Nibras Code. Mahir Əliyev’in bağımsız işidir.",
+          "Ne yapar: fotoğrafı küçültür, JPG, PNG ve WebP arasında çevirir, uzun kenarı 640, 1280 veya 1920 piksele indirir.",
+          "Nasıl kullanılır: fotoğraf seçin, işi seçin, kalite ve biçime bakın, Hazırla’ya basın, sonra İndir.",
+          "Kalite 40 ile 95 arasındadır. Düşük sayı dosyayı daha çok küçültür. 72 günlük paylaşım için başlangıçtır.",
+          "PNG bazen küçülmez. Küçük dosya için WebP veya JPG seçin. JPG saydamlığı taşımaz, beyaz fonla kaydedilir.",
+          "Fotoğraf cihazdan çıkmaz. Sayfa bir kez açıldıktan sonra işlem internetsiz de sürer. Yapay zekâ ile görsel üretmez ve arka plan silmez.",
+          "Hesap, ödeme ve reklam yok. Ücretsizdir. Diller: Azerbaycanca, English, Türkçe, العربية, Русский.",
+          "Destek: nibrascode@gmail.com. Gizlilik adresi: https://www.nibrascode.com/image/privacy"
+        ]
+      },
+      ar: {
+        key: "الخصوصية والمعلومات", close: "إغلاق",
+        privacyTitle: "سياسة الخصوصية", aboutTitle: "معلومات التطبيق",
+        privacy: [
+          "هذه السياسة لـ Nibras Image، الإصدار V 1.0.0، من Nibras Code. التواصل: nibrascode@gmail.com. العنوان: https://www.nibrascode.com/image/privacy",
+          "يضغط التطبيق الصورة على الجهاز، ويحوّل بين JPG وPNG وWebP، ويقصّر الضلع الطويل. الصورة لا تُرسل إلى خادم Nibras Code.",
+          "يُقرأ الملف فقط حين تختاره. المعالجة داخل المتصفح أو التطبيق على جهازك. عند التنزيل تُحفظ النتيجة حيث تختار. لا نحتفظ بنسخة.",
+          "لا نجمع الاسم أو البريد أو الهاتف أو الحساب أو جهات الاتصال أو الموقع أو معرّف الإعلان أو الدفع. لا حساب ولا تتبّع إعلانات ولا حزمة تحليلات.",
+          "ما يبقى على الجهاز هو اللغة فقط. لا يذهب إلى خادم. حذف بيانات التطبيق يحذفه.",
+          "الإذن: اختيار ملف لفتح الصورة وحفظ النتيجة. لا نطلب الكاميرا ولا الميكروفون ولا جهات الاتصال ولا الموقع.",
+          "لا نبيع البيانات الشخصية ولا نشاركها، لأنها لا تصل إلينا. الصورة لا تذهب إلى طرف ثالث.",
+          "التطبيق غير موجّه لمن هم دون 13 عاماً. لا نجمع عمداً بيانات شخصية من الأطفال.",
+          "إذا تغيّرت السياسة يُحدَّث هذا النص وhttps://www.nibrascode.com/image/privacy. السؤال: nibrascode@gmail.com. التحديث: 14 أكتوبر 2026."
+        ],
+        about: [
+          "الاسم: Nibras Image. الإصدار: V 1.0.0. Nibras Code، عمل مستقل لماهِر علييف.",
+          "ماذا يفعل: يصغّر الصورة، يحوّل JPG وPNG وWebP، ويمكن أن يحد الضلع الطويل بـ 640 أو 1280 أو 1920.",
+          "الاستخدام: اختر صورة، اختر العمل، راجع الجودة والصيغة، اضغط جهّز، ثم تنزيل.",
+          "الجودة من 40 إلى 95. الرقم الأصغر يصغّر الملف أكثر. 72 نقطة البداية.",
+          "PNG قد لا يصغر. للملف الصغير اختر WebP أو JPG. JPG يُحفظ بخلفية بيضاء لأنه لا يحمل الشفافية.",
+          "الصورة لا تغادر الجهاز. بعد فتح الصفحة مرة تبقى المعالجة بلا إنترنت. لا يولّد صورة بالذكاء ولا يزيل الخلفية.",
+          "لا حساب ولا دفع ولا إعلان. مجاني. اللغات: الأذربيجانية والإنجليزية والتركية والعربية والروسية.",
+          "الدعم: nibrascode@gmail.com. عنوان الخصوصية: https://www.nibrascode.com/image/privacy"
+        ]
+      },
+      ru: {
+        key: "Конфиденциальность и сведения", close: "Закрыть",
+        privacyTitle: "Политика конфиденциальности", aboutTitle: "О приложении",
+        privacy: [
+          "Эта политика относится к Nibras Image, версия V 1.0.0, от Nibras Code. Связь: nibrascode@gmail.com. Адрес: https://www.nibrascode.com/image/privacy",
+          "Nibras Image сжимает фото на устройстве, переводит JPG, PNG и WebP и укорачивает длинную сторону. Фото не уходит на сервер Nibras Code.",
+          "Файл читается только когда вы его выбираете. Обработка идёт на устройстве, в браузере или в приложении. Результат сохраняется туда, куда вы скачиваете. Копии у нас не остаётся.",
+          "Мы не собираем имя, почту, телефон, аккаунт, контакты, местоположение, рекламный идентификатор и платёжные данные. Нет аккаунта, рекламного трекера, аналитического SDK и сторонних cookie.",
+          "На устройстве остаётся только выбранный язык. Он не уходит на сервер. Очистка данных приложения его удаляет.",
+          "Разрешение: выбор файла, чтобы открыть фото и сохранить результат. Камера, микрофон, контакты и местоположение не запрашиваются.",
+          "Личные данные не продаются и не передаются, потому что они до нас не доходят. Фото третьей стороне не отправляется.",
+          "Приложение не предназначено для детей младше 13 лет. Мы сознательно не собираем личные данные детей.",
+          "Если политика изменится, обновятся этот текст и https://www.nibrascode.com/image/privacy. Вопрос: nibrascode@gmail.com. Обновление: 14 октября 2026."
+        ],
+        about: [
+          "Имя: Nibras Image. Версия: V 1.0.0. Nibras Code, самостоятельная работа Махира Алиева.",
+          "Что делает: уменьшает фото, переводит JPG, PNG и WebP и может ограничить длинную сторону 640, 1280 или 1920 пикселями.",
+          "Как пользоваться: выберите фото, выберите задачу, проверьте качество и формат, нажмите Сделать, затем Скачать.",
+          "Качество от 40 до 95. Меньшее число сильнее уменьшает файл. 72 — обычная точка старта.",
+          "PNG иногда не становится меньше. Для маленького файла выберите WebP или JPG. JPG сохраняется с белым фоном, прозрачность он не держит.",
+          "Фото не уходит с устройства. После одного открытия страницы обработка идёт и без сети. Приложение не рисует картинку ИИ и не удаляет фон.",
+          "Нет аккаунта, оплаты и рекламы. Бесплатно. Языки: азербайджанский, английский, турецкий, арабский и русский.",
+          "Поддержка: nibrascode@gmail.com. Адрес политики: https://www.nibrascode.com/image/privacy"
+        ]
+      }
     };
     var lang = localStorage.getItem("nibras-image-lang") || ((navigator.language || "az").slice(0, 2));
     if (!UI[lang]) lang = "az";
@@ -210,9 +382,17 @@
       document.getElementById("after-cap").textContent = c.after;
       document.getElementById("quality-wrap").hidden = job === "resize";
       document.getElementById("side-wrap").hidden = job !== "resize";
-      document.getElementById("langs").innerHTML = ["az", "en", "tr", "ar", "ru"].map(function (id) {
+      document.getElementById("langbtn").textContent = lang.toUpperCase();
+      document.getElementById("langmenu").innerHTML = ["az", "en", "tr", "ar", "ru"].map(function (id) {
         return '<button type="button" data-lang="' + id + '"' + (id === lang ? ' class="on"' : "") + ">" + id.toUpperCase() + "</button>";
       }).join("");
+      var info = INFO[lang] || INFO.az;
+      document.getElementById("keybtn").setAttribute("aria-label", info.key);
+      document.getElementById("sheet-close").setAttribute("aria-label", info.close);
+      document.getElementById("sheet-privacy").textContent = info.privacyTitle;
+      document.getElementById("sheet-about").textContent = info.aboutTitle;
+      document.getElementById("privacy").innerHTML = info.privacy.map(function (p) { return "<p>" + p.replace(/&/g, "&").replace(/</g, "<") + "</p>"; }).join("");
+      document.getElementById("about").innerHTML = info.about.map(function (p) { return "<p>" + p.replace(/&/g, "&").replace(/</g, "<") + "</p>"; }).join("");
       document.getElementById("job-label").textContent = c.job;
       document.getElementById("format-label").textContent = c.format;
       document.getElementById("jobs").innerHTML = ["compress", "convert", "resize"].map(function (id) {
@@ -292,9 +472,25 @@
       reader.readAsDataURL(result.blob);
     }
     document.body.addEventListener("click", function (event) {
+      var menu = document.getElementById("langmenu");
+      var box = event.target.closest(".langbox");
+      if (!box && !menu.hidden) menu.hidden = true;
       var el = event.target.closest("button");
       if (!el) return;
-      if (el.dataset.lang) { lang = el.dataset.lang; localStorage.setItem("nibras-image-lang", lang); paint(); }
+      if (el.id === "langbtn") {
+        menu.hidden = !menu.hidden;
+        el.setAttribute("aria-expanded", menu.hidden ? "false" : "true");
+        return;
+      }
+      if (el.dataset.lang) {
+        lang = el.dataset.lang;
+        localStorage.setItem("nibras-image-lang", lang);
+        menu.hidden = true;
+        document.getElementById("langbtn").setAttribute("aria-expanded", "false");
+        paint();
+      }
+      if (el.id === "keybtn") document.getElementById("sheet").hidden = false;
+      if (el.id === "sheet-close") document.getElementById("sheet").hidden = true;
       if (el.dataset.job) { job = el.dataset.job; paint(); }
       if (el.dataset.format) { format = el.dataset.format; paint(); }
       if (el.id === "run") run();
@@ -328,10 +524,13 @@
       }
       paint();
     });
+    document.getElementById("sheet").addEventListener("click", function (event) {
+      if (event.target.id === "sheet") this.hidden = true;
+    });
     quality.addEventListener("input", paint);
     side.value = "1280";
     paint();
-    window.NibrasImage = { version: 1 };
+    window.NibrasImage = { version: "1.0.0" };
   </script>
 </body>
 </html>
