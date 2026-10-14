@@ -35,6 +35,14 @@ const FILES_CARD: Record<Lang, string> = {
   ru: "Загрузите фото, уберите фон — бесплатно, в браузере",
 };
 
+const IMAGE_CARD: Record<Lang, string> = {
+  az: "Şəkil sıx, JPG, PNG və WebP çevir",
+  en: "Compress a photo, convert JPG, PNG and WebP",
+  tr: "Fotoğraf sıkıştır, JPG, PNG ve WebP çevir",
+  ar: "اضغط الصورة وحوّل JPG وPNG وWebP",
+  ru: "Сожмите фото, переведите JPG, PNG и WebP",
+};
+
 const STATUS: Partial<Record<"nibras-arabic" | "nibras-pdf" | "nibras-qr" | "nibras-plans" | "nibras-docs", TKey>> = {
   "nibras-pdf": "soon",
   "nibras-qr": "soon",
@@ -368,6 +376,18 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
               <span className="nx-qr-text">
                 <b>Nibras Erase</b>
                 <small>{FILES_CARD[lang]}</small>
+              </span>
+              <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
+            </a>
+            <a className="nx-ai-bar nx-qr-bar" href={localeHref(lang, "/image")}>
+              <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v11a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 17.5v-11Z" />
+                <circle cx="9" cy="9" r="1.4" fill="#05060c" />
+                <path fill="#05060c" d="M7 16.4 10.1 12.6 12.4 15l1.7-1.7L17.2 16.4H7Z" />
+              </svg>
+              <span className="nx-qr-text">
+                <b>{lang === "az" ? "Şəkil sıx" : lang === "tr" ? "Foto sıkıştır" : lang === "ar" ? "ضغط الصورة" : lang === "ru" ? "Сжать фото" : "Compress photo"}</b>
+                <small>{IMAGE_CARD[lang]}</small>
               </span>
               <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
             </a>
