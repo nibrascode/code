@@ -21,6 +21,7 @@ import { Route as MuqayiseRouteImport } from './routes/muqayise'
 import { Route as NeceRouteImport } from './routes/nece'
 import { Route as NxStudioRouteImport } from './routes/nx-studio'
 import { Route as PaketRouteImport } from './routes/paket'
+import { Route as PlannerRouteImport } from './routes/planner'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as QrRouteImport } from './routes/qr'
 import { Route as RuRouteImport } from './routes/ru'
@@ -199,6 +200,11 @@ const NxStudioRoute = NxStudioRouteImport.update({
 const PaketRoute = PaketRouteImport.update({
   id: '/paket',
   path: '/paket',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlannerRoute = PlannerRouteImport.update({
+  id: '/planner',
+  path: '/planner',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacyRoute = PrivacyRouteImport.update({
@@ -811,6 +817,7 @@ export interface FileRoutesByFullPath {
   '/nece': typeof NeceRouteWithChildren
   '/nx-studio': typeof NxStudioRoute
   '/paket': typeof PaketRoute
+  '/planner': typeof PlannerRoute
   '/privacy': typeof PrivacyRouteWithChildren
   '/qr': typeof QrRoute
   '/ru': typeof RuRouteWithChildren
@@ -944,6 +951,7 @@ export interface FileRoutesByTo {
   '/nece': typeof NeceRouteWithChildren
   '/nx-studio': typeof NxStudioRoute
   '/paket': typeof PaketRoute
+  '/planner': typeof PlannerRoute
   '/privacy': typeof PrivacyRouteWithChildren
   '/qr': typeof QrRoute
   '/ru': typeof RuRouteWithChildren
@@ -1077,6 +1085,7 @@ export interface FileRoutesById {
   '/nece': typeof NeceRouteWithChildren
   '/nx-studio': typeof NxStudioRoute
   '/paket': typeof PaketRoute
+  '/planner': typeof PlannerRoute
   '/privacy': typeof PrivacyRouteWithChildren
   '/qr': typeof QrRoute
   '/ru': typeof RuRouteWithChildren
@@ -1212,6 +1221,7 @@ export interface FileRouteTypes {
     | '/nece'
     | '/nx-studio'
     | '/paket'
+    | '/planner'
     | '/privacy'
     | '/qr'
     | '/ru'
@@ -1345,6 +1355,7 @@ export interface FileRouteTypes {
     | '/nece'
     | '/nx-studio'
     | '/paket'
+    | '/planner'
     | '/privacy'
     | '/qr'
     | '/ru'
@@ -1477,6 +1488,7 @@ export interface FileRouteTypes {
     | '/nece'
     | '/nx-studio'
     | '/paket'
+    | '/planner'
     | '/privacy'
     | '/qr'
     | '/ru'
@@ -1611,6 +1623,7 @@ export interface RootRouteChildren {
   NeceRoute: typeof NeceRouteWithChildren
   NxStudioRoute: typeof NxStudioRoute
   PaketRoute: typeof PaketRoute
+  PlannerRoute: typeof PlannerRoute
   PrivacyRoute: typeof PrivacyRouteWithChildren
   QrRoute: typeof QrRoute
   RuRoute: typeof RuRouteWithChildren
@@ -1715,6 +1728,13 @@ declare module '@tanstack/react-router' {
       path: '/paket'
       fullPath: '/paket'
       preLoaderRoute: typeof PaketRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/planner': {
+      id: '/planner'
+      path: '/planner'
+      fullPath: '/planner'
+      preLoaderRoute: typeof PlannerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacy': {
@@ -3160,6 +3180,7 @@ const rootRouteChildren: RootRouteChildren = {
   NeceRoute: NeceRouteWithChildren,
   NxStudioRoute: NxStudioRoute,
   PaketRoute: PaketRoute,
+  PlannerRoute: PlannerRoute,
   PrivacyRoute: PrivacyRouteWithChildren,
   QrRoute: QrRoute,
   RuRoute: RuRouteWithChildren,

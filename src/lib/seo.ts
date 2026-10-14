@@ -625,6 +625,29 @@ const PAGES: Record<string, Copy> = {
       description: "Ücretsiz çevrimiçi QR kod oluşturucu: link, Wi-Fi, kartvizit, WhatsApp ve daha fazlası. Renkler, şekiller, şablonlar, PNG/JPG dışa aktarma, kamera veya görselden tarama. Tamamen tarayıcıda çalışır.",
     },
   },
+  "/planner": {
+    az: {
+      title: "Nibras Planner — tikinti material hesablayıcısı",
+      description:
+        "Evin ölçülərini yaz — kərpic, sement, boya və kafelin sayını, qiymətini, 3D çertyoju və mənzil planını bir anda gör.",
+    },
+    en: {
+      title: "Nibras Planner — construction material calculator",
+      description: "Enter the house size and see brick, cement, paint and tile quantities, the estimate, a live 3D drawing and the floor plan.",
+    },
+    tr: {
+      title: "Nibras Planner — inşaat malzeme hesaplayıcı",
+      description: "Ev ölçülerini yaz — tuğla, çimento, boya ve fayans miktarını, maliyeti, 3D çizimi ve daire planını bir arada gör.",
+    },
+    ar: {
+      title: "Nibras Planner — حاسبة مواد البناء",
+      description: "اكتب مقاسات البيت وشاهد كمية الطوب والإسمنت والدهان والبلاط والتكلفة والمخطط ثلاثي الأبعاد ومخطط الشقة.",
+    },
+    ru: {
+      title: "Nibras Planner — калькулятор стройматериалов",
+      description: "Введите размеры дома и сразу увидьте количество кирпича, цемента, краски и плитки, смету, 3D-чертёж и план.",
+    },
+  },
   "/privacy/nibras-qr": {
     az: {
       title: "Məxfilik siyasəti — Nibras QR",

@@ -250,6 +250,7 @@ function RootDocument() {
   const searchStr = useRouterState({ select: (state) => state.location.searchStr });
   const isHome = pathname === "/" || /^\/(en|tr|ar|ru)\/?$/.test(pathname);
   const isStudio = pathname.startsWith("/nx-studio");
+  const isPlanner = pathname === "/planner" || pathname.startsWith("/planner/");
   const lang = langFromLocation(pathname, searchStr);
 
   return (
@@ -259,18 +260,18 @@ function RootDocument() {
         <SeoLinks />
       </head>
       <body
-        className={isHome ? "is-home" : isStudio ? "is-studio" : undefined}
-        data-scene={isHome || isStudio ? undefined : sceneFor(pathname)}
+        className={isHome ? "is-home" : isStudio ? "is-studio" : isPlanner ? "is-planner" : undefined}
+        data-scene={isHome || isStudio || isPlanner ? undefined : sceneFor(pathname)}
       >
         <PreviewHostBridge />
         <SiteBackdrop />
         <VisitMeter />
         <AuthProvider>
           <I18nProvider>
-            {isHome || isStudio ? null : <SiteHeader />}
+            {isHome || isStudio || isPlanner ? null : <SiteHeader />}
             <Outlet />
-            {isHome || isStudio ? null : <AppSuggest />}
-            {isHome || isStudio ? null : <SiteFooter />}
+            {isHome || isStudio || isPlanner ? null : <AppSuggest />}
+            {isHome || isStudio || isPlanner ? null : <SiteFooter />}
           </I18nProvider>
         </AuthProvider>
         <Scripts />

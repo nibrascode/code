@@ -6442,6 +6442,21 @@ body.is-studio {
   background: #070d18;
 }
 
+body.is-planner {
+  background: #f4f2ee;
+  display: block;
+}
+
+body.is-planner .site-backdrop {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  body.is-planner {
+    background: #161412;
+  }
+}
+
 .dash {
   display: grid;
   grid-template-columns: 220px minmax(0, 1fr);
