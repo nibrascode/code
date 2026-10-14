@@ -380,11 +380,7 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
               <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
             </a>
             <a className="nx-ai-bar nx-qr-bar" href={localeHref(lang, "/image")}>
-              <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true">
-                <path fill="currentColor" d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v11a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 17.5v-11Z" />
-                <circle cx="9" cy="9" r="1.4" fill="#05060c" />
-                <path fill="#05060c" d="M7 16.4 10.1 12.6 12.4 15l1.7-1.7L17.2 16.4H7Z" />
-              </svg>
+              <img src="/apps/nibras-image.png" alt="" width={36} height={36} />
               <span className="nx-qr-text">
                 <b>{lang === "az" ? "Şəkil sıx" : lang === "tr" ? "Foto sıkıştır" : lang === "ar" ? "ضغط الصورة" : lang === "ru" ? "Сжать фото" : "Compress photo"}</b>
                 <small>{IMAGE_CARD[lang]}</small>
