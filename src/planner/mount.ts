@@ -604,8 +604,8 @@ export function mountPlanner(root: HTMLElement): () => void {
     hesabla();
   };
 
-  let rotX = -16;
-  let rotY = 28;
+  let rotX = -18;
+  let rotY = 208;
   let zoomScale = 1.12;
   let dragging = false;
   let lastX = 0;
@@ -863,7 +863,6 @@ export function mountPlanner(root: HTMLElement): () => void {
     const bwStyle = "border:none;";
     const stageNow = parseInt(must<HTMLInputElement>("stageSlider").value, 10) || 5;
     const finish = stageNow >= 4;
-    const skirting = Math.max(7, hp * 0.07);
     const form = formById(must<HTMLSelectElement>("evForm").value);
     const sky = must<HTMLInputElement>("skyId").value || "day";
     must("scene").dataset.sky = sky;
@@ -871,14 +870,22 @@ export function mountPlanner(root: HTMLElement): () => void {
       btn.classList.toggle("is-on", btn.dataset.sky === sky);
     });
     const wallHi = sky === "night" ? "#b7b2a8" : sky === "dusk" ? "#f3d2ae" : "#fffdf8";
-    const wallLo = sky === "night" ? "#7e7a72" : sky === "dusk" ? "#e4b48a" : "#e7d3b4";
-    const plaster =
+    const wallLo = sky === "night" ? "#7e7a72" : sky === "dusk" ? "#e4b48a" : "#efe2cc";
+    const baseH = Math.max(9, hp * 0.14);
+    const plasterOf = (hi: string, lo: string, shade: string) =>
       `background:` +
-      `linear-gradient(#a68462,#a68462) bottom/100% ${skirting}px no-repeat,` +
-      `radial-gradient(circle at 18% 22%,rgba(255,255,255,.22),transparent 26%),` +
-      `radial-gradient(circle at 78% 70%,rgba(90,60,30,.07),transparent 32%),` +
-      `linear-gradient(180deg,${wallHi} 0%,${wallLo} 100%);` +
-      `box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -16px 18px rgba(70,40,16,.08);border:none;`;
+      `linear-gradient(#8d8680,#8d8680) bottom/100% ${baseH}px no-repeat,` +
+      `linear-gradient(90deg,rgba(255,255,255,.18) 1px,transparent 1px) bottom/${Math.max(18, baseH)}px ${baseH}px no-repeat,` +
+      `radial-gradient(circle at 16% 20%,rgba(255,255,255,.28),transparent 22%),` +
+      `linear-gradient(100deg,${shade},transparent 28%),` +
+      `linear-gradient(180deg,${hi},${lo});` +
+      `border:none;`;
+    const plaster = plasterOf(wallHi, wallLo, "rgba(255,255,255,.2)");
+    const plasterShade = plasterOf(
+      sky === "night" ? "#8e8a84" : "#e4d5be",
+      sky === "night" ? "#6a6660" : "#c9b496",
+      "rgba(40,24,10,.18)",
+    );
     const siding =
       "background:repeating-linear-gradient(#e7d3ae 0 12px,#c49a68 12px 14px,#d7bc90 14px 26px);border:none;";
     const blockSkin = (color: string) =>
@@ -890,36 +897,25 @@ export function mountPlanner(root: HTMLElement): () => void {
         ? siding
         : form.skin === "block"
           ? blockSkin("#c8bba8")
-          : brickTexture(scale, kL, kH, tikis, "#b85a34");
+          : brickTexture(scale, kL, kH, tikis, "#c4653e");
     const texSide = rendered
-      ? plaster
-      : form.skin === "wood"
-        ? siding
-        : form.skin === "block"
-          ? blockSkin("#b3a794")
-          : brickTexture(scale, kL, kH, tikis, "#8d4328");
-    const texBack = rendered
-      ? plaster
+      ? plasterShade
       : form.skin === "wood"
         ? siding
         : form.skin === "block"
           ? blockSkin("#a89886")
+          : brickTexture(scale, kL, kH, tikis, "#8d4328");
+    const texBack = rendered
+      ? plasterShade
+      : form.skin === "wood"
+        ? siding
+        : form.skin === "block"
+          ? blockSkin("#9a8b7a")
           : brickTexture(scale, kL, kH, tikis, "#7a3b24");
     cube.querySelectorAll(".iface, .ext-wall, .roof-bit, .lawn").forEach((el) => el.remove());
+    const roomsNow = Math.max(1, Math.round(roomCount) || 1);
+    if (roomsNow !== planState.n) resetPlanGrid(roomsNow);
 
-    const windowSkin =
-      sky === "night"
-        ? "background:linear-gradient(#f8f1e4,#f8f1e4) 0 0/100% 7px no-repeat,linear-gradient(#f8f1e4,#f8f1e4) 0 100%/100% 7px no-repeat,linear-gradient(#f8f1e4,#f8f1e4) 0 0/7px 100% no-repeat,linear-gradient(#f8f1e4,#f8f1e4) 100% 0/7px 100% no-repeat,linear-gradient(rgba(255,220,160,.35),rgba(255,220,160,.35)) 50% 0/2px 100% no-repeat,linear-gradient(180deg,#ffe7b0,#ffb15a 70%,#fff4d2);box-shadow:inset 0 0 0 2px #5c4636,0 0 12px rgba(255,170,60,.85);border:none;"
-        : "background:" +
-          "linear-gradient(#f7f2e8,#f7f2e8) 0 0/100% 7px no-repeat," +
-          "linear-gradient(#f7f2e8,#f7f2e8) 0 100%/100% 7px no-repeat," +
-          "linear-gradient(#f7f2e8,#f7f2e8) 0 0/7px 100% no-repeat," +
-          "linear-gradient(#f7f2e8,#f7f2e8) 100% 0/7px 100% no-repeat," +
-          "linear-gradient(#efe6d6,#efe6d6) 50% 0/2px 100% no-repeat," +
-          "linear-gradient(#efe6d6,#efe6d6) 0 46%/100% 2px no-repeat," +
-          "linear-gradient(115deg,rgba(255,255,255,.8),rgba(255,255,255,0) 42%)," +
-          "linear-gradient(180deg,#e7f6ff,#8ec0dc 55%,#f7fcff);" +
-          "box-shadow:inset 0 0 0 2px #6d5140,0 1px 0 rgba(255,255,255,.4);border:none;";
     const doorSkin = (entrance: boolean) => {
       const wood = entrance ? "#7b4322" : "#8d5b36";
       const panel = entrance ? "#4e2b16" : "#684028";
@@ -942,7 +938,22 @@ export function mountPlanner(root: HTMLElement): () => void {
       heightM?: number;
     };
     const facadeHoles = (id: string, full: number): Hole[] => {
+      const win = Math.min(full * 0.2, Math.max(18, 1.15 * scale));
+      const door = Math.min(full * 0.22, Math.max(20, 0.95 * scale));
       const user = planState.items[id];
+      if (user?.type === "door" && full > win * 2 + door) {
+        return [
+          { offset: 0.18, widthPx: win, kind: "window" },
+          {
+            offset: user.offset ?? 0.5,
+            widthPx: Math.min(full * 0.28, Math.max(18, user.width * scale)),
+            kind: "door",
+            entrance: user.isEntrance,
+            heightM: user.height,
+          },
+          { offset: 0.82, widthPx: win, kind: "window" },
+        ];
+      }
       if (user) {
         const widthPx = Math.min(full * 0.82, Math.max(16, user.width * scale));
         return [
@@ -955,8 +966,6 @@ export function mountPlanner(root: HTMLElement): () => void {
           },
         ];
       }
-      const win = Math.min(full * 0.2, Math.max(18, 1.15 * scale));
-      const door = Math.min(full * 0.22, Math.max(20, 0.95 * scale));
       if (id === "ext-S" && full > door + win * 2 + 12) {
         return [
           { offset: 0.22, widthPx: win, kind: "window" },
@@ -997,20 +1006,45 @@ export function mountPlanner(root: HTMLElement): () => void {
             ? Math.max(16, Math.min(hp * 0.9, (hole.heightM / Math.max(H, 0.1)) * hp))
             : Math.max(16, hp * 0.34);
           const top = Math.max(4, Math.min(hp - h - 4, hp * 0.22));
-          mk(left, hole.widthPx, h, top, windowSkin, " translateZ(2.2px)");
+          const t = Math.max(3, Math.min(6, hole.widthPx * 0.08));
+          const frame = "background:#f7f4ee;border:none;box-shadow:0 1px 0 rgba(80,50,20,.25);";
+          const glass =
+            sky === "night"
+              ? "background:linear-gradient(180deg,#ffe7b0,#ffb15a);box-shadow:0 0 10px rgba(255,170,60,.8);border:none;"
+              : "background:linear-gradient(115deg,rgba(255,255,255,.85),rgba(255,255,255,0) 38%),linear-gradient(180deg,#f4fbff 0%,#9ec8de 46%,#d5ecf8 47%,#7eafcc);border:none;";
+          mk(left - 1, hole.widthPx + 2, t, top - 1, frame, " translateZ(2.4px)");
+          mk(left - 1, hole.widthPx + 2, t, top + h - t, frame, " translateZ(2.4px)");
+          mk(left - 1, t, h, top, frame, " translateZ(2.4px)");
+          mk(left + hole.widthPx - t, t, h, top, frame, " translateZ(2.4px)");
+          mk(left + t, hole.widthPx - t * 2, h - t * 2, top + t, glass, " translateZ(1.2px)");
+          mk(left + hole.widthPx / 2 - 1, 2, h - t * 2, top + t, frame, " translateZ(1.8px)");
+          mk(left + t, hole.widthPx - t * 2, 2, top + h * 0.46, frame, " translateZ(1.8px)");
           mk(
-            left - 2,
-            hole.widthPx + 4,
-            Math.max(4, h * 0.08),
-            top + h - 1,
-            "background:linear-gradient(#fffaf3,#c9b59a);border:none;border-radius:1px;",
-            " translateZ(3.2px)",
+            left - 3,
+            hole.widthPx + 6,
+            Math.max(4, t + 1),
+            top + h - 2,
+            "background:linear-gradient(#fff,#d9cbb6);border:none;border-radius:1px;",
+            " translateZ(3.4px)",
           );
         } else {
           const h = hole.heightM
             ? Math.max(20, Math.min(hp * 0.94, (hole.heightM / Math.max(H, 0.1)) * hp))
             : Math.max(20, hp * 0.66);
-          mk(left, hole.widthPx, h, hp - h, doorSkin(Boolean(hole.entrance)), " translateZ(1.6px)");
+          const top = hp - h;
+          const frame = "background:#f3eee6;border:none;";
+          mk(left - 3, hole.widthPx + 6, 5, top - 4, frame, " translateZ(2.6px)");
+          mk(left - 3, 4, h + 4, top - 4, frame, " translateZ(2.6px)");
+          mk(left + hole.widthPx - 1, 4, h + 4, top - 4, frame, " translateZ(2.6px)");
+          mk(left, hole.widthPx, h, top, doorSkin(Boolean(hole.entrance)), " translateZ(1.8px)");
+          mk(
+            left + hole.widthPx * 0.78,
+            3,
+            3,
+            top + h * 0.48,
+            "background:radial-gradient(circle,#f0d48a,#b08a3e);border:none;border-radius:50%;",
+            " translateZ(2.8px)",
+          );
         }
       }
     };
@@ -1514,6 +1548,10 @@ export function mountPlanner(root: HTMLElement): () => void {
       if (!id.startsWith("ext-")) continue;
       const h = Math.min(H, item.height ?? (item.type === "door" ? 2.1 : 1.2));
       openingArea += Math.max(0, item.width) * Math.max(0, h);
+      if (item.type === "door") {
+        const wallLen = id === "ext-N" || id === "ext-S" ? L : W;
+        if (wallLen > 5) openingArea += 1.2 * 1.2 * 2;
+      }
     }
     openingArea = Math.min(openingArea, wallArea);
     const netWall = Math.max(0, wallArea - openingArea);
@@ -1717,8 +1755,8 @@ export function mountPlanner(root: HTMLElement): () => void {
         rotX = -52;
         rotY = 36;
       } else if (next === "5") {
-        rotX = -24;
-        rotY = 32;
+        rotX = -20;
+        rotY = 208;
       }
       slider.dispatchEvent(new Event("input", { bubbles: true }));
     });
