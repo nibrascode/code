@@ -718,11 +718,25 @@
   height: 520px;
   border-radius: 22px;
   background:
-    radial-gradient(70% 40% at 50% 108%, rgba(70, 42, 18, 0.28), transparent 60%),
-    linear-gradient(180deg, #143047 0%, #6f9bbb 46%, #f2c89a 70%, #ead7b4 100%);
+    radial-gradient(90px 70px at 82% 16%, rgba(255, 248, 220, 0.95), transparent 70%),
+    radial-gradient(80% 36% at 50% 100%, rgba(70, 120, 40, 0.28), transparent 70%),
+    linear-gradient(180deg, #79c0ee 0%, #d7eefb 40%, #f7e7c4 66%, #b7d48a 100%);
   box-shadow:
     0 22px 44px rgba(28, 18, 8, 0.18),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.28);
+    inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+}
+.nibras-planner .cube .face {
+  box-shadow: none;
+  border-color: transparent;
+}
+.nibras-planner .lawn,
+.nibras-planner .roof-bit,
+.nibras-planner #f-plinth,
+.nibras-planner #f-bottom {
+  backface-visibility: visible;
+}
+.nibras-planner .scene::before {
+  display: none;
 }
 .nibras-planner .scene-badge,
 .nibras-planner .scene-cost {

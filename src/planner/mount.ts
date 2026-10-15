@@ -209,14 +209,16 @@ export function mountPlanner(root: HTMLElement): () => void {
     const bh = Math.max(2, (kHmm / 1000) * scale);
     const j = Math.max(1, (tikisMm / 1000) * scale);
     const courseH = bh + j;
-    const mortar = "#d8c3a5";
+    const mortar = "#cbb89a";
+    const sun = "linear-gradient(180deg,rgba(255,255,255,.2),rgba(0,0,0,.12))";
     return (
       `background-color:${shade};` +
-      `background-image:linear-gradient(${mortar} ${j}px,transparent ${j}px),` +
+      `background-image:${sun},` +
+      `linear-gradient(${mortar} ${j}px,transparent ${j}px),` +
       `linear-gradient(90deg,${mortar} ${j}px,transparent ${j}px),` +
       `linear-gradient(90deg,${mortar} ${j}px,transparent ${j}px);` +
-      `background-size:100% ${courseH}px,${bw + j}px ${courseH * 2}px,${bw + j}px ${courseH * 2}px;` +
-      `background-position:0 0,0 0,${(bw + j) / 2}px ${courseH}px;`
+      `background-size:100% 100%,100% ${courseH}px,${bw + j}px ${courseH * 2}px,${bw + j}px ${courseH * 2}px;` +
+      `background-position:0 0,0 0,0 0,${(bw + j) / 2}px ${courseH}px;`
     );
   };
 
@@ -275,11 +277,17 @@ export function mountPlanner(root: HTMLElement): () => void {
     const show = (part: string) => def.parts.includes(part);
     must("f-bottom").style.opacity = show("bottom") ? "1" : "0";
     must("f-plinth").style.opacity = show("bottom") ? "1" : "0";
+    cube.querySelectorAll<HTMLElement>(".lawn").forEach((el) => {
+      el.style.opacity = show("bottom") ? "1" : "0";
+    });
     cube.querySelectorAll<HTMLElement>(".ext-wall").forEach((el) => {
       el.style.opacity = show("walls") ? "1" : "0";
     });
-    must("f-top").style.opacity = show("roof") ? "1" : "0";
-    must("f-ridge").style.opacity = show("roof") ? "1" : "0";
+    cube.querySelectorAll<HTMLElement>(".roof-bit").forEach((el) => {
+      el.style.opacity = show("roof") ? "1" : "0";
+    });
+    must("f-top").style.display = "none";
+    must("f-ridge").style.display = "none";
     cube.querySelectorAll<HTMLElement>(".iface").forEach((el) => {
       el.style.opacity = show("interior") ? "1" : "0";
     });
@@ -331,79 +339,180 @@ export function mountPlanner(root: HTMLElement): () => void {
     cube.style.marginLeft = `${-lp / 2}px`;
     cube.style.marginTop = `${-hp / 2}px`;
 
-    const bwStyle = `border-width:${bw}px;`;
+    const bwStyle = "border:none;";
     const stageNow = parseInt(must<HTMLInputElement>("stageSlider").value, 10) || 5;
     const finish = stageNow >= 5;
+    const skirting = Math.max(7, hp * 0.07);
     const plaster =
-      "background:linear-gradient(180deg,#f8f3ea 0%,#efe4d2 100%);box-shadow:inset 0 0 0 1px rgba(90,60,30,.12);";
-    const texFront = finish ? plaster : brickTexture(scale, kL, kH, tikis, "#a8562e");
-    const texSide = finish ? plaster : brickTexture(scale, kL, kH, tikis, "#8a4423");
-    cube.querySelectorAll(".iface, .ext-wall").forEach((el) => el.remove());
+      `background:linear-gradient(#c8b08a,#c8b08a) bottom/100% ${skirting}px no-repeat,` +
+      `linear-gradient(180deg,#fbf6ee,#eadcc6);box-shadow:inset 0 -10px 14px rgba(80,50,20,.08);`;
+    const texFront = finish ? plaster : brickTexture(scale, kL, kH, tikis, "#b85a34");
+    const texSide = finish ? plaster : brickTexture(scale, kL, kH, tikis, "#8d4328");
+    const texBack = finish ? plaster : brickTexture(scale, kL, kH, tikis, "#7a3b24");
+    cube.querySelectorAll(".iface, .ext-wall, .roof-bit, .lawn").forEach((el) => el.remove());
 
-    const gapColor = (item: PlanItem) =>
-      item.type === "window" ? "#9fd0e8" : item.isEntrance ? "#6fcf73" : "#f2d9a8";
-    const addWallSegments = (
-      itemId: string,
-      full: number,
-      tex: string,
-      extraTransform: string,
-      baseLeft: number,
-    ) => {
-      const item = planState.items[itemId];
-      const mk = (left: number, w: number, style: string) => {
-        const d = document.createElement("div");
-        d.className = "face ext-wall";
-        d.style.cssText = `width:${w}px;height:${hp}px;left:${baseLeft + left}px;${bwStyle}${extraTransform}${style}`;
-        cube.appendChild(d);
-      };
-      if (!item) {
-        mk(0, full, tex);
-        return;
-      }
-      const gap = Math.min(full * 0.9, Math.max(bw * 2, item.width * scale));
-      const center = Math.max(
-        gap / 2,
-        Math.min(full - gap / 2, (item.offset != null ? item.offset : 0.5) * full),
+    const windowSkin =
+      "background:" +
+      "linear-gradient(#f6f0e4,#f6f0e4) 0 0/100% 6px no-repeat," +
+      "linear-gradient(#f6f0e4,#f6f0e4) 0 100%/100% 6px no-repeat," +
+      "linear-gradient(#f6f0e4,#f6f0e4) 0 0/6px 100% no-repeat," +
+      "linear-gradient(#f6f0e4,#f6f0e4) 100% 0/6px 100% no-repeat," +
+      "linear-gradient(#efe2cc,#efe2cc) 50% 0/2px 100% no-repeat," +
+      "linear-gradient(#efe2cc,#efe2cc) 0 48%/100% 2px no-repeat," +
+      "linear-gradient(120deg,rgba(255,255,255,.75),rgba(255,255,255,0) 46%)," +
+      "linear-gradient(180deg,#d7f0ff,#7eb6d4 62%,#f4fbff);" +
+      "box-shadow:inset 0 0 0 2px #6a4630,0 2px 0 rgba(255,255,255,.35);border:none;";
+    const doorSkin = (entrance: boolean) => {
+      const wood = entrance ? "#7b4322" : "#8d5b36";
+      const panel = entrance ? "#4e2b16" : "#684028";
+      return (
+        `background:radial-gradient(circle at 80% 54%,#f0d48a 1.6px,transparent 2.2px),` +
+        `linear-gradient(${panel},${panel}) 16% 10%/30% 34% no-repeat,` +
+        `linear-gradient(${panel},${panel}) 54% 10%/30% 34% no-repeat,` +
+        `linear-gradient(${panel},${panel}) 16% 52%/30% 36% no-repeat,` +
+        `linear-gradient(${panel},${panel}) 54% 52%/30% 36% no-repeat,` +
+        `linear-gradient(180deg,${wood},#3d2414);` +
+        `box-shadow:inset 0 0 0 3px #3a2416;border:none;`
       );
-      const leftW = center - gap / 2;
-      const rightW = full - (center + gap / 2);
-      if (leftW > 0.5) mk(0, leftW, tex);
-      if (rightW > 0.5) mk(center + gap / 2, rightW, tex);
-      mk(center - gap / 2, gap, `background:${gapColor(item)};`);
     };
 
-    addWallSegments("ext-N", lp, texFront, `transform:translateZ(${wp / 2}px);`, 0);
-    addWallSegments("ext-S", lp, texFront, `transform:rotateY(180deg) translateZ(${wp / 2}px);`, 0);
-    addWallSegments(
-      "ext-E",
-      wp,
-      texSide,
-      `transform:rotateY(90deg) translateZ(${lp / 2}px);`,
-      lp / 2 - wp / 2,
+    type Hole = { offset: number; widthPx: number; kind: "door" | "window"; entrance?: boolean };
+    const facadeHoles = (id: string, full: number): Hole[] => {
+      const user = planState.items[id];
+      if (user) {
+        const widthPx = Math.min(full * 0.82, Math.max(16, user.width * scale));
+        return [
+          {
+            offset: user.offset ?? 0.5,
+            widthPx,
+            kind: user.type,
+            entrance: user.isEntrance,
+          },
+        ];
+      }
+      const win = Math.min(full * 0.2, Math.max(18, 1.15 * scale));
+      const door = Math.min(full * 0.22, Math.max(20, 0.95 * scale));
+      if (id === "ext-S" && full > door + win * 2 + 12) {
+        return [
+          { offset: 0.22, widthPx: win, kind: "window" },
+          { offset: 0.5, widthPx: door, kind: "door", entrance: true },
+          { offset: 0.78, widthPx: win, kind: "window" },
+        ];
+      }
+      if ((id === "ext-N" || id === "ext-S") && full > win * 2 + 16) {
+        return [
+          { offset: 0.3, widthPx: win, kind: "window" },
+          { offset: 0.7, widthPx: win, kind: "window" },
+        ];
+      }
+      return [{ offset: 0.5, widthPx: Math.min(win, full * 0.46), kind: "window" }];
+    };
+
+    const addWall = (
+      id: string,
+      full: number,
+      tex: string,
+      transform: string,
+      baseLeft: number,
+    ) => {
+      const mk = (left: number, w: number, h: number, top: number, style: string, proud = "") => {
+        const d = document.createElement("div");
+        d.className = "face ext-wall";
+        d.style.cssText = `width:${w}px;height:${h}px;left:${baseLeft + left}px;top:${top}px;transform:${transform}${proud};${bwStyle}${style}`;
+        cube.appendChild(d);
+      };
+      mk(0, full, hp, 0, tex);
+      for (const hole of facadeHoles(id, full)) {
+        const left = Math.max(
+          3,
+          Math.min(full - hole.widthPx - 3, hole.offset * full - hole.widthPx / 2),
+        );
+        if (hole.kind === "window") {
+          const h = Math.max(16, hp * 0.34);
+          mk(left, hole.widthPx, h, hp * 0.16, windowSkin, " translateZ(1.6px)");
+        } else {
+          const h = Math.max(20, hp * 0.66);
+          mk(left, hole.widthPx, h, hp - h, doorSkin(Boolean(hole.entrance)), " translateZ(1.6px)");
+        }
+      }
+    };
+
+    addWall("ext-N", lp, texBack, `translateZ(${wp / 2}px)`, 0);
+    addWall("ext-S", lp, texFront, `rotateY(180deg) translateZ(${wp / 2}px)`, 0);
+    addWall("ext-E", wp, texSide, `rotateY(90deg) translateZ(${lp / 2}px)`, lp / 2 - wp / 2);
+    addWall("ext-W", wp, texSide, `rotateY(-90deg) translateZ(${lp / 2}px)`, lp / 2 - wp / 2);
+
+    const eave = Math.max(10, bw + 4);
+    const rise = Math.max(26, wp * 0.34);
+    const run = wp / 2 + eave;
+    const slopeLen = Math.hypot(run, rise);
+    const pitch = (Math.atan2(rise, run) * 180) / Math.PI;
+    const rot = 90 - pitch;
+    const tile =
+      "background-color:#8d3b2b;background-image:linear-gradient(180deg,rgba(255,214,180,.45) 0 1px,rgba(0,0,0,.28) 1px 3px,transparent 4px),linear-gradient(90deg,rgba(0,0,0,.22) 1px,transparent 1px);background-size:100% 13px,20px 100%;border:none;box-shadow:inset 0 -12px 16px rgba(40,10,6,.28);";
+    const addRoof = (transform: string) => {
+      const d = document.createElement("div");
+      d.className = "face roof-bit";
+      d.style.cssText = `width:${lp + eave * 2}px;height:${slopeLen}px;left:${-eave}px;top:${-slopeLen}px;transform-origin:center bottom;transform:${transform};${tile}`;
+      cube.appendChild(d);
+    };
+    addRoof(`translateZ(${wp / 2 + eave}px) rotateX(${rot}deg)`);
+    addRoof(`translateZ(${-(wp / 2 + eave)}px) rotateX(${-rot}deg)`);
+
+    const gableTex = finish ? plaster : brickTexture(scale, kL, kH, tikis, "#9a4a30");
+    const addGable = (transform: string) => {
+      const d = document.createElement("div");
+      d.className = "face roof-bit";
+      d.style.cssText = `width:${wp}px;height:${rise}px;left:${lp / 2 - wp / 2}px;top:${-rise}px;transform:${transform};clip-path:polygon(0 100%,50% 0,100% 100%);${gableTex}border:none;`;
+      cube.appendChild(d);
+    };
+    addGable(`rotateY(90deg) translateZ(${lp / 2 - 1}px)`);
+    addGable(`rotateY(-90deg) translateZ(${lp / 2 - 1}px)`);
+
+    const cw = Math.max(12, lp * 0.07);
+    const cd = Math.max(10, wp * 0.12);
+    const ch = Math.max(20, rise * 0.72);
+    const cx = lp * 0.66;
+    const chimneyBrick = brickTexture(scale, kL, kH, tikis, "#6e3424");
+    const chimney = (css: string) => {
+      const d = document.createElement("div");
+      d.className = "face roof-bit";
+      d.style.cssText = css;
+      cube.appendChild(d);
+    };
+    chimney(
+      `width:${cw}px;height:${ch}px;left:${cx}px;top:${-rise - ch + 6}px;transform:translateZ(${cd / 2}px);${chimneyBrick}border:none;`,
     );
-    addWallSegments(
-      "ext-W",
-      wp,
-      texSide,
-      `transform:rotateY(-90deg) translateZ(${lp / 2}px);`,
-      lp / 2 - wp / 2,
+    chimney(
+      `width:${cw}px;height:${ch}px;left:${cx}px;top:${-rise - ch + 6}px;transform:rotateY(180deg) translateZ(${cd / 2}px);${chimneyBrick}border:none;`,
+    );
+    chimney(
+      `width:${cd}px;height:${ch}px;left:${cx + cw / 2 - cd / 2}px;top:${-rise - ch + 6}px;transform:rotateY(90deg) translateZ(${cw / 2}px);${chimneyBrick}border:none;`,
+    );
+    chimney(
+      `width:${cd}px;height:${ch}px;left:${cx + cw / 2 - cd / 2}px;top:${-rise - ch + 6}px;transform:rotateY(-90deg) translateZ(${cw / 2}px);${chimneyBrick}border:none;`,
+    );
+    chimney(
+      `width:${cw + 4}px;height:${cd + 4}px;left:${cx - 2}px;top:${-rise - ch + 4}px;transform:rotateX(90deg) translateZ(${ch / 2}px);background:#4d2a22;border:none;`,
     );
 
-    const overhang = Math.max(8, bw);
-    const tile =
-      "background-color:#7a3428;background-image:linear-gradient(90deg,rgba(0,0,0,.22) 1px,transparent 1px),linear-gradient(rgba(255,236,210,.18) 1px,transparent 1px);background-size:16px 100%,100% 11px;border:none;box-shadow:0 10px 16px rgba(40,16,8,.28);";
-    must("f-top").style.cssText =
-      `width:${lp + overhang * 2}px;height:${wp + overhang * 2}px;left:${-overhang}px;top:${hp / 2 - (wp + overhang * 2) / 2}px;transform:rotateX(90deg) translateZ(${hp / 2 + 2}px);border-width:0;${tile}`;
     const floor = finish
-      ? "background-color:#e6d3ae;background-image:linear-gradient(rgba(120,80,40,.28) 1px,transparent 1px),linear-gradient(90deg,rgba(120,80,40,.28) 1px,transparent 1px);background-size:16px 16px;border:none;"
-      : "background:linear-gradient(160deg,#c5c2bb,#8e8b85);border:none;box-shadow:inset 0 0 0 2px rgba(255,255,255,.25);";
+      ? "background-color:#e4cfaa;background-image:linear-gradient(rgba(110,70,30,.22) 1px,transparent 1px),linear-gradient(90deg,rgba(110,70,30,.22) 1px,transparent 1px);background-size:18px 18px;border:none;"
+      : "background:linear-gradient(160deg,#d5d0c8,#9a958d);border:none;";
     must("f-bottom").style.cssText =
-      `width:${lp}px;height:${wp}px;top:${hp / 2 - wp / 2}px;transform:rotateX(-90deg) translateZ(${hp / 2}px);border-width:0;${floor}`;
-    const plinth = Math.max(7, hp * 0.07);
+      `width:${lp}px;height:${wp}px;top:${hp / 2 - wp / 2}px;transform:rotateX(-90deg) translateZ(${hp / 2}px);${floor}`;
+    const plinth = Math.max(8, hp * 0.06);
     must("f-plinth").style.cssText =
-      `width:${lp + bw * 3}px;height:${wp + bw * 3}px;left:${-bw * 1.5}px;top:${hp / 2 - (wp + bw * 3) / 2}px;transform:rotateX(-90deg) translateZ(${hp / 2 + plinth}px);border:none;background:linear-gradient(180deg,#d9d4cc,#8a867f);box-shadow:0 14px 20px rgba(30,20,10,.28);`;
-    must("f-ridge").style.cssText =
-      `width:${lp + overhang * 2}px;height:${Math.max(6, bw * 0.7)}px;left:${-overhang}px;top:${hp / 2}px;transform:translateZ(${wp / 2 + 2}px) translateY(-${Math.max(6, bw * 0.7) / 2}px);background:linear-gradient(180deg,#f2e2c8,#c4a27a);border:none;border-radius:6px;`;
+      `width:${lp + 16}px;height:${wp + 16}px;left:-8px;top:${hp / 2 - (wp + 16) / 2}px;transform:rotateX(-90deg) translateZ(${hp / 2 + plinth}px);border:none;background:linear-gradient(180deg,#cfc8bc,#7e7870);`;
+    const gw = lp * 1.9;
+    const gd = wp * 2.25;
+    const lawn = document.createElement("div");
+    lawn.className = "face lawn";
+    lawn.style.cssText =
+      `width:${gw}px;height:${gd}px;left:${(lp - gw) / 2}px;top:${hp / 2 - gd / 2}px;` +
+      `transform:rotateX(-90deg) translateZ(${hp / 2 + plinth + 6}px);border:none;` +
+      `background:radial-gradient(closest-side at 50% 46%,rgba(20,40,10,.22),transparent 68%),repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 1px,transparent 1px 8px),linear-gradient(180deg,#8fce62,#4f8d38 55%,#356828);`;
+    cube.appendChild(lawn);
 
     const n = Math.max(1, Math.round(roomCount) || 1);
     if (n !== planState.n) resetPlanGrid(n);
