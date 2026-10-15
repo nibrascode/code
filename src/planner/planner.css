@@ -790,6 +790,7 @@
 }
 .nibras-planner .scene {
   height: 520px;
+  overflow: hidden;
   border-radius: 22px;
   background:
     radial-gradient(90px 70px at 82% 16%, rgba(255, 248, 220, 0.95), transparent 70%),
