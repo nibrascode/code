@@ -282,23 +282,23 @@ const stageDefs: {
     keys: ["kerpic"],
   },
   {
-    name: "3/5 — Dam",
-    short: "Dam",
-    blurb: "Kirəmit örtük bağlanır. Ev bağlanır, xərc hələ hörgü ilə eynidir.",
-    parts: ["bottom", "walls", "roof"],
+    name: "3/5 — Otaqlar",
+    short: "Otaq",
+    blurb: "Dam hələ yoxdur. Otaq bölmələri yuxarıdan görünür.",
+    parts: ["bottom", "walls", "interior"],
     keys: ["kerpic"],
   },
   {
-    name: "4/5 — Bölmələr",
+    name: "4/5 — Suvaq",
     short: "Suvaq",
-    blurb: "Otaq divarları və suvaq gəlir. Sement xərci əlavə olunur.",
-    parts: ["bottom", "walls", "roof", "interior"],
-    keys: ["kerpic", "suvaq"],
+    blurb: "Divarlar suvanır, döşəmə hazırlanır. Dam hələ açıqdır.",
+    parts: ["bottom", "walls", "interior"],
+    keys: ["kerpic", "suvaq", "bitirme"],
   },
   {
-    name: "5/5 — Bitirmə",
-    short: "Bitirmə",
-    blurb: "Boya və döşəmə. Model hazır evdir, tam smeta buradadır.",
+    name: "5/5 — Dam",
+    short: "Dam",
+    blurb: "Kirəmit dam ən sonda bağlanır.",
     parts: ["bottom", "walls", "roof", "interior"],
     keys: ["kerpic", "suvaq", "bitirme"],
   },
@@ -648,7 +648,7 @@ export function mountPlanner(root: HTMLElement): () => void {
     const note =
       stage <= 1
         ? " Təməl xərci bu smetada yoxdur."
-        : stage === 3
+        : stage === 5
           ? " Dam ayrıca qiymətlənməyib."
           : "";
     must("stageLabel").innerHTML =
@@ -683,7 +683,7 @@ export function mountPlanner(root: HTMLElement): () => void {
 
     const bwStyle = "border:none;";
     const stageNow = parseInt(must<HTMLInputElement>("stageSlider").value, 10) || 5;
-    const finish = stageNow >= 5;
+    const finish = stageNow >= 4;
     const skirting = Math.max(7, hp * 0.07);
     const plaster =
       `background:linear-gradient(#c8b08a,#c8b08a) bottom/100% ${skirting}px no-repeat,` +
@@ -852,7 +852,9 @@ export function mountPlanner(root: HTMLElement): () => void {
 
     const floor = finish
       ? "background-color:#e4cfaa;background-image:linear-gradient(rgba(110,70,30,.22) 1px,transparent 1px),linear-gradient(90deg,rgba(110,70,30,.22) 1px,transparent 1px);background-size:18px 18px;border:none;"
-      : "background:linear-gradient(160deg,#d5d0c8,#9a958d);border:none;";
+      : stageNow >= 3
+        ? "background:linear-gradient(160deg,#f3e2c4,#d7b98a);border:none;"
+        : "background:linear-gradient(160deg,#d5d0c8,#9a958d);border:none;";
     must("f-bottom").style.cssText =
       `width:${lp}px;height:${wp}px;top:${hp / 2 - wp / 2}px;transform:rotateX(-90deg) translateZ(${hp / 2}px);${floor}`;
     const plinth = Math.max(8, hp * 0.06);
@@ -871,13 +873,18 @@ export function mountPlanner(root: HTMLElement): () => void {
     const n = Math.max(1, Math.round(roomCount) || 1);
     if (n !== planState.n) resetPlanGrid(n);
     const iw = Math.max(2, bw * 0.55);
-    const texIn = "background:#e9e3d6; box-shadow:inset 0 0 0 2px rgba(0,0,0,.1);";
+    const openRooms = stageNow === 3;
+    const interiorH = openRooms ? Math.max(22, hp * 0.55) : hp;
+    const interiorTop = hp - interiorH;
+    const texIn = openRooms
+      ? "background:linear-gradient(180deg,#f6efe2,#d7b48a);box-shadow:inset 0 0 0 3px #8a5a32;border:none;"
+      : "background:#e7dcc8;box-shadow:inset 0 0 0 2px rgba(0,0,0,.12);border:none;";
     const rows = planState.rowFracs.length - 1;
     for (let j = 1; j < rows; j++) {
       const dz = planState.rowFracs[j] * wp - wp / 2;
       const d = document.createElement("div");
       d.className = "face iface";
-      d.style.cssText = `width:${lp}px;height:${hp}px;transform:translateZ(${dz}px);border-width:${iw}px;${texIn}`;
+      d.style.cssText = `width:${lp}px;height:${interiorH}px;top:${interiorTop}px;transform:translateZ(${dz}px);border-width:${iw}px;${texIn}`;
       cube.appendChild(d);
     }
     const uniqueColFracs = new Set<string>();
@@ -888,7 +895,7 @@ export function mountPlanner(root: HTMLElement): () => void {
       const dx = parseFloat(fracStr) * lp - lp / 2;
       const d = document.createElement("div");
       d.className = "face iface";
-      d.style.cssText = `width:${wp}px;height:${hp}px;left:${lp / 2 - wp / 2}px;transform:rotateY(90deg) translateZ(${dx}px);border-width:${iw}px;${texIn}`;
+      d.style.cssText = `width:${wp}px;height:${interiorH}px;top:${interiorTop}px;left:${lp / 2 - wp / 2}px;transform:rotateY(90deg) translateZ(${dx}px);border-width:${iw}px;${texIn}`;
       cube.appendChild(d);
     });
 
@@ -998,6 +1005,7 @@ export function mountPlanner(root: HTMLElement): () => void {
     }
 
     const wallGeom: Record<string, WallGeom> = {};
+    const hits: string[] = [];
     const wallLine = (
       id: string,
       x0: number,
@@ -1008,7 +1016,16 @@ export function mountPlanner(root: HTMLElement): () => void {
     ) => {
       wallGeom[id] = { x0, y0, x1, y1 };
       const item = planState.items[id];
+      const nx = vbW / 2 - (x0 + x1) / 2;
+      const ny = vbH / 2 - (y0 + y1) / 2;
+      const nlen = Math.hypot(nx, ny) || 1;
+      const ix = (nx / nlen) * Math.max(10, thick * 2.2);
+      const iy = (ny / nlen) * Math.max(10, thick * 2.2);
+      const hit = `<line data-drag-item="${id}" x1="${x0 + ix}" y1="${y0 + iy}" x2="${x1 + ix}" y2="${y1 + iy}" stroke="rgba(0,0,0,0.015)" stroke-width="${Math.max(22, thick * 6)}" stroke-linecap="round" style="cursor:grab;"/>`;
       if (!item) {
+        hits.push(
+          `<line data-wall="${id}" x1="${x0 + ix}" y1="${y0 + iy}" x2="${x1 + ix}" y2="${y1 + iy}" stroke="rgba(0,0,0,0.015)" stroke-width="${Math.max(22, thick * 6)}" stroke-linecap="round" style="cursor:pointer;"/>`,
+        );
         return `<line data-wall="${id}" x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}" stroke="var(--accent)" stroke-width="${thick}" style="cursor:pointer;"/>`;
       }
       const len = Math.hypot(x1 - x0, y1 - y0) || 1;
@@ -1027,11 +1044,12 @@ export function mountPlanner(root: HTMLElement): () => void {
       const gy1 = midY + uy * (gap / 2);
       const color = item.type === "window" ? "#9fd0e8" : item.isEntrance ? "#4caf50" : "#f2d9a8";
       const icon = item.type === "window" ? "🪟" : item.isEntrance ? "🏠" : "🚪";
+      hits.push(hit);
       return (
         `<line data-wall="${id}" x1="${x0}" y1="${y0}" x2="${gx0}" y2="${gy0}" stroke="var(--accent)" stroke-width="${thick}" style="cursor:pointer;"/>` +
         `<line data-wall="${id}" x1="${gx1}" y1="${gy1}" x2="${x1}" y2="${y1}" stroke="var(--accent)" stroke-width="${thick}" style="cursor:pointer;"/>` +
-        `<line data-drag-item="${id}" x1="${gx0}" y1="${gy0}" x2="${gx1}" y2="${gy1}" stroke="${color}" stroke-width="${thick * 1.6}" style="cursor:grab;"/>` +
-        `<text data-drag-item="${id}" x="${midX}" y="${midY - thick}" text-anchor="middle" font-size="${thick * 3}" style="cursor:grab;">${icon}</text>`
+        `<line data-drag-item="${id}" x1="${gx0}" y1="${gy0}" x2="${gx1}" y2="${gy1}" stroke="${color}" stroke-width="${thick * 1.8}" stroke-linecap="round" style="cursor:grab;"/>` +
+        `<text data-drag-item="${id}" x="${midX + ix}" y="${midY + iy}" text-anchor="middle" dominant-baseline="middle" font-size="${thick * 3.2}" style="cursor:grab;">${icon}</text>`
       );
     };
 
@@ -1054,6 +1072,7 @@ export function mountPlanner(root: HTMLElement): () => void {
         html += `<line data-drag-col="1" data-row="${r}" data-idx="${c}" x1="${x}" y1="${y0v}" x2="${x}" y2="${y1v}" stroke="transparent" stroke-width="${wallPx * 3 + 10}" style="cursor:col-resize;"/>`;
       }
     }
+    html += hits.join("");
     svg.innerHTML = html;
     planState._wallGeom = wallGeom;
 
@@ -1102,32 +1121,62 @@ export function mountPlanner(root: HTMLElement): () => void {
     };
     const itemDragPointerDown = (event: Event) => {
       event.stopPropagation();
-      const id = (event.currentTarget as SVGElement).dataset.dragItem || "";
-      const geom = planState._wallGeom[id];
-      const item = planState.items[id];
-      if (!geom || !item) return;
+      event.preventDefault();
+      let activeId = (event.currentTarget as SVGElement).dataset.dragItem || "";
+      if (!planState.items[activeId] || !planState._wallGeom[activeId]) return;
       const ev0 = event as PointerEvent;
-      const rect = svg.getBoundingClientRect();
-      const vb = svg.viewBox.baseVal;
       const startX = ev0.clientX;
       const startY = ev0.clientY;
       let moved = false;
       svg.setPointerCapture(ev0.pointerId);
-      const dx = geom.x1 - geom.x0;
-      const dy = geom.y1 - geom.y0;
-      const len2 = dx * dx + dy * dy || 1;
+      const toSvg = (ev: PointerEvent) => {
+        const rect = svg.getBoundingClientRect();
+        const vb = svg.viewBox.baseVal;
+        return {
+          px: ((ev.clientX - rect.left) / Math.max(rect.width, 1)) * vb.width,
+          py: ((ev.clientY - rect.top) / Math.max(rect.height, 1)) * vb.height,
+          reach: Math.min(vb.width, vb.height) * 0.22,
+        };
+      };
+      const project = (id: string, px: number, py: number) => {
+        const g = planState._wallGeom[id];
+        const dx = g.x1 - g.x0;
+        const dy = g.y1 - g.y0;
+        const len2 = dx * dx + dy * dy || 1;
+        const t = Math.max(0.06, Math.min(0.94, ((px - g.x0) * dx + (py - g.y0) * dy) / len2));
+        const x = g.x0 + dx * t;
+        const y = g.y0 + dy * t;
+        return { t, dist: Math.hypot(px - x, py - y) };
+      };
       const onMove = (ev: PointerEvent) => {
-        if (Math.abs(ev.clientX - startX) > 4 || Math.abs(ev.clientY - startY) > 4) moved = true;
-        const px = ((ev.clientX - rect.left) / rect.width) * vb.width;
-        const py = ((ev.clientY - rect.top) / rect.height) * vb.height;
-        const t = ((px - geom.x0) * dx + (py - geom.y0) * dy) / len2;
-        item.offset = Math.max(0, Math.min(1, t));
+        if (Math.abs(ev.clientX - startX) > 3 || Math.abs(ev.clientY - startY) > 3) moved = true;
+        const current = planState.items[activeId];
+        if (!current) return;
+        const { px, py, reach } = toSvg(ev);
+        let bestId = activeId;
+        let best = project(activeId, px, py);
+        for (const id of Object.keys(planState._wallGeom)) {
+          const cand = project(id, px, py);
+          if (cand.dist < best.dist) {
+            best = cand;
+            bestId = id;
+          }
+        }
+        if (bestId !== activeId && best.dist < reach) {
+          const other = planState.items[bestId];
+          if (other) planState.items[activeId] = { ...other, offset: current.offset };
+          else delete planState.items[activeId];
+          planState.items[bestId] = { ...current, offset: best.t };
+          activeId = bestId;
+        } else {
+          current.offset = project(activeId, px, py).t;
+        }
         renderFloorPlan(planState.Lm, planState.Wm, planState.n, currentWallMm());
       };
       const onUp = () => {
         svg.removeEventListener("pointermove", onMove);
         svg.removeEventListener("pointerup", onUp);
-        if (!moved) openWallEditor(id);
+        if (!moved) openWallEditor(activeId);
         else hesabla();
       };
       svg.addEventListener("pointermove", onMove);
@@ -1349,7 +1398,15 @@ export function mountPlanner(root: HTMLElement): () => void {
   root.querySelectorAll<HTMLElement>("#stageRail [data-stage]").forEach((btn) => {
     on(btn, "click", () => {
       const slider = must<HTMLInputElement>("stageSlider");
-      slider.value = btn.dataset.stage || "5";
+      const next = btn.dataset.stage || "5";
+      slider.value = next;
+      if (next === "3") {
+        rotX = -52;
+        rotY = 36;
+      } else if (next === "5") {
+        rotX = -24;
+        rotY = 32;
+      }
       slider.dispatchEvent(new Event("input", { bubbles: true }));
     });
   });

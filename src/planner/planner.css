@@ -730,6 +730,11 @@
   padding: 8px 12px;
   font-size: 0.8rem;
 }
+.nibras-planner #planSvg,
+.nibras-planner #planSvg text {
+  user-select: none;
+  -webkit-user-select: none;
+}
 
 .nibras-planner .five-head {
   display: flex;
