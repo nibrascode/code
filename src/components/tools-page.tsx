@@ -62,7 +62,15 @@ import {
   WholeWord,
 } from "lucide-react";
 import type { Lang } from "@/lib/i18n";
-import { TOOLS, TOOLS_PAGE, TOOL_GROUPS, relatedTools, toolPath, toolsPath, type ToolId } from "@/lib/tools";
+import {
+  TOOLS,
+  TOOLS_PAGE,
+  TOOL_GROUPS,
+  relatedTools,
+  toolPath,
+  toolsPath,
+  type ToolId,
+} from "@/lib/tools";
 import { TOOL_LEAD, TOOL_SAMPLE } from "@/lib/tools-seo";
 import {
   decodeBase64,
@@ -257,7 +265,18 @@ const NEEDS_TEXT = new Set<ToolId>([
   "leap",
   "query",
 ]);
-const PAIR = new Set<ToolId>(["base64", "url", "html", "roman", "morse", "jsonyaml", "yamljson", "binary", "hex", "escape"]);
+const PAIR = new Set<ToolId>([
+  "base64",
+  "url",
+  "html",
+  "roman",
+  "morse",
+  "jsonyaml",
+  "yamljson",
+  "binary",
+  "hex",
+  "escape",
+]);
 
 const GROUP_ICONS: Record<string, typeof Braces> = {
   gen: Sparkles,
@@ -373,7 +392,15 @@ async function sha(text: string, name: "SHA-1" | "SHA-256") {
   return Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, "0")).join("");
 }
 
-function runSync(id: ToolId, text: string, count: string, low: string, high: string, extra: string, lang: Lang) {
+function runSync(
+  id: ToolId,
+  text: string,
+  count: string,
+  low: string,
+  high: string,
+  extra: string,
+  lang: Lang,
+) {
   if (id === "lorem") return lorem(Number(count));
   if (id === "text") return randomText(Number(count));
   if (id === "number") return randomNumber(Number(low), Number(high));
@@ -395,11 +422,22 @@ function runSync(id: ToolId, text: string, count: string, low: string, high: str
   if (id === "unix") return unixConvert(text);
   if (id === "case") {
     const forms = caseForms(text);
-    return [`${TOOLS_PAGE.upper[lang]}: ${forms.upper}`, `${TOOLS_PAGE.lower[lang]}: ${forms.lower}`, `camelCase: ${forms.camel}`, `snake_case: ${forms.snake}`, `slug: ${forms.slug}`].join("\n");
+    return [
+      `${TOOLS_PAGE.upper[lang]}: ${forms.upper}`,
+      `${TOOLS_PAGE.lower[lang]}: ${forms.lower}`,
+      `camelCase: ${forms.camel}`,
+      `snake_case: ${forms.snake}`,
+      `slug: ${forms.slug}`,
+    ].join("\n");
   }
   if (id === "count") {
     const stats = textStats(text);
-    return [`${TOOLS_PAGE.words[lang]}: ${stats.words}`, `${TOOLS_PAGE.chars[lang]}: ${stats.chars}`, `${TOOLS_PAGE.nospace[lang]}: ${stats.nospace}`, `${TOOLS_PAGE.lines[lang]}: ${stats.lines}`].join("\n");
+    return [
+      `${TOOLS_PAGE.words[lang]}: ${stats.words}`,
+      `${TOOLS_PAGE.chars[lang]}: ${stats.chars}`,
+      `${TOOLS_PAGE.nospace[lang]}: ${stats.nospace}`,
+      `${TOOLS_PAGE.lines[lang]}: ${stats.lines}`,
+    ].join("\n");
   }
   if (id === "csv") return convertTable(text);
   if (id === "color") return convertColor(text);
@@ -528,7 +566,14 @@ function fileKind(id: ToolId, body: string) {
 function saveFile(id: ToolId, body: string) {
   const kind = fileKind(id, body);
   const blob = new Blob([body], {
-    type: kind === "xml" ? "application/xml;charset=utf-8" : kind === "json" ? "application/json;charset=utf-8" : kind === "csv" ? "text/csv;charset=utf-8" : "text/plain;charset=utf-8",
+    type:
+      kind === "xml"
+        ? "application/xml;charset=utf-8"
+        : kind === "json"
+          ? "application/json;charset=utf-8"
+          : kind === "csv"
+            ? "text/csv;charset=utf-8"
+            : "text/plain;charset=utf-8",
   });
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
@@ -562,26 +607,40 @@ export function ToolsPage({ lang, focus }: { lang: Lang; focus?: ToolId }) {
       if (current === "hash") setOutput(await sha(text, "SHA-1"));
       else if (current === "sha256") setOutput(await sha(text, "SHA-256"));
       else if (current === "qr") {
-        const { default: QR } = await import("qrcode") as { default: { toDataURL: (text: string, opts: { margin: number; width: number }) => Promise<string> } };
-        setOutput(await QR.toDataURL(text.trim() || "https://www.nibrascode.com", { margin: 1, width: 280 }));
+        const { default: QR } = (await import("qrcode")) as {
+          default: {
+            toDataURL: (text: string, opts: { margin: number; width: number }) => Promise<string>;
+          };
+        };
+        setOutput(
+          await QR.toDataURL(text.trim() || "https://www.nibrascode.com", {
+            margin: 1,
+            width: 280,
+          }),
+        );
       } else {
-        const next = mode === "undo"
-          ? current === "roman" || current === "morse" || current === "binary" || current === "hex" || current === "escape"
-            ? current === "roman"
-              ? romanConvert(text)
-              : current === "morse"
-                ? morseConvert(text, true)
-                : current === "binary"
-                  ? textBinary(text, true)
-                  : current === "hex"
-                    ? textHex(text, true)
-                    : escapeJson(text, true)
-            : current === "jsonyaml"
-              ? yamlToJson(text)
-              : current === "yamljson"
-                ? jsonToYaml(text)
-                : undo(current, text)
-          : runSync(current, text, count, low, high, extra, lang);
+        const next =
+          mode === "undo"
+            ? current === "roman" ||
+              current === "morse" ||
+              current === "binary" ||
+              current === "hex" ||
+              current === "escape"
+              ? current === "roman"
+                ? romanConvert(text)
+                : current === "morse"
+                  ? morseConvert(text, true)
+                  : current === "binary"
+                    ? textBinary(text, true)
+                    : current === "hex"
+                      ? textHex(text, true)
+                      : escapeJson(text, true)
+              : current === "jsonyaml"
+                ? yamlToJson(text)
+                : current === "yamljson"
+                  ? jsonToYaml(text)
+                  : undo(current, text)
+            : runSync(current, text, count, low, high, extra, lang);
         setOutput(current === "jwt" && mode === "do" ? `${next}\n\n${copy.jwtNote[lang]}` : next);
       }
     } catch {
@@ -627,139 +686,200 @@ export function ToolsPage({ lang, focus }: { lang: Lang; focus?: ToolId }) {
         </p>
       ) : null}
       {focus ? null : (
-      <div className="prog-sections">
-        {TOOL_GROUPS.map((group, index) => {
-          const tools = group.ids.map((id) => TOOLS.find((tool) => tool.id === id)!);
-          const GroupIcon = GROUP_ICONS[group.id];
-          return (
-            <details key={group.id} className="prog-fold tool-fold" open={index === 0}>
-              <summary>
-                <h2>
-                  <GroupIcon aria-hidden="true" />
-                  {group.title[lang]}
-                  <span className="tool-count">{tools.length}</span>
-                </h2>
-              </summary>
-              <div className="prog-fold-body">
-                <ul className="tool-grid">
-                  {tools.map((tool) => {
-                    const Icon = ICONS[tool.id];
-                    return (
-                      <li key={tool.id}>
-                        <a href={toolPath(lang, tool.id)}>
-                          <span className="tool-name">
-                            <Icon aria-hidden="true" />
-                            {tool.label[lang]}
-                          </span>
-                        </a>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            </details>
-          );
-        })}
-      </div>
+        <div className="prog-sections">
+          {TOOL_GROUPS.map((group, index) => {
+            const tools = group.ids.map((id) => TOOLS.find((tool) => tool.id === id)!);
+            const GroupIcon = GROUP_ICONS[group.id];
+            return (
+              <details key={group.id} className="prog-fold tool-fold" open={index === 0}>
+                <summary>
+                  <h2>
+                    <GroupIcon aria-hidden="true" />
+                    {group.title[lang]}
+                    <span className="tool-count">{tools.length}</span>
+                  </h2>
+                </summary>
+                <div className="prog-fold-body">
+                  <ul className="tool-grid">
+                    {tools.map((tool) => {
+                      const Icon = ICONS[tool.id];
+                      return (
+                        <li key={tool.id}>
+                          <a href={toolPath(lang, tool.id)}>
+                            <span className="tool-name">
+                              <Icon aria-hidden="true" />
+                              {tool.label[lang]}
+                            </span>
+                          </a>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              </details>
+            );
+          })}
+        </div>
       )}
       {current ? (
-              <form
-                className="paket-form"
-                onSubmit={(event) => {
-                  event.preventDefault();
-                  void make("do");
-                }}
-              >
-                {current === "number" ? (
-                  <div className="tool-row">
-                    <input value={low} inputMode="numeric" aria-label="min" onChange={(event) => setLow(event.target.value)} />
-                    <input value={high} inputMode="numeric" aria-label="max" onChange={(event) => setHigh(event.target.value)} />
-                  </div>
+        <form
+          className="paket-form tool-desk"
+          onSubmit={(event) => {
+            event.preventDefault();
+            void make("do");
+          }}
+        >
+          <section className="tool-panel">
+            <header>
+              <span>{copy.input[lang]}</span>
+            </header>
+            {current === "number" ? (
+              <div className="tool-row">
+                <input
+                  value={low}
+                  inputMode="numeric"
+                  aria-label="min"
+                  onChange={(event) => setLow(event.target.value)}
+                />
+                <input
+                  value={high}
+                  inputMode="numeric"
+                  aria-label="max"
+                  onChange={(event) => setHigh(event.target.value)}
+                />
+              </div>
+            ) : null}
+            {current === "lorem" ||
+            current === "text" ||
+            current === "password" ||
+            current === "pxrem" ? (
+              <input
+                value={count}
+                inputMode="decimal"
+                aria-label={current === "pxrem" ? copy.root[lang] : "count"}
+                onChange={(event) => setCount(event.target.value)}
+              />
+            ) : null}
+            {NEEDS_TEXT.has(current) ? (
+              <>
+                {current === "regex" ||
+                current === "contrast" ||
+                current === "meta" ||
+                current === "utm" ||
+                current === "days" ||
+                current === "htaccess" ||
+                current === "gradient" ||
+                current === "vat" ||
+                current === "prefix" ||
+                current === "replace" ||
+                current === "discount" ||
+                current === "tip" ||
+                current === "split" ? (
+                  <textarea
+                    value={extra}
+                    spellCheck={false}
+                    aria-label={copy.second[lang]}
+                    placeholder={copy.second[lang]}
+                    onChange={(event) => setExtra(event.target.value)}
+                  />
                 ) : null}
-                {current === "lorem" || current === "text" || current === "password" || current === "pxrem" ? (
+                {current === "meta" || current === "utm" ? (
                   <input
                     value={count}
-                    inputMode="decimal"
-                    aria-label={current === "pxrem" ? copy.root[lang] : "count"}
+                    aria-label={copy.third[lang]}
+                    placeholder={copy.third[lang]}
                     onChange={(event) => setCount(event.target.value)}
                   />
                 ) : null}
-                {NEEDS_TEXT.has(current) ? (
-                  <>
-                    {current === "regex" || current === "contrast" || current === "meta" || current === "utm" || current === "days" || current === "htaccess" || current === "gradient" || current === "vat" || current === "prefix" || current === "replace" || current === "discount" || current === "tip" || current === "split" ? (
-                      <textarea
-                        value={extra}
-                        spellCheck={false}
-                        aria-label={copy.second[lang]}
-                        placeholder={copy.second[lang]}
-                        onChange={(event) => setExtra(event.target.value)}
-                      />
-                    ) : null}
-                    {current === "meta" || current === "utm" ? (
-                      <input value={count} aria-label={copy.third[lang]} placeholder={copy.third[lang]} onChange={(event) => setCount(event.target.value)} />
-                    ) : null}
-                    <label className="tool-file">
-                      {copy.load[lang]}
-                      <input
-                        type="file"
-                        accept={
-                          current === "xml"
-                            ? ".xml,.txt,text/plain,application/xml,text/xml"
-                            : current === "csv"
-                              ? ".csv,.json,.txt,text/plain,text/csv,application/json"
-                              : ".txt,text/plain"
-                        }
-                        onChange={(event) => {
-                          const file = event.target.files?.[0];
-                          if (!file) return;
-                          void file.text().then((value) => setText(value));
-                        }}
-                      />
-                    </label>
-                    <textarea value={text} spellCheck={false} onChange={(event) => setText(event.target.value)} />
-                    {current === "diff" ? (
-                      <textarea
-                        value={extra}
-                        spellCheck={false}
-                        aria-label={copy.second[lang]}
-                        placeholder={copy.second[lang]}
-                        onChange={(event) => setExtra(event.target.value)}
-                      />
-                    ) : null}
-                  </>
+                <label className="tool-file">
+                  {copy.load[lang]}
+                  <input
+                    type="file"
+                    accept={
+                      current === "xml"
+                        ? ".xml,.txt,text/plain,application/xml,text/xml"
+                        : current === "csv"
+                          ? ".csv,.json,.txt,text/plain,text/csv,application/json"
+                          : ".txt,text/plain"
+                    }
+                    onChange={(event) => {
+                      const file = event.target.files?.[0];
+                      if (!file) return;
+                      void file.text().then((value) => setText(value));
+                    }}
+                  />
+                </label>
+                <textarea
+                  value={text}
+                  spellCheck={false}
+                  onChange={(event) => setText(event.target.value)}
+                />
+                {current === "diff" ? (
+                  <textarea
+                    value={extra}
+                    spellCheck={false}
+                    aria-label={copy.second[lang]}
+                    placeholder={copy.second[lang]}
+                    onChange={(event) => setExtra(event.target.value)}
+                  />
                 ) : null}
-                <div className="tool-row">
-                  <button type="submit">{copy.run[lang]}</button>
-                  {PAIR.has(current) ? (
-                    <button type="button" onClick={() => void make("undo")}>
-                      {lang === "en" ? "Read" : lang === "tr" ? "Aç" : lang === "ar" ? "اقرأ" : lang === "ru" ? "Прочитать" : "Aç"}
-                    </button>
-                  ) : null}
-                </div>
-                {note ? <p className="paket-bad">{note}</p> : null}
-                {output ? (
-                  <>
-                    {output.startsWith("data:image") ? <img src={output} alt="QR" width={280} height={280} /> : <textarea readOnly value={output} />}
-                    <div className="tool-row">
-                      <button
-                        type="button"
-                        onClick={() => {
-                          void navigator.clipboard.writeText(output);
-                          setNote(copy.copied[lang]);
-                        }}
-                      >
-                        {copy.copy[lang]}
-                      </button>
-                      <button type="button" onClick={() => saveFile(current, output)}>
-                        {copy.save[lang]}
-                      </button>
-                    </div>
-                  </>
-                ) : null}
-              </form>
+              </>
+            ) : null}
+            <div className="tool-row">
+              <button className="tool-go" type="submit">
+                {copy.run[lang]}
+              </button>
+              {PAIR.has(current) ? (
+                <button className="tool-quiet" type="button" onClick={() => void make("undo")}>
+                  {lang === "en"
+                    ? "Read"
+                    : lang === "tr"
+                      ? "Aç"
+                      : lang === "ar"
+                        ? "اقرأ"
+                        : lang === "ru"
+                          ? "Прочитать"
+                          : "Aç"}
+                </button>
+              ) : null}
+            </div>
+            {note ? <p className="paket-bad">{note}</p> : null}
+          </section>
+          {output ? (
+            <section className="tool-panel tool-panel-out">
+              <header>
+                <span>{copy.result[lang]}</span>
+              </header>
+              {output.startsWith("data:image") ? (
+                <img src={output} alt="QR" width={280} height={280} />
+              ) : (
+                <textarea readOnly value={output} />
+              )}
+              <div className="tool-row">
+                <button
+                  className="tool-quiet"
+                  type="button"
+                  onClick={() => {
+                    void navigator.clipboard.writeText(output);
+                    setNote(copy.copied[lang]);
+                  }}
+                >
+                  {copy.copy[lang]}
+                </button>
+                <button
+                  className="tool-quiet"
+                  type="button"
+                  onClick={() => saveFile(current, output)}
+                >
+                  {copy.save[lang]}
+                </button>
+              </div>
+            </section>
+          ) : null}
+        </form>
       ) : null}
       {focus ? (
-        <div className="prog-fold-body">
+        <div className="tool-related">
           <h2>{copy.related[lang]}</h2>
           <ul className="tool-grid">
             {relatedTools(focus).map((id) => {
