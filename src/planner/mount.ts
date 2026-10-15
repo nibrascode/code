@@ -604,9 +604,9 @@ export function mountPlanner(root: HTMLElement): () => void {
     hesabla();
   };
 
-  let rotX = -22;
-  let rotY = 35;
-  let zoomScale = 1;
+  let rotX = -16;
+  let rotY = 28;
+  let zoomScale = 1.12;
   let dragging = false;
   let lastX = 0;
   let lastY = 0;
@@ -1091,18 +1091,53 @@ export function mountPlanner(root: HTMLElement): () => void {
         : "background:linear-gradient(160deg,#d5d0c8,#9a958d);border:none;";
     must("f-bottom").style.cssText =
       `width:${lp}px;height:${wp}px;top:${hp / 2 - wp / 2}px;transform:rotateX(-90deg) translateZ(${hp / 2}px);${floor}`;
-    const plinth = Math.max(8, hp * 0.06);
+    const plinth = Math.max(6, hp * 0.045);
+    const groundZ = hp / 2 + plinth + 1;
     must("f-plinth").style.cssText =
-      `width:${lp + 16}px;height:${wp + 16}px;left:-8px;top:${hp / 2 - (wp + 16) / 2}px;transform:rotateX(-90deg) translateZ(${hp / 2 + plinth}px);border:none;background:linear-gradient(180deg,#cfc8bc,#7e7870);`;
-    const gw = lp * 1.9;
-    const gd = wp * 2.25;
-    const lawn = document.createElement("div");
-    lawn.className = "face lawn";
-    lawn.style.cssText =
+      `width:${lp + 18}px;height:${wp + 18}px;left:-9px;top:${hp / 2 - (wp + 18) / 2}px;transform:rotateX(-90deg) translateZ(${hp / 2 + plinth}px);border:none;background:linear-gradient(180deg,#b7b1a6,#6f6a64);`;
+    const gw = 1600;
+    const gd = 1200;
+    const site = (css: string) => {
+      const d = document.createElement("div");
+      d.className = "face lawn";
+      d.style.cssText = css;
+      cube.appendChild(d);
+    };
+    site(
       `width:${gw}px;height:${gd}px;left:${(lp - gw) / 2}px;top:${hp / 2 - gd / 2}px;` +
-      `transform:rotateX(-90deg) translateZ(${hp / 2 + plinth + 6}px);border:none;` +
-      `background:radial-gradient(closest-side at 50% 46%,rgba(20,40,10,.22),transparent 68%),repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 1px,transparent 1px 8px),linear-gradient(180deg,#8fce62,#4f8d38 55%,#356828);`;
-    cube.appendChild(lawn);
+        `transform:rotateX(-90deg) translateZ(${groundZ}px);border:none;` +
+        `background:` +
+        `radial-gradient(ellipse at 32% 42%,rgba(255,255,255,.12),transparent 36%),` +
+        `radial-gradient(ellipse at 70% 60%,rgba(20,40,8,.14),transparent 42%),` +
+        `linear-gradient(165deg,#b6e278,#5c9e40 48%,#3b7a2e);`,
+    );
+    site(
+      `width:${lp * 1.4}px;height:${wp * 1.5}px;left:${(lp - lp * 1.4) / 2}px;top:${hp / 2 - (wp * 1.5) / 2}px;` +
+        `transform:rotateX(-90deg) translateZ(${groundZ - 1.2}px);border:none;` +
+        `background:radial-gradient(ellipse at center,rgba(20,16,10,.32),rgba(20,16,10,0) 70%);`,
+    );
+    const pathW = Math.max(18, lp * 0.15);
+    const pathL = Math.max(78, wp);
+    site(
+      `width:${pathW}px;height:${pathL}px;left:${(lp - pathW) / 2}px;top:${hp / 2 - pathL / 2}px;` +
+        `transform:rotateX(-90deg) translateZ(${groundZ - 2}px) translateY(${wp / 2 + pathL / 2 - 10}px);border:none;border-radius:10px;` +
+        `background:linear-gradient(#f3e6c8,#c9b08a);`,
+    );
+    const tree = (x: number, z: number, tall: number) => {
+      const th = Math.max(20, hp * tall);
+      const crown = Math.max(30, th * 0.95);
+      site(
+        `width:7px;height:${th}px;left:${x}px;top:${hp - th}px;transform:translateZ(${z}px);background:linear-gradient(#8d5a34,#4e311c);border:none;border-radius:3px;`,
+      );
+      site(
+        `width:${crown}px;height:${crown}px;left:${x - crown / 2 + 3}px;top:${hp - th - crown * 0.46}px;transform:translateZ(${z}px);background:radial-gradient(circle at 40% 38%,#def6a4,#3e8c32 60%,#1c541e);border:none;border-radius:50%;`,
+      );
+      site(
+        `width:${crown * 0.82}px;height:${crown * 0.7}px;left:${x - crown * 0.32}px;top:${hp - th - crown * 0.2}px;transform:translateZ(${z}px) rotateY(80deg);background:radial-gradient(circle at 50% 40%,#b6dc70,#2a6e26 66%,#163e16);border:none;border-radius:50%;`,
+      );
+    };
+    tree(-78, wp * 0.55, 0.66);
+    tree(lp + 52, wp * 0.1, 0.82);
 
     const n = Math.max(1, Math.round(roomCount) || 1);
     if (n !== planState.n) resetPlanGrid(n);
