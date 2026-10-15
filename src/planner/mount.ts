@@ -404,6 +404,9 @@ const buildForms: BuildForm[] = [
   },
 ];
 
+type GlHole = import("./house3d").Hole;
+const roomsNow0 = (n: number) => Math.max(1, Math.round(n) || 1);
+
 function formById(id: string) {
   return buildForms.find((form) => form.id === id) || buildForms[0];
 }
@@ -624,9 +627,46 @@ export function mountPlanner(root: HTMLElement): () => void {
     if (pts.length < 2) return null;
     return Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
   };
+  // WebGL (three.js) photoreal view; the CSS cube stays as the fallback.
+  let glView: import("./house3d").HouseView | null = null;
+  let glParams: import("./house3d").HouseParams | null = null;
+  let glFailed = false;
+  let sceneVisible = true;
+  const initGl = async () => {
+    try {
+      const probe = document.createElement("canvas");
+      if (!(probe.getContext("webgl2") || probe.getContext("webgl"))) throw new Error("no webgl");
+      const mod = await import("./house3d");
+      const v = mod.createHouseView(scene);
+      if (!v) throw new Error("renderer");
+      glView = v;
+      cube.style.display = "none";
+      scene.dataset.gl = "1";
+      if (glParams) v.update(glParams);
+    } catch {
+      glFailed = true;
+      glView = null;
+    }
+  };
+  const io =
+    typeof IntersectionObserver !== "undefined"
+      ? new IntersectionObserver((entries) => {
+          sceneVisible = entries.some((e) => e.isIntersecting);
+        })
+      : null;
+  io?.observe(scene);
+  cleanups.push(() => {
+    io?.disconnect();
+    glView?.dispose();
+    glView = null;
+  });
   const spinLoop = () => {
     rafId = requestAnimationFrame(spinLoop);
     if (autoSpin && !dragging && activePointers.size === 0) rotY += 0.07;
+    if (glView) {
+      if (sceneVisible) glView.render(rotX, rotY, zoomScale);
+      return;
+    }
     cube.style.transform = `scale(${zoomScale}) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
   };
 
@@ -981,6 +1021,52 @@ export function mountPlanner(root: HTMLElement): () => void {
       }
       return [{ offset: 0.5, widthPx: Math.min(win, full * 0.46), kind: "window" }];
     };
+
+    // ---- three.js path: same plan data, rendered by house3d.ts ----
+    if (!glFailed) {
+      const mk = (id: string, full: number) =>
+        facadeHoles(id, full).map((h) => {
+          const isWin = h.kind === "window";
+          const hm = h.heightM
+            ? h.heightM
+            : isWin
+              ? Math.max(0.5, H * 0.34)
+              : Math.max(1.8, H * 0.66);
+          return {
+            offset: h.offset,
+            width: Math.max(0.5, h.widthPx / scale),
+            height: Math.min(H - 0.3, hm),
+            kind: h.kind,
+            entrance: h.entrance,
+          } as GlHole;
+        });
+      const uniqueCols = new Set<number>();
+      planState.colFracsPerRow.forEach((cf) => {
+        for (let c = 1; c < cf.length - 1; c++) uniqueCols.add(parseFloat(cf[c].toFixed(3)));
+      });
+      const gp: import("./house3d").HouseParams = {
+        L,
+        W,
+        H,
+        wallM: (wallMm || 250) / 1000,
+        roof: form.roof,
+        skin: form.skin,
+        brickColor: "#c4653e",
+        stage: stageNow,
+        sky,
+        walls: { N: mk("ext-N", lp), S: mk("ext-S", lp), E: mk("ext-E", wp), W: mk("ext-W", wp) },
+        rowFracs: planState.rowFracs.slice(),
+        colFracs: [...uniqueCols],
+      };
+      glParams = gp;
+      if (!glView && hasDims) void initGl();
+      if (glView) {
+        if (hasDims) glView.update(gp);
+        must("dimsLabel").innerHTML =
+          `Uzunluq: <b>${L || 0}</b> m · En: <b>${W || 0}</b> m · Hündürlük: <b>${H || 0}</b> m · Otaq: <b>${roomsNow0(roomCount)}</b>`;
+        return;
+      }
+    }
 
     const addWall = (
       id: string,
