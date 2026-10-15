@@ -795,7 +795,7 @@
   background:
     radial-gradient(140px 90px at 80% 14%, rgba(255, 248, 220, 0.95), transparent 68%),
     radial-gradient(ellipse 90% 46% at 50% 100%, #3c742e 0%, #69a84a 34%, transparent 70%),
-    linear-gradient(180deg, #5eaceae 0%, #c5e7fb 38%, #f6ecd2 64%, #8fbe62 100%);
+    linear-gradient(180deg, #5eaeea 0%, #c5e7fb 38%, #f6ecd2 64%, #8fbe62 100%);
   box-shadow:
     0 22px 44px rgba(28, 18, 8, 0.18),
     inset 0 0 0 1px rgba(255, 255, 255, 0.35);
