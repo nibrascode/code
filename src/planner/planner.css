@@ -684,6 +684,52 @@
 .nibras-planner select {
   font-family: inherit;
 }
+.nibras-planner .home-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.nibras-planner .home-actions .btn-ghost {
+  min-width: 220px;
+}
+.nibras-planner .action-row {
+  display: flex;
+  gap: 8px;
+  margin: -6px 0 16px;
+}
+.nibras-planner .action-row .btn-print,
+.nibras-planner .action-row .btn-copy {
+  width: auto;
+  flex: 1;
+  margin: 0;
+}
+.nibras-planner .qty-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+}
+.nibras-planner .qty-row span {
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+  font-size: 0.75rem;
+}
+.nibras-planner .size-picks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+.nibras-planner .size-picks button {
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 0.8rem;
+}
 
 .nibras-planner .five-head {
   display: flex;

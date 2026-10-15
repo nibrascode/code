@@ -3,6 +3,7 @@ type GapKind = "door" | "window";
 type PlanItem = {
   type: GapKind;
   width: number;
+  height?: number;
   isEntrance: boolean;
   offset: number;
 };
@@ -91,10 +92,30 @@ export function mountPlanner(root: HTMLElement): () => void {
   const anaSehife = () => {
     project.classList.add("hidden");
     home.classList.remove("hidden");
+    allowSave = false;
+    showContinue();
   };
   const yeniLayihe = () => {
+    localStorage.removeItem(saveKey);
+    planState.n = 0;
+    planState.items = {};
+    openingsReady = false;
+    must<HTMLInputElement>("uzunluq").value = "10";
+    must<HTMLInputElement>("en").value = "6";
+    must<HTMLInputElement>("hund").value = "3";
+    must<HTMLInputElement>("otaqSayi").value = "3";
     home.classList.add("hidden");
     project.classList.remove("hidden");
+    allowSave = true;
+    hesabla();
+  };
+  const devamEt = () => {
+    const data = readSave();
+    if (!data) return yeniLayihe();
+    applySave(data);
+    home.classList.add("hidden");
+    project.classList.remove("hidden");
+    allowSave = true;
     hesabla();
   };
   const togglePanel = (id: string) => {
@@ -243,6 +264,9 @@ export function mountPlanner(root: HTMLElement): () => void {
   };
   let weCurrentWall: string | null = null;
   let weType: GapKind = "door";
+  let openingsReady = false;
+  let allowSave = false;
+  const saveKey = "nibras-planner-v1";
 
   const stageCosts: Record<StageKey, number> = { kerpic: 0, suvaq: 0, bitirme: 0 };
 
@@ -260,7 +284,42 @@ export function mountPlanner(root: HTMLElement): () => void {
       const cells = isLast ? remainder : cols;
       planState.colFracsPerRow.push(Array.from({ length: cells + 1 }, (_, i) => i / cells));
     }
-    planState.items = {};
+    const kept: Record<string, PlanItem> = {};
+    for (const id of ["ext-N", "ext-S", "ext-E", "ext-W"]) {
+      if (planState.items[id]) kept[id] = planState.items[id];
+    }
+    planState.items = kept;
+    if (!openingsReady && Object.keys(kept).length === 0) {
+      openingsReady = true;
+      planState.items["ext-S"] = {
+        type: "door",
+        width: 0.9,
+        height: 2.1,
+        isEntrance: true,
+        offset: 0.5,
+      };
+      planState.items["ext-N"] = {
+        type: "window",
+        width: 1.4,
+        height: 1.2,
+        isEntrance: false,
+        offset: 0.5,
+      };
+      planState.items["ext-E"] = {
+        type: "window",
+        width: 1.2,
+        height: 1.2,
+        isEntrance: false,
+        offset: 0.5,
+      };
+      planState.items["ext-W"] = {
+        type: "window",
+        width: 1.2,
+        height: 1.2,
+        isEntrance: false,
+        offset: 0.5,
+      };
+    }
   };
 
   const currentWallMm = () => {
@@ -376,7 +435,13 @@ export function mountPlanner(root: HTMLElement): () => void {
       );
     };
 
-    type Hole = { offset: number; widthPx: number; kind: "door" | "window"; entrance?: boolean };
+    type Hole = {
+      offset: number;
+      widthPx: number;
+      kind: "door" | "window";
+      entrance?: boolean;
+      heightM?: number;
+    };
     const facadeHoles = (id: string, full: number): Hole[] => {
       const user = planState.items[id];
       if (user) {
@@ -387,6 +452,7 @@ export function mountPlanner(root: HTMLElement): () => void {
             widthPx,
             kind: user.type,
             entrance: user.isEntrance,
+            heightM: user.height,
           },
         ];
       }
@@ -428,10 +494,15 @@ export function mountPlanner(root: HTMLElement): () => void {
           Math.min(full - hole.widthPx - 3, hole.offset * full - hole.widthPx / 2),
         );
         if (hole.kind === "window") {
-          const h = Math.max(16, hp * 0.34);
-          mk(left, hole.widthPx, h, hp * 0.16, windowSkin, " translateZ(1.6px)");
+          const h = hole.heightM
+            ? Math.max(16, Math.min(hp * 0.9, (hole.heightM / Math.max(H, 0.1)) * hp))
+            : Math.max(16, hp * 0.34);
+          const top = Math.max(4, Math.min(hp - h - 4, hp * 0.22));
+          mk(left, hole.widthPx, h, top, windowSkin, " translateZ(1.6px)");
         } else {
-          const h = Math.max(20, hp * 0.66);
+          const h = hole.heightM
+            ? Math.max(20, Math.min(hp * 0.94, (hole.heightM / Math.max(H, 0.1)) * hp))
+            : Math.max(20, hp * 0.66);
           mk(left, hole.widthPx, h, hp - h, doorSkin(Boolean(hole.entrance)), " translateZ(1.6px)");
         }
       }
@@ -542,13 +613,25 @@ export function mountPlanner(root: HTMLElement): () => void {
       `Uzunluq: <b>${L || 0}</b> m · En: <b>${W || 0}</b> m · Hündürlük: <b>${H || 0}</b> m · Otaq: <b>${n}</b>`;
   };
 
+  const wallTitle = (id: string) => {
+    const names: Record<string, string> = {
+      "ext-N": "Arxa divar",
+      "ext-S": "Ön divar",
+      "ext-E": "Sağ divar",
+      "ext-W": "Sol divar",
+    };
+    return names[id] || "Otaq bölməsi";
+  };
   const openWallEditor = (id: string) => {
     weCurrentWall = id;
     const item = planState.items[id];
     weType = item ? item.type : "door";
-    must("weTitle").textContent = "Divar seçildi";
+    must("weTitle").textContent = wallTitle(id);
     must<HTMLInputElement>("weWidth").value = String(
       item ? item.width : weType === "door" ? 0.9 : 1.2,
+    );
+    must<HTMLInputElement>("weHeight").value = String(
+      item?.height ?? (weType === "door" ? 2.1 : 1.2),
     );
     must<HTMLInputElement>("weEntrance").checked = Boolean(item && item.isEntrance);
     weRefreshTypeButtons();
@@ -558,6 +641,7 @@ export function mountPlanner(root: HTMLElement): () => void {
   const weSetType = (t: GapKind) => {
     weType = t;
     must<HTMLInputElement>("weWidth").value = t === "door" ? "0.9" : "1.2";
+    must<HTMLInputElement>("weHeight").value = t === "door" ? "2.1" : "1.2";
     weRefreshTypeButtons();
   };
   const weRefreshTypeButtons = () => {
@@ -568,6 +652,8 @@ export function mountPlanner(root: HTMLElement): () => void {
   const weSave = () => {
     if (!weCurrentWall) return;
     const width = parseFloat(must<HTMLInputElement>("weWidth").value) || 0.9;
+    const height =
+      parseFloat(must<HTMLInputElement>("weHeight").value) || (weType === "door" ? 2.1 : 1.2);
     const isEntrance = weType === "door" && must<HTMLInputElement>("weEntrance").checked;
     if (isEntrance) {
       Object.values(planState.items).forEach((it) => {
@@ -577,7 +663,13 @@ export function mountPlanner(root: HTMLElement): () => void {
     const existingOffset = planState.items[weCurrentWall]
       ? planState.items[weCurrentWall].offset
       : 0.5;
-    planState.items[weCurrentWall] = { type: weType, width, isEntrance, offset: existingOffset };
+    planState.items[weCurrentWall] = {
+      type: weType,
+      width,
+      height,
+      isEntrance,
+      offset: existingOffset,
+    };
     weClose();
     hesabla();
   };
@@ -791,9 +883,18 @@ export function mountPlanner(root: HTMLElement): () => void {
     update3D(L, W, H, divarQalinliq, kL, kH, tikis, otaqSayi);
     renderFloorPlan(L, W, otaqSayi, divarQalinliq);
 
+    let openingArea = 0;
+    for (const [id, item] of Object.entries(planState.items)) {
+      if (!id.startsWith("ext-")) continue;
+      const h = Math.min(H, item.height ?? (item.type === "door" ? 2.1 : 1.2));
+      openingArea += Math.max(0, item.width) * Math.max(0, h);
+    }
+    openingArea = Math.min(openingArea, wallArea);
+    const netWall = Math.max(0, wallArea - openingArea);
+
     const layers = Math.max(1, Math.round(divarQalinliq / (kW + tikis)));
     const brickFace = (kL + tikis) * (kH + tikis);
-    const brickCount = brickFace > 0 ? Math.ceil((wallArea * 1e6 * layers) / brickFace) : 0;
+    const brickCount = brickFace > 0 ? Math.ceil((netWall * 1e6 * layers) / brickFace) : 0;
     const brickPrice = parseFloat(must<HTMLInputElement>("qKerpic").value) || 0;
     stageCosts.suvaq = 0;
     stageCosts.bitirme = 0;
@@ -805,7 +906,7 @@ export function mountPlanner(root: HTMLElement): () => void {
     } else stageCosts.kerpic = 0;
 
     if (must<HTMLInputElement>("c-sement").checked) {
-      const qty = Math.ceil(wallArea * (parseFloat(must<HTMLInputElement>("p-sement").value) || 0));
+      const qty = Math.ceil(netWall * (parseFloat(must<HTMLInputElement>("p-sement").value) || 0));
       const cost = qty * (parseFloat(must<HTMLInputElement>("q-sement").value) || 0);
       total += cost;
       lines.push([`Sement — ${qty} kg`, cost]);
@@ -813,7 +914,7 @@ export function mountPlanner(root: HTMLElement): () => void {
     }
     if (must<HTMLInputElement>("c-boya").checked) {
       const qty =
-        Math.round(wallArea * (parseFloat(must<HTMLInputElement>("p-boya").value) || 0) * 10) / 10;
+        Math.round(netWall * (parseFloat(must<HTMLInputElement>("p-boya").value) || 0) * 10) / 10;
       const cost = qty * (parseFloat(must<HTMLInputElement>("q-boya").value) || 0);
       total += cost;
       lines.push([`Boya — ${qty} litr`, cost]);
@@ -836,12 +937,123 @@ export function mountPlanner(root: HTMLElement): () => void {
           `<div class="line"><span>${name}</span><span>${cost.toFixed(2)} AZN</span></div>`,
       )
       .join("");
+    const chips = [
+      `Divar ${netWall.toFixed(1)} m²`,
+      `Döşəmə ${floorArea.toFixed(1)} m²`,
+      openingArea > 0 ? `Açılış −${openingArea.toFixed(1)} m²` : "Açılış yoxdur",
+    ];
+    must("qtyChips").innerHTML = chips.map((text) => `<span>${text}</span>`).join("");
     updateStageDisplay();
+    if (allowSave) persist();
+  };
+
+  const smetaText = () => {
+    const title = "Nibras smeta";
+    const dims = must("dimsLabel").innerText.replace(/\s+/g, " ").trim();
+    const chips = must("qtyChips").innerText.replace(/\s+/g, " ").trim();
+    const lines = Array.from(must("estLines").querySelectorAll(".line")).map((el) =>
+      el.textContent?.replace(/\s+/g, " ").trim(),
+    );
+    return [title, dims, chips, "", ...lines, "", must("totalPrice").textContent]
+      .filter((line) => line !== undefined)
+      .join("\n");
+  };
+  const persist = () => {
+    try {
+      const fields: Record<string, string> = {};
+      project
+        .querySelectorAll<HTMLInputElement | HTMLSelectElement>("input[id], select[id]")
+        .forEach((el) => {
+          fields[el.id] =
+            el instanceof HTMLInputElement && el.type === "checkbox"
+              ? el.checked
+                ? "1"
+                : "0"
+              : el.value;
+        });
+      localStorage.setItem(
+        saveKey,
+        JSON.stringify({
+          fields,
+          plan: {
+            n: planState.n,
+            cols: planState.cols,
+            rowFracs: planState.rowFracs,
+            colFracsPerRow: planState.colFracsPerRow,
+            items: planState.items,
+          },
+        }),
+      );
+    } catch {
+      /* private mode */
+    }
+  };
+  const readSave = () => {
+    try {
+      const raw = localStorage.getItem(saveKey);
+      return raw
+        ? (JSON.parse(raw) as { fields: Record<string, string>; plan: typeof planState })
+        : null;
+    } catch {
+      return null;
+    }
+  };
+  const applySave = (data: NonNullable<ReturnType<typeof readSave>>) => {
+    for (const [id, value] of Object.entries(data.fields)) {
+      const el = document.getElementById(id) as HTMLInputElement | HTMLSelectElement | null;
+      if (!el || !project.contains(el)) continue;
+      if (el instanceof HTMLInputElement && el.type === "checkbox") el.checked = value === "1";
+      else el.value = value;
+    }
+    const plan = data.plan;
+    if (plan) {
+      planState.n = plan.n;
+      planState.cols = plan.cols;
+      planState.rowFracs = plan.rowFracs;
+      planState.colFracsPerRow = plan.colFracsPerRow;
+      planState.items = plan.items || {};
+      openingsReady = true;
+    }
+  };
+  const showContinue = () => {
+    must("btnContinue").classList.toggle("hidden", !readSave());
   };
 
   on(root.querySelector('[data-act="yeni"]'), "click", yeniLayihe);
+  on(root.querySelector('[data-act="davam"]'), "click", devamEt);
   on(root.querySelector('[data-act="ana"]'), "click", anaSehife);
   on(root.querySelector('[data-act="print"]'), "click", () => window.print());
+  on(root.querySelector('[data-act="copy"]'), "click", async () => {
+    const text = smetaText();
+    const btn = root.querySelector('[data-act="copy"]');
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      const area = document.createElement("textarea");
+      area.value = text;
+      root.appendChild(area);
+      area.select();
+      document.execCommand("copy");
+      area.remove();
+    }
+    if (btn) {
+      const prev = btn.textContent;
+      btn.textContent = "Kopyalandı";
+      window.setTimeout(() => {
+        btn.textContent = prev;
+      }, 1400);
+    }
+  });
+  root.querySelectorAll<HTMLElement>("[data-size]").forEach((btn) => {
+    on(btn, "click", () => {
+      const [l, w, h, rooms] = (btn.dataset.size || "").split(",");
+      must<HTMLInputElement>("uzunluq").value = l;
+      must<HTMLInputElement>("en").value = w;
+      must<HTMLInputElement>("hund").value = h;
+      must<HTMLInputElement>("otaqSayi").value = rooms;
+      hesabla();
+    });
+  });
   root.querySelectorAll<HTMLElement>("[data-panel]").forEach((el) => {
     const id = el.dataset.panel;
     if (id) on(el, "click", () => togglePanel(id));
@@ -872,6 +1084,7 @@ export function mountPlanner(root: HTMLElement): () => void {
   on(root.querySelector('[data-act="we-close"]'), "click", weClose);
   on(project, "input", hesabla);
   on(project, "change", hesabla);
+  showContinue();
 
   return () => {
     cancelAnimationFrame(rafId);
