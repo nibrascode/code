@@ -268,37 +268,37 @@ const stageDefs: {
   keys: StageKey[];
 }[] = [
   {
-    name: "1/5 — Təməl",
+    name: "1. Təməl",
     short: "Təməl",
-    blurb: "3D həcm başlayır. Beton əsas görünür, divar hələ qalxmayıb.",
+    blurb: "Yalnız beton əsas görünür.",
     parts: ["bottom"],
     keys: [],
   },
   {
-    name: "2/5 — Divarlar",
+    name: "2. Divar",
     short: "Divar",
-    blurb: "Kərpic hörgüsü qalxır. Bu andan kərpic xərci smetaya düşür.",
+    blurb: "Divarlar hörülür. Material xərci buradan başlayır.",
     parts: ["bottom", "walls"],
     keys: ["kerpic"],
   },
   {
-    name: "3/5 — Otaqlar",
+    name: "3. Otaq",
     short: "Otaq",
-    blurb: "Dam hələ yoxdur. Otaq bölmələri yuxarıdan görünür.",
+    blurb: "Dam yoxdur. Otaqlar yuxarıdan görünür.",
     parts: ["bottom", "walls", "interior"],
     keys: ["kerpic"],
   },
   {
-    name: "4/5 — Suvaq",
+    name: "4. Suvaq",
     short: "Suvaq",
-    blurb: "Divarlar suvanır, döşəmə hazırlanır. Dam hələ açıqdır.",
+    blurb: "Divar suvanır, döşəmə hazırlanır. Dam hələ açıqdır.",
     parts: ["bottom", "walls", "interior"],
     keys: ["kerpic", "suvaq", "bitirme"],
   },
   {
-    name: "5/5 — Dam",
+    name: "5. Dam",
     short: "Dam",
-    blurb: "Kirəmit dam ən sonda bağlanır.",
+    blurb: "Dam bağlanır. Aşağıdakı məbləğ tam smetadır.",
     parts: ["bottom", "walls", "roof", "interior"],
     keys: ["kerpic", "suvaq", "bitirme"],
   },
@@ -378,8 +378,9 @@ export function mountPlanner(root: HTMLElement): () => void {
   };
   const refreshUnitNote = () => {
     const unit = unitById(must<HTMLSelectElement>("kerpicSecim").value);
+    must("unitDims").classList.toggle("hidden", Boolean(unit));
     must("unitNote").textContent = unit
-      ? `${unit.country} — yerli adı: ${unit.local}. Tipik divar ${unit.wall} mm.`
+      ? `${unit.country}: buna ${unit.local} deyirlər. Divar adətən ${unit.wall} mm olur.`
       : "Ölçünü millimetrlə özün yaz.";
   };
   const fillUnitSelect = () => {

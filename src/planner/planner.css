@@ -716,11 +716,34 @@
   background: rgba(255, 255, 255, 0.16);
   font-size: 0.75rem;
 }
+.nibras-planner .steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0 0 14px;
+  padding: 0;
+  list-style: none;
+}
+.nibras-planner .steps li {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 10px 8px;
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: var(--muted);
+}
+.nibras-planner .steps b {
+  display: block;
+  margin-bottom: 2px;
+  color: var(--text);
+  font-size: 0.84rem;
+}
 .nibras-planner .size-picks {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 10px;
+  margin: 0 0 12px;
 }
 .nibras-planner .size-picks button {
   border: 1px solid var(--border);
@@ -845,31 +868,16 @@
 }
 .nibras-planner .stage-rail button {
   min-width: 0;
-  padding: 8px 8px 9px;
+  padding: 10px 6px;
   border-radius: 14px;
   border: 1px solid var(--border);
   background: transparent;
   color: var(--muted);
-  text-align: left;
+  text-align: center;
 }
-.nibras-planner .stage-rail button i,
-.nibras-planner .stage-rail button small,
 .nibras-planner .stage-rail button b {
   display: block;
-}
-.nibras-planner .stage-rail button i {
-  font-style: normal;
-  font-size: 0.62rem;
-  letter-spacing: 0.12em;
-  opacity: 0.7;
-}
-.nibras-planner .stage-rail button b {
-  margin-top: 2px;
   font-size: 0.82rem;
-}
-.nibras-planner .stage-rail button small {
-  font-size: 0.68rem;
-  opacity: 0.75;
 }
 .nibras-planner .stage-rail button.is-on {
   background: #fff;
