@@ -12,14 +12,253 @@ type WallGeom = { x0: number; y0: number; x1: number; y1: number };
 
 type StageKey = "kerpic" | "suvaq" | "bitirme";
 
-const kerpicOlculeri: Record<string, [number, number, number]> = {
-  adi: [250, 120, 65],
-  birbucaq: [250, 120, 88],
-  ikiqat: [250, 120, 138],
-  silikat: [250, 120, 65],
-  bos: [250, 120, 138],
-  qazbeton: [600, 200, 300],
+type WallUnit = {
+  id: string;
+  country: string;
+  title: string;
+  local: string;
+  l: number;
+  w: number;
+  h: number;
+  wall: number;
 };
+
+const wallUnits: WallUnit[] = [
+  {
+    id: "adi",
+    country: "Azərbaycan",
+    title: "Adi kərpic",
+    local: "kərpic",
+    l: 250,
+    w: 120,
+    h: 65,
+    wall: 250,
+  },
+  {
+    id: "birbucaq",
+    country: "Azərbaycan",
+    title: "Birbuçaqlı kərpic",
+    local: "birbuçaqlı kərpic",
+    l: 250,
+    w: 120,
+    h: 88,
+    wall: 250,
+  },
+  {
+    id: "ikiqat",
+    country: "Azərbaycan",
+    title: "İkiqat kərpic",
+    local: "ikiqat kərpic",
+    l: 250,
+    w: 120,
+    h: 138,
+    wall: 250,
+  },
+  {
+    id: "silikat",
+    country: "Azərbaycan",
+    title: "Silikat kərpic",
+    local: "silikat",
+    l: 250,
+    w: 120,
+    h: 65,
+    wall: 250,
+  },
+  {
+    id: "bos",
+    country: "Azərbaycan",
+    title: "Deşikli kərpic",
+    local: "boş kərpic",
+    l: 250,
+    w: 120,
+    h: 138,
+    wall: 250,
+  },
+  {
+    id: "qazbeton",
+    country: "Azərbaycan",
+    title: "Qazbeton blok",
+    local: "qazbeton",
+    l: 600,
+    w: 200,
+    h: 300,
+    wall: 200,
+  },
+  {
+    id: "tr-harman",
+    country: "Türkiyə",
+    title: "Harman kərpici",
+    local: "tuğla",
+    l: 190,
+    w: 90,
+    h: 50,
+    wall: 190,
+  },
+  {
+    id: "tr-delik",
+    country: "Türkiyə",
+    title: "Deşikli kərpic",
+    local: "delikli tuğla",
+    l: 190,
+    w: 190,
+    h: 135,
+    wall: 190,
+  },
+  {
+    id: "tr-bims",
+    country: "Türkiyə",
+    title: "Bims blok",
+    local: "bims",
+    l: 390,
+    w: 190,
+    h: 185,
+    wall: 190,
+  },
+  {
+    id: "tr-gaz",
+    country: "Türkiyə",
+    title: "Qazbeton",
+    local: "gazbeton",
+    l: 600,
+    w: 250,
+    h: 200,
+    wall: 250,
+  },
+  {
+    id: "de-nf",
+    country: "Almaniya",
+    title: "Normal kərpic",
+    local: "Ziegel NF",
+    l: 240,
+    w: 115,
+    h: 71,
+    wall: 240,
+  },
+  {
+    id: "de-df",
+    country: "Almaniya",
+    title: "Nazik kərpic",
+    local: "Ziegel DF",
+    l: 240,
+    w: 115,
+    h: 52,
+    wall: 115,
+  },
+  {
+    id: "uk",
+    country: "Böyük Britaniya",
+    title: "Standart kərpic",
+    local: "brick",
+    l: 215,
+    w: 102.5,
+    h: 65,
+    wall: 215,
+  },
+  {
+    id: "us-brick",
+    country: "ABŞ",
+    title: "Modul kərpic",
+    local: "modular brick",
+    l: 194,
+    w: 92,
+    h: 57,
+    wall: 92,
+  },
+  {
+    id: "us-cmu",
+    country: "ABŞ",
+    title: "Beton blok",
+    local: "CMU",
+    l: 390,
+    w: 190,
+    h: 190,
+    wall: 190,
+  },
+  {
+    id: "au",
+    country: "Avstraliya",
+    title: "Standart kərpic",
+    local: "brick",
+    l: 230,
+    w: 110,
+    h: 76,
+    wall: 110,
+  },
+  {
+    id: "in",
+    country: "Hindistan",
+    title: "Modul kərpic",
+    local: "ईंट",
+    l: 190,
+    w: 90,
+    h: 90,
+    wall: 190,
+  },
+  {
+    id: "cn",
+    country: "Çin",
+    title: "Standart kərpic",
+    local: "砖",
+    l: 240,
+    w: 115,
+    h: 53,
+    wall: 240,
+  },
+  {
+    id: "ir",
+    country: "İran",
+    title: "Sıxılmış kərpic",
+    local: "آجر",
+    l: 220,
+    w: 110,
+    h: 55,
+    wall: 220,
+  },
+  {
+    id: "eg",
+    country: "Misir",
+    title: "Qırmızı kərpic",
+    local: "طوب",
+    l: 250,
+    w: 120,
+    h: 60,
+    wall: 120,
+  },
+  {
+    id: "fr-brique",
+    country: "Fransa",
+    title: "Kərpic",
+    local: "brique",
+    l: 220,
+    w: 105,
+    h: 55,
+    wall: 220,
+  },
+  {
+    id: "fr-parpaing",
+    country: "Fransa",
+    title: "Beton blok",
+    local: "parpaing",
+    l: 500,
+    w: 200,
+    h: 200,
+    wall: 200,
+  },
+  {
+    id: "gulf",
+    country: "BƏƏ və Körfəz",
+    title: "Beton blok",
+    local: "بلوك",
+    l: 400,
+    w: 200,
+    h: 200,
+    wall: 200,
+  },
+];
+
+function unitById(id: string) {
+  return wallUnits.find((unit) => unit.id === id);
+}
 
 const stageDefs: {
   name: string;
@@ -125,15 +364,59 @@ export function mountPlanner(root: HTMLElement): () => void {
     must(id).parentElement?.classList.toggle("open");
   };
 
+  const applyWallThickness = (mm: number) => {
+    const thick = must<HTMLSelectElement>("divarQalinliq");
+    const match = Array.from(thick.options).some((option) => option.value === String(mm));
+    if (match) {
+      thick.value = String(mm);
+      must("qalinliqFerdi").style.display = "none";
+    } else {
+      thick.value = "ferdi";
+      must<HTMLInputElement>("qalinliqFerdi").value = String(mm);
+      must("qalinliqFerdi").style.display = "block";
+    }
+  };
+  const refreshUnitNote = () => {
+    const unit = unitById(must<HTMLSelectElement>("kerpicSecim").value);
+    must("unitNote").textContent = unit
+      ? `${unit.country} — yerli adı: ${unit.local}. Tipik divar ${unit.wall} mm.`
+      : "Ölçünü millimetrlə özün yaz.";
+  };
+  const fillUnitSelect = () => {
+    const sel = must<HTMLSelectElement>("kerpicSecim");
+    const current = sel.value || "adi";
+    sel.innerHTML = "";
+    const groups: string[] = [];
+    for (const unit of wallUnits) {
+      if (!groups.includes(unit.country)) groups.push(unit.country);
+    }
+    for (const country of groups) {
+      const group = document.createElement("optgroup");
+      group.label = country;
+      for (const unit of wallUnits.filter((item) => item.country === country)) {
+        const option = document.createElement("option");
+        option.value = unit.id;
+        option.textContent = `${unit.local} · ${unit.title} — ${unit.l}×${unit.w}×${unit.h}`;
+        group.appendChild(option);
+      }
+      sel.appendChild(group);
+    }
+    const custom = document.createElement("option");
+    custom.value = "ferdi";
+    custom.textContent = "Fərdi ölçü (özün yaz)";
+    sel.appendChild(custom);
+    sel.value = unitById(current) || current === "ferdi" ? current : "adi";
+  };
   const kerpicSecimDeyisdi = () => {
     const secim = must<HTMLSelectElement>("kerpicSecim").value;
+    refreshUnitNote();
     if (secim === "ferdi") return;
-    const size = kerpicOlculeri[secim];
-    if (!size) return;
-    const [L, W, H] = size;
-    must<HTMLInputElement>("kUzun").value = String(L);
-    must<HTMLInputElement>("kEn").value = String(W);
-    must<HTMLInputElement>("kHund").value = String(H);
+    const unit = unitById(secim);
+    if (!unit) return;
+    must<HTMLInputElement>("kUzun").value = String(unit.l);
+    must<HTMLInputElement>("kEn").value = String(unit.w);
+    must<HTMLInputElement>("kHund").value = String(unit.h);
+    applyWallThickness(unit.wall);
     hesabla();
   };
   const qalinliqDeyisdi = () => {
@@ -899,9 +1182,11 @@ export function mountPlanner(root: HTMLElement): () => void {
     stageCosts.suvaq = 0;
     stageCosts.bitirme = 0;
     if (must<HTMLInputElement>("c-kerpic").checked) {
+      const unit = unitById(must<HTMLSelectElement>("kerpicSecim").value);
+      const piece = unit ? unit.local : "element";
       const brickCost = brickCount * brickPrice;
       total += brickCost;
-      lines.push([`Kərpic — ${brickCount.toLocaleString("az")} əd (${layers} sıra)`, brickCost]);
+      lines.push([`${piece} — ${brickCount.toLocaleString("az")} əd (${layers} sıra)`, brickCost]);
       stageCosts.kerpic = brickCost;
     } else stageCosts.kerpic = 0;
 
@@ -944,6 +1229,7 @@ export function mountPlanner(root: HTMLElement): () => void {
     ];
     must("qtyChips").innerHTML = chips.map((text) => `<span>${text}</span>`).join("");
     updateStageDisplay();
+    refreshUnitNote();
     if (allowSave) persist();
   };
 
@@ -1077,6 +1363,8 @@ export function mountPlanner(root: HTMLElement): () => void {
   });
   on(must("kerpicSecim"), "change", kerpicSecimDeyisdi);
   on(must("divarQalinliq"), "change", qalinliqDeyisdi);
+  fillUnitSelect();
+  refreshUnitNote();
   on(root.querySelector('[data-act="we-door"]'), "click", () => weSetType("door"));
   on(root.querySelector('[data-act="we-window"]'), "click", () => weSetType("window"));
   on(root.querySelector('[data-act="we-save"]'), "click", weSave);
