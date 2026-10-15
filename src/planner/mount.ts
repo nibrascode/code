@@ -260,6 +260,154 @@ function unitById(id: string) {
   return wallUnits.find((unit) => unit.id === id);
 }
 
+type BuildForm = {
+  id: string;
+  country: string;
+  title: string;
+  local: string;
+  note: string;
+  unit: string;
+  roof: "tile" | "steep" | "low" | "flat" | "shingle";
+  skin: "brick" | "block" | "wood" | "plaster";
+};
+
+const buildForms: BuildForm[] = [
+  {
+    id: "az-brick",
+    country: "Azərbaycan",
+    title: "Kərpic hörgü",
+    local: "kərpic ev",
+    note: "Daşıyıcı kərpic divar, kirəmit dam.",
+    unit: "adi",
+    roof: "tile",
+    skin: "brick",
+  },
+  {
+    id: "az-qaz",
+    country: "Azərbaycan",
+    title: "Qazbeton",
+    local: "qazbeton",
+    note: "Blok divar, kirəmit dam.",
+    unit: "qazbeton",
+    roof: "tile",
+    skin: "block",
+  },
+  {
+    id: "tr-karkas",
+    country: "Türkiyə",
+    title: "Beton karkas",
+    local: "betonarme",
+    note: "Beton sütun, arası tuğla. Kirəmit dam.",
+    unit: "tr-delik",
+    roof: "tile",
+    skin: "brick",
+  },
+  {
+    id: "de-ziegel",
+    country: "Almaniya",
+    title: "Dik dam",
+    local: "Ziegelhaus",
+    note: "Kərpic hörgü, dik kirəmit dam.",
+    unit: "de-nf",
+    roof: "steep",
+    skin: "brick",
+  },
+  {
+    id: "uk-cavity",
+    country: "Böyük Britaniya",
+    title: "İkiqat divar",
+    local: "cavity wall",
+    note: "Çöldə kərpic, içəridə blok, arada boşluq.",
+    unit: "uk",
+    roof: "tile",
+    skin: "brick",
+  },
+  {
+    id: "us-wood",
+    country: "ABŞ",
+    title: "Taxta karkas",
+    local: "wood frame",
+    note: "Dirəklər 40 sm aralı. Üstü şingl dam.",
+    unit: "us-brick",
+    roof: "shingle",
+    skin: "wood",
+  },
+  {
+    id: "au-veneer",
+    country: "Avstraliya",
+    title: "Kərpic üzlük",
+    local: "brick veneer",
+    note: "İçəridə taxta, çöldə bir sıra kərpic.",
+    unit: "au",
+    roof: "tile",
+    skin: "brick",
+  },
+  {
+    id: "fr-parpaing",
+    country: "Fransa",
+    title: "Beton blok",
+    local: "parpaing",
+    note: "Blok hörülür, üstü suvaq. Kirəmit dam.",
+    unit: "fr-parpaing",
+    roof: "tile",
+    skin: "plaster",
+  },
+  {
+    id: "in-rcc",
+    country: "Hindistan",
+    title: "Beton karkas",
+    local: "RCC",
+    note: "Beton sütun, arası kərpic. Düz dam.",
+    unit: "in",
+    roof: "flat",
+    skin: "brick",
+  },
+  {
+    id: "eg-flat",
+    country: "Misir",
+    title: "Düz dam",
+    local: "طوب",
+    note: "Qırmızı kərpic, beton düz dam.",
+    unit: "eg",
+    roof: "flat",
+    skin: "brick",
+  },
+  {
+    id: "gulf-block",
+    country: "BƏƏ və Körfəz",
+    title: "Beton blok",
+    local: "بلوك",
+    note: "Blok divar, düz dam, alçaq parapet.",
+    unit: "gulf",
+    roof: "flat",
+    skin: "block",
+  },
+  {
+    id: "cn-brick",
+    country: "Çin",
+    title: "Kərpic-beton",
+    local: "砖混",
+    note: "Kərpic və beton. Az mailli dam.",
+    unit: "cn",
+    roof: "low",
+    skin: "brick",
+  },
+  {
+    id: "ir-brick",
+    country: "İran",
+    title: "Kərpic hörgü",
+    local: "آجر",
+    note: "Kərpic divar, az mailli dam.",
+    unit: "ir",
+    roof: "low",
+    skin: "brick",
+  },
+];
+
+function formById(id: string) {
+  return buildForms.find((form) => form.id === id) || buildForms[0];
+}
+
 const stageDefs: {
   name: string;
   short: string;
@@ -382,6 +530,7 @@ export function mountPlanner(root: HTMLElement): () => void {
     must("unitNote").textContent = unit
       ? `${unit.country}: buna ${unit.local} deyirlər. Divar adətən ${unit.wall} mm olur.`
       : "Ölçünü millimetrlə özün yaz.";
+    if (document.getElementById("evForm")) refreshFormNote();
   };
   const fillUnitSelect = () => {
     const sel = must<HTMLSelectElement>("kerpicSecim");
@@ -419,6 +568,35 @@ export function mountPlanner(root: HTMLElement): () => void {
     must<HTMLInputElement>("kHund").value = String(unit.h);
     applyWallThickness(unit.wall);
     hesabla();
+  };
+  const refreshFormNote = () => {
+    const form = formById(must<HTMLSelectElement>("evForm").value);
+    must("formNote").textContent = `${form.country} — yerli adı: ${form.local}. ${form.note}`;
+    const priceLabel = root.querySelector('label[for="qKerpic"]');
+    if (priceLabel) {
+      priceLabel.textContent =
+        form.skin === "wood" ? "1 dirəyin qiyməti, AZN" : "1 ədədin qiyməti, AZN";
+    }
+  };
+  const fillFormSelect = () => {
+    const sel = must<HTMLSelectElement>("evForm");
+    const current = sel.value || "az-brick";
+    sel.innerHTML = "";
+    for (const form of buildForms) {
+      const option = document.createElement("option");
+      option.value = form.id;
+      option.textContent = `${form.country} — ${form.title}`;
+      sel.appendChild(option);
+    }
+    sel.value = buildForms.some((form) => form.id === current) ? current : "az-brick";
+  };
+  const formaDeyisdi = () => {
+    const form = formById(must<HTMLSelectElement>("evForm").value);
+    const price = must<HTMLInputElement>("qKerpic");
+    if (form.skin === "wood" && price.value === "0.35") price.value = "3.5";
+    if (form.skin !== "wood" && price.value === "3.5") price.value = "0.35";
+    must<HTMLSelectElement>("kerpicSecim").value = form.unit;
+    kerpicSecimDeyisdi();
   };
   const qalinliqDeyisdi = () => {
     const val = must<HTMLSelectElement>("divarQalinliq").value;
@@ -686,12 +864,36 @@ export function mountPlanner(root: HTMLElement): () => void {
     const stageNow = parseInt(must<HTMLInputElement>("stageSlider").value, 10) || 5;
     const finish = stageNow >= 4;
     const skirting = Math.max(7, hp * 0.07);
+    const form = formById(must<HTMLSelectElement>("evForm").value);
     const plaster =
       `background:linear-gradient(#c8b08a,#c8b08a) bottom/100% ${skirting}px no-repeat,` +
       `linear-gradient(180deg,#fbf6ee,#eadcc6);box-shadow:inset 0 -10px 14px rgba(80,50,20,.08);`;
-    const texFront = finish ? plaster : brickTexture(scale, kL, kH, tikis, "#b85a34");
-    const texSide = finish ? plaster : brickTexture(scale, kL, kH, tikis, "#8d4328");
-    const texBack = finish ? plaster : brickTexture(scale, kL, kH, tikis, "#7a3b24");
+    const siding =
+      "background:repeating-linear-gradient(#e7d3ae 0 12px,#c49a68 12px 14px,#d7bc90 14px 26px);border:none;";
+    const blockSkin = (color: string) =>
+      `background-color:${color};background-image:linear-gradient(rgba(255,255,255,.28) 0 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.16) 1px,transparent 1px);background-size:100% ${Math.max(16, kH * scale * 0.35)}px,${Math.max(22, kL * scale * 0.28)}px 100%;border:none;`;
+    const rendered = (finish && form.skin !== "wood") || form.skin === "plaster";
+    const texFront = rendered
+      ? plaster
+      : form.skin === "wood"
+        ? siding
+        : form.skin === "block"
+          ? blockSkin("#c8bba8")
+          : brickTexture(scale, kL, kH, tikis, "#b85a34");
+    const texSide = rendered
+      ? plaster
+      : form.skin === "wood"
+        ? siding
+        : form.skin === "block"
+          ? blockSkin("#b3a794")
+          : brickTexture(scale, kL, kH, tikis, "#8d4328");
+    const texBack = rendered
+      ? plaster
+      : form.skin === "wood"
+        ? siding
+        : form.skin === "block"
+          ? blockSkin("#a89886")
+          : brickTexture(scale, kL, kH, tikis, "#7a3b24");
     cube.querySelectorAll(".iface, .ext-wall, .roof-bit, .lawn").forEach((el) => el.remove());
 
     const windowSkin =
@@ -798,58 +1000,89 @@ export function mountPlanner(root: HTMLElement): () => void {
     addWall("ext-W", wp, texSide, `rotateY(-90deg) translateZ(${lp / 2}px)`, lp / 2 - wp / 2);
 
     const eave = Math.max(10, bw + 4);
-    const rise = Math.max(26, wp * 0.34);
-    const run = wp / 2 + eave;
-    const slopeLen = Math.hypot(run, rise);
-    const pitch = (Math.atan2(rise, run) * 180) / Math.PI;
-    const rot = 90 - pitch;
-    const tile =
-      "background-color:#8d3b2b;background-image:linear-gradient(180deg,rgba(255,214,180,.45) 0 1px,rgba(0,0,0,.28) 1px 3px,transparent 4px),linear-gradient(90deg,rgba(0,0,0,.22) 1px,transparent 1px);background-size:100% 13px,20px 100%;border:none;box-shadow:inset 0 -12px 16px rgba(40,10,6,.28);";
-    const addRoof = (transform: string) => {
-      const d = document.createElement("div");
-      d.className = "face roof-bit";
-      d.style.cssText = `width:${lp + eave * 2}px;height:${slopeLen}px;left:${-eave}px;top:${-slopeLen}px;transform-origin:center bottom;transform:${transform};${tile}`;
-      cube.appendChild(d);
-    };
-    addRoof(`translateZ(${wp / 2 + eave}px) rotateX(${rot}deg)`);
-    addRoof(`translateZ(${-(wp / 2 + eave)}px) rotateX(${-rot}deg)`);
-
-    const gableTex = finish ? plaster : brickTexture(scale, kL, kH, tikis, "#9a4a30");
-    const addGable = (transform: string) => {
-      const d = document.createElement("div");
-      d.className = "face roof-bit";
-      d.style.cssText = `width:${wp}px;height:${rise}px;left:${lp / 2 - wp / 2}px;top:${-rise}px;transform:${transform};clip-path:polygon(0 100%,50% 0,100% 100%);${gableTex}border:none;`;
-      cube.appendChild(d);
-    };
-    addGable(`rotateY(90deg) translateZ(${lp / 2 - 1}px)`);
-    addGable(`rotateY(-90deg) translateZ(${lp / 2 - 1}px)`);
-
-    const cw = Math.max(12, lp * 0.07);
-    const cd = Math.max(10, wp * 0.12);
-    const ch = Math.max(20, rise * 0.72);
-    const cx = lp * 0.66;
-    const chimneyBrick = brickTexture(scale, kL, kH, tikis, "#6e3424");
-    const chimney = (css: string) => {
+    const rise =
+      form.roof === "flat"
+        ? 0
+        : form.roof === "steep"
+          ? Math.max(40, wp * 0.58)
+          : form.roof === "low"
+            ? Math.max(16, wp * 0.16)
+            : form.roof === "shingle"
+              ? Math.max(22, wp * 0.28)
+              : Math.max(26, wp * 0.34);
+    const addBit = (css: string) => {
       const d = document.createElement("div");
       d.className = "face roof-bit";
       d.style.cssText = css;
       cube.appendChild(d);
     };
-    chimney(
-      `width:${cw}px;height:${ch}px;left:${cx}px;top:${-rise - ch + 6}px;transform:translateZ(${cd / 2}px);${chimneyBrick}border:none;`,
-    );
-    chimney(
-      `width:${cw}px;height:${ch}px;left:${cx}px;top:${-rise - ch + 6}px;transform:rotateY(180deg) translateZ(${cd / 2}px);${chimneyBrick}border:none;`,
-    );
-    chimney(
-      `width:${cd}px;height:${ch}px;left:${cx + cw / 2 - cd / 2}px;top:${-rise - ch + 6}px;transform:rotateY(90deg) translateZ(${cw / 2}px);${chimneyBrick}border:none;`,
-    );
-    chimney(
-      `width:${cd}px;height:${ch}px;left:${cx + cw / 2 - cd / 2}px;top:${-rise - ch + 6}px;transform:rotateY(-90deg) translateZ(${cw / 2}px);${chimneyBrick}border:none;`,
-    );
-    chimney(
-      `width:${cw + 4}px;height:${cd + 4}px;left:${cx - 2}px;top:${-rise - ch + 4}px;transform:rotateX(90deg) translateZ(${ch / 2}px);background:#4d2a22;border:none;`,
-    );
+    if (form.roof === "flat") {
+      const slab = Math.max(7, hp * 0.04);
+      addBit(
+        `width:${lp + 10}px;height:${wp + 10}px;left:-5px;top:${hp / 2 - (wp + 10) / 2}px;transform:rotateX(90deg) translateZ(${hp / 2 + slab}px);background:linear-gradient(#ddd6cb,#b7b1a6);border:none;`,
+      );
+      const ph = Math.max(12, hp * 0.07);
+      const para = "background:#d5cfc3;border:none;";
+      addBit(`width:${lp}px;height:${ph}px;top:${-ph}px;transform:translateZ(${wp / 2}px);${para}`);
+      addBit(
+        `width:${lp}px;height:${ph}px;top:${-ph}px;transform:rotateY(180deg) translateZ(${wp / 2}px);${para}`,
+      );
+      addBit(
+        `width:${wp}px;height:${ph}px;left:${lp / 2 - wp / 2}px;top:${-ph}px;transform:rotateY(90deg) translateZ(${lp / 2}px);${para}`,
+      );
+      addBit(
+        `width:${wp}px;height:${ph}px;left:${lp / 2 - wp / 2}px;top:${-ph}px;transform:rotateY(-90deg) translateZ(${lp / 2}px);${para}`,
+      );
+    } else {
+      const run = wp / 2 + eave;
+      const slopeLen = Math.hypot(run, rise);
+      const pitch = (Math.atan2(rise, run) * 180) / Math.PI;
+      const rot = 90 - pitch;
+      const tile =
+        form.roof === "shingle"
+          ? "background-color:#6d727a;background-image:linear-gradient(180deg,rgba(255,255,255,.3) 0 1px,rgba(0,0,0,.25) 1px 2px,transparent 3px),linear-gradient(90deg,rgba(0,0,0,.18) 1px,transparent 1px);background-size:100% 11px,24px 100%;border:none;"
+          : "background-color:#8d3b2b;background-image:linear-gradient(180deg,rgba(255,214,180,.45) 0 1px,rgba(0,0,0,.28) 1px 3px,transparent 4px),linear-gradient(90deg,rgba(0,0,0,.22) 1px,transparent 1px);background-size:100% 13px,20px 100%;border:none;box-shadow:inset 0 -12px 16px rgba(40,10,6,.28);";
+      const addRoof = (transform: string) => {
+        addBit(
+          `width:${lp + eave * 2}px;height:${slopeLen}px;left:${-eave}px;top:${-slopeLen}px;transform-origin:center bottom;transform:${transform};${tile}`,
+        );
+      };
+      addRoof(`translateZ(${wp / 2 + eave}px) rotateX(${rot}deg)`);
+      addRoof(`translateZ(${-(wp / 2 + eave)}px) rotateX(${-rot}deg)`);
+      const gableTex =
+        form.skin === "wood"
+          ? siding
+          : finish
+            ? plaster
+            : brickTexture(scale, kL, kH, tikis, "#9a4a30");
+      const addGable = (transform: string) => {
+        addBit(
+          `width:${wp}px;height:${rise}px;left:${lp / 2 - wp / 2}px;top:${-rise}px;transform:${transform};clip-path:polygon(0 100%,50% 0,100% 100%);${gableTex}border:none;`,
+        );
+      };
+      addGable(`rotateY(90deg) translateZ(${lp / 2 - 1}px)`);
+      addGable(`rotateY(-90deg) translateZ(${lp / 2 - 1}px)`);
+      if (form.roof === "tile" || form.roof === "steep") {
+        const cw = Math.max(12, lp * 0.07);
+        const cd = Math.max(10, wp * 0.12);
+        const ch = Math.max(20, rise * 0.55);
+        const cx = lp * 0.62;
+        const sink = Math.round(rise * 0.18);
+        const chimneyBrick = brickTexture(scale, kL, kH, tikis, "#6e3424");
+        addBit(
+          `width:${cw}px;height:${ch}px;left:${cx}px;top:${-rise - ch + sink}px;transform:translateZ(${cd / 2}px);${chimneyBrick}border:none;`,
+        );
+        addBit(
+          `width:${cw}px;height:${ch}px;left:${cx}px;top:${-rise - ch + sink}px;transform:rotateY(180deg) translateZ(${cd / 2}px);${chimneyBrick}border:none;`,
+        );
+        addBit(
+          `width:${cd}px;height:${ch}px;left:${cx + cw / 2 - cd / 2}px;top:${-rise - ch + sink}px;transform:rotateY(90deg) translateZ(${cw / 2}px);${chimneyBrick}border:none;`,
+        );
+        addBit(
+          `width:${cd}px;height:${ch}px;left:${cx + cw / 2 - cd / 2}px;top:${-rise - ch + sink}px;transform:rotateY(-90deg) translateZ(${cw / 2}px);${chimneyBrick}border:none;`,
+        );
+      }
+    }
 
     const floor = finish
       ? "background-color:#e4cfaa;background-image:linear-gradient(rgba(110,70,30,.22) 1px,transparent 1px),linear-gradient(90deg,rgba(110,70,30,.22) 1px,transparent 1px);background-size:18px 18px;border:none;"
@@ -1232,11 +1465,23 @@ export function mountPlanner(root: HTMLElement): () => void {
     stageCosts.suvaq = 0;
     stageCosts.bitirme = 0;
     if (must<HTMLInputElement>("c-kerpic").checked) {
+      const form = formById(must<HTMLSelectElement>("evForm").value);
       const unit = unitById(must<HTMLSelectElement>("kerpicSecim").value);
-      const piece = unit ? unit.local : "element";
-      const brickCost = brickCount * brickPrice;
+      let brickCost = 0;
+      if (form.skin === "wood") {
+        const studs = Math.max(8, Math.ceil((2 * (L + W)) / 0.4));
+        const boards = studs + Math.ceil((2 * (L + W)) / 2.4) * 3;
+        brickCost = boards * brickPrice;
+        lines.push([`Dirək — ${boards.toLocaleString("az")} əd (40 sm aralı)`, brickCost]);
+      } else {
+        const piece = unit ? unit.local : "element";
+        brickCost = brickCount * brickPrice;
+        lines.push([
+          `${piece} — ${brickCount.toLocaleString("az")} əd (${layers} sıra)`,
+          brickCost,
+        ]);
+      }
       total += brickCost;
-      lines.push([`${piece} — ${brickCount.toLocaleString("az")} əd (${layers} sıra)`, brickCost]);
       stageCosts.kerpic = brickCost;
     } else stageCosts.kerpic = 0;
 
@@ -1421,7 +1666,9 @@ export function mountPlanner(root: HTMLElement): () => void {
   });
   on(must("kerpicSecim"), "change", kerpicSecimDeyisdi);
   on(must("divarQalinliq"), "change", qalinliqDeyisdi);
+  on(must("evForm"), "change", formaDeyisdi);
   fillUnitSelect();
+  fillFormSelect();
   refreshUnitNote();
   on(root.querySelector('[data-act="we-door"]'), "click", () => weSetType("door"));
   on(root.querySelector('[data-act="we-window"]'), "click", () => weSetType("window"));
