@@ -865,9 +865,20 @@ export function mountPlanner(root: HTMLElement): () => void {
     const finish = stageNow >= 4;
     const skirting = Math.max(7, hp * 0.07);
     const form = formById(must<HTMLSelectElement>("evForm").value);
+    const sky = must<HTMLInputElement>("skyId").value || "day";
+    must("scene").dataset.sky = sky;
+    root.querySelectorAll<HTMLElement>("#skyPicks [data-sky]").forEach((btn) => {
+      btn.classList.toggle("is-on", btn.dataset.sky === sky);
+    });
+    const wallHi = sky === "night" ? "#b7b2a8" : sky === "dusk" ? "#f3d2ae" : "#fffdf8";
+    const wallLo = sky === "night" ? "#7e7a72" : sky === "dusk" ? "#e4b48a" : "#e7d3b4";
     const plaster =
-      `background:linear-gradient(#c8b08a,#c8b08a) bottom/100% ${skirting}px no-repeat,` +
-      `linear-gradient(180deg,#fbf6ee,#eadcc6);box-shadow:inset 0 -10px 14px rgba(80,50,20,.08);`;
+      `background:` +
+      `linear-gradient(#a68462,#a68462) bottom/100% ${skirting}px no-repeat,` +
+      `radial-gradient(circle at 18% 22%,rgba(255,255,255,.22),transparent 26%),` +
+      `radial-gradient(circle at 78% 70%,rgba(90,60,30,.07),transparent 32%),` +
+      `linear-gradient(180deg,${wallHi} 0%,${wallLo} 100%);` +
+      `box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -16px 18px rgba(70,40,16,.08);border:none;`;
     const siding =
       "background:repeating-linear-gradient(#e7d3ae 0 12px,#c49a68 12px 14px,#d7bc90 14px 26px);border:none;";
     const blockSkin = (color: string) =>
@@ -897,16 +908,18 @@ export function mountPlanner(root: HTMLElement): () => void {
     cube.querySelectorAll(".iface, .ext-wall, .roof-bit, .lawn").forEach((el) => el.remove());
 
     const windowSkin =
-      "background:" +
-      "linear-gradient(#f6f0e4,#f6f0e4) 0 0/100% 6px no-repeat," +
-      "linear-gradient(#f6f0e4,#f6f0e4) 0 100%/100% 6px no-repeat," +
-      "linear-gradient(#f6f0e4,#f6f0e4) 0 0/6px 100% no-repeat," +
-      "linear-gradient(#f6f0e4,#f6f0e4) 100% 0/6px 100% no-repeat," +
-      "linear-gradient(#efe2cc,#efe2cc) 50% 0/2px 100% no-repeat," +
-      "linear-gradient(#efe2cc,#efe2cc) 0 48%/100% 2px no-repeat," +
-      "linear-gradient(120deg,rgba(255,255,255,.75),rgba(255,255,255,0) 46%)," +
-      "linear-gradient(180deg,#d7f0ff,#7eb6d4 62%,#f4fbff);" +
-      "box-shadow:inset 0 0 0 2px #6a4630,0 2px 0 rgba(255,255,255,.35);border:none;";
+      sky === "night"
+        ? "background:linear-gradient(#f8f1e4,#f8f1e4) 0 0/100% 7px no-repeat,linear-gradient(#f8f1e4,#f8f1e4) 0 100%/100% 7px no-repeat,linear-gradient(#f8f1e4,#f8f1e4) 0 0/7px 100% no-repeat,linear-gradient(#f8f1e4,#f8f1e4) 100% 0/7px 100% no-repeat,linear-gradient(rgba(255,220,160,.35),rgba(255,220,160,.35)) 50% 0/2px 100% no-repeat,linear-gradient(180deg,#ffe7b0,#ffb15a 70%,#fff4d2);box-shadow:inset 0 0 0 2px #5c4636,0 0 12px rgba(255,170,60,.85);border:none;"
+        : "background:" +
+          "linear-gradient(#f7f2e8,#f7f2e8) 0 0/100% 7px no-repeat," +
+          "linear-gradient(#f7f2e8,#f7f2e8) 0 100%/100% 7px no-repeat," +
+          "linear-gradient(#f7f2e8,#f7f2e8) 0 0/7px 100% no-repeat," +
+          "linear-gradient(#f7f2e8,#f7f2e8) 100% 0/7px 100% no-repeat," +
+          "linear-gradient(#efe6d6,#efe6d6) 50% 0/2px 100% no-repeat," +
+          "linear-gradient(#efe6d6,#efe6d6) 0 46%/100% 2px no-repeat," +
+          "linear-gradient(115deg,rgba(255,255,255,.8),rgba(255,255,255,0) 42%)," +
+          "linear-gradient(180deg,#e7f6ff,#8ec0dc 55%,#f7fcff);" +
+          "box-shadow:inset 0 0 0 2px #6d5140,0 1px 0 rgba(255,255,255,.4);border:none;";
     const doorSkin = (entrance: boolean) => {
       const wood = entrance ? "#7b4322" : "#8d5b36";
       const panel = entrance ? "#4e2b16" : "#684028";
@@ -984,7 +997,15 @@ export function mountPlanner(root: HTMLElement): () => void {
             ? Math.max(16, Math.min(hp * 0.9, (hole.heightM / Math.max(H, 0.1)) * hp))
             : Math.max(16, hp * 0.34);
           const top = Math.max(4, Math.min(hp - h - 4, hp * 0.22));
-          mk(left, hole.widthPx, h, top, windowSkin, " translateZ(1.6px)");
+          mk(left, hole.widthPx, h, top, windowSkin, " translateZ(2.2px)");
+          mk(
+            left - 2,
+            hole.widthPx + 4,
+            Math.max(4, h * 0.08),
+            top + h - 1,
+            "background:linear-gradient(#fffaf3,#c9b59a);border:none;border-radius:1px;",
+            " translateZ(3.2px)",
+          );
         } else {
           const h = hole.heightM
             ? Math.max(20, Math.min(hp * 0.94, (hole.heightM / Math.max(H, 0.1)) * hp))
@@ -1040,8 +1061,8 @@ export function mountPlanner(root: HTMLElement): () => void {
       const rot = 90 - pitch;
       const tile =
         form.roof === "shingle"
-          ? "background-color:#6d727a;background-image:linear-gradient(180deg,rgba(255,255,255,.3) 0 1px,rgba(0,0,0,.25) 1px 2px,transparent 3px),linear-gradient(90deg,rgba(0,0,0,.18) 1px,transparent 1px);background-size:100% 11px,24px 100%;border:none;"
-          : "background-color:#8d3b2b;background-image:linear-gradient(180deg,rgba(255,214,180,.45) 0 1px,rgba(0,0,0,.28) 1px 3px,transparent 4px),linear-gradient(90deg,rgba(0,0,0,.22) 1px,transparent 1px);background-size:100% 13px,20px 100%;border:none;box-shadow:inset 0 -12px 16px rgba(40,10,6,.28);";
+          ? "background-color:#5e646c;background-image:linear-gradient(90deg,rgba(0,0,0,.22) 1px,transparent 1px),repeating-linear-gradient(180deg,#8b929a 0 2px,#5a6168 3px 8px,#6d747c 9px 11px);background-size:26px 100%,100% 12px;border:none;box-shadow:inset 0 -10px 14px rgba(0,0,0,.25);"
+          : "background-color:#8d3a2a;background-image:linear-gradient(90deg,rgba(0,0,0,.2) 1px,transparent 1px),repeating-linear-gradient(180deg,#d06a4e 0 2px,#8a3426 3px 8px,#b5523c 9px 13px);background-size:22px 100%,100% 14px;border:none;box-shadow:inset 0 -14px 16px rgba(40,10,6,.3);";
       const addRoof = (transform: string) => {
         addBit(
           `width:${lp + eave * 2}px;height:${slopeLen}px;left:${-eave}px;top:${-slopeLen}px;transform-origin:center bottom;transform:${transform};${tile}`,
@@ -1107,9 +1128,13 @@ export function mountPlanner(root: HTMLElement): () => void {
       `width:${gw}px;height:${gd}px;left:${(lp - gw) / 2}px;top:${hp / 2 - gd / 2}px;` +
         `transform:rotateX(-90deg) translateZ(${groundZ}px);border:none;` +
         `background:` +
-        `radial-gradient(ellipse at 32% 42%,rgba(255,255,255,.12),transparent 36%),` +
-        `radial-gradient(ellipse at 70% 60%,rgba(20,40,8,.14),transparent 42%),` +
-        `linear-gradient(165deg,#b6e278,#5c9e40 48%,#3b7a2e);`,
+        (sky === "snow"
+          ? `radial-gradient(ellipse at 30% 40%,rgba(255,255,255,.7),transparent 40%),linear-gradient(165deg,#ffffff,#e4edf5 55%,#d5e1ec);`
+          : sky === "night"
+            ? `radial-gradient(ellipse at 40% 45%,rgba(0,0,0,.2),transparent 46%),linear-gradient(165deg,#2a5a40,#173628 60%,#10241a);`
+            : sky === "dusk"
+              ? `radial-gradient(ellipse at 36% 40%,rgba(255,200,120,.12),transparent 40%),linear-gradient(165deg,#7d9456,#4a6236 52%,#314628);`
+              : `radial-gradient(ellipse at 32% 42%,rgba(255,255,255,.12),transparent 36%),radial-gradient(ellipse at 70% 60%,rgba(20,40,8,.14),transparent 42%),linear-gradient(165deg,#b6e278,#5c9e40 48%,#3b7a2e);`),
     );
     site(
       `width:${lp * 1.4}px;height:${wp * 1.5}px;left:${(lp - lp * 1.4) / 2}px;top:${hp / 2 - (wp * 1.5) / 2}px;` +
@@ -1121,7 +1146,7 @@ export function mountPlanner(root: HTMLElement): () => void {
     site(
       `width:${pathW}px;height:${pathL}px;left:${(lp - pathW) / 2}px;top:${hp / 2 - pathL / 2}px;` +
         `transform:rotateX(-90deg) translateZ(${groundZ - 2}px) translateY(${wp / 2 + pathL / 2 - 10}px);border:none;border-radius:10px;` +
-        `background:linear-gradient(#f3e6c8,#c9b08a);`,
+        `background:${sky === "snow" ? "linear-gradient(#f4f7fb,#d5dee8)" : sky === "night" ? "linear-gradient(#3c4438,#2a3128)" : "linear-gradient(#f3e6c8,#c9b08a)"};`,
     );
     const tree = (x: number, z: number, tall: number) => {
       const th = Math.max(20, hp * tall);
@@ -1676,6 +1701,13 @@ export function mountPlanner(root: HTMLElement): () => void {
   });
   on(root.querySelector('[data-act="zoom-in"]'), "click", () => zoomBy(0.2));
   on(root.querySelector('[data-act="zoom-out"]'), "click", () => zoomBy(-0.2));
+  root.querySelectorAll<HTMLElement>("#skyPicks [data-sky]").forEach((btn) => {
+    on(btn, "pointerdown", (event) => event.stopPropagation());
+    on(btn, "click", () => {
+      must<HTMLInputElement>("skyId").value = btn.dataset.sky || "day";
+      hesabla();
+    });
+  });
   root.querySelectorAll<HTMLElement>("#stageRail [data-stage]").forEach((btn) => {
     on(btn, "click", () => {
       const slider = must<HTMLInputElement>("stageSlider");
