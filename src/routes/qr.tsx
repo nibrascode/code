@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { lazy, Suspense, useEffect, useState } from "react";
 import { useI18n } from "@/qr/lib/i18n";
+import { PageAssistant } from "@/components/page-assistant";
 
 // The whole tool (generator, designer, exports) is its own chunk.
 const QrTool = lazy(() => import("@/qr/components/qr-tool").then((m) => ({ default: m.QrTool })));
@@ -37,6 +38,7 @@ export function QrRoutePage() {
       ) : (
         <div className="h-96 animate-pulse rounded-2xl bg-bg-elevated" />
       )}
+      <PageAssistant topic="qr" />
     </main>
   );
 }

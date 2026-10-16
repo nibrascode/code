@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useI18n } from "@/lib/i18n-context";
+import { PageAssistant } from "@/components/page-assistant";
 import { EraseTool } from "@/erase/erase-tool";
 
 const TITLE = {
@@ -183,6 +184,7 @@ export function ErasePage() {
         </div>
       ) : null}
       <EraseTool />
+      <PageAssistant topic="erase" />
     </main>
   );
 }
