@@ -2,6 +2,7 @@ import { LANGS, type Lang } from "@/lib/i18n";
 import { isSplitPage, localeHref, stripLocalePrefix, homePath } from "@/lib/locale-path";
 import { faqAnswerText, faqFromPath, faqPath, faqTopicFromPath, faqTopicPath } from "@/lib/faq";
 import { pdfPairFromPath } from "@/lib/pdf-pairs";
+import { findCourse, HUBS, isCourseSlug } from "@/lib/course/meta";
 import { findProgramming, PROGRAMMING } from "@/lib/programming";
 import { CODE_SAMPLE_SEO, isCodeSampleChild, isCodeSampleSlug } from "@/lib/code-samples";
 import { findProgrammingLocale, programmingFromPath, programmingLocalePath } from "@/lib/programming-locales";
@@ -791,6 +792,19 @@ function pageCopy(pathname: string, lang: Lang) {
   const faq = faqFromPath(path);
   if (faq) return { title: faq.title, description: faq.description, keywords: faq.keywords };
   const located = programmingFromPath(path);
+  if (located && isCourseSlug(located.slug)) {
+    const courseLang = located.lang === "az" ? lang : located.lang;
+    const hub = Object.values(HUBS).find((item) => item.slug === located.slug);
+    const course = findCourse(located.slug);
+    const entry = hub ?? course;
+    if (entry) {
+      return {
+        title: `${entry.title[courseLang]} — Nibras Code`,
+        description: entry.description[courseLang],
+        keywords: entry.keywords[courseLang],
+      };
+    }
+  }
   if (located) {
     const article = findProgramming(located.slug);
     const articleLang = located.lang === "az" ? lang : located.lang;
@@ -873,7 +887,7 @@ export function canonicalUrl(pathname: string, lang: Lang) {
   const located = programmingFromPath(path);
   if (located) {
     const articleLang = located.lang === "az" ? lang : located.lang;
-    if (articleLang === "az" || isCodeSampleSlug(located.slug) || findProgrammingLocale(articleLang, located.slug)) {
+    if (articleLang === "az" || isCodeSampleSlug(located.slug) || isCourseSlug(located.slug) || findProgrammingLocale(articleLang, located.slug)) {
       return `${SITE}${programmingLocalePath(articleLang, located.slug)}`;
     }
   }

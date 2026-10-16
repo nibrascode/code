@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, BookOpen, Boxes, Braces, Briefcase, Bug, CircleHelp, Code, Database, FileCode, GitCompare, GraduationCap, ListChecks, MessageCircleQuestion, Package, Server, Shield, Sparkles, Terminal, Wrench } from "lucide-react";
 import { ApkLab } from "@/components/apk-lab";
 import { LIBRARY, type LibrarySection, type LibraryTopic } from "@/lib/library";
 import { CODE_SAMPLE_HUB, CODE_SAMPLES, SITE_CODE } from "@/lib/code-samples";
 import { findProgramming, type ProgrammingSection } from "@/lib/programming";
+import { HUBS } from "@/lib/course/meta";
 import { findProgrammingLocale, programmingLocalePath } from "@/lib/programming-locales";
 import { SEARCH, searchPath } from "@/lib/search-pages";
 import { COMPARE, comparePath } from "@/lib/learn-pages";
@@ -739,10 +740,16 @@ export function ProgrammingArticle({
   slug,
   title,
   sections,
+  intro,
+  footer,
+  openAll,
 }: {
   slug?: string;
   title: string;
   sections?: readonly ProgrammingSection[];
+  intro?: ReactNode;
+  footer?: ReactNode;
+  openAll?: boolean;
 }) {
   const { t, lang } = useI18n();
   const heading = (slug && PROGRAM_NAMES[slug]) || title;
@@ -775,9 +782,10 @@ export function ProgrammingArticle({
           <span>{FIND_UI[lang].tryNote}</span>
         </p>
       ) : null}
+      {intro}
       <div className="prog-sections">
-        {sections?.map((item) => (
-          <details key={item.id} id={item.id} className="prog-fold">
+        {sections?.map((item, itemIndex) => (
+          <details key={`${item.id}-${itemIndex}`} id={item.id} className="prog-fold" open={openAll || undefined}>
             <summary>
               <h2>
                 {(() => {
@@ -788,30 +796,30 @@ export function ProgrammingArticle({
               </h2>
             </summary>
             <div className="prog-fold-body">
-              {item.blocks?.map((block) => (
-                <div key={block.heading ?? block.paragraphs?.[0] ?? block.code}>
+              {item.blocks?.map((block, blockIndex) => (
+                <div key={blockIndex}>
                   {block.heading ? <h3>{block.heading}</h3> : null}
-                  {block.paragraphs?.map((paragraph) => (
-                    <p key={paragraph}>{paragraph}</p>
+                  {block.paragraphs?.map((paragraph, i) => (
+                    <p key={i}>{paragraph}</p>
                   ))}
                   {block.list ? (
                     block.ordered ? (
                       <ol>
-                        {block.list.map((line) => (
-                          <li key={line}>{line}</li>
+                        {block.list.map((line, i) => (
+                          <li key={i}>{line}</li>
                         ))}
                       </ol>
                     ) : (
                       <ul>
-                        {block.list.map((line) => (
-                          <li key={line}>{line}</li>
+                        {block.list.map((line, i) => (
+                          <li key={i}>{line}</li>
                         ))}
                       </ul>
                     )
                   ) : null}
                   {block.code ? <pre dir="ltr">{block.code}</pre> : null}
-                  {block.after?.map((paragraph) => (
-                    <p key={paragraph}>{paragraph}</p>
+                  {block.after?.map((paragraph, i) => (
+                    <p key={i}>{paragraph}</p>
                   ))}
                 </div>
               ))}
@@ -831,6 +839,16 @@ export function ProgrammingArticle({
           </ul>
         </div>
       ) : null}
+      {slug === "python" || slug === "html-css" ? (
+        <ul className="lib-list">
+          <li className="is-section">
+            <a href={programmingLocalePath(lang, slug === "python" ? HUBS.python.slug : HUBS.html.slug)}>
+              {(slug === "python" ? HUBS.python : HUBS.html).title[lang]}
+              <ArrowUpRight className="rtl-flip size-4" />
+            </a>
+          </li>
+        </ul>
+      ) : null}
       {slug === "html-css" ? (
         <ul className="lib-list">
           <li className="is-section">
@@ -842,6 +860,7 @@ export function ProgrammingArticle({
         </ul>
       ) : null}
       {slug === "apk-hazirla" ? <ApkLab /> : null}
+      {footer}
     </main>
   );
 }
