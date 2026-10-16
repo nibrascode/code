@@ -4,8 +4,8 @@
  */
 export type QrPolicy = { title: string; updated: string; paragraphs: readonly string[] };
 
-export const QR_PRIVACY_URL = "https://nibrascode.com/privacy/nibras-qr";
-export const QR_DELETE_URL = "https://nibrascode.com/privacy/nibras-qr/delete-account";
+export const QR_PRIVACY_URL = "https://www.nibrascode.com/privacy/nibras-qr";
+export const QR_DELETE_URL = "https://www.nibrascode.com/privacy/nibras-qr/delete-account";
 
 export const QR_PRIVACY: { az: QrPolicy; en: QrPolicy } = {
   az: {

@@ -26,12 +26,12 @@ const INFO = {
     privacy: "Məxfilik siyasəti",
     about: "Tətbiq məlumatı",
     privacyBody: [
-      "Bu siyasət Nibras Erase tətbiqinə aiddir. Versiya V 1.0.0. Hazırlayan Nibras Code. Əlaqə: nibrascode@gmail.com. Ünvan: https://nibrascode.com/erase/privacy",
+      "Bu siyasət Nibras Erase tətbiqinə aiddir. Versiya V 1.0.0. Hazırlayan Nibras Code. Əlaqə: nibrascode@gmail.com. Ünvan: https://www.nibrascode.com/erase/privacy",
       "Şəkil Nibras Code serverinə yüklənmir. Fonun silinməsi cihazınızda gedir. İlk dəfə dəqiq model faylı cihaza endirilə bilər. O yükləmə model üçündür, şəkliniz həmin sorğuya qoyulmur.",
       "Ad, e-poçt, telefon, hesab, əlaqələr, dəqiq yer, reklam kimliyi və ödəniş məlumatı toplanmır. Hesab, reklam izləyicisi və analitik SDK yoxdur. Məlumat satılmır.",
       "İcazə yalnız fayl seçimi üçündür: şəkli açmaq və nəticəni saxlamaq. Kamera, mikrofon, əlaqə və yer istənmir.",
       "Tətbiq 13 yaşdan kiçik uşaqlara yönəlmir. Uşaqlardan bilərəkdən şəxsi məlumat toplanmır.",
-      "Siyasət dəyişəndə https://nibrascode.com/erase/privacy yenilənir. Sual: nibrascode@gmail.com. Yenilənmə: 14 oktyabr 2026.",
+      "Siyasət dəyişəndə https://www.nibrascode.com/erase/privacy yenilənir. Sual: nibrascode@gmail.com. Yenilənmə: 14 oktyabr 2026.",
     ],
     aboutBody: [
       "Ad: Nibras Erase. Versiya: V 1.0.0. Nibras Code, Mahir Əliyevin müstəqil işi.",
@@ -39,7 +39,7 @@ const INFO = {
       "Necə işlədilir: şəkli seçin, keyfiyyəti seçin, fonu silin, lazımdırsa əl ilə kənarı düzəldin, formatı seçin və yükləyin.",
       "Şəkil cihazdan çıxmır. Model ilk dəfə endiriləndən sonra növbəti şəkillər internetsiz də işlənə bilər.",
       "Bu tətbiq şəkil sıxmır. Sıxmaq və çevirmək Nibras Image tətbiqindədir. Hesab, ödəniş və reklam yoxdur. Pulsuzdur.",
-      "Dəstək: nibrascode@gmail.com. Məxfilik: https://nibrascode.com/erase/privacy",
+      "Dəstək: nibrascode@gmail.com. Məxfilik: https://www.nibrascode.com/erase/privacy",
     ],
   },
   en: {
@@ -48,12 +48,12 @@ const INFO = {
     privacy: "Privacy policy",
     about: "About this app",
     privacyBody: [
-      "This policy covers Nibras Erase, version V 1.0.0, by Nibras Code. Contact: nibrascode@gmail.com. Address: https://nibrascode.com/en/erase/privacy",
+      "This policy covers Nibras Erase, version V 1.0.0, by Nibras Code. Contact: nibrascode@gmail.com. Address: https://www.nibrascode.com/en/erase/privacy",
       "The photo is not uploaded to a Nibras Code server. Background removal runs on your device. The first time, a model file may download. That download is the model, not your photo.",
       "We do not collect your name, email, phone, account, contacts, precise location, advertising ID, or payment data. There is no account, no ad tracker and no analytics SDK. Data is not sold.",
       "The only permission is a file picker, to open a photo and save the result. Camera, microphone, contacts and location are not requested.",
       "The app is not directed at children under 13. We do not knowingly collect personal information from children.",
-      "If this policy changes, https://nibrascode.com/en/erase/privacy is updated. Questions: nibrascode@gmail.com. Updated: 14 October 2026.",
+      "If this policy changes, https://www.nibrascode.com/en/erase/privacy is updated. Questions: nibrascode@gmail.com. Updated: 14 October 2026.",
     ],
     aboutBody: [
       "Name: Nibras Erase. Version: V 1.0.0. Nibras Code, an independent project by Mahir Əliyev.",
@@ -61,7 +61,7 @@ const INFO = {
       "How to use it: pick a photo, pick the quality, remove the background, fix the edge if you need to, choose the format and download.",
       "The photo stays on the device. After the model has downloaded once, later photos can be processed without the network.",
       "This app does not compress photos. Compressing and converting is Nibras Image. There is no account, no payment and no advertising. It is free.",
-      "Support: nibrascode@gmail.com. Privacy: https://nibrascode.com/en/erase/privacy",
+      "Support: nibrascode@gmail.com. Privacy: https://www.nibrascode.com/en/erase/privacy",
     ],
   },
   tr: {
@@ -70,12 +70,12 @@ const INFO = {
     privacy: "Gizlilik politikası",
     about: "Uygulama bilgisi",
     privacyBody: [
-      "Bu politika Nibras Erase içindir. Sürüm V 1.0.0. Nibras Code. İletişim: nibrascode@gmail.com. Adres: https://nibrascode.com/tr/erase/privacy",
+      "Bu politika Nibras Erase içindir. Sürüm V 1.0.0. Nibras Code. İletişim: nibrascode@gmail.com. Adres: https://www.nibrascode.com/tr/erase/privacy",
       "Fotoğraf Nibras Code sunucusuna yüklenmez. Arka plan silme cihazda olur. İlk seferde model dosyası inebilir. O indirme modeldir, fotoğrafınız değildir.",
       "Ad, e-posta, telefon, hesap, kişiler, konum, reklam kimliği ve ödeme toplanmaz. Hesap ve reklam izleyici yok. Veri satılmaz.",
       "İzin yalnız dosya seçicisidir. Kamera, mikrofon, kişiler ve konum istenmez.",
       "Uygulama 13 yaş altına yönelik değildir.",
-      "Değişiklik olursa https://nibrascode.com/tr/erase/privacy yenilenir. Soru: nibrascode@gmail.com. Güncelleme: 14 Ekim 2026.",
+      "Değişiklik olursa https://www.nibrascode.com/tr/erase/privacy yenilenir. Soru: nibrascode@gmail.com. Güncelleme: 14 Ekim 2026.",
     ],
     aboutBody: [
       "Ad: Nibras Erase. Sürüm: V 1.0.0. Nibras Code.",
@@ -83,7 +83,7 @@ const INFO = {
       "Fotoğraf seçin, kaliteyi seçin, arka planı silin, gerekirse kenarı düzeltin, biçimi seçip indirin.",
       "Fotoğraf cihazdan çıkmaz. Model bir kez indikten sonra sonraki fotoğraflar internetsiz de işlenebilir.",
       "Bu uygulama fotoğraf sıkıştırmaz. Sıkıştırma Nibras Image içindedir. Hesap, ödeme ve reklam yok.",
-      "Destek: nibrascode@gmail.com. Gizlilik: https://nibrascode.com/tr/erase/privacy",
+      "Destek: nibrascode@gmail.com. Gizlilik: https://www.nibrascode.com/tr/erase/privacy",
     ],
   },
   ar: {
@@ -92,12 +92,12 @@ const INFO = {
     privacy: "سياسة الخصوصية",
     about: "معلومات التطبيق",
     privacyBody: [
-      "هذه السياسة لـ Nibras Erase، الإصدار V 1.0.0، من Nibras Code. التواصل: nibrascode@gmail.com. العنوان: https://nibrascode.com/ar/erase/privacy",
+      "هذه السياسة لـ Nibras Erase، الإصدار V 1.0.0، من Nibras Code. التواصل: nibrascode@gmail.com. العنوان: https://www.nibrascode.com/ar/erase/privacy",
       "الصورة لا تُرفع إلى خادم Nibras Code. إزالة الخلفية تتم على الجهاز. في المرة الأولى قد يُنزَّل ملف نموذج. هذا التنزيل للنموذج وليس لصورتك.",
       "لا نجمع الاسم أو البريد أو الهاتف أو الحساب أو جهات الاتصال أو الموقع أو معرّف الإعلان أو الدفع. لا حساب ولا تتبّع إعلانات. البيانات لا تُباع.",
       "الإذن الوحيد اختيار ملف. لا نطلب الكاميرا ولا الميكروفون ولا جهات الاتصال ولا الموقع.",
       "التطبيق غير موجّه لمن هم دون 13 عاماً.",
-      "عند التغيير يُحدَّث https://nibrascode.com/ar/erase/privacy. السؤال: nibrascode@gmail.com. التحديث: 14 أكتوبر 2026.",
+      "عند التغيير يُحدَّث https://www.nibrascode.com/ar/erase/privacy. السؤال: nibrascode@gmail.com. التحديث: 14 أكتوبر 2026.",
     ],
     aboutBody: [
       "الاسم: Nibras Erase. الإصدار: V 1.0.0. Nibras Code.",
@@ -105,7 +105,7 @@ const INFO = {
       "اختر صورة، اختر الجودة، أزل الخلفية، أصلح الحافة إن لزم، اختر الصيغة ثم نزّل.",
       "الصورة تبقى على الجهاز. بعد تنزيل النموذج مرة يمكن معالجة الصور التالية بلا شبكة.",
       "هذا التطبيق لا يضغط الصور. الضغط في Nibras Image. لا حساب ولا دفع ولا إعلان.",
-      "الدعم: nibrascode@gmail.com. الخصوصية: https://nibrascode.com/ar/erase/privacy",
+      "الدعم: nibrascode@gmail.com. الخصوصية: https://www.nibrascode.com/ar/erase/privacy",
     ],
   },
   ru: {
@@ -114,12 +114,12 @@ const INFO = {
     privacy: "Политика конфиденциальности",
     about: "О приложении",
     privacyBody: [
-      "Эта политика относится к Nibras Erase, версия V 1.0.0, от Nibras Code. Связь: nibrascode@gmail.com. Адрес: https://nibrascode.com/ru/erase/privacy",
+      "Эта политика относится к Nibras Erase, версия V 1.0.0, от Nibras Code. Связь: nibrascode@gmail.com. Адрес: https://www.nibrascode.com/ru/erase/privacy",
       "Фото не загружается на сервер Nibras Code. Удаление фона идёт на устройстве. В первый раз может скачаться файл модели. Это модель, не ваше фото.",
       "Имя, почта, телефон, аккаунт, контакты, местоположение, рекламный идентификатор и оплата не собираются. Нет аккаунта и рекламного трекера. Данные не продаются.",
       "Разрешение одно: выбор файла. Камера, микрофон, контакты и местоположение не запрашиваются.",
       "Приложение не предназначено для детей младше 13 лет.",
-      "При изменении обновляется https://nibrascode.com/ru/erase/privacy. Вопрос: nibrascode@gmail.com. Обновление: 14 октября 2026.",
+      "При изменении обновляется https://www.nibrascode.com/ru/erase/privacy. Вопрос: nibrascode@gmail.com. Обновление: 14 октября 2026.",
     ],
     aboutBody: [
       "Имя: Nibras Erase. Версия: V 1.0.0. Nibras Code.",
@@ -127,7 +127,7 @@ const INFO = {
       "Выберите фото, качество, уберите фон, при необходимости поправьте край, выберите формат и скачайте.",
       "Фото остаётся на устройстве. После одной загрузки модели следующие фото можно обработать без сети.",
       "Это приложение не сжимает фото. Сжатие — в Nibras Image. Нет аккаунта, оплаты и рекламы.",
-      "Поддержка: nibrascode@gmail.com. Политика: https://nibrascode.com/ru/erase/privacy",
+      "Поддержка: nibrascode@gmail.com. Политика: https://www.nibrascode.com/ru/erase/privacy",
     ],
   },
 } as const;

@@ -14,7 +14,7 @@ import { PAKET, paketFromPath } from "@/lib/paket";
 import { TOOLS, TOOLS_PAGE, toolFromPath, toolsFromPath, toolPath, toolsPath } from "@/lib/tools";
 import { TOOL_LEAD } from "@/lib/tools-seo";
 
-export const SITE = "https://nibrascode.com";
+export const SITE = "https://www.nibrascode.com";
 
 type PageSeo = {
   title: string;

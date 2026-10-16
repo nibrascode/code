@@ -2,8 +2,8 @@
   "redirects": [
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "www.nibrascode.com" }],
-      "destination": "https://nibrascode.com/:path*",
+      "has": [{ "type": "host", "value": "nibrascode.com" }],
+      "destination": "https://www.nibrascode.com/:path*",
       "permanent": true
     }
   ],
