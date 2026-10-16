@@ -2,6 +2,7 @@ import type { Lang } from "@/lib/i18n";
 import { homePath, isSplitPage, localeHref, stripLocalePrefix } from "@/lib/locale-path";
 import { faqFromPath, faqPath, faqTopicFromPath, faqTopicPath } from "@/lib/faq";
 import { toolFromPath, toolPath, toolsFromPath, toolsPath } from "@/lib/tools";
+import { isCourseSlug } from "@/lib/course/meta";
 import { findProgrammingLocale, programmingFromPath, programmingLocalePath } from "@/lib/programming-locales";
 
 export const PDF_LOCALE_PAIRS = [
@@ -47,7 +48,7 @@ export function hrefForLang(pathname: string, lang: Lang) {
   if (faqFromPath(pathname)) return faqPath(lang);
   const programming = programmingFromPath(pathname);
   if (programming) {
-    if (lang === "az") return programmingLocalePath("az", programming.slug);
+    if (lang === "az" || isCourseSlug(programming.slug)) return programmingLocalePath(lang, programming.slug);
     if (findProgrammingLocale(lang, programming.slug)) return programmingLocalePath(lang, programming.slug);
     return `${programmingLocalePath("az", programming.slug)}?lang=${lang}`;
   }

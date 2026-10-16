@@ -7302,3 +7302,37 @@ body.is-planner .site-backdrop {
 .erase-editbox { margin-top: 12px; }
 @media (max-width: 640px) { .erase-app .files-compare { grid-template-columns: 1fr; } }
 .erase-editbox .erase-stage canvas { position: static; height: auto; width: 100%; }
+
+/* Programming courses: license box and lesson navigation */
+.prog-license {
+  margin-top: 1.5rem;
+  padding: 1rem 1.2rem;
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.14));
+  border-radius: 0.9rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  opacity: 0.92;
+}
+.prog-license h2 {
+  font-size: 1rem;
+  margin: 0 0 0.4rem;
+}
+.prog-license ul {
+  margin: 0;
+  padding-inline-start: 1.1rem;
+}
+.prog-license a {
+  text-decoration: underline;
+}
+.lib-desc {
+  display: block;
+  opacity: 0.7;
+  font-size: 0.85rem;
+  margin-top: 0.15rem;
+}
+.course-nav {
+  margin-top: 1.25rem;
+}
+.lib-list li:has(.lib-desc) {
+  display: block;
+}
