@@ -75,12 +75,12 @@ export function SiteFooter() {
   );
 }
 
-const LEGAL: Record<Lang, { owner: string; about: string; contact: string; privacy: string; terms: string }> = {
-  az: { owner: "Qurucu: Mahir Əliyev", about: "Haqqımızda", contact: "Əlaqə", privacy: "Məxfilik", terms: "İstifadə şərtləri" },
-  en: { owner: "Founder: Mahir Əliyev", about: "About", contact: "Contact", privacy: "Privacy", terms: "Terms" },
-  tr: { owner: "Kurucu: Mahir Əliyev", about: "Hakkımızda", contact: "İletişim", privacy: "Gizlilik", terms: "Kullanım şartları" },
-  ar: { owner: "المؤسس: Mahir Əliyev", about: "من نحن", contact: "تواصل", privacy: "الخصوصية", terms: "شروط الاستخدام" },
-  ru: { owner: "Основатель: Mahir Əliyev", about: "О нас", contact: "Контакт", privacy: "Конфиденциальность", terms: "Условия" },
+const LEGAL: Record<Lang, { about: string; contact: string; privacy: string; terms: string }> = {
+  az: { about: "Haqqımızda", contact: "Əlaqə", privacy: "Məxfilik", terms: "İstifadə şərtləri" },
+  en: { about: "About", contact: "Contact", privacy: "Privacy", terms: "Terms" },
+  tr: { about: "Hakkımızda", contact: "İletişim", privacy: "Gizlilik", terms: "Kullanım şartları" },
+  ar: { about: "من نحن", contact: "تواصل", privacy: "الخصوصية", terms: "شروط الاستخدام" },
+  ru: { about: "О нас", contact: "Контакт", privacy: "Конфиденциальность", terms: "Условия" },
 };
 
 export function SocialIcons() {
@@ -110,7 +110,6 @@ export function SiteLegal() {
   const copy = LEGAL[lang];
   return (
     <div className="site-legal">
-      <p>{copy.owner}</p>
       <SocialIcons />
       <nav aria-label={copy.contact}>
         <a href={localeHref(lang, "/about")}>{copy.about}</a>

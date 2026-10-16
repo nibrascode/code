@@ -57,7 +57,7 @@ const AI: Record<Lang, { title: string; body: string[] }> = {
   az: {
     title: "Nibras AI",
     body: [
-      "Nibras AI Nibras Code-un ayrıca köməkçisidir: nibrascode.com/ai. Layihə Mahir Əliyevin müstəqil işidir. Burada sual vermək, fikir almaq, kod yazmaq və şəkil hazırlamaq və ya düzəltmək olur. Hesab açılmır. Ad, e-poçt və telefon istənmir.",
+      "Nibras AI Nibras Code-un ayrıca köməkçisidir: nibrascode.com/ai. Burada sual vermək, fikir almaq, kod yazmaq və şəkil hazırlamaq və ya düzəltmək olur. Hesab açılmır. Ad, e-poçt və telefon istənmir.",
       "Söhbət bu brauzerin yaddaşında 24 saat qalır, sonra silinir. Söhbəti özün də silə bilərsən. Bu brauzer üçün təsadüfi nömrə də burada saxlanır. Bu nömrə adın deyil, yalnız eyni cihazı tanımaq üçündür. Dil seçimi də bu brauzerdə qalır.",
       "Cavab iki yolla gəlir. Hazır mənbə varsa model çağırılmır: Quran ayəsi, təfsir, hədis, lüğət, Wikidata faktı və saytın öz alətləri. Bu halda mesajın mətni serverdə saxlanmır. Qalan sual əvvəl Nibras Code serverinə, oradan xarici süni intellekt xidmətinə gedir: xAI və ya Groq. Onlar mətni yalnız cavab hazırlamaq üçün oxuyur.",
       "Biz bu mətni reklama vermirik və öz modelimizi öyrətmək üçün saxlamırıq. Server söhbəti qəbul edirsə, eyni mətn həmin cihaz nömrəsi ilə orada da ən çox 24 saat qalır, sonra siyahıdan düşür. Sayğac yalnız hadisənin növünü göndərir, yazdığın cümləni yox. Brauzerdə izləmə bağlıdırsa sayğac getmir.",
@@ -69,7 +69,7 @@ const AI: Record<Lang, { title: string; body: string[] }> = {
   en: {
     title: "Nibras AI",
     body: [
-      "Nibras AI is Nibras Code’s separate assistant at nibrascode.com/ai. The project is Mahir Əliyev’s independent work. You can ask a question, take an idea, write code, and make or edit an image. No account is opened. A name, an email, and a phone number are not asked.",
+      "Nibras AI is Nibras Code’s separate assistant at nibrascode.com/ai. You can ask a question, take an idea, write code, and make or edit an image. No account is opened. A name, an email, and a phone number are not asked.",
       "A chat stays in this browser’s storage for 24 hours, then it is deleted. You can delete a chat yourself. A random number for this browser is also kept here. That number is not your name. It only recognizes the same device. The language choice stays in this browser too.",
       "An answer comes in two ways. If a ready source exists, no model is called: a Quran verse, tafsir, hadith, a word meaning, a Wikidata fact, and the site’s own tools. In that case the message text is not kept on the server. The remaining question goes first to the Nibras Code server, then to an external AI service: xAI or Groq. They read the text only to prepare an answer.",
       "We do not give this text to ads and we do not keep it to train our own model. If the server accepts the chat, the same text stays there with that device number for at most 24 hours, then it drops off the list. The counter sends only the kind of event, not the sentence you wrote. If tracking is off in the browser, the counter does not go.",
@@ -81,7 +81,7 @@ const AI: Record<Lang, { title: string; body: string[] }> = {
   tr: {
     title: "Nibras AI",
     body: [
-      "Nibras AI, Nibras Code’un ayrı yardımcısıdır: nibrascode.com/ai. Proje Mahir Əliyev’in bağımsız işidir. Burada soru sorulur, fikir alınır, kod yazılır ve görsel hazırlanır veya düzeltilir. Hesap açılmaz. Ad, e-posta ve telefon istenmez.",
+      "Nibras AI, Nibras Code’un ayrı yardımcısıdır: nibrascode.com/ai. Burada soru sorulur, fikir alınır, kod yazılır ve görsel hazırlanır veya düzeltilir. Hesap açılmaz. Ad, e-posta ve telefon istenmez.",
       "Sohbet bu tarayıcının belleğinde 24 saat kalır, sonra silinir. Sohbeti kendin de silebilirsin. Bu tarayıcı için rastgele bir numara da burada tutulur. Bu numara adın değildir, yalnız aynı cihazı tanımak içindir. Dil seçimi de bu tarayıcıda kalır.",
       "Cevap iki yolla gelir. Hazır kaynak varsa model çağrılmaz: Kuran ayeti, tefsir, hadis, sözlük, Wikidata faktı ve sitenin kendi araçları. Bu durumda mesajın metni sunucuda saklanmaz. Kalan soru önce Nibras Code sunucusuna, oradan dış bir yapay zeka hizmetine gider: xAI veya Groq. Onlar metni yalnız cevap hazırlamak için okur.",
       "Bu metni reklama vermeyiz ve kendi modelimizi eğitmek için saklamayız. Sunucu sohbeti kabul ederse aynı metin o cihaz numarasıyla orada en çok 24 saat kalır, sonra listeden düşer. Sayacı yalnız olayın türünü gönderir, yazdığın cümleyi değil. Tarayıcıda izleme kapalıysa sayacı gitmez.",
@@ -93,7 +93,7 @@ const AI: Record<Lang, { title: string; body: string[] }> = {
   ar: {
     title: "Nibras AI",
     body: [
-      "Nibras AI مساعد منفصل لـ Nibras Code: nibrascode.com/ai. المشروع عمل مستقل لماهِر علييف. هنا يُطرح سؤال وتُؤخذ فكرة ويُكتب كود وتُجهَّز صورة أو تُعدَّل. لا يُفتح حساب. لا يُطلب اسم ولا بريد ولا هاتف.",
+      "Nibras AI مساعد منفصل لـ Nibras Code: nibrascode.com/ai. هنا يُطرح سؤال وتُؤخذ فكرة ويُكتب كود وتُجهَّز صورة أو تُعدَّل. لا يُفتح حساب. لا يُطلب اسم ولا بريد ولا هاتف.",
       "تبقى المحادثة في ذاكرة هذا المتصفح 24 ساعة ثم تُحذف. يمكنك حذف المحادثة بنفسك. يُحفظ هنا أيضًا رقم عشوائي لهذا المتصفح. هذا الرقم ليس اسمك، بل لمعرفة الجهاز نفسه. يبقى اختيار اللغة في هذا المتصفح أيضًا.",
       "يأتي الجواب من طريقين. إذا وُجد مصدر جاهز لا يُستدعى نموذج: آية القرآن والتفسير والحديث ومعنى الكلمة وحقيقة من ويكي بيانات وأدوات الموقع نفسه. في هذه الحال لا يُحفظ نص الرسالة على الخادم. السؤال الباقي يذهب أولًا إلى خادم Nibras Code ثم إلى خدمة ذكاء اصطناعي خارجية: xAI أو Groq. يقرأون النص فقط لإعداد الجواب.",
       "لا نعطي هذا النص للإعلان ولا نحفظه لتدريب نموذجنا. إذا قبل الخادم المحادثة يبقى النص نفسه برقم ذلك الجهاز 24 ساعة على الأكثر ثم يسقط من القائمة. العداد يرسل نوع الحدث فقط لا الجملة التي كتبتها. إذا كان التتبع مغلقًا في المتصفح لا يذهب العداد.",
@@ -105,7 +105,7 @@ const AI: Record<Lang, { title: string; body: string[] }> = {
   ru: {
     title: "Nibras AI",
     body: [
-      "Nibras AI — отдельный помощник Nibras Code: nibrascode.com/ai. Проект — самостоятельная работа Махира Алиева. Здесь можно задать вопрос, взять идею, написать код и сделать или поправить картинку. Счёт не открывается. Имя, почта и телефон не спрашиваются.",
+      "Nibras AI — отдельный помощник Nibras Code: nibrascode.com/ai. Здесь можно задать вопрос, взять идею, написать код и сделать или поправить картинку. Счёт не открывается. Имя, почта и телефон не спрашиваются.",
       "Разговор остаётся в памяти этого браузера 24 часа, затем удаляется. Разговор можно удалить самому. Случайный номер этого браузера тоже хранится здесь. Этот номер — не имя. Он только узнаёт то же устройство. Выбор языка тоже остаётся в этом браузере.",
       "Ответ приходит двумя путями. Если есть готовый источник, модель не вызывается: аят Корана, тафсир, хадис, значение слова, факт из Викиданных и собственные инструменты сайта. Тогда текст сообщения на сервере не хранится. Остальной вопрос сначала идёт на сервер Nibras Code, затем во внешний сервис ИИ: xAI или Groq. Они читают текст только чтобы подготовить ответ.",
       "Мы не отдаём этот текст рекламе и не храним его, чтобы учить свою модель. Если сервер принимает разговор, тот же текст с номером этого устройства остаётся там не больше 24 часов, затем выпадает из списка. Счётчик шлёт только вид события, не написанное предложение. Если в браузере слежение выключено, счётчик не уходит.",

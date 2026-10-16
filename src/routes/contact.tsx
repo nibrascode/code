@@ -16,23 +16,23 @@ export const Route = createFileRoute("/contact")({
 
 const NOTE: Record<Lang, string[]> = {
   az: [
-    "Nibras Code-u Mahir Əliyev idarə edir. Bu, şəxsi layihədir, ofisi olan şirkət deyil.",
+    "Nibras Code şəxsi layihədir, ofisi olan şirkət deyil.",
     "Telefon nömrəsi və fiziki ünvan yoxdur. Rəsmi əlaqə yalnız bu e-poçtdur.",
   ],
   en: [
-    "Mahir Əliyev runs Nibras Code. It is a personal project, not a company with an office.",
+    "Nibras Code is a personal project, not a company with an office.",
     "There is no phone number and no physical address. This email is the only official contact.",
   ],
   tr: [
-    "Nibras Code’u Mahir Əliyev yönetir. Bu kişisel bir projedir, ofisi olan bir şirket değildir.",
+    "Nibras Code kişisel bir projedir, ofisi olan bir şirket değildir.",
     "Telefon numarası ve fiziksel adres yoktur. Resmi iletişim yalnızca bu e-postadır.",
   ],
   ar: [
-    "يدير Mahir Əliyev مشروع Nibras Code. هذا مشروع شخصي، وليس شركة لها مكتب.",
+    "Nibras Code مشروع شخصي، وليس شركة لها مكتب.",
     "لا يوجد رقم هاتف ولا عنوان فعلي. هذا البريد هو التواصل الرسمي الوحيد.",
   ],
   ru: [
-    "Nibras Code ведёт Mahir Əliyev. Это личный проект, не компания с офисом.",
+    "Nibras Code — личный проект, не компания с офисом.",
     "Телефона и физического адреса нет. Официальная связь только эта почта.",
   ],
 };

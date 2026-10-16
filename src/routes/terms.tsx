@@ -18,7 +18,7 @@ const COPY: Record<Lang, { eyebrow: string; title: string; body: string[] }> = {
     eyebrow: "İstifadə şərtləri",
     title: "İstifadə şərtləri",
     body: [
-      "Nibras Code müstəqil şəxsi layihədir. Onu Mahir Əliyev hazırlayır və idarə edir. Bu, ofisi olan şirkət deyil. Telefon nömrəsi və fiziki ünvan yoxdur.",
+      "Nibras Code müstəqil şəxsi layihədir. Bu, ofisi olan şirkət deyil. Telefon nömrəsi və fiziki ünvan yoxdur.",
       "Rəsmi əlaqə yalnız e-poçtdur: nibrascode@gmail.com. Məktub oxunur və cavablandırılır.",
       "Sayt və alətlər olduğu kimi, pulsuz təqdim olunur. Hesab açmaq şərt deyil. Özün yaratdığın fayl və mətn sənindir.",
       "Saytı qanuna zidd, başqasının hüququnu pozan və ya zərər vermək üçün istifadə etmə.",
@@ -30,7 +30,7 @@ const COPY: Record<Lang, { eyebrow: string; title: string; body: string[] }> = {
     eyebrow: "Terms of use",
     title: "Terms of use",
     body: [
-      "Nibras Code is an independent personal project. Mahir Əliyev builds and runs it. It is not a company with an office. There is no phone number and no physical address.",
+      "Nibras Code is an independent personal project. It is not a company with an office. There is no phone number and no physical address.",
       "The only official contact is email: nibrascode@gmail.com. A letter is read and answered.",
       "The site and the tools are offered as they are, free of charge. An account is not required. A file or text you create is yours.",
       "Do not use the site for anything illegal, for violating someone else’s rights, or to cause harm.",
@@ -42,7 +42,7 @@ const COPY: Record<Lang, { eyebrow: string; title: string; body: string[] }> = {
     eyebrow: "Kullanım şartları",
     title: "Kullanım şartları",
     body: [
-      "Nibras Code bağımsız kişisel bir projedir. Onu Mahir Əliyev hazırlar ve yönetir. Ofisi olan bir şirket değildir. Telefon numarası ve fiziksel adres yoktur.",
+      "Nibras Code bağımsız kişisel bir projedir. Ofisi olan bir şirket değildir. Telefon numarası ve fiziksel adres yoktur.",
       "Resmi iletişim yalnızca e-postadır: nibrascode@gmail.com. Mektup okunur ve cevaplanır.",
       "Site ve araçlar olduğu gibi, ücretsiz sunulur. Hesap açmak şart değildir. Kendin oluşturduğun dosya ve metin senindir.",
       "Siteyi yasaya aykırı, başkasının hakkını çiğneyen veya zarar vermek için kullanma.",
@@ -54,7 +54,7 @@ const COPY: Record<Lang, { eyebrow: string; title: string; body: string[] }> = {
     eyebrow: "شروط الاستخدام",
     title: "شروط الاستخدام",
     body: [
-      "Nibras Code مشروع شخصي مستقل. يعدّه ويديره Mahir Əliyev. ليس شركة لها مكتب. لا يوجد رقم هاتف ولا عنوان فعلي.",
+      "Nibras Code مشروع شخصي مستقل. ليس شركة لها مكتب. لا يوجد رقم هاتف ولا عنوان فعلي.",
       "التواصل الرسمي بالبريد فقط: nibrascode@gmail.com. تُقرأ الرسالة ويُرد عليها.",
       "يُقدَّم الموقع والأدوات كما هي، مجاناً. فتح حساب ليس شرطاً. الملف أو النص الذي تنشئه لك.",
       "لا تستخدم الموقع فيما يخالف القانون أو ينتهك حق غيرك أو يسبب ضرراً.",
@@ -66,7 +66,7 @@ const COPY: Record<Lang, { eyebrow: string; title: string; body: string[] }> = {
     eyebrow: "Условия использования",
     title: "Условия использования",
     body: [
-      "Nibras Code — независимый личный проект. Его делает и ведёт Mahir Əliyev. Это не компания с офисом. Телефона и физического адреса нет.",
+      "Nibras Code — независимый личный проект. Это не компания с офисом. Телефона и физического адреса нет.",
       "Официальная связь только по почте: nibrascode@gmail.com. Письмо читают и на него отвечают.",
       "Сайт и инструменты даются как есть, бесплатно. Учётная запись не обязательна. Файл или текст, который вы создали, ваш.",
       "Не используйте сайт для незаконного, для нарушения чужого права или чтобы причинить вред.",

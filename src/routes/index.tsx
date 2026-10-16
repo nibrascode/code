@@ -477,15 +477,6 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
           <p>{t("nx_who_2")}</p>
           <p>{t("nx_who_3")}</p>
           <p>
-            {lang === "en"
-              ? "Founder: Mahir Əliyev."
-              : lang === "tr"
-                ? "Kurucu: Mahir Əliyev."
-                : lang === "ar"
-                  ? "المؤسس: Mahir Əliyev."
-                  : lang === "ru"
-                    ? "Основатель: Mahir Əliyev."
-                    : "Qurucu: Mahir Əliyev."}{" "}
             <SocialIcons />
           </p>
           <p className="nx-verse" lang="ar" dir="rtl">

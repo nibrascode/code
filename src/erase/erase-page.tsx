@@ -34,7 +34,7 @@ const INFO = {
       "Siyasət dəyişəndə https://nibrascode.com/erase/privacy yenilənir. Sual: nibrascode@gmail.com. Yenilənmə: 14 oktyabr 2026.",
     ],
     aboutBody: [
-      "Ad: Nibras Erase. Versiya: V 1.0.0. Nibras Code, Mahir Əliyevin müstəqil işi.",
+      "Ad: Nibras Erase. Versiya: V 1.0.0. Nibras Code.",
       "Nə edir: fonu silir, rəng və ya bulanıq fon qoyur, kölgə və dairə profil düzəldir, kənarı fırça ilə düzəldir. Nəticə PNG, JPG və ya WebP olur.",
       "Necə işlədilir: şəkli seçin, keyfiyyəti seçin, fonu silin, lazımdırsa əl ilə kənarı düzəldin, formatı seçin və yükləyin.",
       "Şəkil cihazdan çıxmır. Model ilk dəfə endiriləndən sonra növbəti şəkillər internetsiz də işlənə bilər.",
@@ -56,7 +56,7 @@ const INFO = {
       "If this policy changes, https://nibrascode.com/en/erase/privacy is updated. Questions: nibrascode@gmail.com. Updated: 14 October 2026.",
     ],
     aboutBody: [
-      "Name: Nibras Erase. Version: V 1.0.0. Nibras Code, an independent project by Mahir Əliyev.",
+      "Name: Nibras Erase. Version: V 1.0.0. Nibras Code.",
       "What it does: removes the background, places a color or a blur, a shadow and a circle crop, and lets you fix the edge with a brush. The result is PNG, JPG or WebP.",
       "How to use it: pick a photo, pick the quality, remove the background, fix the edge if you need to, choose the format and download.",
       "The photo stays on the device. After the model has downloaded once, later photos can be processed without the network.",
