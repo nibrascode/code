@@ -1,6 +1,6 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { localeHref } from "@/lib/locale-path";
-import { aboutFromRow } from "@/lib/pages";
+import { aboutFromRow, founderCopy } from "@/lib/pages";
 import { readLang } from "@/lib/seo";
 import type { StudioPrivacyRow } from "@/lib/studio";
 import { loadStudioBundle } from "@/lib/studio.functions";
@@ -38,6 +38,14 @@ export function AboutView({ privacy }: { privacy: readonly StudioPrivacyRow[] })
       <section>
         <h2>{copy.approachTitle}</h2>
         {copy.approach.map((paragraph) => (
+          <p key={paragraph}>{paragraph}</p>
+        ))}
+      </section>
+
+      <section className="founder">
+        <h2>{founderCopy(lang).title}</h2>
+        <p className="founder-name">Mahir Əliyev</p>
+        {founderCopy(lang).body.map((paragraph) => (
           <p key={paragraph}>{paragraph}</p>
         ))}
       </section>

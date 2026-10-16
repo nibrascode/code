@@ -2694,6 +2694,15 @@ html[dir="rtl"] .rtl-flip {
   letter-spacing: -0.03em;
 }
 
+.founder-name {
+  margin: 0 0 10px !important;
+  font-size: 10px !important;
+  font-weight: 400;
+  line-height: 1.2 !important;
+  letter-spacing: 0.01em;
+  color: rgb(78 86 102) !important;
+}
+
 .who-success {
   margin: 36px 0 8px !important;
   font-family: var(--font-display);
