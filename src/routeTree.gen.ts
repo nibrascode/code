@@ -27,6 +27,7 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as QrRouteImport } from './routes/qr'
 import { Route as RuRouteImport } from './routes/ru'
 import { Route as SozRouteImport } from './routes/soz'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as ToolsRouteImport } from './routes/tools'
 import { Route as TrRouteImport } from './routes/tr'
 import { Route as UnutmaRouteImport } from './routes/unutma'
@@ -46,6 +47,7 @@ import { Route as ArPaketRouteImport } from './routes/ar.paket'
 import { Route as ArPdfRouteImport } from './routes/ar.pdf'
 import { Route as ArQrRouteImport } from './routes/ar.qr'
 import { Route as ArSozRouteImport } from './routes/ar.soz'
+import { Route as ArTermsRouteImport } from './routes/ar.terms'
 import { Route as ArToolsRouteImport } from './routes/ar.tools'
 import { Route as ArXetaRouteImport } from './routes/ar.xeta'
 import { Route as EnAboutRouteImport } from './routes/en.about'
@@ -60,6 +62,7 @@ import { Route as EnPaketRouteImport } from './routes/en.paket'
 import { Route as EnPdfRouteImport } from './routes/en.pdf'
 import { Route as EnQrRouteImport } from './routes/en.qr'
 import { Route as EnSozRouteImport } from './routes/en.soz'
+import { Route as EnTermsRouteImport } from './routes/en.terms'
 import { Route as EnToolsRouteImport } from './routes/en.tools'
 import { Route as EnXetaRouteImport } from './routes/en.xeta'
 import { Route as FaqSlugRouteImport } from './routes/faq.$slug'
@@ -88,6 +91,7 @@ import { Route as RuPaketRouteImport } from './routes/ru.paket'
 import { Route as RuPdfRouteImport } from './routes/ru.pdf'
 import { Route as RuQrRouteImport } from './routes/ru.qr'
 import { Route as RuSozRouteImport } from './routes/ru.soz'
+import { Route as RuTermsRouteImport } from './routes/ru.terms'
 import { Route as RuToolsRouteImport } from './routes/ru.tools'
 import { Route as RuXetaRouteImport } from './routes/ru.xeta'
 import { Route as SozSlugRouteImport } from './routes/soz.$slug'
@@ -104,6 +108,7 @@ import { Route as TrPaketRouteImport } from './routes/tr.paket'
 import { Route as TrPdfRouteImport } from './routes/tr.pdf'
 import { Route as TrQrRouteImport } from './routes/tr.qr'
 import { Route as TrSozRouteImport } from './routes/tr.soz'
+import { Route as TrTermsRouteImport } from './routes/tr.terms'
 import { Route as TrToolsRouteImport } from './routes/tr.tools'
 import { Route as TrXetaRouteImport } from './routes/tr.xeta'
 import { Route as XetaSlugRouteImport } from './routes/xeta.$slug'
@@ -242,6 +247,11 @@ const SozRoute = SozRouteImport.update({
   path: '/soz',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ToolsRoute = ToolsRouteImport.update({
   id: '/tools',
   path: '/tools',
@@ -337,6 +347,11 @@ const ArSozRoute = ArSozRouteImport.update({
   path: '/soz',
   getParentRoute: () => ArRoute,
 } as any)
+const ArTermsRoute = ArTermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => ArRoute,
+} as any)
 const ArToolsRoute = ArToolsRouteImport.update({
   id: '/tools',
   path: '/tools',
@@ -405,6 +420,11 @@ const EnQrRoute = EnQrRouteImport.update({
 const EnSozRoute = EnSozRouteImport.update({
   id: '/soz',
   path: '/soz',
+  getParentRoute: () => EnRoute,
+} as any)
+const EnTermsRoute = EnTermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => EnRoute,
 } as any)
 const EnToolsRoute = EnToolsRouteImport.update({
@@ -547,6 +567,11 @@ const RuSozRoute = RuSozRouteImport.update({
   path: '/soz',
   getParentRoute: () => RuRoute,
 } as any)
+const RuTermsRoute = RuTermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => RuRoute,
+} as any)
 const RuToolsRoute = RuToolsRouteImport.update({
   id: '/tools',
   path: '/tools',
@@ -625,6 +650,11 @@ const TrQrRoute = TrQrRouteImport.update({
 const TrSozRoute = TrSozRouteImport.update({
   id: '/soz',
   path: '/soz',
+  getParentRoute: () => TrRoute,
+} as any)
+const TrTermsRoute = TrTermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => TrRoute,
 } as any)
 const TrToolsRoute = TrToolsRouteImport.update({
@@ -883,6 +913,7 @@ export interface FileRoutesByFullPath {
   '/qr': typeof QrRoute
   '/ru': typeof RuRouteWithChildren
   '/soz': typeof SozRouteWithChildren
+  '/terms': typeof TermsRoute
   '/tools': typeof ToolsRouteWithChildren
   '/tr': typeof TrRouteWithChildren
   '/unutma': typeof UnutmaRoute
@@ -902,6 +933,7 @@ export interface FileRoutesByFullPath {
   '/ar/pdf': typeof ArPdfRoute
   '/ar/qr': typeof ArQrRoute
   '/ar/soz': typeof ArSozRouteWithChildren
+  '/ar/terms': typeof ArTermsRoute
   '/ar/tools': typeof ArToolsRouteWithChildren
   '/ar/xeta': typeof ArXetaRouteWithChildren
   '/en/about': typeof EnAboutRoute
@@ -916,6 +948,7 @@ export interface FileRoutesByFullPath {
   '/en/pdf': typeof EnPdfRoute
   '/en/qr': typeof EnQrRoute
   '/en/soz': typeof EnSozRouteWithChildren
+  '/en/terms': typeof EnTermsRoute
   '/en/tools': typeof EnToolsRouteWithChildren
   '/en/xeta': typeof EnXetaRouteWithChildren
   '/faq/$slug': typeof FaqSlugRoute
@@ -940,6 +973,7 @@ export interface FileRoutesByFullPath {
   '/ru/pdf': typeof RuPdfRoute
   '/ru/qr': typeof RuQrRoute
   '/ru/soz': typeof RuSozRouteWithChildren
+  '/ru/terms': typeof RuTermsRoute
   '/ru/tools': typeof RuToolsRouteWithChildren
   '/ru/xeta': typeof RuXetaRouteWithChildren
   '/soz/$slug': typeof SozSlugRoute
@@ -956,6 +990,7 @@ export interface FileRoutesByFullPath {
   '/tr/pdf': typeof TrPdfRoute
   '/tr/qr': typeof TrQrRoute
   '/tr/soz': typeof TrSozRouteWithChildren
+  '/tr/terms': typeof TrTermsRoute
   '/tr/tools': typeof TrToolsRouteWithChildren
   '/tr/xeta': typeof TrXetaRouteWithChildren
   '/xeta/$slug': typeof XetaSlugRoute
@@ -1027,6 +1062,7 @@ export interface FileRoutesByTo {
   '/qr': typeof QrRoute
   '/ru': typeof RuRouteWithChildren
   '/soz': typeof SozRouteWithChildren
+  '/terms': typeof TermsRoute
   '/tools': typeof ToolsRouteWithChildren
   '/tr': typeof TrRouteWithChildren
   '/unutma': typeof UnutmaRoute
@@ -1045,6 +1081,7 @@ export interface FileRoutesByTo {
   '/ar/pdf': typeof ArPdfRoute
   '/ar/qr': typeof ArQrRoute
   '/ar/soz': typeof ArSozRouteWithChildren
+  '/ar/terms': typeof ArTermsRoute
   '/ar/tools': typeof ArToolsRouteWithChildren
   '/ar/xeta': typeof ArXetaRouteWithChildren
   '/en/about': typeof EnAboutRoute
@@ -1059,6 +1096,7 @@ export interface FileRoutesByTo {
   '/en/pdf': typeof EnPdfRoute
   '/en/qr': typeof EnQrRoute
   '/en/soz': typeof EnSozRouteWithChildren
+  '/en/terms': typeof EnTermsRoute
   '/en/tools': typeof EnToolsRouteWithChildren
   '/en/xeta': typeof EnXetaRouteWithChildren
   '/faq/$slug': typeof FaqSlugRoute
@@ -1083,6 +1121,7 @@ export interface FileRoutesByTo {
   '/ru/pdf': typeof RuPdfRoute
   '/ru/qr': typeof RuQrRoute
   '/ru/soz': typeof RuSozRouteWithChildren
+  '/ru/terms': typeof RuTermsRoute
   '/ru/tools': typeof RuToolsRouteWithChildren
   '/ru/xeta': typeof RuXetaRouteWithChildren
   '/soz/$slug': typeof SozSlugRoute
@@ -1099,6 +1138,7 @@ export interface FileRoutesByTo {
   '/tr/pdf': typeof TrPdfRoute
   '/tr/qr': typeof TrQrRoute
   '/tr/soz': typeof TrSozRouteWithChildren
+  '/tr/terms': typeof TrTermsRoute
   '/tr/tools': typeof TrToolsRouteWithChildren
   '/tr/xeta': typeof TrXetaRouteWithChildren
   '/xeta/$slug': typeof XetaSlugRoute
@@ -1171,6 +1211,7 @@ export interface FileRoutesById {
   '/qr': typeof QrRoute
   '/ru': typeof RuRouteWithChildren
   '/soz': typeof SozRouteWithChildren
+  '/terms': typeof TermsRoute
   '/tools': typeof ToolsRouteWithChildren
   '/tr': typeof TrRouteWithChildren
   '/unutma': typeof UnutmaRoute
@@ -1190,6 +1231,7 @@ export interface FileRoutesById {
   '/ar/pdf': typeof ArPdfRoute
   '/ar/qr': typeof ArQrRoute
   '/ar/soz': typeof ArSozRouteWithChildren
+  '/ar/terms': typeof ArTermsRoute
   '/ar/tools': typeof ArToolsRouteWithChildren
   '/ar/xeta': typeof ArXetaRouteWithChildren
   '/en/about': typeof EnAboutRoute
@@ -1204,6 +1246,7 @@ export interface FileRoutesById {
   '/en/pdf': typeof EnPdfRoute
   '/en/qr': typeof EnQrRoute
   '/en/soz': typeof EnSozRouteWithChildren
+  '/en/terms': typeof EnTermsRoute
   '/en/tools': typeof EnToolsRouteWithChildren
   '/en/xeta': typeof EnXetaRouteWithChildren
   '/faq/$slug': typeof FaqSlugRoute
@@ -1228,6 +1271,7 @@ export interface FileRoutesById {
   '/ru/pdf': typeof RuPdfRoute
   '/ru/qr': typeof RuQrRoute
   '/ru/soz': typeof RuSozRouteWithChildren
+  '/ru/terms': typeof RuTermsRoute
   '/ru/tools': typeof RuToolsRouteWithChildren
   '/ru/xeta': typeof RuXetaRouteWithChildren
   '/soz/$slug': typeof SozSlugRoute
@@ -1244,6 +1288,7 @@ export interface FileRoutesById {
   '/tr/pdf': typeof TrPdfRoute
   '/tr/qr': typeof TrQrRoute
   '/tr/soz': typeof TrSozRouteWithChildren
+  '/tr/terms': typeof TrTermsRoute
   '/tr/tools': typeof TrToolsRouteWithChildren
   '/tr/xeta': typeof TrXetaRouteWithChildren
   '/xeta/$slug': typeof XetaSlugRoute
@@ -1317,6 +1362,7 @@ export interface FileRouteTypes {
     | '/qr'
     | '/ru'
     | '/soz'
+    | '/terms'
     | '/tools'
     | '/tr'
     | '/unutma'
@@ -1336,6 +1382,7 @@ export interface FileRouteTypes {
     | '/ar/pdf'
     | '/ar/qr'
     | '/ar/soz'
+    | '/ar/terms'
     | '/ar/tools'
     | '/ar/xeta'
     | '/en/about'
@@ -1350,6 +1397,7 @@ export interface FileRouteTypes {
     | '/en/pdf'
     | '/en/qr'
     | '/en/soz'
+    | '/en/terms'
     | '/en/tools'
     | '/en/xeta'
     | '/faq/$slug'
@@ -1374,6 +1422,7 @@ export interface FileRouteTypes {
     | '/ru/pdf'
     | '/ru/qr'
     | '/ru/soz'
+    | '/ru/terms'
     | '/ru/tools'
     | '/ru/xeta'
     | '/soz/$slug'
@@ -1390,6 +1439,7 @@ export interface FileRouteTypes {
     | '/tr/pdf'
     | '/tr/qr'
     | '/tr/soz'
+    | '/tr/terms'
     | '/tr/tools'
     | '/tr/xeta'
     | '/xeta/$slug'
@@ -1461,6 +1511,7 @@ export interface FileRouteTypes {
     | '/qr'
     | '/ru'
     | '/soz'
+    | '/terms'
     | '/tools'
     | '/tr'
     | '/unutma'
@@ -1479,6 +1530,7 @@ export interface FileRouteTypes {
     | '/ar/pdf'
     | '/ar/qr'
     | '/ar/soz'
+    | '/ar/terms'
     | '/ar/tools'
     | '/ar/xeta'
     | '/en/about'
@@ -1493,6 +1545,7 @@ export interface FileRouteTypes {
     | '/en/pdf'
     | '/en/qr'
     | '/en/soz'
+    | '/en/terms'
     | '/en/tools'
     | '/en/xeta'
     | '/faq/$slug'
@@ -1517,6 +1570,7 @@ export interface FileRouteTypes {
     | '/ru/pdf'
     | '/ru/qr'
     | '/ru/soz'
+    | '/ru/terms'
     | '/ru/tools'
     | '/ru/xeta'
     | '/soz/$slug'
@@ -1533,6 +1587,7 @@ export interface FileRouteTypes {
     | '/tr/pdf'
     | '/tr/qr'
     | '/tr/soz'
+    | '/tr/terms'
     | '/tr/tools'
     | '/tr/xeta'
     | '/xeta/$slug'
@@ -1604,6 +1659,7 @@ export interface FileRouteTypes {
     | '/qr'
     | '/ru'
     | '/soz'
+    | '/terms'
     | '/tools'
     | '/tr'
     | '/unutma'
@@ -1623,6 +1679,7 @@ export interface FileRouteTypes {
     | '/ar/pdf'
     | '/ar/qr'
     | '/ar/soz'
+    | '/ar/terms'
     | '/ar/tools'
     | '/ar/xeta'
     | '/en/about'
@@ -1637,6 +1694,7 @@ export interface FileRouteTypes {
     | '/en/pdf'
     | '/en/qr'
     | '/en/soz'
+    | '/en/terms'
     | '/en/tools'
     | '/en/xeta'
     | '/faq/$slug'
@@ -1661,6 +1719,7 @@ export interface FileRouteTypes {
     | '/ru/pdf'
     | '/ru/qr'
     | '/ru/soz'
+    | '/ru/terms'
     | '/ru/tools'
     | '/ru/xeta'
     | '/soz/$slug'
@@ -1677,6 +1736,7 @@ export interface FileRouteTypes {
     | '/tr/pdf'
     | '/tr/qr'
     | '/tr/soz'
+    | '/tr/terms'
     | '/tr/tools'
     | '/tr/xeta'
     | '/xeta/$slug'
@@ -1749,6 +1809,7 @@ export interface RootRouteChildren {
   QrRoute: typeof QrRoute
   RuRoute: typeof RuRouteWithChildren
   SozRoute: typeof SozRouteWithChildren
+  TermsRoute: typeof TermsRoute
   ToolsRoute: typeof ToolsRouteWithChildren
   TrRoute: typeof TrRouteWithChildren
   UnutmaRoute: typeof UnutmaRoute
@@ -1894,6 +1955,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SozRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/tools': {
       id: '/tools'
       path: '/tools'
@@ -2027,6 +2095,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArSozRouteImport
       parentRoute: typeof ArRoute
     }
+    '/ar/terms': {
+      id: '/ar/terms'
+      path: '/terms'
+      fullPath: '/ar/terms'
+      preLoaderRoute: typeof ArTermsRouteImport
+      parentRoute: typeof ArRoute
+    }
     '/ar/tools': {
       id: '/ar/tools'
       path: '/tools'
@@ -2123,6 +2198,13 @@ declare module '@tanstack/react-router' {
       path: '/soz'
       fullPath: '/en/soz'
       preLoaderRoute: typeof EnSozRouteImport
+      parentRoute: typeof EnRoute
+    }
+    '/en/terms': {
+      id: '/en/terms'
+      path: '/terms'
+      fullPath: '/en/terms'
+      preLoaderRoute: typeof EnTermsRouteImport
       parentRoute: typeof EnRoute
     }
     '/en/tools': {
@@ -2321,6 +2403,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RuSozRouteImport
       parentRoute: typeof RuRoute
     }
+    '/ru/terms': {
+      id: '/ru/terms'
+      path: '/terms'
+      fullPath: '/ru/terms'
+      preLoaderRoute: typeof RuTermsRouteImport
+      parentRoute: typeof RuRoute
+    }
     '/ru/tools': {
       id: '/ru/tools'
       path: '/tools'
@@ -2431,6 +2520,13 @@ declare module '@tanstack/react-router' {
       path: '/soz'
       fullPath: '/tr/soz'
       preLoaderRoute: typeof TrSozRouteImport
+      parentRoute: typeof TrRoute
+    }
+    '/tr/terms': {
+      id: '/tr/terms'
+      path: '/terms'
+      fullPath: '/tr/terms'
+      preLoaderRoute: typeof TrTermsRouteImport
       parentRoute: typeof TrRoute
     }
     '/tr/tools': {
@@ -2865,6 +2961,7 @@ interface ArRouteChildren {
   ArPdfRoute: typeof ArPdfRoute
   ArQrRoute: typeof ArQrRoute
   ArSozRoute: typeof ArSozRouteWithChildren
+  ArTermsRoute: typeof ArTermsRoute
   ArToolsRoute: typeof ArToolsRouteWithChildren
   ArXetaRoute: typeof ArXetaRouteWithChildren
   ArPdfToolRoute: typeof ArPdfToolRoute
@@ -2884,6 +2981,7 @@ const ArRouteChildren: ArRouteChildren = {
   ArPdfRoute: ArPdfRoute,
   ArQrRoute: ArQrRoute,
   ArSozRoute: ArSozRouteWithChildren,
+  ArTermsRoute: ArTermsRoute,
   ArToolsRoute: ArToolsRouteWithChildren,
   ArXetaRoute: ArXetaRouteWithChildren,
   ArPdfToolRoute: ArPdfToolRoute,
@@ -2992,6 +3090,7 @@ interface EnRouteChildren {
   EnPdfRoute: typeof EnPdfRoute
   EnQrRoute: typeof EnQrRoute
   EnSozRoute: typeof EnSozRouteWithChildren
+  EnTermsRoute: typeof EnTermsRoute
   EnToolsRoute: typeof EnToolsRouteWithChildren
   EnXetaRoute: typeof EnXetaRouteWithChildren
   EnPdfToolRoute: typeof EnPdfToolRoute
@@ -3011,6 +3110,7 @@ const EnRouteChildren: EnRouteChildren = {
   EnPdfRoute: EnPdfRoute,
   EnQrRoute: EnQrRoute,
   EnSozRoute: EnSozRouteWithChildren,
+  EnTermsRoute: EnTermsRoute,
   EnToolsRoute: EnToolsRouteWithChildren,
   EnXetaRoute: EnXetaRouteWithChildren,
   EnPdfToolRoute: EnPdfToolRoute,
@@ -3176,6 +3276,7 @@ interface RuRouteChildren {
   RuPdfRoute: typeof RuPdfRoute
   RuQrRoute: typeof RuQrRoute
   RuSozRoute: typeof RuSozRouteWithChildren
+  RuTermsRoute: typeof RuTermsRoute
   RuToolsRoute: typeof RuToolsRouteWithChildren
   RuXetaRoute: typeof RuXetaRouteWithChildren
   RuPdfToolRoute: typeof RuPdfToolRoute
@@ -3196,6 +3297,7 @@ const RuRouteChildren: RuRouteChildren = {
   RuPdfRoute: RuPdfRoute,
   RuQrRoute: RuQrRoute,
   RuSozRoute: RuSozRouteWithChildren,
+  RuTermsRoute: RuTermsRoute,
   RuToolsRoute: RuToolsRouteWithChildren,
   RuXetaRoute: RuXetaRouteWithChildren,
   RuPdfToolRoute: RuPdfToolRoute,
@@ -3325,6 +3427,7 @@ interface TrRouteChildren {
   TrPdfRoute: typeof TrPdfRoute
   TrQrRoute: typeof TrQrRoute
   TrSozRoute: typeof TrSozRouteWithChildren
+  TrTermsRoute: typeof TrTermsRoute
   TrToolsRoute: typeof TrToolsRouteWithChildren
   TrXetaRoute: typeof TrXetaRouteWithChildren
   TrPdfToolRoute: typeof TrPdfToolRoute
@@ -3344,6 +3447,7 @@ const TrRouteChildren: TrRouteChildren = {
   TrPdfRoute: TrPdfRoute,
   TrQrRoute: TrQrRoute,
   TrSozRoute: TrSozRouteWithChildren,
+  TrTermsRoute: TrTermsRoute,
   TrToolsRoute: TrToolsRouteWithChildren,
   TrXetaRoute: TrXetaRouteWithChildren,
   TrPdfToolRoute: TrPdfToolRoute,
@@ -3394,6 +3498,7 @@ const rootRouteChildren: RootRouteChildren = {
   QrRoute: QrRoute,
   RuRoute: RuRouteWithChildren,
   SozRoute: SozRouteWithChildren,
+  TermsRoute: TermsRoute,
   ToolsRoute: ToolsRouteWithChildren,
   TrRoute: TrRouteWithChildren,
   UnutmaRoute: UnutmaRoute,
@@ -3413,12 +3518,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}

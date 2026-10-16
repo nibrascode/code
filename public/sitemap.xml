@@ -711,6 +711,56 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/contact"/>
   </url>
   <url>
+    <loc>https://nibrascode.com/terms</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/terms"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/terms"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/terms"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/terms"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/terms"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/terms"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/en/terms</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/terms"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/terms"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/terms"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/terms"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/terms"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/terms"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/tr/terms</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/terms"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/terms"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/terms"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/terms"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/terms"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/terms"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/ar/terms</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/terms"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/terms"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/terms"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/terms"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/terms"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/terms"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/ru/terms</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/terms"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/terms"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/terms"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/terms"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/terms"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/terms"/>
+  </url>
+  <url>
     <loc>https://nibrascode.com/planner</loc>
     <lastmod>2026-10-16</lastmod>
     <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/planner"/>

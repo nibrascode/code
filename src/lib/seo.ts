@@ -461,6 +461,33 @@ const PAGES: Record<string, Copy> = {
       description: "Nibras Code ile iletişim için e-posta: nibrascode@gmail.com. Uygulama, sayfa veya gizlilik hakkında soru yazabilirsiniz.",
     },
   },
+  "/terms": {
+    az: {
+      title: "İstifadə şərtləri — Nibras Code",
+      description:
+        "Nibras Code şəxsi layihədir. Qurucusu Mahir Əliyev. Əlaqə nibrascode@gmail.com. Telefon və ofis ünvanı yoxdur.",
+    },
+    en: {
+      title: "Terms of use — Nibras Code",
+      description:
+        "Nibras Code is a personal project by Mahir Əliyev. Contact nibrascode@gmail.com. There is no phone number and no office address.",
+    },
+    tr: {
+      title: "Kullanım şartları — Nibras Code",
+      description:
+        "Nibras Code kişisel bir projedir. Kurucusu Mahir Əliyev. İletişim nibrascode@gmail.com. Telefon ve ofis adresi yoktur.",
+    },
+    ar: {
+      title: "شروط الاستخدام — Nibras Code",
+      description:
+        "Nibras Code مشروع شخصي لـ Mahir Əliyev. التواصل nibrascode@gmail.com. لا هاتف ولا عنوان مكتب.",
+    },
+    ru: {
+      title: "Условия использования — Nibras Code",
+      description:
+        "Nibras Code — личный проект Mahir Əliyev. Связь: nibrascode@gmail.com. Телефона и адреса офиса нет.",
+    },
+  },
   "/privacy": {
     az: {
       title: "Məxfilik siyasəti — Nibras Code",

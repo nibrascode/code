@@ -5,6 +5,7 @@ import { NavMenu } from "@/components/nav-menu";
 import { faqPath } from "@/lib/faq";
 import { useI18n } from "@/lib/i18n-context";
 import { localeHref } from "@/lib/locale-path";
+import type { Lang } from "@/lib/i18n";
 
 export function SiteHeader() {
   const { t, lang } = useI18n();
@@ -69,6 +70,32 @@ export function SiteFooter() {
         <span className="footer-domain">{t("footer_domain")}</span>
         <span className="footer-year">©2026</span>
       </div>
+      <SiteLegal />
     </footer>
+  );
+}
+
+const LEGAL: Record<Lang, { owner: string; about: string; contact: string; privacy: string; terms: string }> = {
+  az: { owner: "Qurucu: Mahir Əliyev", about: "Haqqımızda", contact: "Əlaqə", privacy: "Məxfilik", terms: "İstifadə şərtləri" },
+  en: { owner: "Founder: Mahir Əliyev", about: "About", contact: "Contact", privacy: "Privacy", terms: "Terms" },
+  tr: { owner: "Kurucu: Mahir Əliyev", about: "Hakkımızda", contact: "İletişim", privacy: "Gizlilik", terms: "Kullanım şartları" },
+  ar: { owner: "المؤسس: Mahir Əliyev", about: "من نحن", contact: "تواصل", privacy: "الخصوصية", terms: "شروط الاستخدام" },
+  ru: { owner: "Основатель: Mahir Əliyev", about: "О нас", contact: "Контакт", privacy: "Конфиденциальность", terms: "Условия" },
+};
+
+export function SiteLegal() {
+  const { lang } = useI18n();
+  const copy = LEGAL[lang];
+  return (
+    <div className="site-legal">
+      <p>{copy.owner}</p>
+      <a href="mailto:nibrascode@gmail.com">nibrascode@gmail.com</a>
+      <nav aria-label={copy.contact}>
+        <a href={localeHref(lang, "/about")}>{copy.about}</a>
+        <a href={localeHref(lang, "/contact")}>{copy.contact}</a>
+        <a href={localeHref(lang, "/privacy")}>{copy.privacy}</a>
+        <a href={localeHref(lang, "/terms")}>{copy.terms}</a>
+      </nav>
+    </div>
   );
 }

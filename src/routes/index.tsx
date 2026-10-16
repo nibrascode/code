@@ -5,6 +5,7 @@ import { AppSuggest } from "@/components/app-suggest";
 import { TechMark } from "@/components/tech-marquee";
 import { LanguageSwitch } from "@/components/language-switch";
 import { NavMenu } from "@/components/nav-menu";
+import { SiteLegal } from "@/components/site-header";
 import { HeroMark } from "@/components/hero-mark";
 import { faqPath } from "@/lib/faq";
 import { homePath, localeHref } from "@/lib/locale-path";
@@ -475,6 +476,18 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
           <p>{t("nx_who_1")}</p>
           <p>{t("nx_who_2")}</p>
           <p>{t("nx_who_3")}</p>
+          <p>
+            {lang === "en"
+              ? "Founder: Mahir Əliyev."
+              : lang === "tr"
+                ? "Kurucu: Mahir Əliyev."
+                : lang === "ar"
+                  ? "المؤسس: Mahir Əliyev."
+                  : lang === "ru"
+                    ? "Основатель: Mahir Əliyev."
+                    : "Qurucu: Mahir Əliyev."}{" "}
+            <a href="mailto:nibrascode@gmail.com">nibrascode@gmail.com</a>
+          </p>
           <p className="nx-verse" lang="ar" dir="rtl">
             {t("remind_verse")}
           </p>
@@ -494,6 +507,7 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
           <NavMenu section="programming" />
         </nav>
         <AppSuggest />
+        <SiteLegal />
         <p className="nx-copy">© 2026 Nibras Code. {t("nx_rights")}</p>
       </footer>
     </main>

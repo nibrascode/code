@@ -2338,6 +2338,33 @@ html[dir="rtl"] .rtl-flip {
   gap: 12px;
 }
 
+.site-legal {
+  display: grid;
+  gap: 6px;
+  width: min(40rem, 100%);
+  margin: 10px auto 0;
+  text-align: center;
+  color: rgb(214 224 245 / 0.86);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.site-legal p,
+.site-legal a {
+  margin: 0;
+}
+
+.site-legal a {
+  color: #c9d7ff;
+}
+
+.site-legal nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 14px;
+}
+
 .footer-panels .nav-pop {
   top: auto;
   bottom: calc(100% + 8px);
@@ -2695,12 +2722,11 @@ html[dir="rtl"] .rtl-flip {
 }
 
 .founder-name {
-  margin: 0 0 10px !important;
-  font-size: 10px !important;
-  font-weight: 400;
-  line-height: 1.2 !important;
-  letter-spacing: 0.01em;
-  color: rgb(78 86 102) !important;
+  margin: 0 0 12px !important;
+  font-size: 15px !important;
+  font-weight: 650;
+  line-height: 1.4 !important;
+  color: #d5def0 !important;
 }
 
 .who-success {
