@@ -36,6 +36,14 @@ const FILES_CARD: Record<Lang, string> = {
   ru: "Загрузите фото, уберите фон — бесплатно, в браузере",
 };
 
+const PDF_CARD: Record<Lang, string> = {
+  az: "PDF birləşdir, böl, sıxışdır, imzala — pulsuz, brauzerdə",
+  en: "Merge, split, compress and sign PDF — free, in your browser",
+  tr: "PDF birleştir, böl, sıkıştır, imzala — ücretsiz, tarayıcıda",
+  ar: "دمج وتقسيم وضغط وتوقيع PDF — مجاناً في المتصفح",
+  ru: "Объединяйте, делите, сжимайте и подписывайте PDF — бесплатно, в браузере",
+};
+
 const IMAGE_CARD: Record<Lang, string> = {
   az: "Şəkil sıx, JPG, PNG və WebP çevir",
   en: "Compress a photo, convert JPG, PNG and WebP",
@@ -388,6 +396,14 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
               <span className="nx-qr-text">
                 <b>Nibras Erase</b>
                 <small>{FILES_CARD[lang]}</small>
+              </span>
+              <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
+            </a>
+            <a className="nx-ai-bar nx-qr-bar" href={localeHref(lang, "/pdf")}>
+              <img src="/apps/nibras-pdf.jpg" alt="" width={36} height={36} />
+              <span className="nx-qr-text">
+                <b>Nibras PDF</b>
+                <small>{PDF_CARD[lang]}</small>
               </span>
               <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
             </a>

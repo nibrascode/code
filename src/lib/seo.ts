@@ -604,6 +604,28 @@ const PAGES: Record<string, Copy> = {
       description: "Загрузите фото, уберите фон, скачайте прозрачный PNG. Бесплатно, без аккаунта, в браузере.",
     },
   },
+  "/pdf": {
+    az: {
+      title: "Nibras PDF — PDF birləşdir, böl, sıxışdır, imzala (pulsuz)",
+      description: "Brauzerdə 19 PDF aləti: birləşdir, böl, sıxışdır, şəkildən PDF, PDF-dən şəkil və Word, OCR, parol, watermark, imza. Pulsuz, hesabsız, fayllar yüklənmir.",
+    },
+    en: {
+      title: "Nibras PDF — merge, split, compress, sign PDF (free)",
+      description: "19 PDF tools in your browser: merge, split, compress, images to PDF, PDF to image and Word, OCR, password, watermark, signature. Free, no account, files stay on your device.",
+    },
+    tr: {
+      title: "Nibras PDF — PDF birleştir, böl, sıkıştır, imzala (ücretsiz)",
+      description: "Tarayıcıda 19 PDF aracı: birleştir, böl, sıkıştır, görselden PDF, PDF'den görsel ve Word, OCR, parola, filigran, imza. Ücretsiz, hesapsız, dosyalar yüklenmez.",
+    },
+    ar: {
+      title: "Nibras PDF — دمج وتقسيم وضغط وتوقيع PDF مجاناً",
+      description: "19 أداة PDF في المتصفح: دمج وتقسيم وضغط وتحويل الصور وWord وOCR وكلمة مرور وعلامة مائية وتوقيع. مجاناً وبلا حساب وتبقى الملفات على جهازك.",
+    },
+    ru: {
+      title: "Nibras PDF — объединить, разделить, сжать, подписать PDF бесплатно",
+      description: "19 PDF-инструментов в браузере: объединение, разделение, сжатие, изображения и Word, OCR, пароль, водяной знак, подпись. Бесплатно, без аккаунта, файлы остаются на устройстве.",
+    },
+  },
   "/qr": {
     az: {
       title: "QR kod generatoru — Nibras QR onlayn",
@@ -907,6 +929,7 @@ function ogImage(path: string) {
   if (bare === "/ai" || bare.startsWith("/ai/")) return `${SITE}/og-ai.jpg`;
   if (bare === "/qr" || bare.startsWith("/qr/")) return `${SITE}/og-qr.jpg`;
   if (bare === "/erase" || bare.startsWith("/erase/")) return `${SITE}/og-tools.jpg`;
+  if (bare === "/pdf" || bare.startsWith("/pdf/")) return `${SITE}/apps/nibras-pdf.jpg`;
   if (bare === "/tools" || bare.startsWith("/tools/")) return `${SITE}/og-tools.jpg`;
   if (bare === "/faq" || bare.startsWith("/faq/")) return `${SITE}/og-faq.jpg`;
   if (bare === "/programming" || bare.startsWith("/programming/")) return `${SITE}/og-programming.jpg`;

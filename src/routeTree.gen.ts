@@ -21,6 +21,7 @@ import { Route as MuqayiseRouteImport } from './routes/muqayise'
 import { Route as NeceRouteImport } from './routes/nece'
 import { Route as NxStudioRouteImport } from './routes/nx-studio'
 import { Route as PaketRouteImport } from './routes/paket'
+import { Route as PdfRouteImport } from './routes/pdf'
 import { Route as PlannerRouteImport } from './routes/planner'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as QrRouteImport } from './routes/qr'
@@ -42,6 +43,7 @@ import { Route as ArMovzuRouteImport } from './routes/ar.movzu'
 import { Route as ArMuqayiseRouteImport } from './routes/ar.muqayise'
 import { Route as ArNeceRouteImport } from './routes/ar.nece'
 import { Route as ArPaketRouteImport } from './routes/ar.paket'
+import { Route as ArPdfRouteImport } from './routes/ar.pdf'
 import { Route as ArQrRouteImport } from './routes/ar.qr'
 import { Route as ArSozRouteImport } from './routes/ar.soz'
 import { Route as ArToolsRouteImport } from './routes/ar.tools'
@@ -55,6 +57,7 @@ import { Route as EnMovzuRouteImport } from './routes/en.movzu'
 import { Route as EnMuqayiseRouteImport } from './routes/en.muqayise'
 import { Route as EnNeceRouteImport } from './routes/en.nece'
 import { Route as EnPaketRouteImport } from './routes/en.paket'
+import { Route as EnPdfRouteImport } from './routes/en.pdf'
 import { Route as EnQrRouteImport } from './routes/en.qr'
 import { Route as EnSozRouteImport } from './routes/en.soz'
 import { Route as EnToolsRouteImport } from './routes/en.tools'
@@ -81,6 +84,7 @@ import { Route as RuMovzuRouteImport } from './routes/ru.movzu'
 import { Route as RuMuqayiseRouteImport } from './routes/ru.muqayise'
 import { Route as RuNeceRouteImport } from './routes/ru.nece'
 import { Route as RuPaketRouteImport } from './routes/ru.paket'
+import { Route as RuPdfRouteImport } from './routes/ru.pdf'
 import { Route as RuQrRouteImport } from './routes/ru.qr'
 import { Route as RuSozRouteImport } from './routes/ru.soz'
 import { Route as RuToolsRouteImport } from './routes/ru.tools'
@@ -96,6 +100,7 @@ import { Route as TrMovzuRouteImport } from './routes/tr.movzu'
 import { Route as TrMuqayiseRouteImport } from './routes/tr.muqayise'
 import { Route as TrNeceRouteImport } from './routes/tr.nece'
 import { Route as TrPaketRouteImport } from './routes/tr.paket'
+import { Route as TrPdfRouteImport } from './routes/tr.pdf'
 import { Route as TrQrRouteImport } from './routes/tr.qr'
 import { Route as TrSozRouteImport } from './routes/tr.soz'
 import { Route as TrToolsRouteImport } from './routes/tr.tools'
@@ -200,6 +205,11 @@ const NxStudioRoute = NxStudioRouteImport.update({
 const PaketRoute = PaketRouteImport.update({
   id: '/paket',
   path: '/paket',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PdfRoute = PdfRouteImport.update({
+  id: '/pdf',
+  path: '/pdf',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PlannerRoute = PlannerRouteImport.update({
@@ -307,6 +317,11 @@ const ArPaketRoute = ArPaketRouteImport.update({
   path: '/paket',
   getParentRoute: () => ArRoute,
 } as any)
+const ArPdfRoute = ArPdfRouteImport.update({
+  id: '/pdf',
+  path: '/pdf',
+  getParentRoute: () => ArRoute,
+} as any)
 const ArQrRoute = ArQrRouteImport.update({
   id: '/qr',
   path: '/qr',
@@ -370,6 +385,11 @@ const EnNeceRoute = EnNeceRouteImport.update({
 const EnPaketRoute = EnPaketRouteImport.update({
   id: '/paket',
   path: '/paket',
+  getParentRoute: () => EnRoute,
+} as any)
+const EnPdfRoute = EnPdfRouteImport.update({
+  id: '/pdf',
+  path: '/pdf',
   getParentRoute: () => EnRoute,
 } as any)
 const EnQrRoute = EnQrRouteImport.update({
@@ -502,6 +522,11 @@ const RuPaketRoute = RuPaketRouteImport.update({
   path: '/paket',
   getParentRoute: () => RuRoute,
 } as any)
+const RuPdfRoute = RuPdfRouteImport.update({
+  id: '/pdf',
+  path: '/pdf',
+  getParentRoute: () => RuRoute,
+} as any)
 const RuQrRoute = RuQrRouteImport.update({
   id: '/qr',
   path: '/qr',
@@ -575,6 +600,11 @@ const TrNeceRoute = TrNeceRouteImport.update({
 const TrPaketRoute = TrPaketRouteImport.update({
   id: '/paket',
   path: '/paket',
+  getParentRoute: () => TrRoute,
+} as any)
+const TrPdfRoute = TrPdfRouteImport.update({
+  id: '/pdf',
+  path: '/pdf',
   getParentRoute: () => TrRoute,
 } as any)
 const TrQrRoute = TrQrRouteImport.update({
@@ -817,6 +847,7 @@ export interface FileRoutesByFullPath {
   '/nece': typeof NeceRouteWithChildren
   '/nx-studio': typeof NxStudioRoute
   '/paket': typeof PaketRoute
+  '/pdf': typeof PdfRoute
   '/planner': typeof PlannerRoute
   '/privacy': typeof PrivacyRouteWithChildren
   '/qr': typeof QrRoute
@@ -838,6 +869,7 @@ export interface FileRoutesByFullPath {
   '/ar/muqayise': typeof ArMuqayiseRouteWithChildren
   '/ar/nece': typeof ArNeceRouteWithChildren
   '/ar/paket': typeof ArPaketRoute
+  '/ar/pdf': typeof ArPdfRoute
   '/ar/qr': typeof ArQrRoute
   '/ar/soz': typeof ArSozRouteWithChildren
   '/ar/tools': typeof ArToolsRouteWithChildren
@@ -851,6 +883,7 @@ export interface FileRoutesByFullPath {
   '/en/muqayise': typeof EnMuqayiseRouteWithChildren
   '/en/nece': typeof EnNeceRouteWithChildren
   '/en/paket': typeof EnPaketRoute
+  '/en/pdf': typeof EnPdfRoute
   '/en/qr': typeof EnQrRoute
   '/en/soz': typeof EnSozRouteWithChildren
   '/en/tools': typeof EnToolsRouteWithChildren
@@ -873,6 +906,7 @@ export interface FileRoutesByFullPath {
   '/ru/muqayise': typeof RuMuqayiseRouteWithChildren
   '/ru/nece': typeof RuNeceRouteWithChildren
   '/ru/paket': typeof RuPaketRoute
+  '/ru/pdf': typeof RuPdfRoute
   '/ru/qr': typeof RuQrRoute
   '/ru/soz': typeof RuSozRouteWithChildren
   '/ru/tools': typeof RuToolsRouteWithChildren
@@ -888,6 +922,7 @@ export interface FileRoutesByFullPath {
   '/tr/muqayise': typeof TrMuqayiseRouteWithChildren
   '/tr/nece': typeof TrNeceRouteWithChildren
   '/tr/paket': typeof TrPaketRoute
+  '/tr/pdf': typeof TrPdfRoute
   '/tr/qr': typeof TrQrRoute
   '/tr/soz': typeof TrSozRouteWithChildren
   '/tr/tools': typeof TrToolsRouteWithChildren
@@ -951,6 +986,7 @@ export interface FileRoutesByTo {
   '/nece': typeof NeceRouteWithChildren
   '/nx-studio': typeof NxStudioRoute
   '/paket': typeof PaketRoute
+  '/pdf': typeof PdfRoute
   '/planner': typeof PlannerRoute
   '/privacy': typeof PrivacyRouteWithChildren
   '/qr': typeof QrRoute
@@ -971,6 +1007,7 @@ export interface FileRoutesByTo {
   '/ar/muqayise': typeof ArMuqayiseRouteWithChildren
   '/ar/nece': typeof ArNeceRouteWithChildren
   '/ar/paket': typeof ArPaketRoute
+  '/ar/pdf': typeof ArPdfRoute
   '/ar/qr': typeof ArQrRoute
   '/ar/soz': typeof ArSozRouteWithChildren
   '/ar/tools': typeof ArToolsRouteWithChildren
@@ -984,6 +1021,7 @@ export interface FileRoutesByTo {
   '/en/muqayise': typeof EnMuqayiseRouteWithChildren
   '/en/nece': typeof EnNeceRouteWithChildren
   '/en/paket': typeof EnPaketRoute
+  '/en/pdf': typeof EnPdfRoute
   '/en/qr': typeof EnQrRoute
   '/en/soz': typeof EnSozRouteWithChildren
   '/en/tools': typeof EnToolsRouteWithChildren
@@ -1006,6 +1044,7 @@ export interface FileRoutesByTo {
   '/ru/muqayise': typeof RuMuqayiseRouteWithChildren
   '/ru/nece': typeof RuNeceRouteWithChildren
   '/ru/paket': typeof RuPaketRoute
+  '/ru/pdf': typeof RuPdfRoute
   '/ru/qr': typeof RuQrRoute
   '/ru/soz': typeof RuSozRouteWithChildren
   '/ru/tools': typeof RuToolsRouteWithChildren
@@ -1021,6 +1060,7 @@ export interface FileRoutesByTo {
   '/tr/muqayise': typeof TrMuqayiseRouteWithChildren
   '/tr/nece': typeof TrNeceRouteWithChildren
   '/tr/paket': typeof TrPaketRoute
+  '/tr/pdf': typeof TrPdfRoute
   '/tr/qr': typeof TrQrRoute
   '/tr/soz': typeof TrSozRouteWithChildren
   '/tr/tools': typeof TrToolsRouteWithChildren
@@ -1085,6 +1125,7 @@ export interface FileRoutesById {
   '/nece': typeof NeceRouteWithChildren
   '/nx-studio': typeof NxStudioRoute
   '/paket': typeof PaketRoute
+  '/pdf': typeof PdfRoute
   '/planner': typeof PlannerRoute
   '/privacy': typeof PrivacyRouteWithChildren
   '/qr': typeof QrRoute
@@ -1106,6 +1147,7 @@ export interface FileRoutesById {
   '/ar/muqayise': typeof ArMuqayiseRouteWithChildren
   '/ar/nece': typeof ArNeceRouteWithChildren
   '/ar/paket': typeof ArPaketRoute
+  '/ar/pdf': typeof ArPdfRoute
   '/ar/qr': typeof ArQrRoute
   '/ar/soz': typeof ArSozRouteWithChildren
   '/ar/tools': typeof ArToolsRouteWithChildren
@@ -1119,6 +1161,7 @@ export interface FileRoutesById {
   '/en/muqayise': typeof EnMuqayiseRouteWithChildren
   '/en/nece': typeof EnNeceRouteWithChildren
   '/en/paket': typeof EnPaketRoute
+  '/en/pdf': typeof EnPdfRoute
   '/en/qr': typeof EnQrRoute
   '/en/soz': typeof EnSozRouteWithChildren
   '/en/tools': typeof EnToolsRouteWithChildren
@@ -1141,6 +1184,7 @@ export interface FileRoutesById {
   '/ru/muqayise': typeof RuMuqayiseRouteWithChildren
   '/ru/nece': typeof RuNeceRouteWithChildren
   '/ru/paket': typeof RuPaketRoute
+  '/ru/pdf': typeof RuPdfRoute
   '/ru/qr': typeof RuQrRoute
   '/ru/soz': typeof RuSozRouteWithChildren
   '/ru/tools': typeof RuToolsRouteWithChildren
@@ -1156,6 +1200,7 @@ export interface FileRoutesById {
   '/tr/muqayise': typeof TrMuqayiseRouteWithChildren
   '/tr/nece': typeof TrNeceRouteWithChildren
   '/tr/paket': typeof TrPaketRoute
+  '/tr/pdf': typeof TrPdfRoute
   '/tr/qr': typeof TrQrRoute
   '/tr/soz': typeof TrSozRouteWithChildren
   '/tr/tools': typeof TrToolsRouteWithChildren
@@ -1221,6 +1266,7 @@ export interface FileRouteTypes {
     | '/nece'
     | '/nx-studio'
     | '/paket'
+    | '/pdf'
     | '/planner'
     | '/privacy'
     | '/qr'
@@ -1242,6 +1288,7 @@ export interface FileRouteTypes {
     | '/ar/muqayise'
     | '/ar/nece'
     | '/ar/paket'
+    | '/ar/pdf'
     | '/ar/qr'
     | '/ar/soz'
     | '/ar/tools'
@@ -1255,6 +1302,7 @@ export interface FileRouteTypes {
     | '/en/muqayise'
     | '/en/nece'
     | '/en/paket'
+    | '/en/pdf'
     | '/en/qr'
     | '/en/soz'
     | '/en/tools'
@@ -1277,6 +1325,7 @@ export interface FileRouteTypes {
     | '/ru/muqayise'
     | '/ru/nece'
     | '/ru/paket'
+    | '/ru/pdf'
     | '/ru/qr'
     | '/ru/soz'
     | '/ru/tools'
@@ -1292,6 +1341,7 @@ export interface FileRouteTypes {
     | '/tr/muqayise'
     | '/tr/nece'
     | '/tr/paket'
+    | '/tr/pdf'
     | '/tr/qr'
     | '/tr/soz'
     | '/tr/tools'
@@ -1355,6 +1405,7 @@ export interface FileRouteTypes {
     | '/nece'
     | '/nx-studio'
     | '/paket'
+    | '/pdf'
     | '/planner'
     | '/privacy'
     | '/qr'
@@ -1375,6 +1426,7 @@ export interface FileRouteTypes {
     | '/ar/muqayise'
     | '/ar/nece'
     | '/ar/paket'
+    | '/ar/pdf'
     | '/ar/qr'
     | '/ar/soz'
     | '/ar/tools'
@@ -1388,6 +1440,7 @@ export interface FileRouteTypes {
     | '/en/muqayise'
     | '/en/nece'
     | '/en/paket'
+    | '/en/pdf'
     | '/en/qr'
     | '/en/soz'
     | '/en/tools'
@@ -1410,6 +1463,7 @@ export interface FileRouteTypes {
     | '/ru/muqayise'
     | '/ru/nece'
     | '/ru/paket'
+    | '/ru/pdf'
     | '/ru/qr'
     | '/ru/soz'
     | '/ru/tools'
@@ -1425,6 +1479,7 @@ export interface FileRouteTypes {
     | '/tr/muqayise'
     | '/tr/nece'
     | '/tr/paket'
+    | '/tr/pdf'
     | '/tr/qr'
     | '/tr/soz'
     | '/tr/tools'
@@ -1488,6 +1543,7 @@ export interface FileRouteTypes {
     | '/nece'
     | '/nx-studio'
     | '/paket'
+    | '/pdf'
     | '/planner'
     | '/privacy'
     | '/qr'
@@ -1509,6 +1565,7 @@ export interface FileRouteTypes {
     | '/ar/muqayise'
     | '/ar/nece'
     | '/ar/paket'
+    | '/ar/pdf'
     | '/ar/qr'
     | '/ar/soz'
     | '/ar/tools'
@@ -1522,6 +1579,7 @@ export interface FileRouteTypes {
     | '/en/muqayise'
     | '/en/nece'
     | '/en/paket'
+    | '/en/pdf'
     | '/en/qr'
     | '/en/soz'
     | '/en/tools'
@@ -1544,6 +1602,7 @@ export interface FileRouteTypes {
     | '/ru/muqayise'
     | '/ru/nece'
     | '/ru/paket'
+    | '/ru/pdf'
     | '/ru/qr'
     | '/ru/soz'
     | '/ru/tools'
@@ -1559,6 +1618,7 @@ export interface FileRouteTypes {
     | '/tr/muqayise'
     | '/tr/nece'
     | '/tr/paket'
+    | '/tr/pdf'
     | '/tr/qr'
     | '/tr/soz'
     | '/tr/tools'
@@ -1623,6 +1683,7 @@ export interface RootRouteChildren {
   NeceRoute: typeof NeceRouteWithChildren
   NxStudioRoute: typeof NxStudioRoute
   PaketRoute: typeof PaketRoute
+  PdfRoute: typeof PdfRoute
   PlannerRoute: typeof PlannerRoute
   PrivacyRoute: typeof PrivacyRouteWithChildren
   QrRoute: typeof QrRoute
@@ -1728,6 +1789,13 @@ declare module '@tanstack/react-router' {
       path: '/paket'
       fullPath: '/paket'
       preLoaderRoute: typeof PaketRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pdf': {
+      id: '/pdf'
+      path: '/pdf'
+      fullPath: '/pdf'
+      preLoaderRoute: typeof PdfRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/planner': {
@@ -1877,6 +1945,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArPaketRouteImport
       parentRoute: typeof ArRoute
     }
+    '/ar/pdf': {
+      id: '/ar/pdf'
+      path: '/pdf'
+      fullPath: '/ar/pdf'
+      preLoaderRoute: typeof ArPdfRouteImport
+      parentRoute: typeof ArRoute
+    }
     '/ar/qr': {
       id: '/ar/qr'
       path: '/qr'
@@ -1966,6 +2041,13 @@ declare module '@tanstack/react-router' {
       path: '/paket'
       fullPath: '/en/paket'
       preLoaderRoute: typeof EnPaketRouteImport
+      parentRoute: typeof EnRoute
+    }
+    '/en/pdf': {
+      id: '/en/pdf'
+      path: '/pdf'
+      fullPath: '/en/pdf'
+      preLoaderRoute: typeof EnPdfRouteImport
       parentRoute: typeof EnRoute
     }
     '/en/qr': {
@@ -2150,6 +2232,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RuPaketRouteImport
       parentRoute: typeof RuRoute
     }
+    '/ru/pdf': {
+      id: '/ru/pdf'
+      path: '/pdf'
+      fullPath: '/ru/pdf'
+      preLoaderRoute: typeof RuPdfRouteImport
+      parentRoute: typeof RuRoute
+    }
     '/ru/qr': {
       id: '/ru/qr'
       path: '/qr'
@@ -2253,6 +2342,13 @@ declare module '@tanstack/react-router' {
       path: '/paket'
       fullPath: '/tr/paket'
       preLoaderRoute: typeof TrPaketRouteImport
+      parentRoute: typeof TrRoute
+    }
+    '/tr/pdf': {
+      id: '/tr/pdf'
+      path: '/pdf'
+      fullPath: '/tr/pdf'
+      preLoaderRoute: typeof TrPdfRouteImport
       parentRoute: typeof TrRoute
     }
     '/tr/qr': {
@@ -2670,6 +2766,7 @@ interface ArRouteChildren {
   ArMuqayiseRoute: typeof ArMuqayiseRouteWithChildren
   ArNeceRoute: typeof ArNeceRouteWithChildren
   ArPaketRoute: typeof ArPaketRoute
+  ArPdfRoute: typeof ArPdfRoute
   ArQrRoute: typeof ArQrRoute
   ArSozRoute: typeof ArSozRouteWithChildren
   ArToolsRoute: typeof ArToolsRouteWithChildren
@@ -2687,6 +2784,7 @@ const ArRouteChildren: ArRouteChildren = {
   ArMuqayiseRoute: ArMuqayiseRouteWithChildren,
   ArNeceRoute: ArNeceRouteWithChildren,
   ArPaketRoute: ArPaketRoute,
+  ArPdfRoute: ArPdfRoute,
   ArQrRoute: ArQrRoute,
   ArSozRoute: ArSozRouteWithChildren,
   ArToolsRoute: ArToolsRouteWithChildren,
@@ -2793,6 +2891,7 @@ interface EnRouteChildren {
   EnMuqayiseRoute: typeof EnMuqayiseRouteWithChildren
   EnNeceRoute: typeof EnNeceRouteWithChildren
   EnPaketRoute: typeof EnPaketRoute
+  EnPdfRoute: typeof EnPdfRoute
   EnQrRoute: typeof EnQrRoute
   EnSozRoute: typeof EnSozRouteWithChildren
   EnToolsRoute: typeof EnToolsRouteWithChildren
@@ -2810,6 +2909,7 @@ const EnRouteChildren: EnRouteChildren = {
   EnMuqayiseRoute: EnMuqayiseRouteWithChildren,
   EnNeceRoute: EnNeceRouteWithChildren,
   EnPaketRoute: EnPaketRoute,
+  EnPdfRoute: EnPdfRoute,
   EnQrRoute: EnQrRoute,
   EnSozRoute: EnSozRouteWithChildren,
   EnToolsRoute: EnToolsRouteWithChildren,
@@ -2973,6 +3073,7 @@ interface RuRouteChildren {
   RuMuqayiseRoute: typeof RuMuqayiseRouteWithChildren
   RuNeceRoute: typeof RuNeceRouteWithChildren
   RuPaketRoute: typeof RuPaketRoute
+  RuPdfRoute: typeof RuPdfRoute
   RuQrRoute: typeof RuQrRoute
   RuSozRoute: typeof RuSozRouteWithChildren
   RuToolsRoute: typeof RuToolsRouteWithChildren
@@ -2991,6 +3092,7 @@ const RuRouteChildren: RuRouteChildren = {
   RuMuqayiseRoute: RuMuqayiseRouteWithChildren,
   RuNeceRoute: RuNeceRouteWithChildren,
   RuPaketRoute: RuPaketRoute,
+  RuPdfRoute: RuPdfRoute,
   RuQrRoute: RuQrRoute,
   RuSozRoute: RuSozRouteWithChildren,
   RuToolsRoute: RuToolsRouteWithChildren,
@@ -3118,6 +3220,7 @@ interface TrRouteChildren {
   TrMuqayiseRoute: typeof TrMuqayiseRouteWithChildren
   TrNeceRoute: typeof TrNeceRouteWithChildren
   TrPaketRoute: typeof TrPaketRoute
+  TrPdfRoute: typeof TrPdfRoute
   TrQrRoute: typeof TrQrRoute
   TrSozRoute: typeof TrSozRouteWithChildren
   TrToolsRoute: typeof TrToolsRouteWithChildren
@@ -3135,6 +3238,7 @@ const TrRouteChildren: TrRouteChildren = {
   TrMuqayiseRoute: TrMuqayiseRouteWithChildren,
   TrNeceRoute: TrNeceRouteWithChildren,
   TrPaketRoute: TrPaketRoute,
+  TrPdfRoute: TrPdfRoute,
   TrQrRoute: TrQrRoute,
   TrSozRoute: TrSozRouteWithChildren,
   TrToolsRoute: TrToolsRouteWithChildren,
@@ -3180,6 +3284,7 @@ const rootRouteChildren: RootRouteChildren = {
   NeceRoute: NeceRouteWithChildren,
   NxStudioRoute: NxStudioRoute,
   PaketRoute: PaketRoute,
+  PdfRoute: PdfRoute,
   PlannerRoute: PlannerRoute,
   PrivacyRoute: PrivacyRouteWithChildren,
   QrRoute: QrRoute,
