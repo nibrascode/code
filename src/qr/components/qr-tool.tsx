@@ -241,10 +241,10 @@ function CreatePanel({ pro }: { pro: boolean }) {
 
         <section className="rounded-2xl border border-border/60 bg-bg-elevated p-4 shadow-[var(--shadow-border)] lg:sticky lg:top-24 lg:self-start">
           <div data-testid="qr-preview" className="mx-auto w-full max-w-[220px] lg:max-w-[272px]">
-            <QrPreview value={payload || "https://www.nibrascode.com"} design={gen.design} branded={limits.branded} className={cn("rounded-xl p-2 shadow-[0_1px_3px_rgb(0_0_0/0.12)] [&_svg]:rounded-md", !gen.design.transparent && "bg-white")} />
+            <QrPreview value={payload || "https://nibrascode.com"} design={gen.design} branded={limits.branded} className={cn("rounded-xl p-2 shadow-[0_1px_3px_rgb(0_0_0/0.12)] [&_svg]:rounded-md", !gen.design.transparent && "bg-white")} />
           </div>
           <div className="mx-auto mt-4 w-full max-w-[320px] lg:max-w-none">
-            <ExportBar value={payload || "https://www.nibrascode.com"} design={gen.design} name={name} plan={plan} onLocked={showLock} />
+            <ExportBar value={payload || "https://nibrascode.com"} design={gen.design} name={name} plan={plan} onLocked={showLock} />
           </div>
         </section>
 

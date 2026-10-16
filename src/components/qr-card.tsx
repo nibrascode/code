@@ -53,7 +53,7 @@ export function QrCard({ lang, preset }: { lang: string; preset: string }) {
     }
     const value = buildQrValue(cur.id, d);
     if (!value) return setErr(C.bad);
-    const u = new URL(`https://www.nibrascode.com${lang === "az" ? "" : "/" + lang}/qr`);
+    const u = new URL(`https://nibrascode.com${lang === "az" ? "" : "/" + lang}/qr`);
     u.searchParams.set("type", cur.id);
     for (const [k, v] of Object.entries(d)) if (v) u.searchParams.set(k, v);
     setErr("");

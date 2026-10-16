@@ -3,4 +3,4 @@ Allow: /
 Disallow: /nx-studio
 Disallow: /panel
 
-Sitemap: https://www.nibrascode.com/sitemap.xml
+Sitemap: https://nibrascode.com/sitemap.xml
