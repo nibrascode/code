@@ -2,8 +2,128 @@
   "redirects": [
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "www.nibrascode.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "www.nibrascode.com"
+        }
+      ],
       "destination": "https://nibrascode.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:prefix(|en/|tr/|ar/|ru/)programming/python-bop-first-steps",
+      "destination": "/:prefix/programming/python-dars-first-steps",
+      "permanent": true
+    },
+    {
+      "source": "/:prefix(|en/|tr/|ar/|ru/)programming/python-bop-basics",
+      "destination": "/:prefix/programming/python-dars-basics",
+      "permanent": true
+    },
+    {
+      "source": "/:prefix(|en/|tr/|ar/|ru/)programming/python-bop-operators",
+      "destination": "/:prefix/programming/python-dars-operators",
+      "permanent": true
+    },
+    {
+      "source": "/:prefix(|en/|tr/|ar/|ru/)programming/python-bop-control-flow",
+      "destination": "/:prefix/programming/python-dars-control-flow",
+      "permanent": true
+    },
+    {
+      "source": "/:prefix(|en/|tr/|ar/|ru/)programming/python-bop-functions",
+      "destination": "/:prefix/programming/python-dars-functions",
+      "permanent": true
+    },
+    {
+      "source": "/:prefix(|en/|tr/|ar/|ru/)programming/python-bop-modules",
+      "destination": "/:prefix/programming/python-dars-modules",
+      "permanent": true
+    },
+    {
+      "source": "/:prefix(|en/|tr/|ar/|ru/)programming/python-bop-data-structures",
+      "destination": "/:prefix/programming/python-dars-data-structures",
+      "permanent": true
+    },
+    {
+      "source": "/:prefix(|en/|tr/|ar/|ru/)programming/python-bop-problem-solving",
+      "destination": "/:prefix/programming/python-dars-problem-solving",
+      "permanent": true
+    },
+    {
+      "source": "/:prefix(|en/|tr/|ar/|ru/)programming/python-bop-oop",
+      "destination": "/:prefix/programming/python-dars-oop",
+      "permanent": true
+    },
+    {
+      "source": "/:prefix(|en/|tr/|ar/|ru/)programming/python-bop-input-output",
+      "destination": "/:prefix/programming/python-dars-input-output",
+      "permanent": true
+    },
+    {
+      "source": "/:prefix(|en/|tr/|ar/|ru/)programming/python-bop-exceptions",
+      "destination": "/:prefix/programming/python-dars-exceptions",
+      "permanent": true
+    },
+    {
+      "source": "/:prefix(|en/|tr/|ar/|ru/)programming/python-bop-stdlib",
+      "destination": "/:prefix/programming/python-dars-stdlib",
+      "permanent": true
+    },
+    {
+      "source": "/:prefix(|en/|tr/|ar/|ru/)programming/html-mdn-basic-syntax",
+      "destination": "/:prefix/programming/html-dars-basic-syntax",
+      "permanent": true
+    },
+    {
+      "source": "/:prefix(|en/|tr/|ar/|ru/)programming/html-mdn-headings-paragraphs",
+      "destination": "/:prefix/programming/html-dars-headings-paragraphs",
+      "permanent": true
+    },
+    {
+      "source": "/:prefix(|en/|tr/|ar/|ru/)programming/html-mdn-lists",
+      "destination": "/:prefix/programming/html-dars-lists",
+      "permanent": true
+    },
+    {
+      "source": "/:prefix(|en/|tr/|ar/|ru/)programming/html-mdn-emphasis",
+      "destination": "/:prefix/programming/html-dars-emphasis",
+      "permanent": true
+    },
+    {
+      "source": "/:prefix(|en/|tr/|ar/|ru/)programming/html-mdn-links",
+      "destination": "/:prefix/programming/html-dars-links",
+      "permanent": true
+    },
+    {
+      "source": "/:prefix(|en/|tr/|ar/|ru/)programming/html-mdn-images",
+      "destination": "/:prefix/programming/html-dars-images",
+      "permanent": true
+    },
+    {
+      "source": "/:prefix(|en/|tr/|ar/|ru/)programming/html-mdn-tables",
+      "destination": "/:prefix/programming/html-dars-tables",
+      "permanent": true
+    },
+    {
+      "source": "/:prefix(|en/|tr/|ar/|ru/)programming/html-mdn-forms",
+      "destination": "/:prefix/programming/html-dars-forms",
+      "permanent": true
+    },
+    {
+      "source": "/:prefix(|en/|tr/|ar/|ru/)programming/html-mdn-document-structure",
+      "destination": "/:prefix/programming/html-dars-document-structure",
+      "permanent": true
+    },
+    {
+      "source": "/:prefix(|en/|tr/|ar/|ru/)programming/html-mdn-metadata",
+      "destination": "/:prefix/programming/html-dars-metadata",
+      "permanent": true
+    },
+    {
+      "source": "/:prefix(|en/|tr/|ar/|ru/)programming/html-mdn-debugging",
+      "destination": "/:prefix/programming/html-dars-debugging",
       "permanent": true
     }
   ],
@@ -15,9 +135,18 @@
           "key": "Content-Security-Policy",
           "value": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; media-src 'self' blob:; connect-src 'self' blob: https://staticimgly.com https://qvwqqpxrvnrnwvyckwlo.supabase.co wss://qvwqqpxrvnrnwvyckwlo.supabase.co https://rbnhwyvpuobdmgqjdiyj.supabase.co https://api.github.com; worker-src 'self' blob:; frame-src 'self'; upgrade-insecure-requests"
         },
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "X-Frame-Options", "value": "DENY" },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
         {
           "key": "Permissions-Policy",
           "value": "accelerometer=(), camera=(self), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()"
