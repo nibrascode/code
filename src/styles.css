@@ -3993,46 +3993,13 @@ body.is-home .noise {
 .nx-stage {
   position: relative;
   isolation: isolate;
-  border-radius: 28px;
-  box-shadow: 0 30px 70px rgb(0 0 0 / 0.35);
+  background: none;
+  box-shadow: none;
 }
 
 .nx-stage::before,
 .nx-stage::after {
-  content: "";
-  position: absolute;
-  border-radius: inherit;
-  pointer-events: none;
-  background: conic-gradient(
-    from var(--nx-angle),
-    transparent 0deg,
-    rgb(126 231 255 / 0.15) 36deg,
-    #7ee7ff 72deg,
-    #c9a6ff 112deg,
-    #ffd27a 148deg,
-    #ff8eb8 176deg,
-    transparent 214deg,
-    transparent 360deg
-  );
-  animation: nx-edge 5.5s linear infinite;
-}
-
-.nx-stage::before {
-  inset: 0;
-  z-index: 2;
-  padding: 1px;
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  mask-composite: exclude;
-}
-
-.nx-stage::after {
-  display: none;
+  content: none;
 }
 
 .nx-5d {
@@ -4044,36 +4011,23 @@ body.is-home .noise {
   place-items: center;
   width: 100%;
   aspect-ratio: 1;
-  overflow: hidden;
-  border-radius: 27px;
+  overflow: visible;
+  border-radius: 0;
   perspective: 900px;
   cursor: grab;
   touch-action: none;
   user-select: none;
-  background: radial-gradient(circle at 50% 42%, #1a1c4d 0%, #0b0c26 52%, #05050f 100%);
+  background: none;
 }
 
 .nx-5d:active { cursor: grabbing; }
 
 .nx-5d::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(circle at var(--mx) var(--my), rgb(130 170 255 / 0.26), transparent 46%);
+  content: none;
 }
 
 .nx-5d-floor {
-  position: absolute;
-  bottom: 12%;
-  left: 50%;
-  width: 58%;
-  height: 9%;
-  border-radius: 50%;
-  pointer-events: none;
-  background: radial-gradient(closest-side, rgb(95 216 255 / 0.5), rgb(143 107 255 / 0.22) 60%, transparent);
-  filter: blur(5px);
-  transform: translateX(-50%);
+  display: none;
 }
 
 .nx-5d-scene {
