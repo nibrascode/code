@@ -14,6 +14,7 @@ export const COPY: Record<Lang, EraseCopy> = {
     hint: "Qalan fonu barmaq və ya siçanla sil. Səhv getsə, qaytar.",
     tabEdit: "Düzəlt", tabCompare: "Müqayisə", before: "Əvvəl", after: "Sonra", slider: "Əvvəl / sonra",
     queue: "Şəkillər", status_queued: "Növbədə", status_working: "İşlənir", status_done: "Hazır", status_error: "Xəta", remove: "Sil",
+    panelLayout: "Düzən", panelExport: "İxrac",
     jpgQuality: "JPG/WebP keyfiyyəti",
   },
   en: {
@@ -27,6 +28,7 @@ export const COPY: Record<Lang, EraseCopy> = {
     hint: "Paint away leftover background. Restore if you erase too much.",
     tabEdit: "Edit", tabCompare: "Compare", before: "Before", after: "After", slider: "Before / after",
     queue: "Photos", status_queued: "Queued", status_working: "Working", status_done: "Done", status_error: "Error", remove: "Remove",
+    panelLayout: "Layout", panelExport: "Export",
     jpgQuality: "JPG/WebP quality",
   },
   tr: {
@@ -40,6 +42,7 @@ export const COPY: Record<Lang, EraseCopy> = {
     hint: "Kalan arka planı parmak veya fareyle sil. Fazla silersen geri al.",
     tabEdit: "Düzenle", tabCompare: "Karşılaştır", before: "Önce", after: "Sonra", slider: "Önce / sonra",
     queue: "Fotoğraflar", status_queued: "Sırada", status_working: "İşleniyor", status_done: "Hazır", status_error: "Hata", remove: "Kaldır",
+    panelLayout: "Düzen", panelExport: "Dışa aktar",
     jpgQuality: "JPG/WebP kalitesi",
   },
   ar: {
@@ -53,6 +56,7 @@ export const COPY: Record<Lang, EraseCopy> = {
     hint: "امسح الخلفية المتبقية بإصبعك أو الفأرة. أعد ما مُسح بالخطأ.",
     tabEdit: "تعديل", tabCompare: "مقارنة", before: "قبل", after: "بعد", slider: "قبل / بعد",
     queue: "الصور", status_queued: "في الانتظار", status_working: "جارٍ", status_done: "جاهز", status_error: "خطأ", remove: "حذف",
+    panelLayout: "التخطيط", panelExport: "التصدير",
     jpgQuality: "جودة JPG/WebP",
   },
   ru: {
@@ -66,6 +70,7 @@ export const COPY: Record<Lang, EraseCopy> = {
     hint: "Сотрите остатки фона пальцем или мышью. Лишнее верните.",
     tabEdit: "Правка", tabCompare: "Сравнение", before: "До", after: "После", slider: "До / после",
     queue: "Фото", status_queued: "В очереди", status_working: "Идёт", status_done: "Готово", status_error: "Ошибка", remove: "Убрать",
+    panelLayout: "Макет", panelExport: "Экспорт",
     jpgQuality: "Качество JPG/WebP",
   },
 };
