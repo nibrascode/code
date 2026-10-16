@@ -3,7 +3,7 @@ import type { ProgrammingSection } from "@/lib/programming";
 import { findCourse, type CoursePage } from "./meta";
 import type { OwnSection } from "./own-types";
 
-const DATA = import.meta.glob<{ default: ProgrammingSection[] }>("./data/*.json");
+const BOOK = import.meta.glob<{ default: OwnSection[] }>("./book/*.ts");
 
 function resolveOwn(sections: OwnSection[], lang: Lang): ProgrammingSection[] {
   return sections.map((s) => ({
@@ -27,8 +27,7 @@ export async function loadCourseSections(slug: string, lang: Lang): Promise<Prog
     const all = page.kind === "python" ? (mod as typeof import("./own-python")).OWN_PYTHON : (mod as typeof import("./own-html")).OWN_HTML;
     return resolveOwn(all[page.file] ?? [], lang);
   }
-  const loader = DATA[`./data/${page.source}-${page.file}.json`];
+  const loader = BOOK[`./book/${page.kind}-${page.file}.ts`];
   if (!loader) return [];
-  const sections = (await loader()).default;
-  return sections as ProgrammingSection[];
+  return resolveOwn((await loader()).default, lang);
 }

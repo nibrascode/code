@@ -1,0 +1,24 @@
+import { C, P, S } from "../dsl";
+
+export default [
+  S("overview", ["Standart kitabxana nədir", "What the standard library is", "Standart kütüphane nedir", "ما المكتبة القياسية", "Что такое стандартная библиотека"],
+    P("Python-la birlikdə yüzlərlə hazır modul gəlir. Əvvəl özün yazmağa çalışmazdan öncə hazır həllin olub-olmadığına bax; bu, vaxta qənaət edir və daha etibarlıdır.",
+      "Hundreds of ready modules ship with Python. Before writing something yourself, check whether a ready solution exists; it saves time and is more reliable.",
+      "Python ile birlikte yüzlerce hazır modül gelir. Kendin yazmadan önce hazır bir çözüm olup olmadığına bak; zaman kazandırır ve daha güvenilirdir.",
+      "تأتي مئات الوحدات الجاهزة مع بايثون. قبل أن تكتب شيئًا بنفسك تحقق من وجود حل جاهز؛ فهذا يوفر الوقت وهو أوثق.",
+      "Вместе с Python поставляются сотни готовых модулей. Прежде чем писать самому, проверьте, нет ли готового решения: это экономит время и надёжнее.")),
+  S("sys-os", ["sys, os və pathlib", "sys, os and pathlib", "sys, os ve pathlib", "sys وos وpathlib", "sys, os и pathlib"],
+    P("sys interpretator haqqında məlumat verir (sys.version, sys.argv). os əməliyyat sistemi ilə işləyir. Fayl yollarını pathlib ilə yazmaq daha təmizdir və hər sistemdə eyni işləyir.",
+      "sys reports about the interpreter (sys.version, sys.argv). os talks to the operating system. Writing file paths with pathlib is cleaner and works the same everywhere.",
+      "sys yorumlayıcı hakkında bilgi verir (sys.version, sys.argv). os işletim sistemiyle çalışır. Dosya yollarını pathlib ile yazmak daha temizdir ve her yerde aynı çalışır.",
+      "تُخبرك sys عن المفسِّر (sys.version وsys.argv) وتتعامل os مع نظام التشغيل. وكتابة المسارات بـ pathlib أنظف وتعمل بالطريقة نفسها في كل مكان.",
+      "sys сообщает сведения об интерпретаторе (sys.version, sys.argv). os работает с операционной системой. Пути удобнее писать через pathlib: это чище и одинаково везде."),
+    C("import sys, os\nfrom pathlib import Path\n\nprint(sys.version_info[:2])\nprint(os.getcwd())\nfor p in Path(\".\").glob(\"*.py\"):\n    print(p.name, p.stat().st_size)")),
+  S("time-log", ["datetime, random və logging", "datetime, random and logging", "datetime, random ve logging", "datetime وrandom وlogging", "datetime, random и logging"],
+    P("datetime tarix və vaxtla işləyir, random təsadüfi seçim edir, logging isə proqramın baş verənləri haqqında qeydləri fayla və ya ekrana yazır; print-dən fərqli olaraq səviyyələri var (DEBUG, INFO, WARNING, ERROR).",
+      "datetime handles dates and times, random makes random choices, and logging records what the program does to a file or the screen; unlike print it has levels (DEBUG, INFO, WARNING, ERROR).",
+      "datetime tarih ve saatle çalışır, random rastgele seçim yapar, logging ise programın olanlarını dosyaya veya ekrana kaydeder; print'ten farklı olarak seviyeleri vardır (DEBUG, INFO, WARNING, ERROR).",
+      "تتعامل datetime مع التاريخ والوقت وتجري random اختيارات عشوائية وتسجّل logging ما يحدث في البرنامج في ملف أو على الشاشة؛ وبخلاف print لها مستويات (DEBUG وINFO وWARNING وERROR).",
+      "datetime работает с датой и временем, random делает случайный выбор, а logging записывает события программы в файл или на экран; в отличие от print, у него есть уровни (DEBUG, INFO, WARNING, ERROR)."),
+    C("import logging, random\nfrom datetime import date, timedelta\n\nlogging.basicConfig(level=logging.INFO, format=\"%(levelname)s: %(message)s\")\ndeadline = date.today() + timedelta(days=14)\nlogging.info(\"deadline is %s\", deadline)\nprint(random.choice([\"red\", \"green\", \"blue\"]))")),
+] ;
