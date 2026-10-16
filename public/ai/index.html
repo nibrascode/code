@@ -1382,7 +1382,7 @@
         return;
       }
       // gizli kontekst sətri (::ctx:: …) «növbəti ayə» üçündür: göstərilmir
-      let src = String(text || "").replace(/\n*^::ctx:: [^\n]*$/gm, "").replace(/::qrform::[a-z]*/g, "");
+      let src = String(text || "").replace(/\n*^::ctx:: [^\n]*$/gm, "").replace(/::qrform::[a-z]*(?:@[a-z]{2})?/g, "");
       // hazır oyun: gizli «::game:: slug | Ad» sətri göstərilmir; kod bloku yoxdursa (serverdən bərpa) «yenidən göstər» düyməsi
       if (src.indexOf("::game::") >= 0) {
         const hasCode = src.indexOf("```") >= 0;
@@ -1451,29 +1451,36 @@
           window.open(url, "_blank", "noopener");
         });
       });
-      const formHit = String(text || "").match(/::qrform::([a-z]*)/);
-      if (formHit) mountQrForm(el, formHit[1] || "");
+      const formHit = String(text || "").match(/::qrform::([a-z]*)(?:@([a-z]{2}))?/);
+      if (formHit) mountQrForm(el, formHit[1] || "", formHit[2] || "");
     }
+    const QR_CARD_I18N = {"az":{"title":"QR xidməti","sub":"Növü seç, xanaları doldur. Boş xana ilə hazırlanmır.","go":"QR hazırla","dl":"Yüklə","open":"QR səhifəsində aç","missing":"{f} boş qala bilməz.","bad":"Bu məlumatla QR hazırlanmır.","alt":"QR kod","kind":{"url":"Ünvan","text":"Mətn","phone":"Telefon","email":"E-poçt","whatsapp":"WhatsApp","wifi":"Wi-Fi","vcard":"Vizit","sms":"SMS","location":"Yer","event":"Tədbir","app":"Tətbiq"},"f":{"url":"Ünvan","text":"Mətn","phone":"Telefon","email":"E-poçt","subject":"Mövzu","body":"Mətn","message":"Mesaj","ssid":"Şəbəkə adı","password":"Şifrə","first":"Ad","last":"Soyad","org":"Şirkət","lat":"Enlik","lng":"Uzunluq","evTitle":"Ad","start":"Başlanğıc","place":"Yer"},"ph":{"text":"Yazı"}},"en":{"title":"QR service","sub":"Pick a type and fill in the fields. It won't be created with empty fields.","go":"Create QR","dl":"Download","open":"Open on the QR page","missing":"{f} cannot be empty.","bad":"A QR code cannot be made from this data.","alt":"QR code","kind":{"url":"Link","text":"Text","phone":"Phone","email":"Email","whatsapp":"WhatsApp","wifi":"Wi-Fi","vcard":"Contact","sms":"SMS","location":"Location","event":"Event","app":"App"},"f":{"url":"Link","text":"Text","phone":"Phone","email":"Email","subject":"Subject","body":"Text","message":"Message","ssid":"Network name","password":"Password","first":"First name","last":"Last name","org":"Company","lat":"Latitude","lng":"Longitude","evTitle":"Title","start":"Start","place":"Place"},"ph":{"text":"Your text"}},"tr":{"title":"QR hizmeti","sub":"Türü seç, alanları doldur. Boş alanla hazırlanmaz.","go":"QR oluştur","dl":"İndir","open":"QR sayfasında aç","missing":"{f} boş bırakılamaz.","bad":"Bu bilgiyle QR oluşturulamaz.","alt":"QR kod","kind":{"url":"Adres","text":"Metin","phone":"Telefon","email":"E-posta","whatsapp":"WhatsApp","wifi":"Wi-Fi","vcard":"Kartvizit","sms":"SMS","location":"Konum","event":"Etkinlik","app":"Uygulama"},"f":{"url":"Adres","text":"Metin","phone":"Telefon","email":"E-posta","subject":"Konu","body":"Metin","message":"Mesaj","ssid":"Ağ adı","password":"Şifre","first":"Ad","last":"Soyad","org":"Şirket","lat":"Enlem","lng":"Boylam","evTitle":"Ad","start":"Başlangıç","place":"Yer"},"ph":{"text":"Yazı"}},"ar":{"title":"خدمة QR","sub":"اختر النوع واملأ الحقول. لا يتم الإنشاء بحقول فارغة.","go":"إنشاء QR","dl":"تنزيل","open":"فتح في صفحة QR","missing":"حقل «{f}» لا يمكن أن يكون فارغاً.","bad":"لا يمكن إنشاء QR بهذه البيانات.","alt":"رمز QR","kind":{"url":"رابط","text":"نص","phone":"هاتف","email":"بريد إلكتروني","whatsapp":"WhatsApp","wifi":"Wi-Fi","vcard":"بطاقة","sms":"SMS","location":"موقع","event":"فعالية","app":"تطبيق"},"f":{"url":"الرابط","text":"النص","phone":"الهاتف","email":"البريد الإلكتروني","subject":"الموضوع","body":"النص","message":"الرسالة","ssid":"اسم الشبكة","password":"كلمة المرور","first":"الاسم","last":"اللقب","org":"الشركة","lat":"خط العرض","lng":"خط الطول","evTitle":"العنوان","start":"البداية","place":"المكان"},"ph":{"text":"اكتب النص"}},"ru":{"title":"Сервис QR","sub":"Выберите тип и заполните поля. С пустыми полями QR не создаётся.","go":"Создать QR","dl":"Скачать","open":"Открыть на странице QR","missing":"Поле «{f}» не может быть пустым.","bad":"Из этих данных QR создать нельзя.","alt":"QR-код","kind":{"url":"Ссылка","text":"Текст","phone":"Телефон","email":"E-mail","whatsapp":"WhatsApp","wifi":"Wi-Fi","vcard":"Визитка","sms":"SMS","location":"Место","event":"Событие","app":"Приложение"},"f":{"url":"Ссылка","text":"Текст","phone":"Телефон","email":"E-mail","subject":"Тема","body":"Текст","message":"Сообщение","ssid":"Имя сети","password":"Пароль","first":"Имя","last":"Фамилия","org":"Компания","lat":"Широта","lng":"Долгота","evTitle":"Название","start":"Начало","place":"Место"},"ph":{"text":"Ваш текст"}}};
     const QR_KINDS = [
-      { id: "url", label: "Ünvan", icon: "🔗", fields: [{ k: "url", l: "Ünvan", ph: "https://", req: true }] },
-      { id: "text", label: "Mətn", icon: "✎", fields: [{ k: "text", l: "Mətn", ph: "Yazı", req: true, area: true }] },
-      { id: "phone", label: "Telefon", icon: "☎", fields: [{ k: "phone", l: "Telefon", ph: "+994", req: true }] },
-      { id: "email", label: "E-poçt", icon: "✉", fields: [{ k: "email", l: "E-poçt", ph: "ad@mail.com", req: true }, { k: "subject", l: "Mövzu" }, { k: "body", l: "Mətn", area: true }] },
-      { id: "whatsapp", label: "WhatsApp", icon: "💬", fields: [{ k: "phone", l: "Telefon", ph: "994501112233", req: true }, { k: "text", l: "Mesaj", area: true }] },
-      { id: "wifi", label: "Wi-Fi", icon: "📶", fields: [{ k: "ssid", l: "Şəbəkə adı", req: true }, { k: "password", l: "Şifrə" }] },
-      { id: "vcard", label: "Vizit", icon: "👤", fields: [{ k: "firstName", l: "Ad", req: true }, { k: "lastName", l: "Soyad" }, { k: "phone", l: "Telefon" }, { k: "email", l: "E-poçt" }, { k: "org", l: "Şirkət" }] },
-      { id: "sms", label: "SMS", icon: "💬", fields: [{ k: "phone", l: "Telefon", ph: "+994", req: true }, { k: "text", l: "Mesaj", area: true }] },
-      { id: "location", label: "Yer", icon: "📍", fields: [{ k: "lat", l: "Enlik", req: true }, { k: "lng", l: "Uzunluq", req: true }] },
-      { id: "event", label: "Tədbir", icon: "📅", fields: [{ k: "title", l: "Ad", req: true }, { k: "start", l: "Başlanğıc", req: true }, { k: "location", l: "Yer" }] },
-      { id: "app", label: "Tətbiq", icon: "▣", fields: [{ k: "url", l: "Ünvan", ph: "https://", req: true }] }
+      { id: "url", icon: "🔗", fields: [{ k: "url", f: "url", ph: "https://", req: true }] },
+      { id: "text", icon: "✎", fields: [{ k: "text", f: "text", phk: "text", req: true, area: true }] },
+      { id: "phone", icon: "☎", fields: [{ k: "phone", f: "phone", ph: "+994", req: true }] },
+      { id: "email", icon: "✉", fields: [{ k: "email", f: "email", ph: "ad@mail.com", req: true }, { k: "subject", f: "subject" }, { k: "body", f: "body", area: true }] },
+      { id: "whatsapp", icon: "💬", fields: [{ k: "phone", f: "phone", ph: "994501112233", req: true }, { k: "text", f: "message", area: true }] },
+      { id: "wifi", icon: "📶", fields: [{ k: "ssid", f: "ssid", req: true }, { k: "password", f: "password" }] },
+      { id: "vcard", icon: "👤", fields: [{ k: "firstName", f: "first", req: true }, { k: "lastName", f: "last" }, { k: "phone", f: "phone" }, { k: "email", f: "email" }, { k: "org", f: "org" }] },
+      { id: "sms", icon: "💬", fields: [{ k: "phone", f: "phone", ph: "+994", req: true }, { k: "text", f: "message", area: true }] },
+      { id: "location", icon: "📍", fields: [{ k: "lat", f: "lat", req: true }, { k: "lng", f: "lng", req: true }] },
+      { id: "event", icon: "📅", fields: [{ k: "title", f: "evTitle", req: true }, { k: "start", f: "start", req: true }, { k: "location", f: "place" }] },
+      { id: "app", icon: "▣", fields: [{ k: "url", f: "url", ph: "https://", req: true }] }
     ];
-    function mountQrForm(el, preset) {
+    function mountQrForm(el, preset, cardLang) {
+      // kartın dili = cavabın dili (server ::qrform::növ@dil işarəsi ilə göndərir); yoxdursa seçilmiş interfeys dili
+      const C = QR_CARD_I18N[cardLang] || QR_CARD_I18N[uiLangCode] || QR_CARD_I18N.az;
+      const fl = function (f) { return C.f[f.f]; };
       el.classList.add("qrcard");
       const box = document.createElement("div");
       box.className = "qrform";
+      box.setAttribute("dir", (QR_CARD_I18N[cardLang] ? cardLang : uiLangCode) === "ar" ? "rtl" : "ltr");
       const head = document.createElement("div");
       head.className = "head";
-      head.innerHTML = '<div class="mark">QR</div><div><div class="ttl">QR xidməti</div><div class="sub">Növü seç, xanaları doldur. Boş xana ilə hazırlanmır.</div></div>';
+      head.innerHTML = '<div class="mark">QR</div><div><div class="ttl"></div><div class="sub"></div></div>';
+      head.querySelector(".ttl").textContent = C.title;
+      head.querySelector(".sub").textContent = C.sub;
       const kinds = document.createElement("div");
       kinds.className = "kinds";
       const fields = document.createElement("div");
@@ -1483,7 +1490,7 @@
       const go = document.createElement("button");
       go.type = "button";
       go.className = "go";
-      go.textContent = "QR hazırla";
+      go.textContent = C.go;
       go.hidden = true;
       acts.appendChild(go);
       const err = document.createElement("div");
@@ -1496,9 +1503,9 @@
         fields.innerHTML = "";
         kind.fields.forEach(function (f) {
           const label = document.createElement("label");
-          label.textContent = f.l + (f.req ? " *" : "");
+          label.textContent = fl(f) + (f.req ? " *" : "");
           const input = document.createElement(f.area ? "textarea" : "input");
-          input.placeholder = f.ph || f.l;
+          input.placeholder = f.ph || (f.phk && C.ph[f.phk]) || fl(f);
           input.setAttribute("data-f", f.k);
           if (f.req) input.required = true;
           label.appendChild(input);
@@ -1510,7 +1517,7 @@
       QR_KINDS.forEach(function (k) {
         const b = document.createElement("button");
         b.type = "button";
-        b.textContent = (k.icon ? k.icon + " " : "") + k.label;
+        b.textContent = (k.icon ? k.icon + " " : "") + C.kind[k.id];
         b.setAttribute("data-k", k.id);
         b.addEventListener("click", function () { show(k.id); });
         kinds.appendChild(b);
@@ -1522,11 +1529,11 @@
         kind.fields.forEach(function (f) {
           const input = fields.querySelector('[data-f="' + f.k + '"]');
           data[f.k] = (input.value || "").trim();
-          if (f.req && !data[f.k]) missing = f.l;
+          if (f.req && !data[f.k]) missing = fl(f);
         });
-        if (missing) { err.textContent = missing + " boş qala bilməz."; return; }
+        if (missing) { err.textContent = C.missing.replace("{f}", missing); return; }
         const value = buildQrValue(current, data);
-        if (!value) { err.textContent = "Bu məlumatla QR hazırlanmır."; return; }
+        if (!value) { err.textContent = C.bad; return; }
         const page = qrPageUrl(current, data);
         let img = box.querySelector("img.shot");
         let a = acts.querySelector("a.qrdl");
@@ -1534,18 +1541,18 @@
         if (!img) {
           img = document.createElement("img");
           img.className = "shot";
-          img.alt = "QR";
+          img.alt = C.alt;
           a = document.createElement("a");
           a.className = "qrdl";
           a.download = "nibras-qr.png";
           a.target = "_blank";
           a.rel = "noopener";
-          a.textContent = "Yüklə";
+          a.textContent = C.dl;
           open = document.createElement("a");
           open.className = "qropen";
           open.target = "_blank";
           open.rel = "noopener";
-          open.textContent = "QR səhifəsində aç";
+          open.textContent = C.open;
           box.insertBefore(img, acts);
           acts.appendChild(a);
           acts.appendChild(open);
@@ -1787,7 +1794,7 @@
     const IC_SHARE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="M8.3 10.7l7.4-4.4M8.3 13.3l7.4 4.4"/></svg>';
     function plainAnswer(raw) {
       let s = String(raw || "").replace(/\r/g, "");
-      s = s.replace(/^::ctx:: [^\n]*$/gm, "").replace(/^::game:: [^\n]*$/gm, "").replace(/::qrform::[a-z]*/g, "").replace(/::sqform::/g, "").replace(/::calc::([^\n]*)/g, function (_, q) { const hit = solveCalc(q); return hit ? hit.expr + " = " + hit.result : q; });
+      s = s.replace(/^::ctx:: [^\n]*$/gm, "").replace(/^::game:: [^\n]*$/gm, "").replace(/::qrform::[a-z]*(?:@[a-z]{2})?/g, "").replace(/::sqform::/g, "").replace(/::calc::([^\n]*)/g, function (_, q) { const hit = solveCalc(q); return hit ? hit.expr + " = " + hit.result : q; });
       s = s.replace(/(^|\n)::sug::\n[\s\S]*?\n::\/sug::(?=\n|$)/g, "$1");
       s = s.replace(/(^|\n)::(?:notice|tafsir [a-z]+|ayah(?: warn)?(?: [0-9:\-]+)?)::\n([\s\S]*?)\n::\/(?:notice|tafsir|ayah)::(?=\n|$)/g, function (all, pre, body) {
         return pre + body.split("\n").map(function (ln) { return ln.replace(/^::(?:ar|tl|tv|src|tr)::[ \t]*/, ""); }).join("\n");

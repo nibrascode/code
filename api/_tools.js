@@ -182,7 +182,7 @@ export function qrReply(message, hist, lang = "az") {
     const why = purposeOf(raw);
     return `::qrimg::${complete}\n${why ? T.qrFor.replace("{x}", why) : T.qrReady}`;
   }
-  if (kind) return `::qrform::${kind}\n${T.qrFill.replace("{k}", kindLabel(kind, lang))}`;
+  if (kind) return `::qrform::${kind}@${lang}\n${T.qrFill.replace("{k}", kindLabel(kind, lang))}`;
   if (wants && /nədir|nedir|necə|nece|how|what is|what's|barədə|barede|haqqında|about|nasıl|что такое|как|ما هو|كيف/i.test(raw) && !/https?:\/\/|@|\d{8,}/.test(raw)) return explainQr(lang);
   if (wants || waiting) return askQr(lang);
   return null;
@@ -228,7 +228,7 @@ function purposeOf(raw) {
 
 function askQr(lang = "az") {
   const a = msgs(lang).qrAsk;
-  return [a[0], "", a[1], a[2], "::qrform::"].join("\n");
+  return [a[0], "", a[1], a[2], `::qrform::@${lang}`].join("\n");
 }
 
 function explainQr(lang = "az") {

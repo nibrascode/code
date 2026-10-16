@@ -1,8 +1,9 @@
 import { useRef, useState, type FormEvent } from "react";
 import { useI18n } from "@/lib/i18n-context";
+import { QrCard } from "@/components/qr-card";
 
 type Topic = "qr" | "erase";
-type Msg = { role: "user" | "bot"; text: string; url?: string };
+type Msg = { role: "user" | "bot"; text: string; url?: string; card?: { kind: string; lang: string } };
 
 const T = {
   az: {
@@ -83,8 +84,10 @@ export function PageAssistant({ topic }: { topic: Topic }) {
       });
       const data = (await res.json()) as { reply?: string; url?: string };
       // internal markers (::qrform::, ::qrimg::) are not shown as text
-      const text = String(data.reply || c.err).replace(/^::\w+::.*$/gm, "").trim() || c.err;
-      setMsgs((m) => [...m, { role: "bot", text, url: data.url }]);
+      const raw = String(data.reply || c.err);
+      const hit = raw.match(/::qrform::([a-z]*)(?:@([a-z]{2}))?/);
+      const text = raw.replace(/^::\w+::.*$/gm, "").trim() || (hit ? "" : c.err);
+      setMsgs((m) => [...m, { role: "bot", text, url: data.url, card: hit ? { kind: hit[1] || "", lang: hit[2] || lang } : undefined }]);
     } catch {
       setMsgs((m) => [...m, { role: "bot", text: c.net }]);
     } finally {
@@ -98,10 +101,11 @@ export function PageAssistant({ topic }: { topic: Topic }) {
       <h2 className="font-display text-base font-bold">{c.title}</h2>
       <p className="mt-1 text-xs text-muted">{c.hint[topic]}</p>
       {msgs.length ? (
-        <div className="mt-3 flex max-h-72 flex-col gap-2 overflow-auto text-sm" aria-live="polite">
+        <div className="mt-3 flex max-h-[34rem] flex-col gap-2 overflow-auto text-sm" aria-live="polite">
           {msgs.map((m, i) => (
             <div key={i} className={m.role === "user" ? "self-end rounded-xl bg-white/10 px-3 py-2" : "self-start whitespace-pre-line rounded-xl bg-black/20 px-3 py-2"} dir="auto">
               {m.text}
+              {m.card ? <QrCard lang={m.card.lang} preset={m.card.kind} /> : null}
               {m.url ? <img src={m.url} alt="QR" width={160} height={160} className="mt-2 rounded-lg bg-white p-2" /> : null}
             </div>
           ))}
