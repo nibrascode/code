@@ -7,6 +7,7 @@ type Bg = "clear" | "white" | "black" | "color" | "gradient" | "blur" | "photo";
 type Format = "png" | "jpeg" | "webp";
 type Hand = "erase" | "restore";
 type Tab = "compare" | "edit";
+type Panel = "bg" | "layout" | "edit" | "export" | null;
 
 export const MAX_BATCH = 30;
 const MAX_BYTES = 25 * 1024 * 1024;
@@ -221,7 +222,8 @@ export function EraseTool() {
   const idRef = useRef(1);
   const [tick, bump] = useReducer((n: number) => n + 1, 0);
   const [activeId, setActiveId] = useState(0);
-  const [tab, setTab] = useState<Tab>("compare");
+  const [panel, setPanel] = useState<Panel>(null);
+  const tab: Tab = panel === "edit" ? "edit" : "compare";
   const [note, setNote] = useState("");
   const [busy, setBusy] = useState(false);
   const [drag, setDrag] = useState(false);
@@ -266,7 +268,7 @@ export function EraseTool() {
       const fresh: Item[] = files.map((file) => ({ id: idRef.current++, file, name: file.name, url: URL.createObjectURL(file), status: "queued", progress: 0, undo: [], redo: [], edge: 0, ver: 0 }));
       itemsRef.current = [...itemsRef.current, ...fresh].slice(-MAX_BATCH);
       setActiveId(fresh[0].id);
-      setTab("compare");
+      setPanel((p) => (p === "edit" ? null : p));
       setNote("");
       bump();
       void startAll();
@@ -513,23 +515,22 @@ export function EraseTool() {
     <div className="files-tool erase-app" dir={dir}>
       <section className="files-card">
         <label
-          className={`files-drop erase-drop${drag ? " is-drag" : ""}`}
+          className={`files-drop erase-drop${drag ? " is-drag" : ""}${items.length ? " is-compact" : ""}`}
           onDragOver={(e) => { e.preventDefault(); setDrag(true); }}
           onDragLeave={() => setDrag(false)}
           onDrop={(e) => { e.preventDefault(); setDrag(false); addFiles(Array.from(e.dataTransfer.files)); }}
         >
           <input type="file" accept="image/jpeg,image/png,image/webp" multiple data-testid="erase-input" onChange={(e) => { addFiles(Array.from(e.target.files ?? [])); e.target.value = ""; }} />
           <b>{t.drop}</b>
-          <span>{items.length ? items.map((i) => i.name).join(", ").slice(0, 120) : `${t.dropSub} ${t.private}`}</span>
+          {items.length ? null : <span>{`${t.dropSub} ${t.private}`}</span>}
         </label>
 
         {items.length > 1 ? (
           <ul className="erase-queue" aria-label={t.queue}>
             {items.map((i) => (
-              <li key={i.id} className={i.id === activeId ? "is-on" : ""}>
-                <button type="button" onClick={() => setActiveId(i.id)}>
+              <li key={i.id} className={i.id === activeId ? "is-on" : ""} data-status={i.status}>
+                <button type="button" onClick={() => setActiveId(i.id)} title={i.name}>
                   <img src={i.url} alt="" />
-                  <span>{i.name}</span>
                   <small data-status={i.status}>{t[`status_${i.status}`]}{i.status === "working" ? ` ${i.progress}%` : ""}</small>
                 </button>
                 <button type="button" className="erase-x" aria-label={t.remove} onClick={() => removeOne(i.id)}>×</button>
@@ -538,105 +539,132 @@ export function EraseTool() {
           </ul>
         ) : null}
 
-        <div className="erase-row">
-          <span>{t.quality}</span>
-          {(["small", "medium", "large"] as Quality[]).map((id) => (
-            <button key={id} type="button" className={quality === id ? "is-on" : ""} onClick={() => setQuality(id)}>
-              {id === "small" ? t.qSmall : id === "medium" ? t.qMedium : t.qLarge}
-            </button>
-          ))}
-        </div>
-        <div className="erase-row">
-          <span>{t.background}</span>
-          {(["clear", "white", "black", "color", "gradient", "blur", "photo"] as Bg[]).map((id) => (
-            <button key={id} type="button" data-bg={id} className={bg === id ? "is-on" : ""} onClick={() => setBg(id)}>
-              {t[id]}
-            </button>
-          ))}
-          {bg === "color" || bg === "gradient" ? <input type="color" value={color} onChange={(e) => setColor(e.target.value)} aria-label={t.color} /> : null}
-          {bg === "gradient" ? <input type="color" value={color2} onChange={(e) => setColor2(e.target.value)} aria-label={t.gradient} /> : null}
-          {bg === "photo" ? (
-            <label className="files-ghost">
-              {t.pickPhoto}
-              <input type="file" accept="image/*" hidden onChange={async (e) => {
-                const f = e.target.files?.[0];
-                if (!f) return;
-                const u = URL.createObjectURL(f);
-                setBgPhoto(await loadImage(u));
-              }} />
-            </label>
-          ) : null}
-        </div>
-        <div className="erase-row">
-          <span>{t.format}</span>
-          {(["png", "jpeg", "webp"] as Format[]).map((id) => (
-            <button key={id} type="button" className={format === id ? "is-on" : ""} onClick={() => setFormat(id)}>{id === "jpeg" ? "JPG" : id.toUpperCase()}</button>
-          ))}
-        </div>
-        {format !== "png" ? <label className="erase-slider"><span>{t.jpgQuality} {jq}</span><input type="range" min={50} max={100} value={jq} onChange={(e) => setJq(Number(e.target.value))} /></label> : null}
-        <div className="erase-row">
-          <span>{t.size}</span>
-          {sizeOptions.map((o) => (
-            <button key={o.v} type="button" data-size={o.v} className={size === o.v ? "is-on" : ""} onClick={() => setSize(o.v)}>
-              {o.label}
-            </button>
-          ))}
-        </div>
-        <div className="erase-row">
-          <span>{t.aspect}</span>
-          {ASPECTS.map((a) => (
-            <button key={a.id} type="button" className={ratioId === a.id ? "is-on" : ""} onClick={() => setRatioId(a.id)}>{a.id === "free" ? t.free : a.id}</button>
-          ))}
-        </div>
-        <label className="erase-slider"><span>{t.pad} {pad}%</span><input type="range" min={0} max={30} value={pad} onChange={(e) => setPad(Number(e.target.value))} /></label>
-        <div className="erase-row">
-          <label className="erase-check"><input type="checkbox" checked={shadow} onChange={(e) => setShadow(e.target.checked)} />{t.shadow}</label>
-          <label className="erase-check"><input type="checkbox" checked={circle} onChange={(e) => setCircle(e.target.checked)} />{t.circle}</label>
-          <label className="erase-check"><input type="checkbox" checked={flip} onChange={(e) => setFlip(e.target.checked)} />{t.flip}</label>
-          <label className="erase-check"><input type="checkbox" checked={trim} onChange={(e) => setTrim(e.target.checked)} />{t.trim}</label>
-        </div>
-
         {active?.status === "done" ? (
-          <>
-            <div className="erase-tabs" role="tablist">
-              <button type="button" role="tab" aria-selected={tab === "compare"} className={tab === "compare" ? "is-on" : ""} onClick={() => setTab("compare")}>{t.tabCompare}</button>
-              <button type="button" role="tab" aria-selected={tab === "edit"} className={tab === "edit" ? "is-on" : ""} onClick={() => setTab("edit")}>{t.tabEdit}</button>
+          tab === "compare" ? (
+            <div className="erase-compare" data-testid="erase-compare">
+              <div className="erase-cmp-stage is-cut" style={{ aspectRatio: previewUrl ? undefined : `${active.cut!.width}/${active.cut!.height}` }}>
+                {previewUrl ? <img className="erase-after" src={previewUrl} alt={t.after} /> : null}
+                <img className="erase-before" src={active.url} alt={t.before} style={{ clipPath: `inset(0 ${dir === "rtl" ? 0 : 100 - split}% 0 ${dir === "rtl" ? 100 - split : 0}%)` }} />
+                <i className="erase-handle" style={{ [dir === "rtl" ? "right" : "left"]: `${split}%` }} />
+                <b className="erase-tag erase-tag-b">{t.before}</b>
+                <b className="erase-tag erase-tag-a">{t.after}</b>
+              </div>
+              <input type="range" min={0} max={100} value={split} aria-label={t.slider} data-testid="erase-split" onChange={(e) => setSplit(Number(e.target.value))} />
             </div>
-            {tab === "compare" ? (
-              <div className="erase-compare" data-testid="erase-compare">
-                <div className="erase-cmp-stage is-cut" style={{ aspectRatio: previewUrl ? undefined : `${active.cut!.width}/${active.cut!.height}` }}>
-                  {previewUrl ? <img className="erase-after" src={previewUrl} alt={t.after} /> : null}
-                  <img className="erase-before" src={active.url} alt={t.before} style={{ clipPath: `inset(0 ${dir === "rtl" ? 0 : 100 - split}% 0 ${dir === "rtl" ? 100 - split : 0}%)` }} />
-                  <i className="erase-handle" style={{ [dir === "rtl" ? "right" : "left"]: `${split}%` }} />
-                  <b className="erase-tag erase-tag-b">{t.before}</b>
-                  <b className="erase-tag erase-tag-a">{t.after}</b>
-                </div>
-                <input type="range" min={0} max={100} value={split} aria-label={t.slider} data-testid="erase-split" onChange={(e) => setSplit(Number(e.target.value))} />
+          ) : (
+            <div className="erase-editbox">
+              <div className="erase-stage is-cut">
+                <canvas ref={editRef} data-testid="erase-edit" className="is-hand" onPointerDown={pointerDown} onPointerMove={pointerMove} onPointerUp={pointerUp} onPointerCancel={pointerUp} />
               </div>
-            ) : (
-              <div className="erase-editbox">
-                <div className="erase-row">
-                  <span>{t.hand}</span>
-                  <button type="button" className={hand === "erase" ? "is-on" : ""} onClick={() => setHand("erase")}>{t.erase}</button>
-                  <button type="button" className={hand === "restore" ? "is-on" : ""} onClick={() => setHand("restore")}>{t.restore}</button>
-                  <button type="button" disabled={!active.undo.length} onClick={undo} data-testid="erase-undo">↶ {t.undo}</button>
-                  <button type="button" disabled={!active.redo.length} onClick={redo}>↷ {t.redo}</button>
-                </div>
-                <label className="erase-slider"><span>{t.brush} {brush}</span><input type="range" min={8} max={90} value={brush} onChange={(e) => setBrush(Number(e.target.value))} /></label>
-                <label className="erase-slider"><span>{t.edge} {active.edge}</span><input type="range" min={-4} max={4} value={active.edge} onChange={(e) => setEdge(Number(e.target.value))} /></label>
-                <p className="files-lead">{t.hint}</p>
-                <div className="erase-stage is-cut">
-                  <canvas ref={editRef} data-testid="erase-edit" className="is-hand" onPointerDown={pointerDown} onPointerMove={pointerMove} onPointerUp={pointerUp} onPointerCancel={pointerUp} />
-                </div>
-              </div>
-            )}
-          </>
+            </div>
+          )
         ) : active ? (
-          <div className="erase-stage"><img src={active.url} alt="" /></div>
+          <div className="erase-stage erase-pending"><img src={active.url} alt="" /></div>
+        ) : null}
+
+        {items.length ? (
+          <div className="erase-toolbar" data-testid="erase-toolbar">
+            <div className="erase-tabs" role="tablist">
+              {([["bg", t.background], ["layout", t.panelLayout], ["edit", t.tabEdit], ["export", t.panelExport]] as [Exclude<Panel, null>, string][])
+                .filter(([id]) => id !== "edit" || active?.status === "done")
+                .map(([id, label]) => (
+                  <button key={id} type="button" role="tab" data-panel={id} aria-expanded={panel === id} aria-selected={panel === id} className={panel === id ? "is-on" : ""} onClick={() => setPanel(panel === id ? null : id)}>
+                    {label}<i aria-hidden="true">{panel === id ? "▴" : "▾"}</i>
+                  </button>
+                ))}
+            </div>
+            {panel ? (
+              <div className="erase-panel" role="tabpanel" data-testid={`erase-panel-${panel}`}>
+                {panel === "bg" ? (
+                  <>
+                    <div className="erase-row">
+                      <span>{t.background}</span>
+                      {(["clear", "white", "black", "color", "gradient", "blur", "photo"] as Bg[]).map((id) => (
+                        <button key={id} type="button" data-bg={id} className={bg === id ? "is-on" : ""} onClick={() => setBg(id)}>
+                          {t[id]}
+                        </button>
+                      ))}
+                      {bg === "color" || bg === "gradient" ? <input type="color" value={color} onChange={(e) => setColor(e.target.value)} aria-label={t.color} /> : null}
+                      {bg === "gradient" ? <input type="color" value={color2} onChange={(e) => setColor2(e.target.value)} aria-label={t.gradient} /> : null}
+                      {bg === "photo" ? (
+                        <label className="files-ghost">
+                          {t.pickPhoto}
+                          <input type="file" accept="image/*" hidden onChange={async (e) => {
+                            const f = e.target.files?.[0];
+                            if (!f) return;
+                            const u = URL.createObjectURL(f);
+                            setBgPhoto(await loadImage(u));
+                          }} />
+                        </label>
+                      ) : null}
+                    </div>
+                    <div className="erase-row">
+                      <span>{t.quality}</span>
+                      {(["small", "medium", "large"] as Quality[]).map((id) => (
+                        <button key={id} type="button" className={quality === id ? "is-on" : ""} onClick={() => setQuality(id)}>
+                          {id === "small" ? t.qSmall : id === "medium" ? t.qMedium : t.qLarge}
+                        </button>
+                      ))}
+                    </div>
+                  </>
+                ) : null}
+                {panel === "layout" ? (
+                  <>
+                    <div className="erase-row">
+                      <span>{t.aspect}</span>
+                      {ASPECTS.map((a) => (
+                        <button key={a.id} type="button" className={ratioId === a.id ? "is-on" : ""} onClick={() => setRatioId(a.id)}>{a.id === "free" ? t.free : a.id}</button>
+                      ))}
+                    </div>
+                    <label className="erase-slider"><span>{t.pad} {pad}%</span><input type="range" min={0} max={30} value={pad} onChange={(e) => setPad(Number(e.target.value))} /></label>
+                    <div className="erase-row">
+                      <label className="erase-check"><input type="checkbox" checked={shadow} onChange={(e) => setShadow(e.target.checked)} />{t.shadow}</label>
+                      <label className="erase-check"><input type="checkbox" checked={circle} onChange={(e) => setCircle(e.target.checked)} />{t.circle}</label>
+                      <label className="erase-check"><input type="checkbox" checked={flip} onChange={(e) => setFlip(e.target.checked)} />{t.flip}</label>
+                      <label className="erase-check"><input type="checkbox" checked={trim} onChange={(e) => setTrim(e.target.checked)} />{t.trim}</label>
+                    </div>
+                  </>
+                ) : null}
+                {panel === "export" ? (
+                  <>
+                    <div className="erase-row">
+                      <span>{t.format}</span>
+                      {(["png", "jpeg", "webp"] as Format[]).map((id) => (
+                        <button key={id} type="button" className={format === id ? "is-on" : ""} onClick={() => setFormat(id)}>{id === "jpeg" ? "JPG" : id.toUpperCase()}</button>
+                      ))}
+                    </div>
+                    {format !== "png" ? <label className="erase-slider"><span>{t.jpgQuality} {jq}</span><input type="range" min={50} max={100} value={jq} onChange={(e) => setJq(Number(e.target.value))} /></label> : null}
+                    <div className="erase-row">
+                      <span>{t.size}</span>
+                      {sizeOptions.map((o) => (
+                        <button key={o.v} type="button" data-size={o.v} className={size === o.v ? "is-on" : ""} onClick={() => setSize(o.v)}>
+                          {o.label}
+                        </button>
+                      ))}
+                    </div>
+                  </>
+                ) : null}
+                {panel === "edit" && active?.status === "done" ? (
+                  <>
+                    <div className="erase-row">
+                      <span>{t.hand}</span>
+                      <button type="button" className={hand === "erase" ? "is-on" : ""} onClick={() => setHand("erase")}>{t.erase}</button>
+                      <button type="button" className={hand === "restore" ? "is-on" : ""} onClick={() => setHand("restore")}>{t.restore}</button>
+                      <button type="button" disabled={!active.undo.length} onClick={undo} data-testid="erase-undo">↶ {t.undo}</button>
+                      <button type="button" disabled={!active.redo.length} onClick={redo}>↷ {t.redo}</button>
+                    </div>
+                    <label className="erase-slider"><span>{t.brush} {brush}</span><input type="range" min={8} max={90} value={brush} onChange={(e) => setBrush(Number(e.target.value))} /></label>
+                    <label className="erase-slider"><span>{t.edge} {active.edge}</span><input type="range" min={-4} max={4} value={active.edge} onChange={(e) => setEdge(Number(e.target.value))} /></label>
+                    <p className="erase-hint">{t.hint}</p>
+                  </>
+                ) : null}
+              </div>
+            ) : null}
+          </div>
         ) : null}
 
         {busy ? <div className="erase-bar"><span style={{ width: `${items.find((i) => i.status === "working")?.progress ?? 0}%` }} /></div> : null}
-        <div className="files-actions">
+        <div className="files-actions erase-actions">
           {items.some((i) => i.status === "queued" || i.status === "error") && !busy ? (
             <button type="button" className="files-run" onClick={() => { itemsRef.current.forEach((i) => { if (i.status === "error") i.status = "queued"; }); void startAll(); }}>{t.run}</button>
           ) : null}
