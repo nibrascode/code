@@ -20,46 +20,6 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-const QR_CARD: Record<Lang, string> = {
-  az: "QR kod düzəlt, dizayn et və skan et — pulsuz, brauzerində",
-  en: "Create, design and scan QR codes — free, in your browser",
-  tr: "QR kod oluştur, tasarla ve tara — ücretsiz, tarayıcında",
-  ar: "أنشئ رموز QR وصمّمها وامسحها — مجاناً في متصفحك",
-  ru: "Создавайте, оформляйте и сканируйте QR-коды — бесплатно, в браузере",
-};
-
-const FILES_CARD: Record<Lang, string> = {
-  az: "Şəkil yüklə, fon getsin — pulsuz, brauzerdə",
-  en: "Upload a photo, remove the background — free, in your browser",
-  tr: "Fotoğraf yükle, arka plan gitsin — ücretsiz, tarayıcıda",
-  ar: "ارفع صورة، أزل الخلفية — مجاناً في المتصفح",
-  ru: "Загрузите фото, уберите фон — бесплатно, в браузере",
-};
-
-const PDF_CARD: Record<Lang, string> = {
-  az: "PDF birləşdir, böl, sıxışdır, imzala — pulsuz, brauzerdə",
-  en: "Merge, split, compress and sign PDF — free, in your browser",
-  tr: "PDF birleştir, böl, sıkıştır, imzala — ücretsiz, tarayıcıda",
-  ar: "دمج وتقسيم وضغط وتوقيع PDF — مجاناً في المتصفح",
-  ru: "Объединяйте, делите, сжимайте и подписывайте PDF — бесплатно, в браузере",
-};
-
-const IMAGE_CARD: Record<Lang, string> = {
-  az: "Şəkil sıx, JPG, PNG və WebP çevir",
-  en: "Compress a photo, convert JPG, PNG and WebP",
-  tr: "Fotoğraf sıkıştır, JPG, PNG ve WebP çevir",
-  ar: "اضغط الصورة وحوّل JPG وPNG وWebP",
-  ru: "Сожмите фото, переведите JPG, PNG и WebP",
-};
-
-const CALC_CARD: Record<Lang, string> = {
-  az: "Elmi hesab, vahid, kredit və BKİ",
-  en: "Scientific math, units, loan and BMI",
-  tr: "Bilimsel hesap, birim, kredi ve VKİ",
-  ar: "حساب علمي ووحدات وقرض ومؤشر كتلة",
-  ru: "Научный счёт, единицы, кредит и ИМТ",
-};
-
 const STATUS: Partial<Record<"nibras-arabic" | "nibras-pdf" | "nibras-qr" | "nibras-plans" | "nibras-docs", TKey>> = {
   "nibras-pdf": "soon",
   "nibras-qr": "soon",
@@ -330,10 +290,7 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
           <div className="nx-bars">
             <a className="nx-ai-bar" href="/ai">
               <img src="/nibras-ai.png" alt="" />
-              <span>
-                Nibras AI
-                <small>{t("nx_ai_note")}</small>
-              </span>
+              <span>Nibras AI</span>
             </a>
             <a
               className="nx-studio-bar"
@@ -387,7 +344,6 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
               <img src="/apps/nibras-qr-v2.jpg" alt="" width={36} height={36} />
               <span className="nx-qr-text">
                 <b>Nibras QR</b>
-                <small>{QR_CARD[lang]}</small>
               </span>
               <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
             </a>
@@ -395,7 +351,6 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
               <img src="/apps/nibras-erase.png" alt="" width={36} height={36} />
               <span className="nx-qr-text">
                 <b>Nibras Erase</b>
-                <small>{FILES_CARD[lang]}</small>
               </span>
               <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
             </a>
@@ -403,7 +358,6 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
               <img src="/apps/nibras-pdf.jpg" alt="" width={36} height={36} />
               <span className="nx-qr-text">
                 <b>Nibras PDF</b>
-                <small>{PDF_CARD[lang]}</small>
               </span>
               <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
             </a>
@@ -411,7 +365,6 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
               <img src="/apps/nibras-image.png" alt="" width={36} height={36} />
               <span className="nx-qr-text">
                 <b>{lang === "az" ? "Şəkil sıx" : lang === "tr" ? "Foto sıkıştır" : lang === "ar" ? "ضغط الصورة" : lang === "ru" ? "Сжать фото" : "Compress photo"}</b>
-                <small>{IMAGE_CARD[lang]}</small>
               </span>
               <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
             </a>
@@ -422,7 +375,6 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
               </svg>
               <span className="nx-qr-text">
                 <b>ProCalc</b>
-                <small>{CALC_CARD[lang]}</small>
               </span>
               <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
             </a>
