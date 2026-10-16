@@ -77,7 +77,18 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "nedir",
         q: "Nibras Code nədir?",
-        a: "Nibras Code sadə, faydalı və istifadəsi rahat tətbiqlər üzərində çalışan müstəqil layihədir. Məqsəd gündəlik ehtiyacı daha rahat həll etməkdir: aydın interfeys, həqiqətən lazım olan funksiyalar və reklamsız istifadə.",
+        a: "Nibras Code — sadəlik, fayda və rahat istifadə prinsipləri üzərində qurulan müstəqil layihədir. Məqsədimiz insanların gündəlik həyatında qarşılaşdıqları müxtəlif ehtiyacları daha asan, sürətli və rahat şəkildə həll etməyə kömək edən faydalı tətbiqlər və rəqəmsal xidmətlər təqdim etməkdir.",
+        notes: [
+          "Bizim üçün tətbiqin dəyəri yalnız sahib olduğu funksiyaların sayı ilə deyil, istifadəçiyə nə dərəcədə fayda verməsi, işini nə qədər asanlaşdırması və istifadəsinin nə qədər rahat olması ilə ölçülür. Buna görə də aydın interfeysə, sadə idarəetməyə, lazımsız mürəkkəblikdən uzaq dizayna və həqiqətən ehtiyac duyulan funksiyalara üstünlük veririk.",
+          "Nibras Code çərçivəsində PDF sənədləri ilə işləmək, faylları idarə etmək, sənədlər hazırlamaq, QR kodlardan istifadə etmək və digər gündəlik ehtiyacları qarşılamaq üçün müxtəlif tətbiqlər və onlayn alətlər üzərində çalışırıq. Məqsədimiz bütün bu imkanları mümkün qədər əlçatan bir formada təqdim etmək, insanların vaxtına qənaət etməsinə və işlərini daha rahat görməsinə kömək etməkdir.",
+          "İstifadəçi rahatlığı və əlçatanlıq əsas prioritetlərimizdəndir. Buna görə tətbiqlərimizi mümkün qədər sadə, anlaşıqlı və istifadəsi rahat hazırlamağa çalışırıq. İmkan daxilində reklamsız istifadə təcrübəsinə üstünlük verir, əsas funksiyaların hər kəs üçün əlçatan olmasını və ödənişli imkanların isə münasib qiymətlərlə təqdim edilməsini hədəfləyirik.",
+          "Nibras Code böyük və mürəkkəb sistemlər yaratmaqdan çox, konkret problemlərə praktik həllər təqdim etməyə diqqət yetirir. Hər bir layihədə əsas məqsədimiz yeni funksiyalar əlavə etmək naminə tətbiqi çətinləşdirmək deyil, istifadəçinin ehtiyacını düzgün anlamaq və ona uyğun faydalı həll hazırlamaqdır.",
+          "Biz inkişafı davam edən müstəqil bir layihəyik. Tətbiqlərimizi və xidmətlərimizi zamanla təkmilləşdirməyə, yeni ehtiyaclara uyğun həllər hazırlamağa və istifadəçilərin təcrübəsindən öyrənərək daha yaxşı nəticələr əldə etməyə çalışırıq.",
+          "Nibras Code-un əsas prinsipi sadədir: həqiqətən faydalı olan, istifadəsi rahat və mümkün qədər əlçatan həllər təqdim etmək.",
+          "Bizim üçün əsas məqsəd yalnız məhsul təqdim etmək deyil, insanların gündəlik işlərini asanlaşdıran və onlara real fayda verən vasitələr hazırlamaqdır.",
+          "وَمَا تَوْفِيقِي إِلَّا بِاللَّهِ",
+          "Çalışır və Allaha təvəkkül edirik.",
+        ],
       },
       {
         id: "sirket",
