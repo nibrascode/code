@@ -2358,6 +2358,35 @@ html[dir="rtl"] .rtl-flip {
   color: #c9d7ff;
 }
 
+.social-icons {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-inline: 8px;
+  vertical-align: middle;
+}
+
+.social-icons a {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  border: 1px solid rgb(255 255 255 / 0.12);
+  background: rgb(255 255 255 / 0.05);
+}
+
+.social-icons a:hover {
+  border-color: rgb(255 255 255 / 0.28);
+  background: rgb(255 255 255 / 0.1);
+}
+
+.social-icons svg {
+  width: 18px;
+  height: 18px;
+}
+
 .site-legal nav {
   display: flex;
   flex-wrap: wrap;

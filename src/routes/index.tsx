@@ -5,7 +5,7 @@ import { AppSuggest } from "@/components/app-suggest";
 import { TechMark } from "@/components/tech-marquee";
 import { LanguageSwitch } from "@/components/language-switch";
 import { NavMenu } from "@/components/nav-menu";
-import { SiteLegal } from "@/components/site-header";
+import { SiteLegal, SocialIcons } from "@/components/site-header";
 import { HeroMark } from "@/components/hero-mark";
 import { faqPath } from "@/lib/faq";
 import { homePath, localeHref } from "@/lib/locale-path";
@@ -486,11 +486,7 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
                   : lang === "ru"
                     ? "Основатель: Mahir Əliyev."
                     : "Qurucu: Mahir Əliyev."}{" "}
-            <a href="mailto:nibrascode@gmail.com">nibrascode@gmail.com</a>
-            {" · "}
-            <a href="https://www.youtube.com/@NibrasCode" target="_blank" rel="noopener noreferrer">
-              YouTube
-            </a>
+            <SocialIcons />
           </p>
           <p className="nx-verse" lang="ar" dir="rtl">
             {t("remind_verse")}

@@ -1,9 +1,9 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
-import { Mail } from "lucide-react";
 import { localeHref } from "@/lib/locale-path";
 import { readLang } from "@/lib/seo";
 import type { Lang } from "@/lib/i18n";
 import { useI18n } from "@/lib/i18n-context";
+import { SocialIcons } from "@/components/site-header";
 
 export const Route = createFileRoute("/contact")({
   beforeLoad: ({ location }) => {
@@ -13,8 +13,6 @@ export const Route = createFileRoute("/contact")({
   },
   component: ContactPage,
 });
-
-const MAIL = "nibrascode@gmail.com";
 
 const NOTE: Record<Lang, string[]> = {
   az: [
@@ -54,13 +52,7 @@ export function ContactPage() {
       {NOTE[lang].map((line) => (
         <p key={line}>{line}</p>
       ))}
-      <a className="contact-mail" href={`mailto:${MAIL}`}>
-        <Mail className="size-4" />
-        {MAIL}
-      </a>
-      <a className="contact-mail" href="https://www.youtube.com/@NibrasCode" target="_blank" rel="noopener noreferrer">
-        YouTube · @NibrasCode
-      </a>
+      <SocialIcons />
     </main>
   );
 }

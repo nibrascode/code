@@ -83,16 +83,35 @@ const LEGAL: Record<Lang, { owner: string; about: string; contact: string; priva
   ru: { owner: "Основатель: Mahir Əliyev", about: "О нас", contact: "Контакт", privacy: "Конфиденциальность", terms: "Условия" },
 };
 
+export function SocialIcons() {
+  return (
+    <span className="social-icons">
+      <a href="mailto:nibrascode@gmail.com" aria-label="Gmail">
+        <svg viewBox="0 0 48 48" aria-hidden="true">
+          <path fill="#4caf50" d="M45 16.2 35 23.7V40h7a3 3 0 0 0 3-3V16.2z" />
+          <path fill="#1e88e5" d="M3 16.2 13 23.7V40H6a3 3 0 0 1-3-3V16.2z" />
+          <path fill="#e53935" d="m35 11.2-11 8.25-11-8.25L12 17l1 6.7 11 8.25 11-8.25 1-6.7z" />
+          <path fill="#c62828" d="M3 12.3V16.2l10 7.5V11.2L9.9 8.9A4.3 4.3 0 0 0 7.3 8C4.9 8 3 9.9 3 12.3z" />
+          <path fill="#fbc02d" d="M45 12.3V16.2l-10 7.5V11.2l3.1-2.3A4.3 4.3 0 0 1 40.7 8C43.1 8 45 9.9 45 12.3z" />
+        </svg>
+      </a>
+      <a href="https://www.youtube.com/@NibrasCode" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="#FF0033" d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8z" />
+          <path fill="#fff" d="M9.8 15.5v-7l6.2 3.5z" />
+        </svg>
+      </a>
+    </span>
+  );
+}
+
 export function SiteLegal() {
   const { lang } = useI18n();
   const copy = LEGAL[lang];
   return (
     <div className="site-legal">
       <p>{copy.owner}</p>
-      <a href="mailto:nibrascode@gmail.com">nibrascode@gmail.com</a>
-      <a href="https://www.youtube.com/@NibrasCode" target="_blank" rel="noopener noreferrer">
-        YouTube
-      </a>
+      <SocialIcons />
       <nav aria-label={copy.contact}>
         <a href={localeHref(lang, "/about")}>{copy.about}</a>
         <a href={localeHref(lang, "/contact")}>{copy.contact}</a>
