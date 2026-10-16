@@ -1025,6 +1025,7 @@ function jsonLd(path: string, lang: Lang, copy: PageSeo, url: string) {
     name: "Nibras Code",
     url: SITE,
     email: "Nibrascode@gmail.com",
+    sameAs: ["https://www.youtube.com/@NibrasCode"],
     description: (PAGES["/"][lang] ?? PAGES["/"].en).description,
     founder: { "@type": "Person", name: "Mahir Əliyev", url: `${SITE}/about` },
   };
@@ -1166,6 +1167,7 @@ function jsonLd(path: string, lang: Lang, copy: PageSeo, url: string) {
           name: "Nibras Code",
           url: SITE,
           email: "Nibrascode@gmail.com",
+          sameAs: ["https://www.youtube.com/@NibrasCode"],
           description: copy.description,
           founder: { "@type": "Person", name: "Mahir Əliyev", url: `${SITE}/about` },
         },

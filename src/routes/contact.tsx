@@ -58,6 +58,9 @@ export function ContactPage() {
         <Mail className="size-4" />
         {MAIL}
       </a>
+      <a className="contact-mail" href="https://www.youtube.com/@NibrasCode" target="_blank" rel="noopener noreferrer">
+        YouTube · @NibrasCode
+      </a>
     </main>
   );
 }

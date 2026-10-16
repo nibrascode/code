@@ -487,6 +487,10 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
                     ? "Основатель: Mahir Əliyev."
                     : "Qurucu: Mahir Əliyev."}{" "}
             <a href="mailto:nibrascode@gmail.com">nibrascode@gmail.com</a>
+            {" · "}
+            <a href="https://www.youtube.com/@NibrasCode" target="_blank" rel="noopener noreferrer">
+              YouTube
+            </a>
           </p>
           <p className="nx-verse" lang="ar" dir="rtl">
             {t("remind_verse")}

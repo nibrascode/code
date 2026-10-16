@@ -90,6 +90,9 @@ export function SiteLegal() {
     <div className="site-legal">
       <p>{copy.owner}</p>
       <a href="mailto:nibrascode@gmail.com">nibrascode@gmail.com</a>
+      <a href="https://www.youtube.com/@NibrasCode" target="_blank" rel="noopener noreferrer">
+        YouTube
+      </a>
       <nav aria-label={copy.contact}>
         <a href={localeHref(lang, "/about")}>{copy.about}</a>
         <a href={localeHref(lang, "/contact")}>{copy.contact}</a>
