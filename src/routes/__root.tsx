@@ -35,10 +35,12 @@ export const Route = createRootRoute({
         ...seo.meta,
       ],
       links: [
-        { rel: "icon", type: "image/png", href: "/nibras-icon.png" },
+        { rel: "icon", href: "/favicon.ico", sizes: "48x48" },
+        { rel: "icon", type: "image/png", sizes: "48x48", href: "/favicon-48.png" },
+        { rel: "icon", type: "image/png", sizes: "192x192", href: "/favicon-192.png" },
+        { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
+        { rel: "manifest", href: "/manifest.webmanifest" },
         { rel: "stylesheet", href: appCss },
-        { rel: "manifest", href: "/__grok/manifest.webmanifest" },
-        { rel: "apple-touch-icon", href: "/__grok/icon-180.png" },
         { rel: "preconnect", href: "https://fonts.googleapis.com" },
         {
           rel: "preconnect",
