@@ -14,7 +14,7 @@ import { PAKET, paketFromPath } from "@/lib/paket";
 import { TOOLS, TOOLS_PAGE, toolFromPath, toolsFromPath, toolPath, toolsPath } from "@/lib/tools";
 import { TOOL_LEAD } from "@/lib/tools-seo";
 
-export const SITE = "https://www.nibrascode.com";
+export const SITE = "https://nibrascode.com";
 
 type PageSeo = {
   title: string;
@@ -1083,26 +1083,33 @@ function jsonLd(path: string, lang: Lang, copy: PageSeo, url: string) {
     };
     return {
       "@context": "https://schema.org",
-      "@type": "Organization",
-      name: "Nibras Code",
-      url: SITE,
-      email: "Nibrascode@gmail.com",
-      description: copy.description,
-      hasOfferCatalog: {
-        "@type": "OfferCatalog",
-        name: "Nibras Code",
-        itemListElement: [
-          {
-            "@type": "SoftwareApplication",
-            name: "Nibras AI",
-            applicationCategory: "UtilitiesApplication",
-            operatingSystem: "Web",
-            url: `${SITE}/ai`,
-            description: ai[lang] ?? ai.en,
-            offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-          },
-        ],
-      },
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": `${SITE}/#website`,
+          name: "Nibras Code",
+          url: SITE,
+          publisher: { "@id": `${SITE}/#org` },
+        },
+        {
+          "@type": "Organization",
+          "@id": `${SITE}/#org`,
+          name: "Nibras Code",
+          url: SITE,
+          email: "Nibrascode@gmail.com",
+          description: copy.description,
+        },
+        {
+          "@type": "SoftwareApplication",
+          name: "Nibras AI",
+          applicationCategory: "UtilitiesApplication",
+          operatingSystem: "Web",
+          url: `${SITE}/ai`,
+          description: ai[lang] ?? ai.en,
+          offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+          provider: { "@id": `${SITE}/#org` },
+        },
+      ],
     };
   }
 

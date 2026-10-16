@@ -14,7 +14,7 @@ const SITE: Record<Lang, { title: string; body: string[] }> = {
   az: {
     title: "Əsas sayt",
     body: [
-      "www.nibrascode.com açıq səhifələrdir. Hesab tələb olunmur.",
+      "nibrascode.com açıq səhifələrdir. Hesab tələb olunmur.",
       "Brauzer dil seçimini və bəzi alət nəticələrini öz yaddaşında saxlaya bilər. Bu məlumat bizə göndərilmir.",
       "Əlaqə üçün yazılan məktub yalnız cavab vermək üçün oxunur. Başqa məqsədlə saxlanmır.",
     ],
@@ -22,7 +22,7 @@ const SITE: Record<Lang, { title: string; body: string[] }> = {
   en: {
     title: "Main site",
     body: [
-      "www.nibrascode.com is a set of open pages. No account is required.",
+      "nibrascode.com is a set of open pages. No account is required.",
       "The browser may keep the language choice and some tool results in its own storage. That data is not sent to us.",
       "A message sent for contact is read only to reply. It is not kept for another purpose.",
     ],
@@ -30,7 +30,7 @@ const SITE: Record<Lang, { title: string; body: string[] }> = {
   tr: {
     title: "Ana site",
     body: [
-      "www.nibrascode.com açık sayfalardır. Hesap gerekmez.",
+      "nibrascode.com açık sayfalardır. Hesap gerekmez.",
       "Tarayıcı dil seçimini ve bazı araç sonuçlarını kendi belleğinde tutabilir. Bu veri bize gönderilmez.",
       "İletişim için yazılan mesaj yalnızca cevap vermek için okunur. Başka amaçla saklanmaz.",
     ],
@@ -38,7 +38,7 @@ const SITE: Record<Lang, { title: string; body: string[] }> = {
   ar: {
     title: "الموقع الرئيسي",
     body: [
-      "www.nibrascode.com صفحات مفتوحة. لا يلزم حساب.",
+      "nibrascode.com صفحات مفتوحة. لا يلزم حساب.",
       "قد يحفظ المتصفح اختيار اللغة وبعض نتائج الأدوات في ذاكرته. لا تُرسل هذه البيانات إلينا.",
       "الرسالة المرسلة للتواصل تُقرأ فقط للرد. لا تُحفظ لغرض آخر.",
     ],
@@ -46,7 +46,7 @@ const SITE: Record<Lang, { title: string; body: string[] }> = {
   ru: {
     title: "Основной сайт",
     body: [
-      "www.nibrascode.com — открытые страницы. Учётная запись не нужна.",
+      "nibrascode.com — открытые страницы. Учётная запись не нужна.",
       "Браузер может хранить выбор языка и некоторые результаты инструментов у себя. Эти данные нам не отправляются.",
       "Письмо для связи читается только для ответа. Для другой цели оно не хранится.",
     ],

@@ -613,7 +613,7 @@ export function ToolsPage({ lang, focus }: { lang: Lang; focus?: ToolId }) {
           };
         };
         setOutput(
-          await QR.toDataURL(text.trim() || "https://www.nibrascode.com", {
+          await QR.toDataURL(text.trim() || "https://nibrascode.com", {
             margin: 1,
             width: 280,
           }),

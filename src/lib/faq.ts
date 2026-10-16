@@ -179,7 +179,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "ai",
         q: "Nibras AI nədir?",
-        a: "Nibras AI Nibras Code-un ayrıca köməkçisidir: www.nibrascode.com/ai. Sual vermək, fikir vermək, kod yazmaq və şəkil düzəltmək olar. Modelə gedən sual gündə 40-dır və xarici süni intellekt xidmətinə (xAI və ya Groq) göndərilir. Hazır cavablar bu limitə düşmür. Bir sabit model adı yoxdur. Söhbət 24 saat saxlanır, sonra silinir.",
+        a: "Nibras AI Nibras Code-un ayrıca köməkçisidir: nibrascode.com/ai. Sual vermək, fikir vermək, kod yazmaq və şəkil düzəltmək olar. Modelə gedən sual gündə 40-dır və xarici süni intellekt xidmətinə (xAI və ya Groq) göndərilir. Hazır cavablar bu limitə düşmür. Bir sabit model adı yoxdur. Söhbət 24 saat saxlanır, sonra silinir.",
       },
       {
         id: "dev",
@@ -326,7 +326,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "ai",
         q: "What is Nibras AI?",
-        a: "Nibras AI is Nibras Code’s separate assistant at www.nibrascode.com/ai. You can ask a question, share an idea, write code, and edit an image. A question that reaches a model is limited to 40 a day and is sent to an external AI service (xAI or Groq). Ready answers do not use that limit. There is no single model name. A chat is kept for 24 hours, then deleted.",
+        a: "Nibras AI is Nibras Code’s separate assistant at nibrascode.com/ai. You can ask a question, share an idea, write code, and edit an image. A question that reaches a model is limited to 40 a day and is sent to an external AI service (xAI or Groq). Ready answers do not use that limit. There is no single model name. A chat is kept for 24 hours, then deleted.",
       },
       {
         id: "dev",
@@ -473,7 +473,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "ai",
         q: "Nibras AI nedir?",
-        a: "Nibras AI, Nibras Code’un ayrı yardımcısıdır: www.nibrascode.com/ai. Soru sorulabilir, fikir verilebilir, kod yazılabilir ve görsel düzeltilebilir. Modele giden soru günde 40’tır ve dış bir yapay zeka hizmetine (xAI veya Groq) gider. Hazır cevaplar bu limite düşmez. Tek bir model adı yoktur. Sohbet 24 saat saklanır, sonra silinir.",
+        a: "Nibras AI, Nibras Code’un ayrı yardımcısıdır: nibrascode.com/ai. Soru sorulabilir, fikir verilebilir, kod yazılabilir ve görsel düzeltilebilir. Modele giden soru günde 40’tır ve dış bir yapay zeka hizmetine (xAI veya Groq) gider. Hazır cevaplar bu limite düşmez. Tek bir model adı yoktur. Sohbet 24 saat saklanır, sonra silinir.",
       },
       {
         id: "dev",
@@ -620,7 +620,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "ai",
         q: "ما هو Nibras AI؟",
-        a: "Nibras AI مساعد منفصل لـ Nibras Code على www.nibrascode.com/ai. يمكن طرح سؤال، وإعطاء فكرة، وكتابة كود، وتعديل صورة. السؤال الذي يصل إلى نموذج محدود بأربعين في اليوم ويُرسل إلى خدمة ذكاء اصطناعي خارجية (xAI أو Groq). الأجوبة الجاهزة لا تدخل في هذا الحد. لا اسم نموذج واحد ثابت. تبقى المحادثة 24 ساعة ثم تُحذف.",
+        a: "Nibras AI مساعد منفصل لـ Nibras Code على nibrascode.com/ai. يمكن طرح سؤال، وإعطاء فكرة، وكتابة كود، وتعديل صورة. السؤال الذي يصل إلى نموذج محدود بأربعين في اليوم ويُرسل إلى خدمة ذكاء اصطناعي خارجية (xAI أو Groq). الأجوبة الجاهزة لا تدخل في هذا الحد. لا اسم نموذج واحد ثابت. تبقى المحادثة 24 ساعة ثم تُحذف.",
       },
       {
         id: "dev",
@@ -767,7 +767,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "ai",
         q: "Что такое Nibras AI?",
-        a: "Nibras AI — отдельный помощник Nibras Code на www.nibrascode.com/ai. Можно задать вопрос, предложить идею, написать код и поправить изображение. Вопрос, который доходит до модели, ограничен сорока в день и уходит во внешний сервис ИИ (xAI или Groq). Готовые ответы в этот предел не входят. Одного постоянного имени модели нет. Разговор хранится 24 часа, затем удаляется.",
+        a: "Nibras AI — отдельный помощник Nibras Code на nibrascode.com/ai. Можно задать вопрос, предложить идею, написать код и поправить изображение. Вопрос, который доходит до модели, ограничен сорока в день и уходит во внешний сервис ИИ (xAI или Groq). Готовые ответы в этот предел не входят. Одного постоянного имени модели нет. Разговор хранится 24 часа, затем удаляется.",
       },
       {
         id: "dev",
@@ -837,7 +837,7 @@ const TOPIC_HREF: Record<string, string> = {
   docs: "/apps/nibras-docs",
   elaqe: "/contact",
   sayt: "/programming",
-  ai: "https://www.nibrascode.com/ai",
+  ai: "https://nibrascode.com/ai",
   dev: "https://dev.nibrascode.com/",
   apk: "https://studio.nibrascode.com/",
   tools: "/tools",
