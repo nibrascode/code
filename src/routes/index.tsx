@@ -322,7 +322,10 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
           <div className="nx-bars">
             <a className="nx-ai-bar" href="/ai">
               <img src="/nibras-ai.png" alt="" />
-              <span>Nibras AI</span>
+              <span>
+                Nibras AI
+                <small>{t("nx_ai_note")}</small>
+              </span>
             </a>
             <a
               className="nx-studio-bar"

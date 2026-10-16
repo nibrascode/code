@@ -39,27 +39,27 @@ const PAGES: Record<string, Copy> = {
     az: {
       title: "Nibras Code — sadə tətbiqlər, real fayda",
       description:
-        "Nibras Code müstəqil layihədir. Gündəlik həyatı və öyrənməni asanlaşdıran sadə mobil tətbiqlər hazırlayır: Nibras Arabic, Nibras PDF, Nibras Docs və Nibras Plans.",
+        "Nibras Code müstəqil layihədir. Nibras AI sual, kod və şəkil köməkçisidir: nibrascode.com/ai. Tətbiqlər: Nibras Arabic, Nibras PDF, Nibras Docs və Nibras Plans.",
     },
     en: {
       title: "Nibras Code — simple apps, real benefit",
       description:
-        "Nibras Code is an independent project making simple, useful mobile apps: Nibras Arabic, Nibras PDF, Nibras Docs, and Nibras Plans.",
+        "Nibras Code is an independent project. Nibras AI is its assistant for questions, code, and images at nibrascode.com/ai. Apps: Nibras Arabic, Nibras PDF, Nibras Docs, and Nibras Plans.",
     },
     tr: {
       title: "Nibras Code — sade uygulamalar, gerçek fayda",
       description:
-        "Nibras Code bağımsız bir projedir. Günlük hayatı kolaylaştıran sade mobil uygulamalar hazırlar: Nibras Arabic, Nibras PDF, Nibras Docs ve Nibras Plans.",
+        "Nibras Code bağımsız bir projedir. Nibras AI soru, kod ve görsel yardımcısıdır: nibrascode.com/ai. Uygulamalar: Nibras Arabic, Nibras PDF, Nibras Docs ve Nibras Plans.",
     },
     ar: {
       title: "Nibras Code — تطبيقات بسيطة، فائدة حقيقية",
       description:
-        "Nibras Code مشروع مستقل يُعدّ تطبيقات هاتف بسيطة ومفيدة: Nibras Arabic وNibras PDF وNibras Docs وNibras Plans.",
+        "Nibras Code مشروع مستقل. Nibras AI مساعد للسؤال والكود والصورة: nibrascode.com/ai. التطبيقات: Nibras Arabic وNibras PDF وNibras Docs وNibras Plans.",
     },
     ru: {
       title: "Nibras Code — простые приложения, реальная польза",
       description:
-        "Nibras Code — независимый проект. Простые мобильные приложения: Nibras Arabic, Nibras PDF, Nibras Docs и Nibras Plans.",
+        "Nibras Code — независимый проект. Nibras AI — помощник для вопросов, кода и изображений: nibrascode.com/ai. Приложения: Nibras Arabic, Nibras PDF, Nibras Docs и Nibras Plans.",
     },
   },
   "/about": {
@@ -1070,6 +1070,39 @@ function jsonLd(path: string, lang: Lang, copy: PageSeo, url: string) {
       mainEntityOfPage: url,
       author: org,
       publisher: org,
+    };
+  }
+
+  if (path === "/") {
+    const ai: Record<Lang, string> = {
+      az: "Nibras AI Nibras Code-un ayrıca köməkçisidir. Sual vermək, kod yazmaq və şəkil hazırlamaq olur.",
+      en: "Nibras AI is Nibras Code’s assistant. You can ask a question, write code, and make an image.",
+      tr: "Nibras AI, Nibras Code’un yardımcısıdır. Soru sorulur, kod yazılır ve görsel hazırlanır.",
+      ar: "Nibras AI مساعد Nibras Code. يمكن طرح سؤال وكتابة كود وإعداد صورة.",
+      ru: "Nibras AI — помощник Nibras Code. Можно задать вопрос, написать код и сделать изображение.",
+    };
+    return {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: "Nibras Code",
+      url: SITE,
+      email: "Nibrascode@gmail.com",
+      description: copy.description,
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Nibras Code",
+        itemListElement: [
+          {
+            "@type": "SoftwareApplication",
+            name: "Nibras AI",
+            applicationCategory: "UtilitiesApplication",
+            operatingSystem: "Web",
+            url: `${SITE}/ai`,
+            description: ai[lang] ?? ai.en,
+            offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+          },
+        ],
+      },
     };
   }
 
