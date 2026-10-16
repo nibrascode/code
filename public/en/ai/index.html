@@ -2163,7 +2163,7 @@
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(useImage
             ? { prompt: m, image: pendingImage, limitReached: remain() <= 0 }
-            : { message: m, messages: threadOf().slice(-8), games: gamesShown(), mode: sentMode, limitReached: remain() <= 0, noticeShown: noticeShown() })
+            : { message: m, lang: uiLangCode, messages: threadOf().slice(-8), games: gamesShown(), mode: sentMode, limitReached: remain() <= 0, noticeShown: noticeShown() })
         });
         const raw = await r.text();
         let data = {};

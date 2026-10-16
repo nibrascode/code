@@ -14,6 +14,7 @@ import { extraReply, prayerReply } from "./_extra.js";
 import { track } from "./_stats.js";
 import { isReligious } from "./_religious.js";
 import { stripNotice, OLD_AZ_NOTICE } from "./_notice.js";
+import { resolveLang, msgs, langDirective, eraseReply } from "./_lang.js";
 
 const SYSTEM = [
   "Sən Nibras AI-san, Nibras Code saytının köməkçisisən.",
@@ -72,15 +73,18 @@ export default async function handler(req, res) {
     return;
   }
   if (req.method !== "POST") {
-    res.status(405).json({ success: false, reply: "Yalnız POST sorğusu qəbul olunur." });
+    res.status(405).json({ success: false, reply: msgs("az").post });
     return;
   }
 
   try {
     const body = await readJson(req);
     const message = String(body.message || "").trim().slice(0, 800);
+    // cavab dili: sualın aydın dili, yoxsa səhifədə seçilmiş dil (body.lang), yoxsa az
+    const lang = resolveLang(message, body.lang);
+    const T = msgs(lang);
     if (!message) {
-      res.status(400).json({ success: false, reply: "Mesaj boş ola bilməz." });
+      res.status(400).json({ success: false, reply: msgs(resolveLang("", body.lang)).empty });
       return;
     }
     // Bəqərə surəsi sözlərinin izahı hazır cavabdır (AI-yə getmir). dinReply-dən əvvəl gəlməlidir,
@@ -184,7 +188,7 @@ export default async function handler(req, res) {
     // Hazır python/html/javascript/sql/css kod nümunələri: AI-yə getmədən (kod rejimi də daxil)
     const snippet = fixed ? null : snippetReply(message, body.mode);
     const search = fixed || snippet || body.mode === "create" ? null : searchReply(message);
-    const qr = fixed || snippet || search || body.mode === "create" ? null : qrReply(message, hist);
+    const qr = fixed || snippet || search || body.mode === "create" ? null : qrReply(message, hist, lang) || eraseReply(message, lang);
     const tools = fixed || snippet || search || qr || body.mode === "create" ? null : toolsReply(message);
     const ready =
       fixed ||
@@ -205,7 +209,7 @@ export default async function handler(req, res) {
         const [first, ...rest] = out.split("\n");
         const value = first.slice("::qrimg::".length).trim().slice(0, 500);
         const url = `https://www.nibrascode.com/api/qr?text=${encodeURIComponent(value)}`;
-        res.status(200).json({ success: true, reply: rest.join("\n").trim() || "QR hazırdır.", url, usedAI: false });
+        res.status(200).json({ success: true, reply: rest.join("\n").trim() || T.qrReady, url, usedAI: false });
         return;
       }
       res.status(200).json({ success: true, reply: out, usedAI: false, ...relFlag(isRel) });
@@ -213,12 +217,12 @@ export default async function handler(req, res) {
     }
     // Library əlçatan deyil və sual kitab/Quran/din sualıdır: AI-yə göndərilmir, qısa nəzakətli cavab
     if (libraryDown && body.mode !== "code" && body.mode !== "create" && (isReligious(message, body.mode) || BOOK_CUE.test(fold(message)) || /[\u0621-\u064A]{2}/.test(message) || /^\s*[\p{L}'’ -]{2,40}\s+\d{1,4}(?:\s*[-–:.]\s*\d{1,4})?\s*[?.!]*\s*$/u.test(message))) {
-      res.status(200).json({ success: false, reply: libraryDownReply(detectLang(message)), usedAI: false });
+      res.status(200).json({ success: false, reply: libraryDownReply(lang), usedAI: false });
       return;
     }
     // Gündəlik limit istifadəçi tərəfində sayılır; doluysa yalnız xarici AI tələb edən suallar dayandırılır (hazır cavablar yuxarıda artıq cavablanıb)
     if (body.limitReached === true) {
-      res.status(200).json({ success: true, reply: LIMIT_REPLY, usedAI: false, limited: true });
+      res.status(200).json({ success: true, reply: T.limit, usedAI: false, limited: true });
       return;
     }
     track("snippet", "ai");
@@ -246,7 +250,7 @@ export default async function handler(req, res) {
     const ctx = { long, deadline: started + 40000 };
     for (const name of order) {
       if (Date.now() - started > (long ? 30000 : 18000)) break;
-      const result = await budget.run(ctx, () => aiConfig.run({ system: SYSTEM, tokens: tokenLimit, timeout: timeoutFor }, () => askProvider(name, history, lexicalLoose ? LEXICAL_HINT + "\n\n" + message : message)));
+      const result = await budget.run(ctx, () => aiConfig.run({ system: SYSTEM + langDirective(lang), tokens: tokenLimit, timeout: timeoutFor }, () => askProvider(name, history, lexicalLoose ? LEXICAL_HINT + "\n\n" + message : message)));
       if (result.skipped) continue;
       if (result.ok) {
         // AI ayə mətni yazıbsa, ərəbcə hissə Tanzil məlumatı ilə əvəz olunur, [[ayah:S:A]] işarələri açılır
@@ -272,14 +276,14 @@ export default async function handler(req, res) {
     track("error", "ai");
     res.status(200).json({
       success: false,
-      reply: "İndi cavab alınmadı. Bir az sonra yenidən yoxlayın.",
+      reply: T.noAnswer,
       usedAI: false,
     });
   } catch {
     track("error", "server");
     res.status(200).json({
       success: false,
-      reply: "Server xətası. Bir az sonra yenidən cəhd edin.",
+      reply: "Server xətası / Server error / Ошибка сервера / خطأ في الخادم / Sunucu hatası.",
     });
   }
 }
