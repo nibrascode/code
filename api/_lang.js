@@ -1,4 +1,4 @@
-// Dil seçimi: səhifədə seçilmiş dil (body.lang) həmişə üstündür; lang göndərilməyibsə sualın dili aşkarlanır, yoxsa az.
+// Dil seçimi: sualın dili aydın aşkarlanırsa o dildə cavab; qısa/qeyri-müəyyən sualda səhifədə seçilmiş dil (body.lang), yoxsa az.
 export const LANGS = ["az", "en", "tr", "ar", "ru"];
 export const LANG_NAMES = { az: "Azerbaijani (Azərbaycan dili)", en: "English", tr: "Turkish (Türkçe)", ar: "Arabic (العربية)", ru: "Russian (Русский)" };
 
@@ -29,7 +29,7 @@ export function queryLang(text) {
 }
 
 export function resolveLang(message, uiLang) {
-  return normLang(uiLang) || queryLang(message) || "az";
+  return queryLang(message) || normLang(uiLang) || "az";
 }
 
 const M = {
