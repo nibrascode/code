@@ -7278,13 +7278,7 @@ body.is-planner .site-backdrop {
 @media (max-width: 640px) { .files-compare { grid-template-columns: 1fr; } }
 
 /* Nibras Erase: premium, batch, compare, edit */
-.erase-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-bottom: 12px; font-size: 13px; }
-.erase-plan { padding: 3px 10px; border-radius: 99px; background: rgb(255 255 255 / 0.08); }
-.erase-plan.is-pro { background: linear-gradient(90deg, #fbbf24, #d946ef); color: #fff; font-weight: 700; }
-.erase-left { color: rgb(244 247 255 / 0.7); }
-.erase-getpro { margin-inline-start: auto; }
 .erase-drop.is-drag { border-color: #fff; background: rgb(255 255 255 / 0.08); }
-.erase-pro { font-style: normal; font-size: 9px; font-weight: 800; margin-inline-start: 5px; padding: 1px 5px; border-radius: 99px; background: linear-gradient(90deg, #fbbf24, #d946ef); color: #fff; }
 .erase-row button:disabled { opacity: 0.4; cursor: default; }
 .erase-queue { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 6px; }
 .erase-queue li { display: flex; align-items: center; gap: 6px; border: 1px solid rgb(255 255 255 / 0.1); border-radius: 10px; }
@@ -7306,17 +7300,5 @@ body.is-planner .site-backdrop {
 .erase-tag-b { left: 8px; } .erase-tag-a { right: 8px; }
 .erase-compare input[type="range"] { width: 100%; margin-top: 8px; }
 .erase-editbox { margin-top: 12px; }
-.erase-modal { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 16px; overflow-y: auto; background: rgb(0 0 0 / 0.7); backdrop-filter: blur(4px); }
-.erase-modal-card { position: relative; width: 100%; max-width: 440px; border-radius: 18px; padding: 22px; background: #0c1220; border: 1px solid rgb(251 191 36 / 0.35); color: #e8eeff; }
-.erase-modal-card .erase-x { position: absolute; inset-inline-end: 6px; top: 6px; }
-.erase-modal-card h2 { margin: 0 0 8px; font-size: 20px; }
-.erase-modal-card ul { list-style: none; margin: 10px 0; padding: 0; display: grid; gap: 4px; font-size: 14px; }
-.erase-reason { padding: 8px 10px; border-radius: 10px; background: rgb(251 191 36 / 0.12); color: #fde68a; font-size: 13px; }
-.erase-plans { display: grid; gap: 8px; margin: 12px 0; }
-.erase-plans button { display: grid; text-align: start; gap: 2px; border: 2px solid rgb(255 255 255 / 0.15); background: none; color: inherit; font: inherit; border-radius: 12px; padding: 10px 12px; cursor: pointer; }
-.erase-plans button.is-on { border-color: #d946ef; background: rgb(217 70 239 / 0.08); }
-.erase-plans small { opacity: 0.7; } .erase-plans span { font-weight: 700; }
-.erase-small { font-size: 12px; color: rgb(244 247 255 / 0.65); }
-.erase-err { color: #fca5a5; font-size: 13px; } .erase-ok { font-weight: 700; }
 @media (max-width: 640px) { .erase-app .files-compare { grid-template-columns: 1fr; } }
 .erase-editbox .erase-stage canvas { position: static; height: auto; width: 100%; }

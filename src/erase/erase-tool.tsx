@@ -1,8 +1,6 @@
 import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from "react";
 import { useI18n } from "@/lib/i18n-context";
-import { useQrAuth } from "@/qr/lib/auth";
 import { COPY } from "./erase-copy";
-import { PremiumDialog } from "./erase-premium";
 
 type Quality = "small" | "medium" | "large";
 type Bg = "clear" | "white" | "black" | "color" | "gradient" | "blur" | "photo";
@@ -10,11 +8,8 @@ type Format = "png" | "jpeg" | "webp";
 type Hand = "erase" | "restore";
 type Tab = "compare" | "edit";
 
-export const FREE_MAX_SIDE = 1600;
-export const FREE_DAILY = 5;
-export const PRO_BATCH = 20;
+export const MAX_BATCH = 30;
 const MAX_BYTES = 25 * 1024 * 1024;
-const USAGE_KEY = "nibras_erase_usage";
 const ASPECTS: { id: string; r: number }[] = [
   { id: "free", r: 0 },
   { id: "1:1", r: 1 },
@@ -42,7 +37,7 @@ type Item = {
 
 type Opts = {
   bg: Bg; color: string; color2: string; bgPhoto: HTMLImageElement | null; pad: number; shadow: boolean;
-  ratio: number; trim: boolean; flip: boolean; circle: boolean; watermark: boolean; format: Format;
+  ratio: number; trim: boolean; flip: boolean; circle: boolean; format: Format;
 };
 
 function download(name: string, blob: Blob) {
@@ -215,43 +210,13 @@ export function compose(item: Item, o: Opts, maxSide: number): HTMLCanvasElement
     rc.drawImage(cur, (cur.width - side) / 2, (cur.height - side) / 2, side, side, 0, 0, side, side);
     cur = r;
   }
-  if (o.watermark) {
-    const wc = cur.getContext("2d")!;
-    const size = Math.max(11, Math.round(Math.min(cur.width, cur.height) * 0.035));
-    wc.font = `700 ${size}px sans-serif`;
-    wc.textAlign = "center";
-    wc.textBaseline = "bottom";
-    wc.lineWidth = Math.max(2, size / 6);
-    wc.strokeStyle = "rgba(0,0,0,0.55)";
-    wc.fillStyle = "rgba(255,255,255,0.85)";
-    const label = "nibrascode.com/erase";
-    const y = cur.height - size * 0.5;
-    wc.strokeText(label, cur.width / 2, y);
-    wc.fillText(label, cur.width / 2, y);
-  }
   return cur;
-}
-
-function usage() {
-  const today = new Date().toISOString().slice(0, 10);
-  try {
-    const u = JSON.parse(localStorage.getItem(USAGE_KEY) || "null") as { d: string; c: number } | null;
-    return u && u.d === today ? u : { d: today, c: 0 };
-  } catch {
-    return { d: today, c: 0 };
-  }
-}
-function bumpUsage() {
-  const u = usage();
-  u.c += 1;
-  try { localStorage.setItem(USAGE_KEY, JSON.stringify(u)); } catch { /* storage blocked */ }
 }
 
 export function EraseTool() {
   const { lang } = useI18n();
   const t = COPY[lang] ?? COPY.az;
   const dir = lang === "ar" ? "rtl" : "ltr";
-  const pro = useQrAuth((s) => s.pro);
   const itemsRef = useRef<Item[]>([]);
   const idRef = useRef(1);
   const [tick, bump] = useReducer((n: number) => n + 1, 0);
@@ -259,7 +224,6 @@ export function EraseTool() {
   const [tab, setTab] = useState<Tab>("compare");
   const [note, setNote] = useState("");
   const [busy, setBusy] = useState(false);
-  const [lock, setLock] = useState<string | null>(null);
   const [drag, setDrag] = useState(false);
   const [quality, setQuality] = useState<Quality>("medium");
   const [bg, setBg] = useState<Bg>("clear");
@@ -279,27 +243,18 @@ export function EraseTool() {
   const [trim, setTrim] = useState(false);
   const [split, setSplit] = useState(50);
   const [previewUrl, setPreviewUrl] = useState("");
-  const [left, setLeft] = useState(FREE_DAILY);
   const editRef = useRef<HTMLCanvasElement | null>(null);
   const painting = useRef(false);
   const runningRef = useRef(false);
 
-  useEffect(() => {
-    void useQrAuth.getState().init();
-    setLeft(Math.max(0, FREE_DAILY - usage().c));
-  }, []);
-
   const items = itemsRef.current;
   const active = items.find((i) => i.id === activeId) ?? null;
   const ratio = ASPECTS.find((a) => a.id === ratioId)?.r ?? 0;
-  const effQuality: Quality = pro || quality !== "large" ? quality : "medium";
-  const effSize = pro ? size : size > 0 && size <= FREE_MAX_SIDE ? size : FREE_MAX_SIDE;
+  const effSize = size;
   const opts: Opts = useMemo(
-    () => ({ bg: pro || bg !== "gradient" ? bg : "clear", color, color2, bgPhoto, pad, shadow, ratio, trim, flip, circle, watermark: !pro, format }),
-    [pro, bg, color, color2, bgPhoto, pad, shadow, ratio, trim, flip, circle, format],
+    () => ({ bg, color, color2, bgPhoto, pad, shadow, ratio, trim, flip, circle, format }),
+    [bg, color, color2, bgPhoto, pad, shadow, ratio, trim, flip, circle, format],
   );
-
-  const ask = useCallback((reason: string) => setLock(reason), []);
 
   // ---- intake: file picker, drag & drop, paste
   const addFiles = useCallback(
@@ -307,14 +262,9 @@ export function EraseTool() {
       let files = all.filter((f) => /^image\/(png|jpeg|webp)$/.test(f.type));
       if (!files.length) { setNote(t.badType); return; }
       if (files.some((f) => f.size > MAX_BYTES)) { setNote(t.tooBig); files = files.filter((f) => f.size <= MAX_BYTES); if (!files.length) return; }
-      const isPro = useQrAuth.getState().pro;
-      if (!isPro && files.length > 1) { files = files.slice(0, 1); setNote(t.batchLocked); ask(t.lockReasonBatch); }
-      if (isPro) files = files.slice(0, PRO_BATCH);
-      if (!isPro && FREE_DAILY - usage().c <= 0) { setNote(t.limitHit); ask(t.lockReasonLimit); return; }
+      files = files.slice(0, MAX_BATCH);
       const fresh: Item[] = files.map((file) => ({ id: idRef.current++, file, name: file.name, url: URL.createObjectURL(file), status: "queued", progress: 0, undo: [], redo: [], edge: 0, ver: 0 }));
-      const keep = isPro ? itemsRef.current : [];
-      if (!isPro) itemsRef.current.forEach((i) => URL.revokeObjectURL(i.url));
-      itemsRef.current = [...keep, ...fresh].slice(0, PRO_BATCH);
+      itemsRef.current = [...itemsRef.current, ...fresh].slice(-MAX_BATCH);
       setActiveId(fresh[0].id);
       setTab("compare");
       setNote("");
@@ -322,7 +272,7 @@ export function EraseTool() {
       void startAll();
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [t, ask],
+    [t],
   );
 
   useEffect(() => {
@@ -342,7 +292,7 @@ export function EraseTool() {
     setNote(t.wait);
     try {
       const { removeBackground } = await import("@imgly/background-removal");
-      const q: Quality = useQrAuth.getState().pro ? quality : quality === "large" ? "medium" : quality;
+      const q = quality;
       const runModel = (device: "gpu" | "cpu") =>
         removeBackground(item.file, {
           model: ({ small: "isnet_quint8", medium: "isnet_fp16", large: "isnet" } as const)[q],
@@ -367,7 +317,6 @@ export function EraseTool() {
       item.ver++;
       item.progress = 100;
       item.status = "done";
-      if (!useQrAuth.getState().pro) { bumpUsage(); setLeft(Math.max(0, FREE_DAILY - usage().c)); }
       setNote(t.ready);
     } catch {
       item.status = "error";
@@ -550,25 +499,19 @@ export function EraseTool() {
     bump();
   }
 
-  const lockedMark = (locked: boolean) => (locked ? <em className="erase-pro">{t.lockedBadge}</em> : null);
   const doneCount = items.filter((i) => i.status === "done").length;
-  const sizeOptions: { v: number; label: string; locked: boolean }[] = [
-    { v: 640, label: "640", locked: false },
-    { v: 1024, label: "1024", locked: false },
-    { v: 1600, label: "1600", locked: false },
-    { v: 4096, label: "4096", locked: true },
-    { v: 0, label: t.original, locked: true },
+  const sizeOptions: { v: number; label: string }[] = [
+    { v: 640, label: "640" },
+    { v: 1024, label: "1024" },
+    { v: 1600, label: "1600" },
+    { v: 2400, label: "2400" },
+    { v: 4096, label: "4096" },
+    { v: 0, label: t.original },
   ];
 
   return (
-    <div className="files-tool erase-app" dir={dir} data-pro={pro ? "1" : "0"}>
+    <div className="files-tool erase-app" dir={dir}>
       <section className="files-card">
-        <div className="erase-top">
-          <span className={`erase-plan${pro ? " is-pro" : ""}`} data-testid="erase-plan">{pro ? `👑 ${t.proNote}` : t.freeNote}</span>
-          {!pro ? <span className="erase-left">{left > 0 ? t.limitLeft.replace("{n}", String(left)) : t.limitHit}</span> : null}
-          {!pro ? <button type="button" className="files-ghost erase-getpro" onClick={() => ask("")} data-testid="erase-getpro">👑 {t.getPremium}</button> : null}
-        </div>
-
         <label
           className={`files-drop erase-drop${drag ? " is-drag" : ""}`}
           onDragOver={(e) => { e.preventDefault(); setDrag(true); }}
@@ -598,16 +541,16 @@ export function EraseTool() {
         <div className="erase-row">
           <span>{t.quality}</span>
           {(["small", "medium", "large"] as Quality[]).map((id) => (
-            <button key={id} type="button" className={effQuality === id && quality === id ? "is-on" : ""} onClick={() => (id === "large" && !pro ? ask(t.lockReasonQuality) : setQuality(id))}>
-              {id === "small" ? t.qSmall : id === "medium" ? t.qMedium : t.qLarge}{lockedMark(id === "large" && !pro)}
+            <button key={id} type="button" className={quality === id ? "is-on" : ""} onClick={() => setQuality(id)}>
+              {id === "small" ? t.qSmall : id === "medium" ? t.qMedium : t.qLarge}
             </button>
           ))}
         </div>
         <div className="erase-row">
           <span>{t.background}</span>
           {(["clear", "white", "black", "color", "gradient", "blur", "photo"] as Bg[]).map((id) => (
-            <button key={id} type="button" data-bg={id} className={bg === id ? "is-on" : ""} onClick={() => (id === "gradient" && !pro ? ask(t.lockReasonGradient) : setBg(id))}>
-              {t[id]}{lockedMark(id === "gradient" && !pro)}
+            <button key={id} type="button" data-bg={id} className={bg === id ? "is-on" : ""} onClick={() => setBg(id)}>
+              {t[id]}
             </button>
           ))}
           {bg === "color" || bg === "gradient" ? <input type="color" value={color} onChange={(e) => setColor(e.target.value)} aria-label={t.color} /> : null}
@@ -634,8 +577,8 @@ export function EraseTool() {
         <div className="erase-row">
           <span>{t.size}</span>
           {sizeOptions.map((o) => (
-            <button key={o.v} type="button" data-size={o.v} className={(pro ? size : effSize) === o.v ? "is-on" : ""} onClick={() => (o.locked && !pro ? ask(t.lockReasonSize) : setSize(o.v))}>
-              {o.label}{lockedMark(o.locked && !pro)}
+            <button key={o.v} type="button" data-size={o.v} className={size === o.v ? "is-on" : ""} onClick={() => setSize(o.v)}>
+              {o.label}
             </button>
           ))}
         </div>
@@ -704,7 +647,6 @@ export function EraseTool() {
         </div>
       </section>
       {note ? <p className="files-note" role="status">{note}</p> : null}
-      {lock !== null ? <PremiumDialog t={t} reason={lock} dir={dir} onClose={() => setLock(null)} /> : null}
     </div>
   );
 }
