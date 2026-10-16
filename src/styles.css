@@ -4042,6 +4042,11 @@ body.is-home .noise {
   .nx-hero { align-items: end; }
 }
 
+@media (min-width: 981px) and (max-width: 1366px) {
+  .nx-5d { place-items: end center; }
+  .nx-5d-scene { margin-bottom: calc(var(--S) * 0.7); }
+}
+
 .nx-5d-world,
 .nx-5d-dust,
 .nx-5d-cube,
