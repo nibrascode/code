@@ -25,3 +25,18 @@ test("qr and erase replies follow language", () => {
   assert.match(eraseReply("how to remove background", "en"), /Nibras Erase removes/);
   assert.match(eraseReply("Как убрать фон", "ru"), /убирает фон/);
 });
+
+test("short/ambiguous queries in all 5 languages", () => {
+  const cases = [
+    ["QR made", "az", "en"], ["make QR", "az", "en"], ["qr create", "ru", "en"], ["generate QR code", "tr", "en"], ["wifi qr code", "az", "en"],
+    ["qr yarat", "en", "az"], ["qr hazırla", "tr", "az"], ["qr oluştur", "az", "tr"], ["karekod yap", "en", "tr"],
+    ["انشئ qr", "az", "ar"], ["создать qr", "az", "ru"], ["qr", "tr", "tr"], ["wifi", "ru", "ru"], ["QR", "", "az"],
+  ];
+  for (const [q, ui, want] of cases) assert.equal(resolveLang(q, ui), want, q + " ui=" + ui);
+});
+test("QR reply for 'QR made' is English, even with az UI", () => {
+  assert.match(qrReply("QR made", [], resolveLang("QR made", "az")), /The QR service is open/);
+});
+test("erase help in az", () => {
+  assert.match(eraseReply("fonu necə silim", "az"), /fonunu silir/);
+});

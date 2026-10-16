@@ -17,9 +17,14 @@ export function queryLang(text) {
   if (cy && cy >= lat) return "ru";
   if (/[əƏ]/.test(t)) return "az";
   const q = t.toLowerCase();
-  if (/[ıİ]/.test(t) || /\b(nasıl|nedir|yapabilir|lütfen|uygulama|oluştur|bana|için|değil|merhaba|teşekkür|göster|şifre|kare ?kod)\b/.test(q)) return "tr";
-  if (/\b(how|what|please|create|make|generate|show|can you|the|my|for|with|code|remove|background|photo|image|is|are|to)\b/.test(q) && !/\b(yarat|hazırla|hazirla|düzəlt|duzelt|nədir|necə|nece)\b/.test(q)) return "en";
-  if (/\b(nədir|necə|hazırla|yarat|düzəlt|haqqında|lazımdır|qr kod)\b/.test(q) || /(nece|hazirla|duzelt|haqqinda)/.test(q.replace(/[əı]/g, "e"))) return "az";
+  const w = q.replace(/[^\p{L}0-9\s'-]/gu, " ");
+  const has = (words) => new RegExp("(?<![\\p{L}])(?:" + words + ")(?![\\p{L}])", "u").test(w);
+  const trWords = "nasıl|nedir|yapabilir|lütfen|uygulama|oluştur|oluştur\\p{L}*|yap|yapar mısın|bana|için|değil|merhaba|teşekkür|göster|şifre|karekod|kare kod|üret|olustur|hazırlar mısın";
+  const azWords = "yarat|yaradın|yarada|hazırla|hazirla|düzəlt|duzelt|nədir|necə|nece|haqqında|haqqinda|lazımdır|lazimdir|mənə|sayt|üçün|ucun|göstər|goster|olunur|edin";
+  const enWords = "make|made|making|create|created|generate|generated|build|how|what|please|show|can|you|the|my|for|with|code|remove|removal|background|photo|image|picture|free|download|scan|scanner|link|text|phone|email|card|business|are|me";
+  if (has(azWords)) return "az";
+  if (has(trWords)) return "tr";
+  if (has(enWords)) return "en";
   return "";
 }
 
@@ -101,7 +106,7 @@ export function langDirective(lang) {
 
 export function eraseReply(message, lang) {
   const raw = String(message || "");
-  if (!/\berase\b|fon\s*(sil|çıx|cix)|arka\s*plan|arxa\s*fon|background|remove\s*bg|фон|خلفية/i.test(raw)) return null;
-  if (!/sil|remove|delete|erase|çıxar|cixar|kald|убра|удал|удали|أزل|ازل|إزالة|حذف|nibras\s*erase/i.test(raw)) return null;
+  if (!/\berase\b|\bfon\p{L}*|arka\s*plan|arxa\s*fon|background|remove\s*bg|фон|خلفية/iu.test(raw)) return null;
+  if (!/sil|remove|delete|erase|çıxar|cixar|kald|убра|удал|удали|أزل|ازل|إزالة|حذف|nibras\s*erase/iu.test(raw)) return null;
   return msgs(lang).erase;
 }
