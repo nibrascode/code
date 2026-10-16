@@ -7218,7 +7218,8 @@ body.is-planner .site-backdrop {
 }
 
 /* ana səhifə: 5-ci kart (Nibras QR) — 4 kartın altında, tam en */
-.nx-bars > .nx-qr-bar { grid-column: 1 / -1; justify-content: flex-start; }
+.nx-bars > .nx-qr-bar { justify-content: flex-start; }
+.nx-bars > .nx-qr-bar:last-child { grid-column: 1 / -1; }
 .nx-qr-bar img { width: 36px; height: 36px; border-radius: 10px; filter: drop-shadow(0 0 10px rgb(60 140 255 / 0.55)); }
 .nx-bars > .nx-qr-bar > .nx-qr-text { display: flex; flex: 1; flex-direction: column; gap: 1px; white-space: normal; font-size: inherit; letter-spacing: normal; }
 .nx-qr-text b { font-size: 15px; font-weight: 750; letter-spacing: -0.03em; }

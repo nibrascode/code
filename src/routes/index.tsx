@@ -341,6 +341,13 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
               </svg>
               <span>{TOOLS_PAGE.heading[lang]}</span>
             </a>
+            <a className="nx-ai-bar nx-qr-bar" href={localeHref(lang, "/pdf")}>
+              <img src="/apps/nibras-pdf.jpg" alt="" width={36} height={36} />
+              <span className="nx-qr-text">
+                <b>Nibras PDF</b>
+              </span>
+              <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
+            </a>
             <a className="nx-ai-bar nx-qr-bar" href={localeHref(lang, "/qr")}>
               <img src="/apps/nibras-qr-v2.jpg" alt="" width={36} height={36} />
               <span className="nx-qr-text">
@@ -352,13 +359,6 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
               <img src="/apps/nibras-erase.png" alt="" width={36} height={36} />
               <span className="nx-qr-text">
                 <b>Nibras Erase</b>
-              </span>
-              <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
-            </a>
-            <a className="nx-ai-bar nx-qr-bar" href={localeHref(lang, "/pdf")}>
-              <img src="/apps/nibras-pdf.jpg" alt="" width={36} height={36} />
-              <span className="nx-qr-text">
-                <b>Nibras PDF</b>
               </span>
               <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
             </a>
