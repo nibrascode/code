@@ -7276,3 +7276,29 @@ body.is-planner .site-backdrop {
 .erase-stage canvas { position: absolute; inset: 0; height: 100%; touch-action: none; cursor: crosshair; }
 .erase-stage.is-cut, .files-compare .is-cut { background: repeating-conic-gradient(#2a2a2a 0 25%, #161616 0 50%) 0 0 / 16px 16px; }
 @media (max-width: 640px) { .files-compare { grid-template-columns: 1fr; } }
+
+/* Nibras Erase: premium, batch, compare, edit */
+.erase-drop.is-drag { border-color: #fff; background: rgb(255 255 255 / 0.08); }
+.erase-row button:disabled { opacity: 0.4; cursor: default; }
+.erase-queue { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 6px; }
+.erase-queue li { display: flex; align-items: center; gap: 6px; border: 1px solid rgb(255 255 255 / 0.1); border-radius: 10px; }
+.erase-queue li.is-on { border-color: #fff; }
+.erase-queue li > button:first-child { flex: 1; display: flex; align-items: center; gap: 8px; min-width: 0; background: none; border: 0; color: inherit; font: inherit; padding: 6px; cursor: pointer; text-align: start; }
+.erase-queue img { width: 36px; height: 36px; object-fit: cover; border-radius: 6px; }
+.erase-queue span { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.erase-queue small { opacity: 0.75; }
+.erase-x { background: none; border: 0; color: inherit; font-size: 20px; line-height: 1; padding: 6px 10px; cursor: pointer; }
+.erase-tabs { display: flex; gap: 6px; margin-top: 14px; }
+.erase-tabs button { border: 1px solid rgb(255 255 255 / 0.2); background: none; color: inherit; font: inherit; border-radius: 99px; padding: 6px 14px; cursor: pointer; }
+.erase-tabs button.is-on { background: #fff; color: #111; }
+.erase-compare { margin-top: 12px; }
+.erase-cmp-stage { position: relative; overflow: hidden; border-radius: 12px; direction: ltr; }
+.erase-cmp-stage img { display: block; width: 100%; }
+.erase-cmp-stage .erase-before { position: absolute; inset: 0; height: 100%; object-fit: contain; background: #111; }
+.erase-handle { position: absolute; top: 0; bottom: 0; width: 2px; background: #fff; box-shadow: 0 0 6px #000; pointer-events: none; }
+.erase-tag { position: absolute; top: 8px; padding: 2px 8px; border-radius: 99px; background: rgb(0 0 0 / 0.55); color: #fff; font-size: 11px; }
+.erase-tag-b { left: 8px; } .erase-tag-a { right: 8px; }
+.erase-compare input[type="range"] { width: 100%; margin-top: 8px; }
+.erase-editbox { margin-top: 12px; }
+@media (max-width: 640px) { .erase-app .files-compare { grid-template-columns: 1fr; } }
+.erase-editbox .erase-stage canvas { position: static; height: auto; width: 100%; }
