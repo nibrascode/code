@@ -4965,7 +4965,7 @@ body.is-home .noise {
   width: 40px;
   height: 36px;
   object-fit: contain;
-  filter: drop-shadow(0 0 10px rgb(80 150 255 / 0.55));
+  filter: drop-shadow(0 0 8px rgb(90 160 255 / 0.7));
 }
 
 .nx-ai-bar span {
@@ -4985,6 +4985,8 @@ body.is-home .noise {
   color: #9eb0d4;
 }
 
+.nx-studio-bar::before,
+.nx-apk-bar::before,
 .nx-ai-bar::before {
   content: "";
   position: absolute;
@@ -5045,29 +5047,6 @@ body.is-home .noise {
   box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.05);
 }
 
-.nx-studio-bar::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  pointer-events: none;
-  background: conic-gradient(
-    from var(--studio-spin),
-    transparent 0deg,
-    transparent 210deg,
-    #d8ff8a 258deg,
-    #34d399 286deg,
-    transparent 322deg,
-    transparent 360deg
-  );
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  mask-composite: exclude;
-  animation: studio-spin 4.4s linear infinite;
-}
-
 .nx-term {
   width: 36px;
   height: 36px;
@@ -5111,29 +5090,6 @@ body.is-home .noise {
   background: #070b16;
   color: #f4f7ff;
   box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.05);
-}
-
-.nx-apk-bar::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  pointer-events: none;
-  background: conic-gradient(
-    from var(--apk-spin),
-    transparent 0deg,
-    transparent 230deg,
-    #ffd27a 276deg,
-    #ff8a3d 304deg,
-    transparent 340deg,
-    transparent 360deg
-  );
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  mask-composite: exclude;
-  animation: apk-spin 3.5s linear infinite;
 }
 
 .nx-apk {
@@ -7220,7 +7176,12 @@ body.is-planner .site-backdrop {
 /* ana səhifə: 5-ci kart (Nibras QR) — 4 kartın altında, tam en */
 .nx-bars > .nx-qr-bar { justify-content: flex-start; }
 .nx-bars > .nx-qr-bar:last-child { grid-column: 1 / -1; }
-.nx-qr-bar img { width: 36px; height: 36px; border-radius: 10px; filter: drop-shadow(0 0 10px rgb(60 140 255 / 0.55)); }
+.nx-qr-bar img {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  filter: drop-shadow(0 0 8px rgb(90 160 255 / 0.7));
+}
 .nx-bars > .nx-qr-bar > .nx-qr-text { display: flex; flex: 1; flex-direction: column; gap: 1px; white-space: normal; font-size: inherit; letter-spacing: normal; }
 .nx-qr-text b { font-size: 15px; font-weight: 750; letter-spacing: -0.03em; }
 .nx-qr-text small { font-size: 12px; font-weight: 500; color: rgb(244 247 255 / 0.65); line-height: 1.3; }
