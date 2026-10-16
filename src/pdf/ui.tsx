@@ -3,14 +3,14 @@ import type { ReactNode } from "react";
 import type { Dict } from "./copy";
 import { closePdf, openPdf, renderPageToCanvas } from "./lib/pdfjs";
 
-export type Out = { name: string; blob: Blob; kind: "pdf" | "image" | "zip" | "docx" | "text"; text?: string; note?: string };
+export type Out = { name: string; blob: Blob; kind: "pdf" | "image" | "zip" | "docx" | "text"; text?: string; note?: string; extra?: { label: string; name: string; blob: Blob }[] };
 
 export const btn =
-  "inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-white/5 px-4 py-2 text-sm font-medium text-fg transition hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-50";
+  "inline-flex items-center justify-center gap-2 rounded-xl border border-[var(--pdf-edge,var(--color-border))] bg-[var(--pdf-glass,transparent)] px-4 py-2 text-sm font-medium text-fg transition duration-200 hover:-translate-y-px hover:bg-[var(--pdf-glass-hi,transparent)] active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-50";
 export const btnPrimary =
-  "inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-primary-fg transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50";
-export const field = "w-full rounded-xl border border-border bg-bg px-3 py-2 text-sm text-fg outline-none focus:border-primary";
-export const card = "rounded-2xl border border-border bg-bg-elevated p-4 md:p-5";
+  "inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-br from-primary to-[var(--color-brand-2)] px-5 py-2.5 text-sm font-semibold text-primary-fg shadow-[0_10px_24px_-12px_var(--pdf-glow,transparent)] transition duration-200 hover:-translate-y-px hover:brightness-110 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-50";
+export const field = "w-full rounded-xl border border-[var(--pdf-edge,var(--color-border))] bg-bg/60 px-3 py-2 text-sm text-fg outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/25";
+export const card = "pdf-surface p-4 md:p-5";
 
 export function fmtSize(n: number) {
   if (n < 1024) return `${n} B`;
@@ -44,7 +44,7 @@ export function Seg<T extends string>({ value, onChange, options, name }: { valu
           aria-checked={value === o.id}
           data-opt={o.id}
           onClick={() => onChange(o.id)}
-          className={`rounded-xl border px-3 py-1.5 text-sm transition ${value === o.id ? "border-primary bg-primary/20 text-fg" : "border-border bg-white/5 text-muted hover:text-fg"}`}
+          className={`rounded-xl border px-3 py-1.5 text-sm transition duration-200 ${value === o.id ? "border-primary bg-primary/20 text-fg shadow-[0_0_0_3px_color-mix(in_srgb,var(--color-primary)_18%,transparent)]" : "border-[var(--pdf-edge,var(--color-border))] bg-[var(--pdf-glass,transparent)] text-muted hover:text-fg"}`}
         >
           {o.label}
         </button>
@@ -89,7 +89,8 @@ export function FileDrop({ accept, multiple, label, hint, onFiles, compact, test
       onDragOver={(e) => { e.preventDefault(); setDrag(true); }}
       onDragLeave={() => setDrag(false)}
       onDrop={(e) => { e.preventDefault(); setDrag(false); onFiles([...e.dataTransfer.files]); }}
-      className={`flex flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed text-center transition ${drag ? "border-primary bg-primary/10" : "border-border bg-white/[0.03]"} ${compact ? "p-4" : "p-8 md:p-12"}`}
+      data-over={drag}
+      className={`pdf-drop flex flex-col items-center justify-center gap-2 text-center ${compact ? "p-4" : "p-8 md:p-12"}`}
     >
       <button type="button" className={btnPrimary} onClick={() => input.current?.click()} data-testid={testId}>
         {label}
@@ -222,7 +223,7 @@ export function ResultCard({ out, t, onOpen }: { out: Out; t: Dict; onOpen?: () 
   }, [out]);
   const canShare = typeof navigator !== "undefined" && typeof navigator.canShare === "function" && navigator.canShare({ files: [new File([""], "a.txt", { type: "text/plain" })] });
   return (
-    <div className="flex flex-col gap-3 rounded-xl border border-border bg-white/[0.03] p-3 sm:flex-row" data-testid="result" data-kind={out.kind}>
+    <div className="pdf-surface flex flex-col gap-3 p-3 sm:flex-row" data-testid="result" data-kind={out.kind}>
       {thumb ? <img src={thumb} alt="" className="h-28 w-20 shrink-0 rounded-md bg-white object-contain" /> : null}
       <div className="min-w-0 flex-1">
         <div className="truncate text-sm font-semibold" title={out.name}>{out.name}</div>
@@ -234,6 +235,7 @@ export function ResultCard({ out, t, onOpen }: { out: Out; t: Dict; onOpen?: () 
         <div className="mt-2 flex flex-wrap gap-2">
           <button type="button" className={btnPrimary} onClick={() => saveBlob(out.name, out.blob)} data-testid="download">{t.download}</button>
           {out.kind === "pdf" && onOpen ? <button type="button" className={btn} onClick={onOpen}>{t.open}</button> : null}
+          {out.extra?.map((x) => <button key={x.label} type="button" className={btn} onClick={() => saveBlob(x.name, x.blob)} data-testid={`download-${x.label.toLowerCase()}`}>{x.label}</button>)}
           {out.kind === "text" ? (
             <button
               type="button"

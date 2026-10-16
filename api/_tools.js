@@ -240,3 +240,6 @@ export function toolsReply(message) {
 }
 
 // chat import fix
+
+// Nibras PDF in chat (intent detection for the browser-side PDF tools): see _pdf-intent.js
+export { pdfIntent, PDF_TOOLS } from "./_pdf-intent.js";

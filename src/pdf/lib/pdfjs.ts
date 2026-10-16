@@ -10,7 +10,7 @@ export function getPdfjs(): Promise<PdfjsModule> {
       import("pdfjs-dist"),
       import("pdfjs-dist/build/pdf.worker.min.mjs?url"),
     ]);
-    lib.GlobalWorkerOptions.workerSrc = worker.default;
+    lib.GlobalWorkerOptions.workerSrc = (globalThis as { __NIBRAS_PDF_WORKER__?: string }).__NIBRAS_PDF_WORKER__ || worker.default;
     return lib;
   })();
   return pdfjsPromise;

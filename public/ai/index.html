@@ -810,7 +810,7 @@
           <textarea id="inp" rows="2" maxlength="800" placeholder="Nə ilə kömək edim?"></textarea>
           <div class="row">
             <img class="thumb" id="thumb" alt="" />
-            <input id="file" type="file" accept="image/png,image/jpeg,image/webp" hidden />
+            <input id="file" type="file" multiple accept="image/png,image/jpeg,image/webp,application/pdf,.pdf,.docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document" hidden />
             <button class="clip" id="clip" type="button" aria-label="Fayl">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="m15.5 7.5-6.8 6.8a2.2 2.2 0 0 0 3.1 3.1l7-7a3.6 3.6 0 0 0-5.1-5.1l-7.2 7.2a5 5 0 0 0 7.1 7.1l5.2-5.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
             </button>
@@ -2151,7 +2151,8 @@
         rec("b", "::calc::" + m, "", 0);
         return;
       }
-      const useImage = mode === "image" || pendingImage || wantsImage(m);
+      const pdfFlow = wantsPdfFlow(m);
+      const useImage = !pdfFlow && (mode === "image" || pendingImage || wantsImage(m));
       const sentMode = useImage ? "image" : mode === "code" ? "code" : mode === "create" ? "create" : "ask";
       inp.value = "";
       busy = true;
@@ -2170,13 +2171,25 @@
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(useImage
             ? { prompt: m, image: pendingImage, limitReached: remain() <= 0 }
-            : { message: m, lang: uiLangCode, messages: threadOf().slice(-8), games: gamesShown(), mode: sentMode, limitReached: remain() <= 0, noticeShown: noticeShown() })
+            : { message: m, lang: uiLangCode, messages: threadOf().slice(-8), games: gamesShown(), mode: sentMode, limitReached: remain() <= 0, noticeShown: noticeShown(), files: sessFiles.length ? filesMeta() : undefined })
         });
         const raw = await r.text();
         let data = {};
         try { data = JSON.parse(raw); } catch (e) {}
         wait.remove();
         const reply = data.reply || data.message || data.error;
+        if (r.ok && data.pdfAction) {
+          pendingDocs = [];
+          paintChips();
+          pendingImage = "";
+          const th = document.getElementById("thumb");
+          th.classList.remove("on");
+          th.removeAttribute("src");
+          setMode("chat");
+          await runPdf(data);
+          return;
+        }
+        if (!useImage && pendingDocs.length) { pendingDocs = []; paintChips(); }
         if (!r.ok || data.success === false || (!reply && !data.url)) {
           stat("error", useImage ? "image" : "chat");
           const etext = reply || "Cavab gəlmədi. Bir az sonra yenidən yoxlayın.";
@@ -2258,7 +2271,7 @@
     });
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      send(inp.value);
+      send(inp.value.trim() || (pendingDocs.length ? "📎 " + pendingDocs.map(function (x) { return x.name; }).join(", ").slice(0, 200) : ""));
     });
     inp.addEventListener("keydown", function (e) {
       if (e.key === "Enter" && !e.shiftKey) {
@@ -2273,14 +2286,131 @@
         inp.focus();
       });
     });
-    document.getElementById("file").addEventListener("change", function () {
-      const file = this.files && this.files[0];
-      this.value = "";
-      if (!file) return;
-      if (!/^image\/(png|jpeg|webp)$/.test(file.type)) {
-        note("PNG və ya JPG seç.");
-        return;
+    // ---- Nibras PDF in chat: PDF/DOCX/image upload (clip + drag&drop). The server only picks the tool; the browser runs it (lazy runner).
+    const PDFUI = {
+      az: { drop: "Faylı bura burax: PDF, şəkil və ya DOCX", rm: "Sil", bad: "Yalnız PDF, DOCX və şəkil (PNG, JPG, WEBP) qəbul olunur.", big: "Fayl çox böyükdür (maks. 60 MB).", fail: "PDF modulu yüklənmədi. Səhifəni yeniləyin." },
+      en: { drop: "Drop the file here: PDF, image or DOCX", rm: "Remove", bad: "Only PDF, DOCX and images (PNG, JPG, WEBP) are accepted.", big: "The file is too large (max 60 MB).", fail: "The PDF module did not load. Reload the page." },
+      tr: { drop: "Dosyayı buraya bırak: PDF, görsel veya DOCX", rm: "Kaldır", bad: "Yalnızca PDF, DOCX ve görseller (PNG, JPG, WEBP) kabul edilir.", big: "Dosya çok büyük (en fazla 60 MB).", fail: "PDF modülü yüklenemedi. Sayfayı yenileyin." },
+      ar: { drop: "أفلت الملف هنا: PDF أو صورة أو DOCX", rm: "إزالة", bad: "يُقبل فقط PDF وDOCX والصور (PNG وJPG وWEBP).", big: "الملف كبير جداً (الحد 60 ميغابايت).", fail: "تعذّر تحميل وحدة PDF. أعد تحميل الصفحة." },
+      ru: { drop: "Отпустите файл здесь: PDF, изображение или DOCX", rm: "Убрать", bad: "Принимаются только PDF, DOCX и изображения (PNG, JPG, WEBP).", big: "Файл слишком большой (макс. 60 МБ).", fail: "Модуль PDF не загрузился. Обновите страницу." }
+    };
+    function pu(k) { return (PDFUI[uiLangCode] || PDFUI.az)[k]; }
+    const sessFiles = [];
+    let pendingDocs = [];
+    function kindOfFile(f) {
+      const n = (f.name || "").toLowerCase();
+      if (f.type === "application/pdf" || /\.pdf$/.test(n)) return "pdf";
+      if (/\.docx$/.test(n)) return "docx";
+      if (/^image\/(png|jpeg|webp|gif|bmp)$/.test(f.type) || /\.(png|jpe?g|webp)$/.test(n)) return "image";
+      return "";
+    }
+    (function () {
+      const st = document.createElement("style");
+      st.textContent = ".fchips{display:flex;flex-wrap:wrap;gap:6px;padding:6px 10px 0}.fchips:empty{display:none}.fchip{display:inline-flex;align-items:center;gap:6px;max-width:100%;border:1px solid rgba(140,160,255,.35);background:rgba(110,130,255,.14);color:inherit;border-radius:999px;padding:3px 6px 3px 10px;font:600 12px system-ui,sans-serif;animation:fchipin .25s cubic-bezier(.2,.8,.2,1) both}.fchip span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:210px}.fchip button{all:unset;cursor:pointer;width:18px;height:18px;border-radius:50%;display:grid;place-items:center;opacity:.75}.fchip button:hover{background:rgba(255,255,255,.18);opacity:1}#dropov{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;background:rgba(8,10,24,.72);backdrop-filter:blur(6px);color:#fff;font:600 18px system-ui,sans-serif}#dropov.on{display:flex}#dropov div{border:2px dashed rgba(126,203,255,.8);border-radius:22px;padding:42px 54px;background:rgba(110,130,255,.12);text-align:center}@keyframes fchipin{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:none}}.nbp-done{margin-top:6px;font-size:13px;opacity:.85}";
+      document.head.appendChild(st);
+    })();
+    const chipBox = document.createElement("div");
+    chipBox.className = "fchips";
+    chipBox.id = "fchips";
+    inp.parentNode.insertBefore(chipBox, inp.nextSibling);
+    function paintChips() {
+      chipBox.textContent = "";
+      pendingDocs.forEach(function (x) {
+        const c = document.createElement("div");
+        c.className = "fchip";
+        c.setAttribute("data-kind", x.kind);
+        const s = document.createElement("span");
+        s.textContent = (x.kind === "pdf" ? "PDF · " : x.kind === "docx" ? "DOCX · " : "") + x.name;
+        s.title = x.name;
+        const b = document.createElement("button");
+        b.type = "button";
+        b.setAttribute("aria-label", pu("rm"));
+        b.textContent = "×";
+        b.onclick = function () {
+          pendingDocs = pendingDocs.filter(function (y) { return y.id !== x.id; });
+          const i = sessFiles.indexOf(x);
+          if (i >= 0) sessFiles.splice(i, 1);
+          paintChips();
+        };
+        c.appendChild(s);
+        c.appendChild(b);
+        chipBox.appendChild(c);
+      });
+    }
+    function pdfAdd(file) {
+      const kind = kindOfFile(file);
+      if (!kind) { note(pu("bad")); return; }
+      if (file.size > 60 * 1024 * 1024) { note(pu("big")); return; }
+      const x = { id: "f" + Date.now().toString(36) + Math.floor(Math.random() * 1e6).toString(36), file: file, kind: kind, name: file.name || "file" };
+      sessFiles.push(x);
+      while (sessFiles.length > 12) sessFiles.shift();
+      pendingDocs.push(x);
+      paintChips();
+      inp.focus();
+    }
+    function filesMeta() {
+      return sessFiles.map(function (x) { return { id: x.id, name: x.name, kind: x.kind, attached: pendingDocs.indexOf(x) >= 0 }; });
+    }
+    function wantsPdfFlow(m) {
+      if (pendingDocs.some(function (x) { return x.kind === "pdf" || x.kind === "docx"; })) return true;
+      if (/pdf|docx|\bocr\b/i.test(m)) return true;
+      return pendingDocs.some(function (x) { return x.kind === "image"; }) && /(mətn|metn|metin|text|текст|نص|oxu|read|распозна|скан|skan)/i.test(m);
+    }
+    let runnerP = null;
+    function loadRunner() {
+      if (!runnerP) runnerP = import("/pdf-assets/runner/runner.js").catch(function (e) { runnerP = null; throw e; });
+      return runnerP;
+    }
+    async function runPdf(data) {
+      const byId = {};
+      sessFiles.forEach(function (x) { byId[x.id] = x; });
+      const files = (data.pdfAction.targets || []).map(function (id) { return byId[id]; }).filter(Boolean).map(function (x) { return x.file; });
+      bubble(data.reply, "b");
+      rec("b", data.reply, "", 0);
+      const card = document.createElement("div");
+      card.className = "msg b";
+      card.setAttribute("data-pdf", data.pdfAction.tool);
+      msgs.appendChild(card);
+      msgs.scrollTop = msgs.scrollHeight;
+      try {
+        const mod = await loadRunner();
+        await mod.default.handle({ action: data.pdfAction, files: files, lang: data.lang || uiLangCode, container: card });
+        if (data.done) {
+          const d = document.createElement("div");
+          d.className = "nbp-done";
+          d.textContent = data.done;
+          card.appendChild(d);
+          rec("b", data.done, "", 0);
+        }
+      } catch (e) {
+        if (!card.querySelector("[data-nbp=error]")) { card.textContent = pu("fail"); }
       }
+      msgs.scrollTop = msgs.scrollHeight;
+    }
+    (function () {
+      const ov = document.createElement("div");
+      ov.id = "dropov";
+      ov.innerHTML = "<div></div>";
+      document.body.appendChild(ov);
+      let depth = 0;
+      const hasFiles = function (e) { return e.dataTransfer && Array.prototype.indexOf.call(e.dataTransfer.types || [], "Files") >= 0; };
+      document.addEventListener("dragenter", function (e) { if (!hasFiles(e)) return; depth++; ov.firstChild.textContent = pu("drop"); ov.classList.add("on"); });
+      document.addEventListener("dragover", function (e) { if (hasFiles(e)) e.preventDefault(); });
+      document.addEventListener("dragleave", function (e) { if (!hasFiles(e)) return; depth = Math.max(0, depth - 1); if (!depth) ov.classList.remove("on"); });
+      document.addEventListener("drop", function (e) {
+        if (!hasFiles(e)) return;
+        e.preventDefault();
+        depth = 0;
+        ov.classList.remove("on");
+        Array.prototype.slice.call(e.dataTransfer.files).forEach(pdfAdd);
+      });
+    })();
+    document.getElementById("file").addEventListener("change", function () {
+      const list = Array.prototype.slice.call(this.files || []);
+      this.value = "";
+      list.forEach(pdfAdd);
+      const file = list.length === 1 && /^image\/(png|jpeg|webp)$/.test(list[0].type) ? list[0] : null;
+      if (!file) return;
       const img = new Image();
       const url = URL.createObjectURL(file);
       img.onload = function () {

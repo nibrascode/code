@@ -1,3 +1,4 @@
+import { useNavigate } from "@tanstack/react-router";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowLeft, ArrowRight, Camera, Check, FileText, FileType2, Files, Image as ImageIcon, Layers, Lock, Minimize2,
@@ -12,7 +13,8 @@ import {
 } from "./ui";
 import * as eng from "./lib/engine";
 import { closePdf, openPdf, renderPageToCanvas } from "./lib/pdfjs";
-import { OCR_LANGS, ocrImages, ocrLangForSite, type OcrLang } from "./lib/ocr";
+import { OCR_LANGS, detectOcrLangs, ocrDetailed, preprocessForOcr, ocrLangForSite, type OcrLang } from "./lib/ocr";
+import { extractTextSmart } from "./lib/extract";
 import { createDocxFromText, docxToText } from "./lib/docx";
 import type { WatermarkPosition } from "./lib/pdfOperations";
 
@@ -38,57 +40,74 @@ const WM_POS: { id: WatermarkPosition; s: string }[] = [
   { id: "bottom-left", s: "↙" }, { id: "bottom-center", s: "↓" }, { id: "bottom-right", s: "↘" },
 ];
 
-export function PdfTool({ lang }: { lang: Lang }) {
+const GROUPS: { id: string; tools: ToolId[]; label: Record<Lang, string> }[] = [
+  { id: "organize", tools: ["merge", "split", "pages", "extract-pages", "rotate", "batch"], label: { az: "Səhifələri idarə et", en: "Organize", tr: "Sayfaları düzenle", ar: "تنظيم الصفحات", ru: "Страницы и файлы" } },
+  { id: "convert", tools: ["pdf-image", "pdf-word", "word-pdf", "pdf-ocr", "ocr", "preview"], label: { az: "Çevir və oxu", en: "Convert & read", tr: "Dönüştür ve oku", ar: "تحويل وقراءة", ru: "Конвертация и чтение" } },
+  { id: "create", tools: ["write-pdf", "image-pdf", "scan"], label: { az: "Yarat", en: "Create", tr: "Oluştur", ar: "إنشاء", ru: "Создание" } },
+  { id: "secure", tools: ["compress", "protect", "watermark", "sign"], label: { az: "Optimallaşdır və qoru", en: "Optimize & protect", tr: "Optimize et ve koru", ar: "تحسين وحماية", ru: "Сжатие и защита" } },
+];
+
+const basePath = (lang: Lang) => (lang === "az" ? "/pdf" : `/${lang}/pdf`);
+
+export function PdfTool({ lang, tool }: { lang: Lang; tool: ToolId | null }) {
   const t = COPY[lang];
   const names = TOOL_TEXT[lang];
   const dir = lang === "ar" ? "rtl" : "ltr";
-  const [tool, setTool] = useState<ToolId | null>(null);
-
-  useEffect(() => {
-    const read = () => {
-      const h = location.hash.replace("#", "") as ToolId;
-      setTool((TOOL_IDS as readonly string[]).includes(h) ? h : null);
-    };
-    read();
-    window.addEventListener("hashchange", read);
-    return () => window.removeEventListener("hashchange", read);
-  }, []);
-  const go = (id: ToolId | null) => {
-    if (id) location.hash = id;
-    else history.pushState(null, "", location.pathname + location.search);
-    setTool(id);
+  const navigate = useNavigate();
+  const base = basePath(lang);
+  const go = (to: string) => {
+    void navigate({ to: to as never });
     window.scrollTo({ top: 0 });
   };
+  const link = (to: string) => ({
+    href: to,
+    onClick: (e: React.MouseEvent) => {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+      e.preventDefault();
+      go(to);
+    },
+  });
+
+  // Old deep links (/pdf#merge) move to the real per-tool page.
+  useEffect(() => {
+    const h = location.hash.replace("#", "");
+    if (!tool && (TOOL_IDS as readonly string[]).includes(h)) void navigate({ to: `${base}/${h}` as never, replace: true });
+  }, [tool, base, navigate]);
 
   return (
     <div dir={dir} className="pdf-tool">
       {tool ? (
         <>
-          <button type="button" className={`${btn} mb-4`} onClick={() => go(null)} data-testid="back">
+          <a {...link(base)} className={`${btn} mb-4`} data-testid="back">
             {dir === "rtl" ? <ArrowRight className="size-4" /> : <ArrowLeft className="size-4" />}
             {t.back}
-          </button>
+          </a>
           <Workspace key={tool} tool={tool} lang={lang} t={t} title={names[tool].title} desc={names[tool].description} />
         </>
       ) : (
-        <>
-          <h2 className="mb-4 text-lg font-semibold">{t.toolsHeading}</h2>
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3" data-testid="tool-grid">
-            {TOOL_IDS.map((id) => {
-              const Icon = ICONS[id];
-              return (
-                <button key={id} type="button" data-tool={id} onClick={() => go(id)} className="flex items-start gap-3 rounded-2xl border border-border bg-bg-elevated p-4 text-start transition hover:border-primary/60 hover:bg-white/[0.06]">
-                  <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-primary/15 text-primary"><Icon className="size-5" /></span>
-                  <span className="min-w-0">
-                    <span className="block text-sm font-semibold">{names[id].title}</span>
-                    <span className="mt-0.5 block text-xs text-muted">{names[id].description}</span>
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-          <p className="mt-6 text-center text-xs text-muted">{t.privateNote}</p>
-        </>
+        <div data-testid="tool-grid">
+          {GROUPS.map((g, gi) => (
+            <section key={g.id} aria-label={g.label[lang]}>
+              <h2 className="pdf-group-title">{g.label[lang]}</h2>
+              <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
+                {g.tools.map((id, i) => {
+                  const Icon = ICONS[id];
+                  return (
+                    <a key={id} {...link(`${base}/${id}`)} data-tool={id} className="pdf-tile" style={{ ["--i" as string]: gi * 3 + i }}>
+                      <span className="pdf-ico"><Icon className="size-5" /></span>
+                      <span className="min-w-0">
+                        <span className="block text-sm font-semibold">{names[id].title}</span>
+                        <span className="mt-0.5 block text-xs leading-snug text-muted">{names[id].description}</span>
+                      </span>
+                      <ArrowRight className="pdf-arrow size-4 shrink-0 self-center" />
+                    </a>
+                  );
+                })}
+              </div>
+            </section>
+          ))}
+          <p className="mt-8 text-center text-xs text-muted">{t.privateNote}</p>
+        </div>
       )}
     </div>
   );
@@ -114,8 +133,9 @@ function Workspace({ tool, lang, t, title, desc }: { tool: ToolId; lang: Lang; t
   const [wm, setWm] = useState(t.wmDefault);
   const [wmPos, setWmPos] = useState<WatermarkPosition>("center");
   const [imgFmt, setImgFmt] = useState<"png" | "jpeg">("png");
-  const [ocrLang, setOcrLang] = useState<OcrLang>(ocrLangForSite(lang));
+  const [ocrLang, setOcrLang] = useState<OcrLang | "auto" | "all">("auto");
   const [batchOp, setBatchOp] = useState<"compress" | "rotate" | "watermark" | "split">("compress");
+  const [forceOcr, setForceOcr] = useState(false);
   const [viewZoom, setViewZoom] = useState(1);
   const [openOut, setOpenOut] = useState<Out | null>(null);
   const [openBytes, setOpenBytes] = useState<Uint8Array | null>(null);
@@ -246,6 +266,15 @@ function Workspace({ tool, lang, t, title, desc }: { tool: ToolId; lang: Lang; t
     const z = zipSync(Object.fromEntries(files.map((f) => [f.name, [f.data, { level: 0 }] as [Uint8Array, { level: 0 }]])));
     return { name, blob: new Blob([z as BlobPart], { type: "application/zip" }), kind: "zip" };
   };
+  const docxBlob = (text: string) => new Blob([createDocxFromText(text) as BlobPart], { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" });
+  const textOut = (name: string, text: string, note?: string): Out => ({
+    name: `${name}.txt`,
+    blob: new Blob([text], { type: "text/plain;charset=utf-8" }),
+    kind: "text",
+    text,
+    note,
+    extra: [{ label: "DOCX", name: `${name}.docx`, blob: docxBlob(text) }],
+  });
   const pagesSel = (total: number): number[] | undefined | null => {
     if (scope === "all") return undefined;
     return eng.parseRange(range, total);
@@ -348,34 +377,38 @@ function Workspace({ tool, lang, t, title, desc }: { tool: ToolId; lang: Lang; t
         }
         case "ocr": {
           if (!items.length) throw new Error(t.errNoImages);
-          const texts = await ocrImages(items.map((i) => i.file), [ocrLang], { onProgress: (d, n, fr) => setBusy({ label: t.ocrWorking, frac: (d + fr) / n }), shouldCancel: stop });
-          const text = texts.join("\n\n").trim();
-          if (!text) throw new Error(t.errNoText);
-          res.push({ name: "text.txt", blob: new Blob([text], { type: "text/plain;charset=utf-8" }), kind: "text", text });
-          break;
-        }
-        case "pdf-ocr": {
-          need();
-          const doc = await openPdf(f.bytes!);
           const canvases: HTMLCanvasElement[] = [];
-          try {
-            for (let n = 1; n <= doc.numPages; n++) {
-              setBusy({ label: t.ocrWorking, frac: (n - 1) / doc.numPages / 2 });
-              canvases.push(await renderPageToCanvas(doc, n, 2.2));
-            }
-          } finally { await closePdf(doc); }
-          const texts = await ocrImages(canvases, [ocrLang], { onProgress: (d, n, fr) => setBusy({ label: t.ocrWorking, frac: 0.5 + (d + fr) / n / 2 }), shouldCancel: stop });
-          const text = texts.map((s, i) => (canvases.length > 1 ? `— ${t.page} ${i + 1} —\n${s}` : s)).join("\n\n").trim();
-          if (!texts.some(Boolean)) throw new Error(t.errNoText);
-          res.push({ name: `${baseName(f.name)}.txt`, blob: new Blob([text], { type: "text/plain;charset=utf-8" }), kind: "text", text });
+          for (const it of items) {
+            const bmp = await createImageBitmap(it.file);
+            const k = Math.min(3, 3000 / Math.max(bmp.width, bmp.height));
+            const c = document.createElement("canvas");
+            c.width = Math.round(bmp.width * Math.max(k, 1)); c.height = Math.round(bmp.height * Math.max(k, 1));
+            const cx = c.getContext("2d", { willReadFrequently: true })!;
+            cx.fillStyle = "#fff"; cx.fillRect(0, 0, c.width, c.height); cx.drawImage(bmp, 0, 0, c.width, c.height); bmp.close();
+            canvases.push(preprocessForOcr(c));
+          }
+          const langs: OcrLang[] = ocrLang === "auto" ? await detectOcrLangs(canvases[0], ocrLangForSite(lang)) : ocrLang === "all" ? ["aze", "eng", "tur", "rus", "ara"] : [ocrLang];
+          const pagesOut = await ocrDetailed(canvases, langs, { onProgress: (d, n, fr) => setBusy({ label: `${t.ocrWorking} ${d + 1}/${n}`, frac: (d + fr) / n }), shouldCancel: stop });
+          const text = pagesOut.map((p) => p.text).join("\n\n").trim();
+          if (!text) throw new Error(t.errNoText);
+          const avg = Math.round(pagesOut.reduce((a, p) => a + p.confidence, 0) / Math.max(1, pagesOut.length));
+          res.push(textOut("text", text, `${t.confidence}: ${avg}%`));
           break;
         }
+        case "pdf-ocr":
         case "pdf-word": {
           need();
-          const pages = await eng.pdfToText(f.bytes!, progress(t.working));
-          const text = pages.join("\n\n").trim();
-          if (!text) throw new Error(t.noTextHint);
-          res.push({ name: `${baseName(f.name)}.docx`, blob: new Blob([createDocxFromText(text) as BlobPart], { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" }), kind: "docx", note: t.wordNote });
+          const r = await extractTextSmart(f.bytes!, {
+            uiLang: lang,
+            ocr: tool === "pdf-ocr" && forceOcr ? "force" : "auto",
+            langs: ocrLang === "auto" ? "auto" : ocrLang === "all" ? ["aze", "eng", "tur", "rus", "ara"] : [ocrLang, ...(ocrLang === "eng" ? [] : (["eng"] as OcrLang[]))],
+            shouldCancel: stop,
+            onProgress: (p) => setBusy({ label: `${p.phase === "ocr" ? t.ocrWorking : p.phase === "render" ? t.preparing : t.working} ${p.page}/${p.total}`, frac: p.phase === "text" ? p.fraction * 0.2 : 0.2 + p.fraction * 0.8 }),
+          });
+          if (!r.text.trim()) throw new Error(t.errNoText);
+          const note = [r.usedOcr ? `${t.ocrUsed} (${r.langs.join("+")})${r.avgConfidence != null ? ` · ${t.confidence}: ${r.avgConfidence}%` : ""}` : t.textLayer, r.lowConfidencePages.length ? `${t.lowConf}: ${r.lowConfidencePages.join(", ")}` : ""].filter(Boolean).join(" · ");
+          if (tool === "pdf-word") res.push({ name: `${baseName(f.name)}.docx`, blob: docxBlob(r.text), kind: "docx", note: `${note} · ${t.wordNote}` });
+          else res.push(textOut(baseName(f.name), r.text, note));
           break;
         }
         case "word-pdf": {
@@ -522,7 +555,7 @@ function Workspace({ tool, lang, t, title, desc }: { tool: ToolId; lang: Lang; t
       {items.length > 0 ? (
         <ul className="space-y-2" data-testid="file-list">
           {items.map((it, i) => (
-            <li key={it.id} className="flex flex-wrap items-center gap-3 rounded-xl border border-border bg-bg-elevated px-3 py-2 text-sm">
+            <li key={it.id} className="pdf-surface flex flex-wrap items-center gap-3 px-3 py-2 text-sm">
               {kind === "images" ? <img src={imgUrls[i]} alt="" className="size-12 rounded-md object-cover" /> : <FileText className="size-5 text-primary" />}
               <div className="min-w-0 flex-1">
                 <div className="truncate font-medium" title={it.name}>{it.name}</div>
@@ -591,8 +624,8 @@ function Workspace({ tool, lang, t, title, desc }: { tool: ToolId; lang: Lang; t
               {scope === "range" ? <input className={`${field} mt-2 max-w-xs`} dir="ltr" placeholder={t.rangePlaceholder} value={range} onChange={(e) => setRange(e.target.value)} data-testid="range" /> : null}
             </div>
           ) : null}
-          {(tool === "ocr" || tool === "pdf-ocr") ? (
-            <div><Label>{t.ocrLang}</Label><Seg name={t.ocrLang} value={ocrLang} onChange={setOcrLang} options={OCR_LANGS.map((l) => ({ id: l.id, label: l.label }))} /><p className="mt-2 text-xs text-muted">{t.ocrFirst}</p></div>
+          {(tool === "ocr" || tool === "pdf-ocr" || tool === "pdf-word") ? (
+            <div className="space-y-2"><Label>{t.ocrLang}</Label><Seg name={t.ocrLang} value={ocrLang} onChange={setOcrLang} options={[{ id: "auto", label: t.auto }, ...OCR_LANGS.map((l) => ({ id: l.id, label: l.label })), { id: "all", label: t.allLangs }]} />{tool === "pdf-ocr" ? <label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={forceOcr} onChange={(e) => setForceOcr(e.target.checked)} />{t.forceOcr}</label> : null}<p className="text-xs text-muted">{t.ocrFirst}</p></div>
           ) : null}
           {tool === "word-pdf" ? <p className="text-xs text-muted">{t.textOnly}</p> : null}
           {tool === "pdf-word" ? <p className="text-xs text-muted">{t.wordNote}</p> : null}
@@ -707,7 +740,7 @@ function Workspace({ tool, lang, t, title, desc }: { tool: ToolId; lang: Lang; t
       {busy ? (
         <div className={card} role="status" data-testid="busy">
           <div className="mb-2 text-sm">{busy.label}</div>
-          <div className="h-2 overflow-hidden rounded-full bg-white/10"><div className="h-full rounded-full bg-primary transition-all" style={{ width: `${Math.max(4, Math.round(busy.frac * 100))}%` }} /></div>
+          <div className="h-2 overflow-hidden rounded-full bg-white/10"><div className="pdf-bar h-full rounded-full transition-all" style={{ width: `${Math.max(4, Math.round(busy.frac * 100))}%` }} /></div>
           <button type="button" className={`${btn} mt-3`} onClick={() => { cancelled.current = true; }}>{t.cancel}</button>
         </div>
       ) : null}
