@@ -30,16 +30,38 @@ async function proFor(c: SupabaseClient, userId: string): Promise<boolean> {
   return !data.expires_at || Date.parse(data.expires_at) > Date.now();
 }
 
+const BACK_KEY = "nibras-after-auth";
+function setBack(back?: string) {
+  try {
+    if (back && /^\/[a-z/]*$/.test(back)) localStorage.setItem(BACK_KEY, back + "|" + Date.now());
+    else localStorage.removeItem(BACK_KEY);
+  } catch {
+    /* storage blocked */
+  }
+}
+/** After the round-trip lands on /qr, send the user back to the page that asked (one-shot). */
+function goBack() {
+  try {
+    const [back, at] = (localStorage.getItem(BACK_KEY) ?? "").split("|");
+    localStorage.removeItem(BACK_KEY);
+    if (!back || Date.now() - Number(at) > 30 * 60_000) return;
+    if (window.location.pathname !== back) window.location.replace(back + window.location.search);
+  } catch {
+    /* storage blocked */
+  }
+}
+
 type State = {
   ready: boolean;
   busy: boolean;
   user: QrUser | null;
   pro: boolean;
   init: () => Promise<void>;
-  signIn: () => Promise<void>;
+  /** `back`: same-origin path to return to after the OAuth/checkout round-trip (e.g. "/erase"). Defaults to /qr. */
+  signIn: (back?: string) => Promise<void>;
   signOut: () => Promise<void>;
   /** Signed-in only: open a Lemon Squeezy checkout for the plan. */
-  buy: (plan: "1y" | "lifetime") => Promise<void>;
+  buy: (plan: "1y" | "lifetime", back?: string) => Promise<void>;
   /** Re-read Pro from public.entitlements (e.g. after ?purchase=success). */
   refreshPro: () => Promise<boolean>;
 };
@@ -75,11 +97,13 @@ export const useQrAuth = create<State>((set, get) => ({
         pro: await proFor(c, u.id),
         ready: true,
       });
+      if (returning || url.searchParams.get("purchase") === "success") goBack();
     } catch {
       set({ ready: true });
     }
   },
-  signIn: async () => {
+  signIn: async (back) => {
+    setBack(back);
     set({ busy: true });
     try {
       const c = await sb();
@@ -91,7 +115,8 @@ export const useQrAuth = create<State>((set, get) => ({
       set({ busy: false });
     }
   },
-  buy: async (plan) => {
+  buy: async (plan, back) => {
+    setBack(back);
     set({ busy: true });
     try {
       const c = await sb();
