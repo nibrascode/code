@@ -7,7 +7,7 @@ import { libraryReply, libraryMeta, libraryFinalize, libraryDownReply, BOOK_CUE 
 import { translateReply } from "./_translate-chat.js";
 import { snippetReply } from "./_snippets.js";
 import { localReply } from "./_local.js";
-import { toolsReply, qrReply } from "./_tools.js";
+import { toolsReply, qrReply, pdfIntent } from "./_tools.js";
 import { searchReply } from "./_search.js";
 import { wikidataReply } from "./_wikidata.js";
 import { extraReply, prayerReply } from "./_extra.js";
@@ -86,6 +86,14 @@ export default async function handler(req, res) {
     if (!message) {
       res.status(400).json({ success: false, reply: msgs(resolveLang("", body.lang)).empty });
       return;
+    }
+    // Nibras PDF: fayl əlavə edilibsə və ya mesaj PDF əməliyyatı istəyirsə, server yalnız aləti seçir (AI-siz); fayllar brauzerdə işlənir.
+    if (body.mode !== "code" && body.mode !== "create") {
+      const pdf = pdfIntent(message, body.files, lang);
+      if (pdf) {
+        res.status(200).json({ success: true, reply: pdf.reply, usedAI: false, lang: pdf.lang, ...(pdf.pdfAction ? { pdfAction: pdf.pdfAction, done: pdf.done } : {}), ...(pdf.needFile ? { needFile: pdf.needFile } : {}) });
+        return;
+      }
     }
     // Bəqərə surəsi sözlərinin izahı hazır cavabdır (AI-yə getmir). dinReply-dən əvvəl gəlməlidir,
     // yoxsa «ayə»/«təfsir» sözləri olan suallar ümumi dini xəbərdarlığa düşər.

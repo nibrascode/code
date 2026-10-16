@@ -2,6 +2,8 @@ import { LANGS, type Lang } from "@/lib/i18n";
 import { isSplitPage, localeHref, stripLocalePrefix, homePath } from "@/lib/locale-path";
 import { faqAnswerText, faqFromPath, faqPath, faqTopicFromPath, faqTopicPath } from "@/lib/faq";
 import { pdfPairFromPath } from "@/lib/pdf-pairs";
+import { isToolId, toolSeo } from "@/pdf/tool-seo";
+import { TOOL_IDS } from "@/pdf/tool-text";
 import { findCourse, HUBS, isCourseSlug } from "@/lib/course/meta";
 import { findProgramming, PROGRAMMING } from "@/lib/programming";
 import { CODE_SAMPLE_SEO, isCodeSampleChild, isCodeSampleSlug } from "@/lib/code-samples";
@@ -860,6 +862,8 @@ function pageCopy(pathname: string, lang: Lang) {
       keywords: topicCopy.keywords[lang],
     };
   }
+  const pdfTool = path.match(/^\/pdf\/([a-z-]+)$/);
+  if (pdfTool && isToolId(pdfTool[1])) return toolSeo(lang, pdfTool[1]);
   const page = PAGES[path] ?? PAGES["/"];
   return page[lang] ?? page.en;
 }
@@ -1164,4 +1168,4 @@ function jsonLd(path: string, lang: Lang, copy: PageSeo, url: string) {
   };
 }
 
-export const SITEMAP_PATHS = Object.keys(PAGES);
+export const SITEMAP_PATHS = [...Object.keys(PAGES), ...TOOL_IDS.map((id) => `/pdf/${id}`)];

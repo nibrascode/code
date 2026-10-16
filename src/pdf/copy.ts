@@ -18,7 +18,7 @@ export type Dict = {
   batchOp: string; opCompress: string; opRotate: string; opWatermark: string; opSplit: string;
   selectAll: string; selectNone: string; selected: string; deleteMark: string; moveLeft: string; moveRight: string; deleted: string; pagesHint: string; extractHint: string;
   zoom: string; unlock: string; unlockHint: string; wordNote: string; strongNote: string; ocrWorking: string; ocrFirst: string; textOnly: string; nPages: (n: number) => string;
-  open: string; restoredDraft: string;
+  open: string; restoredDraft: string; auto: string; allLangs: string; forceOcr: string; confidence: string; ocrUsed: string; textLayer: string; lowConf: string; preparing: string;
 };
 
 const en: Dict = {
@@ -43,6 +43,7 @@ const en: Dict = {
   zoom: "Zoom", unlock: "Unlock", unlockHint: "This PDF needs a password.", wordNote: "Text and line breaks are converted. Images and complex layout are not.", strongNote: "Text in the result will not be selectable.",
   ocrWorking: "Recognizing text…", ocrFirst: "The first run loads the language data (a few MB).", textOnly: "Text only: the layout of the DOCX is not reproduced.", nPages: (n) => `${n} pages`,
   open: "Open", restoredDraft: "Draft restored.",
+  auto: "Auto", allLangs: "All 5 languages", forceOcr: "Force OCR even if the PDF has text", confidence: "Confidence", ocrUsed: "Scanned pages read with OCR", textLayer: "Text read directly from the PDF", lowConf: "Low-confidence pages", preparing: "Preparing page",
 };
 
 const az: Dict = {
@@ -67,6 +68,7 @@ const az: Dict = {
   zoom: "Miqyas", unlock: "Aç", unlockHint: "Bu PDF parol istəyir.", wordNote: "Mətn və sətir keçidləri çevrilir. Şəkillər və mürəkkəb düzülüş çevrilmir.", strongNote: "Nəticədə mətn seçilə bilməyəcək.",
   ocrWorking: "Mətn tanınır…", ocrFirst: "İlk işə salmada dil məlumatı yüklənir (bir neçə MB).", textOnly: "Yalnız mətn: DOCX-in düzülüşü saxlanmır.", nPages: (n) => `${n} səhifə`,
   open: "Aç", restoredDraft: "Qaralama bərpa olundu.",
+  auto: "Avtomatik", allLangs: "Bütün 5 dil", forceOcr: "PDF-də mətn olsa belə OCR işlət", confidence: "Dəqiqlik", ocrUsed: "Skan səhifələr OCR ilə oxundu", textLayer: "Mətn birbaşa PDF-dən oxundu", lowConf: "Aşağı dəqiqlikli səhifələr", preparing: "Səhifə hazırlanır",
 };
 
 const tr: Dict = {
@@ -91,6 +93,7 @@ const tr: Dict = {
   zoom: "Yakınlık", unlock: "Aç", unlockHint: "Bu PDF parola istiyor.", wordNote: "Metin ve satır sonları dönüştürülür. Görseller ve karmaşık düzen dönüştürülmez.", strongNote: "Sonuçtaki metin seçilemez olacak.",
   ocrWorking: "Metin tanınıyor…", ocrFirst: "İlk çalıştırmada dil verisi yüklenir (birkaç MB).", textOnly: "Yalnız metin: DOCX düzeni korunmaz.", nPages: (n) => `${n} sayfa`,
   open: "Aç", restoredDraft: "Taslak geri yüklendi.",
+  auto: "Otomatik", allLangs: "5 dilin hepsi", forceOcr: "PDF'de metin olsa bile OCR kullan", confidence: "Doğruluk", ocrUsed: "Taranmış sayfalar OCR ile okundu", textLayer: "Metin doğrudan PDF'den okundu", lowConf: "Düşük doğruluklu sayfalar", preparing: "Sayfa hazırlanıyor",
 };
 
 const ar: Dict = {
@@ -115,6 +118,7 @@ const ar: Dict = {
   zoom: "تكبير", unlock: "فتح", unlockHint: "هذا PDF يحتاج كلمة مرور.", wordNote: "يُحوَّل النص وفواصل الأسطر. لا تُحوَّل الصور ولا التنسيق المعقد.", strongNote: "لن يكون النص في النتيجة قابلاً للتحديد.",
   ocrWorking: "جارٍ التعرف على النص…", ocrFirst: "التشغيل الأول يحمّل بيانات اللغة (بضعة ميغابايت).", textOnly: "نص فقط: لا يُحفظ تنسيق DOCX.", nPages: (n) => `${n} صفحة`,
   open: "فتح", restoredDraft: "تمت استعادة المسودة.",
+  auto: "تلقائي", allLangs: "اللغات الخمس كلها", forceOcr: "فرض OCR حتى لو كان في PDF نص", confidence: "الدقة", ocrUsed: "قُرئت الصفحات الممسوحة بـ OCR", textLayer: "قُرئ النص مباشرة من PDF", lowConf: "صفحات منخفضة الدقة", preparing: "تجهيز الصفحة",
 };
 
 const ru: Dict = {
@@ -139,6 +143,7 @@ const ru: Dict = {
   zoom: "Масштаб", unlock: "Открыть", unlockHint: "Этому PDF нужен пароль.", wordNote: "Переносятся текст и разрывы строк. Изображения и сложная вёрстка — нет.", strongNote: "Текст в результате нельзя будет выделить.",
   ocrWorking: "Распознавание текста…", ocrFirst: "При первом запуске загружаются языковые данные (несколько МБ).", textOnly: "Только текст: вёрстка DOCX не сохраняется.", nPages: (n) => `${n} стр.`,
   open: "Открыть", restoredDraft: "Черновик восстановлен.",
+  auto: "Авто", allLangs: "Все 5 языков", forceOcr: "Принудительный OCR, даже если в PDF есть текст", confidence: "Точность", ocrUsed: "Сканы прочитаны через OCR", textLayer: "Текст прочитан прямо из PDF", lowConf: "Страницы с низкой точностью", preparing: "Подготовка страницы",
 };
 
 export const COPY: Record<Lang, Dict> = { az, en, tr, ar, ru };

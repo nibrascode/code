@@ -68,6 +68,7 @@ import { Route as GuidesTopicRouteImport } from './routes/guides/$topic'
 import { Route as MovzuSlugRouteImport } from './routes/movzu.$slug'
 import { Route as MuqayiseSlugRouteImport } from './routes/muqayise.$slug'
 import { Route as NeceSlugRouteImport } from './routes/nece.$slug'
+import { Route as PdfToolRouteImport } from './routes/pdf_.$tool'
 import { Route as PrivacySlugRouteImport } from './routes/privacy/$slug'
 import { Route as PrivacyNibrasPdfRouteImport } from './routes/privacy.nibras-pdf'
 import { Route as ProgrammingIndexRouteImport } from './routes/programming/index'
@@ -111,6 +112,7 @@ import { Route as ArFaqSlugRouteImport } from './routes/ar.faq.$slug'
 import { Route as ArMovzuSlugRouteImport } from './routes/ar.movzu.$slug'
 import { Route as ArMuqayiseSlugRouteImport } from './routes/ar.muqayise.$slug'
 import { Route as ArNeceSlugRouteImport } from './routes/ar.nece.$slug'
+import { Route as ArPdfToolRouteImport } from './routes/ar.pdf_.$tool'
 import { Route as ArProgrammingSlugRouteImport } from './routes/ar.programming.$slug'
 import { Route as ArSozSlugRouteImport } from './routes/ar.soz.$slug'
 import { Route as ArToolsSlugRouteImport } from './routes/ar.tools.$slug'
@@ -120,6 +122,7 @@ import { Route as EnFaqSlugRouteImport } from './routes/en.faq.$slug'
 import { Route as EnMovzuSlugRouteImport } from './routes/en.movzu.$slug'
 import { Route as EnMuqayiseSlugRouteImport } from './routes/en.muqayise.$slug'
 import { Route as EnNeceSlugRouteImport } from './routes/en.nece.$slug'
+import { Route as EnPdfToolRouteImport } from './routes/en.pdf_.$tool'
 import { Route as EnProgrammingSlugRouteImport } from './routes/en.programming.$slug'
 import { Route as EnSozSlugRouteImport } from './routes/en.soz.$slug'
 import { Route as EnToolsSlugRouteImport } from './routes/en.tools.$slug'
@@ -132,6 +135,7 @@ import { Route as RuFaqSlugRouteImport } from './routes/ru.faq.$slug'
 import { Route as RuMovzuSlugRouteImport } from './routes/ru.movzu.$slug'
 import { Route as RuMuqayiseSlugRouteImport } from './routes/ru.muqayise.$slug'
 import { Route as RuNeceSlugRouteImport } from './routes/ru.nece.$slug'
+import { Route as RuPdfToolRouteImport } from './routes/ru.pdf_.$tool'
 import { Route as RuProgrammingSlugRouteImport } from './routes/ru.programming.$slug'
 import { Route as RuResourcesSlugRouteImport } from './routes/ru.resources.$slug'
 import { Route as RuSozSlugRouteImport } from './routes/ru.soz.$slug'
@@ -142,6 +146,7 @@ import { Route as TrFaqSlugRouteImport } from './routes/tr.faq.$slug'
 import { Route as TrMovzuSlugRouteImport } from './routes/tr.movzu.$slug'
 import { Route as TrMuqayiseSlugRouteImport } from './routes/tr.muqayise.$slug'
 import { Route as TrNeceSlugRouteImport } from './routes/tr.nece.$slug'
+import { Route as TrPdfToolRouteImport } from './routes/tr.pdf_.$tool'
 import { Route as TrProgrammingSlugRouteImport } from './routes/tr.programming.$slug'
 import { Route as TrSozSlugRouteImport } from './routes/tr.soz.$slug'
 import { Route as TrToolsSlugRouteImport } from './routes/tr.tools.$slug'
@@ -442,6 +447,11 @@ const NeceSlugRoute = NeceSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => NeceRoute,
 } as any)
+const PdfToolRoute = PdfToolRouteImport.update({
+  id: '/pdf_/$tool',
+  path: '/pdf/$tool',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PrivacySlugRoute = PrivacySlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -657,6 +667,11 @@ const ArNeceSlugRoute = ArNeceSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => ArNeceRoute,
 } as any)
+const ArPdfToolRoute = ArPdfToolRouteImport.update({
+  id: '/pdf_/$tool',
+  path: '/pdf/$tool',
+  getParentRoute: () => ArRoute,
+} as any)
 const ArProgrammingSlugRoute = ArProgrammingSlugRouteImport.update({
   id: '/programming/$slug',
   path: '/programming/$slug',
@@ -701,6 +716,11 @@ const EnNeceSlugRoute = EnNeceSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => EnNeceRoute,
+} as any)
+const EnPdfToolRoute = EnPdfToolRouteImport.update({
+  id: '/pdf_/$tool',
+  path: '/pdf/$tool',
+  getParentRoute: () => EnRoute,
 } as any)
 const EnProgrammingSlugRoute = EnProgrammingSlugRouteImport.update({
   id: '/programming/$slug',
@@ -763,6 +783,11 @@ const RuNeceSlugRoute = RuNeceSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => RuNeceRoute,
 } as any)
+const RuPdfToolRoute = RuPdfToolRouteImport.update({
+  id: '/pdf_/$tool',
+  path: '/pdf/$tool',
+  getParentRoute: () => RuRoute,
+} as any)
 const RuProgrammingSlugRoute = RuProgrammingSlugRouteImport.update({
   id: '/programming/$slug',
   path: '/programming/$slug',
@@ -812,6 +837,11 @@ const TrNeceSlugRoute = TrNeceSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => TrNeceRoute,
+} as any)
+const TrPdfToolRoute = TrPdfToolRouteImport.update({
+  id: '/pdf_/$tool',
+  path: '/pdf/$tool',
+  getParentRoute: () => TrRoute,
 } as any)
 const TrProgrammingSlugRoute = TrProgrammingSlugRouteImport.update({
   id: '/programming/$slug',
@@ -893,6 +923,7 @@ export interface FileRoutesByFullPath {
   '/movzu/$slug': typeof MovzuSlugRoute
   '/muqayise/$slug': typeof MuqayiseSlugRoute
   '/nece/$slug': typeof NeceSlugRoute
+  '/pdf/$tool': typeof PdfToolRoute
   '/privacy/$slug': typeof PrivacySlugRoute
   '/privacy/nibras-pdf': typeof PrivacyNibrasPdfRoute
   '/programming/$topic': typeof ProgrammingTopicRoute
@@ -937,6 +968,7 @@ export interface FileRoutesByFullPath {
   '/ar/movzu/$slug': typeof ArMovzuSlugRoute
   '/ar/muqayise/$slug': typeof ArMuqayiseSlugRoute
   '/ar/nece/$slug': typeof ArNeceSlugRoute
+  '/ar/pdf/$tool': typeof ArPdfToolRoute
   '/ar/programming/$slug': typeof ArProgrammingSlugRoute
   '/ar/soz/$slug': typeof ArSozSlugRoute
   '/ar/tools/$slug': typeof ArToolsSlugRoute
@@ -946,6 +978,7 @@ export interface FileRoutesByFullPath {
   '/en/movzu/$slug': typeof EnMovzuSlugRoute
   '/en/muqayise/$slug': typeof EnMuqayiseSlugRoute
   '/en/nece/$slug': typeof EnNeceSlugRoute
+  '/en/pdf/$tool': typeof EnPdfToolRoute
   '/en/programming/$slug': typeof EnProgrammingSlugRoute
   '/en/soz/$slug': typeof EnSozSlugRoute
   '/en/tools/$slug': typeof EnToolsSlugRoute
@@ -957,6 +990,7 @@ export interface FileRoutesByFullPath {
   '/ru/movzu/$slug': typeof RuMovzuSlugRoute
   '/ru/muqayise/$slug': typeof RuMuqayiseSlugRoute
   '/ru/nece/$slug': typeof RuNeceSlugRoute
+  '/ru/pdf/$tool': typeof RuPdfToolRoute
   '/ru/programming/$slug': typeof RuProgrammingSlugRoute
   '/ru/resources/$slug': typeof RuResourcesSlugRoute
   '/ru/soz/$slug': typeof RuSozSlugRoute
@@ -967,6 +1001,7 @@ export interface FileRoutesByFullPath {
   '/tr/movzu/$slug': typeof TrMovzuSlugRoute
   '/tr/muqayise/$slug': typeof TrMuqayiseSlugRoute
   '/tr/nece/$slug': typeof TrNeceSlugRoute
+  '/tr/pdf/$tool': typeof TrPdfToolRoute
   '/tr/programming/$slug': typeof TrProgrammingSlugRoute
   '/tr/soz/$slug': typeof TrSozSlugRoute
   '/tr/tools/$slug': typeof TrToolsSlugRoute
@@ -1031,6 +1066,7 @@ export interface FileRoutesByTo {
   '/movzu/$slug': typeof MovzuSlugRoute
   '/muqayise/$slug': typeof MuqayiseSlugRoute
   '/nece/$slug': typeof NeceSlugRoute
+  '/pdf/$tool': typeof PdfToolRoute
   '/privacy/$slug': typeof PrivacySlugRoute
   '/privacy/nibras-pdf': typeof PrivacyNibrasPdfRoute
   '/programming/$topic': typeof ProgrammingTopicRoute
@@ -1075,6 +1111,7 @@ export interface FileRoutesByTo {
   '/ar/movzu/$slug': typeof ArMovzuSlugRoute
   '/ar/muqayise/$slug': typeof ArMuqayiseSlugRoute
   '/ar/nece/$slug': typeof ArNeceSlugRoute
+  '/ar/pdf/$tool': typeof ArPdfToolRoute
   '/ar/programming/$slug': typeof ArProgrammingSlugRoute
   '/ar/soz/$slug': typeof ArSozSlugRoute
   '/ar/tools/$slug': typeof ArToolsSlugRoute
@@ -1084,6 +1121,7 @@ export interface FileRoutesByTo {
   '/en/movzu/$slug': typeof EnMovzuSlugRoute
   '/en/muqayise/$slug': typeof EnMuqayiseSlugRoute
   '/en/nece/$slug': typeof EnNeceSlugRoute
+  '/en/pdf/$tool': typeof EnPdfToolRoute
   '/en/programming/$slug': typeof EnProgrammingSlugRoute
   '/en/soz/$slug': typeof EnSozSlugRoute
   '/en/tools/$slug': typeof EnToolsSlugRoute
@@ -1095,6 +1133,7 @@ export interface FileRoutesByTo {
   '/ru/movzu/$slug': typeof RuMovzuSlugRoute
   '/ru/muqayise/$slug': typeof RuMuqayiseSlugRoute
   '/ru/nece/$slug': typeof RuNeceSlugRoute
+  '/ru/pdf/$tool': typeof RuPdfToolRoute
   '/ru/programming/$slug': typeof RuProgrammingSlugRoute
   '/ru/resources/$slug': typeof RuResourcesSlugRoute
   '/ru/soz/$slug': typeof RuSozSlugRoute
@@ -1105,6 +1144,7 @@ export interface FileRoutesByTo {
   '/tr/movzu/$slug': typeof TrMovzuSlugRoute
   '/tr/muqayise/$slug': typeof TrMuqayiseSlugRoute
   '/tr/nece/$slug': typeof TrNeceSlugRoute
+  '/tr/pdf/$tool': typeof TrPdfToolRoute
   '/tr/programming/$slug': typeof TrProgrammingSlugRoute
   '/tr/soz/$slug': typeof TrSozSlugRoute
   '/tr/tools/$slug': typeof TrToolsSlugRoute
@@ -1171,6 +1211,7 @@ export interface FileRoutesById {
   '/movzu/$slug': typeof MovzuSlugRoute
   '/muqayise/$slug': typeof MuqayiseSlugRoute
   '/nece/$slug': typeof NeceSlugRoute
+  '/pdf_/$tool': typeof PdfToolRoute
   '/privacy/$slug': typeof PrivacySlugRoute
   '/privacy/nibras-pdf': typeof PrivacyNibrasPdfRoute
   '/programming/$topic': typeof ProgrammingTopicRoute
@@ -1215,6 +1256,7 @@ export interface FileRoutesById {
   '/ar/movzu/$slug': typeof ArMovzuSlugRoute
   '/ar/muqayise/$slug': typeof ArMuqayiseSlugRoute
   '/ar/nece/$slug': typeof ArNeceSlugRoute
+  '/ar/pdf_/$tool': typeof ArPdfToolRoute
   '/ar/programming/$slug': typeof ArProgrammingSlugRoute
   '/ar/soz/$slug': typeof ArSozSlugRoute
   '/ar/tools/$slug': typeof ArToolsSlugRoute
@@ -1224,6 +1266,7 @@ export interface FileRoutesById {
   '/en/movzu/$slug': typeof EnMovzuSlugRoute
   '/en/muqayise/$slug': typeof EnMuqayiseSlugRoute
   '/en/nece/$slug': typeof EnNeceSlugRoute
+  '/en/pdf_/$tool': typeof EnPdfToolRoute
   '/en/programming/$slug': typeof EnProgrammingSlugRoute
   '/en/soz/$slug': typeof EnSozSlugRoute
   '/en/tools/$slug': typeof EnToolsSlugRoute
@@ -1235,6 +1278,7 @@ export interface FileRoutesById {
   '/ru/movzu/$slug': typeof RuMovzuSlugRoute
   '/ru/muqayise/$slug': typeof RuMuqayiseSlugRoute
   '/ru/nece/$slug': typeof RuNeceSlugRoute
+  '/ru/pdf_/$tool': typeof RuPdfToolRoute
   '/ru/programming/$slug': typeof RuProgrammingSlugRoute
   '/ru/resources/$slug': typeof RuResourcesSlugRoute
   '/ru/soz/$slug': typeof RuSozSlugRoute
@@ -1245,6 +1289,7 @@ export interface FileRoutesById {
   '/tr/movzu/$slug': typeof TrMovzuSlugRoute
   '/tr/muqayise/$slug': typeof TrMuqayiseSlugRoute
   '/tr/nece/$slug': typeof TrNeceSlugRoute
+  '/tr/pdf_/$tool': typeof TrPdfToolRoute
   '/tr/programming/$slug': typeof TrProgrammingSlugRoute
   '/tr/soz/$slug': typeof TrSozSlugRoute
   '/tr/tools/$slug': typeof TrToolsSlugRoute
@@ -1312,6 +1357,7 @@ export interface FileRouteTypes {
     | '/movzu/$slug'
     | '/muqayise/$slug'
     | '/nece/$slug'
+    | '/pdf/$tool'
     | '/privacy/$slug'
     | '/privacy/nibras-pdf'
     | '/programming/$topic'
@@ -1356,6 +1402,7 @@ export interface FileRouteTypes {
     | '/ar/movzu/$slug'
     | '/ar/muqayise/$slug'
     | '/ar/nece/$slug'
+    | '/ar/pdf/$tool'
     | '/ar/programming/$slug'
     | '/ar/soz/$slug'
     | '/ar/tools/$slug'
@@ -1365,6 +1412,7 @@ export interface FileRouteTypes {
     | '/en/movzu/$slug'
     | '/en/muqayise/$slug'
     | '/en/nece/$slug'
+    | '/en/pdf/$tool'
     | '/en/programming/$slug'
     | '/en/soz/$slug'
     | '/en/tools/$slug'
@@ -1376,6 +1424,7 @@ export interface FileRouteTypes {
     | '/ru/movzu/$slug'
     | '/ru/muqayise/$slug'
     | '/ru/nece/$slug'
+    | '/ru/pdf/$tool'
     | '/ru/programming/$slug'
     | '/ru/resources/$slug'
     | '/ru/soz/$slug'
@@ -1386,6 +1435,7 @@ export interface FileRouteTypes {
     | '/tr/movzu/$slug'
     | '/tr/muqayise/$slug'
     | '/tr/nece/$slug'
+    | '/tr/pdf/$tool'
     | '/tr/programming/$slug'
     | '/tr/soz/$slug'
     | '/tr/tools/$slug'
@@ -1450,6 +1500,7 @@ export interface FileRouteTypes {
     | '/movzu/$slug'
     | '/muqayise/$slug'
     | '/nece/$slug'
+    | '/pdf/$tool'
     | '/privacy/$slug'
     | '/privacy/nibras-pdf'
     | '/programming/$topic'
@@ -1494,6 +1545,7 @@ export interface FileRouteTypes {
     | '/ar/movzu/$slug'
     | '/ar/muqayise/$slug'
     | '/ar/nece/$slug'
+    | '/ar/pdf/$tool'
     | '/ar/programming/$slug'
     | '/ar/soz/$slug'
     | '/ar/tools/$slug'
@@ -1503,6 +1555,7 @@ export interface FileRouteTypes {
     | '/en/movzu/$slug'
     | '/en/muqayise/$slug'
     | '/en/nece/$slug'
+    | '/en/pdf/$tool'
     | '/en/programming/$slug'
     | '/en/soz/$slug'
     | '/en/tools/$slug'
@@ -1514,6 +1567,7 @@ export interface FileRouteTypes {
     | '/ru/movzu/$slug'
     | '/ru/muqayise/$slug'
     | '/ru/nece/$slug'
+    | '/ru/pdf/$tool'
     | '/ru/programming/$slug'
     | '/ru/resources/$slug'
     | '/ru/soz/$slug'
@@ -1524,6 +1578,7 @@ export interface FileRouteTypes {
     | '/tr/movzu/$slug'
     | '/tr/muqayise/$slug'
     | '/tr/nece/$slug'
+    | '/tr/pdf/$tool'
     | '/tr/programming/$slug'
     | '/tr/soz/$slug'
     | '/tr/tools/$slug'
@@ -1589,6 +1644,7 @@ export interface FileRouteTypes {
     | '/movzu/$slug'
     | '/muqayise/$slug'
     | '/nece/$slug'
+    | '/pdf_/$tool'
     | '/privacy/$slug'
     | '/privacy/nibras-pdf'
     | '/programming/$topic'
@@ -1633,6 +1689,7 @@ export interface FileRouteTypes {
     | '/ar/movzu/$slug'
     | '/ar/muqayise/$slug'
     | '/ar/nece/$slug'
+    | '/ar/pdf_/$tool'
     | '/ar/programming/$slug'
     | '/ar/soz/$slug'
     | '/ar/tools/$slug'
@@ -1642,6 +1699,7 @@ export interface FileRouteTypes {
     | '/en/movzu/$slug'
     | '/en/muqayise/$slug'
     | '/en/nece/$slug'
+    | '/en/pdf_/$tool'
     | '/en/programming/$slug'
     | '/en/soz/$slug'
     | '/en/tools/$slug'
@@ -1653,6 +1711,7 @@ export interface FileRouteTypes {
     | '/ru/movzu/$slug'
     | '/ru/muqayise/$slug'
     | '/ru/nece/$slug'
+    | '/ru/pdf_/$tool'
     | '/ru/programming/$slug'
     | '/ru/resources/$slug'
     | '/ru/soz/$slug'
@@ -1663,6 +1722,7 @@ export interface FileRouteTypes {
     | '/tr/movzu/$slug'
     | '/tr/muqayise/$slug'
     | '/tr/nece/$slug'
+    | '/tr/pdf_/$tool'
     | '/tr/programming/$slug'
     | '/tr/soz/$slug'
     | '/tr/tools/$slug'
@@ -1697,6 +1757,7 @@ export interface RootRouteChildren {
   ResourcesTopicRouteRoute: typeof ResourcesTopicRouteRouteWithChildren
   AppsSlugRoute: typeof AppsSlugRoute
   GuidesTopicRoute: typeof GuidesTopicRoute
+  PdfToolRoute: typeof PdfToolRoute
   ProgrammingTopicRoute: typeof ProgrammingTopicRoute
   ResurslarSlugRoute: typeof ResurslarSlugRoute
   AppsIndexRoute: typeof AppsIndexRoute
@@ -2120,6 +2181,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NeceSlugRouteImport
       parentRoute: typeof NeceRoute
     }
+    '/pdf_/$tool': {
+      id: '/pdf_/$tool'
+      path: '/pdf/$tool'
+      fullPath: '/pdf/$tool'
+      preLoaderRoute: typeof PdfToolRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/privacy/$slug': {
       id: '/privacy/$slug'
       path: '/$slug'
@@ -2421,6 +2489,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArNeceSlugRouteImport
       parentRoute: typeof ArNeceRoute
     }
+    '/ar/pdf_/$tool': {
+      id: '/ar/pdf_/$tool'
+      path: '/pdf/$tool'
+      fullPath: '/ar/pdf/$tool'
+      preLoaderRoute: typeof ArPdfToolRouteImport
+      parentRoute: typeof ArRoute
+    }
     '/ar/programming/$slug': {
       id: '/ar/programming/$slug'
       path: '/programming/$slug'
@@ -2483,6 +2558,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/en/nece/$slug'
       preLoaderRoute: typeof EnNeceSlugRouteImport
       parentRoute: typeof EnNeceRoute
+    }
+    '/en/pdf_/$tool': {
+      id: '/en/pdf_/$tool'
+      path: '/pdf/$tool'
+      fullPath: '/en/pdf/$tool'
+      preLoaderRoute: typeof EnPdfToolRouteImport
+      parentRoute: typeof EnRoute
     }
     '/en/programming/$slug': {
       id: '/en/programming/$slug'
@@ -2568,6 +2650,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RuNeceSlugRouteImport
       parentRoute: typeof RuNeceRoute
     }
+    '/ru/pdf_/$tool': {
+      id: '/ru/pdf_/$tool'
+      path: '/pdf/$tool'
+      fullPath: '/ru/pdf/$tool'
+      preLoaderRoute: typeof RuPdfToolRouteImport
+      parentRoute: typeof RuRoute
+    }
     '/ru/programming/$slug': {
       id: '/ru/programming/$slug'
       path: '/programming/$slug'
@@ -2637,6 +2726,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/tr/nece/$slug'
       preLoaderRoute: typeof TrNeceSlugRouteImport
       parentRoute: typeof TrNeceRoute
+    }
+    '/tr/pdf_/$tool': {
+      id: '/tr/pdf_/$tool'
+      path: '/pdf/$tool'
+      fullPath: '/tr/pdf/$tool'
+      preLoaderRoute: typeof TrPdfToolRouteImport
+      parentRoute: typeof TrRoute
     }
     '/tr/programming/$slug': {
       id: '/tr/programming/$slug'
@@ -2771,6 +2867,7 @@ interface ArRouteChildren {
   ArSozRoute: typeof ArSozRouteWithChildren
   ArToolsRoute: typeof ArToolsRouteWithChildren
   ArXetaRoute: typeof ArXetaRouteWithChildren
+  ArPdfToolRoute: typeof ArPdfToolRoute
   ArProgrammingSlugRoute: typeof ArProgrammingSlugRoute
 }
 
@@ -2789,6 +2886,7 @@ const ArRouteChildren: ArRouteChildren = {
   ArSozRoute: ArSozRouteWithChildren,
   ArToolsRoute: ArToolsRouteWithChildren,
   ArXetaRoute: ArXetaRouteWithChildren,
+  ArPdfToolRoute: ArPdfToolRoute,
   ArProgrammingSlugRoute: ArProgrammingSlugRoute,
 }
 
@@ -2896,6 +2994,7 @@ interface EnRouteChildren {
   EnSozRoute: typeof EnSozRouteWithChildren
   EnToolsRoute: typeof EnToolsRouteWithChildren
   EnXetaRoute: typeof EnXetaRouteWithChildren
+  EnPdfToolRoute: typeof EnPdfToolRoute
   EnProgrammingSlugRoute: typeof EnProgrammingSlugRoute
 }
 
@@ -2914,6 +3013,7 @@ const EnRouteChildren: EnRouteChildren = {
   EnSozRoute: EnSozRouteWithChildren,
   EnToolsRoute: EnToolsRouteWithChildren,
   EnXetaRoute: EnXetaRouteWithChildren,
+  EnPdfToolRoute: EnPdfToolRoute,
   EnProgrammingSlugRoute: EnProgrammingSlugRoute,
 }
 
@@ -3078,6 +3178,7 @@ interface RuRouteChildren {
   RuSozRoute: typeof RuSozRouteWithChildren
   RuToolsRoute: typeof RuToolsRouteWithChildren
   RuXetaRoute: typeof RuXetaRouteWithChildren
+  RuPdfToolRoute: typeof RuPdfToolRoute
   RuProgrammingSlugRoute: typeof RuProgrammingSlugRoute
   RuResourcesSlugRoute: typeof RuResourcesSlugRoute
 }
@@ -3097,6 +3198,7 @@ const RuRouteChildren: RuRouteChildren = {
   RuSozRoute: RuSozRouteWithChildren,
   RuToolsRoute: RuToolsRouteWithChildren,
   RuXetaRoute: RuXetaRouteWithChildren,
+  RuPdfToolRoute: RuPdfToolRoute,
   RuProgrammingSlugRoute: RuProgrammingSlugRoute,
   RuResourcesSlugRoute: RuResourcesSlugRoute,
 }
@@ -3225,6 +3327,7 @@ interface TrRouteChildren {
   TrSozRoute: typeof TrSozRouteWithChildren
   TrToolsRoute: typeof TrToolsRouteWithChildren
   TrXetaRoute: typeof TrXetaRouteWithChildren
+  TrPdfToolRoute: typeof TrPdfToolRoute
   TrProgrammingSlugRoute: typeof TrProgrammingSlugRoute
 }
 
@@ -3243,6 +3346,7 @@ const TrRouteChildren: TrRouteChildren = {
   TrSozRoute: TrSozRouteWithChildren,
   TrToolsRoute: TrToolsRouteWithChildren,
   TrXetaRoute: TrXetaRouteWithChildren,
+  TrPdfToolRoute: TrPdfToolRoute,
   TrProgrammingSlugRoute: TrProgrammingSlugRoute,
 }
 
@@ -3298,6 +3402,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResourcesTopicRouteRoute: ResourcesTopicRouteRouteWithChildren,
   AppsSlugRoute: AppsSlugRoute,
   GuidesTopicRoute: GuidesTopicRoute,
+  PdfToolRoute: PdfToolRoute,
   ProgrammingTopicRoute: ProgrammingTopicRoute,
   ResurslarSlugRoute: ResurslarSlugRoute,
   AppsIndexRoute: AppsIndexRoute,
