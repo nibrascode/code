@@ -758,6 +758,53 @@ export const OWN_JS: OwnPageContent = {
       ],
     },
   ],
+  agent: [
+    {
+      id: "what",
+      title: t("Çatbot və agent", "A chatbot and an agent", "Sohbet ve agent", "محادثة ووكيل", "Чат и агент"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "Çatbot yalnız mətn yazır. Bazanı və sənin funksiyanı işlədə bilmir. Agent hərəkət edir, amma funksiyanı özü çağırmır. tools siyahısında ad, description və parametrlər durur. AI sualı oxuyub functionCall qaytarır: ad və args. Sən həmin funksiyanı işlədib nəticəni functionResponse ilə geri göndərirsən. AI son cümləni ondan yazır. description boşdursa, səhv funksiya seçilir. Tip böyük hərflədir: STRING, NUMBER, OBJECT.",
+            "A chatbot only writes text. It cannot run your database or your function. An agent acts, but it does not call the function itself. The tools list holds the name, the description and the parameters. The AI reads the question and returns a functionCall: a name and args. You run that function and send the result back with functionResponse. The AI writes the final sentence from it. If description is empty, it picks the wrong function. The type is in capital letters: STRING, NUMBER, OBJECT.",
+            "Sohbet yalnız metin yazar. Veritabanını ve senin fonksiyonunu çalıştıramaz. Agent harekete geçer, ama fonksiyonu kendisi çağırmaz. tools listesinde ad, description ve parametreler durur. AI soruyu okuyup functionCall döndürür: ad ve args. Sen o fonksiyonu çalıştırıp sonucu functionResponse ile geri gönderirsin. AI son cümleyi ondan yazar. description boşsa yanlış fonksiyon seçilir. Tip büyük harftir: STRING, NUMBER, OBJECT.",
+            "المحادثة تكتب نصاً فقط. لا تستطيع تشغيل قاعدتك أو دالتك. الوكيل يتحرك، لكنه لا يستدعي الدالة بنفسه. قائمة tools تحمل الاسم وdescription والمعاملات. يقرأ الذكاء السؤال ويُرجع functionCall: اسماً وargs. أنت تشغّل تلك الدالة وتُعيد النتيجة بـ functionResponse. يكتب الذكاء الجملة الأخيرة منها. إذا كان description فارغاً اختار دالة خاطئة. النوع بأحرف كبيرة: STRING وNUMBER وOBJECT.",
+            "Чат пишет только текст. Базу и твою функцию он не запускает. Агент действует, но функцию сам не вызывает. В списке tools стоят имя, description и параметры. ИИ читает вопрос и возвращает functionCall: имя и args. Ты запускаешь эту функцию и отправляешь результат обратно через functionResponse. Итоговое предложение ИИ пишет из него. Если description пустой, выбирается не та функция. Тип большими буквами: STRING, NUMBER, OBJECT.",
+          )],
+        },
+      ],
+    },
+    {
+      id: "call",
+      title: t("functionCall və geri dönüş", "functionCall and the return", "functionCall ve geri dönüş", "functionCall والرد", "functionCall и возврат"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "Birinci sorğu alətlərlə gedir. parts[0].functionCall varsa, mətn yoxdur, əmr var. Funksiyanı sən işlədirsən. İkinci sorğuda üç hissə durur: sual, modelin functionCall-u və functionResponse. Nəticəni yalnız console.log edib geri göndərməsən, istifadəçi səliqəli cümlə görmür. Salam kimi sualda functionCall olmur, birbaşa text gəlir.",
+            "The first request goes with the tools. If parts[0].functionCall is there, there is no text, there is a command. You run the function. The second request has three parts: the question, the model's functionCall and the functionResponse. If you only console.log the result and do not send it back, the user never sees a clean sentence. A question like hello has no functionCall. text comes directly.",
+            "İlk sorgu araçlarla gider. parts[0].functionCall varsa metin yok, emir var. Fonksiyonu sen çalıştırırsın. İkinci sorguda üç parça durur: soru, modelin functionCall'u ve functionResponse. Sonucu yalnız console.log edip geri göndermezsen kullanıcı düzgün cümle görmez. Selam gibi soruda functionCall olmaz, doğrudan text gelir.",
+            "الطلب الأول يذهب مع الأدوات. إذا وُجد parts[0].functionCall فلا نص، بل أمر. أنت تشغّل الدالة. في الطلب الثاني ثلاث قطع: السؤال وfunctionCall الخاص بالنموذج وfunctionResponse. إذا اكتفيت بـ console.log ولم تُعد النتيجة فلن يرى المستخدم جملة مرتبة. في سؤال مثل مرحباً لا يوجد functionCall، ويأتي text مباشرة.",
+            "Первый запрос уходит с инструментами. Если есть parts[0].functionCall, текста нет, есть команда. Функцию запускаешь ты. Во втором запросе три части: вопрос, functionCall модели и functionResponse. Если только сделать console.log и не отправить результат назад, пользователь не увидит чистую фразу. На вопрос вроде «привет» functionCall нет, сразу приходит text.",
+          )],
+          code: 'const apiKey = process.env.GEMINI_API_KEY;\nconst url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;\n\nfunction havaMelumatiniVer(seher) {\n  if (seher === "Baku") return "Bakıda 24 dərəcə, günəşlidir.";\n  return "Bu şəhər üçün məlumat yoxdur.";\n}\n\nconst aletler = [{\n  functionDeclarations: [{\n    name: "havaMelumatiniVer",\n    description: "Verilmiş şəhər üçün hava mətnini qaytarır.",\n    parameters: {\n      type: "OBJECT",\n      properties: { seher: { type: "STRING", description: "Şəhər, məsələn Baku" } },\n      required: ["seher"]\n    }\n  }]\n}];\n\nasync function agentSorgusuGonder(istifadeciSuali) {\n  const ilkBody = {\n    contents: [{ role: "user", parts: [{ text: istifadeciSuali }] }],\n    tools: aletler\n  };\n  const cavab = await fetch(url, {\n    method: "POST",\n    headers: { "Content-Type": "application/json" },\n    body: JSON.stringify(ilkBody)\n  });\n  const melumat = await cavab.json();\n  const hisse = melumat.candidates[0].content.parts[0];\n  if (!hisse.functionCall) {\n    console.log(hisse.text);\n    return;\n  }\n  const ad = hisse.functionCall.name;\n  const netice = havaMelumatiniVer(hisse.functionCall.args.seher);\n  const ikinciBody = {\n    contents: [\n      { role: "user", parts: [{ text: istifadeciSuali }] },\n      { role: "model", parts: [{ functionCall: hisse.functionCall }] },\n      { role: "user", parts: [{ functionResponse: { name: ad, response: { netice } } }] }\n    ],\n    tools: aletler\n  };\n  const cavab2 = await fetch(url, {\n    method: "POST",\n    headers: { "Content-Type": "application/json" },\n    body: JSON.stringify(ikinciBody)\n  });\n  const melumat2 = await cavab2.json();\n  console.log(melumat2.candidates[0].content.parts[0].text);\n}',
+        },
+      ],
+    },
+    {
+      id: "faq",
+      title: t("Suallar", "Questions", "Sorular", "أسئلة", "Вопросы"),
+      blocks: [
+        {
+          paragraphs: [
+            t("AI funksiyanı özü işlədirmi? Xeyr. Yalnız adını və parametrini deyir. İşlədən sənin kodundur.", "Does the AI run the function itself? No. It only says the name and the parameter. Your code runs it.", "AI fonksiyonu kendisi çalıştırır mı? Hayır. Yalnız adını ve parametresini söyler. Çalıştıran senin kodundur.", "هل يشغّل الذكاء الدالة بنفسه؟ لا. يقول الاسم والمعامل فقط. الذي يشغّلها هو كودك.", "ИИ сам запускает функцию? Нет. Он только говорит имя и параметр. Запускает твой код."),
+            t("description niyə vacibdir? AI funksiyanı nə vaxt seçəcəyini bu mətndən bilir. Boş və ya dumanlı olsa, səhvini çağırır.", "Why does description matter? The AI knows when to pick the function from this text. If it is empty or vague, it calls the wrong one.", "description neden önemlidir? AI fonksiyonu ne zaman seçeceğini bu metinden bilir. Boş veya bulanıksa yanlışını çağırır.", "لماذا description مهم؟ يعرف الذكاء متى يختار الدالة من هذا النص. إذا كان فارغاً أو غامضاً استدعى الخطأ.", "Зачем description? ИИ понимает, когда выбрать функцию, из этого текста. Если он пустой или мутный, вызовется не та."),
+            t("STRING kiçik hərflə yazılsa? Gemini xəta verir. Tip OBJECT, STRING və NUMBER böyük hərflədir.", "What if STRING is written in small letters? Gemini returns an error. The types OBJECT, STRING and NUMBER are in capital letters.", "STRING küçük harfle yazılırsa? Gemini hata verir. Tip OBJECT, STRING ve NUMBER büyük harftedir.", "ماذا إذا كُتب STRING بأحرف صغيرة؟ Gemini يُرجع خطأ. الأنواع OBJECT وSTRING وNUMBER بأحرف كبيرة.", "Если написать STRING маленькими буквами? Gemini вернёт ошибку. Типы OBJECT, STRING и NUMBER пишутся большими."),
+            t("Nəticə niyə istifadəçiyə çatmır? functionResponse ikinci sorğuda yoxdur. console.log kifayət etmir.", "Why does the result not reach the user? functionResponse is missing from the second request. console.log is not enough.", "Sonuç neden kullanıcıya ulaşmıyor? functionResponse ikinci sorguda yok. console.log yetmez.", "لماذا لا تصل النتيجة إلى المستخدم؟ functionResponse غائب في الطلب الثاني. console.log لا يكفي.", "Почему результат не доходит до пользователя? Во втором запросе нет functionResponse. console.log мало."),
+          ],
+        },
+      ],
+    },
+  ],
   duyme: [
     {
       id: "click",
