@@ -10,10 +10,11 @@ import * as eng from "./lib/engine";
 import { closePdf, openPdf, renderPageToCanvas } from "./lib/pdfjs";
 import { createDocxFromText, docxToText } from "./lib/docx";
 import { extractTextSmart } from "./lib/extract";
+import * as it from "./lib/imgtools";
 import { detectOcrLangs, ocrDetailed, ocrLangForSite, preprocessForOcr, type OcrConfig, type OcrLang } from "./lib/ocr";
 
-export type RunResult = { name: string; blob: Blob; kind: "pdf" | "image" | "zip" | "docx" | "text"; text?: string; note?: string; extra?: { label: string; name: string; blob: Blob }[] };
-export type Params = { range?: string; angle?: number; format?: "png" | "jpeg"; mode?: "light" | "strong"; text?: string; position?: string; forceOcr?: boolean };
+export type RunResult = { name: string; blob: Blob; kind: "pdf" | "image" | "zip" | "docx" | "text"; card?: boolean; text?: string; note?: string; extra?: { label: string; name: string; blob: Blob }[] };
+export type Params = { range?: string; w?: number; h?: number; pct?: number; maxKb?: number; ratio?: number; vertical?: boolean; to?: "png" | "jpeg" | "webp"; level?: "light" | "strong"; angle?: number; format?: "png" | "jpeg"; mode?: "light" | "strong"; text?: string; position?: string; forceOcr?: boolean };
 export type Action = { tool: string; params?: Params };
 export type HandleOptions = { action: Action; files: File[]; lang: Lang; container: HTMLElement; onStatus?: (s: string) => void };
 
@@ -33,14 +34,14 @@ const base = (n: string) => n.replace(/\.[^.]+$/, "") || "document";
 type S = {
   working: string; done: string; cancel: string; cancelled: string; failed: string; pwdOpen: (n: string) => string; pwdNew: (n: string) => string;
   pwdPh: string; pwd2Ph: string; apply: string; wrong: string; mismatch: string; short: string; zip: string; download: string; copy: string; copied: string;
-  noFile: string; needPdf: string; needTwo: string; needImg: string; needDocx: string; needRange: string; notLocked: string; pagesN: (n: number) => string; more: (n: number) => string;
+  noFile: string; needPdf: string; needTwo: string; needImg: string; imgBefore: string; imgAlready: string; needDocx: string; needRange: string; notLocked: string; pagesN: (n: number) => string; more: (n: number) => string;
 };
 const CHAT: Record<Lang, S> = {
-  az: { working: "İşlənir…", done: "Hazırdır", cancel: "Ləğv et", cancelled: "Ləğv edildi.", failed: "Əməliyyat alınmadı.", pwdOpen: (n) => `«${n}» parolla qorunur. Parolu daxil edin.`, pwdNew: (n) => `«${n}» üçün parol təyin edin.`, pwdPh: "Parol", pwd2Ph: "Parolu təkrar yazın", apply: "Təsdiqlə", wrong: "Parol səhvdir.", mismatch: "Parollar eyni deyil.", short: "Parol ən az 4 simvol olmalıdır.", zip: "Hamısını yüklə (ZIP)", download: "Yüklə", copy: "Kopyala", copied: "Kopyalandı", noFile: "Əvvəlcə fayl əlavə edin.", needPdf: "PDF fayl lazımdır.", needTwo: "Birləşdirmək üçün ən az iki PDF lazımdır.", needImg: "Şəkil lazımdır.", needDocx: "DOCX fayl lazımdır.", needRange: "Səhifə aralığı lazımdır, məsələn 1-3, 5.", notLocked: "Bu PDF parolla qorunmur.", pagesN: (n) => `${n} səhifə`, more: (n) => `və daha ${n} fayl (ZIP-də)` },
-  en: { working: "Working…", done: "Done", cancel: "Cancel", cancelled: "Cancelled.", failed: "The operation failed.", pwdOpen: (n) => `“${n}” is password-protected. Enter the password.`, pwdNew: (n) => `Set a password for “${n}”.`, pwdPh: "Password", pwd2Ph: "Repeat password", apply: "Confirm", wrong: "Wrong password.", mismatch: "The passwords do not match.", short: "Use at least 4 characters.", zip: "Download all (ZIP)", download: "Download", copy: "Copy", copied: "Copied", noFile: "Attach a file first.", needPdf: "A PDF file is needed.", needTwo: "At least two PDFs are needed to merge.", needImg: "An image is needed.", needDocx: "A DOCX file is needed.", needRange: "A page range is needed, for example 1-3, 5.", notLocked: "This PDF is not password-protected.", pagesN: (n) => `${n} pages`, more: (n) => `and ${n} more files (in the ZIP)` },
-  tr: { working: "İşleniyor…", done: "Hazır", cancel: "İptal", cancelled: "İptal edildi.", failed: "İşlem başarısız.", pwdOpen: (n) => `“${n}” parola korumalı. Parolayı girin.`, pwdNew: (n) => `“${n}” için parola belirleyin.`, pwdPh: "Parola", pwd2Ph: "Parolayı tekrar yazın", apply: "Onayla", wrong: "Parola yanlış.", mismatch: "Parolalar aynı değil.", short: "En az 4 karakter kullanın.", zip: "Hepsini indir (ZIP)", download: "İndir", copy: "Kopyala", copied: "Kopyalandı", noFile: "Önce bir dosya ekleyin.", needPdf: "PDF dosyası gerekli.", needTwo: "Birleştirmek için en az iki PDF gerekir.", needImg: "Görsel gerekli.", needDocx: "DOCX dosyası gerekli.", needRange: "Sayfa aralığı gerekli, örneğin 1-3, 5.", notLocked: "Bu PDF parola korumalı değil.", pagesN: (n) => `${n} sayfa`, more: (n) => `ve ${n} dosya daha (ZIP içinde)` },
-  ar: { working: "جارٍ المعالجة…", done: "تم", cancel: "إلغاء", cancelled: "تم الإلغاء.", failed: "فشلت العملية.", pwdOpen: (n) => `الملف «${n}» محمي بكلمة مرور. أدخلها.`, pwdNew: (n) => `عيّن كلمة مرور للملف «${n}».`, pwdPh: "كلمة المرور", pwd2Ph: "أعد كتابة كلمة المرور", apply: "تأكيد", wrong: "كلمة المرور خاطئة.", mismatch: "كلمتا المرور غير متطابقتين.", short: "استخدم 4 أحرف على الأقل.", zip: "تنزيل الكل (ZIP)", download: "تنزيل", copy: "نسخ", copied: "تم النسخ", noFile: "أرفق ملفاً أولاً.", needPdf: "مطلوب ملف PDF.", needTwo: "يلزم ملفا PDF على الأقل للدمج.", needImg: "مطلوبة صورة.", needDocx: "مطلوب ملف DOCX.", needRange: "مطلوب نطاق صفحات، مثل 1-3, 5.", notLocked: "هذا الملف غير محمي بكلمة مرور.", pagesN: (n) => `${n} صفحة`, more: (n) => `و${n} ملفات أخرى (داخل ZIP)` },
-  ru: { working: "Обработка…", done: "Готово", cancel: "Отмена", cancelled: "Отменено.", failed: "Операция не удалась.", pwdOpen: (n) => `«${n}» защищён паролем. Введите пароль.`, pwdNew: (n) => `Задайте пароль для «${n}».`, pwdPh: "Пароль", pwd2Ph: "Повторите пароль", apply: "Подтвердить", wrong: "Неверный пароль.", mismatch: "Пароли не совпадают.", short: "Минимум 4 символа.", zip: "Скачать всё (ZIP)", download: "Скачать", copy: "Копировать", copied: "Скопировано", noFile: "Сначала прикрепите файл.", needPdf: "Нужен PDF-файл.", needTwo: "Для объединения нужно минимум два PDF.", needImg: "Нужно изображение.", needDocx: "Нужен файл DOCX.", needRange: "Нужен диапазон страниц, например 1-3, 5.", notLocked: "Этот PDF не защищён паролем.", pagesN: (n) => `${n} стр.`, more: (n) => `и ещё ${n} файлов (в ZIP)` },
+  az: { working: "İşlənir…", done: "Hazırdır", cancel: "Ləğv et", cancelled: "Ləğv edildi.", failed: "Əməliyyat alınmadı.", pwdOpen: (n) => `«${n}» parolla qorunur. Parolu daxil edin.`, pwdNew: (n) => `«${n}» üçün parol təyin edin.`, pwdPh: "Parol", pwd2Ph: "Parolu təkrar yazın", apply: "Təsdiqlə", wrong: "Parol səhvdir.", mismatch: "Parollar eyni deyil.", short: "Parol ən az 4 simvol olmalıdır.", zip: "Hamısını yüklə (ZIP)", download: "Yüklə", copy: "Kopyala", copied: "Kopyalandı", noFile: "Əvvəlcə fayl əlavə edin.", needPdf: "PDF fayl lazımdır.", needTwo: "Birləşdirmək üçün ən az iki PDF lazımdır.", needImg: "Şəkil lazımdır.", imgBefore: "Ölçü:", imgAlready: "Şəkil artıq kifayət qədər kiçikdir, orijinal saxlanıldı.", needDocx: "DOCX fayl lazımdır.", needRange: "Səhifə aralığı lazımdır, məsələn 1-3, 5.", notLocked: "Bu PDF parolla qorunmur.", pagesN: (n) => `${n} səhifə`, more: (n) => `və daha ${n} fayl (ZIP-də)` },
+  en: { working: "Working…", done: "Done", cancel: "Cancel", cancelled: "Cancelled.", failed: "The operation failed.", pwdOpen: (n) => `“${n}” is password-protected. Enter the password.`, pwdNew: (n) => `Set a password for “${n}”.`, pwdPh: "Password", pwd2Ph: "Repeat password", apply: "Confirm", wrong: "Wrong password.", mismatch: "The passwords do not match.", short: "Use at least 4 characters.", zip: "Download all (ZIP)", download: "Download", copy: "Copy", copied: "Copied", noFile: "Attach a file first.", needPdf: "A PDF file is needed.", needTwo: "At least two PDFs are needed to merge.", needImg: "An image is needed.", imgBefore: "Size:", imgAlready: "The image is already small; the original was kept.", needDocx: "A DOCX file is needed.", needRange: "A page range is needed, for example 1-3, 5.", notLocked: "This PDF is not password-protected.", pagesN: (n) => `${n} pages`, more: (n) => `and ${n} more files (in the ZIP)` },
+  tr: { working: "İşleniyor…", done: "Hazır", cancel: "İptal", cancelled: "İptal edildi.", failed: "İşlem başarısız.", pwdOpen: (n) => `“${n}” parola korumalı. Parolayı girin.`, pwdNew: (n) => `“${n}” için parola belirleyin.`, pwdPh: "Parola", pwd2Ph: "Parolayı tekrar yazın", apply: "Onayla", wrong: "Parola yanlış.", mismatch: "Parolalar aynı değil.", short: "En az 4 karakter kullanın.", zip: "Hepsini indir (ZIP)", download: "İndir", copy: "Kopyala", copied: "Kopyalandı", noFile: "Önce bir dosya ekleyin.", needPdf: "PDF dosyası gerekli.", needTwo: "Birleştirmek için en az iki PDF gerekir.", needImg: "Görsel gerekli.", imgBefore: "Boyut:", imgAlready: "Görsel zaten yeterince küçük, orijinal korundu.", needDocx: "DOCX dosyası gerekli.", needRange: "Sayfa aralığı gerekli, örneğin 1-3, 5.", notLocked: "Bu PDF parola korumalı değil.", pagesN: (n) => `${n} sayfa`, more: (n) => `ve ${n} dosya daha (ZIP içinde)` },
+  ar: { working: "جارٍ المعالجة…", done: "تم", cancel: "إلغاء", cancelled: "تم الإلغاء.", failed: "فشلت العملية.", pwdOpen: (n) => `الملف «${n}» محمي بكلمة مرور. أدخلها.`, pwdNew: (n) => `عيّن كلمة مرور للملف «${n}».`, pwdPh: "كلمة المرور", pwd2Ph: "أعد كتابة كلمة المرور", apply: "تأكيد", wrong: "كلمة المرور خاطئة.", mismatch: "كلمتا المرور غير متطابقتين.", short: "استخدم 4 أحرف على الأقل.", zip: "تنزيل الكل (ZIP)", download: "تنزيل", copy: "نسخ", copied: "تم النسخ", noFile: "أرفق ملفاً أولاً.", needPdf: "مطلوب ملف PDF.", needTwo: "يلزم ملفا PDF على الأقل للدمج.", needImg: "مطلوبة صورة.", imgBefore: "الحجم:", imgAlready: "الصورة صغيرة أصلاً، أُبقيت النسخة الأصلية.", needDocx: "مطلوب ملف DOCX.", needRange: "مطلوب نطاق صفحات، مثل 1-3, 5.", notLocked: "هذا الملف غير محمي بكلمة مرور.", pagesN: (n) => `${n} صفحة`, more: (n) => `و${n} ملفات أخرى (داخل ZIP)` },
+  ru: { working: "Обработка…", done: "Готово", cancel: "Отмена", cancelled: "Отменено.", failed: "Операция не удалась.", pwdOpen: (n) => `«${n}» защищён паролем. Введите пароль.`, pwdNew: (n) => `Задайте пароль для «${n}».`, pwdPh: "Пароль", pwd2Ph: "Повторите пароль", apply: "Подтвердить", wrong: "Неверный пароль.", mismatch: "Пароли не совпадают.", short: "Минимум 4 символа.", zip: "Скачать всё (ZIP)", download: "Скачать", copy: "Копировать", copied: "Скопировано", noFile: "Сначала прикрепите файл.", needPdf: "Нужен PDF-файл.", needTwo: "Для объединения нужно минимум два PDF.", needImg: "Нужно изображение.", imgBefore: "Размер:", imgAlready: "Изображение и так небольшое, оставлен оригинал.", needDocx: "Нужен файл DOCX.", needRange: "Нужен диапазон страниц, например 1-3, 5.", notLocked: "Этот PDF не защищён паролем.", pagesN: (n) => `${n} стр.`, more: (n) => `и ещё ${n} файлов (в ZIP)` },
 };
 
 const CSS = `
@@ -163,8 +164,8 @@ function renderResults(box: HTMLElement, results: RunResult[], s: S) {
   const wrap = el("div", "nbp-card");
   wrap.setAttribute("data-nbp", "results");
   const zip = results.find((r) => r.kind === "zip");
-  const images = results.filter((r) => r.kind === "image");
-  const rest = results.filter((r) => r.kind !== "image" && r.kind !== "zip");
+  const images = results.filter((r) => r.kind === "image" && !r.card);
+  const rest = results.filter((r) => (r.kind !== "image" || r.card) && r.kind !== "zip");
   if (zip) {
     const row = el("div", "nbp-row");
     const info = el("div");
@@ -199,6 +200,13 @@ function renderResults(box: HTMLElement, results: RunResult[], s: S) {
     card.style.marginTop = "10px";
     card.setAttribute("data-nbp", "result");
     card.setAttribute("data-kind", r.kind);
+    if (r.kind === "image") {
+      const img = el("img", "nbp-thumb");
+      img.alt = "";
+      img.src = URL.createObjectURL(r.blob);
+      img.style.background = "repeating-conic-gradient(#ddd 0 25%,#fff 0 50%) 50%/12px 12px";
+      card.append(img);
+    }
     if (r.kind === "pdf") {
       const img = el("img", "nbp-thumb");
       img.alt = "";
@@ -251,6 +259,7 @@ function zipOut(name: string, files: { name: string; data: Uint8Array }[]): RunR
   const z = zipSync(Object.fromEntries(files.map((f) => [f.name, [f.data, { level: 0 }] as [Uint8Array, { level: 0 }]])));
   return { name, blob: new Blob([z as BlobPart], { type: "application/zip" }), kind: "zip" };
 }
+const imgOut = (name: string, blob: Blob, note?: string): RunResult => ({ name, blob, kind: "image", note, card: true });
 const pdfOut = (name: string, bytes: Uint8Array, note?: string): RunResult => ({ name, blob: new Blob([bytes as BlobPart], { type: "application/pdf" }), kind: "pdf", note });
 const docxBlob = (text: string) => new Blob([createDocxFromText(text) as BlobPart], { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" });
 const textOut = (name: string, text: string, note?: string): RunResult => ({ name: `${name}.txt`, blob: new Blob([text], { type: "text/plain;charset=utf-8" }), kind: "text", text, note, extra: [{ label: "DOCX", name: `${name}.docx`, blob: docxBlob(text) }] });
@@ -289,6 +298,61 @@ export async function runTool(action: Action, files: File[], ctx: Ctx): Promise<
   const range = (total: number) => { if (!p.range) throw new UserError(s.needRange); const r = eng.parseRange(p.range, total); if (!r) throw new UserError(t.errBadRange); return r; };
   const out: RunResult[] = [];
   switch (action.tool) {
+    case "img-bg":
+    case "img-compress":
+    case "img-resize":
+    case "img-convert":
+    case "img-crop":
+    case "img-rotate":
+    case "img-flip":
+    case "img-gray": {
+      if (!imgs.length) throw new UserError(s.needImg);
+      const verb = action.tool.slice(4);
+      for (let i = 0; i < imgs.length; i++) {
+        const f = imgs[i];
+        const part = (x: number) => ctx.progress(t.working, (i + x) / imgs.length);
+        part(0.02);
+        const b = base(f.name);
+        const srcFmt = it.fmtOf(f);
+        if (verb === "bg") {
+          const blob = await it.removeBg(f, (x) => part(x));
+          if (ctx.cancelled()) throw new UserError(s.cancelled);
+          out.push(imgOut(`${b}-nobg.png`, blob, `${s.imgBefore} ${fmt(f.size)} → ${fmt(blob.size)}`));
+          continue;
+        }
+        const cv = await it.decode(f);
+        part(0.4);
+        let blob: Blob, fm: "png" | "jpeg" | "webp" = srcFmt, suffix = verb, note = "";
+        if (verb === "compress") {
+          const r = await it.compress(cv, srcFmt, p.level ?? "strong", p.maxKb);
+          blob = r.blob; fm = r.fmt;
+          if (blob.size >= f.size) { blob = f; fm = srcFmt; note = s.imgAlready; }
+        } else if (verb === "resize") {
+          const c = it.resize(cv, { w: p.w, h: p.h, pct: p.pct });
+          blob = await it.encode(c, srcFmt, 0.92);
+          note = `${cv.width}×${cv.height} → ${c.width}×${c.height}`;
+        } else if (verb === "convert") {
+          fm = p.to ?? (srcFmt === "png" ? "jpeg" : "png");
+          blob = await it.encode(cv, fm, 0.92);
+          suffix = "converted";
+        } else if (verb === "crop") {
+          const c = it.cropAspect(cv, p.ratio ?? 1);
+          blob = await it.encode(c, srcFmt, 0.92);
+          note = `${cv.width}×${cv.height} → ${c.width}×${c.height}`;
+        } else if (verb === "rotate") {
+          blob = await it.encode(it.rotate(cv, p.angle ?? 90), srcFmt, 0.92);
+        } else if (verb === "flip") {
+          blob = await it.encode(it.flip(cv, !!p.vertical), srcFmt, 0.92);
+        } else {
+          blob = await it.encode(it.gray(cv), srcFmt, 0.92);
+          suffix = "gray";
+        }
+        part(1);
+        out.push(imgOut(`${b}-${suffix}.${it.EXT[fm]}`, blob, [note, `${s.imgBefore} ${fmt(f.size)} → ${fmt(blob.size)}`].filter(Boolean).join(" · ")));
+      }
+      if (out.length > 1) out.unshift(zipOut("images.zip", await Promise.all(out.map(async (r) => ({ name: r.name, data: new Uint8Array(await r.blob.arrayBuffer()) })))));
+      break;
+    }
     case "merge": {
       if (pdfs.length < 2) throw new UserError(s.needTwo);
       const loaded: Uint8Array[] = [];
