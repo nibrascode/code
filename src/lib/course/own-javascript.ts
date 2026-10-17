@@ -663,6 +663,54 @@ export const OWN_JS: OwnPageContent = {
       ],
     },
   ],
+  json: [
+    {
+      id: "why",
+      title: t("Mətn yox, JSON", "JSON, not text", "Metin değil, JSON", "ليس نصاً، بل JSON", "Не текст, а JSON"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "Çat üçün mətn kifayətdir. Test, lüğət və mağazada sualı, variantı və düzgün cavabı ayrı-ayrı götürmək lazımdır. Uzun cümlədən bunu çıxarmaq çətindir. generationConfig içində responseMimeType: \"application/json\" AI-nı təmiz JSON-a məcbur edir. \"Salam, buyurun\" yazmır. generationConfig contents-in içində deyil, onunla eyni səviyyədə durur.",
+            "Text is enough for a chat. In a quiz, a dictionary and a shop you need the question, the options and the right answer separately. Pulling that out of a long sentence is hard. responseMimeType: \"application/json\" inside generationConfig forces the AI to return clean JSON. It does not write \"Hello, here you go\". generationConfig is not inside contents. It sits at the same level.",
+            "Sohbet için metin yeter. Test, sözlük ve mağazada soruyu, seçeneği ve doğru cevabı ayrı ayrı almak gerekir. Uzun cümleden bunu çıkarmak zordur. generationConfig içinde responseMimeType: \"application/json\" AI'yı temiz JSON'a zorlar. \"Merhaba, buyurun\" yazmaz. generationConfig contents'in içinde değil, onunla aynı seviyededir.",
+            "النص يكفي للمحادثة. في اختبار وقاموس ومتجر تحتاج السؤال والخيارات والجواب الصحيح كل واحد على حدة. إخراجه من جملة طويلة صعب. responseMimeType: \"application/json\" داخل generationConfig يُجبر الذكاء على JSON نظيف. لا يكتب \"مرحباً، تفضل\". generationConfig ليس داخل contents، بل في مستواه.",
+            "Для чата текста хватает. В тесте, словаре и магазине вопрос, варианты и верный ответ нужно брать по отдельности. Вытащить это из длинного предложения трудно. responseMimeType: \"application/json\" внутри generationConfig заставляет ИИ вернуть чистый JSON. Он не пишет «Здравствуйте, вот». generationConfig не внутри contents, а на одном уровне с ним.",
+          )],
+          code: 'const sorguMelumati = {\n  contents: [{ parts: [{ text: "2 rəng adı və kodu ver." }] }],\n  generationConfig: { responseMimeType: "application/json" }\n};',
+        },
+      ],
+    },
+    {
+      id: "parse",
+      title: t("JSON.parse və test", "JSON.parse and a quiz", "JSON.parse ve test", "JSON.parse واختبار", "JSON.parse и тест"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "Gələn hissə hələ mətndir, obyekt deyil. JSON.stringify obyekti göndərmək üçün mətnə çevirir. JSON.parse mətni massivə çevirir. Açar adlarını sualda dəqiq yaz: sual, variantlar, duzgunCavab. Yazmasan AI hər dəfə başqa ad uydurur. Sonra testler[0].sual və testler[0].duzgunCavab oxunur.",
+            "The part that arrives is still text, not an object. JSON.stringify turns an object into text so you can send it. JSON.parse turns the text into an array. Write the key names exactly in the question: sual, variantlar, duzgunCavab. If you do not, the AI invents a different name each time. Then you read testler[0].sual and testler[0].duzgunCavab.",
+            "Gelen parça hâlâ metindir, nesne değil. JSON.stringify nesneyi göndermek için metne çevirir. JSON.parse metni diziye çevirir. Anahtar adlarını soruda net yaz: sual, variantlar, duzgunCavab. Yazmazsan AI her seferinde başka ad uydurur. Sonra testler[0].sual ve testler[0].duzgunCavab okunur.",
+            "الجزء القادم ما زال نصاً لا كائناً. JSON.stringify يحوّل الكائن إلى نص كي ترسله. JSON.parse يحوّل النص إلى مصفوفة. اكتب أسماء المفاتيح في السؤال بدقة: sual وvariantlar وduzgunCavab. وإلا اخترع الذكاء اسماً مختلفاً كل مرة. ثم تقرأ testler[0].sual وtestler[0].duzgunCavab.",
+            "Пришедшая часть всё ещё текст, не объект. JSON.stringify превращает объект в текст, чтобы отправить. JSON.parse превращает текст в массив. Имена ключей напиши в вопросе точно: sual, variantlar, duzgunCavab. Иначе ИИ каждый раз выдумает другое имя. Потом читаются testler[0].sual и testler[0].duzgunCavab.",
+          )],
+          code: 'const apiKey = process.env.GEMINI_API_KEY;\nconst url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;\n\nasync function testYarat(movzu) {\n  const telimat = `${movzu} mövzusunda 2 sual hazırla. Massiv qaytar. Hər obyektdə sual, variantlar və duzgunCavab olsun.`;\n  const cavab = await fetch(url, {\n    method: "POST",\n    headers: { "Content-Type": "application/json" },\n    body: JSON.stringify({\n      contents: [{ parts: [{ text: telimat }] }],\n      generationConfig: { responseMimeType: "application/json" }\n    })\n  });\n  const melumat = await cavab.json();\n  const jsonMetni = melumat.candidates[0].content.parts[0].text;\n  const testler = JSON.parse(jsonMetni);\n  console.log(testler[0].sual, testler[0].duzgunCavab);\n}',
+        },
+      ],
+    },
+    {
+      id: "faq",
+      title: t("Suallar", "Questions", "Sorular", "أسئلة", "Вопросы"),
+      blocks: [
+        {
+          paragraphs: [
+            t("sual niyə undefined olur? JSON.parse yazılmayıb. jsonMetni hələ mətndir, massiv deyil.", "Why is sual undefined? JSON.parse was not written. jsonMetni is still text, not an array.", "sual neden undefined olur? JSON.parse yazılmamış. jsonMetni hâlâ metindir, dizi değil.", "لماذا يكون sual قيمة undefined؟ لم يُكتب JSON.parse. jsonMetni ما زال نصاً لا مصفوفة.", "Почему sual равен undefined? JSON.parse не написан. jsonMetni всё ещё текст, не массив."),
+            t("Açar niyə hər dəfə dəyişir? Sualda adlar yoxdur. sual, variantlar və duzgunCavab sözlərini təlimata yaz.", "Why does the key change every time? The question has no names. Write the words sual, variantlar and duzgunCavab into the instruction.", "Anahtar neden her seferinde değişir? Soruda adlar yok. sual, variantlar ve duzgunCavab sözcüklerini talimata yaz.", "لماذا يتغير المفتاح كل مرة؟ لا أسماء في السؤال. اكتب كلمات sual وvariantlar وduzgunCavab في التعليمة.", "Почему ключ каждый раз другой? В вопросе нет имён. Напиши слова sual, variantlar и duzgunCavab в инструкцию."),
+            t("generationConfig hara düşür? contents-in yanına, içinə yox. responseMimeType dəyəri application/json-dur.", "Where does generationConfig go? Next to contents, not inside it. The value of responseMimeType is application/json.", "generationConfig nereye düşer? contents'in yanına, içine değil. responseMimeType değeri application/json'dur.", "أين يوضع generationConfig؟ بجانب contents لا داخله. قيمة responseMimeType هي application/json.", "Куда ставится generationConfig? Рядом с contents, не внутрь. Значение responseMimeType — application/json."),
+            t("stringify və parse fərqi nədir? stringify göndərir. parse gələn mətni obyekt edir.", "What is the difference between stringify and parse? stringify sends. parse turns the arriving text into an object.", "stringify ve parse farkı nedir? stringify gönderir. parse gelen metni nesne yapar.", "ما الفرق بين stringify وparse؟ stringify يُرسل. parse يحوّل النص القادم إلى كائن.", "В чём разница stringify и parse? stringify отправляет. parse делает из пришедшего текста объект."),
+          ],
+        },
+      ],
+    },
+  ],
   duyme: [
     {
       id: "click",
