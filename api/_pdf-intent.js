@@ -40,7 +40,12 @@ const R = {
   compress: /sıxışdır|sixisdir|sıxışdırma|kiçilt|kicilt|ölçü.{0,10}azalt|\bcompress|reduce\s+(?:the\s+)?(?:file\s+)?size|make.{0,12}smaller|sıkıştır|sikistir|küçült|kucult|сожми|сжать|сжим|уменьш|ضغط|اضغط|تصغير|صغر/i,
   rotate: /rotate|döndər|dondər|dondur|döndür|fırlat|firlat|çevir[^.!?\n]{0,20}(?:sola|sağa|saga|sol\b|sag\b|dərəcə|derece|90|180|270)|поверн|перевер|تدوير|أدر|ادر|دوّر|دور/i,
   text: /mətn|metn|\btext|metin|текст|نص|نصوص/i,
-  grab: /çıxar|cixar|oxu\b|oxut|\bread\b|extract|\bget\b|copy|kopyala|\bal\b|çıkar|cikar|извлек|достань|получи|прочитай|скопир|استخرج|استخراج|انسخ|اقرأ|اقرا/i,
+  grab: /çıxar|çıxart|cixar|cixart|çıkart|oxu\b|oxut|\bread\b|extract|\bget\b|copy|kopyala|\bal\b|çıkar|cikar|извлек|достань|получи|прочитай|скопир|استخرج|استخراج|انسخ|اقرأ|اقرا/i,
+  // "read / what does it say / transcribe" (az, tr, en, ru, ar), also without the word "text"
+  read: /oxu\b|oxuyun|oxut|yaz[ıi]s?[ıi]?n[ıi]?\s+(?:çıxar|çıxart|cixar|oxu)|nə\s+yaz[ıi]l[ıi]b|ne\s+yaz[ıi]yor|ne\s+yaz[ıi]l[ıi]|nə\s+yaz[ıi]l[ıi]r|\bread\b|transcri|what.{0,20}(?:say|written|text)|\bwrite\s+down\b|прочитай|прочесть|расшифруй|что\s+(?:тут\s+|здесь\s+|там\s+)?(?:написано|за\s+текст)|перепиши|ما\s+(?:هو\s+)?(?:المكتوب|الموجود)|ماذا\s+(?:يقول|مكتوب)|اقرأ|اقرا\b|\bokuyun\b|\boku\b|çıkar\b|çıkart|извлеки|извлечь|достань|استخرج|استخراج|\bextract\b|\bgrab\b|\bcopy\b|\bscan\b/i,
+  strongRead: /oxu|\bread\b|transcri|написано|прочитай|расшифруй|المكتوب|اقرأ|اقرا\b|yaz[ıi]l[ıi]|yaz[ıi]yor|yaz[ıi]s?[ıi]?n/i,
+  // the message clearly asks to create / change a picture: not a document request
+  edit: /redakt|düzəlt|duzelt|dəyiş|deyis|rənglən|rengle|arxa\s*plan|\bfon\b|background|\bedit\b|retouch|\bdraw\b|generate|create\s+(?:an?\s+)?(?:image|picture)|cartoon|style|paint|sil\b|\bremove\b|çək\b|çiz\b|çevir\s+(?:cizgi|cartoon)|düzenle|değiştir|olustur|oluştur|нарисуй|создай|сгенерируй|измени|отредактируй|удали\s+фон|убери\s+фон|عدّل|عدل|ارسم|أنشئ|انشئ|ولّد|احذف\s+الخلفية/i,
   ocr: /\bocr\b|skan\w*\s*oxu|tanı|tani|recogni[sz]e|распозна|تعرف|التعرف/i,
   scanned: /skan|scan|taranmış|taranmis|скан|ممسوح|مسح ضوئي/i,
   image: /şəkil|sekil|shekil|image|picture|photo|\bjpe?g\b|\bpng\b|görsel|gorsel|resim|fotoğraf|fotograf|картин|изображ|фото|صور/i,
@@ -102,8 +107,15 @@ function detect(message, files) {
   if ((has.pdf || pdfWord) && R.toWord.test(m)) return has.docx && !has.pdf ? "word-pdf" : "pdf-word";
   if (R.ocr.test(m) && (has.pdf || has.image || pdfWord)) return "ocr";
   if (R.text.test(m) && R.grab.test(m) && (has.pdf || has.image || pdfWord)) return has.pdf || pdfWord ? "extract-text" : "ocr";
+  if (R.read.test(m) && (!R.image.test(m) || R.strongRead.test(m)) && (has.image || has.pdf || pdfWord)) {
+    if (has.pdf) return "extract-text";
+    if (has.image && !R.edit.test(m)) return "ocr";
+    if (pdfWord) return "extract-text";
+  }
   if (has.image && !has.pdf && (pdfWord || R.toPdf.test(m))) return "image-pdf";
   if ((has.pdf || pdfWord) && R.image.test(m)) return "pdf-image";
+  // a lone image with a short, unclear message: read it (the common case) unless it clearly asks to edit / generate a picture
+  if (has.image && !has.pdf && !has.docx && files.some((f) => f.attached) && m.length <= 50 && !R.edit.test(m) && !R.how.test(m)) return "ocr";
   return null;
 }
 

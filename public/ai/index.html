@@ -2354,7 +2354,11 @@
     function wantsPdfFlow(m) {
       if (pendingDocs.some(function (x) { return x.kind === "pdf" || x.kind === "docx"; })) return true;
       if (/pdf|docx|\bocr\b/i.test(m)) return true;
-      return pendingDocs.some(function (x) { return x.kind === "image"; }) && /(mətn|metn|metin|text|текст|نص|oxu|read|распозна|скан|skan)/i.test(m);
+      // an attached image: read it by default; only a clear edit / generate request goes to the picture tools
+      const editRe = /redakt|düzəlt|duzelt|dəyiş|deyis|rənglən|arxa\s*plan|\bfon\b|background|\bedit\b|retouch|\bdraw\b|generate|create\s+(?:an?\s+)?(?:image|picture)|cartoon|style|paint|\bsil\b|\bremove\b|çək\b|çiz\b|düzenle|değiştir|oluştur|нарисуй|создай|сгенерируй|измени|отредактируй|удали\s+фон|убери\s+фон|عدّل|عدل|ارسم|أنشئ|انشئ|ولّد/i;
+      if (pendingDocs.some(function (x) { return x.kind === "image"; })) return !editRe.test(m) && !wantsImage(m);
+      // a follow-up about an image sent earlier in this chat
+      return sessFiles.some(function (x) { return x.kind === "image"; }) && /(mətn|metn|metin|text|текст|نص|oxu|read|распозна|скан|skan|çıxar|çıkar|извлеки|прочитай|استخرج|اقرأ|transcri|yazılıb|yazıyor|написано|المكتوب)/i.test(m) && !editRe.test(m);
     }
     let runnerP = null;
     function loadRunner() {
