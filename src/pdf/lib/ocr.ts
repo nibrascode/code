@@ -167,8 +167,17 @@ async function makeWorker(langs: OcrLang[], best: boolean, logger?: (m: { status
   } as never)) as unknown as TessWorker;
 }
 
+/** True when a page has (almost) no dark pixels at all, e.g. an empty scan. */
+function isBlank(c: HTMLCanvasElement): boolean {
+  const g = toGray(c);
+  let dark = 0;
+  for (let i = 0; i < g.d.length; i += 3) if (g.d[i] < 120) dark++;
+  return dark < g.d.length * 0.0004;
+}
+
 /** Choose OCR languages: read a sample with each script family and keep the one the engine is most sure about. */
 export async function detectOcrLangs(sample: HTMLCanvasElement, fallback: OcrLang): Promise<OcrLang[]> {
+  if (isBlank(sample)) return fallback === "eng" ? ["eng"] : [fallback, "eng"];
   const top = Math.min(sample.height, Math.max(220, Math.round(sample.height * 0.7)));
   const part = crop(sample, 0, 0, sample.width, top);
   const cands: OcrLang[][] = [["ara"], ["aze", "tur", "eng"], ["rus", "eng"]];
@@ -407,7 +416,9 @@ export async function ocrDetailed(
       const score = (r: R) => (r.weight * Math.max(0, r.conf - 40)) / 60;
       let r: R;
       let mode: string = cfg.mode;
-      if (!(src instanceof HTMLCanvasElement)) {
+      if (src instanceof HTMLCanvasElement && isBlank(src)) {
+        r = { text: "", conf: 0, weight: 0 };
+      } else if (!(src instanceof HTMLCanvasElement)) {
         await worker.setParameters({ tessedit_pageseg_mode: String(cfg.psm) });
         const x = await worker.recognize(src as never);
         r = { text: x.data.text, conf: x.data.confidence, weight: x.data.text.length };
