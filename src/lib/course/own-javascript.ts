@@ -297,6 +297,70 @@ export const OWN_JS: OwnPageContent = {
       ],
     },
   ],
+  input: [
+    {
+      id: "prompt",
+      title: t("prompt ilə soruş", "Ask with prompt", "prompt ile sor", "اسأل بـ prompt", "Спроси через prompt"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "prompt brauzerdə kiçik pəncərə açır və yazını qaytarır. Cancel basılanda null olur. Qaytarılan həmişə mətndir. Ədəd lazımdırsa Number yaz, yoxsa \"12\" + \"34\" \"1234\" olar.",
+            "prompt opens a small window in the browser and returns the text. Cancel gives null. The result is always text. If you need a number, write Number, or \"12\" + \"34\" becomes \"1234\".",
+            "prompt tarayıcıda küçük bir pencere açar ve yazıyı döndürür. Cancel basılırsa null olur. Dönen her zaman metindir. Sayı gerekirse Number yaz, yoksa \"12\" + \"34\" \"1234\" olur.",
+            "prompt يفتح نافذة صغيرة في المتصفح ويُرجع النص. عند الإلغاء تكون النتيجة null. الناتج دائماً نص. إذا احتجت رقماً اكتب Number، وإلا أصبح \"12\" + \"34\" هو \"1234\".",
+            "prompt открывает в браузере маленькое окно и возвращает текст. При отмене будет null. Результат всегда текст. Если нужно число, напиши Number, иначе \"12\" + \"34\" станет \"1234\".",
+          )],
+          code: 'let ad = prompt("Adınızı daxil edin:");\nif (ad === null) {\n  console.log("İmtina edildi.");\n} else {\n  console.log("Salam, " + ad + "!");\n}\nlet a = Number(prompt("Birinci ədəd:"));\nlet b = Number(prompt("İkinci ədəd:"));\nconsole.log(a + b);',
+        },
+      ],
+    },
+    {
+      id: "html",
+      title: t("HTML input-dan oxu", "Read an HTML input", "HTML input'tan oku", "اقرأ من input في HTML", "Прочитай HTML input"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "Səhifədəki qutunun mətni .value-dadır. Düyməyə basılanda oxu və textContent ilə göstər. Forma göndəriləndə səhifə yenilənməsin deyə preventDefault çağır.",
+            "The text in a page box is in .value. Read it when the button is clicked and show it with textContent. On a form submit, call preventDefault so the page does not reload.",
+            "Sayfadaki kutunun metni .value içindedir. Düğmeye basılınca oku ve textContent ile göster. Form gönderilince sayfa yenilenmesin diye preventDefault çağır.",
+            "نص الصندوق في الصفحة داخل .value. اقرأه عند الضغط على الزر وأظهره بـ textContent. عند إرسال النموذج استدعِ preventDefault كي لا تُعاد تحميل الصفحة.",
+            "Текст поля на странице лежит в .value. Прочитай его по клику и покажи через textContent. При отправке формы вызови preventDefault, чтобы страница не обновилась.",
+          )],
+          code: '<input id="adInput" type="text">\n<button id="gosterBtn">Göstər</button>\n<p id="netice"></p>\n<script>\n  const adInput = document.getElementById("adInput");\n  const netice = document.getElementById("netice");\n  document.getElementById("gosterBtn").addEventListener("click", function () {\n    netice.textContent = "Salam, " + adInput.value + "!";\n  });\n</script>',
+        },
+      ],
+    },
+    {
+      id: "node",
+      title: t("Node.js-də readline", "readline in Node.js", "Node.js'te readline", "readline في Node.js", "readline в Node.js"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "Brauzerdən kənar, terminalda, readline sual verir. Cavab funksiyaya düşür. Sonda rl.close() çağır, yoxsa proqram gözləməkdə qalır. Sayt dərsi üçün prompt və HTML input kifayətdir.",
+            "Outside the browser, in a terminal, readline asks a question. The answer arrives in a function. Call rl.close() at the end, or the program keeps waiting. For a page lesson, prompt and an HTML input are enough.",
+            "Tarayıcı dışında, terminalde, readline soru sorar. Cevap fonksiyona düşer. Sonda rl.close() çağır, yoksa program beklemeye devam eder. Sayfa dersi için prompt ve HTML input yeter.",
+            "خارج المتصفح، في الطرفية، readline يطرح سؤالاً. يصل الجواب إلى دالة. في النهاية استدعِ rl.close() وإلا بقي البرنامج منتظراً. لدرس الصفحة يكفي prompt وinput في HTML.",
+            "Вне браузера, в терминале, readline задаёт вопрос. Ответ приходит в функцию. В конце вызови rl.close(), иначе программа продолжит ждать. Для урока на странице хватает prompt и HTML input.",
+          )],
+          code: 'const readline = require("readline");\nconst rl = readline.createInterface({\n  input: process.stdin,\n  output: process.stdout,\n});\nrl.question("Adınız: ", function (ad) {\n  console.log("Salam, " + ad + "!");\n  rl.close();\n});',
+        },
+      ],
+    },
+    {
+      id: "faq",
+      title: t("Suallar", "Questions", "Sorular", "أسئلة", "Вопросы"),
+      blocks: [
+        {
+          paragraphs: [
+            t("prompt nə qaytarır? Mətn. Cancel basılanda null.", "What does prompt return? Text. null if Cancel is pressed.", "prompt ne döndürür? Metin. Cancel basılırsa null.", "ماذا يُرجع prompt؟ نصاً. null عند الإلغاء.", "Что возвращает prompt? Текст. null, если нажали Cancel."),
+            t("İki ədəd niyə yapışır? Onlar hələ mətndir. Number() ilə çevir, sonra topla.", "Why do two numbers stick together? They are still text. Convert with Number(), then add.", "İki sayı neden yapışır? Onlar hâlâ metindir. Number() ile çevir, sonra topla.", "لماذا يلتصق الرقمان؟ ما زالا نصاً. حوّلهما بـ Number() ثم اجمع.", "Почему два числа слипаются? Они ещё текст. Переведи через Number(), потом сложи."),
+            t("HTML qutusunun yazısı haradadır? input.value. Göstərmək üçün başqa elementin textContent-ini dəyiş.", "Where is the text of an HTML box? input.value. To show it, change another element's textContent.", "HTML kutusunun yazısı nerede? input.value. Göstermek için başka öğenin textContent'ini değiştir.", "أين نص صندوق HTML؟ في input.value. لإظهاره غيّر textContent لعنصر آخر.", "Где текст поля HTML? В input.value. Чтобы показать, измени textContent другого элемента."),
+            t("Forma niyə səhifəni yeniləyir? submit bunu edir. event.preventDefault() yeniləməni dayandırır.", "Why does a form reload the page? submit does that. event.preventDefault() stops the reload.", "Form neden sayfayı yeniler? submit bunu yapar. event.preventDefault() yenilemeyi durdurur.", "لماذا يعيد النموذج تحميل الصفحة؟ submit يفعل ذلك. event.preventDefault() يوقف إعادة التحميل.", "Почему форма обновляет страницу? Это делает submit. event.preventDefault() останавливает обновление."),
+          ],
+        },
+      ],
+    },
+  ],
   undefined: [
     {
       id: "var",
