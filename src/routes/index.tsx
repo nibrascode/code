@@ -347,7 +347,6 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
               <span className="nx-qr-text">
                 <b>{BAR.pdf[lang]}</b>
               </span>
-              <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
             </a>
             <a className="nx-ai-bar nx-qr-bar" href={localeHref(lang, "/qr")}>
               <svg className="nx-job nx-job-qr" viewBox="0 0 24 24" aria-hidden="true">
@@ -357,7 +356,6 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
               <span className="nx-qr-text">
                 <b>{BAR.qr[lang]}</b>
               </span>
-              <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
             </a>
             <a className="nx-ai-bar nx-qr-bar" href={localeHref(lang, "/erase")}>
               <svg className="nx-job nx-job-erase" viewBox="0 0 24 24" aria-hidden="true">
@@ -369,7 +367,6 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
               <span className="nx-qr-text">
                 <b>{BAR.erase[lang]}</b>
               </span>
-              <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
             </a>
             <a className="nx-ai-bar nx-qr-bar" href={localeHref(lang, "/image")}>
               <svg className="nx-job nx-job-image" viewBox="0 0 24 24" aria-hidden="true">
@@ -380,7 +377,6 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
               <span className="nx-qr-text">
                 <b>{BAR.image[lang]}</b>
               </span>
-              <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
             </a>
             <a className="nx-ai-bar nx-qr-bar" href={localeHref(lang, "/calc")}>
               <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true">
@@ -390,7 +386,6 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
               <span className="nx-qr-text">
                 <b>{BAR.calc[lang]}</b>
               </span>
-              <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
             </a>
           </div>
         </div>

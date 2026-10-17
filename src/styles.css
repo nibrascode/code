@@ -7188,8 +7188,25 @@ body.is-planner .site-backdrop {
 .nx-job-qr { color: #c5dcff; background: rgb(16 36 72 / 0.95); }
 .nx-job-erase { color: #ffe0a8; background: rgb(64 40 12 / 0.95); }
 .nx-job-image { color: #e0d0ff; background: rgb(36 24 68 / 0.95); }
-.nx-bars > .nx-qr-bar > .nx-qr-text { display: flex; flex: 1; flex-direction: column; gap: 1px; white-space: normal; font-size: inherit; letter-spacing: normal; }
-.nx-qr-text b { font-size: 15px; font-weight: 750; letter-spacing: -0.03em; }
+.nx-bars > .nx-qr-bar > .nx-qr-text {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 0;
+  white-space: nowrap;
+  font-size: inherit;
+  letter-spacing: normal;
+}
+.nx-qr-text b {
+  font-size: 15px;
+  font-weight: 750;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .nx-qr-text small { font-size: 12px; font-weight: 500; color: rgb(244 247 255 / 0.65); line-height: 1.3; }
 
 .files-page { --radius-md: 10px; }
