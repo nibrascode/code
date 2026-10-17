@@ -1,4 +1,5 @@
 import type { Lang } from "@/lib/i18n";
+import { APK_ERROR_INDEX } from "@/lib/apk-errors-index";
 
 export type SearchKind = "soz" | "xeta" | "movzu" | "nece";
 
@@ -11,6 +12,8 @@ export type SearchPiece = {
 
 type SearchItem = {
   slug: string;
+  /** Body is loaded from a lazy chunk (see loadApkBody). */
+  lazy?: boolean;
   piece: Record<Lang, SearchPiece>;
 };
 
@@ -243,7 +246,7 @@ const WORDS: readonly SearchItem[] = [
   },
 ];
 
-const ERRORS: readonly SearchItem[] = [
+const BASE_ERRORS: readonly SearchItem[] = [
   {
     slug: "apk-qurulmur",
     piece: piece(
@@ -549,6 +552,20 @@ const ERRORS: readonly SearchItem[] = [
   },
 ];
 
+const LANGS: readonly Lang[] = ["az", "en", "tr", "ar", "ru"];
+const APK_ITEMS: readonly SearchItem[] = APK_ERROR_INDEX.map(([slug, t]) => ({
+  slug,
+  lazy: true,
+  piece: (Object.fromEntries(LANGS.map((l) => [l, { title: t[l][0], lead: t[l][1], points: [] }])) as unknown) as Record<Lang, SearchPiece>,
+}));
+const ERRORS: readonly SearchItem[] = [...BASE_ERRORS, ...APK_ITEMS];
+
+/** Lazy chunk with the full text of the Android/Expo/Play error pages. */
+export async function loadApkBody(slug: string) {
+  const { APK_ERRORS } = await import("@/lib/apk-errors-data");
+  return APK_ERRORS.find((e) => e.slug === slug) ?? null;
+}
+
 const TOPICS: readonly SearchItem[] = [
   {
     slug: "chatgpt-nedir",
@@ -789,11 +806,11 @@ export const SEARCH: Record<SearchKind, SearchSection> = {
     kind: "xeta",
     heading: L("APK xətaları", "APK errors", "APK hataları", "أخطاء APK", "Ошибки APK"),
     intro: L(
-      "Quruluş dayananda telefonun göstərdiyi xətalar. Son vaxtlar axtarılanlar da buradadır: Play Protect, etibarsız paket, yaddaş, uyğunsuz telefon, köhnə versiya və XAPK.",
-      "The errors a phone shows when installation stops. What people have been searching for lately is here too: Play Protect, an invalid package, storage, an incompatible phone, an older version, and XAPK.",
-      "Kurulum durunca telefonun gösterdiği hatalar. Son zamanlar arananlar da burada: Play Protect, geçersiz paket, depolama, uyumsuz telefon, eski sürüm ve XAPK.",
-      "الأخطاء التي يظهرها الهاتف حين يتوقف التثبيت. ما يُبحث عنه مؤخرًا هنا أيضًا: Play Protect والحزمة غير الصالحة والمساحة والهاتف غير المتوافق والنسخة الأقدم وXAPK.",
-      "Ошибки, которые телефон показывает, когда установка останавливается. То, что ищут в последнее время, тоже здесь: Play Protect, недействительный пакет, память, неподходящий телефон, старая версия и XAPK.",
+      "Android, Gradle, Expo, React Native, EAS, Capacitor, keystore, adb, Play Console və iş vaxtı xətaları: səbəb, addım-addım həll, əmrlər və qarşısının alınması. Quruluş dayananda telefonun göstərdiyi xətalar. Son vaxtlar axtarılanlar da buradadır: Play Protect, etibarsız paket, yaddaş, uyğunsuz telefon, köhnə versiya və XAPK.",
+      "Android, Gradle, Expo, React Native, EAS, Capacitor, keystore, adb, Play Console and runtime errors: cause, step-by-step fix, commands and prevention. The errors a phone shows when installation stops. What people have been searching for lately is here too: Play Protect, an invalid package, storage, an incompatible phone, an older version, and XAPK.",
+      "Android, Gradle, Expo, React Native, EAS, Capacitor, keystore, adb, Play Console ve çalışma anı hataları: neden, adım adım çözüm, komutlar ve önlem. Kurulum durunca telefonun gösterdiği hatalar. Son zamanlar arananlar da burada: Play Protect, geçersiz paket, depolama, uyumsuz telefon, eski sürüm ve XAPK.",
+      "أخطاء Android وGradle وExpo وReact Native وEAS وCapacitor وkeystore وadb وPlay Console ووقت التشغيل: السبب والحل خطوة بخطوة والأوامر والوقاية. الأخطاء التي يظهرها الهاتف حين يتوقف التثبيت. ما يُبحث عنه مؤخرًا هنا أيضًا: Play Protect والحزمة غير الصالحة والمساحة والهاتف غير المتوافق والنسخة الأقدم وXAPK.",
+      "Ошибки Android, Gradle, Expo, React Native, EAS, Capacitor, keystore, adb, Play Console и времени выполнения: причина, решение по шагам, команды и профилактика. Ошибки, которые телефон показывает, когда установка останавливается. То, что ищут в последнее время, тоже здесь: Play Protect, недействительный пакет, память, неподходящий телефон, старая версия и XAPK.",
     ),
     title: L(
       "APK xətaları — qurulmur, Play Protect, XAPK",

@@ -1,5 +1,7 @@
 import type { Lang } from "@/lib/i18n";
 import { SEARCH, searchPath, searchTopicPath, type SearchKind } from "@/lib/search-pages";
+import type { ApkError } from "@/lib/apk-errors-types";
+import { APK_LABELS } from "@/lib/apk-errors-types";
 import { TOOLS, TOOLS_PAGE, pageTools, toolPath } from "@/lib/tools";
 
 function Rich({ text }: { text: string }) {
@@ -42,10 +44,12 @@ export function SearchTopic({
   kind,
   lang,
   slug,
+  body,
 }: {
   kind: SearchKind;
   lang: Lang;
   slug: string;
+  body?: ApkError | null;
 }) {
   const section = SEARCH[kind];
   const item = section.items.find((entry) => entry.slug === slug);
@@ -60,25 +64,29 @@ export function SearchTopic({
         <a href={searchPath(lang, kind)}>{section.heading[lang]}</a>
       </p>
       <h1>{text.title}</h1>
+      {body ? (
+        <ApkBody body={body} lang={lang} />
+      ) : (
       <div className="why-lead">
-        {text.lead.split(/\n\n+/).map((para) => (
-          <p key={para}>
-            <Rich text={para} />
-          </p>
-        ))}
-        <ul className="faq-points">
-          {text.points.map((point) => (
-            <li key={point}>
-              <Rich text={point} />
-            </li>
+          {text.lead.split(/\n\n+/).map((para) => (
+            <p key={para}>
+              <Rich text={para} />
+            </p>
           ))}
-        </ul>
-        {text.note ? (
-          <p className="faq-note">
-            <Rich text={text.note} />
-          </p>
-        ) : null}
-      </div>
+          <ul className="faq-points">
+            {text.points.map((point) => (
+              <li key={point}>
+                <Rich text={point} />
+              </li>
+            ))}
+          </ul>
+          {text.note ? (
+            <p className="faq-note">
+              <Rich text={text.note} />
+            </p>
+          ) : null}
+        </div>
+      )}
       {pageTools(slug).length ? (
         <div className="prog-fold-body">
           <h2>{TOOLS_PAGE.toolsFor[lang]}</h2>
@@ -99,5 +107,35 @@ export function SearchTopic({
         ))}
       </ul>
     </main>
+  );
+}
+
+function ApkBody({ body, lang }: { body: ApkError; lang: Lang }) {
+  const t = body.l[lang];
+  const lab = APK_LABELS[lang];
+  return (
+    <div className="why-lead apk-err">
+      <h2>{lab.symptom}</h2>
+      <pre dir="ltr">{body.err}</pre>
+      <h2>{lab.cause}</h2>
+      <p>
+        <Rich text={t.cause} />
+      </p>
+      <h2>{lab.steps}</h2>
+      <ol className="faq-points">
+        {t.steps.map((step) => (
+          <li key={step}>
+            <Rich text={step} />
+          </li>
+        ))}
+      </ol>
+      <h2>{lab.commands}</h2>
+      <pre dir="ltr">{body.cmd}</pre>
+      <h2>{lab.prevent}</h2>
+      <p>
+        <Rich text={t.prevent} />
+      </p>
+      <p className="faq-note">{lab.author}</p>
+    </div>
   );
 }

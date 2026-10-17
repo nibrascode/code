@@ -7376,3 +7376,15 @@ body.is-planner .site-backdrop {
   .erase-panel .erase-row > span { flex-basis: 100%; }
   .erase-row button { padding: 7px 11px; }
 }
+
+/* APK error pages: keep long error text and commands inside the screen */
+.why-page .apk-err { min-width: 0; max-width: 100%; }
+.why-page .apk-err pre { white-space: pre-wrap; overflow-wrap: anywhere; word-break: break-word; max-width: 100%; text-align: left; }
+.why-page .apk-err h2 { margin: 1.4em 0 .4em; font-size: 1.05rem; }
+.why-page .apk-err ol { padding-inline-start: 1.3em; }
+.why-page:has(.apk-err) h1 { overflow-wrap: anywhere; font-size: clamp(1.6rem, 6vw, 2.6rem); }
+.why-page .apk-err code, .why-page .apk-err li, .why-page .apk-err p { overflow-wrap: anywhere; word-break: break-word; min-width: 0; max-width: 100%; }
+.why-page .apk-err code { white-space: normal; }
+.why-page .apk-err li { display: block; }
+.why-page .apk-err li::before { display: none; }
+.why-page .apk-err code, .why-page .apk-err li, .why-page .apk-err p { word-break: normal; overflow-wrap: break-word; }
