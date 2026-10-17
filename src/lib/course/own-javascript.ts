@@ -504,6 +504,69 @@ export const OWN_JS: OwnPageContent = {
       ],
     },
   ],
+  env: [
+    {
+      id: "risk",
+      title: t("Açar kodda olmasın", "The key does not belong in the code", "Anahtar kodda olmasın", "لا تضع المفتاح في الكود", "Ключ не должен быть в коде"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "Açarı JavaScript-in içinə yazmaq yalnız öz kompüterində məşq üçündür. GitHub-a düşəndə botlar onu saniyələrlə tapır. Başqası sənin açarınla sorğu göndərir, limitin və balansın bitir. Saytın görünən hissəsində olsa, F12 ilə hər kəs görür. Sorğu arxa planda, serverdə getməlidir.",
+            "Writing the key inside JavaScript is only for practice on your own computer. Once it reaches GitHub, bots find it in seconds. Someone else sends requests with your key, and your limit and balance run out. If it is in the visible part of the site, anyone can see it with F12. The request must go in the background, on the server.",
+            "Anahtarı JavaScript'in içine yazmak yalnız kendi bilgisayarında alıştırma içindir. GitHub'a düşünce botlar onu saniyelerle bulur. Başkası senin anahtarınla sorgu gönderir, limitin ve bakiyen biter. Sitenin görünen yerindeyse F12 ile herkes görür. Sorgu arka planda, sunucuda gitmelidir.",
+            "كتابة المفتاح داخل جافاسكريبت للتدريب على حاسوبك فقط. حين يصل إلى GitHub تجده البرامج خلال ثوانٍ. يرسل غيرك طلبات بمفتاحك فينفد الحد والرصيد. إذا كان في الجزء الظاهر من الموقع يراه أي شخص بـ F12. يجب أن يذهب الطلب في الخلفية، على الخادم.",
+            "Писать ключ внутри JavaScript можно только для тренировки на своём компьютере. Как только он попадёт на GitHub, боты найдут его за секунды. Чужой шлёт запросы твоим ключом, лимит и баланс кончаются. Если ключ в видимой части сайта, его увидит каждый через F12. Запрос должен идти в фоне, на сервере.",
+          )],
+        },
+      ],
+    },
+    {
+      id: "file",
+      title: t(".env faylı", "The .env file", ".env dosyası", "ملف .env", "Файл .env"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "Faylın adı .env-dir, ad.env deyil. Layihənin əsas qovluğunda durur. Ad böyük hərflə yazılır, sözlər _ ilə ayrılır. Dırnaq, nöqtəli vergül və const yazılmır. Kodda process.env.GEMINI_API_KEY ilə oxunur. Təmiz Node.js-də əvvəlcə npm install dotenv, sonra import \"dotenv/config\".",
+            "The file is named .env, not ad.env. It sits in the project's main folder. The name is in capital letters, words are separated by _. No quotes, no semicolon and no const. The code reads it with process.env.GEMINI_API_KEY. In plain Node.js, first npm install dotenv, then import \"dotenv/config\".",
+            "Dosyanın adı .env'dir, ad.env değil. Projenin ana klasöründe durur. Ad büyük harfle yazılır, sözcükler _ ile ayrılır. Tırnak, noktalı virgül ve const yazılmaz. Kodda process.env.GEMINI_API_KEY ile okunur. Düz Node.js'te önce npm install dotenv, sonra import \"dotenv/config\".",
+            "اسم الملف .env وليس ad.env. يقف في المجلد الرئيسي للمشروع. يُكتب الاسم بأحرف كبيرة وتُفصل الكلمات بـ _. بلا علامات اقتباس ولا فاصلة منقوطة ولا const. يقرأه الكود بـ process.env.GEMINI_API_KEY. في Node.js العادي أولاً npm install dotenv ثم import \"dotenv/config\".",
+            "Файл называется .env, не ad.env. Он лежит в главной папке проекта. Имя пишется большими буквами, слова разделяются _. Без кавычек, точки с запятой и const. Код читает его через process.env.GEMINI_API_KEY. В чистом Node.js сначала npm install dotenv, потом import \"dotenv/config\".",
+          )],
+          code: 'GEMINI_API_KEY=acar\n\nconst apiKey = process.env.GEMINI_API_KEY;',
+        },
+      ],
+    },
+    {
+      id: "hide",
+      title: t("GitHub və Vercel", "GitHub and Vercel", "GitHub ve Vercel", "GitHub وVercel", "GitHub и Vercel"),
+      blocks: [
+        {
+          paragraphs: [t(
+            ".gitignore içinə .env və .env.local yaz. Onda kod gedir, açar cihazda qalır. Vercel-də Settings, Environment Variables: ad GEMINI_API_KEY, dəyər açarın özüdür. Faylı dəyişəndən sonra terminalı dayandırıb yenidən aç, yoxsa nəticə undefined olur. Next.js-də açarın əvvəlinə NEXT_PUBLIC_ yazma: o, brauzerə çıxır.",
+            "Write .env and .env.local inside .gitignore. Then the code goes out and the key stays on the device. On Vercel, Settings, Environment Variables: the name is GEMINI_API_KEY and the value is the key itself. After you change the file, stop the terminal and start it again, or the result is undefined. In Next.js do not put NEXT_PUBLIC_ in front of the key: that sends it to the browser.",
+            ".gitignore içine .env ve .env.local yaz. O zaman kod gider, anahtar cihazda kalır. Vercel'de Settings, Environment Variables: ad GEMINI_API_KEY, değer anahtarın kendisidir. Dosyayı değiştirdikten sonra terminali durdurup yeniden aç, yoksa sonuç undefined olur. Next.js'te anahtarın başına NEXT_PUBLIC_ yazma: o, tarayıcıya çıkar.",
+            "اكتب .env و.env.local داخل .gitignore. عندها يذهب الكود ويبقى المفتاح على الجهاز. في Vercel: Settings ثم Environment Variables. الاسم GEMINI_API_KEY والقيمة هي المفتاح نفسه. بعد تغيير الملف أوقف الطرفية وأعد تشغيلها، وإلا كانت النتيجة undefined. في Next.js لا تكتب NEXT_PUBLIC_ أمام المفتاح: ذلك يرسله إلى المتصفح.",
+            "В .gitignore напиши .env и .env.local. Тогда код уходит, а ключ остаётся на устройстве. В Vercel: Settings, Environment Variables. Имя GEMINI_API_KEY, значение — сам ключ. После правки файла останови терминал и запусти снова, иначе результат будет undefined. В Next.js не пиши NEXT_PUBLIC_ перед ключом: так он попадёт в браузер.",
+          )],
+          code: 'node_modules\n.env\n.env.local',
+        },
+      ],
+    },
+    {
+      id: "faq",
+      title: t("Suallar", "Questions", "Sorular", "أسئلة", "Вопросы"),
+      blocks: [
+        {
+          paragraphs: [
+            t(".env içinə const və dırnaq yazmaq olarmı? Xeyr. Yalnız AD=DEYER. Bərabərliyin yanında boşluq da qoyma.", "Can I write const and quotes inside .env? No. Only NAME=VALUE. Do not put a space next to the equals sign either.", ".env içine const ve tırnak yazılır mı? Hayır. Yalnız AD=DEGER. Eşittirin yanında boşluk da koyma.", "هل أكتب const وعلامات اقتباس داخل .env؟ لا. فقط الاسم=القيمة. ولا تضع فراغاً بجانب علامة المساواة.", "Можно ли писать const и кавычки в .env? Нет. Только ИМЯ=ЗНАЧЕНИЕ. Пробел рядом со знаком равенства тоже не ставь."),
+            t("process.env niyə undefined verir? Fayl yeni dəyişib, server köhnəni saxlayır. Terminalı bağla və yenidən işə sal.", "Why does process.env give undefined? The file just changed and the server still has the old one. Close the terminal and start it again.", "process.env neden undefined verir? Dosya yeni değişti, sunucu eskisini tutuyor. Terminali kapat ve yeniden başlat.", "لماذا يعطي process.env قيمة undefined؟ الملف تغيّر للتو والخادم ما زال يمسك القديم. أغلق الطرفية وشغّلها من جديد.", "Почему process.env даёт undefined? Файл только что изменился, а сервер держит старое. Закрой терминал и запусти снова."),
+            t("NEXT_PUBLIC_ niyə təhlükəlidir? Bu söz dəyişəni brauzerə göndərir. Gizli açarda işlətmə.", "Why is NEXT_PUBLIC_ dangerous? That word sends the variable to the browser. Do not use it on a secret key.", "NEXT_PUBLIC_ neden tehlikelidir? Bu sözcük değişkeni tarayıcıya gönderir. Gizli anahtarda kullanma.", "لماذا NEXT_PUBLIC_ خطرة؟ هذه الكلمة ترسل المتغير إلى المتصفح. لا تستخدمها مع مفتاح سري.", "Почему NEXT_PUBLIC_ опасно? Это слово отправляет переменную в браузер. На секретном ключе его не используй."),
+            t("Açar harada durmalıdır? Serverdə, process.env içində. Brauzerdəki kodda yox.", "Where should the key live? On the server, inside process.env. Not in the code that runs in the browser.", "Anahtar nerede durmalı? Sunucuda, process.env içinde. Tarayıcıdaki kodda değil.", "أين يجب أن يبقى المفتاح؟ على الخادم، داخل process.env. لا في الكود الذي يعمل في المتصفح.", "Где должен лежать ключ? На сервере, внутри process.env. Не в коде, который работает в браузере."),
+          ],
+        },
+      ],
+    },
+  ],
   duyme: [
     {
       id: "click",
