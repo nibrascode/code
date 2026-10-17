@@ -14,7 +14,7 @@ import { extraReply, prayerReply } from "./_extra.js";
 import { track } from "./_stats.js";
 import { isReligious } from "./_religious.js";
 import { stripNotice, OLD_AZ_NOTICE } from "./_notice.js";
-import { resolveLang, msgs, langDirective, eraseReply } from "./_lang.js";
+import { resolveLang, msgs, langDirective, dateDirective, stripCutoff, eraseReply } from "./_lang.js";
 
 const SYSTEM = [
   "Sən Nibras AI-san, Nibras Code saytının köməkçisisən.",
@@ -191,7 +191,7 @@ export default async function handler(req, res) {
       }
     }
     // Köhnə İbn Sirin bildirişi və «لن» qrammatika xəbərdarlığı artıq əlavə olunmur. Model yazsa belə, silinir.
-    const cleaned = (reply) => stripLanWarning(stripNotice(reply));
+    const cleaned = (reply) => stripCutoff(stripLanWarning(stripNotice(reply)));
     const relFlag = (isRel) => (isRel ? { religious: true } : {});
     // Hazır python/html/javascript/sql/css kod nümunələri: AI-yə getmədən (kod rejimi də daxil)
     const snippet = fixed ? null : snippetReply(message, body.mode);
@@ -258,7 +258,7 @@ export default async function handler(req, res) {
     const ctx = { long, deadline: started + 40000 };
     for (const name of order) {
       if (Date.now() - started > (long ? 30000 : 18000)) break;
-      const result = await budget.run(ctx, () => aiConfig.run({ system: SYSTEM + langDirective(lang), tokens: tokenLimit, timeout: timeoutFor }, () => askProvider(name, history, lexicalLoose ? LEXICAL_HINT + "\n\n" + message : message)));
+      const result = await budget.run(ctx, () => aiConfig.run({ system: SYSTEM + langDirective(lang) + dateDirective(), tokens: tokenLimit, timeout: timeoutFor }, () => askProvider(name, history, lexicalLoose ? LEXICAL_HINT + "\n\n" + message : message)));
       if (result.skipped) continue;
       if (result.ok) {
         // AI ayə mətni yazıbsa, ərəbcə hissə Tanzil məlumatı ilə əvəz olunur, [[ayah:S:A]] işarələri açılır
