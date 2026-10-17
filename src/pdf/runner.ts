@@ -429,6 +429,7 @@ export async function handle(o: HandleOptions): Promise<RunResult[]> {
   const t = COPY[lang];
   const box = el("div", "nbp");
   box.setAttribute("data-nbp", "root");
+  box.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
   o.container.append(box);
   const st = el("div", "nbp-card");
   st.setAttribute("data-nbp", "status");

@@ -36,10 +36,10 @@ const R = {
   pdf: /\bpdfs?\b|\.pdf|пдф|بي دي اف|بي دي إف/i,
   docx: /\bdocx?\b|\bword\b|ворд|ورد/i,
   how: /^\s*(?:necə|nece|nasıl|nasil|how\b|как\b|كيف|what is|nədir|nedir|что такое|ما هو)/i,
-  unlock: /(?:parol|şifr|sifr|password|пароль|парол|كلمة)[^.!?\n]{0,40}(?:sil|aç\b|ac\b|çıxar|cixar|götür|gotur|qaldır|qaldir|kaldır|kaldir|remove|unlock|decrypt|break|снять|убрать|сними|удал|إزالة|ازالة|فك|إلغاء|الغاء|احذف)|(?:sil|aç\b|çıxar|qaldır|kaldır|remove|unlock|decrypt|сними|убери|сними|удали|فك|ازل|أزل)[^.!?\n]{0,25}(?:parol|şifr|sifr|password|пароль|парол|كلمة)|\bunlock\b|\bdecrypt\b|расшифр/i,
-  protect: /(?:parol|şifr|sifr|password|пароль|парол|كلمة\s*(?:المرور|سر))[^.!?\n]{0,40}(?:qoy|təyin|teyin|əlavə|elave|et\b|set|add|protect|encrypt|koru|ekle|belirle|поставь|защит|добав|установ|зашифр|حماية|احم|أضف|اضف|تشفير|ضع)|(?:qoru|qoruyun|protect|encrypt|şifrele|sifrele|koru|защити|зашифруй|احم|شفر)\b/i,
+  unlock: /فك\s*(?:حماية|تشفير|قفل)|unlock\s+(?:this\s+)?pdf|decrypt\s+(?:this\s+)?pdf|şifresini\s+çöz|разблокир|расшифруй\s+pdf|(?:parol|şifr|sifr|password|пароль|парол|كلمة)[^.!?\n]{0,40}(?:sil|aç\b|ac\b|çıxar|cixar|götür|gotur|qaldır|qaldir|kaldır|kaldir|remove|unlock|decrypt|break|снять|убрать|сними|удал|إزالة|ازالة|فك|إلغاء|الغاء|احذف)|(?:sil|aç\b|çıxar|qaldır|kaldır|remove|unlock|decrypt|сними|убери|сними|удали|فك|ازل|أزل)[^.!?\n]{0,25}(?:parol|şifr|sifr|password|пароль|парол|كلمة)|\bunlock\b|\bdecrypt\b|расшифр/i,
+  protect: /(?:parol|şifr|sifr|password|пароль|парол|كلمة\s*(?:ال)?(?:مرور|سر)|رمز)[^.!?\n]{0,40}(?:qoy|təyin|teyin|əlavə|elave|et\b|set|add|put|protect|encrypt|koy|koru|ekle|belirle|şifrele|sifrele|поставь|поставить|поставьте|защит|добав|установ|зашифр|حماية|احم|أضف|اضف|تشفير|ضع|ضعي|قفل|qoru)|(?:qoy|təyin|teyin|əlavə|elave|et\b|set|add|put|protect|encrypt|koy|koru|ekle|belirle|şifrele|sifrele|поставь|поставить|поставьте|защит|добав|установ|зашифр|حماية|احم|أضف|اضف|تشفير|ضع|ضعي|قفل|qoru)[^.!?\n]{0,40}(?:parol|şifr|sifr|password|пароль|парол|كلمة\s*(?:ال)?(?:مرور|سر)|رمز)|(?:qoruyun|qoru\b|protect|encrypt|şifrele|зашифруй|защити|احمِ|احم)\s+(?:bu\s+|this\s+|the\s+)?(?:pdf|fayl|dosya|файл)/i,
   watermark: /watermark|su\s*nişan|su\s*nisan|filigran|водян|علامة\s*مائية|علامه\s*مائيه/i,
-  merge: /birləşdir|birlesdir|birleşdir|birlestir|\bmerge\b|combine|\bjoin\b|объедин|склей|соедин|دمج|ادمج|ضم\b/i,
+  merge: /birləşdir|birleştir|birlesdir|birleşdir|birlestir|\bmerge\b|combine|\bjoin\b|объедин|склей|соедин|دمج|ادمج|ضم\b/i,
   extractPages: /(?:səhifə|sehife|page|pages|sayfa|страниц|стр\.|صفح)[^.!?\n]{0,30}(?:çıxar|cixar|ayır|ayir|ayrı|extract|keep|save|saxla|çıkar|cikar|kaydet|извлек|достань|оставь|вытащи|استخرج|استخراج|احتفظ)|(?:çıxar|cixar|extract|keep|çıkar|извлек|достань|вытащи|استخرج|احتفظ)[^.!?\n]{0,30}(?:səhifə|sehife|page|sayfa|страниц|стр\.|صفح)/i,
   deletePages: /(?:səhifə|sehife|page|pages|sayfa|страниц|стр\.|صفح)[^.!?\n]{0,30}(?:sil\b|silin|delete|remove|kaldır|kaldir|удал|убер|احذف|حذف|ازل|أزل)|(?:sil\b|delete|remove|kaldır|kaldir|удали|убери|احذف|حذف|أزل)[^.!?\n]{0,30}(?:səhifə|sehife|page|sayfa|страниц|стр\.|صفح)/i,
   split: /\bböl\b|\bbol\b|bölün|ayır\b|ayir\b|\bsplit\b|separate pages|bölmek|\bböl|раздел|разбей|раздели|تقسيم|قسم|فصل/i,
@@ -71,7 +71,7 @@ function parseRange(raw) {
   if (/(?:ilk|first|первая|первую|первой|الأولى|الاولى)\s*(?:səhifə|sehife|page|sayfa|страниц\p{L}*|صفح\p{L}*)/u.test(m)) return "1";
   if (/(?:son|last|последн\p{L}+|الأخيرة|الاخيرة)\s*(?:səhifə|sehife|page|sayfa|страниц\p{L}*|صفح\p{L}*)/u.test(m)) return "last";
   const lead = m.match(/(?:səhifə\p{L}*|sehife\p{L}*|pages?|sayfa\p{L}*|страниц\p{L}*|стр\.?|صفح\p{L}*|\bp\.)\s*[:#]?\s*(\d{1,4}(?:\s*-\s*\d{1,4})?(?:\s*(?:,|;|،|and|və|ve|и|و)\s*\d{1,4}(?:\s*-\s*\d{1,4})?)*)/u);
-  const trail = m.match(/(\d{1,4}(?:\s*-\s*\d{1,4})?(?:\s*(?:,|;|،|and|və|ve|и|و)\s*\d{1,4}(?:\s*-\s*\d{1,4})?)*)\s*(?:-?(?:ci|cı|cu|cü|inci|ıncı|nci|ncı|nd|rd|th|st))?\s*(?:səhifə|sehife|page|pages|sayfa|страниц|стр\.?|صفح)/u);
+  const trail = m.match(/(\d{1,4}(?:\s*-\s*\d{1,4})?(?:\s*(?:,|;|،|and|və|ve|и|و)\s*\d{1,4}(?:\s*-\s*\d{1,4})?)*)\s*(?:-?(?:ci|cı|cu|cü|inci|ıncı|nci|ncı|nd|rd|th|st)|\.)?\s*(?:səhifə|sehife|page|pages|sayfa|страниц|стр\.?|صفح)/u);
   const got = (lead || trail)?.[1];
   if (!got) return null;
   return got.replace(/\s*(?:,|;|،|and|və|ve|и|و)\s*/g, ",").replace(/\s+/g, "");
