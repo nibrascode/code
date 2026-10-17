@@ -615,6 +615,54 @@ export const OWN_JS: OwnPageContent = {
       ],
     },
   ],
+  yaddas: [
+    {
+      id: "forget",
+      title: t("Niyə unudur", "Why it forgets", "Neden unutur", "لماذا ينسى", "Почему забывает"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "API-nin öz yaddaşı yoxdur. Hər fetch yeni söhbətdir. Adı xatırlaması üçün bütün tarixçəni massivdə saxlayıb hər sorğuda contents kimi göndərmək lazımdır. İnsan mesajının rolu user, AI cavabının rolu model-dir. assistant və ai burada səhvdir, server 400 verir.",
+            "The API has no memory of its own. Every fetch is a new chat. To remember a name you keep the whole history in an array and send it as contents on every request. A human message has the role user. An AI answer has the role model. assistant and ai are wrong here. The server returns 400.",
+            "API'nin kendi hafızası yoktur. Her fetch yeni sohbettir. Adı hatırlaması için bütün geçmişi dizide tutup her sorguda contents olarak göndermek gerekir. İnsan mesajının rolü user, AI cevabının rolü model'dir. assistant ve ai burada yanlıştır, sunucu 400 verir.",
+            "لا ذاكرة للواجهة وحدها. كل fetch محادثة جديدة. كي يتذكر الاسم احفظ التاريخ كله في مصفوفة وأرسله كـ contents في كل طلب. رسالة الإنسان دورها user وجواب الذكاء دوره model. assistant وai خطأ هنا، والخادم يُرجع 400.",
+            "У API нет своей памяти. Каждый fetch — новый разговор. Чтобы помнить имя, храни всю историю в массиве и отправляй её как contents в каждом запросе. У сообщения человека роль user, у ответа ИИ роль model. assistant и ai здесь ошибка, сервер вернёт 400.",
+          )],
+          code: 'let sohbetTarixcesi = [\n  { role: "user", parts: [{ text: "Mənim adım Ömərdir." }] },\n  { role: "model", parts: [{ text: "Tanışlığımıza şadam, Ömər." }] },\n  { role: "user", parts: [{ text: "Mənim adım nə oldu?" }] }\n];',
+        },
+      ],
+    },
+    {
+      id: "push",
+      title: t("push ilə yadda saxla", "Remember with push", "push ile hatırla", "احفظ بـ push", "Запоминай через push"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "Massiv funksiyanın çölündə yaradılır. İçində yaradılsa hər çağırışda sıfırlanır. Əvvəl user mesajı push olunur, massiv göndərilir, gələn cavab model kimi yenə push olunur. Model cavabı əlavə olunmasa iki user ard-arda düşür və növbə pozulur. Uzun söhbətdə slice(-10) yalnız son 10 mesajı göndərir.",
+            "The array is created outside the function. Inside it, every call resets it. First the user message is pushed, the array is sent, and the answer is pushed again as model. If the model answer is not added, two user messages sit in a row and the turn order breaks. In a long chat, slice(-10) sends only the last 10 messages.",
+            "Dizi fonksiyonun dışında yaratılır. İçinde yaratılırsa her çağrıda sıfırlanır. Önce user mesajı push edilir, dizi gönderilir, gelen cevap model olarak yine push edilir. Model cevabı eklenmezse iki user art arda düşer ve sıra bozulur. Uzun sohbette slice(-10) yalnız son 10 mesajı gönderir.",
+            "تُنشأ المصفوفة خارج الدالة. إذا أُنشئت داخلها صُفّرت في كل استدعاء. أولاً تُدفع رسالة user، ثم تُرسل المصفوفة، ثم يُدفع الجواب القادم كـ model. إذا لم يُضف جواب model صار user مرتين متتاليتين وانكسر الترتيب. في حديث طويل slice(-10) يرسل آخر 10 رسائل فقط.",
+            "Массив создаётся вне функции. Если создать его внутри, каждый вызов обнулит его. Сначала push сообщения user, массив отправляется, пришедший ответ снова push как model. Если ответ model не добавить, два user встанут подряд и очередь сломается. В длинном чате slice(-10) отправляет только последние 10 сообщений.",
+          )],
+          code: 'const apiKey = process.env.GEMINI_API_KEY;\nconst url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;\nlet sohbetTarixcesi = [];\n\nasync function mesajGonder(yeniMesaj) {\n  sohbetTarixcesi.push({ role: "user", parts: [{ text: yeniMesaj }] });\n  const cavab = await fetch(url, {\n    method: "POST",\n    headers: { "Content-Type": "application/json" },\n    body: JSON.stringify({ contents: sohbetTarixcesi.slice(-10) })\n  });\n  const melumat = await cavab.json();\n  const aiCavabi = melumat.candidates[0].content.parts[0].text;\n  sohbetTarixcesi.push({ role: "model", parts: [{ text: aiCavabi }] });\n  console.log(aiCavabi);\n}',
+        },
+      ],
+    },
+    {
+      id: "faq",
+      title: t("Suallar", "Questions", "Sorular", "أسئلة", "Вопросы"),
+      blocks: [
+        {
+          paragraphs: [
+            t("İkinci sual niyə adı bilmir? Tarixçə göndərilməyib. contents tək sual yox, bütün massiv olmalıdır.", "Why does the second question not know the name? The history was not sent. contents must be the whole array, not one question.", "İkinci soru adı neden bilmiyor? Geçmiş gönderilmemiş. contents tek soru değil, bütün dizi olmalıdır.", "لماذا لا يعرف السؤال الثاني الاسم؟ لم يُرسل التاريخ. contents يجب أن يكون المصفوفة كلها لا سؤالاً واحداً.", "Почему второй вопрос не знает имя? История не отправлена. contents должен быть весь массив, не один вопрос."),
+            t("Massiv niyə boşalır? O, funksiyanın içində yaradılıb. Yuxarıda, bir dəfə yarat.", "Why does the array go empty? It was created inside the function. Create it above, once.", "Dizi neden boşalır? Fonksiyonun içinde yaratılmış. Yukarıda, bir kez yarat.", "لماذا تفرغ المصفوفة؟ أُنشئت داخل الدالة. أنشئها فوق، مرة واحدة.", "Почему массив пустеет? Его создали внутри функции. Создай его выше, один раз."),
+            t("400 niyə gəlir? Rol model deyil. Gemini-də assistant yazılmır.", "Why do you get 400? The role is not model. Gemini does not use assistant.", "400 neden gelir? Rol model değil. Gemini'de assistant yazılmaz.", "لماذا يظهر 400؟ الدور ليس model. في Gemini لا تُكتب assistant.", "Почему приходит 400? Роль не model. В Gemini assistant не пишется."),
+            t("Yaddaşı necə silmək olar? sohbetTarixcesi = []. Köhnə massiv atılır, yeni boş massiv qalır.", "How do you clear the memory? sohbetTarixcesi = []. The old array is dropped and a new empty one remains.", "Hafıza nasıl silinir? sohbetTarixcesi = []. Eski dizi atılır, yeni boş dizi kalır.", "كيف تُمسح الذاكرة؟ sohbetTarixcesi = []. تُرمى المصفوفة القديمة وتبقى واحدة جديدة فارغة.", "Как стереть память? sohbetTarixcesi = []. Старый массив выбрасывается, остаётся новый пустой."),
+          ],
+        },
+      ],
+    },
+  ],
   duyme: [
     {
       id: "click",
