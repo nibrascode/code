@@ -931,6 +931,68 @@ export const OWN_JS: OwnPageContent = {
       ],
     },
   ],
+  revenuecat: [
+    {
+      id: "words",
+      title: t("Üç söz", "Three words", "Üç sözcük", "ثلاث كلمات", "Три слова"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "Play və App Store ödənişini bir paneldən yoxlamaq üçün RevenueCat var. Tətbiq mağaza ilə birbaşa yox, onun SDK-sı ilə danışır. Product Play-dəki abunənin ID-sidir, məsələn monthly_pro. Entitlement ödənişin açarıdır, məsələn pro_access. Aktivdirsə siyahıda durur. Offering istifadəçiyə göstərilən paketlər qrupudur. Qiymət kodda yox, paneldə dəyişir.",
+            "RevenueCat is there to check Play and App Store payments from one panel. The app does not talk to the store directly. It talks to its SDK. A product is the subscription id in Play, for example monthly_pro. An entitlement is the key of the payment, for example pro_access. If it is active, it sits in the list. An offering is the group of packages shown to the user. The price changes in the panel, not in the code.",
+            "Play ve App Store ödemesini tek panelden kontrol etmek için RevenueCat vardır. Uygulama mağazayla doğrudan değil, onun SDK'sıyla konuşur. Product Play'deki aboneliğin kimliğidir, örneğin monthly_pro. Entitlement ödemenin anahtarıdır, örneğin pro_access. Aktifse listede durur. Offering kullanıcıya gösterilen paketler grubudur. Fiyat kodda değil, panelde değişir.",
+            "RevenueCat موجود لفحص دفع Play وApp Store من لوحة واحدة. التطبيق لا يكلم المتجر مباشرة، بل يتكلم مع SDK الخاص به. Product هو معرّف الاشتراك في Play، مثل monthly_pro. Entitlement هو مفتاح الدفع، مثل pro_access. إذا كان نشطاً وقف في القائمة. Offering هي مجموعة الحزم التي تُعرض للمستخدم. السعر يتغير في اللوحة لا في الكود.",
+            "RevenueCat нужен, чтобы проверять оплату Play и App Store из одной панели. Приложение говорит не с магазином напрямую, а с его SDK. Product — это id подписки в Play, например monthly_pro. Entitlement — ключ оплаты, например pro_access. Если он активен, он стоит в списке. Offering — группа пакетов, которую видит пользователь. Цена меняется в панели, не в коде.",
+          )],
+        },
+      ],
+    },
+    {
+      id: "setup",
+      title: t("Qoşmaq", "Connect it", "Bağlamak", "وصله", "Подключи"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "Play Console-da Monetize, Subscriptions içində abunə yarat və ID ver. RevenueCat-də layihə aç. Google Cloud-dan Service Account JSON-unu al və panelə yüklə. Bu fayl gizlidir: GitHub-a qoyma. Sonra həmin məhsul ID-sini Products bölməsinə yaz. Tətbiqdə paketi quraşdırıb sync et. Android açarı goog_ ilə başlayır. Apple açarı appl_ ilə başlayır. Android-ə Apple açarını yazma.",
+            "In Play Console, under Monetize, Subscriptions, create a subscription and give it an id. Open a project in RevenueCat. Take the Service Account JSON from Google Cloud and upload it to the panel. That file is secret: do not put it on GitHub. Then write that product id into the Products section. In the app, install the package and sync. The Android key starts with goog_. The Apple key starts with appl_. Do not write the Apple key into Android.",
+            "Play Console'da Monetize, Subscriptions içinde abonelik yarat ve kimlik ver. RevenueCat'te proje aç. Google Cloud'dan Service Account JSON'unu al ve panele yükle. Bu dosya gizlidir: GitHub'a koyma. Sonra o ürün kimliğini Products bölümüne yaz. Uygulamada paketi kurup sync et. Android anahtarı goog_ ile başlar. Apple anahtarı appl_ ile başlar. Android'e Apple anahtarını yazma.",
+            "في Play Console، تحت Monetize ثم Subscriptions، أنشئ اشتراكاً وأعطه معرّفاً. افتح مشروعاً في RevenueCat. خذ JSON لحساب الخدمة من Google Cloud وارفعه إلى اللوحة. هذا الملف سر: لا تضعه على GitHub. ثم اكتب معرّف المنتج في قسم Products. في التطبيق ثبّت الحزمة ونفّذ sync. مفتاح أندرويد يبدأ بـ goog_. مفتاح Apple يبدأ بـ appl_. لا تكتب مفتاح Apple في أندرويد.",
+            "В Play Console, в Monetize, Subscriptions, создай подписку и дай ей id. Открой проект в RevenueCat. Возьми JSON сервисного аккаунта из Google Cloud и загрузи его в панель. Этот файл секретный: не клади его на GitHub. Потом впиши этот id продукта в раздел Products. В приложении установи пакет и сделай sync. Ключ Android начинается с goog_. Ключ Apple начинается с appl_. Ключ Apple в Android не пиши.",
+          )],
+          code: 'npm install @revenuecat/purchases-capacitor\nnpx cap sync',
+        },
+      ],
+    },
+    {
+      id: "code",
+      title: t("Yoxla və al", "Check and buy", "Kontrol et ve al", "افحص واشتر", "Проверь и купи"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "configure tətbiq açılan kimi bir dəfə çağırılır. getCustomerInfo aktiv entitlement-i göstərir. Ad paneldəki ilə eyni olmalıdır, hərf fərqi sayılır. Paket offering-dən gəlir, qiyməti sən yazmırsan. İmtina userCancelled-dır. Real kartla yoxlama. Play-də License testing siyahısına test hesabını əlavə et.",
+            "configure is called once, when the app opens. getCustomerInfo shows the active entitlement. The name must match the panel. A letter difference counts. The package comes from the offering. You do not write the price. A cancel is userCancelled. Do not test with a real card. Add the test account to the License testing list in Play.",
+            "configure uygulama açılınca bir kez çağrılır. getCustomerInfo aktif entitlement'i gösterir. Ad paneldekiyle aynı olmalıdır, harf farkı sayılır. Paket offering'den gelir, fiyatı sen yazmazsın. Vazgeçiş userCancelled'dır. Gerçek kartla deneme. Play'de License testing listesine test hesabını ekle.",
+            "configure تُستدعى مرة حين يفتح التطبيق. getCustomerInfo يُظهر entitlement النشط. يجب أن يطابق الاسم اللوحة، وفرق الحرف يُحسب. الحزمة تأتي من offering، أنت لا تكتب السعر. الإلغاء هو userCancelled. لا تجرب ببطاقة حقيقية. أضف حساب الاختبار إلى قائمة License testing في Play.",
+            "configure вызывается один раз, когда приложение открылось. getCustomerInfo показывает активный entitlement. Имя должно совпасть с панелью, разница в букве считается. Пакет приходит из offering, цену ты не пишешь. Отказ — это userCancelled. Не проверяй настоящей картой. Добавь тестовый аккаунт в список License testing в Play.",
+          )],
+          code: 'import { Purchases } from "@revenuecat/purchases-capacitor";\n\nawait Purchases.configure({ apiKey: "goog_ACAR" });\n\nconst { customerInfo } = await Purchases.getCustomerInfo();\nconst aktiv = customerInfo.entitlements.active["pro_access"];\n\nconst offerings = await Purchases.getOfferings();\nconst paket = offerings.current?.availablePackages?.[0];\nif (paket) {\n  const { customerInfo: sonra } = await Purchases.purchasePackage({ aPackage: paket });\n  const aldi = sonra.entitlements.active["pro_access"];\n}',
+        },
+      ],
+    },
+    {
+      id: "faq",
+      title: t("Suallar", "Questions", "Sorular", "أسئلة", "Вопросы"),
+      blocks: [
+        {
+          paragraphs: [
+            t("goog_ və appl_ fərqi nədir? goog_ Android üçündür. appl_ Apple üçündür. Səhv platforma açarı sorğunu rədd edir.", "What is the difference between goog_ and appl_? goog_ is for Android. appl_ is for Apple. The wrong platform key rejects the request.", "goog_ ve appl_ farkı nedir? goog_ Android içindir. appl_ Apple içindir. Yanlış platforma anahtarı sorguyu reddeder.", "ما الفرق بين goog_ وappl_؟ goog_ لأندرويد. appl_ لـ Apple. مفتاح المنصة الخطأ يرفض الطلب.", "В чём разница goog_ и appl_? goog_ для Android. appl_ для Apple. Ключ чужой платформы отклоняет запрос."),
+            t("pro_access niyə false qalır? Paneldəki ad ilə koddakı ad eyni deyil. Böyük hərf də fərqdir.", "Why does pro_access stay missing? The name in the panel and the name in the code are not the same. A capital letter is a difference too.", "pro_access neden false kalır? Paneldeki ad ile koddaki ad aynı değil. Büyük harf de farktır.", "لماذا يبقى pro_access غائباً؟ الاسم في اللوحة والاسم في الكود ليسا واحداً. الحرف الكبير فرق أيضاً.", "Почему pro_access нет? Имя в панели и имя в коде не совпадают. Заглавная буква тоже разница."),
+            t("JSON faylını hara qoymaq olmaz? GitHub-a və tətbiqin içinə. Onu yalnız RevenueCat panelinə yüklə. goog_ açarı isə tətbiqdə qalır, o, ictimai açardır.", "Where must the JSON file not go? Onto GitHub and into the app. Upload it only to the RevenueCat panel. The goog_ key stays in the app. It is a public key.", "JSON dosyasını nereye koymamak gerekir? GitHub'a ve uygulamanın içine. Onu yalnız RevenueCat paneline yükle. goog_ anahtarı ise uygulamada kalır, o, herkese açık anahtardır.", "أين لا يوضع ملف JSON؟ على GitHub وداخل التطبيق. ارفعه فقط إلى لوحة RevenueCat. مفتاح goog_ يبقى في التطبيق، وهو مفتاح عام.", "Куда нельзя класть JSON? На GitHub и внутрь приложения. Загрузи его только в панель RevenueCat. Ключ goog_ остаётся в приложении, это публичный ключ."),
+          ],
+        },
+      ],
+    },
+  ],
   duyme: [
     {
       id: "click",
