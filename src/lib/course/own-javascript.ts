@@ -249,6 +249,70 @@ export const OWN_JS: OwnPageContent = {
       ],
     },
   ],
+  funksiya: [
+    {
+      id: "write",
+      title: t("Funksiyanı yaz və çağır", "Write a function and call it", "Fonksiyonu yaz ve çağır", "اكتب دالة واستدعها", "Напиши функцию и вызови её"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "Funksiya bir işi bir dəfə yazıb dəfələrlə işlətmək üçündür. function sözündən sonra ad, sonra () və {} gəlir. Yazmaq onu işə salmır. Adını və () yazanda çağırılır. Mötərizə unudulsa heç nə olmur.",
+            "A function writes one job once and runs it many times. After function come the name, then () and {}. Writing it does not run it. It runs when you write the name and (). If you forget the parentheses, nothing happens.",
+            "Fonksiyon bir işi bir kez yazıp defalarca çalıştırmak içindir. function sözünden sonra ad, sonra () ve {} gelir. Yazmak onu çalıştırmaz. Adı ve () yazılınca çağrılır. Parantez unutulursa hiçbir şey olmaz.",
+            "الدالة تكتب عملاً مرة وتُشغّله مرات. بعد function يأتي الاسم ثم () و{}. كتابتها لا تُشغّلها. تُستدعى حين تكتب الاسم و(). إذا نسيت القوسين لا يحدث شيء.",
+            "Функция пишет одно дело один раз и запускает его много раз. После function идут имя, затем () и {}. Написание её не запускает. Она вызывается, когда пишешь имя и (). Если забыть скобки, ничего не случится.",
+          )],
+          code: 'function seslen() {\n  console.log("Burdayam");\n}\nseslen();\n\nfunction yazdir(ad) {\n  console.log(ad);\n}\nyazdir("Əli");',
+        },
+      ],
+    },
+    {
+      id: "return",
+      title: t("Parametr və return", "A parameter and return", "Parametre ve return", "المعامل وreturn", "Параметр и return"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "Parametr funksiyaya verilən məlumatdır. return nəticəni geri qaytarır və funksiyanı həmin sətirdə dayandırır. console.log yalnız ekrana yazır, dəyəri saxlamır. İkinci parametr verilməsə nəticə NaN olur.",
+            "A parameter is information given to the function. return sends a result back and stops the function on that line. console.log only prints. It does not keep the value. If the second parameter is missing, the result is NaN.",
+            "Parametre fonksiyona verilen bilgidir. return sonucu geri verir ve fonksiyonu o satırda durdurur. console.log yalnız ekrana yazar, değeri saklamaz. İkinci parametre verilmezse sonuç NaN olur.",
+            "المعامل معلومة تُعطى للدالة. return يُرجع النتيجة ويوقف الدالة في ذلك السطر. console.log يطبع فقط ولا يحفظ القيمة. إذا غاب المعامل الثاني صارت النتيجة NaN.",
+            "Параметр — это данные, которые дают функции. return возвращает результат и останавливает функцию на этой строке. console.log только печатает, значение не хранит. Если второго параметра нет, результат будет NaN.",
+          )],
+          code: 'function topla(a, b) {\n  return a + b;\n}\nconsole.log(topla(4, 6)); // 10\n\nfunction yoxla(bal) {\n  if (bal >= 50) return "Keçdi";\n  return "Kəsildi";\n}\nconsole.log(yoxla(40));',
+        },
+      ],
+    },
+    {
+      id: "array",
+      title: t("Funksiya və massiv", "A function and an array", "Fonksiyon ve dizi", "دالة ومصفوفة", "Функция и массив"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "Massiv də parametr ola bilər. İçində for ilə cəmi və ən böyük ədədi tapmaq olur. {} bağlanmasa xəta yaranır. return-dən sonrakı sətir işləmir.",
+            "An array can be a parameter too. Inside, a for loop can find the sum and the largest number. If {} is not closed, you get an error. The line after return does not run.",
+            "Dizi de parametre olabilir. İçinde for ile toplam ve en büyük sayı bulunur. {} kapanmazsa hata çıkar. return'den sonraki satır çalışmaz.",
+            "يمكن أن تكون المصفوفة معاملاً أيضاً. في الداخل تجد حلقة for المجموع والعدد الأكبر. إذا لم يُغلق {} ظهر خطأ. السطر بعد return لا يعمل.",
+            "Массив тоже может быть параметром. Внутри for можно найти сумму и самое большое число. Если {} не закрыта, будет ошибка. Строка после return не выполняется.",
+          )],
+          code: 'function massivCemi(ededler) {\n  let cem = 0;\n  for (let i = 0; i < ededler.length; i++) {\n    cem = cem + ededler[i];\n  }\n  return cem;\n}\nconsole.log(massivCemi([1, 2, 3, 4])); // 10\n\nfunction enBoyuk(ededler) {\n  let max = ededler[0];\n  for (let i = 1; i < ededler.length; i++) {\n    if (ededler[i] > max) max = ededler[i];\n  }\n  return max;\n}',
+        },
+      ],
+    },
+    {
+      id: "faq",
+      title: t("Suallar", "Questions", "Sorular", "أسئلة", "Вопросы"),
+      blocks: [
+        {
+          paragraphs: [
+            t("Funksiya özü niyə işləmir? Onu çağırmaq lazımdır: seslen(). Mötərizəsiz yalnız ad yazmaq kifayət etmir.", "Why does a function not run by itself? You must call it: seslen(). Writing only the name, without parentheses, is not enough.", "Fonksiyon kendiliğinden neden çalışmaz? Çağırmak gerekir: seslen(). Parantezsiz yalnız ad yazmak yetmez.", "لماذا لا تعمل الدالة وحدها؟ يجب استدعاؤها: seslen(). كتابة الاسم بلا قوسين لا تكفي.", "Почему функция сама не работает? Её надо вызвать: seslen(). Одного имени без скобок мало."),
+            t("console.log və return fərqi nədir? console.log göstərir. return dəyəri geri verir ki, onu başqa yerdə saxlayasan.", "What is the difference between console.log and return? console.log shows. return gives the value back so you can keep it somewhere else.", "console.log ve return farkı nedir? console.log gösterir. return değeri geri verir ki, başka yerde saklayasan.", "ما الفرق بين console.log وreturn؟ console.log يُظهر. return يُرجع القيمة كي تحفظها في مكان آخر.", "В чём разница console.log и return? console.log показывает. return отдаёт значение, чтобы сохранить его в другом месте."),
+            t("return-dən sonra kod niyə işləmir? return funksiyanı dayandırır. Ondan sonrakı sətir oxunmur.", "Why does code after return not run? return stops the function. The line after it is not read.", "return'den sonra kod neden çalışmaz? return fonksiyonu durdurur. Ondan sonraki satır okunmaz.", "لماذا لا يعمل الكود بعد return؟ return يوقف الدالة. السطر بعده لا يُقرأ.", "Почему код после return не работает? return останавливает функцию. Следующая строка не читается."),
+            t("İki parametrli funksiyaya bir ədəd versəm? İkincisi undefined olur və toplama NaN verir. Hər parametri göndər.", "What if I pass one number to a function with two parameters? The second is undefined and the sum is NaN. Pass every parameter.", "İki parametreli fonksiyona bir sayı versem? İkincisi undefined olur ve toplama NaN verir. Her parametreyi gönder.", "ماذا إذا مرّرت رقماً واحداً لدالة بمعاملين؟ الثاني يصير undefined والمجموع NaN. مرّر كل معامل.", "Что если функции с двумя параметрами дать одно число? Второе будет undefined, и сумма станет NaN. Передавай каждый параметр."),
+          ],
+        },
+      ],
+    },
+  ],
   duyme: [
     {
       id: "click",
