@@ -1,6 +1,26 @@
 {
   "redirects": [
     {
+      "source": "/al",
+      "destination": "/ai",
+      "permanent": true
+    },
+    {
+      "source": "/al/",
+      "destination": "/ai",
+      "permanent": true
+    },
+    {
+      "source": "/ai.html",
+      "destination": "/ai",
+      "permanent": true
+    },
+    {
+      "source": "/nibras-ai.html",
+      "destination": "/ai",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
       "has": [
         {
