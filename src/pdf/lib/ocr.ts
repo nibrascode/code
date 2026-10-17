@@ -169,11 +169,14 @@ async function makeWorker(langs: OcrLang[], best: boolean, logger?: (m: { status
 
 /** Choose OCR languages: read a sample with each script family and keep the one the engine is most sure about. */
 export async function detectOcrLangs(sample: HTMLCanvasElement, fallback: OcrLang): Promise<OcrLang[]> {
-  const top = Math.min(sample.height, Math.max(220, Math.round(sample.height * 0.4)));
+  const top = Math.min(sample.height, Math.max(220, Math.round(sample.height * 0.7)));
   const part = crop(sample, 0, 0, sample.width, top);
-  const cands: OcrLang[][] = [["aze", "tur", "eng"], ["ara"], ["rus", "eng"]];
+  const cands: OcrLang[][] = [["ara"], ["aze", "tur", "eng"], ["rus", "eng"]];
   const worker = await makeWorker(cands[0], false);
   let best: { langs: OcrLang[]; conf: number; text: string } | null = null;
+  let ara = { letters: 0, conf: 0, share: 0 };
+  let lat = 0;
+  let latConf = 0;
   try {
     for (let i = 0; i < cands.length; i++) {
       const c = cands[i];
@@ -181,18 +184,25 @@ export async function detectOcrLangs(sample: HTMLCanvasElement, fallback: OcrLan
       await worker.setParameters({ tessedit_pageseg_mode: "3", user_defined_dpi: "300" });
       const r = await worker.recognize(part as never);
       const letters = (r.data.text.match(/\p{L}/gu) || []).length;
-      const conf = letters < 8 ? 0 : r.data.confidence;
+      const flat = r.data.text.replace(/\s+/g, "");
+      const clean = flat.length ? (flat.match(/[\p{L}\p{N}.,;:!?'"()-]/gu) || []).length / flat.length : 0;
+      const arShare = (r.data.text.match(/[\u0621-\u064A]/g) || []).length / Math.max(1, letters);
+      const conf = letters < 8 || (i > 0 && clean < 0.88) || (i === 0 && arShare < 0.5) ? 0 : r.data.confidence;
+      if (i === 0) ara = { letters: (r.data.text.match(/[\u0621-\u064A]/g) || []).length, conf: r.data.confidence, share: arShare };
+      if (i === 1) { lat = letters; latConf = r.data.confidence; }
       if (!best || conf > best.conf) best = { langs: c, conf, text: r.data.text };
-      if (i === 0 && conf >= 80) break;
+      if (i <= 1 && conf >= (i === 0 ? 78 : 80)) break;
     }
   } finally {
     await worker.terminate();
   }
+  // a page the Arabic model can read letter by letter is Arabic, even when another model is "confident" about junk
+  if (best && best.langs[0] !== "ara" && ara.letters >= 12 && ara.conf >= 35 && ara.share >= 0.6 && ara.letters >= 25 && ara.conf >= latConf - 10) return ["ara"];
   if (!best || best.conf === 0) return fallback === "eng" ? ["eng"] : [fallback, "eng"];
   if (best.langs[0] !== "aze") return best.langs[0] === "ara" ? ["ara"] : best.langs;
   const t = best.text;
   if (/[əƏ]/.test(t)) return ["aze", "eng"];
-  if ((t.match(/[ğĞıİşŞ]/g) || []).length >= 2) return ["tur", "eng"];
+  if ((t.match(/[ğĞıİşŞ]/g) || []).length >= 1) return ["tur", "eng"];
   return ["eng"];
 }
 
