@@ -2,7 +2,7 @@
 // Library-nin «yalnız kitab» rejimi (başlıq x-nibras-books-only: 1) nibrascode-un əvvəlki məlumat idarəçilərini eyni sırada işlədir
 // (fətava, İbn Teymiyyə kitabları, hədis, ayə davamı, təfsir, ayə, tövhid, hazır dini cavab, Quran lüğəti, ərəb lüğəti, nəhv) və heç vaxt AI çağırmır.
 // Cavab mətni əvvəlki kimidir (eyni ::işarələr::). Hər sorğu ~8 s gözləyir, bir dəfə təkrarlanır; library əlçatan deyilsə null qaytarılır.
-const BASE = String(process.env.LIBRARY_URL || "https://library.nibrascode.com").replace(/\/+$/, "");
+const baseUrl = () => String(process.env.LIBRARY_URL || "https://library.nibrascode.com").replace(/\/+$/, "");
 const TIMEOUT_MS = 8000;
 // modul yüklənəndəki fetch saxlanılır: testlərdə AI üçün əvəz edilən globalThis.fetch library sorğularına təsir etmir
 const httpFetch = globalThis.fetch.bind(globalThis);
@@ -10,7 +10,7 @@ const httpFetch = globalThis.fetch.bind(globalThis);
 async function post(body) {
   for (let i = 0; i < 2; i++) {
     try {
-      const r = await httpFetch(BASE + "/api/chat", {
+      const r = await httpFetch(baseUrl() + "/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json", "x-nibras-books-only": "1" },
         body: JSON.stringify(body),

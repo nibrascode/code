@@ -35,6 +35,8 @@ export function parseTranslate(message) {
     }
   }
   if (!cue) return null;
+  // «translate this code to python»: kodu başqa dilə çevirmək tərcümə deyil, kod sorğusudur (AI-yə keçir)
+  if (/(?:^|[^\p{L}])(?:code|kod\p{L}*|код\p{L}*|program\p{L}*|script|скрипт\p{L}*|كود|برنامج)(?=$|[^\p{L}])[^:：]{0,40}(?:^|[^\p{L}])(?:to|into|на|-[ae]|ə|a)\s+(?:python|javascript|java|js|typescript|c\+\+|c#|php|html|css|sql|rust|go|kotlin|swift|ruby|bash)(?=$|[^\p{L}])/iu.test(m)) return null;
   const rest = m.slice(cue.len);
   let prefix = "";
   let body = "";

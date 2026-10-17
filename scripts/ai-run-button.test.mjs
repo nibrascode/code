@@ -9,6 +9,7 @@ import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
 import chat from "../api/chat.js";
 
+process.env.LIBRARY_URL = "http://127.0.0.1:9"; // library: sınaqda şəbəkəyə çıxma, dərhal rədd
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const CHROME = process.env.CHROME || ["/usr/bin/google-chrome", "/usr/bin/chromium", "/usr/bin/chromium-browser"].find(existsSync);
 let pw = null;
@@ -61,7 +62,7 @@ test("«Aç» düyməsi", { skip, timeout: 120000 }, async (t) => {
   async function ask(page, text) {
     await page.fill("#inp", text);
     await page.press("#inp", "Enter");
-    await page.waitForSelector(".msg.b:not(:has(.dots))", { timeout: 15000 });
+    await page.waitForSelector(".msg.b:not(:has(.tk))", { timeout: 15000 });
   }
 
   for (const [q, lang] of [["python kod nümunəsi", "python"], ["html form nümunəsi", "html"], ["javascript massiv nümunə", "javascript"], ["css flexbox nümunə", "html"]]) {

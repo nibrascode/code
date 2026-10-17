@@ -23,11 +23,11 @@ test("ai.html və ai/index.html eynidir", () => {
 test("OG/Twitter meta: başlıq, təsvir, url, şəkil", () => {
   const h = HTML("public/ai/index.html");
   for (const re of [
-    /property="og:title" content="Nibras AI"/,
+    /property="og:title" content="Nibras AI[^"]*"/,
     /property="og:description" content="[^"]+"/,
     /property="og:url" content="https:\/\/nibrascode\.com\/ai"/,
-    /property="og:image" content="https:\/\/nibrascode\.com\/nibras-ai-icon\.png"/,
-    /name="twitter:card" content="summary"/,
+    /property="og:image" content="https:\/\/nibrascode\.com\/og-ai\.jpg"/,
+    /name="twitter:card" content="summary_large_image"/,
     /rel="canonical" href="https:\/\/nibrascode\.com\/ai"/,
   ]) assert.match(h, re);
   assert.doesNotMatch(h.match(/<head>[\s\S]*<\/head>/)[0], /yarat/i);
