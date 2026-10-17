@@ -567,6 +567,54 @@ export const OWN_JS: OwnPageContent = {
       ],
     },
   ],
+  system: [
+    {
+      id: "rule",
+      title: t("Gizli qayda", "A hidden rule", "Gizli kural", "قاعدة مخفية", "Скрытое правило"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "System prompt istifadəçinin görmədiyi qaydadır. Onu proqramçı yazır. contents isə istifadəçinin sualıdır. Qayda AI-ya deyir: kimdir, cavab nə qədər olsun, hansı mövzudan imtina etsin.",
+            "A system prompt is a rule the user does not see. The programmer writes it. contents is the user's question. The rule tells the AI who it is, how long the answer should be, and which topic to refuse.",
+            "System prompt kullanıcının görmediği kuraldır. Onu programcı yazar. contents ise kullanıcının sorusudur. Kural AI'ya der: kimdir, cevap ne kadar olsun, hangi konudan geri çevirsin.",
+            "تعليمة النظام قاعدة لا يراها المستخدم. يكتبها المبرمج. contents هو سؤال المستخدم. تقول القاعدة للذكاء من هو، وكم يكون طول الجواب، وأي موضوع يرفض.",
+            "System prompt — правило, которое пользователь не видит. Его пишет программист. contents — это вопрос пользователя. Правило говорит ИИ, кто он, какой длины ответ и от какой темы отказаться.",
+          )],
+          code: 'const sorguMelumati = {\n  systemInstruction: {\n    parts: [{ text: "Sən Nibras Code müəllimisən. Yalnız qısa cümlə ilə cavab ver." }]\n  },\n  contents: [\n    { parts: [{ text: "JavaScript nədir?" }] }\n  ]\n};',
+        },
+      ],
+    },
+    {
+      id: "role",
+      title: t("Rol dəyişir, kod yox", "The role changes, the code does not", "Rol değişir, kod değil", "يتغير الدور لا الكود", "Меняется роль, не код"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "Eyni funksiyada yalnız systemInstruction mətni dəyişir. Müəllim kənar suala imtina edir. Ərəb dili müəllimi isə sözü hərəkə ilə yazır və bir cümlə qurur, əlavə izah yazmır. Açar process.env-dən gəlir.",
+            "In the same function only the systemInstruction text changes. A teacher refuses an off-topic question. An Arabic teacher writes the word with vowel marks and one sentence, and adds no extra explanation. The key comes from process.env.",
+            "Aynı fonksiyonda yalnız systemInstruction metni değişir. Öğretmen konu dışı soruyu geri çevirir. Arapça öğretmeni ise sözü harekeyle yazar ve bir cümle kurar, ek açıklama yazmaz. Anahtar process.env'den gelir.",
+            "في الدالة نفسها يتغير نص systemInstruction فقط. المعلّم يرفض السؤال الخارج عن الموضوع. معلّم العربية يكتب الكلمة بالحركات وجملة واحدة بلا شرح إضافي. المفتاح يأتي من process.env.",
+            "В той же функции меняется только текст systemInstruction. Учитель отказывает на посторонний вопрос. Учитель арабского пишет слово с огласовками и одно предложение, без лишнего объяснения. Ключ берётся из process.env.",
+          )],
+          code: 'const apiKey = process.env.GEMINI_API_KEY;\nconst url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;\n\nasync function muellimBot(istifadeciSuali) {\n  const sorguMelumati = {\n    systemInstruction: {\n      parts: [{\n        text: "Sən JavaScript müəllimisən. Yalnız proqramlaşdırma sualına cavab ver. Başqa mövzuda belə yaz: Üzr istəyirəm, mən yalnız proqramlaşdırma üzrə kömək edə bilərəm."\n      }]\n    },\n    contents: [{ parts: [{ text: istifadeciSuali }] }]\n  };\n  const cavab = await fetch(url, {\n    method: "POST",\n    headers: { "Content-Type": "application/json" },\n    body: JSON.stringify(sorguMelumati)\n  });\n  const melumat = await cavab.json();\n  console.log(melumat.candidates[0].content.parts[0].text);\n}',
+        },
+      ],
+    },
+    {
+      id: "faq",
+      title: t("Suallar", "Questions", "Sorular", "أسئلة", "Вопросы"),
+      blocks: [
+        {
+          paragraphs: [
+            t("Ad necə yazılır? systemInstruction. systeminstruction və system_instruction səhvdir. I böyükdür.", "How is the name written? systemInstruction. systeminstruction and system_instruction are wrong. The I is capital.", "Ad nasıl yazılır? systemInstruction. systeminstruction ve system_instruction yanlıştır. I büyüktür.", "كيف يُكتب الاسم؟ systemInstruction. systeminstruction وsystem_instruction خطأ. حرف I كبير.", "Как пишется имя? systemInstruction. systeminstruction и system_instruction неправильно. I большая."),
+            t("Qayda niyə pozulur? Təlimat özü ilə ziddiyyət təşkil edir. Həm uzun izah, həm bir cümlə demə. Qısa və aydın yaz.", "Why is the rule broken? The instruction contradicts itself. Do not ask for a long explanation and one sentence at the same time. Write it short and clear.", "Kural neden bozulur? Talimat kendiyle çelişir. Hem uzun açıklama hem bir cümle deme. Kısa ve açık yaz.", "لماذا تُكسر القاعدة؟ التعليمة تناقض نفسها. لا تطلب شرحاً طويلاً وجملة واحدة معاً. اكتبها قصيرة وواضحة.", "Почему правило ломается? Инструкция противоречит себе. Не проси длинное объяснение и одно предложение сразу. Пиши коротко и ясно."),
+            t("Qaydanı contents içinə yazmaq olarmı? İşləyir, amma uzun söhbətdə unudulur. Qayda systemInstruction-dadır.", "Can I put the rule inside contents? It works, but it is forgotten in a long chat. The rule belongs in systemInstruction.", "Kuralı contents içine yazmak olur mu? Çalışır, ama uzun sohbette unutulur. Kural systemInstruction'dadır.", "هل أضع القاعدة داخل contents؟ يعمل، لكنه يُنسى في حديث طويل. القاعدة مكانها systemInstruction.", "Можно ли писать правило внутрь contents? Работает, но в длинном разговоре забывается. Правило живёт в systemInstruction."),
+            t("Güclü təlimatda nə olur? Kimlik, uzunluq, qadağa və çıxış forması. Dördü də bir-birinə zidd olmamalıdır.", "What goes in a strong instruction? Identity, length, a ban and the output shape. The four must not contradict each other.", "Güçlü talimatta ne olur? Kimlik, uzunluk, yasak ve çıkış biçimi. Dördü de birbirine zıt olmamalıdır.", "ماذا في التعليمة القوية؟ الهوية والطول والمنع وشكل الناتج. الأربعة يجب ألا تناقض بعضها.", "Что в сильной инструкции? Личность, длина, запрет и форма ответа. Четыре пункта не должны противоречить друг другу."),
+          ],
+        },
+      ],
+    },
+  ],
   duyme: [
     {
       id: "click",
