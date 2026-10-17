@@ -291,6 +291,10 @@ export function stripRunning(pages: string[]): string[] {
 export function cleanText(s: string): string {
   return s
     .replace(AR_G, (m) => m.normalize("NFKC"))
+    // harakat are not wanted: drop them together with the gap some fonts leave in front of a detached mark
+    .replace(/[ \t]*[\u064B-\u065F\u0670\u0640]+/g, "")
+    // fonts that subset Arabic letters without dots map them to dotless forms: ٮ→ب ں→ن ڡ→ف ٯ→ق
+    .replace(/[\u066E\u06BA\u06A1\u066F]/g, (c) => ({ "\u066E": "\u0628", "\u06BA": "\u0646", "\u06A1": "\u0641", "\u066F": "\u0642" })[c]!)
     .replace(/[\u200E\u200F\u202A-\u202E\u2066-\u2069\uFEFF]/g, "")
     .replace(/[ \t]+\n/g, "\n")
     .replace(/\n{3,}/g, "\n\n")
