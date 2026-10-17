@@ -5,7 +5,7 @@ import { ApkLab } from "@/components/apk-lab";
 import { LIBRARY, type LibrarySection, type LibraryTopic } from "@/lib/library";
 import { CODE_SAMPLE_HUB, CODE_SAMPLES, SITE_CODE } from "@/lib/code-samples";
 import { findProgramming, type ProgrammingSection } from "@/lib/programming";
-import { HUBS } from "@/lib/course/meta";
+import { HUBS, pagesOf } from "@/lib/course/meta";
 import { findProgrammingLocale, programmingLocalePath } from "@/lib/programming-locales";
 import { SEARCH, searchPath } from "@/lib/search-pages";
 import { COMPARE, comparePath } from "@/lib/learn-pages";
@@ -17,6 +17,24 @@ import { articlesForTopic, findResourceTopic } from "@/lib/resource-topics";
 import type { StudioPrivacyRow } from "@/lib/studio";
 import { useI18n } from "@/lib/i18n-context";
 import type { Lang } from "@/lib/i18n";
+
+const APK_LESSON_FILES = ["capacitor", "termux", "revenuecat"] as const;
+
+const APK_PATH: Record<Lang, string> = {
+  az: "APK dərsləri",
+  en: "APK lessons",
+  tr: "APK dersleri",
+  ar: "دروس APK",
+  ru: "Уроки APK",
+};
+
+const APK_PATH_NOTE: Record<Lang, string> = {
+  az: "Eyni dərslər JavaScript siyahısında da durur. Qapalı test Capacitor dərsinin içindədir. Sıra belədir: qabıq, telefonda yoxlama, sonra abunə.",
+  en: "The same lessons also sit in the JavaScript list. Closed testing is inside the Capacitor lesson. The order is: the shell, a test on the phone, then a subscription.",
+  tr: "Aynı dersler JavaScript listesinde de durur. Kapalı test Capacitor dersinin içindedir. Sıra şöyledir: kabuk, telefonda deneme, sonra abonelik.",
+  ar: "الدروس نفسها تقف أيضاً في قائمة جافاسكريبت. الاختبار المغلق داخل درس Capacitor. الترتيب: الغلاف، ثم التجربة على الهاتف، ثم الاشتراك.",
+  ru: "Те же уроки стоят и в списке JavaScript. Закрытый тест внутри урока Capacitor. Порядок такой: оболочка, проверка на телефоне, потом подписка.",
+};
 
 const GUIDE_INTRO: Record<string, Record<Lang, string>> = {
   pdf: {
@@ -876,7 +894,29 @@ export function ProgrammingArticle({
           </li>
         </ul>
       ) : null}
-      {slug === "apk-hazirla" ? <ApkLab /> : null}
+      {slug === "apk-hazirla" ? (
+        <>
+          <div className="prog-fold-body">
+            <h2>{APK_PATH[lang]}</h2>
+            <p>{APK_PATH_NOTE[lang]}</p>
+            <ul className="lib-list">
+              {APK_LESSON_FILES.map((file) => {
+                const lesson = pagesOf("javascript").find((page) => page.file === file);
+                if (!lesson) return null;
+                return (
+                  <li key={lesson.slug}>
+                    <a href={programmingLocalePath(lang, lesson.slug)}>
+                      {lesson.title[lang]}
+                      <ArrowUpRight className="rtl-flip size-4" />
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+          <ApkLab />
+        </>
+      ) : null}
       {footer}
     </main>
   );
