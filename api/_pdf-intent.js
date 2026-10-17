@@ -9,6 +9,14 @@ export const PDF_TOOLS = {
   ocr: { needs: "pdf|image", description: "OCR a scanned PDF or an image", params: [] },
   "pdf-word": { needs: "pdf", description: "Convert PDF to Word (DOCX)", params: [] },
   "word-pdf": { needs: "docx", description: "Convert DOCX to PDF", params: [] },
+  "img-bg": { needs: "image", description: "Remove the background of an image (transparent PNG)", params: [] },
+  "img-compress": { needs: "image", description: "Compress an image (smaller file size)", params: ["level", "maxKb"] },
+  "img-resize": { needs: "image", description: "Resize an image (width/height/percent)", params: ["w", "h", "pct"] },
+  "img-convert": { needs: "image", description: "Convert an image to PNG/JPG/WebP", params: ["to"] },
+  "img-crop": { needs: "image", description: "Crop an image to an aspect ratio (centered)", params: ["ratio"] },
+  "img-rotate": { needs: "image", description: "Rotate an image", params: ["angle"] },
+  "img-flip": { needs: "image", description: "Mirror an image", params: ["vertical"] },
+  "img-gray": { needs: "image", description: "Make an image black and white", params: [] },
   "image-pdf": { needs: "image", description: "Images to one PDF", params: [] },
   merge: { needs: "pdf+", description: "Merge several PDFs", params: [] },
   split: { needs: "pdf", description: "Split a PDF into single pages (ZIP)", params: [] },
@@ -99,12 +107,79 @@ function parseParams(tool, message) {
   return p;
 }
 
+// image tools (only when an image is in scope and no PDF/DOCX): same runner, browser side
+const RI = {
+  bgWord: /\bfon\w*|arxa\s*plan\w*|arka\s*plan\w*|background|backdrop|\bbg\b|фон\w*|задн\w+\s+план|الخلفية|خلفية|الخلفيه/i,
+  bgVerb: /sil\b|silin|çıxar|cixar|çıkar|çıkart|götür|gotur|qaldır|qaldir|kaldır|kaldir|təmizlə|temizle|temizlə|remove|delete|erase|cut\s*out|clear|убер|удал|вырежи|сотри|очист|احذف|ازل|أزل|إزالة|ازالة|امسح|شيل|إلغاء/i,
+  bgAlone: /remove\.?bg|şəffaf\s*fon|seffaf\s*fon|transparent|прозрачн|شفاف|şeffaf/i,
+  resize: /resize|rescale|boyutland|yenidən\s*ölçü|yeniden\s*boyut|ölçü\w*\s*(?:dəyiş|deyis|değiş)|boyut\w*\s*(?:değiş|degis)|измени\w*\s+размер|размер\w*\s+измен|поменя\w+\s+размер|تغيير\s*(?:ال)?(?:حجم|مقاس|أبعاد|ابعاد)|غيّر\s*(?:ال)?(?:حجم|مقاس)|غير\s*(?:ال)?(?:حجم|مقاس)|\b\d{2,5}\s*[x×*]\s*\d{2,5}\b|\b\d{2,5}\s*px\b|\b\d{1,3}\s*%/i,
+  crop: /\bkəs\w*|\bkes\b|\bkesin|\bcrop|k[ıi]rp\w*|обрез\w*|обреж\w*|кадрир\w*|قص(?=\s|$)|اقتص\w*|قصّ/i,
+  rot: /rotate|döndər|dondər|dondur|döndür|fırlat|firlat|поверн\w*|перевер\w*|تدوير|أدر(?=\s|$)|ادر(?=\s|$)|دوّر|دور(?=\s|$)/i,
+  flip: /flip|mirror|güzgü|guzgu|ayna|çevir[^.!?\n]{0,12}(?:üfüqi|ufuqi|şaquli|saquli|yatay|dikey)|отзеркал\w*|зеркал\w*|اقلب|مرآة|انعكاس/i,
+  gray: /qara[\s-]*ağ|qara[\s-]*ag|siyah[\s-]*beyaz|gri\s*ton|black[\s-]*(?:and|&)?[\s-]*white|gr[ae]y[\s-]*scale|monochrome|ч[её]рно[\s-]*белый|ч[её]рно-бел|أبيض\s*و?\s*أسود|ابيض\s*و?\s*اسود|رمادي|\bb\/w\b/i,
+  fmtWord: /\b(png|jpe?g|jpg|webp)\b/gi,
+  convert: /çevir|cevir|convert|dönüştür|donustur|переконвертир|конверт\w*|преобраз\w*|сохрани\s+как|\bto\s+(?:png|jpe?g|jpg|webp)|в\s+(?:png|jpe?g|jpg|webp)|حوّل|حول(?=\s|$)|تحويل|-?(?:ya|ye|ə|a|e)\s*(?:çevir|dönüş)|format/i,
+  compress: /sıxışdır|sixisdir|sıxışdırma|kiçilt|kicilt|ölçü.{0,10}azalt|\bcompress|reduce|optimi[sz]e|make.{0,12}smaller|sıkıştır|sikistir|küçült|kucult|сожми|сжать|сжим|уменьш|оптимиз|ضغط|اضغط|تصغير|صغر|قلل|خفف/i,
+};
+function detectImage(m) {
+  if ((RI.bgWord.test(m) && RI.bgVerb.test(m)) || RI.bgAlone.test(m)) return "img-bg";
+  if (RI.resize.test(m)) return "img-resize";
+  if (RI.crop.test(m)) return "img-crop";
+  if (RI.gray.test(m)) return "img-gray";
+  if (RI.flip.test(m)) return "img-flip";
+  if (RI.rot.test(m)) return "img-rotate";
+  const fm = m.match(RI.fmtWord);
+  if (fm && RI.convert.test(m) && !RI.compress.test(m)) return "img-convert";
+  if (RI.compress.test(m)) return "img-compress";
+  return null;
+}
+function imageParams(tool, message) {
+  const m = norm(message);
+  const p = {};
+  if (tool === "img-resize") {
+    const d = m.match(/(\d{2,5})\s*[x×*]\s*(\d{2,5})/);
+    const pct = m.match(/(\d{1,3})\s*%/);
+    const px = m.match(/(\d{2,5})\s*px/) || m.match(/(?:en|width|genişlik|genislik|ширин\w*|عرض)\s*[:=]?\s*(\d{2,5})/);
+    const hh = m.match(/(?:hündürlük|hundurluk|height|yükseklik|yukseklik|высот\w*|ارتفاع)\s*[:=]?\s*(\d{2,5})/);
+    if (d) { p.w = +d[1]; p.h = +d[2]; }
+    else if (pct && +pct[1] > 0) p.pct = +pct[1];
+    else if (px) p.w = +px[1];
+    else if (hh) p.h = +hh[1];
+    else { const n = m.match(/\b(\d{2,5})\b/); if (n) p.w = +n[1]; }
+  }
+  if (tool === "img-compress") {
+    p.level = /yüngül|yungul|hafif|light|лёгк|легк|خفيف/.test(m) ? "light" : "strong";
+    const kb = m.match(/(\d{1,5})\s*(kb|кб|ك\.?ب|mb|мб)/);
+    if (kb) p.maxKb = /mb|мб/.test(kb[2]) ? +kb[1] * 1024 : +kb[1];
+  }
+  if (tool === "img-convert") {
+    const all = [...m.matchAll(/\b(png|jpe?g|jpg|webp)\b/g)].map((x) => x[1]);
+    const last = all[all.length - 1];
+    if (last) p.to = last === "png" ? "png" : last === "webp" ? "webp" : "jpeg";
+  }
+  if (tool === "img-crop") {
+    const r = m.match(/(\d{1,2})\s*[:/]\s*(\d{1,2})/);
+    p.ratio = r && +r[2] > 0 ? +r[1] / +r[2] : 1;
+  }
+  if (tool === "img-rotate") {
+    if (/\b270\b|sola\b|\bsol\b|left|counter|против|влево|налево|يسار|اليسار/.test(m)) p.angle = 270;
+    else if (/\b180\b|ters|upside|перевер|عكس|half/.test(m)) p.angle = 180;
+    else p.angle = 90;
+  }
+  if (tool === "img-flip") p.vertical = /şaquli|saquli|dikey|vertical|вертикал|عمودي|upside/.test(m);
+  return p;
+}
+
 function detect(message, files) {
   const m = norm(message);
   // what the message is about: files attached to it, else everything the chat remembers
   const scope = files.some((f) => f.attached) ? files.filter((f) => f.attached) : files;
   const has = { pdf: scope.some((f) => f.kind === "pdf"), image: scope.some((f) => f.kind === "image"), docx: scope.some((f) => f.kind === "docx") };
   const pdfWord = R.pdf.test(m);
+  if (has.image && !has.pdf && !has.docx && !pdfWord && !R.toPdf.test(m) && !R.how.test(m)) {
+    const it = detectImage(m);
+    if (it) return it;
+  }
   if (R.unlock.test(m)) return "unlock";
   if (R.protect.test(m)) return "protect";
   if (R.watermark.test(m)) return "watermark";
@@ -154,6 +229,14 @@ function pickTargets(tool, files) {
 }
 
 const SAY = {
+  "img-bg": { az: "Fonu silirəm (şəffaf PNG). İlk dəfə model yüklənə bilər, bir az gözləyin…", en: "Removing the background (transparent PNG). The model may load the first time, please wait…", tr: "Arka planı siliyorum (şeffaf PNG). İlk seferde model yüklenebilir, biraz bekleyin…", ar: "أزيل الخلفية (PNG شفاف). قد يُحمَّل النموذج أول مرة، انتظر قليلاً…", ru: "Удаляю фон (прозрачный PNG). В первый раз может загружаться модель, подождите…" },
+  "img-compress": { az: "Şəkli sıxışdırıram…", en: "Compressing the image…", tr: "Görseli sıkıştırıyorum…", ar: "أضغط الصورة…", ru: "Сжимаю изображение…" },
+  "img-resize": { az: "Şəklin ölçüsünü dəyişirəm…", en: "Resizing the image…", tr: "Görselin boyutunu değiştiriyorum…", ar: "أغيّر حجم الصورة…", ru: "Меняю размер изображения…" },
+  "img-convert": { az: "Şəkli çevirirəm…", en: "Converting the image…", tr: "Görseli dönüştürüyorum…", ar: "أحوّل الصورة…", ru: "Конвертирую изображение…" },
+  "img-crop": { az: "Şəkli kəsirəm (mərkəzdən)…", en: "Cropping the image (centered)…", tr: "Görseli kırpıyorum (ortadan)…", ar: "أقص الصورة (من المنتصف)…", ru: "Обрезаю изображение (по центру)…" },
+  "img-rotate": { az: "Şəkli döndərirəm…", en: "Rotating the image…", tr: "Görseli döndürüyorum…", ar: "أدوّر الصورة…", ru: "Поворачиваю изображение…" },
+  "img-flip": { az: "Şəkli güzgülədirəm…", en: "Mirroring the image…", tr: "Görseli aynalıyorum…", ar: "أعكس الصورة…", ru: "Отзеркаливаю изображение…" },
+  "img-gray": { az: "Şəkli qara-ağ edirəm…", en: "Making the image black and white…", tr: "Görseli siyah-beyaz yapıyorum…", ar: "أحوّل الصورة إلى أبيض وأسود…", ru: "Делаю изображение чёрно-белым…" },
   "pdf-image": { az: "PDF səhifələrini şəkillərə çevirirəm…", en: "Converting the PDF pages to images…", tr: "PDF sayfalarını görsellere dönüştürüyorum…", ar: "أحوّل صفحات PDF إلى صور…", ru: "Превращаю страницы PDF в изображения…" },
   "extract-text": { az: "Mətni çıxarıram (skan səhifələrdə avtomatik OCR)…", en: "Extracting the text (automatic OCR on scanned pages)…", tr: "Metni çıkarıyorum (taranmış sayfalarda otomatik OCR)…", ar: "أستخرج النص (OCR تلقائي للصفحات الممسوحة)…", ru: "Извлекаю текст (автоматический OCR для сканов)…" },
   ocr: { az: "OCR ilə mətni tanıyıram…", en: "Recognizing the text with OCR…", tr: "OCR ile metni tanıyorum…", ar: "أتعرّف على النص بـ OCR…", ru: "Распознаю текст через OCR…" },
@@ -207,8 +290,10 @@ const MENU = {
   ar: "استلمت الملف. ماذا تريد أن أفعل؟ مثلاً:\n• تحويل PDF إلى صور (PNG/JPG)\n• استخراج النص (OCR تلقائي للمسح) أو التحويل إلى Word\n• دمج / تقسيم / استخراج الصفحات 2-4 / حذف صفحات\n• ضغط / تدوير / إضافة علامة مائية\n• إضافة كلمة مرور أو إزالتها\n• تحويل الصور إلى PDF",
   ru: "Файл получен. Что сделать? Например:\n• Превратить PDF в изображения (PNG/JPG)\n• Извлечь текст (на сканах автоматический OCR) или в Word\n• Объединить / разделить / извлечь страницы 2-4 / удалить страницы\n• Сжать / повернуть / добавить водяной знак\n• Поставить или снять пароль\n• Собрать изображения в PDF",
 };
+const ASK_SIZE = { az: "Hansı ölçüyə dəyişim? Məsələn: «800x600», «800 px» və ya «50%».", en: "What size should I use? For example: “800x600”, “800 px” or “50%”.", tr: "Hangi boyuta getireyim? Örneğin: «800x600», «800 px» veya «%50».", ar: "ما الحجم المطلوب؟ مثلاً: «800x600» أو «800 px» أو «50%».", ru: "Какой размер сделать? Например: «800x600», «800 px» или «50%»." };
 const TOOL_SLUG = { "pdf-image": "pdf-image", "extract-text": "pdf-ocr", ocr: "ocr", "pdf-word": "pdf-word", "word-pdf": "word-pdf", "image-pdf": "image-pdf", merge: "merge", split: "split", "extract-pages": "extract-pages", "delete-pages": "pages", compress: "compress", rotate: "rotate", watermark: "watermark", protect: "protect", unlock: "", sign: "sign", "write-pdf": "write-pdf", scan: "scan", preview: "preview", batch: "batch" };
-const pagePath = (lang, tool) => `${SITE}${lang === "az" ? "" : `/${lang}`}/pdf${TOOL_SLUG[tool] ? `/${TOOL_SLUG[tool]}` : ""}`;
+const IMG_PAGE = (lang, tool) => `${SITE}${lang === "az" ? "" : `/${lang}`}${tool === "img-bg" ? "/erase" : "/image"}`;
+const pagePath = (lang, tool) => tool.startsWith("img-") ? IMG_PAGE(lang, tool) :  `${SITE}${lang === "az" ? "" : `/${lang}`}/pdf${TOOL_SLUG[tool] ? `/${TOOL_SLUG[tool]}` : ""}`;
 
 function cleanFiles(raw) {
   if (!Array.isArray(raw)) return [];
@@ -241,7 +326,8 @@ export function pdfIntent(message, rawFiles, lang) {
   if (!okTargets) {
     return { reply: `${NEED[L](WHAT[need][L])}\n${pagePath(L, tool)}`, needFile: need, lang: L };
   }
-  const params = parseParams(tool, message);
+  const params = tool.startsWith("img-") ? imageParams(tool, message) : parseParams(tool, message);
+  if (tool === "img-resize" && !params.w && !params.h && !params.pct) return { reply: ASK_SIZE[L], lang: L };
   if ((tool === "extract-pages" || tool === "delete-pages") && !params.range) {
     return { reply: ASK_RANGE[L], lang: L };
   }
