@@ -10,7 +10,7 @@ import { HeroMark } from "@/components/hero-mark";
 import { faqPath } from "@/lib/faq";
 import { homePath, localeHref } from "@/lib/locale-path";
 import { SEARCH, searchPath } from "@/lib/search-pages";
-import { toolsPath } from "@/lib/tools";
+import { toolsPath, TOOLS_PAGE } from "@/lib/tools";
 import { useI18n } from "@/lib/i18n-context";
 import { statusText, type StudioAppRow } from "@/lib/studio";
 import { loadStudioBundle } from "@/lib/studio.functions";
@@ -21,10 +21,9 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-const BAR: Record<"dev" | "apk" | "tools" | "pdf" | "qr" | "erase" | "image" | "calc", Record<Lang, string>> = {
-  dev: { az: "Dev hazırla", en: "Make code", tr: "Dev hazırla", ar: "جهّز كوداً", ru: "Сделать код" },
+const BAR: Record<"dev" | "apk" | "pdf" | "qr" | "erase" | "image" | "calc", Record<Lang, string>> = {
+  dev: { az: "Kod yaz", en: "Write code", tr: "Kod yaz", ar: "اكتب كوداً", ru: "Пиши код" },
   apk: { az: "Apk hazırla", en: "Make an APK", tr: "Apk hazırla", ar: "اصنع APK", ru: "Собрать APK" },
-  tools: { az: "Xidmət hazırla", en: "Make a tool", tr: "Hizmet hazırla", ar: "جهّز خدمة", ru: "Сделать сервис" },
   pdf: { az: "Pdf hazırla", en: "Make a PDF", tr: "Pdf hazırla", ar: "جهّز PDF", ru: "Сделать PDF" },
   qr: { az: "Qr hazırla", en: "Make a QR", tr: "Qr hazırla", ar: "جهّز QR", ru: "Сделать QR" },
   erase: { az: "Fon sil", en: "Remove background", tr: "Arka plan sil", ar: "احذف الخلفية", ru: "Удалить фон" },
@@ -347,7 +346,7 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
                 />
                 <path fill="currentColor" d="M4 18.2h8.5v1.6H4z" />
               </svg>
-              <span>{BAR.tools[lang]}</span>
+              <span>{TOOLS_PAGE.heading[lang]}</span>
             </a>
             <a className="nx-ai-bar nx-qr-bar" href={localeHref(lang, "/pdf")}>
               <img src="/apps/nibras-pdf.jpg" alt="" width={36} height={36} />
