@@ -121,4 +121,181 @@ export const OWN_JS: OwnPageContent = {
       ],
     },
   ],
+  massiv: [
+    {
+      id: "array",
+      title: t("Massiv nədir", "What an array is", "Dizi nedir", "ما هي المصفوفة", "Что такое массив"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "Massiv bir neçə məlumatı bir dəyişəndə saxlayır: adlar, oyunlar, xallar. Hər biri üçün ayrıca dəyişən lazım deyil.",
+            "An array keeps several values in one variable: names, games, scores. You do not need a separate variable for each.",
+            "Dizi birkaç veriyi tek değişkende tutar: adlar, oyunlar, puanlar. Her biri için ayrı değişken gerekmez.",
+            "المصفوفة تحفظ عدة قيم في متغير واحد: أسماء وألعاب ونقاط. لا حاجة لمتغير لكل واحدة.",
+            "Массив хранит несколько значений в одной переменной: имена, игры, очки. Отдельная переменная на каждое не нужна.",
+          )],
+          code: 'let meyveler = ["Alma", "Armud", "Banan"];\nconsole.log(meyveler);\n// ["Alma", "Armud", "Banan"]',
+        },
+      ],
+    },
+    {
+      id: "push",
+      title: t("push: sona əlavə et", "push: add to the end", "push: sona ekle", "push: أضف في النهاية", "push: добавить в конец"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "push() massivin sonuna element qoyur. Köhnə elementlər silinmir. Bir çağırışda bir neçə element də vermək olur.",
+            "push() puts an item at the end of the array. The old items stay. One call can add several items.",
+            "push() dizinin sonuna öğe koyar. Eski öğeler silinmez. Bir çağrıda birkaç öğe de verilebilir.",
+            "push() يضع عنصراً في نهاية المصفوفة. العناصر القديمة تبقى. يمكن تمرير عدة عناصر في نداء واحد.",
+            "push() кладёт элемент в конец массива. Старые элементы остаются. За один вызов можно добавить несколько.",
+          )],
+          code: 'let oyunlar = ["Minecraft", "Roblox"];\noyunlar.push("GTA", "FIFA");\nconsole.log(oyunlar);\n// ["Minecraft", "Roblox", "GTA", "FIFA"]',
+        },
+      ],
+    },
+    {
+      id: "length",
+      title: t("length və indeks", "length and the index", "length ve indeks", "length والفهرس", "length и индекс"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "length elementlərin sayıdır. Bu metod deyil, ona görə mötərizə yazılmır: meyveler.length. İndeks 0-dan başlayır. Olmayan indeks undefined qaytarır.",
+            "length is the number of items. It is not a method, so there are no parentheses: meyveler.length. The index starts at 0. A missing index returns undefined.",
+            "length öğe sayısıdır. Metot değildir, bu yüzden parantez yazılmaz: meyveler.length. İndeks 0'dan başlar. Olmayan indeks undefined döndürür.",
+            "length عدد العناصر. ليست دالة، لذلك لا تُكتب الأقواس: meyveler.length. الفهرس يبدأ من 0. الفهرس غير الموجود يُرجع undefined.",
+            "length — число элементов. Это не метод, скобки не пишут: meyveler.length. Индекс начинается с 0. Несуществующий индекс возвращает undefined.",
+          )],
+          code: 'let heyvanlar = ["Pişik", "İt"];\nconsole.log(heyvanlar.length); // 2\nheyvanlar.push("Dovşan");\nconsole.log(heyvanlar.length); // 3\nconsole.log(heyvanlar[0]); // Pişik\nconsole.log(heyvanlar[5]); // undefined',
+        },
+      ],
+    },
+    {
+      id: "faq",
+      title: t("Suallar", "Questions", "Sorular", "أسئلة", "Вопросы"),
+      blocks: [
+        {
+          paragraphs: [
+            t("push nə edir? Massivin sonuna yeni element əlavə edir.", "What does push do? It adds a new item at the end of the array.", "push ne yapar? Dizinin sonuna yeni öğe ekler.", "ماذا يفعل push؟ يضيف عنصراً جديداً في نهاية المصفوفة.", "Что делает push? Добавляет новый элемент в конец массива."),
+            t("length() yazmaq olarmı? Xeyr. length xüsusiyyətdir, mötərizəsiz yazılır.", "Can I write length()? No. length is a property, written without parentheses.", "length() yazılır mı? Hayır. length özelliktir, parantezsiz yazılır.", "هل أكتب length()؟ لا. length خاصية وتُكتب بلا أقواس.", "Можно ли писать length()? Нет. length — свойство, без скобок."),
+            t("Birinci element hansı indeksdədir? 0-da. İkinci 1-dədir.", "Which index is the first item? 0. The second is 1.", "İlk öğe hangi indekste? 0'da. İkincisi 1'dedir.", "في أي فهرس العنصر الأول؟ في 0. والثاني في 1.", "На каком индексе первый элемент? На 0. Второй на 1."),
+            t("Olmayan indeks nə verir? undefined. Massiv özü yeni element yaratmır.", "What does a missing index give? undefined. The array does not invent an item.", "Olmayan indeks ne verir? undefined. Dizi kendiliğinden öğe yaratmaz.", "ماذا يعطي فهرس غير موجود؟ undefined. المصفوفة لا تخترع عنصراً.", "Что даёт несуществующий индекс? undefined. Массив сам элемент не создаёт."),
+          ],
+        },
+      ],
+    },
+  ],
+  duyme: [
+    {
+      id: "click",
+      title: t("Düyməyə basanda", "When a button is clicked", "Düğmeye basınca", "عند الضغط على الزر", "Когда нажали кнопку"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "Hadisə istifadəçinin hərəkətidir. Ən çox işlənəni klikdir. onclick sadə nümunə üçündür. Ayrı skriptdə addEventListener daha düzgündür.",
+            "An event is something the user does. The most used one is a click. onclick is fine for a small example. In a separate script, addEventListener is the clearer way.",
+            "Olay kullanıcının hareketidir. En çok kullanılanı tıklamadır. onclick küçük örnek içindir. Ayrı betikte addEventListener daha doğrudur.",
+            "الحدث هو فعل المستخدم. الأكثر استخداماً هو النقر. onclick يكفي لمثال صغير. في سكربت منفصل addEventListener أوضح.",
+            "Событие — это действие пользователя. Чаще всего это клик. onclick годится для короткого примера. В отдельном скрипте яснее addEventListener.",
+          )],
+          code: '<button id="menimDuyme">Bas mənə</button>\n<script>\n  const duyme = document.getElementById("menimDuyme");\n  duyme.addEventListener("click", function () {\n    alert("Düyməyə basdın!");\n  });\n</script>',
+        },
+      ],
+    },
+    {
+      id: "text",
+      title: t("Yazını dəyiş və say", "Change the text and count", "Yazıyı değiştir ve say", "غيّر النص وعدّ", "Меняй текст и считай"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "getElementById elementi id ilə tapır. textContent həmin elementin mətnini dəyişir. Səhifə yenidən yüklənmir.",
+            "getElementById finds an element by its id. textContent changes that element's text. The page does not reload.",
+            "getElementById öğeyi id ile bulur. textContent o öğenin metnini değiştirir. Sayfa yeniden yüklenmez.",
+            "getElementById يجد العنصر بمعرّفه. textContent يغيّر نص ذلك العنصر. الصفحة لا تُعاد تحميلها.",
+            "getElementById находит элемент по id. textContent меняет его текст. Страница не перезагружается.",
+          )],
+          code: 'let say = 0;\nconst sayElementi = document.getElementById("say");\nconst duyme = document.getElementById("artir");\nduyme.addEventListener("click", function () {\n  say = say + 1;\n  sayElementi.textContent = say;\n  if (say >= 5) {\n    document.getElementById("mesaj").textContent = "Sayğac 5-ə çatdı.";\n  }\n});',
+        },
+      ],
+    },
+    {
+      id: "faq",
+      title: t("Suallar", "Questions", "Sorular", "أسئلة", "Вопросы"),
+      blocks: [
+        {
+          paragraphs: [
+            t("onclick nədir? Klik olanda işləyən qısa əmrdir. Kiçik nümunə üçün kifayətdir.", "What is onclick? A short command that runs on a click. Enough for a small example.", "onclick nedir? Tıklayınca çalışan kısa komuttur. Küçük örnek için yeter.", "ما هو onclick؟ أمر قصير يعمل عند النقر. يكفي لمثال صغير.", "Что такое onclick? Короткая команда при клике. Для маленького примера хватает."),
+            t("addEventListener nə gözləyir? Birinci arqument hadisənin adıdır, məsələn click. İkinci funksiyadır.", "What does addEventListener wait for? The first argument is the event name, such as click. The second is a function.", "addEventListener ne bekler? İlk argüman olayın adıdır, örneğin click. İkincisi fonksiyondur.", "ماذا ينتظر addEventListener؟ الوسيط الأول اسم الحدث مثل click. والثاني دالة.", "Чего ждёт addEventListener? Первый аргумент — имя события, например click. Второй — функция."),
+            t("id niyə lazımdır? JavaScript həmin elementi tapmaq üçün. Səhifədə təkrar olmamalıdır.", "Why is an id needed? So JavaScript can find that element. It should not repeat on the page.", "id neden gerekir? JavaScript o öğeyi bulsun diye. Sayfada tekrar etmemelidir.", "لماذا نحتاج id؟ كي يجد جافاسكريبت ذلك العنصر. يجب ألا يتكرر في الصفحة.", "Зачем id? Чтобы JavaScript нашёл этот элемент. На странице он не должен повторяться."),
+            t("textContent nə dəyişir? Elementin görünən mətnini. Səhifəni yeniləmədən.", "What does textContent change? The visible text of the element. Without reloading the page.", "textContent neyi değiştirir? Öğenin görünen metnini. Sayfayı yenilemeden.", "ماذا يغيّر textContent؟ النص الظاهر للعنصر. دون إعادة تحميل الصفحة.", "Что меняет textContent? Видимый текст элемента. Без перезагрузки страницы."),
+          ],
+        },
+      ],
+    },
+  ],
+  undefined: [
+    {
+      id: "var",
+      title: t("Dəyər verilməyən dəyişən", "A variable with no value", "Değeri olmayan değişken", "متغير بلا قيمة", "Переменная без значения"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "undefined həmişə xəta deyil. Dəyişən yaradılıb, amma dəyər verilməyibsə, onun dəyəri undefined olur.",
+            "undefined is not always an error. If a variable was created but never given a value, its value is undefined.",
+            "undefined her zaman hata değildir. Değişken yaratıldı ama değer verilmediyse değeri undefined olur.",
+            "undefined ليس دائماً خطأ. إذا أُنشئ متغير ولم تُعطَ له قيمة فقيمته undefined.",
+            "undefined — не всегда ошибка. Если переменную создали и не дали значение, её значение undefined.",
+          )],
+          code: 'let ad;\nconsole.log(ad); // undefined\nad = "Murad";\nconsole.log(ad); // Murad',
+        },
+      ],
+    },
+    {
+      id: "missing",
+      title: t("Olmayan indeks və xüsusiyyət", "A missing index or property", "Olmayan indeks ve özellik", "فهرس أو خاصية غير موجودة", "Нет индекса или свойства"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "Massivdə olmayan indeks və obyektdə olmayan xüsusiyyət də undefined qaytarır. Bu, məlumatın olmadığını deyir, proqramı özü dayandırmır.",
+            "A missing array index and a missing object property also return undefined. That says the data is not there. It does not stop the program by itself.",
+            "Dizide olmayan indeks ve nesnede olmayan özellik de undefined döndürür. Bu, verinin olmadığını söyler, programı kendiliğinden durdurmaz.",
+            "الفهرس غير الموجود في المصفوفة والخاصية غير الموجودة في الكائن يُرجعان undefined أيضاً. هذا يقول إن البيانات غير موجودة ولا يوقف البرنامج وحده.",
+            "Несуществующий индекс массива и отсутствующее свойство объекта тоже возвращают undefined. Это говорит, что данных нет, и само по себе программу не останавливает.",
+          )],
+          code: 'let meyveler = ["Alma", "Armud", "Banan"];\nconsole.log(meyveler[5]); // undefined\nlet telebe = { ad: "Aysel", yas: 20 };\nconsole.log(telebe.soyad); // undefined',
+        },
+      ],
+    },
+    {
+      id: "null",
+      title: t("null və TypeError", "null and TypeError", "null ve TypeError", "null وTypeError", "null и TypeError"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "null proqramçının bilərəkdən qoyduğu boş dəyərdir. undefined isə dəyərin hələ verilmədiyini göstərir. undefined olan dəyərdən xüsusiyyət oxumaq TypeError yaradır. Əvvəl yoxla.",
+            "null is an empty value the programmer set on purpose. undefined means a value was never given. Reading a property from undefined throws a TypeError. Check first.",
+            "null programcının bilerek koyduğu boş değerdir. undefined ise değerin henüz verilmediğini gösterir. undefined olan değerden özellik okumak TypeError üretir. Önce kontrol et.",
+            "null قيمة فارغة وضعها المبرمج عمداً. undefined يعني أن القيمة لم تُعطَ بعد. قراءة خاصية من undefined تُنتج TypeError. افحص أولاً.",
+            "null — пустое значение, которое программист поставил намеренно. undefined значит, что значение ещё не задавали. Чтение свойства у undefined даёт TypeError. Сначала проверьте.",
+          )],
+          code: 'let secilmis = null;\nlet telebe;\nif (telebe !== undefined) {\n  console.log(telebe.ad);\n} else {\n  console.log("Tələbə məlumatı yoxdur.");\n}',
+        },
+      ],
+    },
+    {
+      id: "faq",
+      title: t("Suallar", "Questions", "Sorular", "أسئلة", "Вопросы"),
+      blocks: [
+        {
+          paragraphs: [
+            t("undefined xətadırmı? Özü xəta deyil. Dəyər verilməyib və ya axtarılan məlumat yoxdur.", "Is undefined an error? By itself, no. A value was not given, or the data you asked for is missing.", "undefined hata mıdır? Kendi başına değil. Değer verilmemiştir veya aranan veri yoktur.", "هل undefined خطأ؟ بذاته لا. القيمة لم تُعطَ أو البيانات المطلوبة غير موجودة.", "undefined — это ошибка? Само по себе нет. Значение не задано или запрошенных данных нет."),
+            t("null ilə fərqi nədir? null qəsdən boş qoyulub. undefined isə təyin olunmayıb.", "How is it different from null? null was left empty on purpose. undefined was never set.", "null ile farkı nedir? null bilerek boş bırakılmıştır. undefined ise atanmamıştır.", "ما الفرق عن null؟ null تُرك فارغاً عمداً. undefined لم يُعيَّن.", "Чем отличается от null? null оставили пустым нарочно. undefined не задавали."),
+            t("Nə vaxt TypeError olur? undefined dəyərdən nöqtə ilə xüsusiyyət oxuyanda. Məsələn telebe.ad, telebe isə undefined-dirsə.", "When does a TypeError happen? When you read a property from undefined with a dot. For example telebe.ad while telebe is undefined.", "TypeError ne zaman olur? undefined değerden noktayla özellik okununca. Örneğin telebe undefined iken telebe.ad.", "متى يحدث TypeError؟ عند قراءة خاصية من undefined بنقطة. مثلاً telebe.ad بينما telebe هي undefined.", "Когда бывает TypeError? Когда через точку читают свойство у undefined. Например telebe.ad, если telebe равен undefined."),
+            t("Necə yoxlamaq olar? if (ad === undefined). Dəyər varsa ad !== undefined.", "How do I check? if (ad === undefined). If there is a value, ad !== undefined.", "Nasıl kontrol edilir? if (ad === undefined). Değer varsa ad !== undefined.", "كيف أفحص؟ if (ad === undefined). إذا وُجدت قيمة فـ ad !== undefined.", "Как проверить? if (ad === undefined). Если значение есть, ad !== undefined."),
+          ],
+        },
+      ],
+    },
+  ],
 };
+
