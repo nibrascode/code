@@ -10,7 +10,7 @@ import { HeroMark } from "@/components/hero-mark";
 import { faqPath } from "@/lib/faq";
 import { homePath, localeHref } from "@/lib/locale-path";
 import { SEARCH, searchPath } from "@/lib/search-pages";
-import { toolsPath, TOOLS_PAGE } from "@/lib/tools";
+import { toolsPath } from "@/lib/tools";
 import { useI18n } from "@/lib/i18n-context";
 import { statusText, type StudioAppRow } from "@/lib/studio";
 import { loadStudioBundle } from "@/lib/studio.functions";
@@ -20,6 +20,17 @@ export const Route = createFileRoute("/")({
   loader: () => loadStudioBundle(),
   component: Home,
 });
+
+const BAR: Record<"dev" | "apk" | "tools" | "pdf" | "qr" | "erase" | "image" | "calc", Record<Lang, string>> = {
+  dev: { az: "Dev hazırla", en: "Make code", tr: "Dev hazırla", ar: "جهّز كوداً", ru: "Сделать код" },
+  apk: { az: "Apk hazırla", en: "Make an APK", tr: "Apk hazırla", ar: "اصنع APK", ru: "Собрать APK" },
+  tools: { az: "Xidmət hazırla", en: "Make a tool", tr: "Hizmet hazırla", ar: "جهّز خدمة", ru: "Сделать сервис" },
+  pdf: { az: "Pdf hazırla", en: "Make a PDF", tr: "Pdf hazırla", ar: "جهّز PDF", ru: "Сделать PDF" },
+  qr: { az: "Qr hazırla", en: "Make a QR", tr: "Qr hazırla", ar: "جهّز QR", ru: "Сделать QR" },
+  erase: { az: "Fon sil", en: "Remove background", tr: "Arka plan sil", ar: "احذف الخلفية", ru: "Удалить фон" },
+  image: { az: "Şəkil sıx", en: "Compress photo", tr: "Foto sıkıştır", ar: "ضغط الصورة", ru: "Сжать фото" },
+  calc: { az: "Hesabla", en: "Calculate", tr: "Hesapla", ar: "احسب", ru: "Посчитай" },
+};
 
 const STATUS: Partial<Record<"nibras-arabic" | "nibras-pdf" | "nibras-qr" | "nibras-plans" | "nibras-docs", TKey>> = {
   "nibras-pdf": "soon",
@@ -307,7 +318,7 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
                   strokeLinejoin="round"
                 />
               </svg>
-              <span>Nibras Dev</span>
+              <span>{BAR.dev[lang]}</span>
             </a>
             <a
               className="nx-apk-bar"
@@ -326,7 +337,7 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
                   d="M12 11.2a.8.8 0 0 1 .8.8v2.1h2.1a.8.8 0 0 1 0 1.6h-2.1V18a.8.8 0 0 1-1.6 0v-2.3H8.9a.8.8 0 0 1 0-1.6h2.3V12a.8.8 0 0 1 .8-.8Z"
                 />
               </svg>
-              <span>Nibras Apk</span>
+              <span>{BAR.apk[lang]}</span>
             </a>
             <a className="nx-apk-bar" href={toolsPath(lang)}>
               <svg className="nx-apk nx-tools" viewBox="0 0 24 24" aria-hidden="true">
@@ -336,33 +347,33 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
                 />
                 <path fill="currentColor" d="M4 18.2h8.5v1.6H4z" />
               </svg>
-              <span>{TOOLS_PAGE.heading[lang]}</span>
+              <span>{BAR.tools[lang]}</span>
             </a>
             <a className="nx-ai-bar nx-qr-bar" href={localeHref(lang, "/pdf")}>
               <img src="/apps/nibras-pdf.jpg" alt="" width={36} height={36} />
               <span className="nx-qr-text">
-                <b>Nibras PDF</b>
+                <b>{BAR.pdf[lang]}</b>
               </span>
               <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
             </a>
             <a className="nx-ai-bar nx-qr-bar" href={localeHref(lang, "/qr")}>
               <img src="/apps/nibras-qr-v2.jpg" alt="" width={36} height={36} />
               <span className="nx-qr-text">
-                <b>Nibras QR</b>
+                <b>{BAR.qr[lang]}</b>
               </span>
               <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
             </a>
             <a className="nx-ai-bar nx-qr-bar" href={localeHref(lang, "/erase")}>
               <img src="/apps/nibras-erase.png" alt="" width={36} height={36} />
               <span className="nx-qr-text">
-                <b>Nibras Erase</b>
+                <b>{BAR.erase[lang]}</b>
               </span>
               <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
             </a>
             <a className="nx-ai-bar nx-qr-bar" href={localeHref(lang, "/image")}>
               <img src="/apps/nibras-image.png" alt="" width={36} height={36} />
               <span className="nx-qr-text">
-                <b>{lang === "az" ? "Şəkil sıx" : lang === "tr" ? "Foto sıkıştır" : lang === "ar" ? "ضغط الصورة" : lang === "ru" ? "Сжать фото" : "Compress photo"}</b>
+                <b>{BAR.image[lang]}</b>
               </span>
               <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
             </a>
@@ -372,7 +383,7 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
                 <path fill="currentColor" d="M7 5.5h10v3.2H7zM7.2 11h2.3v2.2H7.2zm3.6 0h2.3v2.2h-2.3zm3.7 0H17v2.2h-2.5zM7.2 14.6h2.3V16.8H7.2zm3.6 0h2.3V16.8h-2.3zm3.7 0H17V16.8h-2.5z" />
               </svg>
               <span className="nx-qr-text">
-                <b>ProCalc</b>
+                <b>{BAR.calc[lang]}</b>
               </span>
               <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
             </a>
