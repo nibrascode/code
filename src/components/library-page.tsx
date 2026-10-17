@@ -16,6 +16,7 @@ import { libItems, libParagraphs, savedLib, type LibGroup } from "@/lib/library-
 import { articlesForTopic, findResourceTopic } from "@/lib/resource-topics";
 import type { StudioPrivacyRow } from "@/lib/studio";
 import { useI18n } from "@/lib/i18n-context";
+import { localeHref } from "@/lib/locale-path";
 import type { Lang } from "@/lib/i18n";
 
 const APK_LESSON_FILES = ["capacitor", "termux", "revenuecat"] as const;
@@ -282,7 +283,7 @@ export function LibraryIndex({
               <li key={step.slug}>
                 <a
                   className={step.slug === "html-css" ? "step-html" : step.slug === "python" ? "step-py" : "step-ai"}
-                  href={step.slug === "ai" ? "/ai" : programmingLocalePath(lang, step.slug)}
+                  href={step.slug === "ai" ? localeHref(lang, "/ai") : programmingLocalePath(lang, step.slug)}
                 >
                   <i>{index + 1}</i>
                   <span className="step-copy">

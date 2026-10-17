@@ -296,7 +296,7 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
             </a>
           </div>
           <div className="nx-bars">
-            <a className="nx-ai-bar" href="/ai">
+            <a className="nx-ai-bar" href={localeHref(lang, "/ai")}>
               <img src="/nibras-ai.png" alt="" />
               <span>Nibras AI</span>
             </a>

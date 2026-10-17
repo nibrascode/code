@@ -89,7 +89,7 @@ export function PdfPage({ tool }: { tool: ToolId | null }) {
           <span className="pdf-badge"><Sparkles className="size-3.5" />{badges[0]}</span>
           <span className="pdf-badge"><Globe2 className="size-3.5" />{badges[1]}</span>
           <span className="pdf-badge"><ShieldCheck className="size-3.5" />{badges[2]}</span>
-          <a href="/ai" className="pdf-badge transition hover:text-fg"><Cpu className="size-3.5" />{ASK_AI[lang]}</a>
+          <a href={localeHref(lang, "/ai")} className="pdf-badge transition hover:text-fg"><Cpu className="size-3.5" />{ASK_AI[lang]}</a>
         </div>
       </header>
       {mounted ? (
