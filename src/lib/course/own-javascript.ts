@@ -993,6 +993,54 @@ export const OWN_JS: OwnPageContent = {
       ],
     },
   ],
+  termux: [
+    {
+      id: "tools",
+      title: t("Termux-da alətlər", "Tools in Termux", "Termux'ta araçlar", "الأدوات في Termux", "Инструменты в Termux"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "Kompüter olmadan telefonda debug APK yığmaq olar. Bu, mağaza faylı deyil. Play imzalı AAB istəyir. app-debug.apk yalnız öz telefonuna quraşdırıb yoxlamaq üçündür. Əvvəl Node.js, git və Java lazımdır. Java yoxdursa Gradle dayanır.",
+            "You can build a debug APK on a phone without a computer. It is not the store file. Play wants a signed AAB. app-debug.apk is only for installing on your own phone and testing. First you need Node.js, git and Java. If Java is missing, Gradle stops.",
+            "Bilgisayar olmadan telefonda debug APK derlemek olur. Bu, mağaza dosyası değildir. Play imzalı AAB ister. app-debug.apk yalnız kendi telefonuna kurup denemek içindir. Önce Node.js, git ve Java gerekir. Java yoksa Gradle durur.",
+            "يمكن بناء APK تجريبي على الهاتف بلا حاسوب. هو ليس ملف المتجر. Play يريد AAB موقّعاً. app-debug.apk فقط لتثبيته على هاتفك وتجربته. أولاً تحتاج Node.js وgit وJava. إذا غابت Java توقف Gradle.",
+            "Отладочный APK можно собрать на телефоне без компьютера. Это не файл магазина. Play хочет подписанный AAB. app-debug.apk только чтобы поставить на свой телефон и проверить. Сначала нужны Node.js, git и Java. Если Java нет, Gradle останавливается.",
+          )],
+          code: 'pkg update && pkg upgrade -y\npkg install nodejs git openjdk-17 -y\njava -version',
+        },
+      ],
+    },
+    {
+      id: "build",
+      title: t("Layihə və APK", "The project and the APK", "Proje ve APK", "المشروع وAPK", "Проект и APK"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "Layihəni klonla, paketləri yüklə, Capacitor yoxdursa əlavə et. npm run build veb faylları yığır. npx cap sync onları Android qovluğuna keçirir. Sonra android içində ./gradlew assembleDebug. İlk dəfə Gradle SDK-nı internetdən yükləyir, bir neçə dəqiqə çəkə bilər. BUILD SUCCESSFUL yazılandan sonra fayl buradadır: android/app/build/outputs/apk/debug/app-debug.apk",
+            "Clone the project, install the packages, and add Capacitor if it is missing. npm run build packs the web files. npx cap sync moves them into the Android folder. Then, inside android, run ./gradlew assembleDebug. The first time, Gradle downloads the SDK from the internet. It can take several minutes. After BUILD SUCCESSFUL the file is here: android/app/build/outputs/apk/debug/app-debug.apk",
+            "Projeyi klonla, paketleri yükle, Capacitor yoksa ekle. npm run build web dosyalarını derler. npx cap sync onları Android klasörüne geçirir. Sonra android içinde ./gradlew assembleDebug. İlk seferde Gradle SDK'yı internetten indirir, birkaç dakika sürebilir. BUILD SUCCESSFUL yazdıktan sonra dosya buradadır: android/app/build/outputs/apk/debug/app-debug.apk",
+            "استنسخ المشروع وثبّت الحزم وأضف Capacitor إذا غاب. npm run build يجمع ملفات الويب. npx cap sync ينقلها إلى مجلد Android. ثم داخل android نفّذ ./gradlew assembleDebug. في المرة الأولى ينزّل Gradle حزمة SDK من الإنترنت وقد يستغرق دقائق. بعد BUILD SUCCESSFUL الملف هنا: android/app/build/outputs/apk/debug/app-debug.apk",
+            "Клонируй проект, поставь пакеты, добавь Capacitor, если его нет. npm run build собирает веб-файлы. npx cap sync переносит их в папку Android. Потом внутри android запусти ./gradlew assembleDebug. В первый раз Gradle качает SDK из интернета, это может занять несколько минут. После BUILD SUCCESSFUL файл здесь: android/app/build/outputs/apk/debug/app-debug.apk",
+          )],
+          code: 'git clone https://github.com/istifadeci/proyekt-adi.git\ncd proyekt-adi\nnpm install\nnpm install @capacitor/core @capacitor/cli @capacitor/android\nnpx cap init\nnpx cap add android\nnpm run build\nnpx cap sync\ncd android\n./gradlew assembleDebug',
+        },
+      ],
+    },
+    {
+      id: "faq",
+      title: t("Suallar", "Questions", "Sorular", "أسئلة", "Вопросы"),
+      blocks: [
+        {
+          paragraphs: [
+            t("Java not found nə deməkdir? JAVA_HOME yolu yoxdur. Termux-da default-jvm yolunu export et və əmri yenidən işlət.", "What does Java not found mean? The JAVA_HOME path is missing. In Termux, export the default-jvm path and run the command again.", "Java not found ne demek? JAVA_HOME yolu yok. Termux'ta default-jvm yolunu export et ve komutu yeniden çalıştır.", "ماذا يعني Java not found؟ مسار JAVA_HOME غائب. في Termux صدّر مسار default-jvm وأعد الأمر.", "Что значит Java not found? Нет пути JAVA_HOME. В Termux экспортируй путь default-jvm и запусти команду снова."),
+            t("Build niyə yarımçıq düşür? İlk Gradle böyük fayllar yükləyir. İnternet qopsa proses dayanır. Şəbəkə sabit olmalıdır.", "Why does the build stop halfway? The first Gradle downloads large files. If the internet drops, the process stops. The network must stay up.", "Build neden yarım kalır? İlk Gradle büyük dosyalar indirir. İnternet koparsa süreç durur. Ağ sabit olmalıdır.", "لماذا يتوقف البناء في المنتصف؟ أول Gradle ينزّل ملفات كبيرة. إذا انقطع الإنترنت توقف العمل. يجب أن تبقى الشبكة ثابتة.", "Почему сборка обрывается? Первый Gradle качает большие файлы. Если интернет пропадёт, процесс остановится. Сеть должна держаться."),
+            t("Yaddaş niyə dolur? SDK və Gradle təxminən 1–2 GB tutur. Boş yer azdırsa yığılma bitmir. Bu APK Play-ə yüklənmir.", "Why does storage fill up? The SDK and Gradle take about 1–2 GB. If free space is low, the build does not finish. This APK is not uploaded to Play.", "Depolama neden dolar? SDK ve Gradle yaklaşık 1–2 GB tutar. Boş yer azsa derleme bitmez. Bu APK Play'e yüklenmez.", "لماذا تمتلئ الذاكرة؟ SDK وGradle يأخذان نحو 1–2 غيغابايت. إذا قل الفراغ لا يكتمل البناء. هذا APK لا يُرفع إلى Play.", "Почему память кончается? SDK и Gradle занимают около 1–2 ГБ. Если свободного места мало, сборка не кончится. Этот APK в Play не загружается."),
+          ],
+          code: 'export JAVA_HOME=/data/data/com.termux/files/usr/lib/jvm/default-jvm',
+        },
+      ],
+    },
+  ],
   duyme: [
     {
       id: "click",
