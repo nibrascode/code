@@ -13,6 +13,7 @@ import { SEARCH, searchPath } from "@/lib/search-pages";
 import { toolsPath, TOOLS_PAGE } from "@/lib/tools";
 import { useI18n } from "@/lib/i18n-context";
 import { statusText, type StudioAppRow } from "@/lib/studio";
+import { appStoreLinks, STUDIO_APPS } from "@/lib/apps";
 import { loadStudioBundle } from "@/lib/studio.functions";
 import type { Lang, TKey } from "@/lib/i18n";
 
@@ -33,7 +34,6 @@ const BAR: Record<"dev" | "apk" | "pdf" | "qr" | "erase" | "image" | "calc", Rec
 
 const STATUS: Partial<Record<"nibras-arabic" | "nibras-pdf" | "nibras-qr" | "nibras-plans" | "nibras-docs", TKey>> = {
   "nibras-pdf": "soon",
-  "nibras-qr": "soon",
   "nibras-plans": "soon",
   "nibras-docs": "soon",
 };
@@ -403,24 +403,37 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
               STATUS[card.slug] ? t(STATUS[card.slug]!) : null,
               labels,
             );
+            const built = STUDIO_APPS.find((item) => item.slug === card.slug);
+            const stores = built ? appStoreLinks(built, live) : [];
             return (
-              <a key={card.slug} href={localeHref(lang, `/apps/${card.slug}`)} className="nx-card">
-                <span className="nx-card-top">
-                  <span className="nx-ico">
-                    <img src={live?.icon_url || card.icon} alt="" />
+              <div key={card.slug} className="nx-card-slot">
+                <a href={localeHref(lang, `/apps/${card.slug}`)} className="nx-card">
+                  <span className="nx-card-top">
+                    <span className="nx-ico">
+                      <img src={live?.icon_url || card.icon} alt="" />
+                    </span>
+                    <span>
+                      {badge ? <em className="nx-status">{badge}</em> : null}
+                      <b>{card.name}</b>
+                    </span>
                   </span>
-                  <span>
-                    {badge ? <em className="nx-status">{badge}</em> : null}
-                    <b>{card.name}</b>
+                  <span className="nx-chips">
+                    {card.chips.map((chip) => (
+                      <em key={chip}>{t(chip)}</em>
+                    ))}
                   </span>
-                </span>
-                <span className="nx-chips">
-                  {card.chips.map((chip) => (
-                    <em key={chip}>{t(chip)}</em>
-                  ))}
-                </span>
-                <ArrowUpRight className="nx-go" />
-              </a>
+                  <ArrowUpRight className="nx-go" />
+                </a>
+                {stores.length ? (
+                  <span className="nx-card-stores">
+                    {stores.map((store) => (
+                      <a key={store.id} href={store.href} target="_blank" rel="noopener noreferrer">
+                        {store.label}
+                      </a>
+                    ))}
+                  </span>
+                ) : null}
+              </div>
             );
           })}
           {extras.map((row) => (

@@ -8,6 +8,7 @@ export type StudioApp = {
   icon: string;
   /** Paste the Play Store listing URL here when it is ready. */
   playStoreUrl: string | null;
+  huaweiStoreUrl?: string | null;
   leadKey: TKey;
   bodyKey: TKey;
   features: readonly TKey[];
@@ -20,7 +21,8 @@ export const STUDIO_APPS: StudioApp[] = [
     slug: "nibras-arabic",
     name: "Nibras Arabic",
     icon: "/apps/nibras-arabic.jpg",
-    playStoreUrl: null,
+    playStoreUrl: "https://play.google.com/store/apps/details?id=com.nibrasarabic.app",
+    huaweiStoreUrl: "https://urldra.cloud.huawei.com/CkyddvOyXK",
     leadKey: "arabic_lead",
     bodyKey: "arabic_body",
     features: ["arabic_f1", "arabic_f2", "arabic_f3", "arabic_f4", "arabic_f5", "arabic_f6"],
@@ -76,4 +78,16 @@ export const STUDIO_APPS: StudioApp[] = [
 
 export function getAppBySlug(slug: string): StudioApp | undefined {
   return STUDIO_APPS.find((app) => app.slug === slug);
+}
+
+export function appStoreLinks(
+  app: Pick<StudioApp, "playStoreUrl" | "huaweiStoreUrl">,
+  live?: { play_url?: string; huawei_url?: string } | null,
+) {
+  const play = (live?.play_url || app.playStoreUrl || "").trim();
+  const huawei = (live?.huawei_url || app.huaweiStoreUrl || "").trim();
+  return [
+    play ? { id: "play", label: "Google Play", href: play } : null,
+    huawei ? { id: "huawei", label: "Huawei", href: huawei } : null,
+  ].filter((item): item is { id: string; label: string; href: string } => Boolean(item));
 }

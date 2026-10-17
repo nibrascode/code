@@ -5839,6 +5839,30 @@ body.is-home .noise {
   }
 }
 
+.nx-card-slot {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.nx-card-stores {
+  display: flex;
+  gap: 6px;
+}
+
+.nx-card-stores a {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 6px;
+  border-radius: 12px;
+  background: rgb(255 255 255 / 0.06);
+  color: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+}
+
 .nx-card {
   position: relative;
   display: flex;
@@ -5896,6 +5920,12 @@ body.is-home .noise {
   flex-direction: column;
   gap: 12px;
   margin-top: 28px;
+}
+
+.app-row-slot {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .app-row {

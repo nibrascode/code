@@ -1,6 +1,6 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
-import { STUDIO_APPS, type AppSlug } from "@/lib/apps";
+import { STUDIO_APPS, appStoreLinks, type AppSlug } from "@/lib/apps";
 import { useI18n } from "@/lib/i18n-context";
 import type { TKey } from "@/lib/i18n";
 import { localeHref } from "@/lib/locale-path";
@@ -22,7 +22,6 @@ const ORDER: AppSlug[] = ["nibras-arabic", "nibras-pdf", "nibras-qr", "nibras-do
 
 const STATUS: Partial<Record<AppSlug, TKey>> = {
   "nibras-pdf": "soon",
-  "nibras-qr": "soon",
   "nibras-plans": "soon",
   "nibras-docs": "soon",
 };
@@ -54,16 +53,28 @@ export function AppsIndex({ apps }: { apps: readonly StudioAppRow[] | null | und
             STATUS[slug] ? t(STATUS[slug]!) : null,
             labels,
           );
+          const stores = appStoreLinks(app, live);
           return (
-            <a key={slug} href={localeHref(lang, `/apps/${slug}`)} className="app-row">
-              <img src={live?.icon_url || app.icon} alt="" />
-              <span>
-                {badge ? <em>{badge}</em> : null}
-                <b>{app.name}</b>
-                <p>{t(app.leadKey)}</p>
-              </span>
-              <ArrowUpRight className="rtl-flip size-4" />
-            </a>
+            <div key={slug} className="app-row-slot">
+              <a href={localeHref(lang, `/apps/${slug}`)} className="app-row">
+                <img src={live?.icon_url || app.icon} alt="" />
+                <span>
+                  {badge ? <em>{badge}</em> : null}
+                  <b>{app.name}</b>
+                  <p>{t(app.leadKey)}</p>
+                </span>
+                <ArrowUpRight className="rtl-flip size-4" />
+              </a>
+              {stores.length ? (
+                <span className="nx-card-stores">
+                  {stores.map((store) => (
+                    <a key={store.id} href={store.href} target="_blank" rel="noopener noreferrer">
+                      {store.label}
+                    </a>
+                  ))}
+                </span>
+              ) : null}
+            </div>
           );
         })}
         {extras.map((row) => {

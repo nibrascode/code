@@ -101,7 +101,7 @@ const az = {
   download_title: "Mağazalar",
   download_cta: "Google Play-dən yüklə",
   download_wait: "Yükləmə linki və əlavə məlumatlar daha sonra bu səhifəyə əlavə edilə bilər.",
-  download_ready_d: "Tətbiqi rəsmi Google Play səhifəsindən yükləyin.",
+  download_ready_d: "Tətbiqi rəsmi mağaza səhifəsindən yükləyin.",
   download_android: "Android",
   arabic_blurb:
     "Azərbaycan dilini bilən biri üçün. Şüar: Ərəb dili - daha yaxın. Feillər, isimlər, dialoqlar, testlər, kartlar və yazı məşqi.",
@@ -485,7 +485,7 @@ const dictionaries = {
     download_title: "Stores",
     download_cta: "Get it on Google Play",
     download_wait: "The download link and extra details can be added to this page later.",
-    download_ready_d: "Download the app from its official Google Play listing.",
+    download_ready_d: "Download the app from its official store page.",
     download_android: "Android",
     arabic_blurb:
       "For someone who knows Azerbaijani. Slogan: Ərəb dili - daha yaxın. Verbs, nouns, dialogues, tests, cards, and writing practice.",
@@ -864,7 +864,7 @@ const dictionaries = {
     download_title: "المتاجر",
     download_cta: "حمّل من Google Play",
     download_wait: "يمكن إضافة رابط التنزيل والمعلومات لاحقًا في هذه الصفحة.",
-    download_ready_d: "حمّل التطبيق من صفحة Google Play الرسمية.",
+    download_ready_d: "حمّل التطبيق من صفحة المتجر الرسمية.",
     download_android: "أندرويد",
     arabic_blurb:
       "لمن يعرف الأذربيجانية. الشعار: Ərəb dili - daha yaxın. أفعال وأسماء وحوارات واختبارات وبطاقات وتدريب كتابة.",
@@ -1237,7 +1237,7 @@ const dictionaries = {
     download_title: "Магазины",
     download_cta: "Скачать в Google Play",
     download_wait: "Ссылку для загрузки и дополнительные сведения можно добавить на эту страницу позже.",
-    download_ready_d: "Скачайте приложение с официальной страницы Google Play.",
+    download_ready_d: "Скачайте приложение с официальной страницы магазина.",
     download_android: "Android",
     arabic_blurb:
       "Для знающего азербайджанский. Девиз: Ərəb dili - daha yaxın. Глаголы, имена, диалоги, тесты, карточки и письмо.",
@@ -1565,6 +1565,7 @@ export const translations: Record<Lang, Record<TKey, string>> = {
     code_level_medium: "Orta",
     code_level_large: "Büyük",
     download_title: "Mağazalar",
+    download_ready_d: "Uygulamayı resmi mağaza sayfasından indirin.",
     soon: "Yakında",
     nx_kicker: "Uygulamalar ve hizmetler / gerçek fayda",
     nx_lead:

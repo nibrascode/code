@@ -8,7 +8,6 @@ import { statusText, type StudioAppRow } from "@/lib/studio";
 
 const STATUS: Partial<Record<AppSlug, TKey>> = {
   "nibras-pdf": "soon",
-  "nibras-qr": "soon",
   "nibras-plans": "soon",
   "nibras-docs": "soon",
 };

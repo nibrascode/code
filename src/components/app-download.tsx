@@ -47,7 +47,7 @@ export function AppDownload({ app, live }: { app: StudioApp; live?: StudioAppRow
   const { t } = useI18n();
   const stores = storeLinks({
     play_url: live?.play_url || app.playStoreUrl || "",
-    huawei_url: live?.huawei_url,
+    huawei_url: live?.huawei_url || app.huaweiStoreUrl || "",
     appstore_url: live?.appstore_url,
     galaxy_url: live?.galaxy_url,
     xiaomi_url: live?.xiaomi_url,
