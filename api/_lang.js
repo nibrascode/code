@@ -19,7 +19,7 @@ export function queryLang(text) {
   const q = t.toLowerCase();
   const w = q.replace(/[^\p{L}0-9\s'-]/gu, " ");
   const has = (words) => new RegExp("(?<![\\p{L}])(?:" + words + ")(?![\\p{L}])", "u").test(w);
-  const trWords = "nasıl|nedir|yapabilir|lütfen|uygulama|oluştur|oluştur\\p{L}*|yap|yapar mısın|bana|için|değil|merhaba|teşekkür|göster|şifre|karekod|kare kod|üret|olustur|hazırlar mısın";
+  const trWords = "sıkıştır|birleştir|döndür|dönüştür|çıkar|çıkart|oku|imzala|tara|kamerayla|görsel\\p{L}*|sayfa\\p{L}*|belge\\p{L}*|metni|metin|kaldır|koy|parola|filigran|toplu|işle|önizleme|nasıl|nedir|yapabilir|lütfen|uygulama|oluştur|oluştur\\p{L}*|yap|yapar mısın|bana|için|değil|merhaba|teşekkür|göster|şifre|karekod|kare kod|üret|olustur|hazırlar mısın";
   const azWords = "yarat|yaradın|yarada|hazırla|hazirla|düzəlt|duzelt|nədir|necə|nece|haqqında|haqqinda|lazımdır|lazimdir|mənə|sayt|üçün|ucun|göstər|goster|olunur|edin";
   const enWords = "make|made|making|create|created|generate|generated|build|how|what|please|show|can|you|the|my|for|with|code|remove|removal|background|photo|image|picture|free|download|scan|scanner|link|text|phone|email|card|business|are|me";
   if (has(azWords)) return "az";

@@ -2091,6 +2091,7 @@
       if (hello && hello.parentNode) hello.remove();
       const el = document.createElement("div");
       el.className = "msg " + kind;
+      el.setAttribute("dir", "auto");
       if (kind === "b" && !kind.includes("err")) fillBubble(el, text);
       else el.textContent = text;
       if (imageUrl) {
