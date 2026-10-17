@@ -869,6 +869,68 @@ export const OWN_JS: OwnPageContent = {
       ],
     },
   ],
+  capacitor: [
+    {
+      id: "wrap",
+      title: t("Capacitor nə edir", "What Capacitor does", "Capacitor ne yapar", "ماذا يفعل Capacitor", "Что делает Capacitor"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "React Native və Expo tətbiqi başdan yazır. Böyük saytı başdan yazmaq uzun çəkir. Capacitor hazır saytı Android qabığının içinə, WebView-ə qoyur. Saytın ünvanını açırsa, səhifə saytla birlikdə dəyişir. Qabığın özü dəyişəndə isə mağazaya yeni AAB yükləmək lazımdır. Öz-özünə mağaza yenilənmir.",
+            "React Native and Expo rewrite the app from scratch. Rewriting a large site takes a long time. Capacitor puts the existing site inside an Android shell, in a WebView. If it opens the site's address, the page changes together with the site. When the shell itself changes, a new AAB must be uploaded to the store. The store does not update by itself.",
+            "React Native ve Expo uygulamayı baştan yazar. Büyük siteyi baştan yazmak uzun sürer. Capacitor hazır siteyi Android kabuğunun içine, WebView'e koyar. Sitenin adresini açıyorsa sayfa siteyle birlikte değişir. Kabuğun kendisi değişince mağazaya yeni AAB yüklemek gerekir. Mağaza kendiliğinden yenilenmez.",
+            "React Native وExpo يعيدان كتابة التطبيق من الصفر. إعادة كتابة موقع كبير تستغرق وقتاً. Capacitor يضع الموقع الجاهز داخل غلاف أندرويد، في WebView. إذا فتح عنوان الموقع تغيّرت الصفحة مع الموقع. حين يتغير الغلاف نفسه يجب رفع AAB جديد إلى المتجر. المتجر لا يتحدث وحده.",
+            "React Native и Expo пишут приложение заново. Большой сайт заново писать долго. Capacitor кладёт готовый сайт внутрь оболочки Android, в WebView. Если он открывает адрес сайта, страница меняется вместе с сайтом. Когда меняется сама оболочка, в магазин нужно загрузить новый AAB. Магазин сам не обновляется.",
+          )],
+        },
+      ],
+    },
+    {
+      id: "commands",
+      title: t("Əmrlər", "The commands", "Komutlar", "الأوامر", "Команды"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "Layihə qovluğunda Node.js olmalıdır. init ad və paket identifikatoru soruşur. copy build nəticəsini Android qovluğuna keçirir. open Android Studio-nu açır. Orada Build, Generate Signed Bundle ilə .aab yığılır. Play köhnə .apk-ni qəbul etmir.",
+            "The project folder needs Node.js. init asks for a name and a package id. copy moves the build result into the Android folder. open starts Android Studio. There, Build, Generate Signed Bundle produces the .aab. Play does not accept the old .apk.",
+            "Proje klasöründe Node.js olmalıdır. init ad ve paket kimliği sorar. copy build sonucunu Android klasörüne geçirir. open Android Studio'yu açar. Orada Build, Generate Signed Bundle ile .aab derlenir. Play eski .apk'yi kabul etmez.",
+            "مجلد المشروع يحتاج Node.js. init يسأل عن الاسم ومعرّف الحزمة. copy ينقل ناتج البناء إلى مجلد Android. open يفتح Android Studio. هناك Build ثم Generate Signed Bundle يُنتج .aab. Play لا يقبل .apk القديم.",
+            "В папке проекта нужен Node.js. init спрашивает имя и идентификатор пакета. copy переносит результат сборки в папку Android. open открывает Android Studio. Там Build, Generate Signed Bundle собирает .aab. Play старый .apk не принимает.",
+          )],
+          code: 'npm install @capacitor/core @capacitor/cli\nnpx cap init\nnpm install @capacitor/android\nnpx cap add android\nnpm run build\nnpx cap copy\nnpx cap open android',
+        },
+      ],
+    },
+    {
+      id: "play",
+      title: t("Play və qapalı test", "Play and closed testing", "Play ve kapalı test", "Play والاختبار المغلق", "Play и закрытый тест"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "play.google.com/console ünvanında hesab bir dəfəlik ödənişlə açılır və şəxsiyyət yoxlanır. Yeni şəxsi hesab tətbiqi birbaşa hamıya aça bilmir. Əvvəl qapalı test var: ən azı 20 fərqli insan, 14 gün. Öz Google qrupunu yarat və həmin insanları ora əlavə et. Eyni telefon və saxta hesab sayılmır, müddət sıfırlana bilər. 14 gün bitəndə Production düyməsi özü açılmaya da bilər. Console-dakı şərti oxu.",
+            "At play.google.com/console the account is opened with a one-time fee and an identity check. A new personal account cannot open the app to everyone at once. First there is closed testing: at least 20 different people, for 14 days. Create your own Google Group and add those people there. The same phone and fake accounts do not count, and the period can reset. When 14 days end, the Production button may still not open by itself. Read the condition in the Console.",
+            "play.google.com/console adresinde hesap bir kerelik ücretle açılır ve kimlik kontrol edilir. Yeni kişisel hesap uygulamayı doğrudan herkese açamaz. Önce kapalı test vardır: en az 20 farklı kişi, 14 gün. Kendi Google Grubunu yarat ve o kişileri oraya ekle. Aynı telefon ve sahte hesap sayılmaz, süre sıfırlanabilir. 14 gün bitince Production düğmesi kendiliğinden açılmayabilir. Console'daki koşulu oku.",
+            "في play.google.com/console يُفتح الحساب برسوم لمرة واحدة وفحص هوية. الحساب الشخصي الجديد لا يستطيع فتح التطبيق للجميع مباشرة. أولاً هناك اختبار مغلق: 20 شخصاً مختلفاً على الأقل، لمدة 14 يوماً. أنشئ مجموعة Google الخاصة بك وأضف أولئك الأشخاص. الهاتف نفسه والحسابات الوهمية لا تُحسب، وقد تُصفّر المدة. حين تنتهي 14 يوماً قد لا يفتح زر Production وحده. اقرأ الشرط في Console.",
+            "На play.google.com/console аккаунт открывается разовой оплатой и проверкой личности. Новый личный аккаунт не может сразу открыть приложение всем. Сначала закрытый тест: минимум 20 разных людей, 14 дней. Создай свою группу Google и добавь туда этих людей. Один и тот же телефон и фальшивые аккаунты не считаются, срок может обнулиться. Когда 14 дней кончатся, кнопка Production может сама не открыться. Прочитай условие в Console.",
+          )],
+        },
+      ],
+    },
+    {
+      id: "faq",
+      title: t("Suallar", "Questions", "Sorular", "أسئلة", "Вопросы"),
+      blocks: [
+        {
+          paragraphs: [
+            t("Sayt görünür, internet yoxdur? AndroidManifest.xml içinə internet icazəsini yaz.", "The site is visible but there is no internet? Write the internet permission into AndroidManifest.xml.", "Site görünüyor, internet yok mu? AndroidManifest.xml içine internet iznini yaz.", "الموقع ظاهر ولا إنترنت؟ اكتب إذن الإنترنت داخل AndroidManifest.xml.", "Сайт виден, а интернета нет? Напиши разрешение интернета в AndroidManifest.xml."),
+            t("AAB niyə imzalanmalıdır? Keystore şifrəsini itirsən, həmin tətbiqə yeniləmə yükləyə bilməzsən. Faylı və şifrəni saxla.", "Why must the AAB be signed? If you lose the keystore password, you cannot upload an update to that app. Keep the file and the password.", "AAB neden imzalanmalıdır? Keystore şifresini kaybedersen o uygulamaya güncelleme yükleyemezsin. Dosyayı ve şifreyi sakla.", "لماذا يجب توقيع AAB؟ إذا ضاع رمز keystore فلن تستطيع رفع تحديث لذلك التطبيق. احفظ الملف والرمز.", "Зачем подписывать AAB? Если потеряешь пароль keystore, обновление в это приложение не загрузишь. Храни файл и пароль."),
+            t("20 testçi niyə sayılmır? Eyni cihaz və eyni hesab bir nəfərdir. Google real girişi yoxlayır.", "Why do 20 testers not count? The same device and the same account are one person. Google checks a real sign-in.", "20 testçi neden sayılmıyor? Aynı cihaz ve aynı hesap bir kişidir. Google gerçek girişi kontrol eder.", "لماذا لا يُحسب 20 مختبراً؟ الجهاز نفسه والحساب نفسه شخص واحد. Google يفحص دخولاً حقيقياً.", "Почему 20 тестировщиков не считаются? Одно устройство и один аккаунт — это один человек. Google проверяет реальный вход."),
+          ],
+          code: '<uses-permission android:name="android.permission.INTERNET" />',
+        },
+      ],
+    },
+  ],
   duyme: [
     {
       id: "click",
