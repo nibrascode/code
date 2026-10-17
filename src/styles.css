@@ -7176,12 +7176,18 @@ body.is-planner .site-backdrop {
 /* ana səhifə: 5-ci kart (Nibras QR) — 4 kartın altında, tam en */
 .nx-bars > .nx-qr-bar { justify-content: flex-start; }
 .nx-bars > .nx-qr-bar:last-child { grid-column: 1 / -1; }
-.nx-qr-bar img {
+.nx-qr-bar img,
+.nx-job {
   width: 36px;
   height: 36px;
+  padding: 6px;
   border-radius: 10px;
-  filter: drop-shadow(0 0 8px rgb(90 160 255 / 0.7));
+  flex: 0 0 auto;
 }
+.nx-job-pdf { color: #ffc1c1; background: rgb(72 22 30 / 0.95); }
+.nx-job-qr { color: #c5dcff; background: rgb(16 36 72 / 0.95); }
+.nx-job-erase { color: #ffe0a8; background: rgb(64 40 12 / 0.95); }
+.nx-job-image { color: #e0d0ff; background: rgb(36 24 68 / 0.95); }
 .nx-bars > .nx-qr-bar > .nx-qr-text { display: flex; flex: 1; flex-direction: column; gap: 1px; white-space: normal; font-size: inherit; letter-spacing: normal; }
 .nx-qr-text b { font-size: 15px; font-weight: 750; letter-spacing: -0.03em; }
 .nx-qr-text small { font-size: 12px; font-weight: 500; color: rgb(244 247 255 / 0.65); line-height: 1.3; }

@@ -326,51 +326,57 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
               rel="noopener noreferrer"
             >
               <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  fill="currentColor"
-                  d="M7 3.5h7.2L19 8.2V20a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 6 20V5a1.5 1.5 0 0 1 1-1.5Z"
-                />
-                <path fill="#05060c" d="M14 3.8V8h4.1" />
-                <path
-                  fill="#05060c"
-                  d="M12 11.2a.8.8 0 0 1 .8.8v2.1h2.1a.8.8 0 0 1 0 1.6h-2.1V18a.8.8 0 0 1-1.6 0v-2.3H8.9a.8.8 0 0 1 0-1.6h2.3V12a.8.8 0 0 1 .8-.8Z"
-                />
+                <rect x="7" y="2.4" width="10" height="19.2" rx="2" fill="none" stroke="currentColor" strokeWidth="1.6" />
+                <path d="M10 5.2h4M10.2 18.4h3.6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                <path d="M12 8.2v4.2M10.2 10.4 12 12.4l1.8-2" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
               <span>{BAR.apk[lang]}</span>
             </a>
             <a className="nx-apk-bar" href={toolsPath(lang)}>
               <svg className="nx-apk nx-tools" viewBox="0 0 24 24" aria-hidden="true">
-                <path
-                  fill="currentColor"
-                  d="M14.2 3.2a2 2 0 0 1 2.8 0l1.2 1.2a2 2 0 0 1 0 2.8l-.7.7-4-4 .7-.7Zm-1.8 2.2 4 4-6.8 6.8H5.6v-4l6.8-6.8Z"
-                />
-                <path fill="currentColor" d="M4 18.2h8.5v1.6H4z" />
+                <path d="M14.7 5.4a3.2 3.2 0 0 0-4.4 4.3L5.2 15a1.7 1.7 0 0 0 2.4 2.4l5.1-5.1a3.2 3.2 0 0 0 4.4-4.3l-2.2 2.2-1.6-1.6 2.2-2.2Z" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
               </svg>
               <span>{TOOLS_PAGE.heading[lang]}</span>
             </a>
             <a className="nx-ai-bar nx-qr-bar" href={localeHref(lang, "/pdf")}>
-              <img src="/apps/nibras-pdf.jpg" alt="" width={36} height={36} />
+              <svg className="nx-job nx-job-pdf" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7 3.2h6.6L19 8.4V20a1.4 1.4 0 0 1-1.4 1.4H7.4A1.4 1.4 0 0 1 6 20V4.6A1.4 1.4 0 0 1 7.4 3.2H7Z" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+                <path d="M13.4 3.4V8H18" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+                <path d="M8.2 12.6h1.8a1.3 1.3 0 0 1 0 2.6H8.2v2.4M12.2 17.6v-5h1.6a1.5 1.5 0 0 1 0 3h-1.6M16.1 12.6H18.4M16.1 15h1.6M16.1 17.6v-5" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
               <span className="nx-qr-text">
                 <b>{BAR.pdf[lang]}</b>
               </span>
               <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
             </a>
             <a className="nx-ai-bar nx-qr-bar" href={localeHref(lang, "/qr")}>
-              <img src="/apps/nibras-qr-v2.jpg" alt="" width={36} height={36} />
+              <svg className="nx-job nx-job-qr" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 4h6.2v6.2H4zM13.8 4H20v6.2h-6.2zM4 13.8h6.2V20H4z" fill="none" stroke="currentColor" strokeWidth="1.6" />
+                <path d="M6.1 6.1h1.9v1.9H6.1zM15.9 6.1h1.9v1.9h-1.9zM6.1 16h1.9v1.9H6.1zM14.2 14.2h1.7v1.7h-1.7zM17.6 14.2H20v1.7h-2.4zM14.2 17.6h1.7V20h-1.7zM17.6 17.6H20V20h-2.4z" fill="currentColor" />
+              </svg>
               <span className="nx-qr-text">
                 <b>{BAR.qr[lang]}</b>
               </span>
               <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
             </a>
             <a className="nx-ai-bar nx-qr-bar" href={localeHref(lang, "/erase")}>
-              <img src="/apps/nibras-erase.png" alt="" width={36} height={36} />
+              <svg className="nx-job nx-job-erase" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="4" width="12.5" height="11" rx="1.6" fill="none" stroke="currentColor" strokeWidth="1.6" />
+                <circle cx="6.6" cy="7.6" r="1.1" fill="currentColor" />
+                <path d="M3.6 13.4 7.4 10l2.6 2 2-1.4 2.6 2.5" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="m14.6 12.6 4.8 4.8a1.5 1.5 0 0 1 0 2.1l-.3.3a1.5 1.5 0 0 1-2.1 0l-4.8-4.8" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+              </svg>
               <span className="nx-qr-text">
                 <b>{BAR.erase[lang]}</b>
               </span>
               <ArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
             </a>
             <a className="nx-ai-bar nx-qr-bar" href={localeHref(lang, "/image")}>
-              <img src="/apps/nibras-image.png" alt="" width={36} height={36} />
+              <svg className="nx-job nx-job-image" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3.5" y="5" width="17" height="14" rx="2" fill="none" stroke="currentColor" strokeWidth="1.6" />
+                <path d="M7.2 15.4 10.4 12l2.2 1.8 2.8-2.6" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M8.2 8.4h2.4M8.2 8.4v2.4M15.8 15.6h-2.4M15.8 15.6v-2.4" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              </svg>
               <span className="nx-qr-text">
                 <b>{BAR.image[lang]}</b>
               </span>
