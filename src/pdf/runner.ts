@@ -10,7 +10,7 @@ import * as eng from "./lib/engine";
 import { closePdf, openPdf, renderPageToCanvas } from "./lib/pdfjs";
 import { createDocxFromText, docxToText } from "./lib/docx";
 import { extractTextSmart } from "./lib/extract";
-import { detectOcrLangs, ocrDetailed, ocrLangForSite, preprocessForOcr, type OcrLang } from "./lib/ocr";
+import { detectOcrLangs, ocrDetailed, ocrLangForSite, preprocessForOcr, type OcrConfig, type OcrLang } from "./lib/ocr";
 
 export type RunResult = { name: string; blob: Blob; kind: "pdf" | "image" | "zip" | "docx" | "text"; text?: string; note?: string; extra?: { label: string; name: string; blob: Blob }[] };
 export type Params = { range?: string; angle?: number; format?: "png" | "jpeg"; mode?: "light" | "strong"; text?: string; position?: string; forceOcr?: boolean };
@@ -460,8 +460,32 @@ export async function handle(o: HandleOptions): Promise<RunResult[]> {
   }
 }
 
+/** OCR one image file with the same pipeline as the "ocr" tool (also used by the accuracy benchmark). */
+/** Debug/test helper: the image exactly as the OCR engine sees it (PNG data URL) plus detected line bands. */
+export async function ocrPrepare(file: File, config: Partial<OcrConfig> = {}) {
+  const bmp = await createImageBitmap(file);
+  const c = document.createElement("canvas");
+  c.width = bmp.width; c.height = bmp.height;
+  const cx = c.getContext("2d", { willReadFrequently: true })!;
+  cx.fillStyle = "#fff"; cx.fillRect(0, 0, c.width, c.height); cx.drawImage(bmp, 0, 0); bmp.close();
+  const pre = preprocessForOcr(c, true, config);
+  return { url: pre.toDataURL("image/png"), w: pre.width, h: pre.height };
+}
+
+export async function ocrFile(file: File, o: { uiLang?: Lang; langs?: OcrLang[]; config?: Partial<OcrConfig> } = {}) {
+  const bmp = await createImageBitmap(file);
+  const c = document.createElement("canvas");
+  c.width = bmp.width; c.height = bmp.height;
+  const cx = c.getContext("2d", { willReadFrequently: true })!;
+  cx.fillStyle = "#fff"; cx.fillRect(0, 0, c.width, c.height); cx.drawImage(bmp, 0, 0); bmp.close();
+  const pre = preprocessForOcr(c, true, o.config);
+  const langs = o.langs ?? (await detectOcrLangs(pre, ocrLangForSite(o.uiLang ?? "az")));
+  const [res] = await ocrDetailed([pre], langs, { config: o.config });
+  return { text: res.text, confidence: res.confidence, langs, mode: res.mode };
+}
+
 export const accepts = (f: File) => kindOf(f) !== "other";
 export const fileKind = kindOf;
-const api = { version: 1, handle, accepts, fileKind };
+const api = { version: 1, handle, accepts, fileKind, ocrFile, ocrPrepare };
 (globalThis as unknown as { NibrasPdf?: typeof api }).NibrasPdf = api;
 export default api;

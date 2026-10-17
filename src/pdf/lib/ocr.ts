@@ -1,5 +1,6 @@
 import type { Lang } from "@/lib/i18n";
 import { cleanExtractedText } from "./arabicText";
+import { fromGray, flatten, paperBox, lineBands, median3, medianBandHeight, otsu, sauvola, toGray, type Gray } from "./ocr-pre";
 
 export type OcrLang = "eng" | "rus" | "ara" | "tur" | "aze";
 export const OCR_LANGS: { id: OcrLang; label: string }[] = [
@@ -13,10 +14,76 @@ export const ocrLangForSite = (lang: Lang): OcrLang => ({ az: "aze", en: "eng", 
 
 const BASE = "/pdf-assets/ocr";
 
-export type OcrPage = { text: string; confidence: number };
+export type OcrPage = { text: string; confidence: number; mode?: string };
 
-/** Grayscale, contrast stretch and deskew: makes scans and photos read noticeably better. */
-export function preprocessForOcr(src: HTMLCanvasElement, deskew = true): HTMLCanvasElement {
+export type OcrConfig = {
+  /** legacy: gray + contrast; flat: illumination flattening; sauvola: flattening + adaptive binarization */
+  pre: "legacy" | "flat" | "sauvola";
+  denoise: boolean;
+  /** page: whole page (columns split) ; lines: every text line on its own (single-line mode) ; auto: try both, keep the better */
+  mode: "page" | "lines" | "auto";
+  /** target median text-line height in pixels after normalization */
+  target: number;
+  psm: number;
+  /** use the larger "best" Arabic model (loaded on demand) */
+  best: boolean;
+};
+export const DEFAULT_CONFIG: OcrConfig = { pre: "flat", denoise: true, mode: "auto", target: 64, psm: 3, best: false };
+
+function rotateCanvas(c: HTMLCanvasElement, deg: number): HTMLCanvasElement {
+  const rot = document.createElement("canvas");
+  rot.width = c.width; rot.height = c.height;
+  const r = rot.getContext("2d")!;
+  r.fillStyle = "#fff";
+  r.fillRect(0, 0, c.width, c.height);
+  r.translate(c.width / 2, c.height / 2);
+  r.rotate((-deg * Math.PI) / 180);
+  r.drawImage(c, -c.width / 2, -c.height / 2);
+  return rot;
+}
+
+/** Prepare a page/photo for OCR: flatten light, denoise, deskew, normalize text size, optional adaptive binarization. */
+export function preprocessForOcr(src: HTMLCanvasElement, deskew = true, cfg: Partial<OcrConfig> = {}): HTMLCanvasElement {
+  const o = { ...DEFAULT_CONFIG, ...cfg };
+  if (o.pre === "legacy") return legacyPreprocess(src, deskew);
+  let g = toGray(src);
+  const box = paperBox(g);
+  if (box) {
+    src = crop(src, box.x, box.y, box.w, box.h);
+    g = toGray(src);
+  }
+  let c = src;
+  if (deskew) {
+    const ang = estimateSkew(c);
+    if (Math.abs(ang) >= 0.3) { c = rotateCanvas(c, ang); g = toGray(c); }
+  }
+  // normalize the size of the text: Tesseract is most accurate when a text line is ~60-80px tall
+  const bands = lineBands(flatten(g), otsu(flatten(g)));
+  const H = medianBandHeight(bands);
+  let k = H > 6 ? o.target / H : 1;
+  k = Math.max(0.5, Math.min(4, k));
+  k = Math.min(k, Math.sqrt(22_000_000 / (g.w * g.h)), 4600 / Math.max(g.w, g.h));
+  if (Math.abs(k - 1) > 0.06) {
+    const s = document.createElement("canvas");
+    s.width = Math.max(1, Math.round(g.w * k)); s.height = Math.max(1, Math.round(g.h * k));
+    const sc = s.getContext("2d")!;
+    sc.imageSmoothingQuality = "high";
+    sc.drawImage(c, 0, 0, s.width, s.height);
+    c = s;
+    g = toGray(c);
+  }
+  g = flatten(g);
+  if (o.denoise && g.w * g.h < 12_000_000) g = median3(g);
+  c = fromGray(g);
+  if (o.pre === "sauvola") {
+    const hh = Math.max(20, Math.round(H * k));
+    const win = Math.round(hh * 0.9) | 1;
+    return fromGray(sauvola(g, win, 0.2));
+  }
+  return c;
+}
+
+function legacyPreprocess(src: HTMLCanvasElement, deskew = true): HTMLCanvasElement {
   const w = src.width;
   const h = src.height;
   const ctx = src.getContext("2d", { willReadFrequently: true })!;
@@ -42,20 +109,10 @@ export function preprocessForOcr(src: HTMLCanvasElement, deskew = true): HTMLCan
   }
   const out = document.createElement("canvas");
   out.width = w; out.height = h;
-  const octx = out.getContext("2d")!;
-  octx.putImageData(img, 0, 0);
+  out.getContext("2d")!.putImageData(img, 0, 0);
   if (!deskew) return out;
   const angle = estimateSkew(out);
-  if (Math.abs(angle) < 0.3) return out;
-  const rot = document.createElement("canvas");
-  rot.width = w; rot.height = h;
-  const rctx = rot.getContext("2d")!;
-  rctx.fillStyle = "#fff";
-  rctx.fillRect(0, 0, w, h);
-  rctx.translate(w / 2, h / 2);
-  rctx.rotate((-angle * Math.PI) / 180);
-  rctx.drawImage(out, -w / 2, -h / 2);
-  return rot;
+  return Math.abs(angle) < 0.3 ? out : rotateCanvas(out, angle);
 }
 
 /** Skew angle in degrees (positive = text runs clockwise down), via projection-profile variance. */
@@ -89,24 +146,64 @@ export function estimateSkew(c: HTMLCanvasElement): number {
   return best;
 }
 
-/** Choose OCR languages from a quick pass over a sample page. */
+type TessWorker = {
+  recognize: (img: never) => Promise<{ data: { text: string; confidence: number } }>;
+  setParameters: (p: Record<string, string>) => Promise<unknown>;
+  reinitialize: (langs: string | string[], oem?: number) => Promise<unknown>;
+  terminate: () => Promise<unknown>;
+};
+
+const langDir = (langs: OcrLang[], best: boolean) => `${BASE}/${best && langs.includes("ara") ? "best" : "lang"}`;
+
+async function makeWorker(langs: OcrLang[], best: boolean, logger?: (m: { status: string; progress: number }) => void): Promise<TessWorker> {
+  const { createWorker } = await import("tesseract.js");
+  return (await createWorker(langs, 1, {
+    workerPath: `${location.origin}${BASE}/worker.min.js`,
+    corePath: `${location.origin}${BASE}/core.wasm.js`,
+    langPath: `${location.origin}${langDir(langs, best)}`,
+    workerBlobURL: false,
+    gzip: true,
+    ...(logger ? { logger } : {}),
+  } as never)) as unknown as TessWorker;
+}
+
+/** Choose OCR languages: read a sample with each script family and keep the one the engine is most sure about. */
 export async function detectOcrLangs(sample: HTMLCanvasElement, fallback: OcrLang): Promise<OcrLang[]> {
-  const small = document.createElement("canvas");
-  const k = Math.min(1, 1400 / Math.max(sample.width, sample.height));
-  small.width = Math.round(sample.width * k); small.height = Math.round(sample.height * k);
-  small.getContext("2d")!.drawImage(sample, 0, 0, small.width, small.height);
-  const [res] = await ocrDetailed([small], ["eng", "rus", "ara"]);
-  const t = res?.text ?? "";
-  const ar = (t.match(/[\u0600-\u06FF]/g) || []).length;
-  const cy = (t.match(/[\u0400-\u04FF]/g) || []).length;
-  const la = (t.match(/[A-Za-zƏəĞğİıÖöŞşÜüÇç]/g) || []).length;
-  const all = ar + cy + la || 1;
-  const latin: OcrLang[] = /[əƏ]/.test(t) ? ["aze", "eng"] : (t.match(/[ğĞıİşŞ]/g) || []).length >= 2 ? ["tur", "eng"] : ["eng"];
-  const parts: [number, OcrLang[]][] = [[ar / all, ["ara"]], [cy / all, ["rus"]], [la / all, latin]];
-  const picked = parts.filter(([share]) => share >= 0.12).sort((x, y) => y[0] - x[0]).flatMap(([, l]) => l);
-  const uniq = [...new Set(picked)];
-  if (!uniq.length) return fallback === "eng" ? ["eng"] : [fallback, "eng"];
-  return uniq.length === 1 && uniq[0] === "ara" ? ["ara"] : uniq;
+  const top = Math.min(sample.height, Math.max(220, Math.round(sample.height * 0.7)));
+  const part = crop(sample, 0, 0, sample.width, top);
+  const cands: OcrLang[][] = [["ara"], ["aze", "tur", "eng"], ["rus", "eng"]];
+  const worker = await makeWorker(cands[0], false);
+  let best: { langs: OcrLang[]; conf: number; text: string } | null = null;
+  let ara = { letters: 0, conf: 0, share: 0 };
+  let lat = 0;
+  let latConf = 0;
+  try {
+    for (let i = 0; i < cands.length; i++) {
+      const c = cands[i];
+      if (i > 0) await worker.reinitialize(c.join("+"));
+      await worker.setParameters({ tessedit_pageseg_mode: "3", user_defined_dpi: "300" });
+      const r = await worker.recognize(part as never);
+      const letters = (r.data.text.match(/\p{L}/gu) || []).length;
+      const flat = r.data.text.replace(/\s+/g, "");
+      const clean = flat.length ? (flat.match(/[\p{L}\p{N}.,;:!?'"()-]/gu) || []).length / flat.length : 0;
+      const arShare = (r.data.text.match(/[\u0621-\u064A]/g) || []).length / Math.max(1, letters);
+      const conf = letters < 8 || (i > 0 && clean < 0.88) || (i === 0 && arShare < 0.5) ? 0 : r.data.confidence;
+      if (i === 0) ara = { letters: (r.data.text.match(/[\u0621-\u064A]/g) || []).length, conf: r.data.confidence, share: arShare };
+      if (i === 1) { lat = letters; latConf = r.data.confidence; }
+      if (!best || conf > best.conf) best = { langs: c, conf, text: r.data.text };
+      if (i <= 1 && conf >= (i === 0 ? 78 : 80)) break;
+    }
+  } finally {
+    await worker.terminate();
+  }
+  // a page the Arabic model can read letter by letter is Arabic, even when another model is "confident" about junk
+  if (best && best.langs[0] !== "ara" && ara.letters >= 12 && ara.conf >= 35 && ara.share >= 0.6 && ara.letters >= 25 && ara.conf >= latConf - 10) return ["ara"];
+  if (!best || best.conf === 0) return fallback === "eng" ? ["eng"] : [fallback, "eng"];
+  if (best.langs[0] !== "aze") return best.langs[0] === "ara" ? ["ara"] : best.langs;
+  const t = best.text;
+  if (/[əƏ]/.test(t)) return ["aze", "eng"];
+  if ((t.match(/[ğĞıİşŞ]/g) || []).length >= 1) return ["tur", "eng"];
+  return ["eng"];
 }
 
 const dehyphenate = (t: string) => t.replace(/(\p{L}{2})[-\u00AD]\n(\p{Ll})/gu, "$1$2");
@@ -144,13 +241,19 @@ export function splitColumns(c: HTMLCanvasElement, rtl: boolean): { img: HTMLCan
   while (bottom > top && row[bottom] <= 3) bottom--;
   const contentH = bottom - top + 1;
   if (contentH < h * 0.08) return null;
+  // a column layout needs enough lines: a short paragraph's aligned word gaps are not a gutter
+  let nLines = 0;
+  for (let y = top; y <= bottom; ) {
+    if (row[y] > 3) { nLines++; let e = y; while (e <= bottom && row[e] > 3) e++; y = e; } else y++;
+  }
+  if (nLines < 8) return null;
   const lim = Math.max(3, contentH * 0.04);
   let best: [number, number] | null = null;
   for (let x = Math.floor(w * 0.2); x < w * 0.8; ) {
     if (col[x] <= lim) {
       let e = x;
       while (e < w * 0.8 && col[e] <= lim) e++;
-      if (e - x >= w * 0.012 && e - x <= w * 0.15 && (!best || e - x > best[1] - best[0])) best = [x, e];
+      if (e - x >= w * 0.02 && e - x <= w * 0.15 && (!best || e - x > best[1] - best[0])) best = [x, e];
       x = e;
     } else x++;
   }
@@ -212,25 +315,68 @@ export function splitColumns(c: HTMLCanvasElement, rtl: boolean): { img: HTMLCan
   return out;
 }
 
+/** Every text line on its own (single-line mode): keeps large titles, and stops stray layout guesses from dropping or merging lines. */
+function binarize(c: HTMLCanvasElement): HTMLCanvasElement {
+  const g = toGray(c);
+  const H = medianBandHeight(lineBands(g, otsu(g))) || 40;
+  return fromGray(sauvola(g, Math.round(H * 0.9) | 1, 0.2));
+}
+
+async function recognizeLines(worker: TessWorker, img: HTMLCanvasElement, tick: (f: number) => void): Promise<{ text: string; conf: number; weight: number }> {
+  const g = toGray(img);
+  const bands = lineBands(g, otsu(g));
+  if (!bands.length) return { text: "", conf: 0, weight: 0 };
+  const H = medianBandHeight(bands);
+  const pad = Math.round(H * 0.35);
+  await worker.setParameters({ tessedit_pageseg_mode: "7" });
+  const lines: string[] = [];
+  let cw = 0, ct = 0, prevEnd = -1;
+  for (let i = 0; i < bands.length; i++) {
+    const b = bands[i];
+    const c = crop(img, 0, b.y0 - pad, img.width, b.y1 - b.y0 + pad * 2);
+    const r = await worker.recognize(c as never);
+    tick((i + 1) / bands.length);
+    const tx = r.data.text.replace(/\s+/g, " ").trim();
+    if (!tx) continue;
+    if (prevEnd >= 0 && b.y0 - prevEnd > H * 1.1) lines.push("");
+    lines.push(tx);
+    prevEnd = b.y1;
+    cw += r.data.confidence * tx.length; ct += tx.length;
+  }
+  return { text: lines.join("\n"), conf: ct ? cw / ct : 0, weight: ct };
+}
+
+async function recognizeBlocks(worker: TessWorker, img: HTMLCanvasElement, rtl: boolean, cfg: OcrConfig, tick: (f: number) => void): Promise<{ text: string; conf: number; weight: number }> {
+  const parts = splitColumns(img, rtl) ?? [{ img, join: "\n\n" as const }];
+  let text = "";
+  let cw = 0, ct = 0;
+  for (let j = 0; j < parts.length; j++) {
+    let tx: string, conf: number;
+    if (cfg.mode === "lines") {
+      const r = await recognizeLines(worker, parts[j].img, (f) => tick((j + f) / parts.length));
+      tx = r.text; conf = r.conf;
+    } else {
+      await worker.setParameters({ tessedit_pageseg_mode: String(cfg.psm) });
+      const r = await worker.recognize(parts[j].img as never);
+      tick((j + 1) / parts.length);
+      tx = r.data.text.trim(); conf = r.data.confidence;
+    }
+    tx = tx.trim();
+    if (tx) { text += (text ? parts[j - 1]?.join ?? "\n" : "") + tx; cw += conf * tx.length; ct += tx.length; }
+  }
+  return { text, conf: ct ? cw / ct : 0, weight: ct };
+}
+
 export async function ocrDetailed(
   sources: OcrSource[],
   langs: OcrLang[],
-  opts: { onProgress?: (done: number, total: number, fraction: number) => void; shouldCancel?: () => boolean; columns?: boolean } = {},
+  opts: { onProgress?: (done: number, total: number, fraction: number) => void; shouldCancel?: () => boolean; columns?: boolean; config?: Partial<OcrConfig> } = {},
 ): Promise<OcrPage[]> {
-  const { createWorker } = await import("tesseract.js");
+  const cfg: OcrConfig = { ...DEFAULT_CONFIG, ...opts.config };
   let current = 0;
-  let sub = 0;
-  let subN = 1;
-  const worker = await createWorker(langs, 1, {
-    workerPath: `${location.origin}${BASE}/worker.min.js`,
-    corePath: `${location.origin}${BASE}/core.wasm.js`,
-    langPath: `${location.origin}${BASE}/lang`,
-    workerBlobURL: false,
-    gzip: true,
-    logger: (m: { status: string; progress: number }) => {
-      if (m.status === "recognizing text") opts.onProgress?.(current, sources.length, (sub + m.progress) / subN);
-    },
-  } as never);
+  let frac = 0;
+  const worker = await makeWorker(langs, cfg.best);
+  await worker.setParameters({ preserve_interword_spaces: "1", user_defined_dpi: "300" });
   const out: OcrPage[] = [];
   const rtl = langs[0] === "ara";
   try {
@@ -240,23 +386,47 @@ export async function ocrDetailed(
       opts.onProgress?.(i, sources.length, 0);
       const s = sources[i];
       const src: Src = typeof s === "function" ? await s() : s;
-      const parts = opts.columns !== false && src instanceof HTMLCanvasElement ? splitColumns(src, rtl) : null;
-      if (!parts) {
-        sub = 0; subN = 1;
-        const res = await worker.recognize(src as never);
-        out.push({ text: dehyphenate(cleanExtractedText(res.data.text)), confidence: Math.round(res.data.confidence) });
-      } else {
-        subN = parts.length;
-        let text = "";
-        let cw = 0, ct = 0;
-        for (let j = 0; j < parts.length; j++) {
-          sub = j;
-          const res = await worker.recognize(parts[j].img as never);
-          const tx = res.data.text.trim();
-          if (tx) { text += (text ? parts[j - 1]?.join ?? "\n" : "") + tx; const wt = tx.length; cw += res.data.confidence * wt; ct += wt; }
+      const tick = (f: number) => { frac = f; opts.onProgress?.(current, sources.length, frac); };
+      type R = { text: string; conf: number; weight: number };
+      const score = (r: R) => (r.weight * Math.max(0, r.conf - 40)) / 60;
+      let r: R;
+      let mode: string = cfg.mode;
+      if (!(src instanceof HTMLCanvasElement)) {
+        await worker.setParameters({ tessedit_pageseg_mode: String(cfg.psm) });
+        const x = await worker.recognize(src as never);
+        r = { text: x.data.text, conf: x.data.confidence, weight: x.data.text.length };
+      } else if (cfg.mode === "auto") {
+        // several settings, keep the one with the most confidently read text
+        const tries: { r: R; mode: string; img: HTMLCanvasElement }[] = [];
+        const run = async (img: HTMLCanvasElement, m: "page" | "lines", f0: number, f1: number) => {
+          const rr = await recognizeBlocks(worker, img, rtl, { ...cfg, mode: m }, (f) => tick(f0 + f * (f1 - f0)));
+          tries.push({ r: rr, mode: m + (img === src ? "" : "+bin"), img });
+        };
+        await run(src, "page", 0, 0.3);
+        await run(src, "lines", 0.3, 0.6);
+        let top = tries.reduce((a, b) => (score(b.r) > score(a.r) ? b : a));
+        if (top.r.conf < 72) {
+          const bin = binarize(src);
+          await run(bin, "page", 0.6, 0.8);
+          await run(bin, "lines", 0.8, 0.95);
+          top = tries.reduce((a, b) => (score(b.r) > score(a.r) ? b : a));
         }
-        out.push({ text: dehyphenate(cleanExtractedText(text)), confidence: ct ? Math.round(cw / ct) : 0 });
+        // Arabic with Latin words / digits (e-mail, URLs, brands): re-read with the English model added
+        if (rtl && !langs.includes("eng") && /[A-Za-z@]{2,}|\d[\d\s.,:/-]{3,}|[©»«*#<>{}\[\]]\S*[A-Za-z0-9]/.test(top.r.text)) {
+          await worker.reinitialize(`${langs.join("+")}+eng`);
+          await worker.setParameters({ preserve_interword_spaces: "1", user_defined_dpi: "300" });
+          const m2 = top.mode.startsWith("lines") ? "lines" : "page";
+          const rr = await recognizeBlocks(worker, top.img, rtl, { ...cfg, mode: m2 }, () => {});
+          await worker.reinitialize(langs.join("+"));
+          await worker.setParameters({ preserve_interword_spaces: "1", user_defined_dpi: "300" });
+          if (score(rr) > score(top.r) * 1.02) top = { r: rr, mode: top.mode + "+eng", img: top.img };
+        }
+        r = top.r;
+        mode = top.mode;
+      } else {
+        r = await recognizeBlocks(worker, src, rtl, cfg, tick);
       }
+      out.push({ text: dehyphenate(cleanExtractedText(r.text)), confidence: Math.round(r.conf), mode });
     }
   } finally {
     await worker.terminate();

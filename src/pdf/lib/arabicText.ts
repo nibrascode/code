@@ -38,6 +38,10 @@ const tidyArabicLine = (line: string) => line
   // Alef wasla is a Quranic spelling of a plain alef.
   .replace(/\u0671/g, '\u0627')
   .replace(/[ \t\u00A0]+/g, ' ')
+  // Latin punctuation right after an Arabic word is Arabic punctuation (OCR reads ، ؛ ؟ as , ; ?).
+  .replace(/(?<=[\u0621-\u064A])\s*,/g, '،')
+  .replace(/(?<=[\u0621-\u064A])\s*;/g, '؛')
+  .replace(/(?<=[\u0621-\u064A])\s*\?/g, '؟')
   // No space before Arabic/Latin punctuation, one space after it.
   .replace(/ +([،؛؟!:.,;?)\]»])/g, '$1')
   .replace(/([(\[«]) +/g, '$1')
