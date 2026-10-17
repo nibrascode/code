@@ -4,7 +4,7 @@ import type { Lang } from "@/lib/i18n";
 export type L5 = Record<Lang, string>;
 export const l5 = (az: string, en: string, tr: string, ar: string, ru: string): L5 => ({ az, en, tr, ar, ru });
 
-export type CourseKind = "python" | "html";
+export type CourseKind = "python" | "html" | "javascript" | "css" | "sql";
 export type SourceId = "own" | "book";
 
 export type CoursePage = {
@@ -56,6 +56,27 @@ export const HUBS: Record<CourseKind, { slug: string; title: L5; description: L5
       "هناك قسمان: صفحات أسئلة وأجوبة وفصول دروس متسلسلة. كتبها Nibras Code كلها وهي متاحة بخمس لغات.",
       "Два раздела: страницы «вопрос — ответ» и последовательные главы уроков. Всё написано Nibras Code и доступно на 5 языках.",
     ),
+  },
+  javascript: {
+    slug: "javascript-kurs",
+    title: l5("JavaScript dərsləri: sıfırdan öyrən", "JavaScript lessons: learn from scratch", "JavaScript dersleri: sıfırdan öğren", "دروس جافاسكريبت: تعلّم من الصفر", "Уроки JavaScript: учимся с нуля"),
+    description: l5("JavaScript-ə console.log ilə başla, sonra if, for və funksiya yaz.", "Start JavaScript with console.log, then write if, for and a function.", "JavaScript'e console.log ile başla, sonra if, for ve fonksiyon yaz.", "ابدأ جافاسكريبت بـ console.log ثم اكتب if وfor ودالة.", "Начните JavaScript с console.log, затем напишите if, for и функцию."),
+    keywords: l5("JavaScript dərsləri, console.log, JavaScript if for", "JavaScript lessons, console.log, JavaScript if for", "JavaScript dersleri, console.log, JavaScript if for", "دروس جافاسكريبت, console.log, if for", "уроки JavaScript, console.log, if for"),
+    intro: l5("Qısa dərslər: ilk sətir, sonra şərt, dövr və funksiya. Hamısı Nibras Code tərəfindən yazılıb.", "Short lessons: the first line, then a condition, a loop and a function. Written by Nibras Code.", "Kısa dersler: ilk satır, sonra koşul, döngü ve fonksiyon. Nibras Code tarafından yazıldı.", "دروس قصيرة: السطر الأول ثم الشرط والحلقة والدالة. كتبها Nibras Code.", "Короткие уроки: первая строка, затем условие, цикл и функция. Написано Nibras Code."),
+  },
+  css: {
+    slug: "css-kurs",
+    title: l5("CSS dərsləri: rəng, class və flex", "CSS lessons: color, class and flex", "CSS dersleri: renk, class ve flex", "دروس CSS: اللون وclass وflex", "Уроки CSS: цвет, class и flex"),
+    description: l5("CSS nədir, class necə yazılır və flex elementləri necə yan-yana qoyur.", "What CSS is, how to write a class, and how flex places elements side by side.", "CSS nedir, class nasıl yazılır ve flex öğeleri nasıl yan yana koyar.", "ما هو CSS وكيف تُكتب class وكيف يضع flex العناصر جنباً إلى جنب.", "Что такое CSS, как пишется class и как flex ставит элементы рядом."),
+    keywords: l5("CSS nədir, CSS class, CSS flex", "what is CSS, CSS class, CSS flex", "CSS nedir, CSS class, CSS flex", "ما هو CSS, CSS class, CSS flex", "что такое CSS, CSS class, CSS flex"),
+    intro: l5("Bir dərs: rəng, class və flex. Nümunə kod səhifənin içindədir.", "One lesson: color, class and flex. The sample code is on the page.", "Bir ders: renk, class ve flex. Örnek kod sayfanın içindedir.", "درس واحد: اللون وclass وflex. الكود النموذجي في الصفحة.", "Один урок: цвет, class и flex. Пример кода на странице."),
+  },
+  sql: {
+    slug: "sql-kurs",
+    title: l5("SQL dərsləri: SELECT", "SQL lessons: SELECT", "SQL dersleri: SELECT", "دروس SQL: SELECT", "Уроки SQL: SELECT"),
+    description: l5("Cədvəldən məlumat çıxarmaq: SELECT, FROM və WHERE.", "Read data from a table: SELECT, FROM and WHERE.", "Tablodan veri çıkarmak: SELECT, FROM ve WHERE.", "إخراج البيانات من جدول: SELECT وFROM وWHERE.", "Достать данные из таблицы: SELECT, FROM и WHERE."),
+    keywords: l5("SQL SELECT, SQL WHERE, SQL dərs", "SQL SELECT, SQL WHERE, SQL lesson", "SQL SELECT, SQL WHERE, SQL ders", "SQL SELECT, SQL WHERE, درس SQL", "SQL SELECT, SQL WHERE, урок SQL"),
+    intro: l5("Bir dərs: cədvəldən sətir oxumaq və şərtlə süzmək.", "One lesson: read rows from a table and filter them with a condition.", "Bir ders: tablodan satır okumak ve koşulla süzmek.", "درس واحد: قراءة صفوف من جدول وتصفية بشرط.", "Один урок: прочитать строки таблицы и отфильтровать их условием."),
   },
 };
 
@@ -148,10 +169,26 @@ export const COURSE_PAGES: readonly CoursePage[] = [
   chap("html", "document-structure", l5("Sənədin quruluşu", "Document and website structure", "Belge ve site yapısı", "بنية المستند والموقع", "Структура документа и сайта"), l5("header, nav, main, article, section, aside, footer.", "header, nav, main, article, section, aside, footer.", "header, nav, main, article, section, aside, footer.", "header وnav وmain وarticle وsection وaside وfooter.", "header, nav, main, article, section, aside, footer."), l5("HTML sənəd quruluşu, semantik", "HTML document structure, semantic", "HTML belge yapısı, anlamsal", "بنية مستند HTML, دلالي", "структура HTML, семантика")),
   chap("html", "metadata", l5("Səhifə metaməlumatı: head və meta", "Webpage metadata: head and meta", "Sayfa üstverisi: head ve meta", "بيانات الصفحة الوصفية: head وmeta", "Метаданные страницы: head и meta"), l5("title, meta charset, viewport, description, favicon.", "title, meta charset, viewport, description, favicon.", "title, meta charset, viewport, description, favicon.", "title وmeta charset وviewport وdescription وfavicon.", "title, meta charset, viewport, description, favicon."), l5("HTML meta, head, viewport, title", "HTML meta, head, viewport, title", "HTML meta, head, viewport, title", "HTML meta, head, viewport, title", "HTML meta, head, viewport, title")),
   chap("html", "debugging", l5("HTML xətalarını tapmaq", "Debugging HTML", "HTML hata ayıklama", "تصحيح أخطاء HTML", "Отладка HTML"), l5("Validator, açılmayan teqlər və yanlış yerləşdirmə.", "The validator, unclosed tags and wrong nesting.", "Doğrulayıcı, kapanmayan etiketler ve yanlış iç içe yerleştirme.", "المدقّق والوسوم غير المغلقة والتداخل الخاطئ.", "Валидатор, незакрытые теги и неверная вложенность."), l5("HTML xəta, validator, debug", "HTML errors, validator, debug", "HTML hata, doğrulayıcı, debug", "أخطاء HTML, مدقق, تصحيح", "ошибки HTML, валидатор, отладка")),
+  own("javascript", "baslangic",
+    l5("JavaScript-ə necə başlamaq olar? console.log", "How do I start JavaScript? console.log", "JavaScript'e nasıl başlanır? console.log", "كيف أبدأ جافاسكريبت؟ console.log", "Как начать JavaScript? console.log"),
+    l5("İlk HTML səhifədə console.log ilə bir cümlə yaz.", "Write one sentence with console.log on your first HTML page.", "İlk HTML sayfada console.log ile bir cümle yaz.", "اكتب جملة بـ console.log في أول صفحة HTML.", "Напишите одну фразу через console.log на первой HTML-странице."),
+    l5("JavaScript başlanğıc, console.log, ilk proqram", "JavaScript start, console.log, first program", "JavaScript başlangıç, console.log, ilk program", "بداية جافاسكريبت, console.log, أول برنامج", "начало JavaScript, console.log, первая программа")),
+  own("javascript", "idare",
+    l5("JavaScript if, for və funksiya", "JavaScript if, for and functions", "JavaScript if, for ve fonksiyon", "جافاسكريبت if وfor والدالة", "JavaScript if, for и функция"),
+    l5("Şərt, dövr və öz funksiyanı yaz.", "Write a condition, a loop and your own function.", "Koşul, döngü ve kendi fonksiyonunu yaz.", "اكتب شرطاً وحلقة ودالتك.", "Напишите условие, цикл и свою функцию."),
+    l5("JavaScript if else, for dövrü, function return", "JavaScript if else, for loop, function return", "JavaScript if else, for döngüsü, function return", "جافاسكريبت if else, حلقة for, function return", "JavaScript if else, цикл for, function return")),
+  own("css", "nedir",
+    l5("CSS nədir? class, rəng və flex", "What is CSS? class, color and flex", "CSS nedir? class, renk ve flex", "ما هو CSS؟ class واللون وflex", "Что такое CSS? class, цвет и flex"),
+    l5("Səhifəyə rəng ver, class yaz və elementləri yan-yana düz.", "Give a page color, write a class and place elements side by side.", "Sayfaya renk ver, class yaz ve öğeleri yan yana diz.", "أعطِ الصفحة لوناً واكتب class وضع العناصر جنباً إلى جنب.", "Задайте странице цвет, напишите class и поставьте элементы рядом."),
+    l5("CSS nədir, CSS class, display flex", "what is CSS, CSS class, display flex", "CSS nedir, CSS class, display flex", "ما هو CSS, CSS class, display flex", "что такое CSS, CSS class, display flex")),
+  own("sql", "select",
+    l5("SQL SELECT: cədvəldən məlumat çıxarmaq", "SQL SELECT: read data from a table", "SQL SELECT: tablodan veri çıkarmak", "SQL SELECT: إخراج البيانات من جدول", "SQL SELECT: достать данные из таблицы"),
+    l5("SELECT, FROM və WHERE ilə sətir oxu.", "Read rows with SELECT, FROM and WHERE.", "SELECT, FROM ve WHERE ile satır oku.", "اقرأ الصفوف بـ SELECT وFROM وWHERE.", "Читайте строки через SELECT, FROM и WHERE."),
+    l5("SQL SELECT, SQL FROM, SQL WHERE", "SQL SELECT, SQL FROM, SQL WHERE", "SQL SELECT, SQL FROM, SQL WHERE", "SQL SELECT, SQL FROM, SQL WHERE", "SQL SELECT, SQL FROM, SQL WHERE")),
 ];
 
 export function isCourseHub(slug: string) {
-  return slug === HUBS.python.slug || slug === HUBS.html.slug;
+  return Object.values(HUBS).some((hub) => hub.slug === slug);
 }
 export function findCourse(slug: string): CoursePage | null {
   return COURSE_PAGES.find((p) => p.slug === slug) ?? null;
@@ -160,9 +197,8 @@ export function isCourseSlug(slug: string) {
   return isCourseHub(slug) || !!findCourse(slug);
 }
 export function hubFor(slug: string): CourseKind | null {
-  if (slug === HUBS.python.slug) return "python";
-  if (slug === HUBS.html.slug) return "html";
-  return findCourse(slug)?.kind ?? null;
+  const hit = (Object.keys(HUBS) as CourseKind[]).find((kind) => HUBS[kind].slug === slug);
+  return hit ?? findCourse(slug)?.kind ?? null;
 }
 export function pagesOf(kind: CourseKind) {
   return COURSE_PAGES.filter((p) => p.kind === kind);

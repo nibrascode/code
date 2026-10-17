@@ -839,14 +839,31 @@ export function ProgrammingArticle({
           </ul>
         </div>
       ) : null}
-      {slug === "python" || slug === "html-css" ? (
+      {slug === "python" || slug === "javascript" || slug === "sql" || slug === "html-css" ? (
         <ul className="lib-list">
-          <li className="is-section">
-            <a href={programmingLocalePath(lang, slug === "python" ? HUBS.python.slug : HUBS.html.slug)}>
-              {(slug === "python" ? HUBS.python : HUBS.html).title[lang]}
-              <ArrowUpRight className="rtl-flip size-4" />
-            </a>
-          </li>
+          {slug === "html-css" ? (
+            <>
+              <li className="is-section">
+                <a href={programmingLocalePath(lang, HUBS.html.slug)}>
+                  {HUBS.html.title[lang]}
+                  <ArrowUpRight className="rtl-flip size-4" />
+                </a>
+              </li>
+              <li className="is-section">
+                <a href={programmingLocalePath(lang, HUBS.css.slug)}>
+                  {HUBS.css.title[lang]}
+                  <ArrowUpRight className="rtl-flip size-4" />
+                </a>
+              </li>
+            </>
+          ) : (
+            <li className="is-section">
+              <a href={programmingLocalePath(lang, HUBS[slug === "python" ? "python" : slug === "javascript" ? "javascript" : "sql"].slug)}>
+                {HUBS[slug === "python" ? "python" : slug === "javascript" ? "javascript" : "sql"].title[lang]}
+                <ArrowUpRight className="rtl-flip size-4" />
+              </a>
+            </li>
+          )}
         </ul>
       ) : null}
       {slug === "html-css" ? (

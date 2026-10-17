@@ -49,8 +49,8 @@ export function CourseHub({ kind }: { kind: CourseKind }) {
       intro={<p>{hub.intro[lang]}</p>}
       footer={
         <>
-          {group(UI.qa[lang], own)}
-          {group(UI.book[lang], book)}
+          {own.length ? group(UI.qa[lang], own) : null}
+          {book.length ? group(UI.book[lang], book) : null}
         </>
       }
     />

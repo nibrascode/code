@@ -23,8 +23,14 @@ export async function loadCourseSections(slug: string, lang: Lang): Promise<Prog
   const page: CoursePage | null = findCourse(slug);
   if (!page) return [];
   if (page.source === "own") {
-    const mod = page.kind === "python" ? await import("./own-python") : await import("./own-html");
-    const all = page.kind === "python" ? (mod as typeof import("./own-python")).OWN_PYTHON : (mod as typeof import("./own-html")).OWN_HTML;
+    const loaders = {
+      python: () => import("./own-python").then((mod) => mod.OWN_PYTHON),
+      html: () => import("./own-html").then((mod) => mod.OWN_HTML),
+      javascript: () => import("./own-javascript").then((mod) => mod.OWN_JS),
+      css: () => import("./own-css").then((mod) => mod.OWN_CSS),
+      sql: () => import("./own-sql").then((mod) => mod.OWN_SQL),
+    };
+    const all = await loaders[page.kind]();
     return resolveOwn(all[page.file] ?? [], lang);
   }
   const loader = BOOK[`./book/${page.kind}-${page.file}.ts`];
