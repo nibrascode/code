@@ -45,6 +45,7 @@ import { Route as ArContactRouteImport } from './routes/ar.contact'
 import { Route as ArEraseRouteImport } from './routes/ar.erase'
 import { Route as ArFaqRouteImport } from './routes/ar.faq'
 import { Route as ArImageRouteImport } from './routes/ar.image'
+import { Route as ArPlannerRouteImport } from './routes/ar.planner'
 import { Route as ArSozSayiRouteImport } from './routes/ar.soz-sayi'
 import { Route as ArFaizRouteImport } from './routes/ar.faiz'
 import { Route as ArWifiRouteImport } from './routes/ar.wifi'
@@ -64,6 +65,7 @@ import { Route as EnContactRouteImport } from './routes/en.contact'
 import { Route as EnEraseRouteImport } from './routes/en.erase'
 import { Route as EnFaqRouteImport } from './routes/en.faq'
 import { Route as EnImageRouteImport } from './routes/en.image'
+import { Route as EnPlannerRouteImport } from './routes/en.planner'
 import { Route as EnSozSayiRouteImport } from './routes/en.soz-sayi'
 import { Route as EnFaizRouteImport } from './routes/en.faiz'
 import { Route as EnWifiRouteImport } from './routes/en.wifi'
@@ -97,6 +99,7 @@ import { Route as RuContactRouteImport } from './routes/ru.contact'
 import { Route as RuEraseRouteImport } from './routes/ru.erase'
 import { Route as RuFaqRouteImport } from './routes/ru.faq'
 import { Route as RuImageRouteImport } from './routes/ru.image'
+import { Route as RuPlannerRouteImport } from './routes/ru.planner'
 import { Route as RuSozSayiRouteImport } from './routes/ru.soz-sayi'
 import { Route as RuFaizRouteImport } from './routes/ru.faiz'
 import { Route as RuWifiRouteImport } from './routes/ru.wifi'
@@ -118,6 +121,7 @@ import { Route as TrContactRouteImport } from './routes/tr.contact'
 import { Route as TrEraseRouteImport } from './routes/tr.erase'
 import { Route as TrFaqRouteImport } from './routes/tr.faq'
 import { Route as TrImageRouteImport } from './routes/tr.image'
+import { Route as TrPlannerRouteImport } from './routes/tr.planner'
 import { Route as TrSozSayiRouteImport } from './routes/tr.soz-sayi'
 import { Route as TrFaizRouteImport } from './routes/tr.faiz'
 import { Route as TrWifiRouteImport } from './routes/tr.wifi'
@@ -358,6 +362,11 @@ const ArImageRoute = ArImageRouteImport.update({
   path: '/image',
   getParentRoute: () => ArRoute,
 } as any)
+const ArPlannerRoute = ArPlannerRouteImport.update({
+  id: '/planner',
+  path: '/planner',
+  getParentRoute: () => ArRoute,
+} as any)
 
 const ArSozSayiRoute = ArSozSayiRouteImport.update({
   id: '/soz-sayi',
@@ -452,6 +461,11 @@ const EnFaqRoute = EnFaqRouteImport.update({
 const EnImageRoute = EnImageRouteImport.update({
   id: '/image',
   path: '/image',
+  getParentRoute: () => EnRoute,
+} as any)
+const EnPlannerRoute = EnPlannerRouteImport.update({
+  id: '/planner',
+  path: '/planner',
   getParentRoute: () => EnRoute,
 } as any)
 
@@ -620,6 +634,11 @@ const RuImageRoute = RuImageRouteImport.update({
   path: '/image',
   getParentRoute: () => RuRoute,
 } as any)
+const RuPlannerRoute = RuPlannerRouteImport.update({
+  id: '/planner',
+  path: '/planner',
+  getParentRoute: () => RuRoute,
+} as any)
 
 const RuSozSayiRoute = RuSozSayiRouteImport.update({
   id: '/soz-sayi',
@@ -724,6 +743,11 @@ const TrFaqRoute = TrFaqRouteImport.update({
 const TrImageRoute = TrImageRouteImport.update({
   id: '/image',
   path: '/image',
+  getParentRoute: () => TrRoute,
+} as any)
+const TrPlannerRoute = TrPlannerRouteImport.update({
+  id: '/planner',
+  path: '/planner',
   getParentRoute: () => TrRoute,
 } as any)
 
@@ -1056,6 +1080,7 @@ export interface FileRoutesByFullPath {
   '/ar/erase': typeof ArEraseRoute
   '/ar/faq': typeof ArFaqRouteWithChildren
   '/ar/image': typeof ArImageRoute
+  '/ar/planner': typeof ArPlannerRoute
   '/ar/soz-sayi': typeof ArSozSayiRoute
   '/ar/faiz': typeof ArFaizRoute
   '/ar/wifi': typeof ArWifiRoute
@@ -1075,6 +1100,7 @@ export interface FileRoutesByFullPath {
   '/en/erase': typeof EnEraseRoute
   '/en/faq': typeof EnFaqRouteWithChildren
   '/en/image': typeof EnImageRoute
+  '/en/planner': typeof EnPlannerRoute
   '/en/soz-sayi': typeof EnSozSayiRoute
   '/en/faiz': typeof EnFaizRoute
   '/en/wifi': typeof EnWifiRoute
@@ -1104,6 +1130,7 @@ export interface FileRoutesByFullPath {
   '/ru/erase': typeof RuEraseRoute
   '/ru/faq': typeof RuFaqRouteWithChildren
   '/ru/image': typeof RuImageRoute
+  '/ru/planner': typeof RuPlannerRoute
   '/ru/soz-sayi': typeof RuSozSayiRoute
   '/ru/faiz': typeof RuFaizRoute
   '/ru/wifi': typeof RuWifiRoute
@@ -1125,6 +1152,7 @@ export interface FileRoutesByFullPath {
   '/tr/erase': typeof TrEraseRoute
   '/tr/faq': typeof TrFaqRouteWithChildren
   '/tr/image': typeof TrImageRoute
+  '/tr/planner': typeof TrPlannerRoute
   '/tr/soz-sayi': typeof TrSozSayiRoute
   '/tr/faiz': typeof TrFaizRoute
   '/tr/wifi': typeof TrWifiRoute
@@ -1224,6 +1252,7 @@ export interface FileRoutesByTo {
   '/ar/erase': typeof ArEraseRoute
   '/ar/faq': typeof ArFaqRouteWithChildren
   '/ar/image': typeof ArImageRoute
+  '/ar/planner': typeof ArPlannerRoute
   '/ar/soz-sayi': typeof ArSozSayiRoute
   '/ar/faiz': typeof ArFaizRoute
   '/ar/wifi': typeof ArWifiRoute
@@ -1243,6 +1272,7 @@ export interface FileRoutesByTo {
   '/en/erase': typeof EnEraseRoute
   '/en/faq': typeof EnFaqRouteWithChildren
   '/en/image': typeof EnImageRoute
+  '/en/planner': typeof EnPlannerRoute
   '/en/soz-sayi': typeof EnSozSayiRoute
   '/en/faiz': typeof EnFaizRoute
   '/en/wifi': typeof EnWifiRoute
@@ -1272,6 +1302,7 @@ export interface FileRoutesByTo {
   '/ru/erase': typeof RuEraseRoute
   '/ru/faq': typeof RuFaqRouteWithChildren
   '/ru/image': typeof RuImageRoute
+  '/ru/planner': typeof RuPlannerRoute
   '/ru/soz-sayi': typeof RuSozSayiRoute
   '/ru/faiz': typeof RuFaizRoute
   '/ru/wifi': typeof RuWifiRoute
@@ -1293,6 +1324,7 @@ export interface FileRoutesByTo {
   '/tr/erase': typeof TrEraseRoute
   '/tr/faq': typeof TrFaqRouteWithChildren
   '/tr/image': typeof TrImageRoute
+  '/tr/planner': typeof TrPlannerRoute
   '/tr/soz-sayi': typeof TrSozSayiRoute
   '/tr/faiz': typeof TrFaizRoute
   '/tr/wifi': typeof TrWifiRoute
@@ -1394,6 +1426,7 @@ export interface FileRoutesById {
   '/ar/erase': typeof ArEraseRoute
   '/ar/faq': typeof ArFaqRouteWithChildren
   '/ar/image': typeof ArImageRoute
+  '/ar/planner': typeof ArPlannerRoute
   '/ar/soz-sayi': typeof ArSozSayiRoute
   '/ar/faiz': typeof ArFaizRoute
   '/ar/wifi': typeof ArWifiRoute
@@ -1413,6 +1446,7 @@ export interface FileRoutesById {
   '/en/erase': typeof EnEraseRoute
   '/en/faq': typeof EnFaqRouteWithChildren
   '/en/image': typeof EnImageRoute
+  '/en/planner': typeof EnPlannerRoute
   '/en/soz-sayi': typeof EnSozSayiRoute
   '/en/faiz': typeof EnFaizRoute
   '/en/wifi': typeof EnWifiRoute
@@ -1442,6 +1476,7 @@ export interface FileRoutesById {
   '/ru/erase': typeof RuEraseRoute
   '/ru/faq': typeof RuFaqRouteWithChildren
   '/ru/image': typeof RuImageRoute
+  '/ru/planner': typeof RuPlannerRoute
   '/ru/soz-sayi': typeof RuSozSayiRoute
   '/ru/faiz': typeof RuFaizRoute
   '/ru/wifi': typeof RuWifiRoute
@@ -1463,6 +1498,7 @@ export interface FileRoutesById {
   '/tr/erase': typeof TrEraseRoute
   '/tr/faq': typeof TrFaqRouteWithChildren
   '/tr/image': typeof TrImageRoute
+  '/tr/planner': typeof TrPlannerRoute
   '/tr/soz-sayi': typeof TrSozSayiRoute
   '/tr/faiz': typeof TrFaizRoute
   '/tr/wifi': typeof TrWifiRoute
@@ -1565,6 +1601,7 @@ export interface FileRouteTypes {
     | '/ar/erase'
     | '/ar/faq'
     | '/ar/image'
+    | '/ar/planner'
     | '/ar/soz-sayi'
     | '/ar/faiz'
     | '/ar/wifi'
@@ -1584,6 +1621,7 @@ export interface FileRouteTypes {
     | '/en/erase'
     | '/en/faq'
     | '/en/image'
+    | '/en/planner'
     | '/en/soz-sayi'
     | '/en/faiz'
     | '/en/wifi'
@@ -1613,6 +1651,7 @@ export interface FileRouteTypes {
     | '/ru/erase'
     | '/ru/faq'
     | '/ru/image'
+    | '/ru/planner'
     | '/ru/soz-sayi'
     | '/ru/faiz'
     | '/ru/wifi'
@@ -1634,6 +1673,7 @@ export interface FileRouteTypes {
     | '/tr/erase'
     | '/tr/faq'
     | '/tr/image'
+    | '/tr/planner'
     | '/tr/soz-sayi'
     | '/tr/faiz'
     | '/tr/wifi'
@@ -1733,6 +1773,7 @@ export interface FileRouteTypes {
     | '/ar/erase'
     | '/ar/faq'
     | '/ar/image'
+    | '/ar/planner'
     | '/ar/soz-sayi'
     | '/ar/faiz'
     | '/ar/wifi'
@@ -1752,6 +1793,7 @@ export interface FileRouteTypes {
     | '/en/erase'
     | '/en/faq'
     | '/en/image'
+    | '/en/planner'
     | '/en/soz-sayi'
     | '/en/faiz'
     | '/en/wifi'
@@ -1781,6 +1823,7 @@ export interface FileRouteTypes {
     | '/ru/erase'
     | '/ru/faq'
     | '/ru/image'
+    | '/ru/planner'
     | '/ru/soz-sayi'
     | '/ru/faiz'
     | '/ru/wifi'
@@ -1802,6 +1845,7 @@ export interface FileRouteTypes {
     | '/tr/erase'
     | '/tr/faq'
     | '/tr/image'
+    | '/tr/planner'
     | '/tr/soz-sayi'
     | '/tr/faiz'
     | '/tr/wifi'
@@ -1902,6 +1946,7 @@ export interface FileRouteTypes {
     | '/ar/erase'
     | '/ar/faq'
     | '/ar/image'
+    | '/ar/planner'
     | '/ar/soz-sayi'
     | '/ar/faiz'
     | '/ar/wifi'
@@ -1921,6 +1966,7 @@ export interface FileRouteTypes {
     | '/en/erase'
     | '/en/faq'
     | '/en/image'
+    | '/en/planner'
     | '/en/soz-sayi'
     | '/en/faiz'
     | '/en/wifi'
@@ -1950,6 +1996,7 @@ export interface FileRouteTypes {
     | '/ru/erase'
     | '/ru/faq'
     | '/ru/image'
+    | '/ru/planner'
     | '/ru/soz-sayi'
     | '/ru/faiz'
     | '/ru/wifi'
@@ -1971,6 +2018,7 @@ export interface FileRouteTypes {
     | '/tr/erase'
     | '/tr/faq'
     | '/tr/image'
+    | '/tr/planner'
     | '/tr/soz-sayi'
     | '/tr/faiz'
     | '/tr/wifi'
@@ -2330,6 +2378,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArImageRouteImport
       parentRoute: typeof ArRoute
     }
+    '/ar/planner': {
+      id: '/ar/planner'
+      path: '/planner'
+      fullPath: '/ar/planner'
+      preLoaderRoute: typeof ArPlannerRouteImport
+      parentRoute: typeof ArRoute
+    }
     '/ar/soz-sayi': {
       id: '/ar/soz-sayi'
       path: '/soz-sayi'
@@ -2461,6 +2516,13 @@ declare module '@tanstack/react-router' {
       path: '/image'
       fullPath: '/en/image'
       preLoaderRoute: typeof EnImageRouteImport
+      parentRoute: typeof EnRoute
+    }
+    '/en/planner': {
+      id: '/en/planner'
+      path: '/planner'
+      fullPath: '/en/planner'
+      preLoaderRoute: typeof EnPlannerRouteImport
       parentRoute: typeof EnRoute
     }
     '/en/soz-sayi': {
@@ -2694,6 +2756,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RuImageRouteImport
       parentRoute: typeof RuRoute
     }
+    '/ru/planner': {
+      id: '/ru/planner'
+      path: '/planner'
+      fullPath: '/ru/planner'
+      preLoaderRoute: typeof RuPlannerRouteImport
+      parentRoute: typeof RuRoute
+    }
     '/ru/soz-sayi': {
       id: '/ru/soz-sayi'
       path: '/soz-sayi'
@@ -2839,6 +2908,13 @@ declare module '@tanstack/react-router' {
       path: '/image'
       fullPath: '/tr/image'
       preLoaderRoute: typeof TrImageRouteImport
+      parentRoute: typeof TrRoute
+    }
+    '/tr/planner': {
+      id: '/tr/planner'
+      path: '/planner'
+      fullPath: '/tr/planner'
+      preLoaderRoute: typeof TrPlannerRouteImport
       parentRoute: typeof TrRoute
     }
     '/tr/soz-sayi': {
@@ -3344,6 +3420,7 @@ interface ArRouteChildren {
   ArEraseRoute: typeof ArEraseRoute
   ArFaqRoute: typeof ArFaqRouteWithChildren
   ArImageRoute: typeof ArImageRoute
+  ArPlannerRoute: typeof ArPlannerRoute
   ArSozSayiRoute: typeof ArSozSayiRoute
   ArFaizRoute: typeof ArFaizRoute
   ArWifiRoute: typeof ArWifiRoute
@@ -3368,6 +3445,7 @@ const ArRouteChildren: ArRouteChildren = {
   ArEraseRoute: ArEraseRoute,
   ArFaqRoute: ArFaqRouteWithChildren,
   ArImageRoute: ArImageRoute,
+  ArPlannerRoute: ArPlannerRoute,
   ArSozSayiRoute: ArSozSayiRoute,
   ArFaizRoute: ArFaizRoute,
   ArWifiRoute: ArWifiRoute,
@@ -3481,6 +3559,7 @@ interface EnRouteChildren {
   EnEraseRoute: typeof EnEraseRoute
   EnFaqRoute: typeof EnFaqRouteWithChildren
   EnImageRoute: typeof EnImageRoute
+  EnPlannerRoute: typeof EnPlannerRoute
   EnSozSayiRoute: typeof EnSozSayiRoute
   EnFaizRoute: typeof EnFaizRoute
   EnWifiRoute: typeof EnWifiRoute
@@ -3505,6 +3584,7 @@ const EnRouteChildren: EnRouteChildren = {
   EnEraseRoute: EnEraseRoute,
   EnFaqRoute: EnFaqRouteWithChildren,
   EnImageRoute: EnImageRoute,
+  EnPlannerRoute: EnPlannerRoute,
   EnSozSayiRoute: EnSozSayiRoute,
   EnFaizRoute: EnFaizRoute,
   EnWifiRoute: EnWifiRoute,
@@ -3675,6 +3755,7 @@ interface RuRouteChildren {
   RuEraseRoute: typeof RuEraseRoute
   RuFaqRoute: typeof RuFaqRouteWithChildren
   RuImageRoute: typeof RuImageRoute
+  RuPlannerRoute: typeof RuPlannerRoute
   RuSozSayiRoute: typeof RuSozSayiRoute
   RuFaizRoute: typeof RuFaizRoute
   RuWifiRoute: typeof RuWifiRoute
@@ -3700,6 +3781,7 @@ const RuRouteChildren: RuRouteChildren = {
   RuEraseRoute: RuEraseRoute,
   RuFaqRoute: RuFaqRouteWithChildren,
   RuImageRoute: RuImageRoute,
+  RuPlannerRoute: RuPlannerRoute,
   RuSozSayiRoute: RuSozSayiRoute,
   RuFaizRoute: RuFaizRoute,
   RuWifiRoute: RuWifiRoute,
@@ -3834,6 +3916,7 @@ interface TrRouteChildren {
   TrEraseRoute: typeof TrEraseRoute
   TrFaqRoute: typeof TrFaqRouteWithChildren
   TrImageRoute: typeof TrImageRoute
+  TrPlannerRoute: typeof TrPlannerRoute
   TrSozSayiRoute: typeof TrSozSayiRoute
   TrFaizRoute: typeof TrFaizRoute
   TrWifiRoute: typeof TrWifiRoute
@@ -3858,6 +3941,7 @@ const TrRouteChildren: TrRouteChildren = {
   TrEraseRoute: TrEraseRoute,
   TrFaqRoute: TrFaqRouteWithChildren,
   TrImageRoute: TrImageRoute,
+  TrPlannerRoute: TrPlannerRoute,
   TrSozSayiRoute: TrSozSayiRoute,
   TrFaizRoute: TrFaizRoute,
   TrWifiRoute: TrWifiRoute,

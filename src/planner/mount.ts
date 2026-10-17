@@ -1,3 +1,6 @@
+import type { Lang } from "@/lib/i18n";
+import { plannerCopy } from "./copy";
+
 type GapKind = "door" | "window";
 
 type PlanItem = {
@@ -458,7 +461,8 @@ function must<T extends Element = HTMLElement>(id: string): T {
   return el as unknown as T;
 }
 
-export function mountPlanner(root: HTMLElement): () => void {
+export function mountPlanner(root: HTMLElement, lang: Lang = "az"): () => void {
+  const copy = plannerCopy(lang);
   const cleanups: Array<() => void> = [];
   const on = (
     el: EventTarget | null,
@@ -528,8 +532,8 @@ export function mountPlanner(root: HTMLElement): () => void {
     const unit = unitById(must<HTMLSelectElement>("kerpicSecim").value);
     must("unitDims").classList.toggle("hidden", Boolean(unit));
     must("unitNote").textContent = unit
-      ? `${unit.country}: buna ${unit.local} deyirlər. Divar adətən ${unit.wall} mm olur.`
-      : "Ölçünü millimetrlə özün yaz.";
+      ? copy.unitNote(copy.country(unit.country), unit.local, unit.wall)
+      : copy.customSizeHint;
     if (document.getElementById("evForm")) refreshFormNote();
   };
   const fillUnitSelect = () => {
@@ -542,18 +546,18 @@ export function mountPlanner(root: HTMLElement): () => void {
     }
     for (const country of groups) {
       const group = document.createElement("optgroup");
-      group.label = country;
+      group.label = copy.country(country);
       for (const unit of wallUnits.filter((item) => item.country === country)) {
         const option = document.createElement("option");
         option.value = unit.id;
-        option.textContent = `${unit.local} · ${unit.title} — ${unit.l}×${unit.w}×${unit.h}`;
+        option.textContent = `${unit.local} · ${copy.unitTitle(unit.id, unit.title)} — ${unit.l}×${unit.w}×${unit.h}`;
         group.appendChild(option);
       }
       sel.appendChild(group);
     }
     const custom = document.createElement("option");
     custom.value = "ferdi";
-    custom.textContent = "Fərdi ölçü (özün yaz)";
+    custom.textContent = copy.customUnit;
     sel.appendChild(custom);
     sel.value = unitById(current) || current === "ferdi" ? current : "adi";
   };
@@ -571,11 +575,10 @@ export function mountPlanner(root: HTMLElement): () => void {
   };
   const refreshFormNote = () => {
     const form = formById(must<HTMLSelectElement>("evForm").value);
-    must("formNote").textContent = `${form.country} — yerli adı: ${form.local}. ${form.note}`;
+    must("formNote").textContent = `${copy.country(form.country)} — ${copy.localName}: ${form.local}. ${copy.formNote(form.id, form.note)}`;
     const priceLabel = root.querySelector('label[for="qKerpic"]');
     if (priceLabel) {
-      priceLabel.textContent =
-        form.skin === "wood" ? "1 dirəyin qiyməti, AZN" : "1 ədədin qiyməti, AZN";
+      priceLabel.textContent = form.skin === "wood" ? copy.studPrice : copy.piecePrice;
     }
   };
   const fillFormSelect = () => {
@@ -585,7 +588,7 @@ export function mountPlanner(root: HTMLElement): () => void {
     for (const form of buildForms) {
       const option = document.createElement("option");
       option.value = form.id;
-      option.textContent = `${form.country} — ${form.title}`;
+      option.textContent = `${copy.country(form.country)} — ${copy.formTitle(form.id, form.title)}`;
       sel.appendChild(option);
     }
     sel.value = buildForms.some((form) => form.id === current) ? current : "az-brick";
@@ -821,17 +824,13 @@ export function mountPlanner(root: HTMLElement): () => void {
       btn.classList.toggle("is-on", n <= stage);
       btn.classList.toggle("is-current", n === stage);
     });
+    const text = copy.stages[stage - 1];
     const sum = def.keys.reduce((s, key) => s + (stageCosts[key] || 0), 0);
     must("fiveCostAmt").textContent = sum.toFixed(2);
-    must("sceneBadge").textContent = `${stage}/5 · ${def.short}`;
-    const note =
-      stage <= 1
-        ? " Təməl xərci bu smetada yoxdur."
-        : stage === 5
-          ? " Dam ayrıca qiymətlənməyib."
-          : "";
+    must("sceneBadge").textContent = `${stage}/5 · ${text.short}`;
+    const note = stage <= 1 ? copy.noteFoundation : stage === 5 ? copy.noteRoof : "";
     must("stageLabel").innerHTML =
-      `<b>${def.name}</b> — ${def.blurb}<br>Bu mərhələyə qədər: <b>${sum.toFixed(2)} AZN</b>` +
+      `<b>${text.name}</b> — ${text.blurb}<br>${copy.upTo}: <b>${sum.toFixed(2)} AZN</b>` +
       (note ? `<span class="stage-note">${note}</span>` : "");
   };
 
@@ -1227,19 +1226,10 @@ export function mountPlanner(root: HTMLElement): () => void {
       cube.appendChild(d);
     });
 
-    must("dimsLabel").innerHTML =
-      `Uzunluq: <b>${L || 0}</b> m · En: <b>${W || 0}</b> m · Hündürlük: <b>${H || 0}</b> m · Otaq: <b>${n}</b>`;
+    must("dimsLabel").innerHTML = copy.dims(L || 0, W || 0, H || 0, n);
   };
 
-  const wallTitle = (id: string) => {
-    const names: Record<string, string> = {
-      "ext-N": "Arxa divar",
-      "ext-S": "Ön divar",
-      "ext-E": "Sağ divar",
-      "ext-W": "Sol divar",
-    };
-    return names[id] || "Otaq bölməsi";
-  };
+  const wallTitle = (id: string) => copy.wall(id);
   const openWallEditor = (id: string) => {
     weCurrentWall = id;
     const item = planState.items[id];
@@ -1326,7 +1316,7 @@ export function mountPlanner(root: HTMLElement): () => void {
         const x1 = cf[c + 1] * vbW;
         const areaM2 = ((x1 - x0) / SC) * ((y1 - y0) / SC);
         const fs = Math.min(x1 - x0, y1 - y0) * 0.15;
-        html += `<text x="${(x0 + x1) / 2}" y="${(y0 + y1) / 2 - fs * 0.4}" text-anchor="middle" font-size="${fs}" fill="var(--text)" font-weight="600">Otaq ${roomNo}</text>`;
+        html += `<text x="${(x0 + x1) / 2}" y="${(y0 + y1) / 2 - fs * 0.4}" text-anchor="middle" font-size="${fs}" fill="var(--text)" font-weight="600">${copy.room(roomNo)}</text>`;
         html += `<text x="${(x0 + x1) / 2}" y="${(y0 + y1) / 2 + fs * 0.9}" text-anchor="middle" font-size="${fs * 0.85}" fill="var(--muted)">${areaM2.toFixed(1)} m²</text>`;
         roomNo++;
       }
@@ -1570,14 +1560,11 @@ export function mountPlanner(root: HTMLElement): () => void {
         const studs = Math.max(8, Math.ceil((2 * (L + W)) / 0.4));
         const boards = studs + Math.ceil((2 * (L + W)) / 2.4) * 3;
         brickCost = boards * brickPrice;
-        lines.push([`Dirək — ${boards.toLocaleString("az")} əd (40 sm aralı)`, brickCost]);
+        lines.push([copy.studLine(boards.toLocaleString(copy.locale)), brickCost]);
       } else {
-        const piece = unit ? unit.local : "element";
+        const piece = unit ? unit.local : copy.element;
         brickCost = brickCount * brickPrice;
-        lines.push([
-          `${piece} — ${brickCount.toLocaleString("az")} əd (${layers} sıra)`,
-          brickCost,
-        ]);
+        lines.push([copy.pieceLine(piece, brickCount.toLocaleString(copy.locale), layers), brickCost]);
       }
       total += brickCost;
       stageCosts.kerpic = brickCost;
@@ -1587,7 +1574,7 @@ export function mountPlanner(root: HTMLElement): () => void {
       const qty = Math.ceil(netWall * (parseFloat(must<HTMLInputElement>("p-sement").value) || 0));
       const cost = qty * (parseFloat(must<HTMLInputElement>("q-sement").value) || 0);
       total += cost;
-      lines.push([`Sement — ${qty} kg`, cost]);
+      lines.push([copy.cementLine(qty), cost]);
       stageCosts.suvaq = cost;
     }
     if (must<HTMLInputElement>("c-boya").checked) {
@@ -1595,7 +1582,7 @@ export function mountPlanner(root: HTMLElement): () => void {
         Math.round(netWall * (parseFloat(must<HTMLInputElement>("p-boya").value) || 0) * 10) / 10;
       const cost = qty * (parseFloat(must<HTMLInputElement>("q-boya").value) || 0);
       total += cost;
-      lines.push([`Boya — ${qty} litr`, cost]);
+      lines.push([copy.paintLine(qty), cost]);
       stageCosts.bitirme += cost;
     }
     if (must<HTMLInputElement>("c-kafel").checked) {
@@ -1604,7 +1591,7 @@ export function mountPlanner(root: HTMLElement): () => void {
         10;
       const cost = qty * (parseFloat(must<HTMLInputElement>("q-kafel").value) || 0);
       total += cost;
-      lines.push([`Kafel/laminat — ${qty} m²`, cost]);
+      lines.push([copy.floorLine(qty), cost]);
       stageCosts.bitirme += cost;
     }
 
@@ -1616,9 +1603,9 @@ export function mountPlanner(root: HTMLElement): () => void {
       )
       .join("");
     const chips = [
-      `Divar ${netWall.toFixed(1)} m²`,
-      `Döşəmə ${floorArea.toFixed(1)} m²`,
-      openingArea > 0 ? `Açılış −${openingArea.toFixed(1)} m²` : "Açılış yoxdur",
+      copy.wallChip(netWall.toFixed(1)),
+      copy.floorChip(floorArea.toFixed(1)),
+      openingArea > 0 ? copy.openChip(openingArea.toFixed(1)) : copy.noOpen,
     ];
     must("qtyChips").innerHTML = chips.map((text) => `<span>${text}</span>`).join("");
     updateStageDisplay();
@@ -1627,7 +1614,7 @@ export function mountPlanner(root: HTMLElement): () => void {
   };
 
   const smetaText = () => {
-    const title = "Nibras smeta";
+    const title = copy.estimateTitle;
     const dims = must("dimsLabel").innerText.replace(/\s+/g, " ").trim();
     const chips = must("qtyChips").innerText.replace(/\s+/g, " ").trim();
     const lines = Array.from(must("estLines").querySelectorAll(".line")).map((el) =>
@@ -1717,7 +1704,7 @@ export function mountPlanner(root: HTMLElement): () => void {
     }
     if (btn) {
       const prev = btn.textContent;
-      btn.textContent = "Kopyalandı";
+      btn.textContent = copy.copied;
       window.setTimeout(() => {
         btn.textContent = prev;
       }, 1400);

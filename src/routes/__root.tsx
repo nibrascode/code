@@ -253,7 +253,7 @@ function RootDocument() {
   const searchStr = useRouterState({ select: (state) => state.location.searchStr });
   const isHome = pathname === "/" || /^\/(en|tr|ar|ru)\/?$/.test(pathname);
   const isStudio = pathname.startsWith("/nx-studio");
-  const isPlanner = pathname === "/planner" || pathname.startsWith("/planner/");
+  const isPlanner = /(?:^|\/)planner\/?$/.test(pathname);
   const lang = langFromLocation(pathname, searchStr);
 
   return (

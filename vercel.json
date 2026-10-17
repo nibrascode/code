@@ -177,5 +177,23 @@
         }
       ]
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/en/calc",
+      "destination": "/calc/index.html"
+    },
+    {
+      "source": "/tr/calc",
+      "destination": "/calc/index.html"
+    },
+    {
+      "source": "/ar/calc",
+      "destination": "/calc/index.html"
+    },
+    {
+      "source": "/ru/calc",
+      "destination": "/calc/index.html"
+    }
   ]
 }

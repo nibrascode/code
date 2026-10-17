@@ -2097,6 +2097,7 @@
       const input = box.querySelector("input");
       const go = box.querySelector(".go");
       const open = box.querySelector(".open");
+      open.href = uiLangCode === "az" ? "/calc" : "/" + uiLangCode + "/calc";
       const note = box.querySelector(".note");
       title.textContent = c.title;
       sub.textContent = c.sub;

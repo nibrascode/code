@@ -762,9 +762,103 @@
   </url>
   <url>
     <loc>https://nibrascode.com/planner</loc>
-    <lastmod>2026-10-16</lastmod>
+    <lastmod>2026-10-17</lastmod>
     <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/planner"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/planner"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/planner"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/planner"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/planner"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/planner"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/en/planner</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/planner"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/planner"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/planner"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/planner"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/planner"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/planner"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/tr/planner</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/planner"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/planner"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/planner"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/planner"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/planner"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/planner"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/ar/planner</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/planner"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/planner"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/planner"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/planner"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/planner"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/planner"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/ru/planner</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/planner"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/planner"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/planner"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/planner"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/planner"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/planner"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/calc</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/calc"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/calc"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/calc"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/calc"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/calc"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/calc"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/en/calc</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/calc"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/calc"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/calc"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/calc"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/calc"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/calc"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/tr/calc</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/calc"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/calc"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/calc"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/calc"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/calc"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/calc"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/ar/calc</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/calc"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/calc"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/calc"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/calc"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/calc"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/calc"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/ru/calc</loc>
+    <lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/calc"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/calc"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/calc"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/calc"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/calc"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/calc"/>
   </url>
   <url>
     <loc>https://nibrascode.com/faq</loc>
