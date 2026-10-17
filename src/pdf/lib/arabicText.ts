@@ -34,6 +34,15 @@ export const normalizeArabicPresentationForms = (value: string) =>
 /** Remove harakat, Quranic marks and tatweel. */
 export const stripArabicDiacritics = (value: string) => value.replace(ARABIC_DIACRITICS, '');
 
+const splitGlued = (token: string) => {
+  // split before a non-initial "وال"/"ال" (≥4 letters before it, ≥3 letters after the article)
+  for (let i = 4; i <= token.length - 5; i++) {
+    const art = token.startsWith('وال', i) ? 3 : token.startsWith('ال', i) && token[i - 1] !== 'ل' ? 2 : 0;
+    if (art && token.length - i - art >= 3) return `${token.slice(0, i)} ${token.slice(i)}`;
+  }
+  return token;
+};
+
 const tidyArabicLine = (line: string) => line
   // Alef wasla is a Quranic spelling of a plain alef.
   .replace(/\u0671/g, '\u0627')
@@ -42,6 +51,11 @@ const tidyArabicLine = (line: string) => line
   .replace(/(?<=[\u0621-\u064A])\s*,/g, '،')
   .replace(/(?<=[\u0621-\u064A])\s*;/g, '؛')
   .replace(/(?<=[\u0621-\u064A])\s*\?/g, '؟')
+  // OCR glues Arabic words to digits and Latin words: "من20" → "من 20", "منصةNibras" → "منصة Nibras".
+  .replace(/([\u0621-\u064A])(?=[0-9A-Za-z])/g, '$1 ')
+  .replace(/([0-9A-Za-z])(?=[\u0621-\u064A])/g, '$1 ')
+  // Very long tokens usually are two words glued together before a definite article: "العربيوالإسلامي" → "العربي والإسلامي".
+  .replace(/[\u0621-\u064A]{11,}/g, splitGlued)
   // No space before Arabic/Latin punctuation, one space after it.
   .replace(/ +([،؛؟!:.,;?)\]»])/g, '$1')
   .replace(/([(\[«]) +/g, '$1')

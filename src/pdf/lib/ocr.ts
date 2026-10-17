@@ -182,7 +182,11 @@ export async function detectOcrLangs(sample: HTMLCanvasElement, fallback: OcrLan
       const c = cands[i];
       if (i > 0) await worker.reinitialize(c.join("+"));
       await worker.setParameters({ tessedit_pageseg_mode: "3", user_defined_dpi: "300" });
-      const r = await worker.recognize(part as never);
+      let r = await worker.recognize(part as never);
+      if ((r.data.text.match(/\p{L}/gu) || []).length < 8) {
+        await worker.setParameters({ tessedit_pageseg_mode: "6" });
+        r = await worker.recognize(part as never);
+      }
       const letters = (r.data.text.match(/\p{L}/gu) || []).length;
       const flat = r.data.text.replace(/\s+/g, "");
       const clean = flat.length ? (flat.match(/[\p{L}\p{N}.,;:!?'"()-]/gu) || []).length / flat.length : 0;
@@ -197,7 +201,7 @@ export async function detectOcrLangs(sample: HTMLCanvasElement, fallback: OcrLan
     await worker.terminate();
   }
   // a page the Arabic model can read letter by letter is Arabic, even when another model is "confident" about junk
-  if (best && best.langs[0] !== "ara" && ara.letters >= 12 && ara.conf >= 35 && ara.share >= 0.6 && ara.letters >= 25 && ara.conf >= latConf - 10) return ["ara"];
+  if (best && best.langs[0] !== "ara" && ara.letters >= 12 && ((ara.conf >= 35 && ara.share >= 0.6 && ara.letters >= 25 && ara.conf >= latConf - 10) || (ara.share >= 0.8 && ara.letters >= 30 && best.conf < 70))) return ["ara"];
   if (!best || best.conf === 0) return fallback === "eng" ? ["eng"] : [fallback, "eng"];
   if (best.langs[0] !== "aze") return best.langs[0] === "ara" ? ["ara"] : best.langs;
   const t = best.text;
@@ -211,9 +215,9 @@ const dehyphenate = (t: string) => t.replace(/(\p{L}{2})[-\u00AD]\n(\p{Ll})/gu, 
 type Src = HTMLCanvasElement | Blob | string;
 export type OcrSource = Src | (() => Promise<HTMLCanvasElement>);
 
-function crop(c: HTMLCanvasElement, x: number, y: number, w: number, h: number): HTMLCanvasElement {
+function crop(c: HTMLCanvasElement, x: number, y: number, w: number, h: number, scale = 1): HTMLCanvasElement {
   const o = document.createElement("canvas");
-  o.width = Math.max(1, Math.round(w)); o.height = Math.max(1, Math.round(h));
+  o.width = Math.max(1, Math.round(w * scale)); o.height = Math.max(1, Math.round(h * scale));
   const cx = o.getContext("2d")!;
   cx.fillStyle = "#fff"; cx.fillRect(0, 0, o.width, o.height);
   cx.drawImage(c, x, y, w, h, 0, 0, o.width, o.height);
@@ -334,9 +338,21 @@ async function recognizeLines(worker: TessWorker, img: HTMLCanvasElement, tick: 
   for (let i = 0; i < bands.length; i++) {
     const b = bands[i];
     const c = crop(img, 0, b.y0 - pad, img.width, b.y1 - b.y0 + pad * 2);
-    const r = await worker.recognize(c as never);
+    let r = await worker.recognize(c as never);
     tick((i + 1) / bands.length);
-    const tx = r.data.text.replace(/\s+/g, " ").trim();
+    let tx = r.data.text.replace(/\s+/g, " ").trim();
+    if (!tx || r.data.confidence < 45) {
+      // bold headings / odd sizes: re-read at other scales and in raw-line mode, keep the most confident non-empty reading
+      for (const [sc, psm] of [[0.7, "7"], [1.4, "7"], [1, "13"], [0.5, "7"]] as const) {
+        await worker.setParameters({ tessedit_pageseg_mode: psm });
+        const v = sc === 1 ? c : crop(c, 0, 0, c.width, c.height, sc);
+        const r2 = await worker.recognize(v as never);
+        const t2 = r2.data.text.replace(/\s+/g, " ").trim();
+        if (t2 && (!tx || r2.data.confidence > r.data.confidence)) { r = r2; tx = t2; }
+        if (tx && r.data.confidence >= 60) break;
+      }
+      await worker.setParameters({ tessedit_pageseg_mode: "7" });
+    }
     if (!tx) continue;
     if (prevEnd >= 0 && b.y0 - prevEnd > H * 1.1) lines.push("");
     lines.push(tx);
