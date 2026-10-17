@@ -440,6 +440,70 @@ export const OWN_JS: OwnPageContent = {
       ],
     },
   ],
+  async: [
+    {
+      id: "wait",
+      title: t("Cavabı gözlə", "Wait for the answer", "Cevabı bekle", "انتظر الجواب", "Дождись ответа"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "Server 1-2 saniyə gecikir. Gözləməsən nəticə undefined və ya Promise olur. async funksiyanın əvvəlində yazılır. await yalnız fetch və json qarşısına qoyulur və növbəti sətirə keçməyə qoymur.",
+            "The server takes 1–2 seconds. If you do not wait, the result is undefined or a Promise. async is written at the start of the function. await goes only in front of fetch and json, and it does not let the next line run yet.",
+            "Sunucu 1-2 saniye gecikir. Beklemezsen sonuç undefined veya Promise olur. async fonksiyonun başında yazılır. await yalnız fetch ve json önüne konur ve sonraki satıra geçirmez.",
+            "الخادم يتأخر ثانية أو اثنتين. إذا لم تنتظر صارت النتيجة undefined أو Promise. تُكتب async في أول الدالة. await توضع فقط أمام fetch وjson ولا تسمح بالسطر التالي بعد.",
+            "Сервер отвечает через 1–2 секунды. Если не ждать, результат будет undefined или Promise. async пишется в начале функции. await ставится только перед fetch и json и не пускает следующую строку раньше времени.",
+          )],
+          code: 'async function numune() {\n  const cavab = await fetch(url);\n  const melumat = await cavab.json();\n}',
+        },
+      ],
+    },
+    {
+      id: "send",
+      title: t("async ilə sual göndər", "Send a question with async", "async ile soru gönder", "أرسل سؤالاً بـ async", "Отправь вопрос через async"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "Eyni sorğu indi funksiyanın içindədir. await hər iki yerdə durur: fetch və json. Funksiya özü işləmir, sonunda adı ilə çağırılır. Açar yenə də səhifəyə yazılmır.",
+            "The same request now sits inside a function. await stands in both places: fetch and json. The function does not run by itself. Call it by name at the end. The key still does not belong on the page.",
+            "Aynı sorgu şimdi fonksiyonun içindedir. await iki yerde durur: fetch ve json. Fonksiyon kendiliğinden çalışmaz, sonda adıyla çağrılır. Anahtar yine sayfaya yazılmaz.",
+            "الطلب نفسه الآن داخل دالة. await تقف في الموضعين: fetch وjson. الدالة لا تعمل وحدها، تُستدعى باسمها في النهاية. المفتاح لا يُكتب في الصفحة.",
+            "Тот же запрос теперь внутри функции. await стоит в обоих местах: fetch и json. Функция сама не работает, в конце её вызывают по имени. Ключ по-прежнему не пишут на страницу.",
+          )],
+          code: 'const apiKey = "BURAYA_OZ_API_ACARINIZI_YAZIN";\nconst url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;\n\nasync function aiSualGonder(sualMetni) {\n  const sorguMelumati = {\n    contents: [{ parts: [{ text: sualMetni }] }]\n  };\n  const cavab = await fetch(url, {\n    method: "POST",\n    headers: { "Content-Type": "application/json" },\n    body: JSON.stringify(sorguMelumati)\n  });\n  const melumat = await cavab.json();\n  const aiMetni = melumat.candidates[0].content.parts[0].text;\n  console.log(aiMetni);\n}\n\naiSualGonder("JavaScript-də massiv nədir?");',
+        },
+      ],
+    },
+    {
+      id: "catch",
+      title: t("try və catch", "try and catch", "try ve catch", "try وcatch", "try и catch"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "İnternet kəsilə bilər və ya açar səhv ola bilər. try içinə işləməli kod yazılır. Xəta olsa proqram dayanmır, catch işə düşür.",
+            "The internet can drop, or the key can be wrong. The code that should run goes inside try. If there is an error, the program does not stop. catch runs instead.",
+            "İnternet kesilebilir veya anahtar yanlış olabilir. Çalışması gereken kod try içine yazılır. Hata olursa program durmaz, catch çalışır.",
+            "قد ينقطع الإنترنت أو يكون المفتاح خطأ. الكود الذي يجب أن يعمل يُكتب داخل try. إذا حدث خطأ لا يتوقف البرنامج، ويعمل catch.",
+            "Интернет может пропасть или ключ может быть неверным. Код, который должен работать, пишется в try. Если будет ошибка, программа не останавливается, срабатывает catch.",
+          )],
+          code: 'async function tehlukesizSorgu(sual) {\n  try {\n    const cavab = await fetch(url, {\n      method: "POST",\n      headers: { "Content-Type": "application/json" },\n      body: JSON.stringify({\n        contents: [{ parts: [{ text: sual }] }]\n      })\n    });\n    const melumat = await cavab.json();\n    console.log(melumat.candidates[0].content.parts[0].text);\n  } catch (xeta) {\n    console.log("Xəta baş verdi. İnterneti və açarı yoxla.");\n  }\n}',
+        },
+      ],
+    },
+    {
+      id: "faq",
+      title: t("Suallar", "Questions", "Sorular", "أسئلة", "Вопросы"),
+      blocks: [
+        {
+          paragraphs: [
+            t("await niyə xəta verir? Funksiyanın əvvəlində async yoxdur. İkisi birlikdə işləyir.", "Why does await throw? The function has no async at the start. The two work together.", "await neden hata verir? Fonksiyonun başında async yoktur. İkisi birlikte çalışır.", "لماذا يُظهر await خطأ؟ لا توجد async في أول الدالة. الاثنان يعملان معاً.", "Почему await даёт ошибку? В начале функции нет async. Они работают вместе."),
+            t("Ekranda Promise niyə görünür? cavab.json() qarşısında await yoxdur. fetch qarşısında da olmalıdır.", "Why do you see a Promise? There is no await in front of cavab.json(). It is also required in front of fetch.", "Ekranda Promise neden görünür? cavab.json() önünde await yoktur. fetch önünde de olmalıdır.", "لماذا تظهر Promise؟ لا توجد await أمام cavab.json(). وهي لازمة أيضاً أمام fetch.", "Почему на экране Promise? Перед cavab.json() нет await. Перед fetch она тоже нужна."),
+            t("Funksiya niyə işləmir? Yazmaq kifayət etmir. Sonda aiSualGonder(\"sual\") çağır.", "Why does the function not run? Writing it is not enough. Call aiSualGonder(\"sual\") at the end.", "Fonksiyon neden çalışmaz? Yazmak yetmez. Sonda aiSualGonder(\"sual\") çağır.", "لماذا لا تعمل الدالة؟ كتابتها لا تكفي. في النهاية استدعِ aiSualGonder(\"sual\").", "Почему функция не работает? Написать её мало. В конце вызови aiSualGonder(\"sual\")."),
+            t(".then() ilə fərqi nədir? async/await eyni işi alt-alta yazır. Xəta ayrıca catch deyil, try və catch ilə tutulur.", "What is the difference from .then()? async/await writes the same job line by line. The error is not a separate catch chain. try and catch hold it.", ".then() ile farkı nedir? async/await aynı işi alt alta yazar. Hata ayrı catch değil, try ve catch ile tutulur.", "ما الفرق عن .then()؟ async/await تكتب العمل نفسه سطراً تحت سطر. الخطأ لا يُمسك بسلسلة catch منفصلة، بل بـ try وcatch.", "В чём разница с .then()? async/await пишет ту же работу строка за строкой. Ошибку ловят не отдельной цепочкой catch, а try и catch."),
+          ],
+        },
+      ],
+    },
+  ],
   duyme: [
     {
       id: "click",
