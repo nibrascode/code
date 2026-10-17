@@ -711,6 +711,53 @@ export const OWN_JS: OwnPageContent = {
       ],
     },
   ],
+  rag: [
+    {
+      id: "what",
+      title: t("RAG nədir", "What RAG is", "RAG nedir", "ما هو RAG", "Что такое RAG"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "AI ümumi mövzunu bilir, sənin PDF-ini yox. Bütün kitabı bir sorğuya qoymaq olmur: limit dolur. Tanımadığı yerdə isə uydurur. RAG əvvəl suala uyğun paraqrafı tapır, sonra AI-ya deyir: yalnız bu mətndən cavab ver. Mətn yoxdursa, \"Bu məlumat sənəddə yoxdur\" yaz.",
+            "The AI knows a general topic, not your PDF. You cannot put a whole book into one request: the limit fills up. Where it does not know the text, it invents. RAG first finds the paragraph that matches the question, then tells the AI: answer only from this text. If the text has no answer, write \"This information is not in the document\".",
+            "AI genel konuyu bilir, senin PDF'ini değil. Bütün kitabı bir sorguya koymak olmaz: limit dolar. Tanımadığı yerde ise uydurur. RAG önce soruya uyan paragrafı bulur, sonra AI'ya der: yalnız bu metinden cevap ver. Metin yoksa, \"Bu bilgi belgede yok\" yaz.",
+            "الذكاء يعرف الموضوع العام لا ملف PDF الخاص بك. لا يمكن وضع الكتاب كله في طلب واحد: يمتلئ الحد. وحيث لا يعرف النص يخترع. RAG يجد أولاً الفقرة المناسبة للسؤال ثم يقول للذكاء: أجب من هذا النص فقط. إذا لم يكن الجواب فاكتب \"هذه المعلومة ليست في المستند\".",
+            "ИИ знает общую тему, не твой PDF. Целую книгу в один запрос не положишь: лимит кончится. Где текста нет, он выдумывает. RAG сначала находит абзац под вопрос, потом говорит ИИ: отвечай только из этого текста. Если ответа нет, напиши «Этой информации в документе нет».",
+          )],
+        },
+      ],
+    },
+    {
+      id: "steps",
+      title: t("Dörd addım və kod", "Four steps and the code", "Dört adım ve kod", "أربع خطوات والكود", "Четыре шага и код"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "Sənəd kiçik paraqraflara bölünür. Hər paraqraf rəqəmə, vektora çevrilir ki, məna tutulsun. Sual gələndə ən oxşar paraqraf tapılır. O paraqraf və sual birlikdə göndərilir. Minlərlə parça adi massivə sığmır. Supabase-də pgvector ilə saxlanır və SQL ən yaxın parçanı tapır. Axtarış səhv paraqraf seçsə, cavab da səhv olur.",
+            "The document is split into small paragraphs. Each paragraph becomes numbers, a vector, so the meaning can be matched. When a question arrives, the closest paragraph is found. That paragraph and the question are sent together. Thousands of pieces do not fit in a plain array. In Supabase they are stored with pgvector, and SQL finds the closest piece. If the search picks the wrong paragraph, the answer is wrong too.",
+            "Belge küçük paragraflara bölünür. Her paragraf rakama, vektöre çevrilir ki, anlam tutulsun. Soru gelince en benzer paragraf bulunur. O paragraf ve soru birlikte gönderilir. Binlerce parça düz diziye sığmaz. Supabase'de pgvector ile saklanır ve SQL en yakın parçayı bulur. Arama yanlış paragraf seçerse cevap da yanlış olur.",
+            "يُقسّم المستند إلى فقرات صغيرة. كل فقرة تصبح أرقاماً، متجهاً، كي يُطابق المعنى. عند وصول السؤال تُوجد أقرب فقرة. تُرسل تلك الفقرة والسؤال معاً. آلاف القطع لا تسع في مصفوفة عادية. في Supabase تُحفظ بـ pgvector ويجد SQL أقرب قطعة. إذا اختار البحث فقرة خاطئة صار الجواب خاطئاً أيضاً.",
+            "Документ режется на короткие абзацы. Каждый абзац становится числами, вектором, чтобы смысл совпал. Когда приходит вопрос, находится самый близкий абзац. Этот абзац и вопрос уходят вместе. Тысячи кусков в обычный массив не лезут. В Supabase их хранят через pgvector, и SQL находит ближайший кусок. Если поиск выбрал не тот абзац, ответ тоже будет неверным.",
+          )],
+          code: 'const apiKey = process.env.GEMINI_API_KEY;\nconst url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;\n\nasync function seneddenCavabAl(istifadeciSuali, senedinParaqrafi) {\n  const sorguMelumati = {\n    systemInstruction: {\n      parts: [{\n        text: "Sən sənəd köməkçisisən. Yalnız verilən mətndən cavab ver. Mətndə yoxdursa yaz: Bu məlumat sənəddə yoxdur. Uydurma."\n      }]\n    },\n    contents: [{\n      parts: [{\n        text: `Kontekst:\\n${senedinParaqrafi}\\n\\nSual: ${istifadeciSuali}`\n      }]\n    }]\n  };\n  const cavab = await fetch(url, {\n    method: "POST",\n    headers: { "Content-Type": "application/json" },\n    body: JSON.stringify(sorguMelumati)\n  });\n  const melumat = await cavab.json();\n  console.log(melumat.candidates[0].content.parts[0].text);\n}\n\nconst pdfdenTapilanHisse = "Nibras PDF aləti brauzerdə açılır. Fayl serverə yüklənmir.";\nseneddenCavabAl("PDF aləti harada açılır?", pdfdenTapilanHisse);',
+        },
+      ],
+    },
+    {
+      id: "faq",
+      title: t("Suallar", "Questions", "Sorular", "أسئلة", "Вопросы"),
+      blocks: [
+        {
+          paragraphs: [
+            t("100 səhifəni bir contents-ə qoymaq olarmı? Xeyr. Token limiti dolur. Sənəd kiçik paraqraflara bölünür.", "Can I put 100 pages into one contents? No. The token limit fills up. The document is split into small paragraphs.", "100 sayfayı bir contents'e koymak olur mu? Hayır. Token limiti dolar. Belge küçük paragraflara bölünür.", "هل أضع 100 صفحة في contents واحد؟ لا. يمتلئ حد الرموز. يُقسّم المستند إلى فقرات صغيرة.", "Можно ли положить 100 страниц в один contents? Нет. Лимит токенов кончится. Документ режется на короткие абзацы."),
+            t("Niyə uydurur? Təlimatda qadağa yoxdur. \"Yalnız bu mətndən cavab ver, yoxdursa belə yaz\" cümləsi systemInstruction-da durmalıdır.", "Why does it invent? The instruction has no ban. The sentence \"Answer only from this text, and if it is missing, say so\" must sit in systemInstruction.", "Neden uydurur? Talimatta yasak yok. \"Yalnız bu metinden cevap ver, yoksa böyle yaz\" cümlesi systemInstruction'da durmalıdır.", "لماذا يخترع؟ لا منع في التعليمة. جملة \"أجب من هذا النص فقط، وإذا غاب فاكتب ذلك\" يجب أن تقف في systemInstruction.", "Почему выдумывает? В инструкции нет запрета. Фраза «Отвечай только из этого текста, если нет — так и напиши» должна стоять в systemInstruction."),
+            t("Cavab niyə səhv paraqrafdan gəlir? Axtarış uyğun parçanı seçməyib. AI yalnız ona veriləni görür.", "Why does the answer come from the wrong paragraph? The search did not pick the matching piece. The AI only sees what it was given.", "Cevap neden yanlış paragraftan gelir? Arama uyan parçayı seçmemiş. AI yalnız kendine verileni görür.", "لماذا يأتي الجواب من فقرة خاطئة؟ البحث لم يختر القطعة المناسبة. الذكاء يرى فقط ما أُعطي له.", "Почему ответ из не того абзаца? Поиск не выбрал подходящий кусок. ИИ видит только то, что ему дали."),
+            t("RAG iki sözdə nədir? Tap və yalnız tapılandan yaz. Özündən əlavə etmə.", "What is RAG in two words? Find, and write only from what was found. Do not add anything of your own.", "RAG iki sözde nedir? Bul ve yalnız bulunandan yaz. Kendinden ekleme.", "ما هو RAG بكلمتين؟ جد واكتب فقط مما وُجد. لا تضف من عندك.", "Что такое RAG в двух словах? Найди и пиши только из найденного. Своего не добавляй."),
+          ],
+        },
+      ],
+    },
+  ],
   duyme: [
     {
       id: "click",
