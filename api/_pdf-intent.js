@@ -19,6 +19,12 @@ export const PDF_TOOLS = {
   watermark: { needs: "pdf", description: "Add a text watermark", params: ["text", "range"] },
   protect: { needs: "pdf", description: "Password-protect a PDF (password asked in the browser)", params: [] },
   unlock: { needs: "pdf", description: "Remove a PDF password (password asked in the browser)", params: [] },
+  // interactive tools: the chat answers with a localized card linking to the exact page
+  sign: { needs: "link", description: "Sign a PDF (draw/type signature, place it on the page)", params: [] },
+  "write-pdf": { needs: "link", description: "Write text and save it as a PDF", params: [] },
+  scan: { needs: "link", description: "Scan a document with the camera into a PDF", params: [] },
+  preview: { needs: "link", description: "View a PDF and its pages", params: [] },
+  batch: { needs: "link", description: "Process many files at once", params: [] },
 };
 
 const LANGS = ["az", "en", "tr", "ar", "ru"];
@@ -27,7 +33,7 @@ const norm = (s) => String(s || "").toLowerCase().normalize("NFC").replace(/[\u0
 
 // word stems per language group (az/tr/en/ru/ar mixed on purpose: users mix languages)
 const R = {
-  pdf: /\bpdf\b|\.pdf|пдф|بي دي اف|بي دي إف/i,
+  pdf: /\bpdfs?\b|\.pdf|пдф|بي دي اف|بي دي إف/i,
   docx: /\bdocx?\b|\bword\b|ворд|ورد/i,
   how: /^\s*(?:necə|nece|nasıl|nasil|how\b|как\b|كيف|what is|nədir|nedir|что такое|ما هو)/i,
   unlock: /(?:parol|şifr|sifr|password|пароль|парол|كلمة)[^.!?\n]{0,40}(?:sil|aç\b|ac\b|çıxar|cixar|götür|gotur|qaldır|qaldir|kaldır|kaldir|remove|unlock|decrypt|break|снять|убрать|сними|удал|إزالة|ازالة|فك|إلغاء|الغاء|احذف)|(?:sil|aç\b|çıxar|qaldır|kaldır|remove|unlock|decrypt|сними|убери|сними|удали|فك|ازل|أزل)[^.!?\n]{0,25}(?:parol|şifr|sifr|password|пароль|парол|كلمة)|\bunlock\b|\bdecrypt\b|расшифр/i,
@@ -50,6 +56,11 @@ const R = {
   scanned: /skan|scan|taranmış|taranmis|скан|ممسوح|مسح ضوئي/i,
   image: /şəkil|sekil|shekil|image|picture|photo|\bjpe?g\b|\bpng\b|görsel|gorsel|resim|fotoğraf|fotograf|картин|изображ|фото|صور/i,
   toPdf: /pdf\s*(?:-?(?:ə|e|a|ya|ye|yə)|\b)|в\s*pdf|الى\s*pdf|إلى\s*pdf|to\s*pdf|into\s*pdf|make\s*(?:a\s*)?pdf|pdf\s*(?:et|düzəlt|yap|yarat|çevir|qur)/i,
+  sign: /imzala|imza\b|imzan|\bsign\b|signature|e-?sign|imzalay|подпис|подпиш|توقيع|وقع(?=\s|$)|وقعي|توقيع/i,
+  writePdf: /(?:text|mətn|metn|metin|текст|نص)\s*(?:to|-?dən|-?dan|-?den|-?dan|в|إلى|الى)\s*pdf|(?:yaz\w*|write|напиши\w*|اكتب\w*|اكتبي)[^.!?\n]{0,25}pdf|pdf[^.!?\n]{0,10}(?:yaz\w*|write)|metin\w*\s+pdf\s*(?:yap|et)|sıfırdan\s+pdf|pdf\s+from\s+scratch/i,
+  scanCam: /kamera|camera|cam\b|камер|الكاميرا|كاميرا|sənəd\s+skan|document\s+scan|scan\s+(?:a\s+)?document|belge\s+tara|belgeyi\s+tara|сканир\w*\s+документ|مسح\s+مستند/i,
+  preview: /önizl|onizl|baxış|baxis|\bpreview\b|\bview\b|\bopen\b|aç\b|göstər|goster|göster\b|предпросмотр|просмотр|посмотр|покажи|معاينة|عرض|اعرض|افتح/i,
+  batch: /toplu|\bbatch\b|\bbulk\b|many\s+files|çoxlu|çok\s+sayıda|toplu\s+işl|пакетн|массов|много\s+файл|دفعة|جماعي|عدة\s+ملفات/i,
   toWord: /\bword\b|\bdocx\b|ворд|ورد/i,
 };
 
@@ -97,6 +108,10 @@ function detect(message, files) {
   if (R.unlock.test(m)) return "unlock";
   if (R.protect.test(m)) return "protect";
   if (R.watermark.test(m)) return "watermark";
+  if (R.sign.test(m) && (pdfWord || has.pdf || m.length < 60) && !R.how.test(m)) return "sign";
+  if (R.batch.test(m) && (pdfWord || has.pdf || files.length > 1)) return "batch";
+  if (R.scanCam.test(m) && !has.pdf && !has.image) return "scan";
+  if (R.writePdf.test(m)) return "write-pdf";
   if (R.merge.test(m) && (pdfWord || has.pdf)) return "merge";
   if (R.extractPages.test(m)) return "extract-pages";
   if (R.deletePages.test(m)) return "delete-pages";
@@ -114,6 +129,7 @@ function detect(message, files) {
   }
   if (has.image && !has.pdf && (pdfWord || R.toPdf.test(m))) return "image-pdf";
   if ((has.pdf || pdfWord) && R.image.test(m)) return "pdf-image";
+  if (pdfWord && R.preview.test(m) && !R.how.test(m)) return "preview";
   // a lone image with a short, unclear message: read it (the common case) unless it clearly asks to edit / generate a picture
   if (has.image && !has.pdf && !has.docx && files.some((f) => f.attached) && m.length <= 50 && !R.edit.test(m) && !R.how.test(m)) return "ocr";
   return null;
@@ -154,6 +170,14 @@ const SAY = {
   protect: { az: "PDF-i parolla qoruyacağam. Parolu aşağıdakı kartda yazın: o söhbətə və serverə getmir.", en: "I will password-protect the PDF. Enter the password in the card below: it never goes to the chat or the server.", tr: "PDF'yi parolayla koruyacağım. Parolu aşağıdaki kartta yazın: sohbete ve sunucuya gitmez.", ar: "سأحمي PDF بكلمة مرور. اكتبها في البطاقة أدناه: لا تُرسل إلى المحادثة ولا إلى الخادم.", ru: "Защищу PDF паролем. Введите пароль в карточке ниже: он не попадёт ни в чат, ни на сервер." },
   unlock: { az: "PDF-in parolunu götürürəm. Parolu aşağıdakı kartda yazın: o serverə getmir.", en: "I will remove the PDF password. Enter it in the card below: it never goes to the server.", tr: "PDF parolasını kaldıracağım. Parolu aşağıdaki kartta yazın: sunucuya gitmez.", ar: "سأزيل كلمة مرور PDF. اكتبها في البطاقة أدناه: لا تُرسل إلى الخادم.", ru: "Сниму пароль с PDF. Введите его в карточке ниже: он не уходит на сервер." },
 };
+const LINK = {
+  sign: { az: "PDF-i imzalamaq üçün imza səhifəsini açın: imzanı çəkin və ya yazın, səhifədə yerləşdirin.", en: "To sign a PDF, open the signing page: draw or type your signature and place it on the page.", tr: "PDF'yi imzalamak için imza sayfasını açın: imzanızı çizin veya yazın, sayfaya yerleştirin.", ar: "لتوقيع ملف PDF افتح صفحة التوقيع: ارسم توقيعك أو اكتبه وضعه على الصفحة.", ru: "Чтобы подписать PDF, откройте страницу подписи: нарисуйте или введите подпись и поместите её на страницу." },
+  "write-pdf": { az: "Mətni yazıb PDF etmək üçün bu səhifəni açın:", en: "To write text and save it as a PDF, open this page:", tr: "Metin yazıp PDF yapmak için bu sayfayı açın:", ar: "لكتابة نص وحفظه كملف PDF افتح هذه الصفحة:", ru: "Чтобы написать текст и сохранить его как PDF, откройте эту страницу:" },
+  scan: { az: "Kamera ilə sənədi skan edib PDF etmək üçün bu səhifəni açın (kameraya icazə verin):", en: "To scan a document with your camera into a PDF, open this page (allow camera access):", tr: "Belgeyi kamerayla tarayıp PDF yapmak için bu sayfayı açın (kamera izni verin):", ar: "لمسح مستند بالكاميرا وحفظه PDF افتح هذه الصفحة (اسمح بالوصول إلى الكاميرا):", ru: "Чтобы отсканировать документ камерой в PDF, откройте эту страницу (разрешите доступ к камере):" },
+  preview: { az: "PDF-ə baxmaq və səhifələrini görmək üçün bu səhifəni açın:", en: "To view a PDF and its pages, open this page:", tr: "PDF'yi ve sayfalarını görmek için bu sayfayı açın:", ar: "لعرض ملف PDF وصفحاته افتح هذه الصفحة:", ru: "Чтобы просмотреть PDF и его страницы, откройте эту страницу:" },
+  batch: { az: "Çoxlu faylı bir dəfəyə işləmək üçün toplu emal səhifəsini açın:", en: "To process many files at once, open the batch page:", tr: "Birçok dosyayı tek seferde işlemek için toplu işlem sayfasını açın:", ar: "لمعالجة عدة ملفات دفعة واحدة افتح صفحة المعالجة الجماعية:", ru: "Чтобы обработать много файлов сразу, откройте страницу пакетной обработки:" },
+};
+const LINK_NOTE = { az: "Fayllar cihazınızda işlənir, heç yerə yüklənmir.", en: "Files are processed on your device and never uploaded.", tr: "Dosyalar cihazınızda işlenir, hiçbir yere yüklenmez.", ar: "تُعالج الملفات على جهازك ولا تُرفع إلى أي مكان.", ru: "Файлы обрабатываются на вашем устройстве и никуда не загружаются." };
 const DONE = { az: "Hazırdır. Fayl cihazınızda işləndi, heç yerə yüklənmədi.", en: "Done. The file was processed on your device and not uploaded.", tr: "Hazır. Dosya cihazınızda işlendi, hiçbir yere yüklenmedi.", ar: "تم. عولج الملف على جهازك ولم يُرفع إلى أي مكان.", ru: "Готово. Файл обработан на вашем устройстве и никуда не загружался." };
 const NEED = {
   az: (what) => `Bunun üçün ${what} lazımdır. Əlavə düyməsi (📎) ilə faylı seçin və ya bura sürüşdürün, sonra yenə yazın.`,
@@ -183,7 +207,7 @@ const MENU = {
   ar: "استلمت الملف. ماذا تريد أن أفعل؟ مثلاً:\n• تحويل PDF إلى صور (PNG/JPG)\n• استخراج النص (OCR تلقائي للمسح) أو التحويل إلى Word\n• دمج / تقسيم / استخراج الصفحات 2-4 / حذف صفحات\n• ضغط / تدوير / إضافة علامة مائية\n• إضافة كلمة مرور أو إزالتها\n• تحويل الصور إلى PDF",
   ru: "Файл получен. Что сделать? Например:\n• Превратить PDF в изображения (PNG/JPG)\n• Извлечь текст (на сканах автоматический OCR) или в Word\n• Объединить / разделить / извлечь страницы 2-4 / удалить страницы\n• Сжать / повернуть / добавить водяной знак\n• Поставить или снять пароль\n• Собрать изображения в PDF",
 };
-const TOOL_SLUG = { "pdf-image": "pdf-image", "extract-text": "pdf-ocr", ocr: "ocr", "pdf-word": "pdf-word", "word-pdf": "word-pdf", "image-pdf": "image-pdf", merge: "merge", split: "split", "extract-pages": "extract-pages", "delete-pages": "pages", compress: "compress", rotate: "rotate", watermark: "watermark", protect: "protect", unlock: "" };
+const TOOL_SLUG = { "pdf-image": "pdf-image", "extract-text": "pdf-ocr", ocr: "ocr", "pdf-word": "pdf-word", "word-pdf": "word-pdf", "image-pdf": "image-pdf", merge: "merge", split: "split", "extract-pages": "extract-pages", "delete-pages": "pages", compress: "compress", rotate: "rotate", watermark: "watermark", protect: "protect", unlock: "", sign: "sign", "write-pdf": "write-pdf", scan: "scan", preview: "preview", batch: "batch" };
 const pagePath = (lang, tool) => `${SITE}${lang === "az" ? "" : `/${lang}`}/pdf${TOOL_SLUG[tool] ? `/${TOOL_SLUG[tool]}` : ""}`;
 
 function cleanFiles(raw) {
@@ -200,7 +224,8 @@ export function pdfIntent(message, rawFiles, lang) {
   const files = cleanFiles(rawFiles);
   const attached = files.filter((f) => f.attached);
   const m = norm(message);
-  if (!files.length && (R.how.test(m) || !R.pdf.test(m))) return null;
+  const linkish = m.length <= 90 && (R.sign.test(m) || R.scanCam.test(m) || R.writePdf.test(m) || R.batch.test(m));
+  if (!files.length && !linkish && (R.how.test(m) || !R.pdf.test(m))) return null;
   const tool = detect(message, files);
   if (!tool) {
     // a file was just attached but the message names no tool: offer the menu (only for this message's attachments)
@@ -209,6 +234,7 @@ export function pdfIntent(message, rawFiles, lang) {
   }
   if (!files.length && R.how.test(m)) return null;
   const def = PDF_TOOLS[tool];
+  if (def.needs === "link") return { reply: `${LINK[tool][L]}\n${pagePath(L, tool)}\n${LINK_NOTE[L]}`, linkTool: tool, lang: L };
   const targets = pickTargets(tool, files);
   const need = def.needs;
   const okTargets = need === "pdf+" ? targets.length >= 2 : targets.length >= 1;
