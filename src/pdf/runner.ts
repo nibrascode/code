@@ -58,9 +58,18 @@ const CSS = `
 .nbp-thumb{width:64px;height:84px;object-fit:contain;border-radius:8px;background:#fff;flex:none}
 .nbp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px;margin-top:8px}.nbp-grid img{width:100%;border-radius:8px;background:#fff}
 .nbp-bar{height:6px;border-radius:99px;background:rgba(128,140,180,.25);overflow:hidden;margin-top:8px}.nbp-bar i{display:block;height:100%;width:4%;background:linear-gradient(90deg,#6d84ff,#7ee7ff);transition:width .25s}
+.nbp-live{position:relative;display:grid;grid-template-columns:auto 1fr auto;align-items:center;column-gap:12px;row-gap:8px;padding:10px 4px;margin-top:8px;animation:nbp-in .35s ease both}
+.nbp-orb{position:relative;width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#9fb2ff 35%,#6d84ff 65%,#7a6bff);box-shadow:0 0 18px rgba(109,132,255,.7),0 0 40px rgba(126,231,255,.35);animation:nbp-pulse 2.2s ease-in-out infinite}
+.nbp-orb:before{content:"";position:absolute;inset:-5px;border-radius:50%;background:conic-gradient(from 0deg,transparent,#7ee7ff,#a78bfa,transparent 70%);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 2px),#000 calc(100% - 1px));mask:radial-gradient(farthest-side,transparent calc(100% - 2px),#000 calc(100% - 1px));animation:nbp-spin 1.6s linear infinite}
+.nbp-stage{font:600 14px/1.3 system-ui,sans-serif;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;background:linear-gradient(90deg,currentColor 35%,#7ee7ff 50%,currentColor 65%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:nbp-shim 2.4s linear infinite}
+.nbp-pct{font:700 13px ui-monospace,monospace;opacity:.85;font-variant-numeric:tabular-nums}
+.nbp-line{grid-column:1/-1;height:2px;border-radius:2px;background:rgba(128,140,180,.18);overflow:hidden}.nbp-line i{display:block;height:100%;width:4%;background:linear-gradient(90deg,#6d84ff,#7ee7ff,#a78bfa);box-shadow:0 0 8px #7ee7ff;transition:width .3s}
+.nbp-ghost{grid-column:1/-1;justify-self:start;appearance:none;border:0;background:none;color:inherit;opacity:.6;font:500 12px system-ui,sans-serif;cursor:pointer;padding:2px 0;transition:opacity .15s}.nbp-ghost:hover{opacity:1;text-decoration:underline}
+@keyframes nbp-spin{to{transform:rotate(360deg)}}@keyframes nbp-pulse{50%{transform:scale(.88);filter:brightness(1.15)}}@keyframes nbp-shim{to{background-position:-250% 0}}
+.msg[data-pdf]:has(.nbp-live){background:none!important;border-color:transparent!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;padding-left:0!important;padding-right:0!important}
 .nbp-err{color:#ff9d9d;font-size:13px;margin-top:6px}
 @keyframes nbp-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-@media (prefers-reduced-motion:reduce){.nbp-card{animation:none}.nbp-btn{transition:none}}
+@media (prefers-reduced-motion:reduce){.nbp-card,.nbp-live{animation:none}.nbp-orb,.nbp-orb:before,.nbp-stage{animation:none}.nbp-stage{-webkit-text-fill-color:currentColor}.nbp-btn{transition:none}}
 `;
 function css() {
   if (document.getElementById("nbp-css")) return;
@@ -431,19 +440,20 @@ export async function handle(o: HandleOptions): Promise<RunResult[]> {
   box.setAttribute("data-nbp", "root");
   box.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
   o.container.append(box);
-  const st = el("div", "nbp-card");
+  const st = el("div", "nbp-live");
   st.setAttribute("data-nbp", "status");
-  const label = el("div", "", s.working);
-  const bar = el("div", "nbp-bar");
+  const orb = el("span", "nbp-orb");
+  const label = el("div", "nbp-stage", s.working);
+  const pct = el("span", "nbp-pct", "0%");
+  const bar = el("div", "nbp-line");
   const fill = el("i");
   bar.append(fill);
   let stop = false;
-  const cancel = el("button", "nbp-btn", s.cancel);
-  cancel.style.marginTop = "8px";
+  const cancel = el("button", "nbp-ghost", s.cancel);
   cancel.onclick = () => { stop = true; };
-  st.append(label, bar, cancel);
+  st.append(orb, label, pct, bar, cancel);
   box.append(st);
-  const progress = (l: string, f: number) => { label.textContent = l; fill.style.width = `${Math.max(4, Math.round(f * 100))}%`; o.onStatus?.(l); };
+  const progress = (l: string, f: number) => { const n = Math.max(0, Math.min(100, Math.round(f * 100))); label.textContent = l; pct.textContent = `${n}%`; fill.style.width = `${Math.max(4, n)}%`; o.onStatus?.(l); };
   try {
     const res = await runTool(o.action, o.files, { lang, t, s, box, progress, cancelled: () => stop });
     st.remove();
