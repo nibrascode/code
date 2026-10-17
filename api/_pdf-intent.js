@@ -19,7 +19,7 @@ export const PDF_TOOLS = {
   "img-gray": { needs: "image", description: "Make an image black and white", params: [] },
   "image-pdf": { needs: "image", description: "Images to one PDF", params: [] },
   merge: { needs: "pdf+", description: "Merge several PDFs", params: [] },
-  split: { needs: "pdf", description: "Split a PDF into single pages (ZIP)", params: [] },
+  split: { needs: "pdf", description: "Split a PDF: given pages/ranges into one file, every N pages, or each page separately (ZIP)", params: ["range", "every"] },
   "extract-pages": { needs: "pdf", description: "Keep only the given pages", params: ["range"] },
   "delete-pages": { needs: "pdf", description: "Remove the given pages", params: ["range"] },
   compress: { needs: "pdf", description: "Reduce PDF size", params: ["mode"] },
@@ -88,6 +88,11 @@ function parseRange(raw) {
 function parseParams(tool, message) {
   const m = norm(message);
   const p = {};
+  if (tool === "split") {
+    const ev = m.match(/(?:hər|her|every|each|каждые|каждую|каждые|كل)\s*(\d{1,3})\s*(?:-?(?:ci|cı|cu|cü|inci|ıncı)\s*)?(?:səhifə|sehife|page|sayfa|страниц|стр|صفح)/u);
+    if (ev && +ev[1] > 0) p.every = +ev[1];
+    else { const r = parseRange(message); if (r && r !== "last") p.range = r; }
+  }
   if (tool === "extract-pages" || tool === "delete-pages" || tool === "rotate" || tool === "watermark") {
     const r = parseRange(message);
     if (r && r !== "last") p.range = r;

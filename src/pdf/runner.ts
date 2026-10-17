@@ -14,7 +14,7 @@ import * as it from "./lib/imgtools";
 import { detectOcrLangs, ocrDetailed, ocrLangForSite, preprocessForOcr, type OcrConfig, type OcrLang } from "./lib/ocr";
 
 export type RunResult = { name: string; blob: Blob; kind: "pdf" | "image" | "zip" | "docx" | "text"; card?: boolean; text?: string; note?: string; extra?: { label: string; name: string; blob: Blob }[] };
-export type Params = { range?: string; w?: number; h?: number; pct?: number; maxKb?: number; ratio?: number; vertical?: boolean; to?: "png" | "jpeg" | "webp"; level?: "light" | "strong"; angle?: number; format?: "png" | "jpeg"; mode?: "light" | "strong"; text?: string; position?: string; forceOcr?: boolean };
+export type Params = { range?: string; every?: number; w?: number; h?: number; pct?: number; maxKb?: number; ratio?: number; vertical?: boolean; to?: "png" | "jpeg" | "webp"; level?: "light" | "strong"; angle?: number; format?: "png" | "jpeg"; mode?: "light" | "strong"; text?: string; position?: string; forceOcr?: boolean };
 export type Action = { tool: string; params?: Params };
 export type HandleOptions = { action: Action; files: File[]; lang: Lang; container: HTMLElement; onStatus?: (s: string) => void };
 
@@ -362,11 +362,16 @@ export async function runTool(action: Action, files: File[], ctx: Ctx): Promise<
     }
     case "split": {
       const f = firstPdf();
-      const { bytes } = await loadPdf(f, ctx);
-      const parts = await eng.splitPdf(bytes);
+      const { bytes, pages } = await loadPdf(f, ctx);
       const b = base(f.name);
-      const list = parts.map((x, i) => ({ name: `${b}-${i + 1}.pdf`, data: x }));
-      out.push(zipOut(`${b}-pages.zip`, list));
+      let groups: number[][] | null;
+      if (p.range) { const g = eng.parseRange(p.range, pages); if (!g) throw new UserError(t.errBadRange); groups = [g]; }
+      else if (p.every) groups = eng.splitGroups(pages, { mode: "every", n: p.every });
+      else groups = eng.splitGroups(pages, { mode: "each" });
+      const parts = await eng.splitInto(bytes, groups!, (d, n) => ctx.progress(t.working, d / n), ctx.cancelled);
+      const label = (g: number[]) => (g.length === 1 ? `p${g[0] + 1}` : g[g.length - 1] - g[0] + 1 === g.length ? `p${g[0] + 1}-${g[g.length - 1] + 1}` : `p${g.map((x) => x + 1).slice(0, 4).join('_')}${g.length > 4 ? '_etc' : ''}`);
+      const list = parts.map((x, i) => ({ name: `${b}-${label(groups![i])}.pdf`, data: x }));
+      if (list.length > 1) out.push(zipOut(`${b}-split.zip`, list));
       list.slice(0, 5).forEach((x) => out.push(pdfOut(x.name, x.data)));
       break;
     }
