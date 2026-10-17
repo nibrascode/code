@@ -25,7 +25,7 @@ for (const file of ["public/ai/index.html", "public/ai.html"]) {
       beforeParse(w) {
         w.TextEncoder = TextEncoder;
         const P = w.HTMLElement.prototype;
-        const isAns = (e) => e.classList.contains("msg") && e.classList.contains("b") && !e.querySelector(".dots");
+        const isAns = (e) => e.classList.contains("msg") && e.classList.contains("b") && !e.querySelector(".tk");
         const st = new WeakMap();
         Object.defineProperty(P, "scrollTop", { configurable: true, get() { return st.get(this) || 0; }, set(v) { st.set(this, v); } });
         Object.defineProperty(P, "scrollHeight", { configurable: true, get() { return this.id === "msgs" ? FULL : 0; } });

@@ -101,8 +101,9 @@ let n = 0; const t = setInterval(() => { K(ks[Math.random() * 4 | 0]); if (++n >
     run: `
 reveal(40);
 const t1 = { opened, started };
-toggle(0); const f1 = flags;
-toggle(0);
+const fi = cells.findIndex((c) => !c.open); // reveal(40) boşluğu açır: bayraq yalnız bağlı xanaya qoyulur (təsadüfi minalara görə sabit)
+toggle(fi); const f1 = flags;
+toggle(fi);
 cells.forEach((c, i) => { if (!c.mine) reveal(i); });
 OUT({ t1, f1, msg: document.getElementById('msg').textContent, over });
 document.getElementById('re').click();

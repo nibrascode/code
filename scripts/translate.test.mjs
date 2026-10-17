@@ -1,5 +1,6 @@
 // Nibras Tərcümə: modelsiz tərcümə xidməti (api/_translate), /api/translate, söhbət inteqrasiyası. AI çağırılmamalıdır.
 import test from "node:test";
+import http_ from "node:http";
 import assert from "node:assert/strict";
 import chat from "../api/chat.js";
 import tr from "../api/translate.js";
@@ -10,11 +11,16 @@ import { parseTranslate, translateReply } from "../api/_translate-chat.js";
 import { envEngine } from "../api/_translate/adapter.js";
 import { FOOTER } from "../api/_translate/messages.js";
 
+process.env.LIBRARY_URL = "http://127.0.0.1:9"; // library: sınaqda şəbəkəyə çıxma, dərhal rədd
 const HE = "عَنْ أَبِي عَبْدِ الرَّحْمَنِ عَبْدِ اللَّهِ بْنِ عُمَرَ بْنِ الخَطَّابِ رَضِيَ اللَّهُ عَنْهُ قَالَ: سَمِعْتُ رَسُولَ اللَّهِ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ يَقُولُ: «بُنِيَ الإِسْلَامُ عَلَى خَمْسٍ: شَهَادَةِ أَنْ لَا إلَهَ إلَّا اللَّهُ وَأَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ، وَإِقَامِ الصَّلَاةِ، وَإِيتَاءِ الزَّكَاةِ، وَحَجِّ الْبَيْتِ، وَصَوْمِ رَمَضَانَ»";
 const run = async (body) => {
   const res = { setHeader() {}, status(c) { this.code = c; return this; }, json(b) { this.body = b; return this; }, end() {} };
   const realFetch = globalThis.fetch;
-  globalThis.fetch = async () => { throw new Error("AI çağırışı olmamalıdır"); };
+  // Adi (hazır mənbəsi olmayan) mətn Google tərcüməsinə gedir: saxta cavab; AI çağırışı olmamalıdır
+  globalThis.fetch = async (url) => {
+    if (String(url).includes("translate.googleapis.com")) return { ok: true, json: async () => ({ src: "ar", sentences: [{ trans: "GT-TRANSLATION" }] }) };
+    throw new Error("AI çağırışı olmamalıdır");
+  };
   try { await chat({ method: "POST", body }, res); } finally { globalThis.fetch = realFetch; }
   return res.body;
 };
@@ -220,14 +226,20 @@ test("söhbət: «tərcümə et: …» hazır tərcümə + footer, AI çağırı
   assert.match(ru.reply, /мир ему и благословение Аллаха/);
   assert.match(ru.reply, /Переведено с помощью Nibras Tərcümə/);
   const none = await run({ message: "tərcümə et: ذهب الولد إلى المدرسة صباحا مع أصدقائه" });
-  assert.equal(none.reply, "Bu mətn üçün hazır tərcümə mənbəsi tapılmadı.");
+  assert.match(none.reply, /GT-TRANSLATION/); // hazır mənbə yoxdur: Google tərcüməsi
   assert.equal(none.usedAI, false);
 });
 
 test("söhbət: digər idarəçilər oğurlanmır; qeyri-ərəb tərcümə istəyi AI-yə keçir", async () => {
-  const had = await run({ message: "hədis axtar: الصلاة نور" });
-  assert.match(had.reply, /Kütübü-sittədə/);
-  assert.equal(await translateReply("translate: hello world"), null);
+  // hədis cavabı Nibras Library-dən gəlir: sınaqda yerli saxta library (şəbəkədən asılı deyil)
+  const srv = http_.createServer((q, r) => { r.setHeader("content-type", "application/json"); r.end(JSON.stringify({ reply: "Kütübü-sittədə: الصلاة نور", kind: "book" })); });
+  await new Promise((ok) => srv.listen(0, "127.0.0.1", ok));
+  const prevLib = process.env.LIBRARY_URL;
+  process.env.LIBRARY_URL = `http://127.0.0.1:${srv.address().port}`;
+  try {
+    const had = await run({ message: "hədis axtar: الصلاة نور" });
+    assert.match(had.reply, /Kütübü-sittədə/);
+  } finally { process.env.LIBRARY_URL = prevLib; srv.close(); }
   assert.equal(await translateReply("translate this code to python"), null);
   assert.equal(await translateReply("salam"), null);
 });

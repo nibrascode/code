@@ -9,6 +9,7 @@ import statsHandler from "../api/stats.js";
 import chatHandler from "../api/chat.js";
 import { cleanEvent, recordEvent, readDays, storageConfig, dayKey, track } from "../api/_stats.js";
 
+process.env.LIBRARY_URL = "http://127.0.0.1:9"; // library: sınaqda şəbəkəyə çıxma, dərhal rədd
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const ENV_KEYS = ["UPSTASH_REDIS_REST_URL", "UPSTASH_REDIS_REST_TOKEN", "KV_REST_API_URL", "KV_REST_API_TOKEN", "STATS_KEY"];
 const UP = { UPSTASH_REDIS_REST_URL: "https://up.example.test/", UPSTASH_REDIS_REST_TOKEN: "tok-up" };
