@@ -17,6 +17,9 @@ import { Route as EnRouteImport } from './routes/en'
 import { Route as EraseRouteImport } from './routes/erase'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ImageRouteImport } from './routes/image'
+import { Route as SozSayiRouteImport } from './routes/soz-sayi'
+import { Route as FaizRouteImport } from './routes/faiz'
+import { Route as WifiRouteImport } from './routes/wifi'
 import { Route as MovzuRouteImport } from './routes/movzu'
 import { Route as MuqayiseRouteImport } from './routes/muqayise'
 import { Route as NeceRouteImport } from './routes/nece'
@@ -42,6 +45,9 @@ import { Route as ArContactRouteImport } from './routes/ar.contact'
 import { Route as ArEraseRouteImport } from './routes/ar.erase'
 import { Route as ArFaqRouteImport } from './routes/ar.faq'
 import { Route as ArImageRouteImport } from './routes/ar.image'
+import { Route as ArSozSayiRouteImport } from './routes/ar.soz-sayi'
+import { Route as ArFaizRouteImport } from './routes/ar.faiz'
+import { Route as ArWifiRouteImport } from './routes/ar.wifi'
 import { Route as ArMovzuRouteImport } from './routes/ar.movzu'
 import { Route as ArMuqayiseRouteImport } from './routes/ar.muqayise'
 import { Route as ArNeceRouteImport } from './routes/ar.nece'
@@ -58,6 +64,9 @@ import { Route as EnContactRouteImport } from './routes/en.contact'
 import { Route as EnEraseRouteImport } from './routes/en.erase'
 import { Route as EnFaqRouteImport } from './routes/en.faq'
 import { Route as EnImageRouteImport } from './routes/en.image'
+import { Route as EnSozSayiRouteImport } from './routes/en.soz-sayi'
+import { Route as EnFaizRouteImport } from './routes/en.faiz'
+import { Route as EnWifiRouteImport } from './routes/en.wifi'
 import { Route as EnMovzuRouteImport } from './routes/en.movzu'
 import { Route as EnMuqayiseRouteImport } from './routes/en.muqayise'
 import { Route as EnNeceRouteImport } from './routes/en.nece'
@@ -88,6 +97,9 @@ import { Route as RuContactRouteImport } from './routes/ru.contact'
 import { Route as RuEraseRouteImport } from './routes/ru.erase'
 import { Route as RuFaqRouteImport } from './routes/ru.faq'
 import { Route as RuImageRouteImport } from './routes/ru.image'
+import { Route as RuSozSayiRouteImport } from './routes/ru.soz-sayi'
+import { Route as RuFaizRouteImport } from './routes/ru.faiz'
+import { Route as RuWifiRouteImport } from './routes/ru.wifi'
 import { Route as RuMovzuRouteImport } from './routes/ru.movzu'
 import { Route as RuMuqayiseRouteImport } from './routes/ru.muqayise'
 import { Route as RuNeceRouteImport } from './routes/ru.nece'
@@ -106,6 +118,9 @@ import { Route as TrContactRouteImport } from './routes/tr.contact'
 import { Route as TrEraseRouteImport } from './routes/tr.erase'
 import { Route as TrFaqRouteImport } from './routes/tr.faq'
 import { Route as TrImageRouteImport } from './routes/tr.image'
+import { Route as TrSozSayiRouteImport } from './routes/tr.soz-sayi'
+import { Route as TrFaizRouteImport } from './routes/tr.faiz'
+import { Route as TrWifiRouteImport } from './routes/tr.wifi'
 import { Route as TrMovzuRouteImport } from './routes/tr.movzu'
 import { Route as TrMuqayiseRouteImport } from './routes/tr.muqayise'
 import { Route as TrNeceRouteImport } from './routes/tr.nece'
@@ -200,6 +215,22 @@ const FaqRoute = FaqRouteImport.update({
 const ImageRoute = ImageRouteImport.update({
   id: '/image',
   path: '/image',
+  getParentRoute: () => rootRouteImport,
+} as any)
+
+const SozSayiRoute = SozSayiRouteImport.update({
+  id: '/soz-sayi',
+  path: '/soz-sayi',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaizRoute = FaizRouteImport.update({
+  id: '/faiz',
+  path: '/faiz',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WifiRoute = WifiRouteImport.update({
+  id: '/wifi',
+  path: '/wifi',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MovzuRoute = MovzuRouteImport.update({
@@ -327,6 +358,22 @@ const ArImageRoute = ArImageRouteImport.update({
   path: '/image',
   getParentRoute: () => ArRoute,
 } as any)
+
+const ArSozSayiRoute = ArSozSayiRouteImport.update({
+  id: '/soz-sayi',
+  path: '/soz-sayi',
+  getParentRoute: () => ArRoute,
+} as any)
+const ArFaizRoute = ArFaizRouteImport.update({
+  id: '/faiz',
+  path: '/faiz',
+  getParentRoute: () => ArRoute,
+} as any)
+const ArWifiRoute = ArWifiRouteImport.update({
+  id: '/wifi',
+  path: '/wifi',
+  getParentRoute: () => ArRoute,
+} as any)
 const ArMovzuRoute = ArMovzuRouteImport.update({
   id: '/movzu',
   path: '/movzu',
@@ -405,6 +452,22 @@ const EnFaqRoute = EnFaqRouteImport.update({
 const EnImageRoute = EnImageRouteImport.update({
   id: '/image',
   path: '/image',
+  getParentRoute: () => EnRoute,
+} as any)
+
+const EnSozSayiRoute = EnSozSayiRouteImport.update({
+  id: '/soz-sayi',
+  path: '/soz-sayi',
+  getParentRoute: () => EnRoute,
+} as any)
+const EnFaizRoute = EnFaizRouteImport.update({
+  id: '/faiz',
+  path: '/faiz',
+  getParentRoute: () => EnRoute,
+} as any)
+const EnWifiRoute = EnWifiRouteImport.update({
+  id: '/wifi',
+  path: '/wifi',
   getParentRoute: () => EnRoute,
 } as any)
 const EnMovzuRoute = EnMovzuRouteImport.update({
@@ -557,6 +620,22 @@ const RuImageRoute = RuImageRouteImport.update({
   path: '/image',
   getParentRoute: () => RuRoute,
 } as any)
+
+const RuSozSayiRoute = RuSozSayiRouteImport.update({
+  id: '/soz-sayi',
+  path: '/soz-sayi',
+  getParentRoute: () => RuRoute,
+} as any)
+const RuFaizRoute = RuFaizRouteImport.update({
+  id: '/faiz',
+  path: '/faiz',
+  getParentRoute: () => RuRoute,
+} as any)
+const RuWifiRoute = RuWifiRouteImport.update({
+  id: '/wifi',
+  path: '/wifi',
+  getParentRoute: () => RuRoute,
+} as any)
 const RuMovzuRoute = RuMovzuRouteImport.update({
   id: '/movzu',
   path: '/movzu',
@@ -645,6 +724,22 @@ const TrFaqRoute = TrFaqRouteImport.update({
 const TrImageRoute = TrImageRouteImport.update({
   id: '/image',
   path: '/image',
+  getParentRoute: () => TrRoute,
+} as any)
+
+const TrSozSayiRoute = TrSozSayiRouteImport.update({
+  id: '/soz-sayi',
+  path: '/soz-sayi',
+  getParentRoute: () => TrRoute,
+} as any)
+const TrFaizRoute = TrFaizRouteImport.update({
+  id: '/faiz',
+  path: '/faiz',
+  getParentRoute: () => TrRoute,
+} as any)
+const TrWifiRoute = TrWifiRouteImport.update({
+  id: '/wifi',
+  path: '/wifi',
   getParentRoute: () => TrRoute,
 } as any)
 const TrMovzuRoute = TrMovzuRouteImport.update({
@@ -933,6 +1028,9 @@ export interface FileRoutesByFullPath {
   '/erase': typeof EraseRoute
   '/faq': typeof FaqRouteWithChildren
   '/image': typeof ImageRoute
+  '/soz-sayi': typeof SozSayiRoute
+  '/faiz': typeof FaizRoute
+  '/wifi': typeof WifiRoute
   '/movzu': typeof MovzuRouteWithChildren
   '/muqayise': typeof MuqayiseRouteWithChildren
   '/nece': typeof NeceRouteWithChildren
@@ -958,6 +1056,9 @@ export interface FileRoutesByFullPath {
   '/ar/erase': typeof ArEraseRoute
   '/ar/faq': typeof ArFaqRouteWithChildren
   '/ar/image': typeof ArImageRoute
+  '/ar/soz-sayi': typeof ArSozSayiRoute
+  '/ar/faiz': typeof ArFaizRoute
+  '/ar/wifi': typeof ArWifiRoute
   '/ar/movzu': typeof ArMovzuRouteWithChildren
   '/ar/muqayise': typeof ArMuqayiseRouteWithChildren
   '/ar/nece': typeof ArNeceRouteWithChildren
@@ -974,6 +1075,9 @@ export interface FileRoutesByFullPath {
   '/en/erase': typeof EnEraseRoute
   '/en/faq': typeof EnFaqRouteWithChildren
   '/en/image': typeof EnImageRoute
+  '/en/soz-sayi': typeof EnSozSayiRoute
+  '/en/faiz': typeof EnFaizRoute
+  '/en/wifi': typeof EnWifiRoute
   '/en/movzu': typeof EnMovzuRouteWithChildren
   '/en/muqayise': typeof EnMuqayiseRouteWithChildren
   '/en/nece': typeof EnNeceRouteWithChildren
@@ -1000,6 +1104,9 @@ export interface FileRoutesByFullPath {
   '/ru/erase': typeof RuEraseRoute
   '/ru/faq': typeof RuFaqRouteWithChildren
   '/ru/image': typeof RuImageRoute
+  '/ru/soz-sayi': typeof RuSozSayiRoute
+  '/ru/faiz': typeof RuFaizRoute
+  '/ru/wifi': typeof RuWifiRoute
   '/ru/movzu': typeof RuMovzuRouteWithChildren
   '/ru/muqayise': typeof RuMuqayiseRouteWithChildren
   '/ru/nece': typeof RuNeceRouteWithChildren
@@ -1018,6 +1125,9 @@ export interface FileRoutesByFullPath {
   '/tr/erase': typeof TrEraseRoute
   '/tr/faq': typeof TrFaqRouteWithChildren
   '/tr/image': typeof TrImageRoute
+  '/tr/soz-sayi': typeof TrSozSayiRoute
+  '/tr/faiz': typeof TrFaizRoute
+  '/tr/wifi': typeof TrWifiRoute
   '/tr/movzu': typeof TrMovzuRouteWithChildren
   '/tr/muqayise': typeof TrMuqayiseRouteWithChildren
   '/tr/nece': typeof TrNeceRouteWithChildren
@@ -1087,6 +1197,9 @@ export interface FileRoutesByTo {
   '/erase': typeof EraseRoute
   '/faq': typeof FaqRouteWithChildren
   '/image': typeof ImageRoute
+  '/soz-sayi': typeof SozSayiRoute
+  '/faiz': typeof FaizRoute
+  '/wifi': typeof WifiRoute
   '/movzu': typeof MovzuRouteWithChildren
   '/muqayise': typeof MuqayiseRouteWithChildren
   '/nece': typeof NeceRouteWithChildren
@@ -1111,6 +1224,9 @@ export interface FileRoutesByTo {
   '/ar/erase': typeof ArEraseRoute
   '/ar/faq': typeof ArFaqRouteWithChildren
   '/ar/image': typeof ArImageRoute
+  '/ar/soz-sayi': typeof ArSozSayiRoute
+  '/ar/faiz': typeof ArFaizRoute
+  '/ar/wifi': typeof ArWifiRoute
   '/ar/movzu': typeof ArMovzuRouteWithChildren
   '/ar/muqayise': typeof ArMuqayiseRouteWithChildren
   '/ar/nece': typeof ArNeceRouteWithChildren
@@ -1127,6 +1243,9 @@ export interface FileRoutesByTo {
   '/en/erase': typeof EnEraseRoute
   '/en/faq': typeof EnFaqRouteWithChildren
   '/en/image': typeof EnImageRoute
+  '/en/soz-sayi': typeof EnSozSayiRoute
+  '/en/faiz': typeof EnFaizRoute
+  '/en/wifi': typeof EnWifiRoute
   '/en/movzu': typeof EnMovzuRouteWithChildren
   '/en/muqayise': typeof EnMuqayiseRouteWithChildren
   '/en/nece': typeof EnNeceRouteWithChildren
@@ -1153,6 +1272,9 @@ export interface FileRoutesByTo {
   '/ru/erase': typeof RuEraseRoute
   '/ru/faq': typeof RuFaqRouteWithChildren
   '/ru/image': typeof RuImageRoute
+  '/ru/soz-sayi': typeof RuSozSayiRoute
+  '/ru/faiz': typeof RuFaizRoute
+  '/ru/wifi': typeof RuWifiRoute
   '/ru/movzu': typeof RuMovzuRouteWithChildren
   '/ru/muqayise': typeof RuMuqayiseRouteWithChildren
   '/ru/nece': typeof RuNeceRouteWithChildren
@@ -1171,6 +1293,9 @@ export interface FileRoutesByTo {
   '/tr/erase': typeof TrEraseRoute
   '/tr/faq': typeof TrFaqRouteWithChildren
   '/tr/image': typeof TrImageRoute
+  '/tr/soz-sayi': typeof TrSozSayiRoute
+  '/tr/faiz': typeof TrFaizRoute
+  '/tr/wifi': typeof TrWifiRoute
   '/tr/movzu': typeof TrMovzuRouteWithChildren
   '/tr/muqayise': typeof TrMuqayiseRouteWithChildren
   '/tr/nece': typeof TrNeceRouteWithChildren
@@ -1241,6 +1366,9 @@ export interface FileRoutesById {
   '/erase': typeof EraseRoute
   '/faq': typeof FaqRouteWithChildren
   '/image': typeof ImageRoute
+  '/soz-sayi': typeof SozSayiRoute
+  '/faiz': typeof FaizRoute
+  '/wifi': typeof WifiRoute
   '/movzu': typeof MovzuRouteWithChildren
   '/muqayise': typeof MuqayiseRouteWithChildren
   '/nece': typeof NeceRouteWithChildren
@@ -1266,6 +1394,9 @@ export interface FileRoutesById {
   '/ar/erase': typeof ArEraseRoute
   '/ar/faq': typeof ArFaqRouteWithChildren
   '/ar/image': typeof ArImageRoute
+  '/ar/soz-sayi': typeof ArSozSayiRoute
+  '/ar/faiz': typeof ArFaizRoute
+  '/ar/wifi': typeof ArWifiRoute
   '/ar/movzu': typeof ArMovzuRouteWithChildren
   '/ar/muqayise': typeof ArMuqayiseRouteWithChildren
   '/ar/nece': typeof ArNeceRouteWithChildren
@@ -1282,6 +1413,9 @@ export interface FileRoutesById {
   '/en/erase': typeof EnEraseRoute
   '/en/faq': typeof EnFaqRouteWithChildren
   '/en/image': typeof EnImageRoute
+  '/en/soz-sayi': typeof EnSozSayiRoute
+  '/en/faiz': typeof EnFaizRoute
+  '/en/wifi': typeof EnWifiRoute
   '/en/movzu': typeof EnMovzuRouteWithChildren
   '/en/muqayise': typeof EnMuqayiseRouteWithChildren
   '/en/nece': typeof EnNeceRouteWithChildren
@@ -1308,6 +1442,9 @@ export interface FileRoutesById {
   '/ru/erase': typeof RuEraseRoute
   '/ru/faq': typeof RuFaqRouteWithChildren
   '/ru/image': typeof RuImageRoute
+  '/ru/soz-sayi': typeof RuSozSayiRoute
+  '/ru/faiz': typeof RuFaizRoute
+  '/ru/wifi': typeof RuWifiRoute
   '/ru/movzu': typeof RuMovzuRouteWithChildren
   '/ru/muqayise': typeof RuMuqayiseRouteWithChildren
   '/ru/nece': typeof RuNeceRouteWithChildren
@@ -1326,6 +1463,9 @@ export interface FileRoutesById {
   '/tr/erase': typeof TrEraseRoute
   '/tr/faq': typeof TrFaqRouteWithChildren
   '/tr/image': typeof TrImageRoute
+  '/tr/soz-sayi': typeof TrSozSayiRoute
+  '/tr/faiz': typeof TrFaizRoute
+  '/tr/wifi': typeof TrWifiRoute
   '/tr/movzu': typeof TrMovzuRouteWithChildren
   '/tr/muqayise': typeof TrMuqayiseRouteWithChildren
   '/tr/nece': typeof TrNeceRouteWithChildren
@@ -1397,6 +1537,9 @@ export interface FileRouteTypes {
     | '/erase'
     | '/faq'
     | '/image'
+    | '/soz-sayi'
+    | '/faiz'
+    | '/wifi'
     | '/movzu'
     | '/muqayise'
     | '/nece'
@@ -1422,6 +1565,9 @@ export interface FileRouteTypes {
     | '/ar/erase'
     | '/ar/faq'
     | '/ar/image'
+    | '/ar/soz-sayi'
+    | '/ar/faiz'
+    | '/ar/wifi'
     | '/ar/movzu'
     | '/ar/muqayise'
     | '/ar/nece'
@@ -1438,6 +1584,9 @@ export interface FileRouteTypes {
     | '/en/erase'
     | '/en/faq'
     | '/en/image'
+    | '/en/soz-sayi'
+    | '/en/faiz'
+    | '/en/wifi'
     | '/en/movzu'
     | '/en/muqayise'
     | '/en/nece'
@@ -1464,6 +1613,9 @@ export interface FileRouteTypes {
     | '/ru/erase'
     | '/ru/faq'
     | '/ru/image'
+    | '/ru/soz-sayi'
+    | '/ru/faiz'
+    | '/ru/wifi'
     | '/ru/movzu'
     | '/ru/muqayise'
     | '/ru/nece'
@@ -1482,6 +1634,9 @@ export interface FileRouteTypes {
     | '/tr/erase'
     | '/tr/faq'
     | '/tr/image'
+    | '/tr/soz-sayi'
+    | '/tr/faiz'
+    | '/tr/wifi'
     | '/tr/movzu'
     | '/tr/muqayise'
     | '/tr/nece'
@@ -1551,6 +1706,9 @@ export interface FileRouteTypes {
     | '/erase'
     | '/faq'
     | '/image'
+    | '/soz-sayi'
+    | '/faiz'
+    | '/wifi'
     | '/movzu'
     | '/muqayise'
     | '/nece'
@@ -1575,6 +1733,9 @@ export interface FileRouteTypes {
     | '/ar/erase'
     | '/ar/faq'
     | '/ar/image'
+    | '/ar/soz-sayi'
+    | '/ar/faiz'
+    | '/ar/wifi'
     | '/ar/movzu'
     | '/ar/muqayise'
     | '/ar/nece'
@@ -1591,6 +1752,9 @@ export interface FileRouteTypes {
     | '/en/erase'
     | '/en/faq'
     | '/en/image'
+    | '/en/soz-sayi'
+    | '/en/faiz'
+    | '/en/wifi'
     | '/en/movzu'
     | '/en/muqayise'
     | '/en/nece'
@@ -1617,6 +1781,9 @@ export interface FileRouteTypes {
     | '/ru/erase'
     | '/ru/faq'
     | '/ru/image'
+    | '/ru/soz-sayi'
+    | '/ru/faiz'
+    | '/ru/wifi'
     | '/ru/movzu'
     | '/ru/muqayise'
     | '/ru/nece'
@@ -1635,6 +1802,9 @@ export interface FileRouteTypes {
     | '/tr/erase'
     | '/tr/faq'
     | '/tr/image'
+    | '/tr/soz-sayi'
+    | '/tr/faiz'
+    | '/tr/wifi'
     | '/tr/movzu'
     | '/tr/muqayise'
     | '/tr/nece'
@@ -1704,6 +1874,9 @@ export interface FileRouteTypes {
     | '/erase'
     | '/faq'
     | '/image'
+    | '/soz-sayi'
+    | '/faiz'
+    | '/wifi'
     | '/movzu'
     | '/muqayise'
     | '/nece'
@@ -1729,6 +1902,9 @@ export interface FileRouteTypes {
     | '/ar/erase'
     | '/ar/faq'
     | '/ar/image'
+    | '/ar/soz-sayi'
+    | '/ar/faiz'
+    | '/ar/wifi'
     | '/ar/movzu'
     | '/ar/muqayise'
     | '/ar/nece'
@@ -1745,6 +1921,9 @@ export interface FileRouteTypes {
     | '/en/erase'
     | '/en/faq'
     | '/en/image'
+    | '/en/soz-sayi'
+    | '/en/faiz'
+    | '/en/wifi'
     | '/en/movzu'
     | '/en/muqayise'
     | '/en/nece'
@@ -1771,6 +1950,9 @@ export interface FileRouteTypes {
     | '/ru/erase'
     | '/ru/faq'
     | '/ru/image'
+    | '/ru/soz-sayi'
+    | '/ru/faiz'
+    | '/ru/wifi'
     | '/ru/movzu'
     | '/ru/muqayise'
     | '/ru/nece'
@@ -1789,6 +1971,9 @@ export interface FileRouteTypes {
     | '/tr/erase'
     | '/tr/faq'
     | '/tr/image'
+    | '/tr/soz-sayi'
+    | '/tr/faiz'
+    | '/tr/wifi'
     | '/tr/movzu'
     | '/tr/muqayise'
     | '/tr/nece'
@@ -1859,6 +2044,9 @@ export interface RootRouteChildren {
   EraseRoute: typeof EraseRoute
   FaqRoute: typeof FaqRouteWithChildren
   ImageRoute: typeof ImageRoute
+  SozSayiRoute: typeof SozSayiRoute
+  FaizRoute: typeof FaizRoute
+  WifiRoute: typeof WifiRoute
   MovzuRoute: typeof MovzuRouteWithChildren
   MuqayiseRoute: typeof MuqayiseRouteWithChildren
   NeceRoute: typeof NeceRouteWithChildren
@@ -1944,6 +2132,27 @@ declare module '@tanstack/react-router' {
       path: '/image'
       fullPath: '/image'
       preLoaderRoute: typeof ImageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/soz-sayi': {
+      id: '/soz-sayi'
+      path: '/soz-sayi'
+      fullPath: '/soz-sayi'
+      preLoaderRoute: typeof SozSayiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faiz': {
+      id: '/faiz'
+      path: '/faiz'
+      fullPath: '/faiz'
+      preLoaderRoute: typeof FaizRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/wifi': {
+      id: '/wifi'
+      path: '/wifi'
+      fullPath: '/wifi'
+      preLoaderRoute: typeof WifiRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/movzu': {
@@ -2121,6 +2330,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArImageRouteImport
       parentRoute: typeof ArRoute
     }
+    '/ar/soz-sayi': {
+      id: '/ar/soz-sayi'
+      path: '/soz-sayi'
+      fullPath: '/ar/soz-sayi'
+      preLoaderRoute: typeof ArSozSayiRouteImport
+      parentRoute: typeof ArRoute
+    }
+    '/ar/faiz': {
+      id: '/ar/faiz'
+      path: '/faiz'
+      fullPath: '/ar/faiz'
+      preLoaderRoute: typeof ArFaizRouteImport
+      parentRoute: typeof ArRoute
+    }
+    '/ar/wifi': {
+      id: '/ar/wifi'
+      path: '/wifi'
+      fullPath: '/ar/wifi'
+      preLoaderRoute: typeof ArWifiRouteImport
+      parentRoute: typeof ArRoute
+    }
     '/ar/movzu': {
       id: '/ar/movzu'
       path: '/movzu'
@@ -2231,6 +2461,27 @@ declare module '@tanstack/react-router' {
       path: '/image'
       fullPath: '/en/image'
       preLoaderRoute: typeof EnImageRouteImport
+      parentRoute: typeof EnRoute
+    }
+    '/en/soz-sayi': {
+      id: '/en/soz-sayi'
+      path: '/soz-sayi'
+      fullPath: '/en/soz-sayi'
+      preLoaderRoute: typeof EnSozSayiRouteImport
+      parentRoute: typeof EnRoute
+    }
+    '/en/faiz': {
+      id: '/en/faiz'
+      path: '/faiz'
+      fullPath: '/en/faiz'
+      preLoaderRoute: typeof EnFaizRouteImport
+      parentRoute: typeof EnRoute
+    }
+    '/en/wifi': {
+      id: '/en/wifi'
+      path: '/wifi'
+      fullPath: '/en/wifi'
+      preLoaderRoute: typeof EnWifiRouteImport
       parentRoute: typeof EnRoute
     }
     '/en/movzu': {
@@ -2443,6 +2694,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RuImageRouteImport
       parentRoute: typeof RuRoute
     }
+    '/ru/soz-sayi': {
+      id: '/ru/soz-sayi'
+      path: '/soz-sayi'
+      fullPath: '/ru/soz-sayi'
+      preLoaderRoute: typeof RuSozSayiRouteImport
+      parentRoute: typeof RuRoute
+    }
+    '/ru/faiz': {
+      id: '/ru/faiz'
+      path: '/faiz'
+      fullPath: '/ru/faiz'
+      preLoaderRoute: typeof RuFaizRouteImport
+      parentRoute: typeof RuRoute
+    }
+    '/ru/wifi': {
+      id: '/ru/wifi'
+      path: '/wifi'
+      fullPath: '/ru/wifi'
+      preLoaderRoute: typeof RuWifiRouteImport
+      parentRoute: typeof RuRoute
+    }
     '/ru/movzu': {
       id: '/ru/movzu'
       path: '/movzu'
@@ -2567,6 +2839,27 @@ declare module '@tanstack/react-router' {
       path: '/image'
       fullPath: '/tr/image'
       preLoaderRoute: typeof TrImageRouteImport
+      parentRoute: typeof TrRoute
+    }
+    '/tr/soz-sayi': {
+      id: '/tr/soz-sayi'
+      path: '/soz-sayi'
+      fullPath: '/tr/soz-sayi'
+      preLoaderRoute: typeof TrSozSayiRouteImport
+      parentRoute: typeof TrRoute
+    }
+    '/tr/faiz': {
+      id: '/tr/faiz'
+      path: '/faiz'
+      fullPath: '/tr/faiz'
+      preLoaderRoute: typeof TrFaizRouteImport
+      parentRoute: typeof TrRoute
+    }
+    '/tr/wifi': {
+      id: '/tr/wifi'
+      path: '/wifi'
+      fullPath: '/tr/wifi'
+      preLoaderRoute: typeof TrWifiRouteImport
       parentRoute: typeof TrRoute
     }
     '/tr/movzu': {
@@ -3051,6 +3344,9 @@ interface ArRouteChildren {
   ArEraseRoute: typeof ArEraseRoute
   ArFaqRoute: typeof ArFaqRouteWithChildren
   ArImageRoute: typeof ArImageRoute
+  ArSozSayiRoute: typeof ArSozSayiRoute
+  ArFaizRoute: typeof ArFaizRoute
+  ArWifiRoute: typeof ArWifiRoute
   ArMovzuRoute: typeof ArMovzuRouteWithChildren
   ArMuqayiseRoute: typeof ArMuqayiseRouteWithChildren
   ArNeceRoute: typeof ArNeceRouteWithChildren
@@ -3072,6 +3368,9 @@ const ArRouteChildren: ArRouteChildren = {
   ArEraseRoute: ArEraseRoute,
   ArFaqRoute: ArFaqRouteWithChildren,
   ArImageRoute: ArImageRoute,
+  ArSozSayiRoute: ArSozSayiRoute,
+  ArFaizRoute: ArFaizRoute,
+  ArWifiRoute: ArWifiRoute,
   ArMovzuRoute: ArMovzuRouteWithChildren,
   ArMuqayiseRoute: ArMuqayiseRouteWithChildren,
   ArNeceRoute: ArNeceRouteWithChildren,
@@ -3182,6 +3481,9 @@ interface EnRouteChildren {
   EnEraseRoute: typeof EnEraseRoute
   EnFaqRoute: typeof EnFaqRouteWithChildren
   EnImageRoute: typeof EnImageRoute
+  EnSozSayiRoute: typeof EnSozSayiRoute
+  EnFaizRoute: typeof EnFaizRoute
+  EnWifiRoute: typeof EnWifiRoute
   EnMovzuRoute: typeof EnMovzuRouteWithChildren
   EnMuqayiseRoute: typeof EnMuqayiseRouteWithChildren
   EnNeceRoute: typeof EnNeceRouteWithChildren
@@ -3203,6 +3505,9 @@ const EnRouteChildren: EnRouteChildren = {
   EnEraseRoute: EnEraseRoute,
   EnFaqRoute: EnFaqRouteWithChildren,
   EnImageRoute: EnImageRoute,
+  EnSozSayiRoute: EnSozSayiRoute,
+  EnFaizRoute: EnFaizRoute,
+  EnWifiRoute: EnWifiRoute,
   EnMovzuRoute: EnMovzuRouteWithChildren,
   EnMuqayiseRoute: EnMuqayiseRouteWithChildren,
   EnNeceRoute: EnNeceRouteWithChildren,
@@ -3370,6 +3675,9 @@ interface RuRouteChildren {
   RuEraseRoute: typeof RuEraseRoute
   RuFaqRoute: typeof RuFaqRouteWithChildren
   RuImageRoute: typeof RuImageRoute
+  RuSozSayiRoute: typeof RuSozSayiRoute
+  RuFaizRoute: typeof RuFaizRoute
+  RuWifiRoute: typeof RuWifiRoute
   RuMovzuRoute: typeof RuMovzuRouteWithChildren
   RuMuqayiseRoute: typeof RuMuqayiseRouteWithChildren
   RuNeceRoute: typeof RuNeceRouteWithChildren
@@ -3392,6 +3700,9 @@ const RuRouteChildren: RuRouteChildren = {
   RuEraseRoute: RuEraseRoute,
   RuFaqRoute: RuFaqRouteWithChildren,
   RuImageRoute: RuImageRoute,
+  RuSozSayiRoute: RuSozSayiRoute,
+  RuFaizRoute: RuFaizRoute,
+  RuWifiRoute: RuWifiRoute,
   RuMovzuRoute: RuMovzuRouteWithChildren,
   RuMuqayiseRoute: RuMuqayiseRouteWithChildren,
   RuNeceRoute: RuNeceRouteWithChildren,
@@ -3523,6 +3834,9 @@ interface TrRouteChildren {
   TrEraseRoute: typeof TrEraseRoute
   TrFaqRoute: typeof TrFaqRouteWithChildren
   TrImageRoute: typeof TrImageRoute
+  TrSozSayiRoute: typeof TrSozSayiRoute
+  TrFaizRoute: typeof TrFaizRoute
+  TrWifiRoute: typeof TrWifiRoute
   TrMovzuRoute: typeof TrMovzuRouteWithChildren
   TrMuqayiseRoute: typeof TrMuqayiseRouteWithChildren
   TrNeceRoute: typeof TrNeceRouteWithChildren
@@ -3544,6 +3858,9 @@ const TrRouteChildren: TrRouteChildren = {
   TrEraseRoute: TrEraseRoute,
   TrFaqRoute: TrFaqRouteWithChildren,
   TrImageRoute: TrImageRoute,
+  TrSozSayiRoute: TrSozSayiRoute,
+  TrFaizRoute: TrFaizRoute,
+  TrWifiRoute: TrWifiRoute,
   TrMovzuRoute: TrMovzuRouteWithChildren,
   TrMuqayiseRoute: TrMuqayiseRouteWithChildren,
   TrNeceRoute: TrNeceRouteWithChildren,
@@ -3592,6 +3909,9 @@ const rootRouteChildren: RootRouteChildren = {
   EraseRoute: EraseRoute,
   FaqRoute: FaqRouteWithChildren,
   ImageRoute: ImageRoute,
+  SozSayiRoute: SozSayiRoute,
+  FaizRoute: FaizRoute,
+  WifiRoute: WifiRoute,
   MovzuRoute: MovzuRouteWithChildren,
   MuqayiseRoute: MuqayiseRouteWithChildren,
   NeceRoute: NeceRouteWithChildren,

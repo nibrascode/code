@@ -1,6 +1,6 @@
 import type { Lang } from "@/lib/i18n";
 
-export const SEARCH_FAQ: Record<"/erase" | "/image", { title: Record<Lang, string>; items: Record<Lang, { q: string; a: string }[]> }> = {
+export const SEARCH_FAQ: Record<"/erase" | "/image" | "/soz-sayi" | "/faiz" | "/wifi", { title: Record<Lang, string>; items: Record<Lang, { q: string; a: string }[]> }> = {
   "/erase": {
     title: { az: "Suallar", en: "Questions", tr: "Sorular", ar: "أسئلة", ru: "Вопросы" },
     items: {
@@ -68,6 +68,111 @@ export const SEARCH_FAQ: Record<"/erase" | "/image", { title: Record<Lang, strin
         { q: "Фото уходит на сервер?", a: "Нет. Сжатие идёт в этом браузере." },
         { q: "Как выбрать качество?", a: "Ползунок выбирает между меньшим файлом и более ясным фото." },
         { q: "Какие фото подходят?", a: "Открываются JPG, PNG и WebP. Результат — JPG." },
+      ],
+    },
+  },
+  "/soz-sayi": {
+    title: { az: "Suallar", en: "Questions", tr: "Sorular", ar: "أسئلة", ru: "Вопросы" },
+    items: {
+      az: [
+        { q: "Söz saymaq pulsuzdur?", a: "Bəli. Hesab və ödəniş yoxdur." },
+        { q: "Mətn serverə gedir?", a: "Xeyr. Sayma bu brauzerdə gedir." },
+        { q: "Söz necə sayılır?", a: "Boşluqla ayrılan hər hissə bir sözdür." },
+        { q: "Boşluq hərf sayılır?", a: "Hərf sayında bəli. Boşluqsuz sayda yox." },
+      ],
+      en: [
+        { q: "Is a word count free?", a: "Yes. There is no account and no payment." },
+        { q: "Does the text go to a server?", a: "No. The count runs in this browser." },
+        { q: "How is a word counted?", a: "Each part separated by a space is one word." },
+        { q: "Does a space count as a character?", a: "Yes in the character count. No in the count without spaces." },
+      ],
+      tr: [
+        { q: "Söz saymak ücretsiz mi?", a: "Evet. Hesap ve ödeme yoktur." },
+        { q: "Metin sunucuya gider mi?", a: "Hayır. Sayma bu tarayıcıda olur." },
+        { q: "Söz nasıl sayılır?", a: "Boşlukla ayrılan her parça bir sözdür." },
+        { q: "Boşluk harf sayılır mı?", a: "Harf sayısında evet. Boşluksuz sayıda hayır." },
+      ],
+      ar: [
+        { q: "هل عدّ الكلمات مجاني؟", a: "نعم. لا حساب ولا دفع." },
+        { q: "هل يذهب النص إلى خادم؟", a: "لا. العدّ يجري في هذا المتصفح." },
+        { q: "كيف تُعدّ الكلمة؟", a: "كل جزء يفصله فراغ هو كلمة." },
+        { q: "هل يُحسب الفراغ حرفاً؟", a: "نعم في عدّ الحروف. لا في العدّ بلا فراغ." },
+      ],
+      ru: [
+        { q: "Посчитать слова бесплатно?", a: "Да. Аккаунта и оплаты нет." },
+        { q: "Текст уходит на сервер?", a: "Нет. Подсчёт идёт в этом браузере." },
+        { q: "Как считается слово?", a: "Каждая часть через пробел — одно слово." },
+        { q: "Пробел считается буквой?", a: "В счёте букв да. В счёте без пробелов нет." },
+      ],
+    },
+  },
+  "/faiz": {
+    title: { az: "Suallar", en: "Questions", tr: "Sorular", ar: "أسئلة", ru: "Вопросы" },
+    items: {
+      az: [
+        { q: "Faiz hesablamaq pulsuzdur?", a: "Bəli. Hesab və ödəniş yoxdur." },
+        { q: "15 faiz 200 nədir?", a: "30. Faiz ədədə vurulur və 100-ə bölünür." },
+        { q: "30, 200-ün neçə faizidir?", a: "15 faiz. Kiçik ədəd böyüyə bölünür və 100-ə vurulur." },
+        { q: "Rəqəmlər saxlanılır?", a: "Xeyr. Hesab bu səhifədə qalır." },
+      ],
+      en: [
+        { q: "Is calculating a percent free?", a: "Yes. There is no account and no payment." },
+        { q: "What is 15 percent of 200?", a: "30. The percent is multiplied by the number and divided by 100." },
+        { q: "What percent is 30 of 200?", a: "15 percent. The smaller number is divided by the larger one and multiplied by 100." },
+        { q: "Are the numbers stored?", a: "No. The calculation stays on this page." },
+      ],
+      tr: [
+        { q: "Yüzde hesaplamak ücretsiz mi?", a: "Evet. Hesap ve ödeme yoktur." },
+        { q: "200'ün yüzde 15'i nedir?", a: "30. Yüzde sayıya çarpılır ve 100'e bölünür." },
+        { q: "30, 200'ün yüzde kaçı?", a: "Yüzde 15. Küçük sayı büyüğe bölünür ve 100 ile çarpılır." },
+        { q: "Sayılar saklanır mı?", a: "Hayır. Hesap bu sayfada kalır." },
+      ],
+      ar: [
+        { q: "هل حساب النسبة مجاني؟", a: "نعم. لا حساب ولا دفع." },
+        { q: "كم يساوي 15 بالمئة من 200؟", a: "30. تُضرب النسبة في العدد وتُقسم على 100." },
+        { q: "30 كم بالمئة من 200؟", a: "15 بالمئة. يُقسم العدد الأصغر على الأكبر ويُضرب في 100." },
+        { q: "هل تُحفظ الأرقام؟", a: "لا. يبقى الحساب في هذه الصفحة." },
+      ],
+      ru: [
+        { q: "Посчитать процент бесплатно?", a: "Да. Аккаунта и оплаты нет." },
+        { q: "Сколько будет 15 процентов от 200?", a: "30. Процент умножается на число и делится на 100." },
+        { q: "Сколько процентов 30 от 200?", a: "15 процентов. Меньшее число делится на большее и умножается на 100." },
+        { q: "Числа сохраняются?", a: "Нет. Расчёт остаётся на этой странице." },
+      ],
+    },
+  },
+  "/wifi": {
+    title: { az: "Suallar", en: "Questions", tr: "Sorular", ar: "أسئلة", ru: "Вопросы" },
+    items: {
+      az: [
+        { q: "Wi-Fi QR pulsuzdur?", a: "Bəli. Hesab və ödəniş yoxdur." },
+        { q: "Şifrə serverə gedir?", a: "Xeyr. QR kod bu brauzerdə yaranır." },
+        { q: "Telefon necə qoşulur?", a: "Kameranı QR koda tut. Şəbəkə adı və şifrə özü dolur." },
+        { q: "Şifrəsiz şəbəkə olur?", a: "Bəli. Qorumanı şifrəsiz seç." },
+      ],
+      en: [
+        { q: "Is a Wi-Fi QR free?", a: "Yes. There is no account and no payment." },
+        { q: "Does the password go to a server?", a: "No. The QR code is made in this browser." },
+        { q: "How does a phone join?", a: "Point the camera at the QR code. The network name and password fill in." },
+        { q: "Can the network have no password?", a: "Yes. Set the security to no password." },
+      ],
+      tr: [
+        { q: "Wi-Fi QR ücretsiz mi?", a: "Evet. Hesap ve ödeme yoktur." },
+        { q: "Şifre sunucuya gider mi?", a: "Hayır. QR kod bu tarayıcıda oluşur." },
+        { q: "Telefon nasıl bağlanır?", a: "Kamerayı QR koda tut. Ağ adı ve şifre kendiliğinden dolar." },
+        { q: "Şifresiz ağ olur mu?", a: "Evet. Korumayı şifresiz seç." },
+      ],
+      ar: [
+        { q: "هل رمز Wi-Fi مجاني؟", a: "نعم. لا حساب ولا دفع." },
+        { q: "هل تذهب كلمة المرور إلى خادم؟", a: "لا. يُصنع رمز QR في هذا المتصفح." },
+        { q: "كيف يتصل الهاتف؟", a: "وجّه الكاميرا إلى الرمز. يمتلئ اسم الشبكة وكلمة المرور وحدهما." },
+        { q: "هل تعمل شبكة بلا كلمة مرور؟", a: "نعم. اجعل الحماية بلا كلمة مرور." },
+      ],
+      ru: [
+        { q: "Wi-Fi QR бесплатно?", a: "Да. Аккаунта и оплаты нет." },
+        { q: "Пароль уходит на сервер?", a: "Нет. QR-код создаётся в этом браузере." },
+        { q: "Как телефон подключается?", a: "Наведите камеру на QR-код. Имя сети и пароль заполнятся сами." },
+        { q: "Сеть без пароля подходит?", a: "Да. Поставьте защиту «без пароля»." },
       ],
     },
   },

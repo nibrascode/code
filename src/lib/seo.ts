@@ -656,6 +656,27 @@ const PAGES: Record<string, Copy> = {
       description: "Уменьшите размер фото. JPG, PNG и WebP. Бесплатно, без аккаунта, фото остаётся в браузере.",
     },
   },
+  "/soz-sayi": {
+    az: { title: "Söz sayı — pulsuz", description: "Mətndə söz, hərf və sətir say. Pulsuz, mətn brauzerdən çıxmır." },
+    en: { title: "Word count — free", description: "Count words, letters and lines. Free, the text stays in your browser." },
+    tr: { title: "Söz sayısı — ücretsiz", description: "Metindeki söz, harf ve satırı say. Ücretsiz, metin tarayıcıdan çıkmaz." },
+    ar: { title: "عدد الكلمات — مجاناً", description: "عدّ الكلمات والحروف والأسطر. مجاناً، والنص يبقى في المتصفح." },
+    ru: { title: "Количество слов — бесплатно", description: "Посчитайте слова, буквы и строки. Бесплатно, текст остаётся в браузере." },
+  },
+  "/faiz": {
+    az: { title: "Faiz hesabla — pulsuz", description: "Faizin nəticəsini və bir ədədin neçə faiz olduğunu hesabla. Hesab yoxdur." },
+    en: { title: "Calculate a percent — free", description: "Find a percent of a number and what percent one number is of another. No account." },
+    tr: { title: "Yüzde hesapla — ücretsiz", description: "Yüzdenin sonucunu ve bir sayının yüzde kaç olduğunu hesapla. Hesap yok." },
+    ar: { title: "احسب النسبة — مجاناً", description: "احسب ناتج النسبة وكم بالمئة عدد من آخر. بلا حساب." },
+    ru: { title: "Посчитать процент — бесплатно", description: "Найдите процент от числа и сколько процентов одно число от другого. Без аккаунта." },
+  },
+  "/wifi": {
+    az: { title: "Wi-Fi QR — pulsuz", description: "Şəbəkə adı və şifrədən QR kod yarat. Qonaq skan edib qoşulsun. Şifrə yüklənmir." },
+    en: { title: "Wi-Fi QR code — free", description: "Make a QR code from a network name and password. A guest scans and joins. The password is not uploaded." },
+    tr: { title: "Wi-Fi QR — ücretsiz", description: "Ağ adı ve şifreden QR kod yap. Konuk tarayıp bağlansın. Şifre yüklenmez." },
+    ar: { title: "رمز QR لـ Wi-Fi — مجاناً", description: "اصنع رمز QR من اسم الشبكة وكلمة المرور. يمسحه الضيف ويتصل. لا تُرفع كلمة المرور." },
+    ru: { title: "Wi-Fi QR — бесплатно", description: "Сделайте QR-код из имени сети и пароля. Гость сканирует и подключается. Пароль не загружается." },
+  },
   "/pdf": {
     az: {
       title: "Nibras PDF — PDF birləşdir, böl, sıxışdır, imzala (pulsuz)",
@@ -1229,7 +1250,7 @@ function jsonLd(path: string, lang: Lang, copy: PageSeo, url: string) {
       };
     }
   }
-  if (path === "/erase" || path === "/image") {
+  if (path === "/erase" || path === "/image" || path === "/soz-sayi" || path === "/faiz" || path === "/wifi") {
     const block = SEARCH_FAQ[path];
     const items = block.items[lang] ?? block.items.en;
     return {
