@@ -110,3 +110,25 @@ export function eraseReply(message, lang) {
   if (!/sil|remove|delete|erase|çıxar|cixar|kald|убра|удал|удали|أزل|ازل|إزالة|حذف|nibras\s*erase/iu.test(raw)) return null;
   return msgs(lang).erase;
 }
+
+// Cari tarix/vaxt (Asia/Baku) sistem sorğusuna əlavə olunur; model «biliyim 2024-ə qədərdir» deməsin.
+export function bakuNow(now = new Date()) {
+  const f = (o) => new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Baku", ...o }).format(now);
+  return `${f({ weekday: "long" })}, ${f({ day: "numeric", month: "long", year: "numeric" })}, ${f({ hour: "2-digit", minute: "2-digit", hour12: false })} (Asia/Baku, UTC+4)`;
+}
+export function dateDirective(now = new Date()) {
+  return (
+    ` CARİ TARİX VƏ VAXT: ${bakuNow(now)}. «Bu gün», «indi», «bu il» bu tarixə görədir. ` +
+    "QADAĞA: heç vaxt bilik həddi, təlim (training) məlumatının tarixi, «2023/2024-ə qədər biliyim var» və ya modelin versiyası/mənbəyi haqqında yazma. " +
+    "Aktual sualda (xəbər, qiymət, hadisə, nəticə) dəqiq bilmirsənsə, bilik tarixini göstərmədən qısa kömək et və məlumatın dəyişmiş ola biləcəyini, rəsmi mənbədən yoxlamağı yaz. " +
+    "NEVER mention a knowledge cutoff, training data, or any year as the limit of your knowledge; just say the information may have changed and suggest checking a current source."
+  );
+}
+// Model yenə də bilik həddini yazsa, həmin cümlələr silinir.
+const CUT_SENT = /[^.!?\n؟]*(?:knowledge\s*cut-?\s*off|cut-?\s*off\s*(?:date)?|training\s*data|trained\s*(?:on|until|up)|(?:my|mənim)\s*(?:knowledge|biliy\p{L}*|məlumat\p{L}*)[^.!?\n]{0,60}20[12]\d|(?:bilik|bilgi|məlumat|veri)\p{L}*[^.!?\n]{0,50}20[12]\d[^.!?\n]{0,30}(?:qədər|kadar|dək|sonuna|until|up to)|up\s*to\s*(?:early\s*|late\s*|mid\s*)?20[12]\d|до\s*20[12]\d\s*года?[^.!?\n]{0,40}(?:знани|данн|обуч)|(?:знани|данн|обуч)\p{L}*[^.!?\n]{0,60}20[12]\d|(?:معرفتي|بياناتي|معلوماتي)[^.!?\n؟]{0,60}20[12]\d)[^.!?\n؟]*[.!?؟]?\s*/giu;
+export function stripCutoff(text) {
+  const s = String(text || "");
+  if (!/20[12]\d|cut-?\s*off|training|trained/i.test(s)) return s;
+  const out = s.replace(CUT_SENT, "").replace(/[ \t]+\n/g, "\n").trim();
+  return out || s;
+}
