@@ -4888,13 +4888,15 @@ body.is-home .noise {
 .nx-kicker {
   margin: 0 0 12px;
   color: #7eb0ff;
+  font-family: var(--font-sans);
   font-size: 12px;
   font-weight: 750;
+  line-height: normal;
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
-.nx h1,
+.nx h1:not(.nx-kicker),
 .nx h2 {
   margin: 0;
   font-size: clamp(2.2rem, 4.6vw, 3.6rem);
