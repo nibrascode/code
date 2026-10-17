@@ -283,7 +283,7 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
       <section className="nx-hero">
         <HomeDrift />
         <div className="nx-hero-copy">
-          <p className="nx-kicker">{t("nx_kicker")}</p>
+          <h1 className="nx-kicker">{t("nx_kicker")}</h1>
           <p>{t("nx_lead")}</p>
           <div className="nx-actions">
             <a className="nx-cta" href={localeHref(lang, "/apps")}>
