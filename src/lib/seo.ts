@@ -3,6 +3,7 @@ import { isSplitPage, localeHref, stripLocalePrefix, homePath } from "@/lib/loca
 import { faqAnswerText, faqFromPath, faqPath, faqTopicFromPath, faqTopicPath } from "@/lib/faq";
 import { pdfPairFromPath } from "@/lib/pdf-pairs";
 import { isToolId, toolSeo } from "@/pdf/tool-seo";
+import { SEARCH_FAQ } from "@/lib/search-faq";
 import { TOOL_IDS } from "@/pdf/tool-text";
 import { findCourse, HUBS, isCourseSlug } from "@/lib/course/meta";
 import { findProgramming, PROGRAMMING } from "@/lib/programming";
@@ -613,24 +614,46 @@ const PAGES: Record<string, Copy> = {
   },
   "/erase": {
     az: {
-      title: "Nibras Erase — fon sil, şəffaf PNG",
-      description: "Fon sil, rəng və ya bulanıq fon qoy, kölgə əlavə et. PNG, JPG və WebP. Pulsuz, brauzerdə.",
+      title: "Şəkil fon sil — pulsuz",
+      description: "Şəkil fonunu sil, şəffaf PNG yüklə. Pulsuz, hesabsız, şəkil brauzerdən çıxmır.",
     },
     en: {
-      title: "Nibras Erase — remove background, free PNG",
-      description: "Remove a background, add color or blur, a shadow, then download PNG, JPG or WebP. Free, in your browser.",
+      title: "Remove image background — free",
+      description: "Remove a photo background and download a transparent PNG. Free, no account, the photo stays in your browser.",
     },
     tr: {
-      title: "Nibras Erase — arka plan sil, şeffaf PNG",
-      description: "Fotoğraf yükle, arka planı sil, şeffaf PNG indir. Ücretsiz, hesap yok, tarayıcıda.",
+      title: "Fotoğraf arka plan sil — ücretsiz",
+      description: "Fotoğrafın arka planını sil, şeffaf PNG indir. Ücretsiz, hesapsız, fotoğraf tarayıcıdan çıkmaz.",
     },
     ar: {
-      title: "Nibras Erase — إزالة الخلفية",
-      description: "ارفع صورة، أزل الخلفية، نزّل PNG شفافاً. مجاناً، بلا حساب، في المتصفح.",
+      title: "حذف خلفية الصورة — مجاناً",
+      description: "احذف خلفية الصورة ونزّل PNG شفافاً. مجاناً وبلا حساب، والصورة تبقى في المتصفح.",
     },
     ru: {
-      title: "Nibras Erase — удалить фон",
-      description: "Загрузите фото, уберите фон, скачайте прозрачный PNG. Бесплатно, без аккаунта, в браузере.",
+      title: "Удалить фон фото — бесплатно",
+      description: "Уберите фон фото и скачайте прозрачный PNG. Бесплатно, без аккаунта, фото остаётся в браузере.",
+    },
+  },
+  "/image": {
+    az: {
+      title: "Şəkil sıx — pulsuz",
+      description: "Şəkilin ölçüsünü kiçilt. JPG, PNG və WebP. Pulsuz, hesabsız, şəkil brauzerdən çıxmır.",
+    },
+    en: {
+      title: "Compress photo — free",
+      description: "Make a photo smaller. JPG, PNG and WebP. Free, no account, the photo stays in your browser.",
+    },
+    tr: {
+      title: "Fotoğraf sıkıştır — ücretsiz",
+      description: "Fotoğrafın boyutunu küçült. JPG, PNG ve WebP. Ücretsiz, hesapsız, fotoğraf tarayıcıdan çıkmaz.",
+    },
+    ar: {
+      title: "ضغط الصورة — مجاناً",
+      description: "صغّر حجم الصورة. JPG وPNG وWebP. مجاناً وبلا حساب، والصورة تبقى في المتصفح.",
+    },
+    ru: {
+      title: "Сжать фото — бесплатно",
+      description: "Уменьшите размер фото. JPG, PNG и WebP. Бесплатно, без аккаунта, фото остаётся в браузере.",
     },
   },
   "/pdf": {
@@ -960,6 +983,7 @@ function ogImage(path: string) {
   if (bare === "/ai" || bare.startsWith("/ai/")) return `${SITE}/og-ai.jpg`;
   if (bare === "/qr" || bare.startsWith("/qr/")) return `${SITE}/og-qr.jpg`;
   if (bare === "/erase" || bare.startsWith("/erase/")) return `${SITE}/og-tools.jpg`;
+  if (bare === "/image" || bare.startsWith("/image/")) return `${SITE}/apps/nibras-image.png`;
   if (bare === "/pdf" || bare.startsWith("/pdf/")) return `${SITE}/apps/nibras-pdf.jpg`;
   if (bare === "/tools" || bare.startsWith("/tools/")) return `${SITE}/og-tools.jpg`;
   if (bare === "/faq" || bare.startsWith("/faq/")) return `${SITE}/og-faq.jpg`;
@@ -1182,6 +1206,45 @@ function jsonLd(path: string, lang: Lang, copy: PageSeo, url: string) {
           provider: { "@id": `${SITE}/#org` },
         },
       ],
+    };
+  }
+
+  const pdfFaq = path.match(/^\/pdf\/([a-z-]+)$/);
+  if (pdfFaq && isToolId(pdfFaq[1])) {
+    const faqs = toolSeo(lang, pdfFaq[1]).faqs;
+    if (faqs.length) {
+      return {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        name: copy.title,
+        description: copy.description,
+        url,
+        inLanguage: lang,
+        mainEntity: faqs.map((item) => ({
+          "@type": "Question",
+          name: item.q,
+          acceptedAnswer: { "@type": "Answer", text: item.a },
+        })),
+        publisher: org,
+      };
+    }
+  }
+  if (path === "/erase" || path === "/image") {
+    const block = SEARCH_FAQ[path];
+    const items = block.items[lang] ?? block.items.en;
+    return {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      name: copy.title,
+      description: copy.description,
+      url,
+      inLanguage: lang,
+      mainEntity: items.map((item) => ({
+        "@type": "Question",
+        name: item.q,
+        acceptedAnswer: { "@type": "Answer", text: item.a },
+      })),
+      publisher: org,
     };
   }
 

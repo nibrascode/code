@@ -89,6 +89,19 @@ export function PdfPage({ tool }: { tool: ToolId | null }) {
               {seo.steps.map((s) => <li key={s} className="pdf-step flex items-center">{s}</li>)}
             </ol>
           </section>
+          {seo.faqs.length ? (
+            <section className="pdf-surface mt-8 p-5 md:p-6" aria-labelledby="pdf-faq">
+              <h2 id="pdf-faq" className="mb-3 text-base font-semibold">{seo.faqTitle}</h2>
+              <div className="space-y-3">
+                {seo.faqs.map((item) => (
+                  <div key={item.q}>
+                    <h3 className="text-sm font-semibold">{item.q}</h3>
+                    <p className="mt-1 text-sm text-muted">{item.a}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          ) : null}
           <section className="mt-8" aria-labelledby="pdf-more">
             <h2 id="pdf-more" className="mb-3 text-base font-semibold">{seo.related}</h2>
             <div className="flex flex-wrap gap-2">

@@ -2,13 +2,14 @@ import { useState } from "react";
 import { useI18n } from "@/lib/i18n-context";
 import { PageAssistant } from "@/components/page-assistant";
 import { EraseTool } from "@/erase/erase-tool";
+import { SEARCH_FAQ } from "@/lib/search-faq";
 
 const TITLE = {
-  az: "Nibras Erase",
-  en: "Nibras Erase",
-  tr: "Nibras Erase",
-  ar: "Nibras Erase",
-  ru: "Nibras Erase",
+  az: "Şəkil fon sil",
+  en: "Remove image background",
+  tr: "Fotoğraf arka plan sil",
+  ar: "حذف خلفية الصورة",
+  ru: "Удалить фон фото",
 } as const;
 
 const LEAD = {
@@ -184,6 +185,15 @@ export function ErasePage() {
         </div>
       ) : null}
       <EraseTool />
+      <section className="mt-8 space-y-3" aria-labelledby="erase-faq">
+        <h2 id="erase-faq" className="text-base font-semibold">{SEARCH_FAQ["/erase"].title[lang]}</h2>
+        {SEARCH_FAQ["/erase"].items[lang].map((item) => (
+          <div key={item.q}>
+            <h3 className="text-sm font-semibold">{item.q}</h3>
+            <p className="mt-1 text-sm text-muted">{item.a}</p>
+          </div>
+        ))}
+      </section>
       <PageAssistant topic="erase" />
     </main>
   );
