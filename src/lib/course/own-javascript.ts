@@ -377,6 +377,69 @@ export const OWN_JS: OwnPageContent = {
       ],
     },
   ],
+  api: [
+    {
+      id: "key",
+      title: t("API və açar", "The API and the key", "API ve anahtar", "الواجهة والمفتاح", "API и ключ"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "Modeli sıfırdan yazmırsan. API kodunla hazır modeli birləşdirən körpüdür. Kod sualı göndərir, server cavabı qaytarır. Başlanğıc üçün Gemini pulsuz açar verir, kart istəmir. aistudio.google.com saytında Get API key, sonra Create API key. Açar şifrə kimidir: paylaşma və açıq GitHub-a qoyma.",
+            "You do not write the model from scratch. An API is the bridge between your code and a ready model. The code sends a question and the server returns an answer. For a start, Gemini gives a free key and does not ask for a card. On aistudio.google.com choose Get API key, then Create API key. The key is like a password: do not share it and do not put it on a public GitHub.",
+            "Modeli sıfırdan yazmazsın. API kodunla hazır modeli birleştiren köprüdür. Kod soruyu gönderir, sunucu cevabı döndürür. Başlangıç için Gemini ücretsiz anahtar verir, kart istemez. aistudio.google.com sitesinde Get API key, sonra Create API key. Anahtar şifre gibidir: paylaşma ve açık GitHub'a koyma.",
+            "لا تكتب النموذج من الصفر. الواجهة جسر بين كودك ونموذج جاهز. الكود يرسل السؤال والخادم يُرجع الجواب. للبداية يعطي Gemini مفتاحاً مجانياً ولا يطلب بطاقة. في aistudio.google.com اختر Get API key ثم Create API key. المفتاح ككلمة السر: لا تشاركه ولا تضعه على GitHub عام.",
+            "Модель с нуля не пишешь. API — мост между твоим кодом и готовой моделью. Код отправляет вопрос, сервер возвращает ответ. Для начала Gemini даёт бесплатный ключ и не просит карту. На aistudio.google.com выбери Get API key, затем Create API key. Ключ как пароль: не делись им и не клади на открытый GitHub.",
+          )],
+        },
+      ],
+    },
+    {
+      id: "json",
+      title: t("Sorğu obyektidir", "The request is an object", "Sorgu bir nesnedir", "الطلب كائن", "Запрос — это объект"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "Sual obyektin içində gedir. Cavab mətni candidates[0].content.parts[0].text ünvanındadır. candidates massivdir, ona görə [0] yazılır. [0] unudulsa nəticə undefined olur.",
+            "The question travels inside an object. The answer text is at candidates[0].content.parts[0].text. candidates is an array, so you write [0]. If you forget [0], the result is undefined.",
+            "Soru nesnenin içinde gider. Cevap metni candidates[0].content.parts[0].text adresindedir. candidates dizidir, bu yüzden [0] yazılır. [0] unutulursa sonuç undefined olur.",
+            "السؤال يذهب داخل كائن. نص الجواب في candidates[0].content.parts[0].text. candidates مصفوفة، لذلك تُكتب [0]. إذا نُسيت [0] كانت النتيجة undefined.",
+            "Вопрос уходит внутри объекта. Текст ответа лежит в candidates[0].content.parts[0].text. candidates — массив, поэтому пишется [0]. Если забыть [0], результат будет undefined.",
+          )],
+          code: 'const sorguMelumati = {\n  contents: [\n    {\n      parts: [{ text: "JavaScript-də dəyişən nədir?" }]\n    }\n  ]\n};',
+        },
+      ],
+    },
+    {
+      id: "fetch",
+      title: t("fetch ilə göndər", "Send it with fetch", "fetch ile gönder", "أرسله بـ fetch", "Отправь через fetch"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "POST sualı göndərir. JSON.stringify obyekti mətnə çevirir ki, getsin. cavab.json() gələn mətni yenidən obyekt edir. Açarın əvvəlində və sonunda boşluq olmasın. Açarı səhifənin içinə qoyma: görən şəxs onu götürə bilər.",
+            "POST sends the question. JSON.stringify turns the object into text so it can travel. cavab.json() turns the answer back into an object. The key must not have a space at the start or the end. Do not put the key inside the page: anyone who sees it can take it.",
+            "POST soruyu gönderir. JSON.stringify nesneyi metne çevirir ki, gitsin. cavab.json() gelen metni yeniden nesne yapar. Anahtarın başında ve sonunda boşluk olmasın. Anahtarı sayfanın içine koyma: gören kişi onu alabilir.",
+            "POST يرسل السؤال. JSON.stringify يحوّل الكائن إلى نص كي يسافر. cavab.json() يُعيد النص القادم إلى كائن. يجب ألا يكون في أول المفتاح أو آخره فراغ. لا تضع المفتاح داخل الصفحة: من يراه يستطيع أخذه.",
+            "POST отправляет вопрос. JSON.stringify превращает объект в текст, чтобы он ушёл. cavab.json() снова делает из ответа объект. В начале и в конце ключа не должно быть пробела. Не клади ключ внутрь страницы: кто увидит, тот сможет его забрать.",
+          )],
+          code: 'const apiKey = "BURAYA_OZ_API_ACARINIZI_YAZIN";\nconst url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;\nfetch(url, {\n  method: "POST",\n  headers: { "Content-Type": "application/json" },\n  body: JSON.stringify(sorguMelumati)\n})\n  .then(cavab => cavab.json())\n  .then(melumat => {\n    const aiMetni = melumat.candidates[0].content.parts[0].text;\n    console.log(aiMetni);\n  });',
+        },
+      ],
+    },
+    {
+      id: "faq",
+      title: t("Suallar", "Questions", "Sorular", "أسئلة", "Вопросы"),
+      blocks: [
+        {
+          paragraphs: [
+            t("400 və ya 403 niyə gəlir? Açar səhvdir və ya ətrafında boşluq var. Dırnağın içində yalnız açarın özü olsun.", "Why do you get 400 or 403? The key is wrong, or there is a space around it. Inside the quotes there should be only the key.", "400 veya 403 neden gelir? Anahtar yanlıştır veya etrafında boşluk vardır. Tırnağın içinde yalnız anahtarın kendisi olsun.", "لماذا يظهر 400 أو 403؟ المفتاح خطأ أو حوله فراغ. داخل علامات الاقتباس يجب أن يكون المفتاح وحده.", "Почему приходит 400 или 403? Ключ неверный или вокруг него пробел. В кавычках должен быть только сам ключ."),
+            t("body niyə getmir? Obyekti birbaşa yazmaq olmaz. JSON.stringify(sorguMelumati) lazımdır.", "Why does the body not go? You cannot write the object directly. You need JSON.stringify(sorguMelumati).", "body neden gitmez? Nesneyi doğrudan yazmak olmaz. JSON.stringify(sorguMelumati) gerekir.", "لماذا لا يذهب body؟ لا يمكن كتابة الكائن مباشرة. يلزم JSON.stringify(sorguMelumati).", "Почему body не уходит? Объект нельзя писать напрямую. Нужен JSON.stringify(sorguMelumati)."),
+            t("Cavab niyə undefined olur? candidates massivdir. [0] yazılmalıdır. candidates.content səhvdir.", "Why is the answer undefined? candidates is an array. You must write [0]. candidates.content is wrong.", "Cevap neden undefined olur? candidates dizidir. [0] yazılmalıdır. candidates.content yanlıştır.", "لماذا يكون الجواب undefined؟ candidates مصفوفة. يجب كتابة [0]. candidates.content خطأ.", "Почему ответ undefined? candidates — массив. Нужно написать [0]. candidates.content неправильно."),
+            t("Mətn haradan oxunur? melumat.candidates[0].content.parts[0].text", "Where do you read the text? melumat.candidates[0].content.parts[0].text", "Metin nereden okunur? melumat.candidates[0].content.parts[0].text", "من أين يُقرأ النص؟ melumat.candidates[0].content.parts[0].text", "Откуда читается текст? melumat.candidates[0].content.parts[0].text"),
+          ],
+        },
+      ],
+    },
+  ],
   duyme: [
     {
       id: "click",
