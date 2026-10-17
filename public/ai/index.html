@@ -536,6 +536,14 @@
     }
     .dots i:nth-child(2) { animation-delay: .15s; }
     .dots i:nth-child(3) { animation-delay: .3s; }
+    .tk { display: inline-flex; align-items: center; gap: 12px; padding: 4px 2px; }
+    .msg.b.tk-wrap { background: none !important; border-color: transparent !important; box-shadow: none !important; -webkit-backdrop-filter: none !important; backdrop-filter: none !important; padding-inline: 0 !important; }
+    .tk-orb { position: relative; flex: none; width: 30px; height: 30px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff, #9fb2ff 35%, #6d84ff 65%, #7a6bff); box-shadow: 0 0 16px rgba(109,132,255,.7), 0 0 36px rgba(126,231,255,.3); animation: tkpulse 2.2s ease-in-out infinite; }
+    .tk-orb::before { content: ""; position: absolute; inset: -5px; border-radius: 50%; background: conic-gradient(from 0deg, transparent, #7ee7ff, #a78bfa, transparent 70%); -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px)); mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px)); animation: tkspin 1.6s linear infinite; }
+    .tk-txt { font-weight: 600; font-size: 14px; background: linear-gradient(90deg, currentColor 35%, #7ee7ff 50%, currentColor 65%); background-size: 250% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: tkshim 2.4s linear infinite; }
+    @keyframes tkspin { to { transform: rotate(360deg); } }
+    @keyframes tkpulse { 50% { transform: scale(.88); filter: brightness(1.15); } }
+    @keyframes tkshim { to { background-position: -250% 0; } }
     .dock { padding: 4px 16px 18px; }
     .ring {
       position: relative;
@@ -743,7 +751,8 @@
       .act b { font-size: 8.5px; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .dots i, .ring::before, .ring::after { animation: none; }
+      .dots i, .ring::before, .ring::after, .tk-orb, .tk-orb::before { animation: none; }
+      .tk-txt { animation: none; -webkit-text-fill-color: currentColor; }
       .drawer, .scrim { transition: none; }
     }
   </style>
@@ -2126,6 +2135,30 @@
       else if (kind.charAt(0) === "b") revealAnswer(el);
       return el;
     }
+    const TK = {
+      az: { ask: ["Düşünürəm…", "Cavabı hazırlayıram…", "Yazıram…"], code: ["Məsələni təhlil edirəm…", "Kodu yazıram…", "Yoxlayıram…"], image: ["Təsviri anlayıram…", "Şəkli çəkirəm…", "Detalları cilalayıram…"] },
+      en: { ask: ["Thinking…", "Preparing the answer…", "Writing…"], code: ["Analyzing the task…", "Writing the code…", "Checking it…"], image: ["Understanding the idea…", "Drawing the image…", "Polishing the details…"] },
+      tr: { ask: ["Düşünüyorum…", "Cevabı hazırlıyorum…", "Yazıyorum…"], code: ["Görevi inceliyorum…", "Kodu yazıyorum…", "Kontrol ediyorum…"], image: ["Fikri anlıyorum…", "Görseli çiziyorum…", "Ayrıntıları parlatıyorum…"] },
+      ar: { ask: ["أفكّر…", "أجهّز الجواب…", "أكتب…"], code: ["أحلّل المهمة…", "أكتب الكود…", "أتحقق منه…"], image: ["أفهم الفكرة…", "أرسم الصورة…", "أصقل التفاصيل…"] },
+      ru: { ask: ["Думаю…", "Готовлю ответ…", "Пишу…"], code: ["Разбираю задачу…", "Пишу код…", "Проверяю…"], image: ["Понимаю идею…", "Рисую изображение…", "Дорабатываю детали…"] }
+    };
+    function thinkEl(kind) {
+      const steps = ((TK[uiLangCode] || TK.az)[kind] || (TK[uiLangCode] || TK.az).ask);
+      const el = document.createElement("div");
+      el.className = "msg b tk-wrap";
+      el.setAttribute("role", "status");
+      el.innerHTML = '<span class="tk"><span class="tk-orb"></span><span class="tk-txt"></span></span>';
+      const txt = el.querySelector(".tk-txt");
+      let i = 0;
+      txt.textContent = steps[0];
+      const timer = setInterval(function () {
+        if (!el.isConnected) { clearInterval(timer); return; }
+        i = Math.min(steps.length - 1, i + 1);
+        txt.textContent = steps[i];
+      }, 3500);
+      return el;
+    }
+
     async function send(text) {
       const m = (text || "").trim();
       if (!m || btn.disabled) return;
@@ -2161,9 +2194,7 @@
       const um = rec("u", m, "", useImage ? 1 : 0);
       btn.disabled = true;
       stat("mode", sentMode);
-      const wait = document.createElement("div");
-      wait.className = "msg b";
-      wait.innerHTML = '<span class="dots"><i></i><i></i><i></i></span>';
+      const wait = thinkEl(useImage ? "image" : sentMode === "code" ? "code" : "ask");
       msgs.appendChild(wait);
       msgs.scrollTop = msgs.scrollHeight;
       try {
