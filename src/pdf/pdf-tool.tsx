@@ -151,6 +151,11 @@ function Workspace({ tool, lang, t, title, desc }: { tool: ToolId; lang: Lang; t
   // pages / extract
   const [order, setOrder] = useState<{ index: number; del: boolean }[]>([]);
   const [sel, setSel] = useState<Set<number>>(new Set());
+  // split
+  const [splitMode, setSplitMode] = useState<"pick" | "every" | "each" | "ranges">("pick");
+  const [splitText, setSplitText] = useState("");
+  const [splitN, setSplitN] = useState(10);
+  const [splitRows, setSplitRows] = useState<string[]>([""]);
   // sign
   const [sigPng, setSigPng] = useState<Uint8Array | null>(null);
   const [sigUrl, setSigUrl] = useState("");
@@ -161,8 +166,8 @@ function Workspace({ tool, lang, t, title, desc }: { tool: ToolId; lang: Lang; t
 
   const first = items[0];
   const firstBytes = first?.bytes && !first.locked ? first.bytes : null;
-  const needsThumbs = tool === "pages" || tool === "extract-pages";
-  const thumbs = usePageThumbs(needsThumbs ? firstBytes : null);
+  const needsThumbs = tool === "pages" || tool === "extract-pages" || (tool === "split" && splitMode === "pick");
+  const thumbs = usePageThumbs(needsThumbs ? firstBytes : null, 0.35, tool === "split" ? 60 : 200);
 
   // writer draft
   useEffect(() => {
@@ -300,10 +305,16 @@ function Workspace({ tool, lang, t, title, desc }: { tool: ToolId; lang: Lang; t
         }
         case "split": {
           need();
-          const parts = await eng.splitPdf(f.bytes!);
+          const total = f.pages ?? (await eng.pageCount(f.bytes!));
           const b = baseName(f.name);
-          const files = parts.map((p, i) => ({ name: `${b}-${i + 1}.pdf`, data: p }));
-          res.push(zipOut(`${b}-pages.zip`, files));
+          let groups: number[][] | null;
+          if (splitMode === "pick") { const g = eng.parseRange(splitText, total); groups = g ? [g] : null; }
+          else groups = eng.splitGroups(total, { mode: splitMode, n: splitN, ranges: splitRows });
+          if (!groups) throw new Error(splitMode === "ranges" || splitMode === "pick" ? t.splitBad : t.errNoSel);
+          const parts = await eng.splitInto(f.bytes!, groups, (d, n) => setBusy({ label: t.working, frac: d / n }), stop);
+          const label = (g: number[]) => (g.length === 1 ? `p${g[0] + 1}` : g[g.length - 1] - g[0] + 1 === g.length ? `p${g[0] + 1}-${g[g.length - 1] + 1}` : `p${g.map((x) => x + 1).slice(0, 4).join('_')}${g.length > 4 ? '_etc' : ''}`);
+          const files = parts.map((x, i) => ({ name: parts.length === 1 ? `${b}-${label(groups![0])}.pdf` : `${b}-${label(groups![i])}.pdf`, data: x }));
+          if (files.length > 1) res.push(zipOut(`${b}-split.zip`, files));
           files.slice(0, 20).forEach((x) => res.push(pdfOut(x.name, x.data)));
           break;
         }
@@ -616,6 +627,54 @@ function Workspace({ tool, lang, t, title, desc }: { tool: ToolId; lang: Lang; t
                 </div>
               </div>
             </>
+          ) : null}
+          {tool === "split" && firstBytes ? (
+            <div className="space-y-3" data-testid="split-ui">
+              <p className="text-xs text-muted">{t.splitHint}{first?.pages ? ` ${t.splitInfo(first.pages)}.` : ""}</p>
+              <Seg name="split-mode" value={splitMode} onChange={setSplitMode} options={[{ id: "pick", label: t.splitPick }, { id: "every", label: t.splitEvery }, { id: "each", label: t.splitEach }, { id: "ranges", label: t.splitRanges }]} />
+              {splitMode === "pick" ? (
+                <div className="space-y-2">
+                  <input className={`${field} max-w-xs`} dir="ltr" placeholder="2, 5-7" value={splitText} onChange={(e) => setSplitText(e.target.value)} data-testid="split-text" />
+                  <p className="text-xs text-muted">{t.splitPickHint}</p>
+                  {thumbs.length ? (
+                    <div className="grid grid-cols-4 gap-2 sm:grid-cols-6 md:grid-cols-8" dir="ltr" data-testid="split-grid">
+                      {thumbs.map((src, i) => {
+                        const chosen = new Set(eng.parseRange(splitText, first?.pages ?? 9999) ?? []);
+                        return (
+                          <button key={i} type="button" data-page={i} onClick={() => {
+                            const c = new Set(chosen);
+                            if (c.has(i)) c.delete(i); else c.add(i);
+                            const a = [...c].sort((x, y) => x - y);
+                            const parts: string[] = [];
+                            for (let k = 0; k < a.length;) { let e = k; while (e + 1 < a.length && a[e + 1] === a[e] + 1) e++; parts.push(e > k ? `${a[k] + 1}-${a[e] + 1}` : `${a[k] + 1}`); k = e + 1; }
+                            setSplitText(parts.join(", "));
+                          }} className={`relative rounded-lg border p-1 ${chosen.has(i) ? "border-primary bg-primary/20" : "border-border"}`}>
+                            <img src={src} alt="" className="w-full rounded bg-white" />
+                            <span className="block text-center text-[11px] text-muted">{i + 1}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  ) : null}
+                </div>
+              ) : null}
+              {splitMode === "every" ? (
+                <div><Label>{t.splitN}</Label><input type="number" min={1} className={`${field} max-w-[8rem]`} dir="ltr" value={splitN} onChange={(e) => setSplitN(Math.max(1, Number(e.target.value) || 1))} data-testid="split-n" />{first?.pages ? <p className="mt-1 text-xs text-muted">{t.splitFiles(Math.ceil(first.pages / splitN))}</p> : null}</div>
+              ) : null}
+              {splitMode === "each" && first?.pages ? <p className="text-xs text-muted">{t.splitFiles(first.pages)}</p> : null}
+              {splitMode === "ranges" ? (
+                <div className="space-y-2" data-testid="split-rows">
+                  {splitRows.map((r, i) => (
+                    <div key={i} className="flex items-center gap-2">
+                      <span className="w-20 shrink-0 text-xs text-muted">{t.splitRow} {i + 1}</span>
+                      <input className={`${field} min-w-0 flex-1 max-w-xs`} dir="ltr" placeholder="1-3, 5" value={r} onChange={(e) => setSplitRows((c) => c.map((x, k) => (k === i ? e.target.value : x)))} />
+                      {splitRows.length > 1 ? <button type="button" className={btn} aria-label="remove" onClick={() => setSplitRows((c) => c.filter((_, k) => k !== i))}>×</button> : null}
+                    </div>
+                  ))}
+                  <button type="button" className={btn} onClick={() => setSplitRows((c) => [...c, ""])}>+ {t.splitAdd}</button>
+                </div>
+              ) : null}
+            </div>
           ) : null}
           {showRange ? (
             <div>

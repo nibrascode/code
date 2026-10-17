@@ -63,8 +63,8 @@ export function PdfPage({ tool }: { tool: ToolId | null }) {
   const dir = lang === "ar" ? "rtl" : "ltr";
   return (
     <main className="pdf-root mx-auto w-full max-w-5xl px-4 pt-28 pb-16 md:px-6" dir={dir}>
-      <header className="pdf-hero mb-7 p-5 md:p-8">
-        <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+      <header className={`pdf-hero p-5 md:p-8 ${seo ? "mb-4 md:mb-7" : "mb-7"}`}>
+        <div className={`flex flex-wrap items-center justify-between gap-3 ${seo ? "mb-3 md:mb-4" : "mb-4"}`}>
           <nav className="pdf-langs flex flex-wrap items-center gap-1" aria-label="Language">
             <Globe2 className="me-1 size-4 text-muted" aria-hidden />
             {LANGS.map((l) => (
@@ -81,11 +81,11 @@ export function PdfPage({ tool }: { tool: ToolId | null }) {
         <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
           <img src="/apps/nibras-pdf.jpg" alt="" width={72} height={72} className="size-14 shrink-0 rounded-2xl shadow-[0_14px_30px_-14px_var(--pdf-glow)] ring-1 ring-white/15 md:size-[4.5rem]" />
           <div className="min-w-0 flex-1 basis-64">
-            <h1 className="pdf-title font-display text-3xl font-bold md:text-5xl">{seo ? seo.h1 : t.title}</h1>
+            <h1 className={`pdf-title font-display font-bold md:text-5xl ${seo ? "text-2xl" : "text-3xl"}`}>{seo ? seo.h1 : t.title}</h1>
             <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted md:text-base">{seo ? seo.lead : t.lead}</p>
           </div>
         </div>
-        <div className="mt-5 flex flex-wrap items-center gap-2">
+        <div className={`mt-5 flex-wrap items-center gap-2 ${seo ? "hidden md:flex" : "flex"}`}>
           <span className="pdf-badge"><Sparkles className="size-3.5" />{badges[0]}</span>
           <span className="pdf-badge"><Globe2 className="size-3.5" />{badges[1]}</span>
           <span className="pdf-badge"><ShieldCheck className="size-3.5" />{badges[2]}</span>

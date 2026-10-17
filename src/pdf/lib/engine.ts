@@ -33,6 +33,10 @@ export function getEngine() {
       StandardFonts: lib.StandardFonts,
       degrees: lib.degrees,
       rgb: lib.rgb,
+      PDFName: lib.PDFName,
+      PDFDict: lib.PDFDict,
+      PDFArray: lib.PDFArray,
+      decodePDFRawStream: lib.decodePDFRawStream,
       fontkit: (fk as { default?: unknown }).default ?? fk,
     } as never);
     return { lib, ops };
@@ -81,6 +85,30 @@ export async function mergePdfs(sources: Uint8Array[]) {
 export async function splitPdf(bytes: Uint8Array) {
   const { ops } = await getEngine();
   return ops.splitPdfBytes(bytes);
+}
+
+/** Pages -> groups of zero-based indices for the split modes. */
+export function splitGroups(total: number, o: { mode: "each" | "every" | "ranges"; n?: number; ranges?: string[] }): number[][] | null {
+  if (o.mode === "each") return [...Array(total).keys()].map((i) => [i]);
+  if (o.mode === "every") {
+    const n = Math.max(1, Math.floor(o.n || 1));
+    const out: number[][] = [];
+    for (let i = 0; i < total; i += n) out.push([...Array(Math.min(n, total - i)).keys()].map((k) => i + k));
+    return out;
+  }
+  const out: number[][] = [];
+  for (const r of o.ranges ?? []) {
+    if (!r.trim()) continue;
+    const g = parseRange(r, total);
+    if (!g) return null;
+    out.push(g);
+  }
+  return out.length ? out : null;
+}
+
+export async function splitInto(bytes: Uint8Array, groups: number[][], onProgress?: (done: number, total: number) => void, shouldCancel?: () => boolean) {
+  const { ops } = await getEngine();
+  return ops.splitGroups(bytes, groups, onProgress, shouldCancel);
 }
 
 export async function extractPages(bytes: Uint8Array, pageIndices: number[]) {

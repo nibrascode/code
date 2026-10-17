@@ -39,6 +39,11 @@ type PdfLib = {
   degrees: (angle: number) => any;
   rgb: (red: number, green: number, blue: number) => any;
   fontkit?: any;
+  // optional: lets copied pages carry only the resources their content actually uses
+  PDFName?: any;
+  PDFDict?: any;
+  PDFArray?: any;
+  decodePDFRawStream?: any;
 };
 
 // pdf-lib's own awaits resolve as microtasks, which never let React Native
@@ -50,7 +55,57 @@ const maybeYield = async (index: number) => {
   if (index % PAGES_PER_YIELD === PAGES_PER_YIELD - 1) await yieldToEventLoop();
 };
 
-export const createPdfOperations = ({ PDFDocument, StandardFonts, degrees, rgb, fontkit }: PdfLib) => {
+export const createPdfOperations = ({ PDFDocument, StandardFonts, degrees, rgb, fontkit, PDFName, PDFDict, PDFArray, decodePDFRawStream }: PdfLib) => {
+  const RES_KEYS = ['XObject', 'Font', 'ExtGState', 'ColorSpace', 'Pattern', 'Shading', 'Properties'];
+
+  /** Names (/Name tokens) the page content refers to; null when the content cannot be read. */
+  const usedNames = (page: any): Set<string> | null => {
+    try {
+      const contents = page.node.lookup(PDFName.of('Contents'));
+      const streams = contents instanceof PDFArray ? contents.asArray().map((r: any) => page.node.context.lookup(r)) : [contents];
+      const names = new Set<string>();
+      for (const st of streams) {
+        if (!st) continue;
+        const raw = typeof st.getContents === 'function' && !st.dict?.has?.(PDFName.of('Filter')) ? st.getContents() : decodePDFRawStream(st).decode();
+        const text = new TextDecoder('latin1').decode(raw);
+        for (const m of text.matchAll(/\/([^\s/\[\]()<>{}%]+)/g)) names.add(m[1].replace(/#([0-9A-Fa-f]{2})/g, (_x, h) => String.fromCharCode(parseInt(h, 16))));
+      }
+      return names;
+    } catch {
+      return null;
+    }
+  };
+
+  /** Replace the page's (possibly shared, possibly inherited) Resources by a private dict with only the used entries, so copyPages does not drag the whole file along. */
+  const pruneResources = (page: any) => {
+    if (!PDFName || !PDFDict || !PDFArray || !decodePDFRawStream) return;
+    const names = usedNames(page);
+    if (!names) return;
+    const ctx = page.node.context;
+    let res: any = null;
+    for (let node: any = page.node; node && !res; node = node.lookupMaybe(PDFName.of('Parent'), PDFDict)) res = node.lookupMaybe(PDFName.of('Resources'), PDFDict);
+    if (!res) return;
+    const fresh = ctx.obj({});
+    for (const key of res.keys()) {
+      const k = key.decodeText();
+      const val = res.lookup(key);
+      if (RES_KEYS.includes(k) && val instanceof PDFDict) {
+        const sub = ctx.obj({});
+        for (const name of val.keys()) if (names.has(name.decodeText())) sub.set(name, val.get(name));
+        fresh.set(key, sub);
+      } else {
+        fresh.set(key, res.get(key));
+      }
+    }
+    page.node.set(PDFName.of('Resources'), fresh);
+  };
+
+  /** copyPages that keeps outputs small (prunes unused shared resources first). */
+  const copyLean = async (output: any, source: any, indices: number[]) => {
+    for (const i of indices) pruneResources(source.getPage(i));
+    return output.copyPages(source, indices);
+  };
+
   const createImagePdfBytes = async (
     images: PdfImageSource[],
     pageSize: PdfPageSize,
@@ -200,7 +255,7 @@ export const createPdfOperations = ({ PDFDocument, StandardFonts, degrees, rgb, 
       await yieldToEventLoop();
       if (shouldCancel?.()) break;
       const output = await PDFDocument.create();
-      const [page] = await output.copyPages(source, [pageIndex]);
+      const [page] = await copyLean(output, source, [pageIndex]);
       output.addPage(page);
       const pageBytes = await output.save({ useObjectStreams: true });
       if (onPage) {
@@ -226,7 +281,7 @@ export const createPdfOperations = ({ PDFDocument, StandardFonts, degrees, rgb, 
         source = await PDFDocument.load(entry.bytes);
         sources.set(entry.bytes, source);
       }
-      const [page] = await output.copyPages(source, [entry.pageIndex]);
+      const [page] = await copyLean(output, source, [entry.pageIndex]);
       output.addPage(page);
     }
     if (shouldCancel?.()) return null;
@@ -248,14 +303,36 @@ export const createPdfOperations = ({ PDFDocument, StandardFonts, degrees, rgb, 
         source = await PDFDocument.load(await readSource(entry.sourceKey));
         loadedSourceKey = entry.sourceKey;
       }
-      const [page] = await output.copyPages(source, [entry.pageIndex]);
+      const [page] = await copyLean(output, source, [entry.pageIndex]);
       output.addPage(page);
     }
     if (shouldCancel?.()) return null;
     return output.save({ useObjectStreams: true });
   };
 
+  /** One output PDF per group of zero-based page indices; the source is loaded once. */
+  const splitGroups = async (
+    bytes: Uint8Array,
+    groups: number[][],
+    onProgress?: (done: number, total: number) => void,
+    shouldCancel?: () => boolean,
+  ) => {
+    const source = await PDFDocument.load(bytes);
+    const results: Uint8Array[] = [];
+    for (const [gi, group] of groups.entries()) {
+      await yieldToEventLoop();
+      if (shouldCancel?.()) break;
+      const output = await PDFDocument.create();
+      const pages = await copyLean(output, source, group);
+      pages.forEach((page: any) => output.addPage(page));
+      results.push(await output.save({ useObjectStreams: true }));
+      onProgress?.(gi + 1, groups.length);
+    }
+    return results;
+  };
+
   return {
+    splitGroups,
     composePdfPages,
     composePdfPageSources,
     createImagePdfBytes,
