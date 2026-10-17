@@ -185,6 +185,70 @@ export const OWN_JS: OwnPageContent = {
       ],
     },
   ],
+  "for-massiv": [
+    {
+      id: "walk",
+      title: t("for ilə massivi gəz", "Walk an array with for", "for ile diziyi gez", "امشِ المصفوفة بـ for", "Пройди массив через for"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "for üç hissədən ibarətdir: başlanğıc, şərt və addım. Massiv üçün sayğac 0-dan başlayır və length-dən kiçik qaldıqca artır. meyveler[i] cari elementdir.",
+            "for has three parts: a start, a condition and a step. For an array the counter starts at 0 and grows while it is smaller than length. meyveler[i] is the current item.",
+            "for üç parçadan oluşur: başlangıç, koşul ve adım. Dizi için sayaç 0'dan başlar ve length'ten küçük kaldıkça artar. meyveler[i] o anki öğedir.",
+            "for من ثلاثة أجزاء: البداية والشرط والخطوة. للمصفوفة يبدأ العدّاد من 0 ويزيد ما دام أصغر من length. meyveler[i] هو العنصر الحالي.",
+            "У for три части: начало, условие и шаг. Для массива счётчик начинается с 0 и растёт, пока он меньше length. meyveler[i] — текущий элемент.",
+          )],
+          code: 'let meyveler = ["alma", "armud", "banan", "gilas"];\nfor (let i = 0; i < meyveler.length; i++) {\n  console.log(meyveler[i]);\n}\n// alma, armud, banan, gilas',
+        },
+      ],
+    },
+    {
+      id: "sum",
+      title: t("Cəm, ən böyük və cüt", "Sum, the largest and the evens", "Toplam, en büyük ve çiftler", "المجموع والأكبر والأزواج", "Сумма, максимум и чётные"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "Eyni dövrə şərt əlavə olunur. Cəm üçün hər elementi toplayırsan. Ən böyük üçün birinci elementi götürüb qalanları onunla müqayisə edirsən. Cüt ədəd % 2 === 0 olandır.",
+            "The same loop takes a condition. For a sum you add each item. For the largest you start with the first item and compare the rest. An even number is one where % 2 === 0.",
+            "Aynı döngüye koşul eklenir. Toplam için her öğeyi eklersin. En büyük için ilk öğeyi alıp kalanlarla karşılaştırırsın. Çift sayı % 2 === 0 olanıdır.",
+            "تُضاف شرط إلى الحلقة نفسها. للمجموع تجمع كل عنصر. للأكبر تبدأ بالأول وتقارن الباقي. العدد الزوجي هو الذي % 2 === 0.",
+            "В тот же цикл добавляется условие. Для суммы складываешь каждый элемент. Для максимума берёшь первый и сравниваешь остальные. Чётное число — то, у которого % 2 === 0.",
+          )],
+          code: 'let reqemler = [12, 45, 7, 89, 34];\nlet cem = 0;\nlet enBoyuk = reqemler[0];\nfor (let i = 0; i < reqemler.length; i++) {\n  cem = cem + reqemler[i];\n  if (reqemler[i] > enBoyuk) enBoyuk = reqemler[i];\n  if (reqemler[i] % 2 === 0) console.log(reqemler[i]);\n}\nconsole.log(cem, enBoyuk);',
+        },
+      ],
+    },
+    {
+      id: "back",
+      title: t("Tərsinə və for...of", "Backwards and for...of", "Tersten ve for...of", "عكساً وfor...of", "Назад и for...of"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "Tərsinə getmək üçün sonuncu indeksdən başla: length - 1, və i-- ilə azal. İndeks lazım deyilsə for...of daha qısadır. i <= length yazma: son addım undefined olur. i++ unudulanda dövr bitmir.",
+            "To go backwards, start at the last index: length - 1, and step down with i--. If you do not need the index, for...of is shorter. Do not write i <= length: the last step is undefined. If you forget i++, the loop never ends.",
+            "Tersten gitmek için son indeksten başla: length - 1, ve i-- ile azalt. İndeks gerekmiyorsa for...of daha kısadır. i <= length yazma: son adım undefined olur. i++ unutulursa döngü bitmez.",
+            "للسير عكساً ابدأ من الفهرس الأخير: length - 1، وانقص بـ i--. إذا لم تحتج الفهرس فـ for...of أقصر. لا تكتب i <= length: الخطوة الأخيرة undefined. إذا نسيت i++ لا تنتهي الحلقة.",
+            "Чтобы идти назад, начни с последнего индекса: length - 1, и уменьшай через i--. Если индекс не нужен, for...of короче. Не пиши i <= length: последний шаг будет undefined. Если забыть i++, цикл не кончится.",
+          )],
+          code: 'for (let i = meyveler.length - 1; i >= 0; i--) {\n  console.log(meyveler[i]);\n}\nfor (let meyve of meyveler) {\n  console.log(meyve);\n}',
+        },
+      ],
+    },
+    {
+      id: "faq",
+      title: t("Suallar", "Questions", "Sorular", "أسئلة", "Вопросы"),
+      blocks: [
+        {
+          paragraphs: [
+            t("for niyə 0-dan başlayır? Birinci elementin indeksi 0-dır.", "Why does for start at 0? The first item's index is 0.", "for neden 0'dan başlar? İlk öğenin indeksi 0'dır.", "لماذا يبدأ for من 0؟ فهرس العنصر الأول هو 0.", "Почему for начинается с 0? Индекс первого элемента — 0."),
+            t("Şərt niyə i < length-dir? Sonuncu indeks length - 1-dir. Bərabər yazılanda olmayan yer undefined olur.", "Why is the condition i < length? The last index is length - 1. With equal, the missing place is undefined.", "Koşul neden i < length? Son indeks length - 1'dir. Eşit yazılırsa olmayan yer undefined olur.", "لماذا الشرط i < length؟ الفهرس الأخير هو length - 1. مع المساواة يصبح المكان غير الموجود undefined.", "Почему условие i < length? Последний индекс — length - 1. При равенстве несуществующее место даёт undefined."),
+            t("Cüt ədəd necə bilinir? Ədədi 2-yə böldükdə qalıq 0-dırsa: n % 2 === 0.", "How do you know a number is even? If the remainder of dividing by 2 is 0: n % 2 === 0.", "Çift sayı nasıl bilinir? 2'ye bölününce kalan 0 ise: n % 2 === 0.", "كيف تعرف أن العدد زوجي؟ إذا كان باقي القسمة على 2 صفراً: n % 2 === 0.", "Как узнать, что число чётное? Если остаток от деления на 2 равен 0: n % 2 === 0."),
+            t("for...of nə vaxt olur? İndeks lazım olmayanda. İndeks və ya element dəyişmək lazımdırsa adi for yaz.", "When is for...of enough? When you do not need the index. If you need the index or must change an item, write a plain for.", "for...of ne zaman olur? İndeks gerekmeyince. İndeks veya öğe değiştirmek gerekirse düz for yaz.", "متى يكفي for...of؟ عندما لا تحتاج الفهرس. إذا احتجت الفهرس أو تغيير عنصر فاكتب for العادي.", "Когда хватает for...of? Когда индекс не нужен. Если нужен индекс или надо менять элемент, пиши обычный for."),
+          ],
+        },
+      ],
+    },
+  ],
   duyme: [
     {
       id: "click",
