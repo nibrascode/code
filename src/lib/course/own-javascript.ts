@@ -313,6 +313,70 @@ export const OWN_JS: OwnPageContent = {
       ],
     },
   ],
+  obyekt: [
+    {
+      id: "write",
+      title: t("Obyekti yaz", "Write an object", "Nesneyi yaz", "اكتب كائناً", "Напиши объект"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "Obyekt bir neçə məlumatı bir yerdə saxlayır. Hər xüsusiyyət açar və dəyərdir. Açar ilə dəyər arasına iki nöqtə qoyulur, xüsusiyyətlər vergüllə ayrılır. = burada səhvdir.",
+            "An object keeps several pieces of information together. Each property is a key and a value. A colon goes between them, and properties are separated by commas. = is wrong here.",
+            "Nesne birkaç bilgiyi bir yerde tutar. Her özellik anahtar ve değerdir. Araya iki nokta konur, özellikler virgülle ayrılır. = burada yanlıştır.",
+            "الكائن يحفظ عدة معلومات معاً. كل خاصية مفتاح وقيمة. توضع نقطتان بينهما، وتُفصل الخصائص بفاصلة. = هنا خطأ.",
+            "Объект хранит несколько данных вместе. Каждое свойство — ключ и значение. Между ними двоеточие, свойства разделяются запятыми. = здесь ошибка.",
+          )],
+          code: 'let telebe = {\n  ad: "Əli",\n  yas: 20\n};\nconsole.log(telebe.ad); // Əli\nconsole.log(telebe.yas); // 20',
+        },
+      ],
+    },
+    {
+      id: "read",
+      title: t("Oxu və dəyiş", "Read and change", "Oku ve değiştir", "اقرأ وغيّر", "Прочитай и измени"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "Nöqtə ilə oxuyursan və bərabərliklə dəyişirsən. Olmayan xüsusiyyət undefined verir. Kvadrat mötərizədə açar dırnaqda olmalıdır. Dırnaq yoxdursa JavaScript onu dəyişən sanır.",
+            "You read with a dot and change with equals. A missing property gives undefined. Inside square brackets the key must be in quotes. Without quotes JavaScript looks for a variable.",
+            "Nokta ile okursun ve eşitle değiştirirsin. Olmayan özellik undefined verir. Köşeli parantezde anahtar tırnakta olmalıdır. Tırnak yoksa JavaScript onu değişken sanır.",
+            "تقرأ بنقطة وتغيّر بالمساواة. الخاصية غير الموجودة تعطي undefined. داخل الأقواس المربعة يجب أن يكون المفتاح بين علامتي اقتباس. بلا اقتباس يبحث جافاسكريبت عن متغير.",
+            "Читаешь точкой и меняешь знаком равенства. Нет свойства — будет undefined. В квадратных скобках ключ должен быть в кавычках. Без кавычек JavaScript ищет переменную.",
+          )],
+          code: 'let mehsul = { ad: "Kitab", qiymet: 12 };\nmehsul.qiymet = 15;\nconsole.log(mehsul.qiymet); // 15\nconsole.log(mehsul.reng); // undefined\nconsole.log(mehsul["ad"]); // Kitab',
+        },
+      ],
+    },
+    {
+      id: "list",
+      title: t("Əlavə et, sil, massiv", "Add, delete, array", "Ekle, sil, dizi", "أضف واحذف ومصفوفة", "Добавь, удали, массив"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "Yeni xüsusiyyət nöqtə ilə əlavə olunur. delete onu silir. Obyektin içində massiv, massivin içində isə obyekt ola bilər. Birinci elementin indeksi 0-dır.",
+            "A new property is added with a dot. delete removes it. An object can hold an array, and an array can hold objects. The first item's index is 0.",
+            "Yeni özellik nokta ile eklenir. delete onu siler. Nesnenin içinde dizi, dizinin içinde nesne olabilir. İlk öğenin indeksi 0'dır.",
+            "تُضاف خاصية جديدة بنقطة. delete يحذفها. يمكن أن يحمل الكائن مصفوفة، والمصفوفة كائنات. فهرس العنصر الأول 0.",
+            "Новое свойство добавляется точкой. delete его удаляет. В объекте может быть массив, а в массиве — объекты. Индекс первого элемента — 0.",
+          )],
+          code: 'let telefon = { marka: "Honor", qiymet: 600 };\ntelefon.reng = "Qara";\ndelete telefon.qiymet;\nconsole.log(telefon.qiymet); // undefined\n\nlet mallar = [\n  { ad: "Qələm", qiymet: 2 },\n  { ad: "Dəftər", qiymet: 5 }\n];\nconsole.log(mallar[1].qiymet); // 5',
+        },
+      ],
+    },
+    {
+      id: "faq",
+      title: t("Suallar", "Questions", "Sorular", "أسئلة", "Вопросы"),
+      blocks: [
+        {
+          paragraphs: [
+            t("Açar ilə dəyər arasına nə qoyulur? İki nöqtə. Bərabərlik yalnız sonra, dəyəri dəyişəndə işlənir.", "What goes between a key and a value? A colon. Equals is only used later, when you change the value.", "Anahtar ile değer arasına ne konur? İki nokta. Eşittir yalnız sonra, değeri değiştirirken kullanılır.", "ماذا يوضع بين المفتاح والقيمة؟ نقطتان. المساواة تُستخدم لاحقاً عند تغيير القيمة.", "Что ставится между ключом и значением? Двоеточие. Знак равенства только потом, когда меняешь значение."),
+            t("Vergül niyə lazımdır? Xüsusiyyətləri ayırır. Unudulsa kod xəta verir.", "Why is the comma needed? It separates properties. If you forget it, the code throws an error.", "Virgül neden gerekir? Özellikleri ayırır. Unutulursa kod hata verir.", "لماذا الفاصلة؟ تفصل الخصائص. إذا نُسيت ظهر خطأ.", "Зачем запятая? Она разделяет свойства. Если забыть, код даст ошибку."),
+            t("Olmayan xüsusiyyət nə verir? undefined. Bu, məlumatın olmadığını deyir.", "What does a missing property give? undefined. That says the information is not there.", "Olmayan özellik ne verir? undefined. Bu, bilginin olmadığını söyler.", "ماذا تعطي خاصية غير موجودة؟ undefined. هذا يقول إن المعلومة غير موجودة.", "Что даёт отсутствующее свойство? undefined. Это значит, что данных нет."),
+            t("a[ad] niyə işləmir? Dırnaq yoxdur. Doğrusu a[\"ad\"]-dır. Nöqtə ilə a.ad da olur.", "Why does a[ad] fail? There are no quotes. The correct form is a[\"ad\"]. a.ad also works.", "a[ad] neden çalışmaz? Tırnak yok. Doğrusu a[\"ad\"]. Nokta ile a.ad da olur.", "لماذا يفشل a[ad]؟ لا توجد علامات اقتباس. الصحيح a[\"ad\"]. وa.ad يعمل أيضاً.", "Почему a[ad] не работает? Нет кавычек. Правильно a[\"ad\"]. a.ad тоже работает."),
+          ],
+        },
+      ],
+    },
+  ],
   duyme: [
     {
       id: "click",
