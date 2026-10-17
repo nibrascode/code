@@ -805,6 +805,70 @@ export const OWN_JS: OwnPageContent = {
       ],
     },
   ],
+  xulase: [
+    {
+      id: "eight",
+      title: t("8 dərs", "The 8 lessons", "8 ders", "8 دروس", "8 уроков"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "Hər dərs bir addımdır. Sıra belədir.",
+            "Each lesson is one step. The order is this.",
+            "Her ders bir adımdır. Sıra böyledir.",
+            "كل درس خطوة. الترتيب هكذا.",
+            "Каждый урок — один шаг. Порядок такой.",
+          )],
+          ordered: true,
+          list: [
+            t("API: fetch və POST ilə Gemini-yə sual göndərmək.", "API: send a question to Gemini with fetch and POST.", "API: fetch ve POST ile Gemini'ye soru göndermek.", "الواجهة: أرسل سؤالاً إلى Gemini بـ fetch وPOST.", "API: отправить вопрос в Gemini через fetch и POST."),
+            t("async/await: cavabı gözləmək, xətanı try və catch ilə tutmaq.", "async/await: wait for the answer and hold the error with try and catch.", "async/await: cevabı beklemek, hatayı try ve catch ile tutmak.", "async/await: انتظر الجواب وامسك الخطأ بـ try وcatch.", "async/await: дождаться ответа и поймать ошибку через try и catch."),
+            t(".env: açarı kodda saxlamamaq, .gitignore və Vercel dəyişəni.", ".env: do not keep the key in the code, .gitignore and a Vercel variable.", ".env: anahtarı kodda tutmamak, .gitignore ve Vercel değişkeni.", ".env: لا تحفظ المفتاح في الكود، و.gitignore ومتغير Vercel.", ".env: не хранить ключ в коде, .gitignore и переменная Vercel."),
+            t("systemInstruction: gizli rol, uzunluq və imtina.", "systemInstruction: a hidden role, a length and a refusal.", "systemInstruction: gizli rol, uzunluk ve ret.", "systemInstruction: دور مخفي وطول ورفض.", "systemInstruction: скрытая роль, длина и отказ."),
+            t("Yaddaş: user və model növbəsi, massiv hər sorğuda gedir.", "Memory: the user and model turns, the array goes on every request.", "Hafıza: user ve model sırası, dizi her sorguda gider.", "الذاكرة: دور user وmodel، والمصفوفة تذهب في كل طلب.", "Память: очередь user и model, массив уходит в каждом запросе."),
+            t("JSON: responseMimeType və JSON.parse ilə test sualları.", "JSON: quiz questions with responseMimeType and JSON.parse.", "JSON: responseMimeType ve JSON.parse ile test soruları.", "JSON: أسئلة اختبار بـ responseMimeType وJSON.parse.", "JSON: вопросы теста через responseMimeType и JSON.parse."),
+            t("RAG: uyğun paraqrafı tap, yalnız ondan yaz.", "RAG: find the matching paragraph and write only from it.", "RAG: uyan paragrafı bul, yalnız ondan yaz.", "RAG: جد الفقرة المناسبة واكتب منها فقط.", "RAG: найди подходящий абзац и пиши только из него."),
+            t("Agent: tools, functionCall və functionResponse.", "Agent: tools, functionCall and functionResponse.", "Agent: tools, functionCall ve functionResponse.", "الوكيل: tools وfunctionCall وfunctionResponse.", "Агент: tools, functionCall и functionResponse."),
+          ],
+        },
+      ],
+    },
+    {
+      id: "web",
+      title: t("Özün qura bilərsən", "You can build these", "Kendin kurabilirsin", "يمكنك بناء هذه", "Это можно собрать самому"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "Bunlar saytda hazır alət deyil. Öyrənilən hissələrlə qurulan növbəti işlərdir.",
+            "These are not ready tools on the site. They are the next things you build from the parts you learned.",
+            "Bunlar sitede hazır araç değil. Öğrenilen parçalarla kurulan sonraki işlerdir.",
+            "هذه ليست أدوات جاهزة في الموقع. هي الأعمال التالية التي تبنيها من الأجزاء التي تعلمتها.",
+            "Это не готовые инструменты на сайте. Это следующие вещи, которые собираешь из пройденных частей.",
+          )],
+          ordered: true,
+          list: [
+            t("Çat səhifəsi: systemInstruction dəyişir, tarixçə massivdə qalır.", "A chat page: systemInstruction changes, the history stays in an array.", "Sohbet sayfası: systemInstruction değişir, geçmiş dizide kalır.", "صفحة محادثة: يتغير systemInstruction ويبقى التاريخ في مصفوفة.", "Страница чата: systemInstruction меняется, история остаётся в массиве."),
+            t("Test səhifəsi: JSON sualları düymə olur, düzgün cavab sayılır.", "A quiz page: the JSON questions become buttons and the right answers are counted.", "Test sayfası: JSON soruları düğme olur, doğru cevap sayılır.", "صفحة اختبار: أسئلة JSON تصبح أزراراً وتُعد الأجوبة الصحيحة.", "Страница теста: вопросы JSON становятся кнопками, верные ответы считаются."),
+            t("Lüğət: söz saxlanır, AI ondan bir cümlə qurur.", "A word list: a word is kept and the AI builds one sentence from it.", "Sözlük: söz saklanır, AI ondan bir cümle kurar.", "قاموس: تُحفظ الكلمة ويبني الذكاء منها جملة.", "Словарь: слово сохраняется, ИИ строит из него одно предложение."),
+          ],
+        },
+      ],
+    },
+    {
+      id: "later",
+      title: t("Sonra", "Later", "Sonra", "لاحقاً", "Дальше"),
+      blocks: [
+        {
+          ordered: true,
+          list: [
+            t("Veb səhifəni Capacitor və ya Expo ilə Android tətbiqinə çevirmək.", "Turn the web page into an Android app with Capacitor or Expo.", "Web sayfasını Capacitor veya Expo ile Android uygulamasına çevirmek.", "حوّل صفحة الويب إلى تطبيق أندرويد بـ Capacitor أو Expo.", "Превратить веб-страницу в приложение Android через Capacitor или Expo."),
+            t("Play Console-da qapalı test: tətbiq əvvəl kiçik tester qrupuna verilir.", "Closed testing in Play Console: the app is given first to a small tester group.", "Play Console'da kapalı test: uygulama önce küçük bir testçi grubuna verilir.", "اختبار مغلق في Play Console: يُعطى التطبيق أولاً لمجموعة صغيرة من المختبرين.", "Закрытый тест в Play Console: приложение сначала отдаётся маленькой группе тестировщиков."),
+            t("PDF parçalarını Supabase pgvector-da saxlayıb RAG axtarışı etmək.", "Store PDF pieces in Supabase pgvector and search them with RAG.", "PDF parçalarını Supabase pgvector'da saklayıp RAG araması yapmak.", "احفظ قطع PDF في Supabase pgvector وابحث عنها بـ RAG.", "Хранить куски PDF в Supabase pgvector и искать их через RAG."),
+            t("Giriş: hər istifadəçinin öz söhbət tarixçəsi olsun.", "Sign-in: each user should have their own chat history.", "Giriş: her kullanıcının kendi sohbet geçmişi olsun.", "تسجيل الدخول: لكل مستخدم تاريخ محادثته.", "Вход: у каждого пользователя своя история чата."),
+          ],
+        },
+      ],
+    },
+  ],
   duyme: [
     {
       id: "click",
