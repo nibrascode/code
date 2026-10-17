@@ -101,6 +101,41 @@ const INTENT: Partial<Record<ToolId, Record<Lang, { title: string; h1: string; d
     ar: { title: "من Word إلى PDF — مجاناً", h1: "من Word إلى PDF", description: "حوّل ملف DOCX إلى PDF" },
     ru: { title: "Word в PDF — бесплатно", h1: "Word в PDF", description: "Превратите файл DOCX в PDF" },
   },
+  rotate: {
+    az: { title: "PDF döndər — pulsuz", h1: "PDF döndər", description: "PDF səhifəsini sola və ya sağa döndər" },
+    en: { title: "Rotate PDF — free", h1: "Rotate PDF", description: "Turn a PDF page left or right" },
+    tr: { title: "PDF döndür — ücretsiz", h1: "PDF döndür", description: "PDF sayfasını sola veya sağa döndür" },
+    ar: { title: "تدوير PDF — مجاناً", h1: "تدوير PDF", description: "أدر صفحة PDF يميناً أو يساراً" },
+    ru: { title: "Повернуть PDF — бесплатно", h1: "Повернуть PDF", description: "Поверните страницу PDF влево или вправо" },
+  },
+  protect: {
+    az: { title: "PDF parol — pulsuz", h1: "PDF parol", description: "PDF-ə parol qoy" },
+    en: { title: "Password protect PDF — free", h1: "Password protect a PDF", description: "Put a password on a PDF" },
+    tr: { title: "PDF şifre — ücretsiz", h1: "PDF şifre", description: "PDF'e şifre koy" },
+    ar: { title: "كلمة مرور PDF — مجاناً", h1: "كلمة مرور PDF", description: "ضع كلمة مرور على PDF" },
+    ru: { title: "Пароль на PDF — бесплатно", h1: "Пароль на PDF", description: "Поставьте пароль на PDF" },
+  },
+  watermark: {
+    az: { title: "PDF su nişanı — pulsuz", h1: "PDF su nişanı", description: "PDF səhifəsinə yazı əlavə et" },
+    en: { title: "PDF watermark — free", h1: "PDF watermark", description: "Add text on a PDF page" },
+    tr: { title: "PDF filigran — ücretsiz", h1: "PDF filigran", description: "PDF sayfasına yazı ekle" },
+    ar: { title: "علامة مائية لـ PDF — مجاناً", h1: "علامة مائية لـ PDF", description: "أضف كتابة على صفحة PDF" },
+    ru: { title: "Водяной знак PDF — бесплатно", h1: "Водяной знак PDF", description: "Добавьте текст на страницу PDF" },
+  },
+  "pdf-word": {
+    az: { title: "PDF-dən Word — pulsuz", h1: "PDF-dən Word", description: "PDF-i redaktə olunan Word faylına çevir" },
+    en: { title: "PDF to Word — free", h1: "PDF to Word", description: "Turn a PDF into an editable Word file" },
+    tr: { title: "PDF'den Word — ücretsiz", h1: "PDF'den Word", description: "PDF'i düzenlenebilir Word dosyasına çevir" },
+    ar: { title: "من PDF إلى Word — مجاناً", h1: "من PDF إلى Word", description: "حوّل PDF إلى ملف Word قابل للتعديل" },
+    ru: { title: "PDF в Word — бесплатно", h1: "PDF в Word", description: "Превратите PDF в редактируемый файл Word" },
+  },
+  "pdf-ocr": {
+    az: { title: "PDF-dən mətn — pulsuz", h1: "PDF-dən mətn", description: "PDF səhifəsindəki yazını mətn kimi çıxar" },
+    en: { title: "PDF to text — free", h1: "PDF to text", description: "Pull the writing on a PDF page out as text" },
+    tr: { title: "PDF'den metin — ücretsiz", h1: "PDF'den metin", description: "PDF sayfasındaki yazıyı metin olarak çıkar" },
+    ar: { title: "من PDF إلى نص — مجاناً", h1: "من PDF إلى نص", description: "أخرج الكتابة في صفحة PDF كنص" },
+    ru: { title: "PDF в текст — бесплатно", h1: "PDF в текст", description: "Достаньте текст со страницы PDF" },
+  },
 };
 
 const FAQS: Partial<Record<ToolId, Record<Lang, { q: string; a: string }[]>>> = {
@@ -326,6 +361,166 @@ const FAQS: Partial<Record<ToolId, Record<Lang, { q: string; a: string }[]>>> = 
       { q: "Какой файл открывается?", a: "Открывается DOCX и становится PDF." },
       { q: "Файл уходит на сервер?", a: "Нет. Преобразование идёт в этом браузере." },
       { q: "Картинки из Word остаются?", a: "Простой текст и картинки переходят в PDF. Очень сложная вёрстка может выглядеть чуть иначе." },
+    ],
+  },
+  rotate: {
+    az: [
+      { q: "PDF döndərmək pulsuzdur?", a: "Bəli. Hesab və ödəniş yoxdur." },
+      { q: "Hansı tərəfə döndərilir?", a: "Səhifə sola və ya sağa döndərilir." },
+      { q: "Fayl serverə gedir?", a: "Xeyr. Döndərmə bu brauzerdə gedir." },
+      { q: "Əsas PDF silinir?", a: "Xeyr. Yeni fayl əlavə yüklənir." },
+    ],
+    en: [
+      { q: "Is rotating a PDF free?", a: "Yes. There is no account and no payment." },
+      { q: "Which way does it turn?", a: "The page turns left or right." },
+      { q: "Does the file go to a server?", a: "No. Rotating runs in this browser." },
+      { q: "Is the original PDF deleted?", a: "No. The new file is an extra download." },
+    ],
+    tr: [
+      { q: "PDF döndürmek ücretsiz mi?", a: "Evet. Hesap ve ödeme yoktur." },
+      { q: "Hangi yöne döner?", a: "Sayfa sola veya sağa döner." },
+      { q: "Dosya sunucuya gider mi?", a: "Hayır. Döndürme bu tarayıcıda olur." },
+      { q: "Asıl PDF silinir mi?", a: "Hayır. Yeni dosya ayrıca iner." },
+    ],
+    ar: [
+      { q: "هل تدوير PDF مجاني؟", a: "نعم. لا حساب ولا دفع." },
+      { q: "إلى أي جهة يدور؟", a: "تدور الصفحة يميناً أو يساراً." },
+      { q: "هل يذهب الملف إلى خادم؟", a: "لا. التدوير يجري في هذا المتصفح." },
+      { q: "هل يُحذف الملف الأصلي؟", a: "لا. الملف الجديد تنزيل إضافي." },
+    ],
+    ru: [
+      { q: "Повернуть PDF бесплатно?", a: "Да. Аккаунта и оплаты нет." },
+      { q: "В какую сторону поворот?", a: "Страница поворачивается влево или вправо." },
+      { q: "Файл уходит на сервер?", a: "Нет. Поворот идёт в этом браузере." },
+      { q: "Исходный PDF удаляется?", a: "Нет. Новый файл скачивается отдельно." },
+    ],
+  },
+  protect: {
+    az: [
+      { q: "PDF-ə parol qoymaq pulsuzdur?", a: "Bəli. Hesab və ödəniş yoxdur." },
+      { q: "Parolu kim bilir?", a: "Yalnız siz. Parol serverə getmir." },
+      { q: "Fayl açılmırsa?", a: "Parol unudulsa, bu səhifə onu bərpa etmir." },
+      { q: "Nəticə harada olur?", a: "Parollu PDF birbaşa cihaza düşür." },
+    ],
+    en: [
+      { q: "Is a PDF password free?", a: "Yes. There is no account and no payment." },
+      { q: "Who knows the password?", a: "Only you. The password does not go to a server." },
+      { q: "What if the file will not open?", a: "If the password is forgotten, this page cannot recover it." },
+      { q: "Where is the result?", a: "The locked PDF downloads straight to your device." },
+    ],
+    tr: [
+      { q: "PDF'e şifre koymak ücretsiz mi?", a: "Evet. Hesap ve ödeme yoktur." },
+      { q: "Şifreyi kim bilir?", a: "Yalnız siz. Şifre sunucuya gitmez." },
+      { q: "Dosya açılmazsa?", a: "Şifre unutulursa bu sayfa onu geri getirmez." },
+      { q: "Sonuç nerede olur?", a: "Şifreli PDF doğrudan cihaza iner." },
+    ],
+    ar: [
+      { q: "هل وضع كلمة مرور على PDF مجاني؟", a: "نعم. لا حساب ولا دفع." },
+      { q: "من يعرف كلمة المرور؟", a: "أنت فقط. لا تذهب كلمة المرور إلى خادم." },
+      { q: "ماذا إذا لم يُفتح الملف؟", a: "إذا نُسيت كلمة المرور فهذه الصفحة لا تستعيدها." },
+      { q: "أين النتيجة؟", a: "ينزل ملف PDF المقفول مباشرة إلى الجهاز." },
+    ],
+    ru: [
+      { q: "Поставить пароль на PDF бесплатно?", a: "Да. Аккаунта и оплаты нет." },
+      { q: "Кто знает пароль?", a: "Только вы. Пароль не уходит на сервер." },
+      { q: "Если файл не открывается?", a: "Если пароль забыт, эта страница его не восстановит." },
+      { q: "Где результат?", a: "PDF с паролем сразу скачивается на устройство." },
+    ],
+  },
+  watermark: {
+    az: [
+      { q: "Su nişanı pulsuzdur?", a: "Bəli. Hesab və ödəniş yoxdur." },
+      { q: "Nə yazılır?", a: "Səhifənin üstünə öz yazınız qoyulur." },
+      { q: "Fayl serverə gedir?", a: "Xeyr. Nişan bu brauzerdə əlavə olunur." },
+      { q: "Əsas PDF silinir?", a: "Xeyr. Nişanlı fayl ayrı yüklənir." },
+    ],
+    en: [
+      { q: "Is a watermark free?", a: "Yes. There is no account and no payment." },
+      { q: "What text is added?", a: "Your own text is placed on the page." },
+      { q: "Does the file go to a server?", a: "No. The mark is added in this browser." },
+      { q: "Is the original PDF deleted?", a: "No. The marked file downloads separately." },
+    ],
+    tr: [
+      { q: "Filigran ücretsiz mi?", a: "Evet. Hesap ve ödeme yoktur." },
+      { q: "Ne yazılır?", a: "Sayfanın üstüne kendi yazınız konur." },
+      { q: "Dosya sunucuya gider mi?", a: "Hayır. İşaret bu tarayıcıda eklenir." },
+      { q: "Asıl PDF silinir mi?", a: "Hayır. İşaretli dosya ayrıca iner." },
+    ],
+    ar: [
+      { q: "هل العلامة المائية مجانية؟", a: "نعم. لا حساب ولا دفع." },
+      { q: "ماذا يُكتب؟", a: "تُوضع كتابتك على الصفحة." },
+      { q: "هل يذهب الملف إلى خادم؟", a: "لا. تُضاف العلامة في هذا المتصفح." },
+      { q: "هل يُحذف الملف الأصلي؟", a: "لا. ينزل الملف المعلَّم على حدة." },
+    ],
+    ru: [
+      { q: "Водяной знак бесплатно?", a: "Да. Аккаунта и оплаты нет." },
+      { q: "Какой текст ставится?", a: "На страницу кладётся ваш текст." },
+      { q: "Файл уходит на сервер?", a: "Нет. Знак добавляется в этом браузере." },
+      { q: "Исходный PDF удаляется?", a: "Нет. Файл со знаком скачивается отдельно." },
+    ],
+  },
+  "pdf-word": {
+    az: [
+      { q: "PDF-dən Word etmək pulsuzdur?", a: "Bəli. Hesab və ödəniş yoxdur." },
+      { q: "Nəticə hansı fayldır?", a: "Redaktə olunan Word faylıdır." },
+      { q: "Fayl serverə gedir?", a: "Xeyr. Çevirmə bu brauzerdə gedir." },
+      { q: "Şəkillər qalır?", a: "Sadə mətn keçir. Skan olunmuş səhifədə yazı şəkil kimi qala bilər." },
+    ],
+    en: [
+      { q: "Is PDF to Word free?", a: "Yes. There is no account and no payment." },
+      { q: "What file is the result?", a: "An editable Word file." },
+      { q: "Does the file go to a server?", a: "No. The conversion runs in this browser." },
+      { q: "Do pictures stay?", a: "Plain text moves over. On a scanned page the writing can stay as a picture." },
+    ],
+    tr: [
+      { q: "PDF'den Word yapmak ücretsiz mi?", a: "Evet. Hesap ve ödeme yoktur." },
+      { q: "Sonuç hangi dosya?", a: "Düzenlenebilir bir Word dosyasıdır." },
+      { q: "Dosya sunucuya gider mi?", a: "Hayır. Çevirme bu tarayıcıda olur." },
+      { q: "Resimler kalır mı?", a: "Düz metin geçer. Taranmış sayfada yazı resim olarak kalabilir." },
+    ],
+    ar: [
+      { q: "هل التحويل من PDF إلى Word مجاني؟", a: "نعم. لا حساب ولا دفع." },
+      { q: "ما ملف النتيجة؟", a: "ملف Word قابل للتعديل." },
+      { q: "هل يذهب الملف إلى خادم؟", a: "لا. التحويل يجري في هذا المتصفح." },
+      { q: "هل تبقى الصور؟", a: "النص البسيط ينتقل. في الصفحة الممسوحة قد تبقى الكتابة صورة." },
+    ],
+    ru: [
+      { q: "PDF в Word бесплатно?", a: "Да. Аккаунта и оплаты нет." },
+      { q: "Какой файл получается?", a: "Редактируемый файл Word." },
+      { q: "Файл уходит на сервер?", a: "Нет. Преобразование идёт в этом браузере." },
+      { q: "Картинки остаются?", a: "Простой текст переходит. На скане текст может остаться картинкой." },
+    ],
+  },
+  "pdf-ocr": {
+    az: [
+      { q: "PDF-dən mətn çıxarmaq pulsuzdur?", a: "Bəli. Hesab və ödəniş yoxdur." },
+      { q: "Mətn hara düşür?", a: "Səhifədəki yazı mətn kimi çıxır, kopyalamaq olur." },
+      { q: "Fayl serverə gedir?", a: "Xeyr. Tanıma bu cihazda gedir." },
+      { q: "Skan olunmuş səhifə olur?", a: "Bəli. Yazı şəkil kimi olsa belə, tanınan hissə mətn olur." },
+    ],
+    en: [
+      { q: "Is PDF to text free?", a: "Yes. There is no account and no payment." },
+      { q: "Where does the text go?", a: "The writing on the page comes out as text you can copy." },
+      { q: "Does the file go to a server?", a: "No. Reading runs on this device." },
+      { q: "Does a scanned page work?", a: "Yes. Even when the writing is a picture, the recognized part becomes text." },
+    ],
+    tr: [
+      { q: "PDF'den metin çıkarmak ücretsiz mi?", a: "Evet. Hesap ve ödeme yoktur." },
+      { q: "Metin nereye düşer?", a: "Sayfadaki yazı kopyalanabilir metin olur." },
+      { q: "Dosya sunucuya gider mi?", a: "Hayır. Tanıma bu cihazda olur." },
+      { q: "Taranmış sayfa olur mu?", a: "Evet. Yazı resim olsa bile tanınan kısım metin olur." },
+    ],
+    ar: [
+      { q: "هل إخراج النص من PDF مجاني؟", a: "نعم. لا حساب ولا دفع." },
+      { q: "أين يذهب النص؟", a: "تخرج الكتابة في الصفحة نصاً يمكن نسخه." },
+      { q: "هل يذهب الملف إلى خادم؟", a: "لا. التعرف يجري على هذا الجهاز." },
+      { q: "هل تعمل الصفحة الممسوحة؟", a: "نعم. حتى إذا كانت الكتابة صورة، يصبح الجزء المعروف نصاً." },
+    ],
+    ru: [
+      { q: "PDF в текст бесплатно?", a: "Да. Аккаунта и оплаты нет." },
+      { q: "Куда попадает текст?", a: "Текст со страницы можно скопировать." },
+      { q: "Файл уходит на сервер?", a: "Нет. Распознавание идёт на этом устройстве." },
+      { q: "Скан страницы подходит?", a: "Да. Даже если буквы — картинка, распознанная часть становится текстом." },
     ],
   },
 };

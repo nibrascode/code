@@ -3,6 +3,7 @@ import { useI18n } from "@/lib/i18n-context";
 import { PageAssistant } from "@/components/page-assistant";
 import { EraseTool } from "@/erase/erase-tool";
 import { SEARCH_FAQ } from "@/lib/search-faq";
+import { NextLinks } from "@/components/next-links";
 
 const TITLE = {
   az: "Şəkil fon sil",
@@ -185,6 +186,12 @@ export function ErasePage() {
         </div>
       ) : null}
       <EraseTool />
+      <NextLinks
+        links={[
+          { href: "/image", label: { az: "Şəkil sıx", en: "Compress photo", tr: "Fotoğraf sıkıştır", ar: "ضغط الصورة", ru: "Сжать фото" } },
+          { href: "/pdf/pdf-image", label: { az: "PDF-dən şəkil", en: "PDF to image", tr: "PDF'den resim", ar: "من PDF إلى صورة", ru: "PDF в картинку" } },
+        ]}
+      />
       <section className="mt-8 space-y-3" aria-labelledby="erase-faq">
         <h2 id="erase-faq" className="text-base font-semibold">{SEARCH_FAQ["/erase"].title[lang]}</h2>
         {SEARCH_FAQ["/erase"].items[lang].map((item) => (

@@ -13,6 +13,7 @@ import "./pdf.css";
 const PdfTool = lazy(() => import("./pdf-tool").then((m) => ({ default: m.PdfTool })));
 
 const LANG_NAME: Record<Lang, string> = { az: "Azərbaycanca", en: "English", tr: "Türkçe", ar: "العربية", ru: "Русский" };
+const ALL_TOOLS: Record<Lang, string> = { az: "Hamısı", en: "All tools", tr: "Hepsi", ar: "الكل", ru: "Все" };
 const BADGES: Record<Lang, [string, string, string]> = {
   az: ["19 alət", "5 dil", "Cihazda emal"],
   en: ["19 tools", "5 languages", "On-device"],
@@ -26,6 +27,28 @@ const ASK_AI: Record<Lang, string> = {
   tr: "Nibras AI ile PDF araçlarını sohbetle kullan",
   ar: "استخدم أدوات PDF عبر محادثة Nibras AI",
   ru: "Управляйте PDF в чате с Nibras AI",
+};
+
+const NEXT: Partial<Record<ToolId, ToolId[]>> = {
+  "write-pdf": ["merge", "sign", "word-pdf"],
+  merge: ["compress", "split", "image-pdf"],
+  split: ["merge", "extract-pages", "compress"],
+  compress: ["merge", "split", "pdf-image"],
+  "image-pdf": ["pdf-image", "merge", "compress"],
+  "pdf-image": ["image-pdf", "compress", "merge"],
+  rotate: ["pages", "merge", "compress"],
+  protect: ["sign", "watermark", "merge"],
+  watermark: ["sign", "protect", "merge"],
+  pages: ["split", "extract-pages", "rotate"],
+  scan: ["ocr", "image-pdf", "merge"],
+  sign: ["protect", "watermark", "merge"],
+  ocr: ["pdf-ocr", "pdf-word", "scan"],
+  "pdf-ocr": ["ocr", "pdf-word", "pdf-image"],
+  "pdf-word": ["word-pdf", "pdf-ocr", "merge"],
+  preview: ["merge", "split", "pages"],
+  batch: ["merge", "compress", "split"],
+  "extract-pages": ["split", "pages", "merge"],
+  "word-pdf": ["pdf-word", "compress", "merge"],
 };
 
 export function PdfPage({ tool }: { tool: ToolId | null }) {
@@ -105,9 +128,10 @@ export function PdfPage({ tool }: { tool: ToolId | null }) {
           <section className="mt-8" aria-labelledby="pdf-more">
             <h2 id="pdf-more" className="mb-3 text-base font-semibold">{seo.related}</h2>
             <div className="flex flex-wrap gap-2">
-              {TOOL_IDS.filter((id) => id !== tool).map((id) => (
-                <a key={id} href={localeHref(lang, `/pdf/${id}`)} className="pdf-chip">{TOOL_TEXT[lang][id].title}</a>
+              {(NEXT[tool] ?? []).map((id) => (
+                <a key={id} href={localeHref(lang, `/pdf/${id}`)} className="pdf-chip">{toolSeo(lang, id).h1}</a>
               ))}
+              <a href={localeHref(lang, "/pdf")} className="pdf-chip">{ALL_TOOLS[lang]}</a>
             </div>
           </section>
         </>

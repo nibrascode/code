@@ -5,6 +5,7 @@ import { readLang } from "@/lib/seo";
 import type { Lang } from "@/lib/i18n";
 import { useI18n } from "@/lib/i18n-context";
 import { SEARCH_FAQ } from "@/lib/search-faq";
+import { NextLinks } from "@/components/next-links";
 
 export const Route = createFileRoute("/faiz")({
   beforeLoad: ({ location }) => {
@@ -78,6 +79,12 @@ export function PercentPage() {
           <div className="font-display text-2xl font-bold">{show(share)}%</div>
         </div>
       </div>
+      <NextLinks
+        links={[
+          { href: "/soz-sayi", label: { az: "Söz sayı", en: "Word count", tr: "Söz sayısı", ar: "عدد الكلمات", ru: "Количество слов" } },
+          { href: "/wifi", label: { az: "Wi-Fi QR", en: "Wi-Fi QR", tr: "Wi-Fi QR", ar: "رمز Wi-Fi", ru: "Wi-Fi QR" } },
+        ]}
+      />
       <section className="space-y-3" aria-labelledby="faiz-faq">
         <h2 id="faiz-faq" className="text-base font-semibold">{faq.title[lang]}</h2>
         {faq.items[lang].map((item) => (

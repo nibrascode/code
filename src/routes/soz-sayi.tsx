@@ -5,6 +5,7 @@ import { readLang } from "@/lib/seo";
 import type { Lang } from "@/lib/i18n";
 import { useI18n } from "@/lib/i18n-context";
 import { SEARCH_FAQ } from "@/lib/search-faq";
+import { NextLinks } from "@/components/next-links";
 
 export const Route = createFileRoute("/soz-sayi")({
   beforeLoad: ({ location }) => {
@@ -59,6 +60,12 @@ export function WordCountPage() {
           </div>
         ))}
       </div>
+      <NextLinks
+        links={[
+          { href: "/faiz", label: { az: "Faiz hesabla", en: "Calculate a percent", tr: "Yüzde hesapla", ar: "احسب النسبة", ru: "Посчитать процент" } },
+          { href: "/wifi", label: { az: "Wi-Fi QR", en: "Wi-Fi QR", tr: "Wi-Fi QR", ar: "رمز Wi-Fi", ru: "Wi-Fi QR" } },
+        ]}
+      />
       <section className="space-y-3" aria-labelledby="soz-faq">
         <h2 id="soz-faq" className="text-base font-semibold">{faq.title[lang]}</h2>
         {faq.items[lang].map((item) => (

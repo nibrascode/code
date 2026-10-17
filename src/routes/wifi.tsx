@@ -5,6 +5,7 @@ import { readLang } from "@/lib/seo";
 import type { Lang } from "@/lib/i18n";
 import { useI18n } from "@/lib/i18n-context";
 import { SEARCH_FAQ } from "@/lib/search-faq";
+import { NextLinks } from "@/components/next-links";
 
 export const Route = createFileRoute("/wifi")({
   beforeLoad: ({ location }) => {
@@ -88,6 +89,12 @@ export function WifiPage() {
           <a className="rounded-xl bg-[#2f6bff] px-4 py-2 text-sm font-semibold text-white" href={url} download="wifi-qr.png">{copy.download}</a>
         </div>
       ) : null}
+      <NextLinks
+        links={[
+          { href: "/qr", label: { az: "QR kod", en: "QR code", tr: "QR kod", ar: "رمز QR", ru: "QR-код" } },
+          { href: "/soz-sayi", label: { az: "Söz sayı", en: "Word count", tr: "Söz sayısı", ar: "عدد الكلمات", ru: "Количество слов" } },
+        ]}
+      />
       <section className="space-y-3" aria-labelledby="wifi-faq">
         <h2 id="wifi-faq" className="text-base font-semibold">{faq.title[lang]}</h2>
         {faq.items[lang].map((item) => (

@@ -5,6 +5,7 @@ import { readLang } from "@/lib/seo";
 import type { Lang } from "@/lib/i18n";
 import { useI18n } from "@/lib/i18n-context";
 import { SEARCH_FAQ } from "@/lib/search-faq";
+import { NextLinks } from "@/components/next-links";
 
 export const Route = createFileRoute("/image")({
   beforeLoad: ({ location }) => {
@@ -117,6 +118,12 @@ export function ImagePage() {
           </a>
         </div>
       ) : null}
+      <NextLinks
+        links={[
+          { href: "/erase", label: { az: "Şəkil fon sil", en: "Remove background", tr: "Arka plan sil", ar: "حذف الخلفية", ru: "Удалить фон" } },
+          { href: "/pdf/image-pdf", label: { az: "JPG-dən PDF", en: "JPG to PDF", tr: "JPG'den PDF", ar: "من JPG إلى PDF", ru: "JPG в PDF" } },
+        ]}
+      />
       <section className="mt-8 space-y-3" aria-labelledby="image-faq">
         <h2 id="image-faq" className="text-base font-semibold">{faq.title[lang]}</h2>
         {faq.items[lang].map((item) => (
