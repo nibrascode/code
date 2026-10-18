@@ -221,17 +221,18 @@ export async function codePipeline({ message, history, baseSystem, uiLang = "az"
 
   // 1) tələb təhlili (≤12 san)
   let checklist = null;
-  const an = await firstOk(FAST_MODELS, ANALYZE_SYS, userHist.slice(-4), 1500, Math.min(deadline, t0 + 15000), 12000, "low");
+  const an = await firstOk(FAST_MODELS, ANALYZE_SYS, userHist.slice(-4), 1500, Math.min(deadline, t0 + 14000), 9000, "low");
   if (an) checklist = parseChecklist(an.reply);
-  steps.push(checklist ? "analyze:" + an.name : "analyze:skip");
+  const sec = () => "@" + Math.round((Date.now() - t0) / 1000) + "s";
+  steps.push((checklist ? "analyze:" + an.name : "analyze:skip") + sec());
 
   // 2) yazılış (güclü model)
   const genSystem = [baseSystem, CODE_RULES, `Answer in ${langName} (match the user's message language if it differs).`, checklistText(checklist)].filter(Boolean).join("\n\n");
-  const gen = await firstOk(genModels, genSystem, [...kbHist, ...history.filter((h) => h.role !== "system" || h.text !== kbText)], 8000, deadline - 8000, 75000, "medium");
+  const gen = await firstOk(genModels, genSystem, [...kbHist, ...history.filter((h) => h.role !== "system" || h.text !== kbText)], 8000, deadline - 8000, 50000, "medium");
   if (!gen) return null;
   let answer = gen.reply;
   let engine = gen.name + (gen.model ? "/" + gen.model : "");
-  steps.push("generate:" + engine);
+  steps.push("generate:" + engine + sec());
 
   // 3) statik yoxlama + 4) özünü yoxlama (vaxt qalırsa)
   let check = staticCheck(answer);
@@ -246,16 +247,16 @@ export async function codePipeline({ message, history, baseSystem, uiLang = "az"
       "AUTOMATIC CHECKS: " + (check.errs.length ? "\n- " + check.errs.join("\n- ") : "no syntax problems detected (still verify logic)"),
       "CANDIDATE ANSWER:\n" + answer,
     ].join("\n\n");
-    const rv = await firstOk(REVIEW_MODELS, [baseSystem, REVIEW_SYS(langName)].join("\n\n"), [{ role: "user", text: reviewMsg }], 8000, deadline - 3000, Math.min(70000, left - 4000), "medium");
+    const rv = await firstOk(REVIEW_MODELS, [baseSystem, REVIEW_SYS(langName)].join("\n\n"), [{ role: "user", text: reviewMsg }], 8000, deadline - 3000, Math.min(40000, left - 4000), "medium");
     if (!rv) { steps.push("review:fail"); break; }
     let cand = rv.reply.replace(/^\s*(CORRECTED( ANSWER)?)\s*:?\s*/i, "");
     let by = rv.name;
     if (isApproved(rv.reply)) {
-      steps.push("review:approved:" + rv.name);
+      steps.push("review:approved:" + rv.name + sec());
       if (!check.errs.length) break;
       // rəyçi təsdiqlədi, amma avtomatik yoxlama xəta tapıb: yazan modeldən konkret düzəliş istənir
       const fixMsg = "Your previous answer has these automatic check errors:\n- " + check.errs.join("\n- ") + "\n\nReturn the COMPLETE corrected final answer (same format), nothing else.\n\nPREVIOUS ANSWER:\n" + answer;
-      const fx = await firstOk([[gen.name, gen.model], ...REVIEW_MODELS], genSystem, [{ role: "user", text: message }, { role: "user", text: fixMsg }], 8000, deadline - 3000, Math.max(10000, deadline - Date.now() - 4000), "medium");
+      const fx = await firstOk([[gen.name, gen.model], ...REVIEW_MODELS], genSystem, [{ role: "user", text: message }, { role: "user", text: fixMsg }], 8000, deadline - 3000, Math.min(40000, Math.max(10000, deadline - Date.now() - 4000)), "medium");
       if (!fx) { steps.push("fix:fail"); break; }
       cand = fx.reply;
       by = fx.name;
@@ -265,7 +266,7 @@ export async function codePipeline({ message, history, baseSystem, uiLang = "az"
     if (c2.blocks && c2.errs.length <= check.errs.length) {
       answer = cand;
       check = c2;
-      steps.push("review:fixed:" + by);
+      steps.push("review:fixed:" + by + sec());
     } else {
       steps.push("review:rejected");
       break;

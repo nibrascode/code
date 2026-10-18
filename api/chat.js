@@ -63,7 +63,7 @@ const budget = new AsyncLocalStorage();
 export const SHORT_TOKENS = 700;
 export const CODE_TOKENS = 3500;
 // Kod boru kəmərinin ümumi vaxtı (vercel.json-da api/chat.js maxDuration 300 san); sonra tək addımlı yola 40 san qalır
-const PIPE_BUDGET_MS = 150000;
+const PIPE_BUDGET_MS = 110000;
 export function wantsLongCode(message, mode) {
   if (mode === "code") return true;
   const q = String(message || "").toLowerCase();
