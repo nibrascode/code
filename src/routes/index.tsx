@@ -9,7 +9,7 @@ import { SiteLegal } from "@/components/site-header";
 import { HeroMark } from "@/components/hero-mark";
 import { faqPath } from "@/lib/faq";
 import { homePath, localeHref } from "@/lib/locale-path";
-import { SEARCH, searchPath } from "@/lib/search-pages";
+import { SEARCH, searchPath, searchTopicPath } from "@/lib/search-pages";
 import { toolsPath, TOOLS_PAGE } from "@/lib/tools";
 import { useI18n } from "@/lib/i18n-context";
 import { statusText, type StudioAppRow } from "@/lib/studio";
@@ -250,6 +250,8 @@ function IosMark() {
   );
 }
 
+const XETA_LINKS = ["apk-qurulmur", "paket-etibarsizdir", "play-protect-bloklayir", "xapk-qurulmur", "yaddas-catmir", "telefon-uygun-deyil"] as const;
+
 export function HomeView({ apps }: { apps: StudioAppRow[] }) {
   const { t, lang } = useI18n();
   const rows = apps;
@@ -453,6 +455,21 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
             </a>
           ))}
         </div>
+      </section>
+
+      <section className="nx-apps">
+        <p className="nx-kicker">APK</p>
+        <nav className="faq-links" aria-label="APK">
+          {XETA_LINKS.map((slug) => {
+            const item = SEARCH.xeta.items.find((entry) => entry.slug === slug);
+            if (!item) return null;
+            return (
+              <a key={slug} href={searchTopicPath(lang, "xeta", slug)}>
+                {item.piece[lang].title}
+              </a>
+            );
+          })}
+        </nav>
       </section>
 
       <section className="nx-split">
