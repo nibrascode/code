@@ -107,7 +107,7 @@ async function xaiResponses(apiKey, history) {
     headers: { "Content-Type": "application/json", Authorization: "Bearer " + apiKey },
     signal: timeoutFor(8000),
     body: JSON.stringify({
-      model: "grok-4.7",
+      model: cfg().xaiModel || "grok-4.7",
       input: [
         { role: "system", content: cfg().system },
         ...history.map((item) => ({ role: item.role, content: item.text })),
@@ -116,7 +116,7 @@ async function xaiResponses(apiKey, history) {
   });
   const data = await upstream.json().catch(() => ({}));
   const reply = stripThink(responseText(data));
-  if (upstream.ok && reply) return { ok: true, reply };
+  if (upstream.ok && reply) return { ok: true, reply, model: "grok-4.7" };
   return { ok: false, detail: "xAI responses" };
 }
 
@@ -267,7 +267,7 @@ async function askGemini(message) {
     );
     const data = await upstream.json().catch(() => ({}));
     const reply = (data.candidates?.[0]?.content?.parts || []).map((part) => part.text || "").join("").trim();
-    if (upstream.ok && reply) return { ok: true, reply };
+    if (upstream.ok && reply) return { ok: true, reply, model };
     detail = String(data.error?.message || detail);
     if (!/high demand|unavailable|not found|no longer available|overloaded|quota/i.test(detail)) break;
   }
@@ -295,7 +295,7 @@ async function complete({ url, apiKey, model, history, extraHeaders }) {
   });
   const data = await upstream.json().catch(() => ({}));
   const reply = stripThink(String(data.choices?.[0]?.message?.content || ""));
-  if (upstream.ok && reply) return { ok: true, reply };
+  if (upstream.ok && reply) return { ok: true, reply, model };
   const detail = data.error?.message || data.error || data.message || data.detail || upstream.status;
   return { ok: false, detail: typeof detail === "string" ? detail : JSON.stringify(detail) };
 }

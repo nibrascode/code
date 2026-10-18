@@ -1,5 +1,5 @@
 import { AsyncLocalStorage } from "node:async_hooks";
-import { askProvider, aiConfig } from "./_ai.js";
+import { askProvider, aiConfig, configuredProviders } from "./_ai.js";
 import { gameReply } from "./_game.js";
 import { compactHistory, AYAH_PROMPT, stripAyahMarkup, detectLang } from "./_text.js";
 // Kitab, Quran, təfsir, tövhid, hədis, fətva, lüğət və nəhv cavabları Nibras Library-dən gəlir (api/_library.js); məlumat bu saytda saxlanmır
@@ -86,6 +86,19 @@ export default async function handler(req, res) {
 
   if (req.method === "OPTIONS") {
     res.status(204).end();
+    return;
+  }
+  // MÜVƏQQƏTİ diaqnostika: hansı provayderin işlədiyini yoxlamaq üçün (açar göstərilmir)
+  if (req.method === "POST" && req.body && req.body.probe === "providers-7c1") {
+    const names = ["xai", "deepseek", "mistral-code", "groq", "cerebras", "github", "nvidia", "openrouter", "gemini", "sambanova", "hf", "scaleway", "ollama", "llm7", "airforce"];
+    const out = await Promise.all(names.map(async (n) => {
+      const t = Date.now();
+      try {
+        const r = await aiConfig.run({ system: "Reply with OK.", tokens: () => 20, timeout: (b) => AbortSignal.timeout(15000) }, () => askProvider(n, [{ role: "user", text: "Say OK" }], "Say OK"));
+        return { n, ok: !!r.ok, skipped: !!r.skipped, model: r.model, ms: Date.now() - t, detail: r.ok ? "" : String(r.detail || "").slice(0, 120) };
+      } catch (e) { return { n, ok: false, ms: Date.now() - t, detail: String(e && e.name) }; }
+    }));
+    res.status(200).json({ configured: configuredProviders(), out });
     return;
   }
   if (req.method !== "POST") {
