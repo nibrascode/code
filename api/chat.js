@@ -172,13 +172,17 @@ export default async function handler(req, res) {
         religious = k !== "brand" && k !== "game" && !lexical && !(k === "din" && body.mode === "code"); // kod rejimində ümumi din-söz uyğunluğu dini sual sayılmır
         break;
       }
+    // Konkret proqramlaşdırma tapşırığı («Python-da CSV oxuyub sütuna görə sırala», «Напиши на Go HTTP сервер»): söz bazası, hava, Wikidata
+    // və ümumi hazır nümunə cavab vermir, AI kod bazası konteksti ilə yazır. «python level 7» kimi səviyyə sorğusu və qısa sorğular hazır nümunədə qalır.
+    const codingQ = isCodingQuestion(message, body.mode) && !/(səviyyə|seviyye|level|уровень)\s*\d/i.test(message);
+    const detailedCode = codingQ && message.split(/\s+/).filter(Boolean).length >= 6;
     // Söz bazası hava və paket axtarışından əvvəl gəlir: «seo nədir» npm paketinə düşməsin.
-    if (!fixed && body.mode !== "code" && body.mode !== "create") {
+    if (!fixed && !codingQ && body.mode !== "code" && body.mode !== "create") {
       const known = searchReply(message);
       if (known) fixed = known;
     }
     // Hava, məzənnə, qısa izah və paket modeli çağırmır. Qalan fakt Wikidata-ya düşür.
-    if (!fixed && body.mode !== "code" && body.mode !== "create") {
+    if (!fixed && !codingQ && body.mode !== "code" && body.mode !== "create") {
       try {
         const extra = await extraReply(message);
         if (extra) fixed = extra;
@@ -187,7 +191,7 @@ export default async function handler(req, res) {
       }
     }
     // Wikidata faktı modelə getmir: şəhər, adam, ölkə kimi aydın sualı server özü oxuyur.
-    if (!fixed && body.mode !== "code" && body.mode !== "create") {
+    if (!fixed && !codingQ && body.mode !== "code" && body.mode !== "create") {
       try {
         const wiki = await wikidataReply(message);
         if (wiki) fixed = wiki;
@@ -199,8 +203,8 @@ export default async function handler(req, res) {
     const cleaned = (reply) => stripCutoff(stripLanWarning(stripNotice(reply)));
     const relFlag = (isRel) => (isRel ? { religious: true } : {});
     // Hazır python/html/javascript/sql/css kod nümunələri: AI-yə getmədən (kod rejimi də daxil)
-    const snippet = fixed ? null : snippetReply(message, body.mode);
-    const search = fixed || snippet || body.mode === "create" ? null : searchReply(message);
+    const snippet = fixed || detailedCode ? null : snippetReply(message, body.mode);
+    const search = fixed || snippet || codingQ || body.mode === "create" ? null : searchReply(message);
     const qr = fixed || snippet || search || body.mode === "create" ? null : qrReply(message, hist, lang) || eraseReply(message, lang);
     const tools = fixed || snippet || search || qr || body.mode === "create" ? null : toolsReply(message);
     const ready =
