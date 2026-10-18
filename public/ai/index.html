@@ -628,6 +628,36 @@
     .msg .ay.warn .at { font-size: 17px; line-height: 1.9; opacity: .85; }
     .msg .ay.warn .as { color: #ffd08a; }
     .msg .cb { margin-top: 8px; white-space: normal; }
+    /* Kod kartı: tünd redaktor görünüşü, dil etiketi, sintaksis rəngləri, kopya düyməsi; yazılarkən zərif parıltı */
+    .msg .cb { position: relative; border: 1px solid rgba(122, 162, 255, .2); border-radius: 13px; background: linear-gradient(180deg, #0c1222, #070b16 46px); box-shadow: 0 10px 30px -18px rgba(60, 110, 255, .55), inset 0 1px 0 rgba(255, 255, 255, .04); overflow: hidden; text-align: left; }
+    .msg .cb .ch { display: flex; align-items: center; gap: 10px; height: 34px; padding: 0 6px 0 12px; border-bottom: 1px solid rgba(122, 162, 255, .12); background: rgba(255, 255, 255, .025); font: 600 11px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: .06em; color: #8fa6d6; user-select: none; -webkit-user-select: none; }
+    .msg .cb .ch .dots { display: inline-flex; gap: 5px; }
+    .msg .cb .ch .dots i { width: 9px; height: 9px; border-radius: 50%; background: #ff6b7d; opacity: .85; }
+    .msg .cb .ch .dots i:nth-child(2) { background: #ffcb5c; }
+    .msg .cb .ch .dots i:nth-child(3) { background: #4fe0a8; }
+    .msg .cb .ch .cl { text-transform: uppercase; }
+    .msg .cb .ch .cbcopy { margin-left: auto; display: inline-flex; align-items: center; gap: 5px; height: 26px; padding: 0 10px; border: 1px solid rgba(143, 180, 255, .28); border-radius: 8px; background: rgba(143, 180, 255, .08); color: #bcd1ff; font: 600 11.5px/1 system-ui, sans-serif; letter-spacing: 0; cursor: pointer; }
+    .msg .cb .ch .cbcopy svg { width: 12px; height: 12px; }
+    .msg .cb .ch .cbcopy:hover, .msg .cb .ch .cbcopy:focus-visible { border-color: #8fb4ff; color: #eef4ff; }
+    .msg .cb .ch .cbcopy.ok { border-color: rgba(79, 224, 168, .6); color: #8ff5cf; }
+    .msg .cb pre { margin: 0; padding: 12px 14px; border-radius: 0; background: transparent; font: 12.5px/1.6 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: #d7e3ff; tab-size: 4; }
+    .msg .cb .bar { padding: 0 8px 8px; }
+    .msg .cb .bar:not(:has(button:not([hidden]))) { display: none; }
+    .msg .cb .fade { border-radius: 0; }
+    .msg .cb .tk-k { color: #c792ea; }
+    .msg .cb .tk-s { color: #c3e88d; }
+    .msg .cb .tk-n { color: #f78c6c; }
+    .msg .cb .tk-c { color: #6f7f9f; font-style: italic; }
+    .msg .cb .tk-f { color: #82aaff; }
+    .msg .cb .tk-t { color: #f07178; }
+    .msg .cb .tk-a { color: #ffcb6b; }
+    .msg .cb .tk-p { color: #89ddff; }
+    .msg .cb.live { border-color: rgba(122, 162, 255, .45); animation: cbglow 1.6s ease-in-out infinite; }
+    .msg .cb.live pre code::after { content: ""; display: inline-block; width: 7px; height: 1.05em; margin-left: 1px; vertical-align: -2px; background: #8fb4ff; box-shadow: 0 0 8px #8fb4ff; animation: cbcaret .9s steps(1) infinite; }
+    .msg.typing .tptx:last-child::after { content: ""; display: inline-block; width: 6px; height: 1em; margin-left: 2px; vertical-align: -2px; background: #8fb4ff; animation: cbcaret .9s steps(1) infinite; }
+    @keyframes cbglow { 0%, 100% { box-shadow: 0 10px 30px -18px rgba(60, 110, 255, .55), 0 0 0 0 rgba(122, 162, 255, 0); } 50% { box-shadow: 0 10px 34px -14px rgba(80, 130, 255, .8), 0 0 0 3px rgba(122, 162, 255, .08); } }
+    @keyframes cbcaret { 50% { opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) { .msg .cb.live { animation: none; } .msg .cb.live pre code::after, .msg.typing .tptx:last-child::after { animation: none; } }
     .msg .cb pre { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
     .msg .cb .cw { position: relative; }
     .msg .cb pre { box-sizing: border-box; }
@@ -1727,6 +1757,110 @@
       }
       return out + plain(text.slice(last), last > 0, false);
     }
+    // --- Kod kartı: yüngül sintaksis rəngləndirməsi (mətn dəyişmir, yalnız <span> rəngləri), dil etiketi, kopya ---
+    const CB_COPY = { az: ["Kopyala", "Kopyalandı"], en: ["Copy", "Copied"], tr: ["Kopyala", "Kopyalandı"], ru: ["Копировать", "Скопировано"], ar: ["نسخ", "تم النسخ"] };
+    const CB_KW = "abstract and as assert async await auto bool boolean break byte case catch char class const constexpr continue def default defer del delete do double elif else enum except export extends extern false final finally float fn for foreach from func function go goto if impl implements import in include inline instanceof int interface is lambda let long loop match mod module mut namespace new nil None not null nullptr object of or override package pass print private protected pub public raise readonly ref return self short signed sizeof static string struct super switch synchronized template this throw throws trait True False true try type typedef typeof uint union unsafe unsigned use using val var virtual void volatile where while with yield SELECT FROM WHERE INSERT INTO VALUES UPDATE SET DELETE CREATE TABLE JOIN LEFT RIGHT INNER OUTER ON GROUP BY ORDER HAVING LIMIT AND OR NOT NULL PRIMARY KEY FOREIGN REFERENCES AS DISTINCT COUNT INDEX DROP ALTER select from where insert into values update delete create table join left right inner on group by order having limit";
+    const CB_KWS = new Set(CB_KW.split(" "));
+    const CB_LABEL = { js: "javascript", py: "python", py3: "python", ts: "typescript", htm: "html", sh: "bash", shell: "bash", cs: "c#", csharp: "c#", cpp: "c++", kt: "kotlin", rb: "ruby", yml: "yaml" };
+    function cbEsc(s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+    function highlightCode(code, lang) {
+      const l = String(lang || "").toLowerCase();
+      if (code.length > 60000) return cbEsc(code);
+      const markup = /^(html|htm|xml|svg|vue)$/.test(l) || (!l && /^\s*</.test(code));
+      const hashC = /^(python|py|py3|bash|sh|shell|ruby|rb|yaml|yml|r|perl|toml|dockerfile|makefile)$/.test(l);
+      const dashC = /^(sql|lua|haskell)$/.test(l);
+      let re;
+      if (markup) re = /(<!--[\s\S]*?(?:-->|$))|("[^"\n]*"?|'[^'\n]*'?)|(<\/?[A-Za-z][\w:-]*|\/?>)|(\s[A-Za-z_:][\w:.-]*)(?==)|(\/\/[^\n]*|\/\*[\s\S]*?(?:\*\/|$))|(\b\d+(?:\.\d+)?\b)|\b([A-Za-z_$][\w$]*)(?=\s*\()|\b([A-Za-z_$][\w$]*)\b/g;
+      else re = new RegExp("(" + (hashC ? "#[^\\n]*" : dashC ? "--[^\\n]*" : "\\/\\/[^\\n]*|\\/\\*[\\s\\S]*?(?:\\*\\/|$)|#(?:include|define|pragma|if|ifdef|ifndef|endif|else|import)\\b[^\\n]*") + ")|(\"{3}[\\s\\S]*?(?:\"{3}|$)|'{3}[\\s\\S]*?(?:'{3}|$)|`(?:\\\\[\\s\\S]|[^`\\\\])*`?|\"(?:\\\\.|[^\"\\\\\\n])*\"?|'(?:\\\\.|[^'\\\\\\n])*'?)|()()()(\\b\\d+(?:\\.\\d+)?\\b)|\\b([A-Za-z_$][\\w$]*)(?=\\s*\\()|\\b([A-Za-z_$][\\w$]*)\\b", "g");
+      let out = "", last = 0, m;
+      while ((m = re.exec(code))) {
+        if (m[0] === "") { re.lastIndex++; continue; }
+        out += cbEsc(code.slice(last, m.index));
+        const t = cbEsc(m[0]);
+        if (m[1]) out += '<span class="tk-c">' + t + "</span>";
+        else if (m[2]) out += '<span class="tk-s">' + t + "</span>";
+        else if (m[3]) out += '<span class="tk-t">' + t + "</span>";
+        else if (m[4]) out += '<span class="tk-a">' + t + "</span>";
+        else if (m[5]) out += '<span class="tk-c">' + t + "</span>";
+        else if (m[6]) out += '<span class="tk-n">' + t + "</span>";
+        else if (m[7]) out += CB_KWS.has(m[7]) ? '<span class="tk-k">' + t + "</span>" : '<span class="tk-f">' + t + "</span>";
+        else if (m[8]) out += CB_KWS.has(m[8]) ? '<span class="tk-k">' + t + "</span>" : t;
+        else out += t;
+        last = m.index + m[0].length;
+      }
+      return out + cbEsc(code.slice(last));
+    }
+    function cbHead(lang) {
+      const name = CB_LABEL[String(lang || "").toLowerCase()] || String(lang || "").toLowerCase() || "code";
+      const lab = (CB_COPY[uiLangCode] || CB_COPY.az)[0];
+      return '<div class="ch" dir="ltr"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="cl">' + escapeHtml(name) + '</span><button type="button" class="cbcopy" aria-label="' + lab + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span>' + lab + "</span></button></div>";
+    }
+    function armCbCopy(el) {
+      el.querySelectorAll("button.cbcopy").forEach(function (b) {
+        if (b._armed) return;
+        b._armed = true;
+        b.addEventListener("click", function (e) {
+          e.stopPropagation();
+          const code = b.closest(".cb").querySelector("pre code").textContent.replace(/\n$/, "");
+          const labs = CB_COPY[uiLangCode] || CB_COPY.az;
+          copyText(code).then(function () {
+            const sp = b.querySelector("span");
+            b.classList.add("ok");
+            sp.textContent = labs[1] + " ✓";
+            setTimeout(function () { b.classList.remove("ok"); sp.textContent = labs[0]; }, 1600);
+          }, function () { note(labs[0] + " ✗"); });
+        });
+      });
+    }
+    // --- Kod cavabının tədricən yazılması (typewriter): yalnız AI kod cavablarında; sonda adi fillBubble ilə tam render olunur ---
+    function typingHtml(src) {
+      const parts = src.split("```");
+      return parts.map(function (part, i) {
+        if (i % 2 === 0) return '<span class="tptx">' + ayahHtml(part) + "</span>";
+        const head = part.match(/^([a-zA-Z0-9+#-]+)\n/);
+        const code = head ? part.slice(head[0].length) : (/^[a-zA-Z0-9+#-]*$/.test(part) ? "" : part);
+        const live = i === parts.length - 1;
+        return '<div class="cb' + (live ? " live" : "") + '" dir="ltr">' + cbHead(head ? head[1] : "") + '<div class="cw"><pre><code>' + highlightCode(code, head ? head[1] : "") + "</code></pre></div></div>";
+      }).join("");
+    }
+    function typeAnswer(text, imageUrl) {
+      if (hello && hello.parentNode) hello.remove();
+      const el = document.createElement("div");
+      el.className = "msg b typing";
+      el.setAttribute("dir", "auto");
+      msgs.appendChild(el);
+      const total = text.length;
+      const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const dur = reduce ? 0 : Math.min(7000, Math.max(1200, total * 3.2));
+      const t0 = Date.now();
+      let pinned = false, done = false, lastN = -1;
+      function follow() {
+        if (pinned) return;
+        if (el.offsetHeight <= msgs.clientHeight) msgs.scrollTop = msgs.scrollHeight;
+        else { revealAnswer(el); pinned = true; } // uzun cavab: başlanğıcı görünür qalır, sona tullanmır
+      }
+      function finish() {
+        if (done) return;
+        done = true;
+        el.classList.remove("typing");
+        fillBubble(el, text);
+        addTools(el, text);
+        armCode(el);
+        if (!pinned) revealAnswer(el);
+      }
+      function step() {
+        if (done || !el.isConnected) return;
+        const p = dur ? Math.min(1, (Date.now() - t0) / dur) : 1;
+        let n = Math.ceil(total * (1 - Math.pow(1 - p, 1.6)));
+        while (n < total && text.charAt(n - 1) === "`") n++; // ``` işarəsi yarımçıq qalmasın
+        if (n >= total) { finish(); return; }
+        if (n !== lastN) { lastN = n; el.innerHTML = typingHtml(text.slice(0, n)); follow(); }
+        setTimeout(step, 45);
+      }
+      el.addEventListener("click", function () { finish(); }, { once: true }); // toxunuş: dərhal tam göstər
+      step();
+      return el;
+    }
     function fillBubble(el, text) {
       if (String(text || "").indexOf("::calc::") === 0) {
         mountCalc(el, text.slice(8));
@@ -1764,9 +1898,10 @@
         const long = code.replace(/\n$/, "").split("\n").length > CODE_LINES || code.length > CODE_CHARS;
         const more = '<button type="button" class="morebtn" aria-expanded="false" aria-label="Kodun davamını aç"' + (long ? "" : " hidden") + ">Davamını aç ▾</button>";
         bar = '<div class="bar">' + more + run + "</div>";
-        return '<div class="cb' + (long ? " col" : "") + '"><div class="cw"><pre><code>' + escapeHtml(code) + "</code></pre>" + '<div class="fade" aria-hidden="true"></div>' + "</div>" + bar + "</div>";
+        return '<div class="cb' + (long ? " col" : "") + '" dir="ltr">' + cbHead(head ? head[1] : "") + '<div class="cw"><pre><code>' + highlightCode(code, head ? head[1] : "") + "</code></pre>" + '<div class="fade" aria-hidden="true"></div>' + "</div>" + bar + "</div>";
       }).join("");
       const queries = chipQ;
+      armCbCopy(el);
       el.querySelectorAll("button.chip[data-sq]").forEach(function (b) {
         const q = queries[Number(b.getAttribute("data-sq"))];
         b.removeAttribute("data-sq");
@@ -2579,7 +2714,9 @@
           const rtext = reply || (data.url ? "Şəkil hazırdır." : "");
           if (rtext.indexOf("::vault::") === 0) openVault(rtext.replace(/^::vault::\n?/, ""), um);
           else {
-            bubble(rtext, "b", data.url || "");
+            // AI-nin kod cavabı tədricən yazılır (kod kartı parıltı ilə); qalan cavablar əvvəlki kimi birdən göstərilir
+            if (data.usedAI === true && !data.url && (rtext.indexOf("```") >= 0 || data.codeKb)) typeAnswer(rtext);
+            else bubble(rtext, "b", data.url || "");
             rec("b", rtext, data.url || "", useImage ? 1 : 0);
           }
           if (data.usedAI === true) {

@@ -15,6 +15,8 @@ import { track } from "./_stats.js";
 import { isReligious } from "./_religious.js";
 import { stripNotice, OLD_AZ_NOTICE } from "./_notice.js";
 import { resolveLang, msgs, langDirective, dateDirective, stripCutoff, eraseReply } from "./_lang.js";
+// Proqramlaşdırma suallarında Hugging Face bucket-dəki kod bazasından uyğun nümunələr AI-yə kontekst kimi verilir (məlumat HF-də qalır)
+import { codeContext, isCodingQuestion } from "./_codekb.js";
 
 const SYSTEM = [
   "Sən Nibras AI-san, Nibras Code saytının köməkçisisən.",
@@ -79,7 +81,10 @@ export default async function handler(req, res) {
 
   try {
     const body = await readJson(req);
-    const message = String(body.message || "").trim().slice(0, 800);
+    // təhlil/dəyişiklik üçün yapışdırılmış kod (``` və ya çoxsətirli kod) daha uzun qəbul olunur
+    const rawMsg = String(body.message || "").trim();
+    const looksCode = rawMsg.includes("```") || ((rawMsg.match(/\n/g) || []).length >= 3 && /[{};()=<>]/.test(rawMsg));
+    const message = rawMsg.slice(0, looksCode ? 6000 : 800);
     // cavab dili: sualın aydın dili, yoxsa səhifədə seçilmiş dil (body.lang), yoxsa az
     const lang = resolveLang(message, body.lang);
     const T = msgs(lang);
@@ -249,6 +254,12 @@ export default async function handler(req, res) {
     if (lexicalLoose && body.mode !== "code") {
       history.unshift({ role: "system", text: LEXICAL_HINT });
     }
+    // Kod bazası konteksti: yalnız proqramlaşdırma sualında, oyun/yaradıcı rejimdən kənar; HF-dən oxunur, 3.5 san həddi
+    let kb = null;
+    if (body.mode !== "create" && isCodingQuestion(message, body.mode)) {
+      kb = await codeContext(message, hist).catch(() => null);
+      if (kb) history.unshift({ role: "system", text: kb.text });
+    }
     const hint = body.mode === "code" ? " kod" : body.mode === "create" ? " yaradıcı" : "";
     const order = pickOrder(message + hint);
     const notes = [];
@@ -274,7 +285,7 @@ export default async function handler(req, res) {
           notes.push(name + ": boş cavab");
           continue;
         }
-        res.status(200).json({ success: true, reply: aiReply, usedAI: true, ...relFlag(isRel) });
+        res.status(200).json({ success: true, reply: aiReply, usedAI: true, ...relFlag(isRel), ...(kb ? { codeKb: kb.refs.length } : {}) });
         return;
       }
       notes.push(name + ": " + String(result.detail || "xəta").slice(0, 140));
@@ -486,7 +497,10 @@ function normalizeHistory(raw, message) {
     }))
     .filter((item) => item.text)
     .slice(-8);
-  if (!cleaned.length || cleaned[cleaned.length - 1].text !== message) {
+  const last = cleaned[cleaned.length - 1];
+  // uzun (kodlu) sual tarixçədə 800 simvola qısaldılıb: son istifadəçi mesajı tam mətnlə əvəz olunur
+  if (last && last.role === "user" && last.text !== message && message.length > 800 && message.startsWith(last.text.slice(0, 200))) last.text = message;
+  else if (!cleaned.length || last.text !== message) {
     cleaned.push({ role: "user", text: message });
   }
   return cleaned;
