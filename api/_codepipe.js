@@ -3,6 +3,7 @@
 // Model kodu serverdə İCRA OLUNMUR (yalnız parse) — istifadəçi sorğusu ilə yazılmış kodu funksiya daxilində işə salmaq təhlükəlidir.
 import vm from "node:vm";
 import { askModel, aiConfig } from "./_ai.js";
+import { analyzeRequest, verifyAnswer } from "./_codeanalyze.js";
 
 // [provayder, model]: ən güclüdən zəifə. 2026-10-18 yoxlanışı: xai/deepseek krediti bitib, cerebras/nvidia/hf/github işləmir;
 // işləyənlər: groq gpt-oss-120b, ollama gpt-oss:120b / nemotron-3-ultra, mistral codestral, openrouter free modelləri, llm7.
@@ -219,12 +220,16 @@ export async function codePipeline({ message, history, baseSystem, uiLang = "az"
   const userHist = history.filter((h) => h.role !== "system");
   const kbHist = kbText ? [{ role: "system", text: kbText }] : [];
 
-  // 1) tələb təhlili (≤12 san)
-  let checklist = null;
-  const an = await firstOk(FAST_MODELS, ANALYZE_SYS, userHist.slice(-4), 1500, Math.min(deadline, t0 + 14000), 9000, "low");
-  if (an) checklist = parseChecklist(an.reply);
+  // 1) tələb təhlili: öz deterministik analizatorumuz (LLM-siz); yalnız hədəf/dil bilinmirsə LLM ehtiyat kimi
   const sec = () => "@" + Math.round((Date.now() - t0) / 1000) + "s";
-  steps.push((checklist ? "analyze:" + an.name : "analyze:skip") + sec());
+  const ana = analyzeRequest(message, userHist);
+  let checklist = ana;
+  if (ana.confidence < 0.6) {
+    const an = await firstOk(FAST_MODELS, ANALYZE_SYS, userHist.slice(-4), 1500, Math.min(deadline, t0 + 12000), 8000, "low");
+    const llm = an ? parseChecklist(an.reply) : null;
+    if (llm) checklist = { ...llm, requirements: [...new Set([...ana.requirements, ...llm.requirements])].slice(0, 14), expect: ana.expect };
+    steps.push((llm ? "analyze:llm:" + an.name : "analyze:local-low") + sec());
+  } else steps.push("analyze:local" + sec());
 
   // 2) yazılış (güclü model)
   const genSystem = [baseSystem, CODE_RULES, `Answer in ${langName} (match the user's message language if it differs).`, checklistText(checklist)].filter(Boolean).join("\n\n");
@@ -234,44 +239,39 @@ export async function codePipeline({ message, history, baseSystem, uiLang = "az"
   let engine = gen.name + (gen.model ? "/" + gen.model : "");
   steps.push("generate:" + engine + sec());
 
-  // 3) statik yoxlama + 4) özünü yoxlama (vaxt qalırsa)
-  let check = staticCheck(answer);
-  for (let round = 0; round < 2; round++) {
-    const left = deadline - Date.now();
-    if (noReview) break;
-    if (left < 20000) { steps.push("review:no-time"); break; }
-    if (round === 1 && !check.errs.length) break; // ikinci tur yalnız avtomatik xəta qalıbsa
+  // 3) yerli yoxlama: sintaksis + yoxlama siyahısı (mətn, rəng, ölçü, ad, dil, HTML-siz funksiya, localStorage…)
+  const fullCheck = (txt) => { const st = staticCheck(txt); return { blocks: st.blocks, errs: [...st.errs, ...verifyAnswer(txt, checklist)].slice(0, 10) }; };
+  let check = fullCheck(answer);
+  const accept = (cand, by, tag) => {
+    const c2 = fullCheck(cand);
+    // düzəliş yalnız kod bloku olan və yerli xətası çox olmayan cavabla qəbul edilir
+    if (c2.blocks && c2.errs.length <= check.errs.length) { answer = cand; check = c2; steps.push(tag + ":" + by + sec()); return true; }
+    steps.push(tag + ":rejected");
+    return false;
+  };
+  const fixLocal = async () => {
+    const fixMsg = "Your previous answer fails these automatic checks:\n- " + check.errs.join("\n- ") + "\n\nFix ALL of them. Return the COMPLETE corrected final answer (same format), nothing else.\n\nPREVIOUS ANSWER:\n" + answer;
+    const fx = await firstOk([[gen.name, gen.model], ...REVIEW_MODELS], genSystem, [{ role: "user", text: message }, { role: "user", text: fixMsg }], 8000, deadline - 3000, Math.min(40000, Math.max(10000, deadline - Date.now() - 4000)), "medium");
+    if (!fx) { steps.push("fix:fail"); return false; }
+    return accept(fx.reply, fx.name, "fix");
+  };
+  // a) yerli problem varsa — birbaşa yazan modelə düzəliş (rəyçi LLM-siz)
+  if (check.errs.length && !noReview && deadline - Date.now() > 15000) await fixLocal();
+  // b) LLM rəyçi yalnız mürəkkəb tapşırıqda (alqoritm, düzəliş/dəyişiklik, çox tələb) və ya yerli xəta qalıbsa
+  const complex = (checklist.complexity ?? ana.complexity) >= 2;
+  if (!noReview && (complex || check.errs.length) && deadline - Date.now() > 20000) {
     const reviewMsg = [
       "USER REQUEST:\n" + message,
       checklistText(checklist) || "(no checklist; infer requirements from the request)",
-      "AUTOMATIC CHECKS: " + (check.errs.length ? "\n- " + check.errs.join("\n- ") : "no syntax problems detected (still verify logic)"),
+      "AUTOMATIC CHECKS: " + (check.errs.length ? "\n- " + check.errs.join("\n- ") : "no problems detected by local checks (still verify logic and edge cases)"),
       "CANDIDATE ANSWER:\n" + answer,
     ].join("\n\n");
-    const rv = await firstOk(REVIEW_MODELS, [baseSystem, REVIEW_SYS(langName)].join("\n\n"), [{ role: "user", text: reviewMsg }], 8000, deadline - 3000, Math.min(40000, left - 4000), "medium");
-    if (!rv) { steps.push("review:fail"); break; }
-    let cand = rv.reply.replace(/^\s*(CORRECTED( ANSWER)?)\s*:?\s*/i, "");
-    let by = rv.name;
-    if (isApproved(rv.reply)) {
-      steps.push("review:approved:" + rv.name + sec());
-      if (!check.errs.length) break;
-      // rəyçi təsdiqlədi, amma avtomatik yoxlama xəta tapıb: yazan modeldən konkret düzəliş istənir
-      const fixMsg = "Your previous answer has these automatic check errors:\n- " + check.errs.join("\n- ") + "\n\nReturn the COMPLETE corrected final answer (same format), nothing else.\n\nPREVIOUS ANSWER:\n" + answer;
-      const fx = await firstOk([[gen.name, gen.model], ...REVIEW_MODELS], genSystem, [{ role: "user", text: message }, { role: "user", text: fixMsg }], 8000, deadline - 3000, Math.min(40000, Math.max(10000, deadline - Date.now() - 4000)), "medium");
-      if (!fx) { steps.push("fix:fail"); break; }
-      cand = fx.reply;
-      by = fx.name;
-    }
-    const c2 = staticCheck(cand);
-    // düzəliş yalnız kod bloku olan və avtomatik xətası çox olmayan cavabla qəbul edilir
-    if (c2.blocks && c2.errs.length <= check.errs.length) {
-      answer = cand;
-      check = c2;
-      steps.push("review:fixed:" + by + sec());
-    } else {
-      steps.push("review:rejected");
-      break;
-    }
-  }
+    const rv = await firstOk(REVIEW_MODELS, [baseSystem, REVIEW_SYS(langName)].join("\n\n"), [{ role: "user", text: reviewMsg }], 8000, deadline - 3000, Math.min(40000, deadline - Date.now() - 4000), "medium");
+    if (!rv) steps.push("review:fail");
+    else if (isApproved(rv.reply)) steps.push("review:approved:" + rv.name + sec());
+    else accept(rv.reply.replace(/^\s*(CORRECTED( ANSWER)?)\s*:?\s*/i, ""), rv.name, "review:fixed");
+    if (check.errs.length && deadline - Date.now() > 15000) await fixLocal();
+  } else if (!check.errs.length) steps.push("review:skip-local-ok");
   if (check.errs.length) steps.push("errs:" + check.errs.length);
   // bəzi modellər «‑» (U+2011) və dar boşluq yazır: kodda xəta verməsin deyə ASCII-yə çevrilir
   answer = answer.replace(/[\u2010\u2011]/g, "-").replace(/[\u202F\u00A0]/g, " ");
