@@ -189,7 +189,13 @@ export default async function handler(req, res) {
     // Konkret proqramlaşdırma tapşırığı («Python-da CSV oxuyub sütuna görə sırala», «Напиши на Go HTTP сервер»): söz bazası, hava, Wikidata
     // və ümumi hazır nümunə cavab vermir, AI kod bazası konteksti ilə yazır. «python level 7» kimi səviyyə sorğusu və qısa sorğular hazır nümunədə qalır.
     const codingQ = isCodingQuestion(message, body.mode) && !/(səviyyə|seviyye|level|уровень)\s*\d/i.test(message);
-    const detailedCode = codingQ && message.split(/\s+/).filter(Boolean).length >= 6;
+    // konkret tapşırıq (≥6 söz və ya dil/«kod yaz» sözlərindən başqa ≥2 məna sözü: «Python-da faylı oxuyan funksiya yaz») hazır nümunəyə düşmür
+    const taskWords = message
+      .toLowerCase()
+      .replace(/[^\p{L}\p{N}\s]/gu, " ")
+      .split(/\s+/)
+      .filter((w) => w && !/^(python|html|css|javascript|js|sql|java|php|c|cpp|go|rust|kotlin|typescript|ts|swift|ruby|da|də|dа|ilə|ile|in|on|for|a|an|the|bir|sadə|sade|kod|kodu|kodunu|code|yaz|yazın|ver|göstər|goster|write|show|give|me|example|sample|nümunə|nümunəsi|numune|misal|program|proqram|proqramı|напиши|код|пример|дай|на|простой|kodla|lazım|lazim|mənə|mene|please|zəhmət|olmasa|salam|dünya|dunya|hello|world|привет|мир|sadə|simple|basic|level|səviyyə)$/.test(w) && !/^(python|html|css|javascript|sql|java|php|rust|kotlin|typescript)/.test(w));
+    const detailedCode = codingQ && (message.split(/\s+/).filter(Boolean).length >= 6 || taskWords.length >= 2);
     // Söz bazası hava və paket axtarışından əvvəl gəlir: «seo nədir» npm paketinə düşməsin.
     if (!fixed && !codingQ && body.mode !== "code" && body.mode !== "create") {
       const known = searchReply(message);
