@@ -53,7 +53,7 @@ export function isCodingQuestion(message, mode) {
   if (mode === "code") return true;
   const q = String(message || "");
   if (q.includes("```") || /[{};]\s*\n.*[{};]/s.test(q)) return true;
-  if (LANG_CUES.some(([, re]) => re.test(q)) && /(kod|code|код|كود|yaz|write|напиш|funksiya|function|функц|class|sinif|klass|necə|how|как|nasıl|كيف|error|xəta|ошибк|bug|izah|explain|объясн|analiz|analy|анализ|dəyiş|modify|change|измени|düzəlt|fix|исправ|refactor|optimiz|misal|nümunə|example|пример)/i.test(q)) return true;
+  if (LANG_CUES.some(([, re]) => re.test(q)) && /(kod|code|код|كود|yaz|write|напиш|funksiya|function|функц|class|sinif|klass|necə|how|как|nasıl|كيف|error|xəta|ошибк|bug|izah|explain|объясн|analiz|analy|анализ|dəyiş|modify|change|измени|düzəlt|fix|исправ|refactor|optimiz|misal|nümunə|example|пример|fonksiyon|örnek|düzelt|açıkla|اكتب|دالة|دالّة|برنامج|كود|شرح|اشرح|خطأ|عدّل|عدل|صحح|مثال)/i.test(q)) return true;
   return /(proqramlaş|programming|программир|algoritm|algorithm|алгоритм|regex|рекурс|recursion|rekursi)/i.test(q);
 }
 
