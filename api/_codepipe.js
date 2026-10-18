@@ -46,6 +46,9 @@ export const CODE_RULES = [
   "Use idiomatic, modern code; validate inputs and handle edge cases and errors explicitly; avoid security bugs (e.g. never put user text into innerHTML — use textContent; parameterize SQL).",
   "HTML/CSS/JS requests: ONE self-contained file (<!DOCTYPE html> … </html>) with inline <style> and <script>, no external dependencies unless asked; it must work when opened directly in a browser.",
   "Python/JavaScript: standard library only unless asked; include a small usage example (and for interactive programs a main guard). Code should run as-is in an online editor (NibrasCode Studio).",
+  "A request for a JavaScript/Python function, class or algorithm (no UI asked) gets plain ```javascript / ```python code with the function at top level — NOT an HTML page.",
+  "Never mutate the caller's arguments (including nested lists/objects) unless asked; copy first. Check off-by-one, empty input, None/null, negative numbers, duplicates and unicode.",
+  "Azerbaijani/Turkish text: str.lower()/toLowerCase() turns 'İ' into 'i̇' (two chars) and 'I' into 'i' — when matching letters, list both cases explicitly (e.g. set('aıoueəiöüAIOUEƏİÖÜ')) or use locale-aware toLocaleLowerCase('tr'/'az').",
   "When the user pasted code to fix or modify: keep their structure and names, change only what is needed, return the full updated code, and say briefly what was wrong / what changed.",
   "Code comments and the explanation must be in the user's language. Format: one short sentence of what the code does, then the code in ONE fenced block with the language tag (```html, ```python, …) unless several files are truly needed, then 2–5 short bullet points: key points and how to run.",
 ].join("\n");
@@ -200,7 +203,7 @@ export function staticCheck(reply) {
 }
 
 const REVIEW_SYS = (lang) => `You are a strict code reviewer. You get a user's programming request, a requirement checklist, a candidate answer and automatic check results.
-Check the code line by line: does it satisfy EVERY checklist item exactly (texts, colors, sizes, names, behaviour)? Does it run without syntax/runtime errors? Are edge cases and invalid input handled? Any security bug (innerHTML with user text, SQL injection)? Any placeholder or omitted code? Is the explanation correct and in ${lang}?
+Check the code line by line and mentally run it on the checklist edge cases and on 2–3 tricky inputs of your own (empty input, boundaries, unicode such as Azerbaijani/Turkish İ/ı, input mutation, repeated calls/timers). Does it satisfy EVERY checklist item exactly (texts, colors, sizes, names, behaviour)? Does it run without syntax/runtime errors? Are edge cases and invalid input handled? Any security bug (innerHTML with user text, SQL injection)? Any placeholder or omitted code? Is the explanation correct and in ${lang}?
 If automatic checks report errors you MUST fix them. If everything is correct reply with exactly: APPROVED
 Otherwise reply with the COMPLETE corrected final answer for the user (same format: one sentence, full code in one fenced block, short bullets), with no mention of review, checklist or previous version.`;
 
@@ -248,7 +251,7 @@ export async function codePipeline({ message, history, baseSystem, uiLang = "az"
     let cand = rv.reply.replace(/^\s*(CORRECTED( ANSWER)?)\s*:?\s*/i, "");
     let by = rv.name;
     if (isApproved(rv.reply)) {
-      steps.push("review:approved");
+      steps.push("review:approved:" + rv.name);
       if (!check.errs.length) break;
       // rəyçi təsdiqlədi, amma avtomatik yoxlama xəta tapıb: yazan modeldən konkret düzəliş istənir
       const fixMsg = "Your previous answer has these automatic check errors:\n- " + check.errs.join("\n- ") + "\n\nReturn the COMPLETE corrected final answer (same format), nothing else.\n\nPREVIOUS ANSWER:\n" + answer;
