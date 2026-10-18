@@ -51,6 +51,27 @@ export async function askProvider(name, history, message) {
   return { skipped: true };
 }
 
+// Müəyyən provayder + model (kod boru kəməri və diaqnostika üçün); OpenAI-uyğun uç nöqtələr
+export const MODEL_ENDPOINTS = {
+  mistral: ["https://api.mistral.ai/v1/chat/completions", ["MISTRAL_API_KEY"]],
+  ollama: ["https://ollama.com/v1/chat/completions", ["OLLAMA_API_KEY"]],
+  openrouter: ["https://openrouter.ai/api/v1/chat/completions", ["OPENROUTER_API_KEY"]],
+  groq: ["https://api.groq.com/openai/v1/chat/completions", ["GROQ_API_KEY"]],
+  github: ["https://models.github.ai/inference/chat/completions", ["GITHUB_MODELS_TOKEN", "GH_MODELS_TOKEN", "GITHUB_TOKEN"]],
+  llm7: ["https://api.llm7.io/v1/chat/completions", ["LLM7_API_KEY"]],
+  xai: ["https://api.x.ai/v1/chat/completions", ["XAI_API_KEY"]],
+  deepseek: ["https://api.deepseek.com/chat/completions", ["DEEPSEEK_API_KEY"]],
+  cerebras: ["https://api.cerebras.ai/v1/chat/completions", ["CEREBRAS_API_KEY"]],
+};
+export async function askModel(provider, model, history) {
+  const ep = MODEL_ENDPOINTS[provider];
+  if (!ep) return { skipped: true };
+  const apiKey = ep[1].map((k) => env(k)).find(Boolean);
+  if (!apiKey) return { skipped: true };
+  const extraHeaders = provider === "openrouter" ? { "HTTP-Referer": "https://www.nibrascode.com", "X-Title": "Nibras AI" } : undefined;
+  return complete({ url: ep[0], apiKey, model, history, extraHeaders });
+}
+
 export function env(name) {
   const hit = Object.keys(process.env).find((key) => key.toUpperCase() === name.toUpperCase());
   return hit ? String(process.env[hit] || "").trim().replace(/^Bearer\s+/i, "").replace(/^["']|["']$/g, "") : "";

@@ -1,5 +1,5 @@
 import { AsyncLocalStorage } from "node:async_hooks";
-import { askProvider, aiConfig, configuredProviders } from "./_ai.js";
+import { askProvider, askModel, aiConfig, configuredProviders } from "./_ai.js";
 import { gameReply } from "./_game.js";
 import { compactHistory, AYAH_PROMPT, stripAyahMarkup, detectLang } from "./_text.js";
 // Kitab, Quran, təfsir, tövhid, hədis, fətva, lüğət və nəhv cavabları Nibras Library-dən gəlir (api/_library.js); məlumat bu saytda saxlanmır
@@ -90,6 +90,17 @@ export default async function handler(req, res) {
   }
   // MÜVƏQQƏTİ diaqnostika: hansı provayderin işlədiyini yoxlamaq üçün (açar göstərilmir)
   if (req.method === "POST" && req.body && req.body.probe === "providers-7c1") {
+    if (Array.isArray(req.body.models)) {
+      const outM = await Promise.all(req.body.models.slice(0, 30).map(async ([pv, model]) => {
+        const t = Date.now();
+        try {
+          const r = await aiConfig.run({ system: "You are a helpful assistant.", tokens: () => 600, timeout: () => AbortSignal.timeout(40000), temperature: 0.2 }, () => askModel(String(pv), String(model), [{ role: "user", text: "Write a Python function is_even(n). Reply only with code." }]));
+          return { pv, model, ok: !!r.ok, ms: Date.now() - t, sample: r.ok ? String(r.reply).slice(0, 80) : "", detail: r.ok ? "" : String(r.detail || "").slice(0, 140) };
+        } catch (e) { return { pv, model, ok: false, ms: Date.now() - t, detail: String(e && e.name) }; }
+      }));
+      res.status(200).json({ out: outM });
+      return;
+    }
     const names = ["xai", "deepseek", "mistral-code", "groq", "cerebras", "github", "nvidia", "openrouter", "gemini", "sambanova", "hf", "scaleway", "ollama", "llm7", "airforce"];
     const out = await Promise.all(names.map(async (n) => {
       const t = Date.now();
