@@ -206,7 +206,9 @@ export function analyzeRequest(message, history = []) {
   if (language) confidence += 0.5;
   if (explicit.length || pasted) confidence += 0.2;
   if (requirements.length) confidence += 0.1;
+  // alqoritm/funksiya tapşırığı (UI-siz) həmişə rəyçidən keçir: kənar hallarda səhv ən çox buradadır
   const complexity =
+    (functionOnly ? 2 : 0) + (["c", "cpp", "rust", "go", "java"].includes(language) ? 1 : 0) +
     (modify ? 2 : 0) + (requirements.length >= 6 ? 1 : 0) + (plain.length > 300 ? 1 : 0) + feats.filter((f) => !["unicode", "responsive"].includes(f[0])).length +
     2 * (/(edge|invalid|valid|ValueError|raise|throw|ignore|yok say|игнор|ties?|alphabetic|O\(1\)|recurs|circular|dövri|цикл|throttle|debounce|parse|sort|merge|regex|roman|рим|LRU|cache|interval|aralık|clone|kopyala|копир|algorithm|algoritm|алгоритм|class|klass|sinif|класс|sınıf)/i.test(plain) ? 1 : 0) +
     (/(game|oyun|игр|لعبة|canvas)/i.test(plain) ? 1 : 0);
