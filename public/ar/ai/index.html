@@ -2632,11 +2632,15 @@
       const txt = el.querySelector(".tk-txt");
       let i = 0;
       txt.textContent = steps[0];
+      // kod: təhlil ~6 san, yazılış ~25 san, sonra yoxlama; qalanları əvvəlki kimi hər 3.5 san
+      const at = kind === "code" ? [6000, 26000] : [3500, 7000];
+      const t0 = Date.now();
       const timer = setInterval(function () {
         if (!el.isConnected) { clearInterval(timer); return; }
-        i = Math.min(steps.length - 1, i + 1);
-        txt.textContent = steps[i];
-      }, 3500);
+        const e = Date.now() - t0;
+        const ni = e >= at[1] ? 2 : e >= at[0] ? 1 : 0;
+        if (ni !== i) { i = Math.min(steps.length - 1, ni); txt.textContent = steps[i]; }
+      }, 500);
       return el;
     }
 
@@ -2674,7 +2678,9 @@
       const um = rec("u", m, "", useImage ? 1 : 0);
       btn.disabled = true;
       stat("mode", sentMode);
-      const wait = thinkEl(useImage ? "image" : sentMode === "code" ? "code" : "ask");
+      // kod tapşırığı serverdə təhlil → yazılış → yoxlama addımlarından keçir: gözləmə yazısı da buna uyğundur
+      const codeAsk = sentMode === "code" || (/(```|\b(html|css|javascript|js|python|sql|php|java|kotlin|rust|golang|typescript|c\+\+|c#|bash|regex)\b|\bkod|\bcode|код|كود|برنامج|fonksiyon|funksiya|function|функци|دالة|\bscript)/i.test(m) && m.split(/\s+/).length >= 4);
+      const wait = thinkEl(useImage ? "image" : codeAsk ? "code" : "ask");
       msgs.appendChild(wait);
       msgs.scrollTop = msgs.scrollHeight;
       try {

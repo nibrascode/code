@@ -312,6 +312,7 @@ async function complete({ url, apiKey, model, history, extraHeaders }) {
         { role: "system", content: cfg().system },
         ...history.map((item) => ({ role: item.role, content: item.text })),
       ],
+      ...((cfg().extraBody && cfg().extraBody(model)) || {}),
     }),
   });
   const data = await upstream.json().catch(() => ({}));

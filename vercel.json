@@ -195,5 +195,10 @@
       "source": "/ru/calc",
       "destination": "/calc/index.html"
     }
-  ]
+  ],
+  "functions": {
+    "api/chat.js": {
+      "maxDuration": 300
+    }
+  }
 }

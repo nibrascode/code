@@ -1,5 +1,6 @@
 import { AsyncLocalStorage } from "node:async_hooks";
 import { askProvider, askModel, aiConfig, configuredProviders } from "./_ai.js";
+import { codePipeline } from "./_codepipe.js";
 import { gameReply } from "./_game.js";
 import { compactHistory, AYAH_PROMPT, stripAyahMarkup, detectLang } from "./_text.js";
 // Kitab, Quran, təfsir, tövhid, hədis, fətva, lüğət və nəhv cavabları Nibras Library-dən gəlir (api/_library.js); məlumat bu saytda saxlanmır
@@ -61,6 +62,8 @@ export const config = { maxDuration: 45 };
 const budget = new AsyncLocalStorage();
 export const SHORT_TOKENS = 700;
 export const CODE_TOKENS = 3500;
+// Kod boru kəmərinin ümumi vaxtı (vercel.json-da api/chat.js maxDuration 300 san); sonra tək addımlı yola 40 san qalır
+const PIPE_BUDGET_MS = 150000;
 export function wantsLongCode(message, mode) {
   if (mode === "code") return true;
   const q = String(message || "").toLowerCase();
@@ -317,8 +320,33 @@ export default async function handler(req, res) {
     const siteAsk = asksAboutSite(message);
     const long = wantsLongCode(message, body.mode);
     const ctx = { long, deadline: started + 40000 };
+    // Kod tapşırığı: təhlil → güclü modellə yazılış → yoxlama/düzəliş (yavaş, amma daha dəqiq). Alınmasa köhnə tək addımlı yol.
+    const evalPipe = body._pipe && body._pipe.key === "providers-7c1" ? body._pipe : null;
+    const codeTask = codingQ && (detailedCode || body.mode === "code") && body.mode !== "create" && !(evalPipe && evalPipe.off);
+    if (codeTask) {
+      const pipe = await codePipeline({
+        message,
+        history,
+        kbText: kb ? kb.text : "",
+        baseSystem: SYSTEM + (siteAsk ? " " + BRAND_INFO : "") + langDirective(lang) + dateDirective(),
+        uiLang: lang,
+        deadline: started + PIPE_BUDGET_MS,
+        ...(evalPipe && Array.isArray(evalPipe.gen) ? { genModels: evalPipe.gen } : {}),
+        ...(evalPipe && evalPipe.noReview ? { noReview: true } : {}),
+      }).catch(() => null);
+      if (pipe && pipe.reply) {
+        const aiReply = stripFabricated(cleaned(closeTruncatedFence(stripAyahMarkup(pipe.reply))), message, { siteAsk });
+        if (aiReply.trim()) {
+          res.status(200).json({ success: true, reply: aiReply, usedAI: true, engine: pipe.engine, steps: pipe.steps, ...(kb ? { codeKb: kb.refs.length } : {}) });
+          return;
+        }
+      }
+      notes.push("pipeline: alınmadı");
+    }
+    const loopStart = Date.now();
+    ctx.deadline = loopStart + 40000;
     for (const name of order) {
-      if (Date.now() - started > (long ? 30000 : 18000)) break;
+      if (Date.now() - loopStart > (long ? 30000 : 18000)) break;
       const result = await budget.run(ctx, () => aiConfig.run({ system: SYSTEM + (siteAsk ? " " + BRAND_INFO : "") + langDirective(lang) + dateDirective(), tokens: tokenLimit, timeout: timeoutFor }, () => askProvider(name, history, lexicalLoose ? LEXICAL_HINT + "\n\n" + message : message)));
       if (result.skipped) continue;
       if (result.ok) {
