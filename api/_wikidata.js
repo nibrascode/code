@@ -74,6 +74,12 @@ function caseCandidates(topic) {
   const out = [t];
   if (/(nın|nin|nun|nün)$/iu.test(t)) out.push(t.replace(/(nın|nin|nun|nün)$/iu, ""));
   if (/(ın|in|un|ün)$/iu.test(t) && t.length > 4) out.push(t.replace(/(ın|in|un|ün)$/iu, ""));
+  if (/['’]/.test(t)) out.push(t.split(/['’]/)[0]); // Japonya'nın -> Japonya
+  if (/[а-я]$/i.test(t) && t.length > 4) {
+    // rus hal şəkilçiləri: Японии -> Япония, Москвы -> Москва, Китая -> Китай, Париже -> Париж
+    out.push(t.replace(/ии$/i, "ия"), t.replace(/ы$/i, "а"), t.replace(/и$/i, "а"), t.replace(/я$/i, "й"), t.replace(/[еуа]$/i, ""), t.replace(/ой$/i, "ая"));
+  }
+  if (/^ال/.test(t)) out.push(t);
   return [...new Set(out.map((x) => x.trim()).filter((x) => x.length >= 2))];
 }
 
@@ -85,7 +91,18 @@ export function wikiQuery(message) {
   if (q.length < 3 || q.length > 180) return null;
   if (SKIP.test(q)) return null;
   const lang = guessLang(raw);
+  const tail = "(?:\\s+(?:nedir|nədir|neresi|nerededir|ne|hansidir|hansı şəhərdir|hansi seherdir|hangisi|hangisidir|hangi sehir|haradir|kimdir))?";
   const rules = [
+    // paytaxt/əhali: sual sözü (what is the / какая / ما هي) əvvəldə də ola bilər
+    [/(?:^|\s)capital(?: city)? of\s+(?:the\s+)?(.{2,60})$/, "capital"],
+    [/(?:^|\s)столиц[аеуы]\s+(.{2,60})$/, "capital"],
+    [/^(.{2,60}?)\s+столица$/, "capital"],
+    [/(?:^|\s)عاصمة\s+(.{2,60})$/, "capital"],
+    [new RegExp("^(.{2,60}?)\\s+(?:paytaxti|baskenti|baskent)" + tail + "$"), "capital"],
+    [/(?:^|\s)population of\s+(?:the\s+)?(.{2,60})$/, "population"],
+    [/(?:^|\s)население\s+(.{2,60})$/, "population"],
+    [/(?:^|\s)(?:عدد\s+)?سكان\s+(.{2,60})$/, "population"],
+    [/^(.{2,60}?)\s+(?:ehalisi|nufusu)(?:\s+(?:ne qederdir|neqederdir|ne qeder|ne kadar|ne kadardir|kac|kacdir|nedir))?$/, "population"],
     [/^(?:who is|who was|kimdir|kim idi|кто так(?:ой|ая)|من هو|من هي)\s+(.{2,80})$/, "who"],
     [/(.{2,80}?)\s+(?:kimdir|kim idi)$/, "who"],
     [/^(?:where is|where are|nerede|neresi)\s+(.{2,80})$/, "where"],
@@ -249,14 +266,22 @@ function descriptionOf(entity, lang) {
 export async function wikidataReply(message) {
   const query = wikiQuery(message);
   if (!query) return null;
-  const hits = await searchEntity(query.topic, query.lang);
+  // paytaxt/əhali sualında yalnız həmin xassəsi olan obyekt qəbul edilir («Франции» şeiri yox, Fransa ölkəsi)
+  const need = query.focus === "capital" ? "capital" : query.focus === "population" ? "people" : "";
+  let hits = await searchEntity(query.topic, query.lang);
+  if (need) {
+    const extra = [];
+    for (const cand of caseCandidates(query.topic).slice(1, 5)) extra.push(...(await searchEntity(cand, query.lang)));
+    hits = [...hits, ...extra].filter((h, i, a) => h && a.findIndex((x) => x.id === h.id) === i);
+  }
   if (!hits.length) return null;
   const names = LABEL[query.lang] || LABEL.az;
   const wanted = FOCUS_PROPS[query.focus] || FOCUS_PROPS.about;
   const show = [...new Set([...wanted, ...FOCUS_PROPS.about])];
-  for (const hit of hits.slice(0, 3)) {
+  for (const hit of hits.slice(0, need ? 6 : 3)) {
     const facts = await sparqlFacts(hit.id, query.lang, query.topic);
     if (!facts) continue;
+    if (need && !facts.grouped[need]) continue;
     const kind = facts.grouped.kind || [];
     if (kind.some((text) => /disambiguation|çoxmənalı|неоднознач|توضيح/i.test(text))) continue;
     const lines = [];

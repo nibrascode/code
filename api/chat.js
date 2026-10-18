@@ -216,7 +216,7 @@ export default async function handler(req, res) {
     // Wikidata faktı modelə getmir: şəhər, adam, ölkə kimi aydın sualı server özü oxuyur.
     if (!fixed && !codingQ && body.mode !== "code" && body.mode !== "create") {
       try {
-        const wiki = await wikidataReply(message);
+        const wiki = isReligious(message, body.mode) ? null : await wikidataReply(message);
         if (wiki) fixed = wiki;
       } catch {
         /* Wikidata susursa, sual hazır cavaba və ya modelə düşür */

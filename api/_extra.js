@@ -1,3 +1,4 @@
+import { isReligious } from "./_religious.js";
 // Müəyyən suallar modelə getmir: hava, məzənnə, qısa izah, paket.
 // extraReply(message) -> mətn və ya null.
 
@@ -158,22 +159,31 @@ async function rateReply(message) {
   return left + " = " + value + " " + names[ask.to] + (quote.date ? " (" + quote.date + ")" : "");
 }
 
+// «haqqında / расскажи о / tell me about / hakkında bilgi ver / أخبرني عن» kimi doldurucu sözlər axtarışa düşmür (əvvəl «Bakı haqqında qısa məlumat ver» səhv adama aparırdı)
+const WIKI_FILL = new Set("haqqında haqqinda haqqındа qısaca qisaca qisa qısa məlumat melumat ver verin verə de deyin danış danis izah et elə ele hakkında hakkinda kısaca kisaca bilgi bilgiler anlat anlatır mısın misin nedir about briefly tell me us something info information give please short brief кратко коротко расскажи расскажите о об обо про информацию информация что знаешь дай нам мне немного نبذة باختصار عن أخبرني اخبرني معلومات حدثني حدثنا قليلا".split(" "));
 function wikiTopic(raw) {
   return raw
-    .replace(/[?؟!]/g, " ")
-    .replace(/\b(haqqında|haqqinda|qısaca|qisaca|qisa|hakkında|hakkinda|kısaca|kisaca|about|briefly|кратко|расскажи|نبذة|باختصار|عن)\b/gi, " ")
-    .replace(/\s+/g, " ")
+    .replace(/[?؟!.,:;«»"“”]/g, " ")
+    .split(/\s+/)
+    .filter((w) => w && !WIKI_FILL.has(w.toLowerCase()))
+    .join(" ")
     .trim();
+}
+const stem = (w) => String(w || "").toLowerCase().replace(/^ال/, "").slice(0, 4);
+// tapılan məqalə adı sorğu sözlərindən biri ilə başlamalıdır (Париже → Париж, Bakının → Bakı)
+function titleFits(title, topic) {
+  const tw = String(title).toLowerCase().replace(/[()]/g, " ").split(/\s+/).map(stem);
+  return topic.split(/\s+/).filter((w) => w.length >= 3).some((w) => tw.includes(stem(w)));
 }
 
 async function wikiReply(message) {
-  if (!/(haqqında|haqqinda|qısaca|qisaca|hakkında|hakkinda|kısaca|about|briefly|кратко|расскажи|نبذة|باختصار)/i.test(message)) return null;
+  if (!/(haqqında|haqqinda|qısaca|qisaca|hakkında|hakkinda|kısaca|about|briefly|кратко|расскажи|нем\b|о\s|об\s|про\s|نبذة|باختصار|أخبرني|اخبرني|حدثني)/i.test(message)) return null;
   const topic = wikiTopic(message);
-  if (topic.length < 2) return null;
+  if (topic.length < 2 || topic.split(/\s+/).length > 6) return null;
   const lang = guessLang(message);
   const host = lang + ".wikipedia.org";
   const found = await getJson("https://" + host + "/w/api.php?action=query&list=search&utf8=1&format=json&srlimit=3&srsearch=" + encodeURIComponent(topic));
-  const title = found?.query?.search?.[0]?.title;
+  const title = (found?.query?.search || []).map((x) => x.title).find((t) => titleFits(t, topic));
   if (!title) return null;
   const page = await getJson("https://" + host + "/api/rest_v1/page/summary/" + encodeURIComponent(title));
   if (!page || page.type === "disambiguation") return null;
@@ -187,6 +197,7 @@ const PY_NAMES = new Set(["requests", "flask", "django", "numpy", "pandas", "sci
 const CODE_NAMES = new Set([...PY_NAMES, "react", "vue", "express", "vite", "lodash", "axios", "webpack", "next", "redux", "jquery", "typescript"]);
 const SKIP_PKG = new Set(["apk", "html", "css", "sql", "git", "api", "json", "python", "javascript", "typescript", "java", "php", "node", "npm", "pip", "android", "ios", "hava", "dollar", "manat"]);
 
+const PKG_STOP = new Set(["the", "a", "an", "this", "that", "it", "my", "your", "capital", "population", "meaning", "difference", "best", "time", "life", "love", "islam", "god", "allah"]);
 function packageTopic(raw) {
   const text = raw.replace(/[?؟!]/g, " ").replace(/\s+/g, " ").trim();
   const hinted = /(npm|pypi|pip\b|paket|package|kitabxana|kütüphane|kutuphane|библиотека|حزمة)/i.test(text);
@@ -197,8 +208,10 @@ function packageTopic(raw) {
     ""
   );
   const name = asked.toLowerCase();
-  if (!name || SKIP_PKG.has(name)) return null;
+  if (!name || SKIP_PKG.has(name) || PKG_STOP.has(name)) return null;
   const codeLike = CODE_NAMES.has(name) || /[.\-]/.test(name);
+  // «What is the capital of Japan?» paket sualı deyil: açıq «npm/pip/paket» işarəsi və ya tanınan paket adı lazımdır
+  if (!hinted && !codeLike) return null;
   if (!hinted && !codeLike && /[A-Z]/.test(asked)) return null;
   if (!hinted && !/(nədir|nedir|nedır|what is|что такое|ما هو|ما هي)/i.test(text)) return null;
   const py = /(pypi|pip\b|python)/i.test(text) || PY_NAMES.has(name);
@@ -476,7 +489,8 @@ export async function extraReply(message) {
     if (rate) return rate;
   } catch { /* növbəti mənbə */ }
   try {
-    const about = await wikiReply(raw);
+    // dini mövzu Vikipediyadan cavablanmır (kitabxana/dini yol işləyir)
+    const about = isReligious(raw) ? null : await wikiReply(raw);
     if (about) return about;
   } catch { /* növbəti mənbə */ }
   try {
