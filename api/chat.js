@@ -18,21 +18,35 @@ import { resolveLang, msgs, langDirective, dateDirective, stripCutoff, eraseRepl
 // Proqramlaşdırma suallarında Hugging Face bucket-dəki kod bazasından uyğun nümunələr AI-yə kontekst kimi verilir (məlumat HF-də qalır)
 import { codeContext, isCodingQuestion } from "./_codekb.js";
 
+// DİQQƏT: sistem mətnində yazılmasını istəmədiyimiz şeylərin adı (konkret sitat, alim adı, qrammatika mövzusu) çəkilmir —
+// zəif modellər «X yazma» qaydasını təkrarlayıb cavaba X-i əlavə edirdi (məs. İbn Sirin «sitatı» + uydurma «(Tirmizi, 3/121)», «لن» qeydi).
+const NO_FAKE =
+  "SƏRT QAYDA: heç vaxt sitat, hədis, ayə, alim və ya səhabə sözü, kitab adı, cild/səhifə və ya hədis nömrəsi istinadı uydurma. " +
+  "Dini mətn və mənbəni yalnız sənə bu söhbətdə ayrıca verilmiş mənbə parçalarından göstər. " +
+  "Yalnız soruşulana cavab ver: sualla əlaqəsi olmayan paraqraf (dini xatırlatma, sayt və ya müəllif haqqında məlumat, dil qrammatikası qeydi, imza, reklam) əlavə etmə. " +
+  "Never invent quotes, hadith, citations or references, and never append paragraphs unrelated to the question.";
 const SYSTEM = [
   "Sən Nibras AI-san, Nibras Code saytının köməkçisisən.",
   "Cavabların qısa, aydın və nəzakətli olsun. İstifadəçi hansı dildə yazırsa, o dildə cavab ver.",
   "Faktı uydurma. Dəqiq bilmirsənsə, bunu açıq yaz. Köhnə, təxmini və ya başqa saytın qaydasını Nibras-ın qaydası kimi göstərmə.",
   "Proqramlaşdırma sualında əvvəl bir cümlə ilə nə olduğunu de, sonra qısa nümunə və ya addım yaz. Uzun dərs açma.",
-  "Cavaba İbn Sirin sitatı, «süni intellektdən din öyrənilməz» xəbərdarlığı və «لن» ədatı haqqında qrammatik təvil yazma.",
+  NO_FAKE,
+  AYAH_PROMPT,
+].join(" ");
+// Sayt/müəllif məlumatı yalnız istifadəçi Nibras, sahibi, tətbiqlər, reklam və ya əlaqə haqqında soruşanda modelə verilir
+const BRAND_INFO = [
   "Layihənin adı Nibras Code-dur. NibrasCodr yazma. Sahibi Mahir Əliyevdir. Bu faktı dəyişmə, başqa adam adı uydurma.",
   "Nibras Code böyük şirkət deyil. Sadə, faydalı və istifadəsi rahat tətbiqlər üzərində çalışan müstəqil şəxsi layihədir.",
   "Tətbiqlər: Nibras Arabic hazırdır. Nibras PDF və Nibras Plans tezliklədir. Nibras Docs hazırlanır.",
   "Saytda hazır alətlər var: Nibras Erase fon silir, Nibras QR kod hazırlayır, Xidmətlər səhifəsində JSON, Base64, UUID, şifrə, hash və format alətləri var. İstifadəçi alət istəyəndə hazır nəticə verilir.",
   "Pulsuz tətbiqlərdə də reklam yoxdur. Premium olsa belə, əsas funksiyalar pulsuz qalır.",
   "Əlaqə: nibrascode@gmail.com. Sayt: nibrascode.com.",
-  "Nibras Code, tətbiq siyahısı və əlaqə ünvanını yalnız istifadəçi Nibras, tətbiq, reklam və ya əlaqə haqqında soruşanda yaz. Başqa cavabın sonuna imza, reklam və ya əlaqə əlavə etmə.",
-  AYAH_PROMPT,
 ].join(" ");
+export function asksAboutSite(message) {
+  const q = fold(message);
+  if (/(kod|code|html|css|goster|yazisi|yazisin|reng|mavi|font|sрифт|text\b|metn)/.test(q) && !/(kimdir|kimindir|sahib|owner|who (is|owns|made)|kimdi)/.test(q)) return false;
+  return /nibras|mahir|sahib|owner|founder|kurucu|reklam|\bads?\b|elaqe|contact|tetbiq|uygulama|приложен|владел|связ|تطبيق|صاحب|تواصل|seni kim|who (made|built) you|sen kimsen/.test(q);
+}
 
 const LEXICAL_HINT =
   "Bu, ərəbcə (və ya dini) sözün mənası (lüğət) sualıdır, dini hökm və ya fətva sualı deyil. Sözün mənasını qısa və düz izah et. Xəbərdarlıq sitatı yazma. Allahın sifətlərini təvil etmə. " +
@@ -206,7 +220,8 @@ export default async function handler(req, res) {
     const snippet = fixed || detailedCode ? null : snippetReply(message, body.mode);
     const search = fixed || snippet || codingQ || body.mode === "create" ? null : searchReply(message);
     const qr = fixed || snippet || search || body.mode === "create" ? null : qrReply(message, hist, lang) || eraseReply(message, lang);
-    const tools = fixed || snippet || search || qr || body.mode === "create" ? null : toolsReply(message);
+    // konkret kod tapşırığı («… göstərən HTML kodu yaz») alət cavabına düşmür (əvvəl «HTML alətinə» düşüb mənasız cavab verirdi)
+    const tools = fixed || snippet || search || qr || detailedCode || body.mode === "create" ? null : toolsReply(message);
     const ready =
       fixed ||
       snippet ||
@@ -269,11 +284,12 @@ export default async function handler(req, res) {
     const notes = [];
     const started = Date.now();
 
+    const siteAsk = asksAboutSite(message);
     const long = wantsLongCode(message, body.mode);
     const ctx = { long, deadline: started + 40000 };
     for (const name of order) {
       if (Date.now() - started > (long ? 30000 : 18000)) break;
-      const result = await budget.run(ctx, () => aiConfig.run({ system: SYSTEM + langDirective(lang) + dateDirective(), tokens: tokenLimit, timeout: timeoutFor }, () => askProvider(name, history, lexicalLoose ? LEXICAL_HINT + "\n\n" + message : message)));
+      const result = await budget.run(ctx, () => aiConfig.run({ system: SYSTEM + (siteAsk ? " " + BRAND_INFO : "") + langDirective(lang) + dateDirective(), tokens: tokenLimit, timeout: timeoutFor }, () => askProvider(name, history, lexicalLoose ? LEXICAL_HINT + "\n\n" + message : message)));
       if (result.skipped) continue;
       if (result.ok) {
         // AI ayə mətni yazıbsa, ərəbcə hissə Tanzil məlumatı ilə əvəz olunur, [[ayah:S:A]] işarələri açılır
@@ -281,7 +297,7 @@ export default async function handler(req, res) {
         // son emal library-dədir (Quran mətni orada); əlçatan deyilsə ayə işarələri sadəcə silinir (model yazdığı ayə mətni göstərilmir)
         const fin = await libraryFinalize({ text: result.reply, message, history: hist });
         const finText = fin ? fin.text : stripAyahMarkup(String(result.reply || "")).replace(/[\u0001-\u0003]/g, "").replace(/\[\[\s*ayah[^\]\n]*\]\]/gi, "").replace(/[﴿﴾][^﴿﴾]{0,4000}[﴿﴾]/g, "");
-        let aiReply = cleaned(closeTruncatedFence(finText));
+        let aiReply = stripFabricated(cleaned(closeTruncatedFence(finText)), message, { siteAsk });
         // Söz mənası lüğətdə tapılmadı, cavabı AI yazıb: dəqiq olmaya bilər qeydi (dini bildiriş yox)
         const nf = lexical && fin ? fin.note : null;
         if (nf && aiReply.trim()) aiReply = aiReply.replace(/\s+$/, "") + "\n\n" + nf;
@@ -309,6 +325,35 @@ export default async function handler(req, res) {
       reply: "Server xətası / Server error / Ошибка сервера / خطأ في الخادم / Sunucu hatası.",
     });
   }
+}
+
+// AI cavabından (mənbə parçası verilmədən yazılmış) uydurma istinad və əlaqəsiz əlavələri silir; kod blokları toxunulmur.
+const BOOKS = "Tirmi[zżd]hi|Tirmizi|Tirmidhi|Termizi|Buxari|Bukhari|Buhari|Müslim|Muslim|Moslem|Əbu Davud|Abu Dawud|Abu Davud|Ebu Davud|Nəsai|Nasai|Nesai|Nasa'?i|İbn Macə|Ibn Majah|Ibn Maja|İbn Mace|Əhməd|Ahmad|Ahmed|Malik|Darimi|Beyhəqi|Bayhaqi|Beyhaki|Hakim|Tabarani|Təbərani|Ibn Hibban|İbn Hibban|Musnad|Müsnəd|Səhih|Sahih|Sünən|Sunan|Мусли?м|Бухари|Тирмизи|Абу Дауд|Ахмад|البخاري|مسلم|الترمذي|أبو داود|النسائي|ابن ماجه|أحمد";
+const CITE_RE = new RegExp("[(\\[]\\s*(?:" + BOOKS + ")[^)\\]\\n]{0,40}\\d[^)\\]\\n]{0,20}[)\\]]", "i");
+const ATTRIB_RE = /(dedi|demişdir|deyib|buyurdu|buyurub|rəvayət|said|narrated|сказал|передал|قال|روى)\s*[:,]?\s*[«"“]/i;
+export function stripFabricated(text, message, { siteAsk = false } = {}) {
+  const q = String(message || "");
+  const askSirin = /sirin|сирин|سيرين/i.test(q);
+  const askLan = /لن|\bl[əea]n\b/i.test(q);
+  const parts = String(text || "").split(/(```[\s\S]*?```)/);
+  const out = parts.map((part) => {
+    if (part.startsWith("```")) return part;
+    return part.split(/\n/).map((para) => {
+      if (!para.trim()) return para;
+      if (!askLan && /(«لن»|"لن"|لن\s*»|لَن|\bلن\b.{0,40}(ədat|edat|particle|частица|harf|حرف)|(ədat|edat|particle)\s*«?لن)/i.test(para)) return null;
+      if (!siteAsk && /Nibras Code/i.test(para) && /(Mahir Əliyev|Mahir Aliyev|nibrascode@gmail|Nibras Arabic|Nibras Erase|Nibras QR|şəxsi layihə|müstəqil layihə|personal project)/i.test(para)) return null;
+      const sents = para.split(/(?<=[.!?…»])\s+(?=\S)/);
+      const kept = sents.filter((x) => {
+        if (!askSirin && /(İbn Sirin|Ibn Sirin|Ибн Сирин|ابن سيرين|süni intellektdən din|religion is not learned from (artificial|AI)|не изучают у искусственного|لا يُ?ؤخذ الدين من الذكاء)/i.test(x)) return false;
+        if (CITE_RE.test(x)) return false;
+        if (ATTRIB_RE.test(x) && /(Peyğəmbər|Prophet|Пророк|النبي|رسول|səhabə|imam|İmam|alim|scholar|rəhimə|رحمه|رضي|ﷺ|r\.a|s\.ə\.s)/i.test(x)) return false;
+        return true;
+      });
+      const res = kept.join(" ");
+      return res.trim() ? res : null;
+    }).filter((x) => x !== null).join("\n");
+  }).join("");
+  return out.replace(/\n{3,}/g, "\n\n").trim() || String(text || "").trim();
 }
 
 function fold(text) {
@@ -370,6 +415,8 @@ export function brandReply(message) {
   const self = /seni kim|sen kim|who are you|kim yarat|seni yarad|who made you|sen kimesen|sen kimsən/.test(q);
   if (!brand && !self) return null;
   if (/(kod yaz|kodu yaz|kod numune|write code|script yaz)/.test(q)) return null;
+  // «Mahir Əliyev yazısını mavi rəngdə göstər» kimi sorğu sayt haqqında sual deyil
+  if (/(kod|code|html|css|goster|yazisi|yazisin|reng|mavi|qirmizi|yasil|font|srift|metn)/.test(q) && !/(kimdir|kimindir|sahib|owner|who|nedir|haqqinda)/.test(q)) return null;
   if (/\bqr\b|qr kod|qr code/.test(q)) return null;
 
   const lang = replyLang(raw);
