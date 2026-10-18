@@ -536,29 +536,29 @@ const PAGES: Record<string, Copy> = {
   },
   "/privacy/nibras-docs": {
     az: {
-      title: "Məxfilik siyasəti — Nibras Docs",
+      title: "Nibras Docs məxfilik siyasəti",
       description:
-        "Nibras Docs hələ çıxmayıb. Tam məxfilik siyasəti tətbiq hazır olanda bu səhifədə dərc olunacaq. İndi hesab və izləmə yoxdur.",
+        "Nibras Docs 1.0.1 məxfilik siyasəti: sənədlər cihazınızda qalır, bulud sinxronu yoxdur, şəkillər sistem foto seçicisi ilə, reklam və izləmə yoxdur, bütün funksiyalar pulsuzdur.",
     },
     en: {
-      title: "Privacy policy — Nibras Docs",
+      title: "Nibras Docs privacy policy",
       description:
-        "Nibras Docs is not released yet. The full privacy policy will be published here when the app is ready. There is no account or tracking now.",
+        "Nibras Docs 1.0.1 privacy policy: documents stay on your device, cloud sync is off, images via the system photo picker, no ads or tracking, all features currently free.",
     },
     tr: {
-      title: "Gizlilik politikası — Nibras Docs",
+      title: "Nibras Docs gizlilik politikası",
       description:
-        "Nibras Docs henüz çıkmadı. Tam gizlilik politikası uygulama hazır olunca bu sayfada yayımlanacak. Şimdilik hesap ve izleme yok.",
+        "Nibras Docs 1.0.1 gizlilik politikası: belgeler cihazınızda kalır, bulut senkronu kapalı, görseller sistem fotoğraf seçicisiyle, reklam ve izleme yok, tüm özellikler şu an ücretsiz.",
     },
     ar: {
-      title: "سياسة الخصوصية — Nibras Docs",
+      title: "سياسة خصوصية Nibras Docs",
       description:
-        "Nibras Docs لم يصدر بعد. تُنشر سياسة الخصوصية الكاملة هنا عندما يجهز التطبيق. لا حساب ولا تتبّع الآن.",
+        "سياسة خصوصية Nibras Docs 1.0.1: المستندات تبقى على جهازك، بلا مزامنة سحابية، الصور عبر منتقي النظام، بلا إعلانات أو تتبع، وجميع الميزات مجانية حالياً.",
     },
     ru: {
-      title: "Политика конфиденциальности — Nibras Docs",
+      title: "Политика конфиденциальности Nibras Docs",
       description:
-        "Nibras Docs ещё не вышел. Полная политика будет опубликована здесь, когда приложение будет готово. Сейчас нет аккаунта и отслеживания.",
+        "Политика Nibras Docs 1.0.1: документы на устройстве, без облачной синхронизации, изображения через системный фотовыбор, без рекламы и слежки, все функции сейчас бесплатны.",
     },
   },
   "/privacy/nibras-plans": {
