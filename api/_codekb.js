@@ -18,12 +18,12 @@ const LANG_CUES = [
   ["java", /\b(java|spring|jvm|maven|gradle)\b(?!\s*script)|джава(?!\s*скрипт)|جافا(?!\s*سكريبت)/i],
   ["csharp", /(c#|\bcsharp\b|\.net\b|\bdotnet\b|\bunity\b|\basp\.net\b|си\s*шарп)/i],
   ["cpp", /(c\+\+|\bcpp\b|\bqt\b|\bstl\b|си\s*плюс)/i],
-  ["c", /((^|[\s(])c[ -](dili|dilində|dilinde|language|program|ilə|də|proqram)|\bin c\b|\bc language\b|\bc program|\bansi c\b|(^|\s)на си([\s,.?!]|$)|язык[ае]? си([\s,.?!]|$)|\bc ilə\b|\bc-də\b|\bmalloc\b|\bprintf\b)/i],
+  ["c", /((^|[\s(])c[ -](dili|dilində|dilinde|language|program|ilə|də|proqram|function|funksiya|fonksiyon|kod|code|функци)|\bin c\b|\bc language\b|\bc program|\bansi c\b|(^|\s)на си([\s,.?!]|$)|язык[ае]? си([\s,.?!]|$)|\bc ilə\b|\bc-də\b|\bmalloc\b|\bprintf\b)/i],
   ["go", /\b(golang|go dili|go dilində|in go|goroutine)\b|(^|\s)на go\b|\bGo\b(?=.*\b(http|server|func|kod|code|struct|channel|api)\b|.*(сервер|функц|код))/i],
   ["rust", /\b(rust|cargo|tokio)\b|раст/i],
   ["php", /\b(php|laravel|symfony|wordpress)\b/i],
   ["sql", /\b(sql|mysql|postgres|postgresql|sqlite|select|join|query)\b|запрос/i],
-  ["html", /\b(html|web\s*page|landing)\b|veb\s*səhifə|səhifə/i],
+  ["html", /\b(html5?|web\s*page|landing)\b|veb\s*səhifə|səhifə/i],
   ["css", /\b(css|flexbox|grid|tailwind|animation|scss|sass)\b/i],
 ];
 
@@ -53,7 +53,7 @@ export function isCodingQuestion(message, mode) {
   if (mode === "code") return true;
   const q = String(message || "");
   if (q.includes("```") || /[{};]\s*\n.*[{};]/s.test(q)) return true;
-  if (LANG_CUES.some(([, re]) => re.test(q)) && /(kod|code|код|كود|yaz|write|напиш|funksiya|function|функц|class|sinif|klass|necə|how|как|nasıl|كيف|error|xəta|ошибк|bug|izah|explain|объясн|analiz|analy|анализ|dəyiş|modify|change|измени|düzəlt|fix|исправ|refactor|optimiz|misal|nümunə|example|пример|fonksiyon|örnek|düzelt|açıkla|اكتب|دالة|دالّة|برنامج|كود|شرح|اشرح|خطأ|عدّل|عدل|صحح|مثال)/i.test(q)) return true;
+  if (LANG_CUES.some(([, re]) => re.test(q)) && /(kod|code|код|كود|yaz|write|напиш|funksiya|function|функц|class|sinif|klass|necə|how|как|nasıl|كيف|error|xəta|ошибк|bug|izah|explain|объясн|analiz|analy|анализ|dəyiş|modify|change|измени|düzəlt|fix|исправ|refactor|optimiz|misal|nümunə|example|пример|fonksiyon|örnek|düzelt|açıkla|make|build|implement|сделай|создай|реализ|hazırla|yap|oluştur|game|oyun|игр|компонент|component|اكتب|دالة|دالّة|برنامج|كود|شرح|اشرح|خطأ|عدّل|عدل|صحح|مثال)/i.test(q)) return true;
   return /(proqramlaş|programming|программир|algoritm|algorithm|алгоритм|regex|рекурс|recursion|rekursi)/i.test(q);
 }
 

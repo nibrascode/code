@@ -19,16 +19,17 @@ export const GEN_MODELS = [
   ["llm7", "default"],
 ];
 export const FAST_MODELS = [
-  ["groq", "openai/gpt-oss-120b"],
   ["mistral", "mistral-small-latest"],
   ["ollama", "gpt-oss:20b"],
+  ["groq", "openai/gpt-oss-120b"],
   ["openrouter", "meta-llama/llama-3.3-70b-instruct"],
   ["llm7", "fast"],
 ];
+// Rəy üçün ayrı kvota (ollama) birinci: groq-un dəqiqəlik token həddi yazılışa qalır
 export const REVIEW_MODELS = [
   ["xai", "grok-4.7"],
-  ["groq", "openai/gpt-oss-120b"],
   ["ollama", "gpt-oss:120b"],
+  ["groq", "openai/gpt-oss-120b"],
   ["mistral", "codestral-latest"],
   ["openrouter", "nvidia/nemotron-3-ultra-550b-a55b:free"],
 ];
@@ -268,5 +269,7 @@ export async function codePipeline({ message, history, baseSystem, uiLang = "az"
     }
   }
   if (check.errs.length) steps.push("errs:" + check.errs.length);
+  // bəzi modellər «‑» (U+2011) və dar boşluq yazır: kodda xəta verməsin deyə ASCII-yə çevrilir
+  answer = answer.replace(/[\u2010\u2011]/g, "-").replace(/[\u202F\u00A0]/g, " ");
   return { reply: answer, engine, steps, ms: Date.now() - t0, checklist };
 }
