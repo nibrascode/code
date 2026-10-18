@@ -1,4 +1,5 @@
 import { ARABIC_PRIVACY } from "@/lib/arabic-privacy";
+import { DOCS_PRIVACY } from "@/lib/docs-privacy";
 import { PDF_PRIVACY } from "@/lib/pdf-privacy";
 import { QR_PRIVACY } from "@/lib/qr-privacy";
 import type { Lang } from "@/lib/i18n";
@@ -92,19 +93,27 @@ function pending(name: string): Record<Lang, Policy> {
 }
 
 const PENDING: Record<string, Record<Lang, Policy>> = {
-  "nibras-docs": pending("Nibras Docs"),
   "nibras-plans": pending("Nibras Plans"),
 };
 
 export function AppPrivacyView({ slug, rows }: { slug: string; rows: StudioPrivacyRow[] }) {
   const { lang } = useI18n();
-  // Nibras PDF ships its policy with the code (src/lib/pdf-privacy.ts) so the page
-  // always matches the released app version; studio rows apply to other apps.
-  // Nibras QR ships its policy with the code too (src/lib/qr-privacy.ts, AZ + EN).
-  const codePolicy = slug === "nibras-pdf" || slug === "nibras-qr";
+  // Nibras PDF / QR / Docs ship policy with the code so the page always matches
+  // the released app; studio rows apply to other apps.
+  const codePolicy = slug === "nibras-pdf" || slug === "nibras-qr" || slug === "nibras-docs";
   const live = codePolicy ? undefined : rows.find((row) => row.slug === slug && row.lang === lang);
   const fallback =
-    slug === "nibras-pdf" ? PDF_PRIVACY[lang] : slug === "nibras-qr" ? (lang === "az" ? QR_PRIVACY.az : QR_PRIVACY.en) : slug === "nibras-arabic" ? ARABIC_PRIVACY : PENDING[slug]?.[lang] ?? null;
+    slug === "nibras-pdf"
+      ? PDF_PRIVACY[lang]
+      : slug === "nibras-docs"
+        ? DOCS_PRIVACY[lang]
+        : slug === "nibras-qr"
+          ? lang === "az"
+            ? QR_PRIVACY.az
+            : QR_PRIVACY.en
+          : slug === "nibras-arabic"
+            ? ARABIC_PRIVACY
+            : (PENDING[slug]?.[lang] ?? null);
   const copy = live
     ? {
         title: live.title,
