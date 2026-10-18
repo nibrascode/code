@@ -1,5 +1,5 @@
 import { AsyncLocalStorage } from "node:async_hooks";
-import { askProvider, askModel, aiConfig, configuredProviders } from "./_ai.js";
+import { askProvider, aiConfig } from "./_ai.js";
 import { codePipeline } from "./_codepipe.js";
 import { gameReply } from "./_game.js";
 import { compactHistory, AYAH_PROMPT, stripAyahMarkup, detectLang } from "./_text.js";
@@ -89,30 +89,6 @@ export default async function handler(req, res) {
 
   if (req.method === "OPTIONS") {
     res.status(204).end();
-    return;
-  }
-  // MÜVƏQQƏTİ diaqnostika: hansı provayderin işlədiyini yoxlamaq üçün (açar göstərilmir)
-  if (req.method === "POST" && req.body && req.body.probe === "providers-7c1") {
-    if (Array.isArray(req.body.models)) {
-      const outM = await Promise.all(req.body.models.slice(0, 30).map(async ([pv, model]) => {
-        const t = Date.now();
-        try {
-          const r = await aiConfig.run({ system: "You are a helpful assistant.", tokens: () => 600, timeout: () => AbortSignal.timeout(40000), temperature: 0.2 }, () => askModel(String(pv), String(model), [{ role: "user", text: "Write a Python function is_even(n). Reply only with code." }]));
-          return { pv, model, ok: !!r.ok, ms: Date.now() - t, sample: r.ok ? String(r.reply).slice(0, 80) : "", detail: r.ok ? "" : String(r.detail || "").slice(0, 140) };
-        } catch (e) { return { pv, model, ok: false, ms: Date.now() - t, detail: String(e && e.name) }; }
-      }));
-      res.status(200).json({ out: outM });
-      return;
-    }
-    const names = ["xai", "deepseek", "mistral-code", "groq", "cerebras", "github", "nvidia", "openrouter", "gemini", "sambanova", "hf", "scaleway", "ollama", "llm7", "airforce"];
-    const out = await Promise.all(names.map(async (n) => {
-      const t = Date.now();
-      try {
-        const r = await aiConfig.run({ system: "Reply with OK.", tokens: () => 20, timeout: (b) => AbortSignal.timeout(15000) }, () => askProvider(n, [{ role: "user", text: "Say OK" }], "Say OK"));
-        return { n, ok: !!r.ok, skipped: !!r.skipped, model: r.model, ms: Date.now() - t, detail: r.ok ? "" : String(r.detail || "").slice(0, 120) };
-      } catch (e) { return { n, ok: false, ms: Date.now() - t, detail: String(e && e.name) }; }
-    }));
-    res.status(200).json({ configured: configuredProviders(), out });
     return;
   }
   if (req.method !== "POST") {
@@ -321,8 +297,7 @@ export default async function handler(req, res) {
     const long = wantsLongCode(message, body.mode);
     const ctx = { long, deadline: started + 40000 };
     // Kod tapşırığı: təhlil → güclü modellə yazılış → yoxlama/düzəliş (yavaş, amma daha dəqiq). Alınmasa köhnə tək addımlı yol.
-    const evalPipe = body._pipe && body._pipe.key === "providers-7c1" ? body._pipe : null;
-    const codeTask = codingQ && (detailedCode || body.mode === "code") && body.mode !== "create" && !(evalPipe && evalPipe.off);
+    const codeTask = codingQ && (detailedCode || body.mode === "code") && body.mode !== "create";
     if (codeTask) {
       const pipe = await codePipeline({
         message,
@@ -331,13 +306,11 @@ export default async function handler(req, res) {
         baseSystem: SYSTEM + (siteAsk ? " " + BRAND_INFO : "") + langDirective(lang) + dateDirective(),
         uiLang: lang,
         deadline: started + PIPE_BUDGET_MS,
-        ...(evalPipe && Array.isArray(evalPipe.gen) ? { genModels: evalPipe.gen } : {}),
-        ...(evalPipe && evalPipe.noReview ? { noReview: true } : {}),
       }).catch(() => null);
       if (pipe && pipe.reply) {
         const aiReply = stripFabricated(cleaned(closeTruncatedFence(stripAyahMarkup(pipe.reply))), message, { siteAsk });
         if (aiReply.trim()) {
-          res.status(200).json({ success: true, reply: aiReply, usedAI: true, engine: pipe.engine, steps: pipe.steps, ...(kb ? { codeKb: kb.refs.length } : {}) });
+          res.status(200).json({ success: true, reply: aiReply, usedAI: true, ...(kb ? { codeKb: kb.refs.length } : {}) });
           return;
         }
       }
