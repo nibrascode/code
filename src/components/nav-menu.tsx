@@ -3,7 +3,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { ChevronDown } from "lucide-react";
 import { LIBRARY, type LibrarySection } from "@/lib/library";
 import { CODE_SAMPLE_HUB } from "@/lib/code-samples";
-import { programmingLocalePath } from "@/lib/programming-locales";
+import { programmingLocalePath } from "@/lib/programming-path";
 import { SEARCH, searchPath } from "@/lib/search-pages";
 import { COMPARE, comparePath } from "@/lib/learn-pages";
 import { PAKET, paketPath } from "@/lib/paket";

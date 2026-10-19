@@ -3,7 +3,7 @@ import { ProgrammingArticle } from "@/components/library-page";
 import { findCourse, HUBS, pagesOf, type CourseKind } from "@/lib/course/meta";
 import { useI18n } from "@/lib/i18n-context";
 import type { ProgrammingSection } from "@/lib/programming";
-import { programmingLocalePath } from "@/lib/programming-locales";
+import { programmingLocalePath } from "@/lib/programming-path";
 
 const UI = {
   author: { az: "Müəllif: Nibras Code", en: "Author: Nibras Code", tr: "Yazar: Nibras Code", ar: "المؤلف: Nibras Code", ru: "Автор: Nibras Code" },
