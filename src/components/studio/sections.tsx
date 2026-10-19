@@ -20,6 +20,7 @@ import { PANEL_LANGS, errorText, type SKey, type T } from "./i18n";
 import {
   IconAlert,
   IconApps,
+  IconCalendar,
   IconChat,
   IconCheck,
   IconChevron,
@@ -32,7 +33,6 @@ import {
   IconLock,
   IconMap,
   IconMoon,
-  IconOverview,
   IconPages,
   IconPlus,
   IconRefresh,
@@ -54,14 +54,39 @@ export type OverviewState = {
   reload: () => void;
 };
 
-const LOCALE: Record<Lang, string> = { az: "az-Latn-AZ", en: "en-GB", tr: "tr-TR", ar: "ar-u-nu-latn", ru: "ru-RU" };
+const LOCALE: Record<Lang, string> = { az: "az", en: "en-GB", tr: "tr-TR", ar: "ar-u-nu-latn", ru: "ru-RU" };
 
 export function fmtNum(lang: Lang, n: number) {
   return new Intl.NumberFormat(LOCALE[lang]).format(n);
 }
 
+const AZ_MONTHS = ["yanvar", "fevral", "mart", "aprel", "may", "iyun", "iyul", "avqust", "sentyabr", "oktyabr", "noyabr", "dekabr"];
+const AZ_SHORT = ["yan", "fev", "mar", "apr", "may", "iyn", "iyl", "avq", "sen", "okt", "noy", "dek"];
+const AZ_DAYS = ["bazar", "bazar ertəsi", "çərşənbə axşamı", "çərşənbə", "cümə axşamı", "cümə", "şənbə"];
+const AZ_DAYS_SHORT = ["B.", "B.e.", "Ç.a.", "Ç.", "C.a.", "C.", "Ş."];
+
+// Bəzi brauzerlərdə az lokal məlumatı yoxdur ("M10" kimi çıxır), ona görə azərbaycanca tarix əllə qurulur.
+function azDate(value: string | number | Date, opts: Intl.DateTimeFormatOptions) {
+  const parts = Object.fromEntries(
+    new Intl.DateTimeFormat("en-US", { timeZone: "Asia/Baku", year: "numeric", month: "numeric", day: "numeric", weekday: "short", hour: "2-digit", minute: "2-digit", hourCycle: "h23" })
+      .formatToParts(new Date(value))
+      .map((p) => [p.type, p.value]),
+  );
+  const m = Number(parts.month) - 1;
+  const wd = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].indexOf(parts.weekday);
+  const out: string[] = [];
+  if (opts.weekday) out.push(opts.weekday === "long" ? AZ_DAYS[wd] + "," : AZ_DAYS_SHORT[wd]);
+  if (opts.day) out.push(String(Number(parts.day)));
+  if (opts.month) out.push(opts.month === "short" ? AZ_SHORT[m] : AZ_MONTHS[m]);
+  if (opts.year) out.push(parts.year);
+  if (opts.hour) out.push(`${parts.hour}:${parts.minute}`);
+  const text = out.join(" ");
+  return opts.weekday === "long" ? text.charAt(0).toLocaleUpperCase("az") + text.slice(1) : text;
+}
+
 export function fmtDate(lang: Lang, value: string | number | Date, opts: Intl.DateTimeFormatOptions = { day: "numeric", month: "long", year: "numeric" }) {
   try {
+    if (lang === "az") return azDate(value, opts);
     return new Intl.DateTimeFormat(LOCALE[lang], { timeZone: "Asia/Baku", ...opts }).format(new Date(value));
   } catch {
     return String(value);
@@ -193,7 +218,7 @@ export function OverviewSection({ ov }: { ov: OverviewState }) {
         </div>
         <div className="nxa-hero-side">
           <span className="nxa-date">
-            <IconOverview size={16} />
+            <IconCalendar size={16} />
             <span>
               <small>{t("today")}</small>
               {fmtDate(lang, Date.now(), { weekday: "long", day: "numeric", month: "long" })}

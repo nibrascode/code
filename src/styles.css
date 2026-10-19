@@ -9957,3 +9957,32 @@ body.is-planner .site-backdrop {
     transition-duration: 0.001ms !important;
   }
 }
+
+.nxa :is(h1, h2, h3, h4) {
+  font-family: var(--nxa-font);
+}
+
+.nxa :is(.nxa-field, .nxa-inline-form, .nxa-toolbar) :is(input:not([type="checkbox"]), select),
+.nxa-filter {
+  height: 44px;
+  line-height: 1.3;
+}
+
+.nxa-kpi small::first-letter {
+  text-transform: uppercase;
+}
+
+.nxa-lang-mini {
+  width: 210px;
+  justify-content: flex-end;
+}
+
+.nxa-card {
+  align-content: start;
+}
+
+.nxa-card > .nxa-seg,
+.nxa-stack > .nxa-seg,
+.nxa-card > .nxa-btn {
+  justify-self: start;
+}

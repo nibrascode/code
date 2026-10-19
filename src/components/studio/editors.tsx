@@ -244,7 +244,7 @@ function AppForm({ initial, onBack }: { initial: StudioAppRow; onBack: () => voi
         ) : null}
       </PageHead>
       <div className="nxa-split">
-        <Card title={t("nav_apps")}>
+        <Card title={t("app_info")}>
           <div className="nxa-form">
             <Field label={t("name")}>
               <input value={draft.name} onChange={(e) => set("name", e.target.value)} maxLength={120} required />
@@ -286,7 +286,7 @@ function AppForm({ initial, onBack }: { initial: StudioAppRow; onBack: () => voi
             </label>
           </div>
         </Card>
-        <Card title="Store" sub={t("stores")}>
+        <Card title={t("stores_title")} sub={t("stores")}>
           <div className="nxa-form is-one">
             {STORE_FIELDS.map(([key, label]) => (
               <Field key={key} label={label}>

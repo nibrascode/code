@@ -100,6 +100,8 @@ const D = {
   summary: ["Qısa məlumat", "Short description", "Kısa açıklama", "وصف قصير", "Краткое описание"],
   icon_url: ["İkon ünvanı", "Icon URL", "Simge adresi", "رابط الأيقونة", "URL иконки"],
   sort: ["Sıra", "Order", "Sıra", "الترتيب", "Порядок"],
+  stores_title: ["Mağazalar", "Stores", "Mağazalar", "المتاجر", "Магазины"],
+  app_info: ["Əsas məlumat", "Details", "Temel bilgiler", "المعلومات الأساسية", "Основное"],
   stores: ["Mağaza keçidləri. Boş qalan saytda görünmür.", "Store links. Empty ones are hidden on the site.", "Mağaza bağlantıları. Boş olanlar sitede görünmez.", "روابط المتاجر. الفارغة لا تظهر في الموقع.", "Ссылки на магазины. Пустые не показываются."],
   url_bad: ["Keçid https:// ilə başlamalıdır.", "Links must start with https://.", "Bağlantı https:// ile başlamalı.", "يجب أن يبدأ الرابط بـ https://.", "Ссылка должна начинаться с https://."],
   visible: ["Saytda görünsün", "Visible on site", "Sitede görünsün", "ظاهر في الموقع", "Показывать на сайте"],
