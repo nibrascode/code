@@ -528,7 +528,7 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
             {SEARCH.movzu.heading[lang]}
           </a>
           <a className="footer-faq" href={faqPath(lang)}>
-            FAQ
+            {t("faq_nav")}
           </a>
           <NavMenu section="programming" />
         </nav>
