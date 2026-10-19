@@ -3,7 +3,6 @@ import { CodeSamplePage, ProgrammingArticle, PythonArticle } from "@/components/
 import { CourseHub, CourseLesson } from "@/components/course-page";
 import { isCodeSampleSlug } from "@/lib/code-samples";
 import { hubFor, isCourseHub, isCourseSlug } from "@/lib/course/meta";
-import { findProgrammingLocale } from "@/lib/programming-locales";
 import { loadStudioBundle } from "@/lib/studio.functions";
 
 export const Route = createFileRoute("/ar/programming/$slug")({
@@ -14,10 +13,11 @@ export const Route = createFileRoute("/ar/programming/$slug")({
       const { loadCourseSections } = await import("@/lib/course/load");
       return { sample: null, page: null, privacy: [], course: { slug: params.slug, sections: await loadCourseSections(params.slug, "ar") } };
     }
-    const page = findProgrammingLocale("ar", params.slug);
+    const privacy = params.slug === "python" ? (await loadStudioBundle()).privacy : [];
+    const { loadProgrammingView } = await import("@/lib/article-load");
+    const page = await loadProgrammingView("ar", params.slug, privacy);
     if (!page) throw notFound();
-    const studio = await loadStudioBundle();
-    return { sample: null, page, privacy: studio.privacy, course: null };
+    return { sample: null, page, privacy, course: null };
   },
   component: LocaleRoute,
 });
@@ -30,6 +30,6 @@ function LocaleRoute() {
     return isCourseHub(course.slug) && kind ? <CourseHub kind={kind} /> : <CourseLesson slug={course.slug} sections={course.sections} />;
   }
   if (!page) throw notFound();
-  if (page.slug === "python") return <PythonArticle privacy={privacy} />;
+  if (page.slug === "python") return <PythonArticle privacy={privacy} title={page.title} sections={page.sections} bakedLang="ar" />;
   return <ProgrammingArticle slug={page.slug} title={page.title} sections={page.sections} />;
 }

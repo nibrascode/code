@@ -1,17 +1,16 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, BookOpen, Boxes, Braces, Briefcase, Bug, CircleHelp, Code, Database, FileCode, GitCompare, GraduationCap, ListChecks, MessageCircleQuestion, Package, Server, Shield, Sparkles, Terminal, Wrench } from "lucide-react";
 import { ApkLab } from "@/components/apk-lab";
 import { LIBRARY, type LibrarySection, type LibraryTopic } from "@/lib/library";
 import { CODE_SAMPLE_HUB, CODE_SAMPLES, SITE_CODE } from "@/lib/code-samples";
-import { findProgramming, type ProgrammingSection } from "@/lib/programming";
+import type { ProgrammingSection } from "@/lib/programming";
 import { HUBS, pagesOf } from "@/lib/course/meta";
-import { findProgrammingLocale, programmingLocalePath } from "@/lib/programming-locales";
+import { programmingLocalePath } from "@/lib/programming-path";
 import { SEARCH, searchPath } from "@/lib/search-pages";
 import { COMPARE, comparePath } from "@/lib/learn-pages";
 import { PAKET, paketPath } from "@/lib/paket";
 import { TOOLS, TOOLS_PAGE, pageTools, toolPath } from "@/lib/tools";
-import { pythonSections } from "@/lib/lessons";
 import { libItems, libParagraphs, savedLib, type LibGroup } from "@/lib/library-admin";
 import { articlesForTopic, findResourceTopic } from "@/lib/resource-topics";
 import type { StudioPrivacyRow } from "@/lib/studio";
@@ -923,28 +922,68 @@ export function ProgrammingArticle({
   );
 }
 
-export function PythonArticle({ privacy }: { privacy: readonly StudioPrivacyRow[] }) {
+export function PythonArticle({
+  privacy,
+  title,
+  sections,
+  bakedLang,
+}: {
+  privacy: readonly StudioPrivacyRow[];
+  title: string;
+  sections: readonly ProgrammingSection[];
+  bakedLang: Lang;
+}) {
   const { lang } = useI18n();
-  const page = findProgramming("python");
-  const title = page?.seo[lang]?.title.replace(/ — Nibras Code$/, "") ?? page?.title ?? "Python";
-  return <ProgrammingArticle slug="python" title={title} sections={pythonSections(lang, privacy)} />;
+  const [view, setView] = useState({ title, sections });
+  useEffect(() => {
+    if (lang === bakedLang) {
+      setView((current) => (current.title === title && current.sections === sections ? current : { title, sections }));
+      return;
+    }
+    let live = true;
+    import("@/lib/article-load")
+      .then((mod) => mod.loadProgrammingView(lang, "python", privacy))
+      .then((next) => {
+        if (live && next) setView({ title: next.title, sections: next.sections });
+      });
+    return () => {
+      live = false;
+    };
+  }, [lang, bakedLang, privacy, title, sections]);
+  return <ProgrammingArticle slug="python" title={view.title} sections={view.sections} />;
 }
 
 export function LibraryTopicPage({
   section,
   topic,
   rows = [],
+  article = null,
 }: {
   section: LibrarySection;
   topic: LibraryTopic;
   rows?: readonly StudioPrivacyRow[];
+  article?: { title: string; sections: readonly ProgrammingSection[] } | null;
 }) {
   const { t, lang } = useI18n();
-  const page = section === "programming" && topic.slug !== "python" ? findProgramming(topic.slug) : null;
-  if (page) {
-    const locale = lang === "az" ? null : findProgrammingLocale(lang, topic.slug);
-    const title = locale?.title ?? page.seo[lang]?.title.replace(/ — Nibras Code$/, "") ?? page.title;
-    return <ProgrammingArticle slug={topic.slug} title={title} sections={locale?.sections ?? page.sections} />;
+  const [shown, setShown] = useState(article);
+  useEffect(() => {
+    if (section !== "programming" || topic.slug === "python") return;
+    if (!article || lang === "az") {
+      setShown(article);
+      return;
+    }
+    let live = true;
+    import("@/lib/article-load")
+      .then((mod) => mod.loadProgrammingView(lang, topic.slug, rows))
+      .then((view) => {
+        if (live && view) setShown(view);
+      });
+    return () => {
+      live = false;
+    };
+  }, [section, topic.slug, lang, rows, article]);
+  if (section === "programming" && topic.slug !== "python" && shown) {
+    return <ProgrammingArticle slug={topic.slug} title={shown.title} sections={shown.sections} />;
   }
   const group: LibGroup | null = section === "resources" ? "resurs" : section === "guides" ? "guide" : null;
   const saved = group ? savedLib(group, topic.slug, lang, rows) : null;

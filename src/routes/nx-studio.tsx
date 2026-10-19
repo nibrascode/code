@@ -51,6 +51,7 @@ import {
 } from "@/lib/studio";
 import { loadStudioBundle, syncStudioToGithub } from "@/lib/studio.functions";
 import { PYTHON_LESSONS, lessonSlug, pythonSections, slugifyLesson } from "@/lib/lessons";
+import type { ProgrammingSection } from "@/lib/programming";
 import { LIB_GROUPS, libDefaults, libItems, libSlug, savedLib, type LibGroup } from "@/lib/library-admin";
 
 export const Route = createFileRoute("/nx-studio")({
@@ -1084,6 +1085,7 @@ function UnutmaEditor() {
 
 function LessonsEditor() {
   const [rows, setRows] = useState<StudioPrivacyRow[]>([]);
+  const [sections, setSections] = useState<readonly ProgrammingSection[]>(() => pythonSections("az", []));
   const [id, setId] = useState("");
   const [lang, setLang] = useState<Lang>("az");
   const [title, setTitle] = useState("");
@@ -1098,7 +1100,20 @@ function LessonsEditor() {
 
   useEffect(load, []);
 
-  const sections = pythonSections("az", rows);
+  useEffect(() => {
+    let live = true;
+    import("@/lib/article-load")
+      .then((mod) => mod.loadPythonEditorSections(rows))
+      .then((next) => {
+        if (live) setSections(next);
+      })
+      .catch(() => {
+        if (live) setSections(pythonSections("az", rows));
+      });
+    return () => {
+      live = false;
+    };
+  }, [rows]);
 
   useEffect(() => {
     if (!id) return;

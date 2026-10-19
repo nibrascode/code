@@ -1,6 +1,5 @@
 import type { Lang } from "@/lib/i18n";
-import { findProgramming, type ProgrammingSection } from "@/lib/programming";
-import { findProgrammingLocale } from "@/lib/programming-locales";
+import type { ProgrammingSection } from "@/lib/programming";
 import type { StudioPrivacyRow } from "@/lib/studio";
 
 export const LESSON_PREFIX = "lesson-python-";
@@ -123,10 +122,13 @@ export function slugifyLesson(value: string) {
   return raw || "sehife";
 }
 
-export function pythonSections(lang: Lang, rows: readonly StudioPrivacyRow[]): ProgrammingSection[] {
+export function pythonSections(
+  lang: Lang,
+  rows: readonly StudioPrivacyRow[],
+  baked: readonly ProgrammingSection[] = [],
+  azBaked: readonly ProgrammingSection[] = baked,
+): ProgrammingSection[] {
   const saved = rows.filter((row) => row.slug.startsWith(LESSON_PREFIX));
-  const azBaked = findProgramming("python")?.sections ?? [];
-  const baked = lang === "az" ? azBaked : (findProgrammingLocale(lang, "python")?.sections ?? []);
   const ids = [...PYTHON_LESSONS.map((item) => item.id), ...azBaked.map((item) => item.id), ...baked.map((item) => item.id)];
   for (const row of saved) {
     const id = lessonId(row.slug);
