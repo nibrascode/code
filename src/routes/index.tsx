@@ -276,7 +276,7 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
         </Link>
         <nav className="nx-links">
           <a href={localeHref(lang, "/about")}>{t("nav_about")}</a>
-          <Link to="/unutma">{t("remind_btn")}</Link>
+          <a href={localeHref(lang, "/unutma")}>{t("remind_btn")}</a>
           <a href={localeHref(lang, "/contact")}>{t("nx_nav_contact")}</a>
           <LanguageSwitch />
         </nav>

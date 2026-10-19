@@ -1,5 +1,6 @@
 import { createFileRoute, Outlet, useRouterState } from "@tanstack/react-router";
 import { useI18n } from "@/lib/i18n-context";
+import { localeHref } from "@/lib/locale-path";
 import type { Lang } from "@/lib/i18n";
 
 const LEAD: Record<Lang, string> = {
@@ -152,7 +153,7 @@ function PrivacyPage() {
       <ul className="lib-list">
         {APPS.map(([slug, name]) => (
           <li key={slug}>
-            <a href={`/privacy/${slug}`}>{name}</a>
+            <a href={localeHref(lang, `/privacy/${slug}`)}>{name}</a>
           </li>
         ))}
       </ul>

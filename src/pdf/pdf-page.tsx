@@ -75,7 +75,7 @@ export function PdfPage({ tool }: { tool: ToolId | null }) {
           </nav>
           <nav className="flex gap-4 text-sm text-muted">
             <a href={`${prefix}/apps/nibras-pdf`} className="transition hover:text-fg">{t.appPage}</a>
-            <a href="/privacy/nibras-pdf" className="transition hover:text-fg">{t.privacy}</a>
+            <a href={localeHref(lang, "/privacy/nibras-pdf")} className="transition hover:text-fg">{t.privacy}</a>
           </nav>
         </div>
         <div className="flex flex-wrap items-center gap-x-5 gap-y-3">

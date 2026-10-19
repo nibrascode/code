@@ -5,6 +5,7 @@ import { QR_PRIVACY } from "@/lib/qr-privacy";
 import type { Lang } from "@/lib/i18n";
 import type { StudioPrivacyRow } from "@/lib/studio";
 import { useI18n } from "@/lib/i18n-context";
+import { localeHref } from "@/lib/locale-path";
 
 function RichText({ text }: { text: string }) {
   const parts = text.split(/(nibrascode@gmail\.com|nibrascode\.com)/gi);
@@ -144,7 +145,7 @@ export function AppPrivacyView({ slug, rows }: { slug: string; rows: StudioPriva
       )}
       {slug === "nibras-qr" ? (
         <p>
-          <a href="/privacy/nibras-qr/delete-account">
+          <a href={localeHref(lang, "/privacy/nibras-qr/delete-account")}>
             {lang === "az" ? "Hesabın silinməsi — Nibras QR" : "Delete your account — Nibras QR"}
           </a>
         </p>

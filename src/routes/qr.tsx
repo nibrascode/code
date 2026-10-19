@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { lazy, Suspense, useEffect, useState } from "react";
 import { useI18n } from "@/qr/lib/i18n";
+import { localeHref } from "@/lib/locale-path";
 import { PageAssistant } from "@/components/page-assistant";
 
 // The whole tool (generator, designer, exports) is its own chunk.
@@ -11,7 +12,7 @@ export const Route = createFileRoute("/qr")({
 });
 
 export function QrRoutePage() {
-  const { w } = useI18n();
+  const { w, lang } = useI18n();
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
   return (
@@ -23,10 +24,10 @@ export function QrRoutePage() {
           <p className="mt-1 text-sm text-muted">{w.lead}</p>
         </div>
         <nav className="flex w-full gap-4 text-sm text-muted sm:w-auto">
-          <a href="/apps/nibras-qr" className="hover:text-fg">
+          <a href={localeHref(lang, "/apps/nibras-qr")} className="hover:text-fg">
             {w.appPage}
           </a>
-          <a href="/privacy/nibras-qr" className="hover:text-fg">
+          <a href={localeHref(lang, "/privacy/nibras-qr")} className="hover:text-fg">
             {w.privacy}
           </a>
         </nav>

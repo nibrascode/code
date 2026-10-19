@@ -21,6 +21,11 @@
       "permanent": true
     },
     {
+      "source": "/:lang(en|tr|ar|ru)/:page(resources|guides|unutma|privacy|programming)",
+      "destination": "/:page?lang=:lang",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
       "has": [
         {
@@ -176,24 +181,6 @@
           "value": "max-age=63072000; includeSubDomains"
         }
       ]
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/en/calc",
-      "destination": "/calc/index.html"
-    },
-    {
-      "source": "/tr/calc",
-      "destination": "/calc/index.html"
-    },
-    {
-      "source": "/ar/calc",
-      "destination": "/calc/index.html"
-    },
-    {
-      "source": "/ru/calc",
-      "destination": "/calc/index.html"
     }
   ],
   "functions": {

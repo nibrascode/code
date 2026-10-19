@@ -52,11 +52,11 @@ export function SimpleAppPage({ app, live }: { app: StudioApp; live?: StudioAppR
         </a>
         <AppDownload app={app} live={live} />
         {app.slug === "nibras-qr" ? (
-          <a href="/qr" className="privacy-btn">
+          <a href={localeHref(lang, "/qr")} className="privacy-btn">
             {t("qr_web_btn")}
           </a>
         ) : null}
-        <a href={`/privacy/${app.slug}`} className="privacy-btn">
+        <a href={localeHref(lang, `/privacy/${app.slug}`)} className="privacy-btn">
           {t("privacy_btn")}
         </a>
       </div>

@@ -1,5 +1,6 @@
 import type { Lang } from "@/lib/i18n";
 import { SEARCH, searchPath, searchTopicPath, type SearchKind } from "@/lib/search-pages";
+import { localeHref } from "@/lib/locale-path";
 import type { ApkError } from "@/lib/apk-errors-types";
 import { APK_LABELS } from "@/lib/apk-errors-types";
 import { TOOLS, TOOLS_PAGE, pageTools, toolPath } from "@/lib/tools";
@@ -26,7 +27,7 @@ export function SearchIndex({ kind, lang }: { kind: SearchKind; lang: Lang }) {
       <h1>{section.heading[lang]}</h1>
       <p className="why-lead">{section.intro[lang]}</p>
       <nav className="faq-links" aria-label={section.heading[lang]}>
-        <a href="/programming">{lang === "ar" ? "البرمجة" : lang === "ru" ? "Программирование" : lang === "tr" ? "Programlama" : lang === "en" ? "Programming" : "Proqramlaşdırma"}</a>
+        <a href={localeHref(lang, "/programming")}>{lang === "ar" ? "البرمجة" : lang === "ru" ? "Программирование" : lang === "tr" ? "Programlama" : lang === "en" ? "Programming" : "Proqramlaşdırma"}</a>
         <a href={searchPath(lang, other)}>{SEARCH[other].heading[lang]}</a>
       </nav>
       <ul className="lib-list">

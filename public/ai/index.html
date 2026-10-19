@@ -3263,6 +3263,20 @@
       menuBtn.setAttribute("title", t("chats"));
       drawer.setAttribute("aria-label", t("chats"));
       document.getElementById("dclose").setAttribute("aria-label", t("close"));
+      const chrome = {
+        az: ["Premium bağlıdır", "Fayl", "Göndər"],
+        en: ["Premium is off", "File", "Send"],
+        tr: ["Premium kapalı", "Dosya", "Gönder"],
+        ar: ["بريميوم مغلق", "ملف", "أرسل"],
+        ru: ["Премиум выключен", "Файл", "Отправить"]
+      }[code];
+      if (chrome) {
+        document.getElementById("prem").setAttribute("aria-label", chrome[0]);
+        document.getElementById("clip").setAttribute("aria-label", chrome[1]);
+        document.getElementById("btn").setAttribute("aria-label", chrome[2]);
+      }
+      const brand = document.querySelector(".brand");
+      if (brand) brand.setAttribute("href", code === "az" ? "/" : "/" + code);
       fillAbout();
       setMode(mode);
       if (typeof renderList === "function") renderList();

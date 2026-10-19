@@ -73,7 +73,7 @@ function ExtraApp({ row }: { row: StudioAppRow }) {
           <ArrowUpRight className="rtl-flip size-3.5" />
         </a>
         <AppDownload app={app} live={row} />
-        <a href={`/privacy/${row.slug}`} className="privacy-btn">
+        <a href={localeHref(lang, `/privacy/${row.slug}`)} className="privacy-btn">
           {t("privacy_btn")}
         </a>
       </div>

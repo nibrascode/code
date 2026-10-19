@@ -18,7 +18,18 @@ export function homePath(lang: Lang) {
 }
 
 export function localeHref(lang: Lang, path: string) {
-  const bare = stripLocalePrefix(path).path;
-  if (!isSplitPage(bare) || lang === "az") return bare;
-  return `/${lang}${bare}`;
+  const hashAt = path.indexOf("#");
+  const hash = hashAt >= 0 ? path.slice(hashAt) : "";
+  const before = hashAt >= 0 ? path.slice(0, hashAt) : path;
+  const queryAt = before.indexOf("?");
+  const pathname = queryAt >= 0 ? before.slice(0, queryAt) : before;
+  const query = queryAt >= 0 ? before.slice(queryAt + 1) : "";
+  const bare = stripLocalePrefix(pathname).path;
+  if (lang === "az" || isSplitPage(bare)) {
+    const next = lang !== "az" && isSplitPage(bare) ? `/${lang}${bare}` : bare;
+    return `${next}${query ? `?${query}` : ""}${hash}`;
+  }
+  const params = new URLSearchParams(query);
+  if (!params.has("lang")) params.set("lang", lang);
+  return `${bare}?${params.toString()}${hash}`;
 }

@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, useRouterState } from "@tanstack/react-router";
+import { useRouterState } from "@tanstack/react-router";
 import { ChevronDown } from "lucide-react";
 import { LIBRARY, type LibrarySection } from "@/lib/library";
 import { CODE_SAMPLE_HUB } from "@/lib/code-samples";
-import { programmingLocalePath } from "@/lib/programming-path";
+import { hasProgrammingLocale, programmingLocalePath } from "@/lib/programming-path";
 import { SEARCH, searchPath } from "@/lib/search-pages";
 import { COMPARE, comparePath } from "@/lib/learn-pages";
 import { PAKET, paketPath } from "@/lib/paket";
+import { localeHref, stripLocalePrefix } from "@/lib/locale-path";
 import { useI18n } from "@/lib/i18n-context";
 import { cn } from "@/lib/utils";
 
@@ -15,10 +16,11 @@ export function NavMenu({ section }: { section: LibrarySection }) {
   const page = LIBRARY[section];
   const path = `/${section}` as const;
   const pathname = useRouterState({ select: (state) => state.location.pathname });
+  const bare = stripLocalePrefix(pathname).path;
   const active =
-    pathname === path ||
-    pathname.startsWith(`${path}/`) ||
-    (section === "resources" && (pathname.startsWith("/resurslar") || pathname.startsWith("/ru/resources")));
+    bare === path ||
+    bare.startsWith(`${path}/`) ||
+    (section === "resources" && (bare.startsWith("/resurslar") || pathname.startsWith("/ru/resources")));
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
 
@@ -49,27 +51,29 @@ export function NavMenu({ section }: { section: LibrarySection }) {
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
-      <Link to={path}>{t(page.title)}</Link>
+      <a href={localeHref(lang, path)}>{t(page.title)}</a>
       <button type="button" aria-expanded={open} aria-label={t(page.title)} onClick={() => setOpen((value) => !value)}>
         <ChevronDown className={cn("nav-chev", open && "is-open")} />
       </button>
       {open ? (
         <div className="nav-pop">
-          {page.topics.map((topic) =>
-            section === "resources" && topic.slug === "pdf" ? (
-              <Link
-                key={topic.slug}
-                to={lang === "ru" ? "/ru/resources/$slug" : "/resurslar/$slug"}
-                params={{ slug: "pdf" }}
-              >
+          {page.topics.map((topic) => {
+            const href =
+              section === "programming"
+                ? lang !== "az" && hasProgrammingLocale(lang, topic.slug)
+                  ? programmingLocalePath(lang, topic.slug)
+                  : localeHref(lang, `/programming/${topic.slug}`)
+                : section === "resources" && topic.slug === "pdf"
+                  ? lang === "ru"
+                    ? "/ru/resources/pdf"
+                    : localeHref(lang, "/resurslar/pdf")
+                  : localeHref(lang, `/${section}/${topic.slug}`);
+            return (
+              <a key={topic.slug} href={href}>
                 {t(topic.label)}
-              </Link>
-            ) : (
-              <Link key={topic.slug} to={`/${section}/$topic`} params={{ topic: topic.slug }}>
-                {t(topic.label)}
-              </Link>
-            ),
-          )}
+              </a>
+            );
+          })}
           {section === "programming" ? (
             <>
               <a href={searchPath(lang, "soz")}>{SEARCH.soz.heading[lang]}</a>

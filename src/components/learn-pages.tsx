@@ -6,6 +6,7 @@ import {
   compareTopicPath,
 } from "@/lib/learn-pages";
 import { SEARCH, searchPath } from "@/lib/search-pages";
+import { localeHref } from "@/lib/locale-path";
 
 const PROG: Record<Lang, string> = {
   az: "Proqramlaşdırma",
@@ -28,7 +29,7 @@ export function CompareIndex({ lang }: { lang: Lang }) {
       <nav className="faq-links" aria-label={COMPARE.heading[lang]}>
         <a href={searchPath(lang, "soz")}>{SEARCH.soz.heading[lang]}</a>
         <a href={searchPath(lang, "xeta")}>{SEARCH.xeta.heading[lang]}</a>
-        <a href="/programming">{PROG[lang]}</a>
+        <a href={localeHref(lang, "/programming")}>{PROG[lang]}</a>
       </nav>
       <ul className="lib-list">
         {COMPARE_ITEMS.map((item) => (

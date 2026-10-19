@@ -1,12 +1,11 @@
 import { useEffect, useState, type ReactNode } from "react";
-import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, BookOpen, Boxes, Braces, Briefcase, Bug, CircleHelp, Code, Database, FileCode, GitCompare, GraduationCap, ListChecks, MessageCircleQuestion, Package, Server, Shield, Sparkles, Terminal, Wrench } from "lucide-react";
 import { ApkLab } from "@/components/apk-lab";
 import { LIBRARY, type LibrarySection, type LibraryTopic } from "@/lib/library";
 import { CODE_SAMPLE_HUB, CODE_SAMPLES, SITE_CODE } from "@/lib/code-samples";
 import type { ProgrammingSection } from "@/lib/programming";
 import { HUBS, pagesOf } from "@/lib/course/meta";
-import { programmingLocalePath } from "@/lib/programming-path";
+import { hasProgrammingLocale, programmingLocalePath } from "@/lib/programming-path";
 import { SEARCH, searchPath } from "@/lib/search-pages";
 import { COMPARE, comparePath } from "@/lib/learn-pages";
 import { PAKET, paketPath } from "@/lib/paket";
@@ -221,14 +220,16 @@ const DEV_TRY: Record<string, string> = {
   javascript: "https://dev.nibrascode.com/javascript",
 };
 
-function topicLink(section: LibrarySection, slug: string, lang: string) {
+function programmingHref(lang: Lang, slug: string) {
+  if (lang !== "az" && hasProgrammingLocale(lang, slug)) return programmingLocalePath(lang, slug);
+  return localeHref(lang, `/programming/${slug}`);
+}
+
+function topicHref(section: LibrarySection, slug: string, lang: Lang) {
   if (section === "resources" && slug === "pdf") {
-    return {
-      to: (lang === "ru" ? "/ru/resources/$slug" : "/resurslar/$slug") as "/ru/resources/$slug" | "/resurslar/$slug",
-      params: { slug: "pdf" },
-    };
+    return lang === "ru" ? "/ru/resources/pdf" : localeHref(lang, "/resurslar/pdf");
   }
-  return { to: `/${section}/$topic` as const, params: { topic: slug } };
+  return localeHref(lang, `/${section}/${slug}`);
 }
 
 export function LibraryIndex({
@@ -282,7 +283,7 @@ export function LibraryIndex({
               <li key={step.slug}>
                 <a
                   className={step.slug === "html-css" ? "step-html" : step.slug === "python" ? "step-py" : "step-ai"}
-                  href={step.slug === "ai" ? localeHref(lang, "/ai") : programmingLocalePath(lang, step.slug)}
+                  href={step.slug === "ai" ? localeHref(lang, "/ai") : programmingHref(lang, step.slug)}
                 >
                   <i>{index + 1}</i>
                   <span className="step-copy">
@@ -328,7 +329,7 @@ export function LibraryIndex({
             const label = t(topic.label);
             return (
               <li key={topic.slug}>
-                <a href={programmingLocalePath(lang, topic.slug)}>
+                <a href={programmingHref(lang, topic.slug)}>
                   <span className="topic-name">
                     {(() => {
                       const Icon = topicIcon(topic.slug);
@@ -341,13 +342,13 @@ export function LibraryIndex({
               </li>
             );
           }
-          const link = topicLink(section, topic.slug, lang);
+          const href = topicHref(section, topic.slug, lang);
           return (
             <li key={topic.slug}>
-              <Link to={link.to} params={link.params}>
+              <a href={href}>
                 {t(topic.label)}
                 <ArrowUpRight className="rtl-flip size-4" />
-              </Link>
+              </a>
             </li>
           );
         })}
@@ -374,7 +375,7 @@ export function LibraryIndex({
               .filter((topic) => t(topic.label).length > 16)
               .map((topic) => (
                 <li key={topic.slug} className="is-wide">
-                  <a href={programmingLocalePath(lang, topic.slug)}>
+                  <a href={programmingHref(lang, topic.slug)}>
                     <span className="topic-name">
                       {(() => {
                         const Icon = topicIcon(topic.slug);
@@ -390,15 +391,15 @@ export function LibraryIndex({
         {extras.map((item) => (
           <li key={item.id}>
             {section === "resources" ? (
-              <Link to="/resurslar/$slug" params={{ slug: item.id }}>
+              <a href={localeHref(lang, `/resurslar/${item.id}`)}>
                 {item.title}
                 <ArrowUpRight className="rtl-flip size-4" />
-              </Link>
+              </a>
             ) : (
-              <Link to="/guides/$topic" params={{ topic: item.id }}>
+              <a href={localeHref(lang, `/guides/${item.id}`)}>
                 {item.title}
                 <ArrowUpRight className="rtl-flip size-4" />
-              </Link>
+              </a>
             )}
           </li>
         ))}
@@ -725,7 +726,7 @@ export function CodeSamplePage({ slug }: { slug: string }) {
         {item ? (
           <a href={parentHref}>{parentLabel}</a>
         ) : (
-          <Link to="/programming">{t("nav_programming")}</Link>
+          <a href={localeHref(lang, "/programming")}>{t("nav_programming")}</a>
         )}
       </p>
       <h1>{item ? t(item.label) : t("code_samples")}</h1>
@@ -777,7 +778,7 @@ export function ProgrammingArticle({
       <div className="why-glow" aria-hidden="true" />
       <p className="eyebrow">
         <i />
-        <Link to="/programming">{t("nav_programming")}</Link>
+        <a href={localeHref(lang, "/programming")}>{t("nav_programming")}</a>
       </p>
       <h1>
         {slug ? (
@@ -1004,7 +1005,7 @@ export function LibraryTopicPage({
       <div className="why-glow" aria-hidden="true" />
       <p className="eyebrow">
         <i />
-        <Link to={`/${section}`}>{t(LIBRARY[section].title)}</Link>
+        <a href={localeHref(lang, `/${section}`)}>{t(LIBRARY[section].title)}</a>
       </p>
       <h1>{heading}</h1>
       {paragraphs.map((paragraph) => (
@@ -1016,10 +1017,10 @@ export function LibraryTopicPage({
           <ul className="lib-list">
             {articles.map((article) => (
               <li key={article.slug}>
-                <Link to="/resources/$topic/$article" params={{ topic: topic.slug, article: article.slug }}>
+                <a href={localeHref(lang, `/resources/${topic.slug}/${article.slug}`)}>
                   {article.title[lang]}
                   <ArrowUpRight className="rtl-flip size-4" />
-                </Link>
+                </a>
               </li>
             ))}
           </ul>
