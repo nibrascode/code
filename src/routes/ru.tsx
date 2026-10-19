@@ -1,9 +1,14 @@
 import { createFileRoute, Outlet, useRouterState } from "@tanstack/react-router";
 import { HomeView } from "@/routes/index";
-import { loadStudioBundle } from "@/lib/studio.functions";
+import { loadHomeApps } from "@/lib/studio.functions";
+import type { StudioAppRow } from "@/lib/studio";
 
 export const Route = createFileRoute("/ru")({
-  loader: () => loadStudioBundle(),
+  loader: ({ location }) => {
+    const path = location.pathname.replace(/\/$/, "") || "/";
+    if (path !== "/ru") return { apps: [] as StudioAppRow[] };
+    return loadHomeApps();
+  },
   component: Page,
 });
 

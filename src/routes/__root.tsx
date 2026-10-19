@@ -9,7 +9,7 @@ import { AppSuggest } from "@/components/app-suggest";
 import appCss from "../styles.css?url";
 import { buildHead, langFromLocation, pageUrl, SITE } from "@/lib/seo";
 import { pdfPairFromPath } from "@/lib/pdf-pairs";
-import { findProgrammingLocale, programmingLocalePath, programmingFromPath } from "@/lib/programming-locales";
+import { hasProgrammingLocale, programmingLocalePath, programmingFromPath } from "@/lib/programming-path";
 import { isCodeSampleSlug } from "@/lib/code-samples";
 import { isCourseSlug } from "@/lib/course/meta";
 import { LANGS, type Lang } from "@/lib/i18n";
@@ -42,16 +42,6 @@ export const Route = createRootRoute({
         { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
         { rel: "manifest", href: "/manifest.webmanifest" },
         { rel: "stylesheet", href: appCss },
-        { rel: "preconnect", href: "https://fonts.googleapis.com" },
-        {
-          rel: "preconnect",
-          href: "https://fonts.gstatic.com",
-          crossOrigin: "anonymous" as const,
-        },
-        {
-          rel: "stylesheet",
-          href: "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Scheherazade+New:wght@500;700&family=Syne:wght@500;600;700;800&display=swap",
-        },
       ],
       scripts: [
         {
@@ -196,10 +186,10 @@ function SeoLinks() {
       </>
     );
   }
-  if (programming && (isCodeSampleSlug(programming.slug) || isCourseSlug(programming.slug) || programming.lang !== "az" || findProgrammingLocale("en", programming.slug))) {
+  if (programming && (isCodeSampleSlug(programming.slug) || isCourseSlug(programming.slug) || programming.lang !== "az" || hasProgrammingLocale("en", programming.slug))) {
     const canonical = programmingLocalePath(programming.lang, programming.slug);
     const alternates = (["az", "en", "tr", "ar", "ru"] as const).filter(
-      (code) => code === "az" || isCodeSampleSlug(programming.slug) || isCourseSlug(programming.slug) || findProgrammingLocale(code, programming.slug),
+      (code) => code === "az" || isCodeSampleSlug(programming.slug) || isCourseSlug(programming.slug) || hasProgrammingLocale(code, programming.slug),
     );
     return (
       <>

@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "./fonts.css";
 
 @theme {
   --font-sans: "DM Sans", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;

@@ -13,6 +13,7 @@ import { PYTHON_RU } from "@/lib/python-ru";
 import { PYTHON_TR } from "@/lib/python-tr";
 import { ALL_STACK } from "@/lib/stack-all";
 import { withStackWorking } from "@/lib/stack-working";
+export { programmingFromPath, programmingLocalePath } from "@/lib/programming-path";
 
 export type ProgrammingLocale = {
   lang: Exclude<Lang, "az">;
@@ -63,20 +64,6 @@ const LOCALES: readonly ProgrammingLocale[] = [
     })),
   ),
 ];
-
-export function programmingLocalePath(lang: Lang, slug: string) {
-  if (lang === "az") return `/programming/${slug}`;
-  return `/${lang}/programming/${slug}`;
-}
-
-export function programmingFromPath(pathname: string) {
-  const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname;
-  const prefixed = path.match(/^\/(en|tr|ar|ru)\/programming\/([^/]+)$/);
-  if (prefixed) return { lang: prefixed[1] as Exclude<Lang, "az">, slug: prefixed[2] };
-  const az = path.match(/^\/programming\/([^/]+)$/);
-  if (az) return { lang: "az" as const, slug: az[1] };
-  return null;
-}
 
 export function findProgrammingLocale(lang: Lang, slug: string) {
   if (lang === "az") return null;

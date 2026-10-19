@@ -14,11 +14,11 @@ import { toolsPath, TOOLS_PAGE } from "@/lib/tools";
 import { useI18n } from "@/lib/i18n-context";
 import { statusText, type StudioAppRow } from "@/lib/studio";
 import { appStoreLinks, STUDIO_APPS } from "@/lib/apps";
-import { loadStudioBundle } from "@/lib/studio.functions";
+import { loadHomeApps } from "@/lib/studio.functions";
 import type { Lang, TKey } from "@/lib/i18n";
 
 export const Route = createFileRoute("/")({
-  loader: () => loadStudioBundle(),
+  loader: () => loadHomeApps(),
   component: Home,
 });
 
@@ -48,42 +48,42 @@ const CARDS: {
   {
     slug: "nibras-arabic",
     name: "Nibras Arabic",
-    icon: "/apps/nibras-arabic.jpg",
+    icon: "/apps/nibras-arabic.webp",
     desc: "nx_ar_d",
     chips: ["nx_ar_1", "nx_ar_2", "nx_ar_3"],
   },
   {
     slug: "nibras-pdf",
     name: "Nibras PDF",
-    icon: "/apps/nibras-pdf.jpg",
+    icon: "/apps/nibras-pdf.webp",
     desc: "nx_pdf_d",
     chips: ["nx_pdf_1", "nx_pdf_2", "nx_pdf_3"],
   },
   {
     slug: "nibras-qr",
     name: "Nibras QR",
-    icon: "/apps/nibras-qr-v2.jpg",
+    icon: "/apps/nibras-qr-v2.webp",
     desc: "nx_qr_d",
     chips: ["nx_qr_1", "nx_qr_2", "nx_qr_3"],
   },
   {
     slug: "nibras-docs",
     name: "Nibras Docs",
-    icon: "/apps/nibras-docs.jpg",
+    icon: "/apps/nibras-docs.webp",
     desc: "nx_docs_d",
     chips: ["nx_docs_1", "nx_docs_2", "nx_docs_3"],
   },
   {
     slug: "nibras-plans",
     name: "Nibras Plans",
-    icon: "/apps/nibras-plans.jpg",
+    icon: "/apps/nibras-plans.webp",
     desc: "nx_plans_d",
     chips: ["nx_plans_1", "nx_plans_2", "nx_plans_3"],
   },
 ];
 
 function Logo({ className }: { className?: string }) {
-  return <img src="/nibras-icon.png" alt="" className={className} />;
+  return <img src="/nibras-icon.webp" alt="" width={54} height={28} decoding="async" className={className} />;
 }
 
 const DRIFT_KINDS = ["python", "js", "ts", "java", "kotlin", "swift", "cpp", "dart", "apk", "ios"] as const;
@@ -299,7 +299,7 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
           </div>
           <div className="nx-bars">
             <a className="nx-ai-bar" href={localeHref(lang, "/ai")}>
-              <img src="/nibras-ai.png" alt="" />
+              <img src="/nibras-ai.webp" alt="" width={40} height={36} decoding="async" />
               <span>Nibras AI</span>
             </a>
             <a
@@ -412,7 +412,7 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
                 <a href={localeHref(lang, `/apps/${card.slug}`)} className="nx-card">
                   <span className="nx-card-top">
                     <span className="nx-ico">
-                      <img src={live?.icon_url || card.icon} alt="" />
+                      <img src={live?.icon_url || card.icon} alt="" width={52} height={52} loading="lazy" decoding="async" />
                     </span>
                     <span>
                       {badge ? <em className="nx-status">{badge}</em> : null}
@@ -442,7 +442,7 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
             <a key={row.slug} href={localeHref(lang, `/apps/${row.slug}`)} className="nx-card">
               <span className="nx-card-top">
                 <span className="nx-ico">
-                  <img src={row.icon_url || "/nibras-icon.png"} alt="" />
+                  <img src={row.icon_url || "/nibras-icon.webp"} alt="" width={52} height={52} loading="lazy" decoding="async" />
                 </span>
                 <span>
                   {statusText(row.status, null, labels) ? (

@@ -28,6 +28,19 @@ export const loadStudioBundle = createServerFn({ method: "GET" }).handler(async 
   return { ready: true, apps, privacy };
 });
 
+export const loadHomeApps = createServerFn({ method: "GET" }).handler(async () => {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 800);
+  try {
+    const apps = await fetchStudioApps(controller.signal);
+    return { apps };
+  } catch {
+    return { apps: [] as StudioAppRow[] };
+  } finally {
+    clearTimeout(timer);
+  }
+});
+
 export const syncStudioToGithub = createServerFn({ method: "POST" })
   .validator((input: { accessToken?: string; privacy?: StudioPrivacyRow | null; dropSlug?: string; app?: StudioAppRow | null; dropApp?: string }) => {
     const accessToken = input.accessToken?.trim() ?? "";

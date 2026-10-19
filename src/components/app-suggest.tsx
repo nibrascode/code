@@ -3,10 +3,10 @@ import { useI18n } from "@/lib/i18n-context";
 import { localeHref, stripLocalePrefix } from "@/lib/locale-path";
 
 const CARDS = [
-  { slug: "nibras-arabic", name: "Nibras Arabic", icon: "/apps/nibras-arabic.jpg" },
-  { slug: "nibras-pdf", name: "Nibras PDF", icon: "/apps/nibras-pdf.jpg" },
-  { slug: "nibras-docs", name: "Nibras Docs", icon: "/apps/nibras-docs.jpg" },
-  { slug: "nibras-plans", name: "Nibras Plans", icon: "/apps/nibras-plans.jpg" },
+  { slug: "nibras-arabic", name: "Nibras Arabic", icon: "/apps/nibras-arabic.webp" },
+  { slug: "nibras-pdf", name: "Nibras PDF", icon: "/apps/nibras-pdf.webp" },
+  { slug: "nibras-docs", name: "Nibras Docs", icon: "/apps/nibras-docs.webp" },
+  { slug: "nibras-plans", name: "Nibras Plans", icon: "/apps/nibras-plans.webp" },
 ] as const;
 
 const LABEL = {
@@ -28,7 +28,7 @@ export function AppSuggest() {
   return (
     <aside className="app-suggest">
       <a href={localeHref(lang, `/apps/${card.slug}`)}>
-        <img src={card.icon} alt="" />
+        <img src={card.icon} alt="" width={34} height={34} loading="lazy" decoding="async" />
         <b>{card.name}</b>
         <small>{LABEL[lang]}</small>
         <svg className="suggest-bot" viewBox="0 0 16 18" aria-hidden="true">

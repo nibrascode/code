@@ -3,7 +3,7 @@ import { homePath, isSplitPage, localeHref, stripLocalePrefix } from "@/lib/loca
 import { faqFromPath, faqPath, faqTopicFromPath, faqTopicPath } from "@/lib/faq";
 import { toolFromPath, toolPath, toolsFromPath, toolsPath } from "@/lib/tools";
 import { isCourseSlug } from "@/lib/course/meta";
-import { findProgrammingLocale, programmingFromPath, programmingLocalePath } from "@/lib/programming-locales";
+import { hasProgrammingLocale, programmingFromPath, programmingLocalePath } from "@/lib/programming-path";
 
 export const PDF_LOCALE_PAIRS = [
   { az: "pdf", ru: "pdf" },
@@ -49,7 +49,7 @@ export function hrefForLang(pathname: string, lang: Lang) {
   const programming = programmingFromPath(pathname);
   if (programming) {
     if (lang === "az" || isCourseSlug(programming.slug)) return programmingLocalePath(lang, programming.slug);
-    if (findProgrammingLocale(lang, programming.slug)) return programmingLocalePath(lang, programming.slug);
+    if (hasProgrammingLocale(lang, programming.slug)) return programmingLocalePath(lang, programming.slug);
     return `${programmingLocalePath("az", programming.slug)}?lang=${lang}`;
   }
   const pair = pdfPairFromPath(pathname);

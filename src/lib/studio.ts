@@ -288,10 +288,10 @@ export async function studioReady(): Promise<boolean> {
   return response.ok;
 }
 
-export async function fetchStudioApps(): Promise<StudioAppRow[]> {
+export async function fetchStudioApps(signal?: AbortSignal): Promise<StudioAppRow[]> {
   const response = await fetch(
     `${STUDIO_URL}/rest/v1/studio_apps?select=${APP_SELECT}&order=sort.asc`,
-    { headers: headers() },
+    { headers: headers(), signal },
   );
   if (!response.ok) return [];
   const rows = (await response.json()) as StudioAppRow[];

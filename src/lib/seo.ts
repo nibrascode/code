@@ -6,9 +6,9 @@ import { isToolId, toolSeo } from "@/pdf/tool-seo";
 import { SEARCH_FAQ } from "@/lib/search-faq";
 import { TOOL_IDS } from "@/pdf/tool-text";
 import { findCourse, HUBS, isCourseSlug } from "@/lib/course/meta";
-import { findProgramming, PROGRAMMING } from "@/lib/programming";
+import { PROGRAMMING_SEO } from "@/lib/programming-seo";
+import { hasProgrammingLocale, programmingFromPath, programmingLocalePath } from "@/lib/programming-path";
 import { CODE_SAMPLE_SEO, isCodeSampleChild, isCodeSampleSlug } from "@/lib/code-samples";
-import { findProgrammingLocale, programmingFromPath, programmingLocalePath } from "@/lib/programming-locales";
 import { RESURSLAR } from "@/lib/resurslar";
 import { findResourceTopic, resourceArticleFromPath } from "@/lib/resource-topics";
 import { RU_RESOURCES } from "@/lib/ru-resources";
@@ -352,7 +352,7 @@ const PAGES: Record<string, Copy> = {
       keywords: "программирование, PostgreSQL, Markdown, rsync, Maven, Linux, React",
     },
   },
-  ...Object.fromEntries(PROGRAMMING.map((page) => [`/programming/${page.slug}`, page.seo])),
+  ...Object.fromEntries(Object.entries(PROGRAMMING_SEO).map(([slug, copy]) => [`/programming/${slug}`, copy])),
   "/resources/ereb-dili": seoLeaf("Ərəb dili — Resurslar", "Arabic — Resources", "العربية — موارد", "Арабский — Ресурсы"),
   "/resources/android": seoLeaf("Android — Resurslar", "Android — Resources", "Android — موارد", "Android — Ресурсы"),
   "/resources/fayl-aletleri": seoLeaf(
@@ -901,9 +901,9 @@ function pageCopy(pathname: string, lang: Lang) {
     }
   }
   if (located) {
-    const article = findProgramming(located.slug);
     const articleLang = located.lang === "az" ? lang : located.lang;
-    if (article) return article.seo[articleLang] ?? article.seo.en;
+    const articleSeo = PROGRAMMING_SEO[located.slug];
+    if (articleSeo) return articleSeo[articleLang] ?? articleSeo.en;
     const sample = CODE_SAMPLE_SEO[located.slug];
     if (sample) return sample[articleLang] ?? sample.en;
   }
@@ -984,7 +984,7 @@ export function canonicalUrl(pathname: string, lang: Lang) {
   const located = programmingFromPath(path);
   if (located) {
     const articleLang = located.lang === "az" ? lang : located.lang;
-    if (articleLang === "az" || isCodeSampleSlug(located.slug) || isCourseSlug(located.slug) || findProgrammingLocale(articleLang, located.slug)) {
+    if (articleLang === "az" || isCodeSampleSlug(located.slug) || isCourseSlug(located.slug) || hasProgrammingLocale(articleLang, located.slug)) {
       return `${SITE}${programmingLocalePath(articleLang, located.slug)}`;
     }
   }
