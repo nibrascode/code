@@ -169,20 +169,19 @@ export type StudioPrivacyRow = {
 
 export type StudioSession = {
   access_token: string;
-  refresh_token: string;
   expires_at: number;
   email: string;
 };
 
-type TokenResponse = {
-  access_token?: string;
-  refresh_token?: string;
-  expires_in?: number;
-  user?: { email?: string };
-  error_description?: string;
-  msg?: string;
-  error?: string;
-};
+export type LoginFailure = { kind: "wrong"; left: number } | { kind: "locked"; retryAfter: number } | { kind: "network" };
+
+export class StudioLoginError extends Error {
+  failure: LoginFailure;
+  constructor(failure: LoginFailure) {
+    super(failure.kind);
+    this.failure = failure;
+  }
+}
 
 function headers(token?: string, prefer?: string) {
   return {
@@ -193,88 +192,119 @@ function headers(token?: string, prefer?: string) {
   };
 }
 
+// Giriş tokeni yalnız yaddaşda saxlanır. Uzunömürlü refresh token serverdə httpOnly cookie-dədir (JS ona çata bilmir).
+let memory: StudioSession | null = null;
+let pending: Promise<StudioSession | null> | null = null;
+const listeners = new Set<(session: StudioSession | null) => void>();
+
+export function onSessionChange(fn: (session: StudioSession | null) => void) {
+  listeners.add(fn);
+  return () => {
+    listeners.delete(fn);
+  };
+}
+
 export function readSession(): StudioSession | null {
-  if (typeof localStorage === "undefined") return null;
-  try {
-    const raw = localStorage.getItem(SESSION_KEY);
-    if (!raw) return null;
-    const session = JSON.parse(raw) as StudioSession;
-    if (!session.access_token || !session.refresh_token) return null;
-    return session;
-  } catch {
-    return null;
-  }
+  return memory;
 }
 
 export function writeSession(session: StudioSession | null) {
-  if (session) localStorage.setItem(SESSION_KEY, JSON.stringify(session));
-  else localStorage.removeItem(SESSION_KEY);
+  memory = session;
+  if (typeof localStorage !== "undefined") localStorage.removeItem(SESSION_KEY);
+  listeners.forEach((fn) => fn(session));
 }
 
-async function refresh(session: StudioSession): Promise<StudioSession> {
-  const response = await fetch(`${STUDIO_URL}/auth/v1/token?grant_type=refresh_token`, {
+async function adminPost(op: string, body?: unknown, token?: string) {
+  return fetch(`/api/admin?op=${op}`, {
     method: "POST",
-    headers: headers(),
-    body: JSON.stringify({ refresh_token: session.refresh_token }),
+    credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/json",
+      "x-nxs": "1",
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    },
+    body: JSON.stringify(body ?? {}),
   });
-  const data = (await response.json()) as TokenResponse;
-  if (!response.ok || !data.access_token || !data.refresh_token) {
-    writeSession(null);
-    throw new Error("Giriş vaxtı bitib. Yenidən daxil olun.");
+}
+
+async function refresh(): Promise<StudioSession | null> {
+  try {
+    const response = await adminPost("refresh");
+    if (!response.ok) {
+      writeSession(null);
+      return null;
+    }
+    const data = (await response.json()) as { session?: StudioSession };
+    if (!data.session?.access_token) return null;
+    writeSession(data.session);
+    return data.session;
+  } catch {
+    return memory;
   }
-  const next: StudioSession = {
-    access_token: data.access_token,
-    refresh_token: data.refresh_token,
-    expires_at: Date.now() + (data.expires_in ?? 3600) * 1000,
-    email: data.user?.email || session.email,
-  };
-  writeSession(next);
-  return next;
 }
 
 export async function validSession(): Promise<StudioSession | null> {
-  const session = readSession();
-  if (!session) return null;
-  if (session.expires_at > Date.now() + 30_000) return session;
-  try {
-    return await refresh(session);
-  } catch {
-    return null;
-  }
+  if (memory && memory.expires_at > Date.now() + 30_000) return memory;
+  if (!pending) pending = refresh().finally(() => (pending = null));
+  return pending;
 }
 
 export async function signIn(email: string, password: string): Promise<StudioSession> {
-  const response = await fetch(`${STUDIO_URL}/auth/v1/token?grant_type=password`, {
-    method: "POST",
-    headers: headers(),
-    body: JSON.stringify({ email, password }),
-  });
-  const data = (await response.json()) as TokenResponse;
-  if (!response.ok || !data.access_token || !data.refresh_token) {
-    throw new Error("E-poçt və ya şifrə yanlışdır.");
+  let response: Response;
+  try {
+    response = await adminPost("login", { email, password });
+  } catch {
+    throw new StudioLoginError({ kind: "network" });
   }
-  const emailOut = data.user?.email || email;
-  if (emailOut.toLowerCase() !== STUDIO_EMAIL) {
-    throw new Error("Bu panel yalnız Nibras Code hesabı üçündür.");
-  }
-  const session: StudioSession = {
-    access_token: data.access_token,
-    refresh_token: data.refresh_token,
-    expires_at: Date.now() + (data.expires_in ?? 3600) * 1000,
-    email: emailOut,
+  const data = (await response.json().catch(() => ({}))) as {
+    session?: StudioSession;
+    left?: number;
+    retryAfter?: number;
   };
-  writeSession(session);
-  return session;
+  if (response.status === 429) throw new StudioLoginError({ kind: "locked", retryAfter: Number(data.retryAfter) || 900 });
+  if (!response.ok || !data.session) {
+    if (response.status === 401) throw new StudioLoginError({ kind: "wrong", left: Number(data.left ?? 0) });
+    throw new StudioLoginError({ kind: "network" });
+  }
+  writeSession(data.session);
+  return data.session;
+}
+
+export async function signOut() {
+  const token = memory?.access_token;
+  try {
+    await adminPost("logout", {}, token);
+  } finally {
+    writeSession(null);
+  }
+}
+
+export type AdminOverview = {
+  health: Record<"supabase" | "statsStorage" | "chatsStorage" | "github" | "ai" | "translate" | "statsKey", boolean>;
+  stats: { date: string; counts: Record<string, number> }[] | null;
+  chats: number | null;
+  serverTime: string;
+};
+
+export async function fetchOverview(days = 30): Promise<AdminOverview> {
+  const session = await validSession();
+  if (!session) throw new Error("auth");
+  const response = await fetch(`/api/admin?op=overview&days=${days}`, {
+    headers: { Authorization: `Bearer ${session.access_token}` },
+    credentials: "same-origin",
+  });
+  if (!response.ok) throw new Error(String(response.status));
+  return (await response.json()) as AdminOverview;
 }
 
 async function parse<T>(response: Response): Promise<T> {
   const text = await response.text();
   const data = text ? (JSON.parse(text) as T & { message?: string; code?: string }) : ({} as T);
   if (!response.ok) {
-    const message = (data as { message?: string }).message || "Saxlanmadı.";
+    const message = (data as { message?: string }).message || "save";
     const code = (data as { code?: string }).code;
     if (code === "PGRST205" || /studio_/.test(message)) {
-      throw new Error("Cədvəl hələ yoxdur. Aşağıdakı SQL-i bir dəfə işə salın.");
+      throw new Error("table");
     }
     throw new Error(message);
   }
@@ -324,7 +354,7 @@ export async function fetchPage(slug: string, lang: string): Promise<StudioPriva
 
 export async function deletePrivacy(slug: string) {
   const session = await validSession();
-  if (!session) throw new Error("Yenidən daxil olun.");
+  if (!session) throw new Error("auth");
   const response = await fetch(
     `${STUDIO_URL}/rest/v1/studio_privacy?slug=eq.${encodeURIComponent(slug)}`,
     { method: "DELETE", headers: headers(session.access_token, "return=minimal") },
@@ -334,7 +364,7 @@ export async function deletePrivacy(slug: string) {
 
 export async function savePrivacy(row: StudioPrivacyRow) {
   const session = await validSession();
-  if (!session) throw new Error("Yenidən daxil olun.");
+  if (!session) throw new Error("auth");
   const response = await fetch(`${STUDIO_URL}/rest/v1/studio_privacy`, {
     method: "POST",
     headers: headers(session.access_token, "resolution=merge-duplicates,return=minimal"),
@@ -345,7 +375,7 @@ export async function savePrivacy(row: StudioPrivacyRow) {
 
 export async function saveApp(row: StudioAppRow) {
   const session = await validSession();
-  if (!session) throw new Error("Yenidən daxil olun.");
+  if (!session) throw new Error("auth");
   const response = await fetch(`${STUDIO_URL}/rest/v1/studio_apps`, {
     method: "POST",
     headers: headers(session.access_token, "resolution=merge-duplicates,return=minimal"),
@@ -356,7 +386,7 @@ export async function saveApp(row: StudioAppRow) {
 
 export async function deleteApp(slug: string) {
   const session = await validSession();
-  if (!session) throw new Error("Yenidən daxil olun.");
+  if (!session) throw new Error("auth");
   const response = await fetch(
     `${STUDIO_URL}/rest/v1/studio_apps?slug=eq.${encodeURIComponent(slug)}`,
     { method: "DELETE", headers: headers(session.access_token, "return=minimal") },
@@ -373,4 +403,38 @@ export function statusText(
   if (code === "soon") return labels.soon;
   if (code === "building") return labels.building;
   return fallback;
+}
+
+export async function savePrivacyMany(rows: StudioPrivacyRow[]) {
+  if (!rows.length) return;
+  const session = await validSession();
+  if (!session) throw new Error("auth");
+  const response = await fetch(`${STUDIO_URL}/rest/v1/studio_privacy`, {
+    method: "POST",
+    headers: headers(session.access_token, "resolution=merge-duplicates,return=minimal"),
+    body: JSON.stringify(rows),
+  });
+  await parse(response);
+}
+
+export async function saveAppsMany(rows: StudioAppRow[]) {
+  if (!rows.length) return;
+  const session = await validSession();
+  if (!session) throw new Error("auth");
+  const response = await fetch(`${STUDIO_URL}/rest/v1/studio_apps`, {
+    method: "POST",
+    headers: headers(session.access_token, "resolution=merge-duplicates,return=minimal"),
+    body: JSON.stringify(rows),
+  });
+  await parse(response);
+}
+
+export async function deletePrivacyRow(slug: string, lang: string) {
+  const session = await validSession();
+  if (!session) throw new Error("auth");
+  const response = await fetch(
+    `${STUDIO_URL}/rest/v1/studio_privacy?slug=eq.${encodeURIComponent(slug)}&lang=eq.${encodeURIComponent(lang)}`,
+    { method: "DELETE", headers: headers(session.access_token, "return=minimal") },
+  );
+  await parse(response);
 }
