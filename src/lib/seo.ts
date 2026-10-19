@@ -29,13 +29,15 @@ type PageSeo = {
 
 type Copy = Record<Exclude<Lang, "tr">, PageSeo> & Partial<Record<Lang, PageSeo>>;
 
-function seoLeaf(az: string, en: string, ar: string, ru: string): Copy {
-  return {
+function seoLeaf(az: string, en: string, ar: string, ru: string, tr?: string): Copy {
+  const copy: Copy = {
     az: { title: `${az} — Nibras Code`, description: az },
     en: { title: `${en} — Nibras Code`, description: en },
     ar: { title: `${ar} — Nibras Code`, description: ar },
     ru: { title: `${ru} — Nibras Code`, description: ru },
   };
+  if (tr) copy.tr = { title: `${tr} — Nibras Code`, description: tr };
+  return copy;
 }
 
 const PAGES: Record<string, Copy> = {
@@ -87,6 +89,11 @@ const PAGES: Record<string, Copy> = {
       description:
         "Nibras Code — независимый личный проект. Основатель — Mahir Əliyev. Nibras Arabic доступен. На сайте также есть Nibras AI, Nibras Dev, Nibras Apk, Nibras QR, Nibras Erase и Сервисы.",
     },
+    tr: {
+      title: "Biz kimiz — Nibras Code",
+      description:
+        "Nibras Code bağımsız bir kişisel projedir. Kurucusu Mahir Əliyev. Nibras Arabic açıktır. Sitede Nibras AI, Nibras Dev, Nibras Apk, Nibras QR, Nibras Erase ve Hizmetler vardır.",
+    },
   },
   "/why": {
     az: {
@@ -109,6 +116,11 @@ const PAGES: Record<string, Copy> = {
       description:
         "Nibras Code — независимый проект простых, полезных и удобных приложений. Цель — реальная польза, а не лишние функции.",
     },
+    tr: {
+      title: "Neden Nibras Code — sade ve faydalı uygulamalar",
+      description:
+        "Nibras Code, sade, faydalı ve kullanımı rahat uygulamalar üzerinde çalışan bağımsız bir projedir. Amaç çok özellik değil, gerçek fayda vermektir.",
+    },
   },
   "/unutma": {
     az: {
@@ -130,6 +142,11 @@ const PAGES: Record<string, Copy> = {
       title: "Помни — напоминания Nibras Code",
       description:
         "Короткие напоминания: успех только от Аллаха, держаться причин и не забывать вечную жизнь.",
+    },
+    tr: {
+      title: "Unutma — Nibras Code hatırlatmaları",
+      description:
+        "Kısa hatırlatmalar: başarı Allah'tandır, sebeplere sarılmak ve ahireti unutmamak üzerine.",
     },
   },
   "/apps/nibras-arabic": {
@@ -205,6 +222,12 @@ const PAGES: Record<string, Copy> = {
         "Nibras PDF — приложение для Android, чтобы работать с PDF и изображениями на телефоне. В нём 18 инструментов: объединение, разделение, сжатие, поворот, защита, подпись, скан, Word и текст. Ваши файлы остаются на устройстве. Проект Nibras Code.",
       features: ["Объединять и делить PDF", "Сжимать, поворачивать и подписывать", "Скан документов и изображений"],
     },
+    tr: {
+      title: "Nibras PDF — telefonda PDF ve görseller",
+      description:
+        "Nibras PDF, telefonda PDF ve görsellerle çalışmak için bir Android uygulamasıdır. 18 araç vardır: birleştir, böl, sıkıştır, döndür, koru, imzala, tara, Word ve metin. Dosyalarınız cihazınızda kalır. Nibras Code projesidir.",
+      features: ["PDF birleştirme ve bölme", "Sıkıştırma, döndürme ve imza", "Belge tarama ve görseller"],
+    },
   },
   "/apps/nibras-docs": {
     az: {
@@ -230,6 +253,12 @@ const PAGES: Record<string, Copy> = {
       description:
         "Nibras Docs — приложение для Android для спокойной работы с документами. Пишите, просто правьте и делитесь в повседневных делах — в одном месте, без лишнего шума. Проект Nibras Code.",
       features: ["Писать документы", "Простое редактирование", "Повседневный обмен"],
+    },
+    tr: {
+      title: "Nibras Docs — belge yaz ve paylaş",
+      description:
+        "Nibras Docs, belgelerle sakin çalışmak için bir Android uygulamasıdır. Yazın, sade düzenleyin ve günlük paylaşın — tek yerde, gereksiz gürültü olmadan. Nibras Code projesidir.",
+      features: ["Belge yazmak", "Sade düzenleme", "Günlük paylaşım"],
     },
   },
   "/apps/nibras-plans": {
@@ -257,6 +286,12 @@ const PAGES: Record<string, Copy> = {
         "Nibras Plans — приложение для Android, которое держит планы, таблицы и отчёты простыми. Составьте план, следите за ходом и получите ясный отчёт для ежедневной работы. Проект Nibras Code.",
       features: ["Составлять планы", "Простое отслеживание", "Ясные отчёты"],
     },
+    tr: {
+      title: "Nibras Plans — plan, tablo ve rapor",
+      description:
+        "Nibras Plans, planları, tabloları ve raporları sade tutan bir Android uygulamasıdır. Plan kurun, ilerlemeyi izleyin ve net bir rapor alın. Günlük iş için tasarlanmıştır. Nibras Code projesidir.",
+      features: ["Plan kurmak", "Sade takip", "Net raporlar"],
+    },
   },
   "/apps": {
     az: {
@@ -278,6 +313,11 @@ const PAGES: Record<string, Copy> = {
       title: "Приложения — Nibras Code",
       description:
         "Приложения Nibras Code: Nibras Arabic, Nibras PDF, Nibras Docs и Nibras Plans. Короткое представление и страница каждого.",
+    },
+    tr: {
+      title: "Uygulamalar — Nibras Code",
+      description:
+        "Nibras Code uygulamaları: Nibras Arabic, Nibras PDF, Nibras Docs ve Nibras Plans. Her uygulamanın kısa tanıtımı ve sayfası.",
     },
   },
   "/resources": {
@@ -324,6 +364,10 @@ const PAGES: Record<string, Copy> = {
       title: "Руководства — Nibras Code",
       description: "Руководства Nibras Code: PDF, Android и арабский язык.",
     },
+    tr: {
+      title: "Rehberler — Nibras Code",
+      description: "Nibras Code rehberleri: PDF, Android ve Arapça.",
+    },
   },
   "/programming": {
     az: {
@@ -353,16 +397,41 @@ const PAGES: Record<string, Copy> = {
     },
   },
   ...Object.fromEntries(Object.entries(PROGRAMMING_SEO).map(([slug, copy]) => [`/programming/${slug}`, copy])),
-  "/resources/ereb-dili": seoLeaf("Ərəb dili — Resurslar", "Arabic — Resources", "العربية — موارد", "Арабский — Ресурсы"),
-  "/resources/android": seoLeaf("Android — Resurslar", "Android — Resources", "Android — موارد", "Android — Ресурсы"),
+  "/resources/ereb-dili": seoLeaf(
+    "Ərəb dili — Resurslar",
+    "Arabic — Resources",
+    "العربية — موارد",
+    "Арабский — Ресурсы",
+    "Arapça — Kaynaklar",
+  ),
+  "/resources/android": seoLeaf(
+    "Android — Resurslar",
+    "Android — Resources",
+    "Android — موارد",
+    "Android — Ресурсы",
+    "Android — Kaynaklar",
+  ),
   "/resources/fayl-aletleri": seoLeaf(
     "Fayl alətləri — Resurslar",
     "File tools — Resources",
     "أدوات الملفات — موارد",
     "Инструменты для файлов — Ресурсы",
+    "Dosya araçları — Kaynaklar",
   ),
-  "/resources/tehsil": seoLeaf("Təhsil — Resurslar", "Education — Resources", "تعليم — موارد", "Обучение — Ресурсы"),
-  "/resources/senedler": seoLeaf("Sənədlər — Resurslar", "Documents — Resources", "مستندات — موارد", "Документы — Ресурсы"),
+  "/resources/tehsil": seoLeaf(
+    "Təhsil — Resurslar",
+    "Education — Resources",
+    "تعليم — موارد",
+    "Обучение — Ресурсы",
+    "Eğitim — Kaynaklar",
+  ),
+  "/resources/senedler": seoLeaf(
+    "Sənədlər — Resurslar",
+    "Documents — Resources",
+    "مستندات — موارد",
+    "Документы — Ресурсы",
+    "Belgeler — Kaynaklar",
+  ),
   ...Object.fromEntries(RESURSLAR.map((page) => [`/resurslar/${page.slug}`, page.seo])),
   ...Object.fromEntries(
     RU_RESOURCES.map((page) => {
@@ -506,6 +575,10 @@ const PAGES: Record<string, Copy> = {
       title: "Политика конфиденциальности — Nibras Code",
       description: "Политика конфиденциальности приложений Nibras Code. У каждого приложения своя страница.",
     },
+    tr: {
+      title: "Gizlilik politikası — Nibras Code",
+      description: "Nibras Code uygulamalarının gizlilik politikası. Her uygulamanın kendi sayfası vardır.",
+    },
   },
   "/privacy/nibras-arabic": {
     az: {
@@ -610,6 +683,12 @@ const PAGES: Record<string, Copy> = {
       title: "Nibras QR — создавайте, оформляйте и сканируйте QR-коды",
       description:
         "Nibras QR — Android-приложение для QR-кодов и штрихкодов: 11 типов, дизайн с логотипом и рамкой, шаблоны и умный безопасный сканер. Основное работает офлайн. Проект Nibras Code.",
+    },
+    tr: {
+      title: "Nibras QR — QR kod oluştur, tasarla, tara",
+      description:
+        "Nibras QR, QR kod ve barkodlar için bir Android uygulamasıdır: 11 QR türü, logo ve çerçeveli tasarım, şablonlar, akıllı ve güvenli tarayıcı. Temel özellikler internetsiz çalışır. Pro: dinamik QR ve istatistik. Nibras Code projesidir.",
+      features: ["11 QR türü ve tasarım", "Akıllı, güvenli tarayıcı", "Dinamik QR ve istatistik (Pro)"],
     },
   },
   "/erase": {
@@ -763,6 +842,11 @@ const PAGES: Record<string, Copy> = {
       title: "Политика конфиденциальности — Nibras QR",
       description: "Политика Nibras QR, 11 октября 2026: сканирование на устройстве офлайн, без рекламы, оплата через Google Play.",
     },
+    tr: {
+      title: "Gizlilik politikası — Nibras QR",
+      description:
+        "Nibras QR gizlilik politikası, 11 Ekim 2026: tarama cihazda ve çevrimdışı, kodlar cihazda saklanır, Google ile giriş isteğe bağlıdır (Supabase), reklam yoktur, ödemeler Google Play üzerinden.",
+    },
   },
   "/privacy/nibras-qr/delete-account": {
     az: {
@@ -780,6 +864,11 @@ const PAGES: Record<string, Copy> = {
     ru: {
       title: "Удаление аккаунта — Nibras QR",
       description: "Как удалить аккаунт Nibras QR в приложении или письмом на nibrascode@gmail.com.",
+    },
+    tr: {
+      title: "Hesabı sil — Nibras QR",
+      description:
+        "Nibras QR hesabı uygulamada (Hesap › Hesabı sil) veya nibrascode@gmail.com adresine e-posta ile nasıl silinir; neler silinir, neler kalır.",
     },
   },
   "/privacy/nibras-pdf": {
