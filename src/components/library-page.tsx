@@ -890,6 +890,30 @@ const HTML_SCHWA: Record<Lang, string> = {
   ru: "Если ə на странице стало вопросом",
 };
 
+const EXCEL_COL: Record<Lang, string> = {
+  az: "Excel bir sütun açırsa",
+  en: "If Excel opens one column",
+  tr: "Excel tek sütun açıyorsa",
+  ar: "إذا فتح Excel عمودًا واحدًا",
+  ru: "Если Excel открывает один столбец",
+};
+
+const PS_SCRIPT: Record<Lang, string> = {
+  az: "PowerShell skripti saxlayırsa",
+  en: "If PowerShell stops the script",
+  tr: "PowerShell betiği durduruyorsa",
+  ar: "إذا أوقف PowerShell السكربت",
+  ru: "Если PowerShell останавливает скрипт",
+};
+
+const JSON_SCHWA: Record<Lang, string> = {
+  az: "JSON-da ə \\u0259 olursa",
+  en: "If ə is \\u0259 in JSON",
+  tr: "JSON'da ə \\u0259 oluyorsa",
+  ar: "إذا صار ə في JSON‏ \\u0259",
+  ru: "Если ə в JSON стало \\u0259",
+};
+
 export function ProgrammingArticle({
   slug,
   title,
@@ -947,6 +971,21 @@ export function ProgrammingArticle({
       {slug === "python" || slug === "python-qurasdir" ? (
         <p className="prog-try">
           <a href={searchTopicPath(lang, "xeta", "excel-e")}>{EXCEL_SCHWA[lang]}</a>
+        </p>
+      ) : null}
+      {slug === "python" || slug === "python-qurasdir" ? (
+        <p className="prog-try">
+          <a href={searchTopicPath(lang, "xeta", "excel-sutun")}>{EXCEL_COL[lang]}</a>
+        </p>
+      ) : null}
+      {slug === "python" || slug === "python-qurasdir" ? (
+        <p className="prog-try">
+          <a href={searchTopicPath(lang, "xeta", "json-e")}>{JSON_SCHWA[lang]}</a>
+        </p>
+      ) : null}
+      {slug === "python" || slug === "python-qurasdir" ? (
+        <p className="prog-try">
+          <a href={searchTopicPath(lang, "xeta", "ps-skript")}>{PS_SCRIPT[lang]}</a>
         </p>
       ) : null}
       {slug === "html-css" ? (

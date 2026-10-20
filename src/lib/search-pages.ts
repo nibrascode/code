@@ -524,6 +524,212 @@ with open("metn.txt", "w", encoding="utf-8") as fayl:
     ),
   },
   {
+    slug: "excel-sutun",
+    code: `import csv
+
+with open("metn.csv", "w", newline="", encoding="utf-8-sig") as fayl:
+    csv.writer(fayl, delimiter=";").writerows([
+        ["ad", "qiymet"],
+        ["Azərbaycan", "1,50"],
+    ])
+`,
+    piece: piece(
+      L(
+        "Excel CSV-ni bir sütun açır",
+        "Excel opens the CSV as one column",
+        "Excel CSV'yi tek sütun açar",
+        "Excel يفتح CSV عمودًا واحدًا",
+        "Excel открывает CSV одним столбцом",
+      ),
+      L(
+        "Excel bütün sətri bir xanada göstərirsə, hərf pozulmayıb. Ayırıcı uyğun gəlmir. Azərbaycan qurulumu vergülü onluq kəsr sayır, ona görə sütun ayırıcısı adətən nöqtəli vergüldür. Fayldakı vergülü Excel ayırıcı saymır.\n\nBu, `ə` hərfinin pozulması deyil. Hərf də pozulursa, fayl həm `utf-8-sig`, həm də `;` ilə yazılmalıdır.\n\nHamısını bir anda dəyişmə. Səbəbi sıra ilə yoxla.",
+        "If Excel shows the whole row in one cell, the letter is not broken. The separator does not match. An Azerbaijani setup treats the comma as a decimal mark, so the column separator is usually a semicolon. Excel does not treat a comma in the file as a separator.\n\nThis is not the letter `ə` breaking. If the letter is also broken, the file needs both `utf-8-sig` and `;`.\n\nDo not change everything at once. Check the cause in order.",
+        "Excel bütün satırı bir hücrede gösteriyorsa harf bozulmamıştır. Ayırıcı uymuyordur. Azerbaycan kurulumu virgülü ondalık sayar, bu yüzden sütun ayırıcısı genellikle noktalı virgüldür. Dosyadaki virgülü Excel ayırıcı saymaz.\n\nBu, `ə` harfinin bozulması değildir. Harf de bozuluyorsa dosya hem `utf-8-sig` hem `;` ile yazılmalıdır.\n\nHepsini bir anda değiştirme. Nedeni sırayla yokla.",
+        "إذا أظهر Excel الصف كله في خلية واحدة فالحرف لم يفسد. الفاصل غير مطابق. إعداد أذربيجان يعدّ الفاصلة علامة عشرية، لذلك فاصل الأعمدة عادة فاصلة منقوطة. Excel لا يعدّ الفاصلة في الملف فاصلًا.\n\nهذا ليس فساد حرف `ə`. إذا فسد الحرف أيضًا فيجب أن يُكتب الملف بـ `utf-8-sig` وبـ `;` معًا.\n\nلا تغيّر كل شيء دفعة واحدة. افحص السبب بالترتيب.",
+        "Если Excel показывает всю строку в одной ячейке, буква не испорчена. Разделитель не тот. Азербайджанская настройка считает запятую десятичным знаком, поэтому разделитель столбцов обычно точка с запятой. Запятую в файле Excel разделителем не считает.\n\nЭто не порча буквы `ə`. Если буква тоже портится, файл надо писать и с `utf-8-sig`, и с `;`.\n\nНе меняй всё сразу. Проверяй причину по порядку.",
+      ),
+      {
+        az: [
+          "Excel-də boş xanaya `=1,5` yaz. Ədəd olursa ayırıcın `;`-dir. `=1.5` ədəd olursa ayırıcın vergüldür.",
+          "Python-da sətir belə olsun: `csv.writer(fayl, delimiter=\";\")`. Fayl `utf-8-sig` və `newline=\"\"` ilə açılmalıdır.",
+          "Ayırıcını yoxlamadan bütün vergüldə `;` etmə. Ədədin içindəki vergül onluq kəsrdir, sütun deyil.",
+          "Köhnə faylı Excel-in içində bölmə. Faylı kodla yenidən yaz.",
+          "Başqa proqram vergül istəyirsə, Excel üçün yazdığın `;` orada bir sütun qoyar. İki fayl lazımdırsa, ayırıcını qarışdırma.",
+        ],
+        en: [
+          "In a blank Excel cell type `=1,5`. If it becomes a number, your separator is `;`. If `=1.5` becomes a number, your separator is a comma.",
+          "In Python the line should be `csv.writer(fayl, delimiter=\";\")`. Open the file with `utf-8-sig` and `newline=\"\"`.",
+          "Do not turn every comma into `;` before you check the separator. A comma inside a number is the decimal mark, not a column.",
+          "Do not split the old file inside Excel. Write the file again from code.",
+          "If another program wants commas, the `;` you wrote for Excel becomes one column there. If you need two files, do not mix the separators.",
+        ],
+        tr: [
+          "Excel'de boş hücreye `=1,5` yaz. Sayı oluyorsa ayırıcın `;`dir. `=1.5` sayı oluyorsa ayırıcın virgüldür.",
+          "Python'da satır şöyle olsun: `csv.writer(fayl, delimiter=\";\")`. Dosya `utf-8-sig` ve `newline=\"\"` ile açılmalıdır.",
+          "Ayırıcıyı yoklamadan her virgülü `;` yapma. Sayının içindeki virgül ondalıktır, sütun değil.",
+          "Eski dosyayı Excel'in içinde bölme. Dosyayı kodla yeniden yaz.",
+          "Başka program virgül istiyorsa, Excel için yazdığın `;` orada tek sütun olur. İki dosya gerekiyorsa ayırıcıyı karıştırma.",
+        ],
+        ar: [
+          "في خلية Excel فارغة اكتب `=1,5`. إذا صار عددًا فالفاصل عندك `;`. إذا صار `=1.5` عددًا فالفاصل فاصلة.",
+          "في Python السطر يكون `csv.writer(fayl, delimiter=\";\")`. يُفتح الملف بـ `utf-8-sig` و`newline=\"\"`.",
+          "لا تحوّل كل فاصلة إلى `;` قبل أن تفحص الفاصل. الفاصلة داخل العدد علامة عشرية وليست عمودًا.",
+          "لا تقسّم الملف القديم داخل Excel. اكتب الملف من الكود من جديد.",
+          "إذا أراد برنامج آخر فاصلة فإن `;` التي كتبتها لـ Excel تصير هناك عمودًا واحدًا. إذا لزم ملفان فلا تخلط الفاصلين.",
+        ],
+        ru: [
+          "В пустой ячейке Excel напиши `=1,5`. Если это число, разделитель у тебя `;`. Если числом становится `=1.5`, разделитель — запятая.",
+          "В Python строка такая: `csv.writer(fayl, delimiter=\";\")`. Файл открывай с `utf-8-sig` и `newline=\"\"`.",
+          "Не меняй все запятые на `;`, пока не проверил разделитель. Запятая внутри числа — десятичный знак, не столбец.",
+          "Не дели старый файл внутри Excel. Запиши файл из кода заново.",
+          "Если другая программа ждёт запятые, твой `;` для Excel станет там одним столбцом. Если нужны два файла, разделители не мешай.",
+        ],
+      },
+      L(
+        "Hərf `?` olursa, ayırıcını dəyişmə. O, `utf-8-sig` səhifəsidir.",
+        "If the letter is `?`, do not change the separator. That is the `utf-8-sig` page.",
+        "Harf `?` oluyorsa ayırıcıyı değiştirme. O, `utf-8-sig` sayfasıdır.",
+        "إذا صار الحرف `?` فلا تغيّر الفاصل. تلك صفحة `utf-8-sig`.",
+        "Если буква стала `?`, разделитель не меняй. Это страница `utf-8-sig`.",
+      ),
+    ),
+  },
+  {
+    slug: "ps-skript",
+    code: `py -m venv .venv
+.venv\\Scripts\\activate.bat
+`,
+    piece: piece(
+      L(
+        "PowerShell skripti işə salmır",
+        "PowerShell will not run the script",
+        "PowerShell betiği çalıştırmıyor",
+        "PowerShell لا يشغّل السكربت",
+        "PowerShell не запускает скрипт",
+      ),
+      L(
+        "PowerShell bu cümləni yazır: `cannot be loaded because running scripts is disabled on this system.` Virtual mühitin `Activate.ps1` faylı skriptdir. Buna görə PowerShell onu saxlayır. Əmr sətrindəki `activate.bat` skript deyil, o, işləyir.\n\nBütün kompüter üçün qadağanı götürmə. Səbəbi sıra ilə yoxla.",
+        "PowerShell writes: `cannot be loaded because running scripts is disabled on this system.` A virtual environment's `Activate.ps1` file is a script, so PowerShell stops it. `activate.bat` in Command Prompt is not that script, and it runs.\n\nDo not lift the block for the whole computer. Check the cause in order.",
+        "PowerShell bu cümleyi yazar: `cannot be loaded because running scripts is disabled on this system.` Sanal ortamın `Activate.ps1` dosyası betiktir. Bu yüzden PowerShell onu durdurur. Komut istemindeki `activate.bat` o betik değildir, o çalışır.\n\nBütün bilgisayar için yasağı kaldırma. Nedeni sırayla yokla.",
+        "يكتب PowerShell: `cannot be loaded because running scripts is disabled on this system.` ملف `Activate.ps1` في البيئة الافتراضية سكربت، لذلك يوقفه PowerShell. `activate.bat` في موجّه الأوامر ليس ذلك السكربت، وهو يعمل.\n\nلا ترفع المنع عن الكمبيوتر كله. افحص السبب بالترتيب.",
+        "PowerShell пишет: `cannot be loaded because running scripts is disabled on this system.` Файл `Activate.ps1` виртуальной среды — скрипт, поэтому PowerShell его останавливает. `activate.bat` в командной строке — не этот скрипт, и он запускается.\n\nНе снимай запрет на весь компьютер. Проверяй причину по порядку.",
+      ),
+      {
+        az: [
+          "Əmr sətrində layihə qovluğunda `.venv\\Scripts\\activate.bat` yaz. Sətirdə `(.venv)` görünürsə, mühit açıqdır. PowerShell-i dəyişmə.",
+          "PowerShell-də qalmaq istəyirsənsə, yalnız öz istifadəçin üçün: `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`. Pəncərəni bağla, yenisini aç, sonra `.venv\\Scripts\\Activate.ps1`.",
+          "`Unrestricted` və `LocalMachine` yazma. Bu, bütün kompüterdə başqa skriptləri də açır.",
+          "`MachinePolicy` sətri `Restricted` qalırsa, istifadəçi əmri onu keçmir. O pəncərədə `activate.bat` ilə davam et.",
+          "Eyni cümlə başqa `.ps1` faylı üçündür. Faylın adı dəyişir, dayanma eynidir.",
+        ],
+        en: [
+          "In Command Prompt, in the project folder, run `.venv\\Scripts\\activate.bat`. If the line shows `(.venv)`, the environment is on. Do not change PowerShell.",
+          "If you want to stay in PowerShell, for your user only: `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`. Close the window, open a new one, then run `.venv\\Scripts\\Activate.ps1`.",
+          "Do not write `Unrestricted` or `LocalMachine`. That opens other scripts on the whole computer.",
+          "If the `MachinePolicy` line stays `Restricted`, a user command does not pass it. Continue with `activate.bat` in that window.",
+          "The same sentence is for another `.ps1` file. The file name changes. The stop is the same.",
+        ],
+        tr: [
+          "Komut isteminde proje klasöründe `.venv\\Scripts\\activate.bat` yaz. Satırda `(.venv)` görünüyorsa ortam açıktır. PowerShell'i değiştirme.",
+          "PowerShell'de kalmak istiyorsan yalnız kendi kullanıcın için: `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`. Pencereyi kapat, yenisini aç, sonra `.venv\\Scripts\\Activate.ps1`.",
+          "`Unrestricted` ve `LocalMachine` yazma. Bu, bütün bilgisayarda başka betikleri de açar.",
+          "`MachinePolicy` satırı `Restricted` kalıyorsa kullanıcı komutu onu geçmez. O pencerede `activate.bat` ile devam et.",
+          "Aynı cümle başka bir `.ps1` dosyası içindir. Dosya adı değişir, durma aynıdır.",
+        ],
+        ar: [
+          "في موجّه الأوامر داخل مجلد المشروع اكتب `.venv\\Scripts\\activate.bat`. إذا ظهر `(.venv)` في السطر فالبيئة مفتوحة. لا تغيّر PowerShell.",
+          "إذا أردت البقاء في PowerShell فللمستخدم فقط: `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`. أغلق النافذة وافتح جديدة ثم `.venv\\Scripts\\Activate.ps1`.",
+          "لا تكتب `Unrestricted` ولا `LocalMachine`. هذا يفتح سكربتات أخرى على الكمبيوتر كله.",
+          "إذا بقي سطر `MachinePolicy` على `Restricted` فأمر المستخدم لا يجاوزه. تابع في تلك النافذة بـ `activate.bat`.",
+          "الجملة نفسها لملف `.ps1` آخر. اسم الملف يتغيّر والتوقف هو نفسه.",
+        ],
+        ru: [
+          "В командной строке в папке проекта напиши `.venv\\Scripts\\activate.bat`. Если в строке видно `(.venv)`, среда включена. PowerShell не меняй.",
+          "Если хочешь остаться в PowerShell, только для своего пользователя: `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`. Закрой окно, открой новое, потом `.venv\\Scripts\\Activate.ps1`.",
+          "Не пиши `Unrestricted` и `LocalMachine`. Это открывает другие скрипты на всём компьютере.",
+          "Если строка `MachinePolicy` остаётся `Restricted`, команда пользователя её не обходит. Продолжай в том окне через `activate.bat`.",
+          "Та же фраза для другого файла `.ps1`. Имя файла другое, остановка та же.",
+        ],
+      },
+      L(
+        "`Bypass` yazma. Bir dəfəlik iş üçün əmr sətrindəki `activate.bat` kifayətdir.",
+        "Do not write `Bypass`. For one job, `activate.bat` in Command Prompt is enough.",
+        "`Bypass` yazma. Bir kerelik iş için komut istemindeki `activate.bat` yeter.",
+        "لا تكتب `Bypass`. لعمل مرة واحدة يكفي `activate.bat` في موجّه الأوامر.",
+        "Не пиши `Bypass`. Для одного раза хватает `activate.bat` в командной строке.",
+      ),
+    ),
+  },
+  {
+    slug: "json-e",
+    code: `import json
+
+metn = json.dumps({"olke": "Azərbaycan"}, ensure_ascii=False)
+with open("metn.json", "w", encoding="utf-8") as fayl:
+    fayl.write(metn)
+`,
+    piece: piece(
+      L(
+        "JSON-da ə hərfi \\u0259 olur",
+        "In JSON the letter ə becomes \\u0259",
+        "JSON'da ə harfi \\u0259 olur",
+        "في JSON يصير حرف ə‏ \\u0259",
+        "В JSON буква ə становится \\u0259",
+      ),
+      L(
+        "Bu, pozulma deyil. `json.dumps` susmaya görə `ə` hərfinı `\\u0259` yazır. Bu, eyni hərfin kodudur. Proqram faylı oxuyanda yenidən `ə` alır.\n\nHərfi faylda özün görmək istəyirsənsə, `ensure_ascii=False` yaz və faylı `utf-8` saxla. `cp1254` yazma. O cədvəldə ə yoxdur.\n\nHamısını bir anda dəyişmə.",
+        "This is not corruption. By default `json.dumps` writes the letter `ə` as `\\u0259`. That is the code of the same letter. When a program reads the file, it gets `ə` again.\n\nIf you want to see the letter in the file, write `ensure_ascii=False` and save the file as `utf-8`. Do not write `cp1254`. That table has no ə.\n\nDo not change everything at once.",
+        "Bu, bozulma değildir. `json.dumps` varsayılan olarak `ə` harfini `\\u0259` yazar. Bu, aynı harfin kodudur. Program dosyayı okuyunca yeniden `ə` alır.\n\nHarfi dosyada kendin görmek istiyorsan `ensure_ascii=False` yaz ve dosyayı `utf-8` kaydet. `cp1254` yazma. O tabloda ə yoktur.\n\nHepsini bir anda değiştirme.",
+        "هذا ليس فسادًا. `json.dumps` يكتب حرف `ə` افتراضيًا `\\u0259`. هذا رمز الحرف نفسه. حين يقرأ البرنامج الملف يأخذ `ə` من جديد.\n\nإذا أردت أن ترى الحرف في الملف فاكتب `ensure_ascii=False` واحفظ الملف `utf-8`. لا تكتب `cp1254`. ذلك الجدول لا يحتوي ə.\n\nلا تغيّر كل شيء دفعة واحدة.",
+        "Это не порча. `json.dumps` по умолчанию пишет букву `ə` как `\\u0259`. Это код той же буквы. Когда программа читает файл, она снова получает `ə`.\n\nЕсли хочешь видеть букву в файле, напиши `ensure_ascii=False` и сохрани файл как `utf-8`. Не пиши `cp1254`. В той таблице нет ə.\n\nНе меняй всё сразу.",
+      ),
+      {
+        az: [
+          "Fayldakı `\\u0259` proqram üçün `ə`-dir. Onu əl ilə silmə.",
+          "Hərfi görmək istəyirsənsə: `json.dumps(melumat, ensure_ascii=False)`.",
+          "Fayla yazanda `encoding=\"utf-8\"` qoy. `encoding` yazmasan Windows türk cədvəlini götürə bilər və ə düşər.",
+          "Excel CSV üçündür `utf-8-sig`. JSON üçün `sig` yazılmır.",
+          "`ensure_ascii=True` səhv deyil. Şəbəkə və köhnə alət üçün `\\u0259` etibarlı qalır.",
+        ],
+        en: [
+          "`\\u0259` in the file is `ə` for a program. Do not delete it by hand.",
+          "If you want to see the letter: `json.dumps(melumat, ensure_ascii=False)`.",
+          "When you write the file, set `encoding=\"utf-8\"`. Without `encoding`, Windows may take the Turkish table and drop ə.",
+          "`utf-8-sig` is for an Excel CSV. JSON does not use `sig`.",
+          "`ensure_ascii=True` is not a mistake. For the network and an old tool, `\\u0259` stays safe.",
+        ],
+        tr: [
+          "Dosyadaki `\\u0259` program için `ə`-dir. Onu elle silme.",
+          "Harfi görmek istiyorsan: `json.dumps(melumat, ensure_ascii=False)`.",
+          "Dosyaya yazarken `encoding=\"utf-8\"` koy. `encoding` yazmazsan Windows Türkçe tabloyu alabilir ve ə düşer.",
+          "Excel CSV içindir `utf-8-sig`. JSON için `sig` yazılmaz.",
+          "`ensure_ascii=True` yanlış değildir. Ağ ve eski araç için `\\u0259` güvenli kalır.",
+        ],
+        ar: [
+          "`\\u0259` في الملف هو `ə` للبرنامج. لا تحذفه يدويًا.",
+          "إذا أردت رؤية الحرف: `json.dumps(melumat, ensure_ascii=False)`.",
+          "عند الكتابة إلى الملف ضع `encoding=\"utf-8\"`. بلا `encoding` قد يأخذ Windows الجدول التركي ويسقط ə.",
+          "`utf-8-sig` لملف CSV في Excel. في JSON لا يُكتب `sig`.",
+          "`ensure_ascii=True` ليس خطأ. للشبكة والأداة القديمة يبقى `\\u0259` سليمًا.",
+        ],
+        ru: [
+          "`\\u0259` в файле для программы — это `ə`. Не стирай его руками.",
+          "Если хочешь видеть букву: `json.dumps(melumat, ensure_ascii=False)`.",
+          "Когда пишешь файл, ставь `encoding=\"utf-8\"`. Без `encoding` Windows может взять турецкую таблицу и ə пропадёт.",
+          "`utf-8-sig` — для CSV в Excel. В JSON `sig` не пишется.",
+          "`ensure_ascii=True` — не ошибка. Для сети и старой программы `\\u0259` остаётся надёжным.",
+        ],
+      },
+      L(
+        "`\\u0259` hərfi pozulmuş `ə` deyil. Eyni hərfin yazılışıdır.",
+        "`\\u0259` is not a broken `ə`. It is another way to write the same letter.",
+        "`\\u0259` bozulmuş `ə` değildir. Aynı harfin yazılışıdır.",
+        "`\\u0259` ليس حرف `ə` فاسدًا. هو كتابة أخرى للحرف نفسه.",
+        "`\\u0259` — это не испорченная `ə`. Это другая запись той же буквы.",
+      ),
+    ),
+  },
+  {
     slug: "apk-qurulmur",
     piece: piece(
       L("APK qurulmur", "APK will not install", "APK kurulmuyor", "APK لا يُثبَّت", "APK не устанавливается"),
