@@ -15,7 +15,7 @@ import { articlesForTopic, findResourceTopic } from "@/lib/resource-topics";
 import type { StudioPrivacyRow } from "@/lib/studio";
 import { useI18n } from "@/lib/i18n-context";
 import { localeHref } from "@/lib/locale-path";
-import type { Lang } from "@/lib/i18n";
+import type { Lang, TKey } from "@/lib/i18n";
 
 const APK_LESSON_FILES = ["capacitor", "termux", "revenuecat"] as const;
 
@@ -840,6 +840,24 @@ export function CodeSamplePage({ slug }: { slug: string }) {
   );
 }
 
+const INSTALL_LINK: Record<string, { slug: string; label: TKey }> = {
+  python: { slug: "python-qurasdir", label: "prog_python_setup" },
+  javascript: { slug: "node-qurasdir", label: "prog_node_setup" },
+  typescript: { slug: "node-qurasdir", label: "prog_node_setup" },
+  nodejs: { slug: "node-qurasdir", label: "prog_node_setup" },
+  java: { slug: "java-qurasdir", label: "prog_java_setup" },
+  csharp: { slug: "csharp-qurasdir", label: "prog_csharp_setup" },
+  sql: { slug: "sql-qurasdir", label: "prog_sql_setup" },
+};
+
+const INSTALL_BACK: Record<string, { slug: string; label: TKey }> = {
+  "python-qurasdir": { slug: "python", label: "prog_python" },
+  "node-qurasdir": { slug: "nodejs", label: "prog_node" },
+  "java-qurasdir": { slug: "java", label: "prog_java" },
+  "csharp-qurasdir": { slug: "csharp", label: "prog_csharp" },
+  "sql-qurasdir": { slug: "sql", label: "prog_sql" },
+};
+
 export function ProgrammingArticle({
   slug,
   title,
@@ -857,6 +875,7 @@ export function ProgrammingArticle({
 }) {
   const { t, lang } = useI18n();
   const heading = (slug && PROGRAM_NAMES[slug]) || title;
+  const related = slug ? INSTALL_LINK[slug] || INSTALL_BACK[slug] : undefined;
 
   return (
     <main className="why-page">
@@ -878,6 +897,11 @@ export function ProgrammingArticle({
           heading
         )}
       </h1>
+      {related ? (
+        <p className="prog-try">
+          <a href={programmingLocalePath(lang, related.slug)}>{t(related.label)}</a>
+        </p>
+      ) : null}
       {slug && DEV_TRY[slug] ? (
         <p className="prog-try">
           <a href={DEV_TRY[slug]} target="_blank" rel="noopener noreferrer">

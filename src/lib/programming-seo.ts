@@ -393,4 +393,40 @@ export const PROGRAMMING_SEO: Record<string, Record<"az" | "en" | "tr" | "ar" | 
     ar: { title: "ما هو YAML؟ — Nibras Code", description: "YAML صيغة تكتب الإعداد بأسطر ومسافات. ليست لغة برمجة. JSON يستخدم الأقواس وYAML ينظر إلى الإزاحة.", keywords: "ما هو YAML, إزاحة YAML, JSON" },
     ru: { title: "Что такое YAML? — Nibras Code", description: "YAML — формат, который пишет настройку строками и пробелами. Это не язык программирования. JSON использует скобки, а YAML смотрит на отступ.", keywords: "что такое YAML, отступ YAML, JSON" },
   },
+
+  "python-qurasdir": {
+    az: { title: "Python quraşdır — Nibras Code", description: "Windows-da bu gün Python 3.14 qurulur. Quraşdırmadan sonra python --version ilə yoxlanır.", keywords: "Python quraşdır, Python 3.14, Windows" },
+    en: { title: "Install Python — Nibras Code", description: "On Windows, install Python 3.14 today. After setup, check it with python --version.", keywords: "install Python, Python 3.14, Windows" },
+    tr: { title: "Python kur — Nibras Code", description: "Windows’ta bugün Python 3.14 kurulur. Kurulumdan sonra python --version ile bakılır.", keywords: "Python kur, Python 3.14, Windows" },
+    ar: { title: "تثبيت Python — Nibras Code", description: "على Windows يُثبَّت اليوم Python 3.14. بعد التثبيت يُفحص بـ python --version.", keywords: "تثبيت Python, Python 3.14" },
+    ru: { title: "Установить Python — Nibras Code", description: "В Windows сегодня ставят Python 3.14. После установки это проверяют командой python --version.", keywords: "установить Python, Python 3.14" },
+  },
+  "node-qurasdir": {
+    az: { title: "Node.js quraşdır — Nibras Code", description: "Windows-da bu gün Node.js 24 LTS qurulur. Quraşdırmadan sonra node --version ilə yoxlanır.", keywords: "Node.js quraşdır, Node 24 LTS, npm" },
+    en: { title: "Install Node.js — Nibras Code", description: "On Windows, install Node.js 24 LTS today. After setup, check it with node --version.", keywords: "install Node.js, Node 24 LTS, npm" },
+    tr: { title: "Node.js kur — Nibras Code", description: "Windows’ta bugün Node.js 24 LTS kurulur. Kurulumdan sonra node --version ile bakılır.", keywords: "Node.js kur, Node 24 LTS" },
+    ar: { title: "تثبيت Node.js — Nibras Code", description: "على Windows يُثبَّت اليوم Node.js 24 LTS. بعد التثبيت يُفحص بـ node --version.", keywords: "تثبيت Node.js, Node 24" },
+    ru: { title: "Установить Node.js — Nibras Code", description: "В Windows сегодня ставят Node.js 24 LTS. После установки это проверяют командой node --version.", keywords: "установить Node.js, Node 24" },
+  },
+  "java-qurasdir": {
+    az: { title: "Java quraşdır — Nibras Code", description: "Windows-da bu gün Java 25 LTS qurulur. Pulsuz quruluş Eclipse Temurin JDK-dır.", keywords: "Java quraşdır, Java 25, Temurin JDK" },
+    en: { title: "Install Java — Nibras Code", description: "On Windows, install Java 25 LTS today. The free build is the Eclipse Temurin JDK.", keywords: "install Java, Java 25, Temurin JDK" },
+    tr: { title: "Java kur — Nibras Code", description: "Windows’ta bugün Java 25 LTS kurulur. Ücretsiz kurulum Eclipse Temurin JDK’dır.", keywords: "Java kur, Java 25, Temurin" },
+    ar: { title: "تثبيت Java — Nibras Code", description: "على Windows تُثبَّت اليوم Java 25 LTS. البناء المجاني هو Eclipse Temurin JDK.", keywords: "تثبيت Java, Java 25, Temurin" },
+    ru: { title: "Установить Java — Nibras Code", description: "В Windows сегодня ставят Java 25 LTS. Бесплатная сборка — Eclipse Temurin JDK.", keywords: "установить Java, Java 25, Temurin" },
+  },
+  "csharp-qurasdir": {
+    az: { title: "C# quraşdır — Nibras Code", description: "C# üçün Windows-da .NET 10 SDK qurulur. Runtime kifayət etmir.", keywords: "C# quraşdır, .NET 10 SDK, dotnet" },
+    en: { title: "Install C# — Nibras Code", description: "For C# on Windows, install the .NET 10 SDK. The runtime is not enough.", keywords: "install C#, .NET 10 SDK, dotnet" },
+    tr: { title: "C# kur — Nibras Code", description: "C# için Windows’ta .NET 10 SDK kurulur. Runtime yetmez.", keywords: "C# kur, .NET 10 SDK" },
+    ar: { title: "تثبيت C# — Nibras Code", description: "لأجل C# على Windows يُثبَّت ‎.NET 10 SDK. بيئة التشغيل وحدها لا تكفي.", keywords: "تثبيت C#, .NET 10" },
+    ru: { title: "Установить C# — Nibras Code", description: "Для C# в Windows ставят .NET 10 SDK. Одной среды выполнения мало.", keywords: "установить C#, .NET 10 SDK" },
+  },
+  "sql-qurasdir": {
+    az: { title: "SQL quraşdır — Nibras Code", description: "SQL dili ayrıca qurulmur. Windows-da onu işlətmək üçün bu gün PostgreSQL 18 qurulur.", keywords: "SQL quraşdır, PostgreSQL 18, psql" },
+    en: { title: "Install SQL — Nibras Code", description: "The SQL language is not installed by itself. To run it on Windows, install PostgreSQL 18 today.", keywords: "install SQL, PostgreSQL 18, psql" },
+    tr: { title: "SQL kur — Nibras Code", description: "SQL dili tek başına kurulmaz. Windows’ta çalıştırmak için bugün PostgreSQL 18 kurulur.", keywords: "SQL kur, PostgreSQL 18, psql" },
+    ar: { title: "تثبيت SQL — Nibras Code", description: "لغة SQL لا تُثبَّت وحدها. لتشغيلها على Windows يُثبَّت اليوم PostgreSQL 18.", keywords: "تثبيت SQL, PostgreSQL 18" },
+    ru: { title: "Установить SQL — Nibras Code", description: "Язык SQL сам по себе не ставится. Чтобы запускать его в Windows, сегодня ставят PostgreSQL 18.", keywords: "установить SQL, PostgreSQL 18" },
+  },
 };
