@@ -1186,7 +1186,7 @@ function jsonLd(path: string, lang: Lang, copy: PageSeo, url: string) {
 
   const searched = searchTopicFromPath(path);
   if (searched) {
-    const answer = [searched.piece.lead, ...searched.piece.points, searched.piece.note].filter(Boolean).join(" ");
+    const answer = [searched.piece.lead, ...searched.piece.points, searched.piece.note, searched.item.code].filter(Boolean).join(" ");
     return {
       "@context": "https://schema.org",
       "@type": "FAQPage",

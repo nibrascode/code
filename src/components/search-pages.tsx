@@ -86,6 +86,7 @@ export function SearchTopic({
               <Rich text={text.note} />
             </p>
           ) : null}
+          {item.code ? <pre dir="ltr">{item.code}</pre> : null}
         </div>
       )}
       {pageTools(slug).length ? (

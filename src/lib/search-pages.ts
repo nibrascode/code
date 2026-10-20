@@ -14,6 +14,8 @@ type SearchItem = {
   slug: string;
   /** Body is loaded from a lazy chunk (see loadApkBody). */
   lazy?: boolean;
+  /** Same source block on every language page. */
+  code?: string;
   piece: Record<Lang, SearchPiece>;
 };
 
@@ -312,6 +314,14 @@ const BASE_ERRORS: readonly SearchItem[] = [
   },
   {
     slug: "e-herfi",
+    code: `import sys
+sys.stdout.reconfigure(encoding="utf-8")
+
+print("Azərbaycan")
+
+with open("metn.txt", "w", encoding="utf-8") as fayl:
+    fayl.write("Azərbaycan\\n")
+`,
     piece: piece(
       L(
         "Konsolda ə hərfi kvadrat olur",
