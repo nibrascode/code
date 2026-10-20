@@ -6,7 +6,7 @@ import { CODE_SAMPLE_HUB, CODE_SAMPLES, SITE_CODE } from "@/lib/code-samples";
 import type { ProgrammingSection } from "@/lib/programming";
 import { HUBS, pagesOf } from "@/lib/course/meta";
 import { hasProgrammingLocale, programmingLocalePath } from "@/lib/programming-path";
-import { SEARCH, searchPath } from "@/lib/search-pages";
+import { SEARCH, searchPath, searchTopicPath } from "@/lib/search-pages";
 import { COMPARE, comparePath } from "@/lib/learn-pages";
 import { PAKET, paketPath } from "@/lib/paket";
 import { TOOLS, TOOLS_PAGE, pageTools, toolPath } from "@/lib/tools";
@@ -858,6 +858,14 @@ const INSTALL_BACK: Record<string, { slug: string; label: TKey }> = {
   "sql-qurasdir": { slug: "sql", label: "prog_sql" },
 };
 
+const CMD_MISSING: Record<Lang, string> = {
+  az: "Əmr tanınmırsa",
+  en: "If the command is not recognized",
+  tr: "Komut tanınmıyorsa",
+  ar: "إذا لم يُعرف الأمر",
+  ru: "Если команда не находится",
+};
+
 export function ProgrammingArticle({
   slug,
   title,
@@ -900,6 +908,11 @@ export function ProgrammingArticle({
       {related ? (
         <p className="prog-try">
           <a href={programmingLocalePath(lang, related.slug)}>{t(related.label)}</a>
+        </p>
+      ) : null}
+      {slug && INSTALL_BACK[slug] ? (
+        <p className="prog-try">
+          <a href={searchTopicPath(lang, "xeta", "emr-taninmir")}>{CMD_MISSING[lang]}</a>
         </p>
       ) : null}
       {slug && DEV_TRY[slug] ? (
