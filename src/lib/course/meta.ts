@@ -66,14 +66,14 @@ export const HUBS: Record<CourseKind, { slug: string; title: L5; description: L5
   },
   css: {
     slug: "css-kurs",
-    title: l5("CSS dərsləri: rəng, class və flex", "CSS lessons: color, class and flex", "CSS dersleri: renk, class ve flex", "دروس CSS: اللون وclass وflex", "Уроки CSS: цвет, class и flex"),
+    title: l5("CSS dərsləri: rəng, qutu və hover", "CSS lessons: color, box and hover", "CSS dersleri: renk, kutu ve hover", "دروس CSS: اللون والصندوق وhover", "Уроки CSS: цвет, коробка и hover"),
     description: l5("CSS nədir, class və flex, sonra qutu (margin, padding) və hover.", "What CSS is, then the box (margin, padding) and hover.", "CSS nedir, class ve flex, sonra kutu (margin, padding) ve hover.", "ما هو CSS ثم الصندوق (margin وpadding) وhover.", "Что такое CSS, затем коробка (margin, padding) и hover."),
     keywords: l5("CSS nədir, CSS class, CSS flex, CSS margin, CSS hover", "what is CSS, CSS class, CSS flex, CSS margin, CSS hover", "CSS nedir, CSS class, CSS flex, CSS margin, CSS hover", "ما هو CSS, CSS class, CSS flex, CSS margin, CSS hover", "что такое CSS, CSS class, CSS flex, CSS margin, CSS hover"),
     intro: l5("Üç dərs: rəng və flex, qutu, hover. Nümunə kod səhifənin içindədir.", "Three lessons: color and flex, the box, and hover. The sample code is on the page.", "Üç ders: renk ve flex, kutu, hover. Örnek kod sayfanın içindedir.", "ثلاثة دروس: اللون وflex، الصندوق، وhover. الكود النموذجي في الصفحة.", "Три урока: цвет и flex, коробка и hover. Пример кода на странице."),
   },
   sql: {
     slug: "sql-kurs",
-    title: l5("SQL dərsləri: SELECT", "SQL lessons: SELECT", "SQL dersleri: SELECT", "دروس SQL: SELECT", "Уроки SQL: SELECT"),
+    title: l5("SQL dərsləri: oxu, sırala, say", "SQL lessons: read, sort, count", "SQL dersleri: oku, sırala, say", "دروس SQL: اقرأ ورتّب وعدّ", "Уроки SQL: читать, сортировать, считать"),
     description: l5("Cədvəldən oxu: SELECT və WHERE, sonra sıralama və sayma.", "Read a table: SELECT and WHERE, then sorting and counting.", "Tablodan oku: SELECT ve WHERE, sonra sıralama ve sayma.", "اقرأ من جدول: SELECT وWHERE ثم الترتيب والعد.", "Чтение таблицы: SELECT и WHERE, затем сортировка и подсчёт."),
     keywords: l5("SQL SELECT, SQL WHERE, SQL ORDER BY, SQL COUNT", "SQL SELECT, SQL WHERE, SQL ORDER BY, SQL COUNT", "SQL SELECT, SQL WHERE, SQL ORDER BY, SQL COUNT", "SQL SELECT, SQL WHERE, SQL ORDER BY, SQL COUNT", "SQL SELECT, SQL WHERE, SQL ORDER BY, SQL COUNT"),
     intro: l5("Üç dərs: cədvəldən sətir oxu, sırala və say.", "Three lessons: read rows, sort them and count them.", "Üç ders: tablodan satır oku, sırala ve say.", "ثلاثة دروس: اقرأ الصفوف ورتّبها وعدّها.", "Три урока: прочитать строки, отсортировать и посчитать."),
