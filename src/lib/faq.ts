@@ -150,12 +150,16 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "plans",
         q: "Nibras Plans nədir?",
-        a: "Nibras Plans plan, cədvəl və hesabatları sadə saxlamaq üçün hazırlanan tətbiqdir. Hazırda tezliklədir.",
+        a: "Nibras Plans plan, cədvəl və hesabatları sadə saxlamaq üçün hazırlanan tətbiqdir. Gündəlik işdə plan qurmaq, gedişi izləmək və aydın hesabat almaq üçündür. Hazırda tezliklədir: mağaza linki yoxdur və dəqiq çıxış tarixi elan olunmur.",
+        points: ["Planları rahat qurmaq", "Sadə izləmə", "Aydın hesabatlar"],
+        notes: ["Səhifəsi /apps/nibras-plans ünvanındadır. Yükləmə düyməsi link hazır olanda orada görünəcək."],
       },
       {
         id: "docs",
         q: "Nibras Docs nədir?",
-        a: "Nibras Docs sənəd yazmaq, redaktə etmək və paylaşmaq üçün hazırlanan tətbiqdir. Vəziyyəti tezliklədir.",
+        a: "Nibras Docs sənəd yazmaq, redaktə etmək və paylaşmaq üçün hazırlanan tətbiqdir. Məqsəd sənədlə işi bir yerdə, artıq səs-küy olmadan sakit və aydın saxlamaqdır. Vəziyyəti tezliklədir: mağaza linki hələ yoxdur.",
+        points: ["Sənədləri rahat yazmaq", "Sadə redaktə", "Gündəlik paylaşım"],
+        notes: ["Səhifəsi /apps/nibras-docs ünvanındadır. Link çıxanda yükləmə düyməsi həmin səhifəyə əlavə olunacaq."],
       },
       {
         id: "pulsuz",
@@ -165,12 +169,12 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "yukleme",
         q: "Tətbiqi haradan yükləmək olar?",
-        a: "Yükləmə linki hazır olanda həmin tətbiqin səhifəsində görünür. Google Play, Huawei, App Store, Galaxy Store və Xiaomi üçün boş link göstərilmir.",
+        a: "Yükləmə linki hazır olanda həmin tətbiqin səhifəsində görünür. Google Play, Huawei, App Store, Galaxy Store və Xiaomi üçün boş link göstərilmir. Hazırda Nibras Arabic Google Play və Huawei-də, Nibras QR isə Google Play-dədir. Nibras PDF, Nibras Docs və Nibras Plans tezliklə olduğu üçün onların səhifəsində yükləmə düyməsi yoxdur. Yeni link çıxanda o, tətbiqin öz səhifəsinə yazılır. Saytda olmayan mağaza ünvanı uydurulmur.",
       },
       {
         id: "mexfilik",
         q: "Məxfilik siyasəti haradadır?",
-        a: "Hər tətbiqin səhifəsində Məxfilik siyasəti düyməsi var. Əsas sayt və Nibras AI üçün mətn /privacy səhifəsindədir. Nibras Arabic və Nibras PDF üçün ayrıca səhifə də var.",
+        a: "Hər tətbiqin səhifəsində Məxfilik siyasəti düyməsi var. Əsas sayt və Nibras AI üçün mətn /privacy səhifəsindədir. Nibras Arabic, Nibras PDF, Nibras Docs, Nibras Plans və Nibras QR üçün ayrıca səhifə də var. Nibras QR hesabının silinməsi /privacy/nibras-qr/delete-account ünvanında yazılır. Hər siyasət həmin tətbiqin öz mətnidir: nə saxlanılır, nə cihazda qalır və hesab varmı, orada göstərilir. Ümumi səhifə tətbiqin siyasətini əvəz etmir. Düymə tətbiqin səhifəsindən birbaşa onun öz siyasətinə aparır. Nibras Arabic və Nibras PDF mətnlərində versiya da yazılır.",
       },
       {
         id: "diller",
@@ -180,7 +184,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "elaqe",
         q: "Nibras Code ilə necə əlaqə saxlamaq olar?",
-        a: "Əlaqə səhifəsindən və ya nibrascode@gmail.com ünvanından yazmaq olar.",
+        a: "Əlaqə səhifəsindən (/contact) və ya nibrascode@gmail.com ünvanından yazmaq olar. Nibras Code şəxsi layihədir, ofisi olan şirkət deyil. Telefon nömrəsi və fiziki ünvan yoxdur. Rəsmi əlaqə yalnız bu e-poçtdur. Cavab da həmin ünvandan gəlir. Başqa kanal elan olunmayıb.",
       },
       {
         id: "sayt",
@@ -297,12 +301,16 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "plans",
         q: "What is Nibras Plans?",
-        a: "Nibras Plans is an app for keeping plans, sheets, and reports simple. It is coming soon.",
+        a: "Nibras Plans is an app for keeping plans, sheets, and reports simple. It is meant for daily work: build a plan, follow progress, and get a clear report. It is coming soon: there is no store link, and no release date is announced.",
+        points: ["Build plans comfortably", "Simple tracking", "Clear reports"],
+        notes: ["Its page is /en/apps/nibras-plans. The download button will appear there when a link is ready."],
       },
       {
         id: "docs",
         q: "What is Nibras Docs?",
-        a: "Nibras Docs is an app for writing, editing, and sharing documents. It is coming soon.",
+        a: "Nibras Docs is an app for writing, editing, and sharing documents. The aim is calm, clear work in one place, without extra noise. It is coming soon: there is no store link yet.",
+        points: ["Write documents comfortably", "Simple editing", "Everyday sharing"],
+        notes: ["Its page is /en/apps/nibras-docs. When a link exists, the download button will be added on that page."],
       },
       {
         id: "pulsuz",
@@ -312,12 +320,12 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "yukleme",
         q: "Where can I download an app?",
-        a: "A download link appears on that app’s page when it is ready. Empty links for Google Play, Huawei, the App Store, Galaxy Store, and Xiaomi are not shown.",
+        a: "A download link appears on that app’s page when it is ready. Empty links for Google Play, Huawei, the App Store, Galaxy Store, and Xiaomi are not shown. Nibras Arabic is on Google Play and Huawei. Nibras QR is on Google Play. Nibras PDF, Nibras Docs, and Nibras Plans are coming soon, so their pages have no download button. A new link is added on that app’s own page. A store address that is not real is not invented on the site.",
       },
       {
         id: "mexfilik",
         q: "Where is the privacy policy?",
-        a: "Every app page has a Privacy policy button. The main site and Nibras AI are covered on /privacy. Nibras Arabic and Nibras PDF also have their own pages.",
+        a: "Every app page has a Privacy policy button. The main site and Nibras AI are covered on /privacy?lang=en. Nibras Arabic, Nibras PDF, Nibras Docs, Nibras Plans, and Nibras QR also have their own pages. Deleting a Nibras QR account is explained at /privacy/nibras-qr/delete-account?lang=en. Each policy is that app’s own text: what is stored, what stays on the device, and whether an account exists. The general page does not replace an app’s policy. The button on the app page opens that app’s own policy. The Nibras Arabic and Nibras PDF texts also name the version.",
       },
       {
         id: "diller",
@@ -327,7 +335,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "elaqe",
         q: "How can I contact Nibras Code?",
-        a: "Use the contact page, or write to nibrascode@gmail.com.",
+        a: "Use the contact page (/en/contact), or write to nibrascode@gmail.com. Nibras Code is a personal project, not a company with an office. There is no phone number and no physical address. This email is the only official contact. The reply comes from the same address. No other channel is announced.",
       },
       {
         id: "sayt",
@@ -444,12 +452,16 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "plans",
         q: "Nibras Plans nedir?",
-        a: "Nibras Plans, plan, tablo ve raporları sade tutmak için hazırlanan uygulamadır. Şu anda yakındadır.",
+        a: "Nibras Plans, plan, tablo ve raporları sade tutmak için hazırlanan uygulamadır. Günlük işte plan kurmak, ilerlemeyi izlemek ve net bir rapor almak içindir. Şu anda yakındadır: mağaza bağlantısı yoktur ve kesin bir çıkış tarihi açıklanmaz.",
+        points: ["Planları rahat kurmak", "Sade takip", "Anlaşılır raporlar"],
+        notes: ["Sayfası /tr/apps/nibras-plans adresindedir. İndirme düğmesi bağlantı hazır olunca orada görünecek."],
       },
       {
         id: "docs",
         q: "Nibras Docs nedir?",
-        a: "Nibras Docs, belge yazmak, düzenlemek ve paylaşmak için hazırlanan uygulamadır. Durumu yakındadır.",
+        a: "Nibras Docs, belge yazmak, düzenlemek ve paylaşmak için hazırlanan uygulamadır. Amaç, belgelerle işi tek yerde, fazla gürültü olmadan sakin ve açık tutmaktır. Durumu yakındadır: mağaza bağlantısı henüz yoktur.",
+        points: ["Belgeleri rahat yazmak", "Sade düzenleme", "Günlük paylaşım"],
+        notes: ["Sayfası /tr/apps/nibras-docs adresindedir. Bağlantı çıkınca indirme düğmesi o sayfaya eklenecek."],
       },
       {
         id: "pulsuz",
@@ -459,12 +471,12 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "yukleme",
         q: "Uygulama nereden indirilir?",
-        a: "İndirme bağlantısı hazır olduğunda o uygulamanın sayfasında görünür. Google Play, Huawei, App Store, Galaxy Store ve Xiaomi için boş bağlantı gösterilmez.",
+        a: "İndirme bağlantısı hazır olduğunda o uygulamanın sayfasında görünür. Google Play, Huawei, App Store, Galaxy Store ve Xiaomi için boş bağlantı gösterilmez. Şu anda Nibras Arabic Google Play ve Huawei’de, Nibras QR ise Google Play’dedir. Nibras PDF, Nibras Docs ve Nibras Plans yakında olduğu için sayfalarında indirme düğmesi yoktur. Yeni bağlantı o uygulamanın kendi sayfasına yazılır. Gerçek olmayan bir mağaza adresi sitede uydurulmaz.",
       },
       {
         id: "mexfilik",
         q: "Gizlilik politikası nerede?",
-        a: "Her uygulamanın sayfasında Gizlilik politikası düğmesi vardır. Ana site ve Nibras AI /privacy sayfasında anlatılır. Nibras Arabic ve Nibras PDF için ayrı sayfa da vardır.",
+        a: "Her uygulamanın sayfasında Gizlilik politikası düğmesi vardır. Ana site ve Nibras AI /privacy?lang=tr sayfasında anlatılır. Nibras Arabic, Nibras PDF, Nibras Docs, Nibras Plans ve Nibras QR için ayrı sayfa da vardır. Nibras QR hesabının silinmesi /privacy/nibras-qr/delete-account?lang=tr adresinde yazılır. Her politika o uygulamanın kendi metnidir: ne saklanır, ne cihazda kalır ve hesap var mı, orada gösterilir. Genel sayfa uygulamanın politikasının yerini tutmaz. Düğme, uygulamanın sayfasından doğrudan onun kendi politikasına gider. Nibras Arabic ve Nibras PDF metinlerinde sürüm de yazılır.",
       },
       {
         id: "diller",
@@ -474,7 +486,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "elaqe",
         q: "Nibras Code ile nasıl iletişim kurulur?",
-        a: "İletişim sayfasından veya nibrascode@gmail.com adresinden yazabilirsiniz.",
+        a: "İletişim sayfasından (/tr/contact) veya nibrascode@gmail.com adresinden yazabilirsiniz. Nibras Code kişisel bir projedir, ofisi olan bir şirket değildir. Telefon numarası ve fiziksel adres yoktur. Resmi iletişim yalnızca bu e-postadır. Cevap da aynı adresten gelir. Başka bir kanal açıklanmamıştır.",
       },
       {
         id: "sayt",
@@ -591,12 +603,16 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "plans",
         q: "ما هو Nibras Plans؟",
-        a: "Nibras Plans تطبيق لإبقاء الخطط والجداول والتقارير بسيطة. وهو قريبًا.",
+        a: "Nibras Plans تطبيق لإبقاء الخطط والجداول والتقارير بسيطة. هو للعمل اليومي: وضع خطة، ومتابعة السير، والحصول على تقرير واضح. وهو قريبًا: لا رابط متجر، ولا يُعلَن تاريخ إصدار محدد.",
+        points: ["وضع الخطط براحة", "متابعة بسيطة", "تقارير واضحة"],
+        notes: ["صفحته على /ar/apps/nibras-plans. زر التحميل يظهر هناك عندما يجهز الرابط."],
       },
       {
         id: "docs",
         q: "ما هو Nibras Docs؟",
-        a: "Nibras Docs تطبيق لكتابة المستندات وتحريرها ومشاركتها. حالته قريبًا.",
+        a: "Nibras Docs تطبيق لكتابة المستندات وتحريرها ومشاركتها. الغرض أن يبقى العمل مع المستند في مكان واحد، هادئًا وواضحًا بلا ضجيج زائد. حالته قريبًا: لا رابط متجر بعد.",
+        points: ["كتابة المستندات براحة", "تحرير بسيط", "مشاركة يومية"],
+        notes: ["صفحته على /ar/apps/nibras-docs. عند وجود الرابط يُضاف زر التحميل في تلك الصفحة."],
       },
       {
         id: "pulsuz",
@@ -606,12 +622,12 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "yukleme",
         q: "من أين يُحمَّل التطبيق؟",
-        a: "يظهر رابط التحميل في صفحة ذلك التطبيق عندما يكون جاهزًا. لا تُعرض روابط فارغة لـ Google Play أو Huawei أو App Store أو Galaxy Store أو Xiaomi.",
+        a: "يظهر رابط التحميل في صفحة ذلك التطبيق عندما يكون جاهزًا. لا تُعرض روابط فارغة لـ Google Play أو Huawei أو App Store أو Galaxy Store أو Xiaomi. Nibras Arabic موجود على Google Play وHuawei، وNibras QR على Google Play. Nibras PDF وNibras Docs وNibras Plans قريبًا، لذلك لا زر تحميل في صفحاتها. الرابط الجديد يُكتب في صفحة التطبيق نفسه. عنوان متجر غير موجود لا يُختلق في الموقع.",
       },
       {
         id: "mexfilik",
         q: "أين سياسة الخصوصية؟",
-        a: "في صفحة كل تطبيق زر لسياسة الخصوصية. الموقع الرئيسي وNibras AI مذكوران في /privacy. ولـ Nibras Arabic وNibras PDF صفحة مستقلة أيضًا.",
+        a: "في صفحة كل تطبيق زر لسياسة الخصوصية. الموقع الرئيسي وNibras AI مذكوران في /privacy?lang=ar. ولـ Nibras Arabic وNibras PDF وNibras Docs وNibras Plans وNibras QR صفحة مستقلة أيضًا. حذف حساب Nibras QR مكتوب في /privacy/nibras-qr/delete-account?lang=ar. كل سياسة هي نص ذلك التطبيق: ما الذي يُحفظ، وما يبقى على الجهاز، وهل يوجد حساب. الصفحة العامة لا تغني عن سياسة التطبيق. الزر في صفحة التطبيق يفتح سياسة ذلك التطبيق نفسها. وفي نصي Nibras Arabic وNibras PDF تُذكر النسخة أيضًا.",
       },
       {
         id: "diller",
@@ -621,7 +637,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "elaqe",
         q: "كيف يكون التواصل مع Nibras Code؟",
-        a: "من صفحة التواصل، أو بالكتابة إلى nibrascode@gmail.com.",
+        a: "من صفحة التواصل (/ar/contact)، أو بالكتابة إلى nibrascode@gmail.com. Nibras Code مشروع شخصي، وليس شركة لها مكتب. لا يوجد رقم هاتف ولا عنوان فعلي. هذا البريد هو التواصل الرسمي الوحيد. الرد يأتي من العنوان نفسه. لم يُعلَن عن قناة أخرى.",
       },
       {
         id: "sayt",
@@ -738,12 +754,16 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "plans",
         q: "Что такое Nibras Plans?",
-        a: "Nibras Plans — приложение, чтобы планы, таблицы и отчёты оставались простыми. Сейчас оно скоро появится.",
+        a: "Nibras Plans — приложение, чтобы планы, таблицы и отчёты оставались простыми. Оно для ежедневной работы: составить план, следить за ходом и получить ясный отчёт. Сейчас оно скоро появится: ссылки на магазин нет, и точная дата выхода не объявляется.",
+        points: ["Удобно составлять планы", "Простое отслеживание", "Ясные отчёты"],
+        notes: ["Страница: /ru/apps/nibras-plans. Кнопка загрузки появится там, когда ссылка будет готова."],
       },
       {
         id: "docs",
         q: "Что такое Nibras Docs?",
-        a: "Nibras Docs — приложение, чтобы писать, править и делиться документами. Его статус — скоро.",
+        a: "Nibras Docs — приложение, чтобы писать, править и делиться документами. Цель — спокойная и ясная работа с документом в одном месте, без лишнего шума. Его статус — скоро: ссылки на магазин пока нет.",
+        points: ["Удобно писать документы", "Простое редактирование", "Повседневный обмен"],
+        notes: ["Страница: /ru/apps/nibras-docs. Когда ссылка появится, кнопка загрузки будет добавлена на эту страницу."],
       },
       {
         id: "pulsuz",
@@ -753,12 +773,12 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "yukleme",
         q: "Откуда скачать приложение?",
-        a: "Ссылка на загрузку появляется на странице этого приложения, когда она готова. Пустые ссылки Google Play, Huawei, App Store, Galaxy Store и Xiaomi не показываются.",
+        a: "Ссылка на загрузку появляется на странице этого приложения, когда она готова. Пустые ссылки Google Play, Huawei, App Store, Galaxy Store и Xiaomi не показываются. Сейчас Nibras Arabic есть в Google Play и Huawei, а Nibras QR — в Google Play. Nibras PDF, Nibras Docs и Nibras Plans скоро, поэтому на их страницах нет кнопки загрузки. Новая ссылка пишется на странице самого приложения. Несуществующий адрес магазина на сайте не выдумывается.",
       },
       {
         id: "mexfilik",
         q: "Где политика конфиденциальности?",
-        a: "На странице каждого приложения есть кнопка политики конфиденциальности. Основной сайт и Nibras AI описаны на /privacy. У Nibras Arabic и Nibras PDF есть и отдельные страницы.",
+        a: "На странице каждого приложения есть кнопка политики конфиденциальности. Основной сайт и Nibras AI описаны на /privacy?lang=ru. У Nibras Arabic, Nibras PDF, Nibras Docs, Nibras Plans и Nibras QR есть и отдельные страницы. Удаление аккаунта Nibras QR описано на /privacy/nibras-qr/delete-account?lang=ru. Каждая политика — текст самого приложения: что хранится, что остаётся на устройстве и есть ли аккаунт. Общая страница не заменяет политику приложения. Кнопка на странице приложения открывает политику именно этого приложения. В текстах Nibras Arabic и Nibras PDF указана и версия.",
       },
       {
         id: "diller",
@@ -768,7 +788,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "elaqe",
         q: "Как связаться с Nibras Code?",
-        a: "Через страницу контакта или по адресу nibrascode@gmail.com.",
+        a: "Через страницу контакта (/ru/contact) или по адресу nibrascode@gmail.com. Nibras Code — личный проект, не компания с офисом. Телефона и физического адреса нет. Официальная связь только эта почта. Ответ приходит с того же адреса. Другой канал не объявлен.",
       },
       {
         id: "sayt",
