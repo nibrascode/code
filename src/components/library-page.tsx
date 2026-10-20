@@ -59,11 +59,12 @@ const GUIDE_INTRO: Record<string, Record<Lang, string>> = {
   },
 };
 
-const FIND_UI: Record<Lang, { search: string; empty: string; start: string; diff: string; tryNote: string }> = {
+const FIND_UI: Record<Lang, { search: string; empty: string; start: string; lessons: string; diff: string; tryNote: string }> = {
   az: {
     search: "Alət axtar",
     empty: "Bu adla səhifə yoxdur.",
     start: "Haradan başlayım",
+    lessons: "Dərslər",
     diff: "Fərqi nədir",
     tryNote: "Bu səhifəni oxuduqdan sonra kodu Nibras Dev-də yoxlaya bilərsən.",
   },
@@ -71,6 +72,7 @@ const FIND_UI: Record<Lang, { search: string; empty: string; start: string; diff
     search: "Search a tool",
     empty: "No page with that name.",
     start: "Where to start",
+    lessons: "Lessons",
     diff: "What is the difference",
     tryNote: "After this page, you can try the code in Nibras Dev.",
   },
@@ -78,6 +80,7 @@ const FIND_UI: Record<Lang, { search: string; empty: string; start: string; diff
     search: "Araç ara",
     empty: "Bu adda sayfa yok.",
     start: "Nereden başlamalı",
+    lessons: "Dersler",
     diff: "Farkı ne",
     tryNote: "Bu sayfadan sonra kodu Nibras Dev içinde deneyebilirsin.",
   },
@@ -86,12 +89,14 @@ const FIND_UI: Record<Lang, { search: string; empty: string; start: string; diff
     empty: "لا صفحة بهذا الاسم.",
     start: "من أين تبدأ",
     diff: "ما الفرق",
+    lessons: "دروس",
     tryNote: "بعد هذه الصفحة يمكنك تجربة الكود في Nibras Dev.",
   },
   ru: {
     search: "Найти инструмент",
     empty: "Такой страницы нет.",
     start: "С чего начать",
+    lessons: "Уроки",
     diff: "В чём разница",
     tryNote: "После этой страницы код можно проверить в Nibras Dev.",
   },
@@ -126,6 +131,59 @@ const START_STEPS: readonly { slug: "html-css" | "python" | "ai"; text: Record<L
       tr: { title: "Nibras AI", note: "Takılınca soru sor." },
       ar: { title: "Nibras AI", note: "اسأل حين تقف." },
       ru: { title: "Nibras AI", note: "Спроси, когда застрянешь." },
+    },
+  },
+];
+
+const LESSONS: readonly { kind: "html" | "css" | "javascript" | "python" | "sql"; note: Record<Lang, string> }[] = [
+  {
+    kind: "html",
+    note: {
+      az: "Səhifənin quruluşu, teqlər və form.",
+      en: "Page structure, tags and forms.",
+      tr: "Sayfanın yapısı, etiketler ve form.",
+      ar: "بنية الصفحة والوسوم والنموذج.",
+      ru: "Структура страницы, теги и форма.",
+    },
+  },
+  {
+    kind: "css",
+    note: {
+      az: "Rəng, qutu və hover.",
+      en: "Color, the box and hover.",
+      tr: "Renk, kutu ve hover.",
+      ar: "اللون والصندوق وhover.",
+      ru: "Цвет, коробка и hover.",
+    },
+  },
+  {
+    kind: "javascript",
+    note: {
+      az: "İlk sətir, şərt və düymə.",
+      en: "The first line, a condition and a button.",
+      tr: "İlk satır, koşul ve düğme.",
+      ar: "السطر الأول والشرط والزر.",
+      ru: "Первая строка, условие и кнопка.",
+    },
+  },
+  {
+    kind: "python",
+    note: {
+      az: "Sıfırdan dərs fəsilləri.",
+      en: "Lesson chapters from scratch.",
+      tr: "Sıfırdan ders bölümleri.",
+      ar: "فصول دروس من الصفر.",
+      ru: "Главы уроков с нуля.",
+    },
+  },
+  {
+    kind: "sql",
+    note: {
+      az: "Oxu, sırala və say.",
+      en: "Read, sort and count.",
+      tr: "Oku, sırala ve say.",
+      ar: "اقرأ ورتّب وعدّ.",
+      ru: "Читать, сортировать и считать.",
     },
   },
 ];
@@ -266,6 +324,14 @@ export function LibraryIndex({
           { href: comparePath(lang), label: COMPARE.heading[lang] },
         ].filter((item) => !needle || item.label.toLowerCase().includes(needle))
       : [];
+  const lessons =
+    section === "programming"
+      ? LESSONS.filter((lesson) => {
+          if (!needle) return true;
+          const title = HUBS[lesson.kind].title[lang].toLowerCase();
+          return title.includes(needle) || lesson.note[lang].toLowerCase().includes(needle) || lesson.kind.includes(needle);
+        })
+      : [];
 
   return (
     <main className="why-page">
@@ -294,6 +360,25 @@ export function LibraryIndex({
               </li>
             ))}
           </ol>
+        </section>
+      ) : null}
+      {section === "programming" && lessons.length ? (
+        <section className="prog-start">
+          <h2>{copy.lessons}</h2>
+          <ul className="lib-list">
+            {lessons.map((lesson) => (
+              <li key={lesson.kind}>
+                <a href={programmingLocalePath(lang, HUBS[lesson.kind].slug)}>
+                  <span className="topic-name">
+                    <GraduationCap aria-hidden="true" />
+                    {HUBS[lesson.kind].title[lang]}
+                  </span>
+                  <ArrowUpRight className="rtl-flip size-4" />
+                </a>
+                <small className="lib-desc">{lesson.note[lang]}</small>
+              </li>
+            ))}
+          </ul>
         </section>
       ) : null}
       {section === "programming" ? (

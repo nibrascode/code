@@ -59,4 +59,99 @@ export const OWN_CSS: OwnPageContent = {
       ],
     },
   ],
+  qutu: [
+    {
+      id: "box",
+      title: t("Üç boşluq", "Three spaces", "Üç boşluk", "ثلاثة فراغات", "Три зазора"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "Hər element bir qutudur. border xətdir. padding xəttin içindəki boşluqdur. margin qutunun çölündəki boşluqdur.",
+            "Every element is a box. border is the line. padding is the space inside the line. margin is the space outside the box.",
+            "Her öğe bir kutudur. border çizgidir. padding çizginin içindeki boşluktur. margin kutunun dışındaki boşluktur.",
+            "كل عنصر صندوق. border هو الخط. padding الفراغ داخل الخط. margin الفراغ خارج الصندوق.",
+            "Каждый элемент — коробка. border — линия. padding — зазор внутри линии. margin — зазор снаружи коробки.",
+          )],
+          code: '.card {\n  margin: 16px;\n  padding: 12px;\n  border: 1px solid #2f6bff;\n  background: #101826;\n  color: white;\n}',
+        },
+      ],
+    },
+    {
+      id: "why",
+      title: t("Nə vaxt hansı", "Which one when", "Hangisi ne zaman", "أيها متى", "Какой когда"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "Yazı qutunun kənarına yapışıbsa padding artır. İki qutu bir-birinə dəyirsə aralarına margin qoy. Xətt görünmürsə border yaz.",
+            "If the text sticks to the edge, add padding. If two boxes touch, put margin between them. If no line shows, write a border.",
+            "Yazı kutunun kenarına yapışmışsa padding artır. İki kutu birbirine değiyorsa araya margin koy. Çizgi görünmüyorsa border yaz.",
+            "إذا التصق النص بالحافة فزِد padding. إذا تلامس صندوقان فضع margin بينهما. إذا لم يظهر خط فاكتب border.",
+            "Если текст прилип к краю, увеличьте padding. Если две коробки касаются, поставьте между ними margin. Если линии нет, напишите border.",
+          )],
+        },
+      ],
+    },
+    {
+      id: "faq",
+      title: t("Suallar", "Questions", "Sorular", "أسئلة", "Вопросы"),
+      blocks: [
+        {
+          paragraphs: [
+            t("margin və padding eynidirmi? Xeyr. margin çöldədir, padding içdədir.", "Are margin and padding the same? No. margin is outside, padding is inside.", "margin ve padding aynı mı? Hayır. margin dışta, padding içte.", "هل margin وpadding واحد؟ لا. margin في الخارج وpadding في الداخل.", "margin и padding одно и то же? Нет. margin снаружи, padding внутри."),
+            t("16px nədir? 16 piksel. Ekranda kiçik bir boşluqdur.", "What is 16px? 16 pixels. A small space on the screen.", "16px nedir? 16 piksel. Ekranda küçük bir boşluktur.", "ما هو 16px؟ 16 بكسل. فراغ صغير على الشاشة.", "Что такое 16px? 16 пикселей. Небольшой зазор на экране."),
+            t("border yazılmazsa nə olur? Qutu qalır, amma xətt görünmür.", "What if there is no border? The box stays, but no line shows.", "border yazılmazsa ne olur? Kutu kalır, ama çizgi görünmez.", "ماذا لو لم يُكتب border؟ يبقى الصندوق بلا خط ظاهر.", "Что если нет border? Коробка остаётся, линии не видно."),
+            t("Rəng hara düşür? background qutunun içini, color isə yazını boyayır.", "Where does the color go? background paints the inside of the box, color paints the text.", "Renk nereye gider? background kutunun içini, color yazıyı boyar.", "أين يذهب اللون؟ background يلون داخل الصندوق وcolor يلون النص.", "Куда идёт цвет? background красит внутренность коробки, color красит текст."),
+          ],
+        },
+      ],
+    },
+  ],
+  hover: [
+    {
+      id: "size",
+      title: t("Ölçü", "Size", "Boyut", "الحجم", "Размер"),
+      blocks: [
+        {
+          paragraphs: [t(
+            "font-size yazının böyüklüyüdür. width qutunun enidir. Ölçü rəngdən ayrıdır: biri yer tutur, o biri boyayır.",
+            "font-size is how big the text is. width is how wide the box is. Size is separate from color: one takes space, the other paints.",
+            "font-size yazının büyüklüğüdür. width kutunun enidir. Boyut renkten ayrıdır: biri yer kaplar, öteki boyar.",
+            "font-size حجم النص. width عرض الصندوق. الحجم منفصل عن اللون: واحد يأخذ مكاناً والآخر يلون.",
+            "font-size — размер текста. width — ширина коробки. Размер отдельно от цвета: одно занимает место, другое красит.",
+          )],
+          code: '.title {\n  font-size: 28px;\n  width: 240px;\n}',
+        },
+      ],
+    },
+    {
+      id: "hover",
+      title: t("Siçan üzərinə gələndə", "When the pointer is over it", "İmleç üzerine gelince", "حين يمر المؤشر", "Когда указатель сверху"),
+      blocks: [
+        {
+          paragraphs: [t(
+            ":hover siçan elementi tutanda işləyən stildir. Əl çəkiləndə əvvəlki rəng qayıdır. Bu, düymənin basıldığını hiss etdirir.",
+            ":hover is the style that runs while the pointer is on the element. When the pointer leaves, the old color returns. This makes a button feel clickable.",
+            ":hover imleç öğenin üzerindeyken çalışan stildir. El çekilince eski renk döner. Bu, düğmenin tıklanabilir hissettirmesini sağlar.",
+            ":hover هو التنسيق الذي يعمل والمؤشر فوق العنصر. حين يغادر المؤشر يرجع اللون السابق. هذا يجعل الزر يبدو قابلاً للنقر.",
+            ":hover — стиль, пока указатель на элементе. Когда указатель уходит, старый цвет возвращается. Так кнопка ощущается нажимаемой.",
+          )],
+          code: 'a {\n  color: #93c5fd;\n  font-size: 18px;\n}\na:hover {\n  color: white;\n}',
+        },
+      ],
+    },
+    {
+      id: "faq",
+      title: t("Suallar", "Questions", "Sorular", "أسئلة", "Вопросы"),
+      blocks: [
+        {
+          paragraphs: [
+            t(":hover hər zaman görünür? Xeyr. Yalnız siçan elementin üstündə olanda.", "Is :hover always visible? No. Only while the pointer is on the element.", ":hover her zaman görünür mü? Hayır. Yalnız imleç öğenin üstündeyken.", "هل :hover ظاهر دائماً؟ لا. فقط والمؤشر فوق العنصر.", ":hover всегда виден? Нет. Только пока указатель на элементе."),
+            t("font-size hara yazılır? Seçicinin içinə: h1 { font-size: 28px; }.", "Where does font-size go? Inside a selector: h1 { font-size: 28px; }.", "font-size nereye yazılır? Seçicinin içine: h1 { font-size: 28px; }.", "أين يُكتب font-size؟ داخل المحدد: h1 { font-size: 28px; }.", "Куда писать font-size? Внутрь селектора: h1 { font-size: 28px; }."),
+            t("width yazını kəsirmi? Qutunun enini məhdudlaşdırır. Yazı sığmazsa aşağı sətirə keçə bilər.", "Does width cut the text? It limits the box width. If the text does not fit, it can wrap to the next line.", "width yazıyı keser mi? Kutunun enini sınırlar. Yazı sığmazsa alt satıra geçebilir.", "هل يقص width النص؟ يحد عرض الصندوق. إذا لم يتسع النص فقد ينزل إلى السطر التالي.", "width обрезает текст? Он ограничивает ширину коробки. Если текст не влезает, он может перейти на следующую строку."),
+            t("Telefonda hover var? Barmaq basıb saxlayanda qısa görünə bilər. Əsas rəng hover-siz də oxunmalıdır.", "Is there hover on a phone? It may show briefly while a finger holds. The main color should stay readable without hover.", "Telefonda hover var mı? Parmak basılı tutunca kısa görünebilir. Ana renk hover olmadan da okunmalıdır.", "هل يوجد hover في الهاتف؟ قد يظهر قليلاً والاصبع ضاغط. اللون الأساسي يجب أن يُقرأ بلا hover.", "Есть ли hover на телефоне? Он может мелькнуть, пока палец держит. Основной цвет должен читаться и без hover."),
+          ],
+        },
+      ],
+    },
+  ],
 };
