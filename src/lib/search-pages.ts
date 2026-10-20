@@ -248,6 +248,69 @@ const WORDS: readonly SearchItem[] = [
 
 const BASE_ERRORS: readonly SearchItem[] = [
   {
+    slug: "emr-taninmir",
+    piece: piece(
+      L(
+        "python daxili və ya xarici əmr deyil",
+        "python is not recognized",
+        "python iç veya dış komut değil",
+        "python ليس أمرًا داخليًا أو خارجيًا",
+        "python не является внутренней или внешней командой",
+      ),
+      L(
+        "Windows bu cümləni `python`, `node`, `npm`, `java`, `dotnet` və ya `psql` tapmayanda yazır. İngilis ekranda belədir: `'python' is not recognized as an internal or external command, operable program or batch file.` Azərbaycan dilində Windows bunu belə göstərir: `daxili və ya xarici əmr, icra edilə bilən proqram və ya toplu fayl kimi tanınmır.`\n\nHamısını bir anda dəyişmə. Səbəbi sıra ilə yoxla.",
+        "Windows writes this when it cannot find `python`, `node`, `npm`, `java`, `dotnet`, or `psql`. The English line is: `'python' is not recognized as an internal or external command, operable program or batch file.`\n\nDo not change everything at once. Check the cause in order.",
+        "Windows bu cümleyi `python`, `node`, `npm`, `java`, `dotnet` veya `psql` bulamayınca yazar. İngilizce ekranda şöyle durur: `'python' is not recognized as an internal or external command, operable program or batch file.`\n\nHepsini bir anda değiştirme. Nedeni sırayla yokla.",
+        "يكتب Windows هذه الجملة حين لا يجد `python` أو `node` أو `npm` أو `java` أو `dotnet` أو `psql`. في الشاشة الإنجليزية: `'python' is not recognized as an internal or external command, operable program or batch file.`\n\nلا تغيّر كل شيء دفعة واحدة. افحص السبب بالترتيب.",
+        "Windows пишет это, когда не находит `python`, `node`, `npm`, `java`, `dotnet` или `psql`. Английская строка такая: `'python' is not recognized as an internal or external command, operable program or batch file.`\n\nНе меняй всё сразу. Проверяй причину по порядку.",
+      ),
+      {
+        az: [
+          "Əvvəl `py --version` yaz. Cavab gəlirsə Python durur, `python` sözü tapılmır. İşə `py` ilə davam et.",
+          "`python` yazanda Microsoft Store açılırsa, Başlatda `Manage app execution aliases` axtar. `python.exe` və `python3.exe` söndür. Terminalı bağla, yenisini aç. Proqramı silmə.",
+          "`where.exe python` yaz. Birinci sətir `WindowsApps` olmamalıdır.",
+          "Qovluq adında ə, ö, ü, ı, ş, ğ, ç varsa, məsələn `C:\\Users\\Əli`, pip və npm yolu qəbul etməyə bilər. Layihəni `C:\\dev` kimi latın hərfli qovluğa qoy. Windows istifadəçi adını dəyişmə.",
+          "Eyni cümlə `node`, `npm`, `java`, `dotnet` və `psql` üçündür. Əmr dəyişir, dayanma eynidir.",
+        ],
+        en: [
+          "First type `py --version`. If an answer comes, Python is there and the word `python` is not found. Continue with `py`.",
+          "If `python` opens the Microsoft Store, search Start for `Manage app execution aliases`. Turn off `python.exe` and `python3.exe`. Close the terminal and open a new one. Do not uninstall the program.",
+          "Type `where.exe python`. The first line should not be `WindowsApps`.",
+          "If a folder name has ə, ö, ü, ı, ş, ğ, or ç, such as `C:\\Users\\Əli`, pip and npm may refuse the path. Put the project in a Latin-letter folder such as `C:\\dev`. Do not rename the Windows user.",
+          "The same sentence is for `node`, `npm`, `java`, `dotnet`, and `psql`. The command changes. The stop is the same.",
+        ],
+        tr: [
+          "Önce `py --version` yaz. Cevap geliyorsa Python duruyor, `python` sözü bulunmuyor. İşe `py` ile devam et.",
+          "`python` yazınca Microsoft Store açılıyorsa Başlat’ta `Manage app execution aliases` ara. `python.exe` ve `python3.exe` kapat. Terminali kapat, yenisini aç. Programı silme.",
+          "`where.exe python` yaz. İlk satır `WindowsApps` olmamalı.",
+          "Klasör adında ə, ö, ü, ı, ş, ğ, ç varsa, örneğin `C:\\Users\\Əli`, pip ve npm yolu kabul etmeyebilir. Projeyi `C:\\dev` gibi Latin harfli klasöre koy. Windows kullanıcı adını değiştirme.",
+          "Aynı cümle `node`, `npm`, `java`, `dotnet` ve `psql` içindir. Komut değişir, durma aynıdır.",
+        ],
+        ar: [
+          "اكتب أولًا `py --version`. إذا جاء جواب فـ Python موجود والكلمة `python` غير موجودة. أكمل بـ `py`.",
+          "إذا فتح `python` متجر Microsoft فابحث في ابدأ عن `Manage app execution aliases`. أوقف `python.exe` و`python3.exe`. أغلق الطرفية وافتح واحدة جديدة. لا تحذف البرنامج.",
+          "اكتب `where.exe python`. السطر الأول يجب ألا يكون `WindowsApps`.",
+          "إذا كان في اسم المجلد ə أو ö أو ü أو ı أو ş أو ğ أو ç، مثل `C:\\Users\\Əli`، فقد يرفض pip وnpm المسار. ضع المشروع في مجلد بحروف لاتينية مثل `C:\\dev`. لا تغيّر اسم مستخدم Windows.",
+          "الجملة نفسها لـ `node` و`npm` و`java` و`dotnet` و`psql`. الأمر يتغير والتوقف نفسه.",
+        ],
+        ru: [
+          "Сначала напиши `py --version`. Если ответ есть, Python стоит, а слово `python` не находится. Продолжай через `py`.",
+          "Если `python` открывает Microsoft Store, в Пуске найди `Manage app execution aliases`. Выключи `python.exe` и `python3.exe`. Закрой терминал и открой новый. Программу не удаляй.",
+          "Напиши `where.exe python`. Первая строка не должна быть `WindowsApps`.",
+          "Если в имени папки есть ə, ö, ü, ı, ş, ğ или ç, например `C:\\Users\\Əli`, pip и npm могут не принять путь. Положи проект в папку латиницей, например `C:\\dev`. Имя пользователя Windows не переименовывай.",
+          "Та же фраза для `node`, `npm`, `java`, `dotnet` и `psql`. Команда другая, остановка та же.",
+        ],
+      },
+      L(
+        "PATH-ə bir neçə qovluğu bir anda yapışdırma. Əvvəl `py --version`.",
+        "Do not paste several folders into PATH at once. First run `py --version`.",
+        "PATH’e birkaç klasörü bir anda yapıştırma. Önce `py --version`.",
+        "لا تلصق عدة مجلدات في PATH دفعة واحدة. أولًا `py --version`.",
+        "Не вставляй в PATH несколько папок сразу. Сначала `py --version`.",
+      ),
+    ),
+  },
+  {
     slug: "apk-qurulmur",
     piece: piece(
       L("APK qurulmur", "APK will not install", "APK kurulmuyor", "APK لا يُثبَّت", "APK не устанавливается"),
