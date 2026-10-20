@@ -311,6 +311,69 @@ const BASE_ERRORS: readonly SearchItem[] = [
     ),
   },
   {
+    slug: "e-herfi",
+    piece: piece(
+      L(
+        "Konsolda ə hərfi kvadrat olur",
+        "The letter ə shows as a square",
+        "Konsolda ə harfi kare olur",
+        "حرف ə يظهر مربعًا في الطرفية",
+        "Буква ə в консоли становится квадратом",
+      ),
+      L(
+        "Python dayanırsa ekranda bu sətir olur: `UnicodeEncodeError: 'charmap' codec can't encode character '\\u0259'`. `\\u0259` hərfi `ə`-dir. Böyük `Ə` də eyni yerdədir. Proqram işləyib ekranda kvadrat və ya `?` qalırsa, hərf gedib, şrift onu çəkmir. Bu, iki ayrı dayanmadır.\n\nTürk səhifələri `cp1254` yazır. Python-un bu cədvəlində ü, ö, ş, ğ, ç, ı var. ə yoxdur. Ona görə həmin təlimat bu hərfi düzəltmir.\n\nHamısını bir anda dəyişmə. Səbəbi sıra ilə yoxla.",
+        "If Python stops, the screen says: `UnicodeEncodeError: 'charmap' codec can't encode character '\\u0259'`. `\\u0259` is the letter `ə`. Capital `Ə` is in the same place. If the program runs and the screen shows a square or `?`, the letter went out and the font cannot draw it. Those are two different stops.\n\nTurkish pages say `cp1254`. Python's table has ü, ö, ş, ğ, ç, and ı. It does not have ə. That guide does not fix this letter.\n\nDo not change everything at once. Check the cause in order.",
+        "Python duruyorsa ekranda bu satır olur: `UnicodeEncodeError: 'charmap' codec can't encode character '\\u0259'`. `\\u0259` harfi `ə`-dir. Büyük `Ə` de aynı yerdedir. Program çalışıp ekranda kare ya da `?` kalıyorsa harf gitmiş, yazı tipi onu çizmiyordur. Bu, iki ayrı durmadır.\n\nTürkçe sayfalar `cp1254` yazar. Python'un bu tablosunda ü, ö, ş, ğ, ç, ı vardır. ə yoktur. O yüzden o anlatım bu harfi düzeltmez.\n\nHepsini bir anda değiştirme. Nedeni sırayla yokla.",
+        "إذا توقف Python فالشاشة تكتب: `UnicodeEncodeError: 'charmap' codec can't encode character '\\u0259'`. `\\u0259` هو الحرف `ə`. الحرف الكبير `Ə` في الموضع نفسه. إذا عمل البرنامج وبقي على الشاشة مربع أو `?` فالحرف خرج والخط لا يرسمه. هذان توقفان مختلفان.\n\nصفحات التركية تكتب `cp1254`. جدول Python فيه ü وö وş وğ وç وı. ليس فيه ə. لذلك ذلك الشرح لا يصلح هذا الحرف.\n\nلا تغيّر كل شيء دفعة واحدة. افحص السبب بالترتيب.",
+        "Если Python останавливается, на экране строка: `UnicodeEncodeError: 'charmap' codec can't encode character '\\u0259'`. `\\u0259` — это буква `ə`. Заглавная `Ə` там же. Если программа работает, а на экране квадрат или `?`, буква ушла, а шрифт её не рисует. Это две разные остановки.\n\nТурецкие страницы пишут `cp1254`. В таблице Python есть ü, ö, ş, ğ, ç и ı. Буквы ə там нет. Поэтому то руководство эту букву не чинит.\n\nНе меняй всё сразу. Проверяй причину по порядку.",
+      ),
+      {
+        az: [
+          "Faylı UTF-8 saxla. VS Code-un aşağı küncündə UTF-8 yazılmalıdır. Notepad-də «Unicode» UTF-16-dır, onu seçmə.",
+          "Fayla yazırsansa sətir belə olsun: `open(\"metn.txt\", \"w\", encoding=\"utf-8\")`. `encoding` yazmasan Windows türk cədvəlini götürür və ə düşür.",
+          "Xəta proqramı dayandırırsa `errors=\"ignore\"` və `cp1254` yazma. Birincisi ə-ni silir. Ikincisində ə yoxdur. Həmin pəncərədə `set PYTHONIOENCODING=utf-8` yaz, sonra proqramı yenidən işə sal.",
+          "Proqram işləyir, hərf kvadratdırsa kodu dəyişmə. Terminalın şriftini Cascadia Mono və ya Consolas et.",
+          "`chcp 65001` yalnız açıq pəncərəni UTF-8 edir. Pəncərə bağlananda köhnə səhifə qayıdır.",
+        ],
+        en: [
+          "Save the file as UTF-8. The bottom corner of VS Code should say UTF-8. In Notepad, Unicode means UTF-16. Do not pick that.",
+          "If you write to a file, the line should be `open(\"metn.txt\", \"w\", encoding=\"utf-8\")`. Without `encoding`, Windows takes the Turkish table and ə is dropped.",
+          "If the error stops the program, do not write `errors=\"ignore\"` or `cp1254`. The first deletes ə. The second has no ə. In that window run `set PYTHONIOENCODING=utf-8`, then start the program again.",
+          "If the program runs and the letter is a square, do not change the code. Set the terminal font to Cascadia Mono or Consolas.",
+          "`chcp 65001` makes only the open window UTF-8. When the window closes, the old page comes back.",
+        ],
+        tr: [
+          "Dosyayı UTF-8 kaydet. VS Code'un alt köşesinde UTF-8 yazmalı. Notepad'de «Unicode» UTF-16'dır, onu seçme.",
+          "Dosyaya yazıyorsan satır şöyle olsun: `open(\"metn.txt\", \"w\", encoding=\"utf-8\")`. `encoding` yazmazsan Windows Türkçe tabloyu alır ve ə düşer.",
+          "Hata programı durduruyorsa `errors=\"ignore\"` ve `cp1254` yazma. Birincisi ə'yi siler. Ikincisinde ə yoktur. O pencerede `set PYTHONIOENCODING=utf-8` yaz, sonra programı yeniden çalıştır.",
+          "Program çalışıyor, harf kareyse kodu değiştirme. Terminalin yazı tipini Cascadia Mono ya da Consolas yap.",
+          "`chcp 65001` yalnız açık pencereyi UTF-8 yapar. Pencere kapanınca eski sayfa geri gelir.",
+        ],
+        ar: [
+          "احفظ الملف UTF-8. يجب أن تكتب زاوية VS Code السفلى UTF-8. في Notepad كلمة Unicode تعني UTF-16. لا تخترها.",
+          "إذا كنت تكتب إلى ملف فالسطر يكون `open(\"metn.txt\", \"w\", encoding=\"utf-8\")`. بلا `encoding` يأخذ Windows الجدول التركي ويسقط ə.",
+          "إذا أوقف الخطأ البرنامج فلا تكتب `errors=\"ignore\"` ولا `cp1254`. الأول يحذف ə. والثاني لا يحتوي ə. في تلك النافذة اكتب `set PYTHONIOENCODING=utf-8` ثم شغّل البرنامج من جديد.",
+          "إذا عمل البرنامج والحرف مربع فلا تغيّر الكود. اجعل خط الطرفية Cascadia Mono أو Consolas.",
+          "`chcp 65001` يجعل النافذة المفتوحة فقط UTF-8. حين تُغلق النافذة تعود الصفحة القديمة.",
+        ],
+        ru: [
+          "Сохрани файл как UTF-8. В нижнем углу VS Code должно быть написано UTF-8. В Блокноте «Unicode» — это UTF-16, его не выбирай.",
+          "Если пишешь в файл, строка такая: `open(\"metn.txt\", \"w\", encoding=\"utf-8\")`. Без `encoding` Windows берёт турецкую таблицу и ə пропадает.",
+          "Если ошибка останавливает программу, не пиши `errors=\"ignore\"` и `cp1254`. Первое удаляет ə. Во втором ə нет. В том окне напиши `set PYTHONIOENCODING=utf-8`, потом запусти программу снова.",
+          "Если программа работает, а буква квадрат, код не меняй. Поставь в терминале шрифт Cascadia Mono или Consolas.",
+          "`chcp 65001` делает UTF-8 только открытое окно. Когда окно закроется, старая страница вернётся.",
+        ],
+      },
+      L(
+        "æ hərfi ə deyil. Türk cədvəlindəki işarəni ə-nin yerinə qoyma.",
+        "The letter æ is not ə. Do not put the mark from the Turkish table in its place.",
+        "æ harfi ə değildir. Türkçe tablodaki işareti onun yerine koyma.",
+        "حرف æ ليس ə. لا تضع علامة الجدول التركي مكانه.",
+        "Буква æ — это не ə. Не ставь знак из турецкой таблицы на её место.",
+      ),
+    ),
+  },
+  {
     slug: "apk-qurulmur",
     piece: piece(
       L("APK qurulmur", "APK will not install", "APK kurulmuyor", "APK لا يُثبَّت", "APK не устанавливается"),

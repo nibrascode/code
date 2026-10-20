@@ -866,6 +866,14 @@ const CMD_MISSING: Record<Lang, string> = {
   ru: "Если команда не находится",
 };
 
+const SCHWA: Record<Lang, string> = {
+  az: "ə hərfi kvadratdırsa",
+  en: "If the letter ə is a square",
+  tr: "ə harfi kareyse",
+  ar: "إذا كان حرف ə مربعًا",
+  ru: "Если буква ə квадрат",
+};
+
 export function ProgrammingArticle({
   slug,
   title,
@@ -913,6 +921,11 @@ export function ProgrammingArticle({
       {slug && INSTALL_BACK[slug] ? (
         <p className="prog-try">
           <a href={searchTopicPath(lang, "xeta", "emr-taninmir")}>{CMD_MISSING[lang]}</a>
+        </p>
+      ) : null}
+      {slug === "python" || slug === "python-qurasdir" ? (
+        <p className="prog-try">
+          <a href={searchTopicPath(lang, "xeta", "e-herfi")}>{SCHWA[lang]}</a>
         </p>
       ) : null}
       {slug && DEV_TRY[slug] ? (
