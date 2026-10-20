@@ -384,6 +384,146 @@ with open("metn.txt", "w", encoding="utf-8") as fayl:
     ),
   },
   {
+    slug: "excel-e",
+    code: `with open("metn.csv", "w", newline="", encoding="utf-8-sig") as fayl:
+    fayl.write("ad\\nAzərbaycan\\n")
+`,
+    piece: piece(
+      L(
+        "Excel-də ə hərfi pozulur",
+        "Excel breaks the letter ə",
+        "Excel'de ə harfi bozulur",
+        "Excel يُفسد حرف ə",
+        "Excel портит букву ə",
+      ),
+      L(
+        "Excel BOM-suz UTF-8 faylı sistem cədvəli ilə aça bilər. Azərbaycan Windows-unda bu, türk cədvəlidir: `cp1254`. Orada ü, ö, ş, ğ, ç, ı var. ə yoxdur. Ona görə hərf `?` və ya başqa işarə olur.\n\n`utf-8` başqa proqram üçün düzgündür. Excel üçün yetmir. `utf-8-sig` əvvələ üç bayt qoyur və Excel faylı UTF-8 oxuyur.\n\nHamısını bir anda dəyişmə. Səbəbi sıra ilə yoxla.",
+        "Excel can open a UTF-8 file that has no BOM with the system table. On Azerbaijani Windows that table is the Turkish one, `cp1254`. It has ü, ö, ş, ğ, ç, and ı. It does not have ə. The letter becomes `?` or another mark.\n\n`utf-8` is right for other programs. It is not enough for Excel. `utf-8-sig` puts three bytes at the start, and Excel reads the file as UTF-8.\n\nDo not change everything at once. Check the cause in order.",
+        "Excel, BOM'suz UTF-8 dosyayı sistem tablosuyla açabilir. Azerbaycan Windows'unda bu tablo Türkçe tablodur: `cp1254`. Orada ü, ö, ş, ğ, ç, ı vardır. ə yoktur. Harf `?` ya da başka bir işaret olur.\n\n`utf-8` başka program için doğrudur. Excel için yetmez. `utf-8-sig` başa üç bayt koyar ve Excel dosyayı UTF-8 okur.\n\nHepsini bir anda değiştirme. Nedeni sırayla yokla.",
+        "قد يفتح Excel ملف UTF-8 بلا BOM بجدول النظام. في Windows الأذربيجاني هذا الجدول تركي: `cp1254`. فيه ü وö وş وğ وç وı. ليس فيه ə. فيصير الحرف `?` أو علامة أخرى.\n\n`utf-8` صحيح لبرنامج آخر. لا يكفي Excel. `utf-8-sig` يضع ثلاث بايتات في الأول ويقرأ Excel الملف UTF-8.\n\nلا تغيّر كل شيء دفعة واحدة. افحص السبب بالترتيب.",
+        "Excel может открыть UTF-8 без BOM системной таблицей. На азербайджанском Windows это турецкая таблица, `cp1254`. В ней есть ü, ö, ş, ğ, ç и ı. Буквы ə нет. Буква становится `?` или другим знаком.\n\n`utf-8` верен для другой программы. Для Excel его мало. `utf-8-sig` ставит три байта в начало, и Excel читает файл как UTF-8.\n\nНе меняй всё сразу. Проверяй причину по порядку.",
+      ),
+      {
+        az: [
+          "Faylı belə yaz: `open(\"metn.csv\", \"w\", newline=\"\", encoding=\"utf-8-sig\")`.",
+          "`encoding=\"utf-8\"` Notepad və brauzer üçün kifayətdir. Excel onu başqa cədvəllə aça bilər.",
+          "`cp1254` yazma. Bu cədvəldə ə yoxdur.",
+          "Köhnə faylda ə artıq `?` olubsa, kod hərfi qaytarmır. Mətni yenidən yaz.",
+          "`newline=\"\"` boş sətir üçündür. Ə hərfinə təsir etmir.",
+        ],
+        en: [
+          "Write the file like this: `open(\"metn.csv\", \"w\", newline=\"\", encoding=\"utf-8-sig\")`.",
+          "`encoding=\"utf-8\"` is enough for Notepad and a browser. Excel may open it with another table.",
+          "Do not write `cp1254`. That table has no ə.",
+          "If ə is already `?` in the old file, code cannot bring the letter back. Write the text again.",
+          "`newline=\"\"` is for the blank row. It does not change the letter ə.",
+        ],
+        tr: [
+          "Dosyayı şöyle yaz: `open(\"metn.csv\", \"w\", newline=\"\", encoding=\"utf-8-sig\")`.",
+          "`encoding=\"utf-8\"` Notepad ve tarayıcı için yeter. Excel onu başka tabloyla açabilir.",
+          "`cp1254` yazma. Bu tabloda ə yoktur.",
+          "Eski dosyada ə çoktan `?` olduysa kod harfi geri getirmez. Metni yeniden yaz.",
+          "`newline=\"\"` boş satır içindir. ə harfine etkisi yoktur.",
+        ],
+        ar: [
+          "اكتب الملف هكذا: `open(\"metn.csv\", \"w\", newline=\"\", encoding=\"utf-8-sig\")`.",
+          "`encoding=\"utf-8\"` يكفي لـ Notepad والمتصفح. قد يفتحه Excel بجدول آخر.",
+          "لا تكتب `cp1254`. هذا الجدول لا يحتوي ə.",
+          "إذا صار ə في الملف القديم `?` فالكود لا يُرجع الحرف. اكتب النص من جديد.",
+          "`newline=\"\"` للسطر الفارغ. لا يغيّر حرف ə.",
+        ],
+        ru: [
+          "Пиши файл так: `open(\"metn.csv\", \"w\", newline=\"\", encoding=\"utf-8-sig\")`.",
+          "`encoding=\"utf-8\"` хватает для Блокнота и браузера. Excel может открыть его другой таблицей.",
+          "Не пиши `cp1254`. В этой таблице нет ə.",
+          "Если в старом файле ə уже стало `?`, код букву не вернёт. Напиши текст заново.",
+          "`newline=\"\"` нужен из-за пустой строки. На букву ə он не влияет.",
+        ],
+      },
+      L(
+        "Bu, konsoldakı kvadrat deyil. Konsolda hərf kvadratdırsa, kodu dəyişmə. Şrifti dəyiş.",
+        "This is not the square in the console. If the letter is a square there, do not change the code. Change the font.",
+        "Bu, konsoldaki kare değildir. Konsolda harf kareyse kodu değiştirme. Yazı tipini değiştir.",
+        "هذا ليس المربع في الطرفية. إذا كان الحرف مربعًا هناك فلا تغيّر الكود. غيّر الخط.",
+        "Это не квадрат в консоли. Если там буква квадрат, код не меняй. Меняй шрифт.",
+      ),
+    ),
+  },
+  {
+    slug: "html-e",
+    code: `<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <title>Səhifə</title>
+</head>
+<body>
+  <p>Azərbaycan</p>
+</body>
+</html>
+`,
+    piece: piece(
+      L(
+        "Səhifədə ə hərfi sual işarəsi olur",
+        "The letter ə becomes a question mark on the page",
+        "Sayfada ə harfi soru işareti olur",
+        "حرف ə يصير علامة استفهام في الصفحة",
+        "Буква ə на странице становится вопросом",
+      ),
+      L(
+        "Brauzer faylın kodunu bilmirsə, `ə` hərfi `?` və ya qəribə işarə olur. `lang=\"az\"` hərfi düzəltmir. Düzəldən sətir `<meta charset=\"UTF-8\">`-dir. Faylın özü də UTF-8 saxlanmalıdır.\n\nHamısını bir anda dəyişmə. Səbəbi sıra ilə yoxla.",
+        "If the browser does not know the file's encoding, the letter `ə` becomes `?` or a strange mark. `lang=\"az\"` does not fix the letter. The line that does is `<meta charset=\"UTF-8\">`. The file itself must be saved as UTF-8.\n\nDo not change everything at once. Check the cause in order.",
+        "Tarayıcı dosyanın kodunu bilmiyorsa `ə` harfi `?` ya da garip bir işaret olur. `lang=\"az\"` harfi düzeltmez. Düzelten satır `<meta charset=\"UTF-8\">` satırıdır. Dosyanın kendisi de UTF-8 kaydedilmelidir.\n\nHepsini bir anda değiştirme. Nedeni sırayla yokla.",
+        "إذا لم يعرف المتصفح ترميز الملف فحرف `ə` يصير `?` أو علامة غريبة. `lang=\"az\"` لا يصلح الحرف. السطر الذي يصلحه هو `<meta charset=\"UTF-8\">`. الملف نفسه يجب أن يُحفظ UTF-8.\n\nلا تغيّر كل شيء دفعة واحدة. افحص السبب بالترتيب.",
+        "Если браузер не знает кодировку файла, буква `ə` становится `?` или странным знаком. `lang=\"az\"` букву не чинит. Чинющая строка — `<meta charset=\"UTF-8\">`. Сам файл тоже надо сохранить как UTF-8.\n\nНе меняй всё сразу. Проверяй причину по порядку.",
+      ),
+      {
+        az: [
+          "`<head>` içində ilk sətirlərdən biri bu olsun: `<meta charset=\"UTF-8\">`.",
+          "VS Code-un aşağı küncündə UTF-8 yazılmalıdır. Notepad-də «Unicode» UTF-16-dır, onu seçmə.",
+          "`lang=\"az\"` səhifənin dilini adlandırır. Hərfi saxlamır.",
+          "Fayl ANSI və ya `cp1254` ilə saxlanıbsa, ə artıq içində yoxdur. UTF-8-ə keç və hərfi yenidən yaz.",
+          "Server `Content-Type` içində başqa kod göndərirsə, o, meta sətirindən öndə durur. Statik səhifədə meta kifayətdir.",
+        ],
+        en: [
+          "One of the first lines inside `<head>` should be `<meta charset=\"UTF-8\">`.",
+          "The bottom corner of VS Code should say UTF-8. In Notepad, Unicode means UTF-16. Do not pick that.",
+          "`lang=\"az\"` names the language of the page. It does not store the letter.",
+          "If the file was saved as ANSI or `cp1254`, ə is already gone. Switch to UTF-8 and type the letter again.",
+          "If the server sends another encoding in `Content-Type`, that comes before the meta line. On a static page, meta is enough.",
+        ],
+        tr: [
+          "`<head>` içinde ilk satırlardan biri bu olsun: `<meta charset=\"UTF-8\">`.",
+          "VS Code'un alt köşesinde UTF-8 yazmalı. Notepad'de «Unicode» UTF-16'dır, onu seçme.",
+          "`lang=\"az\"` sayfanın dilini adlandırır. Harfi saklamaz.",
+          "Dosya ANSI ya da `cp1254` ile kaydedildiyse ə çoktan içinde yoktur. UTF-8'e geç ve harfi yeniden yaz.",
+          "Sunucu `Content-Type` içinde başka kod gönderiyorsa o, meta satırından önce gelir. Statik sayfada meta yeter.",
+        ],
+        ar: [
+          "أحد أول الأسطر داخل `<head>` يكون `<meta charset=\"UTF-8\">`.",
+          "يجب أن تكتب زاوية VS Code السفلى UTF-8. في Notepad كلمة Unicode تعني UTF-16. لا تخترها.",
+          "`lang=\"az\"` يسمّي لغة الصفحة. لا يحفظ الحرف.",
+          "إذا حُفظ الملف ANSI أو `cp1254` فـ ə لم يعد داخله. انتقل إلى UTF-8 واكتب الحرف من جديد.",
+          "إذا أرسل الخادم ترميزًا آخر في `Content-Type` فهو يسبق سطر meta. في صفحة ثابتة يكفي meta.",
+        ],
+        ru: [
+          "Одной из первых строк внутри `<head>` должна быть `<meta charset=\"UTF-8\">`.",
+          "В нижнем углу VS Code должно быть написано UTF-8. В Блокноте «Unicode» — это UTF-16, его не выбирай.",
+          "`lang=\"az\"` называет язык страницы. Букву он не хранит.",
+          "Если файл сохранён как ANSI или `cp1254`, ə внутри уже нет. Перейди на UTF-8 и напиши букву заново.",
+          "Если сервер шлёт другую кодировку в `Content-Type`, она стоит раньше строки meta. На статической странице хватает meta.",
+        ],
+      },
+      L(
+        "Excel CSV başqa fayldır. Orada `utf-8` yetmir, `utf-8-sig` lazımdır. HTML-də `sig` yazılmır.",
+        "An Excel CSV is a different file. There `utf-8` is not enough, and `utf-8-sig` is needed. HTML does not use `sig`.",
+        "Excel CSV başka bir dosyadır. Orada `utf-8` yetmez, `utf-8-sig` gerekir. HTML'de `sig` yazılmaz.",
+        "ملف CSV في Excel ملف آخر. هناك `utf-8` لا يكفي ويلزم `utf-8-sig`. في HTML لا يُكتب `sig`.",
+        "CSV для Excel — другой файл. Там `utf-8` мало, нужен `utf-8-sig`. В HTML `sig` не пишется.",
+      ),
+    ),
+  },
+  {
     slug: "apk-qurulmur",
     piece: piece(
       L("APK qurulmur", "APK will not install", "APK kurulmuyor", "APK لا يُثبَّت", "APK не устанавливается"),

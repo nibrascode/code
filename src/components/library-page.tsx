@@ -874,6 +874,22 @@ const SCHWA: Record<Lang, string> = {
   ru: "Если буква ə квадрат",
 };
 
+const EXCEL_SCHWA: Record<Lang, string> = {
+  az: "Excel-də ə pozulursa",
+  en: "If Excel breaks ə",
+  tr: "Excel ə'yi bozuyorsa",
+  ar: "إذا أفسد Excel حرف ə",
+  ru: "Если Excel портит ə",
+};
+
+const HTML_SCHWA: Record<Lang, string> = {
+  az: "Səhifədə ə sual işarəsidirsə",
+  en: "If ə is a question mark on the page",
+  tr: "Sayfada ə soru işaretiyse",
+  ar: "إذا صار ə علامة استفهام في الصفحة",
+  ru: "Если ə на странице стало вопросом",
+};
+
 export function ProgrammingArticle({
   slug,
   title,
@@ -926,6 +942,16 @@ export function ProgrammingArticle({
       {slug === "python" || slug === "python-qurasdir" ? (
         <p className="prog-try">
           <a href={searchTopicPath(lang, "xeta", "e-herfi")}>{SCHWA[lang]}</a>
+        </p>
+      ) : null}
+      {slug === "python" || slug === "python-qurasdir" ? (
+        <p className="prog-try">
+          <a href={searchTopicPath(lang, "xeta", "excel-e")}>{EXCEL_SCHWA[lang]}</a>
+        </p>
+      ) : null}
+      {slug === "html-css" ? (
+        <p className="prog-try">
+          <a href={searchTopicPath(lang, "xeta", "html-e")}>{HTML_SCHWA[lang]}</a>
         </p>
       ) : null}
       {slug && DEV_TRY[slug] ? (
