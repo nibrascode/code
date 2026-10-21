@@ -10220,7 +10220,19 @@ body.is-planner .site-backdrop {
 
 .nx-play { padding-top: 8px; }
 
-.nx-play-card { max-width: 420px; min-height: 108px; }
+.nx-play-card {
+  width: 100%;
+  max-width: 420px;
+  min-height: 108px;
+  border: 0;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+
+.nx-play-card.is-open { box-shadow: inset 0 0 0 1px #6ee7b7; }
+
+.nx-play .game-icon-grid { margin-top: 14px; }
 
 .nx-play-mark {
   display: grid;

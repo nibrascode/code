@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, BadgeCheck, RefreshCw, Shield, Zap } from "lucide-react";
 import { AppSuggest } from "@/components/app-suggest";
 import { TechMark } from "@/components/tech-marquee";
@@ -10,7 +10,7 @@ import { HeroMark } from "@/components/hero-mark";
 import { faqPath } from "@/lib/faq";
 import { homePath, localeHref } from "@/lib/locale-path";
 import { SEARCH, searchPath, searchTopicPath } from "@/lib/search-pages";
-import { gamePath, GAME_COPY, GAMES } from "@/lib/games";
+import { gamePath, GAME_COPY, GAME_VERSION, GAMES } from "@/lib/games";
 import { GameIcon } from "@/components/game-icons";
 import { toolsPath, TOOLS_PAGE } from "@/lib/tools";
 import { useI18n } from "@/lib/i18n-context";
@@ -256,6 +256,7 @@ const XETA_LINKS = ["apk-qurulmur", "paket-etibarsizdir", "play-protect-bloklayi
 
 export function HomeView({ apps }: { apps: StudioAppRow[] }) {
   const { t, lang } = useI18n();
+  const [gamesOpen, setGamesOpen] = useState(false);
   const rows = apps;
   const labels = { soon: t("soon"), building: t("nx_docs_stage") };
   const cards = CARDS.flatMap((card) => {
@@ -399,13 +400,34 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
       </section>
 
       <section className="nx-apps nx-play" aria-label={GAME_COPY.heading[lang]}>
-        <div className="game-icon-grid">
-          {GAMES.map((game) => (
-            <a key={game.slug} href={gamePath(lang, game.slug)} aria-label={game.name[lang]}>
-              <GameIcon slug={game.slug} />
-            </a>
-          ))}
-        </div>
+        <button
+          type="button"
+          className={`nx-card nx-play-card${gamesOpen ? " is-open" : ""}`}
+          aria-expanded={gamesOpen}
+          onClick={() => setGamesOpen((open) => !open)}
+        >
+          <span className="nx-card-top">
+            <span className="nx-play-mark" aria-hidden="true">
+              <i />
+              <i className="is-gold" />
+              <i />
+              <i className="is-green" />
+            </span>
+            <span>
+              <em className="nx-status">{GAME_VERSION}</em>
+              <b>{GAME_COPY.heading[lang]}</b>
+            </span>
+          </span>
+        </button>
+        {gamesOpen ? (
+          <div className="game-icon-grid">
+            {GAMES.map((game) => (
+              <a key={game.slug} href={gamePath(lang, game.slug)} aria-label={game.name[lang]}>
+                <GameIcon slug={game.slug} />
+              </a>
+            ))}
+          </div>
+        ) : null}
       </section>
 
       <section className="nx-apps" id="apps">
