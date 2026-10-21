@@ -2782,7 +2782,7 @@
         "function scale3(x,y,z){return new Float32Array([x,0,0,0,0,y,0,0,0,0,z,0,0,0,0,1]);}",
         "var I=new Float32Array([1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]);",
         "var kind=canvas.getAttribute('data-kind')||'orbit';",
-        "var night=false,camX=0,camZ=0,go={},pad={},inside=false,saved=null; // data-room",
+        "var night=false,camX=0,camZ=0,go={},pad={},inside=false,saved=null,acts={}; // data-act",
         "var parts=(canvas.getAttribute('data-color')||'0.45,0.7,1').split(',');",
         "var main=new Float32Array([+parts[0]||0.45,+parts[1]||0.7,+parts[2]||1]);",
         "var ax=0.45,ay=0.6,dist=kind==='city'?8.2:kind==='product'?4.4:5.6,spin=0,pts={};",
@@ -2794,16 +2794,18 @@
         "canvas.addEventListener('wheel',function(e){e.preventDefault();dist=Math.max(2.4,Math.min(12,dist+(e.deltaY>0?0.35:-0.35)));},{passive:false});",
         "function draw(mesh,model,mode,color){gl.bindBuffer(gl.ARRAY_BUFFER,mesh.b);gl.vertexAttribPointer(lp,3,gl.FLOAT,false,24,0);gl.vertexAttribPointer(ln,3,gl.FLOAT,false,24,12);gl.uniformMatrix4fv(lmodel,false,model);gl.uniform3fv(lcol,color);gl.drawArrays(mode,0,mesh.n);}",
         "function applyKind(next){kind=next;canvas.setAttribute('data-kind',kind);dist=kind==='city'?8.2:kind==='product'?4.4:5.6;var list=document.querySelectorAll('[data-scene]');for(var i=0;i<list.length;i++)list[i].style.outline=list[i].getAttribute('data-scene')===kind?'2px solid #fff':'';}",
-        "document.addEventListener('click',function(e){var el=e.target;if(!el||!el.getAttribute)return;var name=el.getAttribute('data-scene');if(name){if(inside)leave();applyKind(name);}if(el.getAttribute('data-sky')){night=!night;document.body.classList.toggle('night',night);el.textContent=night?'Gündüz':'Gecə';}if(el.getAttribute('data-home')){if(inside)leave();camX=0;camZ=0;ax=0.45;ay=0.6;applyKind(kind);}if(el.getAttribute('data-enter')){if(inside)leave();else enter();}});",
+        "document.addEventListener('click',function(e){var el=e.target;if(!el||!el.getAttribute)return;var name=el.getAttribute('data-scene');if(name){if(inside)leave();applyKind(name);}if(el.getAttribute('data-sky')){night=!night;document.body.classList.toggle('night',night);el.textContent=night?'Gündüz':'Gecə';}if(el.getAttribute('data-home')){if(inside)leave();camX=0;camZ=0;ax=0.45;ay=0.6;applyKind(kind);}if(el.getAttribute('data-enter')){if(inside)leave();else enter();}if(el.getAttribute('data-act'))doAct();});",
         "window.addEventListener('keydown',function(e){var k=e.key.toLowerCase();if(k==='e'){if(inside)leave();else enter();}if(k==='w'||k==='a'||k==='s'||k==='d')go[k]=true;if(e.key==='ArrowLeft')ay-=0.08;if(e.key==='ArrowRight')ay+=0.08;if(e.key==='ArrowUp')ax=Math.max(-1.2,ax-0.06);if(e.key==='ArrowDown')ax=Math.min(1.2,ax+0.06);if(e.key==='+'||e.key==='=')dist=Math.max(2.4,dist-0.35);if(e.key==='-'||e.key==='_')dist=Math.min(12,dist+0.35);});",
         "window.addEventListener('keyup',function(e){go[e.key.toLowerCase()]=false;});",
         "document.addEventListener('pointerdown',function(e){var k=e.target&&e.target.getAttribute&&e.target.getAttribute('data-move');if(k){pad[k]=1;e.preventDefault();}});",
         "window.addEventListener('pointerup',function(){pad={};});",
         "function blocked(x,z){if(kind!=='city')return false;var i,j;for(i=-2;i<=2;i++)for(j=-2;j<=2;j++){if(!i&&!j)continue;if(Math.abs(x-i*1.25)<0.48&&Math.abs(z-j*1.25)<0.48)return true;}return false;}",
         "function closest(){if(kind!=='city'||inside)return null;var best=99,item=null,n=0,x,z,d;for(x=-2;x<=2;x++)for(z=-2;z<=2;z++){if(!x&&!z)continue;n++;d=Math.hypot(camX-x*1.25,camZ-z*1.25);if(d<best){best=d;item={n:n,d:d};}}return item&&item.d<1.5?item:null;}",
-        "function enter(){if(inside||!closest())return;saved={x:camX,z:camZ,ax:ax,ay:ay,dist:dist,n:closest().n};inside=true;camX=0;camZ=0;ax=0.4;ay=0.5;dist=4.4;var b=document.getElementById('enter');if(b)b.textContent='Çıx';}",
-        "function leave(){if(!inside)return;inside=false;if(saved){camX=saved.x;camZ=saved.z;ax=saved.ax;ay=saved.ay;dist=saved.dist;}var b=document.getElementById('enter');if(b)b.textContent='Gir';}",
-        "function nearName(){var el=document.getElementById('near'),b=document.getElementById('enter'),item=closest(),rooms=['mağaza','ev','ofis'];if(el)el.textContent=inside&&saved?'Bina '+saved.n+' · '+rooms[saved.n%3]:item?'Bina '+item.n:'';if(b)b.style.visibility=(inside||item)?'visible':'hidden';}",
+        "function enter(){if(inside||!closest())return;saved={x:camX,z:camZ,ax:ax,ay:ay,dist:dist,n:closest().n};inside=true;camX=0;camZ=0;ax=0.4;ay=0.5;dist=4.4;var b=document.getElementById('enter');if(b)b.textContent='Çıx';nearName();}",
+        "function leave(){if(!inside)return;inside=false;if(saved){camX=saved.x;camZ=saved.z;ax=saved.ax;ay=saved.ay;dist=saved.dist;}var b=document.getElementById('enter');if(b)b.textContent='Gir';nearName();}",
+        "function on(key){return !!(inside&&saved&&acts[saved.n]&&acts[saved.n][key]);}",
+        "function doAct(){if(!inside||!saved)return;var room=saved.n%3,key=room===0?'buy':room===1?'lamp':'off';if(!acts[saved.n])acts[saved.n]={};acts[saved.n][key]=room===0?1:!acts[saved.n][key];nearName();}",
+        "function nearName(){var el=document.getElementById('near'),b=document.getElementById('enter'),a=document.getElementById('act'),item=closest(),rooms=['mağaza','ev','ofis'],room=saved?saved.n%3:0;if(el)el.textContent=inside&&saved?'Bina '+saved.n+' · '+rooms[room]:item?'Bina '+item.n:'';if(b)b.style.visibility=(inside||item)?'visible':'hidden';if(a){a.style.visibility=inside?'visible':'hidden';a.textContent=room===0?(on('buy')?'Alındı':'Al'):room===1?(on('lamp')?'Söndür':'Lampa'):(on('off')?'Yandır':'Söndür');}}",
         "function frame(){",
         "var w=canvas.clientWidth||innerWidth,h=canvas.clientHeight||innerHeight;",
         "if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;gl.viewport(0,0,w,h);}",
@@ -2827,9 +2829,9 @@
         "draw(box,mul(trans(-1.7,-0.36,0),scale3(0.16,2.4,5.2)),gl.TRIANGLES,new Float32Array([0.2,0.24,0.36]));",
         "draw(box,mul(trans(1.7,-0.36,0),scale3(0.16,2.4,5.2)),gl.TRIANGLES,new Float32Array([0.2,0.24,0.36]));",
         "draw(box,mul(trans(0,0.2,-1.55),scale3(0.9,0.55,0.08)),gl.TRIANGLES,new Float32Array(room===2?[0.45,0.7,1]:[0.95,0.86,0.55]));",
-        "if(room===1){draw(box,mul(trans(0,-0.9,0.1),scale3(1.3,0.7,0.8)),gl.TRIANGLES,new Float32Array([0.55,0.36,0.22]));draw(box,mul(trans(0.75,-1.02,0.55),scale3(0.36,0.5,0.36)),gl.TRIANGLES,new Float32Array([0.4,0.26,0.16]));}",
-        "else if(room===2){draw(box,mul(trans(-0.15,-0.95,0.15),scale3(1.5,0.55,0.75)),gl.TRIANGLES,new Float32Array([0.25,0.28,0.34]));draw(box,mul(trans(-0.15,-0.55,0.15),scale3(0.55,0.4,0.06)),gl.TRIANGLES,new Float32Array([0.35,0.62,1]));}",
-        "else{draw(box,mul(trans(0,-0.9,-0.15),scale3(1.8,0.75,0.55)),gl.TRIANGLES,new Float32Array([0.62,0.34,0.28]));}",
+        "if(room===1){draw(box,mul(trans(0,-0.9,0.1),scale3(1.3,0.7,0.8)),gl.TRIANGLES,new Float32Array([0.55,0.36,0.22]));draw(box,mul(trans(0.75,-1.02,0.55),scale3(0.36,0.5,0.36)),gl.TRIANGLES,new Float32Array([0.4,0.26,0.16]));if(on('lamp'))draw(box,mul(trans(-0.85,0.05,-0.2),scale3(0.18,0.5,0.18)),gl.TRIANGLES,new Float32Array([1,0.88,0.4]));}",
+        "else if(room===2){draw(box,mul(trans(-0.15,-0.95,0.15),scale3(1.5,0.55,0.75)),gl.TRIANGLES,new Float32Array([0.25,0.28,0.34]));draw(box,mul(trans(-0.15,-0.55,0.15),scale3(0.55,0.4,0.06)),gl.TRIANGLES,new Float32Array(on('off')?[0.1,0.12,0.16]:[0.35,0.62,1]));}",
+        "else{draw(box,mul(trans(0,-0.9,-0.15),scale3(1.8,0.75,0.55)),gl.TRIANGLES,new Float32Array([0.62,0.34,0.28]));if(on('buy'))draw(box,mul(trans(0.35,-0.52,-0.15),scale3(0.28,0.28,0.28)),gl.TRIANGLES,new Float32Array([0.95,0.78,0.28]));}",
         "}else{",
         "if(night)draw(star,I,gl.POINTS,new Float32Array([0.92,0.95,1]));",
         "draw(box,mul(trans(0,-1.228,0),scale3(14,0.08,14)),gl.TRIANGLES,new Float32Array([0.07,0.09,0.14]));",
@@ -2864,7 +2866,7 @@
       if (color !== "0.45,0.7,1") notes.push("rəng");
       if (html && !/<h1\b/i.test(html.content)) {
         const title = String(task || "3D").replace(/[<>&]/g, "").trim().slice(0, 48) || "3D";
-        const hud = "<h1>" + title + "</h1><p class=\"hint\">Gir · mağaza, ev, ofis</p><p id=\"near\"></p>";
+        const hud = "<h1>" + title + "</h1><p class=\"hint\">İçəridə: Al, Lampa, Ekran</p><p id=\"near\"></p>";
         if (/<body[^>]*>/i.test(html.content)) html.content = html.content.replace(/<body[^>]*>/i, function (m) { return m + "\n" + hud; });
         else html.content = hud + "\n" + html.content;
         notes.push("başlıq");
@@ -2897,12 +2899,18 @@
         else html.content += enter;
         notes.push("gir");
       }
+      if (html && !/data-act=/.test(html.content)) {
+        const act = "<button type=\"button\" id=\"act\" data-act=\"1\">Al</button>";
+        if (/<\/body>/i.test(html.content)) html.content = html.content.replace(/<\/body>/i, act + "\n</body>");
+        else html.content += act;
+        notes.push("iş");
+      }
       let js = files.filter(function (file) { return /\.js$/.test(file.path); })[0];
       if (!js) {
         js = { path: "app.js", content: "" };
         if (files.length < 4) files.push(js);
       }
-      if (js && js.content.indexOf("data-room") < 0) {
+      if (js && js.content.indexOf("data-act") < 0) {
         js.content = scene3d();
         notes.push("işıq");
         notes.push("zoom");
@@ -3482,7 +3490,7 @@
       const blob = files.map(function (file) { return file.content; }).join("\n");
       const scene = /<canvas\b|getContext\(\s*["']webgl/i.test(blob);
       const base = scene
-        ? "/* nibras-3d */\nhtml,body{margin:0;height:100%;background:radial-gradient(120% 80% at 50% 0%, #23406f, #07090f 58%);color:#e8edf8;font:16px/1.45 system-ui,sans-serif;overflow:hidden}\nbody.night{background:radial-gradient(120% 80% at 50% 0%, #121826, #05060a 62%)}\ncanvas{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block;touch-action:none}\nbody>*:not(canvas){position:relative;z-index:1;pointer-events:none}\nnav.modes,nav.modes button,.pad,.pad button{pointer-events:auto}\nnav.modes{position:fixed;left:16px;bottom:16px;display:flex;gap:8px;z-index:2}\n.pad{position:fixed;right:16px;bottom:16px;z-index:2;display:grid;grid-template-columns:44px 44px 44px;gap:6px}\nh1{margin:20px 20px 4px;font-size:28px;text-shadow:0 8px 24px #000}\n.hint{margin:0 20px;color:#aeb6ce;font-size:13px}\n#near{position:fixed;left:20px;bottom:78px;margin:0;font-weight:700;text-shadow:0 6px 18px #000}\n#enter{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:3;pointer-events:auto;visibility:hidden}\n"
+        ? "/* nibras-3d */\nhtml,body{margin:0;height:100%;background:radial-gradient(120% 80% at 50% 0%, #23406f, #07090f 58%);color:#e8edf8;font:16px/1.45 system-ui,sans-serif;overflow:hidden}\nbody.night{background:radial-gradient(120% 80% at 50% 0%, #121826, #05060a 62%)}\ncanvas{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block;touch-action:none}\nbody>*:not(canvas){position:relative;z-index:1;pointer-events:none}\nnav.modes,nav.modes button,.pad,.pad button{pointer-events:auto}\nnav.modes{position:fixed;left:16px;bottom:16px;display:flex;gap:8px;z-index:2}\n.pad{position:fixed;right:16px;bottom:16px;z-index:2;display:grid;grid-template-columns:44px 44px 44px;gap:6px}\nh1{margin:20px 20px 4px;font-size:28px;text-shadow:0 8px 24px #000}\n.hint{margin:0 20px;color:#aeb6ce;font-size:13px}\n#near{position:fixed;left:20px;bottom:78px;margin:0;font-weight:700;text-shadow:0 6px 18px #000}\n#enter{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:3;pointer-events:auto;visibility:hidden}\n#act{position:fixed;left:50%;bottom:72px;transform:translateX(-50%);z-index:3;pointer-events:auto;visibility:hidden}\n"
         : "/* nibras-premium */\n:root{color-scheme:dark;--bg:#10141f;--card:#181e2e;--ink:#e8edf8;--line:#2c3550;--accent:#7aa2ff}\n*{box-sizing:border-box}\nbody{margin:0;min-height:100vh;font:16px/1.5 system-ui,sans-serif;background:var(--bg);color:var(--ink)}\nmain,form{max-width:420px;margin:0 auto;padding:24px 16px}\nbutton,input,select,textarea{font:inherit}\nbutton{min-height:44px;border:0;border-radius:12px;padding:0 16px;background:var(--accent);color:#08101f;font-weight:700}\ninput,select,textarea{width:100%;min-height:44px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--card);color:inherit}\nbutton:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}\n";
       if (blob.indexOf(scene ? "nibras-3d" : "nibras-premium") < 0 && blob.indexOf("nibras-3d") < 0 && blob.indexOf("nibras-premium") < 0) {
         if (css) css.content = base + css.content;
