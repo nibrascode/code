@@ -575,7 +575,7 @@
     .msg.step.ok { border-color: rgba(120, 210, 160, .45); }
     .msg.step.bad { border-color: rgba(255, 120, 120, .55); }
     .msg.step pre { max-height: 220px; overflow: auto; margin: 8px 0 0; }
-    .zipbtn { margin-top: 8px; border: 0; border-radius: 10px; padding: 7px 12px; background: #3c6dff; color: #fff; font-weight: 600; cursor: pointer; }
+    .preview { display: block; width: 100%; height: 280px; margin-top: 8px; border: 1px solid rgba(120, 168, 255, .35); border-radius: 12px; background: #fff; }
     .msg pre {
       margin: 8px 0 0;
       padding: 10px;
@@ -1284,11 +1284,11 @@
     };
     let uiLangCode = "az";
     const LAY = {
-      az: { layihe: "Layihə", layL: "Layihə — nə hazırlayım?", layP: "Məsələn: telefon üçün sadə hesablayıcı", s1: "1. Tapşırıq təhlil olunur", s2: "2. Plan yazılır", s3: "3. Fayllar yazılır", s4: "4. Xəta axtarılır", s5: "ZIP hazırdır", file: "Fayl", down: "ZIP yüklə", fail: "Bu addım alınmadı", empty: "Fayl çıxmadı", bad: "Boş fayl atıldı", wait: "gözlənilir", clean: "Xəta tapılmadı", found: "Xəta", fix: "5. Xəta düzəldilir", again: "6. Yenidən yoxlanılır", still: "Xəta qaldı" },
-      en: { layihe: "Project", layL: "Project — what should I build?", layP: "For example: a simple calculator for the phone", s1: "1. Reading the task", s2: "2. Writing the plan", s3: "3. Writing the files", s4: "4. Looking for errors", s5: "ZIP is ready", file: "File", down: "Download ZIP", fail: "This step failed", empty: "No file came out", bad: "An empty file was dropped", wait: "waiting", clean: "No error found", found: "Error", fix: "5. Fixing the error", again: "6. Checking again", still: "An error remains" },
-      tr: { layihe: "Proje", layL: "Proje — ne hazırlayayım?", layP: "Örneğin: telefon için basit hesap makinesi", s1: "1. Görev inceleniyor", s2: "2. Plan yazılıyor", s3: "3. Dosyalar yazılıyor", s4: "4. Hata aranıyor", s5: "ZIP hazır", file: "Dosya", down: "ZIP indir", fail: "Bu adım alınmadı", empty: "Dosya çıkmadı", bad: "Boş dosya atıldı", wait: "bekleniyor", clean: "Hata bulunmadı", found: "Hata", fix: "5. Hata düzeltiliyor", again: "6. Yeniden kontrol", still: "Hata kaldı" },
-      ar: { layihe: "مشروع", layL: "مشروع — ماذا أجهّز؟", layP: "مثلاً: آلة حاسبة بسيطة للهاتف", s1: "1. تُحلَّل المهمة", s2: "2. تُكتب الخطة", s3: "3. تُكتب الملفات", s4: "4. يُبحث عن خطأ", s5: "ملف ZIP جاهز", file: "ملف", down: "تنزيل ZIP", fail: "فشلت هذه الخطوة", empty: "لم يخرج ملف", bad: "أُسقط ملف فارغ", wait: "يُنتظر", clean: "لم يُوجد خطأ", found: "خطأ", fix: "5. يُصلَح الخطأ", again: "6. فحص ثانٍ", still: "بقي خطأ" },
-      ru: { layihe: "Проект", layL: "Проект — что собрать?", layP: "Например: простой калькулятор для телефона", s1: "1. Разбор задачи", s2: "2. Пишется план", s3: "3. Пишутся файлы", s4: "4. Поиск ошибок", s5: "ZIP готов", file: "Файл", down: "Скачать ZIP", fail: "Этот шаг не вышел", empty: "Файл не вышел", bad: "Пустой файл отброшен", wait: "ждётся", clean: "Ошибок нет", found: "Ошибка", fix: "5. Ошибка исправляется", again: "6. Повторная проверка", still: "Ошибка осталась" }
+      az: { layihe: "Layihə", layL: "Layihə — nə hazırlayım?", layP: "Məsələn: telefon üçün sadə hesablayıcı", s1: "1. Tapşırıq təhlil olunur", s2: "2. Plan yazılır", s3: "3. Fayllar yazılır", s4: "4. Xəta axtarılır", s5: "ZIP hazırdır", file: "Fayl", down: "ZIP yüklə", fail: "Bu addım alınmadı", empty: "Fayl çıxmadı", bad: "Boş fayl atıldı", wait: "gözlənilir", clean: "Xəta tapılmadı", found: "Xəta", fix: "5. Xəta düzəldilir", again: "6. Yenidən yoxlanılır", still: "Xəta qaldı", see: "Önizləmə", nosee: "Önizləmə yoxdur: HTML faylı çıxmadı" },
+      en: { layihe: "Project", layL: "Project — what should I build?", layP: "For example: a simple calculator for the phone", s1: "1. Reading the task", s2: "2. Writing the plan", s3: "3. Writing the files", s4: "4. Looking for errors", s5: "ZIP is ready", file: "File", down: "Download ZIP", fail: "This step failed", empty: "No file came out", bad: "An empty file was dropped", wait: "waiting", clean: "No error found", found: "Error", fix: "5. Fixing the error", again: "6. Checking again", still: "An error remains", see: "Preview", nosee: "No preview: no HTML file" },
+      tr: { layihe: "Proje", layL: "Proje — ne hazırlayayım?", layP: "Örneğin: telefon için basit hesap makinesi", s1: "1. Görev inceleniyor", s2: "2. Plan yazılıyor", s3: "3. Dosyalar yazılıyor", s4: "4. Hata aranıyor", s5: "ZIP hazır", file: "Dosya", down: "ZIP indir", fail: "Bu adım alınmadı", empty: "Dosya çıkmadı", bad: "Boş dosya atıldı", wait: "bekleniyor", clean: "Hata bulunmadı", found: "Hata", fix: "5. Hata düzeltiliyor", again: "6. Yeniden kontrol", still: "Hata kaldı", see: "Önizleme", nosee: "Önizleme yok: HTML dosyası çıkmadı" },
+      ar: { layihe: "مشروع", layL: "مشروع — ماذا أجهّز؟", layP: "مثلاً: آلة حاسبة بسيطة للهاتف", s1: "1. تُحلَّل المهمة", s2: "2. تُكتب الخطة", s3: "3. تُكتب الملفات", s4: "4. يُبحث عن خطأ", s5: "ملف ZIP جاهز", file: "ملف", down: "تنزيل ZIP", fail: "فشلت هذه الخطوة", empty: "لم يخرج ملف", bad: "أُسقط ملف فارغ", wait: "يُنتظر", clean: "لم يُوجد خطأ", found: "خطأ", fix: "5. يُصلَح الخطأ", again: "6. فحص ثانٍ", still: "بقي خطأ", see: "معاينة", nosee: "لا معاينة: لم يخرج ملف HTML" },
+      ru: { layihe: "Проект", layL: "Проект — что собрать?", layP: "Например: простой калькулятор для телефона", s1: "1. Разбор задачи", s2: "2. Пишется план", s3: "3. Пишутся файлы", s4: "4. Поиск ошибок", s5: "ZIP готов", file: "Файл", down: "Скачать ZIP", fail: "Этот шаг не вышел", empty: "Файл не вышел", bad: "Пустой файл отброшен", wait: "ждётся", clean: "Ошибок нет", found: "Ошибка", fix: "5. Ошибка исправляется", again: "6. Повторная проверка", still: "Ошибка осталась", see: "Просмотр", nosee: "Просмотра нет: HTML-файла нет" }
     };
     function t(key) {
       const row = (UI[uiLangCode] || UI.az)[key];
@@ -2729,19 +2729,50 @@
       return s;
     }
     function analyzeTask(task) {
-      const s = String(task || "").toLowerCase();
+      const raw = String(task || "").trim();
+      const s = raw.toLowerCase();
       const notes = [];
       if (/python|piton|пайтон|بايثون/.test(s)) notes.push("Dil: Python");
       else if (/java\b|kotlin|android|apk/.test(s)) notes.push("Dil: Java və ya Kotlin");
       else if (/html|css|javascript|səhifə|sehife|sayt|website|страниц|صفحة/.test(s)) notes.push("Dil: HTML, CSS, JavaScript");
       else notes.push("Dil: tapşırıqdan seçiləcək");
-      if (/hesab|kalkul|calculator|hesap|حاسب|калькул/.test(s)) notes.push("Növ: hesablayıcı");
-      else if (/çat|chat|söhb|sohb|محادث|чат/.test(s)) notes.push("Növ: söhbət");
-      else if (/siyah|todo|checklist|قائم|список/.test(s)) notes.push("Növ: siyahı");
-      else notes.push("Növ: kiçik səhifə və ya skript");
-      notes.push("Limit: ən çox 4 fayl");
-      notes.push("Xəta axtarışı: mötərizə, HTML teqi, boş fayl, olmayan fayl, JSON");
+      raw.split(/[,\n.;]| və | ve | and | и | و /).map(function (bit) { return bit.trim(); }).filter(function (bit) { return bit.length > 3; }).slice(0, 4).forEach(function (bit, i) {
+        notes.push((i + 1) + ") " + bit.slice(0, 90));
+      });
+      notes.push("Yoxlama: JavaScript sintaksisi, CSS, HTML teqi, Python sətri, JSON, olmayan fayl");
       return notes;
+    }
+    function jsCheck(text) {
+      const src = String(text || "")
+        .replace(/^\s*import\s+[\s\S]*?from\s+["'][^"']+["'];?/gm, "")
+        .replace(/^\s*import\s+["'][^"']+["'];?/gm, "")
+        .replace(/^\s*export\s+default\s+/gm, "")
+        .replace(/^\s*export\s+(async\s+)?function/gm, "$1function")
+        .replace(/^\s*export\s+(const|let|var|class|async)/gm, "$1");
+      try { new Function(src); return ""; }
+      catch (e) { return String(e && e.message ? e.message : "sintaksis").slice(0, 140); }
+    }
+    function cssCheck(text) {
+      try {
+        if (typeof CSSStyleSheet === "function" && CSSStyleSheet.prototype.replaceSync) {
+          new CSSStyleSheet().replaceSync(text);
+          return "";
+        }
+      } catch (e) {
+        return String(e && e.message ? e.message : "CSS").replace(/\s+/g, " ").slice(0, 140);
+      }
+      return balance(text, "{", "}");
+    }
+    function pyIssues(text) {
+      const out = [];
+      if (/\t/.test(text) && /^ +/m.test(text)) out.push("tab və boşluq qarışıqdır");
+      text.split("\n").forEach(function (line, i) {
+        const s = line.replace(/#.*$/, "").trim();
+        if (/^(def|if|elif|else|for|while|try|except|class|with)\b/.test(s) && !/:\s*$/.test(s)) out.push("sətir " + (i + 1) + ": iki nöqtə yoxdur");
+      });
+      const brace = balance(text, "(", ")");
+      if (brace) out.push(brace);
+      return out.slice(0, 4);
     }
     function skipCode(text, i) {
       const c = text[i];
@@ -2816,7 +2847,13 @@
         const text = file.content || "";
         if (!text.trim()) { errs.push(file.path + ": boşdur"); return; }
         if (text.indexOf("```") >= 0) errs.push(file.path + ": kod hasarın içində qalıb");
-        if (ext === "js" || ext === "ts" || ext === "css" || ext === "json") {
+        if (ext === "js" || ext === "mjs") {
+          const msg = jsCheck(text);
+          if (msg) errs.push(file.path + ": " + msg);
+        } else if (ext === "css") {
+          const msg = cssCheck(text);
+          if (msg) errs.push(file.path + ": " + msg);
+        } else if (ext === "ts") {
           ["{}", "()", "[]"].forEach(function (pair) {
             const msg = balance(text, pair.charAt(0), pair.charAt(1));
             if (msg) errs.push(file.path + ": " + msg);
@@ -2824,6 +2861,12 @@
         }
         if (ext === "html" || ext === "htm") {
           htmlIssues(text).forEach(function (msg) { errs.push(file.path + ": " + msg); });
+          const scripts = text.match(/<script\b(?![^>]*\bsrc=)[^>]*>[\s\S]*?<\/script>/gi) || [];
+          scripts.forEach(function (block) {
+            const body = block.replace(/^<script\b[^>]*>/i, "").replace(/<\/script>$/i, "");
+            const msg = jsCheck(body);
+            if (msg) errs.push(file.path + ": " + msg);
+          });
           const refs = text.match(/(?:src|href)\s*=\s*["'][^"']+["']/g) || [];
           refs.forEach(function (raw) {
             const href = raw.replace(/^.*?=["']/, "").replace(/["']$/, "").split("?")[0].split("#")[0].replace(/^\.\//, "");
@@ -2831,7 +2874,7 @@
             if (/\.(css|js|html)$/.test(href) && !names[href]) errs.push(file.path + ": tapılmayan fayl " + href);
           });
         }
-        if (ext === "py" && /\t/.test(text) && /^ +/m.test(text)) errs.push(file.path + ": tab və boşluq qarışıqdır");
+        if (ext === "py") pyIssues(text).forEach(function (msg) { errs.push(file.path + ": " + msg); });
         if (ext === "json") {
           try { JSON.parse(text); } catch (e) { errs.push(file.path + ": JSON oxunmur"); }
         }
@@ -2901,6 +2944,42 @@
       el.appendChild(pre);
       msgs.appendChild(el);
       msgs.scrollTop = msgs.scrollHeight;
+    }
+    function buildPreview(files) {
+      const htmlFile = files.filter(function (file) { return /(^|\/)index\.html$/.test(file.path); })[0] || files.filter(function (file) { return /\.html?$/.test(file.path); })[0];
+      if (!htmlFile) return "";
+      let doc = htmlFile.content;
+      files.forEach(function (file) {
+        const name = file.path.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        if (/\.css$/.test(file.path)) {
+          doc = doc.replace(new RegExp("<link\\b[^>]*href=[\"']" + name + "[\"'][^>]*>", "i"), "<style>" + file.content.replace(/<\/style/gi, "<\\/style") + "</style>");
+        }
+        if (/\.js$/.test(file.path)) {
+          const closeTag = "<" + "/script>";
+          doc = doc.replace(new RegExp("<script\\b[^>]*src=[\"']" + name + "[\"'][^>]*>\\s*" + closeTag, "i"), "<script>" + file.content.replace(new RegExp(closeTag.slice(0, 1) + "/" + "script", "gi"), "<\\" + "/script") + closeTag);
+        }
+      });
+      return doc;
+    }
+    function pushPreview(files) {
+      const html = buildPreview(files);
+      const el = document.createElement("div");
+      el.className = "msg b step " + (html ? "ok" : "run");
+      el.setAttribute("dir", "auto");
+      const title = document.createElement("b");
+      title.textContent = html ? t("see") : t("nosee");
+      el.appendChild(title);
+      if (html) {
+        const frame = document.createElement("iframe");
+        frame.className = "preview";
+        frame.setAttribute("sandbox", "allow-scripts");
+        frame.title = t("see");
+        frame.src = URL.createObjectURL(new Blob([html], { type: "text/html" }));
+        el.appendChild(frame);
+      }
+      msgs.appendChild(el);
+      msgs.scrollTop = msgs.scrollHeight;
+      return !!html;
     }
     function pushZip(files) {
       const el = document.createElement("div");
@@ -3010,6 +3089,8 @@
             log.push(t("fail"));
           }
         }
+        const seen = pushPreview(files);
+        log.push(seen ? t("see") : t("nosee"));
         pushZip(files);
         log.push(t("s5"));
         rec("b", log.join("\n"), "", 0);
