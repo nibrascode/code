@@ -6,7 +6,7 @@ export const GAME_VERSION = "v1.0.0";
 
 type Copy = Record<Lang, string>;
 
-export type GameSlug = "x-o" | "soz";
+export type GameSlug = "x-o" | "soz" | "ilan";
 
 export const GAMES: readonly { slug: GameSlug; name: Copy; blurb: Copy }[] = [
   {
@@ -43,6 +43,23 @@ export const GAMES: readonly { slug: GameSlug; name: Copy; blurb: Copy }[] = [
       ru: "Найди азербайджанское слово. Четыре, пять, шесть или семь букв.",
     },
   },
+  {
+    slug: "ilan",
+    name: {
+      az: "İlan",
+      en: "Snake",
+      tr: "Yılan",
+      ar: "الأفعى",
+      ru: "Змейка",
+    },
+    blurb: {
+      az: "Yeməyi ye, uzan. Divara və özünə toxunma.",
+      en: "Eat, grow, and do not hit the wall or yourself.",
+      tr: "Yemi ye, uzan. Duvara ve kendine değme.",
+      ar: "كُلْ وتقدّم. لا تلمس الجدار ولا نفسك.",
+      ru: "Ешь и расти. Не врежься в стену и в себя.",
+    },
+  },
 ];
 
 export const GAME_COPY = {
@@ -62,11 +79,11 @@ export const GAME_COPY = {
     ru: "Игры — Nibras Code",
   },
   indexDescription: {
-    az: "Nibras Code oyunları. İlk oyun X-O, versiya v1.0.0.",
-    en: "Nibras Code games. The first game is tic-tac-toe, version v1.0.0.",
-    tr: "Nibras Code oyunları. İlk oyun XOX, sürüm v1.0.0.",
-    ar: "ألعاب Nibras Code. اللعبة الأولى إكس أو، الإصدار v1.0.0.",
-    ru: "Игры Nibras Code. Первая игра — крестики-нолики, версия v1.0.0.",
+    az: "Nibras Code oyunları. X-O, Söz və İlan. Versiya v1.0.0.",
+    en: "Nibras Code games. Tic-tac-toe, Söz, and Snake. Version v1.0.0.",
+    tr: "Nibras Code oyunları. XOX, Söz ve Yılan. Sürüm v1.0.0.",
+    ar: "ألعاب Nibras Code. إكس أو، وكلمة، والأفعى. الإصدار v1.0.0.",
+    ru: "Игры Nibras Code. Крестики-нолики, Слово и Змейка. Версия v1.0.0.",
   },
   two: { az: "İki nəfər", en: "Two people", tr: "İki kişi", ar: "شخصان", ru: "Два человека" },
   cpu: { az: "Kompüter", en: "Computer", tr: "Bilgisayar", ar: "الحاسوب", ru: "Компьютер" },
