@@ -85,6 +85,14 @@ export function GameIcon({ slug }: { slug: GameSlug }) {
           <rect x="34" y="34" width="22" height="22" rx="6" fill="#fff" />
         </>
       ) : null}
+      {slug === "meyve" ? (
+        <>
+          <circle cx="22" cy="24" r="12" fill="#ff5c7a" />
+          <circle cx="42" cy="22" r="11" fill="#fb923c" />
+          <circle cx="20" cy="44" r="10" fill="#84cc16" />
+          <circle cx="40" cy="44" r="11" fill="#a78bfa" />
+        </>
+      ) : null}
     </svg>
   );
 }

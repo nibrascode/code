@@ -6,7 +6,7 @@ export const GAME_VERSION = "v1.0.0";
 
 type Copy = Record<Lang, string>;
 
-export type GameSlug = "x-o" | "soz" | "ilan" | "kosmos" | "qala" | "neon" | "tetris" | "2048";
+export type GameSlug = "x-o" | "soz" | "ilan" | "kosmos" | "qala" | "neon" | "tetris" | "2048" | "meyve";
 
 export const GAMES: readonly { slug: GameSlug; name: Copy; blurb: Copy }[] = [
   {
@@ -145,6 +145,23 @@ export const GAMES: readonly { slug: GameSlug; name: Copy; blurb: Copy }[] = [
       ru: "Соединяй одинаковые числа. Доберись до 2048.",
     },
   },
+  {
+    slug: "meyve",
+    name: {
+      az: "Meyvə",
+      en: "Fruit",
+      tr: "Meyve",
+      ar: "فاكهة",
+      ru: "Фрукты",
+    },
+    blurb: {
+      az: "Barmağını sürüşdür, meyvələri kəs. Bombaya toxunma.",
+      en: "Swipe to slice the fruit. Do not touch the bomb.",
+      tr: "Parmağını kaydır, meyveleri kes. Bombaya dokunma.",
+      ar: "اسحب لتقطع الفاكهة. لا تلمس القنبلة.",
+      ru: "Проведи пальцем и режь фрукты. Бомбу не трогай.",
+    },
+  },
 ];
 
 export const GAME_COPY = {
@@ -164,11 +181,11 @@ export const GAME_COPY = {
     ru: "Игры — Nibras Code",
   },
   indexDescription: {
-    az: "Nibras Code oyunları. X-O, Söz, İlan, Kosmos, Qala, Neon, Tetris və 2048. Versiya v1.0.0.",
-    en: "Nibras Code games. Tic-tac-toe, Söz, Snake, Kosmos, Fortress, Neon, Tetris, and 2048. Version v1.0.0.",
-    tr: "Nibras Code oyunları. XOX, Söz, Yılan, Kosmos, Kale, Neon, Tetris ve 2048. Sürüm v1.0.0.",
-    ar: "ألعاب Nibras Code. إكس أو، وكلمة، والأفعى، والفضاء، والقلعة، ونيون، وتتريس، و2048. الإصدار v1.0.0.",
-    ru: "Игры Nibras Code. Крестики-нолики, Слово, Змейка, Космос, Крепость, Неон, Тетрис и 2048. Версия v1.0.0.",
+    az: "Nibras Code oyunları. X-O, Söz, İlan, Kosmos, Qala, Neon, Tetris, 2048 və Meyvə. Versiya v1.0.0.",
+    en: "Nibras Code games. Tic-tac-toe, Söz, Snake, Kosmos, Fortress, Neon, Tetris, 2048, and Fruit. Version v1.0.0.",
+    tr: "Nibras Code oyunları. XOX, Söz, Yılan, Kosmos, Kale, Neon, Tetris, 2048 ve Meyve. Sürüm v1.0.0.",
+    ar: "ألعاب Nibras Code. إكس أو، وكلمة، والأفعى، والفضاء، والقلعة، ونيون، وتتريس، و2048، والفاكهة. الإصدار v1.0.0.",
+    ru: "Игры Nibras Code. Крестики-нолики, Слово, Змейка, Космос, Крепость, Неон, Тетрис, 2048 и Фрукты. Версия v1.0.0.",
   },
   two: { az: "İki nəfər", en: "Two people", tr: "İki kişi", ar: "شخصان", ru: "Два человека" },
   cpu: { az: "Kompüter", en: "Computer", tr: "Bilgisayar", ar: "الحاسوب", ru: "Компьютер" },
