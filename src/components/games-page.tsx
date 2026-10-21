@@ -4,6 +4,7 @@ import { GAME_COPY, GAME_VERSION, GAMES, gameBySlug, gamePath } from "@/lib/game
 import { SozGame } from "@/components/soz-game";
 import { IlanGame } from "@/components/ilan-game";
 import { KosmosGame } from "@/components/kosmos-game";
+import { QalaGame } from "@/components/qala-game";
 import { useI18n } from "@/lib/i18n-context";
 
 const LINES = [
@@ -246,6 +247,7 @@ export function GameScreen({ slug }: { slug: string }) {
   if (slug === "soz") return <SozGame />;
   if (slug === "ilan") return <IlanGame />;
   if (slug === "kosmos") return <KosmosGame />;
+  if (slug === "qala") return <QalaGame />;
   return <TicTacToe />;
 }
 

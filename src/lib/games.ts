@@ -6,7 +6,7 @@ export const GAME_VERSION = "v1.0.0";
 
 type Copy = Record<Lang, string>;
 
-export type GameSlug = "x-o" | "soz" | "ilan" | "kosmos";
+export type GameSlug = "x-o" | "soz" | "ilan" | "kosmos" | "qala";
 
 export const GAMES: readonly { slug: GameSlug; name: Copy; blurb: Copy }[] = [
   {
@@ -77,6 +77,23 @@ export const GAMES: readonly { slug: GameSlug; name: Copy; blurb: Copy }[] = [
       ru: "Сбивай волны. Каждая пятая — босс.",
     },
   },
+  {
+    slug: "qala",
+    name: {
+      az: "Qala",
+      en: "Fortress",
+      tr: "Kale",
+      ar: "القلعة",
+      ru: "Крепость",
+    },
+    blurb: {
+      az: "Yola qüllə qur. Qızıl topla, qalanı qoru.",
+      en: "Build towers beside the road. Gather gold and hold the fortress.",
+      tr: "Yola kule kur. Altın topla, kaleyi koru.",
+      ar: "ابنِ أبراجًا على الطريق. اجمع الذهب واحمِ القلعة.",
+      ru: "Строй башни у дороги. Собирай золото и держи крепость.",
+    },
+  },
 ];
 
 export const GAME_COPY = {
@@ -96,11 +113,11 @@ export const GAME_COPY = {
     ru: "Игры — Nibras Code",
   },
   indexDescription: {
-    az: "Nibras Code oyunları. X-O, Söz, İlan və Kosmos. Versiya v1.0.0.",
-    en: "Nibras Code games. Tic-tac-toe, Söz, Snake, and Kosmos. Version v1.0.0.",
-    tr: "Nibras Code oyunları. XOX, Söz, Yılan ve Kosmos. Sürüm v1.0.0.",
-    ar: "ألعاب Nibras Code. إكس أو، وكلمة، والأفعى، والفضاء. الإصدار v1.0.0.",
-    ru: "Игры Nibras Code. Крестики-нолики, Слово, Змейка и Космос. Версия v1.0.0.",
+    az: "Nibras Code oyunları. X-O, Söz, İlan, Kosmos və Qala. Versiya v1.0.0.",
+    en: "Nibras Code games. Tic-tac-toe, Söz, Snake, Kosmos, and Fortress. Version v1.0.0.",
+    tr: "Nibras Code oyunları. XOX, Söz, Yılan, Kosmos ve Kale. Sürüm v1.0.0.",
+    ar: "ألعاب Nibras Code. إكس أو، وكلمة، والأفعى، والفضاء، والقلعة. الإصدار v1.0.0.",
+    ru: "Игры Nibras Code. Крестики-нолики, Слово, Змейка, Космос и Крепость. Версия v1.0.0.",
   },
   two: { az: "İki nəfər", en: "Two people", tr: "İki kişi", ar: "شخصان", ru: "Два человека" },
   cpu: { az: "Kompüter", en: "Computer", tr: "Bilgisayar", ar: "الحاسوب", ru: "Компьютер" },
