@@ -764,6 +764,13 @@ const PAGES: Record<string, Copy> = {
     ar: { title: "Nibras SEO Check — افحص صفحة", description: "العنوان والوصف والرابط الأساسي وrobots.txt وsitemap. يُفحص عنوان واحد ولا تُفتح الصفحات الأخرى." },
     ru: { title: "Nibras SEO Check — проверить одну страницу", description: "Title, description, canonical, robots.txt и sitemap. Проверяется один адрес, другие страницы не открываются." },
   },
+  "/flow": {
+    az: { title: "Nibras Flow — ideyadan plana", description: "İdeyanı yaz. Səhifə xəritəsi, qovluq, iş sırası və başlanğıc fayl adları bu səhifədə qurulur. Kod yazılmır." },
+    en: { title: "Nibras Flow — from an idea to a plan", description: "Write the idea. The page map, folders, work order, and starter file names are built on this page. No code is written." },
+    tr: { title: "Nibras Flow — fikirden plana", description: "Fikri yaz. Sayfa haritası, klasör, iş sırası ve başlangıç dosya adları bu sayfada kurulur. Kod yazılmaz." },
+    ar: { title: "Nibras Flow — من الفكرة إلى الخطة", description: "اكتب الفكرة. تُبنى خريطة الصفحات والمجلدات وترتيب العمل وأسماء الملفات هنا. لا يُكتب كود." },
+    ru: { title: "Nibras Flow — от идеи к плану", description: "Напишите идею. Карта страниц, папки, порядок работы и имена начальных файлов собираются на этой странице. Код не пишется." },
+  },
   "/pdf": {
     az: {
       title: "Nibras PDF — PDF birləşdir, böl, sıxışdır, imzala (pulsuz)",
@@ -1349,7 +1356,7 @@ function jsonLd(path: string, lang: Lang, copy: PageSeo, url: string) {
       };
     }
   }
-  if (path === "/erase" || path === "/image" || path === "/soz-sayi" || path === "/faiz" || path === "/wifi" || path === "/seo") {
+  if (path === "/erase" || path === "/image" || path === "/soz-sayi" || path === "/faiz" || path === "/wifi" || path === "/seo" || path === "/flow") {
     const block = SEARCH_FAQ[path];
     const items = block.items[lang] ?? block.items.en;
     return {

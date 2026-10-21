@@ -14211,6 +14211,56 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/seo"/>
   </url>
   <url>
+    <loc>https://nibrascode.com/flow</loc>
+    <lastmod>2026-10-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/flow"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/flow"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/flow"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/flow"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/flow"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/flow"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/en/flow</loc>
+    <lastmod>2026-10-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/flow"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/flow"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/flow"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/flow"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/flow"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/flow"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/tr/flow</loc>
+    <lastmod>2026-10-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/flow"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/flow"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/flow"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/flow"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/flow"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/flow"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/ar/flow</loc>
+    <lastmod>2026-10-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/flow"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/flow"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/flow"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/flow"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/flow"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/flow"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/ru/flow</loc>
+    <lastmod>2026-10-21</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/flow"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/flow"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/flow"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/flow"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/flow"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/flow"/>
+  </url>
+  <url>
     <loc>https://nibrascode.com/xeta/gradle-sync-failed</loc>
     <lastmod>2026-10-17</lastmod>
     <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/xeta/gradle-sync-failed"/>

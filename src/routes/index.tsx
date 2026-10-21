@@ -24,7 +24,7 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-const BAR: Record<"dev" | "apk" | "pdf" | "qr" | "erase" | "image" | "calc" | "seo", Record<Lang, string>> = {
+const BAR: Record<"dev" | "apk" | "pdf" | "qr" | "erase" | "image" | "calc" | "seo" | "flow", Record<Lang, string>> = {
   dev: { az: "Kod yaz", en: "Write code", tr: "Kod yaz", ar: "اكتب كوداً", ru: "Пиши код" },
   apk: { az: "Apk hazırla", en: "Make an APK", tr: "Apk hazırla", ar: "اصنع APK", ru: "Собрать APK" },
   pdf: { az: "Pdf hazırla", en: "Make a PDF", tr: "Pdf hazırla", ar: "جهّز PDF", ru: "Сделать PDF" },
@@ -33,6 +33,7 @@ const BAR: Record<"dev" | "apk" | "pdf" | "qr" | "erase" | "image" | "calc" | "s
   image: { az: "Şəkil sıx", en: "Compress photo", tr: "Foto sıkıştır", ar: "ضغط الصورة", ru: "Сжать фото" },
   calc: { az: "Hesabla", en: "Calculate", tr: "Hesapla", ar: "احسب", ru: "Посчитай" },
   seo: { az: "SEO yoxla", en: "Check SEO", tr: "SEO bak", ar: "فحص SEO", ru: "Проверить SEO" },
+  flow: { az: "Plan qur", en: "Make a plan", tr: "Plan kur", ar: "ابنِ خطة", ru: "Собрать план" },
 };
 
 const STATUS: Partial<Record<"nibras-arabic" | "nibras-pdf" | "nibras-qr" | "nibras-plans" | "nibras-docs", TKey>> = {
@@ -351,6 +352,12 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
                 <path d="M14.4 14.4 19 19" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
               </svg>
               <span>{BAR.seo[lang]}</span>
+            </a>
+            <a className="nx-apk-bar" href={localeHref(lang, "/flow")}>
+              <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 7h6M5 12h10M5 17h14" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+              </svg>
+              <span>{BAR.flow[lang]}</span>
             </a>
             <a className="nx-ai-bar nx-qr-bar" href={localeHref(lang, "/pdf")}>
               <svg className="nx-job nx-job-pdf" viewBox="0 0 24 24" aria-hidden="true">

@@ -1,6 +1,6 @@
 import type { Lang } from "@/lib/i18n";
 
-export const SEARCH_FAQ: Record<"/erase" | "/image" | "/soz-sayi" | "/faiz" | "/wifi" | "/seo", { title: Record<Lang, string>; items: Record<Lang, { q: string; a: string }[]> }> = {
+export const SEARCH_FAQ: Record<"/erase" | "/image" | "/soz-sayi" | "/faiz" | "/wifi" | "/seo" | "/flow", { title: Record<Lang, string>; items: Record<Lang, { q: string; a: string }[]> }> = {
   "/erase": {
     title: { az: "Suallar", en: "Questions", tr: "Sorular", ar: "أسئلة", ru: "Вопросы" },
     items: {
@@ -203,6 +203,36 @@ export const SEARCH_FAQ: Record<"/erase" | "/image" | "/soz-sayi" | "/faiz" | "/
         { q: "Что проверяется?", a: "Title, description, canonical, H1, robots.txt и sitemap одной страницы." },
         { q: "Обходится весь сайт?", a: "Нет. Открывается только введённый адрес и его robots.txt с файлом sitemap." },
         { q: "Адрес сохраняется?", a: "Нет. Результат не пишется в базу." },
+      ],
+    },
+  },
+  "/flow": {
+    title: { az: "Suallar", en: "Questions", tr: "Sorular", ar: "أسئلة", ru: "Вопросы" },
+    items: {
+      az: [
+        { q: "Kod yazırmı?", a: "Xeyr. Səhifə adları, qovluq, iş sırası və fayl adları verir." },
+        { q: "İdeya saxlanılırmı?", a: "Xeyr. Plan bu səhifədə qalır və heç yerə göndərilmir." },
+        { q: "Növü necə seçir?", a: "Yazdığın sözlərdən. Mağaza, dərs, bloq, tətbiq və ya sadə sayt." },
+      ],
+      en: [
+        { q: "Does it write code?", a: "No. It gives page names, folders, a work order, and file names." },
+        { q: "Is the idea stored?", a: "No. The plan stays on this page and is not sent anywhere." },
+        { q: "How is the kind chosen?", a: "From the words you write. A shop, a course, a blog, an app, or a simple site." },
+      ],
+      tr: [
+        { q: "Kod yazar mı?", a: "Hayır. Sayfa adları, klasör, iş sırası ve dosya adları verir." },
+        { q: "Fikir saklanır mı?", a: "Hayır. Plan bu sayfada kalır ve hiçbir yere gönderilmez." },
+        { q: "Türü nasıl seçer?", a: "Yazdığın sözlerden. Mağaza, ders, blog, uygulama veya basit site." },
+      ],
+      ar: [
+        { q: "هل يكتب كوداً؟", a: "لا. يعطي أسماء الصفحات والمجلدات وترتيب العمل وأسماء الملفات." },
+        { q: "هل تُحفظ الفكرة؟", a: "لا. تبقى الخطة في هذه الصفحة ولا تُرسل إلى أي مكان." },
+        { q: "كيف يُختار النوع؟", a: "من الكلمات التي تكتبها. متجر أو دروس أو مدونة أو تطبيق أو موقع بسيط." },
+      ],
+      ru: [
+        { q: "Пишет ли код?", a: "Нет. Даёт имена страниц, папки, порядок работы и имена файлов." },
+        { q: "Идея сохраняется?", a: "Нет. План остаётся на этой странице и никуда не отправляется." },
+        { q: "Как выбирается вид?", a: "По словам, которые вы написали. Магазин, уроки, блог, приложение или простой сайт." },
       ],
     },
   },
