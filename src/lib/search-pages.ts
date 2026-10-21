@@ -1150,6 +1150,84 @@ const TOPICS: readonly SearchItem[] = [
       ),
     ),
   },
+  {
+    slug: "gpt-6",
+    piece: piece(
+      L(
+        "GPT-6 cavabın içinə qrafik qoyur",
+        "GPT-6 puts a chart inside the answer",
+        "GPT-6 cevabın içine grafik koyar",
+        "GPT-6 يضع رسمًا داخل الجواب",
+        "GPT-6 кладёт график внутрь ответа",
+      ),
+      L(
+        "7 oktyabr 2026-da OpenAI GPT-6-nı ChatGPT-nin söhbət bölməsinə buraxmağa başlayıb. Yeni hissənin adı Intelligent UI-dir. Cavab təkcə abzas olmaya bilər. İçində qrafik, basılan düymə, forma və kiçik alət, məsələn kalkulyator, dayana bilər.\n\nModel sualın formasına baxır. Müqayisə yan-yana düşə bilər. İzah şəkil ilə gedə bilər. Düz mətn daha yaxşıdırsa, mətn qalır.\n\nÖdənişli söhbət planlarında model GPT-6 Sol-dur və 7 oktyabrdan açılır. Pulsuz və Go planında model GPT-6 Luna-dır və 8 oktyabrdan açılır. Hər hesabda eyni gün görünmür.\n\nQrafikin içindəki rəqəm mənbə deyil. Düyməni basmaq hesabı yoxlamır. Vacib rəqəmi başqa yerdən yoxla.",
+        "On 7 October 2026 OpenAI started releasing GPT-6 into ChatGPT's chat tab. The new part is called Intelligent UI. An answer may not be only a paragraph. A chart, a button you can press, a form, and a small tool, such as a calculator, can stand inside it.\n\nThe model looks at the shape of the question. A comparison can sit side by side. An explanation can go with a picture. If plain text is better, the text stays.\n\nOn the paid chat plans the model is GPT-6 Sol, and it opens from 7 October. On the free plan and Go the model is GPT-6 Luna, and it opens from 8 October. It does not show up on every account on the same day.\n\nA number inside the chart is not a source. Pressing the button does not check the account. Check an important number somewhere else.",
+        "7 Ekim 2026'da OpenAI, GPT-6'yı ChatGPT'nin sohbet bölümüne bırakmaya başladı. Yeni parçanın adı Intelligent UI'dir. Cevap yalnızca paragraf olmayabilir. İçinde grafik, basılan düğme, form ve küçük bir araç, örneğin hesap makinesi, durabilir.\n\nModel sorunun biçimine bakar. Karşılaştırma yan yana düşebilir. Açıklama resimle gidebilir. Düz metin daha iyiyse metin kalır.\n\nÜcretli sohbet planlarında model GPT-6 Sol'dur ve 7 Ekim'den açılır. Ücretsiz ve Go planında model GPT-6 Luna'dır ve 8 Ekim'den açılır. Her hesapta aynı gün görünmez.\n\nGrafiğin içindeki sayı kaynak değildir. Düğmeye basmak hesabı yoklamaz. Önemli sayıyı başka yerden kontrol et.",
+        "في 7 أكتوبر 2026 بدأت OpenAI إطلاق GPT-6 في قسم المحادثة في ChatGPT. اسم الجزء الجديد Intelligent UI. قد لا يكون الجواب فقرة فقط. قد يقف داخله رسم وزر يُضغط ونموذج وأداة صغيرة، مثل آلة حاسبة.\n\nينظر النموذج إلى شكل السؤال. قد تقع المقارنة جنبًا إلى جنب. وقد يمضي الشرح مع صورة. إذا كان النص البسيط أفضل بقي النص.\n\nفي خطط المحادثة المدفوعة النموذج هو GPT-6 Sol ويُفتح من 7 أكتوبر. في الخطة المجانية وGo النموذج هو GPT-6 Luna ويُفتح من 8 أكتوبر. لا يظهر في كل حساب في اليوم نفسه.\n\nالرقم داخل الرسم ليس مصدرًا. ضغط الزر لا يفحص الحساب. افحص الرقم المهم من مكان آخر.",
+        "7 октября 2026 OpenAI начала выпускать GPT-6 во вкладку разговора ChatGPT. Новая часть называется Intelligent UI. Ответ может быть не только абзацем. Внутри могут стоять график, кнопка, форма и маленький инструмент, например калькулятор.\n\nМодель смотрит на форму вопроса. Сравнение может лечь рядом. Объяснение может идти с картинкой. Если лучше простой текст, текст остаётся.\n\nНа платных планах разговора модель — GPT-6 Sol, она открывается с 7 октября. На бесплатном плане и Go модель — GPT-6 Luna, она открывается с 8 октября. Не на каждом аккаунте это видно в один день.\n\nЧисло внутри графика — не источник. Нажатие кнопки не проверяет счёт. Важное число проверь в другом месте.",
+      ),
+      {
+        az: ["Söhbət bölməsindədir. Başqa bölmədə köhnə model qala bilər.", "Pulsuz planda Sol axtarma. Orada Luna-dır.", "Qrafik çıxmırsa, hesabına hələ düşməyib. Eyni sualı sabah yenidən ver.", "Kalkulyatorun nəticəsini özün də hesabla. Bir düymə rəqəmi düz etmir.", "Şifrəni və kartı formanın içinə yazma. Forma da söhbətin hissəsidir.", "Nibras AI bu deyil. Bu saytın söhbəti ayrıdır."],
+        en: ["It is in the chat tab. Another tab can still hold the old model.", "Do not look for Sol on the free plan. There it is Luna.", "If no chart comes out, it has not reached your account yet. Ask the same question again tomorrow.", "Calculate the calculator's result yourself too. A button does not make a number right.", "Do not type a password or a card into the form. The form is part of the chat too.", "Nibras AI is not this. This site's chat is separate."],
+        tr: ["Sohbet bölümündedir. Başka bölümde eski model kalabilir.", "Ücretsiz planda Sol arama. Orada Luna'dır.", "Grafik çıkmıyorsa hesabına daha düşmemiştir. Aynı soruyu yarın yeniden ver.", "Hesap makinesinin sonucunu kendin de hesapla. Bir düğme sayıyı doğru yapmaz.", "Şifreyi ve kartı formanın içine yazma. Forma da sohbetin parçasıdır.", "Nibras AI bu değildir. Bu sitenin sohbeti ayrıdır."],
+        ar: ["هو في قسم المحادثة. قد يبقى النموذج القديم في قسم آخر.", "لا تبحث عن Sol في الخطة المجانية. هناك Luna.", "إذا لم يخرج رسم فلم يصل إلى حسابك بعد. أعطِ السؤال نفسه غدًا من جديد.", "احسب نتيجة الآلة الحاسبة بنفسك أيضًا. الزر لا يجعل الرقم صحيحًا.", "لا تكتب كلمة السر ولا البطاقة داخل النموذج. النموذج جزء من المحادثة أيضًا.", "Nibras AI ليس هذا. محادثة هذا الموقع منفصلة."],
+        ru: ["Это во вкладке разговора. В другой вкладке может остаться старая модель.", "На бесплатном плане не ищи Sol. Там Luna.", "Если график не вышел, до твоей учётной записи ещё не дошло. Задай тот же вопрос завтра.", "Результат калькулятора посчитай и сам. Кнопка не делает число верным.", "Не пиши пароль и карту внутрь формы. Форма тоже часть разговора.", "Nibras AI — это не то. Разговор этого сайта отдельный."],
+      },
+    ),
+  },
+  {
+    slug: "gemini-qrafik",
+    piece: piece(
+      L(
+        "Gemini cavabın içinə qrafik qoyur",
+        "Gemini puts a chart inside the answer",
+        "Gemini cevabın içine grafik koyar",
+        "Gemini يضع رسمًا داخل الجواب",
+        "Gemini кладёт график внутрь ответа",
+      ),
+      L(
+        "Gemini sualı təkcə mətnlə qaytarmaya bilər. Söhbətin içində qrafik, sürgü və işlək model dayana bilər. Molekul fırlatmaq və ya bir hərəkəti sürgü ilə dəyişmək bu qəbildəndir. Google bunu Gemini tətbiqinin içinə qoyub.\n\n«İzah et» əvəzinə «göstər» demək vizualı çağırır. Model seçimi varsa, vizual çox vaxt Pro tərəfdədir. Düymənin adı dəyişə bilər.\n\n13 oktyabr 2026-da Gemini 4 Argon AI Pro və Ultra üçün açılıb. O, daha düz cavab və tapşırıq üçündür. Qrafikin adı Argon deyil. Qrafik söhbətin içindəki vizualdır.\n\n19 oktyabr 2026-dan söhbətdə qurulan interaktiv tətbiqi Google Sites-də qaralama səhifəyə köçürmək olur. Bu, söhbətin özü deyil. Ayrı səhifədir.\n\nSürgünün göstərdiyi rəqəm ölçü deyil. Öz rəqəmini yoxla. Bəzi təhsil hesablarında vizual açılmaya bilər.",
+        "Gemini may not return a question as text only. A chart, a slider, and a working model can stand inside the chat. Turning a molecule, or changing a motion with a slider, is that kind of answer. Google put this inside the Gemini app.\n\nSaying \"show\" instead of \"explain\" calls the visual. If there is a model choice, the visual is often on the Pro side. The name on the button can change.\n\nOn 13 October 2026 Gemini 4 Argon opened for AI Pro and Ultra. That one is for a more direct answer and for tasks. The chart is not named Argon. The chart is the visual inside the chat.\n\nFrom 19 October 2026 an interactive app built in the chat can be moved to a draft page on Google Sites. That is not the chat itself. It is a separate page.\n\nThe number a slider shows is not a measurement. Check your own number. On some education accounts the visual may not open.",
+        "Gemini bir soruyu yalnızca metinle döndürmeyebilir. Sohbetin içinde grafik, sürgü ve çalışan bir model durabilir. Molekül döndürmek ya da bir hareketi sürgüyle değiştirmek bu cinstendir. Google bunu Gemini uygulamasının içine koymuştur.\n\n«Açıkla» yerine «göster» demek görseli çağırır. Model seçimi varsa görsel çoğu zaman Pro tarafındadır. Düğmenin adı değişebilir.\n\n13 Ekim 2026'da Gemini 4 Argon, AI Pro ve Ultra için açıldı. O, daha düz cevap ve görev içindir. Grafiğin adı Argon değildir. Grafik sohbetin içindeki görseldir.\n\n19 Ekim 2026'dan sohbette kurulan interaktif uygulamayı Google Sites'te bir taslak sayfaya taşımak olur. Bu, sohbetin kendisi değildir. Ayrı sayfadır.\n\nSürgünün gösterdiği sayı ölçü değildir. Kendi sayını kontrol et. Bazı eğitim hesaplarında görsel açılmayabilir.",
+        "قد لا يرد Gemini على السؤال بنص فقط. قد يقف داخل المحادثة رسم ومنزلق ونموذج يعمل. تدوير جزيء أو تغيير حركة بالمنزلق من هذا النوع. وضعت Google هذا داخل تطبيق Gemini.\n\nقول «أظهر» بدل «اشرح» يستدعي الصورة. إذا كان هناك اختيار نموذج فالصورة غالبًا في جانب Pro. اسم الزر قد يتغير.\n\nفي 13 أكتوبر 2026 فُتح Gemini 4 Argon لـ AI Pro وUltra. ذلك للجواب المباشر وللمهام. الرسم لا اسمه Argon. الرسم هو الصورة داخل المحادثة.\n\nمن 19 أكتوبر 2026 يمكن نقل تطبيق تفاعلي بُني في المحادثة إلى مسودة صفحة في Google Sites. هذه ليست المحادثة نفسها. إنها صفحة منفصلة.\n\nالرقم الذي يُظهره المنزلق ليس قياسًا. افحص رقمك. في بعض حسابات التعليم قد لا تُفتح الصورة.",
+        "Gemini может вернуть вопрос не только текстом. Внутри разговора могут стоять график, ползунок и работающая модель. Повернуть молекулу или изменить движение ползунком — ответ такого рода. Google положила это внутрь приложения Gemini.\n\nСказать «покажи» вместо «объясни» вызывает картинку. Если есть выбор модели, картинка чаще на стороне Pro. Надпись на кнопке может смениться.\n\n13 октября 2026 открылся Gemini 4 Argon для AI Pro и Ultra. Он для более прямого ответа и для задач. График не называется Argon. График — это картинка внутри разговора.\n\nС 19 октября 2026 интерактивное приложение, собранное в разговоре, можно перенести в черновик страницы на Google Sites. Это не сам разговор. Это отдельная страница.\n\nЧисло, которое показывает ползунок, — не измерение. Проверь своё число. На некоторых учебных аккаунтах картинка может не открыться.",
+      ),
+      {
+        az: ["«Bunu qrafiklə göstər» yaz. Tək «nədir» çox vaxt mətn qaytarır.", "Sürgünü tərpətmək yeni ölçü götürmür. Sənin yazdığın başlanğıc rəqəmlə oynayır.", "Argon düyməsini qrafik düyməsi sayma. O, başqa modeldir və hər hesabda yoxdur.", "Sites-ə köçürmə söhbəti silmir. Qaralama səhifə ayrıca durur.", "ChatGPT hesabı Gemini-ni açmır. Google hesabı lazımdır.", "Şəklin altındakı izahı da oxu. Şəkil düz, cümlə səhv ola bilər."],
+        en: ["Write \"show this as a chart\". A bare \"what is it\" often returns text.", "Moving the slider does not take a new measurement. It plays with the starting number you wrote.", "Do not treat the Argon button as the chart button. That is another model, and it is not on every account.", "Moving it to Sites does not delete the chat. The draft page stands apart.", "A ChatGPT account does not open Gemini. A Google account is needed.", "Read the line under the picture too. The picture can be right and the sentence wrong."],
+        tr: ["«Bunu grafikle göster» yaz. Tek «nedir» çoğu zaman metin döndürür.", "Sürgüyü oynatmak yeni ölçü almaz. Senin yazdığın başlangıç sayısıyla oynar.", "Argon düğmesini grafik düğmesi sayma. O, başka modeldir ve her hesapta yoktur.", "Sites'e taşımak sohbeti silmez. Taslak sayfa ayrı durur.", "ChatGPT hesabı Gemini'yi açmaz. Google hesabı gerekir.", "Resmin altındaki açıklamayı da oku. Resim doğru, cümle yanlış olabilir."],
+        ar: ["اكتب «أظهر هذا برسم». «ما هو» وحدها غالبًا ترد بنص.", "تحريك المنزلق لا يأخذ قياسًا جديدًا. يلعب بالرقم الأول الذي كتبته.", "لا تعدّ زر Argon زر الرسم. ذلك نموذج آخر وليس في كل حساب.", "النقل إلى Sites لا يحذف المحادثة. مسودة الصفحة تقف وحدها.", "حساب ChatGPT لا يفتح Gemini. يلزم حساب Google.", "اقرأ السطر تحت الصورة أيضًا. قد تصح الصورة وتخطئ الجملة."],
+        ru: ["Напиши «покажи это графиком». Голое «что это» часто возвращает текст.", "Двигать ползунок — не снять новое измерение. Он играет с начальным числом, которое ты написал.", "Не считай кнопку Argon кнопкой графика. Это другая модель, и её нет на каждом аккаунте.", "Перенос на Sites не стирает разговор. Черновик страницы стоит отдельно.", "Аккаунт ChatGPT не открывает Gemini. Нужен аккаунт Google.", "Прочитай и строку под картинкой. Картинка может быть верной, а предложение нет."],
+      },
+    ),
+  },
+  {
+    slug: "claude-artifact",
+    piece: piece(
+      L(
+        "Claude qrafiki söhbətin yanına qoyur",
+        "Claude puts the chart beside the chat",
+        "Claude grafiği sohbetin yanına koyar",
+        "Claude يضع الرسم بجانب المحادثة",
+        "Claude кладёт график рядом с разговором",
+      ),
+      L(
+        "Claude böyük cavabı söhbətin içinə tökməyə bilər. Onu yan paneldə açır. Anthropic buna artifact deyir. Panelin içində sənəd, sxem, lövhə və ya kiçik interaktiv alət dura bilər.\n\nBu, ChatGPT-nin Intelligent UI-i deyil. Orada qrafik cavabın içindədir. Burada qrafik mətnin yanındadır. Sən paneli redaktə edə və sonra qayıda bilərsən. Kim görə bilər, plandan asılıdır.\n\n16 sentyabr 2026-dan əvvəl söhbətdə düzəldilmiş artifact köhnə sayılır. Onlar açılır. Həmin köhnə növdən yenisini düzəltmək olmur. Saytda və masaüstü proqramda yeni artifact yenə düzəlir.\n\nClaude Code seansı ayrıca canlı səhifəyə çıxara bilər. Bu, söhbət qabarcığı deyil. Ünvanı olan səhifədir.\n\nPaneldəki alət də yanılır. Cəmi və tarixi özün yoxla.",
+        "Claude may not pour a large answer into the chat. It opens it in a side panel. Anthropic calls that an artifact. A document, a diagram, a board, or a small interactive tool can stand inside the panel.\n\nThis is not ChatGPT's Intelligent UI. There the chart is inside the answer. Here the chart is beside the text. You can edit the panel and come back later. Who can see it depends on the plan.\n\nAn artifact made in a chat before 16 September 2026 counts as old. Those still open. You cannot make a new one of that old kind. On the site and in the desktop app a new artifact is still made.\n\nA Claude Code session can also publish a live page. That is not a chat bubble. It is a page with an address.\n\nThe tool in the panel is wrong too. Check a total and a date yourself.",
+        "Claude büyük bir cevabı sohbetin içine dökmeyebilir. Onu yan panelde açar. Anthropic buna artifact der. Panelin içinde belge, şema, pano ya da küçük bir interaktif araç durabilir.\n\nBu, ChatGPT'nin Intelligent UI'i değildir. Orada grafik cevabın içindedir. Burada grafik metnin yanındadır. Paneli düzenleyebilir ve sonra dönebilirsin. Kim görebilir, plana bağlıdır.\n\n16 Eylül 2026'dan önce sohbette yapılmış artifact eski sayılır. Onlar açılır. O eski türden yenisini yapmak olmaz. Sitede ve masaüstü programda yeni artifact yine yapılır.\n\nClaude Code oturumu ayrıca canlı bir sayfa çıkarabilir. Bu, sohbet balonu değildir. Adresi olan bir sayfadır.\n\nPaneldeki araç da yanılır. Toplamı ve tarihi kendin kontrol et.",
+        "قد لا يصب Claude الجواب الكبير داخل المحادثة. يفتحه في لوحة جانبية. تسمي Anthropic هذا artifact. قد يقف داخل اللوحة مستند أو مخطط أو لوحة أو أداة تفاعلية صغيرة.\n\nهذا ليس Intelligent UI في ChatGPT. هناك الرسم داخل الجواب. هنا الرسم بجانب النص. تستطيع تعديل اللوحة والعودة لاحقًا. من يراها يعتمد على الخطة.\n\nالـ artifact الذي صُنع في محادثة قبل 16 سبتمبر 2026 يُعد قديمًا. تلك تُفتح. لا يمكن صنع جديد من ذلك النوع القديم. على الموقع وفي برنامج سطح المكتب ما زال يُصنع artifact جديد.\n\nجلسة Claude Code تستطيع أيضًا إخراج صفحة حية. هذه ليست فقاعة محادثة. إنها صفحة لها عنوان.\n\nالأداة في اللوحة تخطئ أيضًا. افحص المجموع والتاريخ بنفسك.",
+        "Claude может не вылить большой ответ в разговор. Он открывает его в боковой панели. Anthropic называет это artifact. В панели могут стоять документ, схема, доска или маленький интерактивный инструмент.\n\nЭто не Intelligent UI у ChatGPT. Там график внутри ответа. Здесь график рядом с текстом. Панель можно править и вернуться позже. Кто её видит, зависит от плана.\n\nArtifact, сделанный в разговоре до 16 сентября 2026, считается старым. Они открываются. Новый того старого вида сделать нельзя. На сайте и в программе для стола новый artifact всё ещё делается.\n\nСессия Claude Code может ещё выложить живую страницу. Это не пузырь разговора. Это страница с адресом.\n\nИнструмент в панели тоже ошибается. Сумму и дату проверь сам.",
+      ),
+      {
+        az: ["«Bunu yan paneldə qrafik et» de. Tək «yaz» mətn qaytara bilər.", "Köhnə söhbətdəki panel açılırsa, onu yeni növdən sayma.", "Paylaşma düyməsi hər planda eyni deyil. Açılmırsa, plan buna icazə vermir.", "Claude Code səhifəsi söhbəti əvəz etmir. İkisinin ünvanı ayrıdır.", "ChatGPT və Google girişi Claude-u açmır.", "Paneldəki cəmi kalkulyatorla bir daha yoxla."],
+        en: ["Say \"make this a chart in the side panel\". A bare \"write\" can return text.", "If a panel in an old chat opens, do not count it as the new kind.", "The share button is not the same on every plan. If it does not open, the plan does not allow it.", "A Claude Code page does not replace the chat. The two addresses are separate.", "A ChatGPT or Google sign-in does not open Claude.", "Check a total in the panel again with a calculator."],
+        tr: ["«Bunu yan panelde grafik yap» de. Tek «yaz» metin döndürebilir.", "Eski sohbetteki panel açılırsa onu yeni türden sayma.", "Paylaşma düğmesi her planda aynı değildir. Açılmıyorsa plan buna izin vermez.", "Claude Code sayfası sohbetin yerine geçmez. İkisinin adresi ayrıdır.", "ChatGPT ve Google girişi Claude'u açmaz.", "Paneldeki toplamı hesap makinesiyle bir daha kontrol et."],
+        ar: ["قل «اجعل هذا رسمًا في اللوحة الجانبية». «اكتب» وحدها قد ترد بنص.", "إذا فُتحت لوحة في محادثة قديمة فلا تعدّها من النوع الجديد.", "زر المشاركة ليس نفسه في كل خطة. إذا لم يُفتح فالخطة لا تسمح.", "صفحة Claude Code لا تحل محل المحادثة. العنوانان منفصلان.", "دخول ChatGPT أو Google لا يفتح Claude.", "افحص المجموع في اللوحة مرة أخرى بآلة حاسبة."],
+        ru: ["Скажи «сделай это графиком в боковой панели». Голое «напиши» может вернуть текст.", "Если панель в старом разговоре открывается, не считай её новым видом.", "Кнопка «поделиться» не одна и та же на каждом плане. Если не открывается, план этого не разрешает.", "Страница Claude Code не заменяет разговор. Адреса разные.", "Вход через ChatGPT или Google не открывает Claude.", "Сумму в панели проверь ещё раз калькулятором."],
+      },
+    ),
+  },
 
 ];
 
@@ -1308,11 +1386,11 @@ export const SEARCH: Record<SearchKind, SearchSection> = {
       "Искусственный интеллект — ChatGPT, Gemini, Claude, prompt",
     ),
     description: L(
-      "ChatGPT nədir, Gemini nədir, Claude nədir, prompt nədir və süni intellektlə tətbiq hazırlamaq.",
-      "What is ChatGPT, Gemini, and Claude, what is a prompt, and making an app with AI.",
-      "ChatGPT nedir, Gemini nedir, Claude nedir, prompt nedir ve yapay zeka ile uygulama yapmak.",
-      "ما هو ChatGPT وGemini وClaude، وما هو prompt، وصنع تطبيق بالذكاء الاصطناعي.",
-      "Что такое ChatGPT, Gemini и Claude, что такое prompt и как сделать приложение с ИИ.",
+      "ChatGPT nədir, Gemini nədir, Claude nədir, prompt nədir və süni intellektlə tətbiq hazırlamaq. GPT-6 qrafiki, Gemini vizualı və Claude paneli.",
+      "What is ChatGPT, Gemini, and Claude, what is a prompt, and making an app with AI. A GPT-6 chart, a Gemini visual, and a Claude panel.",
+      "ChatGPT nedir, Gemini nedir, Claude nedir, prompt nedir ve yapay zeka ile uygulama yapmak. GPT-6 grafiği, Gemini görseli ve Claude paneli.",
+      "ما هو ChatGPT وGemini وClaude، وما هو prompt، وصنع تطبيق بالذكاء الاصطناعي. رسم GPT-6 وصورة Gemini ولوحة Claude.",
+      "Что такое ChatGPT, Gemini и Claude, что такое prompt и как сделать приложение с ИИ. График GPT-6, картинка Gemini и панель Claude.",
     ),
     items: TOPICS,
   },
