@@ -157,6 +157,11 @@ export default defineConfig(({ command, isPreview }) => ({
     strictPort: true,
   },
   resolve: { tsconfigPaths: true },
+  build: {
+    // Route chunks still load when the module graph runs. Hinting all of them
+    // in the document makes the render-blocking CSS share a slow connection.
+    modulePreload: false,
+  },
   plugins: [
     pgliteBootstrapPlugin(),
     // Before tanstackStart so /auth/popup never falls through to the SPA.
