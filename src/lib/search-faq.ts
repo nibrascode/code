@@ -1,6 +1,6 @@
 import type { Lang } from "@/lib/i18n";
 
-export const SEARCH_FAQ: Record<"/erase" | "/image" | "/soz-sayi" | "/faiz" | "/wifi" | "/seo" | "/flow", { title: Record<Lang, string>; items: Record<Lang, { q: string; a: string }[]> }> = {
+export const SEARCH_FAQ: Record<"/erase" | "/image" | "/soz-sayi" | "/faiz" | "/wifi" | "/seo" | "/flow" | "/logic", { title: Record<Lang, string>; items: Record<Lang, { q: string; a: string }[]> }> = {
   "/erase": {
     title: { az: "Suallar", en: "Questions", tr: "Sorular", ar: "أسئلة", ru: "Вопросы" },
     items: {
@@ -233,6 +233,36 @@ export const SEARCH_FAQ: Record<"/erase" | "/image" | "/soz-sayi" | "/faiz" | "/
         { q: "Пишет ли код?", a: "Нет. Даёт имена страниц, папки, порядок работы и имена файлов." },
         { q: "Идея сохраняется?", a: "Нет. План остаётся на этой странице и никуда не отправляется." },
         { q: "Как выбирается вид?", a: "По словам, которые вы написали. Магазин, уроки, блог, приложение или простой сайт." },
+      ],
+    },
+  },
+  "/logic": {
+    title: { az: "Suallar", en: "Questions", tr: "Sorular", ar: "أسئلة", ru: "Вопросы" },
+    items: {
+      az: [
+        { q: "Kod lazımdır?", a: "Xeyr. Sual və iki cavab yazırsan." },
+        { q: "Cavablar saxlanılırmı?", a: "Xeyr. Yol yalnız linkin içindədir." },
+        { q: "Link necə işləyir?", a: "Ünvanı göndərirsən. Açan adam həmin sualları gəzir." },
+      ],
+      en: [
+        { q: "Is code needed?", a: "No. You write a question and two answers." },
+        { q: "Are the answers stored?", a: "No. The path lives only inside the link." },
+        { q: "How does the link work?", a: "You send the address. The person who opens it walks those questions." },
+      ],
+      tr: [
+        { q: "Kod gerekir mi?", a: "Hayır. Soru ve iki cevap yazarsın." },
+        { q: "Cevaplar saklanır mı?", a: "Hayır. Yol yalnız bağlantının içindedir." },
+        { q: "Bağlantı nasıl işler?", a: "Adresi gönderirsin. Açan kişi o soruları gezer." },
+      ],
+      ar: [
+        { q: "هل يلزم كود؟", a: "لا. تكتب سؤالاً وجوابين." },
+        { q: "هل تُحفظ الأجوبة؟", a: "لا. الطريق يعيش داخل الرابط فقط." },
+        { q: "كيف يعمل الرابط؟", a: "ترسل العنوان. من يفتحه يسلك تلك الأسئلة." },
+      ],
+      ru: [
+        { q: "Нужен код?", a: "Нет. Вы пишете вопрос и два ответа." },
+        { q: "Ответы сохраняются?", a: "Нет. Путь живёт только внутри ссылки." },
+        { q: "Как работает ссылка?", a: "Вы отправляете адрес. Кто откроет, проходит эти вопросы." },
       ],
     },
   },

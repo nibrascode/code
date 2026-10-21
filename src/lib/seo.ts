@@ -771,6 +771,13 @@ const PAGES: Record<string, Copy> = {
     ar: { title: "Nibras Flow — من الفكرة إلى الخطة", description: "اكتب الفكرة. تُبنى خريطة الصفحات والمجلدات وترتيب العمل وأسماء الملفات هنا. لا يُكتب كود." },
     ru: { title: "Nibras Flow — от идеи к плану", description: "Напишите идею. Карта страниц, папки, порядок работы и имена начальных файлов собираются на этой странице. Код не пишется." },
   },
+  "/logic": {
+    az: { title: "Nibras Logic — sual və cavab yolu", description: "Kod yazmadan sual-cavab yolu qur. Cavab növbəti suala və ya sona gedir. Link ünvanın içindədir, heç nə saxlanmır." },
+    en: { title: "Nibras Logic — a question and answer path", description: "Build a question and answer path without code. An answer goes to the next question or to the end. The link is in the address. Nothing is stored." },
+    tr: { title: "Nibras Logic — soru ve cevap yolu", description: "Kod yazmadan soru-cevap yolu kur. Cevap sonraki soruya ya da sona gider. Bağlantı adresin içindedir, hiçbir şey saklanmaz." },
+    ar: { title: "Nibras Logic — طريق سؤال وجواب", description: "ابنِ طريق سؤال وجواب بلا كود. الجواب يذهب إلى السؤال التالي أو إلى النهاية. الرابط داخل العنوان ولا يُحفظ شيء." },
+    ru: { title: "Nibras Logic — путь вопросов и ответов", description: "Соберите путь вопросов и ответов без кода. Ответ ведёт к следующему вопросу или к концу. Ссылка внутри адреса, ничего не сохраняется." },
+  },
   "/pdf": {
     az: {
       title: "Nibras PDF — PDF birləşdir, böl, sıxışdır, imzala (pulsuz)",
@@ -1356,7 +1363,7 @@ function jsonLd(path: string, lang: Lang, copy: PageSeo, url: string) {
       };
     }
   }
-  if (path === "/erase" || path === "/image" || path === "/soz-sayi" || path === "/faiz" || path === "/wifi" || path === "/seo" || path === "/flow") {
+  if (path === "/erase" || path === "/image" || path === "/soz-sayi" || path === "/faiz" || path === "/wifi" || path === "/seo" || path === "/flow" || path === "/logic") {
     const block = SEARCH_FAQ[path];
     const items = block.items[lang] ?? block.items.en;
     return {
