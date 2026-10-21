@@ -20,7 +20,7 @@ export const STUDIO_APPS: StudioApp[] = [
   {
     slug: "nibras-arabic",
     name: "Nibras Arabic",
-    icon: "/apps/nibras-arabic.jpg",
+    icon: "/apps/nibras-arabic.webp",
     playStoreUrl: "https://play.google.com/store/apps/details?id=com.nibrasarabic.app",
     huaweiStoreUrl: "https://urldra.cloud.huawei.com/CkyddvOyXK",
     leadKey: "arabic_lead",

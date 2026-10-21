@@ -124,6 +124,11 @@ export type StudioAppRow = {
 const APP_SELECT =
   "slug,name,status,summary,play_url,huawei_url,appstore_url,galaxy_url,xiaomi_url,icon_url,sort,visible";
 
+function lightIcon(row: StudioAppRow): StudioAppRow {
+  if (row.icon_url === "/apps/nibras-arabic.jpg") return { ...row, icon_url: "/apps/nibras-arabic.webp" };
+  return row;
+}
+
 export function storeLinks(row: Partial<StudioAppRow> | null | undefined) {
   const fields = [
     ["play_url", "Play Market"],
@@ -325,7 +330,7 @@ export async function fetchStudioApps(signal?: AbortSignal): Promise<StudioAppRo
   );
   if (!response.ok) return [];
   const rows = (await response.json()) as StudioAppRow[];
-  return rows;
+  return rows.map(lightIcon);
 }
 
 export async function fetchStudioApp(slug: string): Promise<StudioAppRow | null> {
@@ -335,7 +340,7 @@ export async function fetchStudioApp(slug: string): Promise<StudioAppRow | null>
   );
   if (!response.ok) return null;
   const rows = (await response.json()) as StudioAppRow[];
-  return rows[0] ?? null;
+  return rows[0] ? lightIcon(rows[0]) : null;
 }
 
 export async function fetchPrivacyAll(): Promise<StudioPrivacyRow[]> {
