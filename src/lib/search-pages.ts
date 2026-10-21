@@ -1,5 +1,6 @@
 import type { Lang } from "@/lib/i18n";
 import { APK_ERROR_INDEX } from "@/lib/apk-errors-index";
+import { LETTER_GAPS } from "@/lib/letter-gaps";
 
 export type SearchKind = "soz" | "xeta" | "movzu" | "nece";
 
@@ -1019,7 +1020,7 @@ const APK_ITEMS: readonly SearchItem[] = APK_ERROR_INDEX.map(([slug, t]) => ({
   lazy: true,
   piece: (Object.fromEntries(LANGS.map((l) => [l, { title: t[l][0], lead: t[l][1], points: [] }])) as unknown) as Record<Lang, SearchPiece>,
 }));
-const ERRORS: readonly SearchItem[] = [...BASE_ERRORS, ...APK_ITEMS];
+const ERRORS: readonly SearchItem[] = [...BASE_ERRORS, ...LETTER_GAPS, ...APK_ITEMS];
 
 /** Lazy chunk with the full text of the Android/Expo/Play error pages. */
 export async function loadApkBody(slug: string) {

@@ -914,6 +914,46 @@ const JSON_SCHWA: Record<Lang, string> = {
   ru: "Если ə в JSON стало \\u0259",
 };
 
+const ETME: Record<Lang, string> = {
+  az: "ödəyici sözü ödÉ™yici olursa",
+  en: "If ödəyici turns into ödÉ™yici",
+  tr: "ödəyici sözcüğü ödÉ™yici oluyorsa",
+  ar: "إذا صارت ödəyici هي ödÉ™yici",
+  ru: "Если ödəyici стало ödÉ™yici",
+};
+
+const CS_SCHWA: Record<Lang, string> = {
+  az: "C#-də ə sual işarəsi olursa",
+  en: "If ə becomes a question mark in C#",
+  tr: "C#'ta ə soru işareti oluyorsa",
+  ar: "إذا صار ə علامة سؤال في C#",
+  ru: "Если ə в C# стало вопросом",
+};
+
+const WA_EXCEL: Record<Lang, string> = {
+  az: "WhatsApp söhbəti Excel-də pozulursa",
+  en: "If a WhatsApp chat breaks in Excel",
+  tr: "WhatsApp sohbeti Excel'de bozuluyorsa",
+  ar: "إذا فسدت دردشة WhatsApp في Excel",
+  ru: "Если переписка WhatsApp ломается в Excel",
+};
+
+const PDF_SCHWA: Record<Lang, string> = {
+  az: "PDF-də ə kvadrat olursa",
+  en: "If ə is a square in a PDF",
+  tr: "PDF'de ə kare oluyorsa",
+  ar: "إذا صار ə مربعًا في PDF",
+  ru: "Если ə в PDF стало квадратом",
+};
+
+const MYSQL_SCHWA: Record<Lang, string> = {
+  az: "MySQL-də ə sual işarəsi olursa",
+  en: "If ə becomes a question mark in MySQL",
+  tr: "MySQL'de ə soru işareti oluyorsa",
+  ar: "إذا صار ə علامة سؤال في MySQL",
+  ru: "Если ə в MySQL стало вопросом",
+};
+
 export function ProgrammingArticle({
   slug,
   title,
@@ -981,6 +1021,31 @@ export function ProgrammingArticle({
       {slug === "python" || slug === "python-qurasdir" ? (
         <p className="prog-try">
           <a href={searchTopicPath(lang, "xeta", "json-e")}>{JSON_SCHWA[lang]}</a>
+        </p>
+      ) : null}
+      {slug === "python" || slug === "python-qurasdir" ? (
+        <p className="prog-try">
+          <a href={searchTopicPath(lang, "xeta", "etme")}>{ETME[lang]}</a>
+        </p>
+      ) : null}
+      {slug === "python" || slug === "python-qurasdir" ? (
+        <p className="prog-try">
+          <a href={searchTopicPath(lang, "xeta", "whatsapp-excel")}>{WA_EXCEL[lang]}</a>
+        </p>
+      ) : null}
+      {slug === "python" || slug === "python-qurasdir" ? (
+        <p className="prog-try">
+          <a href={searchTopicPath(lang, "xeta", "pdf-e")}>{PDF_SCHWA[lang]}</a>
+        </p>
+      ) : null}
+      {slug === "csharp" || slug === "csharp-qurasdir" ? (
+        <p className="prog-try">
+          <a href={searchTopicPath(lang, "xeta", "csharp-e")}>{CS_SCHWA[lang]}</a>
+        </p>
+      ) : null}
+      {slug === "sql" || slug === "sql-qurasdir" ? (
+        <p className="prog-try">
+          <a href={searchTopicPath(lang, "xeta", "mysql-e")}>{MYSQL_SCHWA[lang]}</a>
         </p>
       ) : null}
       {slug === "python" || slug === "python-qurasdir" ? (
