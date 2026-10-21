@@ -10,7 +10,7 @@ import { HeroMark } from "@/components/hero-mark";
 import { faqPath } from "@/lib/faq";
 import { homePath, localeHref } from "@/lib/locale-path";
 import { SEARCH, searchPath, searchTopicPath } from "@/lib/search-pages";
-import { gamePath } from "@/lib/games";
+import { gamePath, GAME_COPY, GAME_VERSION, GAMES } from "@/lib/games";
 import { toolsPath, TOOLS_PAGE } from "@/lib/tools";
 import { useI18n } from "@/lib/i18n-context";
 import { statusText, type StudioAppRow } from "@/lib/studio";
@@ -395,6 +395,27 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
         <div className="nx-stage">
           <HeroMark />
         </div>
+      </section>
+
+      <section className="nx-apps nx-play" aria-label={GAME_COPY.heading[lang]}>
+        <a className="nx-card nx-play-card" href={gamePath(lang)}>
+          <span className="nx-card-top">
+            <span className="nx-play-mark" aria-hidden="true">
+              <i />
+              <i className="is-gold" />
+              <i />
+              <i className="is-green" />
+            </span>
+            <span>
+              <em className="nx-status">{GAME_VERSION}</em>
+              <b>{GAME_COPY.heading[lang]}</b>
+            </span>
+          </span>
+          <span className="nx-play-line">
+            {GAMES.map((item) => item.name[lang]).join(" · ")}
+          </span>
+          <ArrowUpRight className="nx-go" />
+        </a>
       </section>
 
       <section className="nx-apps" id="apps">

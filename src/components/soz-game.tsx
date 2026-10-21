@@ -268,75 +268,78 @@ export function SozGame() {
 
   return (
     <main className="why-page soz-page" lang={lang} dir={lang === "ar" ? "rtl" : "ltr"}>
-      <div className="why-glow" aria-hidden="true" />
-      <p className="eyebrow">
-        <i />
-        <a href={gamePath(lang)}>{lang === "en" ? "Games" : lang === "ar" ? "الألعاب" : lang === "ru" ? "Игры" : "Oyunlar"}</a>
-      </p>
-      <h1>{game.name[lang]}</h1>
-      <p className="xo-version">{GAME_VERSION}</p>
-      <p className="why-lead">{game.blurb[lang]}</p>
-      <p className="xo-note">{COPY.rule[lang]}</p>
-      <div className="xo-modes" role="group">
-        {LENGTHS.map((item) => (
-          <button key={item} type="button" className={len === item ? "is-on" : ""} onClick={() => setLen(item)}>
-            {item}
+      <div className="soz-top">
+        <p className="eyebrow">
+          <i />
+          <a href={gamePath(lang)}>{lang === "en" ? "Games" : lang === "ar" ? "الألعاب" : lang === "ru" ? "Игры" : "Oyunlar"}</a>
+        </p>
+        <div className="soz-head">
+          <h1>{game.name[lang]}</h1>
+          <p className="xo-version">{GAME_VERSION}</p>
+        </div>
+        <div className="xo-modes" role="group">
+          {LENGTHS.map((item) => (
+            <button key={item} type="button" className={len === item ? "is-on" : ""} onClick={() => setLen(item)}>
+              {item}
+            </button>
+          ))}
+          <button type="button" className={mode === "daily" ? "is-on" : ""} onClick={() => setMode("daily")}>
+            {COPY.daily[lang]}
           </button>
-        ))}
+          <button type="button" className={mode === "free" ? "is-on" : ""} onClick={() => setMode("free")}>
+            {COPY.free[lang]}
+          </button>
+        </div>
+        <p className="xo-status" aria-live="polite">{status || COPY.rule[lang]}</p>
       </div>
-      <div className="xo-modes" role="group">
-        <button type="button" className={mode === "daily" ? "is-on" : ""} onClick={() => setMode("daily")}>
-          {COPY.daily[lang]}
-        </button>
-        <button type="button" className={mode === "free" ? "is-on" : ""} onClick={() => setMode("free")}>
-          {COPY.free[lang]}
-        </button>
-      </div>
-      <p className="xo-status" aria-live="polite">{status}</p>
-      <div className={`soz-board${shake ? " is-shake" : ""}`} dir="ltr">
-        {Array.from({ length: rows }, (_, r) => {
-          const guess = guesses[r] ?? (r === guesses.length && !over ? row : "");
-          const painted = r < guesses.length ? marks(guesses[r], secret) : [];
-          return (
-            <div key={r} className="soz-row" style={{ gridTemplateColumns: `repeat(${len}, minmax(0, 1fr))` }}>
-              {Array.from({ length: len }, (_, c) => (
-                <span key={c} className={painted[c] ? `is-${painted[c]}` : guess[c] ? "is-fill" : ""}>
-                  {guess[c] ? show(guess[c]) : ""}
-                </span>
+      <div className="soz-play">
+        <div className={`soz-board${shake ? " is-shake" : ""}`} dir="ltr">
+          {Array.from({ length: rows }, (_, r) => {
+            const guess = guesses[r] ?? (r === guesses.length && !over ? row : "");
+            const painted = r < guesses.length ? marks(guesses[r], secret) : [];
+            return (
+              <div key={r} className="soz-row" style={{ gridTemplateColumns: `repeat(${len}, minmax(0, 1fr))` }}>
+                {Array.from({ length: len }, (_, c) => (
+                  <span key={c} className={painted[c] ? `is-${painted[c]}` : guess[c] ? "is-fill" : ""}>
+                    {guess[c] ? show(guess[c]) : ""}
+                  </span>
+                ))}
+              </div>
+            );
+          })}
+        </div>
+        <div className="soz-keys" dir="ltr">
+          {KEYS.map((line, index) => (
+            <div key={index}>
+              {index === 2 ? (
+                <button type="button" className="is-wide" onClick={submit}>
+                  {lang === "ar" ? "تم" : lang === "ru" ? "Ок" : "OK"}
+                </button>
+              ) : null}
+              {line.map((ch) => (
+                <button key={ch} type="button" className={keyMark[ch] ? `is-${keyMark[ch]}` : ""} onClick={() => type(ch)}>
+                  {show(ch)}
+                </button>
               ))}
+              {index === 2 ? (
+                <button type="button" className="is-wide" onClick={back} aria-label="sil">
+                  ⌫
+                </button>
+              ) : null}
             </div>
-          );
-        })}
+          ))}
+        </div>
       </div>
-      <div className="soz-keys" dir="ltr">
-        {KEYS.map((line, index) => (
-          <div key={index}>
-            {index === 2 ? (
-              <button type="button" className="is-wide" onClick={submit}>
-                {lang === "ar" ? "تم" : lang === "ru" ? "Ок" : "OK"}
-              </button>
-            ) : null}
-            {line.map((ch) => (
-              <button key={ch} type="button" className={keyMark[ch] ? `is-${keyMark[ch]}` : ""} onClick={() => type(ch)}>
-                {show(ch)}
-              </button>
-            ))}
-            {index === 2 ? (
-              <button type="button" className="is-wide" onClick={back} aria-label="sil">
-                ⌫
-              </button>
-            ) : null}
-          </div>
-        ))}
-      </div>
-      <dl className="xo-score">
-        <div><dt>{COPY.played[lang]}</dt><dd>{stats.n}</dd></div>
-        <div><dt>{COPY.wins[lang]}</dt><dd>{stats.w}</dd></div>
-        <div><dt>{COPY.streak[lang]}</dt><dd>{stats.streak}</dd></div>
-      </dl>
-      <div className="xo-actions">
-        {mode === "free" ? <button type="button" onClick={fresh}>{COPY.again[lang]}</button> : null}
-        {guesses.length ? <button type="button" onClick={copy}>{COPY.copy[lang]}</button> : null}
+      <div className="soz-foot">
+        <dl className="xo-score">
+          <div><dt>{COPY.played[lang]}</dt><dd>{stats.n}</dd></div>
+          <div><dt>{COPY.wins[lang]}</dt><dd>{stats.w}</dd></div>
+          <div><dt>{COPY.streak[lang]}</dt><dd>{stats.streak}</dd></div>
+        </dl>
+        <div className="xo-actions">
+          {mode === "free" ? <button type="button" onClick={fresh}>{COPY.again[lang]}</button> : null}
+          {guesses.length ? <button type="button" onClick={copy}>{COPY.copy[lang]}</button> : null}
+        </div>
       </div>
     </main>
   );

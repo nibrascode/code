@@ -244,6 +244,7 @@ function RootDocument() {
   const isHome = pathname === "/" || /^\/(en|tr|ar|ru)\/?$/.test(pathname);
   const isStudio = pathname.startsWith("/nx-studio");
   const isPlanner = /(?:^|\/)planner\/?$/.test(pathname);
+  const isPlay = /\/oyun\/[^/]+\/?$/.test(pathname);
   const lang = langFromLocation(pathname, searchStr);
 
   return (
@@ -263,8 +264,8 @@ function RootDocument() {
           <I18nProvider>
             {isHome || isStudio || isPlanner ? null : <SiteHeader />}
             <Outlet />
-            {isHome || isStudio || isPlanner ? null : <AppSuggest />}
-            {isHome || isStudio || isPlanner ? null : <SiteFooter />}
+            {isHome || isStudio || isPlanner || isPlay ? null : <AppSuggest />}
+            {isHome || isStudio || isPlanner || isPlay ? null : <SiteFooter />}
           </I18nProvider>
         </AuthProvider>
         <Scripts />
