@@ -3204,19 +3204,68 @@
       while ((m = fence.exec(text))) add(m[2] || ext[(m[1] || "").toLowerCase()] || "file.txt", m[3]);
       return out.slice(0, 4);
     }
+    function wantsBuild(text) {
+      if (wants3d(text)) return true;
+      const s = foldTask(text);
+      if (/(sayt|sehife|layihe|hazirla|yarat|html|css|javascript|python|oyun|kalkul|hesabl|forma|proqram|kod yaz|veb|website|page|build|create)/.test(s)) return true;
+      return !!(layiheProject && layiheProject.files && layiheProject.files.length && text.length < 280 && !/\?\s*$/.test(text));
+    }
+    let stepChain = Promise.resolve();
+    function pause(ms) {
+      return new Promise(function (r) { setTimeout(r, ms); });
+    }
+    function typeInto(el, text) {
+      const full = String(text || "");
+      const size = full.length > 90 ? 3 : full.length > 40 ? 2 : 1;
+      el.textContent = "";
+      return (async function () {
+        for (let i = 0; i < full.length; i += size) {
+          el.textContent = full.slice(0, i + size);
+          msgs.scrollTop = msgs.scrollHeight;
+          await pause(34);
+        }
+        el.textContent = full;
+      })();
+    }
     function pushStep(text, state) {
-      if (hello && hello.parentNode) hello.remove();
       const el = document.createElement("div");
       el.className = "msg b step " + (state || "run");
       el.setAttribute("dir", "auto");
-      el.textContent = text;
-      msgs.appendChild(el);
-      msgs.scrollTop = msgs.scrollHeight;
+      stepChain = stepChain.then(async function () {
+        if (hello && hello.parentNode) hello.remove();
+        msgs.appendChild(el);
+        await typeInto(el, text);
+        await pause(260);
+      }).catch(function () {});
       return el;
     }
     function markStep(el, state, text) {
       el.className = "msg b step " + state;
-      el.textContent = text;
+      stepChain = stepChain.then(function () { return typeInto(el, text); }).catch(function () {});
+    }
+    function pushFile(file) {
+      stepChain = stepChain.then(async function () {
+        if (hello && hello.parentNode) hello.remove();
+        const el = document.createElement("div");
+        el.className = "msg b step ok";
+        el.setAttribute("dir", "auto");
+        const title = document.createElement("b");
+        const pre = document.createElement("pre");
+        el.appendChild(title);
+        el.appendChild(pre);
+        msgs.appendChild(el);
+        await typeInto(title, t("file") + ": " + file.path);
+        const body = file.content.length > 1800 ? file.content.slice(0, 1800) + "\n…" : file.content;
+        const lines = body.split("\n");
+        let shown = "";
+        for (let i = 0; i < lines.length; i++) {
+          shown += (i ? "\n" : "") + lines[i];
+          pre.textContent = shown;
+          msgs.scrollTop = msgs.scrollHeight;
+          if (i % 2 === 1) await pause(36);
+        }
+        await pause(180);
+      }).catch(function () {});
     }
     let layiheCalls = 0;
     async function askModel(message) {
@@ -3237,19 +3286,6 @@
         save(u);
       }
       return data.reply || data.message;
-    }
-    function pushFile(file) {
-      const el = document.createElement("div");
-      el.className = "msg b step ok";
-      el.setAttribute("dir", "auto");
-      const title = document.createElement("b");
-      title.textContent = t("file") + ": " + file.path;
-      const pre = document.createElement("pre");
-      pre.textContent = file.content.length > 4000 ? file.content.slice(0, 4000) + "\n…" : file.content;
-      el.appendChild(title);
-      el.appendChild(pre);
-      msgs.appendChild(el);
-      msgs.scrollTop = msgs.scrollHeight;
     }
     function buildPreview(files) {
       const htmlFile = files.filter(function (file) { return /(^|\/)index\.html$/.test(file.path); })[0] || files.filter(function (file) { return /\.html?$/.test(file.path); })[0];
@@ -3622,7 +3658,7 @@
           const line = t(labels[found[i]]) + ": " + deep[found[i]];
           pushStep(line, "ok");
           log.push(line);
-          await new Promise(function (r) { setTimeout(r, 120); });
+          await pause(420);
         }
       } else {
         const plan = String(raw || "").trim().slice(0, 500);
@@ -3695,7 +3731,7 @@
       pushStep(t("cost"), "ok");
       log.push(t("cost"));
       const s1 = pushStep(t("s1") + " — " + t("wait"), "run");
-      await new Promise(function (r) { setTimeout(r, 160); });
+      await pause(500);
       markStep(s1, "ok", t("s1"));
       log.push(t("s1"));
       const notes = analyzeTask(task);
@@ -3789,8 +3825,9 @@
         rec("b", "::calc::" + m, "", 0);
         return;
       }
-      if (mode === "layihe") {
+      if (mode === "layihe" || (mode !== "image" && !pendingImage && wantsBuild(m))) {
         inp.value = "";
+        if (mode !== "layihe") setMode("layihe");
         runLayihe(m);
         return;
       }
