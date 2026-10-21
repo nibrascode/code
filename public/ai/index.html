@@ -2782,7 +2782,7 @@
         "function scale3(x,y,z){return new Float32Array([x,0,0,0,0,y,0,0,0,0,z,0,0,0,0,1]);}",
         "var I=new Float32Array([1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]);",
         "var kind=canvas.getAttribute('data-kind')||'orbit';",
-        "var night=false,camX=0,camZ=0,go={},pad={}; // data-walk",
+        "var night=false,camX=0,camZ=0,go={},pad={}; // data-home",
         "var parts=(canvas.getAttribute('data-color')||'0.45,0.7,1').split(',');",
         "var main=new Float32Array([+parts[0]||0.45,+parts[1]||0.7,+parts[2]||1]);",
         "var ax=0.45,ay=0.6,dist=kind==='city'?8.2:kind==='product'?4.4:5.6,spin=0,pts={};",
@@ -2794,17 +2794,21 @@
         "canvas.addEventListener('wheel',function(e){e.preventDefault();dist=Math.max(2.4,Math.min(12,dist+(e.deltaY>0?0.35:-0.35)));},{passive:false});",
         "function draw(mesh,model,mode,color){gl.bindBuffer(gl.ARRAY_BUFFER,mesh.b);gl.vertexAttribPointer(lp,3,gl.FLOAT,false,24,0);gl.vertexAttribPointer(ln,3,gl.FLOAT,false,24,12);gl.uniformMatrix4fv(lmodel,false,model);gl.uniform3fv(lcol,color);gl.drawArrays(mode,0,mesh.n);}",
         "function applyKind(next){kind=next;canvas.setAttribute('data-kind',kind);dist=kind==='city'?8.2:kind==='product'?4.4:5.6;var list=document.querySelectorAll('[data-scene]');for(var i=0;i<list.length;i++)list[i].style.outline=list[i].getAttribute('data-scene')===kind?'2px solid #fff':'';}",
-        "document.addEventListener('click',function(e){var el=e.target;if(!el||!el.getAttribute)return;var name=el.getAttribute('data-scene');if(name)applyKind(name);if(el.getAttribute('data-sky')){night=!night;document.body.classList.toggle('night',night);el.textContent=night?'Gündüz':'Gecə';}});",
+        "document.addEventListener('click',function(e){var el=e.target;if(!el||!el.getAttribute)return;var name=el.getAttribute('data-scene');if(name)applyKind(name);if(el.getAttribute('data-sky')){night=!night;document.body.classList.toggle('night',night);el.textContent=night?'Gündüz':'Gecə';}if(el.getAttribute('data-home')){camX=0;camZ=0;ax=0.45;ay=0.6;applyKind(kind);}});",
         "window.addEventListener('keydown',function(e){var k=e.key.toLowerCase();if(k==='w'||k==='a'||k==='s'||k==='d')go[k]=true;if(e.key==='ArrowLeft')ay-=0.08;if(e.key==='ArrowRight')ay+=0.08;if(e.key==='ArrowUp')ax=Math.max(-1.2,ax-0.06);if(e.key==='ArrowDown')ax=Math.min(1.2,ax+0.06);if(e.key==='+'||e.key==='=')dist=Math.max(2.4,dist-0.35);if(e.key==='-'||e.key==='_')dist=Math.min(12,dist+0.35);});",
         "window.addEventListener('keyup',function(e){go[e.key.toLowerCase()]=false;});",
         "document.addEventListener('pointerdown',function(e){var k=e.target&&e.target.getAttribute&&e.target.getAttribute('data-move');if(k){pad[k]=1;e.preventDefault();}});",
         "window.addEventListener('pointerup',function(){pad={};});",
+        "function blocked(x,z){if(kind!=='city')return false;var i,j;for(i=-2;i<=2;i++)for(j=-2;j<=2;j++){if(!i&&!j)continue;if(Math.abs(x-i*1.25)<0.48&&Math.abs(z-j*1.25)<0.48)return true;}return false;}",
+        "function nearName(){var el=document.getElementById('near');if(!el)return;if(kind!=='city'){el.textContent='';return;}var best=99,name='',n=0,x,z,d;for(x=-2;x<=2;x++)for(z=-2;z<=2;z++){if(!x&&!z)continue;n++;d=Math.hypot(camX-x*1.25,camZ-z*1.25);if(d<best){best=d;name='Bina '+n;}}el.textContent=best<1.5?name:'';}",
         "function frame(){",
         "var w=canvas.clientWidth||innerWidth,h=canvas.clientHeight||innerHeight;",
         "if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;gl.viewport(0,0,w,h);}",
-        "var step=0.05,fx=Math.sin(ay),fz=Math.cos(ay),moving=go.w||go.a||go.s||go.d||pad.w||pad.a||pad.s||pad.d;",
-        "if(go.w||pad.w){camX+=fx*step;camZ-=fz*step;}if(go.s||pad.s){camX-=fx*step;camZ+=fz*step;}if(go.a||pad.a){camX-=fz*step;camZ-=fx*step;}if(go.d||pad.d){camX+=fz*step;camZ+=fx*step;}",
-        "camX=Math.max(-7,Math.min(7,camX));camZ=Math.max(-7,Math.min(7,camZ));",
+        "var step=0.05,fx=Math.sin(ay),fz=Math.cos(ay),moving=go.w||go.a||go.s||go.d||pad.w||pad.a||pad.s||pad.d,nx=camX,nz=camZ;",
+        "if(go.w||pad.w){nx+=fx*step;nz-=fz*step;}if(go.s||pad.s){nx-=fx*step;nz+=fz*step;}if(go.a||pad.a){nx-=fz*step;nz-=fx*step;}if(go.d||pad.d){nx+=fz*step;nz+=fx*step;}",
+        "nx=Math.max(-7,Math.min(7,nx));nz=Math.max(-7,Math.min(7,nz));",
+        "if(!blocked(nx,camZ))camX=nx;if(!blocked(camX,nz))camZ=nz;",
+        "nearName();",
         "if(touchCount()<1&&!moving)ay+=0.004;spin+=0.012;",
         "gl.uniformMatrix4fv(lvp,false,mul(persp(w/Math.max(1,h)),mul(trans(0,kind==='city'?0.8:0.15,-dist),mul(rotX(ax),mul(rotY(ay),trans(-camX,0,-camZ))))));",
         "gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);",
@@ -2841,19 +2845,26 @@
       if (color !== "0.45,0.7,1") notes.push("rəng");
       if (html && !/<h1\b/i.test(html.content)) {
         const title = String(task || "3D").replace(/[<>&]/g, "").trim().slice(0, 48) || "3D";
-        const hud = "<h1>" + title + "</h1><p class=\"hint\">Fırlat · WASD · Gecə</p>";
+        const hud = "<h1>" + title + "</h1><p class=\"hint\">Gəz · bina adı · Ev</p><p id=\"near\"></p>";
         if (/<body[^>]*>/i.test(html.content)) html.content = html.content.replace(/<body[^>]*>/i, function (m) { return m + "\n" + hud; });
         else html.content = hud + "\n" + html.content;
         notes.push("başlıq");
       }
+      if (html && !/id=["']near["']/.test(html.content)) {
+        if (/<\/body>/i.test(html.content)) html.content = html.content.replace(/<\/body>/i, "<p id=\"near\"></p>\n</body>");
+        else html.content += "<p id=\"near\"></p>";
+      }
       if (html && !/data-scene=/.test(html.content)) {
-        const nav = "<nav class=\"modes\"><button type=\"button\" data-scene=\"orbit\">Orbit</button><button type=\"button\" data-scene=\"city\">Şəhər</button><button type=\"button\" data-scene=\"product\">Məhsul</button><button type=\"button\" data-sky=\"1\">Gecə</button></nav>";
+        const nav = "<nav class=\"modes\"><button type=\"button\" data-scene=\"orbit\">Orbit</button><button type=\"button\" data-scene=\"city\">Şəhər</button><button type=\"button\" data-scene=\"product\">Məhsul</button><button type=\"button\" data-sky=\"1\">Gecə</button><button type=\"button\" data-home=\"1\">Ev</button></nav>";
         if (/<\/body>/i.test(html.content)) html.content = html.content.replace(/<\/body>/i, nav + "\n</body>");
         else html.content += nav;
         notes.push("düymə");
       } else if (html && !/data-sky=/.test(html.content)) {
         html.content = html.content.replace(/<\/nav>/i, "<button type=\"button\" data-sky=\"1\">Gecə</button></nav>");
         notes.push("gecə");
+      } else if (html && !/data-home=/.test(html.content)) {
+        html.content = html.content.replace(/<\/nav>/i, "<button type=\"button\" data-home=\"1\">Ev</button></nav>");
+        notes.push("ev");
       }
       if (html && !/data-move=/.test(html.content)) {
         const pad = "<div class=\"pad\"><span></span><button type=\"button\" data-move=\"w\">↑</button><span></span><button type=\"button\" data-move=\"a\">←</button><button type=\"button\" data-move=\"s\">↓</button><button type=\"button\" data-move=\"d\">→</button></div>";
@@ -2866,7 +2877,7 @@
         js = { path: "app.js", content: "" };
         if (files.length < 4) files.push(js);
       }
-      if (js && js.content.indexOf("data-walk") < 0) {
+      if (js && js.content.indexOf("data-home") < 0) {
         js.content = scene3d();
         notes.push("işıq");
         notes.push("zoom");
@@ -3446,7 +3457,7 @@
       const blob = files.map(function (file) { return file.content; }).join("\n");
       const scene = /<canvas\b|getContext\(\s*["']webgl/i.test(blob);
       const base = scene
-        ? "/* nibras-3d */\nhtml,body{margin:0;height:100%;background:radial-gradient(120% 80% at 50% 0%, #23406f, #07090f 58%);color:#e8edf8;font:16px/1.45 system-ui,sans-serif;overflow:hidden}\nbody.night{background:radial-gradient(120% 80% at 50% 0%, #121826, #05060a 62%)}\ncanvas{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block;touch-action:none}\nbody>*:not(canvas){position:relative;z-index:1;pointer-events:none}\nnav.modes,nav.modes button,.pad,.pad button{pointer-events:auto}\nnav.modes{position:fixed;left:16px;bottom:16px;display:flex;gap:8px;z-index:2}\n.pad{position:fixed;right:16px;bottom:16px;z-index:2;display:grid;grid-template-columns:44px 44px 44px;gap:6px}\nh1{margin:20px 20px 4px;font-size:28px;text-shadow:0 8px 24px #000}\n.hint{margin:0 20px;color:#aeb6ce;font-size:13px}\n"
+        ? "/* nibras-3d */\nhtml,body{margin:0;height:100%;background:radial-gradient(120% 80% at 50% 0%, #23406f, #07090f 58%);color:#e8edf8;font:16px/1.45 system-ui,sans-serif;overflow:hidden}\nbody.night{background:radial-gradient(120% 80% at 50% 0%, #121826, #05060a 62%)}\ncanvas{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block;touch-action:none}\nbody>*:not(canvas){position:relative;z-index:1;pointer-events:none}\nnav.modes,nav.modes button,.pad,.pad button{pointer-events:auto}\nnav.modes{position:fixed;left:16px;bottom:16px;display:flex;gap:8px;z-index:2}\n.pad{position:fixed;right:16px;bottom:16px;z-index:2;display:grid;grid-template-columns:44px 44px 44px;gap:6px}\nh1{margin:20px 20px 4px;font-size:28px;text-shadow:0 8px 24px #000}\n.hint{margin:0 20px;color:#aeb6ce;font-size:13px}\n#near{position:fixed;left:20px;bottom:78px;margin:0;font-weight:700;text-shadow:0 6px 18px #000}\n"
         : "/* nibras-premium */\n:root{color-scheme:dark;--bg:#10141f;--card:#181e2e;--ink:#e8edf8;--line:#2c3550;--accent:#7aa2ff}\n*{box-sizing:border-box}\nbody{margin:0;min-height:100vh;font:16px/1.5 system-ui,sans-serif;background:var(--bg);color:var(--ink)}\nmain,form{max-width:420px;margin:0 auto;padding:24px 16px}\nbutton,input,select,textarea{font:inherit}\nbutton{min-height:44px;border:0;border-radius:12px;padding:0 16px;background:var(--accent);color:#08101f;font-weight:700}\ninput,select,textarea{width:100%;min-height:44px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--card);color:inherit}\nbutton:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}\n";
       if (blob.indexOf(scene ? "nibras-3d" : "nibras-premium") < 0 && blob.indexOf("nibras-3d") < 0 && blob.indexOf("nibras-premium") < 0) {
         if (css) css.content = base + css.content;
