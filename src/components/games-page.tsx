@@ -5,6 +5,7 @@ import { SozGame } from "@/components/soz-game";
 import { IlanGame } from "@/components/ilan-game";
 import { KosmosGame } from "@/components/kosmos-game";
 import { QalaGame } from "@/components/qala-game";
+import { NeonGame } from "@/components/neon-game";
 import { useI18n } from "@/lib/i18n-context";
 
 const LINES = [
@@ -248,6 +249,7 @@ export function GameScreen({ slug }: { slug: string }) {
   if (slug === "ilan") return <IlanGame />;
   if (slug === "kosmos") return <KosmosGame />;
   if (slug === "qala") return <QalaGame />;
+  if (slug === "neon") return <NeonGame />;
   return <TicTacToe />;
 }
 
