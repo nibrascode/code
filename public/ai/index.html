@@ -2782,7 +2782,7 @@
         "function scale3(x,y,z){return new Float32Array([x,0,0,0,0,y,0,0,0,0,z,0,0,0,0,1]);}",
         "var I=new Float32Array([1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]);",
         "var kind=canvas.getAttribute('data-kind')||'orbit';",
-        "var night=false,camX=0,camZ=0,go={},pad={},inside=false,saved=null; // data-enter",
+        "var night=false,camX=0,camZ=0,go={},pad={},inside=false,saved=null; // data-room",
         "var parts=(canvas.getAttribute('data-color')||'0.45,0.7,1').split(',');",
         "var main=new Float32Array([+parts[0]||0.45,+parts[1]||0.7,+parts[2]||1]);",
         "var ax=0.45,ay=0.6,dist=kind==='city'?8.2:kind==='product'?4.4:5.6,spin=0,pts={};",
@@ -2803,7 +2803,7 @@
         "function closest(){if(kind!=='city'||inside)return null;var best=99,item=null,n=0,x,z,d;for(x=-2;x<=2;x++)for(z=-2;z<=2;z++){if(!x&&!z)continue;n++;d=Math.hypot(camX-x*1.25,camZ-z*1.25);if(d<best){best=d;item={n:n,d:d};}}return item&&item.d<1.5?item:null;}",
         "function enter(){if(inside||!closest())return;saved={x:camX,z:camZ,ax:ax,ay:ay,dist:dist,n:closest().n};inside=true;camX=0;camZ=0;ax=0.4;ay=0.5;dist=4.4;var b=document.getElementById('enter');if(b)b.textContent='Çıx';}",
         "function leave(){if(!inside)return;inside=false;if(saved){camX=saved.x;camZ=saved.z;ax=saved.ax;ay=saved.ay;dist=saved.dist;}var b=document.getElementById('enter');if(b)b.textContent='Gir';}",
-        "function nearName(){var el=document.getElementById('near'),b=document.getElementById('enter'),item=closest();if(el)el.textContent=inside&&saved?'Bina '+saved.n+' · içəri':item?'Bina '+item.n:'';if(b)b.style.visibility=(inside||item)?'visible':'hidden';}",
+        "function nearName(){var el=document.getElementById('near'),b=document.getElementById('enter'),item=closest(),rooms=['mağaza','ev','ofis'];if(el)el.textContent=inside&&saved?'Bina '+saved.n+' · '+rooms[saved.n%3]:item?'Bina '+item.n:'';if(b)b.style.visibility=(inside||item)?'visible':'hidden';}",
         "function frame(){",
         "var w=canvas.clientWidth||innerWidth,h=canvas.clientHeight||innerHeight;",
         "if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;gl.viewport(0,0,w,h);}",
@@ -2819,12 +2819,17 @@
         "gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);",
         "gl.uniform1f(llit,inside?1:(night?0.45:1));",
         "if(inside){",
+        "var room=saved?saved.n%3:0;",
         "draw(box,mul(trans(0,-1.22,0),scale3(6,0.08,6)),gl.TRIANGLES,new Float32Array([0.16,0.18,0.26]));",
+        "draw(box,mul(trans(0,0.46,0),scale3(5.2,0.12,5.2)),gl.TRIANGLES,new Float32Array([0.12,0.14,0.2]));",
         "draw(box,mul(trans(0,-0.36,-1.7),scale3(5.2,2.4,0.16)),gl.TRIANGLES,new Float32Array([0.28,0.32,0.46]));",
         "draw(box,mul(trans(0,-0.36,1.7),scale3(5.2,2.4,0.16)),gl.TRIANGLES,new Float32Array([0.22,0.26,0.38]));",
         "draw(box,mul(trans(-1.7,-0.36,0),scale3(0.16,2.4,5.2)),gl.TRIANGLES,new Float32Array([0.2,0.24,0.36]));",
         "draw(box,mul(trans(1.7,-0.36,0),scale3(0.16,2.4,5.2)),gl.TRIANGLES,new Float32Array([0.2,0.24,0.36]));",
-        "draw(box,mul(trans(0,0.2,-1.55),scale3(0.9,0.55,0.08)),gl.TRIANGLES,new Float32Array([0.95,0.86,0.55]));",
+        "draw(box,mul(trans(0,0.2,-1.55),scale3(0.9,0.55,0.08)),gl.TRIANGLES,new Float32Array(room===2?[0.45,0.7,1]:[0.95,0.86,0.55]));",
+        "if(room===1){draw(box,mul(trans(0,-0.9,0.1),scale3(1.3,0.7,0.8)),gl.TRIANGLES,new Float32Array([0.55,0.36,0.22]));draw(box,mul(trans(0.75,-1.02,0.55),scale3(0.36,0.5,0.36)),gl.TRIANGLES,new Float32Array([0.4,0.26,0.16]));}",
+        "else if(room===2){draw(box,mul(trans(-0.15,-0.95,0.15),scale3(1.5,0.55,0.75)),gl.TRIANGLES,new Float32Array([0.25,0.28,0.34]));draw(box,mul(trans(-0.15,-0.55,0.15),scale3(0.55,0.4,0.06)),gl.TRIANGLES,new Float32Array([0.35,0.62,1]));}",
+        "else{draw(box,mul(trans(0,-0.9,-0.15),scale3(1.8,0.75,0.55)),gl.TRIANGLES,new Float32Array([0.62,0.34,0.28]));}",
         "}else{",
         "if(night)draw(star,I,gl.POINTS,new Float32Array([0.92,0.95,1]));",
         "draw(box,mul(trans(0,-1.228,0),scale3(14,0.08,14)),gl.TRIANGLES,new Float32Array([0.07,0.09,0.14]));",
@@ -2859,7 +2864,7 @@
       if (color !== "0.45,0.7,1") notes.push("rəng");
       if (html && !/<h1\b/i.test(html.content)) {
         const title = String(task || "3D").replace(/[<>&]/g, "").trim().slice(0, 48) || "3D";
-        const hud = "<h1>" + title + "</h1><p class=\"hint\">Binaya yaxınlaş · Gir · E</p><p id=\"near\"></p>";
+        const hud = "<h1>" + title + "</h1><p class=\"hint\">Gir · mağaza, ev, ofis</p><p id=\"near\"></p>";
         if (/<body[^>]*>/i.test(html.content)) html.content = html.content.replace(/<body[^>]*>/i, function (m) { return m + "\n" + hud; });
         else html.content = hud + "\n" + html.content;
         notes.push("başlıq");
@@ -2897,7 +2902,7 @@
         js = { path: "app.js", content: "" };
         if (files.length < 4) files.push(js);
       }
-      if (js && js.content.indexOf("data-enter") < 0) {
+      if (js && js.content.indexOf("data-room") < 0) {
         js.content = scene3d();
         notes.push("işıq");
         notes.push("zoom");
