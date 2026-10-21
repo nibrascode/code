@@ -17,6 +17,7 @@ import { COMPARE, compareFromPath, compareTopicFromPath, comparePath, compareTop
 import { PAKET, paketFromPath } from "@/lib/paket";
 import { TOOLS, TOOLS_PAGE, toolFromPath, toolsFromPath, toolPath, toolsPath } from "@/lib/tools";
 import { TOOL_LEAD } from "@/lib/tools-seo";
+import { gameSeo } from "@/lib/games";
 
 export const SITE = "https://nibrascode.com";
 
@@ -908,6 +909,8 @@ export function readLang(searchStr: string | undefined): Lang {
 
 function pageCopy(pathname: string, lang: Lang) {
   const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : "/";
+  const game = gameSeo(path, lang);
+  if (game) return game;
   const topic = faqTopicFromPath(path);
   if (topic) {
     return {

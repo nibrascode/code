@@ -37,6 +37,7 @@ import { Route as UnutmaRouteImport } from './routes/unutma'
 import { Route as WhyRouteImport } from './routes/why'
 import { Route as WifiRouteImport } from './routes/wifi'
 import { Route as XetaRouteImport } from './routes/xeta'
+import { Route as OyunRouteImport } from './routes/oyun'
 import { Route as AppsIndexRouteImport } from './routes/apps/index'
 import { Route as AppsSlugRouteImport } from './routes/apps/$slug'
 import { Route as ArAboutRouteImport } from './routes/ar.about'
@@ -59,6 +60,7 @@ import { Route as ArTermsRouteImport } from './routes/ar.terms'
 import { Route as ArToolsRouteImport } from './routes/ar.tools'
 import { Route as ArWifiRouteImport } from './routes/ar.wifi'
 import { Route as ArXetaRouteImport } from './routes/ar.xeta'
+import { Route as ArOyunRouteImport } from './routes/ar.oyun'
 import { Route as EnAboutRouteImport } from './routes/en.about'
 import { Route as EnAppsRouteImport } from './routes/en.apps'
 import { Route as EnContactRouteImport } from './routes/en.contact'
@@ -79,6 +81,7 @@ import { Route as EnTermsRouteImport } from './routes/en.terms'
 import { Route as EnToolsRouteImport } from './routes/en.tools'
 import { Route as EnWifiRouteImport } from './routes/en.wifi'
 import { Route as EnXetaRouteImport } from './routes/en.xeta'
+import { Route as EnOyunRouteImport } from './routes/en.oyun'
 import { Route as FaqSlugRouteImport } from './routes/faq.$slug'
 import { Route as GuidesIndexRouteImport } from './routes/guides/index'
 import { Route as GuidesTopicRouteImport } from './routes/guides/$topic'
@@ -113,6 +116,7 @@ import { Route as RuTermsRouteImport } from './routes/ru.terms'
 import { Route as RuToolsRouteImport } from './routes/ru.tools'
 import { Route as RuWifiRouteImport } from './routes/ru.wifi'
 import { Route as RuXetaRouteImport } from './routes/ru.xeta'
+import { Route as RuOyunRouteImport } from './routes/ru.oyun'
 import { Route as SozSlugRouteImport } from './routes/soz.$slug'
 import { Route as ToolsSlugRouteImport } from './routes/tools.$slug'
 import { Route as TrAboutRouteImport } from './routes/tr.about'
@@ -135,7 +139,9 @@ import { Route as TrTermsRouteImport } from './routes/tr.terms'
 import { Route as TrToolsRouteImport } from './routes/tr.tools'
 import { Route as TrWifiRouteImport } from './routes/tr.wifi'
 import { Route as TrXetaRouteImport } from './routes/tr.xeta'
+import { Route as TrOyunRouteImport } from './routes/tr.oyun'
 import { Route as XetaSlugRouteImport } from './routes/xeta.$slug'
+import { Route as OyunSlugRouteImport } from './routes/oyun.$slug'
 import { Route as ArAppsSlugRouteImport } from './routes/ar.apps.$slug'
 import { Route as ArFaqSlugRouteImport } from './routes/ar.faq.$slug'
 import { Route as ArMovzuSlugRouteImport } from './routes/ar.movzu.$slug'
@@ -146,6 +152,7 @@ import { Route as ArProgrammingSlugRouteImport } from './routes/ar.programming.$
 import { Route as ArSozSlugRouteImport } from './routes/ar.soz.$slug'
 import { Route as ArToolsSlugRouteImport } from './routes/ar.tools.$slug'
 import { Route as ArXetaSlugRouteImport } from './routes/ar.xeta.$slug'
+import { Route as ArOyunSlugRouteImport } from './routes/ar.oyun.$slug'
 import { Route as EnAppsSlugRouteImport } from './routes/en.apps.$slug'
 import { Route as EnFaqSlugRouteImport } from './routes/en.faq.$slug'
 import { Route as EnMovzuSlugRouteImport } from './routes/en.movzu.$slug'
@@ -156,6 +163,7 @@ import { Route as EnProgrammingSlugRouteImport } from './routes/en.programming.$
 import { Route as EnSozSlugRouteImport } from './routes/en.soz.$slug'
 import { Route as EnToolsSlugRouteImport } from './routes/en.tools.$slug'
 import { Route as EnXetaSlugRouteImport } from './routes/en.xeta.$slug'
+import { Route as EnOyunSlugRouteImport } from './routes/en.oyun.$slug'
 import { Route as PrivacyNibrasQrDeleteAccountRouteImport } from './routes/privacy/nibras-qr.delete-account'
 import { Route as ResourcesTopicIndexRouteImport } from './routes/resources/$topic/index'
 import { Route as ResourcesTopicArticleRouteImport } from './routes/resources/$topic/$article'
@@ -170,6 +178,7 @@ import { Route as RuResourcesSlugRouteImport } from './routes/ru.resources.$slug
 import { Route as RuSozSlugRouteImport } from './routes/ru.soz.$slug'
 import { Route as RuToolsSlugRouteImport } from './routes/ru.tools.$slug'
 import { Route as RuXetaSlugRouteImport } from './routes/ru.xeta.$slug'
+import { Route as RuOyunSlugRouteImport } from './routes/ru.oyun.$slug'
 import { Route as TrAppsSlugRouteImport } from './routes/tr.apps.$slug'
 import { Route as TrFaqSlugRouteImport } from './routes/tr.faq.$slug'
 import { Route as TrMovzuSlugRouteImport } from './routes/tr.movzu.$slug'
@@ -180,6 +189,7 @@ import { Route as TrProgrammingSlugRouteImport } from './routes/tr.programming.$
 import { Route as TrSozSlugRouteImport } from './routes/tr.soz.$slug'
 import { Route as TrToolsSlugRouteImport } from './routes/tr.tools.$slug'
 import { Route as TrXetaSlugRouteImport } from './routes/tr.xeta.$slug'
+import { Route as TrOyunSlugRouteImport } from './routes/tr.oyun.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -321,6 +331,11 @@ const XetaRoute = XetaRouteImport.update({
   path: '/xeta',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OyunRoute = OyunRouteImport.update({
+  id: '/oyun',
+  path: '/oyun',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AppsIndexRoute = AppsIndexRouteImport.update({
   id: '/apps/',
   path: '/apps/',
@@ -431,6 +446,11 @@ const ArXetaRoute = ArXetaRouteImport.update({
   path: '/xeta',
   getParentRoute: () => ArRoute,
 } as any)
+const ArOyunRoute = ArOyunRouteImport.update({
+  id: '/oyun',
+  path: '/oyun',
+  getParentRoute: () => ArRoute,
+} as any)
 const EnAboutRoute = EnAboutRouteImport.update({
   id: '/about',
   path: '/about',
@@ -529,6 +549,11 @@ const EnWifiRoute = EnWifiRouteImport.update({
 const EnXetaRoute = EnXetaRouteImport.update({
   id: '/xeta',
   path: '/xeta',
+  getParentRoute: () => EnRoute,
+} as any)
+const EnOyunRoute = EnOyunRouteImport.update({
+  id: '/oyun',
+  path: '/oyun',
   getParentRoute: () => EnRoute,
 } as any)
 const FaqSlugRoute = FaqSlugRouteImport.update({
@@ -701,6 +726,11 @@ const RuXetaRoute = RuXetaRouteImport.update({
   path: '/xeta',
   getParentRoute: () => RuRoute,
 } as any)
+const RuOyunRoute = RuOyunRouteImport.update({
+  id: '/oyun',
+  path: '/oyun',
+  getParentRoute: () => RuRoute,
+} as any)
 const SozSlugRoute = SozSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -811,10 +841,20 @@ const TrXetaRoute = TrXetaRouteImport.update({
   path: '/xeta',
   getParentRoute: () => TrRoute,
 } as any)
+const TrOyunRoute = TrOyunRouteImport.update({
+  id: '/oyun',
+  path: '/oyun',
+  getParentRoute: () => TrRoute,
+} as any)
 const XetaSlugRoute = XetaSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => XetaRoute,
+} as any)
+const OyunSlugRoute = OyunSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => OyunRoute,
 } as any)
 const ArAppsSlugRoute = ArAppsSlugRouteImport.update({
   id: '/$slug',
@@ -866,6 +906,11 @@ const ArXetaSlugRoute = ArXetaSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => ArXetaRoute,
 } as any)
+const ArOyunSlugRoute = ArOyunSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ArOyunRoute,
+} as any)
 const EnAppsSlugRoute = EnAppsSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -915,6 +960,11 @@ const EnXetaSlugRoute = EnXetaSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => EnXetaRoute,
+} as any)
+const EnOyunSlugRoute = EnOyunSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => EnOyunRoute,
 } as any)
 const PrivacyNibrasQrDeleteAccountRoute =
   PrivacyNibrasQrDeleteAccountRouteImport.update({
@@ -987,6 +1037,11 @@ const RuXetaSlugRoute = RuXetaSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => RuXetaRoute,
 } as any)
+const RuOyunSlugRoute = RuOyunSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => RuOyunRoute,
+} as any)
 const TrAppsSlugRoute = TrAppsSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -1036,6 +1091,11 @@ const TrXetaSlugRoute = TrXetaSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => TrXetaRoute,
+} as any)
+const TrOyunSlugRoute = TrOyunSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => TrOyunRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -2107,6 +2167,7 @@ export interface RootRouteChildren {
   WhyRoute: typeof WhyRoute
   WifiRoute: typeof WifiRoute
   XetaRoute: typeof XetaRouteWithChildren
+  OyunRoute: typeof OyunRouteWithChildren
   ResourcesTopicRouteRoute: typeof ResourcesTopicRouteRouteWithChildren
   AppsSlugRoute: typeof AppsSlugRoute
   GuidesTopicRoute: typeof GuidesTopicRoute
@@ -3408,6 +3469,18 @@ const ArXetaRouteChildren: ArXetaRouteChildren = {
 const ArXetaRouteWithChildren =
   ArXetaRoute._addFileChildren(ArXetaRouteChildren)
 
+
+interface ArOyunRouteChildren {
+  ArOyunSlugRoute: typeof ArOyunSlugRoute
+}
+
+const ArOyunRouteChildren: ArOyunRouteChildren = {
+  ArOyunSlugRoute: ArOyunSlugRoute,
+}
+
+const ArOyunRouteWithChildren =
+  ArOyunRoute._addFileChildren(ArOyunRouteChildren)
+
 interface ArRouteChildren {
   ArAboutRoute: typeof ArAboutRoute
   ArAppsRoute: typeof ArAppsRouteWithChildren
@@ -3429,6 +3502,7 @@ interface ArRouteChildren {
   ArToolsRoute: typeof ArToolsRouteWithChildren
   ArWifiRoute: typeof ArWifiRoute
   ArXetaRoute: typeof ArXetaRouteWithChildren
+  ArOyunRoute: typeof ArOyunRouteWithChildren
   ArPdfToolRoute: typeof ArPdfToolRoute
   ArProgrammingSlugRoute: typeof ArProgrammingSlugRoute
 }
@@ -3454,6 +3528,7 @@ const ArRouteChildren: ArRouteChildren = {
   ArToolsRoute: ArToolsRouteWithChildren,
   ArWifiRoute: ArWifiRoute,
   ArXetaRoute: ArXetaRouteWithChildren,
+  ArOyunRoute: ArOyunRouteWithChildren,
   ArPdfToolRoute: ArPdfToolRoute,
   ArProgrammingSlugRoute: ArProgrammingSlugRoute,
 }
@@ -3547,6 +3622,18 @@ const EnXetaRouteChildren: EnXetaRouteChildren = {
 const EnXetaRouteWithChildren =
   EnXetaRoute._addFileChildren(EnXetaRouteChildren)
 
+
+interface EnOyunRouteChildren {
+  EnOyunSlugRoute: typeof EnOyunSlugRoute
+}
+
+const EnOyunRouteChildren: EnOyunRouteChildren = {
+  EnOyunSlugRoute: EnOyunSlugRoute,
+}
+
+const EnOyunRouteWithChildren =
+  EnOyunRoute._addFileChildren(EnOyunRouteChildren)
+
 interface EnRouteChildren {
   EnAboutRoute: typeof EnAboutRoute
   EnAppsRoute: typeof EnAppsRouteWithChildren
@@ -3568,6 +3655,7 @@ interface EnRouteChildren {
   EnToolsRoute: typeof EnToolsRouteWithChildren
   EnWifiRoute: typeof EnWifiRoute
   EnXetaRoute: typeof EnXetaRouteWithChildren
+  EnOyunRoute: typeof EnOyunRouteWithChildren
   EnPdfToolRoute: typeof EnPdfToolRoute
   EnProgrammingSlugRoute: typeof EnProgrammingSlugRoute
 }
@@ -3593,6 +3681,7 @@ const EnRouteChildren: EnRouteChildren = {
   EnToolsRoute: EnToolsRouteWithChildren,
   EnWifiRoute: EnWifiRoute,
   EnXetaRoute: EnXetaRouteWithChildren,
+  EnOyunRoute: EnOyunRouteWithChildren,
   EnPdfToolRoute: EnPdfToolRoute,
   EnProgrammingSlugRoute: EnProgrammingSlugRoute,
 }
@@ -3743,6 +3832,18 @@ const RuXetaRouteChildren: RuXetaRouteChildren = {
 const RuXetaRouteWithChildren =
   RuXetaRoute._addFileChildren(RuXetaRouteChildren)
 
+
+interface RuOyunRouteChildren {
+  RuOyunSlugRoute: typeof RuOyunSlugRoute
+}
+
+const RuOyunRouteChildren: RuOyunRouteChildren = {
+  RuOyunSlugRoute: RuOyunSlugRoute,
+}
+
+const RuOyunRouteWithChildren =
+  RuOyunRoute._addFileChildren(RuOyunRouteChildren)
+
 interface RuRouteChildren {
   RuAboutRoute: typeof RuAboutRoute
   RuAppsRoute: typeof RuAppsRouteWithChildren
@@ -3764,6 +3865,7 @@ interface RuRouteChildren {
   RuToolsRoute: typeof RuToolsRouteWithChildren
   RuWifiRoute: typeof RuWifiRoute
   RuXetaRoute: typeof RuXetaRouteWithChildren
+  RuOyunRoute: typeof RuOyunRouteWithChildren
   RuPdfToolRoute: typeof RuPdfToolRoute
   RuProgrammingSlugRoute: typeof RuProgrammingSlugRoute
   RuResourcesSlugRoute: typeof RuResourcesSlugRoute
@@ -3790,6 +3892,7 @@ const RuRouteChildren: RuRouteChildren = {
   RuToolsRoute: RuToolsRouteWithChildren,
   RuWifiRoute: RuWifiRoute,
   RuXetaRoute: RuXetaRouteWithChildren,
+  RuOyunRoute: RuOyunRouteWithChildren,
   RuPdfToolRoute: RuPdfToolRoute,
   RuProgrammingSlugRoute: RuProgrammingSlugRoute,
   RuResourcesSlugRoute: RuResourcesSlugRoute,
@@ -3904,6 +4007,18 @@ const TrXetaRouteChildren: TrXetaRouteChildren = {
 const TrXetaRouteWithChildren =
   TrXetaRoute._addFileChildren(TrXetaRouteChildren)
 
+
+interface TrOyunRouteChildren {
+  TrOyunSlugRoute: typeof TrOyunSlugRoute
+}
+
+const TrOyunRouteChildren: TrOyunRouteChildren = {
+  TrOyunSlugRoute: TrOyunSlugRoute,
+}
+
+const TrOyunRouteWithChildren =
+  TrOyunRoute._addFileChildren(TrOyunRouteChildren)
+
 interface TrRouteChildren {
   TrAboutRoute: typeof TrAboutRoute
   TrAppsRoute: typeof TrAppsRouteWithChildren
@@ -3925,6 +4040,7 @@ interface TrRouteChildren {
   TrToolsRoute: typeof TrToolsRouteWithChildren
   TrWifiRoute: typeof TrWifiRoute
   TrXetaRoute: typeof TrXetaRouteWithChildren
+  TrOyunRoute: typeof TrOyunRouteWithChildren
   TrPdfToolRoute: typeof TrPdfToolRoute
   TrProgrammingSlugRoute: typeof TrProgrammingSlugRoute
 }
@@ -3950,11 +4066,22 @@ const TrRouteChildren: TrRouteChildren = {
   TrToolsRoute: TrToolsRouteWithChildren,
   TrWifiRoute: TrWifiRoute,
   TrXetaRoute: TrXetaRouteWithChildren,
+  TrOyunRoute: TrOyunRouteWithChildren,
   TrPdfToolRoute: TrPdfToolRoute,
   TrProgrammingSlugRoute: TrProgrammingSlugRoute,
 }
 
 const TrRouteWithChildren = TrRoute._addFileChildren(TrRouteChildren)
+
+interface OyunRouteChildren {
+  OyunSlugRoute: typeof OyunSlugRoute
+}
+
+const OyunRouteChildren: OyunRouteChildren = {
+  OyunSlugRoute: OyunSlugRoute,
+}
+
+const OyunRouteWithChildren = OyunRoute._addFileChildren(OyunRouteChildren)
 
 interface XetaRouteChildren {
   XetaSlugRoute: typeof XetaSlugRoute
@@ -4008,6 +4135,7 @@ const rootRouteChildren: RootRouteChildren = {
   WhyRoute: WhyRoute,
   WifiRoute: WifiRoute,
   XetaRoute: XetaRouteWithChildren,
+  OyunRoute: OyunRouteWithChildren,
   ResourcesTopicRouteRoute: ResourcesTopicRouteRouteWithChildren,
   AppsSlugRoute: AppsSlugRoute,
   GuidesTopicRoute: GuidesTopicRoute,

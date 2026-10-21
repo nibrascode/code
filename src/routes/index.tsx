@@ -10,6 +10,7 @@ import { HeroMark } from "@/components/hero-mark";
 import { faqPath } from "@/lib/faq";
 import { homePath, localeHref } from "@/lib/locale-path";
 import { SEARCH, searchPath, searchTopicPath } from "@/lib/search-pages";
+import { gamePath } from "@/lib/games";
 import { toolsPath, TOOLS_PAGE } from "@/lib/tools";
 import { useI18n } from "@/lib/i18n-context";
 import { statusText, type StudioAppRow } from "@/lib/studio";
@@ -529,6 +530,9 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
           </a>
           <a className="footer-faq" href={faqPath(lang)}>
             {t("faq_nav")}
+          </a>
+          <a className="footer-faq" href={gamePath(lang)}>
+            {lang === "ar" ? "ألعاب" : lang === "ru" ? "Игры" : lang === "en" ? "Games" : "Oyunlar"}
           </a>
           <NavMenu section="programming" />
         </nav>

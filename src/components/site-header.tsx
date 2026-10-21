@@ -3,6 +3,7 @@ import { ArrowLeft } from "lucide-react";
 import { LanguageSwitch } from "@/components/language-switch";
 import { NavMenu } from "@/components/nav-menu";
 import { faqPath } from "@/lib/faq";
+import { gamePath } from "@/lib/games";
 import { useI18n } from "@/lib/i18n-context";
 import { localeHref } from "@/lib/locale-path";
 import type { Lang } from "@/lib/i18n";
@@ -64,6 +65,9 @@ export function SiteFooter() {
         <NavMenu section="programming" />
         <a className="footer-faq" href={faqPath(lang)}>
           {t("faq_nav")}
+        </a>
+        <a className="footer-faq" href={gamePath(lang)}>
+          {lang === "ar" ? "ألعاب" : lang === "ru" ? "Игры" : lang === "en" ? "Games" : "Oyunlar"}
         </a>
       </nav>
       <div className="footer-end">
