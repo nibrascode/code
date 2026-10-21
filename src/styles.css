@@ -7168,8 +7168,8 @@ body.is-planner .site-backdrop {
 /* ana səhifə: 4 keçid kartı 2×2 */
 .nx-bars {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
   width: 100%;
   max-width: 38rem;
   margin-top: 14px;
@@ -7207,8 +7207,8 @@ body.is-planner .site-backdrop {
 }
 
 /* ana səhifə: 5-ci kart (Nibras QR) — 4 kartın altında, tam en */
-.nx-bars > .nx-qr-bar { justify-content: flex-start; }
-.nx-bars > .nx-qr-bar:last-child { grid-column: 1 / -1; }
+.nx-bars > .nx-qr-bar { justify-content: center; }
+.nx-bars > .nx-qr-bar:last-child { grid-column: auto; }
 
 .nx-mini {
   display: grid;
@@ -7248,6 +7248,44 @@ body.is-planner .site-backdrop {
   line-height: 1.15;
   letter-spacing: -0.02em;
 }
+
+.nx-bars > a {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-height: 68px;
+  padding: 8px 4px;
+  text-align: center;
+}
+
+.nx-bars > a > img,
+.nx-bars > a > svg,
+.nx-bars .nx-apk,
+.nx-bars .nx-term,
+.nx-bars .nx-job {
+  width: 28px;
+  height: 28px;
+  padding: 4px;
+  border-radius: 8px;
+}
+
+.nx-bars > a span,
+.nx-bars .nx-qr-text,
+.nx-bars .nx-qr-text b {
+  max-width: 100%;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-align: center;
+  white-space: normal;
+}
+
+.nx-bars > .nx-qr-bar > .nx-qr-text {
+  display: block;
+  flex: none;
+}
 .nx-qr-bar img,
 .nx-job {
   width: 36px;
@@ -7261,15 +7299,16 @@ body.is-planner .site-backdrop {
 .nx-job-erase { color: #ffe0a8; background: rgb(64 40 12 / 0.95); }
 .nx-job-image { color: #e0d0ff; background: rgb(36 24 68 / 0.95); }
 .nx-bars > .nx-qr-bar > .nx-qr-text {
-  display: flex;
-  flex: 1;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
+  display: block;
+  flex: none;
   min-width: 0;
-  white-space: nowrap;
-  font-size: inherit;
-  letter-spacing: normal;
+  max-width: 100%;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-align: center;
+  white-space: normal;
 }
 .nx-qr-text b {
   font-size: 15px;
