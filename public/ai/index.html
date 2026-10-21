@@ -2746,44 +2746,40 @@
         "if(!gl)return;",
         "function sh(type,src){var s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);return s;}",
         "var prog=gl.createProgram();",
-        "gl.attachShader(prog,sh(gl.VERTEX_SHADER,'attribute vec3 p;attribute vec3 c;uniform mat4 m;varying vec3 v;void main(){v=c;gl_Position=m*vec4(p,1.0);}'));",
-        "gl.attachShader(prog,sh(gl.FRAGMENT_SHADER,'precision mediump float;varying vec3 v;void main(){gl_FragColor=vec4(v,1.0);}'));",
+        "gl.attachShader(prog,sh(gl.VERTEX_SHADER,'attribute vec3 p;attribute vec3 n;uniform mat4 vp;uniform mat4 model;varying vec3 v;void main(){v=mat3(model)*n;gl_Position=vp*model*vec4(p,1.0);}'));",
+        "gl.attachShader(prog,sh(gl.FRAGMENT_SHADER,'precision mediump float;varying vec3 v;uniform vec3 col;void main(){vec3 N=normalize(v);float d=max(dot(N,normalize(vec3(0.45,0.85,0.35))),0.0);float f=max(dot(N,normalize(vec3(-0.55,0.15,0.55))),0.0);gl_FragColor=vec4(col*(0.2+d*0.72+f*0.28),1.0);}'));",
         "gl.linkProgram(prog);gl.useProgram(prog);",
-        "function quad(data,a,b,c,d,col){[a,b,c,a,c,d].forEach(function(p){data.push(p[0],p[1],p[2],col[0],col[1],col[2]);});}",
-        "var data=[];",
-        "quad(data,[-1,-1,1],[1,-1,1],[1,1,1],[-1,1,1],[0.48,0.68,1]);",
-        "quad(data,[-1,-1,-1],[-1,1,-1],[1,1,-1],[1,-1,-1],[0.22,0.32,0.62]);",
-        "quad(data,[-1,1,-1],[-1,1,1],[1,1,1],[1,1,-1],[0.82,0.9,1]);",
-        "quad(data,[-1,-1,-1],[1,-1,-1],[1,-1,1],[-1,-1,1],[0.12,0.16,0.28]);",
-        "quad(data,[1,-1,-1],[1,1,-1],[1,1,1],[1,-1,1],[0.55,0.78,1]);",
-        "quad(data,[-1,-1,-1],[-1,-1,1],[-1,1,1],[-1,1,-1],[0.32,0.48,0.86]);",
-        "var buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);",
-        "gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(data),gl.STATIC_DRAW);",
-        "var lp=gl.getAttribLocation(prog,'p'),lc=gl.getAttribLocation(prog,'c'),lm=gl.getUniformLocation(prog,'m');",
-        "gl.enableVertexAttribArray(lp);gl.enableVertexAttribArray(lc);",
-        "gl.vertexAttribPointer(lp,3,gl.FLOAT,false,24,0);",
-        "gl.vertexAttribPointer(lc,3,gl.FLOAT,false,24,12);",
-        "gl.enable(gl.DEPTH_TEST);",
+        "function buffer(data){var b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(data),gl.STATIC_DRAW);return {b:b,n:data.length/6};}",
+        "function sphere(r,st,sl){var data=[],i,j,th0,th1,ph0,ph1;function vert(th,ph){var x=Math.sin(th)*Math.cos(ph),y=Math.cos(th),z=Math.sin(th)*Math.sin(ph);data.push(r*x,r*y,r*z,x,y,z);}for(i=0;i<st;i++){th0=i/st*Math.PI;th1=(i+1)/st*Math.PI;for(j=0;j<sl;j++){ph0=j/sl*6.28318;ph1=(j+1)/sl*6.28318;vert(th0,ph0);vert(th1,ph0);vert(th1,ph1);vert(th0,ph0);vert(th1,ph1);vert(th0,ph1);}}return data;}",
+        "function cube(s){var data=[],h=s/2;function q(a,b,c,d){var n=[(b[1]-a[1])*(c[2]-a[2])-(b[2]-a[2])*(c[1]-a[1]),(b[2]-a[2])*(c[0]-a[0])-(b[0]-a[0])*(c[2]-a[2]),(b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0])];[a,b,c,a,c,d].forEach(function(p){data.push(p[0],p[1],p[2],n[0],n[1],n[2]);});}q([-h,-h,h],[h,-h,h],[h,h,h],[-h,h,h]);q([-h,-h,-h],[-h,h,-h],[h,h,-h],[h,-h,-h]);q([-h,h,-h],[-h,h,h],[h,h,h],[h,h,-h]);q([-h,-h,-h],[h,-h,-h],[h,-h,h],[-h,-h,h]);q([h,-h,-h],[h,h,-h],[h,h,h],[h,-h,h]);q([-h,-h,-h],[-h,-h,h],[-h,h,h],[-h,h,-h]);return data;}",
+        "function grid(){var data=[],i,y=-1.2;for(i=-4;i<=4;i++){data.push(i,y,-4,0,1,0,i,y,4,0,1,0,-4,y,i,0,1,0,4,y,i,0,1,0);}return data;}",
+        "var ball=buffer(sphere(0.9,10,16)),box=buffer(cube(0.7)),floor=buffer(grid());",
+        "var lp=gl.getAttribLocation(prog,'p'),ln=gl.getAttribLocation(prog,'n');",
+        "var lvp=gl.getUniformLocation(prog,'vp'),lmodel=gl.getUniformLocation(prog,'model'),lcol=gl.getUniformLocation(prog,'col');",
+        "gl.enableVertexAttribArray(lp);gl.enableVertexAttribArray(ln);gl.enable(gl.DEPTH_TEST);",
         "function mul(a,b){var o=new Float32Array(16),c,r;for(c=0;c<4;c++)for(r=0;r<4;r++)o[c*4+r]=a[r]*b[c*4]+a[4+r]*b[c*4+1]+a[8+r]*b[c*4+2]+a[12+r]*b[c*4+3];return o;}",
-        "function persp(aspect){var f=1/Math.tan(0.45),n=0.1,far=20,nf=1/(n-far);return new Float32Array([f/aspect,0,0,0,0,f,0,0,0,0,(far+n)*nf,-1,0,0,2*far*n*nf,0]);}",
+        "function persp(aspect){var f=1/Math.tan(0.42),n=0.1,far=40,nf=1/(n-far);return new Float32Array([f/aspect,0,0,0,0,f,0,0,0,0,(far+n)*nf,-1,0,0,2*far*n*nf,0]);}",
         "function rotX(a){var c=Math.cos(a),s=Math.sin(a);return new Float32Array([1,0,0,0,0,c,s,0,0,-s,c,0,0,0,0,1]);}",
         "function rotY(a){var c=Math.cos(a),s=Math.sin(a);return new Float32Array([c,0,-s,0,0,1,0,0,s,0,c,0,0,0,0,1]);}",
-        "var tz=new Float32Array([1,0,0,0,0,1,0,0,0,0,1,0,0,0,-3.4,1]);",
-        "var ax=0.55,ay=0.7,drag=false,lx=0,ly=0;",
+        "function trans(x,y,z){return new Float32Array([1,0,0,0,0,1,0,0,0,0,1,0,x,y,z,1]);}",
+        "function scale(s){return new Float32Array([s,0,0,0,0,s,0,0,0,0,s,0,0,0,0,1]);}",
+        "var I=new Float32Array([1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]);",
+        "var ax=0.45,ay=0.6,dist=5.6,drag=false,lx=0,ly=0,spin=0;",
         "canvas.addEventListener('pointerdown',function(e){drag=true;lx=e.clientX;ly=e.clientY;});",
         "window.addEventListener('pointerup',function(){drag=false;});",
-        "window.addEventListener('pointermove',function(e){if(!drag)return;ay+=(e.clientX-lx)*0.01;ax+=(e.clientY-ly)*0.01;lx=e.clientX;ly=e.clientY;});",
+        "window.addEventListener('pointermove',function(e){if(!drag)return;ay+=(e.clientX-lx)*0.01;ax=Math.max(-1.2,Math.min(1.2,(ax+(e.clientY-ly)*0.01)));lx=e.clientX;ly=e.clientY;});",
+        "canvas.addEventListener('wheel',function(e){e.preventDefault();dist=Math.max(2.4,Math.min(10,dist+(e.deltaY>0?0.35:-0.35)));},{passive:false});",
+        "function draw(mesh,model,mode,color){gl.bindBuffer(gl.ARRAY_BUFFER,mesh.b);gl.vertexAttribPointer(lp,3,gl.FLOAT,false,24,0);gl.vertexAttribPointer(ln,3,gl.FLOAT,false,24,12);gl.uniformMatrix4fv(lmodel,false,model);gl.uniform3fv(lcol,color);gl.drawArrays(mode,0,mesh.n);}",
         "function frame(){",
         "var w=canvas.clientWidth||innerWidth,h=canvas.clientHeight||innerHeight;",
         "if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;gl.viewport(0,0,w,h);}",
-        "if(!drag)ay+=0.008;",
-        "var m=mul(persp(canvas.width/Math.max(1,canvas.height)),mul(tz,mul(rotY(ay),rotX(ax))));",
-        "gl.uniformMatrix4fv(lm,false,m);",
-        "gl.clearColor(0.03,0.04,0.07,1);",
-        "gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);",
-        "gl.drawArrays(gl.TRIANGLES,0,data.length/6);",
-        "requestAnimationFrame(frame);",
-        "}",
+        "if(!drag)ay+=0.004;spin+=0.012;",
+        "gl.uniformMatrix4fv(lvp,false,mul(persp(w/Math.max(1,h)),mul(trans(0,0.15,-dist),mul(rotX(ax),rotY(ay)))));",
+        "gl.clearColor(0.03,0.04,0.07,1);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);",
+        "draw(floor,I,gl.LINES,new Float32Array([0.35,0.45,0.7]));",
+        "draw(ball,rotY(spin),gl.TRIANGLES,new Float32Array([0.45,0.7,1]));",
+        "for(var i=0;i<5;i++){draw(box,mul(rotY(spin+i*1.256),mul(trans(2.15,Math.sin(spin+i)*0.25,0),scale(0.34))),gl.TRIANGLES,new Float32Array(i%2?[0.75,0.86,1]:[0.3,0.48,0.9]));}",
+        "requestAnimationFrame(frame);}",
         "frame();",
         "})();"
       ].join("\n");
@@ -2797,6 +2793,13 @@
         else html.content += '\n<canvas id="scene"></canvas>';
         notes.push("canvas");
       }
+      if (html && !/<h1\b/i.test(html.content)) {
+        const title = String(task || "3D").replace(/[<>&]/g, "").trim().slice(0, 48) || "3D";
+        const hud = "<h1>" + title + "</h1><p class=\"hint\">Fırlat · təkər ilə yaxınlaşdır</p>";
+        if (/<body[^>]*>/i.test(html.content)) html.content = html.content.replace(/<body[^>]*>/i, function (m) { return m + "\n" + hud; });
+        else html.content = hud + "\n" + html.content;
+        notes.push("başlıq");
+      }
       let js = files.filter(function (file) { return /\.js$/.test(file.path); })[0];
       if (!js) {
         js = { path: "app.js", content: "" };
@@ -2804,7 +2807,9 @@
       }
       if (js && !/getContext\(\s*["']webgl|THREE\.|WebGLRenderer/.test(js.content)) {
         js.content = scene3d();
-        notes.push("səhnə");
+        notes.push("işıq");
+        notes.push("orbit");
+        notes.push("zoom");
       }
       return notes;
     }
@@ -3010,7 +3015,8 @@
       const body = foldTask(file.path + " " + file.content);
       let score = words.reduce(function (n, word) { return n + (body.indexOf(word) >= 0 ? 1 : 0); }, 0);
       const kind = foldTask(task);
-      if (/\.css$/.test(file.path) && /reng|color|stil|font|margin|padding/.test(kind)) score += 3;
+      if (/\.js$/.test(file.path) && wants3d(task)) score += 2;
+      if (/\.css$/.test(file.path) && /reng|color|stil|font|margin|padding/.test(kind) && !wants3d(task)) score += 3;
       if (/\.js$/.test(file.path) && /duyme|klik|hesab|funksi|script/.test(kind)) score += 3;
       if (/\.html?$/.test(file.path) && /basliq|metn|sehife|html/.test(kind)) score += 3;
       return score;
@@ -3291,7 +3297,7 @@
     async function writeOne(task, deep, path, others, built) {
       const brief = ["GOAL", "OUTPUT", "RISK"].map(function (key) { return deep[key] ? key + ": " + deep[key] : ""; }).filter(Boolean).join(" | ").slice(0, 180);
       const sketch = (built || []).map(function (file) { return file.path + ":" + file.content.replace(/\s+/g, " ").slice(0, 70); }).join(" | ").slice(0, 160);
-      const extra = wants3d(task) ? "3D: canvas id=scene tam ekran. WebGL. Kitabxana yox. Siçanla fırlat." : "Premium: telefon, 16px, fokus, boş hal. Lorem yox.";
+      const extra = wants3d(task) ? "3D: canvas id=scene. İşıqlı kürə, orbit, yer, zoom. Kitabxana yox." : "Premium: telefon, 16px, fokus, boş hal. Lorem yox.";
       const raw = await askModel("Yalnız bu faylı yaz: " + path + "\n===FILE: " + path + "===\nkod\n===END===\nBaşqa fayl yazma. " + extra + "\nTapşırıq: " + task.slice(0, 120) + "\nTəhlil: " + brief.slice(0, 140) + "\nDigər: " + others.join(", ").slice(0, 50) + (sketch ? "\nArtıq: " + sketch.slice(0, 120) : ""));
       const parsed = parseFiles(raw);
       const exact = parsed.filter(function (file) { return file.path === path; })[0];
@@ -3380,7 +3386,7 @@
       const blob = files.map(function (file) { return file.content; }).join("\n");
       const scene = /<canvas\b|getContext\(\s*["']webgl/i.test(blob);
       const base = scene
-        ? "/* nibras-3d */\nhtml,body{margin:0;height:100%;background:#07090f;color:#e8edf8;font:16px/1.45 system-ui,sans-serif;overflow:hidden}\ncanvas{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block}\nbody>*:not(canvas){position:relative;z-index:1}\nh1{margin:20px;font-size:28px;text-shadow:0 8px 24px #000}\n"
+        ? "/* nibras-3d */\nhtml,body{margin:0;height:100%;background:#07090f;color:#e8edf8;font:16px/1.45 system-ui,sans-serif;overflow:hidden}\ncanvas{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block;touch-action:none}\nbody>*:not(canvas){position:relative;z-index:1;pointer-events:none}\nh1{margin:20px 20px 4px;font-size:28px;text-shadow:0 8px 24px #000}\n.hint{margin:0 20px;color:#aeb6ce;font-size:13px}\n"
         : "/* nibras-premium */\n:root{color-scheme:dark;--bg:#10141f;--card:#181e2e;--ink:#e8edf8;--line:#2c3550;--accent:#7aa2ff}\n*{box-sizing:border-box}\nbody{margin:0;min-height:100vh;font:16px/1.5 system-ui,sans-serif;background:var(--bg);color:var(--ink)}\nmain,form{max-width:420px;margin:0 auto;padding:24px 16px}\nbutton,input,select,textarea{font:inherit}\nbutton{min-height:44px;border:0;border-radius:12px;padding:0 16px;background:var(--accent);color:#08101f;font-weight:700}\ninput,select,textarea{width:100%;min-height:44px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--card);color:inherit}\nbutton:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}\n";
       if (blob.indexOf(scene ? "nibras-3d" : "nibras-premium") < 0 && blob.indexOf("nibras-3d") < 0 && blob.indexOf("nibras-premium") < 0) {
         if (css) css.content = base + css.content;
