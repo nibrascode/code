@@ -778,6 +778,13 @@ const PAGES: Record<string, Copy> = {
     ar: { title: "Nibras Logic — طريق سؤال وجواب", description: "ابنِ طريق سؤال وجواب بلا كود. الجواب يذهب إلى السؤال التالي أو إلى النهاية. الرابط داخل العنوان ولا يُحفظ شيء." },
     ru: { title: "Nibras Logic — путь вопросов и ответов", description: "Соберите путь вопросов и ответов без кода. Ответ ведёт к следующему вопросу или к концу. Ссылка внутри адреса, ничего не сохраняется." },
   },
+  "/unknown": {
+    az: { title: "Nibras Unknown — üç addımlı sirr", description: "Qeyd, kod və şifrə. Düzgün açılış növbəti hissəni göstərir. Server yoxdur, bu cihazda qalır." },
+    en: { title: "Nibras Unknown — a three-step secret", description: "A note, a code and a password. The right one opens the next part. No server. It stays on this device." },
+    tr: { title: "Nibras Unknown — üç adımlı sır", description: "Not, kod ve şifre. Doğru açılış sonraki parçayı gösterir. Sunucu yok, bu cihazda kalır." },
+    ar: { title: "Nibras Unknown — سر من ثلاث خطوات", description: "ملاحظة وكود وكلمة سر. الفتح الصحيح يُظهر الجزء التالي. لا خادم ويبقى على هذا الجهاز." },
+    ru: { title: "Nibras Unknown — тайна из трёх шагов", description: "Записка, код и пароль. Верный ввод открывает следующую часть. Сервера нет, остаётся на этом устройстве." },
+  },
   "/pdf": {
     az: {
       title: "Nibras PDF — PDF birləşdir, böl, sıxışdır, imzala (pulsuz)",
@@ -1363,7 +1370,7 @@ function jsonLd(path: string, lang: Lang, copy: PageSeo, url: string) {
       };
     }
   }
-  if (path === "/erase" || path === "/image" || path === "/soz-sayi" || path === "/faiz" || path === "/wifi" || path === "/seo" || path === "/flow" || path === "/logic") {
+  if (path === "/erase" || path === "/image" || path === "/soz-sayi" || path === "/faiz" || path === "/wifi" || path === "/seo" || path === "/flow" || path === "/logic" || path === "/unknown") {
     const block = SEARCH_FAQ[path];
     const items = block.items[lang] ?? block.items.en;
     return {

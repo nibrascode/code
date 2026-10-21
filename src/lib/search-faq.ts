@@ -1,6 +1,6 @@
 import type { Lang } from "@/lib/i18n";
 
-export const SEARCH_FAQ: Record<"/erase" | "/image" | "/soz-sayi" | "/faiz" | "/wifi" | "/seo" | "/flow" | "/logic", { title: Record<Lang, string>; items: Record<Lang, { q: string; a: string }[]> }> = {
+export const SEARCH_FAQ: Record<"/erase" | "/image" | "/soz-sayi" | "/faiz" | "/wifi" | "/seo" | "/flow" | "/logic" | "/unknown", { title: Record<Lang, string>; items: Record<Lang, { q: string; a: string }[]> }> = {
   "/erase": {
     title: { az: "Suallar", en: "Questions", tr: "Sorular", ar: "أسئلة", ru: "Вопросы" },
     items: {
@@ -263,6 +263,36 @@ export const SEARCH_FAQ: Record<"/erase" | "/image" | "/soz-sayi" | "/faiz" | "/
         { q: "Нужен код?", a: "Нет. Вы пишете вопрос и два ответа." },
         { q: "Ответы сохраняются?", a: "Нет. Путь живёт только внутри ссылки." },
         { q: "Как работает ссылка?", a: "Вы отправляете адрес. Кто откроет, проходит эти вопросы." },
+      ],
+    },
+  },
+  "/unknown": {
+    title: { az: "Suallar", en: "Questions", tr: "Sorular", ar: "أسئلة", ru: "Вопросы" },
+    items: {
+      az: [
+        { q: "Bu, saytın qalanını gizlədir?", a: "Xeyr. Sirr yalnız bu ünvandadır." },
+        { q: "Şifrə serverə gedir?", a: "Xeyr. Yoxlama bu cihazda olur." },
+        { q: "Növbəti hissə haradadır?", a: "Şifrə düz olanda elə bu səhifədə açılır." },
+      ],
+      en: [
+        { q: "Does this hide the rest of the site?", a: "No. The secret stays on this address." },
+        { q: "Does the password go to a server?", a: "No. The check happens on this device." },
+        { q: "Where is the next part?", a: "When the password is right, it opens on this same page." },
+      ],
+      tr: [
+        { q: "Sitenin kalanını gizler mi?", a: "Hayır. Sır yalnız bu adrestedir." },
+        { q: "Şifre sunucuya gider mi?", a: "Hayır. Kontrol bu cihazda olur." },
+        { q: "Sonraki parça nerede?", a: "Şifre doğru olunca aynı sayfada açılır." },
+      ],
+      ar: [
+        { q: "هل يخفي بقية الموقع؟", a: "لا. السر يبقى في هذا العنوان." },
+        { q: "هل تذهب كلمة السر إلى خادم؟", a: "لا. الفحص يجري على هذا الجهاز." },
+        { q: "أين الجزء التالي؟", a: "حين تصح كلمة السر يُفتح في هذه الصفحة نفسها." },
+      ],
+      ru: [
+        { q: "Это прячет остальной сайт?", a: "Нет. Тайна только на этом адресе." },
+        { q: "Пароль уходит на сервер?", a: "Нет. Проверка идёт на этом устройстве." },
+        { q: "Где следующая часть?", a: "Когда пароль верный, она открывается на этой же странице." },
       ],
     },
   },

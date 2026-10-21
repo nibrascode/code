@@ -24,7 +24,7 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-const BAR: Record<"dev" | "apk" | "pdf" | "qr" | "erase" | "image" | "calc" | "seo" | "flow" | "logic", Record<Lang, string>> = {
+const BAR: Record<"dev" | "apk" | "pdf" | "qr" | "erase" | "image" | "calc" | "seo" | "flow" | "logic" | "unknown", Record<Lang, string>> = {
   dev: { az: "Kod yaz", en: "Write code", tr: "Kod yaz", ar: "اكتب كوداً", ru: "Пиши код" },
   apk: { az: "Apk hazırla", en: "Make an APK", tr: "Apk hazırla", ar: "اصنع APK", ru: "Собрать APK" },
   pdf: { az: "Pdf hazırla", en: "Make a PDF", tr: "Pdf hazırla", ar: "جهّز PDF", ru: "Сделать PDF" },
@@ -35,6 +35,7 @@ const BAR: Record<"dev" | "apk" | "pdf" | "qr" | "erase" | "image" | "calc" | "s
   seo: { az: "SEO yoxla", en: "Check SEO", tr: "SEO bak", ar: "فحص SEO", ru: "Проверить SEO" },
   flow: { az: "Hazırla", en: "Prepare", tr: "Hazırla", ar: "جهّز", ru: "Подготовь" },
   logic: { az: "Sual qur", en: "Build questions", tr: "Soru kur", ar: "ابنِ أسئلة", ru: "Собрать вопросы" },
+  unknown: { az: "Sirr", en: "Secret", tr: "Sır", ar: "سر", ru: "Тайна" },
 };
 
 const STATUS: Partial<Record<"nibras-arabic" | "nibras-pdf" | "nibras-qr" | "nibras-plans" | "nibras-docs", TKey>> = {
@@ -365,6 +366,14 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
                 <path d="M6 7h8M14 7v4H8M8 11v4h8" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
               <span>{BAR.logic[lang]}</span>
+            </a>
+            <a className="nx-apk-bar" href={localeHref(lang, "/unknown")}>
+              <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" strokeWidth="1.6" />
+                <path d="M9.2 9.2a2.8 2.8 0 1 1 3.6 2.7c-.7.3-1 .8-1 1.6V14.2" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                <path d="M12 17.2h.01" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+              </svg>
+              <span>{BAR.unknown[lang]}</span>
             </a>
             <a className="nx-ai-bar nx-qr-bar" href={localeHref(lang, "/pdf")}>
               <svg className="nx-job nx-job-pdf" viewBox="0 0 24 24" aria-hidden="true">
