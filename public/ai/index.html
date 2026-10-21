@@ -534,7 +534,7 @@
     }
     .acts {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       gap: 6px;
       margin-top: 10px;
     }
@@ -570,6 +570,12 @@
       border-bottom-left-radius: 5px;
     }
     .err { border-color: rgba(255,120,140,.35); color: #ffd0d6; }
+    .msg.step { max-width: 92%; border: 1px solid rgba(120, 168, 255, .28); background: rgba(16, 22, 42, .72); }
+    .msg.step.run { border-color: rgba(255, 190, 90, .55); }
+    .msg.step.ok { border-color: rgba(120, 210, 160, .45); }
+    .msg.step.bad { border-color: rgba(255, 120, 120, .55); }
+    .msg.step pre { max-height: 220px; overflow: auto; margin: 8px 0 0; }
+    .zipbtn { margin-top: 8px; border: 0; border-radius: 10px; padding: 7px 12px; background: #3c6dff; color: #fff; font-weight: 600; cursor: pointer; }
     .msg pre {
       margin: 8px 0 0;
       padding: 10px;
@@ -1218,6 +1224,10 @@
           <svg viewBox="0 0 24 24" fill="none"><path d="m8 8-4 4 4 4M16 8l4 4-4 4" stroke="#7ee7ff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <b data-ui="code">Kod yaz</b>
         </button>
+        <button class="act" type="button" data-mode="layihe">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5 7.5h14M5 12h14M5 16.5h9" stroke="#9dffc8" stroke-width="1.7" stroke-linecap="round"/></svg>
+          <b data-ui="layihe">Layihə</b>
+        </button>
         <button class="act" type="button" data-mode="image">
           <svg viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="14" rx="2" stroke="#d9a6ff" stroke-width="1.7"/><circle cx="9" cy="10" r="1.4" fill="#d9a6ff"/><path d="m8 16 3.2-3.2a1 1 0 0 1 1.4 0L16 16" stroke="#d9a6ff" stroke-width="1.7" stroke-linejoin="round"/></svg>
           <b data-ui="image">Şəkil düzəlt</b>
@@ -1273,7 +1283,18 @@
       ru: { chats: "Чаты", close: "Закрыть", newChat: "+ Новый чат", about: "О сервисе", note: "Разговор остаётся в этом браузере 24 часа", empty: "Чатов пока нет", chat: "Чат", del: "Удалить чат", sure: "Удалить?", deleted: "Чат удалён", missing: "Чат не найден", noopen: "Чат не открылся", wait: "Ждём ответ", now: "сейчас", min: " мин назад", hour: " ч назад", kicker: "ТВОЙ ПОМОЩНИК", ask: "Спросить", create: "Идея", code: "Написать код", image: "Править картинку", ph: "Чем помочь?", codeL: "Режим кода — что написать?", codeP: "Например: функция Python, которая складывает два числа", imgL: "Сделать картинку — что нарисовать?", imgE: "Править картинку — что изменить?", imgP: "Например: синий знак N на тёмном столе", imgEp: "Что изменить на этой картинке?", createL: "Режим идеи — напиши тему", createP: "Например: короткое имя для приложения", askL: "Режим вопроса — напиши вопрос", askP: "Напиши вопрос сюда", limit: "Лимит", model: "Модель", privacy: "Конфиденциальность", lead: "Nibras AI — отдельный помощник Nibras Code. Он отдельно от списка приложений: здесь задают вопрос, берут идею, пишут код и делают картинку. Проект — самостоятельная работа Махира Алиева.", lim1: "Вопрос, который доходит до модели, ограничен сорока в день. Счётчик растёт только когда модель действительно вызвана. Аят Корана, тафсир, хадис, значение слова, факт из Викиданных и готовый ответ сайта в эти 40 не входят.", lim2: "Когда лимит полон, модель останавливается до завтра. Готовые ответы в тот день ещё приходят. Если сообщение длиннее 800 знаков, сервер отрезает остальное.", lim3: "Картинка может быть PNG, JPG или WEBP. Перед отправкой длинная сторона уменьшается до 1024 пикселей.", mod1: "Одного имени модели нет. Если есть готовый источник, модель не вызывается: аят, тафсир, хадис, значение слова и собственный ответ сайта приходят оттуда.", mod2: "Остальной вопрос идёт по очереди к внешним моделям. Код, счёт и обычный разговор не используют один и тот же порядок. Поэтому ответ не каждый раз приходит из одного места.", pri1: "Разговор остаётся в этом браузере 24 часа, потом удаляется. Счёт не открывается. Случайный номер этого браузера тоже хранится здесь.", pri2: "Когда нужна модель, сообщение и недавний разговор идут на сервер, а оттуда к выбранной модели. Готовый ответ не хранит текст сообщения. Счётчик шлёт только вид события, не написанное предложение. Если в браузере слежение выключено, счётчик не уходит.", pri3: "Если сервер принимает разговор, тот же текст пытаются сохранить и там с номером этого устройства. Через 24 часа он выпадает из списка.", who: "Это делает Nibras Code. Проект — самостоятельная работа Махира Алиева. Адрес: nibrascode.com/ai. Вопрос, удаление и конфиденциальность: nibrascode@gmail.com.", does: "Четыре дела: задать вопрос, взять идею, написать код, сделать картинку или поправить готовую. Счёт не открывается. Выбор языка остаётся в этом браузере: азербайджанский, английский, турецкий, арабский и русский.", notdo: "Nibras AI — не врач, не юрист и не официальное религиозное решение. Не решай, пока не проверишь ответ. Не пиши пароль, номер карты, удостоверение и тайный документ.", pri4: "Если отправляешь картинку, она тоже идёт к модели. Перед отправкой длинная сторона уменьшается до 1024 пикселей. Формат PNG, JPG или WEBP. Если сервер принимает разговор, текст с номером этого устройства остаётся там не больше 24 часов, затем выпадает из списка.", pri5: "Если сообщение длиннее 800 знаков, сервер отрезает остальное. Вопрос, который доходит до модели, ограничен сорока в день. Аят, тафсир, хадис, значение слова, Викиданные и готовый ответ сайта в этот счёт не входят.", pri6: "Если ты ребёнок или собираешься написать чужую тайну, не делай этого. Пароль, номер карты и личный документ этой странице не принадлежат.", pri7: "Если не хочешь ждать, можешь сам очистить то, что этот сайт хранит в браузере. О тексте, который ещё на сервере, напиши на nibrascode@gmail.com. Письмо читается только чтобы ответить на эту просьбу." }
     };
     let uiLangCode = "az";
-    function t(key) { return (UI[uiLangCode] || UI.az)[key]; }
+    const LAY = {
+      az: { layihe: "Layihə", layL: "Layihə — nə hazırlayım?", layP: "Məsələn: telefon üçün sadə hesablayıcı", s1: "1. Tapşırıq qəbul olundu", s2: "2. Plan yazılır", s3: "3. Fayllar yazılır", s4: "4. Yoxlanılır", s5: "5. ZIP hazırdır", file: "Fayl", down: "ZIP yüklə", fail: "Bu addım alınmadı", empty: "Fayl çıxmadı", bad: "Boş fayl atıldı", wait: "gözlənilir" },
+      en: { layihe: "Project", layL: "Project — what should I build?", layP: "For example: a simple calculator for the phone", s1: "1. Task accepted", s2: "2. Writing the plan", s3: "3. Writing the files", s4: "4. Checking", s5: "5. ZIP is ready", file: "File", down: "Download ZIP", fail: "This step failed", empty: "No file came out", bad: "An empty file was dropped", wait: "waiting" },
+      tr: { layihe: "Proje", layL: "Proje — ne hazırlayayım?", layP: "Örneğin: telefon için basit hesap makinesi", s1: "1. Görev alındı", s2: "2. Plan yazılıyor", s3: "3. Dosyalar yazılıyor", s4: "4. Kontrol ediliyor", s5: "5. ZIP hazır", file: "Dosya", down: "ZIP indir", fail: "Bu adım alınmadı", empty: "Dosya çıkmadı", bad: "Boş dosya atıldı", wait: "bekleniyor" },
+      ar: { layihe: "مشروع", layL: "مشروع — ماذا أجهّز؟", layP: "مثلاً: آلة حاسبة بسيطة للهاتف", s1: "1. قُبلت المهمة", s2: "2. تُكتب الخطة", s3: "3. تُكتب الملفات", s4: "4. يُفحص", s5: "5. ملف ZIP جاهز", file: "ملف", down: "تنزيل ZIP", fail: "فشلت هذه الخطوة", empty: "لم يخرج ملف", bad: "أُسقط ملف فارغ", wait: "يُنتظر" },
+      ru: { layihe: "Проект", layL: "Проект — что собрать?", layP: "Например: простой калькулятор для телефона", s1: "1. Задача принята", s2: "2. Пишется план", s3: "3. Пишутся файлы", s4: "4. Проверка", s5: "5. ZIP готов", file: "Файл", down: "Скачать ZIP", fail: "Этот шаг не вышел", empty: "Файл не вышел", bad: "Пустой файл отброшен", wait: "ждётся" }
+    };
+    function t(key) {
+      const row = (UI[uiLangCode] || UI.az)[key];
+      if (row) return row;
+      return (LAY[uiLangCode] || LAY.az)[key] || LAY.az[key] || key;
+    }
     const msgs = document.getElementById("msgs");
     const hello = document.getElementById("hello");
     const form = document.getElementById("form");
@@ -1318,6 +1339,10 @@
         label.hidden = false;
         label.textContent = t("createL");
         inp.placeholder = t("createP");
+      } else if (next === "layihe") {
+        label.hidden = false;
+        label.textContent = t("layL");
+        inp.placeholder = t("layP");
       } else if (next === "ask") {
         label.hidden = false;
         label.textContent = t("askL");
@@ -2645,6 +2670,205 @@
       return el;
     }
 
+    function crc32(bytes) {
+      let c = ~0;
+      for (let i = 0; i < bytes.length; i++) {
+        c ^= bytes[i];
+        for (let k = 0; k < 8; k++) c = (c >>> 1) ^ (0xedb88320 & -(c & 1));
+      }
+      return ~c >>> 0;
+    }
+    function zipStore(files) {
+      const enc = new TextEncoder();
+      const parts = [];
+      const central = [];
+      let offset = 0;
+      files.forEach(function (f) {
+        const name = enc.encode(f.path);
+        const data = enc.encode(f.content);
+        const crc = crc32(data);
+        const local = new Uint8Array(30 + name.length + data.length);
+        const v = new DataView(local.buffer);
+        v.setUint32(0, 0x04034b50, true);
+        v.setUint16(4, 20, true);
+        v.setUint32(14, crc, true);
+        v.setUint32(18, data.length, true);
+        v.setUint32(22, data.length, true);
+        v.setUint16(26, name.length, true);
+        local.set(name, 30);
+        local.set(data, 30 + name.length);
+        parts.push(local);
+        const cen = new Uint8Array(46 + name.length);
+        const cv = new DataView(cen.buffer);
+        cv.setUint32(0, 0x02014b50, true);
+        cv.setUint16(4, 20, true);
+        cv.setUint16(6, 20, true);
+        cv.setUint32(16, crc, true);
+        cv.setUint32(20, data.length, true);
+        cv.setUint32(24, data.length, true);
+        cv.setUint16(28, name.length, true);
+        cv.setUint32(42, offset, true);
+        cen.set(name, 46);
+        central.push(cen);
+        offset += local.length;
+      });
+      const cenLen = central.reduce(function (n, b) { return n + b.length; }, 0);
+      const end = new Uint8Array(22);
+      const ev = new DataView(end.buffer);
+      ev.setUint32(0, 0x06054b50, true);
+      ev.setUint16(8, files.length, true);
+      ev.setUint16(10, files.length, true);
+      ev.setUint32(12, cenLen, true);
+      ev.setUint32(16, offset, true);
+      return new Blob(parts.concat(central, [end]), { type: "application/zip" });
+    }
+    function safePath(raw) {
+      const s = String(raw || "").trim().replace(/\\/g, "/").replace(/^\/+/, "");
+      if (!s || s.indexOf("..") >= 0 || s.length > 80) return "";
+      if (!/^[a-zA-Z0-9._/-]+$/.test(s)) return "";
+      return s;
+    }
+    function parseFiles(text) {
+      const out = [];
+      const seen = {};
+      function add(path, content) {
+        const p = safePath(path);
+        const body = String(content || "").replace(/^\n/, "").replace(/\s+$/, "");
+        if (!p || !body || seen[p]) return;
+        seen[p] = 1;
+        out.push({ path: p, content: body });
+      }
+      const block = /===FILE:\s*([^\n=]+)===\s*([\s\S]*?)===END===/g;
+      let m;
+      while ((m = block.exec(text))) add(m[1], m[2]);
+      if (out.length) return out.slice(0, 4);
+      const fence = /```([a-zA-Z0-9.+#-]*)[ \t]*([^\n`]*)\n([\s\S]*?)```/g;
+      const ext = { html: "index.html", css: "style.css", javascript: "app.js", js: "app.js", python: "main.py", py: "main.py", typescript: "app.ts", ts: "app.ts" };
+      while ((m = fence.exec(text))) add(m[2] || ext[(m[1] || "").toLowerCase()] || "file.txt", m[3]);
+      return out.slice(0, 4);
+    }
+    function pushStep(text, state) {
+      if (hello && hello.parentNode) hello.remove();
+      const el = document.createElement("div");
+      el.className = "msg b step " + (state || "run");
+      el.setAttribute("dir", "auto");
+      el.textContent = text;
+      msgs.appendChild(el);
+      msgs.scrollTop = msgs.scrollHeight;
+      return el;
+    }
+    function markStep(el, state, text) {
+      el.className = "msg b step " + state;
+      el.textContent = text;
+    }
+    async function askModel(message) {
+      const r = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: message.slice(0, 800), lang: uiLangCode, messages: [], games: [], mode: "code", limitReached: remain() <= 0, noticeShown: noticeShown() })
+      });
+      const raw = await r.text();
+      let data = {};
+      try { data = JSON.parse(raw); } catch (e) {}
+      const reply = data.reply || data.message || data.error || "";
+      if (!r.ok || data.success === false || !data.reply && !data.message) throw new Error(reply || t("fail"));
+      if (data.usedAI === true) {
+        const u = load();
+        u.c += 1;
+        save(u);
+      }
+      return data.reply || data.message;
+    }
+    function pushFile(file) {
+      const el = document.createElement("div");
+      el.className = "msg b step ok";
+      el.setAttribute("dir", "auto");
+      const title = document.createElement("b");
+      title.textContent = t("file") + ": " + file.path;
+      const pre = document.createElement("pre");
+      pre.textContent = file.content.length > 4000 ? file.content.slice(0, 4000) + "\n…" : file.content;
+      el.appendChild(title);
+      el.appendChild(pre);
+      msgs.appendChild(el);
+      msgs.scrollTop = msgs.scrollHeight;
+    }
+    function pushZip(files) {
+      const el = document.createElement("div");
+      el.className = "msg b step ok";
+      el.setAttribute("dir", "auto");
+      el.appendChild(document.createTextNode(t("s5")));
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "zipbtn";
+      button.textContent = t("down");
+      button.addEventListener("click", function () {
+        const url = URL.createObjectURL(zipStore(files));
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "nibras-layihe.zip";
+        link.click();
+        setTimeout(function () { URL.revokeObjectURL(url); }, 1500);
+      });
+      el.appendChild(document.createElement("br"));
+      el.appendChild(button);
+      msgs.appendChild(el);
+      msgs.scrollTop = msgs.scrollHeight;
+    }
+    async function runLayihe(task) {
+      busy = true;
+      btn.disabled = true;
+      bubble(task, "u");
+      rec("u", task, "", 0);
+      const log = [];
+      const s1 = pushStep(t("s1") + " — " + t("wait"), "run");
+      try {
+        await new Promise(function (r) { setTimeout(r, 200); });
+        markStep(s1, "ok", t("s1"));
+        log.push(t("s1"));
+        const s2 = pushStep(t("s2") + " — " + t("wait"), "run");
+        const planRaw = await askModel("Yalnız plan yaz. 3-5 sətir. Hər sətir tire ilə başlasın. Kod yazma.\nTapşırıq: " + task.slice(0, 500));
+        const lines = String(planRaw).split(/\n/).map(function (s) { return s.trim(); }).filter(function (s) { return /^(-|\d+\.)\s+/.test(s); }).slice(0, 6);
+        const plan = (lines.length ? lines : [String(planRaw).trim().slice(0, 280)]).join("\n");
+        markStep(s2, "ok", t("s2"));
+        pushStep(plan, "ok");
+        log.push(t("s2"), plan);
+        const s3 = pushStep(t("s3") + " — " + t("wait"), "run");
+        const fileRaw = await askModel("Yalnız fayl yaz. Ən çox 4 fayl. Hər fayl belə olsun:\n===FILE: index.html===\nkod\n===END===\nBaşqa cümlə yazma.\nTapşırıq: " + task.slice(0, 240) + "\nPlan: " + plan.replace(/\n/g, " | ").slice(0, 220));
+        const files = parseFiles(fileRaw);
+        if (!files.length) {
+          markStep(s3, "bad", t("s3") + " — " + t("empty"));
+          log.push(t("empty"));
+          rec("b", log.join("\n"), "", 1);
+          return;
+        }
+        markStep(s3, "ok", t("s3"));
+        log.push(t("s3"));
+        files.forEach(function (file) {
+          pushFile(file);
+          log.push(t("file") + ": " + file.path);
+        });
+        const s4 = pushStep(t("s4") + " — " + t("wait"), "run");
+        await new Promise(function (r) { setTimeout(r, 200); });
+        const empty = files.some(function (file) { return !file.content.trim(); });
+        markStep(s4, empty ? "bad" : "ok", empty ? t("s4") + " — " + t("bad") : t("s4"));
+        log.push(empty ? t("bad") : t("s4"));
+        if (!empty) pushZip(files);
+        log.push(t("s5"));
+        rec("b", log.join("\n"), "", 0);
+      } catch (e) {
+        const live = msgs.querySelector(".step.run");
+        if (live) markStep(live, "bad", String(live.textContent || "").replace(t("wait"), t("fail")));
+        else pushStep(t("fail"), "bad");
+        log.push(t("fail"));
+        rec("b", log.join("\n"), "", 1);
+      } finally {
+        busy = false;
+        btn.disabled = false;
+        paint();
+        inp.focus();
+      }
+    }
+
     async function send(text) {
       const m = (text || "").trim();
       if (!m || btn.disabled) return;
@@ -2669,6 +2893,11 @@
         rec("u", m, "", 0);
         bubble("::calc::" + m, "b");
         rec("b", "::calc::" + m, "", 0);
+        return;
+      }
+      if (mode === "layihe") {
+        inp.value = "";
+        runLayihe(m);
         return;
       }
       const pdfFlow = wantsPdfFlow(m);
@@ -3132,7 +3361,7 @@
       curItem = it;
       renderItem(it);
       restoring = true;
-      setMode(it.mode === "ask" || it.mode === "code" || it.mode === "create" ? it.mode : "chat");
+      setMode(it.mode === "ask" || it.mode === "code" || it.mode === "create" || it.mode === "layihe" ? it.mode : "chat");
       restoring = false;
     }
 
@@ -3337,7 +3566,7 @@
       renderItem(it);
       resetView();
       restoring = true;
-      setMode(it.mode === "ask" || it.mode === "code" || it.mode === "create" ? it.mode : "chat");
+      setMode(it.mode === "ask" || it.mode === "code" || it.mode === "create" || it.mode === "layihe" ? it.mode : "chat");
       restoring = false;
       setDrawer(false);
     }
