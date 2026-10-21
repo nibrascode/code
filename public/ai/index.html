@@ -2782,7 +2782,7 @@
         "function scale3(x,y,z){return new Float32Array([x,0,0,0,0,y,0,0,0,0,z,0,0,0,0,1]);}",
         "var I=new Float32Array([1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]);",
         "var kind=canvas.getAttribute('data-kind')||'orbit';",
-        "var night=false,camX=0,camZ=0,go={},pad={},inside=false,saved=null,acts={}; // data-glow",
+        "var night=false,camX=0,camZ=0,go={},pad={},inside=false,saved=null,acts={}; // data-live",
         "var parts=(canvas.getAttribute('data-color')||'0.45,0.7,1').split(',');",
         "var main=new Float32Array([+parts[0]||0.45,+parts[1]||0.7,+parts[2]||1]);",
         "var ax=0.45,ay=0.6,dist=kind==='city'?8.2:kind==='product'?4.4:5.6,spin=0,pts={};",
@@ -2805,7 +2805,7 @@
         "function leave(){if(!inside)return;inside=false;if(saved){camX=saved.x;camZ=saved.z;ax=saved.ax;ay=saved.ay;dist=saved.dist;}var b=document.getElementById('enter');if(b)b.textContent='Gir';nearName();}",
         "function on(key){return !!(inside&&saved&&acts[saved.n]&&acts[saved.n][key]);}",
         "function doAct(){if(!inside||!saved)return;var room=saved.n%3,key=room===0?'buy':room===1?'lamp':'off';if(!acts[saved.n])acts[saved.n]={};acts[saved.n][key]=room===0?1:!acts[saved.n][key];nearName();}",
-        "function tally(){var buy=0,lamp=0,k,el=document.getElementById('score');for(k in acts){if(acts[k]&&acts[k].buy)buy++;if(acts[k]&&acts[k].lamp)lamp++;}if(el)el.textContent=(buy||lamp)?('Alış '+buy+' · Lampa '+lamp):'';}",
+        "function tally(){var buy=0,lamp=0,k,el=document.getElementById('score');for(k in acts){if(acts[k]&&acts[k].buy)buy++;if(acts[k]&&acts[k].lamp)lamp++;}if(!el)return;if(kind!=='city'){el.textContent='';return;}el.textContent=(buy>=1&&lamp>=2)?'Şəhər hazırdır':(buy||lamp)?('Alış '+buy+' · Lampa '+lamp):'Məqsəd: 1 alış, 2 lampa';}",
         "function nearName(){var el=document.getElementById('near'),b=document.getElementById('enter'),a=document.getElementById('act'),item=closest(),rooms=['mağaza','ev','ofis'],room=saved?saved.n%3:0;if(el)el.textContent=inside&&saved?'Bina '+saved.n+' · '+rooms[room]:item?'Bina '+item.n:'';if(b)b.style.visibility=(inside||item)?'visible':'hidden';if(a){a.style.visibility=inside?'visible':'hidden';a.textContent=room===0?(on('buy')?'Alındı':'Al'):room===1?(on('lamp')?'Söndür':'Lampa'):(on('off')?'Yandır':'Söndür');}tally();}",
         "function frame(){",
         "var w=canvas.clientWidth||innerWidth,h=canvas.clientHeight||innerHeight;",
@@ -2837,7 +2837,7 @@
         "if(night)draw(star,I,gl.POINTS,new Float32Array([0.92,0.95,1]));",
         "draw(box,mul(trans(0,-1.228,0),scale3(14,0.08,14)),gl.TRIANGLES,new Float32Array([0.07,0.09,0.14]));",
         "draw(floor,I,gl.LINES,new Float32Array([0.35,0.45,0.7]));",
-        "if(kind==='city'){var n=0,x,z,h,shade,room,glow;for(x=-2;x<=2;x++)for(z=-2;z<=2;z++){if(!x&&!z)continue;h=0.75+((n*5)%4)*0.4;shade=0.72+(n%3)*0.14;n++;room=n%3;draw(box,mul(trans(x*1.25,-1.2+h*0.35,z*1.25),scale3(0.5,h,0.5)),gl.TRIANGLES,new Float32Array([main[0]*shade,main[1]*shade,main[2]*shade]));glow=room===2&&!(acts[n]&&acts[n].off)?[0.35,0.62,1]:room===1&&acts[n]&&acts[n].lamp?[1,0.86,0.4]:room===0&&acts[n]&&acts[n].buy?[0.95,0.75,0.28]:null;if(glow)draw(box,mul(trans(x*1.25,-1.2+h*0.5,z*1.25+0.2),scale3(0.22,0.16,0.05)),gl.TRIANGLES,new Float32Array(glow));}}",
+        "if(kind==='city'){var n=0,x,z,h,shade,room,glow;for(x=-2;x<=2;x++)for(z=-2;z<=2;z++){if(!x&&!z)continue;h=0.75+((n*5)%4)*0.4;shade=0.72+(n%3)*0.14;n++;room=n%3;draw(box,mul(trans(x*1.25,-1.2+h*0.35,z*1.25),scale3(0.5,h,0.5)),gl.TRIANGLES,new Float32Array([main[0]*shade,main[1]*shade,main[2]*shade]));glow=room===2&&!(acts[n]&&acts[n].off)?[0.35,0.62,1]:room===1&&acts[n]&&acts[n].lamp?[1,0.86,0.4]:room===0&&acts[n]&&acts[n].buy?[0.95,0.75,0.28]:null;if(glow)draw(box,mul(trans(x*1.25,-1.2+h*0.5,z*1.25+0.2),scale3(0.22,0.16,0.05)),gl.TRIANGLES,new Float32Array(glow));}var a1=spin*0.35,a2=-spin*0.28;draw(box,mul(trans(0,-1.19,0),scale3(1.45,0.05,1.45)),gl.TRIANGLES,new Float32Array([0.09,0.1,0.13]));draw(box,mul(mul(trans(Math.cos(a1)*0.62,-1.1,Math.sin(a1)*0.62),rotY(-a1)),scale3(0.36,0.16,0.2)),gl.TRIANGLES,new Float32Array([0.86,0.24,0.27]));draw(box,mul(mul(trans(Math.cos(a2)*0.62,-1.1,Math.sin(a2)*0.62),rotY(-a2)),scale3(0.36,0.16,0.2)),gl.TRIANGLES,new Float32Array([0.28,0.48,0.92]));}",
         "else if(kind==='product'){draw(box,mul(trans(0,-1.05,0),scale3(1.7,0.28,1.7)),gl.TRIANGLES,new Float32Array([0.16,0.2,0.3]));draw(ball,mul(trans(0,0.2,0),rotY(spin)),gl.TRIANGLES,main);}",
         "else{draw(ball,rotY(spin),gl.TRIANGLES,main);for(var i=0;i<5;i++){draw(box,mul(rotY(spin+i*1.256),mul(trans(2.15,Math.sin(spin+i)*0.25,0),scale(0.34))),gl.TRIANGLES,new Float32Array(i%2?[0.75,0.86,1]:[0.3,0.48,0.9]));}}",
         "}",
@@ -2867,7 +2867,7 @@
       if (color !== "0.45,0.7,1") notes.push("rəng");
       if (html && !/<h1\b/i.test(html.content)) {
         const title = String(task || "3D").replace(/[<>&]/g, "").trim().slice(0, 48) || "3D";
-        const hud = "<h1>" + title + "</h1><p class=\"hint\">İçəridə: Al, Lampa, Ekran</p><p id=\"near\"></p>";
+        const hud = "<h1>" + title + "</h1><p class=\"hint\">Meydan · 1 alış · 2 lampa</p><p id=\"near\"></p>";
         if (/<body[^>]*>/i.test(html.content)) html.content = html.content.replace(/<body[^>]*>/i, function (m) { return m + "\n" + hud; });
         else html.content = hud + "\n" + html.content;
         notes.push("başlıq");
@@ -2916,7 +2916,7 @@
         js = { path: "app.js", content: "" };
         if (files.length < 4) files.push(js);
       }
-      if (js && js.content.indexOf("data-glow") < 0) {
+      if (js && js.content.indexOf("data-live") < 0) {
         js.content = scene3d();
         notes.push("işıq");
         notes.push("zoom");
