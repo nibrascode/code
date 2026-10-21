@@ -954,6 +954,30 @@ const MYSQL_SCHWA: Record<Lang, string> = {
   ru: "Если ə в MySQL стало вопросом",
 };
 
+const SMS_SCHWA: Record<Lang, string> = {
+  az: "SMS-də ə mesajı 70-ə endirirsə",
+  en: "If ə cuts an SMS to 70",
+  tr: "SMS'te ə mesajı 70'e indiriyorsa",
+  ar: "إذا أنزل ə الرسالة إلى 70",
+  ru: "Если ə укорачивает SMS до 70",
+};
+
+const JAVA_SCHWA: Record<Lang, string> = {
+  az: "Java-da Excel üçün ə pozulursa",
+  en: "If ə breaks for Excel in Java",
+  tr: "Java'da Excel için ə bozuluyorsa",
+  ar: "إذا فسد ə من أجل Excel في Java",
+  ru: "Если ə в Java портится для Excel",
+};
+
+const QR_SCHWA: Record<Lang, string> = {
+  az: "QR kod ə hərfinı qəbul etmirsə",
+  en: "If a QR code will not take ə",
+  tr: "QR kod ə harfini kabul etmiyorsa",
+  ar: "إذا لم يقبل رمز QR حرف ə",
+  ru: "Если QR-код не принимает ə",
+};
+
 export function ProgrammingArticle({
   slug,
   title,
@@ -1036,6 +1060,21 @@ export function ProgrammingArticle({
       {slug === "python" || slug === "python-qurasdir" ? (
         <p className="prog-try">
           <a href={searchTopicPath(lang, "xeta", "pdf-e")}>{PDF_SCHWA[lang]}</a>
+        </p>
+      ) : null}
+      {slug === "python" || slug === "python-qurasdir" ? (
+        <p className="prog-try">
+          <a href={searchTopicPath(lang, "xeta", "sms-e")}>{SMS_SCHWA[lang]}</a>
+        </p>
+      ) : null}
+      {slug === "python" || slug === "python-qurasdir" ? (
+        <p className="prog-try">
+          <a href={searchTopicPath(lang, "xeta", "qr-e")}>{QR_SCHWA[lang]}</a>
+        </p>
+      ) : null}
+      {slug === "java" || slug === "java-qurasdir" ? (
+        <p className="prog-try">
+          <a href={searchTopicPath(lang, "xeta", "java-e")}>{JAVA_SCHWA[lang]}</a>
         </p>
       ) : null}
       {slug === "csharp" || slug === "csharp-qurasdir" ? (

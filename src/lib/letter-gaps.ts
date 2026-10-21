@@ -354,4 +354,325 @@ baglanti = pymysql.connect(
       },
     ),
   },
+  {
+    slug: "sms-e",
+    code: `XUSUSI = set("əƏöÖüÜğĞşŞçÇıİ")
+
+def hisseler(metn: str) -> int:
+    ucs = any(h in XUSUSI for h in metn)
+    n = len(metn.encode("utf-16-le")) // 2
+    if not ucs:
+        return 1 if n <= 160 else (n + 152) // 153
+    return 1 if n <= 70 else (n + 66) // 67
+
+print(hisseler("a" * 100))
+print(hisseler("ə" + "a" * 99))
+`,
+    piece: piece(
+      L(
+        "SMS-də ə hərfi mesajı 70 simvola endirir",
+        "In an SMS the letter ə cuts the message to 70 characters",
+        "SMS'te ə harfi mesajı 70 karaktere indirir",
+        "في الرسالة القصيرة حرف ə يُنزل الرسالة إلى 70 رمزًا",
+        "В SMS буква ə укорачивает сообщение до 70 знаков",
+      ),
+      L(
+        "Sadə latın hərfləri bir SMS-ə 160 simvol sığdırır. `ə`, `ö`, `ü`, `ğ`, `ş`, `ç` və ya `ı` o cədvəldə yoxdur. Bir dənəsi bütün mesajı başqa cədvələ keçirir: limit 70 olur. Uzun mesajda hissələr 67 simvoldan bölünür.\n\nTürk operator cədvəli `ö`, `ü`, `ğ`, `ş`, `ç`, `ı` saxlaya bilər. `ə` orada da yoxdur. Əksər göndəriş qapıları türk cədvəlini açmır, ona görə bu hərflərin hamısı 70-ə salır.\n\nHərfi `e` ilə əvəz etmək sözü dəyişir. `əl` və `el` eyni deyil. Sayını əvvəl hesabla.",
+        "Plain Latin letters fit 160 characters in one SMS. `ə`, `ö`, `ü`, `ğ`, `ş`, `ç`, and `ı` are not in that table. One of them moves the whole message to another table: the limit becomes 70. In a long message the parts split at 67 characters.\n\nThe Turkish operator table can hold `ö`, `ü`, `ğ`, `ş`, `ç`, and `ı`. `ə` is not there either. Most sending gates do not turn on the Turkish table, so all of these letters drop the message to 70.\n\nReplacing the letter with `e` changes the word. `əl` and `el` are not the same. Count first.",
+        "Düz Latin harfleri bir SMS'e 160 karakter sığdırır. `ə`, `ö`, `ü`, `ğ`, `ş`, `ç` ya da `ı` o tabloda yoktur. Bir tanesi bütün mesajı başka tabloya geçirir: sınır 70 olur. Uzun mesajda parçalar 67 karakterden bölünür.\n\nTürk operatör tablosu `ö`, `ü`, `ğ`, `ş`, `ç`, `ı` tutabilir. `ə` orada da yoktur. Çoğu gönderim kapısı Türkçe tabloyu açmaz, onun için bu harflerin hepsi 70'e düşürür.\n\nHarfi `e` ile değiştirmek sözü değiştirir. `əl` ile `el` aynı değildir. Önce say.",
+        "الحروف اللاتينية البسيطة تسع 160 رمزًا في رسالة واحدة. `ə` و`ö` و`ü` و`ğ` و`ş` و`ç` و`ı` ليست في ذلك الجدول. واحد منها ينقل الرسالة كلها إلى جدول آخر: يصير الحد 70. في الرسالة الطويلة تُقسم الأجزاء عند 67 رمزًا.\n\nجدول المشغّل التركي قد يحفظ `ö` و`ü` و`ğ` و`ş` و`ç` و`ı`. و`ə` ليست هناك أيضًا. أكثر بوابات الإرسال لا تفتح الجدول التركي، لذلك كل هذه الحروف تُنزل الرسالة إلى 70.\n\nاستبدال الحرف بـ `e` يغيّر الكلمة. `əl` و`el` ليستا واحدًا. احسب أولًا.",
+        "Простые латинские буквы вмещают 160 знаков в одну SMS. `ə`, `ö`, `ü`, `ğ`, `ş`, `ç` и `ı` в той таблице нет. Одной хватает, чтобы всё сообщение перешло в другую таблицу: предел становится 70. В длинном сообщении части делятся по 67 знаков.\n\nТурецкая таблица оператора может держать `ö`, `ü`, `ğ`, `ş`, `ç` и `ı`. Буквы `ə` нет и там. Большинство шлюзов турецкую таблицу не включают, поэтому все эти буквы сбрасывают сообщение на 70.\n\nЗамена буквы на `e` меняет слово. `əl` и `el` — не одно и то же. Сначала посчитай.",
+      ),
+      {
+        az: [
+          "Kod iki rəqəm yazır. `a` yüz dəfə bir hissədir. Əvvəlində `ə` olanda eyni yüz simvol iki hissədir.",
+          "`ə` tək başına kifayətdir. Qalan hərflər latın olsa da mesaj 70-ə keçir.",
+          "71 simvol iki hissədir. Sonrakı bölgü 67-dən gedir: 134-ə qədər iki hissə, 135 üç hissədir.",
+          "Emoji də 70-ə salır və bəzən iki yer tutur. Bu sayğac onu ayrıca saymır.",
+          "Hərfi silmək mətnin mənasını dəyişir. Göndərişdən əvvəl hissə sayını gör.",
+        ],
+        en: [
+          "The code prints two numbers. One hundred `a` characters are one part. The same hundred characters with `ə` in front are two parts.",
+          "`ə` alone is enough. The message goes to 70 even if the other letters are Latin.",
+          "71 characters are two parts. After that the split is 67: up to 134 is two parts, 135 is three.",
+          "An emoji also drops the message to 70 and sometimes takes two places. This counter does not count that separately.",
+          "Removing the letter changes the meaning. See the part count before you send.",
+        ],
+        tr: [
+          "Kod iki sayı yazar. Yüz tane `a` bir parçadır. Başına `ə` gelince aynı yüz karakter iki parçadır.",
+          "`ə` tek başına yeter. Diğer harfler Latin olsa da mesaj 70'e geçer.",
+          "71 karakter iki parçadır. Sonraki bölünme 67'dendir: 134'e kadar iki parça, 135 üç parçadır.",
+          "Emoji de 70'e düşürür ve bazen iki yer tutar. Bu sayaç onu ayrı saymaz.",
+          "Harfi silmek metnin anlamını değiştirir. Göndermeden önce parça sayısını gör.",
+        ],
+        ar: [
+          "الرمز يطبع رقمين. مئة `a` جزء واحد. إذا جاءت `ə` في الأول فنفس المئة رمز جزءان.",
+          "`ə` وحدها تكفي. الرسالة تنتقل إلى 70 ولو كانت بقية الحروف لاتينية.",
+          "71 رمزًا جزءان. التقسيم بعده عند 67: حتى 134 جزءان، و135 ثلاثة.",
+          "الرموز التعبيرية تُنزل الرسالة إلى 70 أيضًا وقد تأخذ مكانين. هذا العدّاد لا يحسب ذلك على حدة.",
+          "حذف الحرف يغيّر المعنى. انظر عدد الأجزاء قبل الإرسال.",
+        ],
+        ru: [
+          "Код печатает два числа. Сто букв `a` — это одна часть. Те же сто знаков с `ə` впереди — две части.",
+          "Одной `ə` достаточно. Сообщение уходит на 70, даже если остальные буквы латинские.",
+          "71 знак — это две части. Дальше деление по 67: до 134 две части, 135 — три.",
+          "Эмодзи тоже сбрасывает сообщение на 70 и иногда занимает два места. Этот счётчик это отдельно не считает.",
+          "Убирать букву — менять смысл. Перед отправкой посмотри число частей.",
+        ],
+      },
+    ),
+  },
+  {
+    slug: "java-e",
+    code: `import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+byte[] bom = new byte[] {(byte) 0xEF, (byte) 0xBB, (byte) 0xBF};
+byte[] metn = "ad\\nAzərbaycan\\n".getBytes(StandardCharsets.UTF_8);
+byte[] fayl = new byte[bom.length + metn.length];
+System.arraycopy(bom, 0, fayl, 0, bom.length);
+System.arraycopy(metn, 0, fayl, bom.length, metn.length);
+Files.write(Path.of("metn.csv"), fayl);
+`,
+    piece: piece(
+      L(
+        "Java-da Excel üçün ə hərfi pozulur",
+        "In Java the letter ə breaks for Excel",
+        "Java'da Excel için ə harfi bozulur",
+        "في Java يفسد حرف ə من أجل Excel",
+        "В Java буква ə портится для Excel",
+      ),
+      L(
+        "`FileWriter` faylı sistem cədvəli ilə yazır. Azərbaycan Windows-unda bu, çox vaxt `Cp1254`-dür. Orada `ə` yoxdur, hərf `?` olur.\n\n`Files.writeString` UTF-8 yazır, amma əvvələ üç bayt qoymur. Excel həmin faylı yenə sistem cədvəli ilə aça bilər. `ödəyici` o zaman `ödÉ™yici` kimi görünür.\n\nƏvvələ `EF BB BF` qoy. `Cp1254` yazma.",
+        "`FileWriter` writes the file with the system table. On Azerbaijani Windows that is often `Cp1254`. `ə` is not there, so the letter becomes `?`.\n\n`Files.writeString` writes UTF-8, but it does not put three bytes at the start. Excel can still open that file with the system table. `ödəyici` then looks like `ödÉ™yici`.\n\nPut `EF BB BF` at the start. Do not write `Cp1254`.",
+        "`FileWriter` dosyayı sistem tablosuyla yazar. Azerbaycan Windows'unda bu çoğu zaman `Cp1254`'tür. Orada `ə` yoktur, harf `?` olur.\n\n`Files.writeString` UTF-8 yazar ama başa üç bayt koymaz. Excel o dosyayı yine sistem tablosuyla açabilir. `ödəyici` o zaman `ödÉ™yici` gibi görünür.\n\nBaşa `EF BB BF` koy. `Cp1254` yazma.",
+        "`FileWriter` يكتب الملف بجدول النظام. في Windows الأذربيجاني هذا غالبًا `Cp1254`. ليس فيه `ə`، فيصير الحرف `?`.\n\n`Files.writeString` يكتب UTF-8 لكنه لا يضع ثلاث بايتات في الأول. قد يفتح Excel ذلك الملف بجدول النظام أيضًا. فتبدو `ödəyici` كـ `ödÉ™yici`.\n\nضع `EF BB BF` في الأول. لا تكتب `Cp1254`.",
+        "`FileWriter` пишет файл системной таблицей. На азербайджанском Windows это часто `Cp1254`. Буквы `ə` там нет, и она становится `?`.\n\n`Files.writeString` пишет UTF-8, но не ставит три байта в начало. Excel всё равно может открыть тот файл системной таблицей. Тогда `ödəyici` выглядит как `ödÉ™yici`.\n\nПоставь в начало `EF BB BF`. Не пиши `Cp1254`.",
+      ),
+      {
+        az: [
+          "CSV-ni yuxarıdakı üç baytla yaz. Excel `ə` hərfinı görür.",
+          "`new FileWriter(\"metn.csv\")` yazma. Cədvəli özü seçir və `ə` itib.",
+          "`Cp1254` və `windows-1254` hərfı saxlamır. UTF-8-dən başqa cədvəl seçmə.",
+          "`Files.writeString` BOM qoymur. Brauzer üçün bəsdir, Excel üçün yox.",
+          "Faylda hərf artıq `?` olubsa, Java onu qaytarmır. Mətni yenidən yaz.",
+        ],
+        en: [
+          "Write the CSV with the three bytes above. Excel then sees `ə`.",
+          "Do not write `new FileWriter(\"metn.csv\")`. It picks the table itself and `ə` is lost.",
+          "`Cp1254` and `windows-1254` do not store the letter. Do not pick a table other than UTF-8.",
+          "`Files.writeString` does not add a BOM. That is enough for a browser, not for Excel.",
+          "If the letter in the file is already `?`, Java cannot bring it back. Write the text again.",
+        ],
+        tr: [
+          "CSV'yi yukarıdaki üç baytla yaz. Excel o zaman `ə` harfini görür.",
+          "`new FileWriter(\"metn.csv\")` yazma. Tabloyu kendi seçer ve `ə` gider.",
+          "`Cp1254` ve `windows-1254` harfi saklamaz. UTF-8 dışında tablo seçme.",
+          "`Files.writeString` BOM koymaz. Tarayıcı için yeter, Excel için yetmez.",
+          "Dosyada harf çoktan `?` olduysa Java onu geri getirmez. Metni yeniden yaz.",
+        ],
+        ar: [
+          "اكتب CSV بالبايتات الثلاث أعلاه. عندها يرى Excel حرف `ə`.",
+          "لا تكتب `new FileWriter(\"metn.csv\")`. هو يختار الجدول بنفسه و`ə` تضيع.",
+          "`Cp1254` و`windows-1254` لا يحفظان الحرف. لا تختر جدولًا غير UTF-8.",
+          "`Files.writeString` لا يضع BOM. يكفي للمتصفح لا لـ Excel.",
+          "إذا صار الحرف في الملف `?` فـ Java لا تُرجعه. اكتب النص من جديد.",
+        ],
+        ru: [
+          "Пиши CSV с тремя байтами выше. Тогда Excel видит `ə`.",
+          "Не пиши `new FileWriter(\"metn.csv\")`. Он сам выбирает таблицу, и `ə` теряется.",
+          "`Cp1254` и `windows-1254` букву не хранят. Не выбирай таблицу кроме UTF-8.",
+          "`Files.writeString` не ставит BOM. Для браузера хватает, для Excel нет.",
+          "Если буква в файле уже `?`, Java её не вернёт. Напиши текст заново.",
+        ],
+      },
+    ),
+  },
+  {
+    slug: "php-e",
+    code: `<?php
+header("Content-Type: text/html; charset=utf-8");
+$baglanti = new PDO(
+    "mysql:host=127.0.0.1;dbname=magaza;charset=utf8mb4",
+    "root",
+    ""
+);
+echo "Azərbaycan";
+`,
+    piece: piece(
+      L(
+        "PHP-də ə hərfi sual işarəsi olur",
+        "In PHP the letter ə becomes a question mark",
+        "PHP'de ə harfi soru işareti olur",
+        "في PHP يصير حرف ə علامة سؤال",
+        "В PHP буква ə становится вопросительным знаком",
+      ),
+      L(
+        "İki yer ayrıdır. Səhifə brauzerə nə göndərdiyini deməlidir. Baza bağlantısı isə mətni necə yazdığını.\n\nBaşlıq yoxdursa brauzer səhifəni sistem cədvəli ilə oxuya bilər. Bağlantıda `charset` yoxdursa MySQL mətni `latin1` saya bilər. Hər iki yolda `ə` `?` olur.\n\nFaylın özü də UTF-8 saxlanmalıdır. PHP başlığı faylın içindəki baytı düzəltmir.",
+        "Two places are separate. The page has to say what it sends to the browser. The database connection has to say how it writes the text.\n\nWithout the header the browser may read the page with the system table. Without `charset` on the connection MySQL may treat the text as `latin1`. On both paths `ə` becomes `?`.\n\nThe file itself must be saved as UTF-8. A PHP header does not repair the bytes inside the file.",
+        "İki yer ayrıdır. Sayfa tarayıcıya ne gönderdiğini söylemeli. Veritabanı bağlantısı ise metni nasıl yazdığını.\n\nBaşlık yoksa tarayıcı sayfayı sistem tablosuyla okuyabilir. Bağlantıda `charset` yoksa MySQL metni `latin1` sayabilir. İki yolda da `ə` `?` olur.\n\nDosyanın kendisi de UTF-8 kaydedilmelidir. PHP başlığı dosyanın içindeki baytı düzeltmez.",
+        "المكانان منفصلان. الصفحة يجب أن تقول ماذا ترسل إلى المتصفح. واتصال القاعدة يقول كيف يُكتب النص.\n\nبلا الترويسة قد يقرأ المتصفح الصفحة بجدول النظام. وبلا `charset` في الاتصال قد تعدّ MySQL النص `latin1`. في الطريقين يصير `ə` هو `?`.\n\nالملف نفسه يجب أن يُحفظ UTF-8. ترويسة PHP لا تصلح البايت داخل الملف.",
+        "Два места разные. Страница должна сказать, что она шлёт браузеру. Соединение с базой — как оно пишет текст.\n\nБез заголовка браузер может прочитать страницу системной таблицей. Без `charset` в соединении MySQL может счесть текст `latin1`. На обоих путях `ə` становится `?`.\n\nСам файл тоже надо сохранить в UTF-8. Заголовок PHP не чинит байт внутри файла.",
+      ),
+      {
+        az: [
+          "Hər səhifənin əvvəlində `header(\"Content-Type: text/html; charset=utf-8\")` olsun.",
+          "PDO sətrində `charset=utf8mb4` yaz. `charset` olmayan DSN `ə` hərfinı `?` edə bilər.",
+          "`mysqli` işlədirsən, bağlantıdan sonra `mysqli_set_charset($baglanti, \"utf8mb4\")` çağır.",
+          "`.php` faylını UTF-8 saxla. Redaktor ANSI seçibsə, hərf fayla düşməmiş olur.",
+          "Cədvəldə hərf artıq `?` olubsa, başlığı dəyişmək onu qaytarmır. Sətri yenidən yaz.",
+        ],
+        en: [
+          "At the start of each page put `header(\"Content-Type: text/html; charset=utf-8\")`.",
+          "In the PDO string write `charset=utf8mb4`. A DSN without `charset` can turn `ə` into `?`.",
+          "If you use `mysqli`, after connecting call `mysqli_set_charset($baglanti, \"utf8mb4\")`.",
+          "Save the `.php` file as UTF-8. If the editor picked ANSI, the letter never entered the file.",
+          "If the letter in the table is already `?`, changing the header does not bring it back. Write the row again.",
+        ],
+        tr: [
+          "Her sayfanın başında `header(\"Content-Type: text/html; charset=utf-8\")` olsun.",
+          "PDO satırında `charset=utf8mb4` yaz. `charset` olmayan DSN `ə` harfini `?` yapabilir.",
+          "`mysqli` kullanıyorsan bağlantıdan sonra `mysqli_set_charset($baglanti, \"utf8mb4\")` çağır.",
+          "`.php` dosyasını UTF-8 kaydet. Düzenleyici ANSI seçtiyse harf dosyaya hiç girmez.",
+          "Tabloda harf çoktan `?` olduysa başlığı değiştirmek onu geri getirmez. Satırı yeniden yaz.",
+        ],
+        ar: [
+          "في أول كل صفحة ضع `header(\"Content-Type: text/html; charset=utf-8\")`.",
+          "في سطر PDO اكتب `charset=utf8mb4`. سلسلة بلا `charset` قد تجعل `ə` تصير `?`.",
+          "إذا استعملت `mysqli` فبعد الاتصال استدعِ `mysqli_set_charset($baglanti, \"utf8mb4\")`.",
+          "احفظ ملف `.php` كـ UTF-8. إذا اختار المحرر ANSI فالحرف لم يدخل الملف أصلًا.",
+          "إذا صار الحرف في الجدول `?` فتغيير الترويسة لا يُرجعه. اكتب الصف من جديد.",
+        ],
+        ru: [
+          "В начале каждой страницы поставь `header(\"Content-Type: text/html; charset=utf-8\")`.",
+          "В строке PDO напиши `charset=utf8mb4`. DSN без `charset` может превратить `ə` в `?`.",
+          "Если используешь `mysqli`, после соединения вызови `mysqli_set_charset($baglanti, \"utf8mb4\")`.",
+          "Сохрани файл `.php` как UTF-8. Если редактор выбрал ANSI, буква в файл так и не попала.",
+          "Если буква в таблице уже `?`, смена заголовка её не вернёт. Запиши строку заново.",
+        ],
+      },
+    ),
+  },
+  {
+    slug: "android-e",
+    code: `<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="olke">Azərbaycan</string>
+</resources>
+`,
+    piece: piece(
+      L(
+        "Android-də ə hərfi sual işarəsi olur",
+        "On Android the letter ə becomes a question mark",
+        "Android'de ə harfi soru işareti olur",
+        "في Android يصير حرف ə علامة سؤال",
+        "На Android буква ə становится вопросительным знаком",
+      ),
+      L(
+        "Mətn `res/values-az/strings.xml` içində durur. Fayl UTF-8 deyilsə, `ə` ya yığılma zamanı xəta verir, ya da telefonda `?` olur.\n\nHərfi kodla gizlətmək məcburi deyil. Fayl düz saxlanıbsa, sözün özü yazılır. Redaktor hərfi saxlaya bilmirsə, yerinə `\\u0259` qoymaq olar. Bu, eyni hərfdir.",
+        "The text lives in `res/values-az/strings.xml`. If the file is not UTF-8, `ə` either fails the build or shows as `?` on the phone.\n\nYou do not have to hide the letter in an escape. If the file is saved correctly, the word itself is written. If the editor cannot store the letter, you can put `\\u0259` in its place. That is the same letter.",
+        "Metin `res/values-az/strings.xml` içindedir. Dosya UTF-8 değilse `ə` ya derleme sırasında hata verir ya da telefonda `?` olur.\n\nHarfi kodla gizlemek zorunlu değildir. Dosya doğru kaydedildiyse sözün kendisi yazılır. Düzenleyici harfi saklayamıyorsa yerine `\\u0259` konabilir. Bu, aynı harftir.",
+        "النص في `res/values-az/strings.xml`. إذا لم يكن الملف UTF-8 فـ `ə` إما تُفشل البناء أو تظهر `?` على الهاتف.\n\nليس واجبًا إخفاء الحرف برمز. إذا حُفظ الملف صحيحًا تُكتب الكلمة نفسها. إذا لم يستطع المحرر حفظ الحرف فضع `\\u0259` مكانه. هذا الحرف نفسه.",
+        "Текст лежит в `res/values-az/strings.xml`. Если файл не UTF-8, `ə` либо ломает сборку, либо на телефоне становится `?`.\n\nПрятать букву в код не обязательно. Если файл сохранён верно, пишется само слово. Если редактор не может сохранить букву, на её место можно поставить `\\u0259`. Это та же буква.",
+      ),
+      {
+        az: [
+          "Faylı `res/values-az/strings.xml` qoy. Birinci sətir `encoding=\"utf-8\"` olsun.",
+          "Notepad ANSI seçibsə, Android Studio-da faylı UTF-8 kimi yenidən saxla.",
+          "`encoding=\"windows-1254\"` yazma. O cədvəl `ə` daşımır.",
+          "Redaktor hərfi qəbul etmirsə, sözün içində `\\u0259` yaz. Ekranda yenə `ə` görünür.",
+          "Tətbiq artıq qurulubsa və hərf `?`-dirsə, mətn paketə səhv düşüb. Faylı düzəldib yenidən qur.",
+        ],
+        en: [
+          "Put the file at `res/values-az/strings.xml`. The first line should be `encoding=\"utf-8\"`.",
+          "If Notepad picked ANSI, save the file again as UTF-8 in Android Studio.",
+          "Do not write `encoding=\"windows-1254\"`. That table does not carry `ə`.",
+          "If the editor will not take the letter, write `\\u0259` inside the word. The screen still shows `ə`.",
+          "If the app is already installed and the letter is `?`, the text went into the package wrong. Fix the file and build again.",
+        ],
+        tr: [
+          "Dosyayı `res/values-az/strings.xml` koy. İlk satır `encoding=\"utf-8\"` olsun.",
+          "Notepad ANSI seçtiyse dosyayı Android Studio'da yeniden UTF-8 kaydet.",
+          "`encoding=\"windows-1254\"` yazma. O tablo `ə` taşımaz.",
+          "Düzenleyici harfi kabul etmiyorsa sözün içinde `\\u0259` yaz. Ekranda yine `ə` görünür.",
+          "Uygulama kurulmuşsa ve harf `?` ise metin pakete yanlış düşmüştür. Dosyayı düzeltip yeniden derle.",
+        ],
+        ar: [
+          "ضع الملف في `res/values-az/strings.xml`. السطر الأول يكون `encoding=\"utf-8\"`.",
+          "إذا اختار Notepad‏ ANSI فاحفظ الملف من جديد كـ UTF-8 في Android Studio.",
+          "لا تكتب `encoding=\"windows-1254\"`. ذلك الجدول لا يحمل `ə`.",
+          "إذا رفض المحرر الحرف فاكتب `\\u0259` داخل الكلمة. الشاشة تُظهر `ə` أيضًا.",
+          "إذا كان التطبيق مثبّتًا والحرف `?` فقد دخل النص الحزمة خطأ. أصلح الملف وابنِ من جديد.",
+        ],
+        ru: [
+          "Положи файл в `res/values-az/strings.xml`. Первая строка пусть будет `encoding=\"utf-8\"`.",
+          "Если Блокнот выбрал ANSI, сохрани файл заново как UTF-8 в Android Studio.",
+          "Не пиши `encoding=\"windows-1254\"`. Та таблица не содержит `ə`.",
+          "Если редактор не принимает букву, напиши внутри слова `\\u0259`. На экране всё равно будет `ə`.",
+          "Если приложение уже стоит и буква `?`, текст попал в пакет неверно. Исправь файл и собери снова.",
+        ],
+      },
+    ),
+  },
+  {
+    slug: "qr-e",
+    code: `import segno
+
+segno.make("Azərbaycan", encoding="utf-8").save("kod.png", scale=8)
+`,
+    piece: piece(
+      L(
+        "QR kod ə hərfinı qəbul etmir",
+        "A QR code will not take the letter ə",
+        "QR kod ə harfini kabul etmiyor",
+        "رمز QR لا يقبل حرف ə",
+        "QR-код не принимает букву ə",
+      ),
+      L(
+        "Köhnə QR kitabxanası mətni `latin-1` ilə yazır. `ə` o cədvəldə yoxdur. Kitabxana ya xəta atır (`latin-1 codec can't encode`), ya da hərfin yerinə `?` qoyur.\n\nUTF-8 bayt rejimi hərfi saxlayır. Şəkil düzdürsə və köhnə oxuyucu `É™` göstərirsə, oxuyucu baytı səhv cədvəllə açır. İndiki telefon kamerası UTF-8 oxuyur.",
+        "An old QR library writes the text as `latin-1`. `ə` is not in that table. The library either throws (`latin-1 codec can't encode`) or puts `?` in place of the letter.\n\nUTF-8 byte mode keeps the letter. If the picture is right and an old scanner shows `É™`, the scanner is opening the bytes with the wrong table. A current phone camera reads UTF-8.",
+        "Eski bir QR kitaplığı metni `latin-1` ile yazar. `ə` o tabloda yoktur. Kitaplık ya hata verir (`latin-1 codec can't encode`) ya da harfin yerine `?` koyar.\n\nUTF-8 bayt kipi harfi saklar. Resim doğruysa ve eski okuyucu `É™` gösteriyorsa okuyucu baytı yanlış tabloyla açıyordur. Günümüz telefon kamerası UTF-8 okur.",
+        "مكتبة QR قديمة تكتب النص بـ `latin-1`. حرف `ə` ليس في ذلك الجدول. المكتبة إما ترمي خطأ (`latin-1 codec can't encode`) أو تضع `?` مكان الحرف.\n\nوضع بايت UTF-8 يحفظ الحرف. إذا كانت الصورة صحيحة وأظهر قارئ قديم `É™` فالقارئ يفتح البايت بالجدول الخطأ. كاميرا الهاتف الحالية تقرأ UTF-8.",
+        "Старая библиотека QR пишет текст как `latin-1`. Буквы `ə` в той таблице нет. Библиотека либо бросает ошибку (`latin-1 codec can't encode`), либо ставит `?` вместо буквы.\n\nБайтовый режим UTF-8 букву сохраняет. Если картинка верна, а старый сканер показывает `É™`, сканер открывает байты не той таблицей. Камера нынешнего телефона читает UTF-8.",
+      ),
+      {
+        az: [
+          "`segno.make(\"Azərbaycan\", encoding=\"utf-8\")` hərfi şəklin içinə qoyur.",
+          "`latin-1 codec can't encode` görsən, kitabxana `ə` qəbul etmir. Hərfi silmə, kitabxananı dəyiş.",
+          "Mətndə hərf əvəzinə `?` varsa, şəkil artıq xarabdır. UTF-8 ilə yenidən yarat.",
+          "Köhnə skaner `É™` göstərirsə, şəkil pozulmayıb. Skaner baytı səhv oxuyur.",
+          "Linkin içindəki `ə` ünvanın hissəsidir. Onu da UTF-8 saxla, `e` ilə əvəz etmə.",
+        ],
+        en: [
+          "`segno.make(\"Azərbaycan\", encoding=\"utf-8\")` puts the letter inside the picture.",
+          "If you see `latin-1 codec can't encode`, the library will not take `ə`. Do not delete the letter. Change the library.",
+          "If the text has `?` instead of the letter, the picture is already broken. Make it again in UTF-8.",
+          "If an old scanner shows `É™`, the picture is not broken. The scanner is reading the bytes wrong.",
+          "An `ə` inside a link is part of the address. Keep that as UTF-8 too. Do not replace it with `e`.",
+        ],
+        tr: [
+          "`segno.make(\"Azərbaycan\", encoding=\"utf-8\")` harfi resmin içine koyar.",
+          "`latin-1 codec can't encode` görürsen kitaplık `ə` kabul etmiyor. Harfi silme, kitaplığı değiştir.",
+          "Metinde harf yerine `?` varsa resim çoktan bozuktur. UTF-8 ile yeniden üret.",
+          "Eski tarayıcı `É™` gösteriyorsa resim bozulmamıştır. Tarayıcı baytı yanlış okur.",
+          "Bağlantının içindeki `ə` adresin parçasıdır. Onu da UTF-8 tut, `e` ile değiştirme.",
+        ],
+        ar: [
+          "`segno.make(\"Azərbaycan\", encoding=\"utf-8\")` يضع الحرف داخل الصورة.",
+          "إذا رأيت `latin-1 codec can't encode` فالمكتبة لا تقبل `ə`. لا تحذف الحرف. غيّر المكتبة.",
+          "إذا كان في النص `?` بدل الحرف فالصورة فاسدة أصلًا. أعد صنعها بـ UTF-8.",
+          "إذا أظهر ماسح قديم `É™` فالصورة ليست فاسدة. الماسح يقرأ البايت خطأ.",
+          "`ə` داخل الرابط جزء من العنوان. أبقها UTF-8 أيضًا ولا تستبدلها بـ `e`.",
+        ],
+        ru: [
+          "`segno.make(\"Azərbaycan\", encoding=\"utf-8\")` кладёт букву внутрь картинки.",
+          "Если видишь `latin-1 codec can't encode`, библиотека не принимает `ə`. Букву не удаляй, смени библиотеку.",
+          "Если в тексте вместо буквы `?`, картинка уже испорчена. Создай её заново в UTF-8.",
+          "Если старый сканер показывает `É™`, картинка не испорчена. Сканер неверно читает байты.",
+          "`ə` внутри ссылки — часть адреса. Её тоже держи в UTF-8 и не заменяй на `e`.",
+        ],
+      },
+    ),
+  },
 ] as const;
