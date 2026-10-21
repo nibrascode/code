@@ -746,4 +746,75 @@ print(qaliq(POZUK))
       },
     ),
   },
+  {
+    slug: "voen",
+    code: `def forma(voen: str) -> str:
+    metn = voen.replace(" ", "")
+    if not (len(metn) == 10 and metn.isdigit()):
+        raise ValueError("10 reqem")
+    son = metn[9]
+    if son == "1":
+        return "huquqi"
+    if son == "2":
+        return "fiziki"
+    raise ValueError("status")
+
+# Verilməmiş nömrələrdir. Yalnız son rəqəmi göstərir.
+print(forma("0000000001"))
+print(forma("0000000002"))
+`,
+    piece: piece(
+      L(
+        "VÖEN-in doqquzuncu rəqəmi hesablanmır",
+        "The ninth digit of a VÖEN cannot be calculated",
+        "VÖEN'in dokuzuncu rakamı hesaplanmaz",
+        "الرقم التاسع في VÖEN لا يُحسب",
+        "Девятую цифру VÖEN посчитать нельзя",
+      ),
+      L(
+        "Vergi uçotu qaydası VÖEN-i on rəqəm sayır. İlk iki rəqəm ərazidir. Sonrakı altı rəqəm sıra nömrəsidir. Doqquzuncu rəqəmi vergi proqramı xüsusi alqoritmlə qoyur. Onuncu rəqəm statusdur.\n\nAlqoritm dərc olunmayıb. Proqram doqquzuncu rəqəmi düzəldə bilməz və onu yoxlaya da bilməz. Uydurma düstur yazmaq olmaz.\n\nSəhifədəki `0000000001` və `0000000002` verilmiş nömrə deyil. Heç kimin VÖEN-i deyil. Yalnız son rəqəmin yerini göstərir: `1` hüquqi şəxs, `2` fiziki şəxs.\n\nBəzi səhifələr eyni on rəqəmi 2+5+1+2 bölür və son iki rəqəmi status sayır. Qayda belə bölmür. Status bir rəqəmdir, onuncudur.",
+        "The tax registration rule counts a VÖEN as ten digits. The first two digits are the territory. The next six digits are the serial number. The tax program sets the ninth digit with a special algorithm. The tenth digit is the status.\n\nThe algorithm is not published. A program cannot repair the ninth digit and cannot check it either. Do not write an invented formula.\n\n`0000000001` and `0000000002` on this page are not issued numbers. They are nobody's VÖEN. They only show the place of the last digit: `1` is a legal person, `2` is a natural person.\n\nSome pages split the same ten digits as 2+5+1+2 and treat the last two digits as the status. The rule does not split it that way. The status is one digit, the tenth.",
+        "Vergi kayıt kuralı VÖEN'i on rakam sayar. İlk iki rakam bölgedir. Sonraki altı rakam sıra numarasıdır. Dokuzuncu rakamı vergi programı özel bir algoritmayla koyar. Onuncu rakam statüdür.\n\nAlgoritma yayımlanmamıştır. Program dokuzuncu rakamı düzeltemez ve onu yoklayamaz da. Uydurma formül yazılmaz.\n\nSayfadaki `0000000001` ve `0000000002` verilmiş numara değildir. Kimsenin VÖEN'i değildir. Yalnız son rakamın yerini gösterir: `1` tüzel kişi, `2` gerçek kişi.\n\nBazı sayfalar aynı on rakamı 2+5+1+2 böler ve son iki rakamı statü sayar. Kural böyle bölmez. Statü bir rakamdır, onuncusudur.",
+        "قاعدة التسجيل الضريبي تعدّ VÖEN عشرة أرقام. الرقمان الأولان للمنطقة. والأرقام الستة التالية رقم تسلسلي. برنامج الضريبة يضع الرقم التاسع بخوارزمية خاصة. الرقم العاشر هو الصفة.\n\nالخوارزمية غير منشورة. البرنامج لا يستطيع إصلاح الرقم التاسع ولا فحصه. لا تُكتب معادلة مخترعة.\n\n`0000000001` و`0000000002` في هذه الصفحة ليسا رقمين صادرين. ليسا VÖEN لأحد. هما يُظهران مكان الرقم الأخير فقط: `1` شخص اعتباري، و`2` شخص طبيعي.\n\nبعض الصفحات تقسم العشرة نفسها 2+5+1+2 وتعدّ الرقمين الأخيرين صفة. القاعدة لا تقسم هكذا. الصفة رقم واحد، وهو العاشر.",
+        "Правило налогового учёта считает VÖEN десятью цифрами. Первые две цифры — территория. Следующие шесть — порядковый номер. Девятую цифру налоговая программа ставит особым алгоритмом. Десятая цифра — статус.\n\nАлгоритм не опубликован. Программа не может починить девятую цифру и не может её проверить. Выдуманную формулу писать нельзя.\n\n`0000000001` и `0000000002` на этой странице — не выданные номера. Это ничей VÖEN. Они только показывают место последней цифры: `1` — юридическое лицо, `2` — физическое лицо.\n\nНекоторые страницы делят те же десять цифр как 2+5+1+2 и считают статусом две последние цифры. Правило так не делит. Статус — одна цифра, десятая.",
+      ),
+      {
+        az: [
+          "Kod `huquqi`, sonra `fiziki` yazır. Hər ikisi formadır. Nömrə verilməyib.",
+          "Doqquz rəqəm və hərf `10 reqem` xətası verir. VÖEN-də hərf olmur.",
+          "Son rəqəm `1` və `2`-dən başqadırsa, `status` xətası verir. Doqquzuncu rəqəm bu yoxlamada iştirak etmir.",
+          "FİN başqa nömrədir. Yeddi işarədir və hərf ola bilər. Onu VÖEN yerinə yazma.",
+          "Forma düz olsa da ödəyici aktiv olmaya bilər. Bunu vergi xidmətinin açıq axtarışı göstərir. Real VÖEN-i bu səhifəyə yazma.",
+        ],
+        en: [
+          "The code prints `huquqi`, then `fiziki`. Both are only the form. The numbers were not issued.",
+          "Nine digits or a letter raise `10 reqem`. A VÖEN has no letter.",
+          "If the last digit is not `1` or `2`, the code raises `status`. The ninth digit takes no part in this check.",
+          "A FİN is a different number. It has seven characters and may include a letter. Do not write it in place of a VÖEN.",
+          "The form can be right and the taxpayer can still be inactive. The tax service's open search shows that. Do not write a real VÖEN on this page.",
+        ],
+        tr: [
+          "Kod `huquqi`, sonra `fiziki` yazar. İkisi de yalnızca biçimdir. Numara verilmemiştir.",
+          "Dokuz rakam ve harf `10 reqem` hatası verir. VÖEN'de harf olmaz.",
+          "Son rakam `1` ve `2` dışında ise `status` hatası verir. Dokuzuncu rakam bu yoklamaya katılmaz.",
+          "FİN başka bir numaradır. Yedi işarettir ve harf olabilir. Onu VÖEN yerine yazma.",
+          "Biçim doğru olsa da mükellef aktif olmayabilir. Bunu vergi hizmetinin açık araması gösterir. Gerçek VÖEN'i bu sayfaya yazma.",
+        ],
+        ar: [
+          "الرمز يطبع `huquqi` ثم `fiziki`. كلاهما شكل فقط. الرقمان لم يُصدرا.",
+          "تسعة أرقام أو حرف يُعطي خطأ `10 reqem`. ليس في VÖEN حرف.",
+          "إذا لم يكن الرقم الأخير `1` أو `2` فالرمز يُعطي خطأ `status`. الرقم التاسع لا يدخل في هذا الفحص.",
+          "FİN رقم آخر. هو سبعة رموز وقد فيه حرف. لا تكتبه مكان VÖEN.",
+          "قد يصح الشكل ويبقى المكلف غير نشط. بحث مصلحة الضرائب المفتوح يُظهر ذلك. لا تكتب VÖEN حقيقيًا في هذه الصفحة.",
+        ],
+        ru: [
+          "Код печатает `huquqi`, потом `fiziki`. Оба ответа только про форму. Номера не выдавались.",
+          "Девять цифр и буква дают ошибку `10 reqem`. В VÖEN буквы нет.",
+          "Если последняя цифра не `1` и не `2`, код даёт ошибку `status`. Девятая цифра в этой проверке не участвует.",
+          "FİN — другой номер. В нём семь знаков, и буква допустима. Не пиши его вместо VÖEN.",
+          "Форма может быть верной, а плательщик неактивным. Это показывает открытый поиск налоговой. Настоящий VÖEN на эту страницу не пиши.",
+        ],
+      },
+    ),
+  },
 ] as const;

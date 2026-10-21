@@ -986,6 +986,14 @@ const IBAN_SAMPLE: Record<Lang, string> = {
   ru: "Проверить образец IBAN",
 };
 
+const VOEN_FORM: Record<Lang, string> = {
+  az: "VÖEN-in doqquzuncu rəqəmi hesablanmır",
+  en: "The ninth digit of a VÖEN cannot be calculated",
+  tr: "VÖEN'in dokuzuncu rakamı hesaplanmaz",
+  ar: "الرقم التاسع في VÖEN لا يُحسب",
+  ru: "Девятую цифру VÖEN посчитать нельзя",
+};
+
 export function ProgrammingArticle({
   slug,
   title,
@@ -1083,6 +1091,11 @@ export function ProgrammingArticle({
       {slug === "python" || slug === "python-qurasdir" ? (
         <p className="prog-try">
           <a href={searchTopicPath(lang, "xeta", "iban")}>{IBAN_SAMPLE[lang]}</a>
+        </p>
+      ) : null}
+      {slug === "python" || slug === "python-qurasdir" ? (
+        <p className="prog-try">
+          <a href={searchTopicPath(lang, "xeta", "voen")}>{VOEN_FORM[lang]}</a>
         </p>
       ) : null}
       {slug === "java" || slug === "java-qurasdir" ? (
