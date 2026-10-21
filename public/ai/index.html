@@ -2916,7 +2916,7 @@
       let js = files.filter(function (file) { return /\.js$/.test(file.path); })[0];
       if (!js) {
         js = { path: "app.js", content: "" };
-        if (files.length < 4) files.push(js);
+        if (files.length < 12) files.push(js);
       }
       if (js && js.content.indexOf("data-win") < 0) {
         js.content = scene3d();
@@ -3146,23 +3146,33 @@
       return lines.slice(Math.max(0, best - 6), best + 10).join("\n").slice(0, 380);
     }
     function wireFiles(files) {
-      const html = files.filter(function (file) { return /(^|\/)index\.html$/.test(file.path); })[0] || files.filter(function (file) { return /\.html?$/.test(file.path); })[0];
-      if (!html) return [];
+      const htmls = files.filter(function (file) { return /\.html?$/i.test(file.path); });
+      if (!htmls.length) return [];
       const notes = [];
       const close = "<" + "/script>";
-      files.forEach(function (file) {
-        if (file === html || html.content.indexOf(file.path) >= 0) return;
-        if (/\.css$/.test(file.path)) {
-          const tag = '<link rel="stylesheet" href="' + file.path + '">';
-          if (/<\/head>/i.test(html.content)) html.content = html.content.replace(/<\/head>/i, tag + "\n</head>");
-          else html.content = tag + "\n" + html.content;
-          notes.push(file.path);
-        }
-        if (/\.js$/.test(file.path)) {
-          const tag = '<script src="' + file.path + '">' + close;
-          if (/<\/body>/i.test(html.content)) html.content = html.content.replace(/<\/body>/i, tag + "\n</body>");
-          else html.content += "\n" + tag;
-          notes.push(file.path);
+      const nav = "<nav class=\"site\">" + htmls.map(function (file) {
+        return "<a href=\"" + file.path + "\">" + pageTitle(file.path) + "</a>";
+      }).join("") + "</nav>";
+      htmls.forEach(function (html) {
+        files.forEach(function (file) {
+          if (file === html || html.content.indexOf(file.path) >= 0) return;
+          if (/\.css$/i.test(file.path)) {
+            const tag = "<link rel=\"stylesheet\" href=\"" + file.path + "\">";
+            if (/<\/head>/i.test(html.content)) html.content = html.content.replace(/<\/head>/i, tag + "\n</head>");
+            else html.content = tag + "\n" + html.content;
+            notes.push(file.path);
+          }
+          if (/\.js$/i.test(file.path)) {
+            const tag = "<script src=\"" + file.path + "\">" + close;
+            if (/<\/body>/i.test(html.content)) html.content = html.content.replace(/<\/body>/i, tag + "\n</body>");
+            else html.content += "\n" + tag;
+            notes.push(file.path);
+          }
+        });
+        if (htmls.length > 1 && html.content.indexOf("class=\"site\"") < 0) {
+          if (/<body[^>]*>/i.test(html.content)) html.content = html.content.replace(/<body[^>]*>/i, function (m) { return m + "\n" + nav; });
+          else html.content = nav + "\n" + html.content;
+          notes.push(html.path);
         }
       });
       return notes;
@@ -3198,11 +3208,11 @@
       const block = /===FILE:\s*([^\n=]+)===\s*([\s\S]*?)===END===/g;
       let m;
       while ((m = block.exec(text))) add(m[1], m[2]);
-      if (out.length) return out.slice(0, 4);
+      if (out.length) return out.slice(0, 12);
       const fence = /```([a-zA-Z0-9.+#-]*)[ \t]*([^\n`]*)\n([\s\S]*?)```/g;
       const ext = { html: "index.html", css: "style.css", javascript: "app.js", js: "app.js", python: "main.py", py: "main.py", typescript: "app.ts", ts: "app.ts" };
       while ((m = fence.exec(text))) add(m[2] || ext[(m[1] || "").toLowerCase()] || "file.txt", m[3]);
-      return out.slice(0, 4);
+      return out.slice(0, 12);
     }
     function wantsBuild(text) {
       if (wants3d(text)) return true;
@@ -3301,26 +3311,40 @@
           doc = doc.replace(new RegExp("<script\\b[^>]*src=[\"']" + name + "[\"'][^>]*>\\s*" + closeTag, "i"), "<script>" + file.content.replace(new RegExp(closeTag.slice(0, 1) + "/" + "script", "gi"), "<\\" + "/script") + closeTag);
         }
       });
+      const pages = files.filter(function (file) { return file !== htmlFile && /\.html?$/i.test(file.path); });
+      if (pages.length) {
+        const blocks = pages.map(function (file) {
+          const main = (file.content.match(/<main[\s\S]*?<\/main>/i) || [""])[0];
+          const id = file.path.replace(/\.html?$/i, "");
+          return "<section id=\"" + id + "\">" + main + "</section>";
+        }).join("\n");
+        if (/<\/body>/i.test(doc)) doc = doc.replace(/<\/body>/i, blocks + "\n</body>");
+        else doc += blocks;
+        doc = doc.replace(/href="([a-z0-9_-]+)\.html"/gi, "href=\"#$1\"");
+      }
       return doc;
     }
     function pushPreview(files) {
       const html = buildPreview(files);
-      const el = document.createElement("div");
-      el.className = "msg b step " + (html ? "ok" : "run");
-      el.setAttribute("dir", "auto");
-      const title = document.createElement("b");
-      title.textContent = html ? t("see") : t("nosee");
-      el.appendChild(title);
-      if (html) {
-        const frame = document.createElement("iframe");
-        frame.className = "preview";
-        frame.setAttribute("sandbox", "allow-scripts");
-        frame.title = t("see");
-        frame.src = URL.createObjectURL(new Blob([html], { type: "text/html" }));
-        el.appendChild(frame);
-      }
-      msgs.appendChild(el);
-      msgs.scrollTop = msgs.scrollHeight;
+      stepChain = stepChain.then(async function () {
+        const el = document.createElement("div");
+        el.className = "msg b step " + (html ? "ok" : "run");
+        el.setAttribute("dir", "auto");
+        const title = document.createElement("b");
+        title.textContent = html ? t("see") : t("nosee");
+        el.appendChild(title);
+        if (html) {
+          const frame = document.createElement("iframe");
+          frame.className = "preview";
+          frame.setAttribute("sandbox", "allow-scripts");
+          frame.title = t("see");
+          frame.src = URL.createObjectURL(new Blob([html], { type: "text/html" }));
+          el.appendChild(frame);
+        }
+        msgs.appendChild(el);
+        msgs.scrollTop = msgs.scrollHeight;
+        await pause(200);
+      }).catch(function () {});
       return !!html;
     }
     function pushZip(files) {
@@ -3342,15 +3366,18 @@
       });
       el.appendChild(document.createElement("br"));
       el.appendChild(button);
-      msgs.appendChild(el);
-      msgs.scrollTop = msgs.scrollHeight;
+      stepChain = stepChain.then(async function () {
+        msgs.appendChild(el);
+        msgs.scrollTop = msgs.scrollHeight;
+        await pause(160);
+      }).catch(function () {});
     }
     let layiheProject = null;
     try { layiheProject = JSON.parse(sessionStorage.getItem("nibras_layihe_v1") || "null"); } catch (e) { layiheProject = null; }
     function saveProject(files, task) {
       layiheProject = {
         task: String(task || "").slice(0, 500),
-        files: files.slice(0, 4).map(function (file) { return { path: file.path, content: String(file.content || "").slice(0, 20000) }; })
+        files: files.slice(0, 12).map(function (file) { return { path: file.path, content: String(file.content || "").slice(0, 20000) }; })
       };
       try { sessionStorage.setItem("nibras_layihe_v1", JSON.stringify(layiheProject)); } catch (e) {}
       paintDock();
@@ -3416,12 +3443,33 @@
       if (isFresh(text) || isReview(text)) return false;
       return text.length < 420 || /(elave|duzelt|deyis|sil\b|reng|boyut|fix|add |change|update|dark|tund|duyme|yenile)/.test(foldTask(text));
     }
+    function isSite(task) {
+      const s = foldTask(task);
+      if (/kalkul|hesablayici|todo|python/.test(s) && !/sayt|bolme/.test(s)) return false;
+      return /sayt|veb|website|bolme|section|sehifeler/.test(s);
+    }
+    function pageTitle(path) {
+      const map = { "index.html": "Ana", "haqqinda.html": "Haqqında", "xidmet.html": "Xidmət", "elaqe.html": "Əlaqə", "qiymet.html": "Qiymət", "blog.html": "Bloq", "qalereya.html": "Qalereya", "komanda.html": "Komanda", "mehsul.html": "Məhsul" };
+      return map[path] || String(path || "").replace(/\.html?$/i, "");
+    }
+    function sitePages(task, deep) {
+      const s = foldTask(task + " " + ((deep && deep.PARTS) || ""));
+      const pages = ["index.html"];
+      [[/haqq|about/, "haqqinda.html"], [/xidmet|service/, "xidmet.html"], [/elaqe|contact/, "elaqe.html"], [/qiymet|price/, "qiymet.html"], [/blog|xeber/, "blog.html"], [/qalereya|gallery/, "qalereya.html"], [/komanda|team/, "komanda.html"], [/mehsul|magaza|shop/, "mehsul.html"]].forEach(function (pair) {
+        if (pair[0].test(s)) pages.push(pair[1]);
+      });
+      if (pages.length === 1) ["haqqinda.html", "xidmet.html", "elaqe.html"].forEach(function (name) { pages.push(name); });
+      else ["haqqinda.html", "xidmet.html", "elaqe.html"].forEach(function (name) {
+        if (pages.length < 4 && pages.indexOf(name) < 0) pages.push(name);
+      });
+      return pages;
+    }
     function expandFiles(task, deep) {
       const seen = {};
       const out = [];
       function add(name) {
         const path = safePath(String(name || "").trim().split(/\s+/)[0]);
-        if (!path || seen[path] || out.length >= 4) return;
+        if (!path || seen[path] || out.length >= 12) return;
         seen[path] = 1;
         out.push(path);
       }
@@ -3434,7 +3482,8 @@
       const web = /html|css|sehife|sayt|hesab|kalkul|chat|cat|siyah|todo|form|duym|oyun|page|site/.test(s) || out.some(function (name) { return /\.html?$/.test(name); });
       const py = /python|piton|пайтон|بايثون/.test(String(task || "").toLowerCase()) || out.some(function (name) { return /\.py$/.test(name); });
       if (py && !out.length) add("main.py");
-      if (web) {
+      if (isSite(task)) sitePages(task, deep).forEach(add);
+      if (web || isSite(task)) {
         if (!out.some(function (name) { return /\.html?$/.test(name); })) add("index.html");
         if (!out.some(function (name) { return /\.css$/.test(name); })) add("style.css");
         if (!out.some(function (name) { return /\.js$/.test(name); })) add("app.js");
@@ -3443,7 +3492,7 @@
         if (py) add("main.py");
         else ["index.html", "style.css", "app.js"].forEach(add);
       }
-      return out.slice(0, 4);
+      return out.slice(0, 12);
     }
     function looksLikeCode(path, text) {
       const s = String(text || "");
@@ -3472,13 +3521,32 @@
       const kind = foldTask(task);
       const end = "<" + "/script>";
       if (/\.html?$/i.test(path)) {
+        const known = {
+          "index.html": ["Ana səhifə", "Saytın giriş bölməsidir."],
+          "haqqinda.html": ["Haqqında", "Bu bölmə saytın kimliyini anlatır."],
+          "xidmet.html": ["Xidmətlər", "Hər xidmət ayrı sətirdədir."],
+          "qiymet.html": ["Qiymət", "Paketlər bu bölmədədir."],
+          "blog.html": ["Bloq", "Yazılar bu bölmədədir."],
+          "qalereya.html": ["Qalereya", "Nümunələr bu bölmədədir."],
+          "komanda.html": ["Komanda", "İnsanlar bu bölmədədir."],
+          "mehsul.html": ["Məhsullar", "Məhsullar bu bölmədədir."]
+        }[path];
+        const lists = { "xidmet.html": ["Plan", "Dizayn", "Kod"], "qiymet.html": ["Sadə", "Standart", "Tam"], "komanda.html": ["Dizayn", "Kod", "Məzmun"], "mehsul.html": ["Birinci", "İkinci", "Üçüncü"] };
+        if (isSite(task) && (known || path === "elaqe.html")) {
+          const head = known ? known[0] : "Əlaqə";
+          let inner = path === "elaqe.html"
+            ? "<form><label>Ad<input name=\"ad\"></label><label>Mesaj<textarea name=\"mesaj\"></textarea></label><button type=\"button\" id=\"go\">Göndər</button><p id=\"out\"></p></form>"
+            : "<p>" + (known ? known[1] : title) + "</p>";
+          if (lists[path]) inner += "<ul>" + lists[path].map(function (item) { return "<li>" + item + "</li>"; }).join("") + "</ul>";
+          return "<!DOCTYPE html>\n<html lang=\"az\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>" + head + "</title>\n<link rel=\"stylesheet\" href=\"style.css\">\n</head>\n<body>\n<main>\n<h1>" + head + "</h1>\n" + inner + "\n</main>\n<script src=\"app.js\">" + end + "\n</body>\n</html>\n";
+        }
         let fields = "<label>Mətn<input id=\"q\"></label>\n<button type=\"button\" id=\"go\">Göstər</button>\n<p id=\"out\"></p>";
         if (/hesab|kalkul|topla/.test(kind)) fields = "<label>Birinci<input id=\"a\" inputmode=\"decimal\"></label>\n<label>İkinci<input id=\"b\" inputmode=\"decimal\"></label>\n<button type=\"button\" id=\"go\">Topla</button>\n<p id=\"out\"></p>";
         if (/siyah|todo|elave/.test(kind)) fields = "<label>Maddə<input id=\"q\"></label>\n<button type=\"button\" id=\"go\">Əlavə et</button>\n<ul id=\"list\"></ul>";
         if (wants3d(task)) fields = "<canvas id=\"scene\"></canvas>";
         return "<!DOCTYPE html>\n<html lang=\"az\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>" + title + "</title>\n<link rel=\"stylesheet\" href=\"style.css\">\n</head>\n<body>\n<main>\n<h1>" + title + "</h1>\n" + fields + "\n</main>\n<script src=\"app.js\">" + end + "\n</body>\n</html>\n";
       }
-      if (/\.css$/i.test(path)) return "h1{margin:0 0 12px}\n#out{min-height:1.4em;font-weight:700}\nul{padding-left:18px}\n";
+      if (/\.css$/i.test(path)) return "nav.site{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}nav.site a{color:#9db7ff;text-decoration:none;min-height:44px;display:inline-flex;align-items:center}h1{margin:0 0 12px}#out{min-height:1.4em;font-weight:700}ul{padding-left:18px}section{margin:20px 0}\n";
       if (/\.js$/i.test(path)) {
         if (wants3d(task)) return scene3d();
         if (/hesab|kalkul|topla/.test(kind)) return "(function(){\nvar a=document.getElementById(\"a\"),b=document.getElementById(\"b\"),out=document.getElementById(\"out\"),go=document.getElementById(\"go\");\nif(!go||!out)return;\ngo.addEventListener(\"click\",function(){var x=parseFloat(a&&a.value),y=parseFloat(b&&b.value);out.textContent=isNaN(x)||isNaN(y)?\"Rəqəm yaz\":String(x+y);});\n})();\n";
@@ -3498,11 +3566,11 @@
         notes.push(file.path);
       });
       const html = files.filter(function (file) { return /\.html?$/i.test(file.path); })[0];
-      if (html && !files.some(function (file) { return /\.css$/i.test(file.path); }) && files.length < 4) {
+      if (html && !files.some(function (file) { return /\.css$/i.test(file.path); }) && files.length < 12) {
         files.push({ path: "style.css", content: localFile("style.css", task) });
         notes.push("style.css");
       }
-      if (html && !files.some(function (file) { return /\.js$/i.test(file.path); }) && files.length < 4 && !wants3d(task)) {
+      if (html && !files.some(function (file) { return /\.js$/i.test(file.path); }) && files.length < 12 && !wants3d(task)) {
         files.push({ path: "app.js", content: localFile("app.js", task) });
         notes.push("app.js");
       }
@@ -3510,9 +3578,9 @@
     }
     async function writeOne(task, deep, path, others, built) {
       const brief = ["GOAL", "OUTPUT", "RISK"].map(function (key) { return deep[key] ? key + ": " + deep[key] : ""; }).filter(Boolean).join(" | ").slice(0, 180);
-      const sketch = (built || []).map(function (file) { return file.path + ":" + file.content.replace(/\s+/g, " ").slice(0, 70); }).join(" | ").slice(0, 160);
       const extra = wants3d(task) ? "3D: canvas id=scene. İşıqlı kürə, orbit, yer, zoom. Kitabxana yox." : "Premium: telefon, 16px, fokus, boş hal. Lorem yox.";
-      const raw = await askModel("Yalnız bu faylı yaz: " + path + "\n===FILE: " + path + "===\nkod\n===END===\nBaşqa fayl yazma. Yalnız kod, izah yox. " + extra + "\nTapşırıq: " + task.slice(0, 100) + "\nTəhlil: " + brief.slice(0, 120) + "\nDigər: " + others.join(", ").slice(0, 40) + (sketch ? "\nArtıq: " + sketch.slice(0, 80) : ""));
+        const role = /\.html?$/i.test(path) ? pageTitle(path) : path;
+        const raw = await askModel("Yalnız bu bölməni yaz: " + path + "\n===FILE: " + path + "===\nkod\n===END===\nBaşqa bölmə yazma. Yalnız kod. Bölmə: " + role + ". " + extra + "\nTapşırıq: " + task.slice(0, 90) + "\nTəhlil: " + brief.slice(0, 100) + "\nDigər: " + others.join(", ").slice(0, 80));
       let code = pickCode(path, raw);
       if (!looksLikeCode(path, code)) code = localFile(path, task);
       if (!code) return null;
@@ -3719,7 +3787,7 @@
         const at = files.findIndex(function (old) { return old.path === file.path; });
         const before = at >= 0 ? files[at].content : "";
         if (at >= 0) files[at] = file;
-        else if (files.length < 4) files.push(file);
+        else if (files.length < 12) files.push(file);
         const delta = file.content.split("\n").length - String(before).split("\n").length;
         pushFile(file);
         pushStep(file.path + ": " + (delta > 0 ? "+" : "") + delta + " " + t("rows"), "ok");
@@ -3749,6 +3817,7 @@
       log.push(t("work") + ": " + names.join(", "));
       const files = [];
       for (let i = 0; i < names.length; i++) {
+        if (i) await pause(450);
         const step = pushStep(t("writing") + ": " + names[i] + " — " + t("wait"), "run");
         const file = await writeOne(task, deep, names[i], names.filter(function (name) { return name !== names[i]; }), files);
         if (!file) {
