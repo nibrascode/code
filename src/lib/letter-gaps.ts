@@ -675,4 +675,75 @@ segno.make("Azərbaycan", encoding="utf-8").save("kod.png", scale=8)
       },
     ),
   },
+  {
+    slug: "iban",
+    code: `NUMUNE = "AZ84NABZ00000000137010002944"
+# Eyni nümunədir. Yalnız son rəqəm dəyişib. Hesab deyil.
+POZUK = "AZ84NABZ00000000137010002945"
+
+def qaliq(iban: str) -> int:
+    metn = iban.replace(" ", "").upper()
+    if not (len(metn) == 28 and metn.startswith("AZ")):
+        raise ValueError("format")
+    kecmis = metn[4:] + metn[:4]
+    reqem = "".join(str(ord(h) - 55) if h.isalpha() else h for h in kecmis)
+    return int(reqem) % 97
+
+print(qaliq(NUMUNE))
+print(qaliq(POZUK))
+`,
+    piece: piece(
+      L(
+        "Azərbaycan IBAN nümunəsi necə yoxlanır",
+        "How to check the Azerbaijan IBAN sample",
+        "Azerbaycan IBAN örneği nasıl yoklanır",
+        "كيف يُفحص نموذج IBAN لأذربيجان",
+        "Как проверяется образец IBAN Азербайджана",
+      ),
+      L(
+        "Səhifədə bir nömrə var: `AZ84NABZ00000000137010002944`. Bu, Mərkəzi Bankın qaydasındakı hesablama nümunəsidir. Hesab deyil. Pul göndərilmir.\n\nİkinci sətir həmin nümunənin özüdür, yalnız son rəqəm dəyişib. O da hesab deyil.\n\nNümunə 28 simvoldur. `AZ` ölkədir. Sonrakı iki rəqəm nəzarətdir. Sonra dörd hərf gəlir. Qalan 20 simvol hesab yeridir. Qısa olanda əvvəlinə sıfır yazılır.\n\nYoxlama ISO 7064 qaydası ilədir, MOD 97-10. İlk dörd simvol sona keçir. Hərf rəqəm olur: `A` 10-dur, `Z` 35-dir. Alınan ədəd 97-yə bölünür. Qalıq 1-dirsə nəzarət rəqəmi düzdür. Bu, hesabın var olduğunu göstərmir.",
+        "There is one number on this page: `AZ84NABZ00000000137010002944`. It is the calculation sample in the Central Bank's rule. It is not an account. No money is sent to it.\n\nThe second line is that same sample with only the last digit changed. That is not an account either.\n\nThe sample is 28 characters. `AZ` is the country. The next two digits are the check. Then come four letters. The remaining 20 characters are the account place. If it is short, zeros are written at the front.\n\nThe check follows ISO 7064, MOD 97-10. The first four characters move to the end. A letter becomes a number: `A` is 10, `Z` is 35. The resulting number is divided by 97. If the remainder is 1, the check digits are right. This does not show that an account exists.",
+        "Sayfada bir numara var: `AZ84NABZ00000000137010002944`. Bu, Merkez Bankası kuralındaki hesaplama örneğidir. Hesap değildir. Para gönderilmez.\n\nİkinci satır aynı örneğin kendisidir, yalnızca son rakam değişmiştir. O da hesap değildir.\n\nÖrnek 28 simvoldur. `AZ` ülkedir. Sonraki iki rakam denetimdir. Sonra dört harf gelir. Kalan 20 simvol hesap yeridir. Kısa olunca başına sıfır yazılır.\n\nYoklama ISO 7064 kuralıyadır, MOD 97-10. İlk dört simvol sona geçer. Harf rakam olur: `A` 10'dur, `Z` 35'tir. Çıkan sayı 97'ye bölünür. Kalan 1 ise denetim rakamı doğrudur. Bu, hesabın var olduğunu göstermez.",
+        "في الصفحة رقم واحد: `AZ84NABZ00000000137010002944`. هذا مثال الحساب المنشور في قاعدة البنك المركزي. ليس حسابًا. لا يُرسل إليه مال.\n\nالسطر الثاني هو النموذج نفسه، وتغيّر فيه الرقم الأخير فقط. وهو ليس حسابًا أيضًا.\n\nالنموذج 28 رمزًا. `AZ` هي البلد. الرقمان التاليان للتحقق. ثم تأتي أربعة أحرف. والرموز العشرون الباقية مكان الحساب. إذا قصُر يُكتب صفر في أوله.\n\nالفحص بقاعدة ISO 7064، أي MOD 97-10. الرموز الأربعة الأولى تنتقل إلى الآخر. الحرف يصير رقمًا: `A` هو 10، و`Z` هو 35. العدد الناتج يُقسم على 97. إذا كان الباقي 1 فأرقام التحقق صحيحة. هذا لا يُظهر أن الحساب موجود.",
+        "На странице один номер: `AZ84NABZ00000000137010002944`. Это образец расчёта из правила Центрального банка. Это не счёт. Деньги на него не отправляют.\n\nВторая строка — тот же образец, изменена только последняя цифра. Это тоже не счёт.\n\nОбразец из 28 знаков. `AZ` — страна. Следующие две цифры — контроль. Потом идут четыре буквы. Остальные 20 знаков — место счёта. Если оно короткое, спереди пишут нули.\n\nПроверка по ISO 7064, MOD 97-10. Первые четыре знака уходят в конец. Буква становится числом: `A` это 10, `Z` это 35. Полученное число делят на 97. Если остаток 1, контрольные цифры верны. Это не показывает, что счёт существует.",
+      ),
+      {
+        az: [
+          "Kod əvvəl `1` yazır. Nümunənin nəzarət rəqəmi düzdür.",
+          "İkinci rəqəm `28`-dir. Son simvol dəyişəndə qalıq 1 olmur. Səhv tutmaq üçün bu bəsdir.",
+          "Nümunənin ortasındakı dörd hərf də nümunənin hissəsidir. Heç kimə köçürmə ünvanı deyil.",
+          "Öz proqramında öz nömrəni yoxlaya bilərsən. Həmin nömrəni səhifəyə, çata və nümunəyə yazma.",
+          "Qalıq 1 olsa belə bankdan yoxlamadan böyük məbləğ göndərmə. Forma düz ola bilər, hesab bağlı ola bilər.",
+        ],
+        en: [
+          "The code first prints `1`. The sample's check digits are right.",
+          "The second number is `28`. When the last character changes, the remainder is not 1. That is enough to catch a typo.",
+          "The four letters in the middle of the sample are part of the sample. They are not an address to pay anyone.",
+          "In your own program you can check your own number. Do not write that number on a page, in a chat, or into the sample.",
+          "Even if the remainder is 1, do not send a large amount without checking with the bank. The form can be right and the account can be closed.",
+        ],
+        tr: [
+          "Kod önce `1` yazar. Örneğin denetim rakamı doğrudur.",
+          "İkinci sayı `28`'dir. Son simvol değişince kalan 1 olmaz. Yanlışı tutmak için bu yeter.",
+          "Örneğin ortasındaki dört harf de örneğin parçasıdır. Kimseye aktarma adresi değildir.",
+          "Kendi programında kendi numaranı yoklayabilirsin. O numarayı sayfaya, sohbete ve örneğe yazma.",
+          "Kalan 1 olsa bile bankadan yoklamadan büyük tutar gönderme. Biçim doğru olabilir, hesap kapalı olabilir.",
+        ],
+        ar: [
+          "الرمز يطبع `1` أولًا. أرقام التحقق في النموذج صحيحة.",
+          "الرقم الثاني `28`. حين يتغيّر الرمز الأخير لا يكون الباقي 1. هذا يكفي لالتقاط الخطأ.",
+          "الأحرف الأربعة في وسط النموذج جزء من النموذج. ليست عنوانًا لتحويل إلى أحد.",
+          "في برنامجك يمكنك فحص رقمك. لا تكتب ذلك الرقم في صفحة ولا في محادثة ولا في النموذج.",
+          "حتى لو كان الباقي 1 فلا ترسل مبلغًا كبيرًا بلا فحص من البنك. قد يصح الشكل ويكون الحساب مغلقًا.",
+        ],
+        ru: [
+          "Код сначала печатает `1`. Контрольные цифры образца верны.",
+          "Второе число — `28`. Когда последний знак меняется, остаток не 1. Этого хватает, чтобы поймать опечатку.",
+          "Четыре буквы в середине образца — часть образца. Это не адрес, чтобы кому-то переводить.",
+          "В своей программе можно проверить свой номер. Этот номер не пиши на страницу, в чат и в образец.",
+          "Даже если остаток 1, не отправляй крупную сумму без проверки в банке. Форма может быть верной, а счёт закрыт.",
+        ],
+      },
+    ),
+  },
 ] as const;

@@ -978,6 +978,14 @@ const QR_SCHWA: Record<Lang, string> = {
   ru: "Если QR-код не принимает ə",
 };
 
+const IBAN_SAMPLE: Record<Lang, string> = {
+  az: "IBAN nümunəsini yoxlamaq",
+  en: "Check the IBAN sample",
+  tr: "IBAN örneğini yoklamak",
+  ar: "فحص نموذج IBAN",
+  ru: "Проверить образец IBAN",
+};
+
 export function ProgrammingArticle({
   slug,
   title,
@@ -1070,6 +1078,11 @@ export function ProgrammingArticle({
       {slug === "python" || slug === "python-qurasdir" ? (
         <p className="prog-try">
           <a href={searchTopicPath(lang, "xeta", "qr-e")}>{QR_SCHWA[lang]}</a>
+        </p>
+      ) : null}
+      {slug === "python" || slug === "python-qurasdir" ? (
+        <p className="prog-try">
+          <a href={searchTopicPath(lang, "xeta", "iban")}>{IBAN_SAMPLE[lang]}</a>
         </p>
       ) : null}
       {slug === "java" || slug === "java-qurasdir" ? (
