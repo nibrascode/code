@@ -1,6 +1,6 @@
 import type { Lang } from "@/lib/i18n";
 
-export const SEARCH_FAQ: Record<"/erase" | "/image" | "/soz-sayi" | "/faiz" | "/wifi", { title: Record<Lang, string>; items: Record<Lang, { q: string; a: string }[]> }> = {
+export const SEARCH_FAQ: Record<"/erase" | "/image" | "/soz-sayi" | "/faiz" | "/wifi" | "/seo", { title: Record<Lang, string>; items: Record<Lang, { q: string; a: string }[]> }> = {
   "/erase": {
     title: { az: "Suallar", en: "Questions", tr: "Sorular", ar: "أسئلة", ru: "Вопросы" },
     items: {
@@ -173,6 +173,36 @@ export const SEARCH_FAQ: Record<"/erase" | "/image" | "/soz-sayi" | "/faiz" | "/
         { q: "Пароль уходит на сервер?", a: "Нет. QR-код создаётся в этом браузере." },
         { q: "Как телефон подключается?", a: "Наведите камеру на QR-код. Имя сети и пароль заполнятся сами." },
         { q: "Сеть без пароля подходит?", a: "Да. Поставьте защиту «без пароля»." },
+      ],
+    },
+  },
+  "/seo": {
+    title: { az: "Suallar", en: "Questions", tr: "Sorular", ar: "أسئلة", ru: "Вопросы" },
+    items: {
+      az: [
+        { q: "Nə yoxlanılır?", a: "Bir səhifənin title, description, canonical, H1, robots.txt və sitemap vəziyyəti." },
+        { q: "Bütün sayt gəzilirmi?", a: "Xeyr. Yalnız yazdığın ünvan və onun robots.txt, sitemap faylı açılır." },
+        { q: "Ünvan saxlanılırmı?", a: "Xeyr. Nəticə bazaya yazılmır." },
+      ],
+      en: [
+        { q: "What is checked?", a: "The title, description, canonical, H1, robots.txt and sitemap of one page." },
+        { q: "Is the whole site crawled?", a: "No. Only the address you enter, plus its robots.txt and sitemap file, is opened." },
+        { q: "Is the address stored?", a: "No. The result is not written to a database." },
+      ],
+      tr: [
+        { q: "Ne bakılır?", a: "Bir sayfanın title, description, canonical, H1, robots.txt ve sitemap durumu." },
+        { q: "Tüm site gezilir mi?", a: "Hayır. Yalnız yazdığın adres ile onun robots.txt ve sitemap dosyası açılır." },
+        { q: "Adres saklanır mı?", a: "Hayır. Sonuç veri tabanına yazılmaz." },
+      ],
+      ar: [
+        { q: "ماذا يُفحص؟", a: "العنوان والوصف والرابط الأساسي وH1 وrobots.txt وsitemap لصفحة واحدة." },
+        { q: "هل يُمسح الموقع كله؟", a: "لا. يُفتح العنوان الذي تكتبه مع robots.txt وملف sitemap فقط." },
+        { q: "هل يُحفظ العنوان؟", a: "لا. لا تُكتب النتيجة في قاعدة بيانات." },
+      ],
+      ru: [
+        { q: "Что проверяется?", a: "Title, description, canonical, H1, robots.txt и sitemap одной страницы." },
+        { q: "Обходится весь сайт?", a: "Нет. Открывается только введённый адрес и его robots.txt с файлом sitemap." },
+        { q: "Адрес сохраняется?", a: "Нет. Результат не пишется в базу." },
       ],
     },
   },

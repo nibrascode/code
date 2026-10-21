@@ -757,6 +757,13 @@ const PAGES: Record<string, Copy> = {
     ar: { title: "رمز QR لـ Wi-Fi — مجاناً", description: "اصنع رمز QR من اسم الشبكة وكلمة المرور. يمسحه الضيف ويتصل. لا تُرفع كلمة المرور." },
     ru: { title: "Wi-Fi QR — бесплатно", description: "Сделайте QR-код из имени сети и пароля. Гость сканирует и подключается. Пароль не загружается." },
   },
+  "/seo": {
+    az: { title: "Nibras SEO Check — bir səhifəni yoxla", description: "Title, description, canonical, robots.txt və sitemap. Bir ünvan yoxlanır, başqa səhifələr açılmır." },
+    en: { title: "Nibras SEO Check — check one page", description: "Title, description, canonical, robots.txt and sitemap. One address is checked. Other pages are not opened." },
+    tr: { title: "Nibras SEO Check — bir sayfaya bak", description: "Title, description, canonical, robots.txt ve sitemap. Bir adres bakılır, başka sayfalar açılmaz." },
+    ar: { title: "Nibras SEO Check — افحص صفحة", description: "العنوان والوصف والرابط الأساسي وrobots.txt وsitemap. يُفحص عنوان واحد ولا تُفتح الصفحات الأخرى." },
+    ru: { title: "Nibras SEO Check — проверить одну страницу", description: "Title, description, canonical, robots.txt и sitemap. Проверяется один адрес, другие страницы не открываются." },
+  },
   "/pdf": {
     az: {
       title: "Nibras PDF — PDF birləşdir, böl, sıxışdır, imzala (pulsuz)",
@@ -1342,7 +1349,7 @@ function jsonLd(path: string, lang: Lang, copy: PageSeo, url: string) {
       };
     }
   }
-  if (path === "/erase" || path === "/image" || path === "/soz-sayi" || path === "/faiz" || path === "/wifi") {
+  if (path === "/erase" || path === "/image" || path === "/soz-sayi" || path === "/faiz" || path === "/wifi" || path === "/seo") {
     const block = SEARCH_FAQ[path];
     const items = block.items[lang] ?? block.items.en;
     return {
