@@ -10,7 +10,8 @@ import { HeroMark } from "@/components/hero-mark";
 import { faqPath } from "@/lib/faq";
 import { homePath, localeHref } from "@/lib/locale-path";
 import { SEARCH, searchPath, searchTopicPath } from "@/lib/search-pages";
-import { gamePath, GAME_COPY, GAME_VERSION, GAMES } from "@/lib/games";
+import { gamePath, GAME_COPY, GAMES } from "@/lib/games";
+import { GameIcon } from "@/components/game-icons";
 import { toolsPath, TOOLS_PAGE } from "@/lib/tools";
 import { useI18n } from "@/lib/i18n-context";
 import { statusText, type StudioAppRow } from "@/lib/studio";
@@ -398,24 +399,13 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
       </section>
 
       <section className="nx-apps nx-play" aria-label={GAME_COPY.heading[lang]}>
-        <a className="nx-card nx-play-card" href={gamePath(lang)}>
-          <span className="nx-card-top">
-            <span className="nx-play-mark" aria-hidden="true">
-              <i />
-              <i className="is-gold" />
-              <i />
-              <i className="is-green" />
-            </span>
-            <span>
-              <em className="nx-status">{GAME_VERSION}</em>
-              <b>{GAME_COPY.heading[lang]}</b>
-            </span>
-          </span>
-          <span className="nx-play-line">
-            {GAMES.map((item) => item.name[lang]).join(" · ")}
-          </span>
-          <ArrowUpRight className="nx-go" />
-        </a>
+        <div className="game-icon-grid">
+          {GAMES.map((game) => (
+            <a key={game.slug} href={gamePath(lang, game.slug)} aria-label={game.name[lang]}>
+              <GameIcon slug={game.slug} />
+            </a>
+          ))}
+        </div>
       </section>
 
       <section className="nx-apps" id="apps">

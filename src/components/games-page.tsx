@@ -6,6 +6,8 @@ import { IlanGame } from "@/components/ilan-game";
 import { KosmosGame } from "@/components/kosmos-game";
 import { QalaGame } from "@/components/qala-game";
 import { NeonGame } from "@/components/neon-game";
+import { TetrisGame } from "@/components/tetris-game";
+import { GameIcon } from "@/components/game-icons";
 import { useI18n } from "@/lib/i18n-context";
 
 const LINES = [
@@ -86,26 +88,15 @@ export function GamesIndexGate() {
 export function GamesIndex() {
   const { lang } = useI18n();
   return (
-    <main className="why-page" lang={lang} dir={lang === "ar" ? "rtl" : "ltr"}>
-      <div className="why-glow" aria-hidden="true" />
-      <p className="eyebrow">
-        <i />
-        Nibras Code
-      </p>
-      <h1>{GAME_COPY.heading[lang]}</h1>
-      <p className="why-lead">{GAME_COPY.lead[lang]}</p>
-      <ul className="lib-list">
+    <main className="game-icons-page" lang={lang} dir={lang === "ar" ? "rtl" : "ltr"}>
+      <h1 className="game-icons-title">{GAME_COPY.heading[lang]}</h1>
+      <div className="game-icon-grid">
         {GAMES.map((game) => (
-          <li key={game.slug}>
-            <a href={gamePath(lang, game.slug)}>
-              {game.name[lang]}
-              <span className="lib-desc">
-                {GAME_VERSION} · {game.blurb[lang]}
-              </span>
-            </a>
-          </li>
+          <a key={game.slug} href={gamePath(lang, game.slug)} aria-label={game.name[lang]}>
+            <GameIcon slug={game.slug} />
+          </a>
         ))}
-      </ul>
+      </div>
     </main>
   );
 }
@@ -250,6 +241,7 @@ export function GameScreen({ slug }: { slug: string }) {
   if (slug === "kosmos") return <KosmosGame />;
   if (slug === "qala") return <QalaGame />;
   if (slug === "neon") return <NeonGame />;
+  if (slug === "tetris") return <TetrisGame />;
   return <TicTacToe />;
 }
 

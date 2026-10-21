@@ -6,7 +6,7 @@ export const GAME_VERSION = "v1.0.0";
 
 type Copy = Record<Lang, string>;
 
-export type GameSlug = "x-o" | "soz" | "ilan" | "kosmos" | "qala" | "neon";
+export type GameSlug = "x-o" | "soz" | "ilan" | "kosmos" | "qala" | "neon" | "tetris";
 
 export const GAMES: readonly { slug: GameSlug; name: Copy; blurb: Copy }[] = [
   {
@@ -111,6 +111,23 @@ export const GAMES: readonly { slug: GameSlug; name: Copy; blurb: Copy }[] = [
       ru: "Веди мяч и разбивай кирпичи.",
     },
   },
+  {
+    slug: "tetris",
+    name: {
+      az: "Tetris",
+      en: "Tetris",
+      tr: "Tetris",
+      ar: "تتريس",
+      ru: "Тетрис",
+    },
+    blurb: {
+      az: "Sətirləri doldur. Hər on xətt yeni səviyyədir.",
+      en: "Fill the rows. Every ten lines is a new level.",
+      tr: "Satırları doldur. Her on satır yeni seviye.",
+      ar: "املأ الصفوف. كل عشرة خطوط مستوى جديد.",
+      ru: "Заполняй ряды. Каждые десять линий — новый уровень.",
+    },
+  },
 ];
 
 export const GAME_COPY = {
@@ -130,11 +147,11 @@ export const GAME_COPY = {
     ru: "Игры — Nibras Code",
   },
   indexDescription: {
-    az: "Nibras Code oyunları. X-O, Söz, İlan, Kosmos, Qala və Neon. Versiya v1.0.0.",
-    en: "Nibras Code games. Tic-tac-toe, Söz, Snake, Kosmos, Fortress, and Neon. Version v1.0.0.",
-    tr: "Nibras Code oyunları. XOX, Söz, Yılan, Kosmos, Kale ve Neon. Sürüm v1.0.0.",
-    ar: "ألعاب Nibras Code. إكس أو، وكلمة، والأفعى، والفضاء، والقلعة، ونيون. الإصدار v1.0.0.",
-    ru: "Игры Nibras Code. Крестики-нолики, Слово, Змейка, Космос, Крепость и Неон. Версия v1.0.0.",
+    az: "Nibras Code oyunları. X-O, Söz, İlan, Kosmos, Qala, Neon və Tetris. Versiya v1.0.0.",
+    en: "Nibras Code games. Tic-tac-toe, Söz, Snake, Kosmos, Fortress, Neon, and Tetris. Version v1.0.0.",
+    tr: "Nibras Code oyunları. XOX, Söz, Yılan, Kosmos, Kale, Neon ve Tetris. Sürüm v1.0.0.",
+    ar: "ألعاب Nibras Code. إكس أو، وكلمة، والأفعى، والفضاء، والقلعة، ونيون، وتتريس. الإصدار v1.0.0.",
+    ru: "Игры Nibras Code. Крестики-нолики, Слово, Змейка, Космос, Крепость, Неон и Тетрис. Версия v1.0.0.",
   },
   two: { az: "İki nəfər", en: "Two people", tr: "İki kişi", ar: "شخصان", ru: "Два человека" },
   cpu: { az: "Kompüter", en: "Computer", tr: "Bilgisayar", ar: "الحاسوب", ru: "Компьютер" },
