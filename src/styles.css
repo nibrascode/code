@@ -10860,3 +10860,83 @@ body.is-planner .site-backdrop {
   .tetris-controls { display: grid; }
   .tetris-page .ilan-hint { display: none; }
 }
+
+.g2048-page {
+  display: flex;
+  flex-direction: column;
+  width: min(420px, 100%);
+  height: 100dvh;
+  max-height: 100dvh;
+  margin: 0 auto;
+  padding: 74px 12px 8px;
+  overflow: hidden;
+  box-sizing: border-box;
+  color: #eaf0ff;
+}
+
+.g2048-page h1 {
+  margin: 0;
+  font-size: 1.4rem;
+  letter-spacing: 0.14em;
+  background: linear-gradient(100deg, #fff, #ffd166 45%, #22d3ee);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.g2048-page .eyebrow { margin: 0 0 4px; }
+
+.g2048-hud {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 8px 0 0;
+}
+
+.g2048-hud div {
+  padding: 6px 8px;
+  border: 1px solid rgb(255 255 255 / 0.11);
+  border-radius: 12px;
+  text-align: center;
+}
+
+.g2048-hud dt { color: #8b99b8; font-size: 8px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
+.g2048-hud dd { margin: 0; font-size: 1.05rem; font-weight: 900; font-variant-numeric: tabular-nums; }
+.g2048-hud .is-gold { color: #ffd166; }
+
+.g2048-board {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  width: min(100%, calc(100dvh - 250px));
+  aspect-ratio: 1;
+  margin: 8px auto 0;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 0.11);
+  background: #04070e;
+  touch-action: none;
+}
+
+.g2048-board canvas { display: block; width: 100%; height: 100%; }
+
+.g2048-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.g2048-actions button {
+  border: 1px solid rgb(255 255 255 / 0.11);
+  border-radius: 14px;
+  background: rgb(255 255 255 / 0.05);
+  color: #eaf0ff;
+  font: inherit;
+  font-weight: 800;
+  padding: 12px 8px;
+  cursor: pointer;
+}
+
+.g2048-actions button:disabled { opacity: 0.35; }
+.g2048-actions .is-mint { background: linear-gradient(100deg, #22d3ee, #0891b2); color: #04121a; border-color: transparent; }

@@ -77,6 +77,14 @@ export function GameIcon({ slug }: { slug: GameSlug }) {
           <rect x="38" y="48" width="10" height="8" rx="2" fill="#ff5c7a" />
         </>
       ) : null}
+      {slug === "2048" ? (
+        <>
+          <rect x="8" y="8" width="22" height="22" rx="6" fill="#dbeafe" />
+          <rect x="34" y="8" width="22" height="22" rx="6" fill="#22d3ee" />
+          <rect x="8" y="34" width="22" height="22" rx="6" fill="#fbbf24" />
+          <rect x="34" y="34" width="22" height="22" rx="6" fill="#fff" />
+        </>
+      ) : null}
     </svg>
   );
 }

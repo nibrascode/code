@@ -7,6 +7,7 @@ import { KosmosGame } from "@/components/kosmos-game";
 import { QalaGame } from "@/components/qala-game";
 import { NeonGame } from "@/components/neon-game";
 import { TetrisGame } from "@/components/tetris-game";
+import { Game2048 } from "@/components/game-2048";
 import { GameIcon } from "@/components/game-icons";
 import { useI18n } from "@/lib/i18n-context";
 
@@ -242,6 +243,7 @@ export function GameScreen({ slug }: { slug: string }) {
   if (slug === "qala") return <QalaGame />;
   if (slug === "neon") return <NeonGame />;
   if (slug === "tetris") return <TetrisGame />;
+  if (slug === "2048") return <Game2048 />;
   return <TicTacToe />;
 }
 

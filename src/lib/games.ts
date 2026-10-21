@@ -6,7 +6,7 @@ export const GAME_VERSION = "v1.0.0";
 
 type Copy = Record<Lang, string>;
 
-export type GameSlug = "x-o" | "soz" | "ilan" | "kosmos" | "qala" | "neon" | "tetris";
+export type GameSlug = "x-o" | "soz" | "ilan" | "kosmos" | "qala" | "neon" | "tetris" | "2048";
 
 export const GAMES: readonly { slug: GameSlug; name: Copy; blurb: Copy }[] = [
   {
@@ -128,6 +128,23 @@ export const GAMES: readonly { slug: GameSlug; name: Copy; blurb: Copy }[] = [
       ru: "Заполняй ряды. Каждые десять линий — новый уровень.",
     },
   },
+  {
+    slug: "2048",
+    name: {
+      az: "2048",
+      en: "2048",
+      tr: "2048",
+      ar: "2048",
+      ru: "2048",
+    },
+    blurb: {
+      az: "Eyni rəqəmləri birləşdir. 2048-ə çat.",
+      en: "Merge matching numbers. Reach 2048.",
+      tr: "Aynı sayıları birleştir. 2048'e ulaş.",
+      ar: "ادمج الأرقام المتشابهة. اوصل إلى 2048.",
+      ru: "Соединяй одинаковые числа. Доберись до 2048.",
+    },
+  },
 ];
 
 export const GAME_COPY = {
@@ -147,11 +164,11 @@ export const GAME_COPY = {
     ru: "Игры — Nibras Code",
   },
   indexDescription: {
-    az: "Nibras Code oyunları. X-O, Söz, İlan, Kosmos, Qala, Neon və Tetris. Versiya v1.0.0.",
-    en: "Nibras Code games. Tic-tac-toe, Söz, Snake, Kosmos, Fortress, Neon, and Tetris. Version v1.0.0.",
-    tr: "Nibras Code oyunları. XOX, Söz, Yılan, Kosmos, Kale, Neon ve Tetris. Sürüm v1.0.0.",
-    ar: "ألعاب Nibras Code. إكس أو، وكلمة، والأفعى، والفضاء، والقلعة، ونيون، وتتريس. الإصدار v1.0.0.",
-    ru: "Игры Nibras Code. Крестики-нолики, Слово, Змейка, Космос, Крепость, Неон и Тетрис. Версия v1.0.0.",
+    az: "Nibras Code oyunları. X-O, Söz, İlan, Kosmos, Qala, Neon, Tetris və 2048. Versiya v1.0.0.",
+    en: "Nibras Code games. Tic-tac-toe, Söz, Snake, Kosmos, Fortress, Neon, Tetris, and 2048. Version v1.0.0.",
+    tr: "Nibras Code oyunları. XOX, Söz, Yılan, Kosmos, Kale, Neon, Tetris ve 2048. Sürüm v1.0.0.",
+    ar: "ألعاب Nibras Code. إكس أو، وكلمة، والأفعى، والفضاء، والقلعة، ونيون، وتتريس، و2048. الإصدار v1.0.0.",
+    ru: "Игры Nibras Code. Крестики-нолики, Слово, Змейка, Космос, Крепость, Неон, Тетрис и 2048. Версия v1.0.0.",
   },
   two: { az: "İki nəfər", en: "Two people", tr: "İki kişi", ar: "شخصان", ru: "Два человека" },
   cpu: { az: "Kompüter", en: "Computer", tr: "Bilgisayar", ar: "الحاسوب", ru: "Компьютер" },
