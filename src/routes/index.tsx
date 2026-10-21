@@ -33,7 +33,7 @@ const BAR: Record<"dev" | "apk" | "pdf" | "qr" | "erase" | "image" | "calc" | "s
   image: { az: "Şəkil sıx", en: "Compress photo", tr: "Foto sıkıştır", ar: "ضغط الصورة", ru: "Сжать фото" },
   calc: { az: "Hesabla", en: "Calculate", tr: "Hesapla", ar: "احسب", ru: "Посчитай" },
   seo: { az: "SEO yoxla", en: "Check SEO", tr: "SEO bak", ar: "فحص SEO", ru: "Проверить SEO" },
-  flow: { az: "Hazırla", en: "Prepare", tr: "Hazırla", ar: "جهّز", ru: "Подготовь" },
+  flow: { az: "Plan hazırla", en: "Make a plan", tr: "Plan hazırla", ar: "جهّز خطة", ru: "Собрать план" },
   logic: { az: "Sual qur", en: "Build questions", tr: "Soru kur", ar: "ابنِ أسئلة", ru: "Собрать вопросы" },
   unknown: { az: "Sirr", en: "Secret", tr: "Sır", ar: "سر", ru: "Тайна" },
 };
@@ -348,33 +348,6 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
               </svg>
               <span>{TOOLS_PAGE.heading[lang]}</span>
             </a>
-            <a className="nx-apk-bar" href={localeHref(lang, "/seo")}>
-              <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true">
-                <circle cx="10.5" cy="10.5" r="5.2" fill="none" stroke="currentColor" strokeWidth="1.6" />
-                <path d="M14.4 14.4 19 19" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-              </svg>
-              <span>{BAR.seo[lang]}</span>
-            </a>
-            <a className="nx-apk-bar" href={localeHref(lang, "/flow")}>
-              <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M5 7h6M5 12h10M5 17h14" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-              </svg>
-              <span>{BAR.flow[lang]}</span>
-            </a>
-            <a className="nx-apk-bar" href={localeHref(lang, "/logic")}>
-              <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M6 7h8M14 7v4H8M8 11v4h8" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-              <span>{BAR.logic[lang]}</span>
-            </a>
-            <a className="nx-apk-bar" href={localeHref(lang, "/unknown")}>
-              <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true">
-                <circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" strokeWidth="1.6" />
-                <path d="M9.2 9.2a2.8 2.8 0 1 1 3.6 2.7c-.7.3-1 .8-1 1.6V14.2" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-                <path d="M12 17.2h.01" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
-              </svg>
-              <span>{BAR.unknown[lang]}</span>
-            </a>
             <a className="nx-ai-bar nx-qr-bar" href={localeHref(lang, "/pdf")}>
               <svg className="nx-job nx-job-pdf" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M7 3.2h6.6L19 8.4V20a1.4 1.4 0 0 1-1.4 1.4H7.4A1.4 1.4 0 0 1 6 20V4.6A1.4 1.4 0 0 1 7.4 3.2H7Z" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
@@ -423,6 +396,35 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
               <span className="nx-qr-text">
                 <b>{BAR.calc[lang]}</b>
               </span>
+            </a>
+          </div>
+          <div className="nx-mini">
+            <a href={localeHref(lang, "/seo")}>
+              <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="10.5" cy="10.5" r="5.2" fill="none" stroke="currentColor" strokeWidth="1.6" />
+                <path d="M14.4 14.4 19 19" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+              </svg>
+              <span>{BAR.seo[lang]}</span>
+            </a>
+            <a href={localeHref(lang, "/flow")}>
+              <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 7h6M5 12h10M5 17h14" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+              </svg>
+              <span>{BAR.flow[lang]}</span>
+            </a>
+            <a href={localeHref(lang, "/logic")}>
+              <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6 7h8M14 7v4H8M8 11v4h8" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              <span>{BAR.logic[lang]}</span>
+            </a>
+            <a href={localeHref(lang, "/unknown")}>
+              <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" strokeWidth="1.6" />
+                <path d="M9.2 9.2a2.8 2.8 0 1 1 3.6 2.7c-.7.3-1 .8-1 1.6V14.2" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                <path d="M12 17.2h.01" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+              </svg>
+              <span>{BAR.unknown[lang]}</span>
             </a>
           </div>
         </div>
