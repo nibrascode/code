@@ -6,7 +6,7 @@ export const GAME_VERSION = "v1.0.0";
 
 type Copy = Record<Lang, string>;
 
-export type GameSlug = "x-o";
+export type GameSlug = "x-o" | "soz";
 
 export const GAMES: readonly { slug: GameSlug; name: Copy; blurb: Copy }[] = [
   {
@@ -24,6 +24,23 @@ export const GAMES: readonly { slug: GameSlug; name: Copy; blurb: Copy }[] = [
       tr: "Üç aynı işaret kazanır. İki kişi ya da bilgisayar.",
       ar: "ثلاث علامات متشابهة تربح. شخصان، أو الحاسوب.",
       ru: "Три одинаковых знака побеждают. Два человека или компьютер.",
+    },
+  },
+  {
+    slug: "soz",
+    name: {
+      az: "Söz",
+      en: "Söz",
+      tr: "Söz",
+      ar: "كلمة",
+      ru: "Слово",
+    },
+    blurb: {
+      az: "Azərbaycan sözünü tap. Dörd, beş, altı və ya yeddi hərf.",
+      en: "Find the Azerbaijani word. Four, five, six, or seven letters.",
+      tr: "Azerbaycan sözünü bul. Dört, beş, altı ya da yedi harf.",
+      ar: "جد الكلمة الأذربيجانية. أربعة أو خمسة أو ستة أو سبعة أحرف.",
+      ru: "Найди азербайджанское слово. Четыре, пять, шесть или семь букв.",
     },
   },
 ];

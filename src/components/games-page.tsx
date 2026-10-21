@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Outlet, useRouterState } from "@tanstack/react-router";
 import { GAME_COPY, GAME_VERSION, GAMES, gameBySlug, gamePath } from "@/lib/games";
+import { SozGame } from "@/components/soz-game";
 import { useI18n } from "@/lib/i18n-context";
 
 const LINES = [
@@ -238,3 +239,9 @@ export function TicTacToe() {
     </main>
   );
 }
+
+export function GameScreen({ slug }: { slug: string }) {
+  if (slug === "soz") return <SozGame />;
+  return <TicTacToe />;
+}
+

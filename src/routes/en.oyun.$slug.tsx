@@ -1,5 +1,5 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
-import { TicTacToe } from "@/components/games-page";
+import { GameScreen } from "@/components/games-page";
 import { gameBySlug } from "@/lib/games";
 
 export const Route = createFileRoute("/en/oyun/$slug")({
@@ -7,5 +7,10 @@ export const Route = createFileRoute("/en/oyun/$slug")({
     if (!gameBySlug(params.slug)) throw notFound();
     return { slug: params.slug };
   },
-  component: TicTacToe,
+  component: Page,
 });
+
+function Page() {
+  const { slug } = Route.useLoaderData();
+  return <GameScreen slug={slug} />;
+}
