@@ -3,6 +3,7 @@ import { Outlet, useRouterState } from "@tanstack/react-router";
 import { GAME_COPY, GAME_VERSION, GAMES, gameBySlug, gamePath } from "@/lib/games";
 import { SozGame } from "@/components/soz-game";
 import { IlanGame } from "@/components/ilan-game";
+import { KosmosGame } from "@/components/kosmos-game";
 import { useI18n } from "@/lib/i18n-context";
 
 const LINES = [
@@ -244,6 +245,7 @@ export function TicTacToe() {
 export function GameScreen({ slug }: { slug: string }) {
   if (slug === "soz") return <SozGame />;
   if (slug === "ilan") return <IlanGame />;
+  if (slug === "kosmos") return <KosmosGame />;
   return <TicTacToe />;
 }
 
