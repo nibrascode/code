@@ -580,6 +580,8 @@
     .layihe-dock[hidden] { display: none; }
     .layihe-dock b { font-size: 11px; color: #aeb6ce; }
     .layihe-dock button { border: 1px solid rgba(120, 168, 255, .35); background: #10162a; color: #d7def2; border-radius: 999px; padding: 4px 8px; font-size: 11px; cursor: pointer; }
+    .site-ask { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .site-ask button { min-height: 44px; border-radius: 999px; border: 1px solid rgba(120, 168, 255, .45); background: #10162a; color: #e8edf8; padding: 8px 14px; cursor: pointer; }
     .msg pre {
       margin: 8px 0 0;
       padding: 10px;
@@ -3447,6 +3449,54 @@
       if (/kalkul|hesablayici|todo|python/.test(s) && !/sayt|bolme/.test(s)) return false;
       return /sayt|veb|website|bolme|section|sehifeler/.test(s);
     }
+    function siteKindKnown(text) {
+      const s = foldTask(text);
+      if (/(magaza|restoran|kafe|klinik|xestexana|mekteb|kurs|otel|salon|idman|portfolio|portfel|sirket|firma|bloq|blog|xeber|menu|vitrin|mehsul|qiymet|elaqe|haqq|xidmet|qalereya|komanda|3d|seher|oyun)/.test(s)) return true;
+      const left = s.replace(/sayt|hazirla|yarat|istiyirem|men|bir|yeni|veb|website|page|zehmet|olsun|ele|boyle|bele/g, " ").replace(/\s+/g, " ").trim();
+      return left.length > 16;
+    }
+    function siteQuestion() {
+      const pack = {
+        az: ["Hansı sayt olsun? Dəqiq bilmədən başlamıram.", [["Mağaza saytı", "Mağaza"], ["Şirkət saytı", "Şirkət"], ["Restoran saytı", "Restoran"], ["Bloq saytı", "Bloq"], ["Kurs saytı", "Kurs"]]],
+        en: ["What kind of site? I will not start until that is clear.", [["Shop site", "Shop"], ["Company site", "Company"], ["Restaurant site", "Restaurant"], ["Blog site", "Blog"], ["Course site", "Course"]]],
+        tr: ["Nasıl bir site olsun? Netleşmeden başlamam.", [["Mağaza sitesi", "Mağaza"], ["Şirket sitesi", "Şirket"], ["Restoran sitesi", "Restoran"], ["Blog sitesi", "Blog"], ["Kurs sitesi", "Kurs"]]],
+        ar: ["أي موقع تريده؟ لن أبدأ قبل أن يتضح.", [["موقع متجر", "متجر"], ["موقع شركة", "شركة"], ["موقع مطعم", "مطعم"], ["موقع مدونة", "مدونة"], ["موقع دورة", "دورة"]]],
+        ru: ["Какой сайт нужен? Без этого не начинаю.", [["Сайт магазина", "Магазин"], ["Сайт компании", "Компания"], ["Сайт ресторана", "Ресторан"], ["Сайт блога", "Блог"], ["Сайт курса", "Курс"]]]
+      };
+      return pack[uiLangCode] || pack.az;
+    }
+    let siteWait = "";
+    function askSiteKind(seed) {
+      siteWait = seed;
+      const pack = siteQuestion();
+      const el = document.createElement("div");
+      el.className = "msg b step ok";
+      el.setAttribute("dir", "auto");
+      const p = document.createElement("p");
+      const row = document.createElement("div");
+      row.className = "site-ask";
+      row.hidden = true;
+      pack[1].forEach(function (opt) {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.textContent = opt[1];
+        b.addEventListener("click", function () {
+          if (!siteWait) return;
+          row.querySelectorAll("button").forEach(function (x) { x.disabled = true; });
+          send(opt[0]);
+        });
+        row.appendChild(b);
+      });
+      el.appendChild(p);
+      el.appendChild(row);
+      stepChain = stepChain.then(async function () {
+        if (hello && hello.parentNode) hello.remove();
+        msgs.appendChild(el);
+        await typeInto(p, pack[0], 62);
+        row.hidden = false;
+        msgs.scrollTop = msgs.scrollHeight;
+      }).catch(function () {});
+    }
     function pageTitle(path) {
       const map = { "index.html": "Ana", "haqqinda.html": "Haqqında", "xidmet.html": "Xidmət", "elaqe.html": "Əlaqə", "qiymet.html": "Qiymət", "blog.html": "Bloq", "qalereya.html": "Qalereya", "komanda.html": "Komanda", "mehsul.html": "Məhsul" };
       return map[path] || String(path || "").replace(/\.html?$/i, "");
@@ -3893,8 +3943,24 @@
         rec("b", "::calc::" + m, "", 0);
         return;
       }
-      if (mode === "layihe" || (mode !== "image" && !pendingImage && wantsBuild(m))) {
+      if (mode === "layihe" || siteWait || (mode !== "image" && !pendingImage && wantsBuild(m))) {
         inp.value = "";
+        if (siteWait) {
+          const full = siteWait + ". " + m;
+          siteWait = "";
+          bubble(m, "u");
+          rec("u", m, "", 0);
+          if (mode !== "layihe") setMode("layihe");
+          runLayihe(full);
+          return;
+        }
+        const fresh = !layiheProject || !layiheProject.files || !layiheProject.files.length || isFresh(m);
+        if (fresh && isSite(m) && !siteKindKnown(m)) {
+          bubble(m, "u");
+          rec("u", m, "", 0);
+          askSiteKind(m);
+          return;
+        }
         if (mode !== "layihe") setMode("layihe");
         runLayihe(m);
         return;
