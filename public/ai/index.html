@@ -3224,17 +3224,18 @@
     function pause(ms) {
       return new Promise(function (r) { setTimeout(r, ms); });
     }
-    function typeInto(el, text) {
+    function typeInto(el, text, gap) {
       const full = String(text || "");
-      const size = full.length > 90 ? 3 : full.length > 40 ? 2 : 1;
+      const wait = gap || 62;
       el.textContent = "";
       return (async function () {
-        for (let i = 0; i < full.length; i += size) {
-          el.textContent = full.slice(0, i + size);
-          msgs.scrollTop = msgs.scrollHeight;
-          await pause(34);
+        for (let i = 0; i < full.length; i++) {
+          el.textContent = full.charAt(i) ? full.slice(0, i + 1) : full;
+          if (i % 3 === 2) msgs.scrollTop = msgs.scrollHeight;
+          await pause(wait);
         }
         el.textContent = full;
+        msgs.scrollTop = msgs.scrollHeight;
       })();
     }
     function pushStep(text, state) {
@@ -3244,14 +3245,14 @@
       stepChain = stepChain.then(async function () {
         if (hello && hello.parentNode) hello.remove();
         msgs.appendChild(el);
-        await typeInto(el, text);
-        await pause(260);
+        await typeInto(el, text, 62);
+        await pause(420);
       }).catch(function () {});
       return el;
     }
     function markStep(el, state, text) {
       el.className = "msg b step " + state;
-      stepChain = stepChain.then(function () { return typeInto(el, text); }).catch(function () {});
+      stepChain = stepChain.then(function () { return typeInto(el, text, 62); }).catch(function () {});
     }
     function pushFile(file) {
       stepChain = stepChain.then(async function () {
@@ -3264,17 +3265,15 @@
         el.appendChild(title);
         el.appendChild(pre);
         msgs.appendChild(el);
-        await typeInto(title, t("file") + ": " + file.path);
-        const body = file.content.length > 1800 ? file.content.slice(0, 1800) + "\n…" : file.content;
-        const lines = body.split("\n");
-        let shown = "";
-        for (let i = 0; i < lines.length; i++) {
-          shown += (i ? "\n" : "") + lines[i];
-          pre.textContent = shown;
-          msgs.scrollTop = msgs.scrollHeight;
-          if (i % 2 === 1) await pause(36);
+        await typeInto(title, t("file") + ": " + file.path, 62);
+        const body = file.content.length > 900 ? file.content.slice(0, 900) + "\n…" : file.content;
+        pre.textContent = "";
+        for (let i = 0; i < body.length; i++) {
+          pre.textContent += body.charAt(i);
+          if (i % 4 === 3) msgs.scrollTop = msgs.scrollHeight;
+          await pause(16);
         }
-        await pause(180);
+        await pause(280);
       }).catch(function () {});
     }
     let layiheCalls = 0;
@@ -3458,9 +3457,9 @@
       [[/haqq|about/, "haqqinda.html"], [/xidmet|service/, "xidmet.html"], [/elaqe|contact/, "elaqe.html"], [/qiymet|price/, "qiymet.html"], [/blog|xeber/, "blog.html"], [/qalereya|gallery/, "qalereya.html"], [/komanda|team/, "komanda.html"], [/mehsul|magaza|shop/, "mehsul.html"]].forEach(function (pair) {
         if (pair[0].test(s)) pages.push(pair[1]);
       });
-      if (pages.length === 1) ["haqqinda.html", "xidmet.html", "elaqe.html"].forEach(function (name) { pages.push(name); });
-      else ["haqqinda.html", "xidmet.html", "elaqe.html"].forEach(function (name) {
-        if (pages.length < 4 && pages.indexOf(name) < 0) pages.push(name);
+      if (pages.length === 1) ["haqqinda.html", "xidmet.html", "qiymet.html", "elaqe.html", "blog.html"].forEach(function (name) { pages.push(name); });
+      else ["haqqinda.html", "xidmet.html", "qiymet.html", "elaqe.html", "blog.html"].forEach(function (name) {
+        if (pages.length < 6 && pages.indexOf(name) < 0) pages.push(name);
       });
       return pages;
     }
@@ -3522,14 +3521,14 @@
       const end = "<" + "/script>";
       if (/\.html?$/i.test(path)) {
         const known = {
-          "index.html": ["Ana səhifə", "Saytın giriş bölməsidir."],
-          "haqqinda.html": ["Haqqında", "Bu bölmə saytın kimliyini anlatır."],
-          "xidmet.html": ["Xidmətlər", "Hər xidmət ayrı sətirdədir."],
-          "qiymet.html": ["Qiymət", "Paketlər bu bölmədədir."],
-          "blog.html": ["Bloq", "Yazılar bu bölmədədir."],
-          "qalereya.html": ["Qalereya", "Nümunələr bu bölmədədir."],
-          "komanda.html": ["Komanda", "İnsanlar bu bölmədədir."],
-          "mehsul.html": ["Məhsullar", "Məhsullar bu bölmədədir."]
+          "index.html": ["Ana səhifə", "Bura girişdir. Aşağıdakı bölmələrin hər biri ayrı səhifədə yazılıb."],
+          "haqqinda.html": ["Haqqında", "Bu bölmə saytın kimliyini, məqsədini və kimin üçün olduğunu ayrıca anlatır."],
+          "xidmet.html": ["Xidmətlər", "Hər xidmət ayrı sətirdədir və öz səhifəsində dayanır."],
+          "qiymet.html": ["Qiymət", "Paketlər bu bölmədə, başqa səhifələrdən ayrı göstərilir."],
+          "blog.html": ["Bloq", "Yazılar bu bölmədə, öz siyahısı ilə durur."],
+          "qalereya.html": ["Qalereya", "Nümunələr bu bölmədə, başqa mətndən ayrı durur."],
+          "komanda.html": ["Komanda", "İnsanlar bu bölmədə, ayrıca siyahı ilə durur."],
+          "mehsul.html": ["Məhsullar", "Məhsullar bu bölmədə, öz siyahısı ilə durur."]
         }[path];
         const lists = { "xidmet.html": ["Plan", "Dizayn", "Kod"], "qiymet.html": ["Sadə", "Standart", "Tam"], "komanda.html": ["Dizayn", "Kod", "Məzmun"], "mehsul.html": ["Birinci", "İkinci", "Üçüncü"] };
         if (isSite(task) && (known || path === "elaqe.html")) {
