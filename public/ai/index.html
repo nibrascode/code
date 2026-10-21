@@ -576,6 +576,10 @@
     .msg.step.bad { border-color: rgba(255, 120, 120, .55); }
     .msg.step pre { max-height: 220px; overflow: auto; margin: 8px 0 0; }
     .preview { display: block; width: 100%; height: 280px; margin-top: 8px; border: 1px solid rgba(120, 168, 255, .35); border-radius: 12px; background: #fff; }
+    .layihe-dock { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 0 0 8px; }
+    .layihe-dock[hidden] { display: none; }
+    .layihe-dock b { font-size: 11px; color: #aeb6ce; }
+    .layihe-dock button { border: 1px solid rgba(120, 168, 255, .35); background: #10162a; color: #d7def2; border-radius: 999px; padding: 4px 8px; font-size: 11px; cursor: pointer; }
     .msg pre {
       margin: 8px 0 0;
       padding: 10px;
@@ -1284,11 +1288,11 @@
     };
     let uiLangCode = "az";
     const LAY = {
-      az: { layihe: "Layihə", layL: "Layihə — nə hazırlayım?", layP: "Məsələn: telefon üçün sadə hesablayıcı", s1: "1. Tapşırıq təhlil olunur", s2: "2. Dərin təhlil", s3: "3. Fayllar yazılır", s4: "4. Xəta axtarılır", s5: "ZIP hazırdır", file: "Fayl", down: "ZIP yüklə", fail: "Bu addım alınmadı", empty: "Fayl çıxmadı", bad: "Boş fayl atıldı", wait: "gözlənilir", clean: "Xəta tapılmadı", found: "Xəta", fix: "5. Xəta düzəldilir", again: "6. Yenidən yoxlanılır", still: "Xəta qaldı", see: "Önizləmə", nosee: "Önizləmə yoxdur: HTML faylı çıxmadı", goal: "Məqsəd", din: "Giriş", dout: "Çıxış", parts: "Hissələr", dfiles: "Fayllar", risk: "Risk", dcheck: "Yoxlama" },
-      en: { layihe: "Project", layL: "Project — what should I build?", layP: "For example: a simple calculator for the phone", s1: "1. Reading the task", s2: "2. Deep analysis", s3: "3. Writing the files", s4: "4. Looking for errors", s5: "ZIP is ready", file: "File", down: "Download ZIP", fail: "This step failed", empty: "No file came out", bad: "An empty file was dropped", wait: "waiting", clean: "No error found", found: "Error", fix: "5. Fixing the error", again: "6. Checking again", still: "An error remains", see: "Preview", nosee: "No preview: no HTML file", goal: "Goal", din: "Input", dout: "Output", parts: "Parts", dfiles: "Files", risk: "Risk", dcheck: "Check" },
-      tr: { layihe: "Proje", layL: "Proje — ne hazırlayayım?", layP: "Örneğin: telefon için basit hesap makinesi", s1: "1. Görev inceleniyor", s2: "2. Derin analiz", s3: "3. Dosyalar yazılıyor", s4: "4. Hata aranıyor", s5: "ZIP hazır", file: "Dosya", down: "ZIP indir", fail: "Bu adım alınmadı", empty: "Dosya çıkmadı", bad: "Boş dosya atıldı", wait: "bekleniyor", clean: "Hata bulunmadı", found: "Hata", fix: "5. Hata düzeltiliyor", again: "6. Yeniden kontrol", still: "Hata kaldı", see: "Önizleme", nosee: "Önizleme yok: HTML dosyası çıkmadı", goal: "Amaç", din: "Giriş", dout: "Çıkış", parts: "Parçalar", dfiles: "Dosyalar", risk: "Risk", dcheck: "Kontrol" },
-      ar: { layihe: "مشروع", layL: "مشروع — ماذا أجهّز؟", layP: "مثلاً: آلة حاسبة بسيطة للهاتف", s1: "1. تُحلَّل المهمة", s2: "2. تحليل عميق", s3: "3. تُكتب الملفات", s4: "4. يُبحث عن خطأ", s5: "ملف ZIP جاهز", file: "ملف", down: "تنزيل ZIP", fail: "فشلت هذه الخطوة", empty: "لم يخرج ملف", bad: "أُسقط ملف فارغ", wait: "يُنتظر", clean: "لم يُوجد خطأ", found: "خطأ", fix: "5. يُصلَح الخطأ", again: "6. فحص ثانٍ", still: "بقي خطأ", see: "معاينة", nosee: "لا معاينة: لم يخرج ملف HTML", goal: "الهدف", din: "المدخل", dout: "المخرج", parts: "الأجزاء", dfiles: "الملفات", risk: "الخطر", dcheck: "الفحص" },
-      ru: { layihe: "Проект", layL: "Проект — что собрать?", layP: "Например: простой калькулятор для телефона", s1: "1. Разбор задачи", s2: "2. Глубокий разбор", s3: "3. Пишутся файлы", s4: "4. Поиск ошибок", s5: "ZIP готов", file: "Файл", down: "Скачать ZIP", fail: "Этот шаг не вышел", empty: "Файл не вышел", bad: "Пустой файл отброшен", wait: "ждётся", clean: "Ошибок нет", found: "Ошибка", fix: "5. Ошибка исправляется", again: "6. Повторная проверка", still: "Ошибка осталась", see: "Просмотр", nosee: "Просмотра нет: HTML-файла нет", goal: "Цель", din: "Вход", dout: "Выход", parts: "Части", dfiles: "Файлы", risk: "Риск", dcheck: "Проверка" }
+      az: { layihe: "Layihə", layL: "Layihə — nə hazırlayım?", layP: "Yeni tapşırıq, dəyişiklik və ya kod", s1: "1. Tapşırıq təhlil olunur", s2: "2. Dərin təhlil", s3: "3. Fayllar yazılır", s4: "4. Xəta axtarılır", s5: "ZIP hazırdır", file: "Fayl", down: "ZIP yüklə", fail: "Bu addım alınmadı", empty: "Fayl çıxmadı", bad: "Boş fayl atıldı", wait: "gözlənilir", clean: "Xəta tapılmadı", found: "Xəta", fix: "5. Xəta düzəldilir", again: "6. Yenidən yoxlanılır", still: "Xəta qaldı", see: "Önizləmə", nosee: "Önizləmə yoxdur: HTML faylı çıxmadı", goal: "Məqsəd", din: "Giriş", dout: "Çıxış", parts: "Hissələr", dfiles: "Fayllar", risk: "Risk", dcheck: "Yoxlama", work: "İş bölünür", writing: "Yazılır", revise: "Əvvəlki layihə oxunur", change: "Dəyişiklik yazılır", review: "Kod təhlil olunur", next: "Davam üçün dəyişikliyi yaz və ya yeni tapşırıq ver", cost: "Bu layihə bir neçə model sualı işlədir", dock: "Layihə" },
+      en: { layihe: "Project", layL: "Project — what should I build?", layP: "A new task, a change, or paste code", s1: "1. Reading the task", s2: "2. Deep analysis", s3: "3. Writing the files", s4: "4. Looking for errors", s5: "ZIP is ready", file: "File", down: "Download ZIP", fail: "This step failed", empty: "No file came out", bad: "An empty file was dropped", wait: "waiting", clean: "No error found", found: "Error", fix: "5. Fixing the error", again: "6. Checking again", still: "An error remains", see: "Preview", nosee: "No preview: no HTML file", goal: "Goal", din: "Input", dout: "Output", parts: "Parts", dfiles: "Files", risk: "Risk", dcheck: "Check", work: "Work is split", writing: "Writing", revise: "Reading the last project", change: "Writing the change", review: "Reading the code", next: "For a follow-up, write the change or give a new task", cost: "This project uses several model questions", dock: "Project" },
+      tr: { layihe: "Proje", layL: "Proje — ne hazırlayayım?", layP: "Yeni görev, değişiklik veya kod", s1: "1. Görev inceleniyor", s2: "2. Derin analiz", s3: "3. Dosyalar yazılıyor", s4: "4. Hata aranıyor", s5: "ZIP hazır", file: "Dosya", down: "ZIP indir", fail: "Bu adım alınmadı", empty: "Dosya çıkmadı", bad: "Boş dosya atıldı", wait: "bekleniyor", clean: "Hata bulunmadı", found: "Hata", fix: "5. Hata düzeltiliyor", again: "6. Yeniden kontrol", still: "Hata kaldı", see: "Önizleme", nosee: "Önizleme yok: HTML dosyası çıkmadı", goal: "Amaç", din: "Giriş", dout: "Çıkış", parts: "Parçalar", dfiles: "Dosyalar", risk: "Risk", dcheck: "Kontrol", work: "İş bölünüyor", writing: "Yazılıyor", revise: "Önceki proje okunuyor", change: "Değişiklik yazılıyor", review: "Kod inceleniyor", next: "Devam için değişikliği yaz veya yeni görev ver", cost: "Bu proje birkaç model sorusu kullanır", dock: "Proje" },
+      ar: { layihe: "مشروع", layL: "مشروع — ماذا أجهّز؟", layP: "مهمة جديدة أو تعديل أو كود", s1: "1. تُحلَّل المهمة", s2: "2. تحليل عميق", s3: "3. تُكتب الملفات", s4: "4. يُبحث عن خطأ", s5: "ملف ZIP جاهز", file: "ملف", down: "تنزيل ZIP", fail: "فشلت هذه الخطوة", empty: "لم يخرج ملف", bad: "أُسقط ملف فارغ", wait: "يُنتظر", clean: "لم يُوجد خطأ", found: "خطأ", fix: "5. يُصلَح الخطأ", again: "6. فحص ثانٍ", still: "بقي خطأ", see: "معاينة", nosee: "لا معاينة: لم يخرج ملف HTML", goal: "الهدف", din: "المدخل", dout: "المخرج", parts: "الأجزاء", dfiles: "الملفات", risk: "الخطر", dcheck: "الفحص", work: "يُقسَّم العمل", writing: "يُكتب", revise: "يُقرأ المشروع السابق", change: "يُكتب التعديل", review: "يُحلَّل الكود", next: "للمتابعة اكتب التعديل أو مهمة جديدة", cost: "هذا المشروع يستخدم عدة أسئلة للنموذج", dock: "المشروع" },
+      ru: { layihe: "Проект", layL: "Проект — что собрать?", layP: "Новая задача, правка или код", s1: "1. Разбор задачи", s2: "2. Глубокий разбор", s3: "3. Пишутся файлы", s4: "4. Поиск ошибок", s5: "ZIP готов", file: "Файл", down: "Скачать ZIP", fail: "Этот шаг не вышел", empty: "Файл не вышел", bad: "Пустой файл отброшен", wait: "ждётся", clean: "Ошибок нет", found: "Ошибка", fix: "5. Ошибка исправляется", again: "6. Повторная проверка", still: "Ошибка осталась", see: "Просмотр", nosee: "Просмотра нет: HTML-файла нет", goal: "Цель", din: "Вход", dout: "Выход", parts: "Части", dfiles: "Файлы", risk: "Риск", dcheck: "Проверка", work: "Работа делится", writing: "Пишется", revise: "Читается прошлый проект", change: "Пишется правка", review: "Код разбирается", next: "Дальше напиши правку или новую задачу", cost: "Этот проект берёт несколько вопросов к модели", dock: "Проект" }
     };
     function t(key) {
       const row = (UI[uiLangCode] || UI.az)[key];
@@ -3004,117 +3008,269 @@
       msgs.appendChild(el);
       msgs.scrollTop = msgs.scrollHeight;
     }
+    let layiheProject = null;
+    try { layiheProject = JSON.parse(sessionStorage.getItem("nibras_layihe_v1") || "null"); } catch (e) { layiheProject = null; }
+    function saveProject(files, task) {
+      layiheProject = {
+        task: String(task || "").slice(0, 500),
+        files: files.slice(0, 4).map(function (file) { return { path: file.path, content: String(file.content || "").slice(0, 20000) }; })
+      };
+      try { sessionStorage.setItem("nibras_layihe_v1", JSON.stringify(layiheProject)); } catch (e) {}
+      paintDock();
+    }
+    function paintDock() {
+      let bar = document.getElementById("layihe-dock");
+      const files = layiheProject && layiheProject.files ? layiheProject.files : [];
+      if (!files.length) {
+        if (bar) bar.hidden = true;
+        return;
+      }
+      if (!bar) {
+        bar = document.createElement("div");
+        bar.id = "layihe-dock";
+        bar.className = "layihe-dock";
+        const dock = document.querySelector(".dock");
+        if (dock && dock.parentNode) dock.parentNode.insertBefore(bar, dock);
+      }
+      bar.hidden = false;
+      bar.textContent = "";
+      const label = document.createElement("b");
+      label.textContent = t("dock");
+      bar.appendChild(label);
+      files.forEach(function (file) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.textContent = file.path;
+        button.addEventListener("click", function () { pushFile(file); });
+        bar.appendChild(button);
+      });
+    }
+    function foldTask(text) {
+      return String(text || "").toLowerCase()
+        .replace(/ı/g, "i").replace(/ə/g, "e").replace(/ö/g, "o").replace(/ü/g, "u")
+        .replace(/ş/g, "s").replace(/ç/g, "c").replace(/ğ/g, "g");
+    }
+    function isFresh(text) {
+      return /(hazirla|yarat|sifirdan|yeni layihe|yeni sehife|build a|create a)/.test(foldTask(text));
+    }
+    function isReview(text) {
+      if (/```/.test(text)) return true;
+      if (isFresh(text)) return false;
+      return text.length > 40 && /function\s+\w+|def\s+\w+|<html|<!doctype|class\s+\w+/.test(text);
+    }
+    function isRevise(text) {
+      if (!layiheProject || !layiheProject.files || !layiheProject.files.length) return false;
+      if (isFresh(text) || isReview(text)) return false;
+      return text.length < 420 || /(elave|duzelt|deyis|sil\b|reng|boyut|fix|add |change|update|dark|tund|duyme|yenile)/.test(foldTask(text));
+    }
+    function expandFiles(task, deep) {
+      const seen = {};
+      const out = [];
+      function add(name) {
+        const path = safePath(String(name || "").trim().split(/\s+/)[0]);
+        if (!path || seen[path] || out.length >= 4) return;
+        seen[path] = 1;
+        out.push(path);
+      }
+      String((deep && deep.FILES) || "").split("|").forEach(add);
+      const s = foldTask(task);
+      const web = /html|css|sehife|sayt|hesab|kalkul|chat|cat|siyah|todo|form|duym|oyun|page|site/.test(s) || out.some(function (name) { return /\.html?$/.test(name); });
+      const py = /python|piton|пайтон|بايثون/.test(String(task || "").toLowerCase()) || out.some(function (name) { return /\.py$/.test(name); });
+      if (py && !out.length) add("main.py");
+      if (web) {
+        if (!out.some(function (name) { return /\.html?$/.test(name); })) add("index.html");
+        if (!out.some(function (name) { return /\.css$/.test(name); })) add("style.css");
+        if (!out.some(function (name) { return /\.js$/.test(name); }) && /duym|hesab|klik|click|siyah|elave|form|saxla|hesabla|oyun/.test(s)) add("app.js");
+      }
+      if (!out.length) add(py ? "main.py" : "index.html");
+      return out.slice(0, 4);
+    }
+    async function writeOne(task, deep, path, others) {
+      const brief = ["GOAL", "OUTPUT", "RISK"].map(function (key) { return deep[key] ? key + ": " + deep[key] : ""; }).filter(Boolean).join(" | ").slice(0, 220);
+      const raw = await askModel("Yalnız bu faylı yaz: " + path + "\n===FILE: " + path + "===\nkod\n===END===\nBaşqa fayl yazma.\nTapşırıq: " + task.slice(0, 180) + "\nTəhlil: " + brief + "\nDigər: " + others.join(", ").slice(0, 80));
+      const parsed = parseFiles(raw);
+      const exact = parsed.filter(function (file) { return file.path === path; })[0];
+      if (exact) return exact;
+      if (parsed[0]) return { path: path, content: parsed[0].content };
+      const body = String(raw || "").replace(/```[a-z]*\n?/gi, "").replace(/```/g, "").trim();
+      if (body.length > 20) return { path: path, content: body.slice(0, 12000) };
+      return null;
+    }
+    async function fixFiles(files, issues, log) {
+      const broken = files.filter(function (file) {
+        return issues.some(function (issue) { return issue.indexOf(file.path + ":") === 0; });
+      }).slice(0, 2);
+      for (let i = 0; i < broken.length; i++) {
+        const file = broken[i];
+        const mine = issues.filter(function (issue) { return issue.indexOf(file.path + ":") === 0; }).slice(0, 2).join(" | ").slice(0, 160);
+        const step = pushStep(t("fix") + ": " + file.path + " — " + t("wait"), "run");
+        try {
+          const raw = await askModel("Xətanı düzəlt. Yalnız " + file.path + " yaz.\n===FILE: " + file.path + "===\nkod\n===END===\nXəta: " + mine + "\n" + file.content.slice(0, 420));
+          const fixed = parseFiles(raw);
+          const next = fixed.filter(function (item) { return item.path === file.path; })[0] || fixed[0];
+          if (!next) { markStep(step, "bad", t("fix") + " — " + t("fail")); log.push(t("fail")); continue; }
+          const updated = { path: file.path, content: next.content };
+          const at = files.findIndex(function (old) { return old.path === file.path; });
+          if (at >= 0) files[at] = updated;
+          pushFile(updated);
+          markStep(step, "ok", t("fix") + ": " + file.path);
+          log.push(t("fix") + ": " + file.path);
+        } catch (err) {
+          markStep(step, "bad", t("fix") + " — " + t("fail"));
+          log.push(t("fail"));
+        }
+      }
+      const again = pushStep(t("again") + " — " + t("wait"), "run");
+      const left = findErrors(files);
+      if (!left.length) {
+        markStep(again, "ok", t("again") + " — " + t("clean"));
+        log.push(t("clean"));
+      } else {
+        markStep(again, "bad", t("still"));
+        left.forEach(function (issue) { pushStep(t("found") + ": " + issue, "bad"); log.push(issue); });
+      }
+    }
+    async function finishProject(files, task, log) {
+      const s4 = pushStep(t("s4") + " — " + t("wait"), "run");
+      const issues = findErrors(files);
+      if (!issues.length) {
+        markStep(s4, "ok", t("s4") + " — " + t("clean"));
+        log.push(t("clean"));
+      } else {
+        markStep(s4, "bad", t("s4") + " — " + issues.length);
+        issues.forEach(function (issue) { pushStep(t("found") + ": " + issue, "bad"); log.push(issue); });
+        await fixFiles(files, issues, log);
+      }
+      const seen = pushPreview(files);
+      log.push(seen ? t("see") : t("nosee"));
+      pushZip(files);
+      log.push(t("s5"));
+      saveProject(files, task);
+      pushStep(t("next"), "ok");
+      log.push(t("next"));
+    }
+    async function showDeep(raw, log) {
+      const deep = parseDeep(raw);
+      const order = ["GOAL", "INPUT", "OUTPUT", "PARTS", "FILES", "RISK", "CHECK"];
+      const labels = { GOAL: "goal", INPUT: "din", OUTPUT: "dout", PARTS: "parts", FILES: "dfiles", RISK: "risk", CHECK: "dcheck" };
+      const found = order.filter(function (key) { return deep[key]; });
+      if (found.length) {
+        for (let i = 0; i < found.length; i++) {
+          const line = t(labels[found[i]]) + ": " + deep[found[i]];
+          pushStep(line, "ok");
+          log.push(line);
+          await new Promise(function (r) { setTimeout(r, 120); });
+        }
+      } else {
+        const plan = String(raw || "").trim().slice(0, 500);
+        if (plan) { pushStep(plan, "ok"); log.push(plan); }
+      }
+      return deep;
+    }
+    async function runReview(task, log) {
+      const step = pushStep(t("review") + " — " + t("wait"), "run");
+      const code = task.replace(/```[a-z]*\n?/gi, "").replace(/```/g, "").trim().slice(0, 20000);
+      let path = "kod.txt";
+      if (/<html|<!doctype/i.test(code)) path = "index.html";
+      else if (/\bdef\s+|\bimport\s+/.test(code) && !/function\s+/.test(code)) path = "main.py";
+      else if (/[{;]|function\s+/.test(code)) path = "app.js";
+      const files = [{ path: path, content: code }];
+      const issues = findErrors(files);
+      markStep(step, issues.length ? "bad" : "ok", t("review"));
+      log.push(t("review"));
+      if (!issues.length) { pushStep(t("clean"), "ok"); log.push(t("clean")); }
+      issues.forEach(function (issue) { pushStep(t("found") + ": " + issue, "bad"); log.push(issue); });
+      const raw = await askModel("Kodu dərin təhlil et. Yeni kod yazma. Etiketi dəyişmə.\nGOAL: nə edir\nRISK: harada sınır\nCHECK: nə yoxlanmalıdır\nKod: " + code.slice(0, 480));
+      await showDeep(raw, log);
+      if (issues.length) await fixFiles(files, issues, log);
+      const seen = pushPreview(files);
+      log.push(seen ? t("see") : t("nosee"));
+      pushZip(files);
+      saveProject(files, "review");
+      pushStep(t("next"), "ok");
+      log.push(t("next"));
+    }
+    async function runRevise(task, log) {
+      const files = layiheProject.files.map(function (file) { return { path: file.path, content: file.content }; });
+      pushStep(t("revise") + ": " + files.map(function (file) { return file.path; }).join(", "), "ok");
+      log.push(t("revise"));
+      const step = pushStep(t("change") + " — " + t("wait"), "run");
+      const sample = files.map(function (file) { return file.path + "\n" + file.content.slice(0, 140); }).join("\n").slice(0, 300);
+      const raw = await askModel("Yalnız dəyişən faylı yaz.\n===FILE: ad===\nkod\n===END===\nDəyişiklik: " + task.slice(0, 200) + "\nFayllar: " + files.map(function (file) { return file.path; }).join(", ") + "\n" + sample);
+      const changed = parseFiles(raw);
+      if (!changed.length) {
+        markStep(step, "bad", t("change") + " — " + t("fail"));
+        log.push(t("fail"));
+        return;
+      }
+      markStep(step, "ok", t("change"));
+      changed.forEach(function (file) {
+        const at = files.findIndex(function (old) { return old.path === file.path; });
+        if (at >= 0) files[at] = file;
+        else if (files.length < 4) files.push(file);
+        pushFile(file);
+        log.push(t("file") + ": " + file.path);
+      });
+      await finishProject(files, task, log);
+    }
+    async function runNewProject(task, log) {
+      pushStep(t("cost"), "ok");
+      log.push(t("cost"));
+      const s1 = pushStep(t("s1") + " — " + t("wait"), "run");
+      await new Promise(function (r) { setTimeout(r, 160); });
+      markStep(s1, "ok", t("s1"));
+      log.push(t("s1"));
+      const notes = analyzeTask(task);
+      for (let i = 0; i < notes.length; i++) {
+        pushStep(notes[i], "ok");
+        log.push(notes[i]);
+      }
+      const s2 = pushStep(t("s2") + " — " + t("wait"), "run");
+      const planRaw = await askModel("Dərin təhlil. Kod yox. Etiketi dəyişmə. Hər sətir belə:\nGOAL: məqsəd\nINPUT: nə verilir\nOUTPUT: nə çıxmalıdır\nPARTS: hissələr | ilə\nFILES: ən çox 4 fayl adı | ilə\nRISK: harada sınır\nCHECK: nə yoxlanmalıdır\nTapşırıq: " + task.slice(0, 460));
+      markStep(s2, "ok", t("s2"));
+      log.push(t("s2"));
+      const deep = await showDeep(planRaw, log);
+      const names = expandFiles(task, deep);
+      pushStep(t("work") + ": " + names.join(", "), "ok");
+      log.push(t("work") + ": " + names.join(", "));
+      const files = [];
+      for (let i = 0; i < names.length; i++) {
+        const step = pushStep(t("writing") + ": " + names[i] + " — " + t("wait"), "run");
+        const file = await writeOne(task, deep, names[i], names.filter(function (name) { return name !== names[i]; }));
+        if (!file) {
+          markStep(step, "bad", t("writing") + ": " + names[i] + " — " + t("fail"));
+          log.push(t("fail"));
+          continue;
+        }
+        files.push(file);
+        markStep(step, "ok", t("writing") + ": " + names[i]);
+        pushFile(file);
+        log.push(t("file") + ": " + file.path);
+      }
+      if (!files.length) {
+        pushStep(t("empty"), "bad");
+        log.push(t("empty"));
+        return;
+      }
+      await finishProject(files, task, log);
+    }
     async function runLayihe(task) {
       busy = true;
       btn.disabled = true;
       bubble(task, "u");
       rec("u", task, "", 0);
       const log = [];
-      const s1 = pushStep(t("s1") + " — " + t("wait"), "run");
       try {
-        await new Promise(function (r) { setTimeout(r, 200); });
-        markStep(s1, "ok", t("s1"));
-        log.push(t("s1"));
-        const notes = analyzeTask(task);
-        for (let i = 0; i < notes.length; i++) {
-          pushStep(notes[i], "ok");
-          log.push(notes[i]);
-          await new Promise(function (r) { setTimeout(r, 120); });
-        }
-        const s2 = pushStep(t("s2") + " — " + t("wait"), "run");
-        const planRaw = await askModel("Dərin təhlil. Kod yox. Etiketi dəyişmə. Hər sətir belə:\nGOAL: məqsəd\nINPUT: nə verilir\nOUTPUT: nə çıxmalıdır\nPARTS: hissələr | ilə\nFILES: ən çox 4 fayl adı | ilə\nRISK: harada sınır\nCHECK: nə yoxlanmalıdır\nTapşırıq: " + task.slice(0, 460));
-        const deep = parseDeep(planRaw);
-        const order = ["GOAL", "INPUT", "OUTPUT", "PARTS", "FILES", "RISK", "CHECK"];
-        const labels = { GOAL: "goal", INPUT: "din", OUTPUT: "dout", PARTS: "parts", FILES: "dfiles", RISK: "risk", CHECK: "dcheck" };
-        const found = order.filter(function (key) { return deep[key]; });
-        markStep(s2, "ok", t("s2"));
-        if (found.length >= 3) {
-          for (let i = 0; i < found.length; i++) {
-            const line = t(labels[found[i]]) + ": " + deep[found[i]];
-            pushStep(line, "ok");
-            log.push(line);
-            await new Promise(function (r) { setTimeout(r, 140); });
-          }
-        } else {
-          const plan = String(planRaw).trim().slice(0, 500);
-          pushStep(plan, "ok");
-          log.push(plan);
-        }
-        log.push(t("s2"));
-        const brief = ["FILES", "GOAL", "OUTPUT", "RISK"].map(function (key) { return deep[key] ? key + ": " + deep[key] : ""; }).filter(Boolean).join(" | ").slice(0, 300);
-        const s3 = pushStep(t("s3") + " — " + t("wait"), "run");
-        const fileRaw = await askModel("Yalnız fayl yaz. Ən çox 4 fayl. Adlar FILES siyahısından olsun.\n===FILE: index.html===\nkod\n===END===\nBaşqa cümlə yazma.\nTapşırıq: " + task.slice(0, 200) + "\nTəhlil: " + (brief || String(planRaw).replace(/\s+/g, " ").slice(0, 240)));
-        const files = parseFiles(fileRaw);
-        if (!files.length) {
-          markStep(s3, "bad", t("s3") + " — " + t("empty"));
-          log.push(t("empty"));
-          rec("b", log.join("\n"), "", 1);
-          return;
-        }
-        markStep(s3, "ok", t("s3"));
-        log.push(t("s3"));
-        files.forEach(function (file) {
-          pushFile(file);
-          log.push(t("file") + ": " + file.path);
-        });
-        const s4 = pushStep(t("s4") + " — " + t("wait"), "run");
-        let issues = findErrors(files);
-        if (!issues.length) {
-          markStep(s4, "ok", t("s4") + " — " + t("clean"));
-          log.push(t("clean"));
-        } else {
-          markStep(s4, "bad", t("s4") + " — " + issues.length);
-          issues.forEach(function (issue) {
-            pushStep(t("found") + ": " + issue, "bad");
-            log.push(issue);
-          });
-          const sFix = pushStep(t("fix") + " — " + t("wait"), "run");
-          try {
-            const broken = files.filter(function (file) {
-              return issues.some(function (issue) { return issue.indexOf(file.path + ":") === 0; });
-            });
-            const pack = broken.map(function (file) { return file.path + "\n" + file.content.slice(0, 180); }).join("\n").slice(0, 380);
-            const fixRaw = await askModel("Xətanı düzəlt. Yalnız pozulan faylı yaz.\n===FILE: ad===\nkod\n===END===\nXəta: " + issues.slice(0, 3).join(" | ").slice(0, 160) + "\n" + pack);
-            const fixed = parseFiles(fixRaw);
-            if (!fixed.length) {
-              markStep(sFix, "bad", t("fix") + " — " + t("fail"));
-              log.push(t("fail"));
-            } else {
-              fixed.forEach(function (file) {
-                const at = files.findIndex(function (old) { return old.path === file.path; });
-                if (at >= 0) files[at] = file;
-                else files.push(file);
-                pushFile(file);
-                log.push(t("fix") + ": " + file.path);
-              });
-              markStep(sFix, "ok", t("fix"));
-              const sAgain = pushStep(t("again") + " — " + t("wait"), "run");
-              issues = findErrors(files);
-              if (!issues.length) {
-                markStep(sAgain, "ok", t("again") + " — " + t("clean"));
-                log.push(t("clean"));
-              } else {
-                markStep(sAgain, "bad", t("still"));
-                issues.forEach(function (issue) { pushStep(t("found") + ": " + issue, "bad"); log.push(issue); });
-                log.push(t("still"));
-              }
-            }
-          } catch (err) {
-            markStep(sFix, "bad", t("fix") + " — " + t("fail"));
-            log.push(t("fail"));
-          }
-        }
-        const seen = pushPreview(files);
-        log.push(seen ? t("see") : t("nosee"));
-        pushZip(files);
-        log.push(t("s5"));
-        rec("b", log.join("\n"), "", 0);
+        if (isReview(task)) await runReview(task, log);
+        else if (isRevise(task)) await runRevise(task, log);
+        else await runNewProject(task, log);
+        rec("b", log.join("\n").slice(0, 4000), "", 0);
       } catch (e) {
         const live = msgs.querySelector(".step.run");
         if (live) markStep(live, "bad", String(live.textContent || "").replace(t("wait"), t("fail")));
         else pushStep(t("fail"), "bad");
         log.push(t("fail"));
-        rec("b", log.join("\n"), "", 1);
+        rec("b", log.join("\n").slice(0, 4000), "", 1);
       } finally {
         busy = false;
         btn.disabled = false;
@@ -3740,6 +3896,7 @@
       document.getElementById("dnote").textContent = t("note");
       document.getElementById("kicker").textContent = t("kicker");
       document.querySelectorAll("[data-ui]").forEach(function (el) { el.textContent = t(el.getAttribute("data-ui")); });
+      paintDock();
       document.querySelectorAll("#langs button").forEach(function (el) { el.classList.toggle("on", el.getAttribute("data-lang") === code); });
       document.getElementById("langhead").textContent = LANG_NAME[code];
       menuBtn.setAttribute("aria-label", t("chats"));
