@@ -53,7 +53,10 @@ export async function publicUrl(input) {
   }
   if (url.protocol !== "http:" && url.protocol !== "https:") return { ok: false, error: "bad-url" };
   if (url.username || url.password) return { ok: false, error: "blocked" };
-  if (blockedHost(url.hostname) || isPrivateAddress(url.hostname)) return { ok: false, error: "blocked" };
+  if (blockedHost(url.hostname)) return { ok: false, error: "blocked" };
+  const host = url.hostname.toLowerCase();
+  const numeric = host.includes(":") || /^\d+\.\d+\.\d+\.\d+$/.test(host);
+  if (numeric && isPrivateAddress(host)) return { ok: false, error: "blocked" };
   let records = [];
   try {
     records = await lookup(url.hostname, { all: true, verbatim: true });
