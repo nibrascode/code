@@ -3457,11 +3457,11 @@
     }
     function siteQuestion() {
       const pack = {
-        az: ["Hansı sayt olsun? Dəqiq bilmədən başlamıram.", [["Mağaza saytı", "Mağaza"], ["Şirkət saytı", "Şirkət"], ["Restoran saytı", "Restoran"], ["Bloq saytı", "Bloq"], ["Kurs saytı", "Kurs"]]],
-        en: ["What kind of site? I will not start until that is clear.", [["Shop site", "Shop"], ["Company site", "Company"], ["Restaurant site", "Restaurant"], ["Blog site", "Blog"], ["Course site", "Course"]]],
-        tr: ["Nasıl bir site olsun? Netleşmeden başlamam.", [["Mağaza sitesi", "Mağaza"], ["Şirket sitesi", "Şirket"], ["Restoran sitesi", "Restoran"], ["Blog sitesi", "Blog"], ["Kurs sitesi", "Kurs"]]],
-        ar: ["أي موقع تريده؟ لن أبدأ قبل أن يتضح.", [["موقع متجر", "متجر"], ["موقع شركة", "شركة"], ["موقع مطعم", "مطعم"], ["موقع مدونة", "مدونة"], ["موقع دورة", "دورة"]]],
-        ru: ["Какой сайт нужен? Без этого не начинаю.", [["Сайт магазина", "Магазин"], ["Сайт компании", "Компания"], ["Сайт ресторана", "Ресторан"], ["Сайт блога", "Блог"], ["Сайт курса", "Курс"]]]
+        az: ["Hansı sayt olsun? Dəqiq bilmədən başlamıram.", [["Mağaza saytı", "Mağaza"], ["Şirkət saytı", "Şirkət"], ["Restoran saytı", "Restoran"], ["Bloq saytı", "Bloq"], ["Kurs saytı", "Kurs"], ["Klinika saytı", "Klinika"], ["Otel saytı", "Otel"]]],
+        en: ["What kind of site? I will not start until that is clear.", [["Shop site", "Shop"], ["Company site", "Company"], ["Restaurant site", "Restaurant"], ["Blog site", "Blog"], ["Course site", "Course"], ["Clinic site", "Clinic"], ["Hotel site", "Hotel"]]],
+        tr: ["Nasıl bir site olsun? Netleşmeden başlamam.", [["Mağaza sitesi", "Mağaza"], ["Şirket sitesi", "Şirket"], ["Restoran sitesi", "Restoran"], ["Blog sitesi", "Blog"], ["Kurs sitesi", "Kurs"], ["Klinik sitesi", "Klinik"], ["Otel sitesi", "Otel"]]],
+        ar: ["أي موقع تريده؟ لن أبدأ قبل أن يتضح.", [["موقع متجر", "متجر"], ["موقع شركة", "شركة"], ["موقع مطعم", "مطعم"], ["موقع مدونة", "مدونة"], ["موقع دورة", "دورة"], ["موقع عيادة", "عيادة"], ["موقع فندق", "فندق"]]],
+        ru: ["Какой сайт нужен? Без этого не начинаю.", [["Сайт магазина", "Магазин"], ["Сайт компании", "Компания"], ["Сайт ресторана", "Ресторан"], ["Сайт блога", "Блог"], ["Сайт курса", "Курс"], ["Сайт клиники", "Клиника"], ["Сайт отеля", "Отель"]]]
       };
       return pack[uiLangCode] || pack.az;
     }
@@ -3498,10 +3498,26 @@
       }).catch(function () {});
     }
     function pageTitle(path) {
-      const map = { "index.html": "Ana", "haqqinda.html": "Haqqında", "xidmet.html": "Xidmət", "elaqe.html": "Əlaqə", "qiymet.html": "Qiymət", "blog.html": "Bloq", "qalereya.html": "Qalereya", "komanda.html": "Komanda", "mehsul.html": "Məhsul" };
+      const map = { "index.html": "Ana", "haqqinda.html": "Haqqında", "xidmet.html": "Xidmət", "elaqe.html": "Əlaqə", "qiymet.html": "Qiymət", "blog.html": "Bloq", "qalereya.html": "Qalereya", "komanda.html": "Komanda", "mehsul.html": "Məhsul", "menu.html": "Menyu", "ders.html": "Dərslər", "hekim.html": "Həkimlər", "otaq.html": "Otaqlar" };
       return map[path] || String(path || "").replace(/\.html?$/i, "");
     }
+    function siteKit(task) {
+      const s = foldTask(task);
+      const kits = [
+        { test: /restoran|kafe/, color: "#e24b3a", pages: ["index.html", "menu.html", "haqqinda.html", "elaqe.html"], button: "Rezerv et", copy: { "index.html": ["Restoran", "Süfrə və saatlar buradan seçilir."], "menu.html": ["Menyu", "Yeməklər ayrıca bölmədədir.", ["Şorba", "Əsas yemək", "Şirniyyat"]], "haqqinda.html": ["Haqqımızda", "Mətbəx və salon haqqında qısa hekayə."] } },
+        { test: /klinik|xestexana/, color: "#2f9e8f", pages: ["index.html", "hekim.html", "xidmet.html", "elaqe.html"], button: "Qəbula yazıl", copy: { "index.html": ["Klinika", "Həkim və qəbul buradan başlayır."], "hekim.html": ["Həkimlər", "Hər həkim ayrı sətirdədir.", ["Terapevt", "Pediatr", "Stomatoloq"]], "xidmet.html": ["Xidmətlər", "Müayinələr ayrıca göstərilir.", ["Müayinə", "Analiz", "Məsləhət"]] } },
+        { test: /otel/, color: "#c48a2a", pages: ["index.html", "otaq.html", "qiymet.html", "elaqe.html"], button: "Otaq tut", copy: { "index.html": ["Otel", "Otaq və tarix buradan seçilir."], "otaq.html": ["Otaqlar", "Növlər ayrı-ayrıdır.", ["Tək", "Cüt", "Ailə"]], "qiymet.html": ["Qiymət", "Gecəlik qiymətlər.", ["Həftəiçi", "Həftəsonu", "Mövsüm"]] } },
+        { test: /kurs|mekteb/, color: "#3b6fe0", pages: ["index.html", "ders.html", "qiymet.html", "elaqe.html"], button: "Yazıl", copy: { "index.html": ["Kurs", "Dərs və qeydiyyat buradan başlayır."], "ders.html": ["Dərslər", "Proqram ayrıca bölmədədir.", ["Başlanğıc", "Orta", "İrəli"]], "qiymet.html": ["Qiymət", "Paketler ayrıdır.", ["Aylıq", "Tam kurs", "Fərdi"]] } },
+        { test: /bloq|blog|xeber/, color: "#7a5af5", pages: ["index.html", "blog.html", "haqqinda.html", "elaqe.html"], button: "Göndər", copy: { "index.html": ["Bloq", "Son yazılar girişdə görünür."], "blog.html": ["Yazılar", "Hər yazı ayrı sətirdədir.", ["Birinci yazı", "İkinci yazı", "Üçüncü yazı"]], "haqqinda.html": ["Haqqında", "Bloqun mövzusu və müəllif."] } },
+        { test: /magaza|mehsul|vitrin/, color: "#d06a1f", pages: ["index.html", "mehsul.html", "qiymet.html", "elaqe.html"], button: "Sifariş et", copy: { "index.html": ["Mağaza", "Məhsullar və sifariş buradan başlayır."], "mehsul.html": ["Məhsullar", "Hər məhsul ayrıdır.", ["Birinci", "İkinci", "Üçüncü"]], "qiymet.html": ["Qiymət", "Məhsul qiymətləri.", ["Kiçik", "Orta", "Böyük"]] } },
+        { test: /sirket|firma|komanda|xidmet/, color: "#3d7eff", pages: ["index.html", "haqqinda.html", "xidmet.html", "komanda.html", "elaqe.html"], button: "Göndər", copy: { "index.html": ["Şirkət", "İşlər və əlaqə buradan başlayır."], "haqqinda.html": ["Haqqımızda", "Şirkətin nə iş gördüyü."], "xidmet.html": ["Xidmətlər", "Təklif olunan işlər.", ["Məsləhət", "Layihə", "Dəstək"]], "komanda.html": ["Komanda", "İnsanlar ayrı siyahıdadır.", ["Rəhbər", "Dizayn", "İş"]] } }
+      ];
+      for (let i = 0; i < kits.length; i++) if (kits[i].test.test(s)) return kits[i];
+      return null;
+    }
     function sitePages(task, deep) {
+      const kit = siteKit(task);
+      if (kit) return kit.pages.slice();
       const s = foldTask(task + " " + ((deep && deep.PARTS) || ""));
       const pages = ["index.html"];
       [[/haqq|about/, "haqqinda.html"], [/xidmet|service/, "xidmet.html"], [/elaqe|contact/, "elaqe.html"], [/qiymet|price/, "qiymet.html"], [/blog|xeber/, "blog.html"], [/qalereya|gallery/, "qalereya.html"], [/komanda|team/, "komanda.html"], [/mehsul|magaza|shop/, "mehsul.html"]].forEach(function (pair) {
@@ -3570,7 +3586,9 @@
       const kind = foldTask(task);
       const end = "<" + "/script>";
       if (/\.html?$/i.test(path)) {
-        const known = {
+        const kit = isSite(task) ? siteKit(task) : null;
+        const page = kit && kit.copy[path];
+        const known = page || {
           "index.html": ["Ana səhifə", "Bura girişdir. Aşağıdakı bölmələrin hər biri ayrı səhifədə yazılıb."],
           "haqqinda.html": ["Haqqında", "Bu bölmə saytın kimliyini, məqsədini və kimin üçün olduğunu ayrıca anlatır."],
           "xidmet.html": ["Xidmətlər", "Hər xidmət ayrı sətirdədir və öz səhifəsində dayanır."],
@@ -3580,13 +3598,14 @@
           "komanda.html": ["Komanda", "İnsanlar bu bölmədə, ayrıca siyahı ilə durur."],
           "mehsul.html": ["Məhsullar", "Məhsullar bu bölmədə, öz siyahısı ilə durur."]
         }[path];
-        const lists = { "xidmet.html": ["Plan", "Dizayn", "Kod"], "qiymet.html": ["Sadə", "Standart", "Tam"], "komanda.html": ["Dizayn", "Kod", "Məzmun"], "mehsul.html": ["Birinci", "İkinci", "Üçüncü"] };
+        const lists = page && page[2] ? page[2] : { "xidmet.html": ["Plan", "Dizayn", "Kod"], "qiymet.html": ["Sadə", "Standart", "Tam"], "komanda.html": ["Dizayn", "Kod", "Məzmun"], "mehsul.html": ["Birinci", "İkinci", "Üçüncü"] }[path];
         if (isSite(task) && (known || path === "elaqe.html")) {
           const head = known ? known[0] : "Əlaqə";
+          const button = kit && kit.button ? kit.button : "Göndər";
           let inner = path === "elaqe.html"
-            ? "<form><label>Ad<input name=\"ad\"></label><label>Mesaj<textarea name=\"mesaj\"></textarea></label><button type=\"button\" id=\"go\">Göndər</button><p id=\"out\"></p></form>"
+            ? "<form><label>Ad<input name=\"ad\"></label><label>Mesaj<textarea name=\"mesaj\"></textarea></label><button type=\"button\" id=\"go\">" + button + "</button><p id=\"out\"></p></form>"
             : "<p>" + (known ? known[1] : title) + "</p>";
-          if (lists[path]) inner += "<ul>" + lists[path].map(function (item) { return "<li>" + item + "</li>"; }).join("") + "</ul>";
+          if (lists) inner += "<ul>" + lists.map(function (item) { return "<li>" + item + "</li>"; }).join("") + "</ul>";
           return "<!DOCTYPE html>\n<html lang=\"az\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>" + head + "</title>\n<link rel=\"stylesheet\" href=\"style.css\">\n</head>\n<body>\n<main>\n<h1>" + head + "</h1>\n" + inner + "\n</main>\n<script src=\"app.js\">" + end + "\n</body>\n</html>\n";
         }
         let fields = "<label>Mətn<input id=\"q\"></label>\n<button type=\"button\" id=\"go\">Göstər</button>\n<p id=\"out\"></p>";
@@ -3595,7 +3614,11 @@
         if (wants3d(task)) fields = "<canvas id=\"scene\"></canvas>";
         return "<!DOCTYPE html>\n<html lang=\"az\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>" + title + "</title>\n<link rel=\"stylesheet\" href=\"style.css\">\n</head>\n<body>\n<main>\n<h1>" + title + "</h1>\n" + fields + "\n</main>\n<script src=\"app.js\">" + end + "\n</body>\n</html>\n";
       }
-      if (/\.css$/i.test(path)) return "nav.site{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}nav.site a{color:#9db7ff;text-decoration:none;min-height:44px;display:inline-flex;align-items:center}h1{margin:0 0 12px}#out{min-height:1.4em;font-weight:700}ul{padding-left:18px}section{margin:20px 0}\n";
+      if (/\.css$/i.test(path)) {
+        const kit = siteKit(task);
+        const accent = kit ? kit.color : "#9db7ff";
+        return "nav.site{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}nav.site a{color:" + accent + ";text-decoration:none;min-height:44px;display:inline-flex;align-items:center}h1{margin:0 0 12px;color:" + accent + "}#out{min-height:1.4em;font-weight:700}ul{padding-left:18px}section{margin:20px 0}\n";
+      }
       if (/\.js$/i.test(path)) {
         if (wants3d(task)) return scene3d();
         if (/hesab|kalkul|topla/.test(kind)) return "(function(){\nvar a=document.getElementById(\"a\"),b=document.getElementById(\"b\"),out=document.getElementById(\"out\"),go=document.getElementById(\"go\");\nif(!go||!out)return;\ngo.addEventListener(\"click\",function(){var x=parseFloat(a&&a.value),y=parseFloat(b&&b.value);out.textContent=isNaN(x)||isNaN(y)?\"Rəqəm yaz\":String(x+y);});\n})();\n";
