@@ -159,7 +159,7 @@ export function LogicPage() {
       )}
       <NextLinks
         links={[
-          { href: "/flow", label: { az: "Plan qur", en: "Make a plan", tr: "Plan kur", ar: "ابنِ خطة", ru: "Собрать план" } },
+          { href: "/flow", label: { az: "Hazırla", en: "Prepare", tr: "Hazırla", ar: "جهّز", ru: "Подготовь" } },
           { href: "/tools", label: { az: "Xidmətlər", en: "Tools", tr: "Araçlar", ar: "الأدوات", ru: "Сервисы" } },
         ]}
       />

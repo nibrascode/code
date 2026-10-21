@@ -18,11 +18,11 @@ export const Route = createFileRoute("/flow")({
 });
 
 const COPY: Record<Lang, { h1: string; lead: string; label: string; button: string; kind: string; pages: string; tree: string; steps: string; files: string; copy: string; copied: string }> = {
-  az: { h1: "Nibras Flow", lead: "İdeyanı yaz. Səhifələrin xəritəsi, qovluq, iş sırası və başlanğıc fayl adları burada qurulur. Kod yazılmır və heç yerə göndərilmir.", label: "İdeya", button: "Plan qur", kind: "Növ", pages: "Səhifələr", tree: "Qovluq", steps: "İş sırası", files: "Fayllar", copy: "Kopyala", copied: "Kopyalandı" },
-  en: { h1: "Nibras Flow", lead: "Write the idea. The page map, folders, work order, and starter file names are built here. No code is written and nothing is sent.", label: "Idea", button: "Make a plan", kind: "Kind", pages: "Pages", tree: "Folders", steps: "Work order", files: "Files", copy: "Copy", copied: "Copied" },
-  tr: { h1: "Nibras Flow", lead: "Fikri yaz. Sayfa haritası, klasör, iş sırası ve başlangıç dosya adları burada kurulur. Kod yazılmaz ve hiçbir yere gönderilmez.", label: "Fikir", button: "Plan kur", kind: "Tür", pages: "Sayfalar", tree: "Klasör", steps: "İş sırası", files: "Dosyalar", copy: "Kopyala", copied: "Kopyalandı" },
-  ar: { h1: "Nibras Flow", lead: "اكتب الفكرة. تُبنى هنا خريطة الصفحات والمجلدات وترتيب العمل وأسماء الملفات الأولى. لا يُكتب كود ولا يُرسل شيء.", label: "الفكرة", button: "ابنِ الخطة", kind: "النوع", pages: "الصفحات", tree: "المجلدات", steps: "ترتيب العمل", files: "الملفات", copy: "انسخ", copied: "تم النسخ" },
-  ru: { h1: "Nibras Flow", lead: "Напишите идею. Карта страниц, папки, порядок работы и имена начальных файлов собираются здесь. Код не пишется и никуда не отправляется.", label: "Идея", button: "Собрать план", kind: "Вид", pages: "Страницы", tree: "Папки", steps: "Порядок работы", files: "Файлы", copy: "Копировать", copied: "Скопировано" },
+  az: { h1: "Nibras Flow", lead: "İdeyanı yaz. Səhifələrin xəritəsi, qovluq, iş sırası və başlanğıc fayl adları burada qurulur. Kod yazılmır və heç yerə göndərilmir.", label: "İdeya", button: "Hazırla", kind: "Növ", pages: "Səhifələr", tree: "Qovluq", steps: "İş sırası", files: "Fayllar", copy: "Kopyala", copied: "Kopyalandı" },
+  en: { h1: "Nibras Flow", lead: "Write the idea. The page map, folders, work order, and starter file names are built here. No code is written and nothing is sent.", label: "Idea", button: "Prepare", kind: "Kind", pages: "Pages", tree: "Folders", steps: "Work order", files: "Files", copy: "Copy", copied: "Copied" },
+  tr: { h1: "Nibras Flow", lead: "Fikri yaz. Sayfa haritası, klasör, iş sırası ve başlangıç dosya adları burada kurulur. Kod yazılmaz ve hiçbir yere gönderilmez.", label: "Fikir", button: "Hazırla", kind: "Tür", pages: "Sayfalar", tree: "Klasör", steps: "İş sırası", files: "Dosyalar", copy: "Kopyala", copied: "Kopyalandı" },
+  ar: { h1: "Nibras Flow", lead: "اكتب الفكرة. تُبنى هنا خريطة الصفحات والمجلدات وترتيب العمل وأسماء الملفات الأولى. لا يُكتب كود ولا يُرسل شيء.", label: "الفكرة", button: "جهّز", kind: "النوع", pages: "الصفحات", tree: "المجلدات", steps: "ترتيب العمل", files: "الملفات", copy: "انسخ", copied: "تم النسخ" },
+  ru: { h1: "Nibras Flow", lead: "Напишите идею. Карта страниц, папки, порядок работы и имена начальных файлов собираются здесь. Код не пишется и никуда не отправляется.", label: "Идея", button: "Подготовь", kind: "Вид", pages: "Страницы", tree: "Папки", steps: "Порядок работы", files: "Файлы", copy: "Копировать", copied: "Скопировано" },
 };
 
 export function FlowPage() {
@@ -70,7 +70,7 @@ export function FlowPage() {
             }}
           />
         </label>
-        <button className="nx-go w-fit rounded-xl bg-[#2f6bff] px-4 py-2 text-sm font-semibold text-white disabled:opacity-60" disabled={!idea.trim()}>
+        <button type="submit" className="nx-go w-fit rounded-xl bg-[#2f6bff] px-4 py-2 text-sm font-semibold text-white">
           {copy.button}
         </button>
       </form>

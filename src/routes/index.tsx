@@ -33,7 +33,7 @@ const BAR: Record<"dev" | "apk" | "pdf" | "qr" | "erase" | "image" | "calc" | "s
   image: { az: "Şəkil sıx", en: "Compress photo", tr: "Foto sıkıştır", ar: "ضغط الصورة", ru: "Сжать фото" },
   calc: { az: "Hesabla", en: "Calculate", tr: "Hesapla", ar: "احسب", ru: "Посчитай" },
   seo: { az: "SEO yoxla", en: "Check SEO", tr: "SEO bak", ar: "فحص SEO", ru: "Проверить SEO" },
-  flow: { az: "Plan qur", en: "Make a plan", tr: "Plan kur", ar: "ابنِ خطة", ru: "Собрать план" },
+  flow: { az: "Hazırla", en: "Prepare", tr: "Hazırla", ar: "جهّز", ru: "Подготовь" },
   logic: { az: "Sual qur", en: "Build questions", tr: "Soru kur", ar: "ابنِ أسئلة", ru: "Собрать вопросы" },
 };
 
