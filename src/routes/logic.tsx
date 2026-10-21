@@ -132,7 +132,7 @@ export function LogicPage() {
               {steps.length > 1 ? <button type="button" className="w-fit text-sm text-muted" onClick={() => remove(index)}>{copy.remove}</button> : null}
             </fieldset>
           ))}
-          <div className="flex flex-wrap gap-2">
+          <div className="nx-row">
             <button type="button" className="rounded-xl border border-white/15 px-4 py-2 text-sm" onClick={add} disabled={steps.length >= MAX_STEPS}>{copy.add}</button>
             <button type="button" className="nx-go rounded-xl bg-[#2f6bff] px-4 py-2 text-sm font-semibold text-white" onClick={() => { writeHash(steps); restart("walk"); }}>{copy.try}</button>
             <button type="button" className="rounded-xl border border-white/15 px-4 py-2 text-sm" onClick={share}>{copied ? copy.copied : copy.link}</button>
@@ -145,13 +145,13 @@ export function LogicPage() {
           ) : (
             <>
               <p className="text-lg">{step?.q || `${copy.step} ${at + 1}`}</p>
-              <div className="flex flex-wrap gap-2">
+              <div className="nx-row">
                 <button type="button" className="nx-go rounded-xl bg-[#2f6bff] px-4 py-2 text-sm font-semibold text-white" onClick={() => choose(step.a.to, step.a.t)}>{step.a.t || copy.a}</button>
                 <button type="button" className="rounded-xl border border-white/15 px-4 py-2 text-sm" onClick={() => choose(step.b.to, step.b.t)}>{step.b.t || copy.b}</button>
               </div>
             </>
           )}
-          <div className="flex flex-wrap gap-2">
+          <div className="nx-row">
             <button type="button" className="rounded-xl border border-white/15 px-4 py-2 text-sm" onClick={() => restart("walk")}>{copy.restart}</button>
             <button type="button" className="rounded-xl border border-white/15 px-4 py-2 text-sm" onClick={() => restart("edit")}>{copy.edit}</button>
           </div>

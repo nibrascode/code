@@ -11090,12 +11090,21 @@ body.is-planner .site-backdrop {
 }
 
 .nx-tool .nx-go {
+  position: static;
   box-shadow:
     0 12px 26px rgb(47 107 255 / 0.42),
     inset 0 1px 0 rgb(255 255 255 / 0.45);
 }
 
-.nx-tool .nx-go:active { transform: translateY(1px); }
+.nx-tool .nx-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 100%;
+  max-width: 100%;
+}
+
+.nx-tool .nx-go:active { transform: none; }
 
 @keyframes nx-tool-spin {
   from { transform: rotateX(-18deg) rotateY(0deg); }
@@ -11104,6 +11113,8 @@ body.is-planner .site-backdrop {
 
 @media (max-width: 640px) {
   .nx-tool header { padding-left: 0; padding-top: 96px; }
+  .nx-tool .nx-row { display: grid; grid-template-columns: 1fr; }
+  .nx-tool { padding-bottom: 28px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
