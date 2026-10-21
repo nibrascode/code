@@ -2732,6 +2732,21 @@
       if (!/^[a-zA-Z0-9._/-]+$/.test(s)) return "";
       return s;
     }
+    function sceneKind(task, current) {
+      const s = foldTask(task);
+      if (/seher|bina|ev\b|city|building/.test(s)) return "city";
+      if (/mehsul|product|vitrin/.test(s)) return "product";
+      if (/orbit|kure|planet/.test(s)) return "orbit";
+      return current || "orbit";
+    }
+    function sceneColor(task) {
+      const s = foldTask(task);
+      if (/qirmizi|qirmiz|\bred\b/.test(s)) return "0.95,0.28,0.32";
+      if (/yasil|\bgreen\b/.test(s)) return "0.25,0.82,0.48";
+      if (/qizil|sari|gold|yellow/.test(s)) return "0.95,0.78,0.32";
+      if (/\bag\b|white/.test(s)) return "0.92,0.94,0.98";
+      return "0.45,0.7,1";
+    }
     function wants3d(text) {
       const raw = String(text || "").toLowerCase();
       if (/3d|3д|webgl|three|gltf|ثلاثي|трёхмер|трехмер/.test(raw)) return true;
@@ -2763,39 +2778,55 @@
         "function rotY(a){var c=Math.cos(a),s=Math.sin(a);return new Float32Array([c,0,-s,0,0,1,0,0,s,0,c,0,0,0,0,1]);}",
         "function trans(x,y,z){return new Float32Array([1,0,0,0,0,1,0,0,0,0,1,0,x,y,z,1]);}",
         "function scale(s){return new Float32Array([s,0,0,0,0,s,0,0,0,0,s,0,0,0,0,1]);}",
+        "function scale3(x,y,z){return new Float32Array([x,0,0,0,0,y,0,0,0,0,z,0,0,0,0,1]);}",
         "var I=new Float32Array([1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]);",
-        "var ax=0.45,ay=0.6,dist=5.6,drag=false,lx=0,ly=0,spin=0;",
-        "canvas.addEventListener('pointerdown',function(e){drag=true;lx=e.clientX;ly=e.clientY;});",
-        "window.addEventListener('pointerup',function(){drag=false;});",
-        "window.addEventListener('pointermove',function(e){if(!drag)return;ay+=(e.clientX-lx)*0.01;ax=Math.max(-1.2,Math.min(1.2,(ax+(e.clientY-ly)*0.01)));lx=e.clientX;ly=e.clientY;});",
-        "canvas.addEventListener('wheel',function(e){e.preventDefault();dist=Math.max(2.4,Math.min(10,dist+(e.deltaY>0?0.35:-0.35)));},{passive:false});",
+        "var kind=canvas.getAttribute('data-kind')||'orbit';",
+        "var parts=(canvas.getAttribute('data-color')||'0.45,0.7,1').split(',');",
+        "var main=new Float32Array([+parts[0]||0.45,+parts[1]||0.7,+parts[2]||1]);",
+        "var ax=0.45,ay=0.6,dist=kind==='city'?8.2:kind==='product'?4.4:5.6,spin=0,pts={};",
+        "function touchCount(){var n=0;for(var k in pts)n++;return n;}",
+        "canvas.addEventListener('pointerdown',function(e){pts[e.pointerId]={x:e.clientX,y:e.clientY};try{canvas.setPointerCapture(e.pointerId);}catch(err){}});",
+        "canvas.addEventListener('pointerup',function(e){delete pts[e.pointerId];});",
+        "canvas.addEventListener('pointercancel',function(e){delete pts[e.pointerId];});",
+        "canvas.addEventListener('pointermove',function(e){if(!pts[e.pointerId])return;var keys=[];for(var k in pts)keys.push(k);if(keys.length>=2){var a=pts[keys[0]],b=pts[keys[1]],prev=Math.hypot(a.x-b.x,a.y-b.y);pts[e.pointerId]={x:e.clientX,y:e.clientY};a=pts[keys[0]];b=pts[keys[1]];dist=Math.max(2.4,Math.min(12,dist-(Math.hypot(a.x-b.x,a.y-b.y)-prev)*0.02));return;}var p=pts[e.pointerId];ay+=(e.clientX-p.x)*0.01;ax=Math.max(-1.2,Math.min(1.2,ax+(e.clientY-p.y)*0.01));pts[e.pointerId]={x:e.clientX,y:e.clientY};});",
+        "canvas.addEventListener('wheel',function(e){e.preventDefault();dist=Math.max(2.4,Math.min(12,dist+(e.deltaY>0?0.35:-0.35)));},{passive:false});",
         "function draw(mesh,model,mode,color){gl.bindBuffer(gl.ARRAY_BUFFER,mesh.b);gl.vertexAttribPointer(lp,3,gl.FLOAT,false,24,0);gl.vertexAttribPointer(ln,3,gl.FLOAT,false,24,12);gl.uniformMatrix4fv(lmodel,false,model);gl.uniform3fv(lcol,color);gl.drawArrays(mode,0,mesh.n);}",
         "function frame(){",
         "var w=canvas.clientWidth||innerWidth,h=canvas.clientHeight||innerHeight;",
         "if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;gl.viewport(0,0,w,h);}",
-        "if(!drag)ay+=0.004;spin+=0.012;",
-        "gl.uniformMatrix4fv(lvp,false,mul(persp(w/Math.max(1,h)),mul(trans(0,0.15,-dist),mul(rotX(ax),rotY(ay)))));",
+        "if(touchCount()<1)ay+=0.004;spin+=0.012;",
+        "gl.uniformMatrix4fv(lvp,false,mul(persp(w/Math.max(1,h)),mul(trans(0,kind==='city'?0.8:0.15,-dist),mul(rotX(ax),rotY(ay)))));",
         "gl.clearColor(0.03,0.04,0.07,1);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);",
         "draw(floor,I,gl.LINES,new Float32Array([0.35,0.45,0.7]));",
-        "draw(ball,rotY(spin),gl.TRIANGLES,new Float32Array([0.45,0.7,1]));",
-        "for(var i=0;i<5;i++){draw(box,mul(rotY(spin+i*1.256),mul(trans(2.15,Math.sin(spin+i)*0.25,0),scale(0.34))),gl.TRIANGLES,new Float32Array(i%2?[0.75,0.86,1]:[0.3,0.48,0.9]));}",
+        "if(kind==='city'){var n=0,x,z,h;for(x=-2;x<=2;x++)for(z=-2;z<=2;z++){if(!x&&!z)continue;h=0.75+((n*5)%4)*0.4;n++;draw(box,mul(trans(x*1.25,-1.2+h*0.35,z*1.25),scale3(0.5,h,0.5)),gl.TRIANGLES,main);}}",
+        "else if(kind==='product'){draw(box,mul(trans(0,-1.05,0),scale3(1.7,0.28,1.7)),gl.TRIANGLES,new Float32Array([0.16,0.2,0.3]));draw(ball,mul(trans(0,0.2,0),rotY(spin)),gl.TRIANGLES,main);}",
+        "else{draw(ball,rotY(spin),gl.TRIANGLES,main);for(var i=0;i<5;i++){draw(box,mul(rotY(spin+i*1.256),mul(trans(2.15,Math.sin(spin+i)*0.25,0),scale(0.34))),gl.TRIANGLES,new Float32Array(i%2?[0.75,0.86,1]:[0.3,0.48,0.9]));}}",
         "requestAnimationFrame(frame);}",
         "frame();",
         "})();"
       ].join("\n");
     }
     function ensure3d(files, task) {
-      if (!wants3d(task)) return [];
-      const notes = [];
       const html = files.filter(function (file) { return /\.html?$/.test(file.path); })[0];
+      const has = html && /id=["']scene["']/.test(html.content);
+      if (!wants3d(task) && !has) return [];
+      const notes = [];
+      const found = html && html.content.match(/data-kind="(city|product|orbit)"/);
+      const kind = sceneKind(task, found && found[1]);
+      const color = sceneColor(task);
+      const tag = '<canvas id="scene" data-kind="' + kind + '" data-color="' + color + '"></canvas>';
       if (html && !/<canvas\b/i.test(html.content)) {
-        if (/<body[^>]*>/i.test(html.content)) html.content = html.content.replace(/<body[^>]*>/i, function (m) { return m + '\n<canvas id="scene"></canvas>'; });
-        else html.content += '\n<canvas id="scene"></canvas>';
+        if (/<body[^>]*>/i.test(html.content)) html.content = html.content.replace(/<body[^>]*>/i, function (m) { return m + "\n" + tag; });
+        else html.content += "\n" + tag;
         notes.push("canvas");
+      } else if (html) {
+        html.content = html.content.replace(/<canvas\b[^>]*>/i, tag);
       }
+      notes.push(kind === "city" ? "şəhər" : kind === "product" ? "məhsul" : "orbit");
+      if (color !== "0.45,0.7,1") notes.push("rəng");
       if (html && !/<h1\b/i.test(html.content)) {
         const title = String(task || "3D").replace(/[<>&]/g, "").trim().slice(0, 48) || "3D";
-        const hud = "<h1>" + title + "</h1><p class=\"hint\">Fırlat · təkər ilə yaxınlaşdır</p>";
+        const hud = "<h1>" + title + "</h1><p class=\"hint\">Fırlat · iki barmaq və ya təkər</p>";
         if (/<body[^>]*>/i.test(html.content)) html.content = html.content.replace(/<body[^>]*>/i, function (m) { return m + "\n" + hud; });
         else html.content = hud + "\n" + html.content;
         notes.push("başlıq");
@@ -2805,17 +2836,16 @@
         js = { path: "app.js", content: "" };
         if (files.length < 4) files.push(js);
       }
-      if (js && !/getContext\(\s*["']webgl|THREE\.|WebGLRenderer/.test(js.content)) {
+      if (js && js.content.indexOf("data-kind") < 0) {
         js.content = scene3d();
         notes.push("işıq");
-        notes.push("orbit");
         notes.push("zoom");
       }
       return notes;
     }
     function analyzeTask(task) {
       const s = String(task || "").toLowerCase();
-      if (wants3d(task)) return ["Dil: HTML, CSS, JavaScript", "Növ: 3D səhifə"];
+      if (wants3d(task)) return ["Dil: HTML, CSS, JavaScript", "Növ: 3D " + (sceneKind(task) === "city" ? "şəhər" : sceneKind(task) === "product" ? "məhsul" : "orbit")];
       if (/python|piton|пайтон|بايثون/.test(s)) return ["Dil: Python"];
       if (/java\b|kotlin|android|apk/.test(s)) return ["Dil: Java və ya Kotlin"];
       if (/html|css|javascript|səhifə|sehife|sayt|website|страниц|صفحة/.test(s)) return ["Dil: HTML, CSS, JavaScript"];
@@ -3278,7 +3308,7 @@
         out.push(path);
       }
       if (wants3d(task)) {
-        ["index.html", "style.css", "app.js"].forEach(add);
+        ["index.html", "style.css"].forEach(add);
         return out;
       }
       String((deep && deep.FILES) || "").split("|").forEach(add);
@@ -3398,10 +3428,10 @@
       return notes;
     }
     async function finishProject(files, task, log, deep) {
+      ensure3d(files, task).forEach(function (note) { pushStep(t("d3") + ": " + note, "ok"); log.push(t("d3") + ": " + note); });
       const linked = wireFiles(files);
       linked.forEach(function (name) { pushStep(t("wired") + ": " + name, "ok"); log.push(t("wired") + ": " + name); });
       tidyFiles(files).forEach(function (name) { pushStep(t("tidy") + ": " + name, "ok"); log.push(t("tidy") + ": " + name); });
-      ensure3d(files, task).forEach(function (note) { pushStep(t("d3") + ": " + note, "ok"); log.push(t("d3") + ": " + note); });
       premiumFinish(files).forEach(function (note) {
         const weak = note === "etiket yoxdur" || note === "boş mətn qalıb";
         pushStep(t("prem") + ": " + note, weak ? "run" : "ok");
@@ -3474,6 +3504,17 @@
     }
     async function runRevise(task, log) {
       const files = layiheProject.files.map(function (file) { return { path: file.path, content: file.content }; });
+      const look = task.length < 140 && /reng|qirmizi|yasil|qizil|sari|\bag\b|seher|bina|mehsul|orbit|kure|city|product/.test(foldTask(task));
+      if (look && files.some(function (file) { return /id=["']scene["']/.test(file.content); })) {
+        ensure3d(files, task).forEach(function (note) { pushStep(t("d3") + ": " + note, "ok"); log.push(t("d3") + ": " + note); });
+        const seen = pushPreview(files);
+        log.push(seen ? t("see") : t("nosee"));
+        pushZip(files);
+        saveProject(files, task);
+        pushStep(t("next"), "ok");
+        log.push(t("next"));
+        return;
+      }
       const ranked = files.slice().sort(function (a, b) { return scoreFile(b, task) - scoreFile(a, task); });
       const focus = ranked[0];
       pushStep(t("revise") + ": " + focus.path, "ok");
