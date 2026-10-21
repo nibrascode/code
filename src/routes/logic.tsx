@@ -106,13 +106,14 @@ export function LogicPage() {
   const step = steps[at] ?? steps[0];
 
   return (
-    <main className="files-page mx-auto w-full max-w-3xl px-4 pt-28 pb-16 md:px-6">
+    <main className="nx-tool files-page mx-auto w-full max-w-3xl px-4 pt-28 pb-16 md:px-6">
       <header className="mb-6">
+        <span className="nx-tool-mark" aria-hidden="true"><b><i /><i /><i /><i /><i /><i /></b></span>
         <h1 className="font-display text-2xl font-bold tracking-tight md:text-4xl">{copy.h1}</h1>
         <p className="mt-1 text-sm text-muted">{copy.lead}</p>
       </header>
       {mode === "edit" ? (
-        <div className="mb-8 grid gap-4">
+        <div className="nx-panel mb-8 grid gap-4">
           {steps.map((item, index) => (
             <fieldset key={index} className="grid gap-2 rounded-xl border border-white/10 p-3">
               <legend className="px-1 text-sm text-muted">{copy.step} {index + 1}</legend>
@@ -133,19 +134,19 @@ export function LogicPage() {
           ))}
           <div className="flex flex-wrap gap-2">
             <button type="button" className="rounded-xl border border-white/15 px-4 py-2 text-sm" onClick={add} disabled={steps.length >= MAX_STEPS}>{copy.add}</button>
-            <button type="button" className="rounded-xl bg-[#2f6bff] px-4 py-2 text-sm font-semibold text-white" onClick={() => { writeHash(steps); restart("walk"); }}>{copy.try}</button>
+            <button type="button" className="nx-go rounded-xl bg-[#2f6bff] px-4 py-2 text-sm font-semibold text-white" onClick={() => { writeHash(steps); restart("walk"); }}>{copy.try}</button>
             <button type="button" className="rounded-xl border border-white/15 px-4 py-2 text-sm" onClick={share}>{copied ? copy.copied : copy.link}</button>
           </div>
         </div>
       ) : (
-        <div className="mb-8 grid gap-4">
+        <div className="nx-panel mb-8 grid gap-4">
           {end ? (
             <p className="text-lg">{end}</p>
           ) : (
             <>
               <p className="text-lg">{step?.q || `${copy.step} ${at + 1}`}</p>
               <div className="flex flex-wrap gap-2">
-                <button type="button" className="rounded-xl bg-[#2f6bff] px-4 py-2 text-sm font-semibold text-white" onClick={() => choose(step.a.to, step.a.t)}>{step.a.t || copy.a}</button>
+                <button type="button" className="nx-go rounded-xl bg-[#2f6bff] px-4 py-2 text-sm font-semibold text-white" onClick={() => choose(step.a.to, step.a.t)}>{step.a.t || copy.a}</button>
                 <button type="button" className="rounded-xl border border-white/15 px-4 py-2 text-sm" onClick={() => choose(step.b.to, step.b.t)}>{step.b.t || copy.b}</button>
               </div>
             </>

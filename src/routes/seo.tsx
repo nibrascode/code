@@ -155,8 +155,9 @@ export function SeoPage() {
     : "";
 
   return (
-    <main className="files-page mx-auto w-full max-w-3xl px-4 pt-28 pb-16 md:px-6">
+    <main className="nx-tool files-page mx-auto w-full max-w-3xl px-4 pt-28 pb-16 md:px-6">
       <header className="mb-6">
+        <span className="nx-tool-mark" aria-hidden="true"><b><i /><i /><i /><i /><i /><i /></b></span>
         <h1 className="font-display text-2xl font-bold tracking-tight md:text-4xl">{copy.h1}</h1>
         <p className="mt-1 text-sm text-muted">{copy.lead}</p>
       </header>
@@ -171,13 +172,13 @@ export function SeoPage() {
             onChange={(event) => setUrl(event.target.value)}
           />
         </label>
-        <button className="w-fit rounded-xl bg-[#2f6bff] px-4 py-2 text-sm font-semibold text-white disabled:opacity-60" disabled={busy || !url.trim()}>
+        <button className="nx-go w-fit rounded-xl bg-[#2f6bff] px-4 py-2 text-sm font-semibold text-white disabled:opacity-60" disabled={busy || !url.trim()}>
           {busy ? copy.working : copy.button}
         </button>
       </form>
       {error ? <p className="mb-6 text-sm text-red-300">{error}</p> : null}
       {report ? (
-        <div className="mb-8 grid gap-2 text-sm">
+        <div className="nx-panel mb-8 grid gap-2 text-sm">
           <p className="break-all text-muted">{report.finalUrl}</p>
           {[
             [copy.rows.status, String(report.status)],

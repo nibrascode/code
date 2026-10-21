@@ -10994,3 +10994,118 @@ body.is-planner .site-backdrop {
 }
 
 .meyve-board canvas { display: block; width: 100%; height: 100%; }
+
+.nx-tool {
+  position: relative;
+}
+
+.nx-tool header {
+  position: relative;
+  min-height: 92px;
+  padding-left: 108px;
+}
+
+.nx-tool h1 {
+  background: linear-gradient(105deg, #fff 10%, #d7e6ff 42%, #7eb0ff 78%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: none;
+}
+
+.nx-tool-mark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 84px;
+  height: 84px;
+  perspective: 640px;
+  pointer-events: none;
+}
+
+.nx-tool-mark b {
+  display: block;
+  width: 54px;
+  height: 54px;
+  margin: 15px;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: nx-tool-spin 16s linear infinite;
+}
+
+.nx-tool-mark i {
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgb(210 226 255 / 0.5);
+  border-radius: 8px;
+  background: linear-gradient(145deg, rgb(255 255 255 / 0.4), rgb(126 176 255 / 0.1) 46%, rgb(8 16 36 / 0.28));
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.6), 0 8px 18px rgb(47 107 255 / 0.18);
+}
+
+.nx-tool-mark i:nth-child(1) { transform: translateZ(27px); }
+.nx-tool-mark i:nth-child(2) { transform: rotateY(180deg) translateZ(27px); }
+.nx-tool-mark i:nth-child(3) { transform: rotateY(90deg) translateZ(27px); }
+.nx-tool-mark i:nth-child(4) { transform: rotateY(-90deg) translateZ(27px); }
+.nx-tool-mark i:nth-child(5) { transform: rotateX(90deg) translateZ(27px); }
+.nx-tool-mark i:nth-child(6) { transform: rotateX(-90deg) translateZ(27px); }
+
+.nx-tool form,
+.nx-tool fieldset,
+.nx-tool .nx-panel,
+.nx-tool > section {
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: 22px;
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 0.07), rgb(10 16 32 / 0.46));
+  box-shadow:
+    0 22px 48px rgb(2 6 16 / 0.38),
+    inset 0 1px 0 rgb(255 255 255 / 0.16);
+}
+
+.nx-tool form,
+.nx-tool .nx-panel,
+.nx-tool > section {
+  padding: 16px;
+}
+
+.nx-tool fieldset {
+  background:
+    linear-gradient(165deg, rgb(126 176 255 / 0.1), rgb(8 14 28 / 0.35));
+}
+
+.nx-tool .nx-panel section {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+}
+
+.nx-tool input,
+.nx-tool textarea,
+.nx-tool select,
+.nx-tool pre {
+  border-color: rgb(190 214 255 / 0.2);
+  background: rgb(3 8 20 / 0.55);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.08), 0 10px 22px rgb(2 6 16 / 0.28);
+}
+
+.nx-tool .nx-go {
+  box-shadow:
+    0 12px 26px rgb(47 107 255 / 0.42),
+    inset 0 1px 0 rgb(255 255 255 / 0.45);
+}
+
+.nx-tool .nx-go:active { transform: translateY(1px); }
+
+@keyframes nx-tool-spin {
+  from { transform: rotateX(-18deg) rotateY(0deg); }
+  to { transform: rotateX(-18deg) rotateY(360deg); }
+}
+
+@media (max-width: 640px) {
+  .nx-tool header { padding-left: 0; padding-top: 96px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nx-tool-mark b { animation: none; transform: rotateX(-18deg) rotateY(28deg); }
+}
