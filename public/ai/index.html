@@ -1284,11 +1284,11 @@
     };
     let uiLangCode = "az";
     const LAY = {
-      az: { layihe: "Layihə", layL: "Layihə — nə hazırlayım?", layP: "Məsələn: telefon üçün sadə hesablayıcı", s1: "1. Tapşırıq qəbul olundu", s2: "2. Plan yazılır", s3: "3. Fayllar yazılır", s4: "4. Yoxlanılır", s5: "5. ZIP hazırdır", file: "Fayl", down: "ZIP yüklə", fail: "Bu addım alınmadı", empty: "Fayl çıxmadı", bad: "Boş fayl atıldı", wait: "gözlənilir" },
-      en: { layihe: "Project", layL: "Project — what should I build?", layP: "For example: a simple calculator for the phone", s1: "1. Task accepted", s2: "2. Writing the plan", s3: "3. Writing the files", s4: "4. Checking", s5: "5. ZIP is ready", file: "File", down: "Download ZIP", fail: "This step failed", empty: "No file came out", bad: "An empty file was dropped", wait: "waiting" },
-      tr: { layihe: "Proje", layL: "Proje — ne hazırlayayım?", layP: "Örneğin: telefon için basit hesap makinesi", s1: "1. Görev alındı", s2: "2. Plan yazılıyor", s3: "3. Dosyalar yazılıyor", s4: "4. Kontrol ediliyor", s5: "5. ZIP hazır", file: "Dosya", down: "ZIP indir", fail: "Bu adım alınmadı", empty: "Dosya çıkmadı", bad: "Boş dosya atıldı", wait: "bekleniyor" },
-      ar: { layihe: "مشروع", layL: "مشروع — ماذا أجهّز؟", layP: "مثلاً: آلة حاسبة بسيطة للهاتف", s1: "1. قُبلت المهمة", s2: "2. تُكتب الخطة", s3: "3. تُكتب الملفات", s4: "4. يُفحص", s5: "5. ملف ZIP جاهز", file: "ملف", down: "تنزيل ZIP", fail: "فشلت هذه الخطوة", empty: "لم يخرج ملف", bad: "أُسقط ملف فارغ", wait: "يُنتظر" },
-      ru: { layihe: "Проект", layL: "Проект — что собрать?", layP: "Например: простой калькулятор для телефона", s1: "1. Задача принята", s2: "2. Пишется план", s3: "3. Пишутся файлы", s4: "4. Проверка", s5: "5. ZIP готов", file: "Файл", down: "Скачать ZIP", fail: "Этот шаг не вышел", empty: "Файл не вышел", bad: "Пустой файл отброшен", wait: "ждётся" }
+      az: { layihe: "Layihə", layL: "Layihə — nə hazırlayım?", layP: "Məsələn: telefon üçün sadə hesablayıcı", s1: "1. Tapşırıq təhlil olunur", s2: "2. Plan yazılır", s3: "3. Fayllar yazılır", s4: "4. Xəta axtarılır", s5: "ZIP hazırdır", file: "Fayl", down: "ZIP yüklə", fail: "Bu addım alınmadı", empty: "Fayl çıxmadı", bad: "Boş fayl atıldı", wait: "gözlənilir", clean: "Xəta tapılmadı", found: "Xəta", fix: "5. Xəta düzəldilir", again: "6. Yenidən yoxlanılır", still: "Xəta qaldı" },
+      en: { layihe: "Project", layL: "Project — what should I build?", layP: "For example: a simple calculator for the phone", s1: "1. Reading the task", s2: "2. Writing the plan", s3: "3. Writing the files", s4: "4. Looking for errors", s5: "ZIP is ready", file: "File", down: "Download ZIP", fail: "This step failed", empty: "No file came out", bad: "An empty file was dropped", wait: "waiting", clean: "No error found", found: "Error", fix: "5. Fixing the error", again: "6. Checking again", still: "An error remains" },
+      tr: { layihe: "Proje", layL: "Proje — ne hazırlayayım?", layP: "Örneğin: telefon için basit hesap makinesi", s1: "1. Görev inceleniyor", s2: "2. Plan yazılıyor", s3: "3. Dosyalar yazılıyor", s4: "4. Hata aranıyor", s5: "ZIP hazır", file: "Dosya", down: "ZIP indir", fail: "Bu adım alınmadı", empty: "Dosya çıkmadı", bad: "Boş dosya atıldı", wait: "bekleniyor", clean: "Hata bulunmadı", found: "Hata", fix: "5. Hata düzeltiliyor", again: "6. Yeniden kontrol", still: "Hata kaldı" },
+      ar: { layihe: "مشروع", layL: "مشروع — ماذا أجهّز؟", layP: "مثلاً: آلة حاسبة بسيطة للهاتف", s1: "1. تُحلَّل المهمة", s2: "2. تُكتب الخطة", s3: "3. تُكتب الملفات", s4: "4. يُبحث عن خطأ", s5: "ملف ZIP جاهز", file: "ملف", down: "تنزيل ZIP", fail: "فشلت هذه الخطوة", empty: "لم يخرج ملف", bad: "أُسقط ملف فارغ", wait: "يُنتظر", clean: "لم يُوجد خطأ", found: "خطأ", fix: "5. يُصلَح الخطأ", again: "6. فحص ثانٍ", still: "بقي خطأ" },
+      ru: { layihe: "Проект", layL: "Проект — что собрать?", layP: "Например: простой калькулятор для телефона", s1: "1. Разбор задачи", s2: "2. Пишется план", s3: "3. Пишутся файлы", s4: "4. Поиск ошибок", s5: "ZIP готов", file: "Файл", down: "Скачать ZIP", fail: "Этот шаг не вышел", empty: "Файл не вышел", bad: "Пустой файл отброшен", wait: "ждётся", clean: "Ошибок нет", found: "Ошибка", fix: "5. Ошибка исправляется", again: "6. Повторная проверка", still: "Ошибка осталась" }
     };
     function t(key) {
       const row = (UI[uiLangCode] || UI.az)[key];
@@ -2728,6 +2728,116 @@
       if (!/^[a-zA-Z0-9._/-]+$/.test(s)) return "";
       return s;
     }
+    function analyzeTask(task) {
+      const s = String(task || "").toLowerCase();
+      const notes = [];
+      if (/python|piton|пайтон|بايثون/.test(s)) notes.push("Dil: Python");
+      else if (/java\b|kotlin|android|apk/.test(s)) notes.push("Dil: Java və ya Kotlin");
+      else if (/html|css|javascript|səhifə|sehife|sayt|website|страниц|صفحة/.test(s)) notes.push("Dil: HTML, CSS, JavaScript");
+      else notes.push("Dil: tapşırıqdan seçiləcək");
+      if (/hesab|kalkul|calculator|hesap|حاسب|калькул/.test(s)) notes.push("Növ: hesablayıcı");
+      else if (/çat|chat|söhb|sohb|محادث|чат/.test(s)) notes.push("Növ: söhbət");
+      else if (/siyah|todo|checklist|قائم|список/.test(s)) notes.push("Növ: siyahı");
+      else notes.push("Növ: kiçik səhifə və ya skript");
+      notes.push("Limit: ən çox 4 fayl");
+      notes.push("Xəta axtarışı: mötərizə, HTML teqi, boş fayl, olmayan fayl, JSON");
+      return notes;
+    }
+    function skipCode(text, i) {
+      const c = text[i];
+      const n = text[i + 1];
+      if (c === "/" && n === "/") {
+        const end = text.indexOf("\n", i + 2);
+        return end < 0 ? text.length : end;
+      }
+      if (c === "/" && n === "*") {
+        const end = text.indexOf("*/", i + 2);
+        return end < 0 ? text.length : end + 2;
+      }
+      if (c === "<" && text.slice(i, i + 4) === "<!--") {
+        const end = text.indexOf("-->", i + 4);
+        return end < 0 ? text.length : end + 3;
+      }
+      return i;
+    }
+    function balance(text, open, close) {
+      let n = 0;
+      let line = 1;
+      let quote = "";
+      let escaped = false;
+      for (let i = 0; i < text.length; i++) {
+        const c = text[i];
+        if (c === "\n") line++;
+        if (quote) {
+          if (escaped) { escaped = false; continue; }
+          if (c === "\\") { escaped = true; continue; }
+          if (c === quote) quote = "";
+          continue;
+        }
+        const next = skipCode(text, i);
+        if (next !== i) { i = next - 1; continue; }
+        if (c === '"' || c === "'" || c === "`") { quote = c; continue; }
+        if (c === open) n++;
+        else if (c === close) {
+          n--;
+          if (n < 0) return "sətir " + line + ": artıq " + close;
+        }
+      }
+      if (n > 0) return "bağlanmayan " + open;
+      return "";
+    }
+    function htmlIssues(text) {
+      const voids = { area: 1, base: 1, br: 1, col: 1, embed: 1, hr: 1, img: 1, input: 1, link: 1, meta: 1, source: 1, track: 1, wbr: 1 };
+      const stack = [];
+      const out = [];
+      const re = /<\/?([a-zA-Z][a-zA-Z0-9]*)\b[^>]*?>/g;
+      let m;
+      let cursor = 0;
+      while ((m = re.exec(text))) {
+        if (m.index < cursor) continue;
+        const skipped = skipCode(text, m.index);
+        if (skipped !== m.index) { cursor = skipped; continue; }
+        const name = m[1].toLowerCase();
+        const raw = m[0];
+        if (raw.charAt(1) === "/") {
+          if (!stack.length || stack[stack.length - 1] !== name) out.push("teq uyğun gəlmir: " + name);
+          else stack.pop();
+        } else if (!voids[name] && !/\/>$/.test(raw)) stack.push(name);
+      }
+      if (stack.length) out.push("bağlanmayan teq: " + stack.slice(0, 3).join(", "));
+      return out.slice(0, 4);
+    }
+    function findErrors(files) {
+      const names = {};
+      const errs = [];
+      files.forEach(function (file) { names[file.path] = 1; });
+      files.forEach(function (file) {
+        const ext = (file.path.match(/\.([a-z0-9]+)$/i) || ["", ""])[1].toLowerCase();
+        const text = file.content || "";
+        if (!text.trim()) { errs.push(file.path + ": boşdur"); return; }
+        if (text.indexOf("```") >= 0) errs.push(file.path + ": kod hasarın içində qalıb");
+        if (ext === "js" || ext === "ts" || ext === "css" || ext === "json") {
+          ["{}", "()", "[]"].forEach(function (pair) {
+            const msg = balance(text, pair.charAt(0), pair.charAt(1));
+            if (msg) errs.push(file.path + ": " + msg);
+          });
+        }
+        if (ext === "html" || ext === "htm") {
+          htmlIssues(text).forEach(function (msg) { errs.push(file.path + ": " + msg); });
+          const refs = text.match(/(?:src|href)\s*=\s*["'][^"']+["']/g) || [];
+          refs.forEach(function (raw) {
+            const href = raw.replace(/^.*?=["']/, "").replace(/["']$/, "").split("?")[0].split("#")[0].replace(/^\.\//, "");
+            if (!href || /^(https?:|data:|mailto:|\/)/.test(href)) return;
+            if (/\.(css|js|html)$/.test(href) && !names[href]) errs.push(file.path + ": tapılmayan fayl " + href);
+          });
+        }
+        if (ext === "py" && /\t/.test(text) && /^ +/m.test(text)) errs.push(file.path + ": tab və boşluq qarışıqdır");
+        if (ext === "json") {
+          try { JSON.parse(text); } catch (e) { errs.push(file.path + ": JSON oxunmur"); }
+        }
+      });
+      return errs.slice(0, 8);
+    }
     function parseFiles(text) {
       const out = [];
       const seen = {};
@@ -2825,6 +2935,12 @@
         await new Promise(function (r) { setTimeout(r, 200); });
         markStep(s1, "ok", t("s1"));
         log.push(t("s1"));
+        const notes = analyzeTask(task);
+        for (let i = 0; i < notes.length; i++) {
+          pushStep(notes[i], "ok");
+          log.push(notes[i]);
+          await new Promise(function (r) { setTimeout(r, 120); });
+        }
         const s2 = pushStep(t("s2") + " — " + t("wait"), "run");
         const planRaw = await askModel("Yalnız plan yaz. 3-5 sətir. Hər sətir tire ilə başlasın. Kod yazma.\nTapşırıq: " + task.slice(0, 500));
         const lines = String(planRaw).split(/\n/).map(function (s) { return s.trim(); }).filter(function (s) { return /^(-|\d+\.)\s+/.test(s); }).slice(0, 6);
@@ -2848,11 +2964,53 @@
           log.push(t("file") + ": " + file.path);
         });
         const s4 = pushStep(t("s4") + " — " + t("wait"), "run");
-        await new Promise(function (r) { setTimeout(r, 200); });
-        const empty = files.some(function (file) { return !file.content.trim(); });
-        markStep(s4, empty ? "bad" : "ok", empty ? t("s4") + " — " + t("bad") : t("s4"));
-        log.push(empty ? t("bad") : t("s4"));
-        if (!empty) pushZip(files);
+        let issues = findErrors(files);
+        if (!issues.length) {
+          markStep(s4, "ok", t("s4") + " — " + t("clean"));
+          log.push(t("clean"));
+        } else {
+          markStep(s4, "bad", t("s4") + " — " + issues.length);
+          issues.forEach(function (issue) {
+            pushStep(t("found") + ": " + issue, "bad");
+            log.push(issue);
+          });
+          const sFix = pushStep(t("fix") + " — " + t("wait"), "run");
+          try {
+            const broken = files.filter(function (file) {
+              return issues.some(function (issue) { return issue.indexOf(file.path + ":") === 0; });
+            });
+            const pack = broken.map(function (file) { return file.path + "\n" + file.content.slice(0, 180); }).join("\n").slice(0, 380);
+            const fixRaw = await askModel("Xətanı düzəlt. Yalnız pozulan faylı yaz.\n===FILE: ad===\nkod\n===END===\nXəta: " + issues.slice(0, 3).join(" | ").slice(0, 160) + "\n" + pack);
+            const fixed = parseFiles(fixRaw);
+            if (!fixed.length) {
+              markStep(sFix, "bad", t("fix") + " — " + t("fail"));
+              log.push(t("fail"));
+            } else {
+              fixed.forEach(function (file) {
+                const at = files.findIndex(function (old) { return old.path === file.path; });
+                if (at >= 0) files[at] = file;
+                else files.push(file);
+                pushFile(file);
+                log.push(t("fix") + ": " + file.path);
+              });
+              markStep(sFix, "ok", t("fix"));
+              const sAgain = pushStep(t("again") + " — " + t("wait"), "run");
+              issues = findErrors(files);
+              if (!issues.length) {
+                markStep(sAgain, "ok", t("again") + " — " + t("clean"));
+                log.push(t("clean"));
+              } else {
+                markStep(sAgain, "bad", t("still"));
+                issues.forEach(function (issue) { pushStep(t("found") + ": " + issue, "bad"); log.push(issue); });
+                log.push(t("still"));
+              }
+            }
+          } catch (err) {
+            markStep(sFix, "bad", t("fix") + " — " + t("fail"));
+            log.push(t("fail"));
+          }
+        }
+        pushZip(files);
         log.push(t("s5"));
         rec("b", log.join("\n"), "", 0);
       } catch (e) {
