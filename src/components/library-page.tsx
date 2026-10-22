@@ -657,11 +657,191 @@ function toolName(slug: string) {
   return PROGRAM_NAMES[slug] || "";
 }
 
-const HTML_TRIES = [
-  `<h1>Hello</h1>\n<p>HTML test</p>`,
-  `<button type="button">Button</button>`,
-  `<ul>\n  <li>One</li>\n  <li>Two</li>\n  <li>Three</li>\n</ul>`,
-] as const;
+type SampleTry = {
+  title: Record<Lang, string>;
+  note: Record<Lang, string>;
+  code: string;
+};
+
+const GAME_TRIES: readonly SampleTry[] = [
+  {
+    title: { az: "Xal", en: "Score", tr: "Puan", ar: "النقاط", ru: "Счёт" },
+    note: {
+      az: "Düyməyə hər basanda xal bir artır. Oyun üçün bu, ən kiçik haldır: bir ədəd saxlanır və bir hadisə onu dəyişir.",
+      en: "Each click adds one point. This is the smallest game: one number is kept, and one event changes it.",
+      tr: "Her tıklamada puan bir artar. Oyun için en küçük hal budur: bir sayı tutulur ve bir olay onu değiştirir.",
+      ar: "كل ضغطة تزيد نقطة. هذه أصغر لعبة: يُحفظ رقم واحد وحدث واحد يغيّره.",
+      ru: "Каждое нажатие добавляет одно очко. Это самая маленькая игра: хранится одно число, и одно событие его меняет.",
+    },
+    code: `<p>Xal: <b id="score">0</b></p>
+<button type="button" id="hit">Vur</button>
+<script>
+  let score = 0;
+  const scoreNode = document.getElementById("score");
+  document.getElementById("hit").addEventListener("click", () => {
+    score += 1;
+    scoreNode.textContent = String(score);
+  });
+</script>`,
+  },
+  {
+    title: { az: "Tap", en: "Guess", tr: "Bul", ar: "خمّن", ru: "Угадай" },
+    note: {
+      az: "Gizli rəqəm 2-dir. Üç düymədən biri düz cavabı yazır, qalanı yenidən cəhd etməyi deyir. Şərt burada başlayır.",
+      en: "The hidden number is 2. One of the three buttons writes the right answer. The others say to try again. This is where a condition starts.",
+      tr: "Gizli sayı 2'dir. Üç düğmeden biri doğru cevabı yazar, diğerleri yeniden denemeyi söyler. Koşul burada başlar.",
+      ar: "الرقم المخفي هو 2. أحد الأزرار الثلاثة يكتب الجواب الصحيح، والباقي يطلب المحاولة مرة أخرى. الشرط يبدأ هنا.",
+      ru: "Скрытое число — 2. Одна из трёх кнопок пишет верный ответ, остальные просят попробовать снова. Условие начинается здесь.",
+    },
+    code: `<p>1, 2 və ya 3 seç.</p>
+<button type="button" data-n="1">1</button>
+<button type="button" data-n="2">2</button>
+<button type="button" data-n="3">3</button>
+<p id="out"></p>
+<script>
+  const secret = 2;
+  const out = document.getElementById("out");
+  document.querySelectorAll("button").forEach((button) => {
+    button.addEventListener("click", () => {
+      const pick = Number(button.getAttribute("data-n"));
+      out.textContent = pick === secret ? "Düzdür" : "Yenə cəhd et";
+    });
+  });
+</script>`,
+  },
+  {
+    title: { az: "Taymer", en: "Timer", tr: "Sayaç", ar: "المؤقت", ru: "Таймер" },
+    note: {
+      az: "Başla düyməsi 10-dan geri sayır və bitəndə dayanır. Eyni düymə ikinci dəfə işə düşmür, çünki sayım açıq olanda bağlı olur.",
+      en: "Start counts down from 10 and stops at zero. The same button does not start twice, because it is disabled while the count is running.",
+      tr: "Başla düğmesi 10'dan geri sayar ve sıfırda durur. Sayım açıkken düğme kapanır, ikinci kez başlamaz.",
+      ar: "زر ابدأ يعدّ من 10 إلى الصفر ويتوقف. الزر نفسه لا يبدأ مرتين لأنه يُغلق أثناء العد.",
+      ru: "Кнопка «Başla» считает от 10 до нуля и останавливается. Второй раз она не стартует, потому что во время счёта она выключена.",
+    },
+    code: `<p>Vaxt: <b id="time">10</b></p>
+<button type="button" id="start">Başla</button>
+<script>
+  const start = document.getElementById("start");
+  const time = document.getElementById("time");
+  start.addEventListener("click", () => {
+    let left = 10;
+    start.disabled = true;
+    const timer = setInterval(() => {
+      left -= 1;
+      time.textContent = String(left);
+      if (left === 0) clearInterval(timer);
+    }, 1000);
+  });
+</script>`,
+  },
+];
+
+const APP_TRIES: readonly SampleTry[] = [
+  {
+    title: { az: "Qeyd", en: "Note", tr: "Not", ar: "ملاحظة", ru: "Заметка" },
+    note: {
+      az: "Yazılan mətn siyahıya əlavə olunur və xana təmizlənir. Boş mətn əlavə olunmur. Bu, kiçik bir qeyd dəftəridir.",
+      en: "The written text is added to the list and the field is cleared. Empty text is not added. This is a small notebook.",
+      tr: "Yazılan metin listeye eklenir ve kutu temizlenir. Boş metin eklenmez. Bu, küçük bir not defteridir.",
+      ar: "النص المكتوب يُضاف إلى القائمة ويُفرَّغ الحقل. النص الفارغ لا يُضاف. هذه مفكرة صغيرة.",
+      ru: "Написанный текст добавляется в список, и поле очищается. Пустой текст не добавляется. Это маленький блокнот.",
+    },
+    code: `<form id="note">
+  <input id="text" type="text" placeholder="Qeyd">
+  <button type="submit">Əlavə et</button>
+</form>
+<ul id="list"></ul>
+<script>
+  const form = document.getElementById("note");
+  const text = document.getElementById("text");
+  const list = document.getElementById("list");
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const value = text.value.trim();
+    if (!value) return;
+    const item = document.createElement("li");
+    item.textContent = value;
+    list.append(item);
+    text.value = "";
+  });
+</script>`,
+  },
+  {
+    title: { az: "Rejim", en: "Mode", tr: "Mod", ar: "الوضع", ru: "Режим" },
+    note: {
+      az: "Bir düymə səhifəni tünd və açıq rejim arasında dəyişir. Vəziyyət sinifdə saxlanır, ayrı bir səhifə açılmır.",
+      en: "One button switches the page between dark and light. The state stays in a class. No second page is opened.",
+      tr: "Bir düğme sayfayı koyu ve açık mod arasında değiştirir. Durum sınıfta durur, ikinci sayfa açılmaz.",
+      ar: "زر واحد يبدّل الصفحة بين الوضع الداكن والفاتح. الحالة تبقى في صنف ولا تُفتح صفحة ثانية.",
+      ru: "Одна кнопка переключает страницу между тёмным и светлым режимом. Состояние лежит в классе, вторая страница не открывается.",
+    },
+    code: `<button type="button" id="mode">Tünd</button>
+<p id="label">Rejim: açıq</p>
+<script>
+  const mode = document.getElementById("mode");
+  const label = document.getElementById("label");
+  mode.addEventListener("click", () => {
+    const dark = document.body.classList.toggle("dark");
+    document.body.style.background = dark ? "#0f172a" : "#f8fafc";
+    document.body.style.color = dark ? "#e2e8f0" : "#0f172a";
+    label.textContent = dark ? "Rejim: tünd" : "Rejim: açıq";
+  });
+</script>`,
+  },
+  {
+    title: { az: "Cəm", en: "Sum", tr: "Toplam", ar: "المجموع", ru: "Сумма" },
+    note: {
+      az: "İki xanadakı ədəd toplanır. Ədəd olmayan yazı sıfır sayılır. Nəticə düymədən sonra görünür.",
+      en: "The two fields are added. A value that is not a number counts as zero. The result shows after the button.",
+      tr: "İki kutudaki sayı toplanır. Sayı olmayan yazı sıfır sayılır. Sonuç düğmeden sonra görünür.",
+      ar: "يُجمع الرقمان في الحقلين. الكتابة التي ليست رقماً تُحسب صفراً. النتيجة تظهر بعد الزر.",
+      ru: "Складываются числа из двух полей. Текст, который не число, считается нулём. Результат виден после кнопки.",
+    },
+    code: `<input id="a" type="number" value="2">
+<input id="b" type="number" value="3">
+<button type="button" id="add">Cəm</button>
+<p id="sum"></p>
+<script>
+  document.getElementById("add").addEventListener("click", () => {
+    const a = Number(document.getElementById("a").value) || 0;
+    const b = Number(document.getElementById("b").value) || 0;
+    document.getElementById("sum").textContent = String(a + b);
+  });
+</script>`,
+  },
+];
+
+const SAMPLE_INTRO: Record<string, Record<Lang, string>> = {
+  "oyun-kodu": {
+    az: "Üç kiçik oyun hissəsi var: xal, tapmaq və taymer. Hər biri bir HTML səhifədə işləyir. Kodu kopyalayıb test səhifəsində aç.",
+    en: "There are three small game pieces: a score, a guess, and a timer. Each one runs in one HTML page. Copy the code and open it on the test page.",
+    tr: "Üç küçük oyun parçası var: puan, bulma ve sayaç. Her biri bir HTML sayfada çalışır. Kodu kopyalayıp test sayfasında aç.",
+    ar: "هناك ثلاث قطع لعب صغيرة: نقاط وتخمين ومؤقت. كل واحدة تعمل في صفحة HTML. انسخ الكود وافتحه في صفحة الاختبار.",
+    ru: "Три маленьких куска игры: счёт, угадывание и таймер. Каждый работает на одной HTML-странице. Скопируй код и открой его на тестовой странице.",
+  },
+  "tetbiq-kodu": {
+    az: "Üç kiçik tətbiq hissəsi var: qeyd, rejim və cəm. Oyun səhifəsindən ayrıdır. Hər kodu kopyalayıb test səhifəsində aç.",
+    en: "There are three small app pieces: a note, a mode, and a sum. They are separate from the game page. Copy each one and open it on the test page.",
+    tr: "Üç küçük uygulama parçası var: not, mod ve toplam. Oyun sayfasından ayrıdır. Her kodu kopyalayıp test sayfasında aç.",
+    ar: "هناك ثلاث قطع تطبيق صغيرة: ملاحظة ووضع ومجموع. هي منفصلة عن صفحة اللعبة. انسخ كل كود وافتحه في صفحة الاختبار.",
+    ru: "Три маленьких куска приложения: заметка, режим и сумма. Они отдельно от страницы игры. Скопируй каждый и открой на тестовой странице.",
+  },
+  "sayt-kodu": {
+    az: "Eyni sayt üç ölçüdədir. Sadə ölçüdə bir başlıq var. Orta ölçüdə menyu və iki qeyd var. Böyük ölçüdə kartlar və forma var.",
+    en: "The same kind of site is shown in three sizes. The simple one has a heading. The medium one has a menu and two notes. The large one has cards and a form.",
+    tr: "Aynı tür site üç boydadır. Basit boyda bir başlık var. Orta boyda menü ve iki not var. Büyük boyda kartlar ve form var.",
+    ar: "الموقع نفسه بثلاثة أحجام. البسيط فيه عنوان. المتوسط فيه قائمة وملاحظتان. الكبير فيه بطاقات ونموذج.",
+    ru: "Один и тот же вид сайта в трёх размерах. В простом есть заголовок. В среднем — меню и две заметки. В большом — карточки и форма.",
+  },
+};
+
+const HUB_NOTE: Record<Lang, string> = {
+  az: "Oyun kodunda xal, tapmaq və taymer var. Tətbiq kodunda qeyd, rejim və cəm var. İkisi eyni sətirləri təkrarlamır.",
+  en: "Game code has a score, a guess, and a timer. App code has a note, a mode, and a sum. The two pages do not repeat the same lines.",
+  tr: "Oyun kodunda puan, bulma ve sayaç var. Uygulama kodunda not, mod ve toplam var. İki sayfa aynı satırları tekrarlamaz.",
+  ar: "كود اللعبة فيه نقاط وتخمين ومؤقت. كود التطبيق فيه ملاحظة ووضع ومجموع. الصفحتان لا تكرران الأسطر نفسها.",
+  ru: "В коде игры есть счёт, угадывание и таймер. В коде приложения есть заметка, режим и сумма. Две страницы не повторяют одни и те же строки.",
+};
 
 const SITE_SIMPLE = `<style>
   body { margin: 0; font-family: Georgia, serif; background: #f6f3ec; color: #1c1917; }
@@ -761,21 +941,52 @@ const SITE_LARGE = `<style>
 </div>
 <footer>Nümunə saytın alt hissəsi.</footer>`;
 
-const SITE_TRIES = [
-  { level: "code_level_simple" as const, code: SITE_SIMPLE },
-  { level: "code_level_medium" as const, code: SITE_MEDIUM },
-  { level: "code_level_large" as const, code: SITE_LARGE },
+const SITE_TRIES: readonly SampleTry[] = [
+  {
+    title: { az: "Sadə", en: "Simple", tr: "Basit", ar: "بسيط", ru: "Простой" },
+    note: {
+      az: "Bir başlıq və bir abzas. Menyü, kart və forma yoxdur. Səhifənin ən kiçik halıdır.",
+      en: "One heading and one paragraph. There is no menu, card, or form. This is the smallest page.",
+      tr: "Bir başlık ve bir paragraf. Menü, kart ve form yok. Sayfanın en küçük halidir.",
+      ar: "عنوان وفقرة. لا قائمة ولا بطاقة ولا نموذج. هذه أصغر صفحة.",
+      ru: "Один заголовок и один абзац. Нет меню, карточки и формы. Это самая маленькая страница.",
+    },
+    code: SITE_SIMPLE,
+  },
+  {
+    title: { az: "Orta", en: "Medium", tr: "Orta", ar: "متوسط", ru: "Средний" },
+    note: {
+      az: "Üst hissədə ad və iki keçid var. Altda iki qeyd, siyahı və düymə var.",
+      en: "The top has a name and two links. Below that are two notes, a list, and a button.",
+      tr: "Üstte ad ve iki bağlantı var. Altta iki not, liste ve düğme var.",
+      ar: "في الأعلى اسم ورابطان. في الأسفل ملاحظتان وقائمة وزر.",
+      ru: "Сверху имя и две ссылки. Ниже две заметки, список и кнопка.",
+    },
+    code: SITE_MEDIUM,
+  },
+  {
+    title: { az: "Böyük", en: "Large", tr: "Büyük", ar: "كبير", ru: "Большой" },
+    note: {
+      az: "Başlıq zolağı, üç kart və qısa form bir səhifədədir. Telefonda kartlar alt-alta düşür.",
+      en: "A heading bar, three cards, and a short form sit on one page. On a phone the cards stack.",
+      tr: "Başlık şeridi, üç kart ve kısa form bir sayfadadır. Telefonda kartlar alt alta iner.",
+      ar: "شريط عنوان وثلاث بطاقات ونموذج قصير في صفحة واحدة. على الهاتف تنزل البطاقات تحت بعضها.",
+      ru: "Полоса заголовка, три карточки и короткая форма на одной странице. На телефоне карточки встают друг под другом.",
+    },
+    code: SITE_LARGE,
+  },
 ];
 
 const HTML_TEST_URL = "https://dev.nibrascode.com/html";
 
-function HtmlTry({ code, label }: { code: string; label?: string }) {
+function HtmlTry({ code, title, note }: { code: string; title: string; note: string }) {
   const { t } = useI18n();
   const [copied, setCopied] = useState(false);
 
   return (
     <div className="code-try">
-      {label ? <p className="code-try-level">{label}</p> : null}
+      <p className="code-try-level">{title}</p>
+      <p className="code-try-note">{note}</p>
       <div className="code-try-bar">
         <button
           type="button"
@@ -816,14 +1027,18 @@ export function CodeSamplePage({ slug }: { slug: string }) {
       </p>
       <h1>{item ? t(item.label) : t("code_samples")}</h1>
       {item ? (
-        <div className="code-tries">
-          {item.slug === SITE_CODE.slug
-            ? SITE_TRIES.map((entry) => <HtmlTry key={entry.level} code={entry.code} label={t(entry.level)} />)
-            : HTML_TRIES.map((code) => <HtmlTry key={code} code={code} />)}
-        </div>
+        <>
+          <p className="code-lead">{SAMPLE_INTRO[item.slug][lang]}</p>
+          <div className="code-tries">
+            {(item.slug === SITE_CODE.slug ? SITE_TRIES : item.slug === "oyun-kodu" ? GAME_TRIES : APP_TRIES).map((entry) => (
+              <HtmlTry key={entry.title.az} code={entry.code} title={entry.title[lang]} note={entry.note[lang]} />
+            ))}
+          </div>
+        </>
       ) : (
         <>
           <p>{t("code_samples_note")}</p>
+          <p>{HUB_NOTE[lang]}</p>
           <ul className="lib-list">
             {CODE_SAMPLES.map((entry) => (
               <li key={entry.slug}>
