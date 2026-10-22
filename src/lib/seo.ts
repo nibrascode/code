@@ -8,7 +8,7 @@ import { TOOL_IDS } from "@/pdf/tool-text";
 import { findCourse, HUBS, isCourseSlug } from "@/lib/course/meta";
 import { PROGRAMMING_SEO } from "@/lib/programming-seo";
 import { hasProgrammingLocale, programmingFromPath, programmingLocalePath } from "@/lib/programming-path";
-import { CODE_SAMPLE_SEO, isCodeSampleChild, isCodeSampleSlug } from "@/lib/code-samples";
+import { CODE_SAMPLE_SEO, isCodeSampleSlug } from "@/lib/code-samples";
 import { RESURSLAR } from "@/lib/resurslar";
 import { findResourceTopic, resourceArticleFromPath } from "@/lib/resource-topics";
 import { RU_RESOURCES } from "@/lib/ru-resources";
@@ -1148,8 +1148,6 @@ export function buildHead(pathname: string, lang: Lang) {
     };
   }
   const copy = pageCopy(path, pageLang);
-  const samplePath = programmingFromPath(raw);
-  const hideSample = Boolean(samplePath && isCodeSampleChild(samplePath.slug));
   const url = canonicalUrl(path, pageLang);
   const image = ogImage(path);
 
@@ -1158,7 +1156,7 @@ export function buildHead(pathname: string, lang: Lang) {
       { title: copy.title },
       { name: "description", content: copy.description },
       ...(copy.keywords ? [{ name: "keywords", content: copy.keywords }] : []),
-      { name: "robots", content: hideSample ? "noindex, follow" : "index, follow" },
+      { name: "robots", content: "index, follow" },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "Nibras Code" },
       { property: "og:title", content: copy.title },
