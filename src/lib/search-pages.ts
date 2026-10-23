@@ -65,6 +65,13 @@ const WORDS: readonly SearchItem[] = [
         ar: ["يذهب الطلب ويأتي الجواب. والجواب غالبًا JSON.", "الطقس وسعر الصرف والترجمة تُقرأ من أبواب كهذه.", "الباب الذي يطلب مفتاحًا يحتاج تسجيلًا. الباب بلا مفتاح يُفتح مباشرة."],
         ru: ["Уходит запрос, приходит ответ. Ответ часто бывает JSON.", "Погода, курс и перевод читаются через такие двери.", "Дверь с ключом просит регистрацию. Дверь без ключа открывается сразу."],
       },
+      L(
+        "Hava saytı öz stansiyasını sənə vermir. Ünvana şəhərin adını göndərirsən, o temperaturu qaytarır. Açarsız ünvanı hər kəs çağıra bilər. Açarlı ünvan sənin adını soruşur.",
+        "A weather site does not hand you its station. You send a city name to an address, and it returns the temperature. An address without a key can be called by anyone. An address with a key asks who you are.",
+        "Hava sitesi kendi istasyonunu sana vermez. Adrese şehrin adını gönderirsin, o sıcaklığı döndürür. Anahtarsız adresi herkes çağırabilir. Anahtarlı adres senin adını sorar.",
+        "موقع الطقس لا يعطيك محطته. ترسل اسم المدينة إلى عنوان فيعيد الحرارة. العنوان بلا مفتاح يستطيع أي أحد أن يناديه. العنوان بمفتاح يسأل عن اسمك.",
+        "Сайт погоды не отдаёт тебе свою станцию. Ты отправляешь имя города по адресу, он возвращает температуру. Адрес без ключа может вызвать кто угодно. Адрес с ключом спрашивает, кто ты.",
+      ),
     ),
   },
   {
@@ -85,6 +92,13 @@ const WORDS: readonly SearchItem[] = [
         ar: ['`seher = "Bakı"` يضع باكو داخل الاسم.', "ثم `seher = \"Ganja\"` يذهب بالقيمة القديمة.", "تضع الاسم مرة، ثم تقرأ به."],
         ru: ["`seher = \"Bakı\"` хранит Баку под этим именем.", "Потом `seher = \"Ganja\"` убирает старое значение.", "Имя задаёшь один раз и дальше читаешь по нему."],
       },
+      L(
+        "Dəyişən qutu kimidir. Adı qutunun üstündə yazılır, qiymət içində durur. Eyni ada ikinci dəfə yazanda köhnə qiymət silinir. Adın içində boşluq olmur.",
+        "A variable is like a box. The name is written on the box, and the value sits inside. Writing to the same name again removes the old value. The name has no space inside it.",
+        "Değişken kutu gibidir. Adı kutunun üstüne yazılır, değer içinde durur. Aynı ada ikinci kez yazınca eski değer silinir. Adın içinde boşluk olmaz.",
+        "المتغير مثل صندوق. الاسم يُكتب على الصندوق، والقيمة تقف في الداخل. الكتابة على الاسم نفسه مرة ثانية تمسح القيمة القديمة. لا فراغ داخل الاسم.",
+        "Переменная похожа на коробку. Имя написано на коробке, значение лежит внутри. Вторая запись в то же имя стирает старое значение. Внутри имени пробела нет.",
+      ),
     ),
   },
   {
@@ -105,6 +119,13 @@ const WORDS: readonly SearchItem[] = [
         ar: ["يمكن أن تدخل معلومة، مثل اسم المدينة.", "حين ينتهي العمل يمكن أن يُرجع نتيجة، مثل الساعة.", "إذا كان الاسم واضحًا صار الرمز مقروءًا."],
         ru: ["Внутрь можно передать данные, например имя города.", "В конце дело может вернуть результат, например время.", "Понятное имя делает код читаемым."],
       },
+      L(
+        "`salam()` hər çağırılanda eyni cümləni yazır. İçinə ad versən, cümlə həmin adla dəyişir. Funksiya özü işləmir. Onu çağıran sətir işlədir.",
+        "`hello()` writes the same sentence every time you call it. If you pass a name in, the sentence changes with that name. A function does not run by itself. The line that calls it runs it.",
+        "`merhaba()` her çağrıda aynı cümleyi yazar. İçine ad verirsen cümle o adla değişir. Fonksiyon kendi çalışmaz. Onu çağıran satır çalıştırır.",
+        "`salam()` يكتب الجملة نفسها كلما ناديته. إذا أدخلت اسمًا تغيّرت الجملة بذلك الاسم. الدالة لا تعمل وحدها. السطر الذي يناديها هو الذي يشغّلها.",
+        "`salam()` пишет одну и ту же фразу при каждом вызове. Если передать имя, фраза меняется с этим именем. Функция сама не работает. Её запускает строка, которая её зовёт.",
+      ),
     ),
   },
   {
@@ -125,6 +146,13 @@ const WORDS: readonly SearchItem[] = [
         ar: ["لا تكتب طقس عشر مدن بيدك واحدة واحدة. تمشي على القائمة.", "إذا لم ينتهِ الشرط لم تنتهِ الحلقة. وهذا يُسمى حلقة لا نهائية.", "`for` يمشي على القائمة. `while` ينظر إلى الشرط."],
         ru: ["Погоду десяти городов не пишешь руками по одной. Проходишь список.", "Если условие не кончается, не кончается и цикл. Это бесконечный цикл.", "`for` идёт по списку. `while` смотрит на условие."],
       },
+      L(
+        "Üç şəhərin siyahısını `for` ilə gəzəndə eyni sətir üç dəfə işləyir. `while` şərt yalan olanda dayanır. Şərti dəyişməsən, proqram orada qalır.",
+        "When `for` walks a list of three cities, the same line runs three times. `while` stops when the condition is false. If you never change the condition, the program stays there.",
+        "Üç şehrin listesini `for` ile gezince aynı satır üç kez çalışır. `while` koşul yanlış olunca durur. Koşulu değiştirmezsen program orada kalır.",
+        "حين يمشي `for` على قائمة من ثلاث مدن يعمل السطر نفسه ثلاث مرات. `while` يقف حين يكون الشرط خطأ. إذا لم تغيّر الشرط يبقى البرنامج هناك.",
+        "Когда `for` проходит список из трёх городов, одна и та же строка выполняется три раза. `while` останавливается, когда условие ложно. Если условие не менять, программа остаётся там.",
+      ),
     ),
   },
   {
@@ -145,6 +173,13 @@ const WORDS: readonly SearchItem[] = [
         ar: ["الوسم الذي يُفتح يُغلق. فقرة `<p>` تنتهي بـ `</p>`.", "الصفحة تبدأ بـ `<html>`. الجزء الظاهر داخل `<body>`.", "المتصفح يقرأ HTML ويبني الصفحة."],
         ru: ["Открытый тег закрывается. Абзац `<p>` кончается `</p>`.", "Страница начинается с `<html>`. Видимая часть внутри `<body>`.", "Браузер читает HTML и собирает страницу."],
       },
+      L(
+        "Boş bir faylda `<h1>` başlıq, `<p>` abzasdır. Brauzer teqi görməyincə yazını adi mətn sayır. Teq bağlanmasa, sonrakı yazı da həmin teqin içində qalır.",
+        "In an empty file `<h1>` is a heading and `<p>` is a paragraph. Until the browser sees a tag, it treats the words as plain text. If a tag is not closed, the text after it stays inside that tag.",
+        "Boş bir dosyada `<h1>` başlık, `<p>` paragraftır. Tarayıcı etiketi görmeyince yazıyı düz metin sayar. Etiket kapanmazsa sonraki yazı da o etiketin içinde kalır.",
+        "في ملف فارغ `<h1>` عنوان و`<p>` فقرة. ما لم يرَ المتصفح وسمًا يعدّ الكلام نصًا عاديًا. إذا لم يُغلق الوسم يبقى الكلام الذي بعده داخله.",
+        "В пустом файле `<h1>` — заголовок, `<p>` — абзац. Пока браузер не видит тег, он считает слова обычным текстом. Если тег не закрыт, следующий текст остаётся внутри него.",
+      ),
     ),
   },
   {
@@ -165,6 +200,13 @@ const WORDS: readonly SearchItem[] = [
         ar: ["`p { color: #111 }` يغيّر لون الفقرة.", "القاعدة نفسها تُطبق في مواضع كثيرة.", "يمكن أن يختلف الترتيب بين الهاتف والشاشة الواسعة."],
         ru: ["`p { color: #111 }` меняет цвет абзаца.", "Одно правило применяется во многих местах.", "На телефоне и на широком экране раскладка может быть разной."],
       },
+      L(
+        "HTML yazını deyir, CSS onun rəngini və yerini. `body { margin: 0 }` səhifənin kənar boşluğunu silir. CSS olmadan səhifə ağ fonda qara yazı kimi açılır.",
+        "HTML says the words. CSS says their color and place. `body { margin: 0 }` removes the page's outer gap. Without CSS the page opens as black text on a white background.",
+        "HTML yazıyı söyler, CSS onun rengini ve yerini. `body { margin: 0 }` sayfanın kenar boşluğunu siler. CSS olmadan sayfa beyaz fonda siyah yazı gibi açılır.",
+        "HTML يقول الكلام، وCSS يقول لونه ومكانه. `body { margin: 0 }` يزيل فراغ حافة الصفحة. بلا CSS تُفتح الصفحة كنص أسود على خلفية بيضاء.",
+        "HTML говорит слова, CSS — их цвет и место. `body { margin: 0 }` убирает внешний промежуток страницы. Без CSS страница открывается чёрным текстом на белом фоне.",
+      ),
     ),
   },
   {
@@ -185,6 +227,13 @@ const WORDS: readonly SearchItem[] = [
         ar: ["يعمل في المتصفح. لا يلزم تثبيت برنامج منفصل.", "يمكن أن يعمل على الخادم أيضًا. وهذا يُسمى Node.", "HTML بنية، وCSS شكل، وJavaScript حركة."],
         ru: ["Работает в браузере. Отдельную программу ставить не обязательно.", "Может работать и на сервере. Это называют Node.", "HTML — устройство, CSS — вид, JavaScript — движение."],
       },
+      L(
+        "Düyməyə `click` bağlayanda basış sayını artıra bilərsən. JavaScript söndürüləndə düymə görünür, amma iş görmür. Səhifənin quruluşu yenə HTML-də qalır.",
+        "When you bind `click` to a button, you can count the presses. If JavaScript is turned off, the button is still visible, but it does no work. The structure of the page still stays in HTML.",
+        "Düğmeye `click` bağlayınca basış sayısını artırabilirsin. JavaScript kapanınca düğme görünür, ama iş görmez. Sayfanın kuruluşu yine HTML'de kalır.",
+        "حين تربط `click` بزر تستطيع عدّ الضغطات. إذا أُوقف JavaScript يبقى الزر ظاهرًا لكنه لا يعمل. بنية الصفحة تبقى في HTML.",
+        "Если привязать `click` к кнопке, можно считать нажатия. Когда JavaScript выключен, кнопка видна, но ничего не делает. Устройство страницы всё равно остаётся в HTML.",
+      ),
     ),
   },
   {
@@ -205,6 +254,13 @@ const WORDS: readonly SearchItem[] = [
         ar: ["لا تضع فاصلة منقوطة في آخر السطر. الكتلة تُفصل بالمسافة.", '`print("Salam")` يكتب النص على الشاشة.', "تطبيق الهاتف يُكتب غالبًا بـ Java أو Kotlin. Python يصلح للتعلم وللخادم."],
         ru: ["В конце строки точку с запятой не ставишь. Блок отделяется пробелами.", '`print("Salam")` пишет текст на экран.', "Приложение для телефона обычно пишут на Java или Kotlin. Python подходит для учёбы и для сервера."],
       },
+      L(
+        "`print(2 + 3)` ekrana 5 yazır. Sətirin əvvəlindəki boşluq bloku göstərir. Boşluğu səhv qoysan, proqram dayanır. Nöqtəli vergül lazım deyil.",
+        "`print(2 + 3)` writes 5 on the screen. The space at the start of a line marks a block. Put the space wrong and the program stops. A semicolon is not needed.",
+        "`print(2 + 3)` ekrana 5 yazar. Satırın başındaki boşluk bloğu gösterir. Boşluğu yanlış koyarsan program durur. Noktalı virgül gerekmez.",
+        "`print(2 + 3)` يكتب 5 على الشاشة. الفراغ في أول السطر يبيّن الكتلة. إذا وضعت الفراغ خطأ يتوقف البرنامج. الفاصلة المنقوطة ليست لازمة.",
+        "`print(2 + 3)` пишет 5 на экран. Пробел в начале строки показывает блок. Поставишь пробел неверно — программа остановится. Точка с запятой не нужна.",
+      ),
     ),
   },
   {
@@ -225,6 +281,13 @@ const WORDS: readonly SearchItem[] = [
         ar: ['هي خطوة واضحة. «انظر قليلًا» ليست خوارزمية.', "المدخل نفسه ينبغي أن يعطي النتيجة نفسها.", "الرمز هو الخوارزمية مكتوبة بلغة واحدة."],
         ru: ["Это ясный шаг. «Посмотри немного» — не алгоритм.", "Один и тот же вход должен дать один и тот же результат.", "Код — это алгоритм, записанный на одном языке."],
       },
+      L(
+        "Çay dəmləmək də alqoritmdir: suyu qaynat, stəkanı qoy, dəmlə, süz. Kod bunu bir dildə yazır. Addım qarışıqdırsa, kod da qarışıq çıxır.",
+        "Making tea is an algorithm too: boil the water, put the cup, brew, pour. Code writes that in one language. If the step is muddy, the code comes out muddy.",
+        "Çay demlemek de algoritmadır: suyu kaynat, bardağı koy, demle, süz. Kod bunu bir dilde yazar. Adım karışıksa kod da karışık çıkar.",
+        "إعداد الشاي خوارزمية أيضًا: اغلِ الماء، ضع الكأس، انقع، صُبّ. الرمز يكتب ذلك بلغة واحدة. إذا كانت الخطوة غامضة خرج الرمز غامضًا.",
+        "Заварка чая тоже алгоритм: вскипяти воду, поставь стакан, завари, процеди. Код записывает это на одном языке. Если шаг мутный, код тоже выходит мутным.",
+      ),
     ),
   },
   {
@@ -245,6 +308,13 @@ const WORDS: readonly SearchItem[] = [
         ar: ["النص داخل علامات اقتباس. الرقم بلا اقتباس.", "القائمة تُكتب بـ `[ ]`، والزوج بـ `{ }`.", "جواب الطقس أو سعر الصرف غالبًا JSON."],
         ru: ["Текст стоит в кавычках. Число без кавычек.", "Список пишется через `[ ]`, пара через `{ }`.", "Ответ о погоде или курсе часто бывает JSON."],
       },
+      L(
+        "`{\"seher\":\"Bakı\"}` bir cütlükdür. Açar `seher`, qiymət `Bakı`. Vergül unudulsa, proqram mətni qəbul etmir. JSON səhifəni çəkmir, yalnız məlumatı daşıyır.",
+        "`{\"city\":\"Baku\"}` is one pair. The key is `city`, the value is `Baku`. If a comma is missing, the program rejects the text. JSON does not draw the page. It only carries the data.",
+        "`{\"sehir\":\"Bakü\"}` bir çifttir. Anahtar `sehir`, değer `Bakü`. Virgül unutulursa program metni kabul etmez. JSON sayfayı çizmez, yalnız veriyi taşır.",
+        "`{\"seher\":\"Bakı\"}` زوج واحد. المفتاح `seher` والقيمة `Bakı`. إذا نُسيت الفاصلة رفض البرنامج النص. JSON لا يرسم الصفحة. يحمل البيانات فقط.",
+        "`{\"seher\":\"Bakı\"}` — это одна пара. Ключ `seher`, значение `Bakı`. Если запятая забыта, программа не принимает текст. JSON страницу не рисует. Он только несёт данные.",
+      ),
     ),
   },
 ];
