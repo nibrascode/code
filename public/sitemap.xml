@@ -71,7 +71,87 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/why"/>
   </url>
   <url>
+    <loc>https://nibrascode.com/why?lang=en</loc>
+    <lastmod>2026-09-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/why"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/why?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/why?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/why?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/why?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/why"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/why?lang=ar</loc>
+    <lastmod>2026-09-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/why"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/why?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/why?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/why?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/why?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/why"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/why?lang=ru</loc>
+    <lastmod>2026-09-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/why"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/why?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/why?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/why?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/why?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/why"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/why?lang=tr</loc>
+    <lastmod>2026-09-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/why"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/why?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/why?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/why?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/why?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/why"/>
+  </url>
+  <url>
     <loc>https://nibrascode.com/unutma</loc>
+    <lastmod>2026-09-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/unutma"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/unutma?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/unutma?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/unutma?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/unutma?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/unutma"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/unutma?lang=en</loc>
+    <lastmod>2026-09-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/unutma"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/unutma?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/unutma?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/unutma?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/unutma?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/unutma"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/unutma?lang=ar</loc>
+    <lastmod>2026-09-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/unutma"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/unutma?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/unutma?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/unutma?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/unutma?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/unutma"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/unutma?lang=ru</loc>
+    <lastmod>2026-09-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/unutma"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/unutma?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/unutma?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/unutma?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/unutma?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/unutma"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/unutma?lang=tr</loc>
     <lastmod>2026-09-23</lastmod>
     <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/unutma"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/unutma?lang=en"/>
@@ -131,7 +211,87 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/privacy"/>
   </url>
   <url>
+    <loc>https://nibrascode.com/privacy?lang=en</loc>
+    <lastmod>2026-09-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/privacy"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/privacy?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/privacy?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/privacy?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/privacy?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/privacy"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/privacy?lang=ar</loc>
+    <lastmod>2026-09-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/privacy"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/privacy?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/privacy?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/privacy?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/privacy?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/privacy"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/privacy?lang=ru</loc>
+    <lastmod>2026-09-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/privacy"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/privacy?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/privacy?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/privacy?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/privacy?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/privacy"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/privacy?lang=tr</loc>
+    <lastmod>2026-09-23</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/privacy"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/privacy?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/privacy?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/privacy?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/privacy?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/privacy"/>
+  </url>
+  <url>
     <loc>https://nibrascode.com/privacy/nibras-arabic</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/privacy/nibras-arabic"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/privacy/nibras-arabic?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/privacy/nibras-arabic?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/privacy/nibras-arabic?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/privacy/nibras-arabic?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/privacy/nibras-arabic"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/privacy/nibras-arabic?lang=en</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/privacy/nibras-arabic"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/privacy/nibras-arabic?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/privacy/nibras-arabic?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/privacy/nibras-arabic?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/privacy/nibras-arabic?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/privacy/nibras-arabic"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/privacy/nibras-arabic?lang=ar</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/privacy/nibras-arabic"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/privacy/nibras-arabic?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/privacy/nibras-arabic?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/privacy/nibras-arabic?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/privacy/nibras-arabic?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/privacy/nibras-arabic"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/privacy/nibras-arabic?lang=ru</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/privacy/nibras-arabic"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/privacy/nibras-arabic?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/privacy/nibras-arabic?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/privacy/nibras-arabic?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/privacy/nibras-arabic?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/privacy/nibras-arabic"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/privacy/nibras-arabic?lang=tr</loc>
     <lastmod>2026-09-30</lastmod>
     <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/privacy/nibras-arabic"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/privacy/nibras-arabic?lang=en"/>
@@ -151,7 +311,87 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/privacy/nibras-pdf"/>
   </url>
   <url>
+    <loc>https://nibrascode.com/privacy/nibras-pdf?lang=en</loc>
+    <lastmod>2026-09-29</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/privacy/nibras-pdf"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/privacy/nibras-pdf?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/privacy/nibras-pdf?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/privacy/nibras-pdf?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/privacy/nibras-pdf?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/privacy/nibras-pdf"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/privacy/nibras-pdf?lang=ar</loc>
+    <lastmod>2026-09-29</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/privacy/nibras-pdf"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/privacy/nibras-pdf?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/privacy/nibras-pdf?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/privacy/nibras-pdf?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/privacy/nibras-pdf?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/privacy/nibras-pdf"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/privacy/nibras-pdf?lang=ru</loc>
+    <lastmod>2026-09-29</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/privacy/nibras-pdf"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/privacy/nibras-pdf?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/privacy/nibras-pdf?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/privacy/nibras-pdf?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/privacy/nibras-pdf?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/privacy/nibras-pdf"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/privacy/nibras-pdf?lang=tr</loc>
+    <lastmod>2026-09-29</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/privacy/nibras-pdf"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/privacy/nibras-pdf?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/privacy/nibras-pdf?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/privacy/nibras-pdf?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/privacy/nibras-pdf?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/privacy/nibras-pdf"/>
+  </url>
+  <url>
     <loc>https://nibrascode.com/resources</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources?lang=en</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources?lang=ar</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources?lang=ru</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources?lang=tr</loc>
     <lastmod>2026-09-30</lastmod>
     <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources?lang=en"/>
@@ -171,7 +411,67 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/pdf"/>
   </url>
   <url>
+    <loc>https://nibrascode.com/resurslar/pdf?lang=en</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/pdf"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/pdf?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/pdf?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/pdf"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/pdf?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/pdf"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resurslar/pdf?lang=ar</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/pdf"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/pdf?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/pdf?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/pdf"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/pdf?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/pdf"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resurslar/pdf?lang=tr</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/pdf"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/pdf?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/pdf?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/pdf"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/pdf?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/pdf"/>
+  </url>
+  <url>
     <loc>https://nibrascode.com/resurslar/pdf-birlesdirmek</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/pdf-birlesdirmek"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/pdf-birlesdirmek?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/pdf-birlesdirmek?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/obedinit-pdf"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/pdf-birlesdirmek?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/pdf-birlesdirmek"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resurslar/pdf-birlesdirmek?lang=en</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/pdf-birlesdirmek"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/pdf-birlesdirmek?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/pdf-birlesdirmek?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/obedinit-pdf"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/pdf-birlesdirmek?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/pdf-birlesdirmek"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resurslar/pdf-birlesdirmek?lang=ar</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/pdf-birlesdirmek"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/pdf-birlesdirmek?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/pdf-birlesdirmek?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/obedinit-pdf"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/pdf-birlesdirmek?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/pdf-birlesdirmek"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resurslar/pdf-birlesdirmek?lang=tr</loc>
     <lastmod>2026-09-30</lastmod>
     <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/pdf-birlesdirmek"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/pdf-birlesdirmek?lang=en"/>
@@ -191,7 +491,67 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/pdf-sixisdirmak"/>
   </url>
   <url>
+    <loc>https://nibrascode.com/resurslar/pdf-sixisdirmak?lang=en</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/pdf-sixisdirmak"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/pdf-sixisdirmak?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/pdf-sixisdirmak?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/szhat-pdf"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/pdf-sixisdirmak?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/pdf-sixisdirmak"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resurslar/pdf-sixisdirmak?lang=ar</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/pdf-sixisdirmak"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/pdf-sixisdirmak?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/pdf-sixisdirmak?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/szhat-pdf"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/pdf-sixisdirmak?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/pdf-sixisdirmak"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resurslar/pdf-sixisdirmak?lang=tr</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/pdf-sixisdirmak"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/pdf-sixisdirmak?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/pdf-sixisdirmak?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/szhat-pdf"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/pdf-sixisdirmak?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/pdf-sixisdirmak"/>
+  </url>
+  <url>
     <loc>https://nibrascode.com/resurslar/pdf-bolmek</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/pdf-bolmek"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/pdf-bolmek?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/pdf-bolmek?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/razdelit-pdf"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/pdf-bolmek?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/pdf-bolmek"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resurslar/pdf-bolmek?lang=en</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/pdf-bolmek"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/pdf-bolmek?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/pdf-bolmek?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/razdelit-pdf"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/pdf-bolmek?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/pdf-bolmek"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resurslar/pdf-bolmek?lang=ar</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/pdf-bolmek"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/pdf-bolmek?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/pdf-bolmek?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/razdelit-pdf"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/pdf-bolmek?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/pdf-bolmek"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resurslar/pdf-bolmek?lang=tr</loc>
     <lastmod>2026-09-30</lastmod>
     <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/pdf-bolmek"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/pdf-bolmek?lang=en"/>
@@ -211,7 +571,67 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/pdf-den-sehife-cixarmaq"/>
   </url>
   <url>
+    <loc>https://nibrascode.com/resurslar/pdf-den-sehife-cixarmaq?lang=en</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/pdf-den-sehife-cixarmaq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/pdf-den-sehife-cixarmaq?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/pdf-den-sehife-cixarmaq?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/udalit-stranitsu-pdf"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/pdf-den-sehife-cixarmaq?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/pdf-den-sehife-cixarmaq"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resurslar/pdf-den-sehife-cixarmaq?lang=ar</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/pdf-den-sehife-cixarmaq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/pdf-den-sehife-cixarmaq?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/pdf-den-sehife-cixarmaq?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/udalit-stranitsu-pdf"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/pdf-den-sehife-cixarmaq?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/pdf-den-sehife-cixarmaq"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resurslar/pdf-den-sehife-cixarmaq?lang=tr</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/pdf-den-sehife-cixarmaq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/pdf-den-sehife-cixarmaq?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/pdf-den-sehife-cixarmaq?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/udalit-stranitsu-pdf"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/pdf-den-sehife-cixarmaq?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/pdf-den-sehife-cixarmaq"/>
+  </url>
+  <url>
     <loc>https://nibrascode.com/resurslar/pdf-den-sekil-cixarmaq</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/pdf-den-sekil-cixarmaq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/pdf-den-sekil-cixarmaq?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/pdf-den-sekil-cixarmaq?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/izvlech-izobrazhenie-iz-pdf"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/pdf-den-sekil-cixarmaq?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/pdf-den-sekil-cixarmaq"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resurslar/pdf-den-sekil-cixarmaq?lang=en</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/pdf-den-sekil-cixarmaq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/pdf-den-sekil-cixarmaq?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/pdf-den-sekil-cixarmaq?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/izvlech-izobrazhenie-iz-pdf"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/pdf-den-sekil-cixarmaq?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/pdf-den-sekil-cixarmaq"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resurslar/pdf-den-sekil-cixarmaq?lang=ar</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/pdf-den-sekil-cixarmaq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/pdf-den-sekil-cixarmaq?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/pdf-den-sekil-cixarmaq?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/izvlech-izobrazhenie-iz-pdf"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/pdf-den-sekil-cixarmaq?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/pdf-den-sekil-cixarmaq"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resurslar/pdf-den-sekil-cixarmaq?lang=tr</loc>
     <lastmod>2026-09-30</lastmod>
     <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/pdf-den-sekil-cixarmaq"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/pdf-den-sekil-cixarmaq?lang=en"/>
@@ -231,7 +651,67 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/sekilleri-pdf-e-cevirmek"/>
   </url>
   <url>
+    <loc>https://nibrascode.com/resurslar/sekilleri-pdf-e-cevirmek?lang=en</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/sekilleri-pdf-e-cevirmek"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/sekilleri-pdf-e-cevirmek?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/sekilleri-pdf-e-cevirmek?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/sozdat-pdf-iz-izobrazheniy"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/sekilleri-pdf-e-cevirmek?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/sekilleri-pdf-e-cevirmek"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resurslar/sekilleri-pdf-e-cevirmek?lang=ar</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/sekilleri-pdf-e-cevirmek"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/sekilleri-pdf-e-cevirmek?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/sekilleri-pdf-e-cevirmek?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/sozdat-pdf-iz-izobrazheniy"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/sekilleri-pdf-e-cevirmek?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/sekilleri-pdf-e-cevirmek"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resurslar/sekilleri-pdf-e-cevirmek?lang=tr</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/sekilleri-pdf-e-cevirmek"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/sekilleri-pdf-e-cevirmek?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/sekilleri-pdf-e-cevirmek?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/sozdat-pdf-iz-izobrazheniy"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/sekilleri-pdf-e-cevirmek?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/sekilleri-pdf-e-cevirmek"/>
+  </url>
+  <url>
     <loc>https://nibrascode.com/resurslar/pdf-i-worde-cevirmek</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/pdf-i-worde-cevirmek"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/pdf-i-worde-cevirmek?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/pdf-i-worde-cevirmek?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/pdf-v-word"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/pdf-i-worde-cevirmek?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/pdf-i-worde-cevirmek"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resurslar/pdf-i-worde-cevirmek?lang=en</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/pdf-i-worde-cevirmek"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/pdf-i-worde-cevirmek?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/pdf-i-worde-cevirmek?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/pdf-v-word"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/pdf-i-worde-cevirmek?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/pdf-i-worde-cevirmek"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resurslar/pdf-i-worde-cevirmek?lang=ar</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/pdf-i-worde-cevirmek"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/pdf-i-worde-cevirmek?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/pdf-i-worde-cevirmek?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/pdf-v-word"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/pdf-i-worde-cevirmek?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/pdf-i-worde-cevirmek"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resurslar/pdf-i-worde-cevirmek?lang=tr</loc>
     <lastmod>2026-09-30</lastmod>
     <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/pdf-i-worde-cevirmek"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/pdf-i-worde-cevirmek?lang=en"/>
@@ -251,7 +731,67 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/wordu-pdf-e-cevirmek"/>
   </url>
   <url>
+    <loc>https://nibrascode.com/resurslar/wordu-pdf-e-cevirmek?lang=en</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/wordu-pdf-e-cevirmek"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/wordu-pdf-e-cevirmek?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/wordu-pdf-e-cevirmek?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/word-v-pdf"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/wordu-pdf-e-cevirmek?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/wordu-pdf-e-cevirmek"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resurslar/wordu-pdf-e-cevirmek?lang=ar</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/wordu-pdf-e-cevirmek"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/wordu-pdf-e-cevirmek?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/wordu-pdf-e-cevirmek?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/word-v-pdf"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/wordu-pdf-e-cevirmek?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/wordu-pdf-e-cevirmek"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resurslar/wordu-pdf-e-cevirmek?lang=tr</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/wordu-pdf-e-cevirmek"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/wordu-pdf-e-cevirmek?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/wordu-pdf-e-cevirmek?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/word-v-pdf"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/wordu-pdf-e-cevirmek?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/wordu-pdf-e-cevirmek"/>
+  </url>
+  <url>
     <loc>https://nibrascode.com/resurslar/telefonda-pdf-redakte-etmek</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/telefonda-pdf-redakte-etmek"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/telefonda-pdf-redakte-etmek?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/telefonda-pdf-redakte-etmek?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/redaktirovat-pdf-na-telefone"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/telefonda-pdf-redakte-etmek?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/telefonda-pdf-redakte-etmek"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resurslar/telefonda-pdf-redakte-etmek?lang=en</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/telefonda-pdf-redakte-etmek"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/telefonda-pdf-redakte-etmek?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/telefonda-pdf-redakte-etmek?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/redaktirovat-pdf-na-telefone"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/telefonda-pdf-redakte-etmek?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/telefonda-pdf-redakte-etmek"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resurslar/telefonda-pdf-redakte-etmek?lang=ar</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/telefonda-pdf-redakte-etmek"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/telefonda-pdf-redakte-etmek?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/telefonda-pdf-redakte-etmek?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/redaktirovat-pdf-na-telefone"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/telefonda-pdf-redakte-etmek?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/telefonda-pdf-redakte-etmek"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resurslar/telefonda-pdf-redakte-etmek?lang=tr</loc>
     <lastmod>2026-09-30</lastmod>
     <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/telefonda-pdf-redakte-etmek"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/telefonda-pdf-redakte-etmek?lang=en"/>
@@ -271,7 +811,67 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/telefonda-pdf-yaratmaq"/>
   </url>
   <url>
+    <loc>https://nibrascode.com/resurslar/telefonda-pdf-yaratmaq?lang=en</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/telefonda-pdf-yaratmaq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/telefonda-pdf-yaratmaq?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/telefonda-pdf-yaratmaq?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/sozdat-pdf-na-telefone"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/telefonda-pdf-yaratmaq?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/telefonda-pdf-yaratmaq"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resurslar/telefonda-pdf-yaratmaq?lang=ar</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/telefonda-pdf-yaratmaq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/telefonda-pdf-yaratmaq?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/telefonda-pdf-yaratmaq?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/sozdat-pdf-na-telefone"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/telefonda-pdf-yaratmaq?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/telefonda-pdf-yaratmaq"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resurslar/telefonda-pdf-yaratmaq?lang=tr</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/telefonda-pdf-yaratmaq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/telefonda-pdf-yaratmaq?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/telefonda-pdf-yaratmaq?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/sozdat-pdf-na-telefone"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/telefonda-pdf-yaratmaq?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/telefonda-pdf-yaratmaq"/>
+  </url>
+  <url>
     <loc>https://nibrascode.com/resurslar/pdf-imzalamaq</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/pdf-imzalamaq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/pdf-imzalamaq?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/pdf-imzalamaq?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/podpisat-pdf"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/pdf-imzalamaq?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/pdf-imzalamaq"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resurslar/pdf-imzalamaq?lang=en</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/pdf-imzalamaq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/pdf-imzalamaq?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/pdf-imzalamaq?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/podpisat-pdf"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/pdf-imzalamaq?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/pdf-imzalamaq"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resurslar/pdf-imzalamaq?lang=ar</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/pdf-imzalamaq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/pdf-imzalamaq?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/pdf-imzalamaq?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/podpisat-pdf"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/pdf-imzalamaq?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/pdf-imzalamaq"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resurslar/pdf-imzalamaq?lang=tr</loc>
     <lastmod>2026-09-30</lastmod>
     <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/pdf-imzalamaq"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/pdf-imzalamaq?lang=en"/>
@@ -291,7 +891,67 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/pdf-e-sifre-qoymaq"/>
   </url>
   <url>
+    <loc>https://nibrascode.com/resurslar/pdf-e-sifre-qoymaq?lang=en</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/pdf-e-sifre-qoymaq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/pdf-e-sifre-qoymaq?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/pdf-e-sifre-qoymaq?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/parol-na-pdf"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/pdf-e-sifre-qoymaq?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/pdf-e-sifre-qoymaq"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resurslar/pdf-e-sifre-qoymaq?lang=ar</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/pdf-e-sifre-qoymaq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/pdf-e-sifre-qoymaq?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/pdf-e-sifre-qoymaq?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/parol-na-pdf"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/pdf-e-sifre-qoymaq?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/pdf-e-sifre-qoymaq"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resurslar/pdf-e-sifre-qoymaq?lang=tr</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/pdf-e-sifre-qoymaq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/pdf-e-sifre-qoymaq?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/pdf-e-sifre-qoymaq?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/parol-na-pdf"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/pdf-e-sifre-qoymaq?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/pdf-e-sifre-qoymaq"/>
+  </url>
+  <url>
     <loc>https://nibrascode.com/resurslar/pdf-den-metn-cixarmaq</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/pdf-den-metn-cixarmaq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/pdf-den-metn-cixarmaq?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/pdf-den-metn-cixarmaq?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/izvlech-tekst-iz-pdf"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/pdf-den-metn-cixarmaq?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/pdf-den-metn-cixarmaq"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resurslar/pdf-den-metn-cixarmaq?lang=en</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/pdf-den-metn-cixarmaq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/pdf-den-metn-cixarmaq?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/pdf-den-metn-cixarmaq?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/izvlech-tekst-iz-pdf"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/pdf-den-metn-cixarmaq?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/pdf-den-metn-cixarmaq"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resurslar/pdf-den-metn-cixarmaq?lang=ar</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/pdf-den-metn-cixarmaq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/pdf-den-metn-cixarmaq?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/pdf-den-metn-cixarmaq?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/izvlech-tekst-iz-pdf"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/pdf-den-metn-cixarmaq?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/pdf-den-metn-cixarmaq"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resurslar/pdf-den-metn-cixarmaq?lang=tr</loc>
     <lastmod>2026-09-30</lastmod>
     <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/pdf-den-metn-cixarmaq"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/pdf-den-metn-cixarmaq?lang=en"/>
@@ -311,7 +971,67 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/pdf-scanner"/>
   </url>
   <url>
+    <loc>https://nibrascode.com/resurslar/pdf-scanner?lang=en</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/pdf-scanner"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/pdf-scanner?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/pdf-scanner?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/pdf-scanner"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/pdf-scanner?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/pdf-scanner"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resurslar/pdf-scanner?lang=ar</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/pdf-scanner"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/pdf-scanner?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/pdf-scanner?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/pdf-scanner"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/pdf-scanner?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/pdf-scanner"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resurslar/pdf-scanner?lang=tr</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/pdf-scanner"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/pdf-scanner?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/pdf-scanner?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/pdf-scanner"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/pdf-scanner?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/pdf-scanner"/>
+  </url>
+  <url>
     <loc>https://nibrascode.com/resurslar/nibras-pdf</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/nibras-pdf"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/nibras-pdf?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/nibras-pdf?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/nibras-pdf?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/nibras-pdf"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/nibras-pdf"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resurslar/nibras-pdf?lang=en</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/nibras-pdf"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/nibras-pdf?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/nibras-pdf?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/nibras-pdf?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/nibras-pdf"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/nibras-pdf"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resurslar/nibras-pdf?lang=tr</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/nibras-pdf"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/nibras-pdf?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resurslar/nibras-pdf?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resurslar/nibras-pdf?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/resources/nibras-pdf"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resurslar/nibras-pdf"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resurslar/nibras-pdf?lang=ar</loc>
     <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resurslar/nibras-pdf"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resurslar/nibras-pdf?lang=en"/>
@@ -491,6 +1211,46 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/programming"/>
   </url>
   <url>
+    <loc>https://nibrascode.com/programming?lang=en</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/programming"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/programming?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/programming?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/programming?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/programming?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/programming"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/programming?lang=ar</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/programming"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/programming?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/programming?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/programming?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/programming?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/programming"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/programming?lang=ru</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/programming"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/programming?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/programming?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/programming?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/programming?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/programming"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/programming?lang=tr</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/programming"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/programming?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/programming?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/programming?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/programming?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/programming"/>
+  </url>
+  <url>
     <loc>https://nibrascode.com/programming/python</loc>
     <lastmod>2026-09-30</lastmod>
     <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/programming/python"/>
@@ -542,6 +1302,46 @@
   </url>
   <url>
     <loc>https://nibrascode.com/programming/javascript</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/programming/javascript"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/programming/javascript?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/programming/javascript?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/programming/javascript?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/programming/javascript?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/programming/javascript"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/programming/javascript?lang=en</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/programming/javascript"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/programming/javascript?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/programming/javascript?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/programming/javascript?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/programming/javascript?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/programming/javascript"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/programming/javascript?lang=ar</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/programming/javascript"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/programming/javascript?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/programming/javascript?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/programming/javascript?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/programming/javascript?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/programming/javascript"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/programming/javascript?lang=ru</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/programming/javascript"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/programming/javascript?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/programming/javascript?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/programming/javascript?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/programming/javascript?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/programming/javascript"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/programming/javascript?lang=tr</loc>
     <lastmod>2026-09-30</lastmod>
     <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/programming/javascript"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/programming/javascript?lang=en"/>
@@ -661,7 +1461,87 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/programming/typescript"/>
   </url>
   <url>
+    <loc>https://nibrascode.com/programming/typescript?lang=en</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/programming/typescript"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/programming/typescript?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/programming/typescript?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/programming/typescript?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/programming/typescript?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/programming/typescript"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/programming/typescript?lang=ar</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/programming/typescript"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/programming/typescript?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/programming/typescript?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/programming/typescript?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/programming/typescript?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/programming/typescript"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/programming/typescript?lang=ru</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/programming/typescript"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/programming/typescript?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/programming/typescript?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/programming/typescript?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/programming/typescript?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/programming/typescript"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/programming/typescript?lang=tr</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/programming/typescript"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/programming/typescript?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/programming/typescript?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/programming/typescript?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/programming/typescript?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/programming/typescript"/>
+  </url>
+  <url>
     <loc>https://nibrascode.com/programming/html-css</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/programming/html-css"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/programming/html-css?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/programming/html-css?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/programming/html-css?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/programming/html-css?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/programming/html-css"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/programming/html-css?lang=en</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/programming/html-css"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/programming/html-css?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/programming/html-css?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/programming/html-css?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/programming/html-css?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/programming/html-css"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/programming/html-css?lang=ar</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/programming/html-css"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/programming/html-css?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/programming/html-css?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/programming/html-css?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/programming/html-css?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/programming/html-css"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/programming/html-css?lang=ru</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/programming/html-css"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/programming/html-css?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/programming/html-css?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/programming/html-css?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/programming/html-css?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/programming/html-css"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/programming/html-css?lang=tr</loc>
     <lastmod>2026-09-30</lastmod>
     <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/programming/html-css"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/programming/html-css?lang=en"/>
@@ -681,7 +1561,87 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/programming/sql"/>
   </url>
   <url>
+    <loc>https://nibrascode.com/programming/sql?lang=en</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/programming/sql"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/programming/sql?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/programming/sql?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/programming/sql?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/programming/sql?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/programming/sql"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/programming/sql?lang=ar</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/programming/sql"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/programming/sql?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/programming/sql?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/programming/sql?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/programming/sql?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/programming/sql"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/programming/sql?lang=ru</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/programming/sql"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/programming/sql?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/programming/sql?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/programming/sql?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/programming/sql?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/programming/sql"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/programming/sql?lang=tr</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/programming/sql"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/programming/sql?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/programming/sql?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/programming/sql?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/programming/sql?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/programming/sql"/>
+  </url>
+  <url>
     <loc>https://nibrascode.com/guides</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/guides"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/guides?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/guides?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/guides?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/guides?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/guides"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/guides?lang=en</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/guides"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/guides?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/guides?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/guides?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/guides?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/guides"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/guides?lang=ar</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/guides"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/guides?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/guides?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/guides?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/guides?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/guides"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/guides?lang=ru</loc>
+    <lastmod>2026-09-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/guides"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/guides?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/guides?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/guides?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/guides?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/guides"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/guides?lang=tr</loc>
     <lastmod>2026-09-30</lastmod>
     <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/guides"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/guides?lang=en"/>
@@ -921,7 +1881,87 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/ereb-dili"/>
   </url>
   <url>
+    <loc>https://nibrascode.com/resources/ereb-dili?lang=en</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/ereb-dili"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/ereb-dili?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/ereb-dili?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/ereb-dili?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/ereb-dili?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/ereb-dili"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/ereb-dili?lang=ar</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/ereb-dili"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/ereb-dili?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/ereb-dili?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/ereb-dili?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/ereb-dili?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/ereb-dili"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/ereb-dili?lang=ru</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/ereb-dili"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/ereb-dili?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/ereb-dili?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/ereb-dili?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/ereb-dili?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/ereb-dili"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/ereb-dili?lang=tr</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/ereb-dili"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/ereb-dili?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/ereb-dili?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/ereb-dili?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/ereb-dili?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/ereb-dili"/>
+  </url>
+  <url>
     <loc>https://nibrascode.com/resources/android</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/android"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/android?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/android?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/android?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/android?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/android"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/android?lang=en</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/android"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/android?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/android?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/android?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/android?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/android"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/android?lang=ar</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/android"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/android?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/android?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/android?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/android?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/android"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/android?lang=ru</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/android"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/android?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/android?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/android?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/android?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/android"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/android?lang=tr</loc>
     <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/android"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/android?lang=en"/>
@@ -941,7 +1981,87 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/fayl-aletleri"/>
   </url>
   <url>
+    <loc>https://nibrascode.com/resources/fayl-aletleri?lang=en</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/fayl-aletleri"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/fayl-aletleri?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/fayl-aletleri?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/fayl-aletleri?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/fayl-aletleri?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/fayl-aletleri"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/fayl-aletleri?lang=ar</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/fayl-aletleri"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/fayl-aletleri?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/fayl-aletleri?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/fayl-aletleri?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/fayl-aletleri?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/fayl-aletleri"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/fayl-aletleri?lang=ru</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/fayl-aletleri"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/fayl-aletleri?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/fayl-aletleri?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/fayl-aletleri?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/fayl-aletleri?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/fayl-aletleri"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/fayl-aletleri?lang=tr</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/fayl-aletleri"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/fayl-aletleri?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/fayl-aletleri?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/fayl-aletleri?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/fayl-aletleri?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/fayl-aletleri"/>
+  </url>
+  <url>
     <loc>https://nibrascode.com/resources/tehsil</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/tehsil"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/tehsil?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/tehsil?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/tehsil?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/tehsil?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/tehsil"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/tehsil?lang=en</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/tehsil"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/tehsil?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/tehsil?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/tehsil?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/tehsil?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/tehsil"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/tehsil?lang=ar</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/tehsil"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/tehsil?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/tehsil?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/tehsil?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/tehsil?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/tehsil"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/tehsil?lang=ru</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/tehsil"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/tehsil?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/tehsil?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/tehsil?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/tehsil?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/tehsil"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/tehsil?lang=tr</loc>
     <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/tehsil"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/tehsil?lang=en"/>
@@ -961,7 +2081,87 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/senedler"/>
   </url>
   <url>
+    <loc>https://nibrascode.com/resources/senedler?lang=en</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/senedler"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/senedler?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/senedler?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/senedler?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/senedler?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/senedler"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/senedler?lang=ar</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/senedler"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/senedler?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/senedler?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/senedler?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/senedler?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/senedler"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/senedler?lang=ru</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/senedler"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/senedler?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/senedler?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/senedler?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/senedler?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/senedler"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/senedler?lang=tr</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/senedler"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/senedler?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/senedler?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/senedler?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/senedler?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/senedler"/>
+  </url>
+  <url>
     <loc>https://nibrascode.com/resources/ereb-dili/ereb-elifbasi</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/ereb-dili/ereb-elifbasi"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/ereb-dili/ereb-elifbasi?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/ereb-dili/ereb-elifbasi?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/ereb-dili/ereb-elifbasi?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/ereb-dili/ereb-elifbasi?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/ereb-dili/ereb-elifbasi"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/ereb-dili/ereb-elifbasi?lang=en</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/ereb-dili/ereb-elifbasi"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/ereb-dili/ereb-elifbasi?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/ereb-dili/ereb-elifbasi?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/ereb-dili/ereb-elifbasi?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/ereb-dili/ereb-elifbasi?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/ereb-dili/ereb-elifbasi"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/ereb-dili/ereb-elifbasi?lang=ar</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/ereb-dili/ereb-elifbasi"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/ereb-dili/ereb-elifbasi?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/ereb-dili/ereb-elifbasi?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/ereb-dili/ereb-elifbasi?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/ereb-dili/ereb-elifbasi?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/ereb-dili/ereb-elifbasi"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/ereb-dili/ereb-elifbasi?lang=ru</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/ereb-dili/ereb-elifbasi"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/ereb-dili/ereb-elifbasi?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/ereb-dili/ereb-elifbasi?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/ereb-dili/ereb-elifbasi?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/ereb-dili/ereb-elifbasi?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/ereb-dili/ereb-elifbasi"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/ereb-dili/ereb-elifbasi?lang=tr</loc>
     <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/ereb-dili/ereb-elifbasi"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/ereb-dili/ereb-elifbasi?lang=en"/>
@@ -981,7 +2181,87 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/ereb-dili/ereb-herflerini-oyrenmek"/>
   </url>
   <url>
+    <loc>https://nibrascode.com/resources/ereb-dili/ereb-herflerini-oyrenmek?lang=en</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/ereb-dili/ereb-herflerini-oyrenmek"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/ereb-dili/ereb-herflerini-oyrenmek?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/ereb-dili/ereb-herflerini-oyrenmek?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/ereb-dili/ereb-herflerini-oyrenmek?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/ereb-dili/ereb-herflerini-oyrenmek?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/ereb-dili/ereb-herflerini-oyrenmek"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/ereb-dili/ereb-herflerini-oyrenmek?lang=ar</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/ereb-dili/ereb-herflerini-oyrenmek"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/ereb-dili/ereb-herflerini-oyrenmek?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/ereb-dili/ereb-herflerini-oyrenmek?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/ereb-dili/ereb-herflerini-oyrenmek?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/ereb-dili/ereb-herflerini-oyrenmek?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/ereb-dili/ereb-herflerini-oyrenmek"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/ereb-dili/ereb-herflerini-oyrenmek?lang=ru</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/ereb-dili/ereb-herflerini-oyrenmek"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/ereb-dili/ereb-herflerini-oyrenmek?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/ereb-dili/ereb-herflerini-oyrenmek?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/ereb-dili/ereb-herflerini-oyrenmek?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/ereb-dili/ereb-herflerini-oyrenmek?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/ereb-dili/ereb-herflerini-oyrenmek"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/ereb-dili/ereb-herflerini-oyrenmek?lang=tr</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/ereb-dili/ereb-herflerini-oyrenmek"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/ereb-dili/ereb-herflerini-oyrenmek?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/ereb-dili/ereb-herflerini-oyrenmek?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/ereb-dili/ereb-herflerini-oyrenmek?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/ereb-dili/ereb-herflerini-oyrenmek?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/ereb-dili/ereb-herflerini-oyrenmek"/>
+  </url>
+  <url>
     <loc>https://nibrascode.com/resources/ereb-dili/herekeler-nedir</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/ereb-dili/herekeler-nedir"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/ereb-dili/herekeler-nedir?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/ereb-dili/herekeler-nedir?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/ereb-dili/herekeler-nedir?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/ereb-dili/herekeler-nedir?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/ereb-dili/herekeler-nedir"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/ereb-dili/herekeler-nedir?lang=en</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/ereb-dili/herekeler-nedir"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/ereb-dili/herekeler-nedir?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/ereb-dili/herekeler-nedir?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/ereb-dili/herekeler-nedir?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/ereb-dili/herekeler-nedir?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/ereb-dili/herekeler-nedir"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/ereb-dili/herekeler-nedir?lang=ar</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/ereb-dili/herekeler-nedir"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/ereb-dili/herekeler-nedir?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/ereb-dili/herekeler-nedir?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/ereb-dili/herekeler-nedir?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/ereb-dili/herekeler-nedir?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/ereb-dili/herekeler-nedir"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/ereb-dili/herekeler-nedir?lang=ru</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/ereb-dili/herekeler-nedir"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/ereb-dili/herekeler-nedir?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/ereb-dili/herekeler-nedir?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/ereb-dili/herekeler-nedir?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/ereb-dili/herekeler-nedir?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/ereb-dili/herekeler-nedir"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/ereb-dili/herekeler-nedir?lang=tr</loc>
     <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/ereb-dili/herekeler-nedir"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/ereb-dili/herekeler-nedir?lang=en"/>
@@ -1001,7 +2281,87 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/ereb-dili/ereb-soz-ehtiyati"/>
   </url>
   <url>
+    <loc>https://nibrascode.com/resources/ereb-dili/ereb-soz-ehtiyati?lang=en</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/ereb-dili/ereb-soz-ehtiyati"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/ereb-dili/ereb-soz-ehtiyati?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/ereb-dili/ereb-soz-ehtiyati?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/ereb-dili/ereb-soz-ehtiyati?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/ereb-dili/ereb-soz-ehtiyati?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/ereb-dili/ereb-soz-ehtiyati"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/ereb-dili/ereb-soz-ehtiyati?lang=ar</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/ereb-dili/ereb-soz-ehtiyati"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/ereb-dili/ereb-soz-ehtiyati?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/ereb-dili/ereb-soz-ehtiyati?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/ereb-dili/ereb-soz-ehtiyati?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/ereb-dili/ereb-soz-ehtiyati?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/ereb-dili/ereb-soz-ehtiyati"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/ereb-dili/ereb-soz-ehtiyati?lang=ru</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/ereb-dili/ereb-soz-ehtiyati"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/ereb-dili/ereb-soz-ehtiyati?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/ereb-dili/ereb-soz-ehtiyati?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/ereb-dili/ereb-soz-ehtiyati?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/ereb-dili/ereb-soz-ehtiyati?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/ereb-dili/ereb-soz-ehtiyati"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/ereb-dili/ereb-soz-ehtiyati?lang=tr</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/ereb-dili/ereb-soz-ehtiyati"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/ereb-dili/ereb-soz-ehtiyati?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/ereb-dili/ereb-soz-ehtiyati?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/ereb-dili/ereb-soz-ehtiyati?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/ereb-dili/ereb-soz-ehtiyati?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/ereb-dili/ereb-soz-ehtiyati"/>
+  </url>
+  <url>
     <loc>https://nibrascode.com/resources/android/android-nedir</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/android/android-nedir"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/android/android-nedir?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/android/android-nedir?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/android/android-nedir?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/android/android-nedir?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/android/android-nedir"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/android/android-nedir?lang=en</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/android/android-nedir"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/android/android-nedir?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/android/android-nedir?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/android/android-nedir?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/android/android-nedir?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/android/android-nedir"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/android/android-nedir?lang=ar</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/android/android-nedir"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/android/android-nedir?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/android/android-nedir?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/android/android-nedir?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/android/android-nedir?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/android/android-nedir"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/android/android-nedir?lang=ru</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/android/android-nedir"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/android/android-nedir?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/android/android-nedir?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/android/android-nedir?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/android/android-nedir?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/android/android-nedir"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/android/android-nedir?lang=tr</loc>
     <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/android/android-nedir"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/android/android-nedir?lang=en"/>
@@ -1021,7 +2381,87 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/android/apk-nedir"/>
   </url>
   <url>
+    <loc>https://nibrascode.com/resources/android/apk-nedir?lang=en</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/android/apk-nedir"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/android/apk-nedir?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/android/apk-nedir?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/android/apk-nedir?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/android/apk-nedir?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/android/apk-nedir"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/android/apk-nedir?lang=ar</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/android/apk-nedir"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/android/apk-nedir?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/android/apk-nedir?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/android/apk-nedir?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/android/apk-nedir?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/android/apk-nedir"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/android/apk-nedir?lang=ru</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/android/apk-nedir"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/android/apk-nedir?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/android/apk-nedir?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/android/apk-nedir?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/android/apk-nedir?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/android/apk-nedir"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/android/apk-nedir?lang=tr</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/android/apk-nedir"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/android/apk-nedir?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/android/apk-nedir?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/android/apk-nedir?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/android/apk-nedir?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/android/apk-nedir"/>
+  </url>
+  <url>
     <loc>https://nibrascode.com/resources/android/telefonda-tetbiq-qurasdirmaq</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/android/telefonda-tetbiq-qurasdirmaq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/android/telefonda-tetbiq-qurasdirmaq?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/android/telefonda-tetbiq-qurasdirmaq?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/android/telefonda-tetbiq-qurasdirmaq?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/android/telefonda-tetbiq-qurasdirmaq?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/android/telefonda-tetbiq-qurasdirmaq"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/android/telefonda-tetbiq-qurasdirmaq?lang=en</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/android/telefonda-tetbiq-qurasdirmaq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/android/telefonda-tetbiq-qurasdirmaq?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/android/telefonda-tetbiq-qurasdirmaq?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/android/telefonda-tetbiq-qurasdirmaq?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/android/telefonda-tetbiq-qurasdirmaq?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/android/telefonda-tetbiq-qurasdirmaq"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/android/telefonda-tetbiq-qurasdirmaq?lang=ar</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/android/telefonda-tetbiq-qurasdirmaq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/android/telefonda-tetbiq-qurasdirmaq?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/android/telefonda-tetbiq-qurasdirmaq?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/android/telefonda-tetbiq-qurasdirmaq?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/android/telefonda-tetbiq-qurasdirmaq?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/android/telefonda-tetbiq-qurasdirmaq"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/android/telefonda-tetbiq-qurasdirmaq?lang=ru</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/android/telefonda-tetbiq-qurasdirmaq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/android/telefonda-tetbiq-qurasdirmaq?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/android/telefonda-tetbiq-qurasdirmaq?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/android/telefonda-tetbiq-qurasdirmaq?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/android/telefonda-tetbiq-qurasdirmaq?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/android/telefonda-tetbiq-qurasdirmaq"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/android/telefonda-tetbiq-qurasdirmaq?lang=tr</loc>
     <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/android/telefonda-tetbiq-qurasdirmaq"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/android/telefonda-tetbiq-qurasdirmaq?lang=en"/>
@@ -1041,7 +2481,87 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/android/tetbiq-icazeleri"/>
   </url>
   <url>
+    <loc>https://nibrascode.com/resources/android/tetbiq-icazeleri?lang=en</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/android/tetbiq-icazeleri"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/android/tetbiq-icazeleri?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/android/tetbiq-icazeleri?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/android/tetbiq-icazeleri?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/android/tetbiq-icazeleri?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/android/tetbiq-icazeleri"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/android/tetbiq-icazeleri?lang=ar</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/android/tetbiq-icazeleri"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/android/tetbiq-icazeleri?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/android/tetbiq-icazeleri?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/android/tetbiq-icazeleri?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/android/tetbiq-icazeleri?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/android/tetbiq-icazeleri"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/android/tetbiq-icazeleri?lang=ru</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/android/tetbiq-icazeleri"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/android/tetbiq-icazeleri?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/android/tetbiq-icazeleri?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/android/tetbiq-icazeleri?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/android/tetbiq-icazeleri?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/android/tetbiq-icazeleri"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/android/tetbiq-icazeleri?lang=tr</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/android/tetbiq-icazeleri"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/android/tetbiq-icazeleri?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/android/tetbiq-icazeleri?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/android/tetbiq-icazeleri?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/android/tetbiq-icazeleri?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/android/tetbiq-icazeleri"/>
+  </url>
+  <url>
     <loc>https://nibrascode.com/resources/fayl-aletleri/fayl-formati-nedir</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/fayl-aletleri/fayl-formati-nedir"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/fayl-aletleri/fayl-formati-nedir?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/fayl-aletleri/fayl-formati-nedir?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/fayl-aletleri/fayl-formati-nedir?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/fayl-aletleri/fayl-formati-nedir?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/fayl-aletleri/fayl-formati-nedir"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/fayl-aletleri/fayl-formati-nedir?lang=en</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/fayl-aletleri/fayl-formati-nedir"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/fayl-aletleri/fayl-formati-nedir?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/fayl-aletleri/fayl-formati-nedir?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/fayl-aletleri/fayl-formati-nedir?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/fayl-aletleri/fayl-formati-nedir?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/fayl-aletleri/fayl-formati-nedir"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/fayl-aletleri/fayl-formati-nedir?lang=ar</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/fayl-aletleri/fayl-formati-nedir"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/fayl-aletleri/fayl-formati-nedir?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/fayl-aletleri/fayl-formati-nedir?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/fayl-aletleri/fayl-formati-nedir?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/fayl-aletleri/fayl-formati-nedir?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/fayl-aletleri/fayl-formati-nedir"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/fayl-aletleri/fayl-formati-nedir?lang=ru</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/fayl-aletleri/fayl-formati-nedir"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/fayl-aletleri/fayl-formati-nedir?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/fayl-aletleri/fayl-formati-nedir?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/fayl-aletleri/fayl-formati-nedir?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/fayl-aletleri/fayl-formati-nedir?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/fayl-aletleri/fayl-formati-nedir"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/fayl-aletleri/fayl-formati-nedir?lang=tr</loc>
     <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/fayl-aletleri/fayl-formati-nedir"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/fayl-aletleri/fayl-formati-nedir?lang=en"/>
@@ -1061,7 +2581,87 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/fayl-aletleri/fayl-novleri"/>
   </url>
   <url>
+    <loc>https://nibrascode.com/resources/fayl-aletleri/fayl-novleri?lang=en</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/fayl-aletleri/fayl-novleri"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/fayl-aletleri/fayl-novleri?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/fayl-aletleri/fayl-novleri?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/fayl-aletleri/fayl-novleri?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/fayl-aletleri/fayl-novleri?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/fayl-aletleri/fayl-novleri"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/fayl-aletleri/fayl-novleri?lang=ar</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/fayl-aletleri/fayl-novleri"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/fayl-aletleri/fayl-novleri?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/fayl-aletleri/fayl-novleri?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/fayl-aletleri/fayl-novleri?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/fayl-aletleri/fayl-novleri?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/fayl-aletleri/fayl-novleri"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/fayl-aletleri/fayl-novleri?lang=ru</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/fayl-aletleri/fayl-novleri"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/fayl-aletleri/fayl-novleri?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/fayl-aletleri/fayl-novleri?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/fayl-aletleri/fayl-novleri?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/fayl-aletleri/fayl-novleri?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/fayl-aletleri/fayl-novleri"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/fayl-aletleri/fayl-novleri?lang=tr</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/fayl-aletleri/fayl-novleri"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/fayl-aletleri/fayl-novleri?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/fayl-aletleri/fayl-novleri?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/fayl-aletleri/fayl-novleri?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/fayl-aletleri/fayl-novleri?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/fayl-aletleri/fayl-novleri"/>
+  </url>
+  <url>
     <loc>https://nibrascode.com/resources/fayl-aletleri/fayli-kiciltmek</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/fayl-aletleri/fayli-kiciltmek"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/fayl-aletleri/fayli-kiciltmek?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/fayl-aletleri/fayli-kiciltmek?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/fayl-aletleri/fayli-kiciltmek?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/fayl-aletleri/fayli-kiciltmek?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/fayl-aletleri/fayli-kiciltmek"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/fayl-aletleri/fayli-kiciltmek?lang=en</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/fayl-aletleri/fayli-kiciltmek"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/fayl-aletleri/fayli-kiciltmek?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/fayl-aletleri/fayli-kiciltmek?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/fayl-aletleri/fayli-kiciltmek?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/fayl-aletleri/fayli-kiciltmek?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/fayl-aletleri/fayli-kiciltmek"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/fayl-aletleri/fayli-kiciltmek?lang=ar</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/fayl-aletleri/fayli-kiciltmek"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/fayl-aletleri/fayli-kiciltmek?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/fayl-aletleri/fayli-kiciltmek?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/fayl-aletleri/fayli-kiciltmek?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/fayl-aletleri/fayli-kiciltmek?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/fayl-aletleri/fayli-kiciltmek"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/fayl-aletleri/fayli-kiciltmek?lang=ru</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/fayl-aletleri/fayli-kiciltmek"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/fayl-aletleri/fayli-kiciltmek?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/fayl-aletleri/fayli-kiciltmek?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/fayl-aletleri/fayli-kiciltmek?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/fayl-aletleri/fayli-kiciltmek?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/fayl-aletleri/fayli-kiciltmek"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/fayl-aletleri/fayli-kiciltmek?lang=tr</loc>
     <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/fayl-aletleri/fayli-kiciltmek"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/fayl-aletleri/fayli-kiciltmek?lang=en"/>
@@ -1081,7 +2681,87 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/fayl-aletleri/fayl-adini-saxlamaq"/>
   </url>
   <url>
+    <loc>https://nibrascode.com/resources/fayl-aletleri/fayl-adini-saxlamaq?lang=en</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/fayl-aletleri/fayl-adini-saxlamaq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/fayl-aletleri/fayl-adini-saxlamaq?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/fayl-aletleri/fayl-adini-saxlamaq?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/fayl-aletleri/fayl-adini-saxlamaq?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/fayl-aletleri/fayl-adini-saxlamaq?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/fayl-aletleri/fayl-adini-saxlamaq"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/fayl-aletleri/fayl-adini-saxlamaq?lang=ar</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/fayl-aletleri/fayl-adini-saxlamaq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/fayl-aletleri/fayl-adini-saxlamaq?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/fayl-aletleri/fayl-adini-saxlamaq?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/fayl-aletleri/fayl-adini-saxlamaq?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/fayl-aletleri/fayl-adini-saxlamaq?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/fayl-aletleri/fayl-adini-saxlamaq"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/fayl-aletleri/fayl-adini-saxlamaq?lang=ru</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/fayl-aletleri/fayl-adini-saxlamaq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/fayl-aletleri/fayl-adini-saxlamaq?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/fayl-aletleri/fayl-adini-saxlamaq?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/fayl-aletleri/fayl-adini-saxlamaq?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/fayl-aletleri/fayl-adini-saxlamaq?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/fayl-aletleri/fayl-adini-saxlamaq"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/fayl-aletleri/fayl-adini-saxlamaq?lang=tr</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/fayl-aletleri/fayl-adini-saxlamaq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/fayl-aletleri/fayl-adini-saxlamaq?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/fayl-aletleri/fayl-adini-saxlamaq?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/fayl-aletleri/fayl-adini-saxlamaq?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/fayl-aletleri/fayl-adini-saxlamaq?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/fayl-aletleri/fayl-adini-saxlamaq"/>
+  </url>
+  <url>
     <loc>https://nibrascode.com/resources/tehsil/qisa-mesq</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/tehsil/qisa-mesq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/tehsil/qisa-mesq?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/tehsil/qisa-mesq?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/tehsil/qisa-mesq?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/tehsil/qisa-mesq?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/tehsil/qisa-mesq"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/tehsil/qisa-mesq?lang=en</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/tehsil/qisa-mesq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/tehsil/qisa-mesq?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/tehsil/qisa-mesq?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/tehsil/qisa-mesq?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/tehsil/qisa-mesq?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/tehsil/qisa-mesq"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/tehsil/qisa-mesq?lang=ar</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/tehsil/qisa-mesq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/tehsil/qisa-mesq?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/tehsil/qisa-mesq?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/tehsil/qisa-mesq?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/tehsil/qisa-mesq?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/tehsil/qisa-mesq"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/tehsil/qisa-mesq?lang=ru</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/tehsil/qisa-mesq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/tehsil/qisa-mesq?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/tehsil/qisa-mesq?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/tehsil/qisa-mesq?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/tehsil/qisa-mesq?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/tehsil/qisa-mesq"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/tehsil/qisa-mesq?lang=tr</loc>
     <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/tehsil/qisa-mesq"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/tehsil/qisa-mesq?lang=en"/>
@@ -1101,7 +2781,87 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/tehsil/gundelik-tekrar"/>
   </url>
   <url>
+    <loc>https://nibrascode.com/resources/tehsil/gundelik-tekrar?lang=en</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/tehsil/gundelik-tekrar"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/tehsil/gundelik-tekrar?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/tehsil/gundelik-tekrar?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/tehsil/gundelik-tekrar?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/tehsil/gundelik-tekrar?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/tehsil/gundelik-tekrar"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/tehsil/gundelik-tekrar?lang=ar</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/tehsil/gundelik-tekrar"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/tehsil/gundelik-tekrar?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/tehsil/gundelik-tekrar?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/tehsil/gundelik-tekrar?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/tehsil/gundelik-tekrar?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/tehsil/gundelik-tekrar"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/tehsil/gundelik-tekrar?lang=ru</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/tehsil/gundelik-tekrar"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/tehsil/gundelik-tekrar?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/tehsil/gundelik-tekrar?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/tehsil/gundelik-tekrar?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/tehsil/gundelik-tekrar?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/tehsil/gundelik-tekrar"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/tehsil/gundelik-tekrar?lang=tr</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/tehsil/gundelik-tekrar"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/tehsil/gundelik-tekrar?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/tehsil/gundelik-tekrar?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/tehsil/gundelik-tekrar?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/tehsil/gundelik-tekrar?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/tehsil/gundelik-tekrar"/>
+  </url>
+  <url>
     <loc>https://nibrascode.com/resources/tehsil/oyreneni-yoxlamaq</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/tehsil/oyreneni-yoxlamaq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/tehsil/oyreneni-yoxlamaq?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/tehsil/oyreneni-yoxlamaq?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/tehsil/oyreneni-yoxlamaq?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/tehsil/oyreneni-yoxlamaq?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/tehsil/oyreneni-yoxlamaq"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/tehsil/oyreneni-yoxlamaq?lang=en</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/tehsil/oyreneni-yoxlamaq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/tehsil/oyreneni-yoxlamaq?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/tehsil/oyreneni-yoxlamaq?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/tehsil/oyreneni-yoxlamaq?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/tehsil/oyreneni-yoxlamaq?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/tehsil/oyreneni-yoxlamaq"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/tehsil/oyreneni-yoxlamaq?lang=ar</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/tehsil/oyreneni-yoxlamaq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/tehsil/oyreneni-yoxlamaq?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/tehsil/oyreneni-yoxlamaq?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/tehsil/oyreneni-yoxlamaq?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/tehsil/oyreneni-yoxlamaq?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/tehsil/oyreneni-yoxlamaq"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/tehsil/oyreneni-yoxlamaq?lang=ru</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/tehsil/oyreneni-yoxlamaq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/tehsil/oyreneni-yoxlamaq?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/tehsil/oyreneni-yoxlamaq?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/tehsil/oyreneni-yoxlamaq?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/tehsil/oyreneni-yoxlamaq?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/tehsil/oyreneni-yoxlamaq"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/tehsil/oyreneni-yoxlamaq?lang=tr</loc>
     <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/tehsil/oyreneni-yoxlamaq"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/tehsil/oyreneni-yoxlamaq?lang=en"/>
@@ -1121,7 +2881,87 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/tehsil/kartlarla-tekrar"/>
   </url>
   <url>
+    <loc>https://nibrascode.com/resources/tehsil/kartlarla-tekrar?lang=en</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/tehsil/kartlarla-tekrar"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/tehsil/kartlarla-tekrar?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/tehsil/kartlarla-tekrar?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/tehsil/kartlarla-tekrar?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/tehsil/kartlarla-tekrar?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/tehsil/kartlarla-tekrar"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/tehsil/kartlarla-tekrar?lang=ar</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/tehsil/kartlarla-tekrar"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/tehsil/kartlarla-tekrar?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/tehsil/kartlarla-tekrar?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/tehsil/kartlarla-tekrar?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/tehsil/kartlarla-tekrar?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/tehsil/kartlarla-tekrar"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/tehsil/kartlarla-tekrar?lang=ru</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/tehsil/kartlarla-tekrar"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/tehsil/kartlarla-tekrar?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/tehsil/kartlarla-tekrar?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/tehsil/kartlarla-tekrar?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/tehsil/kartlarla-tekrar?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/tehsil/kartlarla-tekrar"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/tehsil/kartlarla-tekrar?lang=tr</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/tehsil/kartlarla-tekrar"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/tehsil/kartlarla-tekrar?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/tehsil/kartlarla-tekrar?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/tehsil/kartlarla-tekrar?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/tehsil/kartlarla-tekrar?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/tehsil/kartlarla-tekrar"/>
+  </url>
+  <url>
     <loc>https://nibrascode.com/resources/senedler/sened-nedir</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/senedler/sened-nedir"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/senedler/sened-nedir?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/senedler/sened-nedir?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/senedler/sened-nedir?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/senedler/sened-nedir?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/senedler/sened-nedir"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/senedler/sened-nedir?lang=en</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/senedler/sened-nedir"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/senedler/sened-nedir?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/senedler/sened-nedir?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/senedler/sened-nedir?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/senedler/sened-nedir?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/senedler/sened-nedir"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/senedler/sened-nedir?lang=ar</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/senedler/sened-nedir"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/senedler/sened-nedir?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/senedler/sened-nedir?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/senedler/sened-nedir?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/senedler/sened-nedir?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/senedler/sened-nedir"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/senedler/sened-nedir?lang=ru</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/senedler/sened-nedir"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/senedler/sened-nedir?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/senedler/sened-nedir?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/senedler/sened-nedir?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/senedler/sened-nedir?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/senedler/sened-nedir"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/senedler/sened-nedir?lang=tr</loc>
     <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/senedler/sened-nedir"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/senedler/sened-nedir?lang=en"/>
@@ -1141,6 +2981,46 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/senedler/skan-ve-metn"/>
   </url>
   <url>
+    <loc>https://nibrascode.com/resources/senedler/skan-ve-metn?lang=en</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/senedler/skan-ve-metn"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/senedler/skan-ve-metn?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/senedler/skan-ve-metn?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/senedler/skan-ve-metn?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/senedler/skan-ve-metn?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/senedler/skan-ve-metn"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/senedler/skan-ve-metn?lang=ar</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/senedler/skan-ve-metn"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/senedler/skan-ve-metn?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/senedler/skan-ve-metn?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/senedler/skan-ve-metn?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/senedler/skan-ve-metn?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/senedler/skan-ve-metn"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/senedler/skan-ve-metn?lang=ru</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/senedler/skan-ve-metn"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/senedler/skan-ve-metn?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/senedler/skan-ve-metn?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/senedler/skan-ve-metn?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/senedler/skan-ve-metn?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/senedler/skan-ve-metn"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/senedler/skan-ve-metn?lang=tr</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/senedler/skan-ve-metn"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/senedler/skan-ve-metn?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/senedler/skan-ve-metn?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/senedler/skan-ve-metn?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/senedler/skan-ve-metn?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/senedler/skan-ve-metn"/>
+  </url>
+  <url>
     <loc>https://nibrascode.com/resources/senedler/senedi-imzalamaq</loc>
     <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/senedler/senedi-imzalamaq"/>
@@ -1151,7 +3031,87 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/senedler/senedi-imzalamaq"/>
   </url>
   <url>
+    <loc>https://nibrascode.com/resources/senedler/senedi-imzalamaq?lang=en</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/senedler/senedi-imzalamaq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/senedler/senedi-imzalamaq?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/senedler/senedi-imzalamaq?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/senedler/senedi-imzalamaq?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/senedler/senedi-imzalamaq?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/senedler/senedi-imzalamaq"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/senedler/senedi-imzalamaq?lang=ar</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/senedler/senedi-imzalamaq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/senedler/senedi-imzalamaq?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/senedler/senedi-imzalamaq?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/senedler/senedi-imzalamaq?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/senedler/senedi-imzalamaq?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/senedler/senedi-imzalamaq"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/senedler/senedi-imzalamaq?lang=ru</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/senedler/senedi-imzalamaq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/senedler/senedi-imzalamaq?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/senedler/senedi-imzalamaq?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/senedler/senedi-imzalamaq?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/senedler/senedi-imzalamaq?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/senedler/senedi-imzalamaq"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/senedler/senedi-imzalamaq?lang=tr</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/senedler/senedi-imzalamaq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/senedler/senedi-imzalamaq?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/senedler/senedi-imzalamaq?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/senedler/senedi-imzalamaq?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/senedler/senedi-imzalamaq?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/senedler/senedi-imzalamaq"/>
+  </url>
+  <url>
     <loc>https://nibrascode.com/resources/senedler/senedin-nusxesi</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/senedler/senedin-nusxesi"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/senedler/senedin-nusxesi?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/senedler/senedin-nusxesi?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/senedler/senedin-nusxesi?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/senedler/senedin-nusxesi?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/senedler/senedin-nusxesi"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/senedler/senedin-nusxesi?lang=en</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/senedler/senedin-nusxesi"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/senedler/senedin-nusxesi?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/senedler/senedin-nusxesi?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/senedler/senedin-nusxesi?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/senedler/senedin-nusxesi?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/senedler/senedin-nusxesi"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/senedler/senedin-nusxesi?lang=ar</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/senedler/senedin-nusxesi"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/senedler/senedin-nusxesi?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/senedler/senedin-nusxesi?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/senedler/senedin-nusxesi?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/senedler/senedin-nusxesi?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/senedler/senedin-nusxesi"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/senedler/senedin-nusxesi?lang=ru</loc>
+    <lastmod>2026-10-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/senedler/senedin-nusxesi"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/senedler/senedin-nusxesi?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/resources/senedler/senedin-nusxesi?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/resources/senedler/senedin-nusxesi?lang=ru"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/resources/senedler/senedin-nusxesi?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/resources/senedler/senedin-nusxesi"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/resources/senedler/senedin-nusxesi?lang=tr</loc>
     <lastmod>2026-10-06</lastmod>
     <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/resources/senedler/senedin-nusxesi"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/resources/senedler/senedin-nusxesi?lang=en"/>

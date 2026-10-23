@@ -528,7 +528,7 @@ export const TOOLS: readonly { id: ToolId; label: Record<Lang, string> }[] = [
     id: "words",
     label: L("Ədəd sözə", "Number to words", "Sayıdan söze", "من رقم إلى كلمة", "Число словами"),
   },
-  { id: "ip", label: L("IP yoxla", "Check an IP", "IP kontrol", "فحص IP", "Проверка IP") },
+  { id: "ip", label: L("IPv4 yoxla", "Check an IPv4", "IPv4 kontrol", "فحص IPv4", "Проверка IPv4") },
   {
     id: "sort",
     label: L("Sətir sırala", "Sort lines", "Satır sırala", "ترتيب الأسطر", "Сортировка строк"),
@@ -652,7 +652,12 @@ export const TOOL_GROUPS: readonly {
   {
     id: "gen",
     title: L("Generatorlar", "Generators", "Üreteçler", "مولدات", "Генераторы"),
-    ids: ["uuid", "lorem", "number", "text", "name"],
+    ids: ["password", "uuid", "lorem", "number", "text", "name"],
+  },
+  {
+    id: "hash",
+    title: L("Hash", "Hash", "Hash", "تجزئة", "Хеш"),
+    ids: ["md5", "sha256", "hash"],
   },
   {
     id: "code",
@@ -660,9 +665,9 @@ export const TOOL_GROUPS: readonly {
     ids: ["base64", "url", "html"],
   },
   {
-    id: "crypt",
-    title: L("Şifrələmə", "Encryption", "Şifreleme", "تشفير", "Шифрование"),
-    ids: ["password", "md5", "sha256", "hash", "jwt"],
+    id: "token",
+    title: L("Token oxuma", "Token reading", "Token okuma", "قراءة الرمز", "Чтение токена"),
+    ids: ["jwt"],
   },
   {
     id: "format",

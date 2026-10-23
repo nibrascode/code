@@ -280,8 +280,9 @@ const PAIR = new Set<ToolId>([
 
 const GROUP_ICONS: Record<string, typeof Braces> = {
   gen: Sparkles,
+  hash: Hash,
   code: Binary,
-  crypt: LockKeyhole,
+  token: Scan,
   format: Braces,
   text: Type,
   turn: ArrowLeftRight,
