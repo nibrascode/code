@@ -461,7 +461,7 @@ export function Game2048() {
     <main className="g2048-page" lang={lang} dir={lang === "ar" ? "rtl" : "ltr"}>
       <div className="qala-top">
         <p className="eyebrow"><i /><a href={gamePath(lang)}>{back}</a></p>
-        <div className="kosmos-head"><h1>{game.name[lang]}</h1><p className="xo-version">{GAME_VERSION}</p></div>
+        <div className="kosmos-head"><h1>{game.name[lang]}</h1><p className="xo-version">{GAME_VERSION}</p><p className="why-lead">{game.blurb[lang]}</p></div>
       </div>
       <dl className="g2048-hud">
         <div><dt>{COPY.score[lang]}</dt><dd>{score}</dd></div>

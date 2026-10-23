@@ -606,7 +606,7 @@ export function QalaGame() {
     <main className="qala-page" lang={lang} dir={lang === "ar" ? "rtl" : "ltr"}>
       <div className="qala-top">
         <p className="eyebrow"><i /><a href={gamePath(lang)}>{back}</a></p>
-        <div className="kosmos-head"><h1>{game.name[lang]}</h1><p className="xo-version">{GAME_VERSION}</p></div>
+        <div className="kosmos-head"><h1>{game.name[lang]}</h1><p className="xo-version">{GAME_VERSION}</p><p className="why-lead">{game.blurb[lang]}</p></div>
       </div>
       <dl className="qala-hud">
         <div><dt>{COPY.wave[lang]}</dt><dd>{wave}</dd></div>

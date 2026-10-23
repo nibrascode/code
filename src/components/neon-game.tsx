@@ -502,7 +502,7 @@ export function NeonGame() {
     <main className="neon-page" lang={lang} dir={lang === "ar" ? "rtl" : "ltr"}>
       <div className="qala-top">
         <p className="eyebrow"><i /><a href={gamePath(lang)}>{back}</a></p>
-        <div className="kosmos-head"><h1>{game.name[lang]}</h1><p className="xo-version">{GAME_VERSION}</p></div>
+        <div className="kosmos-head"><h1>{game.name[lang]}</h1><p className="xo-version">{GAME_VERSION}</p><p className="why-lead">{game.blurb[lang]}</p></div>
       </div>
       <dl className="qala-hud">
         <div><dt>{COPY.score[lang]}</dt><dd className="is-gold">{score}</dd></div>

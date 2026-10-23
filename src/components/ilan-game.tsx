@@ -494,6 +494,7 @@ export function IlanGame() {
         <div className="ilan-head">
           <h1>{game.name[lang]}</h1>
           <p className="xo-version">{GAME_VERSION}</p>
+          <p className="why-lead">{game.blurb[lang]}</p>
           <dl>
             <div><dt>{COPY.score[lang]}</dt><dd>{hud.score}</dd></div>
             <div><dt>{COPY.best[lang]}</dt><dd>{hud.best}</dd></div>

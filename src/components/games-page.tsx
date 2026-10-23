@@ -92,6 +92,7 @@ export function GamesIndex() {
   return (
     <main className="game-icons-page" lang={lang} dir={lang === "ar" ? "rtl" : "ltr"}>
       <h1 className="game-icons-title">{GAME_COPY.heading[lang]}</h1>
+      <p className="why-lead">{GAME_COPY.lead[lang]} {GAME_COPY.indexDescription[lang]}</p>
       <div className="game-icon-grid">
         {GAMES.map((game) => (
           <a key={game.slug} href={gamePath(lang, game.slug)} aria-label={game.name[lang]}>

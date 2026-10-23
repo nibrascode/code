@@ -661,6 +661,7 @@ export function KosmosGame() {
         <div className="kosmos-head">
           <h1>{game.name[lang]}</h1>
           <p className="xo-version">{GAME_VERSION}</p>
+          <p className="why-lead">{game.blurb[lang]}</p>
         </div>
       </div>
       <dl className="kosmos-hud">

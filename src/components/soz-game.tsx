@@ -276,6 +276,7 @@ export function SozGame() {
         <div className="soz-head">
           <h1>{game.name[lang]}</h1>
           <p className="xo-version">{GAME_VERSION}</p>
+          <p className="why-lead">{game.blurb[lang]}</p>
         </div>
         <div className="xo-modes" role="group">
           {LENGTHS.map((item) => (
