@@ -461,7 +461,7 @@ export function Game2048() {
     <main className="g2048-page" lang={lang} dir={lang === "ar" ? "rtl" : "ltr"}>
       <div className="qala-top">
         <p className="eyebrow"><i /><a href={gamePath(lang)}>{back}</a></p>
-        <div className="kosmos-head"><h1>{game.name[lang]}</h1><p className="xo-version">{GAME_VERSION}</p><p className="why-lead">{game.blurb[lang]}</p></div>
+        <div className="kosmos-head"><h1>{game.name[lang]}</h1></div>
       </div>
       <dl className="g2048-hud">
         <div><dt>{COPY.score[lang]}</dt><dd>{score}</dd></div>
@@ -488,6 +488,10 @@ export function Game2048() {
         <button type="button" className="is-mint" onClick={() => api.current.fresh()}>{COPY.fresh[lang]}</button>
       </div>
       <p className="ilan-hint">{COPY.hint[lang]}</p>
+      <footer className="game-foot">
+        <p className="xo-version">{GAME_VERSION}</p>
+        <p className="why-lead">{game.blurb[lang]}</p>
+      </footer>
     </main>
   );
 }

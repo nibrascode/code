@@ -10089,6 +10089,20 @@ body.is-planner .site-backdrop {
   letter-spacing: 0.14em;
 }
 
+.game-foot {
+  margin: 18px auto 8px;
+  max-width: 36rem;
+  text-align: center;
+}
+
+.game-foot .xo-version {
+  margin: 0 0 6px;
+}
+
+.game-foot .why-lead {
+  margin: 0;
+}
+
 .xo-modes,
 .xo-actions {
   position: relative;

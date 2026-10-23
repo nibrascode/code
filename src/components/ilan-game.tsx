@@ -493,8 +493,6 @@ export function IlanGame() {
         </p>
         <div className="ilan-head">
           <h1>{game.name[lang]}</h1>
-          <p className="xo-version">{GAME_VERSION}</p>
-          <p className="why-lead">{game.blurb[lang]}</p>
           <dl>
             <div><dt>{COPY.score[lang]}</dt><dd>{hud.score}</dd></div>
             <div><dt>{COPY.best[lang]}</dt><dd>{hud.best}</dd></div>
@@ -533,6 +531,10 @@ export function IlanGame() {
         <button type="button" className="down" onPointerDown={(event) => { event.preventDefault(); api.current.turn(0, 1); }} aria-label="down">▼</button>
       </div>
       <p className="ilan-hint">{COPY.keys[lang]}</p>
+      <footer className="game-foot">
+        <p className="xo-version">{GAME_VERSION}</p>
+        <p className="why-lead">{game.blurb[lang]}</p>
+      </footer>
     </main>
   );
 }

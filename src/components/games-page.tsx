@@ -196,8 +196,6 @@ export function TicTacToe() {
         <a href={gamePath(lang)}>{GAME_COPY.back[lang]}</a>
       </p>
       <h1>{game.name[lang]}</h1>
-      <p className="xo-version">{GAME_VERSION}</p>
-      <p className="why-lead">{game.blurb[lang]}</p>
       <div className="xo-modes" role="group">
         <button type="button" className={mode === "two" ? "is-on" : ""} onClick={() => { setMode("two"); restart(); }}>
           {GAME_COPY.two[lang]}
@@ -234,6 +232,10 @@ export function TicTacToe() {
         <button type="button" onClick={restart}>{GAME_COPY.again[lang]}</button>
         <button type="button" onClick={clearScore}>{GAME_COPY.clear[lang]}</button>
       </div>
+      <footer className="game-foot">
+        <p className="xo-version">{GAME_VERSION}</p>
+        <p className="why-lead">{game.blurb[lang]}</p>
+      </footer>
     </main>
   );
 }

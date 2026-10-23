@@ -502,7 +502,7 @@ export function TetrisGame() {
     <main className="tetris-page" lang={lang} dir={lang === "ar" ? "rtl" : "ltr"}>
       <div className="qala-top">
         <p className="eyebrow"><i /><a href={gamePath(lang)}>{back}</a></p>
-        <div className="kosmos-head"><h1>{game.name[lang]}</h1><p className="xo-version">{GAME_VERSION}</p><p className="why-lead">{game.blurb[lang]}</p></div>
+        <div className="kosmos-head"><h1>{game.name[lang]}</h1></div>
       </div>
       <div className="tetris-layout">
         <div className="tetris-side">
@@ -542,6 +542,10 @@ export function TetrisGame() {
         <button type="button" data-dir="hold" className="is-wide">{COPY.hold[lang]}</button>
       </div>
       <p className="ilan-hint">{COPY.hint[lang]}</p>
+      <footer className="game-foot">
+        <p className="xo-version">{GAME_VERSION}</p>
+        <p className="why-lead">{game.blurb[lang]}</p>
+      </footer>
     </main>
   );
 }
