@@ -7,7 +7,6 @@ import { localeHref } from "@/lib/locale-path";
 import { statusText, type StudioAppRow } from "@/lib/studio";
 
 const STATUS: Partial<Record<AppSlug, TKey>> = {
-  "nibras-pdf": "soon",
   "nibras-plans": "soon",
   "nibras-docs": "soon",
 };
@@ -15,7 +14,7 @@ const STATUS: Partial<Record<AppSlug, TKey>> = {
 export function SimpleAppPage({ app, live }: { app: StudioApp; live?: StudioAppRow | null }) {
   const { t, lang } = useI18n();
   const badge = statusText(
-    app.slug === "nibras-docs" && live?.status !== "ready" ? "soon" : live?.status,
+    app.slug === "nibras-pdf" ? "ready" : app.slug === "nibras-docs" && live?.status !== "ready" ? "soon" : live?.status,
     STATUS[app.slug] ? t(STATUS[app.slug]!) : null,
     { soon: t("soon"), building: t("nx_docs_stage") },
   );

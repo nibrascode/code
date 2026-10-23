@@ -98,7 +98,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "tetbiqler",
         q: "Nibras Code hansı tətbiqləri hazırlayır?",
-        a: "Hazırda Nibras Arabic açıqdır. Nibras PDF, Nibras Plans və Nibras Docs hazırlanır. Saytda ayrıca Nibras AI, Nibras Dev, Nibras Apk, Nibras QR, Nibras Erase və Xidmətlər var. Hər tətbiqin öz səhifəsində adı və yükləmə vəziyyəti göstərilir.",
+        a: "Hazırda Nibras Arabic və Nibras PDF açıqdır. Nibras Plans və Nibras Docs hazırlanır. Saytda ayrıca Nibras AI, Nibras Dev, Nibras Apk, Nibras QR, Nibras Erase və Xidmətlər var. Hər tətbiqin öz səhifəsində adı və yükləmə vəziyyəti göstərilir.",
       },
       {
         id: "arabic",
@@ -169,7 +169,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "yukleme",
         q: "Tətbiqi haradan yükləmək olar?",
-        a: "Yükləmə linki hazır olanda həmin tətbiqin səhifəsində görünür. Google Play, Huawei, App Store, Galaxy Store və Xiaomi üçün boş link göstərilmir. Hazırda Nibras Arabic Google Play və Huawei-də, Nibras QR isə Google Play-dədir. Nibras PDF, Nibras Docs və Nibras Plans tezliklə olduğu üçün onların səhifəsində yükləmə düyməsi yoxdur. Yeni link çıxanda o, tətbiqin öz səhifəsinə yazılır. Saytda olmayan mağaza ünvanı uydurulmur.",
+        a: "Yükləmə linki hazır olanda həmin tətbiqin səhifəsində görünür. Google Play, Huawei, App Store, Galaxy Store və Xiaomi üçün boş link göstərilmir. Hazırda Nibras Arabic Google Play və Huawei-də, Nibras PDF və Nibras QR isə Google Play-dədir. Nibras Docs və Nibras Plans tezliklə olduğu üçün onların səhifəsində yükləmə düyməsi yoxdur. Yeni link çıxanda o, tətbiqin öz səhifəsinə yazılır. Saytda olmayan mağaza ünvanı uydurulmur.",
       },
       {
         id: "mexfilik",
@@ -219,7 +219,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "yeni",
         q: "Yeni tətbiqlər nə vaxt çıxacaq?",
-        a: "Dəqiq çıxış tarixi elan olunmur. Nibras Arabic hazırdır. Nibras PDF, Nibras Plans və Nibras Docs tezliklədir. Gələcəkdə veb saytlar və dini bilikləri etibarlı mənbələrdən öyrənməyə kömək edən tətbiqlər də düşünülə bilər.",
+        a: "Dəqiq çıxış tarixi elan olunmur. Nibras Arabic və Nibras PDF hazırdır. Nibras Plans və Nibras Docs tezliklədir. Gələcəkdə veb saytlar və dini bilikləri etibarlı mənbələrdən öyrənməyə kömək edən tətbiqlər də düşünülə bilər.",
       },
     ],
   },
@@ -249,7 +249,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "tetbiqler",
         q: "Which apps does Nibras Code make?",
-        a: "Nibras Arabic is available now. Nibras PDF, Nibras Plans, and Nibras Docs are in preparation. The site also has Nibras AI, Nibras Dev, Nibras Apk, Nibras QR, Nibras Erase, and Tools. Each app page shows the name and download status.",
+        a: "Nibras Arabic is available now. Nibras PDF is on Google Play. Nibras Plans and Nibras Docs are in preparation. The site also has Nibras AI, Nibras Dev, Nibras Apk, Nibras QR, Nibras Erase, and Tools. Each app page shows the name and download status.",
       },
       {
         id: "arabic",
@@ -320,7 +320,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "yukleme",
         q: "Where can I download an app?",
-        a: "A download link appears on that app’s page when it is ready. Empty links for Google Play, Huawei, the App Store, Galaxy Store, and Xiaomi are not shown. Nibras Arabic is on Google Play and Huawei. Nibras QR is on Google Play. Nibras PDF, Nibras Docs, and Nibras Plans are coming soon, so their pages have no download button. A new link is added on that app’s own page. A store address that is not real is not invented on the site.",
+        a: "A download link appears on that app’s page when it is ready. Empty links for Google Play, Huawei, the App Store, Galaxy Store, and Xiaomi are not shown. Nibras Arabic is on Google Play and Huawei. Nibras PDF and Nibras QR are on Google Play. Nibras Docs and Nibras Plans are coming soon, so their pages have no download button. A new link is added on that app’s own page. A store address that is not real is not invented on the site.",
       },
       {
         id: "mexfilik",
@@ -370,7 +370,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "yeni",
         q: "When will new apps be released?",
-        a: "No exact release date is announced. Nibras Arabic is ready. Nibras PDF, Nibras Plans, and Nibras Docs are coming soon. Websites, and apps that help people learn religious knowledge from reliable sources, may also be considered later.",
+        a: "No exact release date is announced. Nibras Arabic and Nibras PDF are ready. Nibras Plans and Nibras Docs are coming soon. Websites, and apps that help people learn religious knowledge from reliable sources, may also be considered later.",
       },
     ],
   },
@@ -400,7 +400,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "tetbiqler",
         q: "Nibras Code hangi uygulamaları hazırlıyor?",
-        a: "Şu anda Nibras Arabic açık. Nibras PDF, Nibras Plans ve Nibras Docs hazırlanıyor. Sitede ayrıca Nibras AI, Nibras Dev, Nibras Apk, Nibras QR, Nibras Erase ve Hizmetler var. Her uygulamanın sayfasında adı ve indirme durumu yer alır.",
+        a: "Şu anda Nibras Arabic ve Nibras PDF açık. Nibras Plans ve Nibras Docs hazırlanıyor. Sitede ayrıca Nibras AI, Nibras Dev, Nibras Apk, Nibras QR, Nibras Erase ve Hizmetler var. Her uygulamanın sayfasında adı ve indirme durumu yer alır.",
       },
       {
         id: "arabic",
@@ -471,7 +471,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "yukleme",
         q: "Uygulama nereden indirilir?",
-        a: "İndirme bağlantısı hazır olduğunda o uygulamanın sayfasında görünür. Google Play, Huawei, App Store, Galaxy Store ve Xiaomi için boş bağlantı gösterilmez. Şu anda Nibras Arabic Google Play ve Huawei’de, Nibras QR ise Google Play’dedir. Nibras PDF, Nibras Docs ve Nibras Plans yakında olduğu için sayfalarında indirme düğmesi yoktur. Yeni bağlantı o uygulamanın kendi sayfasına yazılır. Gerçek olmayan bir mağaza adresi sitede uydurulmaz.",
+        a: "İndirme bağlantısı hazır olduğunda o uygulamanın sayfasında görünür. Google Play, Huawei, App Store, Galaxy Store ve Xiaomi için boş bağlantı gösterilmez. Şu anda Nibras Arabic Google Play ve Huawei’de, Nibras PDF ve Nibras QR ise Google Play’dedir. Nibras Docs ve Nibras Plans yakında olduğu için sayfalarında indirme düğmesi yoktur. Yeni bağlantı o uygulamanın kendi sayfasına yazılır. Gerçek olmayan bir mağaza adresi sitede uydurulmaz.",
       },
       {
         id: "mexfilik",
@@ -521,7 +521,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "yeni",
         q: "Yeni uygulamalar ne zaman çıkacak?",
-        a: "Kesin bir çıkış tarihi açıklanmaz. Nibras Arabic hazırdır. Nibras PDF, Nibras Plans ve Nibras Docs yakındadır. İleride web siteleri ve dini bilgileri güvenilir kaynaklardan öğrenmeye yardımcı uygulamalar da düşünülebilir.",
+        a: "Kesin bir çıkış tarihi açıklanmaz. Nibras Arabic ve Nibras PDF hazırdır. Nibras Plans ve Nibras Docs yakındadır. İleride web siteleri ve dini bilgileri güvenilir kaynaklardan öğrenmeye yardımcı uygulamalar da düşünülebilir.",
       },
     ],
   },
@@ -551,7 +551,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "tetbiqler",
         q: "ما التطبيقات التي يُعدّها Nibras Code؟",
-        a: "Nibras Arabic متاح الآن. Nibras PDF وNibras Plans وNibras Docs قيد الإعداد. وفي الموقع أيضًا Nibras AI وNibras Dev وNibras Apk وNibras QR وNibras Erase والخدمات. في صفحة كل تطبيق الاسم وحالة التحميل.",
+        a: "Nibras Arabic وNibras PDF متاحان الآن. Nibras Plans وNibras Docs قيد الإعداد. وفي الموقع أيضًا Nibras AI وNibras Dev وNibras Apk وNibras QR وNibras Erase والخدمات. في صفحة كل تطبيق الاسم وحالة التحميل.",
       },
       {
         id: "arabic",
@@ -622,7 +622,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "yukleme",
         q: "من أين يُحمَّل التطبيق؟",
-        a: "يظهر رابط التحميل في صفحة ذلك التطبيق عندما يكون جاهزًا. لا تُعرض روابط فارغة لـ Google Play أو Huawei أو App Store أو Galaxy Store أو Xiaomi. Nibras Arabic موجود على Google Play وHuawei، وNibras QR على Google Play. Nibras PDF وNibras Docs وNibras Plans قريبًا، لذلك لا زر تحميل في صفحاتها. الرابط الجديد يُكتب في صفحة التطبيق نفسه. عنوان متجر غير موجود لا يُختلق في الموقع.",
+        a: "يظهر رابط التحميل في صفحة ذلك التطبيق عندما يكون جاهزًا. لا تُعرض روابط فارغة لـ Google Play أو Huawei أو App Store أو Galaxy Store أو Xiaomi. Nibras Arabic موجود على Google Play وHuawei، وNibras PDF وNibras QR على Google Play. Nibras Docs وNibras Plans قريبًا، لذلك لا زر تحميل في صفحاتهما. الرابط الجديد يُكتب في صفحة التطبيق نفسه. عنوان متجر غير موجود لا يُختلق في الموقع.",
       },
       {
         id: "mexfilik",
@@ -672,7 +672,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "yeni",
         q: "متى تصدر التطبيقات الجديدة؟",
-        a: "لا يُعلَن تاريخ إصدار محدد. Nibras Arabic جاهز. Nibras PDF وNibras Plans وNibras Docs قريبًا. وقد تُدرس لاحقًا مواقع ويب وتطبيقات تساعد على تعلّم العلوم الدينية من مصادر موثوقة.",
+        a: "لا يُعلَن تاريخ إصدار محدد. Nibras Arabic وNibras PDF جاهزان. Nibras Plans وNibras Docs قريبًا. وقد تُدرس لاحقًا مواقع ويب وتطبيقات تساعد على تعلّم العلوم الدينية من مصادر موثوقة.",
       },
     ],
   },
@@ -702,7 +702,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "tetbiqler",
         q: "Какие приложения делает Nibras Code?",
-        a: "Сейчас доступен Nibras Arabic. Nibras PDF, Nibras Plans и Nibras Docs готовятся. На сайте также есть Nibras AI, Nibras Dev, Nibras Apk, Nibras QR, Nibras Erase и Сервисы. На странице каждого приложения есть имя и статус загрузки.",
+        a: "Сейчас доступны Nibras Arabic и Nibras PDF. Nibras Plans и Nibras Docs готовятся. На сайте также есть Nibras AI, Nibras Dev, Nibras Apk, Nibras QR, Nibras Erase и Сервисы. На странице каждого приложения есть имя и статус загрузки.",
       },
       {
         id: "arabic",
@@ -773,7 +773,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "yukleme",
         q: "Откуда скачать приложение?",
-        a: "Ссылка на загрузку появляется на странице этого приложения, когда она готова. Пустые ссылки Google Play, Huawei, App Store, Galaxy Store и Xiaomi не показываются. Сейчас Nibras Arabic есть в Google Play и Huawei, а Nibras QR — в Google Play. Nibras PDF, Nibras Docs и Nibras Plans скоро, поэтому на их страницах нет кнопки загрузки. Новая ссылка пишется на странице самого приложения. Несуществующий адрес магазина на сайте не выдумывается.",
+        a: "Ссылка на загрузку появляется на странице этого приложения, когда она готова. Пустые ссылки Google Play, Huawei, App Store, Galaxy Store и Xiaomi не показываются. Сейчас Nibras Arabic есть в Google Play и Huawei, а Nibras PDF и Nibras QR — в Google Play. Nibras Docs и Nibras Plans скоро, поэтому на их страницах нет кнопки загрузки. Новая ссылка пишется на странице самого приложения. Несуществующий адрес магазина на сайте не выдумывается.",
       },
       {
         id: "mexfilik",
@@ -823,7 +823,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "yeni",
         q: "Когда выйдут новые приложения?",
-        a: "Точная дата выхода не объявляется. Nibras Arabic уже готов. Nibras PDF, Nibras Plans и Nibras Docs скоро. Позже также могут рассматриваться сайты и приложения, которые помогают изучать религиозные знания из надёжных источников.",
+        a: "Точная дата выхода не объявляется. Nibras Arabic и Nibras PDF уже готовы. Nibras Plans и Nibras Docs скоро. Позже также могут рассматриваться сайты и приложения, которые помогают изучать религиозные знания из надёжных источников.",
       },
     ],
   },

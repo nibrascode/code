@@ -39,7 +39,6 @@ const BAR: Record<"dev" | "apk" | "pdf" | "qr" | "erase" | "image" | "calc" | "s
 };
 
 const STATUS: Partial<Record<"nibras-arabic" | "nibras-pdf" | "nibras-qr" | "nibras-plans" | "nibras-docs", TKey>> = {
-  "nibras-pdf": "soon",
   "nibras-plans": "soon",
   "nibras-docs": "soon",
 };
@@ -469,7 +468,7 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
         <div className="nx-grid">
           {cards.map(({ card, live }) => {
             const badge = statusText(
-              card.slug === "nibras-docs" && live?.status !== "ready" ? "soon" : live?.status,
+              card.slug === "nibras-pdf" ? "ready" : card.slug === "nibras-docs" && live?.status !== "ready" ? "soon" : live?.status,
               STATUS[card.slug] ? t(STATUS[card.slug]!) : null,
               labels,
             );

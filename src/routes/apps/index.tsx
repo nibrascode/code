@@ -21,7 +21,6 @@ export const Route = createFileRoute("/apps/")({
 const ORDER: AppSlug[] = ["nibras-arabic", "nibras-pdf", "nibras-qr", "nibras-docs", "nibras-plans"];
 
 const STATUS: Partial<Record<AppSlug, TKey>> = {
-  "nibras-pdf": "soon",
   "nibras-plans": "soon",
   "nibras-docs": "soon",
 };
@@ -49,7 +48,7 @@ export function AppsIndex({ apps }: { apps: readonly StudioAppRow[] | null | und
           const live = rows?.find((row) => row.slug === slug);
           if (live?.visible === false) return null;
           const badge = statusText(
-            slug === "nibras-docs" && live?.status !== "ready" ? "soon" : live?.status,
+            slug === "nibras-pdf" ? "ready" : slug === "nibras-docs" && live?.status !== "ready" ? "soon" : live?.status,
             STATUS[slug] ? t(STATUS[slug]!) : null,
             labels,
           );

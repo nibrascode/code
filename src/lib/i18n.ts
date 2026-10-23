@@ -364,7 +364,7 @@ const az = {
   who_p4:
     "Hazırda Nibras Arabic tətbiqi açıqdır. Saytda isə Nibras AI, Nibras Dev, Nibras Apk, Nibras QR, Nibras Erase və Xidmətlər işləyir.",
   who_p5:
-    "Nibras PDF, Nibras Plans və Nibras Docs hazırlanır. Gələcəkdə dini bilikləri sağlam mənbədən öyrənməyə kömək edən tətbiqlər də ola bilər.",
+    "Nibras PDF Google Play-dədir. Nibras Plans və Nibras Docs hazırlanır. Gələcəkdə dini bilikləri sağlam mənbədən öyrənməyə kömək edən tətbiqlər də ola bilər.",
   who_approach: "Bizim yanaşmamız",
   who_a1: "Tətbiqlərimizin hər biri pullu deyil.",
   who_a2:
@@ -754,7 +754,7 @@ const dictionaries = {
     who_p4:
       "Nibras Arabic is available now. The site also has Nibras AI, Nibras Dev, Nibras Apk, Nibras QR, Nibras Erase, and Tools.",
     who_p5:
-      "Nibras PDF, Nibras Plans, and Nibras Docs are in preparation. Later there may also be apps that help people learn religious knowledge from sound sources.",
+      "Nibras PDF is on Google Play. Nibras Plans and Nibras Docs are in preparation. Later there may also be apps that help people learn religious knowledge from sound sources.",
     who_approach: "Our approach",
     who_a1: "Not every one of our apps is paid.",
     who_a2:
@@ -1136,7 +1136,7 @@ const dictionaries = {
     who_p4:
       "تطبيق Nibras Arabic متاح الآن. وفي الموقع أيضًا Nibras AI وNibras Dev وNibras Apk وNibras QR وNibras Erase والخدمات.",
     who_p5:
-      "Nibras PDF وNibras Plans وNibras Docs قيد الإعداد. وقد تأتي لاحقًا تطبيقات تساعد على تعلّم المعارف الدينية من مصادر سليمة.",
+      "Nibras PDF على Google Play. Nibras Plans وNibras Docs قيد الإعداد. وقد تأتي لاحقًا تطبيقات تساعد على تعلّم المعارف الدينية من مصادر سليمة.",
     who_approach: "نهجنا",
     who_a1: "ليست كل تطبيقاتنا مدفوعة.",
     who_a2:
@@ -1518,7 +1518,7 @@ const dictionaries = {
     who_p4:
       "Сейчас доступно приложение Nibras Arabic. На сайте также есть Nibras AI, Nibras Dev, Nibras Apk, Nibras QR, Nibras Erase и Сервисы.",
     who_p5:
-      "Nibras PDF, Nibras Plans и Nibras Docs готовятся. Позже могут появиться и приложения для изучения религиозных знаний из надёжных источников.",
+      "Nibras PDF есть в Google Play. Nibras Plans и Nibras Docs готовятся. Позже могут появиться и приложения для изучения религиозных знаний из надёжных источников.",
     who_approach: "Наш подход",
     who_a1: "Не каждое наше приложение платное.",
     who_a2:
@@ -1566,7 +1566,7 @@ export const translations: Record<Lang, Record<TKey, string>> = {
     who_p4:
       "Nibras Arabic şu anda açık. Sitede ayrıca Nibras AI, Nibras Dev, Nibras Apk, Nibras QR, Nibras Erase ve Hizmetler var.",
     who_p5:
-      "Nibras PDF, Nibras Plans ve Nibras Docs hazırlanıyor. İleride dini bilgileri sağlam kaynaktan öğrenmeye yardım eden uygulamalar da olabilir.",
+      "Nibras PDF Google Play'dedir. Nibras Plans ve Nibras Docs hazırlanıyor. İleride dini bilgileri sağlam kaynaktan öğrenmeye yardım eden uygulamalar da olabilir.",
     code_samples: "Örnek kod",
     code_samples_note: "Oyun ve uygulama için örnek kod.",
     code_game: "Oyun kodu",

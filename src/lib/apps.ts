@@ -57,8 +57,7 @@ export const STUDIO_APPS: StudioApp[] = [
   {
     slug: "nibras-pdf",
     name: "Nibras PDF",
-    icon: "/apps/nibras-pdf.jpg",
-    playStoreUrl: null,
+    playStoreUrl: "https://play.google.com/store/apps/details?id=com.nibras.pdf",
     leadKey: "pdf_lead",
     bodyKey: "pdf_body",
     features: ["pdf_f1", "pdf_f2", "pdf_f3"],
