@@ -11414,3 +11414,40 @@ body[data-scene] .ns-app::before { content: ""; position: absolute; z-index: -1;
 @media (prefers-reduced-motion: reduce) {
   .nxa .nxx-bar, .nxa .nxx-bar > span > i, .nxa .nxx-msg, .nxa .nxx-cover img, .nxa .nxx-pulse i, .nxa .nxx-cover > span { animation: none !important; }
 }
+
+/* Long-form help text under tools, PDF tools and games */
+.page-guide-wrap {
+  width: min(760px, 100%);
+  margin: 0 auto;
+  padding: 0 22px 72px;
+}
+.page-guide {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--color-line);
+  color: #e9ecf6;
+}
+.page-guide h2 {
+  margin: 30px 0 12px;
+  font-size: 1.35rem;
+  letter-spacing: -0.02em;
+}
+.page-guide h2:first-child { margin-top: 0; }
+.page-guide p,
+.page-guide li {
+  margin: 0 0 12px;
+  font-size: 16.5px;
+  line-height: 1.8;
+  color: #dfe3ef;
+}
+.page-guide ol,
+.page-guide ul { padding-inline-start: 1.3em; margin: 0 0 8px; }
+.page-guide details {
+  margin: 0 0 10px;
+  padding: 12px 16px;
+  border: 1px solid var(--color-line);
+  border-radius: 14px;
+}
+.page-guide summary { cursor: pointer; list-style: none; }
+.page-guide summary h3 { display: inline; margin: 0; font-size: 1.02rem; }
+.page-guide details p { margin: 10px 0 0; }

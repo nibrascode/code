@@ -203,7 +203,12 @@ function SeoLinks() {
     );
   }
   if (pair) {
-    const canonical = path.startsWith("/ru/") ? pair.ru : pair.az;
+    const pairLang = langFromLocation(pathname, searchStr);
+    const canonical = path.startsWith("/ru/")
+      ? pair.ru
+      : pairLang === "en" || pairLang === "tr" || pairLang === "ar"
+        ? `${pair.az}?lang=${pairLang}`
+        : pair.az;
     const alternates = [
       ["az", pair.az],
       ["ru", pair.ru],

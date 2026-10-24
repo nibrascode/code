@@ -1,3 +1,5 @@
+import { GuideSection } from "@/components/guide-section";
+import type { Guide } from "@/lib/guides";
 import { useState } from "react";
 import {
   ArrowLeftRight,
@@ -590,7 +592,7 @@ function undo(id: ToolId, text: string) {
   return decodeHtml(text);
 }
 
-export function ToolsPage({ lang, focus }: { lang: Lang; focus?: ToolId }) {
+export function ToolsPage({ lang, focus, guide }: { lang: Lang; focus?: ToolId; guide?: Guide | null }) {
   const current = focus ?? null;
   const [text, setText] = useState("");
   const [extra, setExtra] = useState("");
@@ -879,6 +881,7 @@ export function ToolsPage({ lang, focus }: { lang: Lang; focus?: ToolId }) {
           ) : null}
         </form>
       ) : null}
+      {focus ? <GuideSection guide={guide} lang={lang} /> : null}
       {focus ? (
         <div className="tool-related">
           <h2>{copy.related[lang]}</h2>
