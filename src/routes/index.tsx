@@ -15,7 +15,7 @@ import { GameIcon } from "@/components/game-icons";
 import { toolsPath, TOOLS_PAGE } from "@/lib/tools";
 import { useI18n } from "@/lib/i18n-context";
 import { statusText, type StudioAppRow } from "@/lib/studio";
-import { appStoreLinks, STUDIO_APPS } from "@/lib/apps";
+import { appStoreLinks, STUDIO_APPS, syncedPlayUrl } from "@/lib/apps";
 import { loadHomeApps } from "@/lib/studio.functions";
 import type { Lang, TKey } from "@/lib/i18n";
 
@@ -38,13 +38,14 @@ const BAR: Record<"dev" | "apk" | "pdf" | "qr" | "erase" | "image" | "calc" | "s
   unknown: { az: "Sirr", en: "Secret", tr: "Sır", ar: "سر", ru: "Тайна" },
 };
 
-const STATUS: Partial<Record<"nibras-arabic" | "nibras-pdf" | "nibras-qr" | "nibras-plans" | "nibras-docs", TKey>> = {
+const STATUS: Partial<Record<"nibras-arabic" | "nibras-pdf" | "nibras-qr" | "nibras-plans" | "nibras-docs" | "nibras-office", TKey>> = {
+  ...(syncedPlayUrl("nibras-office") ? {} : { "nibras-office": "soon" as TKey }),
   "nibras-plans": "soon",
   "nibras-docs": "soon",
 };
 
 const CARDS: {
-  slug: "nibras-arabic" | "nibras-pdf" | "nibras-qr" | "nibras-docs" | "nibras-plans";
+  slug: "nibras-arabic" | "nibras-pdf" | "nibras-qr" | "nibras-docs" | "nibras-plans" | "nibras-office";
   name: string;
   icon: string;
   desc: TKey;
@@ -63,6 +64,13 @@ const CARDS: {
     icon: "/apps/nibras-pdf.webp",
     desc: "nx_pdf_d",
     chips: ["nx_pdf_1", "nx_pdf_2", "nx_pdf_3"],
+  },
+  {
+    slug: "nibras-office",
+    name: "Nibras Office",
+    icon: "/apps/nibras-office.webp",
+    desc: "office_lead",
+    chips: ["office_f1", "office_f2", "office_f3"],
   },
   {
     slug: "nibras-qr",
