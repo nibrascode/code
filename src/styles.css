@@ -7515,20 +7515,20 @@ body.is-planner .site-backdrop {
 
 /* ═══════════════════════════ NX Studio (admin) ═══════════════════════════ */
 .nxa {
-  --nxa-bg: #050a14;
-  --nxa-bg-2: #0a1222;
-  --nxa-panel: rgb(13 21 38 / 0.72);
-  --nxa-panel-solid: #0d1527;
+  --nxa-bg: #08070a;
+  --nxa-bg-2: #110f0b;
+  --nxa-panel: rgb(22 19 14 / 0.74);
+  --nxa-panel-solid: #16130e;
   --nxa-raise: rgb(255 255 255 / 0.035);
   --nxa-raise-2: rgb(255 255 255 / 0.065);
-  --nxa-line: rgb(148 170 220 / 0.12);
-  --nxa-line-2: rgb(148 170 220 / 0.22);
-  --nxa-text: #e9eefb;
-  --nxa-muted: #8e9bb9;
-  --nxa-faint: #5d6a88;
-  --nxa-accent: #4f8cff;
-  --nxa-accent-2: #7ee7ff;
-  --nxa-accent-ink: #ffffff;
+  --nxa-line: rgb(212 175 55 / 0.12);
+  --nxa-line-2: rgb(212 175 55 / 0.24);
+  --nxa-text: #f4efe2;
+  --nxa-muted: #a99f88;
+  --nxa-faint: #6d6555;
+  --nxa-accent: #d4af37;
+  --nxa-accent-2: #f3d98b;
+  --nxa-accent-ink: #1a1406;
   --nxa-ok: #34d399;
   --nxa-warn: #fbbf24;
   --nxa-bad: #f87171;
@@ -7545,16 +7545,16 @@ body.is-planner .site-backdrop {
   font-size: 14.5px;
   line-height: 1.5;
   background:
-    radial-gradient(1100px 520px at 85% -12%, rgb(79 140 255 / 0.16), transparent 62%),
-    radial-gradient(900px 480px at -10% 110%, rgb(126 231 255 / 0.07), transparent 60%),
+    radial-gradient(1100px 520px at 85% -12%, rgb(212 175 55 / 0.16), transparent 62%),
+    radial-gradient(900px 480px at -10% 110%, rgb(243 217 139 / 0.07), transparent 60%),
     var(--nxa-bg);
   -webkit-font-smoothing: antialiased;
   color-scheme: dark;
 }
 
 .nxa[data-theme="light"] {
-  --nxa-bg: #f2f5fb;
-  --nxa-bg-2: #e9eef8;
+  --nxa-bg: #faf7f0;
+  --nxa-bg-2: #f3eee2;
   --nxa-panel: rgb(255 255 255 / 0.86);
   --nxa-panel-solid: #ffffff;
   --nxa-raise: rgb(15 30 70 / 0.035);
@@ -7564,16 +7564,17 @@ body.is-planner .site-backdrop {
   --nxa-text: #0d172d;
   --nxa-muted: #56637f;
   --nxa-faint: #8a95ad;
-  --nxa-accent: #2f6bff;
-  --nxa-accent-2: #11b4d4;
+  --nxa-accent: #9a7410;
+  --nxa-accent-ink: #ffffff;
+  --nxa-accent-2: #b8892a;
   --nxa-ok: #059669;
   --nxa-warn: #b7791f;
   --nxa-bad: #dc2626;
   --nxa-violet: #7c3aed;
   --nxa-shadow: 0 1px 0 rgb(255 255 255 / 0.8) inset, 0 16px 36px -22px rgb(20 40 90 / 0.28);
   background:
-    radial-gradient(1100px 520px at 85% -12%, rgb(47 107 255 / 0.1), transparent 62%),
-    radial-gradient(900px 480px at -10% 110%, rgb(17 180 212 / 0.07), transparent 60%),
+    radial-gradient(1100px 520px at 85% -12%, rgb(154 116 16 / 0.1), transparent 62%),
+    radial-gradient(900px 480px at -10% 110%, rgb(184 137 42 / 0.07), transparent 60%),
     var(--nxa-bg);
   color-scheme: light;
 }
@@ -7664,7 +7665,7 @@ body.is-planner .site-backdrop {
   width: 40px;
   height: 40px;
   border-radius: 13px;
-  background: linear-gradient(145deg, rgb(79 140 255 / 0.3), rgb(126 231 255 / 0.12));
+  background: linear-gradient(145deg, rgb(212 175 55 / 0.3), rgb(243 217 139 / 0.12));
   box-shadow: 0 0 0 1px var(--nxa-line-2) inset, 0 10px 24px -12px var(--nxa-accent);
 }
 
@@ -7822,7 +7823,7 @@ body.is-planner .site-backdrop {
   height: 640px;
   transform: translate(50%, 30%);
   border-radius: 50%;
-  background: radial-gradient(circle, rgb(79 140 255 / 0.22), transparent 62%);
+  background: radial-gradient(circle, rgb(212 175 55 / 0.22), transparent 62%);
   filter: blur(10px);
   pointer-events: none;
 }
@@ -7877,7 +7878,7 @@ body.is-planner .site-backdrop {
   inset: 0;
   padding: 1px;
   border-radius: inherit;
-  background: linear-gradient(160deg, rgb(126 231 255 / 0.5), transparent 35%, transparent 70%, rgb(79 140 255 / 0.45));
+  background: linear-gradient(160deg, rgb(243 217 139 / 0.5), transparent 35%, transparent 70%, rgb(212 175 55 / 0.45));
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
@@ -7893,7 +7894,7 @@ body.is-planner .site-backdrop {
   margin-inline: auto;
   border-radius: 18px;
   color: var(--nxa-accent-2);
-  background: linear-gradient(150deg, rgb(79 140 255 / 0.25), rgb(126 231 255 / 0.08));
+  background: linear-gradient(150deg, rgb(212 175 55 / 0.25), rgb(243 217 139 / 0.08));
   box-shadow: 0 0 0 1px var(--nxa-line-2) inset, 0 16px 34px -16px var(--nxa-accent);
 }
 
@@ -9800,11 +9801,11 @@ body.is-planner .site-backdrop {
 }
 
 .nxa-theme-swatch.is-dark {
-  background: linear-gradient(135deg, #050a14 50%, #4f8cff);
+  background: linear-gradient(135deg, #08070a 50%, #d4af37);
 }
 
 .nxa-theme-swatch.is-light {
-  background: linear-gradient(135deg, #f2f5fb 50%, #2f6bff);
+  background: linear-gradient(135deg, #faf7f0 50%, #9a7410);
 }
 
 .nxa-code {
@@ -11319,3 +11320,97 @@ body[data-scene] .ns-app::before { content: ""; position: absolute; z-index: -1;
 .ns-tools li::marker { color: var(--ns-gold); font-weight: 600; }
 .ns-tools b { display: block; color: #f6efdc; font-weight: 650; }
 .ns-tools span { color: #cfd3dc; line-height: 1.6; }
+
+/* ═══════════ NX Studio: əməliyyat bölmələri (nxx) ═══════════ */
+.nxa .nxx-bars { display: flex; align-items: flex-end; gap: 10px; min-height: 190px; padding: 8px 2px 0; overflow-x: auto; scrollbar-width: thin; }
+.nxa .nxx-bar { flex: 1 0 42px; max-width: 92px; display: flex; flex-direction: column; align-items: center; gap: 6px; animation: nxx-rise 520ms cubic-bezier(.2,.8,.2,1) both; animation-delay: var(--d, 0ms); }
+.nxa .nxx-bar > span { position: relative; width: 100%; height: 140px; display: flex; align-items: flex-end; border-radius: 10px; background: var(--nxa-raise); overflow: hidden; }
+.nxa .nxx-bar > span > i { display: block; width: 100%; border-radius: 10px 10px 4px 4px; background: linear-gradient(180deg, #f3d98b, #d4af37 55%, #9a7410); box-shadow: 0 0 18px -4px rgb(212 175 55 / .55); transform-origin: bottom; animation: nxx-grow 700ms cubic-bezier(.2,.8,.2,1) both; animation-delay: var(--d, 0ms); }
+.nxa .nxx-bar > span > i.is-warn { background: linear-gradient(180deg, #fde68a, var(--nxa-warn)); }
+.nxa .nxx-bar > span > i.is-ok { background: linear-gradient(180deg, #f3d98b, #d4af37); }
+.nxa .nxx-bar em { font-style: normal; font-size: 12px; font-weight: 600; color: var(--nxa-text); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.nxa .nxx-bar small { font-size: 11px; color: var(--nxa-muted); text-align: center; line-height: 1.2; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+@keyframes nxx-grow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes nxx-rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+.nxa .nxx-pill { display: inline-flex; align-items: center; gap: 6px; height: 24px; padding: 0 10px; border-radius: 99px; font-size: 12px; font-weight: 600; white-space: nowrap; }
+.nxa .nxx-pill::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; box-shadow: 0 0 8px currentColor; }
+.nxa .nxx-pill.is-ok { color: var(--nxa-ok); background: color-mix(in oklab, var(--nxa-ok) 14%, transparent); }
+.nxa .nxx-pill.is-bad { color: var(--nxa-bad); background: color-mix(in oklab, var(--nxa-bad) 14%, transparent); }
+.nxa .nxx-pill.is-warn { color: var(--nxa-warn); background: color-mix(in oklab, var(--nxa-warn) 14%, transparent); }
+.nxa .nxx-pill.is-warn::before { animation: nxx-blink 1.2s ease-in-out infinite; }
+.nxa .nxx-pill.is-off { color: var(--nxa-faint); background: var(--nxa-raise-2); }
+.nxa .nxx-pill.is-off::before { box-shadow: none; }
+@keyframes nxx-blink { 50% { opacity: .3; } }
+
+.nxa .nxx-rows { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.nxa .nxx-rows li { display: flex; align-items: center; gap: 12px; padding: 11px 10px; border-radius: 12px; transition: background 160ms; min-width: 0; flex-wrap: wrap; }
+.nxa .nxx-rows li:hover { background: var(--nxa-raise); }
+.nxa .nxx-rows li > b { min-width: 120px; }
+.nxa .nxx-rows li > .nxa-muted { margin-inline-start: auto; font-size: 12.5px; }
+.nxa .nxx-rows code { font-size: 12px; padding: 2px 7px; border-radius: 7px; color: #f3d98b; background: rgb(212 175 55 / .1); }
+.nxa .nxx-rows a { color: inherit; display: inline-flex; align-items: center; gap: 4px; }
+.nxa .nxx-grow { flex: 1 1 200px; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+
+.nxa .nxx-split { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 16px; align-items: start; }
+.nxa .nxx-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+.nxa .nxx-search { display: flex; align-items: center; gap: 8px; height: 38px; padding: 0 12px; border: 1px solid var(--nxa-line-2); border-radius: 12px; background: var(--nxa-raise); color: var(--nxa-muted); }
+.nxa .nxx-search input { border: 0; outline: 0; background: none; color: var(--nxa-text); font: inherit; width: 180px; }
+.nxa .nxx-search:focus-within { border-color: var(--nxa-accent); box-shadow: 0 0 0 3px rgb(212 175 55 / .18); }
+.nxa .nxx-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; max-height: 560px; overflow-y: auto; }
+.nxa .nxx-list button { width: 100%; text-align: start; display: grid; gap: 2px; padding: 11px 12px; border: 1px solid transparent; border-radius: 12px; background: none; color: inherit; font: inherit; cursor: pointer; transition: background 160ms, border-color 160ms; }
+.nxa .nxx-list button:hover { background: var(--nxa-raise); }
+.nxa .nxx-list button.is-on { border-color: rgb(212 175 55 / .45); background: rgb(212 175 55 / .08); }
+.nxa .nxx-list b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.nxa .nxx-list small { color: var(--nxa-muted); font-size: 12px; }
+.nxa .nxx-more { margin-top: 10px; width: 100%; justify-content: center; }
+.nxa .nxx-thread { display: grid; gap: 10px; max-height: 620px; overflow-y: auto; padding-inline-end: 4px; }
+.nxa .nxx-msg { max-width: 88%; padding: 10px 13px; border-radius: 14px; background: var(--nxa-raise-2); animation: nxx-rise 300ms ease both; }
+.nxa .nxx-msg p { margin: 2px 0 0; white-space: pre-wrap; word-break: break-word; }
+.nxa .nxx-msg small { color: var(--nxa-muted); font-size: 11px; font-weight: 600; }
+.nxa .nxx-msg.is-user { justify-self: end; background: linear-gradient(150deg, rgb(212 175 55 / .2), rgb(212 175 55 / .08)); border: 1px solid rgb(212 175 55 / .25); }
+.nxa .nxx-msg.is-err { border: 1px solid color-mix(in oklab, var(--nxa-bad) 35%, transparent); }
+.nxa .nxx-msg a { display: block; margin-top: 6px; font-size: 12px; color: var(--nxa-accent); }
+
+.nxa .nxx-edit { margin-top: 16px; padding: 16px; border-radius: 14px; border: 1px solid rgb(212 175 55 / .3); background: rgb(212 175 55 / .05); display: grid; grid-template-columns: auto 1fr 1fr auto; gap: 14px; align-items: end; animation: nxx-rise 260ms ease both; }
+.nxa .nxx-edit > b { align-self: center; }
+.nxa .nxx-edit input { width: 100%; }
+.nxa .nxx-edit-actions { display: flex; gap: 8px; }
+
+.nxa .nxx-covers { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; }
+.nxa .nxx-cover { position: relative; padding: 0; border: 1px solid var(--nxa-line-2); border-radius: 14px; overflow: hidden; background: var(--nxa-raise); cursor: zoom-in; transition: transform 220ms, box-shadow 220ms, border-color 220ms; }
+.nxa .nxx-cover:hover { transform: translateY(-3px); border-color: rgb(212 175 55 / .55); box-shadow: 0 18px 30px -18px rgb(212 175 55 / .5); }
+.nxa .nxx-cover img { display: block; width: 100%; height: 100%; object-fit: cover; animation: nxx-fade 400ms ease both; }
+.nxa .nxx-cover > span { display: block; width: 100%; height: 100%; background: linear-gradient(100deg, var(--nxa-raise) 30%, var(--nxa-raise-2) 50%, var(--nxa-raise) 70%); background-size: 300% 100%; animation: nxx-shimmer 1.4s linear infinite; }
+.nxa .nxx-cover > span.is-failed { animation: none; }
+.nxa .nxx-cover small { position: absolute; inset: auto 0 0 0; padding: 18px 9px 7px; font-size: 11px; color: #f4efe2; background: linear-gradient(transparent, rgb(0 0 0 / .75)); text-align: start; }
+@keyframes nxx-fade { from { opacity: 0; } }
+@keyframes nxx-shimmer { to { background-position: -300% 0; } }
+.nxa .nxx-lightbox { position: fixed; inset: 0; z-index: 80; display: grid; place-items: center; padding: 24px; border: 0; background: rgb(0 0 0 / .82); backdrop-filter: blur(6px); cursor: zoom-out; animation: nxx-fade 200ms ease both; }
+.nxa .nxx-lightbox img { max-width: min(92vw, 640px); max-height: 88vh; border-radius: 14px; box-shadow: 0 30px 80px rgb(0 0 0 / .6); }
+
+.nxa .nxx-pulses { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.nxa .nxx-pulse { position: relative; display: grid; gap: 4px; text-align: start; padding: 14px 16px 14px 34px; border: 1px solid var(--nxa-line-2); border-radius: 14px; background: var(--nxa-raise); color: inherit; font: inherit; cursor: pointer; transition: border-color 200ms, transform 200ms; }
+.nxa .nxx-pulse:hover { border-color: rgb(212 175 55 / .5); transform: translateY(-2px); }
+.nxa .nxx-pulse i { position: absolute; inset-inline-start: 14px; top: 20px; width: 9px; height: 9px; border-radius: 50%; background: var(--nxa-faint); }
+.nxa .nxx-pulse.is-ok i { background: var(--nxa-ok); box-shadow: 0 0 0 0 var(--nxa-ok); animation: nxx-ping 2s ease-out infinite; }
+.nxa .nxx-pulse.is-warn i { background: var(--nxa-warn); }
+.nxa .nxx-pulse.is-bad i { background: var(--nxa-bad); }
+.nxa .nxx-pulse small { color: var(--nxa-muted); font-size: 12px; }
+.nxa .nxx-pulse b { font-size: 18px; }
+@keyframes nxx-ping { 0% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--nxa-ok) 60%, transparent); } 100% { box-shadow: 0 0 0 10px transparent; } }
+
+@media (max-width: 900px) {
+  .nxa .nxx-split { grid-template-columns: 1fr; }
+  .nxa .nxx-edit { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  .nxa .nxx-pulses { grid-template-columns: 1fr; }
+  .nxa .nxx-grid { grid-template-columns: 1fr; }
+  .nxa .nxx-covers { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .nxa .nxx-search input { width: 120px; }
+  .nxa .nxx-rows li > .nxa-muted { margin-inline-start: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nxa .nxx-bar, .nxa .nxx-bar > span > i, .nxa .nxx-msg, .nxa .nxx-cover img, .nxa .nxx-pulse i, .nxa .nxx-cover > span { animation: none !important; }
+}

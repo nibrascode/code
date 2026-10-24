@@ -19,6 +19,7 @@ import {
   supaLogout,
   verifyAdmin,
 } from "./_admin.js";
+import { appsData, coverImage, coverList, deleteChat, deploys, libraryStats, listChats, providerHealth, readChat, runPlaySync, setAppSize } from "./_nx.js";
 
 export const config = { maxDuration: 15 };
 
@@ -114,6 +115,19 @@ export default async function handler(req, res) {
         return send(200, { ok: true, session: sessionOut(data) });
       }
 
+      // Aşağıdakı bütün əməliyyatlar yalnız təsdiqlənmiş sahib üçündür
+      if (op === "chatdel" || op === "setsize" || op === "playsync") {
+        if (!(await verifyAdmin(bearer(req)))) return send(401, { ok: false, error: "auth" });
+        const body = (await readBody(req)) || {};
+        const out =
+          op === "chatdel"
+            ? await deleteChat(String(body.id || ""))
+            : op === "setsize"
+              ? await setAppSize({ slug: body.slug, size: body.size, sizeVersion: body.sizeVersion })
+              : await runPlaySync();
+        return send(out.status, out.body);
+      }
+
       if (op === "logout") {
         await supaLogout(bearer(req));
         res.setHeader("Set-Cookie", sessionCookie("", { secure }));
@@ -126,6 +140,31 @@ export default async function handler(req, res) {
       if (!(await verifyAdmin(bearer(req)))) return send(401, { ok: false, error: "auth" });
       const days = Math.max(7, Math.min(90, Number(url.searchParams.get("days")) || 30));
       return send(200, { ok: true, ...(await overview({ days })) });
+    }
+
+    const NX_GET = new Set(["chats", "chat", "providers", "library", "apps", "covers", "cover", "deploys"]);
+    if (req.method === "GET" && NX_GET.has(op)) {
+      if (!(await verifyAdmin(bearer(req)))) return send(401, { ok: false, error: "auth" });
+      const fresh = url.searchParams.get("fresh") === "1";
+      const p = (k) => url.searchParams.get(k) || "";
+      if (op === "chats") return send(200, { ok: true, ...(await listChats({ q: p("q"), offset: p("offset"), limit: p("limit") })) });
+      if (op === "chat") {
+        const out = await readChat(p("id"));
+        return send(out.status, out.body);
+      }
+      if (op === "providers") return send(200, { ok: true, ...(await providerHealth({ fresh })) });
+      if (op === "library") return send(200, { ok: true, ...(await libraryStats({ fresh })) });
+      if (op === "apps") return send(200, { ok: true, ...(await appsData({ fresh })) });
+      if (op === "covers") return send(200, { ok: true, ...(await coverList({ fresh })) });
+      if (op === "deploys") return send(200, { ok: true, ...(await deploys({ fresh })) });
+      if (op === "cover") {
+        const out = await coverImage(p("file"));
+        if (out.status !== 200) return send(out.status, { ok: false });
+        res.setHeader("Content-Type", out.type);
+        res.setHeader("Cache-Control", "private, max-age=86400");
+        res.status(200);
+        return res.end(out.buf);
+      }
     }
 
     return send(405, { ok: false, error: "method" });

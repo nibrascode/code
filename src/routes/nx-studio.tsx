@@ -45,13 +45,17 @@ import {
   IconShield,
   IconSpark,
   IconSun,
+  IconUpload,
+  IconChat,
+  IconRefresh,
 } from "@/components/studio/icons";
+import { ChatsSection, CoversSection, DeploysSection, LibraryStatsSection, ProvidersSection, PulseCard, ReleasesSection } from "@/components/studio/nx-sections";
 
 export const Route = createFileRoute("/nx-studio")({
   component: StudioPage,
 });
 
-type Tab = "overview" | "apps" | "pages" | "lessons" | "library" | "ai" | "content" | "sitemap" | "settings";
+type Tab = "overview" | "apps" | "releases" | "pages" | "lessons" | "library" | "ai" | "chats" | "providers" | "libstats" | "covers" | "deploys" | "content" | "sitemap" | "settings";
 
 const NAV: { group: SKey; items: { id: Tab; key: SKey; icon: (p: { size?: number }) => ReactNode }[] }[] = [
   {
@@ -59,7 +63,10 @@ const NAV: { group: SKey; items: { id: Tab; key: SKey; icon: (p: { size?: number
     items: [
       { id: "overview", key: "nav_overview", icon: IconOverview },
       { id: "apps", key: "nav_apps", icon: IconApps },
+      { id: "releases", key: "nav_releases", icon: IconUpload },
       { id: "ai", key: "nav_ai", icon: IconSpark },
+      { id: "chats", key: "nav_chats", icon: IconChat },
+      { id: "providers", key: "nav_providers", icon: IconShield },
     ],
   },
   {
@@ -68,12 +75,15 @@ const NAV: { group: SKey; items: { id: Tab; key: SKey; icon: (p: { size?: number
       { id: "pages", key: "nav_pages", icon: IconPages },
       { id: "lessons", key: "nav_lessons", icon: IconCode },
       { id: "library", key: "nav_library", icon: IconLibrary },
+      { id: "libstats", key: "nav_libstats", icon: IconLibrary },
+      { id: "covers", key: "nav_covers", icon: IconEye },
       { id: "content", key: "nav_content", icon: IconDatabase },
     ],
   },
   {
     group: "group_system",
     items: [
+      { id: "deploys", key: "nav_deploys", icon: IconRefresh },
       { id: "sitemap", key: "nav_sitemap", icon: IconMap },
       { id: "settings", key: "nav_settings", icon: IconSettings },
     ],
@@ -480,7 +490,18 @@ function Desk({
             </div>
           </header>
           <main className="nxa-main" ref={mainRef} key={`${tab}-${nonce}`}>
-            {tab === "overview" ? <OverviewSection ov={ov} /> : null}
+            {tab === "overview" ? (
+              <>
+                <OverviewSection ov={ov} />
+                <PulseCard go={go} />
+              </>
+            ) : null}
+            {tab === "releases" ? <ReleasesSection /> : null}
+            {tab === "chats" ? <ChatsSection /> : null}
+            {tab === "providers" ? <ProvidersSection /> : null}
+            {tab === "libstats" ? <LibraryStatsSection /> : null}
+            {tab === "covers" ? <CoversSection /> : null}
+            {tab === "deploys" ? <DeploysSection /> : null}
             {tab === "apps" ? <AppsSection startNew={sub === "new"} /> : null}
             {tab === "pages" ? <PagesSection start={sub} /> : null}
             {tab === "lessons" ? <LessonsSection /> : null}

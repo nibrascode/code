@@ -1,6 +1,7 @@
 import type { Lang } from "@/lib/i18n";
 import type { AppSlug, StudioApp } from "@/lib/apps";
 import PLAY from "@/data/play-facts.json";
+import SIZES from "@/data/app-sizes.json";
 
 /** Real, verifiable facts only. Unknown values stay undefined and are not shown. */
 export type StoreFacts = {
@@ -146,11 +147,15 @@ export function pick<T extends string>(rec: (Partial<Record<Lang, T>> & { en: T 
 }
 
 type PlayFacts = { listed: boolean; playUrl?: string; version?: string; updated?: string; minAndroid?: string };
+const SIZE_OVERRIDES = SIZES as Partial<Record<string, { size?: string; sizeVersion?: string }>>;
 const PLAY_FACTS = PLAY as Partial<Record<string, PlayFacts>>;
 
 /** Manual facts merged with the auto-synced Play data (scripts/sync-play.mjs). */
 export function effectiveApp(app: StudioApp): { app: StudioApp; facts: StoreFacts } {
-  const base: StoreFacts = STORE[app.slug] ?? { privacyUrl: `/privacy/${app.slug}` };
+  const stored: StoreFacts = STORE[app.slug] ?? { privacyUrl: `/privacy/${app.slug}` };
+  // NX Studio-dan yazılan ölçü (src/data/app-sizes.json) əl ilə yazılmış ölçünü əvəz edir
+  const sized = SIZE_OVERRIDES[app.slug];
+  const base: StoreFacts = sized?.size ? { ...stored, size: sized.size, sizeVersion: sized.sizeVersion || undefined } : stored;
   const play = PLAY_FACTS[app.slug];
   if (!play) return { app, facts: base };
   if (!play.listed) return { app: { ...app, playStoreUrl: null }, facts: base };

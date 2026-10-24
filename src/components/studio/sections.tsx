@@ -117,7 +117,7 @@ function Trend({ t, now, prev }: { t: T; now: number; prev: number }) {
   );
 }
 
-function Kpi({ icon, tone, label, value, foot }: { icon: React.ReactNode; tone: string; label: string; value: string; foot?: React.ReactNode }) {
+export function Kpi({ icon, tone, label, value, foot }: { icon: React.ReactNode; tone: string; label: string; value: string; foot?: React.ReactNode }) {
   return (
     <div className={`nxa-kpi is-${tone}`}>
       <span className="nxa-kpi-icon">{icon}</span>
