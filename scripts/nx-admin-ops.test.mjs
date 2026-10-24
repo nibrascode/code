@@ -21,7 +21,7 @@ function call({ method = "GET", url, headers = {}, body }) {
 const realFetch = globalThis.fetch;
 test.afterEach(() => { globalThis.fetch = realFetch; });
 
-for (const op of ["chats", "chat", "providers", "library", "apps", "covers", "cover", "deploys"]) {
+for (const op of ["providers", "library", "apps", "covers", "cover", "deploys"]) {
   test(`GET ${op} girişsiz 401`, async () => {
     globalThis.fetch = async () => new Response("{}", { status: 401 });
     const r = await call({ url: `/api/admin?op=${op}` });
@@ -31,7 +31,7 @@ for (const op of ["chats", "chat", "providers", "library", "apps", "covers", "co
   });
 }
 
-for (const op of ["chatdel", "setsize", "playsync"]) {
+for (const op of ["setsize", "playsync"]) {
   test(`POST ${op} girişsiz rədd`, async () => {
     globalThis.fetch = async () => new Response("{}", { status: 401 });
     assert.equal((await call({ method: "POST", url: `/api/admin?op=${op}`, body: {} })).code, 403);
@@ -61,4 +61,10 @@ test("setAppSize yanlış dəyəri rədd edir", async () => {
 
 test("coverImage yol keçidini rədd edir", async () => {
   assert.equal((await coverImage("../../secret.webp", { env: {} })).status, 400);
+});
+
+test("söhbət əməliyyatları panelde yoxdur", async () => {
+  globalThis.fetch = async () => new Response("{}", { status: 200 });
+  for (const op of ["chats", "chat"]) assert.ok([404, 405].includes((await call({ url: `/api/admin?op=${op}` })).code));
+  assert.equal((await call({ method: "POST", url: "/api/admin?op=chatdel", headers: { "x-nxs": "1" }, body: {} })).code, 404);
 });

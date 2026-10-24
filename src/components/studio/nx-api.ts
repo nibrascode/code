@@ -39,9 +39,6 @@ export async function nxCover(file: string): Promise<string> {
   return url;
 }
 
-export type Chat = { id: string; device: string; title: string; updated_at: string };
-export type ChatFull = Chat & { messages: { k: string; t: string; i?: string }[] };
-export type ChatList = { storage: boolean; error?: string; total: number; chats: Chat[] };
 export type Provider = { id: string; name: string; configured: boolean; ok: boolean; status: number; ms: number };
 export type Providers = { checkedAt: string; providers: Provider[] };
 export type Library = {

@@ -1,7 +1,6 @@
 // NX Studio əlavə bölmələri (söhbətlər, AI provayderləri, kitabxana, tətbiqlər, üz qabıqları, yerləşdirmələr).
 // Bu funksiyalar yalnız api/admin.js-dən, verifyAdmin uğurlu olandan SONRA çağırılır.
 // Açar və tokenlər heç vaxt cavaba yazılmır: yalnız "qoşulub/işləyir" vəziyyəti, status kodu və cavab müddəti qaytarılır.
-import { supaConfig } from "./_chats.js";
 
 const TIMEOUT_MS = 8000;
 const OWNER = "nibrascode";
@@ -15,7 +14,6 @@ const RELEASE_REPOS = [
   { repo: "nibrascode/quran-tartil", slug: "" },
 ];
 const SLUG_RE = /^[a-z0-9-]{2,40}$/;
-const ID_RE = /^[A-Za-z0-9_-]{8,64}$/;
 const COVER_RE = /^[0-9]{4}-[0-9]{2}-[0-9]{2}\/[A-Za-z0-9_-]{4,80}\.(webp|png|jpe?g)$/;
 
 const envOf = (env, ...keys) => {
@@ -83,55 +81,6 @@ async function ghJsonFile(env, repo, path, fetchImpl) {
 }
 
 // ---------- Nibras AI söhbətləri ----------
-function chatHeaders(cfg, extra = {}) {
-  return { apikey: cfg.key, Authorization: `Bearer ${cfg.key}`, ...extra };
-}
-
-export async function listChats({ q = "", offset = 0, limit = 30, env = process.env, fetchImpl = globalThis.fetch } = {}) {
-  const cfg = supaConfig(env);
-  if (!cfg) return { storage: false, chats: [], total: 0 };
-  const lim = Math.max(1, Math.min(100, Number(limit) || 30));
-  const off = Math.max(0, Math.min(100000, Number(offset) || 0));
-  const params = new URLSearchParams({ select: "id,device_id,title,updated_at", order: "updated_at.desc", limit: String(lim), offset: String(off) });
-  const term = String(q || "").replace(/[%*,()"\\]/g, " ").trim().slice(0, 80);
-  if (term) params.set("title", `ilike.*${term}*`);
-  const { res } = await timed(`${cfg.url}/rest/v1/nibras_chats?${params}`, { headers: chatHeaders(cfg, { Prefer: "count=exact" }) }, fetchImpl);
-  if (!res) return { storage: true, error: "network", chats: [], total: 0 };
-  if (!res.ok) return { storage: true, error: res.status === 404 ? "table" : "db", chats: [], total: 0 };
-  const rows = await res.json().catch(() => []);
-  const total = Number(String(res.headers.get("content-range") || "").split("/")[1]);
-  return {
-    storage: true,
-    total: Number.isFinite(total) ? total : rows.length,
-    chats: rows.map((r) => ({ id: r.id, device: String(r.device_id || "").slice(0, 6), title: r.title || "", updated_at: r.updated_at })),
-  };
-}
-
-export async function readChat(id, { env = process.env, fetchImpl = globalThis.fetch } = {}) {
-  const cfg = supaConfig(env);
-  if (!cfg) return { status: 503, body: { ok: false, storage: false } };
-  if (!ID_RE.test(String(id || ""))) return { status: 400, body: { ok: false, error: "id" } };
-  const { res } = await timed(`${cfg.url}/rest/v1/nibras_chats?id=eq.${encodeURIComponent(id)}&select=id,device_id,title,messages,updated_at&limit=1`, { headers: chatHeaders(cfg) }, fetchImpl);
-  if (!res || !res.ok) return { status: 502, body: { ok: false, error: "db" } };
-  const rows = await res.json().catch(() => []);
-  if (!rows[0]) return { status: 404, body: { ok: false, error: "notfound" } };
-  const r = rows[0];
-  const messages = Array.isArray(r.messages) ? r.messages.map((m) => ({ k: m.k, t: String(m.t || ""), i: typeof m.i === "string" ? m.i : undefined })) : [];
-  return { status: 200, body: { ok: true, chat: { id: r.id, device: String(r.device_id || "").slice(0, 6), title: r.title || "", updated_at: r.updated_at, messages } } };
-}
-
-export async function deleteChat(id, { env = process.env, fetchImpl = globalThis.fetch } = {}) {
-  const cfg = supaConfig(env);
-  if (!cfg) return { status: 503, body: { ok: false, storage: false } };
-  if (!ID_RE.test(String(id || ""))) return { status: 400, body: { ok: false, error: "id" } };
-  const { res } = await timed(`${cfg.url}/rest/v1/nibras_chats?id=eq.${encodeURIComponent(id)}`, { method: "DELETE", headers: chatHeaders(cfg, { Prefer: "return=representation" }) }, fetchImpl);
-  if (!res || !res.ok) return { status: 502, body: { ok: false, error: "db" } };
-  const rows = await res.json().catch(() => []);
-  return { status: rows.length ? 200 : 404, body: { ok: rows.length > 0, deleted: rows.length } };
-}
-
-// ---------- AI provayderləri ----------
-// Hər provayderin yalnız "modellər" (və ya açar yoxlama) ünvanına yüngül sorğu göndərilir: heç bir mətn yaranmır, kvota xərclənmir.
 export const PROVIDERS = [
   { id: "gemini", name: "Google Gemini", keys: ["GEMINI_API_KEY"], url: (k) => `https://generativelanguage.googleapis.com/v1beta/models?pageSize=1&key=${encodeURIComponent(k)}`, auth: "none" },
   { id: "groq", name: "Groq", keys: ["GROQ_API_KEY"], url: () => "https://api.groq.com/openai/v1/models" },

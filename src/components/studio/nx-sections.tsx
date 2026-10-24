@@ -2,26 +2,24 @@ import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } fro
 import type { Lang } from "@/lib/i18n";
 import { STUDIO_APPS } from "@/lib/apps";
 import { effectiveApp } from "@/lib/app-store";
-import { Card, ConfirmDelete, Empty, ErrorBox, Field, PageHead, Skeleton, useStudio } from "@/components/studio/core";
+import { Card, Empty, ErrorBox, Field, PageHead, Skeleton, useStudio } from "@/components/studio/core";
 import { Kpi, fmtDate, fmtNum } from "@/components/studio/sections";
 import type { SKey, T } from "@/components/studio/i18n";
 import {
   IconAlert,
   IconApps,
   IconCalendar,
-  IconChat,
   IconCheck,
   IconDownload,
   IconExternal,
   IconLibrary,
   IconRefresh,
-  IconSearch,
   IconShield,
   IconSpark,
   IconTrendUp,
   IconUpload,
 } from "@/components/studio/icons";
-import { nxCover, nxGet, nxPost, type AppsData, type ChatFull, type ChatList, type Cover, type Covers, type Deploys, type Library, type Providers } from "@/components/studio/nx-api";
+import { nxCover, nxGet, nxPost, type AppsData, type Cover, type Covers, type Deploys, type Library, type Providers } from "@/components/studio/nx-api";
 
 /* ───────────── shared ───────────── */
 
@@ -87,153 +85,6 @@ function Pill({ tone, children }: { tone: "ok" | "bad" | "warn" | "off"; childre
 }
 
 /* ───────────── Nibras AI söhbətləri ───────────── */
-
-export function ChatsSection() {
-  const { t, lang, toast } = useStudio();
-  const [q, setQ] = useState("");
-  const [term, setTerm] = useState("");
-  const [list, setList] = useState<ChatList | null>(null);
-  const [error, setError] = useState("");
-  const [busy, setBusy] = useState(false);
-  const [open, setOpen] = useState<ChatFull | null>(null);
-  const [openBusy, setOpenBusy] = useState("");
-  const [deleting, setDeleting] = useState(false);
-
-  const load = useCallback((query: string, offset = 0) => {
-    setBusy(true);
-    setError("");
-    nxGet<ChatList>("chats", { q: query, offset, limit: 30 })
-      .then((d) => setList((prev) => (offset && prev ? { ...d, chats: [...prev.chats, ...d.chats] } : d)))
-      .catch((e: unknown) => setError(e instanceof Error ? e.message : "error"))
-      .finally(() => setBusy(false));
-  }, []);
-
-  useEffect(() => load(""), [load]);
-  useEffect(() => {
-    const id = setTimeout(() => {
-      if (q !== term) {
-        setTerm(q);
-        load(q);
-      }
-    }, 350);
-    return () => clearTimeout(id);
-  }, [q, term, load]);
-
-  const read = (id: string) => {
-    setOpenBusy(id);
-    nxGet<{ chat: ChatFull }>("chat", { id })
-      .then((d) => setOpen(d.chat))
-      .catch(() => toast(t("err_load"), "err"))
-      .finally(() => setOpenBusy(""));
-  };
-
-  const remove = (id: string) => {
-    setDeleting(true);
-    nxPost("chatdel", { id })
-      .then(() => {
-        toast(t("chats_deleted"));
-        setOpen(null);
-        setList((l) => (l ? { ...l, total: Math.max(0, l.total - 1), chats: l.chats.filter((c) => c.id !== id) } : l));
-      })
-      .catch((e: unknown) => toast(e instanceof Error && e.message === "auth" ? t("err_auth") : t("err_load"), "err"))
-      .finally(() => setDeleting(false));
-  };
-
-  const days = useMemo(() => {
-    const map = new Map<string, number>();
-    for (const c of list?.chats ?? []) map.set(dayKey(c.updated_at), (map.get(dayKey(c.updated_at)) || 0) + 1);
-    return [...map.entries()].sort(([a], [b]) => a.localeCompare(b)).slice(-14);
-  }, [list]);
-
-  return (
-    <div className="nxa-stack">
-      <PageHead icon={<IconChat size={22} />} title={t("nav_chats")} sub={t("chats_sub")}>
-        <RefreshBtn t={t} busy={busy} onClick={() => load(term)} />
-      </PageHead>
-      {error ? <ErrorBox onRetry={() => load(term)} /> : null}
-      {!list && !error ? (
-        <Card>
-          <Skeleton lines={5} />
-        </Card>
-      ) : list && !list.storage ? (
-        <Card>
-          <Empty icon={<IconShield size={26} />} text={t("chats_off")} />
-        </Card>
-      ) : list ? (
-        <>
-          <div className="nxa-kpis is-three">
-            <Kpi icon={<IconChat size={20} />} tone="teal" label={t("chats_total")} value={fmtNum(lang, list.total)} />
-            <Kpi icon={<IconCalendar size={20} />} tone="blue" label={t("last_30")} value={fmtNum(lang, list.chats.filter((c) => Date.now() - new Date(c.updated_at).getTime() < 30 * 864e5).length)} />
-            <Kpi icon={<IconTrendUp size={20} />} tone="violet" label={t("chats_daily")} value={fmtNum(lang, days.length ? days[days.length - 1][1] : 0)} />
-          </div>
-          {days.length > 1 ? (
-            <Card title={t("chats_daily")}>
-              <Bars lang={lang} items={days.map(([d, v]) => ({ label: fmtDate(lang, `${d}T12:00:00Z`, { day: "numeric", month: "short" }), value: v }))} />
-            </Card>
-          ) : null}
-          <div className="nxx-split">
-            <Card
-              title={t("nav_chats")}
-              actions={
-                <label className="nxx-search">
-                  <IconSearch size={16} />
-                  <input value={q} onChange={(e) => setQ(e.target.value)} placeholder={t("chats_search")} aria-label={t("chats_search")} />
-                </label>
-              }
-            >
-              {list.chats.length === 0 ? (
-                <Empty icon={<IconChat size={26} />} text={t("chats_none")} />
-              ) : (
-                <ul className="nxx-list">
-                  {list.chats.map((c) => (
-                    <li key={c.id}>
-                      <button type="button" className={open?.id === c.id ? "is-on" : ""} onClick={() => read(c.id)} disabled={openBusy === c.id}>
-                        <b>{c.title || "—"}</b>
-                        <small>
-                          {when(lang, c.updated_at)} · {t("device")} {c.device}…
-                        </small>
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              )}
-              {list.chats.length < list.total ? (
-                <button type="button" className="nxa-btn is-ghost nxx-more" disabled={busy} onClick={() => load(term, list.chats.length)}>
-                  {t("more")}
-                </button>
-              ) : null}
-            </Card>
-            <Card
-              title={open ? open.title || "—" : t("chats_pick")}
-              sub={open ? `${when(lang, open.updated_at)} · ${open.messages.length}` : undefined}
-              actions={open ? <ConfirmDelete busy={deleting} onConfirm={() => remove(open.id)} /> : null}
-            >
-              {open ? (
-                <div className="nxx-thread">
-                  {open.messages.map((m, i) => (
-                    <div key={i} className={`nxx-msg ${m.k === "u" ? "is-user" : m.k === "b err" ? "is-err" : "is-bot"}`}>
-                      <small>{m.k === "u" ? t("you") : t("bot")}</small>
-                      <p dir="auto">{m.t}</p>
-                      {m.i ? (
-                        <a href={m.i} target="_blank" rel="noreferrer noopener">
-                          {m.i.slice(0, 60)}
-                        </a>
-                      ) : null}
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <Empty icon={<IconChat size={26} />} text={t("chats_pick")} />
-              )}
-            </Card>
-          </div>
-        </>
-      ) : null}
-    </div>
-  );
-}
-
-/* ───────────── AI provayderləri ───────────── */
 
 export function ProvidersSection() {
   const { t, lang } = useStudio();
