@@ -301,11 +301,9 @@ export function OverviewSection({ ov }: { ov: OverviewState }) {
           ) : (
             <ul className="nxa-health">
               <HealthRow t={t} ok={h.supabase} k="h_supabase" />
-              <HealthRow t={t} ok={h.statsStorage} k="h_stats" />
               <HealthRow t={t} ok={h.chatsStorage} k="h_chats" />
               <HealthRow t={t} ok={h.github} k="h_github" />
               <HealthRow t={t} ok={h.ai} k="h_ai" />
-              <HealthRow t={t} ok={h.translate} k="h_translate" />
             </ul>
           )}
         </Card>
@@ -889,7 +887,6 @@ export function SettingsSection({
   const { copied, copy } = useCopied();
   const h = ov.data?.health;
   const envs: [string, boolean | undefined][] = [
-    ["UPSTASH_REDIS_REST_URL · UPSTASH_REDIS_REST_TOKEN", h?.statsStorage],
     ["SUPABASE_URL · SUPABASE_SERVICE_ROLE_KEY", h?.chatsStorage],
     ["GITHUB_TOKEN", h?.github],
     ["GEMINI_API_KEY", h?.ai],
@@ -981,7 +978,6 @@ export function computeAlerts(t: T, ov: OverviewState, apps: StudioAppRow[] | nu
   const h = ov.data?.health;
   if (h && !h.supabase) out.push({ key: "sb", text: t("a_supabase"), go: "settings" });
   if (ov.hitsChecked && !ov.hits) out.push({ key: "hits", text: t("a_hits"), go: "settings" });
-  if (h && !h.statsStorage) out.push({ key: "stats", text: t("a_stats"), go: "ai" });
   if (h && !h.github) out.push({ key: "gh", text: t("a_github"), go: "settings" });
   if (apps && rows) {
     for (const app of appList(apps)) {

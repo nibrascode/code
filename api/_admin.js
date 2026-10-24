@@ -213,7 +213,7 @@ export async function overview({ env = process.env, fetchImpl = globalThis.fetch
     readDays(days, { env, fetchImpl }).catch(() => null),
     chatCount({ env, fetchImpl }),
   ]);
-  return { health: { ...health(env), supabase: up }, stats, chats, serverTime: new Date().toISOString() };
+  return { health: { ...health(env), supabase: up, chatsStorage: chats !== null }, stats, chats, serverTime: new Date().toISOString() };
 }
 
 export async function supaLogout(token, fetchImpl = globalThis.fetch) {
