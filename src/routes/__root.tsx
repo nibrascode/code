@@ -1,4 +1,10 @@
-import { createRootRoute, HeadContent, Outlet, Scripts, useRouterState } from "@tanstack/react-router";
+import {
+  createRootRoute,
+  HeadContent,
+  Outlet,
+  Scripts,
+  useRouterState,
+} from "@tanstack/react-router";
 import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import { VisitMeter } from "@/components/visit-meter";
@@ -9,20 +15,40 @@ import { AppSuggest } from "@/components/app-suggest";
 import appCss from "../styles.css?url";
 import { buildHead, langFromLocation, pageUrl, SITE } from "@/lib/seo";
 import { pdfPairFromPath } from "@/lib/pdf-pairs";
-import { hasProgrammingLocale, programmingLocalePath, programmingFromPath } from "@/lib/programming-path";
+import {
+  hasProgrammingLocale,
+  programmingLocalePath,
+  programmingFromPath,
+} from "@/lib/programming-path";
 import { isCodeSampleSlug } from "@/lib/code-samples";
 import { isCourseSlug } from "@/lib/course/meta";
 import { LANGS, type Lang } from "@/lib/i18n";
 import { faqFromPath, faqPath, faqTopicFromPath, faqTopicPath } from "@/lib/faq";
-import { searchFromPath, searchPath, searchTopicFromPath, searchTopicPath } from "@/lib/search-pages";
-import { compareFromPath, comparePath, compareTopicFromPath, compareTopicPath } from "@/lib/learn-pages";
+import {
+  searchFromPath,
+  searchPath,
+  searchTopicFromPath,
+  searchTopicPath,
+} from "@/lib/search-pages";
+import {
+  compareFromPath,
+  comparePath,
+  compareTopicFromPath,
+  compareTopicPath,
+} from "@/lib/learn-pages";
 import { paketFromPath, paketPath } from "@/lib/paket";
 import { toolFromPath, toolPath, toolsFromPath, toolsPath } from "@/lib/tools";
+import { loadPathGuide } from "@/lib/guides";
+import { GuideSection } from "@/components/guide-section";
 
 export const Route = createRootRoute({
   beforeLoad: ({ location }) => ({
     seoLang: langFromLocation(location.pathname, location.searchStr),
   }),
+  loader: async ({ location }) => {
+    const lang = langFromLocation(location.pathname, location.searchStr);
+    return { pathGuide: await loadPathGuide(location.pathname, lang), pathGuideLang: lang };
+  },
   head: ({ matches }) => {
     const leaf = matches[matches.length - 1];
     const lang = matches[0]?.context.seoLang ?? "az";
@@ -58,7 +84,19 @@ export const Route = createRootRoute({
 function sceneFor(pathname: string) {
   const path = pathname.replace(/^\/(en|tr|ar|ru)(?=\/)/, "");
   if (path.startsWith("/unutma") || path.startsWith("/about")) return "mountains";
-  if (path.startsWith("/why") || path.startsWith("/privacy") || path.startsWith("/contact") || path.startsWith("/nx-studio") || path.startsWith("/resources") || path.startsWith("/resurslar") || path.startsWith("/ru") || path.startsWith("/guides") || path.includes("/programming") || path.includes("/faq") || path.startsWith("/apps"))
+  if (
+    path.startsWith("/why") ||
+    path.startsWith("/privacy") ||
+    path.startsWith("/contact") ||
+    path.startsWith("/nx-studio") ||
+    path.startsWith("/resources") ||
+    path.startsWith("/resurslar") ||
+    path.startsWith("/ru") ||
+    path.startsWith("/guides") ||
+    path.includes("/programming") ||
+    path.includes("/faq") ||
+    path.startsWith("/apps")
+  )
     return "study";
   return "hero";
 }
@@ -83,7 +121,11 @@ function SeoLinks() {
             href={`${SITE}${faqTopicPath(code, topic.item.id)}`}
           />
         ))}
-        <link rel="alternate" {...{ hreflang: "x-default" }} href={`${SITE}${faqTopicPath("az", topic.item.id)}`} />
+        <link
+          rel="alternate"
+          {...{ hreflang: "x-default" }}
+          href={`${SITE}${faqTopicPath("az", topic.item.id)}`}
+        />
       </>
     );
   }
@@ -91,11 +133,23 @@ function SeoLinks() {
   if (searched) {
     return (
       <>
-        <link rel="canonical" href={`${SITE}${searchTopicPath(searched.lang, searched.kind, searched.item.slug)}`} />
+        <link
+          rel="canonical"
+          href={`${SITE}${searchTopicPath(searched.lang, searched.kind, searched.item.slug)}`}
+        />
         {LANGS.map((code) => (
-          <link key={code} rel="alternate" {...{ hreflang: code }} href={`${SITE}${searchTopicPath(code, searched.kind, searched.item.slug)}`} />
+          <link
+            key={code}
+            rel="alternate"
+            {...{ hreflang: code }}
+            href={`${SITE}${searchTopicPath(code, searched.kind, searched.item.slug)}`}
+          />
         ))}
-        <link rel="alternate" {...{ hreflang: "x-default" }} href={`${SITE}${searchTopicPath("az", searched.kind, searched.item.slug)}`} />
+        <link
+          rel="alternate"
+          {...{ hreflang: "x-default" }}
+          href={`${SITE}${searchTopicPath("az", searched.kind, searched.item.slug)}`}
+        />
       </>
     );
   }
@@ -105,9 +159,18 @@ function SeoLinks() {
       <>
         <link rel="canonical" href={`${SITE}${searchPath(searchIndex.lang, searchIndex.kind)}`} />
         {LANGS.map((code) => (
-          <link key={code} rel="alternate" {...{ hreflang: code }} href={`${SITE}${searchPath(code, searchIndex.kind)}`} />
+          <link
+            key={code}
+            rel="alternate"
+            {...{ hreflang: code }}
+            href={`${SITE}${searchPath(code, searchIndex.kind)}`}
+          />
         ))}
-        <link rel="alternate" {...{ hreflang: "x-default" }} href={`${SITE}${searchPath("az", searchIndex.kind)}`} />
+        <link
+          rel="alternate"
+          {...{ hreflang: "x-default" }}
+          href={`${SITE}${searchPath("az", searchIndex.kind)}`}
+        />
       </>
     );
   }
@@ -117,7 +180,12 @@ function SeoLinks() {
       <>
         <link rel="canonical" href={`${SITE}${paketPath(paket)}`} />
         {LANGS.map((code) => (
-          <link key={code} rel="alternate" {...{ hreflang: code }} href={`${SITE}${paketPath(code)}`} />
+          <link
+            key={code}
+            rel="alternate"
+            {...{ hreflang: code }}
+            href={`${SITE}${paketPath(code)}`}
+          />
         ))}
         <link rel="alternate" {...{ hreflang: "x-default" }} href={`${SITE}${paketPath("az")}`} />
       </>
@@ -129,9 +197,18 @@ function SeoLinks() {
       <>
         <link rel="canonical" href={`${SITE}${toolPath(tool.lang, tool.id)}`} />
         {LANGS.map((code) => (
-          <link key={code} rel="alternate" {...{ hreflang: code }} href={`${SITE}${toolPath(code, tool.id)}`} />
+          <link
+            key={code}
+            rel="alternate"
+            {...{ hreflang: code }}
+            href={`${SITE}${toolPath(code, tool.id)}`}
+          />
         ))}
-        <link rel="alternate" {...{ hreflang: "x-default" }} href={`${SITE}${toolPath("az", tool.id)}`} />
+        <link
+          rel="alternate"
+          {...{ hreflang: "x-default" }}
+          href={`${SITE}${toolPath("az", tool.id)}`}
+        />
       </>
     );
   }
@@ -141,7 +218,12 @@ function SeoLinks() {
       <>
         <link rel="canonical" href={`${SITE}${toolsPath(tools)}`} />
         {LANGS.map((code) => (
-          <link key={code} rel="alternate" {...{ hreflang: code }} href={`${SITE}${toolsPath(code)}`} />
+          <link
+            key={code}
+            rel="alternate"
+            {...{ hreflang: code }}
+            href={`${SITE}${toolsPath(code)}`}
+          />
         ))}
         <link rel="alternate" {...{ hreflang: "x-default" }} href={`${SITE}${toolsPath("az")}`} />
       </>
@@ -151,11 +233,23 @@ function SeoLinks() {
   if (compared) {
     return (
       <>
-        <link rel="canonical" href={`${SITE}${compareTopicPath(compared.lang, compared.item.slug)}`} />
+        <link
+          rel="canonical"
+          href={`${SITE}${compareTopicPath(compared.lang, compared.item.slug)}`}
+        />
         {LANGS.map((code) => (
-          <link key={code} rel="alternate" {...{ hreflang: code }} href={`${SITE}${compareTopicPath(code, compared.item.slug)}`} />
+          <link
+            key={code}
+            rel="alternate"
+            {...{ hreflang: code }}
+            href={`${SITE}${compareTopicPath(code, compared.item.slug)}`}
+          />
         ))}
-        <link rel="alternate" {...{ hreflang: "x-default" }} href={`${SITE}${compareTopicPath("az", compared.item.slug)}`} />
+        <link
+          rel="alternate"
+          {...{ hreflang: "x-default" }}
+          href={`${SITE}${compareTopicPath("az", compared.item.slug)}`}
+        />
       </>
     );
   }
@@ -165,7 +259,12 @@ function SeoLinks() {
       <>
         <link rel="canonical" href={`${SITE}${comparePath(compareIndex.lang)}`} />
         {LANGS.map((code) => (
-          <link key={code} rel="alternate" {...{ hreflang: code }} href={`${SITE}${comparePath(code)}`} />
+          <link
+            key={code}
+            rel="alternate"
+            {...{ hreflang: code }}
+            href={`${SITE}${comparePath(code)}`}
+          />
         ))}
         <link rel="alternate" {...{ hreflang: "x-default" }} href={`${SITE}${comparePath("az")}`} />
       </>
@@ -176,16 +275,31 @@ function SeoLinks() {
       <>
         <link rel="canonical" href={`${SITE}${faq.path}`} />
         {LANGS.map((code) => (
-          <link key={code} rel="alternate" {...{ hreflang: code }} href={`${SITE}${faqPath(code)}`} />
+          <link
+            key={code}
+            rel="alternate"
+            {...{ hreflang: code }}
+            href={`${SITE}${faqPath(code)}`}
+          />
         ))}
         <link rel="alternate" {...{ hreflang: "x-default" }} href={`${SITE}/faq`} />
       </>
     );
   }
-  if (programming && (isCodeSampleSlug(programming.slug) || isCourseSlug(programming.slug) || programming.lang !== "az" || hasProgrammingLocale("en", programming.slug))) {
+  if (
+    programming &&
+    (isCodeSampleSlug(programming.slug) ||
+      isCourseSlug(programming.slug) ||
+      programming.lang !== "az" ||
+      hasProgrammingLocale("en", programming.slug))
+  ) {
     const canonical = programmingLocalePath(programming.lang, programming.slug);
     const alternates = (["az", "en", "tr", "ar", "ru"] as const).filter(
-      (code) => code === "az" || isCodeSampleSlug(programming.slug) || isCourseSlug(programming.slug) || hasProgrammingLocale(code, programming.slug),
+      (code) =>
+        code === "az" ||
+        isCodeSampleSlug(programming.slug) ||
+        isCourseSlug(programming.slug) ||
+        hasProgrammingLocale(code, programming.slug),
     );
     return (
       <>
@@ -198,7 +312,11 @@ function SeoLinks() {
             href={`${SITE}${programmingLocalePath(code, programming.slug)}`}
           />
         ))}
-        <link rel="alternate" {...{ hreflang: "x-default" }} href={`${SITE}${programmingLocalePath("az", programming.slug)}`} />
+        <link
+          rel="alternate"
+          {...{ hreflang: "x-default" }}
+          href={`${SITE}${programmingLocalePath("az", programming.slug)}`}
+        />
       </>
     );
   }
@@ -255,7 +373,9 @@ function RootDocument() {
         <SeoLinks />
       </head>
       <body
-        className={isHome ? "is-home" : isStudio ? "is-studio" : isPlanner ? "is-planner" : undefined}
+        className={
+          isHome ? "is-home" : isStudio ? "is-studio" : isPlanner ? "is-planner" : undefined
+        }
         data-scene={isHome || isStudio || isPlanner ? undefined : sceneFor(pathname)}
       >
         <PreviewHostBridge />
@@ -265,6 +385,7 @@ function RootDocument() {
           <I18nProvider>
             {isHome || isStudio || isPlanner ? null : <SiteHeader />}
             <Outlet />
+            <PathGuide />
             {isHome || isStudio || isPlanner || isPlay ? null : <AppSuggest />}
             {isHome || isStudio || isPlanner || isPlay ? null : <SiteFooter />}
           </I18nProvider>
@@ -272,5 +393,19 @@ function RootDocument() {
         <Scripts />
       </body>
     </html>
+  );
+}
+function PathGuide() {
+  const data = Route.useLoaderData();
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+  if (!data?.pathGuide) return null;
+  return (
+    <div className="page-guide-wrap">
+      <GuideSection
+        guide={data.pathGuide}
+        lang={data.pathGuideLang}
+        game={/\/oyun(\/|$)/.test(pathname)}
+      />
+    </div>
   );
 }

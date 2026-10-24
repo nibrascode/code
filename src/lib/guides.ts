@@ -1,7 +1,7 @@
 import type { Lang } from "@/lib/i18n";
 
 export type Guide = { about: string[]; steps?: string[]; uses: string[]; faq: [string, string][] };
-export type GuideKind = "tools" | "pdf" | "games" | "articles";
+export type GuideKind = "tools" | "pdf" | "games" | "articles" | "pages";
 
 const FILES = import.meta.glob<{ default: Record<Lang, Guide> }>("../data/guides/*/*.json");
 
@@ -25,4 +25,15 @@ export const GUIDE_HEAD: Record<Lang, { about: string; steps: string; stepsGame:
 export async function loadGuideAll(kind: GuideKind | "articles", id: string): Promise<Record<Lang, Guide> | null> {
   const load = FILES[`../data/guides/${kind}/${id}.json`];
   return load ? (await load()).default : null;
+}
+
+/** Guide keyed by page path (locale prefix stripped), e.g. /en/faq/nibras-pdf → pages/faq-nibras-pdf. */
+export async function loadPathGuide(pathname: string, lang: Lang): Promise<Guide | null> {
+  const path = pathname.replace(/^\/(en|ru|ar|tr)(?=\/|$)/, "").replace(/\/$/, "");
+  const id = path.replace(/^\//, "").toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  if (!id) return null;
+  const load = FILES[`../data/guides/pages/${id}.json`];
+  if (!load) return null;
+  const data = (await load()).default;
+  return data[lang] ?? data.en ?? null;
 }
