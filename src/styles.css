@@ -11451,3 +11451,22 @@ body[data-scene] .ns-app::before { content: ""; position: absolute; z-index: -1;
 .page-guide summary { cursor: pointer; list-style: none; }
 .page-guide summary h3 { display: inline; margin: 0; font-size: 1.02rem; }
 .page-guide details p { margin: 10px 0 0; }
+
+/* Readable body text on /nece, /movzu, /soz topic pages (display font only for headings). */
+.why-lead.topic-body {
+  font-family: var(--font-sans);
+  font-size: 17.5px;
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: 0;
+  color: #e9ecf6;
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+}
+.why-lead.topic-body p { margin: 0 0 14px; max-width: 40rem; }
+.why-lead.topic-body .faq-points li { line-height: 1.65; }
+html[lang="ar"] .why-lead.topic-body,
+.why-lead.topic-body[dir="rtl"] { font-family: "IBM Plex Sans Arabic", var(--font-sans); line-height: 1.8; }
+.page-guide p, .page-guide li { line-height: 1.7; }
+.why-lead.topic-body .faq-note { line-height: 1.65; }

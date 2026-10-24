@@ -19,6 +19,8 @@ type SearchItem = {
   /** Same source block on every language page. */
   code?: string;
   piece: Record<Lang, SearchPiece>;
+  /** Internal links shown under the text (path without locale prefix). */
+  links?: readonly { path: string; label: Record<Lang, string> }[];
 };
 
 type SearchSection = {

@@ -68,7 +68,7 @@ export function SearchTopic({
       {body ? (
         <ApkBody body={body} lang={lang} />
       ) : (
-      <div className="why-lead">
+      <div className="why-lead topic-body">
           {text.lead.split(/\n\n+/).map((para) => (
             <p key={para}>
               <Rich text={para} />
@@ -89,6 +89,15 @@ export function SearchTopic({
           {item.code ? <pre dir="ltr">{item.code}</pre> : null}
         </div>
       )}
+      {item.links?.length ? (
+        <nav className="faq-links" aria-label={text.title}>
+          {item.links.map((link) => (
+            <a key={link.path} href={localeHref(lang, link.path)}>
+              {link.label[lang]}
+            </a>
+          ))}
+        </nav>
+      ) : null}
       {pageTools(slug).length ? (
         <div className="prog-fold-body">
           <h2>{TOOLS_PAGE.toolsFor[lang]}</h2>
