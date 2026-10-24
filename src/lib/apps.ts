@@ -1,6 +1,13 @@
 import type { TKey } from "@/lib/i18n";
 
-export type AppSlug = "nibras-arabic" | "nibras-docs" | "nibras-plans" | "nibras-pdf" | "nibras-qr";
+export type AppSlug =
+  | "nibras-arabic"
+  | "nibras-docs"
+  | "nibras-plans"
+  | "nibras-pdf"
+  | "nibras-qr"
+  | "nibras-office"
+  | "majmu-al-fatawa";
 
 export type StudioApp = {
   slug: AppSlug;
@@ -57,6 +64,7 @@ export const STUDIO_APPS: StudioApp[] = [
   {
     slug: "nibras-pdf",
     name: "Nibras PDF",
+    icon: "/apps/nibras-pdf.jpg",
     playStoreUrl: "https://play.google.com/store/apps/details?id=com.nibras.pdf",
     leadKey: "pdf_lead",
     bodyKey: "pdf_body",
@@ -71,6 +79,26 @@ export const STUDIO_APPS: StudioApp[] = [
     leadKey: "qr_lead",
     bodyKey: "qr_body",
     features: ["qr_f1", "qr_f2", "qr_f3"],
+    shots: [],
+  },
+  {
+    slug: "nibras-office",
+    name: "Nibras Office",
+    icon: "/apps/nibras-office.jpg",
+    playStoreUrl: null,
+    leadKey: "office_lead",
+    bodyKey: "office_body",
+    features: ["office_f1", "office_f2", "office_f3"],
+    shots: [],
+  },
+  {
+    slug: "majmu-al-fatawa",
+    name: "مجموع الفتاوى",
+    icon: "/apps/majmu-al-fatawa.jpg",
+    playStoreUrl: null,
+    leadKey: "fatawa_lead",
+    bodyKey: "fatawa_body",
+    features: ["fatawa_f1", "fatawa_f2", "fatawa_f3"],
     shots: [],
   },
 ];

@@ -1,7 +1,7 @@
 import { createFileRoute, notFound, redirect } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { AppDownload } from "@/components/app-download";
-import { SimpleAppPage } from "@/components/simple-app-page";
+import { StoreAppPage } from "@/components/store/store-app-page";
 import { getAppBySlug, type StudioApp } from "@/lib/apps";
 import { localeHref } from "@/lib/locale-path";
 import { readLang } from "@/lib/seo";
@@ -37,7 +37,7 @@ export const Route = createFileRoute("/apps/$slug")({
 });
 
 export function AppSlugView({ data }: { data: AppPageData }) {
-  if (data.kind === "built") return <SimpleAppPage app={data.app} live={data.row} />;
+  if (data.kind === "built") return <StoreAppPage app={data.app} live={data.row} />;
   return <ExtraApp row={data.row} />;
 }
 

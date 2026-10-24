@@ -294,6 +294,20 @@ const PAGES: Record<string, Copy> = {
       features: ["Plan kurmak", "Sade takip", "Net raporlar"],
     },
   },
+  "/apps/nibras-office": {
+    az: { title: "Nibras Office — oflayn PDF redaktoru", description: "Nibras Office Android üçün oflayn PDF redaktorudur: qələm, marker, fiqurlar, imza, səhifələri düzənləmək, axtarış, OCR, şifrə, çap və paylaşım. Fayllar cihazınızda qalır. Nibras Code tətbiqi.", features: ["PDF-də qələm, marker və imza", "Səhifələri düzənləmək", "Axtarış, OCR və şifrə"] },
+    en: { title: "Nibras Office — offline PDF editor for Android", description: "Nibras Office is an offline PDF editor for Android: pen, highlighter, shapes, signature, page organizing, search, OCR, password, print and share. Your files stay on your device. An app by Nibras Code.", features: ["Pen, highlighter and signature on PDFs", "Organize pages", "Search, OCR and password"] },
+    ar: { title: "Nibras Office — محرر PDF بلا إنترنت", description: "Nibras Office محرر PDF لأندرويد يعمل دون إنترنت: قلم وتظليل وأشكال وتوقيع وتنظيم الصفحات وبحث وOCR وكلمة مرور وطباعة ومشاركة. ملفاتك تبقى على جهازك.", features: ["قلم وتظليل وتوقيع", "تنظيم الصفحات", "بحث وOCR وكلمة مرور"] },
+    ru: { title: "Nibras Office — офлайн-редактор PDF для Android", description: "Nibras Office — офлайн-редактор PDF для Android: ручка, маркер, фигуры, подпись, упорядочивание страниц, поиск, OCR, пароль, печать и отправка. Файлы остаются на устройстве.", features: ["Ручка, маркер и подпись", "Работа со страницами", "Поиск, OCR и пароль"] },
+    tr: { title: "Nibras Office — çevrimdışı PDF düzenleyici", description: "Nibras Office, Android için çevrimdışı PDF düzenleyicidir: kalem, fosforlu kalem, şekiller, imza, sayfa düzenleme, arama, OCR, şifre, yazdırma ve paylaşma. Dosyalarınız cihazınızda kalır.", features: ["Kalem, fosforlu kalem ve imza", "Sayfa düzenleme", "Arama, OCR ve şifre"] },
+  },
+  "/apps/majmu-al-fatawa": {
+    az: { title: "Məcmu' əl-Fətava — İbn Teymiyyə, oflayn oxu", description: "İbn Teymiyyənin «Məcmu' əl-Fətava» əsəri 35 cildlə, çap nəşrinin səhifə nömrələri ilə, internetsiz. Axtarış, cild/səhifəyə keçid, oxu rejimləri. Nibras Code tətbiqi.", features: ["35 cild, tam oflayn", "Bütün cildlərdə axtarış", "Cild/səhifəyə keçid"] },
+    en: { title: "Majmu' al-Fatawa — Ibn Taymiyyah, offline reader", description: "Ibn Taymiyyah's Majmu' al-Fatawa in 35 volumes with the printed edition's page numbers, fully offline. Search, jump to volume/page, reading modes. An app by Nibras Code.", features: ["35 volumes, fully offline", "Search across all volumes", "Jump to volume/page"] },
+    ar: { title: "مجموع الفتاوى — ابن تيمية، دون اتصال", description: "مجموع فتاوى شيخ الإسلام ابن تيمية في 35 مجلدًا مع ترقيم الطبعة المطبوعة، يعمل دون إنترنت. بحث وانتقال إلى ج/ص وأوضاع قراءة.", features: ["35 مجلدًا دون اتصال", "بحث في جميع المجلدات", "الانتقال إلى ج/ص"] },
+    ru: { title: "Маджму аль-Фатава — Ибн Таймия, офлайн", description: "«Маджму аль-Фатава» Ибн Таймии в 35 томах с нумерацией печатного издания, полностью офлайн. Поиск, переход к тому/странице, режимы чтения.", features: ["35 томов офлайн", "Поиск по всем томам", "Переход к тому/странице"] },
+    tr: { title: "Mecmû'u'l-Fetâvâ — İbn Teymiyye, çevrimdışı", description: "İbn Teymiyye'nin Mecmû'u'l-Fetâvâ'sı 35 cilt, basılı baskının sayfa numaralarıyla, tamamen çevrimdışı. Arama, cilt/sayfaya geçiş, okuma modları.", features: ["35 cilt, çevrimdışı", "Tüm ciltlerde arama", "Cilt/sayfaya geçiş"] },
+  },
   "/apps": {
     az: {
       title: "Tətbiqlər — Nibras Code",

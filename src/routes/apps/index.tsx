@@ -18,11 +18,11 @@ export const Route = createFileRoute("/apps/")({
   component: AppsPage,
 });
 
-const ORDER: AppSlug[] = ["nibras-arabic", "nibras-pdf", "nibras-qr", "nibras-docs", "nibras-plans"];
+const ORDER: AppSlug[] = ["nibras-arabic", "nibras-docs", "nibras-office", "nibras-pdf", "nibras-qr", "majmu-al-fatawa", "nibras-plans"];
 
 const STATUS: Partial<Record<AppSlug, TKey>> = {
   "nibras-plans": "soon",
-  "nibras-docs": "soon",
+  "majmu-al-fatawa": "soon",
 };
 
 export function AppsIndex({ apps }: { apps: readonly StudioAppRow[] | null | undefined }) {
@@ -48,7 +48,7 @@ export function AppsIndex({ apps }: { apps: readonly StudioAppRow[] | null | und
           const live = rows?.find((row) => row.slug === slug);
           if (live?.visible === false) return null;
           const badge = statusText(
-            slug === "nibras-pdf" ? "ready" : slug === "nibras-docs" && live?.status !== "ready" ? "soon" : live?.status,
+            slug === "nibras-pdf" ? "ready" : live?.status,
             STATUS[slug] ? t(STATUS[slug]!) : null,
             labels,
           );
@@ -56,7 +56,7 @@ export function AppsIndex({ apps }: { apps: readonly StudioAppRow[] | null | und
           return (
             <div key={slug} className="app-row-slot">
               <a href={localeHref(lang, `/apps/${slug}`)} className="app-row">
-                <img src={live?.icon_url || app.icon} alt="" />
+                <img src={live?.icon_url || app.icon.replace(/\.(jpg|png)$/, ".webp")} alt="" width={56} height={56} loading="lazy" decoding="async" />
                 <span>
                   {badge ? <em>{badge}</em> : null}
                   <b>{app.name}</b>
