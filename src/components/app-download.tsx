@@ -1,3 +1,4 @@
+import { syncedPlayUrl } from "@/lib/apps";
 import type { StudioApp } from "@/lib/apps";
 import { useI18n } from "@/lib/i18n-context";
 import { countDownload } from "@/components/visit-meter";
@@ -46,7 +47,7 @@ function Mark({ id }: { id: string }) {
 export function AppDownload({ app, live }: { app: StudioApp; live?: StudioAppRow | null }) {
   const { t } = useI18n();
   const stores = storeLinks({
-    play_url: live?.play_url || app.playStoreUrl || "",
+    play_url: syncedPlayUrl(app.slug, live?.play_url || app.playStoreUrl) || "",
     huawei_url: live?.huawei_url || app.huaweiStoreUrl || "",
     appstore_url: live?.appstore_url,
     galaxy_url: live?.galaxy_url,

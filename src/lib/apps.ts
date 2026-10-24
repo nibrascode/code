@@ -1,4 +1,17 @@
 import type { TKey } from "@/lib/i18n";
+import PLAY_FACTS from "@/data/play-facts.json";
+
+type PlayFact = { listed?: boolean; playUrl?: string };
+const PLAY_MAP = ((PLAY_FACTS as { apps?: Record<string, PlayFact> }).apps ??
+  (PLAY_FACTS as unknown as Record<string, PlayFact>));
+
+/** Play URL from the synced public Play data: listed → Play URL, unlisted (404) → null, unknown → fallback. */
+export function syncedPlayUrl(slug: string, fallback?: string | null): string | null {
+  const f = PLAY_MAP[slug];
+  if (f?.listed === true && f.playUrl) return f.playUrl;
+  if (f?.listed === false) return null;
+  return (fallback || "").trim() || null;
+}
 
 export type AppSlug =
   | "nibras-arabic"
@@ -103,15 +116,19 @@ export const STUDIO_APPS: StudioApp[] = [
   },
 ];
 
+for (const app of STUDIO_APPS) app.playStoreUrl = syncedPlayUrl(app.slug, app.playStoreUrl);
+
 export function getAppBySlug(slug: string): StudioApp | undefined {
   return STUDIO_APPS.find((app) => app.slug === slug);
 }
 
 export function appStoreLinks(
-  app: Pick<StudioApp, "playStoreUrl" | "huaweiStoreUrl">,
+  app: Pick<StudioApp, "playStoreUrl" | "huaweiStoreUrl"> & { slug?: string },
   live?: { play_url?: string; huawei_url?: string } | null,
 ) {
-  const play = (live?.play_url || app.playStoreUrl || "").trim();
+  const play = app.slug
+    ? syncedPlayUrl(app.slug, live?.play_url || app.playStoreUrl) || ""
+    : (live?.play_url || app.playStoreUrl || "").trim();
   const huawei = (live?.huawei_url || app.huaweiStoreUrl || "").trim();
   return [
     play ? { id: "play", label: "Google Play", href: play } : null,
