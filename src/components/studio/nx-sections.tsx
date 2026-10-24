@@ -287,7 +287,7 @@ export function ReleasesSection() {
                         <td>
                           <b>{app.name}</b>
                         </td>
-                        <td>{play?.listed ? <Pill tone="ok">{t("rel_play")}</Pill> : <Pill tone="off">{t("rel_notlisted")}</Pill>}</td>
+                        <td>{play?.listed && play.playUrl ? <a href={play.playUrl} target="_blank" rel="noreferrer"><Pill tone="ok">{t("rel_play")} ↗</Pill></a> : app.slug === "nibras-office" ? <Pill tone="warn">{t("rel_soon")}</Pill> : <Pill tone="off">{t("rel_notlisted")}</Pill>}</td>
                         <td>{play?.version || facts.version || "—"}</td>
                         <td>{play?.updated || facts.updated || "—"}</td>
                         <td>{size || "—"}</td>
@@ -441,8 +441,10 @@ export function CoversSection() {
         </Card>
       ) : data ? (
         <>
-          <div className="nxa-kpis is-three">
-            <Kpi icon={<IconCheck size={20} />} tone="teal" label={t("cov_total")} value={fmtNum(lang, data.covers.length)} />
+          <div className="nxa-kpis">
+            <Kpi icon={<IconCheck size={20} />} tone="teal" label={t("cov_gen")} value={fmtNum(lang, data.counts?.gen ?? data.covers.length)} />
+            <Kpi icon={<IconLibrary size={20} />} tone="blue" label={t("cov_user")} value={fmtNum(lang, data.counts?.user ?? 0)} />
+            <Kpi icon={<IconCheck size={20} />} tone="teal" label={t("cov_docs")} value={fmtNum(lang, data.counts?.docs ?? 0)} />
             <Kpi icon={<IconSpark size={20} />} tone="violet" label={t("cov_score")} value={avg ? avg.toFixed(1) : "—"} />
             <Kpi icon={<IconCalendar size={20} />} tone="blue" label={t("cov_runs")} value={data.runs[0] ? when(lang, data.runs[0].at) : "—"} />
           </div>
@@ -462,8 +464,13 @@ export function CoversSection() {
               <Empty text={t("cov_none")} />
             )}
           </Card>
-          {data.runs.length ? (
+          {data.runs.length || data.actionsUrl ? (
             <Card title={t("cov_runs")}>
+              {data.actionsUrl ? (
+                <p>
+                  <a href={data.actionsUrl} target="_blank" rel="noreferrer">{t("cov_actions")} ↗</a>
+                </p>
+              ) : null}
               <ul className="nxx-rows">
                 {data.runs.map((r, i) => (
                   <li key={i}>
@@ -568,7 +575,9 @@ export function PulseCard({ go }: { go: (tab: string) => void }) {
   const [dep, setDep] = useState<Deploys | null>(null);
   const [prov, setProv] = useState<Providers | null>(null);
   const [lib, setLib] = useState<Library | null>(null);
+  const [apps, setApps] = useState<AppsData | null>(null);
   useEffect(() => {
+    nxGet<AppsData>("apps").then(setApps).catch(() => undefined);
     nxGet<Deploys>("deploys").then(setDep).catch(() => undefined);
     nxGet<Providers>("providers").then(setProv).catch(() => undefined);
     nxGet<Library>("library").then(setLib).catch(() => undefined);
@@ -582,8 +591,32 @@ export function PulseCard({ go }: { go: (tab: string) => void }) {
       <b>{value}</b>
     </button>
   );
+  const down = conf.filter((p) => !p.ok);
+  const lastSync = apps?.sync?.[0];
+  const syncBad = apps ? !lastSync || lastSync.conclusion === "failure" || Date.now() - new Date(lastSync.at).getTime() > 12 * 3600_000 : false;
+  const alerts: { tab: string; text: string }[] = [];
+  if (down.length) alerts.push({ tab: "providers", text: `${t("al_prov")}: ${down.map((p) => p.name).join(", ")}` });
+  if (syncBad) alerts.push({ tab: "releases", text: t("al_play") });
+  if (last && last.state === "failure") alerts.push({ tab: "deploys", text: t("al_deploy") });
+  if (lib && !lib.up) alerts.push({ tab: "libstats", text: t("al_lib") });
+  const ready = prov && apps && dep && lib;
   return (
     <Card title={t("pulse")}>
+      {ready ? (
+        alerts.length ? (
+          <ul className="nxx-rows">
+            {alerts.map((a, i) => (
+              <li key={i}>
+                <button type="button" className="nxx-grow" onClick={() => go(a.tab)} style={{ textAlign: "start", background: "none", border: 0, color: "inherit", cursor: "pointer" }}>
+                  <Pill tone="warn">{t("al_title")}</Pill> {a.text}
+                </button>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p><Pill tone="ok">{t("al_ok")}</Pill></p>
+        )
+      ) : null}
       <div className="nxx-pulses">
         {tile("deploys", "dep_last", last ? (last.state === "success" ? t("dep_success") : last.state === "failure" ? t("dep_failure") : t("dep_pending")) : "…", last ? depTone(last.state) : "off")}
         {tile("providers", "prov_working", prov ? `${conf.filter((p) => p.ok).length} / ${conf.length}` : "…", prov ? (conf.every((p) => p.ok) ? "ok" : "warn") : "off")}

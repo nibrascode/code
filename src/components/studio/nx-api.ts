@@ -58,7 +58,7 @@ export type AppsData = {
   releases: { repo: string; slug: string; ok: boolean; items: Release[] }[];
   checkedAt: string;
 };
-export type Cover = { file: string; provider: string; model: string; premium: number | null; judge: string; w: number | null; h: number | null; created: string };
-export type Covers = { ok: boolean; code?: number; covers: Cover[]; runs: { name: string; status: string; conclusion: string | null; at: string; url: string }[] };
+export type Cover = { file: string; source?: "gen" | "user"; provider: string; model: string; premium: number | null; judge: string; w: number | null; h: number | null; created: string };
+export type Covers = { ok: boolean; code?: number; covers: Cover[]; counts?: { gen: number; user: number; docs: number }; actionsUrl?: string; runs: { name: string; status: string; conclusion: string | null; at: string; url: string }[] };
 export type Deploy = { id: number; env: string; sha: string; msg: string; created: string; state: string; updated: string; url: string; live: string };
 export type Deploys = { ok: boolean; code?: number; items: Deploy[]; checkedAt?: string };

@@ -14,7 +14,7 @@ const RELEASE_REPOS = [
   { repo: "nibrascode/quran-tartil", slug: "" },
 ];
 const SLUG_RE = /^[a-z0-9-]{2,40}$/;
-const COVER_RE = /^[0-9]{4}-[0-9]{2}-[0-9]{2}\/[A-Za-z0-9_-]{4,80}\.(webp|png|jpe?g)$/;
+const COVER_RE = /^(?:[0-9]{4}-[0-9]{2}-[0-9]{2}|user)\/[A-Za-z0-9_-]{4,80}\.(webp|png|jpe?g)$/;
 
 const envOf = (env, ...keys) => {
   for (const k of keys) {
@@ -242,28 +242,40 @@ export async function runPlaySync({ env = process.env, fetchImpl = globalThis.fe
 // ---------- Üz qabıqları (cover-gen) ----------
 export async function coverList({ env = process.env, fetchImpl = globalThis.fetch, fresh = false } = {}) {
   return cached("covers", fresh ? 0 : 300_000, async () => {
-    const [file, runs] = await Promise.all([
+    const [file, runs, tree] = await Promise.all([
       ghJsonFile(env, COVER_REPO, "covers/approved.json", fetchImpl),
       gh(env, `/repos/${COVER_REPO}/actions/runs?per_page=5`, { fetchImpl }),
+      gh(env, `/repos/${COVER_REPO}/git/trees/main?recursive=1`, { fetchImpl }),
     ]);
-    if (!file.ok) return { ok: false, code: file.status, covers: [], runs: [] };
-    const list = Array.isArray(file.json) ? file.json : Array.isArray(file.json?.covers) ? file.json.covers : [];
-    const covers = list
-      .filter((c) => c && COVER_RE.test(String(c.file || "")))
-      .map((c) => ({
-        file: c.file,
-        provider: String(c.provider || ""),
-        model: String(c.model || ""),
-        premium: Number(c.premium) || null,
-        judge: String(c.judge || ""),
-        w: Array.isArray(c.size) ? Number(c.size[0]) || null : null,
-        h: Array.isArray(c.size) ? Number(c.size[1]) || null : null,
-        created: c.created_utc || "",
-      }))
+    if (!file.ok && !tree.ok) return { ok: false, code: file.status, covers: [], runs: [] };
+    const list = file.ok ? (Array.isArray(file.json) ? file.json : Array.isArray(file.json?.covers) ? file.json.covers : []) : [];
+    const meta = new Map(list.filter((c) => c && c.file).map((c) => [String(c.file), c]));
+    const files = tree.ok && tree.data && Array.isArray(tree.data.tree)
+      ? tree.data.tree.filter((x) => x.type === "blob" && x.path.startsWith("covers/")).map((x) => x.path.slice(7)).filter((f) => COVER_RE.test(f))
+      : [...meta.keys()].filter((f) => COVER_RE.test(f));
+    const covers = files
+      .map((f) => {
+        const c = meta.get(f) || {};
+        const user = f.startsWith("user/");
+        const day = user ? "" : f.slice(0, 10);
+        return {
+          file: f,
+          source: user ? "user" : "gen",
+          provider: String(c.provider || (user ? "Maher" : "")),
+          model: String(c.model || ""),
+          premium: Number(c.premium) || null,
+          judge: String(c.judge || ""),
+          w: Array.isArray(c.size) ? Number(c.size[0]) || null : null,
+          h: Array.isArray(c.size) ? Number(c.size[1]) || null : null,
+          created: c.created_utc || (day ? `${day}T12:00:00Z` : ""),
+        };
+      })
       .sort((a, b) => String(b.created).localeCompare(String(a.created)));
     return {
       ok: true,
       covers,
+      counts: { gen: covers.filter((c) => c.source === "gen").length, user: covers.filter((c) => c.source === "user").length, docs: 54 },
+      actionsUrl: `https://github.com/${COVER_REPO}/actions`,
       runs: runs.ok && runs.data ? (runs.data.workflow_runs || []).map((w) => ({ name: w.name, status: w.status, conclusion: w.conclusion, at: w.run_started_at || w.created_at, url: w.html_url })) : [],
     };
   });
