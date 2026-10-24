@@ -1,6 +1,7 @@
 import type { Lang } from "@/lib/i18n";
 import { APK_ERROR_INDEX } from "@/lib/apk-errors-index";
 import { LETTER_GAPS } from "@/lib/letter-gaps";
+import { EXTRA_HOWS, EXTRA_TOPICS } from "@/lib/search-extra";
 
 export type SearchKind = "soz" | "xeta" | "movzu" | "nece";
 
@@ -1462,7 +1463,7 @@ export const SEARCH: Record<SearchKind, SearchSection> = {
       "ما هو ChatGPT وGemini وClaude، وما هو prompt، وصنع تطبيق بالذكاء الاصطناعي. رسم GPT-6 وصورة Gemini ولوحة Claude.",
       "Что такое ChatGPT, Gemini и Claude, что такое prompt и как сделать приложение с ИИ. График GPT-6, картинка Gemini и панель Claude.",
     ),
-    items: TOPICS,
+    items: [...TOPICS, ...EXTRA_TOPICS],
   },
   nece: {
     kind: "nece",
@@ -1488,7 +1489,7 @@ export const SEARCH: Record<SearchKind, SearchSection> = {
       "كيف تُكتب أول صفحة HTML، وكيف يُشغَّل أول برنامج Python، وكيف يُفتح حساب Play Console.",
       "Как написать первую страницу HTML, запустить первую программу Python и открыть аккаунт Play Console.",
     ),
-    items: HOWS,
+    items: [...HOWS, ...EXTRA_HOWS],
   },
 };
 
