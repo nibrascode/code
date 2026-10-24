@@ -1,5 +1,6 @@
 import type { Lang } from "@/lib/i18n";
-import type { AppSlug } from "@/lib/apps";
+import type { AppSlug, StudioApp } from "@/lib/apps";
+import PLAY from "@/data/play-facts.json";
 
 /** Real, verifiable facts only. Unknown values stay undefined and are not shown. */
 export type StoreFacts = {
@@ -10,6 +11,8 @@ export type StoreFacts = {
   released?: string;
   downloads?: string;
   iap?: boolean;
+  /** Play version the manual `size` belongs to; size is hidden once Play reports a newer version. */
+  sizeVersion?: string;
   minAndroid?: string;
   category?: Partial<Record<Lang, string>> & { en: string };
   apkUrl?: string;
@@ -83,6 +86,7 @@ export const STORE: Partial<Record<AppSlug, StoreFacts>> = {
     updated: "2026-10-19",
     released: "2026-10-21",
     size: "50.10 MB",
+    sizeVersion: "1.0.5",
     minAndroid: "7.0",
     iap: true,
     pkg: "com.nibras.pdf",
@@ -139,4 +143,28 @@ export function shotsFor(facts: StoreFacts | undefined, lang: Lang): readonly st
 
 export function pick<T extends string>(rec: (Partial<Record<Lang, T>> & { en: T }) | undefined, lang: Lang) {
   return rec ? (rec[lang] ?? rec.en) : undefined;
+}
+
+type PlayFacts = { listed: boolean; playUrl?: string; version?: string; updated?: string; minAndroid?: string };
+const PLAY_FACTS = PLAY as Partial<Record<string, PlayFacts>>;
+
+/** Manual facts merged with the auto-synced Play data (scripts/sync-play.mjs). */
+export function effectiveApp(app: StudioApp): { app: StudioApp; facts: StoreFacts } {
+  const base: StoreFacts = STORE[app.slug] ?? { privacyUrl: `/privacy/${app.slug}` };
+  const play = PLAY_FACTS[app.slug];
+  if (!play) return { app, facts: base };
+  if (!play.listed) return { app: { ...app, playStoreUrl: null }, facts: base };
+  const facts: StoreFacts = {
+    ...base,
+    soon: false,
+    version: play.version ?? base.version,
+    updated: play.updated ?? base.updated,
+    minAndroid: play.minAndroid ?? base.minAndroid,
+  };
+  if (base.sizeVersion && play.version && play.version !== base.sizeVersion) delete facts.size;
+  return { app: { ...app, playStoreUrl: play.playUrl ?? app.playStoreUrl }, facts };
+}
+
+export function playListed(slug: string): boolean | undefined {
+  return PLAY_FACTS[slug]?.listed;
 }

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, ChevronDown, Download, ExternalLink, Lock, ShieldCheck, X } from "lucide-react";
 import type { Lang } from "@/lib/i18n";
 import { STUDIO_APPS, appStoreLinks, type StudioApp } from "@/lib/apps";
-import { STORE, pick, shotsFor } from "@/lib/app-store";
+import { effectiveApp, playListed, pick, shotsFor } from "@/lib/app-store";
 import { NIBRAS_PDF_ABOUT } from "@/lib/nibras-pdf-about";
 import { useI18n } from "@/lib/i18n-context";
 import { localeHref } from "@/lib/locale-path";
@@ -83,13 +83,13 @@ function Lightbox({ shots, start, name, onClose, l }: { shots: readonly string[]
   );
 }
 
-export function StoreAppPage({ app, live }: { app: StudioApp; live?: StudioAppRow | null }) {
+export function StoreAppPage({ app: rawApp, live }: { app: StudioApp; live?: StudioAppRow | null }) {
+  const { app, facts: f } = effectiveApp(rawApp);
   const { t, lang } = useI18n();
   const l = L[lang] ?? L.en;
-  const f = STORE[app.slug] ?? { privacyUrl: `/privacy/${app.slug}` };
   const shots = shotsFor(f, lang);
   const shotsEnglishFallback = shots.length > 0 && !f.shots?.[lang] && lang !== "en";
-  const stores = appStoreLinks(app, live);
+  const stores = appStoreLinks(app, live && playListed(app.slug) === false ? { ...live, play_url: "" } : live);
   const [open, setOpen] = useState<number | null>(null);
   const [more, setMore] = useState(false);
   const icon = live?.icon_url || app.icon;
@@ -315,7 +315,7 @@ export function StoreAppPage({ app, live }: { app: StudioApp; live?: StudioAppRo
             <a key={a.slug} href={localeHref(lang, `/apps/${a.slug}`)}>
               <img src={iconWebp(a.icon)} alt="" width={64} height={64} loading="lazy" decoding="async" />
               <b dir="auto">{a.name}</b>
-              <span>{STORE[a.slug]?.soon ? l.soon : l.free}</span>
+              <span>{effectiveApp(a).facts.soon ? l.soon : l.free}</span>
             </a>
           ))}
         </div>

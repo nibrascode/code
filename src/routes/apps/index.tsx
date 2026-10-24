@@ -1,6 +1,7 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { STUDIO_APPS, appStoreLinks, type AppSlug } from "@/lib/apps";
+import { effectiveApp, playListed } from "@/lib/app-store";
 import { useI18n } from "@/lib/i18n-context";
 import type { TKey } from "@/lib/i18n";
 import { localeHref } from "@/lib/locale-path";
@@ -52,7 +53,7 @@ export function AppsIndex({ apps }: { apps: readonly StudioAppRow[] | null | und
             STATUS[slug] ? t(STATUS[slug]!) : null,
             labels,
           );
-          const stores = appStoreLinks(app, live);
+          const stores = appStoreLinks(effectiveApp(app).app, live && playListed(slug) === false ? { ...live, play_url: "" } : live);
           return (
             <div key={slug} className="app-row-slot">
               <a href={localeHref(lang, `/apps/${slug}`)} className="app-row">
