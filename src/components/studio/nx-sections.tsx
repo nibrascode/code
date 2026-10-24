@@ -19,7 +19,7 @@ import {
   IconTrendUp,
   IconUpload,
 } from "@/components/studio/icons";
-import { nxCover, nxGet, nxPost, type AppsData, type Cover, type Covers, type Deploys, type Library, type Providers } from "@/components/studio/nx-api";
+import { nxGet, nxPost, type AppsData, type Covers, type Deploys, type Library, type Providers } from "@/components/studio/nx-api";
 
 /* ───────────── shared ───────────── */
 
@@ -386,39 +386,9 @@ export function ReleasesSection() {
 
 /* ───────────── Üz qabıqları ───────────── */
 
-function CoverThumb({ cover, onOpen }: { cover: Cover; onOpen: (url: string) => void }) {
-  const ref = useRef<HTMLButtonElement>(null);
-  const [src, setSrc] = useState("");
-  const [failed, setFailed] = useState(false);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((e) => e.isIntersecting)) {
-          io.disconnect();
-          nxCover(cover.file).then(setSrc).catch(() => setFailed(true));
-        }
-      },
-      { rootMargin: "200px" },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, [cover.file]);
-  return (
-    <button type="button" ref={ref} className="nxx-cover" onClick={() => src && onOpen(src)} style={{ aspectRatio: cover.w && cover.h ? `${cover.w} / ${cover.h}` : "7 / 10" }}>
-      {src ? <img src={src} alt="" loading="lazy" decoding="async" /> : <span className={failed ? "is-failed" : "nxa-skel-box"} />}
-      <small>
-        {cover.premium ? `★ ${cover.premium}` : ""} {cover.model}
-      </small>
-    </button>
-  );
-}
-
 export function CoversSection() {
   const { t, lang } = useStudio();
   const { data, error, busy, run } = useLoad((fresh) => nxGet<Covers>("covers", { fresh: fresh ? 1 : undefined }));
-  const [big, setBig] = useState("");
   const days = useMemo(() => {
     const map = new Map<string, number>();
     for (const c of data?.covers ?? []) if (c.created) map.set(dayKey(c.created), (map.get(dayKey(c.created)) || 0) + 1);
@@ -444,7 +414,6 @@ export function CoversSection() {
           <div className="nxa-kpis">
             <Kpi icon={<IconCheck size={20} />} tone="teal" label={t("cov_gen")} value={fmtNum(lang, data.counts?.gen ?? data.covers.length)} />
             <Kpi icon={<IconLibrary size={20} />} tone="blue" label={t("cov_user")} value={fmtNum(lang, data.counts?.user ?? 0)} />
-            <Kpi icon={<IconCheck size={20} />} tone="teal" label={t("cov_docs")} value={fmtNum(lang, data.counts?.docs ?? 0)} />
             <Kpi icon={<IconSpark size={20} />} tone="violet" label={t("cov_score")} value={avg ? avg.toFixed(1) : "—"} />
             <Kpi icon={<IconCalendar size={20} />} tone="blue" label={t("cov_runs")} value={data.runs[0] ? when(lang, data.runs[0].at) : "—"} />
           </div>
@@ -453,17 +422,6 @@ export function CoversSection() {
               <Bars lang={lang} items={days.map(([d, v]) => ({ label: fmtDate(lang, `${d}T12:00:00Z`, { day: "numeric", month: "short" }), value: v }))} />
             </Card>
           ) : null}
-          <Card title={t("nav_covers")}>
-            {data.covers.length ? (
-              <div className="nxx-covers">
-                {data.covers.map((c) => (
-                  <CoverThumb key={c.file} cover={c} onOpen={setBig} />
-                ))}
-              </div>
-            ) : (
-              <Empty text={t("cov_none")} />
-            )}
-          </Card>
           {data.runs.length || data.actionsUrl ? (
             <Card title={t("cov_runs")}>
               {data.actionsUrl ? (
@@ -483,11 +441,6 @@ export function CoversSection() {
                 ))}
               </ul>
             </Card>
-          ) : null}
-          {big ? (
-            <button type="button" className="nxx-lightbox" onClick={() => setBig("")} aria-label={t("close")}>
-              <img src={big} alt="" />
-            </button>
           ) : null}
         </>
       ) : null}

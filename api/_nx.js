@@ -274,7 +274,7 @@ export async function coverList({ env = process.env, fetchImpl = globalThis.fetc
     return {
       ok: true,
       covers,
-      counts: { gen: covers.filter((c) => c.source === "gen").length, user: covers.filter((c) => c.source === "user").length, docs: 54 },
+      counts: { gen: covers.filter((c) => c.source === "gen").length, user: covers.filter((c) => c.source === "user").length },
       actionsUrl: `https://github.com/${COVER_REPO}/actions`,
       runs: runs.ok && runs.data ? (runs.data.workflow_runs || []).map((w) => ({ name: w.name, status: w.status, conclusion: w.conclusion, at: w.run_started_at || w.created_at, url: w.html_url })) : [],
     };

@@ -19,7 +19,7 @@ import {
   supaLogout,
   verifyAdmin,
 } from "./_admin.js";
-import { appsData, coverImage, coverList, deploys, libraryStats, providerHealth, runPlaySync, setAppSize } from "./_nx.js";
+import { appsData, coverList, deploys, libraryStats, providerHealth, runPlaySync, setAppSize } from "./_nx.js";
 
 export const config = { maxDuration: 15 };
 
@@ -140,7 +140,7 @@ export default async function handler(req, res) {
       return send(200, { ok: true, ...(await overview({ days })) });
     }
 
-    const NX_GET = new Set(["providers", "library", "apps", "covers", "cover", "deploys"]);
+    const NX_GET = new Set(["providers", "library", "apps", "covers", "deploys"]);
     if (req.method === "GET" && NX_GET.has(op)) {
       if (!(await verifyAdmin(bearer(req)))) return send(401, { ok: false, error: "auth" });
       const fresh = url.searchParams.get("fresh") === "1";
@@ -150,14 +150,6 @@ export default async function handler(req, res) {
       if (op === "apps") return send(200, { ok: true, ...(await appsData({ fresh })) });
       if (op === "covers") return send(200, { ok: true, ...(await coverList({ fresh })) });
       if (op === "deploys") return send(200, { ok: true, ...(await deploys({ fresh })) });
-      if (op === "cover") {
-        const out = await coverImage(p("file"));
-        if (out.status !== 200) return send(out.status, { ok: false });
-        res.setHeader("Content-Type", out.type);
-        res.setHeader("Cache-Control", "private, max-age=86400");
-        res.status(200);
-        return res.end(out.buf);
-      }
     }
 
     return send(405, { ok: false, error: "method" });
