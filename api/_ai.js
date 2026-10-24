@@ -230,19 +230,32 @@ async function askMistral(history, models) {
   return last;
 }
 
+const OPENROUTER_FREE_MODELS = [
+  "nvidia/nemotron-3-ultra-550b-a55b:free",
+  "google/gemma-4-31b-it:free",
+  "google/gemma-4-26b-a4b-it:free",
+  "nvidia/nemotron-3-super-120b-a12b:free",
+  "cohere/north-mini-code:free",
+];
+
 async function askOpenRouter(history) {
   const apiKey = env("OPENROUTER_API_KEY");
   if (!apiKey) return { skipped: true };
-  return complete({
-    url: "https://openrouter.ai/api/v1/chat/completions",
-    apiKey,
-    model: "meta-llama/llama-3.3-70b-instruct",
-    history,
-    extraHeaders: {
-      "HTTP-Referer": "https://www.nibrascode.com",
-      "X-Title": "Nibras AI",
-    },
-  });
+  let last = { ok: false, detail: "OpenRouter cavab vermədi." };
+  for (const model of OPENROUTER_FREE_MODELS) {
+    last = await complete({
+      url: "https://openrouter.ai/api/v1/chat/completions",
+      apiKey,
+      model,
+      history,
+      extraHeaders: {
+        "HTTP-Referer": "https://www.nibrascode.com",
+        "X-Title": "Nibras AI",
+      },
+    });
+    if (last.ok) return last;
+  }
+  return last;
 }
 
 async function askHf(history) {

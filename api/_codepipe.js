@@ -16,14 +16,14 @@ export const GEN_MODELS = [
   ["ollama", "gpt-oss:120b"],
   ["openrouter", "nvidia/nemotron-3-ultra-550b-a55b:free"],
   ["ollama", "nemotron-3-ultra"],
-  ["openrouter", "meta-llama/llama-3.3-70b-instruct"],
+  ["openrouter", "google/gemma-4-31b-it:free"],
   ["llm7", "default"],
 ];
 export const FAST_MODELS = [
   ["mistral", "mistral-small-latest"],
   ["ollama", "gpt-oss:20b"],
   ["groq", "openai/gpt-oss-120b"],
-  ["openrouter", "meta-llama/llama-3.3-70b-instruct"],
+  ["openrouter", "google/gemma-4-31b-it:free"],
   ["llm7", "fast"],
 ];
 // Rəy üçün ayrı kvota (ollama) birinci: groq-un dəqiqəlik token həddi yazılışa qalır
