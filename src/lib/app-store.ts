@@ -7,6 +7,9 @@ export type StoreFacts = {
   updated?: string; // ISO date (Asia/Riyadh)
   size?: string; // download size of the linked file
   pkg?: string;
+  released?: string;
+  downloads?: string;
+  iap?: boolean;
   minAndroid?: string;
   category?: Partial<Record<Lang, string>> & { en: string };
   apkUrl?: string;
@@ -75,17 +78,26 @@ export const STORE: Partial<Record<AppSlug, StoreFacts>> = {
     category: TOOLS,
     privacyUrl: "/privacy/nibras-qr",
   },
-  "nibras-pdf": { category: TOOLS, privacyUrl: "/privacy/nibras-pdf" },
+  "nibras-pdf": {
+    version: "1.0.5",
+    updated: "2026-10-19",
+    released: "2026-10-21",
+    downloads: "10+",
+    size: "50.10 MB",
+    minAndroid: "7.0",
+    iap: true,
+    pkg: "com.nibras.pdf",
+    category: TOOLS,
+    privacyUrl: "/privacy/nibras-pdf",
+  },
   "nibras-plans": { soon: true, privacyUrl: "/privacy/nibras-plans" },
   "nibras-office": {
     version: "1.0.0",
     updated: "2026-10-24",
-    size: "22.1 MB",
     pkg: "com.nibrascode.pdf",
     minAndroid: "8.0",
     category: TOOLS,
-    apkUrl: "https://github.com/nibrascode/pdfeditor/releases/download/release-2/app-release.apk",
-    apkLabel: "APK",
+    soon: true,
     privacyUrl: "/nibras-office/privacy",
     shots: { en: range("nibras-office-en", 6) },
     shotLabels: [

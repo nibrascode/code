@@ -9,11 +9,11 @@ import { countDownload } from "@/components/visit-meter";
 import type { StudioAppRow } from "@/lib/studio";
 
 const L = {
-  az: { free: "Pulsuz", android: "Android", ver: "Versiya", size: "Ölçü", get: "Yüklə", soon: "Tezliklə", soonD: "Yükləmə linki hazır olanda burada görünəcək.", shots: "Ekran görüntüləri", about: "Tətbiq haqqında", more: "Ətraflı", less: "Qısalt", news: "Yeniliklər", safety: "Məlumat təhlükəsizliyi", safetyD: "Ətraflı məlumat məxfilik siyasətindədir.", policy: "Məxfilik siyasəti", info: "Tətbiq məlumatı", updated: "Yenilənib", pkg: "Paket", req: "Tələb olunur", cat: "Kateqoriya", dev: "Hazırlayan", similar: "Digər Nibras tətbiqləri", web: "Veb versiyanı aç", close: "Bağla", prev: "Əvvəlki", next: "Növbəti", up: "və yuxarı", lang: "Ekran görüntüləri ingiliscədir" },
-  en: { free: "Free", android: "Android", ver: "Version", size: "Size", get: "Download", soon: "Coming soon", soonD: "The download link will appear here when it is ready.", shots: "Screenshots", about: "About this app", more: "Read more", less: "Show less", news: "What's new", safety: "Data safety", safetyD: "Full details are in the privacy policy.", policy: "Privacy policy", info: "App info", updated: "Updated", pkg: "Package", req: "Requires", cat: "Category", dev: "Developer", similar: "More Nibras apps", web: "Open web version", close: "Close", prev: "Previous", next: "Next", up: "and up", lang: "" },
-  ar: { free: "مجاني", android: "أندرويد", ver: "الإصدار", size: "الحجم", get: "تنزيل", soon: "قريبًا", soonD: "سيظهر رابط التنزيل هنا عندما يجهز.", shots: "لقطات الشاشة", about: "عن التطبيق", more: "المزيد", less: "أقل", news: "الجديد", safety: "أمان البيانات", safetyD: "التفاصيل الكاملة في سياسة الخصوصية.", policy: "سياسة الخصوصية", info: "معلومات التطبيق", updated: "آخر تحديث", pkg: "الحزمة", req: "يتطلب", cat: "الفئة", dev: "المطوّر", similar: "تطبيقات Nibras أخرى", web: "فتح نسخة الويب", close: "إغلاق", prev: "السابق", next: "التالي", up: "أو أحدث", lang: "لقطات الشاشة باللغة الإنجليزية" },
-  ru: { free: "Бесплатно", android: "Android", ver: "Версия", size: "Размер", get: "Скачать", soon: "Скоро", soonD: "Ссылка для загрузки появится здесь, когда будет готова.", shots: "Скриншоты", about: "О приложении", more: "Подробнее", less: "Свернуть", news: "Что нового", safety: "Безопасность данных", safetyD: "Подробности — в политике конфиденциальности.", policy: "Политика конфиденциальности", info: "О версии", updated: "Обновлено", pkg: "Пакет", req: "Требуется", cat: "Категория", dev: "Разработчик", similar: "Другие приложения Nibras", web: "Открыть веб-версию", close: "Закрыть", prev: "Назад", next: "Далее", up: "и выше", lang: "Скриншоты на английском" },
-  tr: { free: "Ücretsiz", android: "Android", ver: "Sürüm", size: "Boyut", get: "İndir", soon: "Yakında", soonD: "İndirme bağlantısı hazır olduğunda burada görünecek.", shots: "Ekran görüntüleri", about: "Uygulama hakkında", more: "Devamı", less: "Daha az", news: "Yenilikler", safety: "Veri güvenliği", safetyD: "Ayrıntılar gizlilik politikasındadır.", policy: "Gizlilik politikası", info: "Uygulama bilgisi", updated: "Güncellendi", pkg: "Paket", req: "Gereksinim", cat: "Kategori", dev: "Geliştirici", similar: "Diğer Nibras uygulamaları", web: "Web sürümünü aç", close: "Kapat", prev: "Önceki", next: "Sonraki", up: "ve üstü", lang: "Ekran görüntüleri İngilizcedir" },
+  az: { dl: "Yükləmə", rel: "Buraxılış tarixi", iap: "Tətbiqdaxili alışlar var", free: "Pulsuz", android: "Android", ver: "Versiya", size: "Ölçü", get: "Yüklə", soon: "Tezliklə", soonD: "Yükləmə linki hazır olanda burada görünəcək.", shots: "Ekran görüntüləri", about: "Tətbiq haqqında", more: "Ətraflı", less: "Qısalt", news: "Yeniliklər", safety: "Məlumat təhlükəsizliyi", safetyD: "Ətraflı məlumat məxfilik siyasətindədir.", policy: "Məxfilik siyasəti", info: "Tətbiq məlumatı", updated: "Yenilənib", pkg: "Paket", req: "Tələb olunur", cat: "Kateqoriya", dev: "Hazırlayan", similar: "Digər Nibras tətbiqləri", web: "Veb versiyanı aç", close: "Bağla", prev: "Əvvəlki", next: "Növbəti", up: "və yuxarı", lang: "Ekran görüntüləri ingiliscədir" },
+  en: { dl: "Downloads", rel: "Released", iap: "Contains in-app purchases", free: "Free", android: "Android", ver: "Version", size: "Size", get: "Download", soon: "Coming soon", soonD: "The download link will appear here when it is ready.", shots: "Screenshots", about: "About this app", more: "Read more", less: "Show less", news: "What's new", safety: "Data safety", safetyD: "Full details are in the privacy policy.", policy: "Privacy policy", info: "App info", updated: "Updated", pkg: "Package", req: "Requires", cat: "Category", dev: "Developer", similar: "More Nibras apps", web: "Open web version", close: "Close", prev: "Previous", next: "Next", up: "and up", lang: "" },
+  ar: { dl: "التنزيلات", rel: "تاريخ الإصدار", iap: "يتضمن عمليات شراء داخل التطبيق", free: "مجاني", android: "أندرويد", ver: "الإصدار", size: "الحجم", get: "تنزيل", soon: "قريبًا", soonD: "سيظهر رابط التنزيل هنا عندما يجهز.", shots: "لقطات الشاشة", about: "عن التطبيق", more: "المزيد", less: "أقل", news: "الجديد", safety: "أمان البيانات", safetyD: "التفاصيل الكاملة في سياسة الخصوصية.", policy: "سياسة الخصوصية", info: "معلومات التطبيق", updated: "آخر تحديث", pkg: "الحزمة", req: "يتطلب", cat: "الفئة", dev: "المطوّر", similar: "تطبيقات Nibras أخرى", web: "فتح نسخة الويب", close: "إغلاق", prev: "السابق", next: "التالي", up: "أو أحدث", lang: "لقطات الشاشة باللغة الإنجليزية" },
+  ru: { dl: "Скачиваний", rel: "Дата выпуска", iap: "Есть встроенные покупки", free: "Бесплатно", android: "Android", ver: "Версия", size: "Размер", get: "Скачать", soon: "Скоро", soonD: "Ссылка для загрузки появится здесь, когда будет готова.", shots: "Скриншоты", about: "О приложении", more: "Подробнее", less: "Свернуть", news: "Что нового", safety: "Безопасность данных", safetyD: "Подробности — в политике конфиденциальности.", policy: "Политика конфиденциальности", info: "О версии", updated: "Обновлено", pkg: "Пакет", req: "Требуется", cat: "Категория", dev: "Разработчик", similar: "Другие приложения Nibras", web: "Открыть веб-версию", close: "Закрыть", prev: "Назад", next: "Далее", up: "и выше", lang: "Скриншоты на английском" },
+  tr: { dl: "İndirme", rel: "Yayın tarihi", iap: "Uygulama içi satın alma içerir", free: "Ücretsiz", android: "Android", ver: "Sürüm", size: "Boyut", get: "İndir", soon: "Yakında", soonD: "İndirme bağlantısı hazır olduğunda burada görünecek.", shots: "Ekran görüntüleri", about: "Uygulama hakkında", more: "Devamı", less: "Daha az", news: "Yenilikler", safety: "Veri güvenliği", safetyD: "Ayrıntılar gizlilik politikasındadır.", policy: "Gizlilik politikası", info: "Uygulama bilgisi", updated: "Güncellendi", pkg: "Paket", req: "Gereksinim", cat: "Kategori", dev: "Geliştirici", similar: "Diğer Nibras uygulamaları", web: "Web sürümünü aç", close: "Kapat", prev: "Önceki", next: "Sonraki", up: "ve üstü", lang: "Ekran görüntüleri İngilizcedir" },
 } satisfies Record<Lang, Record<string, string>>;
 
 function fmtDate(iso: string, _lang: Lang) {
@@ -100,7 +100,8 @@ export function StoreAppPage({ app, live }: { app: StudioApp; live?: StudioAppRo
   const others = STUDIO_APPS.filter((a) => a.slug !== app.slug);
 
   const facts = [
-    { k: l.free, v: l.free, big: true },
+    { k: f.iap ? l.iap : l.free, v: l.free, big: true },
+    f.downloads ? { k: l.dl, v: f.downloads } : null,
     f.size ? { k: l.size, v: f.size } : null,
     f.minAndroid ? { k: l.android, v: `${f.minAndroid}+` } : null,
     f.version ? { k: l.ver, v: f.version } : null,
@@ -127,7 +128,7 @@ export function StoreAppPage({ app, live }: { app: StudioApp; live?: StudioAppRo
         {facts.map((x) => (
           <div key={x.k}>
             <dt>{x.big ? x.v : x.v}</dt>
-            <dd>{x.big ? "" : x.k}</dd>
+            <dd>{x.big && x.k === l.free ? "" : x.k}</dd>
           </div>
         ))}
       </dl>
@@ -239,6 +240,24 @@ export function StoreAppPage({ app, live }: { app: StudioApp; live?: StudioAppRo
             <div>
               <dt>{l.updated}</dt>
               <dd>{fmtDate(f.updated, lang)}</dd>
+            </div>
+          ) : null}
+          {f.released ? (
+            <div>
+              <dt>{l.rel}</dt>
+              <dd>{fmtDate(f.released, lang)}</dd>
+            </div>
+          ) : null}
+          {f.downloads ? (
+            <div>
+              <dt>{l.dl}</dt>
+              <dd>{f.downloads}</dd>
+            </div>
+          ) : null}
+          {f.iap ? (
+            <div>
+              <dt>{l.free}</dt>
+              <dd>{l.iap}</dd>
             </div>
           ) : null}
           {f.minAndroid ? (
