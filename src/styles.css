@@ -11315,3 +11315,7 @@ body[data-scene] .ns-app::before { content: ""; position: absolute; z-index: -1;
   .ns-icon img { width: 112px; height: 112px; border-radius: 30px; }
   .ns-app { padding-inline: 44px; }
 }
+.ns-tools { margin: 4px 0 14px; padding-inline-start: 22px; display: grid; gap: 10px; }
+.ns-tools li::marker { color: var(--ns-gold); font-weight: 600; }
+.ns-tools b { display: block; color: #f6efdc; font-weight: 650; }
+.ns-tools span { color: #cfd3dc; line-height: 1.6; }

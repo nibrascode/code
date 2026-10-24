@@ -82,7 +82,6 @@ export const STORE: Partial<Record<AppSlug, StoreFacts>> = {
     version: "1.0.5",
     updated: "2026-10-19",
     released: "2026-10-21",
-    downloads: "10+",
     size: "50.10 MB",
     minAndroid: "7.0",
     iap: true,

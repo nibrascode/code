@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight, ChevronDown, Download, ExternalLink, Lock, Shiel
 import type { Lang } from "@/lib/i18n";
 import { STUDIO_APPS, appStoreLinks, type StudioApp } from "@/lib/apps";
 import { STORE, pick, shotsFor } from "@/lib/app-store";
+import { NIBRAS_PDF_ABOUT } from "@/lib/nibras-pdf-about";
 import { useI18n } from "@/lib/i18n-context";
 import { localeHref } from "@/lib/locale-path";
 import { countDownload } from "@/components/visit-meter";
@@ -193,6 +194,20 @@ export function StoreAppPage({ app, live }: { app: StudioApp; live?: StudioAppRo
         <div className={more ? "ns-more is-open" : "ns-more"}>
           <p>{t(app.bodyKey)}</p>
           {about ? <p>{about}</p> : null}
+          {app.slug === "nibras-pdf" ? (
+            <>
+              <p>{(NIBRAS_PDF_ABOUT[lang] ?? NIBRAS_PDF_ABOUT.en).intro}</p>
+              <ol className="ns-tools">
+                {(NIBRAS_PDF_ABOUT[lang] ?? NIBRAS_PDF_ABOUT.en).tools.map((x) => (
+                  <li key={x.t}>
+                    <b>{x.t}</b>
+                    <span>{x.d}</span>
+                  </li>
+                ))}
+              </ol>
+              <p>{(NIBRAS_PDF_ABOUT[lang] ?? NIBRAS_PDF_ABOUT.en).outro}</p>
+            </>
+          ) : null}
           <ul className="ns-feats">
             {app.features.map((k) => (
               <li key={k}>{t(k)}</li>
