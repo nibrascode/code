@@ -280,7 +280,10 @@ function PdfTool({ p, c, set }: ToolProps) {
       const { pdfToText } = await import("@/pdf/lib/engine");
       const pages = await pdfToText(new Uint8Array(await f.arrayBuffer()), (n, total) => setBusy(`${c.reading} ${n}/${total}`));
       const text = pages.join("\n\n").trim();
-      if (!text) setErr(c.noText);
+      const { textQuality } = await import("@/pdf/lib/textLines");
+      const { qualityMessage } = await import("@/pdf/lib/qualityMsg");
+      const q = textQuality(pages);
+      if (q !== "ok") setErr(qualityMessage(lang, q));
       set({ pdfName: f.name, pdfPages: pages.length, pageTexts: pages, text }, "act_pdf");
     } catch {
       setErr(c.pdfBad);

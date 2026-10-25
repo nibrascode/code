@@ -43,32 +43,11 @@ export function canvasToBlob(canvas: HTMLCanvasElement, type: string, quality?: 
 
 /** Text of one page grouped into lines by baseline. */
 export async function extractPageLines(doc: PDFDocumentProxy, pageNumber: number): Promise<string[]> {
+  const { itemsToLines } = await import("./textLines");
   const page = await doc.getPage(pageNumber);
-  const content = await page.getTextContent();
-  const rows: { y: number; parts: { x: number; text: string; w: number }[] }[] = [];
-  for (const item of content.items as { str?: string; transform: number[]; width: number }[]) {
-    if (typeof item.str !== "string") continue;
-    const y = item.transform[5];
-    const x = item.transform[4];
-    let row = rows.find((r) => Math.abs(r.y - y) < 3);
-    if (!row) {
-      row = { y, parts: [] };
-      rows.push(row);
-    }
-    row.parts.push({ x, text: item.str, w: item.width });
-  }
-  rows.sort((a, b) => b.y - a.y);
-  return rows.map((r) => {
-    r.parts.sort((a, b) => a.x - b.x);
-    let line = "";
-    let end = -Infinity;
-    for (const p of r.parts) {
-      if (line && p.x - end > 1.5 && !line.endsWith(" ") && !p.text.startsWith(" ")) line += " ";
-      line += p.text;
-      end = p.x + p.w;
-    }
-    return line.replace(/\s+$/, "");
-  }).filter((l, i, arr) => l.length > 0 || (i > 0 && arr[i - 1].length > 0));
+  // Marked content carries /ActualText, which Word, LibreOffice and Chrome use for Arabic glyphs.
+  const content = await page.getTextContent({ includeMarkedContent: true });
+  return itemsToLines(content.items as never);
 }
 
 export async function closePdf(doc: PDFDocumentProxy) {

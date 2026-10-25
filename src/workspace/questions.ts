@@ -2,24 +2,30 @@
 export type Question = { q: string; options: string[]; answer: number; source?: string; word?: string };
 
 const STOP = new Set(
-  "və ya ilə üçün bu bir da də ki isə olan olur olub kimi daha çox amma lakin həm hər onun onlar biz siz mən sən the and for with that this from are was were have has been into also but not you your they their which what when where then than there these those such only other more most some any each ve ile için bir daha olan gibi ama ancak her bu şu и в на с по для что это как или но не из от до при также".split(" "),
+  "və ya ilə üçün bu bir da də ki isə olan olur olub kimi daha çox amma lakin həm hər onun onlar biz siz mən sən the and for with that this from are was were have has been into also but not you your they their which what when where then than there these those such only other more most some any each ve ile için bir daha olan gibi ama ancak her bu şu и в на с по для что это как или но не из от до при также في من إلى على عن مع هذا هذه ذلك تلك التي الذي الذين التى كان كانت يكون أن إن أو ثم قد لقد كل بعض غير بين عند حتى إذا لكن لم لن ما لا هو هي هم نحن أنت وهو وهي وقد وفي ومن وعلى وأن كما أيضا أيضاً منذ حيث".split(" "),
 );
-const WORD = /[\p{L}\p{N}][\p{L}\p{N}'’-]*/gu;
+const WORD = /[\p{L}\p{N}][\p{L}\p{M}\p{N}'’-]*/gu;
+const ARABIC = /[\u0600-\u06FF]/;
 
 function clean(w: string) {
-  return w.replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}]+$/gu, "");
+  return w.replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{M}\p{N}]+$/gu, "");
 }
 
 export function splitSentences(text: string): string[] {
   return text
     .replace(/\s+/g, " ")
-    .split(/(?<=[.!?؟।])\s+(?=[\p{Lu}\p{N}"«(\u0600-\u06FF])/u)
+    .split(/(?<=[.!?؟।؛])\s+(?=[\p{Lu}\p{N}"«(\u0600-\u06FF])|(?<=[؟؛۔])\s*/u)
+    .flatMap((s) => {
+      // Arabic prose often runs long sentences joined by commas; split those at "،".
+      if (!ARABIC.test(s) || (s.match(WORD) ?? []).length <= 45) return [s];
+      return s.split(/(?<=،)\s+/u);
+    })
     .map((s) => s.trim())
     .filter((s) => s.length > 0);
 }
 
 function keyWords(sentence: string): string[] {
-  return (sentence.match(WORD) ?? []).map(clean).filter((w) => w.length >= 4 && !STOP.has(w.toLocaleLowerCase()) && !/^\d{1,2}$/.test(w));
+  return (sentence.match(WORD) ?? []).map(clean).filter((w) => w.length >= 4 && !STOP.has(w.toLocaleLowerCase()) && !STOP.has(w.replace(/[\u064B-\u065F\u0670]/g, "")) && !/^\d{1,2}$/.test(w));
 }
 
 function rand(seed: number) {

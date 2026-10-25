@@ -49,7 +49,10 @@ export function LearnPage() {
     try {
       const { pdfToText } = await import("@/pdf/lib/engine");
       const pages = await pdfToText(new Uint8Array(await f.arrayBuffer()), (n, t) => setBusy(`${c.reading} ${n}/${t}`));
-      if (!pages.join("").trim()) { setErr(c.noText); return; }
+      const { textQuality } = await import("@/pdf/lib/textLines");
+      const { qualityMessage } = await import("@/pdf/lib/qualityMsg");
+      const q = textQuality(pages);
+      if (q !== "ok") { setErr(qualityMessage(lang, q)); return; }
       const course = newCourse(f.name.replace(/\.pdf$/i, ""), f.name, pages, c);
       if (!course) { setErr(c.few); return; }
       commit([course, ...(list ?? [])]);

@@ -275,7 +275,8 @@ export async function pdfToText(bytes: Uint8Array, onPage?: (n: number, total: n
   } finally {
     await closePdf(doc);
   }
-  return pages;
+  const { fixArabicDoc } = await import("./textLines");
+  return fixArabicDoc(pages);
 }
 
 export type TextPdfOptions = {
