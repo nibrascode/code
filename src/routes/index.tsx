@@ -355,6 +355,15 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
               </svg>
               <span>{TOOLS_PAGE.heading[lang]}</span>
             </a>
+            <a className="nx-apk-bar" href={localeHref(lang, "/workspace")} data-testid="home-workspace">
+              <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="3.5" width="7.5" height="7.5" rx="2" fill="none" stroke="currentColor" strokeWidth="1.6" />
+                <rect x="13.5" y="3.5" width="7.5" height="7.5" rx="2" fill="none" stroke="currentColor" strokeWidth="1.6" />
+                <rect x="3" y="13" width="7.5" height="7.5" rx="2" fill="none" stroke="currentColor" strokeWidth="1.6" />
+                <path d="M17.25 13.5v6.5M14 16.75h6.5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+              </svg>
+              <span>Workspace</span>
+            </a>
             <a className="nx-ai-bar nx-qr-bar" href={localeHref(lang, "/pdf")}>
               <svg className="nx-job nx-job-pdf" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M7 3.2h6.6L19 8.4V20a1.4 1.4 0 0 1-1.4 1.4H7.4A1.4 1.4 0 0 1 6 20V4.6A1.4 1.4 0 0 1 7.4 3.2H7Z" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />

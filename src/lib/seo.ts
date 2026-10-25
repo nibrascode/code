@@ -779,6 +779,13 @@ const PAGES: Record<string, Copy> = {
     ar: { title: "احسب النسبة — مجاناً", description: "احسب ناتج النسبة وكم بالمئة عدد من آخر. بلا حساب." },
     ru: { title: "Посчитать процент — бесплатно", description: "Найдите процент от числа и сколько процентов одно число от другого. Без аккаунта." },
   },
+  "/workspace": {
+    az: { title: "Nibras Workspace — PDF, suallar, sənəd və kod bir yerdə", description: "PDF aç, mətni çıxar, mətndən sual hazırla, Word/PDF kimi saxla. Kod yaz, işə sal, ZIP endir. Pulsuz, fayllar brauzerdə qalır." },
+    en: { title: "Nibras Workspace — PDF, questions, documents and code in one place", description: "Open a PDF, extract text, make questions, save as Word/PDF. Write code, run it, download a ZIP. Free, files stay in your browser." },
+    tr: { title: "Nibras Workspace — PDF, sorular, belge ve kod tek yerde", description: "PDF aç, metni çıkar, soru hazırla, Word/PDF olarak kaydet. Kod yaz, çalıştır, ZIP indir. Ücretsiz, dosyalar tarayıcıda kalır." },
+    ar: { title: "Nibras Workspace — PDF وأسئلة ومستندات وكود في مكان واحد", description: "افتح PDF واستخرج النص وأنشئ أسئلة واحفظها Word/PDF. اكتب كوداً وشغّله ونزّل ZIP. مجاناً، والملفات تبقى في المتصفح." },
+    ru: { title: "Nibras Workspace — PDF, вопросы, документы и код в одном месте", description: "Откройте PDF, извлеките текст, составьте вопросы, сохраните в Word/PDF. Пишите код, запускайте, скачивайте ZIP. Бесплатно, файлы остаются в браузере." },
+  },
   "/wifi": {
     az: { title: "Wi-Fi QR — pulsuz", description: "Şəbəkə adı və şifrədən QR kod hazırla. Qonaq skan edib qoşulsun. Şifrə yüklənmir." },
     en: { title: "Wi-Fi QR code — free", description: "Make a QR code from a network name and password. A guest scans and joins. The password is not uploaded." },
