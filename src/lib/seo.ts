@@ -807,6 +807,20 @@ const PAGES: Record<string, Copy> = {
     ar: {title: "Nibras Shortcuts — اختصارات VS Code وAndroid Studio وChrome وWindows وmacOS", description: "تعلّم اختصارات لوحة المفاتيح بخريطة حرارية وتدريب بلوحة مفاتيح حقيقية وإحصاءات السرعة والدقة والتكرار المتباعد. مجاني."},
     ru: {title: "Nibras Shortcuts — сочетания клавиш VS Code, Android Studio, Chrome, Windows, macOS", description: "Учите горячие клавиши: тепловая карта, тренировка на настоящей клавиатуре, статистика скорости и точности, интервальное повторение. Бесплатно."},
   },
+  "/schema": {
+    az: {title: "Nibras Schema — verilənlər bazası sxemi dizayneri, SQL ixracı", description: "Cədvəlləri mətnlə və ya vizual lövhədə qur: PK, FK, unique, əlaqələr 1-1, 1-n, n-n. PostgreSQL, MySQL, SQLite üçün SQL, CREATE TABLE idxalı, PNG/SVG/JSON."},
+    en: {title: "Nibras Schema — database schema designer with SQL export", description: "Design tables as text or on a visual canvas: PK, FK, unique, not null, defaults and 1-1, 1-n, n-n relations. Export PostgreSQL, MySQL or SQLite, import CREATE TABLE."},
+    tr: {title: "Nibras Schema — SQL dışa aktarmalı veritabanı şema tasarımcısı", description: "Tabloları metinle veya görsel tuvalde tasarlayın: PK, FK, unique, ilişkiler 1-1, 1-n, n-n. PostgreSQL, MySQL, SQLite için SQL, CREATE TABLE içe aktarma."},
+    ar: {title: "Nibras Schema — مصمم مخططات قواعد البيانات مع تصدير SQL", description: "صمّم الجداول نصاً أو على لوحة مرئية: PK وFK وunique وعلاقات 1-1 و1-n وn-n. صدّر SQL لـ PostgreSQL وMySQL وSQLite واستورد CREATE TABLE."},
+    ru: {title: "Nibras Schema — конструктор схем БД с экспортом SQL", description: "Проектируйте таблицы текстом или на холсте: PK, FK, unique, связи 1-1, 1-n, n-n. Экспорт SQL для PostgreSQL, MySQL, SQLite, импорт CREATE TABLE."},
+  },
+  "/filecheck": {
+    az: {title: "Nibras File Check — faylın əsl tipi, SHA-256 hash və müqayisə", description: "Faylın əsl tipini magic baytlarla tap, uzantı uyğunsuzluğunu gör, SHA-256/SHA-1/SHA-512 hesabla, checksum yoxla, iki faylı müqayisə et. Fayllar brauzerdən çıxmır."},
+    en: {title: "Nibras File Check — real file type, SHA-256 hash and compare", description: "Find a file's real type from its magic bytes, spot extension mismatches, compute SHA-256/SHA-1/SHA-512, verify checksums and compare two files. Files never leave your browser."},
+    tr: {title: "Nibras File Check — gerçek dosya türü, SHA-256 ve karşılaştırma", description: "Dosyanın gerçek türünü sihirli baytlardan bulun, uzantı uyumsuzluğunu görün, SHA-256/SHA-1/SHA-512 hesaplayın, sağlama doğrulayın, iki dosyayı karşılaştırın."},
+    ar: {title: "Nibras File Check — النوع الحقيقي للملف وتجزئة SHA-256 والمقارنة", description: "اعرف النوع الحقيقي للملف من بايتاته السحرية، واكتشف عدم تطابق الامتداد، واحسب SHA-256/SHA-1/SHA-512، وتحقق من المجاميع وقارن ملفين. لا تغادر الملفات متصفحك."},
+    ru: {title: "Nibras File Check — настоящий тип файла, SHA-256 и сравнение", description: "Определите настоящий тип файла по сигнатуре, найдите несовпадение расширения, посчитайте SHA-256/SHA-1/SHA-512, проверьте сумму и сравните два файла. Файлы не покидают браузер."},
+  },
   "/studio": {
     az: { title: "Nibras Studio — brauzerdə kod redaktoru və canlı telefon önizləməsi", description: "HTML, CSS və JavaScript yaz: fayllar və qovluqlar, rəngli kod, telefon çərçivəsində canlı önizləmə. ZIP endir, Nibras Dev-də aç və ya Android APK düzəlt. Pulsuz, fayllar brauzerdə qalır." },
     en: { title: "Nibras Studio — code editor in your browser with live phone preview", description: "Write HTML, CSS and JavaScript: files and folders, syntax highlighting, live preview in a phone frame. Download a ZIP, open in Nibras Dev or build an Android APK. Free, files stay in your browser." },

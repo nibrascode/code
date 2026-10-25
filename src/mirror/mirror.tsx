@@ -23,6 +23,8 @@ export function MirrorPage() {
   const [sel, setSel] = useState<Node | null>(null);
   const [view, setView] = useState({ x: -30, y: -30, k: 0.9 });
   const [rel, setRel] = useState<[string, string][]>([]);
+  const [legend, setLegend] = useState(true);
+  useEffect(() => { setLegend(matchMedia("(min-width: 640px)").matches); }, []);
   const [page, setPage] = useState(""); const [html, setHtml] = useState("");
   const svgRef = useRef<SVGSVGElement>(null);
   const drag = useRef<null | { sx: number; sy: number; ox: number; oy: number; moved: boolean; node: string | null }>(null);
@@ -187,6 +189,7 @@ export function MirrorPage() {
             <button className={btn} onClick={exportJson} disabled={!data} data-testid="mr-json"><Download className="size-4" /> JSON</button>
             <button className={btn} onClick={() => dl(new Blob([svgText()], { type: "image/svg+xml" }), "site-mirror.svg")} disabled={!data} data-testid="mr-svg"><Download className="size-4" /> SVG</button>
           </div>
+          <div className="relative">
           <svg ref={svgRef} className="block h-[62vh] min-h-[380px] w-full touch-none select-none lg:h-[calc(100vh-230px)]" viewBox={`${view.x} ${view.y} ${(svgRef.current?.clientWidth ?? 900) / view.k} ${(svgRef.current?.clientHeight ?? 600) / view.k}`}
             onPointerDown={(e) => { const node = (e.target as Element).closest("[data-node]")?.getAttribute("data-node") ?? null; (e.currentTarget as Element).setPointerCapture(e.pointerId); drag.current = { sx: e.clientX, sy: e.clientY, ox: view.x, oy: view.y, moved: false, node }; }}
             onPointerMove={(e) => { const d = drag.current; if (!d) return; const dx = e.clientX - d.sx, dy = e.clientY - d.sy; if (!d.moved && Math.hypot(dx, dy) < 5) return; d.moved = true; setView((v) => ({ ...v, x: d.ox - dx / v.k, y: d.oy - dy / v.k })); }}
@@ -212,9 +215,9 @@ export function MirrorPage() {
             })}
             {!data ? <text x="20" y="40" fill="#7d89a8" fontSize="15" fontFamily="system-ui">{t.empty}</text> : null}
           </svg>
-          <div className="absolute start-2 top-14 max-w-[190px] rounded-xl border border-white/10 bg-[#1a2133]/95 p-2 text-[11px] shadow-xl" data-testid="mr-legend">
-            <p className="mb-1 flex items-center gap-1 font-semibold"><Layers className="size-3.5" /> {t.legend}</p>
-            <ul className="space-y-0.5">{types.map((ty) => <li key={ty} className="flex items-center gap-1.5"><span className="size-2.5 rounded-full" style={{ background: TYPE_COLORS[ty] }} />{(t as Record<string, string>)["t_" + ty]}</li>)}<li className="flex items-center gap-1.5"><span className="size-2.5 rounded-full border border-dashed border-[#8a94b8]" />{t.t_gap}</li></ul>
+          <div className="absolute start-2 top-2 max-w-[190px] rounded-xl border border-white/10 bg-[#1a2133]/95 p-2 text-[11px] shadow-xl" data-testid="mr-legend">
+            <button className="flex items-center gap-1 font-semibold" onClick={() => setLegend((v) => !v)} aria-expanded={legend} data-testid="mr-legend-toggle"><Layers className="size-3.5" /> {t.legend}</button>
+            <ul className={(legend ? "" : "hidden ") + "mt-1 space-y-0.5"}>{types.map((ty) => <li key={ty} className="flex items-center gap-1.5"><span className="size-2.5 rounded-full" style={{ background: TYPE_COLORS[ty] }} />{(t as Record<string, string>)["t_" + ty]}</li>)}<li className="flex items-center gap-1.5"><span className="size-2.5 rounded-full border border-dashed border-[#8a94b8]" />{t.t_gap}</li></ul>
           </div>
           <div className="absolute bottom-2 start-2 flex flex-col gap-1">
             <button className="grid size-9 place-items-center rounded-full border border-white/10 bg-[#1a2133]" onClick={() => zoom(1.2)} aria-label="+" data-testid="mr-zin"><Plus className="size-4" /></button>
@@ -229,7 +232,8 @@ export function MirrorPage() {
               {sel.url ? <div className="mt-1.5 flex flex-wrap gap-2"><a className="text-[#8aa2ff] underline" href={sel.url} target="_blank" rel="noreferrer noopener">{t.open}</a><a className="inline-flex items-center gap-1 text-[#8aa2ff] underline" href={localeHref(lang, "/doctor") + "?url=" + encodeURIComponent(sel.url)}><Stethoscope className="size-3.5" />{t.doctor}</a></div> : null}
             </div>
           ) : null}
-          {q && data ? <div className="absolute end-2 top-14 rounded-lg bg-black/60 px-2 py-1 text-[11px]">{placed.filter((p) => p.n.name.toLowerCase().includes(q.toLowerCase()) || p.n.path.includes(q.toLowerCase())).length} {t.matches}</div> : null}
+          {q && data ? <div className="absolute end-2 top-2 rounded-lg bg-black/60 px-2 py-1 text-[11px]">{placed.filter((p) => p.n.name.toLowerCase().includes(q.toLowerCase()) || p.n.path.includes(q.toLowerCase())).length} {t.matches}</div> : null}
+        </div>
         </section>
       </div>
       <footer className="mt-6 border-t border-white/10 pt-4"><ToolsLegalLinks /></footer>

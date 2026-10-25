@@ -95,6 +95,8 @@ export function StartDesk({ lang }: { lang: Lang }) {
         [localeHref(lang, "/studio"), "Nibras Studio"],
         [localeHref(lang, "/workspace"), "Workspace"],
         [localeHref(lang, "/doctor"), "Site Doctor"],
+        [localeHref(lang, "/filecheck"), "File Check"],
+        [localeHref(lang, "/schema"), "Schema"],
         [localeHref(lang, "/shortcuts"), "Shortcuts"],
         [localeHref(lang, "/mirror"), "Site Mirror"],
         [localeHref(lang, "/learn/logic"), "Logic Lab"],

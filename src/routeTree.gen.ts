@@ -18,6 +18,7 @@ import { Route as EnRouteImport } from './routes/en'
 import { Route as EraseRouteImport } from './routes/erase'
 import { Route as FaizRouteImport } from './routes/faiz'
 import { Route as FaqRouteImport } from './routes/faq'
+import { Route as FilecheckRouteImport } from './routes/filecheck'
 import { Route as FlowRouteImport } from './routes/flow'
 import { Route as ImageRouteImport } from './routes/image'
 import { Route as LearnRouteImport } from './routes/learn'
@@ -35,6 +36,7 @@ import { Route as PlannerRouteImport } from './routes/planner'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as QrRouteImport } from './routes/qr'
 import { Route as RuRouteImport } from './routes/ru'
+import { Route as SchemaRouteImport } from './routes/schema'
 import { Route as SeoRouteImport } from './routes/seo'
 import { Route as ShortcutsRouteImport } from './routes/shortcuts'
 import { Route as SozRouteImport } from './routes/soz'
@@ -62,6 +64,7 @@ import { Route as ArDoctorRouteImport } from './routes/ar.doctor'
 import { Route as ArEraseRouteImport } from './routes/ar.erase'
 import { Route as ArFaizRouteImport } from './routes/ar.faiz'
 import { Route as ArFaqRouteImport } from './routes/ar.faq'
+import { Route as ArFilecheckRouteImport } from './routes/ar.filecheck'
 import { Route as ArFlowRouteImport } from './routes/ar.flow'
 import { Route as ArImageRouteImport } from './routes/ar.image'
 import { Route as ArLearnRouteImport } from './routes/ar.learn'
@@ -76,6 +79,7 @@ import { Route as ArPaketRouteImport } from './routes/ar.paket'
 import { Route as ArPdfRouteImport } from './routes/ar.pdf'
 import { Route as ArPlannerRouteImport } from './routes/ar.planner'
 import { Route as ArQrRouteImport } from './routes/ar.qr'
+import { Route as ArSchemaRouteImport } from './routes/ar.schema'
 import { Route as ArSeoRouteImport } from './routes/ar.seo'
 import { Route as ArShortcutsRouteImport } from './routes/ar.shortcuts'
 import { Route as ArSozRouteImport } from './routes/ar.soz'
@@ -98,6 +102,7 @@ import { Route as EnDoctorRouteImport } from './routes/en.doctor'
 import { Route as EnEraseRouteImport } from './routes/en.erase'
 import { Route as EnFaizRouteImport } from './routes/en.faiz'
 import { Route as EnFaqRouteImport } from './routes/en.faq'
+import { Route as EnFilecheckRouteImport } from './routes/en.filecheck'
 import { Route as EnFlowRouteImport } from './routes/en.flow'
 import { Route as EnImageRouteImport } from './routes/en.image'
 import { Route as EnLearnRouteImport } from './routes/en.learn'
@@ -112,6 +117,7 @@ import { Route as EnPaketRouteImport } from './routes/en.paket'
 import { Route as EnPdfRouteImport } from './routes/en.pdf'
 import { Route as EnPlannerRouteImport } from './routes/en.planner'
 import { Route as EnQrRouteImport } from './routes/en.qr'
+import { Route as EnSchemaRouteImport } from './routes/en.schema'
 import { Route as EnSeoRouteImport } from './routes/en.seo'
 import { Route as EnShortcutsRouteImport } from './routes/en.shortcuts'
 import { Route as EnSozRouteImport } from './routes/en.soz'
@@ -151,6 +157,7 @@ import { Route as RuDoctorRouteImport } from './routes/ru.doctor'
 import { Route as RuEraseRouteImport } from './routes/ru.erase'
 import { Route as RuFaizRouteImport } from './routes/ru.faiz'
 import { Route as RuFaqRouteImport } from './routes/ru.faq'
+import { Route as RuFilecheckRouteImport } from './routes/ru.filecheck'
 import { Route as RuFlowRouteImport } from './routes/ru.flow'
 import { Route as RuImageRouteImport } from './routes/ru.image'
 import { Route as RuLearnRouteImport } from './routes/ru.learn'
@@ -165,6 +172,7 @@ import { Route as RuPaketRouteImport } from './routes/ru.paket'
 import { Route as RuPdfRouteImport } from './routes/ru.pdf'
 import { Route as RuPlannerRouteImport } from './routes/ru.planner'
 import { Route as RuQrRouteImport } from './routes/ru.qr'
+import { Route as RuSchemaRouteImport } from './routes/ru.schema'
 import { Route as RuSeoRouteImport } from './routes/ru.seo'
 import { Route as RuShortcutsRouteImport } from './routes/ru.shortcuts'
 import { Route as RuSozRouteImport } from './routes/ru.soz'
@@ -189,6 +197,7 @@ import { Route as TrDoctorRouteImport } from './routes/tr.doctor'
 import { Route as TrEraseRouteImport } from './routes/tr.erase'
 import { Route as TrFaizRouteImport } from './routes/tr.faiz'
 import { Route as TrFaqRouteImport } from './routes/tr.faq'
+import { Route as TrFilecheckRouteImport } from './routes/tr.filecheck'
 import { Route as TrFlowRouteImport } from './routes/tr.flow'
 import { Route as TrImageRouteImport } from './routes/tr.image'
 import { Route as TrLearnRouteImport } from './routes/tr.learn'
@@ -203,6 +212,7 @@ import { Route as TrPaketRouteImport } from './routes/tr.paket'
 import { Route as TrPdfRouteImport } from './routes/tr.pdf'
 import { Route as TrPlannerRouteImport } from './routes/tr.planner'
 import { Route as TrQrRouteImport } from './routes/tr.qr'
+import { Route as TrSchemaRouteImport } from './routes/tr.schema'
 import { Route as TrSeoRouteImport } from './routes/tr.seo'
 import { Route as TrShortcutsRouteImport } from './routes/tr.shortcuts'
 import { Route as TrSozRouteImport } from './routes/tr.soz'
@@ -321,6 +331,11 @@ const FaqRoute = FaqRouteImport.update({
   path: '/faq',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FilecheckRoute = FilecheckRouteImport.update({
+  id: '/filecheck',
+  path: '/filecheck',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FlowRoute = FlowRouteImport.update({
   id: '/flow',
   path: '/flow',
@@ -404,6 +419,11 @@ const QrRoute = QrRouteImport.update({
 const RuRoute = RuRouteImport.update({
   id: '/ru',
   path: '/ru',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SchemaRoute = SchemaRouteImport.update({
+  id: '/schema',
+  path: '/schema',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SeoRoute = SeoRouteImport.update({
@@ -541,6 +561,11 @@ const ArFaqRoute = ArFaqRouteImport.update({
   path: '/faq',
   getParentRoute: () => ArRoute,
 } as any)
+const ArFilecheckRoute = ArFilecheckRouteImport.update({
+  id: '/filecheck',
+  path: '/filecheck',
+  getParentRoute: () => ArRoute,
+} as any)
 const ArFlowRoute = ArFlowRouteImport.update({
   id: '/flow',
   path: '/flow',
@@ -609,6 +634,11 @@ const ArPlannerRoute = ArPlannerRouteImport.update({
 const ArQrRoute = ArQrRouteImport.update({
   id: '/qr',
   path: '/qr',
+  getParentRoute: () => ArRoute,
+} as any)
+const ArSchemaRoute = ArSchemaRouteImport.update({
+  id: '/schema',
+  path: '/schema',
   getParentRoute: () => ArRoute,
 } as any)
 const ArSeoRoute = ArSeoRouteImport.update({
@@ -721,6 +751,11 @@ const EnFaqRoute = EnFaqRouteImport.update({
   path: '/faq',
   getParentRoute: () => EnRoute,
 } as any)
+const EnFilecheckRoute = EnFilecheckRouteImport.update({
+  id: '/filecheck',
+  path: '/filecheck',
+  getParentRoute: () => EnRoute,
+} as any)
 const EnFlowRoute = EnFlowRouteImport.update({
   id: '/flow',
   path: '/flow',
@@ -789,6 +824,11 @@ const EnPlannerRoute = EnPlannerRouteImport.update({
 const EnQrRoute = EnQrRouteImport.update({
   id: '/qr',
   path: '/qr',
+  getParentRoute: () => EnRoute,
+} as any)
+const EnSchemaRoute = EnSchemaRouteImport.update({
+  id: '/schema',
+  path: '/schema',
   getParentRoute: () => EnRoute,
 } as any)
 const EnSeoRoute = EnSeoRouteImport.update({
@@ -986,6 +1026,11 @@ const RuFaqRoute = RuFaqRouteImport.update({
   path: '/faq',
   getParentRoute: () => RuRoute,
 } as any)
+const RuFilecheckRoute = RuFilecheckRouteImport.update({
+  id: '/filecheck',
+  path: '/filecheck',
+  getParentRoute: () => RuRoute,
+} as any)
 const RuFlowRoute = RuFlowRouteImport.update({
   id: '/flow',
   path: '/flow',
@@ -1054,6 +1099,11 @@ const RuPlannerRoute = RuPlannerRouteImport.update({
 const RuQrRoute = RuQrRouteImport.update({
   id: '/qr',
   path: '/qr',
+  getParentRoute: () => RuRoute,
+} as any)
+const RuSchemaRoute = RuSchemaRouteImport.update({
+  id: '/schema',
+  path: '/schema',
   getParentRoute: () => RuRoute,
 } as any)
 const RuSeoRoute = RuSeoRouteImport.update({
@@ -1176,6 +1226,11 @@ const TrFaqRoute = TrFaqRouteImport.update({
   path: '/faq',
   getParentRoute: () => TrRoute,
 } as any)
+const TrFilecheckRoute = TrFilecheckRouteImport.update({
+  id: '/filecheck',
+  path: '/filecheck',
+  getParentRoute: () => TrRoute,
+} as any)
 const TrFlowRoute = TrFlowRouteImport.update({
   id: '/flow',
   path: '/flow',
@@ -1244,6 +1299,11 @@ const TrPlannerRoute = TrPlannerRouteImport.update({
 const TrQrRoute = TrQrRouteImport.update({
   id: '/qr',
   path: '/qr',
+  getParentRoute: () => TrRoute,
+} as any)
+const TrSchemaRoute = TrSchemaRouteImport.update({
+  id: '/schema',
+  path: '/schema',
   getParentRoute: () => TrRoute,
 } as any)
 const TrSeoRoute = TrSeoRouteImport.update({
@@ -1618,6 +1678,7 @@ export interface FileRoutesByFullPath {
   '/erase': typeof EraseRoute
   '/faiz': typeof FaizRoute
   '/faq': typeof FaqRouteWithChildren
+  '/filecheck': typeof FilecheckRoute
   '/flow': typeof FlowRoute
   '/image': typeof ImageRoute
   '/learn': typeof LearnRoute
@@ -1635,6 +1696,7 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRouteWithChildren
   '/qr': typeof QrRoute
   '/ru': typeof RuRouteWithChildren
+  '/schema': typeof SchemaRoute
   '/seo': typeof SeoRoute
   '/shortcuts': typeof ShortcutsRoute
   '/soz': typeof SozRouteWithChildren
@@ -1662,6 +1724,7 @@ export interface FileRoutesByFullPath {
   '/ar/erase': typeof ArEraseRoute
   '/ar/faiz': typeof ArFaizRoute
   '/ar/faq': typeof ArFaqRouteWithChildren
+  '/ar/filecheck': typeof ArFilecheckRoute
   '/ar/flow': typeof ArFlowRoute
   '/ar/image': typeof ArImageRoute
   '/ar/learn': typeof ArLearnRoute
@@ -1676,6 +1739,7 @@ export interface FileRoutesByFullPath {
   '/ar/pdf': typeof ArPdfRoute
   '/ar/planner': typeof ArPlannerRoute
   '/ar/qr': typeof ArQrRoute
+  '/ar/schema': typeof ArSchemaRoute
   '/ar/seo': typeof ArSeoRoute
   '/ar/shortcuts': typeof ArShortcutsRoute
   '/ar/soz': typeof ArSozRouteWithChildren
@@ -1698,6 +1762,7 @@ export interface FileRoutesByFullPath {
   '/en/erase': typeof EnEraseRoute
   '/en/faiz': typeof EnFaizRoute
   '/en/faq': typeof EnFaqRouteWithChildren
+  '/en/filecheck': typeof EnFilecheckRoute
   '/en/flow': typeof EnFlowRoute
   '/en/image': typeof EnImageRoute
   '/en/learn': typeof EnLearnRoute
@@ -1712,6 +1777,7 @@ export interface FileRoutesByFullPath {
   '/en/pdf': typeof EnPdfRoute
   '/en/planner': typeof EnPlannerRoute
   '/en/qr': typeof EnQrRoute
+  '/en/schema': typeof EnSchemaRoute
   '/en/seo': typeof EnSeoRoute
   '/en/shortcuts': typeof EnShortcutsRoute
   '/en/soz': typeof EnSozRouteWithChildren
@@ -1747,6 +1813,7 @@ export interface FileRoutesByFullPath {
   '/ru/erase': typeof RuEraseRoute
   '/ru/faiz': typeof RuFaizRoute
   '/ru/faq': typeof RuFaqRouteWithChildren
+  '/ru/filecheck': typeof RuFilecheckRoute
   '/ru/flow': typeof RuFlowRoute
   '/ru/image': typeof RuImageRoute
   '/ru/learn': typeof RuLearnRoute
@@ -1761,6 +1828,7 @@ export interface FileRoutesByFullPath {
   '/ru/pdf': typeof RuPdfRoute
   '/ru/planner': typeof RuPlannerRoute
   '/ru/qr': typeof RuQrRoute
+  '/ru/schema': typeof RuSchemaRoute
   '/ru/seo': typeof RuSeoRoute
   '/ru/shortcuts': typeof RuShortcutsRoute
   '/ru/soz': typeof RuSozRouteWithChildren
@@ -1785,6 +1853,7 @@ export interface FileRoutesByFullPath {
   '/tr/erase': typeof TrEraseRoute
   '/tr/faiz': typeof TrFaizRoute
   '/tr/faq': typeof TrFaqRouteWithChildren
+  '/tr/filecheck': typeof TrFilecheckRoute
   '/tr/flow': typeof TrFlowRoute
   '/tr/image': typeof TrImageRoute
   '/tr/learn': typeof TrLearnRoute
@@ -1799,6 +1868,7 @@ export interface FileRoutesByFullPath {
   '/tr/pdf': typeof TrPdfRoute
   '/tr/planner': typeof TrPlannerRoute
   '/tr/qr': typeof TrQrRoute
+  '/tr/schema': typeof TrSchemaRoute
   '/tr/seo': typeof TrSeoRoute
   '/tr/shortcuts': typeof TrShortcutsRoute
   '/tr/soz': typeof TrSozRouteWithChildren
@@ -1886,6 +1956,7 @@ export interface FileRoutesByTo {
   '/erase': typeof EraseRoute
   '/faiz': typeof FaizRoute
   '/faq': typeof FaqRouteWithChildren
+  '/filecheck': typeof FilecheckRoute
   '/flow': typeof FlowRoute
   '/image': typeof ImageRoute
   '/learn': typeof LearnRoute
@@ -1903,6 +1974,7 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRouteWithChildren
   '/qr': typeof QrRoute
   '/ru': typeof RuRouteWithChildren
+  '/schema': typeof SchemaRoute
   '/seo': typeof SeoRoute
   '/shortcuts': typeof ShortcutsRoute
   '/soz': typeof SozRouteWithChildren
@@ -1929,6 +2001,7 @@ export interface FileRoutesByTo {
   '/ar/erase': typeof ArEraseRoute
   '/ar/faiz': typeof ArFaizRoute
   '/ar/faq': typeof ArFaqRouteWithChildren
+  '/ar/filecheck': typeof ArFilecheckRoute
   '/ar/flow': typeof ArFlowRoute
   '/ar/image': typeof ArImageRoute
   '/ar/learn': typeof ArLearnRoute
@@ -1943,6 +2016,7 @@ export interface FileRoutesByTo {
   '/ar/pdf': typeof ArPdfRoute
   '/ar/planner': typeof ArPlannerRoute
   '/ar/qr': typeof ArQrRoute
+  '/ar/schema': typeof ArSchemaRoute
   '/ar/seo': typeof ArSeoRoute
   '/ar/shortcuts': typeof ArShortcutsRoute
   '/ar/soz': typeof ArSozRouteWithChildren
@@ -1965,6 +2039,7 @@ export interface FileRoutesByTo {
   '/en/erase': typeof EnEraseRoute
   '/en/faiz': typeof EnFaizRoute
   '/en/faq': typeof EnFaqRouteWithChildren
+  '/en/filecheck': typeof EnFilecheckRoute
   '/en/flow': typeof EnFlowRoute
   '/en/image': typeof EnImageRoute
   '/en/learn': typeof EnLearnRoute
@@ -1979,6 +2054,7 @@ export interface FileRoutesByTo {
   '/en/pdf': typeof EnPdfRoute
   '/en/planner': typeof EnPlannerRoute
   '/en/qr': typeof EnQrRoute
+  '/en/schema': typeof EnSchemaRoute
   '/en/seo': typeof EnSeoRoute
   '/en/shortcuts': typeof EnShortcutsRoute
   '/en/soz': typeof EnSozRouteWithChildren
@@ -2014,6 +2090,7 @@ export interface FileRoutesByTo {
   '/ru/erase': typeof RuEraseRoute
   '/ru/faiz': typeof RuFaizRoute
   '/ru/faq': typeof RuFaqRouteWithChildren
+  '/ru/filecheck': typeof RuFilecheckRoute
   '/ru/flow': typeof RuFlowRoute
   '/ru/image': typeof RuImageRoute
   '/ru/learn': typeof RuLearnRoute
@@ -2028,6 +2105,7 @@ export interface FileRoutesByTo {
   '/ru/pdf': typeof RuPdfRoute
   '/ru/planner': typeof RuPlannerRoute
   '/ru/qr': typeof RuQrRoute
+  '/ru/schema': typeof RuSchemaRoute
   '/ru/seo': typeof RuSeoRoute
   '/ru/shortcuts': typeof RuShortcutsRoute
   '/ru/soz': typeof RuSozRouteWithChildren
@@ -2052,6 +2130,7 @@ export interface FileRoutesByTo {
   '/tr/erase': typeof TrEraseRoute
   '/tr/faiz': typeof TrFaizRoute
   '/tr/faq': typeof TrFaqRouteWithChildren
+  '/tr/filecheck': typeof TrFilecheckRoute
   '/tr/flow': typeof TrFlowRoute
   '/tr/image': typeof TrImageRoute
   '/tr/learn': typeof TrLearnRoute
@@ -2066,6 +2145,7 @@ export interface FileRoutesByTo {
   '/tr/pdf': typeof TrPdfRoute
   '/tr/planner': typeof TrPlannerRoute
   '/tr/qr': typeof TrQrRoute
+  '/tr/schema': typeof TrSchemaRoute
   '/tr/seo': typeof TrSeoRoute
   '/tr/shortcuts': typeof TrShortcutsRoute
   '/tr/soz': typeof TrSozRouteWithChildren
@@ -2154,6 +2234,7 @@ export interface FileRoutesById {
   '/erase': typeof EraseRoute
   '/faiz': typeof FaizRoute
   '/faq': typeof FaqRouteWithChildren
+  '/filecheck': typeof FilecheckRoute
   '/flow': typeof FlowRoute
   '/image': typeof ImageRoute
   '/learn': typeof LearnRoute
@@ -2171,6 +2252,7 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRouteWithChildren
   '/qr': typeof QrRoute
   '/ru': typeof RuRouteWithChildren
+  '/schema': typeof SchemaRoute
   '/seo': typeof SeoRoute
   '/shortcuts': typeof ShortcutsRoute
   '/soz': typeof SozRouteWithChildren
@@ -2198,6 +2280,7 @@ export interface FileRoutesById {
   '/ar/erase': typeof ArEraseRoute
   '/ar/faiz': typeof ArFaizRoute
   '/ar/faq': typeof ArFaqRouteWithChildren
+  '/ar/filecheck': typeof ArFilecheckRoute
   '/ar/flow': typeof ArFlowRoute
   '/ar/image': typeof ArImageRoute
   '/ar/learn': typeof ArLearnRoute
@@ -2212,6 +2295,7 @@ export interface FileRoutesById {
   '/ar/pdf': typeof ArPdfRoute
   '/ar/planner': typeof ArPlannerRoute
   '/ar/qr': typeof ArQrRoute
+  '/ar/schema': typeof ArSchemaRoute
   '/ar/seo': typeof ArSeoRoute
   '/ar/shortcuts': typeof ArShortcutsRoute
   '/ar/soz': typeof ArSozRouteWithChildren
@@ -2234,6 +2318,7 @@ export interface FileRoutesById {
   '/en/erase': typeof EnEraseRoute
   '/en/faiz': typeof EnFaizRoute
   '/en/faq': typeof EnFaqRouteWithChildren
+  '/en/filecheck': typeof EnFilecheckRoute
   '/en/flow': typeof EnFlowRoute
   '/en/image': typeof EnImageRoute
   '/en/learn': typeof EnLearnRoute
@@ -2248,6 +2333,7 @@ export interface FileRoutesById {
   '/en/pdf': typeof EnPdfRoute
   '/en/planner': typeof EnPlannerRoute
   '/en/qr': typeof EnQrRoute
+  '/en/schema': typeof EnSchemaRoute
   '/en/seo': typeof EnSeoRoute
   '/en/shortcuts': typeof EnShortcutsRoute
   '/en/soz': typeof EnSozRouteWithChildren
@@ -2283,6 +2369,7 @@ export interface FileRoutesById {
   '/ru/erase': typeof RuEraseRoute
   '/ru/faiz': typeof RuFaizRoute
   '/ru/faq': typeof RuFaqRouteWithChildren
+  '/ru/filecheck': typeof RuFilecheckRoute
   '/ru/flow': typeof RuFlowRoute
   '/ru/image': typeof RuImageRoute
   '/ru/learn': typeof RuLearnRoute
@@ -2297,6 +2384,7 @@ export interface FileRoutesById {
   '/ru/pdf': typeof RuPdfRoute
   '/ru/planner': typeof RuPlannerRoute
   '/ru/qr': typeof RuQrRoute
+  '/ru/schema': typeof RuSchemaRoute
   '/ru/seo': typeof RuSeoRoute
   '/ru/shortcuts': typeof RuShortcutsRoute
   '/ru/soz': typeof RuSozRouteWithChildren
@@ -2321,6 +2409,7 @@ export interface FileRoutesById {
   '/tr/erase': typeof TrEraseRoute
   '/tr/faiz': typeof TrFaizRoute
   '/tr/faq': typeof TrFaqRouteWithChildren
+  '/tr/filecheck': typeof TrFilecheckRoute
   '/tr/flow': typeof TrFlowRoute
   '/tr/image': typeof TrImageRoute
   '/tr/learn': typeof TrLearnRoute
@@ -2335,6 +2424,7 @@ export interface FileRoutesById {
   '/tr/pdf': typeof TrPdfRoute
   '/tr/planner': typeof TrPlannerRoute
   '/tr/qr': typeof TrQrRoute
+  '/tr/schema': typeof TrSchemaRoute
   '/tr/seo': typeof TrSeoRoute
   '/tr/shortcuts': typeof TrShortcutsRoute
   '/tr/soz': typeof TrSozRouteWithChildren
@@ -2424,6 +2514,7 @@ export interface FileRouteTypes {
     | '/erase'
     | '/faiz'
     | '/faq'
+    | '/filecheck'
     | '/flow'
     | '/image'
     | '/learn'
@@ -2441,6 +2532,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/qr'
     | '/ru'
+    | '/schema'
     | '/seo'
     | '/shortcuts'
     | '/soz'
@@ -2468,6 +2560,7 @@ export interface FileRouteTypes {
     | '/ar/erase'
     | '/ar/faiz'
     | '/ar/faq'
+    | '/ar/filecheck'
     | '/ar/flow'
     | '/ar/image'
     | '/ar/learn'
@@ -2482,6 +2575,7 @@ export interface FileRouteTypes {
     | '/ar/pdf'
     | '/ar/planner'
     | '/ar/qr'
+    | '/ar/schema'
     | '/ar/seo'
     | '/ar/shortcuts'
     | '/ar/soz'
@@ -2504,6 +2598,7 @@ export interface FileRouteTypes {
     | '/en/erase'
     | '/en/faiz'
     | '/en/faq'
+    | '/en/filecheck'
     | '/en/flow'
     | '/en/image'
     | '/en/learn'
@@ -2518,6 +2613,7 @@ export interface FileRouteTypes {
     | '/en/pdf'
     | '/en/planner'
     | '/en/qr'
+    | '/en/schema'
     | '/en/seo'
     | '/en/shortcuts'
     | '/en/soz'
@@ -2553,6 +2649,7 @@ export interface FileRouteTypes {
     | '/ru/erase'
     | '/ru/faiz'
     | '/ru/faq'
+    | '/ru/filecheck'
     | '/ru/flow'
     | '/ru/image'
     | '/ru/learn'
@@ -2567,6 +2664,7 @@ export interface FileRouteTypes {
     | '/ru/pdf'
     | '/ru/planner'
     | '/ru/qr'
+    | '/ru/schema'
     | '/ru/seo'
     | '/ru/shortcuts'
     | '/ru/soz'
@@ -2591,6 +2689,7 @@ export interface FileRouteTypes {
     | '/tr/erase'
     | '/tr/faiz'
     | '/tr/faq'
+    | '/tr/filecheck'
     | '/tr/flow'
     | '/tr/image'
     | '/tr/learn'
@@ -2605,6 +2704,7 @@ export interface FileRouteTypes {
     | '/tr/pdf'
     | '/tr/planner'
     | '/tr/qr'
+    | '/tr/schema'
     | '/tr/seo'
     | '/tr/shortcuts'
     | '/tr/soz'
@@ -2692,6 +2792,7 @@ export interface FileRouteTypes {
     | '/erase'
     | '/faiz'
     | '/faq'
+    | '/filecheck'
     | '/flow'
     | '/image'
     | '/learn'
@@ -2709,6 +2810,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/qr'
     | '/ru'
+    | '/schema'
     | '/seo'
     | '/shortcuts'
     | '/soz'
@@ -2735,6 +2837,7 @@ export interface FileRouteTypes {
     | '/ar/erase'
     | '/ar/faiz'
     | '/ar/faq'
+    | '/ar/filecheck'
     | '/ar/flow'
     | '/ar/image'
     | '/ar/learn'
@@ -2749,6 +2852,7 @@ export interface FileRouteTypes {
     | '/ar/pdf'
     | '/ar/planner'
     | '/ar/qr'
+    | '/ar/schema'
     | '/ar/seo'
     | '/ar/shortcuts'
     | '/ar/soz'
@@ -2771,6 +2875,7 @@ export interface FileRouteTypes {
     | '/en/erase'
     | '/en/faiz'
     | '/en/faq'
+    | '/en/filecheck'
     | '/en/flow'
     | '/en/image'
     | '/en/learn'
@@ -2785,6 +2890,7 @@ export interface FileRouteTypes {
     | '/en/pdf'
     | '/en/planner'
     | '/en/qr'
+    | '/en/schema'
     | '/en/seo'
     | '/en/shortcuts'
     | '/en/soz'
@@ -2820,6 +2926,7 @@ export interface FileRouteTypes {
     | '/ru/erase'
     | '/ru/faiz'
     | '/ru/faq'
+    | '/ru/filecheck'
     | '/ru/flow'
     | '/ru/image'
     | '/ru/learn'
@@ -2834,6 +2941,7 @@ export interface FileRouteTypes {
     | '/ru/pdf'
     | '/ru/planner'
     | '/ru/qr'
+    | '/ru/schema'
     | '/ru/seo'
     | '/ru/shortcuts'
     | '/ru/soz'
@@ -2858,6 +2966,7 @@ export interface FileRouteTypes {
     | '/tr/erase'
     | '/tr/faiz'
     | '/tr/faq'
+    | '/tr/filecheck'
     | '/tr/flow'
     | '/tr/image'
     | '/tr/learn'
@@ -2872,6 +2981,7 @@ export interface FileRouteTypes {
     | '/tr/pdf'
     | '/tr/planner'
     | '/tr/qr'
+    | '/tr/schema'
     | '/tr/seo'
     | '/tr/shortcuts'
     | '/tr/soz'
@@ -2959,6 +3069,7 @@ export interface FileRouteTypes {
     | '/erase'
     | '/faiz'
     | '/faq'
+    | '/filecheck'
     | '/flow'
     | '/image'
     | '/learn'
@@ -2976,6 +3087,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/qr'
     | '/ru'
+    | '/schema'
     | '/seo'
     | '/shortcuts'
     | '/soz'
@@ -3003,6 +3115,7 @@ export interface FileRouteTypes {
     | '/ar/erase'
     | '/ar/faiz'
     | '/ar/faq'
+    | '/ar/filecheck'
     | '/ar/flow'
     | '/ar/image'
     | '/ar/learn'
@@ -3017,6 +3130,7 @@ export interface FileRouteTypes {
     | '/ar/pdf'
     | '/ar/planner'
     | '/ar/qr'
+    | '/ar/schema'
     | '/ar/seo'
     | '/ar/shortcuts'
     | '/ar/soz'
@@ -3039,6 +3153,7 @@ export interface FileRouteTypes {
     | '/en/erase'
     | '/en/faiz'
     | '/en/faq'
+    | '/en/filecheck'
     | '/en/flow'
     | '/en/image'
     | '/en/learn'
@@ -3053,6 +3168,7 @@ export interface FileRouteTypes {
     | '/en/pdf'
     | '/en/planner'
     | '/en/qr'
+    | '/en/schema'
     | '/en/seo'
     | '/en/shortcuts'
     | '/en/soz'
@@ -3088,6 +3204,7 @@ export interface FileRouteTypes {
     | '/ru/erase'
     | '/ru/faiz'
     | '/ru/faq'
+    | '/ru/filecheck'
     | '/ru/flow'
     | '/ru/image'
     | '/ru/learn'
@@ -3102,6 +3219,7 @@ export interface FileRouteTypes {
     | '/ru/pdf'
     | '/ru/planner'
     | '/ru/qr'
+    | '/ru/schema'
     | '/ru/seo'
     | '/ru/shortcuts'
     | '/ru/soz'
@@ -3126,6 +3244,7 @@ export interface FileRouteTypes {
     | '/tr/erase'
     | '/tr/faiz'
     | '/tr/faq'
+    | '/tr/filecheck'
     | '/tr/flow'
     | '/tr/image'
     | '/tr/learn'
@@ -3140,6 +3259,7 @@ export interface FileRouteTypes {
     | '/tr/pdf'
     | '/tr/planner'
     | '/tr/qr'
+    | '/tr/schema'
     | '/tr/seo'
     | '/tr/shortcuts'
     | '/tr/soz'
@@ -3228,6 +3348,7 @@ export interface RootRouteChildren {
   EraseRoute: typeof EraseRoute
   FaizRoute: typeof FaizRoute
   FaqRoute: typeof FaqRouteWithChildren
+  FilecheckRoute: typeof FilecheckRoute
   FlowRoute: typeof FlowRoute
   ImageRoute: typeof ImageRoute
   LearnRoute: typeof LearnRoute
@@ -3245,6 +3366,7 @@ export interface RootRouteChildren {
   PrivacyRoute: typeof PrivacyRouteWithChildren
   QrRoute: typeof QrRoute
   RuRoute: typeof RuRouteWithChildren
+  SchemaRoute: typeof SchemaRoute
   SeoRoute: typeof SeoRoute
   ShortcutsRoute: typeof ShortcutsRoute
   SozRoute: typeof SozRouteWithChildren
@@ -3340,6 +3462,13 @@ declare module '@tanstack/react-router' {
       path: '/faq'
       fullPath: '/faq'
       preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/filecheck': {
+      id: '/filecheck'
+      path: '/filecheck'
+      fullPath: '/filecheck'
+      preLoaderRoute: typeof FilecheckRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/flow': {
@@ -3459,6 +3588,13 @@ declare module '@tanstack/react-router' {
       path: '/ru'
       fullPath: '/ru'
       preLoaderRoute: typeof RuRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/schema': {
+      id: '/schema'
+      path: '/schema'
+      fullPath: '/schema'
+      preLoaderRoute: typeof SchemaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/seo': {
@@ -3650,6 +3786,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArFaqRouteImport
       parentRoute: typeof ArRoute
     }
+    '/ar/filecheck': {
+      id: '/ar/filecheck'
+      path: '/filecheck'
+      fullPath: '/ar/filecheck'
+      preLoaderRoute: typeof ArFilecheckRouteImport
+      parentRoute: typeof ArRoute
+    }
     '/ar/flow': {
       id: '/ar/flow'
       path: '/flow'
@@ -3746,6 +3889,13 @@ declare module '@tanstack/react-router' {
       path: '/qr'
       fullPath: '/ar/qr'
       preLoaderRoute: typeof ArQrRouteImport
+      parentRoute: typeof ArRoute
+    }
+    '/ar/schema': {
+      id: '/ar/schema'
+      path: '/schema'
+      fullPath: '/ar/schema'
+      preLoaderRoute: typeof ArSchemaRouteImport
       parentRoute: typeof ArRoute
     }
     '/ar/seo': {
@@ -3902,6 +4052,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EnFaqRouteImport
       parentRoute: typeof EnRoute
     }
+    '/en/filecheck': {
+      id: '/en/filecheck'
+      path: '/filecheck'
+      fullPath: '/en/filecheck'
+      preLoaderRoute: typeof EnFilecheckRouteImport
+      parentRoute: typeof EnRoute
+    }
     '/en/flow': {
       id: '/en/flow'
       path: '/flow'
@@ -3998,6 +4155,13 @@ declare module '@tanstack/react-router' {
       path: '/qr'
       fullPath: '/en/qr'
       preLoaderRoute: typeof EnQrRouteImport
+      parentRoute: typeof EnRoute
+    }
+    '/en/schema': {
+      id: '/en/schema'
+      path: '/schema'
+      fullPath: '/en/schema'
+      preLoaderRoute: typeof EnSchemaRouteImport
       parentRoute: typeof EnRoute
     }
     '/en/seo': {
@@ -4273,6 +4437,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RuFaqRouteImport
       parentRoute: typeof RuRoute
     }
+    '/ru/filecheck': {
+      id: '/ru/filecheck'
+      path: '/filecheck'
+      fullPath: '/ru/filecheck'
+      preLoaderRoute: typeof RuFilecheckRouteImport
+      parentRoute: typeof RuRoute
+    }
     '/ru/flow': {
       id: '/ru/flow'
       path: '/flow'
@@ -4369,6 +4540,13 @@ declare module '@tanstack/react-router' {
       path: '/qr'
       fullPath: '/ru/qr'
       preLoaderRoute: typeof RuQrRouteImport
+      parentRoute: typeof RuRoute
+    }
+    '/ru/schema': {
+      id: '/ru/schema'
+      path: '/schema'
+      fullPath: '/ru/schema'
+      preLoaderRoute: typeof RuSchemaRouteImport
       parentRoute: typeof RuRoute
     }
     '/ru/seo': {
@@ -4539,6 +4717,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TrFaqRouteImport
       parentRoute: typeof TrRoute
     }
+    '/tr/filecheck': {
+      id: '/tr/filecheck'
+      path: '/filecheck'
+      fullPath: '/tr/filecheck'
+      preLoaderRoute: typeof TrFilecheckRouteImport
+      parentRoute: typeof TrRoute
+    }
     '/tr/flow': {
       id: '/tr/flow'
       path: '/flow'
@@ -4635,6 +4820,13 @@ declare module '@tanstack/react-router' {
       path: '/qr'
       fullPath: '/tr/qr'
       preLoaderRoute: typeof TrQrRouteImport
+      parentRoute: typeof TrRoute
+    }
+    '/tr/schema': {
+      id: '/tr/schema'
+      path: '/schema'
+      fullPath: '/tr/schema'
+      preLoaderRoute: typeof TrSchemaRouteImport
       parentRoute: typeof TrRoute
     }
     '/tr/seo': {
@@ -5250,6 +5442,7 @@ interface ArRouteChildren {
   ArEraseRoute: typeof ArEraseRoute
   ArFaizRoute: typeof ArFaizRoute
   ArFaqRoute: typeof ArFaqRouteWithChildren
+  ArFilecheckRoute: typeof ArFilecheckRoute
   ArFlowRoute: typeof ArFlowRoute
   ArImageRoute: typeof ArImageRoute
   ArLearnRoute: typeof ArLearnRoute
@@ -5264,6 +5457,7 @@ interface ArRouteChildren {
   ArPdfRoute: typeof ArPdfRoute
   ArPlannerRoute: typeof ArPlannerRoute
   ArQrRoute: typeof ArQrRoute
+  ArSchemaRoute: typeof ArSchemaRoute
   ArSeoRoute: typeof ArSeoRoute
   ArShortcutsRoute: typeof ArShortcutsRoute
   ArSozRoute: typeof ArSozRouteWithChildren
@@ -5293,6 +5487,7 @@ const ArRouteChildren: ArRouteChildren = {
   ArEraseRoute: ArEraseRoute,
   ArFaizRoute: ArFaizRoute,
   ArFaqRoute: ArFaqRouteWithChildren,
+  ArFilecheckRoute: ArFilecheckRoute,
   ArFlowRoute: ArFlowRoute,
   ArImageRoute: ArImageRoute,
   ArLearnRoute: ArLearnRoute,
@@ -5307,6 +5502,7 @@ const ArRouteChildren: ArRouteChildren = {
   ArPdfRoute: ArPdfRoute,
   ArPlannerRoute: ArPlannerRoute,
   ArQrRoute: ArQrRoute,
+  ArSchemaRoute: ArSchemaRoute,
   ArSeoRoute: ArSeoRoute,
   ArShortcutsRoute: ArShortcutsRoute,
   ArSozRoute: ArSozRouteWithChildren,
@@ -5436,6 +5632,7 @@ interface EnRouteChildren {
   EnEraseRoute: typeof EnEraseRoute
   EnFaizRoute: typeof EnFaizRoute
   EnFaqRoute: typeof EnFaqRouteWithChildren
+  EnFilecheckRoute: typeof EnFilecheckRoute
   EnFlowRoute: typeof EnFlowRoute
   EnImageRoute: typeof EnImageRoute
   EnLearnRoute: typeof EnLearnRoute
@@ -5450,6 +5647,7 @@ interface EnRouteChildren {
   EnPdfRoute: typeof EnPdfRoute
   EnPlannerRoute: typeof EnPlannerRoute
   EnQrRoute: typeof EnQrRoute
+  EnSchemaRoute: typeof EnSchemaRoute
   EnSeoRoute: typeof EnSeoRoute
   EnShortcutsRoute: typeof EnShortcutsRoute
   EnSozRoute: typeof EnSozRouteWithChildren
@@ -5479,6 +5677,7 @@ const EnRouteChildren: EnRouteChildren = {
   EnEraseRoute: EnEraseRoute,
   EnFaizRoute: EnFaizRoute,
   EnFaqRoute: EnFaqRouteWithChildren,
+  EnFilecheckRoute: EnFilecheckRoute,
   EnFlowRoute: EnFlowRoute,
   EnImageRoute: EnImageRoute,
   EnLearnRoute: EnLearnRoute,
@@ -5493,6 +5692,7 @@ const EnRouteChildren: EnRouteChildren = {
   EnPdfRoute: EnPdfRoute,
   EnPlannerRoute: EnPlannerRoute,
   EnQrRoute: EnQrRoute,
+  EnSchemaRoute: EnSchemaRoute,
   EnSeoRoute: EnSeoRoute,
   EnShortcutsRoute: EnShortcutsRoute,
   EnSozRoute: EnSozRouteWithChildren,
@@ -5689,6 +5889,7 @@ interface RuRouteChildren {
   RuEraseRoute: typeof RuEraseRoute
   RuFaizRoute: typeof RuFaizRoute
   RuFaqRoute: typeof RuFaqRouteWithChildren
+  RuFilecheckRoute: typeof RuFilecheckRoute
   RuFlowRoute: typeof RuFlowRoute
   RuImageRoute: typeof RuImageRoute
   RuLearnRoute: typeof RuLearnRoute
@@ -5703,6 +5904,7 @@ interface RuRouteChildren {
   RuPdfRoute: typeof RuPdfRoute
   RuPlannerRoute: typeof RuPlannerRoute
   RuQrRoute: typeof RuQrRoute
+  RuSchemaRoute: typeof RuSchemaRoute
   RuSeoRoute: typeof RuSeoRoute
   RuShortcutsRoute: typeof RuShortcutsRoute
   RuSozRoute: typeof RuSozRouteWithChildren
@@ -5733,6 +5935,7 @@ const RuRouteChildren: RuRouteChildren = {
   RuEraseRoute: RuEraseRoute,
   RuFaizRoute: RuFaizRoute,
   RuFaqRoute: RuFaqRouteWithChildren,
+  RuFilecheckRoute: RuFilecheckRoute,
   RuFlowRoute: RuFlowRoute,
   RuImageRoute: RuImageRoute,
   RuLearnRoute: RuLearnRoute,
@@ -5747,6 +5950,7 @@ const RuRouteChildren: RuRouteChildren = {
   RuPdfRoute: RuPdfRoute,
   RuPlannerRoute: RuPlannerRoute,
   RuQrRoute: RuQrRoute,
+  RuSchemaRoute: RuSchemaRoute,
   RuSeoRoute: RuSeoRoute,
   RuShortcutsRoute: RuShortcutsRoute,
   RuSozRoute: RuSozRouteWithChildren,
@@ -5897,6 +6101,7 @@ interface TrRouteChildren {
   TrEraseRoute: typeof TrEraseRoute
   TrFaizRoute: typeof TrFaizRoute
   TrFaqRoute: typeof TrFaqRouteWithChildren
+  TrFilecheckRoute: typeof TrFilecheckRoute
   TrFlowRoute: typeof TrFlowRoute
   TrImageRoute: typeof TrImageRoute
   TrLearnRoute: typeof TrLearnRoute
@@ -5911,6 +6116,7 @@ interface TrRouteChildren {
   TrPdfRoute: typeof TrPdfRoute
   TrPlannerRoute: typeof TrPlannerRoute
   TrQrRoute: typeof TrQrRoute
+  TrSchemaRoute: typeof TrSchemaRoute
   TrSeoRoute: typeof TrSeoRoute
   TrShortcutsRoute: typeof TrShortcutsRoute
   TrSozRoute: typeof TrSozRouteWithChildren
@@ -5940,6 +6146,7 @@ const TrRouteChildren: TrRouteChildren = {
   TrEraseRoute: TrEraseRoute,
   TrFaizRoute: TrFaizRoute,
   TrFaqRoute: TrFaqRouteWithChildren,
+  TrFilecheckRoute: TrFilecheckRoute,
   TrFlowRoute: TrFlowRoute,
   TrImageRoute: TrImageRoute,
   TrLearnRoute: TrLearnRoute,
@@ -5954,6 +6161,7 @@ const TrRouteChildren: TrRouteChildren = {
   TrPdfRoute: TrPdfRoute,
   TrPlannerRoute: TrPlannerRoute,
   TrQrRoute: TrQrRoute,
+  TrSchemaRoute: TrSchemaRoute,
   TrSeoRoute: TrSeoRoute,
   TrShortcutsRoute: TrShortcutsRoute,
   TrSozRoute: TrSozRouteWithChildren,
@@ -6010,6 +6218,7 @@ const rootRouteChildren: RootRouteChildren = {
   EraseRoute: EraseRoute,
   FaizRoute: FaizRoute,
   FaqRoute: FaqRouteWithChildren,
+  FilecheckRoute: FilecheckRoute,
   FlowRoute: FlowRoute,
   ImageRoute: ImageRoute,
   LearnRoute: LearnRoute,
@@ -6027,6 +6236,7 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyRoute: PrivacyRouteWithChildren,
   QrRoute: QrRoute,
   RuRoute: RuRouteWithChildren,
+  SchemaRoute: SchemaRoute,
   SeoRoute: SeoRoute,
   ShortcutsRoute: ShortcutsRoute,
   SozRoute: SozRouteWithChildren,
