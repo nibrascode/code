@@ -547,6 +547,13 @@ const PAGES: Record<string, Copy> = {
       description: "Nibras Code ile iletişim için e-posta: nibrascode@gmail.com. Uygulama, sayfa veya gizlilik hakkında soru yazabilirsiniz.",
     },
   },
+  "/trust": {
+    az: { title: "Şəffaflıq və xidmət səviyyəsi — Nibras Code", description: "Nibras Code kimdir, fayllarla nə olur, saxta rəy olmaması və xidmət səviyyəsi. Alətlər brauzerdə işləyir." },
+    en: { title: "Transparency and service level — Nibras Code", description: "Who runs Nibras Code, what happens to files, no fake reviews, and the service level. Tools run in the browser." },
+    tr: { title: "Şeffaflık ve hizmet seviyesi — Nibras Code", description: "Nibras Code kimdir, dosyalara ne olur, sahte yorum yok ve hizmet seviyesi. Araçlar tarayıcıda çalışır." },
+    ar: { title: "الشفافية ومستوى الخدمة — Nibras Code", description: "من يدير Nibras Code، ماذا يحدث للملفات، لا تقييمات مزيفة، ومستوى الخدمة. الأدوات تعمل في المتصفح." },
+    ru: { title: "Прозрачность и уровень сервиса — Nibras Code", description: "Кто делает Nibras Code, что происходит с файлами, без фальшивых отзывов и уровень сервиса. Инструменты работают в браузере." },
+  },
   "/terms": {
     az: {
       title: "İstifadə şərtləri — Nibras Code",

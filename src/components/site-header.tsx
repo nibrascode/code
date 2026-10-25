@@ -79,12 +79,12 @@ export function SiteFooter() {
   );
 }
 
-const LEGAL: Record<Lang, { about: string; contact: string; privacy: string; terms: string }> = {
-  az: { about: "Haqqımızda", contact: "Əlaqə", privacy: "Məxfilik", terms: "İstifadə şərtləri" },
-  en: { about: "About", contact: "Contact", privacy: "Privacy", terms: "Terms" },
-  tr: { about: "Hakkımızda", contact: "İletişim", privacy: "Gizlilik", terms: "Kullanım şartları" },
-  ar: { about: "من نحن", contact: "تواصل", privacy: "الخصوصية", terms: "شروط الاستخدام" },
-  ru: { about: "О нас", contact: "Контакт", privacy: "Конфиденциальность", terms: "Условия" },
+const LEGAL: Record<Lang, { about: string; contact: string; privacy: string; terms: string; trust: string }> = {
+  az: { about: "Haqqımızda", contact: "Əlaqə", privacy: "Məxfilik", terms: "İstifadə şərtləri", trust: "Şəffaflıq" },
+  en: { about: "About", contact: "Contact", privacy: "Privacy", terms: "Terms", trust: "Transparency" },
+  tr: { about: "Hakkımızda", contact: "İletişim", privacy: "Gizlilik", terms: "Kullanım şartları", trust: "Şeffaflık" },
+  ar: { about: "من نحن", contact: "تواصل", privacy: "الخصوصية", terms: "شروط الاستخدام", trust: "الشفافية" },
+  ru: { about: "О нас", contact: "Контакт", privacy: "Конфиденциальность", terms: "Условия", trust: "Прозрачность" },
 };
 
 export function SocialIcons() {
@@ -120,6 +120,7 @@ export function SiteLegal() {
         <a href={localeHref(lang, "/contact")}>{copy.contact}</a>
         <a href={localeHref(lang, "/privacy")}>{copy.privacy}</a>
         <a href={localeHref(lang, "/terms")}>{copy.terms}</a>
+        <a href={localeHref(lang, "/trust")}>{copy.trust}</a>
       </nav>
     </div>
   );

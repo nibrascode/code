@@ -1,0 +1,5 @@
+Contact: mailto:nibrascode@gmail.com
+Expires: 2027-10-25T00:00:00.000Z
+Preferred-Languages: az, en, tr, ar, ru
+Canonical: https://nibrascode.com/.well-known/security.txt
+Policy: https://nibrascode.com/trust
