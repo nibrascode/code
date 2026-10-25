@@ -151,7 +151,9 @@ function Convert({ t }: { t: Record<string, string> }) {
           const b = await load(f);
           const blob = await encode(b, b.width, b.height, fmt, q);
           b.close();
-          res.push({ name: `${baseName(f.name)}.${EXT[fmt]}`, blob, before: f.size });
+          let name = `${baseName(f.name)}.${EXT[fmt]}`;
+          for (let n = 2; res.some((r) => r.name === name); n++) name = `${baseName(f.name)}-${n}.${EXT[fmt]}`;
+          res.push({ name, blob, before: f.size });
         } catch { fails.push(f.name); }
       }
       if (!dead) { setOuts(res); setBad(fails); setBusy(false); }
