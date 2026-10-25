@@ -1,12 +1,13 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { ArrowLeft, Code2, Download, FileText, FileUp, FolderPlus, ListChecks, Pencil, Play, Plus, Trash2, X } from "lucide-react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { ArrowLeft, Code2, Download, FileText, FileUp, FolderPlus, ListChecks, Pencil, Trash2 } from "lucide-react";
 import { useI18n } from "@/lib/i18n-context";
 import { save, ui } from "@/kit/shell";
 import { WS, type WsCopy } from "./i18n";
 import { makeQuestions, questionsToText, type Question } from "./questions";
-import { buildPreview, devLink, filesToZip, textToDocx } from "./files";
+import { textToDocx } from "./files";
+import { CodeTool } from "./ide";
 import { localeHref } from "@/lib/locale-path";
-import { BookOpen, ExternalLink, Smartphone } from "lucide-react";
+import { BookOpen } from "lucide-react";
 
 type CodeFile = { name: string; content: string };
 type Act = "act_created" | "act_pdf" | "act_q" | "act_doc" | "act_run" | "act_zip" | "act_edit";
@@ -110,7 +111,7 @@ export function WorkspacePage() {
   );
 
   return (
-    <main className="files-page ws-page mx-auto w-full max-w-5xl px-3 pt-24 pb-16 md:px-6 md:pt-28" dir={lang === "ar" ? "rtl" : "ltr"} data-testid="workspace">
+    <main className={"files-page ws-page mx-auto w-full px-3 " + (current?.tab === "code" ? "max-w-[1680px]" : "max-w-5xl") + " pt-24 pb-16 md:px-6 md:pt-28"} dir={lang === "ar" ? "rtl" : "ltr"} data-testid="workspace">
       {current ? (
         <ProjectView key={current.id} p={current} c={c} update={update} onBack={() => go(null)} />
       ) : (
@@ -415,128 +416,6 @@ function DocTool({ p, c, set }: ToolProps) {
         <button className={ui.btn + " min-h-11 justify-center"} disabled={busy || !p.docBody.trim()} onClick={() => void dl("pdf")} data-testid="ws-dl-pdf"><Download className="size-4" /> {c.dlPdf}</button>
         <button className={ui.btn + " min-h-11 justify-center"} disabled={busy || !p.docBody.trim()} onClick={() => void dl("txt")} data-testid="ws-dl-txt"><Download className="size-4" /> {c.dlTxt}</button>
       </div>
-    </section>
-  );
-}
-
-function CodeTool({ p, c, set }: ToolProps) {
-  const [srcdoc, setSrcdoc] = useState("");
-  const [runId, setRunId] = useState(0);
-  const [logs, setLogs] = useState<{ t: string; m: string }[]>([]);
-  const [view, setView] = useState<"edit" | "run">("edit");
-  const frame = useRef<HTMLIFrameElement>(null);
-  const file = p.files.find((f) => f.name === p.activeFile) ?? p.files[0];
-  useEffect(() => {
-    const on = (e: MessageEvent) => {
-      if (e.source !== frame.current?.contentWindow || !e.data?.__nw) return;
-      setLogs((l) => [...l.slice(-199), { t: String(e.data.t), m: String(e.data.m) }]);
-    };
-    window.addEventListener("message", on);
-    return () => window.removeEventListener("message", on);
-  }, []);
-  const edit = (content: string) => set({ files: p.files.map((f) => (f.name === file.name ? { ...f, content } : f)) });
-  const run = () => {
-    setLogs([]);
-    setView("run");
-    setSrcdoc(buildPreview(p.files));
-    setRunId((n) => n + 1);
-    set({}, "act_run");
-  };
-  const add = () => {
-    const n = prompt(c.fileName, "page.html")?.trim();
-    if (!n) return;
-    if (p.files.some((f) => f.name === n)) return alert(c.exists);
-    set({ files: [...p.files, { name: n.replace(/[\\:*?"<>|]+/g, "-"), content: "" }], activeFile: n });
-  };
-  const rename = () => {
-    const n = prompt(c.fileName, file.name)?.trim();
-    if (!n || n === file.name) return;
-    if (p.files.some((f) => f.name === n)) return alert(c.exists);
-    set({ files: p.files.map((f) => (f.name === file.name ? { ...f, name: n } : f)), activeFile: n });
-  };
-  const remove = () => {
-    if (p.files.length < 2) return alert(c.keepOne);
-    if (!confirm(`${c.del}: ${file.name}?`)) return;
-    const rest = p.files.filter((f) => f.name !== file.name);
-    set({ files: rest, activeFile: rest[0].name });
-  };
-  const [note, setNote] = useState("");
-  const openDev = async () => {
-    const url = await devLink(p.files);
-    if (!url) return setNote(c.tooBig);
-    setNote(c.devNote);
-    window.open(url, "_blank", "noopener");
-    set({}, "act_run");
-  };
-  const toApk = async () => {
-    if (!p.files.some((f) => f.name.toLowerCase() === "index.html")) return setNote(c.needIndex);
-    const w = window.open("https://studio.nibrascode.com/", "_blank", "noopener");
-    save(`${safeName(p.name)}-site.zip`, await filesToZip(p.files));
-    setNote(c.apkNote);
-    set({}, "act_zip");
-    void w;
-  };
-  const zip = async () => {
-    save(`${safeName(p.name)}.zip`, await filesToZip(p.files));
-    set({}, "act_zip");
-  };
-  return (
-    <section>
-      <div className="mb-2 flex gap-1 overflow-x-auto pb-1" data-testid="ws-files">
-        {p.files.map((f) => (
-          <button key={f.name} onClick={() => set({ activeFile: f.name })} className={"whitespace-nowrap rounded-lg border px-3 py-1.5 font-mono text-xs " + (f.name === file.name ? "border-[#2f6bff] bg-[#2f6bff]/20" : "border-white/10 text-muted")}>
-            {f.name}
-          </button>
-        ))}
-        <button className={ui.btn + " whitespace-nowrap py-1.5 text-xs"} onClick={add} data-testid="ws-addfile"><Plus className="size-3.5" /> {c.addFile}</button>
-      </div>
-      <div className="mb-2 flex gap-2 md:hidden">
-        <button className={"flex-1 rounded-xl py-2 text-sm " + (view === "edit" ? "bg-white/15" : "bg-white/5")} onClick={() => setView("edit")}>{c.editor}</button>
-        <button className={"flex-1 rounded-xl py-2 text-sm " + (view === "run" ? "bg-white/15" : "bg-white/5")} onClick={() => setView("run")}>{c.preview}</button>
-      </div>
-      <div className="grid gap-3 md:grid-cols-2">
-        <div className={view === "edit" ? "" : "hidden md:block"}>
-          <div className="mb-1 flex items-center justify-end gap-1">
-            <button className={ui.btn + " px-2 py-1 text-xs"} onClick={rename}><Pencil className="size-3.5" /> {c.rename}</button>
-            <button className={ui.btn + " px-2 py-1 text-xs text-red-300"} onClick={remove}><X className="size-3.5" /> {c.del}</button>
-          </div>
-          <textarea
-            className="h-[52vh] w-full resize-y rounded-xl border border-white/15 bg-[#070b16] p-3 font-mono text-[13px] leading-relaxed text-[#dfe6ff]"
-            spellCheck={false}
-            autoCapitalize="off"
-            autoCorrect="off"
-            dir="ltr"
-            value={file.content}
-            data-testid="ws-code"
-            onChange={(e) => edit(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Tab") {
-                e.preventDefault();
-                const el = e.currentTarget;
-                const s = el.selectionStart;
-                const v = el.value.slice(0, s) + "  " + el.value.slice(el.selectionEnd);
-                edit(v);
-                requestAnimationFrame(() => el.setSelectionRange(s + 2, s + 2));
-              }
-              if ((e.ctrlKey || e.metaKey) && e.key === "Enter") run();
-            }}
-          />
-        </div>
-        <div className={view === "run" ? "" : "hidden md:block"}>
-          <iframe key={runId} ref={frame} title={c.preview} sandbox="allow-scripts allow-modals" srcDoc={srcdoc} className="h-[40vh] w-full rounded-xl border border-white/15 bg-white" data-testid="ws-frame" />
-          <div className="mt-2 max-h-[14vh] overflow-auto rounded-xl border border-white/10 bg-black/40 p-2 font-mono text-xs" data-testid="ws-console" dir="ltr">
-            <div className="mb-1 text-muted">{c.console}</div>
-            {logs.length ? logs.map((l, i) => <div key={i} className={l.t === "error" ? "text-red-300" : l.t === "warn" ? "text-amber-200" : ""}>{l.m}</div>) : <div className="text-muted">{c.noLogs}</div>}
-          </div>
-        </div>
-      </div>
-      <div className="mt-3 grid grid-cols-2 gap-2 sm:flex">
-        <button className={ui.primary + " min-h-11 justify-center"} onClick={run} data-testid="ws-run"><Play className="size-4" /> {c.run}</button>
-        <button className={ui.btn + " min-h-11 justify-center"} onClick={() => void zip()} data-testid="ws-zip"><Download className="size-4" /> {c.zip}</button>
-        <button className={ui.btn + " min-h-11 justify-center"} onClick={() => void openDev()} data-testid="ws-dev"><ExternalLink className="size-4" /> {c.dev}</button>
-        <button className={ui.btn + " min-h-11 justify-center"} onClick={() => void toApk()} data-testid="ws-apk"><Smartphone className="size-4" /> {c.apk}</button>
-      </div>
-      {note ? <p className="mt-3 rounded-xl border border-[#2f6bff]/40 bg-[#2f6bff]/10 p-3 text-sm" data-testid="ws-note">{note}</p> : null}
     </section>
   );
 }

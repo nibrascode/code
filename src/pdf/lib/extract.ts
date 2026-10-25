@@ -1,6 +1,7 @@
 import type { Lang } from "@/lib/i18n";
 import { closePdf, openPdf, renderPageToCanvas } from "./pdfjs";
 import { cleanText, layoutPage, stripRunning, type RawItem } from "./layout";
+import { fixArabicDoc, itemsToLines, textQuality } from "./textLines";
 import { detectOcrLangs, ocrDetailed, ocrLangForSite, preprocessForOcr, type OcrLang } from "./ocr";
 
 export type ExtractPage = { n: number; text: string; method: "text" | "ocr"; confidence?: number };
@@ -27,14 +28,19 @@ export async function extractTextSmart(bytes: Uint8Array, o: ExtractOptions): Pr
       if (o.shouldCancel?.()) break;
       o.onProgress?.({ page: n, total, phase: "text", fraction: (n - 1) / total });
       let text = "";
+      let rtl = false;
       if (o.ocr !== "force") {
         const page = await doc.getPage(n);
-        const tc = await page.getTextContent();
-        text = layoutPage(tc.items as unknown as RawItem[], page.view[2] - page.view[0]);
+        const tc = await page.getTextContent({ includeMarkedContent: true });
+        const glyphs = (tc.items as { str?: string }[]).filter((i) => typeof i.str === "string");
+        // Arabic/RTL pages need ActualText, right-to-left ordering and ligature repair.
+        rtl = glyphs.some((i) => /[\u0590-\u08FF\uFB1D-\uFDFF\uFE70-\uFEFF]/.test(i.str!));
+        text = rtl ? fixArabicDoc([itemsToLines(tc.items as never).join("\n")])[0] : layoutPage(glyphs as unknown as RawItem[], page.view[2] - page.view[0]);
       }
       const letters = (text.match(/\p{L}/gu) || []).length;
       pages.push({ n, text, method: "text" });
-      if (o.ocr !== "never" && (o.ocr === "force" || letters < MIN_LETTERS)) needOcr.push(n);
+      const garbage = letters >= MIN_LETTERS && textQuality([text]) === "garbage";
+      if (o.ocr !== "never" && (o.ocr === "force" || letters < MIN_LETTERS || garbage)) needOcr.push(n);
     }
     let langs: OcrLang[] = [];
     let conf: number[] = [];
