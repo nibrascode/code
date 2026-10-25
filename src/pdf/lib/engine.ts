@@ -579,9 +579,10 @@ export async function readXlsx(bytes: Uint8Array): Promise<{ name: string; rows:
   }).filter((s) => s.rows.length);
 }
 
-type Fonts = { reg: import("@cantoo/pdf-lib").PDFFont; bold: import("@cantoo/pdf-lib").PDFFont; ar: import("@cantoo/pdf-lib").PDFFont; arBold: import("@cantoo/pdf-lib").PDFFont };
+type Fonts = { reg: import("pdf-lib").PDFFont; bold: import("pdf-lib").PDFFont; ar: import("pdf-lib").PDFFont; arBold: import("pdf-lib").PDFFont };
+// Uses plain pdf-lib: font subsetting with @pdf-lib/fontkit crashes on save in the @cantoo fork.
 async function docWithFonts() {
-  const lib = await import("@cantoo/pdf-lib");
+  const { lib } = await getEngine();
   const fk = (await import("@pdf-lib/fontkit")) as { default?: unknown };
   const doc = await lib.PDFDocument.create();
   doc.registerFontkit((fk.default ?? fk) as never);
