@@ -120,6 +120,9 @@ export function ImagePage() {
       ) : null}
       <NextLinks
         links={[
+          { href: "/image/resize", label: { az: "Ölçünü dəyiş", en: "Resize", tr: "Boyut değiştir", ar: "تغيير الحجم", ru: "Размер" } },
+          { href: "/image/convert", label: { az: "Formatı çevir", en: "Convert format", tr: "Biçim dönüştür", ar: "تحويل الصيغة", ru: "Формат" } },
+          { href: "/image/edit", label: { az: "Kəs və döndər", en: "Crop & rotate", tr: "Kırp ve döndür", ar: "قص وتدوير", ru: "Обрезка и поворот" } },
           { href: "/erase", label: { az: "Şəkil fon sil", en: "Remove background", tr: "Arka plan sil", ar: "حذف الخلفية", ru: "Удалить фон" } },
           { href: "/pdf/image-pdf", label: { az: "JPG-dən PDF", en: "JPG to PDF", tr: "JPG'den PDF", ar: "من JPG إلى PDF", ru: "JPG в PDF" } },
         ]}

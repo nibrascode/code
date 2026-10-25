@@ -52,6 +52,48 @@ const FAQ_TITLE: Record<Lang, string> = {
 };
 
 const INTENT: Partial<Record<ToolId, Record<Lang, { title: string; h1: string; description: string }>>> = {
+  "unlock": {
+    az: { title: "PDF parolunu aç — pulsuz", h1: "PDF parolunu aç", description: "Parolu bilirsinizsə, PDF-in parolsuz nüsxəsini yükləyin" },
+    en: { title: "Unlock PDF — free", h1: "Unlock a PDF", description: "If you know the password, download a copy without it" },
+    tr: { title: "PDF parolasını kaldır — ücretsiz", h1: "PDF parolasını kaldır", description: "Parolayı biliyorsanız parolasız kopyayı indirin" },
+    ar: { title: "إزالة كلمة مرور PDF — مجاناً", h1: "إزالة كلمة مرور PDF", description: "إن كنت تعرف كلمة المرور فنزّل نسخة بدونها" },
+    ru: { title: "Снять пароль с PDF — бесплатно", h1: "Снять пароль с PDF", description: "Если вы знаете пароль, скачайте копию без него" },
+  },
+  "crop": {
+    az: { title: "PDF kəs — pulsuz", h1: "PDF-i kəs", description: "Səhifənin yuxarı, aşağı, sol və sağ kənarını mm ilə kəs" },
+    en: { title: "Crop PDF — free", h1: "Crop PDF pages", description: "Trim the top, bottom, left and right edges in mm" },
+    tr: { title: "PDF kırp — ücretsiz", h1: "PDF kırp", description: "Üst, alt, sol ve sağ kenarı mm ile kırpın" },
+    ar: { title: "قص PDF — مجاناً", h1: "قص صفحات PDF", description: "قصّ الحافة العلوية والسفلية واليسرى واليمنى بالمليمتر" },
+    ru: { title: "Обрезать PDF — бесплатно", h1: "Обрезать страницы PDF", description: "Обрежьте верх, низ, левый и правый край в мм" },
+  },
+  "grayscale": {
+    az: { title: "PDF-i ağ-qara et — pulsuz", h1: "PDF-i boz et", description: "Rəngli PDF-i boz çalarlara çevir, çap üçün" },
+    en: { title: "Grayscale PDF — free", h1: "Make a PDF grayscale", description: "Turn a color PDF into shades of gray for printing" },
+    tr: { title: "PDF'i siyah beyaz yap — ücretsiz", h1: "PDF'i gri yap", description: "Renkli PDF'i baskı için gri tonlara çevirin" },
+    ar: { title: "تحويل PDF إلى أبيض وأسود — مجاناً", h1: "PDF بالرمادي", description: "حوّل PDF الملوّن إلى درجات الرمادي للطباعة" },
+    ru: { title: "PDF в чёрно-белый — бесплатно", h1: "PDF в оттенки серого", description: "Переведите цветной PDF в оттенки серого для печати" },
+  },
+  "excel-pdf": {
+    az: { title: "Excel-dən PDF — pulsuz", h1: "Excel və CSV-dən PDF", description: "XLSX və ya CSV cədvəlini səliqəli PDF cədvəlinə çevir" },
+    en: { title: "Excel to PDF — free", h1: "Excel and CSV to PDF", description: "Turn an XLSX or CSV sheet into a neat PDF table" },
+    tr: { title: "Excel'den PDF — ücretsiz", h1: "Excel ve CSV'den PDF", description: "XLSX veya CSV tablosunu düzenli PDF tablosuna çevirin" },
+    ar: { title: "من Excel إلى PDF — مجاناً", h1: "من Excel وCSV إلى PDF", description: "حوّل جدول XLSX أو CSV إلى جدول PDF مرتب" },
+    ru: { title: "Excel в PDF — бесплатно", h1: "Excel и CSV в PDF", description: "Превратите таблицу XLSX или CSV в аккуратную таблицу PDF" },
+  },
+  "redact": {
+    az: { title: "PDF-də məlumatı gizlət — pulsuz", h1: "PDF-də məlumatı gizlət", description: "Ad, nömrə və ya imzanın üstünü qara qutu ilə ört" },
+    en: { title: "Redact PDF — free", h1: "Redact a PDF", description: "Cover names, numbers or signatures with black boxes" },
+    tr: { title: "PDF'te bilgi gizle — ücretsiz", h1: "PDF'te bilgiyi gizle", description: "Ad, numara veya imzanın üstünü siyah kutuyla örtün" },
+    ar: { title: "إخفاء معلومات PDF — مجاناً", h1: "إخفاء معلومات في PDF", description: "غطِّ الأسماء أو الأرقام أو التوقيع بمربعات سوداء" },
+    ru: { title: "Скрыть данные в PDF — бесплатно", h1: "Скрыть данные в PDF", description: "Закройте имена, номера или подпись чёрными блоками" },
+  },
+  "invoice": {
+    az: { title: "Hesab-faktura PDF — pulsuz", h1: "Hesab-faktura hazırla", description: "Satıcı, alıcı və malları yazın, PDF fakturanı yükləyin" },
+    en: { title: "Invoice PDF maker — free", h1: "Make an invoice PDF", description: "Enter seller, buyer and items, then download the PDF invoice" },
+    tr: { title: "Fatura PDF — ücretsiz", h1: "Fatura hazırla", description: "Satıcı, alıcı ve kalemleri yazın, PDF faturayı indirin" },
+    ar: { title: "فاتورة PDF — مجاناً", h1: "إعداد فاتورة PDF", description: "اكتب البائع والمشتري والبنود ونزّل الفاتورة PDF" },
+    ru: { title: "Счёт в PDF — бесплатно", h1: "Сделать счёт в PDF", description: "Укажите продавца, покупателя и позиции и скачайте счёт" },
+  },
   merge: {
     az: { title: "PDF birləşdir — pulsuz", h1: "PDF birləşdir", description: "Bir neçə PDF-i bir faylda birləşdir" },
     en: { title: "Merge PDF — free", h1: "Merge PDF", description: "Join several PDFs into one file" },
@@ -146,6 +188,168 @@ const INTENT: Partial<Record<ToolId, Record<Lang, { title: string; h1: string; d
 };
 
 const FAQS: Partial<Record<ToolId, Record<Lang, { q: string; a: string }[]>>> = {
+  "unlock": {
+    az: [
+      { q: "Parolu bilmədən açmaq olar?", a: "Xeyr. Bu alət parolu sındırmır. Açılış parolunu bilməlisiniz." },
+      { q: "Yalnız «icazə» parolu olan PDF?", a: "Belə PDF parolsuz açılır. Alət onu yenidən yazır və çap/kopya məhdudiyyətləri götürülür." },
+      { q: "Fayl serverə gedir?", a: "Xeyr. Parol və fayl bu brauzerdə qalır." },
+    ],
+    en: [
+      { q: "Can it open a PDF without the password?", a: "No. This tool does not crack passwords. You need the open password." },
+      { q: "What about a PDF with only a permissions password?", a: "Such a PDF opens without a password. The tool rewrites it, and print or copy limits are dropped." },
+      { q: "Does the file go to a server?", a: "No. The password and the file stay in this browser." },
+    ],
+    tr: [
+      { q: "Parolasız açılabilir mi?", a: "Hayır. Bu araç parola kırmaz. Açılış parolasını bilmelisiniz." },
+      { q: "Sadece izin parolası olan PDF?", a: "Böyle PDF parolasız açılır. Araç onu yeniden yazar, yazdırma/kopya sınırları kalkar." },
+      { q: "Dosya sunucuya gider mi?", a: "Hayır. Parola ve dosya bu tarayıcıda kalır." },
+    ],
+    ar: [
+      { q: "هل يفتح PDF بلا كلمة مرور؟", a: "لا. الأداة لا تكسر كلمات المرور. يجب أن تعرف كلمة الفتح." },
+      { q: "وماذا عن PDF بكلمة أذونات فقط؟", a: "يُفتح بلا كلمة مرور. تعيد الأداة كتابته فتُزال قيود الطباعة والنسخ." },
+      { q: "هل يذهب الملف إلى خادم؟", a: "لا. كلمة المرور والملف يبقيان في هذا المتصفح." },
+    ],
+    ru: [
+      { q: "Можно открыть без пароля?", a: "Нет. Инструмент не взламывает пароли. Нужен пароль на открытие." },
+      { q: "А PDF только с паролем прав?", a: "Такой PDF открывается без пароля. Инструмент пересохраняет его, ограничения печати и копирования снимаются." },
+      { q: "Файл уходит на сервер?", a: "Нет. Пароль и файл остаются в этом браузере." },
+    ],
+  },
+  "crop": {
+    az: [
+      { q: "Kəsilən hissə silinir?", a: "Xeyr. Kənar görünmür, amma fayl içində qala bilər. Tam silmək üçün «Məlumatı gizlət» alətindən istifadə edin." },
+      { q: "Ölçü nə ilədir?", a: "Millimetr ilə. 10 mm təxminən 1 sm-dir." },
+      { q: "Yalnız bəzi səhifələri kəsmək olar?", a: "Bəli. Səhifə aralığı yazın, məsələn 1-3." },
+    ],
+    en: [
+      { q: "Is the cut part deleted?", a: "No. The edge is hidden but may stay inside the file. To remove content, use Redact PDF." },
+      { q: "What unit is used?", a: "Millimetres. 10 mm is about 1 cm." },
+      { q: "Can I crop only some pages?", a: "Yes. Enter a page range, for example 1-3." },
+    ],
+    tr: [
+      { q: "Kırpılan kısım silinir mi?", a: "Hayır. Kenar görünmez ama dosyada kalabilir. İçeriği kaldırmak için «Bilgiyi gizle» aracını kullanın." },
+      { q: "Birim nedir?", a: "Milimetre. 10 mm yaklaşık 1 cm'dir." },
+      { q: "Sadece bazı sayfalar kırpılabilir mi?", a: "Evet. Sayfa aralığı yazın, örneğin 1-3." },
+    ],
+    ar: [
+      { q: "هل يُحذف الجزء المقصوص؟", a: "لا. تُخفى الحافة لكنها قد تبقى في الملف. لإزالة المحتوى استخدم أداة الإخفاء." },
+      { q: "ما وحدة القياس؟", a: "المليمتر. 10 مم تقريباً 1 سم." },
+      { q: "هل يمكن قص بعض الصفحات فقط؟", a: "نعم. اكتب نطاق الصفحات مثل 1-3." },
+    ],
+    ru: [
+      { q: "Обрезанная часть удаляется?", a: "Нет. Край скрыт, но может остаться в файле. Чтобы убрать содержимое, используйте «Скрыть данные»." },
+      { q: "В чём измеряется?", a: "В миллиметрах. 10 мм — около 1 см." },
+      { q: "Можно обрезать только часть страниц?", a: "Да. Укажите диапазон, например 1-3." },
+    ],
+  },
+  "grayscale": {
+    az: [
+      { q: "Keyfiyyət dəyişir?", a: "Səhifələr şəkil kimi yenidən qurulur. Mətn artıq seçilmir və axtarılmır. Yaxşı keyfiyyət seçimi daha aydın, amma daha böyük fayl verir." },
+      { q: "Niyə boz etmək?", a: "Ağ-qara çapda rəngli toner sərf olunmur və nəticə əvvəlcədən görünür." },
+      { q: "Fayl serverə gedir?", a: "Xeyr. Hər şey bu brauzerdə edilir." },
+    ],
+    en: [
+      { q: "Does quality change?", a: "Pages are rebuilt as images. Text can no longer be selected or searched. Higher quality is sharper but makes a bigger file." },
+      { q: "Why make it gray?", a: "Black and white printing uses no color toner, and you see the result first." },
+      { q: "Does the file go to a server?", a: "No. Everything runs in this browser." },
+    ],
+    tr: [
+      { q: "Kalite değişir mi?", a: "Sayfalar görsel olarak yeniden kurulur. Metin artık seçilmez ve aranmaz. Yüksek kalite daha net ama daha büyük dosya verir." },
+      { q: "Neden gri?", a: "Siyah beyaz baskıda renkli toner harcanmaz, sonucu önceden görürsünüz." },
+      { q: "Dosya sunucuya gider mi?", a: "Hayır. Her şey bu tarayıcıda yapılır." },
+    ],
+    ar: [
+      { q: "هل تتغير الجودة؟", a: "تُعاد الصفحات كصور. لا يمكن تحديد النص أو البحث فيه بعد ذلك. الجودة الأعلى أوضح لكن الملف أكبر." },
+      { q: "لماذا الرمادي؟", a: "الطباعة بالأبيض والأسود لا تستهلك حبراً ملوناً وترى النتيجة مسبقاً." },
+      { q: "هل يذهب الملف إلى خادم؟", a: "لا. كل شيء في هذا المتصفح." },
+    ],
+    ru: [
+      { q: "Меняется ли качество?", a: "Страницы пересобираются как изображения. Текст больше нельзя выделить или найти. Высокое качество чётче, но файл больше." },
+      { q: "Зачем серый?", a: "При чёрно-белой печати не тратится цветной тонер, и результат виден заранее." },
+      { q: "Файл уходит на сервер?", a: "Нет. Всё делается в этом браузере." },
+    ],
+  },
+  "excel-pdf": {
+    az: [
+      { q: "Hansı fayllar?", a: "XLSX və CSV. Köhnə XLS dəstəklənmir: onu Excel-də XLSX və ya CSV kimi saxlayın." },
+      { q: "Formul və rəng qalır?", a: "Xeyr. Yalnız xanadakı son dəyər yazılır. Rəng, birləşmiş xana və qrafik köçmür." },
+      { q: "Çox sütun sığır?", a: "10-dan çox sütunda şrift kiçilir, uzun mətn «…» ilə qısalır. Sütun çoxdursa səhifə yan çevrilir." },
+    ],
+    en: [
+      { q: "Which files?", a: "XLSX and CSV. Old XLS is not supported: save it as XLSX or CSV in Excel." },
+      { q: "Are formulas and colors kept?", a: "No. Only the last value of each cell is written. Colors, merged cells and charts are not copied." },
+      { q: "Do many columns fit?", a: "With more than 10 columns the font gets smaller and long text is cut with «…». Wide sheets use landscape pages." },
+    ],
+    tr: [
+      { q: "Hangi dosyalar?", a: "XLSX ve CSV. Eski XLS desteklenmez: Excel'de XLSX veya CSV olarak kaydedin." },
+      { q: "Formül ve renk kalır mı?", a: "Hayır. Hücredeki son değer yazılır. Renk, birleşik hücre ve grafik taşınmaz." },
+      { q: "Çok sütun sığar mı?", a: "10'dan fazla sütunda yazı küçülür, uzun metin «…» ile kısalır. Geniş tablolar yatay sayfada olur." },
+    ],
+    ar: [
+      { q: "ما الملفات المدعومة؟", a: "XLSX وCSV. صيغة XLS القديمة غير مدعومة: احفظها في Excel بصيغة XLSX أو CSV." },
+      { q: "هل تبقى الصيغ والألوان؟", a: "لا. تُكتب القيمة الأخيرة لكل خلية فقط. لا تُنقل الألوان والخلايا المدمجة والرسوم." },
+      { q: "هل تتسع أعمدة كثيرة؟", a: "مع أكثر من 10 أعمدة يصغر الخط ويُقصّ النص الطويل بـ«…». الجداول العريضة تكون أفقية." },
+    ],
+    ru: [
+      { q: "Какие файлы?", a: "XLSX и CSV. Старый XLS не поддерживается: сохраните его в Excel как XLSX или CSV." },
+      { q: "Формулы и цвета сохранятся?", a: "Нет. Пишется только итоговое значение ячейки. Цвета, объединённые ячейки и диаграммы не переносятся." },
+      { q: "Поместится много столбцов?", a: "При более 10 столбцах шрифт мельче, длинный текст обрезается «…». Широкие таблицы — альбомные страницы." },
+    ],
+  },
+  "redact": {
+    az: [
+      { q: "Altdakı mətn həqiqətən silinir?", a: "«Səhifəni şəkil et» açıq olanda qutu olan səhifələr şəkil kimi yenidən qurulur və altdakı mətn o səhifələrdən silinir. Bağlı olanda yalnız üstü örtülür və mətn kopyalana bilər." },
+      { q: "Hüquqi sənəd üçün bəs edir?", a: "Bu sadə alətdir. Rəsmi sənəddə nəticəni yoxlayın: mətni seçib kopyalamağa çalışın. Metadata və əlavələr yoxlanmır." },
+      { q: "Qutunu necə qoyum?", a: "Səhifə şəklində siçan və ya barmaqla dartın. Səhv qutunu siyahıdan silin." },
+    ],
+    en: [
+      { q: "Is the text under the box really removed?", a: "With «Flatten pages» on, pages with boxes are rebuilt as images and the text under the box is gone from those pages. With it off, the box only covers the text and it can still be copied." },
+      { q: "Is it enough for legal documents?", a: "This is a simple tool. For official papers, check the result: try to select and copy the text. Metadata and attachments are not checked." },
+      { q: "How do I place a box?", a: "Drag on the page image with a mouse or finger. Remove a wrong box from the list." },
+    ],
+    tr: [
+      { q: "Altındaki metin gerçekten silinir mi?", a: "«Sayfayı görsele çevir» açıkken kutulu sayfalar görsel olarak yeniden kurulur ve metin o sayfalardan silinir. Kapalıyken yalnız üstü örtülür, metin kopyalanabilir." },
+      { q: "Hukuki belge için yeterli mi?", a: "Bu basit bir araçtır. Resmi belgede sonucu kontrol edin: metni seçip kopyalamayı deneyin. Metadata ve ekler kontrol edilmez." },
+      { q: "Kutuyu nasıl koyarım?", a: "Sayfa görselinde fare veya parmakla sürükleyin. Yanlış kutuyu listeden silin." },
+    ],
+    ar: [
+      { q: "هل يُحذف النص تحت المربع فعلاً؟", a: "مع تشغيل «تحويل الصفحة إلى صورة» تُعاد الصفحات التي فيها مربعات كصور ويُحذف النص منها. عند الإيقاف يُغطى النص فقط ويمكن نسخه." },
+      { q: "هل يكفي للوثائق القانونية؟", a: "هذه أداة بسيطة. في الوثائق الرسمية افحص النتيجة: جرّب تحديد النص ونسخه. لا تُفحص البيانات الوصفية والمرفقات." },
+      { q: "كيف أضع المربع؟", a: "اسحب على صورة الصفحة بالفأرة أو الإصبع. احذف المربع الخطأ من القائمة." },
+    ],
+    ru: [
+      { q: "Текст под блоком правда удаляется?", a: "С «Сделать страницу картинкой» страницы с блоками пересобираются как изображения, и текст под блоком исчезает с них. Без неё блок только закрывает текст, его можно скопировать." },
+      { q: "Достаточно ли для юридических документов?", a: "Это простой инструмент. Для официальных бумаг проверьте результат: попробуйте выделить и скопировать текст. Метаданные и вложения не проверяются." },
+      { q: "Как поставить блок?", a: "Протяните мышью или пальцем по картинке страницы. Ошибочный блок удалите из списка." },
+    ],
+  },
+  "invoice": {
+    az: [
+      { q: "Rəsmi e-qaimə əvəz edir?", a: "Xeyr. Bu sadə PDF fakturadır. Vergi orqanına göndərilən e-qaimə deyil." },
+      { q: "Məlumat saxlanır?", a: "Forma yalnız bu brauzerdə saxlanır ki, növbəti dəfə yenidən yazmayasınız. Serverə getmir." },
+      { q: "Vergi əlavə etmək olar?", a: "Bəli. Vergi faizini yazın, məbləğ özü hesablanır." },
+    ],
+    en: [
+      { q: "Does it replace an official e-invoice?", a: "No. This is a simple PDF invoice, not a tax-system e-invoice." },
+      { q: "Is my data saved?", a: "The form is kept only in this browser so you don't retype it next time. It is not sent to a server." },
+      { q: "Can I add tax?", a: "Yes. Enter a tax percent and the total is counted for you." },
+    ],
+    tr: [
+      { q: "Resmi e-faturanın yerini tutar mı?", a: "Hayır. Bu basit bir PDF faturadır, vergi sistemine giden e-fatura değildir." },
+      { q: "Veriler saklanır mı?", a: "Form sadece bu tarayıcıda saklanır, sonraki sefer tekrar yazmazsınız. Sunucuya gitmez." },
+      { q: "Vergi eklenir mi?", a: "Evet. Vergi yüzdesini yazın, toplam kendisi hesaplanır." },
+    ],
+    ar: [
+      { q: "هل تغني عن الفاتورة الإلكترونية الرسمية؟", a: "لا. هذه فاتورة PDF بسيطة وليست فاتورة نظام الضرائب." },
+      { q: "هل تُحفظ البيانات؟", a: "يُحفظ النموذج في هذا المتصفح فقط كي لا تعيد كتابته. لا يُرسل إلى خادم." },
+      { q: "هل يمكن إضافة ضريبة؟", a: "نعم. اكتب نسبة الضريبة ويُحسب المجموع تلقائياً." },
+    ],
+    ru: [
+      { q: "Заменяет официальный электронный счёт?", a: "Нет. Это простой PDF-счёт, а не счёт налоговой системы." },
+      { q: "Данные сохраняются?", a: "Форма хранится только в этом браузере, чтобы не вводить заново. На сервер не отправляется." },
+      { q: "Можно добавить налог?", a: "Да. Укажите процент налога, итог посчитается сам." },
+    ],
+  },
   merge: {
     az: [
       { q: "PDF birləşdirmək pulsuzdur?", a: "Bəli. Hesab açılmır və ödəniş yoxdur." },

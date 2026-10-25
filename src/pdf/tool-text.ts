@@ -1,8 +1,32 @@
 // Tool names and one-line descriptions, taken from the Nibras PDF app (5 languages).
-export const TOOL_IDS = ["write-pdf","merge","split","compress","image-pdf","pdf-image","rotate","protect","watermark","pages","scan","sign","ocr","pdf-ocr","pdf-word","preview","batch","extract-pages","word-pdf","page-numbers"] as const;
+export const TOOL_IDS = ["write-pdf","merge","split","compress","image-pdf","pdf-image","rotate","protect","watermark","pages","scan","sign","ocr","pdf-ocr","pdf-word","preview","batch","extract-pages","word-pdf","page-numbers","unlock","crop","grayscale","excel-pdf","redact","invoice"] as const;
 export type ToolId = (typeof TOOL_IDS)[number];
 export const TOOL_TEXT: Record<"az" | "en" | "tr" | "ar" | "ru", Record<ToolId, { title: string; description: string }>> = {
   "az": {
+    "unlock": {
+      "title": "PDF parolunu aç",
+      "description": "Parolu bildiyiniz PDF-dən parolu götür"
+    },
+    "crop": {
+      "title": "PDF-i kəs",
+      "description": "Səhifə kənarlarını kəsib götür"
+    },
+    "grayscale": {
+      "title": "PDF-i boz et",
+      "description": "Rəngli PDF-i ağ-qara (boz) et"
+    },
+    "excel-pdf": {
+      "title": "Excel/CSV-dən PDF",
+      "description": "XLSX və ya CSV cədvəlini PDF et"
+    },
+    "redact": {
+      "title": "PDF-də məlumatı gizlət",
+      "description": "Seçdiyiniz yerləri qara qutu ilə ört"
+    },
+    "invoice": {
+      "title": "Hesab-faktura PDF",
+      "description": "Satıcı, alıcı və mallardan sadə faktura hazırla"
+    },
     "write-pdf": {
       "title": "Sadə PDF düzəlt",
       "description": "Sadə səhifədə yazın və PDF-i düzəldin"
@@ -73,7 +97,7 @@ export const TOOL_TEXT: Record<"az" | "en" | "tr" | "ar" | "ru", Record<ToolId, 
     },
     "extract-pages": {
       "title": "Səhifə seç və çıxar",
-      "description": "Seçilmiş səhifələrdən yeni PDF yarat"
+      "description": "Seçilmiş səhifələrdən yeni PDF hazırla"
     },
     "word-pdf": {
       "title": "Word-dan PDF",
@@ -85,6 +109,30 @@ export const TOOL_TEXT: Record<"az" | "en" | "tr" | "ar" | "ru", Record<ToolId, 
     }
   },
   "en": {
+    "unlock": {
+      "title": "Unlock PDF",
+      "description": "Remove the password from a PDF you can open"
+    },
+    "crop": {
+      "title": "Crop PDF",
+      "description": "Trim the edges of PDF pages"
+    },
+    "grayscale": {
+      "title": "Grayscale PDF",
+      "description": "Turn a color PDF into black and white"
+    },
+    "excel-pdf": {
+      "title": "Excel/CSV to PDF",
+      "description": "Turn an XLSX or CSV table into a PDF"
+    },
+    "redact": {
+      "title": "Redact PDF",
+      "description": "Cover chosen areas with black boxes"
+    },
+    "invoice": {
+      "title": "Invoice PDF",
+      "description": "Make a simple invoice from seller, buyer and items"
+    },
     "write-pdf": {
       "title": "Simple PDF editor",
       "description": "Write on a simple page and edit it into a PDF"
@@ -167,6 +215,30 @@ export const TOOL_TEXT: Record<"az" | "en" | "tr" | "ar" | "ru", Record<ToolId, 
     }
   },
   "tr": {
+    "unlock": {
+      "title": "PDF parolasını kaldır",
+      "description": "Bildiğiniz parolayı PDF'ten kaldırın"
+    },
+    "crop": {
+      "title": "PDF kırp",
+      "description": "Sayfa kenarlarını kırpın"
+    },
+    "grayscale": {
+      "title": "PDF'i gri yap",
+      "description": "Renkli PDF'i siyah beyaz yapın"
+    },
+    "excel-pdf": {
+      "title": "Excel/CSV'den PDF",
+      "description": "XLSX veya CSV tablosunu PDF yapın"
+    },
+    "redact": {
+      "title": "PDF'te bilgiyi gizle",
+      "description": "Seçtiğiniz alanları siyah kutuyla örtün"
+    },
+    "invoice": {
+      "title": "Fatura PDF",
+      "description": "Satıcı, alıcı ve kalemlerden basit fatura hazırlayın"
+    },
     "write-pdf": {
       "title": "Basit PDF düzenle",
       "description": "Basit bir sayfaya yazın ve PDF olarak düzenleyin"
@@ -249,6 +321,30 @@ export const TOOL_TEXT: Record<"az" | "en" | "tr" | "ar" | "ru", Record<ToolId, 
     }
   },
   "ru": {
+    "unlock": {
+      "title": "Снять пароль с PDF",
+      "description": "Уберите пароль из PDF, который вы можете открыть"
+    },
+    "crop": {
+      "title": "Обрезать PDF",
+      "description": "Обрежьте поля страниц PDF"
+    },
+    "grayscale": {
+      "title": "PDF в оттенки серого",
+      "description": "Сделайте цветной PDF чёрно-белым"
+    },
+    "excel-pdf": {
+      "title": "Excel/CSV в PDF",
+      "description": "Превратите таблицу XLSX или CSV в PDF"
+    },
+    "redact": {
+      "title": "Скрыть данные в PDF",
+      "description": "Закройте выбранные места чёрными блоками"
+    },
+    "invoice": {
+      "title": "Счёт в PDF",
+      "description": "Простой счёт: продавец, покупатель, позиции"
+    },
     "write-pdf": {
       "title": "Простой редактор PDF",
       "description": "Пишите на простой странице и создавайте PDF"
@@ -331,6 +427,30 @@ export const TOOL_TEXT: Record<"az" | "en" | "tr" | "ar" | "ru", Record<ToolId, 
     }
   },
   "ar": {
+    "unlock": {
+      "title": "إزالة كلمة مرور PDF",
+      "description": "أزل كلمة المرور من ملف PDF تعرف كلمته"
+    },
+    "crop": {
+      "title": "قص PDF",
+      "description": "قصّ حواف صفحات PDF"
+    },
+    "grayscale": {
+      "title": "PDF بالأبيض والأسود",
+      "description": "حوّل PDF الملوّن إلى رمادي"
+    },
+    "excel-pdf": {
+      "title": "من Excel/CSV إلى PDF",
+      "description": "حوّل جدول XLSX أو CSV إلى PDF"
+    },
+    "redact": {
+      "title": "إخفاء معلومات في PDF",
+      "description": "غطِّ المناطق المختارة بمربعات سوداء"
+    },
+    "invoice": {
+      "title": "فاتورة PDF",
+      "description": "أعدّ فاتورة بسيطة من البائع والمشتري والبنود"
+    },
     "write-pdf": {
       "title": "محرر PDF البسيط",
       "description": "اكتب على صفحة بسيطة وحوّلها إلى PDF"

@@ -426,3 +426,291 @@ export async function addPageNumbers(bytes: Uint8Array, o: { fromPage: number; s
   });
   return doc.save({ useObjectStreams: true });
 }
+
+/** Hides the page edges: sets the visible box smaller. Margins are in mm. Content outside stays in the file. */
+export async function cropPdf(bytes: Uint8Array, mm: { top: number; right: number; bottom: number; left: number }, pages?: number[]) {
+  const lib = await import("@cantoo/pdf-lib");
+  const doc = await lib.PDFDocument.load(bytes);
+  const k = 72 / 25.4;
+  doc.getPages().forEach((p, i) => {
+    if (pages && !pages.includes(i)) return;
+    const b = p.getCropBox();
+    const l = mm.left * k, r = mm.right * k, t = mm.top * k, bo = mm.bottom * k;
+    const w = b.width - l - r, h = b.height - t - bo;
+    if (w < 20 || h < 20) throw new Error("crop-too-big");
+    p.setCropBox(b.x + l, b.y + bo, w, h);
+    p.setMediaBox(b.x + l, b.y + bo, w, h);
+  });
+  return doc.save({ useObjectStreams: true });
+}
+
+async function rasterPages(
+  bytes: Uint8Array,
+  paint: (ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement, pageIndex: number, scale: number) => void,
+  o: { scale: number; jpeg: number; only?: Set<number> },
+  onPage?: (n: number, total: number) => void,
+) {
+  const lib = await import("@cantoo/pdf-lib");
+  const orig = await lib.PDFDocument.load(bytes);
+  const out = await lib.PDFDocument.create();
+  const src = await openPdf(bytes);
+  try {
+    for (let n = 1; n <= src.numPages; n++) {
+      onPage?.(n, src.numPages);
+      if (o.only && !o.only.has(n - 1)) {
+        const [cp] = await out.copyPages(orig, [n - 1]);
+        out.addPage(cp);
+        continue;
+      }
+      const vp = (await src.getPage(n)).getViewport({ scale: 1 });
+      const canvas = await renderPageToCanvas(src, n, o.scale);
+      const ctx = canvas.getContext("2d")!;
+      paint(ctx, canvas, n - 1, canvas.width / vp.width);
+      const jpg = await out.embedJpg(new Uint8Array(await (await canvasToBlob(canvas, "image/jpeg", o.jpeg)).arrayBuffer()));
+      const p = out.addPage([vp.width, vp.height]);
+      p.drawImage(jpg, { x: 0, y: 0, width: vp.width, height: vp.height });
+      canvas.width = canvas.height = 0;
+    }
+  } finally {
+    await closePdf(src);
+  }
+  return out.save({ useObjectStreams: true });
+}
+
+/** Renders each page to an image and turns it gray. Text is no longer selectable. */
+export async function grayscalePdf(bytes: Uint8Array, quality: Quality, onPage?: (n: number, total: number) => void) {
+  const cfg = RENDER[quality];
+  return rasterPages(bytes, (ctx, c) => {
+    const d = ctx.getImageData(0, 0, c.width, c.height);
+    const a = d.data;
+    for (let i = 0; i < a.length; i += 4) {
+      const g = Math.round(a[i] * 0.299 + a[i + 1] * 0.587 + a[i + 2] * 0.114);
+      a[i] = a[i + 1] = a[i + 2] = g;
+    }
+    ctx.putImageData(d, 0, 0);
+  }, { scale: cfg.scale, jpeg: cfg.jpeg }, onPage);
+}
+
+/** Box in page fractions (0..1, top-left origin). */
+export type RedactBox = { page: number; x: number; y: number; w: number; h: number };
+/**
+ * Draws black boxes. With flatten, the marked pages are rebuilt as images, so the text under the box is gone
+ * from those pages; other pages are kept as they are.
+ */
+export async function redactPdf(bytes: Uint8Array, boxes: RedactBox[], flatten: boolean, onPage?: (n: number, total: number) => void) {
+  if (flatten) {
+    const only = new Set(boxes.map((b) => b.page));
+    return rasterPages(bytes, (ctx, c, i) => {
+      ctx.fillStyle = "#000";
+      for (const b of boxes) if (b.page === i) ctx.fillRect(b.x * c.width, b.y * c.height, b.w * c.width, b.h * c.height);
+    }, { scale: 2, jpeg: 0.9, only }, onPage);
+  }
+  const lib = await import("@cantoo/pdf-lib");
+  const doc = await lib.PDFDocument.load(bytes);
+  const pages = doc.getPages();
+  for (const b of boxes) {
+    const p = pages[b.page];
+    if (!p) continue;
+    const box = p.getCropBox();
+    p.drawRectangle({ x: box.x + b.x * box.width, y: box.y + box.height - (b.y + b.h) * box.height, width: b.w * box.width, height: b.h * box.height, color: lib.rgb(0, 0, 0) });
+  }
+  return doc.save({ useObjectStreams: true });
+}
+
+/** Simple CSV parser: commas, semicolons or tabs, quoted fields. */
+export function parseCsv(text: string): string[][] {
+  const src = text.replace(/^\ufeff/, "");
+  const firstLine = src.split(/\r?\n/, 1)[0] ?? "";
+  const counts = [",", ";", "\t"].map((d) => [d, firstLine.split(d).length] as const);
+  const sep = counts.sort((a, b) => b[1] - a[1])[0][0];
+  const rows: string[][] = [];
+  let row: string[] = [], cell = "", q = false;
+  for (let i = 0; i < src.length; i++) {
+    const ch = src[i];
+    if (q) {
+      if (ch === '"') { if (src[i + 1] === '"') { cell += '"'; i++; } else q = false; }
+      else cell += ch;
+    } else if (ch === '"') q = true;
+    else if (ch === sep) { row.push(cell); cell = ""; }
+    else if (ch === "\n" || ch === "\r") {
+      if (ch === "\r" && src[i + 1] === "\n") i++;
+      row.push(cell); rows.push(row); row = []; cell = "";
+    } else cell += ch;
+  }
+  if (cell || row.length) { row.push(cell); rows.push(row); }
+  return rows.filter((r) => r.some((c) => c.trim()));
+}
+
+/** Reads cell text (values, not formulas or styles) from every sheet of an .xlsx file. */
+export async function readXlsx(bytes: Uint8Array): Promise<{ name: string; rows: string[][] }[]> {
+  const { unzipSync, strFromU8 } = await import("fflate");
+  const z = unzipSync(bytes);
+  const get = (p: string) => (z[p] ? strFromU8(z[p]) : "");
+  const dec = (s: string) => s.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&apos;/g, "'").replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(+n)).replace(/&amp;/g, "&");
+  const shared = [...get("xl/sharedStrings.xml").matchAll(/<si>([\s\S]*?)<\/si>/g)].map((m) => dec([...m[1].matchAll(/<t[^>]*>([\s\S]*?)<\/t>/g)].map((t) => t[1]).join("")));
+  const wb = get("xl/workbook.xml");
+  const rels = get("xl/_rels/workbook.xml.rels");
+  const sheets = [...wb.matchAll(/<sheet\b[^>]*?name="([^"]*)"[^>]*?r:id="([^"]*)"/g)].map((m) => {
+    const target = rels.match(new RegExp(`Id="${m[2]}"[^>]*Target="([^"]+)"`))?.[1] ?? rels.match(new RegExp(`Target="([^"]+)"[^>]*Id="${m[2]}"`))?.[1] ?? "";
+    return { name: dec(m[1]), path: target.startsWith("/") ? target.slice(1) : `xl/${target}` };
+  });
+  const colIdx = (ref: string) => { let n = 0; for (const c of ref.replace(/\d+/g, "")) n = n * 26 + c.charCodeAt(0) - 64; return n - 1; };
+  return sheets.map((s) => {
+    const xml = get(s.path);
+    const rows: string[][] = [];
+    for (const r of xml.matchAll(/<row\b[^>]*>([\s\S]*?)<\/row>/g)) {
+      const row: string[] = [];
+      for (const c of r[1].matchAll(/<c\b([^>]*?)(?:\/>|>([\s\S]*?)<\/c>)/g)) {
+        const attrs = c[1];
+        const ref = attrs.match(/r="([A-Z]+\d+)"/)?.[1];
+        const type = attrs.match(/t="([^"]+)"/)?.[1];
+        const body = c[2] ?? "";
+        let v = body.match(/<v>([\s\S]*?)<\/v>/)?.[1] ?? "";
+        if (type === "s") v = shared[+v] ?? "";
+        else if (type === "inlineStr") v = [...body.matchAll(/<t[^>]*>([\s\S]*?)<\/t>/g)].map((t) => t[1]).join("");
+        else if (type === "b") v = v === "1" ? "TRUE" : "FALSE";
+        const idx = ref ? colIdx(ref) : row.length;
+        while (row.length < idx) row.push("");
+        row[idx] = dec(v);
+      }
+      rows.push(row);
+    }
+    return { name: s.name, rows: rows.filter((x) => x.some((c) => c.trim())) };
+  }).filter((s) => s.rows.length);
+}
+
+type Fonts = { reg: import("@cantoo/pdf-lib").PDFFont; bold: import("@cantoo/pdf-lib").PDFFont; ar: import("@cantoo/pdf-lib").PDFFont; arBold: import("@cantoo/pdf-lib").PDFFont };
+async function docWithFonts() {
+  const lib = await import("@cantoo/pdf-lib");
+  const fk = (await import("@pdf-lib/fontkit")) as { default?: unknown };
+  const doc = await lib.PDFDocument.create();
+  doc.registerFontkit((fk.default ?? fk) as never);
+  const f: Fonts = {
+    reg: await doc.embedFont(await loadFont("DejaVuSans"), { subset: true }),
+    bold: await doc.embedFont(await loadFont("DejaVuSans-Bold"), { subset: true }),
+    ar: await doc.embedFont(await loadFont("NotoNaskhArabic-Regular"), { subset: true }),
+    arBold: await doc.embedFont(await loadFont("NotoNaskhArabic-Bold"), { subset: true }),
+  };
+  const cs = new Map<unknown, Set<number>>();
+  const vis = (s: string, bold = false) => {
+    const isAr = containsArabic(s);
+    const font = isAr ? (bold ? f.arBold : f.ar) : bold ? f.bold : f.reg;
+    let set = cs.get(font);
+    if (!set) { set = new Set((font as unknown as { getCharacterSet(): number[] }).getCharacterSet()); cs.set(font, set); }
+    let r = "";
+    for (const ch of s.replace(/[\r\n\t]+/g, " ")) { const cp = ch.codePointAt(0)!; if (cp < 32) continue; r += set.has(cp) ? ch : "?"; }
+    return { text: isAr ? shapeArabicForPdf(r) : r, font, isAr };
+  };
+  const fit = (s: string, size: number, max: number, bold = false) => {
+    let v = vis(s, bold);
+    if (v.font.widthOfTextAtSize(v.text, size) <= max) return v;
+    let t = s;
+    while (t.length > 1) { t = t.slice(0, -1); v = vis(t + "…", bold); if (v.font.widthOfTextAtSize(v.text, size) <= max) return v; }
+    return v;
+  };
+  return { lib, doc, vis, fit };
+}
+
+/** Draws rows as a table. The first row is the header, repeated on each page. Long cells are cut with «…». */
+export async function tableToPdf(rows: string[][], o: { title?: string; header: boolean; landscape: "auto" | boolean; fontSize?: number }) {
+  const { lib, doc, fit } = await docWithFonts();
+  const cols = Math.max(1, ...rows.map((r) => r.length));
+  const land = o.landscape === "auto" ? cols > 6 : o.landscape;
+  const [PW, PH] = land ? [841.89, 595.28] : [595.28, 841.89];
+  const m = 32, size = o.fontSize ?? (cols > 10 ? 7 : cols > 6 ? 8 : 9.5), rh = size * 1.9;
+  const usable = PW - 2 * m;
+  const len = Array.from({ length: cols }, (_, c) => Math.min(40, Math.max(3, ...rows.slice(0, 200).map((r) => (r[c] ?? "").length))));
+  const sum = len.reduce((a, b) => a + b, 0);
+  const widths = len.map((l) => (l / sum) * usable);
+  const head = o.header ? rows[0] : null;
+  const body = o.header ? rows.slice(1) : rows;
+  let page = doc.addPage([PW, PH]);
+  let y = PH - m;
+  const line = lib.rgb(0.75, 0.77, 0.8);
+  const drawRow = (r: string[], bold: boolean) => {
+    if (y - rh < m) { page = doc.addPage([PW, PH]); y = PH - m; if (head && !bold) drawRow(head, true); }
+    if (bold) page.drawRectangle({ x: m, y: y - rh, width: usable, height: rh, color: lib.rgb(0.92, 0.94, 0.97) });
+    let x = m;
+    for (let c = 0; c < cols; c++) {
+      const v = fit(r[c] ?? "", size, widths[c] - 6, bold);
+      const w = v.font.widthOfTextAtSize(v.text, size);
+      page.drawText(v.text, { x: v.isAr ? x + widths[c] - 3 - w : x + 3, y: y - rh + size * 0.6, size, font: v.font, color: lib.rgb(0.07, 0.09, 0.12) });
+      x += widths[c];
+    }
+    page.drawLine({ start: { x: m, y: y - rh }, end: { x: PW - m, y: y - rh }, thickness: 0.5, color: line });
+    y -= rh;
+  };
+  if (o.title?.trim()) {
+    const v = fit(o.title.trim(), 14, usable, true);
+    page.drawText(v.text, { x: m, y: y - 14, size: 14, font: v.font });
+    y -= 26;
+  }
+  if (head) drawRow(head, true);
+  for (const r of body) drawRow(r, false);
+  return doc.save({ useObjectStreams: true });
+}
+
+export type Invoice = {
+  title: string; number: string; date: string; due: string; currency: string;
+  seller: string; buyer: string; notes: string; taxPct: number;
+  items: { name: string; qty: number; price: number }[];
+  labels: { seller: string; buyer: string; item: string; qty: string; price: string; sum: string; subtotal: string; tax: string; total: string; number: string; date: string; due: string };
+};
+export const money = (n: number) => (Math.round(n * 100) / 100).toFixed(2);
+export function invoiceTotals(inv: Pick<Invoice, "items" | "taxPct">) {
+  const subtotal = inv.items.reduce((a, i) => a + (i.qty || 0) * (i.price || 0), 0);
+  const tax = subtotal * (inv.taxPct || 0) / 100;
+  return { subtotal, tax, total: subtotal + tax };
+}
+export async function invoicePdf(inv: Invoice) {
+  const { lib, doc, fit } = await docWithFonts();
+  const PW = 595.28, PH = 841.89, m = 48, W = PW - 2 * m;
+  const page = doc.addPage([PW, PH]);
+  const ink = lib.rgb(0.07, 0.09, 0.12), mute = lib.rgb(0.4, 0.42, 0.47);
+  const txt = (s: string, x: number, y: number, size: number, o: { bold?: boolean; max?: number; right?: boolean; color?: typeof ink } = {}) => {
+    const v = fit(s, size, o.max ?? W, o.bold);
+    const w = v.font.widthOfTextAtSize(v.text, size);
+    page.drawText(v.text, { x: o.right ? x - w : x, y, size, font: v.font, color: o.color ?? ink });
+  };
+  let y = PH - m - 20;
+  txt(inv.title || "Invoice", m, y, 22, { bold: true });
+  txt(`${inv.labels.number}: ${inv.number}`, PW - m, y + 6, 10, { right: true, max: 220 });
+  txt(`${inv.labels.date}: ${inv.date}`, PW - m, y - 8, 10, { right: true, max: 220 });
+  if (inv.due) txt(`${inv.labels.due}: ${inv.due}`, PW - m, y - 22, 10, { right: true, max: 220 });
+  y -= 56;
+  const block = (label: string, body: string, x: number) => {
+    txt(label, x, y, 9, { bold: true, color: mute });
+    body.split("\n").slice(0, 6).forEach((l, i) => txt(l, x, y - 15 - i * 13, 10, { max: W / 2 - 12 }));
+  };
+  block(inv.labels.seller, inv.seller, m);
+  block(inv.labels.buyer, inv.buyer, m + W / 2 + 12);
+  y -= 15 + 6 * 13 + 16;
+  const cx = [m, m + W * 0.55, m + W * 0.7, m + W];
+  page.drawRectangle({ x: m, y: y - 6, width: W, height: 20, color: lib.rgb(0.92, 0.94, 0.97) });
+  txt(inv.labels.item, cx[0] + 4, y, 9.5, { bold: true });
+  txt(inv.labels.qty, cx[1] + W * 0.1, y, 9.5, { bold: true, right: true });
+  txt(inv.labels.price, cx[2] + W * 0.13, y, 9.5, { bold: true, right: true });
+  txt(inv.labels.sum, cx[3] - 4, y, 9.5, { bold: true, right: true });
+  y -= 22;
+  for (const it of inv.items.filter((i) => i.name.trim() || i.price)) {
+    if (y < m + 140) break;
+    txt(it.name, cx[0] + 4, y, 10, { max: W * 0.53 });
+    txt(String(it.qty), cx[1] + W * 0.1, y, 10, { right: true });
+    txt(money(it.price), cx[2] + W * 0.13, y, 10, { right: true });
+    txt(money(it.qty * it.price), cx[3] - 4, y, 10, { right: true });
+    page.drawLine({ start: { x: m, y: y - 7 }, end: { x: PW - m, y: y - 7 }, thickness: 0.5, color: lib.rgb(0.85, 0.86, 0.88) });
+    y -= 20;
+  }
+  const t = invoiceTotals(inv);
+  y -= 8;
+  const cur = inv.currency ? ` ${inv.currency}` : "";
+  txt(`${inv.labels.subtotal}: ${money(t.subtotal)}${cur}`, PW - m - 4, y, 10, { right: true });
+  if (inv.taxPct) { y -= 15; txt(`${inv.labels.tax} (${inv.taxPct}%): ${money(t.tax)}${cur}`, PW - m - 4, y, 10, { right: true }); }
+  y -= 20;
+  txt(`${inv.labels.total}: ${money(t.total)}${cur}`, PW - m - 4, y, 13, { right: true, bold: true });
+  if (inv.notes.trim()) {
+    y -= 36;
+    inv.notes.split("\n").slice(0, 8).forEach((l, i) => txt(l, m, y - i * 13, 9.5, { color: mute }));
+  }
+  return doc.save({ useObjectStreams: true });
+}

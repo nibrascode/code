@@ -15,11 +15,11 @@ const PdfTool = lazy(() => import("./pdf-tool").then((m) => ({ default: m.PdfToo
 const LANG_NAME: Record<Lang, string> = { az: "Azərbaycanca", en: "English", tr: "Türkçe", ar: "العربية", ru: "Русский" };
 const ALL_TOOLS: Record<Lang, string> = { az: "Hamısı", en: "All tools", tr: "Hepsi", ar: "الكل", ru: "Все" };
 const BADGES: Record<Lang, [string, string, string]> = {
-  az: ["20 alət", "5 dil", "Cihazda emal"],
-  en: ["20 tools", "5 languages", "On-device"],
-  tr: ["20 araç", "5 dil", "Cihazda işlenir"],
-  ar: ["20 أداة", "5 لغات", "على جهازك"],
-  ru: ["20 инструментов", "5 языков", "На устройстве"],
+  az: ["26 alət", "5 dil", "Cihazda emal"],
+  en: ["26 tools", "5 languages", "On-device"],
+  tr: ["26 araç", "5 dil", "Cihazda işlenir"],
+  ar: ["26 أداة", "5 لغات", "على جهازك"],
+  ru: ["26 инструментов", "5 языков", "На устройстве"],
 };
 const ASK_AI: Record<Lang, string> = {
   az: "Nibras AI ilə PDF-i danışıqla idarə et",
@@ -37,7 +37,7 @@ const NEXT: Partial<Record<ToolId, ToolId[]>> = {
   "image-pdf": ["pdf-image", "merge", "compress"],
   "pdf-image": ["image-pdf", "compress", "merge"],
   rotate: ["pages", "merge", "compress"],
-  protect: ["sign", "watermark", "merge"],
+  protect: ["unlock", "sign", "watermark"],
   watermark: ["sign", "protect", "merge"],
   pages: ["split", "extract-pages", "rotate"],
   scan: ["ocr", "image-pdf", "merge"],
@@ -50,6 +50,12 @@ const NEXT: Partial<Record<ToolId, ToolId[]>> = {
   "extract-pages": ["split", "pages", "merge"],
   "word-pdf": ["pdf-word", "page-numbers", "merge"],
   "page-numbers": ["watermark", "pages", "merge"],
+  unlock: ["protect", "compress", "merge"],
+  crop: ["rotate", "pages", "compress"],
+  grayscale: ["compress", "page-numbers", "merge"],
+  "excel-pdf": ["word-pdf", "merge", "page-numbers"],
+  redact: ["protect", "sign", "watermark"],
+  invoice: ["sign", "protect", "merge"],
 };
 
 export function PdfPage({ tool }: { tool: ToolId | null }) {

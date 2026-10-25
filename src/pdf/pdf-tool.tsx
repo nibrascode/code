@@ -2,7 +2,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowLeft, ArrowRight, Camera, Check, FileText, FileType2, Files, Image as ImageIcon, Layers, Lock, Minimize2,
-  PenLine, RotateCw, ScanText, Scissors, Droplet, ListOrdered, Eye, FilePlus2, FileOutput, FileImage, ScanLine, X, Hash } from "lucide-react";
+  PenLine, RotateCw, ScanText, Scissors, Droplet, ListOrdered, Eye, FilePlus2, FileOutput, FileImage, ScanLine, X, Hash, Unlock, Crop, Contrast, Table2, EyeOff, Receipt } from "lucide-react";
 import { zipSync } from "fflate";
 import type { Lang } from "@/lib/i18n";
 import { COPY, type Dict } from "./copy";
@@ -16,21 +16,24 @@ import { OCR_LANGS, detectOcrLangs, ocrDetailed, preprocessForOcr, ocrLangForSit
 import { extractTextSmart } from "./lib/extract";
 import { createDocxFromText, docxToText } from "./lib/docx";
 import type { WatermarkPosition } from "./lib/pdfOperations";
+import { ExtraOptions, EXTRA_ACCEPT, readSheetFile, runExtra, UserError, X_DEFAULT } from "./extra";
 
 const ICONS: Record<ToolId, typeof FileText> = {
   "write-pdf": PenLine, merge: Files, split: Scissors, compress: Minimize2, "image-pdf": ImageIcon, "pdf-image": FileImage,
   rotate: RotateCw, protect: Lock, watermark: Droplet, pages: ListOrdered, scan: ScanLine, sign: PenLine, ocr: ScanText,
   "pdf-ocr": FileType2, "pdf-word": FileOutput, preview: Eye, batch: Layers, "extract-pages": Check, "word-pdf": FilePlus2, "page-numbers": Hash,
+  unlock: Unlock, crop: Crop, grayscale: Contrast, "excel-pdf": Table2, redact: EyeOff, invoice: Receipt,
 };
 
-type Kind = "pdf" | "pdfs" | "images" | "docx" | "none";
+type Kind = "pdf" | "pdfs" | "images" | "docx" | "sheet" | "none";
 const KIND: Record<ToolId, Kind> = {
   "write-pdf": "none", merge: "pdfs", split: "pdf", compress: "pdf", "image-pdf": "images", "pdf-image": "pdf", rotate: "pdf",
   protect: "pdf", watermark: "pdf", pages: "pdf", scan: "images", sign: "pdf", ocr: "images", "pdf-ocr": "pdf", "pdf-word": "pdf",
   preview: "pdf", batch: "pdfs", "extract-pages": "pdf", "word-pdf": "docx", "page-numbers": "pdf",
+  unlock: "pdf", crop: "pdf", grayscale: "pdf", "excel-pdf": "sheet", redact: "pdf", invoice: "none",
 };
 
-type Item = { id: number; file: File; name: string; bytes?: Uint8Array; pages?: number; locked?: boolean; bad?: boolean };
+type Item = { id: number; file: File; name: string; bytes?: Uint8Array; pages?: number; locked?: boolean; wasLocked?: boolean; bad?: boolean };
 let nextId = 1;
 const baseName = (n: string) => n.replace(/\.[^.]+$/, "") || "document";
 const WM_POS: { id: WatermarkPosition; s: string }[] = [
@@ -40,10 +43,10 @@ const WM_POS: { id: WatermarkPosition; s: string }[] = [
 ];
 
 const GROUPS: { id: string; tools: ToolId[]; label: Record<Lang, string> }[] = [
-  { id: "organize", tools: ["merge", "split", "pages", "extract-pages", "rotate", "page-numbers", "batch"], label: { az: "Səhifələri idarə et", en: "Organize", tr: "Sayfaları düzenle", ar: "تنظيم الصفحات", ru: "Страницы и файлы" } },
-  { id: "convert", tools: ["pdf-image", "pdf-word", "word-pdf", "pdf-ocr", "ocr", "preview"], label: { az: "Çevir və oxu", en: "Convert & read", tr: "Dönüştür ve oku", ar: "تحويل وقراءة", ru: "Конвертация и чтение" } },
-  { id: "create", tools: ["write-pdf", "image-pdf", "scan"], label: { az: "Yarat", en: "Create", tr: "Oluştur", ar: "إنشاء", ru: "Создание" } },
-  { id: "secure", tools: ["compress", "protect", "watermark", "sign"], label: { az: "Optimallaşdır və qoru", en: "Optimize & protect", tr: "Optimize et ve koru", ar: "تحسين وحماية", ru: "Сжатие и защита" } },
+  { id: "organize", tools: ["merge", "split", "pages", "extract-pages", "rotate", "page-numbers", "crop", "batch"], label: { az: "Səhifələri idarə et", en: "Organize", tr: "Sayfaları düzenle", ar: "تنظيم الصفحات", ru: "Страницы и файлы" } },
+  { id: "convert", tools: ["pdf-image", "pdf-word", "word-pdf", "pdf-ocr", "ocr", "excel-pdf", "grayscale", "preview"], label: { az: "Çevir və oxu", en: "Convert & read", tr: "Dönüştür ve oku", ar: "تحويل وقراءة", ru: "Конвертация и чтение" } },
+  { id: "create", tools: ["write-pdf", "image-pdf", "scan", "invoice"], label: { az: "Hazırla", en: "Create", tr: "Oluştur", ar: "إنشاء", ru: "Создание" } },
+  { id: "secure", tools: ["compress", "protect", "unlock", "redact", "watermark", "sign"], label: { az: "Optimallaşdır və qoru", en: "Optimize & protect", tr: "Optimize et ve koru", ar: "تحسين وحماية", ru: "Сжатие и защита" } },
 ];
 
 const NUM_POS: { id: eng.NumPos; s: string }[] = [
@@ -152,6 +155,8 @@ function Workspace({ tool, lang, t, title, desc }: { tool: ToolId; lang: Lang; t
   const [numSize, setNumSize] = useState(11);
   const [numMargin, setNumMargin] = useState(28);
   const [forceOcr, setForceOcr] = useState(false);
+  const [xs, setXs] = useState(X_DEFAULT);
+  const [sheets, setSheets] = useState<{ name: string; rows: string[][] }[] | null>(null);
   const [viewZoom, setViewZoom] = useState(1);
   const [openOut, setOpenOut] = useState<Out | null>(null);
   const [openBytes, setOpenBytes] = useState<Uint8Array | null>(null);
@@ -227,7 +232,7 @@ function Workspace({ tool, lang, t, title, desc }: { tool: ToolId; lang: Lang; t
     openOut.blob.arrayBuffer().then((b) => setOpenBytes(new Uint8Array(b)));
   }, [openOut]);
 
-  const accept = kind === "images" ? "image/*" : kind === "docx" ? ".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document" : "application/pdf,.pdf";
+  const accept = kind === "sheet" ? EXTRA_ACCEPT : kind === "images" ? "image/*" : kind === "docx" ? ".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document" : "application/pdf,.pdf";
   const multiple = kind === "pdfs" || kind === "images";
 
   const addFiles = useCallback(async (files: File[]) => {
@@ -239,6 +244,8 @@ function Workspace({ tool, lang, t, title, desc }: { tool: ToolId; lang: Lang; t
       const item: Item = { id: nextId++, file, name: file.name };
       if (kind === "images") {
         if (!file.type.startsWith("image/")) { setErr(t.errNoImages); continue; }
+      } else if (kind === "sheet") {
+        try { const sh = await readSheetFile(file, lang); setSheets(sh); setXs((x) => ({ ...x, sheetIdx: 0 })); } catch (e) { setErr((e as Error).message); continue; }
       } else if (kind === "docx") {
         if (!/\.docx$/i.test(file.name)) { setErr(t.errNotDocx); continue; }
         item.bytes = new Uint8Array(await file.arrayBuffer());
@@ -255,7 +262,7 @@ function Workspace({ tool, lang, t, title, desc }: { tool: ToolId; lang: Lang; t
       made.push(item);
     }
     setItems((cur) => (multiple ? [...cur, ...made] : made));
-  }, [kind, multiple, t]);
+  }, [kind, multiple, t, lang]);
 
   const unlock = async (id: number, password: string) => {
     const it = items.find((i) => i.id === id);
@@ -263,7 +270,7 @@ function Workspace({ tool, lang, t, title, desc }: { tool: ToolId; lang: Lang; t
     try {
       const bytes = await eng.unlockPdf(it.bytes, password);
       const pages = await eng.pageCount(bytes);
-      setItems((cur) => cur.map((i) => (i.id === id ? { ...i, bytes, pages, locked: false } : i)));
+      setItems((cur) => cur.map((i) => (i.id === id ? { ...i, bytes, pages, locked: false, wasLocked: true } : i)));
       setErr("");
     } catch (e) {
       console.error("[pdf] unlock", (e as Error)?.stack ?? String(e));
@@ -476,11 +483,17 @@ function Workspace({ tool, lang, t, title, desc }: { tool: ToolId; lang: Lang; t
         case "preview":
           need();
           break;
+        case "unlock": case "crop": case "grayscale": case "excel-pdf": case "redact": case "invoice": {
+          if (kind === "pdf") need();
+          const o = await runExtra(tool, lang, xs, f, sheets, progress(t.working), t.errNoFile, t.errBadRange);
+          if (o) res.push(pdfOut(o.name, o.bytes, o.note));
+          break;
+        }
       }
       if (!cancelled.current) setOuts(res);
     } catch (e) {
       const msg = (e as Error)?.message ?? "";
-      const known = Object.values(t).includes(msg as never) || msg === t.noTextHint;
+      const known = Object.values(t).includes(msg as never) || msg === t.noTextHint || e instanceof UserError;
       setErr(known ? msg : eng.isEncryptedError(e) ? t.errLocked : t.errFailed);
       if (!known) console.error("[pdf]", (e as Error)?.stack ?? String(e));
     } finally {
@@ -553,7 +566,7 @@ function Workspace({ tool, lang, t, title, desc }: { tool: ToolId; lang: Lang; t
         <FileDrop
           accept={accept}
           multiple={multiple}
-          label={items.length && multiple ? t.add : kind === "images" ? t.pickImages : kind === "pdfs" ? t.pickPdfs : kind === "docx" ? t.pickDocx : t.pickPdf}
+          label={items.length && multiple ? t.add : kind === "images" ? t.pickImages : kind === "pdfs" ? t.pickPdfs : kind === "docx" ? t.pickDocx : kind === "sheet" ? (lang === "az" ? "XLSX və ya CSV seçin" : lang === "tr" ? "XLSX veya CSV seçin" : lang === "ar" ? "اختر XLSX أو CSV" : lang === "ru" ? "Выберите XLSX или CSV" : "Choose an XLSX or CSV") : t.pickPdf}
           hint={t.dropHint}
           onFiles={addFiles}
           compact={items.length > 0}
@@ -629,6 +642,7 @@ function Workspace({ tool, lang, t, title, desc }: { tool: ToolId; lang: Lang; t
           {tool === "rotate" ? (
             <div><Label>{t.mode}</Label><Seg name="rotation" value={String(rot)} onChange={(v) => setRot(Number(v))} options={[{ id: "270", label: t.rotLeft }, { id: "90", label: t.rotRight }, { id: "180", label: t.rot180 }]} /></div>
           ) : null}
+          <ExtraOptions tool={tool} lang={lang} x={xs} setX={setXs} pdf={firstBytes} pages={first?.pages ?? 0} sheets={sheets} t={t} />
           {tool === "page-numbers" ? (() => {
             const nt = NUM_T[lang];
             const total = first?.pages ?? 0;

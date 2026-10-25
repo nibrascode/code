@@ -23,7 +23,7 @@ export type Dict = {
 };
 
 const en: Dict = {
-  title: "Nibras PDF", lead: "20 PDF tools in your browser: merge, split, compress, convert, sign, protect and more. Free, no account.",
+  title: "Nibras PDF", lead: "26 PDF tools in your browser: merge, split, compress, convert, sign, protect and more. Free, no account.",
   toolsHeading: "What do you want to do?", back: "All tools", appPage: "Android app", privacy: "Privacy", privateNote: "Files are processed on your device and are not uploaded.",
   pickPdf: "Choose a PDF", pickPdfs: "Choose PDFs", pickImages: "Choose images", pickDocx: "Choose a DOCX file", dropHint: "or drop it here", add: "Add more", remove: "Remove",
   run: "Start", working: "Working…", cancel: "Cancel", done: "Done", download: "Download", downloadZip: "Download all (ZIP)", share: "Share", copy: "Copy", copied: "Copied.", clear: "Clear",
@@ -49,7 +49,7 @@ const en: Dict = {
 };
 
 const az: Dict = {
-  title: "Nibras PDF", lead: "Brauzerdə 20 PDF aləti: birləşdir, böl, sıxışdır, çevir, imzala, qoru və daha çoxu. Pulsuz, hesabsız.",
+  title: "Nibras PDF", lead: "Brauzerdə 26 PDF aləti: birləşdir, böl, sıxışdır, çevir, imzala, qoru və daha çoxu. Pulsuz, hesabsız.",
   toolsHeading: "Nə etmək istəyirsiniz?", back: "Bütün alətlər", appPage: "Android tətbiqi", privacy: "Məxfilik", privateNote: "Fayllar cihazınızda emal olunur və yüklənmir.",
   pickPdf: "PDF seçin", pickPdfs: "PDF-ləri seçin", pickImages: "Şəkilləri seçin", pickDocx: "DOCX faylı seçin", dropHint: "və ya bura buraxın", add: "Əlavə et", remove: "Sil",
   run: "Başla", working: "İşlənir…", cancel: "Ləğv et", done: "Hazırdır", download: "Yüklə", downloadZip: "Hamısını yüklə (ZIP)", share: "Paylaş", copy: "Kopyala", copied: "Kopyalandı.", clear: "Təmizlə",
@@ -75,7 +75,7 @@ const az: Dict = {
 };
 
 const tr: Dict = {
-  title: "Nibras PDF", lead: "Tarayıcıda 20 PDF aracı: birleştir, böl, sıkıştır, dönüştür, imzala, koru ve daha fazlası. Ücretsiz, hesapsız.",
+  title: "Nibras PDF", lead: "Tarayıcıda 26 PDF aracı: birleştir, böl, sıkıştır, dönüştür, imzala, koru ve daha fazlası. Ücretsiz, hesapsız.",
   toolsHeading: "Ne yapmak istiyorsunuz?", back: "Tüm araçlar", appPage: "Android uygulaması", privacy: "Gizlilik", privateNote: "Dosyalar cihazınızda işlenir, yüklenmez.",
   pickPdf: "PDF seçin", pickPdfs: "PDF'leri seçin", pickImages: "Görselleri seçin", pickDocx: "DOCX dosyası seçin", dropHint: "veya buraya bırakın", add: "Ekle", remove: "Kaldır",
   run: "Başlat", working: "İşleniyor…", cancel: "İptal", done: "Hazır", download: "İndir", downloadZip: "Hepsini indir (ZIP)", share: "Paylaş", copy: "Kopyala", copied: "Kopyalandı.", clear: "Temizle",
@@ -101,7 +101,7 @@ const tr: Dict = {
 };
 
 const ar: Dict = {
-  title: "Nibras PDF", lead: "20 أداة PDF في المتصفح: دمج وتقسيم وضغط وتحويل وتوقيع وحماية والمزيد. مجاناً وبلا حساب.",
+  title: "Nibras PDF", lead: "26 أداة PDF في المتصفح: دمج وتقسيم وضغط وتحويل وتوقيع وحماية والمزيد. مجاناً وبلا حساب.",
   toolsHeading: "ماذا تريد أن تفعل؟", back: "كل الأدوات", appPage: "تطبيق أندرويد", privacy: "الخصوصية", privateNote: "تُعالج الملفات على جهازك ولا تُرفع.",
   pickPdf: "اختر ملف PDF", pickPdfs: "اختر ملفات PDF", pickImages: "اختر الصور", pickDocx: "اختر ملف DOCX", dropHint: "أو أفلته هنا", add: "إضافة", remove: "حذف",
   run: "ابدأ", working: "جارٍ العمل…", cancel: "إلغاء", done: "تم", download: "تنزيل", downloadZip: "تنزيل الكل (ZIP)", share: "مشاركة", copy: "نسخ", copied: "تم النسخ.", clear: "مسح",
@@ -127,7 +127,7 @@ const ar: Dict = {
 };
 
 const ru: Dict = {
-  title: "Nibras PDF", lead: "20 PDF-инструментов в браузере: объединить, разделить, сжать, конвертировать, подписать, защитить и другое. Бесплатно, без аккаунта.",
+  title: "Nibras PDF", lead: "26 PDF-инструментов в браузере: объединить, разделить, сжать, конвертировать, подписать, защитить и другое. Бесплатно, без аккаунта.",
   toolsHeading: "Что вы хотите сделать?", back: "Все инструменты", appPage: "Android-приложение", privacy: "Конфиденциальность", privateNote: "Файлы обрабатываются на вашем устройстве и не загружаются.",
   pickPdf: "Выберите PDF", pickPdfs: "Выберите PDF-файлы", pickImages: "Выберите изображения", pickDocx: "Выберите DOCX", dropHint: "или перетащите сюда", add: "Добавить", remove: "Убрать",
   run: "Начать", working: "Обработка…", cancel: "Отмена", done: "Готово", download: "Скачать", downloadZip: "Скачать всё (ZIP)", share: "Поделиться", copy: "Копировать", copied: "Скопировано.", clear: "Очистить",

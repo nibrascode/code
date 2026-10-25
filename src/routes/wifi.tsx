@@ -92,6 +92,7 @@ export function WifiPage() {
       <NextLinks
         links={[
           { href: "/qr", label: { az: "QR kod", en: "QR code", tr: "QR kod", ar: "رمز QR", ru: "QR-код" } },
+          { href: "/vcard", label: { az: "Vizit kartı QR", en: "Contact QR", tr: "Kartvizit QR", ar: "QR جهة الاتصال", ru: "QR-визитка" } },
           { href: "/soz-sayi", label: { az: "Söz sayı", en: "Word count", tr: "Söz sayısı", ar: "عدد الكلمات", ru: "Количество слов" } },
         ]}
       />

@@ -5,6 +5,7 @@ import { pdfPairFromPath } from "@/lib/pdf-pairs";
 import { isToolId, toolSeo } from "@/pdf/tool-seo";
 import { SEARCH_FAQ } from "@/lib/search-faq";
 import { TOOL_IDS } from "@/pdf/tool-text";
+import { KIT, KIT_PATHS, isKitPath } from "@/kit/meta";
 import { findCourse, HUBS, isCourseSlug } from "@/lib/course/meta";
 import { PROGRAMMING_SEO } from "@/lib/programming-seo";
 import { hasProgrammingLocale, programmingFromPath, programmingLocalePath } from "@/lib/programming-path";
@@ -765,7 +766,7 @@ const PAGES: Record<string, Copy> = {
     ru: { title: "Посчитать процент — бесплатно", description: "Найдите процент от числа и сколько процентов одно число от другого. Без аккаунта." },
   },
   "/wifi": {
-    az: { title: "Wi-Fi QR — pulsuz", description: "Şəbəkə adı və şifrədən QR kod yarat. Qonaq skan edib qoşulsun. Şifrə yüklənmir." },
+    az: { title: "Wi-Fi QR — pulsuz", description: "Şəbəkə adı və şifrədən QR kod hazırla. Qonaq skan edib qoşulsun. Şifrə yüklənmir." },
     en: { title: "Wi-Fi QR code — free", description: "Make a QR code from a network name and password. A guest scans and joins. The password is not uploaded." },
     tr: { title: "Wi-Fi QR — ücretsiz", description: "Ağ adı ve şifreden QR kod yap. Konuk tarayıp bağlansın. Şifre yüklenmez." },
     ar: { title: "رمز QR لـ Wi-Fi — مجاناً", description: "اصنع رمز QR من اسم الشبكة وكلمة المرور. يمسحه الضيف ويتصل. لا تُرفع كلمة المرور." },
@@ -802,23 +803,23 @@ const PAGES: Record<string, Copy> = {
   "/pdf": {
     az: {
       title: "Nibras PDF — PDF birləşdir, böl, sıxışdır, imzala (pulsuz)",
-      description: "Brauzerdə 20 PDF aləti: birləşdir, böl, sıxışdır, şəkildən PDF, PDF-dən şəkil və Word, OCR, parol, watermark, imza. Pulsuz, hesabsız, fayllar yüklənmir.",
+      description: "Brauzerdə 26 PDF aləti: birləşdir, böl, sıxışdır, şəkildən PDF, PDF-dən şəkil və Word, OCR, parol, watermark, imza. Pulsuz, hesabsız, fayllar yüklənmir.",
     },
     en: {
       title: "Nibras PDF — merge, split, compress, sign PDF (free)",
-      description: "20 PDF tools in your browser: merge, split, compress, images to PDF, PDF to image and Word, OCR, password, watermark, signature. Free, no account, files stay on your device.",
+      description: "26 PDF tools in your browser: merge, split, compress, images to PDF, PDF to image and Word, OCR, password, watermark, signature. Free, no account, files stay on your device.",
     },
     tr: {
       title: "Nibras PDF — PDF birleştir, böl, sıkıştır, imzala (ücretsiz)",
-      description: "Tarayıcıda 20 PDF aracı: birleştir, böl, sıkıştır, görselden PDF, PDF'den görsel ve Word, OCR, parola, filigran, imza. Ücretsiz, hesapsız, dosyalar yüklenmez.",
+      description: "Tarayıcıda 26 PDF aracı: birleştir, böl, sıkıştır, görselden PDF, PDF'den görsel ve Word, OCR, parola, filigran, imza. Ücretsiz, hesapsız, dosyalar yüklenmez.",
     },
     ar: {
       title: "Nibras PDF — دمج وتقسيم وضغط وتوقيع PDF مجاناً",
-      description: "20 أداة PDF في المتصفح: دمج وتقسيم وضغط وتحويل الصور وWord وOCR وكلمة مرور وعلامة مائية وتوقيع. مجاناً وبلا حساب وتبقى الملفات على جهازك.",
+      description: "26 أداة PDF في المتصفح: دمج وتقسيم وضغط وتحويل الصور وWord وOCR وكلمة مرور وعلامة مائية وتوقيع. مجاناً وبلا حساب وتبقى الملفات على جهازك.",
     },
     ru: {
       title: "Nibras PDF — объединить, разделить, сжать, подписать PDF бесплатно",
-      description: "20 PDF-инструментов в браузере: объединение, разделение, сжатие, изображения и Word, OCR, пароль, водяной знак, подпись. Бесплатно, без аккаунта, файлы остаются на устройстве.",
+      description: "26 PDF-инструментов в браузере: объединение, разделение, сжатие, изображения и Word, OCR, пароль, водяной знак, подпись. Бесплатно, без аккаунта, файлы остаются на устройстве.",
     },
   },
   "/qr": {
@@ -1067,6 +1068,7 @@ function pageCopy(pathname: string, lang: Lang) {
       keywords: topicCopy.keywords[lang],
     };
   }
+  if (isKitPath(path)) { const k = KIT[path][lang] ?? KIT[path].en; return { title: k.title, description: k.description }; }
   const pdfTool = path.match(/^\/pdf\/([a-z-]+)$/);
   if (pdfTool && isToolId(pdfTool[1])) return toolSeo(lang, pdfTool[1]);
   const page = PAGES[path] ?? PAGES["/"];
@@ -1362,6 +1364,19 @@ function jsonLd(path: string, lang: Lang, copy: PageSeo, url: string) {
     };
   }
 
+  if (isKitPath(path)) {
+    const k = KIT[path][lang] ?? KIT[path].en;
+    return {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      name: copy.title,
+      description: copy.description,
+      url,
+      inLanguage: lang,
+      mainEntity: k.faq.map((item) => ({ "@type": "Question", name: item.q, acceptedAnswer: { "@type": "Answer", text: item.a } })),
+      publisher: org,
+    };
+  }
   const pdfFaq = path.match(/^\/pdf\/([a-z-]+)$/);
   if (pdfFaq && isToolId(pdfFaq[1])) {
     const faqs = toolSeo(lang, pdfFaq[1]).faqs;
@@ -1413,4 +1428,4 @@ function jsonLd(path: string, lang: Lang, copy: PageSeo, url: string) {
   };
 }
 
-export const SITEMAP_PATHS = [...Object.keys(PAGES), ...TOOL_IDS.map((id) => `/pdf/${id}`)];
+export const SITEMAP_PATHS = [...Object.keys(PAGES), ...TOOL_IDS.map((id) => `/pdf/${id}`), ...KIT_PATHS];
