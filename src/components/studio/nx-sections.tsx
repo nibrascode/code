@@ -578,3 +578,45 @@ export function PulseCard({ go }: { go: (tab: string) => void }) {
     </Card>
   );
 }
+
+/* ───────────── live presence ───────────── */
+
+const LIVE_TXT: Record<string, [string, string, string]> = {
+  az: ["İndi saytda", "son 90 saniyədə aktiv", "Saxlama qoşulmayıb"],
+  en: ["On site now", "active in the last 90 s", "Storage not connected"],
+  tr: ["Şu an sitede", "son 90 saniyede aktif", "Depolama bağlı değil"],
+  ar: ["في الموقع الآن", "نشط خلال آخر 90 ثانية", "التخزين غير متصل"],
+  ru: ["Сейчас на сайте", "активны за последние 90 с", "Хранилище не подключено"],
+};
+
+export function LiveCard() {
+  const { lang } = useStudio();
+  const [count, setCount] = useState<number | null | undefined>(undefined);
+  useEffect(() => {
+    let alive = true;
+    const load = () => {
+      if (document.visibilityState === "hidden") return;
+      nxGet<{ count: number | null }>("live")
+        .then((d) => alive && setCount(d.count))
+        .catch(() => alive && setCount((c) => (c === undefined ? null : c)));
+    };
+    load();
+    const id = setInterval(load, 20_000);
+    document.addEventListener("visibilitychange", load);
+    return () => {
+      alive = false;
+      clearInterval(id);
+      document.removeEventListener("visibilitychange", load);
+    };
+  }, []);
+  const [title, sub, off] = LIVE_TXT[lang] ?? LIVE_TXT.az;
+  return (
+    <Card title={title}>
+      <div style={{ display: "flex", alignItems: "baseline", gap: 12 }}>
+        <span aria-hidden style={{ width: 10, height: 10, borderRadius: 99, background: count ? "#22c55e" : "#9ca3af", boxShadow: count ? "0 0 0 4px rgba(34,197,94,.18)" : "none", alignSelf: "center" }} />
+        <b style={{ fontSize: 34, lineHeight: 1, fontVariantNumeric: "tabular-nums" }}>{count === undefined ? "…" : count === null ? "—" : fmtNum(lang, count)}</b>
+        <small style={{ opacity: 0.7 }}>{count === null ? off : sub}</small>
+      </div>
+    </Card>
+  );
+}

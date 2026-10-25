@@ -19,6 +19,7 @@ import {
   supaLogout,
   verifyAdmin,
 } from "./_admin.js";
+import { liveCount, LIVE_SECONDS } from "./_presence.js";
 import { appsData, coverList, deploys, libraryStats, providerHealth, runPlaySync, setAppSize } from "./_nx.js";
 
 export const config = { maxDuration: 15 };
@@ -138,6 +139,12 @@ export default async function handler(req, res) {
       if (!(await verifyAdmin(bearer(req)))) return send(401, { ok: false, error: "auth" });
       const days = Math.max(7, Math.min(90, Number(url.searchParams.get("days")) || 30));
       return send(200, { ok: true, ...(await overview({ days })) });
+    }
+
+    if (req.method === "GET" && op === "live") {
+      if (!(await verifyAdmin(bearer(req)))) return send(401, { ok: false, error: "auth" });
+      const count = await liveCount();
+      return send(200, { ok: true, count, storage: count !== null, windowSeconds: LIVE_SECONDS });
     }
 
     const NX_GET = new Set(["providers", "library", "apps", "covers", "deploys"]);
