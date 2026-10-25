@@ -40,6 +40,7 @@ import { Route as SozSayiRouteImport } from './routes/soz-sayi'
 import { Route as StudioRouteImport } from './routes/studio'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as ToolsRouteImport } from './routes/tools'
+import { Route as ToolsLegalRouteImport } from './routes/tools-legal'
 import { Route as TrRouteImport } from './routes/tr'
 import { Route as TrustRouteImport } from './routes/trust'
 import { Route as UnknownRouteImport } from './routes/unknown'
@@ -78,6 +79,7 @@ import { Route as ArSozSayiRouteImport } from './routes/ar.soz-sayi'
 import { Route as ArStudioRouteImport } from './routes/ar.studio'
 import { Route as ArTermsRouteImport } from './routes/ar.terms'
 import { Route as ArToolsRouteImport } from './routes/ar.tools'
+import { Route as ArToolsLegalRouteImport } from './routes/ar.tools-legal'
 import { Route as ArTrustRouteImport } from './routes/ar.trust'
 import { Route as ArUnknownRouteImport } from './routes/ar.unknown'
 import { Route as ArVcardRouteImport } from './routes/ar.vcard'
@@ -111,6 +113,7 @@ import { Route as EnSozSayiRouteImport } from './routes/en.soz-sayi'
 import { Route as EnStudioRouteImport } from './routes/en.studio'
 import { Route as EnTermsRouteImport } from './routes/en.terms'
 import { Route as EnToolsRouteImport } from './routes/en.tools'
+import { Route as EnToolsLegalRouteImport } from './routes/en.tools-legal'
 import { Route as EnTrustRouteImport } from './routes/en.trust'
 import { Route as EnUnknownRouteImport } from './routes/en.unknown'
 import { Route as EnVcardRouteImport } from './routes/en.vcard'
@@ -160,6 +163,7 @@ import { Route as RuSozSayiRouteImport } from './routes/ru.soz-sayi'
 import { Route as RuStudioRouteImport } from './routes/ru.studio'
 import { Route as RuTermsRouteImport } from './routes/ru.terms'
 import { Route as RuToolsRouteImport } from './routes/ru.tools'
+import { Route as RuToolsLegalRouteImport } from './routes/ru.tools-legal'
 import { Route as RuTrustRouteImport } from './routes/ru.trust'
 import { Route as RuUnknownRouteImport } from './routes/ru.unknown'
 import { Route as RuVcardRouteImport } from './routes/ru.vcard'
@@ -195,6 +199,7 @@ import { Route as TrSozSayiRouteImport } from './routes/tr.soz-sayi'
 import { Route as TrStudioRouteImport } from './routes/tr.studio'
 import { Route as TrTermsRouteImport } from './routes/tr.terms'
 import { Route as TrToolsRouteImport } from './routes/tr.tools'
+import { Route as TrToolsLegalRouteImport } from './routes/tr.tools-legal'
 import { Route as TrTrustRouteImport } from './routes/tr.trust'
 import { Route as TrUnknownRouteImport } from './routes/tr.unknown'
 import { Route as TrVcardRouteImport } from './routes/tr.vcard'
@@ -411,6 +416,11 @@ const ToolsRoute = ToolsRouteImport.update({
   path: '/tools',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ToolsLegalRoute = ToolsLegalRouteImport.update({
+  id: '/tools-legal',
+  path: '/tools-legal',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TrRoute = TrRouteImport.update({
   id: '/tr',
   path: '/tr',
@@ -601,6 +611,11 @@ const ArToolsRoute = ArToolsRouteImport.update({
   path: '/tools',
   getParentRoute: () => ArRoute,
 } as any)
+const ArToolsLegalRoute = ArToolsLegalRouteImport.update({
+  id: '/tools-legal',
+  path: '/tools-legal',
+  getParentRoute: () => ArRoute,
+} as any)
 const ArTrustRoute = ArTrustRouteImport.update({
   id: '/trust',
   path: '/trust',
@@ -764,6 +779,11 @@ const EnTermsRoute = EnTermsRouteImport.update({
 const EnToolsRoute = EnToolsRouteImport.update({
   id: '/tools',
   path: '/tools',
+  getParentRoute: () => EnRoute,
+} as any)
+const EnToolsLegalRoute = EnToolsLegalRouteImport.update({
+  id: '/tools-legal',
+  path: '/tools-legal',
   getParentRoute: () => EnRoute,
 } as any)
 const EnTrustRoute = EnTrustRouteImport.update({
@@ -1011,6 +1031,11 @@ const RuToolsRoute = RuToolsRouteImport.update({
   path: '/tools',
   getParentRoute: () => RuRoute,
 } as any)
+const RuToolsLegalRoute = RuToolsLegalRouteImport.update({
+  id: '/tools-legal',
+  path: '/tools-legal',
+  getParentRoute: () => RuRoute,
+} as any)
 const RuTrustRoute = RuTrustRouteImport.update({
   id: '/trust',
   path: '/trust',
@@ -1184,6 +1209,11 @@ const TrTermsRoute = TrTermsRouteImport.update({
 const TrToolsRoute = TrToolsRouteImport.update({
   id: '/tools',
   path: '/tools',
+  getParentRoute: () => TrRoute,
+} as any)
+const TrToolsLegalRoute = TrToolsLegalRouteImport.update({
+  id: '/tools-legal',
+  path: '/tools-legal',
   getParentRoute: () => TrRoute,
 } as any)
 const TrTrustRoute = TrTrustRouteImport.update({
@@ -1520,6 +1550,7 @@ export interface FileRoutesByFullPath {
   '/studio': typeof StudioRoute
   '/terms': typeof TermsRoute
   '/tools': typeof ToolsRouteWithChildren
+  '/tools-legal': typeof ToolsLegalRoute
   '/tr': typeof TrRouteWithChildren
   '/trust': typeof TrustRoute
   '/unknown': typeof UnknownRoute
@@ -1558,6 +1589,7 @@ export interface FileRoutesByFullPath {
   '/ar/studio': typeof ArStudioRoute
   '/ar/terms': typeof ArTermsRoute
   '/ar/tools': typeof ArToolsRouteWithChildren
+  '/ar/tools-legal': typeof ArToolsLegalRoute
   '/ar/trust': typeof ArTrustRoute
   '/ar/unknown': typeof ArUnknownRoute
   '/ar/vcard': typeof ArVcardRoute
@@ -1591,6 +1623,7 @@ export interface FileRoutesByFullPath {
   '/en/studio': typeof EnStudioRoute
   '/en/terms': typeof EnTermsRoute
   '/en/tools': typeof EnToolsRouteWithChildren
+  '/en/tools-legal': typeof EnToolsLegalRoute
   '/en/trust': typeof EnTrustRoute
   '/en/unknown': typeof EnUnknownRoute
   '/en/vcard': typeof EnVcardRoute
@@ -1636,6 +1669,7 @@ export interface FileRoutesByFullPath {
   '/ru/studio': typeof RuStudioRoute
   '/ru/terms': typeof RuTermsRoute
   '/ru/tools': typeof RuToolsRouteWithChildren
+  '/ru/tools-legal': typeof RuToolsLegalRoute
   '/ru/trust': typeof RuTrustRoute
   '/ru/unknown': typeof RuUnknownRoute
   '/ru/vcard': typeof RuVcardRoute
@@ -1671,6 +1705,7 @@ export interface FileRoutesByFullPath {
   '/tr/studio': typeof TrStudioRoute
   '/tr/terms': typeof TrTermsRoute
   '/tr/tools': typeof TrToolsRouteWithChildren
+  '/tr/tools-legal': typeof TrToolsLegalRoute
   '/tr/trust': typeof TrTrustRoute
   '/tr/unknown': typeof TrUnknownRoute
   '/tr/vcard': typeof TrVcardRoute
@@ -1768,6 +1803,7 @@ export interface FileRoutesByTo {
   '/studio': typeof StudioRoute
   '/terms': typeof TermsRoute
   '/tools': typeof ToolsRouteWithChildren
+  '/tools-legal': typeof ToolsLegalRoute
   '/tr': typeof TrRouteWithChildren
   '/trust': typeof TrustRoute
   '/unknown': typeof UnknownRoute
@@ -1805,6 +1841,7 @@ export interface FileRoutesByTo {
   '/ar/studio': typeof ArStudioRoute
   '/ar/terms': typeof ArTermsRoute
   '/ar/tools': typeof ArToolsRouteWithChildren
+  '/ar/tools-legal': typeof ArToolsLegalRoute
   '/ar/trust': typeof ArTrustRoute
   '/ar/unknown': typeof ArUnknownRoute
   '/ar/vcard': typeof ArVcardRoute
@@ -1838,6 +1875,7 @@ export interface FileRoutesByTo {
   '/en/studio': typeof EnStudioRoute
   '/en/terms': typeof EnTermsRoute
   '/en/tools': typeof EnToolsRouteWithChildren
+  '/en/tools-legal': typeof EnToolsLegalRoute
   '/en/trust': typeof EnTrustRoute
   '/en/unknown': typeof EnUnknownRoute
   '/en/vcard': typeof EnVcardRoute
@@ -1883,6 +1921,7 @@ export interface FileRoutesByTo {
   '/ru/studio': typeof RuStudioRoute
   '/ru/terms': typeof RuTermsRoute
   '/ru/tools': typeof RuToolsRouteWithChildren
+  '/ru/tools-legal': typeof RuToolsLegalRoute
   '/ru/trust': typeof RuTrustRoute
   '/ru/unknown': typeof RuUnknownRoute
   '/ru/vcard': typeof RuVcardRoute
@@ -1918,6 +1957,7 @@ export interface FileRoutesByTo {
   '/tr/studio': typeof TrStudioRoute
   '/tr/terms': typeof TrTermsRoute
   '/tr/tools': typeof TrToolsRouteWithChildren
+  '/tr/tools-legal': typeof TrToolsLegalRoute
   '/tr/trust': typeof TrTrustRoute
   '/tr/unknown': typeof TrUnknownRoute
   '/tr/vcard': typeof TrVcardRoute
@@ -2016,6 +2056,7 @@ export interface FileRoutesById {
   '/studio': typeof StudioRoute
   '/terms': typeof TermsRoute
   '/tools': typeof ToolsRouteWithChildren
+  '/tools-legal': typeof ToolsLegalRoute
   '/tr': typeof TrRouteWithChildren
   '/trust': typeof TrustRoute
   '/unknown': typeof UnknownRoute
@@ -2054,6 +2095,7 @@ export interface FileRoutesById {
   '/ar/studio': typeof ArStudioRoute
   '/ar/terms': typeof ArTermsRoute
   '/ar/tools': typeof ArToolsRouteWithChildren
+  '/ar/tools-legal': typeof ArToolsLegalRoute
   '/ar/trust': typeof ArTrustRoute
   '/ar/unknown': typeof ArUnknownRoute
   '/ar/vcard': typeof ArVcardRoute
@@ -2087,6 +2129,7 @@ export interface FileRoutesById {
   '/en/studio': typeof EnStudioRoute
   '/en/terms': typeof EnTermsRoute
   '/en/tools': typeof EnToolsRouteWithChildren
+  '/en/tools-legal': typeof EnToolsLegalRoute
   '/en/trust': typeof EnTrustRoute
   '/en/unknown': typeof EnUnknownRoute
   '/en/vcard': typeof EnVcardRoute
@@ -2132,6 +2175,7 @@ export interface FileRoutesById {
   '/ru/studio': typeof RuStudioRoute
   '/ru/terms': typeof RuTermsRoute
   '/ru/tools': typeof RuToolsRouteWithChildren
+  '/ru/tools-legal': typeof RuToolsLegalRoute
   '/ru/trust': typeof RuTrustRoute
   '/ru/unknown': typeof RuUnknownRoute
   '/ru/vcard': typeof RuVcardRoute
@@ -2167,6 +2211,7 @@ export interface FileRoutesById {
   '/tr/studio': typeof TrStudioRoute
   '/tr/terms': typeof TrTermsRoute
   '/tr/tools': typeof TrToolsRouteWithChildren
+  '/tr/tools-legal': typeof TrToolsLegalRoute
   '/tr/trust': typeof TrTrustRoute
   '/tr/unknown': typeof TrUnknownRoute
   '/tr/vcard': typeof TrVcardRoute
@@ -2266,6 +2311,7 @@ export interface FileRouteTypes {
     | '/studio'
     | '/terms'
     | '/tools'
+    | '/tools-legal'
     | '/tr'
     | '/trust'
     | '/unknown'
@@ -2304,6 +2350,7 @@ export interface FileRouteTypes {
     | '/ar/studio'
     | '/ar/terms'
     | '/ar/tools'
+    | '/ar/tools-legal'
     | '/ar/trust'
     | '/ar/unknown'
     | '/ar/vcard'
@@ -2337,6 +2384,7 @@ export interface FileRouteTypes {
     | '/en/studio'
     | '/en/terms'
     | '/en/tools'
+    | '/en/tools-legal'
     | '/en/trust'
     | '/en/unknown'
     | '/en/vcard'
@@ -2382,6 +2430,7 @@ export interface FileRouteTypes {
     | '/ru/studio'
     | '/ru/terms'
     | '/ru/tools'
+    | '/ru/tools-legal'
     | '/ru/trust'
     | '/ru/unknown'
     | '/ru/vcard'
@@ -2417,6 +2466,7 @@ export interface FileRouteTypes {
     | '/tr/studio'
     | '/tr/terms'
     | '/tr/tools'
+    | '/tr/tools-legal'
     | '/tr/trust'
     | '/tr/unknown'
     | '/tr/vcard'
@@ -2514,6 +2564,7 @@ export interface FileRouteTypes {
     | '/studio'
     | '/terms'
     | '/tools'
+    | '/tools-legal'
     | '/tr'
     | '/trust'
     | '/unknown'
@@ -2551,6 +2602,7 @@ export interface FileRouteTypes {
     | '/ar/studio'
     | '/ar/terms'
     | '/ar/tools'
+    | '/ar/tools-legal'
     | '/ar/trust'
     | '/ar/unknown'
     | '/ar/vcard'
@@ -2584,6 +2636,7 @@ export interface FileRouteTypes {
     | '/en/studio'
     | '/en/terms'
     | '/en/tools'
+    | '/en/tools-legal'
     | '/en/trust'
     | '/en/unknown'
     | '/en/vcard'
@@ -2629,6 +2682,7 @@ export interface FileRouteTypes {
     | '/ru/studio'
     | '/ru/terms'
     | '/ru/tools'
+    | '/ru/tools-legal'
     | '/ru/trust'
     | '/ru/unknown'
     | '/ru/vcard'
@@ -2664,6 +2718,7 @@ export interface FileRouteTypes {
     | '/tr/studio'
     | '/tr/terms'
     | '/tr/tools'
+    | '/tr/tools-legal'
     | '/tr/trust'
     | '/tr/unknown'
     | '/tr/vcard'
@@ -2761,6 +2816,7 @@ export interface FileRouteTypes {
     | '/studio'
     | '/terms'
     | '/tools'
+    | '/tools-legal'
     | '/tr'
     | '/trust'
     | '/unknown'
@@ -2799,6 +2855,7 @@ export interface FileRouteTypes {
     | '/ar/studio'
     | '/ar/terms'
     | '/ar/tools'
+    | '/ar/tools-legal'
     | '/ar/trust'
     | '/ar/unknown'
     | '/ar/vcard'
@@ -2832,6 +2889,7 @@ export interface FileRouteTypes {
     | '/en/studio'
     | '/en/terms'
     | '/en/tools'
+    | '/en/tools-legal'
     | '/en/trust'
     | '/en/unknown'
     | '/en/vcard'
@@ -2877,6 +2935,7 @@ export interface FileRouteTypes {
     | '/ru/studio'
     | '/ru/terms'
     | '/ru/tools'
+    | '/ru/tools-legal'
     | '/ru/trust'
     | '/ru/unknown'
     | '/ru/vcard'
@@ -2912,6 +2971,7 @@ export interface FileRouteTypes {
     | '/tr/studio'
     | '/tr/terms'
     | '/tr/tools'
+    | '/tr/tools-legal'
     | '/tr/trust'
     | '/tr/unknown'
     | '/tr/vcard'
@@ -3010,6 +3070,7 @@ export interface RootRouteChildren {
   StudioRoute: typeof StudioRoute
   TermsRoute: typeof TermsRoute
   ToolsRoute: typeof ToolsRouteWithChildren
+  ToolsLegalRoute: typeof ToolsLegalRoute
   TrRoute: typeof TrRouteWithChildren
   TrustRoute: typeof TrustRoute
   UnknownRoute: typeof UnknownRoute
@@ -3250,6 +3311,13 @@ declare module '@tanstack/react-router' {
       path: '/tools'
       fullPath: '/tools'
       preLoaderRoute: typeof ToolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools-legal': {
+      id: '/tools-legal'
+      path: '/tools-legal'
+      fullPath: '/tools-legal'
+      preLoaderRoute: typeof ToolsLegalRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tr': {
@@ -3518,6 +3586,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArToolsRouteImport
       parentRoute: typeof ArRoute
     }
+    '/ar/tools-legal': {
+      id: '/ar/tools-legal'
+      path: '/tools-legal'
+      fullPath: '/ar/tools-legal'
+      preLoaderRoute: typeof ArToolsLegalRouteImport
+      parentRoute: typeof ArRoute
+    }
     '/ar/trust': {
       id: '/ar/trust'
       path: '/trust'
@@ -3747,6 +3822,13 @@ declare module '@tanstack/react-router' {
       path: '/tools'
       fullPath: '/en/tools'
       preLoaderRoute: typeof EnToolsRouteImport
+      parentRoute: typeof EnRoute
+    }
+    '/en/tools-legal': {
+      id: '/en/tools-legal'
+      path: '/tools-legal'
+      fullPath: '/en/tools-legal'
+      preLoaderRoute: typeof EnToolsLegalRouteImport
       parentRoute: typeof EnRoute
     }
     '/en/trust': {
@@ -4092,6 +4174,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RuToolsRouteImport
       parentRoute: typeof RuRoute
     }
+    '/ru/tools-legal': {
+      id: '/ru/tools-legal'
+      path: '/tools-legal'
+      fullPath: '/ru/tools-legal'
+      preLoaderRoute: typeof RuToolsLegalRouteImport
+      parentRoute: typeof RuRoute
+    }
     '/ru/trust': {
       id: '/ru/trust'
       path: '/trust'
@@ -4335,6 +4424,13 @@ declare module '@tanstack/react-router' {
       path: '/tools'
       fullPath: '/tr/tools'
       preLoaderRoute: typeof TrToolsRouteImport
+      parentRoute: typeof TrRoute
+    }
+    '/tr/tools-legal': {
+      id: '/tr/tools-legal'
+      path: '/tools-legal'
+      fullPath: '/tr/tools-legal'
+      preLoaderRoute: typeof TrToolsLegalRouteImport
       parentRoute: typeof TrRoute
     }
     '/tr/trust': {
@@ -4885,6 +4981,7 @@ interface ArRouteChildren {
   ArStudioRoute: typeof ArStudioRoute
   ArTermsRoute: typeof ArTermsRoute
   ArToolsRoute: typeof ArToolsRouteWithChildren
+  ArToolsLegalRoute: typeof ArToolsLegalRoute
   ArTrustRoute: typeof ArTrustRoute
   ArUnknownRoute: typeof ArUnknownRoute
   ArVcardRoute: typeof ArVcardRoute
@@ -4924,6 +5021,7 @@ const ArRouteChildren: ArRouteChildren = {
   ArStudioRoute: ArStudioRoute,
   ArTermsRoute: ArTermsRoute,
   ArToolsRoute: ArToolsRouteWithChildren,
+  ArToolsLegalRoute: ArToolsLegalRoute,
   ArTrustRoute: ArTrustRoute,
   ArUnknownRoute: ArUnknownRoute,
   ArVcardRoute: ArVcardRoute,
@@ -5063,6 +5161,7 @@ interface EnRouteChildren {
   EnStudioRoute: typeof EnStudioRoute
   EnTermsRoute: typeof EnTermsRoute
   EnToolsRoute: typeof EnToolsRouteWithChildren
+  EnToolsLegalRoute: typeof EnToolsLegalRoute
   EnTrustRoute: typeof EnTrustRoute
   EnUnknownRoute: typeof EnUnknownRoute
   EnVcardRoute: typeof EnVcardRoute
@@ -5102,6 +5201,7 @@ const EnRouteChildren: EnRouteChildren = {
   EnStudioRoute: EnStudioRoute,
   EnTermsRoute: EnTermsRoute,
   EnToolsRoute: EnToolsRouteWithChildren,
+  EnToolsLegalRoute: EnToolsLegalRoute,
   EnTrustRoute: EnTrustRoute,
   EnUnknownRoute: EnUnknownRoute,
   EnVcardRoute: EnVcardRoute,
@@ -5308,6 +5408,7 @@ interface RuRouteChildren {
   RuStudioRoute: typeof RuStudioRoute
   RuTermsRoute: typeof RuTermsRoute
   RuToolsRoute: typeof RuToolsRouteWithChildren
+  RuToolsLegalRoute: typeof RuToolsLegalRoute
   RuTrustRoute: typeof RuTrustRoute
   RuUnknownRoute: typeof RuUnknownRoute
   RuVcardRoute: typeof RuVcardRoute
@@ -5348,6 +5449,7 @@ const RuRouteChildren: RuRouteChildren = {
   RuStudioRoute: RuStudioRoute,
   RuTermsRoute: RuTermsRoute,
   RuToolsRoute: RuToolsRouteWithChildren,
+  RuToolsLegalRoute: RuToolsLegalRoute,
   RuTrustRoute: RuTrustRoute,
   RuUnknownRoute: RuUnknownRoute,
   RuVcardRoute: RuVcardRoute,
@@ -5508,6 +5610,7 @@ interface TrRouteChildren {
   TrStudioRoute: typeof TrStudioRoute
   TrTermsRoute: typeof TrTermsRoute
   TrToolsRoute: typeof TrToolsRouteWithChildren
+  TrToolsLegalRoute: typeof TrToolsLegalRoute
   TrTrustRoute: typeof TrTrustRoute
   TrUnknownRoute: typeof TrUnknownRoute
   TrVcardRoute: typeof TrVcardRoute
@@ -5547,6 +5650,7 @@ const TrRouteChildren: TrRouteChildren = {
   TrStudioRoute: TrStudioRoute,
   TrTermsRoute: TrTermsRoute,
   TrToolsRoute: TrToolsRouteWithChildren,
+  TrToolsLegalRoute: TrToolsLegalRoute,
   TrTrustRoute: TrTrustRoute,
   TrUnknownRoute: TrUnknownRoute,
   TrVcardRoute: TrVcardRoute,
@@ -5616,6 +5720,7 @@ const rootRouteChildren: RootRouteChildren = {
   StudioRoute: StudioRoute,
   TermsRoute: TermsRoute,
   ToolsRoute: ToolsRouteWithChildren,
+  ToolsLegalRoute: ToolsLegalRoute,
   TrRoute: TrRouteWithChildren,
   TrustRoute: TrustRoute,
   UnknownRoute: UnknownRoute,

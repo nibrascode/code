@@ -1,3 +1,4 @@
+import { ToolsLegalLinks } from "@/legal/tools-legal";
 import { useState } from "react";
 import { Activity, AlertTriangle, CheckCircle2, Copy, Search } from "lucide-react";
 import { useI18n } from "@/lib/i18n-context";
@@ -96,6 +97,7 @@ export function DoctorPage() {
           <button className={ui.btn + " mt-4 min-h-11"} onClick={() => void copy()}><Copy className="size-4" /> {copied ? t.copied : t.copy}</button>
         </section>
       ) : null}
+      <footer className="mt-10 border-t border-white/10 pt-4"><ToolsLegalLinks /></footer>
     </main>
   );
 }

@@ -1,3 +1,4 @@
+import { ToolsLegalLinks } from "@/legal/tools-legal";
 import { useEffect, useMemo, useState } from "react";
 import { ArrowLeft, BarChart3, BookOpen, Check, FileUp, Layers, Plus, RotateCcw, Trash2, X } from "lucide-react";
 import { useI18n } from "@/lib/i18n-context";
@@ -91,6 +92,7 @@ export function LearnPage() {
           ) : list ? <p className="rounded-2xl border border-dashed border-white/15 p-6 text-center text-sm text-muted">{c.empty}</p> : null}
         </>
       )}
+      <footer className="mt-10 border-t border-white/10 pt-4"><ToolsLegalLinks /></footer>
     </main>
   );
 }

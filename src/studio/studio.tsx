@@ -5,14 +5,16 @@ import { useI18n } from "@/lib/i18n-context";
 import { localeHref } from "@/lib/locale-path";
 import { WS } from "@/workspace/i18n";
 import { StudioIDE } from "./studio-ide";
-import { ago, blank, loadProjects, persistProjects, type Project } from "@/workspace/workspace";
+import { ConfirmDialog } from "./confirm";
+import { ToolsLegalLinks } from "@/legal/tools-legal";
+import { ago, blank, dropProjectData, loadProjects, persistProjects, type Project } from "@/workspace/workspace";
 
 const S = {
-  az: { h1: "Nibras Studio", lead: "Brauzerdə tam kod redaktoru: fayllar və qovluqlar, rəngli kod, telefon çərçivəsində canlı önizləmə. Bir kliklə ZIP, Nibras Dev linki və ya Android APK.", name: "Layihənin adı", create: "Yeni layihə", recent: "Layihələr", empty: "Hələ layihə yoxdur — adını yazıb başlayın.", open: "Aç", del: "Sil", confirm: "Bu layihə silinsin?", back: "Layihələr", ws: "Workspace-də aç", local: "Layihələr yalnız bu brauzerdə saxlanır və Workspace ilə ortaqdır. Serverə heç nə yüklənmir.", f1: "CodeMirror redaktoru", f2: "Canlı telefon önizləməsi", f3: "ZIP · Nibras Dev · APK", files: "fayl", untitled: "Saytım" },
-  en: { h1: "Nibras Studio", lead: "A full code editor in your browser: files and folders, syntax highlighting, live preview in a phone frame. One click to a ZIP, a Nibras Dev link or an Android APK.", name: "Project name", create: "New project", recent: "Projects", empty: "No projects yet — type a name to start.", open: "Open", del: "Delete", confirm: "Delete this project?", back: "Projects", ws: "Open in Workspace", local: "Projects are stored only in this browser and shared with Workspace. Nothing is uploaded.", f1: "CodeMirror editor", f2: "Live phone preview", f3: "ZIP · Nibras Dev · APK", files: "files", untitled: "My site" },
-  tr: { h1: "Nibras Studio", lead: "Tarayıcıda tam kod editörü: dosyalar ve klasörler, renkli kod, telefon çerçevesinde canlı önizleme. Tek tıkla ZIP, Nibras Dev bağlantısı ya da Android APK.", name: "Proje adı", create: "Yeni proje", recent: "Projeler", empty: "Henüz proje yok — bir ad yazıp başlayın.", open: "Aç", del: "Sil", confirm: "Bu proje silinsin mi?", back: "Projeler", ws: "Workspace'te aç", local: "Projeler yalnızca bu tarayıcıda saklanır ve Workspace ile ortaktır. Hiçbir şey yüklenmez.", f1: "CodeMirror editörü", f2: "Canlı telefon önizlemesi", f3: "ZIP · Nibras Dev · APK", files: "dosya", untitled: "Sitem" },
-  ar: { h1: "Nibras Studio", lead: "محرر كود كامل في المتصفح: ملفات ومجلدات وتلوين للكود ومعاينة حيّة داخل إطار هاتف. بنقرة واحدة: ZIP أو رابط Nibras Dev أو APK لأندرويد.", name: "اسم المشروع", create: "مشروع جديد", recent: "المشاريع", empty: "لا مشاريع بعد — اكتب اسماً وابدأ.", open: "فتح", del: "حذف", confirm: "حذف هذا المشروع؟", back: "المشاريع", ws: "افتح في Workspace", local: "تُحفظ المشاريع في هذا المتصفح فقط وهي مشتركة مع Workspace. لا يُرفع أي شيء.", f1: "محرر CodeMirror", f2: "معاينة حيّة على الهاتف", f3: "ZIP · Nibras Dev · APK", files: "ملفات", untitled: "موقعي" },
-  ru: { h1: "Nibras Studio", lead: "Полноценный редактор кода в браузере: файлы и папки, подсветка, живой просмотр в рамке телефона. Один клик — ZIP, ссылка Nibras Dev или Android APK.", name: "Название проекта", create: "Новый проект", recent: "Проекты", empty: "Проектов пока нет — введите название.", open: "Открыть", del: "Удалить", confirm: "Удалить проект?", back: "Проекты", ws: "Открыть в Workspace", local: "Проекты хранятся только в этом браузере и общие с Workspace. Ничего не загружается.", f1: "Редактор CodeMirror", f2: "Живой просмотр на телефоне", f3: "ZIP · Nibras Dev · APK", files: "файлов", untitled: "Мой сайт" },
+  az: { h1: "Nibras Studio", dTitle: "Layihə silinsin?", dBody: "«{n}» və onun bütün nüsxələri bu brauzerdən həmişəlik silinəcək. Bunu geri qaytarmaq olmur.", cancel: "Ləğv et", delP: "Layihəni sil", lead: "Brauzerdə tam kod redaktoru: fayllar və qovluqlar, rəngli kod, telefon çərçivəsində canlı önizləmə. Bir kliklə ZIP, Nibras Dev linki və ya Android APK.", name: "Layihənin adı", create: "Yeni layihə", recent: "Layihələr", empty: "Hələ layihə yoxdur — adını yazıb başlayın.", open: "Aç", del: "Sil", confirm: "Bu layihə silinsin?", back: "Layihələr", ws: "Workspace-də aç", local: "Layihələr yalnız bu brauzerdə saxlanır və Workspace ilə ortaqdır. Serverə heç nə yüklənmir.", f1: "CodeMirror redaktoru", f2: "Canlı telefon önizləməsi", f3: "ZIP · Nibras Dev · APK", files: "fayl", untitled: "Saytım" },
+  en: { h1: "Nibras Studio", dTitle: "Delete project?", dBody: "“{n}” and all its snapshots will be permanently removed from this browser. This cannot be undone.", cancel: "Cancel", delP: "Delete project", lead: "A full code editor in your browser: files and folders, syntax highlighting, live preview in a phone frame. One click to a ZIP, a Nibras Dev link or an Android APK.", name: "Project name", create: "New project", recent: "Projects", empty: "No projects yet — type a name to start.", open: "Open", del: "Delete", confirm: "Delete this project?", back: "Projects", ws: "Open in Workspace", local: "Projects are stored only in this browser and shared with Workspace. Nothing is uploaded.", f1: "CodeMirror editor", f2: "Live phone preview", f3: "ZIP · Nibras Dev · APK", files: "files", untitled: "My site" },
+  tr: { h1: "Nibras Studio", dTitle: "Proje silinsin mi?", dBody: "“{n}” ve tüm kopyaları bu tarayıcıdan kalıcı olarak silinecek. Geri alınamaz.", cancel: "İptal", delP: "Projeyi sil", lead: "Tarayıcıda tam kod editörü: dosyalar ve klasörler, renkli kod, telefon çerçevesinde canlı önizleme. Tek tıkla ZIP, Nibras Dev bağlantısı ya da Android APK.", name: "Proje adı", create: "Yeni proje", recent: "Projeler", empty: "Henüz proje yok — bir ad yazıp başlayın.", open: "Aç", del: "Sil", confirm: "Bu proje silinsin mi?", back: "Projeler", ws: "Workspace'te aç", local: "Projeler yalnızca bu tarayıcıda saklanır ve Workspace ile ortaktır. Hiçbir şey yüklenmez.", f1: "CodeMirror editörü", f2: "Canlı telefon önizlemesi", f3: "ZIP · Nibras Dev · APK", files: "dosya", untitled: "Sitem" },
+  ar: { h1: "Nibras Studio", dTitle: "حذف المشروع؟", dBody: "سيُحذف «{n}» وجميع نسخه نهائياً من هذا المتصفح. لا يمكن التراجع.", cancel: "إلغاء", delP: "حذف المشروع", lead: "محرر كود كامل في المتصفح: ملفات ومجلدات وتلوين للكود ومعاينة حيّة داخل إطار هاتف. بنقرة واحدة: ZIP أو رابط Nibras Dev أو APK لأندرويد.", name: "اسم المشروع", create: "مشروع جديد", recent: "المشاريع", empty: "لا مشاريع بعد — اكتب اسماً وابدأ.", open: "فتح", del: "حذف", confirm: "حذف هذا المشروع؟", back: "المشاريع", ws: "افتح في Workspace", local: "تُحفظ المشاريع في هذا المتصفح فقط وهي مشتركة مع Workspace. لا يُرفع أي شيء.", f1: "محرر CodeMirror", f2: "معاينة حيّة على الهاتف", f3: "ZIP · Nibras Dev · APK", files: "ملفات", untitled: "موقعي" },
+  ru: { h1: "Nibras Studio", dTitle: "Удалить проект?", dBody: "«{n}» и все его снимки будут навсегда удалены из этого браузера. Отменить нельзя.", cancel: "Отмена", delP: "Удалить проект", lead: "Полноценный редактор кода в браузере: файлы и папки, подсветка, живой просмотр в рамке телефона. Один клик — ZIP, ссылка Nibras Dev или Android APK.", name: "Название проекта", create: "Новый проект", recent: "Проекты", empty: "Проектов пока нет — введите название.", open: "Открыть", del: "Удалить", confirm: "Удалить проект?", back: "Проекты", ws: "Открыть в Workspace", local: "Проекты хранятся только в этом браузере и общие с Workspace. Ничего не загружается.", f1: "Редактор CodeMirror", f2: "Живой просмотр на телефоне", f3: "ZIP · Nibras Dev · APK", files: "файлов", untitled: "Мой сайт" },
 };
 
 export function StudioPage() {
@@ -22,6 +24,7 @@ export function StudioPage() {
   const [list, setList] = useState<Project[] | null>(null);
   const [openId, setOpenId] = useState<string | null>(null);
   const [name, setName] = useState("");
+  const [ask, setAsk] = useState<Project | null>(null);
   useEffect(() => {
     setList(loadProjects());
     setOpenId(new URLSearchParams(location.search).get("p"));
@@ -51,18 +54,22 @@ export function StudioPage() {
     const next = [p, ...(list ?? [])];
     setList(next); persistProjects(next); setName(""); go(p.id);
   };
-  const remove = (p: Project) => {
-    if (!confirm(t.confirm)) return;
-    const next = (list ?? []).filter((x) => x.id !== p.id);
-    setList(next); persistProjects(next);
+  const remove = (p: Project) => setAsk(p);
+  const doRemove = (p: Project) => {
+    const next = loadProjects().filter((x) => x.id !== p.id);
+    dropProjectData(p.id);
+    setList(next); persistProjects(next); setAsk(null);
+    if (openId === p.id) go(null);
   };
+  const dialog = ask ? <ConfirmDialog title={t.dTitle} body={t.dBody.replace("{n}", ask.name)} ok={t.delP} cancel={t.cancel} onOk={() => doRemove(ask)} onCancel={() => setAsk(null)} /> : null;
   const current = list?.find((p) => p.id === openId) ?? null;
   const sorted = [...(list ?? [])].sort((a, b) => b.updatedAt - a.updatedAt);
 
-  if (current) return <StudioIDE key={current.id} p={current} update={(patch, act) => update(current.id, patch, act)} onHome={() => go(null)} />;
+  if (current) return <>{dialog}<StudioIDE key={current.id} p={current} update={(patch, act) => update(current.id, patch, act)} onHome={() => go(null)} onDelete={() => remove(current)} /></>;
 
   return (
     <main className="studio-page mx-auto w-full max-w-6xl px-3 pt-24 pb-16 md:px-6 md:pt-28" dir={lang === "ar" ? "rtl" : "ltr"} data-testid="studio">
+      {dialog}
       <section className="relative overflow-hidden rounded-3xl border border-white/10 bg-[radial-gradient(ellipse_at_top_left,#1d2f6b_0%,#0b1020_55%)] p-6 md:p-10">
         <div className="pointer-events-none absolute -end-24 -top-24 size-80 rounded-full bg-[#7a5cff]/25 blur-3xl" />
         <span className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-[#c8d1ea]"><Sparkles className="size-3.5 text-[#7aa2ff]" /> HTML · CSS · JavaScript</span>
@@ -91,11 +98,12 @@ export function StudioPage() {
                 <div className="flex items-center gap-2 font-semibold"><FolderOpen className="size-4 text-[#7aa2ff]" /><span className="truncate">{p.name}</span></div>
                 <div className="mt-1 text-xs text-[#7d89a8]">{p.files.length} {t.files} · {ago(p.updatedAt, c)}</div>
               </button>
-              <button className="absolute end-3 top-3 rounded-lg p-1.5 text-[#7d89a8] opacity-100 hover:bg-white/10 hover:text-red-300 md:opacity-0 md:group-hover:opacity-100" onClick={() => remove(p)} aria-label={t.del}><Trash2 className="size-4" /></button>
+              <button className="absolute end-3 top-3 rounded-lg p-1.5 text-[#7d89a8] opacity-100 hover:bg-white/10 hover:text-red-300 md:opacity-0 md:group-hover:opacity-100" onClick={() => remove(p)} aria-label={t.del} title={t.del} data-testid="studio-del"><Trash2 className="size-4" /></button>
             </li>
           ))}
         </ul>
       ) : <p className="rounded-2xl border border-dashed border-white/15 p-6 text-center text-sm text-[#7d89a8]">{t.empty}</p>}
+      <footer className="mt-12 border-t border-white/10 pt-4"><ToolsLegalLinks version /></footer>
     </main>
   );
 }

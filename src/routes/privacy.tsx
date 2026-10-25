@@ -157,6 +157,7 @@ function PrivacyPage() {
           </li>
         ))}
       </ul>
+          <p><a href={localeHref(lang, "/tools-legal")}>{({az:"Studio, Workspace, Learn və Site Doctor üçün məxfilik və şərtlər",en:"Privacy and terms for Studio, Workspace, Learn and Site Doctor",tr:"Studio, Workspace, Learn ve Site Doctor için gizlilik ve koşullar",ar:"الخصوصية والشروط لـ Studio وWorkspace وLearn وSite Doctor",ru:"Конфиденциальность и условия для Studio, Workspace, Learn и Site Doctor"} as Record<string,string>)[lang] ?? "Privacy and terms for Studio, Workspace, Learn and Site Doctor"}</a></p>
     </main>
   );
 }

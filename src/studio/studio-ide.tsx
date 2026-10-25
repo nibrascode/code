@@ -1,4 +1,6 @@
 /** Nibras Studio full-screen IDE. Same project data as Workspace; everything runs in the browser. */
+import { STUDIO_VERSION } from "./version";
+import { LEGAL_LABEL } from "@/legal/tools-legal";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   Bell, BookOpen, ChevronDown, ChevronRight, Code2, Compass, Download, ExternalLink, Eye, FilePlus, FileText, Files, Folder, FolderOpen, GitBranch, Home,
@@ -32,7 +34,7 @@ type Snap = { id: string; at: number; msg: string; files: CodeFile[] };
 const snapKey = (id: string) => `nibras-studio-snap-${id}`;
 const loadSnaps = (id: string): Snap[] => { try { return JSON.parse(localStorage.getItem(snapKey(id)) || "[]"); } catch { return []; } };
 
-export function StudioIDE({ p, update, onHome }: { p: Project; update: (patch: Partial<Project>, act?: string) => void; onHome: () => void }) {
+export function StudioIDE({ p, update, onHome, onDelete }: { p: Project; update: (patch: Partial<Project>, act?: string) => void; onHome: () => void; onDelete: () => void }) {
   const { lang } = useI18n();
   const t: StudioCopy = SC[lang] ?? SC.en;
   const c = WS[lang] ?? WS.en;
@@ -317,6 +319,7 @@ export function StudioIDE({ p, update, onHome }: { p: Project; update: (patch: P
             <label className="flex items-center gap-2"><input type="checkbox" checked={prefs.wrap} onChange={(e) => setPrefs({ ...prefs, wrap: e.target.checked })} className="accent-[#4f6bff]" /> {t.wrap}</label>
             <label className="flex items-center gap-2"><input type="checkbox" checked={prefs.live} onChange={(e) => setPrefs({ ...prefs, live: e.target.checked })} className="accent-[#4f6bff]" /> {t.live}</label>
             <p className="text-[11px] leading-relaxed text-[#7d89a8]">{t.offlineNote}</p>
+            <div className="rounded-lg border border-white/10 p-2 text-[12px]" data-testid="st-version"><b>Nibras Studio v{STUDIO_VERSION}</b><div className="mt-1 flex gap-3 text-[11px]"><a className="text-[#8aa2ff] hover:underline" href={localeHref(lang, "/tools-legal") + "#privacy"}>{LEGAL_LABEL[lang].privacy}</a><a className="text-[#8aa2ff] hover:underline" href={localeHref(lang, "/tools-legal") + "#terms"}>{LEGAL_LABEL[lang].terms}</a></div></div>
           </div>
         )}
       </div>
@@ -485,6 +488,9 @@ export function StudioIDE({ p, update, onHome }: { p: Project; update: (patch: P
               <button role="menuitem" className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-start hover:bg-white/5" onClick={() => void toApk()} data-testid="st-apk"><Rocket className="size-4 text-emerald-300" /> {t.apk}</button>
               <button role="menuitem" className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-start hover:bg-white/5" onClick={() => void zip()} data-testid="st-zip"><Download className="size-4 text-amber-200" /> {t.zip}</button>
               <a role="menuitem" className="flex w-full items-center gap-2 rounded-lg px-3 py-2 hover:bg-white/5" href={localeHref(lang, "/workspace") + "?p=" + p.id}><LayoutGrid className="size-4 text-[#8aa2ff]" /> {t.wsOpen}</a>
+              <div className="my-1 h-px bg-white/10" />
+              <button role="menuitem" className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-start text-red-300 hover:bg-red-500/10" onClick={() => { setMenu(null); onDelete(); }} data-testid="st-delproj"><Trash2 className="size-4" /> {t.delProject}</button>
+              <div className="flex gap-3 px-3 py-1.5 text-[11px] text-[#7d89a8]"><span>v{STUDIO_VERSION}</span><a className="hover:text-white" href={localeHref(lang, "/tools-legal") + "#privacy"}>{LEGAL_LABEL[lang].privacy}</a><a className="hover:text-white" href={localeHref(lang, "/tools-legal") + "#terms"}>{LEGAL_LABEL[lang].terms}</a></div>
               <div className="my-1 border-t border-white/10 lg:hidden" />
               {navItems.map((n) => <a key={n.label} className="flex items-center gap-2 rounded-lg px-3 py-2 hover:bg-white/5 lg:hidden" href={n.href}><n.icon className="size-4 text-[#9aa7c7]" /> {n.label}</a>)}
             </div>
@@ -523,6 +529,7 @@ export function StudioIDE({ p, update, onHome }: { p: Project; update: (patch: P
         <span>Ln {cursor.l}, Col {cursor.c}</span>
         <span className="hidden sm:inline">{t.spaces}</span>
         <span className="hidden sm:inline">UTF-8</span>
+        <span className="hidden md:inline" data-testid="st-ver">Nibras Studio v{STUDIO_VERSION}</span>
         <span className="inline-flex items-center gap-1.5"><span className="size-2 rounded-full bg-emerald-400" /> {t.ready}</span>
       </footer>
     </div>

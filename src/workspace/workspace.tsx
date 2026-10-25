@@ -1,3 +1,4 @@
+import { ToolsLegalLinks } from "@/legal/tools-legal";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { ArrowLeft, Code2, Download, FileText, FileUp, FolderPlus, ListChecks, Pencil, Trash2 } from "lucide-react";
 import { useI18n } from "@/lib/i18n-context";
@@ -47,6 +48,9 @@ export function blank(name: string): Project {
   const now = Date.now();
   return { id: uid(), name, createdAt: now, updatedAt: now, last: "act_created", tab: "pdf", pdfName: "", pdfPages: 0, text: "", qCount: 5, questions: [], docTitle: name, docBody: "", files: DEFAULT_FILES.map((f) => ({ ...f })), activeFile: "index.html" };
 }
+/** Removes data kept beside a project (Studio snapshots). */
+export function dropProjectData(id: string) { try { localStorage.removeItem(`nibras-studio-snap-${id}`); } catch { /* ignore */ } }
+
 export function loadProjects(): Project[] {
   try {
     const raw = JSON.parse(localStorage.getItem(KEY) || "[]");
@@ -117,6 +121,7 @@ export function WorkspacePage() {
       ) : (
         <Home c={c} list={list} commit={commit} open={go} />
       )}
+      <footer className="mt-10 border-t border-white/10 pt-4"><ToolsLegalLinks /></footer>
     </main>
   );
 }
@@ -204,7 +209,7 @@ function Home({ c, list, commit, open }: { c: WsCopy; list: Project[] | null; co
                   title={c.del}
                   data-testid="ws-del"
                   onClick={() => {
-                    if (confirm(c.confirmDel)) commit((list ?? []).filter((x) => x.id !== p.id));
+                    if (confirm(c.confirmDel)) { dropProjectData(p.id); commit((list ?? []).filter((x) => x.id !== p.id)); }
                   }}
                 >
                   <Trash2 className="size-4" />

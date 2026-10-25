@@ -779,6 +779,13 @@ const PAGES: Record<string, Copy> = {
     ar: { title: "احسب النسبة — مجاناً", description: "احسب ناتج النسبة وكم بالمئة عدد من آخر. بلا حساب." },
     ru: { title: "Посчитать процент — бесплатно", description: "Найдите процент от числа и сколько процентов одно число от другого. Без аккаунта." },
   },
+  "/tools-legal": {
+    az: { title: "Məxfilik və istifadə şərtləri — Nibras Studio, Workspace, Learn, Site Doctor", description: "Hesab yoxdur, layihələr yalnız brauzerdə saxlanır, heç nə yüklənmir, xarici AI yoxdur. Site Doctor ünvanı yoxlayır və heç nə saxlamır." },
+    en: { title: "Privacy and terms — Nibras Studio, Workspace, Learn, Site Doctor", description: "No accounts, projects stay in your browser, nothing is uploaded, no external AI. Site Doctor checks the URL you give and stores nothing." },
+    tr: { title: "Gizlilik ve koşullar — Nibras Studio, Workspace, Learn, Site Doctor", description: "Hesap yok, projeler tarayıcıda kalır, hiçbir şey yüklenmez, harici AI yok. Site Doctor adresi kontrol eder ve saklamaz." },
+    ar: { title: "الخصوصية والشروط — Nibras Studio وWorkspace وLearn وSite Doctor", description: "بلا حسابات، تبقى المشاريع في متصفحك، لا يُرفع شيء، ولا ذكاء اصطناعي خارجي. يفحص Site Doctor العنوان ولا يحفظ شيئاً." },
+    ru: { title: "Конфиденциальность и условия — Nibras Studio, Workspace, Learn, Site Doctor", description: "Без аккаунтов, проекты остаются в браузере, ничего не загружается, без внешнего ИИ. Site Doctor проверяет адрес и ничего не хранит." },
+  },
   "/studio": {
     az: { title: "Nibras Studio — brauzerdə kod redaktoru və canlı telefon önizləməsi", description: "HTML, CSS və JavaScript yaz: fayllar və qovluqlar, rəngli kod, telefon çərçivəsində canlı önizləmə. ZIP endir, Nibras Dev-də aç və ya Android APK düzəlt. Pulsuz, fayllar brauzerdə qalır." },
     en: { title: "Nibras Studio — code editor in your browser with live phone preview", description: "Write HTML, CSS and JavaScript: files and folders, syntax highlighting, live preview in a phone frame. Download a ZIP, open in Nibras Dev or build an Android APK. Free, files stay in your browser." },
