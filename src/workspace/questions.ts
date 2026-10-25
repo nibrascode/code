@@ -1,5 +1,5 @@
 /** Client-side question builder: no AI, no network. Cloze multiple-choice from the text's own sentences. */
-export type Question = { q: string; options: string[]; answer: number };
+export type Question = { q: string; options: string[]; answer: number; source?: string; word?: string };
 
 const STOP = new Set(
   "və ya ilə üçün bu bir da də ki isə olan olur olub kimi daha çox amma lakin həm hər onun onlar biz siz mən sən the and for with that this from are was were have has been into also but not you your they their which what when where then than there these those such only other more most some any each ve ile için bir daha olan gibi ama ancak her bu şu и в на с по для что это как или но не из от до при также".split(" "),
@@ -27,7 +27,7 @@ function rand(seed: number) {
   return () => ((s = (s * 16807) % 2147483647) - 1) / 2147483646;
 }
 
-export function makeQuestions(text: string, max = 10, seed = 7): Question[] {
+export function makeQuestions(text: string, max = 10, seed = 7, skip: Set<string> = new Set()): Question[] {
   const sentences = splitSentences(text).filter((s) => {
     const n = (s.match(WORD) ?? []).length;
     return n >= 6 && n <= 45;
@@ -36,7 +36,7 @@ export function makeQuestions(text: string, max = 10, seed = 7): Question[] {
   if (pool.length < 4) return [];
   const r = rand(seed);
   const out: Question[] = [];
-  const used = new Set<string>();
+  const used = new Set<string>(skip);
   // Prefer sentences rich in key words (usually definitions and facts).
   const ranked = sentences
     .map((s, i) => ({ s, i, score: keyWords(s).length + (/\d/.test(s) ? 2 : 0) + (/\s(—|-|:|dir|dır|dur|dür|is|are|olan)\s/i.test(s) ? 2 : 0) }))
@@ -59,7 +59,7 @@ export function makeQuestions(text: string, max = 10, seed = 7): Question[] {
     const options = [...wrong];
     options.splice(answer, 0, target);
     const esc = target.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    out.push({ q: s.replace(new RegExp(esc), "_____"), options, answer });
+    out.push({ q: s.replace(new RegExp(esc), "_____"), options, answer, source: s, word: target });
   }
   return out;
 }

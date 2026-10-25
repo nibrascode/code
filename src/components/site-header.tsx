@@ -35,6 +35,12 @@ export function SiteHeader() {
             <a href={localeHref(lang, "/workspace")} className="back-link">
               Workspace
             </a>
+            <a href={localeHref(lang, "/learn")} className="back-link">
+              Learn
+            </a>
+            <a href={localeHref(lang, "/doctor")} className="back-link">
+              Site Doctor
+            </a>
             <a href="/qr" className="back-link qr-nav-link">
               {t("nav_qr")}
             </a>

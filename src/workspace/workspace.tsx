@@ -4,7 +4,9 @@ import { useI18n } from "@/lib/i18n-context";
 import { save, ui } from "@/kit/shell";
 import { WS, type WsCopy } from "./i18n";
 import { makeQuestions, questionsToText, type Question } from "./questions";
-import { buildPreview, filesToZip, textToDocx } from "./files";
+import { buildPreview, devLink, filesToZip, textToDocx } from "./files";
+import { localeHref } from "@/lib/locale-path";
+import { BookOpen, ExternalLink, Smartphone } from "lucide-react";
 
 type CodeFile = { name: string; content: string };
 type Act = "act_created" | "act_pdf" | "act_q" | "act_doc" | "act_run" | "act_zip" | "act_edit";
@@ -18,6 +20,7 @@ export type Project = {
   tab: Tab;
   pdfName: string;
   pdfPages: number;
+  pageTexts?: string[];
   text: string;
   qCount: number;
   questions: Question[];
@@ -266,6 +269,7 @@ function appendDoc(p: Project, text: string) {
 }
 
 function PdfTool({ p, c, set }: ToolProps) {
+  const { lang } = useI18n();
   const [busy, setBusy] = useState("");
   const [err, setErr] = useState("");
   const read = async (f?: File) => {
@@ -277,7 +281,7 @@ function PdfTool({ p, c, set }: ToolProps) {
       const pages = await pdfToText(new Uint8Array(await f.arrayBuffer()), (n, total) => setBusy(`${c.reading} ${n}/${total}`));
       const text = pages.join("\n\n").trim();
       if (!text) setErr(c.noText);
-      set({ pdfName: f.name, pdfPages: pages.length, text }, "act_pdf");
+      set({ pdfName: f.name, pdfPages: pages.length, pageTexts: pages, text }, "act_pdf");
     } catch {
       setErr(c.pdfBad);
     } finally {
@@ -304,6 +308,18 @@ function PdfTool({ p, c, set }: ToolProps) {
         </button>
         <button className={ui.btn + " min-h-11 justify-center"} disabled={!p.text.trim()} onClick={() => set({ docBody: appendDoc(p, p.text), tab: "doc" })} data-testid="ws-text-to-doc">
           <FileText className="size-4" /> {c.toDoc}
+        </button>
+        <button
+          className={ui.btn + " min-h-11 justify-center"}
+          disabled={!p.text.trim()}
+          data-testid="ws-to-learn"
+          onClick={() => {
+            const same = p.pageTexts && p.pageTexts.join("\n\n").trim() === p.text.trim();
+            localStorage.setItem("nibras-learn-handoff", JSON.stringify({ name: p.name, file: p.pdfName, pages: same ? p.pageTexts : [p.text] }));
+            location.href = localeHref(lang, "/learn");
+          }}
+        >
+          <BookOpen className="size-4" /> {c.learn}
         </button>
         <span className="self-center text-xs text-muted">{(p.text.match(/\S+/g) ?? []).length} {c.words}</span>
       </div>
@@ -441,6 +457,22 @@ function CodeTool({ p, c, set }: ToolProps) {
     const rest = p.files.filter((f) => f.name !== file.name);
     set({ files: rest, activeFile: rest[0].name });
   };
+  const [note, setNote] = useState("");
+  const openDev = async () => {
+    const url = await devLink(p.files);
+    if (!url) return setNote(c.tooBig);
+    setNote(c.devNote);
+    window.open(url, "_blank", "noopener");
+    set({}, "act_run");
+  };
+  const toApk = async () => {
+    if (!p.files.some((f) => f.name.toLowerCase() === "index.html")) return setNote(c.needIndex);
+    const w = window.open("https://studio.nibrascode.com/", "_blank", "noopener");
+    save(`${safeName(p.name)}-site.zip`, await filesToZip(p.files));
+    setNote(c.apkNote);
+    set({}, "act_zip");
+    void w;
+  };
   const zip = async () => {
     save(`${safeName(p.name)}.zip`, await filesToZip(p.files));
     set({}, "act_zip");
@@ -498,7 +530,10 @@ function CodeTool({ p, c, set }: ToolProps) {
       <div className="mt-3 grid grid-cols-2 gap-2 sm:flex">
         <button className={ui.primary + " min-h-11 justify-center"} onClick={run} data-testid="ws-run"><Play className="size-4" /> {c.run}</button>
         <button className={ui.btn + " min-h-11 justify-center"} onClick={() => void zip()} data-testid="ws-zip"><Download className="size-4" /> {c.zip}</button>
+        <button className={ui.btn + " min-h-11 justify-center"} onClick={() => void openDev()} data-testid="ws-dev"><ExternalLink className="size-4" /> {c.dev}</button>
+        <button className={ui.btn + " min-h-11 justify-center"} onClick={() => void toApk()} data-testid="ws-apk"><Smartphone className="size-4" /> {c.apk}</button>
       </div>
+      {note ? <p className="mt-3 rounded-xl border border-[#2f6bff]/40 bg-[#2f6bff]/10 p-3 text-sm" data-testid="ws-note">{note}</p> : null}
     </section>
   );
 }

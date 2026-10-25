@@ -92,6 +92,8 @@ export function StartDesk({ lang }: { lang: Lang }) {
       title: COPY.code[lang],
       lead: COPY.codeLead[lang],
       links: [
+        [localeHref(lang, "/workspace"), "Workspace"],
+        [localeHref(lang, "/doctor"), "Site Doctor"],
         [toolPath(lang, "json"), "JSON"],
         [toolPath(lang, "css"), name("css", lang)],
         [localeHref(lang, "/programming"), lang === "az" ? "Dərslər" : lang === "tr" ? "Dersler" : lang === "ar" ? "دروس" : lang === "ru" ? "Уроки" : "Lessons"],
@@ -101,6 +103,7 @@ export function StartDesk({ lang }: { lang: Lang }) {
       title: COPY.learn[lang],
       lead: COPY.learnLead[lang],
       links: [
+        [localeHref(lang, "/learn"), "Nibras Learn"],
         [localeHref(lang, "/programming"), lang === "az" ? "Programming" : "Programming"],
         [faqPath(lang), "FAQ"],
       ],

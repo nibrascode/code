@@ -364,6 +364,18 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
               </svg>
               <span>Workspace</span>
             </a>
+            <a className="nx-apk-bar" href={localeHref(lang, "/learn")} data-testid="home-learn">
+              <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v15H5.5A1.5 1.5 0 0 0 4 20.5zM20 5.5A1.5 1.5 0 0 0 18.5 4H13v15h5.5a1.5 1.5 0 0 1 1.5 1.5z" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+              </svg>
+              <span>Learn</span>
+            </a>
+            <a className="nx-apk-bar" href={localeHref(lang, "/doctor")} data-testid="home-doctor">
+              <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3 12h4l2-5 4 10 2-5h6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              <span>Site Doctor</span>
+            </a>
             <a className="nx-ai-bar nx-qr-bar" href={localeHref(lang, "/pdf")}>
               <svg className="nx-job nx-job-pdf" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M7 3.2h6.6L19 8.4V20a1.4 1.4 0 0 1-1.4 1.4H7.4A1.4 1.4 0 0 1 6 20V4.6A1.4 1.4 0 0 1 7.4 3.2H7Z" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />

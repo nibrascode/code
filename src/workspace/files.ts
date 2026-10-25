@@ -22,7 +22,7 @@ export async function filesToZip(files: { name: string; content: string }[]): Pr
 }
 
 /** One HTML document for the sandboxed preview: CSS and JS files inlined, console forwarded. */
-export function buildPreview(files: { name: string; content: string }[]): string {
+export function buildPreview(files: { name: string; content: string }[], withBridge = true): string {
   const html = files.find((f) => f.name.toLowerCase() === "index.html") ?? files.find((f) => /\.html?$/i.test(f.name));
   const css = files.filter((f) => /\.css$/i.test(f.name)).map((f) => f.content).join("\n");
   const js = files.filter((f) => /\.(m?js)$/i.test(f.name)).map((f) => f.content).join("\n;\n");
@@ -30,9 +30,26 @@ export function buildPreview(files: { name: string; content: string }[]): string
   let doc = html?.content ?? "<!doctype html><html><head></head><body></body></html>";
   // Linked local files are inlined, so drop their tags.
   doc = doc.replace(/<link[^>]+href=["'](?!https?:)[^"']+\.css["'][^>]*>/gi, "").replace(/<script[^>]+src=["'](?!https?:)[^"']+\.m?js["'][^>]*>\s*<\/script>/gi, "");
-  const head = `${bridge}<style>${css}</style>`;
+  const head = `${withBridge ? bridge : ""}<style>${css}</style>`;
   doc = /<head[^>]*>/i.test(doc) ? doc.replace(/<head[^>]*>/i, (m) => m + head) : head + doc;
   const tail = `<script>${js.replace(/<\/script/gi, "<\\/script")}<\/script>`;
   doc = /<\/body>/i.test(doc) ? doc.replace(/<\/body>(?![\s\S]*<\/body>)/i, tail + "</body>") : doc + tail;
   return doc;
+}
+
+/** Link that opens the merged page in Nibras Dev's runner (dev.nibrascode.com/run, deflate-raw + base64url in the hash). */
+export async function devLink(files: { name: string; content: string }[]): Promise<string | null> {
+  const html = buildPreview(files, false);
+  const bytes = new TextEncoder().encode(html);
+  let data = bytes;
+  let z = false;
+  if (typeof CompressionStream !== "undefined") {
+    data = new Uint8Array(await new Response(new Blob([bytes]).stream().pipeThrough(new CompressionStream("deflate-raw"))).arrayBuffer());
+    z = true;
+  }
+  let bin = "";
+  for (let i = 0; i < data.length; i += 0x8000) bin += String.fromCharCode(...data.subarray(i, i + 0x8000));
+  const b64 = btoa(bin).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  if (b64.length > 1_500_000) return null;
+  return `https://dev.nibrascode.com/run#l=html&c=${b64}${z ? "&z=1" : ""}`;
 }

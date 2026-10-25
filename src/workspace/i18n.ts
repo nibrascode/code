@@ -70,6 +70,7 @@ const az = {
   dayAgo: "gün əvvəl",
   flow1: "PDF → mətn → suallar → sənəd",
   flow2: "Kod yaz → işə sal → ZIP",
+  dev: "Nibras Dev-də aç", apk: "APK Studio-ya göndər", apkNote: "Layihənin ZIP-i endirildi və APK Studio yeni tabda açıldı. Orada «Hazır statik ZIP» seçin, bu faylı yükləyin və «APK düzəlt» basın.", needIndex: "APK üçün layihədə index.html olmalıdır.", learn: "Öyrənmə kursu yarat", devNote: "Nibras Dev yeni tabda açılır: bütün fayllar bir HTML-də birləşdirilir.", tooBig: "Layihə linkə sığmır (çox böyükdür). ZIP endirin.",
 };
 export type WsCopy = typeof az;
 
@@ -95,6 +96,7 @@ const en: WsCopy = {
   act_created: "Project created", act_pdf: "PDF read", act_q: "Questions made", act_doc: "Document downloaded", act_run: "Code run", act_zip: "ZIP downloaded", act_edit: "Edited",
   justNow: "just now", minAgo: "min ago", hrAgo: "h ago", dayAgo: "d ago",
   flow1: "PDF → text → questions → document", flow2: "Write code → run → ZIP",
+  dev: "Open in Nibras Dev", apk: "Send to APK Studio", apkNote: "The project ZIP was downloaded and APK Studio opened in a new tab. Choose «Hazır statik ZIP» (ready static ZIP) there, upload this file and press «APK düzəlt» (Make APK).", needIndex: "The project needs an index.html for an APK.", learn: "Create a learning course", devNote: "Nibras Dev opens in a new tab: all files are merged into one HTML.", tooBig: "The project is too big for a link. Download the ZIP.",
 };
 
 const tr: WsCopy = {
@@ -117,6 +119,7 @@ const tr: WsCopy = {
   act_created: "Proje oluşturuldu", act_pdf: "PDF okundu", act_q: "Sorular hazırlandı", act_doc: "Belge indirildi", act_run: "Kod çalıştırıldı", act_zip: "ZIP indirildi", act_edit: "Değişiklik",
   justNow: "şimdi", minAgo: "dk önce", hrAgo: "sa önce", dayAgo: "gün önce",
   flow1: "PDF → metin → sorular → belge", flow2: "Kod yaz → çalıştır → ZIP",
+  dev: "Nibras Dev'de aç", apk: "APK Studio'ya gönder", apkNote: "Proje ZIP'i indirildi ve APK Studio yeni sekmede açıldı. Orada ZIP yükleyin ve «APK yap»a basın.", needIndex: "APK için projede index.html olmalı.", learn: "Öğrenme kursu oluştur", devNote: "Nibras Dev yeni sekmede açılır: tüm dosyalar tek HTML'de birleşir.", tooBig: "Proje bağlantıya sığmıyor. ZIP indirin.",
 };
 
 const ar: WsCopy = {
@@ -139,6 +142,7 @@ const ar: WsCopy = {
   act_created: "أُنشئ المشروع", act_pdf: "قُرئ PDF", act_q: "أُنشئت الأسئلة", act_doc: "نُزّل المستند", act_run: "شُغّل الكود", act_zip: "نُزّل ZIP", act_edit: "تعديل",
   justNow: "الآن", minAgo: "د مضت", hrAgo: "س مضت", dayAgo: "يوم مضى",
   flow1: "PDF ← نص ← أسئلة ← مستند", flow2: "اكتب كوداً ← شغّل ← ZIP",
+  dev: "افتح في Nibras Dev", apk: "أرسل إلى APK Studio", apkNote: "نُزّل ملف ZIP للمشروع وفُتح APK Studio في تبويب جديد. ارفع الملف هناك واضغط «اصنع APK».", needIndex: "يحتاج المشروع إلى index.html لصنع APK.", learn: "أنشئ دورة تعلّم", devNote: "يُفتح Nibras Dev في تبويب جديد وتُدمج الملفات في HTML واحد.", tooBig: "المشروع أكبر من الرابط. نزّل ZIP.",
 };
 
 const ru: WsCopy = {
@@ -161,6 +165,7 @@ const ru: WsCopy = {
   act_created: "Проект создан", act_pdf: "PDF прочитан", act_q: "Вопросы составлены", act_doc: "Документ скачан", act_run: "Код запущен", act_zip: "ZIP скачан", act_edit: "Изменение",
   justNow: "сейчас", minAgo: "мин назад", hrAgo: "ч назад", dayAgo: "дн назад",
   flow1: "PDF → текст → вопросы → документ", flow2: "Код → запуск → ZIP",
+  dev: "Открыть в Nibras Dev", apk: "Отправить в APK Studio", apkNote: "ZIP проекта скачан, APK Studio открыт в новой вкладке. Загрузите там этот ZIP и нажмите «Собрать APK».", needIndex: "Для APK нужен index.html в проекте.", learn: "Создать учебный курс", devNote: "Nibras Dev откроется в новой вкладке: все файлы собираются в один HTML.", tooBig: "Проект слишком большой для ссылки. Скачайте ZIP.",
 };
 
 export const WS: Record<Lang, WsCopy> = { az, en, tr, ar, ru };

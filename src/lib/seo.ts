@@ -779,6 +779,20 @@ const PAGES: Record<string, Copy> = {
     ar: { title: "احسب النسبة — مجاناً", description: "احسب ناتج النسبة وكم بالمئة عدد من آخر. بلا حساب." },
     ru: { title: "Посчитать процент — бесплатно", description: "Найдите процент от числа и сколько процентов одно число от другого. Без аккаунта." },
   },
+  "/learn": {
+    az: { title: "Nibras Learn — PDF-dən test, yaddaş kartları və təkrar", description: "PDF seçin: mövzular üzrə suallar, testlər, yaddaş kartları, səhvlərin təkrarı və irəliləyiş statistikası. Hər sualın mənbə cümləsi və səhifəsi göstərilir." },
+    en: { title: "Nibras Learn — tests, flashcards and review from a PDF", description: "Pick a PDF: questions per topic, tests, flashcards, spaced review of mistakes and progress stats. Each question shows its source sentence and page." },
+    tr: { title: "Nibras Learn — PDF'ten test, kart ve tekrar", description: "PDF seçin: konu bazında sorular, testler, kartlar, yanlışların tekrarı ve ilerleme istatistiği." },
+    ar: { title: "Nibras Learn — اختبارات وبطاقات ومراجعة من PDF", description: "اختر ملف PDF: أسئلة لكل موضوع واختبارات وبطاقات ومراجعة الأخطاء وإحصاءات التقدم." },
+    ru: { title: "Nibras Learn — тесты, карточки и повторение по PDF", description: "Выберите PDF: вопросы по темам, тесты, карточки, повтор ошибок и статистика прогресса." },
+  },
+  "/doctor": {
+    az: { title: "Nibras Site Doctor — saytın texniki yoxlanışı", description: "Sayt ünvanını yazın: başlıq, meta təsvir, qırıq keçidlər, mobil uyğunluq və sürət. Hər problem üçün konkret düzəliş addımları." },
+    en: { title: "Nibras Site Doctor — technical website check", description: "Enter a URL: titles, meta descriptions, broken links, mobile-friendliness and speed, with concrete fix steps for each issue." },
+    tr: { title: "Nibras Site Doctor — teknik site kontrolü", description: "Adres girin: başlık, açıklama, kırık bağlantılar, mobil uyum ve hız; her sorun için düzeltme adımları." },
+    ar: { title: "Nibras Site Doctor — فحص تقني للموقع", description: "أدخل العنوان: العناوين والأوصاف والروابط المعطلة وملاءمة الجوال والسرعة مع خطوات إصلاح." },
+    ru: { title: "Nibras Site Doctor — технический аудит сайта", description: "Введите адрес: заголовки, описания, битые ссылки, мобильность и скорость — с шагами исправления." },
+  },
   "/workspace": {
     az: { title: "Nibras Workspace — PDF, suallar, sənəd və kod bir yerdə", description: "PDF aç, mətni çıxar, mətndən sual hazırla, Word/PDF kimi saxla. Kod yaz, işə sal, ZIP endir. Pulsuz, fayllar brauzerdə qalır." },
     en: { title: "Nibras Workspace — PDF, questions, documents and code in one place", description: "Open a PDF, extract text, make questions, save as Word/PDF. Write code, run it, download a ZIP. Free, files stay in your browser." },
