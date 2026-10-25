@@ -74,6 +74,7 @@ import {
   type ToolId,
 } from "@/lib/tools";
 import { TOOL_LEAD, TOOL_SAMPLE } from "@/lib/tools-seo";
+import { StartDesk } from "@/components/start-desk";
 import {
   decodeBase64,
   decodeHtml,
@@ -688,8 +689,9 @@ export function ToolsPage({ lang, focus, guide }: { lang: Lang; focus?: ToolId; 
           </button>
         </p>
       ) : null}
+      {focus ? null : <StartDesk lang={lang} />}
       {focus ? null : (
-        <div className="prog-sections">
+        <div className="prog-sections" id="xidmet-siyahisi">
           {TOOL_GROUPS.map((group, index) => {
             const tools = group.ids.map((id) => TOOLS.find((tool) => tool.id === id)!);
             const GroupIcon = GROUP_ICONS[group.id];
