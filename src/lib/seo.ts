@@ -786,6 +786,27 @@ const PAGES: Record<string, Copy> = {
     ar: { title: "الخصوصية والشروط — Nibras Studio وWorkspace وLearn وSite Doctor", description: "بلا حسابات، تبقى المشاريع في متصفحك، لا يُرفع شيء، ولا ذكاء اصطناعي خارجي. يفحص Site Doctor العنوان ولا يحفظ شيئاً." },
     ru: { title: "Конфиденциальность и условия — Nibras Studio, Workspace, Learn, Site Doctor", description: "Без аккаунтов, проекты остаются в браузере, ничего не загружается, без внешнего ИИ. Site Doctor проверяет адрес и ничего не хранит." },
   },
+  "/learn/logic": {
+    az: {title: "Nibras Logic Lab — brauzerdə məntiq qapıları simulyatoru", description: "AND, OR, NOT, NAND, XOR, NOR, XNOR qapılarından sxem qur, canlı siqnal, həqiqət cədvəli, Boolean ifadə və tapşırıqlar. Pulsuz, qeydiyyatsız, brauzerdə."},
+    en: {title: "Nibras Logic Lab — logic gate simulator in your browser", description: "Build circuits from AND, OR, NOT, NAND, XOR, NOR and XNOR gates with live signals, truth table, Boolean expression and challenges. Free, no sign-up."},
+    tr: {title: "Nibras Logic Lab — tarayıcıda mantık kapısı simülatörü", description: "AND, OR, NOT, NAND, XOR, NOR, XNOR kapılarıyla devre kurun; canlı sinyal, doğruluk tablosu, Boole ifadesi ve görevler. Ücretsiz."},
+    ar: {title: "Nibras Logic Lab — محاكي البوابات المنطقية في المتصفح", description: "ابنِ دوائر من بوابات AND وOR وNOT وNAND وXOR وNOR وXNOR مع إشارات حيّة وجدول حقيقة وتعبير منطقي وتحديات. مجاني."},
+    ru: {title: "Nibras Logic Lab — симулятор логических вентилей в браузере", description: "Собирайте схемы из AND, OR, NOT, NAND, XOR, NOR и XNOR: живые сигналы, таблица истинности, булево выражение и задания. Бесплатно."},
+  },
+  "/mirror": {
+    az: {title: "Nibras Site Mirror — sitemap-dən saytın vizual xəritəsi", description: "Sitemap XML yapışdır və saytının ağac xəritəsini gör: dərin səhifələr, təkrar URL-lər, boşluqlar, uzun linklər. Serverə heç nə yüklənmir."},
+    en: {title: "Nibras Site Mirror — visual site map from your sitemap", description: "Paste a sitemap XML and see your site as a tree: deep pages, duplicate URLs, gaps and long links. Runs in your browser, nothing is uploaded."},
+    tr: {title: "Nibras Site Mirror — sitemap'ten görsel site haritası", description: "Sitemap XML yapıştırın, sitenizi ağaç olarak görün: derin sayfalar, yinelenen URL'ler, boşluklar. Tarayıcıda çalışır, hiçbir şey yüklenmez."},
+    ar: {title: "Nibras Site Mirror — خريطة مرئية لموقعك من sitemap", description: "الصق XML لخريطة الموقع وشاهد موقعك كشجرة: صفحات عميقة وروابط مكررة وفجوات. يعمل في متصفحك ولا يُرفع شيء."},
+    ru: {title: "Nibras Site Mirror — визуальная карта сайта из sitemap", description: "Вставьте sitemap XML и увидьте сайт деревом: глубокие страницы, дубли URL, пробелы. Работает в браузере, ничего не загружается."},
+  },
+  "/shortcuts": {
+    az: {title: "Nibras Shortcuts — VS Code, Android Studio, Chrome, Windows, macOS qısayolları", description: "Klaviatura qısayollarını istilik xəritəsi, real klaviatura ilə məşq, sürət/dəqiqlik statistikası və aralıqlı təkrarla öyrən. Pulsuz, brauzerdə."},
+    en: {title: "Nibras Shortcuts — learn VS Code, Android Studio, Chrome, Windows and macOS shortcuts", description: "Learn keyboard shortcuts with a key heatmap, real-keyboard practice, speed and accuracy stats, spaced repetition and your own collections. Free."},
+    tr: {title: "Nibras Shortcuts — VS Code, Android Studio, Chrome, Windows, macOS kısayolları", description: "Klavye kısayollarını ısı haritası, gerçek klavyeyle alıştırma, hız/doğruluk istatistiği ve aralıklı tekrarla öğrenin. Ücretsiz."},
+    ar: {title: "Nibras Shortcuts — اختصارات VS Code وAndroid Studio وChrome وWindows وmacOS", description: "تعلّم اختصارات لوحة المفاتيح بخريطة حرارية وتدريب بلوحة مفاتيح حقيقية وإحصاءات السرعة والدقة والتكرار المتباعد. مجاني."},
+    ru: {title: "Nibras Shortcuts — сочетания клавиш VS Code, Android Studio, Chrome, Windows, macOS", description: "Учите горячие клавиши: тепловая карта, тренировка на настоящей клавиатуре, статистика скорости и точности, интервальное повторение. Бесплатно."},
+  },
   "/studio": {
     az: { title: "Nibras Studio — brauzerdə kod redaktoru və canlı telefon önizləməsi", description: "HTML, CSS və JavaScript yaz: fayllar və qovluqlar, rəngli kod, telefon çərçivəsində canlı önizləmə. ZIP endir, Nibras Dev-də aç və ya Android APK düzəlt. Pulsuz, fayllar brauzerdə qalır." },
     en: { title: "Nibras Studio — code editor in your browser with live phone preview", description: "Write HTML, CSS and JavaScript: files and folders, syntax highlighting, live preview in a phone frame. Download a ZIP, open in Nibras Dev or build an Android APK. Free, files stay in your browser." },

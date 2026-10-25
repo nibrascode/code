@@ -1,5 +1,6 @@
 import { ToolsLegalLinks } from "@/legal/tools-legal";
-import { useState } from "react";
+import { localeHref } from "@/lib/locale-path";
+import { useEffect, useState } from "react";
 import { Activity, AlertTriangle, CheckCircle2, Copy, Search } from "lucide-react";
 import { useI18n } from "@/lib/i18n-context";
 import { ui } from "@/kit/shell";
@@ -20,6 +21,7 @@ export function DoctorPage() {
   const t = UI[lang] ?? UI.en;
   const [url, setUrl] = useState("");
   const [busy, setBusy] = useState(false);
+  useEffect(() => { const u = new URLSearchParams(location.search).get("url"); if (u) setUrl(u.slice(0, 2048)); }, []);
   const [err, setErr] = useState("");
   const [rep, setRep] = useState<Report | null>(null);
   const [copied, setCopied] = useState(false);
@@ -97,6 +99,7 @@ export function DoctorPage() {
           <button className={ui.btn + " mt-4 min-h-11"} onClick={() => void copy()}><Copy className="size-4" /> {copied ? t.copied : t.copy}</button>
         </section>
       ) : null}
+      <a className="mt-8 flex items-center justify-between gap-3 rounded-2xl border border-[#ff3d7f]/40 bg-gradient-to-r from-[#ff3d7f]/15 to-[#7a5cff]/10 px-4 py-3 text-sm hover:border-[#ff3d7f]" href={localeHref(lang, "/mirror")} data-testid="doc-to-mirror"><span><b>Nibras Site Mirror</b> · {({ az: "Bütün saytın strukturunu Site Mirror ilə gör (sitemap xəritəsi)", en: "See the whole site structure with Site Mirror (sitemap map)", tr: "Tüm site yapısını Site Mirror ile görün (sitemap haritası)", ar: "شاهد بنية الموقع كاملة مع Site Mirror (خريطة sitemap)", ru: "Вся структура сайта в Site Mirror (карта sitemap)" } as Record<string, string>)[lang] ?? "Site Mirror"}</span><span aria-hidden="true">→</span></a>
       <footer className="mt-10 border-t border-white/10 pt-4"><ToolsLegalLinks /></footer>
     </main>
   );

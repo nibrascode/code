@@ -22,6 +22,7 @@ import { Route as FlowRouteImport } from './routes/flow'
 import { Route as ImageRouteImport } from './routes/image'
 import { Route as LearnRouteImport } from './routes/learn'
 import { Route as LogicRouteImport } from './routes/logic'
+import { Route as MirrorRouteImport } from './routes/mirror'
 import { Route as MovzuRouteImport } from './routes/movzu'
 import { Route as MuqayiseRouteImport } from './routes/muqayise'
 import { Route as NeceRouteImport } from './routes/nece'
@@ -35,6 +36,7 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as QrRouteImport } from './routes/qr'
 import { Route as RuRouteImport } from './routes/ru'
 import { Route as SeoRouteImport } from './routes/seo'
+import { Route as ShortcutsRouteImport } from './routes/shortcuts'
 import { Route as SozRouteImport } from './routes/soz'
 import { Route as SozSayiRouteImport } from './routes/soz-sayi'
 import { Route as StudioRouteImport } from './routes/studio'
@@ -64,6 +66,7 @@ import { Route as ArFlowRouteImport } from './routes/ar.flow'
 import { Route as ArImageRouteImport } from './routes/ar.image'
 import { Route as ArLearnRouteImport } from './routes/ar.learn'
 import { Route as ArLogicRouteImport } from './routes/ar.logic'
+import { Route as ArMirrorRouteImport } from './routes/ar.mirror'
 import { Route as ArMovzuRouteImport } from './routes/ar.movzu'
 import { Route as ArMuqayiseRouteImport } from './routes/ar.muqayise'
 import { Route as ArNeceRouteImport } from './routes/ar.nece'
@@ -74,6 +77,7 @@ import { Route as ArPdfRouteImport } from './routes/ar.pdf'
 import { Route as ArPlannerRouteImport } from './routes/ar.planner'
 import { Route as ArQrRouteImport } from './routes/ar.qr'
 import { Route as ArSeoRouteImport } from './routes/ar.seo'
+import { Route as ArShortcutsRouteImport } from './routes/ar.shortcuts'
 import { Route as ArSozRouteImport } from './routes/ar.soz'
 import { Route as ArSozSayiRouteImport } from './routes/ar.soz-sayi'
 import { Route as ArStudioRouteImport } from './routes/ar.studio'
@@ -98,6 +102,7 @@ import { Route as EnFlowRouteImport } from './routes/en.flow'
 import { Route as EnImageRouteImport } from './routes/en.image'
 import { Route as EnLearnRouteImport } from './routes/en.learn'
 import { Route as EnLogicRouteImport } from './routes/en.logic'
+import { Route as EnMirrorRouteImport } from './routes/en.mirror'
 import { Route as EnMovzuRouteImport } from './routes/en.movzu'
 import { Route as EnMuqayiseRouteImport } from './routes/en.muqayise'
 import { Route as EnNeceRouteImport } from './routes/en.nece'
@@ -108,6 +113,7 @@ import { Route as EnPdfRouteImport } from './routes/en.pdf'
 import { Route as EnPlannerRouteImport } from './routes/en.planner'
 import { Route as EnQrRouteImport } from './routes/en.qr'
 import { Route as EnSeoRouteImport } from './routes/en.seo'
+import { Route as EnShortcutsRouteImport } from './routes/en.shortcuts'
 import { Route as EnSozRouteImport } from './routes/en.soz'
 import { Route as EnSozSayiRouteImport } from './routes/en.soz-sayi'
 import { Route as EnStudioRouteImport } from './routes/en.studio'
@@ -125,6 +131,7 @@ import { Route as FaqSlugRouteImport } from './routes/faq.$slug'
 import { Route as GuidesIndexRouteImport } from './routes/guides/index'
 import { Route as GuidesTopicRouteImport } from './routes/guides/$topic'
 import { Route as ImageToolRouteImport } from './routes/image_.$tool'
+import { Route as LearnLogicRouteImport } from './routes/learn_.logic'
 import { Route as MovzuSlugRouteImport } from './routes/movzu.$slug'
 import { Route as MuqayiseSlugRouteImport } from './routes/muqayise.$slug'
 import { Route as NeceSlugRouteImport } from './routes/nece.$slug'
@@ -148,6 +155,7 @@ import { Route as RuFlowRouteImport } from './routes/ru.flow'
 import { Route as RuImageRouteImport } from './routes/ru.image'
 import { Route as RuLearnRouteImport } from './routes/ru.learn'
 import { Route as RuLogicRouteImport } from './routes/ru.logic'
+import { Route as RuMirrorRouteImport } from './routes/ru.mirror'
 import { Route as RuMovzuRouteImport } from './routes/ru.movzu'
 import { Route as RuMuqayiseRouteImport } from './routes/ru.muqayise'
 import { Route as RuNeceRouteImport } from './routes/ru.nece'
@@ -158,6 +166,7 @@ import { Route as RuPdfRouteImport } from './routes/ru.pdf'
 import { Route as RuPlannerRouteImport } from './routes/ru.planner'
 import { Route as RuQrRouteImport } from './routes/ru.qr'
 import { Route as RuSeoRouteImport } from './routes/ru.seo'
+import { Route as RuShortcutsRouteImport } from './routes/ru.shortcuts'
 import { Route as RuSozRouteImport } from './routes/ru.soz'
 import { Route as RuSozSayiRouteImport } from './routes/ru.soz-sayi'
 import { Route as RuStudioRouteImport } from './routes/ru.studio'
@@ -184,6 +193,7 @@ import { Route as TrFlowRouteImport } from './routes/tr.flow'
 import { Route as TrImageRouteImport } from './routes/tr.image'
 import { Route as TrLearnRouteImport } from './routes/tr.learn'
 import { Route as TrLogicRouteImport } from './routes/tr.logic'
+import { Route as TrMirrorRouteImport } from './routes/tr.mirror'
 import { Route as TrMovzuRouteImport } from './routes/tr.movzu'
 import { Route as TrMuqayiseRouteImport } from './routes/tr.muqayise'
 import { Route as TrNeceRouteImport } from './routes/tr.nece'
@@ -194,6 +204,7 @@ import { Route as TrPdfRouteImport } from './routes/tr.pdf'
 import { Route as TrPlannerRouteImport } from './routes/tr.planner'
 import { Route as TrQrRouteImport } from './routes/tr.qr'
 import { Route as TrSeoRouteImport } from './routes/tr.seo'
+import { Route as TrShortcutsRouteImport } from './routes/tr.shortcuts'
 import { Route as TrSozRouteImport } from './routes/tr.soz'
 import { Route as TrSozSayiRouteImport } from './routes/tr.soz-sayi'
 import { Route as TrStudioRouteImport } from './routes/tr.studio'
@@ -211,6 +222,7 @@ import { Route as XetaSlugRouteImport } from './routes/xeta.$slug'
 import { Route as ArAppsSlugRouteImport } from './routes/ar.apps.$slug'
 import { Route as ArFaqSlugRouteImport } from './routes/ar.faq.$slug'
 import { Route as ArImageToolRouteImport } from './routes/ar.image_.$tool'
+import { Route as ArLearnLogicRouteImport } from './routes/ar.learn_.logic'
 import { Route as ArMovzuSlugRouteImport } from './routes/ar.movzu.$slug'
 import { Route as ArMuqayiseSlugRouteImport } from './routes/ar.muqayise.$slug'
 import { Route as ArNeceSlugRouteImport } from './routes/ar.nece.$slug'
@@ -223,6 +235,7 @@ import { Route as ArXetaSlugRouteImport } from './routes/ar.xeta.$slug'
 import { Route as EnAppsSlugRouteImport } from './routes/en.apps.$slug'
 import { Route as EnFaqSlugRouteImport } from './routes/en.faq.$slug'
 import { Route as EnImageToolRouteImport } from './routes/en.image_.$tool'
+import { Route as EnLearnLogicRouteImport } from './routes/en.learn_.logic'
 import { Route as EnMovzuSlugRouteImport } from './routes/en.movzu.$slug'
 import { Route as EnMuqayiseSlugRouteImport } from './routes/en.muqayise.$slug'
 import { Route as EnNeceSlugRouteImport } from './routes/en.nece.$slug'
@@ -238,6 +251,7 @@ import { Route as ResourcesTopicArticleRouteImport } from './routes/resources/$t
 import { Route as RuAppsSlugRouteImport } from './routes/ru.apps.$slug'
 import { Route as RuFaqSlugRouteImport } from './routes/ru.faq.$slug'
 import { Route as RuImageToolRouteImport } from './routes/ru.image_.$tool'
+import { Route as RuLearnLogicRouteImport } from './routes/ru.learn_.logic'
 import { Route as RuMovzuSlugRouteImport } from './routes/ru.movzu.$slug'
 import { Route as RuMuqayiseSlugRouteImport } from './routes/ru.muqayise.$slug'
 import { Route as RuNeceSlugRouteImport } from './routes/ru.nece.$slug'
@@ -251,6 +265,7 @@ import { Route as RuXetaSlugRouteImport } from './routes/ru.xeta.$slug'
 import { Route as TrAppsSlugRouteImport } from './routes/tr.apps.$slug'
 import { Route as TrFaqSlugRouteImport } from './routes/tr.faq.$slug'
 import { Route as TrImageToolRouteImport } from './routes/tr.image_.$tool'
+import { Route as TrLearnLogicRouteImport } from './routes/tr.learn_.logic'
 import { Route as TrMovzuSlugRouteImport } from './routes/tr.movzu.$slug'
 import { Route as TrMuqayiseSlugRouteImport } from './routes/tr.muqayise.$slug'
 import { Route as TrNeceSlugRouteImport } from './routes/tr.nece.$slug'
@@ -326,6 +341,11 @@ const LogicRoute = LogicRouteImport.update({
   path: '/logic',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MirrorRoute = MirrorRouteImport.update({
+  id: '/mirror',
+  path: '/mirror',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MovzuRoute = MovzuRouteImport.update({
   id: '/movzu',
   path: '/movzu',
@@ -389,6 +409,11 @@ const RuRoute = RuRouteImport.update({
 const SeoRoute = SeoRouteImport.update({
   id: '/seo',
   path: '/seo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShortcutsRoute = ShortcutsRouteImport.update({
+  id: '/shortcuts',
+  path: '/shortcuts',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SozRoute = SozRouteImport.update({
@@ -536,6 +561,11 @@ const ArLogicRoute = ArLogicRouteImport.update({
   path: '/logic',
   getParentRoute: () => ArRoute,
 } as any)
+const ArMirrorRoute = ArMirrorRouteImport.update({
+  id: '/mirror',
+  path: '/mirror',
+  getParentRoute: () => ArRoute,
+} as any)
 const ArMovzuRoute = ArMovzuRouteImport.update({
   id: '/movzu',
   path: '/movzu',
@@ -584,6 +614,11 @@ const ArQrRoute = ArQrRouteImport.update({
 const ArSeoRoute = ArSeoRouteImport.update({
   id: '/seo',
   path: '/seo',
+  getParentRoute: () => ArRoute,
+} as any)
+const ArShortcutsRoute = ArShortcutsRouteImport.update({
+  id: '/shortcuts',
+  path: '/shortcuts',
   getParentRoute: () => ArRoute,
 } as any)
 const ArSozRoute = ArSozRouteImport.update({
@@ -706,6 +741,11 @@ const EnLogicRoute = EnLogicRouteImport.update({
   path: '/logic',
   getParentRoute: () => EnRoute,
 } as any)
+const EnMirrorRoute = EnMirrorRouteImport.update({
+  id: '/mirror',
+  path: '/mirror',
+  getParentRoute: () => EnRoute,
+} as any)
 const EnMovzuRoute = EnMovzuRouteImport.update({
   id: '/movzu',
   path: '/movzu',
@@ -754,6 +794,11 @@ const EnQrRoute = EnQrRouteImport.update({
 const EnSeoRoute = EnSeoRouteImport.update({
   id: '/seo',
   path: '/seo',
+  getParentRoute: () => EnRoute,
+} as any)
+const EnShortcutsRoute = EnShortcutsRouteImport.update({
+  id: '/shortcuts',
+  path: '/shortcuts',
   getParentRoute: () => EnRoute,
 } as any)
 const EnSozRoute = EnSozRouteImport.update({
@@ -839,6 +884,11 @@ const GuidesTopicRoute = GuidesTopicRouteImport.update({
 const ImageToolRoute = ImageToolRouteImport.update({
   id: '/image_/$tool',
   path: '/image/$tool',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LearnLogicRoute = LearnLogicRouteImport.update({
+  id: '/learn_/logic',
+  path: '/learn/logic',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MovzuSlugRoute = MovzuSlugRouteImport.update({
@@ -956,6 +1006,11 @@ const RuLogicRoute = RuLogicRouteImport.update({
   path: '/logic',
   getParentRoute: () => RuRoute,
 } as any)
+const RuMirrorRoute = RuMirrorRouteImport.update({
+  id: '/mirror',
+  path: '/mirror',
+  getParentRoute: () => RuRoute,
+} as any)
 const RuMovzuRoute = RuMovzuRouteImport.update({
   id: '/movzu',
   path: '/movzu',
@@ -1004,6 +1059,11 @@ const RuQrRoute = RuQrRouteImport.update({
 const RuSeoRoute = RuSeoRouteImport.update({
   id: '/seo',
   path: '/seo',
+  getParentRoute: () => RuRoute,
+} as any)
+const RuShortcutsRoute = RuShortcutsRouteImport.update({
+  id: '/shortcuts',
+  path: '/shortcuts',
   getParentRoute: () => RuRoute,
 } as any)
 const RuSozRoute = RuSozRouteImport.update({
@@ -1136,6 +1196,11 @@ const TrLogicRoute = TrLogicRouteImport.update({
   path: '/logic',
   getParentRoute: () => TrRoute,
 } as any)
+const TrMirrorRoute = TrMirrorRouteImport.update({
+  id: '/mirror',
+  path: '/mirror',
+  getParentRoute: () => TrRoute,
+} as any)
 const TrMovzuRoute = TrMovzuRouteImport.update({
   id: '/movzu',
   path: '/movzu',
@@ -1184,6 +1249,11 @@ const TrQrRoute = TrQrRouteImport.update({
 const TrSeoRoute = TrSeoRouteImport.update({
   id: '/seo',
   path: '/seo',
+  getParentRoute: () => TrRoute,
+} as any)
+const TrShortcutsRoute = TrShortcutsRouteImport.update({
+  id: '/shortcuts',
+  path: '/shortcuts',
   getParentRoute: () => TrRoute,
 } as any)
 const TrSozRoute = TrSozRouteImport.update({
@@ -1271,6 +1341,11 @@ const ArImageToolRoute = ArImageToolRouteImport.update({
   path: '/image/$tool',
   getParentRoute: () => ArRoute,
 } as any)
+const ArLearnLogicRoute = ArLearnLogicRouteImport.update({
+  id: '/learn_/logic',
+  path: '/learn/logic',
+  getParentRoute: () => ArRoute,
+} as any)
 const ArMovzuSlugRoute = ArMovzuSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -1329,6 +1404,11 @@ const EnFaqSlugRoute = EnFaqSlugRouteImport.update({
 const EnImageToolRoute = EnImageToolRouteImport.update({
   id: '/image_/$tool',
   path: '/image/$tool',
+  getParentRoute: () => EnRoute,
+} as any)
+const EnLearnLogicRoute = EnLearnLogicRouteImport.update({
+  id: '/learn_/logic',
+  path: '/learn/logic',
   getParentRoute: () => EnRoute,
 } as any)
 const EnMovzuSlugRoute = EnMovzuSlugRouteImport.update({
@@ -1407,6 +1487,11 @@ const RuImageToolRoute = RuImageToolRouteImport.update({
   path: '/image/$tool',
   getParentRoute: () => RuRoute,
 } as any)
+const RuLearnLogicRoute = RuLearnLogicRouteImport.update({
+  id: '/learn_/logic',
+  path: '/learn/logic',
+  getParentRoute: () => RuRoute,
+} as any)
 const RuMovzuSlugRoute = RuMovzuSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -1472,6 +1557,11 @@ const TrImageToolRoute = TrImageToolRouteImport.update({
   path: '/image/$tool',
   getParentRoute: () => TrRoute,
 } as any)
+const TrLearnLogicRoute = TrLearnLogicRouteImport.update({
+  id: '/learn_/logic',
+  path: '/learn/logic',
+  getParentRoute: () => TrRoute,
+} as any)
 const TrMovzuSlugRoute = TrMovzuSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -1532,6 +1622,7 @@ export interface FileRoutesByFullPath {
   '/image': typeof ImageRoute
   '/learn': typeof LearnRoute
   '/logic': typeof LogicRoute
+  '/mirror': typeof MirrorRoute
   '/movzu': typeof MovzuRouteWithChildren
   '/muqayise': typeof MuqayiseRouteWithChildren
   '/nece': typeof NeceRouteWithChildren
@@ -1545,6 +1636,7 @@ export interface FileRoutesByFullPath {
   '/qr': typeof QrRoute
   '/ru': typeof RuRouteWithChildren
   '/seo': typeof SeoRoute
+  '/shortcuts': typeof ShortcutsRoute
   '/soz': typeof SozRouteWithChildren
   '/soz-sayi': typeof SozSayiRoute
   '/studio': typeof StudioRoute
@@ -1574,6 +1666,7 @@ export interface FileRoutesByFullPath {
   '/ar/image': typeof ArImageRoute
   '/ar/learn': typeof ArLearnRoute
   '/ar/logic': typeof ArLogicRoute
+  '/ar/mirror': typeof ArMirrorRoute
   '/ar/movzu': typeof ArMovzuRouteWithChildren
   '/ar/muqayise': typeof ArMuqayiseRouteWithChildren
   '/ar/nece': typeof ArNeceRouteWithChildren
@@ -1584,6 +1677,7 @@ export interface FileRoutesByFullPath {
   '/ar/planner': typeof ArPlannerRoute
   '/ar/qr': typeof ArQrRoute
   '/ar/seo': typeof ArSeoRoute
+  '/ar/shortcuts': typeof ArShortcutsRoute
   '/ar/soz': typeof ArSozRouteWithChildren
   '/ar/soz-sayi': typeof ArSozSayiRoute
   '/ar/studio': typeof ArStudioRoute
@@ -1608,6 +1702,7 @@ export interface FileRoutesByFullPath {
   '/en/image': typeof EnImageRoute
   '/en/learn': typeof EnLearnRoute
   '/en/logic': typeof EnLogicRoute
+  '/en/mirror': typeof EnMirrorRoute
   '/en/movzu': typeof EnMovzuRouteWithChildren
   '/en/muqayise': typeof EnMuqayiseRouteWithChildren
   '/en/nece': typeof EnNeceRouteWithChildren
@@ -1618,6 +1713,7 @@ export interface FileRoutesByFullPath {
   '/en/planner': typeof EnPlannerRoute
   '/en/qr': typeof EnQrRoute
   '/en/seo': typeof EnSeoRoute
+  '/en/shortcuts': typeof EnShortcutsRoute
   '/en/soz': typeof EnSozRouteWithChildren
   '/en/soz-sayi': typeof EnSozSayiRoute
   '/en/studio': typeof EnStudioRoute
@@ -1634,6 +1730,7 @@ export interface FileRoutesByFullPath {
   '/faq/$slug': typeof FaqSlugRoute
   '/guides/$topic': typeof GuidesTopicRoute
   '/image/$tool': typeof ImageToolRoute
+  '/learn/logic': typeof LearnLogicRoute
   '/movzu/$slug': typeof MovzuSlugRoute
   '/muqayise/$slug': typeof MuqayiseSlugRoute
   '/nece/$slug': typeof NeceSlugRoute
@@ -1654,6 +1751,7 @@ export interface FileRoutesByFullPath {
   '/ru/image': typeof RuImageRoute
   '/ru/learn': typeof RuLearnRoute
   '/ru/logic': typeof RuLogicRoute
+  '/ru/mirror': typeof RuMirrorRoute
   '/ru/movzu': typeof RuMovzuRouteWithChildren
   '/ru/muqayise': typeof RuMuqayiseRouteWithChildren
   '/ru/nece': typeof RuNeceRouteWithChildren
@@ -1664,6 +1762,7 @@ export interface FileRoutesByFullPath {
   '/ru/planner': typeof RuPlannerRoute
   '/ru/qr': typeof RuQrRoute
   '/ru/seo': typeof RuSeoRoute
+  '/ru/shortcuts': typeof RuShortcutsRoute
   '/ru/soz': typeof RuSozRouteWithChildren
   '/ru/soz-sayi': typeof RuSozSayiRoute
   '/ru/studio': typeof RuStudioRoute
@@ -1690,6 +1789,7 @@ export interface FileRoutesByFullPath {
   '/tr/image': typeof TrImageRoute
   '/tr/learn': typeof TrLearnRoute
   '/tr/logic': typeof TrLogicRoute
+  '/tr/mirror': typeof TrMirrorRoute
   '/tr/movzu': typeof TrMovzuRouteWithChildren
   '/tr/muqayise': typeof TrMuqayiseRouteWithChildren
   '/tr/nece': typeof TrNeceRouteWithChildren
@@ -1700,6 +1800,7 @@ export interface FileRoutesByFullPath {
   '/tr/planner': typeof TrPlannerRoute
   '/tr/qr': typeof TrQrRoute
   '/tr/seo': typeof TrSeoRoute
+  '/tr/shortcuts': typeof TrShortcutsRoute
   '/tr/soz': typeof TrSozRouteWithChildren
   '/tr/soz-sayi': typeof TrSozSayiRoute
   '/tr/studio': typeof TrStudioRoute
@@ -1721,6 +1822,7 @@ export interface FileRoutesByFullPath {
   '/ar/apps/$slug': typeof ArAppsSlugRoute
   '/ar/faq/$slug': typeof ArFaqSlugRoute
   '/ar/image/$tool': typeof ArImageToolRoute
+  '/ar/learn/logic': typeof ArLearnLogicRoute
   '/ar/movzu/$slug': typeof ArMovzuSlugRoute
   '/ar/muqayise/$slug': typeof ArMuqayiseSlugRoute
   '/ar/nece/$slug': typeof ArNeceSlugRoute
@@ -1733,6 +1835,7 @@ export interface FileRoutesByFullPath {
   '/en/apps/$slug': typeof EnAppsSlugRoute
   '/en/faq/$slug': typeof EnFaqSlugRoute
   '/en/image/$tool': typeof EnImageToolRoute
+  '/en/learn/logic': typeof EnLearnLogicRoute
   '/en/movzu/$slug': typeof EnMovzuSlugRoute
   '/en/muqayise/$slug': typeof EnMuqayiseSlugRoute
   '/en/nece/$slug': typeof EnNeceSlugRoute
@@ -1747,6 +1850,7 @@ export interface FileRoutesByFullPath {
   '/ru/apps/$slug': typeof RuAppsSlugRoute
   '/ru/faq/$slug': typeof RuFaqSlugRoute
   '/ru/image/$tool': typeof RuImageToolRoute
+  '/ru/learn/logic': typeof RuLearnLogicRoute
   '/ru/movzu/$slug': typeof RuMovzuSlugRoute
   '/ru/muqayise/$slug': typeof RuMuqayiseSlugRoute
   '/ru/nece/$slug': typeof RuNeceSlugRoute
@@ -1760,6 +1864,7 @@ export interface FileRoutesByFullPath {
   '/tr/apps/$slug': typeof TrAppsSlugRoute
   '/tr/faq/$slug': typeof TrFaqSlugRoute
   '/tr/image/$tool': typeof TrImageToolRoute
+  '/tr/learn/logic': typeof TrLearnLogicRoute
   '/tr/movzu/$slug': typeof TrMovzuSlugRoute
   '/tr/muqayise/$slug': typeof TrMuqayiseSlugRoute
   '/tr/nece/$slug': typeof TrNeceSlugRoute
@@ -1785,6 +1890,7 @@ export interface FileRoutesByTo {
   '/image': typeof ImageRoute
   '/learn': typeof LearnRoute
   '/logic': typeof LogicRoute
+  '/mirror': typeof MirrorRoute
   '/movzu': typeof MovzuRouteWithChildren
   '/muqayise': typeof MuqayiseRouteWithChildren
   '/nece': typeof NeceRouteWithChildren
@@ -1798,6 +1904,7 @@ export interface FileRoutesByTo {
   '/qr': typeof QrRoute
   '/ru': typeof RuRouteWithChildren
   '/seo': typeof SeoRoute
+  '/shortcuts': typeof ShortcutsRoute
   '/soz': typeof SozRouteWithChildren
   '/soz-sayi': typeof SozSayiRoute
   '/studio': typeof StudioRoute
@@ -1826,6 +1933,7 @@ export interface FileRoutesByTo {
   '/ar/image': typeof ArImageRoute
   '/ar/learn': typeof ArLearnRoute
   '/ar/logic': typeof ArLogicRoute
+  '/ar/mirror': typeof ArMirrorRoute
   '/ar/movzu': typeof ArMovzuRouteWithChildren
   '/ar/muqayise': typeof ArMuqayiseRouteWithChildren
   '/ar/nece': typeof ArNeceRouteWithChildren
@@ -1836,6 +1944,7 @@ export interface FileRoutesByTo {
   '/ar/planner': typeof ArPlannerRoute
   '/ar/qr': typeof ArQrRoute
   '/ar/seo': typeof ArSeoRoute
+  '/ar/shortcuts': typeof ArShortcutsRoute
   '/ar/soz': typeof ArSozRouteWithChildren
   '/ar/soz-sayi': typeof ArSozSayiRoute
   '/ar/studio': typeof ArStudioRoute
@@ -1860,6 +1969,7 @@ export interface FileRoutesByTo {
   '/en/image': typeof EnImageRoute
   '/en/learn': typeof EnLearnRoute
   '/en/logic': typeof EnLogicRoute
+  '/en/mirror': typeof EnMirrorRoute
   '/en/movzu': typeof EnMovzuRouteWithChildren
   '/en/muqayise': typeof EnMuqayiseRouteWithChildren
   '/en/nece': typeof EnNeceRouteWithChildren
@@ -1870,6 +1980,7 @@ export interface FileRoutesByTo {
   '/en/planner': typeof EnPlannerRoute
   '/en/qr': typeof EnQrRoute
   '/en/seo': typeof EnSeoRoute
+  '/en/shortcuts': typeof EnShortcutsRoute
   '/en/soz': typeof EnSozRouteWithChildren
   '/en/soz-sayi': typeof EnSozSayiRoute
   '/en/studio': typeof EnStudioRoute
@@ -1886,6 +1997,7 @@ export interface FileRoutesByTo {
   '/faq/$slug': typeof FaqSlugRoute
   '/guides/$topic': typeof GuidesTopicRoute
   '/image/$tool': typeof ImageToolRoute
+  '/learn/logic': typeof LearnLogicRoute
   '/movzu/$slug': typeof MovzuSlugRoute
   '/muqayise/$slug': typeof MuqayiseSlugRoute
   '/nece/$slug': typeof NeceSlugRoute
@@ -1906,6 +2018,7 @@ export interface FileRoutesByTo {
   '/ru/image': typeof RuImageRoute
   '/ru/learn': typeof RuLearnRoute
   '/ru/logic': typeof RuLogicRoute
+  '/ru/mirror': typeof RuMirrorRoute
   '/ru/movzu': typeof RuMovzuRouteWithChildren
   '/ru/muqayise': typeof RuMuqayiseRouteWithChildren
   '/ru/nece': typeof RuNeceRouteWithChildren
@@ -1916,6 +2029,7 @@ export interface FileRoutesByTo {
   '/ru/planner': typeof RuPlannerRoute
   '/ru/qr': typeof RuQrRoute
   '/ru/seo': typeof RuSeoRoute
+  '/ru/shortcuts': typeof RuShortcutsRoute
   '/ru/soz': typeof RuSozRouteWithChildren
   '/ru/soz-sayi': typeof RuSozSayiRoute
   '/ru/studio': typeof RuStudioRoute
@@ -1942,6 +2056,7 @@ export interface FileRoutesByTo {
   '/tr/image': typeof TrImageRoute
   '/tr/learn': typeof TrLearnRoute
   '/tr/logic': typeof TrLogicRoute
+  '/tr/mirror': typeof TrMirrorRoute
   '/tr/movzu': typeof TrMovzuRouteWithChildren
   '/tr/muqayise': typeof TrMuqayiseRouteWithChildren
   '/tr/nece': typeof TrNeceRouteWithChildren
@@ -1952,6 +2067,7 @@ export interface FileRoutesByTo {
   '/tr/planner': typeof TrPlannerRoute
   '/tr/qr': typeof TrQrRoute
   '/tr/seo': typeof TrSeoRoute
+  '/tr/shortcuts': typeof TrShortcutsRoute
   '/tr/soz': typeof TrSozRouteWithChildren
   '/tr/soz-sayi': typeof TrSozSayiRoute
   '/tr/studio': typeof TrStudioRoute
@@ -1973,6 +2089,7 @@ export interface FileRoutesByTo {
   '/ar/apps/$slug': typeof ArAppsSlugRoute
   '/ar/faq/$slug': typeof ArFaqSlugRoute
   '/ar/image/$tool': typeof ArImageToolRoute
+  '/ar/learn/logic': typeof ArLearnLogicRoute
   '/ar/movzu/$slug': typeof ArMovzuSlugRoute
   '/ar/muqayise/$slug': typeof ArMuqayiseSlugRoute
   '/ar/nece/$slug': typeof ArNeceSlugRoute
@@ -1985,6 +2102,7 @@ export interface FileRoutesByTo {
   '/en/apps/$slug': typeof EnAppsSlugRoute
   '/en/faq/$slug': typeof EnFaqSlugRoute
   '/en/image/$tool': typeof EnImageToolRoute
+  '/en/learn/logic': typeof EnLearnLogicRoute
   '/en/movzu/$slug': typeof EnMovzuSlugRoute
   '/en/muqayise/$slug': typeof EnMuqayiseSlugRoute
   '/en/nece/$slug': typeof EnNeceSlugRoute
@@ -1999,6 +2117,7 @@ export interface FileRoutesByTo {
   '/ru/apps/$slug': typeof RuAppsSlugRoute
   '/ru/faq/$slug': typeof RuFaqSlugRoute
   '/ru/image/$tool': typeof RuImageToolRoute
+  '/ru/learn/logic': typeof RuLearnLogicRoute
   '/ru/movzu/$slug': typeof RuMovzuSlugRoute
   '/ru/muqayise/$slug': typeof RuMuqayiseSlugRoute
   '/ru/nece/$slug': typeof RuNeceSlugRoute
@@ -2012,6 +2131,7 @@ export interface FileRoutesByTo {
   '/tr/apps/$slug': typeof TrAppsSlugRoute
   '/tr/faq/$slug': typeof TrFaqSlugRoute
   '/tr/image/$tool': typeof TrImageToolRoute
+  '/tr/learn/logic': typeof TrLearnLogicRoute
   '/tr/movzu/$slug': typeof TrMovzuSlugRoute
   '/tr/muqayise/$slug': typeof TrMuqayiseSlugRoute
   '/tr/nece/$slug': typeof TrNeceSlugRoute
@@ -2038,6 +2158,7 @@ export interface FileRoutesById {
   '/image': typeof ImageRoute
   '/learn': typeof LearnRoute
   '/logic': typeof LogicRoute
+  '/mirror': typeof MirrorRoute
   '/movzu': typeof MovzuRouteWithChildren
   '/muqayise': typeof MuqayiseRouteWithChildren
   '/nece': typeof NeceRouteWithChildren
@@ -2051,6 +2172,7 @@ export interface FileRoutesById {
   '/qr': typeof QrRoute
   '/ru': typeof RuRouteWithChildren
   '/seo': typeof SeoRoute
+  '/shortcuts': typeof ShortcutsRoute
   '/soz': typeof SozRouteWithChildren
   '/soz-sayi': typeof SozSayiRoute
   '/studio': typeof StudioRoute
@@ -2080,6 +2202,7 @@ export interface FileRoutesById {
   '/ar/image': typeof ArImageRoute
   '/ar/learn': typeof ArLearnRoute
   '/ar/logic': typeof ArLogicRoute
+  '/ar/mirror': typeof ArMirrorRoute
   '/ar/movzu': typeof ArMovzuRouteWithChildren
   '/ar/muqayise': typeof ArMuqayiseRouteWithChildren
   '/ar/nece': typeof ArNeceRouteWithChildren
@@ -2090,6 +2213,7 @@ export interface FileRoutesById {
   '/ar/planner': typeof ArPlannerRoute
   '/ar/qr': typeof ArQrRoute
   '/ar/seo': typeof ArSeoRoute
+  '/ar/shortcuts': typeof ArShortcutsRoute
   '/ar/soz': typeof ArSozRouteWithChildren
   '/ar/soz-sayi': typeof ArSozSayiRoute
   '/ar/studio': typeof ArStudioRoute
@@ -2114,6 +2238,7 @@ export interface FileRoutesById {
   '/en/image': typeof EnImageRoute
   '/en/learn': typeof EnLearnRoute
   '/en/logic': typeof EnLogicRoute
+  '/en/mirror': typeof EnMirrorRoute
   '/en/movzu': typeof EnMovzuRouteWithChildren
   '/en/muqayise': typeof EnMuqayiseRouteWithChildren
   '/en/nece': typeof EnNeceRouteWithChildren
@@ -2124,6 +2249,7 @@ export interface FileRoutesById {
   '/en/planner': typeof EnPlannerRoute
   '/en/qr': typeof EnQrRoute
   '/en/seo': typeof EnSeoRoute
+  '/en/shortcuts': typeof EnShortcutsRoute
   '/en/soz': typeof EnSozRouteWithChildren
   '/en/soz-sayi': typeof EnSozSayiRoute
   '/en/studio': typeof EnStudioRoute
@@ -2140,6 +2266,7 @@ export interface FileRoutesById {
   '/faq/$slug': typeof FaqSlugRoute
   '/guides/$topic': typeof GuidesTopicRoute
   '/image_/$tool': typeof ImageToolRoute
+  '/learn_/logic': typeof LearnLogicRoute
   '/movzu/$slug': typeof MovzuSlugRoute
   '/muqayise/$slug': typeof MuqayiseSlugRoute
   '/nece/$slug': typeof NeceSlugRoute
@@ -2160,6 +2287,7 @@ export interface FileRoutesById {
   '/ru/image': typeof RuImageRoute
   '/ru/learn': typeof RuLearnRoute
   '/ru/logic': typeof RuLogicRoute
+  '/ru/mirror': typeof RuMirrorRoute
   '/ru/movzu': typeof RuMovzuRouteWithChildren
   '/ru/muqayise': typeof RuMuqayiseRouteWithChildren
   '/ru/nece': typeof RuNeceRouteWithChildren
@@ -2170,6 +2298,7 @@ export interface FileRoutesById {
   '/ru/planner': typeof RuPlannerRoute
   '/ru/qr': typeof RuQrRoute
   '/ru/seo': typeof RuSeoRoute
+  '/ru/shortcuts': typeof RuShortcutsRoute
   '/ru/soz': typeof RuSozRouteWithChildren
   '/ru/soz-sayi': typeof RuSozSayiRoute
   '/ru/studio': typeof RuStudioRoute
@@ -2196,6 +2325,7 @@ export interface FileRoutesById {
   '/tr/image': typeof TrImageRoute
   '/tr/learn': typeof TrLearnRoute
   '/tr/logic': typeof TrLogicRoute
+  '/tr/mirror': typeof TrMirrorRoute
   '/tr/movzu': typeof TrMovzuRouteWithChildren
   '/tr/muqayise': typeof TrMuqayiseRouteWithChildren
   '/tr/nece': typeof TrNeceRouteWithChildren
@@ -2206,6 +2336,7 @@ export interface FileRoutesById {
   '/tr/planner': typeof TrPlannerRoute
   '/tr/qr': typeof TrQrRoute
   '/tr/seo': typeof TrSeoRoute
+  '/tr/shortcuts': typeof TrShortcutsRoute
   '/tr/soz': typeof TrSozRouteWithChildren
   '/tr/soz-sayi': typeof TrSozSayiRoute
   '/tr/studio': typeof TrStudioRoute
@@ -2227,6 +2358,7 @@ export interface FileRoutesById {
   '/ar/apps/$slug': typeof ArAppsSlugRoute
   '/ar/faq/$slug': typeof ArFaqSlugRoute
   '/ar/image_/$tool': typeof ArImageToolRoute
+  '/ar/learn_/logic': typeof ArLearnLogicRoute
   '/ar/movzu/$slug': typeof ArMovzuSlugRoute
   '/ar/muqayise/$slug': typeof ArMuqayiseSlugRoute
   '/ar/nece/$slug': typeof ArNeceSlugRoute
@@ -2239,6 +2371,7 @@ export interface FileRoutesById {
   '/en/apps/$slug': typeof EnAppsSlugRoute
   '/en/faq/$slug': typeof EnFaqSlugRoute
   '/en/image_/$tool': typeof EnImageToolRoute
+  '/en/learn_/logic': typeof EnLearnLogicRoute
   '/en/movzu/$slug': typeof EnMovzuSlugRoute
   '/en/muqayise/$slug': typeof EnMuqayiseSlugRoute
   '/en/nece/$slug': typeof EnNeceSlugRoute
@@ -2253,6 +2386,7 @@ export interface FileRoutesById {
   '/ru/apps/$slug': typeof RuAppsSlugRoute
   '/ru/faq/$slug': typeof RuFaqSlugRoute
   '/ru/image_/$tool': typeof RuImageToolRoute
+  '/ru/learn_/logic': typeof RuLearnLogicRoute
   '/ru/movzu/$slug': typeof RuMovzuSlugRoute
   '/ru/muqayise/$slug': typeof RuMuqayiseSlugRoute
   '/ru/nece/$slug': typeof RuNeceSlugRoute
@@ -2266,6 +2400,7 @@ export interface FileRoutesById {
   '/tr/apps/$slug': typeof TrAppsSlugRoute
   '/tr/faq/$slug': typeof TrFaqSlugRoute
   '/tr/image_/$tool': typeof TrImageToolRoute
+  '/tr/learn_/logic': typeof TrLearnLogicRoute
   '/tr/movzu/$slug': typeof TrMovzuSlugRoute
   '/tr/muqayise/$slug': typeof TrMuqayiseSlugRoute
   '/tr/nece/$slug': typeof TrNeceSlugRoute
@@ -2293,6 +2428,7 @@ export interface FileRouteTypes {
     | '/image'
     | '/learn'
     | '/logic'
+    | '/mirror'
     | '/movzu'
     | '/muqayise'
     | '/nece'
@@ -2306,6 +2442,7 @@ export interface FileRouteTypes {
     | '/qr'
     | '/ru'
     | '/seo'
+    | '/shortcuts'
     | '/soz'
     | '/soz-sayi'
     | '/studio'
@@ -2335,6 +2472,7 @@ export interface FileRouteTypes {
     | '/ar/image'
     | '/ar/learn'
     | '/ar/logic'
+    | '/ar/mirror'
     | '/ar/movzu'
     | '/ar/muqayise'
     | '/ar/nece'
@@ -2345,6 +2483,7 @@ export interface FileRouteTypes {
     | '/ar/planner'
     | '/ar/qr'
     | '/ar/seo'
+    | '/ar/shortcuts'
     | '/ar/soz'
     | '/ar/soz-sayi'
     | '/ar/studio'
@@ -2369,6 +2508,7 @@ export interface FileRouteTypes {
     | '/en/image'
     | '/en/learn'
     | '/en/logic'
+    | '/en/mirror'
     | '/en/movzu'
     | '/en/muqayise'
     | '/en/nece'
@@ -2379,6 +2519,7 @@ export interface FileRouteTypes {
     | '/en/planner'
     | '/en/qr'
     | '/en/seo'
+    | '/en/shortcuts'
     | '/en/soz'
     | '/en/soz-sayi'
     | '/en/studio'
@@ -2395,6 +2536,7 @@ export interface FileRouteTypes {
     | '/faq/$slug'
     | '/guides/$topic'
     | '/image/$tool'
+    | '/learn/logic'
     | '/movzu/$slug'
     | '/muqayise/$slug'
     | '/nece/$slug'
@@ -2415,6 +2557,7 @@ export interface FileRouteTypes {
     | '/ru/image'
     | '/ru/learn'
     | '/ru/logic'
+    | '/ru/mirror'
     | '/ru/movzu'
     | '/ru/muqayise'
     | '/ru/nece'
@@ -2425,6 +2568,7 @@ export interface FileRouteTypes {
     | '/ru/planner'
     | '/ru/qr'
     | '/ru/seo'
+    | '/ru/shortcuts'
     | '/ru/soz'
     | '/ru/soz-sayi'
     | '/ru/studio'
@@ -2451,6 +2595,7 @@ export interface FileRouteTypes {
     | '/tr/image'
     | '/tr/learn'
     | '/tr/logic'
+    | '/tr/mirror'
     | '/tr/movzu'
     | '/tr/muqayise'
     | '/tr/nece'
@@ -2461,6 +2606,7 @@ export interface FileRouteTypes {
     | '/tr/planner'
     | '/tr/qr'
     | '/tr/seo'
+    | '/tr/shortcuts'
     | '/tr/soz'
     | '/tr/soz-sayi'
     | '/tr/studio'
@@ -2482,6 +2628,7 @@ export interface FileRouteTypes {
     | '/ar/apps/$slug'
     | '/ar/faq/$slug'
     | '/ar/image/$tool'
+    | '/ar/learn/logic'
     | '/ar/movzu/$slug'
     | '/ar/muqayise/$slug'
     | '/ar/nece/$slug'
@@ -2494,6 +2641,7 @@ export interface FileRouteTypes {
     | '/en/apps/$slug'
     | '/en/faq/$slug'
     | '/en/image/$tool'
+    | '/en/learn/logic'
     | '/en/movzu/$slug'
     | '/en/muqayise/$slug'
     | '/en/nece/$slug'
@@ -2508,6 +2656,7 @@ export interface FileRouteTypes {
     | '/ru/apps/$slug'
     | '/ru/faq/$slug'
     | '/ru/image/$tool'
+    | '/ru/learn/logic'
     | '/ru/movzu/$slug'
     | '/ru/muqayise/$slug'
     | '/ru/nece/$slug'
@@ -2521,6 +2670,7 @@ export interface FileRouteTypes {
     | '/tr/apps/$slug'
     | '/tr/faq/$slug'
     | '/tr/image/$tool'
+    | '/tr/learn/logic'
     | '/tr/movzu/$slug'
     | '/tr/muqayise/$slug'
     | '/tr/nece/$slug'
@@ -2546,6 +2696,7 @@ export interface FileRouteTypes {
     | '/image'
     | '/learn'
     | '/logic'
+    | '/mirror'
     | '/movzu'
     | '/muqayise'
     | '/nece'
@@ -2559,6 +2710,7 @@ export interface FileRouteTypes {
     | '/qr'
     | '/ru'
     | '/seo'
+    | '/shortcuts'
     | '/soz'
     | '/soz-sayi'
     | '/studio'
@@ -2587,6 +2739,7 @@ export interface FileRouteTypes {
     | '/ar/image'
     | '/ar/learn'
     | '/ar/logic'
+    | '/ar/mirror'
     | '/ar/movzu'
     | '/ar/muqayise'
     | '/ar/nece'
@@ -2597,6 +2750,7 @@ export interface FileRouteTypes {
     | '/ar/planner'
     | '/ar/qr'
     | '/ar/seo'
+    | '/ar/shortcuts'
     | '/ar/soz'
     | '/ar/soz-sayi'
     | '/ar/studio'
@@ -2621,6 +2775,7 @@ export interface FileRouteTypes {
     | '/en/image'
     | '/en/learn'
     | '/en/logic'
+    | '/en/mirror'
     | '/en/movzu'
     | '/en/muqayise'
     | '/en/nece'
@@ -2631,6 +2786,7 @@ export interface FileRouteTypes {
     | '/en/planner'
     | '/en/qr'
     | '/en/seo'
+    | '/en/shortcuts'
     | '/en/soz'
     | '/en/soz-sayi'
     | '/en/studio'
@@ -2647,6 +2803,7 @@ export interface FileRouteTypes {
     | '/faq/$slug'
     | '/guides/$topic'
     | '/image/$tool'
+    | '/learn/logic'
     | '/movzu/$slug'
     | '/muqayise/$slug'
     | '/nece/$slug'
@@ -2667,6 +2824,7 @@ export interface FileRouteTypes {
     | '/ru/image'
     | '/ru/learn'
     | '/ru/logic'
+    | '/ru/mirror'
     | '/ru/movzu'
     | '/ru/muqayise'
     | '/ru/nece'
@@ -2677,6 +2835,7 @@ export interface FileRouteTypes {
     | '/ru/planner'
     | '/ru/qr'
     | '/ru/seo'
+    | '/ru/shortcuts'
     | '/ru/soz'
     | '/ru/soz-sayi'
     | '/ru/studio'
@@ -2703,6 +2862,7 @@ export interface FileRouteTypes {
     | '/tr/image'
     | '/tr/learn'
     | '/tr/logic'
+    | '/tr/mirror'
     | '/tr/movzu'
     | '/tr/muqayise'
     | '/tr/nece'
@@ -2713,6 +2873,7 @@ export interface FileRouteTypes {
     | '/tr/planner'
     | '/tr/qr'
     | '/tr/seo'
+    | '/tr/shortcuts'
     | '/tr/soz'
     | '/tr/soz-sayi'
     | '/tr/studio'
@@ -2734,6 +2895,7 @@ export interface FileRouteTypes {
     | '/ar/apps/$slug'
     | '/ar/faq/$slug'
     | '/ar/image/$tool'
+    | '/ar/learn/logic'
     | '/ar/movzu/$slug'
     | '/ar/muqayise/$slug'
     | '/ar/nece/$slug'
@@ -2746,6 +2908,7 @@ export interface FileRouteTypes {
     | '/en/apps/$slug'
     | '/en/faq/$slug'
     | '/en/image/$tool'
+    | '/en/learn/logic'
     | '/en/movzu/$slug'
     | '/en/muqayise/$slug'
     | '/en/nece/$slug'
@@ -2760,6 +2923,7 @@ export interface FileRouteTypes {
     | '/ru/apps/$slug'
     | '/ru/faq/$slug'
     | '/ru/image/$tool'
+    | '/ru/learn/logic'
     | '/ru/movzu/$slug'
     | '/ru/muqayise/$slug'
     | '/ru/nece/$slug'
@@ -2773,6 +2937,7 @@ export interface FileRouteTypes {
     | '/tr/apps/$slug'
     | '/tr/faq/$slug'
     | '/tr/image/$tool'
+    | '/tr/learn/logic'
     | '/tr/movzu/$slug'
     | '/tr/muqayise/$slug'
     | '/tr/nece/$slug'
@@ -2798,6 +2963,7 @@ export interface FileRouteTypes {
     | '/image'
     | '/learn'
     | '/logic'
+    | '/mirror'
     | '/movzu'
     | '/muqayise'
     | '/nece'
@@ -2811,6 +2977,7 @@ export interface FileRouteTypes {
     | '/qr'
     | '/ru'
     | '/seo'
+    | '/shortcuts'
     | '/soz'
     | '/soz-sayi'
     | '/studio'
@@ -2840,6 +3007,7 @@ export interface FileRouteTypes {
     | '/ar/image'
     | '/ar/learn'
     | '/ar/logic'
+    | '/ar/mirror'
     | '/ar/movzu'
     | '/ar/muqayise'
     | '/ar/nece'
@@ -2850,6 +3018,7 @@ export interface FileRouteTypes {
     | '/ar/planner'
     | '/ar/qr'
     | '/ar/seo'
+    | '/ar/shortcuts'
     | '/ar/soz'
     | '/ar/soz-sayi'
     | '/ar/studio'
@@ -2874,6 +3043,7 @@ export interface FileRouteTypes {
     | '/en/image'
     | '/en/learn'
     | '/en/logic'
+    | '/en/mirror'
     | '/en/movzu'
     | '/en/muqayise'
     | '/en/nece'
@@ -2884,6 +3054,7 @@ export interface FileRouteTypes {
     | '/en/planner'
     | '/en/qr'
     | '/en/seo'
+    | '/en/shortcuts'
     | '/en/soz'
     | '/en/soz-sayi'
     | '/en/studio'
@@ -2900,6 +3071,7 @@ export interface FileRouteTypes {
     | '/faq/$slug'
     | '/guides/$topic'
     | '/image_/$tool'
+    | '/learn_/logic'
     | '/movzu/$slug'
     | '/muqayise/$slug'
     | '/nece/$slug'
@@ -2920,6 +3092,7 @@ export interface FileRouteTypes {
     | '/ru/image'
     | '/ru/learn'
     | '/ru/logic'
+    | '/ru/mirror'
     | '/ru/movzu'
     | '/ru/muqayise'
     | '/ru/nece'
@@ -2930,6 +3103,7 @@ export interface FileRouteTypes {
     | '/ru/planner'
     | '/ru/qr'
     | '/ru/seo'
+    | '/ru/shortcuts'
     | '/ru/soz'
     | '/ru/soz-sayi'
     | '/ru/studio'
@@ -2956,6 +3130,7 @@ export interface FileRouteTypes {
     | '/tr/image'
     | '/tr/learn'
     | '/tr/logic'
+    | '/tr/mirror'
     | '/tr/movzu'
     | '/tr/muqayise'
     | '/tr/nece'
@@ -2966,6 +3141,7 @@ export interface FileRouteTypes {
     | '/tr/planner'
     | '/tr/qr'
     | '/tr/seo'
+    | '/tr/shortcuts'
     | '/tr/soz'
     | '/tr/soz-sayi'
     | '/tr/studio'
@@ -2987,6 +3163,7 @@ export interface FileRouteTypes {
     | '/ar/apps/$slug'
     | '/ar/faq/$slug'
     | '/ar/image_/$tool'
+    | '/ar/learn_/logic'
     | '/ar/movzu/$slug'
     | '/ar/muqayise/$slug'
     | '/ar/nece/$slug'
@@ -2999,6 +3176,7 @@ export interface FileRouteTypes {
     | '/en/apps/$slug'
     | '/en/faq/$slug'
     | '/en/image_/$tool'
+    | '/en/learn_/logic'
     | '/en/movzu/$slug'
     | '/en/muqayise/$slug'
     | '/en/nece/$slug'
@@ -3013,6 +3191,7 @@ export interface FileRouteTypes {
     | '/ru/apps/$slug'
     | '/ru/faq/$slug'
     | '/ru/image_/$tool'
+    | '/ru/learn_/logic'
     | '/ru/movzu/$slug'
     | '/ru/muqayise/$slug'
     | '/ru/nece/$slug'
@@ -3026,6 +3205,7 @@ export interface FileRouteTypes {
     | '/tr/apps/$slug'
     | '/tr/faq/$slug'
     | '/tr/image_/$tool'
+    | '/tr/learn_/logic'
     | '/tr/movzu/$slug'
     | '/tr/muqayise/$slug'
     | '/tr/nece/$slug'
@@ -3052,6 +3232,7 @@ export interface RootRouteChildren {
   ImageRoute: typeof ImageRoute
   LearnRoute: typeof LearnRoute
   LogicRoute: typeof LogicRoute
+  MirrorRoute: typeof MirrorRoute
   MovzuRoute: typeof MovzuRouteWithChildren
   MuqayiseRoute: typeof MuqayiseRouteWithChildren
   NeceRoute: typeof NeceRouteWithChildren
@@ -3065,6 +3246,7 @@ export interface RootRouteChildren {
   QrRoute: typeof QrRoute
   RuRoute: typeof RuRouteWithChildren
   SeoRoute: typeof SeoRoute
+  ShortcutsRoute: typeof ShortcutsRoute
   SozRoute: typeof SozRouteWithChildren
   SozSayiRoute: typeof SozSayiRoute
   StudioRoute: typeof StudioRoute
@@ -3085,6 +3267,7 @@ export interface RootRouteChildren {
   AppsSlugRoute: typeof AppsSlugRoute
   GuidesTopicRoute: typeof GuidesTopicRoute
   ImageToolRoute: typeof ImageToolRoute
+  LearnLogicRoute: typeof LearnLogicRoute
   PdfToolRoute: typeof PdfToolRoute
   ProgrammingTopicRoute: typeof ProgrammingTopicRoute
   ResurslarSlugRoute: typeof ResurslarSlugRoute
@@ -3187,6 +3370,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LogicRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/mirror': {
+      id: '/mirror'
+      path: '/mirror'
+      fullPath: '/mirror'
+      preLoaderRoute: typeof MirrorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/movzu': {
       id: '/movzu'
       path: '/movzu'
@@ -3276,6 +3466,13 @@ declare module '@tanstack/react-router' {
       path: '/seo'
       fullPath: '/seo'
       preLoaderRoute: typeof SeoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shortcuts': {
+      id: '/shortcuts'
+      path: '/shortcuts'
+      fullPath: '/shortcuts'
+      preLoaderRoute: typeof ShortcutsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/soz': {
@@ -3481,6 +3678,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArLogicRouteImport
       parentRoute: typeof ArRoute
     }
+    '/ar/mirror': {
+      id: '/ar/mirror'
+      path: '/mirror'
+      fullPath: '/ar/mirror'
+      preLoaderRoute: typeof ArMirrorRouteImport
+      parentRoute: typeof ArRoute
+    }
     '/ar/movzu': {
       id: '/ar/movzu'
       path: '/movzu'
@@ -3549,6 +3753,13 @@ declare module '@tanstack/react-router' {
       path: '/seo'
       fullPath: '/ar/seo'
       preLoaderRoute: typeof ArSeoRouteImport
+      parentRoute: typeof ArRoute
+    }
+    '/ar/shortcuts': {
+      id: '/ar/shortcuts'
+      path: '/shortcuts'
+      fullPath: '/ar/shortcuts'
+      preLoaderRoute: typeof ArShortcutsRouteImport
       parentRoute: typeof ArRoute
     }
     '/ar/soz': {
@@ -3719,6 +3930,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EnLogicRouteImport
       parentRoute: typeof EnRoute
     }
+    '/en/mirror': {
+      id: '/en/mirror'
+      path: '/mirror'
+      fullPath: '/en/mirror'
+      preLoaderRoute: typeof EnMirrorRouteImport
+      parentRoute: typeof EnRoute
+    }
     '/en/movzu': {
       id: '/en/movzu'
       path: '/movzu'
@@ -3787,6 +4005,13 @@ declare module '@tanstack/react-router' {
       path: '/seo'
       fullPath: '/en/seo'
       preLoaderRoute: typeof EnSeoRouteImport
+      parentRoute: typeof EnRoute
+    }
+    '/en/shortcuts': {
+      id: '/en/shortcuts'
+      path: '/shortcuts'
+      fullPath: '/en/shortcuts'
+      preLoaderRoute: typeof EnShortcutsRouteImport
       parentRoute: typeof EnRoute
     }
     '/en/soz': {
@@ -3906,6 +4131,13 @@ declare module '@tanstack/react-router' {
       path: '/image/$tool'
       fullPath: '/image/$tool'
       preLoaderRoute: typeof ImageToolRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/learn_/logic': {
+      id: '/learn_/logic'
+      path: '/learn/logic'
+      fullPath: '/learn/logic'
+      preLoaderRoute: typeof LearnLogicRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/movzu/$slug': {
@@ -4069,6 +4301,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RuLogicRouteImport
       parentRoute: typeof RuRoute
     }
+    '/ru/mirror': {
+      id: '/ru/mirror'
+      path: '/mirror'
+      fullPath: '/ru/mirror'
+      preLoaderRoute: typeof RuMirrorRouteImport
+      parentRoute: typeof RuRoute
+    }
     '/ru/movzu': {
       id: '/ru/movzu'
       path: '/movzu'
@@ -4137,6 +4376,13 @@ declare module '@tanstack/react-router' {
       path: '/seo'
       fullPath: '/ru/seo'
       preLoaderRoute: typeof RuSeoRouteImport
+      parentRoute: typeof RuRoute
+    }
+    '/ru/shortcuts': {
+      id: '/ru/shortcuts'
+      path: '/shortcuts'
+      fullPath: '/ru/shortcuts'
+      preLoaderRoute: typeof RuShortcutsRouteImport
       parentRoute: typeof RuRoute
     }
     '/ru/soz': {
@@ -4321,6 +4567,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TrLogicRouteImport
       parentRoute: typeof TrRoute
     }
+    '/tr/mirror': {
+      id: '/tr/mirror'
+      path: '/mirror'
+      fullPath: '/tr/mirror'
+      preLoaderRoute: typeof TrMirrorRouteImport
+      parentRoute: typeof TrRoute
+    }
     '/tr/movzu': {
       id: '/tr/movzu'
       path: '/movzu'
@@ -4389,6 +4642,13 @@ declare module '@tanstack/react-router' {
       path: '/seo'
       fullPath: '/tr/seo'
       preLoaderRoute: typeof TrSeoRouteImport
+      parentRoute: typeof TrRoute
+    }
+    '/tr/shortcuts': {
+      id: '/tr/shortcuts'
+      path: '/shortcuts'
+      fullPath: '/tr/shortcuts'
+      preLoaderRoute: typeof TrShortcutsRouteImport
       parentRoute: typeof TrRoute
     }
     '/tr/soz': {
@@ -4510,6 +4770,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArImageToolRouteImport
       parentRoute: typeof ArRoute
     }
+    '/ar/learn_/logic': {
+      id: '/ar/learn_/logic'
+      path: '/learn/logic'
+      fullPath: '/ar/learn/logic'
+      preLoaderRoute: typeof ArLearnLogicRouteImport
+      parentRoute: typeof ArRoute
+    }
     '/ar/movzu/$slug': {
       id: '/ar/movzu/$slug'
       path: '/$slug'
@@ -4592,6 +4859,13 @@ declare module '@tanstack/react-router' {
       path: '/image/$tool'
       fullPath: '/en/image/$tool'
       preLoaderRoute: typeof EnImageToolRouteImport
+      parentRoute: typeof EnRoute
+    }
+    '/en/learn_/logic': {
+      id: '/en/learn_/logic'
+      path: '/learn/logic'
+      fullPath: '/en/learn/logic'
+      preLoaderRoute: typeof EnLearnLogicRouteImport
       parentRoute: typeof EnRoute
     }
     '/en/movzu/$slug': {
@@ -4699,6 +4973,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RuImageToolRouteImport
       parentRoute: typeof RuRoute
     }
+    '/ru/learn_/logic': {
+      id: '/ru/learn_/logic'
+      path: '/learn/logic'
+      fullPath: '/ru/learn/logic'
+      preLoaderRoute: typeof RuLearnLogicRouteImport
+      parentRoute: typeof RuRoute
+    }
     '/ru/movzu/$slug': {
       id: '/ru/movzu/$slug'
       path: '/$slug'
@@ -4788,6 +5069,13 @@ declare module '@tanstack/react-router' {
       path: '/image/$tool'
       fullPath: '/tr/image/$tool'
       preLoaderRoute: typeof TrImageToolRouteImport
+      parentRoute: typeof TrRoute
+    }
+    '/tr/learn_/logic': {
+      id: '/tr/learn_/logic'
+      path: '/learn/logic'
+      fullPath: '/tr/learn/logic'
+      preLoaderRoute: typeof TrLearnLogicRouteImport
       parentRoute: typeof TrRoute
     }
     '/tr/movzu/$slug': {
@@ -4966,6 +5254,7 @@ interface ArRouteChildren {
   ArImageRoute: typeof ArImageRoute
   ArLearnRoute: typeof ArLearnRoute
   ArLogicRoute: typeof ArLogicRoute
+  ArMirrorRoute: typeof ArMirrorRoute
   ArMovzuRoute: typeof ArMovzuRouteWithChildren
   ArMuqayiseRoute: typeof ArMuqayiseRouteWithChildren
   ArNeceRoute: typeof ArNeceRouteWithChildren
@@ -4976,6 +5265,7 @@ interface ArRouteChildren {
   ArPlannerRoute: typeof ArPlannerRoute
   ArQrRoute: typeof ArQrRoute
   ArSeoRoute: typeof ArSeoRoute
+  ArShortcutsRoute: typeof ArShortcutsRoute
   ArSozRoute: typeof ArSozRouteWithChildren
   ArSozSayiRoute: typeof ArSozSayiRoute
   ArStudioRoute: typeof ArStudioRoute
@@ -4990,6 +5280,7 @@ interface ArRouteChildren {
   ArXetaRoute: typeof ArXetaRouteWithChildren
   ArZipRoute: typeof ArZipRoute
   ArImageToolRoute: typeof ArImageToolRoute
+  ArLearnLogicRoute: typeof ArLearnLogicRoute
   ArPdfToolRoute: typeof ArPdfToolRoute
   ArProgrammingSlugRoute: typeof ArProgrammingSlugRoute
 }
@@ -5006,6 +5297,7 @@ const ArRouteChildren: ArRouteChildren = {
   ArImageRoute: ArImageRoute,
   ArLearnRoute: ArLearnRoute,
   ArLogicRoute: ArLogicRoute,
+  ArMirrorRoute: ArMirrorRoute,
   ArMovzuRoute: ArMovzuRouteWithChildren,
   ArMuqayiseRoute: ArMuqayiseRouteWithChildren,
   ArNeceRoute: ArNeceRouteWithChildren,
@@ -5016,6 +5308,7 @@ const ArRouteChildren: ArRouteChildren = {
   ArPlannerRoute: ArPlannerRoute,
   ArQrRoute: ArQrRoute,
   ArSeoRoute: ArSeoRoute,
+  ArShortcutsRoute: ArShortcutsRoute,
   ArSozRoute: ArSozRouteWithChildren,
   ArSozSayiRoute: ArSozSayiRoute,
   ArStudioRoute: ArStudioRoute,
@@ -5030,6 +5323,7 @@ const ArRouteChildren: ArRouteChildren = {
   ArXetaRoute: ArXetaRouteWithChildren,
   ArZipRoute: ArZipRoute,
   ArImageToolRoute: ArImageToolRoute,
+  ArLearnLogicRoute: ArLearnLogicRoute,
   ArPdfToolRoute: ArPdfToolRoute,
   ArProgrammingSlugRoute: ArProgrammingSlugRoute,
 }
@@ -5146,6 +5440,7 @@ interface EnRouteChildren {
   EnImageRoute: typeof EnImageRoute
   EnLearnRoute: typeof EnLearnRoute
   EnLogicRoute: typeof EnLogicRoute
+  EnMirrorRoute: typeof EnMirrorRoute
   EnMovzuRoute: typeof EnMovzuRouteWithChildren
   EnMuqayiseRoute: typeof EnMuqayiseRouteWithChildren
   EnNeceRoute: typeof EnNeceRouteWithChildren
@@ -5156,6 +5451,7 @@ interface EnRouteChildren {
   EnPlannerRoute: typeof EnPlannerRoute
   EnQrRoute: typeof EnQrRoute
   EnSeoRoute: typeof EnSeoRoute
+  EnShortcutsRoute: typeof EnShortcutsRoute
   EnSozRoute: typeof EnSozRouteWithChildren
   EnSozSayiRoute: typeof EnSozSayiRoute
   EnStudioRoute: typeof EnStudioRoute
@@ -5170,6 +5466,7 @@ interface EnRouteChildren {
   EnXetaRoute: typeof EnXetaRouteWithChildren
   EnZipRoute: typeof EnZipRoute
   EnImageToolRoute: typeof EnImageToolRoute
+  EnLearnLogicRoute: typeof EnLearnLogicRoute
   EnPdfToolRoute: typeof EnPdfToolRoute
   EnProgrammingSlugRoute: typeof EnProgrammingSlugRoute
 }
@@ -5186,6 +5483,7 @@ const EnRouteChildren: EnRouteChildren = {
   EnImageRoute: EnImageRoute,
   EnLearnRoute: EnLearnRoute,
   EnLogicRoute: EnLogicRoute,
+  EnMirrorRoute: EnMirrorRoute,
   EnMovzuRoute: EnMovzuRouteWithChildren,
   EnMuqayiseRoute: EnMuqayiseRouteWithChildren,
   EnNeceRoute: EnNeceRouteWithChildren,
@@ -5196,6 +5494,7 @@ const EnRouteChildren: EnRouteChildren = {
   EnPlannerRoute: EnPlannerRoute,
   EnQrRoute: EnQrRoute,
   EnSeoRoute: EnSeoRoute,
+  EnShortcutsRoute: EnShortcutsRoute,
   EnSozRoute: EnSozRouteWithChildren,
   EnSozSayiRoute: EnSozSayiRoute,
   EnStudioRoute: EnStudioRoute,
@@ -5210,6 +5509,7 @@ const EnRouteChildren: EnRouteChildren = {
   EnXetaRoute: EnXetaRouteWithChildren,
   EnZipRoute: EnZipRoute,
   EnImageToolRoute: EnImageToolRoute,
+  EnLearnLogicRoute: EnLearnLogicRoute,
   EnPdfToolRoute: EnPdfToolRoute,
   EnProgrammingSlugRoute: EnProgrammingSlugRoute,
 }
@@ -5393,6 +5693,7 @@ interface RuRouteChildren {
   RuImageRoute: typeof RuImageRoute
   RuLearnRoute: typeof RuLearnRoute
   RuLogicRoute: typeof RuLogicRoute
+  RuMirrorRoute: typeof RuMirrorRoute
   RuMovzuRoute: typeof RuMovzuRouteWithChildren
   RuMuqayiseRoute: typeof RuMuqayiseRouteWithChildren
   RuNeceRoute: typeof RuNeceRouteWithChildren
@@ -5403,6 +5704,7 @@ interface RuRouteChildren {
   RuPlannerRoute: typeof RuPlannerRoute
   RuQrRoute: typeof RuQrRoute
   RuSeoRoute: typeof RuSeoRoute
+  RuShortcutsRoute: typeof RuShortcutsRoute
   RuSozRoute: typeof RuSozRouteWithChildren
   RuSozSayiRoute: typeof RuSozSayiRoute
   RuStudioRoute: typeof RuStudioRoute
@@ -5417,6 +5719,7 @@ interface RuRouteChildren {
   RuXetaRoute: typeof RuXetaRouteWithChildren
   RuZipRoute: typeof RuZipRoute
   RuImageToolRoute: typeof RuImageToolRoute
+  RuLearnLogicRoute: typeof RuLearnLogicRoute
   RuPdfToolRoute: typeof RuPdfToolRoute
   RuProgrammingSlugRoute: typeof RuProgrammingSlugRoute
   RuResourcesSlugRoute: typeof RuResourcesSlugRoute
@@ -5434,6 +5737,7 @@ const RuRouteChildren: RuRouteChildren = {
   RuImageRoute: RuImageRoute,
   RuLearnRoute: RuLearnRoute,
   RuLogicRoute: RuLogicRoute,
+  RuMirrorRoute: RuMirrorRoute,
   RuMovzuRoute: RuMovzuRouteWithChildren,
   RuMuqayiseRoute: RuMuqayiseRouteWithChildren,
   RuNeceRoute: RuNeceRouteWithChildren,
@@ -5444,6 +5748,7 @@ const RuRouteChildren: RuRouteChildren = {
   RuPlannerRoute: RuPlannerRoute,
   RuQrRoute: RuQrRoute,
   RuSeoRoute: RuSeoRoute,
+  RuShortcutsRoute: RuShortcutsRoute,
   RuSozRoute: RuSozRouteWithChildren,
   RuSozSayiRoute: RuSozSayiRoute,
   RuStudioRoute: RuStudioRoute,
@@ -5458,6 +5763,7 @@ const RuRouteChildren: RuRouteChildren = {
   RuXetaRoute: RuXetaRouteWithChildren,
   RuZipRoute: RuZipRoute,
   RuImageToolRoute: RuImageToolRoute,
+  RuLearnLogicRoute: RuLearnLogicRoute,
   RuPdfToolRoute: RuPdfToolRoute,
   RuProgrammingSlugRoute: RuProgrammingSlugRoute,
   RuResourcesSlugRoute: RuResourcesSlugRoute,
@@ -5595,6 +5901,7 @@ interface TrRouteChildren {
   TrImageRoute: typeof TrImageRoute
   TrLearnRoute: typeof TrLearnRoute
   TrLogicRoute: typeof TrLogicRoute
+  TrMirrorRoute: typeof TrMirrorRoute
   TrMovzuRoute: typeof TrMovzuRouteWithChildren
   TrMuqayiseRoute: typeof TrMuqayiseRouteWithChildren
   TrNeceRoute: typeof TrNeceRouteWithChildren
@@ -5605,6 +5912,7 @@ interface TrRouteChildren {
   TrPlannerRoute: typeof TrPlannerRoute
   TrQrRoute: typeof TrQrRoute
   TrSeoRoute: typeof TrSeoRoute
+  TrShortcutsRoute: typeof TrShortcutsRoute
   TrSozRoute: typeof TrSozRouteWithChildren
   TrSozSayiRoute: typeof TrSozSayiRoute
   TrStudioRoute: typeof TrStudioRoute
@@ -5619,6 +5927,7 @@ interface TrRouteChildren {
   TrXetaRoute: typeof TrXetaRouteWithChildren
   TrZipRoute: typeof TrZipRoute
   TrImageToolRoute: typeof TrImageToolRoute
+  TrLearnLogicRoute: typeof TrLearnLogicRoute
   TrPdfToolRoute: typeof TrPdfToolRoute
   TrProgrammingSlugRoute: typeof TrProgrammingSlugRoute
 }
@@ -5635,6 +5944,7 @@ const TrRouteChildren: TrRouteChildren = {
   TrImageRoute: TrImageRoute,
   TrLearnRoute: TrLearnRoute,
   TrLogicRoute: TrLogicRoute,
+  TrMirrorRoute: TrMirrorRoute,
   TrMovzuRoute: TrMovzuRouteWithChildren,
   TrMuqayiseRoute: TrMuqayiseRouteWithChildren,
   TrNeceRoute: TrNeceRouteWithChildren,
@@ -5645,6 +5955,7 @@ const TrRouteChildren: TrRouteChildren = {
   TrPlannerRoute: TrPlannerRoute,
   TrQrRoute: TrQrRoute,
   TrSeoRoute: TrSeoRoute,
+  TrShortcutsRoute: TrShortcutsRoute,
   TrSozRoute: TrSozRouteWithChildren,
   TrSozSayiRoute: TrSozSayiRoute,
   TrStudioRoute: TrStudioRoute,
@@ -5659,6 +5970,7 @@ const TrRouteChildren: TrRouteChildren = {
   TrXetaRoute: TrXetaRouteWithChildren,
   TrZipRoute: TrZipRoute,
   TrImageToolRoute: TrImageToolRoute,
+  TrLearnLogicRoute: TrLearnLogicRoute,
   TrPdfToolRoute: TrPdfToolRoute,
   TrProgrammingSlugRoute: TrProgrammingSlugRoute,
 }
@@ -5702,6 +6014,7 @@ const rootRouteChildren: RootRouteChildren = {
   ImageRoute: ImageRoute,
   LearnRoute: LearnRoute,
   LogicRoute: LogicRoute,
+  MirrorRoute: MirrorRoute,
   MovzuRoute: MovzuRouteWithChildren,
   MuqayiseRoute: MuqayiseRouteWithChildren,
   NeceRoute: NeceRouteWithChildren,
@@ -5715,6 +6028,7 @@ const rootRouteChildren: RootRouteChildren = {
   QrRoute: QrRoute,
   RuRoute: RuRouteWithChildren,
   SeoRoute: SeoRoute,
+  ShortcutsRoute: ShortcutsRoute,
   SozRoute: SozRouteWithChildren,
   SozSayiRoute: SozSayiRoute,
   StudioRoute: StudioRoute,
@@ -5735,6 +6049,7 @@ const rootRouteChildren: RootRouteChildren = {
   AppsSlugRoute: AppsSlugRoute,
   GuidesTopicRoute: GuidesTopicRoute,
   ImageToolRoute: ImageToolRoute,
+  LearnLogicRoute: LearnLogicRoute,
   PdfToolRoute: PdfToolRoute,
   ProgrammingTopicRoute: ProgrammingTopicRoute,
   ResurslarSlugRoute: ResurslarSlugRoute,

@@ -23,6 +23,11 @@ function newCourse(name: string, file: string, pages: string[], c: LCopy): Cours
 
 type Mode = { kind: "home" } | { kind: "test"; ids: string[]; review: boolean } | { kind: "cards"; ids: string[] } | { kind: "stats" };
 
+const LEARN_SECTIONS: { path: string; icon: string; name: string; desc: Record<string, string> }[] = [
+  { path: "/learn/logic", icon: "⚡", name: "Logic Lab", desc: { az: "Məntiq qapıları ilə sxem qur və sına", en: "Build and test logic gate circuits", tr: "Mantık kapılarıyla devre kurun", ar: "ابنِ دوائر البوابات المنطقية واختبرها", ru: "Собирайте схемы из логических вентилей" } },
+  { path: "/shortcuts", icon: "⌨️", name: "Shortcuts", desc: { az: "VS Code, Chrome, Windows, macOS qısayollarını məşq et", en: "Practise VS Code, Chrome, Windows and macOS shortcuts", tr: "VS Code, Chrome, Windows, macOS kısayollarını çalışın", ar: "تدرّب على اختصارات VS Code وChrome وWindows وmacOS", ru: "Тренируйте сочетания VS Code, Chrome, Windows, macOS" } },
+];
+
 export function LearnPage() {
   const { lang } = useI18n();
   const c = LC[lang] ?? LC.en;
@@ -70,6 +75,14 @@ export function LearnPage() {
             <p className="mt-2 text-sm text-muted md:text-base">{c.lead}</p>
             <p className="mt-2 text-xs text-muted">{c.grounded}</p>
           </header>
+          <nav className="mb-5 grid gap-2 sm:grid-cols-2" data-testid="learn-sections">
+            {LEARN_SECTIONS.map((x) => (
+              <a key={x.path} href={localeHref(lang, x.path)} className="flex items-center gap-3 rounded-2xl border border-[#2f6bff]/35 bg-gradient-to-r from-[#2f6bff]/15 to-[#39ff9c]/5 px-4 py-3 hover:border-[#2f6bff]">
+                <span className="text-2xl" aria-hidden="true">{x.icon}</span>
+                <span className="min-w-0"><b className="block">{x.name}</b><span className="block text-xs text-muted">{x.desc[lang] ?? x.desc.en}</span></span>
+              </a>
+            ))}
+          </nav>
           <label className={ui.drop} onDragOver={(e) => e.preventDefault()} onDrop={(e) => { e.preventDefault(); void read(e.dataTransfer.files[0]); }}>
             <span><FileUp className="mx-auto mb-2 size-7 opacity-80" /><b>{c.pick}</b><br /><span className="text-muted">{busy || c.drop}</span></span>
             <input className="sr-only" type="file" accept="application/pdf,.pdf" data-testid="learn-pdf" onChange={(e) => { void read(e.target.files?.[0]); e.target.value = ""; }} />

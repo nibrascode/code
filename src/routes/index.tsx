@@ -382,6 +382,18 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
               </svg>
               <span>Site Doctor</span>
             </a>
+            <a className="nx-apk-bar" href={localeHref(lang, "/learn/logic")} data-testid="home-learn-logic">
+              <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h5a5 5 0 0 1 0 10H4zM14 12h6M2 9.5h2M2 14.5h2" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+              <span>Logic Lab</span>
+            </a>
+            <a className="nx-apk-bar" href={localeHref(lang, "/mirror")} data-testid="home-mirror">
+              <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h4M8 12c3 0 3-6 6-6h3M8 12c3 0 3 6 6 6h3M8 12h9" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+              <span>Site Mirror</span>
+            </a>
+            <a className="nx-apk-bar" href={localeHref(lang, "/shortcuts")} data-testid="home-shortcuts">
+              <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18v10H3zM6 10h1M9 10h1M12 10h1M15 10h1M18 10h0M7 14h10" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+              <span>Shortcuts</span>
+            </a>
             <a className="nx-ai-bar nx-qr-bar" href={localeHref(lang, "/pdf")}>
               <svg className="nx-job nx-job-pdf" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M7 3.2h6.6L19 8.4V20a1.4 1.4 0 0 1-1.4 1.4H7.4A1.4 1.4 0 0 1 6 20V4.6A1.4 1.4 0 0 1 7.4 3.2H7Z" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
