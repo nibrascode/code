@@ -10,7 +10,7 @@ export function stripLocalePrefix(pathname: string): { lang: Lang | null; path: 
 }
 
 export function isSplitPage(path: string) {
-  return path === "/about" || path === "/contact" || path === "/terms" || path === "/trust" || path === "/nedir" || path === "/apps" || path === "/qr" || path === "/erase" || path === "/image" || /^\/image\/(resize|convert|edit)$/.test(path) || path === "/vcard" || path === "/zip" || path === "/workspace" || path === "/learn" || path === "/doctor" || path === "/planner" || path === "/calc" || path === "/ai" || path === "/soz-sayi" || path === "/faiz" || path === "/wifi" || path === "/seo" || path === "/flow" || path === "/logic" || path === "/unknown" || path === "/pdf" || /^\/pdf\/[a-z-]+$/.test(path) || /^\/apps\/[^/]+$/.test(path) || path === "/oyun" || /^\/oyun\/[a-z0-9-]+$/.test(path);
+  return path === "/about" || path === "/contact" || path === "/terms" || path === "/trust" || path === "/nedir" || path === "/apps" || path === "/qr" || path === "/erase" || path === "/image" || /^\/image\/(resize|convert|edit)$/.test(path) || path === "/vcard" || path === "/zip" || path === "/workspace" || path === "/learn" || path === "/studio" || path === "/doctor" || path === "/planner" || path === "/calc" || path === "/ai" || path === "/soz-sayi" || path === "/faiz" || path === "/wifi" || path === "/seo" || path === "/flow" || path === "/logic" || path === "/unknown" || path === "/pdf" || /^\/pdf\/[a-z-]+$/.test(path) || /^\/apps\/[^/]+$/.test(path) || path === "/oyun" || /^\/oyun\/[a-z0-9-]+$/.test(path);
 }
 
 export function homePath(lang: Lang) {

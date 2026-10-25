@@ -260,25 +260,48 @@ function send(res, status, body) {
   res.end(JSON.stringify(body));
 }
 
+const BODY_LIMIT = 1024;
+const URL_LIMIT = 2048;
+
+// Only a tiny JSON object {"url": "..."} is accepted; anything else (files, forms, big bodies) is refused.
 async function readJson(req) {
-  if (req.body && typeof req.body === "object" && !Buffer.isBuffer(req.body)) return req.body;
-  if (typeof req.body === "string") return JSON.parse(req.body || "{}");
+  if (req.body !== undefined && req.body !== null && req.body !== "") {
+    const raw = Buffer.isBuffer(req.body) ? req.body.toString("utf8") : typeof req.body === "string" ? req.body : JSON.stringify(req.body);
+    if (raw.length > BODY_LIMIT) throw Object.assign(new Error("big"), { code: 413 });
+    return JSON.parse(raw || "{}");
+  }
   const chunks = [];
   let size = 0;
   for await (const chunk of req) {
     size += chunk.length;
-    if (size > 4000) return {};
+    if (size > BODY_LIMIT) throw Object.assign(new Error("big"), { code: 413 });
     chunks.push(chunk);
   }
   return JSON.parse(Buffer.concat(chunks).toString("utf8") || "{}");
 }
 
 export default async function handler(req, res) {
-  if (req.method !== "POST") return send(res, 405, { ok: false, error: "method" });
+  if (req.method !== "POST") {
+    res.setHeader("allow", "POST");
+    return send(res, 405, { ok: false, error: "method" });
+  }
+  const type = String(req.headers["content-type"] || "").split(";")[0].trim().toLowerCase();
+  if (type !== "application/json") return send(res, 415, { ok: false, error: "type" });
+  const declared = Number(req.headers["content-length"] || 0);
+  if (declared > BODY_LIMIT) return send(res, 413, { ok: false, error: "big" });
   if (limited(clientIp(req))) return send(res, 429, { ok: false, error: "rate" });
+  let body;
   try {
-    const body = await readJson(req);
-    const result = await diagnose(body.url);
+    body = await readJson(req);
+  } catch (e) {
+    return send(res, e && e.code === 413 ? 413 : 400, { ok: false, error: e && e.code === 413 ? "big" : "bad-url" });
+  }
+  const keys = body && typeof body === "object" && !Array.isArray(body) ? Object.keys(body) : null;
+  if (!keys || keys.some((k) => k !== "url") || typeof body.url !== "string" || !body.url.trim() || body.url.length > URL_LIMIT) {
+    return send(res, 400, { ok: false, error: "bad-url" });
+  }
+  try {
+    const result = await diagnose(body.url.trim());
     send(res, result.ok ? 200 : 400, result);
   } catch {
     send(res, 400, { ok: false, error: "bad-url" });

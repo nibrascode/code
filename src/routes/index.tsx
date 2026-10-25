@@ -355,6 +355,12 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
               </svg>
               <span>{TOOLS_PAGE.heading[lang]}</span>
             </a>
+            <a className="nx-apk-bar nx-studio-bar" href={localeHref(lang, "/studio")} data-testid="home-studio">
+              <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M8.5 7 3.5 12l5 5M15.5 7l5 5-5 5M13.5 4.5l-3 15" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              <span>Nibras Studio</span>
+            </a>
             <a className="nx-apk-bar" href={localeHref(lang, "/workspace")} data-testid="home-workspace">
               <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true">
                 <rect x="3" y="3.5" width="7.5" height="7.5" rx="2" fill="none" stroke="currentColor" strokeWidth="1.6" />

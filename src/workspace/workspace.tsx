@@ -31,7 +31,7 @@ export type Project = {
   activeFile: string;
 };
 
-const KEY = "nibras-workspace-v1";
+export const KEY = "nibras-workspace-v1";
 const DEFAULT_FILES: CodeFile[] = [
   { name: "index.html", content: "<!doctype html>\n<html lang=\"az\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Layihə</title>\n  <link rel=\"stylesheet\" href=\"style.css\">\n</head>\n<body>\n  <h1>Salam, dünya!</h1>\n  <button id=\"btn\">Bas</button>\n  <p id=\"out\"></p>\n  <script src=\"script.js\"></script>\n</body>\n</html>\n" },
   { name: "style.css", content: "body {\n  font-family: system-ui, sans-serif;\n  padding: 24px;\n  background: #0b1020;\n  color: #f1f4ff;\n}\nbutton {\n  padding: 10px 18px;\n  border: 0;\n  border-radius: 12px;\n  background: #2f6bff;\n  color: #fff;\n  font-size: 16px;\n}\n" },
@@ -40,14 +40,14 @@ const DEFAULT_FILES: CodeFile[] = [
 const SAMPLE_TEXT =
   "Fotosintez yaşıl bitkilərin günəş işığından istifadə edərək qida hazırladığı prosesdir. Bu proses əsasən yarpaqlarda, xloroplast adlanan hissəciklərdə gedir. Xloroplastların içində olan xlorofil piqmenti işığı udur və bitkiyə yaşıl rəng verir. Fotosintez zamanı bitki havadan karbon qazını, torpaqdan isə suyu götürür. Nəticədə qlükoza əmələ gəlir və atmosferə oksigen buraxılır. Qlükoza bitkinin böyüməsi üçün enerji mənbəyidir. Yer kürəsində oksigenin böyük hissəsi okeanlardakı yosunlar tərəfindən istehsal olunur. İşıq az olanda fotosintezin sürəti azalır.";
 
-function uid() {
+export function uid() {
   return Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
 }
-function blank(name: string): Project {
+export function blank(name: string): Project {
   const now = Date.now();
   return { id: uid(), name, createdAt: now, updatedAt: now, last: "act_created", tab: "pdf", pdfName: "", pdfPages: 0, text: "", qCount: 5, questions: [], docTitle: name, docBody: "", files: DEFAULT_FILES.map((f) => ({ ...f })), activeFile: "index.html" };
 }
-function load(): Project[] {
+export function loadProjects(): Project[] {
   try {
     const raw = JSON.parse(localStorage.getItem(KEY) || "[]");
     return Array.isArray(raw) ? raw.filter((p) => p && p.id) : [];
@@ -55,7 +55,7 @@ function load(): Project[] {
     return [];
   }
 }
-function persist(list: Project[]) {
+export function persistProjects(list: Project[]) {
   try {
     localStorage.setItem(KEY, JSON.stringify(list));
     return true;
@@ -63,7 +63,7 @@ function persist(list: Project[]) {
     return false;
   }
 }
-function ago(t: number, c: WsCopy) {
+export function ago(t: number, c: WsCopy) {
   const m = Math.floor((Date.now() - t) / 60000);
   if (m < 1) return c.justNow;
   if (m < 60) return `${m} ${c.minAgo}`;
@@ -80,13 +80,13 @@ export function WorkspacePage() {
   const [openId, setOpenId] = useState<string | null>(null);
 
   useEffect(() => {
-    setList(load());
+    setList(loadProjects());
     const id = new URLSearchParams(location.search).get("p");
     if (id) setOpenId(id);
   }, []);
   const commit = useCallback((next: Project[]) => {
     setList(next);
-    persist(next);
+    persistProjects(next);
   }, []);
   const go = (id: string | null) => {
     setOpenId(id);
@@ -103,7 +103,7 @@ export function WorkspacePage() {
       setList((prev) => {
         if (!prev) return prev;
         const next = prev.map((p) => (p.id === id ? { ...p, ...patch, updatedAt: Date.now(), last: act === "act_edit" && p.last !== "act_created" ? p.last : act } : p));
-        persist(next);
+        persistProjects(next);
         return next;
       });
     },
@@ -219,6 +219,7 @@ function Home({ c, list, commit, open }: { c: WsCopy; list: Project[] | null; co
 }
 
 function ProjectView({ p, c, update, onBack }: { p: Project; c: WsCopy; update: (id: string, patch: Partial<Project>, act?: Act) => void; onBack: () => void }) {
+  const { lang } = useI18n();
   const set = (patch: Partial<Project>, act?: Act) => update(p.id, patch, act);
   const tabs: { id: Tab; label: string; icon: typeof FileText }[] = [
     { id: "pdf", label: c.tabPdf, icon: FileUp },
@@ -258,7 +259,14 @@ function ProjectView({ p, c, update, onBack }: { p: Project; c: WsCopy; update: 
       {p.tab === "pdf" ? <PdfTool p={p} c={c} set={set} /> : null}
       {p.tab === "q" ? <QTool p={p} c={c} set={set} /> : null}
       {p.tab === "doc" ? <DocTool p={p} c={c} set={set} /> : null}
-      {p.tab === "code" ? <CodeTool p={p} c={c} set={set} /> : null}
+      {p.tab === "code" ? (
+        <>
+          <a className="mb-3 flex items-center justify-between gap-3 rounded-2xl border border-[#2f6bff]/40 bg-gradient-to-r from-[#2f6bff]/20 to-[#7a5cff]/15 px-4 py-3 text-sm hover:border-[#2f6bff]" href={localeHref(lang, "/studio") + "?p=" + p.id} data-testid="ws-to-studio">
+            <span><b>Nibras Studio</b> · {c.studioHint}</span><span aria-hidden="true">→</span>
+          </a>
+          <CodeTool p={p} c={c} set={set} />
+        </>
+      ) : null}
     </>
   );
 }

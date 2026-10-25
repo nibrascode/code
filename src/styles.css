@@ -11585,3 +11585,9 @@ html[lang="ar"] .why-lead.topic-body,
 .ide-chip:hover { background: rgb(255 255 255 / .09); border-color: rgb(255 255 255 / .18); }
 .ide .cm-editor { height: 100%; }
 .ide .cm-editor.cm-focused { outline: none; }
+.nx-apk-bar.nx-studio-bar { background: linear-gradient(135deg, #2f6bff, #7a5cff); border-color: transparent; color: #fff; box-shadow: 0 10px 30px -12px #2f6bff; }
+.nx-apk-bar.nx-studio-bar:hover { filter: brightness(1.08); }
+.studio-ide.studio-light { filter: invert(0.92) hue-rotate(180deg); }
+.studio-ide.studio-light iframe, .studio-ide.studio-light img { filter: invert(1) hue-rotate(180deg); }
+.studio-ide .cm-editor { height: 100%; }
+.studio-ide .cm-editor.cm-focused { outline: none; }

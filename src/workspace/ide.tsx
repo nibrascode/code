@@ -18,7 +18,7 @@ type Mode = "design" | "code" | "preview";
 type Pane = "files" | "code" | "preview";
 type Side = "explorer" | "search" | "settings";
 
-const DEVICES = [
+export const DEVICES = [
   { id: "iphone", label: "iPhone 15", w: 393, h: 852, icon: Smartphone, phone: true },
   { id: "pixel", label: "Pixel 8", w: 412, h: 915, icon: Smartphone, phone: true },
   { id: "ipad", label: "iPad mini", w: 744, h: 1133, icon: Tablet, phone: false },
@@ -26,10 +26,10 @@ const DEVICES = [
 ] as const;
 type DeviceId = (typeof DEVICES)[number]["id"] | "responsive";
 
-const safeName = (s: string) => (s.trim() || "nibras").replace(/[\\/:*?"<>|]+/g, "-").slice(0, 80);
-const cleanPath = (s: string) => s.trim().replace(/\\/g, "/").replace(/^\/+|\/+$/g, "").replace(/\/{2,}/g, "/").replace(/[:*?"<>|]+/g, "-");
+export const safeName = (s: string) => (s.trim() || "nibras").replace(/[\\/:*?"<>|]+/g, "-").slice(0, 80);
+export const cleanPath = (s: string) => s.trim().replace(/\\/g, "/").replace(/^\/+|\/+$/g, "").replace(/\/{2,}/g, "/").replace(/[:*?"<>|]+/g, "-");
 
-function FileIcon({ name, className }: { name: string; className?: string }) {
+export function FileIcon({ name, className }: { name: string; className?: string }) {
   const ext = name.toLowerCase().split(".").pop();
   const cls = "size-3.5 shrink-0 " + (className ?? "");
   if (ext === "html" || ext === "htm") return <FileCode2 className={cls + " text-[#ff7a9a]"} />;
@@ -40,8 +40,8 @@ function FileIcon({ name, className }: { name: string; className?: string }) {
   return <File className={cls + " text-[#9aa7c7]"} />;
 }
 
-type Node = { name: string; path: string; dir: boolean; children: Node[] };
-function tree(files: CodeFile[]): Node[] {
+export type Node = { name: string; path: string; dir: boolean; children: Node[] };
+export function tree(files: CodeFile[]): Node[] {
   const root: Node = { name: "", path: "", dir: true, children: [] };
   for (const f of files) {
     const parts = f.name.split("/");
@@ -58,7 +58,7 @@ function tree(files: CodeFile[]): Node[] {
   return sort(root.children);
 }
 
-function tidy(src: string, name: string) {
+export function tidy(src: string, name: string) {
   if (!/\.(m?js|jsx|ts|tsx|css|json)$/i.test(name)) return src;
   let depth = 0;
   return src.split("\n").map((raw) => {
@@ -73,9 +73,9 @@ function tidy(src: string, name: string) {
   }).join("\n");
 }
 
-const PAGE_TEMPLATE = (title: string) => `<!doctype html>\n<html lang="az">\n<head>\n  <meta charset="utf-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1">\n  <title>${title}</title>\n  <link rel="stylesheet" href="style.css">\n</head>\n<body>\n  <h1>${title}</h1>\n  <p></p>\n</body>\n</html>\n`;
+export const PAGE_TEMPLATE = (title: string) => `<!doctype html>\n<html lang="az">\n<head>\n  <meta charset="utf-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1">\n  <title>${title}</title>\n  <link rel="stylesheet" href="style.css">\n</head>\n<body>\n  <h1>${title}</h1>\n  <p></p>\n</body>\n</html>\n`;
 
-export function CodeTool({ p, c, set }: { p: P; c: WsCopy; set: SetFn }) {
+export function CodeTool({ p, c, set, tall = false }: { p: P; c: WsCopy; set: SetFn; tall?: boolean }) {
   const { lang } = useI18n();
   const t: IdeCopy = IDE[lang] ?? IDE.en;
   const file = p.files.find((f) => f.name === p.activeFile) ?? p.files[0];
@@ -426,7 +426,7 @@ export function CodeTool({ p, c, set }: { p: P; c: WsCopy; set: SetFn }) {
         ))}
       </div>
 
-      <div className="ide-body flex lg:h-[calc(100vh-13rem)] lg:min-h-[600px]" dir="ltr">
+      <div className={"ide-body flex lg:min-h-[600px] " + (tall ? "lg:h-[calc(100vh-9.5rem)]" : "lg:h-[calc(100vh-13rem)]")} dir="ltr">
         {/* icon rail */}
         <nav className="hidden w-12 shrink-0 flex-col items-center gap-1 border-e border-white/[0.06] bg-[#080b16] py-2 lg:flex" aria-label="IDE">
           {([["explorer", Files, t.explorer], ["search", Search, t.search], ["settings", Settings2, t.settings]] as const).map(([id, Icon, label]) => (

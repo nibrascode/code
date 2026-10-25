@@ -92,6 +92,7 @@ export function StartDesk({ lang }: { lang: Lang }) {
       title: COPY.code[lang],
       lead: COPY.codeLead[lang],
       links: [
+        [localeHref(lang, "/studio"), "Nibras Studio"],
         [localeHref(lang, "/workspace"), "Workspace"],
         [localeHref(lang, "/doctor"), "Site Doctor"],
         [toolPath(lang, "json"), "JSON"],

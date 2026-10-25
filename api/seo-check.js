@@ -262,6 +262,11 @@ export default async function handler(req, res) {
     send(res, 405, { ok: false, error: "bad-url" });
     return;
   }
+  // Small JSON only: no files or forms.
+  if (String(req.headers["content-type"] || "").split(";")[0].trim().toLowerCase() !== "application/json" || Number(req.headers["content-length"] || 0) > 4000) {
+    send(res, 415, { ok: false, error: "bad-url" });
+    return;
+  }
   if (limited(clientIp(req))) {
     send(res, 429, { ok: false, error: "rate" });
     return;

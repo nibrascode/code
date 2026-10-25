@@ -37,6 +37,7 @@ import { Route as RuRouteImport } from './routes/ru'
 import { Route as SeoRouteImport } from './routes/seo'
 import { Route as SozRouteImport } from './routes/soz'
 import { Route as SozSayiRouteImport } from './routes/soz-sayi'
+import { Route as StudioRouteImport } from './routes/studio'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as ToolsRouteImport } from './routes/tools'
 import { Route as TrRouteImport } from './routes/tr'
@@ -74,6 +75,7 @@ import { Route as ArQrRouteImport } from './routes/ar.qr'
 import { Route as ArSeoRouteImport } from './routes/ar.seo'
 import { Route as ArSozRouteImport } from './routes/ar.soz'
 import { Route as ArSozSayiRouteImport } from './routes/ar.soz-sayi'
+import { Route as ArStudioRouteImport } from './routes/ar.studio'
 import { Route as ArTermsRouteImport } from './routes/ar.terms'
 import { Route as ArToolsRouteImport } from './routes/ar.tools'
 import { Route as ArTrustRouteImport } from './routes/ar.trust'
@@ -106,6 +108,7 @@ import { Route as EnQrRouteImport } from './routes/en.qr'
 import { Route as EnSeoRouteImport } from './routes/en.seo'
 import { Route as EnSozRouteImport } from './routes/en.soz'
 import { Route as EnSozSayiRouteImport } from './routes/en.soz-sayi'
+import { Route as EnStudioRouteImport } from './routes/en.studio'
 import { Route as EnTermsRouteImport } from './routes/en.terms'
 import { Route as EnToolsRouteImport } from './routes/en.tools'
 import { Route as EnTrustRouteImport } from './routes/en.trust'
@@ -154,6 +157,7 @@ import { Route as RuQrRouteImport } from './routes/ru.qr'
 import { Route as RuSeoRouteImport } from './routes/ru.seo'
 import { Route as RuSozRouteImport } from './routes/ru.soz'
 import { Route as RuSozSayiRouteImport } from './routes/ru.soz-sayi'
+import { Route as RuStudioRouteImport } from './routes/ru.studio'
 import { Route as RuTermsRouteImport } from './routes/ru.terms'
 import { Route as RuToolsRouteImport } from './routes/ru.tools'
 import { Route as RuTrustRouteImport } from './routes/ru.trust'
@@ -188,6 +192,7 @@ import { Route as TrQrRouteImport } from './routes/tr.qr'
 import { Route as TrSeoRouteImport } from './routes/tr.seo'
 import { Route as TrSozRouteImport } from './routes/tr.soz'
 import { Route as TrSozSayiRouteImport } from './routes/tr.soz-sayi'
+import { Route as TrStudioRouteImport } from './routes/tr.studio'
 import { Route as TrTermsRouteImport } from './routes/tr.terms'
 import { Route as TrToolsRouteImport } from './routes/tr.tools'
 import { Route as TrTrustRouteImport } from './routes/tr.trust'
@@ -391,6 +396,11 @@ const SozSayiRoute = SozSayiRouteImport.update({
   path: '/soz-sayi',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StudioRoute = StudioRouteImport.update({
+  id: '/studio',
+  path: '/studio',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
   path: '/terms',
@@ -576,6 +586,11 @@ const ArSozSayiRoute = ArSozSayiRouteImport.update({
   path: '/soz-sayi',
   getParentRoute: () => ArRoute,
 } as any)
+const ArStudioRoute = ArStudioRouteImport.update({
+  id: '/studio',
+  path: '/studio',
+  getParentRoute: () => ArRoute,
+} as any)
 const ArTermsRoute = ArTermsRouteImport.update({
   id: '/terms',
   path: '/terms',
@@ -734,6 +749,11 @@ const EnSozRoute = EnSozRouteImport.update({
 const EnSozSayiRoute = EnSozSayiRouteImport.update({
   id: '/soz-sayi',
   path: '/soz-sayi',
+  getParentRoute: () => EnRoute,
+} as any)
+const EnStudioRoute = EnStudioRouteImport.update({
+  id: '/studio',
+  path: '/studio',
   getParentRoute: () => EnRoute,
 } as any)
 const EnTermsRoute = EnTermsRouteImport.update({
@@ -976,6 +996,11 @@ const RuSozSayiRoute = RuSozSayiRouteImport.update({
   path: '/soz-sayi',
   getParentRoute: () => RuRoute,
 } as any)
+const RuStudioRoute = RuStudioRouteImport.update({
+  id: '/studio',
+  path: '/studio',
+  getParentRoute: () => RuRoute,
+} as any)
 const RuTermsRoute = RuTermsRouteImport.update({
   id: '/terms',
   path: '/terms',
@@ -1144,6 +1169,11 @@ const TrSozRoute = TrSozRouteImport.update({
 const TrSozSayiRoute = TrSozSayiRouteImport.update({
   id: '/soz-sayi',
   path: '/soz-sayi',
+  getParentRoute: () => TrRoute,
+} as any)
+const TrStudioRoute = TrStudioRouteImport.update({
+  id: '/studio',
+  path: '/studio',
   getParentRoute: () => TrRoute,
 } as any)
 const TrTermsRoute = TrTermsRouteImport.update({
@@ -1487,6 +1517,7 @@ export interface FileRoutesByFullPath {
   '/seo': typeof SeoRoute
   '/soz': typeof SozRouteWithChildren
   '/soz-sayi': typeof SozSayiRoute
+  '/studio': typeof StudioRoute
   '/terms': typeof TermsRoute
   '/tools': typeof ToolsRouteWithChildren
   '/tr': typeof TrRouteWithChildren
@@ -1524,6 +1555,7 @@ export interface FileRoutesByFullPath {
   '/ar/seo': typeof ArSeoRoute
   '/ar/soz': typeof ArSozRouteWithChildren
   '/ar/soz-sayi': typeof ArSozSayiRoute
+  '/ar/studio': typeof ArStudioRoute
   '/ar/terms': typeof ArTermsRoute
   '/ar/tools': typeof ArToolsRouteWithChildren
   '/ar/trust': typeof ArTrustRoute
@@ -1556,6 +1588,7 @@ export interface FileRoutesByFullPath {
   '/en/seo': typeof EnSeoRoute
   '/en/soz': typeof EnSozRouteWithChildren
   '/en/soz-sayi': typeof EnSozSayiRoute
+  '/en/studio': typeof EnStudioRoute
   '/en/terms': typeof EnTermsRoute
   '/en/tools': typeof EnToolsRouteWithChildren
   '/en/trust': typeof EnTrustRoute
@@ -1600,6 +1633,7 @@ export interface FileRoutesByFullPath {
   '/ru/seo': typeof RuSeoRoute
   '/ru/soz': typeof RuSozRouteWithChildren
   '/ru/soz-sayi': typeof RuSozSayiRoute
+  '/ru/studio': typeof RuStudioRoute
   '/ru/terms': typeof RuTermsRoute
   '/ru/tools': typeof RuToolsRouteWithChildren
   '/ru/trust': typeof RuTrustRoute
@@ -1634,6 +1668,7 @@ export interface FileRoutesByFullPath {
   '/tr/seo': typeof TrSeoRoute
   '/tr/soz': typeof TrSozRouteWithChildren
   '/tr/soz-sayi': typeof TrSozSayiRoute
+  '/tr/studio': typeof TrStudioRoute
   '/tr/terms': typeof TrTermsRoute
   '/tr/tools': typeof TrToolsRouteWithChildren
   '/tr/trust': typeof TrTrustRoute
@@ -1730,6 +1765,7 @@ export interface FileRoutesByTo {
   '/seo': typeof SeoRoute
   '/soz': typeof SozRouteWithChildren
   '/soz-sayi': typeof SozSayiRoute
+  '/studio': typeof StudioRoute
   '/terms': typeof TermsRoute
   '/tools': typeof ToolsRouteWithChildren
   '/tr': typeof TrRouteWithChildren
@@ -1766,6 +1802,7 @@ export interface FileRoutesByTo {
   '/ar/seo': typeof ArSeoRoute
   '/ar/soz': typeof ArSozRouteWithChildren
   '/ar/soz-sayi': typeof ArSozSayiRoute
+  '/ar/studio': typeof ArStudioRoute
   '/ar/terms': typeof ArTermsRoute
   '/ar/tools': typeof ArToolsRouteWithChildren
   '/ar/trust': typeof ArTrustRoute
@@ -1798,6 +1835,7 @@ export interface FileRoutesByTo {
   '/en/seo': typeof EnSeoRoute
   '/en/soz': typeof EnSozRouteWithChildren
   '/en/soz-sayi': typeof EnSozSayiRoute
+  '/en/studio': typeof EnStudioRoute
   '/en/terms': typeof EnTermsRoute
   '/en/tools': typeof EnToolsRouteWithChildren
   '/en/trust': typeof EnTrustRoute
@@ -1842,6 +1880,7 @@ export interface FileRoutesByTo {
   '/ru/seo': typeof RuSeoRoute
   '/ru/soz': typeof RuSozRouteWithChildren
   '/ru/soz-sayi': typeof RuSozSayiRoute
+  '/ru/studio': typeof RuStudioRoute
   '/ru/terms': typeof RuTermsRoute
   '/ru/tools': typeof RuToolsRouteWithChildren
   '/ru/trust': typeof RuTrustRoute
@@ -1876,6 +1915,7 @@ export interface FileRoutesByTo {
   '/tr/seo': typeof TrSeoRoute
   '/tr/soz': typeof TrSozRouteWithChildren
   '/tr/soz-sayi': typeof TrSozSayiRoute
+  '/tr/studio': typeof TrStudioRoute
   '/tr/terms': typeof TrTermsRoute
   '/tr/tools': typeof TrToolsRouteWithChildren
   '/tr/trust': typeof TrTrustRoute
@@ -1973,6 +2013,7 @@ export interface FileRoutesById {
   '/seo': typeof SeoRoute
   '/soz': typeof SozRouteWithChildren
   '/soz-sayi': typeof SozSayiRoute
+  '/studio': typeof StudioRoute
   '/terms': typeof TermsRoute
   '/tools': typeof ToolsRouteWithChildren
   '/tr': typeof TrRouteWithChildren
@@ -2010,6 +2051,7 @@ export interface FileRoutesById {
   '/ar/seo': typeof ArSeoRoute
   '/ar/soz': typeof ArSozRouteWithChildren
   '/ar/soz-sayi': typeof ArSozSayiRoute
+  '/ar/studio': typeof ArStudioRoute
   '/ar/terms': typeof ArTermsRoute
   '/ar/tools': typeof ArToolsRouteWithChildren
   '/ar/trust': typeof ArTrustRoute
@@ -2042,6 +2084,7 @@ export interface FileRoutesById {
   '/en/seo': typeof EnSeoRoute
   '/en/soz': typeof EnSozRouteWithChildren
   '/en/soz-sayi': typeof EnSozSayiRoute
+  '/en/studio': typeof EnStudioRoute
   '/en/terms': typeof EnTermsRoute
   '/en/tools': typeof EnToolsRouteWithChildren
   '/en/trust': typeof EnTrustRoute
@@ -2086,6 +2129,7 @@ export interface FileRoutesById {
   '/ru/seo': typeof RuSeoRoute
   '/ru/soz': typeof RuSozRouteWithChildren
   '/ru/soz-sayi': typeof RuSozSayiRoute
+  '/ru/studio': typeof RuStudioRoute
   '/ru/terms': typeof RuTermsRoute
   '/ru/tools': typeof RuToolsRouteWithChildren
   '/ru/trust': typeof RuTrustRoute
@@ -2120,6 +2164,7 @@ export interface FileRoutesById {
   '/tr/seo': typeof TrSeoRoute
   '/tr/soz': typeof TrSozRouteWithChildren
   '/tr/soz-sayi': typeof TrSozSayiRoute
+  '/tr/studio': typeof TrStudioRoute
   '/tr/terms': typeof TrTermsRoute
   '/tr/tools': typeof TrToolsRouteWithChildren
   '/tr/trust': typeof TrTrustRoute
@@ -2218,6 +2263,7 @@ export interface FileRouteTypes {
     | '/seo'
     | '/soz'
     | '/soz-sayi'
+    | '/studio'
     | '/terms'
     | '/tools'
     | '/tr'
@@ -2255,6 +2301,7 @@ export interface FileRouteTypes {
     | '/ar/seo'
     | '/ar/soz'
     | '/ar/soz-sayi'
+    | '/ar/studio'
     | '/ar/terms'
     | '/ar/tools'
     | '/ar/trust'
@@ -2287,6 +2334,7 @@ export interface FileRouteTypes {
     | '/en/seo'
     | '/en/soz'
     | '/en/soz-sayi'
+    | '/en/studio'
     | '/en/terms'
     | '/en/tools'
     | '/en/trust'
@@ -2331,6 +2379,7 @@ export interface FileRouteTypes {
     | '/ru/seo'
     | '/ru/soz'
     | '/ru/soz-sayi'
+    | '/ru/studio'
     | '/ru/terms'
     | '/ru/tools'
     | '/ru/trust'
@@ -2365,6 +2414,7 @@ export interface FileRouteTypes {
     | '/tr/seo'
     | '/tr/soz'
     | '/tr/soz-sayi'
+    | '/tr/studio'
     | '/tr/terms'
     | '/tr/tools'
     | '/tr/trust'
@@ -2461,6 +2511,7 @@ export interface FileRouteTypes {
     | '/seo'
     | '/soz'
     | '/soz-sayi'
+    | '/studio'
     | '/terms'
     | '/tools'
     | '/tr'
@@ -2497,6 +2548,7 @@ export interface FileRouteTypes {
     | '/ar/seo'
     | '/ar/soz'
     | '/ar/soz-sayi'
+    | '/ar/studio'
     | '/ar/terms'
     | '/ar/tools'
     | '/ar/trust'
@@ -2529,6 +2581,7 @@ export interface FileRouteTypes {
     | '/en/seo'
     | '/en/soz'
     | '/en/soz-sayi'
+    | '/en/studio'
     | '/en/terms'
     | '/en/tools'
     | '/en/trust'
@@ -2573,6 +2626,7 @@ export interface FileRouteTypes {
     | '/ru/seo'
     | '/ru/soz'
     | '/ru/soz-sayi'
+    | '/ru/studio'
     | '/ru/terms'
     | '/ru/tools'
     | '/ru/trust'
@@ -2607,6 +2661,7 @@ export interface FileRouteTypes {
     | '/tr/seo'
     | '/tr/soz'
     | '/tr/soz-sayi'
+    | '/tr/studio'
     | '/tr/terms'
     | '/tr/tools'
     | '/tr/trust'
@@ -2703,6 +2758,7 @@ export interface FileRouteTypes {
     | '/seo'
     | '/soz'
     | '/soz-sayi'
+    | '/studio'
     | '/terms'
     | '/tools'
     | '/tr'
@@ -2740,6 +2796,7 @@ export interface FileRouteTypes {
     | '/ar/seo'
     | '/ar/soz'
     | '/ar/soz-sayi'
+    | '/ar/studio'
     | '/ar/terms'
     | '/ar/tools'
     | '/ar/trust'
@@ -2772,6 +2829,7 @@ export interface FileRouteTypes {
     | '/en/seo'
     | '/en/soz'
     | '/en/soz-sayi'
+    | '/en/studio'
     | '/en/terms'
     | '/en/tools'
     | '/en/trust'
@@ -2816,6 +2874,7 @@ export interface FileRouteTypes {
     | '/ru/seo'
     | '/ru/soz'
     | '/ru/soz-sayi'
+    | '/ru/studio'
     | '/ru/terms'
     | '/ru/tools'
     | '/ru/trust'
@@ -2850,6 +2909,7 @@ export interface FileRouteTypes {
     | '/tr/seo'
     | '/tr/soz'
     | '/tr/soz-sayi'
+    | '/tr/studio'
     | '/tr/terms'
     | '/tr/tools'
     | '/tr/trust'
@@ -2947,6 +3007,7 @@ export interface RootRouteChildren {
   SeoRoute: typeof SeoRoute
   SozRoute: typeof SozRouteWithChildren
   SozSayiRoute: typeof SozSayiRoute
+  StudioRoute: typeof StudioRoute
   TermsRoute: typeof TermsRoute
   ToolsRoute: typeof ToolsRouteWithChildren
   TrRoute: typeof TrRouteWithChildren
@@ -3168,6 +3229,13 @@ declare module '@tanstack/react-router' {
       path: '/soz-sayi'
       fullPath: '/soz-sayi'
       preLoaderRoute: typeof SozSayiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/studio': {
+      id: '/studio'
+      path: '/studio'
+      fullPath: '/studio'
+      preLoaderRoute: typeof StudioRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/terms': {
@@ -3429,6 +3497,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArSozSayiRouteImport
       parentRoute: typeof ArRoute
     }
+    '/ar/studio': {
+      id: '/ar/studio'
+      path: '/studio'
+      fullPath: '/ar/studio'
+      preLoaderRoute: typeof ArStudioRouteImport
+      parentRoute: typeof ArRoute
+    }
     '/ar/terms': {
       id: '/ar/terms'
       path: '/terms'
@@ -3651,6 +3726,13 @@ declare module '@tanstack/react-router' {
       path: '/soz-sayi'
       fullPath: '/en/soz-sayi'
       preLoaderRoute: typeof EnSozSayiRouteImport
+      parentRoute: typeof EnRoute
+    }
+    '/en/studio': {
+      id: '/en/studio'
+      path: '/studio'
+      fullPath: '/en/studio'
+      preLoaderRoute: typeof EnStudioRouteImport
       parentRoute: typeof EnRoute
     }
     '/en/terms': {
@@ -3989,6 +4071,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RuSozSayiRouteImport
       parentRoute: typeof RuRoute
     }
+    '/ru/studio': {
+      id: '/ru/studio'
+      path: '/studio'
+      fullPath: '/ru/studio'
+      preLoaderRoute: typeof RuStudioRouteImport
+      parentRoute: typeof RuRoute
+    }
     '/ru/terms': {
       id: '/ru/terms'
       path: '/terms'
@@ -4225,6 +4314,13 @@ declare module '@tanstack/react-router' {
       path: '/soz-sayi'
       fullPath: '/tr/soz-sayi'
       preLoaderRoute: typeof TrSozSayiRouteImport
+      parentRoute: typeof TrRoute
+    }
+    '/tr/studio': {
+      id: '/tr/studio'
+      path: '/studio'
+      fullPath: '/tr/studio'
+      preLoaderRoute: typeof TrStudioRouteImport
       parentRoute: typeof TrRoute
     }
     '/tr/terms': {
@@ -4786,6 +4882,7 @@ interface ArRouteChildren {
   ArSeoRoute: typeof ArSeoRoute
   ArSozRoute: typeof ArSozRouteWithChildren
   ArSozSayiRoute: typeof ArSozSayiRoute
+  ArStudioRoute: typeof ArStudioRoute
   ArTermsRoute: typeof ArTermsRoute
   ArToolsRoute: typeof ArToolsRouteWithChildren
   ArTrustRoute: typeof ArTrustRoute
@@ -4824,6 +4921,7 @@ const ArRouteChildren: ArRouteChildren = {
   ArSeoRoute: ArSeoRoute,
   ArSozRoute: ArSozRouteWithChildren,
   ArSozSayiRoute: ArSozSayiRoute,
+  ArStudioRoute: ArStudioRoute,
   ArTermsRoute: ArTermsRoute,
   ArToolsRoute: ArToolsRouteWithChildren,
   ArTrustRoute: ArTrustRoute,
@@ -4962,6 +5060,7 @@ interface EnRouteChildren {
   EnSeoRoute: typeof EnSeoRoute
   EnSozRoute: typeof EnSozRouteWithChildren
   EnSozSayiRoute: typeof EnSozSayiRoute
+  EnStudioRoute: typeof EnStudioRoute
   EnTermsRoute: typeof EnTermsRoute
   EnToolsRoute: typeof EnToolsRouteWithChildren
   EnTrustRoute: typeof EnTrustRoute
@@ -5000,6 +5099,7 @@ const EnRouteChildren: EnRouteChildren = {
   EnSeoRoute: EnSeoRoute,
   EnSozRoute: EnSozRouteWithChildren,
   EnSozSayiRoute: EnSozSayiRoute,
+  EnStudioRoute: EnStudioRoute,
   EnTermsRoute: EnTermsRoute,
   EnToolsRoute: EnToolsRouteWithChildren,
   EnTrustRoute: EnTrustRoute,
@@ -5205,6 +5305,7 @@ interface RuRouteChildren {
   RuSeoRoute: typeof RuSeoRoute
   RuSozRoute: typeof RuSozRouteWithChildren
   RuSozSayiRoute: typeof RuSozSayiRoute
+  RuStudioRoute: typeof RuStudioRoute
   RuTermsRoute: typeof RuTermsRoute
   RuToolsRoute: typeof RuToolsRouteWithChildren
   RuTrustRoute: typeof RuTrustRoute
@@ -5244,6 +5345,7 @@ const RuRouteChildren: RuRouteChildren = {
   RuSeoRoute: RuSeoRoute,
   RuSozRoute: RuSozRouteWithChildren,
   RuSozSayiRoute: RuSozSayiRoute,
+  RuStudioRoute: RuStudioRoute,
   RuTermsRoute: RuTermsRoute,
   RuToolsRoute: RuToolsRouteWithChildren,
   RuTrustRoute: RuTrustRoute,
@@ -5403,6 +5505,7 @@ interface TrRouteChildren {
   TrSeoRoute: typeof TrSeoRoute
   TrSozRoute: typeof TrSozRouteWithChildren
   TrSozSayiRoute: typeof TrSozSayiRoute
+  TrStudioRoute: typeof TrStudioRoute
   TrTermsRoute: typeof TrTermsRoute
   TrToolsRoute: typeof TrToolsRouteWithChildren
   TrTrustRoute: typeof TrTrustRoute
@@ -5441,6 +5544,7 @@ const TrRouteChildren: TrRouteChildren = {
   TrSeoRoute: TrSeoRoute,
   TrSozRoute: TrSozRouteWithChildren,
   TrSozSayiRoute: TrSozSayiRoute,
+  TrStudioRoute: TrStudioRoute,
   TrTermsRoute: TrTermsRoute,
   TrToolsRoute: TrToolsRouteWithChildren,
   TrTrustRoute: TrTrustRoute,
@@ -5509,6 +5613,7 @@ const rootRouteChildren: RootRouteChildren = {
   SeoRoute: SeoRoute,
   SozRoute: SozRouteWithChildren,
   SozSayiRoute: SozSayiRoute,
+  StudioRoute: StudioRoute,
   TermsRoute: TermsRoute,
   ToolsRoute: ToolsRouteWithChildren,
   TrRoute: TrRouteWithChildren,

@@ -32,6 +32,9 @@ export function SiteHeader() {
             <a href={localeHref(lang, "/apps")} className="back-link">
               {t("b_nav_apps")}
             </a>
+            <a href={localeHref(lang, "/studio")} className="back-link" data-testid="nav-studio">
+              Studio
+            </a>
             <a href={localeHref(lang, "/workspace")} className="back-link">
               Workspace
             </a>

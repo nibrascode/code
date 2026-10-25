@@ -779,6 +779,13 @@ const PAGES: Record<string, Copy> = {
     ar: { title: "احسب النسبة — مجاناً", description: "احسب ناتج النسبة وكم بالمئة عدد من آخر. بلا حساب." },
     ru: { title: "Посчитать процент — бесплатно", description: "Найдите процент от числа и сколько процентов одно число от другого. Без аккаунта." },
   },
+  "/studio": {
+    az: { title: "Nibras Studio — brauzerdə kod redaktoru və canlı telefon önizləməsi", description: "HTML, CSS və JavaScript yaz: fayllar və qovluqlar, rəngli kod, telefon çərçivəsində canlı önizləmə. ZIP endir, Nibras Dev-də aç və ya Android APK düzəlt. Pulsuz, fayllar brauzerdə qalır." },
+    en: { title: "Nibras Studio — code editor in your browser with live phone preview", description: "Write HTML, CSS and JavaScript: files and folders, syntax highlighting, live preview in a phone frame. Download a ZIP, open in Nibras Dev or build an Android APK. Free, files stay in your browser." },
+    tr: { title: "Nibras Studio — tarayıcıda kod editörü ve canlı telefon önizlemesi", description: "HTML, CSS ve JavaScript yazın: dosyalar ve klasörler, renkli kod, telefon çerçevesinde canlı önizleme. ZIP indirin, Nibras Dev'de açın ya da Android APK yapın. Ücretsiz." },
+    ar: { title: "Nibras Studio — محرر كود في المتصفح مع معاينة حيّة على الهاتف", description: "اكتب HTML وCSS وJavaScript: ملفات ومجلدات وتلوين للكود ومعاينة حيّة داخل إطار هاتف. نزّل ZIP أو افتح في Nibras Dev أو اصنع APK لأندرويد. مجاناً، والملفات تبقى في المتصفح." },
+    ru: { title: "Nibras Studio — редактор кода в браузере с живым просмотром на телефоне", description: "Пишите HTML, CSS и JavaScript: файлы и папки, подсветка, живой просмотр в рамке телефона. Скачайте ZIP, откройте в Nibras Dev или соберите Android APK. Бесплатно." },
+  },
   "/learn": {
     az: { title: "Nibras Learn — PDF-dən test, yaddaş kartları və təkrar", description: "PDF seçin: mövzular üzrə suallar, testlər, yaddaş kartları, səhvlərin təkrarı və irəliləyiş statistikası. Hər sualın mənbə cümləsi və səhifəsi göstərilir." },
     en: { title: "Nibras Learn — tests, flashcards and review from a PDF", description: "Pick a PDF: questions per topic, tests, flashcards, spaced review of mistakes and progress stats. Each question shows its source sentence and page." },
@@ -1173,6 +1180,7 @@ const LOCALES: Record<Lang, string> = {
 function ogImage(path: string) {
   const bare = stripLocalePrefix(path).path;
   if (bare === "/ai" || bare.startsWith("/ai/")) return `${SITE}/og-ai.jpg`;
+  if (bare === "/studio") return `${SITE}/og-studio.jpg`;
   if (bare === "/qr" || bare.startsWith("/qr/")) return `${SITE}/og-qr.jpg`;
   if (bare === "/erase" || bare.startsWith("/erase/")) return `${SITE}/og-tools.jpg`;
   if (bare === "/image" || bare.startsWith("/image/")) return `${SITE}/apps/nibras-image.png`;
