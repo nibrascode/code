@@ -24770,4 +24770,54 @@
     <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/trust"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/trust"/>
   </url>
+  <url>
+    <loc>https://nibrascode.com/nedir</loc>
+    <lastmod>2026-10-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/nedir"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/nedir"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/nedir"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/nedir"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/nedir"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/nedir"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/en/nedir</loc>
+    <lastmod>2026-10-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/nedir"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/nedir"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/nedir"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/nedir"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/nedir"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/nedir"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/tr/nedir</loc>
+    <lastmod>2026-10-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/nedir"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/nedir"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/nedir"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/nedir"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/nedir"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/nedir"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/ar/nedir</loc>
+    <lastmod>2026-10-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/nedir"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/nedir"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/nedir"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/nedir"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/nedir"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/nedir"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/ru/nedir</loc>
+    <lastmod>2026-10-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/nedir"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/nedir"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/nedir"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/nedir"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/nedir"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/nedir"/>
+  </url>
 </urlset>

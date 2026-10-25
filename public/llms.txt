@@ -23,6 +23,9 @@
 - Nibras AI assistant: https://nibrascode.com/ai
 - Android apps: https://nibrascode.com/apps
 - How-to guides: https://nibrascode.com/nece
+- What is Nibras Code (short): https://nibrascode.com/nedir (also /en/nedir, /tr/nedir, /ar/nedir, /ru/nedir)
+- All privacy policies: https://nibrascode.com/privacy
+- Security contact: https://nibrascode.com/.well-known/security.txt
 - Transparency and service level: https://nibrascode.com/trust
 - Terms: https://nibrascode.com/terms
 - Contact: https://nibrascode.com/contact

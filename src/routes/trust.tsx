@@ -24,7 +24,7 @@ const COPY: Record<Lang, Copy> = {
     blocks: [
       { h: "Kimik", p: ["Nibras Code müstəqil layihədir. Qurucusu Mahir Əliyevdir. Ofis və telefon yoxdur.", "Rəsmi əlaqə yalnız e-poçtdur: nibrascode@gmail.com."] },
       { h: "Fayllarınla nə olur", p: ["PDF, şəkil, QR, ZIP alətləri brauzerdə işləyir. Fayl serverə göndərilmir.", "Nibras AI-yə yazdığın mətn cavab üçün serverə gedir. Şəxsi məlumat yazma.", "Tətbiqlərin öz məxfilik səhifəsi var."] },
-      { h: "Saxta rəy yoxdur", p: ["Saytda uydurma ulduz, reytinq, rəy və ya yükləmə sayı yoxdur və olmayacaq.", "Rəy görürsənsə, o real istifadəçidən və ya mağazanın özündəndir."] },
+      { h: "Saxta rəy yoxdur", p: ["Saytda uydurma ulduz, reytinq, rəy və ya yükləmə sayı yoxdur və olmayacaq.", "Real reytinqlər Google Play-dədir. Saytda onları köçürmürük, yalnız mağazaya link veririk."] },
     ],
     levelTitle: "Xidmət səviyyəsi",
     levels: [
@@ -33,7 +33,7 @@ const COPY: Record<Lang, Copy> = {
       ["Nibras AI", "Pulsuzdur. Bəzən yavaşlaya və ya müvəqqəti dayana bilər. Cavab səhv ola bilər, yoxla."],
       ["Xəta olarsa", "nibrascode@gmail.com ünvanına yaz: hansı səhifə, nə baş verdi. Məktub oxunur."],
     ],
-    links: [["/about", "Haqqımızda"], ["/privacy", "Məxfilik"], ["/terms", "İstifadə şərtləri"], ["/contact", "Əlaqə"], ["/apps", "Tətbiqlər"]],
+    links: [["/about", "Haqqımızda"], ["/privacy", "Bütün məxfilik siyasətləri"], ["/nedir", "Nibras Code nədir?"], ["/terms", "İstifadə şərtləri"], ["/contact", "Əlaqə"], ["/apps", "Tətbiqlər"]],
   },
   en: {
     eyebrow: "Transparency",
@@ -42,7 +42,7 @@ const COPY: Record<Lang, Copy> = {
     blocks: [
       { h: "Who we are", p: ["Nibras Code is an independent project. Its founder is Mahir Aliyev. There is no office and no phone.", "The only official contact is email: nibrascode@gmail.com."] },
       { h: "What happens to your files", p: ["The PDF, image, QR and ZIP tools run in your browser. The file is not sent to a server.", "Text you write to Nibras AI goes to a server to get an answer. Do not write personal data.", "Each app has its own privacy page."] },
-      { h: "No fake reviews", p: ["The site has no invented stars, ratings, reviews or download counts, and it will not.", "Any review you see comes from a real user or from the store itself."] },
+      { h: "No fake reviews", p: ["The site has no invented stars, ratings, reviews or download counts, and it will not.", "Real ratings live on Google Play. We do not copy numbers here, we only link to the store."] },
     ],
     levelTitle: "Service level",
     levels: [
@@ -51,7 +51,7 @@ const COPY: Record<Lang, Copy> = {
       ["Nibras AI", "Free. It can be slow or stop for a while. An answer can be wrong, so check it."],
       ["If something breaks", "Write to nibrascode@gmail.com: which page and what happened. The letter is read."],
     ],
-    links: [["/about", "About"], ["/privacy", "Privacy"], ["/terms", "Terms"], ["/contact", "Contact"], ["/apps", "Apps"]],
+    links: [["/about", "About"], ["/privacy", "All privacy policies"], ["/nedir", "What is Nibras Code?"], ["/terms", "Terms"], ["/contact", "Contact"], ["/apps", "Apps"]],
   },
   tr: {
     eyebrow: "Şeffaflık",
@@ -60,7 +60,7 @@ const COPY: Record<Lang, Copy> = {
     blocks: [
       { h: "Kimiz", p: ["Nibras Code bağımsız bir projedir. Kurucusu Mahir Aliyev'dir. Ofis ve telefon yoktur.", "Resmi iletişim yalnızca e-postadır: nibrascode@gmail.com."] },
       { h: "Dosyalarına ne olur", p: ["PDF, resim, QR ve ZIP araçları tarayıcıda çalışır. Dosya sunucuya gönderilmez.", "Nibras AI'ye yazdığın metin cevap için sunucuya gider. Kişisel bilgi yazma.", "Uygulamaların kendi gizlilik sayfası vardır."] },
-      { h: "Sahte yorum yok", p: ["Sitede uydurma yıldız, puan, yorum veya indirme sayısı yoktur ve olmayacak.", "Gördüğün yorum gerçek kullanıcıdan ya da mağazanın kendisinden gelir."] },
+      { h: "Sahte yorum yok", p: ["Sitede uydurma yıldız, puan, yorum veya indirme sayısı yoktur ve olmayacak.", "Gerçek puanlar Google Play'dedir. Burada sayı kopyalamıyoruz, yalnızca mağazaya bağlantı veriyoruz."] },
     ],
     levelTitle: "Hizmet seviyesi",
     levels: [
@@ -69,7 +69,7 @@ const COPY: Record<Lang, Copy> = {
       ["Nibras AI", "Ücretsizdir. Bazen yavaşlayabilir veya geçici durabilir. Cevap yanlış olabilir, kontrol et."],
       ["Hata olursa", "nibrascode@gmail.com adresine yaz: hangi sayfa, ne oldu. Mektup okunur."],
     ],
-    links: [["/about", "Hakkımızda"], ["/privacy", "Gizlilik"], ["/terms", "Kullanım şartları"], ["/contact", "İletişim"], ["/apps", "Uygulamalar"]],
+    links: [["/about", "Hakkımızda"], ["/privacy", "Tüm gizlilik politikaları"], ["/nedir", "Nibras Code nedir?"], ["/terms", "Kullanım şartları"], ["/contact", "İletişim"], ["/apps", "Uygulamalar"]],
   },
   ar: {
     eyebrow: "الشفافية",
@@ -78,7 +78,7 @@ const COPY: Record<Lang, Copy> = {
     blocks: [
       { h: "من نحن", p: ["Nibras Code مشروع مستقل. مؤسسه ماهر علييف. لا مكتب ولا هاتف.", "التواصل الرسمي بالبريد فقط: nibrascode@gmail.com."] },
       { h: "ماذا يحدث لملفاتك", p: ["أدوات PDF والصور وQR وZIP تعمل في المتصفح. لا يُرسل الملف إلى خادم.", "النص الذي تكتبه لـ Nibras AI يذهب إلى خادم للحصول على جواب. لا تكتب بيانات شخصية.", "لكل تطبيق صفحة خصوصية خاصة."] },
-      { h: "لا تقييمات مزيفة", p: ["لا توجد في الموقع نجوم أو تقييمات أو مراجعات أو أرقام تنزيل مختلقة، ولن توجد.", "أي مراجعة تراها هي من مستخدم حقيقي أو من المتجر نفسه."] },
+      { h: "لا تقييمات مزيفة", p: ["لا توجد في الموقع نجوم أو تقييمات أو مراجعات أو أرقام تنزيل مختلقة، ولن توجد.", "التقييمات الحقيقية موجودة في Google Play. لا ننقل الأرقام هنا، بل نضع رابط المتجر فقط."] },
     ],
     levelTitle: "مستوى الخدمة",
     levels: [
@@ -87,7 +87,7 @@ const COPY: Record<Lang, Copy> = {
       ["Nibras AI", "مجاني. قد يبطئ أو يتوقف مؤقتاً. قد يكون الجواب خاطئاً، فتحقق منه."],
       ["إن حدث خطأ", "اكتب إلى nibrascode@gmail.com: أي صفحة وماذا حدث. تُقرأ الرسالة."],
     ],
-    links: [["/about", "من نحن"], ["/privacy", "الخصوصية"], ["/terms", "شروط الاستخدام"], ["/contact", "تواصل"], ["/apps", "التطبيقات"]],
+    links: [["/about", "من نحن"], ["/privacy", "كل سياسات الخصوصية"], ["/nedir", "ما هو Nibras Code؟"], ["/terms", "شروط الاستخدام"], ["/contact", "تواصل"], ["/apps", "التطبيقات"]],
   },
   ru: {
     eyebrow: "Прозрачность",
@@ -96,7 +96,7 @@ const COPY: Record<Lang, Copy> = {
     blocks: [
       { h: "Кто мы", p: ["Nibras Code — независимый проект. Основатель — Махир Алиев. Офиса и телефона нет.", "Официальная связь только по почте: nibrascode@gmail.com."] },
       { h: "Что происходит с файлами", p: ["Инструменты PDF, изображений, QR и ZIP работают в браузере. Файл не отправляется на сервер.", "Текст для Nibras AI уходит на сервер, чтобы получить ответ. Не пишите личные данные.", "У каждого приложения своя страница конфиденциальности."] },
-      { h: "Без фальшивых отзывов", p: ["На сайте нет выдуманных звёзд, оценок, отзывов или числа загрузок, и не будет.", "Любой отзыв — от реального пользователя или от самого магазина."] },
+      { h: "Без фальшивых отзывов", p: ["На сайте нет выдуманных звёзд, оценок, отзывов или числа загрузок, и не будет.", "Настоящие оценки — в Google Play. Мы не переносим цифры сюда, а только даём ссылку на магазин."] },
     ],
     levelTitle: "Уровень сервиса",
     levels: [
@@ -105,7 +105,7 @@ const COPY: Record<Lang, Copy> = {
       ["Nibras AI", "Бесплатно. Может замедлиться или временно остановиться. Ответ может быть неверным — проверяйте."],
       ["Если что-то сломалось", "Напишите на nibrascode@gmail.com: какая страница и что случилось. Письмо читают."],
     ],
-    links: [["/about", "О нас"], ["/privacy", "Конфиденциальность"], ["/terms", "Условия"], ["/contact", "Контакт"], ["/apps", "Приложения"]],
+    links: [["/about", "О нас"], ["/privacy", "Все политики конфиденциальности"], ["/nedir", "Что такое Nibras Code?"], ["/terms", "Условия"], ["/contact", "Контакт"], ["/apps", "Приложения"]],
   },
 };
 

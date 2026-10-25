@@ -547,6 +547,13 @@ const PAGES: Record<string, Copy> = {
       description: "Nibras Code ile iletişim için e-posta: nibrascode@gmail.com. Uygulama, sayfa veya gizlilik hakkında soru yazabilirsiniz.",
     },
   },
+  "/nedir": {
+    az: { title: "Nibras Code nədir? — Nibras Code", description: "Nibras Code Mahir Əliyevin müstəqil layihəsidir: pulsuz PDF, şəkil və QR alətləri, Android tətbiqləri, Nibras AI və bələdçilər." },
+    en: { title: "What is Nibras Code? — Nibras Code", description: "Nibras Code is an independent project by Mahir Aliyev: free PDF, image and QR tools, Android apps, Nibras AI and guides." },
+    tr: { title: "Nibras Code nedir? — Nibras Code", description: "Nibras Code, Mahir Aliyev'in bağımsız projesidir: ücretsiz PDF, resim ve QR araçları, Android uygulamaları, Nibras AI ve rehberler." },
+    ar: { title: "ما هو Nibras Code؟ — Nibras Code", description: "Nibras Code مشروع مستقل لماهر علييف: أدوات PDF وصور وQR مجانية، تطبيقات أندرويد، Nibras AI وأدلة." },
+    ru: { title: "Что такое Nibras Code? — Nibras Code", description: "Nibras Code — независимый проект Махира Алиева: бесплатные инструменты PDF, изображений и QR, Android-приложения, Nibras AI и руководства." },
+  },
   "/trust": {
     az: { title: "Şəffaflıq və xidmət səviyyəsi — Nibras Code", description: "Nibras Code kimdir, fayllarla nə olur, saxta rəy olmaması və xidmət səviyyəsi. Alətlər brauzerdə işləyir." },
     en: { title: "Transparency and service level — Nibras Code", description: "Who runs Nibras Code, what happens to files, no fake reviews, and the service level. Tools run in the browser." },
