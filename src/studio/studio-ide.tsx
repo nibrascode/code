@@ -64,6 +64,20 @@ export function StudioIDE({ p, update, onHome }: { p: Project; update: (patch: P
   const api = useRef<EditorApi | null>(null);
   const attach = useRef<HTMLInputElement>(null);
   const [stageSize, setStageSize] = useState({ w: 360, h: 600 });
+  const [widths, setWidths] = useState(() => { try { return { left: 208, right: 440, ...JSON.parse(localStorage.getItem("nibras-studio-widths") || "{}") }; } catch { return { left: 208, right: 440 }; } });
+  useEffect(() => { try { localStorage.setItem("nibras-studio-widths", JSON.stringify(widths)); } catch { /* full */ } }, [widths]);
+  const drag = (which: "left" | "right") => (e: React.PointerEvent) => {
+    e.preventDefault();
+    const x0 = e.clientX, w0 = widths[which];
+    const move = (ev: PointerEvent) => {
+      const dx = ev.clientX - x0;
+      const max = which === "left" ? 420 : Math.min(760, innerWidth * 0.5);
+      setWidths((w: { left: number; right: number }) => ({ ...w, [which]: Math.round(Math.max(which === "left" ? 160 : 320, Math.min(max, w0 + (which === "left" ? dx : -dx)))) }));
+    };
+    const up = () => { removeEventListener("pointermove", move); removeEventListener("pointerup", up); document.body.style.cursor = ""; };
+    addEventListener("pointermove", move); addEventListener("pointerup", up); document.body.style.cursor = "col-resize";
+  };
+  const handle = (which: "left" | "right") => <div role="separator" aria-orientation="vertical" onPointerDown={drag(which)} onDoubleClick={() => setWidths((w: { left: number; right: number }) => ({ ...w, [which]: which === "left" ? 208 : 440 }))} className="group -mx-1.5 hidden w-3 shrink-0 cursor-col-resize items-center justify-center lg:flex" data-testid={`st-resize-${which}`}><span className="h-12 w-1 rounded-full bg-white/10 group-hover:bg-[#4f6bff]" /></div>;
 
   useEffect(() => { const o = document.body.style.overflow; document.body.style.overflow = "hidden"; return () => { document.body.style.overflow = o; }; }, []);
   const log = (text: string) => setActs((a) => [{ at: Date.now(), text }, ...a].slice(0, 30));
@@ -215,10 +229,10 @@ export function StudioIDE({ p, update, onHome }: { p: Project; update: (patch: P
   const nodes = useMemo(() => tree(p.files), [p.files]);
   const hits = useMemo(() => findAll(query), [query, p.files]); // eslint-disable-line react-hooks/exhaustive-deps
   const dev = DEVICES.find((d) => d.id === device);
-  const frameW = dev ? dev.w : Math.max(240, stageSize.w - 32);
-  const frameH = dev ? dev.h : Math.max(240, stageSize.h - 32);
+  const frameW = dev ? dev.w : Math.max(240, stageSize.w - 16);
+  const frameH = dev ? dev.h : Math.max(240, stageSize.h - 16);
   const pad = dev?.phone ? 12 : dev ? 10 : 0;
-  const scale = Math.min(1, (stageSize.w - 32) / (frameW + pad * 2), (stageSize.h - 32) / (frameH + pad * 2));
+  const scale = Math.min(1, (stageSize.w - 16) / (frameW + pad * 2), (stageSize.h - 16) / (frameH + pad * 2));
   const errors = logs.filter((l) => l.t === "error").length;
   const navItems = [
     { href: localeHref(lang, "/workspace"), label: t.workspace, icon: LayoutGrid, active: true },
@@ -389,24 +403,24 @@ export function StudioIDE({ p, update, onHome }: { p: Project; update: (patch: P
   ];
   const lvl = { error: "text-red-300", warn: "text-amber-200", info: "text-[#8aa2ff]" };
   const assistant = (
-    <div className={card + " flex shrink-0 flex-col p-3"} data-testid="st-assistant">
-      <div className="mb-3 flex items-center gap-2">
-        <Sparkles className="size-5 text-[#9b8cff]" />
-        <span className="flex-1 text-[15px] font-semibold">{t.assistant}</span>
+    <div className={card + " flex shrink-0 flex-col p-2.5"} data-testid="st-assistant">
+      <div className="mb-2 flex items-center gap-2">
+        <Sparkles className="size-4 text-[#9b8cff]" />
+        <span className="flex-1 text-[13px] font-semibold">{t.assistant}</span>
         <div className="relative" data-menu>
-          <button className="inline-flex items-center gap-1.5 rounded-lg border border-white/10 bg-black/20 px-2.5 py-1.5 text-[12px]" onClick={() => setMenu(menu === "model" ? null : "model")} data-testid="st-model"><span className="text-[#9b8cff]">◖◗</span> {t.offline} <ChevronDown className="size-3.5" /></button>
+          <button className="inline-flex items-center gap-1 rounded-lg border border-white/10 bg-black/20 px-2 py-1 text-[11px]" onClick={() => setMenu(menu === "model" ? null : "model")} data-testid="st-model"><span className="text-[#9b8cff]">◖◗</span> {t.offline} <ChevronDown className="size-3.5" /></button>
           {menu === "model" ? <div className="absolute end-0 top-full z-40 mt-1 w-64 rounded-xl border border-white/10 bg-[#0e1638] p-3 text-[12px] leading-relaxed text-[#c8d1ea] shadow-2xl">{t.offlineNote}</div> : null}
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-2">
+      <div className="grid grid-cols-3 gap-1.5">
         {actions.map((a) => (
-          <button key={a.id} className="flex min-h-10 items-center gap-2.5 rounded-xl border border-white/[0.08] bg-[#0e1638]/80 px-3 text-start text-[13px] hover:border-[#4f6bff]/60 hover:bg-[#16205a]/60" onClick={a.run} data-testid={`st-act-${a.id}`}>
-            <a.icon className="size-4 shrink-0 text-[#8aa2ff]" /> <span className="truncate">{a.label}</span>
+          <button key={a.id} title={a.label} className="flex h-8 min-w-0 items-center gap-1.5 rounded-lg border border-white/[0.08] bg-[#0e1638]/80 px-2 text-start text-[11.5px] hover:border-[#4f6bff]/60 hover:bg-[#16205a]/60" onClick={a.run} data-testid={`st-act-${a.id}`}>
+            <a.icon className="size-3.5 shrink-0 text-[#8aa2ff]" /> <span className="truncate">{a.label}</span>
           </button>
         ))}
       </div>
       {out ? (
-        <div className="mt-2 max-h-44 overflow-auto rounded-xl border border-white/[0.08] bg-black/25 p-2.5 text-[12.5px]" data-testid="st-out">
+        <div className="mt-2 max-h-28 overflow-auto rounded-xl border border-white/[0.08] bg-black/25 p-2.5 text-[12.5px]" data-testid="st-out">
           <div className="mb-1 flex justify-end"><button onClick={() => setOut(null)} aria-label="×"><X className="size-3.5 text-[#7d89a8]" /></button></div>
           {out.kind === "msg" ? <p className="text-[#dfe6ff]">{out.text}</p> : null}
           {out.kind === "findings" ? (out.list.length ? <>
@@ -420,12 +434,12 @@ export function StudioIDE({ p, update, onHome }: { p: Project; update: (patch: P
           {out.kind === "hits" ? <><p className="mb-1 text-[#c8d1ea]">{out.text}</p>{out.hits.slice(0, 40).map((h, i) => <button key={i} className="block w-full truncate rounded px-1 text-start font-mono text-[11.5px] hover:bg-white/5" dir="ltr" onClick={() => jump(h.file, h.line)}><span className="text-[#8aa2ff]">{h.file}:{h.line}</span> {h.text}</button>)}</> : null}
         </div>
       ) : null}
-      <form className="mt-2 flex items-center gap-1.5 rounded-xl border border-white/10 bg-black/25 p-1.5 focus-within:border-[#4f6bff]/70" onSubmit={(e) => { e.preventDefault(); command(); }}>
+      <form className="mt-2 flex items-center gap-1 rounded-xl border border-white/10 bg-black/25 p-1 focus-within:border-[#4f6bff]/70" onSubmit={(e) => { e.preventDefault(); command(); }}>
         <button type="button" className="rounded-lg p-1.5 text-[#9aa7c7] hover:text-white" onClick={() => attach.current?.click()} title={t.attach} aria-label={t.attach}><Paperclip className="size-4" /></button>
         <input ref={attach} type="file" multiple accept=".html,.htm,.css,.js,.mjs,.json,.md,.txt,.svg" className="hidden" onChange={(e) => { void onAttach(e.target.files); e.target.value = ""; }} />
         <button type="button" className="rounded-lg p-1.5 text-[#9b8cff] hover:text-white" onClick={() => setOut({ kind: "msg", text: t.cmdHelp })} title={t.hints} aria-label={t.hints}><Sparkles className="size-4" /></button>
-        <input className="min-w-0 flex-1 bg-transparent px-1 text-[13px] outline-none placeholder:text-[#5d6b8a]" placeholder={t.ask} value={cmd} onChange={(e) => setCmd(e.target.value)} dir="auto" data-testid="st-cmd" />
-        <button type="submit" className="grid size-9 place-items-center rounded-full bg-gradient-to-br from-[#4f6bff] to-[#7a5cff] text-white shadow-[0_6px_20px_-6px_#4f6bff] disabled:opacity-50" disabled={!cmd.trim()} aria-label={t.send} data-testid="st-send"><Send className="rtl-flip size-4" /></button>
+        <input className="min-w-0 flex-1 bg-transparent px-1 text-[12.5px] outline-none placeholder:text-[#5d6b8a]" placeholder={t.ask} value={cmd} onChange={(e) => setCmd(e.target.value)} dir="auto" data-testid="st-cmd" />
+        <button type="submit" className="grid size-7 place-items-center rounded-full bg-gradient-to-br from-[#4f6bff] to-[#7a5cff] text-white shadow-[0_6px_20px_-6px_#4f6bff] disabled:opacity-50" disabled={!cmd.trim()} aria-label={t.send} data-testid="st-send"><Send className="rtl-flip size-3.5" /></button>
       </form>
     </div>
   );
@@ -483,19 +497,21 @@ export function StudioIDE({ p, update, onHome }: { p: Project; update: (patch: P
         {panes.map((x) => <button key={x.id} role="tab" aria-selected={pane === x.id} onClick={() => setPane(x.id)} data-testid={`st-pane-${x.id}`} className={"inline-flex min-h-10 flex-1 items-center justify-center gap-1.5 rounded-xl text-[13px] " + (pane === x.id ? "bg-[#2f4bff]/30 text-white" : "text-[#7d89a8]")}><x.icon className="size-4" /> {x.label}</button>)}
       </div>
 
-      <div className="relative z-10 flex min-h-0 flex-1 gap-3 px-3 pb-2 lg:px-4" dir="ltr">
+      <div className="relative z-10 flex min-h-0 flex-1 gap-3 px-3 pb-2 lg:gap-1.5 lg:px-4" dir="ltr">
         <nav className="hidden w-12 shrink-0 flex-col items-center gap-2 pt-1 lg:flex" aria-label="Studio">
           {railItems.map((r) => {
             const on = r.id !== "home" && showSide && side === r.id;
             return <button key={r.id} title={r.label} aria-label={r.label} data-testid={`st-rail-${r.id}`} onClick={() => { if (r.id === "home") return onHome(); if (side === r.id && showSide) setShowSide(false); else { setSide(r.id); setShowSide(true); } }} className={"grid size-11 place-items-center rounded-xl " + (on ? "border border-[#4f6bff]/60 bg-[#2f4bff]/25 text-white shadow-[0_0_20px_-6px_#4f6bff]" : "text-[#7d89a8] hover:bg-white/5 hover:text-white")}><r.icon className="size-5" /></button>;
           })}
         </nav>
-        <aside className={(pane === "files" ? "flex" : "hidden") + " min-h-0 flex-1 flex-col lg:w-64 lg:flex-none " + (showSide ? "lg:flex" : "lg:hidden")} dir={lang === "ar" ? "rtl" : "ltr"}>
+        <aside className={(pane === "files" ? "flex" : "hidden") + " min-h-0 flex-1 flex-col lg:w-[var(--st-left)] lg:flex-none " + (showSide ? "lg:flex" : "lg:hidden")} style={{ ["--st-left" as string]: `${widths.left}px` }} dir={lang === "ar" ? "rtl" : "ltr"}>
           <div className="mb-2 flex gap-1 lg:hidden">{(["files", "search", "git", "settings"] as Side[]).map((s) => <button key={s} onClick={() => setSide(s)} className={"flex-1 rounded-lg py-1.5 text-[12px] " + (side === s ? "bg-white/10 text-white" : "text-[#7d89a8]")}>{t[s]}</button>)}</div>
           {sidePanel}
         </aside>
+        {showSide ? handle("left") : null}
         <main className={(pane === "code" ? "flex" : "hidden") + " min-h-0 min-w-0 flex-1 flex-col lg:flex"}>{editor}</main>
-        <section className={((pane === "preview" || pane === "ai") ? "flex" : "hidden") + " min-h-0 min-w-0 flex-1 flex-col gap-3 lg:w-[420px] lg:flex-none xl:w-[460px] " + (showRight ? "lg:flex" : "lg:hidden")} dir={lang === "ar" ? "rtl" : "ltr"}>
+        {showRight ? handle("right") : null}
+        <section className={((pane === "preview" || pane === "ai") ? "flex" : "hidden") + " min-h-0 min-w-0 flex-1 flex-col gap-2 lg:w-[var(--st-right)] lg:flex-none " + (showRight ? "lg:flex" : "lg:hidden")} style={{ ["--st-right" as string]: `${widths.right}px` }} dir={lang === "ar" ? "rtl" : "ltr"}>
           <div className={(pane === "ai" ? "hidden " : "flex ") + "min-h-0 flex-1 flex-col lg:flex"} dir="ltr">{previewCard}</div>
           <div className={(pane === "preview" ? "hidden " : "") + "min-h-0 overflow-auto lg:block lg:shrink-0"}>{assistant}</div>
         </section>
