@@ -1,5 +1,5 @@
 // Tool names and one-line descriptions, taken from the Nibras PDF app (5 languages).
-export const TOOL_IDS = ["write-pdf","merge","split","compress","image-pdf","pdf-image","rotate","protect","watermark","pages","scan","sign","ocr","pdf-ocr","pdf-word","preview","batch","extract-pages","word-pdf"] as const;
+export const TOOL_IDS = ["write-pdf","merge","split","compress","image-pdf","pdf-image","rotate","protect","watermark","pages","scan","sign","ocr","pdf-ocr","pdf-word","preview","batch","extract-pages","word-pdf","page-numbers"] as const;
 export type ToolId = (typeof TOOL_IDS)[number];
 export const TOOL_TEXT: Record<"az" | "en" | "tr" | "ar" | "ru", Record<ToolId, { title: string; description: string }>> = {
   "az": {
@@ -78,6 +78,10 @@ export const TOOL_TEXT: Record<"az" | "en" | "tr" | "ar" | "ru", Record<ToolId, 
     "word-pdf": {
       "title": "Word-dan PDF",
       "description": "DOCX faylını PDF sənədinə çevir"
+    },
+    "page-numbers": {
+      "title": "Səhifə nömrəsi qoy",
+      "description": "Hazır PDF-ə səhifə nömrələri əlavə et"
     }
   },
   "en": {
@@ -144,6 +148,10 @@ export const TOOL_TEXT: Record<"az" | "en" | "tr" | "ar" | "ru", Record<ToolId, 
     "word-pdf": {
       "title": "Word to PDF",
       "description": "Convert a DOCX file into a PDF"
+    },
+    "page-numbers": {
+      "title": "Add page numbers",
+      "description": "Put page numbers on an existing PDF"
     },
     "preview": {
       "title": "PDF preview",
@@ -223,6 +231,10 @@ export const TOOL_TEXT: Record<"az" | "en" | "tr" | "ar" | "ru", Record<ToolId, 
       "title": "Word’den PDF",
       "description": "DOCX dosyasını PDF belgesine çevir"
     },
+    "page-numbers": {
+      "title": "Sayfa numarası ekle",
+      "description": "Hazır PDF'e sayfa numarası ekle"
+    },
     "preview": {
       "title": "PDF önizleme",
       "description": "Sayfaları görüntüle ve yakınlaştır"
@@ -301,6 +313,10 @@ export const TOOL_TEXT: Record<"az" | "en" | "tr" | "ar" | "ru", Record<ToolId, 
       "title": "Word в PDF",
       "description": "Преобразовать DOCX в PDF"
     },
+    "page-numbers": {
+      "title": "Номера страниц",
+      "description": "Добавьте номера страниц в готовый PDF"
+    },
     "preview": {
       "title": "Предпросмотр PDF",
       "description": "Просматривать и увеличивать страницы"
@@ -378,6 +394,10 @@ export const TOOL_TEXT: Record<"az" | "en" | "tr" | "ar" | "ru", Record<ToolId, 
     "word-pdf": {
       "title": "من وورد إلى PDF",
       "description": "تحويل ملف DOCX إلى PDF"
+    },
+    "page-numbers": {
+      "title": "ترقيم الصفحات",
+      "description": "أضف أرقام الصفحات إلى ملف PDF جاهز"
     },
     "preview": {
       "title": "معاينة PDF",

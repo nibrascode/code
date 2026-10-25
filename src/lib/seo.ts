@@ -802,23 +802,23 @@ const PAGES: Record<string, Copy> = {
   "/pdf": {
     az: {
       title: "Nibras PDF — PDF birləşdir, böl, sıxışdır, imzala (pulsuz)",
-      description: "Brauzerdə 19 PDF aləti: birləşdir, böl, sıxışdır, şəkildən PDF, PDF-dən şəkil və Word, OCR, parol, watermark, imza. Pulsuz, hesabsız, fayllar yüklənmir.",
+      description: "Brauzerdə 20 PDF aləti: birləşdir, böl, sıxışdır, şəkildən PDF, PDF-dən şəkil və Word, OCR, parol, watermark, imza. Pulsuz, hesabsız, fayllar yüklənmir.",
     },
     en: {
       title: "Nibras PDF — merge, split, compress, sign PDF (free)",
-      description: "19 PDF tools in your browser: merge, split, compress, images to PDF, PDF to image and Word, OCR, password, watermark, signature. Free, no account, files stay on your device.",
+      description: "20 PDF tools in your browser: merge, split, compress, images to PDF, PDF to image and Word, OCR, password, watermark, signature. Free, no account, files stay on your device.",
     },
     tr: {
       title: "Nibras PDF — PDF birleştir, böl, sıkıştır, imzala (ücretsiz)",
-      description: "Tarayıcıda 19 PDF aracı: birleştir, böl, sıkıştır, görselden PDF, PDF'den görsel ve Word, OCR, parola, filigran, imza. Ücretsiz, hesapsız, dosyalar yüklenmez.",
+      description: "Tarayıcıda 20 PDF aracı: birleştir, böl, sıkıştır, görselden PDF, PDF'den görsel ve Word, OCR, parola, filigran, imza. Ücretsiz, hesapsız, dosyalar yüklenmez.",
     },
     ar: {
       title: "Nibras PDF — دمج وتقسيم وضغط وتوقيع PDF مجاناً",
-      description: "19 أداة PDF في المتصفح: دمج وتقسيم وضغط وتحويل الصور وWord وOCR وكلمة مرور وعلامة مائية وتوقيع. مجاناً وبلا حساب وتبقى الملفات على جهازك.",
+      description: "20 أداة PDF في المتصفح: دمج وتقسيم وضغط وتحويل الصور وWord وOCR وكلمة مرور وعلامة مائية وتوقيع. مجاناً وبلا حساب وتبقى الملفات على جهازك.",
     },
     ru: {
       title: "Nibras PDF — объединить, разделить, сжать, подписать PDF бесплатно",
-      description: "19 PDF-инструментов в браузере: объединение, разделение, сжатие, изображения и Word, OCR, пароль, водяной знак, подпись. Бесплатно, без аккаунта, файлы остаются на устройстве.",
+      description: "20 PDF-инструментов в браузере: объединение, разделение, сжатие, изображения и Word, OCR, пароль, водяной знак, подпись. Бесплатно, без аккаунта, файлы остаются на устройстве.",
     },
   },
   "/qr": {

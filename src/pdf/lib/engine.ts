@@ -403,3 +403,26 @@ export async function unlockPdf(bytes: Uint8Array, password: string) {
 export function isEncryptedError(e: unknown) {
   return /encrypt|password/i.test(String((e as Error)?.message ?? e));
 }
+
+export type NumPos = "top-left" | "top-center" | "top-right" | "bottom-left" | "bottom-center" | "bottom-right";
+export type NumFormat = "n" | "n-of" | "dash";
+export async function addPageNumbers(bytes: Uint8Array, o: { fromPage: number; start: number; position: NumPos; format: NumFormat; size: number; margin: number }) {
+  const lib = await import("@cantoo/pdf-lib");
+  const doc = await lib.PDFDocument.load(bytes);
+  const font = await doc.embedFont(lib.StandardFonts.Helvetica);
+  const pages = doc.getPages();
+  const from = Math.max(1, Math.min(pages.length, Math.floor(o.fromPage) || 1)) - 1;
+  const start = Math.floor(o.start) || 0;
+  const last = start + (pages.length - from) - 1;
+  pages.forEach((p, i) => {
+    if (i < from) return;
+    const n = start + (i - from);
+    const label = o.format === "n-of" ? `${n} / ${last}` : o.format === "dash" ? `- ${n} -` : String(n);
+    const box = p.getCropBox();
+    const w = font.widthOfTextAtSize(label, o.size);
+    const x = o.position.endsWith("left") ? box.x + o.margin : o.position.endsWith("right") ? box.x + box.width - o.margin - w : box.x + (box.width - w) / 2;
+    const y = o.position.startsWith("top") ? box.y + box.height - o.margin - o.size : box.y + o.margin;
+    p.drawText(label, { x, y, size: o.size, font, color: lib.rgb(0.15, 0.15, 0.15) });
+  });
+  return doc.save({ useObjectStreams: true });
+}

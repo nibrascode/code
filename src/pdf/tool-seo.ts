@@ -101,6 +101,13 @@ const INTENT: Partial<Record<ToolId, Record<Lang, { title: string; h1: string; d
     ar: { title: "من Word إلى PDF — مجاناً", h1: "من Word إلى PDF", description: "حوّل ملف DOCX إلى PDF" },
     ru: { title: "Word в PDF — бесплатно", h1: "Word в PDF", description: "Превратите файл DOCX в PDF" },
   },
+  "page-numbers": {
+    az: { title: "PDF-ə səhifə nömrəsi qoy — pulsuz", h1: "PDF-ə səhifə nömrəsi qoy", description: "Hazır PDF-ə nömrə əlavə et: başlanğıc səhifə, ilk rəqəm və yer seçilir" },
+    en: { title: "Add page numbers to PDF — free", h1: "Add page numbers to a PDF", description: "Number an existing PDF: choose the first page, the start number and the position" },
+    tr: { title: "PDF'e sayfa numarası ekle — ücretsiz", h1: "PDF'e sayfa numarası ekle", description: "Hazır PDF'e numara ekle: başlangıç sayfası, ilk sayı ve konum seçilir" },
+    ar: { title: "ترقيم صفحات PDF — مجاناً", h1: "ترقيم صفحات PDF", description: "رقّم ملف PDF جاهزاً: اختر صفحة البداية والرقم الأول والموضع" },
+    ru: { title: "Пронумеровать страницы PDF — бесплатно", h1: "Номера страниц в PDF", description: "Пронумеруйте готовый PDF: выберите первую страницу, начальное число и место" },
+  },
   rotate: {
     az: { title: "PDF döndər — pulsuz", h1: "PDF döndər", description: "PDF səhifəsini sola və ya sağa döndər" },
     en: { title: "Rotate PDF — free", h1: "Rotate PDF", description: "Turn a PDF page left or right" },
@@ -425,6 +432,38 @@ const FAQS: Partial<Record<ToolId, Record<Lang, { q: string; a: string }[]>>> = 
       { q: "Кто знает пароль?", a: "Только вы. Пароль не уходит на сервер." },
       { q: "Если файл не открывается?", a: "Если пароль забыт, эта страница его не восстановит." },
       { q: "Где результат?", a: "PDF с паролем сразу скачивается на устройство." },
+    ],
+  },
+  "page-numbers": {
+    az: [
+      { q: "Hazır PDF-ə nömrə qoymaq pulsuzdur?", a: "Bəli. Hesab və ödəniş yoxdur." },
+      { q: "Üz qabığını nömrəsiz saxlamaq olar?", a: "Bəli. «Hansı səhifədən» xanasına 2 yazın. Nömrə 2-ci səhifədən başlayır." },
+      { q: "Nömrə 1-dən başlamalıdır?", a: "Xeyr. İlk rəqəmi özünüz seçirsiniz, məsələn 5." },
+      { q: "Fayl serverə gedir?", a: "Xeyr. Nömrələr bu brauzerdə əlavə olunur." },
+    ],
+    en: [
+      { q: "Is numbering a PDF free?", a: "Yes. There is no account and no payment." },
+      { q: "Can the cover stay unnumbered?", a: "Yes. Set «Start on page» to 2. Numbers begin on page 2." },
+      { q: "Must numbers start at 1?", a: "No. You choose the first number, for example 5." },
+      { q: "Does the file go to a server?", a: "No. Numbers are added in this browser." },
+    ],
+    tr: [
+      { q: "PDF numaralandırma ücretsiz mi?", a: "Evet. Hesap ve ödeme yoktur." },
+      { q: "Kapak numarasız kalabilir mi?", a: "Evet. «Başlangıç sayfası»na 2 yazın." },
+      { q: "Numara 1'den mi başlamalı?", a: "Hayır. İlk sayıyı siz seçersiniz, örneğin 5." },
+      { q: "Dosya sunucuya gider mi?", a: "Hayır. Numaralar bu tarayıcıda eklenir." },
+    ],
+    ar: [
+      { q: "هل ترقيم PDF مجاني؟", a: "نعم. لا حساب ولا دفع." },
+      { q: "هل يمكن ترك الغلاف بلا رقم؟", a: "نعم. اكتب 2 في «البدء من الصفحة»." },
+      { q: "هل يجب أن يبدأ الترقيم من 1؟", a: "لا. أنت تختار الرقم الأول، مثل 5." },
+      { q: "هل يذهب الملف إلى خادم؟", a: "لا. تُضاف الأرقام في هذا المتصفح." },
+    ],
+    ru: [
+      { q: "Нумерация PDF бесплатна?", a: "Да. Аккаунта и оплаты нет." },
+      { q: "Можно не нумеровать обложку?", a: "Да. Укажите «Начать со страницы» 2." },
+      { q: "Номера должны начинаться с 1?", a: "Нет. Первое число выбираете вы, например 5." },
+      { q: "Файл уходит на сервер?", a: "Нет. Номера добавляются в этом браузере." },
     ],
   },
   watermark: {

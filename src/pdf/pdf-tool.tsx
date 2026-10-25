@@ -2,8 +2,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowLeft, ArrowRight, Camera, Check, FileText, FileType2, Files, Image as ImageIcon, Layers, Lock, Minimize2,
-  PenLine, RotateCw, ScanText, Scissors, Droplet, ListOrdered, Eye, FilePlus2, FileOutput, FileImage, ScanLine, X,
-} from "lucide-react";
+  PenLine, RotateCw, ScanText, Scissors, Droplet, ListOrdered, Eye, FilePlus2, FileOutput, FileImage, ScanLine, X, Hash } from "lucide-react";
 import { zipSync } from "fflate";
 import type { Lang } from "@/lib/i18n";
 import { COPY, type Dict } from "./copy";
@@ -21,14 +20,14 @@ import type { WatermarkPosition } from "./lib/pdfOperations";
 const ICONS: Record<ToolId, typeof FileText> = {
   "write-pdf": PenLine, merge: Files, split: Scissors, compress: Minimize2, "image-pdf": ImageIcon, "pdf-image": FileImage,
   rotate: RotateCw, protect: Lock, watermark: Droplet, pages: ListOrdered, scan: ScanLine, sign: PenLine, ocr: ScanText,
-  "pdf-ocr": FileType2, "pdf-word": FileOutput, preview: Eye, batch: Layers, "extract-pages": Check, "word-pdf": FilePlus2,
+  "pdf-ocr": FileType2, "pdf-word": FileOutput, preview: Eye, batch: Layers, "extract-pages": Check, "word-pdf": FilePlus2, "page-numbers": Hash,
 };
 
 type Kind = "pdf" | "pdfs" | "images" | "docx" | "none";
 const KIND: Record<ToolId, Kind> = {
   "write-pdf": "none", merge: "pdfs", split: "pdf", compress: "pdf", "image-pdf": "images", "pdf-image": "pdf", rotate: "pdf",
   protect: "pdf", watermark: "pdf", pages: "pdf", scan: "images", sign: "pdf", ocr: "images", "pdf-ocr": "pdf", "pdf-word": "pdf",
-  preview: "pdf", batch: "pdfs", "extract-pages": "pdf", "word-pdf": "docx",
+  preview: "pdf", batch: "pdfs", "extract-pages": "pdf", "word-pdf": "docx", "page-numbers": "pdf",
 };
 
 type Item = { id: number; file: File; name: string; bytes?: Uint8Array; pages?: number; locked?: boolean; bad?: boolean };
@@ -41,12 +40,23 @@ const WM_POS: { id: WatermarkPosition; s: string }[] = [
 ];
 
 const GROUPS: { id: string; tools: ToolId[]; label: Record<Lang, string> }[] = [
-  { id: "organize", tools: ["merge", "split", "pages", "extract-pages", "rotate", "batch"], label: { az: "Səhifələri idarə et", en: "Organize", tr: "Sayfaları düzenle", ar: "تنظيم الصفحات", ru: "Страницы и файлы" } },
+  { id: "organize", tools: ["merge", "split", "pages", "extract-pages", "rotate", "page-numbers", "batch"], label: { az: "Səhifələri idarə et", en: "Organize", tr: "Sayfaları düzenle", ar: "تنظيم الصفحات", ru: "Страницы и файлы" } },
   { id: "convert", tools: ["pdf-image", "pdf-word", "word-pdf", "pdf-ocr", "ocr", "preview"], label: { az: "Çevir və oxu", en: "Convert & read", tr: "Dönüştür ve oku", ar: "تحويل وقراءة", ru: "Конвертация и чтение" } },
   { id: "create", tools: ["write-pdf", "image-pdf", "scan"], label: { az: "Yarat", en: "Create", tr: "Oluştur", ar: "إنشاء", ru: "Создание" } },
   { id: "secure", tools: ["compress", "protect", "watermark", "sign"], label: { az: "Optimallaşdır və qoru", en: "Optimize & protect", tr: "Optimize et ve koru", ar: "تحسين وحماية", ru: "Сжатие и защита" } },
 ];
 
+const NUM_POS: { id: eng.NumPos; s: string }[] = [
+  { id: "top-left", s: "↖" }, { id: "top-center", s: "↑" }, { id: "top-right", s: "↗" },
+  { id: "bottom-left", s: "↙" }, { id: "bottom-center", s: "↓" }, { id: "bottom-right", s: "↘" },
+];
+const NUM_T: Record<Lang, { from: string; fromHint: string; start: string; startHint: string; pos: string; fmt: string; size: string; margin: string; preview: string; page: string }> = {
+  az: { from: "Hansı səhifədən başlasın", fromHint: "Üz qabığını nömrəsiz saxlamaq üçün 2 yazın.", start: "İlk rəqəm", startHint: "Nömrələnən ilk səhifədə görünən rəqəm.", pos: "Yer", fmt: "Görünüş", size: "Şrift ölçüsü", margin: "Kənardan məsafə", preview: "Nümunə", page: "səhifə" },
+  en: { from: "Start on page", fromHint: "Set 2 to keep the cover unnumbered.", start: "First number", startHint: "The number shown on the first numbered page.", pos: "Position", fmt: "Format", size: "Font size", margin: "Distance from edge", preview: "Preview", page: "page" },
+  tr: { from: "Başlangıç sayfası", fromHint: "Kapağı numarasız bırakmak için 2 yazın.", start: "İlk sayı", startHint: "Numaralanan ilk sayfada görünen sayı.", pos: "Konum", fmt: "Biçim", size: "Yazı boyutu", margin: "Kenardan uzaklık", preview: "Örnek", page: "sayfa" },
+  ar: { from: "البدء من الصفحة", fromHint: "اكتب 2 لترك الغلاف بلا رقم.", start: "الرقم الأول", startHint: "الرقم الذي يظهر على أول صفحة مرقّمة.", pos: "الموضع", fmt: "الشكل", size: "حجم الخط", margin: "المسافة من الحافة", preview: "مثال", page: "صفحة" },
+  ru: { from: "Начать со страницы", fromHint: "Укажите 2, чтобы обложка осталась без номера.", start: "Первое число", startHint: "Число на первой нумеруемой странице.", pos: "Место", fmt: "Вид", size: "Размер шрифта", margin: "Отступ от края", preview: "Пример", page: "стр." },
+};
 const basePath = (lang: Lang) => (lang === "az" ? "/pdf" : `/${lang}/pdf`);
 
 export function PdfTool({ lang, tool }: { lang: Lang; tool: ToolId | null }) {
@@ -135,6 +145,12 @@ function Workspace({ tool, lang, t, title, desc }: { tool: ToolId; lang: Lang; t
   const [imgFmt, setImgFmt] = useState<"png" | "jpeg">("png");
   const [ocrLang, setOcrLang] = useState<OcrLang | "auto" | "all">("auto");
   const [batchOp, setBatchOp] = useState<"compress" | "rotate" | "watermark" | "split">("compress");
+  const [numFrom, setNumFrom] = useState(1);
+  const [numStart, setNumStart] = useState(1);
+  const [numPos, setNumPos] = useState<eng.NumPos>("bottom-center");
+  const [numFmt, setNumFmt] = useState<eng.NumFormat>("n");
+  const [numSize, setNumSize] = useState(11);
+  const [numMargin, setNumMargin] = useState(28);
   const [forceOcr, setForceOcr] = useState(false);
   const [viewZoom, setViewZoom] = useState(1);
   const [openOut, setOpenOut] = useState<Out | null>(null);
@@ -363,6 +379,11 @@ function Workspace({ tool, lang, t, title, desc }: { tool: ToolId; lang: Lang; t
           const p = pagesSel(f.pages ?? 0);
           if (p === null) throw new Error(t.errBadRange);
           res.push(pdfOut(`${baseName(f.name)}-watermark.pdf`, await eng.watermarkPdf(f.bytes!, wm.trim() || "NIBRAS PDF", wmPos, p)));
+          break;
+        }
+        case "page-numbers": {
+          need();
+          res.push(pdfOut(`${baseName(f.name)}-numbered.pdf`, await eng.addPageNumbers(f.bytes!, { fromPage: numFrom, start: numStart, position: numPos, format: numFmt, size: Math.max(6, Math.min(36, numSize || 11)), margin: Math.max(8, Math.min(120, numMargin || 28)) })));
           break;
         }
         case "pages": {
@@ -608,6 +629,30 @@ function Workspace({ tool, lang, t, title, desc }: { tool: ToolId; lang: Lang; t
           {tool === "rotate" ? (
             <div><Label>{t.mode}</Label><Seg name="rotation" value={String(rot)} onChange={(v) => setRot(Number(v))} options={[{ id: "270", label: t.rotLeft }, { id: "90", label: t.rotRight }, { id: "180", label: t.rot180 }]} /></div>
           ) : null}
+          {tool === "page-numbers" ? (() => {
+            const nt = NUM_T[lang];
+            const total = first?.pages ?? 0;
+            const last = numStart + Math.max(0, total - numFrom);
+            const sample = numFmt === "n-of" ? `${numStart} / ${total ? last : "N"}` : numFmt === "dash" ? `- ${numStart} -` : String(numStart);
+            return (
+              <div className="grid gap-3 sm:grid-cols-2" data-testid="num-ui">
+                <div><Label>{nt.from}</Label><input type="number" min={1} max={total || undefined} className={field} value={numFrom} onChange={(e) => setNumFrom(Math.max(1, Number(e.target.value) || 1))} data-testid="num-from" /><p className="mt-1 text-xs text-muted">{nt.fromHint}</p></div>
+                <div><Label>{nt.start}</Label><input type="number" min={0} className={field} value={numStart} onChange={(e) => setNumStart(Math.max(0, Number(e.target.value) || 0))} data-testid="num-start" /><p className="mt-1 text-xs text-muted">{nt.startHint}</p></div>
+                <div>
+                  <Label>{nt.pos}</Label>
+                  <div className="grid w-36 grid-cols-3 gap-1.5" dir="ltr">
+                    {NUM_POS.map((p) => (
+                      <button key={p.id} type="button" aria-label={p.id} data-pos={p.id} onClick={() => setNumPos(p.id)} className={`aspect-square rounded-lg border text-lg ${numPos === p.id ? "border-primary bg-primary/25" : "border-border bg-white/5"}`}>{p.s}</button>
+                    ))}
+                  </div>
+                </div>
+                <div><Label>{nt.fmt}</Label><Seg name={nt.fmt} value={numFmt} onChange={setNumFmt} options={[{ id: "n", label: "1" }, { id: "n-of", label: "1 / N" }, { id: "dash", label: "- 1 -" }]} /></div>
+                <div><Label>{nt.size}</Label><input type="number" min={6} max={36} className={field} value={numSize} onChange={(e) => setNumSize(Number(e.target.value))} data-testid="num-size" /></div>
+                <div><Label>{nt.margin}</Label><input type="number" min={8} max={120} className={field} value={numMargin} onChange={(e) => setNumMargin(Number(e.target.value))} data-testid="num-margin" /></div>
+                <p className="text-xs text-muted sm:col-span-2">{nt.preview}: <b dir="ltr">{sample}</b> — {nt.page} {numFrom}{total ? ` … ${total}` : ""}</p>
+              </div>
+            );
+          })() : null}
           {tool === "protect" ? (
             <div className="grid gap-3 sm:grid-cols-2">
               <div><Label>{t.password}</Label><input type="password" autoComplete="new-password" className={field} value={pwd} onChange={(e) => setPwd(e.target.value)} data-testid="pwd" /></div>

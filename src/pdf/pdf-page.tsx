@@ -15,11 +15,11 @@ const PdfTool = lazy(() => import("./pdf-tool").then((m) => ({ default: m.PdfToo
 const LANG_NAME: Record<Lang, string> = { az: "Azərbaycanca", en: "English", tr: "Türkçe", ar: "العربية", ru: "Русский" };
 const ALL_TOOLS: Record<Lang, string> = { az: "Hamısı", en: "All tools", tr: "Hepsi", ar: "الكل", ru: "Все" };
 const BADGES: Record<Lang, [string, string, string]> = {
-  az: ["19 alət", "5 dil", "Cihazda emal"],
-  en: ["19 tools", "5 languages", "On-device"],
-  tr: ["19 araç", "5 dil", "Cihazda işlenir"],
-  ar: ["19 أداة", "5 لغات", "على جهازك"],
-  ru: ["19 инструментов", "5 языков", "На устройстве"],
+  az: ["20 alət", "5 dil", "Cihazda emal"],
+  en: ["20 tools", "5 languages", "On-device"],
+  tr: ["20 araç", "5 dil", "Cihazda işlenir"],
+  ar: ["20 أداة", "5 لغات", "على جهازك"],
+  ru: ["20 инструментов", "5 языков", "На устройстве"],
 };
 const ASK_AI: Record<Lang, string> = {
   az: "Nibras AI ilə PDF-i danışıqla idarə et",
@@ -48,7 +48,8 @@ const NEXT: Partial<Record<ToolId, ToolId[]>> = {
   preview: ["merge", "split", "pages"],
   batch: ["merge", "compress", "split"],
   "extract-pages": ["split", "pages", "merge"],
-  "word-pdf": ["pdf-word", "compress", "merge"],
+  "word-pdf": ["pdf-word", "page-numbers", "merge"],
+  "page-numbers": ["watermark", "pages", "merge"],
 };
 
 export function PdfPage({ tool }: { tool: ToolId | null }) {
