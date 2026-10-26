@@ -5,6 +5,7 @@
 //   DELETE ?id=...                              -> silir
 // Cihaz nömrəsi x-device-id başlığı (və ya ?device_id=) ilə gəlir; yalnız həmin cihazın sətirləri qaytarılır.
 import { handleChats } from "./_chats.js";
+import { watch5xx } from "./_ops.js";
 
 export const config = { maxDuration: 15 };
 
@@ -35,7 +36,7 @@ async function readBody(req) {
   return typeof body === "object" ? body : null;
 }
 
-export default async function handler(req, res) {
+async function handler(req, res) {
   res.setHeader("Cache-Control", "no-store");
   try {
     const url = new URL(req.url || "/", "http://localhost");
@@ -53,3 +54,4 @@ export default async function handler(req, res) {
     res.status(200).json({ ok: false, storage: false, error: "Server xətası" });
   }
 }
+export default watch5xx("chats", handler);

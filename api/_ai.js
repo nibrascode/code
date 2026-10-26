@@ -2,6 +2,7 @@
 // Yeni provayder və ya açar yoxdur: yalnız köhnə funksiyalar buraya köçürülüb.
 // Sistem mətni, token, temperatur və vaxt həddi sorğu daxilində (AsyncLocalStorage) verilir: aiConfig.run({system, tokens(), timeout(base), temperature?}, fn).
 import { AsyncLocalStorage } from "node:async_hooks";
+import { countAi } from "./_ops.js";
 
 export const aiConfig = new AsyncLocalStorage();
 const DEFAULT_CFG = { system: "", tokens: () => 700, timeout: (base) => AbortSignal.timeout(base) };
@@ -32,6 +33,11 @@ export function configuredProviders() {
 }
 
 export async function askProvider(name, history, message) {
+  const r = await askProviderRaw(name, history, message);
+  countAi(name, r);
+  return r;
+}
+async function askProviderRaw(name, history, message) {
   if (name === "groq" || name === "groq-reason") return askGroq(history);
   if (name === "xai") return askXai(history);
   if (name === "mistral") return askMistral(history, ["mistral-small-latest", "codestral-latest"]);
@@ -69,7 +75,9 @@ export async function askModel(provider, model, history) {
   const apiKey = ep[1].map((k) => env(k)).find(Boolean);
   if (!apiKey) return { skipped: true };
   const extraHeaders = provider === "openrouter" ? { "HTTP-Referer": "https://www.nibrascode.com", "X-Title": "Nibras AI" } : undefined;
-  return complete({ url: ep[0], apiKey, model, history, extraHeaders });
+  const r = await complete({ url: ep[0], apiKey, model, history, extraHeaders });
+  countAi(provider, r);
+  return r;
 }
 
 export function env(name) {

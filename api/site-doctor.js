@@ -1,4 +1,5 @@
 import { publicUrl, parsePage, readRobots, readSitemap } from "./seo-check.js";
+import { watch5xx } from "./_ops.js";
 
 export const config = { maxDuration: 30 };
 
@@ -280,7 +281,7 @@ async function readJson(req) {
   return JSON.parse(Buffer.concat(chunks).toString("utf8") || "{}");
 }
 
-export default async function handler(req, res) {
+async function handler(req, res) {
   if (req.method !== "POST") {
     res.setHeader("allow", "POST");
     return send(res, 405, { ok: false, error: "method" });
@@ -307,3 +308,4 @@ export default async function handler(req, res) {
     send(res, 400, { ok: false, error: "bad-url" });
   }
 }
+export default watch5xx("site-doctor", handler);

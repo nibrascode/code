@@ -1,4 +1,5 @@
 import QRCode from "qrcode";
+import { watch5xx } from "./_ops.js";
 
 function textOf(req) {
   const direct = req.query?.text;
@@ -11,7 +12,7 @@ function textOf(req) {
   }
 }
 
-export default async function handler(req, res) {
+async function handler(req, res) {
   const text = textOf(req).slice(0, 500);
   if (!text) {
     res.status(400).end("text");
@@ -29,3 +30,4 @@ export default async function handler(req, res) {
   res.setHeader("Cache-Control", "public, max-age=86400");
   res.status(200).end(png);
 }
+export default watch5xx("qr", handler);

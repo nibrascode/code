@@ -550,7 +550,7 @@ export function PulseCard({ go }: { go: (tab: string) => void }) {
   const alerts: { tab: string; text: string }[] = [];
   if (down.length) alerts.push({ tab: "providers", text: `${t("al_prov")}: ${down.map((p) => p.name).join(", ")}` });
   if (syncBad) alerts.push({ tab: "releases", text: t("al_play") });
-  if (last && last.state === "failure") alerts.push({ tab: "deploys", text: t("al_deploy") });
+  if (last && (last.state === "failure" || last.state === "error")) alerts.push({ tab: "deploys", text: t("al_deploy") });
   if (lib && !lib.up) alerts.push({ tab: "libstats", text: t("al_lib") });
   const ready = prov && apps && dep && lib;
   return (
@@ -571,10 +571,58 @@ export function PulseCard({ go }: { go: (tab: string) => void }) {
         )
       ) : null}
       <div className="nxx-pulses">
-        {tile("deploys", "dep_last", last ? (last.state === "success" ? t("dep_success") : last.state === "failure" ? t("dep_failure") : t("dep_pending")) : "…", last ? depTone(last.state) : "off")}
+        {tile("deploys", "dep_last", last ? (last.state === "success" ? t("dep_success") : last.state === "failure" || last.state === "error" ? t("dep_failure") : t("dep_pending")) : "…", last ? depTone(last.state) : "off")}
         {tile("providers", "prov_working", prov ? `${conf.filter((p) => p.ok).length} / ${conf.length}` : "…", prov ? (conf.every((p) => p.ok) ? "ok" : "warn") : "off")}
         {tile("libstats", "lib_books", lib?.catalog ? fmtNum(lang, lib.catalog.books) : "…", lib ? (lib.up ? "ok" : "bad") : "off")}
       </div>
+    </Card>
+  );
+}
+
+/* ───────────── AI + 5xx siqnalları ───────────── */
+
+type Ops = { storage: boolean; ai?: { calls: number; err: number; avg: number | null; spike: boolean; errAlert: boolean; errRate: number }; e5?: { total: number; top: { route: string; n: number }[]; alert: boolean } };
+const OPS_TXT: Record<string, Record<string, string>> = {
+  az: { t: "AI və server xətaları", ai: "AI bu gün", avg: "7 gün ortası", err: "xəta", spike: "AI çağırışları ortanın ≥3× qədərdir", erra: "AI provayder xətaları çoxdur", e5: "5xx (bu gün+dünən)", e5a: "Server xətaları artıb", none: "5xx yoxdur", na: "Saxlama qoşulmayıb — siqnal əlçatan deyil", ok: "Normal", new: "sayğac təzə başlayıb" },
+  en: { t: "AI & server errors", ai: "AI today", avg: "7-day avg", err: "errors", spike: "AI calls are ≥3× the average", erra: "High AI provider errors", e5: "5xx (today+yesterday)", e5a: "Server errors increased", none: "No 5xx", na: "Storage not connected — signal unavailable", ok: "Normal", new: "counter just started" },
+  tr: { t: "AI ve sunucu hataları", ai: "AI bugün", avg: "7 gün ort.", err: "hata", spike: "AI çağrıları ortalamanın ≥3 katı", erra: "AI sağlayıcı hataları yüksek", e5: "5xx (bugün+dün)", e5a: "Sunucu hataları arttı", none: "5xx yok", na: "Depolama bağlı değil — sinyal yok", ok: "Normal", new: "sayaç yeni başladı" },
+  ar: { t: "الذكاء الاصطناعي وأخطاء الخادم", ai: "الذكاء اليوم", avg: "متوسط 7 أيام", err: "أخطاء", spike: "طلبات الذكاء ≥3× المتوسط", erra: "أخطاء مزودي الذكاء مرتفعة", e5: "5xx (اليوم+أمس)", e5a: "ازدادت أخطاء الخادم", none: "لا أخطاء 5xx", na: "التخزين غير متصل — الإشارة غير متاحة", ok: "طبيعي", new: "العداد بدأ للتو" },
+  ru: { t: "ИИ и ошибки сервера", ai: "ИИ сегодня", avg: "сред. 7 дн.", err: "ошибок", spike: "Вызовы ИИ ≥3× среднего", erra: "Много ошибок провайдеров ИИ", e5: "5xx (сегодня+вчера)", e5a: "Рост ошибок сервера", none: "5xx нет", na: "Хранилище не подключено — сигнал недоступен", ok: "Норма", new: "счётчик только начал" },
+};
+
+export function OpsCard() {
+  const { lang } = useStudio();
+  const x = OPS_TXT[lang] || OPS_TXT.en;
+  const [d, setD] = useState<Ops | null>(null);
+  useEffect(() => {
+    let alive = true;
+    const load = () => {
+      if (document.visibilityState === "hidden") return;
+      nxGet<Ops>("ops").then((v) => alive && setD(v)).catch(() => undefined);
+    };
+    load();
+    const id = setInterval(load, 120_000);
+    return () => {
+      alive = false;
+      clearInterval(id);
+    };
+  }, []);
+  if (!d) return null;
+  if (!d.storage || !d.ai || !d.e5) return <Card title={x.t}><p className="nxa-muted">{x.na}</p></Card>;
+  const { ai, e5 } = d;
+  const warns = [ai.spike && x.spike, ai.errAlert && `${x.erra} (${ai.errRate}%)`, e5.alert && x.e5a].filter(Boolean) as string[];
+  return (
+    <Card title={x.t}>
+      <p>
+        {warns.length ? warns.map((w, i) => <span key={i}><Pill tone={i === 0 && ai.spike ? "warn" : "bad"}>!</Pill> {w} </span>) : <Pill tone="ok">{x.ok}</Pill>}
+      </p>
+      <p className="nxa-muted">
+        {x.ai}: <b>{fmtNum(lang, ai.calls)}</b> · {x.err}: {fmtNum(lang, ai.err)} · {x.avg}: {ai.avg == null ? x.new : fmtNum(lang, ai.avg)}
+      </p>
+      <p className="nxa-muted">
+        {x.e5}: <b>{fmtNum(lang, e5.total)}</b>
+        {e5.top.length ? " — " + e5.top.map((r) => `/api/${r.route} ${r.n}`).join(" · ") : ` — ${x.none}`}
+      </p>
     </Card>
   );
 }

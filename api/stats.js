@@ -2,6 +2,7 @@
 // GET  /api/stats?key=STATS_KEY[&days=14]  (və ya x-stats-key başlığı) -> günlük say cədvəli
 import { createHash, timingSafeEqual } from "node:crypto";
 import { cleanEvent, recordEvent, readDays, storageConfig, TYPES } from "./_stats.js";
+import { watch5xx } from "./_ops.js";
 
 export const config = { maxDuration: 10 };
 
@@ -36,7 +37,7 @@ async function readBody(req) {
   return typeof body === "object" ? body : null;
 }
 
-export default async function handler(req, res) {
+async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, x-stats-key");
@@ -86,3 +87,4 @@ export default async function handler(req, res) {
     res.status(200).json({ ok: false, error: "Server xətası" });
   }
 }
+export default watch5xx("stats", handler);

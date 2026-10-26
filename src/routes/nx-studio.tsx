@@ -48,7 +48,7 @@ import {
   IconUpload,
   IconRefresh,
 } from "@/components/studio/icons";
-import { CoversSection, DeploysSection, LibraryStatsSection, ProvidersSection, PulseCard, LiveCard, ReleasesSection } from "@/components/studio/nx-sections";
+import { CoversSection, DeploysSection, LibraryStatsSection, ProvidersSection, PulseCard, LiveCard, OpsCard, ReleasesSection } from "@/components/studio/nx-sections";
 
 export const Route = createFileRoute("/nx-studio")({
   component: StudioPage,
@@ -493,6 +493,7 @@ function Desk({
                 <LiveCard />
                 <OverviewSection ov={ov} />
                 <PulseCard go={go} />
+                <OpsCard />
               </>
             ) : null}
             {tab === "releases" ? <ReleasesSection /> : null}

@@ -23,6 +23,7 @@ import {
 } from "./_admin.js";
 import { liveCount, LIVE_SECONDS } from "./_presence.js";
 import { appsData, coverList, deploys, libraryStats, providerHealth, runPlaySync, setAppSize } from "./_nx.js";
+import { opsSignals, watch5xx } from "./_ops.js";
 
 export const config = { maxDuration: 15 };
 
@@ -71,7 +72,7 @@ function bearer(req) {
   return h.startsWith("Bearer ") ? h.slice(7).trim() : "";
 }
 
-export default async function handler(req, res) {
+async function handler(req, res) {
   res.setHeader("Cache-Control", "no-store");
   res.setHeader("X-Robots-Tag", "noindex, nofollow");
   const url = new URL(req.url || "/", "http://localhost");
@@ -155,6 +156,10 @@ export default async function handler(req, res) {
       const [sig, vercel] = await Promise.all([securitySignals(live), vercelAttack(process.env, globalThis.fetch)]);
       return send(200, { ok: true, ...sig, vercel, at: Date.now() });
     }
+    if (req.method === "GET" && op === "ops") {
+      if (!(await verifyAdmin(bearer(req)))) return send(401, { ok: false, error: "auth" });
+      return send(200, { ok: true, ...(await opsSignals()) });
+    }
 
     const NX_GET = new Set(["providers", "library", "apps", "covers", "deploys"]);
     if (req.method === "GET" && NX_GET.has(op)) {
@@ -173,3 +178,4 @@ export default async function handler(req, res) {
     return send(500, { ok: false, error: "server" });
   }
 }
+export default watch5xx("admin", handler);

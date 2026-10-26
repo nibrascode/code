@@ -1,4 +1,5 @@
 import { lookup } from "node:dns/promises";
+import { watch5xx } from "./_ops.js";
 
 export const config = { maxDuration: 15 };
 
@@ -257,7 +258,7 @@ async function readJson(req) {
   return JSON.parse(Buffer.concat(chunks).toString("utf8") || "{}");
 }
 
-export default async function handler(req, res) {
+async function handler(req, res) {
   if (req.method !== "POST") {
     send(res, 405, { ok: false, error: "bad-url" });
     return;
@@ -279,3 +280,4 @@ export default async function handler(req, res) {
     send(res, 400, { ok: false, error: "bad-url" });
   }
 }
+export default watch5xx("seo-check", handler);

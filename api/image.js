@@ -1,3 +1,4 @@
+import { watch5xx } from "./_ops.js";
 export const config = { maxDuration: 60 };
 
 const MODELS = ["grok-imagine-image", "grok-imagine-image-2.0", "grok-imagine-image-quality"];
@@ -53,7 +54,7 @@ function wantsLiving(prompt) {
   return false;
 }
 
-export default async function handler(req, res) {
+async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
@@ -256,3 +257,4 @@ async function readJson(req) {
   const raw = Buffer.concat(chunks).toString("utf8");
   return raw ? JSON.parse(raw) : {};
 }
+export default watch5xx("image", handler);

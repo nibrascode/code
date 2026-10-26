@@ -1,6 +1,7 @@
 // Nibras Error Help: proqramçının xəta mesajını yeni başlayan üçün izah edir (mövcud Nibras AI provayderləri)
 import { askProvider, aiConfig, configuredProviders } from "./_ai.js";
 import { langDirective } from "./_lang.js";
+import { watch5xx } from "./_ops.js";
 
 export const config = { maxDuration: 45 };
 
@@ -45,7 +46,7 @@ export function parseAnswer(text) {
   return { meaning, causes: list(j.causes), checklist: list(j.checklist), example: String(j.example || "").trim().slice(0, 4000), stack: String(j.stack || "other") };
 }
 
-export default async function handler(req, res) {
+async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).json({ ok: false, error: "method" });
   let body = req.body;
   if (typeof body === "string") { try { body = JSON.parse(body); } catch { body = {}; } }
@@ -73,3 +74,4 @@ export default async function handler(req, res) {
   }
   return res.status(503).json({ ok: false, error: "ai" });
 }
+export default watch5xx("error-help", handler);

@@ -18,6 +18,7 @@ import { stripNotice, OLD_AZ_NOTICE } from "./_notice.js";
 import { resolveLang, msgs, langDirective, dateDirective, stripCutoff, eraseReply } from "./_lang.js";
 // Proqramlaşdırma suallarında Hugging Face bucket-dəki kod bazasından uyğun nümunələr AI-yə kontekst kimi verilir (məlumat HF-də qalır)
 import { codeContext, isCodingQuestion } from "./_codekb.js";
+import { watch5xx } from "./_ops.js";
 
 // DİQQƏT: sistem mətnində yazılmasını istəmədiyimiz şeylərin adı (konkret sitat, alim adı, qrammatika mövzusu) çəkilmir —
 // zəif modellər «X yazma» qaydasını təkrarlayıb cavaba X-i əlavə edirdi (məs. İbn Sirin «sitatı» + uydurma «(Tirmizi, 3/121)», «لن» qeydi).
@@ -82,7 +83,7 @@ export function closeTruncatedFence(text) {
   return t.replace(/\s+$/, "") + "\n```\n\nKod uzunluq həddinə çatdığı üçün yarımçıq qala bilər. Davamı üçün «davam et» yaz.";
 }
 
-export default async function handler(req, res) {
+async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
@@ -598,3 +599,4 @@ async function readJson(req) {
   const raw = Buffer.concat(chunks).toString("utf8");
   return raw ? JSON.parse(raw) : {};
 }
+export default watch5xx("chat", handler);
