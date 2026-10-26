@@ -1,6 +1,76 @@
 {
   "redirects": [
     {
+      "source": "/:lang(en|tr|ar|ru)?/kitab",
+      "destination": "https://library.nibrascode.com/",
+      "permanent": true
+    },
+    {
+      "source": "/:lang(en|tr|ar|ru)?/kitab/:path*",
+      "destination": "https://library.nibrascode.com/",
+      "permanent": true
+    },
+    {
+      "source": "/:lang(en|tr|ar|ru)?/kitablar",
+      "destination": "https://library.nibrascode.com/",
+      "permanent": true
+    },
+    {
+      "source": "/:lang(en|tr|ar|ru)?/kitablar/:path*",
+      "destination": "https://library.nibrascode.com/",
+      "permanent": true
+    },
+    {
+      "source": "/:lang(en|tr|ar|ru)?/books",
+      "destination": "https://library.nibrascode.com/",
+      "permanent": true
+    },
+    {
+      "source": "/:lang(en|tr|ar|ru)?/books/:path*",
+      "destination": "https://library.nibrascode.com/",
+      "permanent": true
+    },
+    {
+      "source": "/:lang(en|tr|ar|ru)?/book",
+      "destination": "https://library.nibrascode.com/",
+      "permanent": true
+    },
+    {
+      "source": "/:lang(en|tr|ar|ru)?/book/:path*",
+      "destination": "https://library.nibrascode.com/",
+      "permanent": true
+    },
+    {
+      "source": "/:lang(en|tr|ar|ru)?/quran",
+      "destination": "https://library.nibrascode.com/quran",
+      "permanent": true
+    },
+    {
+      "source": "/:lang(en|tr|ar|ru)?/quran/:path*",
+      "destination": "https://library.nibrascode.com/quran/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:lang(en|tr|ar|ru)?/tafsir",
+      "destination": "https://library.nibrascode.com/tafsir",
+      "permanent": true
+    },
+    {
+      "source": "/:lang(en|tr|ar|ru)?/tafsir/:path*",
+      "destination": "https://library.nibrascode.com/tafsir/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:lang(en|tr|ar|ru)?/tefsir",
+      "destination": "https://library.nibrascode.com/tafsir",
+      "permanent": true
+    },
+    {
+      "source": "/:lang(en|tr|ar|ru)?/tefsir/:path*",
+      "destination": "https://library.nibrascode.com/tafsir/:path*",
+      "permanent": true
+    },
+    {
       "source": "/al",
       "destination": "/ai",
       "permanent": true
