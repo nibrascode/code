@@ -288,6 +288,8 @@ export function collectRoutePathsFromTree(routeTree: unknown): string[] {
           ? record.path
           : null;
     if (full !== null && full !== "") {
+      // Skip TanStack param templates like /xeta/$slug — never expose as crawlable URLs
+      if (full.includes("$")) return;
       paths.add(full.startsWith("/") ? full : `/${full}`);
     } else if (full === "") {
       paths.add("/");
