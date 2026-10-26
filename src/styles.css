@@ -7317,11 +7317,11 @@ body.is-planner .site-backdrop {
 .nx-bar-group--studio .nx-bar-group-title { color: color-mix(in srgb, #c4b0ff 85%, #fff); }
 .nx-bar-group--learn .nx-bar-group-title { color: color-mix(in srgb, #8fe0c8 85%, #fff); }
 .nx-bar-group-title {
-  margin: 0 0 8px;
-  font-size: 11px;
+  margin: 0 0 7px;
+  font-size: 10px;
   font-weight: 600;
   line-height: 1.2;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
   color: color-mix(in srgb, currentColor 55%, transparent);
 }
