@@ -7356,14 +7356,16 @@ body.is-planner .site-backdrop {
 .nx-bar-group--tools .nx-bar-group-title { color: color-mix(in srgb, #9ec0ff 85%, #fff); }
 .nx-bar-group--studio .nx-bar-group-title { color: color-mix(in srgb, #c4b0ff 85%, #fff); }
 .nx-bar-group--learn .nx-bar-group-title { color: color-mix(in srgb, #8fe0c8 85%, #fff); }
+.nx h2.nx-bar-group-title,
+.nx-bars h2.nx-bar-group-title,
 .nx-bar-group-title {
-  margin: 0 0 4px;
-  font-size: 5px;
-  font-weight: 600;
-  line-height: 1.1;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: color-mix(in srgb, currentColor 50%, transparent);
+  margin: 0 0 6px !important;
+  font-size: 10px !important;
+  font-weight: 600 !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: color-mix(in srgb, currentColor 55%, transparent);
 }
 .nx-bar-group-grid {
   display: grid;
