@@ -6248,8 +6248,9 @@ body.is-home .noise {
 }
 
 .nx-why li span {
-  color: rgb(226 234 248 / 0.9);
-  font-size: 13px;
+  color: rgb(226 234 248 / 0.92);
+  font-size: 14.5px;
+  line-height: 1.45;
 }
 
 .nx-who {
