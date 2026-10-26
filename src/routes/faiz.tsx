@@ -48,7 +48,7 @@ export function PercentPage() {
   return (
     <main className="files-page mx-auto w-full max-w-3xl px-4 pt-28 pb-16 md:px-6">
       <header className="mb-6">
-        <h1 className="font-display text-2xl font-bold tracking-tight md:text-4xl">{copy.h1}</h1>
+        <h1 className="font-display text-2xl font-bold tracking-tight md:text-3xl">{copy.h1}</h1>
         <p className="mt-1 text-sm text-muted">{copy.lead}</p>
       </header>
       <div className="mb-4 grid gap-3 sm:grid-cols-3">

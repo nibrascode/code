@@ -55,7 +55,7 @@ export function FlowPage() {
     <main className="nx-tool files-page mx-auto w-full max-w-3xl px-4 pt-28 pb-16 md:px-6">
       <header className="mb-6">
         <span className="nx-tool-mark" aria-hidden="true"><b><i /><i /><i /><i /><i /><i /></b></span>
-        <h1 className="font-display text-2xl font-bold tracking-tight md:text-4xl">{copy.h1}</h1>
+        <h1 className="font-display text-2xl font-bold tracking-tight md:text-3xl">{copy.h1}</h1>
         <p className="mt-1 text-sm text-muted">{copy.lead}</p>
       </header>
       <form className="mb-6 grid gap-3" onSubmit={onSubmit}>

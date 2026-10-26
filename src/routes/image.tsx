@@ -84,7 +84,7 @@ export function ImagePage() {
       <header className="mb-6 flex items-center gap-4">
         <img src="/apps/nibras-image.png" alt="" width={64} height={64} className="size-14 shrink-0 rounded-2xl" />
         <div>
-          <h1 className="font-display text-2xl font-bold tracking-tight md:text-4xl">{copy.h1}</h1>
+          <h1 className="font-display text-2xl font-bold tracking-tight md:text-3xl">{copy.h1}</h1>
           <p className="mt-1 text-sm text-muted">{copy.lead}</p>
         </div>
       </header>

@@ -20,7 +20,7 @@ export function QrRoutePage() {
       <header className="mb-6 flex flex-wrap items-center gap-x-4 gap-y-2">
         <img src="/apps/nibras-qr-v2.jpg" alt="" width={56} height={56} className="size-12 shrink-0 rounded-2xl md:size-14" />
         <div className="min-w-0 flex-1 basis-56">
-          <h1 className="font-display text-2xl font-bold tracking-tight md:text-4xl">{w.title}</h1>
+          <h1 className="font-display text-2xl font-bold tracking-tight md:text-3xl">{w.title}</h1>
           <p className="mt-1 text-sm text-muted">{w.lead}</p>
         </div>
         <nav className="flex w-full gap-4 text-sm text-muted sm:w-auto">

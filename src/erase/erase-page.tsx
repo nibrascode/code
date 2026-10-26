@@ -142,9 +142,9 @@ export function ErasePage() {
     <main className="files-page mx-auto w-full max-w-3xl px-4 pt-28 pb-16 md:px-6">
       <header className="mb-6 flex items-start justify-between gap-3">
         <div className="flex min-w-0 items-center gap-4">
-          <img src="/apps/nibras-erase.png" alt="" width={64} height={64} className="size-14 shrink-0 rounded-2xl" />
+          <img src="/apps/nibras-erase.png" alt="" width={64} height={64} className="size-12 shrink-0 rounded-2xl md:size-14" />
           <div>
-            <h1 className="font-display text-2xl font-bold tracking-tight md:text-4xl">{TITLE[lang]}</h1>
+            <h1 className="font-display text-2xl font-bold tracking-tight md:text-3xl">{TITLE[lang]}</h1>
             <p className="mt-1 text-sm text-muted">{LEAD[lang]}</p>
           </div>
         </div>

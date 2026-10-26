@@ -47,9 +47,9 @@ export function KitShell({ path, lang, icon, next, children }: { path: KitPath; 
   return (
     <main className="files-page mx-auto w-full max-w-3xl px-4 pt-28 pb-16 md:px-6" dir={lang === "ar" ? "rtl" : "ltr"}>
       <header className="mb-6 flex items-center gap-4">
-        {icon ? <img src={icon} alt="" width={64} height={64} className="size-14 shrink-0 rounded-2xl" /> : null}
+        {icon ? <img src={icon} alt="" width={64} height={64} className="size-12 shrink-0 rounded-2xl md:size-14" /> : null}
         <div>
-          <h1 className="font-display text-2xl font-bold tracking-tight md:text-4xl">{m.h1}</h1>
+          <h1 className="font-display text-2xl font-bold tracking-tight md:text-3xl">{m.h1}</h1>
           <p className="mt-1 text-sm text-muted">{m.lead}</p>
         </div>
       </header>
