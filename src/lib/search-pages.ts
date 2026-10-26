@@ -1445,11 +1445,11 @@ export const SEARCH: Record<SearchKind, SearchSection> = {
     kind: "movzu",
     heading: L("Süni intellekt", "Artificial intelligence", "Yapay zeka", "الذكاء الاصطناعي", "Искусственный интеллект"),
     intro: L(
-      "ChatGPT, Gemini və Claude eyni işi görür: sən yazırsan, cavab gəlir. Prompt və tətbiq də buradadır.",
-      "ChatGPT, Gemini, and Claude do the same job: you write, and an answer comes back. A prompt and an app are here too.",
-      "ChatGPT, Gemini ve Claude aynı işi görür: sen yazarsın, cevap gelir. Prompt ve uygulama da burada.",
-      "ChatGPT وGemini وClaude تؤدي العمل نفسه: تكتب فيأتي الجواب. الـ prompt والتطبيق هنا أيضًا.",
-      "ChatGPT, Gemini и Claude делают одну работу: ты пишешь, приходит ответ. Prompt и приложение тоже здесь.",
+      "Süni intellekt burada söhbət proqramı deməkdir. Sən yazırsan, model cavab yazır. ChatGPT, Gemini və Claude üç ayrı proqramdır. Birinin hesabı o birini açmır. Prompt modelə göndərdiyin yazıdır. Qrafik, düymə və panel cavabın içinə və ya yanına düşə bilər, amma içindəki rəqəm mənbə deyil. Nibras AI bu saytın öz söhbətidir, onların heç biri deyil.",
+      "Artificial intelligence here means a chat program. You write, and a model writes back. ChatGPT, Gemini, and Claude are three separate programs. One account does not open the others. A prompt is the text you send to the model. A chart, a button, and a panel can sit inside the answer or beside it, but a number inside is not a source. Nibras AI is this site's own chat. It is none of those.",
+      "Yapay zeka burada sohbet programı demektir. Sen yazarsın, model cevap yazar. ChatGPT, Gemini ve Claude üç ayrı programdır. Birinin hesabı diğerini açmaz. Prompt modele gönderdiğin yazıdır. Grafik, düğme ve panel cevabın içine ya da yanına düşebilir, ama içindeki sayı kaynak değildir. Nibras AI bu sitenin kendi sohbetidir, onların hiçbiri değildir.",
+      "الذكاء الاصطناعي هنا يعني برنامج محادثة. تكتب فيكتب النموذج الجواب. ChatGPT وGemini وClaude ثلاثة برامج منفصلة. حساب واحد لا يفتح البقية. الـ prompt هو النص الذي ترسله إلى النموذج. قد يقع الرسم والزر واللوحة داخل الجواب أو بجانبه، لكن الرقم في الداخل ليس مصدرًا. Nibras AI محادثة هذا الموقع، وليس أيًا من تلك.",
+      "Искусственный интеллект здесь — программа для разговора. Ты пишешь, модель отвечает. ChatGPT, Gemini и Claude — три отдельные программы. Один аккаунт не открывает остальные. Prompt — текст, который ты отправляешь модели. График, кнопка и панель могут стоять внутри ответа или рядом, но число внутри — не источник. Nibras AI — разговор этого сайта, и это не они.",
     ),
     title: L(
       "Süni intellekt — ChatGPT, Gemini, Claude, prompt",
