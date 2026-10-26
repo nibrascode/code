@@ -2,7 +2,7 @@ import type { Lang } from "@/lib/i18n";
 
 const az = {
   h1: "Nibras Workspace",
-  lead: "Bütün alətlər bir iş sahəsində. PDF aç, mətni çıxar, sual hazırla, sənəd kimi saxla. Yaxud kod yaz, işə sal və ZIP kimi endir.",
+  lead: "PDF, suallar, sənəd və kod — bir iş sahəsində.",
   local: "Layihələr yalnız bu brauzerdə saxlanır. Fayllar serverə getmir.",
   newProject: "Yeni layihə",
   projectName: "Layihənin adı",
@@ -76,7 +76,7 @@ export type WsCopy = typeof az;
 
 const en: WsCopy = {
   h1: "Nibras Workspace",
-  lead: "All tools in one workspace. Open a PDF, extract its text, make questions, save it as a document. Or write code, run it and download it as a ZIP.",
+  lead: "PDF, questions, docs and code — one workspace.",
   local: "Projects are saved only in this browser. Files are not uploaded.",
   newProject: "New project", projectName: "Project name", untitled: "Untitled project", create: "Create",
   recent: "Recent work", projects: "Saved projects", empty: "No projects yet. Create one or start with the sample.",
@@ -101,7 +101,7 @@ const en: WsCopy = {
 
 const tr: WsCopy = {
   ...en,
-  lead: "Tüm araçlar tek çalışma alanında. PDF aç, metni çıkar, soru hazırla, belge olarak kaydet. Ya da kod yaz, çalıştır ve ZIP olarak indir.",
+  lead: "PDF, sorular, belge ve kod — tek alanda.",
   local: "Projeler yalnızca bu tarayıcıda saklanır. Dosyalar yüklenmez.",
   newProject: "Yeni proje", projectName: "Proje adı", untitled: "Adsız proje", create: "Oluştur",
   recent: "Son işler", projects: "Kayıtlı projeler", empty: "Henüz proje yok. Yeni proje oluşturun veya örnekle başlayın.",
@@ -124,7 +124,7 @@ const tr: WsCopy = {
 
 const ar: WsCopy = {
   ...en,
-  lead: "كل الأدوات في مساحة عمل واحدة. افتح PDF واستخرج النص وأنشئ أسئلة واحفظها كمستند. أو اكتب كوداً وشغّله ونزّله كملف ZIP.",
+  lead: "PDF وأسئلة ومستند وكود — في مساحة واحدة.",
   local: "تُحفظ المشاريع في هذا المتصفح فقط. لا تُرفع الملفات.",
   newProject: "مشروع جديد", projectName: "اسم المشروع", untitled: "مشروع بلا اسم", create: "إنشاء",
   recent: "آخر الأعمال", projects: "المشاريع المحفوظة", empty: "لا توجد مشاريع بعد. أنشئ مشروعاً أو ابدأ بالمثال.",
@@ -147,7 +147,7 @@ const ar: WsCopy = {
 
 const ru: WsCopy = {
   ...en,
-  lead: "Все инструменты в одном рабочем пространстве. Откройте PDF, извлеките текст, составьте вопросы, сохраните документ. Или пишите код, запускайте и скачивайте ZIP.",
+  lead: "PDF, вопросы, документ и код — в одном месте.",
   local: "Проекты хранятся только в этом браузере. Файлы не загружаются.",
   newProject: "Новый проект", projectName: "Название проекта", untitled: "Без названия", create: "Создать",
   recent: "Последние работы", projects: "Сохранённые проекты", empty: "Проектов пока нет. Создайте новый или начните с примера.",

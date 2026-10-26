@@ -71,7 +71,7 @@ export function LearnPage() {
       {course ? <CourseView key={course.id} course={course} c={c} save={save} back={() => setOpenId(null)} /> : (
         <>
           <header className="mb-5">
-            <h1 className="flex items-center gap-2 font-display text-3xl font-bold tracking-tight md:text-5xl"><BookOpen className="size-8 text-[#2f6bff]" /> {c.h1}</h1>
+            <h1 className="flex items-center gap-2 font-display text-2xl font-bold tracking-tight md:text-3xl"><BookOpen className="size-6 text-[#2f6bff]" /> {c.h1}</h1>
             <p className="mt-2 text-sm text-muted md:text-base">{c.lead}</p>
             <p className="mt-2 text-xs text-muted">{c.grounded}</p>
           </header>

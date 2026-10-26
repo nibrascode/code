@@ -49,7 +49,7 @@ export function DoctorPage() {
   return (
     <main className="files-page mx-auto w-full max-w-3xl px-3 pt-24 pb-16 md:px-6 md:pt-28" dir={lang === "ar" ? "rtl" : "ltr"} data-testid="doctor">
       <header className="mb-5">
-        <h1 className="flex items-center gap-2 font-display text-3xl font-bold tracking-tight md:text-5xl"><Activity className="size-8 text-[#2f6bff]" /> {t.h1}</h1>
+        <h1 className="flex items-center gap-2 font-display text-2xl font-bold tracking-tight md:text-3xl"><Activity className="size-6 text-[#2f6bff]" /> {t.h1}</h1>
         <p className="mt-2 text-sm text-muted md:text-base">{t.lead}</p>
       </header>
       <form className="flex flex-col gap-2 rounded-2xl border border-white/10 bg-white/[0.04] p-3 sm:flex-row" onSubmit={(e) => { e.preventDefault(); void run(); }}>

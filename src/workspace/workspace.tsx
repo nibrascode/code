@@ -115,7 +115,7 @@ export function WorkspacePage() {
   );
 
   return (
-    <main className={"files-page ws-page mx-auto w-full px-3 " + (current?.tab === "code" ? "max-w-[1680px]" : "max-w-5xl") + " pt-24 pb-16 md:px-6 md:pt-28"} dir={lang === "ar" ? "rtl" : "ltr"} data-testid="workspace">
+    <main className={"files-page ws-page mx-auto w-full px-3 " + (current?.tab === "code" ? "max-w-[1680px]" : "max-w-5xl") + " pt-20 pb-10 md:px-6 md:pt-24"} dir={lang === "ar" ? "rtl" : "ltr"} data-testid="workspace">
       {current ? (
         <ProjectView key={current.id} p={current} c={c} update={update} onBack={() => go(null)} />
       ) : (
@@ -141,16 +141,16 @@ function Home({ c, list, commit, open }: { c: WsCopy; list: Project[] | null; co
   };
   return (
     <>
-      <header className="mb-5">
-        <h1 className="font-display text-3xl font-bold tracking-tight md:text-5xl">{c.h1}</h1>
-        <p className="mt-2 max-w-2xl text-sm text-muted md:text-base">{c.lead}</p>
+      <header className="mb-3">
+        <h1 className="font-display text-2xl font-bold tracking-tight md:text-3xl">{c.h1}</h1>
+        <p className="mt-1 max-w-2xl text-sm text-muted">{c.lead}</p>
         <div className="mt-3 flex flex-wrap gap-2 text-xs">
           <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1">{c.flow1}</span>
           <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1">{c.flow2}</span>
         </div>
       </header>
       <form
-        className="mb-6 flex flex-col gap-2 rounded-2xl border border-white/10 bg-white/[0.04] p-3 sm:flex-row"
+        className="mb-4 flex flex-col gap-2 rounded-xl border border-white/10 bg-white/[0.04] p-2.5 sm:flex-row"
         onSubmit={(e) => {
           e.preventDefault();
           create(blank(name.trim() || c.untitled));
@@ -165,7 +165,7 @@ function Home({ c, list, commit, open }: { c: WsCopy; list: Project[] | null; co
           {c.sample}
         </button>
       </form>
-      <p className="mb-6 text-xs text-muted">{c.local}</p>
+      <p className="mb-4 text-[11px] text-muted">{c.local}</p>
 
       {list === null ? null : sorted.length === 0 ? (
         <p className="rounded-2xl border border-dashed border-white/15 p-6 text-center text-sm text-muted">{c.empty}</p>
