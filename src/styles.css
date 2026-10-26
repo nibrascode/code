@@ -4648,12 +4648,32 @@ body.is-home .noise {
   text-decoration: none;
 }
 
-.start-row.is-later a {
-  border-style: dashed;
-  align-items: flex-start;
+.why-page .start-row a {
   flex-direction: column;
+  align-items: flex-start;
   border-radius: 16px;
-  min-width: min(100%, 180px);
+}
+
+.why-page .start-row.is-later a {
+  border-style: dashed;
+}
+
+.start-row strong {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.start-copy {
+  color: #c9d3ee;
+  font-size: 14.5px;
+  font-weight: 450;
+  line-height: 1.6;
+}
+
+.start-chain-block {
+  margin-top: 12px;
 }
 
 .start-badge {
