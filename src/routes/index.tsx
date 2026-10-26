@@ -319,7 +319,7 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
             </a>
           </div>
           <div className="nx-bars">
-            <div className="nx-bar-group">
+            <div className="nx-bar-group nx-bar-group--tools">
               <h2 className="nx-bar-group-title">{BAR_GROUPS.g1[lang]}</h2>
               <div className="nx-bar-group-grid">
                 <a className="nx-ai-bar" href={localeHref(lang, "/ai")}>
@@ -377,7 +377,7 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
                 </a>
               </div>
             </div>
-            <div className="nx-bar-group">
+            <div className="nx-bar-group nx-bar-group--studio">
               <h2 className="nx-bar-group-title">{BAR_GROUPS.g2[lang]}</h2>
               <div className="nx-bar-group-grid">
                 <a
@@ -435,7 +435,7 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
                 </a>
               </div>
             </div>
-            <div className="nx-bar-group">
+            <div className="nx-bar-group nx-bar-group--learn">
               <h2 className="nx-bar-group-title">{BAR_GROUPS.g3[lang]}</h2>
               <div className="nx-bar-group-grid">
                 <a className="nx-apk-bar" href={localeHref(lang, "/learn")} data-testid="home-learn">

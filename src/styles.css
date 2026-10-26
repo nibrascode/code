@@ -7291,11 +7291,31 @@ body.is-planner .site-backdrop {
 .nx-bars {
   display: flex;
   flex-direction: column;
-  gap: 13px;
+  gap: 12px;
   width: 100%;
   max-width: 38rem;
   margin-top: 14px;
 }
+.nx-bar-group {
+  border-radius: 16px;
+  padding: 10px 10px 12px;
+  border: 1px solid transparent;
+}
+.nx-bar-group--tools {
+  background: color-mix(in srgb, #5b8def 12%, transparent);
+  border-color: color-mix(in srgb, #5b8def 22%, transparent);
+}
+.nx-bar-group--studio {
+  background: color-mix(in srgb, #8b6cf0 12%, transparent);
+  border-color: color-mix(in srgb, #8b6cf0 22%, transparent);
+}
+.nx-bar-group--learn {
+  background: color-mix(in srgb, #3cb89a 12%, transparent);
+  border-color: color-mix(in srgb, #3cb89a 22%, transparent);
+}
+.nx-bar-group--tools .nx-bar-group-title { color: color-mix(in srgb, #9ec0ff 85%, #fff); }
+.nx-bar-group--studio .nx-bar-group-title { color: color-mix(in srgb, #c4b0ff 85%, #fff); }
+.nx-bar-group--learn .nx-bar-group-title { color: color-mix(in srgb, #8fe0c8 85%, #fff); }
 .nx-bar-group-title {
   margin: 0 0 8px;
   font-size: 11px;
