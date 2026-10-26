@@ -34,28 +34,28 @@ const LINKS: Record<Lang, readonly FaqLink[]> = {
     { href: "/en/apps", label: "Apps" },
     { href: "/en/tools", label: "Services" },
     { href: "/qr", label: "QR" },
-    { href: "/programming?lang=en", label: "Programming" },
+    { href: "/en/programming", label: "Programming" },
     { href: "/en/contact", label: "Contact" },
   ],
   tr: [
     { href: "/tr/apps", label: "Uygulamalar" },
     { href: "/tr/tools", label: "Hizmetler" },
     { href: "/qr", label: "QR" },
-    { href: "/programming?lang=tr", label: "Programlama" },
+    { href: "/tr/programming", label: "Programlama" },
     { href: "/tr/contact", label: "İletişim" },
   ],
   ar: [
     { href: "/ar/apps", label: "التطبيقات" },
     { href: "/ar/tools", label: "الخدمات" },
     { href: "/qr", label: "QR" },
-    { href: "/programming?lang=ar", label: "البرمجة" },
+    { href: "/ar/programming", label: "البرمجة" },
     { href: "/ar/contact", label: "تواصل" },
   ],
   ru: [
     { href: "/ru/apps", label: "Приложения" },
     { href: "/ru/tools", label: "Сервисы" },
     { href: "/qr", label: "QR" },
-    { href: "/programming?lang=ru", label: "Программирование" },
+    { href: "/ru/programming", label: "Программирование" },
     { href: "/ru/contact", label: "Контакт" },
   ],
 };
@@ -325,7 +325,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "mexfilik",
         q: "Where is the privacy policy?",
-        a: "Every app page has a Privacy policy button. The main site and Nibras AI are covered on /privacy?lang=en. Nibras Arabic, Nibras PDF, Nibras Docs, Nibras Plans, and Nibras QR also have their own pages. Deleting a Nibras QR account is explained at /privacy/nibras-qr/delete-account?lang=en. Each policy is that app’s own text: what is stored, what stays on the device, and whether an account exists. The general page does not replace an app’s policy. The button on the app page opens that app’s own policy. The Nibras Arabic and Nibras PDF texts also name the version.",
+        a: "Every app page has a Privacy policy button. The main site and Nibras AI are covered on /en/privacy. Nibras Arabic, Nibras PDF, Nibras Docs, Nibras Plans, and Nibras QR also have their own pages. Deleting a Nibras QR account is explained at /en/privacy/nibras-qr/delete-account. Each policy is that app’s own text: what is stored, what stays on the device, and whether an account exists. The general page does not replace an app’s policy. The button on the app page opens that app’s own policy. The Nibras Arabic and Nibras PDF texts also name the version.",
       },
       {
         id: "diller",
@@ -476,7 +476,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "mexfilik",
         q: "Gizlilik politikası nerede?",
-        a: "Her uygulamanın sayfasında Gizlilik politikası düğmesi vardır. Ana site ve Nibras AI /privacy?lang=tr sayfasında anlatılır. Nibras Arabic, Nibras PDF, Nibras Docs, Nibras Plans ve Nibras QR için ayrı sayfa da vardır. Nibras QR hesabının silinmesi /privacy/nibras-qr/delete-account?lang=tr adresinde yazılır. Her politika o uygulamanın kendi metnidir: ne saklanır, ne cihazda kalır ve hesap var mı, orada gösterilir. Genel sayfa uygulamanın politikasının yerini tutmaz. Düğme, uygulamanın sayfasından doğrudan onun kendi politikasına gider. Nibras Arabic ve Nibras PDF metinlerinde sürüm de yazılır.",
+        a: "Her uygulamanın sayfasında Gizlilik politikası düğmesi vardır. Ana site ve Nibras AI /tr/privacy sayfasında anlatılır. Nibras Arabic, Nibras PDF, Nibras Docs, Nibras Plans ve Nibras QR için ayrı sayfa da vardır. Nibras QR hesabının silinmesi /tr/privacy/nibras-qr/delete-account adresinde yazılır. Her politika o uygulamanın kendi metnidir: ne saklanır, ne cihazda kalır ve hesap var mı, orada gösterilir. Genel sayfa uygulamanın politikasının yerini tutmaz. Düğme, uygulamanın sayfasından doğrudan onun kendi politikasına gider. Nibras Arabic ve Nibras PDF metinlerinde sürüm de yazılır.",
       },
       {
         id: "diller",
@@ -627,7 +627,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "mexfilik",
         q: "أين سياسة الخصوصية؟",
-        a: "في صفحة كل تطبيق زر لسياسة الخصوصية. الموقع الرئيسي وNibras AI مذكوران في /privacy?lang=ar. ولـ Nibras Arabic وNibras PDF وNibras Docs وNibras Plans وNibras QR صفحة مستقلة أيضًا. حذف حساب Nibras QR مكتوب في /privacy/nibras-qr/delete-account?lang=ar. كل سياسة هي نص ذلك التطبيق: ما الذي يُحفظ، وما يبقى على الجهاز، وهل يوجد حساب. الصفحة العامة لا تغني عن سياسة التطبيق. الزر في صفحة التطبيق يفتح سياسة ذلك التطبيق نفسها. وفي نصي Nibras Arabic وNibras PDF تُذكر النسخة أيضًا.",
+        a: "في صفحة كل تطبيق زر لسياسة الخصوصية. الموقع الرئيسي وNibras AI مذكوران في /ar/privacy. ولـ Nibras Arabic وNibras PDF وNibras Docs وNibras Plans وNibras QR صفحة مستقلة أيضًا. حذف حساب Nibras QR مكتوب في /ar/privacy/nibras-qr/delete-account. كل سياسة هي نص ذلك التطبيق: ما الذي يُحفظ، وما يبقى على الجهاز، وهل يوجد حساب. الصفحة العامة لا تغني عن سياسة التطبيق. الزر في صفحة التطبيق يفتح سياسة ذلك التطبيق نفسها. وفي نصي Nibras Arabic وNibras PDF تُذكر النسخة أيضًا.",
       },
       {
         id: "diller",
@@ -778,7 +778,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "mexfilik",
         q: "Где политика конфиденциальности?",
-        a: "На странице каждого приложения есть кнопка политики конфиденциальности. Основной сайт и Nibras AI описаны на /privacy?lang=ru. У Nibras Arabic, Nibras PDF, Nibras Docs, Nibras Plans и Nibras QR есть и отдельные страницы. Удаление аккаунта Nibras QR описано на /privacy/nibras-qr/delete-account?lang=ru. Каждая политика — текст самого приложения: что хранится, что остаётся на устройстве и есть ли аккаунт. Общая страница не заменяет политику приложения. Кнопка на странице приложения открывает политику именно этого приложения. В текстах Nibras Arabic и Nibras PDF указана и версия.",
+        a: "На странице каждого приложения есть кнопка политики конфиденциальности. Основной сайт и Nibras AI описаны на /ru/privacy. У Nibras Arabic, Nibras PDF, Nibras Docs, Nibras Plans и Nibras QR есть и отдельные страницы. Удаление аккаунта Nibras QR описано на /ru/privacy/nibras-qr/delete-account. Каждая политика — текст самого приложения: что хранится, что остаётся на устройстве и есть ли аккаунт. Общая страница не заменяет политику приложения. Кнопка на странице приложения открывает политику именно этого приложения. В текстах Nibras Arabic и Nibras PDF указана и версия.",
       },
       {
         id: "diller",

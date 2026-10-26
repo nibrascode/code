@@ -21,11 +21,6 @@
       "permanent": true
     },
     {
-      "source": "/:lang(en|tr|ar|ru)/:page(resources|guides|unutma|privacy|programming)",
-      "destination": "/:page?lang=:lang",
-      "permanent": true
-    },
-    {
       "source": "/:path*",
       "has": [
         {

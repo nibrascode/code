@@ -325,14 +325,14 @@ function SeoLinks() {
     const canonical = path.startsWith("/ru/")
       ? pair.ru
       : pairLang === "en" || pairLang === "tr" || pairLang === "ar"
-        ? `${pair.az}?lang=${pairLang}`
+        ? `/${pairLang}${pair.az}`
         : pair.az;
     const alternates = [
       ["az", pair.az],
       ["ru", pair.ru],
-      ["en", `${pair.az}?lang=en`],
-      ["tr", `${pair.az}?lang=tr`],
-      ["ar", `${pair.az}?lang=ar`],
+      ["en", `/en${pair.az}`],
+      ["tr", `/tr${pair.az}`],
+      ["ar", `/ar${pair.az}`],
     ] as const;
     return (
       <>

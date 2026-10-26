@@ -47,7 +47,7 @@ function TopicRoute() {
               <article key={article.slug}>
                 <h3>
                   <a
-                    href={`/resources/${article.topic}/${article.slug}${lang === "az" ? "" : `?lang=${lang}`}`}
+                    href={`${lang === "az" ? "" : `/${lang}`}/resources/${article.topic}/${article.slug}`}
                   >
                     {article.title[lang]}
                   </a>
