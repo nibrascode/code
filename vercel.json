@@ -1,54 +1,6 @@
 {
   "redirects": [
     {
-      "source": "/:page(why|unutma|guides|privacy|resources|resurslar|programming|about|contact|terms|trust|nedir|apps|qr|erase|image|vcard|zip|planner|calc|ai|soz-sayi|faiz|wifi|seo|flow|logic|unknown|pdf|oyun)/:rest*",
-      "has": [
-        {
-          "type": "query",
-          "key": "lang",
-          "value": "(?<lang>en)"
-        }
-      ],
-      "destination": "/en/:page/:rest*",
-      "permanent": true
-    },
-    {
-      "source": "/:page(why|unutma|guides|privacy|resources|resurslar|programming|about|contact|terms|trust|nedir|apps|qr|erase|image|vcard|zip|planner|calc|ai|soz-sayi|faiz|wifi|seo|flow|logic|unknown|pdf|oyun)/:rest*",
-      "has": [
-        {
-          "type": "query",
-          "key": "lang",
-          "value": "(?<lang>tr)"
-        }
-      ],
-      "destination": "/tr/:page/:rest*",
-      "permanent": true
-    },
-    {
-      "source": "/:page(why|unutma|guides|privacy|resources|resurslar|programming|about|contact|terms|trust|nedir|apps|qr|erase|image|vcard|zip|planner|calc|ai|soz-sayi|faiz|wifi|seo|flow|logic|unknown|pdf|oyun)/:rest*",
-      "has": [
-        {
-          "type": "query",
-          "key": "lang",
-          "value": "(?<lang>ar)"
-        }
-      ],
-      "destination": "/ar/:page/:rest*",
-      "permanent": true
-    },
-    {
-      "source": "/:page(why|unutma|guides|privacy|resources|resurslar|programming|about|contact|terms|trust|nedir|apps|qr|erase|image|vcard|zip|planner|calc|ai|soz-sayi|faiz|wifi|seo|flow|logic|unknown|pdf|oyun)/:rest*",
-      "has": [
-        {
-          "type": "query",
-          "key": "lang",
-          "value": "(?<lang>ru)"
-        }
-      ],
-      "destination": "/ru/:page/:rest*",
-      "permanent": true
-    },
-    {
       "source": "/al",
       "destination": "/ai",
       "permanent": true
