@@ -7353,19 +7353,27 @@ body.is-planner .site-backdrop {
   background: color-mix(in srgb, #3cb89a 12%, transparent);
   border-color: color-mix(in srgb, #3cb89a 22%, transparent);
 }
-.nx-bar-group--tools .nx-bar-group-title { color: color-mix(in srgb, #9ec0ff 85%, #fff); }
-.nx-bar-group--studio .nx-bar-group-title { color: color-mix(in srgb, #c4b0ff 85%, #fff); }
-.nx-bar-group--learn .nx-bar-group-title { color: color-mix(in srgb, #8fe0c8 85%, #fff); }
+.nx-bar-group--tools .nx h2.nx-bar-group-title,
+.nx-bar-group--tools .nx-bar-group-title {
+  color: #b7d4ff !important;
+}
+.nx-bar-group--studio h2.nx-bar-group-title,
+.nx-bar-group--studio .nx-bar-group-title {
+  color: #d4c4ff !important;
+}
+.nx-bar-group--learn h2.nx-bar-group-title,
+.nx-bar-group--learn .nx-bar-group-title {
+  color: #9aefd4 !important;
+}
 .nx h2.nx-bar-group-title,
 .nx-bars h2.nx-bar-group-title,
 .nx-bar-group-title {
   margin: 0 0 5px !important;
   font-size: 8px !important;
-  font-weight: 600 !important;
+  font-weight: 650 !important;
   line-height: 1.15 !important;
   letter-spacing: 0.1em !important;
   text-transform: uppercase !important;
-  color: color-mix(in srgb, currentColor 55%, transparent);
 }
 .nx-bar-group-grid {
   display: grid;
