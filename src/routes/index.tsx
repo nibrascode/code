@@ -382,6 +382,10 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
               </svg>
               <span>Site Doctor</span>
             </a>
+            <a className="nx-apk-bar" href={localeHref(lang, "/error-help")} data-testid="home-error-help">
+              <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 20h20zM12 10v4M12 17h.01" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+              <span>Error Help</span>
+            </a>
             <a className="nx-apk-bar" href={localeHref(lang, "/learn/logic")} data-testid="home-learn-logic">
               <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h5a5 5 0 0 1 0 10H4zM14 12h6M2 9.5h2M2 14.5h2" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
               <span>Logic Lab</span>
