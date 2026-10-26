@@ -6,6 +6,7 @@ import { CODE_SAMPLE_HUB, CODE_SAMPLES, SITE_CODE } from "@/lib/code-samples";
 import type { ProgrammingSection } from "@/lib/programming";
 import { HUBS, pagesOf } from "@/lib/course/meta";
 import { hasProgrammingLocale, programmingLocalePath } from "@/lib/programming-path";
+import { PROGRAMMING_SEO } from "@/lib/programming-seo";
 import { SEARCH, searchPath, searchTopicPath } from "@/lib/search-pages";
 import { COMPARE, comparePath } from "@/lib/learn-pages";
 import { PAKET, paketPath } from "@/lib/paket";
@@ -59,7 +60,7 @@ const GUIDE_INTRO: Record<string, Record<Lang, string>> = {
   },
 };
 
-const FIND_UI: Record<Lang, { search: string; empty: string; start: string; lessons: string; diff: string; tryNote: string }> = {
+const FIND_UI: Record<Lang, { search: string; empty: string; start: string; lessons: string; diff: string; tryNote: string; intro: string }> = {
   az: {
     search: "Alət axtar",
     empty: "Bu adla səhifə yoxdur.",
@@ -67,6 +68,8 @@ const FIND_UI: Record<Lang, { search: string; empty: string; start: string; less
     lessons: "Dərslər",
     diff: "Fərqi nədir",
     tryNote: "Bu səhifəni oxuduqdan sonra kodu Nibras Dev-də yoxlaya bilərsən.",
+    intro:
+      "Hər səhifə bir mövzunu ayrıca açır. Əvvəl HTML və CSS ilə səhifənin üzünü oxu. Sonra Python ilə qısa proqram yaz. Dil, əmr və alət qarışmasın deyə aşağıda hər kartın nə olduğu yazılır. İlişəndə Nibras AI-yə sual ver.",
   },
   en: {
     search: "Search a tool",
@@ -75,6 +78,8 @@ const FIND_UI: Record<Lang, { search: string; empty: string; start: string; less
     lessons: "Lessons",
     diff: "What is the difference",
     tryNote: "After this page, you can try the code in Nibras Dev.",
+    intro:
+      "Each page opens one topic on its own. First read the face of a page with HTML and CSS. Then write a short program in Python. So a language, a command, and a tool do not get mixed, each card below says what it is. When you get stuck, ask Nibras AI.",
   },
   tr: {
     search: "Araç ara",
@@ -83,6 +88,8 @@ const FIND_UI: Record<Lang, { search: string; empty: string; start: string; less
     lessons: "Dersler",
     diff: "Farkı ne",
     tryNote: "Bu sayfadan sonra kodu Nibras Dev içinde deneyebilirsin.",
+    intro:
+      "Her sayfa bir konuyu ayrı açar. Önce HTML ve CSS ile sayfanın yüzünü oku. Sonra Python ile kısa bir program yaz. Dil, komut ve araç karışmasın diye aşağıda her kartın ne olduğu yazılır. Takılınca Nibras AI'ye soru sor.",
   },
   ar: {
     search: "ابحث عن أداة",
@@ -91,6 +98,8 @@ const FIND_UI: Record<Lang, { search: string; empty: string; start: string; less
     diff: "ما الفرق",
     lessons: "دروس",
     tryNote: "بعد هذه الصفحة يمكنك تجربة الكود في Nibras Dev.",
+    intro:
+      "كل صفحة تفتح موضوعاً واحداً وحده. اقرأ أولاً وجه الصفحة مع HTML وCSS. ثم اكتب برنامجاً قصيراً بـ Python. كي لا تختلط اللغة والأمر والأداة، يُكتب تحت كل بطاقة ما هي. حين تقف اسأل Nibras AI.",
   },
   ru: {
     search: "Найти инструмент",
@@ -99,38 +108,46 @@ const FIND_UI: Record<Lang, { search: string; empty: string; start: string; less
     lessons: "Уроки",
     diff: "В чём разница",
     tryNote: "После этой страницы код можно проверить в Nibras Dev.",
+    intro:
+      "Каждая страница открывает одну тему отдельно. Сначала прочитай лицо страницы через HTML и CSS. Потом напиши короткую программу на Python. Чтобы язык, команда и инструмент не смешались, под каждой карточкой написано, что это. Если застрял, спроси Nibras AI.",
   },
 };
+
+function topicNote(slug: string, lang: Lang) {
+  const text = PROGRAMMING_SEO[slug]?.[lang]?.description ?? "";
+  const parts = text.split(/(?<=[.!?])\s+/).filter(Boolean);
+  return parts.slice(0, 2).join(" ");
+}
 
 const START_STEPS: readonly { slug: "html-css" | "python" | "ai"; text: Record<Lang, { title: string; note: string }> }[] = [
   {
     slug: "html-css",
     text: {
-      az: { title: "HTML/CSS", note: "Səhifənin üzü. Əvvəl bunu oxu." },
-      en: { title: "HTML/CSS", note: "The face of a page. Read this first." },
-      tr: { title: "HTML/CSS", note: "Sayfanın yüzü. Önce bunu oku." },
-      ar: { title: "HTML/CSS", note: "وجه الصفحة. اقرأ هذا أولاً." },
-      ru: { title: "HTML/CSS", note: "Лицо страницы. Сначала прочитай это." },
+      az: { title: "HTML/CSS", note: "Səhifənin üzü buradan başlayır. HTML quruluşu yazır, CSS rəngi və yeri deyir. Proqram dilindən əvvəl bunu oxu." },
+      en: { title: "HTML/CSS", note: "The face of a page starts here. HTML writes the structure. CSS says the color and the place. Read this before a programming language." },
+      tr: { title: "HTML/CSS", note: "Sayfanın yüzü buradan başlar. HTML yapıyı yazar, CSS rengi ve yeri söyler. Programlama dilinden önce bunu oku." },
+      ar: { title: "HTML/CSS", note: "وجه الصفحة يبدأ من هنا. HTML يكتب البنية، وCSS يقول اللون والمكان. اقرأ هذا قبل لغة البرمجة." },
+      ru: { title: "HTML/CSS", note: "Лицо страницы начинается здесь. HTML пишет структуру, CSS говорит цвет и место. Прочитай это до языка программирования." },
     },
   },
   {
     slug: "python",
     text: {
-      az: { title: "Python", note: "İlk dil. Qısa proqram buradan başlayır." },
-      en: { title: "Python", note: "A first language. A short program starts here." },
-      tr: { title: "Python", note: "İlk dil. Kısa program buradan başlar." },
-      ar: { title: "Python", note: "اللغة الأولى. البرنامج القصير يبدأ من هنا." },
-      ru: { title: "Python", note: "Первый язык. Короткая программа начинается здесь." },
+      az: { title: "Python", note: "İlk dil kimi buradan başla. print ilə mətn çıxır, şərt və döngə qısa proqramı idarə edir. Dərs fəsilləri ayrıca siyahıdadır." },
+      en: { title: "Python", note: "Start here as a first language. print shows text. A condition and a loop run a short program. The lesson chapters are in their own list." },
+      tr: { title: "Python", note: "İlk dil olarak buradan başla. print metni çıkarır, koşul ve döngü kısa programı yönetir. Ders bölümleri ayrı listededir." },
+      ar: { title: "Python", note: "ابدأ من هنا كلغة أولى. print يُظهر النص، والشرط والحلقة يديران برنامجاً قصيراً. فصول الدرس في قائمة خاصة." },
+      ru: { title: "Python", note: "Начни здесь как с первого языка. print выводит текст, условие и цикл ведут короткую программу. Главы урока в отдельном списке." },
     },
   },
   {
     slug: "ai",
     text: {
-      az: { title: "Nibras AI", note: "İlişəndə sual ver." },
-      en: { title: "Nibras AI", note: "Ask when you get stuck." },
-      tr: { title: "Nibras AI", note: "Takılınca soru sor." },
-      ar: { title: "Nibras AI", note: "اسأل حين تقف." },
-      ru: { title: "Nibras AI", note: "Спроси, когда застрянешь." },
+      az: { title: "Nibras AI", note: "Dərsdə bir sətir ilişəndə bura sual ver. AI dili əvəz etmir. Əvvəl səhifəni oxu, sonra anlamadığın sətri soruş." },
+      en: { title: "Nibras AI", note: "Ask here when one line in a lesson gets stuck. AI does not replace the language. Read the page first, then ask about the line you did not understand." },
+      tr: { title: "Nibras AI", note: "Derste bir satır takılınca buraya soru sor. AI dilin yerini tutmaz. Önce sayfayı oku, sonra anlamadığın satırı sor." },
+      ar: { title: "Nibras AI", note: "حين يقف سطر في الدرس اسأل هنا. الذكاء الاصطناعي لا يحل محل اللغة. اقرأ الصفحة أولاً، ثم اسأل عن السطر الذي لم تفهمه." },
+      ru: { title: "Nibras AI", note: "Когда одна строка в уроке не идёт, спроси здесь. ИИ не заменяет язык. Сначала прочитай страницу, потом спроси строку, которую не понял." },
     },
   },
 ];
@@ -139,51 +156,51 @@ const LESSONS: readonly { kind: "html" | "css" | "javascript" | "python" | "sql"
   {
     kind: "html",
     note: {
-      az: "Səhifənin quruluşu, teqlər və form.",
-      en: "Page structure, tags and forms.",
-      tr: "Sayfanın yapısı, etiketler ve form.",
-      ar: "بنية الصفحة والوسوم والنموذج.",
-      ru: "Структура страницы, теги и форма.",
+      az: "Səhifənin quruluşu, başlıq, abzas, siyahı, şəkil və form. Teq mətn deyil, yerin adıdır.",
+      en: "The structure of a page, a heading, a paragraph, a list, an image, and a form. A tag is the name of a place, not the text.",
+      tr: "Sayfanın yapısı, başlık, paragraf, liste, görsel ve form. Etiket metin değil, yerin adıdır.",
+      ar: "بنية الصفحة والعنوان والفقرة والقائمة والصورة والنموذج. الوسم اسم المكان، لا النص.",
+      ru: "Структура страницы, заголовок, абзац, список, картинка и форма. Тег — имя места, не текст.",
     },
   },
   {
     kind: "css",
     note: {
-      az: "Rəng, qutu və hover.",
-      en: "Color, the box and hover.",
-      tr: "Renk, kutu ve hover.",
-      ar: "اللون والصندوق وhover.",
-      ru: "Цвет, коробка и hover.",
+      az: "Rəng, qutu, boşluq və hover. CSS səhifənin nə olduğunu yox, necə göründüyünü deyir.",
+      en: "Color, the box, space, and hover. CSS does not say what the page is. It says how it looks.",
+      tr: "Renk, kutu, boşluk ve hover. CSS sayfanın ne olduğunu değil, nasıl göründüğünü söyler.",
+      ar: "اللون والصندوق والفراغ وhover. CSS لا يقول ما هي الصفحة، بل كيف تظهر.",
+      ru: "Цвет, коробка, отступ и hover. CSS не говорит, чем страница является. Он говорит, как она выглядит.",
     },
   },
   {
     kind: "javascript",
     note: {
-      az: "İlk sətir, şərt və düymə.",
-      en: "The first line, a condition and a button.",
-      tr: "İlk satır, koşul ve düğme.",
-      ar: "السطر الأول والشرط والزر.",
-      ru: "Первая строка, условие и кнопка.",
+      az: "İlk sətir, şərt, döngə və düymə. JavaScript səhifəni dəyişir. HTML-in yerini tutmur.",
+      en: "The first line, a condition, a loop, and a button. JavaScript changes the page. It does not take HTML's place.",
+      tr: "İlk satır, koşul, döngü ve düğme. JavaScript sayfayı değiştirir. HTML'in yerini tutmaz.",
+      ar: "السطر الأول والشرط والحلقة والزر. JavaScript يغيّر الصفحة. لا يأخذ مكان HTML.",
+      ru: "Первая строка, условие, цикл и кнопка. JavaScript меняет страницу. Он не занимает место HTML.",
     },
   },
   {
     kind: "python",
     note: {
-      az: "Sıfırdan dərs fəsilləri.",
-      en: "Lesson chapters from scratch.",
-      tr: "Sıfırdan ders bölümleri.",
-      ar: "فصول دروس من الصفر.",
-      ru: "Главы уроков с нуля.",
+      az: "Sıfırdan dərs fəsilləri: ilk addım, şərt, funksiya, siyahı və xəta. Hər fəsil bir işi ayrıca deyir.",
+      en: "Lesson chapters from scratch: the first step, a condition, a function, a list, and an error. Each chapter says one job on its own.",
+      tr: "Sıfırdan ders bölümleri: ilk adım, koşul, fonksiyon, liste ve hata. Her bölüm bir işi ayrı söyler.",
+      ar: "فصول دروس من الصفر: الخطوة الأولى والشرط والدالة والقائمة والخطأ. كل فصل يقول عملاً واحداً وحده.",
+      ru: "Главы уроков с нуля: первый шаг, условие, функция, список и ошибка. Каждая глава говорит об одном деле отдельно.",
     },
   },
   {
     kind: "sql",
     note: {
-      az: "Oxu, sırala və say.",
-      en: "Read, sort and count.",
-      tr: "Oku, sırala ve say.",
-      ar: "اقرأ ورتّب وعدّ.",
-      ru: "Читать, сортировать и считать.",
+      az: "Cədvəldən oxu, sırala və say. SQL proqramlaşdırma dili deyil. Verilənlərə sual yazır.",
+      en: "Read from a table, sort, and count. SQL is not a programming language in the same sense. It writes a question to the data.",
+      tr: "Tablodan oku, sırala ve say. SQL aynı anlamda bir programlama dili değildir. Veriye soru yazar.",
+      ar: "اقرأ من الجدول ورتّب وعدّ. SQL ليست لغة برمجة بالمعنى نفسه. تكتب سؤالاً للبيانات.",
+      ru: "Читай из таблицы, сортируй и считай. SQL не язык программирования в том же смысле. Он пишет вопрос к данным.",
     },
   },
 ];
@@ -341,6 +358,7 @@ export function LibraryIndex({
         Nibras Code
       </p>
       <h1>{t(page.title)}</h1>
+      {section === "programming" ? <p>{copy.intro}</p> : null}
       {section === "programming" ? (
         <section className="prog-start">
           <h2>{copy.start}</h2>
@@ -412,6 +430,7 @@ export function LibraryIndex({
         {(section === "programming" ? topics.filter((topic) => t(topic.label).length <= 16) : topics).map((topic) => {
           if (section === "programming") {
             const label = t(topic.label);
+            const note = topicNote(topic.slug, lang);
             return (
               <li key={topic.slug}>
                 <a href={programmingHref(lang, topic.slug)}>
@@ -424,6 +443,7 @@ export function LibraryIndex({
                   </span>
                   <ArrowUpRight className="rtl-flip size-4" />
                 </a>
+                {note ? <small className="lib-desc">{note}</small> : null}
               </li>
             );
           }
@@ -458,7 +478,9 @@ export function LibraryIndex({
         {section === "programming"
           ? topics
               .filter((topic) => t(topic.label).length > 16)
-              .map((topic) => (
+              .map((topic) => {
+                const note = topicNote(topic.slug, lang);
+                return (
                 <li key={topic.slug} className="is-wide">
                   <a href={programmingHref(lang, topic.slug)}>
                     <span className="topic-name">
@@ -470,8 +492,10 @@ export function LibraryIndex({
                     </span>
                     <ArrowUpRight className="rtl-flip size-4" />
                   </a>
+                  {note ? <small className="lib-desc">{note}</small> : null}
                 </li>
-              ))
+                );
+              })
           : null}
         {extras.map((item) => (
           <li key={item.id}>
