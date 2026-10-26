@@ -7289,29 +7289,41 @@ body.is-planner .site-backdrop {
 
 /* ana səhifə: 4 keçid kartı 2×2 */
 .nx-bars {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
   width: 100%;
   max-width: 38rem;
   margin-top: 14px;
 }
-.nx-bars > a {
+.nx-bar-group-title {
+  margin: 0 0 6px;
+  font-size: 12.5px;
+  font-weight: 600;
+  opacity: 0.65;
+  letter-spacing: 0.02em;
+}
+.nx-bar-group-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+.nx-bar-group-grid > a {
   margin-top: 0;
   max-width: none;
   min-width: 0;
   padding: 6px 12px 6px 8px;
 }
-.nx-bars > a > span {
+.nx-bar-group-grid > a > span {
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 @media (max-width: 360px) {
-  .nx-bars > a { gap: 6px; padding: 6px 8px 6px 6px; }
-  .nx-bars > a > span { font-size: 13px; }
-  .nx-bars > a > img, .nx-bars > a > svg { width: 32px; height: 30px; }
+  .nx-bar-group-grid > a { gap: 6px; padding: 6px 8px 6px 6px; }
+  .nx-bar-group-grid > a > span { font-size: 13px; }
+  .nx-bar-group-grid > a > img, .nx-bar-group-grid > a > svg { width: 32px; height: 30px; }
 }
 
 /* Nibras QR tool: tighter radii than the marketing pages (utilities read these vars). */
@@ -7329,8 +7341,8 @@ body.is-planner .site-backdrop {
 }
 
 /* ana səhifə: 5-ci kart (Nibras QR) — 4 kartın altında, tam en */
-.nx-bars > .nx-qr-bar { justify-content: center; }
-.nx-bars > .nx-qr-bar:last-child { grid-column: auto; }
+.nx-bar-group-grid > .nx-qr-bar { justify-content: center; }
+.nx-bar-group-grid > .nx-qr-bar:last-child { grid-column: auto; }
 
 .nx-mini {
   display: grid;
@@ -7371,7 +7383,7 @@ body.is-planner .site-backdrop {
   letter-spacing: -0.02em;
 }
 
-.nx-bars > a {
+.nx-bar-group-grid > a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -7381,8 +7393,8 @@ body.is-planner .site-backdrop {
   text-align: center;
 }
 
-.nx-bars > a > img,
-.nx-bars > a > svg,
+.nx-bar-group-grid > a > img,
+.nx-bar-group-grid > a > svg,
 .nx-bars .nx-apk,
 .nx-bars .nx-term,
 .nx-bars .nx-job {
@@ -7392,7 +7404,7 @@ body.is-planner .site-backdrop {
   border-radius: 8px;
 }
 
-.nx-bars > a span,
+.nx-bar-group-grid > a span,
 .nx-bars .nx-qr-text,
 .nx-bars .nx-qr-text b {
   max-width: 100%;
@@ -7404,7 +7416,7 @@ body.is-planner .site-backdrop {
   white-space: normal;
 }
 
-.nx-bars > .nx-qr-bar > .nx-qr-text {
+.nx-bar-group-grid > .nx-qr-bar > .nx-qr-text {
   display: block;
   flex: none;
 }
@@ -7420,7 +7432,7 @@ body.is-planner .site-backdrop {
 .nx-job-qr { color: #c5dcff; background: rgb(16 36 72 / 0.95); }
 .nx-job-erase { color: #ffe0a8; background: rgb(64 40 12 / 0.95); }
 .nx-job-image { color: #e0d0ff; background: rgb(36 24 68 / 0.95); }
-.nx-bars > .nx-qr-bar > .nx-qr-text {
+.nx-bar-group-grid > .nx-qr-bar > .nx-qr-text {
   display: block;
   flex: none;
   min-width: 0;
