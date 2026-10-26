@@ -1,6 +1,6 @@
 /** Nibras Studio: the full-screen IDE. Projects are the same as Workspace (same localStorage key). */
 import { useCallback, useEffect, useState } from "react";
-import { Code2, FolderOpen, Plus, Smartphone, Sparkles, Trash2, Zap } from "lucide-react";
+import { Code2, FolderOpen, Plus, Trash2 } from "lucide-react";
 import { useI18n } from "@/lib/i18n-context";
 import { localeHref } from "@/lib/locale-path";
 import { WS } from "@/workspace/i18n";
@@ -10,11 +10,11 @@ import { ToolsLegalLinks } from "@/legal/tools-legal";
 import { ago, blank, dropProjectData, loadProjects, persistProjects, type Project } from "@/workspace/workspace";
 
 const S = {
-  az: { h1: "Nibras Studio", dTitle: "Layihə silinsin?", dBody: "«{n}» və onun bütün nüsxələri bu brauzerdən həmişəlik silinəcək. Bunu geri qaytarmaq olmur.", cancel: "Ləğv et", delP: "Layihəni sil", lead: "Brauzerdə kod redaktoru — fayllar, canlı önizləmə, ZIP/APK.", name: "Layihənin adı", create: "Yeni layihə", recent: "Layihələr", empty: "Hələ layihə yoxdur — adını yazıb başlayın.", open: "Aç", del: "Sil", confirm: "Bu layihə silinsin?", back: "Layihələr", ws: "Workspace-də aç", local: "Yalnız bu brauzerdə · Workspace ilə ortaq.", f1: "CodeMirror redaktoru", f2: "Canlı telefon önizləməsi", f3: "ZIP · Nibras Dev · APK", files: "fayl", untitled: "Saytım" },
-  en: { h1: "Nibras Studio", dTitle: "Delete project?", dBody: "“{n}” and all its snapshots will be permanently removed from this browser. This cannot be undone.", cancel: "Cancel", delP: "Delete project", lead: "In-browser code editor — files, live preview, ZIP/APK.", name: "Project name", create: "New project", recent: "Projects", empty: "No projects yet — type a name to start.", open: "Open", del: "Delete", confirm: "Delete this project?", back: "Projects", ws: "Open in Workspace", local: "This browser only · shared with Workspace.", f1: "CodeMirror editor", f2: "Live phone preview", f3: "ZIP · Nibras Dev · APK", files: "files", untitled: "My site" },
-  tr: { h1: "Nibras Studio", dTitle: "Proje silinsin mi?", dBody: "“{n}” ve tüm kopyaları bu tarayıcıdan kalıcı olarak silinecek. Geri alınamaz.", cancel: "İptal", delP: "Projeyi sil", lead: "Tarayıcıda kod editörü — dosyalar, canlı önizleme, ZIP/APK.", name: "Proje adı", create: "Yeni proje", recent: "Projeler", empty: "Henüz proje yok — bir ad yazıp başlayın.", open: "Aç", del: "Sil", confirm: "Bu proje silinsin mi?", back: "Projeler", ws: "Workspace'te aç", local: "Yalnızca bu tarayıcıda · Workspace ile ortak.", f1: "CodeMirror editörü", f2: "Canlı telefon önizlemesi", f3: "ZIP · Nibras Dev · APK", files: "dosya", untitled: "Sitem" },
-  ar: { h1: "Nibras Studio", dTitle: "حذف المشروع؟", dBody: "سيُحذف «{n}» وجميع نسخه نهائياً من هذا المتصفح. لا يمكن التراجع.", cancel: "إلغاء", delP: "حذف المشروع", lead: "محرر كود في المتصفح — ملفات ومعاينة حيّة وZIP/APK.", name: "اسم المشروع", create: "مشروع جديد", recent: "المشاريع", empty: "لا مشاريع بعد — اكتب اسماً وابدأ.", open: "فتح", del: "حذف", confirm: "حذف هذا المشروع؟", back: "المشاريع", ws: "افتح في Workspace", local: "في هذا المتصفح فقط · مشتركة مع Workspace.", f1: "محرر CodeMirror", f2: "معاينة حيّة على الهاتف", f3: "ZIP · Nibras Dev · APK", files: "ملفات", untitled: "موقعي" },
-  ru: { h1: "Nibras Studio", dTitle: "Удалить проект?", dBody: "«{n}» и все его снимки будут навсегда удалены из этого браузера. Отменить нельзя.", cancel: "Отмена", delP: "Удалить проект", lead: "Редактор кода в браузере — файлы, превью, ZIP/APK.", name: "Название проекта", create: "Новый проект", recent: "Проекты", empty: "Проектов пока нет — введите название.", open: "Открыть", del: "Удалить", confirm: "Удалить проект?", back: "Проекты", ws: "Открыть в Workspace", local: "Только в браузере · общее с Workspace.", f1: "Редактор CodeMirror", f2: "Живой просмотр на телефоне", f3: "ZIP · Nibras Dev · APK", files: "файлов", untitled: "Мой сайт" },
+  az: { h1: "Nibras Studio", dTitle: "Layihə silinsin?", dBody: "«{n}» və onun bütün nüsxələri bu brauzerdən həmişəlik silinəcək. Bunu geri qaytarmaq olmur.", cancel: "Ləğv et", delP: "Layihəni sil", lead: "Brauzerdə kod redaktoru — fayllar, canlı önizləmə, ZIP/APK.", name: "Layihənin adı", create: "Yeni layihə", recent: "Layihələr", empty: "Hələ layihə yoxdur — adını yazıb başlayın.", open: "Aç", del: "Sil", confirm: "Bu layihə silinsin?", back: "Layihələr", ws: "Workspace-də aç", local: "Yalnız bu brauzerdə · Workspace ilə ortaq.", files: "fayl", untitled: "Saytım" },
+  en: { h1: "Nibras Studio", dTitle: "Delete project?", dBody: "“{n}” and all its snapshots will be permanently removed from this browser. This cannot be undone.", cancel: "Cancel", delP: "Delete project", lead: "In-browser code editor — files, live preview, ZIP/APK.", name: "Project name", create: "New project", recent: "Projects", empty: "No projects yet — type a name to start.", open: "Open", del: "Delete", confirm: "Delete this project?", back: "Projects", ws: "Open in Workspace", local: "This browser only · shared with Workspace.", files: "files", untitled: "My site" },
+  tr: { h1: "Nibras Studio", dTitle: "Proje silinsin mi?", dBody: "“{n}” ve tüm kopyaları bu tarayıcıdan kalıcı olarak silinecek. Geri alınamaz.", cancel: "İptal", delP: "Projeyi sil", lead: "Tarayıcıda kod editörü — dosyalar, canlı önizleme, ZIP/APK.", name: "Proje adı", create: "Yeni proje", recent: "Projeler", empty: "Henüz proje yok — bir ad yazıp başlayın.", open: "Aç", del: "Sil", confirm: "Bu proje silinsin mi?", back: "Projeler", ws: "Workspace'te aç", local: "Yalnızca bu tarayıcıda · Workspace ile ortak.", files: "dosya", untitled: "Sitem" },
+  ar: { h1: "Nibras Studio", dTitle: "حذف المشروع؟", dBody: "سيُحذف «{n}» وجميع نسخه نهائياً من هذا المتصفح. لا يمكن التراجع.", cancel: "إلغاء", delP: "حذف المشروع", lead: "محرر كود في المتصفح — ملفات ومعاينة حيّة وZIP/APK.", name: "اسم المشروع", create: "مشروع جديد", recent: "المشاريع", empty: "لا مشاريع بعد — اكتب اسماً وابدأ.", open: "فتح", del: "حذف", confirm: "حذف هذا المشروع؟", back: "المشاريع", ws: "افتح في Workspace", local: "في هذا المتصفح فقط · مشتركة مع Workspace.", files: "ملفات", untitled: "موقعي" },
+  ru: { h1: "Nibras Studio", dTitle: "Удалить проект?", dBody: "«{n}» и все его снимки будут навсегда удалены из этого браузера. Отменить нельзя.", cancel: "Отмена", delP: "Удалить проект", lead: "Редактор кода в браузере — файлы, превью, ZIP/APK.", name: "Название проекта", create: "Новый проект", recent: "Проекты", empty: "Проектов пока нет — введите название.", open: "Открыть", del: "Удалить", confirm: "Удалить проект?", back: "Проекты", ws: "Открыть в Workspace", local: "Только в браузере · общее с Workspace.", files: "файлов", untitled: "Мой сайт" },
 };
 
 export function StudioPage() {
@@ -68,43 +68,32 @@ export function StudioPage() {
   if (current) return <>{dialog}<StudioIDE key={current.id} p={current} update={(patch, act) => update(current.id, patch, act)} onHome={() => go(null)} onDelete={() => remove(current)} /></>;
 
   return (
-    <main className="studio-page mx-auto w-full max-w-6xl px-3 pt-20 pb-10 md:px-6 md:pt-24" dir={lang === "ar" ? "rtl" : "ltr"} data-testid="studio">
+    <main className="studio-page mx-auto w-full max-w-3xl px-3 pt-20 pb-8 md:px-6 md:pt-24" dir={lang === "ar" ? "rtl" : "ltr"} data-testid="studio">
       {dialog}
-      <section className="rounded-2xl border border-white/10 bg-[#0c1120] p-4 md:p-5">
-        <div className="flex flex-wrap items-center gap-2">
-          <h1 className="flex items-center gap-2 font-display text-2xl font-bold tracking-tight md:text-3xl"><Code2 className="size-6 text-[#2f6bff] md:size-7" /> {t.h1}</h1>
-          <span className="inline-flex items-center gap-1 rounded-full border border-white/15 bg-white/5 px-2 py-0.5 text-[11px] text-[#c8d1ea]"><Sparkles className="size-3 text-[#7aa2ff]" /> HTML · CSS · JS</span>
-        </div>
-        <p className="mt-1.5 max-w-2xl text-sm text-[#c8d1ea]">{t.lead}</p>
-        <ul className="mt-2 flex flex-wrap gap-1.5 text-xs text-[#dfe6ff]">
-          <li className="inline-flex items-center gap-1 rounded-md bg-white/5 px-2 py-0.5"><Code2 className="size-3 text-[#ffd479]" /> {t.f1}</li>
-          <li className="inline-flex items-center gap-1 rounded-md bg-white/5 px-2 py-0.5"><Smartphone className="size-3 text-emerald-300" /> {t.f2}</li>
-          <li className="inline-flex items-center gap-1 rounded-md bg-white/5 px-2 py-0.5"><Zap className="size-3 text-[#7aa2ff]" /> {t.f3}</li>
-        </ul>
-        <form className="mt-3 flex max-w-xl flex-col gap-2 sm:flex-row" onSubmit={(e) => { e.preventDefault(); create(); }}>
-          <input className="min-h-11 flex-1 rounded-xl border border-white/15 bg-black/30 px-3 text-sm outline-none focus:border-[#2f6bff]" placeholder={t.name} value={name} onChange={(e) => setName(e.target.value)} maxLength={80} data-testid="studio-name" aria-label={t.name} />
-          <button className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-xl bg-[#2f6bff] px-4 text-sm font-semibold text-white hover:bg-[#3d77ff]" type="submit" data-testid="studio-create"><Plus className="size-4" /> {t.create}</button>
-        </form>
-        <p className="mt-2 text-[11px] text-[#7d89a8]">{t.local}</p>
-      </section>
-      <h2 className="mb-2 mt-5 text-base font-semibold">{t.recent}</h2>
+      <header className="mb-3">
+        <h1 className="flex items-center gap-2 font-display text-2xl font-bold tracking-tight md:text-3xl"><Code2 className="size-6 text-[#2f6bff]" /> {t.h1}</h1>
+        <p className="mt-1 text-sm text-muted">{t.lead}</p>
+      </header>
+      <form className="flex flex-col gap-2 rounded-xl border border-white/10 bg-white/[0.04] p-2.5 sm:flex-row sm:items-center" onSubmit={(e) => { e.preventDefault(); create(); }}>
+        <input className="min-h-10 flex-1 rounded-lg border border-white/15 bg-black/30 px-3 text-sm outline-none focus:border-[#2f6bff]" placeholder={t.name} value={name} onChange={(e) => setName(e.target.value)} maxLength={80} data-testid="studio-name" aria-label={t.name} />
+        <button className="inline-flex min-h-10 shrink-0 items-center justify-center gap-1.5 rounded-lg bg-[#2f6bff] px-3.5 text-sm font-semibold text-white hover:bg-[#3d77ff]" type="submit" data-testid="studio-create"><Plus className="size-4" /> {t.create}</button>
+      </form>
+      <p className="mt-1.5 text-[11px] text-[#7d89a8]">{t.local}</p>
+      <h2 className="mb-1.5 mt-4 text-sm font-semibold text-[#c8d1ea]">{t.recent}</h2>
       {list === null ? null : sorted.length ? (
-        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3" data-testid="studio-list">
+        <ul className="grid gap-2" data-testid="studio-list">
           {sorted.map((p) => (
-            <li key={p.id} className="group relative rounded-xl border border-white/10 bg-[#0c1120] p-3 hover:border-[#2f6bff]/60">
-              <button className="block w-full text-start" onClick={() => go(p.id)} data-testid="studio-open">
-                <div className="mb-2 flex h-14 items-end gap-1 overflow-hidden rounded-lg bg-[#070b16] p-1.5 font-mono text-[9px] leading-tight text-[#5d6b8a]" dir="ltr">
-                  <pre className="truncate">{(p.files.find((f) => f.name === p.activeFile) ?? p.files[0])?.content.split("\n").slice(0, 5).join("\n")}</pre>
-                </div>
-                <div className="flex items-center gap-2 font-semibold"><FolderOpen className="size-4 text-[#7aa2ff]" /><span className="truncate">{p.name}</span></div>
-                <div className="mt-1 text-xs text-[#7d89a8]">{p.files.length} {t.files} · {ago(p.updatedAt, c)}</div>
+            <li key={p.id} className="group relative flex items-center gap-3 rounded-xl border border-white/10 bg-[#0c1120] px-3 py-2.5 hover:border-[#2f6bff]/60">
+              <button className="min-w-0 flex-1 text-start" onClick={() => go(p.id)} data-testid="studio-open">
+                <div className="flex items-center gap-2 font-semibold"><FolderOpen className="size-4 shrink-0 text-[#7aa2ff]" /><span className="truncate">{p.name}</span></div>
+                <div className="mt-0.5 text-xs text-[#7d89a8]">{p.files.length} {t.files} · {ago(p.updatedAt, c)}</div>
               </button>
-              <button className="absolute end-3 top-3 rounded-lg p-1.5 text-[#7d89a8] opacity-100 hover:bg-white/10 hover:text-red-300 md:opacity-0 md:group-hover:opacity-100" onClick={() => remove(p)} aria-label={t.del} title={t.del} data-testid="studio-del"><Trash2 className="size-4" /></button>
+              <button className="rounded-lg p-1.5 text-[#7d89a8] hover:bg-white/10 hover:text-red-300" onClick={() => remove(p)} aria-label={t.del} title={t.del} data-testid="studio-del"><Trash2 className="size-4" /></button>
             </li>
           ))}
         </ul>
-      ) : <p className="rounded-2xl border border-dashed border-white/15 p-6 text-center text-sm text-[#7d89a8]">{t.empty}</p>}
-      <footer className="mt-8 border-t border-white/10 pt-3"><ToolsLegalLinks version /></footer>
+      ) : <p className="rounded-xl border border-dashed border-white/15 px-3 py-4 text-center text-sm text-[#7d89a8]">{t.empty}</p>}
+      <footer className="mt-5 border-t border-white/10 pt-3"><ToolsLegalLinks version /></footer>
     </main>
   );
 }
