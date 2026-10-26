@@ -842,6 +842,13 @@ const PAGES: Record<string, Copy> = {
     ar: { title: "Nibras Site Doctor — فحص تقني للموقع", description: "أدخل العنوان: العناوين والأوصاف والروابط المعطلة وملاءمة الجوال والسرعة مع خطوات إصلاح." },
     ru: { title: "Nibras Site Doctor — технический аудит сайта", description: "Введите адрес: заголовки, описания, битые ссылки, мобильность и скорость — с шагами исправления." },
   },
+  "/error-help": {
+    az: { title: "Nibras Error Help — xəta mesajını başa sal", description: "Xəta mesajını yapışdırın: mənası, mümkün səbəblər, yoxlanılacaq addımlar və sadə nümunə. Python, JavaScript və Android/Gradle." },
+    en: { title: "Nibras Error Help — understand an error message", description: "Paste an error: its meaning, likely causes, what to check and a simple example. Python, JavaScript and Android/Gradle." },
+    tr: { title: "Nibras Error Help — hata mesajını anla", description: "Hata mesajını yapıştırın: anlamı, olası nedenler, kontrol adımları ve basit örnek. Python, JavaScript ve Android/Gradle." },
+    ar: { title: "Nibras Error Help — افهم رسالة الخطأ", description: "الصق رسالة الخطأ: المعنى والأسباب المحتملة وما يجب فحصه ومثال بسيط. Python وJavaScript وAndroid/Gradle." },
+    ru: { title: "Nibras Error Help — разбор сообщения об ошибке", description: "Вставьте ошибку: значение, возможные причины, что проверить и простой пример. Python, JavaScript и Android/Gradle." },
+  },
   "/workspace": {
     az: { title: "Nibras Workspace — PDF, suallar, sənəd və kod bir yerdə", description: "PDF aç, mətni çıxar, mətndən sual hazırla, Word/PDF kimi saxla. Kod yaz, işə sal, ZIP endir. Pulsuz, fayllar brauzerdə qalır." },
     en: { title: "Nibras Workspace — PDF, questions, documents and code in one place", description: "Open a PDF, extract text, make questions, save as Word/PDF. Write code, run it, download a ZIP. Free, files stay in your browser." },

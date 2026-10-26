@@ -16,6 +16,7 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DoctorRouteImport } from './routes/doctor'
 import { Route as EnRouteImport } from './routes/en'
 import { Route as EraseRouteImport } from './routes/erase'
+import { Route as ErrorHelpRouteImport } from './routes/error-help'
 import { Route as FaizRouteImport } from './routes/faiz'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as FilecheckRouteImport } from './routes/filecheck'
@@ -62,6 +63,7 @@ import { Route as ArAppsRouteImport } from './routes/ar.apps'
 import { Route as ArContactRouteImport } from './routes/ar.contact'
 import { Route as ArDoctorRouteImport } from './routes/ar.doctor'
 import { Route as ArEraseRouteImport } from './routes/ar.erase'
+import { Route as ArErrorHelpRouteImport } from './routes/ar.error-help'
 import { Route as ArFaizRouteImport } from './routes/ar.faiz'
 import { Route as ArFaqRouteImport } from './routes/ar.faq'
 import { Route as ArFilecheckRouteImport } from './routes/ar.filecheck'
@@ -100,6 +102,7 @@ import { Route as EnAppsRouteImport } from './routes/en.apps'
 import { Route as EnContactRouteImport } from './routes/en.contact'
 import { Route as EnDoctorRouteImport } from './routes/en.doctor'
 import { Route as EnEraseRouteImport } from './routes/en.erase'
+import { Route as EnErrorHelpRouteImport } from './routes/en.error-help'
 import { Route as EnFaizRouteImport } from './routes/en.faiz'
 import { Route as EnFaqRouteImport } from './routes/en.faq'
 import { Route as EnFilecheckRouteImport } from './routes/en.filecheck'
@@ -155,6 +158,7 @@ import { Route as RuAppsRouteImport } from './routes/ru.apps'
 import { Route as RuContactRouteImport } from './routes/ru.contact'
 import { Route as RuDoctorRouteImport } from './routes/ru.doctor'
 import { Route as RuEraseRouteImport } from './routes/ru.erase'
+import { Route as RuErrorHelpRouteImport } from './routes/ru.error-help'
 import { Route as RuFaizRouteImport } from './routes/ru.faiz'
 import { Route as RuFaqRouteImport } from './routes/ru.faq'
 import { Route as RuFilecheckRouteImport } from './routes/ru.filecheck'
@@ -195,6 +199,7 @@ import { Route as TrAppsRouteImport } from './routes/tr.apps'
 import { Route as TrContactRouteImport } from './routes/tr.contact'
 import { Route as TrDoctorRouteImport } from './routes/tr.doctor'
 import { Route as TrEraseRouteImport } from './routes/tr.erase'
+import { Route as TrErrorHelpRouteImport } from './routes/tr.error-help'
 import { Route as TrFaizRouteImport } from './routes/tr.faiz'
 import { Route as TrFaqRouteImport } from './routes/tr.faq'
 import { Route as TrFilecheckRouteImport } from './routes/tr.filecheck'
@@ -319,6 +324,11 @@ const EnRoute = EnRouteImport.update({
 const EraseRoute = EraseRouteImport.update({
   id: '/erase',
   path: '/erase',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ErrorHelpRoute = ErrorHelpRouteImport.update({
+  id: '/error-help',
+  path: '/error-help',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaizRoute = FaizRouteImport.update({
@@ -551,6 +561,11 @@ const ArEraseRoute = ArEraseRouteImport.update({
   path: '/erase',
   getParentRoute: () => ArRoute,
 } as any)
+const ArErrorHelpRoute = ArErrorHelpRouteImport.update({
+  id: '/error-help',
+  path: '/error-help',
+  getParentRoute: () => ArRoute,
+} as any)
 const ArFaizRoute = ArFaizRouteImport.update({
   id: '/faiz',
   path: '/faiz',
@@ -739,6 +754,11 @@ const EnDoctorRoute = EnDoctorRouteImport.update({
 const EnEraseRoute = EnEraseRouteImport.update({
   id: '/erase',
   path: '/erase',
+  getParentRoute: () => EnRoute,
+} as any)
+const EnErrorHelpRoute = EnErrorHelpRouteImport.update({
+  id: '/error-help',
+  path: '/error-help',
   getParentRoute: () => EnRoute,
 } as any)
 const EnFaizRoute = EnFaizRouteImport.update({
@@ -1016,6 +1036,11 @@ const RuEraseRoute = RuEraseRouteImport.update({
   path: '/erase',
   getParentRoute: () => RuRoute,
 } as any)
+const RuErrorHelpRoute = RuErrorHelpRouteImport.update({
+  id: '/error-help',
+  path: '/error-help',
+  getParentRoute: () => RuRoute,
+} as any)
 const RuFaizRoute = RuFaizRouteImport.update({
   id: '/faiz',
   path: '/faiz',
@@ -1214,6 +1239,11 @@ const TrDoctorRoute = TrDoctorRouteImport.update({
 const TrEraseRoute = TrEraseRouteImport.update({
   id: '/erase',
   path: '/erase',
+  getParentRoute: () => TrRoute,
+} as any)
+const TrErrorHelpRoute = TrErrorHelpRouteImport.update({
+  id: '/error-help',
+  path: '/error-help',
   getParentRoute: () => TrRoute,
 } as any)
 const TrFaizRoute = TrFaizRouteImport.update({
@@ -1676,6 +1706,7 @@ export interface FileRoutesByFullPath {
   '/doctor': typeof DoctorRoute
   '/en': typeof EnRouteWithChildren
   '/erase': typeof EraseRoute
+  '/error-help': typeof ErrorHelpRoute
   '/faiz': typeof FaizRoute
   '/faq': typeof FaqRouteWithChildren
   '/filecheck': typeof FilecheckRoute
@@ -1722,6 +1753,7 @@ export interface FileRoutesByFullPath {
   '/ar/contact': typeof ArContactRoute
   '/ar/doctor': typeof ArDoctorRoute
   '/ar/erase': typeof ArEraseRoute
+  '/ar/error-help': typeof ArErrorHelpRoute
   '/ar/faiz': typeof ArFaizRoute
   '/ar/faq': typeof ArFaqRouteWithChildren
   '/ar/filecheck': typeof ArFilecheckRoute
@@ -1760,6 +1792,7 @@ export interface FileRoutesByFullPath {
   '/en/contact': typeof EnContactRoute
   '/en/doctor': typeof EnDoctorRoute
   '/en/erase': typeof EnEraseRoute
+  '/en/error-help': typeof EnErrorHelpRoute
   '/en/faiz': typeof EnFaizRoute
   '/en/faq': typeof EnFaqRouteWithChildren
   '/en/filecheck': typeof EnFilecheckRoute
@@ -1811,6 +1844,7 @@ export interface FileRoutesByFullPath {
   '/ru/contact': typeof RuContactRoute
   '/ru/doctor': typeof RuDoctorRoute
   '/ru/erase': typeof RuEraseRoute
+  '/ru/error-help': typeof RuErrorHelpRoute
   '/ru/faiz': typeof RuFaizRoute
   '/ru/faq': typeof RuFaqRouteWithChildren
   '/ru/filecheck': typeof RuFilecheckRoute
@@ -1851,6 +1885,7 @@ export interface FileRoutesByFullPath {
   '/tr/contact': typeof TrContactRoute
   '/tr/doctor': typeof TrDoctorRoute
   '/tr/erase': typeof TrEraseRoute
+  '/tr/error-help': typeof TrErrorHelpRoute
   '/tr/faiz': typeof TrFaizRoute
   '/tr/faq': typeof TrFaqRouteWithChildren
   '/tr/filecheck': typeof TrFilecheckRoute
@@ -1954,6 +1989,7 @@ export interface FileRoutesByTo {
   '/doctor': typeof DoctorRoute
   '/en': typeof EnRouteWithChildren
   '/erase': typeof EraseRoute
+  '/error-help': typeof ErrorHelpRoute
   '/faiz': typeof FaizRoute
   '/faq': typeof FaqRouteWithChildren
   '/filecheck': typeof FilecheckRoute
@@ -1999,6 +2035,7 @@ export interface FileRoutesByTo {
   '/ar/contact': typeof ArContactRoute
   '/ar/doctor': typeof ArDoctorRoute
   '/ar/erase': typeof ArEraseRoute
+  '/ar/error-help': typeof ArErrorHelpRoute
   '/ar/faiz': typeof ArFaizRoute
   '/ar/faq': typeof ArFaqRouteWithChildren
   '/ar/filecheck': typeof ArFilecheckRoute
@@ -2037,6 +2074,7 @@ export interface FileRoutesByTo {
   '/en/contact': typeof EnContactRoute
   '/en/doctor': typeof EnDoctorRoute
   '/en/erase': typeof EnEraseRoute
+  '/en/error-help': typeof EnErrorHelpRoute
   '/en/faiz': typeof EnFaizRoute
   '/en/faq': typeof EnFaqRouteWithChildren
   '/en/filecheck': typeof EnFilecheckRoute
@@ -2088,6 +2126,7 @@ export interface FileRoutesByTo {
   '/ru/contact': typeof RuContactRoute
   '/ru/doctor': typeof RuDoctorRoute
   '/ru/erase': typeof RuEraseRoute
+  '/ru/error-help': typeof RuErrorHelpRoute
   '/ru/faiz': typeof RuFaizRoute
   '/ru/faq': typeof RuFaqRouteWithChildren
   '/ru/filecheck': typeof RuFilecheckRoute
@@ -2128,6 +2167,7 @@ export interface FileRoutesByTo {
   '/tr/contact': typeof TrContactRoute
   '/tr/doctor': typeof TrDoctorRoute
   '/tr/erase': typeof TrEraseRoute
+  '/tr/error-help': typeof TrErrorHelpRoute
   '/tr/faiz': typeof TrFaizRoute
   '/tr/faq': typeof TrFaqRouteWithChildren
   '/tr/filecheck': typeof TrFilecheckRoute
@@ -2232,6 +2272,7 @@ export interface FileRoutesById {
   '/doctor': typeof DoctorRoute
   '/en': typeof EnRouteWithChildren
   '/erase': typeof EraseRoute
+  '/error-help': typeof ErrorHelpRoute
   '/faiz': typeof FaizRoute
   '/faq': typeof FaqRouteWithChildren
   '/filecheck': typeof FilecheckRoute
@@ -2278,6 +2319,7 @@ export interface FileRoutesById {
   '/ar/contact': typeof ArContactRoute
   '/ar/doctor': typeof ArDoctorRoute
   '/ar/erase': typeof ArEraseRoute
+  '/ar/error-help': typeof ArErrorHelpRoute
   '/ar/faiz': typeof ArFaizRoute
   '/ar/faq': typeof ArFaqRouteWithChildren
   '/ar/filecheck': typeof ArFilecheckRoute
@@ -2316,6 +2358,7 @@ export interface FileRoutesById {
   '/en/contact': typeof EnContactRoute
   '/en/doctor': typeof EnDoctorRoute
   '/en/erase': typeof EnEraseRoute
+  '/en/error-help': typeof EnErrorHelpRoute
   '/en/faiz': typeof EnFaizRoute
   '/en/faq': typeof EnFaqRouteWithChildren
   '/en/filecheck': typeof EnFilecheckRoute
@@ -2367,6 +2410,7 @@ export interface FileRoutesById {
   '/ru/contact': typeof RuContactRoute
   '/ru/doctor': typeof RuDoctorRoute
   '/ru/erase': typeof RuEraseRoute
+  '/ru/error-help': typeof RuErrorHelpRoute
   '/ru/faiz': typeof RuFaizRoute
   '/ru/faq': typeof RuFaqRouteWithChildren
   '/ru/filecheck': typeof RuFilecheckRoute
@@ -2407,6 +2451,7 @@ export interface FileRoutesById {
   '/tr/contact': typeof TrContactRoute
   '/tr/doctor': typeof TrDoctorRoute
   '/tr/erase': typeof TrEraseRoute
+  '/tr/error-help': typeof TrErrorHelpRoute
   '/tr/faiz': typeof TrFaizRoute
   '/tr/faq': typeof TrFaqRouteWithChildren
   '/tr/filecheck': typeof TrFilecheckRoute
@@ -2512,6 +2557,7 @@ export interface FileRouteTypes {
     | '/doctor'
     | '/en'
     | '/erase'
+    | '/error-help'
     | '/faiz'
     | '/faq'
     | '/filecheck'
@@ -2558,6 +2604,7 @@ export interface FileRouteTypes {
     | '/ar/contact'
     | '/ar/doctor'
     | '/ar/erase'
+    | '/ar/error-help'
     | '/ar/faiz'
     | '/ar/faq'
     | '/ar/filecheck'
@@ -2596,6 +2643,7 @@ export interface FileRouteTypes {
     | '/en/contact'
     | '/en/doctor'
     | '/en/erase'
+    | '/en/error-help'
     | '/en/faiz'
     | '/en/faq'
     | '/en/filecheck'
@@ -2647,6 +2695,7 @@ export interface FileRouteTypes {
     | '/ru/contact'
     | '/ru/doctor'
     | '/ru/erase'
+    | '/ru/error-help'
     | '/ru/faiz'
     | '/ru/faq'
     | '/ru/filecheck'
@@ -2687,6 +2736,7 @@ export interface FileRouteTypes {
     | '/tr/contact'
     | '/tr/doctor'
     | '/tr/erase'
+    | '/tr/error-help'
     | '/tr/faiz'
     | '/tr/faq'
     | '/tr/filecheck'
@@ -2790,6 +2840,7 @@ export interface FileRouteTypes {
     | '/doctor'
     | '/en'
     | '/erase'
+    | '/error-help'
     | '/faiz'
     | '/faq'
     | '/filecheck'
@@ -2835,6 +2886,7 @@ export interface FileRouteTypes {
     | '/ar/contact'
     | '/ar/doctor'
     | '/ar/erase'
+    | '/ar/error-help'
     | '/ar/faiz'
     | '/ar/faq'
     | '/ar/filecheck'
@@ -2873,6 +2925,7 @@ export interface FileRouteTypes {
     | '/en/contact'
     | '/en/doctor'
     | '/en/erase'
+    | '/en/error-help'
     | '/en/faiz'
     | '/en/faq'
     | '/en/filecheck'
@@ -2924,6 +2977,7 @@ export interface FileRouteTypes {
     | '/ru/contact'
     | '/ru/doctor'
     | '/ru/erase'
+    | '/ru/error-help'
     | '/ru/faiz'
     | '/ru/faq'
     | '/ru/filecheck'
@@ -2964,6 +3018,7 @@ export interface FileRouteTypes {
     | '/tr/contact'
     | '/tr/doctor'
     | '/tr/erase'
+    | '/tr/error-help'
     | '/tr/faiz'
     | '/tr/faq'
     | '/tr/filecheck'
@@ -3067,6 +3122,7 @@ export interface FileRouteTypes {
     | '/doctor'
     | '/en'
     | '/erase'
+    | '/error-help'
     | '/faiz'
     | '/faq'
     | '/filecheck'
@@ -3113,6 +3169,7 @@ export interface FileRouteTypes {
     | '/ar/contact'
     | '/ar/doctor'
     | '/ar/erase'
+    | '/ar/error-help'
     | '/ar/faiz'
     | '/ar/faq'
     | '/ar/filecheck'
@@ -3151,6 +3208,7 @@ export interface FileRouteTypes {
     | '/en/contact'
     | '/en/doctor'
     | '/en/erase'
+    | '/en/error-help'
     | '/en/faiz'
     | '/en/faq'
     | '/en/filecheck'
@@ -3202,6 +3260,7 @@ export interface FileRouteTypes {
     | '/ru/contact'
     | '/ru/doctor'
     | '/ru/erase'
+    | '/ru/error-help'
     | '/ru/faiz'
     | '/ru/faq'
     | '/ru/filecheck'
@@ -3242,6 +3301,7 @@ export interface FileRouteTypes {
     | '/tr/contact'
     | '/tr/doctor'
     | '/tr/erase'
+    | '/tr/error-help'
     | '/tr/faiz'
     | '/tr/faq'
     | '/tr/filecheck'
@@ -3346,6 +3406,7 @@ export interface RootRouteChildren {
   DoctorRoute: typeof DoctorRoute
   EnRoute: typeof EnRouteWithChildren
   EraseRoute: typeof EraseRoute
+  ErrorHelpRoute: typeof ErrorHelpRoute
   FaizRoute: typeof FaizRoute
   FaqRoute: typeof FaqRouteWithChildren
   FilecheckRoute: typeof FilecheckRoute
@@ -3448,6 +3509,13 @@ declare module '@tanstack/react-router' {
       path: '/erase'
       fullPath: '/erase'
       preLoaderRoute: typeof EraseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/error-help': {
+      id: '/error-help'
+      path: '/error-help'
+      fullPath: '/error-help'
+      preLoaderRoute: typeof ErrorHelpRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/faiz': {
@@ -3772,6 +3840,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArEraseRouteImport
       parentRoute: typeof ArRoute
     }
+    '/ar/error-help': {
+      id: '/ar/error-help'
+      path: '/error-help'
+      fullPath: '/ar/error-help'
+      preLoaderRoute: typeof ArErrorHelpRouteImport
+      parentRoute: typeof ArRoute
+    }
     '/ar/faiz': {
       id: '/ar/faiz'
       path: '/faiz'
@@ -4036,6 +4111,13 @@ declare module '@tanstack/react-router' {
       path: '/erase'
       fullPath: '/en/erase'
       preLoaderRoute: typeof EnEraseRouteImport
+      parentRoute: typeof EnRoute
+    }
+    '/en/error-help': {
+      id: '/en/error-help'
+      path: '/error-help'
+      fullPath: '/en/error-help'
+      preLoaderRoute: typeof EnErrorHelpRouteImport
       parentRoute: typeof EnRoute
     }
     '/en/faiz': {
@@ -4423,6 +4505,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RuEraseRouteImport
       parentRoute: typeof RuRoute
     }
+    '/ru/error-help': {
+      id: '/ru/error-help'
+      path: '/error-help'
+      fullPath: '/ru/error-help'
+      preLoaderRoute: typeof RuErrorHelpRouteImport
+      parentRoute: typeof RuRoute
+    }
     '/ru/faiz': {
       id: '/ru/faiz'
       path: '/faiz'
@@ -4701,6 +4790,13 @@ declare module '@tanstack/react-router' {
       path: '/erase'
       fullPath: '/tr/erase'
       preLoaderRoute: typeof TrEraseRouteImport
+      parentRoute: typeof TrRoute
+    }
+    '/tr/error-help': {
+      id: '/tr/error-help'
+      path: '/error-help'
+      fullPath: '/tr/error-help'
+      preLoaderRoute: typeof TrErrorHelpRouteImport
       parentRoute: typeof TrRoute
     }
     '/tr/faiz': {
@@ -5440,6 +5536,7 @@ interface ArRouteChildren {
   ArContactRoute: typeof ArContactRoute
   ArDoctorRoute: typeof ArDoctorRoute
   ArEraseRoute: typeof ArEraseRoute
+  ArErrorHelpRoute: typeof ArErrorHelpRoute
   ArFaizRoute: typeof ArFaizRoute
   ArFaqRoute: typeof ArFaqRouteWithChildren
   ArFilecheckRoute: typeof ArFilecheckRoute
@@ -5485,6 +5582,7 @@ const ArRouteChildren: ArRouteChildren = {
   ArContactRoute: ArContactRoute,
   ArDoctorRoute: ArDoctorRoute,
   ArEraseRoute: ArEraseRoute,
+  ArErrorHelpRoute: ArErrorHelpRoute,
   ArFaizRoute: ArFaizRoute,
   ArFaqRoute: ArFaqRouteWithChildren,
   ArFilecheckRoute: ArFilecheckRoute,
@@ -5630,6 +5728,7 @@ interface EnRouteChildren {
   EnContactRoute: typeof EnContactRoute
   EnDoctorRoute: typeof EnDoctorRoute
   EnEraseRoute: typeof EnEraseRoute
+  EnErrorHelpRoute: typeof EnErrorHelpRoute
   EnFaizRoute: typeof EnFaizRoute
   EnFaqRoute: typeof EnFaqRouteWithChildren
   EnFilecheckRoute: typeof EnFilecheckRoute
@@ -5675,6 +5774,7 @@ const EnRouteChildren: EnRouteChildren = {
   EnContactRoute: EnContactRoute,
   EnDoctorRoute: EnDoctorRoute,
   EnEraseRoute: EnEraseRoute,
+  EnErrorHelpRoute: EnErrorHelpRoute,
   EnFaizRoute: EnFaizRoute,
   EnFaqRoute: EnFaqRouteWithChildren,
   EnFilecheckRoute: EnFilecheckRoute,
@@ -5887,6 +5987,7 @@ interface RuRouteChildren {
   RuContactRoute: typeof RuContactRoute
   RuDoctorRoute: typeof RuDoctorRoute
   RuEraseRoute: typeof RuEraseRoute
+  RuErrorHelpRoute: typeof RuErrorHelpRoute
   RuFaizRoute: typeof RuFaizRoute
   RuFaqRoute: typeof RuFaqRouteWithChildren
   RuFilecheckRoute: typeof RuFilecheckRoute
@@ -5933,6 +6034,7 @@ const RuRouteChildren: RuRouteChildren = {
   RuContactRoute: RuContactRoute,
   RuDoctorRoute: RuDoctorRoute,
   RuEraseRoute: RuEraseRoute,
+  RuErrorHelpRoute: RuErrorHelpRoute,
   RuFaizRoute: RuFaizRoute,
   RuFaqRoute: RuFaqRouteWithChildren,
   RuFilecheckRoute: RuFilecheckRoute,
@@ -6099,6 +6201,7 @@ interface TrRouteChildren {
   TrContactRoute: typeof TrContactRoute
   TrDoctorRoute: typeof TrDoctorRoute
   TrEraseRoute: typeof TrEraseRoute
+  TrErrorHelpRoute: typeof TrErrorHelpRoute
   TrFaizRoute: typeof TrFaizRoute
   TrFaqRoute: typeof TrFaqRouteWithChildren
   TrFilecheckRoute: typeof TrFilecheckRoute
@@ -6144,6 +6247,7 @@ const TrRouteChildren: TrRouteChildren = {
   TrContactRoute: TrContactRoute,
   TrDoctorRoute: TrDoctorRoute,
   TrEraseRoute: TrEraseRoute,
+  TrErrorHelpRoute: TrErrorHelpRoute,
   TrFaizRoute: TrFaizRoute,
   TrFaqRoute: TrFaqRouteWithChildren,
   TrFilecheckRoute: TrFilecheckRoute,
@@ -6216,6 +6320,7 @@ const rootRouteChildren: RootRouteChildren = {
   DoctorRoute: DoctorRoute,
   EnRoute: EnRouteWithChildren,
   EraseRoute: EraseRoute,
+  ErrorHelpRoute: ErrorHelpRoute,
   FaizRoute: FaizRoute,
   FaqRoute: FaqRouteWithChildren,
   FilecheckRoute: FilecheckRoute,
