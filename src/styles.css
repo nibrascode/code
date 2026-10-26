@@ -7357,13 +7357,13 @@ body.is-planner .site-backdrop {
 .nx-bar-group--studio .nx-bar-group-title { color: color-mix(in srgb, #c4b0ff 85%, #fff); }
 .nx-bar-group--learn .nx-bar-group-title { color: color-mix(in srgb, #8fe0c8 85%, #fff); }
 .nx-bar-group-title {
-  margin: 0 0 5px;
-  font-size: 6.5px;
+  margin: 0 0 4px;
+  font-size: 5px;
   font-weight: 600;
-  line-height: 1.15;
-  letter-spacing: 0.1em;
+  line-height: 1.1;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: color-mix(in srgb, currentColor 55%, transparent);
+  color: color-mix(in srgb, currentColor 50%, transparent);
 }
 .nx-bar-group-grid {
   display: grid;
@@ -7384,7 +7384,7 @@ body.is-planner .site-backdrop {
 }
 @media (max-width: 360px) {
   .nx-bar-group-grid > a { gap: 6px; padding: 6px 8px 6px 6px; }
-  .nx-bar-group-grid > a > span { font-size: 9px; }
+  .nx-bar-group-grid > a > span { font-size: 7.5px; }
   .nx-bar-group-grid > a > img, .nx-bar-group-grid > a > svg { width: 32px; height: 30px; }
 }
 
@@ -7449,9 +7449,9 @@ body.is-planner .site-backdrop {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 4px;
-  min-height: 68px;
-  padding: 8px 4px;
+  gap: 3px;
+  min-height: 58px;
+  padding: 6px 3px;
   text-align: center;
 }
 
@@ -7470,7 +7470,7 @@ body.is-planner .site-backdrop {
 .nx-bars .nx-qr-text,
 .nx-bars .nx-qr-text b {
   max-width: 100%;
-  font-size: 9px;
+  font-size: 7.5px;
   font-weight: 700;
   line-height: 1.15;
   letter-spacing: -0.02em;
