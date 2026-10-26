@@ -15,6 +15,58 @@ const TIMEOUT_MS = 6000;
 
 const memFails = new Map();
 const verified = new Map();
+const memGlobal = [];
+
+// Təhlükəsizlik siqnalları (yalnız oxuma, heç kimi bloklamır).
+// Uğursuz admin girişləri: son ~1 saat (cari + əvvəlki saat açarı). >=3 → xəbərdarlıq.
+// Canlı ziyarətçi sıçrayışı: hər yoxlamada yavaş orta (EMA) saxlanır; canlı >= max(20, 4×orta) → xəbərdarlıq.
+export const FAIL_ALERT = 3;
+export async function securitySignals(live, { env = process.env, fetchImpl = globalThis.fetch, now = Date.now() } = {}) {
+  const h = Math.floor(now / 3600000);
+  let fails = memGlobal.filter((t) => t > now - 3600000).length;
+  let lastFail = memGlobal.length ? memGlobal[memGlobal.length - 1] : null;
+  let base = null;
+  let storage = false;
+  const cfg = storageConfig(env);
+  if (cfg) {
+    try {
+      const out = await redis(cfg, [["GET", "nxadm:fails:" + h], ["GET", "nxadm:fails:" + (h - 1)], ["GET", "nxadm:lastfail"], ["GET", "nxadm:liveema"]], fetchImpl);
+      fails = (Number(out?.[0]?.result) || 0) + (Number(out?.[1]?.result) || 0);
+      lastFail = Number(out?.[2]?.result) || null;
+      const prev = out?.[3]?.result;
+      base = prev == null ? null : Number(prev);
+      storage = true;
+      if (typeof live === "number") {
+        // Sıçrayış ortanı tez şişirtməsin deyə kiçik çəki
+        const next = base == null ? live : base * 0.95 + Math.min(live, Math.max(base * 2, 5)) * 0.05;
+        await redis(cfg, [["SET", "nxadm:liveema", next.toFixed(2), "EX", 30 * 86400]], fetchImpl);
+      }
+    } catch {
+      // yaddaş dəyərləri qalır
+    }
+  }
+  const spikeAt = base == null ? null : Math.max(20, Math.ceil(base * 4));
+  const spike = typeof live === "number" && spikeAt !== null && live >= spikeAt;
+  return { fails, lastFail, failAlert: fails >= FAIL_ALERT, live, base: base == null ? null : Math.round(base * 10) / 10, spikeAt, spike, storage };
+}
+
+async function vercelAttack(env, fetchImpl) {
+  const token = env.VERCEL_SECURITY_TOKEN || env.VERCEL_API_TOKEN;
+  const project = env.VERCEL_PROJECT_ID || "prj_qE0xBVHXvUwmNFCHV3HCpRalFshX";
+  if (!token || !project) return null;
+  try {
+    const q = new URLSearchParams({ projectId: project });
+    if (env.VERCEL_TEAM_ID) q.set("teamId", env.VERCEL_TEAM_ID);
+    const res = await timed("https://api.vercel.com/v1/security/firewall/attack-status?" + q, { headers: { Authorization: "Bearer " + token } }, fetchImpl);
+    if (!res.ok) return null;
+    const j = await res.json();
+    const list = Array.isArray(j?.anomalies) ? j.anomalies : [];
+    return { active: list.length > 0, count: list.length };
+  } catch {
+    return null;
+  }
+}
+export { vercelAttack };
 
 function hash(value) {
   return createHash("sha256").update(String(value || "")).digest("hex").slice(0, 32);
@@ -69,11 +121,13 @@ export async function addFail(ip, { env = process.env, fetchImpl = globalThis.fe
   const cfg = storageConfig(env);
   if (cfg) {
     try {
-      await redis(cfg, [["INCR", key], ["EXPIRE", key, LOCK_SECONDS, "NX"]], fetchImpl);
+      await redis(cfg, [["INCR", key], ["EXPIRE", key, LOCK_SECONDS, "NX"], ["INCR", "nxadm:fails:" + Math.floor(now / 3600000)], ["EXPIRE", "nxadm:fails:" + Math.floor(now / 3600000), 7200], ["SET", "nxadm:lastfail", String(now), "EX", 86400]], fetchImpl);
     } catch {
       // yaddaşa düşür
     }
   }
+  memGlobal.push(now);
+  while (memGlobal.length && memGlobal[0] < now - 3600000) memGlobal.shift();
   const row = memFails.get(key);
   if (!row || row.until <= now) memFails.set(key, { count: 1, until: now + LOCK_SECONDS * 1000 });
   else row.count += 1;

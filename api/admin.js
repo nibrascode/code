@@ -18,6 +18,8 @@ import {
   sessionOut,
   supaLogout,
   verifyAdmin,
+  securitySignals,
+  vercelAttack,
 } from "./_admin.js";
 import { liveCount, LIVE_SECONDS } from "./_presence.js";
 import { appsData, coverList, deploys, libraryStats, providerHealth, runPlaySync, setAppSize } from "./_nx.js";
@@ -145,6 +147,13 @@ export default async function handler(req, res) {
       if (!(await verifyAdmin(bearer(req)))) return send(401, { ok: false, error: "auth" });
       const count = await liveCount();
       return send(200, { ok: true, count, storage: count !== null, windowSeconds: LIVE_SECONDS });
+    }
+
+    if (req.method === "GET" && op === "security") {
+      if (!(await verifyAdmin(bearer(req)))) return send(401, { ok: false, error: "auth" });
+      const live = await liveCount();
+      const [sig, vercel] = await Promise.all([securitySignals(live), vercelAttack(process.env, globalThis.fetch)]);
+      return send(200, { ok: true, ...sig, vercel, at: Date.now() });
     }
 
     const NX_GET = new Set(["providers", "library", "apps", "covers", "deploys"]);

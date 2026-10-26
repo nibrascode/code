@@ -16,6 +16,7 @@ import {
 } from "@/lib/studio";
 import { Card, ConfirmDelete, Empty, ErrorBox, PageHead, Seg, Skeleton, runCommit, useCopied, useStudio, type SaveTarget } from "./core";
 import { CATALOG, ICONS, LangDots, STORE_FIELDS, appList } from "./editors";
+import { nxGet } from "./nx-api";
 import { PANEL_LANGS, errorText, type SKey, type T } from "./i18n";
 import {
   IconAlert,
@@ -191,6 +192,57 @@ export function AreaChart({ values, labels, lang, label }: { values: number[]; l
 
 /* ───────────────────────────── İcmal ───────────────────────────── */
 
+type SecData = { fails: number; lastFail: number | null; failAlert: boolean; live: number | null; base: number | null; spike: boolean; vercel: { active: boolean; count: number } | null; at: number };
+
+function SecurityAlert() {
+  const { t, lang } = useStudio();
+  const [d, setD] = useState<SecData | null>(null);
+  useEffect(() => {
+    let alive = true;
+    const load = () => {
+      if (document.visibilityState === "hidden") return;
+      nxGet<SecData>("security").then((x) => alive && setD(x)).catch(() => undefined);
+    };
+    load();
+    const id = setInterval(load, 45_000);
+    document.addEventListener("visibilitychange", load);
+    return () => {
+      alive = false;
+      clearInterval(id);
+      document.removeEventListener("visibilitychange", load);
+    };
+  }, []);
+  const msgs: string[] = [];
+  if (d?.vercel?.active) msgs.push(t("sec_vercel").replace("{n}", String(d.vercel.count)));
+  if (d?.spike) msgs.push(t("sec_spike").replace("{n}", String(d.live)).replace("{b}", String(Math.round(d.base ?? 0))));
+  if (d?.failAlert) msgs.push(t("sec_fail").replace("{n}", String(d.fails)));
+  const bad = msgs.length > 0;
+  const when = d ? fmtDate(lang, d.at, { hour: "2-digit", minute: "2-digit" }) : "";
+  return (
+    <details className="nxa-card nxa-sec" open={bad || undefined} style={{ padding: "10px 14px", ...(bad ? { borderColor: "#ef4444", background: "rgba(239,68,68,.08)" } : {}) }} role={bad ? "alert" : undefined}>
+      <summary style={{ cursor: "pointer", display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
+        <span aria-hidden style={{ width: 9, height: 9, borderRadius: 99, background: !d ? "#9ca3af" : bad ? "#ef4444" : "#22c55e" }} />
+        <strong>🛡️ {bad ? t("sec_alert") : t("sec_title")}</strong>
+        <span style={{ opacity: 0.8, fontSize: 13 }}>{d ? (bad ? "" : t("sec_ok")) : "…"}</span>
+        {d && <small style={{ opacity: 0.6 }}>{t("sec_checked")} {when}</small>}
+        <span style={{ fontSize: 13, textDecoration: "underline" }}>{t("sec_more")}</span>
+      </summary>
+      {bad && (
+        <ul style={{ margin: "8px 0 4px", paddingInlineStart: 20, fontSize: 13, lineHeight: 1.5, color: "#b91c1c", fontWeight: 600 }}>
+          {msgs.map((m) => <li key={m}>{m}</li>)}
+        </ul>
+      )}
+      <p style={{ margin: "6px 0", fontSize: 13, opacity: 0.8 }}>{t("sec_warn")}</p>
+      <ol style={{ margin: "4px 0", paddingInlineStart: 20, fontSize: 13, lineHeight: 1.5 }}>
+        <li>{t("sec_s1")}</li>
+        <li>{t("sec_s2")}</li>
+        <li>{t("sec_s3")}</li>
+      </ol>
+      <a href="https://vercel.com/docs/vercel-firewall/attack-challenge-mode" target="_blank" rel="noreferrer" style={{ fontSize: 13 }}>{t("sec_open")} ↗</a>
+    </details>
+  );
+}
+
 export function OverviewSection({ ov }: { ov: OverviewState }) {
   const { t, lang, apps, rows, go } = useStudio();
   const thisMonth = new Date().toISOString().slice(0, 7);
@@ -231,19 +283,7 @@ export function OverviewSection({ ov }: { ov: OverviewState }) {
         </div>
       </div>
 
-      <details className="nxa-card nxa-sec" style={{ padding: "10px 14px" }}>
-        <summary style={{ cursor: "pointer", display: "flex", gap: 8, alignItems: "baseline", flexWrap: "wrap" }}>
-          <strong>🛡️ {t("sec_title")}</strong>
-          <span style={{ opacity: 0.8, fontSize: 13 }}>{t("sec_warn")}</span>
-          <span style={{ fontSize: 13, textDecoration: "underline" }}>{t("sec_more")}</span>
-        </summary>
-        <ol style={{ margin: "8px 0 4px", paddingInlineStart: 20, fontSize: 13, lineHeight: 1.5 }}>
-          <li>{t("sec_s1")}</li>
-          <li>{t("sec_s2")}</li>
-          <li>{t("sec_s3")}</li>
-        </ol>
-        <a href="https://vercel.com/docs/vercel-firewall/attack-challenge-mode" target="_blank" rel="noreferrer" style={{ fontSize: 13 }}>{t("sec_open")} ↗</a>
-      </details>
+      <SecurityAlert />
 
       <div className="nxa-kpis">
         <Kpi
