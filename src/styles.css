@@ -5969,14 +5969,27 @@ body.is-home .noise {
 .nx-card-slot {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0;
   min-width: 0;
+}
+
+.nx-card-main {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 0;
+  color: inherit;
+  text-decoration: none;
+  flex: 1;
 }
 
 .nx-card-stores {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 5px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgb(255 255 255 / 0.06);
 }
 
 .nx-card-stores a,
@@ -5986,11 +5999,12 @@ body.is-home .noise {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 6px;
-  border-radius: 12px;
+  padding: 5px 8px;
+  border-radius: 9px;
   border: 1px solid transparent;
-  font-size: 12px;
+  font-size: 10.5px;
   font-weight: 700;
+  line-height: 1.2;
   text-align: center;
   text-decoration: none;
   transition: filter 0.15s ease, transform 0.15s ease;
@@ -11445,6 +11459,24 @@ body.is-planner .site-backdrop {
 .ns-get small { font-weight: 500; opacity: 0.7; margin-inline-start: 4px; }
 .ns-get.is-alt { background: transparent; color: var(--ns-gold-2); box-shadow: inset 0 0 0 1px var(--ns-line); }
 .ns-get.is-soon { background: rgb(255 255 255 / 0.06); color: #b9bfcc; box-shadow: inset 0 0 0 1px var(--ns-line); cursor: not-allowed; }
+
+.ns-get-play {
+  background: #01875f;
+  border-color: #01875f;
+  color: #fff;
+}
+.ns-get-play:hover {
+  filter: brightness(1.06);
+}
+.ns-get-huawei {
+  background: #cf0a2c;
+  border-color: #cf0a2c;
+  color: #fff;
+}
+.ns-get-huawei:hover {
+  filter: brightness(1.06);
+}
+
 .ns-cta-note { flex-basis: 100%; margin: 0; font-size: 0.82rem; color: #9ea6b8; }
 .ns-sec { margin-top: 30px; padding-top: 22px; border-top: 1px solid var(--ns-line); }
 .ns-sec p { line-height: 1.65; color: #cfd3dc; margin: 0 0 10px; }

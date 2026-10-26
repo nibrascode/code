@@ -93,7 +93,7 @@ export function StoreAppPage({ app: rawApp, live }: { app: StudioApp; live?: Stu
   const [open, setOpen] = useState<number | null>(null);
   const [more, setMore] = useState(false);
   const icon = live?.icon_url || app.icon;
-  const soon = f.soon || (stores.length === 0 && !f.apkUrl);
+  const soon = stores.length === 0 && !f.apkUrl && Boolean(f.soon);
   const about = pick(f.about, lang);
   const news = pick(f.whatsNew, lang);
   const perms = pick(f.permissions, lang);
@@ -146,7 +146,14 @@ export function StoreAppPage({ app: rawApp, live }: { app: StudioApp; live?: Stu
         ) : (
           <>
             {stores.map((s) => (
-              <a key={s.id} className="ns-get" href={s.href} target="_blank" rel="noopener noreferrer" onClick={() => countDownload(app.slug)}>
+              <a
+                key={s.id}
+                className={`ns-get ns-get-${s.id}`}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => countDownload(app.slug)}
+              >
                 <Download className="size-4" />
                 {l.get} · {s.label}
               </a>

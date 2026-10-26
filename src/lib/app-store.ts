@@ -96,12 +96,12 @@ export const STORE: Partial<Record<AppSlug, StoreFacts>> = {
   },
   "nibras-plans": { soon: true, privacyUrl: "/privacy/nibras-plans" },
   "nibras-office": {
-    version: "1.0.0",
-    updated: "2026-10-24",
+    version: "1.0.1",
+    updated: "2026-10-26",
     pkg: "com.nibrascode.pdf",
     minAndroid: "8.0",
     category: TOOLS,
-    soon: true,
+    soon: false,
     privacyUrl: "/nibras-office/privacy",
     shots: { en: range("nibras-office-en", 6) },
     shotLabels: [

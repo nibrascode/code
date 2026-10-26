@@ -558,8 +558,8 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
             const built = STUDIO_APPS.find((item) => item.slug === card.slug);
             const stores = built ? appStoreLinks(built, live) : [];
             return (
-              <div key={card.slug} className="nx-card-slot">
-                <a href={localeHref(lang, `/apps/${card.slug}`)} className="nx-card">
+              <div key={card.slug} className="nx-card">
+                <a href={localeHref(lang, `/apps/${card.slug}`)} className="nx-card-main">
                   <span className="nx-card-top">
                     <span className="nx-ico">
                       <img src={live?.icon_url || card.icon} alt="" width={52} height={52} loading="lazy" decoding="async" />
