@@ -3,6 +3,7 @@ import { ArrowUpRight, BookOpen, Boxes, Braces, Briefcase, Bug, CircleHelp, Code
 import { ApkLab } from "@/components/apk-lab";
 import { LIBRARY, type LibrarySection, type LibraryTopic } from "@/lib/library";
 import { CODE_SAMPLE_HUB, CODE_SAMPLES, SITE_CODE } from "@/lib/code-samples";
+import { LARGE_APP, LARGE_GAME, WORK_SAMPLES } from "@/lib/work-samples";
 import type { ProgrammingSection } from "@/lib/programming";
 import { HUBS, pagesOf } from "@/lib/course/meta";
 import { hasProgrammingLocale, programmingLocalePath } from "@/lib/programming-path";
@@ -758,6 +759,7 @@ const GAME_TRIES: readonly SampleTry[] = [
   });
 </script>`,
   },
+  LARGE_GAME,
 ];
 
 const APP_TRIES: readonly SampleTry[] = [
@@ -833,6 +835,7 @@ const APP_TRIES: readonly SampleTry[] = [
   });
 </script>`,
   },
+  LARGE_APP,
 ];
 
 const SAMPLE_INTRO: Record<string, Record<Lang, string>> = {
@@ -1233,6 +1236,33 @@ const VOEN_FORM: Record<Lang, string> = {
   ru: "Девятую цифру VÖEN посчитать нельзя",
 };
 
+function WorkSample({ slug }: { slug: string }) {
+  const { t, lang } = useI18n();
+  const sample = WORK_SAMPLES[slug];
+  const [copied, setCopied] = useState(false);
+  if (!sample) return null;
+  return (
+    <section className="code-try">
+      <p className="code-try-level">{sample.title[lang]}</p>
+      <p className="code-try-note">{sample.note[lang]}</p>
+      <div className="code-try-bar">
+        <button
+          type="button"
+          onClick={() => {
+            void navigator.clipboard.writeText(sample.code).then(() => {
+              setCopied(true);
+              window.setTimeout(() => setCopied(false), 1600);
+            });
+          }}
+        >
+          {copied ? t("code_copied") : t("code_copy")}
+        </button>
+      </div>
+      <pre dir="ltr">{sample.code}</pre>
+    </section>
+  );
+}
+
 export function ProgrammingArticle({
   slug,
   title,
@@ -1415,6 +1445,7 @@ export function ProgrammingArticle({
           </details>
         ))}
       </div>
+      {slug ? <WorkSample slug={slug} /> : null}
       {slug && pageTools(slug).length ? (
         <div className="prog-fold-body">
           <h2>{TOOLS_PAGE.toolsFor[lang]}</h2>
