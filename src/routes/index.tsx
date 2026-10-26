@@ -547,7 +547,11 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
         <div className="nx-grid">
           {cards.map(({ card, live }) => {
             const badge = statusText(
-              card.slug === "nibras-pdf" ? "ready" : card.slug === "nibras-docs" && live?.status !== "ready" ? "soon" : live?.status,
+              card.slug === "nibras-pdf" || card.slug === "nibras-office"
+                ? "ready"
+                : card.slug === "nibras-docs" && live?.status !== "ready"
+                  ? "soon"
+                  : live?.status,
               STATUS[card.slug] ? t(STATUS[card.slug]!) : null,
               labels,
             );
@@ -575,7 +579,13 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
                 {stores.length ? (
                   <span className="nx-card-stores">
                     {stores.map((store) => (
-                      <a key={store.id} href={store.href} target="_blank" rel="noopener noreferrer">
+                      <a
+                        key={store.id}
+                        className={`nx-store-btn nx-store-${store.id}`}
+                        href={store.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         {store.label}
                       </a>
                     ))}

@@ -1240,9 +1240,10 @@ html[dir="rtl"] .marquee-track {
 
 .download-stores .store-play_url,
 .download-stores .store-play_url:hover {
-  background: #111;
+  background: #01875f;
   color: #fff;
-  border-color: #111;
+  border-color: #01875f;
+  box-shadow: 0 10px 28px rgb(1 135 95 / 0.28);
 }
 
 .download-stores .store-huawei_url,
@@ -1250,6 +1251,7 @@ html[dir="rtl"] .marquee-track {
   background: #cf0a2c;
   color: #fff;
   border-color: #cf0a2c;
+  box-shadow: 0 10px 28px rgb(207 10 44 / 0.28);
 }
 
 .download-stores .store-appstore_url,
@@ -5973,19 +5975,42 @@ body.is-home .noise {
 
 .nx-card-stores {
   display: flex;
+  flex-wrap: wrap;
   gap: 6px;
 }
 
-.nx-card-stores a {
+.nx-card-stores a,
+.nx-store-btn {
   flex: 1;
   min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 8px 6px;
   border-radius: 12px;
-  background: rgb(255 255 255 / 0.06);
-  color: inherit;
+  border: 1px solid transparent;
   font-size: 12px;
   font-weight: 700;
   text-align: center;
+  text-decoration: none;
+  transition: filter 0.15s ease, transform 0.15s ease;
+}
+
+.nx-store-btn:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.nx-store-play {
+  background: #01875f;
+  border-color: #01875f;
+  color: #fff !important;
+}
+
+.nx-store-huawei {
+  background: #cf0a2c;
+  border-color: #cf0a2c;
+  color: #fff !important;
 }
 
 .nx-card {
@@ -6107,8 +6132,9 @@ body.is-home .noise {
 
 .nx-card b {
   display: block;
-  font-size: 16px;
-  letter-spacing: -0.03em;
+  font-size: 12.5px;
+  letter-spacing: -0.02em;
+  font-weight: 650;
 }
 
 .nx-chips {
@@ -7317,11 +7343,11 @@ body.is-planner .site-backdrop {
 .nx-bar-group--studio .nx-bar-group-title { color: color-mix(in srgb, #c4b0ff 85%, #fff); }
 .nx-bar-group--learn .nx-bar-group-title { color: color-mix(in srgb, #8fe0c8 85%, #fff); }
 .nx-bar-group-title {
-  margin: 0 0 7px;
-  font-size: 10px;
+  margin: 0 0 6px;
+  font-size: 8px;
   font-weight: 600;
   line-height: 1.2;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: color-mix(in srgb, currentColor 55%, transparent);
 }
