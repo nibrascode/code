@@ -50,13 +50,13 @@ export function hrefForLang(pathname: string, lang: Lang) {
   if (programming) {
     if (lang === "az" || isCourseSlug(programming.slug)) return programmingLocalePath(lang, programming.slug);
     if (hasProgrammingLocale(lang, programming.slug)) return programmingLocalePath(lang, programming.slug);
-    return `${programmingLocalePath("az", programming.slug)}?lang=${lang}`;
+    return localeHref(lang, programmingLocalePath("az", programming.slug));
   }
   const pair = pdfPairFromPath(pathname);
   if (pair) {
     if (lang === "ru") return pair.ru;
     if (lang === "az") return pair.az;
-    return `${pair.az}?lang=${lang}`;
+    return localeHref(lang, pair.az);
   }
   const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname;
   const split = stripLocalePrefix(path);
@@ -69,7 +69,7 @@ export function hrefForLang(pathname: string, lang: Lang) {
     path.startsWith("/guides/") ||
     path === "/programming"
   ) {
-    return lang === "az" ? path : `${path}?lang=${lang}`;
+    return localeHref(lang, path);
   }
-  return lang === "az" ? path : `${path}?lang=${lang}`;
+  return localeHref(lang, path);
 }

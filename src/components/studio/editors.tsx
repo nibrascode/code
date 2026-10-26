@@ -459,7 +459,7 @@ function UnutmaForm() {
         actions={
           <>
             <LangTabs lang={lang} setLang={setLang} filled={hasRow(rows, "unutma")} />
-            <a className="nxa-btn is-ghost is-sm" href={lang === "az" ? "/unutma" : `/unutma?lang=${lang}`} target="_blank" rel="noreferrer">
+            <a className="nxa-btn is-ghost is-sm" href={lang === "az" ? "/unutma" : `/${lang}/unutma`} target="_blank" rel="noreferrer">
               <IconExternal size={15} />
               {t("open_live")}
             </a>

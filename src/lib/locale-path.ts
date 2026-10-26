@@ -9,8 +9,13 @@ export function stripLocalePrefix(pathname: string): { lang: Lang | null; path: 
   return { lang: match[1] as Lang, path: match[2] };
 }
 
+/** Pages that keep one route file and get `/xx/...` URLs via router rewrite. */
+export function isSharedLocalePage(path: string) {
+  return path === "/why" || path === "/unutma" || path === "/guides" || /^\/guides\/[^/]+$/.test(path) || path === "/privacy" || /^\/privacy\/[^?#]+$/.test(path) || path === "/resources" || /^\/resources\/[^/]+(\/[^/]+)?$/.test(path) || /^\/resurslar\/[^/]+$/.test(path) || path === "/programming" || /^\/programming\/[^/]+$/.test(path);
+}
+
 export function isSplitPage(path: string) {
-  return path === "/about" || path === "/contact" || path === "/terms" || path === "/trust" || path === "/nedir" || path === "/apps" || path === "/qr" || path === "/erase" || path === "/image" || /^\/image\/(resize|convert|edit)$/.test(path) || path === "/vcard" || path === "/zip" || path === "/planner" || path === "/calc" || path === "/ai" || path === "/soz-sayi" || path === "/faiz" || path === "/wifi" || path === "/seo" || path === "/flow" || path === "/logic" || path === "/unknown" || path === "/pdf" || /^\/pdf\/[a-z-]+$/.test(path) || /^\/apps\/[^/]+$/.test(path) || path === "/oyun" || /^\/oyun\/[a-z0-9-]+$/.test(path);
+  return isSharedLocalePage(path) || path === "/about" || path === "/contact" || path === "/terms" || path === "/trust" || path === "/nedir" || path === "/apps" || path === "/qr" || path === "/erase" || path === "/image" || /^\/image\/(resize|convert|edit)$/.test(path) || path === "/vcard" || path === "/zip" || path === "/planner" || path === "/calc" || path === "/ai" || path === "/soz-sayi" || path === "/faiz" || path === "/wifi" || path === "/seo" || path === "/flow" || path === "/logic" || path === "/unknown" || path === "/pdf" || /^\/pdf\/[a-z-]+$/.test(path) || /^\/apps\/[^/]+$/.test(path) || path === "/oyun" || /^\/oyun\/[a-z0-9-]+$/.test(path);
 }
 
 export function homePath(lang: Lang) {

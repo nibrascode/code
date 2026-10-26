@@ -1129,7 +1129,7 @@ export function canonicalUrl(pathname: string, lang: Lang) {
   if (pair) {
     if (path.startsWith("/ru/") || lang === "ru") return `${SITE}${pair.ru}`;
     if (lang === "az") return `${SITE}${pair.az}`;
-    return `${SITE}${pair.az}?lang=${lang}`;
+    return `${SITE}${localeHref(lang, pair.az)}`;
   }
   const located = programmingFromPath(path);
   if (located) {

@@ -1,3 +1,4 @@
+import { localeHref } from "@/lib/locale-path";
 import { useRouterState } from "@tanstack/react-router";
 import { LANGS, LANG_META, STORAGE_KEY, type Lang } from "@/lib/i18n";
 import { useI18n } from "@/lib/i18n-context";
@@ -16,7 +17,7 @@ export function LanguageSwitch() {
       /* ignore */
     }
     const href = hrefForLang(pathname, code);
-    const next = href ?? (code === "az" ? pathname : `${pathname}?lang=${code}`);
+    const next = href ?? (code === "az" ? pathname : localeHref(code, pathname));
     const here = `${pathname}${searchStr ?? ""}`;
     if (next === here) return;
     window.location.assign(next);
