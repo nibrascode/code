@@ -1,76 +1,6 @@
 {
   "redirects": [
     {
-      "source": "/:lang(en|tr|ar|ru)?/kitab",
-      "destination": "https://library.nibrascode.com/",
-      "permanent": true
-    },
-    {
-      "source": "/:lang(en|tr|ar|ru)?/kitab/:path*",
-      "destination": "https://library.nibrascode.com/",
-      "permanent": true
-    },
-    {
-      "source": "/:lang(en|tr|ar|ru)?/kitablar",
-      "destination": "https://library.nibrascode.com/",
-      "permanent": true
-    },
-    {
-      "source": "/:lang(en|tr|ar|ru)?/kitablar/:path*",
-      "destination": "https://library.nibrascode.com/",
-      "permanent": true
-    },
-    {
-      "source": "/:lang(en|tr|ar|ru)?/books",
-      "destination": "https://library.nibrascode.com/",
-      "permanent": true
-    },
-    {
-      "source": "/:lang(en|tr|ar|ru)?/books/:path*",
-      "destination": "https://library.nibrascode.com/",
-      "permanent": true
-    },
-    {
-      "source": "/:lang(en|tr|ar|ru)?/book",
-      "destination": "https://library.nibrascode.com/",
-      "permanent": true
-    },
-    {
-      "source": "/:lang(en|tr|ar|ru)?/book/:path*",
-      "destination": "https://library.nibrascode.com/",
-      "permanent": true
-    },
-    {
-      "source": "/:lang(en|tr|ar|ru)?/quran",
-      "destination": "https://library.nibrascode.com/quran",
-      "permanent": true
-    },
-    {
-      "source": "/:lang(en|tr|ar|ru)?/quran/:path*",
-      "destination": "https://library.nibrascode.com/quran/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/:lang(en|tr|ar|ru)?/tafsir",
-      "destination": "https://library.nibrascode.com/tafsir",
-      "permanent": true
-    },
-    {
-      "source": "/:lang(en|tr|ar|ru)?/tafsir/:path*",
-      "destination": "https://library.nibrascode.com/tafsir/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/:lang(en|tr|ar|ru)?/tefsir",
-      "destination": "https://library.nibrascode.com/tafsir",
-      "permanent": true
-    },
-    {
-      "source": "/:lang(en|tr|ar|ru)?/tefsir/:path*",
-      "destination": "https://library.nibrascode.com/tafsir/:path*",
-      "permanent": true
-    },
-    {
       "source": "/al",
       "destination": "/ai",
       "permanent": true
@@ -99,6 +29,186 @@
         }
       ],
       "destination": "https://nibrascode.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/quran",
+      "destination": "https://library.nibrascode.com/quran",
+      "permanent": true
+    },
+    {
+      "source": "/quran/",
+      "destination": "https://library.nibrascode.com/quran",
+      "permanent": true
+    },
+    {
+      "source": "/quran/:path*",
+      "destination": "https://library.nibrascode.com/quran",
+      "permanent": true
+    },
+    {
+      "source": "/kitab",
+      "destination": "https://library.nibrascode.com/",
+      "permanent": true
+    },
+    {
+      "source": "/kitab/",
+      "destination": "https://library.nibrascode.com/",
+      "permanent": true
+    },
+    {
+      "source": "/kitab/:path*",
+      "destination": "https://library.nibrascode.com/",
+      "permanent": true
+    },
+    {
+      "source": "/mushaf",
+      "destination": "https://library.nibrascode.com/quran",
+      "permanent": true
+    },
+    {
+      "source": "/mushaf/:path*",
+      "destination": "https://library.nibrascode.com/quran",
+      "permanent": true
+    },
+    {
+      "source": "/tafsir",
+      "destination": "https://library.nibrascode.com/quran",
+      "permanent": true
+    },
+    {
+      "source": "/tafsir/:path*",
+      "destination": "https://library.nibrascode.com/quran",
+      "permanent": true
+    },
+    {
+      "source": "/hadis",
+      "destination": "https://library.nibrascode.com/bolme/hadith",
+      "permanent": true
+    },
+    {
+      "source": "/hadis/:path*",
+      "destination": "https://library.nibrascode.com/bolme/hadith",
+      "permanent": true
+    },
+    {
+      "source": "/nahw",
+      "destination": "https://library.nibrascode.com/bolme/nahw",
+      "permanent": true
+    },
+    {
+      "source": "/nahw/:path*",
+      "destination": "https://library.nibrascode.com/bolme/nahw",
+      "permanent": true
+    },
+    {
+      "source": "/mektebe",
+      "destination": "https://library.nibrascode.com/",
+      "permanent": true
+    },
+    {
+      "source": "/mektebe/:path*",
+      "destination": "https://library.nibrascode.com/",
+      "permanent": true
+    },
+    {
+      "source": "/library",
+      "destination": "https://library.nibrascode.com/",
+      "permanent": true
+    },
+    {
+      "source": "/library/:path*",
+      "destination": "https://library.nibrascode.com/",
+      "permanent": true
+    },
+    {
+      "source": "/books",
+      "destination": "https://library.nibrascode.com/",
+      "permanent": true
+    },
+    {
+      "source": "/books/:path*",
+      "destination": "https://library.nibrascode.com/",
+      "permanent": true
+    },
+    {
+      "source": "/en/quran",
+      "destination": "https://library.nibrascode.com/quran",
+      "permanent": true
+    },
+    {
+      "source": "/en/quran/:path*",
+      "destination": "https://library.nibrascode.com/quran",
+      "permanent": true
+    },
+    {
+      "source": "/en/kitab",
+      "destination": "https://library.nibrascode.com/",
+      "permanent": true
+    },
+    {
+      "source": "/en/kitab/:path*",
+      "destination": "https://library.nibrascode.com/",
+      "permanent": true
+    },
+    {
+      "source": "/tr/quran",
+      "destination": "https://library.nibrascode.com/quran",
+      "permanent": true
+    },
+    {
+      "source": "/tr/quran/:path*",
+      "destination": "https://library.nibrascode.com/quran",
+      "permanent": true
+    },
+    {
+      "source": "/tr/kitab",
+      "destination": "https://library.nibrascode.com/",
+      "permanent": true
+    },
+    {
+      "source": "/tr/kitab/:path*",
+      "destination": "https://library.nibrascode.com/",
+      "permanent": true
+    },
+    {
+      "source": "/ar/quran",
+      "destination": "https://library.nibrascode.com/quran",
+      "permanent": true
+    },
+    {
+      "source": "/ar/quran/:path*",
+      "destination": "https://library.nibrascode.com/quran",
+      "permanent": true
+    },
+    {
+      "source": "/ar/kitab",
+      "destination": "https://library.nibrascode.com/",
+      "permanent": true
+    },
+    {
+      "source": "/ar/kitab/:path*",
+      "destination": "https://library.nibrascode.com/",
+      "permanent": true
+    },
+    {
+      "source": "/ru/quran",
+      "destination": "https://library.nibrascode.com/quran",
+      "permanent": true
+    },
+    {
+      "source": "/ru/quran/:path*",
+      "destination": "https://library.nibrascode.com/quran",
+      "permanent": true
+    },
+    {
+      "source": "/ru/kitab",
+      "destination": "https://library.nibrascode.com/",
+      "permanent": true
+    },
+    {
+      "source": "/ru/kitab/:path*",
+      "destination": "https://library.nibrascode.com/",
       "permanent": true
     },
     {
