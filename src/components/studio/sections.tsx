@@ -231,6 +231,20 @@ export function OverviewSection({ ov }: { ov: OverviewState }) {
         </div>
       </div>
 
+      <details className="nxa-card nxa-sec" style={{ padding: "10px 14px" }}>
+        <summary style={{ cursor: "pointer", display: "flex", gap: 8, alignItems: "baseline", flexWrap: "wrap" }}>
+          <strong>🛡️ {t("sec_title")}</strong>
+          <span style={{ opacity: 0.8, fontSize: 13 }}>{t("sec_warn")}</span>
+          <span style={{ fontSize: 13, textDecoration: "underline" }}>{t("sec_more")}</span>
+        </summary>
+        <ol style={{ margin: "8px 0 4px", paddingInlineStart: 20, fontSize: 13, lineHeight: 1.5 }}>
+          <li>{t("sec_s1")}</li>
+          <li>{t("sec_s2")}</li>
+          <li>{t("sec_s3")}</li>
+        </ol>
+        <a href="https://vercel.com/docs/vercel-firewall/attack-challenge-mode" target="_blank" rel="noreferrer" style={{ fontSize: 13 }}>{t("sec_open")} ↗</a>
+      </details>
+
       <div className="nxa-kpis">
         <Kpi
           icon={<IconGlobe size={20} />}
