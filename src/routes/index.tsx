@@ -26,8 +26,8 @@ export const Route = createFileRoute("/")({
 
 const BAR_GROUPS: Record<"g1" | "g2" | "g3", Record<Lang, string>> = {
   g1: { az: "Alətlər", en: "Tools", tr: "Araçlar", ru: "Инструменты", ar: "أدوات" },
-  g2: { az: "Studio və kod", en: "Studio & code", tr: "Studio ve kod", ru: "Студия и код", ar: "الاستوديو والبرمجة" },
-  g3: { az: "Öyrən və yoxla", en: "Learn & check", tr: "Öğren ve kontrol", ru: "Учёба и проверка", ar: "تعلّم وفحص" },
+  g2: { az: "Studio", en: "Studio", tr: "Studio", ru: "Студия", ar: "الاستوديو" },
+  g3: { az: "Öyrənmə", en: "Learn", tr: "Öğrenme", ru: "Обучение", ar: "التعلّم" },
 };
 
 const BAR: Record<"dev" | "apk" | "pdf" | "qr" | "erase" | "image" | "calc" | "seo" | "flow" | "logic" | "unknown", Record<Lang, string>> = {

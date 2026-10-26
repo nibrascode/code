@@ -7297,11 +7297,13 @@ body.is-planner .site-backdrop {
   margin-top: 14px;
 }
 .nx-bar-group-title {
-  margin: 0 0 6px;
-  font-size: 12.5px;
+  margin: 0 0 8px;
+  font-size: 11px;
   font-weight: 600;
-  opacity: 0.65;
-  letter-spacing: 0.02em;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, currentColor 55%, transparent);
 }
 .nx-bar-group-grid {
   display: grid;
