@@ -45,7 +45,6 @@ const BAR: Record<"dev" | "apk" | "pdf" | "qr" | "erase" | "image" | "calc" | "s
 };
 
 const STATUS: Partial<Record<"nibras-arabic" | "nibras-pdf" | "nibras-qr" | "nibras-plans" | "nibras-docs" | "nibras-office", TKey>> = {
-  ...(syncedPlayUrl("nibras-office") ? {} : { "nibras-office": "soon" as TKey }),
   "nibras-plans": "soon",
   "nibras-docs": "soon",
 };

@@ -99,6 +99,7 @@ export const STUDIO_APPS: StudioApp[] = [
     name: "Nibras Office",
     icon: "/apps/nibras-office.jpg",
     playStoreUrl: null,
+    huaweiStoreUrl: "https://appgallery.huawei.com/app/C119512365",
     leadKey: "office_lead",
     bodyKey: "office_body",
     features: ["office_f1", "office_f2", "office_f3"],

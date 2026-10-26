@@ -1,5 +1,5 @@
 {
-  "savedAt": "2026-10-03T10:20:08.162Z",
+  "savedAt": "2026-10-26T12:52:25.673Z",
   "apps": [
     {
       "slug": "nibras-arabic",
@@ -13,6 +13,20 @@
       "xiaomi_url": "",
       "icon_url": "/apps/nibras-arabic.webp",
       "sort": 200,
+      "visible": true
+    },
+    {
+      "slug": "nibras-office",
+      "name": "Nibras Office",
+      "status": "ready",
+      "summary": "",
+      "play_url": "",
+      "huawei_url": "https://appgallery.huawei.com/app/C119512365",
+      "appstore_url": "",
+      "galaxy_url": "",
+      "xiaomi_url": "",
+      "icon_url": "/apps/nibras-office.webp",
+      "sort": 150,
       "visible": true
     }
   ],
