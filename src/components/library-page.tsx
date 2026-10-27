@@ -1,3 +1,4 @@
+import { InfoCard, InfoCards } from "@/components/info-card";
 import { useEffect, useState, type ReactNode } from "react";
 import { ArrowUpRight, BookOpen, Boxes, Braces, Briefcase, Bug, CircleHelp, Code, Database, FileCode, GitCompare, GraduationCap, ListChecks, MessageCircleQuestion, Package, Server, Shield, Sparkles, Terminal, Wrench } from "lucide-react";
 import { ApkLab } from "@/components/apk-lab";
@@ -384,20 +385,13 @@ export function LibraryIndex({
       {section === "programming" && lessons.length ? (
         <section className="prog-start">
           <h2>{copy.lessons}</h2>
-          <ul className="lib-list">
+          <InfoCards>
             {lessons.map((lesson) => (
-              <li key={lesson.kind}>
-                <a href={programmingLocalePath(lang, HUBS[lesson.kind].slug)}>
-                  <span className="topic-name">
-                    <GraduationCap aria-hidden="true" />
-                    {HUBS[lesson.kind].title[lang]}
-                  </span>
-                  <ArrowUpRight className="rtl-flip size-4" />
-                </a>
-                <small className="lib-desc">{lesson.note[lang]}</small>
-              </li>
+              <InfoCard key={lesson.kind} icon={GraduationCap} title={HUBS[lesson.kind].title[lang]} href={programmingLocalePath(lang, HUBS[lesson.kind].slug)}>
+                <p>{lesson.note[lang]}</p>
+              </InfoCard>
             ))}
-          </ul>
+          </InfoCards>
         </section>
       ) : null}
       {section === "programming" ? (

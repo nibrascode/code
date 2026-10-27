@@ -1,3 +1,5 @@
+import { Bookmark } from "lucide-react";
+import { InfoCard, InfoCards } from "@/components/info-card";
 import { createFileRoute } from "@tanstack/react-router";
 import { unutmaFromRow } from "@/lib/pages";
 import { loadStudioBundle } from "@/lib/studio.functions";
@@ -24,14 +26,13 @@ function UnutmaPage() {
       <p className="who-verse" lang="ar" dir="rtl">
         {copy.verse}
       </p>
-      <ol className="remind-list">
+      <InfoCards>
         {copy.notes.map((note, index) => (
-          <li key={note}>
-            <span>{String(index + 1).padStart(2, "0")}</span>
+          <InfoCard key={note} icon={Bookmark} muted={String(index + 1).padStart(2, "0")}>
             <p>{note}</p>
-          </li>
+          </InfoCard>
         ))}
-      </ol>
+      </InfoCards>
     </main>
   );
 }

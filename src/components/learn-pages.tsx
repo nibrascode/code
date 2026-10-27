@@ -1,3 +1,5 @@
+import { BookOpen, GitCompare, Info, ListChecks } from "lucide-react";
+import { InfoCard, InfoCards } from "@/components/info-card";
 import type { Lang } from "@/lib/i18n";
 import {
   COMPARE,
@@ -31,13 +33,11 @@ export function CompareIndex({ lang }: { lang: Lang }) {
         <a href={searchPath(lang, "xeta")}>{SEARCH.xeta.heading[lang]}</a>
         <a href={localeHref(lang, "/programming")}>{PROG[lang]}</a>
       </nav>
-      <ul className="lib-list">
+      <InfoCards>
         {COMPARE_ITEMS.map((item) => (
-          <li key={item.slug}>
-            <a href={compareTopicPath(lang, item.slug)}>{item.title[lang]}</a>
-          </li>
+          <InfoCard key={item.slug} icon={GitCompare} title={item.title[lang]} href={compareTopicPath(lang, item.slug)} />
         ))}
-      </ul>
+      </InfoCards>
     </main>
   );
 }
@@ -54,24 +54,28 @@ export function CompareTopic({ lang, slug }: { lang: Lang; slug: string }) {
         <a href={comparePath(lang)}>{COMPARE.heading[lang]}</a>
       </p>
       <h1>{item.title[lang]}</h1>
-      <div className="why-lead">
-        {item.lead[lang].split(/\n\n+/).map((para) => (
-          <p key={para}>{para}</p>
-        ))}
-        <ul className="faq-points">
-          {item.points[lang].map((point) => (
-            <li key={point}>{point}</li>
+      <InfoCards>
+        <InfoCard icon={BookOpen}>
+          {item.lead[lang].split(/\n\n+/).map((para) => (
+            <p key={para}>{para}</p>
           ))}
-        </ul>
-        <p className="faq-note">{item.note[lang]}</p>
-      </div>
-      <ul className="lib-list">
+        </InfoCard>
+        <InfoCard icon={ListChecks}>
+          <ul>
+            {item.points[lang].map((point) => (
+              <li key={point}>{point}</li>
+            ))}
+          </ul>
+        </InfoCard>
+        <InfoCard icon={Info}>
+          <p>{item.note[lang]}</p>
+        </InfoCard>
+      </InfoCards>
+      <InfoCards>
         {others.map((entry) => (
-          <li key={entry.slug}>
-            <a href={compareTopicPath(lang, entry.slug)}>{entry.title[lang]}</a>
-          </li>
+          <InfoCard key={entry.slug} icon={GitCompare} title={entry.title[lang]} href={compareTopicPath(lang, entry.slug)} />
         ))}
-      </ul>
+      </InfoCards>
     </main>
   );
 }

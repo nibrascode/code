@@ -2,7 +2,7 @@ import { ShieldCheck } from "lucide-react";
 import { InfoCard, InfoCards } from "@/components/info-card";
 
 /** Numbered heading + following paragraphs = one card; unnumbered paragraphs each get their own card. */
-function groupPolicy(paragraphs: readonly string[]) {
+export function groupPolicy(paragraphs: readonly string[]) {
   const out: { title?: string; body: string[] }[] = [];
   let cur: { title?: string; body: string[] } | null = null;
   for (const p of paragraphs) {

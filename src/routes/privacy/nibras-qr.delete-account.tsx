@@ -1,5 +1,8 @@
+import { ShieldCheck, Trash2 } from "lucide-react";
+import { InfoCard, InfoCards } from "@/components/info-card";
 import { createFileRoute } from "@tanstack/react-router";
 import { useI18n } from "@/lib/i18n-context";
+import { groupPolicy } from "@/components/app-privacy";
 import { QR_DELETE } from "@/lib/qr-privacy";
 
 export const Route = createFileRoute("/privacy/nibras-qr/delete-account")({
@@ -29,12 +32,16 @@ function NibrasQrDeleteAccountPage() {
       </div>
       <h1>{copy.title}</h1>
       <p className="privacy-updated">{copy.updated}</p>
-      {copy.paragraphs.map((paragraph) =>
-        /^\d+\.\s/.test(paragraph) ? <h2 key={paragraph}>{paragraph}</h2> : <p key={paragraph}>{linkify(paragraph)}</p>,
-      )}
-      <p>
-        <a href="/privacy/nibras-qr">{lang === "az" ? "Məxfilik siyasəti — Nibras QR" : "Privacy policy — Nibras QR"}</a>
-      </p>
+      <InfoCards>
+        {groupPolicy(copy.paragraphs).map((g, i) => (
+          <InfoCard key={(g.title ?? "") + i} icon={Trash2} title={g.title}>
+            {g.body.map((paragraph) => (
+              <p key={paragraph}>{linkify(paragraph)}</p>
+            ))}
+          </InfoCard>
+        ))}
+        <InfoCard icon={ShieldCheck} href="/privacy/nibras-qr" title={lang === "az" ? "Məxfilik siyasəti — Nibras QR" : "Privacy policy — Nibras QR"} />
+      </InfoCards>
     </main>
   );
 }
