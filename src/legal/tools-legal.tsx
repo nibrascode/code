@@ -12,25 +12,34 @@ type Copy = { eyebrow: string; title: string; updated: string; pTitle: string; p
 const C: Record<Lang, Copy> = {
   az: {
     eyebrow: `Məxfilik və şərtlər`,
-    title: `Nibras Studio, Workspace, Learn, Site Doctor, Error Help və digər alətlər`,
-    updated: `Yenilənib: 26 oktyabr 2026`,
+    title: `Nibras Code alətləri: Alətlər, Studio, Workspace, Learn, Site Doctor, Error Help`,
+    updated: `Yenilənib: 27 oktyabr 2026`,
     pTitle: `Məxfilik siyasəti`,
     privacy: [
       {
         title: `1. Bu səhifə nəyi əhatə edir`,
         paras: [
+          `Həmçinin ana səhifədəki «Alətlər» qrupunu əhatə edir: PDF hazırla, QR hazırla, Fon sil, Şəkil sıx, ZIP, Hesabla, Plan hazırla, Sual qur, SEO yoxla və Nibras AI.`,
           `Bu məxfilik siyasəti və istifadə şərtləri nibrascode.com üzərindəki brauzer alətlərinə aiddir: Nibras Studio (/studio), Workspace (/workspace), Learn (/learn), Site Doctor (/doctor), Error Help (/error-help), Logic Lab (/learn/logic), Site Mirror (/mirror), Shortcuts (/shortcuts), Schema (/schema) və File Check (/filecheck). Onlar ana səhifədə «Studio və kod» və «Öyrən və yoxla» qruplarında göstərilir.`,
           `Operator: Nibras Code (nibrascode.com). Əlaqə: nibrascode@gmail.com. Bu səhifənin ünvanı: https://nibrascode.com/tools-legal. Mobil tətbiqlərin (Nibras Docs, QR, PDF, Arabic, Office və s.) ayrıca məxfilik səhifələri /privacy altında toplanır.`,
         ],
       },
       {
-        title: `2. Hesab və şəxsiyyət`,
+        title: `2. Alətlər — PDF, QR, Fon sil, Şəkil, ZIP, Hesabla, Plan, Sual, SEO və Nibras AI`,
+        paras: [
+          `PDF hazırla (/pdf), QR hazırla (/qr), Fon sil (/erase), Şəkil sıx (/image) və ZIP (/zip) brauzerinizdə işləyir. Seçdiyiniz fayllar Nibras Code serverinə yüklənmir. Fon silmə modeli ilk dəfə brauzerə endirilir, şəkil isə cihazınızda emal olunur.`,
+          `Hesabla (/calc), Plan hazırla (/flow, /planner) və Sual qur (/logic) yazdıqlarınızı brauzerdə işləyir və lazım olduqda localStorage-da saxlayır.`,
+          `SEO yoxla (/seo) yazdığınız ünvanı yoxlamaq üçün serverimizə göndərir. Nibras AI (/ai) yazdığınız mətni cavab hazırlamaq üçün serverə göndərir. Ətraflı: /privacy səhifəsindəki Nibras AI bölməsi. Şəxsi məlumat, şifrə və ya kart nömrəsi yazmayın.`,
+        ],
+      },
+      {
+        title: `3. Hesab və şəxsiyyət`,
         paras: [
           `Bu alətlərdə hesab yoxdur. Qeydiyyat, giriş, ad, telefon və e-poçt istənmir. Ödəniş və abunəlik yoxdur. Alətlər pulsuzdur.`,
         ],
       },
       {
-        title: `3. Studio, Workspace və Learn — brauzerdə saxlama`,
+        title: `4. Studio, Workspace və Learn — brauzerdə saxlama`,
         paras: [
           `Layihələr, fayllar, kod, PDF-dən çıxarılmış mətn, suallar, kurslar, nəticələr və nüsxələr yalnız sizin brauzerinizin localStorage (və lazım gəldikdə IndexedDB) yaddaşında saxlanır. Nibras Code serverinə yüklənmir; bizdə surəti yoxdur.`,
           `Studio və Workspace eyni layihə açarını paylaşır: birində yazdığınız digərində görünə bilər. «Nibras Dev-də aç» layihəni linkin # hissəsinə yazır; bu hissə serverə getmir. «APK Studio» ZIP-i cihazınıza endirir; onu siz yükləyirsiniz.`,
@@ -38,20 +47,20 @@ const C: Record<Lang, Copy> = {
         ],
       },
       {
-        title: `4. Logic Lab, Site Mirror, Shortcuts, Schema, File Check`,
+        title: `5. Logic Lab, Site Mirror, Shortcuts, Schema, File Check`,
         paras: [
           `Hamısı brauzerdə işləyir. Sxemlər, kolleksiyalar, irəliləyiş, sitemap XML, açdığınız fayllar və hash nəticələri localStorage və ya yaddaşda qalır. Seçdiyiniz fayllar və yapışdırdığınız sitemap Nibras Code serverinə göndərilmir. File Check magic bayt və SHA hash-ləri cihazınızda hesablayır.`,
         ],
       },
       {
-        title: `5. Site Doctor — server yoxlaması`,
+        title: `6. Site Doctor — server yoxlaması`,
         paras: [
           `Yazdığınız ünvanı yoxlamaq üçün serverimiz açıq səhifəni, robots.txt, sitemap və məhdud sayda keçidi açır (təxminən 25 link və 12 fayl). Nəticə sizə qaytarılır və saxlanmır.`,
           `Sui-istifadənin qarşısını almaq üçün IP ünvanı qısa müddət yalnız yaddaşda sorğu sürətini məhdudlaşdırmaq üçün istifadə olunur. Yalnız yoxlamağa haqqınız olan saytlarda istifadə edin.`,
         ],
       },
       {
-        title: `6. Error Help — xəta mətninin AI ilə izahı`,
+        title: `7. Error Help — xəta mətninin AI ilə izahı`,
         paras: [
           `Error Help yapışdırdığınız xəta mesajını və ya stack trace-i (ən çoxu təxminən 6000 simvol) və seçdiyiniz dili /api/error-help vasitəsilə Nibras Code serverinə göndərir. Server cavabı hazırlamaq üçün xarici süni intellekt xidmətlərinə (məsələn Groq, Mistral, OpenRouter və digər konfiqurasiya olunmuş provayderlər) ötürür. Onlar mətni yalnız izah hazırlamaq üçün oxuyur.`,
           `Xəta mətni hesabla bağlanmır, reklam üçün istifadə olunmur və bizim modelimizi öyrətmək üçün saxlanmır. Sorğular diskə uzunmüddətli jurnal kimi yazılmır. IP ünvanı qısa müddət yaddaşda sürət limiti (təxminən 4 saniyə) üçün istifadə olunur. Brauzerdə gündəlik limit (10 sorğu) localStorage-da saxlanır.`,
@@ -59,19 +68,19 @@ const C: Record<Lang, Copy> = {
         ],
       },
       {
-        title: `7. Analitika`,
+        title: `8. Analitika`,
         paras: [
           `Sayt anonim ziyarət statistikası (Google Analytics və sadə onlayn sayğac) istifadə edə bilər. Layihə məzmunu, xəta mətni, fayllar və hash-lər bu statistikaya göndərilmir. Brauzerdə izləməni bağlasanız, sayğac getməyə bilər.`,
         ],
       },
       {
-        title: `8. Məlumatın silinməsi`,
+        title: `9. Məlumatın silinməsi`,
         paras: [
           `Layihəni silmə düyməsi ilə və ya brauzerdə bu saytın məlumatlarını təmizləməklə silin. Təmizlənən localStorage geri qaytarılmır — vacib işin ZIP nüsxəsini saxlayın. Error Help və Doctor nəticələri serverdə saxlanmadığı üçün silinəcək surət yoxdur.`,
         ],
       },
       {
-        title: `9. Uşaqlar və dəyişikliklər`,
+        title: `10. Uşaqlar və dəyişikliklər`,
         paras: [
           `Alətlər 13 yaşdan kiçik uşaqlar üçün nəzərdə tutulmayıb. Siyasət dəyişəndə bu səhifə yenilənir; keçərli olan son haldır. Suallar: nibrascode@gmail.com.`,
         ],
@@ -114,25 +123,34 @@ const C: Record<Lang, Copy> = {
   },
   en: {
     eyebrow: `Privacy and terms`,
-    title: `Nibras Studio, Workspace, Learn, Site Doctor, Error Help and other tools`,
-    updated: `Updated: 26 October 2026`,
+    title: `Nibras Code tools: Tools, Studio, Workspace, Learn, Site Doctor, Error Help`,
+    updated: `Updated: 27 October 2026`,
     pTitle: `Privacy policy`,
     privacy: [
       {
         title: `1. What this page covers`,
         paras: [
+          `It also covers the “Tools” group on the home page: Make a PDF, Make a QR, Remove background, Compress photo, ZIP, Calculate, Make a plan, Build questions, Check SEO and Nibras AI.`,
           `This privacy policy and these terms of use cover the browser tools on nibrascode.com: Nibras Studio (/studio), Workspace (/workspace), Learn (/learn), Site Doctor (/doctor), Error Help (/error-help), Logic Lab (/learn/logic), Site Mirror (/mirror), Shortcuts (/shortcuts), Schema (/schema) and File Check (/filecheck). They appear on the home page under “Studio & code” and “Learn & check”.`,
           `Operator: Nibras Code (nibrascode.com). Contact: nibrascode@gmail.com. Page URL: https://nibrascode.com/en/tools-legal. Mobile apps (Nibras Docs, QR, PDF, Arabic, Office, etc.) have separate policies under /privacy.`,
         ],
       },
       {
-        title: `2. Accounts and identity`,
+        title: `2. Tools — PDF, QR, Remove background, Photo, ZIP, Calculate, Plan, Questions, SEO and Nibras AI`,
+        paras: [
+          `Make a PDF (/pdf), Make a QR (/qr), Remove background (/erase), Compress photo (/image) and ZIP (/zip) run in your browser. Files you choose are not uploaded to a Nibras Code server. The background-removal model is downloaded to the browser the first time; the image is processed on your device.`,
+          `Calculate (/calc), Make a plan (/flow, /planner) and Build questions (/logic) work in your browser and may keep data in localStorage.`,
+          `Check SEO (/seo) sends the address you enter to our server to check it. Nibras AI (/ai) sends the text you type to a server to prepare an answer. Details: the Nibras AI section on /privacy. Do not type personal data, passwords or card numbers.`,
+        ],
+      },
+      {
+        title: `3. Accounts and identity`,
         paras: [
           `These tools have no accounts. No sign-up, login, name, phone or email is required. There is no payment or subscription. The tools are free.`,
         ],
       },
       {
-        title: `3. Studio, Workspace and Learn — browser storage`,
+        title: `4. Studio, Workspace and Learn — browser storage`,
         paras: [
           `Projects, files, code, text extracted from PDFs, questions, courses, results and snapshots are stored only in your browser’s localStorage (and IndexedDB when needed). They are not uploaded to a Nibras Code server; we have no copy.`,
           `Studio and Workspace share the same project key, so work in one can appear in the other. “Open in Nibras Dev” puts the project in the link’s # fragment, which is not sent to a server. “APK Studio” downloads a ZIP to your device; you upload it yourself.`,
@@ -140,20 +158,20 @@ const C: Record<Lang, Copy> = {
         ],
       },
       {
-        title: `4. Logic Lab, Site Mirror, Shortcuts, Schema, File Check`,
+        title: `5. Logic Lab, Site Mirror, Shortcuts, Schema, File Check`,
         paras: [
           `All run in your browser. Circuits, collections, progress, sitemap XML, opened files and hash results stay in localStorage or memory. Files you choose and sitemaps you paste are not sent to a Nibras Code server. File Check computes magic-byte types and SHA hashes on your device.`,
         ],
       },
       {
-        title: `5. Site Doctor — server check`,
+        title: `6. Site Doctor — server check`,
         paras: [
           `To check the address you enter, our server opens the public page, robots.txt, sitemap and a limited number of links (about 25 links and 12 files). The result is returned to you and not stored.`,
           `To prevent abuse, your IP is used briefly in memory only to rate-limit requests. Use Site Doctor only on sites you are allowed to check.`,
         ],
       },
       {
-        title: `6. Error Help — AI explanation of error text`,
+        title: `7. Error Help — AI explanation of error text`,
         paras: [
           `Error Help sends the error message or stack trace you paste (up to about 6,000 characters) and your chosen language to the Nibras Code server via /api/error-help. The server forwards that text to external AI providers (for example Groq, Mistral, OpenRouter and other configured providers) solely to prepare an explanation.`,
           `The error text is not tied to an account, not used for advertising, and not kept to train our own model. Requests are not written as long-term disk logs. Your IP is used briefly in memory for a short rate limit (about 4 seconds). A daily limit (10 requests) is stored in localStorage in your browser.`,
@@ -161,19 +179,19 @@ const C: Record<Lang, Copy> = {
         ],
       },
       {
-        title: `7. Analytics`,
+        title: `8. Analytics`,
         paras: [
           `The site may use anonymous visit statistics (Google Analytics and a simple online counter). Project content, error text, files and hashes are never sent to them. If tracking is disabled in your browser, the counter may not run.`,
         ],
       },
       {
-        title: `8. Deleting data`,
+        title: `9. Deleting data`,
         paras: [
           `Delete a project with the delete button, or clear this site’s data in your browser. Cleared localStorage cannot be recovered — keep a ZIP of important work. Error Help and Doctor results are not stored on the server, so there is no server copy to delete.`,
         ],
       },
       {
-        title: `9. Children and changes`,
+        title: `10. Children and changes`,
         paras: [
           `These tools are not directed at children under 13. When this policy changes, this page is updated; the latest version applies. Questions: nibrascode@gmail.com.`,
         ],
@@ -216,57 +234,66 @@ const C: Record<Lang, Copy> = {
   },
   tr: {
     eyebrow: `Gizlilik ve koşullar`,
-    title: `Nibras Studio, Workspace, Learn, Site Doctor, Error Help ve diğer araçlar`,
-    updated: `Güncellendi: 26 Ekim 2026`,
+    title: `Nibras Code araçları: Araçlar, Studio, Workspace, Learn, Site Doctor, Error Help`,
+    updated: `Güncellendi: 27 Ekim 2026`,
     pTitle: `Gizlilik politikası`,
     privacy: [
       {
         title: `1. Bu sayfa neyi kapsar`,
         paras: [
+          `Ana sayfadaki «Araçlar» grubunu da kapsar: PDF hazırla, QR hazırla, Arka plan sil, Foto sıkıştır, ZIP, Hesapla, Plan hazırla, Soru kur, SEO bak ve Nibras AI.`,
           `Bu gizlilik politikası ve kullanım koşulları nibrascode.com üzerindeki tarayıcı araçlarını kapsar: Nibras Studio, Workspace, Learn, Site Doctor, Error Help, Logic Lab, Site Mirror, Shortcuts, Schema ve File Check. Ana sayfada «Studio ve kod» ile «Öğren ve kontrol et» gruplarında yer alırlar.`,
           `İşletmeci: Nibras Code (nibrascode.com). İletişim: nibrascode@gmail.com. Adres: https://nibrascode.com/tr/tools-legal. Mobil uygulamaların ayrı politikaları /privacy altındadır.`,
         ],
       },
       {
-        title: `2. Hesap ve kimlik`,
+        title: `2. Araçlar — PDF, QR, Arka plan sil, Foto, ZIP, Hesapla, Plan, Soru, SEO ve Nibras AI`,
+        paras: [
+          `PDF hazırla (/pdf), QR hazırla (/qr), Arka plan sil (/erase), Foto sıkıştır (/image) ve ZIP (/zip) tarayıcınızda çalışır. Seçtiğiniz dosyalar Nibras Code sunucusuna yüklenmez. Arka plan silme modeli ilk seferde tarayıcıya indirilir; görsel cihazınızda işlenir.`,
+          `Hesapla (/calc), Plan hazırla (/flow, /planner) ve Soru kur (/logic) tarayıcıda çalışır ve gerekirse verileri localStorage'da saklar.`,
+          `SEO bak (/seo) girdiğiniz adresi kontrol için sunucumuza gönderir. Nibras AI (/ai) yazdığınız metni cevap için sunucuya gönderir. Ayrıntı: /privacy sayfasındaki Nibras AI bölümü. Kişisel veri, şifre veya kart numarası yazmayın.`,
+        ],
+      },
+      {
+        title: `3. Hesap ve kimlik`,
         paras: [
           `Bu araçlarda hesap yoktur. Kayıt, giriş, ad, telefon veya e-posta istenmez. Ödeme veya abonelik yoktur; araçlar ücretsizdir.`,
         ],
       },
       {
-        title: `3. Studio, Workspace ve Learn`,
+        title: `4. Studio, Workspace ve Learn`,
         paras: [
           `Projeler, dosyalar, kod, PDF metni, sorular, kurslar ve kopyalar yalnızca tarayıcınızın localStorage (gerekirse IndexedDB) alanında saklanır. Nibras Code sunucusuna yüklenmez; bizde kopyası yoktur.`,
           `Studio ile Workspace aynı proje anahtarını paylaşır. «Nibras Dev'de aç» projeyi bağlantının # kısmına yazar; sunucuya gitmez. Studio'daki AI Asistan tarayıcıdaki yerleşik kurallardır; kodunuz harici yapay zekâya gönderilmez.`,
         ],
       },
       {
-        title: `4. Logic Lab, Mirror, Shortcuts, Schema, File Check`,
+        title: `5. Logic Lab, Mirror, Shortcuts, Schema, File Check`,
         paras: [
           `Hepsi tarayıcıda çalışır. Devreler, koleksiyonlar, ilerleme, sitemap ve açtığınız dosyalar sunucuya gönderilmez. File Check hash hesaplarını cihazınızda yapar.`,
         ],
       },
       {
-        title: `5. Site Doctor`,
+        title: `6. Site Doctor`,
         paras: [
           `Girdiğiniz adresi kontrol etmek için sunucumuz herkese açık sayfayı, robots.txt, sitemap ve sınırlı sayıda bağlantıyı açar. Sonuç size döner ve saklanmaz. IP yalnızca bellekte kısa süre hız sınırı için kullanılır. Yalnızca kontrol etme hakkınız olan sitelerde kullanın.`,
         ],
       },
       {
-        title: `6. Error Help`,
+        title: `7. Error Help`,
         paras: [
           `Yapıştırdığınız hata metni (yaklaşık 6000 karaktere kadar) ve dil seçiminiz /api/error-help ile Nibras Code sunucusuna gider; sunucu açıklama için harici yapay zekâ sağlayıcılarına (ör. Groq, Mistral, OpenRouter) iletir. Metin hesaba bağlanmaz, reklam için kullanılmaz ve kendi modelimizi eğitmek için saklanmaz. IP kısa süre bellekte hız sınırı içindir; günlük 10 istek limiti tarayıcı localStorage'ındadır.`,
           `Gizli anahtar, parola, token veya kişisel veri yapıştırmayın. Açıklama resmi belgelerin yerini tutmaz ve hatalı olabilir.`,
         ],
       },
       {
-        title: `7. Analitik ve silme`,
+        title: `8. Analitik ve silme`,
         paras: [
           `Site anonim ziyaret istatistiği kullanabilir; proje içeriği ve hata metni bunlara gitmez. Projeyi sil düğmesi veya tarayıcı site verisini temizleme ile silin. Temizlenen veri geri gelmez.`,
         ],
       },
       {
-        title: `8. Çocuklar ve değişiklikler`,
+        title: `9. Çocuklar ve değişiklikler`,
         paras: [
           `Araçlar 13 yaş altı çocuklara yönelik değildir. Politika değişince bu sayfa güncellenir. Sorular: nibrascode@gmail.com.`,
         ],
@@ -303,57 +330,66 @@ const C: Record<Lang, Copy> = {
   },
   ar: {
     eyebrow: `الخصوصية والشروط`,
-    title: `Nibras Studio وWorkspace وLearn وSite Doctor وError Help وأدوات أخرى`,
-    updated: `آخر تحديث: 26 أكتوبر 2026`,
+    title: `أدوات Nibras Code: الأدوات وStudio وWorkspace وLearn وSite Doctor وError Help`,
+    updated: `آخر تحديث: 27 أكتوبر 2026`,
     pTitle: `سياسة الخصوصية`,
     privacy: [
       {
         title: `1. ما الذي تغطيه هذه الصفحة`,
         paras: [
+          `وتشمل أيضاً مجموعة «أدوات» في الصفحة الرئيسية: PDF وQR وحذف الخلفية وضغط الصور وZIP والحساب والخطة والأسئلة وفحص SEO وNibras AI.`,
           `تغطي سياسة الخصوصية وشروط الاستخدام هذه أدوات المتصفح على nibrascode.com: Nibras Studio وWorkspace وLearn وSite Doctor وError Help وLogic Lab وSite Mirror وShortcuts وSchema وFile Check. تظهر في الصفحة الرئيسية ضمن «Studio والكود» و«تعلّم وتحقق».`,
           `المشغّل: Nibras Code (nibrascode.com). التواصل: nibrascode@gmail.com. العنوان: https://nibrascode.com/ar/tools-legal. لتطبيقات الجوال سياسات منفصلة تحت /privacy.`,
         ],
       },
       {
-        title: `2. الحسابات والهوية`,
+        title: `2. الأدوات — PDF وQR وحذف الخلفية والصور وZIP والحساب والخطة والأسئلة وSEO وNibras AI`,
+        paras: [
+          `أدوات PDF (/pdf) وQR (/qr) وحذف الخلفية (/erase) وضغط الصور (/image) وZIP (/zip) تعمل في متصفحك. لا تُرفع الملفات التي تختارها إلى خادم Nibras Code. يُنزَّل نموذج حذف الخلفية إلى المتصفح أول مرة، وتُعالج الصورة على جهازك.`,
+          `أدوات الحساب (/calc) والخطة (/flow و/planner) والأسئلة (/logic) تعمل في المتصفح وقد تحفظ البيانات في localStorage.`,
+          `فحص SEO (/seo) يرسل العنوان الذي تكتبه إلى خادمنا لفحصه. Nibras AI (/ai) يرسل نصك إلى الخادم لإعداد الجواب. التفاصيل: قسم Nibras AI في صفحة /privacy. لا تكتب بيانات شخصية أو كلمات مرور أو أرقام بطاقات.`,
+        ],
+      },
+      {
+        title: `3. الحسابات والهوية`,
         paras: [
           `لا حسابات في هذه الأدوات. لا يُطلب تسجيل أو دخول أو اسم أو هاتف أو بريد. لا دفع ولا اشتراك؛ الأدوات مجانية.`,
         ],
       },
       {
-        title: `3. Studio وWorkspace وLearn`,
+        title: `4. Studio وWorkspace وLearn`,
         paras: [
           `تُحفظ المشاريع والملفات والكود ونص PDF والأسئلة والدورات والنسخ في localStorage بمتصفحك فقط (وIndexedDB عند الحاجة). لا تُرفع إلى خادم Nibras Code وليست لدينا نسخة.`,
           `يشترك Studio وWorkspace في مفتاح المشاريع نفسه. زر «افتح في Nibras Dev» يضع المشروع في جزء # من الرابط ولا يُرسل إلى الخادم. «المساعد» في Studio قواعد مدمجة في المتصفح؛ لا يُرسل كودك إلى ذكاء اصطناعي خارجي.`,
         ],
       },
       {
-        title: `4. Logic Lab وMirror وShortcuts وSchema وFile Check`,
+        title: `5. Logic Lab وMirror وShortcuts وSchema وFile Check`,
         paras: [
           `تعمل كلها في المتصفح. الدوائر والمجموعات والتقدم وsitemap والملفات التي تفتحها لا تُرسل إلى الخادم. File Check يحسب التجزئة على جهازك.`,
         ],
       },
       {
-        title: `5. Site Doctor`,
+        title: `6. Site Doctor`,
         paras: [
           `لفحص العنوان الذي تكتبه يفتح خادمنا الصفحة العامة وrobots.txt وsitemap وعدداً محدوداً من الروابط. تُعاد النتيجة إليك ولا تُحفظ. يُستخدم عنوان IP لفترة قصيرة في الذاكرة فقط لتحديد المعدل. استخدمه فقط على مواقع يحق لك فحصها.`,
         ],
       },
       {
-        title: `6. Error Help`,
+        title: `7. Error Help`,
         paras: [
           `يُرسل نص الخطأ الذي تلصقه (حتى نحو 6000 حرف) واللغة عبر /api/error-help إلى خادم Nibras Code، ثم إلى مزوّدي ذكاء اصطناعي خارجيين (مثل Groq وMistral وOpenRouter) لإعداد الشرح فقط. لا يُربط النص بحساب ولا يُستخدم للإعلان ولا يُحفظ لتدريب نموذجنا. الحد اليومي (10 طلبات) في localStorage؛ وIP لفترة قصيرة في الذاكرة لحد المعدل.`,
           `لا تلصق مفاتيح سرية أو كلمات مرور أو بيانات شخصية. الشرح للمبتدئين وقد يخطئ ولا يغني عن الوثائق الرسمية.`,
         ],
       },
       {
-        title: `7. التحليلات والحذف`,
+        title: `8. التحليلات والحذف`,
         paras: [
           `قد يستخدم الموقع إحصاءات زيارات مجهولة؛ لا يُرسل إليها محتوى المشاريع أو نص الخطأ. احذف المشروع بالزر أو امسح بيانات الموقع في المتصفح. البيانات الممسوحة لا تُستعاد.`,
         ],
       },
       {
-        title: `8. الأطفال والتغييرات`,
+        title: `9. الأطفال والتغييرات`,
         paras: [
           `الأدوات غير موجّهة لمن دون 13 عاماً. عند تغيير السياسة تُحدَّث هذه الصفحة. الأسئلة: nibrascode@gmail.com.`,
         ],
@@ -390,57 +426,66 @@ const C: Record<Lang, Copy> = {
   },
   ru: {
     eyebrow: `Конфиденциальность и условия`,
-    title: `Nibras Studio, Workspace, Learn, Site Doctor, Error Help и другие инструменты`,
-    updated: `Обновлено: 26 октября 2026`,
+    title: `Инструменты Nibras Code: Инструменты, Studio, Workspace, Learn, Site Doctor, Error Help`,
+    updated: `Обновлено: 27 октября 2026`,
     pTitle: `Политика конфиденциальности`,
     privacy: [
       {
         title: `1. Что покрывает эта страница`,
         paras: [
+          `Также охватывает группу «Инструменты» на главной: PDF, QR, удаление фона, сжатие фото, ZIP, расчёты, план, вопросы, проверку SEO и Nibras AI.`,
           `Эта политика конфиденциальности и условия использования относятся к браузерным инструментам на nibrascode.com: Nibras Studio, Workspace, Learn, Site Doctor, Error Help, Logic Lab, Site Mirror, Shortcuts, Schema и File Check. Они показаны на главной в группах «Studio и код» и «Учись и проверяй».`,
           `Оператор: Nibras Code (nibrascode.com). Связь: nibrascode@gmail.com. Адрес: https://nibrascode.com/ru/tools-legal. У мобильных приложений отдельные политики в /privacy.`,
         ],
       },
       {
-        title: `2. Аккаунты и личность`,
+        title: `2. Инструменты — PDF, QR, удаление фона, фото, ZIP, расчёты, план, вопросы, SEO и Nibras AI`,
+        paras: [
+          `PDF (/pdf), QR (/qr), удаление фона (/erase), сжатие фото (/image) и ZIP (/zip) работают в браузере. Выбранные файлы не загружаются на сервер Nibras Code. Модель удаления фона скачивается в браузер при первом запуске; изображение обрабатывается на устройстве.`,
+          `Расчёты (/calc), планы (/flow, /planner) и вопросы (/logic) работают в браузере и могут хранить данные в localStorage.`,
+          `Проверка SEO (/seo) отправляет введённый адрес на наш сервер. Nibras AI (/ai) отправляет ваш текст на сервер для ответа. Подробнее: раздел Nibras AI на странице /privacy. Не вводите личные данные, пароли и номера карт.`,
+        ],
+      },
+      {
+        title: `3. Аккаунты и личность`,
         paras: [
           `В этих инструментах нет аккаунтов. Регистрация, вход, имя, телефон и e-mail не требуются. Оплаты и подписки нет; инструменты бесплатны.`,
         ],
       },
       {
-        title: `3. Studio, Workspace и Learn`,
+        title: `4. Studio, Workspace и Learn`,
         paras: [
           `Проекты, файлы, код, текст из PDF, вопросы, курсы и снимки хранятся только в localStorage браузера (при необходимости IndexedDB). На сервер Nibras Code не загружаются; копии у нас нет.`,
           `Studio и Workspace делят один ключ проектов. «Открыть в Nibras Dev» пишет проект в # ссылки; на сервер это не уходит. «Помощник» в Studio — встроенные правила в браузере; код во внешний ИИ не отправляется.`,
         ],
       },
       {
-        title: `4. Logic Lab, Mirror, Shortcuts, Schema, File Check`,
+        title: `5. Logic Lab, Mirror, Shortcuts, Schema, File Check`,
         paras: [
           `Всё работает в браузере. Схемы, коллекции, прогресс, sitemap и открытые файлы на сервер не отправляются. File Check считает хеши на вашем устройстве.`,
         ],
       },
       {
-        title: `5. Site Doctor`,
+        title: `6. Site Doctor`,
         paras: [
           `Чтобы проверить введённый адрес, наш сервер открывает публичную страницу, robots.txt, sitemap и ограниченное число ссылок. Результат возвращается вам и не сохраняется. IP кратко используется только в памяти для ограничения частоты. Проверяйте только сайты, которые вам разрешено проверять.`,
         ],
       },
       {
-        title: `6. Error Help`,
+        title: `7. Error Help`,
         paras: [
           `Вставленный текст ошибки (до ~6000 символов) и язык уходят через /api/error-help на сервер Nibras Code, затем к внешним ИИ-провайдерам (например Groq, Mistral, OpenRouter) только для подготовки объяснения. Текст не привязан к аккаунту, не идёт в рекламу и не хранится для обучения нашей модели. Дневной лимит (10 запросов) — в localStorage; IP кратко в памяти для rate limit.`,
           `Не вставляйте секретные ключи, пароли, токены и чужие данные. Объяснение для новичков, может ошибаться и не заменяет официальную документацию.`,
         ],
       },
       {
-        title: `7. Аналитика и удаление`,
+        title: `8. Аналитика и удаление`,
         paras: [
           `Сайт может использовать анонимную статистику посещений; содержимое проектов и текст ошибки туда не отправляются. Удалите проект кнопкой или очистите данные сайта в браузере. Очищенное не восстановить.`,
         ],
       },
       {
-        title: `8. Дети и изменения`,
+        title: `9. Дети и изменения`,
         paras: [
           `Инструменты не предназначены для детей младше 13 лет. При изменении политики обновляется эта страница. Вопросы: nibrascode@gmail.com.`,
         ],
