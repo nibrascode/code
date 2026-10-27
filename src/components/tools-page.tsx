@@ -75,6 +75,8 @@ import {
 } from "@/lib/tools";
 import { TOOL_LEAD, TOOL_SAMPLE } from "@/lib/tools-seo";
 import { StartDesk } from "@/components/start-desk";
+import { TOOL_LANDINGS } from "@/lib/search-help";
+import { searchTopicPath } from "@/lib/search-pages";
 import {
   decodeBase64,
   decodeHtml,
@@ -689,6 +691,15 @@ export function ToolsPage({ lang, focus, guide }: { lang: Lang; focus?: ToolId; 
           </button>
         </p>
       ) : null}
+      {focus ? null : (
+        <nav className="faq-links" aria-label="Nibras Code">
+          {TOOL_LANDINGS.map((item) => (
+            <a key={item.slug} href={searchTopicPath(lang, "nece", item.slug)}>
+              {item.piece[lang].title}
+            </a>
+          ))}
+        </nav>
+      )}
       {focus ? null : <StartDesk lang={lang} />}
       {focus ? null : (
         <div className="prog-sections" id="xidmet-siyahisi">

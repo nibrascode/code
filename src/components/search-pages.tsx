@@ -223,6 +223,15 @@ export function SearchTopic({
               </p>
             </InfoCard>
           ) : null}
+          {text.faq?.length ? (
+            <InfoCard icon={Info} title={lang === "az" ? "Suallar" : lang === "tr" ? "Sorular" : lang === "ar" ? "أسئلة" : lang === "ru" ? "Вопросы" : "Questions"}>
+              {text.faq.map((entry) => (
+                <p key={entry.q}>
+                  <strong>{entry.q}</strong> {entry.a}
+                </p>
+              ))}
+            </InfoCard>
+          ) : null}
           {item.code ? (
             <InfoCard icon={Code2}>
               <pre dir="ltr">{item.code}</pre>

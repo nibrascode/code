@@ -2,6 +2,7 @@ import type { Lang } from "@/lib/i18n";
 import { APK_ERROR_INDEX } from "@/lib/apk-errors-index";
 import { LETTER_GAPS } from "@/lib/letter-gaps";
 import { EXTRA_HOWS, EXTRA_TOPICS } from "@/lib/search-extra";
+import { PROBLEM_PAGES, TOOL_LANDINGS } from "@/lib/search-help";
 
 export type SearchKind = "soz" | "xeta" | "movzu" | "nece";
 
@@ -10,9 +11,11 @@ export type SearchPiece = {
   lead: string;
   points: readonly string[];
   note?: string;
+  /** Short question-answer pairs shown under the text and in FAQPage JSON-LD. */
+  faq?: readonly { q: string; a: string }[];
 };
 
-type SearchItem = {
+export type SearchItem = {
   slug: string;
   /** Body is loaded from a lazy chunk (see loadApkBody). */
   lazy?: boolean;
@@ -1093,7 +1096,7 @@ const APK_ITEMS: readonly SearchItem[] = APK_ERROR_INDEX.map(([slug, t]) => ({
   lazy: true,
   piece: (Object.fromEntries(LANGS.map((l) => [l, { title: t[l][0], lead: t[l][1], points: [] }])) as unknown) as Record<Lang, SearchPiece>,
 }));
-const ERRORS: readonly SearchItem[] = [...BASE_ERRORS, ...LETTER_GAPS, ...APK_ITEMS];
+const ERRORS: readonly SearchItem[] = [...BASE_ERRORS, ...PROBLEM_PAGES, ...LETTER_GAPS, ...APK_ITEMS];
 
 /** Lazy chunk with the full text of the Android/Expo/Play error pages. */
 export async function loadApkBody(slug: string) {
@@ -1491,7 +1494,7 @@ export const SEARCH: Record<SearchKind, SearchSection> = {
       "كيف تُكتب أول صفحة HTML، وكيف يُشغَّل أول برنامج Python، وكيف يُفتح حساب Play Console.",
       "Как написать первую страницу HTML, запустить первую программу Python и открыть аккаунт Play Console.",
     ),
-    items: [...HOWS, ...EXTRA_HOWS],
+    items: [...TOOL_LANDINGS, ...HOWS, ...EXTRA_HOWS],
   },
 };
 

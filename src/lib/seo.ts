@@ -1333,7 +1333,10 @@ function jsonLd(path: string, lang: Lang, copy: PageSeo, url: string) {
       description: searched.piece.lead.split("\n\n")[0],
       url,
       inLanguage: searched.lang,
-      mainEntity: [{ "@type": "Question", name: searched.piece.title, acceptedAnswer: { "@type": "Answer", text: answer } }],
+      mainEntity: [
+        { "@type": "Question", name: searched.piece.title, acceptedAnswer: { "@type": "Answer", text: answer } },
+        ...(searched.piece.faq ?? []).map((entry) => ({ "@type": "Question", name: entry.q, acceptedAnswer: { "@type": "Answer", text: entry.a } })),
+      ],
       publisher: org,
     };
   }
