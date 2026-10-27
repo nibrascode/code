@@ -38,3 +38,11 @@ export function InfoCard({
 export function InfoCards({ children }: { children: ReactNode }) {
   return <div className="info-cards">{children}</div>;
 }
+
+/** Split prose into sentences without breaking URLs, domains, emails or decimals. */
+export function splitSentences(text: string): string[] {
+  return text
+    .split(/(?<=[.!?。؟])\s+(?=[^\s.])/u)
+    .map((s) => s.trim())
+    .filter(Boolean);
+}

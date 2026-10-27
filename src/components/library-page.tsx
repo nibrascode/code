@@ -1,6 +1,6 @@
-import { InfoCard, InfoCards } from "@/components/info-card";
+import { InfoCard, InfoCards, splitSentences } from "@/components/info-card";
 import { useEffect, useState, type ReactNode } from "react";
-import { ArrowUpRight, BookOpen, Boxes, Braces, Briefcase, Bug, CircleHelp, Code, Database, FileCode, GitCompare, GraduationCap, ListChecks, MessageCircleQuestion, Package, Server, Shield, Sparkles, Terminal, Wrench } from "lucide-react";
+import { ArrowUpRight, BookOpen, Boxes, Braces, Briefcase, Bug, CircleHelp, Code, Database, FileCode, GitCompare, GraduationCap, Info, ListChecks, MessageCircleQuestion, Package, Server, Shield, Sparkles, Terminal, Wrench } from "lucide-react";
 import { ApkLab } from "@/components/apk-lab";
 import { LIBRARY, type LibrarySection, type LibraryTopic } from "@/lib/library";
 import { CODE_SAMPLE_HUB, CODE_SAMPLES, SITE_CODE } from "@/lib/code-samples";
@@ -360,7 +360,15 @@ export function LibraryIndex({
         Nibras Code
       </p>
       <h1>{t(page.title)}</h1>
-      {section === "programming" ? <p>{copy.intro}</p> : null}
+      {section === "programming" ? (
+        <InfoCards>
+          {splitSentences(copy.intro).map((sentence, i) => (
+            <InfoCard key={`intro-${i}`} icon={Info}>
+              <p>{sentence}</p>
+            </InfoCard>
+          ))}
+        </InfoCards>
+      ) : null}
       {section === "programming" ? (
         <section className="prog-start">
           <h2>{copy.start}</h2>
@@ -386,11 +394,13 @@ export function LibraryIndex({
         <section className="prog-start">
           <h2>{copy.lessons}</h2>
           <InfoCards>
-            {lessons.map((lesson) => (
-              <InfoCard key={lesson.kind} icon={GraduationCap} title={HUBS[lesson.kind].title[lang]} href={programmingLocalePath(lang, HUBS[lesson.kind].slug)}>
-                <p>{lesson.note[lang]}</p>
-              </InfoCard>
-            ))}
+            {lessons.flatMap((lesson) =>
+              splitSentences(lesson.note[lang]).map((sentence, i) => (
+                <InfoCard key={`${lesson.kind}-${i}`} icon={GraduationCap} title={HUBS[lesson.kind].title[lang]} href={programmingLocalePath(lang, HUBS[lesson.kind].slug)}>
+                  <p>{sentence}</p>
+                </InfoCard>
+              )),
+            )}
           </InfoCards>
         </section>
       ) : null}
