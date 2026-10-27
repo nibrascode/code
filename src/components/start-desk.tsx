@@ -22,11 +22,11 @@ const COPY = {
   ),
   file: L("Faylla işləyirəm", "I work with a file", "Dosyayla çalışıyorum", "أعمل مع ملف", "Работаю с файлом"),
   fileLead: L(
-    "PDF-i bölmək, birləşdirmək və səhifədəki yazını mətnə çevirmək saytda işləyir. Şəkil təmizlənir. QR ünvanı, Wi-Fi-ni və vizit kartını koda çevirir. Nibras PDF tətbiqinin özü hələ mağazaya çıxmayıb, ona görə fayl işini burada gör.",
-    "Splitting a PDF, merging one, and turning the writing on a page into text already work on the site. An image can be cleaned. QR turns an address, Wi-Fi, or a card into a code. The Nibras PDF app itself is not in a store yet, so do the file work here.",
-    "PDF'i bölmek, birleştirmek ve sayfadaki yazıyı metne çevirmek sitede çalışır. Görsel temizlenir. QR adresi, Wi-Fi'yi ve kartviziti koda çevirir. Nibras PDF uygulamasının kendisi henüz mağazada yok, bu yüzden dosya işini burada gör.",
-    "تقسيم PDF ودمجه وتحويل الكتابة في الصفحة إلى نص يعمل في الموقع. الصورة تُنظَّف. QR يحوّل العنوان وWi-Fi والبطاقة إلى رمز. تطبيق Nibras PDF نفسه ليس في متجر بعد، فاعمل الملف هنا.",
-    "Разделить PDF, склеить и превратить текст на странице в обычный текст уже можно на сайте. Картинку можно почистить. QR переводит адрес, Wi-Fi и визитку в код. Само приложение Nibras PDF в магазине ещё нет, поэтому работу с файлом делай здесь.",
+    "PDF-i bölmək, birləşdirmək və səhifədəki yazını mətnə çevirmək saytda işləyir. Şəkil təmizlənir. QR ünvanı, Wi-Fi-ni və vizit kartını koda çevirir. Telefonda isə Nibras PDF tətbiqi Google Play-dədir.",
+    "Splitting a PDF, merging one, and turning the writing on a page into text already work on the site. An image can be cleaned. QR turns an address, Wi-Fi, or a card into a code. On the phone, the Nibras PDF app is on Google Play.",
+    "PDF'i bölmek, birleştirmek ve sayfadaki yazıyı metne çevirmek sitede çalışır. Görsel temizlenir. QR adresi, Wi-Fi'yi ve kartviziti koda çevirir. Telefonda ise Nibras PDF uygulaması Google Play'dedir.",
+    "تقسيم PDF ودمجه وتحويل الكتابة في الصفحة إلى نص يعمل في الموقع. الصورة تُنظَّف. QR يحوّل العنوان وWi-Fi والبطاقة إلى رمز. وفي الهاتف تطبيق Nibras PDF موجود في Google Play.",
+    "Разделить PDF, склеить и превратить текст на странице в обычный текст уже можно на сайте. Картинку можно почистить. QR переводит адрес, Wi-Fi и визитку в код. А на телефоне приложение Nibras PDF есть в Google Play.",
   ),
   code: L("Kod yazıram", "I write code", "Kod yazıyorum", "أكتب كوداً", "Пишу код"),
   codeLead: L(
@@ -59,12 +59,12 @@ const COPY = {
     "تطبيق العربية جاهز. فيه 704 أفعال و200 اسم وبطاقات وتدريب كتابة 28 حرفًا. هو في Google Play وHuawei.",
     "Приложение арабского готово. В нём 704 глагола, 200 имён, карточки и практика письма 28 букв. Оно в Google Play и Huawei.",
   ),
-  readyQr: L(
-    "QR tətbiqi hazırdır və Google Play-dədir. Saytda da kod düzəltmək, dizayn etmək və skan etmək olur.",
-    "The QR app is ready and on Google Play. On the site you can also make a code, design it, and scan.",
-    "QR uygulaması hazırdır ve Google Play'dedir. Sitede de kod yapmak, tasarlamak ve taramak olur.",
-    "تطبيق QR جاهز وفي Google Play. في الموقع أيضًا يمكن صنع الرمز وتصميمه ومسحه.",
-    "Приложение QR готово и есть в Google Play. На сайте тоже можно сделать код, оформить его и сканировать.",
+  readyPdf: L(
+    "Nibras PDF hazırdır və Google Play-dədir. PDF-i telefonda açmaq və onunla işləmək üçündür. Saytdakı PDF səhifəsi də açıqdır.",
+    "Nibras PDF is ready and on Google Play. It is for opening and working with a PDF on the phone. The PDF page on the site is open too.",
+    "Nibras PDF hazırdır ve Google Play'dedir. PDF'i telefonda açmak ve onunla çalışmak içindir. Sitedeki PDF sayfası da açıktır.",
+    "Nibras PDF جاهز وفي Google Play. هو لفتح ملف PDF والعمل عليه في الهاتف. صفحة PDF في الموقع مفتوحة أيضًا.",
+    "Nibras PDF готов и есть в Google Play. Он для того, чтобы открыть PDF на телефоне и работать с ним. Страница PDF на сайте тоже открыта.",
   ),
   readyAi: L(
     "Nibras AI saytda açıqdır. Sual, kod və şəkil üçün köməkçidir. Ayrı mağaza tətbiqi deyil.",
@@ -88,12 +88,12 @@ const COPY = {
     "هذه التطبيقات الثلاثة بلا رابط متجر. لم يُعلن تاريخ. زر التنزيل لا يُعرض. الصفحة تقول فقط ماذا يُراد منها.",
     "У этих трёх приложений нет ссылки магазина. Дата не объявлена. Кнопка загрузки не показывается. Страница только говорит, чем они должны быть.",
   ),
-  laterPdf: L(
-    "Telefon tətbiqi hazırlanır. İçində birləşdirmə, bölmə, sıxışdırma, imza və mətn nəzərdə tutulub. Eyni işlərin bir qismi saytdakı PDF səhifəsində artıq açılır.",
-    "The phone app is in preparation. Merge, split, compress, a signature, and text are planned. Part of the same work already opens on the PDF page of the site.",
-    "Telefon uygulaması hazırlanıyor. Birleştirme, bölme, sıkıştırma, imza ve metin planlanır. Aynı işlerin bir kısmı sitedeki PDF sayfasında şimdiden açılır.",
-    "تطبيق الهاتف قيد الإعداد. الدمج والتقسيم والضغط والتوقيع والنص مخططة. جزء من العمل نفسه يُفتح الآن في صفحة PDF في الموقع.",
-    "Приложение для телефона готовится. Склейка, разделение, сжатие, подпись и текст задуманы. Часть той же работы уже открывается на странице PDF сайта.",
+  laterQr: L(
+    "Telefon tətbiqi hələ mağazada deyil. Saytdakı QR səhifəsində kod düzəltmək, dizayn etmək və skan etmək artıq olur.",
+    "The phone app is not in a store yet. On the QR page of the site you can already make, design, and scan a code.",
+    "Telefon uygulaması henüz mağazada değil. Sitedeki QR sayfasında kod yapmak, tasarlamak ve taramak şimdiden olur.",
+    "تطبيق الهاتف ليس في المتجر بعد. في صفحة QR في الموقع يمكن الآن صنع الرمز وتصميمه ومسحه.",
+    "Приложения для телефона пока нет в магазине. На странице QR сайта уже можно сделать, оформить и сканировать код.",
   ),
   laterDocs: L(
     "Sənəd yazmaq, redaktə etmək və paylaşmaq üçündür. Plan sakit ekrandır, reklam yoxdur. Hələ yükləmək olmur.",
@@ -189,12 +189,12 @@ export function StartDesk({ lang }: { lang: Lang }) {
   ] as const;
   const ready = [
     [localeHref(lang, "/apps/nibras-arabic"), "Nibras Arabic", COPY.readyArabic[lang]],
-    [localeHref(lang, "/apps/nibras-qr"), "Nibras QR", COPY.readyQr[lang]],
+    [localeHref(lang, "/apps/nibras-pdf"), "Nibras PDF", COPY.readyPdf[lang]],
     [localeHref(lang, "/ai"), "Nibras AI", COPY.readyAi[lang]],
     ["#xidmet-siyahisi", COPY.list[lang], COPY.readyList[lang]],
   ] as const;
   const later = [
-    [localeHref(lang, "/apps/nibras-pdf"), "Nibras PDF", COPY.laterPdf[lang]],
+    [localeHref(lang, "/apps/nibras-qr"), "Nibras QR", COPY.laterQr[lang]],
     [localeHref(lang, "/apps/nibras-docs"), "Nibras Docs", COPY.laterDocs[lang]],
     [localeHref(lang, "/apps/nibras-plans"), "Nibras Plans", COPY.laterPlans[lang]],
   ] as const;

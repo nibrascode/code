@@ -169,7 +169,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "yukleme",
         q: "Tətbiqi haradan yükləmək olar?",
-        a: "Yükləmə linki hazır olanda həmin tətbiqin səhifəsində görünür. Google Play, Huawei, App Store, Galaxy Store və Xiaomi üçün boş link göstərilmir. Hazırda Nibras Arabic Google Play və Huawei-də, Nibras PDF və Nibras QR isə Google Play-dədir. Nibras Docs və Nibras Plans tezliklə olduğu üçün onların səhifəsində yükləmə düyməsi yoxdur. Yeni link çıxanda o, tətbiqin öz səhifəsinə yazılır. Saytda olmayan mağaza ünvanı uydurulmur.",
+        a: "Yükləmə linki hazır olanda həmin tətbiqin səhifəsində görünür. Google Play, Huawei, App Store, Galaxy Store və Xiaomi üçün boş link göstərilmir. Hazırda Nibras Arabic Google Play və Huawei-də, Nibras PDF isə Google Play-dədir. Nibras QR, Nibras Docs və Nibras Plans tezliklə olduğu üçün onların səhifəsində yükləmə düyməsi yoxdur. Yeni link çıxanda o, tətbiqin öz səhifəsinə yazılır. Saytda olmayan mağaza ünvanı uydurulmur.",
       },
       {
         id: "mexfilik",
@@ -320,7 +320,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "yukleme",
         q: "Where can I download an app?",
-        a: "A download link appears on that app’s page when it is ready. Empty links for Google Play, Huawei, the App Store, Galaxy Store, and Xiaomi are not shown. Nibras Arabic is on Google Play and Huawei. Nibras PDF and Nibras QR are on Google Play. Nibras Docs and Nibras Plans are coming soon, so their pages have no download button. A new link is added on that app’s own page. A store address that is not real is not invented on the site.",
+        a: "A download link appears on that app’s page when it is ready. Empty links for Google Play, Huawei, the App Store, Galaxy Store, and Xiaomi are not shown. Nibras Arabic is on Google Play and Huawei. Nibras PDF is on Google Play. Nibras QR, Nibras Docs and Nibras Plans are coming soon, so their pages have no download button. A new link is added on that app’s own page. A store address that is not real is not invented on the site.",
       },
       {
         id: "mexfilik",
@@ -471,7 +471,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "yukleme",
         q: "Uygulama nereden indirilir?",
-        a: "İndirme bağlantısı hazır olduğunda o uygulamanın sayfasında görünür. Google Play, Huawei, App Store, Galaxy Store ve Xiaomi için boş bağlantı gösterilmez. Şu anda Nibras Arabic Google Play ve Huawei’de, Nibras PDF ve Nibras QR ise Google Play’dedir. Nibras Docs ve Nibras Plans yakında olduğu için sayfalarında indirme düğmesi yoktur. Yeni bağlantı o uygulamanın kendi sayfasına yazılır. Gerçek olmayan bir mağaza adresi sitede uydurulmaz.",
+        a: "İndirme bağlantısı hazır olduğunda o uygulamanın sayfasında görünür. Google Play, Huawei, App Store, Galaxy Store ve Xiaomi için boş bağlantı gösterilmez. Şu anda Nibras Arabic Google Play ve Huawei’de, Nibras PDF ise Google Play’dedir. Nibras QR, Nibras Docs ve Nibras Plans yakında olduğu için sayfalarında indirme düğmesi yoktur. Yeni bağlantı o uygulamanın kendi sayfasına yazılır. Gerçek olmayan bir mağaza adresi sitede uydurulmaz.",
       },
       {
         id: "mexfilik",
@@ -622,7 +622,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "yukleme",
         q: "من أين يُحمَّل التطبيق؟",
-        a: "يظهر رابط التحميل في صفحة ذلك التطبيق عندما يكون جاهزًا. لا تُعرض روابط فارغة لـ Google Play أو Huawei أو App Store أو Galaxy Store أو Xiaomi. Nibras Arabic موجود على Google Play وHuawei، وNibras PDF وNibras QR على Google Play. Nibras Docs وNibras Plans قريبًا، لذلك لا زر تحميل في صفحاتهما. الرابط الجديد يُكتب في صفحة التطبيق نفسه. عنوان متجر غير موجود لا يُختلق في الموقع.",
+        a: "يظهر رابط التحميل في صفحة ذلك التطبيق عندما يكون جاهزًا. لا تُعرض روابط فارغة لـ Google Play أو Huawei أو App Store أو Galaxy Store أو Xiaomi. Nibras Arabic موجود على Google Play وHuawei، وNibras PDF على Google Play. Nibras QR وNibras Docs وNibras Plans قريبًا، لذلك لا زر تحميل في صفحاتهما. الرابط الجديد يُكتب في صفحة التطبيق نفسه. عنوان متجر غير موجود لا يُختلق في الموقع.",
       },
       {
         id: "mexfilik",
@@ -773,7 +773,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "yukleme",
         q: "Откуда скачать приложение?",
-        a: "Ссылка на загрузку появляется на странице этого приложения, когда она готова. Пустые ссылки Google Play, Huawei, App Store, Galaxy Store и Xiaomi не показываются. Сейчас Nibras Arabic есть в Google Play и Huawei, а Nibras PDF и Nibras QR — в Google Play. Nibras Docs и Nibras Plans скоро, поэтому на их страницах нет кнопки загрузки. Новая ссылка пишется на странице самого приложения. Несуществующий адрес магазина на сайте не выдумывается.",
+        a: "Ссылка на загрузку появляется на странице этого приложения, когда она готова. Пустые ссылки Google Play, Huawei, App Store, Galaxy Store и Xiaomi не показываются. Сейчас Nibras Arabic есть в Google Play и Huawei, а Nibras PDF — в Google Play. Nibras QR, Nibras Docs и Nibras Plans скоро, поэтому на их страницах нет кнопки загрузки. Новая ссылка пишется на странице самого приложения. Несуществующий адрес магазина на сайте не выдумывается.",
       },
       {
         id: "mexfilik",
