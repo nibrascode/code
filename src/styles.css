@@ -11853,3 +11853,6 @@ html[lang="ar"] .why-lead.topic-body,
   text-align: center;
 }
 .nx-group-page .nx-bars--full { max-width: 48rem; }
+.nx-group-page { min-height: auto; padding-bottom: 48px; }
+.nx-group-page .nx-bars--full { max-width: 64rem; }
+.nx-group-page .nx-bars--full .nx-bar-group-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }

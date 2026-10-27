@@ -255,15 +255,6 @@ function IosMark() {
   );
 }
 
-const START: Record<"title" | "pdf" | "photo" | "apps", Record<Lang, string>> = {
-  title: { az: "Haradan başlayım?", en: "Where do I start?", tr: "Nereden başlayayım?", ar: "من أين أبدأ؟", ru: "С чего начать?" },
-  pdf: { az: "PDF faylım var →", en: "I have a PDF →", tr: "PDF dosyam var →", ar: "لديّ ملف PDF ←", ru: "У меня PDF →" },
-  photo: { az: "Şəkil düzəltmək →", en: "Fix a photo →", tr: "Fotoğraf düzeltmek →", ar: "تعديل صورة ←", ru: "Поправить фото →" },
-  apps: { az: "Telefon tətbiqi →", en: "Phone app →", tr: "Telefon uygulaması →", ar: "تطبيق للهاتف ←", ru: "Приложение →" },
-};
-
-const PROBLEM_LINKS = ["pdf-acilmir", "qr-oxunmur", "sekil-cox-boyukdur"] as const;
-const PROBLEM_HELP: Record<Lang, string> = { az: "Başqa problem? Həll yolları", en: "Other problems? Fixes", tr: "Başka sorun mu? Çözümler", ar: "مشكلة أخرى؟ الحلول", ru: "Другая проблема? Решения" };
 
 const XETA_LINKS = ["apk-qurulmur", "paket-etibarsizdir", "play-protect-bloklayir", "xapk-qurulmur", "yaddas-catmir", "telefon-uygun-deyil"] as const;
 
@@ -314,12 +305,6 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
               <ArrowUpRight className="size-4" />
             </a>
           </div>
-          <nav className="nx-start" aria-label={START.title[lang]}>
-            <p className="nx-start-title">{START.title[lang]}</p>
-            <a href={localeHref(lang, "/pdf")}>{START.pdf[lang]}</a>
-            <a href={localeHref(lang, "/erase")}>{START.photo[lang]}</a>
-            <a href={localeHref(lang, "/apps")}>{START.apps[lang]}</a>
-          </nav>
           <div className="nx-bars">
             <BarGroupView lang={lang} group="g1" />
             <BarGroupView lang={lang} group="g2" />
@@ -438,21 +423,6 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
         <p className="nx-kicker">{APK_HELP[lang]}</p>
         <nav className="faq-links" aria-label={APK_HELP[lang]}>
           {XETA_LINKS.map((slug) => {
-            const item = SEARCH.xeta.items.find((entry) => entry.slug === slug);
-            if (!item) return null;
-            return (
-              <a key={slug} href={searchTopicPath(lang, "xeta", slug)}>
-                {item.piece[lang].title}
-              </a>
-            );
-          })}
-        </nav>
-      </section>
-
-      <section className="nx-apps">
-        <p className="nx-kicker">{PROBLEM_HELP[lang]}</p>
-        <nav className="faq-links" aria-label={PROBLEM_HELP[lang]}>
-          {PROBLEM_LINKS.map((slug) => {
             const item = SEARCH.xeta.items.find((entry) => entry.slug === slug);
             if (!item) return null;
             return (
