@@ -1,3 +1,5 @@
+import { FileText } from "lucide-react";
+import { InfoCard, InfoCards, splitSentences } from "@/components/info-card";
 import { createFileRoute, notFound, redirect } from "@tanstack/react-router";
 import { LibraryTopicPage } from "@/components/library-page";
 import { findTopic } from "@/lib/library";
@@ -43,19 +45,17 @@ function TopicRoute() {
         <div className="page-guide-wrap">
           <section className="page-guide" lang={lang} dir={lang === "ar" ? "rtl" : "ltr"}>
             <h2>{MORE[lang]}</h2>
-            {articles.map((article) => (
-              <article key={article.slug}>
-                <h3>
-                  <a
-                    href={`${lang === "az" ? "" : `/${lang}`}/resources/${article.topic}/${article.slug}`}
-                  >
-                    {article.title[lang]}
-                  </a>
-                </h3>
-                <p>{article.description[lang]}</p>
-                {article.paragraphs[lang][0] ? <p>{article.paragraphs[lang][0]}</p> : null}
-              </article>
-            ))}
+            <InfoCards>
+              {articles.flatMap((article) => {
+                const href = `${lang === "az" ? "" : `/${lang}`}/resources/${article.topic}/${article.slug}`;
+                const text = [article.description[lang], article.paragraphs[lang][0]].filter(Boolean).join(" ");
+                return splitSentences(text).map((sentence, i) => (
+                  <InfoCard key={`${article.slug}-${i}`} icon={FileText} title={article.title[lang]} href={href}>
+                    <p>{sentence}</p>
+                  </InfoCard>
+                ));
+              })}
+            </InfoCards>
           </section>
         </div>
       ) : null}

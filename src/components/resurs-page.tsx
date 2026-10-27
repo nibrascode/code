@@ -1,5 +1,5 @@
-import { BookOpen } from "lucide-react";
-import { InfoCard, InfoCards } from "@/components/info-card";
+import { BookOpen, Info } from "lucide-react";
+import { InfoCard, InfoCards, splitSentences } from "@/components/info-card";
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { NIBRAS_PDF_GUIDE, type PdfGuideSection } from "@/lib/nibras-pdf-guide";
@@ -45,11 +45,17 @@ function ArticleBody({
         <Link to="/resources">{backLabel}</Link>
       </p>
       <h1>{title}</h1>
-      {paragraphs.map((paragraph) => (
-        <p key={paragraph} className={paragraph === paragraphs[0] ? "why-lead" : undefined}>
-          {paragraph}
-        </p>
-      ))}
+      {paragraphs.length ? (
+        <InfoCards>
+          {paragraphs.flatMap((paragraph, pi) =>
+            splitSentences(paragraph).map((sentence, i) => (
+              <InfoCard key={`p-${pi}-${i}`} icon={Info}>
+                <p>{sentence}</p>
+              </InfoCard>
+            )),
+          )}
+        </InfoCards>
+      ) : null}
       {steps ? (
         <ol className="lib-steps">
           {steps.map((step) => (
@@ -59,20 +65,22 @@ function ArticleBody({
       ) : null}
       {sections?.length ? (
         <InfoCards>
-          {sections.map((section) => (
-            <InfoCard key={section.title} icon={BookOpen} title={section.title}>
-              {section.paragraphs.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
-              {section.points ? (
-                <ol className="lib-steps">
-                  {section.points.map((point) => (
-                    <li key={point}>{point}</li>
-                  ))}
-                </ol>
-              ) : null}
-            </InfoCard>
-          ))}
+          {sections.flatMap((section) => {
+            const sentences = section.paragraphs.flatMap((paragraph) => splitSentences(paragraph));
+            const cards = sentences.length ? sentences : [""];
+            return cards.map((sentence, i) => (
+              <InfoCard key={`${section.title}-${i}`} icon={BookOpen} title={section.title}>
+                {sentence ? <p>{sentence}</p> : null}
+                {section.points && i === cards.length - 1 ? (
+                  <ol className="lib-steps">
+                    {section.points.map((point) => (
+                      <li key={point}>{point}</li>
+                    ))}
+                  </ol>
+                ) : null}
+              </InfoCard>
+            ));
+          })}
         </InfoCards>
       ) : null}
       <section>
