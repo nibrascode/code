@@ -11852,7 +11852,10 @@ html[lang="ar"] .why-lead.topic-body,
   padding: 3px 10px;
   text-align: center;
 }
-.nx-group-page .nx-bars--full { max-width: 48rem; }
 .nx-group-page { min-height: auto; padding-bottom: 48px; }
-.nx-group-page .nx-bars--full { max-width: 64rem; }
-.nx-group-page .nx-bars--full .nx-bar-group-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+.nx-group-page .nx-bars--full { max-width: 38rem; }
+.nx-group-page .nx-bars--full .nx-bar-group-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
