@@ -46,7 +46,7 @@ const CARDS: {
   {
     slug: "nibras-arabic",
     name: "Nibras Arabic",
-    icon: "/apps/nibras-arabic.webp",
+    icon: "/apps/nibras-arabic-v2.webp",
     desc: "nx_ar_d",
     chips: ["nx_ar_1", "nx_ar_2", "nx_ar_3"],
   },

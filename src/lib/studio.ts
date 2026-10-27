@@ -125,7 +125,7 @@ const APP_SELECT =
   "slug,name,status,summary,play_url,huawei_url,appstore_url,galaxy_url,xiaomi_url,icon_url,sort,visible";
 
 function lightIcon(row: StudioAppRow): StudioAppRow {
-  if (row.icon_url === "/apps/nibras-arabic.jpg") return { ...row, icon_url: "/apps/nibras-arabic.webp" };
+  if (row.icon_url === "/apps/nibras-arabic.jpg" || row.icon_url === "/apps/nibras-arabic.webp") return { ...row, icon_url: "/apps/nibras-arabic-v2.webp" };
   return row;
 }
 

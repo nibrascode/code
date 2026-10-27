@@ -54,7 +54,7 @@ export const CATALOG = [
 ] as const;
 
 export const ICONS: Record<string, string> = {
-  "nibras-arabic": "/apps/nibras-arabic.webp",
+  "nibras-arabic": "/apps/nibras-arabic-v2.webp",
   "nibras-pdf": "/apps/nibras-pdf.jpg",
   "nibras-docs": "/apps/nibras-docs.jpg",
   "nibras-plans": "/apps/nibras-plans.jpg",

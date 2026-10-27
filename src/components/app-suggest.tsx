@@ -3,7 +3,7 @@ import { useI18n } from "@/lib/i18n-context";
 import { localeHref, stripLocalePrefix } from "@/lib/locale-path";
 
 const CARDS = [
-  { slug: "nibras-arabic", name: "Nibras Arabic", icon: "/apps/nibras-arabic.webp" },
+  { slug: "nibras-arabic", name: "Nibras Arabic", icon: "/apps/nibras-arabic-v2.webp" },
   { slug: "nibras-pdf", name: "Nibras PDF", icon: "/apps/nibras-pdf.webp" },
   { slug: "nibras-docs", name: "Nibras Docs", icon: "/apps/nibras-docs.webp" },
   { slug: "nibras-plans", name: "Nibras Plans", icon: "/apps/nibras-plans.webp" },
