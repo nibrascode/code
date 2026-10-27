@@ -1,3 +1,5 @@
+import { ArrowUpRight, BadgeCheck, Bot, FileLock, Mail, ShieldCheck, Smartphone, Users, Wrench } from "lucide-react";
+import { InfoCard, InfoCards } from "@/components/info-card";
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { localeHref } from "@/lib/locale-path";
 import { readLang } from "@/lib/seo";
@@ -121,30 +123,28 @@ export function TrustPage() {
       </p>
       <h1>{c.title}</h1>
       <p className="why-lead">{c.lead}</p>
-      {c.blocks.map((b) => (
-        <section key={b.h}>
-          <h2>{b.h}</h2>
-          {b.p.map((p) => (
-            <p key={p}>{p}</p>
-          ))}
-        </section>
-      ))}
-      <section>
-        <h2>{c.levelTitle}</h2>
-        {c.levels.map(([k, v]) => (
-          <p key={k}>
-            <strong>{k}:</strong> {v}
-          </p>
+      <InfoCards>
+        {c.blocks.map((b, i) => (
+          <InfoCard key={b.h} icon={[Users, FileLock, BadgeCheck][i] ?? ShieldCheck} title={b.h}>
+            {b.p.map((p) => (
+              <p key={p}>{p}</p>
+            ))}
+          </InfoCard>
         ))}
-      </section>
-      <p>
-        {c.links.map(([href, label], i) => (
-          <span key={href}>
-            {i > 0 ? " · " : ""}
-            <a href={localeHref(lang, href)}>{label}</a>
-          </span>
+      </InfoCards>
+      <h2 className="info-section-title">{c.levelTitle}</h2>
+      <InfoCards>
+        {c.levels.map(([k, v], i) => (
+          <InfoCard key={k} icon={[Wrench, Smartphone, Bot, Mail][i] ?? ShieldCheck} title={k}>
+            <p>{v}</p>
+          </InfoCard>
         ))}
-      </p>
+      </InfoCards>
+      <InfoCards>
+        {c.links.map(([href, label]) => (
+          <InfoCard key={href} icon={ArrowUpRight} title={label} href={localeHref(lang, href)} />
+        ))}
+      </InfoCards>
     </main>
   );
 }

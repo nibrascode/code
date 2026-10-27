@@ -1,3 +1,5 @@
+import { Info, Mail, User } from "lucide-react";
+import { InfoCard, InfoCards } from "@/components/info-card";
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { localeHref } from "@/lib/locale-path";
 import { readLang } from "@/lib/seo";
@@ -49,9 +51,14 @@ export function ContactPage() {
       </p>
       <h1>{t("contact_title")}</h1>
       <p className="why-lead">{t("contact_note")}</p>
-      {NOTE[lang].map((line) => (
-        <p key={line}>{line}</p>
-      ))}
+      <InfoCards>
+        <InfoCard icon={Mail} muted={t("nx_nav_contact")} title="nibrascode@gmail.com" href="mailto:nibrascode@gmail.com" />
+        {NOTE[lang].map((line, i) => (
+          <InfoCard key={line} icon={i === 0 ? User : Info}>
+            <p>{line}</p>
+          </InfoCard>
+        ))}
+      </InfoCards>
       <SocialIcons />
     </main>
   );

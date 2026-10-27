@@ -1,3 +1,19 @@
+import { ShieldCheck } from "lucide-react";
+import { InfoCard, InfoCards } from "@/components/info-card";
+
+/** Numbered heading + following paragraphs = one card; unnumbered paragraphs each get their own card. */
+function groupPolicy(paragraphs: readonly string[]) {
+  const out: { title?: string; body: string[] }[] = [];
+  let cur: { title?: string; body: string[] } | null = null;
+  for (const p of paragraphs) {
+    if (/^\d+\.\s/.test(p)) {
+      cur = { title: p, body: [] };
+      out.push(cur);
+    } else if (cur) cur.body.push(p);
+    else out.push({ body: [p] });
+  }
+  return out;
+}
 import { ARABIC_PRIVACY } from "@/lib/arabic-privacy";
 import { DOCS_PRIVACY } from "@/lib/docs-privacy";
 import { PDF_PRIVACY } from "@/lib/pdf-privacy";
@@ -134,15 +150,17 @@ export function AppPrivacyView({ slug, rows }: { slug: string; rows: StudioPriva
       </div>
       <h1>{copy?.title || "Məxfilik siyasəti"}</h1>
       {copy?.updated ? <p className="privacy-updated">{copy.updated}</p> : null}
-      {copy?.paragraphs.map((paragraph) =>
-        /^\d+\.\s/.test(paragraph) ? (
-          <h2 key={paragraph}>{paragraph}</h2>
-        ) : (
-          <p key={paragraph}>
-            <RichText text={paragraph} />
-          </p>
-        ),
-      )}
+      <InfoCards>
+        {groupPolicy(copy?.paragraphs ?? []).map((g, i) => (
+          <InfoCard key={(g.title ?? "") + i} icon={ShieldCheck} title={g.title}>
+            {g.body.map((paragraph) => (
+              <p key={paragraph}>
+                <RichText text={paragraph} />
+              </p>
+            ))}
+          </InfoCard>
+        ))}
+      </InfoCards>
       {slug === "nibras-qr" ? (
         <p>
           <a href={localeHref(lang, "/privacy/nibras-qr/delete-account")}>

@@ -1,3 +1,5 @@
+import { AlertTriangle, Ban, FileText, Gift, Mail, RefreshCw, Scale, ShieldCheck, User } from "lucide-react";
+import { InfoCard, InfoCards } from "@/components/info-card";
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { localeHref } from "@/lib/locale-path";
 import { readLang } from "@/lib/seo";
@@ -87,13 +89,15 @@ export function TermsPage() {
         {copy.eyebrow}
       </p>
       <h1>{copy.title}</h1>
-      {copy.body.map((paragraph) => (
-        <p key={paragraph}>{paragraph}</p>
-      ))}
-      <p>
-        <a href={localeHref(lang, "/privacy")}>{lang === "az" ? "Məxfilik siyasəti" : lang === "tr" ? "Gizlilik politikası" : lang === "ar" ? "سياسة الخصوصية" : lang === "ru" ? "Политика конфиденциальности" : "Privacy policy"}</a>
-      </p>
-      <p><a href={localeHref(lang, "/tools-legal")}>{({az:"Studio, Workspace, Learn və Site Doctor üçün məxfilik və şərtlər",en:"Privacy and terms for Studio, Workspace, Learn and Site Doctor",tr:"Studio, Workspace, Learn ve Site Doctor için gizlilik ve koşullar",ar:"الخصوصية والشروط لـ Studio وWorkspace وLearn وSite Doctor",ru:"Конфиденциальность и условия для Studio, Workspace, Learn и Site Doctor"} as Record<string,string>)[lang] ?? "Privacy and terms for Studio, Workspace, Learn and Site Doctor"}</a></p>
+      <InfoCards>
+        {copy.body.map((paragraph, i) => (
+          <InfoCard key={paragraph} icon={[User, Mail, Gift, Ban, AlertTriangle, RefreshCw][i] ?? FileText}>
+            <p>{paragraph}</p>
+          </InfoCard>
+        ))}
+        <InfoCard icon={ShieldCheck} href={localeHref(lang, "/privacy")} title={lang === "az" ? "Məxfilik siyasəti" : lang === "tr" ? "Gizlilik politikası" : lang === "ar" ? "سياسة الخصوصية" : lang === "ru" ? "Политика конфиденциальности" : "Privacy policy"} />
+        <InfoCard icon={Scale} href={localeHref(lang, "/tools-legal")} title={({az:"Studio, Workspace, Learn və Site Doctor üçün məxfilik və şərtlər",en:"Privacy and terms for Studio, Workspace, Learn and Site Doctor",tr:"Studio, Workspace, Learn ve Site Doctor için gizlilik ve koşullar",ar:"الخصوصية والشروط لـ Studio وWorkspace وLearn وSite Doctor",ru:"Конфиденциальность и условия для Studio, Workspace, Learn и Site Doctor"} as Record<string,string>)[lang] ?? "Privacy and terms for Studio, Workspace, Learn and Site Doctor"} />
+      </InfoCards>
     </main>
   );
 }

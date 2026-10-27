@@ -1,3 +1,5 @@
+import { Compass, UserRound } from "lucide-react";
+import { InfoCard, InfoCards } from "@/components/info-card";
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { localeHref } from "@/lib/locale-path";
 import { aboutFromRow, founderCopy } from "@/lib/pages";
@@ -35,20 +37,18 @@ export function AboutView({ privacy }: { privacy: readonly StudioPrivacyRow[] })
         </p>
       ))}
 
-      <section>
-        <h2>{copy.approachTitle}</h2>
-        {copy.approach.map((paragraph) => (
-          <p key={paragraph}>{paragraph}</p>
-        ))}
-      </section>
-
-      <section className="founder">
-        <h2>{founderCopy(lang).title}</h2>
-        <p className="founder-name">Mahir Əliyev</p>
-        {founderCopy(lang).body.map((paragraph) => (
-          <p key={paragraph}>{paragraph}</p>
-        ))}
-      </section>
+      <InfoCards>
+        <InfoCard icon={Compass} title={copy.approachTitle}>
+          {copy.approach.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
+        </InfoCard>
+        <InfoCard icon={UserRound} muted={founderCopy(lang).title} title="Mahir Əliyev">
+          {founderCopy(lang).body.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
+        </InfoCard>
+      </InfoCards>
 
       <p className="who-success">{copy.success}</p>
       <p className="who-verse" lang="ar" dir="rtl">

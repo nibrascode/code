@@ -1,3 +1,5 @@
+import { LayoutGrid, Link2, Mail, ShieldCheck, User } from "lucide-react";
+import { InfoCard, InfoCards } from "@/components/info-card";
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { localeHref } from "@/lib/locale-path";
 import { readLang } from "@/lib/seo";
@@ -94,36 +96,37 @@ export function NedirPage() {
       <div className="why-glow" aria-hidden="true" />
       <h1>{c.title}</h1>
       <p className="why-lead">{c.lead}</p>
-      <section>
-        <h2>{c.whoH}</h2>
-        <p>{c.who}</p>
-      </section>
-      <section>
-        <h2>{c.prodH}</h2>
-        <ul>
-          {c.prods.map(([href, name, desc]) => (
-            <li key={href}>
-              <a href={localeHref(lang, href)}>{name}</a> — {desc}
-            </li>
-          ))}
-        </ul>
-      </section>
-      <section>
-        <h2>{c.privH}</h2>
-        <p>{c.priv}</p>
-      </section>
-      <section>
-        <h2>{c.more}</h2>
-        <p>
-          {MORE[lang].map(([href, label]) => (
-            <span key={href}>
-              <a href={localeHref(lang, href)}>{label}</a> ·{" "}
-            </span>
-          ))}
-          <a href="/llms.txt">llms.txt</a>
-        </p>
-        <p>{c.contact}</p>
-      </section>
+      <InfoCards>
+        <InfoCard icon={User} title={c.whoH}>
+          <p>{c.who}</p>
+        </InfoCard>
+      </InfoCards>
+      <h2 className="info-section-title">{c.prodH}</h2>
+      <InfoCards>
+        {c.prods.map(([href, name, desc]) => (
+          <InfoCard key={href} icon={LayoutGrid} title={name} href={localeHref(lang, href)}>
+            <p>{desc}</p>
+          </InfoCard>
+        ))}
+      </InfoCards>
+      <InfoCards>
+        <InfoCard icon={ShieldCheck} title={c.privH}>
+          <p>{c.priv}</p>
+        </InfoCard>
+        <InfoCard icon={Link2} title={c.more}>
+          <p>
+            {MORE[lang].map(([href, label]) => (
+              <span key={href}>
+                <a href={localeHref(lang, href)}>{label}</a> ·{" "}
+              </span>
+            ))}
+            <a href="/llms.txt">llms.txt</a>
+          </p>
+        </InfoCard>
+        <InfoCard icon={Mail}>
+          <p>{c.contact}</p>
+        </InfoCard>
+      </InfoCards>
     </main>
   );
 }

@@ -1,3 +1,5 @@
+import { AlertTriangle, Bot, Clock, Globe, HardDrive, Image as ImageIcon, Lock, Mail, Scale, Server, ShieldCheck, Trash2 } from "lucide-react";
+import { InfoCard, InfoCards } from "@/components/info-card";
 import { createFileRoute, Outlet, useRouterState } from "@tanstack/react-router";
 import { useI18n } from "@/lib/i18n-context";
 import { localeHref } from "@/lib/locale-path";
@@ -138,26 +140,28 @@ function PrivacyPage() {
     <main className="why-page privacy-page">
       <h1>{t("privacy_btn")}</h1>
       <p className="why-lead">{LEAD[lang]}</p>
-      <section>
-        <h2>{SITE[lang].title}</h2>
-        {SITE[lang].body.map((line) => (
-          <p key={line}>{line}</p>
+      <h2 className="info-section-title">{SITE[lang].title}</h2>
+      <InfoCards>
+        {SITE[lang].body.map((line, i) => (
+          <InfoCard key={line} icon={[Globe, HardDrive, Mail][i] ?? Globe}>
+            <p>{line}</p>
+          </InfoCard>
         ))}
-      </section>
-      <section>
-        <h2>{AI[lang].title}</h2>
-        {AI[lang].body.map((line) => (
-          <p key={line}>{line}</p>
+      </InfoCards>
+      <h2 className="info-section-title">{AI[lang].title}</h2>
+      <InfoCards>
+        {AI[lang].body.map((line, i) => (
+          <InfoCard key={line} icon={[Bot, Clock, Server, Lock, ImageIcon, AlertTriangle, Trash2][i] ?? Bot}>
+            <p>{line}</p>
+          </InfoCard>
         ))}
-      </section>
-      <ul className="lib-list">
+      </InfoCards>
+      <InfoCards>
         {APPS.map(([slug, name]) => (
-          <li key={slug}>
-            <a href={localeHref(lang, `/privacy/${slug}`)}>{name}</a>
-          </li>
+          <InfoCard key={slug} icon={ShieldCheck} muted={t("privacy_btn")} title={name} href={localeHref(lang, `/privacy/${slug}`)} />
         ))}
-      </ul>
-          <p><a href={localeHref(lang, "/tools-legal")}>{({az:"Studio, Workspace, Learn, Site Doctor, Error Help və digər alətlər — məxfilik və şərtlər",en:"Privacy and terms for Studio, Workspace, Learn, Site Doctor, Error Help and other tools",tr:"Studio, Workspace, Learn, Site Doctor, Error Help ve diğer araçlar — gizlilik ve koşullar",ar:"الخصوصية والشروط لـ Studio وWorkspace وLearn وSite Doctor وError Help وأدوات أخرى",ru:"Конфиденциальность и условия для Studio, Workspace, Learn, Site Doctor, Error Help и других инструментов"} as Record<string,string>)[lang] ?? "Privacy and terms for Studio, Workspace, Learn, Site Doctor, Error Help and other tools"}</a></p>
+        <InfoCard icon={Scale} muted={t("privacy_btn")} href={localeHref(lang, "/tools-legal")} title={({az:"Studio, Workspace, Learn, Site Doctor, Error Help və digər alətlər — məxfilik və şərtlər",en:"Privacy and terms for Studio, Workspace, Learn, Site Doctor, Error Help and other tools",tr:"Studio, Workspace, Learn, Site Doctor, Error Help ve diğer araçlar — gizlilik ve koşullar",ar:"الخصوصية والشروط لـ Studio وWorkspace وLearn وSite Doctor وError Help وأدوات أخرى",ru:"Конфиденциальность и условия для Studio, Workspace, Learn, Site Doctor, Error Help и других инструментов"} as Record<string,string>)[lang] ?? "Privacy and terms for Studio, Workspace, Learn, Site Doctor, Error Help and other tools"} />
+      </InfoCards>
     </main>
   );
 }

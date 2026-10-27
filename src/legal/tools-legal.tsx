@@ -1,4 +1,6 @@
 /** Privacy policy and terms of use for Studio-family browser tools (incl. Error Help). */
+import { FileText, Mail, Scale, ShieldCheck } from "lucide-react";
+import { InfoCard, InfoCards } from "@/components/info-card";
 import { useI18n } from "@/lib/i18n-context";
 import { localeHref } from "@/lib/locale-path";
 import type { Lang } from "@/lib/i18n";
@@ -503,23 +505,29 @@ export function ToolsLegalPage() {
       <p className="eyebrow"><i />{c.eyebrow}</p>
       <h1>{c.title}</h1>
       <p className="text-sm opacity-70">{c.updated} · Nibras Studio v{STUDIO_VERSION}</p>
-      <h2 id="privacy" className="mt-8 scroll-mt-28 text-2xl font-bold">{c.pTitle}</h2>
-      {c.privacy.map((s) => (
-        <section key={s.title} className="mt-6">
-          <h3 className="mb-2 text-lg font-semibold">{s.title}</h3>
-          {s.paras.map((x) => <p key={x.slice(0, 48)}>{x}</p>)}
-        </section>
-      ))}
-      <h2 id="terms" className="mt-10 scroll-mt-28 text-2xl font-bold">{c.tTitle}</h2>
-      {c.terms.map((s) => (
-        <section key={s.title} className="mt-6">
-          <h3 className="mb-2 text-lg font-semibold">{s.title}</h3>
-          {s.paras.map((x) => <p key={x.slice(0, 48)}>{x}</p>)}
-        </section>
-      ))}
-      <h2 className="mt-10 text-xl font-bold">{c.contact}</h2>
-      <p><a href="mailto:nibrascode@gmail.com">nibrascode@gmail.com</a> · <a href={localeHref(lang, "/contact")}>nibrascode.com/contact</a></p>
-      <p><a href={localeHref(lang, "/privacy")}>{c.general}</a> · <a href={localeHref(lang, "/terms")}>{c.generalTerms}</a></p>
+      <h2 id="privacy" className="info-section-title scroll-mt-28">{c.pTitle}</h2>
+      <InfoCards>
+        {c.privacy.map((s) => (
+          <InfoCard key={s.title} icon={ShieldCheck} title={s.title}>
+            {s.paras.map((x) => <p key={x.slice(0, 48)}>{x}</p>)}
+          </InfoCard>
+        ))}
+      </InfoCards>
+      <h2 id="terms" className="info-section-title scroll-mt-28">{c.tTitle}</h2>
+      <InfoCards>
+        {c.terms.map((s) => (
+          <InfoCard key={s.title} icon={FileText} title={s.title}>
+            {s.paras.map((x) => <p key={x.slice(0, 48)}>{x}</p>)}
+          </InfoCard>
+        ))}
+      </InfoCards>
+      <InfoCards>
+        <InfoCard icon={Mail} title={c.contact}>
+          <p><a href="mailto:nibrascode@gmail.com">nibrascode@gmail.com</a> · <a href={localeHref(lang, "/contact")}>nibrascode.com/contact</a></p>
+        </InfoCard>
+        <InfoCard icon={ShieldCheck} title={c.general} href={localeHref(lang, "/privacy")} />
+        <InfoCard icon={Scale} title={c.generalTerms} href={localeHref(lang, "/terms")} />
+      </InfoCards>
     </main>
   );
 }
