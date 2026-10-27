@@ -19,6 +19,7 @@ import { DOCS_PRIVACY } from "@/lib/docs-privacy";
 import { PDF_PRIVACY } from "@/lib/pdf-privacy";
 import { SCAN_PRIVACY } from "@/lib/scan-privacy";
 import { NOTE_PRIVACY } from "@/lib/note-privacy";
+import { PLANS_PRIVACY } from "@/lib/plans-privacy";
 import { QR_PRIVACY } from "@/lib/qr-privacy";
 import type { Lang } from "@/lib/i18n";
 import type { StudioPrivacyRow } from "@/lib/studio";
@@ -121,7 +122,7 @@ export function AppPrivacyView({ slug, rows }: { slug: string; rows: StudioPriva
   const { lang } = useI18n();
   // Nibras PDF / QR / Docs ship policy with the code so the page always matches
   // the released app; studio rows apply to other apps.
-  const codePolicy = slug === "nibras-pdf" || slug === "nibras-qr" || slug === "nibras-docs" || slug === "nibras-scan" || slug === "nibras-note";
+  const codePolicy = slug === "nibras-pdf" || slug === "nibras-qr" || slug === "nibras-docs" || slug === "nibras-scan" || slug === "nibras-note" || slug === "nibras-plans";
   const live = codePolicy ? undefined : rows.find((row) => row.slug === slug && row.lang === lang);
   const fallback =
     slug === "nibras-pdf"
@@ -130,6 +131,8 @@ export function AppPrivacyView({ slug, rows }: { slug: string; rows: StudioPriva
         ? SCAN_PRIVACY[lang]
       : slug === "nibras-note"
         ? NOTE_PRIVACY[lang]
+      : slug === "nibras-plans"
+        ? PLANS_PRIVACY[lang]
       : slug === "nibras-docs"
         ? DOCS_PRIVACY[lang]
         : slug === "nibras-qr"
