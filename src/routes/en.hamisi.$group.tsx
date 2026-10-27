@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { GroupPage, groupFromSlug, groupTitle } from "@/components/group-page";
+import { GroupPage, groupFromSlug, groupMeta } from "@/components/group-page";
 
 export const Route = createFileRoute("/en/hamisi/$group")({
   loader: ({ params }) => ({ group: groupFromSlug(params.group) }),
   head: ({ loaderData }) => ({
-    meta: loaderData ? [{ title: groupTitle("en", loaderData.group) }, { property: "og:title", content: groupTitle("en", loaderData.group) }] : [],
+    meta: loaderData ? groupMeta("en", loaderData.group) : [],
   }),
   component: function Page() {
     const { group } = Route.useLoaderData();
