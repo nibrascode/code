@@ -391,7 +391,7 @@ export function LibraryIndex({
         </section>
       ) : null}
       {section === "programming" && lessons.length ? (
-        <section className="prog-start">
+        <section className="prog-lessons">
           <h2>{copy.lessons}</h2>
           <InfoCards>
             {lessons.flatMap((lesson) =>
