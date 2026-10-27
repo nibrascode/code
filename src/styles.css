@@ -11762,3 +11762,19 @@ html[lang="ar"] .why-lead.topic-body,
 .why-page .prog-compare summary .topic-name { color: #f0d48a; font-weight: 600; }
 .why-page .prog-compare summary svg { color: #d6b25e; }
 .why-page .prog-compare details p { color: #a7aebb; font-size: 0.92rem; line-height: 1.55; }
+
+/* home: soon app cards + external link mark */
+.nx-card.is-soon {
+  opacity: 0.72;
+  background: rgb(16 24 42 / 0.6);
+}
+.nx-card.is-soon:hover,
+.nx-card.is-soon:focus-within {
+  opacity: 0.92;
+}
+.nx-ext {
+  display: inline !important;
+  margin-inline-start: 3px;
+  font-size: 0.8em;
+  opacity: 0.7;
+}

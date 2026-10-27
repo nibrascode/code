@@ -30,11 +30,11 @@ const BAR_GROUPS: Record<"g1" | "g2" | "g3", Record<Lang, string>> = {
   g3: { az: "Öyrənmə", en: "Learn", tr: "Öğrenme", ru: "Обучение", ar: "التعلّم" },
 };
 
-const BAR: Record<"dev" | "apk" | "pdf" | "qr" | "erase" | "image" | "calc" | "seo" | "flow" | "logic" | "unknown", Record<Lang, string>> = {
+const BAR = {
   dev: { az: "Kod yaz", en: "Write code", tr: "Kod yaz", ar: "اكتب كوداً", ru: "Пиши код" },
-  apk: { az: "Apk hazırla", en: "Make an APK", tr: "Apk hazırla", ar: "اصنع APK", ru: "Собрать APK" },
-  pdf: { az: "Pdf hazırla", en: "Make a PDF", tr: "Pdf hazırla", ar: "جهّز PDF", ru: "Сделать PDF" },
-  qr: { az: "Qr hazırla", en: "Make a QR", tr: "Qr hazırla", ar: "جهّز QR", ru: "Сделать QR" },
+  apk: { az: "APK hazırla", en: "Make an APK", tr: "APK hazırla", ar: "اصنع APK", ru: "Собрать APK" },
+  pdf: { az: "PDF hazırla", en: "Make a PDF", tr: "PDF hazırla", ar: "جهّز PDF", ru: "Сделать PDF" },
+  qr: { az: "QR hazırla", en: "Make a QR", tr: "QR hazırla", ar: "جهّز QR", ru: "Сделать QR" },
   erase: { az: "Fon sil", en: "Remove background", tr: "Arka plan sil", ar: "احذف الخلفية", ru: "Удалить фон" },
   image: { az: "Şəkil sıx", en: "Compress photo", tr: "Foto sıkıştır", ar: "ضغط الصورة", ru: "Сжать фото" },
   calc: { az: "Hesabla", en: "Calculate", tr: "Hesapla", ar: "احسب", ru: "Посчитай" },
@@ -42,9 +42,25 @@ const BAR: Record<"dev" | "apk" | "pdf" | "qr" | "erase" | "image" | "calc" | "s
   flow: { az: "Plan hazırla", en: "Make a plan", tr: "Plan hazırla", ar: "جهّز خطة", ru: "Собрать план" },
   logic: { az: "Sual qur", en: "Build questions", tr: "Soru kur", ar: "ابنِ أسئلة", ru: "Собрать вопросы" },
   unknown: { az: "Sirr", en: "Secret", tr: "Sır", ar: "سر", ru: "Тайна" },
+  studio: { az: "Studio paneli", en: "Studio panel", tr: "Studio paneli", ar: "لوحة Studio", ru: "Панель Studio" },
+  learn: { az: "Dərslər", en: "Lessons", tr: "Dersler", ar: "الدروس", ru: "Уроки" },
+  doctor: { az: "Sayt yoxla", en: "Site Doctor", tr: "Site kontrolü", ar: "فحص الموقع", ru: "Проверка сайта" },
+  errorHelp: { az: "Xəta yardımı", en: "Error Help", tr: "Hata yardımı", ar: "مساعدة الأخطاء", ru: "Помощь с ошибками" },
+  logicLab: { az: "Məntiq", en: "Logic Lab", tr: "Mantık", ar: "المنطق", ru: "Логика" },
+  mirror: { az: "Sayt güzgüsü", en: "Site Mirror", tr: "Site aynası", ar: "مرآة الموقع", ru: "Зеркало сайта" },
+  shortcuts: { az: "Qısayollar", en: "Shortcuts", tr: "Kısayollar", ar: "الاختصارات", ru: "Горячие клавиши" },
+  schema: { az: "Sxem", en: "Schema", tr: "Şema", ar: "المخطط", ru: "Схема" },
+  filecheck: { az: "Fayl yoxla", en: "File Check", tr: "Dosya kontrolü", ar: "فحص الملف", ru: "Проверка файла" },
 };
 
+const NEW_TAB: Record<Lang, string> = { az: "yeni pəncərədə açılır", en: "opens in a new tab", tr: "yeni sekmede açılır", ar: "يفتح في علامة تبويب جديدة", ru: "откроется в новой вкладке" };
+
+const APK_HELP: Record<Lang, string> = { az: "APK qurulmur? Həll yolları", en: "APK won't install? Fixes", tr: "APK kurulmuyor mu? Çözümler", ar: "لا يُثبَّت APK؟ الحلول", ru: "APK не ставится? Решения" };
+
+const SOON_SLUGS = new Set(["nibras-qr", "nibras-docs", "nibras-plans"]);
+
 const STATUS: Partial<Record<"nibras-arabic" | "nibras-pdf" | "nibras-qr" | "nibras-plans" | "nibras-docs" | "nibras-office", TKey>> = {
+  "nibras-qr": "soon",
   "nibras-plans": "soon",
   "nibras-docs": "soon",
 };
@@ -374,6 +390,22 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
                     <b>{BAR.calc[lang]}</b>
                   </span>
                 </a>
+                <a className="nx-ai-bar nx-qr-bar" href={localeHref(lang, "/flow")} data-testid="home-flow">
+                  <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M5 7h6M5 12h10M5 17h14" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                  </svg>
+                  <span className="nx-qr-text">
+                    <b>{BAR.flow[lang]}</b>
+                  </span>
+                </a>
+                <a className="nx-ai-bar nx-qr-bar" href={localeHref(lang, "/logic")} data-testid="home-logic">
+                  <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6 7h8M14 7v4H8M8 11v4h8" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  <span className="nx-qr-text">
+                    <b>{BAR.logic[lang]}</b>
+                  </span>
+                </a>
               </div>
             </div>
             <div className="nx-bar-group nx-bar-group--studio">
@@ -384,6 +416,7 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
                   href="https://dev.nibrascode.com"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={`${BAR.dev[lang]} (${NEW_TAB[lang]})`}
                 >
                   <svg className="nx-term" viewBox="0 0 24 24" aria-hidden="true">
                     <rect x="3" y="4" width="18" height="16" rx="3" fill="none" stroke="currentColor" strokeWidth="1.6" />
@@ -396,32 +429,27 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
                       strokeLinejoin="round"
                     />
                   </svg>
-                  <span>{BAR.dev[lang]}</span>
+                  <span>{BAR.dev[lang]} <span className="nx-ext" aria-hidden="true">↗</span></span>
                 </a>
                 <a
                   className="nx-apk-bar"
                   href="https://studio.nibrascode.com"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={`${BAR.apk[lang]} (${NEW_TAB[lang]})`}
                 >
                   <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true">
                     <rect x="7" y="2.4" width="10" height="19.2" rx="2" fill="none" stroke="currentColor" strokeWidth="1.6" />
                     <path d="M10 5.2h4M10.2 18.4h3.6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
                     <path d="M12 8.2v4.2M10.2 10.4 12 12.4l1.8-2" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                  <span>{BAR.apk[lang]}</span>
-                </a>
-                <a className="nx-apk-bar" href={toolsPath(lang)}>
-                  <svg className="nx-apk nx-tools" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M14.7 5.4a3.2 3.2 0 0 0-4.4 4.3L5.2 15a1.7 1.7 0 0 0 2.4 2.4l5.1-5.1a3.2 3.2 0 0 0 4.4-4.3l-2.2 2.2-1.6-1.6 2.2-2.2Z" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
-                  </svg>
-                  <span>{TOOLS_PAGE.heading[lang]}</span>
+                  <span>{BAR.apk[lang]} <span className="nx-ext" aria-hidden="true">↗</span></span>
                 </a>
                 <a className="nx-apk-bar nx-studio-bar" href={localeHref(lang, "/studio")} data-testid="home-studio">
                   <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M8.5 7 3.5 12l5 5M15.5 7l5 5-5 5M13.5 4.5l-3 15" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                  <span>Nibras Studio</span>
+                  <span>{BAR.studio[lang]}</span>
                 </a>
                 <a className="nx-apk-bar" href={localeHref(lang, "/workspace")} data-testid="home-workspace">
                   <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true">
@@ -432,6 +460,12 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
                   </svg>
                   <span>Workspace</span>
                 </a>
+                <a className="nx-apk-bar" href={toolsPath(lang)}>
+                  <svg className="nx-apk nx-tools" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M14.7 5.4a3.2 3.2 0 0 0-4.4 4.3L5.2 15a1.7 1.7 0 0 0 2.4 2.4l5.1-5.1a3.2 3.2 0 0 0 4.4-4.3l-2.2 2.2-1.6-1.6 2.2-2.2Z" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+                  </svg>
+                  <span>{TOOLS_PAGE.heading[lang]}</span>
+                </a>
               </div>
             </div>
             <div className="nx-bar-group nx-bar-group--learn">
@@ -441,69 +475,47 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
                   <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v15H5.5A1.5 1.5 0 0 0 4 20.5zM20 5.5A1.5 1.5 0 0 0 18.5 4H13v15h5.5a1.5 1.5 0 0 1 1.5 1.5z" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
                   </svg>
-                  <span>Learn</span>
+                  <span>{BAR.learn[lang]}</span>
                 </a>
                 <a className="nx-apk-bar" href={localeHref(lang, "/doctor")} data-testid="home-doctor">
                   <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M3 12h4l2-5 4 10 2-5h6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                  <span>Site Doctor</span>
+                  <span>{BAR.doctor[lang]}</span>
                 </a>
                 <a className="nx-apk-bar" href={localeHref(lang, "/error-help")} data-testid="home-error-help">
                   <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 20h20zM12 10v4M12 17h.01" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                  <span>Error Help</span>
+                  <span>{BAR.errorHelp[lang]}</span>
                 </a>
                 <a className="nx-apk-bar" href={localeHref(lang, "/learn/logic")} data-testid="home-learn-logic">
                   <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h5a5 5 0 0 1 0 10H4zM14 12h6M2 9.5h2M2 14.5h2" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                  <span>Logic Lab</span>
+                  <span>{BAR.logicLab[lang]}</span>
                 </a>
                 <a className="nx-apk-bar" href={localeHref(lang, "/mirror")} data-testid="home-mirror">
                   <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h4M8 12c3 0 3-6 6-6h3M8 12c3 0 3 6 6 6h3M8 12h9" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                  <span>Site Mirror</span>
+                  <span>{BAR.mirror[lang]}</span>
                 </a>
                 <a className="nx-apk-bar" href={localeHref(lang, "/shortcuts")} data-testid="home-shortcuts">
                   <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18v10H3zM6 10h1M9 10h1M12 10h1M15 10h1M18 10h0M7 14h10" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                  <span>Shortcuts</span>
+                  <span>{BAR.shortcuts[lang]}</span>
                 </a>
                 <a className="nx-apk-bar" href={localeHref(lang, "/schema")} data-testid="home-schema">
                   <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3zM4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                  <span>Schema</span>
+                  <span>{BAR.schema[lang]}</span>
                 </a>
                 <a className="nx-apk-bar" href={localeHref(lang, "/filecheck")} data-testid="home-filecheck">
                   <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6zM14 3v4h4M9 13l2 2 4-4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
-                  <span>File Check</span>
+                  <span>{BAR.filecheck[lang]}</span>
+                </a>
+                <a className="nx-apk-bar" href={localeHref(lang, "/seo")} data-testid="home-seo">
+                  <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="10.5" cy="10.5" r="5.2" fill="none" stroke="currentColor" strokeWidth="1.6" />
+                    <path d="M14.4 14.4 19 19" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                  </svg>
+                  <span>{BAR.seo[lang]}</span>
                 </a>
               </div>
             </div>
-          </div>
-          <div className="nx-mini">
-            <a href={localeHref(lang, "/seo")}>
-              <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true">
-                <circle cx="10.5" cy="10.5" r="5.2" fill="none" stroke="currentColor" strokeWidth="1.6" />
-                <path d="M14.4 14.4 19 19" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-              </svg>
-              <span>{BAR.seo[lang]}</span>
-            </a>
-            <a href={localeHref(lang, "/flow")}>
-              <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M5 7h6M5 12h10M5 17h14" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-              </svg>
-              <span>{BAR.flow[lang]}</span>
-            </a>
-            <a href={localeHref(lang, "/logic")}>
-              <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M6 7h8M14 7v4H8M8 11v4h8" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-              <span>{BAR.logic[lang]}</span>
-            </a>
-            <a href={localeHref(lang, "/unknown")}>
-              <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true">
-                <circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" strokeWidth="1.6" />
-                <path d="M9.2 9.2a2.8 2.8 0 1 1 3.6 2.7c-.7.3-1 .8-1 1.6V14.2" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-                <path d="M12 17.2h.01" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
-              </svg>
-              <span>{BAR.unknown[lang]}</span>
-            </a>
           </div>
         </div>
         <div className="nx-stage">
@@ -549,16 +561,17 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
             const badge = statusText(
               card.slug === "nibras-pdf" || card.slug === "nibras-office"
                 ? "ready"
-                : card.slug === "nibras-docs" && live?.status !== "ready"
+                : card.slug === "nibras-qr" || (card.slug === "nibras-docs" && live?.status !== "ready")
                   ? "soon"
                   : live?.status,
               STATUS[card.slug] ? t(STATUS[card.slug]!) : null,
               labels,
             );
+            const soon = SOON_SLUGS.has(card.slug) && !(card.slug !== "nibras-qr" && live?.status === "ready");
             const built = STUDIO_APPS.find((item) => item.slug === card.slug);
-            const stores = built ? appStoreLinks(built, live) : [];
+            const stores = built && !soon ? appStoreLinks(built, live) : [];
             return (
-              <div key={card.slug} className="nx-card">
+              <div key={card.slug} className={`nx-card${soon ? " is-soon" : ""}`}>
                 <a href={localeHref(lang, `/apps/${card.slug}`)} className="nx-card-main">
                   <span className="nx-card-top">
                     <span className="nx-ico">
@@ -614,8 +627,8 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
       </section>
 
       <section className="nx-apps">
-        <p className="nx-kicker">APK</p>
-        <nav className="faq-links" aria-label="APK">
+        <p className="nx-kicker">{APK_HELP[lang]}</p>
+        <nav className="faq-links" aria-label={APK_HELP[lang]}>
           {XETA_LINKS.map((slug) => {
             const item = SEARCH.xeta.items.find((entry) => entry.slug === slug);
             if (!item) return null;
@@ -690,6 +703,9 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
             {lang === "ar" ? "ألعاب" : lang === "ru" ? "Игры" : lang === "en" ? "Games" : "Oyunlar"}
           </a>
           <NavMenu section="programming" />
+          <a className="footer-faq" href={localeHref(lang, "/unknown")}>
+            {BAR.unknown[lang]}
+          </a>
         </nav>
         <AppSuggest />
         <SiteLegal />
