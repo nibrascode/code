@@ -25,11 +25,11 @@ function row(title: string, description: string, keywords: string): Seo {
 
 export const CODE_SAMPLE_SEO: Record<string, Record<Lang, Seo>> = {
   "numune-kod": {
-    az: row("Nümunə kod", "Oyun kodu və tətbiq kodu üçün nümunə səhifələr.", "nümunə kod, oyun kodu, tətbiq kodu"),
-    en: row("Sample code", "Sample pages for game code and app code.", "sample code, game code, app code"),
-    tr: row("Örnek kod", "Oyun kodu ve uygulama kodu için örnek sayfalar.", "örnek kod, oyun kodu, uygulama kodu"),
-    ar: row("كود نموذجي", "صفحات نموذجية لكود اللعبة وكود التطبيق.", "كود نموذجي, كود اللعبة, كود التطبيق"),
-    ru: row("Примеры кода", "Страницы с примерами кода игры и приложения.", "примеры кода, код игры, код приложения"),
+    az: row("Nümunə kod: hazır HTML oyun və tətbiq kodları", "Kopyalayıb işlədə biləcəyiniz hazır HTML kod nümunələri: oyun (xal, taymer), tətbiq (qeyd siyahısı, tünd rejim) və sayt səhifələri. Pulsuz, izahlı.", "nümunə kod, oyun kodu, tətbiq kodu"),
+    en: row("Sample code: ready HTML game and app examples", "Copy-paste HTML code examples that run in the browser: games (score, timer), apps (notes, dark mode) and website pages. Free, with short explanations.", "sample code, game code, app code"),
+    tr: row("Örnek kod: hazır HTML oyun ve uygulama kodları", "Kopyalayıp tarayıcıda çalıştırabileceğiniz HTML örnekleri: oyun (puan, sayaç), uygulama (not listesi, koyu mod) ve site sayfaları. Ücretsiz.", "örnek kod, oyun kodu, uygulama kodu"),
+    ar: row("كود نموذجي: أمثلة HTML جاهزة لألعاب وتطبيقات", "أمثلة HTML جاهزة للنسخ تعمل في المتصفح: ألعاب (نقاط، مؤقت)، تطبيقات (ملاحظات، وضع داكن) وصفحات مواقع. مجانًا.", "كود نموذجي, كود اللعبة, كود التطبيق"),
+    ru: row("Примеры кода: готовые HTML игры и приложения", "Готовые HTML-примеры для копирования: игры (счёт, таймер), приложения (заметки, тёмная тема) и страницы сайтов. Бесплатно, с пояснениями.", "примеры кода, код игры, код приложения"),
   },
   "oyun-kodu": {
     az: row("Oyun kodu", "Xal, üç rəqəmdən birini tapmaq və geriyə sayan taymer. Hər nümunə bir HTML səhifədə işləyir.", "oyun kodu, html, taymer"),

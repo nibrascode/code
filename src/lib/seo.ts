@@ -45,58 +45,60 @@ function seoLeaf(az: string, en: string, ar: string, ru: string, tr?: string): C
 const PAGES: Record<string, Copy> = {
   "/": {
     az: {
-      title: "Nibras Code — sadə tətbiqlər, real fayda",
+      title: "Nibras Code — pulsuz PDF, QR alətləri və tətbiqlər",
       description:
-        "Nibras Code müstəqil layihədir. Nibras AI sual, kod və şəkil köməkçisidir: nibrascode.com/ai. Tətbiqlər: Nibras Arabic, Nibras PDF, Nibras Docs və Nibras Plans.",
+        "Azərbaycan dilində pulsuz onlayn alətlər: PDF birləşdir, QR kod, şəkil sıxma. Kodlaşdırma dərsləri, Nibras AI və Android tətbiqləri. Reklamsız.",
     },
     en: {
-      title: "Nibras Code — simple apps, real benefit",
+      title: "Nibras Code — free PDF & QR tools, apps and lessons",
       description:
-        "Nibras Code is an independent project. Nibras AI is its assistant for questions, code, and images at nibrascode.com/ai. Apps: Nibras Arabic, Nibras PDF, Nibras Docs, and Nibras Plans.",
+        "Free online tools that run in your browser: merge PDF, make QR codes, compress images. Coding lessons, Nibras AI and Android apps. No ads, no sign-up.",
     },
     tr: {
-      title: "Nibras Code — sade uygulamalar, gerçek fayda",
+      title: "Nibras Code — ücretsiz PDF, QR araçları ve uygulamalar",
       description:
-        "Nibras Code bağımsız bir projedir. Nibras AI soru, kod ve görsel yardımcısıdır: nibrascode.com/ai. Uygulamalar: Nibras Arabic, Nibras PDF, Nibras Docs ve Nibras Plans.",
+        "Tarayıcıda çalışan ücretsiz araçlar: PDF birleştir, QR kod, görsel sıkıştır. Kodlama dersleri, Nibras AI ve Android uygulamaları. Reklamsız.",
     },
     ar: {
-      title: "Nibras Code — تطبيقات بسيطة، فائدة حقيقية",
+      title: "Nibras Code — أدوات PDF وQR مجانية وتطبيقات",
       description:
-        "Nibras Code مشروع مستقل. Nibras AI مساعد للسؤال والكود والصورة: nibrascode.com/ai. التطبيقات: Nibras Arabic وNibras PDF وNibras Docs وNibras Plans.",
+        "أدوات مجانية تعمل في المتصفح: دمج PDF، رمز QR، ضغط الصور. دروس برمجة وNibras AI وتطبيقات أندرويد. بلا إعلانات.",
     },
     ru: {
-      title: "Nibras Code — простые приложения, реальная польза",
+      title: "Nibras Code — бесплатные PDF и QR инструменты",
       description:
-        "Nibras Code — независимый проект. Nibras AI — помощник для вопросов, кода и изображений: nibrascode.com/ai. Приложения: Nibras Arabic, Nibras PDF, Nibras Docs и Nibras Plans.",
+        "Бесплатные инструменты в браузере: объединить PDF, QR-код, сжать фото. Уроки программирования, Nibras AI и Android-приложения. Без рекламы.",
     },
   },
+
   "/about": {
     az: {
-      title: "Biz kimik — Nibras Code",
+      title: "Nibras Code sahibi kimdir? Mahir Əliyev — haqqında",
       description:
-        "Nibras Code müstəqil şəxsi layihədir. Qurucusu Mahir Əliyev. Nibras Arabic açıqdır. Saytda Nibras AI, Nibras Dev, Nibras Apk, Nibras QR, Nibras Erase və Xidmətlər var.",
+        "Nibras Code-un sahibi və qurucusu Mahir Əliyevdir. Müstəqil şəxsi layihə: Nibras Arabic, Nibras PDF tətbiqləri, pulsuz onlayn alətlər. Reklamsız.",
     },
     en: {
-      title: "Who we are — Nibras Code",
+      title: "Who owns Nibras Code? Mahir Əliyev — About",
       description:
-        "Nibras Code is an independent personal project. Founder: Mahir Əliyev. Nibras Arabic is available. The site also has Nibras AI, Nibras Dev, Nibras Apk, Nibras QR, Nibras Erase, and Tools.",
-    },
-    ar: {
-      title: "من نحن — Nibras Code",
-      description:
-        "Nibras Code مشروع شخصي مستقل. المؤسس Mahir Əliyev. Nibras Arabic متاح. وفي الموقع أيضًا Nibras AI وNibras Dev وNibras Apk وNibras QR وNibras Erase والخدمات.",
-    },
-    ru: {
-      title: "Кто мы — Nibras Code",
-      description:
-        "Nibras Code — независимый личный проект. Основатель — Mahir Əliyev. Nibras Arabic доступен. На сайте также есть Nibras AI, Nibras Dev, Nibras Apk, Nibras QR, Nibras Erase и Сервисы.",
+        "Nibras Code is owned and run by Mahir Əliyev, an independent developer. A personal project: Nibras Arabic and Nibras PDF apps, free web tools. No ads.",
     },
     tr: {
-      title: "Biz kimiz — Nibras Code",
+      title: "Nibras Code sahibi kim? Mahir Əliyev — Hakkında",
       description:
-        "Nibras Code bağımsız bir kişisel projedir. Kurucusu Mahir Əliyev. Nibras Arabic açıktır. Sitede Nibras AI, Nibras Dev, Nibras Apk, Nibras QR, Nibras Erase ve Hizmetler vardır.",
+        "Nibras Code'un sahibi ve kurucusu Mahir Əliyev. Bağımsız kişisel proje: Nibras Arabic ve Nibras PDF uygulamaları, ücretsiz web araçları. Reklamsız.",
+    },
+    ar: {
+      title: "من صاحب Nibras Code؟ Mahir Əliyev — من نحن",
+      description:
+        "صاحب Nibras Code ومؤسسه هو Mahir Əliyev، مطوّر مستقل. مشروع شخصي: تطبيقا Nibras Arabic وNibras PDF وأدوات ويب مجانية. بلا إعلانات.",
+    },
+    ru: {
+      title: "Кто владелец Nibras Code? Mahir Əliyev — О нас",
+      description:
+        "Владелец и основатель Nibras Code — Mahir Əliyev, независимый разработчик. Личный проект: приложения Nibras Arabic и Nibras PDF, бесплатные веб-инструменты.",
     },
   },
+
   "/why": {
     az: {
       title: "Niyə Nibras Code — sadə və faydalı tətbiqlər",

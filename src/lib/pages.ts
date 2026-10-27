@@ -42,7 +42,7 @@ export function defaultAbout(lang: Lang): AboutCopy {
 
 const FOUNDER: Record<Lang, { title: string; body: string[] }> = {
   az: {
-    title: "Nibras Code-un qurucusu haqqında",
+    title: "Nibras Code-un sahibi və qurucusu",
     body: [
       "Nibras Code-un arxasında texnologiyanı yalnız kod yazmaq vasitəsi deyil, insanlara fayda vermək üçün bir imkan kimi görən müstəqil bir proqram təminatı həvəskarı dayanır.",
       "Özünü ön plana çıxarmaqdansa, hazırladığı layihələr və təqdim etdiyi faydalı həllərlə tanınmağa üstünlük verir. Onun yanaşması sadədir: gündəlik ehtiyacları anlamaq, lazımsız mürəkkəbliyi aradan qaldırmaq və texnologiyanı hər kəs üçün daha əlçatan etmək.",
@@ -52,7 +52,7 @@ const FOUNDER: Record<Lang, { title: string; body: string[] }> = {
     ],
   },
   en: {
-    title: "About the founder of Nibras Code",
+    title: "Owner and founder of Nibras Code",
     body: [
       "Behind Nibras Code is an independent software enthusiast who sees technology not only as a way to write code, but as a way to help people.",
       "Rather than putting himself forward, he prefers to be known by the projects he builds and the useful solutions he offers. His approach is simple: understand everyday needs, remove needless complexity, and make technology more reachable for everyone.",
@@ -62,7 +62,7 @@ const FOUNDER: Record<Lang, { title: string; body: string[] }> = {
     ],
   },
   tr: {
-    title: "Nibras Code’un kurucusu hakkında",
+    title: "Nibras Code’un sahibi ve kurucusu",
     body: [
       "Nibras Code’un arkasında, teknolojiyi yalnızca kod yazma aracı değil, insanlara fayda vermek için bir imkân olarak gören bağımsız bir yazılım meraklısı vardır.",
       "Kendini öne çıkarmaktansa, hazırladığı projeler ve sunduğu faydalı çözümlerle tanınmayı tercih eder. Yaklaşımı basittir: günlük ihtiyaçları anlamak, gereksiz karmaşıklığı kaldırmak ve teknolojiyi herkes için daha erişilebilir yapmak.",
@@ -72,7 +72,7 @@ const FOUNDER: Record<Lang, { title: string; body: string[] }> = {
     ],
   },
   ar: {
-    title: "عن مؤسس Nibras Code",
+    title: "صاحب Nibras Code ومؤسسه",
     body: [
       "خلف Nibras Code هاوٍ مستقل للبرمجيات يرى التقنية ليست مجرد وسيلة لكتابة الكود، بل فرصة لنفع الناس.",
       "وهو يفضّل أن يُعرف بمشاريعه والحلول المفيدة التي يقدّمها، لا بتقديم نفسه. منهجه بسيط: فهم الحاجات اليومية، وإزالة التعقيد غير اللازم، وجعل التقنية أقرب إلى الجميع.",
@@ -82,7 +82,7 @@ const FOUNDER: Record<Lang, { title: string; body: string[] }> = {
     ],
   },
   ru: {
-    title: "Об основателе Nibras Code",
+    title: "Владелец и основатель Nibras Code",
     body: [
       "За Nibras Code стоит независимый энтузиаст программного обеспечения, который видит технологию не только как способ писать код, а как возможность приносить пользу людям.",
       "Он предпочитает, чтобы его узнавали по проектам и полезным решениям, а не по тому, что он выставляет себя вперёд. Подход простой: понять повседневные нужды, убрать лишнюю сложность и сделать технологию доступнее для каждого.",
