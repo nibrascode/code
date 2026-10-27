@@ -2,9 +2,9 @@
   "nibras-arabic": {
     "listed": true,
     "playUrl": "https://play.google.com/store/apps/details?id=com.nibrasarabic.app",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "minAndroid": "7.0",
-    "updated": "2026-09-30"
+    "updated": "2026-10-26"
   },
   "nibras-docs": {
     "listed": false
