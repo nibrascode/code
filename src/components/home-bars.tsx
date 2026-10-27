@@ -229,14 +229,13 @@ export function BarGroupView({ lang, group, full = false }: { lang: Lang; group:
   return (
     <div className={`nx-bar-group nx-bar-group--${GROUP_CLASS[group]}`}>
       {full ? null : <h2 className="nx-bar-group-title">{BAR_GROUPS[group][lang]}</h2>}
-      <div className="nx-bar-group-grid">
-        {shown}
-        {!full && all.length > HOME_LIMIT ? (
-          <a key="more" className="nx-more-link" href={groupPath(lang, group)}>
-            {MORE[lang]} →
-          </a>
-        ) : null}
-      </div>
+      <div className="nx-bar-group-grid">{shown}</div>
+      {!full && all.length > HOME_LIMIT ? (
+        <a className="nx-more-link" href={groupPath(lang, group)}>
+          {MORE[lang]}
+          <span className="nx-more-link-arrow" aria-hidden="true">→</span>
+        </a>
+      ) : null}
     </div>
   );
 }
