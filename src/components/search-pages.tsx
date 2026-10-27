@@ -1,3 +1,5 @@
+import { Bot, Sparkles } from "lucide-react";
+import { InfoCard, InfoCards } from "@/components/info-card";
 import type { Lang } from "@/lib/i18n";
 import { SEARCH, searchPath, searchTopicPath, type SearchKind } from "@/lib/search-pages";
 import { localeHref } from "@/lib/locale-path";
@@ -145,17 +147,14 @@ export function SearchIndex({ kind, lang }: { kind: SearchKind; lang: Lang }) {
       <h1>{section.heading[lang]}</h1>
       <p className="why-lead">{section.intro[lang]}</p>
       {kind === "movzu" ? (
-        <div className="prog-sections">
+        <InfoCards>
           {AI_GUIDE[lang].map((block) => (
-            <section key={block.h}>
-              <h2>{block.h}</h2>
+            <InfoCard key={block.h} icon={Bot} title={block.h}>
               <p>{block.p}</p>
-            </section>
+            </InfoCard>
           ))}
-          <p>
-            <a href={localeHref(lang, "/ai")}>Nibras AI</a>
-          </p>
-        </div>
+          <InfoCard icon={Sparkles} title="Nibras AI" href={localeHref(lang, "/ai")} />
+        </InfoCards>
       ) : null}
       <nav className="faq-links" aria-label={section.heading[lang]}>
         <a href={localeHref(lang, "/programming")}>{lang === "ar" ? "البرمجة" : lang === "ru" ? "Программирование" : lang === "tr" ? "Programlama" : lang === "en" ? "Programming" : "Proqramlaşdırma"}</a>

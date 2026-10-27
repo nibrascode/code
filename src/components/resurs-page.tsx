@@ -1,3 +1,5 @@
+import { BookOpen } from "lucide-react";
+import { InfoCard, InfoCards } from "@/components/info-card";
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { NIBRAS_PDF_GUIDE, type PdfGuideSection } from "@/lib/nibras-pdf-guide";
@@ -55,21 +57,24 @@ function ArticleBody({
           ))}
         </ol>
       ) : null}
-      {sections?.map((section) => (
-        <section key={section.title}>
-          <h2>{section.title}</h2>
-          {section.paragraphs.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
-          {section.points ? (
-            <ol className="lib-steps">
-              {section.points.map((point) => (
-                <li key={point}>{point}</li>
+      {sections?.length ? (
+        <InfoCards>
+          {sections.map((section) => (
+            <InfoCard key={section.title} icon={BookOpen} title={section.title}>
+              {section.paragraphs.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
               ))}
-            </ol>
-          ) : null}
-        </section>
-      ))}
+              {section.points ? (
+                <ol className="lib-steps">
+                  {section.points.map((point) => (
+                    <li key={point}>{point}</li>
+                  ))}
+                </ol>
+              ) : null}
+            </InfoCard>
+          ))}
+        </InfoCards>
+      ) : null}
       <section>
         <h2>{moreLabel}</h2>
         <ul className="lib-list">

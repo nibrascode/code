@@ -1,3 +1,5 @@
+import { Compass, Heart, Target } from "lucide-react";
+import { InfoCard, InfoCards } from "@/components/info-card";
 import { createFileRoute } from "@tanstack/react-router";
 import { useI18n } from "@/lib/i18n-context";
 import type { TKey } from "@/lib/i18n";
@@ -24,34 +26,26 @@ function WhyPage() {
       <p>{t("why_p1")}</p>
       <p>{t("why_p2")}</p>
 
-      <section>
-        <h2>{t("why_believe_h")}</h2>
-        <p>{t("why_believe_p")}</p>
-        <p className="why-as">{t("why_as")}</p>
-        <ul>
-          {BELIEFS.map((key) => (
-            <li key={key}>
-              <i />
-              {t(key as TKey)}
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section>
-        <h2>{t("why_goal_h")}</h2>
-        <p>{t("why_goal_p1")}</p>
-        <p>{t("why_goal_p2")}</p>
-      </section>
-
-      <section>
-        <h2>{t("why_approach_h")}</h2>
-        <div className="why-lines">
+      <InfoCards>
+        <InfoCard icon={Heart} title={t("why_believe_h")}>
+          <p>{t("why_believe_p")}</p>
+          <p>{t("why_as")}</p>
+          <ul className="faq-points">
+            {BELIEFS.map((key) => (
+              <li key={key}>{t(key as TKey)}</li>
+            ))}
+          </ul>
+        </InfoCard>
+        <InfoCard icon={Target} title={t("why_goal_h")}>
+          <p>{t("why_goal_p1")}</p>
+          <p>{t("why_goal_p2")}</p>
+        </InfoCard>
+        <InfoCard icon={Compass} title={t("why_approach_h")}>
           {LINES.map((key) => (
             <p key={key}>{t(key as TKey)}</p>
           ))}
-        </div>
-      </section>
+        </InfoCard>
+      </InfoCards>
 
       <p className="why-close">{t("why_close")}</p>
     </main>

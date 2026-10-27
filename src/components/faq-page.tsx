@@ -1,3 +1,5 @@
+import { HelpCircle } from "lucide-react";
+import { InfoCard, InfoCards } from "@/components/info-card";
 import type { FaqCopy, FaqItem } from "@/lib/faq";
 import { faqSlug, faqTopicHref, faqTopicPath } from "@/lib/faq";
 
@@ -88,13 +90,11 @@ export function FaqTopic({ page, item }: { page: FaqCopy; item: FaqItem }) {
           </a>
         ))}
       </nav>
-      <ul className="lib-list">
+      <InfoCards>
         {others.map((entry) => (
-          <li key={entry.id}>
-            <a href={faqTopicPath(page.lang, faqSlug(entry.id))}>{entry.q}</a>
-          </li>
+          <InfoCard key={entry.id} icon={HelpCircle} title={entry.q} href={faqTopicPath(page.lang, faqSlug(entry.id))} />
         ))}
-      </ul>
+      </InfoCards>
     </main>
   );
 }
