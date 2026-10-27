@@ -11778,3 +11778,57 @@ html[lang="ar"] .why-lead.topic-body,
   font-size: 0.8em;
   opacity: 0.7;
 }
+
+/* Homepage: first-visit start path + collapsed secondary groups */
+.nx-start {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  max-width: 38rem;
+}
+.nx-start-title {
+  width: 100%;
+  margin: 0;
+  font-size: 13px;
+  font-weight: 650;
+  opacity: 0.85;
+}
+.nx-start a {
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  color: inherit;
+  background: color-mix(in srgb, #5b8def 18%, transparent);
+  border: 1px solid color-mix(in srgb, #5b8def 34%, transparent);
+}
+.nx-start a:hover { background: color-mix(in srgb, #5b8def 28%, transparent); }
+.nx-more { display: flex; flex-direction: column; gap: 12px; }
+.nx-more > summary {
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  opacity: 0.8;
+  padding: 6px 2px;
+  list-style-position: inside;
+}
+.nx-more[open] { gap: 12px; }
+.nx-more > .nx-bar-group { margin-top: 12px; }
+.nx-more-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 650;
+  text-decoration: none;
+  color: inherit;
+  border: 1px dashed color-mix(in srgb, currentColor 35%, transparent);
+  opacity: 0.9;
+}
+.nx-more-link:hover { opacity: 1; background: color-mix(in srgb, currentColor 8%, transparent); }
+.nx-group-page .nx-bars--full { max-width: 48rem; }

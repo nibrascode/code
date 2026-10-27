@@ -139,6 +139,7 @@ import { Route as EnZipRouteImport } from './routes/en.zip'
 import { Route as FaqSlugRouteImport } from './routes/faq.$slug'
 import { Route as GuidesIndexRouteImport } from './routes/guides/index'
 import { Route as GuidesTopicRouteImport } from './routes/guides/$topic'
+import { Route as HamisiGroupRouteImport } from './routes/hamisi.$group'
 import { Route as ImageToolRouteImport } from './routes/image_.$tool'
 import { Route as LearnLogicRouteImport } from './routes/learn_.logic'
 import { Route as MovzuSlugRouteImport } from './routes/movzu.$slug'
@@ -236,6 +237,7 @@ import { Route as TrZipRouteImport } from './routes/tr.zip'
 import { Route as XetaSlugRouteImport } from './routes/xeta.$slug'
 import { Route as ArAppsSlugRouteImport } from './routes/ar.apps.$slug'
 import { Route as ArFaqSlugRouteImport } from './routes/ar.faq.$slug'
+import { Route as ArHamisiGroupRouteImport } from './routes/ar.hamisi.$group'
 import { Route as ArImageToolRouteImport } from './routes/ar.image_.$tool'
 import { Route as ArLearnLogicRouteImport } from './routes/ar.learn_.logic'
 import { Route as ArMovzuSlugRouteImport } from './routes/ar.movzu.$slug'
@@ -249,6 +251,7 @@ import { Route as ArToolsSlugRouteImport } from './routes/ar.tools.$slug'
 import { Route as ArXetaSlugRouteImport } from './routes/ar.xeta.$slug'
 import { Route as EnAppsSlugRouteImport } from './routes/en.apps.$slug'
 import { Route as EnFaqSlugRouteImport } from './routes/en.faq.$slug'
+import { Route as EnHamisiGroupRouteImport } from './routes/en.hamisi.$group'
 import { Route as EnImageToolRouteImport } from './routes/en.image_.$tool'
 import { Route as EnLearnLogicRouteImport } from './routes/en.learn_.logic'
 import { Route as EnMovzuSlugRouteImport } from './routes/en.movzu.$slug'
@@ -265,6 +268,7 @@ import { Route as ResourcesTopicIndexRouteImport } from './routes/resources/$top
 import { Route as ResourcesTopicArticleRouteImport } from './routes/resources/$topic/$article'
 import { Route as RuAppsSlugRouteImport } from './routes/ru.apps.$slug'
 import { Route as RuFaqSlugRouteImport } from './routes/ru.faq.$slug'
+import { Route as RuHamisiGroupRouteImport } from './routes/ru.hamisi.$group'
 import { Route as RuImageToolRouteImport } from './routes/ru.image_.$tool'
 import { Route as RuLearnLogicRouteImport } from './routes/ru.learn_.logic'
 import { Route as RuMovzuSlugRouteImport } from './routes/ru.movzu.$slug'
@@ -279,6 +283,7 @@ import { Route as RuToolsSlugRouteImport } from './routes/ru.tools.$slug'
 import { Route as RuXetaSlugRouteImport } from './routes/ru.xeta.$slug'
 import { Route as TrAppsSlugRouteImport } from './routes/tr.apps.$slug'
 import { Route as TrFaqSlugRouteImport } from './routes/tr.faq.$slug'
+import { Route as TrHamisiGroupRouteImport } from './routes/tr.hamisi.$group'
 import { Route as TrImageToolRouteImport } from './routes/tr.image_.$tool'
 import { Route as TrLearnLogicRouteImport } from './routes/tr.learn_.logic'
 import { Route as TrMovzuSlugRouteImport } from './routes/tr.movzu.$slug'
@@ -941,6 +946,11 @@ const GuidesTopicRoute = GuidesTopicRouteImport.update({
   path: '/guides/$topic',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HamisiGroupRoute = HamisiGroupRouteImport.update({
+  id: '/hamisi/$group',
+  path: '/hamisi/$group',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ImageToolRoute = ImageToolRouteImport.update({
   id: '/image_/$tool',
   path: '/image/$tool',
@@ -1426,6 +1436,11 @@ const ArFaqSlugRoute = ArFaqSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => ArFaqRoute,
 } as any)
+const ArHamisiGroupRoute = ArHamisiGroupRouteImport.update({
+  id: '/hamisi/$group',
+  path: '/hamisi/$group',
+  getParentRoute: () => ArRoute,
+} as any)
 const ArImageToolRoute = ArImageToolRouteImport.update({
   id: '/image_/$tool',
   path: '/image/$tool',
@@ -1490,6 +1505,11 @@ const EnFaqSlugRoute = EnFaqSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => EnFaqRoute,
+} as any)
+const EnHamisiGroupRoute = EnHamisiGroupRouteImport.update({
+  id: '/hamisi/$group',
+  path: '/hamisi/$group',
+  getParentRoute: () => EnRoute,
 } as any)
 const EnImageToolRoute = EnImageToolRouteImport.update({
   id: '/image_/$tool',
@@ -1572,6 +1592,11 @@ const RuFaqSlugRoute = RuFaqSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => RuFaqRoute,
 } as any)
+const RuHamisiGroupRoute = RuHamisiGroupRouteImport.update({
+  id: '/hamisi/$group',
+  path: '/hamisi/$group',
+  getParentRoute: () => RuRoute,
+} as any)
 const RuImageToolRoute = RuImageToolRouteImport.update({
   id: '/image_/$tool',
   path: '/image/$tool',
@@ -1641,6 +1666,11 @@ const TrFaqSlugRoute = TrFaqSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => TrFaqRoute,
+} as any)
+const TrHamisiGroupRoute = TrHamisiGroupRouteImport.update({
+  id: '/hamisi/$group',
+  path: '/hamisi/$group',
+  getParentRoute: () => TrRoute,
 } as any)
 const TrImageToolRoute = TrImageToolRouteImport.update({
   id: '/image_/$tool',
@@ -1828,6 +1858,7 @@ export interface FileRoutesByFullPath {
   '/en/zip': typeof EnZipRoute
   '/faq/$slug': typeof FaqSlugRoute
   '/guides/$topic': typeof GuidesTopicRoute
+  '/hamisi/$group': typeof HamisiGroupRoute
   '/image/$tool': typeof ImageToolRoute
   '/learn/logic': typeof LearnLogicRoute
   '/movzu/$slug': typeof MovzuSlugRoute
@@ -1926,6 +1957,7 @@ export interface FileRoutesByFullPath {
   '/resources/': typeof ResourcesIndexRoute
   '/ar/apps/$slug': typeof ArAppsSlugRoute
   '/ar/faq/$slug': typeof ArFaqSlugRoute
+  '/ar/hamisi/$group': typeof ArHamisiGroupRoute
   '/ar/image/$tool': typeof ArImageToolRoute
   '/ar/learn/logic': typeof ArLearnLogicRoute
   '/ar/movzu/$slug': typeof ArMovzuSlugRoute
@@ -1939,6 +1971,7 @@ export interface FileRoutesByFullPath {
   '/ar/xeta/$slug': typeof ArXetaSlugRoute
   '/en/apps/$slug': typeof EnAppsSlugRoute
   '/en/faq/$slug': typeof EnFaqSlugRoute
+  '/en/hamisi/$group': typeof EnHamisiGroupRoute
   '/en/image/$tool': typeof EnImageToolRoute
   '/en/learn/logic': typeof EnLearnLogicRoute
   '/en/movzu/$slug': typeof EnMovzuSlugRoute
@@ -1954,6 +1987,7 @@ export interface FileRoutesByFullPath {
   '/resources/$topic/$article': typeof ResourcesTopicArticleRoute
   '/ru/apps/$slug': typeof RuAppsSlugRoute
   '/ru/faq/$slug': typeof RuFaqSlugRoute
+  '/ru/hamisi/$group': typeof RuHamisiGroupRoute
   '/ru/image/$tool': typeof RuImageToolRoute
   '/ru/learn/logic': typeof RuLearnLogicRoute
   '/ru/movzu/$slug': typeof RuMovzuSlugRoute
@@ -1968,6 +2002,7 @@ export interface FileRoutesByFullPath {
   '/ru/xeta/$slug': typeof RuXetaSlugRoute
   '/tr/apps/$slug': typeof TrAppsSlugRoute
   '/tr/faq/$slug': typeof TrFaqSlugRoute
+  '/tr/hamisi/$group': typeof TrHamisiGroupRoute
   '/tr/image/$tool': typeof TrImageToolRoute
   '/tr/learn/logic': typeof TrLearnLogicRoute
   '/tr/movzu/$slug': typeof TrMovzuSlugRoute
@@ -2110,6 +2145,7 @@ export interface FileRoutesByTo {
   '/en/zip': typeof EnZipRoute
   '/faq/$slug': typeof FaqSlugRoute
   '/guides/$topic': typeof GuidesTopicRoute
+  '/hamisi/$group': typeof HamisiGroupRoute
   '/image/$tool': typeof ImageToolRoute
   '/learn/logic': typeof LearnLogicRoute
   '/movzu/$slug': typeof MovzuSlugRoute
@@ -2208,6 +2244,7 @@ export interface FileRoutesByTo {
   '/resources': typeof ResourcesIndexRoute
   '/ar/apps/$slug': typeof ArAppsSlugRoute
   '/ar/faq/$slug': typeof ArFaqSlugRoute
+  '/ar/hamisi/$group': typeof ArHamisiGroupRoute
   '/ar/image/$tool': typeof ArImageToolRoute
   '/ar/learn/logic': typeof ArLearnLogicRoute
   '/ar/movzu/$slug': typeof ArMovzuSlugRoute
@@ -2221,6 +2258,7 @@ export interface FileRoutesByTo {
   '/ar/xeta/$slug': typeof ArXetaSlugRoute
   '/en/apps/$slug': typeof EnAppsSlugRoute
   '/en/faq/$slug': typeof EnFaqSlugRoute
+  '/en/hamisi/$group': typeof EnHamisiGroupRoute
   '/en/image/$tool': typeof EnImageToolRoute
   '/en/learn/logic': typeof EnLearnLogicRoute
   '/en/movzu/$slug': typeof EnMovzuSlugRoute
@@ -2236,6 +2274,7 @@ export interface FileRoutesByTo {
   '/resources/$topic/$article': typeof ResourcesTopicArticleRoute
   '/ru/apps/$slug': typeof RuAppsSlugRoute
   '/ru/faq/$slug': typeof RuFaqSlugRoute
+  '/ru/hamisi/$group': typeof RuHamisiGroupRoute
   '/ru/image/$tool': typeof RuImageToolRoute
   '/ru/learn/logic': typeof RuLearnLogicRoute
   '/ru/movzu/$slug': typeof RuMovzuSlugRoute
@@ -2250,6 +2289,7 @@ export interface FileRoutesByTo {
   '/ru/xeta/$slug': typeof RuXetaSlugRoute
   '/tr/apps/$slug': typeof TrAppsSlugRoute
   '/tr/faq/$slug': typeof TrFaqSlugRoute
+  '/tr/hamisi/$group': typeof TrHamisiGroupRoute
   '/tr/image/$tool': typeof TrImageToolRoute
   '/tr/learn/logic': typeof TrLearnLogicRoute
   '/tr/movzu/$slug': typeof TrMovzuSlugRoute
@@ -2394,6 +2434,7 @@ export interface FileRoutesById {
   '/en/zip': typeof EnZipRoute
   '/faq/$slug': typeof FaqSlugRoute
   '/guides/$topic': typeof GuidesTopicRoute
+  '/hamisi/$group': typeof HamisiGroupRoute
   '/image_/$tool': typeof ImageToolRoute
   '/learn_/logic': typeof LearnLogicRoute
   '/movzu/$slug': typeof MovzuSlugRoute
@@ -2492,6 +2533,7 @@ export interface FileRoutesById {
   '/resources/': typeof ResourcesIndexRoute
   '/ar/apps/$slug': typeof ArAppsSlugRoute
   '/ar/faq/$slug': typeof ArFaqSlugRoute
+  '/ar/hamisi/$group': typeof ArHamisiGroupRoute
   '/ar/image_/$tool': typeof ArImageToolRoute
   '/ar/learn_/logic': typeof ArLearnLogicRoute
   '/ar/movzu/$slug': typeof ArMovzuSlugRoute
@@ -2505,6 +2547,7 @@ export interface FileRoutesById {
   '/ar/xeta/$slug': typeof ArXetaSlugRoute
   '/en/apps/$slug': typeof EnAppsSlugRoute
   '/en/faq/$slug': typeof EnFaqSlugRoute
+  '/en/hamisi/$group': typeof EnHamisiGroupRoute
   '/en/image_/$tool': typeof EnImageToolRoute
   '/en/learn_/logic': typeof EnLearnLogicRoute
   '/en/movzu/$slug': typeof EnMovzuSlugRoute
@@ -2520,6 +2563,7 @@ export interface FileRoutesById {
   '/resources/$topic/$article': typeof ResourcesTopicArticleRoute
   '/ru/apps/$slug': typeof RuAppsSlugRoute
   '/ru/faq/$slug': typeof RuFaqSlugRoute
+  '/ru/hamisi/$group': typeof RuHamisiGroupRoute
   '/ru/image_/$tool': typeof RuImageToolRoute
   '/ru/learn_/logic': typeof RuLearnLogicRoute
   '/ru/movzu/$slug': typeof RuMovzuSlugRoute
@@ -2534,6 +2578,7 @@ export interface FileRoutesById {
   '/ru/xeta/$slug': typeof RuXetaSlugRoute
   '/tr/apps/$slug': typeof TrAppsSlugRoute
   '/tr/faq/$slug': typeof TrFaqSlugRoute
+  '/tr/hamisi/$group': typeof TrHamisiGroupRoute
   '/tr/image_/$tool': typeof TrImageToolRoute
   '/tr/learn_/logic': typeof TrLearnLogicRoute
   '/tr/movzu/$slug': typeof TrMovzuSlugRoute
@@ -2679,6 +2724,7 @@ export interface FileRouteTypes {
     | '/en/zip'
     | '/faq/$slug'
     | '/guides/$topic'
+    | '/hamisi/$group'
     | '/image/$tool'
     | '/learn/logic'
     | '/movzu/$slug'
@@ -2777,6 +2823,7 @@ export interface FileRouteTypes {
     | '/resources/'
     | '/ar/apps/$slug'
     | '/ar/faq/$slug'
+    | '/ar/hamisi/$group'
     | '/ar/image/$tool'
     | '/ar/learn/logic'
     | '/ar/movzu/$slug'
@@ -2790,6 +2837,7 @@ export interface FileRouteTypes {
     | '/ar/xeta/$slug'
     | '/en/apps/$slug'
     | '/en/faq/$slug'
+    | '/en/hamisi/$group'
     | '/en/image/$tool'
     | '/en/learn/logic'
     | '/en/movzu/$slug'
@@ -2805,6 +2853,7 @@ export interface FileRouteTypes {
     | '/resources/$topic/$article'
     | '/ru/apps/$slug'
     | '/ru/faq/$slug'
+    | '/ru/hamisi/$group'
     | '/ru/image/$tool'
     | '/ru/learn/logic'
     | '/ru/movzu/$slug'
@@ -2819,6 +2868,7 @@ export interface FileRouteTypes {
     | '/ru/xeta/$slug'
     | '/tr/apps/$slug'
     | '/tr/faq/$slug'
+    | '/tr/hamisi/$group'
     | '/tr/image/$tool'
     | '/tr/learn/logic'
     | '/tr/movzu/$slug'
@@ -2961,6 +3011,7 @@ export interface FileRouteTypes {
     | '/en/zip'
     | '/faq/$slug'
     | '/guides/$topic'
+    | '/hamisi/$group'
     | '/image/$tool'
     | '/learn/logic'
     | '/movzu/$slug'
@@ -3059,6 +3110,7 @@ export interface FileRouteTypes {
     | '/resources'
     | '/ar/apps/$slug'
     | '/ar/faq/$slug'
+    | '/ar/hamisi/$group'
     | '/ar/image/$tool'
     | '/ar/learn/logic'
     | '/ar/movzu/$slug'
@@ -3072,6 +3124,7 @@ export interface FileRouteTypes {
     | '/ar/xeta/$slug'
     | '/en/apps/$slug'
     | '/en/faq/$slug'
+    | '/en/hamisi/$group'
     | '/en/image/$tool'
     | '/en/learn/logic'
     | '/en/movzu/$slug'
@@ -3087,6 +3140,7 @@ export interface FileRouteTypes {
     | '/resources/$topic/$article'
     | '/ru/apps/$slug'
     | '/ru/faq/$slug'
+    | '/ru/hamisi/$group'
     | '/ru/image/$tool'
     | '/ru/learn/logic'
     | '/ru/movzu/$slug'
@@ -3101,6 +3155,7 @@ export interface FileRouteTypes {
     | '/ru/xeta/$slug'
     | '/tr/apps/$slug'
     | '/tr/faq/$slug'
+    | '/tr/hamisi/$group'
     | '/tr/image/$tool'
     | '/tr/learn/logic'
     | '/tr/movzu/$slug'
@@ -3244,6 +3299,7 @@ export interface FileRouteTypes {
     | '/en/zip'
     | '/faq/$slug'
     | '/guides/$topic'
+    | '/hamisi/$group'
     | '/image_/$tool'
     | '/learn_/logic'
     | '/movzu/$slug'
@@ -3342,6 +3398,7 @@ export interface FileRouteTypes {
     | '/resources/'
     | '/ar/apps/$slug'
     | '/ar/faq/$slug'
+    | '/ar/hamisi/$group'
     | '/ar/image_/$tool'
     | '/ar/learn_/logic'
     | '/ar/movzu/$slug'
@@ -3355,6 +3412,7 @@ export interface FileRouteTypes {
     | '/ar/xeta/$slug'
     | '/en/apps/$slug'
     | '/en/faq/$slug'
+    | '/en/hamisi/$group'
     | '/en/image_/$tool'
     | '/en/learn_/logic'
     | '/en/movzu/$slug'
@@ -3370,6 +3428,7 @@ export interface FileRouteTypes {
     | '/resources/$topic/$article'
     | '/ru/apps/$slug'
     | '/ru/faq/$slug'
+    | '/ru/hamisi/$group'
     | '/ru/image_/$tool'
     | '/ru/learn_/logic'
     | '/ru/movzu/$slug'
@@ -3384,6 +3443,7 @@ export interface FileRouteTypes {
     | '/ru/xeta/$slug'
     | '/tr/apps/$slug'
     | '/tr/faq/$slug'
+    | '/tr/hamisi/$group'
     | '/tr/image_/$tool'
     | '/tr/learn_/logic'
     | '/tr/movzu/$slug'
@@ -3449,6 +3509,7 @@ export interface RootRouteChildren {
   ResourcesTopicRouteRoute: typeof ResourcesTopicRouteRouteWithChildren
   AppsSlugRoute: typeof AppsSlugRoute
   GuidesTopicRoute: typeof GuidesTopicRoute
+  HamisiGroupRoute: typeof HamisiGroupRoute
   ImageToolRoute: typeof ImageToolRoute
   LearnLogicRoute: typeof LearnLogicRoute
   PdfToolRoute: typeof PdfToolRoute
@@ -4372,6 +4433,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GuidesTopicRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/hamisi/$group': {
+      id: '/hamisi/$group'
+      path: '/hamisi/$group'
+      fullPath: '/hamisi/$group'
+      preLoaderRoute: typeof HamisiGroupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/image_/$tool': {
       id: '/image_/$tool'
       path: '/image/$tool'
@@ -5051,6 +5119,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArFaqSlugRouteImport
       parentRoute: typeof ArFaqRoute
     }
+    '/ar/hamisi/$group': {
+      id: '/ar/hamisi/$group'
+      path: '/hamisi/$group'
+      fullPath: '/ar/hamisi/$group'
+      preLoaderRoute: typeof ArHamisiGroupRouteImport
+      parentRoute: typeof ArRoute
+    }
     '/ar/image_/$tool': {
       id: '/ar/image_/$tool'
       path: '/image/$tool'
@@ -5141,6 +5216,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/en/faq/$slug'
       preLoaderRoute: typeof EnFaqSlugRouteImport
       parentRoute: typeof EnFaqRoute
+    }
+    '/en/hamisi/$group': {
+      id: '/en/hamisi/$group'
+      path: '/hamisi/$group'
+      fullPath: '/en/hamisi/$group'
+      preLoaderRoute: typeof EnHamisiGroupRouteImport
+      parentRoute: typeof EnRoute
     }
     '/en/image_/$tool': {
       id: '/en/image_/$tool'
@@ -5254,6 +5336,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RuFaqSlugRouteImport
       parentRoute: typeof RuFaqRoute
     }
+    '/ru/hamisi/$group': {
+      id: '/ru/hamisi/$group'
+      path: '/hamisi/$group'
+      fullPath: '/ru/hamisi/$group'
+      preLoaderRoute: typeof RuHamisiGroupRouteImport
+      parentRoute: typeof RuRoute
+    }
     '/ru/image_/$tool': {
       id: '/ru/image_/$tool'
       path: '/image/$tool'
@@ -5351,6 +5440,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/tr/faq/$slug'
       preLoaderRoute: typeof TrFaqSlugRouteImport
       parentRoute: typeof TrFaqRoute
+    }
+    '/tr/hamisi/$group': {
+      id: '/tr/hamisi/$group'
+      path: '/hamisi/$group'
+      fullPath: '/tr/hamisi/$group'
+      preLoaderRoute: typeof TrHamisiGroupRouteImport
+      parentRoute: typeof TrRoute
     }
     '/tr/image_/$tool': {
       id: '/tr/image_/$tool'
@@ -5570,6 +5666,7 @@ interface ArRouteChildren {
   ArWorkspaceRoute: typeof ArWorkspaceRoute
   ArXetaRoute: typeof ArXetaRouteWithChildren
   ArZipRoute: typeof ArZipRoute
+  ArHamisiGroupRoute: typeof ArHamisiGroupRoute
   ArImageToolRoute: typeof ArImageToolRoute
   ArLearnLogicRoute: typeof ArLearnLogicRoute
   ArPdfToolRoute: typeof ArPdfToolRoute
@@ -5616,6 +5713,7 @@ const ArRouteChildren: ArRouteChildren = {
   ArWorkspaceRoute: ArWorkspaceRoute,
   ArXetaRoute: ArXetaRouteWithChildren,
   ArZipRoute: ArZipRoute,
+  ArHamisiGroupRoute: ArHamisiGroupRoute,
   ArImageToolRoute: ArImageToolRoute,
   ArLearnLogicRoute: ArLearnLogicRoute,
   ArPdfToolRoute: ArPdfToolRoute,
@@ -5762,6 +5860,7 @@ interface EnRouteChildren {
   EnWorkspaceRoute: typeof EnWorkspaceRoute
   EnXetaRoute: typeof EnXetaRouteWithChildren
   EnZipRoute: typeof EnZipRoute
+  EnHamisiGroupRoute: typeof EnHamisiGroupRoute
   EnImageToolRoute: typeof EnImageToolRoute
   EnLearnLogicRoute: typeof EnLearnLogicRoute
   EnPdfToolRoute: typeof EnPdfToolRoute
@@ -5808,6 +5907,7 @@ const EnRouteChildren: EnRouteChildren = {
   EnWorkspaceRoute: EnWorkspaceRoute,
   EnXetaRoute: EnXetaRouteWithChildren,
   EnZipRoute: EnZipRoute,
+  EnHamisiGroupRoute: EnHamisiGroupRoute,
   EnImageToolRoute: EnImageToolRoute,
   EnLearnLogicRoute: EnLearnLogicRoute,
   EnPdfToolRoute: EnPdfToolRoute,
@@ -6021,6 +6121,7 @@ interface RuRouteChildren {
   RuWorkspaceRoute: typeof RuWorkspaceRoute
   RuXetaRoute: typeof RuXetaRouteWithChildren
   RuZipRoute: typeof RuZipRoute
+  RuHamisiGroupRoute: typeof RuHamisiGroupRoute
   RuImageToolRoute: typeof RuImageToolRoute
   RuLearnLogicRoute: typeof RuLearnLogicRoute
   RuPdfToolRoute: typeof RuPdfToolRoute
@@ -6068,6 +6169,7 @@ const RuRouteChildren: RuRouteChildren = {
   RuWorkspaceRoute: RuWorkspaceRoute,
   RuXetaRoute: RuXetaRouteWithChildren,
   RuZipRoute: RuZipRoute,
+  RuHamisiGroupRoute: RuHamisiGroupRoute,
   RuImageToolRoute: RuImageToolRoute,
   RuLearnLogicRoute: RuLearnLogicRoute,
   RuPdfToolRoute: RuPdfToolRoute,
@@ -6235,6 +6337,7 @@ interface TrRouteChildren {
   TrWorkspaceRoute: typeof TrWorkspaceRoute
   TrXetaRoute: typeof TrXetaRouteWithChildren
   TrZipRoute: typeof TrZipRoute
+  TrHamisiGroupRoute: typeof TrHamisiGroupRoute
   TrImageToolRoute: typeof TrImageToolRoute
   TrLearnLogicRoute: typeof TrLearnLogicRoute
   TrPdfToolRoute: typeof TrPdfToolRoute
@@ -6281,6 +6384,7 @@ const TrRouteChildren: TrRouteChildren = {
   TrWorkspaceRoute: TrWorkspaceRoute,
   TrXetaRoute: TrXetaRouteWithChildren,
   TrZipRoute: TrZipRoute,
+  TrHamisiGroupRoute: TrHamisiGroupRoute,
   TrImageToolRoute: TrImageToolRoute,
   TrLearnLogicRoute: TrLearnLogicRoute,
   TrPdfToolRoute: TrPdfToolRoute,
@@ -6363,6 +6467,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResourcesTopicRouteRoute: ResourcesTopicRouteRouteWithChildren,
   AppsSlugRoute: AppsSlugRoute,
   GuidesTopicRoute: GuidesTopicRoute,
+  HamisiGroupRoute: HamisiGroupRoute,
   ImageToolRoute: ImageToolRoute,
   LearnLogicRoute: LearnLogicRoute,
   PdfToolRoute: PdfToolRoute,
