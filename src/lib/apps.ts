@@ -17,6 +17,8 @@ export type AppSlug =
   | "nibras-arabic"
   | "nibras-docs"
   | "nibras-plans"
+  | "nibras-note"
+  | "nibras-scan"
   | "nibras-pdf"
   | "nibras-qr"
   | "nibras-office"
@@ -72,6 +74,26 @@ export const STUDIO_APPS: StudioApp[] = [
     leadKey: "plans_lead",
     bodyKey: "plans_body",
     features: ["plans_f1", "plans_f2", "plans_f3"],
+    shots: [],
+  },
+  {
+    slug: "nibras-note",
+    name: "Nibras Note",
+    icon: "/apps/nibras-note.webp",
+    playStoreUrl: null,
+    leadKey: "note_lead",
+    bodyKey: "note_body",
+    features: ["note_f1", "note_f2", "note_f3"],
+    shots: [],
+  },
+  {
+    slug: "nibras-scan",
+    name: "Nibras Scan",
+    icon: "/apps/nibras-scan.webp",
+    playStoreUrl: null,
+    leadKey: "scan_lead",
+    bodyKey: "scan_body",
+    features: ["scan_f1", "scan_f2", "scan_f3"],
     shots: [],
   },
   {

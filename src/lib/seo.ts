@@ -297,6 +297,50 @@ const PAGES: Record<string, Copy> = {
       features: ["Plan kurmak", "Sade takip", "Net raporlar"],
     },
   },
+  "/apps/nibras-note": {
+    az: {
+      title: "Nibras Note — telefonda yazı və əl qeydləri dəftəri",
+      description: "Nibras Note mətn yazmaq, qələmlə çəkmək və şəkil əlavə etmək üçün Android dəftəridir. Hesab, reklam və izləmə yoxdur, hər şey cihazda qalır. Tezliklə. Nibras Code layihəsidir.",
+      features: ["Dəftərlər və vərəq növləri", "Qələm və şəkil", "PDF ixracı"],
+    },
+    en: {
+      title: "Nibras Note — a notebook for typed and handwritten notes",
+      description: "Nibras Note is an Android notebook for typing, pen drawing, and images. No account, no ads, no tracking; everything stays on your device. Coming soon. An app by Nibras Code.",
+      features: ["Notebooks and page styles", "Pen and images", "PDF export"],
+    },
+    ar: {
+      title: "Nibras Note — دفتر للملاحظات المكتوبة وبخط اليد",
+      description: "Nibras Note دفتر Android للكتابة والرسم بالقلم وإضافة الصور. لا حساب ولا إعلانات ولا تتبع، وكل شيء يبقى على جهازك. قريبًا. من Nibras Code.",
+      features: ["دفاتر وأنواع صفحات", "قلم وصور", "تصدير PDF"],
+    },
+    ru: {
+      title: "Nibras Note — блокнот для текста и рукописных заметок",
+      description: "Nibras Note — блокнот для Android: текст, перо и фото. Без аккаунта, рекламы и слежки, всё остаётся на устройстве. Скоро. Проект Nibras Code.",
+      features: ["Блокноты и виды страниц", "Перо и фото", "Экспорт в PDF"],
+    },
+  },
+  "/apps/nibras-scan": {
+    az: {
+      title: "Nibras Scan — sənədi telefonla skan et, PDF saxla",
+      description: "Nibras Scan kağız sənədi kamera ilə aydın PDF-ə çevirən Android skaneridir. Hesab və reklam yoxdur, fayllar cihazda qalır. Tezliklə. Nibras Code layihəsidir.",
+      features: ["Kamera ilə skan", "Aydın PDF", "Cihazda emal"],
+    },
+    en: {
+      title: "Nibras Scan — scan documents to PDF on your phone",
+      description: "Nibras Scan is an Android document scanner that turns paper into clear PDFs with your camera. No account, no ads; files stay on your device. Coming soon. An app by Nibras Code.",
+      features: ["Camera scanning", "Clear PDFs", "On-device processing"],
+    },
+    ar: {
+      title: "Nibras Scan — امسح المستندات إلى PDF بهاتفك",
+      description: "Nibras Scan ماسح مستندات لـ Android يحوّل الورق إلى PDF واضح بالكاميرا. لا حساب ولا إعلانات، والملفات تبقى على جهازك. قريبًا. من Nibras Code.",
+      features: ["مسح بالكاميرا", "PDF واضح", "معالجة على الجهاز"],
+    },
+    ru: {
+      title: "Nibras Scan — сканируйте документы в PDF телефоном",
+      description: "Nibras Scan — сканер документов для Android: бумага в чёткий PDF камерой. Без аккаунта и рекламы, файлы остаются на устройстве. Скоро. Проект Nibras Code.",
+      features: ["Сканирование камерой", "Чёткий PDF", "Обработка на устройстве"],
+    },
+  },
   "/apps/nibras-office": {
     az: { title: "Nibras Office — oflayn PDF redaktoru", description: "Nibras Office Android üçün oflayn PDF redaktorudur: qələm, marker, fiqurlar, imza, səhifələri düzənləmək, axtarış, OCR, şifrə, çap və paylaşım. Fayllar cihazınızda qalır. Nibras Code tətbiqi.", features: ["PDF-də qələm, marker və imza", "Səhifələri düzənləmək", "Axtarış, OCR və şifrə"] },
     en: { title: "Nibras Office — offline PDF editor for Android", description: "Nibras Office is an offline PDF editor for Android: pen, highlighter, shapes, signature, page organizing, search, OCR, password, print and share. Your files stay on your device. An app by Nibras Code.", features: ["Pen, highlighter and signature on PDFs", "Organize pages", "Search, OCR and password"] },
@@ -1381,6 +1425,8 @@ function jsonLd(path: string, lang: Lang, copy: PageSeo, url: string) {
       "/apps/nibras-qr": "Nibras QR",
       "/apps/nibras-docs": "Nibras Docs",
       "/apps/nibras-plans": "Nibras Plans",
+      "/apps/nibras-note": "Nibras Note",
+      "/apps/nibras-scan": "Nibras Scan",
     };
     const categories: Record<string, string> = {
       "/apps/nibras-arabic": "EducationalApplication",
@@ -1388,6 +1434,8 @@ function jsonLd(path: string, lang: Lang, copy: PageSeo, url: string) {
       "/apps/nibras-qr": "UtilitiesApplication",
       "/apps/nibras-docs": "BusinessApplication",
       "/apps/nibras-plans": "BusinessApplication",
+      "/apps/nibras-note": "ProductivityApplication",
+      "/apps/nibras-scan": "UtilitiesApplication",
     };
     return {
       "@context": "https://schema.org",
