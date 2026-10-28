@@ -1,9 +1,10 @@
 // Tool names and one-line descriptions, taken from the Nibras PDF app (5 languages).
-export const TOOL_IDS = ["write-pdf","merge","split","compress","image-pdf","pdf-image","rotate","protect","watermark","pages","scan","sign","ocr","pdf-ocr","pdf-word","preview","batch","extract-pages","word-pdf","page-numbers","unlock","crop","grayscale","excel-pdf","redact","invoice","pdf-excel","ppt-pdf"] as const;
+export const TOOL_IDS = ["write-pdf","merge","split","compress","image-pdf","pdf-image","rotate","protect","watermark","pages","scan","sign","ocr","pdf-ocr","pdf-word","preview","batch","extract-pages","word-pdf","page-numbers","unlock","crop","grayscale","excel-pdf","redact","invoice","pdf-excel","ppt-pdf","pdf-ppt"] as const;
 export type ToolId = (typeof TOOL_IDS)[number];
 export const TOOL_TEXT: Record<"az" | "en" | "tr" | "ar" | "ru", Record<ToolId, { title: string; description: string }>> = {
   "az": {
     "pdf-excel": { "title": "PDF-dən Excel", "description": "PDF cədvəlini XLSX faylına çevir" },
+    "pdf-ppt": { "title": "PDF-dən PowerPoint", "description": "PDF səhifələrini PPTX slaydlarına çevir" },
     "ppt-pdf": { "title": "PowerPoint-dən PDF", "description": "PPTX slaydlarını PDF et" },
     "unlock": {
       "title": "PDF parolunu aç",
@@ -112,6 +113,7 @@ export const TOOL_TEXT: Record<"az" | "en" | "tr" | "ar" | "ru", Record<ToolId, 
   },
   "en": {
     "pdf-excel": { "title": "PDF to Excel", "description": "Turn PDF tables into an XLSX file" },
+    "pdf-ppt": { "title": "PDF to PowerPoint", "description": "Turn PDF pages into PPTX slides" },
     "ppt-pdf": { "title": "PowerPoint to PDF", "description": "Turn PPTX slides into a PDF" },
     "unlock": {
       "title": "Unlock PDF",
@@ -220,6 +222,7 @@ export const TOOL_TEXT: Record<"az" | "en" | "tr" | "ar" | "ru", Record<ToolId, 
   },
   "tr": {
     "pdf-excel": { "title": "PDF'ten Excel", "description": "PDF tablolarını XLSX dosyasına çevirin" },
+    "pdf-ppt": { "title": "PDF'ten PowerPoint", "description": "PDF sayfalarını PPTX slaytlarına çevirin" },
     "ppt-pdf": { "title": "PowerPoint'ten PDF", "description": "PPTX slaytlarını PDF yapın" },
     "unlock": {
       "title": "PDF parolasını kaldır",
@@ -328,6 +331,7 @@ export const TOOL_TEXT: Record<"az" | "en" | "tr" | "ar" | "ru", Record<ToolId, 
   },
   "ru": {
     "pdf-excel": { "title": "PDF в Excel", "description": "Превратите таблицы PDF в файл XLSX" },
+    "pdf-ppt": { "title": "PDF в PowerPoint", "description": "Превратите страницы PDF в слайды PPTX" },
     "ppt-pdf": { "title": "PowerPoint в PDF", "description": "Превратите слайды PPTX в PDF" },
     "unlock": {
       "title": "Снять пароль с PDF",
@@ -436,6 +440,7 @@ export const TOOL_TEXT: Record<"az" | "en" | "tr" | "ar" | "ru", Record<ToolId, 
   },
   "ar": {
     "pdf-excel": { "title": "من PDF إلى Excel", "description": "حوّل جداول PDF إلى ملف XLSX" },
+    "pdf-ppt": { "title": "من PDF إلى PowerPoint", "description": "حوّل صفحات PDF إلى شرائح PPTX" },
     "ppt-pdf": { "title": "من PowerPoint إلى PDF", "description": "حوّل شرائح PPTX إلى PDF" },
     "unlock": {
       "title": "إزالة كلمة مرور PDF",

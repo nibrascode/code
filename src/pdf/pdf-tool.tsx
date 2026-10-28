@@ -25,7 +25,7 @@ const ICONS: Record<ToolId, typeof FileText> = {
   "write-pdf": PenLine, merge: Files, split: Scissors, compress: Minimize2, "image-pdf": ImageIcon, "pdf-image": FileImage,
   rotate: RotateCw, protect: Lock, watermark: Droplet, pages: ListOrdered, scan: ScanLine, sign: PenLine, ocr: ScanText,
   "pdf-ocr": FileType2, "pdf-word": FileOutput, preview: Eye, batch: Layers, "extract-pages": Check, "word-pdf": FilePlus2, "page-numbers": Hash,
-  unlock: Unlock, crop: Crop, grayscale: Contrast, "excel-pdf": Table2, redact: EyeOff, invoice: Receipt, "pdf-excel": Sheet, "ppt-pdf": Presentation,
+  unlock: Unlock, crop: Crop, grayscale: Contrast, "excel-pdf": Table2, redact: EyeOff, invoice: Receipt, "pdf-excel": Sheet, "ppt-pdf": Presentation, "pdf-ppt": Presentation,
 };
 
 type Kind = "pdf" | "pdfs" | "images" | "docx" | "sheet" | "pptx" | "none";
@@ -33,7 +33,7 @@ const KIND: Record<ToolId, Kind> = {
   "write-pdf": "none", merge: "pdfs", split: "pdf", compress: "pdf", "image-pdf": "images", "pdf-image": "pdf", rotate: "pdf",
   protect: "pdf", watermark: "pdf", pages: "pdf", scan: "images", sign: "pdf", ocr: "images", "pdf-ocr": "pdf", "pdf-word": "pdf",
   preview: "pdf", batch: "pdfs", "extract-pages": "pdf", "word-pdf": "docx", "page-numbers": "pdf",
-  unlock: "pdf", crop: "pdf", grayscale: "pdf", "excel-pdf": "sheet", redact: "pdf", invoice: "none", "pdf-excel": "pdf", "ppt-pdf": "pptx",
+  unlock: "pdf", crop: "pdf", grayscale: "pdf", "excel-pdf": "sheet", redact: "pdf", invoice: "none", "pdf-excel": "pdf", "ppt-pdf": "pptx", "pdf-ppt": "pdf",
 };
 
 type Item = { id: number; file: File; name: string; bytes?: Uint8Array; pages?: number; locked?: boolean; wasLocked?: boolean; bad?: boolean };
@@ -47,7 +47,7 @@ const WM_POS: { id: WatermarkPosition; s: string }[] = [
 
 const GROUPS: { id: string; tools: ToolId[]; label: Record<Lang, string> }[] = [
   { id: "organize", tools: ["merge", "split", "pages", "extract-pages", "rotate", "page-numbers", "crop", "batch"], label: { az: "Səhifələri idarə et", en: "Organize", tr: "Sayfaları düzenle", ar: "تنظيم الصفحات", ru: "Страницы и файлы" } },
-  { id: "convert", tools: ["pdf-image", "pdf-word", "word-pdf", "pdf-excel", "excel-pdf", "ppt-pdf", "pdf-ocr", "ocr", "grayscale", "preview"], label: { az: "Çevir və oxu", en: "Convert & read", tr: "Dönüştür ve oku", ar: "تحويل وقراءة", ru: "Конвертация и чтение" } },
+  { id: "convert", tools: ["pdf-image", "pdf-word", "word-pdf", "pdf-excel", "excel-pdf", "ppt-pdf", "pdf-ppt", "pdf-ocr", "ocr", "grayscale", "preview"], label: { az: "Çevir və oxu", en: "Convert & read", tr: "Dönüştür ve oku", ar: "تحويل وقراءة", ru: "Конвертация и чтение" } },
   { id: "create", tools: ["write-pdf", "image-pdf", "scan", "invoice"], label: { az: "Hazırla", en: "Create", tr: "Oluştur", ar: "إنشاء", ru: "Создание" } },
   { id: "secure", tools: ["compress", "protect", "unlock", "redact", "watermark", "sign"], label: { az: "Optimallaşdır və qoru", en: "Optimize & protect", tr: "Optimize et ve koru", ar: "تحسين وحماية", ru: "Сжатие и защита" } },
 ];
@@ -504,6 +504,13 @@ function Workspace({ tool, lang, t, title, desc }: { tool: ToolId; lang: Lang; t
           }
           res.push(zipOut("batch.zip", files));
           if (files.length <= 10) files.forEach((x) => res.push(pdfOut(x.name, x.data)));
+          break;
+        }
+        case "pdf-ppt": {
+          need();
+          const blobs = await eng.pdfToImages(f.bytes!, "jpeg", "high", progress(t.working), stop);
+          const { imagesToPptx } = await import("./lib/images-to-pptx");
+          res.push({ name: `${baseName(f.name)}.pptx`, blob: await imagesToPptx(blobs, "jpg"), kind: "zip", note: `${blobs.length} slides` });
           break;
         }
         case "pdf-excel": {

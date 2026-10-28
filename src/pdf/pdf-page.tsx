@@ -55,6 +55,7 @@ const NEXT: Partial<Record<ToolId, ToolId[]>> = {
   grayscale: ["compress", "page-numbers", "merge"],
   "excel-pdf": ["pdf-excel", "word-pdf", "merge"],
   "pdf-excel": ["excel-pdf", "pdf-word", "pdf-ocr"],
+  "pdf-ppt": ["ppt-pdf", "pdf-image", "pdf-word"],
   "ppt-pdf": ["word-pdf", "compress", "merge"],
   redact: ["protect", "sign", "watermark"],
   invoice: ["sign", "protect", "merge"],

@@ -73,6 +73,13 @@ const INTENT: Partial<Record<ToolId, Record<Lang, { title: string; h1: string; d
     ar: { title: "تحويل PDF إلى أبيض وأسود — مجاناً", h1: "PDF بالرمادي", description: "حوّل PDF الملوّن إلى درجات الرمادي للطباعة" },
     ru: { title: "PDF в чёрно-белый — бесплатно", h1: "PDF в оттенки серого", description: "Переведите цветной PDF в оттенки серого для печати" },
   },
+  "pdf-ppt": {
+    az: { title: "PDF-dən PowerPoint — pulsuz", h1: "PDF-i PPTX-ə çevir", description: "Hər PDF səhifəsi ayrıca PowerPoint slaydı olur; fayl serverə getmir" },
+    en: { title: "PDF to PowerPoint — free", h1: "Convert PDF to PPTX", description: "Each PDF page becomes a PowerPoint slide; the file never leaves your browser" },
+    tr: { title: "PDF'ten PowerPoint — ücretsiz", h1: "PDF'yi PPTX'e dönüştür", description: "Her PDF sayfası ayrı bir PowerPoint slaytı olur; dosya sunucuya gitmez" },
+    ar: { title: "من PDF إلى PowerPoint — مجاناً", h1: "تحويل PDF إلى PPTX", description: "كل صفحة PDF تصبح شريحة PowerPoint؛ لا يغادر الملف متصفحك" },
+    ru: { title: "PDF в PowerPoint — бесплатно", h1: "Конвертировать PDF в PPTX", description: "Каждая страница PDF становится слайдом PowerPoint; файл не уходит на сервер" },
+  },
   "pdf-excel": {
     az: { title: "PDF-dən Excel — pulsuz", h1: "PDF-dən Excel-ə çevir", description: "PDF-dəki cədvəl və mətni XLSX vərəqinə köçür, brauzerdə" },
     en: { title: "PDF to Excel — free", h1: "Convert PDF to Excel", description: "Move tables and text from a PDF into an XLSX sheet, in your browser" },
@@ -282,6 +289,13 @@ const FAQS: Partial<Record<ToolId, Record<Lang, { q: string; a: string }[]>>> = 
       { q: "Зачем серый?", a: "При чёрно-белой печати не тратится цветной тонер, и результат виден заранее." },
       { q: "Файл уходит на сервер?", a: "Нет. Всё делается в этом браузере." },
     ],
+  },
+  "pdf-ppt": {
+    az: [{ q: "Slaydları redaktə etmək olar?", a: "Hər səhifə slayda yüksək keyfiyyətli şəkil kimi qoyulur: görünüş eynilə qalır, üstünə yeni mətn və forma əlavə edə bilərsiniz. Mətni dəyişmək lazımdırsa, əvvəlcə PDF-dən Word alətini işlədin." }, { q: "Fayl serverə gedir?", a: "Xeyr. Çevirmə brauzerdə, cihazınızda gedir." }],
+    en: [{ q: "Can I edit the slides?", a: "Each page is placed on a slide as a high-quality picture, so the look stays the same and you can add new text and shapes on top. To change the original text, use PDF to Word first." }, { q: "Is the file uploaded?", a: "No. The conversion runs in your browser, on your device." }],
+    tr: [{ q: "Slaytlar düzenlenebilir mi?", a: "Her sayfa slayta yüksek kaliteli resim olarak konur: görünüm aynı kalır, üstüne yeni metin ve şekil ekleyebilirsiniz. Asıl metni değiştirmek için önce PDF'ten Word aracını kullanın." }, { q: "Dosya sunucuya gider mi?", a: "Hayır. Dönüştürme tarayıcıda, cihazınızda yapılır." }],
+    ar: [{ q: "هل يمكن تعديل الشرائح؟", a: "توضع كل صفحة على شريحة كصورة عالية الجودة، فيبقى الشكل كما هو ويمكنك إضافة نص وأشكال فوقها. لتعديل النص الأصلي استخدم أداة PDF إلى Word أولاً." }, { q: "هل يُرفع الملف؟", a: "لا. يتم التحويل في متصفحك على جهازك." }],
+    ru: [{ q: "Можно редактировать слайды?", a: "Каждая страница ставится на слайд как качественная картинка: вид не меняется, сверху можно добавить текст и фигуры. Чтобы менять исходный текст, сначала используйте PDF в Word." }, { q: "Файл загружается на сервер?", a: "Нет. Конвертация идёт в браузере, на вашем устройстве." }],
   },
   "pdf-excel": {
     az: [{ q: "Cədvəl dəqiq köçür?", a: "Sütunlar mətnin səhifədəki yerinə görə qurulur. Sadə cədvəllər yaxşı çıxır; birləşmiş xana, çox sətirli xana və çərçivəsiz mürəkkəb cədvəli yoxlayın." }, { q: "Skan PDF olar?", a: "Skanda mətn qatı yoxdur. Əvvəl «PDF-dən mətn (OCR)» alətini işlədin." }, { q: "Fayl serverə gedir?", a: "Xeyr. Hər şey bu brauzerdə olur." }],
