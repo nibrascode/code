@@ -31,7 +31,7 @@ export const TOOL_TEXT: Record<"az" | "en" | "tr" | "ar" | "ru", Record<ToolId, 
     },
     "write-pdf": {
       "title": "Sadə PDF düzəlt",
-      "description": "Sadə səhifədə yazın və PDF-i düzəldin"
+      "description": "Yazın və ya hazır şablon seçin: ərizə nümunəsi, sadə CV, izahnamə, qiymət təklifi"
     },
     "merge": {
       "title": "Birləşdir",
@@ -139,7 +139,7 @@ export const TOOL_TEXT: Record<"az" | "en" | "tr" | "ar" | "ru", Record<ToolId, 
     },
     "write-pdf": {
       "title": "Simple PDF editor",
-      "description": "Write on a simple page and edit it into a PDF"
+      "description": "Type or pick a template: application letter, simple CV, explanatory note, price quote"
     },
     "merge": {
       "title": "Merge",
@@ -247,7 +247,7 @@ export const TOOL_TEXT: Record<"az" | "en" | "tr" | "ar" | "ru", Record<ToolId, 
     },
     "write-pdf": {
       "title": "Basit PDF düzenle",
-      "description": "Basit bir sayfaya yazın ve PDF olarak düzenleyin"
+      "description": "Yazın veya şablon seçin: dilekçe, basit CV, açıklama yazısı, fiyat teklifi"
     },
     "merge": {
       "title": "Birleştir",
@@ -355,7 +355,7 @@ export const TOOL_TEXT: Record<"az" | "en" | "tr" | "ar" | "ru", Record<ToolId, 
     },
     "write-pdf": {
       "title": "Простой редактор PDF",
-      "description": "Пишите на простой странице и создавайте PDF"
+      "description": "Пишите или выберите шаблон: заявление, резюме, объяснительная, коммерческое предложение"
     },
     "merge": {
       "title": "Объединить",
@@ -463,7 +463,7 @@ export const TOOL_TEXT: Record<"az" | "en" | "tr" | "ar" | "ru", Record<ToolId, 
     },
     "write-pdf": {
       "title": "محرر PDF البسيط",
-      "description": "اكتب على صفحة بسيطة وحوّلها إلى PDF"
+      "description": "اكتب أو اختر قالباً: طلب، سيرة ذاتية، مذكرة توضيحية، عرض سعر"
     },
     "merge": {
       "title": "دمج",

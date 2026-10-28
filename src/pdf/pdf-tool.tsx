@@ -1,4 +1,5 @@
 import { takeHandOff } from "@/lib/handoff";
+import { DOC_TEMPLATES, TEMPLATE_LABEL } from "./templates";
 import { useNavigate } from "@tanstack/react-router";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
@@ -209,6 +210,12 @@ function Workspace({ tool, lang, t, title, desc }: { tool: ToolId; lang: Lang; t
       if (d?.text) { setWText(d.text); setWTitle(d.title ?? ""); }
     } catch { /* ignore */ }
   }, [tool]);
+  useEffect(() => {
+    if (tool !== "write-pdf") return;
+    const id = new URLSearchParams(location.search).get("t");
+    const tp = id && DOC_TEMPLATES.find((x) => x.id === id);
+    if (tp) { setWTitle(tp.title[lang] ?? tp.title.az); setWText(tp.body[lang] ?? tp.body.az); }
+  }, [tool, lang]);
   useEffect(() => {
     if (tool !== "write-pdf") return;
     const h = setTimeout(() => localStorage.setItem("nibras-pdf-draft", JSON.stringify({ text: wText, title: wTitle })), 400);
@@ -792,6 +799,14 @@ function Workspace({ tool, lang, t, title, desc }: { tool: ToolId; lang: Lang; t
           ) : null}
           {tool === "write-pdf" ? (
             <div className="space-y-3">
+              <div data-testid="w-templates">
+                <Label>{TEMPLATE_LABEL[lang] ?? TEMPLATE_LABEL.az}</Label>
+                <div className="flex flex-wrap gap-2">
+                  {DOC_TEMPLATES.map((tp) => (
+                    <a key={tp.id} href={`?t=${tp.id}`} className="rounded-full border border-white/15 bg-white/[0.06] px-3 py-1.5 text-sm hover:bg-white/10" onClick={(e) => { e.preventDefault(); if ((wText.trim() && !confirm(tp.label[lang] + "?"))) return; setWTitle(tp.title[lang] ?? tp.title.az); setWText(tp.body[lang] ?? tp.body.az); history.replaceState(null, "", `?t=${tp.id}`); }}>{tp.label[lang] ?? tp.label.az}</a>
+                  ))}
+                </div>
+              </div>
               <input className={field} dir="auto" placeholder={t.docTitle} value={wTitle} onChange={(e) => setWTitle(e.target.value)} data-testid="w-title" />
               <textarea className={`${field} h-56 resize-y`} dir="auto" placeholder={t.writePlaceholder} value={wText} onChange={(e) => setWText(e.target.value)} data-testid="w-text" />
               <div className="grid gap-4 sm:grid-cols-2">
