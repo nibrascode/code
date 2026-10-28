@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Copy, Mic, Square, Trash2 } from "lucide-react";
 import type { Lang } from "@/lib/i18n";
+import { localeHref } from "@/lib/locale-path";
+import { ExternalLink } from "lucide-react";
 
 type L = Record<Lang, string>;
 const T = (az: string, en: string, tr: string, ar: string, ru: string): L => ({ az, en, tr, ar, ru });
@@ -8,8 +10,8 @@ const T = (az: string, en: string, tr: string, ar: string, ru: string): L => ({ 
 const S = {
   title: T("Səsdən mətnə", "Speech to text", "Sesten metne", "تحويل الصوت إلى نص", "Голос в текст"),
   lead: T(
-    "Danış, mətn yazılsın. Pulsuz, qeydiyyatsız, brauzerdə.",
-    "Speak and the text is typed. Free, no sign-up, in your browser.",
+    "Danış, mətn yazılsın. Pulsuz, qeydiyyatsız.",
+    "Speak and the text is typed. Free, no sign-up.",
     "Konuş, metin yazılsın. Ücretsiz, kayıtsız, tarayıcıda.",
     "تحدّث ويُكتب النص. مجاناً، بلا تسجيل، في المتصفح.",
     "Говорите — текст печатается. Бесплатно, без регистрации, в браузере.",
@@ -34,6 +36,22 @@ const S = {
     "الميكروفون أو التعرف على الصوت محظور. اسمح به من إعدادات المتصفح أو افتح الرابط في المتصفح مباشرة.",
     "Микрофон или распознавание речи запрещены. Разрешите в настройках браузера или откройте ссылку прямо в браузере.",
   ),
+  steps: T(
+    "Android Chrome: ünvan sətrindəki kilid → Sayt ayarları → Mikrofon → İcazə ver, sonra səhifəni yenilə. iPhone Safari: ünvan sətrində «AA» → Veb sayt ayarları → Mikrofon → İcazə ver (və ya Ayarlar → Safari → Mikrofon). Telegram, Instagram kimi tətbiqlərin içində yox, Chrome və ya Safari-də aç.",
+    "Android Chrome: tap the lock in the address bar → Site settings → Microphone → Allow, then reload. iPhone Safari: tap «AA» in the address bar → Website Settings → Microphone → Allow (or Settings → Safari → Microphone). Open it in Chrome or Safari, not inside Telegram or Instagram.",
+    "Android Chrome: adres çubuğundaki kilit → Site ayarları → Mikrofon → İzin ver, sonra sayfayı yenile. iPhone Safari: adres çubuğunda «AA» → Web Sitesi Ayarları → Mikrofon → İzin ver (veya Ayarlar → Safari → Mikrofon). Telegram, Instagram içinde değil, Chrome veya Safari'de aç.",
+    "أندرويد Chrome: اضغط القفل في شريط العنوان ← إعدادات الموقع ← الميكروفون ← السماح، ثم أعد التحميل. آيفون Safari: اضغط «AA» ← إعدادات موقع الويب ← الميكروفون ← السماح (أو الإعدادات ← Safari ← الميكروفون). افتحه في Chrome أو Safari وليس داخل Telegram أو Instagram.",
+    "Android Chrome: замок в адресной строке → Настройки сайта → Микрофон → Разрешить, затем обновите. iPhone Safari: «AA» в адресной строке → Настройки веб-сайта → Микрофон → Разрешить (или Настройки → Safari → Микрофон). Открывайте в Chrome или Safari, а не внутри Telegram или Instagram.",
+  ),
+  embedded: T(
+    "Bu səhifə tətbiq içində və ya çərçivədə açılıb — mikrofon burada çox vaxt bağlı olur. Brauzerdə aç.",
+    "This page is open inside an app or a frame, where the microphone is often blocked. Open it in your browser.",
+    "Bu sayfa bir uygulama veya çerçeve içinde açık; mikrofon burada çoğu zaman kapalıdır. Tarayıcıda aç.",
+    "هذه الصفحة مفتوحة داخل تطبيق أو إطار، وغالباً ما يكون الميكروفون محظوراً هنا. افتحها في المتصفح.",
+    "Страница открыта внутри приложения или фрейма — там микрофон часто заблокирован. Откройте в браузере.",
+  ),
+  openBrowser: T("Brauzerdə aç", "Open in browser", "Tarayıcıda aç", "افتح في المتصفح", "Открыть в браузере"),
+  copyLink: T("Linki kopyala", "Copy link", "Bağlantıyı kopyala", "نسخ الرابط", "Копировать ссылку"),
   audio: T("Mikrofon tapılmadı və ya başqa tətbiq onu istifadə edir.", "No microphone found, or another app is using it.", "Mikrofon bulunamadı veya başka uygulama kullanıyor.", "لم يُعثر على ميكروفون أو أن تطبيقاً آخر يستخدمه.", "Микрофон не найден или занят другим приложением."),
   network: T("İnternet lazımdır: səs tanıma onlayn işləyir.", "Internet needed: recognition works online.", "İnternet gerekli: ses tanıma çevrim içi çalışır.", "يلزم اتصال بالإنترنت: التعرف يعمل عبر الشبكة.", "Нужен интернет: распознавание работает онлайн."),
   langNo: T("Bu dil bu cihazda dəstəklənmir. Başqa dil seç.", "This language is not supported on this device. Pick another.", "Bu dil bu cihazda desteklenmiyor. Başka dil seç.", "هذه اللغة غير مدعومة على هذا الجهاز. اختر لغة أخرى.", "Этот язык не поддерживается на устройстве. Выберите другой."),
@@ -46,12 +64,13 @@ const S = {
     "Это окно не поддерживает распознавание речи. Откройте ссылку в Chrome (Android, ПК), Edge или Safari (iPhone).",
   ),
   privacy: T(
-    "Səs brauzerin səs tanıma xidmətinə gedir (Chrome-da onlayn). Nibras Code serverinə heç nə göndərilmir; mətn yalnız bu cihazda saxlanır. Firefox dəstəkləmir.",
-    "Audio goes to the browser's own recognition service (online in Chrome). Nothing is sent to Nibras Code; the text is stored only on this device. Firefox is not supported.",
-    "Ses tarayıcının tanıma hizmetine gider (Chrome'da çevrim içi). Nibras Code'a hiçbir şey gönderilmez; metin yalnız bu cihazda saklanır. Firefox desteklenmez.",
-    "يذهب الصوت إلى خدمة التعرف في المتصفح (عبر الإنترنت في Chrome). لا يُرسل شيء إلى Nibras Code، ويُحفظ النص على هذا الجهاز فقط. Firefox غير مدعوم.",
-    "Звук идёт в сервис распознавания браузера (онлайн в Chrome). В Nibras Code ничего не отправляется, текст хранится только на этом устройстве. Firefox не поддерживается.",
+    "Danışarkən səsin brauzerin səs tanıma xidmətinə yüklənir (Chrome-da Google, Safari-də Apple). Səs yalnız cihazda qalmır. Alınan mətn bu cihazda saxlanır; Nibras Code serverinə heç nə göndərilmir. Firefox dəstəkləmir.",
+    "While you speak, the audio is uploaded to the browser's speech-recognition service (Google in Chrome, Apple in Safari). The audio does not stay only on your device. The resulting text is stored on this device; nothing is sent to Nibras Code servers. Firefox is not supported.",
+    "Konuşurken ses tarayıcının ses tanıma hizmetine yüklenir (Chrome'da Google, Safari'de Apple). Ses yalnız cihazda kalmaz. Çıkan metin bu cihazda saklanır; Nibras Code sunucularına hiçbir şey gönderilmez. Firefox desteklenmez.",
+    "أثناء الكلام يُرفع الصوت إلى خدمة التعرف على الكلام في المتصفح (Google في Chrome وApple في Safari)، فلا يبقى الصوت على جهازك فقط. يُحفظ النص الناتج على هذا الجهاز، ولا يُرسل شيء إلى خوادم Nibras Code. Firefox غير مدعوم.",
+    "Пока вы говорите, звук загружается в сервис распознавания браузера (Google в Chrome, Apple в Safari) — он не остаётся только на устройстве. Полученный текст хранится на этом устройстве; на серверы Nibras Code ничего не отправляется. Firefox не поддерживается.",
   ),
+  upHint: T("Danışarkən səs tanıma xidmətinə yüklənir", "Audio is uploaded to the recognition service while you speak", "Konuşurken ses tanıma hizmetine yüklenir", "يُرفع الصوت إلى خدمة التعرف أثناء الكلام", "Во время речи звук загружается в сервис распознавания"),
 };
 
 export const VOICE_TITLE = S.title;
@@ -91,6 +110,8 @@ export function VoicePage({ lang }: { lang: Lang }) {
   const [note, setNote] = useState<{ t: string; err: boolean } | null>(null);
   const [armed, setArmed] = useState(false);
   const [supported, setSupported] = useState(true);
+  const [embedded, setEmbedded] = useState(false);
+  const [denied, setDenied] = useState(false);
   const recRef = useRef<Rec>(null);
   const want = useRef(false);
   const locRef = useRef(loc);
@@ -103,6 +124,9 @@ export function VoicePage({ lang }: { lang: Lang }) {
   useEffect(() => {
     const SR = (window as Rec).SpeechRecognition || (window as Rec).webkitSpeechRecognition;
     setSupported(!!SR);
+    let framed = false;
+    try { framed = window.top !== window.self; } catch { framed = true; }
+    setEmbedded(framed || /FBAN|FBAV|Instagram|\bLine\/|Twitter|MicroMessenger|Telegram|; wv\)|\bWV\b/i.test(navigator.userAgent));
     const saved = store.get("stt-lang");
     if (saved && LOCALES.some(([v]) => v === saved)) { setLoc(saved); locRef.current = saved; }
     setText(store.get("stt-text") || "");
@@ -152,6 +176,7 @@ export function VoicePage({ lang }: { lang: Lang }) {
         "not-allowed": tt("deny"), "service-not-allowed": tt("deny"),
         "audio-capture": tt("audio"), network: tt("network"), "language-not-supported": tt("langNo"),
       };
+      if (e.error === "not-allowed" || e.error === "service-not-allowed") setDenied(true);
       if (map[e.error]) { want.current = false; say(map[e.error]); }
       else if (e.error !== "no-speech" && e.error !== "aborted") say(tt("err") + e.error);
     };
@@ -163,14 +188,28 @@ export function VoicePage({ lang }: { lang: Lang }) {
     try { r.start(); } catch { want.current = false; setOn(false); }
   }, [add, say]);
 
-  const toggle = () => {
+  const toggle = async () => {
     if (want.current) {
       want.current = false;
       try { recRef.current?.stop(); } catch { /* */ }
       setOn(false); setInterim("");
       return;
     }
-    say(""); want.current = true; begin();
+    say(""); setDenied(false); want.current = true;
+    const md = navigator.mediaDevices;
+    if (!md?.getUserMedia) { begin(); return; }
+    try {
+      const st = await md.getUserMedia({ audio: true });
+      st.getTracks().forEach((tr) => tr.stop());
+    } catch (e) {
+      want.current = false;
+      const n = (e as { name?: string })?.name;
+      if (n === "NotAllowedError" || n === "SecurityError") { setDenied(true); say(t("deny")); }
+      else if (n === "NotFoundError" || n === "NotReadableError") say(t("audio"));
+      else say(t("err") + (n || "mic"));
+      return;
+    }
+    if (want.current) begin();
   };
 
   const changeLoc = (v: string) => {
@@ -194,6 +233,7 @@ export function VoicePage({ lang }: { lang: Lang }) {
     clearTimeout(armTm.current); setArmed(false); setText("");
   };
 
+  const absUrl = "https://nibrascode.com" + localeHref(lang, "/voice");
   const words = (text.trim().match(/\S+/g) || []).length;
   const shownNote = !supported ? { t: t("unsupported"), err: true } : note;
 
@@ -228,6 +268,7 @@ export function VoicePage({ lang }: { lang: Lang }) {
         <p className={`min-h-[1.5em] text-center text-sm ${interim ? "italic text-white/80" : "text-muted"}`} aria-live="polite">
           {interim || (on ? t("listening") : t("ready"))}
         </p>
+        <p className="-mt-2 text-center text-[11px] text-white/45">{t("upHint")}</p>
       </div>
 
       <div className={`voice-sheet${on ? " on-air" : ""}`}>
@@ -250,6 +291,18 @@ export function VoicePage({ lang }: { lang: Lang }) {
 
       {shownNote ? (
         <p role="status" className={`mt-3 rounded-xl px-4 py-2 text-sm ${shownNote.err ? "border border-red-400/30 bg-red-500/10 text-red-200" : "border border-emerald-400/30 bg-emerald-500/10 text-emerald-200"}`}>{shownNote.t}</p>
+      ) : null}
+
+      {embedded || denied ? (
+        <div className="mt-3 rounded-xl border border-amber-200/30 bg-amber-200/[0.06] p-4 text-sm text-[#e8eeff]">
+          {embedded ? <p className="mb-2">{t("embedded")}</p> : null}
+          {denied ? <p className="mb-3 text-[#d5def0]">{t("steps")}</p> : null}
+          <div className="flex flex-wrap gap-2">
+            <a href={absUrl} target="_blank" rel="noopener" className="inline-flex items-center gap-1.5 rounded-full bg-amber-200 px-4 py-1.5 font-semibold text-[#0c1220]"><ExternalLink size={15} />{t("openBrowser")}</a>
+            <button type="button" className="voice-btn" onClick={async () => { try { await navigator.clipboard.writeText(absUrl); say(t("copied"), 1800); } catch { say(absUrl); } }}><Copy size={15} />{t("copyLink")}</button>
+          </div>
+          <p className="mt-2 break-all text-xs text-muted" dir="ltr">{absUrl}</p>
+        </div>
       ) : null}
 
       <p className="mt-6 text-xs leading-relaxed text-muted">{t("privacy")}</p>
