@@ -2,9 +2,9 @@
  * One permanent hop from legacy `?lang=xx` URLs to path locales (`/xx/...`),
  * dropping the `lang` query and any trailing slash.
  */
-import { legacySectionRedirect } from "../../src/lib/section-slugs";
+import { legacySectionRedirect, localizeSection } from "../../src/lib/section-slugs";
 
-const PAGES = /^\/(services|why|unutma|guides|privacy|resources|resurslar|programming|about|contact|terms|trust|nedir|apps|qr|erase|image|vcard|zip|video|planner|calc|ai|soz-sayi|faiz|wifi|seo|flow|logic|unknown|pdf|oyun)(\/.*)?$/;
+const PAGES = /^\/(services|why|unutma|guides|privacy|resources|resurslar|programming|about|contact|terms|trust|nedir|apps|qr|erase|image|vcard|zip|video|planner|calc|ai|soz-sayi|faiz|wifi|seo|flow|logic|unknown|pdf|oyun|doctor|studio|learn|workspace|filecheck|schema|shortcuts|mirror|tools-legal|error-help|paket|planner|vcard)(\/.*)?$/;
 
 interface LangEvent {
   url: URL;
@@ -30,6 +30,6 @@ export default function langRedirectMiddleware(event: LangEvent, next: () => unk
   const qs = params.toString();
   return new Response(null, {
     status: 308,
-    headers: { location: `/${lang}${path}${qs ? `?${qs}` : ""}`, "cache-control": "public, max-age=3600" },
+    headers: { location: `${localizeSection(`/${lang}${path}`)}${qs ? `?${qs}` : ""}`, "cache-control": "public, max-age=3600" },
   });
 }

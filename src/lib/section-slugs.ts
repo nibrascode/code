@@ -2,7 +2,20 @@
  * Localized first URL segment per language for sections whose route files use
  * AZ slugs (e.g. public `/en/how-to/x` is served by route `/en/nece/$slug`).
  */
-import { ARTICLE_SLUGS } from "./article-slugs.generated";
+import { ARTICLE_SLUGS as GENERATED_SLUGS } from "./article-slugs.generated";
+
+type Loc4 = { en: string; tr: string; ar: string; ru: string };
+/** Hand-kept localized child slugs (not generated). */
+const MANUAL_SLUGS: Record<string, Record<string, Loc4>> = {
+  programming: {
+    "numune-kod": { en: "sample-code", tr: "ornek-kod", ar: "amthilat-alkod", ru: "primery-koda" },
+    "tetbiq-kodu": { en: "app-code", tr: "uygulama-kodu", ar: "kod-altatbiq", ru: "kod-prilozheniya" },
+    "oyun-kodu": { en: "game-code", tr: "oyun-kodlari", ar: "kod-allueba", ru: "kod-igry" },
+    "sayt-kodu": { en: "website-code", tr: "site-kodu", ar: "kod-almawqi", ru: "kod-sayta" },
+  },
+};
+const ARTICLE_SLUGS: Record<string, Record<string, Loc4>> = { ...GENERATED_SLUGS };
+for (const [sec, items] of Object.entries(MANUAL_SLUGS)) ARTICLE_SLUGS[sec] = { ...(ARTICLE_SLUGS[sec] ?? {}), ...items };
 
 type L4 = "en" | "tr" | "ar" | "ru";
 
