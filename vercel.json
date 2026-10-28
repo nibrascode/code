@@ -401,15 +401,15 @@
   "rewrites": [
     {
       "source": "/audio",
-      "destination": "https://audio.nibrascode.com/audio"
+      "destination": "https://audio-nibrascode-1188.vercel.app/audio"
     },
     {
       "source": "/audio/",
-      "destination": "https://audio.nibrascode.com/audio"
+      "destination": "https://audio-nibrascode-1188.vercel.app/audio"
     },
     {
       "source": "/audio/:path*",
-      "destination": "https://audio.nibrascode.com/audio/:path*"
+      "destination": "https://audio-nibrascode-1188.vercel.app/audio/:path*"
     }
   ]
 }
