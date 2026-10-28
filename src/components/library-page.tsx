@@ -1,3 +1,4 @@
+import { ProgMicroTool } from "@/components/prog-tools";
 import { InfoCard, InfoCards, splitSentences } from "@/components/info-card";
 import { useEffect, useState, type ReactNode } from "react";
 import { ArrowUpRight, BookOpen, Boxes, Braces, Briefcase, Bug, CircleHelp, Code, Database, FileCode, GitCompare, GraduationCap, Info, ListChecks, MessageCircleQuestion, Package, Server, Shield, Sparkles, Terminal, Wrench } from "lucide-react";
@@ -1405,6 +1406,7 @@ export function ProgrammingArticle({
         </p>
       ) : null}
       {intro}
+      <ProgMicroTool slug={slug} />
       <div className="prog-sections">
         {sections?.map((item, itemIndex) => (
           <details key={`${item.id}-${itemIndex}`} id={item.id} className="prog-fold" open={openAll || undefined}>
