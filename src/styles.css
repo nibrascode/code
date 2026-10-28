@@ -11859,3 +11859,18 @@ html[lang="ar"] .why-lead.topic-body,
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 8px;
 }
+
+/* Services hub accordion */
+.svc-list { display: flex; flex-direction: column; gap: 8px; margin-top: 24px; max-width: 640px; }
+.svc-cat { border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; background: rgba(255,255,255,0.02); }
+.svc-cat summary { display: flex; align-items: center; gap: 12px; padding: 14px 16px; cursor: pointer; list-style: none; font-weight: 600; }
+.svc-cat summary::-webkit-details-marker { display: none; }
+.svc-ico { display: inline-flex; width: 30px; height: 30px; align-items: center; justify-content: center; border-radius: 8px; background: rgba(255,255,255,0.06); }
+.svc-name { flex: 1; }
+.svc-chev { opacity: 0.6; transition: transform 0.2s; }
+.svc-cat[open] .svc-chev { transform: rotate(180deg); }
+.svc-cat ul { list-style: none; margin: 0; padding: 0 8px 10px; display: flex; flex-direction: column; }
+.svc-cat li a { display: flex; flex-direction: column; gap: 2px; padding: 9px 12px 9px 50px; border-radius: 8px; color: inherit; text-decoration: none; }
+.svc-page[dir="rtl"] .svc-cat li a { padding: 9px 50px 9px 12px; }
+.svc-cat li a:hover { background: rgba(255,255,255,0.05); }
+.svc-cat li small { opacity: 0.6; font-size: 0.82em; line-height: 1.35; }

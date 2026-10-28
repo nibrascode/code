@@ -6,6 +6,7 @@ import { faqPath } from "@/lib/faq";
 import { gamePath } from "@/lib/games";
 import { useI18n } from "@/lib/i18n-context";
 import { localeHref } from "@/lib/locale-path";
+import { SERVICES_LABEL } from "@/components/services-page";
 import type { Lang } from "@/lib/i18n";
 
 export function SiteHeader() {
@@ -72,6 +73,9 @@ export function SiteFooter() {
   return (
     <footer className="site-footer">
       <nav className="footer-panels" aria-label="Nibras Code">
+        <a className="footer-faq" href={localeHref(lang, "/xidmetler")}>
+          {SERVICES_LABEL[lang]}
+        </a>
         <NavMenu section="resources" />
         <NavMenu section="guides" />
         <NavMenu section="programming" />

@@ -55,6 +55,7 @@ import { Route as WhyRouteImport } from './routes/why'
 import { Route as WifiRouteImport } from './routes/wifi'
 import { Route as WorkspaceRouteImport } from './routes/workspace'
 import { Route as XetaRouteImport } from './routes/xeta'
+import { Route as XidmetlerRouteImport } from './routes/xidmetler'
 import { Route as ZipRouteImport } from './routes/zip'
 import { Route as AppsIndexRouteImport } from './routes/apps/index'
 import { Route as AppsSlugRouteImport } from './routes/apps/$slug'
@@ -96,6 +97,7 @@ import { Route as ArVcardRouteImport } from './routes/ar.vcard'
 import { Route as ArWifiRouteImport } from './routes/ar.wifi'
 import { Route as ArWorkspaceRouteImport } from './routes/ar.workspace'
 import { Route as ArXetaRouteImport } from './routes/ar.xeta'
+import { Route as ArXidmetlerRouteImport } from './routes/ar.xidmetler'
 import { Route as ArZipRouteImport } from './routes/ar.zip'
 import { Route as EnAboutRouteImport } from './routes/en.about'
 import { Route as EnAppsRouteImport } from './routes/en.apps'
@@ -135,6 +137,7 @@ import { Route as EnVcardRouteImport } from './routes/en.vcard'
 import { Route as EnWifiRouteImport } from './routes/en.wifi'
 import { Route as EnWorkspaceRouteImport } from './routes/en.workspace'
 import { Route as EnXetaRouteImport } from './routes/en.xeta'
+import { Route as EnXidmetlerRouteImport } from './routes/en.xidmetler'
 import { Route as EnZipRouteImport } from './routes/en.zip'
 import { Route as FaqSlugRouteImport } from './routes/faq.$slug'
 import { Route as GuidesIndexRouteImport } from './routes/guides/index'
@@ -149,8 +152,8 @@ import { Route as OyunSlugRouteImport } from './routes/oyun.$slug'
 import { Route as PdfToolRouteImport } from './routes/pdf_.$tool'
 import { Route as PrivacySlugRouteImport } from './routes/privacy/$slug'
 import { Route as PrivacyNibrasNoteRouteImport } from './routes/privacy.nibras-note'
-import { Route as PrivacyNibrasPlansRouteImport } from './routes/privacy.nibras-plans'
 import { Route as PrivacyNibrasPdfRouteImport } from './routes/privacy.nibras-pdf'
+import { Route as PrivacyNibrasPlansRouteImport } from './routes/privacy.nibras-plans'
 import { Route as PrivacyNibrasScanRouteImport } from './routes/privacy.nibras-scan'
 import { Route as ProgrammingIndexRouteImport } from './routes/programming/index'
 import { Route as ProgrammingTopicRouteImport } from './routes/programming/$topic'
@@ -195,6 +198,7 @@ import { Route as RuVcardRouteImport } from './routes/ru.vcard'
 import { Route as RuWifiRouteImport } from './routes/ru.wifi'
 import { Route as RuWorkspaceRouteImport } from './routes/ru.workspace'
 import { Route as RuXetaRouteImport } from './routes/ru.xeta'
+import { Route as RuXidmetlerRouteImport } from './routes/ru.xidmetler'
 import { Route as RuZipRouteImport } from './routes/ru.zip'
 import { Route as SozSlugRouteImport } from './routes/soz.$slug'
 import { Route as ToolsSlugRouteImport } from './routes/tools.$slug'
@@ -236,6 +240,7 @@ import { Route as TrVcardRouteImport } from './routes/tr.vcard'
 import { Route as TrWifiRouteImport } from './routes/tr.wifi'
 import { Route as TrWorkspaceRouteImport } from './routes/tr.workspace'
 import { Route as TrXetaRouteImport } from './routes/tr.xeta'
+import { Route as TrXidmetlerRouteImport } from './routes/tr.xidmetler'
 import { Route as TrZipRouteImport } from './routes/tr.zip'
 import { Route as XetaSlugRouteImport } from './routes/xeta.$slug'
 import { Route as ArAppsSlugRouteImport } from './routes/ar.apps.$slug'
@@ -529,6 +534,11 @@ const XetaRoute = XetaRouteImport.update({
   path: '/xeta',
   getParentRoute: () => rootRouteImport,
 } as any)
+const XidmetlerRoute = XidmetlerRouteImport.update({
+  id: '/xidmetler',
+  path: '/xidmetler',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ZipRoute = ZipRouteImport.update({
   id: '/zip',
   path: '/zip',
@@ -734,6 +744,11 @@ const ArXetaRoute = ArXetaRouteImport.update({
   path: '/xeta',
   getParentRoute: () => ArRoute,
 } as any)
+const ArXidmetlerRoute = ArXidmetlerRouteImport.update({
+  id: '/xidmetler',
+  path: '/xidmetler',
+  getParentRoute: () => ArRoute,
+} as any)
 const ArZipRoute = ArZipRouteImport.update({
   id: '/zip',
   path: '/zip',
@@ -929,6 +944,11 @@ const EnXetaRoute = EnXetaRouteImport.update({
   path: '/xeta',
   getParentRoute: () => EnRoute,
 } as any)
+const EnXidmetlerRoute = EnXidmetlerRouteImport.update({
+  id: '/xidmetler',
+  path: '/xidmetler',
+  getParentRoute: () => EnRoute,
+} as any)
 const EnZipRoute = EnZipRouteImport.update({
   id: '/zip',
   path: '/zip',
@@ -999,14 +1019,14 @@ const PrivacyNibrasNoteRoute = PrivacyNibrasNoteRouteImport.update({
   path: '/nibras-note',
   getParentRoute: () => PrivacyRoute,
 } as any)
-const PrivacyNibrasPlansRoute = PrivacyNibrasPlansRouteImport.update({
-  id: '/nibras-plans',
-  path: '/nibras-plans',
-  getParentRoute: () => PrivacyRoute,
-} as any)
 const PrivacyNibrasPdfRoute = PrivacyNibrasPdfRouteImport.update({
   id: '/nibras-pdf',
   path: '/nibras-pdf',
+  getParentRoute: () => PrivacyRoute,
+} as any)
+const PrivacyNibrasPlansRoute = PrivacyNibrasPlansRouteImport.update({
+  id: '/nibras-plans',
+  path: '/nibras-plans',
   getParentRoute: () => PrivacyRoute,
 } as any)
 const PrivacyNibrasScanRoute = PrivacyNibrasScanRouteImport.update({
@@ -1229,6 +1249,11 @@ const RuXetaRoute = RuXetaRouteImport.update({
   path: '/xeta',
   getParentRoute: () => RuRoute,
 } as any)
+const RuXidmetlerRoute = RuXidmetlerRouteImport.update({
+  id: '/xidmetler',
+  path: '/xidmetler',
+  getParentRoute: () => RuRoute,
+} as any)
 const RuZipRoute = RuZipRouteImport.update({
   id: '/zip',
   path: '/zip',
@@ -1432,6 +1457,11 @@ const TrWorkspaceRoute = TrWorkspaceRouteImport.update({
 const TrXetaRoute = TrXetaRouteImport.update({
   id: '/xeta',
   path: '/xeta',
+  getParentRoute: () => TrRoute,
+} as any)
+const TrXidmetlerRoute = TrXidmetlerRouteImport.update({
+  id: '/xidmetler',
+  path: '/xidmetler',
   getParentRoute: () => TrRoute,
 } as any)
 const TrZipRoute = TrZipRouteImport.update({
@@ -1793,6 +1823,7 @@ export interface FileRoutesByFullPath {
   '/wifi': typeof WifiRoute
   '/workspace': typeof WorkspaceRoute
   '/xeta': typeof XetaRouteWithChildren
+  '/xidmetler': typeof XidmetlerRoute
   '/zip': typeof ZipRoute
   '/resources/$topic': typeof ResourcesTopicRouteRouteWithChildren
   '/apps/$slug': typeof AppsSlugRoute
@@ -1834,6 +1865,7 @@ export interface FileRoutesByFullPath {
   '/ar/wifi': typeof ArWifiRoute
   '/ar/workspace': typeof ArWorkspaceRoute
   '/ar/xeta': typeof ArXetaRouteWithChildren
+  '/ar/xidmetler': typeof ArXidmetlerRoute
   '/ar/zip': typeof ArZipRoute
   '/en/about': typeof EnAboutRoute
   '/en/apps': typeof EnAppsRouteWithChildren
@@ -1873,6 +1905,7 @@ export interface FileRoutesByFullPath {
   '/en/wifi': typeof EnWifiRoute
   '/en/workspace': typeof EnWorkspaceRoute
   '/en/xeta': typeof EnXetaRouteWithChildren
+  '/en/xidmetler': typeof EnXidmetlerRoute
   '/en/zip': typeof EnZipRoute
   '/faq/$slug': typeof FaqSlugRoute
   '/guides/$topic': typeof GuidesTopicRoute
@@ -1886,8 +1919,8 @@ export interface FileRoutesByFullPath {
   '/pdf/$tool': typeof PdfToolRoute
   '/privacy/$slug': typeof PrivacySlugRoute
   '/privacy/nibras-note': typeof PrivacyNibrasNoteRoute
-  '/privacy/nibras-plans': typeof PrivacyNibrasPlansRoute
   '/privacy/nibras-pdf': typeof PrivacyNibrasPdfRoute
+  '/privacy/nibras-plans': typeof PrivacyNibrasPlansRoute
   '/privacy/nibras-scan': typeof PrivacyNibrasScanRoute
   '/programming/$topic': typeof ProgrammingTopicRoute
   '/resurslar/$slug': typeof ResurslarSlugRoute
@@ -1929,6 +1962,7 @@ export interface FileRoutesByFullPath {
   '/ru/wifi': typeof RuWifiRoute
   '/ru/workspace': typeof RuWorkspaceRoute
   '/ru/xeta': typeof RuXetaRouteWithChildren
+  '/ru/xidmetler': typeof RuXidmetlerRoute
   '/ru/zip': typeof RuZipRoute
   '/soz/$slug': typeof SozSlugRoute
   '/tools/$slug': typeof ToolsSlugRoute
@@ -1970,6 +2004,7 @@ export interface FileRoutesByFullPath {
   '/tr/wifi': typeof TrWifiRoute
   '/tr/workspace': typeof TrWorkspaceRoute
   '/tr/xeta': typeof TrXetaRouteWithChildren
+  '/tr/xidmetler': typeof TrXidmetlerRoute
   '/tr/zip': typeof TrZipRoute
   '/xeta/$slug': typeof XetaSlugRoute
   '/apps/': typeof AppsIndexRoute
@@ -2084,6 +2119,7 @@ export interface FileRoutesByTo {
   '/wifi': typeof WifiRoute
   '/workspace': typeof WorkspaceRoute
   '/xeta': typeof XetaRouteWithChildren
+  '/xidmetler': typeof XidmetlerRoute
   '/zip': typeof ZipRoute
   '/apps/$slug': typeof AppsSlugRoute
   '/ar/about': typeof ArAboutRoute
@@ -2124,6 +2160,7 @@ export interface FileRoutesByTo {
   '/ar/wifi': typeof ArWifiRoute
   '/ar/workspace': typeof ArWorkspaceRoute
   '/ar/xeta': typeof ArXetaRouteWithChildren
+  '/ar/xidmetler': typeof ArXidmetlerRoute
   '/ar/zip': typeof ArZipRoute
   '/en/about': typeof EnAboutRoute
   '/en/apps': typeof EnAppsRouteWithChildren
@@ -2163,6 +2200,7 @@ export interface FileRoutesByTo {
   '/en/wifi': typeof EnWifiRoute
   '/en/workspace': typeof EnWorkspaceRoute
   '/en/xeta': typeof EnXetaRouteWithChildren
+  '/en/xidmetler': typeof EnXidmetlerRoute
   '/en/zip': typeof EnZipRoute
   '/faq/$slug': typeof FaqSlugRoute
   '/guides/$topic': typeof GuidesTopicRoute
@@ -2176,8 +2214,8 @@ export interface FileRoutesByTo {
   '/pdf/$tool': typeof PdfToolRoute
   '/privacy/$slug': typeof PrivacySlugRoute
   '/privacy/nibras-note': typeof PrivacyNibrasNoteRoute
-  '/privacy/nibras-plans': typeof PrivacyNibrasPlansRoute
   '/privacy/nibras-pdf': typeof PrivacyNibrasPdfRoute
+  '/privacy/nibras-plans': typeof PrivacyNibrasPlansRoute
   '/privacy/nibras-scan': typeof PrivacyNibrasScanRoute
   '/programming/$topic': typeof ProgrammingTopicRoute
   '/resurslar/$slug': typeof ResurslarSlugRoute
@@ -2219,6 +2257,7 @@ export interface FileRoutesByTo {
   '/ru/wifi': typeof RuWifiRoute
   '/ru/workspace': typeof RuWorkspaceRoute
   '/ru/xeta': typeof RuXetaRouteWithChildren
+  '/ru/xidmetler': typeof RuXidmetlerRoute
   '/ru/zip': typeof RuZipRoute
   '/soz/$slug': typeof SozSlugRoute
   '/tools/$slug': typeof ToolsSlugRoute
@@ -2260,6 +2299,7 @@ export interface FileRoutesByTo {
   '/tr/wifi': typeof TrWifiRoute
   '/tr/workspace': typeof TrWorkspaceRoute
   '/tr/xeta': typeof TrXetaRouteWithChildren
+  '/tr/xidmetler': typeof TrXidmetlerRoute
   '/tr/zip': typeof TrZipRoute
   '/xeta/$slug': typeof XetaSlugRoute
   '/apps': typeof AppsIndexRoute
@@ -2375,6 +2415,7 @@ export interface FileRoutesById {
   '/wifi': typeof WifiRoute
   '/workspace': typeof WorkspaceRoute
   '/xeta': typeof XetaRouteWithChildren
+  '/xidmetler': typeof XidmetlerRoute
   '/zip': typeof ZipRoute
   '/resources/$topic': typeof ResourcesTopicRouteRouteWithChildren
   '/apps/$slug': typeof AppsSlugRoute
@@ -2416,6 +2457,7 @@ export interface FileRoutesById {
   '/ar/wifi': typeof ArWifiRoute
   '/ar/workspace': typeof ArWorkspaceRoute
   '/ar/xeta': typeof ArXetaRouteWithChildren
+  '/ar/xidmetler': typeof ArXidmetlerRoute
   '/ar/zip': typeof ArZipRoute
   '/en/about': typeof EnAboutRoute
   '/en/apps': typeof EnAppsRouteWithChildren
@@ -2455,6 +2497,7 @@ export interface FileRoutesById {
   '/en/wifi': typeof EnWifiRoute
   '/en/workspace': typeof EnWorkspaceRoute
   '/en/xeta': typeof EnXetaRouteWithChildren
+  '/en/xidmetler': typeof EnXidmetlerRoute
   '/en/zip': typeof EnZipRoute
   '/faq/$slug': typeof FaqSlugRoute
   '/guides/$topic': typeof GuidesTopicRoute
@@ -2468,8 +2511,8 @@ export interface FileRoutesById {
   '/pdf_/$tool': typeof PdfToolRoute
   '/privacy/$slug': typeof PrivacySlugRoute
   '/privacy/nibras-note': typeof PrivacyNibrasNoteRoute
-  '/privacy/nibras-plans': typeof PrivacyNibrasPlansRoute
   '/privacy/nibras-pdf': typeof PrivacyNibrasPdfRoute
+  '/privacy/nibras-plans': typeof PrivacyNibrasPlansRoute
   '/privacy/nibras-scan': typeof PrivacyNibrasScanRoute
   '/programming/$topic': typeof ProgrammingTopicRoute
   '/resurslar/$slug': typeof ResurslarSlugRoute
@@ -2511,6 +2554,7 @@ export interface FileRoutesById {
   '/ru/wifi': typeof RuWifiRoute
   '/ru/workspace': typeof RuWorkspaceRoute
   '/ru/xeta': typeof RuXetaRouteWithChildren
+  '/ru/xidmetler': typeof RuXidmetlerRoute
   '/ru/zip': typeof RuZipRoute
   '/soz/$slug': typeof SozSlugRoute
   '/tools/$slug': typeof ToolsSlugRoute
@@ -2552,6 +2596,7 @@ export interface FileRoutesById {
   '/tr/wifi': typeof TrWifiRoute
   '/tr/workspace': typeof TrWorkspaceRoute
   '/tr/xeta': typeof TrXetaRouteWithChildren
+  '/tr/xidmetler': typeof TrXidmetlerRoute
   '/tr/zip': typeof TrZipRoute
   '/xeta/$slug': typeof XetaSlugRoute
   '/apps/': typeof AppsIndexRoute
@@ -2668,6 +2713,7 @@ export interface FileRouteTypes {
     | '/wifi'
     | '/workspace'
     | '/xeta'
+    | '/xidmetler'
     | '/zip'
     | '/resources/$topic'
     | '/apps/$slug'
@@ -2709,6 +2755,7 @@ export interface FileRouteTypes {
     | '/ar/wifi'
     | '/ar/workspace'
     | '/ar/xeta'
+    | '/ar/xidmetler'
     | '/ar/zip'
     | '/en/about'
     | '/en/apps'
@@ -2748,6 +2795,7 @@ export interface FileRouteTypes {
     | '/en/wifi'
     | '/en/workspace'
     | '/en/xeta'
+    | '/en/xidmetler'
     | '/en/zip'
     | '/faq/$slug'
     | '/guides/$topic'
@@ -2761,8 +2809,8 @@ export interface FileRouteTypes {
     | '/pdf/$tool'
     | '/privacy/$slug'
     | '/privacy/nibras-note'
-    | '/privacy/nibras-plans'
     | '/privacy/nibras-pdf'
+    | '/privacy/nibras-plans'
     | '/privacy/nibras-scan'
     | '/programming/$topic'
     | '/resurslar/$slug'
@@ -2804,6 +2852,7 @@ export interface FileRouteTypes {
     | '/ru/wifi'
     | '/ru/workspace'
     | '/ru/xeta'
+    | '/ru/xidmetler'
     | '/ru/zip'
     | '/soz/$slug'
     | '/tools/$slug'
@@ -2845,6 +2894,7 @@ export interface FileRouteTypes {
     | '/tr/wifi'
     | '/tr/workspace'
     | '/tr/xeta'
+    | '/tr/xidmetler'
     | '/tr/zip'
     | '/xeta/$slug'
     | '/apps/'
@@ -2959,6 +3009,7 @@ export interface FileRouteTypes {
     | '/wifi'
     | '/workspace'
     | '/xeta'
+    | '/xidmetler'
     | '/zip'
     | '/apps/$slug'
     | '/ar/about'
@@ -2999,6 +3050,7 @@ export interface FileRouteTypes {
     | '/ar/wifi'
     | '/ar/workspace'
     | '/ar/xeta'
+    | '/ar/xidmetler'
     | '/ar/zip'
     | '/en/about'
     | '/en/apps'
@@ -3038,6 +3090,7 @@ export interface FileRouteTypes {
     | '/en/wifi'
     | '/en/workspace'
     | '/en/xeta'
+    | '/en/xidmetler'
     | '/en/zip'
     | '/faq/$slug'
     | '/guides/$topic'
@@ -3051,8 +3104,8 @@ export interface FileRouteTypes {
     | '/pdf/$tool'
     | '/privacy/$slug'
     | '/privacy/nibras-note'
-    | '/privacy/nibras-plans'
     | '/privacy/nibras-pdf'
+    | '/privacy/nibras-plans'
     | '/privacy/nibras-scan'
     | '/programming/$topic'
     | '/resurslar/$slug'
@@ -3094,6 +3147,7 @@ export interface FileRouteTypes {
     | '/ru/wifi'
     | '/ru/workspace'
     | '/ru/xeta'
+    | '/ru/xidmetler'
     | '/ru/zip'
     | '/soz/$slug'
     | '/tools/$slug'
@@ -3135,6 +3189,7 @@ export interface FileRouteTypes {
     | '/tr/wifi'
     | '/tr/workspace'
     | '/tr/xeta'
+    | '/tr/xidmetler'
     | '/tr/zip'
     | '/xeta/$slug'
     | '/apps'
@@ -3249,6 +3304,7 @@ export interface FileRouteTypes {
     | '/wifi'
     | '/workspace'
     | '/xeta'
+    | '/xidmetler'
     | '/zip'
     | '/resources/$topic'
     | '/apps/$slug'
@@ -3290,6 +3346,7 @@ export interface FileRouteTypes {
     | '/ar/wifi'
     | '/ar/workspace'
     | '/ar/xeta'
+    | '/ar/xidmetler'
     | '/ar/zip'
     | '/en/about'
     | '/en/apps'
@@ -3329,6 +3386,7 @@ export interface FileRouteTypes {
     | '/en/wifi'
     | '/en/workspace'
     | '/en/xeta'
+    | '/en/xidmetler'
     | '/en/zip'
     | '/faq/$slug'
     | '/guides/$topic'
@@ -3342,8 +3400,8 @@ export interface FileRouteTypes {
     | '/pdf_/$tool'
     | '/privacy/$slug'
     | '/privacy/nibras-note'
-    | '/privacy/nibras-plans'
     | '/privacy/nibras-pdf'
+    | '/privacy/nibras-plans'
     | '/privacy/nibras-scan'
     | '/programming/$topic'
     | '/resurslar/$slug'
@@ -3385,6 +3443,7 @@ export interface FileRouteTypes {
     | '/ru/wifi'
     | '/ru/workspace'
     | '/ru/xeta'
+    | '/ru/xidmetler'
     | '/ru/zip'
     | '/soz/$slug'
     | '/tools/$slug'
@@ -3426,6 +3485,7 @@ export interface FileRouteTypes {
     | '/tr/wifi'
     | '/tr/workspace'
     | '/tr/xeta'
+    | '/tr/xidmetler'
     | '/tr/zip'
     | '/xeta/$slug'
     | '/apps/'
@@ -3541,6 +3601,7 @@ export interface RootRouteChildren {
   WifiRoute: typeof WifiRoute
   WorkspaceRoute: typeof WorkspaceRoute
   XetaRoute: typeof XetaRouteWithChildren
+  XidmetlerRoute: typeof XidmetlerRoute
   ZipRoute: typeof ZipRoute
   ResourcesTopicRouteRoute: typeof ResourcesTopicRouteRouteWithChildren
   AppsSlugRoute: typeof AppsSlugRoute
@@ -3881,6 +3942,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof XetaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/xidmetler': {
+      id: '/xidmetler'
+      path: '/xidmetler'
+      fullPath: '/xidmetler'
+      preLoaderRoute: typeof XidmetlerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/zip': {
       id: '/zip'
       path: '/zip'
@@ -4168,6 +4236,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArXetaRouteImport
       parentRoute: typeof ArRoute
     }
+    '/ar/xidmetler': {
+      id: '/ar/xidmetler'
+      path: '/xidmetler'
+      fullPath: '/ar/xidmetler'
+      preLoaderRoute: typeof ArXidmetlerRouteImport
+      parentRoute: typeof ArRoute
+    }
     '/ar/zip': {
       id: '/ar/zip'
       path: '/zip'
@@ -4441,6 +4516,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EnXetaRouteImport
       parentRoute: typeof EnRoute
     }
+    '/en/xidmetler': {
+      id: '/en/xidmetler'
+      path: '/xidmetler'
+      fullPath: '/en/xidmetler'
+      preLoaderRoute: typeof EnXidmetlerRouteImport
+      parentRoute: typeof EnRoute
+    }
     '/en/zip': {
       id: '/en/zip'
       path: '/zip'
@@ -4539,18 +4621,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacyNibrasNoteRouteImport
       parentRoute: typeof PrivacyRoute
     }
-    '/privacy/nibras-plans': {
-      id: '/privacy/nibras-plans'
-      path: '/nibras-plans'
-      fullPath: '/privacy/nibras-plans'
-      preLoaderRoute: typeof PrivacyNibrasPlansRouteImport
-      parentRoute: typeof PrivacyRoute
-    }
     '/privacy/nibras-pdf': {
       id: '/privacy/nibras-pdf'
       path: '/nibras-pdf'
       fullPath: '/privacy/nibras-pdf'
       preLoaderRoute: typeof PrivacyNibrasPdfRouteImport
+      parentRoute: typeof PrivacyRoute
+    }
+    '/privacy/nibras-plans': {
+      id: '/privacy/nibras-plans'
+      path: '/nibras-plans'
+      fullPath: '/privacy/nibras-plans'
+      preLoaderRoute: typeof PrivacyNibrasPlansRouteImport
       parentRoute: typeof PrivacyRoute
     }
     '/privacy/nibras-scan': {
@@ -4861,6 +4943,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RuXetaRouteImport
       parentRoute: typeof RuRoute
     }
+    '/ru/xidmetler': {
+      id: '/ru/xidmetler'
+      path: '/xidmetler'
+      fullPath: '/ru/xidmetler'
+      preLoaderRoute: typeof RuXidmetlerRouteImport
+      parentRoute: typeof RuRoute
+    }
     '/ru/zip': {
       id: '/ru/zip'
       path: '/zip'
@@ -5146,6 +5235,13 @@ declare module '@tanstack/react-router' {
       path: '/xeta'
       fullPath: '/tr/xeta'
       preLoaderRoute: typeof TrXetaRouteImport
+      parentRoute: typeof TrRoute
+    }
+    '/tr/xidmetler': {
+      id: '/tr/xidmetler'
+      path: '/xidmetler'
+      fullPath: '/tr/xidmetler'
+      preLoaderRoute: typeof TrXidmetlerRouteImport
       parentRoute: typeof TrRoute
     }
     '/tr/zip': {
@@ -5722,6 +5818,7 @@ interface ArRouteChildren {
   ArWifiRoute: typeof ArWifiRoute
   ArWorkspaceRoute: typeof ArWorkspaceRoute
   ArXetaRoute: typeof ArXetaRouteWithChildren
+  ArXidmetlerRoute: typeof ArXidmetlerRoute
   ArZipRoute: typeof ArZipRoute
   ArHamisiGroupRoute: typeof ArHamisiGroupRoute
   ArImageToolRoute: typeof ArImageToolRoute
@@ -5769,6 +5866,7 @@ const ArRouteChildren: ArRouteChildren = {
   ArWifiRoute: ArWifiRoute,
   ArWorkspaceRoute: ArWorkspaceRoute,
   ArXetaRoute: ArXetaRouteWithChildren,
+  ArXidmetlerRoute: ArXidmetlerRoute,
   ArZipRoute: ArZipRoute,
   ArHamisiGroupRoute: ArHamisiGroupRoute,
   ArImageToolRoute: ArImageToolRoute,
@@ -5916,6 +6014,7 @@ interface EnRouteChildren {
   EnWifiRoute: typeof EnWifiRoute
   EnWorkspaceRoute: typeof EnWorkspaceRoute
   EnXetaRoute: typeof EnXetaRouteWithChildren
+  EnXidmetlerRoute: typeof EnXidmetlerRoute
   EnZipRoute: typeof EnZipRoute
   EnHamisiGroupRoute: typeof EnHamisiGroupRoute
   EnImageToolRoute: typeof EnImageToolRoute
@@ -5963,6 +6062,7 @@ const EnRouteChildren: EnRouteChildren = {
   EnWifiRoute: EnWifiRoute,
   EnWorkspaceRoute: EnWorkspaceRoute,
   EnXetaRoute: EnXetaRouteWithChildren,
+  EnXidmetlerRoute: EnXidmetlerRoute,
   EnZipRoute: EnZipRoute,
   EnHamisiGroupRoute: EnHamisiGroupRoute,
   EnImageToolRoute: EnImageToolRoute,
@@ -6028,8 +6128,8 @@ const OyunRouteWithChildren = OyunRoute._addFileChildren(OyunRouteChildren)
 interface PrivacyRouteChildren {
   PrivacySlugRoute: typeof PrivacySlugRoute
   PrivacyNibrasNoteRoute: typeof PrivacyNibrasNoteRoute
-  PrivacyNibrasPlansRoute: typeof PrivacyNibrasPlansRoute
   PrivacyNibrasPdfRoute: typeof PrivacyNibrasPdfRoute
+  PrivacyNibrasPlansRoute: typeof PrivacyNibrasPlansRoute
   PrivacyNibrasScanRoute: typeof PrivacyNibrasScanRoute
   PrivacyNibrasQrDeleteAccountRoute: typeof PrivacyNibrasQrDeleteAccountRoute
 }
@@ -6037,8 +6137,8 @@ interface PrivacyRouteChildren {
 const PrivacyRouteChildren: PrivacyRouteChildren = {
   PrivacySlugRoute: PrivacySlugRoute,
   PrivacyNibrasNoteRoute: PrivacyNibrasNoteRoute,
-  PrivacyNibrasPlansRoute: PrivacyNibrasPlansRoute,
   PrivacyNibrasPdfRoute: PrivacyNibrasPdfRoute,
+  PrivacyNibrasPlansRoute: PrivacyNibrasPlansRoute,
   PrivacyNibrasScanRoute: PrivacyNibrasScanRoute,
   PrivacyNibrasQrDeleteAccountRoute: PrivacyNibrasQrDeleteAccountRoute,
 }
@@ -6183,6 +6283,7 @@ interface RuRouteChildren {
   RuWifiRoute: typeof RuWifiRoute
   RuWorkspaceRoute: typeof RuWorkspaceRoute
   RuXetaRoute: typeof RuXetaRouteWithChildren
+  RuXidmetlerRoute: typeof RuXidmetlerRoute
   RuZipRoute: typeof RuZipRoute
   RuHamisiGroupRoute: typeof RuHamisiGroupRoute
   RuImageToolRoute: typeof RuImageToolRoute
@@ -6231,6 +6332,7 @@ const RuRouteChildren: RuRouteChildren = {
   RuWifiRoute: RuWifiRoute,
   RuWorkspaceRoute: RuWorkspaceRoute,
   RuXetaRoute: RuXetaRouteWithChildren,
+  RuXidmetlerRoute: RuXidmetlerRoute,
   RuZipRoute: RuZipRoute,
   RuHamisiGroupRoute: RuHamisiGroupRoute,
   RuImageToolRoute: RuImageToolRoute,
@@ -6399,6 +6501,7 @@ interface TrRouteChildren {
   TrWifiRoute: typeof TrWifiRoute
   TrWorkspaceRoute: typeof TrWorkspaceRoute
   TrXetaRoute: typeof TrXetaRouteWithChildren
+  TrXidmetlerRoute: typeof TrXidmetlerRoute
   TrZipRoute: typeof TrZipRoute
   TrHamisiGroupRoute: typeof TrHamisiGroupRoute
   TrImageToolRoute: typeof TrImageToolRoute
@@ -6446,6 +6549,7 @@ const TrRouteChildren: TrRouteChildren = {
   TrWifiRoute: TrWifiRoute,
   TrWorkspaceRoute: TrWorkspaceRoute,
   TrXetaRoute: TrXetaRouteWithChildren,
+  TrXidmetlerRoute: TrXidmetlerRoute,
   TrZipRoute: TrZipRoute,
   TrHamisiGroupRoute: TrHamisiGroupRoute,
   TrImageToolRoute: TrImageToolRoute,
@@ -6526,6 +6630,7 @@ const rootRouteChildren: RootRouteChildren = {
   WifiRoute: WifiRoute,
   WorkspaceRoute: WorkspaceRoute,
   XetaRoute: XetaRouteWithChildren,
+  XidmetlerRoute: XidmetlerRoute,
   ZipRoute: ZipRoute,
   ResourcesTopicRouteRoute: ResourcesTopicRouteRouteWithChildren,
   AppsSlugRoute: AppsSlugRoute,
