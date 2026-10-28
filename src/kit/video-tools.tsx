@@ -3,14 +3,14 @@ import type { FFmpeg } from "@ffmpeg/ffmpeg";
 import type { Lang } from "@/lib/i18n";
 import { useI18n } from "@/lib/i18n-context";
 import { localeHref } from "@/lib/locale-path";
-import { ChevronRight, Combine, Music, RefreshCw, Scissors } from "lucide-react";
+import { ChevronRight, Combine, Crop as CropIco, Minimize2, Music, RefreshCw, Scaling, Scissors, VolumeX } from "lucide-react";
 import { KitShell, kb, ui } from "./shell";
 import { VIDEO_KIT } from "./video-meta";
 
-export const VIDEO_TOOLS = ["trim", "convert", "merge", "audio"] as const;
+export const VIDEO_TOOLS = ["trim", "compress", "crop", "resize", "mute", "convert", "merge", "audio"] as const;
 export type VideoTool = (typeof VIDEO_TOOLS)[number];
 export const isVideoTool = (v: string): v is VideoTool => (VIDEO_TOOLS as readonly string[]).includes(v);
-export const VIDEO_FAMILY = ["/video", "/video/trim", "/video/convert", "/video/merge", "/video/audio"];
+export const VIDEO_FAMILY = ["/video", "/video/trim", "/video/compress", "/video/crop", "/video/resize", "/video/mute", "/video/convert", "/video/merge", "/video/audio"];
 
 const T: Record<Lang, Record<string, string>> = {
   az: { pick: "Video seçin", picks: "Videoları seçin", drop: "və ya bura buraxın", loading: "Video mühərriki yüklənir (~30 MB, bir dəfə)…", ready: "Hazırdır", start: "Başlanğıc (san)", end: "Son (san)", fast: "Sürətli (yenidən kodlaşdırmadan)", run: "Başla", working: "İşlənir", download: "Yüklə", before: "Əvvəl", after: "Sonra", fail: "Alınmadı. Başqa format və ya daha kiçik video yoxlayın.", format: "Format", width: "En", fps: "Kadr/san", orig: "Orijinal", up: "Yuxarı", down: "Aşağı", remove: "Sil", add: "Video əlavə et", need2: "Ən azı 2 video seçin.", setStart: "Bu an başlanğıc", setEnd: "Bu an son", engineFail: "Mühərrik yüklənmədi. Səhifəni yeniləyin.", sel: "Seçilən hissə", preview: "Seçimi izlə", hint: "Zolaqda tutub sürüşdürün: sol tutacaq başlanğıc, sağ tutacaq son.", open: "Aç", zIn: "Yaxınlaşdır", zOut: "Uzaqlaşdır", zSel: "Seçimə yaxınlaş", zAll: "Hamısı", frame: "kadr", mode: "Kəsmə üsulu", exact: "Dəqiq (kadra qədər, yenidən kodlaşdırma)", fastShort: "Sürətli (açar kadra yuvarlanır)", keys: "Ox düymələri: 1 kadr · Shift: 1 san · tutacağa klik edib istifadə edin.", goA: "Başlanğıca get", goB: "Sona get" },
@@ -342,12 +342,136 @@ function Audio({ t }: { t: Record<string, string> }) {
   );
 }
 
+
+const X: Record<Lang, Record<string, string>> = {
+  az: { level: "Sıxma", light: "Yüngül", medium: "Orta", strong: "Güclü", target: "Hədəf ölçü", size: "Ölçü", res: "Keyfiyyət", ratio: "Nisbət", pos: "Yer", left: "Sol/Yuxarı", center: "Orta", right: "Sağ/Aşağı", fit: "Yerləşdirmə", pad: "Qara zolaqla sığdır", fill: "Doldur (kənarları kəs)", noAudio: "Səs silinir, görüntü olduğu kimi qalır (yenidən kodlaşdırmadan).", none: "Yox" },
+  en: { level: "Compression", light: "Light", medium: "Medium", strong: "Strong", target: "Target size", size: "Size", res: "Resolution", ratio: "Ratio", pos: "Position", left: "Left/Top", center: "Center", right: "Right/Bottom", fit: "Fit", pad: "Fit with black bars", fill: "Fill (crop edges)", noAudio: "Sound is removed, the picture stays as is (no re-encode).", none: "Off" },
+  tr: { level: "Sıkıştırma", light: "Hafif", medium: "Orta", strong: "Güçlü", target: "Hedef boyut", size: "Boyut", res: "Çözünürlük", ratio: "Oran", pos: "Konum", left: "Sol/Üst", center: "Orta", right: "Sağ/Alt", fit: "Yerleşim", pad: "Siyah şeritle sığdır", fill: "Doldur (kenarları kırp)", noAudio: "Ses silinir, görüntü olduğu gibi kalır (yeniden kodlamasız).", none: "Kapalı" },
+  ar: { level: "الضغط", light: "خفيف", medium: "متوسط", strong: "قوي", target: "الحجم المستهدف", size: "المقاس", res: "الدقة", ratio: "النسبة", pos: "الموضع", left: "يسار/أعلى", center: "الوسط", right: "يمين/أسفل", fit: "الملاءمة", pad: "ملاءمة بحواف سوداء", fill: "ملء (قص الحواف)", noAudio: "يُحذف الصوت وتبقى الصورة كما هي (بلا إعادة ترميز).", none: "إيقاف" },
+  ru: { level: "Сжатие", light: "Слабое", medium: "Среднее", strong: "Сильное", target: "Целевой размер", size: "Размер", res: "Разрешение", ratio: "Пропорции", pos: "Положение", left: "Слева/Сверху", center: "Центр", right: "Справа/Снизу", fit: "Вписать", pad: "С чёрными полями", fill: "Заполнить (обрезать края)", noAudio: "Звук удаляется, картинка остаётся как есть (без перекодирования).", none: "Нет" },
+};
+const durOf = (f: File) => new Promise<number>((res) => { const v = document.createElement("video"); const u = URL.createObjectURL(f); v.preload = "metadata"; v.onloadedmetadata = () => { res(v.duration || 0); URL.revokeObjectURL(u); }; v.onerror = () => { res(0); URL.revokeObjectURL(u); }; v.src = u; });
+const H264 = ["-c:v", "libx264", "-preset", "veryfast", "-pix_fmt", "yuv420p", "-movflags", "+faststart"];
+
+function OneFile({ t, job, file, setFile }: { t: Record<string, string>; job: ReturnType<typeof useJob>; file: File | null; setFile: (f: File) => void }) {
+  return (<>
+    <Status t={t} ff={job.ff} err={job.err} busy={job.busy} pct={job.pct} />
+    <Picker t={t} onFiles={(f) => { if (f[0]) { setFile(f[0]); job.setOut(null); } }} />
+    {file ? <p className="text-sm">{file.name} · {kb(file.size)}</p> : null}
+  </>);
+}
+function RunBtn({ t, job, file, onRun }: { t: Record<string, string>; job: ReturnType<typeof useJob>; file: File | null; onRun: () => void }) {
+  return <button type="button" className={ui.primary} disabled={!file || !job.ff || job.busy} data-testid="video-run" onClick={onRun}>{t.run}</button>;
+}
+
+function Compress({ t }: { t: Record<string, string> }) {
+  const x = X[useI18n().lang] ?? X.en;
+  const job = useJob();
+  const [file, setFile] = useState<File | null>(null);
+  const [lvl, setLvl] = useState(28);
+  const [h, setH] = useState(0);
+  const [mb, setMb] = useState(0);
+  const go = () => file && job.go(async (ff) => {
+    const vf = h ? ["-vf", `scale=-2:'min(${h},ih)'`] : [];
+    let rate: string[] = ["-crf", String(lvl)];
+    if (mb) { const d = await durOf(file); if (d > 0) { const kbps = Math.max(150, Math.floor((mb * 8192) / d) - 96); rate = ["-b:v", `${kbps}k`, "-maxrate", `${kbps}k`, "-bufsize", `${kbps * 2}k`]; } }
+    return run(ff, [file], ([n]) => ["-i", n, ...vf, ...H264, ...rate, "-c:a", "aac", "-b:a", "96k", "out.mp4"], "out.mp4");
+  });
+  return (
+    <div className="space-y-3">
+      <OneFile t={t} job={job} file={file} setFile={setFile} />
+      <Opts label={x.level} v={lvl} set={(v) => { setLvl(v); setMb(0); }} opts={[[24, x.light], [28, x.medium], [33, x.strong]]} />
+      <Opts label={x.res} v={h} set={setH} opts={[[0, t.orig], [1080, "1080p"], [720, "720p"], [480, "480p"]]} />
+      <Opts label={x.target} v={mb} set={setMb} opts={[[0, x.none], [8, "8 MB"], [16, "16 MB"], [25, "25 MB"], [50, "50 MB"]]} />
+      <RunBtn t={t} job={job} file={file} onRun={go} />
+      {job.fail ? <p className="text-sm text-red-400">{t.fail}</p> : null}
+      <Out t={t} before={file?.size ?? 0} blob={job.out} name={`${baseName(file?.name ?? "video")}-sixilmis.mp4`} />
+    </div>
+  );
+}
+
+function Crop({ t }: { t: Record<string, string> }) {
+  const x = X[useI18n().lang] ?? X.en;
+  const job = useJob();
+  const [file, setFile] = useState<File | null>(null);
+  const [r, setR] = useState("9:16");
+  const [p, setP] = useState(0.5);
+  const src = useMemo(() => (file ? URL.createObjectURL(file) : ""), [file]);
+  useEffect(() => () => { if (src) URL.revokeObjectURL(src); }, [src]);
+  const [rw, rh] = r.split(":").map(Number);
+  const k = rw / rh;
+  const go = () => file && job.go((ff) => {
+    const cw = `trunc(min(iw\\,ih*${k})/2)*2`, ch = `trunc(min(ih\\,iw/${k})/2)*2`;
+    return run(ff, [file], ([n]) => ["-i", n, "-vf", `crop=${cw}:${ch}:(iw-${cw})*${p}:(ih-${ch})*${p}`, ...H264, "-crf", "20", "-c:a", "copy", "out.mp4"], "out.mp4")
+      .catch(() => run(ff, [file], ([n]) => ["-i", n, "-vf", `crop=${cw}:${ch}:(iw-${cw})*${p}:(ih-${ch})*${p}`, ...H264, "-crf", "20", "-c:a", "aac", "out.mp4"], "out.mp4"));
+  });
+  return (
+    <div className="space-y-3">
+      <OneFile t={t} job={job} file={file} setFile={setFile} />
+      {src ? (
+        <div className="relative mx-auto w-fit overflow-hidden rounded-2xl bg-black ring-1 ring-white/10">
+          <video src={src} muted playsInline controls className="block max-h-72" />
+          <div className="pointer-events-none absolute inset-0 grid" style={{ placeItems: "center" }}>
+            <div className="h-full max-h-full max-w-full border-2 border-[#2f6bff] shadow-[0_0_0_9999px_rgba(0,0,0,0.55)]" style={{ aspectRatio: `${rw}/${rh}`, justifySelf: p === 0 ? "start" : p === 1 ? "end" : "center", alignSelf: p === 0 ? "start" : p === 1 ? "end" : "center", width: k >= 1 ? "100%" : "auto" }} />
+          </div>
+        </div>
+      ) : null}
+      <Opts label={x.ratio} v={r} set={setR} opts={[["9:16", "9:16"], ["1:1", "1:1"], ["4:5", "4:5"], ["16:9", "16:9"], ["4:3", "4:3"]]} />
+      <Opts label={x.pos} v={p} set={setP} opts={[[0, x.left], [0.5, x.center], [1, x.right]]} />
+      <RunBtn t={t} job={job} file={file} onRun={go} />
+      {job.fail ? <p className="text-sm text-red-400">{t.fail}</p> : null}
+      <Out t={t} before={file?.size ?? 0} blob={job.out} name={`${baseName(file?.name ?? "video")}-${r.replace(":", "x")}.mp4`} />
+    </div>
+  );
+}
+
+function Resize({ t }: { t: Record<string, string> }) {
+  const x = X[useI18n().lang] ?? X.en;
+  const job = useJob();
+  const [file, setFile] = useState<File | null>(null);
+  const [s, setS] = useState("1280x720");
+  const [fit, setFit] = useState<"pad" | "fill">("pad");
+  const go = () => file && job.go((ff) => {
+    const [w, h] = s.split("x");
+    const vf = fit === "pad" ? `scale=${w}:${h}:force_original_aspect_ratio=decrease,pad=${w}:${h}:(ow-iw)/2:(oh-ih)/2,setsar=1` : `scale=${w}:${h}:force_original_aspect_ratio=increase,crop=${w}:${h},setsar=1`;
+    return run(ff, [file], ([n]) => ["-i", n, "-vf", vf, ...H264, "-crf", "22", "-c:a", "aac", "-b:a", "128k", "out.mp4"], "out.mp4");
+  });
+  return (
+    <div className="space-y-3">
+      <OneFile t={t} job={job} file={file} setFile={setFile} />
+      <Opts label={x.size} v={s} set={setS} opts={[["1920x1080", "1080p 16:9"], ["1280x720", "720p 16:9"], ["854x480", "480p 16:9"], ["1080x1920", "9:16 Reels/TikTok"], ["1080x1080", "1:1"], ["1080x1350", "4:5"]]} />
+      <Opts label={x.fit} v={fit} set={setFit} opts={[["pad", x.pad], ["fill", x.fill]]} />
+      <RunBtn t={t} job={job} file={file} onRun={go} />
+      {job.fail ? <p className="text-sm text-red-400">{t.fail}</p> : null}
+      <Out t={t} before={file?.size ?? 0} blob={job.out} name={`${baseName(file?.name ?? "video")}-${s}.mp4`} />
+    </div>
+  );
+}
+
+function Mute({ t }: { t: Record<string, string> }) {
+  const x = X[useI18n().lang] ?? X.en;
+  const job = useJob();
+  const [file, setFile] = useState<File | null>(null);
+  const ext = file ? (["mp4", "mov", "mkv", "webm", "m4v"].includes(extOf(file.name)) ? extOf(file.name) : "mp4") : "mp4";
+  const go = () => file && job.go((ff) => run(ff, [file], ([n]) => ["-i", n, "-an", "-c:v", "copy", `out.${ext}`], `out.${ext}`)
+    .catch(() => run(ff, [file], ([n]) => ["-i", n, "-an", ...H264, "-crf", "20", "out.mp4"], "out.mp4")));
+  return (
+    <div className="space-y-3">
+      <OneFile t={t} job={job} file={file} setFile={setFile} />
+      <p className="text-sm text-muted">{x.noAudio}</p>
+      <RunBtn t={t} job={job} file={file} onRun={go} />
+      {job.fail ? <p className="text-sm text-red-400">{t.fail}</p> : null}
+      <Out t={t} before={file?.size ?? 0} blob={job.out} name={`${baseName(file?.name ?? "video")}-sessiz.${ext}`} />
+    </div>
+  );
+}
+
 export function VideoToolPage({ tool }: { tool: VideoTool }) {
   const { lang } = useI18n();
   const t = T[lang] ?? T.en;
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
-  const C = { trim: Trim, convert: Convert, merge: Merge, audio: Audio }[tool];
+  const C = { trim: Trim, compress: Compress, crop: Crop, resize: Resize, mute: Mute, convert: Convert, merge: Merge, audio: Audio }[tool];
   return (
     <KitShell path={`/video/${tool}`} lang={lang} next={[...VIDEO_FAMILY, "/voice"]}>
       {mounted ? <C t={t} /> : <div className="h-40 animate-pulse rounded-2xl bg-white/5" />}
@@ -355,7 +479,7 @@ export function VideoToolPage({ tool }: { tool: VideoTool }) {
   );
 }
 
-const VHUB_ICON: Record<string, typeof Scissors> = { trim: Scissors, convert: RefreshCw, merge: Combine, audio: Music };
+const VHUB_ICON: Record<string, typeof Scissors> = { trim: Scissors, compress: Minimize2, crop: CropIco, resize: Scaling, mute: VolumeX, convert: RefreshCw, merge: Combine, audio: Music };
 
 export function VideoHubPage() {
   const { lang } = useI18n();

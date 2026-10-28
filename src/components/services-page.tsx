@@ -55,8 +55,8 @@ const CATS: Cat[] = [
     ],
   },
   {
-    id: "video", sub: T("Kəs, çevir, birləşdir, səsini çıxar", "Trim, convert, merge, extract audio", "Kes, dönüştür, birleştir, sesi çıkar", "قص وتحويل ودمج واستخراج الصوت", "Обрезка, конвертация, склейка, звук"), icon: <Clapperboard size={22} />, title: T("Video", "Video", "Video", "الفيديو", "Видео"),
-    items: (lang) => (["/video", "/video/trim", "/video/convert", "/video/merge", "/video/audio"] as const).map((p) => ({ href: localeHref(lang, p), label: VIDEO_KIT[p][lang].h1, hint: p === "/video" ? undefined : VIDEO_KIT[p][lang].lead })),
+    id: "video", sub: T("Kəs, sıx, çərçivələ, ölçü, səssiz, çevir, birləşdir", "Trim, compress, crop, resize, mute, convert, merge", "Kes, sıkıştır, kırp, boyut, sessiz, dönüştür, birleştir", "قص وضغط واقتصاص وتغيير الحجم وكتم وتحويل ودمج", "Обрезка, сжатие, кадр, размер, без звука, конвертация, склейка"), icon: <Clapperboard size={22} />, title: T("Video", "Video", "Video", "الفيديو", "Видео"),
+    items: (lang) => (["/video", "/video/trim", "/video/compress", "/video/crop", "/video/resize", "/video/mute", "/video/convert", "/video/merge", "/video/audio"] as const).map((p) => ({ href: localeHref(lang, p), label: VIDEO_KIT[p][lang].h1, hint: p === "/video" ? undefined : VIDEO_KIT[p][lang].lead })),
   },
   {
     id: "code", sub: T("Proqramçılar üçün faydalı alətlər", "Handy tools for developers", "Geliştiriciler için faydalı araçlar", "أدوات مفيدة للمبرمجين", "Полезные инструменты для разработчиков"), icon: <Code2 size={22} />, title: T("Kod alətləri", "Code tools", "Kod araçları", "أدوات الكود", "Инструменты кода"),

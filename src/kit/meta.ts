@@ -3,7 +3,7 @@ import { VIDEO_KIT } from "./video-meta";
 
 type QA = { q: string; a: string };
 type Meta = { title: string; description: string; h1: string; lead: string; faq: QA[] };
-export const KIT_PATHS = ["/image/resize", "/image/convert", "/image/edit", "/vcard", "/zip", "/video", "/video/trim", "/video/convert", "/video/merge", "/video/audio"] as const;
+export const KIT_PATHS = ["/image/resize", "/image/convert", "/image/edit", "/vcard", "/zip", "/video", "/video/trim", "/video/convert", "/video/merge", "/video/audio", "/video/compress", "/video/crop", "/video/resize", "/video/mute"] as const;
 export type KitPath = (typeof KIT_PATHS)[number];
 export const isKitPath = (p: string): p is KitPath => (KIT_PATHS as readonly string[]).includes(p);
 

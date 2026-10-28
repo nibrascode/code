@@ -11917,7 +11917,7 @@ html[lang="ar"] .why-lead.topic-body,
 
 /* Video hub (same language as Services) */
 .vhub-card { display: flex; align-items: center; gap: 12px; padding: 12px 14px; color: inherit; text-decoration: none; }
-.vhub-trim { --c: 96,140,255; } .vhub-convert { --c: 150,120,255; } .vhub-merge { --c: 70,220,160; } .vhub-audio { --c: 255,170,60; }
+.vhub-trim { --c: 96,140,255; } .vhub-convert { --c: 150,120,255; } .vhub-merge { --c: 70,220,160; } .vhub-audio { --c: 255,170,60; } .vhub-compress { --c: 255,95,120; } .vhub-crop { --c: 60,200,230; } .vhub-resize { --c: 120,200,90; } .vhub-mute { --c: 170,170,190; }
 .vhub-card:hover .vhub-chev { background: rgba(var(--c),0.18); }
 [dir="rtl"] .vhub-chev { transform: scaleX(-1); }
 @media (max-width: 560px) { .vhub-card { gap: 10px; padding: 11px 12px; } }
