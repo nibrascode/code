@@ -11874,7 +11874,7 @@ html[lang="ar"] .why-lead.topic-body,
 .svc-cat:hover, .svc-cat[open] { border-color: rgba(var(--c),0.45); box-shadow: 0 0 0 1px rgba(var(--c),0.15), 0 8px 28px rgba(var(--c),0.12); }
 .svc-pdf { border-color: rgba(90,130,255,0.6); background: linear-gradient(110deg, rgba(30,50,110,0.75), rgba(20,40,120,0.6) 60%, rgba(40,90,255,0.45)); box-shadow: 0 0 24px rgba(60,110,255,0.22); }
 .svc-qr { --c: 150,120,255; } .svc-image { --c: 70,220,160; } .svc-code { --c: 255,170,60; }
-.svc-apps { --c: 255,110,150; } .svc-studio { --c: 130,120,255; } .svc-other { --c: 100,220,240; }
+.svc-apps { --c: 255,110,150; } .svc-studio { --c: 130,120,255; } .svc-audio { --c: 80,210,190; } .svc-other { --c: 100,220,240; }
 .svc-cat summary { display: flex; align-items: center; gap: 12px; padding: 12px 14px; cursor: pointer; list-style: none; }
 .svc-cat summary::-webkit-details-marker { display: none; }
 .svc-ico { flex: none; display: inline-flex; width: 44px; height: 44px; align-items: center; justify-content: center; border-radius: 12px; color: rgb(var(--c)); background: rgba(var(--c),0.16); border: 1px solid rgba(var(--c),0.28); box-shadow: inset 0 0 14px rgba(var(--c),0.18), 0 0 12px rgba(var(--c),0.12); }

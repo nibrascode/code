@@ -1,4 +1,4 @@
-import { AppWindow, Mic, ChevronRight, Code2, FileText, Image as ImageIcon, LayoutGrid, QrCode, Sparkles } from "lucide-react";
+import { AppWindow, ChevronRight, Code2, FileText, Headphones, Image as ImageIcon, LayoutGrid, QrCode, Sparkles } from "lucide-react";
 import type { ReactNode } from "react";
 import { BAR } from "@/components/home-bars";
 import { STUDIO_APPS } from "@/lib/apps";
@@ -13,11 +13,11 @@ const T = (az: string, en: string, tr: string, ar: string, ru: string): L => ({ 
 
 const TITLE = T("Services", "Services", "Services", "Services", "Services");
 const DESC = T(
-  "Nibras Code xidmətləri: PDF, QR, şəkil, kod alətləri, tətbiqlər, Studio və Nibras AI — hamısı bir siyahıda.",
-  "Nibras Code services: PDF, QR, images, code tools, apps, Studio and Nibras AI — all in one list.",
-  "Nibras Code hizmetleri: PDF, QR, görsel, kod araçları, uygulamalar, Studio ve Nibras AI — hepsi tek listede.",
-  "خدمات Nibras Code: PDF وQR والصور وأدوات الكود والتطبيقات وStudio وNibras AI — كلها في قائمة واحدة.",
-  "Сервисы Nibras Code: PDF, QR, изображения, инструменты кода, приложения, Studio и Nibras AI — всё в одном списке.",
+  "Nibras Code xidmətləri: PDF, səs, QR, şəkil, kod alətləri, tətbiqlər, Studio və Nibras AI — hamısı bir siyahıda.",
+  "Nibras Code services: PDF, audio, QR, images, code tools, apps, Studio and Nibras AI — all in one list.",
+  "Nibras Code hizmetleri: PDF, ses, QR, görsel, kod araçları, uygulamalar, Studio ve Nibras AI — hepsi tek listede.",
+  "خدمات Nibras Code: PDF والصوت وQR والصور وأدوات الكود والتطبيقات وStudio وNibras AI — كلها في قائمة واحدة.",
+  "Сервисы Nibras Code: PDF, аудио, QR, изображения, инструменты кода, приложения, Studio и Nibras AI — всё в одном списке.",
 );
 
 type Item = { href: string; label: string; hint?: string; ext?: boolean };
@@ -79,9 +79,26 @@ const CATS: Cat[] = [
     ],
   },
   {
+    id: "audio", sub: T("Səs yaz, montaj et, birləşdir — oflayn studio", "Record, edit, join — offline studio", "Kaydet, düzenle, birleştir — çevrimdışı stüdyo", "سجّل وحرّر وادمج — استوديو دون اتصال", "Запись, монтаж, склейка — офлайн-студия"), icon: <Headphones size={22} />, title: T("Səs", "Audio", "Ses", "الصوت", "Аудио"),
+    items: (lang) => [
+      { href: "/audio", label: T("Nibras Audio", "Nibras Audio", "Nibras Audio", "Nibras Audio", "Nibras Audio")[lang], hint: T("Oflayn səs studiyası", "Offline audio studio", "Çevrimdışı ses stüdyosu", "استوديو صوت دون اتصال", "Офлайн аудиостудия")[lang] },
+      { href: "/audio", label: T("Yeni səs yazısı", "New recording", "Yeni ses kaydı", "تسجيل جديد", "Новая запись")[lang] },
+      { href: "/audio", label: T("Audio fayl aç", "Open audio file", "Ses dosyası aç", "فتح ملف صوت", "Открыть аудиофайл")[lang] },
+      { href: "/audio", label: T("Montaj", "Edit", "Montaj", "مونتاج", "Монтаж")[lang] },
+      { href: "/audio", label: T("Birləşdir", "Join", "Birleştir", "دمج", "Объединить")[lang] },
+      { href: "/audio", label: T("Toplu emal", "Batch process", "Toplu işlem", "معالجة دفعة", "Пакетная обработка")[lang] },
+      { href: "/audio", label: T("Qarışıq", "Mix", "Karışım", "مزج", "Микс")[lang] },
+      { href: "/audio", label: T("Effektlər", "Effects", "Efektler", "تأثيرات", "Эффекты")[lang] },
+      { href: "/audio", label: T("Küyü azalt", "Reduce noise", "Gürültüyü azalt", "تقليل الضوضاء", "Шумоподавление")[lang] },
+      { href: "/audio", label: T("Telefona saxla", "Save to phone", "Telefona kaydet", "حفظ على الهاتف", "Сохранить на телефон")[lang] },
+      { href: "/audio", label: T("Yadda saxlanmış qeydlər", "Saved notes", "Kayıtlı notlar", "ملاحظات محفوظة", "Сохранённые заметки")[lang] },
+      { href: "/audio", label: T("Paylaş", "Share", "Paylaş", "مشاركة", "Поделиться")[lang] },
+      { href: localeHref(lang, "/voice"), label: VOICE_TITLE[lang] },
+    ],
+  },
+  {
     id: "other", sub: T("Əlavə alətlər və resurslar", "Extra tools and resources", "Ek araçlar ve kaynaklar", "أدوات وموارد إضافية", "Дополнительные инструменты и ресурсы"), icon: <Sparkles size={22} />, title: T("Digər", "More", "Diğer", "أخرى", "Другое"),
     items: (lang) => [
-      { href: localeHref(lang, "/voice"), label: VOICE_TITLE[lang] },
       { href: localeHref(lang, "/ai"), label: "Nibras AI" },
       { href: localeHref(lang, "/calc"), label: BAR.calc[lang] },
       { href: localeHref(lang, "/flow"), label: BAR.flow[lang] },
@@ -125,7 +142,7 @@ export function ServicesPage({ lang }: { lang: Lang }) {
             </summary>
             <ul>
               {c.items(lang).map((it) => (
-                <li key={it.href}>
+                <li key={`${it.href}::${it.label}`}>
                   <a href={it.href} {...(it.ext ? { target: "_blank", rel: "noopener" } : {})}>
                     <span>{it.label}</span>
                     {it.hint ? <small>{it.hint}</small> : null}
