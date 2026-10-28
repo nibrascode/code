@@ -1,4 +1,4 @@
-/** Nibras Studio full-screen IDE. Same project data as Workspace; everything runs in the browser. */
+/** Code Studio full-screen IDE. Same project data as Workspace; everything runs in the browser. */
 import { STUDIO_VERSION } from "./version";
 import { LEGAL_LABEL } from "@/legal/tools-legal";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -285,7 +285,7 @@ export function StudioIDE({ p, update, onHome, onDelete }: { p: Project; update:
       <div className="min-h-0 flex-1 overflow-auto p-2">
         {side === "files" ? (
           <>
-            <div className="flex min-h-8 items-center gap-1.5 px-2 text-[13px] text-[#dfe6ff]"><ChevronDown className="size-3.5 text-[#6b7aa6]" /><Folder className="size-4 text-[#6f8cff]" /> Nibras Studio</div>
+            <div className="flex min-h-8 items-center gap-1.5 px-2 text-[13px] text-[#dfe6ff]"><ChevronDown className="size-3.5 text-[#6b7aa6]" /><Folder className="size-4 text-[#6f8cff]" /> Code Studio</div>
             <div className="flex min-h-8 items-center gap-1.5 px-2 text-[13px] text-[#dfe6ff]" style={{ paddingInlineStart: 22 }}><ChevronDown className="size-3.5 text-[#6b7aa6]" /><FolderOpen className="size-4 text-[#6f8cff]" /> <span className="truncate">{p.name}</span></div>
             <div style={{ paddingInlineStart: 14 }}><Tree ns={nodes} depth={1} /></div>
           </>
@@ -319,7 +319,7 @@ export function StudioIDE({ p, update, onHome, onDelete }: { p: Project; update:
             <label className="flex items-center gap-2"><input type="checkbox" checked={prefs.wrap} onChange={(e) => setPrefs({ ...prefs, wrap: e.target.checked })} className="accent-[#4f6bff]" /> {t.wrap}</label>
             <label className="flex items-center gap-2"><input type="checkbox" checked={prefs.live} onChange={(e) => setPrefs({ ...prefs, live: e.target.checked })} className="accent-[#4f6bff]" /> {t.live}</label>
             <p className="text-[11px] leading-relaxed text-[#7d89a8]">{t.offlineNote}</p>
-            <div className="rounded-lg border border-white/10 p-2 text-[12px]" data-testid="st-version"><b>Nibras Studio v{STUDIO_VERSION}</b><div className="mt-1 flex gap-3 text-[11px]"><a className="text-[#8aa2ff] hover:underline" href={localeHref(lang, "/tools-legal") + "#privacy"}>{LEGAL_LABEL[lang].privacy}</a><a className="text-[#8aa2ff] hover:underline" href={localeHref(lang, "/tools-legal") + "#terms"}>{LEGAL_LABEL[lang].terms}</a></div></div>
+            <div className="rounded-lg border border-white/10 p-2 text-[12px]" data-testid="st-version"><b>Code Studio v{STUDIO_VERSION}</b><div className="mt-1 flex gap-3 text-[11px]"><a className="text-[#8aa2ff] hover:underline" href={localeHref(lang, "/tools-legal") + "#privacy"}>{LEGAL_LABEL[lang].privacy}</a><a className="text-[#8aa2ff] hover:underline" href={localeHref(lang, "/tools-legal") + "#terms"}>{LEGAL_LABEL[lang].terms}</a></div></div>
           </div>
         )}
       </div>
@@ -350,7 +350,7 @@ export function StudioIDE({ p, update, onHome, onDelete }: { p: Project; update:
         </div>
       </div>
       <div className="flex items-center gap-2 border-b border-white/[0.06] px-3 py-1.5 text-[12px] text-[#7d89a8]">
-        <span className="min-w-0 flex-1 truncate" dir="ltr">Nibras Studio <span className="mx-1 opacity-50">/</span> {p.name} {file.name.split("/").map((s, i) => <span key={i}><span className="mx-1 opacity-50">/</span><span className={i === file.name.split("/").length - 1 ? "text-[#c8d1ea]" : ""}>{s}</span></span>)}</span>
+        <span className="min-w-0 flex-1 truncate" dir="ltr">Code Studio <span className="mx-1 opacity-50">/</span> {p.name} {file.name.split("/").map((s, i) => <span key={i}><span className="mx-1 opacity-50">/</span><span className={i === file.name.split("/").length - 1 ? "text-[#c8d1ea]" : ""}>{s}</span></span>)}</span>
         <span className="flex overflow-hidden rounded-lg border border-white/10">
           <button className={"hidden p-1.5 hover:bg-white/10 lg:block " + (showRight ? "text-white" : "")} onClick={() => setShowRight((v) => !v)} title={t.split} aria-label={t.split}><SquareSplitHorizontal className="size-4" /></button>
           <button className="border-x border-white/10 p-1.5 text-emerald-300 hover:bg-white/10" onClick={run} title={`${t.run} (Ctrl+Enter)`} aria-label={t.run} data-testid="st-run"><Play className="size-4" /></button>
@@ -459,7 +459,7 @@ export function StudioIDE({ p, update, onHome, onDelete }: { p: Project; update:
       <header className="relative z-30 flex items-center gap-3 px-3 py-2.5 lg:px-5">
         <button className="flex items-center gap-2.5" onClick={onHome} data-testid="st-home">
           <img src="/nibras-icon.webp" alt="" className="size-9 rounded-xl" />
-          <span className="text-[17px] font-bold tracking-tight lg:text-[19px]">Nibras Studio</span>
+          <span className="text-[17px] font-bold tracking-tight lg:text-[19px]">Code Studio</span>
         </button>
         <nav className="mx-auto hidden items-center gap-1 rounded-2xl border border-white/10 bg-[#0b1230]/80 p-1 backdrop-blur lg:flex" aria-label="Nibras">
           {navItems.map((n) => (
@@ -529,7 +529,7 @@ export function StudioIDE({ p, update, onHome, onDelete }: { p: Project; update:
         <span>Ln {cursor.l}, Col {cursor.c}</span>
         <span className="hidden sm:inline">{t.spaces}</span>
         <span className="hidden sm:inline">UTF-8</span>
-        <span className="hidden md:inline" data-testid="st-ver">Nibras Studio v{STUDIO_VERSION}</span>
+        <span className="hidden md:inline" data-testid="st-ver">Code Studio v{STUDIO_VERSION}</span>
         <span className="inline-flex items-center gap-1.5"><span className="size-2 rounded-full bg-emerald-400" /> {t.ready}</span>
       </footer>
     </div>

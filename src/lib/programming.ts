@@ -641,27 +641,27 @@ export const PROGRAMMING: readonly ProgrammingPage[] = [
     seo: seo(
       {
         title: "APK hazırla: öz tətbiqini telefona qoy — Nibras Code",
-        description: "APK nədir, necə düzəldilir, hansı qovluq lazımdır və hazır zip necə Nibras Studio-ya verilir.",
+        description: "APK nədir, necə düzəldilir, hansı qovluq lazımdır və hazır zip necə Code Studio-ya verilir.",
         keywords: "APK ikon, paket adı, keystore, APK qurmaq, APK açılmır",
       },
       {
         title: "Build an APK: put your own app on the phone — Nibras Code",
-        description: "What an APK is, how it is built, which folders you need, and how a ready zip goes to Nibras Studio.",
+        description: "What an APK is, how it is built, which folders you need, and how a ready zip goes to Code Studio.",
         keywords: "how to make an APK, what is an APK, build an Android APK",
       },
       {
         title: "APK hazırla: kendi uygulamanı telefona koy — Nibras Code",
-        description: "APK nedir, nasıl yapılır, hangi klasör gerekir ve hazır zip Nibras Studio'ya nasıl verilir.",
+        description: "APK nedir, nasıl yapılır, hangi klasör gerekir ve hazır zip Code Studio'ya nasıl verilir.",
         keywords: "APK yapmak, APK nedir, APK nasıl yapılır, Android APK",
       },
       {
         title: "اصنع APK: ضع تطبيقك على الهاتف — Nibras Code",
-        description: "ما هو APK وكيف يُصنع وأي مجلد يلزم وكيف يُعطى zip الجاهز إلى Nibras Studio.",
+        description: "ما هو APK وكيف يُصنع وأي مجلد يلزم وكيف يُعطى zip الجاهز إلى Code Studio.",
         keywords: "صنع APK, ما هو APK, كيف أصنع APK, Android APK",
       },
       {
         title: "Собери APK: поставь своё приложение на телефон — Nibras Code",
-        description: "Что такое APK, как его собирают, какие папки нужны и как готовый zip отдают в Nibras Studio.",
+        description: "Что такое APK, как его собирают, какие папки нужны и как готовый zip отдают в Code Studio.",
         keywords: "как сделать APK, что такое APK, собрать Android APK",
       },
     ),

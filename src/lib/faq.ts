@@ -200,7 +200,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "dev",
         q: "Nibras Dev nədir?",
-        a: "Nibras Dev brauzerdə işləyən kod studiyasıdır: dev.nibrascode.com. Python, HTML/CSS, JavaScript, SQL, C, C++, Java, PHP, Go, Rust və başqa dillərdə kod yazılır, nəticə yeni səhifədə açılır, kod telefona və ya ZIP kimi yüklənir. Ctrl+Enter ilə işə düşür və yazılan kod avtomatik yadda saxlanılır.",
+        a: "Nibras Dev brauzerdə işləyən kod studiyasıdır: dev.nibrascode.com. Python, HTML/CSS, JavaScript, SQL, C, C++, Java, PHP, Go, Rust və başqa dillərdə kod yazılır, nəticə yeni səhifədə açılır, kod telefona və ya ZIP kimi yüklənir. Ctrl+Enter ilə işə düşür və yazılan kod avtomatik yadda saxlanılır. Qarışmasın: nibrascode.com/studio — Code Studio (veb layihə redaktoru), studio.nibrascode.com — APK Studio (saytı APK-ya çevirir).",
       },
       {
         id: "apk",
@@ -351,7 +351,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "dev",
         q: "What is Nibras Dev?",
-        a: "Nibras Dev is a code studio that runs in the browser at dev.nibrascode.com. You can write Python, HTML/CSS, JavaScript, SQL, C, C++, Java, PHP, Go, Rust, and other languages, open the result in a new page, and download the code to a phone or as a ZIP. Ctrl+Enter runs it, and the code is saved automatically.",
+        a: "Nibras Dev is a code studio that runs in the browser at dev.nibrascode.com. You can write Python, HTML/CSS, JavaScript, SQL, C, C++, Java, PHP, Go, Rust, and other languages, open the result in a new page, and download the code to a phone or as a ZIP. Ctrl+Enter runs it, and the code is saved automatically. Not to be confused: nibrascode.com/studio is Code Studio (web project editor) and studio.nibrascode.com is APK Studio (turns a site into an APK).",
       },
       {
         id: "apk",
@@ -502,7 +502,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "dev",
         q: "Nibras Dev nedir?",
-        a: "Nibras Dev tarayıcıda çalışan bir kod stüdyosudur: dev.nibrascode.com. Python, HTML/CSS, JavaScript, SQL, C, C++, Java, PHP, Go, Rust ve başka dillerde kod yazılır, sonuç yeni sayfada açılır, kod telefona veya ZIP olarak indirilir. Ctrl+Enter ile çalışır ve yazılan kod otomatik kaydedilir.",
+        a: "Nibras Dev tarayıcıda çalışan bir kod stüdyosudur: dev.nibrascode.com. Python, HTML/CSS, JavaScript, SQL, C, C++, Java, PHP, Go, Rust ve başka dillerde kod yazılır, sonuç yeni sayfada açılır, kod telefona veya ZIP olarak indirilir. Ctrl+Enter ile çalışır ve yazılan kod otomatik kaydedilir. Karıştırmayın: nibrascode.com/studio — Code Studio (web proje editörü), studio.nibrascode.com — APK Studio (siteyi APK'ya çevirir).",
       },
       {
         id: "apk",
@@ -653,7 +653,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "dev",
         q: "ما هو Nibras Dev؟",
-        a: "Nibras Dev استوديو كود يعمل في المتصفح على dev.nibrascode.com. يُكتب فيه Python وHTML/CSS وJavaScript وSQL وC وC++ وJava وPHP وGo وRust ولغات أخرى، وتُفتح النتيجة في صفحة جديدة، ويمكن تنزيل الكود إلى الهاتف أو كملف ZIP. يعمل بـ Ctrl+Enter، والكود يُحفظ تلقائيًا.",
+        a: "Nibras Dev استوديو كود يعمل في المتصفح على dev.nibrascode.com. يُكتب فيه Python وHTML/CSS وJavaScript وSQL وC وC++ وJava وPHP وGo وRust ولغات أخرى، وتُفتح النتيجة في صفحة جديدة، ويمكن تنزيل الكود إلى الهاتف أو كملف ZIP. يعمل بـ Ctrl+Enter، والكود يُحفظ تلقائيًا. لا تخلط: nibrascode.com/studio هو Code Studio (محرر مشاريع الويب)، وstudio.nibrascode.com هو APK Studio (يحوّل الموقع إلى APK).",
       },
       {
         id: "apk",
@@ -804,7 +804,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "dev",
         q: "Что такое Nibras Dev?",
-        a: "Nibras Dev — студия кода в браузере на dev.nibrascode.com. Можно писать на Python, HTML/CSS, JavaScript, SQL, C, C++, Java, PHP, Go, Rust и других языках, открыть результат на новой странице и скачать код на телефон или как ZIP. Запуск — Ctrl+Enter, код сохраняется автоматически.",
+        a: "Nibras Dev — студия кода в браузере на dev.nibrascode.com. Можно писать на Python, HTML/CSS, JavaScript, SQL, C, C++, Java, PHP, Go, Rust и других языках, открыть результат на новой странице и скачать код на телефон или как ZIP. Запуск — Ctrl+Enter, код сохраняется автоматически. Не путайте: nibrascode.com/studio — Code Studio (редактор веб-проектов), studio.nibrascode.com — APK Studio (превращает сайт в APK).",
       },
       {
         id: "apk",

@@ -48,7 +48,7 @@ export function apkSections(lang: Lang): ProgrammingSection[] {
           {
             paragraphs: [
               "Əvvəl tətbiqin nə edəcəyi yazılır. Sonra ekran qurulur. Sonra həmin ekran fayllara çevrilir. Axırda bir proqram bu faylları bir APK-ya yığır. Telefon həmin bir faylı quraşdırır.",
-              "Ən qısa yol veb səhifədir. index.html olan bir zip götürülür və Nibras Studio onu APK-ya çevirir. Android Studio, hesab və kod dərsliyi bu yol üçün lazım deyil. Səhifə telefonda tətbiq pəncərəsində açılır.",
+              "Ən qısa yol veb səhifədir. index.html olan bir zip götürülür və APK Studio onu APK-ya çevirir. Android Studio, hesab və kod dərsliyi bu yol üçün lazım deyil. Səhifə telefonda tətbiq pəncərəsində açılır.",
               "Daha böyük yol telefonda özü işləyən proqram yazmaqdır. Onda qovluqlar, manifest və imza addımı gəlir. APK yenə sonda bir fayldır, amma ora çatmaq üçün daha çox alət lazımdır.",
             ],
           },
@@ -60,11 +60,11 @@ export function apkSections(lang: Lang): ProgrammingSection[] {
         blocks: [
           {
             paragraphs: [
-              "Hər növ eyni aləti istəmir. Saytı tətbiqə çevirirsənsə, brauzer, bir mətn redaktoru və zip kifayətdir. Telefonun özü yoxlamadır. Yığımı Nibras Studio görür.",
+              "Hər növ eyni aləti istəmir. Saytı tətbiqə çevirirsənsə, brauzer, bir mətn redaktoru və zip kifayətdir. Telefonun özü yoxlamadır. Yığımı APK Studio görür.",
               "Kotlin və ya Java ilə native tətbiq üçün Android Studio, JDK və Android SDK lazımdır. Gradle paketi yığır. Capacitor üçün Node və npm də gəlir, çünki səhifə əvvəl veb qovluğunda durur, sonra android qovluğuna keçir. Flutter üçün ayrıca Flutter SDK lazımdır.",
             ],
             list: [
-              "Veb APK: redaktor, brauzer, zip, Nibras Studio",
+              "Veb APK: redaktor, brauzer, zip, APK Studio",
               "Native: Android Studio, JDK, Android SDK, Gradle",
               "Capacitor: Node, npm, Android SDK, android qovluğu",
               "Flutter: Flutter SDK, android qovluğu",
@@ -99,7 +99,7 @@ export function apkSections(lang: Lang): ProgrammingSection[] {
           {
             heading: "Veb APK",
             paragraphs: [
-              "Bu, saytın telefon pəncərəsinə qoyulmasıdır. İçəri HTML, CSS və JavaScript-dir. Serverdə işləyən Python burada özü açılmır. Zipin kökündə index.html olmalıdır. css və js qovluqları onun yanındadır. Şəkil img qovluğuna düşür. Nibras Studio bu zipi və ya saytın ünvanını alır, ad, ikon və paket adı seçilir, APK yığılır.",
+              "Bu, saytın telefon pəncərəsinə qoyulmasıdır. İçəri HTML, CSS və JavaScript-dir. Serverdə işləyən Python burada özü açılmır. Zipin kökündə index.html olmalıdır. css və js qovluqları onun yanındadır. Şəkil img qovluğuna düşür. APK Studio bu zipi və ya saytın ünvanını alır, ad, ikon və paket adı seçilir, APK yığılır.",
             ],
             code: WEB,
             after: ["Hazır nümunə bu quruluşdadır. Aşağıdan zipi endir, yazını dəyişmək istəsən index.html-ə bax, sonra Studio-ya ver."],
@@ -158,7 +158,7 @@ export function apkSections(lang: Lang): ProgrammingSection[] {
         {
           paragraphs: [
             "First you write what the app will do. Then you build the screen. Then that screen becomes files. At the end a program packs those files into one APK. The phone installs that one file.",
-            "The short path is a web page. A zip that contains index.html is given to Nibras Studio, and Studio turns it into an APK. Android Studio, an account, and a coding course are not required for this path. The page opens in an app window on the phone.",
+            "The short path is a web page. A zip that contains index.html is given to APK Studio, and Studio turns it into an APK. Android Studio, an account, and a coding course are not required for this path. The page opens in an app window on the phone.",
             "The longer path is a program that runs on the phone itself. Then folders, a manifest, and a signing step appear. The APK is still one file at the end, but more tools are needed to reach it.",
           ],
         },
@@ -170,11 +170,11 @@ export function apkSections(lang: Lang): ProgrammingSection[] {
       blocks: [
         {
           paragraphs: [
-            "Not every kind asks for the same tool. If you turn a site into an app, a browser, a text editor, and a zip are enough. The phone itself is the check. Nibras Studio does the build.",
+            "Not every kind asks for the same tool. If you turn a site into an app, a browser, a text editor, and a zip are enough. The phone itself is the check. APK Studio does the build.",
             "A native app in Kotlin or Java needs Android Studio, a JDK, and the Android SDK. Gradle packs the file. Capacitor also needs Node and npm, because the page first lives in a web folder and then moves into the android folder. Flutter needs its own Flutter SDK.",
           ],
           list: [
-            "Web APK: an editor, a browser, a zip, Nibras Studio",
+            "Web APK: an editor, a browser, a zip, APK Studio",
             "Native: Android Studio, JDK, Android SDK, Gradle",
             "Capacitor: Node, npm, Android SDK, the android folder",
             "Flutter: the Flutter SDK, the android folder",
@@ -207,7 +207,7 @@ export function apkSections(lang: Lang): ProgrammingSection[] {
         {
           heading: "Web APK",
           paragraphs: [
-            "This puts a site into a phone window. The inside is HTML, CSS, and JavaScript. Python that runs on a server does not open here by itself. index.html must be at the root of the zip. The css and js folders stand beside it. A picture falls into img. Nibras Studio takes this zip or the site address, you choose the name, the icon, and the package name, and the APK is built.",
+            "This puts a site into a phone window. The inside is HTML, CSS, and JavaScript. Python that runs on a server does not open here by itself. index.html must be at the root of the zip. The css and js folders stand beside it. A picture falls into img. APK Studio takes this zip or the site address, you choose the name, the icon, and the package name, and the APK is built.",
           ],
           code: WEB,
           after: ["The ready sample has this shape. Download the zip below, open index.html if you want to change a line, then give it to Studio."],
@@ -261,7 +261,7 @@ export function apkSections(lang: Lang): ProgrammingSection[] {
         {
           paragraphs: [
             "Önce uygulamanın ne yapacağı yazılır. Sonra ekran kurulur. Sonra o ekran dosyaya döner. En sonda bir program bu dosyaları bir APK'ya toplar. Telefon o tek dosyayı kurar.",
-            "En kısa yol web sayfasıdır. index.html bulunan bir zip Nibras Studio'ya verilir ve Studio onu APK'ya çevirir. Bu yol için Android Studio, hesap ve kod dersi gerekmez. Sayfa telefonda bir uygulama penceresinde açılır.",
+            "En kısa yol web sayfasıdır. index.html bulunan bir zip APK Studio'ya verilir ve Studio onu APK'ya çevirir. Bu yol için Android Studio, hesap ve kod dersi gerekmez. Sayfa telefonda bir uygulama penceresinde açılır.",
             "Daha uzun yol telefonun kendisinde çalışan bir program yazmaktır. O zaman klasörler, manifest ve imza adımı gelir. APK yine sonda bir dosyadır, ama oraya varmak için daha çok araç gerekir.",
           ],
         },
@@ -273,11 +273,11 @@ export function apkSections(lang: Lang): ProgrammingSection[] {
       blocks: [
         {
           paragraphs: [
-            "Her tür aynı aracı istemez. Siteyi uygulamaya çeviriyorsan tarayıcı, bir metin düzenleyici ve zip yeter. Telefonun kendisi yoklamadır. Derlemeyi Nibras Studio görür.",
+            "Her tür aynı aracı istemez. Siteyi uygulamaya çeviriyorsan tarayıcı, bir metin düzenleyici ve zip yeter. Telefonun kendisi yoklamadır. Derlemeyi APK Studio görür.",
             "Kotlin veya Java ile native uygulama için Android Studio, JDK ve Android SDK gerekir. Paketi Gradle toplar. Capacitor için Node ve npm de gelir, çünkü sayfa önce web klasöründedir, sonra android klasörüne geçer. Flutter için ayrı Flutter SDK gerekir.",
           ],
           list: [
-            "Web APK: düzenleyici, tarayıcı, zip, Nibras Studio",
+            "Web APK: düzenleyici, tarayıcı, zip, APK Studio",
             "Native: Android Studio, JDK, Android SDK, Gradle",
             "Capacitor: Node, npm, Android SDK, android klasörü",
             "Flutter: Flutter SDK, android klasörü",
@@ -310,7 +310,7 @@ export function apkSections(lang: Lang): ProgrammingSection[] {
         {
           heading: "Web APK",
           paragraphs: [
-            "Bu, sitenin telefon penceresine konmasıdır. İçi HTML, CSS ve JavaScript'tir. Sunucuda çalışan Python burada kendi açılmaz. Zipin kökünde index.html olmalıdır. css ve js klasörleri onun yanındadır. Resim img klasörüne düşer. Nibras Studio bu zipi veya sitenin adresini alır, ad, ikon ve paket adı seçilir, APK derlenir.",
+            "Bu, sitenin telefon penceresine konmasıdır. İçi HTML, CSS ve JavaScript'tir. Sunucuda çalışan Python burada kendi açılmaz. Zipin kökünde index.html olmalıdır. css ve js klasörleri onun yanındadır. Resim img klasörüne düşer. APK Studio bu zipi veya sitenin adresini alır, ad, ikon ve paket adı seçilir, APK derlenir.",
           ],
           code: WEB,
           after: ["Hazır örnek bu düzendedir. Aşağıdan zipi indir, yazıyı değiştirmek istersen index.html'e bak, sonra Studio'ya ver."],
@@ -364,7 +364,7 @@ export function apkSections(lang: Lang): ProgrammingSection[] {
         {
           paragraphs: [
             "أولاً يُكتب ماذا سيفعل التطبيق. ثم تُبنى الشاشة. ثم تصير تلك الشاشة ملفات. في الأخير يجمع برنامج هذه الملفات في APK واحد. الهاتف يثبّت ذلك الملف الواحد.",
-            "أقصر طريق هو صفحة ويب. يُعطى zip فيه index.html إلى Nibras Studio وهو يحوّله إلى APK. Android Studio والحساب ودرس الكود ليست لازمة لهذا الطريق. الصفحة تُفتح في نافذة تطبيق على الهاتف.",
+            "أقصر طريق هو صفحة ويب. يُعطى zip فيه index.html إلى APK Studio وهو يحوّله إلى APK. Android Studio والحساب ودرس الكود ليست لازمة لهذا الطريق. الصفحة تُفتح في نافذة تطبيق على الهاتف.",
             "الطريق الأطول هو برنامج يعمل على الهاتف نفسه. عندها تأتي المجلدات وmanifest وخطوة التوقيع. APK ما زال ملفاً واحداً في الأخير، لكن الوصول إليه يحتاج أدوات أكثر.",
           ],
         },
@@ -376,11 +376,11 @@ export function apkSections(lang: Lang): ProgrammingSection[] {
       blocks: [
         {
           paragraphs: [
-            "ليس كل نوع يطلب الأداة نفسها. إذا حوّلت موقعاً إلى تطبيق فمتصفح ومحرر نص وzip تكفي. الهاتف نفسه هو الفحص. Nibras Studio يقوم بالجمع.",
+            "ليس كل نوع يطلب الأداة نفسها. إذا حوّلت موقعاً إلى تطبيق فمتصفح ومحرر نص وzip تكفي. الهاتف نفسه هو الفحص. APK Studio يقوم بالجمع.",
             "التطبيق الأصلي بـ Kotlin أو Java يحتاج Android Studio وJDK وAndroid SDK. Gradle يجمع الحزمة. Capacitor يحتاج Node وnpm أيضاً لأن الصفحة تقف أولاً في مجلد الويب ثم تنتقل إلى مجلد android. Flutter يحتاج Flutter SDK الخاص به.",
           ],
           list: [
-            "APK الويب: محرر، متصفح، zip، Nibras Studio",
+            "APK الويب: محرر، متصفح، zip، APK Studio",
             "الأصلي: Android Studio وJDK وAndroid SDK وGradle",
             "Capacitor: Node وnpm وAndroid SDK ومجلد android",
             "Flutter: Flutter SDK ومجلد android",
@@ -413,7 +413,7 @@ export function apkSections(lang: Lang): ProgrammingSection[] {
         {
           heading: "APK الويب",
           paragraphs: [
-            "هذا وضع الموقع في نافذة الهاتف. الداخل HTML وCSS وجافاسكريبت. Python الذي يعمل على الخادم لا يُفتح هنا بنفسه. index.html يجب أن يكون في جذر الـ zip. مجلدا css وjs يقفان بجانبه. الصورة تقع في img. يأخذ Nibras Studio هذا الـ zip أو عنوان الموقع، ويُختار الاسم والأيقونة واسم الحزمة، ويُجمع APK.",
+            "هذا وضع الموقع في نافذة الهاتف. الداخل HTML وCSS وجافاسكريبت. Python الذي يعمل على الخادم لا يُفتح هنا بنفسه. index.html يجب أن يكون في جذر الـ zip. مجلدا css وjs يقفان بجانبه. الصورة تقع في img. يأخذ APK Studio هذا الـ zip أو عنوان الموقع، ويُختار الاسم والأيقونة واسم الحزمة، ويُجمع APK.",
           ],
           code: WEB,
           after: ["المثال الجاهز بهذا الشكل. نزّل الـ zip من الأسفل، وافتح index.html إذا أردت تغيير سطر، ثم أعطه إلى Studio."],
@@ -467,7 +467,7 @@ export function apkSections(lang: Lang): ProgrammingSection[] {
         {
           paragraphs: [
             "Сначала пишут, что приложение будет делать. Потом собирают экран. Потом этот экран становится файлами. В конце программа упаковывает эти файлы в один APK. Телефон ставит этот один файл.",
-            "Короткий путь — веб-страница. Zip, в котором есть index.html, отдают Nibras Studio, и Studio превращает его в APK. Android Studio, аккаунт и курс кода для этого пути не нужны. Страница открывается в окне приложения на телефоне.",
+            "Короткий путь — веб-страница. Zip, в котором есть index.html, отдают APK Studio, и Studio превращает его в APK. Android Studio, аккаунт и курс кода для этого пути не нужны. Страница открывается в окне приложения на телефоне.",
             "Длинный путь — программа, которая работает на самом телефоне. Тогда появляются папки, манифест и шаг подписи. APK в конце всё равно один файл, но чтобы до него дойти, нужно больше инструментов.",
           ],
         },
@@ -479,11 +479,11 @@ export function apkSections(lang: Lang): ProgrammingSection[] {
       blocks: [
         {
           paragraphs: [
-            "Не каждый вид просит один и тот же инструмент. Если превращаешь сайт в приложение, хватает браузера, текстового редактора и zip. Сам телефон — проверка. Сборку делает Nibras Studio.",
+            "Не каждый вид просит один и тот же инструмент. Если превращаешь сайт в приложение, хватает браузера, текстового редактора и zip. Сам телефон — проверка. Сборку делает APK Studio.",
             "Нативное приложение на Kotlin или Java требует Android Studio, JDK и Android SDK. Пакет собирает Gradle. Capacitor нужен ещё Node и npm, потому что страница сначала стоит в веб-папке, потом переходит в папку android. Flutter нужен свой Flutter SDK.",
           ],
           list: [
-            "Веб-APK: редактор, браузер, zip, Nibras Studio",
+            "Веб-APK: редактор, браузер, zip, APK Studio",
             "Нативный: Android Studio, JDK, Android SDK, Gradle",
             "Capacitor: Node, npm, Android SDK, папка android",
             "Flutter: Flutter SDK, папка android",
@@ -516,7 +516,7 @@ export function apkSections(lang: Lang): ProgrammingSection[] {
         {
           heading: "Веб-APK",
           paragraphs: [
-            "Это помещение сайта в окно телефона. Внутри HTML, CSS и JavaScript. Python, который работает на сервере, здесь сам не открывается. index.html должен быть в корне zip. Папки css и js стоят рядом. Картинка падает в img. Nibras Studio берёт этот zip или адрес сайта, выбираются имя, значок и имя пакета, и APK собирается.",
+            "Это помещение сайта в окно телефона. Внутри HTML, CSS и JavaScript. Python, который работает на сервере, здесь сам не открывается. index.html должен быть в корне zip. Папки css и js стоят рядом. Картинка падает в img. APK Studio берёт этот zip или адрес сайта, выбираются имя, значок и имя пакета, и APK собирается.",
           ],
           code: WEB,
           after: ["Готовый пример устроен так. Скачай zip ниже, открой index.html, если хочешь сменить строку, и отдай его Studio."],

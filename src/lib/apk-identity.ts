@@ -36,7 +36,7 @@ export function identitySections(lang: Lang): ProgrammingSection[] {
             paragraphs: [
               "Bu ad ikonun altında görünür. Uzun olsa, telefon kəsir. İki və ya üç qısa söz bəs edir. «Mənim ən yaxşı qeyd tətbiqim» menyuda sığmır.",
               "Native layihədə ad res/values/strings.xml içində app_name sətrində durur. AndroidManifest.xml onu android:label=\"@string/app_name\" ilə çağırır. Sözü birbaşa manifestə yazmaq da olar, amma sonra hər dildə ayrı sətir saxlamaq çətinləşir. Başqa dil üçün res/values-tr və res/values-ru qovluğunda eyni app_name təkrarlanır.",
-              "Nibras Studio yığımda ad soruşur. Həmin ad pəncərənin başlığına düşür. Saytın içindəki böyük başlıq isə index.html-də qalır. İkisini eyni etmək istəyirsənsə, həm Studio-dakı adı, həm də səhifədəki başlığı dəyiş.",
+              "APK Studio yığımda ad soruşur. Həmin ad pəncərənin başlığına düşür. Saytın içindəki böyük başlıq isə index.html-də qalır. İkisini eyni etmək istəyirsənsə, həm Studio-dakı adı, həm də səhifədəki başlığı dəyiş.",
               "Mağaza adı ayrıca formadadır. Orada bir az uzun yaza bilərsən, amma içində olmayan işi vəd etmə. Menyudakı ad «Qeyd», mağazadakı ad «Qeyd — gündəlik sətir» ola bilər. Paket adı heç birində görünməyə bilər.",
             ],
           },
@@ -56,7 +56,7 @@ export function identitySections(lang: Lang): ProgrammingSection[] {
             after: [
               "Yeni layihədə ikon çox vaxt dairə və ya yumru kvadrat içində kəsilir. Yazını və vacib xətti kənara qoyma. Ortada bir işarə qalsın. Kənardakı hərf kəsilir.",
               "Faylın adı adətən ic_launcher.png olur. Dairəvi ikon ayrıca ic_launcher_round.png ola bilər. Android Studio-nun Image Asset pəncərəsi bu ölçüləri bir şəkildən özü düzəldir. Əl ilə yalnız bir qovluğa böyük şəkil atmaq kifayət etmir.",
-              "Veb APK-da Nibras Studio ikonu yığım addımında alır. Saytın favicon-u həmişə telefon ikonu olmur. Studio-ya verdiyin şəkil kvadrat olsun və kənarında başqa markanın işarəsi olmasın.",
+              "Veb APK-da APK Studio ikonu yığım addımında alır. Saytın favicon-u həmişə telefon ikonu olmur. Studio-ya verdiyin şəkil kvadrat olsun və kənarında başqa markanın işarəsi olmasın.",
             ],
           },
           {
@@ -117,7 +117,7 @@ export function identitySections(lang: Lang): ProgrammingSection[] {
             heading: "Debug açarı başqadır",
             paragraphs: [
               "Android Studio ilk yoxlamada sənin açarını istəmir. Kompüterdə gizli bir debug.keystora var. Həmin açarla qurulan fayl yalnız sənin maşınındakı yoxlamaya bənzəyir. Başqa kompüterin debug açarı fərqlidir. Buna görə bir kompüterdə qurduğun debug faylın üstünə o biri kompüterin debug faylı keçmir və imza xətası verir.",
-              "Nibras Studio-nun APK-sı da debug imzalıdır. Onu dostun telefonunda sınamaq olar. Play və AppGallery həmin faylı son buraxılış kimi qəbul etmir. Mağazaya gedən ilk fayldan etibarən öz release açarın olmalıdır. Bir dəfə debug ilə mağazaya çıxmaq olmur.",
+              "APK Studio-nun APK-sı da debug imzalıdır. Onu dostun telefonunda sınamaq olar. Play və AppGallery həmin faylı son buraxılış kimi qəbul etmir. Mağazaya gedən ilk fayldan etibarən öz release açarın olmalıdır. Bir dəfə debug ilə mağazaya çıxmaq olmur.",
             ],
           },
           {
@@ -148,7 +148,7 @@ export function identitySections(lang: Lang): ProgrammingSection[] {
             paragraphs: [
               "This name shows under the icon. If it is long, the phone cuts it. Two or three short words are enough. \"My best notes app of all\" does not fit the menu.",
               "In a native project the name stands in the app_name line inside res/values/strings.xml. AndroidManifest.xml calls it with android:label=\"@string/app_name\". You can write the word straight into the manifest, but then a separate line for each language gets harder. For another language the same app_name is repeated in res/values-tr and res/values-ru.",
-              "Nibras Studio asks for a name during the build. That name falls on the window title. The large title inside the site stays in index.html. If you want both to match, change the name in Studio and the title on the page.",
+              "APK Studio asks for a name during the build. That name falls on the window title. The large title inside the site stays in index.html. If you want both to match, change the name in Studio and the title on the page.",
               "The store name is a separate form. You can write a little longer there, but do not promise a job the inside does not do. The menu name can be \"Note\" and the store name \"Note — a daily line\". The package name may show in neither.",
             ],
           },
@@ -166,7 +166,7 @@ export function identitySections(lang: Lang): ProgrammingSection[] {
             after: [
               "In a new project the icon is often cut into a circle or a rounded square. Do not put writing or an important line at the edge. Leave one mark in the middle. A letter at the edge gets cut.",
               "The file is usually named ic_launcher.png. A round icon can be a separate ic_launcher_round.png. Android Studio's Image Asset window makes these sizes from one picture. Dropping one large picture into a single folder by hand is not enough.",
-              "For a web APK, Nibras Studio takes the icon at the build step. The site's favicon is not always the phone icon. The picture you give Studio should be square, and it should not carry another brand's mark at the edge.",
+              "For a web APK, APK Studio takes the icon at the build step. The site's favicon is not always the phone icon. The picture you give Studio should be square, and it should not carry another brand's mark at the edge.",
             ],
           },
           {
@@ -227,7 +227,7 @@ export function identitySections(lang: Lang): ProgrammingSection[] {
             heading: "The debug key is different",
             paragraphs: [
               "Android Studio does not ask for your key on the first check. There is a hidden debug.keystore on the computer. A file built with that key only resembles a check on your machine. Another computer's debug key is different. That is why a debug file from one computer does not land on a debug file from the other, and you get a signature error.",
-              "The APK from Nibras Studio is debug-signed too. A friend can try it on a phone. Play and AppGallery do not take that file as the final release. From the first file that goes to a store, you need your own release key. You cannot ship to a store once on the debug key.",
+              "The APK from APK Studio is debug-signed too. A friend can try it on a phone. Play and AppGallery do not take that file as the final release. From the first file that goes to a store, you need your own release key. You cannot ship to a store once on the debug key.",
             ],
           },
           {
@@ -258,7 +258,7 @@ export function identitySections(lang: Lang): ProgrammingSection[] {
             paragraphs: [
               "Bu ad ikonun altında görünür. Uzunsa telefon keser. İki ya da üç kısa söz yeter. «Benim en iyi not uygulamam» menüye sığmaz.",
               "Native projede ad res/values/strings.xml içinde app_name satırında durur. AndroidManifest.xml onu android:label=\"@string/app_name\" ile çağırır. Sözü doğrudan manifeste yazmak da olur, ama sonra her dilde ayrı satır tutmak zorlaşır. Başka dil için res/values-tr ve res/values-ru klasöründe aynı app_name tekrarlanır.",
-              "Nibras Studio derlemede ad sorar. O ad pencerenin başlığına düşer. Sitenin içindeki büyük başlık ise index.html'de kalır. İkisini aynı yapmak istiyorsan hem Studio'daki adı hem sayfadaki başlığı değiştir.",
+              "APK Studio derlemede ad sorar. O ad pencerenin başlığına düşer. Sitenin içindeki büyük başlık ise index.html'de kalır. İkisini aynı yapmak istiyorsan hem Studio'daki adı hem sayfadaki başlığı değiştir.",
               "Mağaza adı ayrı formdadır. Orada biraz uzun yazabilirsin, ama içinde olmayan işi vadetme. Menüdeki ad «Not», mağazadaki ad «Not — günlük satır» olabilir. Paket adı hiçbirinde görünmeyebilir.",
             ],
           },
@@ -276,7 +276,7 @@ export function identitySections(lang: Lang): ProgrammingSection[] {
             after: [
               "Yeni projede ikon çoğu zaman daire ya da yuvarlak kare içinde kesilir. Yazıyı ve önemli çizgiyi kenara koyma. Ortada bir işaret kalsın. Kenardaki harf kesilir.",
               "Dosyanın adı genellikle ic_launcher.png olur. Yuvarlak ikon ayrı ic_launcher_round.png olabilir. Android Studio'nun Image Asset penceresi bu ölçüleri bir resimden kendi düzeltir. Elle yalnız bir klasöre büyük resim atmak yetmez.",
-              "Web APK'da Nibras Studio ikonu derleme adımında alır. Sitenin favicon'u her zaman telefon ikonu olmaz. Studio'ya verdiğin resim kare olsun ve kenarında başka markanın işareti olmasın.",
+              "Web APK'da APK Studio ikonu derleme adımında alır. Sitenin favicon'u her zaman telefon ikonu olmaz. Studio'ya verdiğin resim kare olsun ve kenarında başka markanın işareti olmasın.",
             ],
           },
           {
@@ -337,7 +337,7 @@ export function identitySections(lang: Lang): ProgrammingSection[] {
             heading: "Debug anahtarı başkadır",
             paragraphs: [
               "Android Studio ilk yoklamada senin anahtarını istemez. Bilgisayarda gizli bir debug.keystore vardır. O anahtarla kurulan dosya yalnız senin makinedeki yoklamaya benzer. Başka bilgisayarın debug anahtarı farklıdır. Bu yüzden bir bilgisayarda kurduğun debug dosyanın üstüne öteki bilgisayarın debug dosyası geçmez ve imza hatası verir.",
-              "Nibras Studio'nun APK'sı da debug imzalıdır. Onu arkadaşının telefonunda denemek olur. Play ve AppGallery o dosyayı son sürüm olarak kabul etmez. Mağazaya giden ilk dosyadan itibaren kendi release anahtarın olmalıdır. Bir kez debug ile mağazaya çıkmak olmaz.",
+              "APK Studio'nun APK'sı da debug imzalıdır. Onu arkadaşının telefonunda denemek olur. Play ve AppGallery o dosyayı son sürüm olarak kabul etmez. Mağazaya giden ilk dosyadan itibaren kendi release anahtarın olmalıdır. Bir kez debug ile mağazaya çıkmak olmaz.",
             ],
           },
           {
@@ -368,7 +368,7 @@ export function identitySections(lang: Lang): ProgrammingSection[] {
             paragraphs: [
               "هذا الاسم يظهر تحت الأيقونة. إذا طال يقطعه الهاتف. كلمتان أو ثلاث قصيرة تكفي. «أفضل تطبيق ملاحظات عندي» لا يتسع في القائمة.",
               "في المشروع الأصلي يقف الاسم في سطر app_name داخل res/values/strings.xml. يستدعيه AndroidManifest.xml بـ android:label=\"@string/app_name\". يمكن كتابة الكلمة مباشرة في الـ manifest، لكن إبقاء سطر لكل لغة يصير أصعب. للغة أخرى يُكرَّر app_name نفسه في مجلدي res/values-tr وres/values-ru.",
-              "Nibras Studio يسأل عن الاسم أثناء الجمع. ذلك الاسم يقع على عنوان النافذة. العنوان الكبير داخل الموقع يبقى في index.html. إذا أردت أن يتطابقا فغيّر الاسم في Studio وعنوان الصفحة.",
+              "APK Studio يسأل عن الاسم أثناء الجمع. ذلك الاسم يقع على عنوان النافذة. العنوان الكبير داخل الموقع يبقى في index.html. إذا أردت أن يتطابقا فغيّر الاسم في Studio وعنوان الصفحة.",
               "اسم المتجر في نموذج منفصل. يمكن أن تكتب أطول قليلاً هناك، لكن لا تعد بعمل لا يفعله الداخل. اسم القائمة قد يكون «ملاحظة» واسم المتجر «ملاحظة — سطر يومي». اسم الحزمة قد لا يظهر في أي منهما.",
             ],
           },
@@ -386,7 +386,7 @@ export function identitySections(lang: Lang): ProgrammingSection[] {
             after: [
               "في المشروع الجديد غالباً تُقص الأيقونة داخل دائرة أو مربع مستدير. لا تضع الكتابة والخط المهم على الحافة. تبقى علامة واحدة في الوسط. الحرف على الحافة يُقص.",
               "اسم الملف عادة ic_launcher.png. الأيقونة المستديرة قد تكون ic_launcher_round.png منفصلة. نافذة Image Asset في Android Studio تصنع هذه المقاسات من صورة واحدة. رمي صورة كبيرة باليد في مجلد واحد لا يكفي.",
-              "في APK الويب يأخذ Nibras Studio الأيقونة في خطوة الجمع. أيقونة الموقع الصغيرة ليست دائماً أيقونة الهاتف. الصورة التي تعطيها لـ Studio تكون مربعة ولا تحمل علامة ماركة أخرى على الحافة.",
+              "في APK الويب يأخذ APK Studio الأيقونة في خطوة الجمع. أيقونة الموقع الصغيرة ليست دائماً أيقونة الهاتف. الصورة التي تعطيها لـ Studio تكون مربعة ولا تحمل علامة ماركة أخرى على الحافة.",
             ],
           },
           {
@@ -447,7 +447,7 @@ export function identitySections(lang: Lang): ProgrammingSection[] {
             heading: "مفتاح التجريب غيره",
             paragraphs: [
               "Android Studio لا يطلب مفتاحك في أول فحص. على الحاسوب keystore تجريبي مخفي. الملف المجمّع بذلك المفتاح يشبه الفحص على جهازك فقط. مفتاح التجريب في حاسوب آخر مختلف. لذلك ملف التجريب من حاسوب لا يعلو ملف التجريب من الآخر ويعطي خطأ توقيع.",
-              "APK من Nibras Studio موقّع توقيعاً تجريبياً أيضاً. يمكن لصديق تجربته على الهاتف. Play وAppGallery لا يقبلان ذلك الملف كإصدار أخير. من أول ملف يذهب إلى المتجر يلزم مفتاح الإصدار الخاص بك. لا يمكن الخروج إلى المتجر مرة بمفتاح التجريب.",
+              "APK من APK Studio موقّع توقيعاً تجريبياً أيضاً. يمكن لصديق تجربته على الهاتف. Play وAppGallery لا يقبلان ذلك الملف كإصدار أخير. من أول ملف يذهب إلى المتجر يلزم مفتاح الإصدار الخاص بك. لا يمكن الخروج إلى المتجر مرة بمفتاح التجريب.",
             ],
           },
           {
@@ -478,7 +478,7 @@ export function identitySections(lang: Lang): ProgrammingSection[] {
             paragraphs: [
               "Это имя видно под значком. Если оно длинное, телефон обрезает. Хватает двух или трёх коротких слов. «Моё самое лучшее приложение заметок» в меню не помещается.",
               "В нативном проекте имя стоит в строке app_name внутри res/values/strings.xml. AndroidManifest.xml зовёт его через android:label=\"@string/app_name\". Слово можно вписать прямо в манифест, но потом отдельная строка для каждого языка становится труднее. Для другого языка тот же app_name повторяется в папках res/values-tr и res/values-ru.",
-              "Nibras Studio спрашивает имя при сборке. Это имя падает в заголовок окна. Крупный заголовок внутри сайта остаётся в index.html. Если хочешь, чтобы оба совпали, поменяй имя в Studio и заголовок на странице.",
+              "APK Studio спрашивает имя при сборке. Это имя падает в заголовок окна. Крупный заголовок внутри сайта остаётся в index.html. Если хочешь, чтобы оба совпали, поменяй имя в Studio и заголовок на странице.",
               "Имя магазина — отдельная форма. Там можно написать чуть длиннее, но не обещай работу, которой нет внутри. Имя в меню может быть «Заметка», имя в магазине — «Заметка — дневная строка». Имени пакета может не быть ни там, ни там.",
             ],
           },
@@ -496,7 +496,7 @@ export function identitySections(lang: Lang): ProgrammingSection[] {
             after: [
               "В новом проекте значок часто обрезается в круг или скруглённый квадрат. Не клади текст и важную линию на край. В середине пусть останется один знак. Буква на краю срежется.",
               "Файл обычно называется ic_launcher.png. Круглый значок может быть отдельным ic_launcher_round.png. Окно Image Asset в Android Studio само делает эти размеры из одной картинки. Вручную бросить одну большую картинку в одну папку недостаточно.",
-              "В веб-APK Nibras Studio берёт значок на шаге сборки. Маленький значок сайта не всегда значок телефона. Картинка, которую отдаёшь Studio, должна быть квадратной, и на краю не должно быть знака чужой марки.",
+              "В веб-APK APK Studio берёт значок на шаге сборки. Маленький значок сайта не всегда значок телефона. Картинка, которую отдаёшь Studio, должна быть квадратной, и на краю не должно быть знака чужой марки.",
             ],
           },
           {
@@ -557,7 +557,7 @@ export function identitySections(lang: Lang): ProgrammingSection[] {
             heading: "Debug-ключ другой",
             paragraphs: [
               "Android Studio при первой проверке твой ключ не просит. На компьютере есть скрытый debug.keystore. Файл, собранный тем ключом, похож только на проверку на твоей машине. Debug-ключ другого компьютера другой. Поэтому debug-файл с одного компьютера не ложится на debug-файл с другого, и выходит ошибка подписи.",
-              "APK от Nibras Studio тоже подписан debug-подписью. Друг может попробовать его на телефоне. Play и AppGallery не берут этот файл как окончательный выпуск. С первого файла, который идёт в магазин, нужен свой release-ключ. Один раз выйти в магазин на debug-ключе нельзя.",
+              "APK от APK Studio тоже подписан debug-подписью. Друг может попробовать его на телефоне. Play и AppGallery не берут этот файл как окончательный выпуск. С первого файла, который идёт в магазин, нужен свой release-ключ. Один раз выйти в магазин на debug-ключе нельзя.",
             ],
           },
           {

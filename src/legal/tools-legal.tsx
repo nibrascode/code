@@ -20,7 +20,7 @@ const C: Record<Lang, Copy> = {
         title: `1. Bu səhifə nəyi əhatə edir`,
         paras: [
           `Həmçinin ana səhifədəki «Alətlər» qrupunu əhatə edir: PDF hazırla, QR hazırla, Fon sil, Şəkil sıx, ZIP, Hesabla, Plan hazırla, Sual qur, SEO yoxla və Nibras AI.`,
-          `Bu məxfilik siyasəti və istifadə şərtləri nibrascode.com üzərindəki brauzer alətlərinə aiddir: Nibras Studio (/studio), Workspace (/workspace), Learn (/learn), Site Doctor (/doctor), Error Help (/error-help), Logic Lab (/learn/logic), Site Mirror (/mirror), Shortcuts (/shortcuts), Schema (/schema) və File Check (/filecheck). Onlar ana səhifədə «Studio və kod» və «Öyrən və yoxla» qruplarında göstərilir.`,
+          `Bu məxfilik siyasəti və istifadə şərtləri nibrascode.com üzərindəki brauzer alətlərinə aiddir: Code Studio (/studio), Workspace (/workspace), Learn (/learn), Site Doctor (/doctor), Error Help (/error-help), Logic Lab (/learn/logic), Site Mirror (/mirror), Shortcuts (/shortcuts), Schema (/schema) və File Check (/filecheck). Onlar ana səhifədə «Studio və kod» və «Öyrən və yoxla» qruplarında göstərilir.`,
           `Operator: Nibras Code (nibrascode.com). Əlaqə: nibrascode@gmail.com. Bu səhifənin ünvanı: https://nibrascode.com/tools-legal. Mobil tətbiqlərin (Nibras Docs, QR, PDF, Arabic, Office və s.) ayrıca məxfilik səhifələri /privacy altında toplanır.`,
         ],
       },
@@ -131,7 +131,7 @@ const C: Record<Lang, Copy> = {
         title: `1. What this page covers`,
         paras: [
           `It also covers the “Tools” group on the home page: Make a PDF, Make a QR, Remove background, Compress photo, ZIP, Calculate, Make a plan, Build questions, Check SEO and Nibras AI.`,
-          `This privacy policy and these terms of use cover the browser tools on nibrascode.com: Nibras Studio (/studio), Workspace (/workspace), Learn (/learn), Site Doctor (/doctor), Error Help (/error-help), Logic Lab (/learn/logic), Site Mirror (/mirror), Shortcuts (/shortcuts), Schema (/schema) and File Check (/filecheck). They appear on the home page under “Studio & code” and “Learn & check”.`,
+          `This privacy policy and these terms of use cover the browser tools on nibrascode.com: Code Studio (/studio), Workspace (/workspace), Learn (/learn), Site Doctor (/doctor), Error Help (/error-help), Logic Lab (/learn/logic), Site Mirror (/mirror), Shortcuts (/shortcuts), Schema (/schema) and File Check (/filecheck). They appear on the home page under “Studio & code” and “Learn & check”.`,
           `Operator: Nibras Code (nibrascode.com). Contact: nibrascode@gmail.com. Page URL: https://nibrascode.com/en/tools-legal. Mobile apps (Nibras Docs, QR, PDF, Arabic, Office, etc.) have separate policies under /privacy.`,
         ],
       },
@@ -242,7 +242,7 @@ const C: Record<Lang, Copy> = {
         title: `1. Bu sayfa neyi kapsar`,
         paras: [
           `Ana sayfadaki «Araçlar» grubunu da kapsar: PDF hazırla, QR hazırla, Arka plan sil, Foto sıkıştır, ZIP, Hesapla, Plan hazırla, Soru kur, SEO bak ve Nibras AI.`,
-          `Bu gizlilik politikası ve kullanım koşulları nibrascode.com üzerindeki tarayıcı araçlarını kapsar: Nibras Studio, Workspace, Learn, Site Doctor, Error Help, Logic Lab, Site Mirror, Shortcuts, Schema ve File Check. Ana sayfada «Studio ve kod» ile «Öğren ve kontrol et» gruplarında yer alırlar.`,
+          `Bu gizlilik politikası ve kullanım koşulları nibrascode.com üzerindeki tarayıcı araçlarını kapsar: Code Studio, Workspace, Learn, Site Doctor, Error Help, Logic Lab, Site Mirror, Shortcuts, Schema ve File Check. Ana sayfada «Studio ve kod» ile «Öğren ve kontrol et» gruplarında yer alırlar.`,
           `İşletmeci: Nibras Code (nibrascode.com). İletişim: nibrascode@gmail.com. Adres: https://nibrascode.com/tr/tools-legal. Mobil uygulamaların ayrı politikaları /privacy altındadır.`,
         ],
       },
@@ -338,7 +338,7 @@ const C: Record<Lang, Copy> = {
         title: `1. ما الذي تغطيه هذه الصفحة`,
         paras: [
           `وتشمل أيضاً مجموعة «أدوات» في الصفحة الرئيسية: PDF وQR وحذف الخلفية وضغط الصور وZIP والحساب والخطة والأسئلة وفحص SEO وNibras AI.`,
-          `تغطي سياسة الخصوصية وشروط الاستخدام هذه أدوات المتصفح على nibrascode.com: Nibras Studio وWorkspace وLearn وSite Doctor وError Help وLogic Lab وSite Mirror وShortcuts وSchema وFile Check. تظهر في الصفحة الرئيسية ضمن «Studio والكود» و«تعلّم وتحقق».`,
+          `تغطي سياسة الخصوصية وشروط الاستخدام هذه أدوات المتصفح على nibrascode.com: Code Studio وWorkspace وLearn وSite Doctor وError Help وLogic Lab وSite Mirror وShortcuts وSchema وFile Check. تظهر في الصفحة الرئيسية ضمن «Studio والكود» و«تعلّم وتحقق».`,
           `المشغّل: Nibras Code (nibrascode.com). التواصل: nibrascode@gmail.com. العنوان: https://nibrascode.com/ar/tools-legal. لتطبيقات الجوال سياسات منفصلة تحت /privacy.`,
         ],
       },
@@ -434,7 +434,7 @@ const C: Record<Lang, Copy> = {
         title: `1. Что покрывает эта страница`,
         paras: [
           `Также охватывает группу «Инструменты» на главной: PDF, QR, удаление фона, сжатие фото, ZIP, расчёты, план, вопросы, проверку SEO и Nibras AI.`,
-          `Эта политика конфиденциальности и условия использования относятся к браузерным инструментам на nibrascode.com: Nibras Studio, Workspace, Learn, Site Doctor, Error Help, Logic Lab, Site Mirror, Shortcuts, Schema и File Check. Они показаны на главной в группах «Studio и код» и «Учись и проверяй».`,
+          `Эта политика конфиденциальности и условия использования относятся к браузерным инструментам на nibrascode.com: Code Studio, Workspace, Learn, Site Doctor, Error Help, Logic Lab, Site Mirror, Shortcuts, Schema и File Check. Они показаны на главной в группах «Studio и код» и «Учись и проверяй».`,
           `Оператор: Nibras Code (nibrascode.com). Связь: nibrascode@gmail.com. Адрес: https://nibrascode.com/ru/tools-legal. У мобильных приложений отдельные политики в /privacy.`,
         ],
       },
@@ -534,7 +534,7 @@ export function ToolsLegalLinks({ version = false, className = "" }: { version?:
   const base = localeHref(lang, "/tools-legal");
   return (
     <p className={"flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted " + className} data-testid="tools-legal">
-      {version ? <span>Nibras Studio v{STUDIO_VERSION}</span> : null}
+      {version ? <span>Code Studio v{STUDIO_VERSION}</span> : null}
       <a className="underline-offset-2 hover:underline" href={`${base}#privacy`}>{l.privacy}</a>
       <a className="underline-offset-2 hover:underline" href={`${base}#terms`}>{l.terms}</a>
     </p>
@@ -549,7 +549,7 @@ export function ToolsLegalPage() {
       <div className="why-glow" aria-hidden="true" />
       <p className="eyebrow"><i />{c.eyebrow}</p>
       <h1>{c.title}</h1>
-      <p className="text-sm opacity-70">{c.updated} · Nibras Studio v{STUDIO_VERSION}</p>
+      <p className="text-sm opacity-70">{c.updated} · Code Studio v{STUDIO_VERSION}</p>
       <h2 id="privacy" className="info-section-title scroll-mt-28">{c.pTitle}</h2>
       <InfoCards>
         {c.privacy.map((s) => (

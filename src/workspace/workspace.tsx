@@ -267,7 +267,7 @@ function ProjectView({ p, c, update, onBack }: { p: Project; c: WsCopy; update: 
       {p.tab === "code" ? (
         <>
           <a className="mb-3 flex items-center justify-between gap-3 rounded-2xl border border-[#2f6bff]/40 bg-gradient-to-r from-[#2f6bff]/20 to-[#7a5cff]/15 px-4 py-3 text-sm hover:border-[#2f6bff]" href={localeHref(lang, "/studio") + "?p=" + p.id} data-testid="ws-to-studio">
-            <span><b>Nibras Studio</b> · {c.studioHint}</span><span aria-hidden="true">→</span>
+            <span><b>Code Studio</b> · {c.studioHint}</span><span aria-hidden="true">→</span>
           </a>
           <CodeTool p={p} c={c} set={set} />
         </>

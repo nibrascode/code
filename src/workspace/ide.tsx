@@ -398,7 +398,7 @@ export function CodeTool({ p, c, set, tall = false }: { p: P; c: WsCopy; set: Se
       <header className="flex items-center gap-2 border-b border-white/[0.07] bg-[#0c1120] px-2.5 py-2">
         <span className="hidden items-center gap-2 sm:flex">
           <span className="grid size-7 place-items-center rounded-lg bg-gradient-to-br from-[#2f6bff] to-[#7a5cff] text-[11px] font-bold text-white">N</span>
-          <span className="leading-tight"><span className="block text-[12.5px] font-semibold">Nibras Studio</span><span className="block max-w-[9rem] truncate text-[10.5px] text-[#7d89a8]">{p.name}</span></span>
+          <span className="leading-tight"><span className="block text-[12.5px] font-semibold">Code Studio</span><span className="block max-w-[9rem] truncate text-[10.5px] text-[#7d89a8]">{p.name}</span></span>
         </span>
         <div className="mx-auto hidden rounded-lg border border-white/10 bg-black/30 p-0.5 lg:flex" role="tablist" data-testid="ws-modes">
           {modes.map((m) => (

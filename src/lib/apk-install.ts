@@ -18,7 +18,7 @@ export function installSections(lang: Lang): ProgrammingSection[] {
             heading: "Qurmazdan əvvəl",
             paragraphs: [
               "Yalnız öz yığdığın, öz saytından və ya müəllifin öz səhifəsindən gələn faylı aç. Mesajda gəzən, adı məşhur tətbiqə bənzəyən və heç bir səhifəsi olmayan APK başqa proqram ola bilər. Adın içində apk yazılması təhlükəsizlik demək deyil.",
-              "Nibras Studio-nun verdiyi fayl yoxlama üçündür. Onu öz telefonuna qurub düyməni sınamaq olar. Mağaza buraxılışı deyil. Qurulanda telefon «naməlum tətbiq» deyə bilər. Bu, faylın Play-dən gəlmədiyini bildirir.",
+              "APK Studio-nun verdiyi fayl yoxlama üçündür. Onu öz telefonuna qurub düyməni sınamaq olar. Mağaza buraxılışı deyil. Qurulanda telefon «naməlum tətbiq» deyə bilər. Bu, faylın Play-dən gəlmədiyini bildirir.",
               "Quraşdırma pəncərəsi tətbiqin istəyə biləcəyi icazələri göstərir. Siyahını oxu. Qeyd tətbiqi kamera, rehber və yer istəyirsə, faylı bağla. Öz düzəltdiyin tətbiqdə isə bu siyahı sənin manifestdə yazdığındır.",
             ],
           },
@@ -81,7 +81,7 @@ export function installSections(lang: Lang): ProgrammingSection[] {
             heading: "İmza uyğun gəlmir",
             paragraphs: [
               "«Paket mövcud paketlə ziddiyyət təşkil edir» və ya «imzalar uyğun gəlmir» o deməkdir ki, telefonda eyni adda tətbiq var, amma bu fayl başqa açarla yığılır. Telefon köhnənin üstünə başqa açarın faylını qoymur.",
-              "İki çıxış yolu var. Köhnə tətbiqi silib yenisini qur. Bu, içindəki saxlanmış sətiri aparır. Və ya yeni faylı köhnə açarla yenidən yığ. Test üçün bir dəfə debug açarı, mağaza üçün başqa açar işlədibsənsə, telefon onları eyni tətbiq saymır. Nibras Studio-nun debug faylı ilə öz release açarını qarışdırmaq bu xətanı verir.",
+              "İki çıxış yolu var. Köhnə tətbiqi silib yenisini qur. Bu, içindəki saxlanmış sətiri aparır. Və ya yeni faylı köhnə açarla yenidən yığ. Test üçün bir dəfə debug açarı, mağaza üçün başqa açar işlədibsənsə, telefon onları eyni tətbiq saymır. APK Studio-nun debug faylı ilə öz release açarını qarışdırmaq bu xətanı verir.",
             ],
           },
           {
@@ -102,7 +102,7 @@ export function installSections(lang: Lang): ProgrammingSection[] {
             heading: "Yaddaş və test faylı",
             paragraphs: [
               "«Yaddaş kifayət deyil» açıq səbəbdir. Şəkilləri və lazımsız tətbiqi sil, sonra yenidən bas. Faylın özü böyükdürsə, quraşdırma üçün faylın ölçüsündən artıq boş yer lazımdır, çünki telefon onu açıb köçürür.",
-              "«Yalnız test üçündür» Android Studio-nun bəzi yoxlama yığımlarında olur. Həmin fayl mağaza və adi quraşdırma üçün deyil. Release yığım götür. Nibras Studio-nun debug APK-sı bu cümlə ilə gəlmir, onu adi yolla qurmaq olar. Android Studio-nun testOnly bayrağı isə fayl tətbiqindən quraşdırmanı dayandırır.",
+              "«Yalnız test üçündür» Android Studio-nun bəzi yoxlama yığımlarında olur. Həmin fayl mağaza və adi quraşdırma üçün deyil. Release yığım götür. APK Studio-nun debug APK-sı bu cümlə ilə gəlmir, onu adi yolla qurmaq olar. Android Studio-nun testOnly bayrağı isə fayl tətbiqindən quraşdırmanı dayandırır.",
             ],
           },
           {
@@ -156,7 +156,7 @@ export function installSections(lang: Lang): ProgrammingSection[] {
             heading: "Before you install",
             paragraphs: [
               "Open only a file you built, or one that came from your own site or the author's own page. An APK walking around in a message, with a name that looks like a famous app and no page of its own, can be another program. The letters apk in the name do not mean it is safe.",
-              "The file from Nibras Studio is for a test. You can install it on your own phone and try the button. It is not a store release. The phone may say unknown app. That only means the file did not come from Play.",
+              "The file from APK Studio is for a test. You can install it on your own phone and try the button. It is not a store release. The phone may say unknown app. That only means the file did not come from Play.",
               "The install window shows the permissions the app may ask. Read the list. If a notes app asks for the camera, contacts, and location, close the file. In an app you built yourself, this list is what you wrote in the manifest.",
             ],
           },
@@ -219,7 +219,7 @@ export function installSections(lang: Lang): ProgrammingSection[] {
             heading: "The signature does not match",
             paragraphs: [
               "\"The package conflicts with an existing package\" or \"the signatures do not match\" means an app with the same name is already on the phone, but this file was built with another key. The phone will not put another key's file on top of the old one.",
-              "There are two ways out. Delete the old app and install the new one. That takes the saved line inside. Or build the new file again with the old key. If you used a debug key once for a test and another key for the store, the phone does not treat them as the same app. Mixing the Nibras Studio debug file with your own release key gives this error.",
+              "There are two ways out. Delete the old app and install the new one. That takes the saved line inside. Or build the new file again with the old key. If you used a debug key once for a test and another key for the store, the phone does not treat them as the same app. Mixing the APK Studio debug file with your own release key gives this error.",
             ],
           },
           {
@@ -240,7 +240,7 @@ export function installSections(lang: Lang): ProgrammingSection[] {
             heading: "Storage and a test file",
             paragraphs: [
               "\"Not enough storage\" is a plain cause. Delete pictures and an app you do not need, then tap again. If the file itself is large, the install needs more free space than the file's size, because the phone opens it and copies it.",
-              "\"Test only\" happens on some check builds from Android Studio. That file is not for a store or a normal install. Take a release build. The debug APK from Nibras Studio does not come with this sentence. You can install it the normal way. Android Studio's testOnly flag does stop an install from the files app.",
+              "\"Test only\" happens on some check builds from Android Studio. That file is not for a store or a normal install. Take a release build. The debug APK from APK Studio does not come with this sentence. You can install it the normal way. Android Studio's testOnly flag does stop an install from the files app.",
             ],
           },
           {
@@ -294,7 +294,7 @@ export function installSections(lang: Lang): ProgrammingSection[] {
             heading: "Kurmadan önce",
             paragraphs: [
               "Yalnız kendi derlediğin, kendi sitenden ya da yazarın kendi sayfasından gelen dosyayı aç. Mesajda dolaşan, adı ünlü uygulamaya benzeyen ve hiçbir sayfası olmayan APK başka program olabilir. Adın içinde apk yazması güvenlik demek değildir.",
-              "Nibras Studio'nun verdiği dosya yoklama içindir. Onu kendi telefonuna kurup düğmeyi denemek olur. Mağaza sürümü değildir. Kurulunca telefon bilinmeyen uygulama diyebilir. Bu, dosyanın Play'den gelmediğini bildirir.",
+              "APK Studio'nun verdiği dosya yoklama içindir. Onu kendi telefonuna kurup düğmeyi denemek olur. Mağaza sürümü değildir. Kurulunca telefon bilinmeyen uygulama diyebilir. Bu, dosyanın Play'den gelmediğini bildirir.",
               "Kurulum penceresi uygulamanın isteyebileceği izinleri gösterir. Listeyi oku. Not uygulaması kamera, rehber ve konum istiyorsa dosyayı kapat. Kendi düzelttiğin uygulamada bu liste manifestte yazdığındır.",
             ],
           },
@@ -357,7 +357,7 @@ export function installSections(lang: Lang): ProgrammingSection[] {
             heading: "İmza uyuşmuyor",
             paragraphs: [
               "«Paket mevcut paketle çakışıyor» ya da «imzalar uyuşmuyor» telefonda aynı adlı uygulama var, ama bu dosya başka anahtarla derlenmiş demektir. Telefon eskisinin üstüne başka anahtarın dosyasını koymaz.",
-              "İki çıkış yolu vardır. Eski uygulamayı silip yenisini kur. Bu, içindeki kayıtlı satırı götürür. Ya da yeni dosyayı eski anahtarla yeniden derle. Deneme için bir kez debug anahtarı, mağaza için başka anahtar kullandıysan telefon onları aynı uygulama saymaz. Nibras Studio'nun debug dosyası ile kendi release anahtarını karıştırmak bu hatayı verir.",
+              "İki çıkış yolu vardır. Eski uygulamayı silip yenisini kur. Bu, içindeki kayıtlı satırı götürür. Ya da yeni dosyayı eski anahtarla yeniden derle. Deneme için bir kez debug anahtarı, mağaza için başka anahtar kullandıysan telefon onları aynı uygulama saymaz. APK Studio'nun debug dosyası ile kendi release anahtarını karıştırmak bu hatayı verir.",
             ],
           },
           {
@@ -378,7 +378,7 @@ export function installSections(lang: Lang): ProgrammingSection[] {
             heading: "Depolama ve deneme dosyası",
             paragraphs: [
               "«Yeterli depolama yok» açık sebeptir. Resimleri ve gereksiz uygulamayı sil, sonra yeniden bas. Dosyanın kendisi büyükse kurulum için dosyanın boyundan fazla boş yer gerekir, çünkü telefon onu açıp kopyalar.",
-              "«Yalnızca deneme içindir» Android Studio'nun bazı yoklama derlemelerinde olur. O dosya mağaza ve olağan kurulum için değildir. Release derleme al. Nibras Studio'nun debug APK'sı bu cümleyle gelmez, onu olağan yolla kurmak olur. Android Studio'nun testOnly bayrağı ise dosya uygulamasından kurulumu durdurur.",
+              "«Yalnızca deneme içindir» Android Studio'nun bazı yoklama derlemelerinde olur. O dosya mağaza ve olağan kurulum için değildir. Release derleme al. APK Studio'nun debug APK'sı bu cümleyle gelmez, onu olağan yolla kurmak olur. Android Studio'nun testOnly bayrağı ise dosya uygulamasından kurulumu durdurur.",
             ],
           },
           {
@@ -432,7 +432,7 @@ export function installSections(lang: Lang): ProgrammingSection[] {
             heading: "قبل التثبيت",
             paragraphs: [
               "افتح فقط ملفاً جمّعته أو جاء من موقعك أو من صفحة المؤلف نفسه. APK يدور في رسالة واسمه يشبه تطبيقاً مشهوراً ولا صفحة له قد يكون برنامجاً آخر. كتابة apk في الاسم ليست أماناً.",
-              "الملف من Nibras Studio للاختبار. يمكن تثبيته على هاتفك وتجربة الزر. ليس إصدار متجر. عند التثبيت قد يقول الهاتف تطبيقاً غير معروف. هذا يعني فقط أن الملف لم يأتِ من Play.",
+              "الملف من APK Studio للاختبار. يمكن تثبيته على هاتفك وتجربة الزر. ليس إصدار متجر. عند التثبيت قد يقول الهاتف تطبيقاً غير معروف. هذا يعني فقط أن الملف لم يأتِ من Play.",
               "نافذة التثبيت تعرض الصلاحيات التي قد يطلبها التطبيق. اقرأ القائمة. إذا طلب تطبيق ملاحظات الكاميرا وجهات الاتصال والمكان فأغلق الملف. في تطبيق أعددته بنفسك هذه القائمة هي ما كتبته في الـ manifest.",
             ],
           },
@@ -495,7 +495,7 @@ export function installSections(lang: Lang): ProgrammingSection[] {
             heading: "التوقيع غير متطابق",
             paragraphs: [
               "«الحزمة تتعارض مع حزمة موجودة» أو «التوقيعات غير متطابقة» يعني أن تطبيقاً بالاسم نفسه موجود على الهاتف لكن هذا الملف جُمّع بمفتاح آخر. الهاتف لا يضع ملف مفتاح آخر فوق القديم.",
-              "هناك مخرجان. احذف التطبيق القديم وثبّت الجديد. هذا يأخذ السطر المحفوظ في الداخل. أو أعد تجميع الملف الجديد بالمفتاح القديم. إذا استعملت مفتاح تجريب مرة ومفتاحاً آخر للمتجر فالهاتف لا يحسبهما تطبيقاً واحداً. خلط ملف التجريب من Nibras Studio مع مفتاح الإصدار يعطي هذا الخطأ.",
+              "هناك مخرجان. احذف التطبيق القديم وثبّت الجديد. هذا يأخذ السطر المحفوظ في الداخل. أو أعد تجميع الملف الجديد بالمفتاح القديم. إذا استعملت مفتاح تجريب مرة ومفتاحاً آخر للمتجر فالهاتف لا يحسبهما تطبيقاً واحداً. خلط ملف التجريب من APK Studio مع مفتاح الإصدار يعطي هذا الخطأ.",
             ],
           },
           {
@@ -516,7 +516,7 @@ export function installSections(lang: Lang): ProgrammingSection[] {
             heading: "التخزين وملف الاختبار",
             paragraphs: [
               "«التخزين غير كافٍ» سبب واضح. احذف الصور وتطبيقاً لا تحتاجه ثم اضغط من جديد. إذا كان الملف نفسه كبيراً فالتثبيت يحتاج فراغاً أكبر من حجم الملف لأن الهاتف يفتحه وينسخه.",
-              "«للاختبار فقط» يحدث في بعض تجميعات الفحص من Android Studio. ذلك الملف ليس للمتجر ولا للتثبيت العادي. خذ تجميع إصدار. APK التجريبي من Nibras Studio لا يأتي بهذه الجملة ويمكن تثبيته بالطريق العادي. علم testOnly في Android Studio يوقف التثبيت من تطبيق الملفات.",
+              "«للاختبار فقط» يحدث في بعض تجميعات الفحص من Android Studio. ذلك الملف ليس للمتجر ولا للتثبيت العادي. خذ تجميع إصدار. APK التجريبي من APK Studio لا يأتي بهذه الجملة ويمكن تثبيته بالطريق العادي. علم testOnly في Android Studio يوقف التثبيت من تطبيق الملفات.",
             ],
           },
           {
@@ -570,7 +570,7 @@ export function installSections(lang: Lang): ProgrammingSection[] {
             heading: "Перед установкой",
             paragraphs: [
               "Открывай только файл, который собрал сам, или который пришёл с твоего сайта либо со страницы самого автора. APK, который ходит в сообщении, с именем похожим на известное приложение и без своей страницы, может быть другой программой. Буквы apk в имени не значат безопасность.",
-              "Файл от Nibras Studio нужен для проверки. Его можно поставить на свой телефон и нажать кнопку. Это не выпуск магазина. При установке телефон может сказать «неизвестное приложение». Это лишь значит, что файл пришёл не из Play.",
+              "Файл от APK Studio нужен для проверки. Его можно поставить на свой телефон и нажать кнопку. Это не выпуск магазина. При установке телефон может сказать «неизвестное приложение». Это лишь значит, что файл пришёл не из Play.",
               "Окно установки показывает разрешения, которые приложение может спросить. Прочитай список. Если приложение заметок просит камеру, контакты и место, закрой файл. В приложении, которое собрал сам, этот список — то, что ты написал в манифесте.",
             ],
           },
@@ -633,7 +633,7 @@ export function installSections(lang: Lang): ProgrammingSection[] {
             heading: "Подпись не совпадает",
             paragraphs: [
               "«Пакет конфликтует с уже установленным» или «подписи не совпадают» значит, что на телефоне уже есть приложение с тем же именем, но этот файл собран другим ключом. Телефон не кладёт файл другого ключа поверх старого.",
-              "Выхода два. Удалить старое приложение и поставить новое. Это уносит сохранённую внутри строку. Либо собрать новый файл снова старым ключом. Если для проверки один раз брал debug-ключ, а для магазина другой, телефон не считает их одним приложением. Смешать debug-файл Nibras Studio со своим release-ключом даёт эту ошибку.",
+              "Выхода два. Удалить старое приложение и поставить новое. Это уносит сохранённую внутри строку. Либо собрать новый файл снова старым ключом. Если для проверки один раз брал debug-ключ, а для магазина другой, телефон не считает их одним приложением. Смешать debug-файл APK Studio со своим release-ключом даёт эту ошибку.",
             ],
           },
           {
@@ -654,7 +654,7 @@ export function installSections(lang: Lang): ProgrammingSection[] {
             heading: "Память и тестовый файл",
             paragraphs: [
               "«Недостаточно памяти» — ясная причина. Удали снимки и ненужное приложение, потом нажми снова. Если сам файл большой, для установки нужно больше свободного места, чем размер файла, потому что телефон открывает его и копирует.",
-              "«Только для теста» бывает на части проверочных сборок Android Studio. Этот файл не для магазина и не для обычной установки. Возьми сборку release. Debug APK от Nibras Studio с этой фразой не приходит, его можно ставить обычным путём. Флаг testOnly в Android Studio останавливает установку из приложения файлов.",
+              "«Только для теста» бывает на части проверочных сборок Android Studio. Этот файл не для магазина и не для обычной установки. Возьми сборку release. Debug APK от APK Studio с этой фразой не приходит, его можно ставить обычным путём. Флаг testOnly в Android Studio останавливает установку из приложения файлов.",
             ],
           },
           {

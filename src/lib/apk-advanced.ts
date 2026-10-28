@@ -67,7 +67,7 @@ export function apkAdvanced(lang: Lang): ProgrammingSection[] {
         blocks: [
           {
             paragraphs: [
-              "Debug APK yoxlama üçündür. Nibras Studio-nun yığdığı APK debug imzalıdır. Onu öz telefonuna quraşdırıb düyməni sınamaq olar. Mağaza bu faylı adətən son buraxılış kimi qəbul etmir. Dostuna test üçün vermək olar, telefon isə tanınmayan mənbə barədə xəbərdarlıq göstərə bilər.",
+              "Debug APK yoxlama üçündür. APK Studio-nun yığdığı APK debug imzalıdır. Onu öz telefonuna quraşdırıb düyməni sınamaq olar. Mağaza bu faylı adətən son buraxılış kimi qəbul etmir. Dostuna test üçün vermək olar, telefon isə tanınmayan mənbə barədə xəbərdarlıq göstərə bilər.",
               "Release APK sənin öz açarınla imzalanır. Həmin açar növbəti yeniləmənin səndən gəldiyini göstərir. Açarı itirsən, eyni tətbiqin üstünə yenisini qoya bilməzsən. Yeni paket adı başqa tətbiq sayılır və köhnəsinin yanında ayrıca durur.",
               "versionCode tam ədəddir. Hər yeni faylda bu ədəd böyüməlidir. versionName adamın gördüyü addır, məsələn 1.2. Ədəd artmasa, telefon yenini köhnənin yerinə qoymur.",
               "AAB mağazanın çox vaxt istədiyi bağlamadır. APK telefonun quraşdırdığı fayldır. Mağaza AAB-ni telefonun növünə görə kiçik APK-lara bölə bilər. Özün birbaşa quraşdırırsansa, əlində APK olmalıdır.",
@@ -84,7 +84,7 @@ export function apkAdvanced(lang: Lang): ProgrammingSection[] {
               "Sadə APK bir ekrandır. Bir sətri telefonda saxlayır. Adamın kim olduğunu bilmir. Bağlayıb açanda sətir yerindədir və bu bəs edir. Qeyd, sayğac və bir düyməlik səhifə bu növdür. Onu bir gündə yığmaq olar.",
               "İnkişaf etmiş APK çox ekrandır. Hesab var. Məlumat başqa telefonda da görünməlidir. Siyahı internetdən gəlir. Şəkil göndərilir. Tətbiq bağlı olanda bildiriş gələ bilər. İki adam eyni dəyişikliyi görür. Bu artıq bir faylın içinə sıxılmış səhifə deyil. Telefon, server və saxlanan məlumat birlikdə işləyir.",
               "İnkişaf etmiş tətbiq birinci gün böyük başlamır. Əvvəl sadə ekran bitir. Sonra ikinci ekran gəlir. Sonra saxlama serverə keçir. Sonra giriş. Hamısını ilk gündə yazmaq boş qabıq verir: düymələr var, iş yoxdur.",
-              "Veb yolunda çətin hissə çox vaxt saytın özüdür. Giriş, siyahı və server saytda olur. APK yalnız pəncərədir. Nibras Studio həmin saytı tətbiqə çevirə bilər. Kameranın, faylın və arxa planda işin səhifədən dərin olması lazımdırsa, native və ya Flutter seçilir. Pəncərə bəs edirsə, ikinci proqram yazmaq vaxt itkisidir.",
+              "Veb yolunda çətin hissə çox vaxt saytın özüdür. Giriş, siyahı və server saytda olur. APK yalnız pəncərədir. APK Studio həmin saytı tətbiqə çevirə bilər. Kameranın, faylın və arxa planda işin səhifədən dərin olması lazımdırsa, native və ya Flutter seçilir. Pəncərə bəs edirsə, ikinci proqram yazmaq vaxt itkisidir.",
             ],
           },
         ],
@@ -198,7 +198,7 @@ export function apkAdvanced(lang: Lang): ProgrammingSection[] {
         blocks: [
           {
             paragraphs: [
-              "A debug APK is for a test. The APK that Nibras Studio builds is debug-signed. You can install it on your own phone and try the button. A store usually will not take this file as the final release. You can hand it to a friend for a test. The phone may warn about an unknown source.",
+              "A debug APK is for a test. The APK that APK Studio builds is debug-signed. You can install it on your own phone and try the button. A store usually will not take this file as the final release. You can hand it to a friend for a test. The phone may warn about an unknown source.",
               "A release APK is signed with your own key. That key shows that the next update came from you. Lose the key and you cannot put a new file on top of the same app. A new package name counts as another app and stands beside the old one.",
               "versionCode is a whole number. Each new file must raise it. versionName is the name a person sees, such as 1.2. If the number does not rise, the phone does not replace the old file.",
               "An AAB is the bundle a store often wants. An APK is the file the phone installs. The store can split an AAB into smaller APKs for each kind of phone. If you install it yourself, you need an APK in your hand.",
@@ -215,7 +215,7 @@ export function apkAdvanced(lang: Lang): ProgrammingSection[] {
               "A simple APK is one screen. It keeps a line on the phone. It does not know who the person is. Close it and open it, and the line is still there. That is enough. A note, a counter, and a one-button page are this kind. You can build one in a day.",
               "An advanced APK has many screens. There is an account. The data has to appear on another phone. A list comes from the internet. A picture is sent. A notification can arrive while the app is closed. Two people see the same change. This is no longer a page squeezed into a file. The phone, a server, and stored data work together.",
               "An advanced app does not start big on the first day. The simple screen is finished first. Then a second screen arrives. Then saving moves to a server. Then login. Writing all of it on day one gives an empty shell: buttons, and no job.",
-              "On the web path the hard part is often the site itself. Login, the list, and the server live on the site. The APK is only the window. Nibras Studio can turn that site into an app. Choose native or Flutter when the camera, the files, or background work must go deeper than a page. If a window is enough, a second program wastes time.",
+              "On the web path the hard part is often the site itself. Login, the list, and the server live on the site. The APK is only the window. APK Studio can turn that site into an app. Choose native or Flutter when the camera, the files, or background work must go deeper than a page. If a window is enough, a second program wastes time.",
             ],
           },
         ],
@@ -314,7 +314,7 @@ export function apkAdvanced(lang: Lang): ProgrammingSection[] {
         blocks: [
           {
             paragraphs: [
-              "Debug APK yoklama içindir. Nibras Studio'nun derlediği APK debug imzalıdır. Onu kendi telefonuna kurup düğmeyi denemek olur. Mağaza bu dosyayı genellikle son sürüm olarak kabul etmez. Arkadaşına deneme için vermek olur, telefon ise tanınmayan kaynak uyarısı gösterebilir.",
+              "Debug APK yoklama içindir. APK Studio'nun derlediği APK debug imzalıdır. Onu kendi telefonuna kurup düğmeyi denemek olur. Mağaza bu dosyayı genellikle son sürüm olarak kabul etmez. Arkadaşına deneme için vermek olur, telefon ise tanınmayan kaynak uyarısı gösterebilir.",
               "Release APK senin kendi anahtarınla imzalanır. O anahtar sonraki güncellemenin senden geldiğini gösterir. Anahtarı kaybedersen aynı uygulamanın üstüne yenisini koyamazsın. Yeni paket adı başka uygulama sayılır ve eskisinin yanında ayrı durur.",
               "versionCode tam sayıdır. Her yeni dosyada bu sayı büyümeli. versionName kişinin gördüğü addır, örneğin 1.2. Sayı artmazsa telefon yenisini eskinin yerine koymaz.",
               "AAB mağazanın çoğu zaman istediği pakettir. APK telefonun kurduğu dosyadır. Mağaza AAB'yi telefonun türüne göre küçük APK'lara bölebilir. Kendin doğrudan kuruyorsan elinde APK olmalıdır.",
@@ -331,7 +331,7 @@ export function apkAdvanced(lang: Lang): ProgrammingSection[] {
               "Basit APK bir ekrandır. Bir satırı telefonda tutar. Kişinin kim olduğunu bilmez. Kapatıp açınca satır yerindedir ve bu yeter. Not, sayaç ve bir düğmelik sayfa bu türdür. Onu bir günde derlemek olur.",
               "Gelişmiş APK çok ekrandır. Hesap vardır. Veri başka telefonda da görünmelidir. Liste internetten gelir. Resim gönderilir. Uygulama kapalıyken bildirim gelebilir. İki kişi aynı değişikliği görür. Bu artık bir dosyanın içine sıkışmış sayfa değildir. Telefon, sunucu ve saklanan veri birlikte çalışır.",
               "Gelişmiş uygulama ilk gün büyük başlamaz. Önce basit ekran biter. Sonra ikinci ekran gelir. Sonra kayıt sunucuya geçer. Sonra giriş. Hepsini ilk gün yazmak boş kabuk verir: düğmeler vardır, iş yoktur.",
-              "Web yolunda zor kısım çoğu zaman sitenin kendisidir. Giriş, liste ve sunucu sitededir. APK yalnız penceredir. Nibras Studio o siteyi uygulamaya çevirebilir. Kameranın, dosyanın ve arka planda işin sayfadan derin olması gerekiyorsa native ya da Flutter seçilir. Pencere yetiyorsa ikinci program yazmak vakit kaybıdır.",
+              "Web yolunda zor kısım çoğu zaman sitenin kendisidir. Giriş, liste ve sunucu sitededir. APK yalnız penceredir. APK Studio o siteyi uygulamaya çevirebilir. Kameranın, dosyanın ve arka planda işin sayfadan derin olması gerekiyorsa native ya da Flutter seçilir. Pencere yetiyorsa ikinci program yazmak vakit kaybıdır.",
             ],
           },
         ],
@@ -430,7 +430,7 @@ export function apkAdvanced(lang: Lang): ProgrammingSection[] {
         blocks: [
           {
             paragraphs: [
-              "APK التجريبي للاختبار. ملف APK الذي يجمعه Nibras Studio موقّع توقيعاً تجريبياً. يمكن تثبيته على هاتفك وتجربة الزر. المتجر عادة لا يقبل هذا الملف كإصدار أخير. يمكن إعطاؤه لصديق للاختبار وقد يُظهر الهاتف تحذيراً عن مصدر غير معروف.",
+              "APK التجريبي للاختبار. ملف APK الذي يجمعه APK Studio موقّع توقيعاً تجريبياً. يمكن تثبيته على هاتفك وتجربة الزر. المتجر عادة لا يقبل هذا الملف كإصدار أخير. يمكن إعطاؤه لصديق للاختبار وقد يُظهر الهاتف تحذيراً عن مصدر غير معروف.",
               "APK الإصدار يُوقَّع بمفتاحك. ذلك المفتاح يُظهر أن التحديث التالي جاء منك. إذا ضاع المفتاح لا تستطيع وضع ملف جديد فوق التطبيق نفسه. اسم حزمة جديد يُحسب تطبيقاً آخر ويقف بجانب القديم.",
               "versionCode عدد صحيح. يجب أن يكبر في كل ملف جديد. versionName هو الاسم الذي يراه الإنسان مثل 1.2. إذا لم يكبر العدد فالهاتف لا يضع الجديد مكان القديم.",
               "AAB هو الحزمة التي يريدها المتجر غالباً. APK هو الملف الذي يثبّته الهاتف. المتجر قد يقسم AAB إلى ملفات APK صغيرة حسب نوع الهاتف. إذا ثبّت بنفسك فيجب أن يكون في يدك APK.",
@@ -447,7 +447,7 @@ export function apkAdvanced(lang: Lang): ProgrammingSection[] {
               "APK البسيط شاشة واحدة. يحفظ سطراً على الهاتف. لا يعرف من الشخص. إذا أغلقته وفتحته فالسطر في مكانه وهذا يكفي. الملاحظة والعدّاد وصفحة الزر الواحد من هذا النوع. يمكن جمعه في يوم.",
               "APK المتقدّم شاشات كثيرة. فيه حساب. البيانات يجب أن تظهر على هاتف آخر. القائمة تأتي من الإنترنت. تُرسل صورة. قد يصل إشعار والتطبيق مغلق. شخصان يريان التغيير نفسه. هذا لم يعد صفحة مضغوطة في ملف. الهاتف والخادم والبيانات المحفوظة تعمل معاً.",
               "التطبيق المتقدّم لا يبدأ كبيراً في اليوم الأول. تنتهي الشاشة البسيطة أولاً. ثم تأتي شاشة ثانية. ثم ينتقل الحفظ إلى الخادم. ثم الدخول. كتابة كل هذا في اليوم الأول يعطي قشرة فارغة: أزرار بلا عمل.",
-              "في طريق الويب الجزء الصعب غالباً هو الموقع نفسه. الدخول والقائمة والخادم على الموقع. APK مجرد نافذة. يستطيع Nibras Studio تحويل ذلك الموقع إلى تطبيق. يُختار الأصلي أو Flutter حين يجب أن تكون الكاميرا والملفات والعمل في الخلفية أعمق من صفحة. إذا كفت النافذة فكتابة برنامج ثانٍ ضياع وقت.",
+              "في طريق الويب الجزء الصعب غالباً هو الموقع نفسه. الدخول والقائمة والخادم على الموقع. APK مجرد نافذة. يستطيع APK Studio تحويل ذلك الموقع إلى تطبيق. يُختار الأصلي أو Flutter حين يجب أن تكون الكاميرا والملفات والعمل في الخلفية أعمق من صفحة. إذا كفت النافذة فكتابة برنامج ثانٍ ضياع وقت.",
             ],
           },
         ],
@@ -546,7 +546,7 @@ export function apkAdvanced(lang: Lang): ProgrammingSection[] {
         blocks: [
           {
             paragraphs: [
-              "Debug APK нужен для проверки. APK, который собирает Nibras Studio, подписан отладочной подписью. Его можно поставить на свой телефон и нажать кнопку. Магазин обычно не берёт этот файл как окончательный выпуск. Другу для теста отдать можно, телефон может предупредить о неизвестном источнике.",
+              "Debug APK нужен для проверки. APK, который собирает APK Studio, подписан отладочной подписью. Его можно поставить на свой телефон и нажать кнопку. Магазин обычно не берёт этот файл как окончательный выпуск. Другу для теста отдать можно, телефон может предупредить о неизвестном источнике.",
               "Release APK подписывается твоим ключом. Этот ключ показывает, что следующее обновление пришло от тебя. Потеряешь ключ — не сможешь положить новый файл поверх того же приложения. Новое имя пакета считается другим приложением и стоит рядом со старым.",
               "versionCode — целое число. В каждом новом файле оно должно вырасти. versionName — имя, которое видит человек, например 1.2. Если число не выросло, телефон не ставит новый файл на место старого.",
               "AAB — пакет, который магазин часто хочет. APK — файл, который ставит телефон. Магазин может разрезать AAB на маленькие APK под вид телефона. Если ставишь сам, в руках должен быть APK.",
@@ -563,7 +563,7 @@ export function apkAdvanced(lang: Lang): ProgrammingSection[] {
               "Простой APK — это один экран. Он хранит строку на телефоне. Он не знает, кто человек. Закрой и открой — строка на месте, и этого хватает. Заметка, счётчик и страница с одной кнопкой такого вида. Его можно собрать за день.",
               "Развитый APK — это много экранов. Есть учётная запись. Данные должны быть видны и на другом телефоне. Список приходит из интернета. Картинка отправляется. Уведомление может прийти, когда приложение закрыто. Двое видят одно изменение. Это уже не страница, сжатая в файл. Телефон, сервер и сохранённые данные работают вместе.",
               "Развитое приложение не начинается большим в первый день. Сначала заканчивается простой экран. Потом приходит второй. Потом сохранение переходит на сервер. Потом вход. Написать всё это в первый день — получить пустую оболочку: кнопки есть, работы нет.",
-              "На веб-пути трудная часть часто сам сайт. Вход, список и сервер живут на сайте. APK — только окно. Nibras Studio может превратить этот сайт в приложение. Native или Flutter выбирают, когда камера, файлы и фоновая работа должны быть глубже страницы. Если окна хватает, вторая программа — потеря времени.",
+              "На веб-пути трудная часть часто сам сайт. Вход, список и сервер живут на сайте. APK — только окно. APK Studio может превратить этот сайт в приложение. Native или Flutter выбирают, когда камера, файлы и фоновая работа должны быть глубже страницы. Если окна хватает, вторая программа — потеря времени.",
             ],
           },
         ],
@@ -665,7 +665,7 @@ function moneySection(lang: Lang): ProgrammingSection {
             "Yoxlama istifadəçisi. Öz kartınla ilk alış etmə. Mağazanın lisenziya yoxlayıcısı saxta ödənişlə düyməni sınamağa imkan verir.",
           ],
           after: [
-            "Nibras Studio-nun debug APK-sı yoxlama üçündür. Onunla mağaza ödənişi açılmır. Saytın özündə ödəniş varsa, pəncərə həmin səhifəni aça bilər. Mağazaya qoyanda isə release imza, böyüyən versiya və mağazanın qaydası lazımdır.",
+            "APK Studio-nun debug APK-sı yoxlama üçündür. Onunla mağaza ödənişi açılmır. Saytın özündə ödəniş varsa, pəncərə həmin səhifəni aça bilər. Mağazaya qoyanda isə release imza, böyüyən versiya və mağazanın qaydası lazımdır.",
           ],
         },
         {
@@ -721,7 +721,7 @@ function moneySection(lang: Lang): ProgrammingSection {
             "A test user. Do not make the first purchase with your own card. The store's license tester lets you try the button with a fake payment.",
           ],
           after: [
-            "The debug APK from Nibras Studio is for a test. Store payment does not open with it. If the site itself has payment, the window can open that page. Putting it in a store still needs a release signature, a rising version, and the store's rule.",
+            "The debug APK from APK Studio is for a test. Store payment does not open with it. If the site itself has payment, the window can open that page. Putting it in a store still needs a release signature, a rising version, and the store's rule.",
           ],
         },
         {
@@ -777,7 +777,7 @@ function moneySection(lang: Lang): ProgrammingSection {
             "Deneme kullanıcısı. İlk alışı kendi kartınla yapma. Mağazanın lisans denemesi sahte ödemeyle düğmeyi sınamaya izin verir.",
           ],
           after: [
-            "Nibras Studio'nun debug APK'sı yoklama içindir. Onunla mağaza ödemesi açılmaz. Sitenin kendisinde ödeme varsa pencere o sayfayı açabilir. Mağazaya koyunca ise release imza, yükselen sürüm ve mağazanın kuralı gerekir.",
+            "APK Studio'nun debug APK'sı yoklama içindir. Onunla mağaza ödemesi açılmaz. Sitenin kendisinde ödeme varsa pencere o sayfayı açabilir. Mağazaya koyunca ise release imza, yükselen sürüm ve mağazanın kuralı gerekir.",
           ],
         },
         {
@@ -833,7 +833,7 @@ function moneySection(lang: Lang): ProgrammingSection {
             "مستخدم تجربة. لا تجعل أول شراء ببطاقتك. مُجرِّب الترخيص في المتجر يسمح بتجربة الزر بدفع غير حقيقي.",
           ],
           after: [
-            "ملف APK التجريبي من Nibras Studio للاختبار. دفع المتجر لا يُفتح به. إذا كان في الموقع نفسه دفع فتستطيع النافذة فتح تلك الصفحة. وضعه في المتجر ما زال يحتاج توقيع إصدار ونسخة تكبر وقاعدة المتجر.",
+            "ملف APK التجريبي من APK Studio للاختبار. دفع المتجر لا يُفتح به. إذا كان في الموقع نفسه دفع فتستطيع النافذة فتح تلك الصفحة. وضعه في المتجر ما زال يحتاج توقيع إصدار ونسخة تكبر وقاعدة المتجر.",
           ],
         },
         {
@@ -889,7 +889,7 @@ function moneySection(lang: Lang): ProgrammingSection {
             "Тестовый пользователь. Первую покупку не делай своей картой. Проверка лицензии магазина даёт нажать кнопку поддельной оплатой.",
           ],
           after: [
-            "Debug APK от Nibras Studio нужен для проверки. Оплата магазина им не открывается. Если оплата есть на самом сайте, окно может открыть ту страницу. Чтобы положить в магазин, всё равно нужны подпись release, растущая версия и правило магазина.",
+            "Debug APK от APK Studio нужен для проверки. Оплата магазина им не открывается. Если оплата есть на самом сайте, окно может открыть ту страницу. Чтобы положить в магазин, всё равно нужны подпись release, растущая версия и правило магазина.",
           ],
         },
         {

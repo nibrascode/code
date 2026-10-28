@@ -23,11 +23,11 @@ const DESC: Record<BarGroup, L> = {
     ru: "Бесплатные онлайн-инструменты: PDF, QR-код, удаление фона, сжатие фото, расчёты, планы, вопросы и Nibras AI. Без аккаунта.",
   },
   g2: {
-    az: "Nibras Studio, Workspace və APK Studio: brauzerdə kod yaz, layihəni saxla və APK üçün ZIP hazırla. Pulsuz, hesabsız.",
-    en: "Nibras Studio, Workspace and APK Studio: write code in the browser, keep projects and prepare a ZIP for an APK. Free, no account.",
-    tr: "Nibras Studio, Workspace ve APK Studio: tarayıcıda kod yaz, projeyi sakla ve APK için ZIP hazırla. Ücretsiz, hesapsız.",
-    ar: "Nibras Studio وWorkspace وAPK Studio: اكتب الكود في المتصفح واحفظ المشروع وجهّز ZIP لتطبيق APK. مجاني وبلا حساب.",
-    ru: "Nibras Studio, Workspace и APK Studio: пишите код в браузере, храните проекты и готовьте ZIP для APK. Бесплатно, без аккаунта.",
+    az: "Code Studio, Workspace və APK Studio: brauzerdə kod yaz, layihəni saxla və APK üçün ZIP hazırla. Pulsuz, hesabsız.",
+    en: "Code Studio, Workspace and APK Studio: write code in the browser, keep projects and prepare a ZIP for an APK. Free, no account.",
+    tr: "Code Studio, Workspace ve APK Studio: tarayıcıda kod yaz, projeyi sakla ve APK için ZIP hazırla. Ücretsiz, hesapsız.",
+    ar: "Code Studio وWorkspace وAPK Studio: اكتب الكود في المتصفح واحفظ المشروع وجهّز ZIP لتطبيق APK. مجاني وبلا حساب.",
+    ru: "Code Studio, Workspace и APK Studio: пишите код в браузере, храните проекты и готовьте ZIP для APK. Бесплатно, без аккаунта.",
   },
   g3: {
     az: "Learn, Logic Lab, Site Doctor, Error Help və digər yoxlama alətləri: öyrən, saytı yoxla, xətanı başa düş. Pulsuz.",

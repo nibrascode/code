@@ -30,11 +30,11 @@ const COPY = {
   ),
   code: L("Kod yazıram", "I write code", "Kod yazıyorum", "أكتب كوداً", "Пишу код"),
   codeLead: L(
-    "JSON sətirlərə ayrılır və səhv vergül burada görünür. CSS və JavaScript oxunaqlı olur, amma bu səhifələr kodu işlətmir. Dərslər Python, HTML və başqa mövzunu addım-addım açır. Eyni qapıda Nibras Studio, Workspace, Site Doctor, File Check, Schema, Shortcuts, Site Mirror və Logic Lab da var. Hər birinin öz səhifəsində nə etdiyi yazılır.",
-    "JSON is split onto lines, and a bad comma shows up here. CSS and JavaScript become easier to read, but these pages do not run the code. The lessons open Python, HTML, and other topics step by step. The same door also has Nibras Studio, Workspace, Site Doctor, File Check, Schema, Shortcuts, Site Mirror, and Logic Lab. Each page says what that one does.",
-    "JSON satırlara ayrılır ve hatalı virgül burada görünür. CSS ve JavaScript okunur hale gelir, ama bu sayfalar kodu çalıştırmaz. Dersler Python, HTML ve başka konuyu adım adım açar. Aynı kapıda Nibras Studio, Workspace, Site Doctor, File Check, Schema, Shortcuts, Site Mirror ve Logic Lab da vardır. Her birinin kendi sayfasında ne yaptığı yazılır.",
-    "يُفصل JSON على أسطر وتظهر الفاصلة الخطأ هنا. CSS وJavaScript يصيران أسهل قراءة، لكن هذه الصفحات لا تشغّل الرمز. الدروس تفتح Python وHTML وغيرهما خطوة بخطوة. في الباب نفسه أيضًا Nibras Studio وWorkspace وSite Doctor وFile Check وSchema وShortcuts وSite Mirror وLogic Lab. كل صفحة تقول ماذا تفعل.",
-    "JSON разбивается на строки, и плохая запятая видна здесь. CSS и JavaScript становятся читаемее, но эти страницы код не запускают. Уроки открывают Python, HTML и другие темы шаг за шагом. В той же двери есть Nibras Studio, Workspace, Site Doctor, File Check, Schema, Shortcuts, Site Mirror и Logic Lab. На своей странице написано, что делает каждая.",
+    "JSON sətirlərə ayrılır və səhv vergül burada görünür. CSS və JavaScript oxunaqlı olur, amma bu səhifələr kodu işlətmir. Dərslər Python, HTML və başqa mövzunu addım-addım açır. Eyni qapıda Code Studio, Workspace, Site Doctor, File Check, Schema, Shortcuts, Site Mirror və Logic Lab da var. Hər birinin öz səhifəsində nə etdiyi yazılır.",
+    "JSON is split onto lines, and a bad comma shows up here. CSS and JavaScript become easier to read, but these pages do not run the code. The lessons open Python, HTML, and other topics step by step. The same door also has Code Studio, Workspace, Site Doctor, File Check, Schema, Shortcuts, Site Mirror, and Logic Lab. Each page says what that one does.",
+    "JSON satırlara ayrılır ve hatalı virgül burada görünür. CSS ve JavaScript okunur hale gelir, ama bu sayfalar kodu çalıştırmaz. Dersler Python, HTML ve başka konuyu adım adım açar. Aynı kapıda Code Studio, Workspace, Site Doctor, File Check, Schema, Shortcuts, Site Mirror ve Logic Lab da vardır. Her birinin kendi sayfasında ne yaptığı yazılır.",
+    "يُفصل JSON على أسطر وتظهر الفاصلة الخطأ هنا. CSS وJavaScript يصيران أسهل قراءة، لكن هذه الصفحات لا تشغّل الرمز. الدروس تفتح Python وHTML وغيرهما خطوة بخطوة. في الباب نفسه أيضًا Code Studio وWorkspace وSite Doctor وFile Check وSchema وShortcuts وSite Mirror وLogic Lab. كل صفحة تقول ماذا تفعل.",
+    "JSON разбивается на строки, и плохая запятая видна здесь. CSS и JavaScript становятся читаемее, но эти страницы код не запускают. Уроки открывают Python, HTML и другие темы шаг за шагом. В той же двери есть Code Studio, Workspace, Site Doctor, File Check, Schema, Shortcuts, Site Mirror и Logic Lab. На своей странице написано, что делает каждая.",
   ),
   learn: L("Öyrənirəm", "I am learning", "Öğreniyorum", "أتعلّم", "Учусь"),
   learnLead: L(
@@ -164,7 +164,7 @@ export function StartDesk({ lang }: { lang: Lang }) {
       title: COPY.code[lang],
       lead: COPY.codeLead[lang],
       links: [
-        [localeHref(lang, "/studio"), "Nibras Studio"],
+        [localeHref(lang, "/studio"), "Code Studio"],
         [localeHref(lang, "/workspace"), "Workspace"],
         [localeHref(lang, "/doctor"), "Site Doctor"],
         [localeHref(lang, "/filecheck"), "File Check"],

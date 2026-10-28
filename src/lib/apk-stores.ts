@@ -10,7 +10,7 @@ export function storeSections(lang: Lang): ProgrammingSection[] {
         blocks: [
           {
             paragraphs: [
-              "Play Market Google Play-dir. Telefonun özünə APK atmaq başqa şeydir. Mağazaya çıxarmaq üçün Play Console hesabı, imzalı AAB və doldurulmuş səhifə lazımdır. Nibras Studio-nun debug APK-sı bu yerə getmir. 2021-ci ilin avqustundan yeni tətbiq üçün mağaza APK yox, AAB istəyir. AAB bağlama faylıdır. Mağaza onu telefonun növünə görə kiçik APK-ya çevirir.",
+              "Play Market Google Play-dir. Telefonun özünə APK atmaq başqa şeydir. Mağazaya çıxarmaq üçün Play Console hesabı, imzalı AAB və doldurulmuş səhifə lazımdır. APK Studio-nun debug APK-sı bu yerə getmir. 2021-ci ilin avqustundan yeni tətbiq üçün mağaza APK yox, AAB istəyir. AAB bağlama faylıdır. Mağaza onu telefonun növünə görə kiçik APK-ya çevirir.",
               "İş bir gündə bitmir. Şəxsiyyət yoxlaması, mətn, şəkillər və bəzi hesablarda 14 günlük qapalı test var. Əvvəl faylı düz yığ, sonra səhifəni doldur, axırda nəzərdən keçirməyə göndər.",
             ],
           },
@@ -72,7 +72,7 @@ export function storeSections(lang: Lang): ProgrammingSection[] {
             heading: "Google xidməti Huawei-də yoxdur",
             paragraphs: [
               "2019-cu ilin sonundan bir çox Huawei telefonunda Google Play xidməti yoxdur. Google ilə giriş, Google xəritə, Play Billing və Firebase bildirişi həmin telefonlarda açılmır. Bu hissələri gizlət və ya Huawei-nin öz xidməti ilə əvəz et. Yoxlamadan keçən tətbiq telefonda açılıb boş düymə göstərə bilər. Buna görə bulud testi və ya əsl Huawei telefonu lazımdır.",
-              "Tətbiq yalnız sənin saytının pəncərəsidirsə və Google kitabxanası çağırmırsa, eyni səhifə AppGallery-də də aça bilər. Yenə də release imzalı APK və ya AAB lazımdır. Nibras Studio-nun debug faylı mağaza faylı deyil.",
+              "Tətbiq yalnız sənin saytının pəncərəsidirsə və Google kitabxanası çağırmırsa, eyni səhifə AppGallery-də də aça bilər. Yenə də release imzalı APK və ya AAB lazımdır. APK Studio-nun debug faylı mağaza faylı deyil.",
               "İki mağaza iki tamaşaçıdır. Play-də olan adam Huawei-də özü səni görmür. Səhifənin mətni, ikonu və məxfilik ünvanı hər mağazada ayrıca doldurulur. Paket adını hər ikisində eyni saxlamaq yeniləməni qarışdırmır, çünki mağazalar bir-birinin imzasını daşımır. Hər mağazada ilk faylın açarını öz yerində saxla.",
             ],
           },
@@ -86,7 +86,7 @@ export function storeSections(lang: Lang): ProgrammingSection[] {
         blocks: [
           {
             paragraphs: [
-              "The Play Store is Google Play. Putting an APK on your own phone is a different job. To reach the store you need a Play Console account, a signed AAB, and a filled page. The debug APK from Nibras Studio does not go there. Since August 2021 a new app must be an AAB, not an APK. An AAB is a bundle. The store turns it into a small APK for each kind of phone.",
+              "The Play Store is Google Play. Putting an APK on your own phone is a different job. To reach the store you need a Play Console account, a signed AAB, and a filled page. The debug APK from APK Studio does not go there. Since August 2021 a new app must be an AAB, not an APK. An AAB is a bundle. The store turns it into a small APK for each kind of phone.",
               "The work does not finish in a day. There is an identity check, text, pictures, and on some accounts a 14-day closed test. Build the file first, fill the page next, and send it for review last.",
             ],
           },
@@ -148,7 +148,7 @@ export function storeSections(lang: Lang): ProgrammingSection[] {
             heading: "Google services are missing on Huawei",
             paragraphs: [
               "Since late 2019 many Huawei phones have no Google Play services. Google sign-in, Google maps, Play Billing, and Firebase notifications do not open on those phones. Hide those parts or replace them with Huawei's own service. An app that passes review can still open and show an empty button. That is why a cloud test or a real Huawei phone is needed.",
-              "If the app is only a window onto your site and it does not call a Google library, the same page can open on AppGallery too. You still need a release-signed APK or AAB. The debug file from Nibras Studio is not a store file.",
+              "If the app is only a window onto your site and it does not call a Google library, the same page can open on AppGallery too. You still need a release-signed APK or AAB. The debug file from APK Studio is not a store file.",
               "Two stores are two audiences. A person on Play does not see you on Huawei by themselves. The page text, the icon, and the privacy address are filled separately in each store. Keeping the same package name in both does not mix the updates, because the stores do not carry each other's signature. Keep the first file's key in its own place for each store.",
             ],
           },
@@ -162,7 +162,7 @@ export function storeSections(lang: Lang): ProgrammingSection[] {
         blocks: [
           {
             paragraphs: [
-              "Play Market Google Play'dir. Telefonun kendine APK atmak başka iştir. Mağazaya çıkmak için Play Console hesabı, imzalı AAB ve doldurulmuş sayfa gerekir. Nibras Studio'nun debug APK'sı oraya gitmez. Ağustos 2021'den beri yeni uygulama için mağaza APK değil, AAB ister. AAB bir paket dosyasıdır. Mağaza onu telefonun türüne göre küçük APK'ya çevirir.",
+              "Play Market Google Play'dir. Telefonun kendine APK atmak başka iştir. Mağazaya çıkmak için Play Console hesabı, imzalı AAB ve doldurulmuş sayfa gerekir. APK Studio'nun debug APK'sı oraya gitmez. Ağustos 2021'den beri yeni uygulama için mağaza APK değil, AAB ister. AAB bir paket dosyasıdır. Mağaza onu telefonun türüne göre küçük APK'ya çevirir.",
               "İş bir günde bitmez. Kimlik yoklaması, metin, resimler ve bazı hesaplarda 14 günlük kapalı test vardır. Önce dosyayı düz derle, sonra sayfayı doldur, en sonda incelemeye gönder.",
             ],
           },
@@ -224,7 +224,7 @@ export function storeSections(lang: Lang): ProgrammingSection[] {
             heading: "Google hizmeti Huawei'de yoktur",
             paragraphs: [
               "2019'un sonundan beri birçok Huawei telefonunda Google Play hizmeti yoktur. Google ile giriş, Google harita, Play Billing ve Firebase bildirimi o telefonlarda açılmaz. Bu parçaları gizle ya da Huawei'nin kendi hizmetiyle değiştir. İncelemeden geçen uygulama telefonda açılıp boş düğme gösterebilir. Bunun için bulut testi ya da gerçek bir Huawei telefonu gerekir.",
-              "Uygulama yalnız sitenin penceresiyse ve Google kütüphanesi çağırmıyorsa, aynı sayfa AppGallery'de de açılabilir. Yine de release imzalı APK ya da AAB gerekir. Nibras Studio'nun debug dosyası mağaza dosyası değildir.",
+              "Uygulama yalnız sitenin penceresiyse ve Google kütüphanesi çağırmıyorsa, aynı sayfa AppGallery'de de açılabilir. Yine de release imzalı APK ya da AAB gerekir. APK Studio'nun debug dosyası mağaza dosyası değildir.",
               "İki mağaza iki izleyicidir. Play'deki kişi Huawei'de seni kendi görmez. Sayfanın metni, ikonu ve gizlilik adresi her mağazada ayrı doldurulur. Paket adını ikisinde de aynı tutmak güncellemeyi karıştırmaz, çünkü mağazalar birbirinin imzasını taşımaz. Her mağazada ilk dosyanın anahtarını kendi yerinde sakla.",
             ],
           },
@@ -238,7 +238,7 @@ export function storeSections(lang: Lang): ProgrammingSection[] {
         blocks: [
           {
             paragraphs: [
-              "Play Market هو Google Play. وضع APK على هاتفك عمل آخر. للوصول إلى المتجر يلزم حساب Play Console وAAB موقّع وصفحة مملوءة. ملف APK التجريبي من Nibras Studio لا يذهب إلى هناك. منذ أغسطس 2021 التطبيق الجديد يجب أن يكون AAB لا APK. AAB حزمة. المتجر يحوّلها إلى APK صغير حسب نوع الهاتف.",
+              "Play Market هو Google Play. وضع APK على هاتفك عمل آخر. للوصول إلى المتجر يلزم حساب Play Console وAAB موقّع وصفحة مملوءة. ملف APK التجريبي من APK Studio لا يذهب إلى هناك. منذ أغسطس 2021 التطبيق الجديد يجب أن يكون AAB لا APK. AAB حزمة. المتجر يحوّلها إلى APK صغير حسب نوع الهاتف.",
               "العمل لا ينتهي في يوم. هناك فحص هوية ونص وصور وفي بعض الحسابات اختبار مغلق لمدة 14 يوماً. اجمع الملف أولاً ثم املأ الصفحة وفي الأخير أرسله للمراجعة.",
             ],
           },
@@ -300,7 +300,7 @@ export function storeSections(lang: Lang): ProgrammingSection[] {
             heading: "خدمات Google غير موجودة على Huawei",
             paragraphs: [
               "منذ أواخر 2019 كثير من هواتف Huawei بلا خدمات Google Play. الدخول بـ Google وخرائط Google وPlay Billing وإشعارات Firebase لا تُفتح على تلك الهواتف. أخفِ هذه الأجزاء أو استبدلها بخدمة Huawei. التطبيق الذي يمر المراجعة قد يُفتح ويُظهر زراً فارغاً. لذلك يلزم الاختبار السحابي أو هاتف Huawei حقيقي.",
-              "إذا كان التطبيق مجرد نافذة لموقعك ولا يستدعي مكتبة Google فالصفحة نفسها يمكن أن تُفتح على AppGallery أيضاً. ما زلت تحتاج APK أو AAB بتوقيع الإصدار. ملف التجريب من Nibras Studio ليس ملف متجر.",
+              "إذا كان التطبيق مجرد نافذة لموقعك ولا يستدعي مكتبة Google فالصفحة نفسها يمكن أن تُفتح على AppGallery أيضاً. ما زلت تحتاج APK أو AAB بتوقيع الإصدار. ملف التجريب من APK Studio ليس ملف متجر.",
               "المتجران جمهوران. الشخص على Play لا يراك على Huawei وحده. نص الصفحة والأيقونة وعنوان الخصوصية يُملأ في كل متجر على حدة. إبقاء اسم الحزمة واحداً في الاثنين لا يخلط التحديث لأن المتجرين لا يحملان توقيع بعضهما. احفظ مفتاح أول ملف في مكانه لكل متجر.",
             ],
           },
@@ -314,7 +314,7 @@ export function storeSections(lang: Lang): ProgrammingSection[] {
         blocks: [
           {
             paragraphs: [
-              "Play Market — это Google Play. Положить APK на свой телефон — другая работа. Чтобы выйти в магазин, нужны аккаунт Play Console, подписанный AAB и заполненная страница. Debug APK от Nibras Studio туда не идёт. С августа 2021 новое приложение должно быть AAB, а не APK. AAB — это пакет. Магазин превращает его в маленький APK под вид телефона.",
+              "Play Market — это Google Play. Положить APK на свой телефон — другая работа. Чтобы выйти в магазин, нужны аккаунт Play Console, подписанный AAB и заполненная страница. Debug APK от APK Studio туда не идёт. С августа 2021 новое приложение должно быть AAB, а не APK. AAB — это пакет. Магазин превращает его в маленький APK под вид телефона.",
               "Работа не кончается за день. Есть проверка личности, текст, картинки и на части аккаунтов закрытый тест на 14 дней. Сначала собери файл, потом заполни страницу, в конце отправь на проверку.",
             ],
           },
@@ -376,7 +376,7 @@ export function storeSections(lang: Lang): ProgrammingSection[] {
             heading: "Служб Google на Huawei нет",
             paragraphs: [
               "С конца 2019 на многих телефонах Huawei нет служб Google Play. Вход через Google, карты Google, Play Billing и уведомления Firebase на этих телефонах не открываются. Спрячь эти части или замени службой самой Huawei. Приложение, которое прошло проверку, может открыться и показать пустую кнопку. Поэтому нужен облачный тест или настоящий телефон Huawei.",
-              "Если приложение только окно твоего сайта и не вызывает библиотеку Google, та же страница может открыться и в AppGallery. Всё равно нужен APK или AAB с подписью release. Debug-файл от Nibras Studio — не файл магазина.",
+              "Если приложение только окно твоего сайта и не вызывает библиотеку Google, та же страница может открыться и в AppGallery. Всё равно нужен APK или AAB с подписью release. Debug-файл от APK Studio — не файл магазина.",
               "Два магазина — две аудитории. Человек в Play сам не видит тебя в Huawei. Текст страницы, значок и адрес политики заполняются в каждом магазине отдельно. Одинаковое имя пакета в обоих не смешивает обновления, потому что магазины не носят подпись друг друга. Ключ первого файла храни в своём месте для каждого магазина.",
             ],
           },
@@ -430,7 +430,7 @@ function rejectSection(lang: Lang): ProgrammingSection {
           heading: "Yalnız sayt pəncərəsidir",
           paragraphs: [
             "Google Play sadəcə bir saytı pəncərəyə qoyan tətbiqi tez-tez rədd edir. İçində bildiriş, telefonda saxlanan iş, kamera və ya səhifədən artıq bir düymə yoxdursa, yoxlayan bunu ayrıca tətbiq saymaya bilər. Saytın ünvanını brauzerdə açmaq eyni işi görürsə, mağaza faylı artıq sayır.",
-            "Huawei də boş pəncərəni və açılmayan ünvanı rədd edə bilər. Saytın özü doludursa və telefonda işləyirsə, şans daha yüksəkdir, amma zəmanət deyil. Nibras Studio-nun debug APK-sı bu yoxlamaya göndərilmir. Mağazaya release yığım lazımdır.",
+            "Huawei də boş pəncərəni və açılmayan ünvanı rədd edə bilər. Saytın özü doludursa və telefonda işləyirsə, şans daha yüksəkdir, amma zəmanət deyil. APK Studio-nun debug APK-sı bu yoxlamaya göndərilmir. Mağazaya release yığım lazımdır.",
             "Pəncərəni tətbiq etmək istəyirsənsə, ən azı bir telefon işi əlavə et. Son açılan səhifəni saxla, bildiriş göndər və ya kameradan bir şəkil al. Bunu etmədən göndərmək rədd riskini böyüdür.",
           ],
         },
@@ -510,7 +510,7 @@ function rejectSection(lang: Lang): ProgrammingSection {
           heading: "It is only a window onto a site",
           paragraphs: [
             "Google Play often refuses an app that only puts a site in a window. If there is no notification, no job saved on the phone, no camera, and no button beyond the page, the reviewer may not count it as its own app. If opening the site's address in a browser does the same job, the store treats the file as extra.",
-            "Huawei can also refuse an empty window and an address that does not open. If the site itself is full and works on a phone, the chance is higher, but it is not a promise. The debug APK from Nibras Studio is not sent to this review. The store needs a release build.",
+            "Huawei can also refuse an empty window and an address that does not open. If the site itself is full and works on a phone, the chance is higher, but it is not a promise. The debug APK from APK Studio is not sent to this review. The store needs a release build.",
             "If you want the window to become an app, add at least one phone job. Save the last opened page, send a notification, or take one picture from the camera. Sending it without that raises the chance of a refusal.",
           ],
         },
@@ -590,7 +590,7 @@ function rejectSection(lang: Lang): ProgrammingSection {
           heading: "Yalnızca site penceresidir",
           paragraphs: [
             "Google Play yalnızca bir siteyi pencereye koyan uygulamayı sık sık reddeder. İçinde bildirim, telefonda saklanan iş, kamera ya da sayfadan fazla bir düğme yoksa inceleyen bunu ayrı uygulama saymayabilir. Sitenin adresini tarayıcıda açmak aynı işi görüyorsa mağaza dosyayı fazla sayar.",
-            "Huawei de boş pencereyi ve açılmayan adresi reddedebilir. Sitenin kendisi doluysa ve telefonda çalışıyorsa şans daha yüksektir, ama söz değildir. Nibras Studio'nun debug APK'sı bu incelemeye gönderilmez. Mağazaya release derleme gerekir.",
+            "Huawei de boş pencereyi ve açılmayan adresi reddedebilir. Sitenin kendisi doluysa ve telefonda çalışıyorsa şans daha yüksektir, ama söz değildir. APK Studio'nun debug APK'sı bu incelemeye gönderilmez. Mağazaya release derleme gerekir.",
             "Pencereyi uygulama yapmak istiyorsan en az bir telefon işi ekle. Son açılan sayfayı sakla, bildirim gönder ya da kameradan bir resim al. Bunu etmeden göndermek ret riskini büyütür.",
           ],
         },
@@ -670,7 +670,7 @@ function rejectSection(lang: Lang): ProgrammingSection {
           heading: "مجرد نافذة موقع",
           paragraphs: [
             "Google Play غالباً يرفض تطبيقاً يضع موقعاً في نافذة فقط. إذا لم يكن فيه إشعار ولا عمل محفوظ على الهاتف ولا كاميرا ولا زر زائد على الصفحة فقد لا يحسبه المراجع تطبيقاً مستقلاً. إذا كان فتح عنوان الموقع في المتصفح يؤدي العمل نفسه فالمتجر يعدّ الملف زيادة.",
-            "Huawei أيضاً قد يرفض النافذة الفارغة والعنوان الذي لا يُفتح. إذا كان الموقع نفسه مليئاً ويعمل على الهاتف فالفرصة أعلى لكنها ليست وعداً. ملف APK التجريبي من Nibras Studio لا يُرسل إلى هذه المراجعة. المتجر يحتاج تجميع إصدار.",
+            "Huawei أيضاً قد يرفض النافذة الفارغة والعنوان الذي لا يُفتح. إذا كان الموقع نفسه مليئاً ويعمل على الهاتف فالفرصة أعلى لكنها ليست وعداً. ملف APK التجريبي من APK Studio لا يُرسل إلى هذه المراجعة. المتجر يحتاج تجميع إصدار.",
             "إذا أردت أن تصير النافذة تطبيقاً فأضف عملاً واحداً على الأقل للهاتف. احفظ آخر صفحة فُتحت أو أرسل إشعاراً أو خذ صورة واحدة من الكاميرا. الإرسال بلا ذلك يكبّر خطر الرفض.",
           ],
         },
@@ -750,7 +750,7 @@ function rejectSection(lang: Lang): ProgrammingSection {
           heading: "Это только окно сайта",
           paragraphs: [
             "Google Play часто отказывает приложению, которое лишь кладёт сайт в окно. Если нет уведомления, работы, сохранённой на телефоне, камеры и кнопки сверх страницы, проверяющий может не счесть это отдельным приложением. Если открыть адрес сайта в браузере — та же работа, магазин считает файл лишним.",
-            "Huawei тоже может отказать пустому окну и адресу, который не открывается. Если сам сайт полный и работает на телефоне, шанс выше, но это не обещание. Debug APK от Nibras Studio на эту проверку не отправляют. Магазину нужна сборка release.",
+            "Huawei тоже может отказать пустому окну и адресу, который не открывается. Если сам сайт полный и работает на телефоне, шанс выше, но это не обещание. Debug APK от APK Studio на эту проверку не отправляют. Магазину нужна сборка release.",
             "Если хочешь сделать из окна приложение, добавь хотя бы одну телефонную работу. Сохрани последнюю открытую страницу, пошли уведомление или возьми одну картинку с камеры. Отправка без этого повышает шанс отказа.",
           ],
         },

@@ -16,11 +16,11 @@ export const PROGRAMMING_SEO: Record<string, Record<"az" | "en" | "tr" | "ar" | 
     ru: { title: "Что такое API? — Nibras Code", description: "API — дверь, которую одна программа открывает другой. Человек жмёт кнопку. Программа же шлёт адрес через эту дверь и получает ответ. Код внутри видеть не нужно.", keywords: "что такое api, api простыми словами, rest api, ключ api" },
   },
   "apk-hazirla": {
-    az: { title: "APK hazırla: öz tətbiqini telefona qoy — Nibras Code", description: "APK nədir, necə düzəldilir, hansı qovluq lazımdır və hazır zip necə Nibras Studio-ya verilir.", keywords: "APK ikon, paket adı, keystore, APK qurmaq, APK açılmır" },
-    en: { title: "Build an APK: put your own app on the phone — Nibras Code", description: "What an APK is, how it is built, which folders you need, and how a ready zip goes to Nibras Studio.", keywords: "how to make an APK, what is an APK, build an Android APK" },
-    tr: { title: "APK hazırla: kendi uygulamanı telefona koy — Nibras Code", description: "APK nedir, nasıl yapılır, hangi klasör gerekir ve hazır zip Nibras Studio'ya nasıl verilir.", keywords: "APK yapmak, APK nedir, APK nasıl yapılır, Android APK" },
-    ar: { title: "اصنع APK: ضع تطبيقك على الهاتف — Nibras Code", description: "ما هو APK وكيف يُصنع وأي مجلد يلزم وكيف يُعطى zip الجاهز إلى Nibras Studio.", keywords: "صنع APK, ما هو APK, كيف أصنع APK, Android APK" },
-    ru: { title: "Собери APK: поставь своё приложение на телефон — Nibras Code", description: "Что такое APK, как его собирают, какие папки нужны и как готовый zip отдают в Nibras Studio.", keywords: "как сделать APK, что такое APK, собрать Android APK" },
+    az: { title: "APK hazırla: öz tətbiqini telefona qoy — Nibras Code", description: "APK nədir, necə düzəldilir, hansı qovluq lazımdır və hazır zip necə Code Studio-ya verilir.", keywords: "APK ikon, paket adı, keystore, APK qurmaq, APK açılmır" },
+    en: { title: "Build an APK: put your own app on the phone — Nibras Code", description: "What an APK is, how it is built, which folders you need, and how a ready zip goes to Code Studio.", keywords: "how to make an APK, what is an APK, build an Android APK" },
+    tr: { title: "APK hazırla: kendi uygulamanı telefona koy — Nibras Code", description: "APK nedir, nasıl yapılır, hangi klasör gerekir ve hazır zip Code Studio'ya nasıl verilir.", keywords: "APK yapmak, APK nedir, APK nasıl yapılır, Android APK" },
+    ar: { title: "اصنع APK: ضع تطبيقك على الهاتف — Nibras Code", description: "ما هو APK وكيف يُصنع وأي مجلد يلزم وكيف يُعطى zip الجاهز إلى Code Studio.", keywords: "صنع APK, ما هو APK, كيف أصنع APK, Android APK" },
+    ru: { title: "Собери APK: поставь своё приложение на телефон — Nibras Code", description: "Что такое APK, как его собирают, какие папки нужны и как готовый zip отдают в Code Studio.", keywords: "как сделать APK, что такое APK, собрать Android APK" },
   },
   "bash": {
     az: { title: "Bash nədir? — Nibras Code", description: "Bash əmrləri yazdığın proqramdır. Ubuntu terminalında çox vaxt o işləyir. Proqramlaşdırma dili kimi deyil, əmr dilidir.", keywords: "Bash nədir, terminal, Ubuntu Bash, shell skript" },

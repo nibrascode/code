@@ -212,7 +212,7 @@ export function readme(name: string, files: F[], lang: string): string {
   return [
     `# ${name}`,
     "",
-    H("Nibras Studio-da hazırlanmış statik veb layihə.", "A static web project made in Nibras Studio."),
+    H("Code Studio-da hazırlanmış statik veb layihə.", "A static web project made in Code Studio."),
     "",
     `## ${H("Fayllar", "Files")}`,
     ...files.map((f) => `- \`${f.name}\` — ${f.content.split("\n").length} ${H("sətir", "lines")}`),
@@ -220,7 +220,7 @@ export function readme(name: string, files: F[], lang: string): string {
     ...(fns.length ? [`## ${H("Funksiyalar", "Functions")}`, ...fns, ""] : []),
     ...(ids.length ? [`## ${H("Elementlər (id)", "Elements (id)")}`, ids.map((i) => `\`#${i}\``).join(", "), ""] : []),
     `## ${H("İşə salmaq", "Run")}`,
-    H("`index.html` faylını brauzerdə açın və ya Nibras Studio-da «İşə sal» basın.", "Open `index.html` in a browser, or press Run in Nibras Studio."),
+    H("`index.html` faylını brauzerdə açın və ya Code Studio-da «İşə sal» basın.", "Open `index.html` in a browser, or press Run in Code Studio."),
     "",
   ].join("\n");
 }
