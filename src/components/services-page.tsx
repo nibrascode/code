@@ -1,4 +1,4 @@
-import { AppWindow, Mic, ChevronDown, Code2, FileText, Image as ImageIcon, LayoutGrid, QrCode, Sparkles } from "lucide-react";
+import { AppWindow, Mic, ChevronRight, Code2, FileText, Image as ImageIcon, LayoutGrid, QrCode, Sparkles } from "lucide-react";
 import type { ReactNode } from "react";
 import { BAR } from "@/components/home-bars";
 import { STUDIO_APPS } from "@/lib/apps";
@@ -21,7 +21,7 @@ const DESC = T(
 );
 
 type Item = { href: string; label: string; hint?: string; ext?: boolean };
-type Cat = { id: string; icon: ReactNode; title: L; items: (lang: Lang) => Item[] };
+type Cat = { id: string; sub: L; icon: ReactNode; title: L; items: (lang: Lang) => Item[] };
 
 const IMG_TOOL: Record<string, L> = {
   resize: T("Ölçünü dəyiş", "Resize", "Boyutlandır", "تغيير الحجم", "Изменить размер"),
@@ -31,14 +31,14 @@ const IMG_TOOL: Record<string, L> = {
 
 const CATS: Cat[] = [
   {
-    id: "pdf", icon: <FileText size={18} />, title: T("PDF", "PDF", "PDF", "PDF", "PDF"),
+    id: "pdf", sub: T("PDF ilə işləmək üçün alətlər", "Tools for working with PDF", "PDF ile çalışmak için araçlar", "أدوات للعمل مع PDF", "Инструменты для работы с PDF"), icon: <FileText size={22} />, title: T("PDF", "PDF", "PDF", "PDF", "PDF"),
     items: (lang) => [
       { href: localeHref(lang, "/pdf"), label: T("PDF ana", "PDF home", "PDF ana sayfa", "الصفحة الرئيسية لـ PDF", "PDF главная")[lang] },
       ...TOOL_IDS.map((id) => ({ href: localeHref(lang, `/pdf/${id}`), label: TOOL_TEXT[lang][id].title, hint: TOOL_TEXT[lang][id].description })),
     ],
   },
   {
-    id: "qr", icon: <QrCode size={18} />, title: T("QR", "QR", "QR", "QR", "QR"),
+    id: "qr", sub: T("QR kod hazırla və oxu", "Make and read QR codes", "QR kod hazırla ve oku", "أنشئ رموز QR واقرأها", "Создавайте и читайте QR-коды"), icon: <QrCode size={22} />, title: T("QR", "QR", "QR", "QR", "QR"),
     items: (lang) => [
       { href: localeHref(lang, "/qr"), label: BAR.qr[lang] },
       { href: localeHref(lang, "/wifi"), label: T("Wi-Fi QR", "Wi-Fi QR", "Wi-Fi QR", "QR للواي فاي", "Wi-Fi QR")[lang] },
@@ -46,7 +46,7 @@ const CATS: Cat[] = [
     ],
   },
   {
-    id: "image", icon: <ImageIcon size={18} />, title: T("Şəkil", "Images", "Görsel", "الصور", "Изображения"),
+    id: "image", sub: T("Şəkillə bağlı alətlər", "Tools for images", "Görsellerle ilgili araçlar", "أدوات للصور", "Инструменты для изображений"), icon: <ImageIcon size={22} />, title: T("Şəkil", "Images", "Görsel", "الصور", "Изображения"),
     items: (lang) => [
       { href: localeHref(lang, "/erase"), label: BAR.erase[lang] },
       { href: localeHref(lang, "/image"), label: BAR.image[lang] },
@@ -54,7 +54,7 @@ const CATS: Cat[] = [
     ],
   },
   {
-    id: "code", icon: <Code2 size={18} />, title: T("Kod alətləri", "Code tools", "Kod araçları", "أدوات الكود", "Инструменты кода"),
+    id: "code", sub: T("Proqramçılar üçün faydalı alətlər", "Handy tools for developers", "Geliştiriciler için faydalı araçlar", "أدوات مفيدة للمبرمجين", "Полезные инструменты для разработчиков"), icon: <Code2 size={22} />, title: T("Kod alətləri", "Code tools", "Kod araçları", "أدوات الكود", "Инструменты кода"),
     items: (lang) => [
       { href: toolsPath(lang), label: T("Bütün alətlər", "All tools", "Tüm araçlar", "كل الأدوات", "Все инструменты")[lang] },
       ...TOOL_GROUPS.flatMap((g) =>
@@ -63,14 +63,14 @@ const CATS: Cat[] = [
     ],
   },
   {
-    id: "apps", icon: <AppWindow size={18} />, title: T("Tətbiqlər", "Apps", "Uygulamalar", "التطبيقات", "Приложения"),
+    id: "apps", sub: T("Onlayn tətbiqlər", "Online apps", "Çevrim içi uygulamalar", "تطبيقات على الإنترنت", "Онлайн-приложения"), icon: <AppWindow size={22} />, title: T("Tətbiqlər", "Apps", "Uygulamalar", "التطبيقات", "Приложения"),
     items: (lang) => [
       { href: localeHref(lang, "/apps"), label: T("Bütün tətbiqlər", "All apps", "Tüm uygulamalar", "كل التطبيقات", "Все приложения")[lang] },
       ...STUDIO_APPS.map((a) => ({ href: localeHref(lang, `/apps/${a.slug}`), label: a.name })),
     ],
   },
   {
-    id: "studio", icon: <LayoutGrid size={18} />, title: T("Studio", "Studio", "Studio", "الاستوديو", "Студия"),
+    id: "studio", sub: T("Layihələrini hazırla", "Build your projects", "Projelerini hazırla", "جهّز مشاريعك", "Собирайте свои проекты"), icon: <LayoutGrid size={22} />, title: T("Studio", "Studio", "Studio", "الاستوديو", "Студия"),
     items: (lang) => [
       { href: "https://dev.nibrascode.com", label: BAR.dev[lang], ext: true },
       { href: "https://studio.nibrascode.com", label: BAR.apk[lang], ext: true },
@@ -79,7 +79,7 @@ const CATS: Cat[] = [
     ],
   },
   {
-    id: "other", icon: <Sparkles size={18} />, title: T("Digər", "More", "Diğer", "أخرى", "Другое"),
+    id: "other", sub: T("Əlavə alətlər və resurslar", "Extra tools and resources", "Ek araçlar ve kaynaklar", "أدوات وموارد إضافية", "Дополнительные инструменты и ресурсы"), icon: <Sparkles size={22} />, title: T("Digər", "More", "Diğer", "أخرى", "Другое"),
     items: (lang) => [
       { href: localeHref(lang, "/voice"), label: VOICE_TITLE[lang] },
       { href: localeHref(lang, "/ai"), label: "Nibras AI" },
@@ -117,11 +117,11 @@ export function ServicesPage({ lang }: { lang: Lang }) {
       <div className="why-glow" aria-hidden="true" />
       <div className="svc-list">
         {CATS.map((c) => (
-          <details key={c.id} className="svc-cat" name="svc">
+          <details key={c.id} className={`svc-cat svc-${c.id}`} name="svc">
             <summary>
               <span className="svc-ico" aria-hidden="true">{c.icon}</span>
-              <span className="svc-name">{c.title[lang]}</span>
-              <ChevronDown className="svc-chev" size={18} aria-hidden="true" />
+              <span className="svc-text"><b className="svc-name">{c.title[lang]}</b><small className="svc-sub">{c.sub[lang]}</small></span>
+              <span className="svc-chev" aria-hidden="true"><ChevronRight size={18} /></span>
             </summary>
             <ul>
               {c.items(lang).map((it) => (
