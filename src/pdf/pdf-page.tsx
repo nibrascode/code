@@ -15,11 +15,11 @@ const PdfTool = lazy(() => import("./pdf-tool").then((m) => ({ default: m.PdfToo
 const LANG_NAME: Record<Lang, string> = { az: "Azərbaycanca", en: "English", tr: "Türkçe", ar: "العربية", ru: "Русский" };
 const ALL_TOOLS: Record<Lang, string> = { az: "Hamısı", en: "All tools", tr: "Hepsi", ar: "الكل", ru: "Все" };
 const BADGES: Record<Lang, [string, string, string]> = {
-  az: ["26 alət", "5 dil", "Cihazda emal"],
-  en: ["26 tools", "5 languages", "On-device"],
-  tr: ["26 araç", "5 dil", "Cihazda işlenir"],
-  ar: ["26 أداة", "5 لغات", "على جهازك"],
-  ru: ["26 инструментов", "5 языков", "На устройстве"],
+  az: ["28 alət", "5 dil", "Cihazda emal"],
+  en: ["28 tools", "5 languages", "On-device"],
+  tr: ["28 araç", "5 dil", "Cihazda işlenir"],
+  ar: ["28 أداة", "5 لغات", "على جهازك"],
+  ru: ["28 инструментов", "5 языков", "На устройстве"],
 };
 const ASK_AI: Record<Lang, string> = {
   az: "Nibras AI ilə PDF-i danışıqla idarə et",
