@@ -5,7 +5,7 @@ export type EraseCopy = Record<string, string>;
 export const COPY: Record<Lang, EraseCopy> = {
   az: {
     drop: "Şəkli bura at, yapışdır (Ctrl+V) və ya seç", dropSub: "PNG, JPG, WebP. Bir neçə şəkil birdən.", run: "Fonu sil", working: "İşlənir…", ready: "Hazırdır.", empty: "Əvvəl şəkil seç",
-    private: "Şəkil cihazda qalır. Hesab lazım deyil.", again: "Təmizlə", download: "Yüklə", downloadAll: "Hamısını yüklə", copy: "Kopyala", copied: "Kopyalandı.",
+    private: "Şəkil cihazda qalır. Hesab lazım deyil.", again: "Təmizlə", toCompress: "Həcmini kiçilt", toPdf: "PDF-ə əlavə et", download: "Yüklə", downloadAll: "Hamısını yüklə", copy: "Kopyala", copied: "Kopyalandı.",
     wait: "Dəqiq model yüklənir…", fail: "Fon silinmədi. Başqa şəkil yoxla.", tooBig: "Şəkil çox böyükdür (maks. 25 MB).", badType: "Yalnız PNG, JPG və ya WebP.",
     quality: "Keyfiyyət", qSmall: "Sürətli", qMedium: "Orta", qLarge: "Ən yaxşı",
     background: "Fon", clear: "Şəffaf", white: "Ağ", black: "Qara", color: "Rəng", gradient: "Gradient", blur: "Bulanıq", photo: "Şəkil", pickPhoto: "Fon şəkli seç",
@@ -19,7 +19,7 @@ export const COPY: Record<Lang, EraseCopy> = {
   },
   en: {
     drop: "Drop a photo here, paste (Ctrl+V) or choose", dropSub: "PNG, JPG, WebP. Several photos at once.", run: "Remove background", working: "Working…", ready: "Done.", empty: "Choose a photo first",
-    private: "The photo stays on your device. No account.", again: "Clear", download: "Download", downloadAll: "Download all", copy: "Copy", copied: "Copied.",
+    private: "The photo stays on your device. No account.", again: "Clear", toCompress: "Compress image", toPdf: "Add to PDF", download: "Download", downloadAll: "Download all", copy: "Copy", copied: "Copied.",
     wait: "Loading the precise model…", fail: "Could not remove the background. Try another photo.", tooBig: "The photo is too large (max 25 MB).", badType: "Only PNG, JPG or WebP.",
     quality: "Quality", qSmall: "Fast", qMedium: "Medium", qLarge: "Best",
     background: "Background", clear: "Clear", white: "White", black: "Black", color: "Color", gradient: "Gradient", blur: "Blur", photo: "Photo", pickPhoto: "Choose background photo",
@@ -33,7 +33,7 @@ export const COPY: Record<Lang, EraseCopy> = {
   },
   tr: {
     drop: "Fotoğrafı buraya bırak, yapıştır (Ctrl+V) veya seç", dropSub: "PNG, JPG, WebP. Birden çok fotoğraf aynı anda.", run: "Arka planı sil", working: "İşleniyor…", ready: "Hazır.", empty: "Önce fotoğraf seç",
-    private: "Fotoğraf cihazda kalır. Hesap gerekmez.", again: "Temizle", download: "İndir", downloadAll: "Hepsini indir", copy: "Kopyala", copied: "Kopyalandı.",
+    private: "Fotoğraf cihazda kalır. Hesap gerekmez.", again: "Temizle", toCompress: "Boyutunu küçült", toPdf: "PDF'e ekle", download: "İndir", downloadAll: "Hepsini indir", copy: "Kopyala", copied: "Kopyalandı.",
     wait: "Hassas model yükleniyor…", fail: "Arka plan silinemedi. Başka fotoğraf dene.", tooBig: "Fotoğraf çok büyük (en fazla 25 MB).", badType: "Yalnızca PNG, JPG veya WebP.",
     quality: "Kalite", qSmall: "Hızlı", qMedium: "Orta", qLarge: "En iyi",
     background: "Arka plan", clear: "Şeffaf", white: "Beyaz", black: "Siyah", color: "Renk", gradient: "Gradyan", blur: "Bulanık", photo: "Foto", pickPhoto: "Arka plan fotoğrafı seç",
@@ -47,7 +47,7 @@ export const COPY: Record<Lang, EraseCopy> = {
   },
   ar: {
     drop: "أفلت الصورة هنا أو الصقها (Ctrl+V) أو اخترها", dropSub: "PNG وJPG وWebP. عدة صور دفعة واحدة.", run: "أزل الخلفية", working: "جارٍ العمل…", ready: "تم.", empty: "اختر صورة أولاً",
-    private: "الصورة تبقى على جهازك. بلا حساب.", again: "مسح", download: "تنزيل", downloadAll: "تنزيل الكل", copy: "انسخ", copied: "تم النسخ.",
+    private: "الصورة تبقى على جهازك. بلا حساب.", again: "مسح", toCompress: "ضغط الصورة", toPdf: "أضف إلى PDF", download: "تنزيل", downloadAll: "تنزيل الكل", copy: "انسخ", copied: "تم النسخ.",
     wait: "يتم تحميل النموذج الأدق…", fail: "تعذّرت إزالة الخلفية. جرّب صورة أخرى.", tooBig: "الصورة كبيرة جداً (الحد 25 ميغابايت).", badType: "PNG أو JPG أو WebP فقط.",
     quality: "الجودة", qSmall: "سريع", qMedium: "متوسط", qLarge: "الأفضل",
     background: "الخلفية", clear: "شفاف", white: "أبيض", black: "أسود", color: "لون", gradient: "تدرّج", blur: "ضبابي", photo: "صورة", pickPhoto: "اختر صورة الخلفية",
@@ -61,7 +61,7 @@ export const COPY: Record<Lang, EraseCopy> = {
   },
   ru: {
     drop: "Перетащите фото, вставьте (Ctrl+V) или выберите", dropSub: "PNG, JPG, WebP. Несколько фото сразу.", run: "Удалить фон", working: "Обработка…", ready: "Готово.", empty: "Сначала выберите фото",
-    private: "Фото остаётся на устройстве. Аккаунт не нужен.", again: "Очистить", download: "Скачать", downloadAll: "Скачать все", copy: "Копировать", copied: "Скопировано.",
+    private: "Фото остаётся на устройстве. Аккаунт не нужен.", again: "Очистить", toCompress: "Сжать фото", toPdf: "Добавить в PDF", download: "Скачать", downloadAll: "Скачать все", copy: "Копировать", copied: "Скопировано.",
     wait: "Загрузка точной модели…", fail: "Не удалось убрать фон. Попробуйте другое фото.", tooBig: "Фото слишком большое (макс. 25 МБ).", badType: "Только PNG, JPG или WebP.",
     quality: "Качество", qSmall: "Быстро", qMedium: "Средне", qLarge: "Лучшее",
     background: "Фон", clear: "Прозрачный", white: "Белый", black: "Чёрный", color: "Цвет", gradient: "Градиент", blur: "Размытие", photo: "Фото", pickPhoto: "Выбрать фото фона",

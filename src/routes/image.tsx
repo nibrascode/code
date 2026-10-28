@@ -1,3 +1,4 @@
+import { takeHandOff } from "@/lib/handoff";
 import { useEffect, useState } from "react";
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { localeHref } from "@/lib/locale-path";
@@ -48,6 +49,7 @@ export function ImagePage() {
   const [max, setMax] = useState(2400);
   const [target, setTarget] = useState(0);
   const [files, setFiles] = useState<File[]>([]);
+  useEffect(() => { const h = takeHandOff(); if (h.length) setFiles(h); }, []);
   const [outs, setOuts] = useState<{ name: string; blob: Blob; url: string; before: number }[]>([]);
   const [busy, setBusy] = useState(false);
 

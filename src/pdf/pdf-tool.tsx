@@ -1,3 +1,4 @@
+import { takeHandOff } from "@/lib/handoff";
 import { useNavigate } from "@tanstack/react-router";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
@@ -276,6 +277,11 @@ function Workspace({ tool, lang, t, title, desc }: { tool: ToolId; lang: Lang; t
     }
     setItems((cur) => (multiple ? [...cur, ...made] : made));
   }, [kind, multiple, t, lang]);
+  useEffect(() => {
+    if (kind !== "images") return;
+    const h = takeHandOff();
+    if (h.length) void addFiles(h);
+  }, [kind, addFiles]);
 
   const unlock = async (id: number, password: string) => {
     const it = items.find((i) => i.id === id);

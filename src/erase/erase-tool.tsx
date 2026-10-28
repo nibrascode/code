@@ -1,3 +1,6 @@
+import { useNavigate } from "@tanstack/react-router";
+import { handOff } from "@/lib/handoff";
+import { localeHref } from "@/lib/locale-path";
 import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from "react";
 import { useI18n } from "@/lib/i18n-context";
 import { COPY } from "./erase-copy";
@@ -218,6 +221,7 @@ export function EraseTool() {
   const { lang } = useI18n();
   const t = COPY[lang] ?? COPY.az;
   const dir = lang === "ar" ? "rtl" : "ltr";
+  const navigate = useNavigate();
   const itemsRef = useRef<Item[]>([]);
   const idRef = useRef(1);
   const [tick, bump] = useReducer((n: number) => n + 1, 0);
@@ -459,6 +463,17 @@ export function EraseTool() {
     const { blob } = await renderBlob(active);
     download(`${baseName(active.name)}-nibras-erase.${ext}`, blob);
   }
+  async function chainTo(path: string) {
+    const done = itemsRef.current.filter((i) => i.status === "done");
+    const files: File[] = [];
+    for (const it of done) {
+      const { blob } = await renderBlob(it);
+      files.push(new File([blob], `${baseName(it.name)}-nibras-erase.${ext}`, { type: blob.type }));
+    }
+    if (!files.length) return;
+    handOff(files);
+    void navigate({ href: localeHref(lang, path) });
+  }
   async function exportAll() {
     const done = itemsRef.current.filter((i) => i.status === "done");
     if (done.length < 2) return exportActive();
@@ -670,6 +685,8 @@ export function EraseTool() {
           ) : null}
           {active?.status === "done" ? <button type="button" className="files-run" onClick={() => void exportActive()} data-testid="erase-download">{t.download} {ext.toUpperCase()}</button> : null}
           {doneCount > 1 ? <button type="button" className="files-ghost" onClick={() => void exportAll()} data-testid="erase-download-all">{t.downloadAll} (ZIP)</button> : null}
+          {active?.status === "done" ? <button type="button" className="files-ghost" onClick={() => void chainTo("/image")} data-testid="erase-to-compress">{t.toCompress}</button> : null}
+          {active?.status === "done" ? <button type="button" className="files-ghost" onClick={() => void chainTo("/pdf/image-pdf")} data-testid="erase-to-pdf">{t.toPdf}</button> : null}
           {active?.status === "done" ? <button type="button" className="files-ghost" onClick={() => void copyNow()}>{t.copy}</button> : null}
           {items.length ? <button type="button" className="files-ghost" onClick={clearAll}>{t.again}</button> : null}
         </div>
