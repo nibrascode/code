@@ -74,6 +74,10 @@ export const Route = createRootRoute({
           children:
             "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;gtag('js',new Date());gtag('config','G-F1DMB5BCCD');addEventListener('load',function(){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-F1DMB5BCCD';document.head.appendChild(s);});",
         },
+        {
+          children:
+            "addEventListener('vite:preloadError',function(e){try{var k='nx-preload-reload',t=+sessionStorage.getItem(k)||0;if(Date.now()-t<30000)return;sessionStorage.setItem(k,String(Date.now()));e.preventDefault();location.reload();}catch(_){}});if('serviceWorker'in navigator)addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){});});",
+        },
         ...seo.scripts,
       ],
     };
