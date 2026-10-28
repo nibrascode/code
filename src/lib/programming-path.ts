@@ -4,7 +4,7 @@ import { PROGRAMMING_SEO } from "@/lib/programming-seo";
 
 export function programmingLocalePath(lang: Lang, slug: string) {
   if (lang === "az") return `/programming/${slug}`;
-  return `/${lang}/programming/${slug}`;
+  return localizeSection(`/${lang}/programming/${slug}`);
 }
 
 export function programmingFromPath(pathname: string) {
