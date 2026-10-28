@@ -145,6 +145,7 @@ import { Route as EnWifiRouteImport } from './routes/en.wifi'
 import { Route as EnWorkspaceRouteImport } from './routes/en.workspace'
 import { Route as EnXetaRouteImport } from './routes/en.xeta'
 import { Route as EnZipRouteImport } from './routes/en.zip'
+import { Route as ErebDiliFeilRouteImport } from './routes/ereb-dili.feil'
 import { Route as FaqSlugRouteImport } from './routes/faq.$slug'
 import { Route as GuidesIndexRouteImport } from './routes/guides/index'
 import { Route as GuidesTopicRouteImport } from './routes/guides/$topic'
@@ -284,6 +285,7 @@ import { Route as EnSozSlugRouteImport } from './routes/en.soz.$slug'
 import { Route as EnToolsSlugRouteImport } from './routes/en.tools.$slug'
 import { Route as EnVideoToolRouteImport } from './routes/en.video_.$tool'
 import { Route as EnXetaSlugRouteImport } from './routes/en.xeta.$slug'
+import { Route as ErebDiliFeilSlugRouteImport } from './routes/ereb-dili.feil.$slug'
 import { Route as PrivacyNibrasQrDeleteAccountRouteImport } from './routes/privacy/nibras-qr.delete-account'
 import { Route as ResourcesTopicIndexRouteImport } from './routes/resources/$topic/index'
 import { Route as ResourcesTopicArticleRouteImport } from './routes/resources/$topic/$article'
@@ -999,6 +1001,11 @@ const EnZipRoute = EnZipRouteImport.update({
   path: '/zip',
   getParentRoute: () => EnRoute,
 } as any)
+const ErebDiliFeilRoute = ErebDiliFeilRouteImport.update({
+  id: '/ereb-dili/feil',
+  path: '/ereb-dili/feil',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FaqSlugRoute = FaqSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -1694,6 +1701,11 @@ const EnXetaSlugRoute = EnXetaSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => EnXetaRoute,
 } as any)
+const ErebDiliFeilSlugRoute = ErebDiliFeilSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ErebDiliFeilRoute,
+} as any)
 const PrivacyNibrasQrDeleteAccountRoute =
   PrivacyNibrasQrDeleteAccountRouteImport.update({
     id: '/nibras-qr/delete-account',
@@ -2003,6 +2015,7 @@ export interface FileRoutesByFullPath {
   '/en/workspace': typeof EnWorkspaceRoute
   '/en/xeta': typeof EnXetaRouteWithChildren
   '/en/zip': typeof EnZipRoute
+  '/ereb-dili/feil': typeof ErebDiliFeilRouteWithChildren
   '/faq/$slug': typeof FaqSlugRoute
   '/guides/$topic': typeof GuidesTopicRoute
   '/hamisi/$group': typeof HamisiGroupRoute
@@ -2142,6 +2155,7 @@ export interface FileRoutesByFullPath {
   '/en/tools/$slug': typeof EnToolsSlugRoute
   '/en/video/$tool': typeof EnVideoToolRoute
   '/en/xeta/$slug': typeof EnXetaSlugRoute
+  '/ereb-dili/feil/$slug': typeof ErebDiliFeilSlugRoute
   '/privacy/nibras-qr/delete-account': typeof PrivacyNibrasQrDeleteAccountRoute
   '/resources/$topic/$article': typeof ResourcesTopicArticleRoute
   '/ru/apps/$slug': typeof RuAppsSlugRoute
@@ -2313,6 +2327,7 @@ export interface FileRoutesByTo {
   '/en/workspace': typeof EnWorkspaceRoute
   '/en/xeta': typeof EnXetaRouteWithChildren
   '/en/zip': typeof EnZipRoute
+  '/ereb-dili/feil': typeof ErebDiliFeilRouteWithChildren
   '/faq/$slug': typeof FaqSlugRoute
   '/guides/$topic': typeof GuidesTopicRoute
   '/hamisi/$group': typeof HamisiGroupRoute
@@ -2452,6 +2467,7 @@ export interface FileRoutesByTo {
   '/en/tools/$slug': typeof EnToolsSlugRoute
   '/en/video/$tool': typeof EnVideoToolRoute
   '/en/xeta/$slug': typeof EnXetaSlugRoute
+  '/ereb-dili/feil/$slug': typeof ErebDiliFeilSlugRoute
   '/privacy/nibras-qr/delete-account': typeof PrivacyNibrasQrDeleteAccountRoute
   '/resources/$topic/$article': typeof ResourcesTopicArticleRoute
   '/ru/apps/$slug': typeof RuAppsSlugRoute
@@ -2625,6 +2641,7 @@ export interface FileRoutesById {
   '/en/workspace': typeof EnWorkspaceRoute
   '/en/xeta': typeof EnXetaRouteWithChildren
   '/en/zip': typeof EnZipRoute
+  '/ereb-dili/feil': typeof ErebDiliFeilRouteWithChildren
   '/faq/$slug': typeof FaqSlugRoute
   '/guides/$topic': typeof GuidesTopicRoute
   '/hamisi/$group': typeof HamisiGroupRoute
@@ -2764,6 +2781,7 @@ export interface FileRoutesById {
   '/en/tools/$slug': typeof EnToolsSlugRoute
   '/en/video_/$tool': typeof EnVideoToolRoute
   '/en/xeta/$slug': typeof EnXetaSlugRoute
+  '/ereb-dili/feil/$slug': typeof ErebDiliFeilSlugRoute
   '/privacy/nibras-qr/delete-account': typeof PrivacyNibrasQrDeleteAccountRoute
   '/resources/$topic/$article': typeof ResourcesTopicArticleRoute
   '/ru/apps/$slug': typeof RuAppsSlugRoute
@@ -2938,6 +2956,7 @@ export interface FileRouteTypes {
     | '/en/workspace'
     | '/en/xeta'
     | '/en/zip'
+    | '/ereb-dili/feil'
     | '/faq/$slug'
     | '/guides/$topic'
     | '/hamisi/$group'
@@ -3077,6 +3096,7 @@ export interface FileRouteTypes {
     | '/en/tools/$slug'
     | '/en/video/$tool'
     | '/en/xeta/$slug'
+    | '/ereb-dili/feil/$slug'
     | '/privacy/nibras-qr/delete-account'
     | '/resources/$topic/$article'
     | '/ru/apps/$slug'
@@ -3248,6 +3268,7 @@ export interface FileRouteTypes {
     | '/en/workspace'
     | '/en/xeta'
     | '/en/zip'
+    | '/ereb-dili/feil'
     | '/faq/$slug'
     | '/guides/$topic'
     | '/hamisi/$group'
@@ -3387,6 +3408,7 @@ export interface FileRouteTypes {
     | '/en/tools/$slug'
     | '/en/video/$tool'
     | '/en/xeta/$slug'
+    | '/ereb-dili/feil/$slug'
     | '/privacy/nibras-qr/delete-account'
     | '/resources/$topic/$article'
     | '/ru/apps/$slug'
@@ -3559,6 +3581,7 @@ export interface FileRouteTypes {
     | '/en/workspace'
     | '/en/xeta'
     | '/en/zip'
+    | '/ereb-dili/feil'
     | '/faq/$slug'
     | '/guides/$topic'
     | '/hamisi/$group'
@@ -3698,6 +3721,7 @@ export interface FileRouteTypes {
     | '/en/tools/$slug'
     | '/en/video_/$tool'
     | '/en/xeta/$slug'
+    | '/ereb-dili/feil/$slug'
     | '/privacy/nibras-qr/delete-account'
     | '/resources/$topic/$article'
     | '/ru/apps/$slug'
@@ -3787,6 +3811,7 @@ export interface RootRouteChildren {
   ZipRoute: typeof ZipRoute
   ResourcesTopicRouteRoute: typeof ResourcesTopicRouteRouteWithChildren
   AppsSlugRoute: typeof AppsSlugRoute
+  ErebDiliFeilRoute: typeof ErebDiliFeilRouteWithChildren
   GuidesTopicRoute: typeof GuidesTopicRoute
   HamisiGroupRoute: typeof HamisiGroupRoute
   ImageToolRoute: typeof ImageToolRoute
@@ -4754,6 +4779,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/en/zip'
       preLoaderRoute: typeof EnZipRouteImport
       parentRoute: typeof EnRoute
+    }
+    '/ereb-dili/feil': {
+      id: '/ereb-dili/feil'
+      path: '/ereb-dili/feil'
+      fullPath: '/ereb-dili/feil'
+      preLoaderRoute: typeof ErebDiliFeilRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/faq/$slug': {
       id: '/faq/$slug'
@@ -5727,6 +5759,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/en/xeta/$slug'
       preLoaderRoute: typeof EnXetaSlugRouteImport
       parentRoute: typeof EnXetaRoute
+    }
+    '/ereb-dili/feil/$slug': {
+      id: '/ereb-dili/feil/$slug'
+      path: '/$slug'
+      fullPath: '/ereb-dili/feil/$slug'
+      preLoaderRoute: typeof ErebDiliFeilSlugRouteImport
+      parentRoute: typeof ErebDiliFeilRoute
     }
     '/privacy/nibras-qr/delete-account': {
       id: '/privacy/nibras-qr/delete-account'
@@ -6895,6 +6934,18 @@ const ResourcesTopicRouteRouteChildren: ResourcesTopicRouteRouteChildren = {
 const ResourcesTopicRouteRouteWithChildren =
   ResourcesTopicRouteRoute._addFileChildren(ResourcesTopicRouteRouteChildren)
 
+interface ErebDiliFeilRouteChildren {
+  ErebDiliFeilSlugRoute: typeof ErebDiliFeilSlugRoute
+}
+
+const ErebDiliFeilRouteChildren: ErebDiliFeilRouteChildren = {
+  ErebDiliFeilSlugRoute: ErebDiliFeilSlugRoute,
+}
+
+const ErebDiliFeilRouteWithChildren = ErebDiliFeilRoute._addFileChildren(
+  ErebDiliFeilRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
@@ -6948,6 +6999,7 @@ const rootRouteChildren: RootRouteChildren = {
   ZipRoute: ZipRoute,
   ResourcesTopicRouteRoute: ResourcesTopicRouteRouteWithChildren,
   AppsSlugRoute: AppsSlugRoute,
+  ErebDiliFeilRoute: ErebDiliFeilRouteWithChildren,
   GuidesTopicRoute: GuidesTopicRoute,
   HamisiGroupRoute: HamisiGroupRoute,
   ImageToolRoute: ImageToolRoute,

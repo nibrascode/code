@@ -109,6 +109,15 @@ function SeoLinks() {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
   const searchStr = useRouterState({ select: (state) => state.location.searchStr });
   const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : "/";
+  if (path === "/ereb-dili/feil" || path.startsWith("/ereb-dili/feil/")) {
+    return (
+      <>
+        <link rel="canonical" href={`${SITE}${path}`} />
+        <link rel="alternate" {...{ hreflang: "az" }} href={`${SITE}${path}`} />
+        <link rel="alternate" {...{ hreflang: "x-default" }} href={`${SITE}${path}`} />
+      </>
+    );
+  }
   const pair = pdfPairFromPath(path);
   const programming = programmingFromPath(path);
   const faq = faqFromPath(path);
