@@ -11860,7 +11860,14 @@ html[lang="ar"] .why-lead.topic-body,
   gap: 8px;
 }
 
-/* Services hub accordion */
+/* Services hub accordion — tight top (no hero title) */
+.svc-page.why-page {
+  padding-top: 64px;
+  padding-bottom: 48px;
+}
+.svc-page .why-glow {
+  display: none;
+}
 .svc-list { display: flex; flex-direction: column; gap: 8px; margin-top: 0; max-width: 640px; }
 .svc-cat { border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; background: rgba(255,255,255,0.02); }
 .svc-cat summary { display: flex; align-items: center; gap: 12px; padding: 14px 16px; cursor: pointer; list-style: none; font-weight: 600; }
