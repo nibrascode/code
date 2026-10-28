@@ -2,6 +2,8 @@
  * Localized first URL segment per language for sections whose route files use
  * AZ slugs (e.g. public `/en/how-to/x` is served by route `/en/nece/$slug`).
  */
+import { ARTICLE_SLUGS } from "./article-slugs.generated";
+
 type L4 = "en" | "tr" | "ar" | "ru";
 
 export const SECTION_SLUGS: Record<string, Record<L4, string>> = {
@@ -21,26 +23,46 @@ export const SECTION_SLUGS: Record<string, Record<L4, string>> = {
 const REVERSE: Record<L4, Record<string, string>> = { en: {}, tr: {}, ar: {}, ru: {} };
 for (const [az, m] of Object.entries(SECTION_SLUGS)) for (const l of Object.keys(m) as L4[]) REVERSE[l][m[l]] = az;
 
+const ART_REV: Record<string, Record<L4, Record<string, string>>> = {};
+for (const [sec, items] of Object.entries(ARTICLE_SLUGS)) {
+  const r: Record<L4, Record<string, string>> = (ART_REV[sec] = { en: {}, tr: {}, ar: {}, ru: {} });
+  for (const [az, m] of Object.entries(items)) for (const l of Object.keys(m) as L4[]) r[l][m[l]] = az;
+}
+const ART_RE = /^\/([^/?#]+)(.*)$/;
+function artOut(l: L4, sec: string, rest: string) {
+  const m = rest.match(ART_RE);
+  const loc = m && ARTICLE_SLUGS[sec]?.[m[1]]?.[l];
+  return loc ? `/${loc}${m![2]}` : rest;
+}
+function artIn(l: L4, sec: string, rest: string) {
+  const m = rest.match(ART_RE);
+  const az = m && ART_REV[sec]?.[l][m[1]];
+  return az ? `/${az}${m![2]}` : rest;
+}
+
 const RE = /^\/(en|tr|ar|ru)\/([^/?#]+)(.*)$/;
 
 /** `/en/nece/x` → `/en/how-to/x` (public URL). Idempotent; other paths untouched. */
 export function localizeSection(path: string): string {
   const m = path.match(RE);
   if (!m) return path;
-  const loc = SECTION_SLUGS[m[2]]?.[m[1] as L4];
-  return loc && loc !== m[2] ? `/${m[1]}/${loc}${m[3]}` : path;
+  const l = m[1] as L4;
+  const az = REVERSE[l][m[2]] ?? m[2];
+  const loc = SECTION_SLUGS[az]?.[l] ?? m[2];
+  return `/${l}/${loc}${artOut(l, az, artIn(l, az, m[3]))}`;
 }
 
 /** `/en/how-to/x` → `/en/nece/x` (internal route path). Idempotent. */
 export function delocalizeSection(path: string): string {
   const m = path.match(RE);
   if (!m) return path;
-  const az = REVERSE[m[1] as L4][m[2]];
-  return az && az !== m[2] ? `/${m[1]}/${az}${m[3]}` : path;
+  const l = m[1] as L4;
+  const az = REVERSE[l][m[2]] ?? m[2];
+  return `/${l}/${az}${artIn(l, az, m[3])}`;
 }
 
 /** Old AZ-slug public URL that should 301 to its localized form, or null. */
 export function legacySectionRedirect(path: string): string | null {
   const next = localizeSection(path);
-  return next !== path && delocalizeSection(next) === path ? next : null;
+  return next !== path ? next : null;
 }
