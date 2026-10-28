@@ -401,11 +401,11 @@
   "rewrites": [
     {
       "source": "/audio",
-      "destination": "https://audio-nibrascode-1188.vercel.app/audio"
+      "destination": "https://audio-nibrascode-1188.vercel.app/audio/"
     },
     {
       "source": "/audio/",
-      "destination": "https://audio-nibrascode-1188.vercel.app/audio"
+      "destination": "https://audio-nibrascode-1188.vercel.app/audio/"
     },
     {
       "source": "/audio/:path*",
