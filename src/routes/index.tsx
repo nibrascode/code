@@ -1,3 +1,4 @@
+import { DeviceCheck } from "@/components/device-check";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, BadgeCheck, RefreshCw, Shield, Zap } from "lucide-react";
@@ -442,6 +443,7 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
 
       <section className="nx-apps">
         <p className="nx-kicker">{APK_HELP[lang]}</p>
+        <DeviceCheck lang={lang} />
         <nav className="faq-links" aria-label={APK_HELP[lang]}>
           {XETA_LINKS.map((slug) => {
             const item = SEARCH.xeta.items.find((entry) => entry.slug === slug);

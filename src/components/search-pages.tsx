@@ -1,3 +1,4 @@
+import { DeviceCheck } from "@/components/device-check";
 import { AlertTriangle, BookOpen, Code2, FileText, Info, ListChecks, Search, ShieldCheck, User, Wrench } from "lucide-react";
 import { InfoCard, InfoCards } from "@/components/info-card";
 import { Bot, Sparkles } from "lucide-react";
@@ -196,6 +197,7 @@ export function SearchTopic({
         <a href={searchPath(lang, kind)}>{section.heading[lang]}</a>
       </p>
       <h1>{text.title}</h1>
+      {kind === "xeta" ? <DeviceCheck lang={lang} /> : null}
       {body ? (
         <ApkBody body={body} lang={lang} />
       ) : (
