@@ -18,7 +18,8 @@ import { GameIcon } from "@/components/game-icons";
 import { toolsPath, TOOLS_PAGE } from "@/lib/tools";
 import { useI18n } from "@/lib/i18n-context";
 import { statusText, type StudioAppRow } from "@/lib/studio";
-import { appStoreLinks, STUDIO_APPS, syncedPlayUrl } from "@/lib/apps";
+import { appStatus, appStatusLabel, appStoreLinks, statusStoreLinks, STUDIO_APPS, syncedPlayUrl } from "@/lib/apps";
+import { effectiveApp, playListed } from "@/lib/app-store";
 import { loadHomeApps } from "@/lib/studio.functions";
 import type { Lang, TKey } from "@/lib/i18n";
 
@@ -373,18 +374,10 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
         <p className="nx-kicker">{t("nx_apps_k")}</p>
         <div className="nx-grid">
           {cards.map(({ card, live }) => {
-            const badge = statusText(
-              card.slug === "nibras-pdf" || card.slug === "nibras-office"
-                ? "ready"
-                : card.slug === "nibras-qr" || (card.slug === "nibras-docs" && live?.status !== "ready")
-                  ? "soon"
-                  : live?.status,
-              STATUS[card.slug] ? t(STATUS[card.slug]!) : null,
-              labels,
-            );
-            const soon = SOON_SLUGS.has(card.slug) && !(card.slug !== "nibras-qr" && live?.status === "ready");
+            const badge = appStatusLabel(card.slug, lang);
+            const soon = appStatus(card.slug) !== "ready" && appStatus(card.slug) !== "beta";
             const built = STUDIO_APPS.find((item) => item.slug === card.slug);
-            const stores = built && !soon ? appStoreLinks(built, live) : [];
+            const stores = built && !soon ? statusStoreLinks(effectiveApp(built).app, live && playListed(card.slug) === false ? { ...live, play_url: "" } : live) : [];
             return (
               <div key={card.slug} className={`nx-card${soon ? " is-soon" : ""}`}>
                 <a href={localeHref(lang, `/apps/${card.slug}`)} className="nx-card-main">

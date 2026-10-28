@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { countDownload } from "@/components/visit-meter";
-import { STUDIO_APPS, type StudioApp } from "@/lib/apps";
+import { STUDIO_APPS, appStatusLabel, statusStoreLinks, type StudioApp } from "@/lib/apps";
 import { localeHref } from "@/lib/locale-path";
 import { useI18n } from "@/lib/i18n-context";
 
@@ -59,7 +59,8 @@ export function AppSpotlight() {
   const [frame, setFrame] = useState(0);
   const app = STUDIO_APPS[index];
   const count = app.shots.length > 0 ? app.shots.length : FRAMES;
-  const ready = Boolean(app.playStoreUrl);
+  const store = statusStoreLinks(app)[0];
+  const ready = Boolean(store);
   const ask = index % 2 === 0 ? t("spot_check") : t("spot_glance");
   const indexRef = useRef(0);
   const frameRef = useRef(0);
@@ -110,10 +111,10 @@ export function AppSpotlight() {
             </div>
           </div>
           <div className="spot-row">
-            {ready && app.playStoreUrl ? (
+            {ready && store ? (
               <a
                 className="play-btn"
-                href={app.playStoreUrl}
+                href={store.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => countDownload(app.slug)}
@@ -129,7 +130,7 @@ export function AppSpotlight() {
                 <PlayMark />
                 <span>
                   <small>{t("download_android")}</small>
-                  <b>{t("soon")}</b>
+                  <b>{appStatusLabel(app.slug, lang)}</b>
                 </span>
               </div>
             )}

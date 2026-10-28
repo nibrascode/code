@@ -158,3 +158,44 @@ export function appStoreLinks(
     huawei ? { id: "huawei", label: "Huawei", href: huawei } : null,
   ].filter((item): item is { id: string; label: string; href: string } => Boolean(item));
 }
+
+/* ── Single source of truth for product status (all 5 languages read from here) ── */
+export type AppStatus = "ready" | "beta" | "building" | "planned";
+
+export const APP_STATUS: Record<AppSlug, AppStatus> = {
+  "nibras-arabic": "ready",
+  "nibras-pdf": "ready",
+  "nibras-office": "ready",
+  "nibras-docs": "building",
+  "nibras-qr": "building",
+  "nibras-scan": "building",
+  "majmu-al-fatawa": "building",
+  "nibras-note": "planned",
+  "nibras-plans": "planned",
+};
+
+export const APP_STATUS_LABEL: Record<AppStatus, Record<"az" | "en" | "tr" | "ar" | "ru", string>> = {
+  ready: { az: "Hazırdır", en: "Available", tr: "Hazır", ar: "متاح", ru: "Доступно" },
+  beta: { az: "Beta", en: "Beta", tr: "Beta", ar: "تجريبي", ru: "Бета" },
+  building: { az: "Hazırlanır", en: "In development", tr: "Hazırlanıyor", ar: "قيد التطوير", ru: "В разработке" },
+  planned: { az: "Planlaşdırılır", en: "Planned", tr: "Planlanıyor", ar: "مخطط له", ru: "Планируется" },
+};
+
+export function appStatus(slug: string): AppStatus {
+  return APP_STATUS[slug as AppSlug] ?? "planned";
+}
+
+export function appStatusLabel(slug: string, lang: string): string {
+  const l = APP_STATUS_LABEL[appStatus(slug)];
+  return l[lang as keyof typeof l] ?? l.en;
+}
+
+/** Store links only for released/beta apps; never a Play link that is not listed. */
+export function statusStoreLinks(
+  app: Pick<StudioApp, "playStoreUrl" | "huaweiStoreUrl"> & { slug: string },
+  live?: { play_url?: string; huawei_url?: string } | null,
+) {
+  const s = appStatus(app.slug);
+  if (s !== "ready" && s !== "beta") return [];
+  return appStoreLinks(app, live);
+}

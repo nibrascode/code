@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, ChevronDown, Download, ExternalLink, Lock, ShieldCheck, X } from "lucide-react";
 import type { Lang } from "@/lib/i18n";
-import { STUDIO_APPS, appStoreLinks, type StudioApp } from "@/lib/apps";
+import { STUDIO_APPS, appStatusLabel, appStoreLinks, statusStoreLinks, type StudioApp } from "@/lib/apps";
 import { effectiveApp, playListed, pick, shotsFor } from "@/lib/app-store";
 import { NIBRAS_PDF_ABOUT } from "@/lib/nibras-pdf-about";
 import { useI18n } from "@/lib/i18n-context";
@@ -89,11 +89,11 @@ export function StoreAppPage({ app: rawApp, live }: { app: StudioApp; live?: Stu
   const l = L[lang] ?? L.en;
   const shots = shotsFor(f, lang);
   const shotsEnglishFallback = shots.length > 0 && !f.shots?.[lang] && lang !== "en";
-  const stores = appStoreLinks(app, live && playListed(app.slug) === false ? { ...live, play_url: "" } : live);
+  const stores = statusStoreLinks(app, live && playListed(app.slug) === false ? { ...live, play_url: "" } : live);
   const [open, setOpen] = useState<number | null>(null);
   const [more, setMore] = useState(false);
   const icon = live?.icon_url || app.icon;
-  const soon = stores.length === 0 && !f.apkUrl && Boolean(f.soon);
+  const soon = stores.length === 0 && !f.apkUrl;
   const about = pick(f.about, lang);
   const news = pick(f.whatsNew, lang);
   const perms = pick(f.permissions, lang);
@@ -121,7 +121,7 @@ export function StoreAppPage({ app: rawApp, live }: { app: StudioApp; live?: Stu
           <a className="ns-dev" href={localeHref(lang, "/about")}>
             Nibras Code
           </a>
-          {soon ? <span className="ns-chip">{l.soon}</span> : null}
+          <span className="ns-chip">{appStatusLabel(app.slug, lang)}</span>
         </div>
       </header>
 
