@@ -6,6 +6,7 @@ import { TechMark } from "@/components/tech-marquee";
 import { LanguageSwitch } from "@/components/language-switch";
 import { NavMenu } from "@/components/nav-menu";
 import { SiteLegal } from "@/components/site-header";
+import { SERVICES_LABEL } from "@/components/services-page";
 import { HeroMark } from "@/components/hero-mark";
 import { BAR, BarGroupView } from "@/components/home-bars";
 import { faqPath } from "@/lib/faq";
@@ -314,6 +315,10 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
           <div className="nx-actions">
             <a className="nx-cta" href={localeHref(lang, "/apps")}>
               {t("b_hero_cta")}
+              <ArrowUpRight className="size-4" />
+            </a>
+            <a href={localeHref(lang, "/services")} className="nx-ghost">
+              {SERVICES_LABEL[lang]}
               <ArrowUpRight className="size-4" />
             </a>
             <a href={localeHref(lang, "/about")} className="nx-ghost">

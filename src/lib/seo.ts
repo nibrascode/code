@@ -1,3 +1,4 @@
+import { delocalizeSection } from "@/lib/section-slugs";
 import { groupFromPath, groupLocalePath } from "@/lib/group-path";
 import { LANGS, type Lang } from "@/lib/i18n";
 import { isSplitPage, localeHref, stripLocalePrefix, homePath } from "@/lib/locale-path";
@@ -1133,8 +1134,6 @@ function pageCopy(pathname: string, lang: Lang) {
       keywords: item.label[tool.lang],
     };
   }
-  const grp = groupFromPath(path);
-  if (grp) return `${SITE}${groupLocalePath(grp.lang, grp.group)}`;
   const tools = toolsFromPath(path);
   if (tools) {
     return {
@@ -1233,11 +1232,13 @@ export function langFromLocation(pathname: string, searchStr?: string): Lang {
 }
 
 export function canonicalUrl(pathname: string, lang: Lang) {
-  const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : "/";
+  const path = delocalizeSection(pathname.length > 1 ? pathname.replace(/\/$/, "") : "/");
   if (faqTopicFromPath(path)) {
     const topic = faqTopicFromPath(path)!;
     return `${SITE}${faqTopicPath(topic.page.lang, topic.item.id)}`;
   }
+  const grp = groupFromPath(path);
+  if (grp) return `${SITE}${groupLocalePath(grp.lang, grp.group)}`;
   const searched = searchTopicFromPath(path);
   if (searched) return `${SITE}${searchTopicPath(searched.lang, searched.kind, searched.item.slug)}`;
   const searchIndex = searchFromPath(path);

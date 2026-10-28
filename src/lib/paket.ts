@@ -1,3 +1,4 @@
+import { delocalizeSection, localizeSection } from "@/lib/section-slugs";
 import type { Lang } from "@/lib/i18n";
 
 const PREFIX: Record<Lang, string> = { az: "", en: "/en", tr: "/tr", ar: "/ar", ru: "/ru" };
@@ -56,11 +57,11 @@ export const PAKET = {
 };
 
 export function paketPath(lang: Lang) {
-  return `${PREFIX[lang]}/paket`;
+  return localizeSection(`${PREFIX[lang]}/paket`);
 }
 
 export function paketFromPath(pathname: string) {
-  const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname;
+  const path = delocalizeSection(pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname);
   const match = path.match(/^\/(?:(en|tr|ar|ru)\/)?paket$/);
   if (!match) return null;
   return (match[1] ?? "az") as Lang;

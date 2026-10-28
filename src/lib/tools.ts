@@ -1,3 +1,4 @@
+import { delocalizeSection, localizeSection } from "@/lib/section-slugs";
 import type { Lang } from "@/lib/i18n";
 import { TOOL_SLUG, toolIdFromSlug } from "@/lib/tools-seo";
 
@@ -805,14 +806,14 @@ export function toolPath(lang: Lang, id: ToolId) {
 }
 
 export function toolsFromPath(pathname: string) {
-  const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname;
+  const path = delocalizeSection(pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname);
   const match = path.match(/^\/(?:(en|tr|ar|ru)\/)?tools$/);
   if (!match) return null;
   return (match[1] ?? "az") as Lang;
 }
 
 export function toolFromPath(pathname: string) {
-  const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname;
+  const path = delocalizeSection(pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname);
   const match = path.match(/^\/(?:(en|tr|ar|ru)\/)?tools\/([^/]+)$/);
   if (!match) return null;
   const id = toolIdFromSlug(match[2]);

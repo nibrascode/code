@@ -1,3 +1,4 @@
+import { delocalizeSection, localizeSection } from "@/lib/section-slugs";
 import { groupFromPath, groupLocalePath } from "@/lib/group-path";
 import type { Lang } from "@/lib/i18n";
 import { homePath, isSplitPage, localeHref, stripLocalePrefix } from "@/lib/locale-path";
@@ -26,7 +27,7 @@ export const PDF_LOCALE_PAIRS = [
 ] as const;
 
 export function pdfPairFromPath(pathname: string) {
-  const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname;
+  const path = delocalizeSection(pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname);
   const az = path.match(/^\/resurslar\/([^/]+)$/);
   if (az) {
     const pair = PDF_LOCALE_PAIRS.find((item) => item.az === az[1]);
@@ -61,7 +62,7 @@ export function hrefForLang(pathname: string, lang: Lang) {
     if (lang === "az") return pair.az;
     return localeHref(lang, pair.az);
   }
-  const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname;
+  const path = delocalizeSection(pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname);
   const split = stripLocalePrefix(path);
   if (split.path === "/") return homePath(lang);
   if (isSplitPage(split.path)) return localeHref(lang, split.path);

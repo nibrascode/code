@@ -1,3 +1,4 @@
+import { delocalizeSection, localizeSection } from "@/lib/section-slugs";
 import type { Lang } from "@/lib/i18n";
 import { APK_ERROR_INDEX } from "@/lib/apk-errors-index";
 import { LETTER_GAPS } from "@/lib/letter-gaps";
@@ -1501,15 +1502,15 @@ export const SEARCH: Record<SearchKind, SearchSection> = {
 const LANG_PREFIX: Record<Lang, string> = { az: "", en: "/en", tr: "/tr", ar: "/ar", ru: "/ru" };
 
 export function searchPath(lang: Lang, kind: SearchKind) {
-  return `${LANG_PREFIX[lang]}/${kind}`;
+  return localizeSection(`${LANG_PREFIX[lang]}/${kind}`);
 }
 
 export function searchTopicPath(lang: Lang, kind: SearchKind, slug: string) {
-  return `${searchPath(lang, kind)}/${slug}`;
+  return localizeSection(`${LANG_PREFIX[lang]}/${kind}/${slug}`);
 }
 
 export function searchFromPath(pathname: string) {
-  const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname;
+  const path = delocalizeSection(pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname);
   const match = path.match(/^\/(?:(en|tr|ar|ru)\/)?(soz|xeta|movzu|nece)$/);
   if (!match) return null;
   const lang = (match[1] ?? "az") as Lang;
@@ -1518,7 +1519,7 @@ export function searchFromPath(pathname: string) {
 }
 
 export function searchTopicFromPath(pathname: string) {
-  const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname;
+  const path = delocalizeSection(pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname);
   const match = path.match(/^\/(?:(en|tr|ar|ru)\/)?(soz|xeta|movzu|nece)\/([^/]+)$/);
   if (!match) return null;
   const lang = (match[1] ?? "az") as Lang;

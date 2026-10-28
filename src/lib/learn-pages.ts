@@ -1,3 +1,4 @@
+import { delocalizeSection, localizeSection } from "@/lib/section-slugs";
 import type { Lang } from "@/lib/i18n";
 
 const L = (az: string, en: string, tr: string, ar: string, ru: string): Record<Lang, string> => ({ az, en, tr, ar, ru });
@@ -264,29 +265,29 @@ export function qiblaPath(lang: Lang) {
 }
 
 export function comparePath(lang: Lang) {
-  return `${PREFIX[lang]}/muqayise`;
+  return localizeSection(`${PREFIX[lang]}/muqayise`);
 }
 
 export function compareTopicPath(lang: Lang, slug: string) {
-  return `${comparePath(lang)}/${slug}`;
+  return localizeSection(`${PREFIX[lang]}/muqayise/${slug}`);
 }
 
 export function qiblaFromPath(pathname: string) {
-  const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname;
+  const path = delocalizeSection(pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname);
   const match = path.match(/^\/(?:(en|tr|ar|ru)\/)?qible$/);
   if (!match) return null;
   return { lang: (match[1] ?? "az") as Lang };
 }
 
 export function compareFromPath(pathname: string) {
-  const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname;
+  const path = delocalizeSection(pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname);
   const match = path.match(/^\/(?:(en|tr|ar|ru)\/)?muqayise$/);
   if (!match) return null;
   return { lang: (match[1] ?? "az") as Lang };
 }
 
 export function compareTopicFromPath(pathname: string) {
-  const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname;
+  const path = delocalizeSection(pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname);
   const match = path.match(/^\/(?:(en|tr|ar|ru)\/)?muqayise\/([^/]+)$/);
   if (!match) return null;
   const lang = (match[1] ?? "az") as Lang;

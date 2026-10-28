@@ -1,3 +1,4 @@
+import { delocalizeSection, localizeSection } from "@/lib/section-slugs";
 import type { Lang } from "@/lib/i18n";
 
 export type FaqItem = {
@@ -834,7 +835,7 @@ export function faqPath(lang: Lang) {
 }
 
 export function faqFromPath(pathname: string) {
-  const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname;
+  const path = delocalizeSection(pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname);
   return Object.values(FAQ).find((page) => page.path === path) ?? null;
 }
 
@@ -896,7 +897,7 @@ export function faqTopicHref(id: string, lang: Lang = "az") {
 }
 
 export function faqTopicFromPath(pathname: string) {
-  const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname;
+  const path = delocalizeSection(pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname);
   const match = path.match(/^\/(?:(en|tr|ar|ru)\/)?faq\/([^/]+)$/);
   if (!match) return null;
   const lang = (match[1] ?? "az") as Lang;

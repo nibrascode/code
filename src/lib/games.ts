@@ -1,3 +1,4 @@
+import { delocalizeSection, localizeSection } from "@/lib/section-slugs";
 import type { Lang } from "@/lib/i18n";
 
 const PREFIX: Record<Lang, string> = { az: "", en: "/en", tr: "/tr", ar: "/ar", ru: "/ru" };
@@ -202,7 +203,7 @@ export const GAME_COPY = {
 
 export function gamePath(lang: Lang, slug?: string) {
   const base = `${PREFIX[lang]}/oyun`;
-  return slug ? `${base}/${slug}` : base;
+  return localizeSection(slug ? `${base}/${slug}` : base);
 }
 
 export function gameBySlug(slug: string) {
@@ -210,7 +211,7 @@ export function gameBySlug(slug: string) {
 }
 
 export function gameSeo(pathname: string, lang: Lang) {
-  const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname;
+  const path = delocalizeSection(pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname);
   const match = path.match(/^\/(?:(?:en|tr|ar|ru)\/)?oyun(?:\/([a-z0-9-]+))?$/);
   if (!match) return null;
   if (!match[1]) {

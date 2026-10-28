@@ -1,3 +1,4 @@
+import { delocalizeSection, localizeSection } from "@/lib/section-slugs";
 import type { Lang } from "@/lib/i18n";
 
 export type ResourceArticle = {
@@ -905,7 +906,7 @@ export function findResourceArticle(topic: string, slug: string) {
 }
 
 export function resourceArticleFromPath(pathname: string) {
-  const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname;
+  const path = delocalizeSection(pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname);
   const match = path.match(/^\/resources\/([^/]+)\/([^/]+)$/);
   if (!match) return null;
   return findResourceArticle(match[1], match[2]);

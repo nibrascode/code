@@ -1,3 +1,4 @@
+import { delocalizeSection, localizeSection } from "@/lib/section-slugs";
 import type { Lang } from "@/lib/i18n";
 import { PROGRAMMING_SEO } from "@/lib/programming-seo";
 
@@ -7,7 +8,7 @@ export function programmingLocalePath(lang: Lang, slug: string) {
 }
 
 export function programmingFromPath(pathname: string) {
-  const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname;
+  const path = delocalizeSection(pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname);
   const prefixed = path.match(/^\/(en|tr|ar|ru)\/programming\/([^/]+)$/);
   if (prefixed) return { lang: prefixed[1] as Exclude<Lang, "az">, slug: prefixed[2] };
   const az = path.match(/^\/programming\/([^/]+)$/);

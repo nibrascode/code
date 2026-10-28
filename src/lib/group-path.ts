@@ -1,3 +1,4 @@
+import { delocalizeSection, localizeSection } from "@/lib/section-slugs";
 import type { Lang } from "@/lib/i18n";
 
 export type GroupKey = "g1" | "g2" | "g3";
@@ -29,7 +30,7 @@ export function groupKeyFromSlug(lang: Lang, slug: string): GroupKey | null {
 }
 
 export function groupFromPath(pathname: string): { lang: Lang; group: GroupKey } | null {
-  const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname;
+  const path = delocalizeSection(pathname.length > 1 ? pathname.replace(/\/$/, "") : pathname);
   for (const lang of Object.keys(GROUP_BASE) as Lang[]) {
     const base = GROUP_BASE[lang];
     if (!path.startsWith(`${base}/`)) continue;

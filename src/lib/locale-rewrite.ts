@@ -8,6 +8,7 @@ import { isCourseSlug } from "@/lib/course/meta";
 import { hasProgrammingLocale } from "@/lib/programming-path";
 import { PDF_LOCALE_PAIRS } from "@/lib/pdf-pairs";
 import { isSharedLocalePage } from "@/lib/locale-path";
+import { delocalizeSection, localizeSection } from "@/lib/section-slugs";
 
 const LANGS = ["en", "tr", "ar", "ru"] as const;
 type PrefixLang = (typeof LANGS)[number];
@@ -28,6 +29,7 @@ export function needsLocaleRewrite(lang: PrefixLang, path: string) {
 
 export const localeRewrite = {
   input: ({ url }: { url: URL }) => {
+    url.pathname = delocalizeSection(url.pathname);
     const m = url.pathname.match(/^\/(en|tr|ar|ru)(\/.+?)\/?$/);
     if (!m) return url;
     const lang = m[1] as PrefixLang;
@@ -37,11 +39,12 @@ export const localeRewrite = {
     return url;
   },
   output: ({ url }: { url: URL }) => {
+    url.pathname = localizeSection(url.pathname);
     const lang = url.searchParams.get("lang");
     if (!lang || !(LANGS as readonly string[]).includes(lang)) return url;
     const path = url.pathname.length > 1 ? url.pathname.replace(/\/$/, "") : url.pathname;
     if (!needsLocaleRewrite(lang as PrefixLang, path)) return url;
-    url.pathname = `/${lang}${path}`;
+    url.pathname = localizeSection(`/${lang}${path}`);
     url.searchParams.delete("lang");
     return url;
   },
