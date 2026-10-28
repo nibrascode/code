@@ -15,6 +15,7 @@ export const BAR = {
   apk: { az: "APK hazırla", en: "Make an APK", tr: "APK hazırla", ar: "اصنع APK", ru: "Собрать APK" },
   pdf: { az: "PDF hazırla", en: "Make a PDF", tr: "PDF hazırla", ar: "جهّز PDF", ru: "Сделать PDF" },
   audio: { az: "Səs yaz", en: "Record audio", tr: "Ses kaydet", ar: "سجّل الصوت", ru: "Записать звук" },
+  video: { az: "Video kəs", en: "Edit video", tr: "Video düzenle", ar: "حرّر الفيديو", ru: "Видео" },
   qr: { az: "QR hazırla", en: "Make a QR", tr: "QR hazırla", ar: "جهّز QR", ru: "Сделать QR" },
   erase: { az: "Fon sil", en: "Remove background", tr: "Arka plan sil", ar: "احذف الخلفية", ru: "Удалить фон" },
   image: { az: "Şəkil sıx", en: "Compress photo", tr: "Foto sıkıştır", ar: "ضغط الصورة", ru: "Сжать фото" },
@@ -80,6 +81,15 @@ export function barItems(lang: Lang): Record<BarGroup, ReactElement[]> {
                 </svg>
                 <span className="nx-qr-text">
                   <b>{BAR.audio[lang]}</b>
+                </span>
+              </a>,
+              <a key="/video" className="nx-ai-bar nx-qr-bar" href={localeHref(lang, "/video")}>
+                <svg className="nx-job nx-job-video" viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="3" y="6" width="13" height="12" rx="1.6" fill="none" stroke="currentColor" strokeWidth="1.6" />
+                  <path d="M16 10.5l5-3v9l-5-3z" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+                </svg>
+                <span className="nx-qr-text">
+                  <b>{BAR.video[lang]}</b>
                 </span>
               </a>,
               <a key="/erase" className="nx-ai-bar nx-qr-bar" href={localeHref(lang, "/erase")}>
