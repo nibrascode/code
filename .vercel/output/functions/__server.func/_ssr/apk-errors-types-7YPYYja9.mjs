@@ -1,0 +1,65 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/apk-errors-types-7YPYYja9.js
+function E(slug, err, cmd, az, en, tr, ar, ru) {
+	const t = (x) => ({
+		title: x[0],
+		cause: x[1],
+		steps: x[2],
+		prevent: x[3]
+	});
+	return {
+		slug,
+		err,
+		cmd,
+		l: {
+			az: t(az),
+			en: t(en),
+			tr: t(tr),
+			ar: t(ar),
+			ru: t(ru)
+		}
+	};
+}
+var APK_LABELS = {
+	az: {
+		symptom: "Xəta mətni",
+		cause: "Səbəb",
+		steps: "Addım-addım həll",
+		commands: "Nümunə əmrlər",
+		prevent: "Təkrarlanmasın deyə",
+		author: "Müəllif və lisenziya: Nibras Code"
+	},
+	en: {
+		symptom: "Error text",
+		cause: "Cause",
+		steps: "Step-by-step fix",
+		commands: "Example commands",
+		prevent: "How to prevent it",
+		author: "Author and license: Nibras Code"
+	},
+	tr: {
+		symptom: "Hata metni",
+		cause: "Neden",
+		steps: "Adım adım çözüm",
+		commands: "Örnek komutlar",
+		prevent: "Tekrarlanmasın diye",
+		author: "Yazar ve lisans: Nibras Code"
+	},
+	ar: {
+		symptom: "نص الخطأ",
+		cause: "السبب",
+		steps: "الحل خطوة بخطوة",
+		commands: "أوامر للمثال",
+		prevent: "كيف لا يتكرر",
+		author: "المؤلف والترخيص: Nibras Code"
+	},
+	ru: {
+		symptom: "Текст ошибки",
+		cause: "Причина",
+		steps: "Решение по шагам",
+		commands: "Примеры команд",
+		prevent: "Как не повторить",
+		author: "Автор и лицензия: Nibras Code"
+	}
+};
+//#endregion
+export { E as n, APK_LABELS as t };

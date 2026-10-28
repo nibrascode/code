@@ -1,0 +1,110 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/r-pdf-sixisdirmak-BNexNAtv.js
+var az = {
+	"about": ["PDF sıxışdırmaq faylın həcmini azaltmaqdır ki, onu mesaj və ya poçtla göndərmək asan olsun. Ən çox yer tutan hissə adətən içindəki şəkillərdir. Sənədlərin ölçüsünü kiçiltmək rəqəmsal mühitdə məlumat mübadiləsini sürətləndirir və yaddaşda boş sahə yaradır.", "İstifadəçilər həcm məhdudiyyəti olan platformalara sənəd yükləyərkən bu prosesə ehtiyac duyurlar. Konsepsiya sənəddəki artıq məlumatların optimallaşdırılmasına əsaslanır. Artıq kiçik olan mətn sənədi sıxışdırılandan sonra az dəyişir, çünki onun daxilində sıxılacaq qrafik elementlər yoxdur."],
+	"steps": [
+		"Sənədi Nibras PDF alətinə yükləyin.",
+		"Sıxışdırma parametrini seçin.",
+		"Prosesin tamamlanmasını gözləyin.",
+		"Hazır faylı cihazınıza endirin."
+	],
+	"uses": [
+		"Elektron poçt vasitəsilə böyük həcmli sənədlərin göndərilməsi.",
+		"Veb saytlarda yerləşdirmək üçün fayl ölçülərinin optimallaşdırılması.",
+		"Mesencerlərdə sənəd paylaşımı zamanı limitlərin aşılması.",
+		"Şəxsi yaddaşda boş sahənin artırılması üçün arxivləmə."
+	],
+	"faq": [
+		["PDF sıxışdırmaq nə üçündür?", "PDF sıxışdırmaq faylın həcmini azaltmaqdır ki, onu mesaj və ya poçtla göndərmək asan olsun. Bu, faylların ötürülməsini sürətləndirir."],
+		["Niyə bəzi fayllar az dəyişir?", "Artıq kiçik olan mətn sənədi sıxışdırılandan sonra az dəyişir, çünki sənədlərdə ən çox yer tutan hissə adətən içindəki şəkillərdir."],
+		["Sıxışdırmadan sonra sənədin keyfiyyəti necə yoxlanılır?", "Proses başa çatdıqdan sonra faylı açaraq mütləq yoxlamaq lazımdır. Yoxlayın ki, mətn və digər elementlər hələ də tam oxunaqlıdır."]
+	]
+};
+var en = {
+	"about": ["Compressing a PDF makes it smaller to send, allowing you to share documents easily via messages or email. Large files often contain heavy graphical elements that consume substantial storage space. Reducing file dimensions helps streamline digital communication and ensures compatibility with strict upload limits.", "People frequently need this function when attaching documents to portals with strict size caps. The underlying concept involves optimizing the data structure and internal elements. A small text file shrinks very little because it lacks large graphical components to compress."],
+	"steps": [
+		"Upload your document to the Nibras PDF tool.",
+		"Select the desired compression level.",
+		"Wait for the processing to finish.",
+		"Download the optimized file to your device."
+	],
+	"uses": [
+		"Sending large documents efficiently through email attachments.",
+		"Optimizing file sizes for web upload forms and portals.",
+		"Sharing documents via messaging apps without hitting size limits.",
+		"Saving local device storage space by shrinking bulky archives."
+	],
+	"faq": [
+		["Why should I compress a PDF?", "Compressing a PDF makes it smaller to send, which helps you transfer documents quickly through email or messaging platforms without restrictions."],
+		["Why do some files barely change in size?", "A small text file shrinks very little during compression because the part that takes up the most space is usually the images inside it."],
+		["What should I do after compressing the file?", "After the compression process is complete, you should check that the text is still readable to ensure the document remains fully functional."]
+	]
+};
+var ru = {
+	"about": ["Сжатие PDF делает файл меньше для отправки, что позволяет легко передавать документы через сообщения или электронную почту. Большие файлы часто содержат тяжелые графические элементы, занимающие много места. Уменьшение размера помогает оптимизировать цифровой обмен и соблюдать лимиты платформ.", "Пользователи часто прибегают к этой процедуре при загрузке документов на сайты с ограничениями по весу. Концепция заключается в оптимизации внутреннего содержимого. Небольшой текстовый документ сжимается очень мало, так как в нем нет крупных графических элементов."],
+	"steps": [
+		"Загрузите документ в инструмент Nibras PDF.",
+		"Выберите параметр сжатия.",
+		"Дождитесь завершения обработки файла.",
+		"Скачайте оптимизированный документ на устройство."
+	],
+	"uses": [
+		"Отправка объемных документов через электронную почту.",
+		"Оптимизация файлов для быстрой загрузки на веб-сайты.",
+		"Передача документов через мессенджеры в рамках лимитов.",
+		"Экономия свободного пространства на вашем устройстве."
+	],
+	"faq": [
+		["Зачем нужно сжимать PDF?", "Сжатие PDF делает файл меньше для отправки, чтобы его можно было легко передать через мессенджеры или почту без превышения лимитов."],
+		["Почему текстовые файлы почти не уменьшаются?", "Маленький текстовый файл сжимается очень мало, поскольку самую большую часть занимают изображения, которых в простом тексте нет."],
+		["Что важно сделать после сжатия?", "После завершения процесса обязательно проверьте, что текст все еще читаем и документ полностью пригоден для дальнейшего использования."]
+	]
+};
+var ar = {
+	"about": ["يؤدي ضغط ملف PDF إلى جعل حجمه أصغر لتسهيل إرساله عبر الرسائل أو البريد الإلكتروني. عادةً ما تكون الجوانب الأكثر استهلاكاً للمساحة هي الصور الموجودة داخل الملف. يساعد تقليل أبعاد الملفات في تسريع تبادل البيانات الرقمية وتجنب قيود منصات الرفع.", "يحتاج المستخدمون إلى هذه العملية عند إرفاق المستندات بالمنصات التي تفرض حدوداً صارمة على حجم الملفات. يعتمد الأساس التقني على تحسين بنية الملف الداخلية. الملف النصي الصغير يتقلص بشكل طفيف جداً لعدم وجود عناصر رسومية ضخمة."],
+	"steps": [
+		"قم برفع المستند إلى أداة Nibras PDF.",
+		"حدد خيار مستوى الضغط المطلوب.",
+		"انتظر حتى اكتمال عملية المعالجة.",
+		"قم بتنزيل الملف المحسن إلى جهازك."
+	],
+	"uses": [
+		"إرسال المستندات الكبيرة بكفاءة عبر مرفقات البريد الإلكتروني.",
+		"تحسين أحجام الملفات لرفعها عبر منصات ومواقع الويب.",
+		"مشاركة المستندات عبر تطبيقات المراسلة دون تجاوز الحدود.",
+		"توفير مساحة التخزين المحلية عن طريق تصغير الملفات الضخمة."
+	],
+	"faq": [
+		["ما هي فائدة ضغط ملفات PDF؟", "ضغط ملف PDF يجعل حجمه أصغر لتسهيل إرساله، مما يساعدك على نقل المستندات بسرعة عبر البريد الإلكتروني أو تطبيقات المراسلة دون قيود."],
+		["لماذا تتغير بعض الملفات بشكل طفيف جداً؟", "الملف النصي الصغير يتقلص بشكل طفيف جداً بعد الضغط، لأن الجزء الذي يأخذ أكبر مساحة عادة ما يكون الصور الموجودة بداخله."],
+		["ما الذي يجب التحقق منه بعد الضغط؟", "بعد الانتهاء من عملية الضغط، تحقق من أن النص لا يزال قابلاً للقراءة لضمان أن المستند الاحترافي يظل واضحاً وسالماً."]
+	]
+};
+var tr = {
+	"about": ["Bir PDF dosyasını sıkıştırmak, mesaj veya e-posta yoluyla göndermeyi kolaylaştırmak için dosya boyutunu küçültmektir. Büyük dosyalar genellikle çok yer kaplayan görsel öğeler içerir. Dosya boyutlarını azaltmak dijital iletişimi hızlandırır ve platform yükleme sınırlarına uyum sağlar.", "Kullanıcılar, katı boyut sınırları olan platformlara belge yüklerken bu sürece ihtiyaç duyarlar. Temel mantık, belgedeki verilerin optimize edilmesine dayanır. Zaten küçük olan bir metin belgesi sıkıştırıldıktan sonra çok az değişir, çünkü içinde sıkıştırılacak büyük grafikler yoktur."],
+	"steps": [
+		"Belgeyi Nibras PDF aracına yükleyin.",
+		"Sıkıştırma ayarını seçin.",
+		"İşlemin tamamlanmasını bekleyin.",
+		"Hazır dosyayı cihazınıza indirin."
+	],
+	"uses": [
+		"E-posta ekleri aracılığıyla büyük belgelerin gönderilmesi.",
+		"Web sitelerine yüklemek için dosya boyutlarının optimize edilmesi.",
+		"Mesajlaşma uygulamalarında sınırları aşmadan dosya paylaşımı.",
+		"Cihaz depolama alanında yer kazanmak için arşivleme."
+	],
+	"faq": [
+		["PDF sıkıştırmak ne işe yarar?", "PDF sıkıştırmak dosyanın hacmini azaltmak içindir ki onu mesaj veya posta ile göndermek kolay olsun. Bu, belge aktarımlarını hızlandırır."],
+		["Neden bazı dosyalar çok az değişir?", "Zaten küçük olan bir metin belgesi sıkıştırıldıktan sonra çok az değişir, çünkü en çok yer tutan kısım genellikle içindeki resimlerdir."],
+		["Sıkıştırma işleminden sonra ne yapılmalıdır?", "İşlem tamamlandıktan sonra dosyanın okunabilirliğini kontrol etmelisiniz. Metnin ve diğer öğelerin hâlâ net bir şekilde okunabildiğinden emin olun."]
+	]
+};
+var r_pdf_sixisdirmak_default = {
+	az,
+	en,
+	ru,
+	ar,
+	tr
+};
+//#endregion
+export { ar, az, r_pdf_sixisdirmak_default as default, en, ru, tr };

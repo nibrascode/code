@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-CKeovgl0.js";import{t}from"./useRouterState-BzxD9ca1.js";import{Tr as n}from"./index-CuD-MDMg.js";import{t as r}from"./search-pages-m0BBvzI5.js";var i=e();function a(){return t({select:e=>e.location.pathname}).replace(/\/$/,``)===`/tr/movzu`?(0,i.jsx)(r,{kind:`movzu`,lang:`tr`}):(0,i.jsx)(n,{})}export{a as component};

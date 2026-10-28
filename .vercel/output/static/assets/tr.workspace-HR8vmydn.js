@@ -1,0 +1,1 @@
+import{t as e}from"./workspace-Doqik2hk.js";var t=e;export{t as component};

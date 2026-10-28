@@ -1,0 +1,45 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/nece-telefonda-python-DU6EzKM9.js
+var az = {
+	"about": ["Telefonda Python yazmaq başlanğıc üçün tam kifayətdir. Dəyişən, şərt, dövr kimi əsasları burada öyrənmək olur.", "Böyük layihələr üçün sonra kompüter rahat olacaq. Amma başlamaq üçün gözləmək lazım deyil."],
+	"steps": [
+		"Termux-u qurun.",
+		"Python-u qurun.",
+		"Fayl yazın.",
+		"İşə salın."
+	],
+	"uses": [
+		"Yolda kod məşqi.",
+		"Kiçik skriptlər.",
+		"Dərsləri telefonda təkrar etmək."
+	],
+	"faq": [
+		["Termux pulsuzdur?", "Bəli, açıq mənbəli və pulsuzdur."],
+		["iPhone-da olar?", "Termux yalnız Android üçündür."],
+		["Haradan davam edim?", "«İlk Python proqramı» bələdçisi və Python dərsləri ilə."]
+	]
+};
+var en = {
+	"about": ["Writing Python on a phone is fully enough for a beginner. You can learn the basics here: variables, conditions, loops.", "For big projects a computer will be easier later. But you do not need to wait to start."],
+	"steps": [
+		"Install Termux.",
+		"Install Python.",
+		"Write a file.",
+		"Run it."
+	],
+	"uses": [
+		"Practising on the go.",
+		"Small scripts.",
+		"Reviewing lessons on the phone."
+	],
+	"faq": [
+		["Is Termux free?", "Yes, it is open source and free."],
+		["Does it work on iPhone?", "Termux is for Android only."],
+		["Where do I go next?", "The First Python program guide and the Python lessons."]
+	]
+};
+var nece_telefonda_python_default = {
+	az,
+	en
+};
+//#endregion
+export { az, nece_telefonda_python_default as default, en };

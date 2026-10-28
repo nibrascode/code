@@ -1,0 +1,145 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/sign-m1Mrp_2o.js
+var az = {
+	"about": [
+		"Nibras PDF Android tətbiqinin veb versiyası olan bu alət istifadəçilərə PDF sənədlərinə elektron imza yerləşdirməyə imkan verir. Xidmət tamamilə pulsuzdur və istifadədən ötrü heç bir hesab açılması tələb olunmur. Bütün əməliyyatlar birbaşa brauzerdə icra edilir və fayllar cihazınızı tərk etmir.",
+		"Bu funksiya rəqəmsal sənəd dövriyyəsində imzalanma tələb olunduqda lazımdır. Brauzer əsaslı texnologiya sayəsində imzalama prosesi yerli olaraq aparılır, bu da məxfiliyi qorumağa və xarici serverlərə qoşulmadan işləməyə şərait yaradır.",
+		"Faylı seçmək üçün brauzerə əlavə edin.",
+		"İmzanı müvafiq sahəyə yerləşdirin.",
+		"Dəyişiklikləri təsdiq edib düyməni sıxın.",
+		"İmzalanmış faylı cihazınıza endirin."
+	],
+	"steps": [
+		"Faylı seçmək üçün brauzerə əlavə edin.",
+		"İmzanı müvafiq sahəyə yerləşdirin.",
+		"Dəyişiklikləri təsdiq edib prosesi başladın.",
+		"İmzalanmış faylı cihazınıza endirin."
+	],
+	"uses": [
+		"Rəqəmsal müqavilələrə və razılaşmalara imza əlavə etmək üçün.",
+		"Müraciət və ərizə sənədlərini rəsmi şəkildə təsdiqləmək üçün.",
+		"Hesabatları və iş sənədlərini uzaqdan imzalamaq üçün.",
+		"Şəxsi sənədlərə elektron imzanı operativ şəkildə qoymaq üçün."
+	],
+	"faq": [
+		["Bu xidmətdən istifadə etmək üçün ödəniş tələb olunurmu?", "Xeyr, bu alət tamamilə pulsuzdur və heç bir abunəlik tələb etmir."],
+		["İmzalama zamanı fayllarım təhlükəsizdirmi?", "Bəli, bütün proseslər birbaşa brauzerinizdə baş verir və fayllarınız cihazınızı tərk etmir."],
+		["İstifadə üçün hesab açmaq lazımdırrmı?", "Xeyr, heç bir qeydiyyat və ya hesab açmadan birbaşa istifadə edə bilərsiniz."]
+	]
+};
+var en = {
+	"about": [
+		"This tool is the web version of a feature from the Nibras PDF Android app, hosted on nibrascode.com/pdf. It allows users to place an electronic signature on a PDF document. The service is entirely free, requires no user account, and processes files directly in the browser.",
+		"The underlying technology ensures that all file processing happens locally on your hardware. Because files do not leave the device, privacy is maintained during the signing process, making it useful when you need to sign digital documents without uploading them to external servers.",
+		"Open the tool page in your browser.",
+		"Select and load the PDF document.",
+		"Place your electronic signature on the page.",
+		"Save the signed document."
+	],
+	"steps": [
+		"Open the tool page in your browser.",
+		"Select and load the PDF document.",
+		"Place your electronic signature on the page.",
+		"Save the signed document."
+	],
+	"uses": [
+		"Signing business contracts and agreements digitally.",
+		"Authorizing official application forms and letters.",
+		"Approving invoices and financial documents remotely.",
+		"Validating personal documents with an electronic signature."
+	],
+	"faq": [
+		["Is this service free to use?", "Yes, this tool is completely free with no hidden charges or subscription requirements."],
+		["Do I need to create an account?", "No account or registration is required to access and use the signing tool."],
+		["Are my files secure during processing?", "Yes, files are processed directly in your browser and never leave your device."]
+	]
+};
+var ru = {
+	"about": [
+		"Данный инструмент является веб-версией функции из Android-приложения Nibras PDF на сайте nibrascode.com/pdf. Он позволяет разместить электронную подпись на PDF-документе. Сервис полностью бесплатен, не требует создания аккаунта и обрабатывает файлы непосредственно в браузере.",
+		"Основной принцип работы заключается в том, что вся обработка выполняется локально на вашем устройстве. Поскольку файлы не покидают устройство, обеспечивается конфиденциальность, что востребовано при необходимости подписания цифровых документов без загрузки на внешние серверы.",
+		"Откройте страницу инструмента в браузере.",
+		"Загрузите нужный PDF-файл.",
+		"Разместите электронную подпись на документе.",
+		"Сохраните подписанный файл."
+	],
+	"steps": [
+		"Откройте страницу инструмента в браузере.",
+		"Загрузите нужный PDF-файл.",
+		"Разместите электронную подпись на документе.",
+		"Сохраните подписанный файл."
+	],
+	"uses": [
+		"Подписание договоров и соглашений в цифровом виде.",
+		"Утверждение официальных заявлений и бланков.",
+		"Согласование отчетов и рабочих документов удаленно.",
+		"Проставление подписи на личных документах."
+	],
+	"faq": [
+		["Нужно ли платить за использование этого инструмента?", "Нет, сервис полностью бесплатен и не требует оплаты."],
+		["Требуется ли создание аккаунта?", "Нет, регистрация или учетная запись не нужны для работы с инструментом."],
+		["Безопасны ли мои файлы при обработке?", "Да, файлы обрабатываются в браузере и не покидают ваше устройство."]
+	]
+};
+var ar = {
+	"about": [
+		"هذه الأداة هي النسخة الويب من إحدى ميزات تطبيق Nibras PDF لنظام أندرويد على موقع nibrascode.com/pdf. تتيح للمستخدمين وضع توقيع إلكتروني على ملف PDF. الخدمة مجانية بالكامل، ولا تتطلب إنشاء حساب، وتتم معالجة الملفات مباشرة في المتصفح.",
+		"تعتمد التقنية الأساسية على معالجة الملفات محلياً داخل جهازك. وبما أن الملفات لا تغادر الأجهزة، يتم الحفاظ على الخصوصية الكاملة، مما يجعل هذه الأداة مفيدة عندما يحتاج الأشخاص إلى توقيع المستندات الرقمية دون رفعها إلى خوادم خارجية.",
+		"افتح صفحة الأداة في المتصفح.",
+		"اختر وحمل ملف PDF المطلوب.",
+		"ضع التوقيع الإلكتروني في المكان المخصص.",
+		"احفظ المستند الموقع على جهازك."
+	],
+	"steps": [
+		"افتح صفحة الأداة في المتصفح.",
+		"اختر وحمل ملف PDF المطلوب.",
+		"ضع التوقيع الإلكتروني في المكان المخصص.",
+		"احفظ المستند الموقع على جهازك."
+	],
+	"uses": [
+		"توقيع العقود والاتفاقيات الرقمية بسهولة.",
+		"اعتماد النماذج والطلبات الرسمية إلكترونياً.",
+		"الموافقة على التقارير وملفات العمل عن بُعد.",
+		"إضافة التوقيع إلى المستندات الشخصية."
+	],
+	"faq": [
+		["هل هذه الخدمة مجانية للاستخدام؟", "نعم، هذه الأداة مجانية بالكامل ولا توجد أي رسوم أو متطلبات اشتراك."],
+		["هل يحتاج المستخدم إلى إنشاء حساب؟", "لا، لا يلزم إنشاء حساب أو تسجيل للوصول إلى أداة التوقيع واستخدامها."],
+		["هل ملفاتي آمنة أثناء المعالجة؟", "نعم، تتم معالجة الملفات داخل متصفحك مباشرة ولا تغادر جهازك أبداً."]
+	]
+};
+var tr = {
+	"about": [
+		"Nibras PDF Android uygulamasının web sürümü olan bu araç, nibrascode.com/pdf adresinde sunulmaktadır. Kullanıcıların bir PDF belgesine elektronik imza yerleştirmesini sağlar. Hizmet tamamen ücretsizdir, hesap gerektirmez ve dosyalar doğrudan tarayıcıda işlenir.",
+		"Temel çalışma prensibi, tüm dosya işlemlerinin cihazınızda yerel olarak gerçekleşmesine dayanır. Dosyalar cihazı terk etmediği için gizlilik korunur; bu da dijital belgeleri harici sunuculara yüklemeden imzalamanız gerektiğinde faydalıdır.",
+		"Tarayıcınızda araç sayfasını açın.",
+		"İlgili PDF dosyasını seçip yükleyin.",
+		"Elektronik imzanızı belgeye yerleştirin.",
+		"İmzalanan dosyayı cihazınıza kaydedin."
+	],
+	"steps": [
+		"Tarayıcınızda araç sayfasını açın.",
+		"İlgili PDF dosyasını seçip yükleyin.",
+		"Elektronik imzanızı belgeye yerleştirin.",
+		"İmzalanan dosyayı cihazınıza kaydedin."
+	],
+	"uses": [
+		"Dijital sözleşmelere ve anlaşmalara imza atmak için.",
+		"Resmi başvuru formlarını ve belgeleri onaylamak için.",
+		"Raporları ve iş belgelerini uzaktan imzalamak için.",
+		"Kişisel belgelere elektronik imza eklemek için."
+	],
+	"faq": [
+		["Bu hizmeti kullanmak ücretli midir?", "Hayır, bu araç tamamen ücretsizdir ve herhangi bir abonelik veya ödeme gerektirmez."],
+		["Kullanım için hesap açmak gerekiyor mu?", "Hayır, imzalama aracını kullanmak için herhangi bir kayıt veya hesap açma zorunluluğu yoktur."],
+		["İşlem sırasında dosyalarım güvende mi?", "Evet, dosyalarınız doğrudan tarayıcınızda işlenir ve cihazınızdan asla dışarı çıkmaz."]
+	]
+};
+var sign_default = {
+	az,
+	en,
+	ru,
+	ar,
+	tr
+};
+//#endregion
+export { ar, az, sign_default as default, en, ru, tr };

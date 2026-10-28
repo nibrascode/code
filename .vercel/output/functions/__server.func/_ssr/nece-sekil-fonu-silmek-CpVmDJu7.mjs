@@ -1,0 +1,45 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/nece-sekil-fonu-silmek-CpVmDJu7.js
+var az = {
+	"about": ["Fonu silinmiş şəkil sənəd, CV və onlayn mağaza üçün daha səliqəli görünür.", "Hesab, ödəniş və reklam yoxdur."],
+	"steps": [
+		"Aləti açın.",
+		"Şəkli seçin.",
+		"Fonu silin.",
+		"Endirin."
+	],
+	"uses": [
+		"CV üçün profil şəkli.",
+		"Mağaza üçün məhsul fotosu.",
+		"Sənəd şəkli üçün ağ fon."
+	],
+	"faq": [
+		["Şəkil yüklənir?", "Xeyr. Fon cihazınızda silinir."],
+		["Şəffaf fon olar?", "Bəli, PNG formatında."],
+		["İnternetsiz işləyir?", "Model bir dəfə endiriləndən sonra növbəti şəkillər internetsiz də işlənə bilər."]
+	]
+};
+var en = {
+	"about": ["A photo without a background looks neater on documents, CVs and online shops.", "No account, no payment, no ads."],
+	"steps": [
+		"Open the tool.",
+		"Choose the photo.",
+		"Remove the background.",
+		"Download."
+	],
+	"uses": [
+		"Profile photo for a CV.",
+		"Product photo for a shop.",
+		"White background for an ID photo."
+	],
+	"faq": [
+		["Is the photo uploaded?", "No. The background is removed on your device."],
+		["Can the background be transparent?", "Yes, in PNG format."],
+		["Does it work offline?", "After the model downloads once, later photos can be processed offline."]
+	]
+};
+var nece_sekil_fonu_silmek_default = {
+	az,
+	en
+};
+//#endregion
+export { az, nece_sekil_fonu_silmek_default as default, en };

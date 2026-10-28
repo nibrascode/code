@@ -1,0 +1,1 @@
+import{r as e}from"./tools-legal-DTjxWx9e.js";var t=e;export{t as component};

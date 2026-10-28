@@ -1,0 +1,1 @@
+import{o as e}from"./rolldown-runtime-C0FnF6B9.js";import{n as t,t as n}from"./jsx-runtime-CKeovgl0.js";var r=`__root__`,i=e(t(),1),a=n(),o=()=>!0,s=()=>!1;function c({children:e,fallback:t=null}){return(0,a.jsx)(i.Fragment,{children:l()?e:t})}function l(e=!0){return i.useSyncExternalStore(u,o,e?s:o)}function u(){return()=>{}}export{l as n,r,c as t};

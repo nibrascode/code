@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-CKeovgl0.js";import{t}from"./useRouterState-BzxD9ca1.js";import{Tr as n}from"./index-Bdeknepo.js";import{t as r}from"./search-pages-CsbIZfam.js";var i=e();function a(){return t({select:e=>e.location.pathname}).replace(/\/$/,``)===`/soz`?(0,i.jsx)(r,{kind:`soz`,lang:`az`}):(0,i.jsx)(n,{})}export{a as component};

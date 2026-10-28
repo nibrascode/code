@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#0f172a" />
+  <title>ProCalc — Çoxfunksiyalı Kalkulyator</title>
+  <meta name="description" content="Elmi kalkulyator, vahid çevirici, endirim, kredit, BKİ və tarix fərqi. Hesablama cihazda qalır." />
+  <link rel="canonical" href="https://nibrascode.com/calc" />
+  <link rel="alternate" hreflang="az" href="https://nibrascode.com/calc" />
+  <link rel="alternate" hreflang="en" href="https://nibrascode.com/en/calc" />
+  <link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/calc" />
+  <link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/calc" />
+  <link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/calc" />
+  <link rel="alternate" hreflang="x-default" href="https://nibrascode.com/calc" />
+  <style>
+    :root {
+      --bg: #0f172a; --panel: #1e293b; --panel-alt: #0b1120; --btn: #334155; --btn-hover: #475569;
+      --btn-sci: #1e293b; --accent: #6366f1; --accent-hover: #4f46e5; --op: #3b82f6; --danger: #ef4444;
+      --success: #10b981; --text: #f8fafc; --muted: #94a3b8; --border: #334155;
+    }
+    [data-theme="light"] {
+      --bg: #f1f5f9; --panel: #ffffff; --panel-alt: #f8fafc; --btn: #e2e8f0; --btn-hover: #cbd5e1;
+      --btn-sci: #f1f5f9; --accent: #4f46e5; --accent-hover: #4338ca; --op: #2563eb; --danger: #dc2626;
+      --success: #059669; --text: #0f172a; --muted: #64748b; --border: #cbd5e1;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; user-select: none; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    input, select { user-select: text; }
+    body { background: var(--bg); color: var(--text); display: flex; justify-content: center; min-height: 100dvh; }
+    .app-container { width: 100%; max-width: 460px; height: 100dvh; display: flex; flex-direction: column; background: var(--panel); box-shadow: 0 10px 30px rgba(0,0,0,.35); overflow: hidden; }
+    .header { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: var(--panel-alt); border-bottom: 1px solid var(--border); }
+    .brand { font-size: 1.1rem; font-weight: 700; display: flex; align-items: center; gap: 8px; color: var(--accent); text-decoration: none; }
+    .header-actions { display: flex; gap: 8px; }
+    .icon-btn { background: var(--btn); color: var(--text); border: none; padding: 6px 10px; border-radius: 8px; font-size: .85rem; font-weight: 600; cursor: pointer; }
+    .nav-tabs { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--panel-alt); padding: 6px; gap: 4px; border-bottom: 1px solid var(--border); }
+    .tab-btn { background: transparent; color: var(--muted); border: none; padding: 8px 4px; border-radius: 8px; font-size: .8rem; font-weight: 600; cursor: pointer; }
+    .tab-btn.active { background: var(--accent); color: #fff; }
+    .view { display: none; flex: 1; flex-direction: column; overflow-y: auto; min-height: 0; }
+    .view.active { display: flex; }
+    .display-box { padding: 16px; background: var(--panel-alt); display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-end; min-height: 125px; border-bottom: 1px solid var(--border); position: relative; }
+    .status-row { position: absolute; top: 10px; left: 16px; right: 16px; display: flex; justify-content: space-between; font-size: .75rem; color: var(--muted); font-weight: 600; }
+    .expression { font-size: 1.05rem; color: var(--muted); min-height: 24px; word-break: break-all; text-align: right; margin-top: 18px; }
+    .result { font-size: clamp(1.35rem, 7vw, 2.3rem); font-weight: 700; word-break: break-all; text-align: right; margin-top: 4px; cursor: pointer; }
+    .toolbar-row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; padding: 8px 12px; background: var(--panel); border-bottom: 1px solid var(--border); }
+    .mem-btn { background: var(--btn-sci); color: var(--muted); border: 1px solid var(--border); padding: 7px 0; border-radius: 6px; font-size: .78rem; font-weight: 600; cursor: pointer; }
+    .mem-btn.active-mode { color: var(--accent); border-color: var(--accent); }
+    .sci-pad { display: none; grid-template-columns: repeat(5, 1fr); gap: 6px; padding: 8px 12px 0; background: var(--panel); }
+    .sci-pad.open { display: grid; }
+    .sci-btn { background: var(--btn-sci); color: var(--text); border: 1px solid var(--border); padding: 10px 0; border-radius: 8px; font-size: .85rem; font-weight: 600; cursor: pointer; }
+    .keypad { flex: 1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding: 12px; background: var(--panel); }
+    .key { border: none; border-radius: 12px; font-size: 1.25rem; font-weight: 600; background: var(--btn); color: var(--text); cursor: pointer; display: flex; align-items: center; justify-content: center; min-height: 48px; }
+    .key:active, .sci-btn:active, .mem-btn:active { transform: scale(.95); }
+    .key.op { background: rgba(59,130,246,.18); color: var(--op); font-size: 1.35rem; }
+    .key.danger { background: rgba(239,68,68,.16); color: var(--danger); }
+    .key.equal { background: var(--accent); color: #fff; }
+    .section-pad { padding: 16px; display: flex; flex-direction: column; gap: 14px; }
+    .card { background: var(--panel-alt); border: 1px solid var(--border); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 10px; }
+    .card-title { font-size: .95rem; font-weight: 700; color: var(--accent); }
+    .form-group { display: flex; flex-direction: column; gap: 5px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    label { font-size: .78rem; color: var(--muted); font-weight: 600; }
+    input, select { width: 100%; padding: 10px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--panel); color: var(--text); font-size: .95rem; outline: none; }
+    input:focus, select:focus { border-color: var(--accent); }
+    .output-box { background: var(--panel); border-left: 4px solid var(--accent); padding: 10px 12px; border-radius: 6px; font-size: .9rem; line-height: 1.5; }
+    .history-list { display: flex; flex-direction: column; gap: 8px; }
+    .history-item { background: var(--panel-alt); border: 1px solid var(--border); padding: 12px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; gap: 10px; cursor: pointer; }
+    .history-exp { font-size: .85rem; color: var(--muted); word-break: break-all; }
+    .history-res { font-size: 1.15rem; font-weight: 700; color: var(--accent); }
+    .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--success); color: #fff; padding: 8px 16px; border-radius: 20px; font-size: .82rem; font-weight: 600; opacity: 0; pointer-events: none; transition: opacity .25s; z-index: 100; }
+    .toast.show { opacity: 1; }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <div class="header">
+      <a class="brand" href="/">⚡ ProCalc</a>
+      <div class="header-actions">
+        <select class="icon-btn" id="langPick" aria-label="Language">
+          <option value="az">AZ</option>
+          <option value="en">EN</option>
+          <option value="tr">TR</option>
+          <option value="ar">AR</option>
+          <option value="ru">RU</option>
+        </select>
+        <button class="icon-btn" id="copyBtn" type="button">📋 Kopyala</button>
+        <button class="icon-btn" id="themeBtn" type="button">☀️/🌙</button>
+      </div>
+    </div>
+    <div class="nav-tabs">
+      <button class="tab-btn active" type="button" onclick="switchTab('calc', this)">🧮 Hesabla</button>
+      <button class="tab-btn" type="button" onclick="switchTab('conv', this)">🔄 Çevirici</button>
+      <button class="tab-btn" type="button" onclick="switchTab('tools', this)">💼 Alətlər</button>
+      <button class="tab-btn" type="button" onclick="switchTab('hist', this)">🕒 Tarixçə</button>
+    </div>
+    <div id="view-calc" class="view active">
+      <div class="display-box" onclick="copyResult()">
+        <div class="status-row"><span id="angleIndicator">REJİM: DEG</span><span id="memIndicator"></span></div>
+        <div class="expression" id="expDisplay"></div>
+        <div class="result" id="resDisplay">0</div>
+      </div>
+      <div class="toolbar-row">
+        <button class="mem-btn active-mode" id="sciToggleBtn" type="button" onclick="toggleSci()">ELMİ ▾</button>
+        <button class="mem-btn" id="degRadBtn" type="button" onclick="toggleDegRad()">DEG</button>
+        <button class="mem-btn" type="button" onclick="memAction('MC')">MC</button>
+        <button class="mem-btn" type="button" onclick="memAction('MR')">MR</button>
+        <button class="mem-btn" type="button" onclick="memAction('M+')">M+</button>
+        <button class="mem-btn" type="button" onclick="memAction('M-')">M-</button>
+      </div>
+      <div class="sci-pad open" id="sciPad">
+        <button class="sci-btn" type="button" onclick="insertToken('sin(')">sin</button>
+        <button class="sci-btn" type="button" onclick="insertToken('cos(')">cos</button>
+        <button class="sci-btn" type="button" onclick="insertToken('tan(')">tan</button>
+        <button class="sci-btn" type="button" onclick="insertToken('log(')">log</button>
+        <button class="sci-btn" type="button" onclick="insertToken('ln(')">ln</button>
+        <button class="sci-btn" type="button" onclick="insertToken('(')">(</button>
+        <button class="sci-btn" type="button" onclick="insertToken(')')">)</button>
+        <button class="sci-btn" type="button" onclick="insertToken('sqrt(')">√x</button>
+        <button class="sci-btn" type="button" onclick="insertToken('^2')">x²</button>
+        <button class="sci-btn" type="button" onclick="insertToken('^')">xʸ</button>
+        <button class="sci-btn" type="button" onclick="applyFactorial()">n!</button>
+        <button class="sci-btn" type="button" onclick="insertToken('π')">π</button>
+        <button class="sci-btn" type="button" onclick="insertToken('e')">e</button>
+        <button class="sci-btn" type="button" onclick="invertVal()">1/x</button>
+        <button class="sci-btn" type="button" onclick="absVal()">|x|</button>
+      </div>
+      <div class="keypad">
+        <button class="key danger" type="button" onclick="clearAll()">AC</button>
+        <button class="key danger" type="button" onclick="backspace()">⌫</button>
+        <button class="key op" type="button" onclick="insertToken('%')">%</button>
+        <button class="key op" type="button" onclick="insertToken('÷')">÷</button>
+        <button class="key" type="button" onclick="insertToken('7')">7</button>
+        <button class="key" type="button" onclick="insertToken('8')">8</button>
+        <button class="key" type="button" onclick="insertToken('9')">9</button>
+        <button class="key op" type="button" onclick="insertToken('×')">×</button>
+        <button class="key" type="button" onclick="insertToken('4')">4</button>
+        <button class="key" type="button" onclick="insertToken('5')">5</button>
+        <button class="key" type="button" onclick="insertToken('6')">6</button>
+        <button class="key op" type="button" onclick="insertToken('-')">−</button>
+        <button class="key" type="button" onclick="insertToken('1')">1</button>
+        <button class="key" type="button" onclick="insertToken('2')">2</button>
+        <button class="key" type="button" onclick="insertToken('3')">3</button>
+        <button class="key op" type="button" onclick="insertToken('+')">+</button>
+        <button class="key" type="button" onclick="toggleSign()">±</button>
+        <button class="key" type="button" onclick="insertToken('0')">0</button>
+        <button class="key" type="button" onclick="insertToken('.')">.</button>
+        <button class="key equal" type="button" onclick="calculate()">=</button>
+      </div>
+    </div>
+    <div id="view-conv" class="view">
+      <div class="section-pad">
+        <div class="card">
+          <div class="card-title">🔄 Universal Vahid Çevirici</div>
+          <div class="form-group">
+            <label>Kateqoriya seçin</label>
+            <select id="convCategory" onchange="populateUnits()">
+              <option value="length">Uzunluq (m, km, sm, mil...)</option>
+              <option value="weight">Çəki (kq, qram, ton, funt...)</option>
+              <option value="temp">Temperatur (°C, °F, K)</option>
+              <option value="speed">Sürət (km/saat, m/san, mil/saat)</option>
+              <option value="area">Sahə (m², hektar, km², sot)</option>
+              <option value="data">Məlumat həcmi (KB, MB, GB, TB)</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Dəyər daxil edin</label><input type="number" id="convInput" value="1" oninput="runConversion()" /></div>
+          <div class="form-row">
+            <div class="form-group"><label>Hansı vahiddən</label><select id="convFrom" onchange="runConversion()"></select></div>
+            <div class="form-group"><label>Hansı vahidə</label><select id="convTo" onchange="runConversion()"></select></div>
+          </div>
+          <div class="output-box" id="convResult">Nəticə: 100 sm</div>
+        </div>
+      </div>
+    </div>
+    <div id="view-tools" class="view">
+      <div class="section-pad">
+        <div class="card">
+          <div class="card-title">🏷️ Endirim və ƏDV Hesablayıcı</div>
+          <div class="form-row">
+            <div class="form-group"><label>İlkin Qiymət</label><input type="number" id="discPrice" placeholder="100" oninput="calcDiscount()" /></div>
+            <div class="form-group"><label>Endirim (%)</label><input type="number" id="discPercent" placeholder="20" value="0" oninput="calcDiscount()" /></div>
+          </div>
+          <div class="form-group"><label>ƏDV / Vergi (%)</label><input type="number" id="discTax" placeholder="18" value="0" oninput="calcDiscount()" /></div>
+          <div class="output-box" id="discOutput">Qiyməti daxil edin...</div>
+        </div>
+        <div class="card">
+          <div class="card-title">🏦 Kredit və Faiz Hesablayıcı</div>
+          <div class="form-row">
+            <div class="form-group"><label>Məbləğ</label><input type="number" id="loanAmount" placeholder="5000" oninput="calcLoan()" /></div>
+            <div class="form-group"><label>İllik Faiz (%)</label><input type="number" id="loanRate" placeholder="14" oninput="calcLoan()" /></div>
+          </div>
+          <div class="form-group"><label>Müddət (Ay)</label><input type="number" id="loanMonths" placeholder="12" oninput="calcLoan()" /></div>
+          <div class="output-box" id="loanOutput">Məlumatları daxil edin...</div>
+        </div>
+        <div class="card">
+          <div class="card-title">⚖️ Bədən Kütlə İndeksi (BKİ)</div>
+          <div class="form-row">
+            <div class="form-group"><label>Boy (sm)</label><input type="number" id="bmiHeight" placeholder="175" oninput="calcBMI()" /></div>
+            <div class="form-group"><label>Çəki (kq)</label><input type="number" id="bmiWeight" placeholder="72" oninput="calcBMI()" /></div>
+          </div>
+          <div class="output-box" id="bmiOutput">Boy və çəkini daxil edin...</div>
+        </div>
+        <div class="card">
+          <div class="card-title">📅 Tarix və Yaş Fərqi</div>
+          <div class="form-row">
+            <div class="form-group"><label>Başlanğıc Tarix</label><input type="date" id="dateStart" onchange="calcDateDiff()" /></div>
+            <div class="form-group"><label>Son Tarix</label><input type="date" id="dateEnd" onchange="calcDateDiff()" /></div>
+          </div>
+          <div class="output-box" id="dateOutput">Tarixləri seçin...</div>
+        </div>
+      </div>
+    </div>
+    <div id="view-hist" class="view">
+      <div class="section-pad">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-weight:700;">Hesablama Tarixçəsi</span>
+          <button class="icon-btn" style="color:var(--danger)" type="button" onclick="clearHistory()">🗑️ Təmizlə</button>
+        </div>
+        <div id="historyContainer" class="history-list"></div>
+      </div>
+    </div>
+  </div>
+  <div class="toast" id="toast">Nəticə kopyalandı!</div>
+  <script>
+    const CALC_LANG = (location.pathname.match(/^\/(en|tr|ar|ru)(?=\/|$)/) || [])[1] || "az";
+    const CALC_I = { az: 0, en: 1, tr: 2, ar: 3, ru: 4 }[CALC_LANG];
+    const CT = (row) => row[CALC_I];
+    const ERR = CT(["Xəta", "Error", "Hata", "خطأ", "Ошибка"]);
+    const TIME_LOCALE = CT(["az-AZ", "en-GB", "tr-TR", "ar", "ru-RU"]);
+    const UNIT_LABEL = {
+      az: { length: { m: "Metr (m)", km: "Kilometr (km)", cm: "Santimetr (sm)", mm: "Millimetr (mm)", mi: "Mil", ft: "Fut (ft)", "in": "Düym (in)" }, weight: { kg: "Kiloqram (kq)", g: "Qram (q)", t: "Ton (t)", lb: "Funt (lb)", oz: "Unsiya (oz)" }, speed: { kmh: "km/saat", ms: "m/saniyə", mph: "Mil/saat", kn: "Knot" }, area: { m2: "Kvadrat metr (m²)", sot: "Sot", ha: "Hektar", km2: "Kvadrat km" }, data: { KB: "Kilobayt (KB)", MB: "Meqabayt (MB)", GB: "Giqabayt (GB)", TB: "Terabayt (TB)" }, temp: { C: "Selsi (°C)", F: "Farenheyt (°F)", K: "Kelvin (K)" } },
+      en: { length: { m: "Metre (m)", km: "Kilometre (km)", cm: "Centimetre (cm)", mm: "Millimetre (mm)", mi: "Mile", ft: "Foot (ft)", "in": "Inch (in)" }, weight: { kg: "Kilogram (kg)", g: "Gram (g)", t: "Tonne (t)", lb: "Pound (lb)", oz: "Ounce (oz)" }, speed: { kmh: "km/h", ms: "m/s", mph: "mph", kn: "Knot" }, area: { m2: "Square metre (m²)", sot: "Are (sot)", ha: "Hectare", km2: "Square km" }, data: { KB: "Kilobyte (KB)", MB: "Megabyte (MB)", GB: "Gigabyte (GB)", TB: "Terabyte (TB)" }, temp: { C: "Celsius (°C)", F: "Fahrenheit (°F)", K: "Kelvin (K)" } },
+      tr: { length: { m: "Metre (m)", km: "Kilometre (km)", cm: "Santimetre (cm)", mm: "Milimetre (mm)", mi: "Mil", ft: "Fit (ft)", "in": "İnç (in)" }, weight: { kg: "Kilogram (kg)", g: "Gram (g)", t: "Ton (t)", lb: "Libre (lb)", oz: "Ons (oz)" }, speed: { kmh: "km/saat", ms: "m/saniye", mph: "Mil/saat", kn: "Knot" }, area: { m2: "Metrekare (m²)", sot: "Sot", ha: "Hektar", km2: "Kilometrekare" }, data: { KB: "Kilobayt (KB)", MB: "Megabayt (MB)", GB: "Gigabayt (GB)", TB: "Terabayt (TB)" }, temp: { C: "Santigrat (°C)", F: "Fahrenhayt (°F)", K: "Kelvin (K)" } },
+      ar: { length: { m: "متر (m)", km: "كيلومتر (km)", cm: "سنتيمتر (cm)", mm: "مليمتر (mm)", mi: "ميل", ft: "قدم (ft)", "in": "بوصة (in)" }, weight: { kg: "كيلوغرام (kg)", g: "غرام (g)", t: "طن (t)", lb: "رطل (lb)", oz: "أونصة (oz)" }, speed: { kmh: "كم/ساعة", ms: "م/ثانية", mph: "ميل/ساعة", kn: "عقدة" }, area: { m2: "متر مربع (m²)", sot: "سوت", ha: "هكتار", km2: "كيلومتر مربع" }, data: { KB: "كيلوبايت (KB)", MB: "ميغابايت (MB)", GB: "غيغابايت (GB)", TB: "تيرابايت (TB)" }, temp: { C: "مئوية (°C)", F: "فهرنهايت (°F)", K: "كلفن (K)" } },
+      ru: { length: { m: "Метр (m)", km: "Километр (km)", cm: "Сантиметр (cm)", mm: "Миллиметр (mm)", mi: "Миля", ft: "Фут (ft)", "in": "Дюйм (in)" }, weight: { kg: "Килограмм (kg)", g: "Грамм (g)", t: "Тонна (t)", lb: "Фунт (lb)", oz: "Унция (oz)" }, speed: { kmh: "км/ч", ms: "м/с", mph: "миль/ч", kn: "Узел" }, area: { m2: "Квадратный метр (m²)", sot: "Сотка", ha: "Гектар", km2: "Квадратный км" }, data: { KB: "Килобайт (KB)", MB: "Мегабайт (MB)", GB: "Гигабайт (GB)", TB: "Терабайт (TB)" }, temp: { C: "Цельсий (°C)", F: "Фаренгейт (°F)", K: "Кельвин (K)" } }
+    };
+    const CHROME = {
+      "📋 Kopyala": CT(["📋 Kopyala", "📋 Copy", "📋 Kopyala", "📋 انسخ", "📋 Копировать"]),
+      "🧮 Hesabla": CT(["🧮 Hesabla", "🧮 Calculate", "🧮 Hesapla", "🧮 احسب", "🧮 Считать"]),
+      "🔄 Çevirici": CT(["🔄 Çevirici", "🔄 Convert", "🔄 Çevirici", "🔄 حوّل", "🔄 Перевод"]),
+      "💼 Alətlər": CT(["💼 Alətlər", "💼 Tools", "💼 Araçlar", "💼 أدوات", "💼 Инструменты"]),
+      "🕒 Tarixçə": CT(["🕒 Tarixçə", "🕒 History", "🕒 Geçmiş", "🕒 السجل", "🕒 История"]),
+      "REJİM: DEG": CT(["REJİM: DEG", "MODE: DEG", "MOD: DEG", "الوضع: DEG", "РЕЖИМ: DEG"]),
+      "ELMİ ▾": CT(["ELMİ ▾", "SCI ▾", "BİLİM ▾", "علمي ▾", "НАУЧ ▾"]),
+      "🔄 Universal Vahid Çevirici": CT(["🔄 Universal Vahid Çevirici", "🔄 Unit converter", "🔄 Birim çevirici", "🔄 محوّل الوحدات", "🔄 Перевод единиц"]),
+      "Kateqoriya seçin": CT(["Kateqoriya seçin", "Category", "Kategori seçin", "اختر الفئة", "Категория"]),
+      "Uzunluq (m, km, sm, mil...)": CT(["Uzunluq (m, km, sm, mil...)", "Length (m, km, cm, mile...)", "Uzunluk (m, km, cm, mil...)", "الطول (م، كم، سم، ميل...)", "Длина (м, км, см, миля...)"]),
+      "Çəki (kq, qram, ton, funt...)": CT(["Çəki (kq, qram, ton, funt...)", "Weight (kg, gram, tonne, pound...)", "Ağırlık (kg, gram, ton, libre...)", "الوزن (كغ، غرام، طن، رطل...)", "Вес (кг, грамм, тонна, фунт...)"]),
+      "Temperatur (°C, °F, K)": CT(["Temperatur (°C, °F, K)", "Temperature (°C, °F, K)", "Sıcaklık (°C, °F, K)", "الحرارة (°C، °F، K)", "Температура (°C, °F, K)"]),
+      "Sürət (km/saat, m/san, mil/saat)": CT(["Sürət (km/saat, m/san, mil/saat)", "Speed (km/h, m/s, mph)", "Hız (km/saat, m/sn, mil/saat)", "السرعة (كم/س، م/ث، ميل/س)", "Скорость (км/ч, м/с, миль/ч)"]),
+      "Sahə (m², hektar, km², sot)": CT(["Sahə (m², hektar, km², sot)", "Area (m², hectare, km², are)", "Alan (m², hektar, km², sot)", "المساحة (م²، هكتار، كم²، سوت)", "Площадь (м², гектар, км², сотка)"]),
+      "Məlumat həcmi (KB, MB, GB, TB)": CT(["Məlumat həcmi (KB, MB, GB, TB)", "Data size (KB, MB, GB, TB)", "Veri boyutu (KB, MB, GB, TB)", "حجم البيانات (KB, MB, GB, TB)", "Объём данных (KB, MB, GB, TB)"]),
+      "Dəyər daxil edin": CT(["Dəyər daxil edin", "Enter a value", "Değer girin", "أدخل القيمة", "Введите значение"]),
+      "Hansı vahiddən": CT(["Hansı vahiddən", "From", "Hangi birimden", "من وحدة", "Из"]),
+      "Hansı vahidə": CT(["Hansı vahidə", "To", "Hangi birime", "إلى وحدة", "В"]),
+      "Nəticə: 100 sm": CT(["Nəticə: 100 sm", "Result: 100 cm", "Sonuç: 100 cm", "النتيجة: 100 سم", "Результат: 100 см"]),
+      "🏷️ Endirim və ƏDV Hesablayıcı": CT(["🏷️ Endirim və ƏDV Hesablayıcı", "🏷️ Discount and VAT", "🏷️ İndirim ve KDV", "🏷️ الخصم والضريبة", "🏷️ Скидка и НДС"]),
+      "İlkin Qiymət": CT(["İlkin Qiymət", "Starting price", "İlk fiyat", "السعر الأول", "Начальная цена"]),
+      "Endirim (%)": CT(["Endirim (%)", "Discount (%)", "İndirim (%)", "الخصم (%)", "Скидка (%)"]),
+      "ƏDV / Vergi (%)": CT(["ƏDV / Vergi (%)", "VAT / tax (%)", "KDV / Vergi (%)", "ضريبة (%)", "НДС / налог (%)"]),
+      "Qiyməti daxil edin...": CT(["Qiyməti daxil edin...", "Enter a price...", "Fiyatı girin...", "أدخل السعر...", "Введите цену..."]),
+      "🏦 Kredit və Faiz Hesablayıcı": CT(["🏦 Kredit və Faiz Hesablayıcı", "🏦 Loan and interest", "🏦 Kredi ve faiz", "🏦 القرض والفائدة", "🏦 Кредит и процент"]),
+      "Məbləğ": CT(["Məbləğ", "Amount", "Tutar", "المبلغ", "Сумма"]),
+      "İllik Faiz (%)": CT(["İllik Faiz (%)", "Yearly interest (%)", "Yıllık faiz (%)", "الفائدة السنوية (%)", "Годовой процент (%)"]),
+      "Müddət (Ay)": CT(["Müddət (Ay)", "Term (months)", "Süre (ay)", "المدة (شهر)", "Срок (мес.)"]),
+      "Məlumatları daxil edin...": CT(["Məlumatları daxil edin...", "Enter the figures...", "Bilgileri girin...", "أدخل البيانات...", "Введите данные..."]),
+      "⚖️ Bədən Kütlə İndeksi (BKİ)": CT(["⚖️ Bədən Kütlə İndeksi (BKİ)", "⚖️ Body mass index (BMI)", "⚖️ Vücut kitle indeksi (VKİ)", "⚖️ مؤشر كتلة الجسم", "⚖️ Индекс массы тела (ИМТ)"]),
+      "Boy (sm)": CT(["Boy (sm)", "Height (cm)", "Boy (cm)", "الطول (سم)", "Рост (см)"]),
+      "Çəki (kq)": CT(["Çəki (kq)", "Weight (kg)", "Kilo (kg)", "الوزن (كغ)", "Вес (кг)"]),
+      "Boy və çəkini daxil edin...": CT(["Boy və çəkini daxil edin...", "Enter height and weight...", "Boy ve kiloyu girin...", "أدخل الطول والوزن...", "Введите рост и вес..."]),
+      "📅 Tarix və Yaş Fərqi": CT(["📅 Tarix və Yaş Fərqi", "📅 Date and age difference", "📅 Tarih ve yaş farkı", "📅 فرق التاريخ والعمر", "📅 Разница дат и возраста"]),
+      "Başlanğıc Tarix": CT(["Başlanğıc Tarix", "Start date", "Başlangıç tarihi", "تاريخ البداية", "Дата начала"]),
+      "Son Tarix": CT(["Son Tarix", "End date", "Bitiş tarihi", "تاريخ النهاية", "Дата конца"]),
+      "Tarixləri seçin...": CT(["Tarixləri seçin...", "Pick the dates...", "Tarihleri seçin...", "اختر التاريخين...", "Выберите даты..."]),
+      "Hesablama Tarixçəsi": CT(["Hesablama Tarixçəsi", "Calculation history", "Hesap geçmişi", "سجل الحساب", "История расчётов"]),
+      "🗑️ Təmizlə": CT(["🗑️ Təmizlə", "🗑️ Clear", "🗑️ Temizle", "🗑️ امسح", "🗑️ Очистить"]),
+      "Nəticə kopyalandı!": CT(["Nəticə kopyalandı!", "Result copied!", "Sonuç kopyalandı!", "تم نسخ النتيجة!", "Результат скопирован!"])
+    };
+    function applyChrome() {
+      document.documentElement.lang = CALC_LANG;
+      document.documentElement.dir = CALC_LANG === "ar" ? "rtl" : "ltr";
+      document.title = CT(["ProCalc — Çoxfunksiyalı Kalkulyator", "ProCalc — calculator", "ProCalc — hesap makinesi", "ProCalc — آلة حاسبة", "ProCalc — калькулятор"]);
+      const desc = document.querySelector('meta[name="description"]');
+      if (desc) desc.setAttribute("content", CT(["Elmi kalkulyator, vahid çevirici, endirim, kredit, BKİ və tarix fərqi. Hesablama cihazda qalır.", "Scientific calculator, unit converter, discount, loan, BMI and date difference. The calculation stays on the device.", "Bilimsel hesap makinesi, birim çevirici, indirim, kredi, VKİ ve tarih farkı. Hesap cihazda kalır.", "آلة حاسبة علمية ومحوّل وحدات وخصم وقرض ومؤشر كتلة وفرق تاريخ. الحساب يبقى على الجهاز.", "Научный калькулятор, перевод единиц, скидка, кредит, ИМТ и разница дат. Расчёт остаётся на устройстве."]));
+      const canon = document.querySelector('link[rel="canonical"]');
+      const path = CALC_LANG === "az" ? "/calc" : "/" + CALC_LANG + "/calc";
+      if (canon) canon.setAttribute("href", "https://nibrascode.com" + path);
+      const brand = document.querySelector(".brand");
+      if (brand) brand.setAttribute("href", CALC_LANG === "az" ? "/" : "/" + CALC_LANG);
+      const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+      const nodes = [];
+      while (walker.nextNode()) nodes.push(walker.currentNode);
+      nodes.forEach((node) => {
+        const raw = node.nodeValue;
+        if (!raw || !raw.trim() || !CHROME[raw.trim()]) return;
+        node.nodeValue = raw.replace(raw.trim(), CHROME[raw.trim()]);
+      });
+      const langPick = document.getElementById("langPick");
+      if (langPick) {
+        langPick.value = CALC_LANG;
+        langPick.addEventListener("change", () => {
+          const next = langPick.value;
+          location.href = next === "az" ? "/calc" : "/" + next + "/calc";
+        });
+      }
+    }
+    function angleText() {
+      return CT(["REJİM", "MODE", "MOD", "الوضع", "РЕЖИМ"]) + ": " + (isDeg ? "DEG" : "RAD");
+    }
+    let currentExp = "";
+    let currentRes = "0";
+    let isDeg = true;
+    let memoryVal = parseFloat(localStorage.getItem("procalc_mem")) || 0;
+    let historyList = [];
+    try { historyList = JSON.parse(localStorage.getItem("procalc_hist") || "[]"); } catch (e) { historyList = []; }
+    if (!Array.isArray(historyList)) historyList = [];
+    const expDisplay = document.getElementById("expDisplay");
+    const resDisplay = document.getElementById("resDisplay");
+    const memIndicator = document.getElementById("memIndicator");
+    const angleIndicator = document.getElementById("angleIndicator");
+    function vibrate() { if (navigator.vibrate) navigator.vibrate(12); }
+    function showToast(msg) {
+      const t = document.getElementById("toast");
+      t.textContent = msg;
+      t.classList.add("show");
+      setTimeout(() => t.classList.remove("show"), 1800);
+    }
+    const savedTheme = localStorage.getItem("procalc_theme") || "dark";
+    if (savedTheme === "light") document.documentElement.setAttribute("data-theme", "light");
+    document.getElementById("themeBtn").addEventListener("click", () => {
+      vibrate();
+      const isLight = document.documentElement.getAttribute("data-theme") === "light";
+      if (isLight) { document.documentElement.removeAttribute("data-theme"); localStorage.setItem("procalc_theme", "dark"); }
+      else { document.documentElement.setAttribute("data-theme", "light"); localStorage.setItem("procalc_theme", "light"); }
+    });
+    function switchTab(tabId, btn) {
+      vibrate();
+      document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
+      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+      document.getElementById("view-" + tabId).classList.add("active");
+      btn.classList.add("active");
+      if (tabId === "hist") renderHistory();
+    }
+    function updateDisplay() {
+      expDisplay.textContent = currentExp;
+      resDisplay.textContent = currentRes;
+      memIndicator.textContent = memoryVal !== 0 ? "M: " + memoryVal : "";
+    }
+    function insertToken(token) {
+      vibrate();
+      if (currentExp === "" && ["+", "×", "÷", "^", "^2", "%"].includes(token) && currentRes !== "0" && currentRes !== ERR) currentExp = currentRes + token;
+      else currentExp += token;
+      livePreview();
+      updateDisplay();
+    }
+    function clearAll() { vibrate(); currentExp = ""; currentRes = "0"; updateDisplay(); }
+    function backspace() {
+      vibrate();
+      const funcs = ["sin(", "cos(", "tan(", "log(", "ln(", "sqrt("];
+      for (const f of funcs) {
+        if (currentExp.endsWith(f)) { currentExp = currentExp.slice(0, -f.length); livePreview(); updateDisplay(); return; }
+      }
+      currentExp = currentExp.slice(0, -1);
+      livePreview();
+      updateDisplay();
+    }
+    function toggleSci() {
+      vibrate();
+      document.getElementById("sciPad").classList.toggle("open");
+      document.getElementById("sciToggleBtn").classList.toggle("active-mode");
+    }
+    function toggleDegRad() {
+      vibrate();
+      isDeg = !isDeg;
+      document.getElementById("degRadBtn").textContent = isDeg ? "DEG" : "RAD";
+      angleIndicator.textContent = angleText();
+      livePreview();
+      updateDisplay();
+    }
+    function factorial(n) {
+      if (n < 0 || !Number.isInteger(n)) return NaN;
+      if (n > 170) return Infinity;
+      let r = 1;
+      for (let i = 2; i <= n; i++) r *= i;
+      return r;
+    }
+    function applyFactorial() {
+      vibrate();
+      const val = parseFloat(currentRes);
+      if (!isNaN(val)) {
+        const res = factorial(val);
+        currentExp = val + "!";
+        currentRes = isNaN(res) || !isFinite(res) ? ERR : String(tidy(res));
+        updateDisplay();
+      }
+    }
+    function invertVal() {
+      vibrate();
+      const val = parseFloat(currentRes);
+      if (val) { currentExp = "1/(" + val + ")"; currentRes = String(tidy(1 / val)); updateDisplay(); }
+    }
+    function absVal() {
+      vibrate();
+      const val = parseFloat(currentRes);
+      if (!isNaN(val)) { currentExp = "|" + val + "|"; currentRes = String(Math.abs(val)); updateDisplay(); }
+    }
+    function toggleSign() {
+      vibrate();
+      if (!currentExp && currentRes !== "0" && currentRes !== ERR) { currentRes = String(parseFloat(currentRes) * -1); currentExp = currentRes; }
+      else if (currentExp) { currentExp = "-(" + currentExp + ")"; livePreview(); }
+      updateDisplay();
+    }
+    function tidy(n) {
+      if (typeof n !== "number" || !isFinite(n)) throw new Error("Math error");
+      const t = Number(n.toPrecision(12));
+      return Object.is(t, -0) ? 0 : t;
+    }
+    function evaluateMath(raw) {
+      if (!raw) return 0;
+      let expr = raw;
+      const openCount = (expr.match(/\(/g) || []).length;
+      const closeCount = (expr.match(/\)/g) || []).length;
+      if (openCount > closeCount) expr += ")".repeat(openCount - closeCount);
+      const tokens = [];
+      for (let i = 0; i < expr.length; ) {
+        const c = expr[i];
+        if (c === " ") { i++; continue; }
+        if ((c >= "0" && c <= "9") || c === ".") {
+          let n = "";
+          while (i < expr.length && ((expr[i] >= "0" && expr[i] <= "9") || expr[i] === ".")) n += expr[i++];
+          const v = Number(n);
+          if (!isFinite(v)) throw new Error("num");
+          tokens.push(["n", v]);
+          continue;
+        }
+        if (c === "π") { tokens.push(["id", "pi"]); i++; continue; }
+        if ((c >= "a" && c <= "z") || (c >= "A" && c <= "Z")) {
+          let id = "";
+          while (i < expr.length && /[a-zA-Z]/.test(expr[i])) id += expr[i++];
+          tokens.push(["id", id]);
+          continue;
+        }
+        if ("+-*/^()%!".indexOf(c) >= 0) { tokens.push(["op", c]); i++; continue; }
+        if (c === "×") { tokens.push(["op", "*"]); i++; continue; }
+        if (c === "÷") { tokens.push(["op", "/"]); i++; continue; }
+        throw new Error("bad");
+      }
+      let p = 0;
+      const peek = () => tokens[p];
+      const eat = () => tokens[p++];
+      const startsValue = (tok) => !!tok && (tok[0] === "n" || tok[0] === "id" || (tok[0] === "op" && tok[1] === "("));
+      function applyFn(name, x) {
+        const rad = isDeg ? (x * Math.PI) / 180 : x;
+        if (name === "sin") return Math.sin(rad);
+        if (name === "cos") return Math.cos(rad);
+        if (name === "tan") return Math.tan(rad);
+        if (name === "log") return Math.log10(x);
+        if (name === "ln") return Math.log(x);
+        if (name === "sqrt") return Math.sqrt(x);
+        throw new Error("fn");
+      }
+      function parseAdd() {
+        let left = parseMul();
+        while (peek() && peek()[0] === "op" && (peek()[1] === "+" || peek()[1] === "-")) {
+          const op = eat()[1];
+          const right = parseMul();
+          left = op === "+" ? left + right : left - right;
+        }
+        return left;
+      }
+      function parseMul() {
+        let left = parsePow();
+        while (peek() && ((peek()[0] === "op" && (peek()[1] === "*" || peek()[1] === "/")) || startsValue(peek()))) {
+          if (peek()[0] === "op" && (peek()[1] === "*" || peek()[1] === "/")) {
+            const op = eat()[1];
+            const right = parsePow();
+            left = op === "*" ? left * right : left / right;
+          } else left *= parsePow();
+        }
+        return left;
+      }
+      function parsePow() {
+        const left = parseUnary();
+        if (peek() && peek()[0] === "op" && peek()[1] === "^") { eat(); return Math.pow(left, parsePow()); }
+        return left;
+      }
+      function parseUnary() {
+        if (peek() && peek()[0] === "op" && (peek()[1] === "+" || peek()[1] === "-")) {
+          const op = eat()[1];
+          const v = parseUnary();
+          return op === "-" ? -v : v;
+        }
+        return parsePost();
+      }
+      function parsePrimary() {
+        const tok = eat();
+        if (!tok) throw new Error("end");
+        if (tok[0] === "n") return tok[1];
+        if (tok[0] === "op" && tok[1] === "(") {
+          const v = parseAdd();
+          if (!peek() || peek()[1] !== ")") throw new Error(")");
+          eat();
+          return v;
+        }
+        if (tok[0] === "id") {
+          if (tok[1] === "pi") return Math.PI;
+          if (tok[1] === "e") return Math.E;
+          if (["sin", "cos", "tan", "log", "ln", "sqrt"].indexOf(tok[1]) >= 0) {
+            if (!peek() || peek()[1] !== "(") throw new Error("(");
+            eat();
+            const arg = parseAdd();
+            if (!peek() || peek()[1] !== ")") throw new Error(")");
+            eat();
+            return applyFn(tok[1], arg);
+          }
+        }
+        throw new Error("tok");
+      }
+      function parsePost() {
+        let v = parsePrimary();
+        while (peek() && peek()[0] === "op" && (peek()[1] === "%" || peek()[1] === "!")) {
+          const op = eat()[1];
+          if (op === "%") v /= 100;
+          else v = factorial(v);
+        }
+        return v;
+      }
+      const out = parseAdd();
+      if (peek()) throw new Error("rest");
+      return tidy(out);
+    }
+    function livePreview() {
+      if (!currentExp) { currentRes = "0"; return; }
+      try { currentRes = String(evaluateMath(currentExp)); } catch (e) {}
+    }
+    function calculate() {
+      vibrate();
+      if (!currentExp) return;
+      try {
+        const finalVal = evaluateMath(currentExp);
+        const formatted = String(finalVal);
+        saveHistory(currentExp, formatted);
+        currentRes = formatted;
+        currentExp = formatted;
+        updateDisplay();
+      } catch (e) { currentRes = ERR; updateDisplay(); }
+    }
+    function memAction(type) {
+      vibrate();
+      const val = parseFloat(currentRes) || 0;
+      if (type === "MC") memoryVal = 0;
+      if (type === "MR") { currentExp += String(memoryVal); livePreview(); }
+      if (type === "M+") memoryVal = tidy(memoryVal + val);
+      if (type === "M-") memoryVal = tidy(memoryVal - val);
+      localStorage.setItem("procalc_mem", memoryVal);
+      updateDisplay();
+    }
+    function copyResult() {
+      vibrate();
+      const text = String(currentRes);
+      const done = () => showToast(CT(["Kopyalandı: ", "Copied: ", "Kopyalandı: ", "تم النسخ: ", "Скопировано: "]) + text);
+      if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done).catch(fallback);
+      else fallback();
+      function fallback() {
+        const area = document.createElement("textarea");
+        area.value = text;
+        document.body.appendChild(area);
+        area.select();
+        try { document.execCommand("copy"); } catch (e) {}
+        area.remove();
+        done();
+      }
+    }
+    document.getElementById("copyBtn").addEventListener("click", (event) => { event.stopPropagation(); copyResult(); });
+    function saveHistory(exp, res) {
+      if (exp === res) return;
+      historyList.unshift({ exp, res, time: new Date().toLocaleTimeString(TIME_LOCALE, { hour: "2-digit", minute: "2-digit" }) });
+      if (historyList.length > 50) historyList.pop();
+      localStorage.setItem("procalc_hist", JSON.stringify(historyList));
+    }
+    function esc(s) { return String(s).replace(/&/g, "&").replace(/</g, "<").replace(/>/g, ">"); }
+    function renderHistory() {
+      const container = document.getElementById("historyContainer");
+      if (!historyList.length) { container.innerHTML = '<div style="color:var(--muted); text-align:center; padding:24px;">' + CT(["Tarixçə boşdur", "History is empty", "Geçmiş boş", "السجل فارغ", "История пуста"]) + "</div>"; return; }
+      container.innerHTML = historyList.map((item, idx) => '<div class="history-item" onclick="useHistoryItem(' + idx + ')"><div><div class="history-exp">' + esc(item.exp) + ' =</div><div style="font-size:0.7rem; color:var(--muted);">' + esc(item.time || "") + '</div></div><div class="history-res">' + esc(item.res) + '</div></div>').join("");
+    }
+    function useHistoryItem(idx) {
+      vibrate();
+      const item = historyList[idx];
+      if (!item) return;
+      currentExp = String(item.res);
+      currentRes = String(item.res);
+      updateDisplay();
+      document.querySelector(".tab-btn").click();
+    }
+    function clearHistory() { vibrate(); historyList = []; localStorage.removeItem("procalc_hist"); renderHistory(); }
+    const unitsData = {
+      length: { units: { m: "Metr (m)", km: "Kilometr (km)", cm: "Santimetr (sm)", mm: "Millimetr (mm)", mi: "Mil", ft: "Fut (ft)", "in": "Düym (in)" }, rates: { m: 1, km: 1000, cm: 0.01, mm: 0.001, mi: 1609.344, ft: 0.3048, "in": 0.0254 } },
+      weight: { units: { kg: "Kiloqram (kq)", g: "Qram (q)", t: "Ton (t)", lb: "Funt (lb)", oz: "Unsiya (oz)" }, rates: { kg: 1, g: 0.001, t: 1000, lb: 0.45359237, oz: 0.0283495 } },
+      speed: { units: { kmh: "km/saat", ms: "m/saniyə", mph: "Mil/saat", kn: "Knot" }, rates: { kmh: 1, ms: 3.6, mph: 1.60934, kn: 1.852 } },
+      area: { units: { m2: "Kvadrat metr (m²)", sot: "Sot", ha: "Hektar", km2: "Kvadrat km" }, rates: { m2: 1, sot: 100, ha: 10000, km2: 1000000 } },
+      data: { units: { KB: "Kilobayt (KB)", MB: "Meqabayt (MB)", GB: "Giqabayt (GB)", TB: "Terabayt (TB)" }, rates: { KB: 1, MB: 1024, GB: 1048576, TB: 1073741824 } },
+      temp: { units: { C: "Selsi (°C)", F: "Farenheyt (°F)", K: "Kelvin (K)" } }
+    };
+    function populateUnits() {
+      const cat = document.getElementById("convCategory").value;
+      const fromSel = document.getElementById("convFrom");
+      const toSel = document.getElementById("convTo");
+      const entries = Object.entries(UNIT_LABEL[CALC_LANG][cat]);
+      fromSel.innerHTML = entries.map(([k, v]) => '<option value="' + k + '">' + v + "</option>").join("");
+      toSel.innerHTML = entries.map(([k, v]) => '<option value="' + k + '">' + v + "</option>").join("");
+      if (cat === "length") toSel.value = "cm";
+      else if (entries.length > 1) toSel.selectedIndex = 1;
+      runConversion();
+    }
+    function runConversion() {
+      const cat = document.getElementById("convCategory").value;
+      const val = parseFloat(document.getElementById("convInput").value);
+      const from = document.getElementById("convFrom").value;
+      const to = document.getElementById("convTo").value;
+      const resBox = document.getElementById("convResult");
+      if (isNaN(val)) { resBox.textContent = CT(["Dəyər daxil edin...", "Enter a value...", "Değer girin...", "أدخل القيمة...", "Введите значение..."]); return; }
+      let out = 0;
+      if (cat === "temp") {
+        let celsius = val;
+        if (from === "F") celsius = (val - 32) * 5 / 9;
+        if (from === "K") celsius = val - 273.15;
+        if (to === "C") out = celsius;
+        if (to === "F") out = celsius * 9 / 5 + 32;
+        if (to === "K") out = celsius + 273.15;
+      } else {
+        out = (val * unitsData[cat].rates[from]) / unitsData[cat].rates[to];
+      }
+      resBox.innerHTML = CT(["Nəticə: ", "Result: ", "Sonuç: ", "النتيجة: ", "Результат: "]) + "<strong>" + Number(out.toPrecision(8)) + " " + to + "</strong>";
+    }
+    function calcDiscount() {
+      const p = parseFloat(document.getElementById("discPrice").value) || 0;
+      const d = parseFloat(document.getElementById("discPercent").value) || 0;
+      const t = parseFloat(document.getElementById("discTax").value) || 0;
+      const saved = p * (d / 100);
+      const discounted = p - saved;
+      const taxAmt = discounted * (t / 100);
+      document.getElementById("discOutput").innerHTML = CT(["Yekun ödəniş: ", "Final: ", "Son ödeme: ", "الدفع النهائي: ", "Итог: "]) + "<strong>" + (discounted + taxAmt).toFixed(2) + "</strong><br>" + CT(["Qənaət: ", "Saved: ", "Tasarruf: ", "التوفير: ", "Экономия: "]) + "<span style=\"color:var(--success)\">" + saved.toFixed(2) + "</span> | " + CT(["ƏDV: ", "VAT: ", "KDV: ", "الضريبة: ", "НДС: "]) + taxAmt.toFixed(2);
+    }
+    function calcLoan() {
+      const P = parseFloat(document.getElementById("loanAmount").value);
+      const annualRate = parseFloat(document.getElementById("loanRate").value);
+      const n = parseInt(document.getElementById("loanMonths").value, 10);
+      const out = document.getElementById("loanOutput");
+      if (!P || isNaN(annualRate) || !n || n <= 0) { out.textContent = CT(["Məlumatları tam daxil edin...", "Enter the full figures...", "Bilgileri tam girin...", "أدخل البيانات كاملة...", "Введите данные полностью..."]); return; }
+      const r = annualRate / 12 / 100;
+      const emi = r === 0 ? P / n : (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+      out.innerHTML = CT(["Aylıq ödəniş: ", "Monthly payment: ", "Aylık ödeme: ", "القسط الشهري: ", "Платёж в месяц: "]) + "<strong>" + emi.toFixed(2) + "</strong><br>" + CT(["Ümumi: ", "Total: ", "Toplam: ", "الإجمالي: ", "Итого: "]) + (emi * n).toFixed(2) + " | " + CT(["Faiz: ", "Interest: ", "Faiz: ", "الفائدة: ", "Проценты: "]) + "<span style=\"color:var(--danger)\">" + (emi * n - P).toFixed(2) + "</span>";
+    }
+    function calcBMI() {
+      const h = parseFloat(document.getElementById("bmiHeight").value) / 100;
+      const w = parseFloat(document.getElementById("bmiWeight").value);
+      const out = document.getElementById("bmiOutput");
+      if (!h || !w || h <= 0) { out.textContent = CT(["Boy və çəkini daxil edin...", "Enter height and weight...", "Boy ve kiloyu girin...", "أدخل الطول والوزن...", "Введите рост и вес..."]); return; }
+      const bmi = w / (h * h);
+      let status = CT(["Normal çəki", "Normal weight", "Normal kilo", "وزن طبيعي", "Нормальный вес"]);
+      if (bmi < 18.5) status = CT(["Çəki azlığı", "Underweight", "Zayıf", "نقص الوزن", "Недостаток веса"]);
+      else if (bmi >= 25 && bmi < 30) status = CT(["Artıq çəki", "Overweight", "Fazla kilolu", "زيادة الوزن", "Избыточный вес"]);
+      else if (bmi >= 30) status = CT(["Piylənmə", "Obese", "Obez", "سمنة", "Ожирение"]);
+      out.innerHTML = CT(["BKİ: ", "BMI: ", "VKİ: ", "مؤشر الكتلة: ", "ИМТ: "]) + "<strong>" + bmi.toFixed(1) + "</strong> — <span>" + status + "</span>";
+    }
+    function calcDateDiff() {
+      const s = document.getElementById("dateStart").value;
+      const e = document.getElementById("dateEnd").value;
+      const out = document.getElementById("dateOutput");
+      if (!s || !e) return;
+      const diffMs = Math.abs(new Date(e) - new Date(s));
+      const totalDays = Math.floor(diffMs / 86400000);
+      const years = Math.floor(totalDays / 365.25);
+      const months = Math.floor((totalDays % 365.25) / 30.4375);
+      const days = Math.floor((totalDays % 365.25) % 30.4375);
+      out.innerHTML = CT(["Fərq: ", "Difference: ", "Fark: ", "الفرق: ", "Разница: "]) + "<strong>" + years + CT([" il, ", " years, ", " yıl, ", " سنة، ", " г., "]) + months + CT([" ay, ", " months, ", " ay, ", " شهر، ", " мес., "]) + days + CT([" gün", " days", " gün", " يوم", " дн."]) + "</strong><br>" + CT(["Ümumi gün: ", "Total days: ", "Toplam gün: ", "مجموع الأيام: ", "Всего дней: "]) + "<strong>" + totalDays + CT([" gün", " days", " gün", " يوم", " дн."]) + "</strong>";
+    }
+    document.addEventListener("keydown", (event) => {
+      const tag = (event.target.tagName || "").toLowerCase();
+      if (tag === "input" || tag === "textarea" || tag === "select") return;
+      const key = event.key;
+      if (/^[0-9]$/.test(key) || key === ".") { insertToken(key); event.preventDefault(); }
+      else if (key === "+") { insertToken("+"); event.preventDefault(); }
+      else if (key === "-") { insertToken("-"); event.preventDefault(); }
+      else if (key === "*") { insertToken("×"); event.preventDefault(); }
+      else if (key === "/") { insertToken("÷"); event.preventDefault(); }
+      else if (key === "(" || key === ")") { insertToken(key); event.preventDefault(); }
+      else if (key === "%") { insertToken("%"); event.preventDefault(); }
+      else if (key === "^") { insertToken("^"); event.preventDefault(); }
+      else if (key === "Enter" || key === "=") { calculate(); event.preventDefault(); }
+      else if (key === "Backspace") { backspace(); event.preventDefault(); }
+      else if (key === "Escape") { clearAll(); event.preventDefault(); }
+    });
+    applyChrome();
+    populateUnits();
+    updateDisplay();
+    const today = new Date().toISOString().split("T")[0];
+    document.getElementById("dateStart").value = today;
+    document.getElementById("dateEnd").value = today;
+  </script>
+</body>
+</html>

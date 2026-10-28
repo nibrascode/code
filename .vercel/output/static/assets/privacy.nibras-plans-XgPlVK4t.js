@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-CKeovgl0.js";import{xt as t}from"./index-ye_Wxhb5.js";import{t as n}from"./app-privacy-BM3UNzN1.js";var r=e();function i(){let{privacy:e}=t.useLoaderData();return(0,r.jsx)(n,{slug:`nibras-plans`,rows:e})}export{i as component};

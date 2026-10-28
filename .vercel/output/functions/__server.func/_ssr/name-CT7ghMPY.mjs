@@ -1,0 +1,110 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/name-CT7ghMPY.js
+var az = {
+	"about": ["Random name səhifəsi təsadüfi ad və soyad verən rəqəmsal vasitədir. Verilən adlar sadəcə nümunədir və real insanlara aid deyil. Alət onlayn formada şəxsi məlumatları daxil etmədən sınaqdan keçirmək məqsədilə hazırlanıb. Hər dəfə düyməni sıxanda fərqli ad çıxır.", "Bu funksiya veb-saytların qeydiyyat formalarını, anketləri və məlumat bazalarını yoxlayan zaman lazımdır. Əməliyyat birbaşa brauzerdə yerinə yetirilir, internetə heç nə göndərilmir. Siyahı əvvəlcədən təyin olunmuş adlardan ibarətdir, şəxsiyyət yoxlanışı aparılmır və heç bir məlumat ötürülmür."],
+	"steps": [
+		"Səhifəni ziyarət edin.",
+		"Təsadüfi ad əldə etmək üçün əməliyyatı başladın.",
+		"Nəticəni nəzərdən keçirin.",
+		"Adı kopyalayın və ya fayl kimi endirin."
+	],
+	"uses": [
+		"Veb-saytların qeydiyyat və əlaqə formalarını real məlumat yazmadan test etmək üçün.",
+		"Proqram təminatı hazırlanarkən test verilənlər bazasını doldurmaq üçün.",
+		"Müxtəlif simulyasiyalar və ya oyunlar zamanı uydurma personaj adlarından istifadə etmək üçün.",
+		"Məxfilik qorunmaqla anketləri və ya sorğuları saxta məlumatla doldurmaq üçün."
+	],
+	"faq": [
+		["Bu adlar real insanlara məxsusdur?", "Xeyr, verilən adlar yalnız nümunədir və heç bir real şəxsə aid deyil. Siyahı tamamilə uydurma adlardan ibarətdir."],
+		["Məlumatlarım serverə göndərilirmi?", "Xeyr, bütün proseslər birbaşa brauzerinizdə baş verir. Heç bir məlumat heç bir serverə yüklənmir."],
+		["Nəticəni necə saxlaya bilərəm?", "Hazır nəticəni birbaşa kopyalaya və ya kompüterinizə fayl kimi endirə bilərsiniz. Xidmətdən istifadə etmək üçün qeydiyyat tələb olunmur."]
+	]
+};
+var en = {
+	"about": ["The Random name page is a browser-based tool that writes a random first and last name from a fixed list. Each press gives another name. These names are samples and do not represent real people. The page is completely free and requires no sign-up.", "This utility is used when testing web forms, databases, or software inputs without entering real personal data. Processing happens locally in your browser, and input is never uploaded to a server. The tool does not check any identity and does not send anything."],
+	"steps": [
+		"Open the Random name page.",
+		"Trigger the action to get a random name.",
+		"View the generated sample name.",
+		"Copy the result to your clipboard or download it as a file."
+	],
+	"uses": [
+		"Testing online registration forms and contact fields quickly.",
+		"Populating mock databases with sample names during software development.",
+		"Generating placeholder identities for UI design and mockups.",
+		"Simulating user input without exposing real personal information."
+	],
+	"faq": [
+		["Are these real people's names?", "No, the names come from a fixed sample list and do not belong to real people."],
+		["Is my data uploaded to a server?", "No, all processing happens entirely within your web browser and nothing is sent anywhere."],
+		["Do I need to create an account to use this?", "No, the tool is completely free, requires no sign-up, and lets you copy or download results instantly."]
+	]
+};
+var ru = {
+	"about": ["Страница Random name представляет собой браузерный инструмент, который выдает случайные имя и фамилию из фиксированного списка. Каждое нажатие генерирует новый вариант. Эти имена являются примерами и не принадлежат реальным людям.", "Данная функция полезна при тестировании веб-форм, опросников или баз данных, когда не нужно вводить реальные личные данные. Обработка происходит в браузере, ничего не загружается на сервер. Инструмент не проверяет личность и ничего не отправляет."],
+	"steps": [
+		"Откройте страницу Random name.",
+		"Запустите процесс получения случайного имени.",
+		"Посмотрите на сгенерированный результат.",
+		"Скопируйте текст или скачайте его в виде файла."
+	],
+	"uses": [
+		"Тестирование форм регистрации и обратной связи на веб-сайтах.",
+		"Заполнение тестовых баз данных фиктивными именами при разработке.",
+		"Создание макетов интерфейсов с примерными персональными данными.",
+		"Проверка полей ввода без использования реальной информации."
+	],
+	"faq": [
+		["Эти имена принадлежат реальным людям?", "Нет, имена берутся из фиксированного списка примеров и не относятся к реальным людям."],
+		["Загружаются ли мои данные на сервер?", "Нет, вся обработка выполняется прямо в браузере, и введенные данные никуда не отправляются."],
+		["Нужна ли регистрация для использования?", "Нет, инструмент полностью бесплатен, работает без регистрации, а результат можно скопировать или скачать."]
+	]
+};
+var ar = {
+	"about": ["صفحة Random name هي أداة تعمل في المتصفح وتكتب اسمًا أولاً واسم عائلة عشوائيًا من قائمة ثابتة. كل ضغطة توفر اسمًا مختلفًا. هذه الأسماء هي مجرد عينات وليست لأشخاص حقيقيين، وهي أداة مجانية بالكامل بدون تسجيل.", "تُستخدم هذه الوظيفة عندما يحتاج المستخدم إلى تجربة النماذج وإدخال البيانات دون استخدام معلومات شخصية حقيقية. تتم معالجة البيانات بالكامل داخل المتصفح ولا يتم تحميل أي شيء إلى الخادم. لا تتحقق هذه الصفحة من أي هوية ولا ترسل أي بيانات."],
+	"steps": [
+		"افتح صفحة Random name في المتصفح.",
+		"قم بتفعيل الأداة للحصول على اسم عشوائي جديد.",
+		"اطّلع على الاسم المعروض في النتيجة.",
+		"انسخ النتيجة أو قم بتنزيلها كملف."
+	],
+	"uses": [
+		"اختبار نماذج التسجيل والاتصال عبر الويب بسرعة وسهولة.",
+		"ملء قواعد البيانات التجريبية بأسماء عينات أثناء تطوير البرمجيات.",
+		"إنشاء بيانات وهمية لتصميم واجهات المستخدم والنماذج الأولية.",
+		"إجراء اختبارات الإدخال دون الكشف عن معلومات شخصية حقيقية."
+	],
+	"faq": [
+		["هل هذه أسماء أشخاص حقيقيين؟", "لا، الأسماء تأتي من قائمة ثابتة للاستخدام كعينات فقط ولا تنتمي لأشخاص حقيقيين."],
+		["هل يتم رفع بياناتي إلى الخادم؟", "لا، تحدث جميع العمليات داخل متصفح الويب الخاص بك محليًا ولا يتم إرسال أي شيء."],
+		["هل تحتاج الأداة إلى إنشاء حساب؟", "لا، الأداة مجانية بالكامل ولا تتطلب أي تسجيلاً، ويمكنك نسخ النتيجة أو تنزيلها فورًا."]
+	]
+};
+var tr = {
+	"about": ["Random name sayfası, sabit bir listeden rastgele bir ad ve soyadı veren tarayıcı tabanlı bir araçtır. Her basışta başka bir isim gelir. Bu isimler gerçek insanlara ait değildir, yalnızca birer örnektir.", "Bu sayfa, gerçek kişisel bilgileri girmeden formları denemek gerektiğinde kullanılır. İşlem doğrudan tarayıcıda gerçekleştirilir ve sunucuya herhangi bir veri yüklenmez. Araç kimlik doğrulaması yapmaz ve hiçbir şey göndermez."],
+	"steps": [
+		"Random name sayfasını ziyaret edin.",
+		"Rastgele bir isim almak için işlemi başlatın.",
+		"Elde edilen örnek ismi inceleyin.",
+		"Sonucu kopyalayın veya dosya olarak indirin."
+	],
+	"uses": [
+		"Web sitelerindeki kayıt ve iletişim formlarını test etmek.",
+		"Yazılım geliştirme sürecinde örnek veri tabanlarını doldurmak.",
+		"Arayüz tasarımlarında örnek isim alanları oluşturmak.",
+		"Gerçek bilgileri paylaşmadan form denemeleri gerçekleştirmek."
+	],
+	"faq": [
+		["Bu isimler gerçek kişilere mi ait?", "Hayır, isimler sabit bir listeden gelir ve gerçek insanları temsil etmez, yalnızca örnektir."],
+		["Verilerim bir sunucuya yükleniyor mu?", "Hayır, tüm işlemler yalnızca tarayıcınızda gerçekleşir ve hiçbir girdi sunucuya gönderilmez."],
+		["Kullanmak için kayıt olmam gerekiyor mu?", "Hayır, araç tamamen ücretsizdir, kayıt gerektirmez ve sonucu kopyalayıp indirmenize olanak tanır."]
+	]
+};
+var name_default = {
+	az,
+	en,
+	ru,
+	ar,
+	tr
+};
+//#endregion
+export { ar, az, name_default as default, en, ru, tr };

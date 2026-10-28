@@ -1,0 +1,110 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/meyve-BqEUAxj-.js
+var az = {
+	"about": ["Bu, nibrascode.com saytında pulsuz oynanan brauzer oyunu. Meyvələri dilimləmək üçün ekranda sürüşdürmə hərəkəti edilir. Oyunda partlayıcıdan qaçınmaq lazımdır, çünki ona toxunmaq oyunu dərhal bitirir. Bu sadə format, qısa boş vaxtlarda diqqət və refleksləri sınamaq üçün uygundur.", "Oyunun əsas məqsədi mümkün qədər çox meyvəni dilimləyərək xal qazanmaqdır. Hər bir kəsilmiş meyvə istifadəçiyə ballar verir. Brauzerdə işlədiyi üçün qeydiyyat və ya əlavə yükləmə tələb olunmur. İstifadəçilər istənilən cihazda asanlıqla başlaya bilər."],
+	"steps": [
+		"Oyunu brauzerdə açın və başlatmaq üçün ekrana toxunun.",
+		"Meyvələr ekrana çıxdıqda onları kəsmək üçün parmağınızla və ya siçanla sürüşdürün.",
+		"Partlayıcıları görməyə diqqət edin və onlara toxunmamağa çalışın.",
+		"Oyun bitdikdə nəticənizi yoxlayın və istəsəniz yenidən başlayın."
+	],
+	"uses": [
+		"Qısa fasilələrdə refleksləri və diqqət mərkəzini təkmilləşdirmək üçün istifadə edin.",
+		"Brauzerdə qeydiyyat tələb etməyən sadə bir oyun axtardığınızda seçin.",
+		"Mobil cihazda boş vaxtları doldurmaq üçün sürətli bir aktivitet kimi tətbiq edin.",
+		"Oyun mexanikalarını öyrənmək üçün asan və intuitiv bir nümunə kimi baxın."
+	],
+	"faq": [
+		["Oyun üçün proqram yükləmək lazımdırmı?", "Xeyr, oyun brauzerdə birbaşa işləyir. Heç bir proqram yükləməsi və ya qeydiyyat tələb edilmir. Səhifəni açdığınız anda oynamağa başlaya bilərsiniz."],
+		["Partlayıcıya toxunsaq nə olur?", "Partlayıcıya toxunmaq oyunu dərhal bitirir. Bu, oyunun əsas qaydasıdır. Xal qazanmaq üçün yalnız meyvələri dilimləmək lazımdır, partlayıcılardan isə qaçınmaq lazımdır."],
+		["Xallar necə qazanılır?", "Hər bir kəsilmiş meyvə sizə xal verir. Məqsəd mümkün qədər çox meyvəni kəsməkdir. Partlayıcıya toxunmadığınız müddətcə oyun davam edir və xallarınız artır."]
+	]
+};
+var en = {
+	"about": ["This is a free browser game available on nibrascode.com. Players swipe to slice fruits while avoiding bombs. Touching a bomb immediately ends the session. The simple mechanics make it suitable for quick breaks where users need to test their reflexes and hand-eye coordination without complex setup.", "The core objective is to score points by slicing as many fruits as possible. Each sliced fruit adds to your total score. Since it runs directly in the web browser, there is no need for sign-up or additional software. It provides a straightforward way to engage with a classic arcade-style concept."],
+	"steps": [
+		"Open the game page in your web browser.",
+		"Swipe across the screen to slice the fruits as they appear.",
+		"Watch out for bombs and avoid touching them to keep playing.",
+		"Check your final score when the game ends and restart if desired."
+	],
+	"uses": [
+		"Use it to improve hand-eye coordination during short breaks.",
+		"Select it when you need a simple game that requires no registration.",
+		"Apply it as a quick mobile activity to fill idle moments.",
+		"View it as an easy example of basic game mechanics for learning purposes."
+	],
+	"faq": [
+		["Do I need to install any software?", "No, the game runs directly in your web browser. There is no requirement for installing applications or creating an account. You can start playing immediately after loading the page."],
+		["What happens if I touch a bomb?", "Touching a bomb ends the game immediately. This is a core rule of the gameplay. You must focus on slicing fruits while carefully avoiding any bombs that appear on the screen."],
+		["How do I earn points?", "You earn points every time you successfully slice a fruit. The goal is to accumulate as many points as possible. The game continues as long as you avoid touching the bombs."]
+	]
+};
+var ru = {
+	"about": ["Это бесплатная браузерная игра на сайте nibrascode.com. Игроки свайпают, чтобы резать фрукты, избегая бомб. Касание бомбы немедленно завершает сессию. Простая механика делает её подходящей для коротких перерывов, когда нужно проверить рефлексы и координацию без сложной настройки.", "Основная цель — набирать очки, резая как можно больше фруктов. Каждый нарезанный фрукт добавляет баллы к общему счёту. Поскольку игра работает непосредственно в веб-браузере, не требуется регистрация или установка дополнительного программного обеспечения. Это прямой способ познакомиться с классической аркадной концепцией."],
+	"steps": [
+		"Откройте страницу игры в вашем веб-браузере.",
+		"Свайпайте по экрану, чтобы резать появляющиеся фрукты.",
+		"Следите за бомбами и избегайте касания их, чтобы продолжить игру.",
+		"Посмотрите свой итоговый счёт, когда игра закончится, и перезапустите её при необходимости."
+	],
+	"uses": [
+		"Используйте её для улучшения координации «рука-глаз» во время коротких перерывов.",
+		"Выбирайте её, если нужна простая игра без необходимости регистрации.",
+		"Применяйте как быструю мобильную активность для заполнения свободного времени.",
+		"Рассматривайте как простой пример базовой игровой механики для учебных целей."
+	],
+	"faq": [
+		["Нужно ли устанавливать какое-либо программное обеспечение?", "Нет, игра работает непосредственно в вашем веб-браузере. Не требуется установка приложений или создание учётной записи. Вы можете начать играть сразу после загрузки страницы."],
+		["Что произойдёт, если я коснусь бомбы?", "Касание бомбы немедленно завершает игру. Это основное правило геймплея. Вы должны сосредоточиться на нарезке фруктов, внимательно избегая любых бомб, появляющихся на экране."],
+		["Как я зарабатываю очки?", "Вы получаете очки каждый раз, когда успешно режете фрукт. Цель состоит в том, чтобы набрать как можно больше очков. Игра продолжается, пока вы избегаете касания бомб."]
+	]
+};
+var ar = {
+	"about": ["هذه لعبة متصفح مجانية متاحة على موقع nibrascode.com. يقوم اللاعبون بالسحب لقطع الفواكه مع تجنب القنابل. اللمس للقنبلة ينهي الجلسة فوراً. تجعل الميكانيكا البسيطة اللعبة مناسبة للاستراحات القصيرة حيث يحتاج المستخدمون إلى اختبار ردود أفعالهم وتنسيق اليد والعين دون إعداد معقد.", "الهدف الأساسي هو كسب النقاط عن طريق قطع أكبر عدد ممكن من الفواكه. كل فاكهة مقطوعة تضيف إلى مجموع نقاطك. بما أنها تعمل مباشرة في متصفح الويب، لا حاجة للتسجيل أو برامج إضافية. توفر طريقة مباشرة للتفاعل مع مفهوم أركيد كلاسيكي."],
+	"steps": [
+		"افتح صفحة اللعبة في متصفحك.",
+		"اسحب عبر الشاشة لقطع الفواكه عندما تظهر.",
+		"انتبه إلى القنابل وتجنب لمسها للمتابعة.",
+		"تحقق من نتيجتك النهائية عندما تنتهي اللعبة وأعد البدء إذا رغبت."
+	],
+	"uses": [
+		"استخدمها لتحسين تنسيق اليد والعين أثناء الاستراحات القصيرة.",
+		"اخترها عندما تحتاج إلى لعبة بسيطة لا تتطلب تسجيل.",
+		"طبقها كنشاط سريع على الهاتف لملء الأوقات الفراغية.",
+		"انظر إليها كمثال سهل على ميكانيكا الألعاب الأساسية لأغراض التعلم."
+	],
+	"faq": [
+		["هل أحتاج إلى تثبيت أي برنامج؟", "لا، تعمل اللعبة مباشرة في متصفحك. لا توجد متطلبات لتثبيت التطبيقات أو إنشاء حساب. يمكنك البدء في اللعب فوراً بعد تحميل الصفحة."],
+		["ماذا يحدث إذا لمست قنبلة؟", "لمس القنبلة ينهي اللعبة فوراً. هذه قاعدة أساسية في أسلوب اللعب. يجب أن تركز على قطع الفواكه مع تجنب أي قنابل تظهر على الشاشة بعناية."],
+		["كيف أكسب النقاط؟", "تكسب النقاط كل مرة تقطع فيها فاكهة بنجاح. الهدف هو جمع أكبر عدد ممكن من النقاط. تستمر اللعبة طالما تتجنب لمس القنابل."]
+	]
+};
+var tr = {
+	"about": ["Bu, nibrascode.com sitesinde ücretsiz olarak oynanabilen bir tarayıcı oyunudur. Oyuncular, bombalardan kaçınarak meyveleri dilimlemek için ekranda kaydırma yapar. Bombaya dokunmak oturumu anında sonlandırır. Basit mekanikler, kullanıcıların karmaşık bir kurulum olmadan reflekslerini ve el-göz koordinasyonunu test etmek istedikleri kısa molalar için uygun hale getirir.", "Temel amaç, mümkün olan en fazla meyveyi dilimleyerek puan kazanmaktır. Her dilimlenen meyve toplam puanınıza eklenir. Web tarayıcısında doğrudan çalıştığı için kayıt veya ek yazılım gerekmez. Klasik bir arcade tarzı kavramla etkileşime girmek için doğrudan bir yol sunar."],
+	"steps": [
+		"Oyun sayfasını web tarayıcınızda açın.",
+		"Meyveler göründüğünde onları dilimlemek için ekranın üzerinde kaydırın.",
+		"Oynamaya devam etmek için bombalara dikkat edin ve onlara dokunmaktan kaçının.",
+		"Oyun bittiğinde nihai skorunuzu kontrol edin ve isterseniz yeniden başlayın."
+	],
+	"uses": [
+		"Kısa molalarda el-göz koordinasyonunu geliştirmek için kullanın.",
+		"Kayıt gerektirmeyen basit bir oyuna ihtiyacınız olduğunda seçin.",
+		"Boş zamanları doldurmak için hızlı bir mobil aktivite olarak uygulayın.",
+		"Öğrenme amaçlı temel oyun mekaniklerinin kolay bir örneği olarak görün."
+	],
+	"faq": [
+		["Herhangi bir yazılım kurmam gerekiyor mu?", "Hayır, oyun web tarayıcınızda doğrudan çalışır. Uygulama kurma veya hesap oluşturma gereksinimi yoktur. Sayfa yüklendikten sonra hemen oynamaya başlayabilirsiniz."],
+		["Bir bombaya dokunursam ne olur?", "Bombaya dokunmak oyunu anında sonlandırır. Bu, oyunun temel bir kuralıdır. Ekranın üzerinde beliren bombalardan dikkatle kaçınarak meyveleri dilimlemeye odaklanmalısınız."],
+		["Puanları nasıl kazanırım?", "Her başarılı bir meyve dilimlediğinizde puan kazanırsınız. Amaç mümkün olan en yüksek puanı toplamaktır. Bombalara dokunmadığınız sürece oyun devam eder."]
+	]
+};
+var meyve_default = {
+	az,
+	en,
+	ru,
+	ar,
+	tr
+};
+//#endregion
+export { ar, az, meyve_default as default, en, ru, tr };

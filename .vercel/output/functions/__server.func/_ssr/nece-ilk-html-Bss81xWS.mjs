@@ -1,0 +1,110 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/nece-ilk-html-Bss81xWS.js
+var az = {
+	"about": ["İlk HTML səhifəsi hər hansı bir çərçivə, kitabxana və ya sayt qurucusu tələb etməyən tək fayldır. Bu sənəd brauzerdə açılan mətn faylı kimi işləyir və bütün veb-inkişafın təməlini təşkil edir. Səhifəni düzəltmək üçün xüsusi proqramlara ehtiyac yoxdur, çünki əsas struktur bir neçə sadə teqdən ibarətdir.", "İnsanlar veb-proqramlaşdırmağı öyrənməyə başlayanda və ya internetdə ilk şəxsi məlumatlarını yerləşdirmək istədikdə bu səhifəyə ehtiyac duyurlar. Hazır şablonlardan istifadə etmək əvəzinə, sətirləri özünüz yazmaq dərhal nəticəni görməyə və brauzerin faylı necə oxuduğunu anlamağa kömək edir."],
+	"steps": [
+		"Faylı index.html adlandırın və iş masasında saxlayın.",
+		"Faylın daxilində html, head və body teqlərini yerləşdirin.",
+		"body teqinin içinə <h1>Hello</h1> və digər görünən mətnləri yazın.",
+		"Faylın sonluğunun .html olduğundan əmin olun və üzərinə iki dəfə basın."
+	],
+	"uses": [
+		"Veb-dizayn və proqramlaşdırma öyrənməyə başlamaq üçün ilk addım kimi istifadə olunur.",
+		"İnternetdə dərc etmədən əvvəl mətnin brauzerdə necə göründüyünü yoxlamağa yarayır.",
+		"Faylın adının sonluğunu və uzantısını düzgün təyin etməyi öyrədir.",
+		"Sadə şəkillərin və mətnlərin bir qovluqda necə əlaqələndirildiyini göstərir."
+	],
+	"faq": [
+		["Niyə fayl açılmır?", "Faylın adının sonuna baxın. Əgər sonluq .html deyilsə, brauzer onu səhifə kimi qəbul etməyəcək və faylı mətn kimi göstərəcək."],
+		["Səhifəni necə açmaq olar?", "Faylı iş masasında saxlayın və üzərinə iki dəfə basın. Brauzer onu avtomatik olaraq açacaq."],
+		["Düymə işləyirmi?", "Siz səhifəyə düymə qoya bilərsiniz, lakin onun işləməsi üçün əvvəlcə JavaScript tələb olunur."]
+	]
+};
+var en = {
+	"about": ["The first HTML page is a single file that does not need a framework, a library, or a site builder. It serves as the absolute starting point for web development, containing basic structural tags like html, head, and body that instruct the browser on how to display content.", "People need this foundational file when they begin learning web programming or want to understand how browsers read documents. Writing these initial lines yourself rather than copying a ready template ensures you grasp the direct connection between the file on your desktop and the visible output."],
+	"steps": [
+		"Name your file index.html and save it on the desktop.",
+		"Place the html, head, and body tags inside the file structure.",
+		"Add visible content like headings and paragraphs inside the body section.",
+		"Save the file and click it twice so the browser opens it."
+	],
+	"uses": [
+		"Learning the basic syntax and structure of web pages from scratch.",
+		"Testing simple text and headings locally in any standard web browser.",
+		"Practicing proper file naming conventions to ensure correct browser recognition.",
+		"Understanding how to place images and buttons within a local folder."
+	],
+	"faq": [
+		["Why won't the page open correctly?", "Look at the end of the file name. If it is not .html, the browser does not treat it as a page."],
+		["Do I need any special software?", "No frameworks, libraries, or site builders are needed first. A basic text editor and a browser are enough."],
+		["Can I add interactive buttons?", "You can put a button on the page, but it needs JavaScript before it does any work."]
+	]
+};
+var ru = {
+	"about": ["Первая страница HTML — это единственный файл, который не требует фреймворка, библиотеки или конструктора сайтов. Он представляет собой базовую основу веб-разработки, состоящую из обязательных тегов, которые браузер самостоятельно считывает и отображает на экране.", "Людям нужен этот навык, когда они начинают изучать программирование или хотят понять принципы работы веб-страниц. Написание первых строк кода самостоятельно вместо копирования готового шаблона помогает прочно усвоить структуру документа."],
+	"steps": [
+		"Назовите файл index.html и сохраните его на рабочем столе.",
+		"Добавьте основные теги html, head и body внутрь файла.",
+		"Поместите видимый текст и заголовки внутрь тега body.",
+		"Сохраните файл и нажмите на него дважды, чтобы открыть в браузере."
+	],
+	"uses": [
+		"Освоение базовых принципов создания веб-страниц без использования сторонних инструментов.",
+		"Проверка отображения простого текста и заголовков в браузере.",
+		"Изучение правильного расширения файлов для корректной работы в сети.",
+		"Размещение локальных изображений и кнопок в одной папке."
+	],
+	"faq": [
+		["Что делать, если страница не открывается как сайт?", "Посмотрите на конец имени файла. Если в конце нет .html, браузер не распознает его как веб-страницу."],
+		["Нужны ли специальные программы?", "Сначала вам не нужны фреймворки, библиотеки или конструкторы сайтов, достаточно простого блокнота и браузера."],
+		["Будет ли работать кнопка?", "Вы можете добавить кнопку, но для выполнения каких-либо действий ей предварительно потребуется JavaScript."]
+	]
+};
+var ar = {
+	"about": ["تعد صفحة HTML الأولى ملفاً واحداً لا يحتاج إلى إطار عمل أو مكتبة أو مُنشئ مواقع. وهي تمثل نقطة البداية الأساسية لتطوير الويب، حيث تحتوي على هياكل تنظيمية بسيطة يقرؤها المتصفح مباشرة لعرض المحتوى للمستخدم دون تعقيد.", "يحتاج الأشخاص إلى هذا الملف عند البدء في تعلم برمجة الويب أو عندما يرغبون في فهم كيفية عمل المستندات على المتصفح. وتساعد كتابة هذه السطر يدوياً بدلاً من نسخ قالب جاهز في استيعاب الأساسيات بوضوح."],
+	"steps": [
+		"قم بتسمية الملف index.html واحفظه على سطح المكتب.",
+		"ضع الوسوم الأساسية مثل html و head و body داخل الملف.",
+		"أضف نصوصاً مرئية وعناوين داخل وسوم body.",
+		"احفظ الملف واضغط عليه مرتين ليفتحه المتصفح."
+	],
+	"uses": [
+		"تعلم الأساسيات الهيكلية لصفحات الويب من الصفر.",
+		"اختبار عرض النصوص والعناوين مباشرة في المتصفح.",
+		"فهم كيفية التعامل مع امتدادات الملفات الصحيحة.",
+		"ربط الصور والأزرار بداخل مجلد العمل المحلي."
+	],
+	"faq": [
+		["لماذا لا تفتح الصفحة بالشكل الصحيح؟", "انظر إلى نهاية اسم الملف. إذا لم يكن امتداده .html، فلن يتعامل معه المتصفح كصفحة ويب."],
+		["هل أحتاج إلى أدوات معقدة؟", "أنت لا تحتاج إلى إطار عمل أو مكتبة أو مُنشئ مواقع في البداية، بل يكفي ملف نصي ومتصفح."],
+		["هل يعمل الزر تلقائياً؟", "يمكنك وضع زر على الصفحة، لكنه يحتاج إلى جافا سكريبت قبل أن يقوم بأي عمل."]
+	]
+};
+var tr = {
+	"about": ["İlk HTML sayfası; herhangi bir çatıya, kütüphaneye veya site kurucusuna ihtiyaç duymayan tek bir dosyadır. Tarayıcının doğrudan okuyup ekranda gösterdiği temel yapı taşlarını barındırır ve web geliştirmeyi öğrenmek için en doğru başlangıç noktasıdır.", "İnsanlar programlama öğrenmeye başladığında veya belgelerin tarayıcıda nasıl çalıştığını anlamak istediğinde bu dosyaya ihtiyaç duyar. Hazır şablonları kopyalamak yerine ilk satırları kendiniz yazmak, dosya yapısını ve tarayıcı mantığını kalıcı olarak kavramanızı sağlar."],
+	"steps": [
+		"Dosyayı index.html olarak adlandırın ve masaüstüne kaydedin.",
+		"Dosyanın içine html, head ve body etiketlerini yerleştirin.",
+		"Görünür metinleri ve başlıkları body etiketinin içine yazın.",
+		"Dosyayı kaydedin ve tarayıcının açılması için üzerine iki kez tıklayın."
+	],
+	"uses": [
+		"Web sayfalarının temel sözdizimini ve yapısını sıfırdan öğrenmek.",
+		"Metinlerin ve başlıkların tarayıcıda nasıl göründüğünü yerel olarak test etmek.",
+		"Doğru dosya uzantısı kurallarını kavrayarak tarayıcı tanınmasını sağlamak.",
+		"Aynı klasör içindeki görselleri ve düğmeleri sayfaya ekleme pratikleri yapmak."
+	],
+	"faq": [
+		["Sayfa neden açılmıyor veya metin olarak görünüyor?", "Dosya adının sonuna bakın. Uzantı .html değilse tarayıcı onu bir sayfa olarak değerlendirmez."],
+		["Özel bir program indirmem gerekir mi?", "İlk başta bir çatıya, kütüphaneye veya site kurucusuna ihtiyacınız yoktur. Temel bir düzenleyici yeterlidir."],
+		["Eklediğim düğme hemen çalışır mı?", "Sayfaya bir düğme koyabilirsiniz, ancak herhangi bir işlev yerine getirmesi için öncelikle JavaScript gereklidir."]
+	]
+};
+var nece_ilk_html_default = {
+	az,
+	en,
+	ru,
+	ar,
+	tr
+};
+//#endregion
+export { ar, az, nece_ilk_html_default as default, en, ru, tr };

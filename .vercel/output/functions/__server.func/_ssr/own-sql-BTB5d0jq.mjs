@@ -1,0 +1,90 @@
+import { o as l5 } from "./meta-Bb3__USb.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/own-sql-BTB5d0jq.js
+var OWN_SQL = {
+	select: [
+		{
+			id: "select",
+			title: l5("SELECT: cədvəldən oxu", "SELECT: read from a table", "SELECT: tablodan oku", "SELECT: اقرأ من جدول", "SELECT: чтение из таблицы"),
+			blocks: [{
+				paragraphs: [l5("SQL cədvəldən soruşmaq dilidir. SELECT hansı sütunları, FROM hansı cədvəli göstərir.", "SQL is the language for asking a table. SELECT says which columns, FROM says which table.", "SQL tablodan sorma dilidir. SELECT hangi sütunları, FROM hangi tabloyu söyler.", "SQL لغة السؤال من جدول. SELECT يقول أي الأعمدة، وFROM أي جدول.", "SQL — язык вопросов к таблице. SELECT говорит, какие столбцы, FROM — какую таблицу.")],
+				code: "SELECT name, city\nFROM users;"
+			}]
+		},
+		{
+			id: "where",
+			title: l5("WHERE: şərt", "WHERE: a condition", "WHERE: koşul", "WHERE: شرط", "WHERE: условие"),
+			blocks: [{
+				paragraphs: [l5("WHERE yalnız uyğun sətirləri saxlayır. Bu sorğu Bakıdakı istifadəçilərin adını gətirir.", "WHERE keeps only the matching rows. This query brings the names of users in Baku.", "WHERE yalnız uyan satırları tutar. Bu sorgu Bakü'deki kullanıcıların adını getirir.", "WHERE يُبقي الصفوف المطابقة فقط. هذا الاستعلام يجلب أسماء المستخدمين في باكو.", "WHERE оставляет только подходящие строки. Этот запрос приносит имена пользователей из Баку.")],
+				code: "SELECT name\nFROM users\nWHERE city = 'Baku';"
+			}]
+		},
+		{
+			id: "faq",
+			title: l5("Suallar", "Questions", "Sorular", "أسئلة", "Вопросы"),
+			blocks: [{ paragraphs: [
+				l5("SELECT nə seçir? Cədvəldən görmək istədiyin sütunları.", "What does SELECT pick? The columns you want to see from the table.", "SELECT ne seçer? Tablodan görmek istediğin sütunları.", "ماذا يختار SELECT؟ الأعمدة التي تريد رؤيتها من الجدول.", "Что выбирает SELECT? Столбцы, которые вы хотите видеть из таблицы."),
+				l5("FROM nə üçündür? Məlumatın hansı cədvəldə olduğunu deyir.", "What is FROM for? It says which table holds the data.", "FROM ne işe yarar? Verinin hangi tabloda olduğunu söyler.", "فيم يُستخدم FROM؟ يقول في أي جدول البيانات.", "Зачем FROM? Говорит, в какой таблице лежат данные."),
+				l5("WHERE yazılmazsa nə olur? Cədvəldəki bütün sətirlər gəlir.", "What if there is no WHERE? Every row in the table comes back.", "WHERE yazılmazsa ne olur? Tablodaki bütün satırlar gelir.", "ماذا لو لم يُكتب WHERE؟ ترجع كل صفوف الجدول.", "Что если нет WHERE? Вернутся все строки таблицы."),
+				l5("Şəhər adı niyə dırnaqdadır? Mətn şərti dırnaq içində yazılır. Ədəd yazılmaz.", "Why is the city name in quotes? A text condition is written in quotes. A number is not.", "Şehir adı neden tırnakta? Metin koşulu tırnak içinde yazılır. Sayı yazılmaz.", "لماذا اسم المدينة بين علامتي اقتباس؟ شرط النص يُكتب بين علامتي اقتباس. الرقم لا يُكتب.", "Почему город в кавычках? Текстовое условие пишут в кавычках. Число — нет.")
+			] }]
+		}
+	],
+	sirala: [
+		{
+			id: "order",
+			title: l5("ORDER BY: düz", "ORDER BY: sort", "ORDER BY: sırala", "ORDER BY: رتّب", "ORDER BY: сортировка"),
+			blocks: [{
+				paragraphs: [l5("ORDER BY sətirləri bir sütuna görə düzür. Adın yanına DESC yazılsa sıra tərsinə düşür, böyükdən kiçiyə.", "ORDER BY sorts the rows by one column. DESC after the name reverses the order, from large to small.", "ORDER BY satırları bir sütuna göre dizer. Adın yanına DESC yazılırsa sıra tersine döner, büyükten küçüğe.", "ORDER BY يرتّب الصفوف حسب عمود. DESC بعد الاسم يعكس الترتيب، من الكبير إلى الصغير.", "ORDER BY сортирует строки по одному столбцу. DESC после имени переворачивает порядок, от большего к меньшему.")],
+				code: "SELECT name\nFROM users\nORDER BY name;"
+			}]
+		},
+		{
+			id: "limit",
+			title: l5("LIMIT: bir neçəsini götür", "LIMIT: take a few", "LIMIT: birkaçını al", "LIMIT: خذ القليل", "LIMIT: взять несколько"),
+			blocks: [{
+				paragraphs: [l5("LIMIT neçə sətir qayıdacağını deyir. Əvvəl ORDER BY ilə düz, sonra LIMIT 5 ilə ilk beşi saxla. Limitsiz sorğu böyük cədvəldə ağır ola bilər.", "LIMIT says how many rows come back. Sort with ORDER BY first, then keep the first five with LIMIT 5. A query without a limit can be heavy on a large table.", "LIMIT kaç satır döneceğini söyler. Önce ORDER BY ile diz, sonra LIMIT 5 ile ilk beşi tut. Limitsiz sorgu büyük tabloda ağır olabilir.", "LIMIT يقول كم صفاً يرجع. رتّب أولاً بـ ORDER BY ثم أبقِ الخمسة الأولى بـ LIMIT 5. استعلام بلا حد قد يثقل على جدول كبير.", "LIMIT говорит, сколько строк вернётся. Сначала отсортируйте через ORDER BY, затем оставьте первые пять через LIMIT 5. Запрос без предела может быть тяжёлым на большой таблице.")],
+				code: "SELECT name\nFROM users\nORDER BY name\nLIMIT 5;"
+			}]
+		},
+		{
+			id: "faq",
+			title: l5("Suallar", "Questions", "Sorular", "أسئلة", "Вопросы"),
+			blocks: [{ paragraphs: [
+				l5("ORDER BY yazılmazsa sıra necədir? Bazanın öz sırasıdır. Ona güvənmə.", "What is the order without ORDER BY? The database’s own order. Do not rely on it.", "ORDER BY yazılmazsa sıra nasıldır? Veritabanının kendi sırasıdır. Ona güvenme.", "ما الترتيب بلا ORDER BY؟ ترتيب قاعدة البيانات نفسه. لا تعتمد عليه.", "Какой порядок без ORDER BY? Собственный порядок базы. На него не опирайтесь."),
+				l5("LIMIT 5 nə gətirir? Uyğun sətirlərdən yalnız beşini.", "What does LIMIT 5 bring? Only five of the matching rows.", "LIMIT 5 ne getirir? Uyan satırlardan yalnız beşini.", "ماذا يجلب LIMIT 5؟ خمسة فقط من الصفوف المطابقة.", "Что приносит LIMIT 5? Только пять подходящих строк."),
+				l5("Əvvəl LIMIT, sonra ORDER BY yazılır? Xeyr. Əvvəl düz, sonra kəs. ORDER BY LIMIT-dən əvvəl gəlir.", "Do you write LIMIT first and ORDER BY after? No. Sort first, then cut. ORDER BY comes before LIMIT.", "Önce LIMIT, sonra ORDER BY yazılır mı? Hayır. Önce diz, sonra kes. ORDER BY, LIMIT’ten önce gelir.", "هل تُكتب LIMIT أولاً ثم ORDER BY؟ لا. رتّب أولاً ثم اقطع. ORDER BY يأتي قبل LIMIT.", "Сначала LIMIT, потом ORDER BY? Нет. Сначала сортировка, потом срез. ORDER BY стоит перед LIMIT."),
+				l5("DESC nədir? Azalan sıra. Məsələn ən yeni tarix üstdə qalsın deyə.", "What is DESC? Descending order. For example so the newest date stays on top.", "DESC nedir? Azalan sıra. Örneğin en yeni tarih üstte kalsın diye.", "ما هو DESC؟ ترتيب تنازلي. مثلاً ليبقى أحدث تاريخ في الأعلى.", "Что такое DESC? Убывающий порядок. Например, чтобы самая новая дата была сверху.")
+			] }]
+		}
+	],
+	say: [
+		{
+			id: "count",
+			title: l5("COUNT: say", "COUNT: count", "COUNT: say", "COUNT: عدّ", "COUNT: посчитать"),
+			blocks: [{
+				paragraphs: [l5("COUNT(*) cədvəldəki sətirləri sayır. WHERE ilə birlikdə yalnız şərti ödəyənləri sayır. Nəticə bir rəqəmdir, ad siyahısı deyil.", "COUNT(*) counts the rows in the table. Together with WHERE it counts only the rows that match. The result is one number, not a list of names.", "COUNT(*) tablodaki satırları sayar. WHERE ile birlikte yalnız koşulu tutanları sayar. Sonuç bir sayıdır, ad listesi değil.", "COUNT(*) يعدّ صفوف الجدول. مع WHERE يعدّ الصفوف المطابقة فقط. النتيجة رقم واحد، لا قائمة أسماء.", "COUNT(*) считает строки таблицы. Вместе с WHERE считает только подходящие. Результат — одно число, не список имён.")],
+				code: "SELECT COUNT(*)\nFROM users\nWHERE city = 'Baku';"
+			}]
+		},
+		{
+			id: "group",
+			title: l5("GROUP BY: qrupla", "GROUP BY: group", "GROUP BY: grupla", "GROUP BY: جمّع", "GROUP BY: сгруппировать"),
+			blocks: [{
+				paragraphs: [l5("GROUP BY eyni şəhərdəki sətirləri bir qrupa yığır. COUNT hər qrupun içində neçə nəfər olduğunu deyir. Bakı ayrı, Gəncə ayrı sətir olur.", "GROUP BY gathers rows of the same city into one group. COUNT says how many people are in each group. Baku is one row, Ganja is another.", "GROUP BY aynı şehirdeki satırları bir gruba toplar. COUNT her grubun içinde kaç kişi olduğunu söyler. Bakü ayrı, Gence ayrı satır olur.", "GROUP BY يجمع صفوف المدينة نفسها في مجموعة. COUNT يقول كم شخصاً في كل مجموعة. باكو صف، وكنجه صف آخر.", "GROUP BY собирает строки одного города в группу. COUNT говорит, сколько людей в каждой группе. Баку — одна строка, Гянджа — другая.")],
+				code: "SELECT city, COUNT(*)\nFROM users\nGROUP BY city;"
+			}]
+		},
+		{
+			id: "faq",
+			title: l5("Suallar", "Questions", "Sorular", "أسئلة", "Вопросы"),
+			blocks: [{ paragraphs: [
+				l5("COUNT adları göstərirmi? Xeyr. Yalnız sayını göstərir.", "Does COUNT show the names? No. It shows only the number.", "COUNT adları gösterir mi? Hayır. Yalnız sayıyı gösterir.", "هل يُظهر COUNT الأسماء؟ لا. يُظهر العدد فقط.", "COUNT показывает имена? Нет. Только число."),
+				l5("COUNT(*) ulduzu nədir? Bütün sətirləri say deməkdir. Boş sütunları atlamır.", "What is the star in COUNT(*)? It means count every row. It does not skip empty columns.", "COUNT(*) içindeki yıldız nedir? Bütün satırları say demektir. Boş sütunları atlamaz.", "ما النجمة في COUNT(*)؟ تعني عدّ كل الصفوف. لا تتجاوز الأعمدة الفارغة.", "Что за звёздочка в COUNT(*)? Она значит считать каждую строку. Пустые столбцы не пропускает."),
+				l5("GROUP BY olmadan şəhər və COUNT yazılır? Əksər bazalar bunu rədd edir. Sayılan sütun qrupda olmalıdır.", "Can you write the city and COUNT without GROUP BY? Most databases reject that. The column you show must be in the group.", "GROUP BY olmadan şehir ve COUNT yazılır mı? Çoğu veritabanı bunu reddeder. Gösterilen sütun grupta olmalıdır.", "هل تُكتب المدينة وCOUNT بلا GROUP BY؟ أكثر القواعد ترفض ذلك. العمود الظاهر يجب أن يكون في المجموعة.", "Можно написать город и COUNT без GROUP BY? Большинство баз это отвергает. Показанный столбец должен быть в группе."),
+				l5("Bu səhifə bazanı dəyişirmi? Xeyr. Nümunə sorğudur. Öz cədvəlin yoxdursa nəticə gəlmir.", "Does this page change a database? No. It is a sample query. If you have no table of your own, there is no result.", "Bu sayfa veritabanını değiştirir mi? Hayır. Örnek sorgudur. Kendi tablon yoksa sonuç gelmez.", "هل تغيّر هذه الصفحة قاعدة بيانات؟ لا. هذا استعلام نموذجي. إن لم يكن لك جدول فلا نتيجة.", "Эта страница меняет базу? Нет. Это пример запроса. Если своей таблицы нет, результата не будет.")
+			] }]
+		}
+	]
+};
+//#endregion
+export { OWN_SQL };

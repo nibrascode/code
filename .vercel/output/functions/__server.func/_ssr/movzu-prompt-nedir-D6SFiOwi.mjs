@@ -1,0 +1,110 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/movzu-prompt-nedir-D6SFiOwi.js
+var az = {
+	"about": ["Prompt süni intellekt modelinə göndərdiyin yazıdır. Bu, sual, tapşırıq və ya yapışdırdığın kod ola bilər. Model sənin baxdığın səhifəni görmür və yalnız göndərdiyin mətni oxuyur. Qısa və boş yazılar qeyri-müəyyən cavablar gətirir, çünki model nəyi və necə izah edəcəyini özü seçməli olur.", "İnsanlar dəqiq və faydalı cavablar almaq üçün düzgün prompt yazmağa ehtiyac duyurlar. Düzgün prompt nə istədiyini, hansı dildə və nə qədər uzunluqda olmasını dəqiq göstərir. Nümunə əlavə etmək, cavabda nə olmamasını qeyd etmək və mərhələli şəkildə söhbət qurmaq nəticəni daha keyfiyyətli edir."],
+	"steps": [
+		"Nə istədiyini, hansı dildə və nə qədər olmasını yaz.",
+		"Əlində nümunə varsa, onu da əlavə et.",
+		"Cavabın içində nə olmamasını qeyd et.",
+		"Bir dəfəyə hər şeyi yığmadan addım-addım davam et."
+	],
+	"uses": [
+		"Python kodunu üç cümlə ilə izah etmək üçün istifadə olunur.",
+		"Kod səhvini göstərmək, gözlədiyin və olan nəticəni müqayisə etmək üçün tətbiq edilir.",
+		"Mətni müəyyən dildə və tələb olunan uzunluqda qısaltmaq üçün yazılır.",
+		"Süni intellektlə addım-addım tətbiq hazırlamaq üçün mərhələli şəkildə sorğu göndərilir."
+	],
+	"faq": [
+		["Prompt nədir?", "Prompt modelə göndərdiyin yazıdır. Sual da odu, tapşırıq da, yapışdırdığın kod da. Model sənin baxdığın səhifəni görmür, yalnız bu yazını oxuyur."],
+		["Düzgün prompt necə yazılır?", "Düz prompt üç şeyi deyir: nə istəyirsən, hansı dildə, nə qədər. Əlində nümunə varsa onu da yaz, həmçinin cavabın içində nə olmamasını qeyd et."],
+		["Birinci cavab səhvdirsə nə etmək lazımdır?", "Birinci cavab səhvdirsə hamısını silib yenidən başlama. Sadəcə səhv yeri göstər və söhbəti addım-addım davam etdirərək düzəlt."]
+	]
+};
+var en = {
+	"about": ["A prompt is the text you send to an artificial intelligence model. It can be a question, a task, or pasted code. The model does not see the page you are looking at and only reads this text. Short and vague inputs lead to uncertain answers because the model has to guess what and how to explain.", "People need prompts to get precise and useful answers from AI models. A good prompt specifies what you want, in which language, and how long it should be. Adding examples, stating what to exclude, and building the conversation step by step improves the overall quality of the generated output."],
+	"steps": [
+		"State clearly what you want, in what language, and its length.",
+		"Include a relevant example if you have one available.",
+		"Specify what should be excluded from the answer.",
+		"Build the conversation step by step instead of asking everything at once."
+	],
+	"uses": [
+		"Explaining a Python code snippet within three specific sentences.",
+		"Showing a code error, the expected result, and the actual outcome.",
+		"Summarizing or shortening text based on exact language requirements.",
+		"Developing applications with AI through gradual step-by-step instructions."
+	],
+	"faq": [
+		["What is a prompt?", "A prompt is the text you send to the model, including questions, tasks, or pasted code. The model does not see your screen and only reads this text."],
+		["How do you write a correct prompt?", "A correct prompt specifies three things: what you want, in which language, and how much. Include examples if available and state what elements to omit."],
+		["What should you do if the first answer is wrong?", "Do not delete everything and start over if the first response is incorrect. Simply point out the specific error and continue the conversation."]
+	]
+};
+var ru = {
+	"about": ["Промпт — это текст, который вы отправляете модели искусственного интеллекта. Это может быть вопрос, задача или вставленный код. Модель не видит страницу, на которую вы смотрите, а читает только этот текст. Короткие и пустые запросы приводят к неопределенным ответам, так как модель сама выбирает, что и как объяснять.", "Людям нужны промпты для получения точных и полезных ответов. Правильный промпт указывает три вещи: что вам нужно, на каком языке и в каком объеме. Добавление примеров, указание того, чего не должно быть в ответе, и пошаговое ведение диалога делают результат более качественным."],
+	"steps": [
+		"Укажите, что именно вы хотите, на каком языке и в каком объеме.",
+		"Добавьте пример, если он у вас есть под рукой.",
+		"Напишите, чего не должно быть в итоговом ответе.",
+		"Ведите диалог постепенно, не пытаясь запросить всё за один раз."
+	],
+	"uses": [
+		"Объяснение кода на языке Python ровно в трех предложениях.",
+		"Указание на ошибку в коде, сравнение ожидаемого и полученного результатов.",
+		"Сокращение или изменение текста с учетом заданных языковых требований.",
+		"Поэтапная разработка приложений с использованием искусственного интеллекта."
+	],
+	"faq": [
+		["Что такое промпт?", "Промпт — это текст, отправляемый модели: вопрос, задача или код. Модель не видит ваш экран и воспринимает только этот текст."],
+		["Как правильно писать промпт?", "Правильный промпт содержит три вещи: что нужно, на каком языке и сколько. Добавьте пример и укажите, чего не должно быть в ответе."],
+		["Что делать, если первый ответ оказался неверным?", "Если первый ответ неверный, не удаляйте всё и не начинайте сначала. Просто укажите на конкретную ошибку и продолжите общение."]
+	]
+};
+var ar = {
+	"about": ["الأمر هو النص الذي ترسله إلى نموذج الذكاء الاصطناعي. قد يكون سؤالاً أو مهمة أو تعليمة برمجية قمت لصقها. النموذج لا يرى الصفحة التي تنظر إليها بل يقرأ هذا النص فقط. النصوص القصيرة والفارغة تؤدي إلى إجابات غامضة لأن النموذج يضطر لتخمين ما يجب شرحه.", "يحتاج الأشخاص إلى الأوامر الصحيحة للحصول على إجابات دقيقة ومفيدة. الأمر الصحيح يحدد ثلاثة أمور: ما تريد، وبأي لغة، وبأي حجم. إضافة الأمثلة، وتحديد ما يجب استبعاده، وبناء المحادثة خطوة بخطوة يجعل النتيجة النهائية أفضل بكثير."],
+	"steps": [
+		"حدد بوضوح ما تريده، واللغة المطلوبة، والحجم المناسب.",
+		"أضف مثالاً إذا كان متوفراً لديك للحصول على نتيجة مشابهة.",
+		"اكتب ما يجب تجنبه أو عدم تضمينه داخل الإجابة.",
+		"تابع المحادثة تدريجياً ولا تطلب كل شيء دفعة واحدة."
+	],
+	"uses": [
+		"شرح كود بايثون في ثلاث جمل محددة فقط.",
+		"توضيح خطأ برمجي مع مقارنة النتيجة المتوقعة بالنتيجة الفعلية.",
+		"تقصير النصوص وتعديلها وفقاً للغة والحجم المطلوبين.",
+		"تطوير التطبيقات باستخدام الذكاء الاصطناعي عبر خطوات متتالية."
+	],
+	"faq": [
+		["ما هو الأمر (Prompt)؟", "الأمر هو النص الذي ترسله للنموذج، سواء كان سؤالاً أو مهمة أو كوداً. النموذج لا يرى شاشتك بل يقرأ هذا النص فقط."],
+		["كيف تكتب أمراً صحيحاً؟", "الأمر الصحيح يوضح ثلاثة أشياء: ما تريده، واللغة، والحجم. أضف مثالاً إن وجد وحدد ما لا يجب أن تتضمنه الإجابة."],
+		["ماذا تفعل إذا كانت الإجابة الأولى خاطئة؟", "إذا كانت الإجابة الأولى خاطئة فلا تحذف كل شيء وتصنع بداية جديدة. فقط قم بتوضيح مكان الخطأ وتابع المحادثة."]
+	]
+};
+var tr = {
+	"about": ["Prompt, yapay zeka modeline gönderdiğiniz metindir. Bu bir soru, bir görev veya yapıştırdığınız bir kod olabilir. Model baktığınız sayfayı görmez ve yalnızca bu metni okur. Kısa ve boş girdiler belirsiz yanıtlar doğurur, çünkü model neyi ve nasıl açıklayacağını kendisi seçmek zorunda kalır.", "İnsanlar net ve faydalı yanıtlar almak için doğru prompt yazmaya ihtiyaç duyar. Doğru bir prompt ne istediğinizi, hangi dilde ve ne kadar uzunlukta olması gerektiğini belirtir. Örnek eklemek, yanıtta ne olmaması gerektiğini yazmak ve sohbeti aşamalı ilerletmek kaliteliyi artırır."],
+	"steps": [
+		"Ne istediğinizi, hangi dilde ve ne kadar uzunlukta olacağını yazın.",
+		"Elinde bir örnek varsa bunu da metne ekleyin.",
+		"Yanıtta nelerin yer almaması gerektiğini özellikle belirtin.",
+		"Her şeyi tek seferde istemek yerine sohbeti adım adım ilerletin."
+	],
+	"uses": [
+		"Bir Python kodunu tam üç cümle ile açıklamak için kullanılır.",
+		"Kod hatasını göstermek, beklenen sonuç ile elde edilen sonucu karşılaştırmak için yazılır.",
+		"Metni istenen dilde ve belirlenen uzunlukta kısaltmak amacıyla uygulanır.",
+		"Yapay zeka ile aşamalı bir şekilde uygulama geliştirmek için kullanılır."
+	],
+	"faq": [
+		["Prompt nedir?", "Prompt modele gönderdiğiniz yazıdır; soru, görev veya yapıştırılan kod olabilir. Model ekranınızı görmez, sadece bu metni okur."],
+		["Doğru prompt nasıl yazılır?", "Doğru prompt üç şeyi belirtir: ne istediğinizi, hangi dilde ve ne kadar. Varsa örnek ekleyin ve yanıtta ne olmaması gerektiğini yazın."],
+		["İlk yanıt yanlışsa ne yapılmalıdır?", "İlk yanıt yanlışsa her şeyi silip baştan başlamayın. Sadece hatalı yeri gösterin ve sohbeti adımlarla düzeltmeye devam edin."]
+	]
+};
+var movzu_prompt_nedir_default = {
+	az,
+	en,
+	ru,
+	ar,
+	tr
+};
+//#endregion
+export { ar, az, movzu_prompt_nedir_default as default, en, ru, tr };

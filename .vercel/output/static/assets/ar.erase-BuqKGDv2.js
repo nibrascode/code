@@ -1,0 +1,1 @@
+import{t as e}from"./erase-page-B36dA7Kv.js";var t=e;export{t as component};

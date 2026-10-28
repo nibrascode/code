@@ -1,0 +1,45 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/nece-pdf-parol-acmaq-peEgBLJ1.js
+var az = {
+	"about": ["Parollu PDF-i hər dəfə açmaq vaxt alır.", "«PDF parolunu aç» aləti parolu bildiyiniz fayldan parolsuz nüsxə hazırlayır."],
+	"steps": [
+		"nibrascode.com/pdf/unlock səhifəsini açın.",
+		"PDF-i seçin.",
+		"Parolu yazıb «Aç» basın.",
+		"«Başla» basıb endirin."
+	],
+	"uses": [
+		"Öz parollu sənədiniz.",
+		"Bankdan gələn çıxarış.",
+		"Çap üçün sənəd."
+	],
+	"faq": [
+		["Parolu bilmədən açmaq olar?", "Xeyr. Alət parolu sındırmır, parolu bilməlisiniz."],
+		["Fayl yüklənir?", "Xeyr. İş brauzerdə gedir."],
+		["Əsl fayl dəyişir?", "Xeyr. Yeni nüsxə endirilir."]
+	]
+};
+var en = {
+	"about": ["Opening a protected PDF every time takes time.", "Unlock PDF saves a password-free copy of a file whose password you know."],
+	"steps": [
+		"Open nibrascode.com/en/pdf/unlock.",
+		"Choose the PDF.",
+		"Type the password and press Unlock.",
+		"Press Start and download."
+	],
+	"uses": [
+		"Your own protected document.",
+		"Bank statements.",
+		"Files to print."
+	],
+	"faq": [
+		["Can I open it without the password?", "No. The tool does not crack passwords; you must know it."],
+		["Is the file uploaded?", "No. It runs in the browser."],
+		["Does the original change?", "No. A new copy is downloaded."]
+	]
+};
+var nece_pdf_parol_acmaq_default = {
+	az,
+	en
+};
+//#endregion
+export { az, nece_pdf_parol_acmaq_default as default, en };

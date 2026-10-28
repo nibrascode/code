@@ -1,0 +1,1873 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/_tanstack-start-manifest_v-Bsiv7ca5.js
+var tsrStartManifest = () => ({ routes: {
+	__root__: {
+		filePath: "/workspace/nibras-code/src/routes/__root.tsx",
+		children: [
+			"/",
+			"/about",
+			"/ar",
+			"/contact",
+			"/doctor",
+			"/en",
+			"/erase",
+			"/error-help",
+			"/faiz",
+			"/faq",
+			"/filecheck",
+			"/flow",
+			"/image",
+			"/learn",
+			"/logic",
+			"/mirror",
+			"/movzu",
+			"/muqayise",
+			"/nece",
+			"/nedir",
+			"/nx-studio",
+			"/oyun",
+			"/paket",
+			"/pdf",
+			"/planner",
+			"/privacy",
+			"/qr",
+			"/ru",
+			"/schema",
+			"/seo",
+			"/services",
+			"/shortcuts",
+			"/soz",
+			"/soz-sayi",
+			"/studio",
+			"/terms",
+			"/tools",
+			"/tools-legal",
+			"/tr",
+			"/trust",
+			"/unknown",
+			"/unutma",
+			"/vcard",
+			"/video",
+			"/voice",
+			"/why",
+			"/wifi",
+			"/workspace",
+			"/xeta",
+			"/zip",
+			"/resources/$topic",
+			"/apps/$slug",
+			"/ereb-dili/feil",
+			"/guides/$topic",
+			"/hamisi/$group",
+			"/image_/$tool",
+			"/learn_/logic",
+			"/pdf_/$tool",
+			"/programming/$topic",
+			"/resurslar/$slug",
+			"/video_/$tool",
+			"/apps/",
+			"/guides/",
+			"/programming/",
+			"/resources/"
+		],
+		css: ["/assets/index-BS0YHD-m.css"],
+		preloads: [
+			"/assets/index-DaoRAfRy.js",
+			"/assets/rolldown-runtime-C0FnF6B9.js",
+			"/assets/jsx-runtime-CKeovgl0.js",
+			"/assets/studio.functions-C8CUrO7U.js",
+			"/assets/not-found-i5RsCZif.js",
+			"/assets/redirect-DmtLUW0N.js",
+			"/assets/useMatch-C91u7kai.js",
+			"/assets/fileRoute-CgVYmMB5.js",
+			"/assets/invariant-DEEwAagU.js",
+			"/assets/ClientOnly-DV-gi5RD.js",
+			"/assets/lazyRouteComponent-Di8yUiLG.js",
+			"/assets/useSelector-CQLpO8jY.js",
+			"/assets/useRouterState-BXlZ-I8r.js",
+			"/assets/createLucideIcon-BtTu3AWq.js",
+			"/assets/arrow-left-CT7bR6Pe.js",
+			"/assets/arrow-right-CpJKVwpq.js",
+			"/assets/arrow-up-right-JFDc7Blh.js",
+			"/assets/chevron-down-B3kFQ7-g.js",
+			"/assets/chevron-right-rytcjf_E.js",
+			"/assets/circle-help-D9hzk-hl.js",
+			"/assets/services-page-ufGvEXf7.js",
+			"/assets/download-Cb3anq98.js",
+			"/assets/external-link-CS3Tnvb4.js",
+			"/assets/file-text-DbupyTRi.js",
+			"/assets/info-CK-L551R.js",
+			"/assets/layout-grid-D6M8HNFo.js",
+			"/assets/lock-CJK7v35e.js",
+			"/assets/voice-page-D6Kz9OIK.js",
+			"/assets/paperclip-BcWPLYtG.js",
+			"/assets/shield-check-1qmdDpJQ.js",
+			"/assets/stethoscope-CH1-CCiX.js",
+			"/assets/x-CtZ5fytk.js",
+			"/assets/i18n-context-DTr_leYa.js",
+			"/assets/meta-DH_EWIkA.js",
+			"/assets/section-slugs-yuunuQF9.js",
+			"/assets/ru-resources-BKIOcRsW.js",
+			"/assets/group-path-Di9u3nYb.js",
+			"/assets/locale-path-B4Cu4Wj1.js",
+			"/assets/faq-BHubV0zP.js",
+			"/assets/tools-BtX-yE7N.js",
+			"/assets/video-meta-xvvuKw7F.js",
+			"/assets/search-pages-D2MI8uE2.js",
+			"/assets/preload-helper-CxFQXtKk.js",
+			"/assets/learn-pages-DSaHkiv-.js",
+			"/assets/paket-Q__ZBrBO.js",
+			"/assets/home-bars-CkTslGYh.js",
+			"/assets/apps-wDl6E5Ek.js",
+			"/assets/info-card-Dusr24tQ.js",
+			"/assets/next-links-BM0ecXGJ.js",
+			"/assets/browser-C8g3Oxje.js",
+			"/assets/shell-DhcfOSB8.js"
+		],
+		scripts: [{ attrs: {
+			type: "module",
+			async: !0,
+			src: "/assets/index-DaoRAfRy.js"
+		} }]
+	},
+	"/": {
+		filePath: "/workspace/nibras-code/src/routes/index.tsx",
+		children: void 0,
+		preloads: ["/assets/routes-BdF9fmHd.js"]
+	},
+	"/about": {
+		filePath: "/workspace/nibras-code/src/routes/about.tsx",
+		children: void 0,
+		preloads: ["/assets/about-DvlLlfU1.js"]
+	},
+	"/ar": {
+		filePath: "/workspace/nibras-code/src/routes/ar.tsx",
+		children: [
+			"/ar/about",
+			"/ar/apps",
+			"/ar/contact",
+			"/ar/doctor",
+			"/ar/erase",
+			"/ar/error-help",
+			"/ar/faiz",
+			"/ar/faq",
+			"/ar/filecheck",
+			"/ar/flow",
+			"/ar/image",
+			"/ar/learn",
+			"/ar/logic",
+			"/ar/mirror",
+			"/ar/movzu",
+			"/ar/muqayise",
+			"/ar/nece",
+			"/ar/nedir",
+			"/ar/oyun",
+			"/ar/paket",
+			"/ar/pdf",
+			"/ar/planner",
+			"/ar/qr",
+			"/ar/schema",
+			"/ar/seo",
+			"/ar/services",
+			"/ar/shortcuts",
+			"/ar/soz",
+			"/ar/soz-sayi",
+			"/ar/studio",
+			"/ar/terms",
+			"/ar/tools",
+			"/ar/tools-legal",
+			"/ar/trust",
+			"/ar/unknown",
+			"/ar/vcard",
+			"/ar/video",
+			"/ar/voice",
+			"/ar/wifi",
+			"/ar/workspace",
+			"/ar/xeta",
+			"/ar/zip",
+			"/ar/image_/$tool",
+			"/ar/jami/$group",
+			"/ar/learn_/logic",
+			"/ar/pdf_/$tool",
+			"/ar/programming/$slug",
+			"/ar/video_/$tool"
+		],
+		preloads: ["/assets/ar-Q0FqZ9Xr.js"]
+	},
+	"/doctor": {
+		filePath: "/workspace/nibras-code/src/routes/doctor.tsx",
+		children: void 0,
+		preloads: ["/assets/doctor-Bj0AS2Eh.js", "/assets/doctor-BpMw1xe5.js"]
+	},
+	"/en": {
+		filePath: "/workspace/nibras-code/src/routes/en.tsx",
+		children: [
+			"/en/about",
+			"/en/apps",
+			"/en/contact",
+			"/en/doctor",
+			"/en/erase",
+			"/en/error-help",
+			"/en/faiz",
+			"/en/faq",
+			"/en/filecheck",
+			"/en/flow",
+			"/en/image",
+			"/en/learn",
+			"/en/logic",
+			"/en/mirror",
+			"/en/movzu",
+			"/en/muqayise",
+			"/en/nece",
+			"/en/nedir",
+			"/en/oyun",
+			"/en/paket",
+			"/en/pdf",
+			"/en/planner",
+			"/en/qr",
+			"/en/schema",
+			"/en/seo",
+			"/en/services",
+			"/en/shortcuts",
+			"/en/soz",
+			"/en/soz-sayi",
+			"/en/studio",
+			"/en/terms",
+			"/en/tools",
+			"/en/tools-legal",
+			"/en/trust",
+			"/en/unknown",
+			"/en/vcard",
+			"/en/video",
+			"/en/voice",
+			"/en/wifi",
+			"/en/workspace",
+			"/en/xeta",
+			"/en/zip",
+			"/en/all/$group",
+			"/en/image_/$tool",
+			"/en/learn_/logic",
+			"/en/pdf_/$tool",
+			"/en/programming/$slug",
+			"/en/video_/$tool"
+		],
+		preloads: ["/assets/en-TEprB3y9.js"]
+	},
+	"/erase": {
+		filePath: "/workspace/nibras-code/src/routes/erase.tsx",
+		children: void 0,
+		preloads: ["/assets/erase-CBdS5a_J.js", "/assets/erase-page-DylM7TSU.js"]
+	},
+	"/error-help": {
+		filePath: "/workspace/nibras-code/src/routes/error-help.tsx",
+		children: void 0,
+		preloads: ["/assets/error-help-DOqnD_p3.js", "/assets/error-help-Ag4Bp1_a.js"]
+	},
+	"/faq": {
+		filePath: "/workspace/nibras-code/src/routes/faq.tsx",
+		children: ["/faq/$slug"],
+		preloads: ["/assets/faq-BnvgLGgN.js", "/assets/faq-page-Cl5QExW7.js"]
+	},
+	"/filecheck": {
+		filePath: "/workspace/nibras-code/src/routes/filecheck.tsx",
+		children: void 0,
+		preloads: ["/assets/filecheck-CkbyMA03.js", "/assets/filecheck-CxsInRuT.js"]
+	},
+	"/learn": {
+		filePath: "/workspace/nibras-code/src/routes/learn.tsx",
+		children: void 0,
+		preloads: ["/assets/learn-CFWuz_Lw.js", "/assets/learn-A93TfnwC.js"]
+	},
+	"/mirror": {
+		filePath: "/workspace/nibras-code/src/routes/mirror.tsx",
+		children: void 0,
+		preloads: ["/assets/mirror-XtNOeTIv.js", "/assets/mirror-CBuux84c.js"]
+	},
+	"/movzu": {
+		filePath: "/workspace/nibras-code/src/routes/movzu.tsx",
+		children: ["/movzu/$slug"],
+		preloads: ["/assets/movzu-CYsAI8Q3.js", "/assets/search-pages-BOGJ-Hxp.js"]
+	},
+	"/muqayise": {
+		filePath: "/workspace/nibras-code/src/routes/muqayise.tsx",
+		children: ["/muqayise/$slug"],
+		preloads: ["/assets/muqayise-5BKBbe36.js", "/assets/learn-pages-DCn7CP4Q.js"]
+	},
+	"/nece": {
+		filePath: "/workspace/nibras-code/src/routes/nece.tsx",
+		children: ["/nece/$slug"],
+		preloads: ["/assets/nece-BCj5yf-7.js", "/assets/search-pages-BOGJ-Hxp.js"]
+	},
+	"/nx-studio": {
+		filePath: "/workspace/nibras-code/src/routes/nx-studio.tsx",
+		children: void 0,
+		preloads: [
+			"/assets/nx-studio-DVe2qCRp.js",
+			"/assets/lessons-nKZja49E.js",
+			"/assets/library-admin-lP4TwDay.js",
+			"/assets/pdf-privacy-DnEjzx_X.js"
+		]
+	},
+	"/oyun": {
+		filePath: "/workspace/nibras-code/src/routes/oyun.tsx",
+		children: ["/oyun/$slug"],
+		preloads: ["/assets/oyun-Bnw33DD1.js", "/assets/games-page-Byr5xtEI.js"]
+	},
+	"/paket": {
+		filePath: "/workspace/nibras-code/src/routes/paket.tsx",
+		children: void 0,
+		preloads: ["/assets/paket-CyBdgQPv.js", "/assets/paket-tool-hguc9rdL.js"]
+	},
+	"/pdf": {
+		filePath: "/workspace/nibras-code/src/routes/pdf.tsx",
+		children: void 0,
+		css: ["/assets/pdf-page-BN7vo2Xc.css"],
+		preloads: ["/assets/pdf-BHjwN-Pd.js", "/assets/pdf-page-Zyyj52VM.js"]
+	},
+	"/privacy": {
+		filePath: "/workspace/nibras-code/src/routes/privacy.tsx",
+		children: [
+			"/privacy/$slug",
+			"/privacy/nibras-note",
+			"/privacy/nibras-pdf",
+			"/privacy/nibras-plans",
+			"/privacy/nibras-scan",
+			"/privacy/nibras-qr/delete-account"
+		],
+		preloads: [
+			"/assets/privacy-Dz1s8yv2.js",
+			"/assets/clock-BesPS9gw.js",
+			"/assets/globe-C3F461Jb.js",
+			"/assets/image-BABfCy7r.js",
+			"/assets/server-FuCeyWmR.js",
+			"/assets/trash-2-eDKXprfx.js"
+		]
+	},
+	"/ru": {
+		filePath: "/workspace/nibras-code/src/routes/ru.tsx",
+		children: [
+			"/ru/about",
+			"/ru/apps",
+			"/ru/contact",
+			"/ru/doctor",
+			"/ru/erase",
+			"/ru/error-help",
+			"/ru/faiz",
+			"/ru/faq",
+			"/ru/filecheck",
+			"/ru/flow",
+			"/ru/image",
+			"/ru/learn",
+			"/ru/logic",
+			"/ru/mirror",
+			"/ru/movzu",
+			"/ru/muqayise",
+			"/ru/nece",
+			"/ru/nedir",
+			"/ru/oyun",
+			"/ru/paket",
+			"/ru/pdf",
+			"/ru/planner",
+			"/ru/qr",
+			"/ru/schema",
+			"/ru/seo",
+			"/ru/services",
+			"/ru/shortcuts",
+			"/ru/soz",
+			"/ru/soz-sayi",
+			"/ru/studio",
+			"/ru/terms",
+			"/ru/tools",
+			"/ru/tools-legal",
+			"/ru/trust",
+			"/ru/unknown",
+			"/ru/vcard",
+			"/ru/video",
+			"/ru/voice",
+			"/ru/wifi",
+			"/ru/workspace",
+			"/ru/xeta",
+			"/ru/zip",
+			"/ru/image_/$tool",
+			"/ru/learn_/logic",
+			"/ru/pdf_/$tool",
+			"/ru/programming/$slug",
+			"/ru/resources/$slug",
+			"/ru/video_/$tool",
+			"/ru/vse/$group"
+		],
+		preloads: ["/assets/ru-CHkxhRB3.js"]
+	},
+	"/schema": {
+		filePath: "/workspace/nibras-code/src/routes/schema.tsx",
+		children: void 0,
+		preloads: ["/assets/schema-Cwm_vc0x.js", "/assets/schema-Cx33iFKF.js"]
+	},
+	"/services": {
+		filePath: "/workspace/nibras-code/src/routes/services.tsx",
+		children: void 0,
+		preloads: ["/assets/services-CT9spnfC.js"]
+	},
+	"/shortcuts": {
+		filePath: "/workspace/nibras-code/src/routes/shortcuts.tsx",
+		children: void 0,
+		preloads: ["/assets/shortcuts-LbU-a0pr.js", "/assets/shortcuts-CAqI-Dev.js"]
+	},
+	"/soz": {
+		filePath: "/workspace/nibras-code/src/routes/soz.tsx",
+		children: ["/soz/$slug"],
+		preloads: ["/assets/soz-BwhovSqe.js", "/assets/search-pages-BOGJ-Hxp.js"]
+	},
+	"/studio": {
+		filePath: "/workspace/nibras-code/src/routes/studio.tsx",
+		children: void 0,
+		preloads: ["/assets/studio-DRo_tRfq.js", "/assets/studio-suGhqXGa.js"]
+	},
+	"/tools": {
+		filePath: "/workspace/nibras-code/src/routes/tools.tsx",
+		children: ["/tools/$slug"],
+		preloads: ["/assets/tools-CkWjmMad.js", "/assets/tools-page-CsnX6njO.js"]
+	},
+	"/tools-legal": {
+		filePath: "/workspace/nibras-code/src/routes/tools-legal.tsx",
+		children: void 0,
+		preloads: ["/assets/tools-legal-DIBeQe3T.js", "/assets/tools-legal-DTjxWx9e.js"]
+	},
+	"/tr": {
+		filePath: "/workspace/nibras-code/src/routes/tr.tsx",
+		children: [
+			"/tr/about",
+			"/tr/apps",
+			"/tr/contact",
+			"/tr/doctor",
+			"/tr/erase",
+			"/tr/error-help",
+			"/tr/faiz",
+			"/tr/faq",
+			"/tr/filecheck",
+			"/tr/flow",
+			"/tr/image",
+			"/tr/learn",
+			"/tr/logic",
+			"/tr/mirror",
+			"/tr/movzu",
+			"/tr/muqayise",
+			"/tr/nece",
+			"/tr/nedir",
+			"/tr/oyun",
+			"/tr/paket",
+			"/tr/pdf",
+			"/tr/planner",
+			"/tr/qr",
+			"/tr/schema",
+			"/tr/seo",
+			"/tr/services",
+			"/tr/shortcuts",
+			"/tr/soz",
+			"/tr/soz-sayi",
+			"/tr/studio",
+			"/tr/terms",
+			"/tr/tools",
+			"/tr/tools-legal",
+			"/tr/trust",
+			"/tr/unknown",
+			"/tr/vcard",
+			"/tr/video",
+			"/tr/voice",
+			"/tr/wifi",
+			"/tr/workspace",
+			"/tr/xeta",
+			"/tr/zip",
+			"/tr/image_/$tool",
+			"/tr/learn_/logic",
+			"/tr/pdf_/$tool",
+			"/tr/programming/$slug",
+			"/tr/tumu/$group",
+			"/tr/video_/$tool"
+		],
+		preloads: ["/assets/tr-eR0GH5w6.js"]
+	},
+	"/unutma": {
+		filePath: "/workspace/nibras-code/src/routes/unutma.tsx",
+		children: void 0,
+		preloads: ["/assets/unutma-CoFX5ifw.js", "/assets/bookmark-DpZI9oNA.js"]
+	},
+	"/vcard": {
+		filePath: "/workspace/nibras-code/src/routes/vcard.tsx",
+		children: void 0,
+		preloads: ["/assets/vcard-CQ0TwPrq.js", "/assets/vcard-CE8HPlaT.js"]
+	},
+	"/video": {
+		filePath: "/workspace/nibras-code/src/routes/video.tsx",
+		children: void 0,
+		preloads: ["/assets/video-DnbdLM6z.js"]
+	},
+	"/voice": {
+		filePath: "/workspace/nibras-code/src/routes/voice.tsx",
+		children: void 0,
+		preloads: ["/assets/voice-C3wjRl0G.js"]
+	},
+	"/why": {
+		filePath: "/workspace/nibras-code/src/routes/why.tsx",
+		children: void 0,
+		preloads: ["/assets/why-BDfZgk6j.js"]
+	},
+	"/workspace": {
+		filePath: "/workspace/nibras-code/src/routes/workspace.tsx",
+		children: void 0,
+		preloads: ["/assets/workspace-BiGwVHo5.js", "/assets/workspace-m6u5aOeC.js"]
+	},
+	"/xeta": {
+		filePath: "/workspace/nibras-code/src/routes/xeta.tsx",
+		children: ["/xeta/$slug"],
+		preloads: ["/assets/xeta-rGYblw_J.js", "/assets/search-pages-BOGJ-Hxp.js"]
+	},
+	"/zip": {
+		filePath: "/workspace/nibras-code/src/routes/zip.tsx",
+		children: void 0,
+		preloads: ["/assets/zip-CwJRvdhS.js", "/assets/zip-DAtFv9zh.js"]
+	},
+	"/resources/$topic": {
+		filePath: "/workspace/nibras-code/src/routes/resources/$topic/route.tsx",
+		children: ["/resources/$topic/$article", "/resources/$topic/"],
+		preloads: ["/assets/route-D4KknoR4.js"]
+	},
+	"/apps/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/apps/$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/_slug-CCI6D6lL.js"]
+	},
+	"/ar/about": {
+		filePath: "/workspace/nibras-code/src/routes/ar.about.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.about-UGvrnAPI.js"]
+	},
+	"/ar/apps": {
+		filePath: "/workspace/nibras-code/src/routes/ar.apps.tsx",
+		children: ["/ar/apps/$slug"],
+		preloads: ["/assets/ar.apps-X7DfuBos.js"]
+	},
+	"/ar/contact": {
+		filePath: "/workspace/nibras-code/src/routes/ar.contact.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.contact-DbZaJPUS.js"]
+	},
+	"/ar/doctor": {
+		filePath: "/workspace/nibras-code/src/routes/ar.doctor.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.doctor-Bj0AS2Eh.js", "/assets/doctor-BpMw1xe5.js"]
+	},
+	"/ar/erase": {
+		filePath: "/workspace/nibras-code/src/routes/ar.erase.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.erase-CBdS5a_J.js", "/assets/erase-page-DylM7TSU.js"]
+	},
+	"/ar/error-help": {
+		filePath: "/workspace/nibras-code/src/routes/ar.error-help.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.error-help-DOqnD_p3.js", "/assets/error-help-Ag4Bp1_a.js"]
+	},
+	"/ar/faiz": {
+		filePath: "/workspace/nibras-code/src/routes/ar.faiz.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.faiz-CkwAP_Hl.js"]
+	},
+	"/ar/faq": {
+		filePath: "/workspace/nibras-code/src/routes/ar.faq.tsx",
+		children: ["/ar/faq/$slug"],
+		preloads: ["/assets/ar.faq-VdG1BPzx.js", "/assets/faq-page-Cl5QExW7.js"]
+	},
+	"/ar/filecheck": {
+		filePath: "/workspace/nibras-code/src/routes/ar.filecheck.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.filecheck-CkbyMA03.js", "/assets/filecheck-CxsInRuT.js"]
+	},
+	"/ar/flow": {
+		filePath: "/workspace/nibras-code/src/routes/ar.flow.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.flow-BvoRWBsF.js"]
+	},
+	"/ar/image": {
+		filePath: "/workspace/nibras-code/src/routes/ar.image.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.image-C_kTRQ2K.js"]
+	},
+	"/ar/learn": {
+		filePath: "/workspace/nibras-code/src/routes/ar.learn.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.learn-CFWuz_Lw.js", "/assets/learn-A93TfnwC.js"]
+	},
+	"/ar/logic": {
+		filePath: "/workspace/nibras-code/src/routes/ar.logic.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.logic-Be2P-v5E.js"]
+	},
+	"/ar/mirror": {
+		filePath: "/workspace/nibras-code/src/routes/ar.mirror.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.mirror-XtNOeTIv.js", "/assets/mirror-CBuux84c.js"]
+	},
+	"/ar/movzu": {
+		filePath: "/workspace/nibras-code/src/routes/ar.movzu.tsx",
+		children: ["/ar/movzu/$slug"],
+		preloads: ["/assets/ar.movzu-BEem0oJ4.js", "/assets/search-pages-BOGJ-Hxp.js"]
+	},
+	"/ar/muqayise": {
+		filePath: "/workspace/nibras-code/src/routes/ar.muqayise.tsx",
+		children: ["/ar/muqayise/$slug"],
+		preloads: ["/assets/ar.muqayise-39jjfmTY.js", "/assets/learn-pages-DCn7CP4Q.js"]
+	},
+	"/ar/nece": {
+		filePath: "/workspace/nibras-code/src/routes/ar.nece.tsx",
+		children: ["/ar/nece/$slug"],
+		preloads: ["/assets/ar.nece-BvPB3Zjf.js", "/assets/search-pages-BOGJ-Hxp.js"]
+	},
+	"/ar/nedir": {
+		filePath: "/workspace/nibras-code/src/routes/ar.nedir.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.nedir-WORf2zUB.js"]
+	},
+	"/ar/oyun": {
+		filePath: "/workspace/nibras-code/src/routes/ar.oyun.tsx",
+		children: ["/ar/oyun/$slug"],
+		preloads: ["/assets/ar.oyun-Bnw33DD1.js", "/assets/games-page-Byr5xtEI.js"]
+	},
+	"/ar/paket": {
+		filePath: "/workspace/nibras-code/src/routes/ar.paket.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.paket-Whk5__rq.js", "/assets/paket-tool-hguc9rdL.js"]
+	},
+	"/ar/pdf": {
+		filePath: "/workspace/nibras-code/src/routes/ar.pdf.tsx",
+		children: void 0,
+		css: ["/assets/pdf-page-BN7vo2Xc.css"],
+		preloads: ["/assets/ar.pdf-BHjwN-Pd.js", "/assets/pdf-page-Zyyj52VM.js"]
+	},
+	"/ar/planner": {
+		filePath: "/workspace/nibras-code/src/routes/ar.planner.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.planner-CiRV3JCp.js"]
+	},
+	"/ar/qr": {
+		filePath: "/workspace/nibras-code/src/routes/ar.qr.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.qr-D2tg7FuQ.js"]
+	},
+	"/ar/schema": {
+		filePath: "/workspace/nibras-code/src/routes/ar.schema.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.schema-Cwm_vc0x.js", "/assets/schema-Cx33iFKF.js"]
+	},
+	"/ar/seo": {
+		filePath: "/workspace/nibras-code/src/routes/ar.seo.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.seo-BYXa3J-k.js"]
+	},
+	"/ar/services": {
+		filePath: "/workspace/nibras-code/src/routes/ar.services.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.services-OreDdj7c.js"]
+	},
+	"/ar/shortcuts": {
+		filePath: "/workspace/nibras-code/src/routes/ar.shortcuts.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.shortcuts-LbU-a0pr.js", "/assets/shortcuts-CAqI-Dev.js"]
+	},
+	"/ar/soz": {
+		filePath: "/workspace/nibras-code/src/routes/ar.soz.tsx",
+		children: ["/ar/soz/$slug"],
+		preloads: ["/assets/ar.soz-BzjC4YNF.js", "/assets/search-pages-BOGJ-Hxp.js"]
+	},
+	"/ar/soz-sayi": {
+		filePath: "/workspace/nibras-code/src/routes/ar.soz-sayi.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.soz-sayi-BXgGqgPb.js"]
+	},
+	"/ar/studio": {
+		filePath: "/workspace/nibras-code/src/routes/ar.studio.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.studio-DRo_tRfq.js", "/assets/studio-suGhqXGa.js"]
+	},
+	"/ar/terms": {
+		filePath: "/workspace/nibras-code/src/routes/ar.terms.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.terms-CBc6soe1.js"]
+	},
+	"/ar/tools": {
+		filePath: "/workspace/nibras-code/src/routes/ar.tools.tsx",
+		children: ["/ar/tools/$slug"],
+		preloads: ["/assets/ar.tools-D63hF-O8.js", "/assets/tools-page-CsnX6njO.js"]
+	},
+	"/ar/tools-legal": {
+		filePath: "/workspace/nibras-code/src/routes/ar.tools-legal.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.tools-legal-DIBeQe3T.js", "/assets/tools-legal-DTjxWx9e.js"]
+	},
+	"/ar/trust": {
+		filePath: "/workspace/nibras-code/src/routes/ar.trust.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.trust-BlK76uOD.js"]
+	},
+	"/ar/unknown": {
+		filePath: "/workspace/nibras-code/src/routes/ar.unknown.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.unknown-Dm9XHV_b.js"]
+	},
+	"/ar/vcard": {
+		filePath: "/workspace/nibras-code/src/routes/ar.vcard.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.vcard-CQ0TwPrq.js", "/assets/vcard-CE8HPlaT.js"]
+	},
+	"/ar/video": {
+		filePath: "/workspace/nibras-code/src/routes/ar.video.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.video-DnbdLM6z.js"]
+	},
+	"/ar/voice": {
+		filePath: "/workspace/nibras-code/src/routes/ar.voice.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.voice-DKCL6OXT.js"]
+	},
+	"/ar/wifi": {
+		filePath: "/workspace/nibras-code/src/routes/ar.wifi.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.wifi-BigIZYQ2.js"]
+	},
+	"/ar/workspace": {
+		filePath: "/workspace/nibras-code/src/routes/ar.workspace.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.workspace-BiGwVHo5.js", "/assets/workspace-m6u5aOeC.js"]
+	},
+	"/ar/xeta": {
+		filePath: "/workspace/nibras-code/src/routes/ar.xeta.tsx",
+		children: ["/ar/xeta/$slug"],
+		preloads: ["/assets/ar.xeta-D854xI7x.js", "/assets/search-pages-BOGJ-Hxp.js"]
+	},
+	"/ar/zip": {
+		filePath: "/workspace/nibras-code/src/routes/ar.zip.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.zip-CwJRvdhS.js", "/assets/zip-DAtFv9zh.js"]
+	},
+	"/en/about": {
+		filePath: "/workspace/nibras-code/src/routes/en.about.tsx",
+		children: void 0,
+		preloads: ["/assets/en.about-Bzi7cAfx.js"]
+	},
+	"/en/apps": {
+		filePath: "/workspace/nibras-code/src/routes/en.apps.tsx",
+		children: ["/en/apps/$slug"],
+		preloads: ["/assets/en.apps-CQ1Apm2u.js"]
+	},
+	"/en/contact": {
+		filePath: "/workspace/nibras-code/src/routes/en.contact.tsx",
+		children: void 0,
+		preloads: ["/assets/en.contact-DbZaJPUS.js"]
+	},
+	"/en/doctor": {
+		filePath: "/workspace/nibras-code/src/routes/en.doctor.tsx",
+		children: void 0,
+		preloads: ["/assets/en.doctor-Bj0AS2Eh.js", "/assets/doctor-BpMw1xe5.js"]
+	},
+	"/en/erase": {
+		filePath: "/workspace/nibras-code/src/routes/en.erase.tsx",
+		children: void 0,
+		preloads: ["/assets/en.erase-CBdS5a_J.js", "/assets/erase-page-DylM7TSU.js"]
+	},
+	"/en/error-help": {
+		filePath: "/workspace/nibras-code/src/routes/en.error-help.tsx",
+		children: void 0,
+		preloads: ["/assets/en.error-help-DOqnD_p3.js", "/assets/error-help-Ag4Bp1_a.js"]
+	},
+	"/en/faiz": {
+		filePath: "/workspace/nibras-code/src/routes/en.faiz.tsx",
+		children: void 0,
+		preloads: ["/assets/en.faiz-CkwAP_Hl.js"]
+	},
+	"/en/faq": {
+		filePath: "/workspace/nibras-code/src/routes/en.faq.tsx",
+		children: ["/en/faq/$slug"],
+		preloads: ["/assets/en.faq-nZcgHwGQ.js", "/assets/faq-page-Cl5QExW7.js"]
+	},
+	"/en/filecheck": {
+		filePath: "/workspace/nibras-code/src/routes/en.filecheck.tsx",
+		children: void 0,
+		preloads: ["/assets/en.filecheck-CkbyMA03.js", "/assets/filecheck-CxsInRuT.js"]
+	},
+	"/en/flow": {
+		filePath: "/workspace/nibras-code/src/routes/en.flow.tsx",
+		children: void 0,
+		preloads: ["/assets/en.flow-BvoRWBsF.js"]
+	},
+	"/en/image": {
+		filePath: "/workspace/nibras-code/src/routes/en.image.tsx",
+		children: void 0,
+		preloads: ["/assets/en.image-C_kTRQ2K.js"]
+	},
+	"/en/learn": {
+		filePath: "/workspace/nibras-code/src/routes/en.learn.tsx",
+		children: void 0,
+		preloads: ["/assets/en.learn-CFWuz_Lw.js", "/assets/learn-A93TfnwC.js"]
+	},
+	"/en/logic": {
+		filePath: "/workspace/nibras-code/src/routes/en.logic.tsx",
+		children: void 0,
+		preloads: ["/assets/en.logic-Be2P-v5E.js"]
+	},
+	"/en/mirror": {
+		filePath: "/workspace/nibras-code/src/routes/en.mirror.tsx",
+		children: void 0,
+		preloads: ["/assets/en.mirror-XtNOeTIv.js", "/assets/mirror-CBuux84c.js"]
+	},
+	"/en/movzu": {
+		filePath: "/workspace/nibras-code/src/routes/en.movzu.tsx",
+		children: ["/en/movzu/$slug"],
+		preloads: ["/assets/en.movzu-d_YNhs0l.js", "/assets/search-pages-BOGJ-Hxp.js"]
+	},
+	"/en/muqayise": {
+		filePath: "/workspace/nibras-code/src/routes/en.muqayise.tsx",
+		children: ["/en/muqayise/$slug"],
+		preloads: ["/assets/en.muqayise-s18yReh4.js", "/assets/learn-pages-DCn7CP4Q.js"]
+	},
+	"/en/nece": {
+		filePath: "/workspace/nibras-code/src/routes/en.nece.tsx",
+		children: ["/en/nece/$slug"],
+		preloads: ["/assets/en.nece-CbmxDoxV.js", "/assets/search-pages-BOGJ-Hxp.js"]
+	},
+	"/en/nedir": {
+		filePath: "/workspace/nibras-code/src/routes/en.nedir.tsx",
+		children: void 0,
+		preloads: ["/assets/en.nedir-WORf2zUB.js"]
+	},
+	"/en/oyun": {
+		filePath: "/workspace/nibras-code/src/routes/en.oyun.tsx",
+		children: ["/en/oyun/$slug"],
+		preloads: ["/assets/en.oyun-Bnw33DD1.js", "/assets/games-page-Byr5xtEI.js"]
+	},
+	"/en/paket": {
+		filePath: "/workspace/nibras-code/src/routes/en.paket.tsx",
+		children: void 0,
+		preloads: ["/assets/en.paket-CwolabAq.js", "/assets/paket-tool-hguc9rdL.js"]
+	},
+	"/en/pdf": {
+		filePath: "/workspace/nibras-code/src/routes/en.pdf.tsx",
+		children: void 0,
+		css: ["/assets/pdf-page-BN7vo2Xc.css"],
+		preloads: ["/assets/en.pdf-BHjwN-Pd.js", "/assets/pdf-page-Zyyj52VM.js"]
+	},
+	"/en/planner": {
+		filePath: "/workspace/nibras-code/src/routes/en.planner.tsx",
+		children: void 0,
+		preloads: ["/assets/en.planner-CiRV3JCp.js"]
+	},
+	"/en/qr": {
+		filePath: "/workspace/nibras-code/src/routes/en.qr.tsx",
+		children: void 0,
+		preloads: ["/assets/en.qr-D2tg7FuQ.js"]
+	},
+	"/en/schema": {
+		filePath: "/workspace/nibras-code/src/routes/en.schema.tsx",
+		children: void 0,
+		preloads: ["/assets/en.schema-Cwm_vc0x.js", "/assets/schema-Cx33iFKF.js"]
+	},
+	"/en/seo": {
+		filePath: "/workspace/nibras-code/src/routes/en.seo.tsx",
+		children: void 0,
+		preloads: ["/assets/en.seo-BYXa3J-k.js"]
+	},
+	"/en/services": {
+		filePath: "/workspace/nibras-code/src/routes/en.services.tsx",
+		children: void 0,
+		preloads: ["/assets/en.services-CX3A4Ic3.js"]
+	},
+	"/en/shortcuts": {
+		filePath: "/workspace/nibras-code/src/routes/en.shortcuts.tsx",
+		children: void 0,
+		preloads: ["/assets/en.shortcuts-LbU-a0pr.js", "/assets/shortcuts-CAqI-Dev.js"]
+	},
+	"/en/soz": {
+		filePath: "/workspace/nibras-code/src/routes/en.soz.tsx",
+		children: ["/en/soz/$slug"],
+		preloads: ["/assets/en.soz-BqF8ntYr.js", "/assets/search-pages-BOGJ-Hxp.js"]
+	},
+	"/en/soz-sayi": {
+		filePath: "/workspace/nibras-code/src/routes/en.soz-sayi.tsx",
+		children: void 0,
+		preloads: ["/assets/en.soz-sayi-BXgGqgPb.js"]
+	},
+	"/en/studio": {
+		filePath: "/workspace/nibras-code/src/routes/en.studio.tsx",
+		children: void 0,
+		preloads: ["/assets/en.studio-DRo_tRfq.js", "/assets/studio-suGhqXGa.js"]
+	},
+	"/en/terms": {
+		filePath: "/workspace/nibras-code/src/routes/en.terms.tsx",
+		children: void 0,
+		preloads: ["/assets/en.terms-CBc6soe1.js"]
+	},
+	"/en/tools": {
+		filePath: "/workspace/nibras-code/src/routes/en.tools.tsx",
+		children: ["/en/tools/$slug"],
+		preloads: ["/assets/en.tools-BsfYtvv5.js", "/assets/tools-page-CsnX6njO.js"]
+	},
+	"/en/tools-legal": {
+		filePath: "/workspace/nibras-code/src/routes/en.tools-legal.tsx",
+		children: void 0,
+		preloads: ["/assets/en.tools-legal-DIBeQe3T.js", "/assets/tools-legal-DTjxWx9e.js"]
+	},
+	"/en/trust": {
+		filePath: "/workspace/nibras-code/src/routes/en.trust.tsx",
+		children: void 0,
+		preloads: ["/assets/en.trust-BlK76uOD.js"]
+	},
+	"/en/unknown": {
+		filePath: "/workspace/nibras-code/src/routes/en.unknown.tsx",
+		children: void 0,
+		preloads: ["/assets/en.unknown-Dm9XHV_b.js"]
+	},
+	"/en/vcard": {
+		filePath: "/workspace/nibras-code/src/routes/en.vcard.tsx",
+		children: void 0,
+		preloads: ["/assets/en.vcard-CQ0TwPrq.js", "/assets/vcard-CE8HPlaT.js"]
+	},
+	"/en/video": {
+		filePath: "/workspace/nibras-code/src/routes/en.video.tsx",
+		children: void 0,
+		preloads: ["/assets/en.video-DnbdLM6z.js"]
+	},
+	"/en/voice": {
+		filePath: "/workspace/nibras-code/src/routes/en.voice.tsx",
+		children: void 0,
+		preloads: ["/assets/en.voice-BCrK5mY_.js"]
+	},
+	"/en/wifi": {
+		filePath: "/workspace/nibras-code/src/routes/en.wifi.tsx",
+		children: void 0,
+		preloads: ["/assets/en.wifi-BigIZYQ2.js"]
+	},
+	"/en/workspace": {
+		filePath: "/workspace/nibras-code/src/routes/en.workspace.tsx",
+		children: void 0,
+		preloads: ["/assets/en.workspace-BiGwVHo5.js", "/assets/workspace-m6u5aOeC.js"]
+	},
+	"/en/xeta": {
+		filePath: "/workspace/nibras-code/src/routes/en.xeta.tsx",
+		children: ["/en/xeta/$slug"],
+		preloads: ["/assets/en.xeta-DhSrbJjh.js", "/assets/search-pages-BOGJ-Hxp.js"]
+	},
+	"/en/zip": {
+		filePath: "/workspace/nibras-code/src/routes/en.zip.tsx",
+		children: void 0,
+		preloads: ["/assets/en.zip-CwJRvdhS.js", "/assets/zip-DAtFv9zh.js"]
+	},
+	"/ereb-dili/feil": {
+		filePath: "/workspace/nibras-code/src/routes/ereb-dili.feil.tsx",
+		children: ["/ereb-dili/feil/$slug"],
+		preloads: ["/assets/ereb-dili.feil-DiggRvSs.js", "/assets/arabic-verbs-Du8Oz2m4.js"]
+	},
+	"/faq/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/faq.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/faq._slug-r1RDs-u4.js"]
+	},
+	"/guides/$topic": {
+		filePath: "/workspace/nibras-code/src/routes/guides/$topic.tsx",
+		children: void 0,
+		preloads: ["/assets/_topic-M8RcsjKO.js", "/assets/library-page-BLO7REU3.js"]
+	},
+	"/hamisi/$group": {
+		filePath: "/workspace/nibras-code/src/routes/hamisi.$group.tsx",
+		children: void 0,
+		preloads: ["/assets/hamisi._group-DLgIudph.js"]
+	},
+	"/image_/$tool": {
+		filePath: "/workspace/nibras-code/src/routes/image_.$tool.tsx",
+		children: void 0,
+		preloads: ["/assets/image_._tool--WV0FpRb.js"]
+	},
+	"/learn_/logic": {
+		filePath: "/workspace/nibras-code/src/routes/learn_.logic.tsx",
+		children: void 0,
+		preloads: ["/assets/learn_.logic-BDpKyXnZ.js", "/assets/logiclab-LkPmK5NS.js"]
+	},
+	"/movzu/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/movzu.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/movzu._slug-0JIcsKcY.js"]
+	},
+	"/muqayise/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/muqayise.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/muqayise._slug-ieTp5XHo.js"]
+	},
+	"/nece/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/nece.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/nece._slug-q2BlcAxm.js"]
+	},
+	"/oyun/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/oyun.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/oyun._slug-B6sSB5jg.js"]
+	},
+	"/pdf_/$tool": {
+		filePath: "/workspace/nibras-code/src/routes/pdf_.$tool.tsx",
+		children: void 0,
+		css: ["/assets/pdf-page-BN7vo2Xc.css"],
+		preloads: ["/assets/pdf_._tool-DrTTEroQ.js", "/assets/pdf-page-Zyyj52VM.js"]
+	},
+	"/privacy/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/privacy/$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/_slug-BnoQXrhZ.js", "/assets/app-privacy-8HaRgBWR.js"]
+	},
+	"/privacy/nibras-note": {
+		filePath: "/workspace/nibras-code/src/routes/privacy.nibras-note.tsx",
+		children: void 0,
+		preloads: ["/assets/privacy.nibras-note-C4TvNcsu.js", "/assets/app-privacy-8HaRgBWR.js"]
+	},
+	"/privacy/nibras-pdf": {
+		filePath: "/workspace/nibras-code/src/routes/privacy.nibras-pdf.tsx",
+		children: void 0,
+		preloads: ["/assets/privacy.nibras-pdf-BkB8Pcnq.js", "/assets/app-privacy-8HaRgBWR.js"]
+	},
+	"/privacy/nibras-plans": {
+		filePath: "/workspace/nibras-code/src/routes/privacy.nibras-plans.tsx",
+		children: void 0,
+		preloads: ["/assets/privacy.nibras-plans-qyBhIXzY.js", "/assets/app-privacy-8HaRgBWR.js"]
+	},
+	"/privacy/nibras-scan": {
+		filePath: "/workspace/nibras-code/src/routes/privacy.nibras-scan.tsx",
+		children: void 0,
+		preloads: ["/assets/privacy.nibras-scan-BTWGIk4h.js", "/assets/app-privacy-8HaRgBWR.js"]
+	},
+	"/programming/$topic": {
+		filePath: "/workspace/nibras-code/src/routes/programming/$topic.tsx",
+		children: void 0,
+		preloads: [
+			"/assets/_topic-DGMoBXHz.js",
+			"/assets/library-page-BLO7REU3.js",
+			"/assets/course-page-B4Yb1674.js"
+		]
+	},
+	"/resurslar/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/resurslar/$slug.tsx",
+		children: void 0,
+		preloads: [
+			"/assets/_slug-EQNe2ftB.js",
+			"/assets/library-admin-lP4TwDay.js",
+			"/assets/resurs-page-CsfqMOdx.js"
+		]
+	},
+	"/ru/about": {
+		filePath: "/workspace/nibras-code/src/routes/ru.about.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.about-PxaSXOXn.js"]
+	},
+	"/ru/apps": {
+		filePath: "/workspace/nibras-code/src/routes/ru.apps.tsx",
+		children: ["/ru/apps/$slug"],
+		preloads: ["/assets/ru.apps-Cq3gg61R.js"]
+	},
+	"/ru/contact": {
+		filePath: "/workspace/nibras-code/src/routes/ru.contact.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.contact-DbZaJPUS.js"]
+	},
+	"/ru/doctor": {
+		filePath: "/workspace/nibras-code/src/routes/ru.doctor.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.doctor-Bj0AS2Eh.js", "/assets/doctor-BpMw1xe5.js"]
+	},
+	"/ru/erase": {
+		filePath: "/workspace/nibras-code/src/routes/ru.erase.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.erase-CBdS5a_J.js", "/assets/erase-page-DylM7TSU.js"]
+	},
+	"/ru/error-help": {
+		filePath: "/workspace/nibras-code/src/routes/ru.error-help.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.error-help-DOqnD_p3.js", "/assets/error-help-Ag4Bp1_a.js"]
+	},
+	"/ru/faiz": {
+		filePath: "/workspace/nibras-code/src/routes/ru.faiz.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.faiz-CkwAP_Hl.js"]
+	},
+	"/ru/faq": {
+		filePath: "/workspace/nibras-code/src/routes/ru.faq.tsx",
+		children: ["/ru/faq/$slug"],
+		preloads: ["/assets/ru.faq-CNkp51tr.js", "/assets/faq-page-Cl5QExW7.js"]
+	},
+	"/ru/filecheck": {
+		filePath: "/workspace/nibras-code/src/routes/ru.filecheck.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.filecheck-CkbyMA03.js", "/assets/filecheck-CxsInRuT.js"]
+	},
+	"/ru/flow": {
+		filePath: "/workspace/nibras-code/src/routes/ru.flow.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.flow-BvoRWBsF.js"]
+	},
+	"/ru/image": {
+		filePath: "/workspace/nibras-code/src/routes/ru.image.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.image-C_kTRQ2K.js"]
+	},
+	"/ru/learn": {
+		filePath: "/workspace/nibras-code/src/routes/ru.learn.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.learn-CFWuz_Lw.js", "/assets/learn-A93TfnwC.js"]
+	},
+	"/ru/logic": {
+		filePath: "/workspace/nibras-code/src/routes/ru.logic.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.logic-Be2P-v5E.js"]
+	},
+	"/ru/mirror": {
+		filePath: "/workspace/nibras-code/src/routes/ru.mirror.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.mirror-XtNOeTIv.js", "/assets/mirror-CBuux84c.js"]
+	},
+	"/ru/movzu": {
+		filePath: "/workspace/nibras-code/src/routes/ru.movzu.tsx",
+		children: ["/ru/movzu/$slug"],
+		preloads: ["/assets/ru.movzu-Coio0FCL.js", "/assets/search-pages-BOGJ-Hxp.js"]
+	},
+	"/ru/muqayise": {
+		filePath: "/workspace/nibras-code/src/routes/ru.muqayise.tsx",
+		children: ["/ru/muqayise/$slug"],
+		preloads: ["/assets/ru.muqayise-Cki9R4C9.js", "/assets/learn-pages-DCn7CP4Q.js"]
+	},
+	"/ru/nece": {
+		filePath: "/workspace/nibras-code/src/routes/ru.nece.tsx",
+		children: ["/ru/nece/$slug"],
+		preloads: ["/assets/ru.nece-BLNSHMIQ.js", "/assets/search-pages-BOGJ-Hxp.js"]
+	},
+	"/ru/nedir": {
+		filePath: "/workspace/nibras-code/src/routes/ru.nedir.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.nedir-WORf2zUB.js"]
+	},
+	"/ru/oyun": {
+		filePath: "/workspace/nibras-code/src/routes/ru.oyun.tsx",
+		children: ["/ru/oyun/$slug"],
+		preloads: ["/assets/ru.oyun-Bnw33DD1.js", "/assets/games-page-Byr5xtEI.js"]
+	},
+	"/ru/paket": {
+		filePath: "/workspace/nibras-code/src/routes/ru.paket.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.paket-CFmVfNMh.js", "/assets/paket-tool-hguc9rdL.js"]
+	},
+	"/ru/pdf": {
+		filePath: "/workspace/nibras-code/src/routes/ru.pdf.tsx",
+		children: void 0,
+		css: ["/assets/pdf-page-BN7vo2Xc.css"],
+		preloads: ["/assets/ru.pdf-BHjwN-Pd.js", "/assets/pdf-page-Zyyj52VM.js"]
+	},
+	"/ru/planner": {
+		filePath: "/workspace/nibras-code/src/routes/ru.planner.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.planner-CiRV3JCp.js"]
+	},
+	"/ru/qr": {
+		filePath: "/workspace/nibras-code/src/routes/ru.qr.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.qr-D2tg7FuQ.js"]
+	},
+	"/ru/schema": {
+		filePath: "/workspace/nibras-code/src/routes/ru.schema.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.schema-Cwm_vc0x.js", "/assets/schema-Cx33iFKF.js"]
+	},
+	"/ru/seo": {
+		filePath: "/workspace/nibras-code/src/routes/ru.seo.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.seo-BYXa3J-k.js"]
+	},
+	"/ru/services": {
+		filePath: "/workspace/nibras-code/src/routes/ru.services.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.services-DFO9GPar.js"]
+	},
+	"/ru/shortcuts": {
+		filePath: "/workspace/nibras-code/src/routes/ru.shortcuts.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.shortcuts-LbU-a0pr.js", "/assets/shortcuts-CAqI-Dev.js"]
+	},
+	"/ru/soz": {
+		filePath: "/workspace/nibras-code/src/routes/ru.soz.tsx",
+		children: ["/ru/soz/$slug"],
+		preloads: ["/assets/ru.soz-ClDq-C49.js", "/assets/search-pages-BOGJ-Hxp.js"]
+	},
+	"/ru/soz-sayi": {
+		filePath: "/workspace/nibras-code/src/routes/ru.soz-sayi.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.soz-sayi-BXgGqgPb.js"]
+	},
+	"/ru/studio": {
+		filePath: "/workspace/nibras-code/src/routes/ru.studio.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.studio-DRo_tRfq.js", "/assets/studio-suGhqXGa.js"]
+	},
+	"/ru/terms": {
+		filePath: "/workspace/nibras-code/src/routes/ru.terms.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.terms-CBc6soe1.js"]
+	},
+	"/ru/tools": {
+		filePath: "/workspace/nibras-code/src/routes/ru.tools.tsx",
+		children: ["/ru/tools/$slug"],
+		preloads: ["/assets/ru.tools-BGMNrAbI.js", "/assets/tools-page-CsnX6njO.js"]
+	},
+	"/ru/tools-legal": {
+		filePath: "/workspace/nibras-code/src/routes/ru.tools-legal.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.tools-legal-DIBeQe3T.js", "/assets/tools-legal-DTjxWx9e.js"]
+	},
+	"/ru/trust": {
+		filePath: "/workspace/nibras-code/src/routes/ru.trust.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.trust-BlK76uOD.js"]
+	},
+	"/ru/unknown": {
+		filePath: "/workspace/nibras-code/src/routes/ru.unknown.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.unknown-Dm9XHV_b.js"]
+	},
+	"/ru/vcard": {
+		filePath: "/workspace/nibras-code/src/routes/ru.vcard.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.vcard-CQ0TwPrq.js", "/assets/vcard-CE8HPlaT.js"]
+	},
+	"/ru/video": {
+		filePath: "/workspace/nibras-code/src/routes/ru.video.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.video-DnbdLM6z.js"]
+	},
+	"/ru/voice": {
+		filePath: "/workspace/nibras-code/src/routes/ru.voice.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.voice-D4KgKFwT.js"]
+	},
+	"/ru/wifi": {
+		filePath: "/workspace/nibras-code/src/routes/ru.wifi.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.wifi-BigIZYQ2.js"]
+	},
+	"/ru/workspace": {
+		filePath: "/workspace/nibras-code/src/routes/ru.workspace.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.workspace-BiGwVHo5.js", "/assets/workspace-m6u5aOeC.js"]
+	},
+	"/ru/xeta": {
+		filePath: "/workspace/nibras-code/src/routes/ru.xeta.tsx",
+		children: ["/ru/xeta/$slug"],
+		preloads: ["/assets/ru.xeta-f6EeGLlL.js", "/assets/search-pages-BOGJ-Hxp.js"]
+	},
+	"/ru/zip": {
+		filePath: "/workspace/nibras-code/src/routes/ru.zip.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.zip-CwJRvdhS.js", "/assets/zip-DAtFv9zh.js"]
+	},
+	"/soz/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/soz.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/soz._slug-Pluungo7.js"]
+	},
+	"/tools/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/tools.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/tools._slug-B-618_zi.js"]
+	},
+	"/tr/about": {
+		filePath: "/workspace/nibras-code/src/routes/tr.about.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.about-D3tnGJ_t.js"]
+	},
+	"/tr/apps": {
+		filePath: "/workspace/nibras-code/src/routes/tr.apps.tsx",
+		children: ["/tr/apps/$slug"],
+		preloads: ["/assets/tr.apps-QXGAGxbr.js"]
+	},
+	"/tr/contact": {
+		filePath: "/workspace/nibras-code/src/routes/tr.contact.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.contact-DbZaJPUS.js"]
+	},
+	"/tr/doctor": {
+		filePath: "/workspace/nibras-code/src/routes/tr.doctor.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.doctor-Bj0AS2Eh.js", "/assets/doctor-BpMw1xe5.js"]
+	},
+	"/tr/erase": {
+		filePath: "/workspace/nibras-code/src/routes/tr.erase.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.erase-CBdS5a_J.js", "/assets/erase-page-DylM7TSU.js"]
+	},
+	"/tr/error-help": {
+		filePath: "/workspace/nibras-code/src/routes/tr.error-help.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.error-help-DOqnD_p3.js", "/assets/error-help-Ag4Bp1_a.js"]
+	},
+	"/tr/faiz": {
+		filePath: "/workspace/nibras-code/src/routes/tr.faiz.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.faiz-CkwAP_Hl.js"]
+	},
+	"/tr/faq": {
+		filePath: "/workspace/nibras-code/src/routes/tr.faq.tsx",
+		children: ["/tr/faq/$slug"],
+		preloads: ["/assets/tr.faq-DKV_wWi4.js", "/assets/faq-page-Cl5QExW7.js"]
+	},
+	"/tr/filecheck": {
+		filePath: "/workspace/nibras-code/src/routes/tr.filecheck.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.filecheck-CkbyMA03.js", "/assets/filecheck-CxsInRuT.js"]
+	},
+	"/tr/flow": {
+		filePath: "/workspace/nibras-code/src/routes/tr.flow.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.flow-BvoRWBsF.js"]
+	},
+	"/tr/image": {
+		filePath: "/workspace/nibras-code/src/routes/tr.image.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.image-C_kTRQ2K.js"]
+	},
+	"/tr/learn": {
+		filePath: "/workspace/nibras-code/src/routes/tr.learn.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.learn-CFWuz_Lw.js", "/assets/learn-A93TfnwC.js"]
+	},
+	"/tr/logic": {
+		filePath: "/workspace/nibras-code/src/routes/tr.logic.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.logic-Be2P-v5E.js"]
+	},
+	"/tr/mirror": {
+		filePath: "/workspace/nibras-code/src/routes/tr.mirror.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.mirror-XtNOeTIv.js", "/assets/mirror-CBuux84c.js"]
+	},
+	"/tr/movzu": {
+		filePath: "/workspace/nibras-code/src/routes/tr.movzu.tsx",
+		children: ["/tr/movzu/$slug"],
+		preloads: ["/assets/tr.movzu-DycGBbrr.js", "/assets/search-pages-BOGJ-Hxp.js"]
+	},
+	"/tr/muqayise": {
+		filePath: "/workspace/nibras-code/src/routes/tr.muqayise.tsx",
+		children: ["/tr/muqayise/$slug"],
+		preloads: ["/assets/tr.muqayise-Bz8S_OA0.js", "/assets/learn-pages-DCn7CP4Q.js"]
+	},
+	"/tr/nece": {
+		filePath: "/workspace/nibras-code/src/routes/tr.nece.tsx",
+		children: ["/tr/nece/$slug"],
+		preloads: ["/assets/tr.nece-CXbq2UVZ.js", "/assets/search-pages-BOGJ-Hxp.js"]
+	},
+	"/tr/nedir": {
+		filePath: "/workspace/nibras-code/src/routes/tr.nedir.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.nedir-WORf2zUB.js"]
+	},
+	"/tr/oyun": {
+		filePath: "/workspace/nibras-code/src/routes/tr.oyun.tsx",
+		children: ["/tr/oyun/$slug"],
+		preloads: ["/assets/tr.oyun-Bnw33DD1.js", "/assets/games-page-Byr5xtEI.js"]
+	},
+	"/tr/paket": {
+		filePath: "/workspace/nibras-code/src/routes/tr.paket.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.paket-hPvNVaHe.js", "/assets/paket-tool-hguc9rdL.js"]
+	},
+	"/tr/pdf": {
+		filePath: "/workspace/nibras-code/src/routes/tr.pdf.tsx",
+		children: void 0,
+		css: ["/assets/pdf-page-BN7vo2Xc.css"],
+		preloads: ["/assets/tr.pdf-BHjwN-Pd.js", "/assets/pdf-page-Zyyj52VM.js"]
+	},
+	"/tr/planner": {
+		filePath: "/workspace/nibras-code/src/routes/tr.planner.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.planner-CiRV3JCp.js"]
+	},
+	"/tr/qr": {
+		filePath: "/workspace/nibras-code/src/routes/tr.qr.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.qr-D2tg7FuQ.js"]
+	},
+	"/tr/schema": {
+		filePath: "/workspace/nibras-code/src/routes/tr.schema.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.schema-Cwm_vc0x.js", "/assets/schema-Cx33iFKF.js"]
+	},
+	"/tr/seo": {
+		filePath: "/workspace/nibras-code/src/routes/tr.seo.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.seo-BYXa3J-k.js"]
+	},
+	"/tr/services": {
+		filePath: "/workspace/nibras-code/src/routes/tr.services.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.services-C2L0ico_.js"]
+	},
+	"/tr/shortcuts": {
+		filePath: "/workspace/nibras-code/src/routes/tr.shortcuts.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.shortcuts-LbU-a0pr.js", "/assets/shortcuts-CAqI-Dev.js"]
+	},
+	"/tr/soz": {
+		filePath: "/workspace/nibras-code/src/routes/tr.soz.tsx",
+		children: ["/tr/soz/$slug"],
+		preloads: ["/assets/tr.soz-CwVc5XbT.js", "/assets/search-pages-BOGJ-Hxp.js"]
+	},
+	"/tr/soz-sayi": {
+		filePath: "/workspace/nibras-code/src/routes/tr.soz-sayi.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.soz-sayi-BXgGqgPb.js"]
+	},
+	"/tr/studio": {
+		filePath: "/workspace/nibras-code/src/routes/tr.studio.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.studio-DRo_tRfq.js", "/assets/studio-suGhqXGa.js"]
+	},
+	"/tr/terms": {
+		filePath: "/workspace/nibras-code/src/routes/tr.terms.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.terms-CBc6soe1.js"]
+	},
+	"/tr/tools": {
+		filePath: "/workspace/nibras-code/src/routes/tr.tools.tsx",
+		children: ["/tr/tools/$slug"],
+		preloads: ["/assets/tr.tools-CjFfgmfj.js", "/assets/tools-page-CsnX6njO.js"]
+	},
+	"/tr/tools-legal": {
+		filePath: "/workspace/nibras-code/src/routes/tr.tools-legal.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.tools-legal-DIBeQe3T.js", "/assets/tools-legal-DTjxWx9e.js"]
+	},
+	"/tr/trust": {
+		filePath: "/workspace/nibras-code/src/routes/tr.trust.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.trust-BlK76uOD.js"]
+	},
+	"/tr/unknown": {
+		filePath: "/workspace/nibras-code/src/routes/tr.unknown.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.unknown-Dm9XHV_b.js"]
+	},
+	"/tr/vcard": {
+		filePath: "/workspace/nibras-code/src/routes/tr.vcard.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.vcard-CQ0TwPrq.js", "/assets/vcard-CE8HPlaT.js"]
+	},
+	"/tr/video": {
+		filePath: "/workspace/nibras-code/src/routes/tr.video.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.video-DnbdLM6z.js"]
+	},
+	"/tr/voice": {
+		filePath: "/workspace/nibras-code/src/routes/tr.voice.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.voice-Cqqo1lNm.js"]
+	},
+	"/tr/wifi": {
+		filePath: "/workspace/nibras-code/src/routes/tr.wifi.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.wifi-BigIZYQ2.js"]
+	},
+	"/tr/workspace": {
+		filePath: "/workspace/nibras-code/src/routes/tr.workspace.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.workspace-BiGwVHo5.js", "/assets/workspace-m6u5aOeC.js"]
+	},
+	"/tr/xeta": {
+		filePath: "/workspace/nibras-code/src/routes/tr.xeta.tsx",
+		children: ["/tr/xeta/$slug"],
+		preloads: ["/assets/tr.xeta-Bj1b1ORS.js", "/assets/search-pages-BOGJ-Hxp.js"]
+	},
+	"/tr/zip": {
+		filePath: "/workspace/nibras-code/src/routes/tr.zip.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.zip-CwJRvdhS.js", "/assets/zip-DAtFv9zh.js"]
+	},
+	"/video_/$tool": {
+		filePath: "/workspace/nibras-code/src/routes/video_.$tool.tsx",
+		children: void 0,
+		preloads: ["/assets/video_._tool-CSOd_M2y.js"]
+	},
+	"/xeta/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/xeta.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/xeta._slug-DVgWRVI3.js"]
+	},
+	"/apps/": {
+		filePath: "/workspace/nibras-code/src/routes/apps/index.tsx",
+		children: void 0,
+		preloads: ["/assets/apps-CGJx2BgD.js"]
+	},
+	"/guides/": {
+		filePath: "/workspace/nibras-code/src/routes/guides/index.tsx",
+		children: void 0,
+		preloads: ["/assets/guides-CJdzZwvH.js", "/assets/library-page-BLO7REU3.js"]
+	},
+	"/programming/": {
+		filePath: "/workspace/nibras-code/src/routes/programming/index.tsx",
+		children: void 0,
+		preloads: ["/assets/programming-K_gzi6_T.js", "/assets/library-page-BLO7REU3.js"]
+	},
+	"/resources/": {
+		filePath: "/workspace/nibras-code/src/routes/resources/index.tsx",
+		children: void 0,
+		preloads: ["/assets/resources-CMJgV_XD.js", "/assets/library-page-BLO7REU3.js"]
+	},
+	"/ar/apps/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/ar.apps.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.apps._slug-C-FA7MQ7.js"]
+	},
+	"/ar/faq/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/ar.faq.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.faq._slug-Blj-ByL9.js"]
+	},
+	"/ar/image_/$tool": {
+		filePath: "/workspace/nibras-code/src/routes/ar.image_.$tool.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.image_._tool-D6tI-QRI.js"]
+	},
+	"/ar/jami/$group": {
+		filePath: "/workspace/nibras-code/src/routes/ar.jami.$group.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.jami._group-DKcybXLF.js"]
+	},
+	"/ar/learn_/logic": {
+		filePath: "/workspace/nibras-code/src/routes/ar.learn_.logic.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.learn_.logic-BDpKyXnZ.js", "/assets/logiclab-LkPmK5NS.js"]
+	},
+	"/ar/movzu/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/ar.movzu.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.movzu._slug-B9-8K8Xj.js"]
+	},
+	"/ar/muqayise/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/ar.muqayise.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.muqayise._slug-Bph_KpU3.js"]
+	},
+	"/ar/nece/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/ar.nece.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.nece._slug-DswZupr8.js"]
+	},
+	"/ar/oyun/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/ar.oyun.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.oyun._slug-BQNriUCh.js"]
+	},
+	"/ar/pdf_/$tool": {
+		filePath: "/workspace/nibras-code/src/routes/ar.pdf_.$tool.tsx",
+		children: void 0,
+		css: ["/assets/pdf-page-BN7vo2Xc.css"],
+		preloads: ["/assets/ar.pdf_._tool-DJ23N8Vj.js", "/assets/pdf-page-Zyyj52VM.js"]
+	},
+	"/ar/programming/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/ar.programming.$slug.tsx",
+		children: void 0,
+		preloads: [
+			"/assets/ar.programming._slug-DcQ8IlBx.js",
+			"/assets/library-page-BLO7REU3.js",
+			"/assets/course-page-B4Yb1674.js"
+		]
+	},
+	"/ar/soz/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/ar.soz.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.soz._slug-DGLlOftu.js"]
+	},
+	"/ar/tools/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/ar.tools.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.tools._slug-Dc2Gvq-6.js"]
+	},
+	"/ar/video_/$tool": {
+		filePath: "/workspace/nibras-code/src/routes/ar.video_.$tool.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.video_._tool-CswW-xkR.js"]
+	},
+	"/ar/xeta/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/ar.xeta.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/ar.xeta._slug-Ga7Ow-hW.js"]
+	},
+	"/en/all/$group": {
+		filePath: "/workspace/nibras-code/src/routes/en.all.$group.tsx",
+		children: void 0,
+		preloads: ["/assets/en.all._group-ojyueUDZ.js"]
+	},
+	"/en/apps/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/en.apps.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/en.apps._slug-Cw_RuomI.js"]
+	},
+	"/en/faq/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/en.faq.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/en.faq._slug-PmQS32zp.js"]
+	},
+	"/en/image_/$tool": {
+		filePath: "/workspace/nibras-code/src/routes/en.image_.$tool.tsx",
+		children: void 0,
+		preloads: ["/assets/en.image_._tool-CfLDcBQS.js"]
+	},
+	"/en/learn_/logic": {
+		filePath: "/workspace/nibras-code/src/routes/en.learn_.logic.tsx",
+		children: void 0,
+		preloads: ["/assets/en.learn_.logic-BDpKyXnZ.js", "/assets/logiclab-LkPmK5NS.js"]
+	},
+	"/en/movzu/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/en.movzu.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/en.movzu._slug-CfMk55Xx.js"]
+	},
+	"/en/muqayise/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/en.muqayise.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/en.muqayise._slug-BZd7EyZG.js"]
+	},
+	"/en/nece/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/en.nece.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/en.nece._slug-Dr-Aqsor.js"]
+	},
+	"/en/oyun/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/en.oyun.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/en.oyun._slug-BWuDFsMW.js"]
+	},
+	"/en/pdf_/$tool": {
+		filePath: "/workspace/nibras-code/src/routes/en.pdf_.$tool.tsx",
+		children: void 0,
+		css: ["/assets/pdf-page-BN7vo2Xc.css"],
+		preloads: ["/assets/en.pdf_._tool-BcLQIFR9.js", "/assets/pdf-page-Zyyj52VM.js"]
+	},
+	"/en/programming/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/en.programming.$slug.tsx",
+		children: void 0,
+		preloads: [
+			"/assets/en.programming._slug-aZU4NvPv.js",
+			"/assets/library-page-BLO7REU3.js",
+			"/assets/course-page-B4Yb1674.js"
+		]
+	},
+	"/en/soz/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/en.soz.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/en.soz._slug-VHc1VI70.js"]
+	},
+	"/en/tools/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/en.tools.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/en.tools._slug-zQp83rE2.js"]
+	},
+	"/en/video_/$tool": {
+		filePath: "/workspace/nibras-code/src/routes/en.video_.$tool.tsx",
+		children: void 0,
+		preloads: ["/assets/en.video_._tool-Bj0Wzdct.js"]
+	},
+	"/en/xeta/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/en.xeta.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/en.xeta._slug-CNVwf0mT.js"]
+	},
+	"/ereb-dili/feil/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/ereb-dili.feil.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/ereb-dili.feil._slug-BCZ3DFFL.js"]
+	},
+	"/privacy/nibras-qr/delete-account": {
+		filePath: "/workspace/nibras-code/src/routes/privacy/nibras-qr.delete-account.tsx",
+		children: void 0,
+		preloads: ["/assets/nibras-qr.delete-account-CYDiPYkd.js", "/assets/app-privacy-8HaRgBWR.js"]
+	},
+	"/resources/$topic/$article": {
+		filePath: "/workspace/nibras-code/src/routes/resources/$topic/$article.tsx",
+		children: void 0,
+		preloads: ["/assets/_article-DeBQhjxb.js", "/assets/resurs-page-CsfqMOdx.js"]
+	},
+	"/ru/apps/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/ru.apps.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.apps._slug-CHMxetTN.js"]
+	},
+	"/ru/faq/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/ru.faq.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.faq._slug-DRNKGRPu.js"]
+	},
+	"/ru/image_/$tool": {
+		filePath: "/workspace/nibras-code/src/routes/ru.image_.$tool.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.image_._tool-7Iu5C2Up.js"]
+	},
+	"/ru/learn_/logic": {
+		filePath: "/workspace/nibras-code/src/routes/ru.learn_.logic.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.learn_.logic-BDpKyXnZ.js", "/assets/logiclab-LkPmK5NS.js"]
+	},
+	"/ru/movzu/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/ru.movzu.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.movzu._slug-B5U4yl5G.js"]
+	},
+	"/ru/muqayise/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/ru.muqayise.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.muqayise._slug-CxxdA4Jl.js"]
+	},
+	"/ru/nece/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/ru.nece.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.nece._slug-DiAR7bmu.js"]
+	},
+	"/ru/oyun/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/ru.oyun.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.oyun._slug-B3xUlRBa.js"]
+	},
+	"/ru/pdf_/$tool": {
+		filePath: "/workspace/nibras-code/src/routes/ru.pdf_.$tool.tsx",
+		children: void 0,
+		css: ["/assets/pdf-page-BN7vo2Xc.css"],
+		preloads: ["/assets/ru.pdf_._tool-D20VttUG.js", "/assets/pdf-page-Zyyj52VM.js"]
+	},
+	"/ru/programming/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/ru.programming.$slug.tsx",
+		children: void 0,
+		preloads: [
+			"/assets/ru.programming._slug-CPwh15zw.js",
+			"/assets/library-page-BLO7REU3.js",
+			"/assets/course-page-B4Yb1674.js"
+		]
+	},
+	"/ru/resources/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/ru.resources.$slug.tsx",
+		children: void 0,
+		preloads: [
+			"/assets/ru.resources._slug-R_U25bP3.js",
+			"/assets/library-admin-lP4TwDay.js",
+			"/assets/resurs-page-CsfqMOdx.js"
+		]
+	},
+	"/ru/soz/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/ru.soz.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.soz._slug-DETgGEZj.js"]
+	},
+	"/ru/tools/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/ru.tools.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.tools._slug-cN3TKeQ_.js"]
+	},
+	"/ru/video_/$tool": {
+		filePath: "/workspace/nibras-code/src/routes/ru.video_.$tool.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.video_._tool-CTYDIW8t.js"]
+	},
+	"/ru/vse/$group": {
+		filePath: "/workspace/nibras-code/src/routes/ru.vse.$group.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.vse._group-4qaD0WIz.js"]
+	},
+	"/ru/xeta/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/ru.xeta.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/ru.xeta._slug-P6vUy3Jo.js"]
+	},
+	"/tr/apps/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/tr.apps.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.apps._slug-CUyYjYU4.js"]
+	},
+	"/tr/faq/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/tr.faq.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.faq._slug-BU4dcLhC.js"]
+	},
+	"/tr/image_/$tool": {
+		filePath: "/workspace/nibras-code/src/routes/tr.image_.$tool.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.image_._tool-FRslbMUh.js"]
+	},
+	"/tr/learn_/logic": {
+		filePath: "/workspace/nibras-code/src/routes/tr.learn_.logic.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.learn_.logic-BDpKyXnZ.js", "/assets/logiclab-LkPmK5NS.js"]
+	},
+	"/tr/movzu/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/tr.movzu.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.movzu._slug-DQxDkCap.js"]
+	},
+	"/tr/muqayise/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/tr.muqayise.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.muqayise._slug-C3MfDWpX.js"]
+	},
+	"/tr/nece/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/tr.nece.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.nece._slug-DQGTWBPt.js"]
+	},
+	"/tr/oyun/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/tr.oyun.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.oyun._slug-CNQ79U-r.js"]
+	},
+	"/tr/pdf_/$tool": {
+		filePath: "/workspace/nibras-code/src/routes/tr.pdf_.$tool.tsx",
+		children: void 0,
+		css: ["/assets/pdf-page-BN7vo2Xc.css"],
+		preloads: ["/assets/tr.pdf_._tool-Cslk7Ln7.js", "/assets/pdf-page-Zyyj52VM.js"]
+	},
+	"/tr/programming/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/tr.programming.$slug.tsx",
+		children: void 0,
+		preloads: [
+			"/assets/tr.programming._slug-aUZ9eGml.js",
+			"/assets/library-page-BLO7REU3.js",
+			"/assets/course-page-B4Yb1674.js"
+		]
+	},
+	"/tr/soz/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/tr.soz.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.soz._slug-CwxqJVAO.js"]
+	},
+	"/tr/tools/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/tr.tools.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.tools._slug-CVxh1ngJ.js"]
+	},
+	"/tr/tumu/$group": {
+		filePath: "/workspace/nibras-code/src/routes/tr.tumu.$group.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.tumu._group-D-U4ql1O.js"]
+	},
+	"/tr/video_/$tool": {
+		filePath: "/workspace/nibras-code/src/routes/tr.video_.$tool.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.video_._tool-DHBl55OW.js"]
+	},
+	"/tr/xeta/$slug": {
+		filePath: "/workspace/nibras-code/src/routes/tr.xeta.$slug.tsx",
+		children: void 0,
+		preloads: ["/assets/tr.xeta._slug-DWqc1Vjt.js"]
+	},
+	"/resources/$topic/": {
+		filePath: "/workspace/nibras-code/src/routes/resources/$topic/index.tsx",
+		children: void 0,
+		preloads: ["/assets/_topic-BPvK9sNc.js", "/assets/library-page-BLO7REU3.js"]
+	}
+} });
+//#endregion
+export { tsrStartManifest };

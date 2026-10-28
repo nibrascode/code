@@ -1,0 +1,110 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/programming-python-qurasdir-Bq1uElOa.js
+var az = {
+	"about": ["Python, geniş istifadəçi bazasına malik, səthi səviyyəli proqramlaşdırma dilidir. Bu səhifə, Windows sistemində Python 3.14 versiyasının rəsmi quraşdırıcısı vasitəsilə düzgün qurulmasını izah edir. 3.15 versiyası yeni çıxdığı üçün, bəzi kitabxanalar üçün 3.14 daha uyğun ola bilər. Quraşdırma prosesi sadədir və əsas diqqət PATH dəyişəninə yönəldilir.", "Bu qılavuz, yeni başlayanlar və ya mövcud tərtibatını yeniləyən istifadəçilər üçün nəzərdə tutulub. Python, verilənlərin emalı, avtomatlaşdırma və veb proqramlaşdırması kimi sahələrdə geniş tətbiq olunur. Düzgün quraşdırma, terminalda 'python --version' əmri ilə yoxlanılır. Əgər əmr tanınmırsa, PATH seçiminin düzgün edildiyindən əmin olun və yeni terminal pəncərəsi açın."],
+	"steps": [
+		"python.org saytından Python 3.14 üçün 64-bit Windows quraşdırıcısını endirin.",
+		"Quraşdırma faylını işə salın və 'Add python.exe to PATH' seçiminin işarələnmiş olduğundan əmin olun.",
+		"'Install Now' düyməsinə basın və prosesin bitməsini gözləyin.",
+		"Yeni terminal pəncərəsi açın və 'python --version' əmrini yazaraq versiyayı yoxlayın."
+	],
+	"uses": [
+		"Verilənlərin təhlili və emalı üçün skriptlər hazırlamaq.",
+		"Veb serverləri və API-ləri qurmaq.",
+		"Fayl adlarını dəyişmək və ya kataloqları təşkil etmək üçün avtomatlaşdırma alətləri çıxarmaq.",
+		"Məktəbi və ya biznes proseslərini sadələşdirmək üçün xüsusi proqramlar hazırlamaq."
+	],
+	"faq": [
+		["Niyə 3.15 əvəzinə 3.14 quraşdırıram?", "3.15 bu ay çıxdı, lakin bəzi kitabxanalar hələ də 3.14 üçün uyğunlaşdırılmayıb. Yeni tərtibatlar üçün 3.14 daha stabildir və geniş dəstək alır."],
+		["Terminal 'python' əmrini tanımır, nə etməliyəm?", "Quraşdırma zamanı PATH seçiminin işarələnib-işarələnmədiyini yoxlayın. Əgər işarələnibsə, köhnə terminalı bağlayıb yeni bir pəncərə açın. Bu, dəyişikliklərin yüklənməsini təmin edir."],
+		["Python 3.12-dən fərqi nədir?", "Python 3.12 indi yalnız təhlükəsizlik düzəlişləri alır. Yeni layihələr üçün 3.14 tövsiyə olunur, çünki o, daha yeni xüsusiyyətlərə və aktiv dəstəyə malikdir."]
+	]
+};
+var en = {
+	"about": ["Python is a high-level programming language with a broad user base. This page explains how to correctly install Python 3.14 on Windows using the official installer. Since version 3.15 was released this month, 3.14 may be preferred if specific libraries are missing for the newer version. The installation process is straightforward, focusing primarily on ensuring the PATH variable is configured correctly.", "This guide is intended for beginners or users updating their existing setup. Python is widely applied in data processing, automation, and web development. Correct installation is verified by typing 'python --version' in the terminal. If the command is not recognized, ensure the PATH option was ticked during installation and open a new terminal window to refresh the environment."],
+	"steps": [
+		"Download the 64-bit Windows installer for Python 3.14 from python.org.",
+		"Run the installer and ensure the 'Add python.exe to PATH' option is checked.",
+		"Click 'Install Now' and wait for the process to complete.",
+		"Open a new terminal window and type 'python --version' to verify the installation."
+	],
+	"uses": [
+		"Creating scripts for data analysis and processing.",
+		"Building web servers and APIs.",
+		"Automating file renaming or directory organization tasks.",
+		"Developing custom tools to simplify educational or business processes."
+	],
+	"faq": [
+		["Why install 3.14 instead of 3.15?", "Version 3.15 was released this month, but some libraries may not yet support it. 3.14 is more stable and widely supported for new setups at this time."],
+		["The terminal does not recognize the 'python' command. What should I do?", "Verify that the PATH option was checked during installation. If it was, close the old terminal and open a new one. This ensures the system recognizes the new executable path."],
+		["How does it differ from Python 3.12?", "Python 3.12 now receives only security fixes. For new projects, 3.14 is recommended because it offers newer features and active maintenance support."]
+	]
+};
+var ru = {
+	"about": ["Python — высокоуровневый язык программирования с широкой базой пользователей. Эта страница объясняет, как правильно установить Python 3.14 на Windows с помощью официального установщика. Поскольку версия 3.15 вышла в этом месяце, 3.14 может быть предпочтительнее, если для новой версии отсутствуют некоторые библиотеки. Процесс установки прост и в основном сосредоточен на правильной настройке переменной PATH.", "Это руководство предназначено для начинающих или пользователей, обновляющих свою конфигурацию. Python широко применяется в обработке данных, автоматизации и веб-разработке. Корректная установка проверяется вводом 'python --version' в терминале. Если команда не распознана, убедитесь, что опция PATH была отмечена при установке, и откройте новое окно терминала."],
+	"steps": [
+		"Скачайте 64-битный установщик Windows для Python 3.14 с сайта python.org.",
+		"Запустите установщик и убедитесь, что отмечен пункт 'Add python.exe to PATH'.",
+		"Нажмите 'Install Now' и дождитесь завершения процесса.",
+		"Откройте новое окно терминала и введите 'python --version' для проверки."
+	],
+	"uses": [
+		"Создание скриптов для анализа и обработки данных.",
+		"Построение веб-серверов и API.",
+		"Автоматизация задач переименования файлов или организации каталогов.",
+		"Разработка инструментов для упрощения образовательных или бизнес-процессов."
+	],
+	"faq": [
+		["Почему устанавливать 3.14, а не 3.15?", "Версия 3.15 вышла в этом месяце, но некоторые библиотеки могут еще не поддерживать ее. 3.14 более стабильна и широко поддерживается для новых установок."],
+		["Терминал не распознает команду 'python'. Что делать?", "Проверьте, была ли отмечена опция PATH при установке. Если да, закройте старый терминал и откройте новый. Это гарантирует, что система распознает новый путь к исполняемому файлу."],
+		["Чем это отличается от Python 3.12?", "Python 3.12 теперь получает только исправления безопасности. Для новых проектов рекомендуется 3.14, так как она предлагает новые функции и активную поддержку."]
+	]
+};
+var ar = {
+	"about": ["بايثون هي لغة برمجة عالية المستوى تتمتع بقاعدة مستخدمين واسعة. توضح هذه الصفحة كيفية تثبيت بايثون 3.14 على ويندوز بشكل صحيح باستخدام المثبت الرسمي. نظرًا لأن الإصدار 3.15 صدر هذا الشهر، قد يكون 3.14 مفضلاً إذا كانت بعض المكتبات مفقودة في الإصدار الأحدث. عملية التثبيت بسيطة وتركز بشكل رئيسي على التأكد من متغير PATH بشكل صحيح.", "هذا الدليل مخصص للمبتدئين أو المستخدمين الذين يقومون بتحديث إعداداتهم الحالية. تُستخدم بايثون على نطاق واسع في معالجة البيانات والأتمتة وتطوير الويب. يتم التحقق من التثبيت الصحيح عن طريق كتابة 'python --version' في الطرفية. إذا لم يتم التعرف على الأمر، تأكد من تحديد خيار PATH أثناء التثبيت وافتح نافذة طرفية جديدة لتحديث البيئة."],
+	"steps": [
+		"قم بتنزيل مثبت ويندوز 64-بت لبايثون 3.14 من python.org.",
+		"شغل المثبت وتأكد من تحديد خيار 'Add python.exe to PATH'.",
+		"انقر على 'Install Now' وانتظر حتى تكتمل العملية.",
+		"افتح نافذة طرفية جديدة واكتب 'python --version' للتحقق من التثبيت."
+	],
+	"uses": [
+		"إنشاء سكربتات لتحليل ومعالجة البيانات.",
+		"بناء خوادم الويب وواجهات برمجة التطبيقات (APIs).",
+		"أتمتة مهام إعادة تسمية الملفات أو تنظيم المجلدات.",
+		"تطوير أدوات مخصصة لتبسيط العمليات التعليمية أو التجارية."
+	],
+	"faq": [
+		["لماذا أقوم بتثبيت 3.14 بدلاً من 3.15؟", "صدر الإصدار 3.15 هذا الشهر، لكن بعض المكتبات قد لا تدعمه بعد. الإصدار 3.14 أكثر استقرارًا ومدعومًا على نطاق أوسع للإعدادات الجديدة حاليًا."],
+		["لا تتعرف الطرفية على أمر 'python'. ماذا أفعل؟", "تحقق من أن خيار PATH تم تحديده أثناء التثبيت. إذا كان كذلك، أغلق الطرفية القديمة وافتح واحدة جديدة. هذا يضمن أن النظام يتعرف على مسار الملف التنفيذي الجديد."],
+		["كيف يختلف عن بايثون 3.12؟", "بايثون 3.12 تستقبل الآن فقط إصلاحات الأمان. يُنصح بالإصدار 3.14 للمشاريع الجديدة لأنها توفر ميزات جديدة ودعمًا نشطًا."]
+	]
+};
+var tr = {
+	"about": ["Python, geniş bir kullanıcı tabanına sahip yüksek seviyeli bir programlama dilidir. Bu sayfa, resmî kurulum programı kullanılarak Windows'ta Python 3.14'ün nasıl doğru yükleneceğini açıklar. 3.15 sürümü bu ay çıktığı için, bazı kütüphaneler yeni sürüm için eksikse 3.14 tercih edilebilir. Kurulum süreci basittir ve ağırlıklı olarak PATH değişkeninin doğru yapılandırılmasına odaklanır.", "Bu kılavuz, yeni başlayanlar veya mevcut kurulumlarını güncelleyen kullanıcılar için tasarlanmıştır. Python, veri işleme, otomasyon ve web geliştirme alanlarında yaygın olarak kullanılır. Doğru kurulum, terminalde 'python --version' yazılarak doğrulanır. Komut tanınmıyorsa, kurulum sırasında PATH seçeneğinin işaretlendiğinden emin olun ve ortamı yenilemek için yeni bir terminal penceresi açın."],
+	"steps": [
+		"python.org sitesinden Python 3.14 için 64-bit Windows kurulum programını indirin.",
+		"Kurulum programını çalıştırın ve 'Add python.exe to PATH' seçeneğinin işaretlendiğinden emin olun.",
+		"'Install Now' düğmesine tıklayın ve sürecin tamamlanmasını bekleyin.",
+		"Yeni bir terminal penceresi açın ve kurulumu doğrulamak için 'python --version' yazın."
+	],
+	"uses": [
+		"Veri analizi ve işleme için betikler hazırlamak.",
+		"Web sunucuları ve API'ler oluşturmak.",
+		"Dosya yeniden adlandırma veya dizin organizasyonu görevlerini otomatize etmek.",
+		"Eğitim veya iş süreçlerini basitleştirmek için özel araçlar geliştirmek."
+	],
+	"faq": [
+		["Neden 3.15 yerine 3.14 yüklüyorum?", "3.15 sürümü bu ay çıktı, ancak bazı kütüphaneler henüz onu desteklemeyebilir. 3.14 şu anda yeni kurulumlar için daha kararlı ve yaygın olarak desteklenmektedir."],
+		["Terminal 'python' komutunu tanımıyor. Ne yapmalıyım?", "Kurulum sırasında PATH seçeneğinin işaretlenip işaretlenmediğini doğrulayın. Eğer işaretlendiyse, eski terminali kapatıp yenisini açın. Bu, sistemin yeni yürütülebilir dosya yolunu tanımasını sağlar."],
+		["Python 3.12'den farkı nedir?", "Python 3.12 artık yalnızca güvenlik düzeltmeleri alıyor. Yeni projeler için 3.14 önerilir çünkü daha yeni özellikler ve aktif bakım desteği sunar."]
+	]
+};
+var programming_python_qurasdir_default = {
+	az,
+	en,
+	ru,
+	ar,
+	tr
+};
+//#endregion
+export { ar, az, programming_python_qurasdir_default as default, en, ru, tr };

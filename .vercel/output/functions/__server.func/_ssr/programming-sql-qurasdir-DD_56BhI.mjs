@@ -1,0 +1,110 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/programming-sql-qurasdir-DD_56BhI.js
+var az = {
+	"about": ["SQL verilənlər bazalarını idarə etmək və onlarla işləmək üçün istifadə olunan standart dildir. Bu dil vasitəsilə cədvəllər düzəltmək, məlumat əlavə etmək, onları yeniləmək və axtarmaq mümkündür. Veb səhifələr və tətbiqlər istifadəçi məlumatlarını, məhsulları və digər vacib qeydləri saxlamaq üçün məhz bu cür sistemlərə güvənirlər.", "İstifadəçilərə məlumat bazasını idarə etmək üçün xüsusi proqram təminatı lazımdır. Səhifədə göstərildiyi kimi, yeni quraşdırma üçün PostgreSQL 18 seçilməlidir. Quraşdırma zamanı şifrəni unutmamaq və portun yerində qalmasını təmin etmək vacibdir, çünki bu parametrlər sonrakı əlaqə üçün əsas rol oynayır."],
+	"steps": [
+		"Rəsmi veb saytdan Windows üçün PostgreSQL 18 quraşdırıcısını endirin.",
+		"Quraşdırma zamanı superuser şifrəsini yazın və onu mütləq yadda saxlayın.",
+		"Port sahəsini 5432 olaraq buraxın və Command Line Tools elementinin seçildiyini yoxlayın.",
+		"Qurulum bitdikdən sonra yeni terminal açın və versiyanı yoxlamaq üçün əmr daxil edin."
+	],
+	"uses": [
+		"Veb tətbiqlərində istifadəçi qeydiyyatı və məlumatlarını təhlükəsiz şəkildə saxlamaq üçün tətbiq edilir.",
+		"İnternet mağazalarında məhsul kataloqunu, qiymətləri və sifariş tarixçəsini idarə etmək üçün istifadə olunur.",
+		"Analitik sistemlərdə böyük həcmli rəqəmsal məlumatları süzgəcdən keçirmək və hesabat hazırlamaq üçün gərəklidir.",
+		"Faylın kifayət etdiyi sadə layihələrdə server tələb etməyən alternativlərdən yararlanmaq olar."
+	],
+	"faq": [
+		["Quraşdırma zamanı şifrəni unutsaq nə etməliyik?", "Quraşdırma zamanı daxil etdiyiniz superuser şifrəsini mütləq yadda saxlamalısınız, çünki sonrakı girişlər və verilənlər bazası əməliyyatları üçün bu məlumat tələb olunur."],
+		["Niyə köhnə versiya əvəzinə PostgreSQL 18 seçilməlidir?", "PostgreSQL 16 köhnəlmiş xətt hesab olunur. Hər hansı yeni quraşdırma üçün birbaşa 18 versiyasını götürmək tövsiyə edilir."],
+		["Əmr tanınmadıqda və ya simvollar səhv çıxdıqda nə etməli?", "Əgər sistem əmri tanımırsa və ya MySQL daxilində simvol sual işarəsinə çevrilirsə, terminal tənzimləmələrini və daxil edilən simvolların kodlaşdırmasını yoxlamaq lazımdır."]
+	]
+};
+var en = {
+	"about": ["SQL is a standard language used to manage and interact with relational databases. Through this language, it is possible to create tables, insert data, update records, and query information. Web pages and applications rely on such database management systems to store user details, products, and other critical records safely.", "Users need specialized software to handle database operations on their computers. As shown on the page, PostgreSQL 18 should be chosen for a new setup. During installation, it is crucial to keep the password you type and leave the default port, as these parameters establish the foundation for subsequent connections."],
+	"steps": [
+		"Open the official downloads page and get version 18 from the Windows installer.",
+		"Type a superuser password during the setup process and keep it secure.",
+		"Leave the network port at 5432 and ensure Command Line Tools remain selected.",
+		"When the setup ends, open a new terminal and type the version check command."
+	],
+	"uses": [
+		"Applied in web applications to store user registration details and account profiles securely.",
+		"Used in e-commerce platforms to manage product catalogs, pricing details, and order histories.",
+		"Required in analytical systems to filter large volumes of digital records and generate reports.",
+		"Utilized in lightweight projects where a single file is enough and a separate server is not needed."
+	],
+	"faq": [
+		["What should I do with the password typed during setup?", "Keep the password you type during setup in a safe place, as it acts as your superuser credential for accessing the database later."],
+		["Why choose version 18 instead of older releases?", "PostgreSQL 16 is an older line. For any new setup, you should take version 18 to ensure you are using the current standard."],
+		["How do I verify that the installation was successful?", "After the setup ends, open a new terminal and type the version verification command to ensure the answer starts with 18."]
+	]
+};
+var ru = {
+	"about": ["SQL — это стандартный язык, используемый для управления реляционными базами данных и работы с ними. С помощью этого языка можно создавать таблицы, добавлять данные, обновлять записи и выполнять поиск информации. Веб-страницы и приложения полагаются на подобные системы управления для надежного хранения пользовательских данных и записей.", "Для работы с базами данных пользователям требуется специальное программное обеспечение. Как указано на странице, для новой установки следует выбрать PostgreSQL 18. Во время установки важно сохранить введенный пароль и оставить порт по умолчанию, так как эти параметры необходимы для дальнейших подключений и работы с системой."],
+	"steps": [
+		"Перейдите на страницу загрузки для Windows и получите версию 18 из установщика.",
+		"Введите пароль суперпользователя во время настройки и сохраните его.",
+		"Оставьте сетевой порт 5432 и убедитесь, что инструменты командной строки выбраны.",
+		"Когда установка завершится, откройте новый терминал и введите команду проверки."
+	],
+	"uses": [
+		"Применяется в веб-приложениях для безопасного хранения данных учетных записей пользователей.",
+		"Используется в интернет-магазинах для управления каталогами товаров и историей заказов.",
+		"Требуется в аналитических системах для фильтрации больших объемов цифровых записей.",
+		"Используется в простых проектах, где достаточно одного файла и не нужен отдельный сервер."
+	],
+	"faq": [
+		["Что делать с паролем, введенным во время установки?", "Обязательно сохраните пароль, который вы вводите во время настройки, так как он служит учетными данными суперпользователя для доступа к базе данных."],
+		["Почему стоит выбрать версию 18, а не более старые?", "PostgreSQL 16 — это более старая линия. Для новой настройки рекомендуется выбрать версию 18."],
+		["Как проверить успешность установки в терминале?", "После завершения настройки откройте новый терминал и введите команду проверки версии. Ответ должен начинаться с числа 18."]
+	]
+};
+var ar = {
+	"about": ["لغة الاستعلام الهيكلية (SQL) هي اللغة القياسية المستخدمة لإدارة قواعد البيانات العلائقية والتفاعل معها. من خلال هذه اللغة، يصبح من الممكن إنشاء الجداول، وإدراج البيانات، وتحديث السجلات، والاستعلام عن المعلومات. تعتمد صفحاتเว็บ والتطبيقات على هذه الأنظمة لتخزين بيانات المستخدمين والمنتجات والسجلات الهامة بشكل آمن.", "يحتاج المستخدمون إلى برامج متخصصة للتعامل مع عمليات قواعد البيانات على أجهزتهم. كما هو موضح في الصفحة، يجب اختيار PostgreSQL 18 لإعداد جديد. أثناء التثبيت، من الضروري الاحتفاظ بكلمة المرور التي تكتبها وترك المنفذ الافتراضي، حيث تشكل هذه المعلمات الأساس للاتصالات اللاحقة."],
+	"steps": [
+		"افتح صفحة تنزيل ويندوز واحصل على الإصدار 18 من برنامج التثبيت.",
+		"اكتب كلمة مرور المستخدم الخارق أثناء الإعداد واحتفظ بها.",
+		"اترك منفذ الشبكة على 5432 وتأكد من تحديد أدوات سطر الأوامر.",
+		"عندما ينتهي الإعداد، افتح طرفية جديدة واكتب أمر التحقق من الإصدار."
+	],
+	"uses": [
+		"تستخدم في تطبيقات الويب لتخزين تفاصيل تسجيل المستخدمين وبيانات الحسابات بشكل آمن.",
+		"تُستعمل في منصات التجارة الإلكترونية لإدارة كتالوجات المنتجات وتفاصيل الأسعار وسجلات الطلبات.",
+		"مطلوبة في الأنظمة التحليلية لتصفية أحجام كبيرة من البيانات الرقمية وإنشاء التقارير.",
+		"تُستخدم في المشاريع البسيطة حيث يكون ملف واحد كافياً ولا حاجة لخادم منفصل."
+	],
+	"faq": [
+		["ماذا يجب أن أفعل بكلمة المرور المكتوبة أثناء الإعداد؟", "احتفظ بكلمة المرور التي تكتبها أثناء الإعداد، لأنها بمثابة بيانات اعتماد المستخدم الخارق للوصول إلى قاعدة البيانات لاحقاً."],
+		["لماذا يجب اختيار الإصدار 18 بدلاً من الإصدارات القديمة؟", "يعتبر PostgreSQL 16 خطاً قديماً. لأي إعداد جديد، يجب عليك اختيار الإصدار 18 لضمان استخدام المعيار الحالي."],
+		["كيف أتحقق من نجاح التثبيت في الطرفية؟", "بعد انتهاء الإعداد، افتح طرفية جديدة واكتب أمر التحقق من الإصدار للتأكد من أن الإجابة تبدأ بالرقم 18."]
+	]
+};
+var tr = {
+	"about": ["SQL, ilişkisel veritabanlarını yönetmek ve bunlarla etkileşim kurmak için kullanılan standart bir dildir. Bu dil aracılığıyla tablolar oluşturmak, veri eklemek, kayıtları güncellemek ve bilgi sorgulamak mümkündür. Web sayfaları ve uygulamalar, kullanıcı detaylarını, ürünleri ve diğer kritik kayıtları güvenli bir şekilde saklamak için bu tür veritabanı sistemlerine güvenir.", "Kullanıcıların bilgisayarlarında veritabanı işlemlerini yürütmek için özel bir yazılıma ihtiyacı vardır. Sayfada belirtildiği gibi, yeni bir kurulum için PostgreSQL 18 seçilmelidir. Kurulum sırasında yazdığınız şifreyi unutmamanız ve portu olduğu gibi bırakmanız esastır, çünkü bu parametreler sonraki bağlantılar için temel oluşturur."],
+	"steps": [
+		"Resmi sayfadan Windows yükleyicisini açın ve 18 numaralı sürümü indirin.",
+		"Kurulum işlemi sırasında bir süper kullanıcı şifresi yazın ve bunu saklayın.",
+		"Ağ bağlantı noktasını 5432'de bırakın ve Komut Satırı Araçlarının seçili olduğundan emin olun.",
+		"Kurulum bittiğinde yeni bir terminal açın ve sürüm kontrol komutunu girin."
+	],
+	"uses": [
+		"Web uygulamalarında kullanıcı kayıt detaylarını ve hesap profillerini güvenli şekilde saklamak için uygulanır.",
+		"E-ticaret platformlarında ürün kataloglarını, fiyat detaylarını ve sipariş geçmişini yönetmek için kullanılır.",
+		"Analitik sistemlerde büyük hacimli dijital kayıtları filtrelemek ve raporlar üretmek için gereklidir.",
+		"Tek bir dosyanın yettiği ve ayrı bir sunucuya ihtiyaç duyulmayan hafif projelerde değerlendirilir."
+	],
+	"faq": [
+		["Kurulum sırasında yazdığımız şifreye ne yapmalıyız?", "Kurulum sırasında yazdığınız süper kullanıcı şifresini mutlaka saklayın, çünkü daha sonra veritabanına erişmek için bu kimlik bilgisi gerekecektir."],
+		["Neden eski sürümler yerine 18 sürümü seçilmelidir?", "PostgreSQL 16 daha eski bir seridir. Herhangi bir yeni kurulum için doğrudan 18 sürümünü almanız önerilir."],
+		["Kurulumun başarılı olduğunu terminalde nasıl doğrularım?", "Kurulum bittiğinde yeni bir terminal açın ve sürüm komutunu yazın. Verilen cevabın 18 ile başladığını kontrol edin."]
+	]
+};
+var programming_sql_qurasdir_default = {
+	az,
+	en,
+	ru,
+	ar,
+	tr
+};
+//#endregion
+export { ar, az, programming_sql_qurasdir_default as default, en, ru, tr };

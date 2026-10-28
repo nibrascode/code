@@ -1,0 +1,1 @@
+import{t as e}from"./vcard-dbo-doOp.js";var t=e;export{t as component};

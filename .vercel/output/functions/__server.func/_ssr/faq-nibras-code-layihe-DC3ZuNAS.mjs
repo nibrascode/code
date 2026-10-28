@@ -1,0 +1,110 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/faq-nibras-code-layihe-DC3ZuNAS.js
+var az = {
+	"about": ["Nibras Code böyük bir şirkət deyil, faydalı ideyaları tətbiqlərə çevirmək məqsədilə başlanmış müstəqil bir şəxsi layihədir. Bu layihə çərçivəsində istifadəçilərin müxtəlif rəqəmsal ehtiyaclarını ödəmək üçün fərqli proqramlar və alətlər hazırlanır. İnsanlar gündəlik işlərini asanlaşdırmaq, məlumatları idarə etmək və ya müəyyən tapşırıqları həll etmək üçün bu tətbiqlərə ehtiyac duyurlar.", "Layihənin mahiyyəti rəqəmsal mühitdə sadə, anlaşıqlı və funksional vasitələr təqdim etməkdən ibarətdir. Müstəqil yanaşma sayəsində hər bir tətbiq konkret istifadəçi tələblərinə uyğunlaşdırılır. Texnoloji ideyaların reallaşdırılması prosesi asan və əlçatan şəkildə həyata keçirilir, bu da istifadəçilərə gündəlik fəaliyyətlərində rahatlıq qazandırır."],
+	"steps": [
+		"Sayta daxil olaraq mövcud tətbiqlərin siyahısını nəzərdən keçirin.",
+		"Maraqlandığınız proqram haqqında məlumatları oxuyun.",
+		"Tətbiqi uyğun mənbədən və ya platformadan endirin.",
+		"Proqramı quraşdıraraq təyinatı üzrə istifadə etməyə başlayın."
+	],
+	"uses": [
+		"Gündəlik rəqəmsal tapşırıqları idarə etmək üçün proqram vasitələrindən istifadə olunur.",
+		"Müxtəlif məlumatları oxumaq və ya emal etmək üçün xüsusi tətbiqlər seçilir.",
+		"Faydalı ideyaların tətbiq olunduğu proqramlarla iş prosesi sadələşdirilir.",
+		"Şəxsi layihə çərçivəsində yaradılmış rəqəmsal alətlərdən faydalanılır."
+	],
+	"faq": [
+		["Nibras Code şirkətdirmi?", "Xeyir, Nibras Code böyük bir şirkət deyil. O, faydalı ideyaları tətbiqlərə çevirmək məqsədilə başlanmış müstəqil bir şəxsi layihədir."],
+		["Nibras Code nədir?", "Nibras Code müxtəlif tətbiqlərin, o cümlədən Nibras Arabic, Nibras PDF, Nibras Plans, Nibras Docs, Nibras AI, Nibras Dev, Nibras Apk, Nibras QR kimi proqramların və xidmətlərin təqdim olunduğu müstəqil şəxsi layihədir."],
+		["Tətbiqləri haradan əldə etmək olar?", "İstifadəçilər saytdakı məlumatlara əsaslanaraq müvafiq tətbiqləri təlimatlara uyğun olaraq müvafiq mənbələrdən endirə bilərlər."]
+	]
+};
+var en = {
+	"about": ["Nibras Code is not a large company. It is an independent personal project started to turn useful ideas into apps. Within this project, various digital tools and applications are developed to meet specific user needs. People need such applications when they want to simplify digital tasks, handle information efficiently, or solve everyday problems using software solutions.", "The underlying concept of the project is to provide simple, understandable, and functional utilities in the digital environment. Being an independent personal initiative allows for a focused approach to turning ideas into working apps. This helps users access practical solutions designed to address specific requirements in their daily routines without unnecessary complexity."],
+	"steps": [
+		"Browse the site to view the list of available apps and services.",
+		"Select the specific application you want to explore.",
+		"Find the download link or source provided for the app.",
+		"Install the application and start using it for your tasks."
+	],
+	"uses": [
+		"Users access specialized apps to manage daily digital activities efficiently.",
+		"People utilize software tools to process documents and information easily.",
+		"Individuals explore independent applications designed to fulfill specific functional needs.",
+		"Users benefit from software solutions created out of useful personal project ideas."
+	],
+	"faq": [
+		["Is Nibras Code a company?", "No. Nibras Code is not a large company. It is an independent personal project started to turn useful ideas into apps."],
+		["What is Nibras Code?", "Nibras Code is an independent personal project that creates and hosts various apps and services, including Nibras Arabic, Nibras PDF, Nibras Plans, Nibras Docs, Nibras AI, Nibras Dev, Nibras Apk, and Nibras QR."],
+		["Where can I download an app?", "You can find the download locations and options provided directly on the Nibras Code website for each specific application."]
+	]
+};
+var ru = {
+	"about": ["Nibras Code — это не крупная компания. Это независимый личный проект, созданный для превращения полезных идей в приложения. В рамках этого проекта разрабатываются различные программные инструменты и утилиты, предназначенные для решения конкретных задач пользователей. Люди нуждаются в таких приложениях, когда хотят упростить повседневные цифровые действия и эффективно работать с информацией.", "Основная концепция проекта заключается в предоставлении простых, понятных и функциональных цифровых инструментов. Независимый характер проекта позволяет сосредоточиться на реализации полезных идей в виде удобных приложений. Это помогает пользователям находить практичные программные решения для своих повседневных нужд без лишней сложности."],
+	"steps": [
+		"Посетите сайт, чтобы ознакомиться со списком доступных приложений.",
+		"Выберите интересующее вас программное обеспечение на страницах сайта.",
+		"Найдите указанное место для загрузки выбранного приложения.",
+		"Установите программу и начните использовать ее по назначению."
+	],
+	"uses": [
+		"Пользователи обращаются к специализированным приложениям для выполнения повседневных задач.",
+		"Люди используют цифровые инструменты для удобной работы с текстовой и информационной средой.",
+		"Применяются программные решения, созданные на основе практичных идей независимого разработчика.",
+		"Осуществляется поиск и загрузка утилит для удовлетворения конкретных технологических потребностей."
+	],
+	"faq": [
+		["Является ли Nibras Code компанией?", "Нет. Nibras Code — это не крупная компания. Это независимый личный проект, начатый для превращения полезных идей в приложения."],
+		["Что такое Nibras Code?", "Nibras Code — это независимый личный проект, объединяющий различные приложения и сервисы, такие как Nibras Arabic, Nibras PDF, Nibras Plans, Nibras Docs, Nibras AI, Nibras Dev, Nibras Apk и Nibras QR."],
+		["Где можно скачать приложение?", "Вы можете найти информацию о загрузке каждого конкретного приложения непосредственно на страницах сайта Nibras Code."]
+	]
+};
+var ar = {
+	"about": ["نبراس كود ليس شركة كبرى. إنه مشروع شخصي مستقل بدأ لتحويل الأفكار المفيدة إلى تطبيقات. ضمن هذا المشروع، يتم تطوير أدوات وبرمجيات رقمية متنوعة لتلبية احتياجات المستخدمين المحددة. يحتاج الناس إلى هذه التطبيقات عندما يرغبون في تبسيط المهام الرقمية اليومية، أو إدارة المعلومات، أو حل المشكلات باستخدام حلول برمجية.", "المفهوم الأساسي للمشروع هو توفير أدوات رقمية بسيطة ومفهومة وعملية. يتيح الطبيعة المستقلة للمشروع التركيز على تحويل الأفكار إلى تطبيقات عملية مفيدة. يساعد ذلك المستخدمين في الوصول إلى حلول مصممة خصيصاً لتلبية متطلبات محددة في روتينهم اليومي دون تعقيد غيرจำเป็น."],
+	"steps": [
+		"تصفح الموقع الإلكتروني للاطلاع على قائمة التطبيقات المتاحة.",
+		"اختر التطبيق أو الخدمة التي ترغب في معرفة المزيد عنها.",
+		"ابحث عن مكان التنزيل أو المصدر المخصص للتطبيق.",
+		"قم بتثبيت التطبيق وابدأ في استخدامه لإنجاز مهامك."
+	],
+	"uses": [
+		"يستخدم الأفراد التطبيقات المتخصصة لإدارة الأنشطة الرقمية اليومية بكفاءة.",
+		"يستفيد المستخدمون من الأدوات البرمجية لمعالجة النصوص والمعلومات بسهولة.",
+		"يتم الاعتماد على تطبيقات مستقلة مصممة لتحقيق احتياجات وظيفية محددة.",
+		"يستفيد الناس من حلول برمجية نشأت من أفكار مشروع شخصي مفيد."
+	],
+	"faq": [
+		["هل نبراس كود شركة؟", "لا. نبراس كود ليس شركة كبرى. إنه مشروع شخصي مستقل بدأ لتحويل الأفكار المفيدة إلى تطبيقات."],
+		["ما هو نبراس كود؟", "نبراس كود هو مشروع شخصي مستقل يضم تطبيقات وخدمات متعددة مثل نبراس للعربية، ونبراس PDF، ونبراس للخطط، ونبراس المستندات، ونبراس الذكاء الاصطناعي، وغيرها."],
+		["أين يمكنني تنزيل التطبيق؟", "يمكنك معرفة مواقع التنزيل والروابط المتاحة لكل تطبيق محدد من خلال تصفح موقع نبراس كود."]
+	]
+};
+var tr = {
+	"about": ["Nibras Code büyük bir şirket değildir. Faydalı fikirleri uygulamalara dönüştürmek amacıyla başlatılmış bağımsız bir kişisel projedir. Bu proje kapsamında, kullanıcıların belirli dijital ihtiyaçlarını karşılamak için çeşitli yazılım araçları ve programlar geliştirilmektedir. İnsanlar günlük işlerini basitleştirmek, bilgileri yönetmek veya belirli görevleri çözmek için bu uygulamalara ihtiyaç duyar.", "Projenin temel amacı, dijital ortamda basit, anlaşılır ve işlevsel araçlar sunmaktır. Bağımsız kişisel bir girişim olması, fikirlerin somut uygulamalara dönüştürülmesinde odaklanmış bir yaklaşım izlenmesini sağlar. Bu sayede kullanıcılar, günlük rutinlerindeki belirli gereksinimleri karşılamak üzere tasarlanmış pratik çözümlere kolayca erişebilir."],
+	"steps": [
+		"Mevcut uygulamaların listesini görmek için siteyi ziyaret edin.",
+		"İncelemek istediğiniz belirli uygulamayı seçin.",
+		"Uygulama için sağlanan indirme kaynağını veya bağlantısını bulun.",
+		"Uygulamayı yükleyin ve amacına uygun olarak kullanmaya başlayın."
+	],
+	"uses": [
+		"Kullanıcılar günlük dijital etkinlikleri yönetmek için özel uygulamalardan yararlanır.",
+		"İnsanlar bilgileri ve belgeleri kolayca işlemek amacıyla yazılım araçlarını kullanır.",
+		"Bireyler, belirli işlevsel ihtiyaçları karşılamak için tasarlanmış bağımsız uygulamaları keşfeder.",
+		"Faydalı kişisel proje fikirlerinden doğan yazılım çözümlerinden faydalanılır."
+	],
+	"faq": [
+		["Nibras Code bir şirket mi?", "Hayır. Nibras Code büyük bir şirket değildir. Faydalı fikirleri uygulamalara dönüştürmek amacıyla başlatılmış bağımsız bir kişisel projedir."],
+		["Nibras Code nedir?", "Nibras Code; Nibras Arabic, Nibras PDF, Nibras Plans, Nibras Docs, Nibras AI, Nibras Dev, Nibras Apk ve Nibras QR gibi çeşitli uygulamaları barındıran bağımsız bir kişisel projedir."],
+		["Bir uygulamayı nereden indirebilirim?", "Uygulamaları indirmek için gereken yerleri ve seçenekleri doğrudan Nibras Code web sitesinde bulabilirsiniz."]
+	]
+};
+var faq_nibras_code_layihe_default = {
+	az,
+	en,
+	ru,
+	ar,
+	tr
+};
+//#endregion
+export { ar, az, faq_nibras_code_layihe_default as default, en, ru, tr };

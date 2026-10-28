@@ -1,0 +1,110 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/soz-dongu-nedir-BQaZGzN7.js
+var az = {
+	"about": ["Dövr (loop) proqramlaşdırmada eyni əməliyyatı dəfələrlə yerinə yetirmək üçün istifadə olunan mexanizmdir. Bu, kodun təkrar yazılmasının qarşısını alır və iş prosesini avtomatlaşdırır. Məsələn, on şəhərin hava məlumatını əllə daxil etmək əvəzinə, dövr vasitəsilə siyahını gəzib məlumatları avtomatik emal etmək mümkündür.", "Proqramçılar məlumat toplusu ilə işləyərkən və ya müəyyən şərt ödənilənə qədər prosesi davam etdirmək istədikdə dövrlərdən istifadə edirlər. 'for' dövrü siyahı üzrə hərəkət edir, 'while' isə şərt doğru qaldıqca işləyir. Şərt heç vaxt dəyişməzsə, proqram sonsuz dövrə düşür və dayanmır."],
+	"steps": [
+		"Dövrün növünü seçin: for və ya while.",
+		"İşləyəcək kod blokunu müəyyən edin.",
+		"Siyahını və ya şərti daxil edin.",
+		"Dövrün bitməsi üçün şərti dəyişin."
+	],
+	"uses": [
+		"Siyahıdakı bütün elementləri bir-bir oxumaq.",
+		"Məlumat bazasındakı qeydləri tək-tək emal etmək.",
+		"İstifadəçi düzgün məlumat daxil edənə qədər sorğunu təkrarlamaq.",
+		"Rəqəmlər silsiləsini avtomatik hesablamaq."
+	],
+	"faq": [
+		["Sonsuz dövr nədir?", "Sonsuz dövr, şərtin heç vaxt yanlış olmadığı və ya dəyişmədiyi hallarda baş verir. Bu zaman proqram dayanmadan eyni əməliyyatı icra edir və sistemin donmasına səbəb ola bilər."],
+		["for və while arasındakı fərq nədir?", "for dövrü adətən siyahı və ya müəyyən sayda element üzərində hərəkət etmək üçün istifadə olunur. while dövrü isə müəyyən bir şərt doğru olduğu müddətcə işləməyə davam edir."],
+		["Dövrü necə dayandırmaq olar?", "Dövrün dayanması üçün onun şərtini yanlış edən bir dəyişiklik etmək lazımdır. Əgər şərt heç vaxt dəyişmirsə, dövr sonsuza qədər davam edəcək və proqramı dayandırmaq çətinləşəcək."]
+	]
+};
+var en = {
+	"about": ["A loop is a programming structure that repeats a specific block of code until a condition is met or a list is exhausted. Instead of writing repetitive lines of code, such as manually entering weather data for ten different cities, a loop allows the computer to process the entire list efficiently.", "Developers use loops when they need to perform the same task multiple times. The 'for' loop is typically used to iterate through a list, while the 'while' loop continues as long as a specific condition remains true. If the condition never changes, the loop becomes an infinite loop, causing the program to run indefinitely."],
+	"steps": [
+		"Choose the loop type: for or while.",
+		"Define the block of code to repeat.",
+		"Set the list or the condition.",
+		"Ensure the condition can eventually become false."
+	],
+	"uses": [
+		"Iterating through items in a list.",
+		"Processing database records one by one.",
+		"Repeating a prompt until valid input is received.",
+		"Performing calculations on a series of numbers."
+	],
+	"faq": [
+		["What is an infinite loop?", "An infinite loop occurs when the loop's condition never becomes false. Because the condition remains true, the program continues to execute the same code block forever, which can cause the application to hang."],
+		["How do for and while differ?", "The 'for' loop is designed to walk through a list of items, running a set number of times. The 'while' loop is designed to watch a condition and runs as long as it is true."],
+		["How do I stop a loop?", "To stop a loop, you must ensure that the condition being watched eventually becomes false. If you do not update the condition within the loop, the program will stay stuck in that process."]
+	]
+};
+var ru = {
+	"about": ["Цикл — это программная конструкция, которая повторяет одну и ту же задачу до тех пор, пока список не закончится или условие остается истинным. Вместо того чтобы вручную вводить данные о погоде для десяти городов, вы используете цикл, чтобы пройти по списку и обработать каждый элемент автоматически.", "Разработчики используют циклы для выполнения повторяющихся действий. Цикл 'for' проходит по списку, а цикл 'while' следит за условием. Если условие никогда не становится ложным, цикл никогда не заканчивается. Это называется бесконечным циклом, из-за которого программа может зависнуть, так как она не может выйти из процесса."],
+	"steps": [
+		"Выберите тип цикла: for или while.",
+		"Определите блок кода для повторения.",
+		"Укажите список или условие.",
+		"Измените условие, чтобы цикл завершился."
+	],
+	"uses": [
+		"Перебор всех элементов в списке.",
+		"Обработка записей из базы данных по очереди.",
+		"Повторение запроса до получения верного ввода.",
+		"Выполнение расчетов для ряда чисел."
+	],
+	"faq": [
+		["Что такое бесконечный цикл?", "Бесконечный цикл возникает, когда условие цикла никогда не становится ложным. В результате программа продолжает выполнять один и тот же код бесконечно, что может привести к зависанию приложения."],
+		["В чем разница между for и while?", "Цикл 'for' предназначен для прохода по списку элементов. Цикл 'while' следит за состоянием условия и продолжает работу до тех пор, пока это условие остается истинным."],
+		["Как остановить цикл?", "Чтобы остановить цикл, необходимо изменить условие так, чтобы оно стало ложным. Если вы не меняете условие внутри цикла, программа останется в нем навсегда."]
+	]
+};
+var ar = {
+	"about": ["الحلقة (Loop) هي بنية برمجية تكرر نفس المهمة حتى تنتهي القائمة أو يظل الشرط صحيحاً. بدلاً من كتابة بيانات الطقس لعشر مدن يدوياً، يمكنك استخدام الحلقة للمرور عبر القائمة ومعالجة البيانات تلقائياً، مما يوفر الوقت ويقلل من تكرار الكود البرمجي بشكل غير ضروري.", "يستخدم المبرمجون الحلقات عندما يحتاجون إلى تنفيذ نفس الإجراء عدة مرات. حلقة 'for' تمر عبر قائمة، بينما تراقب حلقة 'while' شرطاً معيناً. إذا لم يتغير الشرط أبداً، فلن تنتهي الحلقة، وهو ما يعرف بالحلقة اللانهائية التي تجعل البرنامج عالقاً في نفس النقطة."],
+	"steps": [
+		"اختر نوع الحلقة: for أو while.",
+		"حدد كتلة الكود المراد تكرارها.",
+		"أدخل القائمة أو الشرط المطلوب.",
+		"تأكد من تغيير الشرط لإنهاء الحلقة."
+	],
+	"uses": [
+		"المرور عبر جميع العناصر في قائمة.",
+		"معالجة سجلات قاعدة البيانات واحداً تلو الآخر.",
+		"تكرار طلب إدخال حتى يتم الحصول على بيانات صحيحة.",
+		"إجراء حسابات على سلسلة من الأرقام."
+	],
+	"faq": [
+		["ما هي الحلقة اللانهائية؟", "تحدث الحلقة اللانهائية عندما لا يصبح شرط الحلقة خاطئاً أبداً. نظراً لأن الشرط يظل صحيحاً، يستمر البرنامج في تنفيذ نفس الكود إلى الأبد، مما قد يؤدي إلى توقف البرنامج عن الاستجابة."],
+		["ما الفرق بين for و while؟", "تُستخدم حلقة 'for' للمرور عبر قائمة من العناصر. أما حلقة 'while' فهي تراقب شرطاً معيناً وتستمر في العمل طالما أن هذا الشرط يظل صحيحاً."],
+		["كيف يمكن إيقاف الحلقة؟", "لإيقاف الحلقة، يجب عليك التأكد من أن الشرط الذي تتم مراقبته يصبح خاطئاً في مرحلة ما. إذا لم تقم بتغيير الشرط داخل الحلقة، فسيظل البرنامج عالقاً في تلك العملية."]
+	]
+};
+var tr = {
+	"about": ["Döngü (loop), bir liste bitene veya bir koşul doğru kaldığı sürece aynı işi tekrarlayan bir programlama yapısıdır. On şehrin hava durumunu elle girmek yerine, bir liste üzerinde döngü kullanarak verileri otomatik olarak işleyebilirsiniz. Bu yöntem, kodun gereksiz yere tekrarlanmasını önler ve iş akışını verimli hale getirir.", "Yazılımcılar aynı işlemi defalarca yapmaları gerektiğinde döngüleri kullanırlar. 'for' döngüsü bir liste üzerinde gezinirken, 'while' döngüsü bir koşulu izler. Eğer koşul hiç değişmezse, döngü asla bitmez. Buna sonsuz döngü denir ve bu durumda program aynı noktada takılı kalarak çalışmaya devam eder."],
+	"steps": [
+		"Döngü türünü seçin: for veya while.",
+		"Tekrarlanacak kod bloğunu belirleyin.",
+		"Listeyi veya koşulu tanımlayın.",
+		"Döngünün bitmesi için koşulu değiştirin."
+	],
+	"uses": [
+		"Listedeki tüm öğeleri tek tek okumak.",
+		"Veritabanındaki kayıtları sırayla işlemek.",
+		"Doğru giriş alınana kadar soruyu tekrarlamak.",
+		"Sayılar dizisi üzerinde hesaplama yapmak."
+	],
+	"faq": [
+		["Sonsuz döngü nedir?", "Sonsuz döngü, döngü koşulunun hiçbir zaman yanlış olmadığı durumlarda ortaya çıkar. Koşul doğru kaldığı sürece program aynı kodu sürekli çalıştırır, bu da uygulamanın donmasına neden olabilir."],
+		["for ve while arasındaki fark nedir?", "for döngüsü genellikle bir liste üzerinde gezinmek için kullanılır. while döngüsü ise belirli bir koşulu izler ve koşul doğru olduğu sürece çalışmaya devam eder."],
+		["Döngüyü nasıl durdurabilirim?", "Döngüyü durdurmak için izlenen koşulu yanlış yapacak bir değişiklik yapmanız gerekir. Eğer koşulu döngü içinde güncellemezseniz, program o süreçte takılı kalacaktır."]
+	]
+};
+var soz_dongu_nedir_default = {
+	az,
+	en,
+	ru,
+	ar,
+	tr
+};
+//#endregion
+export { ar, az, soz_dongu_nedir_default as default, en, ru, tr };

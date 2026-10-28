@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-CKeovgl0.js";import{t}from"./useRouterState-BXlZ-I8r.js";import{Ir as n,Wt as r,Xt as i}from"./index-C7SfPi0Z.js";var a=e();function o(){return t({select:e=>e.location.pathname}).replace(/\/$/,``)===`/ar/apps`?(0,a.jsx)(i,{apps:r.useLoaderData().apps}):(0,a.jsx)(n,{})}export{o as component};

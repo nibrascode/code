@@ -1,0 +1,1 @@
+import{t as e}from"./schema-DSEv16Kg.js";var t=e;export{t as component};

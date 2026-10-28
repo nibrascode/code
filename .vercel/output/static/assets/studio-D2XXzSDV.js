@@ -1,0 +1,1 @@
+import{t as e}from"./studio-BBtGRLGS.js";var t=e;export{t as component};

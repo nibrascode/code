@@ -1,0 +1,110 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/soz-deyisen-nedir-bBd3U1UU.js
+var az = {
+	"about": ["Proqramlaşdırmada dəyişən məlumat parçasının adını daşıyır. Adı yerində qalır, lakin içindəki qiymət dəyişə bilər. Məsələn, city = \"Baku\" yazdıqda Bakı həmin ad altında saxlanılır, daha sonra city = \"Ganja\" əmri köhnə qiyməti əvəz edir. Adı bir dəfə seçir, sonra həmin ad vasitəsilə oxuyursunuz. Adın içində heç bir boşluq ola bilməz.", "Dəyişən xüsusi bir qutuya bənzəyir, üzərində adı yazılıb və içərisində qiymət oturur. Eyni ada yeni qiymət yazdıqda köhnə qiymət silinir. İnsanlar proqramda təkrar istifadə olunan məlumatları saxlamaq və idarə etmək üçün buna ehtiyac duyurlar, çünki bu yanaşma kodun oxunmasını və yenilənməsini asanlaşdırır."],
+	"steps": [
+		"Dəyişən üçün boşluqsuz ad seçin.",
+		"Bərabərlik işarəsindən istifadə edərək qiymət təyin edin.",
+		"Lazım olduqda dəyişənin adını çağıraraq onun içindəki məlumatı oxuyun.",
+		"Eyni ada yeni qiymət yazaraq əvvəlki qiyməti əvəz edin."
+	],
+	"uses": [
+		"İstifadəçinin daxil etdiyi şəhər adını yadda saxlamaq üçün istifadə olunur.",
+		"Proqramın icrası zamanı dəyişən hesablamaları saxlamaq üçün tətbiq edilir.",
+		"Keçici məlumatları saxlamaqla kodu daha səliqəli etməyə kömək edir.",
+		"Qiyməti yeniləmək lazım gəldikdə eyni addan yenidən faydalanmağa imkan verir."
+	],
+	"faq": [
+		["Dəyişən nədir?", "Dəyişən məlumat parçasının adıdır. Onun adı sabit qalır, lakin içindəki qiymət zamanla dəyişə bilər."],
+		["Dəyişən adında boşluq ola bilərmi?", "Xeyr, dəyişən adının içində heç bir boşluq ola bilməz. Adlar bitişik yazılmalıdır."],
+		["Köhnə qiymətə nə olur?", "Eyni ada yeni qiymət yazdıqda, həmin əməliyyat köhnə qiyməti tamamilə aradan qaldırır."]
+	]
+};
+var en = {
+	"about": ["In programming, a variable is the name of a piece of data. The name stays, and the value inside can change. For instance, city = \"Baku\" stores Baku under that name, and later city = \"Ganja\" replaces the old value. You choose the name once, then read it by that name. The name has no space inside it.", "A variable is like a box where the name is written on the box and the value sits inside. Writing to the same name again removes the old value. People need variables to store, track, and update dynamic information efficiently while running software applications without repeating raw data."],
+	"steps": [
+		"Choose a name for your data without any spaces inside.",
+		"Assign an initial value to that name using the equals sign.",
+		"Read or reference the data later simply by calling its name.",
+		"Replace the old value by writing a new value to the same name."
+	],
+	"uses": [
+		"Storing user settings or profile details like a city name.",
+		"Tracking changing values during a program execution.",
+		"Updating temporary states easily without redefining new logic.",
+		"Managing text and numbers cleanly through named containers."
+	],
+	"faq": [
+		["What is a variable?", "A variable is the name of a piece of data. Its name remains the same, but the value stored inside can change over time."],
+		["Can a variable name contain spaces?", "No, a variable name cannot contain any spaces inside it. Words must be combined without separation."],
+		["What happens to the old value?", "Writing a new value to the exact same name completely removes the old value from that container."]
+	]
+};
+var ru = {
+	"about": ["В программировании переменная представляет собой имя для определенного фрагмента данных. Имя остается прежним, а значение внутри может меняться. Например, city = \"Baku\" сохраняет значение под этим именем, а последующая запись city = \"Ganja\" заменяет старое значение. Вы выбираете имя один раз и затем обращаетесь к нему по этому имени. Внутри имени не должно быть пробелов.", "Переменная похожа на коробку, на которой написано ее имя, а внутри находится само значение. Запись нового значения под тем же именем удаляет старое. Программистам это нужно для временного хранения, изменения и удобного управления различными данными в ходе работы кода."],
+	"steps": [
+		"Выберите имя для данных без пробелов внутри.",
+		"Присвойте этому имени начальное значение.",
+		"Читайте сохраненную информацию позже, используя выбранное имя.",
+		"Замените старое значение, записав новое под тем же именем."
+	],
+	"uses": [
+		"Хранение текущего названия города или текстовых настроек.",
+		"Обновление значений по мере выполнения программы.",
+		"Управление числовыми и текстовыми данными через понятные имена.",
+		"Удаление устаревшей информации путем перезаписи переменной."
+	],
+	"faq": [
+		["Что такое переменная?", "Переменная — это имя участка данных. Имя остается неизменным, тогда как хранящееся внутри значение может изменяться."],
+		["Может ли имя содержать пробелы?", "Нет, имя переменной не должно содержать пробелов внутри себя. Все символы пишутся слитно."],
+		["Куда девается старое значение?", "При повторной записи значения в ту же переменную старое значение полностью стирается."]
+	]
+};
+var ar = {
+	"about": ["في البرمجة، المتغير هو اسم لقطعة من البيانات. يبقى الاسم ثابتاً بينما يمكن للقيمة الموجودة بداخله أن تتغير. على سبيل المثال، تخزن city = \"Baku\" مدينة باكو تحت هذا الاسم، وبعد ذلك يقوم city = \"Ganja\" باستبدال القيمة القديمة. أنت تختار الاسم مرة واحدة ثم تقرأه بهذا الاسم ولا يُسمح بوجود مسافات داخله.", "يشبه المتغير صندوقاً كُتب عليه الاسم في الخارج بينما توضع القيمة في الداخل. تؤدي كتابة قيمة جديدة بنفس الاسم إلى إزالة القيمة القديمة تماماً. يحتاج المبرمجون إلى المتغيرات لتخزين وتتبع وتحديث المعلومات المختلفة أثناء تشغيل التعليمات البرمجية دون تكرار."],
+	"steps": [
+		"اختر اسماً لبياناتك بدون أي مسافات داخله.",
+		"قم بتعيين قيمة أولية لهذا الاسم.",
+		"اقرأ البيانات لاحقاً من خلال استدعاء اسمها.",
+		"استبدل القيمة القديمة بكتابة قيمة جديدة بنفس الاسم."
+	],
+	"uses": [
+		"تخزين وتحديث اسم المدينة أو تفضيلات المستخدم.",
+		"تتبع القيم المتغيرة أثناء تنفيذ البرنامج.",
+		"الاحتفاظ بالبيانات المؤقتة للرجوع إليها لاحقاً.",
+		"إدارة النصوص والأرقام بطريقة منظمة عبر الحاويات المسماة."
+	],
+	"faq": [
+		["ما هو المتغير؟", "المتغير هو اسم لقطعة من البيانات. يظل اسمه كما هو بينما يمكن للقيمة الموجودة بداخله أن تتغير بمرور الوقت."],
+		["هل يمكن أن يحتوي اسم المتغير على مسافات؟", "لا، يجب ألا يحتوي اسم المتغير على أي مسافات بداخله بل يُكتب متصلاً."],
+		["ماذا يحدث للقيمة القديمة؟", "تؤدي كتابة قيمة جديدة لنفس الاسم تماماً إلى إزالة القيمة القديمة واستبدالها بالجديدة."]
+	]
+};
+var tr = {
+	"about": ["Programlamada değişken, bir veri parçasının adıdır. İsim aynı kalır ancak içerisindeki değer değişebilir. Örneğin, city = \"Baku\" ifadesi ile Baku bu ad altında saklanır, daha sonra city = \"Ganja\" komutu eski değeri değiştirir. Adı bir kez seçersiniz ve ardından bu ad aracılığıyla okursunuz. İsmin içinde hiçbir boşluk olamaz.", "Değişken, üzerinde adı yazan ve içinde değer barındıran bir kutuya benzer. Aynı ada tekrar yazma işlemi eski değeri ortadan kaldırır. İnsanlar, yazılım geliştirirken verileri saklamak, izlemek ve gerektiğinde kolayca güncellemek için değişkenlere ihtiyaç duyarlar."],
+	"steps": [
+		"İçinde boşluk barındırmayan bir değişken adı seçin.",
+		"Eşittir işareti yardımıyla bu ada bir değer atayın.",
+		"İhtiyaç duyduğunuzda değişkenin adını çağırarak veriyi okuyun.",
+		"Aynı ada yeni bir değer yazarak eski veriyi güncelleyin."
+	],
+	"uses": [
+		"Kullanıcının seçtiği şehir adını hafızada tutmak için kullanılır.",
+		"Program çalışırken değişen sayısal veya metinsel değerleri izler.",
+		"Verileri düzenli bir şekilde saklayarak kodun yönetimini kolaylaştırır.",
+		"Gerektiğinde aynı adı kullanarak eski değeri yenisiyle değiştirir."
+	],
+	"faq": [
+		["Değişken nedir?", "Değişken bir veri parçasının adıdır. Adı sabit kalır, fakat içerisindeki değer zamanla değiştirilebilir."],
+		["Değişken adında boşluk bulunabilir mi?", "Hayır, değişken adının içinde kesinlikle boşluk olamaz. Kelimeler bitişik yazılmalıdır."],
+		["Eski değere ne olur?", "Aynı ada yeni bir değer yazıldığında, önceki değer tamamen ortadan kalkar ve yerini yeni değere bırakır."]
+	]
+};
+var soz_deyisen_nedir_default = {
+	az,
+	en,
+	ru,
+	ar,
+	tr
+};
+//#endregion
+export { ar, az, soz_deyisen_nedir_default as default, en, ru, tr };

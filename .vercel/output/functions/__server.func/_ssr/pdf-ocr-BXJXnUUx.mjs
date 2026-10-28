@@ -1,0 +1,145 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/pdf-ocr-BXJXnUUx.js
+var az = {
+	"about": [
+		"OCR PDF (PDF tool) nibrascode.com saytında təqdim olunan pulsuz veb alətdir və Nibras PDF Android tətbiqinin veb versiyasıdır. Bu alət istənilən PDF səhifələrindən mətni birbaşa cihazınızda tanımaq və çıxarmaq üçün nəzərdə tutulub. Xidmətdən istifadə etmək üçün heç bir hesab açmaq tələb olunmur və bütün proseslər birbaşa brauzerdə həyata keçirilir.",
+		"Bu funksiya skan edilmiş sənədlərdən, şəkillərdən ibarət PDF fayllarından mətn oxumaq lazım gəldikdə çox faydalıdır. Optik simvol tanıma texnologiyası vizual olaraq çəkilmiş hərfləri rəqəmsal mətnə çevirir. Fayllarınız cihazınızı tərk etmədən emal olunduğu üçün məxfiliyiniz tam qorunur və heç bir məlumat kənar serverlərə göndərilmir.",
+		"Faylı seçin və ya səhifəyə sürükləyin.",
+		"Sənədin yüklənməsini və sistem tərəfindən oxunmasını gözləyin.",
+		"Tanınmış mətni nəzərdən keçirin.",
+		"Nəticəni cihazınıza endirin və ya kopyalayın."
+	],
+	"steps": [
+		"Faylı seçin və ya səhifəyə sürükləyin.",
+		"Sənədin yüklənməsini və sistem tərəfindən oxunmasını gözləyin.",
+		"Tanınmış mətni nəzərdən keçirin.",
+		"Nəticəni cihazınıza endirin və ya kopyalayın."
+	],
+	"uses": [
+		"Skan edilmiş kitab səhifələrindən mətni kopyalana bilən formata çevirmək üçün istifadə olunur.",
+		"Şəkil formatında olan sənədlərdən mətni oxumaq zərurəti yarandıqda kömək edir.",
+		"Arxivdəki köhnə PDF fayllarındakı məlumatları rəqəmsal olaraq əldə etməyə imkan verir.",
+		"Kağız sənədin rəqəmsal nüsxəsindən sitat götürmək istədikdə əlverişlidir."
+	],
+	"faq": [
+		["Bu alətdən istifadə etmək üçün ödəniş etmək lazımdırmı?", "Xeyr, bu alət tamamilə pulsuzdur və heç bir ödəniş tələb etmir."],
+		["Fayllarım təhlükəsizdirmi? Onlar serverə yüklənirmi?", "Bəli, fayllarınız tamamilə təhlükəsizdir. Bütün proseslər birbaşa brauzerdə həyata keçirilir və sənədlər cihazınızı tərk etmir."],
+		["Xidmətdən istifadə etmək üçün qeydiyyatdan keçmək tələb olunurmu?", "Xeyr, heç bir hesab açmaq və ya qeydiyyatdan keçmək lazım deyil, birbaşa istifadə edə bilərsiniz."]
+	]
+};
+var en = {
+	"about": [
+		"OCR PDF (PDF tool) is a free web utility available on nibrascode.com and serves as the web version of a tool from the Nibras PDF Android app. It is designed to recognize text from PDF pages directly on your device. The service requires no account and operates entirely without server uploads for document processing.",
+		"This utility is necessary when you need to extract readable text from scanned documents, images, or non-searchable PDF files. The underlying concept relies on optical character recognition, analyzing page pixels within the browser to identify letter shapes and convert them into editable digital text. Because processing happens locally, your files never leave your device.",
+		"Select your PDF file from your device storage.",
+		"Wait for the document to load into the browser.",
+		"Allow the on-device tool to process and recognize the page text.",
+		"Review the extracted text and copy or save the result."
+	],
+	"steps": [
+		"Select your PDF file from your device storage.",
+		"Wait for the document to load into the browser.",
+		"Allow the on-device tool to process and recognize the page text.",
+		"Review the extracted text and copy or save the result."
+	],
+	"uses": [
+		"Extracting searchable text from scanned paper documents stored as PDF files.",
+		"Reading text content from image-based PDF pages without manual typing.",
+		"Converting old scanned invoices or contracts into editable digital text.",
+		"Copying specific paragraphs from non-selectable academic PDF papers."
+	],
+	"faq": [
+		["Is this PDF tool completely free to use?", "Yes, the tool is entirely free to use directly in your web browser without hidden costs."],
+		["Are my files uploaded to any external server during processing?", "No, all files are processed locally in your browser and never leave your device, ensuring total privacy."],
+		["Do I need to register or create an account to use this service?", "No account or registration is required to access and use the OCR PDF tool on the website."]
+	]
+};
+var ru = {
+	"about": [
+		"OCR PDF (PDF tool) — это бесплатный веб-инструмент на сайте nibrascode.com, представляющий собой веб-версию функции из Android-приложения Nibras PDF. Он предназначен для распознавания текста со страниц PDF прямо на вашем устройстве. Сервис бесплатен, не требует создания учетной записи, а все файлы обрабатываются непосредственно в браузере.",
+		"Данный инструмент необходим, когда вам нужно извлечь читаемый текст из отсканированных документов или PDF-файлов, содержащих изображения. Основная концепция заключается в локальном оптическом распознавании символов, которое анализирует визуальное содержимое страниц в браузере. Поскольку файлы обрабатываются локально, они не покидают ваше устройство.",
+		"Выберите или перетащите ваш PDF-файл в область загрузки.",
+		"Дождитесь загрузки документа в браузер.",
+		"Подождите, пока система распознает текст на страницах.",
+		"Скопируйте или сохраните полученный результат."
+	],
+	"steps": [
+		"Выберите или перетащите ваш PDF-файл в область загрузки.",
+		"Дождитесь загрузки документа в браузер.",
+		"Подождите, пока система распознает текст на страницах.",
+		"Скопируйте или сохраните полученный результат."
+	],
+	"uses": [
+		"Извлечение текста из отсканированных бумажных документов для дальнейшего редактирования.",
+		"Чтение содержимого со страниц PDF, состоящих из изображений.",
+		"Получение цифрового текста из старых архивных документов.",
+		"Копирование фрагментов текста из заблокированных от выделения файлов."
+	],
+	"faq": [
+		["Нужно ли платить за использование этого инструмента?", "Нет, этот веб-инструмент полностью бесплатен для всех пользователей."],
+		["Безопасны ли мои файлы при обработке?", "Да, файлы обрабатываются прямо в браузере и не покидают ваше устройство, что гарантирует конфиденциальность."],
+		["Требуется ли регистрация учетной записи?", "Нет, создание аккаунта или регистрация не требуются для использования сервиса."]
+	]
+};
+var ar = {
+	"about": [
+		"أداة OCR PDF هي أداة ويب مجانية متوفرة على موقع nibrascode.com وتعتبر النسخة الويب لأداة من تطبيق Nibras PDF لنظام أندرويد. تم تصميم هذه الأداة للتعرف على النص من صفحات ملفات بي دي إف مباشرة على جهازك. الخدمة مجانية تماماً ولا تتطلب إنشاء حساب، حيث تتم معالجة الملفات محلياً داخل المتصفح دون مغادرة الجهاز.",
+		"تكون هذه الأداة ضرورية عندما تحتاج إلى استخراج نص قابل للقراءة من المستندات الممسوحة ضوئياً أو ملفات بي دي إف التي تحتوي على صور. يعتمد المفترق الأساسي على تقنية التعرف الضوئي على الحروف داخل المتصفح لتحويل العناصر المرئية إلى نص رقمي. نظراً لأن المعالجة تحدث محلياً، تظل ملفاتك خاصة وآمنة تماماً.",
+		"اختر ملف بي دي إف الخاص بك من جهازك.",
+		"انتظر حتى يتم تحميل المستند داخل المتصفح.",
+		"دع الأداة تقوم بالتعرف على النص الموجود في الصفحات.",
+		"قم بنساخ النص المستخرج أو حفظ النتيجة."
+	],
+	"steps": [
+		"اختر ملف بي دي إف الخاص بك من جهازك.",
+		"انتظر حتى يتم تحميل المستند داخل المتصفح.",
+		"دع الأداة تقوم بالتعرف على النص الموجود في الصفحات.",
+		"قم بنساخ النص المستخرج أو حفظ النتيجة."
+	],
+	"uses": [
+		"استخراج نص قابل للتحرير من المستندات الورقية الممسوحة ضوئياً.",
+		"قراءة المحتوى النصي من صفحات بي دي إف المصورة بدون كتابة يدوية.",
+		"تحويل الفواتير أو العقود القديمة إلى نصوص رقمية قابلة للاستخدام.",
+		"نسخ فقرات معينة من مستندات بي دي إف التي لا تدعم التحديد المباشر."
+	],
+	"faq": [
+		["هل استخدام هذه الأداة مجاني تماماً؟", "نعم، الأداة مجانية تماماً للاستخدام مباشرة في متصفح الويب الخاص بك دون أي رسوم."],
+		["هل يتم رفع ملفاتي إلى أي خادم خارجي أثناء المعالجة؟", "لا، تتم معالجة جميع الملفات محلياً في متصفحك ولا تترك جهازك أبداً، مما يضمن خصوصيتك."],
+		["هل أحتاج إلى إنشاء حساب أو التسجيل لاستخدام الخدمة؟", "لا، لا يتطلب الأمر أي حساب أو تسجيل للوصول إلى أداة التعرف على النصوص واستخدامها."]
+	]
+};
+var tr = {
+	"about": [
+		"OCR PDF (PDF tool), nibrascode.com adresinde sunulan ücretsiz bir web aracıdır ve Nibras PDF Android uygulamasındaki bir aracın web sürümüdür. Doğrudan cihazınızda PDF sayfalarındaki metni tanılamak ve çıkarmak için tasarlanmıştır. Hizmet tamamen ücretsizdir, hesap gerektirmez ve dosyalar tarayıcı içinde işlenerek cihazı terk etmez.",
+		"Bu araç, taranmış belgelerden veya resim içeren PDF dosyalarından okunabilir metin çıkarmanız gerektiğinde çok faydalıdır. Altta yatan kavram, tarayıcı içinde sayfa piksellerini analiz ederek görsel harfleri dijital metne dönüştüren optik karakter tanıma teknolojisine dayanır. İşlem yerel olarak yapıldığı için gizliliğiniz tamamen korunur.",
+		"PDF dosyanızı cihazınızdan seçin veya sayfaya sürükleyin.",
+		"Belgenin tarayıcıya yüklenmesini bekleyin.",
+		"Sayfa metninin sistem tarafından tanınmasını bekleyin.",
+		"Elde edilen metni kopyalayın veya cihazınıza kaydedin."
+	],
+	"steps": [
+		"PDF dosyanızı cihazınızdan seçin veya sayfaya sürükleyin.",
+		"Belgenin tarayıcıya yüklenmesini bekleyin.",
+		"Sayfa metninin sistem tarafından tanınmasını bekleyin.",
+		"Elde edilen metni kopyalayın veya cihazınıza kaydedin."
+	],
+	"uses": [
+		"Taranmış kağıt belgelerdeki metinleri kopyalanabilir formata dönüştürmek için kullanılır.",
+		"Görsel formatındaki PDF sayfalarından metin okuma ihtiyacı doğduğunda yardımcı olur.",
+		"Arşivdeki eski PDF dosyalarındaki bilgileri dijital olarak elde etmeyi sağlar.",
+		"Basılı bir belgenin dijital kopyasından alıntı yapmak istediğinizde elverişlidir."
+	],
+	"faq": [
+		["Bu aracı kullanmak için herhangi bir ücret ödemem gerekiyor mu?", "Hayır, bu araç tamamen ücretsizdir ve herhangi bir ödeme talep etmez."],
+		["Dosyalarım güvende mi? Sunucuya yükleniyor mu?", "Evet, dosyalarınız tamamen güvendedir. Tüm işlemler doğrudan tarayıcıda gerçekleştirilir ve dosyalar cihazınızı terk etmez."],
+		["Hizmeti kullanmak için kayıt olmam veya hesap açmam gerekiyor mu?", "Hayır, herhangi bir hesap açmanıza veya kayıt olmanıza gerek yoktur, doğrudan kullanabilirsiniz."]
+	]
+};
+var pdf_ocr_default = {
+	az,
+	en,
+	ru,
+	ar,
+	tr
+};
+//#endregion
+export { ar, az, pdf_ocr_default as default, en, ru, tr };

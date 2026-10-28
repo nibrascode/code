@@ -1,0 +1,45 @@
+import { i as S, n as N, r as P, t as C } from "./dsl-0GJBPSOD.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/python-first-steps-BcnPWCfl.js
+var python_first_steps_default = [
+	S("what", [
+		"Proqram nədir, Python nə edir",
+		"What a program is and what Python does",
+		"Program nedir, Python ne yapar",
+		"ما هو البرنامج وماذا تفعل بايثون",
+		"Что такое программа и что делает Python"
+	], P("Proqram kompüterə verilən addım-addım təlimatlardır. Python bu təlimatları insan dilinə yaxın sözlərlə yazmağa imkan verən dildir. Yazdığın mətn faylını «interpretator» adlanan proqram sətir-sətir oxuyub icra edir.", "A program is a list of step-by-step instructions for a computer. Python lets you write those instructions with words close to everyday English. A program called the interpreter reads your text file line by line and carries out each instruction.", "Program, bilgisayara verilen adım adım talimatlardır. Python bu talimatları günlük dile yakın sözcüklerle yazmanı sağlar. Yorumlayıcı adlı program metin dosyanı satır satır okuyup çalıştırır.", "البرنامج هو قائمة تعليمات متسلسلة تُعطى للحاسوب. تتيح لك بايثون كتابة هذه التعليمات بكلمات قريبة من اللغة اليومية. ويقرأ برنامج يسمى المفسِّر ملفك النصي سطرًا سطرًا وينفّذه.", "Программа — это пошаговая инструкция для компьютера. Python позволяет записывать её словами, близкими к обычному языку. Программа-интерпретатор читает ваш текстовый файл строка за строкой и выполняет команды."), P("Python-un üstünlükləri: sintaksisi sadədir, kitabxanaları çoxdur, eyni kod Windows, macOS və Linux-da işləyir. Ona görə də həm yeni başlayanlar, həm də veb, data və avtomatlaşdırma ilə məşğul olanlar onu seçir.", "Python's strengths: simple syntax, a huge ecosystem of libraries, and the same code runs on Windows, macOS and Linux. That is why beginners and people working on web, data and automation all pick it.", "Python'un güçlü yanları: sade sözdizimi, çok sayıda kütüphane ve aynı kodun Windows, macOS ve Linux'ta çalışması. Bu yüzden hem yeni başlayanlar hem de web, veri ve otomasyon ile uğraşanlar onu seçer.", "نقاط قوة بايثون: صياغة بسيطة ومكتبات كثيرة، ويعمل الكود نفسه على ويندوز وماك ولينكس. لذلك يختارها المبتدئون والعاملون في الويب والبيانات والأتمتة.", "Сильные стороны Python: простой синтаксис, огромное число библиотек и одинаковая работа на Windows, macOS и Linux. Поэтому его выбирают и новички, и те, кто занимается вебом, данными и автоматизацией.")),
+	S("run", [
+		"Kodu necə işlətmək olar",
+		"Ways to run code",
+		"Kodu nasıl çalıştırırsın",
+		"طرق تشغيل الكود",
+		"Как запускать код"
+	], P("İki əsas yol var. Birincisi interaktiv rejimdir: terminalda python yazıb Enter basırsan, ardınca hər sətrin nəticəsini dərhal görürsən. Bu, kiçik təcrübələr üçün əladır.", "There are two main ways. The first is interactive mode: type python in a terminal, press Enter, and every line you type is evaluated immediately. It is ideal for small experiments.", "İki ana yol var. Birincisi etkileşimli moddur: terminalde python yazıp Enter'a basarsın, yazdığın her satırın sonucunu hemen görürsün. Küçük denemeler için idealdir.", "هناك طريقتان رئيسيتان. الأولى الوضع التفاعلي: اكتب python في الطرفية واضغط Enter فترى نتيجة كل سطر فورًا. وهو مناسب للتجارب الصغيرة.", "Есть два основных способа. Первый — интерактивный режим: введите python в терминале, нажмите Enter и сразу видьте результат каждой строки. Удобно для мелких экспериментов."), C(">>> 7 * 6\n42\n>>> \"sa\" + \"lam\"\n'salam'\n>>> exit()"), P("İkincisi fayl rejimidir: kodu .py faylında saxlayıb python fayl_adi.py ilə işlədirsən. Real proqramlar belə yazılır, çünki fayl saxlanılır və təkrar işlədilə bilir.", "The second is file mode: save the code in a .py file and run it with python file_name.py. Real programs are written this way because the file is kept and can be run again.", "İkincisi dosya modudur: kodu .py dosyasına kaydedip python dosya_adi.py ile çalıştırırsın. Gerçek programlar böyle yazılır, çünkü dosya saklanır ve tekrar çalıştırılabilir.", "الثانية وضع الملف: احفظ الكود في ملف .py ثم شغّله بالأمر python file_name.py. هكذا تُكتب البرامج الحقيقية لأن الملف يبقى ويمكن تشغيله مجددًا.", "Второй — режим файла: сохраните код в файл .py и запустите командой python имя_файла.py. Так пишут настоящие программы: файл остаётся и его можно запускать снова."), C("# greeting.py\nname = \"Aysel\"\nprint(\"Welcome,\", name)\nprint(\"2 + 3 =\", 2 + 3)"), P("Editor seçimi: VS Code, PyCharm Community və ya sadə IDLE uyğundur. Vacib olan faylı .py uzantısı ilə saxlamaq və düzgün qovluqda terminal açmaqdır.", "Choosing an editor: VS Code, PyCharm Community or the simple IDLE all work. What matters is saving the file with a .py extension and opening the terminal in the right folder.", "Editör seçimi: VS Code, PyCharm Community veya basit IDLE uygundur. Önemli olan dosyayı .py uzantısıyla kaydetmek ve terminali doğru klasörde açmaktır.", "اختيار المحرر: يصلح VS Code أو PyCharm Community أو IDLE البسيط. المهم أن تحفظ الملف بامتداد .py وتفتح الطرفية في المجلد الصحيح.", "Выбор редактора: подойдут VS Code, PyCharm Community или простой IDLE. Важно сохранить файл с расширением .py и открыть терминал в нужной папке.")),
+	S("anatomy", [
+		"Sətir, şərh və boşluq qaydaları",
+		"Lines, comments and spacing rules",
+		"Satır, yorum ve boşluk kuralları",
+		"الأسطر والتعليقات وقواعد المسافات",
+		"Строки, комментарии и правила отступов"
+	], P("Hər əmr ayrı sətirdə yazılır. # işarəsindən sonrakı hər şey şərhdir; Python onu icra etmir, sən isə özünə izah yazırsan. Python-da sətirin əvvəlindəki boşluqlar (girinti) mənalıdır: eyni blokdakı sətirlər eyni girintidə olmalıdır.", "Each command goes on its own line. Anything after # is a comment: Python ignores it, and you use it to leave notes for yourself. In Python the spaces at the start of a line (indentation) carry meaning: lines in the same block must share the same indentation.", "Her komut ayrı satıra yazılır. # işaretinden sonrası yorumdur: Python onu çalıştırmaz, sen kendine not bırakırsın. Python'da satır başındaki boşluklar (girinti) anlam taşır: aynı bloktaki satırlar aynı girintide olmalıdır.", "يُكتب كل أمر في سطر مستقل. كل ما يأتي بعد # تعليق تتجاهله بايثون وتستخدمه لتدوين ملاحظات لنفسك. في بايثون للمسافات في بداية السطر (الإزاحة) معنى: يجب أن تتساوى إزاحة الأسطر داخل الكتلة الواحدة.", "Каждая команда пишется на своей строке. Всё после # — комментарий: Python его игнорирует, а вы оставляете себе заметки. В Python пробелы в начале строки (отступы) имеют значение: строки одного блока должны иметь одинаковый отступ."), C("# total price of three items\nprice = 12\ncount = 3\nif count > 2:\n    print(\"Bulk order\")   # 4 spaces = inside the if block\n    print(price * count)"), N([
+		"Girinti üçün 4 boşluq işlət.",
+		"Use 4 spaces for indentation.",
+		"Girinti için 4 boşluk kullan.",
+		"استخدم 4 مسافات للإزاحة.",
+		"Для отступа используйте 4 пробела."
+	], [
+		"Tab və boşluğu qarışdırma.",
+		"Never mix tabs and spaces.",
+		"Tab ile boşluğu karıştırma.",
+		"لا تخلط بين Tab والمسافات.",
+		"Не смешивайте табуляцию и пробелы."
+	], [
+		"Mətnləri dırnaq içinə al: \"belə\" və ya 'belə'.",
+		"Wrap text in quotes: \"like this\" or 'like this'.",
+		"Metinleri tırnak içine al: \"böyle\" veya 'böyle'.",
+		"ضع النص بين علامتي اقتباس: \"هكذا\" أو 'هكذا'.",
+		"Текст берите в кавычки: \"так\" или 'так'."
+	]), P("Əvvəlcə sadə şeylərlə başla: print() ilə nəticə çıxar, nəticəni dəyişdir, yenidən işlət. Səhv etməkdən qorxma; xəta mesajı problemin hansı sətirdə olduğunu göstərir.", "Start with simple things: show output with print(), change something, run it again. Do not fear mistakes; an error message tells you which line has the problem.", "Basit şeylerle başla: print() ile çıktı al, bir şeyi değiştir, tekrar çalıştır. Hata yapmaktan korkma; hata mesajı sorunun hangi satırda olduğunu söyler.", "ابدأ بأشياء بسيطة: اعرض الناتج بـ print() وغيّر شيئًا ثم شغّل مجددًا. لا تخَف من الأخطاء؛ رسالة الخطأ تدلّك على السطر الذي فيه المشكلة.", "Начните с простого: выведите результат через print(), измените что-нибудь и запустите снова. Не бойтесь ошибок: сообщение об ошибке подскажет, в какой строке проблема."))
+];
+//#endregion
+export { python_first_steps_default as default };

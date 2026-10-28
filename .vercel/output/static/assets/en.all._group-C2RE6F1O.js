@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-CKeovgl0.js";import{G as t,Pt as n}from"./index-ye_Wxhb5.js";var r=e(),i=function(){let{group:e}=t.useLoaderData();return(0,r.jsx)(n,{lang:`en`,group:e})};export{i as component};

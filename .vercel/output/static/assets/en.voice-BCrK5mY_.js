@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-CKeovgl0.js";import{n as t}from"./voice-page-D6Kz9OIK.js";var n=e(),r=()=>(0,n.jsx)(t,{lang:`en`});export{r as component};

@@ -1,0 +1,1 @@
+import{t as e}from"./schema-Chy1BmiA.js";var t=e;export{t as component};

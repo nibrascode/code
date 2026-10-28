@@ -1,0 +1,1 @@
+import{n as e}from"./games-page-CYrHNF4J.js";var t=e;export{t as component};

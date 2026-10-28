@@ -1,0 +1,110 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/hash-pqRHfuCQ.js
+var az = {
+	"about": ["Bu alət mətnin SHA-1 həşini yaradır. Həş, mətnin dəyişməz, 40 xarakterdən ibarət kodudur; eyni mətn hər zaman eyni həşi verir. Bir hərfi dəyişdirdikdə kod tamamilə fərqlənir.", "SHA-1, şifrələmə deyil, məlumatın bütövlüyünü yoxlamaq üçün istifadə olunur. Parol saxlamaq üçün uyğun deyil; bcrypt, scrypt və Argon2 kimi xüsusi algoritmlərə ehtiyac var. Alət brauzerdə işləyir və heç bir məlumat serverə göndərilmir."],
+	"steps": [
+		"Brauzerdə nibrascode.com saytını açın.",
+		"Mətn sahəsinə istədiyiniz mətn daxil edin.",
+		"Həş hesablamaq üçün \"Hesapla\" düyməsini basın.",
+		"Nəticəni kopyalayın və ya fayl kimi yükləyin."
+	],
+	"uses": [
+		"Məlumatın dəyişmədiyini yoxlamaq üçün fayl müqayisəsi.",
+		"Kodların unikal identifikatorları kimi istifadə.",
+		"Verilənlərin bütövlüyünü təsdiqləmək üçün sistemlərdə.",
+		"Parol təhlükəsizliyi testlərində müqayisə aləti olaraq."
+	],
+	"faq": [
+		["SHA-1 nədir?", "SHA-1, 160 bitlik (40 xarakterli) həş alqoritmidir, mətnin dəyişməz kodunu verir. Şifrələmə deyil, bütövlük yoxlaması üçün istifadə olunur."],
+		["Parol saxlamaq üçün SHA-1 istifadə edilə bilərmi?", "Xeyr. SHA-1 zəifdir və parol saxlamaq üçün bcrypt, scrypt və Argon2 kimi xüsusi alqoritmlərə ehtiyac var."],
+		["Məlumat serverə göndərilirmi?", "Xeyr. Həş hesablama brauzerdə yerli olaraq edilir və heç bir məlumat serverə ötürülmür."]
+	]
+};
+var en = {
+	"about": ["This tool generates a SHA‑1 hash from text. The hash is a fixed 40‑character code that remains the same for identical input; changing one letter produces a completely different code.", "SHA‑1 is a hashing algorithm, not encryption. It is used for integrity checks, not for storing passwords. Passwords should be hashed with bcrypt, scrypt, or Argon2. The tool runs entirely in the browser with no data sent to a server."],
+	"steps": [
+		"Open nibrascode.com in your browser.",
+		"Enter the desired text into the input field.",
+		"Click the button to calculate the hash.",
+		"Copy the result or download it as a file."
+	],
+	"uses": [
+		"Verifying file integrity by comparing hashes.",
+		"Creating unique identifiers for data entries.",
+		"Confirming data consistency in systems.",
+		"Testing password comparison in security audits."
+	],
+	"faq": [
+		["What is SHA‑1?", "SHA‑1 is a 160‑bit hashing algorithm that produces a 40‑character code. It is used for integrity checks, not for encryption."],
+		["Can SHA‑1 be used to store passwords?", "No. SHA‑1 is weak; passwords should be hashed with bcrypt, scrypt, or Argon2."],
+		["Is any data sent to a server?", "No. The hash calculation occurs locally in the browser; no data is transmitted."]
+	]
+};
+var ru = {
+	"about": ["Этот инструмент создает SHA‑1 хеш из текста. Хеш – фиксированный код из 40 символов, который одинаков для одинакового ввода; изменение одной буквы приводит к полностью новому коду.", "SHA‑1 – это алгоритм хеширования, а не шифрования. Он используется для проверки целостности данных, а не для хранения паролей. Для паролей нужны bcrypt, scrypt или Argon2. Расчёт выполняется в браузере без передачи данных на сервер."],
+	"steps": [
+		"Откройте сайт nibrascode.com в браузере.",
+		"Введите нужный текст в поле ввода.",
+		"Нажмите кнопку расчёта хеша.",
+		"Скопируйте результат или скачайте его как файл."
+	],
+	"uses": [
+		"Проверка целостности файлов по хешу.",
+		"Создание уникальных идентификаторов данных.",
+		"Подтверждение согласованности данных в системах.",
+		"Тестирование сравнения паролей в аудите безопасности."
+	],
+	"faq": [
+		["Что такое SHA‑1?", "SHA‑1 – это 160‑битный алгоритм хеширования, выдающий 40‑символьный код. Он используется для проверки целостности, а не для шифрования."],
+		["Можно ли использовать SHA‑1 для хранения паролей?", "Нет. SHA‑1 слабый; пароли следует хешировать с помощью bcrypt, scrypt или Argon2."],
+		["Отправляются ли данные на сервер?", "Нет. Расчёт хеша выполняется локально в браузере, данные не передаются."]
+	]
+};
+var ar = {
+	"about": ["هذا الأداة تُنشئ تجزئة SHA‑1 من النص. التجزئة هي رمز ثابت مكوّن من 40 حرفاً يظل ثابتاً لنفس الإدخال؛ تغيير حرف واحد يؤدي إلى رمز مختلف تماماً.", "SHA‑1 هو خوارزمية تجزئة، لا تشفير. يُستخدم للتحقق من سلامة البيانات وليس لتخزين كلمات المرور. يجب استخدام bcrypt أو scrypt أو Argon2 لكلمات المرور. يتم الحساب في المتصفح ولا يُرسل أيّ بيانات إلى الخادم."],
+	"steps": [
+		"افتح موقع nibrascode.com في المتصفح.",
+		"أدخل النص المطلوب في حقل الإدخال.",
+		"انقر على زر حساب التجزئة.",
+		"انسخ النتيجة أو احملها كملف."
+	],
+	"uses": [
+		"التحقق من سلامة الملفات عبر التجزئة.",
+		"إنشاء معرفات فريدة للبيانات.",
+		"تأكيد اتساق البيانات في الأنظمة.",
+		"اختبار مقارنة كلمات المرور في تدقيق الأمان."
+	],
+	"faq": [
+		["ما هو SHA‑1؟", "SHA‑1 هو خوارزمية تجزئة 160‑بت تُنتج رمزاً مكوّنًا من 40 حرفاً. يُستخدم للتحقق من سلامة البيانات، وليس للتشفير."],
+		["هل يمكن استخدام SHA‑1 لتخزين كلمات المرور؟", "لا. SHA‑1 ضعيف؛ يجب استخدام bcrypt أو scrypt أو Argon2 لتخزين كلمات المرور."],
+		["هل تُرسل البيانات إلى الخادم؟", "لا. يتم حساب التجزئة محلياً في المتصفح، ولا تُرسل أي بيانات."]
+	]
+};
+var tr = {
+	"about": ["Bu araç metinden SHA‑1 karmasını oluşturur. Karması, aynı girdi için aynı 40 karakterli kodu verir; bir harfi değiştirirseniz kod tamamen farklı olur.", "SHA‑1, şifreleme değil, bütünlük kontrolü için kullanılan bir hash algoritmasıdır. Parolaları saklamak için uygun değildir; bcrypt, scrypt veya Argon2 gibi algoritmalar gerekir. Hesaplama tarayıcıda yapılır ve veriler sunucuya gönderilmez."],
+	"steps": [
+		"Tarayıcınızda nibrascode.com sitesini açın.",
+		"İstediğiniz metni giriş alanına girin.",
+		"Karma hesaplamak için düğmeye tıklayın.",
+		"Sonucu kopyalayın veya dosya olarak indirin."
+	],
+	"uses": [
+		"Dosya bütünlüğünü kontrol etmek için.",
+		"Veri girdileri için benzersiz tanımlayıcı oluşturmak.",
+		"Sistemlerde veri tutarlılığını doğrulamak.",
+		"Güvenlik incelemelerinde parola karşılaştırması yapmak."
+	],
+	"faq": [
+		["SHA‑1 nedir?", "SHA‑1, 160 bitlik bir hash algoritmasıdır ve 40 karakterli bir kod üretir. Şifreleme değil, bütünlük kontrolü için kullanılır."],
+		["Parolaları saklamak için SHA‑1 kullanılabilir mi?", "Hayır. SHA‑1 zayıftır; parolalar bcrypt, scrypt veya Argon2 ile hashlenmelidir."],
+		["Veri sunucuya gönderiliyor mu?", "Hayır. Hesaplama tarayıcıda yerel olarak yapılır; veri gönderilmez."]
+	]
+};
+var hash_default = {
+	az,
+	en,
+	ru,
+	ar,
+	tr
+};
+//#endregion
+export { ar, az, hash_default as default, en, ru, tr };

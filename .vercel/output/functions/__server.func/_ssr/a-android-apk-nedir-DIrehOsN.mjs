@@ -1,0 +1,110 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/a-android-apk-nedir-DIrehOsN.js
+var az = {
+	"about": ["APK (Android Package) faylı, Android tətbiqini quraşdırmaq üçün istifadə edilən paketdir. Bu fayl, tətbiqin bütün mənbə kodunu, resurslarını və konfiqurasiya fayllarını bir arada saxlayır. Android sistemində APK faylı açıldıqda, sistem onu avtomatik olaraq tanıyır və quraşdırma prosesini başlatır.", "İstifadəçilər APK faylını birbaşa internetdən yüklədikdə və ya başqa bir cihazdan köçürdükdə ehtiyatlı olmalıdırlar. Tanımadığınız mənbələrdən gələn APK-lar, orijinal tətbiqin nüsxəsi olmaya və ya zərərli kodlar daşıya bilər. Hər zaman tanınmış mağazalardan və ya rəsmi veb saytlarından quraşdırma etməyə üstünlük verin."],
+	"steps": [
+		"APK faylını təhlükəsiz mənbədən yükləyin.",
+		"Telefonunuzda “Bilinməyən mənbələr” seçimini aktivləşdirin.",
+		"Yüklənmiş faylı açın və quraşdırma prosesini izləyin.",
+		"Quraşdırma tamamlandıqdan sonra “Bilinməyən mənbələr” seçimini yenidən deaktiv edin."
+	],
+	"uses": [
+		"Təhlükəsiz test məqsədilə beta tətbiqləri quraşdırmaq.",
+		"İnternetə çıxışı olmayan yerlərdə tətbiq paylaşmaq.",
+		"Tətbiqin yenilənmiş versiyasını quraşdırmaq.",
+		"Tətbiqin orijinal mənbə kodunu yoxlamaq."
+	],
+	"faq": [
+		["APK faylı nədir?", "APK, Android tətbiqinin quraşdırma faylıdır və bütün kod, resurs və konfiqurasiya məlumatlarını ehtiva edir."],
+		["Niyə APK faylını yükləmək risklidir?", "Tanımadığınız mənbələrdən gələn APK-lar zərərli kodlar daşıya bilər və cihazınızın təhlükəsizliyini poza bilər."],
+		["APK faylını necə təhlükəsiz şəkildə quraşdırmaq olar?", "Rəsmi mağazalardan və ya tətbiqin rəsmi saytından yükləyin, telefonunuzda “Bilinməyən mənbələr” seçimini aktivləşdirin, quraşdırma tamamlandıqdan sonra bu seçimi deaktiv edin."]
+	]
+};
+var en = {
+	"about": ["An APK (Android Package) file is the installation package used to deploy an Android application. It contains all of the app’s code, resources, and configuration files bundled together. When the file is opened on an Android device, the system automatically recognizes it and initiates the installation process.", "Users should be cautious when downloading an APK from an unknown source or transferring it from another device. Unverified APKs may not be the genuine copy of the app and could contain malicious code. Always prefer installing from a reputable store or the app’s official website."],
+	"steps": [
+		"Download the APK from a trusted source.",
+		"Enable the “Unknown sources” option on your device.",
+		"Open the downloaded file and follow the installation prompts.",
+		"After installation, disable the “Unknown sources” option again."
+	],
+	"uses": [
+		"Installing beta versions for testing purposes.",
+		"Sharing an app in offline environments.",
+		"Deploying an updated version of an app.",
+		"Inspecting the original source code of an application."
+	],
+	"faq": [
+		["What is an APK?", "An APK is the installation file for an Android app, containing all its code, resources, and configuration data."],
+		["Why is downloading an APK risky?", "APK files from unverified sources may include malicious code that can compromise device security."],
+		["How can I safely install an APK?", "Download from the official site or a reputable store, enable “Unknown sources,” install, then disable the option afterward."]
+	]
+};
+var ru = {
+	"about": ["APK (Android Package) – это файл, используемый для установки Android‑приложения. В нём содержится весь код, ресурсы и конфигурационные файлы приложения, собранные в одном пакете. При открытии APK система автоматически распознаёт его и запускает процесс установки.", "При скачивании APK с неизвестного источника или при передаче с другого устройства необходимо проявлять осторожность. Не проверенные APK могут не быть оригинальной копией приложения и содержать вредоносный код. Лучше устанавливать приложения из надёжного магазина или официального сайта."],
+	"steps": [
+		"Скачайте APK с доверенного источника.",
+		"Включите в настройках устройства параметр «Неизвестные источники».",
+		"Откройте скачанный файл и следуйте инструкциям установки.",
+		"После завершения установки отключите параметр «Неизвестные источники»."
+	],
+	"uses": [
+		"Установка бета‑версий для тестирования.",
+		"Передача приложения в офлайн‑средах.",
+		"Установка обновлённой версии приложения.",
+		"Проверка исходного кода приложения."
+	],
+	"faq": [
+		["Что такое APK?", "APK – это файл установки Android‑приложения, содержащий весь код, ресурсы и конфигурацию."],
+		["Почему скачивание APK может быть опасным?", "Файлы APK из непроверенных источников могут содержать вредоносный код, угрожающий безопасности устройства."],
+		["Как безопасно установить APK?", "Скачайте с официального сайта или надёжного магазина, включите «Неизвестные источники», установите, затем отключите параметр."]
+	]
+};
+var ar = {
+	"about": ["ملف APK (Android Package) هو حزمة التثبيت المستخدمة لتثبيت تطبيق Android. يحتوي على جميع كود التطبيق، والموارد، وملفات التكوين المجمعة معًا. عند فتح الملف على جهاز Android، يتعرف النظام تلقائيًا ويبدأ عملية التثبيت.", "يجب على المستخدمين توخي الحذر عند تنزيل ملف APK من مصدر غير معروف أو نقله من جهاز آخر. قد لا تكون ملفات APK غير الموثوق بها النسخة الأصلية للتطبيق وقد تحمل شفرة خبيثة. يفضل دائمًا التثبيت من متجر موثوق أو موقع التطبيق الرسمي."],
+	"steps": [
+		"نزّل ملف APK من مصدر موثوق.",
+		"فعّل خيار \"المصادر غير المعروفة\" على جهازك.",
+		"افتح الملف المُنزّل واتبع تعليمات التثبيت.",
+		"بعد الانتهاء من التثبيت، أوقف تشغيل خيار \"المصادر غير المعروفة\"."
+	],
+	"uses": [
+		"تثبيت إصدارات تجريبية للاختبار.",
+		"مشاركة التطبيق في بيئات غير متصلة بالإنترنت.",
+		"نشر نسخة محدثة من التطبيق.",
+		"فحص شفرة المصدر الأصلية للتطبيق."
+	],
+	"faq": [
+		["ما هو ملف APK؟", "ملف APK هو ملف التثبيت لتطبيق Android، يحتوي على كل الكود والموارد وإعدادات التطبيق."],
+		["لماذا يعتبر تنزيل APK مخاطرة؟", "ملفات APK من مصادر غير موثوق بها قد تحتوي على شفرة خبيثة تهدد أمان الجهاز."],
+		["كيف يمكن تثبيت APK بأمان؟", "نزّل من الموقع الرسمي أو متجر موثوق، فعّل \"المصادر غير المعروفة\"، ثم ثبّت وأوقف تشغيل الخيار."]
+	]
+};
+var tr = {
+	"about": ["APK (Android Package) dosyası, Android uygulamasını yüklemek için kullanılan paket dosyasıdır. Tüm kod, kaynaklar ve yapılandırma dosyalarını tek bir paket içinde barındırır. Android cihazda açıldığında sistem otomatik olarak tanır ve kurulum sürecini başlatır.", "Bilinmeyen bir kaynaktan APK indirirken veya başka bir cihazdan taşıdığınızda dikkatli olmalısınız. Doğrulanmamış APK'lar, uygulamanın gerçek kopyası olmayabilir ve zararlı kod içerebilir. Her zaman güvenilir bir mağazadan veya uygulamanın resmi sitesinden yüklemeyi tercih edin."],
+	"steps": [
+		"APK'yi güvenilir bir kaynaktan indirin.",
+		"Cihazınızda \"Bilinmeyen kaynaklar\" seçeneğini etkinleştirin.",
+		"İndirilen dosyayı açın ve kurulum talimatlarını izleyin.",
+		"Kurulum tamamlandıktan sonra \"Bilinmeyen kaynaklar\" seçeneğini tekrar devre dışı bırakın."
+	],
+	"uses": [
+		"Beta sürümlerini test amaçlı yüklemek.",
+		"İnternete erişimi olmayan ortamlarda uygulama paylaşmak.",
+		"Uygulamanın güncellenmiş sürümünü kurmak.",
+		"Uygulamanın orijinal kaynak kodunu incelemek."
+	],
+	"faq": [
+		["APK nedir?", "APK, Android uygulamasının kurulum dosyasıdır ve tüm kod, kaynak ve yapılandırma bilgilerini içerir."],
+		["APK indirmenin riski nedir?", "Doğrulanmamış kaynaklardan gelen APK'lar zararlı kod içerebilir ve cihaz güvenliğini tehlikeye atabilir."],
+		["APK'yi güvenli bir şekilde nasıl kurarım?", "Resmi site veya güvenilir bir mağazadan indirin, \"Bilinmeyen kaynaklar\" seçeneğini etkinleştirin, kurun ve ardından seçeneği devre dışı bırakın."]
+	]
+};
+var a_android_apk_nedir_default = {
+	az,
+	en,
+	ru,
+	ar,
+	tr
+};
+//#endregion
+export { ar, az, a_android_apk_nedir_default as default, en, ru, tr };

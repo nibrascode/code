@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-CKeovgl0.js";import{_ as t,dt as n,ut as r}from"./index-DaoRAfRy.js";var i=e(),a=function(){let{tool:e}=t.useParams();return n(e)?(0,i.jsx)(r,{tool:e}):null};export{a as component};

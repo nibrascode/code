@@ -1,0 +1,110 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/programming-sql-sual-say-Y5Y--cke.js
+var az = {
+	"about": ["SQL COUNT funksiyası verilənlər bazasındakı cədvəllərdə olan sətirlərin sayını müəyyən etmək üçün istifadə olunan əsas aqreqat funksiyasıdır. Bu funksiya sorğunun nəticəsində əldə edilən sətirlərin miqdarını tək bir rəqəm olaraq qaytarır. O, məlumatların həcmini qiymətləndirmək və ya müəyyən şərtlərə cavab verən qeydlərin sayını tapmaq üçün vacibdir.", "İstifadəçilər verilənlər bazasında müəyyən meyarlara uyğun gələn məlumatların miqdarını bilmək istədikdə bu funksiyaya müraciət edirlər. Məsələn, müəyyən şəhərdə yaşayan istifadəçilərin və ya müəyyən kateqoriyaya aid məhsulların sayını hesablamaq üçün COUNT tətbiq edilir. Bu funksiya verilənləri dəyişmir, yalnız mövcud vəziyyəti təhlil edərək hesabat verir."],
+	"steps": [
+		"SELECT açar sözü ilə sorğuya başlayın.",
+		"COUNT funksiyasını mötərizə daxilində yazın.",
+		"Lazım gələrsə, WHERE vasitəsilə şərt əlavə edin.",
+		"Qruplaşdırma üçün GROUP BY əmrindən istifadə edin."
+	],
+	"uses": [
+		"Sistemdə qeydiyyatdan keçmiş istifadəçilərin ümumi sayını tapmaq.",
+		"Müəyyən bir şəhərdə yaşayan müştərilərin sayını hesablamaq.",
+		"Sifarişlər cədvəlində tamamlanmış əməliyyatların miqdarını müəyyən etmək.",
+		"Məhsul siyahısında müəyyən qiymət aralığındakı malları saymaq."
+	],
+	"faq": [
+		["COUNT funksiyası adları göstərirmi?", "Xeyr, bu funksiya yalnız sətirlərin sayını əks etdirən bir rəqəm qaytarır. O, siyahı deyil, kəmiyyət göstəricisi verir."],
+		["COUNT(*) ifadəsindəki ulduz nə deməkdir?", "Ulduz bütün sətirlərin sayılmasını bildirir. O, hətta boş sütunları belə nəzərə alaraq cədvəldəki bütün qeydləri hesablayır."],
+		["GROUP BY olmadan şəhər adını və sayı göstərmək olarmı?", "Əksər verilənlər bazası idarəetmə sistemləri bunu qəbul etmir. Seçilən sütun mütləq qruplaşdırılmalıdır, əks halda sorğu səhv nəticə verəcəkdir."]
+	]
+};
+var en = {
+	"about": ["The SQL COUNT function is a fundamental aggregate tool used to determine the number of rows in a database table. It processes the specified data and returns a single integer representing the count of records. This function is essential for data analysis, allowing developers to quantify information without retrieving the actual content of the rows.", "Users rely on COUNT when they need to measure the volume of data that meets specific criteria. Whether calculating the total number of registered users or counting entries within a specific category, this function provides a clear numerical summary. It does not modify the database, ensuring that the original data remains intact during the process."],
+	"steps": [
+		"Start your query with the SELECT keyword.",
+		"Include the COUNT function with parentheses.",
+		"Filter data using the WHERE clause if needed.",
+		"Use GROUP BY to categorize results by specific columns."
+	],
+	"uses": [
+		"Determining the total number of users registered in a system.",
+		"Calculating how many customers reside in a specific city.",
+		"Counting the number of completed transactions in an orders table.",
+		"Finding the quantity of products available within a certain price range."
+	],
+	"faq": [
+		["Does COUNT show the names?", "No, it does not return a list of names. It provides only a single numerical value representing the total count of the rows that meet your criteria."],
+		["What is the star in COUNT(*)?", "The star represents every row in the table. It ensures that the count includes all records, even if some columns within those rows are empty or contain null values."],
+		["Can you write the city and COUNT without GROUP BY?", "Most database systems will reject such a query. Any column included in the SELECT statement alongside an aggregate function must be part of the GROUP BY clause."]
+	]
+};
+var ru = {
+	"about": ["Функция SQL COUNT является основным инструментом агрегирования, используемым для определения количества строк в таблице базы данных. Она обрабатывает указанные данные и возвращает единственное целое число, представляющее количество записей. Эта функция необходима для анализа данных, позволяя разработчикам количественно оценивать информацию без извлечения фактического содержимого строк.", "Пользователи обращаются к COUNT, когда им нужно измерить объем данных, соответствующих определенным критериям. Будь то расчет общего числа зарегистрированных пользователей или подсчет записей в определенной категории, эта функция предоставляет четкое числовое резюме. Она не изменяет базу данных, гарантируя, что исходные данные остаются нетронутыми в процессе выполнения запроса."],
+	"steps": [
+		"Начните запрос с ключевого слова SELECT.",
+		"Укажите функцию COUNT в скобках.",
+		"При необходимости добавьте условие через WHERE.",
+		"Используйте GROUP BY для группировки результатов по столбцам."
+	],
+	"uses": [
+		"Определение общего количества пользователей, зарегистрированных в системе.",
+		"Подсчет количества клиентов, проживающих в определенном городе.",
+		"Вычисление количества завершенных транзакций в таблице заказов.",
+		"Определение количества товаров в определенном ценовом диапазоне."
+	],
+	"faq": [
+		["Показывает ли COUNT имена?", "Нет, функция не возвращает список имен. Она предоставляет только одно числовое значение, отражающее общее количество строк, соответствующих вашим критериям."],
+		["Что означает звездочка в COUNT(*)?", "Звездочка означает подсчет каждой строки в таблице. Она гарантирует, что в результат будут включены все записи, даже если некоторые столбцы в этих строках пустые."],
+		["Можно ли написать город и COUNT без GROUP BY?", "Большинство систем управления базами данных отклонят такой запрос. Столбец, который вы отображаете вместе с агрегатной функцией, должен быть указан в предложении GROUP BY."]
+	]
+};
+var ar = {
+	"about": ["تعد دالة SQL COUNT أداة تجميع أساسية تُستخدم لتحديد عدد الصفوف في جداول قاعدة البيانات. تقوم هذه الدالة بمعالجة البيانات وإرجاع رقم واحد يمثل إجمالي عدد السجلات. تعتبر هذه الوظيفة ضرورية لتحليل البيانات، حيث تتيح للمطورين قياس حجم المعلومات دون الحاجة إلى استرجاع محتوى الصفوف الفعلي.", "يعتمد المستخدمون على COUNT عندما يحتاجون إلى قياس حجم البيانات التي تستوفي معايير معينة. سواء كان ذلك لحساب إجمالي عدد المستخدمين المسجلين أو عد السجلات ضمن فئة محددة، توفر هذه الدالة ملخصاً رقمياً واضحاً. لا تؤدي هذه الدالة إلى تغيير قاعدة البيانات، مما يضمن بقاء البيانات الأصلية سليمة أثناء عملية الاستعلام."],
+	"steps": [
+		"ابدأ الاستعلام باستخدام الكلمة المفتاحية SELECT.",
+		"أدرج دالة COUNT مع وضع الأقواس.",
+		"أضف شرطاً باستخدام WHERE إذا لزم الأمر.",
+		"استخدم GROUP BY لتجميع النتائج حسب أعمدة معينة."
+	],
+	"uses": [
+		"تحديد العدد الإجمالي للمستخدمين المسجلين في النظام.",
+		"حساب عدد العملاء الذين يقيمون في مدينة معينة.",
+		"عد عدد المعاملات المكتملة في جدول الطلبات.",
+		"معرفة كمية المنتجات المتاحة ضمن نطاق سعري معين."
+	],
+	"faq": [
+		["هل تعرض دالة COUNT الأسماء؟", "لا، هي لا تعيد قائمة بالأسماء، بل توفر فقط قيمة رقمية واحدة تمثل إجمالي عدد الصفوف التي تطابق معايير البحث الخاصة بك."],
+		["ماذا تعني النجمة في (*)?COUNT", "تعني النجمة عد كل صف في الجدول. فهي تضمن أن يشمل العد جميع السجلات، حتى لو كانت بعض الأعمدة داخل تلك الصفوف فارغة."],
+		["هل يمكن كتابة المدينة و COUNT بدون GROUP BY؟", "معظم أنظمة قواعد البيانات ترفض هذا الاستعلام. يجب أن يكون العمود الذي تعرضه بجانب دالة التجميع جزءاً من جملة GROUP BY."]
+	]
+};
+var tr = {
+	"about": ["SQL COUNT fonksiyonu, veritabanı tablolarındaki satır sayısını belirlemek için kullanılan temel bir toplama aracıdır. Belirtilen verileri işler ve kayıt sayısını temsil eden tek bir tam sayı döndürür. Bu fonksiyon, verilerin içeriğini çekmeden hacmini ölçmeye yaradığı için veri analizi süreçlerinde oldukça önemlidir.", "Kullanıcılar, belirli kriterlere uyan veri miktarını ölçmek istediklerinde COUNT fonksiyonuna başvururlar. Kayıtlı kullanıcı sayısını bulmak veya belirli bir kategorideki girişleri saymak gibi durumlarda, bu fonksiyon net bir sayısal özet sunar. İşlem sırasında veritabanını değiştirmez, bu nedenle orijinal veriler her zaman güvende kalır."],
+	"steps": [
+		"Sorgunuza SELECT anahtar kelimesi ile başlayın.",
+		"Parantez içinde COUNT fonksiyonunu yazın.",
+		"Gerekirse WHERE ile bir koşul ekleyin.",
+		"Sonuçları gruplandırmak için GROUP BY kullanın."
+	],
+	"uses": [
+		"Sistemde kayıtlı olan toplam kullanıcı sayısını bulmak.",
+		"Belirli bir şehirde yaşayan müşteri sayısını hesaplamak.",
+		"Siparişler tablosundaki tamamlanmış işlemlerin miktarını belirlemek.",
+		"Belirli bir fiyat aralığındaki ürünlerin sayısını bulmak."
+	],
+	"faq": [
+		["COUNT isimleri gösterir mi?", "Hayır, bu fonksiyon isim listesi döndürmez. Sadece kriterlerinize uyan satırların toplam sayısını gösteren tek bir sayısal değer verir."],
+		["COUNT(*) içindeki yıldız ne anlama gelir?", "Yıldız, tablodaki her satırın sayılacağını belirtir. Bazı sütunlar boş olsa bile tablodaki tüm kayıtların hesaba katılmasını sağlar."],
+		["GROUP BY olmadan şehir adını ve COUNT'u yazabilir miyim?", "Çoğu veritabanı yönetim sistemi bu sorguyu reddeder. Toplama fonksiyonu ile birlikte gösterdiğiniz sütun mutlaka GROUP BY ifadesinde yer almalıdır."]
+	]
+};
+var programming_sql_sual_say_default = {
+	az,
+	en,
+	ru,
+	ar,
+	tr
+};
+//#endregion
+export { ar, az, programming_sql_sual_say_default as default, en, ru, tr };

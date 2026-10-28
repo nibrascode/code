@@ -1,0 +1,110 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/neon-I96GoxEJ.js
+var az = {
+	"about": ["Neon, nibrascode.com/oyun saytında pulsuz olaraq təqdim edilən bir browser oyunudur. Oyunda məqsəd, balonu idarə edərək kənarları parçalamaqdır. Balon düşdükdə bir həyat itirilir.", "Bu oyun, sadə və sürətli əyləncə axtaran istifadəçilər üçün uyğundur. Əsas konsept, balonun hərəkətini idarə edərək çubuğu sağa-sola hərəkət etdirmək və balonu kənarları vurmaqdır."],
+	"steps": [
+		"1. Oyunu açın və balonu işıqlandırın.",
+		"2. Çubuğu sol və sağ düymələrlə hərəkət etdirin.",
+		"3. Balonun çubuğa çarpmasını təmin edin.",
+		"4. Balon düşdüyündə yeni bir həyat başlayır."
+	],
+	"uses": [
+		"Balonun hərəkətini təhlil edərək sürətini artırmaq.",
+		"Çubuğu düzgün mövqedə yerləşdirərək balonu yönəltmək.",
+		"Hər dəfə balon düşdükdə yeni bir həyat üçün plan qurmaq.",
+		"Oyun zamanı diqqəti artıraraq reaksiyalarınızı inkişaf etdirmək."
+	],
+	"faq": [
+		["Balon düşdükdə nə olur?", "Balon düşdükdə bir həyat itirilir və oyun davam edir. Həyat sayı sıfırlandıqda oyun bitir."],
+		["Çubuğu necə hərəkət etdirə bilərəm?", "Çubuğu sol və sağ düymələrlə idarə edərək balonu çubuğa çarpdırın."],
+		["Oyunda reklam var mı?", "Bu oyun reklam göstərmir və qeydiyyat tələb etmir. Sadəcə pulsuz oynanır."]
+	]
+};
+var en = {
+	"about": ["Neon is a free browser game hosted on nibrascode.com/oyun. The goal is to steer a ball to break bricks, using a paddle that moves left and right. If the ball falls, a life is lost.", "The game is suitable for players seeking quick, simple entertainment. It relies on controlling the ball’s trajectory and the paddle’s position to keep the ball in play."],
+	"steps": [
+		"1. Open the game and launch the ball.",
+		"2. Move the paddle left and right with the arrow keys.",
+		"3. Keep the ball bouncing off the paddle to hit bricks.",
+		"4. When the ball falls, a life is deducted and the game continues."
+	],
+	"uses": [
+		"Analyze the ball’s speed to improve timing.",
+		"Position the paddle to direct the ball accurately.",
+		"Plan for life loss and reset strategies.",
+		"Use the game to sharpen reaction times."
+	],
+	"faq": [
+		["What happens when the ball falls?", "A life is lost and the game continues until all lives are gone."],
+		["How do I move the paddle?", "Use the left and right arrow keys to control the paddle."],
+		["Are there ads in the game?", "No, the game contains no advertisements and requires no sign‑up."]
+	]
+};
+var ru = {
+	"about": ["Neon — бесплатная браузерная игра, размещённая на nibrascode.com/oyun. Цель игры — управлять шаром, разбивая кирпичи, при этом шар движется, а ракетка перемещается влево и вправо. Если шар падает, теряется жизнь.", "Игра подходит тем, кто ищет простое и быстрое развлечение. Основной принцип — управление траекторией шара и позиционирование ракетки, чтобы удержать шар в игре."],
+	"steps": [
+		"1. Откройте игру и запустите шар.",
+		"2. Перемещайте ракетку влево и вправо клавишами со стрелками.",
+		"3. Держите шар в игре, отражая его от ракетки, чтобы он ударял кирпичи.",
+		"4. При падении шара теряется жизнь, но игра продолжается."
+	],
+	"uses": [
+		"Анализируйте скорость шара для улучшения реакции.",
+		"Размещайте ракетку так, чтобы точно направлять шар.",
+		"Планируйте восстановление после потери жизни.",
+		"Используйте игру для тренировки реакций."
+	],
+	"faq": [
+		["Что происходит, если шар падает?", "Теряется жизнь, и игра продолжается до тех пор, пока не останется жизней."],
+		["Как перемещать ракетку?", "Используйте клавиши со стрелками влево и вправо."],
+		["Есть ли реклама в игре?", "Нет, в игре нет рекламы и регистрация не требуется."]
+	]
+};
+var ar = {
+	"about": ["نيون هو لعبة متصفح مجانية متوفرة على nibrascode.com/oyun. الهدف هو توجيه الكرة لتفجير الألواح، مع تحريك المقابض لليمين واليسار. إذا سقطت الكرة، تُفقد حياة واحدة.", "اللعبة مناسبة للعب السريع والبسيط. تعتمد على التحكم في مسار الكرة وموقع المقابض لإبقاء الكرة في اللعب."],
+	"steps": [
+		"1. افتح اللعبة وأطلق الكرة.",
+		"2. حرك المقابض لليمين واليسار باستخدام مفاتيح الأسهم.",
+		"3. حافظ على ارتداد الكرة من المقابض لتفجير الألواح.",
+		"4. عند سقوط الكرة، تُفقد حياة واحدة وتستمر اللعبة."
+	],
+	"uses": [
+		"تحليل سرعة الكرة لتحسين التوقيت.",
+		"وضع المقابض لتوجيه الكرة بدقة.",
+		"التخطيط لاستعادة الحياة بعد فقدانها.",
+		"استخدام اللعبة لتحسين ردود الفعل."
+	],
+	"faq": [
+		["ماذا يحدث عندما تسقط الكرة؟", "يُفقد حياة واحدة وتستمر اللعبة حتى تنتهي جميع الحيات."],
+		["كيف أتحرك المقابض؟", "استخدم مفاتيح الأسهم اليسار واليمين للتحكم في المقابض."],
+		["هل توجد إعلانات في اللعبة؟", "لا، اللعبة لا تحتوي على إعلانات ولا تتطلب تسجيلاً."]
+	]
+};
+var tr = {
+	"about": ["Neon, nibrascode.com/oyun sitesinde ücretsiz sunulan bir tarayıcı oyunudur. Oyunun amacı, topu yönlendirerek duvarları kırmaktır; top hareket ederken paddle sağa ve sola kayar. Top düşerse bir hayat kaybedilir.", "Oyun, hızlı ve basit eğlence arayan oyuncular için uygundur. Temel konsept, topun yolunu ve paddle’ın konumunu kontrol ederek topu oyunda tutmaktır."],
+	"steps": [
+		"1. Oyunu açın ve topu başlatın.",
+		"2. Paddeli sol ve sağ ok tuşlarıyla hareket ettirin.",
+		"3. Topu paddle’a çarparak duvarları vurun.",
+		"4. Top düşerse bir hayat azalır ve oyun devam eder."
+	],
+	"uses": [
+		"Topun hızını analiz ederek zamanlamayı geliştirin.",
+		"Paddeli doğru konuma getirerek topu yönlendirin.",
+		"Hayat kaybı sonrası strateji planlayın.",
+		"Oyunla reaksiyon sürelerinizi artırın."
+	],
+	"faq": [
+		["Top düşerse ne olur?", "Bir hayat kaybedilir ve oyun, tüm hayatlar bitene kadar devam eder."],
+		["Paddeli nasıl hareket ettiririm?", "Sol ve sağ ok tuşlarıyla paddeli kontrol edin."],
+		["Oyunda reklam var mı?", "Hayır, oyun reklam içermez ve kayıt gerektirmez."]
+	]
+};
+var neon_default = {
+	az,
+	en,
+	ru,
+	ar,
+	tr
+};
+//#endregion
+export { ar, az, neon_default as default, en, ru, tr };

@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-CKeovgl0.js";import{t}from"./useRouterState-BXlZ-I8r.js";import{Mr as n}from"./index-IgY1VdGF.js";import{t as r}from"./search-pages-BzuT4YH4.js";var i=e();function a(){return t({select:e=>e.location.pathname}).replace(/\/$/,``)===`/en/nece`?(0,i.jsx)(r,{kind:`nece`,lang:`en`}):(0,i.jsx)(n,{})}export{a as component};

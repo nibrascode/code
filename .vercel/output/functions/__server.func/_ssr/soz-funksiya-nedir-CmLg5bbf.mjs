@@ -1,0 +1,110 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/soz-funksiya-nedir-CmLg5bbf.js
+var az = {
+	"about": ["Funksiya, proqramın müəyyən bir işini yerinə yetirən adlandırılmış kod blokudur. Adını çağırdığınızda, həmin kod yenidən işə düşür. Funksiya, eyni kodu bir neçə dəfə yazmaq yerinə, bir dəfə yazıb, lazım olduqda çağırmaqla kodu təmiz və oxunaqlı saxlayır.", "Funksiyaya parametrlər verə bilərsiniz; bu, funksiyanın daxilindəki əməliyyatları dəyişdirir. Funksiya işini bitirdikdən sonra nəticə qaytara bilər, məsələn, cari vaxtı və ya hesablama nəticəsini. Funksiya özbaşına işə düşmür, onu çağıran sətir işə salır."],
+	"steps": [
+		"Funksiya üçün ad seçin və onu `def` (Python) və ya `function` (JavaScript) sözü ilə elan edin.",
+		"Funksiya daxilində lazım olan əməliyyatları yazın və `return` ilə nəticə verin.",
+		"Funksiyanı çağırmaq üçün adını yazın və lazım olan arqumentləri verin.",
+		"Çıxış nəticəsini `print` və ya `console.log` ilə ekrana verin."
+	],
+	"uses": [
+		"Verilənləri formatlamaq üçün mətn funksiyası.",
+		"Məlumat bazasından sorğu nəticələrini emal edən funksiya.",
+		"İstifadəçi girişini doğrulayan funksiya.",
+		"Veb səhifədə dinamik məzmunu yeniləyən funksiya."
+	],
+	"faq": [
+		["Funksiya nədir?", "Funksiya, müəyyən bir işi yerinə yetirən və adla çağırılan kod blokudur."],
+		["Funksiya necə çağırılır?", "Adını yazaraq və arqumentləri verərək çağırılır, məsələn `myFunc(5)`."],
+		["Funksiyanın nəticəsi nədir?", "Funksiya `return` ilə nəticə verir və bu nəticə çağıran kodda istifadə edilə bilər."]
+	]
+};
+var en = {
+	"about": ["A function is a named block of code that performs a specific task. When you call its name, the code runs again. Functions avoid duplicating the same code throughout your program, keeping it clean and readable.", "You can pass data into a function as parameters, allowing the function to behave differently each time. After completing its work, a function can return a result, such as the current time or a calculation outcome."],
+	"steps": [
+		"Choose a descriptive name and declare the function using `def` (Python) or `function` (JavaScript).",
+		"Write the operations inside the function and use `return` to output a value.",
+		"Call the function by its name and provide any required arguments.",
+		"Print or log the returned value to see the result."
+	],
+	"uses": [
+		"Formatting text for display.",
+		"Processing database query results.",
+		"Validating user input.",
+		"Updating dynamic content on a web page."
+	],
+	"faq": [
+		["What is a function?", "A function is a named block of code that performs a specific task."],
+		["How do you call a function?", "You call it by writing its name and passing any needed arguments, e.g., `myFunc(5)`."],
+		["What does a function return?", "A function returns a value using `return`, which can then be used by the calling code."]
+	]
+};
+var ru = {
+	"about": ["Функция — это именованный блок кода, выполняющий конкретную задачу. При вызове её имени код запускается снова, что позволяет избежать дублирования кода и делает программу более читаемой.", "В функцию можно передавать параметры, благодаря чему она может вести себя по‑разному в каждом вызове. После выполнения функция может вернуть результат, например, текущее время или результат вычисления."],
+	"steps": [
+		"Выберите понятное имя и объявите функцию с помощью `def` (Python) или `function` (JavaScript).",
+		"Напишите операции внутри функции и используйте `return` для выдачи значения.",
+		"Вызовите функцию, указав имя и необходимые аргументы.",
+		"Выведите возвращённое значение через `print` или `console.log`."
+	],
+	"uses": [
+		"Форматирование текста для вывода.",
+		"Обработка результатов запросов к базе данных.",
+		"Проверка пользовательского ввода.",
+		"Обновление динамического контента на веб‑странице."
+	],
+	"faq": [
+		["Что такое функция?", "Функция — это именованный блок кода, выполняющий конкретную задачу."],
+		["Как вызвать функцию?", "Вызов осуществляется, написав её имя и передав необходимые аргументы, например `myFunc(5)`."],
+		["Что возвращает функция?", "Функция возвращает значение через `return`, которое может использовать вызывающий код."]
+	]
+};
+var ar = {
+	"about": ["الدالة هي كتلة كود مسماة تقوم بعمل محدد. عند استدعاء اسمها، يتم تشغيل الكود مرة أخرى، ما يمنع تكرار الكود في أماكن متعددة ويجعل البرنامج أكثر وضوحاً.", "يمكنك تمرير بيانات إلى الدالة كوسائط، مما يتيح لها أن تتصرف بشكل مختلف في كل مرة. بعد الانتهاء، يمكن للدالة إرجاع نتيجة، مثل الوقت الحالي أو نتيجة حساب."],
+	"steps": [
+		"اختر اسمًا واضحًا وأعلن الدالة باستخدام `def` (بايثون) أو `function` (جافاسكربت).",
+		"اكتب العمليات داخل الدالة واستخدم `return` لإرجاع قيمة.",
+		"استدعِ الدالة بكتابة اسمها وتزويدها بالوسائط المطلوبة.",
+		"اطبع أو سجّل القيمة المرجعة باستخدام `print` أو `console.log`."
+	],
+	"uses": [
+		"تنسيق النص للعرض.",
+		"معالجة نتائج استعلامات قاعدة البيانات.",
+		"التحقق من إدخال المستخدم.",
+		"تحديث المحتوى الديناميكي على صفحة الويب."
+	],
+	"faq": [
+		["ما هي الدالة؟", "الدالة هي كتلة كود مسماة تقوم بعمل محدد."],
+		["كيف تستدعي الدالة؟", "يتم الاستدعاء بكتابة اسم الدالة وتزويدها بالوسائط المطلوبة، مثل `myFunc(5)`."],
+		["ما الذي تُرجعه الدالة؟", "تُرجِع الدالة قيمة باستخدام `return`، ويمكن استخدام هذه القيمة في الكود المستدعي."]
+	]
+};
+var tr = {
+	"about": ["Fonksiyon, belirli bir işi yerine getiren adlandırılmış bir kod bloğudur. Adını çağırdığınızda kod tekrar çalışır, bu da aynı kodu birden çok kez yazmak yerine tek bir yerde tutmanızı sağlar.", "Fonksiyona parametreler vererek her çağrıda farklı davranmasını sağlayabilirsiniz. İşlemi tamamladıktan sonra fonksiyon, örneğin geçerli zamanı veya bir hesaplama sonucunu döndürebilir."],
+	"steps": [
+		"Açıklayıcı bir ad seçin ve `def` (Python) veya `function` (JavaScript) ile fonksiyonu tanımlayın.",
+		"Fonksiyon içinde işlemleri yazın ve `return` ile bir değer döndürün.",
+		"Fonksiyonu adıyla çağırın ve gerekli argümanları verin.",
+		"Dönen değeri `print` veya `console.log` ile ekrana yazdırın."
+	],
+	"uses": [
+		"Metni biçimlendirme.",
+		"Veritabanı sorgusu sonuçlarını işleme.",
+		"Kullanıcı girişi doğrulama.",
+		"Web sayfasında dinamik içeriği güncelleme."
+	],
+	"faq": [
+		["Fonksiyon nedir?", "Fonksiyon, belirli bir işi yapan adlandırılmış bir kod bloğudur."],
+		["Fonksiyon nasıl çağrılır?", "Fonksiyon adıyla ve gerekli argümanlarla çağrılır, örneğin `myFunc(5)`."],
+		["Fonksiyon ne döndürür?", "Fonksiyon, `return` ile bir değer döndürür ve bu değer çağıran kodda kullanılabilir."]
+	]
+};
+var soz_funksiya_nedir_default = {
+	az,
+	en,
+	ru,
+	ar,
+	tr
+};
+//#endregion
+export { ar, az, soz_funksiya_nedir_default as default, en, ru, tr };

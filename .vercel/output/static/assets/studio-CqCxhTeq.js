@@ -1,0 +1,1 @@
+import{t as e}from"./studio-ydKEpXOD.js";var t=e;export{t as component};

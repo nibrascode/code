@@ -1,0 +1,110 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/password-B6XxKeWf.js
+var az = {
+	"about": ["Bu alət brauzerinizdə işləyən pulsuz bir generatorudur. O, hər dəfə düyməni basdığınızda hərflər, rəqəmlər və işarələrdən ibarət təsadüfi bir şifrə çıxarır. İstədiyiniz uzunluğu seçə bilərsiniz; məsələn, 16 uzunluq seçsəniz, 16 simvoldan ibarət şifrə əldə edirsiniz. Şifrə heç bir serverə göndərilmir və burada saxlanılmır, ona görə də onu özünüz kopyalamaq və ya fayl kimi yükləmək lazımdır.", "Bu tip şifrələr güclü hesab olunur, çünki onlar müxtəlif simvol siniflərini qarışdırır və təxmin etmək çətindir. Lakin 12 simvol uzunluq yalnız başlanğıc üçün kifayətdir; əksər onlayn hesablar üçün 16 və ya daha uzun şifrə tövsiyə olunur. Daha yadda qalan və təhlükəsiz bir həll üçün bir neçə sözlərlə ibarət passfraza da seçilə bilər."],
+	"steps": [
+		"Brauzerdə nibrascode.com saytına daxil olun və Random password bölməsini açın.",
+		"İstədiyiniz şifrə uzunluğunu seçin və ya əl ilə daxil edin.",
+		"‘Generate’ düyməsini basın; yeni təsadüfi şifrə ekranda görünəcək.",
+		"Şifrəni kopyalayın və ya fayl kimi yükləyin; daha sonra istifadə edin."
+	],
+	"uses": [
+		"Onlayn hesabların giriş məlumatlarını gücləndirmək üçün.",
+		"Şifrələnmiş faylların və ya arxivlərin qorunması məqsədilə.",
+		"Wi‑Fi şəbəkəsi və ya digər cihazların şifrələrini təyin edərkən.",
+		"Müvəqqəti və ya bir dəfəlik giriş tələb edən sistemlərdə."
+	],
+	"faq": [
+		["Bu alət şifrəni serverə göndərirmi?", "Xeyr, bütün əməliyyatlar brauzerdə yerinə yetirilir və şifrə heç bir serverə ötürülmür, buna görə də məlumatların gizliliyi təmin olunur."],
+		["Şifrəni necə saxlamalıyam?", "Şifrəni özünüz kopyalayın və etibarlı bir şifrə meneceri və ya şifrələnmiş fayl şəklində saxlayın; sayt şifrəni saxlamır."],
+		["Niyə 16 və ya daha uzun şifrə tövsiyə olunur?", "Uzun şifrələr daha çox kombinasiyaya malik olur, bu da kəşf edilmə və ya zorla açılma ehtimalını əhəmiyyətli dərəcədə azaldır."]
+	]
+};
+var en = {
+	"about": ["This tool is a free, browser‑based password generator. Each time you press the generate button it produces a random string composed of letters, digits and symbols. You can set the desired length, for example a length of 16 yields a 16‑character password. The password is never sent to a server and is not stored, so you must copy it yourself or download it as a file.", "Such passwords are considered strong because they mix multiple character classes, making them hard to guess. However, a 12‑character password is only a minimal start; most online accounts benefit from 16 characters or more. For better memorability and security, a passphrase made of several words can also be used."],
+	"steps": [
+		"Open nibrascode.com in your browser and navigate to the Random password section.",
+		"Select or type the desired password length.",
+		"Click the generate button; a new random password will appear on the screen.",
+		"Copy the password or download it as a file, then use it where needed."
+	],
+	"uses": [
+		"Strengthening login credentials for online services.",
+		"Protecting encrypted files or archives.",
+		"Setting passwords for Wi‑Fi networks or other devices.",
+		"Providing temporary passwords for one‑time access systems."
+	],
+	"faq": [
+		["Does the tool send the password to a server?", "No, all processing happens locally in the browser and the password is never transmitted to any server, ensuring privacy."],
+		["How should I store the generated password?", "Copy it to a secure password manager or save it in an encrypted file; the site does not retain any copy."],
+		["Why is a length of 16 or more recommended?", "Longer passwords have exponentially more possible combinations, which dramatically reduces the chance of brute‑force or guess attacks."]
+	]
+};
+var ru = {
+	"about": ["Этот сервис – бесплатный генератор паролей, работающий полностью в браузере. При каждом нажатии кнопки генерируется случайная строка из букв, цифр и знаков. Пользователь задаёт длину, например 16‑символьный пароль будет состоять из 16 символов. Пароль не отправляется на сервер и не сохраняется, поэтому его нужно скопировать вручную или скачать в виде файла.", "Такие пароли считаются надёжными, поскольку используют несколько наборов символов, что затрудняет их угадывание. Тем не менее 12‑символьный пароль – лишь минимум; для большинства онлайн‑аккаунтов рекомендуется 16 и более символов. Для лучшей запоминаемости и безопасности можно использовать пароль‑фразу из нескольких слов."],
+	"steps": [
+		"Откройте nibrascode.com в браузере и перейдите к разделу Random password.",
+		"Укажите желаемую длину пароля или введите её вручную.",
+		"Нажмите кнопку генерации – на экране появится новый случайный пароль.",
+		"Скопируйте пароль или скачайте его в виде файла и используйте по назначению."
+	],
+	"uses": [
+		"Укрепление паролей для входа в онлайн‑сервисы.",
+		"Защита зашифрованных файлов и архивов.",
+		"Установка паролей для Wi‑Fi сетей и других устройств.",
+		"Создание одноразовых паролей для временного доступа."
+	],
+	"faq": [
+		["Отправляет ли сервис пароль на сервер?", "Нет, вся генерация происходит локально в браузере, пароль не передаётся и не сохраняется на сервере."],
+		["Как лучше хранить сгенерированный пароль?", "Сохраните его в надёжном менеджере паролей или в зашифрованном файле; сайт не сохраняет копию."],
+		["Почему рекомендуется длина 16 и более?", "Большее количество символов резко увеличивает количество возможных комбинаций, что делает подбор пароля практически невозможным."]
+	]
+};
+var ar = {
+	"about": ["هذه الأداة مولّد كلمات مرور مجاني يعمل داخل المتصفح. كل مرة تضغط فيها زر الإنشاء يتم إنتاج سلسلة عشوائية مكوّنة من أحرف، أرقام ورموز. يمكنك تحديد الطول المطلوب؛ على سبيل المثال اختيار طول 16 ينتج كلمة مرور مكوّنة من 16 حرفًا. لا يتم إرسال كلمة المرور إلى أي خادم ولا تُحفظ، لذا عليك نسخها يدويًا أو تنزيلها كملف.", "تُعدّ هذه الكلمات قوية لأنها تجمع بين فئات متعددة من الأحرف، ما يجعل تخمينها صعبًا. ومع ذلك، كلمة مرور بطول 12 حرفًا لا تُعدّ كافية؛ يُنصح عادةً بطول 16 حرفًا أو أكثر للحسابات على الإنترنت. للحصول على أمان وسهولة تذكر أكبر، يمكن اختيار عبارة مرور مكوّنة من عدة كلمات."],
+	"steps": [
+		"افتح موقع nibrascode.com في المتصفح وانتقل إلى قسم كلمة المرور العشوائية.",
+		"حدد أو أدخل الطول المطلوب لكلمة المرور.",
+		"اضغط زر الإنشاء؛ ستظهر كلمة مرور عشوائية جديدة على الشاشة.",
+		"انسخ كلمة المرور أو حمّلها كملف ثم استخدمها حسب الحاجة."
+	],
+	"uses": [
+		"تقوية بيانات الدخول للحسابات على الإنترنت.",
+		"حماية الملفات المشفّرة أو الأرشيفات.",
+		"تعيين كلمات مرور لشبكات الواي‑فاي أو الأجهزة الأخرى.",
+		"إنشاء كلمات مرور مؤقتة للوصول لمرة واحدة."
+	],
+	"faq": [
+		["هل تُرسل الأداة كلمة المرور إلى خادم؟", "لا، جميع عمليات الإنشاء تتم محليًا في المتصفح ولا تُرسل كلمة المرور إلى أي خادم، مما يحافظ على الخصوصية."],
+		["كيف يجب أن أحفظ كلمة المرور التي تم إنشاؤها؟", "قم بنسخها إلى مدير كلمات مرور موثوق أو احفظها في ملف مشفر؛ الموقع لا يحتفظ بأي نسخة."],
+		["لماذا يُنصح بطول 16 حرفًا أو أكثر؟", "كلما زاد الطول تزداد عدد التركيبات الممكنة بصورة هائلة، ما يقلل بشكل كبير فرص الاختراق عبر التخمين أو القوة الغاشمة."]
+	]
+};
+var tr = {
+	"about": ["Bu araç, tarayıcıda çalışan ücretsiz bir şifre üreticisidir. Her seferinde bir düğmeye bastığınızda harf, rakam ve işaretlerden oluşan rastgele bir dizi oluşturur. İstediğiniz uzunluğu seçebilirsiniz; örneğin 16 uzunluk seçildiğinde 16 karakterlik bir şifre elde edilir. Şifre hiçbir zaman sunucuya gönderilmez ve burada saklanmaz, bu yüzden kendiniz kopyalamalı veya dosya olarak indirmelisiniz.", "Bu şifreler, birden fazla karakter sınıfını karıştırdıkları için güçlü kabul edilir ve tahmin edilmesi zordur. Ancak 12 karakterlik bir şifre sadece başlangıç seviyesindedir; çoğu çevrimiçi hesap için 16 veya daha uzun bir şifre önerilir. Daha akılda kalıcı ve güvenli bir seçenek olarak birkaç kelimeden oluşan bir parola cümlesi de tercih edilebilir."],
+	"steps": [
+		"Tarayıcınızda nibrascode.com sitesini açın ve Random password bölümüne gidin.",
+		"İstediğiniz şifre uzunluğunu seçin veya manuel olarak girin.",
+		"Üret düğmesine tıklayın; ekranda yeni bir rastgele şifre görünecek.",
+		"Şifreyi kopyalayın ya da dosya olarak indirin ve ihtiyacınız olan yerde kullanın."
+	],
+	"uses": [
+		"Çevrimiçi hizmetlerin giriş bilgilerini güçlendirmek için.",
+		"Şifrelenmiş dosya ve arşivleri korumak amacıyla.",
+		"Wi‑Fi ağları veya diğer cihazlar için şifre belirlerken.",
+		"Geçici ve tek seferlik erişim gerektiren sistemlerde."
+	],
+	"faq": [
+		["Araç şifreyi sunucuya gönderiyor mu?", "Hayır, tüm işlem tarayıcıda yerel olarak gerçekleşir ve şifre hiçbir zaman bir sunucuya aktarılmaz, bu da gizliliği sağlar."],
+		["Oluşturulan şifreyi nasıl saklamalıyım?", "Güvenli bir şifre yöneticisine kopyalayın ya da şifreli bir dosyada saklayın; site herhangi bir kopya tutmaz."],
+		["Neden 16 karakter ve üzeri uzunluk önerilir?", "Daha uzun şifreler, kombinasyon sayısını katlanarak artırır ve kaba kuvvet ya da tahmin saldırılarını büyük ölçüde zorlaştırır."]
+	]
+};
+var password_default = {
+	az,
+	en,
+	ru,
+	ar,
+	tr
+};
+//#endregion
+export { ar, az, password_default as default, en, ru, tr };

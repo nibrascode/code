@@ -1,0 +1,27 @@
+import { i as S, r as P, t as C } from "./dsl-0GJBPSOD.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/python-input-output-Ju1LmCE7.js
+var python_input_output_default = [
+	S("input", [
+		"İstifadəçidən məlumat almaq",
+		"Reading from the user",
+		"Kullanıcıdan veri almak",
+		"قراءة البيانات من المستخدم",
+		"Ввод от пользователя"
+	], P("input() istifadəçinin yazdığı mətni qaytarır; qiymət həmişə str tipindədir. Ədəd lazımdırsa int() və ya float() ilə çevir. Yanlış daxiletmə xəta verə bilər, buna görə try ilə qoru.", "input() returns what the user typed, always as a str. If you need a number, convert it with int() or float(). A wrong entry can raise an error, so guard it with try.", "input() kullanıcının yazdığı metni döndürür; değer her zaman str'dir. Sayı gerekiyorsa int() veya float() ile dönüştür. Yanlış girdi hata verebilir, bu yüzden try ile koru.", "تعيد input() ما كتبه المستخدم وهو دائمًا من النوع str. وإذا احتجت عددًا فحوّله بـ int() أو float(). وقد يسبب الإدخال الخاطئ خطأً لذا احمه بـ try.", "input() возвращает введённый текст — всегда типа str. Нужно число — преобразуйте через int() или float(). Неверный ввод может вызвать ошибку, поэтому оберните в try."), C("raw = input(\"How many tickets? \")\ntry:\n    n = int(raw)\n    print(\"Total:\", n * 8, \"AZN\")\nexcept ValueError:\n    print(\"Please type a whole number\")")),
+	S("files", [
+		"Fayllarla işləmək",
+		"Working with files",
+		"Dosyalarla çalışmak",
+		"العمل مع الملفات",
+		"Работа с файлами"
+	], P("Faylı with open(...) ilə aç: blok bitəndə fayl avtomatik bağlanır. Rejimlər: \"r\" oxu, \"w\" yaz (köhnəni silir), \"a\" sona əlavə et. Azərbaycan hərfləri üçün encoding=\"utf-8\" göstər.", "Open a file with with open(...): it closes automatically when the block ends. Modes: \"r\" read, \"w\" write (erases the old content), \"a\" append. Specify encoding=\"utf-8\" for non-English letters.", "Dosyayı with open(...) ile aç: blok bitince dosya otomatik kapanır. Modlar: \"r\" oku, \"w\" yaz (eskisini siler), \"a\" sona ekle. Türkçe karakterler için encoding=\"utf-8\" belirt.", "افتح الملف بـ with open(...) فيُغلق تلقائيًا عند انتهاء الكتلة. الأوضاع: \"r\" للقراءة و\"w\" للكتابة (تمسح القديم) و\"a\" للإلحاق. وحدّد encoding=\"utf-8\" للحروف غير الإنجليزية.", "Открывайте файл через with open(...): по окончании блока он закроется сам. Режимы: \"r\" — чтение, \"w\" — запись (стирает старое), \"a\" — дозапись. Для не-английских букв укажите encoding=\"utf-8\"."), C("with open(\"notes.txt\", \"w\", encoding=\"utf-8\") as f:\n    f.write(\"first\\n\")\n    f.write(\"second\\n\")\n\nwith open(\"notes.txt\", encoding=\"utf-8\") as f:\n    for line in f:\n        print(line.strip())")),
+	S("json", [
+		"Məlumatı JSON ilə saxlamaq",
+		"Saving data as JSON",
+		"Veriyi JSON ile saklamak",
+		"حفظ البيانات بصيغة JSON",
+		"Сохранение данных в JSON"
+	], P("Siyahı və lüğəti fayla yazmağın rahat yolu json modulıdır; nəticə insan tərəfindən də oxunur və başqa dillərlə uyğundur.", "The json module is a convenient way to write lists and dictionaries to a file; the result is human-readable and compatible with other languages.", "Liste ve sözlükleri dosyaya yazmanın rahat yolu json modülüdür; sonuç insan tarafından da okunur ve başka dillerle uyumludur.", "وحدة json طريقة مريحة لكتابة القوائم والقواميس في ملف، والنتيجة مقروءة للبشر ومتوافقة مع لغات أخرى.", "Модуль json — удобный способ записать списки и словари в файл; результат читаем и совместим с другими языками."), C("import json\n\ndata = {\"user\": \"Sevda\", \"scores\": [90, 85]}\nwith open(\"data.json\", \"w\", encoding=\"utf-8\") as f:\n    json.dump(data, f, ensure_ascii=False, indent=2)\n\nwith open(\"data.json\", encoding=\"utf-8\") as f:\n    back = json.load(f)\nprint(back[\"scores\"])"))
+];
+//#endregion
+export { python_input_output_default as default };

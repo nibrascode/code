@@ -1,0 +1,1 @@
+import{t as e}from"./doctor-DAjZJKLh.js";var t=e;export{t as component};

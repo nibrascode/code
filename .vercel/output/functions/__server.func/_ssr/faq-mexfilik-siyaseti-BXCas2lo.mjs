@@ -1,0 +1,110 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/faq-mexfilik-siyaseti-BXCas2lo.js
+var az = {
+	"about": ["Nibras Code veb-səhifəsində tətbiqlərin məxfilik siyasətinin harada yerləşdiyini və necə tapılacağını izah edən rəsmi yardım səhifəsidir. İstifadəçilər hər tətbiq səhifəsində müvafiq düymə vasitəsilə birbaşa həmin xidmətin öz şərtləri ilə tanış ola bilərlər. Əsas sayt və Nibras AI üçün ümumi məxfilik səhifəsi mövcuddur.", "Məxfilik siyasəti anlayışı istifadəçi məlumatlarının qorunması, hansı məlumatların saxlanılması və nələrin cihazda qalmasını tənzimləyən hüquqi sənəddir. Hər bir tətbiqin özünəməxsus siyasəti mövcuddur və ümumi səhifə fərdi tətbiqlərin qaydalarını əvəz etmir. Bəzi xüsusi xidmətlər və hesab silmə qaydaları üçün də ayrıca bölmələr fəaliyyət göstərir."],
+	"steps": [
+		"İstədiyiniz tətbiq səhifəsini açın.",
+		"Məxfilik bölməsinə keçid edən düyməni tapın.",
+		"Düyməni sıxaraq həmin tətbiqin mətnini oxuyun.",
+		"Ümumi məlumat üçün əsas keçiddən istifadə edin."
+	],
+	"uses": [
+		"Tətbiqin məlumatlarınızı necə qoruduğunu yoxlamaq üçün oxuyursunuz.",
+		"Hansı məlumatların cihazda qaldığını öyrənmək üçün baxırsınız.",
+		"Hesabın silinməsi qaydaları ilə tanış olmaq üçün istifadə edirsiniz.",
+		"Fərdi tətbiqlərin öz şərtlərini müqayisə edirsiniz."
+	],
+	"faq": [
+		["Məxfilik siyasətini haradan tapa bilərəm?", "Hər tətbiq səhifəsində uyğun keçid düyməsi mövcuddur və əsas səhifə üçün xüsusi ünvan istifadə olunur."],
+		["Ümumi siyasət bütün tətbiqlərə şamil edilirmi?", "Xeyr, ümumi səhifə fərdi tətbiqlərin öz siyasətini əvəz etmir və hər xidmətin öz mətni olur."],
+		["Hesabın silinməsi qaydalarını haradan öyrənə bilərəm?", "Nibras QR hesabı üçün xüsusi silmə təlimatları ayrıca səhifədə izah edilmişdir."]
+	]
+};
+var en = {
+	"about": ["This is an official help page on nibrascode.com explaining where to find the privacy policies for various applications. Every app page includes a dedicated button to open that specific service's policy. The main site and Nibras AI share a general policy page, while several other apps maintain their own distinct policy texts.", "The privacy policy concept refers to documentation outlining how user data is handled, what information is stored, and what stays directly on the device. Each app features its own independent text detailing these practices as well as account status, ensuring transparency across the entire platform without general pages overriding specific terms."],
+	"steps": [
+		"Navigate to the desired application page.",
+		"Locate the privacy policy button on the page.",
+		"Click the button to open the specific text.",
+		"Review the stored data and device retention details."
+	],
+	"uses": [
+		"Checking how an individual application handles your data.",
+		"Learning which information remains stored on your device.",
+		"Finding specific account deletion instructions for services.",
+		"Reviewing separate terms for different platform tools."
+	],
+	"faq": [
+		["Where can I find the privacy policy for an app?", "Every application page features a dedicated button that opens that specific service's own policy text directly."],
+		["Does the main site policy replace individual app policies?", "No, the general page does not replace an app's policy, as each application maintains its own separate text."],
+		["How do I learn about account deletion for specific tools?", "Account removal procedures, such as for Nibras QR, are explained on dedicated subpages provided on the site."]
+	]
+};
+var ru = {
+	"about": ["Это официальная страница справки на nibrascode.com, объясняющая, где найти политику конфиденциальности для различных приложений. На каждой странице приложения предусмотрена специальная кнопка для доступа к условиям этого сервиса. Основной сайт и Nibras AI используют общую страницу, а другие сервисы имеют собственные тексты.", "Концепция политики конфиденциальности описывает правила обработки пользовательских данных, включая информацию о том, что именно сохраняется и что остается непосредственно на устройстве. Каждое приложение публикует свой собственный текст о хранении данных и наличии учетной записи, причем общие страницы не заменяют правила конкретных сервисов."],
+	"steps": [
+		"Откройте страницу нужного приложения на сайте.",
+		"Найдите кнопку политики конфиденциальности.",
+		"Нажмите кнопку для просмотра текста.",
+		"Ознакомьтесь с информацией о хранении данных."
+	],
+	"uses": [
+		"Проверка правил обработки данных конкретного приложения.",
+		"Выяснение того, какая информация остается на вашем устройстве.",
+		"Поиск инструкций по удалению учетной записи сервиса.",
+		"Сравнение условий различных программных продуктов."
+	],
+	"faq": [
+		["Где находится политика конфиденциальности?", "На каждой странице приложения есть специальная кнопка, а для основного сайта и Nibras AI используется отдельная общая страница."],
+		["Заменяет ли общая страница политику конкретного приложения?", "Нет, общая страница не заменяет политику приложения, так как каждое из них имеет собственный текст."],
+		["Где описано удаление учетной записи?", "Инструкции по удалению учетной записи, например для Nibras QR, объясняются на специальной странице."]
+	]
+};
+var ar = {
+	"about": ["هذه صفحة مساعدة رسمية على موقع nibrascode.com توضح مكان العثور على سياسة الخصوصية لمختلف التطبيقات. تتضمن صفحة كل تطبيق زراً مخصصاً يتيح للمستخدمين الانتقال مباشرة إلى النص الخاص بخصوصية تلك الخدمة. يمتلك الموقع الرئيسي وNibras AI صفحة مشتركة بينما تتمتع تطبيقات أخرى بصفحات منفصلة.", "مفهوم سياسة الخصوصية يتعلق بتوثيق كيفية التعامل مع بيانات المستخدمين وما يتم تخزينه وما يبقى على الجهاز. يقدم كل تطبيق نصه الخاص الذي يوضح تفاصيل البيانات وحالة الحساب، ولا تعوض الصفحة العامة السياسة الخاصة بأي تطبيق فردي لضمان الوضوح التام للمستخدمين."],
+	"steps": [
+		"انتقل إلى صفحة التطبيق المطلوبة على الموقع.",
+		"ابحث عن زر سياسة الخصوصية الموجود في الصفحة.",
+		"اضغط على الزر لفتح النص الخاص بالتطبيق.",
+		"راجع تفاصيل البيانات المخزنة ومعلومات الجهاز."
+	],
+	"uses": [
+		"التحقق من كيفية تعامل التطبيق مع بياناتك الشخصية.",
+		"معرفة المعلومات التي يتم تخزينها محلياً على جهازك.",
+		"الاطلاع على تعليمات حذف الحساب لبعض الخدمات.",
+		"مراجعة الشروط الخاصة بمختلف أدوات المنصة."
+	],
+	"faq": [
+		["أين أجد سياسة الخصوصية الخاصة بالتطبيقات؟", "تتضمن صفحة كل تطبيق زراً مخصصاً يفتح سياسة تلك الخدمة، بينما يمتلك الموقع الرئيسي صفحة أخرى مخصصة."],
+		["هل تحل الصفحة العامة محل سياسة التطبيق الفردي؟", "لا، الصفحة العامة لا تحل محل سياسة التطبيق، حيث يحافظ كل تطبيق على نصه المستقل الخاص به."],
+		["كيف أعرف تفاصيل حذف الحساب لبعض الخدمات؟", "يتم شرح إجراءات إزالة الحساب، مثل حساب Nibras QR، في صفحة فرعية مخصصة على الموقع."]
+	]
+};
+var tr = {
+	"about": ["Bu sayfa, nibrascode.com üzerinde çeşitli uygulamaların gizlilik politikasının nerede bulunduğunu ve nasıl erişileceğini açıklayan resmi bir yardım içeriğidir. Her uygulama sayfasında, ilgili servisin kendi koşullarını açan özel bir düğme yer alır. Ana site ve Nibras AI için ortak bir sayfa bulunurken diğer bazı araçların ayrı metinleri vardır.", "Gizlilik politikası kavramı, kullanıcı verilerinin nasıl işlendiğini, hangi bilgilerin saklandığını ve nelerin doğrudan cihazda kaldığını belirten belgelendirmedir. Her uygulama kendi bağımsız metnini sunar ve genel sayfa hiçbir zaman bireysel uygulama kurallarının yerini almaz, böylece her hizmetin kendi şartları şeffaf bir şekilde sunulmuş olur."],
+	"steps": [
+		"İlgili uygulama sayfasına gidin.",
+		"Sayfadaki gizlilik politikası düğmesini bulun.",
+		"Metni açmak için düğmeye tıklayın.",
+		"Saklanan verilerle ilgili detayları inceleyin."
+	],
+	"uses": [
+		"Bir uygulamanın verilerinizi nasıl koruduğunu kontrol etmek için bakarsınız.",
+		"Hangi bilgilerin cihazınızda saklandığını öğrenmek için okursunuz.",
+		"Hesap silme prosedürleri hakkında bilgi almak için kullanırsınız.",
+		"Farklı platform araçlarının ayrı ayrı koşullarını incelersiniz."
+	],
+	"faq": [
+		["Gizlilik politikasını nerede bulabilirim?", "Her uygulama sayfasında ilgili servisin politikasını açan bir düğme bulunur ve ana site için ayrı bir adres vardır."],
+		["Genel sayfa, uygulama politikasının yerini alır mı?", "Hayır, genel sayfa bir uygulamanın politikasının yerini almaz; her uygulamanın kendi ayrı metni mevcuttur."],
+		["Hesap silme adımlarını nereden öğrenebilirim?", "Nibras QR gibi belirli araçlar için hesap silme süreçleri sitedeki özel bir alt sayfada açıklanmıştır."]
+	]
+};
+var faq_mexfilik_siyaseti_default = {
+	az,
+	en,
+	ru,
+	ar,
+	tr
+};
+//#endregion
+export { ar, az, faq_mexfilik_siyaseti_default as default, en, ru, tr };

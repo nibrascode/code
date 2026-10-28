@@ -1,0 +1,110 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/a-android-tetbiq-icazeleri-B3ey6szT.js
+var az = {
+	"about": ["İcazələr tətbiqin telefonun kamera, fayllar və bildirişlər kimi hissələrinə çıxışını idarə edir. Hər icazə, tətbiqin telefonun yalnız bir hissəsinə daxil olmasına razılıqdır. Kamera, fotoşəkillər, mikrofon və bildirişlər fərqli icazələrdir və müstəqil şəkildə idarə olunur.", "İstifadəçilər tətbiqin funksiyası üçün zəruri olmayan icazələri verə bilməz. İcazələr daha sonra tənzimləmələrdən söndürülə bilər. Məsələn, kameranın söndürülməsi skan prosesini dayandırır, lakin tətbiqin qalan hissəsini silmir. Bu, cihazın təhlükəsizliyini və məxfiliyini qorumağa kömək edir."],
+	"steps": [
+		"Telefonunuzun əsas tənzimləmələr menyunu açın.",
+		"Uygulama icazələri bölməsinə keçin və maraqlandığınız tətbiqi seçin.",
+		"İstədiyiniz icazəni (məsələn, kamera) tapın və açarını söndürün.",
+		"Dəyişikliyin tətbiqin işinə təsirini yoxlamaq üçün tətbiqi yenidən yükləyin."
+	],
+	"uses": [
+		"Kamera icazəsini söndürərək tətbiqin skan funksiyasını məhdudlaşdırmaq.",
+		"Mikrofon icazəsini bağlayaraq tətbiqin səs qeyd etməsini qarşısını almaq.",
+		"Bildiriş icazəsini ləğv edərək istenmeyen məlumatların gəlməsini dayandırmaq.",
+		"Fayl icazəsini məhdudlaşdıraraq şəxsi sənədlərinizin təhlükəsizliyi."
+	],
+	"faq": [
+		["İcazəni söndürmək tətbiqi silir?", "Xeyr, icazəni söndürmək tətbiqin qalan hissəsini silmir. Yalnız həmin icazəyə bağlı funksiyalar işləməyə davam etmir, məsələn, kamera söndürüldükdə skan başlamağa bilmir."],
+		["Bütün icazələri eyni anda verə bilərəm?", "Bəli, lakin yalnız tətbiqin işi üçün zəruri olan icazələri vermək məsləhətdir. Zəruri olmayan icazələri verməyə məcbur deyilsiniz və onları istənilən vaxt dəyişə bilərsiniz."],
+		["İcazələr hansı hissələri əhatə edir?", "İcazələr kamera, fotoşəkillər, mikrofon və bildirişlər kimi fərqli hissələri əhatə edir. Hər biri müstəqil icazədir və telefonun həmin hissəsinə çıxışı nəzarət edir."]
+	]
+};
+var en = {
+	"about": ["Permissions determine whether an app can access the camera, files, or notifications. Each permission acts as consent for an app to enter a specific part of the phone. Camera, photos, microphone, and notifications are distinct permissions that operate independently of one another.", "Users are not required to grant permissions that an app does not need for its visible functions. Permissions can be revoked later through device settings. For instance, turning off the camera stops scanning features without deleting the rest of the application. This mechanism helps maintain privacy and control over device resources."],
+	"steps": [
+		"Open the main settings menu on your phone.",
+		"Navigate to the app permissions section and select the specific app.",
+		"Locate the permission you wish to change, such as camera access.",
+		"Toggle the switch off to revoke access and verify the app's behavior."
+	],
+	"uses": [
+		"Disable camera access to prevent an app from starting a scan function.",
+		"Turn off microphone permissions to stop an app from recording audio.",
+		"Revoke notification permissions to stop unwanted alerts from appearing.",
+		"Restrict file access to protect personal documents from unauthorized reading."
+	],
+	"faq": [
+		["Does turning off a permission delete the app?", "No, turning off a permission does not delete the rest of the app. It only stops the specific job related to that permission, such as preventing a scan from starting when the camera is off."],
+		["Must I allow all requested permissions?", "You do not have to allow permissions the app does not need for the job you see. You can deny unnecessary access and manage these settings at any time according to your privacy needs."],
+		["What specific areas do permissions cover?", "Permissions cover separate areas like the camera, photos, microphone, and notifications. Each is a distinct consent allowing an app to enter one specific part of the phone system."]
+	]
+};
+var ru = {
+	"about": ["Разрешения определяют, может ли приложение обращаться к камере, файлам или уведомлениям. Каждое разрешение является согласием на доступ приложения к одной части телефона. Камера, фото, микрофон и уведомления — это отдельные разрешения, которые управляются независимо друг от друга.", "Пользователи не обязаны предоставлять разрешения, которые приложение не использует для видимых функций. Разрешения можно отключить позже в настройках устройства. Например, отключение камеры останавливает сканирование, но не удаляет остальную часть приложения. Это помогает контролировать приватность и ресурсы устройства."],
+	"steps": [
+		"Откройте главное меню настроек на вашем телефоне.",
+		"Перейдите в раздел разрешений приложений и выберите нужное приложение.",
+		"Найдите разрешение, которое хотите изменить, например, доступ к камере.",
+		"Выключите переключатель, чтобы отозвать доступ и проверить работу приложения."
+	],
+	"uses": [
+		"Отключите доступ к камере, чтобы предотвратить запуск функции сканирования.",
+		"Отключите разрешение микрофона, чтобы остановить запись звука приложением.",
+		"Отмените разрешение на уведомления, чтобы прекратить получение нежелательных оповещений.",
+		"Ограничьте доступ к файлам для защиты личных документов от несанкционированного чтения."
+	],
+	"faq": [
+		["Удаляет ли приложение отключение разрешения?", "Нет, отключение разрешения не удаляет остальную часть приложения. Оно лишь останавливает конкретную функцию, связанную с этим разрешением, например, сканирование не начнется, если камера отключена."],
+		["Должен ли я разрешать все запрошенные права?", "Вы не обязаны разрешать права, которые приложение не использует для видимых задач. Вы можете отказать в ненужном доступе и управлять этими настройками в любое время в соответствии со своими потребностями."],
+		["Какие именно области покрывают разрешения?", "Разрешения покрывают отдельные области, такие как камера, фото, микрофон и уведомления. Каждое из них является отдельным согласием, позволяющим приложению войти в одну конкретную часть системы телефона."]
+	]
+};
+var ar = {
+	"about": ["تحديد الصلاحيات ما إذا كان التطبيق يمكنه الوصول إلى الكاميرا أو الملفات أو الإشعارات. كل صلاحية هي موافقة على دخول التطبيق إلى جزء واحد من الهاتف. الكاميرا والصور والميكروفون والإشعارات هي صلاحيات منفصلة تعمل بشكل مستقل عن بعضها البعض.", "لا يُطلب من المستخدمين منح الصلاحيات التي لا يحتاجها التطبيق للوظائف المرئية. يمكن إلغاء الصلاحيات لاحقًا من خلال إعدادات الجهاز. على سبيل المثال، إيقاف الكاميرا يوقف المسح الضوئي دون حذف بقية التطبيق. يساعد هذا الآلية في الحفاظ على الخصوصية والتحكم في موارد الجهاز."],
+	"steps": [
+		"افتح قائمة الإعدادات الرئيسية على هاتفك.",
+		"انتقل إلى قسم صلاحيات التطبيقات واختر التطبيق المحدد.",
+		"ابحث عن الصلاحية التي تريد تغييرها، مثل الوصول إلى الكاميرا.",
+		"قم بإيقاف المفتاح لسحب الوصول والتحقق من سلوك التطبيق."
+	],
+	"uses": [
+		"تعطيل الوصول إلى الكاميرا لمنع التطبيق من بدء وظيفة المسح الضوئي.",
+		"إيقاف صلاحيات الميكروفون لمنع التطبيق من تسجيل الصوت.",
+		"إلغاء صلاحيات الإشعارات لإيقاف التنبيهات غير المرغوب فيها.",
+		"تقييد الوصول إلى الملفات لحماية المستندات الشخصية من القراءة غير المصرح بها."
+	],
+	"faq": [
+		["هل يؤدي إيقاف الصلاحية إلى حذف التطبيق؟", "لا، إيقاف الصلاحية لا يحذف بقية التطبيق. إنه يوقف فقط المهمة المحددة المرتبطة بتلك الصلاحية، مثل منع بدء المسح الضوئي عندما تكون الكاميرا مغلقة."],
+		["هل يجب علي السماح بجميع الصلاحيات المطلوبة؟", "لا يجب عليك السماح بالصلاحيات التي لا يحتاجها التطبيق للعمل الذي تراه. يمكنك رفض الوصول غير الضروري وإدارة هذه الإعدادات في أي وقت وفقًا لاحتياجات الخصوصية."],
+		["ما المناطق المحددة التي تغطيها الصلاحيات؟", "تغطي الصلاحيات مناطق منفصلة مثل الكاميرا والصور والميكروفون والإشعارات. كل منها موافقة منفصلة تسمح للتطبيق بالدخول إلى جزء واحد محدد من نظام الهاتف."]
+	]
+};
+var tr = {
+	"about": ["İzinler, bir uygulamanın kameraya, dosyalara veya bildirimlere erişip erişemeyeceğini belirler. Her izin, uygulamanın telefonun bir kısmına girmesi için bir onaydır. Kamera, fotoğraflar, mikrofon ve bildirimler birbirinden bağımsız çalışan ayrı izinlerdir.", "Kullanıcılar, uygulamanın görünen işlevi için ihtiyaç duymadığı izinleri vermek zorunda değildir. İzinler daha sonra ayarlar üzerinden kapatılabilir. Örneğin, kameranın kapatılması taramayı durdurur ancak uygulamanın geri kalanını silmez. Bu, gizliliği ve cihaz kaynaklarını kontrol altında tutmaya yardımcı olur."],
+	"steps": [
+		"Telefonunuzdaki ana ayarlar menüsünü açın.",
+		"Uygulama izinleri bölümüne gidin ve ilgili uygulamayı seçin.",
+		"Değiştirmek istediğiniz izni bulun, örneğin kamera erişimi.",
+		"Erişimi iptal etmek için anahtarı kapatın ve uygulamanın davranışını doğrulayın."
+	],
+	"uses": [
+		"Tarama işlevinin başlamasını önlemek için kamera erişimini devre dışı bırakın.",
+		"Uygulamanın ses kaydetmesini durdurmak için mikrofon iznini kapatın.",
+		"İstenmeyen uyarıların gelmesini durdurmak için bildirim iznini iptal edin.",
+		"Kişisel belgeleri yetkisiz okumadan korumak için dosya erişimini sınırlayın."
+	],
+	"faq": [
+		["İzin kapatmak uygulamayı siler mi?", "Hayır, izni kapatmak uygulamanın geri kalanını silmez. Sadece o izinle ilgili belirli işi durdurur, örneğin kamera kapalıyken tarama başlatılamaz."],
+		["Tüm istenen izinlere izin vermek zorunda mıyım?", "Uygulamanın gördüğünüz iş için ihtiyaç duymadığı izinlere izin vermek zorunda değilsiniz. Gizlilik ihtiyaçlarınıza göre bu ayarları istediğiniz zaman yönetebilirsiniz."],
+		["İzinler hangi belirli alanları kapsar?", "İzinler kamera, fotoğraflar, mikrofon ve bildirimler gibi ayrı alanları kapsar. Her biri, uygulamanın telefon sisteminin belirli bir kısmına girmesine izin veren ayrı bir onaydır."]
+	]
+};
+var a_android_tetbiq_icazeleri_default = {
+	az,
+	en,
+	ru,
+	ar,
+	tr
+};
+//#endregion
+export { ar, az, a_android_tetbiq_icazeleri_default as default, en, ru, tr };

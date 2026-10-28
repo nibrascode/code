@@ -1,0 +1,1 @@
+import{t as e}from"./filecheck-PATXnJK-.js";var t=e;export{t as component};

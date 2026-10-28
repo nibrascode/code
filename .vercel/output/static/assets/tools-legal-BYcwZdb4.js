@@ -1,0 +1,1 @@
+import{r as e}from"./tools-legal-DVOZSx_6.js";var t=e;export{t as component};

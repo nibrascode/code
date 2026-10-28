@@ -1,0 +1,45 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/nece-pdf-parol-qoymaq-DvAeNpOa.js
+var az = {
+	"about": ["Parollu PDF açılanda parol soruşur. Fayl səhv adama getsə belə, parolsuz oxunmur.", "AES-128 PDF proqramlarının geniş dəstəklədiyi şifrələmədir. Fayl adi PDF baxıcılarında parolla açılır."],
+	"steps": [
+		"Aləti açın.",
+		"Faylı seçin.",
+		"Parolu yazın.",
+		"Endirin."
+	],
+	"uses": [
+		"Maaş və bank sənədləri.",
+		"Müqavilə layihələri.",
+		"Şəxsi sənəd surətləri."
+	],
+	"faq": [
+		["Parol qoymaq pulsuzdur?", "Bəli."],
+		["Parolum saxlanılır?", "Xeyr. Parol və fayl brauzerdən çıxmır."],
+		["Parolu unutdum, nə edim?", "Bərpa etmək mümkün deyil. Orijinal parolsuz faylı saxlayın."]
+	]
+};
+var en = {
+	"about": ["A protected PDF asks for the password when opened. Even if it reaches the wrong person, it cannot be read without it.", "AES-128 is widely supported by PDF apps. The file opens in normal PDF viewers with the password."],
+	"steps": [
+		"Open the tool.",
+		"Choose the file.",
+		"Type the password.",
+		"Download."
+	],
+	"uses": [
+		"Payslips and bank papers.",
+		"Draft contracts.",
+		"Copies of personal documents."
+	],
+	"faq": [
+		["Is adding a password free?", "Yes."],
+		["Is my password stored?", "No. The password and file stay in the browser."],
+		["I forgot the password, what now?", "It cannot be recovered. Keep the original file without a password."]
+	]
+};
+var nece_pdf_parol_qoymaq_default = {
+	az,
+	en
+};
+//#endregion
+export { az, nece_pdf_parol_qoymaq_default as default, en };

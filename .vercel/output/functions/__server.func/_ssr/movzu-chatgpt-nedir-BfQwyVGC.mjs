@@ -1,0 +1,110 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/movzu-chatgpt-nedir-BfQwyVGC.js
+var az = {
+	"about": ["ChatGPT OpenAI tərəfindən hazırlanmış süni intellekt əsaslı söhbət proqramıdır. İstifadəçi mətn yazır, sistem isə cavab verir. Bu alət mətni redaktə etmək, kod yazmaq və tərcümə etmək üçün nəzərdə tutulub. Həm pulsuz, həm də ödənişli planları mövcuddur. Limitlər və model seçimi vaxtaşırı dəyişə bilər.", "İnsanlar sadə izahat, kod yoxlaması və dil tərcüməsi üçün bu platformaya müraciət edirlər. Lakin cavablar həmişə dəqiq olmaya bilər. Rəqəmlər, tarixlər və qanunlar səhv çıxa bilər. Şəxsi məlumatları və şifrələri sisteminə ötürməmək vacibdir. Nəticələri istifadə etməzdən əvvəl mütləq yoxlamaq lazımdır."],
+	"steps": [
+		"Sualınızı və ya tapşırıq mətnini aydın şəkildə yazın.",
+		"Sistemdən gələn cavabı diqqətlə oxuyun.",
+		"Kod və ya faktları müstəqil olaraq yoxlayın.",
+		"Zəruri hallarda sualı dəqiqləşdirərək yenidən soruşun."
+	],
+	"uses": [
+		"Mürəkkəb kod parçalarını sətir-sətir izah etmək üçün istifadə olunur.",
+		"Fərqli dillər arasında mətn tərcüməsi aparmaq üçün kömək edir.",
+		"Məktub və ya sənad qrammatik səhvləri tapmaq üçün xidmət edir.",
+		"Sadə dil ilə mürəkkəb mövzuları izah etmək üçün tətbiq olunur."
+	],
+	"faq": [
+		["ChatGPT fayllarımı öz-özünə açır mı?", "Xeyr, sistem kompüterinizdəki faylları avtomatik açmır. Yalnız sizə yapışdırdığınız və ya əl ilə yüklədiyiniz mətni görür. Şifrə və kart nömrəsi kimi həssas məlumatları ora ötürməmək məsləhətdir."],
+		["Cavablar həmişə dəqiqdir?", "Yox, cavablar həmişə düzgün olmaya bilər. Rəqəmlər, tarixlər və qanun maddələri səhv çıxa bilər. Əmin görünən cavablarda belə səhv ola bilər. Vacib məlumatları başqa mənbələrdən yoxlamaq lazımdır."],
+		["Nibras AI ilə fərqi nədir?", "Nibras AI bu saytın öz söhbət funksiyasıdır və ChatGPT deyil. Sual verilmə üsulu oxşardır, lakin istifadə olunan model və limitlər fərqlidir. Hər ikisi müstəqil sistemlər kimi işləyir."]
+	]
+};
+var en = {
+	"about": ["ChatGPT is an AI chatbot developed by OpenAI. Users type text, and the system generates responses. It is designed for writing, coding, translation, and simple explanations. Both free and paid plans are available. Model access and daily limits may change periodically.", "People use this tool for code review, language translation, and clarifying complex topics. However, answers are not always accurate. Numbers, dates, and legal facts can be incorrect. Never share passwords or card numbers. Always verify important information from other sources before using it."],
+	"steps": [
+		"Type your question or task clearly.",
+		"Read the generated response carefully.",
+		"Verify code or facts independently.",
+		"Refine your prompt if the answer is unclear."
+	],
+	"uses": [
+		"It helps explain complex code line by line.",
+		"It assists with text translation between different languages.",
+		"It serves to find grammatical errors in drafts.",
+		"It is applied to explain complex topics in simple terms."
+	],
+	"faq": [
+		["Does ChatGPT access my files?", "No, the system does not automatically open files on your computer. It only sees text you paste or upload manually. You should not share sensitive data like passwords or card numbers with it."],
+		["Are the answers always correct?", "No, answers are not always accurate. Numbers, dates, and laws can be wrong. Even confident-sounding responses may contain errors. You must verify critical information from other reliable sources before relying on it."],
+		["How is it different from Nibras AI?", "Nibras AI is the site's own chat feature, not ChatGPT. While the question format is similar, the underlying model and usage limits are different. They operate as separate, independent systems."]
+	]
+};
+var ru = {
+	"about": ["ChatGPT — это чат-бот на основе ИИ, разработанный OpenAI. Пользователь вводит текст, а система генерирует ответы. Инструмент предназначен для написания текстов, кода, перевода и простых объяснений. Доступны бесплатные и платные планы. Доступ к моделям и лимиты могут меняться.", "Люди используют этот инструмент для проверки кода, перевода и разъяснения сложных тем. Однако ответы не всегда точны. Цифры, даты и законы могут быть ошибочными. Никогда не передавайте пароли или номера карт. Всегда проверяйте важную информацию из других источников перед использованием."],
+	"steps": [
+		"Четко введите свой вопрос или задачу.",
+		"Внимательно прочитайте сгенерированный ответ.",
+		"Независимо проверьте код или факты.",
+		"Уточните запрос, если ответ неясен."
+	],
+	"uses": [
+		"Он помогает объяснять сложный код построчно.",
+		"Он помогает с переводом текста между разными языками.",
+		"Он используется для поиска грамматических ошибок в черновиках.",
+		"Он применяется для объяснения сложных тем простыми словами."
+	],
+	"faq": [
+		["Доступляет ли ChatGPT к моим файлам?", "Нет, система не открывает файлы на вашем компьютере автоматически. Она видит только текст, который вы вставляете или загружаете вручную. Не следует передавать ей чувствительные данные, такие как пароли или номера карт."],
+		["Всегда ли ответы верны?", "Нет, ответы не всегда точны. Цифры, даты и законы могут быть неверными. Даже уверенные ответы могут содержать ошибки. Критическую информацию необходимо проверять по другим надежным источникам."],
+		["Чем он отличается от Nibras AI?", "Nibras AI — это собственная функция чата сайта, а не ChatGPT. Формат вопросов похож, но базовая модель и лимиты использования различаются. Они работают как отдельные независимые системы."]
+	]
+};
+var ar = {
+	"about": ["تشات جي بي تي هو روبوت محادثة يعتمد على الذكاء الاصطناعي طورته OpenAI. يكتب المستخدم النص، وينتج النظام ردوداً. صُمم للأدب والبرمجة والترجمة والشرح البسيط. تتوفر خطط مجانية ومدفوعة. قد تتغير النماذج والحدود اليومية بشكل دوري.", "يستخدم الناس هذا الأداة لمراجعة الكود والترجمة وشرح المواضيع المعقدة. لكن الإجابات ليست دقيقة دائماً. قد تكون الأرقام والتواريخ والقوانين خاطئة. لا تشارك كلمات المرور أو أرقام البطاقات. تحقق دائماً من المعلومات المهمة من مصادر أخرى قبل استخدامها."],
+	"steps": [
+		"اكتب سؤالك أو مهمتك بوضوح.",
+		"اقرأ الرد المولّد بعناية.",
+		"تحقق من الكود أو الحقائق بشكل مستقل.",
+		"حسّن طلبك إذا كان الرد غير واضح."
+	],
+	"uses": [
+		"يساعد في شرح الكود المعقد سطراً بسطر.",
+		"يساعد في ترجمة النص بين لغات مختلفة.",
+		"يُستخدم للعثور على أخطاء نحوية في المسودات.",
+		"يُطبق لشرح المواضيع المعقدة بلغة بسيطة."
+	],
+	"faq": [
+		["هل يصل تشات جي بي تي إلى ملفاتي؟", "لا، لا تفتح النظام الملفات على حاسوبك تلقائياً. يرى فقط النص الذي تلصقه أو ترفعه يدوياً. يجب عدم مشاركة البيانات الحساسة مثل كلمات المرور أو أرقام البطاقات معه."],
+		["هل الإجابات صحيحة دائماً؟", "لا، الإجابات ليست دقيقة دائماً. قد تكون الأرقام والتواريخ والقوانين خاطئة. حتى الإجابات الواثقة قد تحتوي على أخطاء. يجب التحقق من المعلومات الحرجة من مصادر موثوقة أخرى."],
+		["كيف يختلف عن Nibras AI؟", "Nibras AI هو ميزة الدردشة الخاصة بالموقع، وليس تشات جي بي تي. بينما يشبه صيغة الأسئلة، إلا أن النموذج الأساسي وحدود الاستخدام مختلفة. يعملان كنظامين مستقلين منفصلين."]
+	]
+};
+var tr = {
+	"about": ["ChatGPT, OpenAI tarafından geliştirilen yapay zeka tabanlı bir sohbet botudur. Kullanıcı metin yazar, sistem yanıtlar üretir. Yazma, kodlama, çeviri ve basit açıklamalar için tasarlanmıştır. Hem ücretsiz hem de ücretli planlar mevcuttur. Model erişimi ve günlük sınırlar zaman zaman değişebilir.", "İnsanlar kod incelemesi, dil çevirisi ve karmaşık konuları açıklama için bu aracı kullanır. Ancak cevaplar her zaman doğru olmayabilir. Rakamlar, tarihler ve yasalar hatalı çıkabilir. Şifre veya kart numaralarını asla paylaşmayın. Önemli bilgileri kullanmadan önce başka kaynaklardan mutlaka doğrulayın."],
+	"steps": [
+		"Sorunuzu veya görevinizi net bir şekilde yazın.",
+		"Üretilen yanıtı dikkatlice okuyun.",
+		"Kodu veya gerçekleri bağımsız olarak doğrulayın.",
+		"Yanıt belirsizse talebinizi netleştirin."
+	],
+	"uses": [
+		"Karmaşık kodu satır satır açıklamak için yardımcı olur.",
+		"Farklı diller arasında metin çevirisine yardımcı olur.",
+		"Taslaklardaki dilbilgisi hatalarını bulmak için kullanılır.",
+		"Karmaşık konuları basit terimlerle açıklamak için uygulanır."
+	],
+	"faq": [
+		["ChatGPT dosyalarıma erişir mi?", "Hayır, sistem bilgisayarınızdaki dosyaları otomatik olarak açmaz. Sadece yapıştırdığınız veya manuel yüklediğiniz metni görür. Şifre veya kart numarası gibi hassas verileri onunla paylaşmamalısınız."],
+		["Cevaplar her zaman doğru mu?", "Hayır, cevaplar her zaman doğru olmayabilir. Rakamlar, tarihler ve yasalar yanlış çıkabilir. Güvenilir görünen yanıtlarda bile hatalar olabilir. Kritik bilgileri diğer güvenilir kaynaklardan doğrulamanız gerekir."],
+		["Nibras AI'dan farkı nedir?", "Nibras AI, sitenin kendi sohbet özelliğidir ve ChatGPT değildir. Soru formatı benzer olsa da, alt model ve kullanım sınırları farklıdır. Bunlar bağımsız, ayrı sistemler olarak çalışır."]
+	]
+};
+var movzu_chatgpt_nedir_default = {
+	az,
+	en,
+	ru,
+	ar,
+	tr
+};
+//#endregion
+export { ar, az, movzu_chatgpt_nedir_default as default, en, ru, tr };

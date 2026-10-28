@@ -1,0 +1,1 @@
+import{r as e}from"./tools-legal-Blx2cs-F.js";var t=e;export{t as component};

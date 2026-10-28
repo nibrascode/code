@@ -1,0 +1,1 @@
+import{t as e}from"./doctor-CcO4Pv0z.js";var t=e;export{t as component};

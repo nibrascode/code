@@ -1,0 +1,110 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/unix-D99AgZZn.js
+var az = {
+	"about": ["Unix vaxtı aləti nibrascode.com saytında pulsuz olaraq təqdim edilir və heç bir qeydiyyat tələb etmir. Bütün əməliyyatlar birbaşa brauzerinizdə yerinə yetirilir, ona görə də daxil etdiyiniz məlumatlar heç bir serverə ötürülmür. Nəticəni dərhal kopyalaya və ya fayl kimi kompüterinizə endirə bilərsiniz.", "Bu funksiya saniyələri təqvim tarixinə, tarixi isə Unix saniyələrinə çevirməyə imkan verir. Qısa rəqəmlər saniyə kimi qəbul olunur, 10 rəqəmli ədəd saniyəni, 13 rəqəmli ədəd isə millisaniyəni göstərir. Məsələn, 0 rəqəmi 1970-01-01 00:00:00 UTC tarixini verir. Göstərilən vaxt yerli saatı deyil, həmişə UTC vaxtını əks etdirir."],
+	"steps": [
+		"Saytda Unix vaxtı səhifəsini açın və lazımi məlumatı daxil edin.",
+		"Saniyə və ya tarixi qeyd edərək çevrilmə istiqamətini seçin.",
+		"10 rəqəmli ədədin saniyə, 13 rəqəmli ədədin millisaniyə olduğunu nəzərə alın.",
+		"Nəticəni kopyalayın və ya fayl kimi kompüterinizə endirin."
+	],
+	"uses": [
+		"Proqramlaşdırma zamanı saniyə formatındakı rəqəmləri oxunaqlı UTC tarixinə çevirmək üçün istifadə olunur.",
+		"Verilənlər bazasındakı vaxt damğalarını standart təqvim tarixinə uyğunlaşdırmaq üçün tətbiq edilir.",
+		"Gələcək və ya keçmiş tarixlərin dəqiq Unix saniyə dəyərini tapmaq üçün kömək edir.",
+		"10 və ya 13 rəqəmli vaxt formatlarını yoxlamaq və müqayisə etmək üçün əlverişlidir."
+	],
+	"faq": [
+		["Bu alətdən istifadə etmək ödənişlidirmi?", "Xeyr, bu vasitə tamamilə pulsuzdur və heç bir qeydiyyat tələb etmir."],
+		["Məlumatlarım serverə göndərilirmi?", "Xeyr, bütün emal prosesi birbaşa brauzerinizdə aparılır və məlumatlarınız heç yerə yüklənmir."],
+		["Vaxt hansı zaman qurşağında göstərilir?", "Bütün tarixlər yerli vaxtla deyil, həmişə UTC zaman standartı ilə göstərilir."]
+	]
+};
+var en = {
+	"about": ["This free browser-based tool on nibrascode.com requires no sign-up. All processing happens entirely within your web browser, ensuring that your input is never uploaded to any server. Once the conversion is complete, you can easily copy the result to your clipboard or download it directly as a file.", "The utility converts seconds into a human-readable date and a calendar date into Unix seconds. A short number is treated as seconds, a 10-digit number represents seconds, and a 13-digit number represents milliseconds. For example, 0 translates to 1970-01-01 00:00:00 UTC, while 2026-10-07 turns into a second count. All dates are displayed in UTC, not local time."],
+	"steps": [
+		"Open the Unix time tool page on nibrascode.com.",
+		"Enter your date or numerical second count into the input field.",
+		"Ensure the digit length matches your format, such as 10 digits for seconds or 13 for milliseconds.",
+		"View the converted result and copy it or download it as a file."
+	],
+	"uses": [
+		"Developers use it to quickly convert raw timestamp integers into readable UTC calendar dates.",
+		"It helps database administrators verify historical timestamps stored in Unix epoch format.",
+		"You can find the exact second count for specific future dates like 2026-10-07.",
+		"It allows accurate conversion between 10-digit second counts and 13-digit millisecond counts."
+	],
+	"faq": [
+		["Do I need to sign up to use this tool?", "No, the tool is completely free and requires no registration or account creation."],
+		["Is my data safe and private?", "Yes, all processing happens inside your browser, and your input data is never uploaded to an external server."],
+		["What timezone is used for the dates?", "The resulting date is always displayed in UTC, not your local time zone."]
+	]
+};
+var ru = {
+	"about": ["Этот бесплатный браузерный инструмент на nibrascode.com не требует никакой регистрации. Вся обработка выполняется непосредственно в вашем браузере, а вводимые данные не загружаются ни на какой удаленный сервер. Полученный результат можно сразу скопировать или скачать в виде готового файла.", "Утилита преобразует секунды в дату, а дату — в секунды Unix. Короткое число воспринимается как секунды, 10-значное число означает секунды, а 13-значное — миллисекунды. Например, 0 превращается в 1970-01-01 00:00:00 UTC, а 2026-10-07 переводится в количество секунд. Все даты отображаются по всемирному координированному времени UTC, а не по местному."],
+	"steps": [
+		"Откройте страницу инструмента Unix времени на nibrascode.com.",
+		"Введите в поле ввода число секунд или нужную календарную дату.",
+		"Убедитесь, что количество цифр соответствует секундам или миллисекундам.",
+		"Скопируйте готовый результат или скачайте его в виде файла."
+	],
+	"uses": [
+		"Применяется для быстрого перевода числовых меток времени в читаемый формат даты.",
+		"Помогает разработчикам проверять значения времени в базах данных и логах.",
+		"Используется для точного определения количества секунд для будущих или прошлых дат.",
+		"Позволяет сопоставлять 10-значные и 13-значные числовые форматы времени."
+	],
+	"faq": [
+		["Нужна ли регистрация для использования инструмента?", "Нет, инструмент полностью бесплатен, и для работы с ним не требуется создавать учетную запись."],
+		["Загружаются ли мои данные на сервер?", "Нет, вся обработка происходит исключительно в вашем браузере, и данные никуда не передаются."],
+		["Какое время отображается в результатах?", "Все даты выводятся в формате UTC, местное время не используется."]
+	]
+};
+var ar = {
+	"about": ["هذه الأداة المجانية على موقع nibrascode.com تعمل مباشرة في المتصفح ولا تتطلب أي تسجيل. تتم معالجة جميع البيانات محلياً داخل متصفحك دون رفع أي مدخلات إلى الخادم، مما يضمن الخصوصية التامة. يمكنك نسخ النتيجة المباشرة أو تنزيلها كملف على جهازك بكل سهولة.", "تقوم الأداة بتحويل الثواني إلى تاريخ زمني والعكس صحيح. يتم التعامل مع الأرقام القصيرة كثوانٍ، حيث يمثل الرقم المكون من 10 خانات ثوانٍ بينما يمثل الرقم المكون من 13 خانة ملي ثانية. على سبيل المثال، الرقم 0 يتحول إلى 1970-01-01 00:00:00 UTC. يتم عرض التواريخ دائماً بتوقيت UTC العالمي وليس بالتوقيت المحلي."],
+	"steps": [
+		"افتح صفحة أداة وقت يونكس على موقع nibrascode.com.",
+		"أدخل عداد الثواني الرقمي أو التاريخ المطلوب في حقل الإدخال.",
+		"تأكد من طول الرقم ليتوافق مع الثواني أو الملي ثانية حسب الحاجة.",
+		"انسخ النتيجة الظاهرة أو قم بتنزيلها مباشرة كملف."
+	],
+	"uses": [
+		"تستخدم لتحويل الطوابع الزمنية الرقمية إلى تواريخ مقروءة بسهولة.",
+		"تساعد المطورين في مطابقة وتحليل تواريخ قواعد البيانات وتنسيقات النظام.",
+		"تتيح معرفة عدد الثواني الدقيق لتواريخ محددة مثل 2026-10-07.",
+		"تستخدم للتحويل بدقة بين الثواني ذات 10 أرقام والملي ثانية ذات 13 رقماً."
+	],
+	"faq": [
+		["هل يتطلب استخدام الأداة تسجيل حساب؟", "لا، الأداة مجانية بالكامل ولا تتطلب أي تسجيل أو إنشاء حساب."],
+		["هل تتم مشاركة بياناتي مع أي خادم؟", "لا، تتم معالجة كافة البيانات في متصفحك فقط ولا يتم رفعها لأي خادم خارجي."],
+		["ما هو النطاق الزمني المستخدم في النتائج؟", "يتم عرض كافة التواريخ بتوقيت UTC العالمي وليس التوقيت المحلي للمستخدم."]
+	]
+};
+var tr = {
+	"about": ["nibrascode.com üzerindeki bu ücretsiz tarayıcı tabanlı araç hiçbir kayıt gerektirmez. Tüm işlemler doğrudan tarayıcınızda gerçekleşir ve girdiğiniz veriler hiçbir sunucuya yüklenmez. Elde ettiğiniz sonucu anında kopyalayabilir veya bilgisayarınıza dosya olarak indirebilirsiniz.", "Bu araç saniyeleri bir tarihe, bir tarihi ise Unix saniyelerine dönüştürür. Kısa bir sayı saniye olarak kabul edilir, 10 haneli bir sayı saniyeyi, 13 haneli bir sayı ise milisaniyeyi ifade eder. Örneğin 0 sayısı 1970-01-01 00:00:00 UTC tarihine dönüşür. Tarihler yerel saatle değil, her zaman UTC zaman dilimine göre gösterilir."],
+	"steps": [
+		"nibrascode.com adresindeki Unix zamanı sayfasını açın.",
+		"Saniye değerini veya takvim tarihini ilgili alana girin.",
+		"10 haneli sayının saniye, 13 haneli sayının milisaniye olduğunu dikkate alın.",
+		"Dönüştürülen sonucu kopyalayın veya dosya olarak indirin."
+	],
+	"uses": [
+		"Ham zaman damgası sayılarını okunabilir UTC takvim tarihlerine çevirmek için kullanılır.",
+		"Veritabanı kayıtlarındaki zaman verilerini standart tarih formatına uyarlamak için tercih edilir.",
+		"Gelecek veya geçmiş tarihlere ait tam Unix saniye değerini bulmaya yardımcı olur.",
+		"10 haneli saniye ve 13 haneli milisaniye formatlarını doğrulayıp karşılaştırmayı sağlar."
+	],
+	"faq": [
+		["Bu aracı kullanmak ücretli mi?", "Hayır, araç tamamen ücretsizdir ve herhangi bir kayıt gerektirmez."],
+		["Girdiğim veriler sunucuya gönderiliyor mu?", "Hayır, tüm işlemler yalnızca tarayıcınızda gerçekleşir ve verileriniz dışarıya yüklenmez."],
+		["Sonuçlardaki tarih hangi saat dilimine aittir?", "Tarihler yerel saate göre değil, her zaman UTC zaman standardına göre gösterilir."]
+	]
+};
+var unix_default = {
+	az,
+	en,
+	ru,
+	ar,
+	tr
+};
+//#endregion
+export { ar, az, unix_default as default, en, ru, tr };

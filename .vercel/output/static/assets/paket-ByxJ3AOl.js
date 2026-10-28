@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-CKeovgl0.js";import{t}from"./paket-tool-CBtqswcA.js";var n=e();function r(){return(0,n.jsx)(t,{lang:`az`})}export{r as component};

@@ -1,0 +1,110 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/area-Bu-K-I94.js
+var az = {
+	"about": ["Bu alət kvadrat metr və kvadrat fut arasında sadə çevirmə aparır. İstifadəçi yalnız ədədi daxil edir, sistem avtomatik olaraq müvafiq ölçü vahidinə çevirir. Çevirmə dəqiq 1 m² = 10.7639 ft² nisbətinə əsaslanır, buna görə 10 m² ≈ 107.64 ft² alınır.", "Alət yalnız ədədi çevirmə üçün nəzərdə tutulmuşdur, otağın ölçülərini hesablamaq və ya planlaşdırmaq üçün deyil. Brauzerdə işlədiyi üçün məlumatlar heç bir serverə göndərilmir, nəticə kopyalanıb və ya fayl kimi yüklənə bilər."],
+	"steps": [
+		"Veb səhifəyə daxil olun və çevirmək istədiyiniz ədədi daxil edin.",
+		"Müvafiq ölçü vahidini (metr və ya fut) seçin.",
+		"“Convert” düyməsini basın, nəticə avtomatik göstəriləcək.",
+		"Nəticəni kopyalayın və ya “Download” seçimi ilə fayl kimi saxlayın."
+	],
+	"uses": [
+		"Tikinti materiallarının sahəsini hesablamaq.",
+		"İnşaat layihələrində kvadrat metr və fut arasında müqayisə aparmaq.",
+		"Müxtəlif ölkələrdə elan olunan sahə ölçülərini anlamaq.",
+		"Müəssisələrdə sahə ölçülərinin standartlaşdırılması."
+	],
+	"faq": [
+		["Alət internet bağlantısı olmadan işləyirmi?", "Bəli, bütün hesablama brauzerdə yerinə yetirilir, serverə məlumat göndərilmir, buna görə offline rejimdə də işləyə bilər."],
+		["Nəticəni hansı formatda yükləmək mümkündür?", "Nəticə mətn faylı (txt) kimi yüklənə bilər və ya sadəcə kopyalanaraq istənilən sənədə yapışdırıla bilər."],
+		["Müxtəlif ölçü vahidlərini bir anda çevirmək mümkündür?", "Alət bir dəfə bir ədəd üçün bir vahiddən digərinə çevirməyi dəstəkləyir; bir neçə ədəd üçün ayrı-ayrılıqda çevirmə tələb olunur."]
+	]
+};
+var en = {
+	"about": ["The tool converts numbers between square meters and square feet. Users enter a numeric value, and the application applies the exact conversion factor of 1 m² = 10.7639 ft², so 10 m² becomes approximately 107.64 ft².", "It is designed solely for numeric conversion, not for measuring rooms or calculating area from dimensions. All processing occurs in the browser, meaning no data is uploaded to a server, and the result can be copied or downloaded as a text file."],
+	"steps": [
+		"Open the page on nibrascode.com and type the number you want to convert.",
+		"Select the source unit (square meters or square feet).",
+		"Press the convert button; the result appears instantly.",
+		"Copy the result or download it as a file."
+	],
+	"uses": [
+		"Estimating material quantities for construction projects.",
+		"Comparing property listings that use different area units.",
+		"Understanding specifications in international product catalogs.",
+		"Standardizing area measurements across different teams."
+	],
+	"faq": [
+		["Does the tool work without an internet connection?", "Yes, because all calculations run locally in the browser, it can function offline after the page has loaded."],
+		["In what format can I download the result?", "The result can be saved as a plain text (txt) file or simply copied to the clipboard."],
+		["Can I convert multiple values at once?", "The current version handles one value per conversion; for multiple numbers you need to repeat the process."]
+	]
+};
+var ru = {
+	"about": ["Инструмент преобразует числа между квадратными метрами и квадратными футами. Пользователь вводит значение, а система применяет точный коэффициент 1 м² = 10.7639 фут², поэтому 10 м² ≈ 107.64 фут².", "Он предназначен только для числового преобразования, а не для измерения помещений. Все вычисления выполняются в браузере, данные не отправляются на сервер, а результат можно скопировать или скачать как текстовый файл."],
+	"steps": [
+		"Откройте страницу на nibrascode.com и введите число для преобразования.",
+		"Выберите исходную единицу измерения (метры или футы).",
+		"Нажмите кнопку конвертации – результат появится мгновенно.",
+		"Скопируйте результат или загрузите его в виде файла."
+	],
+	"uses": [
+		"Расчёт количества материалов для строительства.",
+		"Сравнение объявлений о недвижимости, указанных в разных единицах.",
+		"Понимание технических характеристик международных каталогов.",
+		"Унификация измерений площади в разных отделах компании."
+	],
+	"faq": [
+		["Можно ли использовать инструмент без подключения к интернету?", "Да, после загрузки страницы все расчёты выполняются локально, поэтому он работает офлайн."],
+		["В каком формате можно скачать результат?", "Результат сохраняется в виде простого текстового файла (txt) или копируется в буфер обмена."],
+		["Можно ли конвертировать несколько значений одновременно?", "Текущая версия обрабатывает одно значение за раз; для нескольких чисел процесс нужно повторить."]
+	]
+};
+var ar = {
+	"about": ["الأداة تقوم بتحويل الأعداد بين المتر المربع والقدم المربع. يُدخل المستخدم القيمة العددية وتُطبق الأداة معامل التحويل الدقيق 1 م² = 10.7639 قدم²، لذا 10 م² ≈ 107.64 قدم².", "هذه الأداة مخصصة فقط للتحويل الرقمي ولا تُستخدم لقياس مساحة غرفة أو حساب المساحة من الأبعاد. جميع العمليات تُجرى داخل المتصفح، ولا تُرسل البيانات إلى خادم، ويمكن نسخ النتيجة أو تنزيلها كملف نصي."],
+	"steps": [
+		"افتح الصفحة على nibrascode.com وأدخل الرقم المراد تحويله.",
+		"اختر وحدة المصدر (متر مربع أو قدم مربع).",
+		"اضغط زر التحويل؛ ستظهر النتيجة فوراً.",
+		"انسخ النتيجة أو حمّلها كملف."
+	],
+	"uses": [
+		"تقدير كمية المواد في مشاريع البناء.",
+		"مقارنة إعلانات العقارات التي تستخدم وحدات مساحة مختلفة.",
+		"فهم المواصفات في الكتالوجات الدولية.",
+		"توحيد قياسات المساحة بين فرق العمل."
+	],
+	"faq": [
+		["هل يمكن استخدام الأداة بدون اتصال بالإنترنت؟", "نعم، لأن جميع الحسابات تُجرى محلياً في المتصفح، لذا يمكنها العمل في وضع عدم الاتصال بعد تحميل الصفحة."],
+		["بأي صيغة يمكن تنزيل النتيجة؟", "يمكن حفظ النتيجة كملف نصي بسيط (txt) أو نسخها إلى الحافظة."],
+		["هل يمكن تحويل عدة قيم في آن واحد؟", "الإصدار الحالي يدعم تحويل قيمة واحدة في كل مرة؛ لتحويل قيم متعددة يجب تكرار العملية."]
+	]
+};
+var tr = {
+	"about": ["Araç, sayıları metrekare ile kare fit arasında dönüştürür. Kullanıcı bir sayı girer ve uygulama 1 m² = 10.7639 ft² dönüşüm katsayısını kullanır; örneğin 10 m² ≈ 107.64 ft² olur.", "Bu sadece sayısal dönüşüm içindir, oda ölçümü veya boyutlardan alan hesaplama amaçlı değildir. İşlemler tarayıcıda gerçekleşir, veri sunucuya gönderilmez ve sonuç kopyalanabilir ya da metin dosyası olarak indirilebilir."],
+	"steps": [
+		"nibrascode.com sayfasını açın ve dönüştürmek istediğiniz sayıyı girin.",
+		"Kaynak birimi (metrekare veya kare fit) seçin.",
+		"Dönüştür düğmesine basın; sonuç anında görüntülenecek.",
+		"Sonucu kopyalayın veya dosya olarak indirin."
+	],
+	"uses": [
+		"İnşaat projelerinde malzeme miktarını tahmin etmek.",
+		"Farklı birimlerde ilan edilen gayrimenkul alanlarını karşılaştırmak.",
+		"Uluslararası kataloglardaki teknik özellikleri anlamak.",
+		"Farklı ekipler arasında alan ölçümlerini standartlaştırmak."
+	],
+	"faq": [
+		["Araç internet bağlantısı olmadan çalışır mı?", "Evet, tüm hesaplamalar tarayıcıda yerel olarak yapılır, sayfa yüklendikten sonra çevrimdışı da kullanılabilir."],
+		["Sonucu hangi formatta indirebilirim?", "Sonuç düz metin (txt) dosyası olarak kaydedilebilir veya panoya kopyalanabilir."],
+		["Birden fazla değeri aynı anda dönüştürebilir miyim?", "Şu anki sürüm bir seferde tek bir değeri işler; birden fazla sayı için işlemi tekrarlamanız gerekir."]
+	]
+};
+var area_default = {
+	az,
+	en,
+	ru,
+	ar,
+	tr
+};
+//#endregion
+export { ar, az, area_default as default, en, ru, tr };

@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-CKeovgl0.js";import{t}from"./tools-page-BJH0nhBl.js";import{P as n}from"./index-Bsd9WuPX.js";var r=e();function i(){let{id:e,guide:i}=n.useLoaderData();return(0,r.jsx)(t,{lang:`en`,focus:e,guide:i})}export{i as component};

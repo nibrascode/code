@@ -1,0 +1,1 @@
+import{t as e}from"./shortcuts-C-uOL6OP.js";var t=e;export{t as component};

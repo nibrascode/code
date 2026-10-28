@@ -1,0 +1,1215 @@
+import { o as __toESM } from "./_runtime.mjs";
+import { i as localeHref } from "./_ssr/locale-path-fYvKyZ8f.mjs";
+import { n as require_react } from "./_libs/@radix-ui/react-compose-refs+[...].mjs";
+import { X as notFound, _ as lazyRouteComponent, p as useRouterState, q as redirect, v as createFileRoute } from "./_libs/@tanstack/react-router+[...].mjs";
+import { n as require_jsx_runtime } from "./_libs/radix-ui__react-context+react.mjs";
+import { x as useI18n, y as readLang } from "./_ssr/i18n-context-BAcGBjAs.mjs";
+import { b as statusText, d as fetchStudioApp, x as storeLinks } from "./_ssr/studio-Dz15PtOL.mjs";
+import { i as shotsFor, n as pick, r as playListed, s as recordHit, t as effectiveApp } from "./_ssr/app-store-D7Bnka1x.mjs";
+import { i as getAppBySlug, o as statusStoreLinks, r as appStatusLabel, s as syncedPlayUrl, t as STUDIO_APPS } from "./_ssr/apps-6qMCvgID.mjs";
+import { Ar as ArrowUpRight, Mr as ArrowLeft, R as ShieldCheck, Un as Download, Ut as Lock, jr as ArrowRight, lr as ChevronDown, n as X, zn as ExternalLink } from "./_libs/lucide-react.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/_slug-DxKDjMpQ.js
+var import_react = /* @__PURE__ */ __toESM(require_react());
+var import_jsx_runtime = require_jsx_runtime();
+function VisitMeter() {
+	const pathname = useRouterState({ select: (state) => state.location.pathname });
+	(0, import_react.useEffect)(() => {
+		if (pathname.startsWith("/nx-studio")) return;
+		const key = `nibras_view_${(/* @__PURE__ */ new Date()).toISOString().slice(0, 10)}`;
+		if (localStorage.getItem(key)) return;
+		recordHit({ data: {
+			kind: "view",
+			slug: ""
+		} }).then((result) => {
+			if (result.ok) localStorage.setItem(key, "1");
+		}).catch(() => void 0);
+	}, [pathname]);
+	usePresence();
+	return null;
+}
+function usePresence() {
+	(0, import_react.useEffect)(() => {
+		if (location.pathname.startsWith("/nx-studio")) return;
+		let timer = 0;
+		let idle = 0;
+		let stopped = false;
+		const sid = (() => {
+			try {
+				let v = sessionStorage.getItem("nb_sid");
+				if (!v) {
+					v = (crypto.randomUUID?.() || `${Math.random()}${Date.now()}`).replace(/[^a-z0-9]/gi, "").toLowerCase().slice(0, 32);
+					sessionStorage.setItem("nb_sid", v);
+				}
+				return v;
+			} catch {
+				return "";
+			}
+		})();
+		if (!sid) return;
+		const body = JSON.stringify({ sid });
+		const ping = () => {
+			if (stopped || document.visibilityState === "hidden") return;
+			try {
+				if (navigator.sendBeacon?.("/api/presence", new Blob([body], { type: "application/json" }))) return;
+				fetch("/api/presence", {
+					method: "POST",
+					body,
+					keepalive: true,
+					headers: { "Content-Type": "application/json" }
+				}).catch(() => void 0);
+			} catch {}
+		};
+		const onVis = () => {
+			if (document.visibilityState === "visible") ping();
+		};
+		const start = () => {
+			const ric = window.requestIdleCallback;
+			const go = () => {
+				ping();
+				timer = window.setInterval(ping, 45e3);
+				document.addEventListener("visibilitychange", onVis);
+			};
+			idle = ric ? ric(go, { timeout: 5e3 }) : window.setTimeout(go, 2e3);
+		};
+		if (document.readyState === "complete") start();
+		else window.addEventListener("load", start, { once: true });
+		return () => {
+			stopped = true;
+			window.removeEventListener("load", start);
+			window.clearInterval(timer);
+			window.clearTimeout(idle);
+			window.cancelIdleCallback?.(idle);
+			document.removeEventListener("visibilitychange", onVis);
+		};
+	}, []);
+}
+function countDownload(slug) {
+	if (!slug) return;
+	recordHit({ data: {
+		kind: "download",
+		slug
+	} }).catch(() => void 0);
+}
+function Mark({ id }) {
+	if (id === "huawei_url") return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("svg", {
+		viewBox: "0 0 24 24",
+		className: "play-btn-mark",
+		"aria-hidden": "true",
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", {
+			fill: "currentColor",
+			d: "M12 2.2 13.6 8l5.8-2.2-2.2 5.8 5.8 1.6-5.8 1.6 2.2 5.8L13.6 16 12 21.8 10.4 16l-5.8 2.4 2.2-5.8L1 11.2l5.8-1.6L4.6 3.8 10.4 8 12 2.2Z"
+		})
+	});
+	if (id === "appstore_url") return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("svg", {
+		viewBox: "0 0 24 24",
+		className: "play-btn-mark",
+		"aria-hidden": "true",
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", {
+			fill: "currentColor",
+			d: "M16.4 12.7c0-2.2 1.8-3.3 1.9-3.4-1-1.5-2.6-1.7-3.2-1.7-1.3-.1-2.6.8-3.3.8s-1.7-.8-2.9-.7c-1.5 0-2.8.9-3.6 2.2-1.5 2.7-.4 6.6 1.1 8.8.7 1.1 1.6 2.3 2.7 2.2 1.1 0 1.5-.7 2.8-.7s1.7.7 2.9.7 1.9-1.1 2.6-2.2c.8-1.2 1.1-2.3 1.2-2.4-.1 0-2.2-.8-2.2-3.6Zm-2-6.6c.6-.7 1-1.7.9-2.7-1 .1-2.1.6-2.8 1.4-.6.7-1.1 1.7-.9 2.6 1 .1 2.1-.5 2.8-1.3Z"
+		})
+	});
+	if (id === "galaxy_url") return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", {
+		viewBox: "0 0 24 24",
+		className: "play-btn-mark",
+		"aria-hidden": "true",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", {
+			fill: "currentColor",
+			d: "M7 7.5h10a2 2 0 0 1 2 2V19a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V9.5a2 2 0 0 1 2-2Z"
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", {
+			fill: "currentColor",
+			d: "M9 7.5V6.2A3 3 0 0 1 12 3a3 3 0 0 1 3 3.2v1.3h-1.6V6.2a1.4 1.4 0 0 0-2.8 0v1.3H9Z"
+		})]
+	});
+	if (id === "xiaomi_url") return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("svg", {
+		viewBox: "0 0 24 24",
+		className: "play-btn-mark",
+		"aria-hidden": "true",
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", {
+			fill: "currentColor",
+			d: "M4 16.5V8.2c0-.5.6-.8 1-.4l3.2 3.1 3.3-4.4c.3-.4.9-.4 1.2 0l3.3 4.4 3.2-3.1c.4-.4 1-.1 1 .4v8.3c0 .4-.4.8-.8.8H4.8c-.4 0-.8-.4-.8-.8Z"
+		})
+	});
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", {
+		viewBox: "0 0 24 24",
+		className: "play-btn-mark",
+		"aria-hidden": "true",
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", {
+				fill: "#34A853",
+				d: "m4.2 20.6 8.1-8.2-2.4-2.5L3 16.2c-.4.7 0 2.4 1.2 4.4Z"
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", {
+				fill: "#FBBC04",
+				d: "M20.3 10.2 17 8.4l-2.7 2.6 2.6 2.6 3.4-1.9c1-.6 1-2.1 0-2.5Z"
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", {
+				fill: "#EA4335",
+				d: "m4.2 3.4.1 13.2 5.6-5.7L4.3 3.4c-.3-.5-.1-1.1 0 0Z"
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", {
+				fill: "#4285F4",
+				d: "M12.3 12.4 9.9 14.8 17 18.7c.8.4 1.7 0 2.2-.7l-6.9-5.6Z"
+			})
+		]
+	});
+}
+function AppDownload({ app, live }) {
+	const { t } = useI18n();
+	const stores = storeLinks({
+		play_url: syncedPlayUrl(app.slug, live?.play_url || app.playStoreUrl) || "",
+		huawei_url: live?.huawei_url || app.huaweiStoreUrl || "",
+		appstore_url: live?.appstore_url,
+		galaxy_url: live?.galaxy_url,
+		xiaomi_url: live?.xiaomi_url
+	});
+	if (stores.length === 0) return null;
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+		className: "download-panel",
+		"aria-label": t("download_title"),
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "eyebrow",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("i", {}), t("download_kicker")]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", { children: t("download_title") }),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: t("download_ready_d") })
+		] }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+			className: "download-stores",
+			children: stores.map((store) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
+				className: `play-btn store-${store.id}`,
+				href: store.href,
+				target: "_blank",
+				rel: "noopener noreferrer",
+				onClick: () => countDownload(app.slug),
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Mark, { id: store.id }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("small", { children: t("download_kicker") }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("b", { children: store.name })] })]
+			}, store.id))
+		})]
+	});
+}
+var NIBRAS_PDF_ABOUT = {
+	"en": {
+		"intro": "Nibras PDF is a mobile app that makes everyday document work simpler. It has 18 tools, and your files are processed mainly on your device.",
+		"tools": [
+			{
+				"t": "Merge",
+				"d": "Combine several PDFs into one file. Pick the files one after another and save them as a single document."
+			},
+			{
+				"t": "Split",
+				"d": "Divide a PDF into two parts by page count: in a 25-page file, entering 5 gives pages 1–5 and 6–25. You can keep both parts or only one."
+			},
+			{
+				"t": "Compress",
+				"d": "Rewrites the PDF to reduce its file size. If the file would not get smaller, the original is kept so you never get a worse result."
+			},
+			{
+				"t": "Image to PDF",
+				"d": "Turns one or more images into a PDF document. Handy for receipts, notes and photos you need to send as a single file."
+			},
+			{
+				"t": "PDF to image",
+				"d": "Saves PDF pages as images. Useful when you need to post or send a single page as a picture."
+			},
+			{
+				"t": "Rotate",
+				"d": "Turns the PDF left or right. Every page turns in the direction you choose, then the file is saved."
+			},
+			{
+				"t": "Protect",
+				"d": "Locks the PDF with a password (at least 6 characters) using AES-128 encryption. The password is entered twice to avoid typos."
+			},
+			{
+				"t": "Watermark",
+				"d": "Adds your own text, for example “Confidential”, to the document. You choose its position on the page, its transparency and which pages get it."
+			},
+			{
+				"t": "Manage pages",
+				"d": "Delete pages, change their order, or insert pages from another PDF. The last change can be undone before you save a new PDF."
+			},
+			{
+				"t": "Scan",
+				"d": "Uses the camera to turn paper documents into a PDF. The document is cropped automatically and several pages can go into one file."
+			},
+			{
+				"t": "Add signature",
+				"d": "Draw your signature with your finger and place it on a PDF page. You can drag it, resize it and add more than one signature."
+			},
+			{
+				"t": "Recognize text (OCR)",
+				"d": "Extracts text from images on your device. Choose the language — Azerbaijani, English, Turkish, Russian or Arabic — and copy the result."
+			},
+			{
+				"t": "Extract text from PDF",
+				"d": "Recognizes the text on PDF pages, including scanned ones, directly on your device so you can copy and reuse it."
+			},
+			{
+				"t": "PDF to Word",
+				"d": "Saves the text of a PDF as a Word (DOCX) file that you can keep editing."
+			},
+			{
+				"t": "PDF preview",
+				"d": "Look through the pages of a PDF: swipe between pages and pinch with two fingers to zoom."
+			},
+			{
+				"t": "Batch processing",
+				"d": "Choose several PDFs and apply the same operation to all of them at once: compress, rotate, add a watermark or split into pages."
+			},
+			{
+				"t": "Select and extract pages",
+				"d": "Choose the pages you need and get them as a new PDF. The original file stays unchanged."
+			},
+			{
+				"t": "Word to PDF",
+				"d": "Converts a Word (DOCX) file into a PDF document ready to share or print."
+			}
+		],
+		"outro": "Privacy: document content is not sent to our servers for PDF, image, OCR or scan processing; OCR and scanning run on the device, and the camera is used only while scanning. The free version opens every tool with daily limits (10 document operations, 4 OCR, 5 scans, files up to 100 MB). Pro removes the daily limits and allows PDFs up to 250 MB."
+	},
+	"az": {
+		"intro": "Nibras PDF gündəlik sənəd işini sadələşdirən mobil tətbiqdir. İçində 18 alət var və fayllar əsasən cihazınızda emal olunur.",
+		"tools": [
+			{
+				"t": "Birləşdir",
+				"d": "Bir neçə PDF-i bir faylda toplayır. Faylları ardıcıl seçirsiniz və onlar tək sənəd kimi saxlanılır."
+			},
+			{
+				"t": "Böl",
+				"d": "PDF-i səhifə sayına görə iki hissəyə ayırır: 25 səhifəlik faylda 5 yazsanız, 1–5 və 6–25 alınır. Hər iki hissəni və ya yalnız birini saxlaya bilərsiniz."
+			},
+			{
+				"t": "Sıxışdır",
+				"d": "PDF-i yenidən yazaraq fayl ölçüsünü kiçildir. Fayl kiçilmirsə, orijinal saxlanılır — nəticə heç vaxt pisləşmir."
+			},
+			{
+				"t": "Şəkildən PDF",
+				"d": "Bir və ya bir neçə şəkli PDF sənədinə çevirir. Qəbzləri, qeydləri və fotoları tək fayl kimi göndərmək üçün rahatdır."
+			},
+			{
+				"t": "PDF-dən şəkil",
+				"d": "PDF səhifələrini şəkil kimi saxlayır. Bir səhifəni şəkil kimi paylaşmaq lazım olanda faydalıdır."
+			},
+			{
+				"t": "Döndər",
+				"d": "PDF-i sola və ya sağa çevirir. Bütün səhifələr seçdiyiniz istiqamətə dönür və fayl saxlanılır."
+			},
+			{
+				"t": "Qoru",
+				"d": "PDF-i parolla (ən azı 6 simvol) AES-128 şifrələməsi ilə bağlayır. Səhv olmasın deyə parol iki dəfə yazılır."
+			},
+			{
+				"t": "Su nişanı",
+				"d": "Sənədə öz yazınızı, məsələn «Məxfi», əlavə edir. Səhifədəki yerini, şəffaflığını və hansı səhifələrə düşəcəyini seçirsiniz."
+			},
+			{
+				"t": "Səhifələri idarə et",
+				"d": "Səhifələri silin, sırasını dəyişin və ya başqa PDF-dən səhifə əlavə edin. Yeni PDF saxlamazdan əvvəl son dəyişikliyi geri ala bilərsiniz."
+			},
+			{
+				"t": "Skan et",
+				"d": "Kamera ilə kağız sənədi PDF-ə çevirir. Sənəd avtomatik kəsilir, bir neçə səhifə bir fayla yığıla bilər."
+			},
+			{
+				"t": "İmza əlavə et",
+				"d": "İmzanızı barmaqla çəkib PDF səhifəsinə yerləşdirin. İmzanı sürüşdürmək, ölçüsünü dəyişmək və bir neçə imza qoymaq olur."
+			},
+			{
+				"t": "Mətni tanı (OCR)",
+				"d": "Şəkildəki mətni cihazda çıxarır. Dili seçirsiniz — Azərbaycan, ingilis, türk, rus və ya ərəb — və nəticəni kopyalayırsınız."
+			},
+			{
+				"t": "PDF-dən mətn çıxar",
+				"d": "PDF səhifələrindəki, o cümlədən skan olunmuş səhifələrdəki mətni cihazda tanıyır ki, onu kopyalayıb istifadə edəsiniz."
+			},
+			{
+				"t": "PDF-i Word-ə çevir",
+				"d": "PDF-in mətnini Word (DOCX) faylı kimi saxlayır, sonra onu redaktə etməyə davam edə bilərsiniz."
+			},
+			{
+				"t": "PDF önizləmə",
+				"d": "PDF səhifələrinə baxın: səhifələr arasında sürüşdürün, iki barmaqla böyüdün."
+			},
+			{
+				"t": "Toplu əməliyyatlar",
+				"d": "Bir neçə PDF seçib hamısına eyni əməliyyatı birdən tətbiq edin: sıxışdırma, döndərmə, su nişanı və ya səhifələrə bölmə."
+			},
+			{
+				"t": "Səhifə seç və çıxar",
+				"d": "Lazım olan səhifələri seçin və onları yeni PDF kimi alın. Orijinal fayl dəyişmir."
+			},
+			{
+				"t": "Word-dan PDF",
+				"d": "Word (DOCX) faylını paylaşmağa və ya çapa hazır PDF sənədinə çevirir."
+			}
+		],
+		"outro": "Məxfilik: PDF, şəkil, OCR və skan emalı üçün sənəd məzmunu serverlərimizə göndərilmir; OCR və skan cihazda aparılır, kamera yalnız skan zamanı işləyir. Pulsuz versiyada bütün alətlər gündəlik limitlərlə açıqdır (gündə 10 sənəd əməliyyatı, 4 OCR, 5 skan, 100 MB-a qədər fayllar). Pro gündəlik limitləri qaldırır və 250 MB-a qədər PDF-lərə imkan verir."
+	},
+	"ar": {
+		"intro": "Nibras PDF تطبيق جوّال يسهّل العمل اليومي مع المستندات. يضم 18 أداة، وتُعالَج ملفاتك غالبًا على جهازك.",
+		"tools": [
+			{
+				"t": "دمج",
+				"d": "يجمع عدة ملفات PDF في ملف واحد. تختار الملفات واحدًا تلو الآخر فتُحفظ مستندًا واحدًا."
+			},
+			{
+				"t": "تقسيم",
+				"d": "يقسم ملف PDF إلى جزأين حسب عدد الصفحات: في ملف من 25 صفحة، كتابة 5 تعطي 1–5 و6–25. يمكنك الاحتفاظ بالجزأين أو بجزء واحد."
+			},
+			{
+				"t": "ضغط",
+				"d": "يعيد كتابة ملف PDF لتقليل حجمه. إذا لم يصغر الملف يُحتفظ بالأصل، فلا تحصل على نتيجة أسوأ."
+			},
+			{
+				"t": "من صورة إلى PDF",
+				"d": "يحوّل صورة أو أكثر إلى مستند PDF. مفيد للإيصالات والملاحظات والصور التي تريد إرسالها ملفًا واحدًا."
+			},
+			{
+				"t": "من PDF إلى صورة",
+				"d": "يحفظ صفحات PDF كصور. مفيد عندما تريد مشاركة صفحة واحدة كصورة."
+			},
+			{
+				"t": "تدوير",
+				"d": "يدير ملف PDF إلى اليسار أو اليمين. تدور كل الصفحات في الاتجاه الذي تختاره ثم يُحفظ الملف."
+			},
+			{
+				"t": "حماية",
+				"d": "يقفل ملف PDF بكلمة مرور (6 أحرف على الأقل) بتشفير AES-128. تُكتب كلمة المرور مرتين لتجنب الخطأ."
+			},
+			{
+				"t": "علامة مائية",
+				"d": "يضيف نصك الخاص إلى المستند، مثل «سري». تختار موضعه في الصفحة وشفافيته والصفحات التي يظهر عليها."
+			},
+			{
+				"t": "إدارة الصفحات",
+				"d": "احذف الصفحات أو غيّر ترتيبها أو أدرج صفحات من ملف PDF آخر. يمكن التراجع عن آخر تغيير قبل حفظ ملف جديد."
+			},
+			{
+				"t": "مسح ضوئي",
+				"d": "يستخدم الكاميرا لتحويل المستندات الورقية إلى PDF. يُقص المستند تلقائيًا ويمكن جمع عدة صفحات في ملف واحد."
+			},
+			{
+				"t": "إضافة توقيع",
+				"d": "ارسم توقيعك بإصبعك وضعه على صفحة PDF. يمكنك سحبه وتغيير حجمه وإضافة أكثر من توقيع."
+			},
+			{
+				"t": "التعرف على النص (OCR)",
+				"d": "يستخرج النص من الصور على جهازك. اختر اللغة — الأذربيجانية أو الإنجليزية أو التركية أو الروسية أو العربية — وانسخ النتيجة."
+			},
+			{
+				"t": "استخراج النص من PDF",
+				"d": "يتعرف على النص في صفحات PDF، ومنها الصفحات الممسوحة، على جهازك مباشرة لتنسخه وتستخدمه."
+			},
+			{
+				"t": "من PDF إلى Word",
+				"d": "يحفظ نص ملف PDF كملف Word ‏(DOCX) يمكنك مواصلة تحريره."
+			},
+			{
+				"t": "معاينة PDF",
+				"d": "تصفّح صفحات PDF: اسحب بين الصفحات وكبّر بإصبعين."
+			},
+			{
+				"t": "المعالجة الجماعية",
+				"d": "اختر عدة ملفات PDF وطبّق العملية نفسها عليها جميعًا مرة واحدة: ضغط أو تدوير أو علامة مائية أو تقسيم إلى صفحات."
+			},
+			{
+				"t": "تحديد الصفحات واستخراجها",
+				"d": "اختر الصفحات التي تحتاجها واحصل عليها كملف PDF جديد. يبقى الملف الأصلي كما هو."
+			},
+			{
+				"t": "من Word إلى PDF",
+				"d": "يحوّل ملف Word ‏(DOCX) إلى مستند PDF جاهز للمشاركة أو الطباعة."
+			}
+		],
+		"outro": "الخصوصية: لا يُرسل محتوى المستندات إلى خوادمنا لمعالجة PDF أو الصور أو OCR أو المسح؛ يتم OCR والمسح على الجهاز، ولا تُستخدم الكاميرا إلا أثناء المسح. النسخة المجانية تفتح جميع الأدوات بحدود يومية (10 عمليات مستندات، 4 OCR، 5 عمليات مسح، ملفات حتى 100 ميغابايت). يزيل Pro الحدود اليومية ويسمح بملفات حتى 250 ميغابايت."
+	},
+	"ru": {
+		"intro": "Nibras PDF — мобильное приложение, которое упрощает повседневную работу с документами. В нём 18 инструментов, а файлы обрабатываются в основном на вашем устройстве.",
+		"tools": [
+			{
+				"t": "Объединить",
+				"d": "Собирает несколько PDF в один файл. Выбираете файлы по очереди — и они сохраняются одним документом."
+			},
+			{
+				"t": "Разделить",
+				"d": "Делит PDF на две части по числу страниц: в файле из 25 страниц число 5 даст 1–5 и 6–25. Можно сохранить обе части или только одну."
+			},
+			{
+				"t": "Сжать",
+				"d": "Перезаписывает PDF, чтобы уменьшить размер. Если файл не становится меньше, сохраняется оригинал — результат не ухудшится."
+			},
+			{
+				"t": "Изображение в PDF",
+				"d": "Превращает одно или несколько изображений в документ PDF. Удобно для чеков, заметок и фото, которые нужно отправить одним файлом."
+			},
+			{
+				"t": "PDF в изображение",
+				"d": "Сохраняет страницы PDF как изображения. Полезно, когда нужно отправить одну страницу картинкой."
+			},
+			{
+				"t": "Повернуть",
+				"d": "Поворачивает PDF влево или вправо. Все страницы поворачиваются в выбранную сторону, затем файл сохраняется."
+			},
+			{
+				"t": "Защитить",
+				"d": "Закрывает PDF паролем (не менее 6 символов) с шифрованием AES-128. Пароль вводится дважды, чтобы избежать опечатки."
+			},
+			{
+				"t": "Водяной знак",
+				"d": "Добавляет ваш текст, например «Конфиденциально». Вы выбираете место на странице, прозрачность и нужные страницы."
+			},
+			{
+				"t": "Управление страницами",
+				"d": "Удаляйте страницы, меняйте их порядок или вставляйте страницы из другого PDF. Последнее изменение можно отменить до сохранения нового PDF."
+			},
+			{
+				"t": "Сканировать",
+				"d": "Камерой превращает бумажные документы в PDF. Документ обрезается автоматически, несколько страниц можно собрать в один файл."
+			},
+			{
+				"t": "Добавить подпись",
+				"d": "Нарисуйте подпись пальцем и поместите её на страницу PDF. Её можно перетаскивать, менять размер и ставить несколько подписей."
+			},
+			{
+				"t": "Распознать текст (OCR)",
+				"d": "Извлекает текст из изображений на устройстве. Выберите язык — азербайджанский, английский, турецкий, русский или арабский — и скопируйте результат."
+			},
+			{
+				"t": "Извлечь текст из PDF",
+				"d": "Распознаёт текст на страницах PDF, включая сканы, прямо на устройстве, чтобы его можно было скопировать."
+			},
+			{
+				"t": "PDF в Word",
+				"d": "Сохраняет текст PDF как файл Word (DOCX), который можно дальше редактировать."
+			},
+			{
+				"t": "Просмотр PDF",
+				"d": "Листайте страницы PDF и увеличивайте их жестом двумя пальцами."
+			},
+			{
+				"t": "Пакетная обработка",
+				"d": "Выберите несколько PDF и примените к ним одну операцию сразу: сжатие, поворот, водяной знак или разделение на страницы."
+			},
+			{
+				"t": "Выбрать и извлечь страницы",
+				"d": "Отметьте нужные страницы и получите их новым PDF. Исходный файл не меняется."
+			},
+			{
+				"t": "Word в PDF",
+				"d": "Превращает файл Word (DOCX) в документ PDF, готовый к отправке или печати."
+			}
+		],
+		"outro": "Конфиденциальность: содержимое документов не отправляется на наши серверы для обработки PDF, изображений, OCR или сканирования; OCR и сканирование выполняются на устройстве, камера используется только при сканировании. В бесплатной версии открыты все инструменты с дневными лимитами (10 операций с документами, 4 OCR, 5 сканов, файлы до 100 МБ). Pro снимает дневные лимиты и позволяет PDF до 250 МБ."
+	},
+	"tr": {
+		"intro": "Nibras PDF, günlük belge işlerini kolaylaştıran bir mobil uygulamadır. 18 araç içerir ve dosyalarınız çoğunlukla cihazınızda işlenir.",
+		"tools": [
+			{
+				"t": "Birleştir",
+				"d": "Birden fazla PDF'yi tek dosyada toplar. Dosyaları sırayla seçersiniz, tek belge olarak kaydedilir."
+			},
+			{
+				"t": "Böl",
+				"d": "PDF'yi sayfa sayısına göre ikiye ayırır: 25 sayfalık dosyada 5 yazarsanız 1–5 ve 6–25 oluşur. İki parçayı da ya da yalnızca birini saklayabilirsiniz."
+			},
+			{
+				"t": "Sıkıştır",
+				"d": "Dosya boyutunu küçültmek için PDF'yi yeniden yazar. Dosya küçülmezse orijinal korunur; sonuç asla kötüleşmez."
+			},
+			{
+				"t": "Görselden PDF",
+				"d": "Bir veya daha fazla görseli PDF belgesine dönüştürür. Fişleri, notları ve fotoğrafları tek dosya olarak göndermek için kullanışlıdır."
+			},
+			{
+				"t": "PDF'den görsel",
+				"d": "PDF sayfalarını görsel olarak kaydeder. Tek bir sayfayı resim olarak paylaşmanız gerektiğinde faydalıdır."
+			},
+			{
+				"t": "Döndür",
+				"d": "PDF'yi sola veya sağa çevirir. Tüm sayfalar seçtiğiniz yöne döner ve dosya kaydedilir."
+			},
+			{
+				"t": "Koru",
+				"d": "PDF'yi AES-128 şifrelemeyle bir parolayla (en az 6 karakter) kilitler. Hata olmaması için parola iki kez girilir."
+			},
+			{
+				"t": "Filigran",
+				"d": "Belgeye kendi metninizi, örneğin “Gizli”, ekler. Sayfadaki yerini, şeffaflığını ve hangi sayfalara ekleneceğini seçersiniz."
+			},
+			{
+				"t": "Sayfaları yönet",
+				"d": "Sayfaları silin, sırasını değiştirin veya başka bir PDF'den sayfa ekleyin. Yeni PDF'yi kaydetmeden önce son değişikliği geri alabilirsiniz."
+			},
+			{
+				"t": "Tara",
+				"d": "Kamerayla kâğıt belgeleri PDF'ye dönüştürür. Belge otomatik kırpılır, birden çok sayfa tek dosyada toplanabilir."
+			},
+			{
+				"t": "İmza ekle",
+				"d": "İmzanızı parmağınızla çizip PDF sayfasına yerleştirin. Sürükleyebilir, boyutunu değiştirebilir ve birden fazla imza ekleyebilirsiniz."
+			},
+			{
+				"t": "Metni tanı (OCR)",
+				"d": "Görsellerdeki metni cihazda çıkarır. Dili seçin — Azerbaycanca, İngilizce, Türkçe, Rusça veya Arapça — ve sonucu kopyalayın."
+			},
+			{
+				"t": "PDF'den metin çıkar",
+				"d": "PDF sayfalarındaki, taranmış olanlar dahil, metni doğrudan cihazda tanır; kopyalayıp kullanabilirsiniz."
+			},
+			{
+				"t": "PDF'yi Word'e dönüştür",
+				"d": "PDF metnini düzenlemeye devam edebileceğiniz bir Word (DOCX) dosyası olarak kaydeder."
+			},
+			{
+				"t": "PDF önizleme",
+				"d": "PDF sayfalarına göz atın: sayfalar arasında kaydırın, iki parmakla yakınlaştırın."
+			},
+			{
+				"t": "Toplu işlemler",
+				"d": "Birden fazla PDF seçin ve hepsine aynı işlemi tek seferde uygulayın: sıkıştırma, döndürme, filigran veya sayfalara bölme."
+			},
+			{
+				"t": "Sayfa seç ve çıkar",
+				"d": "İhtiyacınız olan sayfaları seçin ve yeni bir PDF olarak alın. Orijinal dosya değişmez."
+			},
+			{
+				"t": "Word'den PDF",
+				"d": "Word (DOCX) dosyasını paylaşmaya veya yazdırmaya hazır bir PDF belgesine dönüştürür."
+			}
+		],
+		"outro": "Gizlilik: PDF, görsel, OCR veya tarama işlemleri için belge içeriği sunucularımıza gönderilmez; OCR ve tarama cihazda yapılır, kamera yalnızca tarama sırasında kullanılır. Ücretsiz sürümde tüm araçlar günlük limitlerle açıktır (günde 10 belge işlemi, 4 OCR, 5 tarama, 100 MB'a kadar dosyalar). Pro günlük limitleri kaldırır ve 250 MB'a kadar PDF'lere izin verir."
+	}
+};
+var L = {
+	az: {
+		dl: "Yükləmə",
+		rel: "Buraxılış tarixi",
+		iap: "Tətbiqdaxili alışlar var",
+		free: "Pulsuz",
+		android: "Android",
+		ver: "Versiya",
+		size: "Ölçü",
+		get: "Yüklə",
+		soon: "Tezliklə",
+		soonD: "Yükləmə linki hazır olanda burada görünəcək.",
+		shots: "Ekran görüntüləri",
+		about: "Tətbiq haqqında",
+		more: "Ətraflı",
+		less: "Qısalt",
+		news: "Yeniliklər",
+		safety: "Məlumat təhlükəsizliyi",
+		safetyD: "Ətraflı məlumat məxfilik siyasətindədir.",
+		policy: "Məxfilik siyasəti",
+		info: "Tətbiq məlumatı",
+		updated: "Yenilənib",
+		pkg: "Paket",
+		req: "Tələb olunur",
+		cat: "Kateqoriya",
+		dev: "Hazırlayan",
+		similar: "Digər Nibras tətbiqləri",
+		web: "Veb versiyanı aç",
+		close: "Bağla",
+		prev: "Əvvəlki",
+		next: "Növbəti",
+		up: "və yuxarı",
+		lang: "Ekran görüntüləri ingiliscədir"
+	},
+	en: {
+		dl: "Downloads",
+		rel: "Released",
+		iap: "Contains in-app purchases",
+		free: "Free",
+		android: "Android",
+		ver: "Version",
+		size: "Size",
+		get: "Download",
+		soon: "Coming soon",
+		soonD: "The download link will appear here when it is ready.",
+		shots: "Screenshots",
+		about: "About this app",
+		more: "Read more",
+		less: "Show less",
+		news: "What's new",
+		safety: "Data safety",
+		safetyD: "Full details are in the privacy policy.",
+		policy: "Privacy policy",
+		info: "App info",
+		updated: "Updated",
+		pkg: "Package",
+		req: "Requires",
+		cat: "Category",
+		dev: "Developer",
+		similar: "More Nibras apps",
+		web: "Open web version",
+		close: "Close",
+		prev: "Previous",
+		next: "Next",
+		up: "and up",
+		lang: ""
+	},
+	ar: {
+		dl: "التنزيلات",
+		rel: "تاريخ الإصدار",
+		iap: "يتضمن عمليات شراء داخل التطبيق",
+		free: "مجاني",
+		android: "أندرويد",
+		ver: "الإصدار",
+		size: "الحجم",
+		get: "تنزيل",
+		soon: "قريبًا",
+		soonD: "سيظهر رابط التنزيل هنا عندما يجهز.",
+		shots: "لقطات الشاشة",
+		about: "عن التطبيق",
+		more: "المزيد",
+		less: "أقل",
+		news: "الجديد",
+		safety: "أمان البيانات",
+		safetyD: "التفاصيل الكاملة في سياسة الخصوصية.",
+		policy: "سياسة الخصوصية",
+		info: "معلومات التطبيق",
+		updated: "آخر تحديث",
+		pkg: "الحزمة",
+		req: "يتطلب",
+		cat: "الفئة",
+		dev: "المطوّر",
+		similar: "تطبيقات Nibras أخرى",
+		web: "فتح نسخة الويب",
+		close: "إغلاق",
+		prev: "السابق",
+		next: "التالي",
+		up: "أو أحدث",
+		lang: "لقطات الشاشة باللغة الإنجليزية"
+	},
+	ru: {
+		dl: "Скачиваний",
+		rel: "Дата выпуска",
+		iap: "Есть встроенные покупки",
+		free: "Бесплатно",
+		android: "Android",
+		ver: "Версия",
+		size: "Размер",
+		get: "Скачать",
+		soon: "Скоро",
+		soonD: "Ссылка для загрузки появится здесь, когда будет готова.",
+		shots: "Скриншоты",
+		about: "О приложении",
+		more: "Подробнее",
+		less: "Свернуть",
+		news: "Что нового",
+		safety: "Безопасность данных",
+		safetyD: "Подробности — в политике конфиденциальности.",
+		policy: "Политика конфиденциальности",
+		info: "О версии",
+		updated: "Обновлено",
+		pkg: "Пакет",
+		req: "Требуется",
+		cat: "Категория",
+		dev: "Разработчик",
+		similar: "Другие приложения Nibras",
+		web: "Открыть веб-версию",
+		close: "Закрыть",
+		prev: "Назад",
+		next: "Далее",
+		up: "и выше",
+		lang: "Скриншоты на английском"
+	},
+	tr: {
+		dl: "İndirme",
+		rel: "Yayın tarihi",
+		iap: "Uygulama içi satın alma içerir",
+		free: "Ücretsiz",
+		android: "Android",
+		ver: "Sürüm",
+		size: "Boyut",
+		get: "İndir",
+		soon: "Yakında",
+		soonD: "İndirme bağlantısı hazır olduğunda burada görünecek.",
+		shots: "Ekran görüntüleri",
+		about: "Uygulama hakkında",
+		more: "Devamı",
+		less: "Daha az",
+		news: "Yenilikler",
+		safety: "Veri güvenliği",
+		safetyD: "Ayrıntılar gizlilik politikasındadır.",
+		policy: "Gizlilik politikası",
+		info: "Uygulama bilgisi",
+		updated: "Güncellendi",
+		pkg: "Paket",
+		req: "Gereksinim",
+		cat: "Kategori",
+		dev: "Geliştirici",
+		similar: "Diğer Nibras uygulamaları",
+		web: "Web sürümünü aç",
+		close: "Kapat",
+		prev: "Önceki",
+		next: "Sonraki",
+		up: "ve üstü",
+		lang: "Ekran görüntüleri İngilizcedir"
+	}
+};
+function fmtDate(iso, _lang) {
+	const [y, m, d] = iso.split("-");
+	return `${d}.${m}.${y}`;
+}
+function iconWebp(src) {
+	return src.replace(/\.(jpg|png)$/, ".webp");
+}
+function Lightbox({ shots, start, name, onClose, l }) {
+	const [i, setI] = (0, import_react.useState)(start);
+	const track = (0, import_react.useRef)(null);
+	(0, import_react.useEffect)(() => {
+		const el = track.current;
+		if (el) el.scrollTo({
+			left: el.clientWidth * start * (document.dir === "rtl" ? -1 : 1),
+			behavior: "instant"
+		});
+		const key = (e) => {
+			if (e.key === "Escape") onClose();
+			if (e.key === "ArrowRight") go(1);
+			if (e.key === "ArrowLeft") go(-1);
+		};
+		document.addEventListener("keydown", key);
+		const prev = document.body.style.overflow;
+		document.body.style.overflow = "hidden";
+		return () => {
+			document.removeEventListener("keydown", key);
+			document.body.style.overflow = prev;
+		};
+	}, []);
+	const go = (d) => {
+		const el = track.current;
+		if (!el) return;
+		el.scrollBy({
+			left: el.clientWidth * d * (document.dir === "rtl" ? -1 : 1),
+			behavior: "smooth"
+		});
+	};
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		className: "ns-lb",
+		role: "dialog",
+		"aria-modal": "true",
+		"aria-label": name,
+		onClick: onClose,
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+				type: "button",
+				className: "ns-lb-x",
+				"aria-label": l.close,
+				onClick: onClose,
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, { className: "size-5" })
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				ref: track,
+				className: "ns-lb-track",
+				onClick: (e) => e.stopPropagation(),
+				onScroll: (e) => setI(Math.round(Math.abs(e.currentTarget.scrollLeft) / e.currentTarget.clientWidth)),
+				children: shots.map((s, k) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					className: "ns-lb-slide",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+						src: `${s}.webp`,
+						alt: `${name} ${k + 1}`,
+						loading: Math.abs(k - start) <= 1 ? "eager" : "lazy",
+						decoding: "async"
+					})
+				}, s))
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "ns-lb-nav",
+				onClick: (e) => e.stopPropagation(),
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+						type: "button",
+						"aria-label": l.prev,
+						onClick: () => go(-1),
+						disabled: i === 0,
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowLeft, { className: "rtl-flip size-5" })
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: [
+						i + 1,
+						" / ",
+						shots.length
+					] }),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+						type: "button",
+						"aria-label": l.next,
+						onClick: () => go(1),
+						disabled: i >= shots.length - 1,
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRight, { className: "rtl-flip size-5" })
+					})
+				]
+			})
+		]
+	});
+}
+function StoreAppPage({ app: rawApp, live }) {
+	const { app, facts: f } = effectiveApp(rawApp);
+	const { t, lang } = useI18n();
+	const l = L[lang] ?? L.en;
+	const shots = shotsFor(f, lang);
+	const shotsEnglishFallback = shots.length > 0 && !f.shots?.[lang] && lang !== "en";
+	const stores = statusStoreLinks(app, live && playListed(app.slug) === false ? {
+		...live,
+		play_url: ""
+	} : live);
+	const [open, setOpen] = (0, import_react.useState)(null);
+	const [more, setMore] = (0, import_react.useState)(false);
+	const icon = live?.icon_url || app.icon;
+	const soon = stores.length === 0 && !f.apkUrl;
+	const about = pick(f.about, lang);
+	const news = pick(f.whatsNew, lang);
+	const perms = pick(f.permissions, lang);
+	const cat = pick(f.category, lang);
+	const others = STUDIO_APPS.filter((a) => a.slug !== app.slug);
+	const facts = [
+		{
+			k: f.iap ? l.iap : l.free,
+			v: l.free,
+			big: true
+		},
+		f.downloads ? {
+			k: l.dl,
+			v: f.downloads
+		} : null,
+		f.size ? {
+			k: l.size,
+			v: f.size
+		} : null,
+		f.minAndroid ? {
+			k: l.android,
+			v: `${f.minAndroid}+`
+		} : null,
+		f.version ? {
+			k: l.ver,
+			v: f.version
+		} : null,
+		cat ? {
+			k: l.cat,
+			v: cat
+		} : null
+	].filter(Boolean);
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("main", {
+		className: "ns-app",
+		"data-slug": app.slug,
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("header", {
+				className: "ns-head",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("picture", {
+					className: "ns-icon",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("source", {
+						srcSet: iconWebp(icon),
+						type: "image/webp"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+						src: icon,
+						alt: "",
+						width: 96,
+						height: 96,
+						fetchPriority: "high"
+					})]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "ns-title",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
+							dir: "auto",
+							children: app.name
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+							className: "ns-dev",
+							href: localeHref(lang, "/about"),
+							children: "Nibras Code"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							className: "ns-chip",
+							children: appStatusLabel(app.slug, lang)
+						})
+					]
+				})]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("dl", {
+				className: "ns-facts",
+				children: facts.map((x) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("dt", { children: x.big ? x.v : x.v }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("dd", { children: x.big && x.k === l.free ? "" : x.k })] }, x.k))
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "ns-cta",
+				children: [soon ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+					type: "button",
+					className: "ns-get is-soon",
+					disabled: true,
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Lock, { className: "size-4" }), l.soon]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+					className: "ns-cta-note",
+					children: l.soonD
+				})] }) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [stores.map((s) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
+					className: `ns-get ns-get-${s.id}`,
+					href: s.href,
+					target: "_blank",
+					rel: "noopener noreferrer",
+					onClick: () => countDownload(app.slug),
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Download, { className: "size-4" }),
+						l.get,
+						" · ",
+						s.label
+					]
+				}, s.id)), f.apkUrl ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
+					className: stores.length ? "ns-get is-alt" : "ns-get",
+					href: f.apkUrl,
+					rel: "noopener",
+					onClick: () => countDownload(app.slug),
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Download, { className: "size-4" }),
+						l.get,
+						" · ",
+						f.apkLabel ?? "APK",
+						f.size ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("small", { children: f.size }) : null
+					]
+				}) : null] }), app.slug === "nibras-qr" ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
+					className: "ns-get is-alt",
+					href: localeHref(lang, "/qr"),
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ExternalLink, { className: "size-4" }), l.web]
+				}) : null]
+			}),
+			shots.length ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+				className: "ns-sec",
+				"aria-label": l.shots,
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					className: "ns-shots",
+					tabIndex: 0,
+					children: shots.map((s, k) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+						type: "button",
+						className: "ns-shot",
+						onClick: () => setOpen(k),
+						"aria-label": `${l.shots} ${k + 1}`,
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+							src: `${s}-s.webp`,
+							alt: f.shotLabels?.[k] ?? `${app.name} ${k + 1}`,
+							width: 360,
+							height: 640,
+							loading: k < 2 ? "eager" : "lazy",
+							decoding: "async"
+						})
+					}, s))
+				}), shotsEnglishFallback && l.lang ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+					className: "ns-muted",
+					children: l.lang
+				}) : null]
+			}) : null,
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+				className: "ns-sec",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", { children: l.about }),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						className: "ns-lead",
+						children: t(app.leadKey)
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: more ? "ns-more is-open" : "ns-more",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: t(app.bodyKey) }),
+							about ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: about }) : null,
+							app.slug === "nibras-pdf" ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: (NIBRAS_PDF_ABOUT[lang] ?? NIBRAS_PDF_ABOUT.en).intro }),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("ol", {
+									className: "ns-tools",
+									children: (NIBRAS_PDF_ABOUT[lang] ?? NIBRAS_PDF_ABOUT.en).tools.map((x) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("b", { children: x.t }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: x.d })] }, x.t))
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: (NIBRAS_PDF_ABOUT[lang] ?? NIBRAS_PDF_ABOUT.en).outro })
+							] }) : null,
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
+								className: "ns-feats",
+								children: app.features.map((k) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: t(k) }, k))
+							})
+						]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+						type: "button",
+						className: "ns-toggle",
+						onClick: () => setMore((v) => !v),
+						"aria-expanded": more,
+						children: [more ? l.less : l.more, /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronDown, { className: more ? "size-4 rotate-180" : "size-4" })]
+					})
+				]
+			}),
+			news ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+				className: "ns-sec",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", { children: l.news }),
+					f.version ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						className: "ns-muted",
+						children: `v${f.version}${f.updated ? ` · ${fmtDate(f.updated, lang)}` : ""}`
+					}) : null,
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: news })
+				]
+			}) : null,
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+				className: "ns-sec",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", { children: l.safety }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "ns-safe",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ShieldCheck, { className: "size-5" }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
+						perms ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: perms }) : null,
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+							className: "ns-muted",
+							children: l.safetyD
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+							href: f.privacyUrl,
+							className: "ns-link",
+							children: l.policy
+						})
+					] })]
+				})]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+				className: "ns-sec",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", { children: l.info }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("dl", {
+					className: "ns-info",
+					children: [
+						f.version ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("dt", { children: l.ver }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("dd", { children: f.version })] }) : null,
+						f.updated ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("dt", { children: l.updated }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("dd", { children: fmtDate(f.updated, lang) })] }) : null,
+						f.released ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("dt", { children: l.rel }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("dd", { children: fmtDate(f.released, lang) })] }) : null,
+						f.downloads ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("dt", { children: l.dl }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("dd", { children: f.downloads })] }) : null,
+						f.iap ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("dt", { children: l.free }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("dd", { children: l.iap })] }) : null,
+						f.minAndroid ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("dt", { children: l.req }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("dd", { children: [
+							l.android,
+							" ",
+							f.minAndroid,
+							" ",
+							l.up
+						] })] }) : null,
+						f.size ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("dt", { children: l.size }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("dd", { children: f.size })] }) : null,
+						f.pkg ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("dt", { children: l.pkg }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("dd", {
+							dir: "ltr",
+							children: f.pkg
+						})] }) : null,
+						cat ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("dt", { children: l.cat }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("dd", { children: cat })] }) : null,
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("dt", { children: l.dev }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("dd", { children: "Nibras Code · Nibrascode@gmail.com" })] })
+					]
+				})]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+				className: "ns-sec",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", { children: l.similar }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					className: "ns-similar",
+					children: others.map((a) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
+						href: localeHref(lang, `/apps/${a.slug}`),
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+								src: iconWebp(a.icon),
+								alt: "",
+								width: 64,
+								height: 64,
+								loading: "lazy",
+								decoding: "async"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("b", {
+								dir: "auto",
+								children: a.name
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: effectiveApp(a).facts.soon ? l.soon : l.free })
+						]
+					}, a.slug))
+				})]
+			}),
+			open !== null ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Lightbox, {
+				shots,
+				start: open,
+				name: app.name,
+				onClose: () => setOpen(null),
+				l
+			}) : null
+		]
+	});
+}
+var $$splitComponentImporter = () => import("./_slug-DHCTktl-.mjs");
+async function loadAppPage(slug) {
+	const app = getAppBySlug(slug);
+	const row = await fetchStudioApp(slug);
+	if (app) return {
+		kind: "built",
+		app,
+		row
+	};
+	if (!row || row.visible === false) return null;
+	return {
+		kind: "extra",
+		row
+	};
+}
+var Route = createFileRoute("/apps/$slug")({
+	beforeLoad: ({ location }) => {
+		const lang = readLang(location.searchStr);
+		if (lang === "az") return;
+		throw redirect({
+			href: localeHref(lang, location.pathname),
+			replace: true
+		});
+	},
+	loader: async ({ params }) => {
+		const data = await loadAppPage(params.slug);
+		if (!data) throw notFound();
+		return data;
+	},
+	component: lazyRouteComponent($$splitComponentImporter, "component")
+});
+function AppSlugView({ data }) {
+	if (data.kind === "built") return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(StoreAppPage, {
+		app: data.app,
+		live: data.row
+	});
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ExtraApp, { row: data.row });
+}
+function ExtraApp({ row }) {
+	const { t, lang } = useI18n();
+	const badge = statusText(row.status, null, {
+		soon: t("soon"),
+		building: t("nx_docs_stage")
+	});
+	const app = {
+		slug: "nibras-docs",
+		name: row.name,
+		icon: row.icon_url || "/nibras-icon.png",
+		playStoreUrl: row.play_url || null,
+		leadKey: "docs_lead",
+		bodyKey: "docs_body",
+		features: [],
+		shots: []
+	};
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("main", {
+		className: "simple-app",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			className: "simple-app-head",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				className: "simple-app-icon-wrap",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
+					src: app.icon,
+					alt: ""
+				})
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [badge ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+				className: "nx-status",
+				children: badge
+			}) : null, /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", { children: row.name })] })]
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			className: "simple-app-copy",
+			children: [
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+					className: "simple-lead",
+					children: row.summary
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
+					href: localeHref(lang, "/apps"),
+					className: "simple-more",
+					children: [t("app_other"), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowUpRight, { className: "rtl-flip size-3.5" })]
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AppDownload, {
+					app,
+					live: row
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+					href: localeHref(lang, `/privacy/${row.slug}`),
+					className: "privacy-btn",
+					children: t("privacy_btn")
+				})
+			]
+		})]
+	});
+}
+//#endregion
+export { VisitMeter as a, StoreAppPage as i, AppSlugView as n, loadAppPage as o, Route as r, AppDownload as t };

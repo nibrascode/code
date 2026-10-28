@@ -1,0 +1,54 @@
+import { a as U, i as S, r as P, t as C } from "./dsl-0GJBPSOD.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/html-emphasis-CTq2Ej0T.js
+var html_emphasis_default = [
+	S("em-strong", [
+		"em və strong",
+		"em and strong",
+		"em ve strong",
+		"em وstrong",
+		"em и strong"
+	], P("<em> mənaca vurğu verir (səsləndirmədə intonasiya dəyişir), <strong> isə mətnin vacib olduğunu bildirir. Brauzer adətən em-i əyri, strong-u qalın göstərir, amma seçim görünüşə görə yox, mənaya görə edilməlidir.", "<em> adds stress of meaning (the intonation changes when read aloud) and <strong> signals that the text is important. Browsers usually show em in italics and strong in bold, but the choice should follow meaning, not looks.", "<em> anlamsal vurgu verir (sesli okunurken tonlama değişir), <strong> ise metnin önemli olduğunu belirtir. Tarayıcılar genelde em'i eğik, strong'u kalın gösterir, ama seçim görünüşe değil anlama göre yapılmalıdır.", "يضيف <em> تشديدًا في المعنى (تتغير النبرة عند القراءة بصوت عالٍ) ويدل <strong> على أهمية النص. وغالبًا يعرض المتصفح em بخط مائل وstrong بخط غامق، لكن الاختيار يجب أن يتبع المعنى لا الشكل.", "<em> задаёт смысловое ударение (при озвучивании меняется интонация), а <strong> указывает на важность текста. Браузеры обычно показывают em курсивом, а strong — жирным, но выбирать нужно по смыслу, а не по виду."), C(`<p>I <em>really</em> want this.</p>
+<p><strong>Warning:</strong> do not unplug the device.</p>`)),
+	S("i-b", [
+		"i, b və u",
+		"i, b and u",
+		"i, b ve u",
+		"i وb وu",
+		"i, b и u"
+	], P("<i>, <b> və <u> yalnız üslub məqsədi daşıyır: <i> xarici söz və ya texniki termin, <b> açar söz, <u> isə səhv yazılışı və ya xüsusi qeydi göstərə bilər. Sadəcə bəzək üçün CSS işlət.", "<i>, <b> and <u> are for stylistic reasons: <i> for a foreign word or technical term, <b> for a keyword, <u> for a misspelling or a special annotation. For plain decoration use CSS.", "<i>, <b> ve <u> üslup amaçlıdır: <i> yabancı sözcük veya teknik terim, <b> anahtar sözcük, <u> ise yazım hatası veya özel not için olabilir. Salt süs için CSS kullan.", "العناصر <i> و<b> و<u> لأغراض أسلوبية: <i> لكلمة أجنبية أو مصطلح تقني و<b> لكلمة مفتاحية و<u> لخطأ إملائي أو تدوين خاص. وللزينة المحضة استخدم CSS.", "<i>, <b> и <u> нужны по стилистическим причинам: <i> — иностранное слово или термин, <b> — ключевое слово, <u> — орфографическая ошибка или особая пометка. Для простого украшения используйте CSS."), C(`<p>The word <i lang="la">habitat</i> comes from Latin.</p>
+<p>Ingredients: <b>flour</b>, <b>eggs</b>, sugar.</p>`)),
+	S("others", [
+		"Digər faydalı elementlər",
+		"Other useful elements",
+		"Diğer faydalı elemanlar",
+		"عناصر مفيدة أخرى",
+		"Другие полезные элементы"
+	], U([
+		"<mark> mətni işıqlandırır.",
+		"<mark> highlights text.",
+		"<mark> metni vurgular.",
+		"يُبرز <mark> النص.",
+		"<mark> подсвечивает текст."
+	], [
+		"<small> kiçik qeyd və hüquqi mətn üçündür.",
+		"<small> is for fine print.",
+		"<small> küçük not ve yasal metin içindir.",
+		"<small> للملاحظات الصغيرة والنصوص القانونية.",
+		"<small> — для мелкого шрифта."
+	], [
+		"<sub> və <sup> aşağı və yuxarı indeksdir: H<sub>2</sub>O, m<sup>2</sup>.",
+		"<sub> and <sup> are subscript and superscript: H<sub>2</sub>O, m<sup>2</sup>.",
+		"<sub> ve <sup> alt ve üst simgedir: H<sub>2</sub>O, m<sup>2</sup>.",
+		"<sub> و<sup> للرمز السفلي والعلوي: H<sub>2</sub>O وm<sup>2</sup>.",
+		"<sub> и <sup> — нижний и верхний индекс: H<sub>2</sub>O, m<sup>2</sup>."
+	], [
+		"<abbr title=\"…\"> abreviaturanın açılışını göstərir.",
+		"<abbr title=\"…\"> reveals what an abbreviation stands for.",
+		"<abbr title=\"…\"> kısaltmanın açılımını gösterir.",
+		"<abbr title=\"…\"> يكشف معنى الاختصار.",
+		"<abbr title=\"…\"> показывает расшифровку аббревиатуры."
+	]), C(`<p>Water is H<sub>2</sub>O and the room is 20 m<sup>2</sup>.</p>
+<p><abbr title="HyperText Markup Language">HTML</abbr> is not a <mark>programming</mark> language.</p>`))
+];
+//#endregion
+export { html_emphasis_default as default };

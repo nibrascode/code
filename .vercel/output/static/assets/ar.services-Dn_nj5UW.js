@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-CKeovgl0.js";import{n as t}from"./services-page--VX-W7os.js";var n=e(),r=()=>(0,n.jsx)(t,{lang:`ar`});export{r as component};

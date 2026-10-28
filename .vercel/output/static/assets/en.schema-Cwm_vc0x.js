@@ -1,0 +1,1 @@
+import{t as e}from"./schema-Cx33iFKF.js";var t=e;export{t as component};

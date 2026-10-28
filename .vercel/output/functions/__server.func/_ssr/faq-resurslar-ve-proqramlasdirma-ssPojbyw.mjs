@@ -1,0 +1,110 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/faq-resurslar-ve-proqramlasdirma-ssPojbyw.js
+var az = {
+	"about": ["Nibras Code tətbiqləri rəqəmsal mühitdə müxtəlif texniki və məlumat ehtiyaclarını qarşılamaq üçün nəzərdə tutulmuş proqram təminatı vasitələrindən ibarətdir. Bu məhsullar istifadəçilərə gündəlik tapşırıqları yerinə yetirməkdə, sənədlərlə işləməkdə, planlaşdırma aparmaqda və müxtəlif rəqəmsal formatları idarə etməkdə dəstək olmaq məqsədilə fəaliyyət göstərir.", "İstifadəçilər bu tətbiqlərə gündəlik iş prosesini sürətləndirmək, xüsusi rəqəmsal faylları açmaq, mətnləri tərcümə etmək, sənədləri oxumaq və ya kodlaşdırma resurslarından faydalanmaq tələb olunduqda müraciət edirlər. Proqramlar müxtəlif texniki ehtiyacları təkrarən axtarmadan bir yerdə həll etməyə imkan tanıyır."],
+	"steps": [
+		"Saytın müvafiq bölməsinə daxil olaraq mövcud proqramları nəzərdən keçirin.",
+		"Tələb olunan xüsusi tətbiqi və ya faylı endirmək üçün uyğun düyməni seçin.",
+		"Endirilmiş proqram paketini və ya quraşdırma faylını cihazınıza quraşdırın.",
+		"Tətbiqi işə salaraq onun təqdim etdiyi funksiyalardan istifadə etməyə başlayın."
+	],
+	"uses": [
+		"Müxtəlif rəqəmsal sənədləri oxumaq və onlarla işləmək üçün bu tətbiqlərdən yararlana bilərsiniz.",
+		"Gündəlik planlarınızı və tapşırıqlarınızı sistemli şəkildə idarə etmək üçün bu vasitələri seçə bilərsiniz.",
+		"Ərəb dili ilə bağlı məlumatları öyrənmək və ya tərcümə vasitələrindən istifadə etmək mümkündür.",
+		"Kodlaşdırma və proqramlaşdırma ilə əlaqədar rəqəmsal alətlərdən işlərinizdə faydalana bilərsiniz."
+	],
+	"faq": [
+		["Nibras Code hansı tətbiqləri hazırlayır?", "Nibras Code rəsmi olaraq Nibras Arabic, Nibras PDF, Nibras Plans, Nibras Docs, Nibras AI, Nibras Dev, Nibras Apk və Nibras QR kimi müxtəlif proqram təminatı məhsulları təqdim edir."],
+		["Tətbiqlər ödənişlidirmi və onlarda reklamlar göstərilirmi?", "Saytda təqdim edilən proqramların ödənişli olub-olmaması və reklam göstərilməsi barədə məlumatlar müvafiq tətbiq səhifələrində qeyd olunur; ümumi platforma istifadəçilərə müxtəlif rəqəmsal resurslar təqdim edir."],
+		["Yeni tətbiqlər nə vaxt buraxılacaq?", "Gələcəkdə yeni tətbiqlərin və proqram təminatı məhsullarının nə vaxt reliz olunacağı barədə dəqiq cədvəl açıqlanmayıb, lakin sayt mütəmadi olaraq yenilənir və inkişaf etdirilir."]
+	]
+};
+var en = {
+	"about": ["Nibras Code apps comprise a collection of software tools designed to address various technical and informational needs within the digital environment. These products function to support users in handling everyday tasks, working with documents, managing schedules, and interacting with different digital formats efficiently.", "Users turn to these applications when they need to streamline their daily workflow, open specific digital files, translate texts, read documents, or utilize coding resources. The programs allow individuals to resolve multiple technical requirements in one place without needing to search elsewhere."],
+	"steps": [
+		"Navigate to the relevant section of the website to browse the available applications.",
+		"Select the appropriate button to download the specific app or file you require.",
+		"Install the downloaded software package or installation file onto your device.",
+		"Launch the application and begin utilizing its provided features for your tasks."
+	],
+	"uses": [
+		"You can utilize these applications to read and interact with various digital document formats.",
+		"Choose these tools to manage your daily schedules and tasks in a systematic manner.",
+		"Access resources related to the Arabic language or utilize specialized translation tools.",
+		"Benefit from digital programming tools and coding resources for your technical projects."
+	],
+	"faq": [
+		["Which apps does Nibras Code make?", "Nibras Code produces various software products including Nibras Arabic, Nibras PDF, Nibras Plans, Nibras Docs, Nibras AI, Nibras Dev, Nibras Apk, and Nibras QR."],
+		["Are the apps free, and do they show ads?", "Information regarding whether the applications are free of charge or display advertisements is specified on their respective pages within the platform."],
+		["When will new apps be released?", "A specific schedule or exact date for the release of upcoming applications has not been publicly announced, but the site continues to grow."]
+	]
+};
+var ru = {
+	"about": ["Приложения Nibras Code представляют собой набор программных инструментов, созданных для удовлетворения различных технических и информационных потребностей в цифровой среде. Эти продукты помогают пользователям выполнять повседневные задачи, работать с документами, управлять расписанием и эффективно взаимодействовать с различными цифровыми форматами.", "Пользователи обращаются к этим приложениям, когда им необходимо оптимизировать свой ежедневный рабочий процесс, открывать специфические цифровые файлы, переводить тексты, читать документы или использовать ресурсы для программирования. Программы позволяют решать технические задачи в одном месте."],
+	"steps": [
+		"Перейдите в соответствующий раздел веб-сайта для просмотра доступных приложений.",
+		"Выберите нужную кнопку для загрузки конкретного приложения или файла.",
+		"Установите загруженный пакет программного обеспечения или файл установки на свое устройство.",
+		"Запустите приложение и начните использовать его функции для выполнения задач."
+	],
+	"uses": [
+		"Вы можете использовать эти приложения для чтения различных цифровых документов.",
+		"Выберите эти инструменты для систематического управления своими ежедневными планами и задачами.",
+		"Получите доступ к материалам, связанным с арабским языком, или используйте инструменты перевода.",
+		"Пользуйтесь цифровыми инструментами программирования и кодирования для своих проектов."
+	],
+	"faq": [
+		["Какие приложения создает Nibras Code?", "Nibras Code производит различные программные продукты, включая Nibras Arabic, Nibras PDF, Nibras Plans, Nibras Docs, Nibras AI, Nibras Dev, Nibras Apk и Nibras QR."],
+		["Являются ли приложения бесплатными и показывают ли они рекламу?", "Информация о том, являются ли приложения бесплатными или содержат ли они рекламу, указана на соответствующих страницах продуктов на платформе."],
+		["Когда будут выпущены новые приложения?", "Конкретное расписание или точная дата выхода будущих приложений официально не объявлены, однако сайт постоянно развивается и обновляется."]
+	]
+};
+var ar = {
+	"about": ["تضم تطبيقات نيبراس كود مجموعة من أدوات البرمجيات المصممة لتلبية الاحتياجات التقنية والمعلوماتية المختلفة في البيئة الرقمية. تعمل هذه المنتجات على دعم المستخدمين في إنجاز المهام اليومية، والتعامل مع المستندات، وإدارة الجداول الزمنية، والتفاعل بكفاءة مع مختلف التنسيقات الرقمية.", "يلجأ المستخدمون إلى هذه التطبيقات عندما يحتاجون إلى تبسيط سير عملهم اليومي، أو فتح ملفات رقمية محددة، أو ترجمة النصوص، أو قراءة المستندات، أو الاستفادة من موارد البرمجة. تتيح البرامج للأفراد حل المتطلبات التقنية المتعددة في مكان واحد دون الحاجة للبحث في أماكن أخرى."],
+	"steps": [
+		"انتقل إلى القسم ذي الصلة في الموقع الإلكتروني لتصفح التطبيقات المتاحة.",
+		"حدد الزر المناسب لتنزيل التطبيق أو الملف المحدد الذي تحتاجه.",
+		"قم بتثبيت حزمة البرمجيات المُنزلة أو ملف التثبيت على جهازك.",
+		"قم بتشغيل التطبيق وابدأ في استخدام ميزاته المقدمة لإنجاز مهامك."
+	],
+	"uses": [
+		"يمكنك استخدام هذه التطبيقات لقراءة مختلف تنسيقات المستندات الرقمية والتعامل معها.",
+		"اختر هذه الأدوات لإدارة جداول أعمالك ومهامك اليومية بطريقة منظمة.",
+		"الوصول إلى الموارد المتعلقة باللغة العربية أو استخدام أدوات الترجمة المتخصصة.",
+		"الاستفادة من أدوات البرمجة الرقمية وموارد الكود لمشاريعك التقنية."
+	],
+	"faq": [
+		["ما هي التطبيقات التي تنتجها نيبراس كود؟", "تنتج نيبراس كود العديد من المنتجات البرمجية بما في ذلك نيبراس أرابيك، ونيبراس بي دي إف، ونيبراس بلانز، ونيبراس دوكس، ونيبراس إيه آي، ونيبراس ديف، ونيبراس أيه بي كي، ونيبراس كيو آر."],
+		["هل التطبيقات مجانية وهل تعرض إعلانات؟", "يتم توضيح المعلومات المتعلقة بما إذا كانت التطبيقات مجانية أو تعرض إعلانات على صفحاتها الخاصة داخل المنصة."],
+		["متى سيتم إطلاق تطبيقات جديدة؟", "لم يتم الإعلان علناً عن جدول زمني محدد أو تاريخ دقيق لإطلاق التطبيقات القادمة، ولكن الموقع يستمر في التحديث والتطوير."]
+	]
+};
+var tr = {
+	"about": ["Nibras Code uygulamaları, dijital ortamdaki çeşitli teknik ve bilgi ihtiyaçlarını karşılamak üzere tasarlanmış yazılım araçlarından oluşan bir koleksiyondur. Bu ürünler, kullanıcıların günlük görevleri yerine getirmesine, belgelerle çalışmasına, planlamaları yönetmesine ve farklı dijital biçimlerle etkileşim kurmasına destek olmak amacıyla faaliyet gösterir.", "Kullanıcılar günlük iş akışlarını hızlandırmak, belirli dijital dosyaları açmak, metinleri çevirmek, belgeleri okumak veya kodlama kaynaklarından yararlanmak istediklerinde bu uygulamalara başvururlar. Programlar, bireylerin birden fazla teknik gereksinimi başka yerlerde arama yapmadan tek bir merkezde çözmesine olanak tanır."],
+	"steps": [
+		"Mevcut uygulamaları incelemek için web sitesinin ilgili bölümüne gidin.",
+		"İhtiyacınız olan belirli uygulamayı veya dosyayı indirmek için uygun düğmeyi seçin.",
+		"İndirilen yazılım paketini veya kurulum dosyasını cihazınıza kurun.",
+		"Uygulamayı başlatın ve görevleriniz için sunduğu özellikleri kullanmaya başlayın."
+	],
+	"uses": [
+		"Çeşitli dijital belge biçimlerini okumak ve bunlarla etkileşim kurmak için bu uygulamaları kullanabilirsiniz.",
+		"Günlük planlarınızı ve görevlerinizi sistematik bir şekilde yönetmek için bu araçları seçebilirsiniz.",
+		"Arapça dili ile ilgili kaynaklara ulaşabilir veya özel çeviri araçlarından faydalanabilirsiniz.",
+		"Teknik projeleriniz için dijital programlama araçlarından ve kodlama kaynaklarından yararlanabilirsiniz."
+	],
+	"faq": [
+		["Nibras Code hangi uygulamaları üretmektedir?", "Nibras Code; Nibras Arabic, Nibras PDF, Nibras Plans, Nibras Docs, Nibras AI, Nibras Dev, Nibras Apk ve Nibras QR dahil olmak üzere çeşitli yazılım ürünleri üretmektedir."],
+		["Uygulamalar ücretsiz mi ve reklam gösteriyor mu?", "Uygulamaların ücretsiz olup olmadığı veya reklam gösterip göstermediği bilgisi, platform içerisindeki ilgili sayfalarda belirtilmektedir."],
+		["Yeni uygulamalar ne zaman yayınlanacak?", "Gelecekteki uygulamaların ne zaman yayınlanacağına dair kesin bir tarih veya zaman çizelgesi resmi olarak açıklanmamıştır, ancak site sürekli olarak güncellenmektedir."]
+	]
+};
+var faq_resurslar_ve_proqramlasdirma_default = {
+	az,
+	en,
+	ru,
+	ar,
+	tr
+};
+//#endregion
+export { ar, az, faq_resurslar_ve_proqramlasdirma_default as default, en, ru, tr };

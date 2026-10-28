@@ -1,0 +1,1 @@
+import{t as e}from"./schema-D8HdR1v4.js";var t=e;export{t as component};

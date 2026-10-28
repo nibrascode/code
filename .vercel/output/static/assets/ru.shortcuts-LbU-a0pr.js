@@ -1,0 +1,1 @@
+import{t as e}from"./shortcuts-CAqI-Dev.js";var t=e;export{t as component};

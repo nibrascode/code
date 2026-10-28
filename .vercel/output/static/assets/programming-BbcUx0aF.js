@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-CKeovgl0.js";import{n as t}from"./library-page-CBVoxtOh.js";var n=e(),r=()=>(0,n.jsx)(t,{section:`programming`});export{r as component};

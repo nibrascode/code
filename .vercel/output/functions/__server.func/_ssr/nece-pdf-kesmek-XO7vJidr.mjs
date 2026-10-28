@@ -1,0 +1,45 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/nece-pdf-kesmek-XO7vJidr.js
+var az = {
+	"about": ["Geniş kənarlar oxumağı çətinləşdirir.", "«PDF kəs» aləti kənarları mm ilə kəsir."],
+	"steps": [
+		"nibrascode.com/pdf/crop açın.",
+		"PDF-i seçin.",
+		"Kənarları mm ilə yazın.",
+		"Başlayıb endirin."
+	],
+	"uses": [
+		"Skan edilmiş sənəd.",
+		"Telefonda oxumaq.",
+		"Çap üçün."
+	],
+	"faq": [
+		["Yalnız bir neçə səhifəni kəsmək olar?", "Bəli. «Aralıq» seçib, məsələn 2-4 yazın."],
+		["Kəsilən hissə tam silinir?", "Xeyr. Gizlənir, amma faylın içində qala bilər."],
+		["Fayl yüklənir?", "Xeyr. İş brauzerdə gedir."]
+	]
+};
+var en = {
+	"about": ["Wide margins make reading harder.", "Crop PDF trims edges in mm."],
+	"steps": [
+		"Open nibrascode.com/en/pdf/crop.",
+		"Choose the PDF.",
+		"Enter margins in mm.",
+		"Start and download."
+	],
+	"uses": [
+		"Scanned documents.",
+		"Reading on a phone.",
+		"Printing."
+	],
+	"faq": [
+		["Can I crop only some pages?", "Yes. Choose Range, e.g. 2-4."],
+		["Is the cut part deleted?", "No. It is hidden but may stay in the file."],
+		["Is the file uploaded?", "No. It runs in the browser."]
+	]
+};
+var nece_pdf_kesmek_default = {
+	az,
+	en
+};
+//#endregion
+export { az, nece_pdf_kesmek_default as default, en };

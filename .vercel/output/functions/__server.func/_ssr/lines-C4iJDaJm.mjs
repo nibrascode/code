@@ -1,0 +1,110 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/lines-C4iJDaJm.js
+var az = {
+	"about": ["Sətir nömrələri funksiyası, mətnin hər sətirinin əvvəlində ardıcıl ədədlər yerləşdirir. Bu, kod parçalarını və ya mətn sənədlərini redaktə edərkən konkret sətirlərə istinad etməyi asanlaşdırır.", "İstifadəçilər bu alandan, xüsusilə proqramlaşdırma və mətn emalı işlərində, səhvləri tapmaq, şərhlər əlavə etmək və ya sənədin strukturunu izah etmək üçün faydalıdır. Alət yalnız sayıları göstərir, məzmunu dəyişdirmir."],
+	"steps": [
+		"Alətə daxil olun və mətninizi kopyalayıb yapışdırın.",
+		"Sətir nömrələrinin avtomatik olaraq göstərilməsini gözləyin.",
+		"Nəticəni seçin və istədiyiniz kimi kopyalayın.",
+		"İstəsəniz, məzmunu fayl olaraq yükləyə bilərsiniz."
+	],
+	"uses": [
+		"Kod səhvlərini taparkən konkret sətir nömrələrinə istinad etmək.",
+		"Mətn sənədində müəyyən hissələri izah etmək üçün sətir nömrələri əlavə etmək.",
+		"Təlimat və təlim materiallarında addım-addım təlimatları göstərmək.",
+		"Sənədin redaktə tarixçəsində dəyişiklikləri izləmək."
+	],
+	"faq": [
+		["Sətir nömrələri necə işləyir?", "Alət mətnin hər sətirini oxuyur və əvvəlində ardıcıl ədədlər yerləşdirir. Bu, məzmunu dəyişdirmədən sadə bir nömrələmə təqdim edir."],
+		["Məlumatlar serverə göndərilirmi?", "Xeyr, bütün emal brauzerdə yerli olaraq baş verir. Məlumatlar heç bir serverə göndərilmir."],
+		["Nəticəni necə yükləyə bilərəm?", "Nəticəni seçib kopyalayıb, istədiyiniz mətn redaktoruna yapışdıra və ya fayl olaraq saxlayaraq yükləyə bilərsiniz."]
+	]
+};
+var en = {
+	"about": ["The line numbers feature places a sequential number at the start of each line in a text block. This makes it easy to reference specific lines when reviewing or editing code or documentation.", "Users employ this tool primarily in programming, text editing, and documentation tasks where pinpointing a particular line is necessary for debugging, commenting, or explaining structure."],
+	"steps": [
+		"Open the tool and paste your text into the input area.",
+		"Wait for the numbers to appear automatically at the beginning of each line.",
+		"Select the numbered text and copy it to the clipboard.",
+		"Optionally, download the result as a file for later use."
+	],
+	"uses": [
+		"Referencing specific lines when debugging code.",
+		"Annotating sections of a document with line numbers for clarity.",
+		"Providing step‑by‑step instructions in tutorials or guides.",
+		"Tracking changes in a document’s revision history."
+	],
+	"faq": [
+		["How does the line numbering work?", "The tool reads each line of your text and prefixes it with a sequential number, without altering the content itself."],
+		["Is my data sent to a server?", "No. All processing occurs locally in the browser; no data is uploaded."],
+		["Can I download the numbered text?", "Yes. After copying the result, you can paste it into any editor or save it as a file for future reference."]
+	]
+};
+var ru = {
+	"about": ["Функция нумерации строк добавляет последовательный номер в начало каждой строки текста. Это облегчает ссылку на конкретные строки при просмотре или редактировании кода и документации.", "Пользователи применяют этот инструмент в основном в программировании, редактировании текста и работе с документами, где необходимо точно указать конкретную строку для отладки, комментариев или пояснения структуры."],
+	"steps": [
+		"Откройте инструмент и вставьте ваш текст в поле ввода.",
+		"Подождите, пока номера автоматически появятся в начале каждой строки.",
+		"Выделите нумерованный текст и скопируйте его в буфер обмена.",
+		"При желании скачайте результат как файл для дальнейшего использования."
+	],
+	"uses": [
+		"Ссылка на конкретные строки при отладке кода.",
+		"Добавление номеров строк в разделы документа для ясности.",
+		"Предоставление пошаговых инструкций в учебных материалах.",
+		"Отслеживание изменений в истории редактирования документа."
+	],
+	"faq": [
+		["Как работает нумерация строк?", "Инструмент читает каждую строку вашего текста и добавляет к ней последовательный номер, не изменяя сам контент."],
+		["Отправляются ли данные на сервер?", "Нет. Все обработка выполняется локально в браузере, данные не загружаются."],
+		["Можно ли скачать нумерованный текст?", "Да. После копирования результата вы можете вставить его в любой редактор или сохранить как файл для дальнейшего использования."]
+	]
+};
+var ar = {
+	"about": ["يضيف ميزة أرقام الأسطر رقمًا متسلسلًا في بداية كل سطر من النص. هذا يسهل الإشارة إلى أسطر محددة عند مراجعة أو تحرير الكود أو الوثائق.", "يستخدم المستخدمون هذه الأداة في البرمجة وتحرير النصوص والوثائق عندما يحتاجون إلى تحديد سطر معين للخطأ أو التعليق أو شرح البنية."],
+	"steps": [
+		"افتح الأداة وألصق نصك في منطقة الإدخال.",
+		"انتظر حتى تظهر الأرقام تلقائيًا في بداية كل سطر.",
+		"اختر النص المرقّم وانسخه إلى الحافظة.",
+		"اختياريًا، قم بتنزيل النتيجة كملف للاستخدام لاحقًا."
+	],
+	"uses": [
+		"الإشارة إلى أسطر محددة عند تصحيح الأخطاء في الكود.",
+		"إضافة أرقام الأسطر إلى أجزاء من المستند لتوضيحها.",
+		"تقديم تعليمات خطوة بخطوة في الدروس أو الدليل.",
+		"تتبع التغييرات في تاريخ تعديل المستند."
+	],
+	"faq": [
+		["كيف تعمل أرقام الأسطر؟", "تقرأ الأداة كل سطر من نصك وتضيف له رقمًا متسلسلًا، دون تعديل المحتوى."],
+		["هل تُرسل بياناتك إلى خادم؟", "لا. تتم جميع المعالجات محليًا في المتصفح؛ لا تُرفع أي بيانات."],
+		["هل يمكنني تنزيل النص المرقّم؟", "نعم. بعد نسخ النتيجة، يمكنك لصقها في أي محرر أو حفظها كملف لاستخدام لاحق."]
+	]
+};
+var tr = {
+	"about": ["Satır numaraları özelliği, metnin her satırının başına ardışık bir sayı ekler. Bu, kod veya belge üzerinde belirli satırlara atıfta bulunmayı kolaylaştırır.", "Kullanıcılar, hata ayıklama, yorum ekleme veya yapı açıklaması gibi durumlarda belirli bir satırı işaretlemek için bu aracı tercih ederler."],
+	"steps": [
+		"Araçta metninizi yapıştırın.",
+		"Numaraların otomatik olarak her satırın başına eklenmesini bekleyin.",
+		"Numaralı metni seçip kopyalayın.",
+		"İsterseniz sonucu bir dosya olarak indirin."
+	],
+	"uses": [
+		"Kod hatalarını giderirken belirli satırlara referans vermek.",
+		"Belgenin belirli bölümlerini açıklamak için satır numaraları eklemek.",
+		"Eğitim materyallerinde adım adım talimatlar sunmak.",
+		"Belge sürüm geçmişinde değişiklikleri izlemek."
+	],
+	"faq": [
+		["Satır numaralandırması nasıl çalışır?", "Araç, metnin her satırını okur ve içeriği değiştirmeden başına ardışık bir sayı ekler."],
+		["Veriler sunucuya gönderiliyor mu?", "Hayır. Tüm işlem tarayıcıda yerel olarak gerçekleşir; veri gönderilmez."],
+		["Numaralı metni indirebilir miyim?", "Evet. Kopyaladıktan sonra metni herhangi bir editöre yapıştırabilir veya bir dosya olarak kaydedebilirsiniz."]
+	]
+};
+var lines_default = {
+	az,
+	en,
+	ru,
+	ar,
+	tr
+};
+//#endregion
+export { ar, az, lines_default as default, en, ru, tr };

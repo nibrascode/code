@@ -1,0 +1,1 @@
+import{t as e}from"./doctor-BTf3-ueB.js";var t=e;export{t as component};

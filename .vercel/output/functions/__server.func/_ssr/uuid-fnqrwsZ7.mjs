@@ -1,0 +1,110 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/uuid-fnqrwsZ7.js
+var az = {
+	"about": ["UUID (Universally Unique Identifier) – 128‑bit uzunluqda təsadüfi identifikator, 36 simvoldan ibarət (8‑4‑4‑4‑12 formatında). Hər dəfə alətə basdığınızda yeni bir UUID alınır və eyni kodun iki dəfə yaranma ehtimalı praktiki olaraq sıfırdır. UUID‑lər proqram təminatında obyektləri, faylları və ya sessiyaları unikal şəkildə ayırmaq üçün geniş istifadə olunur.", "Bu alət brauzerdə işləyir, heç bir məlumat serverə göndərilmir və verilənlər bazasına yazılmır. Nəticəni kopyalaya, ya da mətn faylı kimi yükləyə bilərsiniz. UUID‑nin uzunluğu dəyişmir; hər zaman eyni struktura malikdir, buna görə əlavə parametrlərə ehtiyac yoxdur."],
+	"steps": [
+		"Veb səhifəni açın və UUID generatoruna keçin.",
+		"Səhifədəki \"Generate\" düyməsinə bir dəfə basın.",
+		"Yeni yaranmış UUID‑ni ekranda görün.",
+		"Kodunuzu kopyalayın və ya \"Download\" seçimi ilə fayl kimi saxlayın."
+	],
+	"uses": [
+		"Müxtəlif sistemlərdə obyektləri unikal şəkildə tanımaq.",
+		"Verilənlər bazasında satırları təkrarsız identifikatorla qeyd etmək.",
+		"API sorğularında sessiya və ya sorğu identifikatoru kimi istifadə etmək.",
+		"Fayl adlarını və ya müvəqqəti kataloqları təyin edərkən qarışıqlığı önləmək."
+	],
+	"faq": [
+		["UUID nə üçün istifadə olunur?", "UUID‑lər sistemlər arasında obyektləri təkrarsız şəkildə tanımaq üçün istifadə edilir, beləliklə məlumatların qarışıqlığı və toqquşması azalır."],
+		["Hər bir UUID‑nin eyni uzunluğu varmı?", "Bəli, bütün UUID‑lər 36 simvoldan ibarət eyni formatda (8‑4‑4‑4‑12) təqdim olunur."],
+		["Alət məlumatları serverə göndərirmi?", "Xeyr, bütün əməliyyatlar brauzerdə yerinə yetirilir, heç bir məlumat internetə ötürülmür."]
+	]
+};
+var en = {
+	"about": ["A UUID (Universally Unique Identifier) is a 128‑bit random identifier displayed as 36 characters in the 8‑4‑4‑4‑12 format. Each click generates a new UUID, and the probability of generating the same value twice is practically zero. UUIDs are commonly used to uniquely label objects, files, or sessions in software systems.", "The tool runs entirely in the browser; no data is sent to a server or stored in a database. The generated UUID can be copied to the clipboard or downloaded as a text file. The length and shape of a UUID never change, so there are no additional options to configure."],
+	"steps": [
+		"Open the nibrascode.com UUID generator page.",
+		"Click the generate button once.",
+		"View the newly created UUID on the screen.",
+		"Copy the code or download it as a file."
+	],
+	"uses": [
+		"Assigning unique identifiers to objects across distributed systems.",
+		"Storing rows in a database with a collision‑free primary key.",
+		"Using as a request or session ID in API communications.",
+		"Naming temporary files or directories to avoid naming conflicts."
+	],
+	"faq": [
+		["What is a UUID used for?", "UUIDs provide a way to uniquely identify resources without central coordination, reducing the risk of identifier collisions."],
+		["Do all UUIDs have the same length?", "Yes, every UUID is represented by 36 characters following the standard 8‑4‑4‑4‑12 pattern."],
+		["Does the tool send any data to a server?", "No, all generation happens locally in the browser and nothing is uploaded."]
+	]
+};
+var ru = {
+	"about": ["UUID (Universally Unique Identifier) — 128‑битный случайный идентификатор, представляемый 36 символами в формате 8‑4‑4‑4‑12. При каждом нажатии генерируется новый UUID, а вероятность получить одинаковый код практически равна нулю. UUID часто используют для уникального обозначения объектов, файлов или сессий в программных системах.", "Инструмент работает полностью в браузере, данные не отправляются на сервер и не сохраняются в базе. Сгенерированный UUID можно скопировать в буфер обмена или скачать как текстовый файл. Длина и форма UUID всегда одинаковы, дополнительных параметров настройки нет."],
+	"steps": [
+		"Откройте страницу генератора UUID на nibrascode.com.",
+		"Нажмите кнопку генерации один раз.",
+		"На экране появится новый UUID.",
+		"Скопируйте код или загрузите его в файл."
+	],
+	"uses": [
+		"Присвоение уникальных идентификаторов объектам в распределённых системах.",
+		"Хранение строк в базе данных с гарантией отсутствия конфликтов ключей.",
+		"Использование в качестве идентификатора запросов или сессий в API.",
+		"Назначение имён временным файлам и каталогам, чтобы избежать совпадений."
+	],
+	"faq": [
+		["Для чего нужен UUID?", "UUID позволяет однозначно идентифицировать ресурсы без центрального контроля, уменьшая риск конфликтов идентификаторов."],
+		["Все ли UUID имеют одинаковую длину?", "Да, каждый UUID состоит из 36 символов по шаблону 8‑4‑4‑4‑12."],
+		["Отправляются ли данные на сервер?", "Нет, генерация происходит локально в браузере, и никакая информация не передаётся наружу."]
+	]
+};
+var ar = {
+	"about": ["معرف UUID (Universally Unique Identifier) هو معرف عشوائي بطول 128 بت يُعرض كـ 36 حرفًا وفق تنسيق 8‑4‑4‑4‑12. كل نقرة تُنتج UUID جديد، واحتمال تكرار نفس القيمة عمليًا معدوم. يُستعمل UUID عادةً لتعيين هوية فريدة للكائنات أو الملفات أو الجلسات في البرمجيات.", "الأداة تعمل بالكامل داخل المتصفح؛ لا تُرسل أي بيانات إلى الخادم ولا تُخزن في قاعدة بيانات. يمكن نسخ UUID إلى الحافظة أو تنزيله كملف نصي. طول وشكل UUID ثابت دائمًا، ولا توجد خيارات تعديل إضافية."],
+	"steps": [
+		"افتح صفحة مولّد UUID على nibrascode.com.",
+		"انقر زر التوليد مرة واحدة.",
+		"ستظهر قيمة UUID الجديدة على الشاشة.",
+		"انسخ الكود أو حمّله كملف."
+	],
+	"uses": [
+		"إعطاء هوية فريدة للكائنات في الأنظمة الموزعة.",
+		"تخزين سجلات في قاعدة بيانات مع مفتاح أساسي لا يتصادم.",
+		"استخدامه كمعرف للطلبات أو الجلسات في واجهات برمجة التطبيقات.",
+		"تسمية ملفات أو مجلدات مؤقتة لتفادي التعارض في الأسماء."
+	],
+	"faq": [
+		["ما هو الغرض من UUID؟", "يوفر UUID طريقة لتحديد الموارد بشكل فريد دون الحاجة إلى تنسيق مركزي، مما يقلل من خطر تصادم المعرفات."],
+		["هل جميع UUID لها نفس الطول؟", "نعم، كل UUID يتكون من 36 حرفًا وفق النمط 8‑4‑4‑4‑12."],
+		["هل تُرسل الأداة أي بيانات إلى الخادم؟", "لا، كل عملية توليد تتم محليًا في المتصفح ولا يتم إرسال أي معلومات إلى الخارج."]
+	]
+};
+var tr = {
+	"about": ["UUID (Universally Unique Identifier), 128 bit uzunluğunda rastgele bir tanımlayıcıdır ve 8‑4‑4‑4‑12 formatında 36 karakter olarak gösterilir. Her tıklamada yeni bir UUID üretilir ve aynı değerin iki kez ortaya çıkma ihtimali pratikte yoktur. UUID'ler, nesneleri, dosyaları veya oturumları benzersiz şekilde işaretlemek için yaygın olarak kullanılır.", "Araç tamamen tarayıcıda çalışır; veri sunucuya gönderilmez ve veritabanına kaydedilmez. Oluşturulan UUID panoya kopyalanabilir veya metin dosyası olarak indirilebilir. UUID'nin uzunluğu ve şekli her zaman aynıdır, ek bir ayar seçeneği bulunmaz."],
+	"steps": [
+		"nibrascode.com üzerindeki UUID üretici sayfasını açın.",
+		"Üret düğmesine bir kez tıklayın.",
+		"Ekranda yeni bir UUID görüntülenecek.",
+		"Kodu kopyalayın ya da dosya olarak indirin."
+	],
+	"uses": [
+		"Dağıtık sistemlerde nesnelere benzersiz kimlik atamak.",
+		"Veritabanı satırlarını çakışmasız birincil anahtar ile saklamak.",
+		"API isteklerinde oturum veya istek kimliği olarak kullanmak.",
+		"Geçici dosya ve klasör adlarını çakışmadan belirlemek."
+	],
+	"faq": [
+		["UUID ne amaçla kullanılır?", "UUID, merkezi bir koordinasyon olmadan kaynakları benzersiz şekilde tanımlamayı sağlar ve kimlik çakışma riskini azaltır."],
+		["Tüm UUID'ler aynı uzunlukta mı?", "Evet, her UUID 8‑4‑4‑4‑12 şablonuna uygun 36 karakterden oluşur."],
+		["Araç verileri sunucuya gönderiyor mu?", "Hayır, tüm üretim yerel olarak tarayıcıda gerçekleşir ve hiçbir bilgi dışarıya aktarılmaz."]
+	]
+};
+var uuid_default = {
+	az,
+	en,
+	ru,
+	ar,
+	tr
+};
+//#endregion
+export { ar, az, uuid_default as default, en, ru, tr };

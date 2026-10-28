@@ -1,0 +1,45 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/nece-pdf-boz-etmek-DFQseeW0.js
+var az = {
+	"about": ["Ağ-qara çap üçün rəngsiz PDF rahatdır.", "«PDF-i boz et» aləti səhifələri boz edir."],
+	"steps": [
+		"nibrascode.com/pdf/grayscale açın.",
+		"PDF-i seçin.",
+		"Keyfiyyəti seçin.",
+		"Başlayıb endirin."
+	],
+	"uses": [
+		"Ağ-qara çap.",
+		"Arxiv nüsxəsi.",
+		"Rəngsiz təqdim."
+	],
+	"faq": [
+		["Mətn seçilə qalır?", "Xeyr. Səhifələr şəkil olur."],
+		["Fayl kiçilir?", "Həmişə yox. «Kiçik fayl» seçin; «Aydın» faylı böyüdə bilər."],
+		["Fayl yüklənir?", "Xeyr. İş brauzerdə gedir."]
+	]
+};
+var en = {
+	"about": ["A gray PDF is handy for black-and-white printing.", "Grayscale PDF turns pages gray."],
+	"steps": [
+		"Open nibrascode.com/en/pdf/grayscale.",
+		"Choose the PDF.",
+		"Pick quality.",
+		"Start and download."
+	],
+	"uses": [
+		"B&W printing.",
+		"Archive copies.",
+		"Color-free handouts."
+	],
+	"faq": [
+		["Does text stay selectable?", "No. Pages become images."],
+		["Does the file get smaller?", "Not always. Pick Small file; Sharp may grow it."],
+		["Is the file uploaded?", "No. It runs in the browser."]
+	]
+};
+var nece_pdf_boz_etmek_default = {
+	az,
+	en
+};
+//#endregion
+export { az, nece_pdf_boz_etmek_default as default, en };

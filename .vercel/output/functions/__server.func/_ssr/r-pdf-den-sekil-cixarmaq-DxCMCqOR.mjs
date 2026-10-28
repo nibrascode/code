@@ -1,0 +1,110 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/r-pdf-den-sekil-cixarmaq-DxCMCqOR.js
+var az = {
+	"about": ["PDF-dən şəkil çıxarmaq iki işdən biri ola bilər. Birincisi, bütün səhifəni şəkil kimi saxlamaqdır. İkincisi, səhifənin içindəki ayrıca şəkli götürməkdir. Ekran şəkli də olur, amma kənarları əyri və keyfiyyəti zəif qala bilər. Bu proses rəqəmsal sənədlərlə işləyərkən vizual elementlərin digər proqramlarda istifadəsi üçün vacibdir. Nibras PDF vasitəsilə bu əməliyyatları birbaşa brauzerdə və ya Android tətbiqində heç bir çətinlik çəkmədən həyata keçirmək mümkündür.", "İstifadəçilər tez-tez PDF sənədlərindəki qrafikləri, illüstrasiyaları və ya bütöv səhifələri təqdimatlara və hesabatlara əlavə etmək ehtiyacı duyurlar. Bəzən skrinşot çəkmək əlverişsiz olur, çünki nəticə səliqəsiz görünür və ya lazımi dəqiqliyi təmin etmir. Səhifəni birbaşa şəkil formatında ixrac etmək isə həmişə daha təmiz və peşəkar nəticə verir. Bu metod keyfiyyəti qorumağa və materialların təqdimatını yaxşılaşdırmağa kömək edir."],
+	"steps": [
+		"PDF sənədini Nibras PDF alətinə yükləyin.",
+		"İstədiyiniz səhifəni və ya daxili şəkli müəyyən edin.",
+		"Bütöv səhifəni şəkil kimi saxlamaq və ya tək şəkli çıxarmaq seçimini edin.",
+		"Hazır faylı birbaşa cihazınıza endirin."
+	],
+	"uses": [
+		"Təqdimatlara PDF səhifələrindən keyfiyyətli qrafiklər əlavə etmək.",
+		"Hesabatlar üçün sənədlərdən ayrı-ayrı illüstrasiyaları götürmək.",
+		"Skrinşot əvəzinə səhifəni təmiz şəkildə ixrac etmək.",
+		"Mühazirə materiallarını vizual olaraq digər formatlarda saxlamaq."
+	],
+	"faq": [
+		["Bütün səhifəni şəkil kimi saxlamaq mümkündürmü?", "Bəli, PDF sənədinin istənilən səhifəsini birbaşa şəkil formatında saxlaya bilərsiniz. Bu üsul ekran şəklindən daha təmiz və keyfiyyətli nəticə təmin edir."],
+		["Səhifənin içindəki tək şəkli necə götürmək olar?", "Alət vasitəsilə səhifənin daxilində yerləşən ayrı-ayrı vizual elementləri və ya şəkilləri seçərək ayrıca şəkildə çıxarmaq mümkündür."],
+		["Niyə skrinşot əvəzinə səhifə ixracından istifadə etməli?", "Ekran şəkli çəkərkən kənarlar əyri və keyfiyyət zəif qala bilər. Səhifə ixracı isə hər zaman daha səliqəli və aydın nəticə verir."]
+	]
+};
+var en = {
+	"about": ["Extracting an image from a PDF can mean one of two tasks. First, saving an entire page as a picture. Second, pulling out one specific image inside it. While you can take a screenshot, the edges might turn out crooked and the quality low. This process is essential when working with digital documents to reuse visual elements in other applications. Using Nibras PDF, these operations can be performed directly in the browser or via the Android app without any complications.", "Users frequently need to include charts, illustrations, or whole pages from PDF documents into presentations and reports. Sometimes taking a screenshot is inconvenient because the result looks messy or fails to provide the necessary precision. Exporting a page directly as an image format always yields a cleaner and more professional outcome. This method helps maintain quality and improves the presentation of materials."],
+	"steps": [
+		"Upload your PDF document to the Nibras PDF tool.",
+		"Locate the specific page or internal image you wish to target.",
+		"Choose whether to save the whole page as a picture or pull out a single image.",
+		"Download the resulting file directly to your device."
+	],
+	"uses": [
+		"Adding high-quality graphics from PDF pages into presentations.",
+		"Extracting individual illustrations from documents for reports.",
+		"Exporting a page cleanly instead of relying on screenshots.",
+		"Saving lecture materials visually in alternative formats."
+	],
+	"faq": [
+		["Can I save an entire page as a picture?", "Yes, you can save any page of the PDF document directly as an image format. This method provides a much cleaner and higher quality result than a standard screenshot."],
+		["How do I extract a single image inside a page?", "Using the tool, you can locate and pull out individual visual elements or pictures embedded within the document page."],
+		["Why use page export instead of taking a screenshot?", "Screenshots can often leave edges crooked and image quality weak. A direct page export is usually cleaner and preserves the visual standard better."]
+	]
+};
+var ru = {
+	"about": ["Извлечение изображения из PDF может означать одну из двух задач. Во-первых, сохранение всей страницы в виде картинки. Во-вторых, извлечение отдельного изображения внутри нее. Хотя можно сделать снимок экрана, его края могут получиться неровными, а качество — низким. Этот процесс необходим при работе с цифровыми документами для повторного использования визуальных элементов. С помощью Nibras PDF эти операции можно выполнять прямо в браузере или через приложение для Android.", "Пользователям часто требуется включать графики, иллюстрации или целые страницы из документов PDF в презентации и отчеты. Иногда делать скриншот неудобно, так как результат выглядит неаккуратно или не обеспечивает нужную точность. Экспорт страницы напрямую в формате изображения всегда дает более чистый и профессиональный результат. Этот метод помогает сохранить качество и улучшить оформление материалов."],
+	"steps": [
+		"Загрузите ваш PDF-документ в инструмент Nibras PDF.",
+		"Найдите нужную страницу или внутреннее изображение.",
+		"Выберите вариант сохранения всей страницы как картинки или извлечения одного изображения.",
+		"Скачайте готовый файл прямо на ваше устройство."
+	],
+	"uses": [
+		"Добавление качественной графики из страниц PDF в презентации.",
+		"Извлечение отдельных иллюстраций из документов для отчетов.",
+		"Чистый экспорт страницы вместо использования снимков экрана.",
+		"Сохранение учебных материалов в виде изображений."
+	],
+	"faq": [
+		["Можно ли сохранить всю страницу как картинку?", "Да, вы можете сохранить любую страницу PDF-документа напрямую в виде изображения. Этот способ обеспечивает более чистый результат, чем снимок экрана."],
+		["Как извлечь отдельное изображение внутри страницы?", "С помощью инструмента можно находить и вытягивать отдельные визуальные элементы или картинки, находящиеся внутри документа."],
+		["Почему стоит использовать экспорт страницы вместо скриншота?", "Снимки экрана часто оставляют края неровными, а качество слабым. Экспорт страницы обычно намного чище и аккуратнее."]
+	]
+};
+var ar = {
+	"about": ["استخراج صورة من ملف PDF قد يعني إحدى مهمتين. الأولى هي حفظ صفحة كاملة كصورة. والثانية هي سحب صورة واحدة داخلها. على الرغم من أنه يمكنك التقاط لقطة شاشة، إلا أن الحواف قد تكون معوجة وتكون الجودة ضعيفة. هذه العملية ضرورية عند التعامل مع المستندات الرقمية لإعادة استخدام العناصر البصرية في تطبيقات أخرى. باستخدام Nibras PDF، يمكن إجراء هذه العمليات مباشرة في المتصفح أو عبر تطبيق أندرويد دون أي تعقيد.", "يحتاج المستخدمون بشكل متكرر إلى تضمين الرسوم البيانية أو الرسومات التوضيحية أو صفحات كاملة من مستندات PDF في العروض التقديمية والتقارير. في بعض الأحيان يكون التقاط لقطة شاشة غير مناسب لأن النتيجة تبدو غير مرتبة أو تفشل في توفير الدقة المطلوبة. أما تصدير الصفحة مباشرة كصورة فيعطي دائماً نتيجة أنظف وأكثر احترافية. تساعد هذه الطريقة في الحفاظ على الجودة وتحسين عرض المواد."],
+	"steps": [
+		"قم بتحميل مستند PDF الخاص بك إلى أداة Nibras PDF.",
+		"حدد الصفحة المطلوبة أو الصورة الداخلية التي تريد استهدافها.",
+		"اختر ما إذا كنت تريد حفظ الصفحة بأكملها كصورة أو سحب صورة واحدة.",
+		"قم بتنزيل الملف الناتج مباشرة على جهازك."
+	],
+	"uses": [
+		"إضافة رسومات عالية الجودة من صفحات PDF إلى العروض التقديمية.",
+		"استخراج رسومات توضيحية فردية من المستندات للتقارير.",
+		"تصدير الصفحة بشكل نظيف بدلاً من الاعتماد على لقطات الشاشة.",
+		"حفظ المواد التعليمية بصرياً بتسقيلات بديلة."
+	],
+	"faq": [
+		["هل يمكنني حفظ صفحة كاملة كصورة؟", "نعم، يمكنك حفظ أي صفحة من مستند PDF مباشرة كصورة. توفر هذه الطريقة نتيجة أنظف وأعلى جودة مقارنة بلقطة الشاشة العادية."],
+		["كيف أستخرج صورة واحدة داخل الصفحة؟", "باستخدام الأداة، يمكنك تحديد وسحب العناصر البصرية الفردية أو الصور المضمنة داخل صفحة المستند."],
+		["لماذا يجب استخدام تصدير الصفحة بدلاً من التقاط لقطة شاشة؟", "غالباً ما تترك لقطات الشاشة حوافاً معوجة وجودة ضعيفة. وعادة ما يكون تصدير الصفحة أنظف وأكثر دقة."]
+	]
+};
+var tr = {
+	"about": ["PDF'den resim çıkarmak iki işten biri olabilir. Birincisi, bütün sayfayı resim olarak kaydetmektir. İkincisi, sayfanın içindeki ayrıca resmi almaktır. Ekran resmi de olur, ancak kenarları eğri ve kalitesi zayıf kalabilir. Bu işlem, dijital belgelerle çalışırken görsel öğelerin diğer programlarda kullanılması için gereklidir. Nibras PDF aracılığıyla bu işlemleri doğrudan tarayıcıda veya Android uygulamasında hiçbir zorluk yaşamadan gerçekleştirmek mümkündür.", "Kullanıcılar genellikle PDF belgelerindeki grafikleri, illüstrasyonları veya tüm sayfaları sunumlara ve raporlara ekleme ihtiyacı duyar. Bazen ekran görüntüsü almak elverişsiz olur çünkü sonuç düzensiz görünür veya gerekli hassasiyeti sağlamaz. Sayfayı doğrudan resim formatında dışarı aktarmak ise her zaman daha temiz ve profesyonel bir sonuç verir. Bu yöntem kalitenin korunmasına ve materyallerin sunumunun iyileştirilmesine yardımcı olur."],
+	"steps": [
+		"PDF belgenizi Nibras PDF aracına yükleyin.",
+		"İstediğiniz sayfayı veya dahili resmi belirleyin.",
+		"Bütün sayfayı resim olarak kaydetme veya tek resmi çıkarma seçimini yapın.",
+		"Hazır dosyayı doğrudan cihazınıza indirin."
+	],
+	"uses": [
+		"Sunumlara PDF sayfalarından kaliteli grafikler eklemek.",
+		"Raporlar için belgelerden ayrı illüstrasyonları almak.",
+		"Ekran görüntüsü yerine sayfayı temiz bir şekilde dışarı aktarmak.",
+		"Ders materyallerini görsel olarak alternatif formatlarda saklamak."
+	],
+	"faq": [
+		["Bütün sayfayı resim olarak kaydetmek mümkün mü?", "Evet, PDF belgesinin herhangi bir sayfasını doğrudan resim formatında kaydedebilirsiniz. Bu yöntem ekran görüntüsünden çok daha temiz ve kaliteli bir sonuç sağlar."],
+		["Sayfanın içindeki tek resmi nasıl alabilirim?", "Araç vasıtasıyla sayfanın içinde bulunan ayrı görsel öğeleri veya resimleri seçerek ayrıca çıkarmanız mümkündür."],
+		["Neden ekran görüntüsü yerine sayfa dışa aktarımı kullanılmalı?", "Ekran görüntüsü çekerken kenarlar eğri ve kalite zayıf kalabilir. Sayfa dışa aktarımı ise her zaman daha düzenli ve net bir sonuç verir."]
+	]
+};
+var r_pdf_den_sekil_cixarmaq_default = {
+	az,
+	en,
+	ru,
+	ar,
+	tr
+};
+//#endregion
+export { ar, az, r_pdf_den_sekil_cixarmaq_default as default, en, ru, tr };

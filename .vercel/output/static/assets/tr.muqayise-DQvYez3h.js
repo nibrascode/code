@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-CKeovgl0.js";import{t}from"./useRouterState-BXlZ-I8r.js";import{Ir as n}from"./index-C7SfPi0Z.js";import{t as r}from"./learn-pages-DCn7CP4Q.js";var i=e();function a(){return t({select:e=>e.location.pathname}).replace(/\/$/,``)===`/tr/muqayise`?(0,i.jsx)(r,{lang:`tr`}):(0,i.jsx)(n,{})}export{a as component};

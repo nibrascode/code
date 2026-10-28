@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-CKeovgl0.js";import{bt as t}from"./index-CuD-MDMg.js";import{t as n}from"./app-privacy-DgZiTEn7.js";var r=e();function i(){let{privacy:e}=t.useLoaderData();return(0,r.jsx)(n,{slug:`nibras-scan`,rows:e})}export{i as component};

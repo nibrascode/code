@@ -6,6 +6,7 @@ import type { Lang } from "@/lib/i18n";
 import { useI18n } from "@/lib/i18n-context";
 import { SEARCH_FAQ } from "@/lib/search-faq";
 import { NextLinks } from "@/components/next-links";
+import { ApkDiagnose } from "@/components/apk-diagnose";
 import { MAX_STEPS, decodeTree, encodeTree, sampleTree, tokenFromHash, type Step } from "@/lib/logic-tree";
 
 export const Route = createFileRoute("/logic")({
@@ -112,6 +113,7 @@ export function LogicPage() {
         <h1 className="font-display text-2xl font-bold tracking-tight md:text-3xl">{copy.h1}</h1>
         <p className="mt-1 text-sm text-muted">{copy.lead}</p>
       </header>
+      <ApkDiagnose lang={lang} />
       {mode === "edit" ? (
         <div className="nx-panel mb-8 grid gap-4">
           {steps.map((item, index) => (

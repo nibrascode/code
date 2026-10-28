@@ -1,0 +1,110 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/pdf-word-X3UGInpX.js
+var az = {
+	"about": ["Bu pulsuz veb aləti PDF sənədindəki mətni birbaşa DOCX formatında saxlamağa imkan verir. Xidmət Nibras PDF Android tətbiqinin veb versiyasıdır və heç bir qeydiyyat tələb etmədən nibrascode.com/pdf səhifəsində işləyir.", "İstifadəçilər mövcud mətn sənədlərini yenidən redaktə etmək və ya məzmunu dəyişdirmək ehtiyacı yarandıqda bu üsuldan istifadə edirlər. Bütün əməliyyatlar birbaşa brauzerdə yerinə yetirilir və fayllar cihazınızı tərk etmir."],
+	"steps": [
+		"Alət səhifəsini açın və PDF faylını seçin.",
+		"Faylın brauzerdə işlənməsini gözləyin.",
+		"Mətnin çıxarılması prosesinin tamamlanmasını təmin edin.",
+		"Hazır DOCX faylını cihazınıza endirin."
+	],
+	"uses": [
+		"Oxunmayan PDF formatındakı mətnləri redaktə olunan sənədə çevirmək üçün.",
+		"Mühazirə materiallarını və ya hesabatları mətn prosessorunda yenidən işləmək üçün.",
+		"Arxiv sənədlərindən məlumatları çıxarıb fərdi qeydlərə əlavə etmək üçün.",
+		"İnternetdən yüklənən sənədlərin məzmununu dəyişdirmək üçün."
+	],
+	"faq": [
+		["Bu xidmət ödənişlidirmi?", "Xeyr, bu alət tamamilə pulsuzdur və heç bir ödəniş tələb etmir."],
+		["Hesab açmaq lazımdırmı?", "Xeyr, heç bir qeydiyyatdan keçmədən və ya hesab açmadan birbaşa istifadə edə bilərsiniz."],
+		["Fayllarım təhlükəsizdirmi?", "Bəli, bütün proseslər birbaşa brauzerdə aparılır və fayllarınız cihazınızdan kənara göndərilmir."]
+	]
+};
+var en = {
+	"about": ["This free web tool allows you to save PDF text directly as a DOCX file. It is the web version of a tool from the Nibras PDF Android app, available freely on nibrascode.com/pdf without requiring any account.", "People need this functionality when they have locked or static document text that requires editing in a standard word processor. The underlying process runs entirely within the web browser, ensuring that files are processed locally and do not leave the device."],
+	"steps": [
+		"Open the tool page and select your PDF file.",
+		"Wait for the file to be processed in the browser.",
+		"Allow the text extraction process to complete.",
+		"Download the resulting DOCX file to your device."
+	],
+	"uses": [
+		"Converting static PDF text into an editable document format.",
+		"Modifying lecture notes or reports inside a standard word processor.",
+		"Extracting information from archived files for further writing.",
+		"Updating the content of downloaded documents without retyping."
+	],
+	"faq": [
+		["Is this tool free to use?", "Yes, this web tool is completely free with no hidden charges."],
+		["Do I need to create an account?", "No account or registration is required to use this service."],
+		["Are my files secure?", "Yes, all files are processed locally in your browser and never leave your device."]
+	]
+};
+var ru = {
+	"about": ["Этот бесплатный веб-инструмент позволяет сохранять текст из PDF-документов в формате DOCX. Он представляет собой веб-версию функции из приложения Nibras PDF для Android и доступен на странице nibrascode.com/pdf без создания учетной записи.", "Данная функция необходима, когда требуется отредактировать текст из документа или изменить его содержимое с помощью текстового процессора. Обработка файлов выполняется полностью в браузере, благодаря чему они не покидают ваше устройство."],
+	"steps": [
+		"Откройте страницу инструмента и выберите нужный PDF-файл.",
+		"Дождитесь завершения обработки файла в браузере.",
+		"Убедитесь, что извлечение текста завершено.",
+		"Сохраните готовый файл DOCX на свое устройство."
+	],
+	"uses": [
+		"Преобразование неизменяемого текста PDF в формат для редактирования.",
+		"Изменение учебных материалов или отчетов в текстовом редакторе.",
+		"Извлечение данных из архивных документов для дальнейшей работы.",
+		"Быстрое обновление содержимого загруженных файлов без повторного набора."
+	],
+	"faq": [
+		["Это бесплатный инструмент?", "Да, данный сервис полностью бесплатен для всех пользователей."],
+		["Нужно ли создавать учетную запись?", "Нет, регистрироваться или создавать аккаунт для использования не требуется."],
+		["Безопасны ли мои файлы?", "Да, все файлы обрабатываются локально в браузере и не покидают устройство."]
+	]
+};
+var ar = {
+	"about": ["تتيح لك هذه الأداة المجانية على الويب حفظ نصوص ملفات بي دي إف مباشرة بتنسيق دوكس. وهي النسخة الويب لأداة من تطبيق نبراس بي دي إف للأندرويد، ومتاحة مجاناً على nibrascode.com/pdf دون الحاجة لإنشاء أي حساب.", "يحتاج المستخدمون إلى هذه الميزة عندما يرغبون في تعديل نصوص الملفات الثابتة أو تغيير محتواها باستخدام برامج تحرير النصوص. تتم عمليات المعالجة بالكامل داخل متصفح الويب، مما ensures أن الملفات معالجة محلياً ولا تغادر الجهاز أبدًا."],
+	"steps": [
+		"افتح صفحة الأداة واختر ملف بي دي إف الخاص بك.",
+		"انتظر حتى يتم معالجة الملف داخل المتصفح.",
+		"دع عملية استخراج النص تكتمل بنجاح.",
+		"قم بتنزيل ملف دوكس الناتج على جهازك."
+	],
+	"uses": [
+		"تحويل النصوص الثابتة في المستندات إلى تنسيق قابل للتعديل.",
+		"تعديل مواد المحاضرات أو التقارير داخل برنامج معالجة النصوص.",
+		"استخراج المعلومات من الملفات المؤرشفة لإعادة استخدامها.",
+		"تحديث محتوى المستندات المنزلة دون الحاجة لإعادة كتابتها."
+	],
+	"faq": [
+		["هل هذه الأداة مجانية؟", "نعم، هذه الأداة مجانية تماماً ولا تتطلب أي رسوم لاستخدامها."],
+		["هل أحتاج إلى إنشاء حساب؟", "لا، لا يلزم إنشاء أي حساب أو تسجل للوصول إلى الخدمة."],
+		["هل ملفاتي آمنة؟", "نعم، تتم معالجة جميع الملفات محلياً داخل المتصفح ولا تغادر جهازك نهائياً."]
+	]
+};
+var tr = {
+	"about": ["Bu ücretsiz web aracı, bir PDF belgesindeki metni doğrudan DOCX dosyası olarak kaydetmenizi sağlar. Nibras PDF Android uygulamasının web sürümü olup, nibrascode.com/pdf adresinde herhangi bir hesap gerektirmeden ücretsiz sunulur.", "Kullanıcılar, mevcut bir belgedeki metinleri düzenlemek veya içeriği değiştirmek istediklerinde bu yönteme ihtiyaç duyar. Temeldeki işlem tamamen web tarayıcısı içinde gerçekleşir, böylece dosyalar yerel olarak işlenir ve cihazınızı terk etmez."],
+	"steps": [
+		"Araç sayfasını açın ve PDF dosyanızı seçin.",
+		"Dosyanın tarayıcıda işlenmesini bekleyin.",
+		"Metin çıkarma işleminin tamamlanmasını sağlayın.",
+		"Hazır olan DOCX dosyasını cihazınıza indirin."
+	],
+	"uses": [
+		"Sabit PDF metinlerini düzenlenebilir bir belge biçimine dönüştürmek için.",
+		"Ders notlarını veya raporları kelime işlemcide yeniden düzenlemek için.",
+		"Arşivlenmiş belgelerden bilgileri çıkarıp kişisel notlara eklemek için.",
+		"İnternetten indirilen belgelerin içeriğini yeniden yazmadan değiştirmek için."
+	],
+	"faq": [
+		["Bu araç ücretsiz mi?", "Evet, bu web aracı tamamen ücretsizdir ve herhangi bir ücret talep edilmez."],
+		["Hesap açmam gerekiyor mu?", "Hayır, herhangi bir kayıt oluşturmadan veya hesap açmadan doğrudan kullanabilirsiniz."],
+		["Dosyalarım güvende mi?", "Evet, tüm işlemler doğrudan tarayıcınızda yapılır ve dosyalarınız cihazınızdan dışarı çıkmaz."]
+	]
+};
+var pdf_word_default = {
+	az,
+	en,
+	ru,
+	ar,
+	tr
+};
+//#endregion
+export { ar, az, pdf_word_default as default, en, ru, tr };

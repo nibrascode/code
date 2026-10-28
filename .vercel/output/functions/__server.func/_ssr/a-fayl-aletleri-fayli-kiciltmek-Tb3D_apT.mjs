@@ -1,0 +1,110 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/a-fayl-aletleri-fayli-kiciltmek-Tb3D_apT.js
+var az = {
+	"about": ["Bir faylı kiçiltmək, mesajda və ya saxlama sistemində yer tutmayan faylları daha rahat göndərmək və saxlamaq məqsədilə edilir. Fayl ölçüsünü azaldaraq, e‑poçt, mesajlaşma və bulud xidmətlərindəki məhdudiyyətləri aşmaq mümkündür.", "Faylın ölçüsünü azaltmaq, xüsusilə şəkillər və şəkillər ehtiva edən PDF-lər üçün əhəmiyyətlidir. Kiçik mətn faylları artıq azaldıldıqda məzmunda əhəmiyyətli dəyişiklik olmaz, lakin çox sıxışdırıldıqda yazı və xəttlər bulanıqlaşa bilər."],
+	"steps": [
+		"Faylı açın və ölçüsünü ölçmək üçün faylın xüsusiyyətlərini yoxlayın.",
+		"Məhdudiyyətlərə uyğun olaraq faylın ölçüsünü azaltmaq üçün uyğun bir sıxışdırma alətindən istifadə edin.",
+		"Azaldılmış faylı açın və məzmunun oxunaqlı olduğundan əmin olun.",
+		"Oxunmazlıq hallarında, daha az sıxışdırılmış bir nüsxəni saxlayın və göndərin."
+	],
+	"uses": [
+		"E‑poçt vasitəsilə böyük şəkil fayllarını göndərmək.",
+		"Buludda məhdud yerə malik olan faylları saxlamaq.",
+		"Sosial media platformalarında şəkil və PDF-ləri paylaşmaq.",
+		"Sənədləri kompakt formatda arxivləşdirmək."
+	],
+	"faq": [
+		["Nə üçün faylı kiçiltmək vacibdir?", "Fayl ölçüsünü azaltmaq, mesajlaşma və saxlama məhdudiyyətlərini aşmağa və faylları daha sürətli göndərməyə kömək edir."],
+		["Mətn faylları nə qədər kiçiltilə bilər?", "Kiçik mətn faylları azaldıldıqda məzmunda əhəmiyyətli dəyişiklik olmaz, lakin çox sıxışdırıldıqda oxunmaz ola bilər."],
+		["Nə zaman sıxışdırılmış faylı yenidən açmalıyam?", "Faylı göndərməzdən əvvəl açın; oxunmazlıq halında, daha az sıxışdırılmış nüsxəni saxlayın."]
+	]
+};
+var en = {
+	"about": ["Compressing a file is done to make it fit within message limits or storage constraints, enabling easier sending and keeping. By reducing file size, you can bypass restrictions on email, messaging apps, and cloud services.", "Images and PDFs that contain images consume the most space. Small text files change little when compressed, but excessive compression can blur writing and lines, making the content unreadable."],
+	"steps": [
+		"Open the file and check its current size.",
+		"Use a compression tool to reduce the file size to meet the required limits.",
+		"Open the compressed file to verify readability.",
+		"If unreadable, keep a less compressed copy for sending."
+	],
+	"uses": [
+		"Sending large image files via email.",
+		"Storing files in cloud services with limited space.",
+		"Sharing images and PDFs on social media platforms.",
+		"Archiving documents in a compact format."
+	],
+	"faq": [
+		["Why is it important to compress a file?", "Compressing reduces file size, allowing you to send and store files within platform limits and improving transfer speed."],
+		["How much can a text file be compressed?", "Small text files change little when compressed, but over‑compression can make them unreadable."],
+		["When should I open the compressed file?", "Open it before sending; if it’s unreadable, keep a less compressed version."]
+	]
+};
+var ru = {
+	"about": ["Сжатие файла выполняется, когда он не помещается в сообщение или ограничено место хранения, чтобы облегчить отправку и хранение. Уменьшая размер, вы можете обойти ограничения почты, мессенджеров и облачных сервисов.", "Изображения и PDF, содержащие изображения, занимают наибольшее место. Маленькие текстовые файлы почти не меняются после сжатия, но чрезмерное сжатие может размыть текст и линии, делая файл нечитаемым."],
+	"steps": [
+		"Откройте файл и проверьте его текущий размер.",
+		"Используйте инструмент сжатия, чтобы уменьшить размер до нужного уровня.",
+		"Откройте сжатый файл и убедитесь, что он читаемый.",
+		"Если файл нечитаем, сохраните менее сжатую копию для отправки."
+	],
+	"uses": [
+		"Отправка больших изображений по электронной почте.",
+		"Хранение файлов в облаке с ограниченным пространством.",
+		"Публикация изображений и PDF в соцсетях.",
+		"Архивирование документов в компактном формате."
+	],
+	"faq": [
+		["Зачем сжимать файл?", "Сжатие уменьшает размер, позволяя отправлять и хранить файлы в пределах ограничений платформ и ускоряя передачу."],
+		["Насколько можно сжать текстовый файл?", "Маленькие текстовые файлы почти не меняются при сжатии, но чрезмерное сжатие может сделать их нечитаемыми."],
+		["Когда нужно открыть сжатый файл?", "Откройте его перед отправкой; если он нечитаемый, сохраните менее сжатую версию."]
+	]
+};
+var ar = {
+	"about": ["يُضغط الملف عندما لا يتناسب مع حدود الرسائل أو مساحة التخزين، لتسهيل إرساله أو حفظه. يقلل الضغط من حجم الملف، مما يسمح بمرور الرسائل عبر البريد الإلكتروني أو تطبيقات المراسلة وخدمات السحابة.", "الصور وملفات PDF التي تحتوي على صور تستهلك مساحة كبيرة. الملفات النصية الصغيرة لا تتغير كثيراً عند الضغط، لكن الضغط المفرط قد يطمس الكتابة والخطوط ويجعل المحتوى غير قابل للقراءة."],
+	"steps": [
+		"افتح الملف وتحقق من حجمه الحالي.",
+		"استخدم أداة ضغط لتقليل حجم الملف بما يتوافق مع الحدود المطلوبة.",
+		"افتح الملف المضغوط للتحقق من قابلية القراءة.",
+		"إذا كان غير قابل للقراءة، احتفظ بنسخة أقل ضغطاً للإرسال."
+	],
+	"uses": [
+		"إرسال ملفات صور كبيرة عبر البريد الإلكتروني.",
+		"تخزين الملفات في خدمات السحابة ذات مساحة محدودة.",
+		"مشاركة الصور وملفات PDF على منصات التواصل الاجتماعي.",
+		"أرشفة المستندات بصيغة مضغوطة."
+	],
+	"faq": [
+		["لماذا يجب ضغط الملف؟", "يقلل الضغط حجم الملف، مما يتيح إرساله وتخزينه ضمن حدود المنصات ويسرّع النقل."],
+		["كم يمكن ضغط ملف نصي؟", "الملفات النصية الصغيرة لا تتغير كثيراً عند الضغط، لكن الضغط المفرط قد يجعله غير قابل للقراءة."],
+		["متى يجب فتح الملف المضغوط؟", "افتحه قبل الإرسال؛ إذا كان غير قابل للقراءة، احتفظ بنسخة أقل ضغطاً."]
+	]
+};
+var tr = {
+	"about": ["Bir dosyayı küçültmek, mesaj sınırlarına veya depolama kısıtlamalarına uymak için yapılır, böylece dosya gönderimi ve saklanması kolaylaşır. Dosya boyutunu azaltarak e‑posta, mesajlaşma uygulamaları ve bulut hizmetlerindeki sınırlamaları aşabilirsiniz.", "Görseller ve görsel içeren PDF'ler en çok yer kaplar. Küçük metin dosyaları küçültüldüğünde neredeyse değişmez, ancak aşırı sıkıştırma yazıyı ve çizgileri bulanıklaştırarak okunamaz hale getirebilir."],
+	"steps": [
+		"Dosyayı açın ve mevcut boyutunu kontrol edin.",
+		"Gerekli sınırlar için dosya boyutunu azaltmak üzere bir sıkıştırma aracı kullanın.",
+		"Sıkıştırılmış dosyayı açarak okunabilirliğini doğrulayın.",
+		"Okunamazsa, daha az sıkıştırılmış bir kopyayı saklayın ve gönderin."
+	],
+	"uses": [
+		"Büyük resim dosyalarını e‑posta ile göndermek.",
+		"Bulut hizmetlerinde sınırlı alanla dosya saklamak.",
+		"Sosyal medya platformlarında resim ve PDF paylaşmak.",
+		"Belgeleri kompakt biçimde arşivlemek."
+	],
+	"faq": [
+		["Dosyayı küçültmek neden önemlidir?", "Dosya boyutunu küçültmek, dosyayı platform sınırları içinde göndermeyi ve saklamayı sağlar ve transfer hızını artırır."],
+		["Bir metin dosyası ne kadar küçültülebilir?", "Küçük metin dosyaları sıkıştırıldığında neredeyse değişmez, ancak aşırı sıkıştırma okunamaz hale getirebilir."],
+		["Sıkıştırılmış dosyayı ne zaman açmalıyım?", "Göndermeden önce açın; okunamazsa, daha az sıkıştırılmış bir sürümü saklayın."]
+	]
+};
+var a_fayl_aletleri_fayli_kiciltmek_default = {
+	az,
+	en,
+	ru,
+	ar,
+	tr
+};
+//#endregion
+export { ar, az, a_fayl_aletleri_fayli_kiciltmek_default as default, en, ru, tr };

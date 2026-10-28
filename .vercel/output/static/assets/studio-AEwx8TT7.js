@@ -1,0 +1,1 @@
+import{t as e}from"./studio-Dmo-WBqW.js";var t=e;export{t as component};

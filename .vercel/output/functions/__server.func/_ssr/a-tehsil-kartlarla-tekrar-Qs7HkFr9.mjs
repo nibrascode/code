@@ -1,0 +1,110 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/a-tehsil-kartlarla-tekrar-Qs7HkFr9.js
+var az = {
+	"about": ["Kartla təkrar oxuma üsulu iki tərəfli kartlardan istifadə edir. Kartın bir tərəfində sual, digər tərəfində isə cavab yerləşir. Bu metod, bilikləri qısa və aydın bloklara bölməyə əsaslanır. Hər kart yalnız bir sual və bir cavabı ehtiva etməlidir. Əgər kart çox məlumat daşıyırsa, o, artıq kart deyil, kiçik bir səhifə sayılır. Bu qayda, yaddaşa yükü azaltmağa kömək edir.", "Bu üsul, tələbələr və peşəkarlar üçün faydalıdır. Onlar mürəkkəb mövzuları sadə hissələrə bölmək istəyirlər. Təkrar oxuma zamanı kartın ön tərəfini görüb cavabı söyləməyə çalışırsınız. Sonra kartı çevirib cavabı yoxlayırsınız. Bilinən kartlar bir tərəfə qoyulur, çətin olanlar isə təkrar yığınında qalır. Bu yanaşma, vaxtı səmərəli istifadə etməyə imkan verir."],
+	"steps": [
+		"Kartın ön tərəfindəki sualı oxuyun və cavabı yaddan söyləməyə çalışın.",
+		"Kartı çevirib öz cavabınızı düzgün cavabla müqayisə edin.",
+		"Cavabı dərhal və düzgün bildiyiniz kartı bir tərəfə qoyun.",
+		"Cavabı yadda saxlaya bilmədiyiniz və ya gec bildiyiniz kartı təkrar yığınına qoyun."
+	],
+	"uses": [
+		"Tibbi terminləri və diaqnostik meyarları yadda saxlamaq üçün istifadə olunur.",
+		"Yad dil sözlərini və qrammatik qaydalarını öyrənmək üçün tətbiq edilir.",
+		"Qanun mətnlərindəki əsas maddələri və istisnaları öyrənmək üçün faydalıdır.",
+		"Texniki konsepsiyaları və proqramlaşdırma terminlərini mənimsəmək üçün əlverişlidir."
+	],
+	"faq": [
+		["Niyə hər kartda yalnız bir sual olmalıdır?", "Çoxlu suallar yaddaşı yorur və cavab verməyi çətinləşdirir. Tək sual, diqqəti mərkəzləşdirir və cavabı daha asan xatırlamağa kömək edir. Bu, təkrar oxuma prosesini daha səmərəli edir."],
+		["Cavabı gec bildiyim kartı nə etməliyəm?", "Cavabı gec bildiyiniz kartı bir tərəfə qoymayın. Onu təkrar yığınında saxlayın. Bu, beyninizin məlumatı daha dərindən emal etməsinə və uzunmüddətli yaddaşa köçürməsinə kömək edir."],
+		["Kart çox böyükdürsə, nə etməliyəm?", "Əgər kart çox məlumat daşıyırsa, onu bölməli və ya kiçik səhifə kimi qəbul etməlisiniz. Kartlar qısa və konkret olmalıdır. Böyük kartlar təkrar oxuma üsulunun əsas məqsədinə ziddir."]
+	]
+};
+var en = {
+	"about": ["Card-based review uses two-sided cards where one side holds a question and the other the answer. This method relies on breaking knowledge into short, clear blocks. Each card must contain only one question and one answer. If a card holds too much information, it becomes a small page rather than a card. This rule helps reduce cognitive load and improves retention by keeping the focus narrow and specific.", "This technique is useful for students and professionals who want to simplify complex topics. During review, you see the front of the card and try to say the answer. Then, you turn it to check your response. Cards you know well are set aside, while those you miss or answer slowly stay in the review pile. This split ensures time is not spent equally on every card, optimizing the learning process."],
+	"steps": [
+		"Read the question on the front of the card and try to recall the answer.",
+		"Turn the card over to compare your answer with the correct one.",
+		"Set aside the card if you answered correctly and immediately.",
+		"Keep the card in the review pile if you missed it or answered slowly."
+	],
+	"uses": [
+		"Memorizing medical terms and diagnostic criteria for exams.",
+		"Learning vocabulary and grammar rules in a foreign language.",
+		"Studying key legal clauses and exceptions in law texts.",
+		"Mastering technical concepts and programming terminology for developers."
+	],
+	"faq": [
+		["Why must each card have only one question?", "Multiple questions overload memory and make recall difficult. A single question focuses attention and helps you remember the answer more easily. This makes the review process more efficient and less stressful for the learner."],
+		["What should I do if I answer slowly?", "Do not set aside the card if you hesitate. Keep it in the review pile. This allows your brain to process the information more deeply and move it into long-term memory effectively."],
+		["What if a card is too large?", "If a card holds too much, it is a small page, not a card. You should split the content into smaller, distinct cards. Large cards defeat the purpose of this specific memory technique."]
+	]
+};
+var ru = {
+	"about": ["Метод повторения с карточками использует двухсторонние карточки: на одной стороне вопрос, на другой ответ. Этот подход основан на разбиении знаний на короткие, четкие блоки. Каждая карточка должна содержать только один вопрос и один ответ. Если на карточке слишком много информации, это уже не карточка, а маленькая страница. Это правило снижает когнитивную нагрузку и улучшает запоминание.", "Этот метод полезен студентам и специалистам, которые хотят упростить сложные темы. Во время повторения вы видите лицевую сторону карточки и пытаетесь назвать ответ. Затем вы переворачиваете её, чтобы проверить результат. Карточки, которые вы знаете, откладываются в сторону, а те, на которые вы отвечаете медленно или ошибаетесь, остаются в стопке для повторения. Это позволяет не тратить время на каждую карточку одинаково."],
+	"steps": [
+		"Прочитайте вопрос на лицевой стороне карточки и попробуйте вспомнить ответ.",
+		"Переверните карточку, чтобы сравнить ваш ответ с правильным.",
+		"Отложите карточку в сторону, если вы ответили правильно и сразу.",
+		"Оставьте карточку в стопке для повторения, если вы ошиблись или ответили медленно."
+	],
+	"uses": [
+		"Запоминание медицинских терминов и диагностических критериев для экзаменов.",
+		"Изучение лексики и грамматических правил иностранного языка.",
+		"Изучение ключевых юридических положений и исключений в правовых текстах.",
+		"Освоение технических концепций и терминологии программирования для разработчиков."
+	],
+	"faq": [
+		["Почему на каждой карточке должен быть только один вопрос?", "Несколько вопросов перегружают память и затрудняют воспроизведение. Один вопрос фокусирует внимание и помогает легче вспомнить ответ. Это делает процесс повторения более эффективным и менее стрессовым для ученика."],
+		["Что делать, если я отвечаю медленно?", "Не откладывайте карточку в сторону, если вы колеблетесь. Оставьте её в стопке для повторения. Это позволяет мозгу глубже обработать информацию и эффективно переместить её в долговременную память."],
+		["Что делать, если карточка слишком большая?", "Если на карточке слишком много информации, это маленькая страница, а не карточка. Вы должны разделить контент на более мелкие, отдельные карточки. Большие карточки противоречат цели этой техники запоминания."]
+	]
+};
+var ar = {
+	"about": ["يعتمد المراجعة بالبطاقات على بطاقات ذات وجهين، حيث يحمل أحد الوجهين السؤال والآخر الإجابة. يستند هذا الأسلوب إلى تقسيم المعرفة إلى كتل قصيرة وواضحة. يجب أن تحتوي كل بطاقة على سؤال واحد وإجابة واحدة فقط. إذا احتوت البطاقة على الكثير من المعلومات، فهي صفحة صغيرة وليست بطاقة. تساعد هذه القاعدة في تقليل العبء المعرفي وتحسين الاحتفاظ بالمعلومات.", "يعد هذا الأسلوب مفيدًا للطلاب والمهنيين الذين يرغبون في تبسيط المواضيع المعقدة. أثناء المراجعة، ترى وجه البطاقة الأمامي وتحاول قول الإجابة. ثم تقلبها للتحقق من ردك. تُوضع البطاقات التي تعرفها جيدًا جانبًا، بينما تبقى تلك التي تخطئ فيها أو تجيب ببطء في رزمة المراجعة. هذا التقسيم يضمن عدم إنفاق الوقت بنفس المقدار على كل بطاقة، مما يحسن عملية التعلم."],
+	"steps": [
+		"اقرأ السؤال على وجه البطاقة الأمامي وحاول استحضار الإجابة.",
+		"اقلب البطاقة لمقارنة إجابتك بالإجابة الصحيحة.",
+		"ضع البطاقة جانبًا إذا أجبت بشكل صحيح وفوري.",
+		"أبقِ البطاقة في رزمة المراجعة إذا أخطأت أو أجبت ببطء."
+	],
+	"uses": [
+		"حفظ المصطلحات الطبية ومعايير التشخيص للامتحانات.",
+		"تعلم مفردات وقواعد لغة أجنبية.",
+		"دراسة البنود القانونية الرئيسية والاستثناءات في النصوص القانونية.",
+		"إتقان المفاهيم التقنية ومصطلحات البرمجة للمطورين."
+	],
+	"faq": [
+		["لماذا يجب أن يحتوي كل بطاقة على سؤال واحد فقط؟", "تتسبب الأسئلة المتعددة في إرهاق الذاكرة وتجعل الاسترجاع صعبًا. يركز السؤال الواحد الانتباه ويساعدك على تذكر الإجابة بسهولة أكبر. يجعل هذا العملية أكثر كفاءة وأقل إجهادًا للمتعلم."],
+		["ماذا أفعل إذا أجبت ببطء؟", "لا تضع البطاقة جانبًا إذا ترددت. أبقها في رزمة المراجعة. يسمح هذا لمخك بمعالجة المعلومات بعمق أكبر ونقلها إلى الذاكرة طويلة المدى بفعالية."],
+		["ماذا لو كانت البطاقة كبيرة جدًا؟", "إذا احتوت البطاقة على الكثير، فهي صفحة صغيرة وليست بطاقة. يجب تقسيم المحتوى إلى بطاقات أصغر ومميزة. البطاقات الكبيرة تتعارض مع الغرض من هذه التقنية المحددة."]
+	]
+};
+var tr = {
+	"about": ["Kartlarla tekrar yöntemi, bir tarafında soru, diğer tarafında cevap bulunan çift taraflı kartlar kullanır. Bu yöntem, bilgileri kısa ve net bloklara bölmeye dayanır. Her kart yalnızca bir soru ve bir cevap içermelidir. Bir kart çok fazla bilgi taşıyorsa, o artık bir kart değil, küçük bir sayfadır. Bu kural, bilişsel yükü azaltmaya ve odaklanmayı dar tutarak bilgiyi daha iyi hatırlamaya yardımcı olur.", "Bu teknik, karmaşık konuları basitleştirmek isteyen öğrenciler ve profesyoneller için faydalıdır. Tekrar sırasında kartın ön yüzünü görüp cevabı söylemeye çalışırsınız. Ardından kontrol etmek için kartı çevirirsiniz. İyi bildiğiniz kartlar bir kenara konur, kaçırılan veya yavaş cevaplananlar ise tekrar yığında kalır. Bu ayrım, her karta aynı miktarda zaman harcanmasını engeller ve öğrenme sürecini optimize eder."],
+	"steps": [
+		"Kartın ön yüzündeki soruyu okuyun ve cevabı hatırlamaya çalışın.",
+		"Cevabınızı doğru olanla karşılaştırmak için kartı çevirin.",
+		"Doğru ve hemen cevapladıysanız kartı bir kenara koyun.",
+		"Yanlış cevapladıysanız veya yavaş olduysanız kartı tekrar yığında bırakın."
+	],
+	"uses": [
+		"Sınavlar için tıbbi terimleri ve tanı kriterlerini ezberlemek.",
+		"Yabancı dilde kelime bilgisi ve dilbilgisi kurallarını öğrenmek.",
+		"Hukuk metinlerindeki temel maddeleri ve istisnaları çalışmak.",
+		"Geliştiriciler için teknik kavramları ve programlama terminolojisini kavramak."
+	],
+	"faq": [
+		["Neden her kartta yalnızca bir soru olmalı?", "Birden fazla soru belleği yorar ve hatırlamayı zorlaştırır. Tek bir soru dikkati odaklar ve cevabı daha kolay hatırlamanıza yardımcı olur. Bu, tekrar sürecini daha verimli ve öğrenen için daha az stresli hale getirir."],
+		["Yavaş cevapladıysam ne yapmalıyım?", "Tereddüt ettiyseniz kartı bir kenara koymayın. Onu tekrar yığında tutun. Bu, beyninizin bilgiyi daha derinlemesine işlemesine ve uzun süreli belleğe taşımasına olanak tanır."],
+		["Kart çok büyükse ne yapmalıyım?", "Bir kart çok fazla içerik taşıyorsa, o küçük bir sayfadır, kart değildir. İçeriği daha küçük ve ayrı kartlara bölmelisiniz. Büyük kartlar, bu hafıza tekniğinin amacına aykırıdır."]
+	]
+};
+var a_tehsil_kartlarla_tekrar_default = {
+	az,
+	en,
+	ru,
+	ar,
+	tr
+};
+//#endregion
+export { ar, az, a_tehsil_kartlarla_tekrar_default as default, en, ru, tr };

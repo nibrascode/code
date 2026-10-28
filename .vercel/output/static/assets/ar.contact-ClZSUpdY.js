@@ -1,0 +1,1 @@
+import{_n as e}from"./index-Bdeknepo.js";var t=e;export{t as component};

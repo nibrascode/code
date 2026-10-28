@@ -1,0 +1,110 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/programming-numune-kod-BU82hwOF.js
+var az = {
+	"about": ["Nibras Code, oyun və tətbiq üçün nümunə kodlar təqdim edən pulsuz veb səhifəsidir. Oyun kodu skor, təxmin və zamanlayıcı xüsusiyyətlərini ehtiva edir, tətbiq kodu isə qeydlər, rejim və cəmləmə funksiyalarını əhatə edir. Bu kodlar, proqramçıların öz layihələrində istifadə edə biləcəyi əsas strukturları göstərir.", "İstifadəçilər, proqramlaşdırma təcrübələrini artırmaq və yeni konseptləri öyrənmək üçün bu nümunələri istifadə edə bilərlər. Oyun və tətbiq kodları, xüsusilə təcrübəsiz proqramçılar üçün başlanğıc nöqtəsi kimi xidmət edir və real dünya tətbiqlərində tətbiq edilə biləcək əsas prinsipləri nümayiş etdirir."],
+	"steps": [
+		"1. Sayfaya daxil olun və oyun və ya tətbiq kod bölməsini seçin.",
+		"2. İstədiyiniz kodu seçin və tam mətnini kopyalayın.",
+		"3. Öz layihənizdə uyğun fayl strukturu yaradın və kopyaladığınız kodu yerləşdirin.",
+		"4. Kodun işini yoxlayın, lazım olduqda dəyişikliklər edin və tətbiqinizi işə salın."
+	],
+	"uses": [
+		"Yeni başlayanlar üçün proqramlaşdırma prinsiplərini öyrənmək.",
+		"Mənbə kodunu təhlil edərək daha yaxşı kodlaşdırma texnikaları tapmaq.",
+		"Öz oyun və tətbiq layihələrinizdə əsas funksionallığı sürətlə tətbiq etmək.",
+		"Kodun strukturunu başa düşmək üçün tədris materialı kimi istifadə etmək."
+	],
+	"faq": [
+		["Bu kodlar hansı proqramlaşdırma dillərində yazılıb?", "Kodlar əsasən JavaScript və HTML/CSS formatında təqdim edilir, bu da veb əsaslı oyun və tətbiq üçün uyğundur."],
+		["Kodları öz layihələrimdə istifadə edə bilərəmmi?", "Bəli, kodlar açıq mənbədir və şəxsi və ya kommersiya layihələrinizdə sərbəst şəkildə istifadə edilə bilər."],
+		["Kodları dəyişdirmək üçün hansı vasitələrə ehtiyac var?", "Sadə mətn redaktorları və ya IDE-lər (Visual Studio Code, Sublime Text və s.) kifayətdir; əlavə olaraq, veb server və ya lokal server mühitinə ehtiyacınız ola bilər."]
+	]
+};
+var en = {
+	"about": ["Nibras Code is a free web page that provides sample code for games and apps. The game code includes a score, a guess, and a timer, while the app code features a note, a mode, and a sum. These examples illustrate core structures that developers can adapt for their own projects.", "Users often turn to these samples to learn programming concepts, experiment with new ideas, or quickly prototype features. The code demonstrates practical implementations of common patterns, making it valuable for beginners and experienced developers alike."],
+	"steps": [
+		"Navigate to the site and choose either the game or app code section.",
+		"Select the desired snippet and copy the entire code block.",
+		"Create the appropriate file structure in your project and paste the copied code.",
+		"Run the code, test its functionality, and modify as needed for your application."
+	],
+	"uses": [
+		"Learning foundational programming techniques.",
+		"Analyzing source code to improve coding practices.",
+		"Rapidly adding core features to personal projects.",
+		"Using the examples as teaching material in educational settings."
+	],
+	"faq": [
+		["What programming languages are used in these samples?", "The snippets are primarily written in JavaScript with accompanying HTML/CSS for web-based games and apps."],
+		["Can I use these codes in my own projects?", "Yes, the code is open source and can be freely incorporated into personal or commercial projects."],
+		["What tools do I need to modify the code?", "A simple text editor or IDE like Visual Studio Code or Sublime Text is sufficient; a local web server may be required for testing."]
+	]
+};
+var ru = {
+	"about": ["Nibras Code – это бесплатная веб‑страница, предлагающая примеры кода для игр и приложений. Код игры содержит счёт, догадку и таймер, а код приложения – заметку, режим и сумму. Эти примеры демонстрируют основные структуры, которые разработчики могут адаптировать под свои проекты.", "Пользователи используют эти примеры для изучения программирования, экспериментов с новыми идеями и быстрой прототипизации. Код показывает практические реализации общих паттернов, что делает его полезным как для новичков, так и для опытных программистов."],
+	"steps": [
+		"Перейдите на сайт и выберите раздел с кодом игры или приложения.",
+		"Выберите нужный фрагмент и скопируйте весь блок кода.",
+		"Создайте соответствующую структуру файлов в своём проекте и вставьте скопированный код.",
+		"Запустите код, проверьте его работу и при необходимости внесите изменения."
+	],
+	"uses": [
+		"Изучение базовых принципов программирования.",
+		"Анализ исходного кода для улучшения практик кодирования.",
+		"Быстрое добавление основных функций в личные проекты.",
+		"Использование примеров в качестве учебного материала."
+	],
+	"faq": [
+		["На каких языках написаны эти примеры?", "Код написан в основном на JavaScript с HTML/CSS для веб‑игр и приложений."],
+		["Могу ли я использовать этот код в своих проектах?", "Да, код открыт и может свободно использоваться в личных или коммерческих проектах."],
+		["Какие инструменты нужны для изменения кода?", "Подходит любой текстовый редактор или IDE, например Visual Studio Code; для тестирования может потребоваться локальный веб‑сервер."]
+	]
+};
+var ar = {
+	"about": ["Nibras Code هو صفحة ويب مجانية تقدم أمثلة على الكود للعبة وتطبيق. الكود الخاص باللعبة يتضمن درجة، تخمين، ومؤقت، بينما الكود الخاص بالتطبيق يحتوي على ملاحظة، وضع، ومجموع. تُظهر هذه الأمثلة الهياكل الأساسية التي يمكن للمطورين تعديلها لاستخدامها في مشاريعهم.", "يستخدم المستخدمون هذه الأمثلة لتعلم مفاهيم البرمجة، تجربة أفكار جديدة، أو إنشاء نماذج أولية بسرعة. الكود يوضح تطبيقات عملية للأنماط الشائعة، ما يجعله مفيدًا للمبتدئين والمحترفين على حدٍ سواء."],
+	"steps": [
+		"تصفح الموقع واختر قسم الكود للعبة أو التطبيق.",
+		"اختر المقتطف المطلوب وانسخ الكود بالكامل.",
+		"أنشئ بنية الملفات المناسبة في مشروعك وألصق الكود المنسوخ.",
+		"شغل الكود، اختبر وظيفته، وعدل حسب الحاجة."
+	],
+	"uses": [
+		"تعلم تقنيات البرمجة الأساسية.",
+		"تحليل الكود المصدر لتحسين الممارسات.",
+		"إضافة ميزات أساسية بسرعة إلى المشاريع الشخصية.",
+		"استخدام الأمثلة كمواد تعليمية."
+	],
+	"faq": [
+		["ما هي لغات البرمجة المستخدمة في هذه الأمثلة؟", "الكود مكتوب أساسًا بلغة JavaScript مع HTML/CSS لتطبيقات الويب."],
+		["هل يمكنني استخدام هذه الكودات في مشاريعي؟", "نعم، الكود مفتوح المصدر ويمكن دمجه بحرية في المشاريع الشخصية أو التجارية."],
+		["ما الأدوات المطلوبة لتعديل الكود؟", "محرر نصوص بسيط أو IDE مثل Visual Studio Code كافٍ؛ قد تحتاج إلى خادم ويب محلي لاختبار الكود."]
+	]
+};
+var tr = {
+	"about": ["Nibras Code, oyun ve uygulama için örnek kodlar sunan ücretsiz bir web sayfasıdır. Oyun kodu skor, tahmin ve zamanlayıcı içerirken, uygulama kodu not, mod ve toplamı barındırır. Bu örnekler, geliştiricilerin kendi projelerinde kullanabilecekleri temel yapıları gösterir.", "Kullanıcılar, programlama kavramlarını öğrenmek, yeni fikirleri denemek veya özellikleri hızlıca prototiplemek için bu örnekleri kullanır. Kod, yaygın kalıpların pratik uygulamalarını gösterdiği için hem yeni başlayanlar hem de deneyimli geliştiriciler için değerlidir."],
+	"steps": [
+		"Siteye gidin ve oyun veya uygulama kodu bölümünü seçin.",
+		"İstediğiniz kod bloğunu seçin ve tümünü kopyalayın.",
+		"Projenizde uygun dosya yapısını oluşturun ve kopyaladığınız kodu yapıştırın.",
+		"Kodu çalıştırın, işlevini test edin ve gerekirse değişiklik yapın."
+	],
+	"uses": [
+		"Temel programlama tekniklerini öğrenmek.",
+		"Kaynak kodu analiz ederek kodlama uygulamalarını geliştirmek.",
+		"Kişisel projelere hızlıca temel özellik eklemek.",
+		"Öğretim materyali olarak kullanmak."
+	],
+	"faq": [
+		["Bu örnekler hangi programlama dillerinde yazılmıştır?", "Kodlar, web tabanlı oyun ve uygulamalar için JavaScript ile HTML/CSS kullanılarak hazırlanmıştır."],
+		["Kodları kendi projelerimde kullanabilir miyim?", "Evet, kodlar açık kaynaklıdır ve kişisel veya ticari projelerde serbestçe kullanılabilir."],
+		["Kodu değiştirirken hangi araçlara ihtiyacım var?", "Basit bir metin düzenleyici veya Visual Studio Code gibi bir IDE yeterlidir; test için yerel bir web sunucusu gerekebilir."]
+	]
+};
+var programming_numune_kod_default = {
+	az,
+	en,
+	ru,
+	ar,
+	tr
+};
+//#endregion
+export { ar, az, programming_numune_kod_default as default, en, ru, tr };

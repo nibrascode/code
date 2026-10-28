@@ -1,0 +1,175 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/services-CRrC828s.js
+var az = {
+	"about": [
+		"Nibras Code Xidmətlər səhifəsi saytdakı bütün pulsuz alət və tətbiqləri bir yerdə toplayır: PDF alətləri, video kəsmə və çevirmə, səs studiyası (Nibras Audio) və səs alətləri, QR kod, Wi-Fi QR və vizit kartı QR, şəkil ölçüsü, format çevirmə və fon silmə, proqramçılar üçün kod alətləri, mobil tətbiqlər, Studio və Nibras AI.",
+		"Məxfilik yanaşmamız sadədir: mümkün olan hər yerdə fayllar cihazınızda, brauzerin içində emal olunur. PDF birləşdirmə, bölmə, sıxma, şifrələmə, video kəsmə və çevirmə, səs montajı, şəkil emalı və QR kod hazırlama zamanı fayllarınız serverə yüklənmir — nəticə birbaşa cihazınıza saxlanılır.",
+		"Bu alətlərdən istifadə üçün hesab açmaq və ya şəxsi məlumat vermək lazım deyil. Alətlər pulsuzdur və reklam göstərmir. Saytın ümumi işləməsi üçün yalnız anonim ziyarət statistikası ola bilər.",
+		"İstisna: Nibras AI kimi süni intellekt xidmətlərində yazdığınız mətn cavab hazırlamaq üçün serverə göndərilir. Belə hallarda məxfi məlumat (parol, kart nömrəsi, şəxsi sənəd) yazmamağı tövsiyə edirik. Mobil tətbiqlərin məxfilik qaydaları hər tətbiqin öz Məxfilik siyasəti səhifəsində ətraflı yazılıb.",
+		"Alətlər telefonda və kompüterdə, müasir brauzerlərdə işləyir. Bəzi alətlər (məsələn, video və səs) ilk açılışda lazımi mühərriki bir dəfə yükləyir, sonra daha tez açılır."
+	],
+	"steps": [
+		"Xidmətlər siyahısında lazım olan bölməni tapın: PDF, Video, Səs, QR, Şəkil, Kod və ya Tətbiqlər.",
+		"Aləti açın və faylınızı cihazınızdan seçin və ya mətni daxil edin.",
+		"Ayarları edin və nəticəni görün.",
+		"Hazır faylı yükləyin və ya nəticəni kopyalayın."
+	],
+	"uses": [
+		"PDF-ləri birləşdirmək, bölmək, sıxmaq, parol qoymaq və ya Word-ə çevirmək.",
+		"Videonu kəsmək, MP4/GIF-ə çevirmək, klipləri birləşdirmək və səs çıxarmaq.",
+		"Səs yazmaq, montaj etmək, küyü azaltmaq və effekt əlavə etmək.",
+		"Link, Wi-Fi və vizit kartı üçün QR kod hazırlamaq.",
+		"Şəklin ölçüsünü dəyişmək, kiçiltmək, formatını çevirmək və fonunu silmək.",
+		"JSON, Base64, UUID, şifrə və digər kod alətlərindən istifadə etmək."
+	],
+	"faq": [
+		["Nibras Code xidmətləri pulsuzdurmu?", "Bəli. Saytdakı alətlər pulsuzdur, reklam yoxdur və əksəriyyəti hesabsız işləyir."],
+		["Fayllarım serverə yüklənirmi?", "PDF, video, səs, şəkil və QR alətlərində xeyr — emal brauzerinizdə, cihazınızda gedir. Fayllar Nibras Code serverlərində saxlanılmır."],
+		["Hansı şəxsi məlumatları toplayırsınız?", "Alətlərdən istifadə üçün ad, e-poçt və ya telefon tələb olunmur. Yalnız ümumi anonim ziyarət statistikası ola bilər."],
+		["Nibras AI-yə yazdıqlarım haraya gedir?", "Süni intellekt cavabı üçün mətniniz serverə göndərilir. Ona görə həssas şəxsi məlumat yazmamağınız tövsiyə olunur."],
+		["Telefonda istifadə etmək olarmı?", "Bəli, alətlər Android və iPhone brauzerlərində işləyir; ayrıca Android tətbiqlərimiz də var."],
+		["İnternet olmadan işləyirmi?", "Bəzi alətlər (məsələn, Nibras Audio) ilk yüklənmədən sonra oflayn da işləyə bilər. Digərləri ilk açılış üçün internet tələb edir."],
+		["Hansı dillərdə mövcuddur?", "Azərbaycan, ingilis, türk, ərəb və rus dillərində."],
+		["Sual və ya təklif üçün necə əlaqə saxlamaq olar?", "nibrascode@gmail.com ünvanına yaza bilərsiniz."]
+	]
+};
+var en = {
+	"about": [
+		"The Nibras Code Services page gathers every free tool and app on the site in one place: PDF tools, video trimming and conversion, the Nibras Audio studio and voice tools, QR codes including Wi-Fi and vCard QR, image resizing, format conversion and background removal, developer code tools, mobile apps, Studio and Nibras AI.",
+		"Our privacy approach is simple: wherever possible, files are processed on your device, inside the browser. When you merge, split, compress or protect PDFs, trim or convert videos, edit audio, process images or make QR codes, your files are not uploaded to a server — the result is saved straight to your device.",
+		"You do not need an account or personal data to use these tools. They are free and show no ads. Only anonymous visit statistics may exist for general site operation.",
+		"Exception: AI services such as Nibras AI send the text you type to a server to produce an answer. Please avoid typing sensitive data (passwords, card numbers, private documents) there. Each mobile app has its own Privacy Policy page with full details.",
+		"The tools work on phones and computers in modern browsers. Some tools (such as video and audio) download their engine once on first use and open faster afterwards."
+	],
+	"steps": [
+		"Find the section you need: PDF, Video, Audio, QR, Image, Code or Apps.",
+		"Open a tool and pick a file from your device or enter text.",
+		"Adjust the settings and preview the result.",
+		"Download the file or copy the result."
+	],
+	"uses": [
+		"Merge, split, compress, password-protect or convert PDFs to Word.",
+		"Trim videos, convert to MP4/GIF, join clips and extract audio.",
+		"Record, edit, denoise and add effects to audio.",
+		"Make QR codes for links, Wi-Fi and contact cards.",
+		"Resize, compress and convert images or remove backgrounds.",
+		"Use JSON, Base64, UUID, password and other code tools."
+	],
+	"faq": [
+		["Are Nibras Code services free?", "Yes. The tools are free, ad-free and most work without an account."],
+		["Are my files uploaded to a server?", "For PDF, video, audio, image and QR tools, no — processing happens in your browser on your device. Files are not stored on Nibras Code servers."],
+		["What personal data do you collect?", "No name, email or phone is required to use the tools. Only general anonymous visit statistics may exist."],
+		["Where does my Nibras AI text go?", "Your text is sent to a server to generate the AI answer, so avoid typing sensitive personal information."],
+		["Can I use them on my phone?", "Yes, the tools work in Android and iPhone browsers, and we also have Android apps."],
+		["Do they work offline?", "Some tools (such as Nibras Audio) can work offline after the first load. Others need internet to open."],
+		["Which languages are available?", "Azerbaijani, English, Turkish, Arabic and Russian."],
+		["How can I send a question or suggestion?", "Write to nibrascode@gmail.com."]
+	]
+};
+var tr = {
+	"about": [
+		"Nibras Code Hizmetler sayfası sitedeki tüm ücretsiz araç ve uygulamaları tek yerde toplar: PDF araçları, video kesme ve dönüştürme, Nibras Audio ses stüdyosu ve ses araçları, Wi-Fi ve kartvizit dahil QR kodlar, görsel boyutlandırma, format dönüştürme ve arka plan silme, geliştirici kod araçları, mobil uygulamalar, Studio ve Nibras AI.",
+		"Gizlilik yaklaşımımız basit: mümkün olan her yerde dosyalar cihazınızda, tarayıcı içinde işlenir. PDF birleştirme, bölme, sıkıştırma, şifreleme, video kesme ve dönüştürme, ses düzenleme, görsel işleme ve QR kod hazırlarken dosyalarınız sunucuya yüklenmez — sonuç doğrudan cihazınıza kaydedilir.",
+		"Bu araçları kullanmak için hesap veya kişisel veri gerekmez. Araçlar ücretsizdir ve reklam göstermez. Sitenin genel işleyişi için yalnızca anonim ziyaret istatistikleri olabilir.",
+		"İstisna: Nibras AI gibi yapay zekâ hizmetlerinde yazdığınız metin yanıt üretmek için sunucuya gönderilir. Bu yüzden orada hassas bilgi (şifre, kart numarası, özel belge) yazmamanızı öneririz. Her mobil uygulamanın kendi Gizlilik Politikası sayfası vardır.",
+		"Araçlar telefon ve bilgisayarda, modern tarayıcılarda çalışır. Bazı araçlar (video ve ses gibi) ilk açılışta motorlarını bir kez indirir, sonra daha hızlı açılır."
+	],
+	"steps": [
+		"İhtiyacınız olan bölümü bulun: PDF, Video, Ses, QR, Görsel, Kod veya Uygulamalar.",
+		"Bir araç açın ve cihazınızdan dosya seçin ya da metin girin.",
+		"Ayarları yapın ve sonucu görün.",
+		"Dosyayı indirin veya sonucu kopyalayın."
+	],
+	"uses": [
+		"PDF birleştirmek, bölmek, sıkıştırmak, şifrelemek veya Word'e dönüştürmek.",
+		"Video kesmek, MP4/GIF'e dönüştürmek, klip birleştirmek ve ses çıkarmak.",
+		"Ses kaydetmek, düzenlemek, gürültü azaltmak ve efekt eklemek.",
+		"Bağlantı, Wi-Fi ve kartvizit için QR kod hazırlamak.",
+		"Görseli boyutlandırmak, küçültmek, dönüştürmek veya arka planını silmek.",
+		"JSON, Base64, UUID, şifre ve diğer kod araçlarını kullanmak."
+	],
+	"faq": [
+		["Nibras Code hizmetleri ücretsiz mi?", "Evet. Araçlar ücretsiz, reklamsızdır ve çoğu hesapsız çalışır."],
+		["Dosyalarım sunucuya yükleniyor mu?", "PDF, video, ses, görsel ve QR araçlarında hayır — işlem cihazınızdaki tarayıcıda yapılır. Dosyalar Nibras Code sunucularında saklanmaz."],
+		["Hangi kişisel verileri topluyorsunuz?", "Araçları kullanmak için ad, e-posta veya telefon gerekmez. Yalnızca genel anonim ziyaret istatistikleri olabilir."],
+		["Nibras AI'ye yazdıklarım nereye gidiyor?", "Yapay zekâ yanıtı için metniniz sunucuya gönderilir; bu yüzden hassas kişisel bilgi yazmayın."],
+		["Telefonda kullanabilir miyim?", "Evet, araçlar Android ve iPhone tarayıcılarında çalışır; ayrıca Android uygulamalarımız da var."],
+		["İnternetsiz çalışır mı?", "Bazı araçlar (Nibras Audio gibi) ilk yüklemeden sonra çevrimdışı çalışabilir. Diğerleri açılmak için internet ister."],
+		["Hangi dillerde mevcut?", "Azerbaycanca, İngilizce, Türkçe, Arapça ve Rusça."],
+		["Soru veya öneri için nasıl ulaşırım?", "nibrascode@gmail.com adresine yazabilirsiniz."]
+	]
+};
+var ar = {
+	"about": [
+		"تجمع صفحة خدمات Nibras Code كل الأدوات والتطبيقات المجانية في الموقع في مكان واحد: أدوات PDF، قص الفيديو وتحويله، استوديو Nibras Audio وأدوات الصوت، رموز QR بما فيها الواي فاي وبطاقات الاتصال، تغيير حجم الصور وتحويل صيغها وإزالة الخلفية، أدوات برمجية للمطورين، تطبيقات الجوال، Studio وNibras AI.",
+		"نهجنا في الخصوصية بسيط: حيثما أمكن تُعالج الملفات على جهازك داخل المتصفح. عند دمج ملفات PDF أو تقسيمها أو ضغطها أو حمايتها، وقص الفيديو أو تحويله، وتحرير الصوت، ومعالجة الصور وصنع رموز QR، لا تُرفع ملفاتك إلى خادم — ويُحفظ الناتج مباشرة على جهازك.",
+		"لا تحتاج إلى حساب أو بيانات شخصية لاستخدام هذه الأدوات. الأدوات مجانية وبلا إعلانات، وقد توجد فقط إحصاءات زيارات مجهولة الهوية لتشغيل الموقع.",
+		"استثناء: خدمات الذكاء الاصطناعي مثل Nibras AI ترسل النص الذي تكتبه إلى خادم لإنتاج الإجابة، لذا ننصح بعدم كتابة بيانات حساسة (كلمات مرور، أرقام بطاقات، مستندات خاصة). لكل تطبيق جوال صفحة سياسة خصوصية خاصة به.",
+		"تعمل الأدوات على الهواتف والحواسيب في المتصفحات الحديثة. بعض الأدوات (مثل الفيديو والصوت) تحمّل محركها مرة واحدة عند أول استخدام ثم تفتح أسرع."
+	],
+	"steps": [
+		"ابحث عن القسم المطلوب: PDF، فيديو، صوت، QR، صور، برمجة أو تطبيقات.",
+		"افتح الأداة واختر ملفاً من جهازك أو أدخل نصاً.",
+		"اضبط الإعدادات وشاهد النتيجة.",
+		"نزّل الملف أو انسخ النتيجة."
+	],
+	"uses": [
+		"دمج ملفات PDF وتقسيمها وضغطها وحمايتها بكلمة مرور أو تحويلها إلى Word.",
+		"قص الفيديو وتحويله إلى MP4/GIF ودمج المقاطع واستخراج الصوت.",
+		"تسجيل الصوت وتحريره وتقليل الضوضاء وإضافة التأثيرات.",
+		"صنع رموز QR للروابط والواي فاي وبطاقات الاتصال.",
+		"تغيير حجم الصور وضغطها وتحويلها أو إزالة خلفيتها.",
+		"استخدام أدوات JSON وBase64 وUUID وكلمات المرور وغيرها."
+	],
+	"faq": [
+		["هل خدمات Nibras Code مجانية؟", "نعم. الأدوات مجانية وبلا إعلانات ومعظمها يعمل دون حساب."],
+		["هل تُرفع ملفاتي إلى خادم؟", "في أدوات PDF والفيديو والصوت والصور وQR لا — تتم المعالجة في متصفحك على جهازك، ولا تُخزن الملفات على خوادم Nibras Code."],
+		["ما البيانات الشخصية التي تجمعونها؟", "لا يُطلب اسم أو بريد أو هاتف لاستخدام الأدوات، وقد توجد فقط إحصاءات زيارات عامة مجهولة الهوية."],
+		["أين يذهب ما أكتبه في Nibras AI؟", "يُرسل النص إلى خادم لتوليد إجابة الذكاء الاصطناعي، لذا تجنب كتابة معلومات شخصية حساسة."],
+		["هل يمكن استخدامها على الهاتف؟", "نعم، تعمل الأدوات في متصفحات أندرويد وآيفون، ولدينا أيضاً تطبيقات أندرويد."],
+		["هل تعمل دون إنترنت؟", "بعض الأدوات (مثل Nibras Audio) تعمل دون اتصال بعد التحميل الأول، والبقية تحتاج إلى الإنترنت لفتحها."],
+		["ما اللغات المتاحة؟", "الأذربيجانية والإنجليزية والتركية والعربية والروسية."],
+		["كيف أرسل سؤالاً أو اقتراحاً؟", "راسلنا على nibrascode@gmail.com."]
+	]
+};
+var ru = {
+	"about": [
+		"Страница «Услуги» Nibras Code собирает все бесплатные инструменты и приложения сайта в одном месте: инструменты PDF, обрезку и конвертацию видео, аудиостудию Nibras Audio и голосовые инструменты, QR-коды, включая Wi-Fi и визитки, изменение размера и формата изображений и удаление фона, инструменты для разработчиков, мобильные приложения, Studio и Nibras AI.",
+		"Наш подход к конфиденциальности прост: везде, где возможно, файлы обрабатываются на вашем устройстве, внутри браузера. При объединении, разделении, сжатии и защите PDF, обрезке и конвертации видео, монтаже звука, обработке изображений и создании QR-кодов ваши файлы не загружаются на сервер — результат сохраняется прямо на устройство.",
+		"Для работы с инструментами не нужны аккаунт и личные данные. Инструменты бесплатны и без рекламы. Для работы сайта может вестись только анонимная статистика посещений.",
+		"Исключение: ИИ-сервисы, такие как Nibras AI, отправляют введённый текст на сервер, чтобы сформировать ответ. Не вводите там чувствительные данные (пароли, номера карт, личные документы). У каждого мобильного приложения есть своя страница Политики конфиденциальности.",
+		"Инструменты работают на телефонах и компьютерах в современных браузерах. Некоторые (например, видео и аудио) один раз загружают движок при первом запуске, а затем открываются быстрее."
+	],
+	"steps": [
+		"Найдите нужный раздел: PDF, Видео, Аудио, QR, Изображения, Код или Приложения.",
+		"Откройте инструмент и выберите файл на устройстве или введите текст.",
+		"Настройте параметры и посмотрите результат.",
+		"Скачайте файл или скопируйте результат."
+	],
+	"uses": [
+		"Объединять, разделять, сжимать, защищать паролем PDF или конвертировать в Word.",
+		"Обрезать видео, конвертировать в MP4/GIF, склеивать клипы и извлекать звук.",
+		"Записывать и монтировать звук, убирать шум и добавлять эффекты.",
+		"Делать QR-коды для ссылок, Wi-Fi и визиток.",
+		"Менять размер, сжимать и конвертировать изображения или удалять фон.",
+		"Пользоваться инструментами JSON, Base64, UUID, генератором паролей и др."
+	],
+	"faq": [
+		["Сервисы Nibras Code бесплатны?", "Да. Инструменты бесплатны, без рекламы, и большинство работает без аккаунта."],
+		["Загружаются ли мои файлы на сервер?", "В инструментах PDF, видео, аудио, изображений и QR — нет: обработка идёт в браузере на устройстве. Файлы не хранятся на серверах Nibras Code."],
+		["Какие личные данные вы собираете?", "Для использования инструментов не нужны имя, e-mail или телефон. Возможна только общая анонимная статистика посещений."],
+		["Куда уходит текст, введённый в Nibras AI?", "Текст отправляется на сервер для ответа ИИ, поэтому не вводите чувствительные личные данные."],
+		["Можно ли пользоваться на телефоне?", "Да, инструменты работают в браузерах Android и iPhone; также есть Android-приложения."],
+		["Работают ли без интернета?", "Некоторые (например, Nibras Audio) работают офлайн после первой загрузки. Остальным нужен интернет для открытия."],
+		["На каких языках доступно?", "Азербайджанский, английский, турецкий, арабский и русский."],
+		["Как задать вопрос или предложить идею?", "Напишите на nibrascode@gmail.com."]
+	]
+};
+var services_default = {
+	az,
+	en,
+	tr,
+	ar,
+	ru
+};
+//#endregion
+export { ar, az, services_default as default, en, ru, tr };

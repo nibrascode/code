@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-CKeovgl0.js";import{t}from"./useRouterState-BzxD9ca1.js";import{t as n}from"./faq-BHubV0zP.js";import{Tr as r}from"./index-CuD-MDMg.js";import{n as i}from"./faq-page-Cl5QExW7.js";var a=e();function o(){return t({select:e=>e.location.pathname}).replace(/\/$/,``)===`/tr/faq`?(0,a.jsx)(i,{page:n.tr}):(0,a.jsx)(r,{})}export{o as component};

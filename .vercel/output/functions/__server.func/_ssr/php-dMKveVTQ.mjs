@@ -1,0 +1,110 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/php-dMKveVTQ.js
+var az = {
+	"about": ["Nibrascode PHP formatter, PHP kodunu səliqəli və oxunaqlı hala gətirən brauzer əsaslı bir vasitədir. Bu alət PHP kodunu sətirlərə bölür və mötərizələri öz sətirlərinə yerləşdirir. Proses tamamilə istifadəçinin brauzerində icra olunur, kod heç bir serverə göndərilmir və məlumatlarınızın təhlükəsizliyi qorunur.", "Bu alət kodun oxunmasını çətinləşdirən qarışıq və ya sıxılmış PHP skriptləri ilə işləyərkən lazımdır. Kodun strukturunu qaydaya salmaq üçün istifadə olunur. Alət PHP kodunu icra etmir, yalnız vizual formatlaşdırma aparır. Nəticəni birbaşa köçürə və ya fayl kimi kompüterinizə yükləyə bilərsiniz."],
+	"steps": [
+		"PHP kodunuzu daxil etmə sahəsinə yapışdırın.",
+		"Formatlaşdırma düyməsini seçərək prosesi başladın.",
+		"Hazır kodu birbaşa kopyalayın.",
+		"İstəsəniz nəticəni fayl kimi yükləyin."
+	],
+	"uses": [
+		"Oxunması çətin olan sıxılmış PHP kodlarını daha aydın formaya salmaq.",
+		"Kodun strukturunu standartlara uyğun şəkildə nizamlı göstərmək.",
+		"Mötərizələrin düzgün yerləşdirilməsini təmin edərək kodun vizual qaydasını qurmaq.",
+		"Layihə üzərində işləyərkən kodun oxunaqlılığını artıraraq səhvləri daha tez aşkar etmək."
+	],
+	"faq": [
+		["Kodum serverə göndərilirmi?", "Xeyr, bütün emal prosesi birbaşa brauzerinizdə baş verir. Kodunuz heç bir serverə ötürülmür və ya saxlanılmır, bu da məlumatlarınızın tam məxfiliyini təmin edir."],
+		["Alət PHP kodunu icra edirmi?", "Xeyr, bu alət yalnız PHP kodunun vizual görünüşünü dəyişir. O, kodun icrasını yerinə yetirmir və ya məntiqi yoxlamalar aparmır, sadəcə sətirlərə bölmə və formatlaşdırma funksiyasını yerinə yetirir."],
+		["Xidmətdən istifadə üçün qeydiyyat lazımdırmı?", "Xeyr, bu xidmət tamamilə pulsuzdur və istifadə üçün heç bir qeydiyyat tələb olunmur. İstənilən vaxt brauzer vasitəsilə birbaşa daxil olub kodunuzu formatlaşdıra bilərsiniz."]
+	]
+};
+var en = {
+	"about": ["The Nibrascode PHP formatter is a browser-based tool designed to improve the readability of PHP code. It automatically breaks PHP code into lines and ensures that every brace is placed on its own line. All processing occurs locally within your web browser, ensuring that your input code is never uploaded to any server.", "This tool is essential when dealing with minified or poorly formatted PHP scripts that are difficult to read. It helps developers organize their code structure without executing it. Once formatted, you can easily copy the result to your clipboard or download it as a file for your local project."],
+	"steps": [
+		"Paste your PHP code into the input area.",
+		"Click the format button to process the code.",
+		"Copy the formatted code to your clipboard.",
+		"Download the result as a file if needed."
+	],
+	"uses": [
+		"Organizing minified PHP code into a readable line-by-line format.",
+		"Standardizing the placement of braces for better visual structure.",
+		"Preparing messy code snippets for easier review and maintenance.",
+		"Formatting PHP files locally without the need for server-side processing."
+	],
+	"faq": [
+		["Is my code uploaded to a server?", "No, the tool operates entirely within your browser. Your code is never sent to a server, ensuring that your data remains private and secure on your local machine."],
+		["Does this tool execute the PHP code?", "No, this is strictly a formatting tool. It does not run, compile, or execute any PHP code; it only modifies the visual layout by adding line breaks and adjusting brace positions."],
+		["Do I need to sign up to use this?", "No, the service is free and requires no sign-up. You can access the tool directly through your browser and start formatting your code immediately without any restrictions."]
+	]
+};
+var ru = {
+	"about": ["PHP-форматтер от Nibrascode — это браузерный инструмент для улучшения читаемости PHP-кода. Он автоматически разбивает код на строки и переносит фигурные скобки на отдельные строки. Вся обработка выполняется локально в вашем браузере, поэтому исходный код не отправляется на сервер и остается полностью конфиденциальным.", "Этот инструмент необходим при работе с минифицированными или неструктурированными PHP-скриптами. Он помогает привести код в порядок без его выполнения. После завершения форматирования вы можете скопировать результат в буфер обмена или загрузить его в виде отдельного файла для дальнейшего использования в ваших проектах."],
+	"steps": [
+		"Вставьте ваш PHP-код в поле ввода.",
+		"Нажмите кнопку форматирования для обработки.",
+		"Скопируйте полученный код в буфер обмена.",
+		"При необходимости скачайте результат как файл."
+	],
+	"uses": [
+		"Преобразование минифицированного PHP-кода в удобный для чтения формат.",
+		"Приведение структуры кода к стандарту с переносом скобок на новые строки.",
+		"Подготовка неаккуратных фрагментов кода для упрощения проверки и отладки.",
+		"Быстрое форматирование PHP-файлов без необходимости запуска на сервере."
+	],
+	"faq": [
+		["Отправляется ли мой код на сервер?", "Нет, вся обработка происходит исключительно в вашем браузере. Ваш код не передается на сервер и не сохраняется, что гарантирует полную конфиденциальность и безопасность ваших данных."],
+		["Выполняет ли этот инструмент PHP-код?", "Нет, это исключительно инструмент форматирования. Он не запускает, не компилирует и не выполняет PHP-код, а лишь изменяет его визуальное представление путем расстановки переносов строк и скобок."],
+		["Нужна ли регистрация для использования?", "Нет, сервис предоставляется бесплатно и не требует регистрации. Вы можете использовать инструмент в браузере в любое время без каких-либо ограничений или создания учетной записи."]
+	]
+};
+var ar = {
+	"about": ["أداة تنسيق PHP من Nibrascode هي أداة تعتمد على المتصفح لتحسين قراءة كود PHP. تقوم الأداة تلقائياً بتقسيم الكود إلى أسطر ووضع أقواس المجموعات في أسطر منفصلة. تتم جميع عمليات المعالجة محلياً داخل متصفحك، مما يضمن عدم إرسال الكود الخاص بك إلى أي خادم والحفاظ على خصوصية بياناتك.", "تعتبر هذه الأداة ضرورية عند التعامل مع أكواد PHP المضغوطة أو غير المنظمة التي يصعب قراءتها. تساعد المطورين على تنظيم هيكل الكود دون الحاجة إلى تشغيله. بعد التنسيق، يمكنك نسخ النتيجة بسهولة أو تنزيلها كملف لاستخدامها في مشاريعك المحلية."],
+	"steps": [
+		"الصق كود PHP الخاص بك في منطقة الإدخال.",
+		"اضغط على زر التنسيق لبدء المعالجة.",
+		"انسخ الكود المنسق إلى الحافظة.",
+		"قم بتنزيل النتيجة كملف إذا لزم الأمر."
+	],
+	"uses": [
+		"تنظيم أكواد PHP المضغوطة وتحويلها إلى تنسيق مقروء سطرًا بسطر.",
+		"توحيد موضع الأقواس لضمان هيكل مرئي منظم للكود.",
+		"تجهيز أجزاء الكود غير المرتبة لتسهيل المراجعة والصيانة.",
+		"تنسيق ملفات PHP محلياً دون الحاجة إلى معالجة عبر الخادم."
+	],
+	"faq": [
+		["هل يتم إرسال الكود الخاص بي إلى خادم؟", "لا، تعمل الأداة بالكامل داخل متصفحك. لا يتم إرسال الكود الخاص بك إلى أي خادم، مما يضمن بقاء بياناتك خاصة وآمنة على جهازك المحلي."],
+		["هل تقوم هذه الأداة بتنفيذ كود PHP؟", "لا، هذه أداة تنسيق فقط. فهي لا تقوم بتشغيل أو تجميع أو تنفيذ أي كود PHP، بل تقوم فقط بتعديل المظهر المرئي عن طريق إضافة فواصل الأسطر وتعديل مواضع الأقواس."],
+		["هل أحتاج إلى التسجيل لاستخدام الأداة؟", "لا، الخدمة مجانية ولا تتطلب أي تسجيل. يمكنك الوصول إلى الأداة مباشرة عبر متصفحك والبدء في تنسيق الكود الخاص بك فوراً دون أي قيود."]
+	]
+};
+var tr = {
+	"about": ["Nibrascode PHP biçimlendirici, PHP kodunun okunabilirliğini artırmak için tasarlanmış tarayıcı tabanlı bir araçtır. PHP kodunu otomatik olarak satırlara böler ve her süslü parantezin kendi satırında yer almasını sağlar. Tüm işlemler yerel olarak tarayıcınızda gerçekleşir, bu sayede kodunuz hiçbir sunucuya yüklenmez ve verileriniz güvende kalır.", "Bu araç, okunması zor olan sıkıştırılmış veya düzensiz PHP betikleriyle çalışırken gereklidir. Kodun yapısını çalıştırmadan düzenlemenize yardımcı olur. Biçimlendirme tamamlandıktan sonra sonucu kolayca kopyalayabilir veya yerel projeniz için bir dosya olarak bilgisayarınıza indirebilirsiniz."],
+	"steps": [
+		"PHP kodunuzu giriş alanına yapıştırın.",
+		"İşlemi başlatmak için biçimlendirme düğmesine tıklayın.",
+		"Biçimlendirilmiş kodu panoya kopyalayın.",
+		"Gerekirse sonucu dosya olarak indirin."
+	],
+	"uses": [
+		"Sıkıştırılmış PHP kodlarını okunabilir satır bazlı bir formata dönüştürmek.",
+		"Daha iyi bir görsel yapı için parantez yerleşimini standart hale getirmek.",
+		"Düzenlenmemiş kod parçalarını inceleme ve bakım için hazırlamak.",
+		"Sunucu tarafında işlem yapmaya gerek kalmadan yerel olarak PHP dosyalarını biçimlendirmek."
+	],
+	"faq": [
+		["Kodum bir sunucuya yükleniyor mu?", "Hayır, araç tamamen tarayıcınız içinde çalışır. Kodunuz hiçbir sunucuya gönderilmez, bu da verilerinizin yerel makinenizde gizli ve güvende kalmasını sağlar."],
+		["Bu araç PHP kodunu çalıştırıyor mu?", "Hayır, bu sadece bir biçimlendirme aracıdır. PHP kodunu çalıştırmaz, derlemez veya icra etmez; yalnızca satır sonları ekleyerek ve parantez konumlarını ayarlayarak görsel düzeni değiştirir."],
+		["Kullanmak için kayıt olmam gerekiyor mu?", "Hayır, hizmet tamamen ücretsizdir ve kayıt gerektirmez. Araca tarayıcınız üzerinden doğrudan erişebilir ve herhangi bir kısıtlama olmaksızın kodunuzu hemen biçimlendirmeye başlayabilirsiniz."]
+	]
+};
+var php_default = {
+	az,
+	en,
+	ru,
+	ar,
+	tr
+};
+//#endregion
+export { ar, az, php_default as default, en, ru, tr };

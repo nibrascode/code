@@ -1,0 +1,110 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/tetris-DYPc1YES.js
+var az = {
+	"about": ["Tetris, nibrascode.com/oyun saytında pulsuz olaraq təqdim edilən bir brauzer oyunudur. Oyun, müxtəlif şəkilli blokların aşağıya düşməsi və səthdə tam sətirləri dolduraraq silinməsi prinsipi üzərində qurulub.", "Bu oyun, sürətli reaksiya və planlaşdırma bacarıqlarını inkişaf etdirmək üçün ideal bir vasitədir. İstifadəçilər, gündəlik stresdən uzaqlaşmaq və konsentrasiya səviyyəsini artırmaq üçün bu oyunu oynayırlar."],
+	"steps": [
+		"Blokları sol və sağ istiqamətə hərəkət etdirin.",
+		"Blokları aşağıya sürətlə endirin.",
+		"Blokları döndürərək uyğun mövqedə yerləşdirin.",
+		"Tam sətirləri dolduraraq onları silin."
+	],
+	"uses": [
+		"Sürətli reaksiyanı təkmilləşdirmək üçün istifadə edilə bilər.",
+		"Məntiqi düşüncə və planlaşdırma bacarıqlarını inkişaf etdirmək üçün faydalıdır.",
+		"Stresli anlarda rahatlama və konsentrasiya üçün oynana bilər.",
+		"Dostlarla rəqabət aparmaq üçün bir platforma yaradır."
+	],
+	"faq": [
+		["Oyun necə başlayır?", "Sayt açıldıqda avtomatik olaraq yeni bir oyun başlayır. Bloklar aşağıya düşməyə başlayır və siz onları idarə etməyə hazırsınız."],
+		["Məqsəd nədir?", "Məqsəd, tam sətirləri dolduraraq onları silmək və mümkün qədər yüksək səviyyəyə çatmaqdır."],
+		["İnternet bağlantısı tələb olunur mu?", "Bəli, brauzer oyunları üçün aktiv internet bağlantısı lazımdır, amma oyun özü offline rejimdə də işləyə bilər."]
+	]
+};
+var en = {
+	"about": ["Tetris is a free browser game available on nibrascode.com/oyun. The game is based on dropping various shaped blocks that fill rows; when a row is complete it disappears.", "It is useful for developing quick reaction and planning skills. Players often use it to relax after a busy day and to improve concentration."],
+	"steps": [
+		"Move the piece left or right.",
+		"Move the piece down quickly.",
+		"Rotate the piece to fit the space.",
+		"Clear full rows by completing them."
+	],
+	"uses": [
+		"Enhances rapid response and decision making.",
+		"Improves logical thinking and planning.",
+		"Provides a stress‑relief activity during busy periods.",
+		"Allows friendly competition with others."
+	],
+	"faq": [
+		["How does the game start?", "The game begins automatically when the page loads, with blocks dropping from the top."],
+		["What is the goal?", "The goal is to fill and clear complete rows to reach higher levels."],
+		["Is an internet connection required?", "Yes, an active internet connection is needed to load the browser game, though it can run offline once loaded."]
+	]
+};
+var ru = {
+	"about": ["Tetris – бесплатная браузерная игра, доступная на nibrascode.com/oyun. Игра основана на падении различных фигур, которые заполняют строки; при заполнении строк они исчезают.", "Она полезна для развития быстрой реакции и планирования. Пользователи часто используют её для снятия стресса и улучшения концентрации."],
+	"steps": [
+		"Перемещайте фигуру влево и вправо.",
+		"Перемещайте фигуру вниз быстро.",
+		"Поворачивайте фигуру, чтобы она поместилась.",
+		"Очистите полностью заполненные строки."
+	],
+	"uses": [
+		"Улучшает быструю реакцию и принятие решений.",
+		"Развивает логическое мышление и планирование.",
+		"Предоставляет способ снятия стресса в напряжённые моменты.",
+		"Позволяет соревноваться с друзьями."
+	],
+	"faq": [
+		["Как начинается игра?", "Игра автоматически запускается при загрузке страницы, и блоки начинают падать сверху."],
+		["Какова цель игры?", "Цель – заполнить и удалить полностью заполненные строки, чтобы продвинуться на более высокие уровни."],
+		["Требуется ли интернет‑соединение?", "Да, для загрузки браузерной игры требуется активное соединение, но после загрузки игра может работать в автономном режиме."]
+	]
+};
+var ar = {
+	"about": ["تِسْرِس هو لعبة متصفح مجانية متاحة على nibrascode.com/oyun. تعتمد اللعبة على سقوط قطع بأشكال مختلفة تُملأ الصفوف، وعندما يُكمل صف بالكامل، يختفي.", "تُستخدم لتطوير سرعة الاستجابة والتخطيط. غالباً ما يلجأ اللاعبون إلى هذه اللعبة للاسترخاء بعد يوم شاق ولتحسين التركيز."],
+	"steps": [
+		"حرك القطعة إلى اليسار أو اليمين.",
+		"حرك القطعة إلى الأسفل بسرعة.",
+		"دوّر القطعة لتناسب المساحة.",
+		"امسح الصفوف المكتملة عند إكمالها."
+	],
+	"uses": [
+		"تعزز الاستجابة السريعة واتخاذ القرار.",
+		"تحسن التفكير المنطقي والتخطيط.",
+		"توفر نشاطاً لتخفيف التوتر خلال فترات الانشغال.",
+		"تسمح بالمنافسة الودية مع الآخرين."
+	],
+	"faq": [
+		["كيف يبدأ اللعب؟", "يبدأ اللعب تلقائياً عند تحميل الصفحة، وتبدأ القطع في السقوط من الأعلى."],
+		["ما هو الهدف؟", "الهدف هو ملء صفوف كاملة وحذفها للوصول إلى مستويات أعلى."],
+		["هل يلزم اتصال بالإنترنت؟", "نعم، يلزم اتصال نشط لتحميل اللعبة، لكنها يمكن أن تعمل في وضع غير متصل بعد التحميل."]
+	]
+};
+var tr = {
+	"about": ["Tetris, nibrascode.com/oyun sitesinde ücretsiz sunulan bir tarayıcı oyunudur. Oyun, farklı şekilli blokların aşağıya düşmesi ve satırları doldurup silmesi prensibiyle çalışır.", "Hızlı tepki ve planlama becerilerini geliştirmek için idealdir. Kullanıcılar, yoğun bir günün ardından rahatlamak ve konsantrasyonu artırmak için bu oyunu oynarlar."],
+	"steps": [
+		"Parçayı sola veya sağa hareket ettirin.",
+		"Parçayı aşağıya hızlıca indirin.",
+		"Parçayı döndürerek uygun konuma yerleştirin.",
+		"Tam satırları doldurarak silin."
+	],
+	"uses": [
+		"Hızlı tepki ve karar verme becerilerini artırır.",
+		"Mantıksal düşünme ve planlamayı geliştirir.",
+		"Yoğun dönemlerde stres giderici bir aktivite sunar.",
+		"Arkadaşlarla rekabet etmeyi sağlar."
+	],
+	"faq": [
+		["Oyun nasıl başlar?", "Sayfa yüklendiğinde oyun otomatik olarak başlar; bloklar yukarıdan düşmeye başlar."],
+		["Amaç nedir?", "Amaç, tam satırları doldurup silerek daha yüksek seviyelere ulaşmaktır."],
+		["İnternet bağlantısı gerekli mi?", "Evet, tarayıcı oyunu yüklemek için aktif bir internet bağlantısı gerekir, ancak yükleme sonrası çevrimdışı çalışabilir."]
+	]
+};
+var tetris_default = {
+	az,
+	en,
+	ru,
+	ar,
+	tr
+};
+//#endregion
+export { ar, az, tetris_default as default, en, ru, tr };

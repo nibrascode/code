@@ -1,0 +1,110 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/base64-B9eJ5lzU.js
+var az = {
+	"about": ["Base64, mətnləri 64 simvola əsaslanan bir alfabeyə çevirən bir kodlaşdırma metodudur. Bu metod, mətnin özünü gizlətməz, sadəcə onu başqa bir formatda saxlayır, buna görə də şifrələmə deyil, kodlaşdırma hesab olunur.", "Bu alət, brauzerdə işləyir və heç bir məlumat serverə göndərilmir. İstifadəçilər mətnlərini daxil edib, nəticəni kopyalaya və ya fayl kimi yükləyə bilərlər. Şəkil və digər fayl formatları dəstəklənmir, yalnız sadə mətnlərlə işləyir."],
+	"steps": [
+		"Veb səhifəyə daxil olun və mətn sahəsinə kodlaşdırmaq istədiyiniz mətni yazın.",
+		"‘Encode’ (kodlaşdır) düyməsini basın, nəticə avtomatik olaraq aşağıda göstəriləcək.",
+		"Kodlaşdırılmış mətni kopyalayın və ya “Download” (yüklə) seçimi ilə fayl kimi saxlayın.",
+		"Əksinə, Base64 kodunu sahəyə yapışdırın və ‘Decode’ (çöz) düyməsini basaraq orijinal mətnə çevirin."
+	],
+	"uses": [
+		"Mətnləri e-poçt və ya URL parametrlərində təhlükəsiz ötürmək.",
+		"Mətn əsaslı konfiqurasiya fayllarını birbaşa kodlaşdırmaq.",
+		"Kodlaşdırılmış mətnləri log fayllarında oxunaqlı saxlamaq.",
+		"Mətnləri JSON və XML kimi formatlarda yerləşdirmək üçün kodlaşdırmaq."
+	],
+	"faq": [
+		["Base64 şifrələmə hesab edilirmi?", "Xeyr, Base64 şifrələmə deyil, sadəcə kodlaşdırmadır; mətnin məzmunu açıq şəkildə saxlanır və asanlıqla geri çevrilə bilər."],
+		["Bu alət serverə məlumat göndərirmi?", "Xeyr, bütün emal brauzerdə baş verir, mətn heç bir zaman uzaq serverə ötürülmür."],
+		["Şəkil və ya digər faylları kodlaşdırmaq mümkündür?", "Bu alət yalnız mətnlə işləyir; şəkil və digər ikili fayllar üçün ayrıca kodlaşdırma alətləri tələb olunur."]
+	]
+};
+var en = {
+	"about": ["Base64 is a text encoding scheme that converts characters into a set of 64 symbols. It does not encrypt data, it merely represents the original text in a different form, making it suitable for transport and storage.", "The tool runs entirely in the browser, so no data is uploaded to a server. Users can enter plain text, obtain the Base64 string, copy it, or download it as a file. Only textual data is supported; images and other file types are not processed."],
+	"steps": [
+		"Open the page and type the text you want to encode into the input area.",
+		"Press the encode button; the Base64 result appears below.",
+		"Copy the encoded string or use the download option to save it as a file.",
+		"To decode, paste a Base64 string into the input area and press the decode button to retrieve the original text."
+	],
+	"uses": [
+		"Embedding text safely in URLs or email bodies.",
+		"Storing configuration values in a single-line format.",
+		"Making log entries more readable by encoding multiline messages.",
+		"Including plain text inside JSON or XML payloads without breaking syntax."
+	],
+	"faq": [
+		["Is Base64 a cipher?", "No, Base64 is not a cipher; it is a reversible encoding method that does not hide the content of the text."],
+		["Does the tool send my data to a server?", "All processing happens locally in the browser, so your text never leaves your computer."],
+		["Can I encode images with this tool?", "This tool works only with text; binary files such as images require a different Base64 encoder."]
+	]
+};
+var ru = {
+	"about": ["Base64 — это схема кодирования текста, преобразующая символы в набор из 64 знаков. Это не шифр, а лишь представление исходного текста в иной форме, удобной для передачи и хранения.", "Инструмент работает полностью в браузере, поэтому данные не отправляются на сервер. Пользователь вводит текст, получает строку Base64, может её скопировать или скачать как файл. Поддерживается только текст, изображения и другие файлы не обрабатываются."],
+	"steps": [
+		"Откройте страницу и введите текст, который нужно закодировать, в поле ввода.",
+		"Нажмите кнопку кодирования, результат появится ниже.",
+		"Скопируйте полученную строку или сохраните её в файл с помощью кнопки загрузки.",
+		"Для обратного преобразования вставьте строку Base64 в поле и нажмите кнопку декодирования."
+	],
+	"uses": [
+		"Безопасная передача текста в URL или электронных письмах.",
+		"Хранение конфигурационных параметров в однострочном виде.",
+		"Улучшение читаемости журналов, кодируя многострочные сообщения.",
+		"Встраивание текста в JSON или XML без нарушения синтаксиса."
+	],
+	"faq": [
+		["Является ли Base64 шифром?", "Нет, Base64 не шифр, а обратимый метод кодирования, который не скрывает содержимое текста."],
+		["Отправляются ли мои данные на сервер?", "Все операции выполняются в браузере, поэтому ваш текст не покидает ваш компьютер."],
+		["Можно ли кодировать изображения этим инструментом?", "Инструмент работает только с текстом; для бинарных файлов, таких как изображения, нужен отдельный кодировщик."]
+	]
+};
+var ar = {
+	"about": ["Base64 هو أسلوب ترميز نصي يحول الأحرف إلى مجموعة مكوّنة من 64 رمزًا. لا يُعدّ تشفيرًا بل مجرد تمثيل للنص الأصلي بصيغة مختلفة لتسهيل النقل والتخزين.", "الأداة تعمل بالكامل داخل المتصفح، ولا يتم إرسال أي بيانات إلى الخادم. يمكن للمستخدم إدخال النص، الحصول على سلسلة Base64، نسخها أو تنزيلها كملف. تدعم النص فقط ولا تعالج الصور أو الملفات الأخرى."],
+	"steps": [
+		"افتح الصفحة واكتب النص الذي تريد ترميزه في حقل الإدخال.",
+		"اضغط زر الترميز؛ ستظهر النتيجة أسفل الصفحة.",
+		"انسخ السلسلة المشفرة أو استخدم خيار التنزيل لحفظها كملف.",
+		"لعكس العملية، الصق سلسلة Base64 في الحقل واضغط زر فك الترميز لاستعادة النص الأصلي."
+	],
+	"uses": [
+		"إدراج النص بأمان في عناوين URL أو رسائل البريد الإلكتروني.",
+		"تخزين قيم الإعدادات في صيغة سطر واحد.",
+		"تحسين قابلية قراءة سجلات النظام بترميز الرسائل متعددة الأسطر.",
+		"إدراج نص داخل حمولات JSON أو XML دون كسر البنية."
+	],
+	"faq": [
+		["هل Base64 يعتبر تشفيرًا؟", "لا، Base64 ليس تشفيرًا؛ هو طريقة ترميز قابلة للعكس ولا تخفي محتوى النص."],
+		["هل تُرسل الأداة بياناتي إلى الخادم؟", "جميع المعالجة تتم محليًا في المتصفح، لذا لا تُرسل أي بيانات خارج جهازك."],
+		["هل يمكن ترميز الصور بهذه الأداة؟", "الأداة تدعم النص فقط؛ للملفات الثنائية مثل الصور يلزم استخدام أداة ترميز Base64 مخصصة."]
+	]
+};
+var tr = {
+	"about": ["Base64, karakterleri 64 simgeden oluşan bir alfabeye dönüştüren bir kodlama yöntemidir. Şifreleme değildir; sadece metni başka bir biçimde saklar ve taşıma sırasında kullanılır.", "Araç tamamen tarayıcıda çalışır, veri sunucuya gönderilmez. Kullanıcı metni girer, Base64 çıktısını alır, kopyalar ya da dosya olarak indirir. Sadece metin işlenir, resim ve diğer dosyalar desteklenmez."],
+	"steps": [
+		"Sayfayı açın ve kodlamak istediğiniz metni giriş alanına yazın.",
+		"Kodlama düğmesine basın; Base64 sonucu aşağıda görünecek.",
+		"Kodlanmış metni kopyalayın veya indirme seçeneğiyle dosya olarak kaydedin.",
+		"Tersine çevirmek için Base64 kodunu alana yapıştırın ve çözme düğmesine basın."
+	],
+	"uses": [
+		"URL ve e-posta içinde metni güvenli bir şekilde taşımak.",
+		"Tek satırda konfigürasyon değerlerini saklamak.",
+		"Log dosyalarında çok satırlı mesajları okunabilir kılmak için kodlamak.",
+		"JSON veya XML içinde metni sözdizimini bozmadan eklemek."
+	],
+	"faq": [
+		["Base64 bir şifreleme yöntemi midir?", "Hayır, Base64 bir şifreleme yöntemi değildir; metni gizlemez, sadece tersine çevrilebilir bir kodlama yapar."],
+		["Araç verilerimi sunucuya gönderiyor mu?", "Tüm işlemler tarayıcıda yerel olarak gerçekleşir, veri bilgisayarınızdan dışarı çıkmaz."],
+		["Bu araçla resim kodlayabilir miyim?", "Araç yalnızca metinle çalışır; resim gibi ikili dosyalar için ayrı bir Base64 kodlayıcı gerekir."]
+	]
+};
+var base64_default = {
+	az,
+	en,
+	ru,
+	ar,
+	tr
+};
+//#endregion
+export { ar, az, base64_default as default, en, ru, tr };

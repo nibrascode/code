@@ -1,0 +1,110 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/shadow-dz5SKesX.js
+var az = {
+	"about": ["Bu alət brauzer əsaslı CSS kölgə generatorudur. O, daxil edilən rəqəmlər əsasında box-shadow sətirlərini hazırlayır. İstifadəçi rəqəmləri daxil etdikdə, alət dərhal müvafiq CSS kodunu çıxarır. Bütün proses istifadəçinin brauzerində baş verir, heç bir məlumat serverə göndərilmir və xidmətdən istifadə üçün qeydiyyat tələb olunmur.", "Veb dizaynerlər elementlərə dərinlik qatmaq üçün bu alətdən istifadə edirlər. Birinci rəqəm kölgənin yan tərəfə, ikincisi aşağıya doğru hərəkətini, üçüncüsü bulanıqlıq dərəcəsini, sonuncu isə rəngi təyin edir. Hazırlanmış kodu birbaşa CSS qaydasına köçürmək kifayətdir. Fayl yükləmə funksiyası vasitəsilə nəticəni kompüterə saxlamaq mümkündür."],
+	"steps": [
+		"Lazımi rəqəmləri və rəng kodunu daxil edin.",
+		"Avtomatik çıxan CSS sətirini nəzərdən keçirin.",
+		"Kodu kopyalayın və ya fayl kimi yükləyin.",
+		"Kodu layihənizin CSS qaydasına əlavə edin."
+	],
+	"uses": [
+		"Düymələrə vizual dərinlik vermək üçün istifadə olunur.",
+		"Kart dizaynlarında elementləri fondan ayırmaq üçün tətbiq edilir.",
+		"Şəkillərə və ya bloklara kölgə effekti əlavə etmək üçün yararlıdır.",
+		"İstifadəçi interfeysindəki panelləri vurğulamaq üçün kömək edir."
+	],
+	"faq": [
+		["Məlumatlarım serverə göndərilirmi?", "Xeyr, bütün emal prosesi yalnız sizin brauzerinizdə baş verir. Heç bir məlumat internet üzərindən serverə ötürülmür və saxlanılmır."],
+		["CSS faylım birbaşa dəyişdirilirmi?", "Xeyr, bu alət CSS fayllarınızı dəyişmir. Siz sadəcə çıxarılan kodu kopyalayıb öz layihənizdəki CSS qaydalarına əlavə etməlisiniz."],
+		["Xidmət ödənişlidirmi?", "Xeyr, bu alət tamamilə pulsuzdur. İstifadə üçün heç bir qeydiyyatdan keçmək və ya abunəlik tələb olunmur."]
+	]
+};
+var en = {
+	"about": ["This is a browser-based CSS shadow generator. It creates a box-shadow line based on numerical inputs provided by the user. When you enter the values, the tool immediately generates the corresponding CSS code. The entire process occurs locally within your browser, ensuring no data is uploaded to a server, and no sign-up is required.", "Web designers use this tool to add depth to elements. The first number controls horizontal offset, the second controls vertical offset, the third defines blur, and the last is the color. You can copy the resulting line directly into your CSS rule or download it as a file for your project."],
+	"steps": [
+		"Enter the required numbers and color code.",
+		"Review the generated CSS line.",
+		"Copy the code or download it as a file.",
+		"Paste the code into your CSS rule."
+	],
+	"uses": [
+		"Adding visual depth to buttons on a webpage.",
+		"Separating content cards from the background.",
+		"Applying shadow effects to images or layout blocks.",
+		"Highlighting specific panels in a user interface."
+	],
+	"faq": [
+		["Is my data sent to a server?", "No, all processing happens locally in your browser. No input data is uploaded to any server, ensuring your information remains private and secure."],
+		["Does this tool modify my CSS file directly?", "No, this tool does not change your CSS files. You must manually copy the generated code and paste it into your own CSS stylesheet."],
+		["Is this service free?", "Yes, the tool is completely free to use. There is no sign-up, no hidden fees, and no requirements to create an account to access the features."]
+	]
+};
+var ru = {
+	"about": ["Это браузерный инструмент для генерации CSS-теней. Он создает строку box-shadow на основе введенных пользователем чисел. Как только вы вводите значения, инструмент мгновенно формирует соответствующий CSS-код. Весь процесс обработки происходит локально в вашем браузере, данные не отправляются на сервер, а регистрация не требуется.", "Веб-дизайнеры используют этот инструмент для придания глубины элементам. Первое число задает смещение по горизонтали, второе — по вертикали, третье — размытие, а последнее — цвет. Полученную строку можно скопировать прямо в правило CSS или загрузить в виде файла для последующего использования в проекте."],
+	"steps": [
+		"Введите необходимые числа и цветовой код.",
+		"Проверьте сгенерированную строку CSS.",
+		"Скопируйте код или загрузите его как файл.",
+		"Вставьте код в свое правило CSS."
+	],
+	"uses": [
+		"Придание визуальной глубины кнопкам на веб-странице.",
+		"Отделение карточек контента от фона.",
+		"Добавление эффектов тени к изображениям или блокам.",
+		"Выделение панелей в пользовательском интерфейсе."
+	],
+	"faq": [
+		["Отправляются ли мои данные на сервер?", "Нет, вся обработка происходит локально в вашем браузере. Введенные данные не загружаются на сервер, что обеспечивает конфиденциальность вашей информации."],
+		["Изменяет ли этот инструмент мой CSS-файл?", "Нет, этот инструмент не вносит изменения в ваши CSS-файлы. Вам необходимо самостоятельно скопировать полученный код и вставить его в свою таблицу стилей."],
+		["Является ли этот сервис бесплатным?", "Да, инструмент полностью бесплатен. Для его использования не требуется регистрация, создание учетной записи или оплата каких-либо скрытых платежей."]
+	]
+};
+var ar = {
+	"about": ["هذه أداة تعتمد على المتصفح لإنشاء ظلال CSS. تقوم بإنشاء سطر box-shadow بناءً على الأرقام التي يدخلها المستخدم. بمجرد إدخال القيم، تقوم الأداة فوراً بإنشاء كود CSS المقابل. تتم عملية المعالجة بالكامل محلياً داخل متصفحك، ولا يتم تحميل أي بيانات إلى خادم، كما لا يلزم التسجيل لاستخدام الأداة.", "يستخدم مصممو الويب هذه الأداة لإضافة عمق للعناصر. الرقم الأول يحدد الإزاحة الأفقية، والثاني الإزاحة الرأسية، والثالث يحدد التمويه، والأخير يحدد اللون. يمكنك نسخ السطر الناتج مباشرة إلى قاعدة CSS الخاصة بك أو تنزيله كملف لاستخدامه في مشروعك."],
+	"steps": [
+		"أدخل الأرقام المطلوبة ورمز اللون.",
+		"راجع سطر CSS الذي تم إنشاؤه.",
+		"انسخ الكود أو قم بتنزيله كملف.",
+		"الصق الكود في قاعدة CSS الخاصة بك."
+	],
+	"uses": [
+		"إضافة عمق مرئي للأزرار على صفحة الويب.",
+		"فصل بطاقات المحتوى عن الخلفية.",
+		"تطبيق تأثيرات الظل على الصور أو كتل التصميم.",
+		"تمييز اللوحات المحددة في واجهة المستخدم."
+	],
+	"faq": [
+		["هل يتم إرسال بياناتي إلى خادم؟", "لا، تتم جميع عمليات المعالجة محلياً في متصفحك. لا يتم تحميل أي بيانات مدخلة إلى أي خادم، مما يضمن بقاء معلوماتك خاصة وآمنة."],
+		["هل تقوم هذه الأداة بتعديل ملف CSS الخاص بي مباشرة؟", "لا، هذه الأداة لا تغير ملفات CSS الخاصة بك. يجب عليك نسخ الكود الذي تم إنشاؤه يدوياً ولصقه في ورقة أنماط CSS الخاصة بك."],
+		["هل هذه الخدمة مجانية؟", "نعم، الأداة مجانية تماماً للاستخدام. لا يوجد تسجيل، ولا توجد رسوم خفية، ولا توجد متطلبات لإنشاء حساب للوصول إلى الميزات."]
+	]
+};
+var tr = {
+	"about": ["Bu, tarayıcı tabanlı bir CSS gölge oluşturma aracıdır. Kullanıcı tarafından girilen sayılara dayalı olarak bir box-shadow satırı oluşturur. Değerleri girdiğinizde, araç anında ilgili CSS kodunu üretir. Tüm işlem tarayıcınızda yerel olarak gerçekleşir, hiçbir veri sunucuya yüklenmez ve kullanım için herhangi bir kayıt gerekmez.", "Web tasarımcıları bu aracı öğelere derinlik katmak için kullanırlar. İlk sayı yatay kaydırmayı, ikincisi dikey kaydırmayı, üçüncüsü bulanıklığı, sonuncusu ise rengi belirler. Ortaya çıkan kodu doğrudan CSS kuralınıza kopyalayabilir veya projeniz için bir dosya olarak indirebilirsiniz."],
+	"steps": [
+		"Gerekli sayıları ve renk kodunu girin.",
+		"Oluşturulan CSS satırını inceleyin.",
+		"Kodu kopyalayın veya dosya olarak indirin.",
+		"Kodu CSS kuralınıza yapıştırın."
+	],
+	"uses": [
+		"Web sayfasındaki düğmelere görsel derinlik eklemek için kullanılır.",
+		"İçerik kartlarını arka plandan ayırmak için uygulanır.",
+		"Görsellere veya düzen bloklarına gölge efekti eklemek için yararlıdır.",
+		"Kullanıcı arayüzündeki belirli panelleri vurgulamaya yardımcı olur."
+	],
+	"faq": [
+		["Verilerim bir sunucuya gönderiliyor mu?", "Hayır, tüm işlemler tarayıcınızda yerel olarak gerçekleşir. Hiçbir girdi verisi sunucuya yüklenmez, bu da bilgilerinizin gizli ve güvende kalmasını sağlar."],
+		["Bu araç CSS dosyamı doğrudan değiştirir mi?", "Hayır, bu araç CSS dosyalarınızı değiştirmez. Oluşturulan kodu manuel olarak kopyalayıp kendi CSS stil dosyanıza yapıştırmanız gerekir."],
+		["Bu hizmet ücretsiz mi?", "Evet, araç tamamen ücretsizdir. Özelliklere erişmek için herhangi bir kayıt, üyelik veya gizli ücret talebi bulunmamaktadır."]
+	]
+};
+var shadow_default = {
+	az,
+	en,
+	ru,
+	ar,
+	tr
+};
+//#endregion
+export { ar, az, shadow_default as default, en, ru, tr };

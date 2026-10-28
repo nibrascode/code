@@ -1,4 +1,7 @@
 import { DeviceCheck } from "@/components/device-check";
+import { ApkDiagnose } from "@/components/apk-diagnose";
+
+const APK_DX = new Set(["apk-qurulmur", "parse-error", "imza-uygun-deyil", "apk-fayli-zedelenib", "play-protect-bloklayir", "paket-etibarsizdir", "telefon-uygun-deyil", "kohne-versiya-qurulmur", "xapk-qurulmur"]);
 import { AlertTriangle, BookOpen, Code2, FileText, Info, ListChecks, Search, ShieldCheck, User, Wrench } from "lucide-react";
 import { InfoCard, InfoCards } from "@/components/info-card";
 import { Bot, Sparkles } from "lucide-react";
@@ -198,6 +201,7 @@ export function SearchTopic({
       </p>
       <h1>{text.title}</h1>
       {kind === "xeta" ? <DeviceCheck lang={lang} /> : null}
+      {kind === "xeta" && APK_DX.has(slug) ? <ApkDiagnose lang={lang} /> : null}
       {body ? (
         <ApkBody body={body} lang={lang} />
       ) : (

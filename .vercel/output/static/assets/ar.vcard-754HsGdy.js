@@ -1,0 +1,1 @@
+import{t as e}from"./vcard-Csa-98zI.js";var t=e;export{t as component};

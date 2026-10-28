@@ -1,0 +1,1 @@
+import{t as e}from"./workspace-BvNX2JvE.js";var t=e;export{t as component};

@@ -1,0 +1,110 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/diff-DMixa81v.js
+var az = {
+	"about": ["Nibrascode.com saytındakı bu alət iki mətn arasında sətirbəsətir müqayisə aparmaq üçün nəzərdə tutulub. Proses tamamilə brauzerdə icra olunur, məlumatlar heç bir serverə ötürülmür və saxlanılmır. İstifadəçi iki mətni daxil etdikdə, sistem onları analiz edərək fərqləri müəyyənləşdirir. Eyni olan sətirlər nəticədə göstərilmir, yalnız dəyişikliklər əks olunur.", "Bu funksiya kodlarda, sənədlərdə və ya uzun siyahılarda edilən dəyişiklikləri tapmaq lazım olduqda faydalıdır. Silinmiş sətirlər çıxışda minus işarəsi ilə, yeni əlavə edilmiş sətirlər isə plus işarəsi ilə qeyd edilir. Nəticəni birbaşa kopyalamaq və ya fayl kimi yükləmək mümkündür. Qeydiyyat tələb olunmur, alət tamamilə pulsuzdur."],
+	"steps": [
+		"Birinci mətni sol sahəyə daxil edin.",
+		"İkinci mətni sağ sahəyə yerləşdirin.",
+		"Sistem avtomatik olaraq fərqləri müqayisə edəcək.",
+		"Nəticəni kopyalayın və ya fayl kimi endirin."
+	],
+	"uses": [
+		"İki fərqli proqram kodu versiyası arasındakı dəyişiklikləri müəyyən etmək üçün istifadə olunur.",
+		"Mətn sənədlərinin redaktə olunmuş variantları ilə ilkin variantlarını tutuşdurmaq üçün əlverişlidir.",
+		"Konfiqurasiya fayllarında edilən düzəlişləri yoxlamaq üçün tətbiq edilir.",
+		"İki uzun siyahı və ya məlumat bazası çıxışı arasındakı fərqləri tapmaq üçün yararlıdır."
+	],
+	"faq": [
+		["Məlumatlarım serverə yüklənirmi?", "Xeyr, bütün proses brauzer daxilində həyata keçirilir. Məlumatlarınız heç bir serverə göndərilmir və sayt tərəfindən saxlanılmır. Bu, məxfiliyinizi qorumaq üçün nəzərdə tutulmuş təhlükəsiz bir yanaşmadır."],
+		["Eyni olan sətirlər niyə görünmür?", "Alət yalnız dəyişiklikləri vurğulamaq üçün nəzərdə tutulub. Eyni olan sətirlər nəticə siyahısından çıxarılır ki, istifadəçi yalnız fərqlərə diqqət yetirə bilsin və lazımsız məlumatlarla vaxt itirməsin."],
+		["Nəticəni necə saxlaya bilərəm?", "Müqayisə başa çatdıqdan sonra nəticəni birbaşa brauzerdən kopyalaya və ya fayl kimi kompüterinizə yükləyə bilərsiniz. Heç bir qeydiyyat və ya ödəniş tələb olunmur."]
+	]
+};
+var en = {
+	"about": ["The Text Difference tool on nibrascode.com performs a line-by-line comparison between two text inputs. The entire process occurs within your browser, ensuring that no data is uploaded to a server or stored. By analyzing the provided texts, the tool identifies discrepancies, displaying only the lines that have been modified, added, or removed during the comparison process.", "This utility is useful when you need to identify specific changes in code, documentation, or lists. Removed lines are marked with a minus sign, while new lines are indicated with a plus sign. Matching lines are omitted from the output to focus on the differences. The final result can be easily copied to your clipboard or downloaded as a file."],
+	"steps": [
+		"Paste the first text into the left field.",
+		"Paste the second text into the right field.",
+		"The system will automatically compare the inputs.",
+		"Copy the result or download it as a file."
+	],
+	"uses": [
+		"Identify specific modifications between two different versions of source code files.",
+		"Compare original and edited versions of text documents to track changes.",
+		"Verify adjustments made within configuration files or system settings.",
+		"Detect differences between two long lists or data exports efficiently."
+	],
+	"faq": [
+		["Is my data uploaded to a server?", "No, the tool operates entirely within your browser. Your input is never transmitted to a server or stored on our systems, ensuring that your data remains private and secure throughout the entire process."],
+		["Why are matching lines not displayed?", "The tool is designed to highlight only the differences between texts. By excluding matching lines, the output remains concise, allowing you to focus exclusively on the modifications without unnecessary clutter."],
+		["How can I save the comparison result?", "Once the comparison is complete, you can copy the output directly from the page or download it as a file to your local device. No registration is required for this feature."]
+	]
+};
+var ru = {
+	"about": ["Инструмент «Text difference» на nibrascode.com выполняет построчное сравнение двух текстов. Весь процесс обработки происходит непосредственно в вашем браузере, поэтому данные не загружаются на сервер и не сохраняются. Система анализирует введенные тексты и выводит только те строки, которые были изменены, добавлены или удалены, исключая из результата совпадающие фрагменты.", "Этот сервис полезен для выявления изменений в коде, документах или списках. Удаленные строки помечаются знаком «минус», а новые — знаком «плюс». Совпадающие строки не отображаются в итоговом результате, что помогает сосредоточиться на различиях. Полученный результат можно скопировать в буфер обмена или загрузить в виде файла без необходимости регистрации."],
+	"steps": [
+		"Вставьте первый текст в левое поле.",
+		"Вставьте второй текст в правое поле.",
+		"Система автоматически сравнит введенные данные.",
+		"Скопируйте результат или скачайте его файлом."
+	],
+	"uses": [
+		"Определение изменений между двумя версиями файлов исходного кода.",
+		"Сравнение исходного и отредактированного вариантов текстовых документов.",
+		"Проверка правок, внесенных в файлы конфигурации или настройки.",
+		"Поиск различий между двумя длинными списками или выгрузками данных."
+	],
+	"faq": [
+		["Загружаются ли мои данные на сервер?", "Нет, вся обработка происходит исключительно в вашем браузере. Введенные данные не передаются на сервер и не сохраняются, что обеспечивает конфиденциальность и безопасность вашей информации во время использования инструмента."],
+		["Почему совпадающие строки не отображаются?", "Инструмент предназначен для акцентирования внимания только на различиях. Исключение совпадающих строк делает результат более наглядным, позволяя быстро увидеть внесенные изменения без лишней информации."],
+		["Как сохранить результат сравнения?", "После завершения сравнения вы можете скопировать полученный текст прямо со страницы или загрузить его в виде файла на свое устройство. Регистрация для этого не требуется."]
+	]
+};
+var ar = {
+	"about": ["أداة مقارنة النصوص على موقع nibrascode.com تقوم بمقارنة نصين سطراً بسطر. تتم المعالجة بالكامل داخل متصفحك، مما يضمن عدم تحميل البيانات إلى أي خادم أو تخزينها. من خلال تحليل النصوص المدخلة، تحدد الأداة الاختلافات وتعرض فقط الأسطر التي تم تعديلها أو إضافتها أو حذفها، مع استبعاد الأسطر المتطابقة من النتيجة النهائية.", "تعد هذه الأداة مفيدة عند الحاجة إلى تحديد التغييرات في الأكواد البرمجية أو المستندات أو القوائم. يتم تمييز الأسطر المحذوفة بعلامة ناقص، بينما يتم تمييز الأسطر الجديدة بعلامة زائد. لا يتم عرض الأسطر المتطابقة للتركيز على الفروقات فقط. يمكن نسخ النتيجة بسهولة أو تنزيلها كملف، ولا يتطلب استخدام الأداة أي تسجيل."],
+	"steps": [
+		"أدخل النص الأول في الحقل الأيسر.",
+		"أدخل النص الثاني في الحقل الأيمن.",
+		"سيقوم النظام بمقارنة المدخلات تلقائياً.",
+		"انسخ النتيجة أو قم بتنزيلها كملف."
+	],
+	"uses": [
+		"تحديد التعديلات بين نسختين مختلفتين من ملفات الكود البرمجي.",
+		"مقارنة النسخ الأصلية والمعدلة من المستندات النصية لتتبع التغييرات.",
+		"التحقق من التعديلات التي تم إجراؤها داخل ملفات الإعدادات.",
+		"اكتشاف الاختلافات بين قائمتين طويلتين أو بيانات مستخرجة بكفاءة."
+	],
+	"faq": [
+		["هل يتم تحميل بياناتي إلى خادم؟", "لا، تعمل الأداة بالكامل داخل متصفحك. لا يتم إرسال مدخلاتك إلى أي خادم أو تخزينها على أنظمتنا، مما يضمن بقاء بياناتك خاصة وآمنة طوال عملية الاستخدام."],
+		["لماذا لا تظهر الأسطر المتطابقة؟", "تم تصميم الأداة لتسليط الضوء على الاختلافات فقط. من خلال استبعاد الأسطر المتطابقة، تظل النتيجة موجزة، مما يسمح لك بالتركيز حصرياً على التعديلات دون أي تشتيت."],
+		["كيف يمكنني حفظ نتيجة المقارنة؟", "بمجرد اكتمال المقارنة، يمكنك نسخ النتيجة مباشرة من الصفحة أو تنزيلها كملف على جهازك. لا يلزم التسجيل لاستخدام هذه الميزة."]
+	]
+};
+var tr = {
+	"about": ["nibrascode.com üzerindeki metin karşılaştırma aracı, iki metin arasında satır satır karşılaştırma yapar. Tüm işlem tarayıcınızda gerçekleşir; veriler herhangi bir sunucuya yüklenmez veya saklanmaz. Sistem, girilen metinleri analiz ederek sadece değiştirilen, eklenen veya silinen satırları gösterir. Eşleşen satırlar sonuçta yer almaz, böylece sadece farklılıklar üzerinde odaklanmanız sağlanır.", "Bu araç, kodlarda, belgelerde veya listelerde yapılan değişiklikleri bulmanız gerektiğinde kullanışlıdır. Silinen satırlar eksi işaretiyle, yeni eklenen satırlar ise artı işaretiyle belirtilir. Sonuç doğrudan kopyalanabilir veya dosya olarak indirilebilir. Herhangi bir kayıt işlemi gerektirmez ve tamamen ücretsizdir."],
+	"steps": [
+		"İlk metni sol alana yapıştırın.",
+		"İkinci metni sağ alana yapıştırın.",
+		"Sistem otomatik olarak karşılaştırma yapacaktır.",
+		"Sonucu kopyalayın veya dosya olarak indirin."
+	],
+	"uses": [
+		"İki farklı kaynak kodu sürümü arasındaki değişiklikleri belirlemek için kullanılır.",
+		"Metin belgelerinin orijinal ve düzenlenmiş sürümlerini karşılaştırmak için uygundur.",
+		"Yapılandırma dosyalarında veya ayarlarda yapılan düzeltmeleri doğrulamak için kullanılır.",
+		"İki uzun liste veya veri çıktısı arasındaki farkları verimli bir şekilde bulur."
+	],
+	"faq": [
+		["Verilerim sunucuya yükleniyor mu?", "Hayır, tüm işlem tamamen tarayıcınızda gerçekleşir. Girdiğiniz veriler hiçbir sunucuya gönderilmez veya sistemlerimizde saklanmaz; bu sayede gizliliğiniz ve güvenliğiniz korunmuş olur."],
+		["Eşleşen satırlar neden görünmüyor?", "Araç, sadece metinler arasındaki farkları vurgulamak için tasarlanmıştır. Eşleşen satırların hariç tutulması, gereksiz bilgilerle vakit kaybetmeden doğrudan değişikliklere odaklanmanıza olanak tanır."],
+		["Karşılaştırma sonucunu nasıl kaydedebilirim?", "Karşılaştırma tamamlandıktan sonra sonucu doğrudan sayfadan kopyalayabilir veya cihazınıza dosya olarak indirebilirsiniz. Bu özellik için herhangi bir kayıt gerekmemektedir."]
+	]
+};
+var diff_default = {
+	az,
+	en,
+	ru,
+	ar,
+	tr
+};
+//#endregion
+export { ar, az, diff_default as default, en, ru, tr };
