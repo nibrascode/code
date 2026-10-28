@@ -11914,3 +11914,10 @@ html[lang="ar"] .why-lead.topic-body,
 .voice-btn:disabled{opacity:.4}
 .voice-btn.warn{border-color:rgba(248,113,113,.6);color:#fecaca}
 @media (prefers-reduced-motion:reduce){.voice-mic.on{animation:none}}
+
+/* Video hub (same language as Services) */
+.vhub-card { display: flex; align-items: center; gap: 12px; padding: 12px 14px; color: inherit; text-decoration: none; }
+.vhub-trim { --c: 96,140,255; } .vhub-convert { --c: 150,120,255; } .vhub-merge { --c: 70,220,160; } .vhub-audio { --c: 255,170,60; }
+.vhub-card:hover .vhub-chev { background: rgba(var(--c),0.18); }
+[dir="rtl"] .vhub-chev { transform: scaleX(-1); }
+@media (max-width: 560px) { .vhub-card { gap: 10px; padding: 11px 12px; } }

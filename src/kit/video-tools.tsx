@@ -3,6 +3,7 @@ import type { FFmpeg } from "@ffmpeg/ffmpeg";
 import type { Lang } from "@/lib/i18n";
 import { useI18n } from "@/lib/i18n-context";
 import { localeHref } from "@/lib/locale-path";
+import { ChevronRight, Combine, Music, RefreshCw, Scissors } from "lucide-react";
 import { KitShell, kb, ui } from "./shell";
 import { VIDEO_KIT } from "./video-meta";
 
@@ -84,7 +85,7 @@ function Status({ t, ff, err, busy, pct }: { t: Record<string, string>; ff: FFmp
   if (err) return <p className="mb-3 text-sm text-red-400">{t.engineFail}</p>;
   if (!ff) return <p className="mb-3 text-sm text-muted" data-testid="video-engine">{t.loading}</p>;
   if (busy) return (
-    <div className="mb-3 text-sm"><span>{t.working}… {pct}%</span><div className="mt-1.5 h-2 w-full overflow-hidden rounded-full bg-white/10"><div className="h-full rounded-full bg-gradient-to-r from-[#2f6bff] to-[#8b5cf6] transition-[width]" style={{ width: `${pct}%` }} /></div></div>
+    <div className="mb-3 text-sm"><span>{t.working}… {pct}%</span><div className="mt-1.5 h-2 w-full overflow-hidden rounded-full bg-white/10"><div className="h-full rounded-full bg-[#2f6bff] transition-[width]" style={{ width: `${pct}%` }} /></div></div>
   );
   return <p className="mb-3 text-sm text-muted" data-testid="video-ready">{t.ready}</p>;
 }
@@ -150,12 +151,12 @@ function Timeline({ t, dur, fps, a, b, now, setA, setB, seek }: { t: Record<stri
       onKeyDown={(e) => { const d = e.key === "ArrowLeft" ? -1 : e.key === "ArrowRight" ? 1 : 0; if (d) { e.preventDefault(); apply(w, snap((w === "a" ? a : b) + d * (e.shiftKey ? 1 : fr))); } }}
       onPointerDown={(e) => { e.stopPropagation(); (e.currentTarget as HTMLElement).focus(); drag.current = w; bar.current?.setPointerCapture(e.pointerId); }}
       className="absolute top-1/2 z-10 flex h-11 w-7 -translate-x-1/2 -translate-y-1/2 cursor-ew-resize touch-none items-center justify-center outline-none focus-visible:[&>span]:ring-2 focus-visible:[&>span]:ring-white" style={{ left: pc(w === "a" ? a : b) }} data-testid={`trim-handle-${w}`}>
-      <span className="flex h-12 w-4 items-center justify-center rounded-md bg-gradient-to-b from-[#5b8cff] to-[#2f6bff] shadow-[0_4px_14px_rgba(47,107,255,0.55)] ring-1 ring-white/70 transition-transform active:scale-110"><span className="h-5 w-0.5 rounded-full bg-white/90" /></span>
+      <span className="flex h-12 w-4 items-center justify-center rounded-md bg-[#3b74ff] shadow-md ring-1 ring-white/70 transition-transform active:scale-110"><span className="h-5 w-0.5 rounded-full bg-white/90" /></span>
     </div>
   ) : null;
   const zb = "rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs transition hover:border-white/25 hover:bg-white/10 disabled:opacity-40";
   return (
-    <div className="space-y-2 rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] p-3 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.6)] sm:p-4">
+    <div className="space-y-2 rounded-2xl border border-white/10 bg-white/[0.03] p-3 sm:p-4">
       <div dir="ltr" className="flex flex-wrap items-center gap-1.5" data-testid="trim-zoom">
         <button type="button" className={zb} onClick={() => zoomTo(v0 + span * 0.25, v1 - span * 0.25)}>＋ {t.zIn}</button>
         <button type="button" className={zb} disabled={!zoomed} onClick={() => zoomTo(v0 - span / 2, v1 + span / 2)}>－ {t.zOut}</button>
@@ -170,8 +171,8 @@ function Timeline({ t, dur, fps, a, b, now, setA, setB, seek }: { t: Record<stri
         onPointerUp={() => { drag.current = null; }} onPointerCancel={() => { drag.current = null; }}>
         {ticks.map((x) => <div key={x} className="pointer-events-none absolute top-0 h-2.5 w-px bg-white/25" style={{ left: pc(x) }} />)}
         <div className="absolute inset-x-2 top-1/2 h-8 -translate-y-1/2 rounded-lg bg-[repeating-linear-gradient(90deg,rgba(255,255,255,0.07)_0_2px,transparent_2px_6px)]" />
-        <div className="absolute top-1/2 h-8 -translate-y-1/2 rounded-md border-y-2 border-[#5b8cff] bg-gradient-to-b from-[#2f6bff]/45 to-[#8b5cf6]/30 shadow-[0_0_24px_rgba(47,107,255,0.35)]" style={{ left: pc(Math.max(a, v0)), width: `${Math.max(0, pcRaw(Math.min(b, v1)) - pcRaw(Math.max(a, v0)))}%` }} />
-        {vis(now) ? <div className="pointer-events-none absolute top-1 bottom-1 w-0.5 rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.8)]" style={{ left: pc(now) }} /> : null}
+        <div className="absolute top-1/2 h-8 -translate-y-1/2 rounded-md border-y-2 border-[#5b8cff] bg-[#2f6bff]/30" style={{ left: pc(Math.max(a, v0)), width: `${Math.max(0, pcRaw(Math.min(b, v1)) - pcRaw(Math.max(a, v0)))}%` }} />
+        {vis(now) ? <div className="pointer-events-none absolute top-1 bottom-1 w-0.5 rounded-full bg-white" style={{ left: pc(now) }} /> : null}
         {handle("a")}{handle("b")}
       </div>
       {zoomed ? <input dir="ltr" type="range" aria-label="scroll" className="w-full" min={0} max={r3(dur - span)} step={fr} value={v0} onChange={(e) => { const s0 = Number(e.target.value); setView([s0, s0 + span]); }} /> : null}
@@ -206,7 +207,7 @@ function Trim({ t }: { t: Record<string, string> }) {
       <Picker t={t} onFiles={(f) => { if (f[0]) { setFile(f[0]); job.setOut(null); } }} />
       {file ? (
         <>
-          <video ref={vid} src={src} controls className="max-h-[26rem] w-full rounded-2xl bg-black shadow-[0_20px_60px_-20px_rgba(47,107,255,0.45)] ring-1 ring-white/10" onLoadedMetadata={(e) => { const d = e.currentTarget.duration || 0; setDur(d); setA(0); setB(r3(d)); }}
+          <video ref={vid} src={src} controls className="max-h-[26rem] w-full rounded-2xl bg-black ring-1 ring-white/10" onLoadedMetadata={(e) => { const d = e.currentTarget.duration || 0; setDur(d); setA(0); setB(r3(d)); }}
             onTimeUpdate={(e) => { const c = e.currentTarget.currentTime; setNow(c); if (stopAt.current !== null && c >= stopAt.current) { e.currentTarget.pause(); stopAt.current = null; } }} />
           {dur > 0 ? <Timeline t={t} dur={dur} fps={fps} a={a} b={b} now={now} setA={setA} setB={setB} seek={seek} /> : null}
           <div dir="ltr" className="flex flex-wrap items-center gap-1.5 rounded-2xl border border-white/10 bg-white/[0.03] p-2.5" data-testid="trim-step">
@@ -231,10 +232,10 @@ function Trim({ t }: { t: Record<string, string> }) {
           </div>
           <fieldset className="grid gap-2 text-sm sm:grid-cols-2" data-testid="trim-mode"><legend className="mb-1.5 text-xs text-muted">{t.mode}</legend>
             {([[false, t.exact], [true, t.fastShort]] as [boolean, string][]).map(([f, l]) => (
-              <label key={String(f)} className={`flex cursor-pointer items-center gap-2 rounded-xl border px-3 py-2.5 transition ${fast === f ? "border-[#2f6bff]/70 bg-[#2f6bff]/15 shadow-[0_0_20px_-6px_rgba(47,107,255,0.6)]" : "border-white/10 bg-white/[0.03] hover:bg-white/[0.06]"}`}><input type="radio" name="trim-mode" className="accent-[#2f6bff]" checked={fast === f} onChange={() => setFast(f)} />{l}</label>
+              <label key={String(f)} className={`flex cursor-pointer items-center gap-2 rounded-xl border px-3 py-2.5 transition ${fast === f ? "border-[#2f6bff]/70 bg-[#2f6bff]/15" : "border-white/10 bg-white/[0.03] hover:bg-white/[0.06]"}`}><input type="radio" name="trim-mode" className="accent-[#2f6bff]" checked={fast === f} onChange={() => setFast(f)} />{l}</label>
             ))}
           </fieldset>
-          <button type="button" className={`${ui.primary} w-full py-3 text-base shadow-[0_10px_30px_-10px_rgba(47,107,255,0.7)] sm:w-auto sm:px-8`} disabled={!job.ff || job.busy || b <= a} data-testid="video-run"
+          <button type="button" className={`${ui.primary} w-full py-3 text-base sm:w-auto sm:px-8`} disabled={!job.ff || job.busy || b <= a} data-testid="video-run"
             onClick={() => job.go((ff) => run(ff, [file], ([n]) => fast
               ? ["-ss", a.toFixed(3), "-i", n, "-t", (b - a).toFixed(3), "-c", "copy", "-avoid_negative_ts", "make_zero", `out.${outExt}`]
               : ["-i", n, "-ss", a.toFixed(3), "-to", b.toFixed(3), "-c:v", "libx264", "-preset", "veryfast", "-crf", "20", "-pix_fmt", "yuv420p", "-c:a", "aac", "-movflags", "+faststart", `out.${outExt}`], `out.${outExt}`))}>{t.run}</button>
@@ -354,19 +355,22 @@ export function VideoToolPage({ tool }: { tool: VideoTool }) {
   );
 }
 
+const VHUB_ICON: Record<string, typeof Scissors> = { trim: Scissors, convert: RefreshCw, merge: Combine, audio: Music };
+
 export function VideoHubPage() {
   const { lang } = useI18n();
   const t = T[lang] ?? T.en;
   return (
     <KitShell path="/video" lang={lang} next={["/image", "/pdf/merge", "/zip"]}>
-      <div className="grid gap-3 sm:grid-cols-2">
+      <div className="svc-list vhub">
         {VIDEO_TOOLS.map((id) => {
           const k = VIDEO_KIT[`/video/${id}`][lang];
+          const I = VHUB_ICON[id];
           return (
-            <a key={id} href={localeHref(lang, `/video/${id}`)} className="rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.07] to-white/[0.02] p-5 transition hover:-translate-y-0.5 hover:border-[#2f6bff]/40 hover:shadow-[0_12px_40px_-16px_rgba(47,107,255,0.6)]" data-testid={`video-card-${id}`}>
-              <b className="block">{k.h1}</b>
-              <span className="mt-1 block text-sm text-muted">{k.lead}</span>
-              <span className="mt-2 inline-block text-sm text-[#7aa2ff]">{t.open} →</span>
+            <a key={id} href={localeHref(lang, `/video/${id}`)} className={`svc-cat vhub-card vhub-${id}`} data-testid={`video-card-${id}`} aria-label={`${k.h1} — ${t.open}`}>
+              <span className="svc-ico" aria-hidden="true"><I size={22} /></span>
+              <span className="svc-text"><b className="svc-name">{k.h1}</b><small className="svc-sub">{k.lead}</small></span>
+              <span className="svc-chev vhub-chev" aria-hidden="true"><ChevronRight size={18} /></span>
             </a>
           );
         })}
