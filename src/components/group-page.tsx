@@ -150,7 +150,7 @@ export function GroupPage({ lang, group }: { lang: Lang; group: BarGroup }) {
         <i />
         <a href={homePath(lang)}>Nibras Code</a>
       </p>
-      <h1>{BAR_GROUPS[group][lang]}</h1>
+      <h1>{BAR_GROUPS[group][lang === "az" ? "en" : lang]}</h1>
       <p>{LEAD[group][lang]}</p>
       <div className="nx-bars nx-bars--full">
         <BarGroupView lang={lang} group={group} full />
