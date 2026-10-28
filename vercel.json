@@ -329,6 +329,19 @@
   ],
   "headers": [
     {
+      "source": "/audio/(.*)",
+      "headers": [
+        {
+          "key": "Permissions-Policy",
+          "value": "accelerometer=(), camera=(self), geolocation=(), gyroscope=(), magnetometer=(), microphone=(self), payment=(), usb=()"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "index, follow"
+        }
+      ]
+    },
+    {
       "source": "/(.*)",
       "headers": [
         {
@@ -349,7 +362,7 @@
         },
         {
           "key": "Permissions-Policy",
-          "value": "accelerometer=(), camera=(self), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()"
+          "value": "accelerometer=(), camera=(self), geolocation=(), gyroscope=(), magnetometer=(), microphone=(self), payment=(), usb=()"
         },
         {
           "key": "Strict-Transport-Security",
@@ -384,5 +397,19 @@
     "api/chat.js": {
       "maxDuration": 300
     }
-  }
+  },
+  "rewrites": [
+    {
+      "source": "/audio",
+      "destination": "https://audio-nibrascode-1188.vercel.app/audio"
+    },
+    {
+      "source": "/audio/",
+      "destination": "https://audio-nibrascode-1188.vercel.app/audio"
+    },
+    {
+      "source": "/audio/:path*",
+      "destination": "https://audio-nibrascode-1188.vercel.app/audio/:path*"
+    }
+  ]
 }
