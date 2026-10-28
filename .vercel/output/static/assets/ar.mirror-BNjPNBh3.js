@@ -1,1 +1,0 @@
-import{t as e}from"./mirror-DMlG9xlt.js";var t=e;export{t as component};

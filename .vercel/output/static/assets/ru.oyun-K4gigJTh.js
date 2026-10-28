@@ -1,1 +1,0 @@
-import{n as e}from"./games-page-_hT--vP7.js";var t=e;export{t as component};

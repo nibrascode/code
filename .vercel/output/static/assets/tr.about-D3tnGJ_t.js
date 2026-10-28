@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-CKeovgl0.js";import{kn as t,pt as n}from"./index-DaoRAfRy.js";var r=e(),i=function(){return(0,r.jsx)(t,{privacy:n.useLoaderData().privacy})};export{i as component};

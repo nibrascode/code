@@ -1,1 +1,0 @@
-import{t as e}from"./mirror-C8JcsTHp.js";var t=e;export{t as component};

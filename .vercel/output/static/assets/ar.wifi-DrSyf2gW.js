@@ -1,1 +1,0 @@
-import{Xt as e}from"./index-ye_Wxhb5.js";var t=e;export{t as component};

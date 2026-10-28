@@ -1,1 +1,0 @@
-import{r as e}from"./tools-legal-Dat--ib6.js";var t=e;export{t as component};

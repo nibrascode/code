@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-CKeovgl0.js";import{Vt as t,_n as n}from"./index-CuD-MDMg.js";var r=e(),i=function(){return(0,r.jsx)(n,{privacy:t.useLoaderData().privacy})};export{i as component};

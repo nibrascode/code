@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-CKeovgl0.js";import{n as t}from"./arabic-verbs-CynOHbCu.js";import{M as n}from"./index-BzbMPS8h.js";var r=e();function i(){let e=n.useLoaderData();return(0,r.jsx)(t,{...e})}export{i as component};

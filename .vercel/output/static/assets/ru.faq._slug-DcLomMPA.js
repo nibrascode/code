@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-CKeovgl0.js";import{O as t}from"./index-Bsd9WuPX.js";import{t as n}from"./faq-page-Pp0-1ncS.js";var r=e();function i(){let{page:e,item:i}=t.useLoaderData();return(0,r.jsx)(n,{page:e,item:i})}export{i as component};

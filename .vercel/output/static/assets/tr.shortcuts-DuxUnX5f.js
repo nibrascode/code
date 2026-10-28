@@ -1,1 +1,0 @@
-import{t as e}from"./shortcuts-83g7vniy.js";var t=e;export{t as component};

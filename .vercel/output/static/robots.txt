@@ -1,6 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /nx-studio
-Disallow: /panel
-
-Sitemap: https://nibrascode.com/sitemap.xml

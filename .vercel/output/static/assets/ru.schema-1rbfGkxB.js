@@ -1,1 +1,0 @@
-import{t as e}from"./schema-DEC4Ynl_.js";var t=e;export{t as component};

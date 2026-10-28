@@ -1,1 +1,0 @@
-import{t as e}from"./vcard-CE8HPlaT.js";var t=e;export{t as component};

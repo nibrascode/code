@@ -1,1 +1,0 @@
-import{t as e}from"./doctor-XCN5xltA.js";var t=e;export{t as component};

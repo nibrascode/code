@@ -1,1 +1,0 @@
-import{n as e}from"./games-page-C3Vh_yOU.js";var t=e;export{t as component};

@@ -1,9 +1,0 @@
-Third-party files used by the Nibras PDF page (/pdf)
-
-fonts/DejaVuSans*.ttf        DejaVu Fonts License (free; see fonts/DEJAVU-FONTS-LICENSE.txt)
-fonts/NotoNaskhArabic-*.ttf  SIL Open Font License 1.1, Copyright The Noto Project Authors
-ocr/worker.min.js, ocr/core.wasm.js   tesseract.js and tesseract.js-core, Apache License 2.0
-ocr/lang/*.traineddata.gz    Tesseract "tessdata_best" language data (@tesseract.js-data), Apache License 2.0
-
-npm dependencies: pdf-lib (MIT), @pdf-lib/fontkit (MIT), @cantoo/pdf-lib (MIT, only for password protect/unlock),
-pdfjs-dist (Apache-2.0), tesseract.js (Apache-2.0), fflate (MIT).

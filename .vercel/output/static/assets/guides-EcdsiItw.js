@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-CKeovgl0.js";import{n as t}from"./library-page-CWYuQNz1.js";import{It as n}from"./index-ye_Wxhb5.js";var r=e();function i(){return(0,r.jsx)(t,{section:`guides`,rows:n.useLoaderData().privacy})}export{i as component};

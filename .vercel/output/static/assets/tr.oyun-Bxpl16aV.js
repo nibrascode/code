@@ -1,1 +1,0 @@
-import{n as e}from"./games-page-B8E7Ur-7.js";var t=e;export{t as component};

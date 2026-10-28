@@ -1,1 +1,0 @@
-import{t as e}from"./doctor-BpMw1xe5.js";var t=e;export{t as component};

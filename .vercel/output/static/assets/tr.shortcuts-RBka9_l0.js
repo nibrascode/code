@@ -1,1 +1,0 @@
-import{t as e}from"./shortcuts-BD1FxAiZ.js";var t=e;export{t as component};

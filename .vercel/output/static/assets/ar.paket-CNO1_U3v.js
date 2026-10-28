@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-CKeovgl0.js";import{t}from"./paket-tool-Cppyvmid.js";var n=e();function r(){return(0,n.jsx)(t,{lang:`ar`})}export{r as component};

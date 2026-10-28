@@ -1,1 +1,0 @@
-import{t as e}from"./schema-CZE2_48D.js";var t=e;export{t as component};

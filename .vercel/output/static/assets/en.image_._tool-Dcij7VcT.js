@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-CKeovgl0.js";import{H as t,Mt as n,jt as r}from"./index-CuD-MDMg.js";var i=e(),a=function(){let{tool:e}=t.useParams();return n(e)?(0,i.jsx)(r,{tool:e}):null};export{a as component};

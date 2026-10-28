@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-CKeovgl0.js";import{t}from"./useRouterState-BXlZ-I8r.js";import{Lr as n}from"./index-DaoRAfRy.js";import{t as r}from"./learn-pages-DCn7CP4Q.js";var i=e();function a(){return t({select:e=>e.location.pathname}).replace(/\/$/,``)===`/ru/muqayise`?(0,i.jsx)(r,{lang:`ru`}):(0,i.jsx)(n,{})}export{a as component};

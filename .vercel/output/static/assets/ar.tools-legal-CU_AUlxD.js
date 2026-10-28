@@ -1,1 +1,0 @@
-import{r as e}from"./tools-legal-DVDxRS9v.js";var t=e;export{t as component};

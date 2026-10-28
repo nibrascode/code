@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-CKeovgl0.js";import{w as t}from"./index-DaQODWZ0.js";import{n}from"./search-pages-o8yqz-uo.js";var r=e();function i(){let{kind:e,lang:i,item:a}=t.useLoaderData();return(0,r.jsx)(n,{kind:e,lang:i,slug:a.slug})}export{i as component};

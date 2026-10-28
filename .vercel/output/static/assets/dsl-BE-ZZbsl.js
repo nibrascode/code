@@ -1,1 +1,0 @@
-import{o as e}from"./meta-DH_EWIkA.js";var t=(...t)=>({paragraphs:[e(...t)]}),n=e=>({code:e}),r=(...t)=>({list:t.map(t=>e(...t))}),i=(...t)=>({list:t.map(t=>e(...t)),ordered:!0}),a=(t,n,...r)=>({id:t,title:e(...n),blocks:r});export{r as a,a as i,i as n,t as r,n as t};

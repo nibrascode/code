@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-CKeovgl0.js";import{t}from"./useRouterState-BzxD9ca1.js";import{t as n}from"./tools-page-DSxCFmB9.js";import{Sr as r}from"./index-DK3wT_bo.js";var i=e();function a(){return t({select:e=>e.location.pathname}).replace(/\/$/,``)===`/tr/tools`?(0,i.jsx)(n,{lang:`tr`}):(0,i.jsx)(r,{})}export{a as component};

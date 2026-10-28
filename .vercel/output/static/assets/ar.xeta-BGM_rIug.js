@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-CKeovgl0.js";import{t}from"./useRouterState-BzxD9ca1.js";import{Tr as n}from"./index-ye_Wxhb5.js";import{t as r}from"./search-pages-BRb3swbL.js";var i=e();function a(){return t({select:e=>e.location.pathname}).replace(/\/$/,``)===`/ar/xeta`?(0,i.jsx)(r,{kind:`xeta`,lang:`ar`}):(0,i.jsx)(n,{})}export{a as component};

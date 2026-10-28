@@ -1,1 +1,0 @@
-import{t as e}from"./shortcuts-CaTu0ofX.js";var t=e;export{t as component};

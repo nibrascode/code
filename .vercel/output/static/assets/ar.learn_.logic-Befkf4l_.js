@@ -1,1 +1,0 @@
-import{t as e}from"./logiclab-Ccyi7OmM.js";var t=e;export{t as component};

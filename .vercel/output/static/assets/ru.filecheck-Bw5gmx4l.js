@@ -1,1 +1,0 @@
-import{t as e}from"./filecheck-C1feua5n.js";var t=e;export{t as component};
