@@ -52,6 +52,7 @@ import { Route as TrustRouteImport } from './routes/trust'
 import { Route as UnknownRouteImport } from './routes/unknown'
 import { Route as UnutmaRouteImport } from './routes/unutma'
 import { Route as VcardRouteImport } from './routes/vcard'
+import { Route as VoiceRouteImport } from './routes/voice'
 import { Route as WhyRouteImport } from './routes/why'
 import { Route as WifiRouteImport } from './routes/wifi'
 import { Route as WorkspaceRouteImport } from './routes/workspace'
@@ -95,6 +96,7 @@ import { Route as ArToolsLegalRouteImport } from './routes/ar.tools-legal'
 import { Route as ArTrustRouteImport } from './routes/ar.trust'
 import { Route as ArUnknownRouteImport } from './routes/ar.unknown'
 import { Route as ArVcardRouteImport } from './routes/ar.vcard'
+import { Route as ArVoiceRouteImport } from './routes/ar.voice'
 import { Route as ArWifiRouteImport } from './routes/ar.wifi'
 import { Route as ArWorkspaceRouteImport } from './routes/ar.workspace'
 import { Route as ArXetaRouteImport } from './routes/ar.xeta'
@@ -135,6 +137,7 @@ import { Route as EnToolsLegalRouteImport } from './routes/en.tools-legal'
 import { Route as EnTrustRouteImport } from './routes/en.trust'
 import { Route as EnUnknownRouteImport } from './routes/en.unknown'
 import { Route as EnVcardRouteImport } from './routes/en.vcard'
+import { Route as EnVoiceRouteImport } from './routes/en.voice'
 import { Route as EnWifiRouteImport } from './routes/en.wifi'
 import { Route as EnWorkspaceRouteImport } from './routes/en.workspace'
 import { Route as EnXetaRouteImport } from './routes/en.xeta'
@@ -196,6 +199,7 @@ import { Route as RuToolsLegalRouteImport } from './routes/ru.tools-legal'
 import { Route as RuTrustRouteImport } from './routes/ru.trust'
 import { Route as RuUnknownRouteImport } from './routes/ru.unknown'
 import { Route as RuVcardRouteImport } from './routes/ru.vcard'
+import { Route as RuVoiceRouteImport } from './routes/ru.voice'
 import { Route as RuWifiRouteImport } from './routes/ru.wifi'
 import { Route as RuWorkspaceRouteImport } from './routes/ru.workspace'
 import { Route as RuXetaRouteImport } from './routes/ru.xeta'
@@ -238,6 +242,7 @@ import { Route as TrToolsLegalRouteImport } from './routes/tr.tools-legal'
 import { Route as TrTrustRouteImport } from './routes/tr.trust'
 import { Route as TrUnknownRouteImport } from './routes/tr.unknown'
 import { Route as TrVcardRouteImport } from './routes/tr.vcard'
+import { Route as TrVoiceRouteImport } from './routes/tr.voice'
 import { Route as TrWifiRouteImport } from './routes/tr.wifi'
 import { Route as TrWorkspaceRouteImport } from './routes/tr.workspace'
 import { Route as TrXetaRouteImport } from './routes/tr.xeta'
@@ -519,6 +524,11 @@ const VcardRoute = VcardRouteImport.update({
   path: '/vcard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VoiceRoute = VoiceRouteImport.update({
+  id: '/voice',
+  path: '/voice',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WhyRoute = WhyRouteImport.update({
   id: '/why',
   path: '/why',
@@ -734,6 +744,11 @@ const ArVcardRoute = ArVcardRouteImport.update({
   path: '/vcard',
   getParentRoute: () => ArRoute,
 } as any)
+const ArVoiceRoute = ArVoiceRouteImport.update({
+  id: '/voice',
+  path: '/voice',
+  getParentRoute: () => ArRoute,
+} as any)
 const ArWifiRoute = ArWifiRouteImport.update({
   id: '/wifi',
   path: '/wifi',
@@ -932,6 +947,11 @@ const EnUnknownRoute = EnUnknownRouteImport.update({
 const EnVcardRoute = EnVcardRouteImport.update({
   id: '/vcard',
   path: '/vcard',
+  getParentRoute: () => EnRoute,
+} as any)
+const EnVoiceRoute = EnVoiceRouteImport.update({
+  id: '/voice',
+  path: '/voice',
   getParentRoute: () => EnRoute,
 } as any)
 const EnWifiRoute = EnWifiRouteImport.update({
@@ -1239,6 +1259,11 @@ const RuVcardRoute = RuVcardRouteImport.update({
   path: '/vcard',
   getParentRoute: () => RuRoute,
 } as any)
+const RuVoiceRoute = RuVoiceRouteImport.update({
+  id: '/voice',
+  path: '/voice',
+  getParentRoute: () => RuRoute,
+} as any)
 const RuWifiRoute = RuWifiRouteImport.update({
   id: '/wifi',
   path: '/wifi',
@@ -1447,6 +1472,11 @@ const TrUnknownRoute = TrUnknownRouteImport.update({
 const TrVcardRoute = TrVcardRouteImport.update({
   id: '/vcard',
   path: '/vcard',
+  getParentRoute: () => TrRoute,
+} as any)
+const TrVoiceRoute = TrVoiceRouteImport.update({
+  id: '/voice',
+  path: '/voice',
   getParentRoute: () => TrRoute,
 } as any)
 const TrWifiRoute = TrWifiRouteImport.update({
@@ -1820,6 +1850,7 @@ export interface FileRoutesByFullPath {
   '/unknown': typeof UnknownRoute
   '/unutma': typeof UnutmaRoute
   '/vcard': typeof VcardRoute
+  '/voice': typeof VoiceRoute
   '/why': typeof WhyRoute
   '/wifi': typeof WifiRoute
   '/workspace': typeof WorkspaceRoute
@@ -1863,6 +1894,7 @@ export interface FileRoutesByFullPath {
   '/ar/trust': typeof ArTrustRoute
   '/ar/unknown': typeof ArUnknownRoute
   '/ar/vcard': typeof ArVcardRoute
+  '/ar/voice': typeof ArVoiceRoute
   '/ar/wifi': typeof ArWifiRoute
   '/ar/workspace': typeof ArWorkspaceRoute
   '/ar/xeta': typeof ArXetaRouteWithChildren
@@ -1903,6 +1935,7 @@ export interface FileRoutesByFullPath {
   '/en/trust': typeof EnTrustRoute
   '/en/unknown': typeof EnUnknownRoute
   '/en/vcard': typeof EnVcardRoute
+  '/en/voice': typeof EnVoiceRoute
   '/en/wifi': typeof EnWifiRoute
   '/en/workspace': typeof EnWorkspaceRoute
   '/en/xeta': typeof EnXetaRouteWithChildren
@@ -1960,6 +1993,7 @@ export interface FileRoutesByFullPath {
   '/ru/trust': typeof RuTrustRoute
   '/ru/unknown': typeof RuUnknownRoute
   '/ru/vcard': typeof RuVcardRoute
+  '/ru/voice': typeof RuVoiceRoute
   '/ru/wifi': typeof RuWifiRoute
   '/ru/workspace': typeof RuWorkspaceRoute
   '/ru/xeta': typeof RuXetaRouteWithChildren
@@ -2002,6 +2036,7 @@ export interface FileRoutesByFullPath {
   '/tr/trust': typeof TrTrustRoute
   '/tr/unknown': typeof TrUnknownRoute
   '/tr/vcard': typeof TrVcardRoute
+  '/tr/voice': typeof TrVoiceRoute
   '/tr/wifi': typeof TrWifiRoute
   '/tr/workspace': typeof TrWorkspaceRoute
   '/tr/xeta': typeof TrXetaRouteWithChildren
@@ -2116,6 +2151,7 @@ export interface FileRoutesByTo {
   '/unknown': typeof UnknownRoute
   '/unutma': typeof UnutmaRoute
   '/vcard': typeof VcardRoute
+  '/voice': typeof VoiceRoute
   '/why': typeof WhyRoute
   '/wifi': typeof WifiRoute
   '/workspace': typeof WorkspaceRoute
@@ -2158,6 +2194,7 @@ export interface FileRoutesByTo {
   '/ar/trust': typeof ArTrustRoute
   '/ar/unknown': typeof ArUnknownRoute
   '/ar/vcard': typeof ArVcardRoute
+  '/ar/voice': typeof ArVoiceRoute
   '/ar/wifi': typeof ArWifiRoute
   '/ar/workspace': typeof ArWorkspaceRoute
   '/ar/xeta': typeof ArXetaRouteWithChildren
@@ -2198,6 +2235,7 @@ export interface FileRoutesByTo {
   '/en/trust': typeof EnTrustRoute
   '/en/unknown': typeof EnUnknownRoute
   '/en/vcard': typeof EnVcardRoute
+  '/en/voice': typeof EnVoiceRoute
   '/en/wifi': typeof EnWifiRoute
   '/en/workspace': typeof EnWorkspaceRoute
   '/en/xeta': typeof EnXetaRouteWithChildren
@@ -2255,6 +2293,7 @@ export interface FileRoutesByTo {
   '/ru/trust': typeof RuTrustRoute
   '/ru/unknown': typeof RuUnknownRoute
   '/ru/vcard': typeof RuVcardRoute
+  '/ru/voice': typeof RuVoiceRoute
   '/ru/wifi': typeof RuWifiRoute
   '/ru/workspace': typeof RuWorkspaceRoute
   '/ru/xeta': typeof RuXetaRouteWithChildren
@@ -2297,6 +2336,7 @@ export interface FileRoutesByTo {
   '/tr/trust': typeof TrTrustRoute
   '/tr/unknown': typeof TrUnknownRoute
   '/tr/vcard': typeof TrVcardRoute
+  '/tr/voice': typeof TrVoiceRoute
   '/tr/wifi': typeof TrWifiRoute
   '/tr/workspace': typeof TrWorkspaceRoute
   '/tr/xeta': typeof TrXetaRouteWithChildren
@@ -2412,6 +2452,7 @@ export interface FileRoutesById {
   '/unknown': typeof UnknownRoute
   '/unutma': typeof UnutmaRoute
   '/vcard': typeof VcardRoute
+  '/voice': typeof VoiceRoute
   '/why': typeof WhyRoute
   '/wifi': typeof WifiRoute
   '/workspace': typeof WorkspaceRoute
@@ -2455,6 +2496,7 @@ export interface FileRoutesById {
   '/ar/trust': typeof ArTrustRoute
   '/ar/unknown': typeof ArUnknownRoute
   '/ar/vcard': typeof ArVcardRoute
+  '/ar/voice': typeof ArVoiceRoute
   '/ar/wifi': typeof ArWifiRoute
   '/ar/workspace': typeof ArWorkspaceRoute
   '/ar/xeta': typeof ArXetaRouteWithChildren
@@ -2495,6 +2537,7 @@ export interface FileRoutesById {
   '/en/trust': typeof EnTrustRoute
   '/en/unknown': typeof EnUnknownRoute
   '/en/vcard': typeof EnVcardRoute
+  '/en/voice': typeof EnVoiceRoute
   '/en/wifi': typeof EnWifiRoute
   '/en/workspace': typeof EnWorkspaceRoute
   '/en/xeta': typeof EnXetaRouteWithChildren
@@ -2552,6 +2595,7 @@ export interface FileRoutesById {
   '/ru/trust': typeof RuTrustRoute
   '/ru/unknown': typeof RuUnknownRoute
   '/ru/vcard': typeof RuVcardRoute
+  '/ru/voice': typeof RuVoiceRoute
   '/ru/wifi': typeof RuWifiRoute
   '/ru/workspace': typeof RuWorkspaceRoute
   '/ru/xeta': typeof RuXetaRouteWithChildren
@@ -2594,6 +2638,7 @@ export interface FileRoutesById {
   '/tr/trust': typeof TrTrustRoute
   '/tr/unknown': typeof TrUnknownRoute
   '/tr/vcard': typeof TrVcardRoute
+  '/tr/voice': typeof TrVoiceRoute
   '/tr/wifi': typeof TrWifiRoute
   '/tr/workspace': typeof TrWorkspaceRoute
   '/tr/xeta': typeof TrXetaRouteWithChildren
@@ -2710,6 +2755,7 @@ export interface FileRouteTypes {
     | '/unknown'
     | '/unutma'
     | '/vcard'
+    | '/voice'
     | '/why'
     | '/wifi'
     | '/workspace'
@@ -2753,6 +2799,7 @@ export interface FileRouteTypes {
     | '/ar/trust'
     | '/ar/unknown'
     | '/ar/vcard'
+    | '/ar/voice'
     | '/ar/wifi'
     | '/ar/workspace'
     | '/ar/xeta'
@@ -2793,6 +2840,7 @@ export interface FileRouteTypes {
     | '/en/trust'
     | '/en/unknown'
     | '/en/vcard'
+    | '/en/voice'
     | '/en/wifi'
     | '/en/workspace'
     | '/en/xeta'
@@ -2850,6 +2898,7 @@ export interface FileRouteTypes {
     | '/ru/trust'
     | '/ru/unknown'
     | '/ru/vcard'
+    | '/ru/voice'
     | '/ru/wifi'
     | '/ru/workspace'
     | '/ru/xeta'
@@ -2892,6 +2941,7 @@ export interface FileRouteTypes {
     | '/tr/trust'
     | '/tr/unknown'
     | '/tr/vcard'
+    | '/tr/voice'
     | '/tr/wifi'
     | '/tr/workspace'
     | '/tr/xeta'
@@ -3006,6 +3056,7 @@ export interface FileRouteTypes {
     | '/unknown'
     | '/unutma'
     | '/vcard'
+    | '/voice'
     | '/why'
     | '/wifi'
     | '/workspace'
@@ -3048,6 +3099,7 @@ export interface FileRouteTypes {
     | '/ar/trust'
     | '/ar/unknown'
     | '/ar/vcard'
+    | '/ar/voice'
     | '/ar/wifi'
     | '/ar/workspace'
     | '/ar/xeta'
@@ -3088,6 +3140,7 @@ export interface FileRouteTypes {
     | '/en/trust'
     | '/en/unknown'
     | '/en/vcard'
+    | '/en/voice'
     | '/en/wifi'
     | '/en/workspace'
     | '/en/xeta'
@@ -3145,6 +3198,7 @@ export interface FileRouteTypes {
     | '/ru/trust'
     | '/ru/unknown'
     | '/ru/vcard'
+    | '/ru/voice'
     | '/ru/wifi'
     | '/ru/workspace'
     | '/ru/xeta'
@@ -3187,6 +3241,7 @@ export interface FileRouteTypes {
     | '/tr/trust'
     | '/tr/unknown'
     | '/tr/vcard'
+    | '/tr/voice'
     | '/tr/wifi'
     | '/tr/workspace'
     | '/tr/xeta'
@@ -3301,6 +3356,7 @@ export interface FileRouteTypes {
     | '/unknown'
     | '/unutma'
     | '/vcard'
+    | '/voice'
     | '/why'
     | '/wifi'
     | '/workspace'
@@ -3344,6 +3400,7 @@ export interface FileRouteTypes {
     | '/ar/trust'
     | '/ar/unknown'
     | '/ar/vcard'
+    | '/ar/voice'
     | '/ar/wifi'
     | '/ar/workspace'
     | '/ar/xeta'
@@ -3384,6 +3441,7 @@ export interface FileRouteTypes {
     | '/en/trust'
     | '/en/unknown'
     | '/en/vcard'
+    | '/en/voice'
     | '/en/wifi'
     | '/en/workspace'
     | '/en/xeta'
@@ -3441,6 +3499,7 @@ export interface FileRouteTypes {
     | '/ru/trust'
     | '/ru/unknown'
     | '/ru/vcard'
+    | '/ru/voice'
     | '/ru/wifi'
     | '/ru/workspace'
     | '/ru/xeta'
@@ -3483,6 +3542,7 @@ export interface FileRouteTypes {
     | '/tr/trust'
     | '/tr/unknown'
     | '/tr/vcard'
+    | '/tr/voice'
     | '/tr/wifi'
     | '/tr/workspace'
     | '/tr/xeta'
@@ -3598,6 +3658,7 @@ export interface RootRouteChildren {
   UnknownRoute: typeof UnknownRoute
   UnutmaRoute: typeof UnutmaRoute
   VcardRoute: typeof VcardRoute
+  VoiceRoute: typeof VoiceRoute
   WhyRoute: typeof WhyRoute
   WifiRoute: typeof WifiRoute
   WorkspaceRoute: typeof WorkspaceRoute
@@ -3921,6 +3982,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VcardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/voice': {
+      id: '/voice'
+      path: '/voice'
+      fullPath: '/voice'
+      preLoaderRoute: typeof VoiceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/why': {
       id: '/why'
       path: '/why'
@@ -4222,6 +4290,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArVcardRouteImport
       parentRoute: typeof ArRoute
     }
+    '/ar/voice': {
+      id: '/ar/voice'
+      path: '/voice'
+      fullPath: '/ar/voice'
+      preLoaderRoute: typeof ArVoiceRouteImport
+      parentRoute: typeof ArRoute
+    }
     '/ar/wifi': {
       id: '/ar/wifi'
       path: '/wifi'
@@ -4500,6 +4575,13 @@ declare module '@tanstack/react-router' {
       path: '/vcard'
       fullPath: '/en/vcard'
       preLoaderRoute: typeof EnVcardRouteImport
+      parentRoute: typeof EnRoute
+    }
+    '/en/voice': {
+      id: '/en/voice'
+      path: '/voice'
+      fullPath: '/en/voice'
+      preLoaderRoute: typeof EnVoiceRouteImport
       parentRoute: typeof EnRoute
     }
     '/en/wifi': {
@@ -4929,6 +5011,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RuVcardRouteImport
       parentRoute: typeof RuRoute
     }
+    '/ru/voice': {
+      id: '/ru/voice'
+      path: '/voice'
+      fullPath: '/ru/voice'
+      preLoaderRoute: typeof RuVoiceRouteImport
+      parentRoute: typeof RuRoute
+    }
     '/ru/wifi': {
       id: '/ru/wifi'
       path: '/wifi'
@@ -5221,6 +5310,13 @@ declare module '@tanstack/react-router' {
       path: '/vcard'
       fullPath: '/tr/vcard'
       preLoaderRoute: typeof TrVcardRouteImport
+      parentRoute: typeof TrRoute
+    }
+    '/tr/voice': {
+      id: '/tr/voice'
+      path: '/voice'
+      fullPath: '/tr/voice'
+      preLoaderRoute: typeof TrVoiceRouteImport
       parentRoute: typeof TrRoute
     }
     '/tr/wifi': {
@@ -5816,6 +5912,7 @@ interface ArRouteChildren {
   ArTrustRoute: typeof ArTrustRoute
   ArUnknownRoute: typeof ArUnknownRoute
   ArVcardRoute: typeof ArVcardRoute
+  ArVoiceRoute: typeof ArVoiceRoute
   ArWifiRoute: typeof ArWifiRoute
   ArWorkspaceRoute: typeof ArWorkspaceRoute
   ArXetaRoute: typeof ArXetaRouteWithChildren
@@ -5864,6 +5961,7 @@ const ArRouteChildren: ArRouteChildren = {
   ArTrustRoute: ArTrustRoute,
   ArUnknownRoute: ArUnknownRoute,
   ArVcardRoute: ArVcardRoute,
+  ArVoiceRoute: ArVoiceRoute,
   ArWifiRoute: ArWifiRoute,
   ArWorkspaceRoute: ArWorkspaceRoute,
   ArXetaRoute: ArXetaRouteWithChildren,
@@ -6012,6 +6110,7 @@ interface EnRouteChildren {
   EnTrustRoute: typeof EnTrustRoute
   EnUnknownRoute: typeof EnUnknownRoute
   EnVcardRoute: typeof EnVcardRoute
+  EnVoiceRoute: typeof EnVoiceRoute
   EnWifiRoute: typeof EnWifiRoute
   EnWorkspaceRoute: typeof EnWorkspaceRoute
   EnXetaRoute: typeof EnXetaRouteWithChildren
@@ -6060,6 +6159,7 @@ const EnRouteChildren: EnRouteChildren = {
   EnTrustRoute: EnTrustRoute,
   EnUnknownRoute: EnUnknownRoute,
   EnVcardRoute: EnVcardRoute,
+  EnVoiceRoute: EnVoiceRoute,
   EnWifiRoute: EnWifiRoute,
   EnWorkspaceRoute: EnWorkspaceRoute,
   EnXetaRoute: EnXetaRouteWithChildren,
@@ -6281,6 +6381,7 @@ interface RuRouteChildren {
   RuTrustRoute: typeof RuTrustRoute
   RuUnknownRoute: typeof RuUnknownRoute
   RuVcardRoute: typeof RuVcardRoute
+  RuVoiceRoute: typeof RuVoiceRoute
   RuWifiRoute: typeof RuWifiRoute
   RuWorkspaceRoute: typeof RuWorkspaceRoute
   RuXetaRoute: typeof RuXetaRouteWithChildren
@@ -6330,6 +6431,7 @@ const RuRouteChildren: RuRouteChildren = {
   RuTrustRoute: RuTrustRoute,
   RuUnknownRoute: RuUnknownRoute,
   RuVcardRoute: RuVcardRoute,
+  RuVoiceRoute: RuVoiceRoute,
   RuWifiRoute: RuWifiRoute,
   RuWorkspaceRoute: RuWorkspaceRoute,
   RuXetaRoute: RuXetaRouteWithChildren,
@@ -6499,6 +6601,7 @@ interface TrRouteChildren {
   TrTrustRoute: typeof TrTrustRoute
   TrUnknownRoute: typeof TrUnknownRoute
   TrVcardRoute: typeof TrVcardRoute
+  TrVoiceRoute: typeof TrVoiceRoute
   TrWifiRoute: typeof TrWifiRoute
   TrWorkspaceRoute: typeof TrWorkspaceRoute
   TrXetaRoute: typeof TrXetaRouteWithChildren
@@ -6547,6 +6650,7 @@ const TrRouteChildren: TrRouteChildren = {
   TrTrustRoute: TrTrustRoute,
   TrUnknownRoute: TrUnknownRoute,
   TrVcardRoute: TrVcardRoute,
+  TrVoiceRoute: TrVoiceRoute,
   TrWifiRoute: TrWifiRoute,
   TrWorkspaceRoute: TrWorkspaceRoute,
   TrXetaRoute: TrXetaRouteWithChildren,
@@ -6627,6 +6731,7 @@ const rootRouteChildren: RootRouteChildren = {
   UnknownRoute: UnknownRoute,
   UnutmaRoute: UnutmaRoute,
   VcardRoute: VcardRoute,
+  VoiceRoute: VoiceRoute,
   WhyRoute: WhyRoute,
   WifiRoute: WifiRoute,
   WorkspaceRoute: WorkspaceRoute,

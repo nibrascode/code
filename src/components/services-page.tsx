@@ -1,10 +1,11 @@
-import { AppWindow, ChevronDown, Code2, FileText, Image as ImageIcon, LayoutGrid, QrCode, Sparkles } from "lucide-react";
+import { AppWindow, Mic, ChevronDown, Code2, FileText, Image as ImageIcon, LayoutGrid, QrCode, Sparkles } from "lucide-react";
 import type { ReactNode } from "react";
 import { BAR } from "@/components/home-bars";
 import { STUDIO_APPS } from "@/lib/apps";
 import type { Lang } from "@/lib/i18n";
 import { localeHref } from "@/lib/locale-path";
 import { TOOL_GROUPS, TOOLS, toolPath, toolsPath } from "@/lib/tools";
+import { VOICE_TITLE } from "@/voice/voice-page";
 import { TOOL_IDS, TOOL_TEXT } from "@/pdf/tool-text";
 
 type L = Record<Lang, string>;
@@ -80,6 +81,7 @@ const CATS: Cat[] = [
   {
     id: "other", icon: <Sparkles size={18} />, title: T("Digər", "More", "Diğer", "أخرى", "Другое"),
     items: (lang) => [
+      { href: localeHref(lang, "/voice"), label: VOICE_TITLE[lang] },
       { href: localeHref(lang, "/ai"), label: "Nibras AI" },
       { href: localeHref(lang, "/calc"), label: BAR.calc[lang] },
       { href: localeHref(lang, "/flow"), label: BAR.flow[lang] },
