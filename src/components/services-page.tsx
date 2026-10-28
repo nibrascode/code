@@ -1,4 +1,4 @@
-import { AppWindow, ChevronRight, Code2, FileText, Headphones, Image as ImageIcon, LayoutGrid, QrCode, Sparkles } from "lucide-react";
+import { AppWindow, ChevronRight, Clapperboard, Code2, FileText, Headphones, Image as ImageIcon, LayoutGrid, QrCode, Sparkles } from "lucide-react";
 import type { ReactNode } from "react";
 import { BAR } from "@/components/home-bars";
 import { STUDIO_APPS } from "@/lib/apps";
@@ -7,17 +7,18 @@ import { localeHref } from "@/lib/locale-path";
 import { TOOL_GROUPS, TOOLS, toolPath, toolsPath } from "@/lib/tools";
 import { VOICE_TITLE } from "@/voice/voice-page";
 import { TOOL_IDS, TOOL_TEXT } from "@/pdf/tool-text";
+import { VIDEO_KIT } from "@/kit/video-meta";
 
 type L = Record<Lang, string>;
 const T = (az: string, en: string, tr: string, ar: string, ru: string): L => ({ az, en, tr, ar, ru });
 
 const TITLE = T("Services", "Services", "Services", "Services", "Services");
 const DESC = T(
-  "Nibras Code xidmətləri: PDF, səs, QR, şəkil, kod alətləri, tətbiqlər, Studio və Nibras AI — hamısı bir siyahıda.",
-  "Nibras Code services: PDF, audio, QR, images, code tools, apps, Studio and Nibras AI — all in one list.",
-  "Nibras Code hizmetleri: PDF, ses, QR, görsel, kod araçları, uygulamalar, Studio ve Nibras AI — hepsi tek listede.",
-  "خدمات Nibras Code: PDF والصوت وQR والصور وأدوات الكود والتطبيقات وStudio وNibras AI — كلها في قائمة واحدة.",
-  "Сервисы Nibras Code: PDF, аудио, QR, изображения, инструменты кода, приложения, Studio и Nibras AI — всё в одном списке.",
+  "Nibras Code xidmətləri: PDF, video, səs, QR, şəkil, kod alətləri, tətbiqlər, Studio və Nibras AI — hamısı bir siyahıda.",
+  "Nibras Code services: PDF, video, audio, QR, images, code tools, apps, Studio and Nibras AI — all in one list.",
+  "Nibras Code hizmetleri: PDF, video, ses, QR, görsel, kod araçları, uygulamalar, Studio ve Nibras AI — hepsi tek listede.",
+  "خدمات Nibras Code: PDF والفيديو والصوت وQR والصور وأدوات الكود والتطبيقات وStudio وNibras AI — كلها في قائمة واحدة.",
+  "Сервисы Nibras Code: PDF, видео, аудио, QR, изображения, инструменты кода, приложения, Studio и Nibras AI — всё в одном списке.",
 );
 
 type Item = { href: string; label: string; hint?: string; ext?: boolean };
@@ -52,6 +53,10 @@ const CATS: Cat[] = [
       { href: localeHref(lang, "/image"), label: BAR.image[lang] },
       ...Object.keys(IMG_TOOL).map((k) => ({ href: localeHref(lang, `/image/${k}`), label: IMG_TOOL[k][lang] })),
     ],
+  },
+  {
+    id: "video", sub: T("Kəs, çevir, birləşdir, səsini çıxar", "Trim, convert, merge, extract audio", "Kes, dönüştür, birleştir, sesi çıkar", "قص وتحويل ودمج واستخراج الصوت", "Обрезка, конвертация, склейка, звук"), icon: <Clapperboard size={22} />, title: T("Video", "Video", "Video", "الفيديو", "Видео"),
+    items: (lang) => (["/video", "/video/trim", "/video/convert", "/video/merge", "/video/audio"] as const).map((p) => ({ href: localeHref(lang, p), label: VIDEO_KIT[p][lang].h1, hint: p === "/video" ? undefined : VIDEO_KIT[p][lang].lead })),
   },
   {
     id: "code", sub: T("Proqramçılar üçün faydalı alətlər", "Handy tools for developers", "Geliştiriciler için faydalı araçlar", "أدوات مفيدة للمبرمجين", "Полезные инструменты для разработчиков"), icon: <Code2 size={22} />, title: T("Kod alətləri", "Code tools", "Kod araçları", "أدوات الكود", "Инструменты кода"),

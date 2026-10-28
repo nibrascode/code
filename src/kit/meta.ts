@@ -1,12 +1,14 @@
 import type { Lang } from "@/lib/i18n";
+import { VIDEO_KIT } from "./video-meta";
 
 type QA = { q: string; a: string };
 type Meta = { title: string; description: string; h1: string; lead: string; faq: QA[] };
-export const KIT_PATHS = ["/image/resize", "/image/convert", "/image/edit", "/vcard", "/zip"] as const;
+export const KIT_PATHS = ["/image/resize", "/image/convert", "/image/edit", "/vcard", "/zip", "/video", "/video/trim", "/video/convert", "/video/merge", "/video/audio"] as const;
 export type KitPath = (typeof KIT_PATHS)[number];
 export const isKitPath = (p: string): p is KitPath => (KIT_PATHS as readonly string[]).includes(p);
 
 export const KIT: Record<KitPath, Record<Lang, Meta>> = {
+  ...VIDEO_KIT,
   "/image/resize": {
     az: { title: "Şəkil ölçüsünü dəyiş — pulsuz", description: "Şəklin enini və hündürlüyünü piksel və ya faizlə dəyiş. Nisbət qorunur. Şəkil brauzerdən çıxmır.", h1: "Şəkil ölçüsünü dəyiş", lead: "En və hündürlüyü yazın, nisbət qorunsun. Pulsuz, hesabsız, şəkil brauzerdən çıxmır.",
       faq: [{ q: "Nisbət pozulmur?", a: "«Nisbəti qoru» açıq olanda bir ölçünü yazırsınız, o biri özü hesablanır." }, { q: "Şəkli böyütmək olar?", a: "Bəli, amma böyüdülən şəkil daha aydın olmur." }, { q: "Şəkil serverə gedir?", a: "Xeyr. Hər şey bu brauzerdə edilir." }] },

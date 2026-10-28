@@ -25530,4 +25530,254 @@
     <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/uslugi"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/services"/>
   </url>
+  <url>
+    <loc>https://nibrascode.com/video</loc>
+    <lastmod>2026-10-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/video"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/video"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/video"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/video"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/video"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/video"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/en/video</loc>
+    <lastmod>2026-10-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/video"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/video"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/video"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/video"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/video"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/video"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/tr/video</loc>
+    <lastmod>2026-10-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/video"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/video"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/video"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/video"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/video"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/video"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/ar/video</loc>
+    <lastmod>2026-10-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/video"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/video"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/video"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/video"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/video"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/video"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/ru/video</loc>
+    <lastmod>2026-10-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/video"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/video"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/video"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/video"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/video"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/video"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/video/trim</loc>
+    <lastmod>2026-10-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/video/trim"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/video/trim"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/video/trim"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/video/trim"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/video/trim"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/video/trim"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/en/video/trim</loc>
+    <lastmod>2026-10-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/video/trim"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/video/trim"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/video/trim"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/video/trim"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/video/trim"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/video/trim"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/tr/video/trim</loc>
+    <lastmod>2026-10-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/video/trim"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/video/trim"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/video/trim"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/video/trim"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/video/trim"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/video/trim"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/ar/video/trim</loc>
+    <lastmod>2026-10-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/video/trim"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/video/trim"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/video/trim"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/video/trim"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/video/trim"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/video/trim"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/ru/video/trim</loc>
+    <lastmod>2026-10-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/video/trim"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/video/trim"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/video/trim"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/video/trim"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/video/trim"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/video/trim"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/video/convert</loc>
+    <lastmod>2026-10-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/video/convert"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/video/convert"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/video/convert"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/video/convert"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/video/convert"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/video/convert"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/en/video/convert</loc>
+    <lastmod>2026-10-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/video/convert"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/video/convert"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/video/convert"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/video/convert"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/video/convert"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/video/convert"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/tr/video/convert</loc>
+    <lastmod>2026-10-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/video/convert"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/video/convert"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/video/convert"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/video/convert"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/video/convert"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/video/convert"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/ar/video/convert</loc>
+    <lastmod>2026-10-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/video/convert"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/video/convert"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/video/convert"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/video/convert"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/video/convert"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/video/convert"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/ru/video/convert</loc>
+    <lastmod>2026-10-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/video/convert"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/video/convert"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/video/convert"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/video/convert"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/video/convert"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/video/convert"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/video/merge</loc>
+    <lastmod>2026-10-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/video/merge"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/video/merge"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/video/merge"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/video/merge"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/video/merge"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/video/merge"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/en/video/merge</loc>
+    <lastmod>2026-10-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/video/merge"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/video/merge"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/video/merge"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/video/merge"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/video/merge"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/video/merge"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/tr/video/merge</loc>
+    <lastmod>2026-10-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/video/merge"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/video/merge"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/video/merge"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/video/merge"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/video/merge"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/video/merge"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/ar/video/merge</loc>
+    <lastmod>2026-10-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/video/merge"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/video/merge"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/video/merge"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/video/merge"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/video/merge"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/video/merge"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/ru/video/merge</loc>
+    <lastmod>2026-10-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/video/merge"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/video/merge"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/video/merge"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/video/merge"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/video/merge"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/video/merge"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/video/audio</loc>
+    <lastmod>2026-10-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/video/audio"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/video/audio"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/video/audio"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/video/audio"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/video/audio"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/video/audio"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/en/video/audio</loc>
+    <lastmod>2026-10-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/video/audio"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/video/audio"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/video/audio"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/video/audio"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/video/audio"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/video/audio"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/tr/video/audio</loc>
+    <lastmod>2026-10-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/video/audio"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/video/audio"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/video/audio"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/video/audio"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/video/audio"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/video/audio"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/ar/video/audio</loc>
+    <lastmod>2026-10-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/video/audio"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/video/audio"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/video/audio"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/video/audio"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/video/audio"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/video/audio"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/ru/video/audio</loc>
+    <lastmod>2026-10-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/video/audio"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/video/audio"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/video/audio"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/video/audio"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/video/audio"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/video/audio"/>
+  </url>
 </urlset>

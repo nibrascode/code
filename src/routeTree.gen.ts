@@ -52,6 +52,7 @@ import { Route as TrustRouteImport } from './routes/trust'
 import { Route as UnknownRouteImport } from './routes/unknown'
 import { Route as UnutmaRouteImport } from './routes/unutma'
 import { Route as VcardRouteImport } from './routes/vcard'
+import { Route as VideoRouteImport } from './routes/video'
 import { Route as VoiceRouteImport } from './routes/voice'
 import { Route as WhyRouteImport } from './routes/why'
 import { Route as WifiRouteImport } from './routes/wifi'
@@ -96,6 +97,7 @@ import { Route as ArToolsLegalRouteImport } from './routes/ar.tools-legal'
 import { Route as ArTrustRouteImport } from './routes/ar.trust'
 import { Route as ArUnknownRouteImport } from './routes/ar.unknown'
 import { Route as ArVcardRouteImport } from './routes/ar.vcard'
+import { Route as ArVideoRouteImport } from './routes/ar.video'
 import { Route as ArVoiceRouteImport } from './routes/ar.voice'
 import { Route as ArWifiRouteImport } from './routes/ar.wifi'
 import { Route as ArWorkspaceRouteImport } from './routes/ar.workspace'
@@ -137,6 +139,7 @@ import { Route as EnToolsLegalRouteImport } from './routes/en.tools-legal'
 import { Route as EnTrustRouteImport } from './routes/en.trust'
 import { Route as EnUnknownRouteImport } from './routes/en.unknown'
 import { Route as EnVcardRouteImport } from './routes/en.vcard'
+import { Route as EnVideoRouteImport } from './routes/en.video'
 import { Route as EnVoiceRouteImport } from './routes/en.voice'
 import { Route as EnWifiRouteImport } from './routes/en.wifi'
 import { Route as EnWorkspaceRouteImport } from './routes/en.workspace'
@@ -199,6 +202,7 @@ import { Route as RuToolsLegalRouteImport } from './routes/ru.tools-legal'
 import { Route as RuTrustRouteImport } from './routes/ru.trust'
 import { Route as RuUnknownRouteImport } from './routes/ru.unknown'
 import { Route as RuVcardRouteImport } from './routes/ru.vcard'
+import { Route as RuVideoRouteImport } from './routes/ru.video'
 import { Route as RuVoiceRouteImport } from './routes/ru.voice'
 import { Route as RuWifiRouteImport } from './routes/ru.wifi'
 import { Route as RuWorkspaceRouteImport } from './routes/ru.workspace'
@@ -242,11 +246,13 @@ import { Route as TrToolsLegalRouteImport } from './routes/tr.tools-legal'
 import { Route as TrTrustRouteImport } from './routes/tr.trust'
 import { Route as TrUnknownRouteImport } from './routes/tr.unknown'
 import { Route as TrVcardRouteImport } from './routes/tr.vcard'
+import { Route as TrVideoRouteImport } from './routes/tr.video'
 import { Route as TrVoiceRouteImport } from './routes/tr.voice'
 import { Route as TrWifiRouteImport } from './routes/tr.wifi'
 import { Route as TrWorkspaceRouteImport } from './routes/tr.workspace'
 import { Route as TrXetaRouteImport } from './routes/tr.xeta'
 import { Route as TrZipRouteImport } from './routes/tr.zip'
+import { Route as VideoToolRouteImport } from './routes/video_.$tool'
 import { Route as XetaSlugRouteImport } from './routes/xeta.$slug'
 import { Route as ArAppsSlugRouteImport } from './routes/ar.apps.$slug'
 import { Route as ArFaqSlugRouteImport } from './routes/ar.faq.$slug'
@@ -261,6 +267,7 @@ import { Route as ArPdfToolRouteImport } from './routes/ar.pdf_.$tool'
 import { Route as ArProgrammingSlugRouteImport } from './routes/ar.programming.$slug'
 import { Route as ArSozSlugRouteImport } from './routes/ar.soz.$slug'
 import { Route as ArToolsSlugRouteImport } from './routes/ar.tools.$slug'
+import { Route as ArVideoToolRouteImport } from './routes/ar.video_.$tool'
 import { Route as ArXetaSlugRouteImport } from './routes/ar.xeta.$slug'
 import { Route as EnAllGroupRouteImport } from './routes/en.all.$group'
 import { Route as EnAppsSlugRouteImport } from './routes/en.apps.$slug'
@@ -275,6 +282,7 @@ import { Route as EnPdfToolRouteImport } from './routes/en.pdf_.$tool'
 import { Route as EnProgrammingSlugRouteImport } from './routes/en.programming.$slug'
 import { Route as EnSozSlugRouteImport } from './routes/en.soz.$slug'
 import { Route as EnToolsSlugRouteImport } from './routes/en.tools.$slug'
+import { Route as EnVideoToolRouteImport } from './routes/en.video_.$tool'
 import { Route as EnXetaSlugRouteImport } from './routes/en.xeta.$slug'
 import { Route as PrivacyNibrasQrDeleteAccountRouteImport } from './routes/privacy/nibras-qr.delete-account'
 import { Route as ResourcesTopicIndexRouteImport } from './routes/resources/$topic/index'
@@ -292,6 +300,7 @@ import { Route as RuProgrammingSlugRouteImport } from './routes/ru.programming.$
 import { Route as RuResourcesSlugRouteImport } from './routes/ru.resources.$slug'
 import { Route as RuSozSlugRouteImport } from './routes/ru.soz.$slug'
 import { Route as RuToolsSlugRouteImport } from './routes/ru.tools.$slug'
+import { Route as RuVideoToolRouteImport } from './routes/ru.video_.$tool'
 import { Route as RuVseGroupRouteImport } from './routes/ru.vse.$group'
 import { Route as RuXetaSlugRouteImport } from './routes/ru.xeta.$slug'
 import { Route as TrAppsSlugRouteImport } from './routes/tr.apps.$slug'
@@ -307,6 +316,7 @@ import { Route as TrProgrammingSlugRouteImport } from './routes/tr.programming.$
 import { Route as TrSozSlugRouteImport } from './routes/tr.soz.$slug'
 import { Route as TrToolsSlugRouteImport } from './routes/tr.tools.$slug'
 import { Route as TrTumuGroupRouteImport } from './routes/tr.tumu.$group'
+import { Route as TrVideoToolRouteImport } from './routes/tr.video_.$tool'
 import { Route as TrXetaSlugRouteImport } from './routes/tr.xeta.$slug'
 
 const IndexRoute = IndexRouteImport.update({
@@ -522,6 +532,11 @@ const UnutmaRoute = UnutmaRouteImport.update({
 const VcardRoute = VcardRouteImport.update({
   id: '/vcard',
   path: '/vcard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VideoRoute = VideoRouteImport.update({
+  id: '/video',
+  path: '/video',
   getParentRoute: () => rootRouteImport,
 } as any)
 const VoiceRoute = VoiceRouteImport.update({
@@ -744,6 +759,11 @@ const ArVcardRoute = ArVcardRouteImport.update({
   path: '/vcard',
   getParentRoute: () => ArRoute,
 } as any)
+const ArVideoRoute = ArVideoRouteImport.update({
+  id: '/video',
+  path: '/video',
+  getParentRoute: () => ArRoute,
+} as any)
 const ArVoiceRoute = ArVoiceRouteImport.update({
   id: '/voice',
   path: '/voice',
@@ -947,6 +967,11 @@ const EnUnknownRoute = EnUnknownRouteImport.update({
 const EnVcardRoute = EnVcardRouteImport.update({
   id: '/vcard',
   path: '/vcard',
+  getParentRoute: () => EnRoute,
+} as any)
+const EnVideoRoute = EnVideoRouteImport.update({
+  id: '/video',
+  path: '/video',
   getParentRoute: () => EnRoute,
 } as any)
 const EnVoiceRoute = EnVoiceRouteImport.update({
@@ -1259,6 +1284,11 @@ const RuVcardRoute = RuVcardRouteImport.update({
   path: '/vcard',
   getParentRoute: () => RuRoute,
 } as any)
+const RuVideoRoute = RuVideoRouteImport.update({
+  id: '/video',
+  path: '/video',
+  getParentRoute: () => RuRoute,
+} as any)
 const RuVoiceRoute = RuVoiceRouteImport.update({
   id: '/voice',
   path: '/voice',
@@ -1474,6 +1504,11 @@ const TrVcardRoute = TrVcardRouteImport.update({
   path: '/vcard',
   getParentRoute: () => TrRoute,
 } as any)
+const TrVideoRoute = TrVideoRouteImport.update({
+  id: '/video',
+  path: '/video',
+  getParentRoute: () => TrRoute,
+} as any)
 const TrVoiceRoute = TrVoiceRouteImport.update({
   id: '/voice',
   path: '/voice',
@@ -1498,6 +1533,11 @@ const TrZipRoute = TrZipRouteImport.update({
   id: '/zip',
   path: '/zip',
   getParentRoute: () => TrRoute,
+} as any)
+const VideoToolRoute = VideoToolRouteImport.update({
+  id: '/video_/$tool',
+  path: '/video/$tool',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const XetaSlugRoute = XetaSlugRouteImport.update({
   id: '/$slug',
@@ -1569,6 +1609,11 @@ const ArToolsSlugRoute = ArToolsSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => ArToolsRoute,
 } as any)
+const ArVideoToolRoute = ArVideoToolRouteImport.update({
+  id: '/video_/$tool',
+  path: '/video/$tool',
+  getParentRoute: () => ArRoute,
+} as any)
 const ArXetaSlugRoute = ArXetaSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -1638,6 +1683,11 @@ const EnToolsSlugRoute = EnToolsSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => EnToolsRoute,
+} as any)
+const EnVideoToolRoute = EnVideoToolRouteImport.update({
+  id: '/video_/$tool',
+  path: '/video/$tool',
+  getParentRoute: () => EnRoute,
 } as any)
 const EnXetaSlugRoute = EnXetaSlugRouteImport.update({
   id: '/$slug',
@@ -1725,6 +1775,11 @@ const RuToolsSlugRoute = RuToolsSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => RuToolsRoute,
 } as any)
+const RuVideoToolRoute = RuVideoToolRouteImport.update({
+  id: '/video_/$tool',
+  path: '/video/$tool',
+  getParentRoute: () => RuRoute,
+} as any)
 const RuVseGroupRoute = RuVseGroupRouteImport.update({
   id: '/vse/$group',
   path: '/vse/$group',
@@ -1800,6 +1855,11 @@ const TrTumuGroupRoute = TrTumuGroupRouteImport.update({
   path: '/tumu/$group',
   getParentRoute: () => TrRoute,
 } as any)
+const TrVideoToolRoute = TrVideoToolRouteImport.update({
+  id: '/video_/$tool',
+  path: '/video/$tool',
+  getParentRoute: () => TrRoute,
+} as any)
 const TrXetaSlugRoute = TrXetaSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -1850,6 +1910,7 @@ export interface FileRoutesByFullPath {
   '/unknown': typeof UnknownRoute
   '/unutma': typeof UnutmaRoute
   '/vcard': typeof VcardRoute
+  '/video': typeof VideoRoute
   '/voice': typeof VoiceRoute
   '/why': typeof WhyRoute
   '/wifi': typeof WifiRoute
@@ -1894,6 +1955,7 @@ export interface FileRoutesByFullPath {
   '/ar/trust': typeof ArTrustRoute
   '/ar/unknown': typeof ArUnknownRoute
   '/ar/vcard': typeof ArVcardRoute
+  '/ar/video': typeof ArVideoRoute
   '/ar/voice': typeof ArVoiceRoute
   '/ar/wifi': typeof ArWifiRoute
   '/ar/workspace': typeof ArWorkspaceRoute
@@ -1935,6 +1997,7 @@ export interface FileRoutesByFullPath {
   '/en/trust': typeof EnTrustRoute
   '/en/unknown': typeof EnUnknownRoute
   '/en/vcard': typeof EnVcardRoute
+  '/en/video': typeof EnVideoRoute
   '/en/voice': typeof EnVoiceRoute
   '/en/wifi': typeof EnWifiRoute
   '/en/workspace': typeof EnWorkspaceRoute
@@ -1993,6 +2056,7 @@ export interface FileRoutesByFullPath {
   '/ru/trust': typeof RuTrustRoute
   '/ru/unknown': typeof RuUnknownRoute
   '/ru/vcard': typeof RuVcardRoute
+  '/ru/video': typeof RuVideoRoute
   '/ru/voice': typeof RuVoiceRoute
   '/ru/wifi': typeof RuWifiRoute
   '/ru/workspace': typeof RuWorkspaceRoute
@@ -2036,11 +2100,13 @@ export interface FileRoutesByFullPath {
   '/tr/trust': typeof TrTrustRoute
   '/tr/unknown': typeof TrUnknownRoute
   '/tr/vcard': typeof TrVcardRoute
+  '/tr/video': typeof TrVideoRoute
   '/tr/voice': typeof TrVoiceRoute
   '/tr/wifi': typeof TrWifiRoute
   '/tr/workspace': typeof TrWorkspaceRoute
   '/tr/xeta': typeof TrXetaRouteWithChildren
   '/tr/zip': typeof TrZipRoute
+  '/video/$tool': typeof VideoToolRoute
   '/xeta/$slug': typeof XetaSlugRoute
   '/apps/': typeof AppsIndexRoute
   '/guides/': typeof GuidesIndexRoute
@@ -2059,6 +2125,7 @@ export interface FileRoutesByFullPath {
   '/ar/programming/$slug': typeof ArProgrammingSlugRoute
   '/ar/soz/$slug': typeof ArSozSlugRoute
   '/ar/tools/$slug': typeof ArToolsSlugRoute
+  '/ar/video/$tool': typeof ArVideoToolRoute
   '/ar/xeta/$slug': typeof ArXetaSlugRoute
   '/en/all/$group': typeof EnAllGroupRoute
   '/en/apps/$slug': typeof EnAppsSlugRoute
@@ -2073,6 +2140,7 @@ export interface FileRoutesByFullPath {
   '/en/programming/$slug': typeof EnProgrammingSlugRoute
   '/en/soz/$slug': typeof EnSozSlugRoute
   '/en/tools/$slug': typeof EnToolsSlugRoute
+  '/en/video/$tool': typeof EnVideoToolRoute
   '/en/xeta/$slug': typeof EnXetaSlugRoute
   '/privacy/nibras-qr/delete-account': typeof PrivacyNibrasQrDeleteAccountRoute
   '/resources/$topic/$article': typeof ResourcesTopicArticleRoute
@@ -2089,6 +2157,7 @@ export interface FileRoutesByFullPath {
   '/ru/resources/$slug': typeof RuResourcesSlugRoute
   '/ru/soz/$slug': typeof RuSozSlugRoute
   '/ru/tools/$slug': typeof RuToolsSlugRoute
+  '/ru/video/$tool': typeof RuVideoToolRoute
   '/ru/vse/$group': typeof RuVseGroupRoute
   '/ru/xeta/$slug': typeof RuXetaSlugRoute
   '/tr/apps/$slug': typeof TrAppsSlugRoute
@@ -2104,6 +2173,7 @@ export interface FileRoutesByFullPath {
   '/tr/soz/$slug': typeof TrSozSlugRoute
   '/tr/tools/$slug': typeof TrToolsSlugRoute
   '/tr/tumu/$group': typeof TrTumuGroupRoute
+  '/tr/video/$tool': typeof TrVideoToolRoute
   '/tr/xeta/$slug': typeof TrXetaSlugRoute
   '/resources/$topic/': typeof ResourcesTopicIndexRoute
 }
@@ -2151,6 +2221,7 @@ export interface FileRoutesByTo {
   '/unknown': typeof UnknownRoute
   '/unutma': typeof UnutmaRoute
   '/vcard': typeof VcardRoute
+  '/video': typeof VideoRoute
   '/voice': typeof VoiceRoute
   '/why': typeof WhyRoute
   '/wifi': typeof WifiRoute
@@ -2194,6 +2265,7 @@ export interface FileRoutesByTo {
   '/ar/trust': typeof ArTrustRoute
   '/ar/unknown': typeof ArUnknownRoute
   '/ar/vcard': typeof ArVcardRoute
+  '/ar/video': typeof ArVideoRoute
   '/ar/voice': typeof ArVoiceRoute
   '/ar/wifi': typeof ArWifiRoute
   '/ar/workspace': typeof ArWorkspaceRoute
@@ -2235,6 +2307,7 @@ export interface FileRoutesByTo {
   '/en/trust': typeof EnTrustRoute
   '/en/unknown': typeof EnUnknownRoute
   '/en/vcard': typeof EnVcardRoute
+  '/en/video': typeof EnVideoRoute
   '/en/voice': typeof EnVoiceRoute
   '/en/wifi': typeof EnWifiRoute
   '/en/workspace': typeof EnWorkspaceRoute
@@ -2293,6 +2366,7 @@ export interface FileRoutesByTo {
   '/ru/trust': typeof RuTrustRoute
   '/ru/unknown': typeof RuUnknownRoute
   '/ru/vcard': typeof RuVcardRoute
+  '/ru/video': typeof RuVideoRoute
   '/ru/voice': typeof RuVoiceRoute
   '/ru/wifi': typeof RuWifiRoute
   '/ru/workspace': typeof RuWorkspaceRoute
@@ -2336,11 +2410,13 @@ export interface FileRoutesByTo {
   '/tr/trust': typeof TrTrustRoute
   '/tr/unknown': typeof TrUnknownRoute
   '/tr/vcard': typeof TrVcardRoute
+  '/tr/video': typeof TrVideoRoute
   '/tr/voice': typeof TrVoiceRoute
   '/tr/wifi': typeof TrWifiRoute
   '/tr/workspace': typeof TrWorkspaceRoute
   '/tr/xeta': typeof TrXetaRouteWithChildren
   '/tr/zip': typeof TrZipRoute
+  '/video/$tool': typeof VideoToolRoute
   '/xeta/$slug': typeof XetaSlugRoute
   '/apps': typeof AppsIndexRoute
   '/guides': typeof GuidesIndexRoute
@@ -2359,6 +2435,7 @@ export interface FileRoutesByTo {
   '/ar/programming/$slug': typeof ArProgrammingSlugRoute
   '/ar/soz/$slug': typeof ArSozSlugRoute
   '/ar/tools/$slug': typeof ArToolsSlugRoute
+  '/ar/video/$tool': typeof ArVideoToolRoute
   '/ar/xeta/$slug': typeof ArXetaSlugRoute
   '/en/all/$group': typeof EnAllGroupRoute
   '/en/apps/$slug': typeof EnAppsSlugRoute
@@ -2373,6 +2450,7 @@ export interface FileRoutesByTo {
   '/en/programming/$slug': typeof EnProgrammingSlugRoute
   '/en/soz/$slug': typeof EnSozSlugRoute
   '/en/tools/$slug': typeof EnToolsSlugRoute
+  '/en/video/$tool': typeof EnVideoToolRoute
   '/en/xeta/$slug': typeof EnXetaSlugRoute
   '/privacy/nibras-qr/delete-account': typeof PrivacyNibrasQrDeleteAccountRoute
   '/resources/$topic/$article': typeof ResourcesTopicArticleRoute
@@ -2389,6 +2467,7 @@ export interface FileRoutesByTo {
   '/ru/resources/$slug': typeof RuResourcesSlugRoute
   '/ru/soz/$slug': typeof RuSozSlugRoute
   '/ru/tools/$slug': typeof RuToolsSlugRoute
+  '/ru/video/$tool': typeof RuVideoToolRoute
   '/ru/vse/$group': typeof RuVseGroupRoute
   '/ru/xeta/$slug': typeof RuXetaSlugRoute
   '/tr/apps/$slug': typeof TrAppsSlugRoute
@@ -2404,6 +2483,7 @@ export interface FileRoutesByTo {
   '/tr/soz/$slug': typeof TrSozSlugRoute
   '/tr/tools/$slug': typeof TrToolsSlugRoute
   '/tr/tumu/$group': typeof TrTumuGroupRoute
+  '/tr/video/$tool': typeof TrVideoToolRoute
   '/tr/xeta/$slug': typeof TrXetaSlugRoute
   '/resources/$topic': typeof ResourcesTopicIndexRoute
 }
@@ -2452,6 +2532,7 @@ export interface FileRoutesById {
   '/unknown': typeof UnknownRoute
   '/unutma': typeof UnutmaRoute
   '/vcard': typeof VcardRoute
+  '/video': typeof VideoRoute
   '/voice': typeof VoiceRoute
   '/why': typeof WhyRoute
   '/wifi': typeof WifiRoute
@@ -2496,6 +2577,7 @@ export interface FileRoutesById {
   '/ar/trust': typeof ArTrustRoute
   '/ar/unknown': typeof ArUnknownRoute
   '/ar/vcard': typeof ArVcardRoute
+  '/ar/video': typeof ArVideoRoute
   '/ar/voice': typeof ArVoiceRoute
   '/ar/wifi': typeof ArWifiRoute
   '/ar/workspace': typeof ArWorkspaceRoute
@@ -2537,6 +2619,7 @@ export interface FileRoutesById {
   '/en/trust': typeof EnTrustRoute
   '/en/unknown': typeof EnUnknownRoute
   '/en/vcard': typeof EnVcardRoute
+  '/en/video': typeof EnVideoRoute
   '/en/voice': typeof EnVoiceRoute
   '/en/wifi': typeof EnWifiRoute
   '/en/workspace': typeof EnWorkspaceRoute
@@ -2595,6 +2678,7 @@ export interface FileRoutesById {
   '/ru/trust': typeof RuTrustRoute
   '/ru/unknown': typeof RuUnknownRoute
   '/ru/vcard': typeof RuVcardRoute
+  '/ru/video': typeof RuVideoRoute
   '/ru/voice': typeof RuVoiceRoute
   '/ru/wifi': typeof RuWifiRoute
   '/ru/workspace': typeof RuWorkspaceRoute
@@ -2638,11 +2722,13 @@ export interface FileRoutesById {
   '/tr/trust': typeof TrTrustRoute
   '/tr/unknown': typeof TrUnknownRoute
   '/tr/vcard': typeof TrVcardRoute
+  '/tr/video': typeof TrVideoRoute
   '/tr/voice': typeof TrVoiceRoute
   '/tr/wifi': typeof TrWifiRoute
   '/tr/workspace': typeof TrWorkspaceRoute
   '/tr/xeta': typeof TrXetaRouteWithChildren
   '/tr/zip': typeof TrZipRoute
+  '/video_/$tool': typeof VideoToolRoute
   '/xeta/$slug': typeof XetaSlugRoute
   '/apps/': typeof AppsIndexRoute
   '/guides/': typeof GuidesIndexRoute
@@ -2661,6 +2747,7 @@ export interface FileRoutesById {
   '/ar/programming/$slug': typeof ArProgrammingSlugRoute
   '/ar/soz/$slug': typeof ArSozSlugRoute
   '/ar/tools/$slug': typeof ArToolsSlugRoute
+  '/ar/video_/$tool': typeof ArVideoToolRoute
   '/ar/xeta/$slug': typeof ArXetaSlugRoute
   '/en/all/$group': typeof EnAllGroupRoute
   '/en/apps/$slug': typeof EnAppsSlugRoute
@@ -2675,6 +2762,7 @@ export interface FileRoutesById {
   '/en/programming/$slug': typeof EnProgrammingSlugRoute
   '/en/soz/$slug': typeof EnSozSlugRoute
   '/en/tools/$slug': typeof EnToolsSlugRoute
+  '/en/video_/$tool': typeof EnVideoToolRoute
   '/en/xeta/$slug': typeof EnXetaSlugRoute
   '/privacy/nibras-qr/delete-account': typeof PrivacyNibrasQrDeleteAccountRoute
   '/resources/$topic/$article': typeof ResourcesTopicArticleRoute
@@ -2691,6 +2779,7 @@ export interface FileRoutesById {
   '/ru/resources/$slug': typeof RuResourcesSlugRoute
   '/ru/soz/$slug': typeof RuSozSlugRoute
   '/ru/tools/$slug': typeof RuToolsSlugRoute
+  '/ru/video_/$tool': typeof RuVideoToolRoute
   '/ru/vse/$group': typeof RuVseGroupRoute
   '/ru/xeta/$slug': typeof RuXetaSlugRoute
   '/tr/apps/$slug': typeof TrAppsSlugRoute
@@ -2706,6 +2795,7 @@ export interface FileRoutesById {
   '/tr/soz/$slug': typeof TrSozSlugRoute
   '/tr/tools/$slug': typeof TrToolsSlugRoute
   '/tr/tumu/$group': typeof TrTumuGroupRoute
+  '/tr/video_/$tool': typeof TrVideoToolRoute
   '/tr/xeta/$slug': typeof TrXetaSlugRoute
   '/resources/$topic/': typeof ResourcesTopicIndexRoute
 }
@@ -2755,6 +2845,7 @@ export interface FileRouteTypes {
     | '/unknown'
     | '/unutma'
     | '/vcard'
+    | '/video'
     | '/voice'
     | '/why'
     | '/wifi'
@@ -2799,6 +2890,7 @@ export interface FileRouteTypes {
     | '/ar/trust'
     | '/ar/unknown'
     | '/ar/vcard'
+    | '/ar/video'
     | '/ar/voice'
     | '/ar/wifi'
     | '/ar/workspace'
@@ -2840,6 +2932,7 @@ export interface FileRouteTypes {
     | '/en/trust'
     | '/en/unknown'
     | '/en/vcard'
+    | '/en/video'
     | '/en/voice'
     | '/en/wifi'
     | '/en/workspace'
@@ -2898,6 +2991,7 @@ export interface FileRouteTypes {
     | '/ru/trust'
     | '/ru/unknown'
     | '/ru/vcard'
+    | '/ru/video'
     | '/ru/voice'
     | '/ru/wifi'
     | '/ru/workspace'
@@ -2941,11 +3035,13 @@ export interface FileRouteTypes {
     | '/tr/trust'
     | '/tr/unknown'
     | '/tr/vcard'
+    | '/tr/video'
     | '/tr/voice'
     | '/tr/wifi'
     | '/tr/workspace'
     | '/tr/xeta'
     | '/tr/zip'
+    | '/video/$tool'
     | '/xeta/$slug'
     | '/apps/'
     | '/guides/'
@@ -2964,6 +3060,7 @@ export interface FileRouteTypes {
     | '/ar/programming/$slug'
     | '/ar/soz/$slug'
     | '/ar/tools/$slug'
+    | '/ar/video/$tool'
     | '/ar/xeta/$slug'
     | '/en/all/$group'
     | '/en/apps/$slug'
@@ -2978,6 +3075,7 @@ export interface FileRouteTypes {
     | '/en/programming/$slug'
     | '/en/soz/$slug'
     | '/en/tools/$slug'
+    | '/en/video/$tool'
     | '/en/xeta/$slug'
     | '/privacy/nibras-qr/delete-account'
     | '/resources/$topic/$article'
@@ -2994,6 +3092,7 @@ export interface FileRouteTypes {
     | '/ru/resources/$slug'
     | '/ru/soz/$slug'
     | '/ru/tools/$slug'
+    | '/ru/video/$tool'
     | '/ru/vse/$group'
     | '/ru/xeta/$slug'
     | '/tr/apps/$slug'
@@ -3009,6 +3108,7 @@ export interface FileRouteTypes {
     | '/tr/soz/$slug'
     | '/tr/tools/$slug'
     | '/tr/tumu/$group'
+    | '/tr/video/$tool'
     | '/tr/xeta/$slug'
     | '/resources/$topic/'
   fileRoutesByTo: FileRoutesByTo
@@ -3056,6 +3156,7 @@ export interface FileRouteTypes {
     | '/unknown'
     | '/unutma'
     | '/vcard'
+    | '/video'
     | '/voice'
     | '/why'
     | '/wifi'
@@ -3099,6 +3200,7 @@ export interface FileRouteTypes {
     | '/ar/trust'
     | '/ar/unknown'
     | '/ar/vcard'
+    | '/ar/video'
     | '/ar/voice'
     | '/ar/wifi'
     | '/ar/workspace'
@@ -3140,6 +3242,7 @@ export interface FileRouteTypes {
     | '/en/trust'
     | '/en/unknown'
     | '/en/vcard'
+    | '/en/video'
     | '/en/voice'
     | '/en/wifi'
     | '/en/workspace'
@@ -3198,6 +3301,7 @@ export interface FileRouteTypes {
     | '/ru/trust'
     | '/ru/unknown'
     | '/ru/vcard'
+    | '/ru/video'
     | '/ru/voice'
     | '/ru/wifi'
     | '/ru/workspace'
@@ -3241,11 +3345,13 @@ export interface FileRouteTypes {
     | '/tr/trust'
     | '/tr/unknown'
     | '/tr/vcard'
+    | '/tr/video'
     | '/tr/voice'
     | '/tr/wifi'
     | '/tr/workspace'
     | '/tr/xeta'
     | '/tr/zip'
+    | '/video/$tool'
     | '/xeta/$slug'
     | '/apps'
     | '/guides'
@@ -3264,6 +3370,7 @@ export interface FileRouteTypes {
     | '/ar/programming/$slug'
     | '/ar/soz/$slug'
     | '/ar/tools/$slug'
+    | '/ar/video/$tool'
     | '/ar/xeta/$slug'
     | '/en/all/$group'
     | '/en/apps/$slug'
@@ -3278,6 +3385,7 @@ export interface FileRouteTypes {
     | '/en/programming/$slug'
     | '/en/soz/$slug'
     | '/en/tools/$slug'
+    | '/en/video/$tool'
     | '/en/xeta/$slug'
     | '/privacy/nibras-qr/delete-account'
     | '/resources/$topic/$article'
@@ -3294,6 +3402,7 @@ export interface FileRouteTypes {
     | '/ru/resources/$slug'
     | '/ru/soz/$slug'
     | '/ru/tools/$slug'
+    | '/ru/video/$tool'
     | '/ru/vse/$group'
     | '/ru/xeta/$slug'
     | '/tr/apps/$slug'
@@ -3309,6 +3418,7 @@ export interface FileRouteTypes {
     | '/tr/soz/$slug'
     | '/tr/tools/$slug'
     | '/tr/tumu/$group'
+    | '/tr/video/$tool'
     | '/tr/xeta/$slug'
     | '/resources/$topic'
   id:
@@ -3356,6 +3466,7 @@ export interface FileRouteTypes {
     | '/unknown'
     | '/unutma'
     | '/vcard'
+    | '/video'
     | '/voice'
     | '/why'
     | '/wifi'
@@ -3400,6 +3511,7 @@ export interface FileRouteTypes {
     | '/ar/trust'
     | '/ar/unknown'
     | '/ar/vcard'
+    | '/ar/video'
     | '/ar/voice'
     | '/ar/wifi'
     | '/ar/workspace'
@@ -3441,6 +3553,7 @@ export interface FileRouteTypes {
     | '/en/trust'
     | '/en/unknown'
     | '/en/vcard'
+    | '/en/video'
     | '/en/voice'
     | '/en/wifi'
     | '/en/workspace'
@@ -3499,6 +3612,7 @@ export interface FileRouteTypes {
     | '/ru/trust'
     | '/ru/unknown'
     | '/ru/vcard'
+    | '/ru/video'
     | '/ru/voice'
     | '/ru/wifi'
     | '/ru/workspace'
@@ -3542,11 +3656,13 @@ export interface FileRouteTypes {
     | '/tr/trust'
     | '/tr/unknown'
     | '/tr/vcard'
+    | '/tr/video'
     | '/tr/voice'
     | '/tr/wifi'
     | '/tr/workspace'
     | '/tr/xeta'
     | '/tr/zip'
+    | '/video_/$tool'
     | '/xeta/$slug'
     | '/apps/'
     | '/guides/'
@@ -3565,6 +3681,7 @@ export interface FileRouteTypes {
     | '/ar/programming/$slug'
     | '/ar/soz/$slug'
     | '/ar/tools/$slug'
+    | '/ar/video_/$tool'
     | '/ar/xeta/$slug'
     | '/en/all/$group'
     | '/en/apps/$slug'
@@ -3579,6 +3696,7 @@ export interface FileRouteTypes {
     | '/en/programming/$slug'
     | '/en/soz/$slug'
     | '/en/tools/$slug'
+    | '/en/video_/$tool'
     | '/en/xeta/$slug'
     | '/privacy/nibras-qr/delete-account'
     | '/resources/$topic/$article'
@@ -3595,6 +3713,7 @@ export interface FileRouteTypes {
     | '/ru/resources/$slug'
     | '/ru/soz/$slug'
     | '/ru/tools/$slug'
+    | '/ru/video_/$tool'
     | '/ru/vse/$group'
     | '/ru/xeta/$slug'
     | '/tr/apps/$slug'
@@ -3610,6 +3729,7 @@ export interface FileRouteTypes {
     | '/tr/soz/$slug'
     | '/tr/tools/$slug'
     | '/tr/tumu/$group'
+    | '/tr/video_/$tool'
     | '/tr/xeta/$slug'
     | '/resources/$topic/'
   fileRoutesById: FileRoutesById
@@ -3658,6 +3778,7 @@ export interface RootRouteChildren {
   UnknownRoute: typeof UnknownRoute
   UnutmaRoute: typeof UnutmaRoute
   VcardRoute: typeof VcardRoute
+  VideoRoute: typeof VideoRoute
   VoiceRoute: typeof VoiceRoute
   WhyRoute: typeof WhyRoute
   WifiRoute: typeof WifiRoute
@@ -3673,6 +3794,7 @@ export interface RootRouteChildren {
   PdfToolRoute: typeof PdfToolRoute
   ProgrammingTopicRoute: typeof ProgrammingTopicRoute
   ResurslarSlugRoute: typeof ResurslarSlugRoute
+  VideoToolRoute: typeof VideoToolRoute
   AppsIndexRoute: typeof AppsIndexRoute
   GuidesIndexRoute: typeof GuidesIndexRoute
   ProgrammingIndexRoute: typeof ProgrammingIndexRoute
@@ -3980,6 +4102,13 @@ declare module '@tanstack/react-router' {
       path: '/vcard'
       fullPath: '/vcard'
       preLoaderRoute: typeof VcardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/video': {
+      id: '/video'
+      path: '/video'
+      fullPath: '/video'
+      preLoaderRoute: typeof VideoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/voice': {
@@ -4290,6 +4419,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArVcardRouteImport
       parentRoute: typeof ArRoute
     }
+    '/ar/video': {
+      id: '/ar/video'
+      path: '/video'
+      fullPath: '/ar/video'
+      preLoaderRoute: typeof ArVideoRouteImport
+      parentRoute: typeof ArRoute
+    }
     '/ar/voice': {
       id: '/ar/voice'
       path: '/voice'
@@ -4575,6 +4711,13 @@ declare module '@tanstack/react-router' {
       path: '/vcard'
       fullPath: '/en/vcard'
       preLoaderRoute: typeof EnVcardRouteImport
+      parentRoute: typeof EnRoute
+    }
+    '/en/video': {
+      id: '/en/video'
+      path: '/video'
+      fullPath: '/en/video'
+      preLoaderRoute: typeof EnVideoRouteImport
       parentRoute: typeof EnRoute
     }
     '/en/voice': {
@@ -5011,6 +5154,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RuVcardRouteImport
       parentRoute: typeof RuRoute
     }
+    '/ru/video': {
+      id: '/ru/video'
+      path: '/video'
+      fullPath: '/ru/video'
+      preLoaderRoute: typeof RuVideoRouteImport
+      parentRoute: typeof RuRoute
+    }
     '/ru/voice': {
       id: '/ru/voice'
       path: '/voice'
@@ -5312,6 +5462,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TrVcardRouteImport
       parentRoute: typeof TrRoute
     }
+    '/tr/video': {
+      id: '/tr/video'
+      path: '/video'
+      fullPath: '/tr/video'
+      preLoaderRoute: typeof TrVideoRouteImport
+      parentRoute: typeof TrRoute
+    }
     '/tr/voice': {
       id: '/tr/voice'
       path: '/voice'
@@ -5346,6 +5503,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/tr/zip'
       preLoaderRoute: typeof TrZipRouteImport
       parentRoute: typeof TrRoute
+    }
+    '/video_/$tool': {
+      id: '/video_/$tool'
+      path: '/video/$tool'
+      fullPath: '/video/$tool'
+      preLoaderRoute: typeof VideoToolRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/xeta/$slug': {
       id: '/xeta/$slug'
@@ -5445,6 +5609,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArToolsSlugRouteImport
       parentRoute: typeof ArToolsRoute
     }
+    '/ar/video_/$tool': {
+      id: '/ar/video_/$tool'
+      path: '/video/$tool'
+      fullPath: '/ar/video/$tool'
+      preLoaderRoute: typeof ArVideoToolRouteImport
+      parentRoute: typeof ArRoute
+    }
     '/ar/xeta/$slug': {
       id: '/ar/xeta/$slug'
       path: '/$slug'
@@ -5542,6 +5713,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/en/tools/$slug'
       preLoaderRoute: typeof EnToolsSlugRouteImport
       parentRoute: typeof EnToolsRoute
+    }
+    '/en/video_/$tool': {
+      id: '/en/video_/$tool'
+      path: '/video/$tool'
+      fullPath: '/en/video/$tool'
+      preLoaderRoute: typeof EnVideoToolRouteImport
+      parentRoute: typeof EnRoute
     }
     '/en/xeta/$slug': {
       id: '/en/xeta/$slug'
@@ -5662,6 +5840,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RuToolsSlugRouteImport
       parentRoute: typeof RuToolsRoute
     }
+    '/ru/video_/$tool': {
+      id: '/ru/video_/$tool'
+      path: '/video/$tool'
+      fullPath: '/ru/video/$tool'
+      preLoaderRoute: typeof RuVideoToolRouteImport
+      parentRoute: typeof RuRoute
+    }
     '/ru/vse/$group': {
       id: '/ru/vse/$group'
       path: '/vse/$group'
@@ -5765,6 +5950,13 @@ declare module '@tanstack/react-router' {
       path: '/tumu/$group'
       fullPath: '/tr/tumu/$group'
       preLoaderRoute: typeof TrTumuGroupRouteImport
+      parentRoute: typeof TrRoute
+    }
+    '/tr/video_/$tool': {
+      id: '/tr/video_/$tool'
+      path: '/video/$tool'
+      fullPath: '/tr/video/$tool'
+      preLoaderRoute: typeof TrVideoToolRouteImport
       parentRoute: typeof TrRoute
     }
     '/tr/xeta/$slug': {
@@ -5912,6 +6104,7 @@ interface ArRouteChildren {
   ArTrustRoute: typeof ArTrustRoute
   ArUnknownRoute: typeof ArUnknownRoute
   ArVcardRoute: typeof ArVcardRoute
+  ArVideoRoute: typeof ArVideoRoute
   ArVoiceRoute: typeof ArVoiceRoute
   ArWifiRoute: typeof ArWifiRoute
   ArWorkspaceRoute: typeof ArWorkspaceRoute
@@ -5922,6 +6115,7 @@ interface ArRouteChildren {
   ArLearnLogicRoute: typeof ArLearnLogicRoute
   ArPdfToolRoute: typeof ArPdfToolRoute
   ArProgrammingSlugRoute: typeof ArProgrammingSlugRoute
+  ArVideoToolRoute: typeof ArVideoToolRoute
 }
 
 const ArRouteChildren: ArRouteChildren = {
@@ -5961,6 +6155,7 @@ const ArRouteChildren: ArRouteChildren = {
   ArTrustRoute: ArTrustRoute,
   ArUnknownRoute: ArUnknownRoute,
   ArVcardRoute: ArVcardRoute,
+  ArVideoRoute: ArVideoRoute,
   ArVoiceRoute: ArVoiceRoute,
   ArWifiRoute: ArWifiRoute,
   ArWorkspaceRoute: ArWorkspaceRoute,
@@ -5971,6 +6166,7 @@ const ArRouteChildren: ArRouteChildren = {
   ArLearnLogicRoute: ArLearnLogicRoute,
   ArPdfToolRoute: ArPdfToolRoute,
   ArProgrammingSlugRoute: ArProgrammingSlugRoute,
+  ArVideoToolRoute: ArVideoToolRoute,
 }
 
 const ArRouteWithChildren = ArRoute._addFileChildren(ArRouteChildren)
@@ -6110,6 +6306,7 @@ interface EnRouteChildren {
   EnTrustRoute: typeof EnTrustRoute
   EnUnknownRoute: typeof EnUnknownRoute
   EnVcardRoute: typeof EnVcardRoute
+  EnVideoRoute: typeof EnVideoRoute
   EnVoiceRoute: typeof EnVoiceRoute
   EnWifiRoute: typeof EnWifiRoute
   EnWorkspaceRoute: typeof EnWorkspaceRoute
@@ -6120,6 +6317,7 @@ interface EnRouteChildren {
   EnLearnLogicRoute: typeof EnLearnLogicRoute
   EnPdfToolRoute: typeof EnPdfToolRoute
   EnProgrammingSlugRoute: typeof EnProgrammingSlugRoute
+  EnVideoToolRoute: typeof EnVideoToolRoute
 }
 
 const EnRouteChildren: EnRouteChildren = {
@@ -6159,6 +6357,7 @@ const EnRouteChildren: EnRouteChildren = {
   EnTrustRoute: EnTrustRoute,
   EnUnknownRoute: EnUnknownRoute,
   EnVcardRoute: EnVcardRoute,
+  EnVideoRoute: EnVideoRoute,
   EnVoiceRoute: EnVoiceRoute,
   EnWifiRoute: EnWifiRoute,
   EnWorkspaceRoute: EnWorkspaceRoute,
@@ -6169,6 +6368,7 @@ const EnRouteChildren: EnRouteChildren = {
   EnLearnLogicRoute: EnLearnLogicRoute,
   EnPdfToolRoute: EnPdfToolRoute,
   EnProgrammingSlugRoute: EnProgrammingSlugRoute,
+  EnVideoToolRoute: EnVideoToolRoute,
 }
 
 const EnRouteWithChildren = EnRoute._addFileChildren(EnRouteChildren)
@@ -6381,6 +6581,7 @@ interface RuRouteChildren {
   RuTrustRoute: typeof RuTrustRoute
   RuUnknownRoute: typeof RuUnknownRoute
   RuVcardRoute: typeof RuVcardRoute
+  RuVideoRoute: typeof RuVideoRoute
   RuVoiceRoute: typeof RuVoiceRoute
   RuWifiRoute: typeof RuWifiRoute
   RuWorkspaceRoute: typeof RuWorkspaceRoute
@@ -6391,6 +6592,7 @@ interface RuRouteChildren {
   RuPdfToolRoute: typeof RuPdfToolRoute
   RuProgrammingSlugRoute: typeof RuProgrammingSlugRoute
   RuResourcesSlugRoute: typeof RuResourcesSlugRoute
+  RuVideoToolRoute: typeof RuVideoToolRoute
   RuVseGroupRoute: typeof RuVseGroupRoute
 }
 
@@ -6431,6 +6633,7 @@ const RuRouteChildren: RuRouteChildren = {
   RuTrustRoute: RuTrustRoute,
   RuUnknownRoute: RuUnknownRoute,
   RuVcardRoute: RuVcardRoute,
+  RuVideoRoute: RuVideoRoute,
   RuVoiceRoute: RuVoiceRoute,
   RuWifiRoute: RuWifiRoute,
   RuWorkspaceRoute: RuWorkspaceRoute,
@@ -6441,6 +6644,7 @@ const RuRouteChildren: RuRouteChildren = {
   RuPdfToolRoute: RuPdfToolRoute,
   RuProgrammingSlugRoute: RuProgrammingSlugRoute,
   RuResourcesSlugRoute: RuResourcesSlugRoute,
+  RuVideoToolRoute: RuVideoToolRoute,
   RuVseGroupRoute: RuVseGroupRoute,
 }
 
@@ -6601,6 +6805,7 @@ interface TrRouteChildren {
   TrTrustRoute: typeof TrTrustRoute
   TrUnknownRoute: typeof TrUnknownRoute
   TrVcardRoute: typeof TrVcardRoute
+  TrVideoRoute: typeof TrVideoRoute
   TrVoiceRoute: typeof TrVoiceRoute
   TrWifiRoute: typeof TrWifiRoute
   TrWorkspaceRoute: typeof TrWorkspaceRoute
@@ -6611,6 +6816,7 @@ interface TrRouteChildren {
   TrPdfToolRoute: typeof TrPdfToolRoute
   TrProgrammingSlugRoute: typeof TrProgrammingSlugRoute
   TrTumuGroupRoute: typeof TrTumuGroupRoute
+  TrVideoToolRoute: typeof TrVideoToolRoute
 }
 
 const TrRouteChildren: TrRouteChildren = {
@@ -6650,6 +6856,7 @@ const TrRouteChildren: TrRouteChildren = {
   TrTrustRoute: TrTrustRoute,
   TrUnknownRoute: TrUnknownRoute,
   TrVcardRoute: TrVcardRoute,
+  TrVideoRoute: TrVideoRoute,
   TrVoiceRoute: TrVoiceRoute,
   TrWifiRoute: TrWifiRoute,
   TrWorkspaceRoute: TrWorkspaceRoute,
@@ -6660,6 +6867,7 @@ const TrRouteChildren: TrRouteChildren = {
   TrPdfToolRoute: TrPdfToolRoute,
   TrProgrammingSlugRoute: TrProgrammingSlugRoute,
   TrTumuGroupRoute: TrTumuGroupRoute,
+  TrVideoToolRoute: TrVideoToolRoute,
 }
 
 const TrRouteWithChildren = TrRoute._addFileChildren(TrRouteChildren)
@@ -6731,6 +6939,7 @@ const rootRouteChildren: RootRouteChildren = {
   UnknownRoute: UnknownRoute,
   UnutmaRoute: UnutmaRoute,
   VcardRoute: VcardRoute,
+  VideoRoute: VideoRoute,
   VoiceRoute: VoiceRoute,
   WhyRoute: WhyRoute,
   WifiRoute: WifiRoute,
@@ -6746,6 +6955,7 @@ const rootRouteChildren: RootRouteChildren = {
   PdfToolRoute: PdfToolRoute,
   ProgrammingTopicRoute: ProgrammingTopicRoute,
   ResurslarSlugRoute: ResurslarSlugRoute,
+  VideoToolRoute: VideoToolRoute,
   AppsIndexRoute: AppsIndexRoute,
   GuidesIndexRoute: GuidesIndexRoute,
   ProgrammingIndexRoute: ProgrammingIndexRoute,

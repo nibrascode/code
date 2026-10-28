@@ -4,7 +4,7 @@
  */
 import { legacySectionRedirect } from "../../src/lib/section-slugs";
 
-const PAGES = /^\/(services|why|unutma|guides|privacy|resources|resurslar|programming|about|contact|terms|trust|nedir|apps|qr|erase|image|vcard|zip|planner|calc|ai|soz-sayi|faiz|wifi|seo|flow|logic|unknown|pdf|oyun)(\/.*)?$/;
+const PAGES = /^\/(services|why|unutma|guides|privacy|resources|resurslar|programming|about|contact|terms|trust|nedir|apps|qr|erase|image|vcard|zip|video|planner|calc|ai|soz-sayi|faiz|wifi|seo|flow|logic|unknown|pdf|oyun)(\/.*)?$/;
 
 interface LangEvent {
   url: URL;

@@ -16,6 +16,12 @@ export const LINKS: Record<string, L5> = {
   "/vcard": { az: "Vizit kartı QR", en: "Contact QR", tr: "Kartvizit QR", ar: "QR جهة الاتصال", ru: "QR-визитка" },
   "/zip": { az: "ZIP sıx və aç", en: "Zip & unzip", tr: "ZIP", ar: "ZIP", ru: "ZIP" },
   "/pdf/merge": { az: "PDF birləşdir", en: "Merge PDF", tr: "PDF birleştir", ar: "دمج PDF", ru: "Объединить PDF" },
+  "/video": { az: "Video alətləri", en: "Video tools", tr: "Video araçları", ar: "أدوات الفيديو", ru: "Видео" },
+  "/video/trim": { az: "Video kəs", en: "Trim video", tr: "Video kes", ar: "قص الفيديو", ru: "Обрезать видео" },
+  "/video/convert": { az: "Video çevir / GIF", en: "Convert / GIF", tr: "Dönüştür / GIF", ar: "تحويل / GIF", ru: "Конвертер / GIF" },
+  "/video/merge": { az: "Video birləşdir", en: "Merge videos", tr: "Video birleştir", ar: "دمج الفيديو", ru: "Склеить видео" },
+  "/video/audio": { az: "Videodan səs", en: "Extract audio", tr: "Videodan ses", ar: "استخراج الصوت", ru: "Звук из видео" },
+  "/voice": { az: "Səs", en: "Voice", tr: "Ses", ar: "الصوت", ru: "Голос" },
   "/pdf/compress": { az: "PDF sıx", en: "Compress PDF", tr: "PDF sıkıştır", ar: "ضغط PDF", ru: "Сжать PDF" },
 };
 export const IMAGE_FAMILY = ["/image", "/image/resize", "/image/convert", "/image/edit", "/erase"];
