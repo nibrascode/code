@@ -12,11 +12,11 @@ export const isVideoTool = (v: string): v is VideoTool => (VIDEO_TOOLS as readon
 export const VIDEO_FAMILY = ["/video", "/video/trim", "/video/convert", "/video/merge", "/video/audio"];
 
 const T: Record<Lang, Record<string, string>> = {
-  az: { pick: "Video seçin", picks: "Videoları seçin", drop: "və ya bura buraxın", loading: "Video mühərriki yüklənir (~30 MB, bir dəfə)…", ready: "Hazırdır", start: "Başlanğıc (san)", end: "Son (san)", fast: "Sürətli (yenidən kodlaşdırmadan)", run: "Başla", working: "İşlənir", download: "Yüklə", before: "Əvvəl", after: "Sonra", fail: "Alınmadı. Başqa format və ya daha kiçik video yoxlayın.", format: "Format", width: "En", fps: "Kadr/san", orig: "Orijinal", up: "Yuxarı", down: "Aşağı", remove: "Sil", add: "Video əlavə et", need2: "Ən azı 2 video seçin.", setStart: "Bu an başlanğıc", setEnd: "Bu an son", engineFail: "Mühərrik yüklənmədi. Səhifəni yeniləyin.", open: "Aç" },
-  en: { pick: "Choose a video", picks: "Choose videos", drop: "or drop here", loading: "Loading the video engine (~30 MB, once)…", ready: "Ready", start: "Start (s)", end: "End (s)", fast: "Fast (no re-encode)", run: "Start", working: "Working", download: "Download", before: "Before", after: "After", fail: "That did not work. Try another format or a smaller video.", format: "Format", width: "Width", fps: "FPS", orig: "Original", up: "Up", down: "Down", remove: "Remove", add: "Add video", need2: "Choose at least 2 videos.", setStart: "Set start here", setEnd: "Set end here", engineFail: "The engine did not load. Reload the page.", open: "Open" },
-  tr: { pick: "Video seçin", picks: "Videoları seçin", drop: "veya buraya bırakın", loading: "Video motoru yükleniyor (~30 MB, bir kez)…", ready: "Hazır", start: "Başlangıç (sn)", end: "Bitiş (sn)", fast: "Hızlı (yeniden kodlamasız)", run: "Başlat", working: "İşleniyor", download: "İndir", before: "Önce", after: "Sonra", fail: "Olmadı. Başka biçim veya daha küçük video deneyin.", format: "Biçim", width: "Genişlik", fps: "Kare/sn", orig: "Orijinal", up: "Yukarı", down: "Aşağı", remove: "Sil", add: "Video ekle", need2: "En az 2 video seçin.", setStart: "Başlangıç burası", setEnd: "Bitiş burası", engineFail: "Motor yüklenmedi. Sayfayı yenileyin.", open: "Aç" },
-  ar: { pick: "اختر فيديو", picks: "اختر الفيديوهات", drop: "أو أفلته هنا", loading: "جارٍ تحميل محرك الفيديو (~30 ميغابايت، مرة واحدة)…", ready: "جاهز", start: "البداية (ث)", end: "النهاية (ث)", fast: "سريع (بلا إعادة ترميز)", run: "ابدأ", working: "جارٍ المعالجة", download: "تنزيل", before: "قبل", after: "بعد", fail: "لم ينجح. جرّب صيغة أخرى أو فيديو أصغر.", format: "الصيغة", width: "العرض", fps: "إطار/ث", orig: "الأصلي", up: "أعلى", down: "أسفل", remove: "حذف", add: "إضافة فيديو", need2: "اختر فيديوهين على الأقل.", setStart: "البداية هنا", setEnd: "النهاية هنا", engineFail: "لم يُحمَّل المحرك. أعد تحميل الصفحة.", open: "فتح" },
-  ru: { pick: "Выбрать видео", picks: "Выбрать видео", drop: "или перетащите сюда", loading: "Загружается видеодвижок (~30 МБ, один раз)…", ready: "Готово", start: "Начало (с)", end: "Конец (с)", fast: "Быстро (без перекодирования)", run: "Начать", working: "Обработка", download: "Скачать", before: "До", after: "После", fail: "Не получилось. Попробуйте другой формат или видео поменьше.", format: "Формат", width: "Ширина", fps: "Кадр/с", orig: "Исходная", up: "Вверх", down: "Вниз", remove: "Убрать", add: "Добавить видео", need2: "Выберите минимум 2 видео.", setStart: "Начало здесь", setEnd: "Конец здесь", engineFail: "Движок не загрузился. Обновите страницу.", open: "Открыть" },
+  az: { pick: "Video seçin", picks: "Videoları seçin", drop: "və ya bura buraxın", loading: "Video mühərriki yüklənir (~30 MB, bir dəfə)…", ready: "Hazırdır", start: "Başlanğıc (san)", end: "Son (san)", fast: "Sürətli (yenidən kodlaşdırmadan)", run: "Başla", working: "İşlənir", download: "Yüklə", before: "Əvvəl", after: "Sonra", fail: "Alınmadı. Başqa format və ya daha kiçik video yoxlayın.", format: "Format", width: "En", fps: "Kadr/san", orig: "Orijinal", up: "Yuxarı", down: "Aşağı", remove: "Sil", add: "Video əlavə et", need2: "Ən azı 2 video seçin.", setStart: "Bu an başlanğıc", setEnd: "Bu an son", engineFail: "Mühərrik yüklənmədi. Səhifəni yeniləyin.", sel: "Seçilən hissə", preview: "Seçimi izlə", hint: "Zolaqda tutub sürüşdürün: sol tutacaq başlanğıc, sağ tutacaq son.", open: "Aç" },
+  en: { pick: "Choose a video", picks: "Choose videos", drop: "or drop here", loading: "Loading the video engine (~30 MB, once)…", ready: "Ready", start: "Start (s)", end: "End (s)", fast: "Fast (no re-encode)", run: "Start", working: "Working", download: "Download", before: "Before", after: "After", fail: "That did not work. Try another format or a smaller video.", format: "Format", width: "Width", fps: "FPS", orig: "Original", up: "Up", down: "Down", remove: "Remove", add: "Add video", need2: "Choose at least 2 videos.", setStart: "Set start here", setEnd: "Set end here", engineFail: "The engine did not load. Reload the page.", sel: "Selected part", preview: "Play selection", hint: "Drag on the bar: left handle is the start, right handle is the end.", open: "Open" },
+  tr: { pick: "Video seçin", picks: "Videoları seçin", drop: "veya buraya bırakın", loading: "Video motoru yükleniyor (~30 MB, bir kez)…", ready: "Hazır", start: "Başlangıç (sn)", end: "Bitiş (sn)", fast: "Hızlı (yeniden kodlamasız)", run: "Başlat", working: "İşleniyor", download: "İndir", before: "Önce", after: "Sonra", fail: "Olmadı. Başka biçim veya daha küçük video deneyin.", format: "Biçim", width: "Genişlik", fps: "Kare/sn", orig: "Orijinal", up: "Yukarı", down: "Aşağı", remove: "Sil", add: "Video ekle", need2: "En az 2 video seçin.", setStart: "Başlangıç burası", setEnd: "Bitiş burası", engineFail: "Motor yüklenmedi. Sayfayı yenileyin.", sel: "Seçilen kısım", preview: "Seçimi oynat", hint: "Çubukta sürükleyin: sol tutamaç başlangıç, sağ tutamaç bitiş.", open: "Aç" },
+  ar: { pick: "اختر فيديو", picks: "اختر الفيديوهات", drop: "أو أفلته هنا", loading: "جارٍ تحميل محرك الفيديو (~30 ميغابايت، مرة واحدة)…", ready: "جاهز", start: "البداية (ث)", end: "النهاية (ث)", fast: "سريع (بلا إعادة ترميز)", run: "ابدأ", working: "جارٍ المعالجة", download: "تنزيل", before: "قبل", after: "بعد", fail: "لم ينجح. جرّب صيغة أخرى أو فيديو أصغر.", format: "الصيغة", width: "العرض", fps: "إطار/ث", orig: "الأصلي", up: "أعلى", down: "أسفل", remove: "حذف", add: "إضافة فيديو", need2: "اختر فيديوهين على الأقل.", setStart: "البداية هنا", setEnd: "النهاية هنا", engineFail: "لم يُحمَّل المحرك. أعد تحميل الصفحة.", sel: "الجزء المحدد", preview: "تشغيل التحديد", hint: "اسحب على الشريط: المقبض الأيسر للبداية والأيمن للنهاية.", open: "فتح" },
+  ru: { pick: "Выбрать видео", picks: "Выбрать видео", drop: "или перетащите сюда", loading: "Загружается видеодвижок (~30 МБ, один раз)…", ready: "Готово", start: "Начало (с)", end: "Конец (с)", fast: "Быстро (без перекодирования)", run: "Начать", working: "Обработка", download: "Скачать", before: "До", after: "После", fail: "Не получилось. Попробуйте другой формат или видео поменьше.", format: "Формат", width: "Ширина", fps: "Кадр/с", orig: "Исходная", up: "Вверх", down: "Вниз", remove: "Убрать", add: "Добавить видео", need2: "Выберите минимум 2 видео.", setStart: "Начало здесь", setEnd: "Конец здесь", engineFail: "Движок не загрузился. Обновите страницу.", sel: "Выбранный фрагмент", preview: "Проиграть выбор", hint: "Тяните по полосе: левый маркер — начало, правый — конец.", open: "Открыть" },
 };
 
 let ffPromise: Promise<FFmpeg> | null = null;
@@ -127,6 +127,40 @@ function useJob() {
   return { ...eng, busy, out, fail, go, setOut };
 }
 
+const fmt = (n: number) => { const m = Math.floor(n / 60); const s = n - m * 60; return `${m}:${s < 10 ? "0" : ""}${s.toFixed(1)}`; };
+
+/** Range selector: drag handles or tap the bar; nearest handle jumps there. */
+function Timeline({ t, dur, a, b, now, setA, setB, seek }: { t: Record<string, string>; dur: number; a: number; b: number; now: number; setA: (n: number) => void; setB: (n: number) => void; seek: (n: number) => void }) {
+  const bar = useRef<HTMLDivElement>(null);
+  const drag = useRef<"a" | "b" | null>(null);
+  const at = (x: number) => { const r = bar.current!.getBoundingClientRect(); return Math.round(Math.max(0, Math.min(1, (x - r.left) / r.width)) * dur * 10) / 10; };
+  const apply = (which: "a" | "b", v: number) => { if (which === "a") setA(Math.min(v, b - 0.1 < 0 ? 0 : b - 0.1)); else setB(Math.max(v, a + 0.1 > dur ? dur : a + 0.1)); seek(v); };
+  const pc = (n: number) => `${dur ? (n / dur) * 100 : 0}%`;
+  const handle = (w: "a" | "b") => (
+    <div role="slider" aria-label={w === "a" ? t.start : t.end} aria-valuemin={0} aria-valuemax={Math.round(dur * 10) / 10} aria-valuenow={w === "a" ? a : b} tabIndex={0}
+      onKeyDown={(e) => { const d = e.key === "ArrowLeft" ? -0.1 : e.key === "ArrowRight" ? 0.1 : 0; if (d) { e.preventDefault(); apply(w, Math.round(((w === "a" ? a : b) + d * (e.shiftKey ? 10 : 1)) * 10) / 10); } }}
+      onPointerDown={(e) => { e.stopPropagation(); drag.current = w; bar.current?.setPointerCapture(e.pointerId); }}
+      className="absolute top-1/2 z-10 flex h-11 w-7 -translate-x-1/2 -translate-y-1/2 cursor-ew-resize touch-none items-center justify-center" style={{ left: pc(w === "a" ? a : b) }} data-testid={`trim-handle-${w}`}>
+      <span className="h-9 w-2.5 rounded-full border-2 border-white bg-[#2f6bff] shadow" />
+    </div>
+  );
+  return (
+    <div className="space-y-1">
+      <div dir="ltr" ref={bar} className="relative h-11 cursor-pointer touch-none select-none" data-testid="trim-timeline"
+        onPointerDown={(e) => { const v = at(e.clientX); drag.current = Math.abs(v - a) <= Math.abs(v - b) ? "a" : "b"; bar.current?.setPointerCapture(e.pointerId); apply(drag.current, v); }}
+        onPointerMove={(e) => { if (drag.current) apply(drag.current, at(e.clientX)); }}
+        onPointerUp={() => { drag.current = null; }} onPointerCancel={() => { drag.current = null; }}>
+        <div className="absolute inset-x-0 top-1/2 h-3 -translate-y-1/2 rounded-full bg-white/10" />
+        <div className="absolute top-1/2 h-3 -translate-y-1/2 rounded-full bg-[#2f6bff]/60" style={{ left: pc(a), width: `calc(${pc(b)} - ${pc(a)})` }} />
+        <div className="pointer-events-none absolute top-1 bottom-1 w-0.5 bg-white/80" style={{ left: pc(now) }} />
+        {handle("a")}{handle("b")}
+      </div>
+      <div dir="ltr" className="flex justify-between text-xs text-muted"><span>{fmt(a)}</span><span>{t.sel}: {fmt(Math.max(0, b - a))}</span><span>{fmt(b)}</span></div>
+      <p className="text-xs text-muted">{t.hint}</p>
+    </div>
+  );
+}
+
 function Trim({ t }: { t: Record<string, string> }) {
   const job = useJob();
   const [file, setFile] = useState<File | null>(null);
@@ -134,6 +168,8 @@ function Trim({ t }: { t: Record<string, string> }) {
   const [a, setA] = useState(0);
   const [b, setB] = useState(0);
   const [fast, setFast] = useState(true);
+  const [now, setNow] = useState(0);
+  const stopAt = useRef<number | null>(null);
   const vid = useRef<HTMLVideoElement>(null);
   const src = useMemo(() => (file ? URL.createObjectURL(file) : ""), [file]);
   useEffect(() => () => { if (src) URL.revokeObjectURL(src); }, [src]);
@@ -146,14 +182,17 @@ function Trim({ t }: { t: Record<string, string> }) {
       <Picker t={t} onFiles={(f) => { if (f[0]) { setFile(f[0]); job.setOut(null); } }} />
       {file ? (
         <>
-          <video ref={vid} src={src} controls className="max-h-80 w-full rounded-xl bg-black" onLoadedMetadata={(e) => { const d = e.currentTarget.duration || 0; setDur(d); setA(0); setB(r(d)); }} />
+          <video ref={vid} src={src} controls className="max-h-80 w-full rounded-xl bg-black" onLoadedMetadata={(e) => { const d = e.currentTarget.duration || 0; setDur(d); setA(0); setB(r(d)); }}
+            onTimeUpdate={(e) => { const c = e.currentTarget.currentTime; setNow(c); if (stopAt.current !== null && c >= stopAt.current) { e.currentTarget.pause(); stopAt.current = null; } }} />
+          {dur > 0 ? <Timeline t={t} dur={dur} a={a} b={b} now={now} setA={setA} setB={setB} seek={(n) => { stopAt.current = null; if (vid.current) { vid.current.currentTime = n; setNow(n); } }} /> : null}
           <div className="flex flex-wrap gap-2">
             <button type="button" className={ui.btn} onClick={() => setA(r(vid.current?.currentTime ?? 0))}>{t.setStart}</button>
             <button type="button" className={ui.btn} onClick={() => setB(r(vid.current?.currentTime ?? dur))}>{t.setEnd}</button>
+            <button type="button" className={ui.btn} disabled={b <= a} onClick={() => { const v = vid.current; if (!v) return; v.currentTime = a; stopAt.current = b; void v.play(); }} data-testid="trim-preview">▶ {t.preview}</button>
           </div>
           <div className="grid grid-cols-2 gap-3 text-sm">
-            <label>{t.start}<input className={ui.field} type="number" min={0} step={0.1} value={a} onChange={(e) => setA(Number(e.target.value))} /></label>
-            <label>{t.end}<input className={ui.field} type="number" min={0} step={0.1} value={b} onChange={(e) => setB(Number(e.target.value))} /></label>
+            <label>{t.start}<input className={ui.field} type="number" min={0} step={0.1} max={dur || undefined} value={a} onChange={(e) => setA(Math.max(0, Number(e.target.value)))} /></label>
+            <label>{t.end}<input className={ui.field} type="number" min={0} step={0.1} max={dur || undefined} value={b} onChange={(e) => setB(Math.min(dur || Infinity, Number(e.target.value)))} /></label>
           </div>
           <label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={fast} onChange={(e) => setFast(e.target.checked)} />{t.fast}</label>
           <button type="button" className={ui.primary} disabled={!job.ff || job.busy || b <= a} data-testid="video-run"
