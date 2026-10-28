@@ -11921,3 +11921,10 @@ html[lang="ar"] .why-lead.topic-body,
 .vhub-card:hover .vhub-chev { background: rgba(var(--c),0.18); }
 [dir="rtl"] .vhub-chev { transform: scaleX(-1); }
 @media (max-width: 560px) { .vhub-card { gap: 10px; padding: 11px 12px; } }
+
+/* Report print (Site Doctor, Paket): "Download as PDF" via the print dialog. */
+@media print {
+  body.nx-print-report header:not([data-report-keep]), body.nx-print-report nav, body.nx-print-report footer, body.nx-print-report form input, body.nx-print-report form button, body.nx-print-report .nx-share-report { display: none !important; }
+  body.nx-print-report { background: #fff !important; color: #000 !important; }
+  body.nx-print-report * { color: #000 !important; background: transparent !important; box-shadow: none !important; }
+}

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { ShareReport } from "@/components/share-report";
 import type { Lang } from "@/lib/i18n";
 import { PAKET, paketProblems } from "@/lib/paket";
 
@@ -13,6 +14,12 @@ function Rich({ text }: { text: string }) {
 
 export function PaketTool({ lang }: { lang: Lang }) {
   const [value, setValue] = useState("");
+  useEffect(() => {
+    const q = new URLSearchParams(location.search).get("id");
+    if (q) setValue(q.slice(0, 255));
+    document.body.classList.add("nx-print-report");
+    return () => document.body.classList.remove("nx-print-report");
+  }, []);
   const problems = value.trim() ? paketProblems(value, lang) : [];
   return (
     <main className="why-page" lang={lang} dir={lang === "ar" ? "rtl" : "ltr"}>
@@ -45,7 +52,9 @@ export function PaketTool({ lang }: { lang: Lang }) {
             </ul>
           )
         ) : null}
+        {value.trim() ? <p className="paket-print-id" dir="ltr"><code>{value.trim()}</code></p> : null}
       </form>
+      {value.trim() ? <ShareReport lang={lang} params={{ id: value.trim() }} className="mt-4" /> : null}
     </main>
   );
 }

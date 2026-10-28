@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Activity, AlertTriangle, CheckCircle2, Copy, Search } from "lucide-react";
 import { useI18n } from "@/lib/i18n-context";
 import { ui } from "@/kit/shell";
+import { ShareReport } from "@/components/share-report";
 import { ISSUES, UI } from "./issues";
 
 type Issue = { code: string; severity: "high" | "medium" | "low"; data: Record<string, unknown> & { items?: Record<string, unknown>[] } };
@@ -21,7 +22,9 @@ export function DoctorPage() {
   const t = UI[lang] ?? UI.en;
   const [url, setUrl] = useState("");
   const [busy, setBusy] = useState(false);
-  useEffect(() => { const u = new URLSearchParams(location.search).get("url"); if (u) setUrl(u.slice(0, 2048)); }, []);
+  const [auto, setAuto] = useState(false);
+  useEffect(() => { const u = new URLSearchParams(location.search).get("url"); if (u) { setUrl(u.slice(0, 2048)); setAuto(true); } }, []);
+  useEffect(() => { document.body.classList.add("nx-print-report"); return () => document.body.classList.remove("nx-print-report"); }, []);
   const [err, setErr] = useState("");
   const [rep, setRep] = useState<Report | null>(null);
   const [copied, setCopied] = useState(false);
@@ -34,6 +37,7 @@ export function DoctorPage() {
       if (j.ok) setRep(j); else setErr(t[`e_${j.error}`] ?? t.e_other);
     } catch { setErr(t.e_other); } finally { setBusy(false); }
   };
+  useEffect(() => { if (auto && url) { setAuto(false); void run(); } }, [auto, url]); // eslint-disable-line react-hooks/exhaustive-deps
   const text = (i: Issue) => { const row = ISSUES[i.code]; return row ? row[lang] ?? row.en : null; };
   const order = { high: 0, medium: 1, low: 2 };
   const issues = rep ? [...rep.issues].sort((a, b) => order[a.severity] - order[b.severity]) : [];
@@ -96,7 +100,10 @@ export function DoctorPage() {
             <div><span className="text-xs text-muted">{t.desc}:</span> <span dir="auto">{s.description || "—"}</span></div>
           </div>
           {s.headings.length ? <details className="mt-3 rounded-xl border border-white/10 bg-white/[0.04] p-3 text-sm"><summary className="cursor-pointer font-semibold">{t.heads} ({s.headings.length})</summary><ul className="mt-2 space-y-0.5">{s.headings.map((h, k) => <li key={k} style={{ paddingInlineStart: (h.level - 1) * 12 }} dir="auto"><span className="text-muted">H{h.level}</span> {h.text || "—"}</li>)}</ul></details> : null}
-          <button className={ui.btn + " mt-4 min-h-11"} onClick={() => void copy()}><Copy className="size-4" /> {copied ? t.copied : t.copy}</button>
+          <div className="mt-4 flex flex-wrap gap-2">
+            <button className={ui.btn + " min-h-11"} onClick={() => void copy()}><Copy className="size-4" /> {copied ? t.copied : t.copy}</button>
+            <ShareReport lang={lang} params={{ url: rep.url }} />
+          </div>
         </section>
       ) : null}
       <a className="mt-8 flex items-center justify-between gap-3 rounded-2xl border border-[#ff3d7f]/40 bg-gradient-to-r from-[#ff3d7f]/15 to-[#7a5cff]/10 px-4 py-3 text-sm hover:border-[#ff3d7f]" href={localeHref(lang, "/mirror")} data-testid="doc-to-mirror"><span><b>Nibras Site Mirror</b> · {({ az: "Bütün saytın strukturunu Site Mirror ilə gör (sitemap xəritəsi)", en: "See the whole site structure with Site Mirror (sitemap map)", tr: "Tüm site yapısını Site Mirror ile görün (sitemap haritası)", ar: "شاهد بنية الموقع كاملة مع Site Mirror (خريطة sitemap)", ru: "Вся структура сайта в Site Mirror (карта sitemap)" } as Record<string, string>)[lang] ?? "Site Mirror"}</span><span aria-hidden="true">→</span></a>
