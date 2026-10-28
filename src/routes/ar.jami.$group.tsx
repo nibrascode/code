@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { GroupPage, groupFromSlug, groupMeta } from "@/components/group-page";
 
-export const Route = createFileRoute("/ar/hamisi/$group")({
-  loader: ({ params }) => ({ group: groupFromSlug(params.group) }),
+export const Route = createFileRoute("/ar/jami/$group")({
+  loader: ({ params }) => ({ group: groupFromSlug(params.group, "ar") }),
   head: ({ loaderData }) => ({
     meta: loaderData ? groupMeta("ar", loaderData.group) : [],
   }),

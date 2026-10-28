@@ -1,5 +1,6 @@
 import type { ReactElement } from "react";
 import { localeHref } from "@/lib/locale-path";
+import { groupLocalePath } from "@/lib/group-path";
 import { toolsPath, TOOLS_PAGE } from "@/lib/tools";
 import type { Lang } from "@/lib/i18n";
 
@@ -42,7 +43,7 @@ export const MORE: Record<Lang, string> = { az: "Daha çox", en: "More", tr: "Da
 export const HOME_LIMIT = 4;
 
 export function groupPath(lang: Lang, group: BarGroup) {
-  return localeHref(lang, `/hamisi/${GROUP_SLUG[group]}`);
+  return groupLocalePath(lang, group);
 }
 
 /** All bars per group, most important first (homepage shows the first HOME_LIMIT). */

@@ -1,6 +1,66 @@
 {
   "redirects": [
     {
+      "source": "/en/hamisi/aletler",
+      "destination": "/en/all/tools",
+      "permanent": true
+    },
+    {
+      "source": "/en/hamisi/studio",
+      "destination": "/en/all/studio",
+      "permanent": true
+    },
+    {
+      "source": "/en/hamisi/oyrenme",
+      "destination": "/en/all/learn",
+      "permanent": true
+    },
+    {
+      "source": "/tr/hamisi/aletler",
+      "destination": "/tr/tumu/araclar",
+      "permanent": true
+    },
+    {
+      "source": "/tr/hamisi/studio",
+      "destination": "/tr/tumu/studio",
+      "permanent": true
+    },
+    {
+      "source": "/tr/hamisi/oyrenme",
+      "destination": "/tr/tumu/ogrenme",
+      "permanent": true
+    },
+    {
+      "source": "/ar/hamisi/aletler",
+      "destination": "/ar/jami/adawat",
+      "permanent": true
+    },
+    {
+      "source": "/ar/hamisi/studio",
+      "destination": "/ar/jami/studio",
+      "permanent": true
+    },
+    {
+      "source": "/ar/hamisi/oyrenme",
+      "destination": "/ar/jami/taallum",
+      "permanent": true
+    },
+    {
+      "source": "/ru/hamisi/aletler",
+      "destination": "/ru/vse/instrumenty",
+      "permanent": true
+    },
+    {
+      "source": "/ru/hamisi/studio",
+      "destination": "/ru/vse/studiya",
+      "permanent": true
+    },
+    {
+      "source": "/ru/hamisi/oyrenme",
+      "destination": "/ru/vse/obuchenie",
+      "permanent": true
+    },
+    {
       "source": "/xidmetler",
       "destination": "/services",
       "permanent": true

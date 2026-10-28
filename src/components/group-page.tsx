@@ -1,6 +1,7 @@
 import { notFound } from "@tanstack/react-router";
 import { HelpCircle, Info, ShieldCheck } from "lucide-react";
-import { BAR_GROUPS, BarGroupView, GROUP_SLUG, type BarGroup } from "@/components/home-bars";
+import { groupKeyFromSlug, groupLocalePath } from "@/lib/group-path";
+import { BAR_GROUPS, BarGroupView, type BarGroup } from "@/components/home-bars";
 import { InfoCard, InfoCards, splitSentences } from "@/components/info-card";
 import { homePath, localeHref } from "@/lib/locale-path";
 import type { Lang } from "@/lib/i18n";
@@ -105,8 +106,8 @@ const PRIV: Record<BarGroup, L> = {
   },
 };
 
-export function groupFromSlug(slug: string): BarGroup {
-  const found = (Object.keys(GROUP_SLUG) as BarGroup[]).find((g) => GROUP_SLUG[g] === slug);
+export function groupFromSlug(slug: string, lang: Lang = "az"): BarGroup {
+  const found = groupKeyFromSlug(lang, slug);
   if (!found) throw notFound();
   return found;
 }
@@ -127,6 +128,7 @@ export function groupMeta(lang: Lang, group: BarGroup) {
     { property: "og:title", content: title },
     { name: "description", content: description },
     { property: "og:description", content: description },
+    { property: "og:url", content: `https://nibrascode.com${groupLocalePath(lang, group)}` },
   ];
 }
 

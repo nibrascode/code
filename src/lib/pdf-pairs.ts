@@ -1,3 +1,4 @@
+import { groupFromPath, groupLocalePath } from "@/lib/group-path";
 import type { Lang } from "@/lib/i18n";
 import { homePath, isSplitPage, localeHref, stripLocalePrefix } from "@/lib/locale-path";
 import { faqFromPath, faqPath, faqTopicFromPath, faqTopicPath } from "@/lib/faq";
@@ -40,6 +41,8 @@ export function pdfPairFromPath(pathname: string) {
 }
 
 export function hrefForLang(pathname: string, lang: Lang) {
+  const grp = groupFromPath(pathname);
+  if (grp) return groupLocalePath(lang, grp.group);
   const tool = toolFromPath(pathname);
   if (tool) return toolPath(lang, tool.id);
   if (toolsFromPath(pathname)) return toolsPath(lang);

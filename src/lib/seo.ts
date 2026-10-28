@@ -1,3 +1,4 @@
+import { groupFromPath, groupLocalePath } from "@/lib/group-path";
 import { LANGS, type Lang } from "@/lib/i18n";
 import { isSplitPage, localeHref, stripLocalePrefix, homePath } from "@/lib/locale-path";
 import { faqAnswerText, faqFromPath, faqPath, faqTopicFromPath, faqTopicPath } from "@/lib/faq";
@@ -1132,6 +1133,8 @@ function pageCopy(pathname: string, lang: Lang) {
       keywords: item.label[tool.lang],
     };
   }
+  const grp = groupFromPath(path);
+  if (grp) return `${SITE}${groupLocalePath(grp.lang, grp.group)}`;
   const tools = toolsFromPath(path);
   if (tools) {
     return {
