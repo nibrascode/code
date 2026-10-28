@@ -9,8 +9,9 @@ export type ScanPrivacy = {
 export const SCAN_PRIVACY: Record<Lang, ScanPrivacy> = {
   az: {
     title: "Nibras Scan məxfilik siyasəti",
-    updated: "Son yenilənmə: 27 oktyabr 2026 · Tətbiq versiyası 1.0.0",
+    updated: "Son yenilənmə: 28 oktyabr 2026 · Tətbiq versiyası 1.0.1",
     paragraphs: [
+      "Tətbiq: Nibras Scan · Developer: Nibras Code · Əlaqə: nibrascode@gmail.com · 简体中文: https://nibrascode.com/privacy/nibras-scan-zh.html",
       "1. Qısa məzmun",
       "Nibras Scan sənəd skaneridir. Skan etdiyiniz hər şey yalnız sizin cihazınızda işlənir və saxlanılır. Bu tətbiq üçün server işlətmirik, hesab tələb etmirik və reklam göstərmirik. Şəxsi məlumatlarınızı toplamırıq, satmırıq və üçüncü tərəflərlə paylaşmırıq.",
       "2. Toplamadığımız məlumatlar",
@@ -32,13 +33,14 @@ export const SCAN_PRIVACY: Record<Lang, ScanPrivacy> = {
       "10. Siyasətdəki dəyişikliklər",
       "Siyasəti dəyişsək, tarixi yeniləyəcək və yeni versiyanı tətbiqdə və bu səhifədə dərc edəcəyik.",
       "11. Əlaqə",
-      "Bu siyasətlə bağlı suallar üçün nibrascode@gmail.com ünvanına yazın.",
+      "Bu siyasətlə bağlı suallar üçün nibrascode@gmail.com ünvanına yazın. Developer: Nibras Code.",
     ],
   },
   en: {
     title: "Nibras Scan privacy policy",
-    updated: "Last updated: 27 October 2026 · App version 1.0.0",
+    updated: "Last updated: 28 October 2026 · App version 1.0.1",
     paragraphs: [
+      "App: Nibras Scan · Developer: Nibras Code · Contact: nibrascode@gmail.com · 简体中文: https://nibrascode.com/privacy/nibras-scan-zh.html",
       "1. Summary",
       "Nibras Scan is a document scanner. Everything you scan is processed and stored on your device. We do not run servers for this app, we do not create accounts and we do not show ads. We do not collect, sell or share your personal data.",
       "2. Information we do not collect",
@@ -60,13 +62,14 @@ export const SCAN_PRIVACY: Record<Lang, ScanPrivacy> = {
       "10. Changes to this policy",
       "If we change this policy, we will update the date and publish the new version in the app and on this page.",
       "11. Contact",
-      "For questions about this policy, write to nibrascode@gmail.com.",
+      "For questions about this policy, write to nibrascode@gmail.com. Developer: Nibras Code.",
     ],
   },
   tr: {
     title: "Nibras Scan gizlilik politikası",
-    updated: "Son güncelleme: 27 Ekim 2026 · Uygulama sürümü 1.0.0",
+    updated: "Son güncelleme: 28 Ekim 2026 · Uygulama sürümü 1.0.1",
     paragraphs: [
+      "Uygulama: Nibras Scan · Geliştirici: Nibras Code · İletişim: nibrascode@gmail.com · 简体中文: https://nibrascode.com/privacy/nibras-scan-zh.html",
       "1. Özet",
       "Nibras Scan bir belge tarayıcısıdır. Taradığınız her şey yalnızca cihazınızda işlenir ve saklanır. Bu uygulama için sunucu çalıştırmıyor, hesap oluşturmuyor ve reklam göstermiyoruz. Kişisel verilerinizi toplamıyor, satmıyor ve paylaşmıyoruz.",
       "2. Toplamadığımız bilgiler",
@@ -88,13 +91,14 @@ export const SCAN_PRIVACY: Record<Lang, ScanPrivacy> = {
       "10. Politika değişiklikleri",
       "Bu politikayı değiştirirsek tarihi güncelleyecek ve yeni sürümü uygulamada ve bu sayfada yayımlayacağız.",
       "11. İletişim",
-      "Bu politika hakkındaki sorularınız için nibrascode@gmail.com adresine yazın.",
+      "Bu politika hakkındaki sorularınız için nibrascode@gmail.com adresine yazın. Geliştirici: Nibras Code.",
     ],
   },
   ar: {
     title: "سياسة خصوصية Nibras Scan",
-    updated: "آخر تحديث: 27 أكتوبر 2026 · إصدار التطبيق 1.0.0",
+    updated: "آخر تحديث: 28 أكتوبر 2026 · إصدار التطبيق 1.0.1",
     paragraphs: [
+      "التطبيق: Nibras Scan · المطوّر: Nibras Code · التواصل: nibrascode@gmail.com · 简体中文: https://nibrascode.com/privacy/nibras-scan-zh.html",
       "1. ملخص",
       "Nibras Scan ماسح ضوئي للمستندات. كل ما تمسحه تتم معالجته وحفظه على جهازك فقط. لا نشغّل خوادم لهذا التطبيق، ولا ننشئ حسابات، ولا نعرض إعلانات. لا نجمع بياناتك الشخصية ولا نبيعها ولا نشاركها.",
       "2. المعلومات التي لا نجمعها",
@@ -116,13 +120,14 @@ export const SCAN_PRIVACY: Record<Lang, ScanPrivacy> = {
       "10. التغييرات على هذه السياسة",
       "إذا غيّرنا هذه السياسة فسنحدّث التاريخ وننشر النسخة الجديدة في التطبيق وفي هذه الصفحة.",
       "11. التواصل",
-      "للأسئلة حول هذه السياسة راسلنا على nibrascode@gmail.com.",
+      "للأسئلة حول هذه السياسة راسلنا على nibrascode@gmail.com. المطوّر: Nibras Code.",
     ],
   },
   ru: {
     title: "Политика конфиденциальности Nibras Scan",
-    updated: "Последнее обновление: 27 октября 2026 · Версия приложения 1.0.0",
+    updated: "Последнее обновление: 28 октября 2026 · Версия приложения 1.0.1",
     paragraphs: [
+      "Приложение: Nibras Scan · Разработчик: Nibras Code · Контакт: nibrascode@gmail.com · 简体中文: https://nibrascode.com/privacy/nibras-scan-zh.html",
       "1. Кратко",
       "Nibras Scan — сканер документов. Всё, что вы сканируете, обрабатывается и хранится только на вашем устройстве. Мы не используем серверы для этого приложения, не создаём аккаунты и не показываем рекламу. Мы не собираем, не продаём и не передаём ваши персональные данные.",
       "2. Какие данные мы не собираем",
@@ -144,7 +149,7 @@ export const SCAN_PRIVACY: Record<Lang, ScanPrivacy> = {
       "10. Изменения политики",
       "Если мы изменим политику, мы обновим дату и опубликуем новую версию в приложении и на этой странице.",
       "11. Контакты",
-      "Вопросы об этой политике присылайте на nibrascode@gmail.com.",
+      "Вопросы об этой политике присылайте на nibrascode@gmail.com. Разработчик: Nibras Code.",
     ],
   },
 };

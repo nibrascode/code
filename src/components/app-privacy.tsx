@@ -172,6 +172,13 @@ export function AppPrivacyView({ slug, rows }: { slug: string; rows: StudioPriva
           </InfoCard>
         ))}
       </InfoCards>
+      {slug === "nibras-scan" ? (
+        <p>
+          <a href="/privacy/nibras-scan-zh.html" lang="zh-Hans">
+            简体中文版隐私政策 (Chinese privacy policy)
+          </a>
+        </p>
+      ) : null}
       {slug === "nibras-qr" ? (
         <p>
           <a href={localeHref(lang, "/privacy/nibras-qr/delete-account")}>
