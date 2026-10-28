@@ -1,6 +1,31 @@
 {
   "redirects": [
     {
+      "source": "/xidmetler",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/en/xidmetler",
+      "destination": "/en/services",
+      "permanent": true
+    },
+    {
+      "source": "/tr/xidmetler",
+      "destination": "/tr/services",
+      "permanent": true
+    },
+    {
+      "source": "/ar/xidmetler",
+      "destination": "/ar/services",
+      "permanent": true
+    },
+    {
+      "source": "/ru/xidmetler",
+      "destination": "/ru/services",
+      "permanent": true
+    },
+    {
       "source": "/al",
       "destination": "/ai",
       "permanent": true

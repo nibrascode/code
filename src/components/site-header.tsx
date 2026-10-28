@@ -73,7 +73,7 @@ export function SiteFooter() {
   return (
     <footer className="site-footer">
       <nav className="footer-panels" aria-label="Nibras Code">
-        <a className="footer-faq" href={localeHref(lang, "/xidmetler")}>
+        <a className="footer-faq" href={localeHref(lang, "/services")}>
           {SERVICES_LABEL[lang]}
         </a>
         <NavMenu section="resources" />

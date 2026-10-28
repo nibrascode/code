@@ -39,6 +39,7 @@ import { Route as QrRouteImport } from './routes/qr'
 import { Route as RuRouteImport } from './routes/ru'
 import { Route as SchemaRouteImport } from './routes/schema'
 import { Route as SeoRouteImport } from './routes/seo'
+import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ShortcutsRouteImport } from './routes/shortcuts'
 import { Route as SozRouteImport } from './routes/soz'
 import { Route as SozSayiRouteImport } from './routes/soz-sayi'
@@ -55,7 +56,6 @@ import { Route as WhyRouteImport } from './routes/why'
 import { Route as WifiRouteImport } from './routes/wifi'
 import { Route as WorkspaceRouteImport } from './routes/workspace'
 import { Route as XetaRouteImport } from './routes/xeta'
-import { Route as XidmetlerRouteImport } from './routes/xidmetler'
 import { Route as ZipRouteImport } from './routes/zip'
 import { Route as AppsIndexRouteImport } from './routes/apps/index'
 import { Route as AppsSlugRouteImport } from './routes/apps/$slug'
@@ -84,6 +84,7 @@ import { Route as ArPlannerRouteImport } from './routes/ar.planner'
 import { Route as ArQrRouteImport } from './routes/ar.qr'
 import { Route as ArSchemaRouteImport } from './routes/ar.schema'
 import { Route as ArSeoRouteImport } from './routes/ar.seo'
+import { Route as ArServicesRouteImport } from './routes/ar.services'
 import { Route as ArShortcutsRouteImport } from './routes/ar.shortcuts'
 import { Route as ArSozRouteImport } from './routes/ar.soz'
 import { Route as ArSozSayiRouteImport } from './routes/ar.soz-sayi'
@@ -97,7 +98,6 @@ import { Route as ArVcardRouteImport } from './routes/ar.vcard'
 import { Route as ArWifiRouteImport } from './routes/ar.wifi'
 import { Route as ArWorkspaceRouteImport } from './routes/ar.workspace'
 import { Route as ArXetaRouteImport } from './routes/ar.xeta'
-import { Route as ArXidmetlerRouteImport } from './routes/ar.xidmetler'
 import { Route as ArZipRouteImport } from './routes/ar.zip'
 import { Route as EnAboutRouteImport } from './routes/en.about'
 import { Route as EnAppsRouteImport } from './routes/en.apps'
@@ -124,6 +124,7 @@ import { Route as EnPlannerRouteImport } from './routes/en.planner'
 import { Route as EnQrRouteImport } from './routes/en.qr'
 import { Route as EnSchemaRouteImport } from './routes/en.schema'
 import { Route as EnSeoRouteImport } from './routes/en.seo'
+import { Route as EnServicesRouteImport } from './routes/en.services'
 import { Route as EnShortcutsRouteImport } from './routes/en.shortcuts'
 import { Route as EnSozRouteImport } from './routes/en.soz'
 import { Route as EnSozSayiRouteImport } from './routes/en.soz-sayi'
@@ -137,7 +138,6 @@ import { Route as EnVcardRouteImport } from './routes/en.vcard'
 import { Route as EnWifiRouteImport } from './routes/en.wifi'
 import { Route as EnWorkspaceRouteImport } from './routes/en.workspace'
 import { Route as EnXetaRouteImport } from './routes/en.xeta'
-import { Route as EnXidmetlerRouteImport } from './routes/en.xidmetler'
 import { Route as EnZipRouteImport } from './routes/en.zip'
 import { Route as FaqSlugRouteImport } from './routes/faq.$slug'
 import { Route as GuidesIndexRouteImport } from './routes/guides/index'
@@ -185,6 +185,7 @@ import { Route as RuPlannerRouteImport } from './routes/ru.planner'
 import { Route as RuQrRouteImport } from './routes/ru.qr'
 import { Route as RuSchemaRouteImport } from './routes/ru.schema'
 import { Route as RuSeoRouteImport } from './routes/ru.seo'
+import { Route as RuServicesRouteImport } from './routes/ru.services'
 import { Route as RuShortcutsRouteImport } from './routes/ru.shortcuts'
 import { Route as RuSozRouteImport } from './routes/ru.soz'
 import { Route as RuSozSayiRouteImport } from './routes/ru.soz-sayi'
@@ -198,7 +199,6 @@ import { Route as RuVcardRouteImport } from './routes/ru.vcard'
 import { Route as RuWifiRouteImport } from './routes/ru.wifi'
 import { Route as RuWorkspaceRouteImport } from './routes/ru.workspace'
 import { Route as RuXetaRouteImport } from './routes/ru.xeta'
-import { Route as RuXidmetlerRouteImport } from './routes/ru.xidmetler'
 import { Route as RuZipRouteImport } from './routes/ru.zip'
 import { Route as SozSlugRouteImport } from './routes/soz.$slug'
 import { Route as ToolsSlugRouteImport } from './routes/tools.$slug'
@@ -227,6 +227,7 @@ import { Route as TrPlannerRouteImport } from './routes/tr.planner'
 import { Route as TrQrRouteImport } from './routes/tr.qr'
 import { Route as TrSchemaRouteImport } from './routes/tr.schema'
 import { Route as TrSeoRouteImport } from './routes/tr.seo'
+import { Route as TrServicesRouteImport } from './routes/tr.services'
 import { Route as TrShortcutsRouteImport } from './routes/tr.shortcuts'
 import { Route as TrSozRouteImport } from './routes/tr.soz'
 import { Route as TrSozSayiRouteImport } from './routes/tr.soz-sayi'
@@ -240,7 +241,6 @@ import { Route as TrVcardRouteImport } from './routes/tr.vcard'
 import { Route as TrWifiRouteImport } from './routes/tr.wifi'
 import { Route as TrWorkspaceRouteImport } from './routes/tr.workspace'
 import { Route as TrXetaRouteImport } from './routes/tr.xeta'
-import { Route as TrXidmetlerRouteImport } from './routes/tr.xidmetler'
 import { Route as TrZipRouteImport } from './routes/tr.zip'
 import { Route as XetaSlugRouteImport } from './routes/xeta.$slug'
 import { Route as ArAppsSlugRouteImport } from './routes/ar.apps.$slug'
@@ -454,6 +454,11 @@ const SeoRoute = SeoRouteImport.update({
   path: '/seo',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesRoute = ServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ShortcutsRoute = ShortcutsRouteImport.update({
   id: '/shortcuts',
   path: '/shortcuts',
@@ -532,11 +537,6 @@ const WorkspaceRoute = WorkspaceRouteImport.update({
 const XetaRoute = XetaRouteImport.update({
   id: '/xeta',
   path: '/xeta',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const XidmetlerRoute = XidmetlerRouteImport.update({
-  id: '/xidmetler',
-  path: '/xidmetler',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ZipRoute = ZipRouteImport.update({
@@ -679,6 +679,11 @@ const ArSeoRoute = ArSeoRouteImport.update({
   path: '/seo',
   getParentRoute: () => ArRoute,
 } as any)
+const ArServicesRoute = ArServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => ArRoute,
+} as any)
 const ArShortcutsRoute = ArShortcutsRouteImport.update({
   id: '/shortcuts',
   path: '/shortcuts',
@@ -742,11 +747,6 @@ const ArWorkspaceRoute = ArWorkspaceRouteImport.update({
 const ArXetaRoute = ArXetaRouteImport.update({
   id: '/xeta',
   path: '/xeta',
-  getParentRoute: () => ArRoute,
-} as any)
-const ArXidmetlerRoute = ArXidmetlerRouteImport.update({
-  id: '/xidmetler',
-  path: '/xidmetler',
   getParentRoute: () => ArRoute,
 } as any)
 const ArZipRoute = ArZipRouteImport.update({
@@ -879,6 +879,11 @@ const EnSeoRoute = EnSeoRouteImport.update({
   path: '/seo',
   getParentRoute: () => EnRoute,
 } as any)
+const EnServicesRoute = EnServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => EnRoute,
+} as any)
 const EnShortcutsRoute = EnShortcutsRouteImport.update({
   id: '/shortcuts',
   path: '/shortcuts',
@@ -942,11 +947,6 @@ const EnWorkspaceRoute = EnWorkspaceRouteImport.update({
 const EnXetaRoute = EnXetaRouteImport.update({
   id: '/xeta',
   path: '/xeta',
-  getParentRoute: () => EnRoute,
-} as any)
-const EnXidmetlerRoute = EnXidmetlerRouteImport.update({
-  id: '/xidmetler',
-  path: '/xidmetler',
   getParentRoute: () => EnRoute,
 } as any)
 const EnZipRoute = EnZipRouteImport.update({
@@ -1184,6 +1184,11 @@ const RuSeoRoute = RuSeoRouteImport.update({
   path: '/seo',
   getParentRoute: () => RuRoute,
 } as any)
+const RuServicesRoute = RuServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => RuRoute,
+} as any)
 const RuShortcutsRoute = RuShortcutsRouteImport.update({
   id: '/shortcuts',
   path: '/shortcuts',
@@ -1247,11 +1252,6 @@ const RuWorkspaceRoute = RuWorkspaceRouteImport.update({
 const RuXetaRoute = RuXetaRouteImport.update({
   id: '/xeta',
   path: '/xeta',
-  getParentRoute: () => RuRoute,
-} as any)
-const RuXidmetlerRoute = RuXidmetlerRouteImport.update({
-  id: '/xidmetler',
-  path: '/xidmetler',
   getParentRoute: () => RuRoute,
 } as any)
 const RuZipRoute = RuZipRouteImport.update({
@@ -1394,6 +1394,11 @@ const TrSeoRoute = TrSeoRouteImport.update({
   path: '/seo',
   getParentRoute: () => TrRoute,
 } as any)
+const TrServicesRoute = TrServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => TrRoute,
+} as any)
 const TrShortcutsRoute = TrShortcutsRouteImport.update({
   id: '/shortcuts',
   path: '/shortcuts',
@@ -1457,11 +1462,6 @@ const TrWorkspaceRoute = TrWorkspaceRouteImport.update({
 const TrXetaRoute = TrXetaRouteImport.update({
   id: '/xeta',
   path: '/xeta',
-  getParentRoute: () => TrRoute,
-} as any)
-const TrXidmetlerRoute = TrXidmetlerRouteImport.update({
-  id: '/xidmetler',
-  path: '/xidmetler',
   getParentRoute: () => TrRoute,
 } as any)
 const TrZipRoute = TrZipRouteImport.update({
@@ -1807,6 +1807,7 @@ export interface FileRoutesByFullPath {
   '/ru': typeof RuRouteWithChildren
   '/schema': typeof SchemaRoute
   '/seo': typeof SeoRoute
+  '/services': typeof ServicesRoute
   '/shortcuts': typeof ShortcutsRoute
   '/soz': typeof SozRouteWithChildren
   '/soz-sayi': typeof SozSayiRoute
@@ -1823,7 +1824,6 @@ export interface FileRoutesByFullPath {
   '/wifi': typeof WifiRoute
   '/workspace': typeof WorkspaceRoute
   '/xeta': typeof XetaRouteWithChildren
-  '/xidmetler': typeof XidmetlerRoute
   '/zip': typeof ZipRoute
   '/resources/$topic': typeof ResourcesTopicRouteRouteWithChildren
   '/apps/$slug': typeof AppsSlugRoute
@@ -1852,6 +1852,7 @@ export interface FileRoutesByFullPath {
   '/ar/qr': typeof ArQrRoute
   '/ar/schema': typeof ArSchemaRoute
   '/ar/seo': typeof ArSeoRoute
+  '/ar/services': typeof ArServicesRoute
   '/ar/shortcuts': typeof ArShortcutsRoute
   '/ar/soz': typeof ArSozRouteWithChildren
   '/ar/soz-sayi': typeof ArSozSayiRoute
@@ -1865,7 +1866,6 @@ export interface FileRoutesByFullPath {
   '/ar/wifi': typeof ArWifiRoute
   '/ar/workspace': typeof ArWorkspaceRoute
   '/ar/xeta': typeof ArXetaRouteWithChildren
-  '/ar/xidmetler': typeof ArXidmetlerRoute
   '/ar/zip': typeof ArZipRoute
   '/en/about': typeof EnAboutRoute
   '/en/apps': typeof EnAppsRouteWithChildren
@@ -1892,6 +1892,7 @@ export interface FileRoutesByFullPath {
   '/en/qr': typeof EnQrRoute
   '/en/schema': typeof EnSchemaRoute
   '/en/seo': typeof EnSeoRoute
+  '/en/services': typeof EnServicesRoute
   '/en/shortcuts': typeof EnShortcutsRoute
   '/en/soz': typeof EnSozRouteWithChildren
   '/en/soz-sayi': typeof EnSozSayiRoute
@@ -1905,7 +1906,6 @@ export interface FileRoutesByFullPath {
   '/en/wifi': typeof EnWifiRoute
   '/en/workspace': typeof EnWorkspaceRoute
   '/en/xeta': typeof EnXetaRouteWithChildren
-  '/en/xidmetler': typeof EnXidmetlerRoute
   '/en/zip': typeof EnZipRoute
   '/faq/$slug': typeof FaqSlugRoute
   '/guides/$topic': typeof GuidesTopicRoute
@@ -1949,6 +1949,7 @@ export interface FileRoutesByFullPath {
   '/ru/qr': typeof RuQrRoute
   '/ru/schema': typeof RuSchemaRoute
   '/ru/seo': typeof RuSeoRoute
+  '/ru/services': typeof RuServicesRoute
   '/ru/shortcuts': typeof RuShortcutsRoute
   '/ru/soz': typeof RuSozRouteWithChildren
   '/ru/soz-sayi': typeof RuSozSayiRoute
@@ -1962,7 +1963,6 @@ export interface FileRoutesByFullPath {
   '/ru/wifi': typeof RuWifiRoute
   '/ru/workspace': typeof RuWorkspaceRoute
   '/ru/xeta': typeof RuXetaRouteWithChildren
-  '/ru/xidmetler': typeof RuXidmetlerRoute
   '/ru/zip': typeof RuZipRoute
   '/soz/$slug': typeof SozSlugRoute
   '/tools/$slug': typeof ToolsSlugRoute
@@ -1991,6 +1991,7 @@ export interface FileRoutesByFullPath {
   '/tr/qr': typeof TrQrRoute
   '/tr/schema': typeof TrSchemaRoute
   '/tr/seo': typeof TrSeoRoute
+  '/tr/services': typeof TrServicesRoute
   '/tr/shortcuts': typeof TrShortcutsRoute
   '/tr/soz': typeof TrSozRouteWithChildren
   '/tr/soz-sayi': typeof TrSozSayiRoute
@@ -2004,7 +2005,6 @@ export interface FileRoutesByFullPath {
   '/tr/wifi': typeof TrWifiRoute
   '/tr/workspace': typeof TrWorkspaceRoute
   '/tr/xeta': typeof TrXetaRouteWithChildren
-  '/tr/xidmetler': typeof TrXidmetlerRoute
   '/tr/zip': typeof TrZipRoute
   '/xeta/$slug': typeof XetaSlugRoute
   '/apps/': typeof AppsIndexRoute
@@ -2103,6 +2103,7 @@ export interface FileRoutesByTo {
   '/ru': typeof RuRouteWithChildren
   '/schema': typeof SchemaRoute
   '/seo': typeof SeoRoute
+  '/services': typeof ServicesRoute
   '/shortcuts': typeof ShortcutsRoute
   '/soz': typeof SozRouteWithChildren
   '/soz-sayi': typeof SozSayiRoute
@@ -2119,7 +2120,6 @@ export interface FileRoutesByTo {
   '/wifi': typeof WifiRoute
   '/workspace': typeof WorkspaceRoute
   '/xeta': typeof XetaRouteWithChildren
-  '/xidmetler': typeof XidmetlerRoute
   '/zip': typeof ZipRoute
   '/apps/$slug': typeof AppsSlugRoute
   '/ar/about': typeof ArAboutRoute
@@ -2147,6 +2147,7 @@ export interface FileRoutesByTo {
   '/ar/qr': typeof ArQrRoute
   '/ar/schema': typeof ArSchemaRoute
   '/ar/seo': typeof ArSeoRoute
+  '/ar/services': typeof ArServicesRoute
   '/ar/shortcuts': typeof ArShortcutsRoute
   '/ar/soz': typeof ArSozRouteWithChildren
   '/ar/soz-sayi': typeof ArSozSayiRoute
@@ -2160,7 +2161,6 @@ export interface FileRoutesByTo {
   '/ar/wifi': typeof ArWifiRoute
   '/ar/workspace': typeof ArWorkspaceRoute
   '/ar/xeta': typeof ArXetaRouteWithChildren
-  '/ar/xidmetler': typeof ArXidmetlerRoute
   '/ar/zip': typeof ArZipRoute
   '/en/about': typeof EnAboutRoute
   '/en/apps': typeof EnAppsRouteWithChildren
@@ -2187,6 +2187,7 @@ export interface FileRoutesByTo {
   '/en/qr': typeof EnQrRoute
   '/en/schema': typeof EnSchemaRoute
   '/en/seo': typeof EnSeoRoute
+  '/en/services': typeof EnServicesRoute
   '/en/shortcuts': typeof EnShortcutsRoute
   '/en/soz': typeof EnSozRouteWithChildren
   '/en/soz-sayi': typeof EnSozSayiRoute
@@ -2200,7 +2201,6 @@ export interface FileRoutesByTo {
   '/en/wifi': typeof EnWifiRoute
   '/en/workspace': typeof EnWorkspaceRoute
   '/en/xeta': typeof EnXetaRouteWithChildren
-  '/en/xidmetler': typeof EnXidmetlerRoute
   '/en/zip': typeof EnZipRoute
   '/faq/$slug': typeof FaqSlugRoute
   '/guides/$topic': typeof GuidesTopicRoute
@@ -2244,6 +2244,7 @@ export interface FileRoutesByTo {
   '/ru/qr': typeof RuQrRoute
   '/ru/schema': typeof RuSchemaRoute
   '/ru/seo': typeof RuSeoRoute
+  '/ru/services': typeof RuServicesRoute
   '/ru/shortcuts': typeof RuShortcutsRoute
   '/ru/soz': typeof RuSozRouteWithChildren
   '/ru/soz-sayi': typeof RuSozSayiRoute
@@ -2257,7 +2258,6 @@ export interface FileRoutesByTo {
   '/ru/wifi': typeof RuWifiRoute
   '/ru/workspace': typeof RuWorkspaceRoute
   '/ru/xeta': typeof RuXetaRouteWithChildren
-  '/ru/xidmetler': typeof RuXidmetlerRoute
   '/ru/zip': typeof RuZipRoute
   '/soz/$slug': typeof SozSlugRoute
   '/tools/$slug': typeof ToolsSlugRoute
@@ -2286,6 +2286,7 @@ export interface FileRoutesByTo {
   '/tr/qr': typeof TrQrRoute
   '/tr/schema': typeof TrSchemaRoute
   '/tr/seo': typeof TrSeoRoute
+  '/tr/services': typeof TrServicesRoute
   '/tr/shortcuts': typeof TrShortcutsRoute
   '/tr/soz': typeof TrSozRouteWithChildren
   '/tr/soz-sayi': typeof TrSozSayiRoute
@@ -2299,7 +2300,6 @@ export interface FileRoutesByTo {
   '/tr/wifi': typeof TrWifiRoute
   '/tr/workspace': typeof TrWorkspaceRoute
   '/tr/xeta': typeof TrXetaRouteWithChildren
-  '/tr/xidmetler': typeof TrXidmetlerRoute
   '/tr/zip': typeof TrZipRoute
   '/xeta/$slug': typeof XetaSlugRoute
   '/apps': typeof AppsIndexRoute
@@ -2399,6 +2399,7 @@ export interface FileRoutesById {
   '/ru': typeof RuRouteWithChildren
   '/schema': typeof SchemaRoute
   '/seo': typeof SeoRoute
+  '/services': typeof ServicesRoute
   '/shortcuts': typeof ShortcutsRoute
   '/soz': typeof SozRouteWithChildren
   '/soz-sayi': typeof SozSayiRoute
@@ -2415,7 +2416,6 @@ export interface FileRoutesById {
   '/wifi': typeof WifiRoute
   '/workspace': typeof WorkspaceRoute
   '/xeta': typeof XetaRouteWithChildren
-  '/xidmetler': typeof XidmetlerRoute
   '/zip': typeof ZipRoute
   '/resources/$topic': typeof ResourcesTopicRouteRouteWithChildren
   '/apps/$slug': typeof AppsSlugRoute
@@ -2444,6 +2444,7 @@ export interface FileRoutesById {
   '/ar/qr': typeof ArQrRoute
   '/ar/schema': typeof ArSchemaRoute
   '/ar/seo': typeof ArSeoRoute
+  '/ar/services': typeof ArServicesRoute
   '/ar/shortcuts': typeof ArShortcutsRoute
   '/ar/soz': typeof ArSozRouteWithChildren
   '/ar/soz-sayi': typeof ArSozSayiRoute
@@ -2457,7 +2458,6 @@ export interface FileRoutesById {
   '/ar/wifi': typeof ArWifiRoute
   '/ar/workspace': typeof ArWorkspaceRoute
   '/ar/xeta': typeof ArXetaRouteWithChildren
-  '/ar/xidmetler': typeof ArXidmetlerRoute
   '/ar/zip': typeof ArZipRoute
   '/en/about': typeof EnAboutRoute
   '/en/apps': typeof EnAppsRouteWithChildren
@@ -2484,6 +2484,7 @@ export interface FileRoutesById {
   '/en/qr': typeof EnQrRoute
   '/en/schema': typeof EnSchemaRoute
   '/en/seo': typeof EnSeoRoute
+  '/en/services': typeof EnServicesRoute
   '/en/shortcuts': typeof EnShortcutsRoute
   '/en/soz': typeof EnSozRouteWithChildren
   '/en/soz-sayi': typeof EnSozSayiRoute
@@ -2497,7 +2498,6 @@ export interface FileRoutesById {
   '/en/wifi': typeof EnWifiRoute
   '/en/workspace': typeof EnWorkspaceRoute
   '/en/xeta': typeof EnXetaRouteWithChildren
-  '/en/xidmetler': typeof EnXidmetlerRoute
   '/en/zip': typeof EnZipRoute
   '/faq/$slug': typeof FaqSlugRoute
   '/guides/$topic': typeof GuidesTopicRoute
@@ -2541,6 +2541,7 @@ export interface FileRoutesById {
   '/ru/qr': typeof RuQrRoute
   '/ru/schema': typeof RuSchemaRoute
   '/ru/seo': typeof RuSeoRoute
+  '/ru/services': typeof RuServicesRoute
   '/ru/shortcuts': typeof RuShortcutsRoute
   '/ru/soz': typeof RuSozRouteWithChildren
   '/ru/soz-sayi': typeof RuSozSayiRoute
@@ -2554,7 +2555,6 @@ export interface FileRoutesById {
   '/ru/wifi': typeof RuWifiRoute
   '/ru/workspace': typeof RuWorkspaceRoute
   '/ru/xeta': typeof RuXetaRouteWithChildren
-  '/ru/xidmetler': typeof RuXidmetlerRoute
   '/ru/zip': typeof RuZipRoute
   '/soz/$slug': typeof SozSlugRoute
   '/tools/$slug': typeof ToolsSlugRoute
@@ -2583,6 +2583,7 @@ export interface FileRoutesById {
   '/tr/qr': typeof TrQrRoute
   '/tr/schema': typeof TrSchemaRoute
   '/tr/seo': typeof TrSeoRoute
+  '/tr/services': typeof TrServicesRoute
   '/tr/shortcuts': typeof TrShortcutsRoute
   '/tr/soz': typeof TrSozRouteWithChildren
   '/tr/soz-sayi': typeof TrSozSayiRoute
@@ -2596,7 +2597,6 @@ export interface FileRoutesById {
   '/tr/wifi': typeof TrWifiRoute
   '/tr/workspace': typeof TrWorkspaceRoute
   '/tr/xeta': typeof TrXetaRouteWithChildren
-  '/tr/xidmetler': typeof TrXidmetlerRoute
   '/tr/zip': typeof TrZipRoute
   '/xeta/$slug': typeof XetaSlugRoute
   '/apps/': typeof AppsIndexRoute
@@ -2697,6 +2697,7 @@ export interface FileRouteTypes {
     | '/ru'
     | '/schema'
     | '/seo'
+    | '/services'
     | '/shortcuts'
     | '/soz'
     | '/soz-sayi'
@@ -2713,7 +2714,6 @@ export interface FileRouteTypes {
     | '/wifi'
     | '/workspace'
     | '/xeta'
-    | '/xidmetler'
     | '/zip'
     | '/resources/$topic'
     | '/apps/$slug'
@@ -2742,6 +2742,7 @@ export interface FileRouteTypes {
     | '/ar/qr'
     | '/ar/schema'
     | '/ar/seo'
+    | '/ar/services'
     | '/ar/shortcuts'
     | '/ar/soz'
     | '/ar/soz-sayi'
@@ -2755,7 +2756,6 @@ export interface FileRouteTypes {
     | '/ar/wifi'
     | '/ar/workspace'
     | '/ar/xeta'
-    | '/ar/xidmetler'
     | '/ar/zip'
     | '/en/about'
     | '/en/apps'
@@ -2782,6 +2782,7 @@ export interface FileRouteTypes {
     | '/en/qr'
     | '/en/schema'
     | '/en/seo'
+    | '/en/services'
     | '/en/shortcuts'
     | '/en/soz'
     | '/en/soz-sayi'
@@ -2795,7 +2796,6 @@ export interface FileRouteTypes {
     | '/en/wifi'
     | '/en/workspace'
     | '/en/xeta'
-    | '/en/xidmetler'
     | '/en/zip'
     | '/faq/$slug'
     | '/guides/$topic'
@@ -2839,6 +2839,7 @@ export interface FileRouteTypes {
     | '/ru/qr'
     | '/ru/schema'
     | '/ru/seo'
+    | '/ru/services'
     | '/ru/shortcuts'
     | '/ru/soz'
     | '/ru/soz-sayi'
@@ -2852,7 +2853,6 @@ export interface FileRouteTypes {
     | '/ru/wifi'
     | '/ru/workspace'
     | '/ru/xeta'
-    | '/ru/xidmetler'
     | '/ru/zip'
     | '/soz/$slug'
     | '/tools/$slug'
@@ -2881,6 +2881,7 @@ export interface FileRouteTypes {
     | '/tr/qr'
     | '/tr/schema'
     | '/tr/seo'
+    | '/tr/services'
     | '/tr/shortcuts'
     | '/tr/soz'
     | '/tr/soz-sayi'
@@ -2894,7 +2895,6 @@ export interface FileRouteTypes {
     | '/tr/wifi'
     | '/tr/workspace'
     | '/tr/xeta'
-    | '/tr/xidmetler'
     | '/tr/zip'
     | '/xeta/$slug'
     | '/apps/'
@@ -2993,6 +2993,7 @@ export interface FileRouteTypes {
     | '/ru'
     | '/schema'
     | '/seo'
+    | '/services'
     | '/shortcuts'
     | '/soz'
     | '/soz-sayi'
@@ -3009,7 +3010,6 @@ export interface FileRouteTypes {
     | '/wifi'
     | '/workspace'
     | '/xeta'
-    | '/xidmetler'
     | '/zip'
     | '/apps/$slug'
     | '/ar/about'
@@ -3037,6 +3037,7 @@ export interface FileRouteTypes {
     | '/ar/qr'
     | '/ar/schema'
     | '/ar/seo'
+    | '/ar/services'
     | '/ar/shortcuts'
     | '/ar/soz'
     | '/ar/soz-sayi'
@@ -3050,7 +3051,6 @@ export interface FileRouteTypes {
     | '/ar/wifi'
     | '/ar/workspace'
     | '/ar/xeta'
-    | '/ar/xidmetler'
     | '/ar/zip'
     | '/en/about'
     | '/en/apps'
@@ -3077,6 +3077,7 @@ export interface FileRouteTypes {
     | '/en/qr'
     | '/en/schema'
     | '/en/seo'
+    | '/en/services'
     | '/en/shortcuts'
     | '/en/soz'
     | '/en/soz-sayi'
@@ -3090,7 +3091,6 @@ export interface FileRouteTypes {
     | '/en/wifi'
     | '/en/workspace'
     | '/en/xeta'
-    | '/en/xidmetler'
     | '/en/zip'
     | '/faq/$slug'
     | '/guides/$topic'
@@ -3134,6 +3134,7 @@ export interface FileRouteTypes {
     | '/ru/qr'
     | '/ru/schema'
     | '/ru/seo'
+    | '/ru/services'
     | '/ru/shortcuts'
     | '/ru/soz'
     | '/ru/soz-sayi'
@@ -3147,7 +3148,6 @@ export interface FileRouteTypes {
     | '/ru/wifi'
     | '/ru/workspace'
     | '/ru/xeta'
-    | '/ru/xidmetler'
     | '/ru/zip'
     | '/soz/$slug'
     | '/tools/$slug'
@@ -3176,6 +3176,7 @@ export interface FileRouteTypes {
     | '/tr/qr'
     | '/tr/schema'
     | '/tr/seo'
+    | '/tr/services'
     | '/tr/shortcuts'
     | '/tr/soz'
     | '/tr/soz-sayi'
@@ -3189,7 +3190,6 @@ export interface FileRouteTypes {
     | '/tr/wifi'
     | '/tr/workspace'
     | '/tr/xeta'
-    | '/tr/xidmetler'
     | '/tr/zip'
     | '/xeta/$slug'
     | '/apps'
@@ -3288,6 +3288,7 @@ export interface FileRouteTypes {
     | '/ru'
     | '/schema'
     | '/seo'
+    | '/services'
     | '/shortcuts'
     | '/soz'
     | '/soz-sayi'
@@ -3304,7 +3305,6 @@ export interface FileRouteTypes {
     | '/wifi'
     | '/workspace'
     | '/xeta'
-    | '/xidmetler'
     | '/zip'
     | '/resources/$topic'
     | '/apps/$slug'
@@ -3333,6 +3333,7 @@ export interface FileRouteTypes {
     | '/ar/qr'
     | '/ar/schema'
     | '/ar/seo'
+    | '/ar/services'
     | '/ar/shortcuts'
     | '/ar/soz'
     | '/ar/soz-sayi'
@@ -3346,7 +3347,6 @@ export interface FileRouteTypes {
     | '/ar/wifi'
     | '/ar/workspace'
     | '/ar/xeta'
-    | '/ar/xidmetler'
     | '/ar/zip'
     | '/en/about'
     | '/en/apps'
@@ -3373,6 +3373,7 @@ export interface FileRouteTypes {
     | '/en/qr'
     | '/en/schema'
     | '/en/seo'
+    | '/en/services'
     | '/en/shortcuts'
     | '/en/soz'
     | '/en/soz-sayi'
@@ -3386,7 +3387,6 @@ export interface FileRouteTypes {
     | '/en/wifi'
     | '/en/workspace'
     | '/en/xeta'
-    | '/en/xidmetler'
     | '/en/zip'
     | '/faq/$slug'
     | '/guides/$topic'
@@ -3430,6 +3430,7 @@ export interface FileRouteTypes {
     | '/ru/qr'
     | '/ru/schema'
     | '/ru/seo'
+    | '/ru/services'
     | '/ru/shortcuts'
     | '/ru/soz'
     | '/ru/soz-sayi'
@@ -3443,7 +3444,6 @@ export interface FileRouteTypes {
     | '/ru/wifi'
     | '/ru/workspace'
     | '/ru/xeta'
-    | '/ru/xidmetler'
     | '/ru/zip'
     | '/soz/$slug'
     | '/tools/$slug'
@@ -3472,6 +3472,7 @@ export interface FileRouteTypes {
     | '/tr/qr'
     | '/tr/schema'
     | '/tr/seo'
+    | '/tr/services'
     | '/tr/shortcuts'
     | '/tr/soz'
     | '/tr/soz-sayi'
@@ -3485,7 +3486,6 @@ export interface FileRouteTypes {
     | '/tr/wifi'
     | '/tr/workspace'
     | '/tr/xeta'
-    | '/tr/xidmetler'
     | '/tr/zip'
     | '/xeta/$slug'
     | '/apps/'
@@ -3585,6 +3585,7 @@ export interface RootRouteChildren {
   RuRoute: typeof RuRouteWithChildren
   SchemaRoute: typeof SchemaRoute
   SeoRoute: typeof SeoRoute
+  ServicesRoute: typeof ServicesRoute
   ShortcutsRoute: typeof ShortcutsRoute
   SozRoute: typeof SozRouteWithChildren
   SozSayiRoute: typeof SozSayiRoute
@@ -3601,7 +3602,6 @@ export interface RootRouteChildren {
   WifiRoute: typeof WifiRoute
   WorkspaceRoute: typeof WorkspaceRoute
   XetaRoute: typeof XetaRouteWithChildren
-  XidmetlerRoute: typeof XidmetlerRoute
   ZipRoute: typeof ZipRoute
   ResourcesTopicRouteRoute: typeof ResourcesTopicRouteRouteWithChildren
   AppsSlugRoute: typeof AppsSlugRoute
@@ -3830,6 +3830,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SeoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services': {
+      id: '/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/shortcuts': {
       id: '/shortcuts'
       path: '/shortcuts'
@@ -3940,13 +3947,6 @@ declare module '@tanstack/react-router' {
       path: '/xeta'
       fullPath: '/xeta'
       preLoaderRoute: typeof XetaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/xidmetler': {
-      id: '/xidmetler'
-      path: '/xidmetler'
-      fullPath: '/xidmetler'
-      preLoaderRoute: typeof XidmetlerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/zip': {
@@ -4145,6 +4145,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArSeoRouteImport
       parentRoute: typeof ArRoute
     }
+    '/ar/services': {
+      id: '/ar/services'
+      path: '/services'
+      fullPath: '/ar/services'
+      preLoaderRoute: typeof ArServicesRouteImport
+      parentRoute: typeof ArRoute
+    }
     '/ar/shortcuts': {
       id: '/ar/shortcuts'
       path: '/shortcuts'
@@ -4234,13 +4241,6 @@ declare module '@tanstack/react-router' {
       path: '/xeta'
       fullPath: '/ar/xeta'
       preLoaderRoute: typeof ArXetaRouteImport
-      parentRoute: typeof ArRoute
-    }
-    '/ar/xidmetler': {
-      id: '/ar/xidmetler'
-      path: '/xidmetler'
-      fullPath: '/ar/xidmetler'
-      preLoaderRoute: typeof ArXidmetlerRouteImport
       parentRoute: typeof ArRoute
     }
     '/ar/zip': {
@@ -4425,6 +4425,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EnSeoRouteImport
       parentRoute: typeof EnRoute
     }
+    '/en/services': {
+      id: '/en/services'
+      path: '/services'
+      fullPath: '/en/services'
+      preLoaderRoute: typeof EnServicesRouteImport
+      parentRoute: typeof EnRoute
+    }
     '/en/shortcuts': {
       id: '/en/shortcuts'
       path: '/shortcuts'
@@ -4514,13 +4521,6 @@ declare module '@tanstack/react-router' {
       path: '/xeta'
       fullPath: '/en/xeta'
       preLoaderRoute: typeof EnXetaRouteImport
-      parentRoute: typeof EnRoute
-    }
-    '/en/xidmetler': {
-      id: '/en/xidmetler'
-      path: '/xidmetler'
-      fullPath: '/en/xidmetler'
-      preLoaderRoute: typeof EnXidmetlerRouteImport
       parentRoute: typeof EnRoute
     }
     '/en/zip': {
@@ -4852,6 +4852,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RuSeoRouteImport
       parentRoute: typeof RuRoute
     }
+    '/ru/services': {
+      id: '/ru/services'
+      path: '/services'
+      fullPath: '/ru/services'
+      preLoaderRoute: typeof RuServicesRouteImport
+      parentRoute: typeof RuRoute
+    }
     '/ru/shortcuts': {
       id: '/ru/shortcuts'
       path: '/shortcuts'
@@ -4941,13 +4948,6 @@ declare module '@tanstack/react-router' {
       path: '/xeta'
       fullPath: '/ru/xeta'
       preLoaderRoute: typeof RuXetaRouteImport
-      parentRoute: typeof RuRoute
-    }
-    '/ru/xidmetler': {
-      id: '/ru/xidmetler'
-      path: '/xidmetler'
-      fullPath: '/ru/xidmetler'
-      preLoaderRoute: typeof RuXidmetlerRouteImport
       parentRoute: typeof RuRoute
     }
     '/ru/zip': {
@@ -5146,6 +5146,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TrSeoRouteImport
       parentRoute: typeof TrRoute
     }
+    '/tr/services': {
+      id: '/tr/services'
+      path: '/services'
+      fullPath: '/tr/services'
+      preLoaderRoute: typeof TrServicesRouteImport
+      parentRoute: typeof TrRoute
+    }
     '/tr/shortcuts': {
       id: '/tr/shortcuts'
       path: '/shortcuts'
@@ -5235,13 +5242,6 @@ declare module '@tanstack/react-router' {
       path: '/xeta'
       fullPath: '/tr/xeta'
       preLoaderRoute: typeof TrXetaRouteImport
-      parentRoute: typeof TrRoute
-    }
-    '/tr/xidmetler': {
-      id: '/tr/xidmetler'
-      path: '/xidmetler'
-      fullPath: '/tr/xidmetler'
-      preLoaderRoute: typeof TrXidmetlerRouteImport
       parentRoute: typeof TrRoute
     }
     '/tr/zip': {
@@ -5805,6 +5805,7 @@ interface ArRouteChildren {
   ArQrRoute: typeof ArQrRoute
   ArSchemaRoute: typeof ArSchemaRoute
   ArSeoRoute: typeof ArSeoRoute
+  ArServicesRoute: typeof ArServicesRoute
   ArShortcutsRoute: typeof ArShortcutsRoute
   ArSozRoute: typeof ArSozRouteWithChildren
   ArSozSayiRoute: typeof ArSozSayiRoute
@@ -5818,7 +5819,6 @@ interface ArRouteChildren {
   ArWifiRoute: typeof ArWifiRoute
   ArWorkspaceRoute: typeof ArWorkspaceRoute
   ArXetaRoute: typeof ArXetaRouteWithChildren
-  ArXidmetlerRoute: typeof ArXidmetlerRoute
   ArZipRoute: typeof ArZipRoute
   ArHamisiGroupRoute: typeof ArHamisiGroupRoute
   ArImageToolRoute: typeof ArImageToolRoute
@@ -5853,6 +5853,7 @@ const ArRouteChildren: ArRouteChildren = {
   ArQrRoute: ArQrRoute,
   ArSchemaRoute: ArSchemaRoute,
   ArSeoRoute: ArSeoRoute,
+  ArServicesRoute: ArServicesRoute,
   ArShortcutsRoute: ArShortcutsRoute,
   ArSozRoute: ArSozRouteWithChildren,
   ArSozSayiRoute: ArSozSayiRoute,
@@ -5866,7 +5867,6 @@ const ArRouteChildren: ArRouteChildren = {
   ArWifiRoute: ArWifiRoute,
   ArWorkspaceRoute: ArWorkspaceRoute,
   ArXetaRoute: ArXetaRouteWithChildren,
-  ArXidmetlerRoute: ArXidmetlerRoute,
   ArZipRoute: ArZipRoute,
   ArHamisiGroupRoute: ArHamisiGroupRoute,
   ArImageToolRoute: ArImageToolRoute,
@@ -6001,6 +6001,7 @@ interface EnRouteChildren {
   EnQrRoute: typeof EnQrRoute
   EnSchemaRoute: typeof EnSchemaRoute
   EnSeoRoute: typeof EnSeoRoute
+  EnServicesRoute: typeof EnServicesRoute
   EnShortcutsRoute: typeof EnShortcutsRoute
   EnSozRoute: typeof EnSozRouteWithChildren
   EnSozSayiRoute: typeof EnSozSayiRoute
@@ -6014,7 +6015,6 @@ interface EnRouteChildren {
   EnWifiRoute: typeof EnWifiRoute
   EnWorkspaceRoute: typeof EnWorkspaceRoute
   EnXetaRoute: typeof EnXetaRouteWithChildren
-  EnXidmetlerRoute: typeof EnXidmetlerRoute
   EnZipRoute: typeof EnZipRoute
   EnHamisiGroupRoute: typeof EnHamisiGroupRoute
   EnImageToolRoute: typeof EnImageToolRoute
@@ -6049,6 +6049,7 @@ const EnRouteChildren: EnRouteChildren = {
   EnQrRoute: EnQrRoute,
   EnSchemaRoute: EnSchemaRoute,
   EnSeoRoute: EnSeoRoute,
+  EnServicesRoute: EnServicesRoute,
   EnShortcutsRoute: EnShortcutsRoute,
   EnSozRoute: EnSozRouteWithChildren,
   EnSozSayiRoute: EnSozSayiRoute,
@@ -6062,7 +6063,6 @@ const EnRouteChildren: EnRouteChildren = {
   EnWifiRoute: EnWifiRoute,
   EnWorkspaceRoute: EnWorkspaceRoute,
   EnXetaRoute: EnXetaRouteWithChildren,
-  EnXidmetlerRoute: EnXidmetlerRoute,
   EnZipRoute: EnZipRoute,
   EnHamisiGroupRoute: EnHamisiGroupRoute,
   EnImageToolRoute: EnImageToolRoute,
@@ -6270,6 +6270,7 @@ interface RuRouteChildren {
   RuQrRoute: typeof RuQrRoute
   RuSchemaRoute: typeof RuSchemaRoute
   RuSeoRoute: typeof RuSeoRoute
+  RuServicesRoute: typeof RuServicesRoute
   RuShortcutsRoute: typeof RuShortcutsRoute
   RuSozRoute: typeof RuSozRouteWithChildren
   RuSozSayiRoute: typeof RuSozSayiRoute
@@ -6283,7 +6284,6 @@ interface RuRouteChildren {
   RuWifiRoute: typeof RuWifiRoute
   RuWorkspaceRoute: typeof RuWorkspaceRoute
   RuXetaRoute: typeof RuXetaRouteWithChildren
-  RuXidmetlerRoute: typeof RuXidmetlerRoute
   RuZipRoute: typeof RuZipRoute
   RuHamisiGroupRoute: typeof RuHamisiGroupRoute
   RuImageToolRoute: typeof RuImageToolRoute
@@ -6319,6 +6319,7 @@ const RuRouteChildren: RuRouteChildren = {
   RuQrRoute: RuQrRoute,
   RuSchemaRoute: RuSchemaRoute,
   RuSeoRoute: RuSeoRoute,
+  RuServicesRoute: RuServicesRoute,
   RuShortcutsRoute: RuShortcutsRoute,
   RuSozRoute: RuSozRouteWithChildren,
   RuSozSayiRoute: RuSozSayiRoute,
@@ -6332,7 +6333,6 @@ const RuRouteChildren: RuRouteChildren = {
   RuWifiRoute: RuWifiRoute,
   RuWorkspaceRoute: RuWorkspaceRoute,
   RuXetaRoute: RuXetaRouteWithChildren,
-  RuXidmetlerRoute: RuXidmetlerRoute,
   RuZipRoute: RuZipRoute,
   RuHamisiGroupRoute: RuHamisiGroupRoute,
   RuImageToolRoute: RuImageToolRoute,
@@ -6488,6 +6488,7 @@ interface TrRouteChildren {
   TrQrRoute: typeof TrQrRoute
   TrSchemaRoute: typeof TrSchemaRoute
   TrSeoRoute: typeof TrSeoRoute
+  TrServicesRoute: typeof TrServicesRoute
   TrShortcutsRoute: typeof TrShortcutsRoute
   TrSozRoute: typeof TrSozRouteWithChildren
   TrSozSayiRoute: typeof TrSozSayiRoute
@@ -6501,7 +6502,6 @@ interface TrRouteChildren {
   TrWifiRoute: typeof TrWifiRoute
   TrWorkspaceRoute: typeof TrWorkspaceRoute
   TrXetaRoute: typeof TrXetaRouteWithChildren
-  TrXidmetlerRoute: typeof TrXidmetlerRoute
   TrZipRoute: typeof TrZipRoute
   TrHamisiGroupRoute: typeof TrHamisiGroupRoute
   TrImageToolRoute: typeof TrImageToolRoute
@@ -6536,6 +6536,7 @@ const TrRouteChildren: TrRouteChildren = {
   TrQrRoute: TrQrRoute,
   TrSchemaRoute: TrSchemaRoute,
   TrSeoRoute: TrSeoRoute,
+  TrServicesRoute: TrServicesRoute,
   TrShortcutsRoute: TrShortcutsRoute,
   TrSozRoute: TrSozRouteWithChildren,
   TrSozSayiRoute: TrSozSayiRoute,
@@ -6549,7 +6550,6 @@ const TrRouteChildren: TrRouteChildren = {
   TrWifiRoute: TrWifiRoute,
   TrWorkspaceRoute: TrWorkspaceRoute,
   TrXetaRoute: TrXetaRouteWithChildren,
-  TrXidmetlerRoute: TrXidmetlerRoute,
   TrZipRoute: TrZipRoute,
   TrHamisiGroupRoute: TrHamisiGroupRoute,
   TrImageToolRoute: TrImageToolRoute,
@@ -6614,6 +6614,7 @@ const rootRouteChildren: RootRouteChildren = {
   RuRoute: RuRouteWithChildren,
   SchemaRoute: SchemaRoute,
   SeoRoute: SeoRoute,
+  ServicesRoute: ServicesRoute,
   ShortcutsRoute: ShortcutsRoute,
   SozRoute: SozRouteWithChildren,
   SozSayiRoute: SozSayiRoute,
@@ -6630,7 +6631,6 @@ const rootRouteChildren: RootRouteChildren = {
   WifiRoute: WifiRoute,
   WorkspaceRoute: WorkspaceRoute,
   XetaRoute: XetaRouteWithChildren,
-  XidmetlerRoute: XidmetlerRoute,
   ZipRoute: ZipRoute,
   ResourcesTopicRouteRoute: ResourcesTopicRouteRouteWithChildren,
   AppsSlugRoute: AppsSlugRoute,

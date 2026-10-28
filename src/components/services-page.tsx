@@ -10,7 +10,7 @@ import { TOOL_IDS, TOOL_TEXT } from "@/pdf/tool-text";
 type L = Record<Lang, string>;
 const T = (az: string, en: string, tr: string, ar: string, ru: string): L => ({ az, en, tr, ar, ru });
 
-const TITLE = T("Xidmətlər", "Services", "Hizmetler", "الخدمات", "Услуги");
+const TITLE = T("Services", "Services", "Services", "Services", "Services");
 const LEAD = T(
   "Nibras Code-un bütün xidmətləri bir yerdə.",
   "All Nibras Code services in one place.",
