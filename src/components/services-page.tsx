@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { BAR } from "@/components/home-bars";
 import { STUDIO_APPS } from "@/lib/apps";
 import type { Lang } from "@/lib/i18n";
-import { homePath, localeHref } from "@/lib/locale-path";
+import { localeHref } from "@/lib/locale-path";
 import { TOOL_GROUPS, TOOLS, toolPath, toolsPath } from "@/lib/tools";
 import { TOOL_IDS, TOOL_TEXT } from "@/pdf/tool-text";
 
@@ -11,13 +11,6 @@ type L = Record<Lang, string>;
 const T = (az: string, en: string, tr: string, ar: string, ru: string): L => ({ az, en, tr, ar, ru });
 
 const TITLE = T("Services", "Services", "Services", "Services", "Services");
-const LEAD = T(
-  "Nibras Code-un bütün xidmətləri bir yerdə.",
-  "All Nibras Code services in one place.",
-  "Nibras Code'un tüm hizmetleri tek yerde.",
-  "كل خدمات Nibras Code في مكان واحد.",
-  "Все сервисы Nibras Code в одном месте.",
-);
 const DESC = T(
   "Nibras Code xidmətləri: PDF, QR, şəkil, kod alətləri, tətbiqlər, Studio və Nibras AI — hamısı bir siyahıda.",
   "Nibras Code services: PDF, QR, images, code tools, apps, Studio and Nibras AI — all in one list.",
@@ -120,9 +113,6 @@ export function ServicesPage({ lang }: { lang: Lang }) {
   return (
     <main className="why-page svc-page" lang={lang} dir={lang === "ar" ? "rtl" : "ltr"}>
       <div className="why-glow" aria-hidden="true" />
-      <p className="eyebrow"><i /><a href={homePath(lang)}>Nibras Code</a></p>
-      <h1>{TITLE[lang]}</h1>
-      <p>{LEAD[lang]}</p>
       <div className="svc-list">
         {CATS.map((c) => (
           <details key={c.id} className="svc-cat" name="svc">
