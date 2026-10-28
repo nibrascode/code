@@ -1,3 +1,5 @@
+import { addRecent } from "@/lib/recent-files";
+import { SendToPhone } from "@/components/send-to-phone";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import type { Dict } from "./copy";
@@ -213,6 +215,7 @@ export function ResultCard({ out, t, onOpen }: { out: Out; t: Dict; onOpen?: () 
       if (url) URL.revokeObjectURL(url);
     };
   }, [out]);
+  useEffect(() => { void addRecent(out.blob, out.name, "pdf"); }, [out]);
   const share = useCallback(async () => {
     const file = new File([out.blob], out.name, { type: out.blob.type });
     try {
@@ -234,6 +237,7 @@ export function ResultCard({ out, t, onOpen }: { out: Out; t: Dict; onOpen?: () 
         ) : null}
         <div className="mt-2 flex flex-wrap gap-2">
           <button type="button" className={btnPrimary} onClick={() => saveBlob(out.name, out.blob)} data-testid="download">{t.download}</button>
+          <SendToPhone blob={out.blob} name={out.name} className={btn} />
           {out.kind === "pdf" && onOpen ? <button type="button" className={btn} onClick={onOpen}>{t.open}</button> : null}
           {out.extra?.map((x) => <button key={x.label} type="button" className={btn} onClick={() => saveBlob(x.name, x.blob)} data-testid={`download-${x.label.toLowerCase()}`}>{x.label}</button>)}
           {out.kind === "text" ? (

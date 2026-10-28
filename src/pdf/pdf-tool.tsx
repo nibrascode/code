@@ -1,3 +1,4 @@
+import { RecentFiles } from "@/components/recent-files";
 import { takeHandOff } from "@/lib/handoff";
 import { DOC_TEMPLATES, TEMPLATE_LABEL } from "./templates";
 import { useNavigate } from "@tanstack/react-router";
@@ -623,6 +624,7 @@ function Workspace({ tool, lang, t, title, desc }: { tool: ToolId; lang: Lang; t
           testId="pick"
         />
       ) : null}
+      {kind !== "none" && !items.length ? <RecentFiles accept={accept} onPick={(f) => void addFiles([f])} /> : null}
 
       {tool === "scan" ? (
         <div className={card}>

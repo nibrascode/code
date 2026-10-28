@@ -448,7 +448,7 @@ export async function cropPdf(bytes: Uint8Array, mm: { top: number; right: numbe
 async function rasterPages(
   bytes: Uint8Array,
   paint: (ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement, pageIndex: number, scale: number) => void,
-  o: { scale: number; jpeg: number; only?: Set<number> },
+  o: { scale: number; jpeg: number; only?: Set<number>; off?: (canvas: HTMLCanvasElement, q: number) => Promise<Uint8Array | null> },
   onPage?: (n: number, total: number) => void,
 ) {
   const lib = await import("@cantoo/pdf-lib");
@@ -457,7 +457,7 @@ async function rasterPages(
   const src = await openPdf(bytes);
   try {
     for (let n = 1; n <= src.numPages; n++) {
-      onPage?.(n, src.numPages);
+      onPage?.(n - 1, src.numPages);
       if (o.only && !o.only.has(n - 1)) {
         const [cp] = await out.copyPages(orig, [n - 1]);
         out.addPage(cp);
@@ -466,8 +466,13 @@ async function rasterPages(
       const vp = (await src.getPage(n)).getViewport({ scale: 1 });
       const canvas = await renderPageToCanvas(src, n, o.scale);
       const ctx = canvas.getContext("2d")!;
-      paint(ctx, canvas, n - 1, canvas.width / vp.width);
-      const jpg = await out.embedJpg(new Uint8Array(await (await canvasToBlob(canvas, "image/jpeg", o.jpeg)).arrayBuffer()));
+      let bytesJ = o.off ? await o.off(canvas, o.jpeg) : null;
+      if (!bytesJ) {
+        paint(ctx, canvas, n - 1, canvas.width / vp.width);
+        bytesJ = new Uint8Array(await (await canvasToBlob(canvas, "image/jpeg", o.jpeg)).arrayBuffer());
+      }
+      const jpg = await out.embedJpg(bytesJ);
+      onPage?.(n, src.numPages);
       const p = out.addPage([vp.width, vp.height]);
       p.drawImage(jpg, { x: 0, y: 0, width: vp.width, height: vp.height });
       canvas.width = canvas.height = 0;
@@ -489,7 +494,7 @@ export async function grayscalePdf(bytes: Uint8Array, quality: Quality, onPage?:
       a[i] = a[i + 1] = a[i + 2] = g;
     }
     ctx.putImageData(d, 0, 0);
-  }, { scale: cfg.scale, jpeg: cfg.jpeg }, onPage);
+  }, { scale: cfg.scale, jpeg: cfg.jpeg, off: (c, q) => import("./heavy").then((h) => h.grayJpegOff(c, q)).catch(() => null) }, onPage);
 }
 
 /** Box in page fractions (0..1, top-left origin). */

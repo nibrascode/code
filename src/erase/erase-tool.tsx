@@ -303,6 +303,7 @@ export function EraseTool() {
         removeBackground(item.file, {
           model: ({ small: "isnet_quint8", medium: "isnet_fp16", large: "isnet" } as const)[q],
           device,
+          proxyToWorker: device === "gpu",
           rescale: true,
           output: { format: "image/png", quality: 1 },
           progress: (_k, cur, total) => {

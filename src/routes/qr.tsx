@@ -3,6 +3,7 @@ import { lazy, Suspense, useEffect, useState } from "react";
 import { useI18n } from "@/qr/lib/i18n";
 import { localeHref } from "@/lib/locale-path";
 import { PageAssistant } from "@/components/page-assistant";
+import { PhoneReceive } from "@/components/phone-receive";
 
 // The whole tool (generator, designer, exports) is its own chunk.
 const QrTool = lazy(() => import("@/qr/components/qr-tool").then((m) => ({ default: m.QrTool })));
@@ -32,6 +33,7 @@ export function QrRoutePage() {
           </a>
         </nav>
       </header>
+      {mounted ? <PhoneReceive /> : null}
       {mounted ? (
         <Suspense fallback={<div className="h-96 animate-pulse rounded-2xl bg-bg-elevated" />}>
           <QrTool />

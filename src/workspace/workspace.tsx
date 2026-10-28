@@ -1,3 +1,6 @@
+import { SendToPhone } from "@/components/send-to-phone";
+import { RecentFiles } from "@/components/recent-files";
+import { addRecent } from "@/lib/recent-files";
 import { ToolsLegalLinks } from "@/legal/tools-legal";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { ArrowLeft, Code2, Download, FileText, FileUp, FolderPlus, ListChecks, Pencil, Trash2 } from "lucide-react";
@@ -287,6 +290,7 @@ function PdfTool({ p, c, set }: ToolProps) {
   const [busy, setBusy] = useState("");
   const [err, setErr] = useState("");
   const read = async (f?: File) => {
+    if (f) void addRecent(f, f.name, "workspace");
     if (!f) return;
     setErr("");
     setBusy(c.reading);
@@ -316,9 +320,11 @@ function PdfTool({ p, c, set }: ToolProps) {
         </span>
         <input className="sr-only" type="file" accept="application/pdf,.pdf" data-testid="ws-pdf" onChange={(e) => { void read(e.target.files?.[0]); e.target.value = ""; }} />
       </label>
+      <RecentFiles accept="application/pdf,.pdf" onPick={(f) => void read(f)} />
       {err ? <p className="mb-3 rounded-xl border border-red-400/30 bg-red-500/10 p-3 text-sm text-red-200">{err}</p> : null}
       <label className="mb-1 block text-sm text-muted">{c.extracted}</label>
       <textarea className={ui.field + " min-h-[40vh] font-mono text-[13px] leading-relaxed"} value={p.text} onChange={(e) => set({ text: e.target.value })} data-testid="ws-text" dir="auto" />
+      {p.text.trim() ? <div className="mt-2"><SendToPhone blob={new Blob([p.text], { type: "text/plain;charset=utf-8" })} name={`${(p.pdfName || "note").replace(/\.pdf$/i, "")}.txt`} className="rounded-xl border border-white/15 px-3 py-1.5 text-sm" /></div> : null}
       <div className="mt-3 grid grid-cols-1 gap-2 sm:flex">
         <button className={ui.primary + " min-h-11 justify-center"} disabled={!p.text.trim()} onClick={() => set({ tab: "q" })} data-testid="ws-to-q">
           <ListChecks className="size-4" /> {c.toQ}

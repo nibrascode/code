@@ -1,3 +1,5 @@
+import { RecentFiles } from "@/components/recent-files";
+import { addRecent } from "@/lib/recent-files";
 import { ToolsLegalLinks } from "@/legal/tools-legal";
 import { useEffect, useMemo, useState } from "react";
 import { ArrowLeft, BarChart3, BookOpen, Check, FileUp, Layers, Plus, RotateCcw, Trash2, X } from "lucide-react";
@@ -50,6 +52,7 @@ export function LearnPage() {
   const commit = (next: Course[]) => { setList(next); persist(next); };
   const save = (course: Course) => commit((list ?? []).map((x) => (x.id === course.id ? { ...course, updatedAt: Date.now() } : x)));
   const read = async (f?: File) => {
+    if (f) void addRecent(f, f.name, "learn");
     if (!f) return;
     setErr(""); setBusy(c.reading);
     try {
@@ -87,6 +90,7 @@ export function LearnPage() {
             <span><FileUp className="mx-auto mb-2 size-7 opacity-80" /><b>{c.pick}</b><br /><span className="text-muted">{busy || c.drop}</span></span>
             <input className="sr-only" type="file" accept="application/pdf,.pdf" data-testid="learn-pdf" onChange={(e) => { void read(e.target.files?.[0]); e.target.value = ""; }} />
           </label>
+      <RecentFiles accept="application/pdf,.pdf" onPick={(f) => void read(f)} />
           {err ? <p className="mb-3 rounded-xl border border-red-400/30 bg-red-500/10 p-3 text-sm text-red-200">{err}</p> : null}
           <p className="mb-5 text-xs text-muted">{c.local} · <a className="underline" href={localeHref(lang, "/workspace")}>{c.workspace}</a></p>
           <h2 className="mb-3 text-base font-semibold">{c.courses}</h2>

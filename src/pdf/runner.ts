@@ -262,6 +262,7 @@ function zipOut(name: string, files: { name: string; data: Uint8Array }[]): RunR
 const imgOut = (name: string, blob: Blob, note?: string): RunResult => ({ name, blob, kind: "image", note, card: true });
 const pdfOut = (name: string, bytes: Uint8Array, note?: string): RunResult => ({ name, blob: new Blob([bytes as BlobPart], { type: "application/pdf" }), kind: "pdf", note });
 const docxBlob = (text: string) => new Blob([createDocxFromText(text) as BlobPart], { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" });
+const docxBlobOff = async (text: string) => { const u = await import("./lib/heavy").then((h) => h.docxOff(text)).catch(() => null); return u ? new Blob([u as BlobPart], { type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document" }) : docxBlob(text); };
 const textOut = (name: string, text: string, note?: string): RunResult => ({ name: `${name}.txt`, blob: new Blob([text], { type: "text/plain;charset=utf-8" }), kind: "text", text, note, extra: [{ label: "DOCX", name: `${name}.docx`, blob: docxBlob(text) }] });
 
 type Ctx = { lang: Lang; t: (typeof COPY)[Lang]; s: S; box: HTMLElement; progress: (label: string, frac: number) => void; cancelled: () => boolean };
@@ -476,7 +477,7 @@ export async function runTool(action: Action, files: File[], ctx: Ctx): Promise<
       });
       if (!r.text.trim()) throw new UserError(t.errNoText);
       const note = [r.usedOcr ? `${t.ocrUsed} (${r.langs.join("+")})${r.avgConfidence != null ? ` · ${t.confidence}: ${r.avgConfidence}%` : ""}` : t.textLayer, r.lowConfidencePages.length ? `${t.lowConf}: ${r.lowConfidencePages.join(", ")}` : ""].filter(Boolean).join(" · ");
-      if (action.tool === "pdf-word") out.push({ name: `${base(f.name)}.docx`, blob: docxBlob(r.text), kind: "docx", note: `${note} · ${t.wordNote}` });
+      if (action.tool === "pdf-word") out.push({ name: `${base(f.name)}.docx`, blob: await docxBlobOff(r.text), kind: "docx", note: `${note} · ${t.wordNote}` });
       else out.push(textOut(base(f.name), r.text, note));
       break;
     }
