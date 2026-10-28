@@ -532,7 +532,7 @@ const dictionaries = {
     app_all: "All apps",
     app_other: "See other apps",
     footer_domain: "NibrasCode.com",
-    arabic_lead: "Ərəb dili - daha yaxın",
+    arabic_lead: "Arabic — closer than ever",
     arabic_body:
       "Made so someone who knows Azerbaijani can learn Arabic more easily. 704 verbs, 200 nouns, 100 adjectives, numbers, 186 dialogues, tests, 4400 flashcards, and writing practice for 28 letters. What you learn stays on your device.",
     arabic_f1: "28 letters — writing practice",
@@ -945,7 +945,7 @@ const dictionaries = {
     app_all: "كل التطبيقات",
     app_other: "شاهد التطبيقات الأخرى",
     footer_domain: "NibrasCode.com",
-    arabic_lead: "Ərəb dili - daha yaxın",
+    arabic_lead: "العربية — أقرب إليك",
     arabic_body:
       "لمن يعرف الأذربيجانية ليتعلّم العربية بسهولة أكبر. 704 أفعال و200 اسم و100 صفة وأعداد و186 حوارًا واختبارات و4400 بطاقة وتدريب كتابة لـ28 حرفًا. بيانات التعلّم تبقى على الجهاز.",
     arabic_f1: "28 حرفًا — تدريب الكتابة",
@@ -1352,7 +1352,7 @@ const dictionaries = {
     app_all: "Все приложения",
     app_other: "Другие приложения",
     footer_domain: "NibrasCode.com",
-    arabic_lead: "Ərəb dili - daha yaxın",
+    arabic_lead: "Арабский — ближе, чем кажется",
     arabic_body:
       "Для того, кто знает азербайджанский и хочет учить арабский легче. 704 глагола, 200 имён, 100 прилагательных, числа, 186 диалогов, тесты, 4400 карточек и письмо 28 букв. Данные обучения остаются на устройстве.",
     arabic_f1: "28 букв — практика письма",
@@ -1773,7 +1773,7 @@ export const translations: Record<Lang, Record<TKey, string>> = {
     nav_programming: "Programlama",
     app_family_kicker: "NIBRAS CODE UYGULAMASI",
     app_other: "Diğer uygulamalara bak",
-    arabic_lead: "Ərəb dili - daha yaxın",
+    arabic_lead: "Arapça — daha yakın",
     arabic_body:
       "Azerbaycan Türkçesini bilen birinin Arapçayı daha kolay öğrenmesi için. 704 fiil, 200 isim, 100 sıfat, sayılar, 186 diyalog, testler, 4400 kart ve 28 harfin yazı alıştırması. Öğrenilen bilgiler cihazda kalır.",
     arabic_f1: "28 harf — yazı alıştırması",
