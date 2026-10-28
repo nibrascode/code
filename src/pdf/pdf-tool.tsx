@@ -2,7 +2,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowLeft, ArrowRight, Camera, Check, FileText, FileType2, Files, Image as ImageIcon, Layers, Lock, Minimize2,
-  PenLine, RotateCw, ScanText, Scissors, Droplet, ListOrdered, Eye, FilePlus2, FileOutput, FileImage, ScanLine, X, Hash, Unlock, Crop, Contrast, Table2, EyeOff, Receipt } from "lucide-react";
+  PenLine, RotateCw, ScanText, Scissors, Droplet, ListOrdered, Eye, FilePlus2, FileOutput, FileImage, ScanLine, X, Hash, Unlock, Crop, Contrast, Table2, EyeOff, Receipt, Sheet, Presentation } from "lucide-react";
 import { zipSync } from "fflate";
 import type { Lang } from "@/lib/i18n";
 import { COPY, type Dict } from "./copy";
@@ -16,21 +16,22 @@ import { OCR_LANGS, detectOcrLangs, ocrDetailed, preprocessForOcr, ocrLangForSit
 import { extractTextSmart } from "./lib/extract";
 import { createDocxFromText, docxToText } from "./lib/docx";
 import type { WatermarkPosition } from "./lib/pdfOperations";
+import { pdfToTables, pptxToPdf, sheetsToXlsx } from "./lib/office";
 import { ExtraOptions, EXTRA_ACCEPT, readSheetFile, runExtra, UserError, X_DEFAULT } from "./extra";
 
 const ICONS: Record<ToolId, typeof FileText> = {
   "write-pdf": PenLine, merge: Files, split: Scissors, compress: Minimize2, "image-pdf": ImageIcon, "pdf-image": FileImage,
   rotate: RotateCw, protect: Lock, watermark: Droplet, pages: ListOrdered, scan: ScanLine, sign: PenLine, ocr: ScanText,
   "pdf-ocr": FileType2, "pdf-word": FileOutput, preview: Eye, batch: Layers, "extract-pages": Check, "word-pdf": FilePlus2, "page-numbers": Hash,
-  unlock: Unlock, crop: Crop, grayscale: Contrast, "excel-pdf": Table2, redact: EyeOff, invoice: Receipt,
+  unlock: Unlock, crop: Crop, grayscale: Contrast, "excel-pdf": Table2, redact: EyeOff, invoice: Receipt, "pdf-excel": Sheet, "ppt-pdf": Presentation,
 };
 
-type Kind = "pdf" | "pdfs" | "images" | "docx" | "sheet" | "none";
+type Kind = "pdf" | "pdfs" | "images" | "docx" | "sheet" | "pptx" | "none";
 const KIND: Record<ToolId, Kind> = {
   "write-pdf": "none", merge: "pdfs", split: "pdf", compress: "pdf", "image-pdf": "images", "pdf-image": "pdf", rotate: "pdf",
   protect: "pdf", watermark: "pdf", pages: "pdf", scan: "images", sign: "pdf", ocr: "images", "pdf-ocr": "pdf", "pdf-word": "pdf",
   preview: "pdf", batch: "pdfs", "extract-pages": "pdf", "word-pdf": "docx", "page-numbers": "pdf",
-  unlock: "pdf", crop: "pdf", grayscale: "pdf", "excel-pdf": "sheet", redact: "pdf", invoice: "none",
+  unlock: "pdf", crop: "pdf", grayscale: "pdf", "excel-pdf": "sheet", redact: "pdf", invoice: "none", "pdf-excel": "pdf", "ppt-pdf": "pptx",
 };
 
 type Item = { id: number; file: File; name: string; bytes?: Uint8Array; pages?: number; locked?: boolean; wasLocked?: boolean; bad?: boolean };
@@ -44,7 +45,7 @@ const WM_POS: { id: WatermarkPosition; s: string }[] = [
 
 const GROUPS: { id: string; tools: ToolId[]; label: Record<Lang, string> }[] = [
   { id: "organize", tools: ["merge", "split", "pages", "extract-pages", "rotate", "page-numbers", "crop", "batch"], label: { az: "Səhifələri idarə et", en: "Organize", tr: "Sayfaları düzenle", ar: "تنظيم الصفحات", ru: "Страницы и файлы" } },
-  { id: "convert", tools: ["pdf-image", "pdf-word", "word-pdf", "pdf-ocr", "ocr", "excel-pdf", "grayscale", "preview"], label: { az: "Çevir və oxu", en: "Convert & read", tr: "Dönüştür ve oku", ar: "تحويل وقراءة", ru: "Конвертация и чтение" } },
+  { id: "convert", tools: ["pdf-image", "pdf-word", "word-pdf", "pdf-excel", "excel-pdf", "ppt-pdf", "pdf-ocr", "ocr", "grayscale", "preview"], label: { az: "Çevir və oxu", en: "Convert & read", tr: "Dönüştür ve oku", ar: "تحويل وقراءة", ru: "Конвертация и чтение" } },
   { id: "create", tools: ["write-pdf", "image-pdf", "scan", "invoice"], label: { az: "Hazırla", en: "Create", tr: "Oluştur", ar: "إنشاء", ru: "Создание" } },
   { id: "secure", tools: ["compress", "protect", "unlock", "redact", "watermark", "sign"], label: { az: "Optimallaşdır və qoru", en: "Optimize & protect", tr: "Optimize et ve koru", ar: "تحسين وحماية", ru: "Сжатие и защита" } },
 ];
@@ -59,6 +60,13 @@ const NUM_T: Record<Lang, { from: string; fromHint: string; start: string; start
   tr: { from: "Başlangıç sayfası", fromHint: "Kapağı numarasız bırakmak için 2 yazın.", start: "İlk sayı", startHint: "Numaralanan ilk sayfada görünen sayı.", pos: "Konum", fmt: "Biçim", size: "Yazı boyutu", margin: "Kenardan uzaklık", preview: "Örnek", page: "sayfa" },
   ar: { from: "البدء من الصفحة", fromHint: "اكتب 2 لترك الغلاف بلا رقم.", start: "الرقم الأول", startHint: "الرقم الذي يظهر على أول صفحة مرقّمة.", pos: "الموضع", fmt: "الشكل", size: "حجم الخط", margin: "المسافة من الحافة", preview: "مثال", page: "صفحة" },
   ru: { from: "Начать со страницы", fromHint: "Укажите 2, чтобы обложка осталась без номера.", start: "Первое число", startHint: "Число на первой нумеруемой странице.", pos: "Место", fmt: "Вид", size: "Размер шрифта", margin: "Отступ от края", preview: "Пример", page: "стр." },
+};
+const OX: Record<Lang, Record<"pickPptx" | "errPptx" | "noTable" | "rows" | "xlNote" | "sheets" | "perPage" | "oneSheet" | "slides" | "pptNote", string>> = {
+  az: { pickPptx: "PPTX seçin", errPptx: "Bu fayl PPTX deyil. Köhnə .ppt-ni PowerPoint-də PPTX kimi saxlayın.", noTable: "Mətn tapılmadı. Skan PDF-dirsə əvvəl «PDF-dən mətn (OCR)» alətini işlədin.", rows: "sətir", xlNote: "Sütunlar mətnin yerinə görə qurulur. Sadə cədvəllər yaxşı çıxır; birləşmiş xana və mürəkkəb cədvəli yoxlayın.", sheets: "Vərəqlər", perPage: "Hər səhifə ayrı vərəq", oneSheet: "Hamısı bir vərəqdə", slides: "slayd", pptNote: "Mətn qutuları və şəkillər yerində çəkilir. Tema fonu, qrafik, SmartArt və effektlər köçmür." },
+  en: { pickPptx: "Choose a PPTX", errPptx: "This is not a PPTX file. Save an old .ppt as PPTX in PowerPoint.", noTable: "No text found. If it's a scanned PDF, run «PDF to text (OCR)» first.", rows: "rows", xlNote: "Columns are rebuilt from text positions. Simple tables work well; check merged cells and complex tables.", sheets: "Sheets", perPage: "One sheet per page", oneSheet: "All in one sheet", slides: "slides", pptNote: "Text boxes and pictures are drawn in place. Theme backgrounds, charts, SmartArt and effects are not copied." },
+  tr: { pickPptx: "PPTX seçin", errPptx: "Bu dosya PPTX değil. Eski .ppt'yi PowerPoint'te PPTX olarak kaydedin.", noTable: "Metin bulunamadı. Taranmış PDF ise önce «PDF'ten metin (OCR)» aracını kullanın.", rows: "satır", xlNote: "Sütunlar metnin konumuna göre kurulur. Basit tablolar iyi çıkar; birleşik hücre ve karmaşık tabloları kontrol edin.", sheets: "Sayfalar", perPage: "Her sayfa ayrı sayfa", oneSheet: "Hepsi tek sayfada", slides: "slayt", pptNote: "Metin kutuları ve görseller yerinde çizilir. Tema arka planı, grafik, SmartArt ve efektler aktarılmaz." },
+  ar: { pickPptx: "اختر ملف PPTX", errPptx: "هذا ليس ملف PPTX. احفظ ملف ppt القديم بصيغة PPTX في PowerPoint.", noTable: "لم يُعثر على نص. إن كان PDF ممسوحاً فاستخدم أداة OCR أولاً.", rows: "صف", xlNote: "تُبنى الأعمدة من مواضع النص. الجداول البسيطة تخرج جيداً؛ افحص الخلايا المدمجة والجداول المعقدة.", sheets: "الأوراق", perPage: "ورقة لكل صفحة", oneSheet: "الكل في ورقة واحدة", slides: "شريحة", pptNote: "تُرسم مربعات النص والصور في مكانها. لا تُنقل خلفيات السمة والرسوم البيانية وSmartArt والتأثيرات." },
+  ru: { pickPptx: "Выберите PPTX", errPptx: "Это не PPTX. Сохраните старый .ppt как PPTX в PowerPoint.", noTable: "Текст не найден. Если это скан, сначала запустите «PDF в текст (OCR)».", rows: "строк", xlNote: "Столбцы восстанавливаются по положению текста. Простые таблицы выходят хорошо; проверьте объединённые ячейки и сложные таблицы.", sheets: "Листы", perPage: "Каждая страница — лист", oneSheet: "Всё на одном листе", slides: "слайдов", pptNote: "Текстовые блоки и картинки рисуются на своих местах. Фон темы, диаграммы, SmartArt и эффекты не переносятся." },
 };
 const basePath = (lang: Lang) => (lang === "az" ? "/pdf" : `/${lang}/pdf`);
 
@@ -128,6 +136,8 @@ export function PdfTool({ lang, tool }: { lang: Lang; tool: ToolId | null }) {
 
 function Workspace({ tool, lang, t, title, desc }: { tool: ToolId; lang: Lang; t: Dict; title: string; desc: string }) {
   const kind = KIND[tool];
+  const ox = OX[lang] ?? OX.en;
+  const [xlMode, setXlMode] = useState<"pages" | "one">("pages");
   const [items, setItems] = useState<Item[]>([]);
   const [outs, setOuts] = useState<Out[]>([]);
   const [err, setErr] = useState("");
@@ -232,7 +242,7 @@ function Workspace({ tool, lang, t, title, desc }: { tool: ToolId; lang: Lang; t
     openOut.blob.arrayBuffer().then((b) => setOpenBytes(new Uint8Array(b)));
   }, [openOut]);
 
-  const accept = kind === "sheet" ? EXTRA_ACCEPT : kind === "images" ? "image/*" : kind === "docx" ? ".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document" : "application/pdf,.pdf";
+  const accept = kind === "pptx" ? ".pptx,application/vnd.openxmlformats-officedocument.presentationml.presentation" : kind === "sheet" ? EXTRA_ACCEPT : kind === "images" ? "image/*" : kind === "docx" ? ".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document" : "application/pdf,.pdf";
   const multiple = kind === "pdfs" || kind === "images";
 
   const addFiles = useCallback(async (files: File[]) => {
@@ -246,6 +256,9 @@ function Workspace({ tool, lang, t, title, desc }: { tool: ToolId; lang: Lang; t
         if (!file.type.startsWith("image/")) { setErr(t.errNoImages); continue; }
       } else if (kind === "sheet") {
         try { const sh = await readSheetFile(file, lang); setSheets(sh); setXs((x) => ({ ...x, sheetIdx: 0 })); } catch (e) { setErr((e as Error).message); continue; }
+      } else if (kind === "pptx") {
+        if (!/\.pptx$/i.test(file.name)) { setErr(ox.errPptx); continue; }
+        item.bytes = new Uint8Array(await file.arrayBuffer());
       } else if (kind === "docx") {
         if (!/\.docx$/i.test(file.name)) { setErr(t.errNotDocx); continue; }
         item.bytes = new Uint8Array(await file.arrayBuffer());
@@ -480,6 +493,23 @@ function Workspace({ tool, lang, t, title, desc }: { tool: ToolId; lang: Lang; t
           if (files.length <= 10) files.forEach((x) => res.push(pdfOut(x.name, x.data)));
           break;
         }
+        case "pdf-excel": {
+          need();
+          const pagesT = await pdfToTables(f.bytes!, progress(t.working), stop);
+          const sheets = xlMode === "one" ? [{ name: "PDF", rows: pagesT.flatMap((sh, i) => (i && sh.rows.length ? [[], ...sh.rows] : sh.rows)) }] : pagesT;
+          const cells = sheets.reduce((a, sh) => a + sh.rows.length, 0);
+          if (!cells) throw new UserError(ox.noTable);
+          const blob = new Blob([(await sheetsToXlsx(sheets.filter((sh) => sh.rows.length))) as BlobPart], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+          res.push({ name: `${baseName(f.name)}.xlsx`, blob, kind: "xlsx", note: `${cells} ${ox.rows} · ${ox.xlNote}` });
+          break;
+        }
+        case "ppt-pdf": {
+          need();
+          let r: { bytes: Uint8Array; slides: number };
+          try { r = await pptxToPdf(f.bytes!, progress(t.working)); } catch (e) { if (e instanceof Error && /not-pptx|zip|invalid/i.test(e.message)) throw new UserError(ox.errPptx); throw e; }
+          res.push(pdfOut(`${baseName(f.name)}.pdf`, r.bytes, `${r.slides} ${ox.slides} · ${ox.pptNote}`));
+          break;
+        }
         case "preview":
           need();
           break;
@@ -566,7 +596,7 @@ function Workspace({ tool, lang, t, title, desc }: { tool: ToolId; lang: Lang; t
         <FileDrop
           accept={accept}
           multiple={multiple}
-          label={items.length && multiple ? t.add : kind === "images" ? t.pickImages : kind === "pdfs" ? t.pickPdfs : kind === "docx" ? t.pickDocx : kind === "sheet" ? (lang === "az" ? "XLSX və ya CSV seçin" : lang === "tr" ? "XLSX veya CSV seçin" : lang === "ar" ? "اختر XLSX أو CSV" : lang === "ru" ? "Выберите XLSX или CSV" : "Choose an XLSX or CSV") : t.pickPdf}
+          label={items.length && multiple ? t.add : kind === "images" ? t.pickImages : kind === "pdfs" ? t.pickPdfs : kind === "docx" ? t.pickDocx : kind === "pptx" ? ox.pickPptx : kind === "sheet" ? (lang === "az" ? "XLSX və ya CSV seçin" : lang === "tr" ? "XLSX veya CSV seçin" : lang === "ar" ? "اختر XLSX أو CSV" : lang === "ru" ? "Выберите XLSX или CSV" : "Choose an XLSX or CSV") : t.pickPdf}
           hint={t.dropHint}
           onFiles={addFiles}
           compact={items.length > 0}
@@ -747,6 +777,10 @@ function Workspace({ tool, lang, t, title, desc }: { tool: ToolId; lang: Lang; t
           ) : null}
           {tool === "word-pdf" ? <p className="text-xs text-muted">{t.textOnly}</p> : null}
           {tool === "pdf-word" ? <p className="text-xs text-muted">{t.wordNote}</p> : null}
+          {tool === "pdf-excel" ? (
+            <div className="space-y-2"><Label>{ox.sheets}</Label><Seg name={ox.sheets} value={xlMode} onChange={setXlMode} options={[{ id: "pages", label: ox.perPage }, { id: "one", label: ox.oneSheet }]} /><p className="text-xs text-muted">{ox.xlNote}</p></div>
+          ) : null}
+          {tool === "ppt-pdf" ? <p className="text-xs text-muted">{ox.pptNote}</p> : null}
           {tool === "batch" ? (
             <div><Label>{t.batchOp}</Label><Seg name={t.batchOp} value={batchOp} onChange={setBatchOp} options={[{ id: "compress", label: t.opCompress }, { id: "rotate", label: t.opRotate }, { id: "watermark", label: t.opWatermark }, { id: "split", label: t.opSplit }]} /></div>
           ) : null}

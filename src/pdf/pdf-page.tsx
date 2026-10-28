@@ -53,7 +53,9 @@ const NEXT: Partial<Record<ToolId, ToolId[]>> = {
   unlock: ["protect", "compress", "merge"],
   crop: ["rotate", "pages", "compress"],
   grayscale: ["compress", "page-numbers", "merge"],
-  "excel-pdf": ["word-pdf", "merge", "page-numbers"],
+  "excel-pdf": ["pdf-excel", "word-pdf", "merge"],
+  "pdf-excel": ["excel-pdf", "pdf-word", "pdf-ocr"],
+  "ppt-pdf": ["word-pdf", "compress", "merge"],
   redact: ["protect", "sign", "watermark"],
   invoice: ["sign", "protect", "merge"],
 };

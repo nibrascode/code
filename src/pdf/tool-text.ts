@@ -1,8 +1,10 @@
 // Tool names and one-line descriptions, taken from the Nibras PDF app (5 languages).
-export const TOOL_IDS = ["write-pdf","merge","split","compress","image-pdf","pdf-image","rotate","protect","watermark","pages","scan","sign","ocr","pdf-ocr","pdf-word","preview","batch","extract-pages","word-pdf","page-numbers","unlock","crop","grayscale","excel-pdf","redact","invoice"] as const;
+export const TOOL_IDS = ["write-pdf","merge","split","compress","image-pdf","pdf-image","rotate","protect","watermark","pages","scan","sign","ocr","pdf-ocr","pdf-word","preview","batch","extract-pages","word-pdf","page-numbers","unlock","crop","grayscale","excel-pdf","redact","invoice","pdf-excel","ppt-pdf"] as const;
 export type ToolId = (typeof TOOL_IDS)[number];
 export const TOOL_TEXT: Record<"az" | "en" | "tr" | "ar" | "ru", Record<ToolId, { title: string; description: string }>> = {
   "az": {
+    "pdf-excel": { "title": "PDF-dən Excel", "description": "PDF cədvəlini XLSX faylına çevir" },
+    "ppt-pdf": { "title": "PowerPoint-dən PDF", "description": "PPTX slaydlarını PDF et" },
     "unlock": {
       "title": "PDF parolunu aç",
       "description": "Parolu bildiyiniz PDF-dən parolu götür"
@@ -109,6 +111,8 @@ export const TOOL_TEXT: Record<"az" | "en" | "tr" | "ar" | "ru", Record<ToolId, 
     }
   },
   "en": {
+    "pdf-excel": { "title": "PDF to Excel", "description": "Turn PDF tables into an XLSX file" },
+    "ppt-pdf": { "title": "PowerPoint to PDF", "description": "Turn PPTX slides into a PDF" },
     "unlock": {
       "title": "Unlock PDF",
       "description": "Remove the password from a PDF you can open"
@@ -215,6 +219,8 @@ export const TOOL_TEXT: Record<"az" | "en" | "tr" | "ar" | "ru", Record<ToolId, 
     }
   },
   "tr": {
+    "pdf-excel": { "title": "PDF'ten Excel", "description": "PDF tablolarını XLSX dosyasına çevirin" },
+    "ppt-pdf": { "title": "PowerPoint'ten PDF", "description": "PPTX slaytlarını PDF yapın" },
     "unlock": {
       "title": "PDF parolasını kaldır",
       "description": "Bildiğiniz parolayı PDF'ten kaldırın"
@@ -321,6 +327,8 @@ export const TOOL_TEXT: Record<"az" | "en" | "tr" | "ar" | "ru", Record<ToolId, 
     }
   },
   "ru": {
+    "pdf-excel": { "title": "PDF в Excel", "description": "Превратите таблицы PDF в файл XLSX" },
+    "ppt-pdf": { "title": "PowerPoint в PDF", "description": "Превратите слайды PPTX в PDF" },
     "unlock": {
       "title": "Снять пароль с PDF",
       "description": "Уберите пароль из PDF, который вы можете открыть"
@@ -427,6 +435,8 @@ export const TOOL_TEXT: Record<"az" | "en" | "tr" | "ar" | "ru", Record<ToolId, 
     }
   },
   "ar": {
+    "pdf-excel": { "title": "من PDF إلى Excel", "description": "حوّل جداول PDF إلى ملف XLSX" },
+    "ppt-pdf": { "title": "من PowerPoint إلى PDF", "description": "حوّل شرائح PPTX إلى PDF" },
     "unlock": {
       "title": "إزالة كلمة مرور PDF",
       "description": "أزل كلمة المرور من ملف PDF تعرف كلمته"

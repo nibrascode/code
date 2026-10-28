@@ -73,6 +73,20 @@ const INTENT: Partial<Record<ToolId, Record<Lang, { title: string; h1: string; d
     ar: { title: "تحويل PDF إلى أبيض وأسود — مجاناً", h1: "PDF بالرمادي", description: "حوّل PDF الملوّن إلى درجات الرمادي للطباعة" },
     ru: { title: "PDF в чёрно-белый — бесплатно", h1: "PDF в оттенки серого", description: "Переведите цветной PDF в оттенки серого для печати" },
   },
+  "pdf-excel": {
+    az: { title: "PDF-dən Excel — pulsuz", h1: "PDF-dən Excel-ə çevir", description: "PDF-dəki cədvəl və mətni XLSX vərəqinə köçür, brauzerdə" },
+    en: { title: "PDF to Excel — free", h1: "Convert PDF to Excel", description: "Move tables and text from a PDF into an XLSX sheet, in your browser" },
+    tr: { title: "PDF'ten Excel — ücretsiz", h1: "PDF'i Excel'e dönüştür", description: "PDF'teki tablo ve metni XLSX sayfasına aktarın, tarayıcıda" },
+    ar: { title: "من PDF إلى Excel — مجاناً", h1: "تحويل PDF إلى Excel", description: "انقل الجداول والنص من PDF إلى ورقة XLSX داخل المتصفح" },
+    ru: { title: "PDF в Excel — бесплатно", h1: "Конвертировать PDF в Excel", description: "Перенесите таблицы и текст из PDF в лист XLSX прямо в браузере" },
+  },
+  "ppt-pdf": {
+    az: { title: "PowerPoint-dən PDF — pulsuz", h1: "PPTX-i PDF-ə çevir", description: "Slaydları PDF səhifələrinə çevir, fayl serverə getmir" },
+    en: { title: "PowerPoint to PDF — free", h1: "Convert PPTX to PDF", description: "Turn slides into PDF pages; the file never leaves your browser" },
+    tr: { title: "PowerPoint'ten PDF — ücretsiz", h1: "PPTX'i PDF'ye dönüştür", description: "Slaytları PDF sayfalarına çevirin; dosya sunucuya gitmez" },
+    ar: { title: "من PowerPoint إلى PDF — مجاناً", h1: "تحويل PPTX إلى PDF", description: "حوّل الشرائح إلى صفحات PDF؛ لا يغادر الملف متصفحك" },
+    ru: { title: "PowerPoint в PDF — бесплатно", h1: "Конвертировать PPTX в PDF", description: "Превратите слайды в страницы PDF; файл не уходит на сервер" },
+  },
   "excel-pdf": {
     az: { title: "Excel-dən PDF — pulsuz", h1: "Excel və CSV-dən PDF", description: "XLSX və ya CSV cədvəlini səliqəli PDF cədvəlinə çevir" },
     en: { title: "Excel to PDF — free", h1: "Excel and CSV to PDF", description: "Turn an XLSX or CSV sheet into a neat PDF table" },
@@ -268,6 +282,20 @@ const FAQS: Partial<Record<ToolId, Record<Lang, { q: string; a: string }[]>>> = 
       { q: "Зачем серый?", a: "При чёрно-белой печати не тратится цветной тонер, и результат виден заранее." },
       { q: "Файл уходит на сервер?", a: "Нет. Всё делается в этом браузере." },
     ],
+  },
+  "pdf-excel": {
+    az: [{ q: "Cədvəl dəqiq köçür?", a: "Sütunlar mətnin səhifədəki yerinə görə qurulur. Sadə cədvəllər yaxşı çıxır; birləşmiş xana, çox sətirli xana və çərçivəsiz mürəkkəb cədvəli yoxlayın." }, { q: "Skan PDF olar?", a: "Skanda mətn qatı yoxdur. Əvvəl «PDF-dən mətn (OCR)» alətini işlədin." }, { q: "Fayl serverə gedir?", a: "Xeyr. Hər şey bu brauzerdə olur." }],
+    en: [{ q: "Is the table copied exactly?", a: "Columns are rebuilt from where text sits on the page. Simple tables work well; check merged cells, multi-line cells and complex tables without borders." }, { q: "Does it work with scans?", a: "Scans have no text layer. Run «PDF to text (OCR)» first." }, { q: "Is the file uploaded?", a: "No. Everything happens in this browser." }],
+    tr: [{ q: "Tablo birebir aktarılır mı?", a: "Sütunlar metnin sayfadaki konumuna göre kurulur. Basit tablolar iyi çıkar; birleşik ve çok satırlı hücreleri kontrol edin." }, { q: "Taranmış PDF olur mu?", a: "Taramada metin katmanı yoktur. Önce OCR aracını kullanın." }, { q: "Dosya sunucuya gider mi?", a: "Hayır. Her şey bu tarayıcıda olur." }],
+    ar: [{ q: "هل يُنقل الجدول بدقة؟", a: "تُبنى الأعمدة من موضع النص في الصفحة. الجداول البسيطة تخرج جيداً؛ افحص الخلايا المدمجة والمتعددة الأسطر." }, { q: "هل يعمل مع الممسوح ضوئياً؟", a: "لا توجد طبقة نص في المسح. استخدم أداة OCR أولاً." }, { q: "هل يُرفع الملف؟", a: "لا. كل شيء في هذا المتصفح." }],
+    ru: [{ q: "Таблица переносится точно?", a: "Столбцы восстанавливаются по положению текста. Простые таблицы выходят хорошо; проверьте объединённые и многострочные ячейки." }, { q: "Сканы подходят?", a: "У скана нет текстового слоя. Сначала запустите OCR." }, { q: "Файл уходит на сервер?", a: "Нет. Всё делается в этом браузере." }],
+  },
+  "ppt-pdf": {
+    az: [{ q: "Hansı fayllar?", a: "PPTX. Köhnə .ppt-ni PowerPoint-də PPTX kimi saxlayın." }, { q: "Dizayn tam qalır?", a: "Mətn qutuları və PNG/JPG şəkillər yerində çəkilir. Tema fonu, qrafik, SmartArt, animasiya və xüsusi şriftlər köçmür." }, { q: "Fayl serverə gedir?", a: "Xeyr. Hər şey bu brauzerdə olur." }],
+    en: [{ q: "Which files?", a: "PPTX. Save an old .ppt as PPTX in PowerPoint." }, { q: "Is the design kept?", a: "Text boxes and PNG/JPG pictures are drawn in place. Theme backgrounds, charts, SmartArt, animations and custom fonts are not copied." }, { q: "Is the file uploaded?", a: "No. Everything happens in this browser." }],
+    tr: [{ q: "Hangi dosyalar?", a: "PPTX. Eski .ppt'yi PowerPoint'te PPTX olarak kaydedin." }, { q: "Tasarım korunur mu?", a: "Metin kutuları ve PNG/JPG görseller yerinde çizilir. Tema arka planı, grafik, SmartArt ve özel yazı tipleri aktarılmaz." }, { q: "Dosya sunucuya gider mi?", a: "Hayır. Her şey bu tarayıcıda olur." }],
+    ar: [{ q: "ما الملفات؟", a: "PPTX. احفظ ملف ppt القديم بصيغة PPTX." }, { q: "هل يبقى التصميم؟", a: "تُرسم مربعات النص وصور PNG/JPG في مكانها. لا تُنقل خلفيات السمة والرسوم وSmartArt والخطوط الخاصة." }, { q: "هل يُرفع الملف؟", a: "لا. كل شيء في هذا المتصفح." }],
+    ru: [{ q: "Какие файлы?", a: "PPTX. Старый .ppt сохраните как PPTX." }, { q: "Дизайн сохраняется?", a: "Текстовые блоки и картинки PNG/JPG рисуются на местах. Фон темы, диаграммы, SmartArt и свои шрифты не переносятся." }, { q: "Файл уходит на сервер?", a: "Нет. Всё делается в этом браузере." }],
   },
   "excel-pdf": {
     az: [

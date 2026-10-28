@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import type { Dict } from "./copy";
 import { closePdf, openPdf, renderPageToCanvas } from "./lib/pdfjs";
 
-export type Out = { name: string; blob: Blob; kind: "pdf" | "image" | "zip" | "docx" | "text"; text?: string; note?: string; extra?: { label: string; name: string; blob: Blob }[] };
+export type Out = { name: string; blob: Blob; kind: "pdf" | "image" | "zip" | "docx" | "xlsx" | "text"; text?: string; note?: string; extra?: { label: string; name: string; blob: Blob }[] };
 
 export const btn =
   "inline-flex items-center justify-center gap-2 rounded-xl border border-[var(--pdf-edge,var(--color-border))] bg-[var(--pdf-glass,transparent)] px-4 py-2 text-sm font-medium text-fg transition duration-200 hover:-translate-y-px hover:bg-[var(--pdf-glass-hi,transparent)] active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-50";
