@@ -6,6 +6,7 @@ export const NOVA_PRIVACY: Record<Lang, NotePrivacy> = {
     "title": "Nibras Nova — Məxfilik siyasəti",
     "updated": "Son yenilənmə: 30 oktyabr 2026 · v2.0.0",
     "paragraphs": [
+      "Yeni: Qiblə istiqaməti ekranı (kompas, maqnit meylinin düzəlişi, Kəbəyə məsafə; sensor yoxdursa yalnız dərəcə göstərilir), şəhər adları 5 dildə (məs. Bakı, Gəncə, Məkkə; GeoNames alternateNames, CC BY 4.0) və axtarışda ə/ı/ş/ç/ğ/ö/ü fərqi nəzərə alınmır. Valideyn nəzarəti: 4–6 rəqəmli PIN (PBKDF2 + duz ilə hash-lənir, yalnız cihazda saxlanır), ayarların dəyişdirilməsi, tarixçənin silinməsi və təcili silmə üçün PIN tələbi, əlavə bloklanan saytlar, gündəlik vaxt limiti. 5 səhv cəhddən sonra müvəqqəti kilid. PIN unudularsa, yeganə yol tətbiq məlumatlarını sıfırlamaqdır; heç bir xarici xidmət istifadə olunmur. Qiblə üçün yer və sensor məlumatları cihazdan çıxmır.",
       "Namaz vaxtları standart olaraq Ümmül-Qura (Məkkə) metodu ilə hesablanır; metod ayarlarda dəyişdirilə bilər. Şəhər seçimi: əvvəl ölkə, sonra şəhər (oflayn, GeoNames, CC BY 4.0), vaxtlar həmin şəhərin saat qurşağında göstərilir.",
       "Namaz vaxtları: ana səhifədəki namaz vaxtları cihazda hesablanır (adhan kitabxanası, internet tələb olunmur). İcazə versəniz, yalnız təxmini (coarse) yer istifadə olunur; koordinatlar ~1 km dəqiqliyinə yuvarlaqlaşdırılıb yalnız cihazda saxlanır və heç yerə göndərilmir. İstəsəniz yer əvəzinə şəhər seçə bilərsiniz.",
       "Ehtiyat nüsxə: əlfəcin və tarixçəni JSON faylına ixrac/idxal etmək yalnız sizin seçdiyiniz fayla yazılır; tətbiq heç nə yükləmir.",
@@ -32,6 +33,7 @@ export const NOVA_PRIVACY: Record<Lang, NotePrivacy> = {
     "title": "Nibras Nova — Privacy policy",
     "updated": "Last updated: 30 October 2026 · v2.0.0",
     "paragraphs": [
+      "New: a Qibla direction screen (compass with magnetic-declination correction and distance to the Kaaba; without a compass sensor it shows the bearing only), city names in 5 languages (e.g. Bakı, Gəncə, Məkkə; GeoNames alternateNames, CC BY 4.0) with accent-insensitive search. Parental controls: a 4–6 digit PIN (hashed with PBKDF2 and a salt, stored only on the device) required to change settings, clear history or run the emergency wipe, plus extra blocked sites and a daily time limit. A temporary lock applies after 5 wrong attempts. If the PIN is forgotten, the only recovery is resetting the app data; no external service is used. Location and sensor data for the Qibla never leave the device.",
       "Prayer times use the Umm al-Qura (Makkah) method by default; the method can be changed in Settings. City selection: country first, then city (offline, GeoNames, CC BY 4.0); times are shown in that city’s time zone.",
       "Prayer times: prayer times on the home page are calculated on your device (adhan library, no internet needed). If you grant permission, only approximate (coarse) location is used; coordinates are rounded to about 1 km, stored only on the device and never sent anywhere. You can choose a city instead of sharing location.",
       "Backups: exporting/importing bookmarks and history as JSON only writes to or reads from the file you pick; nothing is uploaded.",
@@ -58,6 +60,7 @@ export const NOVA_PRIVACY: Record<Lang, NotePrivacy> = {
     "title": "Nibras Nova — Gizlilik politikası",
     "updated": "Son güncelleme: 30 Ekim 2026 · v2.0.0",
     "paragraphs": [
+      "Yeni: Kıble yönü ekranı (manyetik sapma düzeltmeli pusula ve Kâbe’ye uzaklık; pusula sensörü yoksa yalnızca derece gösterilir), 5 dilde şehir adları (ör. Bakı, Gəncə, Mekke; GeoNames alternateNames, CC BY 4.0) ve harf işaretlerine duyarsız arama. Ebeveyn denetimi: ayarları değiştirmek, geçmişi silmek veya acil silmeyi çalıştırmak için 4–6 haneli PIN (PBKDF2 ve tuz ile hash’lenir, yalnızca cihazda saklanır), ek engellenen siteler ve günlük süre sınırı. 5 yanlış denemeden sonra geçici kilit uygulanır. PIN unutulursa tek kurtarma yolu uygulama verilerini sıfırlamaktır; hiçbir harici hizmet kullanılmaz. Kıble için konum ve sensör verileri cihazdan çıkmaz.",
       "Namaz vakitleri varsayılan olarak Ümmü’l-Kurâ (Mekke) yöntemiyle hesaplanır; yöntem ayarlardan değiştirilebilir. Şehir seçimi: önce ülke, sonra şehir (çevrimdışı, GeoNames, CC BY 4.0); vakitler o şehrin saat diliminde gösterilir.",
       "Namaz vakitleri: ana sayfadaki namaz vakitleri cihazınızda hesaplanır (adhan kütüphanesi, internet gerekmez). İzin verirseniz yalnızca yaklaşık (coarse) konum kullanılır; koordinatlar yaklaşık 1 km’ye yuvarlanır, yalnızca cihazda saklanır ve hiçbir yere gönderilmez. Konum yerine şehir de seçebilirsiniz.",
       "Yedekler: yer imlerini ve geçmişi JSON olarak dışa/içe aktarma yalnızca seçtiğiniz dosyaya yazar veya ondan okur; hiçbir şey yüklenmez.",
@@ -84,6 +87,7 @@ export const NOVA_PRIVACY: Record<Lang, NotePrivacy> = {
     "title": "Nibras Nova — Политика конфиденциальности",
     "updated": "Обновлено: 30 октября 2026 · v2.0.0",
     "paragraphs": [
+      "Новое: экран направления киблы (компас с поправкой на магнитное склонение и расстояние до Каабы; без датчика компаса показывается только азимут), названия городов на 5 языках (напр. Баку, Гянджа, Мекка; GeoNames alternateNames, CC BY 4.0) и поиск без учёта диакритики. Родительский контроль: PIN из 4–6 цифр (хешируется PBKDF2 с солью, хранится только на устройстве) для изменения настроек, очистки истории и экстренного удаления, а также доп. блокировка сайтов и дневной лимит времени. После 5 неверных попыток — временная блокировка. Если PIN забыт, единственный способ — сброс данных приложения; внешние сервисы не используются. Данные о местоположении и датчиках для киблы не покидают устройство.",
       "Время намаза по умолчанию рассчитывается методом Умм аль-Кура (Мекка); метод можно изменить в настройках. Выбор города: сначала страна, затем город (офлайн, GeoNames, CC BY 4.0); время показывается в часовом поясе этого города.",
       "Время намаза: время намаза на главной рассчитывается на устройстве (библиотека adhan, интернет не нужен). Если вы дадите разрешение, используется только примерное местоположение; координаты округляются примерно до 1 км, хранятся только на устройстве и никуда не отправляются. Вместо местоположения можно выбрать город.",
       "Резервные копии: экспорт/импорт закладок и истории в JSON записывает и читает только выбранный вами файл; ничего не загружается в сеть.",
@@ -110,6 +114,7 @@ export const NOVA_PRIVACY: Record<Lang, NotePrivacy> = {
     "title": "Nibras Nova — سياسة الخصوصية",
     "updated": "آخر تحديث: 30 أكتوبر 2026 · v2.0.0",
     "paragraphs": [
+      "جديد: شاشة اتجاه القبلة (بوصلة مع تصحيح الانحراف المغناطيسي والمسافة إلى الكعبة؛ وبدون حساس بوصلة تُعرض الزاوية فقط)، وأسماء المدن بخمس لغات (مثل باكو وكنجة ومكة؛ GeoNames alternateNames، رخصة CC BY 4.0) مع بحث لا يتأثر بالتشكيل والحروف الخاصة. الرقابة الأبوية: رمز PIN من 4–6 أرقام (يُجزّأ بـ PBKDF2 مع ملح ويُحفظ على الجهاز فقط) مطلوب لتغيير الإعدادات ومسح السجل والمسح الطارئ، مع مواقع محظورة إضافية وحد وقت يومي. يُطبَّق قفل مؤقت بعد 5 محاولات خاطئة. إذا نُسي الرمز فالحل الوحيد إعادة ضبط بيانات التطبيق؛ ولا تُستخدم أي خدمة خارجية. بيانات الموقع والحساسات للقبلة لا تغادر الجهاز.",
       "تُحسب مواقيت الصلاة افتراضيًا بطريقة أم القرى (مكة)، ويمكن تغيير الطريقة من الإعدادات. اختيار المدينة: الدولة أولًا ثم المدينة (دون اتصال، GeoNames، رخصة CC BY 4.0)، وتُعرض الأوقات بتوقيت تلك المدينة.",
       "مواقيت الصلاة: تُحسب مواقيت الصلاة في الصفحة الرئيسية على جهازك (مكتبة adhan، دون حاجة إلى الإنترنت). إذا منحت الإذن، يُستخدم الموقع التقريبي فقط؛ تُقرَّب الإحداثيات إلى نحو 1 كم، وتُحفظ على الجهاز فقط ولا تُرسل إلى أي جهة. يمكنك اختيار مدينة بدلًا من مشاركة الموقع.",
       "النسخ الاحتياطي: تصدير/استيراد الإشارات والسجل بصيغة JSON يكتب أو يقرأ الملف الذي تختاره فقط؛ ولا يُرفع أي شيء.",
