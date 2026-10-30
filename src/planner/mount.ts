@@ -987,6 +987,7 @@ export function mountPlanner(root: HTMLElement, lang: Lang = "az"): () => void {
       tex: string,
       transform: string,
       baseLeft: number,
+      wash = "linear-gradient(transparent,transparent)",
     ) => {
       const mk = (left: number, w: number, h: number, top: number, style: string, proud = "") => {
         const d = document.createElement("div");
@@ -995,6 +996,15 @@ export function mountPlanner(root: HTMLElement, lang: Lang = "az"): () => void {
         cube.appendChild(d);
       };
       mk(0, full, hp, 0, tex);
+      // realism: soft shadow under the eaves, ground contact darkening and a light/shade wash
+      mk(
+        0,
+        full,
+        hp,
+        0,
+        `background:linear-gradient(180deg,rgba(25,12,4,${sky === "night" ? 0.4 : 0.34}) 0,rgba(25,12,4,.12) ${Math.max(10, hp * 0.1)}px,transparent ${Math.max(26, hp * 0.26)}px),linear-gradient(0deg,rgba(20,14,6,.28) 0,transparent ${Math.max(10, hp * 0.12)}px),${wash};border:none;pointer-events:none;`,
+        " translateZ(0.5px)",
+      );
       for (const hole of facadeHoles(id, full)) {
         const left = Math.max(
           3,
@@ -1006,11 +1016,12 @@ export function mountPlanner(root: HTMLElement, lang: Lang = "az"): () => void {
             : Math.max(16, hp * 0.34);
           const top = Math.max(4, Math.min(hp - h - 4, hp * 0.22));
           const t = Math.max(3, Math.min(6, hole.widthPx * 0.08));
-          const frame = "background:#f7f4ee;border:none;box-shadow:0 1px 0 rgba(80,50,20,.25);";
+          const frame =
+            "background:linear-gradient(#fff,#e9e3d8);border:none;box-shadow:0 2px 3px rgba(40,24,10,.45),1px 0 2px rgba(40,24,10,.3);";
           const glass =
             sky === "night"
               ? "background:linear-gradient(180deg,#ffe7b0,#ffb15a);box-shadow:0 0 10px rgba(255,170,60,.8);border:none;"
-              : "background:linear-gradient(115deg,rgba(255,255,255,.85),rgba(255,255,255,0) 38%),linear-gradient(180deg,#f4fbff 0%,#9ec8de 46%,#d5ecf8 47%,#7eafcc);border:none;";
+              : "background:linear-gradient(115deg,rgba(255,255,255,.85),rgba(255,255,255,0) 38%),linear-gradient(180deg,rgba(0,0,0,.28),transparent 24%),linear-gradient(180deg,#e9f5fc 0%,#8dbad3 46%,#c4e0ef 47%,#6b9dbb);box-shadow:inset 0 3px 4px rgba(0,0,0,.35);border:none;";
           mk(left - 1, hole.widthPx + 2, t, top - 1, frame, " translateZ(2.4px)");
           mk(left - 1, hole.widthPx + 2, t, top + h - t, frame, " translateZ(2.4px)");
           mk(left - 1, t, h, top, frame, " translateZ(2.4px)");
@@ -1031,7 +1042,7 @@ export function mountPlanner(root: HTMLElement, lang: Lang = "az"): () => void {
             ? Math.max(20, Math.min(hp * 0.94, (hole.heightM / Math.max(H, 0.1)) * hp))
             : Math.max(20, hp * 0.66);
           const top = hp - h;
-          const frame = "background:#f3eee6;border:none;";
+          const frame = "background:#f3eee6;border:none;box-shadow:0 2px 3px rgba(40,24,10,.45);";
           mk(left - 3, hole.widthPx + 6, 5, top - 4, frame, " translateZ(2.6px)");
           mk(left - 3, 4, h + 4, top - 4, frame, " translateZ(2.6px)");
           mk(left + hole.widthPx - 1, 4, h + 4, top - 4, frame, " translateZ(2.6px)");
@@ -1041,17 +1052,35 @@ export function mountPlanner(root: HTMLElement, lang: Lang = "az"): () => void {
             3,
             3,
             top + h * 0.48,
-            "background:radial-gradient(circle,#f0d48a,#b08a3e);border:none;border-radius:50%;",
+            "background:radial-gradient(circle,#f0d48a,#b08a3e);border:none;border-radius:50%;box-shadow:0 1px 2px rgba(0,0,0,.5);",
             " translateZ(2.8px)",
           );
         }
       }
     };
 
-    addWall("ext-N", lp, texBack, `translateZ(${wp / 2}px)`, 0);
-    addWall("ext-S", lp, texFront, `rotateY(180deg) translateZ(${wp / 2}px)`, 0);
-    addWall("ext-E", wp, texSide, `rotateY(90deg) translateZ(${lp / 2}px)`, lp / 2 - wp / 2);
-    addWall("ext-W", wp, texSide, `rotateY(-90deg) translateZ(${lp / 2}px)`, lp / 2 - wp / 2);
+    const lit = sky === "night" ? 0.05 : 0.14;
+    const washFront = `linear-gradient(105deg,rgba(255,244,214,${lit}),transparent 55%)`;
+    const washDark = (a: number) =>
+      `linear-gradient(90deg,rgba(20,16,30,${a}),rgba(20,16,30,${a / 3}))`;
+    addWall("ext-N", lp, texBack, `translateZ(${wp / 2}px)`, 0, washDark(0.16));
+    addWall("ext-S", lp, texFront, `rotateY(180deg) translateZ(${wp / 2}px)`, 0, washFront);
+    addWall(
+      "ext-E",
+      wp,
+      texSide,
+      `rotateY(90deg) translateZ(${lp / 2}px)`,
+      lp / 2 - wp / 2,
+      washDark(0.1),
+    );
+    addWall(
+      "ext-W",
+      wp,
+      texSide,
+      `rotateY(-90deg) translateZ(${lp / 2}px)`,
+      lp / 2 - wp / 2,
+      washDark(0.28),
+    );
 
     const eave = Math.max(10, bw + 4);
     const rise =
@@ -1096,13 +1125,37 @@ export function mountPlanner(root: HTMLElement, lang: Lang = "az"): () => void {
         form.roof === "shingle"
           ? "background-color:#5e646c;background-image:linear-gradient(90deg,rgba(0,0,0,.22) 1px,transparent 1px),repeating-linear-gradient(180deg,#8b929a 0 2px,#5a6168 3px 8px,#6d747c 9px 11px);background-size:26px 100%,100% 12px;border:none;box-shadow:inset 0 -10px 14px rgba(0,0,0,.25);"
           : "background-color:#8d3a2a;background-image:linear-gradient(90deg,rgba(0,0,0,.2) 1px,transparent 1px),repeating-linear-gradient(180deg,#d06a4e 0 2px,#8a3426 3px 8px,#b5523c 9px 13px);background-size:22px 100%,100% 14px;border:none;box-shadow:inset 0 -14px 16px rgba(40,10,6,.3);";
-      const addRoof = (transform: string) => {
+      const addRoof = (transform: string, light: string) => {
+        const geo = `width:${lp + eave * 2}px;height:${slopeLen}px;left:${-eave}px;top:${-slopeLen}px;transform-origin:center bottom;`;
+        addBit(`${geo}transform:${transform};${tile}`);
         addBit(
-          `width:${lp + eave * 2}px;height:${slopeLen}px;left:${-eave}px;top:${-slopeLen}px;transform-origin:center bottom;transform:${transform};${tile}`,
+          `${geo}transform:${transform} translateZ(0.6px);pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.12),transparent 30%),linear-gradient(0deg,rgba(0,0,0,.3),transparent 14%),${light};border:none;`,
         );
       };
-      addRoof(`translateZ(${wp / 2 + eave}px) rotateX(${rot}deg)`);
-      addRoof(`translateZ(${-(wp / 2 + eave)}px) rotateX(${-rot}deg)`);
+      addRoof(
+        `translateZ(${wp / 2 + eave}px) rotateX(${rot}deg)`,
+        `linear-gradient(100deg,rgba(255,236,190,${sky === "night" ? 0.04 : 0.16}),transparent 60%)`,
+      );
+      addRoof(
+        `translateZ(${-(wp / 2 + eave)}px) rotateX(${-rot}deg)`,
+        "linear-gradient(90deg,rgba(15,10,30,.32),rgba(15,10,30,.18))",
+      );
+      // ridge cap + fascia boards for a finished roof edge
+      const cap = "background:linear-gradient(90deg,#6b2a1e,#9a4230 50%,#6b2a1e);border:none;";
+      addBit(
+        `width:${lp + eave * 2}px;height:5px;left:${-eave}px;top:${-rise - 3}px;transform:translateZ(0.5px);${cap}`,
+      );
+      addBit(
+        `width:${lp + eave * 2}px;height:5px;left:${-eave}px;top:${-rise - 3}px;transform:rotateY(180deg) translateZ(0.5px);${cap}`,
+      );
+      const fascia = "background:linear-gradient(#f4efe6,#cfc6b6);border:none;";
+      const fh = Math.max(4, hp * 0.03);
+      addBit(
+        `width:${lp + eave * 2}px;height:${fh}px;left:${-eave}px;top:${-fh}px;transform:translateZ(${wp / 2 + eave}px);${fascia}`,
+      );
+      addBit(
+        `width:${lp + eave * 2}px;height:${fh}px;left:${-eave}px;top:${-fh}px;transform:rotateY(180deg) translateZ(${wp / 2 + eave}px);${fascia}`,
+      );
       const gableTex =
         form.skin === "wood"
           ? siding
@@ -1111,18 +1164,18 @@ export function mountPlanner(root: HTMLElement, lang: Lang = "az"): () => void {
             : brickTexture(scale, kL, kH, tikis, "#9a4a30");
       const addGable = (transform: string) => {
         addBit(
-          `width:${wp}px;height:${rise}px;left:${lp / 2 - wp / 2}px;top:${-rise}px;transform:${transform};clip-path:polygon(0 100%,50% 0,100% 100%);${gableTex}border:none;`,
+          `width:${wp}px;height:${rise}px;left:${lp / 2 - wp / 2}px;top:${-rise}px;transform:${transform};clip-path:polygon(2% 100%,50% 4%,98% 100%);${gableTex}border:none;`,
         );
       };
-      addGable(`rotateY(90deg) translateZ(${lp / 2 - 1}px)`);
-      addGable(`rotateY(-90deg) translateZ(${lp / 2 - 1}px)`);
+      addGable(`rotateY(90deg) translateZ(${lp / 2 - 3}px)`);
+      addGable(`rotateY(-90deg) translateZ(${lp / 2 - 3}px)`);
       if (form.roof === "tile" || form.roof === "steep") {
         const cw = Math.max(12, lp * 0.07);
         const cd = Math.max(10, wp * 0.12);
         const ch = Math.max(20, rise * 0.55);
         const cx = lp * 0.62;
         const sink = Math.round(rise * 0.18);
-        const chimneyBrick = brickTexture(scale, kL, kH, tikis, "#6e3424");
+        const chimneyBrick = `${brickTexture(scale, kL, kH, tikis, "#6e3424")}box-shadow:inset 0 -8px 10px rgba(0,0,0,.25);`;
         addBit(
           `width:${cw}px;height:${ch}px;left:${cx}px;top:${-rise - ch + sink}px;transform:translateZ(${cd / 2}px);${chimneyBrick}border:none;`,
         );
@@ -1160,6 +1213,7 @@ export function mountPlanner(root: HTMLElement, lang: Lang = "az"): () => void {
     site(
       `width:${gw}px;height:${gd}px;left:${(lp - gw) / 2}px;top:${hp / 2 - gd / 2}px;` +
         `transform:rotateX(-90deg) translateZ(${groundZ}px);border:none;` +
+        `-webkit-mask-image:radial-gradient(closest-side,#000 62%,transparent);mask-image:radial-gradient(closest-side,#000 62%,transparent);` +
         `background:` +
         (sky === "snow"
           ? `radial-gradient(ellipse at 30% 40%,rgba(255,255,255,.7),transparent 40%),linear-gradient(165deg,#ffffff,#e4edf5 55%,#d5e1ec);`
@@ -1194,6 +1248,28 @@ export function mountPlanner(root: HTMLElement, lang: Lang = "az"): () => void {
         `width:${crown * 0.82}px;height:${crown * 0.7}px;left:${x - crown * 0.32}px;top:${hp - th - crown * 0.2}px;transform:translateZ(${z}px) rotateY(80deg);background:radial-gradient(circle at 50% 40%,#b6dc70,#2a6e26 66%,#163e16);border:none;border-radius:50%;`,
       );
     };
+    // soft cast shadows on the ground for the trees
+    const treeShadow = (x: number, z: number, size: number) =>
+      site(
+        `width:${size * 1.5}px;height:${size * 0.8}px;left:${x - size * 0.6}px;top:${hp / 2 - (size * 0.8) / 2}px;transform:rotateX(-90deg) translateZ(${groundZ - 1.5}px) translateY(${-z + size * 0.1}px);border:none;background:radial-gradient(ellipse,rgba(10,20,6,.38),transparent 70%);`,
+      );
+    treeShadow(-78, wp * 0.55, Math.max(30, hp * 0.66 * 0.95));
+    treeShadow(lp + 52, wp * 0.1, Math.max(30, hp * 0.82 * 0.95));
+    // low shrubs along the front wall
+    const bush = (x: number, z: number, size: number) => {
+      const bgc =
+        "background:radial-gradient(circle at 38% 32%,#bde27a,#4c8f38 58%,#1f5a22);border:none;border-radius:50%;";
+      site(
+        `width:${size}px;height:${size * 0.8}px;left:${x - size / 2}px;top:${hp - size * 0.8}px;transform:translateZ(${z}px);${bgc}`,
+      );
+      site(
+        `width:${size}px;height:${size * 0.8}px;left:${x - size / 2}px;top:${hp - size * 0.8}px;transform:translateZ(${z}px) rotateY(75deg);${bgc}`,
+      );
+    };
+    const bs = Math.max(24, Math.min(56, hp * 0.3));
+    bush(lp * 0.1, -(wp / 2 + bs * 0.5), bs);
+    bush(lp * 0.9, -(wp / 2 + bs * 0.5), bs * 1.1);
+    bush(lp * 0.34, -(wp / 2 + bs * 0.4), bs * 0.8);
     tree(-78, wp * 0.55, 0.66);
     tree(lp + 52, wp * 0.1, 0.82);
 
