@@ -31,18 +31,19 @@ export const Route = createFileRoute("/")({
 
 const APK_HELP: Record<Lang, string> = { az: "APK qurulmur? Həll yolları", en: "APK won't install? Fixes", tr: "APK kurulmuyor mu? Çözümler", ar: "لا يُثبَّت APK؟ الحلول", ru: "APK не ставится? Решения" };
 
-const SOON_SLUGS = new Set(["nibras-qr", "nibras-docs", "nibras-plans", "nibras-note", "nibras-scan"]);
+const SOON_SLUGS = new Set(["nibras-qr", "nibras-docs", "nibras-plans", "nibras-note", "nibras-scan", "nibras-nova"]);
 
-const STATUS: Partial<Record<"nibras-arabic" | "nibras-pdf" | "nibras-qr" | "nibras-plans" | "nibras-docs" | "nibras-office" | "nibras-note" | "nibras-scan", TKey>> = {
+const STATUS: Partial<Record<"nibras-arabic" | "nibras-pdf" | "nibras-qr" | "nibras-plans" | "nibras-docs" | "nibras-office" | "nibras-note" | "nibras-scan" | "nibras-nova", TKey>> = {
   "nibras-qr": "soon",
   "nibras-plans": "soon",
   "nibras-docs": "soon",
   "nibras-note": "soon",
+  "nibras-nova": "soon",
   "nibras-scan": "soon",
 };
 
 const CARDS: {
-  slug: "nibras-arabic" | "nibras-pdf" | "nibras-qr" | "nibras-docs" | "nibras-plans" | "nibras-office" | "nibras-note" | "nibras-scan";
+  slug: "nibras-arabic" | "nibras-pdf" | "nibras-qr" | "nibras-docs" | "nibras-plans" | "nibras-office" | "nibras-note" | "nibras-scan" | "nibras-nova";
   name: string;
   icon: string;
   desc: TKey;
@@ -103,6 +104,13 @@ const CARDS: {
     icon: "/apps/nibras-note.webp",
     desc: "nx_note_d",
     chips: ["nx_note_1", "nx_note_2", "nx_note_3"],
+  },
+  {
+    slug: "nibras-nova",
+    name: "Nibras Nova",
+    icon: "/apps/nibras-nova.webp",
+    desc: "nx_nova_d",
+    chips: ["nx_nova_1", "nx_nova_2", "nx_nova_3"],
   },
 ];
 

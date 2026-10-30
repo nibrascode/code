@@ -52,6 +52,7 @@ export const CATALOG = [
   { slug: "nibras-docs", name: "Nibras Docs" },
   { slug: "nibras-plans", name: "Nibras Plans" },
   { slug: "nibras-note", name: "Nibras Note" },
+  { slug: "nibras-nova", name: "Nibras Nova" },
   { slug: "nibras-scan", name: "Nibras Scan" },
 ] as const;
 
@@ -61,6 +62,7 @@ export const ICONS: Record<string, string> = {
   "nibras-docs": "/apps/nibras-docs.jpg",
   "nibras-plans": "/apps/nibras-plans.jpg",
   "nibras-note": "/apps/nibras-note.jpg",
+  "nibras-nova": "/apps/nibras-nova.jpg",
   "nibras-scan": "/apps/nibras-scan.jpg",
 };
 

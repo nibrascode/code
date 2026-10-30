@@ -421,6 +421,21 @@
       "source": "/:prefix(|en/|tr/|ar/|ru/)programming/html-mdn-debugging",
       "destination": "/:prefix/programming/html-dars-debugging",
       "permanent": true
+    },
+    {
+      "source": "/nibrasnova/privacy",
+      "destination": "/privacy/nibras-nova",
+      "permanent": false
+    },
+    {
+      "source": "/nibrasnova",
+      "destination": "/nibrasnova/",
+      "permanent": false
+    },
+    {
+      "source": "/nibras-nova",
+      "destination": "/nibrasnova/",
+      "permanent": false
     }
   ],
   "headers": [
@@ -521,6 +536,10 @@
     }
   },
   "rewrites": [
+    {
+      "source": "/nibrasnova/",
+      "destination": "/nibrasnova/index.html"
+    },
     {
       "source": "/audio",
       "destination": "https://audio-nibrascode-1188.vercel.app/audio/"

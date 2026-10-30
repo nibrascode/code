@@ -1430,6 +1430,7 @@ function jsonLd(path: string, lang: Lang, copy: PageSeo, url: string) {
       "/apps/nibras-docs": "Nibras Docs",
       "/apps/nibras-plans": "Nibras Plans",
       "/apps/nibras-note": "Nibras Note",
+      "/apps/nibras-nova": "Nibras Nova",
       "/apps/nibras-scan": "Nibras Scan",
     };
     const categories: Record<string, string> = {
@@ -1439,6 +1440,7 @@ function jsonLd(path: string, lang: Lang, copy: PageSeo, url: string) {
       "/apps/nibras-docs": "BusinessApplication",
       "/apps/nibras-plans": "BusinessApplication",
       "/apps/nibras-note": "ProductivityApplication",
+      "/apps/nibras-nova": "BrowserApplication",
       "/apps/nibras-scan": "UtilitiesApplication",
     };
     return {

@@ -135,6 +135,7 @@ const APPS = [
   ["nibras-qr", "Nibras QR"],
   ["nibras-scan", "Nibras Scan"],
   ["nibras-note", "Nibras Note"],
+  ["nibras-nova", "Nibras Nova"],
   ["nibras-docs", "Nibras Docs"],
   ["nibras-plans", "Nibras Plans"],
 ] as const;

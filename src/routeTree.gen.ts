@@ -159,6 +159,7 @@ import { Route as OyunSlugRouteImport } from './routes/oyun.$slug'
 import { Route as PdfToolRouteImport } from './routes/pdf_.$tool'
 import { Route as PrivacySlugRouteImport } from './routes/privacy/$slug'
 import { Route as PrivacyNibrasNoteRouteImport } from './routes/privacy.nibras-note'
+import { Route as PrivacyNibrasNovaRouteImport } from './routes/privacy.nibras-nova'
 import { Route as PrivacyNibrasPdfRouteImport } from './routes/privacy.nibras-pdf'
 import { Route as PrivacyNibrasPlansRouteImport } from './routes/privacy.nibras-plans'
 import { Route as PrivacyNibrasScanRouteImport } from './routes/privacy.nibras-scan'
@@ -1069,6 +1070,11 @@ const PrivacySlugRoute = PrivacySlugRouteImport.update({
 const PrivacyNibrasNoteRoute = PrivacyNibrasNoteRouteImport.update({
   id: '/nibras-note',
   path: '/nibras-note',
+  getParentRoute: () => PrivacyRoute,
+} as any)
+const PrivacyNibrasNovaRoute = PrivacyNibrasNovaRouteImport.update({
+  id: '/nibras-nova',
+  path: '/nibras-nova',
   getParentRoute: () => PrivacyRoute,
 } as any)
 const PrivacyNibrasPdfRoute = PrivacyNibrasPdfRouteImport.update({
@@ -2028,6 +2034,7 @@ export interface FileRoutesByFullPath {
   '/pdf/$tool': typeof PdfToolRoute
   '/privacy/$slug': typeof PrivacySlugRoute
   '/privacy/nibras-note': typeof PrivacyNibrasNoteRoute
+  '/privacy/nibras-nova': typeof PrivacyNibrasNovaRoute
   '/privacy/nibras-pdf': typeof PrivacyNibrasPdfRoute
   '/privacy/nibras-plans': typeof PrivacyNibrasPlansRoute
   '/privacy/nibras-scan': typeof PrivacyNibrasScanRoute
@@ -2340,6 +2347,7 @@ export interface FileRoutesByTo {
   '/pdf/$tool': typeof PdfToolRoute
   '/privacy/$slug': typeof PrivacySlugRoute
   '/privacy/nibras-note': typeof PrivacyNibrasNoteRoute
+  '/privacy/nibras-nova': typeof PrivacyNibrasNovaRoute
   '/privacy/nibras-pdf': typeof PrivacyNibrasPdfRoute
   '/privacy/nibras-plans': typeof PrivacyNibrasPlansRoute
   '/privacy/nibras-scan': typeof PrivacyNibrasScanRoute
@@ -2654,6 +2662,7 @@ export interface FileRoutesById {
   '/pdf_/$tool': typeof PdfToolRoute
   '/privacy/$slug': typeof PrivacySlugRoute
   '/privacy/nibras-note': typeof PrivacyNibrasNoteRoute
+  '/privacy/nibras-nova': typeof PrivacyNibrasNovaRoute
   '/privacy/nibras-pdf': typeof PrivacyNibrasPdfRoute
   '/privacy/nibras-plans': typeof PrivacyNibrasPlansRoute
   '/privacy/nibras-scan': typeof PrivacyNibrasScanRoute
@@ -2969,6 +2978,7 @@ export interface FileRouteTypes {
     | '/pdf/$tool'
     | '/privacy/$slug'
     | '/privacy/nibras-note'
+    | '/privacy/nibras-nova'
     | '/privacy/nibras-pdf'
     | '/privacy/nibras-plans'
     | '/privacy/nibras-scan'
@@ -3281,6 +3291,7 @@ export interface FileRouteTypes {
     | '/pdf/$tool'
     | '/privacy/$slug'
     | '/privacy/nibras-note'
+    | '/privacy/nibras-nova'
     | '/privacy/nibras-pdf'
     | '/privacy/nibras-plans'
     | '/privacy/nibras-scan'
@@ -3594,6 +3605,7 @@ export interface FileRouteTypes {
     | '/pdf_/$tool'
     | '/privacy/$slug'
     | '/privacy/nibras-note'
+    | '/privacy/nibras-nova'
     | '/privacy/nibras-pdf'
     | '/privacy/nibras-plans'
     | '/privacy/nibras-scan'
@@ -4876,6 +4888,13 @@ declare module '@tanstack/react-router' {
       path: '/nibras-note'
       fullPath: '/privacy/nibras-note'
       preLoaderRoute: typeof PrivacyNibrasNoteRouteImport
+      parentRoute: typeof PrivacyRoute
+    }
+    '/privacy/nibras-nova': {
+      id: '/privacy/nibras-nova'
+      path: '/nibras-nova'
+      fullPath: '/privacy/nibras-nova'
+      preLoaderRoute: typeof PrivacyNibrasNovaRouteImport
       parentRoute: typeof PrivacyRoute
     }
     '/privacy/nibras-pdf': {
@@ -6467,6 +6486,7 @@ const OyunRouteWithChildren = OyunRoute._addFileChildren(OyunRouteChildren)
 interface PrivacyRouteChildren {
   PrivacySlugRoute: typeof PrivacySlugRoute
   PrivacyNibrasNoteRoute: typeof PrivacyNibrasNoteRoute
+  PrivacyNibrasNovaRoute: typeof PrivacyNibrasNovaRoute
   PrivacyNibrasPdfRoute: typeof PrivacyNibrasPdfRoute
   PrivacyNibrasPlansRoute: typeof PrivacyNibrasPlansRoute
   PrivacyNibrasScanRoute: typeof PrivacyNibrasScanRoute
@@ -6476,6 +6496,7 @@ interface PrivacyRouteChildren {
 const PrivacyRouteChildren: PrivacyRouteChildren = {
   PrivacySlugRoute: PrivacySlugRoute,
   PrivacyNibrasNoteRoute: PrivacyNibrasNoteRoute,
+  PrivacyNibrasNovaRoute: PrivacyNibrasNovaRoute,
   PrivacyNibrasPdfRoute: PrivacyNibrasPdfRoute,
   PrivacyNibrasPlansRoute: PrivacyNibrasPlansRoute,
   PrivacyNibrasScanRoute: PrivacyNibrasScanRoute,

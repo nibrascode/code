@@ -8,6 +8,7 @@ const CARDS = [
   { slug: "nibras-docs", name: "Nibras Docs", icon: "/apps/nibras-docs.webp" },
   { slug: "nibras-plans", name: "Nibras Plans", icon: "/apps/nibras-plans.webp" },
   { slug: "nibras-note", name: "Nibras Note", icon: "/apps/nibras-note.webp" },
+  { slug: "nibras-nova", name: "Nibras Nova", icon: "/apps/nibras-nova.webp" },
   { slug: "nibras-scan", name: "Nibras Scan", icon: "/apps/nibras-scan.webp" },
 ] as const;
 

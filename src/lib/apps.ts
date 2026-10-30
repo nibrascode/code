@@ -18,6 +18,7 @@ export type AppSlug =
   | "nibras-docs"
   | "nibras-plans"
   | "nibras-note"
+  | "nibras-nova"
   | "nibras-scan"
   | "nibras-pdf"
   | "nibras-qr"
@@ -84,6 +85,16 @@ export const STUDIO_APPS: StudioApp[] = [
     leadKey: "note_lead",
     bodyKey: "note_body",
     features: ["note_f1", "note_f2", "note_f3"],
+    shots: [],
+  },
+  {
+    slug: "nibras-nova",
+    name: "Nibras Nova",
+    icon: "/apps/nibras-nova.webp",
+    playStoreUrl: null,
+    leadKey: "nova_lead",
+    bodyKey: "nova_body",
+    features: ["nova_f1", "nova_f2", "nova_f3"],
     shots: [],
   },
   {
@@ -171,6 +182,7 @@ export const APP_STATUS: Record<AppSlug, AppStatus> = {
   "nibras-scan": "building",
   "majmu-al-fatawa": "building",
   "nibras-note": "planned",
+  "nibras-nova": "building",
   "nibras-plans": "planned",
 };
 

@@ -96,6 +96,7 @@ export const STORE: Partial<Record<AppSlug, StoreFacts>> = {
   },
   "nibras-plans": { soon: true, privacyUrl: "/privacy/nibras-plans" },
   "nibras-note": { soon: true, pkg: "com.nibras.note", privacyUrl: "/privacy/nibras-note" },
+  "nibras-nova": { soon: true, pkg: "com.nibras.nova", privacyUrl: "/privacy/nibras-nova" },
   "nibras-scan": { soon: true, pkg: "com.nibras.scan", privacyUrl: "/privacy/nibras-scan" },
   "nibras-office": {
     version: "1.0.1",
