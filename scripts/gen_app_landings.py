@@ -9,7 +9,7 @@ LANGS = ["az", "en", "tr", "ru", "ar"]
 DIR = {"nibras-arabic": "nibrasarabic", "nibras-docs": "nibrasdocs", "nibras-plans": "nibrasplans", "nibras-note": "nibrasnote",
        "nibras-scan": "nibrasscan", "nibras-pdf": "nibraspdf", "nibras-qr": "nibrasqr", "nibras-office": "nibrasoffice",
        "majmu-al-fatawa": "majmualfatawa"}
-PRIV = {"nibras-pdf", "nibras-note", "nibras-plans", "nibras-scan", "nibras-qr", "nibras-arabic", "nibras-docs", "nibras-office", "majmu-al-fatawa"}
+PRIV = {"nibras-pdf", "nibras-note", "nibras-plans", "nibras-scan", "nibras-qr", "nibras-arabic", "nibras-docs"}
 UI = {
  "az": dict(app="Tətbiq səhifəsi", play="Google Play-dən yüklə", huawei="AppGallery", feat="Əsas imkanlar", about="Haqqında", shots="Ekran görüntüləri", priv="Məxfilik siyasəti", all="Bütün tətbiqlər", web="Veb versiyanı aç", note="Mağaza linki hazır olanda burada görünəcək."),
  "en": dict(app="App page", play="Get it on Google Play", huawei="AppGallery", feat="Key features", about="About", shots="Screenshots", priv="Privacy policy", all="All apps", web="Open the web version", note="The store link will appear here when it is ready."),
