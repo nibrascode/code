@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { ArrowLeft, ArrowRight, ChevronDown, Download, ExternalLink, Lock, ShieldCheck, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, ChevronDown, Download, ExternalLink, Lock, ShieldCheck, Sparkles, X } from "lucide-react";
 import type { Lang } from "@/lib/i18n";
 import { STUDIO_APPS, appStatusLabel, appStoreLinks, statusStoreLinks, type StudioApp } from "@/lib/apps";
 import { effectiveApp, playListed, pick, shotsFor } from "@/lib/app-store";
@@ -21,6 +21,27 @@ function fmtDate(iso: string, _lang: Lang) {
   const [y, m, d] = iso.split("-");
   return `${d}.${m}.${y}`;
 }
+
+
+const LANDING: Record<string, string> = {
+  "nibras-nova": "nibrasnova",
+  "nibras-arabic": "nibrasarabic",
+  "nibras-docs": "nibrasdocs",
+  "nibras-plans": "nibrasplans",
+  "nibras-note": "nibrasnote",
+  "nibras-scan": "nibrasscan",
+  "nibras-pdf": "nibraspdf",
+  "nibras-qr": "nibrasqr",
+  "nibras-office": "nibrasoffice",
+  "majmu-al-fatawa": "majmualfatawa",
+};
+const LANDING_LABEL: Record<Lang, string> = {
+  az: "Tanıtım səhifəsi",
+  en: "Feature page",
+  tr: "Tanıtım sayfası",
+  ru: "Страница о приложении",
+  ar: "صفحة التعريف",
+};
 
 export function iconWebp(src: string) {
   return src.replace(/\.(jpg|png)$/, ".webp");
@@ -167,6 +188,12 @@ export function StoreAppPage({ app: rawApp, live }: { app: StudioApp; live?: Stu
             ) : null}
           </>
         )}
+        {LANDING[app.slug] ? (
+          <a className="ns-get is-alt ns-landing" href={`/${LANDING[app.slug]}/${lang === "az" ? "" : `${lang}/`}`}>
+            <Sparkles className="size-4" />
+            {LANDING_LABEL[lang]}
+          </a>
+        ) : null}
         {app.slug === "nibras-qr" ? (
           <a className="ns-get is-alt" href={localeHref(lang, "/qr")}>
             <ExternalLink className="size-4" />

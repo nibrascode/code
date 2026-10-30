@@ -1,0 +1,10 @@
+.hero .lead{font-size:1.15rem;color:#dbe2ff}
+.cta{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;text-decoration:none;font-weight:600;color:var(--txt);border:1px solid var(--line);background:rgba(20,29,74,.6)}
+.btn.main{background:linear-gradient(90deg,var(--cyan),var(--violet));color:#fff;border:0;box-shadow:0 8px 30px rgba(0,0,0,.35)}
+.btn:hover{transform:translateY(-1px)}
+.note{color:var(--mut);font-size:.9rem;margin-top:12px}
+.hero img{box-shadow:0 0 60px color-mix(in srgb,var(--cyan) 60%,transparent),0 0 120px color-mix(in srgb,var(--violet) 35%,transparent)}
+.shots{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px}.shots img{height:420px;border-radius:18px;border:1px solid var(--line)}
+.card h3{margin:0}
+.pill.on{border-color:var(--cyan)}
