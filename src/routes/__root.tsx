@@ -366,9 +366,18 @@ function SeoLinks() {
         <link key={code} rel="alternate" {...{ hreflang: code }} href={pageUrl(path, code)} />
       ))}
       <link rel="alternate" {...{ hreflang: "x-default" }} href={pageUrl(path, "az")} />
+      {ZH_PRIVACY[path.replace(/\/$/, "")] ? (
+        <link rel="alternate" {...{ hreflang: "zh-Hans" }} href={`${SITE}${ZH_PRIVACY[path.replace(/\/$/, "")]}`} />
+      ) : null}
     </>
   );
 }
+
+/** Static Simplified Chinese privacy policies (public/privacy/*-zh.html). */
+const ZH_PRIVACY: Record<string, string> = {
+  "/privacy/nibras-nova": "/privacy/nibras-nova-zh.html",
+  "/privacy/nibras-scan": "/privacy/nibras-scan-zh.html",
+};
 
 function RootDocument() {
   const pathname = useRouterState({ select: (state) => state.location.pathname });

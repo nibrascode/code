@@ -176,9 +176,9 @@ export function AppPrivacyView({ slug, rows }: { slug: string; rows: StudioPriva
           </InfoCard>
         ))}
       </InfoCards>
-      {slug === "nibras-scan" ? (
+      {slug === "nibras-scan" || slug === "nibras-nova" ? (
         <p>
-          <a href="/privacy/nibras-scan-zh.html" lang="zh-Hans">
+          <a href={`/privacy/${slug}-zh.html`} lang="zh-Hans" hrefLang="zh-Hans">
             简体中文版隐私政策 (Chinese privacy policy)
           </a>
         </p>
