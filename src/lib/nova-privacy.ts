@@ -6,6 +6,8 @@ export const NOVA_PRIVACY: Record<Lang, NotePrivacy> = {
     "title": "Nibras Nova — Məxfilik siyasəti",
     "updated": "Son yenilənmə: 30 oktyabr 2026 · v2.0.0",
     "paragraphs": [
+      "Namaz vaxtları: ana səhifədəki namaz vaxtları cihazda hesablanır (adhan kitabxanası, internet tələb olunmur). İcazə versəniz, yalnız təxmini (coarse) yer istifadə olunur; koordinatlar ~1 km dəqiqliyinə yuvarlaqlaşdırılıb yalnız cihazda saxlanır və heç yerə göndərilmir. İstəsəniz yer əvəzinə şəhər seçə bilərsiniz.",
+      "Ehtiyat nüsxə: əlfəcin və tarixçəni JSON faylına ixrac/idxal etmək yalnız sizin seçdiyiniz fayla yazılır; tətbiq heç nə yükləmir.",
       "Uşaq və ailə üçün təhlükəsizlik: yetkin (18+) saytlar həmişə bloklanır, Google, Bing, DuckDuckGo və YouTube-da təhlükəsiz axtarış məcburidir. Yoxlama tamamilə cihazda, daxili siyahı (StevenBlack/hosts, MIT) ilə aparılır; heç bir baxış məlumatı heç yerə göndərilmir. Gizli vərəqlərdə də işləyir.",
       "1. Qısa məlumat",
       "Nibras Nova Nibras Code tərəfindən hazırlanmış veb brauzerdir. Tətbiqdə istifadəçi hesabı, reklam, analitika və ya xəta-hesabat SDK-ları yoxdur. Tətbiqdə yaratdığınız hər şey (tarixçə, əlfəcinlər, vərəqlər, ayarlar, qeydlər, seyf məzmunu) yalnız cihazınızda saxlanılır. Biz, yəni tərtibatçı, heç bir məlumatınızı almırıq və saxlamırıq.",
@@ -29,6 +31,8 @@ export const NOVA_PRIVACY: Record<Lang, NotePrivacy> = {
     "title": "Nibras Nova — Privacy policy",
     "updated": "Last updated: 30 October 2026 · v2.0.0",
     "paragraphs": [
+      "Prayer times: prayer times on the home page are calculated on your device (adhan library, no internet needed). If you grant permission, only approximate (coarse) location is used; coordinates are rounded to about 1 km, stored only on the device and never sent anywhere. You can choose a city instead of sharing location.",
+      "Backups: exporting/importing bookmarks and history as JSON only writes to or reads from the file you pick; nothing is uploaded.",
       "Family safety: adult (18+) sites are always blocked and SafeSearch is enforced on Google, Bing, DuckDuckGo and YouTube. The check runs entirely on your device using a bundled list (StevenBlack/hosts, MIT); no browsing data is sent anywhere. It also applies in private tabs.",
       "1. Summary",
       "Nibras Nova is a web browser made by Nibras Code. It has no user accounts, no ads, no analytics and no crash-reporting SDKs. Everything you create in the app (history, bookmarks, tabs, settings, notes, vault items) is stored only on your device. We, the developer, do not receive or store any of your data.",
@@ -52,6 +56,8 @@ export const NOVA_PRIVACY: Record<Lang, NotePrivacy> = {
     "title": "Nibras Nova — Gizlilik politikası",
     "updated": "Son güncelleme: 30 Ekim 2026 · v2.0.0",
     "paragraphs": [
+      "Namaz vakitleri: ana sayfadaki namaz vakitleri cihazınızda hesaplanır (adhan kütüphanesi, internet gerekmez). İzin verirseniz yalnızca yaklaşık (coarse) konum kullanılır; koordinatlar yaklaşık 1 km’ye yuvarlanır, yalnızca cihazda saklanır ve hiçbir yere gönderilmez. Konum yerine şehir de seçebilirsiniz.",
+      "Yedekler: yer imlerini ve geçmişi JSON olarak dışa/içe aktarma yalnızca seçtiğiniz dosyaya yazar veya ondan okur; hiçbir şey yüklenmez.",
       "Aile güvenliği: yetişkin (18+) siteler her zaman engellenir; Google, Bing, DuckDuckGo ve YouTube’da Güvenli Arama zorunludur. Kontrol tamamen cihazda, uygulamaya gömülü liste (StevenBlack/hosts, MIT) ile yapılır; hiçbir tarama verisi bir yere gönderilmez. Gizli sekmelerde de çalışır.",
       "1. Özet",
       "Nibras Nova, Nibras Code tarafından geliştirilen bir web tarayıcısıdır. Kullanıcı hesabı, reklam, analiz veya hata raporlama SDK'sı yoktur. Uygulamada oluşturduğunuz her şey (geçmiş, yer imleri, sekmeler, ayarlar, notlar, kasa içeriği) yalnızca cihazınızda saklanır. Geliştirici olarak hiçbir verinizi almıyor ve saklamıyoruz.",
@@ -75,6 +81,8 @@ export const NOVA_PRIVACY: Record<Lang, NotePrivacy> = {
     "title": "Nibras Nova — Политика конфиденциальности",
     "updated": "Обновлено: 30 октября 2026 · v2.0.0",
     "paragraphs": [
+      "Время намаза: время намаза на главной рассчитывается на устройстве (библиотека adhan, интернет не нужен). Если вы дадите разрешение, используется только примерное местоположение; координаты округляются примерно до 1 км, хранятся только на устройстве и никуда не отправляются. Вместо местоположения можно выбрать город.",
+      "Резервные копии: экспорт/импорт закладок и истории в JSON записывает и читает только выбранный вами файл; ничего не загружается в сеть.",
       "Безопасность семьи: сайты для взрослых (18+) всегда блокируются, в Google, Bing, DuckDuckGo и YouTube принудительно включён безопасный поиск. Проверка выполняется полностью на устройстве по встроенному списку (StevenBlack/hosts, MIT); данные о просмотре никуда не отправляются. Работает и в приватных вкладках.",
       "1. Кратко",
       "Nibras Nova — веб-браузер от Nibras Code. В нём нет учётных записей, рекламы, аналитики и SDK для отчётов о сбоях. Всё, что вы создаёте в приложении (история, закладки, вкладки, настройки, заметки, содержимое хранилища), хранится только на вашем устройстве. Мы, разработчик, не получаем и не храним ваши данные.",
@@ -98,6 +106,8 @@ export const NOVA_PRIVACY: Record<Lang, NotePrivacy> = {
     "title": "Nibras Nova — سياسة الخصوصية",
     "updated": "آخر تحديث: 30 أكتوبر 2026 · v2.0.0",
     "paragraphs": [
+      "مواقيت الصلاة: تُحسب مواقيت الصلاة في الصفحة الرئيسية على جهازك (مكتبة adhan، دون حاجة إلى الإنترنت). إذا منحت الإذن، يُستخدم الموقع التقريبي فقط؛ تُقرَّب الإحداثيات إلى نحو 1 كم، وتُحفظ على الجهاز فقط ولا تُرسل إلى أي جهة. يمكنك اختيار مدينة بدلًا من مشاركة الموقع.",
+      "النسخ الاحتياطي: تصدير/استيراد الإشارات والسجل بصيغة JSON يكتب أو يقرأ الملف الذي تختاره فقط؛ ولا يُرفع أي شيء.",
       "أمان العائلة: تُحظر المواقع الإباحية (18+) دائمًا، ويُفرض البحث الآمن في Google وBing وDuckDuckGo وYouTube. يتم الفحص بالكامل على جهازك باستخدام قائمة مدمجة (StevenBlack/hosts، رخصة MIT)؛ ولا تُرسل أي بيانات تصفح إلى أي جهة. ويعمل أيضًا في الألسنة الخاصة.",
       "1. ملخص",
       "نبراس نوفا متصفح ويب من تطوير Nibras Code. لا يحتوي على حسابات مستخدمين أو إعلانات أو تحليلات أو أدوات تقارير أعطال. كل ما تنشئه في التطبيق (السجل، الإشارات، علامات التبويب، الإعدادات، الملاحظات، محتوى الخزنة) يُحفظ على جهازك فقط. نحن، المطوّر، لا نستلم أي بيانات منك ولا نخزّنها.",
