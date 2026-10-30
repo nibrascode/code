@@ -8,3 +8,18 @@
 .shots{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px}.shots img{height:420px;border-radius:18px;border:1px solid var(--line)}
 .card h3{margin:0}
 .pill.on{border-color:var(--cyan)}
+.chips{list-style:none;padding:0;margin:16px 0 0;display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.chips li{padding:5px 12px;border-radius:999px;font-size:.85rem;background:color-mix(in srgb,var(--cyan) 14%,transparent);border:1px solid color-mix(in srgb,var(--cyan) 40%,transparent)}
+.sec{margin-top:34px}.gh{margin:22px 0 10px;color:var(--cyan);font-size:1.05rem}
+.card h3,.card h4{margin:0 0 6px;font-size:1.02rem}
+.grid.wide{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}.two h2{margin-top:0}
+.lead2 p{font-size:1.04rem}.mt{margin-top:14px}
+.steps{padding-inline-start:22px;margin:0}.steps li{margin:8px 0;color:#cfd6f7}.steps li::marker{color:var(--cyan);font-weight:700}
+.doc th{color:var(--cyan);width:40%}
+.faq details{background:linear-gradient(160deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:16px;padding:4px 18px;margin-bottom:10px}
+.faq summary{cursor:pointer;list-style:none}.faq summary::-webkit-details-marker{display:none}
+.faq summary h3{display:inline;font-size:1rem;margin:0}.faq summary{padding:12px 0}.faq summary:after{content:"+";float:inline-end;color:var(--cyan);font-weight:700}
+.faq details[open] summary:after{content:"–"}.faq p{color:#cfd6f7;margin:0 0 14px}
+.relc{display:flex;gap:12px;align-items:center;text-decoration:none;color:var(--txt)}.relc img{width:48px;height:48px;border-radius:12px;flex:none}
+.relc span{display:flex;flex-direction:column}.relc small{color:var(--mut);line-height:1.35}
