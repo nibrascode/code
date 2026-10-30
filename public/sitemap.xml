@@ -351,16 +351,6 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/privacy/nibras-nova"/>
   </url>
   <url>
-    <loc>https://nibrascode.com/nibrasnova/</loc>
-    <lastmod>2026-10-27</lastmod>
-    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/nibrasnova/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/nibrasnova/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/nibrasnova/?lang=ar"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/nibrasnova/?lang=ru"/>
-    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/nibrasnova/?lang=tr"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/nibrasnova/"/>
-  </url>
-  <url>
     <loc>https://nibrascode.com/en/privacy/nibras-pdf</loc>
     <lastmod>2026-09-29</lastmod>
     <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/privacy/nibras-pdf"/>

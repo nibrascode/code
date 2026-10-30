@@ -89,7 +89,8 @@ def info(slug):
     st = "play" if play else f.get("status", "prep")
     return f, play, st
 
-CSS_EXTRA = ""
+# old /nibrasnova/?lang=xx links -> per-language page
+LEGACY = '<script>(function(){var q=new URLSearchParams(location.search).get("lang");if(q&&["en","tr","ru","ar"].indexOf(q)>=0)location.replace("/nibrasnova/"+q+"/")})()</script>'
 def page(slug, l, c1, c2):
     a = apps[slug]; n = a["name"]; t = a["t"][l]; u = UI[l]; f, play, st = info(slug)
     fmt = lambda k, **kw: u[k].format(n=n, **kw)
@@ -165,7 +166,7 @@ def page(slug, l, c1, c2):
 <meta property="og:type" content="website"><meta property="og:site_name" content="Nibras Code"><meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(desc)}"><meta property="og:url" content="{canon}"><meta property="og:image" content="{img}"><meta property="og:image:alt" content="{e(n)}"><meta property="og:locale" content="{ {"az":"az_AZ","en":"en_US","tr":"tr_TR","ru":"ru_RU","ar":"ar_AR"}[l] }">
 <meta name="twitter:card" content="summary"><meta name="twitter:title" content="{e(title)}"><meta name="twitter:description" content="{e(desc)}"><meta name="twitter:image" content="{img}">
 <link rel="icon" href="{a["icon"]}"><link rel="stylesheet" href="/nibrasnova/style.css"><link rel="stylesheet" href="/nibrasnova/landing.css">
-<style>:root{{--cyan:{c1};--violet:{c2};--blue:{c1}}}</style>{ld}</head>
+<style>:root{{--cyan:{c1};--violet:{c2};--blue:{c1}}}</style>{ld}{LEGACY if (slug == "nibras-nova" and l == "az") else ""}</head>
 <body class="{l}"><div class="wrap"><nav aria-label="Nibras"><a class="brand" href="{land_href(slug, l)}"><img src="{a["icon"]}" alt="{e(n)}" width="44" height="44">{e(n)}</a>
 <div class="links"><a class="pill" href="{app_href(slug, l)}">{e(u["app"])}</a><a class="pill" href="{"/apps" if l == "az" else "/" + l + "/apps"}">{e(u["all"])}</a><a class="pill" href="{SITE}{"" if l == "az" else "/" + l}">nibrascode.com</a>{langs}</div></nav>
 <main><header class="hero"><img src="{a["icon"]}" alt="{e(n)}" width="120" height="120"><h1>{e(n)}</h1><p class="sub lead">{e(t["lead"])}</p>
