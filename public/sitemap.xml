@@ -62248,4 +62248,54 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/ereb-dili/feil/uzaqlasmaq-naa"/>
   </url>
 <!-- /arabic-verbs -->
+  <url>
+    <loc>https://nibrascode.com/pdf/url-pdf</loc>
+    <lastmod>2026-11-01</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/pdf/url-pdf"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/pdf/url-pdf"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/pdf/url-pdf"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/pdf/url-pdf"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/pdf/url-pdf"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/pdf/url-pdf"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/en/pdf/url-pdf</loc>
+    <lastmod>2026-11-01</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/pdf/url-pdf"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/pdf/url-pdf"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/pdf/url-pdf"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/pdf/url-pdf"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/pdf/url-pdf"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/pdf/url-pdf"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/ar/pdf/url-pdf</loc>
+    <lastmod>2026-11-01</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/pdf/url-pdf"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/pdf/url-pdf"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/pdf/url-pdf"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/pdf/url-pdf"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/pdf/url-pdf"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/pdf/url-pdf"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/ru/pdf/url-pdf</loc>
+    <lastmod>2026-11-01</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/pdf/url-pdf"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/pdf/url-pdf"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/pdf/url-pdf"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/pdf/url-pdf"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/pdf/url-pdf"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/pdf/url-pdf"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/tr/pdf/url-pdf</loc>
+    <lastmod>2026-11-01</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/pdf/url-pdf"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/pdf/url-pdf"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/pdf/url-pdf"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/pdf/url-pdf"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/pdf/url-pdf"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/pdf/url-pdf"/>
+  </url>
 </urlset>
