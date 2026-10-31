@@ -11962,68 +11962,46 @@ html[lang="ar"] .why-lead.topic-body,
 .phone-warn { color: #fecaca; }
 .phone-note { color: #cbd5e1; line-height: 1.5; }
 
-.nb { padding: 72px 0 0; color: #1c2430; background: #e6e8ee; min-height: 100vh; }
-.nb-top { display: flex; align-items: center; gap: 16px; min-height: 56px; padding: 8px 16px; background: #fff; border-bottom: 1px solid #d9dee7; }
-.nb-brand { display: grid; min-width: 180px; }
-.nb-brand strong { font-size: 14px; letter-spacing: 0.01em; }
-.nb-brand span, .nb-note { color: #667488; font-size: 12px; line-height: 1.4; }
-.nb-brand span { max-width: 280px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.nb-name { display: grid; gap: 2px; font-size: 11px; color: #667488; }
-.nb-name input, .nb-form input, .nb-form textarea, .nb-mini input { border: 1px solid #d5dbe4; background: #fff; color: #1c2430; border-radius: 6px; padding: 7px 8px; font: inherit; }
-.nb-tools { display: flex; align-items: center; gap: 8px; margin-left: auto; }
-.nb button { font: 12px/1 system-ui, sans-serif; cursor: pointer; }
-.nb-tools > button, .nb-side > button { height: 32px; padding: 0 10px; border: 1px solid #d5dbe4; border-radius: 6px; background: #fff; color: #1c2430; }
+.nb { padding: 88px 16px 48px; background: #f3f4f6; color: #1c2430; }
+.nb-simple { max-width: 1040px; margin: 0 auto; }
+.nb-intro h1 { margin: 0 0 6px; font-size: 28px; }
+.nb-intro p { margin: 0 0 18px; color: #5c6778; max-width: 40rem; line-height: 1.45; }
+.nb-steps { display: grid; grid-template-columns: minmax(0, 440px) minmax(0, 1fr); gap: 16px; align-items: start; }
+.nb-card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 16px; margin-bottom: 12px; }
+.nb-card h2 { margin: 0 0 12px; font-size: 16px; }
+.nb-tpls, .nb-pages, .nb-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.nb-tpls button, .nb-pages button, .nb-row button, .nb-quiet {
+  height: 40px; padding: 0 12px; border: 1px solid #d7dde6; border-radius: 8px; background: #fff; color: #1c2430; cursor: pointer; font: 14px/1 system-ui, sans-serif;
+}
+.nb-pages button.is-on { background: #172033; color: #fff; border-color: #172033; }
+.nb-card label { display: grid; gap: 4px; margin: 10px 0; font-size: 13px; color: #3c4758; }
+.nb-card input, .nb-card textarea, .nb-card select {
+  width: 100%; box-sizing: border-box; border: 1px solid #d7dde6; border-radius: 8px; padding: 8px 10px; font: 15px/1.4 system-ui, sans-serif; color: #1c2430; background: #fff;
+}
+.nb-card textarea { min-height: 72px; }
+.nb-part { margin-top: 14px; padding-top: 12px; border-top: 1px solid #eef0f3; }
+.nb-part b { display: block; margin-bottom: 6px; font-size: 13px; }
 .nb-go { background: #172033 !important; color: #fff !important; border-color: #172033 !important; }
-.nb-seg { display: flex; border: 1px solid #d5dbe4; border-radius: 6px; overflow: hidden; }
-.nb-seg button { height: 32px; padding: 0 10px; border: 0; border-right: 1px solid #d5dbe4; border-radius: 0; background: #fff; color: #3c4758; }
-.nb-seg button:last-child { border-right: 0; }
-.nb-seg button.is-on { background: #172033; color: #fff; }
-.nb-frame { display: grid; grid-template-columns: 232px minmax(0, 1fr) 280px; min-height: calc(100vh - 128px); background: #fff; }
-.nb-side { padding: 14px 12px 24px; background: #f7f8fa; }
-.nb-left { border-right: 1px solid #e3e7ee; }
-.nb-right { border-left: 1px solid #e3e7ee; background: #fff; }
-.nb-side h2 { margin: 16px 4px 6px; font-size: 11px; font-weight: 650; letter-spacing: 0.06em; text-transform: uppercase; color: #7b8798; }
-.nb-picks { display: grid; gap: 2px; }
-.nb-picks button, .nb-layers button { width: 100%; text-align: left; height: 32px; padding: 0 8px; border: 0; border-radius: 6px; background: transparent; color: #1c2430; }
-.nb-picks button:hover, .nb-layers button:hover { background: #eceff4; }
-.nb-picks button.is-on, .nb-layers button.is-on, .nb-tabs button.is-on { background: #e7eefc; color: #1d3f8f; }
-.nb-mini { display: grid; gap: 4px; margin: 8px 4px; font-size: 11px; color: #667488; }
-.nb-stage { min-width: 0; background: #eceff3; padding: 28px 20px 40px; display: flex; justify-content: center; }
-.nb-stage.is-phone .nb-canvas { width: 390px; }
-.nb-stage.is-tablet .nb-canvas { width: 768px; }
-.nb-stage.is-desk .nb-canvas { width: min(920px, 100%); }
-.nb-canvas { background: #fff; color: #1c2430; min-height: 640px; padding: 28px 22px 40px; box-shadow: 0 12px 40px rgb(23 32 51 / 8%); }
-.nb-canvas article { background: #fff; border: 1px solid transparent; border-radius: 8px; margin: 0 0 8px; cursor: grab; }
-.nb-canvas article.is-on { border-color: #2f6fed; box-shadow: 0 0 0 1px #2f6fed; }
-.nb-canvas h3 { margin: 0 0 6px; font-size: 1.15rem; }
-.nb-canvas p { margin: 0; line-height: 1.5; color: inherit; }
-.nb-hero { display: grid; grid-template-columns: 1.2fr .8fr; gap: 16px; align-items: center; }
-.nb-hero i, .nb-hero img { min-height: 140px; border-radius: 8px; background: #d9e2f2; width: 100%; object-fit: cover; }
-.nb-btn { display: inline-block; margin-top: 12px; background: #172033; color: #fff; border-radius: 6px; padding: 8px 12px; font-size: 13px; }
+.nb-look { position: sticky; top: 76px; }
+.nb-canvas { background: #f8fafc; border: 1px solid #e5e7eb; border-radius: 10px; padding: 12px; margin-bottom: 12px; max-height: 70vh; overflow: auto; }
+.nb-canvas article { margin: 0 0 8px; border-radius: 8px; }
+.nb-canvas h3 { margin: 0 0 6px; }
+.nb-canvas p { margin: 0; line-height: 1.45; }
+.nb-hero { display: grid; grid-template-columns: 1.2fr .8fr; gap: 12px; align-items: center; }
+.nb-hero i, .nb-hero img { min-height: 96px; border-radius: 8px; background: #d9e2f2; width: 100%; object-fit: cover; }
+.nb-btn { display: inline-block; margin-top: 8px; background: #172033; color: #fff; border-radius: 6px; padding: 8px 12px; }
 .nb-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-.nb-grid div { background: #f6f7f9; border-radius: 8px; padding: 12px; }
+.nb-grid div { background: #fff; border-radius: 8px; padding: 10px; }
 .nb-grid b, .nb-grid span { display: block; }
-.nb-pagenav { display: flex; gap: 12px; margin: 0 0 18px; padding-bottom: 10px; border-bottom: 1px solid #e6e9ef; }
-.nb-pagenav button { border: 0; background: transparent; color: #667488; padding: 0; height: auto; border-radius: 0; }
-.nb-pagenav button.is-on { color: #172033; box-shadow: inset 0 -1px 0 #172033; }
-.nb-tabs { display: flex; gap: 4px; margin-bottom: 12px; }
-.nb-tabs button { height: 30px; padding: 0 10px; border: 0; border-radius: 6px; background: transparent; color: #667488; }
-.nb-form { display: grid; gap: 10px; }
-.nb-form label { display: grid; gap: 4px; font-size: 11px; color: #667488; }
-.nb-form textarea { min-height: 88px; resize: vertical; }
-.nb-form small, .nb-note { color: #7b8798; }
-.nb-row { display: flex; gap: 4px; flex-wrap: wrap; }
-.nb-form .nb-row button, .nb-form .nb-row button { height: 28px; padding: 0 8px; border: 1px solid #d5dbe4; border-radius: 6px; background: #fff; color: #1c2430; }
-.nb-layers { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
-.nb-empty { color: #8b95a5; font-size: 13px; }
-.nb-swatches { display: flex; gap: 6px; }
-.nb-swatches button { width: 18px; height: 18px; border-radius: 4px; border: 1px solid rgb(0 0 0 / 12%); padding: 0; }
 .nb-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.nb-note { margin-top: 16px; }
-.nb-frame.is-preview { grid-template-columns: 1fr; }
-.nb-frame.is-preview .nb-side { display: none; }
-@media (max-width: 980px) {
-  .nb-top, .nb-tools { flex-wrap: wrap; }
+.nb-swatches { display: flex; gap: 8px; }
+.nb-swatches button { width: 28px; height: 28px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 0 1px #d7dde6; padding: 0; }
+.nb-note { color: #6b7280; font-size: 13px; line-height: 1.4; }
+.nb-quiet { margin-top: 8px; }
+@media (max-width: 800px) {
+  .nb-steps, .nb-hero, .nb-grid, .nb-cols { grid-template-columns: 1fr; }
+  .nb-look { position: static; }
+}
   .nb-brand span { display: none; }
   .nb-frame, .nb-hero, .nb-grid, .nb-cols { grid-template-columns: 1fr; }
   .nb-stage.is-tablet .nb-canvas, .nb-stage.is-phone .nb-canvas, .nb-stage.is-desk .nb-canvas { width: 100%; }
