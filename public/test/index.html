@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Nibras</title>
 <meta name="robots" content="noindex,nofollow">
-<meta name="theme-color" content="#0f1012">
+<meta name="theme-color" content="#050e19">
 <link rel="icon" href="/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -72,16 +72,53 @@ textarea::placeholder{color:var(--mute)}
 .lb.more{display:block;margin-top:6px;color:var(--accent);font-size:13px}.acts .lb{border:1px solid var(--line);border-radius:99px;padding:5px 14px;font-size:13px;color:var(--text)}
 .muted{color:var(--mute);margin:4px 0;font-size:14px}.card{box-shadow:none;padding:14px 16px;margin:0 0 10px}
 .hero{min-height:56vh}.hero .logo2{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--gold));display:grid;place-items:center;font:700 24px Amiri,serif;color:#fff;margin-bottom:18px}
+
+/* ===== Library AI görünüşü (library.nibrascode.com/assets/ai.css + app.css palitrası) ===== */
+:root,:root[data-theme=dark]{--bg:#050e19;--soft:rgba(212,175,106,.08);--card:#0b1222;--line:rgba(212,175,106,.18);--text:#e7ecf7;--mute:#8b96b0;--accent:#d4af6a;--accent-soft:rgba(212,175,106,.14);--gold:#d4af6a;--gold2:#f1d79a;--user:#2a2213;--paper:#f5ecd6;--paper2:#efe2c4;--ink:#2a2116;--ink2:#7a4b14;--glass:rgba(16,24,38,.72);--shadow:0 10px 30px rgba(0,0,0,.25)}
+:root[data-theme=light]{--bg:#f4ecda;--soft:rgba(122,75,20,.06);--card:#fffaf0;--line:rgba(122,75,20,.18);--text:#2a2116;--mute:#7d6a4c;--accent:#9a6b1f;--accent-soft:rgba(154,107,31,.12);--gold:#b08a3e;--gold2:#7a4b14;--user:#3a2e17;--paper:#fffaf0;--paper2:#f7eed8;--ink:#2a2116;--ink2:#7a4b14;--glass:rgba(255,250,240,.85);--shadow:0 8px 24px rgba(122,75,20,.12)}
+body{background:radial-gradient(900px 600px at 50% 110%,rgba(20,36,60,.3),transparent 70%),var(--bg)}
+:root[data-theme=light] body{background:radial-gradient(900px 600px at 50% 110%,rgba(212,175,106,.25),transparent 70%),var(--bg)}
+header{background:color-mix(in srgb,var(--bg) 80%,transparent);border-bottom:1px solid rgba(212,175,106,.12)}
+.logo{background:linear-gradient(135deg,#c99a4e,#f1d79a);color:#1a1206}
+.aicorner{position:fixed;z-index:0;width:190px;height:200px;pointer-events:none;opacity:.85;background:url(/test/img/ai-corner.webp) 0 0/contain no-repeat}
+.aicorner.tl{top:52px;left:0}.aicorner.br{bottom:0;right:0;transform:rotate(180deg)}
+@media (max-width:640px){.aicorner{width:120px;height:127px;opacity:.7}.aicorner.tl{top:46px}}
+main{position:relative;z-index:1}
+.hero{min-height:calc(100svh - 260px)}.hero img{width:min(380px,80vw);height:auto;animation:aiGlow 5s ease-in-out infinite}
+@keyframes aiGlow{50%{filter:brightness(1.08)}}
+.chip{background:rgba(212,175,106,.08);border-color:rgba(212,175,106,.25);border-radius:12px}.chip:hover{background:rgba(212,175,106,.16);border-color:rgba(212,175,106,.45)}
+.bubble{background:linear-gradient(135deg,#2a2213,#3a2e17);border:1px solid rgba(212,175,106,.35);color:#f6ead0;border-radius:18px;border-start-end-radius:6px;box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.bot .av{background:linear-gradient(135deg,#c99a4e,#f1d79a);color:#1a1206}
+.bot .bubble{background:linear-gradient(180deg,rgba(18,27,43,.82),rgba(12,19,31,.82));border:1px solid rgba(212,175,106,.14);border-radius:18px;border-start-start-radius:6px;padding:14px 17px;box-shadow:0 10px 30px rgba(0,0,0,.25);position:relative;color:var(--text)}
+:root[data-theme=light] .bot .bubble{background:rgba(255,250,240,.9)}
+.bot .bubble::before{content:"";position:absolute;inset-block:14px;inset-inline-start:-1px;width:2px;border-radius:2px;background:linear-gradient(var(--gold2),rgba(212,175,106,0))}
+.card{background:linear-gradient(180deg,var(--paper),var(--paper2));color:var(--ink);border:0;box-shadow:inset 0 0 0 1px rgba(122,75,20,.15);border-radius:14px}
+.card .ar{color:var(--ink);text-align:justify;line-height:1.9}.card .src,.card .src a,.card .lb{color:#6b5a40}.card .src a:hover,.card .lb:hover{color:var(--ink2)}.card .lb.more{color:var(--ink2);font-weight:600}
+.card .tag{background:#3a2a12;color:#f6e2b0}
+.acts .lb{background:rgba(212,175,106,.14);color:var(--gold2);border:1px solid rgba(212,175,106,.35)}.acts .lb:hover{background:rgba(212,175,106,.26)}
+.dots span{background:var(--gold)}
+footer{background:linear-gradient(transparent,var(--bg) 42%)}
+.composer{background:var(--glass);border:1px solid rgba(212,175,106,.22);backdrop-filter:blur(18px) saturate(1.2);-webkit-backdrop-filter:blur(18px) saturate(1.2);box-shadow:0 12px 40px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.04)}
+:root[data-theme=light] .composer{box-shadow:0 12px 40px rgba(122,75,20,.15)}
+.composer:focus-within{border-color:rgba(212,175,106,.55);box-shadow:0 12px 40px rgba(0,0,0,.45),0 0 0 4px rgba(212,175,106,.09),0 0 28px rgba(212,175,106,.14)}
+textarea::placeholder{color:#7f8aa3}
+.pill{border-color:rgba(212,175,106,.25);color:var(--mute)}.pill.on{background:rgba(212,175,106,.16);color:var(--gold2);border-color:rgba(212,175,106,.45)}
+.send{width:40px;height:40px;color:#1a1206;background:linear-gradient(135deg,#c99a4e,#f1d79a);box-shadow:0 4px 14px rgba(212,160,80,.3)}.send svg{width:20px;height:20px}
+.send:hover:not(:disabled){transform:scale(1.06)}.send:disabled{color:#6f7890;background:rgba(255,255,255,.07);box-shadow:none;opacity:1}
+.hbtn,select{border-color:rgba(212,175,106,.22);color:var(--mute);background:transparent}select option{background:var(--card);color:var(--text)}
+.vbox{background:var(--card);border-color:rgba(212,175,106,.22)}.vbody{background:linear-gradient(180deg,var(--paper),var(--paper2));color:var(--ink)}
+.btn{border-color:rgba(212,175,106,.3)}
 </style>
 </head>
 <body>
+<div class="aicorner tl" aria-hidden="true"></div><div class="aicorner br" aria-hidden="true"></div>
 <header>
   <div class="logo">ن</div><h1 data-i="title"></h1><span class="sp"></span>
   <button class="hbtn" id="theme" type="button" aria-label="" title="">◐</button>
   <select id="lang"><option value="az">AZ</option><option value="en">EN</option><option value="tr">TR</option><option value="ru">RU</option><option value="ar">AR</option></select>
 </header>
 <main id="main"><div class="wrap" id="chat">
-  <div class="hero" id="hero"><div class="logo2">ن</div><div class="chips" id="chips"></div></div>
+  <div class="hero" id="hero"><img src="/test/img/ai-hero.webp" srcset="/test/img/ai-hero.webp 300w, /test/img/ai-hero@2x.webp 526w" sizes="(max-width: 520px) 80vw, 380px" width="526" height="532" alt="" decoding="async" fetchpriority="high"><div class="chips" id="chips"></div></div>
 </div></main>
 <footer>
   <form class="composer" id="f">
@@ -91,7 +128,7 @@ textarea::placeholder{color:var(--mute)}
         <button class="pill on" data-m="fatwa" type="button" role="radio" data-i="p1" data-t="p1t">فتاوى ابن باز وابن عثيمين</button>
         <button class="pill" data-m="library" type="button" role="radio" data-i="p2" data-t="p2t">الشاملة + الدرر</button>
       </div><span class="sp"></span>
-      <button class="send" id="send" aria-label="">↑</button>
+      <button class="send" id="send" aria-label=""><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     </div>
   </form>
   <div class="hint" id="hint" role="alert"></div>
@@ -133,7 +170,7 @@ function applyLang(){document.documentElement.lang=lang;document.documentElement
  $("#vprev").textContent=T("prev");$("#vnext").textContent=T("next")}
 $("#lang").onchange=e=>{lang=e.target.value;localStorage.setItem("nt-lang",lang);applyLang()};
 document.querySelectorAll(".pill").forEach(b=>b.onclick=()=>{mode=b.dataset.m;document.querySelectorAll(".pill").forEach(x=>{x.classList.toggle("on",x===b);x.setAttribute("aria-checked",x===b)});$("#q").focus()});
-const th=localStorage.getItem("nt-theme");if(th)document.documentElement.dataset.theme=th;
+document.documentElement.dataset.theme=localStorage.getItem("nt-theme")||"dark";
 $("#theme").onclick=()=>{const cur=document.documentElement.dataset.theme||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");const n=cur==="dark"?"light":"dark";document.documentElement.dataset.theme=n;localStorage.setItem("nt-theme",n)};
 const hasAr=t=>/[\u0600-\u06ff]/.test(t);
 // Fətva: sualı at, yalnız cavabı göstər
