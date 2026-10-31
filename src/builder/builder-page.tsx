@@ -563,6 +563,7 @@ export function BuilderPage() {
   const [preview, setPreview] = useState(false);
   const [tab, setTab] = useState<"design" | "layers">("design");
   const [device, setDevice] = useState<"desk" | "tablet" | "phone">("desk");
+  const [open, setOpen] = useState<"pages" | "look" | "blocks" | "write">("pages");
   const [ready, setReady] = useState(false);
   const history = useRef<SitePage[][]>([]);
   const lastPush = useRef(0);
@@ -702,80 +703,107 @@ export function BuilderPage() {
     <main className="nb">
       <div className="nb-app">
         <aside className="nb-side">
-          <h2>{extra.step1}</h2>
-          <div className="nb-list">
-            {copy.tpls.map((tpl) => (
-              <button key={tpl.id} type="button" onClick={() => load(tpl.id)}>{tpl.name}</button>
-            ))}
+          <div className="nb-brand">
+            <strong>Nibras</strong>
+            <span>{copy.name}</span>
           </div>
-          <h2>{extra.pages}</h2>
-          <div className="nb-list">
-            {pages.map((item) => (
-              <button key={item.id} type="button" className={item.id === page?.id ? "is-on" : ""} onClick={() => { setPageId(item.id); setSelected(null); }}>{item.name}</button>
-            ))}
-            <button type="button" onClick={addPage}>+ {extra.newPage}</button>
-          </div>
-          {page ? (
-            <label>{extra.pageName}
-              <input value={page.name} onChange={(event) => write(pages.map((item) => (item.id === page.id ? { ...item, name: event.target.value } : item)))} />
-            </label>
-          ) : null}
-          {pages.length > 1 && page ? (
-            <button type="button" className="nb-quiet" onClick={() => { const next = pages.filter((item) => item.id !== page.id); write(next, next[0]?.id); setSelected(null); }}>{extra.delPage}</button>
-          ) : null}
-          <h2>{extra.addPart}</h2>
-          <div className="nb-list">
-            {KINDS.map((kind) => (
-              <button key={kind} type="button" onClick={() => insert(kind, blocks.length)}>{copy.kinds[kind]}</button>
-            ))}
-          </div>
-          <h2>{extra.color}</h2>
-          <span className="nb-swatches">
-            {COLORS.map((color) => (
-              <button key={color} type="button" className={accent === color ? "is-on" : ""} style={{ background: color }} aria-label={color} onClick={() => setAccent(color)} />
-            ))}
-          </span>
-          {current ? (
-            <div className="nb-edit">
-              <h2>{copy.kinds[current.kind]}</h2>
-              <label>{copy.title}<input value={current.title} onChange={(event) => patch(current.id, { title: event.target.value })} /></label>
-              <label>{copy.body}<textarea value={current.body} onChange={(event) => patch(current.id, { body: event.target.value })} /></label>
-              {current.kind === "hero" || current.kind === "cta" || current.kind === "footer" ? (
-                <>
-                  <label>{copy.button}<input value={current.button} onChange={(event) => patch(current.id, { button: event.target.value })} /></label>
-                  <label>{copy.link}<input value={current.href} onChange={(event) => patch(current.id, { href: event.target.value })} /></label>
-                </>
+          <label className="nb-id">{copy.siteName}
+            <input value={site} onChange={(event) => setSite(event.target.value)} />
+          </label>
+          <button type="button" className={open === "pages" ? "nb-acc is-on" : "nb-acc"} onClick={() => setOpen("pages")}>{extra.pages}</button>
+          {open === "pages" ? (
+            <div className="nb-panel">
+              <div className="nb-list">
+                {pages.map((item) => (
+                  <button key={item.id} type="button" className={item.id === page?.id ? "is-on" : ""} onClick={() => { setPageId(item.id); setSelected(null); }}>{item.name}</button>
+                ))}
+                <button type="button" onClick={addPage}>+ {extra.newPage}</button>
+              </div>
+              {page ? (
+                <label>{extra.pageName}
+                  <input value={page.name} onChange={(event) => write(pages.map((item) => (item.id === page.id ? { ...item, name: event.target.value } : item)))} />
+                </label>
               ) : null}
-              <span className="nb-row">
-                <button type="button" onClick={() => shift(current.id, -1)}>{copy.up}</button>
-                <button type="button" onClick={() => shift(current.id, 1)}>{copy.down}</button>
-                <button type="button" onClick={() => { setBlocks(blocks.filter((item) => item.id !== current.id)); setSelected(null); }}>{copy.remove}</button>
+              {pages.length > 1 && page ? (
+                <button type="button" className="nb-quiet" onClick={() => { const next = pages.filter((item) => item.id !== page.id); write(next, next[0]?.id); setSelected(null); }}>{extra.delPage}</button>
+              ) : null}
+            </div>
+          ) : null}
+          <button type="button" className={open === "look" ? "nb-acc is-on" : "nb-acc"} onClick={() => setOpen("look")}>{copy.templates}</button>
+          {open === "look" ? (
+            <div className="nb-panel">
+              <div className="nb-list">
+                {copy.tpls.map((tpl) => (
+                  <button key={tpl.id} type="button" onClick={() => load(tpl.id)}>{tpl.name}</button>
+                ))}
+              </div>
+              <p className="nb-kicker">{extra.color}</p>
+              <span className="nb-swatches">
+                {COLORS.map((color) => (
+                  <button key={color} type="button" className={accent === color ? "is-on" : ""} style={{ background: color }} aria-label={color} onClick={() => setAccent(color)} />
+                ))}
               </span>
             </div>
-          ) : <p className="nb-note">{extra.touch}</p>}
+          ) : null}
+          <button type="button" className={open === "blocks" ? "nb-acc is-on" : "nb-acc"} onClick={() => setOpen("blocks")}>{extra.addPart}</button>
+          {open === "blocks" ? (
+            <div className="nb-panel">
+              <div className="nb-list">
+                {KINDS.map((kind) => (
+                  <button key={kind} type="button" onClick={() => { insert(kind, blocks.length); setOpen("write"); }}>{copy.kinds[kind]}</button>
+                ))}
+              </div>
+            </div>
+          ) : null}
+          <button type="button" className={open === "write" ? "nb-acc is-on" : "nb-acc"} onClick={() => setOpen("write")}>{copy.design}</button>
+          {open === "write" ? (
+            <div className="nb-panel">
+              {current ? (
+                <>
+                  <p className="nb-kicker">{copy.kinds[current.kind]}</p>
+                  <label>{copy.title}<input value={current.title} onChange={(event) => patch(current.id, { title: event.target.value })} /></label>
+                  <label>{copy.body}<textarea value={current.body} onChange={(event) => patch(current.id, { body: event.target.value })} /></label>
+                  {current.kind === "hero" || current.kind === "cta" || current.kind === "footer" ? (
+                    <>
+                      <label>{copy.button}<input value={current.button} onChange={(event) => patch(current.id, { button: event.target.value })} /></label>
+                      <label>{copy.link}<input value={current.href} onChange={(event) => patch(current.id, { href: event.target.value })} /></label>
+                    </>
+                  ) : null}
+                  <span className="nb-row">
+                    <button type="button" onClick={() => shift(current.id, -1)}>{copy.up}</button>
+                    <button type="button" onClick={() => shift(current.id, 1)}>{copy.down}</button>
+                    <button type="button" onClick={() => { setBlocks(blocks.filter((item) => item.id !== current.id)); setSelected(null); }}>{copy.remove}</button>
+                  </span>
+                </>
+              ) : <p className="nb-note">{extra.touch}</p>}
+            </div>
+          ) : null}
         </aside>
         <section className="nb-screen">
-          <div className="nb-bar">
-            <label>{copy.siteName}<input value={site} onChange={(event) => setSite(event.target.value)} /></label>
-            <button type="button" onClick={undo}>{extra.undo}</button>
-            <button type="button" onClick={download}>{copy.download}</button>
-            <button type="button" className="nb-go" onClick={() => void downloadZip()}>{extra.zip}</button>
-          </div>
           <div className="nb-stage">
-            <div className="nb-canvas">
-              {blocks.map((block) => {
-                const look = box(block, accent);
-                return (
-                  <article
-                    key={block.id}
-                    className={block.id === selected ? "is-on" : ""}
-                    style={{ textAlign: block.align, background: look.bg === "transparent" ? "#fff" : look.bg, color: look.color, padding: look.pad }}
-                    onClick={() => setSelected(block.id)}
-                  >
-                    <BlockView block={block} accent={accent} size={look.size} />
-                  </article>
-                );
-              })}
+            <div className="nb-browser">
+              <div className="nb-chrome">
+                <i /><i /><i />
+                <span>{site || copy.name}</span>
+                <button type="button" onClick={undo}>{extra.undo}</button>
+                <button type="button" onClick={download}>{copy.download}</button>
+                <button type="button" className="nb-go" onClick={() => void downloadZip()}>{extra.zip}</button>
+              </div>
+              <div className="nb-canvas">
+                {blocks.map((block) => {
+                  const look = box(block, accent);
+                  return (
+                    <article
+                      key={block.id}
+                      className={block.id === selected ? "is-on" : ""}
+                      style={{ textAlign: block.align, background: look.bg === "transparent" ? "#fff" : look.bg, color: look.color, padding: look.pad }}
+                      onClick={() => { setSelected(block.id); setOpen("write"); }}
+                    >
+                      <BlockView block={block} accent={accent} size={look.size} />
+                    </article>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </section>
