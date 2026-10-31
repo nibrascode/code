@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as ArRouteImport } from './routes/ar'
+import { Route as BuilderRouteImport } from './routes/builder'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DoctorRouteImport } from './routes/doctor'
 import { Route as EnRouteImport } from './routes/en'
@@ -44,6 +45,7 @@ import { Route as ShortcutsRouteImport } from './routes/shortcuts'
 import { Route as SozRouteImport } from './routes/soz'
 import { Route as SozSayiRouteImport } from './routes/soz-sayi'
 import { Route as StudioRouteImport } from './routes/studio'
+import { Route as TelefonRouteImport } from './routes/telefon'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as ToolsRouteImport } from './routes/tools'
 import { Route as ToolsLegalRouteImport } from './routes/tools-legal'
@@ -56,8 +58,6 @@ import { Route as VideoRouteImport } from './routes/video'
 import { Route as VoiceRouteImport } from './routes/voice'
 import { Route as WhyRouteImport } from './routes/why'
 import { Route as WifiRouteImport } from './routes/wifi'
-import { Route as TelefonRouteImport } from './routes/telefon'
-import { Route as BuilderRouteImport } from './routes/builder'
 import { Route as WorkspaceRouteImport } from './routes/workspace'
 import { Route as XetaRouteImport } from './routes/xeta'
 import { Route as ZipRouteImport } from './routes/zip'
@@ -65,6 +65,7 @@ import { Route as AppsIndexRouteImport } from './routes/apps/index'
 import { Route as AppsSlugRouteImport } from './routes/apps/$slug'
 import { Route as ArAboutRouteImport } from './routes/ar.about'
 import { Route as ArAppsRouteImport } from './routes/ar.apps'
+import { Route as ArBuilderRouteImport } from './routes/ar.builder'
 import { Route as ArContactRouteImport } from './routes/ar.contact'
 import { Route as ArDoctorRouteImport } from './routes/ar.doctor'
 import { Route as ArEraseRouteImport } from './routes/ar.erase'
@@ -93,6 +94,7 @@ import { Route as ArShortcutsRouteImport } from './routes/ar.shortcuts'
 import { Route as ArSozRouteImport } from './routes/ar.soz'
 import { Route as ArSozSayiRouteImport } from './routes/ar.soz-sayi'
 import { Route as ArStudioRouteImport } from './routes/ar.studio'
+import { Route as ArTelefonRouteImport } from './routes/ar.telefon'
 import { Route as ArTermsRouteImport } from './routes/ar.terms'
 import { Route as ArToolsRouteImport } from './routes/ar.tools'
 import { Route as ArToolsLegalRouteImport } from './routes/ar.tools-legal'
@@ -102,13 +104,12 @@ import { Route as ArVcardRouteImport } from './routes/ar.vcard'
 import { Route as ArVideoRouteImport } from './routes/ar.video'
 import { Route as ArVoiceRouteImport } from './routes/ar.voice'
 import { Route as ArWifiRouteImport } from './routes/ar.wifi'
-import { Route as ArTelefonRouteImport } from './routes/ar.telefon'
-import { Route as ArBuilderRouteImport } from './routes/ar.builder'
 import { Route as ArWorkspaceRouteImport } from './routes/ar.workspace'
 import { Route as ArXetaRouteImport } from './routes/ar.xeta'
 import { Route as ArZipRouteImport } from './routes/ar.zip'
 import { Route as EnAboutRouteImport } from './routes/en.about'
 import { Route as EnAppsRouteImport } from './routes/en.apps'
+import { Route as EnBuilderRouteImport } from './routes/en.builder'
 import { Route as EnContactRouteImport } from './routes/en.contact'
 import { Route as EnDoctorRouteImport } from './routes/en.doctor'
 import { Route as EnEraseRouteImport } from './routes/en.erase'
@@ -137,6 +138,7 @@ import { Route as EnShortcutsRouteImport } from './routes/en.shortcuts'
 import { Route as EnSozRouteImport } from './routes/en.soz'
 import { Route as EnSozSayiRouteImport } from './routes/en.soz-sayi'
 import { Route as EnStudioRouteImport } from './routes/en.studio'
+import { Route as EnTelefonRouteImport } from './routes/en.telefon'
 import { Route as EnTermsRouteImport } from './routes/en.terms'
 import { Route as EnToolsRouteImport } from './routes/en.tools'
 import { Route as EnToolsLegalRouteImport } from './routes/en.tools-legal'
@@ -146,8 +148,6 @@ import { Route as EnVcardRouteImport } from './routes/en.vcard'
 import { Route as EnVideoRouteImport } from './routes/en.video'
 import { Route as EnVoiceRouteImport } from './routes/en.voice'
 import { Route as EnWifiRouteImport } from './routes/en.wifi'
-import { Route as EnTelefonRouteImport } from './routes/en.telefon'
-import { Route as EnBuilderRouteImport } from './routes/en.builder'
 import { Route as EnWorkspaceRouteImport } from './routes/en.workspace'
 import { Route as EnXetaRouteImport } from './routes/en.xeta'
 import { Route as EnZipRouteImport } from './routes/en.zip'
@@ -176,6 +176,7 @@ import { Route as ResourcesTopicRouteRouteImport } from './routes/resources/$top
 import { Route as ResurslarSlugRouteImport } from './routes/resurslar/$slug'
 import { Route as RuAboutRouteImport } from './routes/ru.about'
 import { Route as RuAppsRouteImport } from './routes/ru.apps'
+import { Route as RuBuilderRouteImport } from './routes/ru.builder'
 import { Route as RuContactRouteImport } from './routes/ru.contact'
 import { Route as RuDoctorRouteImport } from './routes/ru.doctor'
 import { Route as RuEraseRouteImport } from './routes/ru.erase'
@@ -204,6 +205,7 @@ import { Route as RuShortcutsRouteImport } from './routes/ru.shortcuts'
 import { Route as RuSozRouteImport } from './routes/ru.soz'
 import { Route as RuSozSayiRouteImport } from './routes/ru.soz-sayi'
 import { Route as RuStudioRouteImport } from './routes/ru.studio'
+import { Route as RuTelefonRouteImport } from './routes/ru.telefon'
 import { Route as RuTermsRouteImport } from './routes/ru.terms'
 import { Route as RuToolsRouteImport } from './routes/ru.tools'
 import { Route as RuToolsLegalRouteImport } from './routes/ru.tools-legal'
@@ -213,8 +215,6 @@ import { Route as RuVcardRouteImport } from './routes/ru.vcard'
 import { Route as RuVideoRouteImport } from './routes/ru.video'
 import { Route as RuVoiceRouteImport } from './routes/ru.voice'
 import { Route as RuWifiRouteImport } from './routes/ru.wifi'
-import { Route as RuTelefonRouteImport } from './routes/ru.telefon'
-import { Route as RuBuilderRouteImport } from './routes/ru.builder'
 import { Route as RuWorkspaceRouteImport } from './routes/ru.workspace'
 import { Route as RuXetaRouteImport } from './routes/ru.xeta'
 import { Route as RuZipRouteImport } from './routes/ru.zip'
@@ -222,6 +222,7 @@ import { Route as SozSlugRouteImport } from './routes/soz.$slug'
 import { Route as ToolsSlugRouteImport } from './routes/tools.$slug'
 import { Route as TrAboutRouteImport } from './routes/tr.about'
 import { Route as TrAppsRouteImport } from './routes/tr.apps'
+import { Route as TrBuilderRouteImport } from './routes/tr.builder'
 import { Route as TrContactRouteImport } from './routes/tr.contact'
 import { Route as TrDoctorRouteImport } from './routes/tr.doctor'
 import { Route as TrEraseRouteImport } from './routes/tr.erase'
@@ -250,6 +251,7 @@ import { Route as TrShortcutsRouteImport } from './routes/tr.shortcuts'
 import { Route as TrSozRouteImport } from './routes/tr.soz'
 import { Route as TrSozSayiRouteImport } from './routes/tr.soz-sayi'
 import { Route as TrStudioRouteImport } from './routes/tr.studio'
+import { Route as TrTelefonRouteImport } from './routes/tr.telefon'
 import { Route as TrTermsRouteImport } from './routes/tr.terms'
 import { Route as TrToolsRouteImport } from './routes/tr.tools'
 import { Route as TrToolsLegalRouteImport } from './routes/tr.tools-legal'
@@ -259,14 +261,13 @@ import { Route as TrVcardRouteImport } from './routes/tr.vcard'
 import { Route as TrVideoRouteImport } from './routes/tr.video'
 import { Route as TrVoiceRouteImport } from './routes/tr.voice'
 import { Route as TrWifiRouteImport } from './routes/tr.wifi'
-import { Route as TrTelefonRouteImport } from './routes/tr.telefon'
-import { Route as TrBuilderRouteImport } from './routes/tr.builder'
 import { Route as TrWorkspaceRouteImport } from './routes/tr.workspace'
 import { Route as TrXetaRouteImport } from './routes/tr.xeta'
 import { Route as TrZipRouteImport } from './routes/tr.zip'
 import { Route as VideoToolRouteImport } from './routes/video_.$tool'
 import { Route as XetaSlugRouteImport } from './routes/xeta.$slug'
 import { Route as ArAppsSlugRouteImport } from './routes/ar.apps.$slug'
+import { Route as ArErebDiliFeilRouteImport } from './routes/ar.ereb-dili.feil'
 import { Route as ArFaqSlugRouteImport } from './routes/ar.faq.$slug'
 import { Route as ArImageToolRouteImport } from './routes/ar.image_.$tool'
 import { Route as ArJamiGroupRouteImport } from './routes/ar.jami.$group'
@@ -283,6 +284,7 @@ import { Route as ArVideoToolRouteImport } from './routes/ar.video_.$tool'
 import { Route as ArXetaSlugRouteImport } from './routes/ar.xeta.$slug'
 import { Route as EnAllGroupRouteImport } from './routes/en.all.$group'
 import { Route as EnAppsSlugRouteImport } from './routes/en.apps.$slug'
+import { Route as EnErebDiliFeilRouteImport } from './routes/en.ereb-dili.feil'
 import { Route as EnFaqSlugRouteImport } from './routes/en.faq.$slug'
 import { Route as EnImageToolRouteImport } from './routes/en.image_.$tool'
 import { Route as EnLearnLogicRouteImport } from './routes/en.learn_.logic'
@@ -301,6 +303,7 @@ import { Route as PrivacyNibrasQrDeleteAccountRouteImport } from './routes/priva
 import { Route as ResourcesTopicIndexRouteImport } from './routes/resources/$topic/index'
 import { Route as ResourcesTopicArticleRouteImport } from './routes/resources/$topic/$article'
 import { Route as RuAppsSlugRouteImport } from './routes/ru.apps.$slug'
+import { Route as RuErebDiliFeilRouteImport } from './routes/ru.ereb-dili.feil'
 import { Route as RuFaqSlugRouteImport } from './routes/ru.faq.$slug'
 import { Route as RuImageToolRouteImport } from './routes/ru.image_.$tool'
 import { Route as RuLearnLogicRouteImport } from './routes/ru.learn_.logic'
@@ -317,6 +320,7 @@ import { Route as RuVideoToolRouteImport } from './routes/ru.video_.$tool'
 import { Route as RuVseGroupRouteImport } from './routes/ru.vse.$group'
 import { Route as RuXetaSlugRouteImport } from './routes/ru.xeta.$slug'
 import { Route as TrAppsSlugRouteImport } from './routes/tr.apps.$slug'
+import { Route as TrErebDiliFeilRouteImport } from './routes/tr.ereb-dili.feil'
 import { Route as TrFaqSlugRouteImport } from './routes/tr.faq.$slug'
 import { Route as TrImageToolRouteImport } from './routes/tr.image_.$tool'
 import { Route as TrLearnLogicRouteImport } from './routes/tr.learn_.logic'
@@ -331,6 +335,10 @@ import { Route as TrToolsSlugRouteImport } from './routes/tr.tools.$slug'
 import { Route as TrTumuGroupRouteImport } from './routes/tr.tumu.$group'
 import { Route as TrVideoToolRouteImport } from './routes/tr.video_.$tool'
 import { Route as TrXetaSlugRouteImport } from './routes/tr.xeta.$slug'
+import { Route as ArErebDiliFeilSlugRouteImport } from './routes/ar.ereb-dili.feil.$slug'
+import { Route as EnErebDiliFeilSlugRouteImport } from './routes/en.ereb-dili.feil.$slug'
+import { Route as RuErebDiliFeilSlugRouteImport } from './routes/ru.ereb-dili.feil.$slug'
+import { Route as TrErebDiliFeilSlugRouteImport } from './routes/tr.ereb-dili.feil.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -345,6 +353,11 @@ const AboutRoute = AboutRouteImport.update({
 const ArRoute = ArRouteImport.update({
   id: '/ar',
   path: '/ar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BuilderRoute = BuilderRouteImport.update({
+  id: '/builder',
+  path: '/builder',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -507,6 +520,11 @@ const StudioRoute = StudioRouteImport.update({
   path: '/studio',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TelefonRoute = TelefonRouteImport.update({
+  id: '/telefon',
+  path: '/telefon',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
   path: '/terms',
@@ -567,16 +585,6 @@ const WifiRoute = WifiRouteImport.update({
   path: '/wifi',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TelefonRoute = TelefonRouteImport.update({
-  id: '/telefon',
-  path: '/telefon',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BuilderRoute = BuilderRouteImport.update({
-  id: '/builder',
-  path: '/builder',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const WorkspaceRoute = WorkspaceRouteImport.update({
   id: '/workspace',
   path: '/workspace',
@@ -610,6 +618,11 @@ const ArAboutRoute = ArAboutRouteImport.update({
 const ArAppsRoute = ArAppsRouteImport.update({
   id: '/apps',
   path: '/apps',
+  getParentRoute: () => ArRoute,
+} as any)
+const ArBuilderRoute = ArBuilderRouteImport.update({
+  id: '/builder',
+  path: '/builder',
   getParentRoute: () => ArRoute,
 } as any)
 const ArContactRoute = ArContactRouteImport.update({
@@ -752,6 +765,11 @@ const ArStudioRoute = ArStudioRouteImport.update({
   path: '/studio',
   getParentRoute: () => ArRoute,
 } as any)
+const ArTelefonRoute = ArTelefonRouteImport.update({
+  id: '/telefon',
+  path: '/telefon',
+  getParentRoute: () => ArRoute,
+} as any)
 const ArTermsRoute = ArTermsRouteImport.update({
   id: '/terms',
   path: '/terms',
@@ -797,16 +815,6 @@ const ArWifiRoute = ArWifiRouteImport.update({
   path: '/wifi',
   getParentRoute: () => ArRoute,
 } as any)
-const ArTelefonRoute = ArTelefonRouteImport.update({
-  id: '/telefon',
-  path: '/telefon',
-  getParentRoute: () => ArRoute,
-} as any)
-const ArBuilderRoute = ArBuilderRouteImport.update({
-  id: '/builder',
-  path: '/builder',
-  getParentRoute: () => ArRoute,
-} as any)
 const ArWorkspaceRoute = ArWorkspaceRouteImport.update({
   id: '/workspace',
   path: '/workspace',
@@ -830,6 +838,11 @@ const EnAboutRoute = EnAboutRouteImport.update({
 const EnAppsRoute = EnAppsRouteImport.update({
   id: '/apps',
   path: '/apps',
+  getParentRoute: () => EnRoute,
+} as any)
+const EnBuilderRoute = EnBuilderRouteImport.update({
+  id: '/builder',
+  path: '/builder',
   getParentRoute: () => EnRoute,
 } as any)
 const EnContactRoute = EnContactRouteImport.update({
@@ -972,6 +985,11 @@ const EnStudioRoute = EnStudioRouteImport.update({
   path: '/studio',
   getParentRoute: () => EnRoute,
 } as any)
+const EnTelefonRoute = EnTelefonRouteImport.update({
+  id: '/telefon',
+  path: '/telefon',
+  getParentRoute: () => EnRoute,
+} as any)
 const EnTermsRoute = EnTermsRouteImport.update({
   id: '/terms',
   path: '/terms',
@@ -1015,16 +1033,6 @@ const EnVoiceRoute = EnVoiceRouteImport.update({
 const EnWifiRoute = EnWifiRouteImport.update({
   id: '/wifi',
   path: '/wifi',
-  getParentRoute: () => EnRoute,
-} as any)
-const EnTelefonRoute = EnTelefonRouteImport.update({
-  id: '/telefon',
-  path: '/telefon',
-  getParentRoute: () => EnRoute,
-} as any)
-const EnBuilderRoute = EnBuilderRouteImport.update({
-  id: '/builder',
-  path: '/builder',
   getParentRoute: () => EnRoute,
 } as any)
 const EnWorkspaceRoute = EnWorkspaceRouteImport.update({
@@ -1167,6 +1175,11 @@ const RuAppsRoute = RuAppsRouteImport.update({
   path: '/apps',
   getParentRoute: () => RuRoute,
 } as any)
+const RuBuilderRoute = RuBuilderRouteImport.update({
+  id: '/builder',
+  path: '/builder',
+  getParentRoute: () => RuRoute,
+} as any)
 const RuContactRoute = RuContactRouteImport.update({
   id: '/contact',
   path: '/contact',
@@ -1307,6 +1320,11 @@ const RuStudioRoute = RuStudioRouteImport.update({
   path: '/studio',
   getParentRoute: () => RuRoute,
 } as any)
+const RuTelefonRoute = RuTelefonRouteImport.update({
+  id: '/telefon',
+  path: '/telefon',
+  getParentRoute: () => RuRoute,
+} as any)
 const RuTermsRoute = RuTermsRouteImport.update({
   id: '/terms',
   path: '/terms',
@@ -1352,16 +1370,6 @@ const RuWifiRoute = RuWifiRouteImport.update({
   path: '/wifi',
   getParentRoute: () => RuRoute,
 } as any)
-const RuTelefonRoute = RuTelefonRouteImport.update({
-  id: '/telefon',
-  path: '/telefon',
-  getParentRoute: () => RuRoute,
-} as any)
-const RuBuilderRoute = RuBuilderRouteImport.update({
-  id: '/builder',
-  path: '/builder',
-  getParentRoute: () => RuRoute,
-} as any)
 const RuWorkspaceRoute = RuWorkspaceRouteImport.update({
   id: '/workspace',
   path: '/workspace',
@@ -1395,6 +1403,11 @@ const TrAboutRoute = TrAboutRouteImport.update({
 const TrAppsRoute = TrAppsRouteImport.update({
   id: '/apps',
   path: '/apps',
+  getParentRoute: () => TrRoute,
+} as any)
+const TrBuilderRoute = TrBuilderRouteImport.update({
+  id: '/builder',
+  path: '/builder',
   getParentRoute: () => TrRoute,
 } as any)
 const TrContactRoute = TrContactRouteImport.update({
@@ -1537,6 +1550,11 @@ const TrStudioRoute = TrStudioRouteImport.update({
   path: '/studio',
   getParentRoute: () => TrRoute,
 } as any)
+const TrTelefonRoute = TrTelefonRouteImport.update({
+  id: '/telefon',
+  path: '/telefon',
+  getParentRoute: () => TrRoute,
+} as any)
 const TrTermsRoute = TrTermsRouteImport.update({
   id: '/terms',
   path: '/terms',
@@ -1582,16 +1600,6 @@ const TrWifiRoute = TrWifiRouteImport.update({
   path: '/wifi',
   getParentRoute: () => TrRoute,
 } as any)
-const TrTelefonRoute = TrTelefonRouteImport.update({
-  id: '/telefon',
-  path: '/telefon',
-  getParentRoute: () => TrRoute,
-} as any)
-const TrBuilderRoute = TrBuilderRouteImport.update({
-  id: '/builder',
-  path: '/builder',
-  getParentRoute: () => TrRoute,
-} as any)
 const TrWorkspaceRoute = TrWorkspaceRouteImport.update({
   id: '/workspace',
   path: '/workspace',
@@ -1621,6 +1629,11 @@ const ArAppsSlugRoute = ArAppsSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => ArAppsRoute,
+} as any)
+const ArErebDiliFeilRoute = ArErebDiliFeilRouteImport.update({
+  id: '/ereb-dili/feil',
+  path: '/ereb-dili/feil',
+  getParentRoute: () => ArRoute,
 } as any)
 const ArFaqSlugRoute = ArFaqSlugRouteImport.update({
   id: '/$slug',
@@ -1701,6 +1714,11 @@ const EnAppsSlugRoute = EnAppsSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => EnAppsRoute,
+} as any)
+const EnErebDiliFeilRoute = EnErebDiliFeilRouteImport.update({
+  id: '/ereb-dili/feil',
+  path: '/ereb-dili/feil',
+  getParentRoute: () => EnRoute,
 } as any)
 const EnFaqSlugRoute = EnFaqSlugRouteImport.update({
   id: '/$slug',
@@ -1793,6 +1811,11 @@ const RuAppsSlugRoute = RuAppsSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => RuAppsRoute,
 } as any)
+const RuErebDiliFeilRoute = RuErebDiliFeilRouteImport.update({
+  id: '/ereb-dili/feil',
+  path: '/ereb-dili/feil',
+  getParentRoute: () => RuRoute,
+} as any)
 const RuFaqSlugRoute = RuFaqSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -1873,6 +1896,11 @@ const TrAppsSlugRoute = TrAppsSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => TrAppsRoute,
 } as any)
+const TrErebDiliFeilRoute = TrErebDiliFeilRouteImport.update({
+  id: '/ereb-dili/feil',
+  path: '/ereb-dili/feil',
+  getParentRoute: () => TrRoute,
+} as any)
 const TrFaqSlugRoute = TrFaqSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -1943,11 +1971,32 @@ const TrXetaSlugRoute = TrXetaSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => TrXetaRoute,
 } as any)
+const ArErebDiliFeilSlugRoute = ArErebDiliFeilSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ArErebDiliFeilRoute,
+} as any)
+const EnErebDiliFeilSlugRoute = EnErebDiliFeilSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => EnErebDiliFeilRoute,
+} as any)
+const RuErebDiliFeilSlugRoute = RuErebDiliFeilSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => RuErebDiliFeilRoute,
+} as any)
+const TrErebDiliFeilSlugRoute = TrErebDiliFeilSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => TrErebDiliFeilRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/ar': typeof ArRouteWithChildren
+  '/builder': typeof BuilderRoute
   '/contact': typeof ContactRoute
   '/doctor': typeof DoctorRoute
   '/en': typeof EnRouteWithChildren
@@ -1980,6 +2029,7 @@ export interface FileRoutesByFullPath {
   '/soz': typeof SozRouteWithChildren
   '/soz-sayi': typeof SozSayiRoute
   '/studio': typeof StudioRoute
+  '/telefon': typeof TelefonRoute
   '/terms': typeof TermsRoute
   '/tools': typeof ToolsRouteWithChildren
   '/tools-legal': typeof ToolsLegalRoute
@@ -1992,8 +2042,6 @@ export interface FileRoutesByFullPath {
   '/voice': typeof VoiceRoute
   '/why': typeof WhyRoute
   '/wifi': typeof WifiRoute
-  '/telefon': typeof TelefonRoute
-  '/builder': typeof BuilderRoute
   '/workspace': typeof WorkspaceRoute
   '/xeta': typeof XetaRouteWithChildren
   '/zip': typeof ZipRoute
@@ -2001,6 +2049,7 @@ export interface FileRoutesByFullPath {
   '/apps/$slug': typeof AppsSlugRoute
   '/ar/about': typeof ArAboutRoute
   '/ar/apps': typeof ArAppsRouteWithChildren
+  '/ar/builder': typeof ArBuilderRoute
   '/ar/contact': typeof ArContactRoute
   '/ar/doctor': typeof ArDoctorRoute
   '/ar/erase': typeof ArEraseRoute
@@ -2029,6 +2078,7 @@ export interface FileRoutesByFullPath {
   '/ar/soz': typeof ArSozRouteWithChildren
   '/ar/soz-sayi': typeof ArSozSayiRoute
   '/ar/studio': typeof ArStudioRoute
+  '/ar/telefon': typeof ArTelefonRoute
   '/ar/terms': typeof ArTermsRoute
   '/ar/tools': typeof ArToolsRouteWithChildren
   '/ar/tools-legal': typeof ArToolsLegalRoute
@@ -2038,13 +2088,12 @@ export interface FileRoutesByFullPath {
   '/ar/video': typeof ArVideoRoute
   '/ar/voice': typeof ArVoiceRoute
   '/ar/wifi': typeof ArWifiRoute
-  '/ar/telefon': typeof ArTelefonRoute
-  '/ar/builder': typeof ArBuilderRoute
   '/ar/workspace': typeof ArWorkspaceRoute
   '/ar/xeta': typeof ArXetaRouteWithChildren
   '/ar/zip': typeof ArZipRoute
   '/en/about': typeof EnAboutRoute
   '/en/apps': typeof EnAppsRouteWithChildren
+  '/en/builder': typeof EnBuilderRoute
   '/en/contact': typeof EnContactRoute
   '/en/doctor': typeof EnDoctorRoute
   '/en/erase': typeof EnEraseRoute
@@ -2073,6 +2122,7 @@ export interface FileRoutesByFullPath {
   '/en/soz': typeof EnSozRouteWithChildren
   '/en/soz-sayi': typeof EnSozSayiRoute
   '/en/studio': typeof EnStudioRoute
+  '/en/telefon': typeof EnTelefonRoute
   '/en/terms': typeof EnTermsRoute
   '/en/tools': typeof EnToolsRouteWithChildren
   '/en/tools-legal': typeof EnToolsLegalRoute
@@ -2082,8 +2132,6 @@ export interface FileRoutesByFullPath {
   '/en/video': typeof EnVideoRoute
   '/en/voice': typeof EnVoiceRoute
   '/en/wifi': typeof EnWifiRoute
-  '/en/telefon': typeof EnTelefonRoute
-  '/en/builder': typeof EnBuilderRoute
   '/en/workspace': typeof EnWorkspaceRoute
   '/en/xeta': typeof EnXetaRouteWithChildren
   '/en/zip': typeof EnZipRoute
@@ -2108,6 +2156,7 @@ export interface FileRoutesByFullPath {
   '/resurslar/$slug': typeof ResurslarSlugRoute
   '/ru/about': typeof RuAboutRoute
   '/ru/apps': typeof RuAppsRouteWithChildren
+  '/ru/builder': typeof RuBuilderRoute
   '/ru/contact': typeof RuContactRoute
   '/ru/doctor': typeof RuDoctorRoute
   '/ru/erase': typeof RuEraseRoute
@@ -2136,6 +2185,7 @@ export interface FileRoutesByFullPath {
   '/ru/soz': typeof RuSozRouteWithChildren
   '/ru/soz-sayi': typeof RuSozSayiRoute
   '/ru/studio': typeof RuStudioRoute
+  '/ru/telefon': typeof RuTelefonRoute
   '/ru/terms': typeof RuTermsRoute
   '/ru/tools': typeof RuToolsRouteWithChildren
   '/ru/tools-legal': typeof RuToolsLegalRoute
@@ -2145,8 +2195,6 @@ export interface FileRoutesByFullPath {
   '/ru/video': typeof RuVideoRoute
   '/ru/voice': typeof RuVoiceRoute
   '/ru/wifi': typeof RuWifiRoute
-  '/ru/telefon': typeof RuTelefonRoute
-  '/ru/builder': typeof RuBuilderRoute
   '/ru/workspace': typeof RuWorkspaceRoute
   '/ru/xeta': typeof RuXetaRouteWithChildren
   '/ru/zip': typeof RuZipRoute
@@ -2154,6 +2202,7 @@ export interface FileRoutesByFullPath {
   '/tools/$slug': typeof ToolsSlugRoute
   '/tr/about': typeof TrAboutRoute
   '/tr/apps': typeof TrAppsRouteWithChildren
+  '/tr/builder': typeof TrBuilderRoute
   '/tr/contact': typeof TrContactRoute
   '/tr/doctor': typeof TrDoctorRoute
   '/tr/erase': typeof TrEraseRoute
@@ -2182,6 +2231,7 @@ export interface FileRoutesByFullPath {
   '/tr/soz': typeof TrSozRouteWithChildren
   '/tr/soz-sayi': typeof TrSozSayiRoute
   '/tr/studio': typeof TrStudioRoute
+  '/tr/telefon': typeof TrTelefonRoute
   '/tr/terms': typeof TrTermsRoute
   '/tr/tools': typeof TrToolsRouteWithChildren
   '/tr/tools-legal': typeof TrToolsLegalRoute
@@ -2191,8 +2241,6 @@ export interface FileRoutesByFullPath {
   '/tr/video': typeof TrVideoRoute
   '/tr/voice': typeof TrVoiceRoute
   '/tr/wifi': typeof TrWifiRoute
-  '/tr/telefon': typeof TrTelefonRoute
-  '/tr/builder': typeof TrBuilderRoute
   '/tr/workspace': typeof TrWorkspaceRoute
   '/tr/xeta': typeof TrXetaRouteWithChildren
   '/tr/zip': typeof TrZipRoute
@@ -2203,6 +2251,7 @@ export interface FileRoutesByFullPath {
   '/programming/': typeof ProgrammingIndexRoute
   '/resources/': typeof ResourcesIndexRoute
   '/ar/apps/$slug': typeof ArAppsSlugRoute
+  '/ar/ereb-dili/feil': typeof ArErebDiliFeilRouteWithChildren
   '/ar/faq/$slug': typeof ArFaqSlugRoute
   '/ar/image/$tool': typeof ArImageToolRoute
   '/ar/jami/$group': typeof ArJamiGroupRoute
@@ -2219,6 +2268,7 @@ export interface FileRoutesByFullPath {
   '/ar/xeta/$slug': typeof ArXetaSlugRoute
   '/en/all/$group': typeof EnAllGroupRoute
   '/en/apps/$slug': typeof EnAppsSlugRoute
+  '/en/ereb-dili/feil': typeof EnErebDiliFeilRouteWithChildren
   '/en/faq/$slug': typeof EnFaqSlugRoute
   '/en/image/$tool': typeof EnImageToolRoute
   '/en/learn/logic': typeof EnLearnLogicRoute
@@ -2236,6 +2286,7 @@ export interface FileRoutesByFullPath {
   '/privacy/nibras-qr/delete-account': typeof PrivacyNibrasQrDeleteAccountRoute
   '/resources/$topic/$article': typeof ResourcesTopicArticleRoute
   '/ru/apps/$slug': typeof RuAppsSlugRoute
+  '/ru/ereb-dili/feil': typeof RuErebDiliFeilRouteWithChildren
   '/ru/faq/$slug': typeof RuFaqSlugRoute
   '/ru/image/$tool': typeof RuImageToolRoute
   '/ru/learn/logic': typeof RuLearnLogicRoute
@@ -2252,6 +2303,7 @@ export interface FileRoutesByFullPath {
   '/ru/vse/$group': typeof RuVseGroupRoute
   '/ru/xeta/$slug': typeof RuXetaSlugRoute
   '/tr/apps/$slug': typeof TrAppsSlugRoute
+  '/tr/ereb-dili/feil': typeof TrErebDiliFeilRouteWithChildren
   '/tr/faq/$slug': typeof TrFaqSlugRoute
   '/tr/image/$tool': typeof TrImageToolRoute
   '/tr/learn/logic': typeof TrLearnLogicRoute
@@ -2267,11 +2319,16 @@ export interface FileRoutesByFullPath {
   '/tr/video/$tool': typeof TrVideoToolRoute
   '/tr/xeta/$slug': typeof TrXetaSlugRoute
   '/resources/$topic/': typeof ResourcesTopicIndexRoute
+  '/ar/ereb-dili/feil/$slug': typeof ArErebDiliFeilSlugRoute
+  '/en/ereb-dili/feil/$slug': typeof EnErebDiliFeilSlugRoute
+  '/ru/ereb-dili/feil/$slug': typeof RuErebDiliFeilSlugRoute
+  '/tr/ereb-dili/feil/$slug': typeof TrErebDiliFeilSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/ar': typeof ArRouteWithChildren
+  '/builder': typeof BuilderRoute
   '/contact': typeof ContactRoute
   '/doctor': typeof DoctorRoute
   '/en': typeof EnRouteWithChildren
@@ -2304,6 +2361,7 @@ export interface FileRoutesByTo {
   '/soz': typeof SozRouteWithChildren
   '/soz-sayi': typeof SozSayiRoute
   '/studio': typeof StudioRoute
+  '/telefon': typeof TelefonRoute
   '/terms': typeof TermsRoute
   '/tools': typeof ToolsRouteWithChildren
   '/tools-legal': typeof ToolsLegalRoute
@@ -2316,14 +2374,13 @@ export interface FileRoutesByTo {
   '/voice': typeof VoiceRoute
   '/why': typeof WhyRoute
   '/wifi': typeof WifiRoute
-  '/telefon': typeof TelefonRoute
-  '/builder': typeof BuilderRoute
   '/workspace': typeof WorkspaceRoute
   '/xeta': typeof XetaRouteWithChildren
   '/zip': typeof ZipRoute
   '/apps/$slug': typeof AppsSlugRoute
   '/ar/about': typeof ArAboutRoute
   '/ar/apps': typeof ArAppsRouteWithChildren
+  '/ar/builder': typeof ArBuilderRoute
   '/ar/contact': typeof ArContactRoute
   '/ar/doctor': typeof ArDoctorRoute
   '/ar/erase': typeof ArEraseRoute
@@ -2352,6 +2409,7 @@ export interface FileRoutesByTo {
   '/ar/soz': typeof ArSozRouteWithChildren
   '/ar/soz-sayi': typeof ArSozSayiRoute
   '/ar/studio': typeof ArStudioRoute
+  '/ar/telefon': typeof ArTelefonRoute
   '/ar/terms': typeof ArTermsRoute
   '/ar/tools': typeof ArToolsRouteWithChildren
   '/ar/tools-legal': typeof ArToolsLegalRoute
@@ -2361,13 +2419,12 @@ export interface FileRoutesByTo {
   '/ar/video': typeof ArVideoRoute
   '/ar/voice': typeof ArVoiceRoute
   '/ar/wifi': typeof ArWifiRoute
-  '/ar/telefon': typeof ArTelefonRoute
-  '/ar/builder': typeof ArBuilderRoute
   '/ar/workspace': typeof ArWorkspaceRoute
   '/ar/xeta': typeof ArXetaRouteWithChildren
   '/ar/zip': typeof ArZipRoute
   '/en/about': typeof EnAboutRoute
   '/en/apps': typeof EnAppsRouteWithChildren
+  '/en/builder': typeof EnBuilderRoute
   '/en/contact': typeof EnContactRoute
   '/en/doctor': typeof EnDoctorRoute
   '/en/erase': typeof EnEraseRoute
@@ -2396,6 +2453,7 @@ export interface FileRoutesByTo {
   '/en/soz': typeof EnSozRouteWithChildren
   '/en/soz-sayi': typeof EnSozSayiRoute
   '/en/studio': typeof EnStudioRoute
+  '/en/telefon': typeof EnTelefonRoute
   '/en/terms': typeof EnTermsRoute
   '/en/tools': typeof EnToolsRouteWithChildren
   '/en/tools-legal': typeof EnToolsLegalRoute
@@ -2405,8 +2463,6 @@ export interface FileRoutesByTo {
   '/en/video': typeof EnVideoRoute
   '/en/voice': typeof EnVoiceRoute
   '/en/wifi': typeof EnWifiRoute
-  '/en/telefon': typeof EnTelefonRoute
-  '/en/builder': typeof EnBuilderRoute
   '/en/workspace': typeof EnWorkspaceRoute
   '/en/xeta': typeof EnXetaRouteWithChildren
   '/en/zip': typeof EnZipRoute
@@ -2431,6 +2487,7 @@ export interface FileRoutesByTo {
   '/resurslar/$slug': typeof ResurslarSlugRoute
   '/ru/about': typeof RuAboutRoute
   '/ru/apps': typeof RuAppsRouteWithChildren
+  '/ru/builder': typeof RuBuilderRoute
   '/ru/contact': typeof RuContactRoute
   '/ru/doctor': typeof RuDoctorRoute
   '/ru/erase': typeof RuEraseRoute
@@ -2459,6 +2516,7 @@ export interface FileRoutesByTo {
   '/ru/soz': typeof RuSozRouteWithChildren
   '/ru/soz-sayi': typeof RuSozSayiRoute
   '/ru/studio': typeof RuStudioRoute
+  '/ru/telefon': typeof RuTelefonRoute
   '/ru/terms': typeof RuTermsRoute
   '/ru/tools': typeof RuToolsRouteWithChildren
   '/ru/tools-legal': typeof RuToolsLegalRoute
@@ -2468,8 +2526,6 @@ export interface FileRoutesByTo {
   '/ru/video': typeof RuVideoRoute
   '/ru/voice': typeof RuVoiceRoute
   '/ru/wifi': typeof RuWifiRoute
-  '/ru/telefon': typeof RuTelefonRoute
-  '/ru/builder': typeof RuBuilderRoute
   '/ru/workspace': typeof RuWorkspaceRoute
   '/ru/xeta': typeof RuXetaRouteWithChildren
   '/ru/zip': typeof RuZipRoute
@@ -2477,6 +2533,7 @@ export interface FileRoutesByTo {
   '/tools/$slug': typeof ToolsSlugRoute
   '/tr/about': typeof TrAboutRoute
   '/tr/apps': typeof TrAppsRouteWithChildren
+  '/tr/builder': typeof TrBuilderRoute
   '/tr/contact': typeof TrContactRoute
   '/tr/doctor': typeof TrDoctorRoute
   '/tr/erase': typeof TrEraseRoute
@@ -2505,6 +2562,7 @@ export interface FileRoutesByTo {
   '/tr/soz': typeof TrSozRouteWithChildren
   '/tr/soz-sayi': typeof TrSozSayiRoute
   '/tr/studio': typeof TrStudioRoute
+  '/tr/telefon': typeof TrTelefonRoute
   '/tr/terms': typeof TrTermsRoute
   '/tr/tools': typeof TrToolsRouteWithChildren
   '/tr/tools-legal': typeof TrToolsLegalRoute
@@ -2514,8 +2572,6 @@ export interface FileRoutesByTo {
   '/tr/video': typeof TrVideoRoute
   '/tr/voice': typeof TrVoiceRoute
   '/tr/wifi': typeof TrWifiRoute
-  '/tr/telefon': typeof TrTelefonRoute
-  '/tr/builder': typeof TrBuilderRoute
   '/tr/workspace': typeof TrWorkspaceRoute
   '/tr/xeta': typeof TrXetaRouteWithChildren
   '/tr/zip': typeof TrZipRoute
@@ -2526,6 +2582,7 @@ export interface FileRoutesByTo {
   '/programming': typeof ProgrammingIndexRoute
   '/resources': typeof ResourcesIndexRoute
   '/ar/apps/$slug': typeof ArAppsSlugRoute
+  '/ar/ereb-dili/feil': typeof ArErebDiliFeilRouteWithChildren
   '/ar/faq/$slug': typeof ArFaqSlugRoute
   '/ar/image/$tool': typeof ArImageToolRoute
   '/ar/jami/$group': typeof ArJamiGroupRoute
@@ -2542,6 +2599,7 @@ export interface FileRoutesByTo {
   '/ar/xeta/$slug': typeof ArXetaSlugRoute
   '/en/all/$group': typeof EnAllGroupRoute
   '/en/apps/$slug': typeof EnAppsSlugRoute
+  '/en/ereb-dili/feil': typeof EnErebDiliFeilRouteWithChildren
   '/en/faq/$slug': typeof EnFaqSlugRoute
   '/en/image/$tool': typeof EnImageToolRoute
   '/en/learn/logic': typeof EnLearnLogicRoute
@@ -2559,6 +2617,7 @@ export interface FileRoutesByTo {
   '/privacy/nibras-qr/delete-account': typeof PrivacyNibrasQrDeleteAccountRoute
   '/resources/$topic/$article': typeof ResourcesTopicArticleRoute
   '/ru/apps/$slug': typeof RuAppsSlugRoute
+  '/ru/ereb-dili/feil': typeof RuErebDiliFeilRouteWithChildren
   '/ru/faq/$slug': typeof RuFaqSlugRoute
   '/ru/image/$tool': typeof RuImageToolRoute
   '/ru/learn/logic': typeof RuLearnLogicRoute
@@ -2575,6 +2634,7 @@ export interface FileRoutesByTo {
   '/ru/vse/$group': typeof RuVseGroupRoute
   '/ru/xeta/$slug': typeof RuXetaSlugRoute
   '/tr/apps/$slug': typeof TrAppsSlugRoute
+  '/tr/ereb-dili/feil': typeof TrErebDiliFeilRouteWithChildren
   '/tr/faq/$slug': typeof TrFaqSlugRoute
   '/tr/image/$tool': typeof TrImageToolRoute
   '/tr/learn/logic': typeof TrLearnLogicRoute
@@ -2590,12 +2650,17 @@ export interface FileRoutesByTo {
   '/tr/video/$tool': typeof TrVideoToolRoute
   '/tr/xeta/$slug': typeof TrXetaSlugRoute
   '/resources/$topic': typeof ResourcesTopicIndexRoute
+  '/ar/ereb-dili/feil/$slug': typeof ArErebDiliFeilSlugRoute
+  '/en/ereb-dili/feil/$slug': typeof EnErebDiliFeilSlugRoute
+  '/ru/ereb-dili/feil/$slug': typeof RuErebDiliFeilSlugRoute
+  '/tr/ereb-dili/feil/$slug': typeof TrErebDiliFeilSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/ar': typeof ArRouteWithChildren
+  '/builder': typeof BuilderRoute
   '/contact': typeof ContactRoute
   '/doctor': typeof DoctorRoute
   '/en': typeof EnRouteWithChildren
@@ -2628,6 +2693,7 @@ export interface FileRoutesById {
   '/soz': typeof SozRouteWithChildren
   '/soz-sayi': typeof SozSayiRoute
   '/studio': typeof StudioRoute
+  '/telefon': typeof TelefonRoute
   '/terms': typeof TermsRoute
   '/tools': typeof ToolsRouteWithChildren
   '/tools-legal': typeof ToolsLegalRoute
@@ -2640,8 +2706,6 @@ export interface FileRoutesById {
   '/voice': typeof VoiceRoute
   '/why': typeof WhyRoute
   '/wifi': typeof WifiRoute
-  '/telefon': typeof TelefonRoute
-  '/builder': typeof BuilderRoute
   '/workspace': typeof WorkspaceRoute
   '/xeta': typeof XetaRouteWithChildren
   '/zip': typeof ZipRoute
@@ -2649,6 +2713,7 @@ export interface FileRoutesById {
   '/apps/$slug': typeof AppsSlugRoute
   '/ar/about': typeof ArAboutRoute
   '/ar/apps': typeof ArAppsRouteWithChildren
+  '/ar/builder': typeof ArBuilderRoute
   '/ar/contact': typeof ArContactRoute
   '/ar/doctor': typeof ArDoctorRoute
   '/ar/erase': typeof ArEraseRoute
@@ -2677,6 +2742,7 @@ export interface FileRoutesById {
   '/ar/soz': typeof ArSozRouteWithChildren
   '/ar/soz-sayi': typeof ArSozSayiRoute
   '/ar/studio': typeof ArStudioRoute
+  '/ar/telefon': typeof ArTelefonRoute
   '/ar/terms': typeof ArTermsRoute
   '/ar/tools': typeof ArToolsRouteWithChildren
   '/ar/tools-legal': typeof ArToolsLegalRoute
@@ -2686,13 +2752,12 @@ export interface FileRoutesById {
   '/ar/video': typeof ArVideoRoute
   '/ar/voice': typeof ArVoiceRoute
   '/ar/wifi': typeof ArWifiRoute
-  '/ar/telefon': typeof ArTelefonRoute
-  '/ar/builder': typeof ArBuilderRoute
   '/ar/workspace': typeof ArWorkspaceRoute
   '/ar/xeta': typeof ArXetaRouteWithChildren
   '/ar/zip': typeof ArZipRoute
   '/en/about': typeof EnAboutRoute
   '/en/apps': typeof EnAppsRouteWithChildren
+  '/en/builder': typeof EnBuilderRoute
   '/en/contact': typeof EnContactRoute
   '/en/doctor': typeof EnDoctorRoute
   '/en/erase': typeof EnEraseRoute
@@ -2721,6 +2786,7 @@ export interface FileRoutesById {
   '/en/soz': typeof EnSozRouteWithChildren
   '/en/soz-sayi': typeof EnSozSayiRoute
   '/en/studio': typeof EnStudioRoute
+  '/en/telefon': typeof EnTelefonRoute
   '/en/terms': typeof EnTermsRoute
   '/en/tools': typeof EnToolsRouteWithChildren
   '/en/tools-legal': typeof EnToolsLegalRoute
@@ -2730,8 +2796,6 @@ export interface FileRoutesById {
   '/en/video': typeof EnVideoRoute
   '/en/voice': typeof EnVoiceRoute
   '/en/wifi': typeof EnWifiRoute
-  '/en/telefon': typeof EnTelefonRoute
-  '/en/builder': typeof EnBuilderRoute
   '/en/workspace': typeof EnWorkspaceRoute
   '/en/xeta': typeof EnXetaRouteWithChildren
   '/en/zip': typeof EnZipRoute
@@ -2756,6 +2820,7 @@ export interface FileRoutesById {
   '/resurslar/$slug': typeof ResurslarSlugRoute
   '/ru/about': typeof RuAboutRoute
   '/ru/apps': typeof RuAppsRouteWithChildren
+  '/ru/builder': typeof RuBuilderRoute
   '/ru/contact': typeof RuContactRoute
   '/ru/doctor': typeof RuDoctorRoute
   '/ru/erase': typeof RuEraseRoute
@@ -2784,6 +2849,7 @@ export interface FileRoutesById {
   '/ru/soz': typeof RuSozRouteWithChildren
   '/ru/soz-sayi': typeof RuSozSayiRoute
   '/ru/studio': typeof RuStudioRoute
+  '/ru/telefon': typeof RuTelefonRoute
   '/ru/terms': typeof RuTermsRoute
   '/ru/tools': typeof RuToolsRouteWithChildren
   '/ru/tools-legal': typeof RuToolsLegalRoute
@@ -2793,8 +2859,6 @@ export interface FileRoutesById {
   '/ru/video': typeof RuVideoRoute
   '/ru/voice': typeof RuVoiceRoute
   '/ru/wifi': typeof RuWifiRoute
-  '/ru/telefon': typeof RuTelefonRoute
-  '/ru/builder': typeof RuBuilderRoute
   '/ru/workspace': typeof RuWorkspaceRoute
   '/ru/xeta': typeof RuXetaRouteWithChildren
   '/ru/zip': typeof RuZipRoute
@@ -2802,6 +2866,7 @@ export interface FileRoutesById {
   '/tools/$slug': typeof ToolsSlugRoute
   '/tr/about': typeof TrAboutRoute
   '/tr/apps': typeof TrAppsRouteWithChildren
+  '/tr/builder': typeof TrBuilderRoute
   '/tr/contact': typeof TrContactRoute
   '/tr/doctor': typeof TrDoctorRoute
   '/tr/erase': typeof TrEraseRoute
@@ -2830,6 +2895,7 @@ export interface FileRoutesById {
   '/tr/soz': typeof TrSozRouteWithChildren
   '/tr/soz-sayi': typeof TrSozSayiRoute
   '/tr/studio': typeof TrStudioRoute
+  '/tr/telefon': typeof TrTelefonRoute
   '/tr/terms': typeof TrTermsRoute
   '/tr/tools': typeof TrToolsRouteWithChildren
   '/tr/tools-legal': typeof TrToolsLegalRoute
@@ -2839,8 +2905,6 @@ export interface FileRoutesById {
   '/tr/video': typeof TrVideoRoute
   '/tr/voice': typeof TrVoiceRoute
   '/tr/wifi': typeof TrWifiRoute
-  '/tr/telefon': typeof TrTelefonRoute
-  '/tr/builder': typeof TrBuilderRoute
   '/tr/workspace': typeof TrWorkspaceRoute
   '/tr/xeta': typeof TrXetaRouteWithChildren
   '/tr/zip': typeof TrZipRoute
@@ -2851,6 +2915,7 @@ export interface FileRoutesById {
   '/programming/': typeof ProgrammingIndexRoute
   '/resources/': typeof ResourcesIndexRoute
   '/ar/apps/$slug': typeof ArAppsSlugRoute
+  '/ar/ereb-dili/feil': typeof ArErebDiliFeilRouteWithChildren
   '/ar/faq/$slug': typeof ArFaqSlugRoute
   '/ar/image_/$tool': typeof ArImageToolRoute
   '/ar/jami/$group': typeof ArJamiGroupRoute
@@ -2867,6 +2932,7 @@ export interface FileRoutesById {
   '/ar/xeta/$slug': typeof ArXetaSlugRoute
   '/en/all/$group': typeof EnAllGroupRoute
   '/en/apps/$slug': typeof EnAppsSlugRoute
+  '/en/ereb-dili/feil': typeof EnErebDiliFeilRouteWithChildren
   '/en/faq/$slug': typeof EnFaqSlugRoute
   '/en/image_/$tool': typeof EnImageToolRoute
   '/en/learn_/logic': typeof EnLearnLogicRoute
@@ -2884,6 +2950,7 @@ export interface FileRoutesById {
   '/privacy/nibras-qr/delete-account': typeof PrivacyNibrasQrDeleteAccountRoute
   '/resources/$topic/$article': typeof ResourcesTopicArticleRoute
   '/ru/apps/$slug': typeof RuAppsSlugRoute
+  '/ru/ereb-dili/feil': typeof RuErebDiliFeilRouteWithChildren
   '/ru/faq/$slug': typeof RuFaqSlugRoute
   '/ru/image_/$tool': typeof RuImageToolRoute
   '/ru/learn_/logic': typeof RuLearnLogicRoute
@@ -2900,6 +2967,7 @@ export interface FileRoutesById {
   '/ru/vse/$group': typeof RuVseGroupRoute
   '/ru/xeta/$slug': typeof RuXetaSlugRoute
   '/tr/apps/$slug': typeof TrAppsSlugRoute
+  '/tr/ereb-dili/feil': typeof TrErebDiliFeilRouteWithChildren
   '/tr/faq/$slug': typeof TrFaqSlugRoute
   '/tr/image_/$tool': typeof TrImageToolRoute
   '/tr/learn_/logic': typeof TrLearnLogicRoute
@@ -2915,6 +2983,10 @@ export interface FileRoutesById {
   '/tr/video_/$tool': typeof TrVideoToolRoute
   '/tr/xeta/$slug': typeof TrXetaSlugRoute
   '/resources/$topic/': typeof ResourcesTopicIndexRoute
+  '/ar/ereb-dili/feil/$slug': typeof ArErebDiliFeilSlugRoute
+  '/en/ereb-dili/feil/$slug': typeof EnErebDiliFeilSlugRoute
+  '/ru/ereb-dili/feil/$slug': typeof RuErebDiliFeilSlugRoute
+  '/tr/ereb-dili/feil/$slug': typeof TrErebDiliFeilSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -2922,6 +2994,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/ar'
+    | '/builder'
     | '/contact'
     | '/doctor'
     | '/en'
@@ -2954,6 +3027,7 @@ export interface FileRouteTypes {
     | '/soz'
     | '/soz-sayi'
     | '/studio'
+    | '/telefon'
     | '/terms'
     | '/tools'
     | '/tools-legal'
@@ -2973,6 +3047,7 @@ export interface FileRouteTypes {
     | '/apps/$slug'
     | '/ar/about'
     | '/ar/apps'
+    | '/ar/builder'
     | '/ar/contact'
     | '/ar/doctor'
     | '/ar/erase'
@@ -3001,6 +3076,7 @@ export interface FileRouteTypes {
     | '/ar/soz'
     | '/ar/soz-sayi'
     | '/ar/studio'
+    | '/ar/telefon'
     | '/ar/terms'
     | '/ar/tools'
     | '/ar/tools-legal'
@@ -3015,6 +3091,7 @@ export interface FileRouteTypes {
     | '/ar/zip'
     | '/en/about'
     | '/en/apps'
+    | '/en/builder'
     | '/en/contact'
     | '/en/doctor'
     | '/en/erase'
@@ -3043,6 +3120,7 @@ export interface FileRouteTypes {
     | '/en/soz'
     | '/en/soz-sayi'
     | '/en/studio'
+    | '/en/telefon'
     | '/en/terms'
     | '/en/tools'
     | '/en/tools-legal'
@@ -3076,6 +3154,7 @@ export interface FileRouteTypes {
     | '/resurslar/$slug'
     | '/ru/about'
     | '/ru/apps'
+    | '/ru/builder'
     | '/ru/contact'
     | '/ru/doctor'
     | '/ru/erase'
@@ -3104,6 +3183,7 @@ export interface FileRouteTypes {
     | '/ru/soz'
     | '/ru/soz-sayi'
     | '/ru/studio'
+    | '/ru/telefon'
     | '/ru/terms'
     | '/ru/tools'
     | '/ru/tools-legal'
@@ -3120,6 +3200,7 @@ export interface FileRouteTypes {
     | '/tools/$slug'
     | '/tr/about'
     | '/tr/apps'
+    | '/tr/builder'
     | '/tr/contact'
     | '/tr/doctor'
     | '/tr/erase'
@@ -3148,6 +3229,7 @@ export interface FileRouteTypes {
     | '/tr/soz'
     | '/tr/soz-sayi'
     | '/tr/studio'
+    | '/tr/telefon'
     | '/tr/terms'
     | '/tr/tools'
     | '/tr/tools-legal'
@@ -3167,6 +3249,7 @@ export interface FileRouteTypes {
     | '/programming/'
     | '/resources/'
     | '/ar/apps/$slug'
+    | '/ar/ereb-dili/feil'
     | '/ar/faq/$slug'
     | '/ar/image/$tool'
     | '/ar/jami/$group'
@@ -3183,6 +3266,7 @@ export interface FileRouteTypes {
     | '/ar/xeta/$slug'
     | '/en/all/$group'
     | '/en/apps/$slug'
+    | '/en/ereb-dili/feil'
     | '/en/faq/$slug'
     | '/en/image/$tool'
     | '/en/learn/logic'
@@ -3200,6 +3284,7 @@ export interface FileRouteTypes {
     | '/privacy/nibras-qr/delete-account'
     | '/resources/$topic/$article'
     | '/ru/apps/$slug'
+    | '/ru/ereb-dili/feil'
     | '/ru/faq/$slug'
     | '/ru/image/$tool'
     | '/ru/learn/logic'
@@ -3216,6 +3301,7 @@ export interface FileRouteTypes {
     | '/ru/vse/$group'
     | '/ru/xeta/$slug'
     | '/tr/apps/$slug'
+    | '/tr/ereb-dili/feil'
     | '/tr/faq/$slug'
     | '/tr/image/$tool'
     | '/tr/learn/logic'
@@ -3231,11 +3317,16 @@ export interface FileRouteTypes {
     | '/tr/video/$tool'
     | '/tr/xeta/$slug'
     | '/resources/$topic/'
+    | '/ar/ereb-dili/feil/$slug'
+    | '/en/ereb-dili/feil/$slug'
+    | '/ru/ereb-dili/feil/$slug'
+    | '/tr/ereb-dili/feil/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
     | '/ar'
+    | '/builder'
     | '/contact'
     | '/doctor'
     | '/en'
@@ -3268,6 +3359,7 @@ export interface FileRouteTypes {
     | '/soz'
     | '/soz-sayi'
     | '/studio'
+    | '/telefon'
     | '/terms'
     | '/tools'
     | '/tools-legal'
@@ -3286,6 +3378,7 @@ export interface FileRouteTypes {
     | '/apps/$slug'
     | '/ar/about'
     | '/ar/apps'
+    | '/ar/builder'
     | '/ar/contact'
     | '/ar/doctor'
     | '/ar/erase'
@@ -3314,6 +3407,7 @@ export interface FileRouteTypes {
     | '/ar/soz'
     | '/ar/soz-sayi'
     | '/ar/studio'
+    | '/ar/telefon'
     | '/ar/terms'
     | '/ar/tools'
     | '/ar/tools-legal'
@@ -3328,6 +3422,7 @@ export interface FileRouteTypes {
     | '/ar/zip'
     | '/en/about'
     | '/en/apps'
+    | '/en/builder'
     | '/en/contact'
     | '/en/doctor'
     | '/en/erase'
@@ -3356,6 +3451,7 @@ export interface FileRouteTypes {
     | '/en/soz'
     | '/en/soz-sayi'
     | '/en/studio'
+    | '/en/telefon'
     | '/en/terms'
     | '/en/tools'
     | '/en/tools-legal'
@@ -3389,6 +3485,7 @@ export interface FileRouteTypes {
     | '/resurslar/$slug'
     | '/ru/about'
     | '/ru/apps'
+    | '/ru/builder'
     | '/ru/contact'
     | '/ru/doctor'
     | '/ru/erase'
@@ -3417,6 +3514,7 @@ export interface FileRouteTypes {
     | '/ru/soz'
     | '/ru/soz-sayi'
     | '/ru/studio'
+    | '/ru/telefon'
     | '/ru/terms'
     | '/ru/tools'
     | '/ru/tools-legal'
@@ -3433,6 +3531,7 @@ export interface FileRouteTypes {
     | '/tools/$slug'
     | '/tr/about'
     | '/tr/apps'
+    | '/tr/builder'
     | '/tr/contact'
     | '/tr/doctor'
     | '/tr/erase'
@@ -3461,6 +3560,7 @@ export interface FileRouteTypes {
     | '/tr/soz'
     | '/tr/soz-sayi'
     | '/tr/studio'
+    | '/tr/telefon'
     | '/tr/terms'
     | '/tr/tools'
     | '/tr/tools-legal'
@@ -3480,6 +3580,7 @@ export interface FileRouteTypes {
     | '/programming'
     | '/resources'
     | '/ar/apps/$slug'
+    | '/ar/ereb-dili/feil'
     | '/ar/faq/$slug'
     | '/ar/image/$tool'
     | '/ar/jami/$group'
@@ -3496,6 +3597,7 @@ export interface FileRouteTypes {
     | '/ar/xeta/$slug'
     | '/en/all/$group'
     | '/en/apps/$slug'
+    | '/en/ereb-dili/feil'
     | '/en/faq/$slug'
     | '/en/image/$tool'
     | '/en/learn/logic'
@@ -3513,6 +3615,7 @@ export interface FileRouteTypes {
     | '/privacy/nibras-qr/delete-account'
     | '/resources/$topic/$article'
     | '/ru/apps/$slug'
+    | '/ru/ereb-dili/feil'
     | '/ru/faq/$slug'
     | '/ru/image/$tool'
     | '/ru/learn/logic'
@@ -3529,6 +3632,7 @@ export interface FileRouteTypes {
     | '/ru/vse/$group'
     | '/ru/xeta/$slug'
     | '/tr/apps/$slug'
+    | '/tr/ereb-dili/feil'
     | '/tr/faq/$slug'
     | '/tr/image/$tool'
     | '/tr/learn/logic'
@@ -3544,11 +3648,16 @@ export interface FileRouteTypes {
     | '/tr/video/$tool'
     | '/tr/xeta/$slug'
     | '/resources/$topic'
+    | '/ar/ereb-dili/feil/$slug'
+    | '/en/ereb-dili/feil/$slug'
+    | '/ru/ereb-dili/feil/$slug'
+    | '/tr/ereb-dili/feil/$slug'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/ar'
+    | '/builder'
     | '/contact'
     | '/doctor'
     | '/en'
@@ -3581,6 +3690,7 @@ export interface FileRouteTypes {
     | '/soz'
     | '/soz-sayi'
     | '/studio'
+    | '/telefon'
     | '/terms'
     | '/tools'
     | '/tools-legal'
@@ -3600,6 +3710,7 @@ export interface FileRouteTypes {
     | '/apps/$slug'
     | '/ar/about'
     | '/ar/apps'
+    | '/ar/builder'
     | '/ar/contact'
     | '/ar/doctor'
     | '/ar/erase'
@@ -3628,6 +3739,7 @@ export interface FileRouteTypes {
     | '/ar/soz'
     | '/ar/soz-sayi'
     | '/ar/studio'
+    | '/ar/telefon'
     | '/ar/terms'
     | '/ar/tools'
     | '/ar/tools-legal'
@@ -3642,6 +3754,7 @@ export interface FileRouteTypes {
     | '/ar/zip'
     | '/en/about'
     | '/en/apps'
+    | '/en/builder'
     | '/en/contact'
     | '/en/doctor'
     | '/en/erase'
@@ -3670,6 +3783,7 @@ export interface FileRouteTypes {
     | '/en/soz'
     | '/en/soz-sayi'
     | '/en/studio'
+    | '/en/telefon'
     | '/en/terms'
     | '/en/tools'
     | '/en/tools-legal'
@@ -3703,6 +3817,7 @@ export interface FileRouteTypes {
     | '/resurslar/$slug'
     | '/ru/about'
     | '/ru/apps'
+    | '/ru/builder'
     | '/ru/contact'
     | '/ru/doctor'
     | '/ru/erase'
@@ -3731,6 +3846,7 @@ export interface FileRouteTypes {
     | '/ru/soz'
     | '/ru/soz-sayi'
     | '/ru/studio'
+    | '/ru/telefon'
     | '/ru/terms'
     | '/ru/tools'
     | '/ru/tools-legal'
@@ -3747,6 +3863,7 @@ export interface FileRouteTypes {
     | '/tools/$slug'
     | '/tr/about'
     | '/tr/apps'
+    | '/tr/builder'
     | '/tr/contact'
     | '/tr/doctor'
     | '/tr/erase'
@@ -3775,6 +3892,7 @@ export interface FileRouteTypes {
     | '/tr/soz'
     | '/tr/soz-sayi'
     | '/tr/studio'
+    | '/tr/telefon'
     | '/tr/terms'
     | '/tr/tools'
     | '/tr/tools-legal'
@@ -3794,6 +3912,7 @@ export interface FileRouteTypes {
     | '/programming/'
     | '/resources/'
     | '/ar/apps/$slug'
+    | '/ar/ereb-dili/feil'
     | '/ar/faq/$slug'
     | '/ar/image_/$tool'
     | '/ar/jami/$group'
@@ -3810,6 +3929,7 @@ export interface FileRouteTypes {
     | '/ar/xeta/$slug'
     | '/en/all/$group'
     | '/en/apps/$slug'
+    | '/en/ereb-dili/feil'
     | '/en/faq/$slug'
     | '/en/image_/$tool'
     | '/en/learn_/logic'
@@ -3827,6 +3947,7 @@ export interface FileRouteTypes {
     | '/privacy/nibras-qr/delete-account'
     | '/resources/$topic/$article'
     | '/ru/apps/$slug'
+    | '/ru/ereb-dili/feil'
     | '/ru/faq/$slug'
     | '/ru/image_/$tool'
     | '/ru/learn_/logic'
@@ -3843,6 +3964,7 @@ export interface FileRouteTypes {
     | '/ru/vse/$group'
     | '/ru/xeta/$slug'
     | '/tr/apps/$slug'
+    | '/tr/ereb-dili/feil'
     | '/tr/faq/$slug'
     | '/tr/image_/$tool'
     | '/tr/learn_/logic'
@@ -3858,12 +3980,17 @@ export interface FileRouteTypes {
     | '/tr/video_/$tool'
     | '/tr/xeta/$slug'
     | '/resources/$topic/'
+    | '/ar/ereb-dili/feil/$slug'
+    | '/en/ereb-dili/feil/$slug'
+    | '/ru/ereb-dili/feil/$slug'
+    | '/tr/ereb-dili/feil/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ArRoute: typeof ArRouteWithChildren
+  BuilderRoute: typeof BuilderRoute
   ContactRoute: typeof ContactRoute
   DoctorRoute: typeof DoctorRoute
   EnRoute: typeof EnRouteWithChildren
@@ -3896,6 +4023,7 @@ export interface RootRouteChildren {
   SozRoute: typeof SozRouteWithChildren
   SozSayiRoute: typeof SozSayiRoute
   StudioRoute: typeof StudioRoute
+  TelefonRoute: typeof TelefonRoute
   TermsRoute: typeof TermsRoute
   ToolsRoute: typeof ToolsRouteWithChildren
   ToolsLegalRoute: typeof ToolsLegalRoute
@@ -3908,8 +4036,6 @@ export interface RootRouteChildren {
   VoiceRoute: typeof VoiceRoute
   WhyRoute: typeof WhyRoute
   WifiRoute: typeof WifiRoute
-  TelefonRoute: typeof TelefonRoute
-  BuilderRoute: typeof BuilderRoute
   WorkspaceRoute: typeof WorkspaceRoute
   XetaRoute: typeof XetaRouteWithChildren
   ZipRoute: typeof ZipRoute
@@ -3951,6 +4077,13 @@ declare module '@tanstack/react-router' {
       path: '/ar'
       fullPath: '/ar'
       preLoaderRoute: typeof ArRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/builder': {
+      id: '/builder'
+      path: '/builder'
+      fullPath: '/builder'
+      preLoaderRoute: typeof BuilderRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -4177,6 +4310,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StudioRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/telefon': {
+      id: '/telefon'
+      path: '/telefon'
+      fullPath: '/telefon'
+      preLoaderRoute: typeof TelefonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/terms': {
       id: '/terms'
       path: '/terms'
@@ -4261,20 +4401,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WifiRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/telefon': {
-      id: '/telefon'
-      path: '/telefon'
-      fullPath: '/telefon'
-      preLoaderRoute: typeof TelefonRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/builder': {
-      id: '/builder'
-      path: '/builder'
-      fullPath: '/builder'
-      preLoaderRoute: typeof BuilderRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/workspace': {
       id: '/workspace'
       path: '/workspace'
@@ -4322,6 +4448,13 @@ declare module '@tanstack/react-router' {
       path: '/apps'
       fullPath: '/ar/apps'
       preLoaderRoute: typeof ArAppsRouteImport
+      parentRoute: typeof ArRoute
+    }
+    '/ar/builder': {
+      id: '/ar/builder'
+      path: '/builder'
+      fullPath: '/ar/builder'
+      preLoaderRoute: typeof ArBuilderRouteImport
       parentRoute: typeof ArRoute
     }
     '/ar/contact': {
@@ -4520,6 +4653,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArStudioRouteImport
       parentRoute: typeof ArRoute
     }
+    '/ar/telefon': {
+      id: '/ar/telefon'
+      path: '/telefon'
+      fullPath: '/ar/telefon'
+      preLoaderRoute: typeof ArTelefonRouteImport
+      parentRoute: typeof ArRoute
+    }
     '/ar/terms': {
       id: '/ar/terms'
       path: '/terms'
@@ -4583,20 +4723,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArWifiRouteImport
       parentRoute: typeof ArRoute
     }
-    '/ar/telefon': {
-      id: '/ar/telefon'
-      path: '/telefon'
-      fullPath: '/ar/telefon'
-      preLoaderRoute: typeof ArTelefonRouteImport
-      parentRoute: typeof ArRoute
-    }
-    '/ar/builder': {
-      id: '/ar/builder'
-      path: '/builder'
-      fullPath: '/ar/builder'
-      preLoaderRoute: typeof ArBuilderRouteImport
-      parentRoute: typeof ArRoute
-    }
     '/ar/workspace': {
       id: '/ar/workspace'
       path: '/workspace'
@@ -4630,6 +4756,13 @@ declare module '@tanstack/react-router' {
       path: '/apps'
       fullPath: '/en/apps'
       preLoaderRoute: typeof EnAppsRouteImport
+      parentRoute: typeof EnRoute
+    }
+    '/en/builder': {
+      id: '/en/builder'
+      path: '/builder'
+      fullPath: '/en/builder'
+      preLoaderRoute: typeof EnBuilderRouteImport
       parentRoute: typeof EnRoute
     }
     '/en/contact': {
@@ -4828,6 +4961,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EnStudioRouteImport
       parentRoute: typeof EnRoute
     }
+    '/en/telefon': {
+      id: '/en/telefon'
+      path: '/telefon'
+      fullPath: '/en/telefon'
+      preLoaderRoute: typeof EnTelefonRouteImport
+      parentRoute: typeof EnRoute
+    }
     '/en/terms': {
       id: '/en/terms'
       path: '/terms'
@@ -4889,20 +5029,6 @@ declare module '@tanstack/react-router' {
       path: '/wifi'
       fullPath: '/en/wifi'
       preLoaderRoute: typeof EnWifiRouteImport
-      parentRoute: typeof EnRoute
-    }
-    '/en/telefon': {
-      id: '/en/telefon'
-      path: '/telefon'
-      fullPath: '/en/telefon'
-      preLoaderRoute: typeof EnTelefonRouteImport
-      parentRoute: typeof EnRoute
-    }
-    '/en/builder': {
-      id: '/en/builder'
-      path: '/builder'
-      fullPath: '/en/builder'
-      preLoaderRoute: typeof EnBuilderRouteImport
       parentRoute: typeof EnRoute
     }
     '/en/workspace': {
@@ -5101,6 +5227,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RuAppsRouteImport
       parentRoute: typeof RuRoute
     }
+    '/ru/builder': {
+      id: '/ru/builder'
+      path: '/builder'
+      fullPath: '/ru/builder'
+      preLoaderRoute: typeof RuBuilderRouteImport
+      parentRoute: typeof RuRoute
+    }
     '/ru/contact': {
       id: '/ru/contact'
       path: '/contact'
@@ -5297,6 +5430,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RuStudioRouteImport
       parentRoute: typeof RuRoute
     }
+    '/ru/telefon': {
+      id: '/ru/telefon'
+      path: '/telefon'
+      fullPath: '/ru/telefon'
+      preLoaderRoute: typeof RuTelefonRouteImport
+      parentRoute: typeof RuRoute
+    }
     '/ru/terms': {
       id: '/ru/terms'
       path: '/terms'
@@ -5360,20 +5500,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RuWifiRouteImport
       parentRoute: typeof RuRoute
     }
-    '/ru/telefon': {
-      id: '/ru/telefon'
-      path: '/telefon'
-      fullPath: '/ru/telefon'
-      preLoaderRoute: typeof RuTelefonRouteImport
-      parentRoute: typeof RuRoute
-    }
-    '/ru/builder': {
-      id: '/ru/builder'
-      path: '/builder'
-      fullPath: '/ru/builder'
-      preLoaderRoute: typeof RuBuilderRouteImport
-      parentRoute: typeof RuRoute
-    }
     '/ru/workspace': {
       id: '/ru/workspace'
       path: '/workspace'
@@ -5421,6 +5547,13 @@ declare module '@tanstack/react-router' {
       path: '/apps'
       fullPath: '/tr/apps'
       preLoaderRoute: typeof TrAppsRouteImport
+      parentRoute: typeof TrRoute
+    }
+    '/tr/builder': {
+      id: '/tr/builder'
+      path: '/builder'
+      fullPath: '/tr/builder'
+      preLoaderRoute: typeof TrBuilderRouteImport
       parentRoute: typeof TrRoute
     }
     '/tr/contact': {
@@ -5619,6 +5752,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TrStudioRouteImport
       parentRoute: typeof TrRoute
     }
+    '/tr/telefon': {
+      id: '/tr/telefon'
+      path: '/telefon'
+      fullPath: '/tr/telefon'
+      preLoaderRoute: typeof TrTelefonRouteImport
+      parentRoute: typeof TrRoute
+    }
     '/tr/terms': {
       id: '/tr/terms'
       path: '/terms'
@@ -5682,20 +5822,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TrWifiRouteImport
       parentRoute: typeof TrRoute
     }
-    '/tr/telefon': {
-      id: '/tr/telefon'
-      path: '/telefon'
-      fullPath: '/tr/telefon'
-      preLoaderRoute: typeof TrTelefonRouteImport
-      parentRoute: typeof TrRoute
-    }
-    '/tr/builder': {
-      id: '/tr/builder'
-      path: '/builder'
-      fullPath: '/tr/builder'
-      preLoaderRoute: typeof TrBuilderRouteImport
-      parentRoute: typeof TrRoute
-    }
     '/tr/workspace': {
       id: '/tr/workspace'
       path: '/workspace'
@@ -5737,6 +5863,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/ar/apps/$slug'
       preLoaderRoute: typeof ArAppsSlugRouteImport
       parentRoute: typeof ArAppsRoute
+    }
+    '/ar/ereb-dili/feil': {
+      id: '/ar/ereb-dili/feil'
+      path: '/ereb-dili/feil'
+      fullPath: '/ar/ereb-dili/feil'
+      preLoaderRoute: typeof ArErebDiliFeilRouteImport
+      parentRoute: typeof ArRoute
     }
     '/ar/faq/$slug': {
       id: '/ar/faq/$slug'
@@ -5849,6 +5982,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/en/apps/$slug'
       preLoaderRoute: typeof EnAppsSlugRouteImport
       parentRoute: typeof EnAppsRoute
+    }
+    '/en/ereb-dili/feil': {
+      id: '/en/ereb-dili/feil'
+      path: '/ereb-dili/feil'
+      fullPath: '/en/ereb-dili/feil'
+      preLoaderRoute: typeof EnErebDiliFeilRouteImport
+      parentRoute: typeof EnRoute
     }
     '/en/faq/$slug': {
       id: '/en/faq/$slug'
@@ -5976,6 +6116,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RuAppsSlugRouteImport
       parentRoute: typeof RuAppsRoute
     }
+    '/ru/ereb-dili/feil': {
+      id: '/ru/ereb-dili/feil'
+      path: '/ereb-dili/feil'
+      fullPath: '/ru/ereb-dili/feil'
+      preLoaderRoute: typeof RuErebDiliFeilRouteImport
+      parentRoute: typeof RuRoute
+    }
     '/ru/faq/$slug': {
       id: '/ru/faq/$slug'
       path: '/$slug'
@@ -6088,6 +6235,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TrAppsSlugRouteImport
       parentRoute: typeof TrAppsRoute
     }
+    '/tr/ereb-dili/feil': {
+      id: '/tr/ereb-dili/feil'
+      path: '/ereb-dili/feil'
+      fullPath: '/tr/ereb-dili/feil'
+      preLoaderRoute: typeof TrErebDiliFeilRouteImport
+      parentRoute: typeof TrRoute
+    }
     '/tr/faq/$slug': {
       id: '/tr/faq/$slug'
       path: '/$slug'
@@ -6185,6 +6339,34 @@ declare module '@tanstack/react-router' {
       fullPath: '/tr/xeta/$slug'
       preLoaderRoute: typeof TrXetaSlugRouteImport
       parentRoute: typeof TrXetaRoute
+    }
+    '/ar/ereb-dili/feil/$slug': {
+      id: '/ar/ereb-dili/feil/$slug'
+      path: '/$slug'
+      fullPath: '/ar/ereb-dili/feil/$slug'
+      preLoaderRoute: typeof ArErebDiliFeilSlugRouteImport
+      parentRoute: typeof ArErebDiliFeilRoute
+    }
+    '/en/ereb-dili/feil/$slug': {
+      id: '/en/ereb-dili/feil/$slug'
+      path: '/$slug'
+      fullPath: '/en/ereb-dili/feil/$slug'
+      preLoaderRoute: typeof EnErebDiliFeilSlugRouteImport
+      parentRoute: typeof EnErebDiliFeilRoute
+    }
+    '/ru/ereb-dili/feil/$slug': {
+      id: '/ru/ereb-dili/feil/$slug'
+      path: '/$slug'
+      fullPath: '/ru/ereb-dili/feil/$slug'
+      preLoaderRoute: typeof RuErebDiliFeilSlugRouteImport
+      parentRoute: typeof RuErebDiliFeilRoute
+    }
+    '/tr/ereb-dili/feil/$slug': {
+      id: '/tr/ereb-dili/feil/$slug'
+      path: '/$slug'
+      fullPath: '/tr/ereb-dili/feil/$slug'
+      preLoaderRoute: typeof TrErebDiliFeilSlugRouteImport
+      parentRoute: typeof TrErebDiliFeilRoute
     }
   }
 }
@@ -6287,9 +6469,22 @@ const ArXetaRouteChildren: ArXetaRouteChildren = {
 const ArXetaRouteWithChildren =
   ArXetaRoute._addFileChildren(ArXetaRouteChildren)
 
+interface ArErebDiliFeilRouteChildren {
+  ArErebDiliFeilSlugRoute: typeof ArErebDiliFeilSlugRoute
+}
+
+const ArErebDiliFeilRouteChildren: ArErebDiliFeilRouteChildren = {
+  ArErebDiliFeilSlugRoute: ArErebDiliFeilSlugRoute,
+}
+
+const ArErebDiliFeilRouteWithChildren = ArErebDiliFeilRoute._addFileChildren(
+  ArErebDiliFeilRouteChildren,
+)
+
 interface ArRouteChildren {
   ArAboutRoute: typeof ArAboutRoute
   ArAppsRoute: typeof ArAppsRouteWithChildren
+  ArBuilderRoute: typeof ArBuilderRoute
   ArContactRoute: typeof ArContactRoute
   ArDoctorRoute: typeof ArDoctorRoute
   ArEraseRoute: typeof ArEraseRoute
@@ -6318,6 +6513,7 @@ interface ArRouteChildren {
   ArSozRoute: typeof ArSozRouteWithChildren
   ArSozSayiRoute: typeof ArSozSayiRoute
   ArStudioRoute: typeof ArStudioRoute
+  ArTelefonRoute: typeof ArTelefonRoute
   ArTermsRoute: typeof ArTermsRoute
   ArToolsRoute: typeof ArToolsRouteWithChildren
   ArToolsLegalRoute: typeof ArToolsLegalRoute
@@ -6327,11 +6523,10 @@ interface ArRouteChildren {
   ArVideoRoute: typeof ArVideoRoute
   ArVoiceRoute: typeof ArVoiceRoute
   ArWifiRoute: typeof ArWifiRoute
-  ArTelefonRoute: typeof ArTelefonRoute
-  ArBuilderRoute: typeof ArBuilderRoute
   ArWorkspaceRoute: typeof ArWorkspaceRoute
   ArXetaRoute: typeof ArXetaRouteWithChildren
   ArZipRoute: typeof ArZipRoute
+  ArErebDiliFeilRoute: typeof ArErebDiliFeilRouteWithChildren
   ArImageToolRoute: typeof ArImageToolRoute
   ArJamiGroupRoute: typeof ArJamiGroupRoute
   ArLearnLogicRoute: typeof ArLearnLogicRoute
@@ -6343,6 +6538,7 @@ interface ArRouteChildren {
 const ArRouteChildren: ArRouteChildren = {
   ArAboutRoute: ArAboutRoute,
   ArAppsRoute: ArAppsRouteWithChildren,
+  ArBuilderRoute: ArBuilderRoute,
   ArContactRoute: ArContactRoute,
   ArDoctorRoute: ArDoctorRoute,
   ArEraseRoute: ArEraseRoute,
@@ -6371,6 +6567,7 @@ const ArRouteChildren: ArRouteChildren = {
   ArSozRoute: ArSozRouteWithChildren,
   ArSozSayiRoute: ArSozSayiRoute,
   ArStudioRoute: ArStudioRoute,
+  ArTelefonRoute: ArTelefonRoute,
   ArTermsRoute: ArTermsRoute,
   ArToolsRoute: ArToolsRouteWithChildren,
   ArToolsLegalRoute: ArToolsLegalRoute,
@@ -6380,11 +6577,10 @@ const ArRouteChildren: ArRouteChildren = {
   ArVideoRoute: ArVideoRoute,
   ArVoiceRoute: ArVoiceRoute,
   ArWifiRoute: ArWifiRoute,
-  ArTelefonRoute: ArTelefonRoute,
-  ArBuilderRoute: ArBuilderRoute,
   ArWorkspaceRoute: ArWorkspaceRoute,
   ArXetaRoute: ArXetaRouteWithChildren,
   ArZipRoute: ArZipRoute,
+  ArErebDiliFeilRoute: ArErebDiliFeilRouteWithChildren,
   ArImageToolRoute: ArImageToolRoute,
   ArJamiGroupRoute: ArJamiGroupRoute,
   ArLearnLogicRoute: ArLearnLogicRoute,
@@ -6493,9 +6689,22 @@ const EnXetaRouteChildren: EnXetaRouteChildren = {
 const EnXetaRouteWithChildren =
   EnXetaRoute._addFileChildren(EnXetaRouteChildren)
 
+interface EnErebDiliFeilRouteChildren {
+  EnErebDiliFeilSlugRoute: typeof EnErebDiliFeilSlugRoute
+}
+
+const EnErebDiliFeilRouteChildren: EnErebDiliFeilRouteChildren = {
+  EnErebDiliFeilSlugRoute: EnErebDiliFeilSlugRoute,
+}
+
+const EnErebDiliFeilRouteWithChildren = EnErebDiliFeilRoute._addFileChildren(
+  EnErebDiliFeilRouteChildren,
+)
+
 interface EnRouteChildren {
   EnAboutRoute: typeof EnAboutRoute
   EnAppsRoute: typeof EnAppsRouteWithChildren
+  EnBuilderRoute: typeof EnBuilderRoute
   EnContactRoute: typeof EnContactRoute
   EnDoctorRoute: typeof EnDoctorRoute
   EnEraseRoute: typeof EnEraseRoute
@@ -6524,6 +6733,7 @@ interface EnRouteChildren {
   EnSozRoute: typeof EnSozRouteWithChildren
   EnSozSayiRoute: typeof EnSozSayiRoute
   EnStudioRoute: typeof EnStudioRoute
+  EnTelefonRoute: typeof EnTelefonRoute
   EnTermsRoute: typeof EnTermsRoute
   EnToolsRoute: typeof EnToolsRouteWithChildren
   EnToolsLegalRoute: typeof EnToolsLegalRoute
@@ -6533,12 +6743,11 @@ interface EnRouteChildren {
   EnVideoRoute: typeof EnVideoRoute
   EnVoiceRoute: typeof EnVoiceRoute
   EnWifiRoute: typeof EnWifiRoute
-  EnTelefonRoute: typeof EnTelefonRoute
-  EnBuilderRoute: typeof EnBuilderRoute
   EnWorkspaceRoute: typeof EnWorkspaceRoute
   EnXetaRoute: typeof EnXetaRouteWithChildren
   EnZipRoute: typeof EnZipRoute
   EnAllGroupRoute: typeof EnAllGroupRoute
+  EnErebDiliFeilRoute: typeof EnErebDiliFeilRouteWithChildren
   EnImageToolRoute: typeof EnImageToolRoute
   EnLearnLogicRoute: typeof EnLearnLogicRoute
   EnPdfToolRoute: typeof EnPdfToolRoute
@@ -6549,6 +6758,7 @@ interface EnRouteChildren {
 const EnRouteChildren: EnRouteChildren = {
   EnAboutRoute: EnAboutRoute,
   EnAppsRoute: EnAppsRouteWithChildren,
+  EnBuilderRoute: EnBuilderRoute,
   EnContactRoute: EnContactRoute,
   EnDoctorRoute: EnDoctorRoute,
   EnEraseRoute: EnEraseRoute,
@@ -6577,6 +6787,7 @@ const EnRouteChildren: EnRouteChildren = {
   EnSozRoute: EnSozRouteWithChildren,
   EnSozSayiRoute: EnSozSayiRoute,
   EnStudioRoute: EnStudioRoute,
+  EnTelefonRoute: EnTelefonRoute,
   EnTermsRoute: EnTermsRoute,
   EnToolsRoute: EnToolsRouteWithChildren,
   EnToolsLegalRoute: EnToolsLegalRoute,
@@ -6586,12 +6797,11 @@ const EnRouteChildren: EnRouteChildren = {
   EnVideoRoute: EnVideoRoute,
   EnVoiceRoute: EnVoiceRoute,
   EnWifiRoute: EnWifiRoute,
-  EnTelefonRoute: EnTelefonRoute,
-  EnBuilderRoute: EnBuilderRoute,
   EnWorkspaceRoute: EnWorkspaceRoute,
   EnXetaRoute: EnXetaRouteWithChildren,
   EnZipRoute: EnZipRoute,
   EnAllGroupRoute: EnAllGroupRoute,
+  EnErebDiliFeilRoute: EnErebDiliFeilRouteWithChildren,
   EnImageToolRoute: EnImageToolRoute,
   EnLearnLogicRoute: EnLearnLogicRoute,
   EnPdfToolRoute: EnPdfToolRoute,
@@ -6774,9 +6984,22 @@ const RuXetaRouteChildren: RuXetaRouteChildren = {
 const RuXetaRouteWithChildren =
   RuXetaRoute._addFileChildren(RuXetaRouteChildren)
 
+interface RuErebDiliFeilRouteChildren {
+  RuErebDiliFeilSlugRoute: typeof RuErebDiliFeilSlugRoute
+}
+
+const RuErebDiliFeilRouteChildren: RuErebDiliFeilRouteChildren = {
+  RuErebDiliFeilSlugRoute: RuErebDiliFeilSlugRoute,
+}
+
+const RuErebDiliFeilRouteWithChildren = RuErebDiliFeilRoute._addFileChildren(
+  RuErebDiliFeilRouteChildren,
+)
+
 interface RuRouteChildren {
   RuAboutRoute: typeof RuAboutRoute
   RuAppsRoute: typeof RuAppsRouteWithChildren
+  RuBuilderRoute: typeof RuBuilderRoute
   RuContactRoute: typeof RuContactRoute
   RuDoctorRoute: typeof RuDoctorRoute
   RuEraseRoute: typeof RuEraseRoute
@@ -6805,6 +7028,7 @@ interface RuRouteChildren {
   RuSozRoute: typeof RuSozRouteWithChildren
   RuSozSayiRoute: typeof RuSozSayiRoute
   RuStudioRoute: typeof RuStudioRoute
+  RuTelefonRoute: typeof RuTelefonRoute
   RuTermsRoute: typeof RuTermsRoute
   RuToolsRoute: typeof RuToolsRouteWithChildren
   RuToolsLegalRoute: typeof RuToolsLegalRoute
@@ -6814,11 +7038,10 @@ interface RuRouteChildren {
   RuVideoRoute: typeof RuVideoRoute
   RuVoiceRoute: typeof RuVoiceRoute
   RuWifiRoute: typeof RuWifiRoute
-  RuTelefonRoute: typeof RuTelefonRoute
-  RuBuilderRoute: typeof RuBuilderRoute
   RuWorkspaceRoute: typeof RuWorkspaceRoute
   RuXetaRoute: typeof RuXetaRouteWithChildren
   RuZipRoute: typeof RuZipRoute
+  RuErebDiliFeilRoute: typeof RuErebDiliFeilRouteWithChildren
   RuImageToolRoute: typeof RuImageToolRoute
   RuLearnLogicRoute: typeof RuLearnLogicRoute
   RuPdfToolRoute: typeof RuPdfToolRoute
@@ -6831,6 +7054,7 @@ interface RuRouteChildren {
 const RuRouteChildren: RuRouteChildren = {
   RuAboutRoute: RuAboutRoute,
   RuAppsRoute: RuAppsRouteWithChildren,
+  RuBuilderRoute: RuBuilderRoute,
   RuContactRoute: RuContactRoute,
   RuDoctorRoute: RuDoctorRoute,
   RuEraseRoute: RuEraseRoute,
@@ -6859,6 +7083,7 @@ const RuRouteChildren: RuRouteChildren = {
   RuSozRoute: RuSozRouteWithChildren,
   RuSozSayiRoute: RuSozSayiRoute,
   RuStudioRoute: RuStudioRoute,
+  RuTelefonRoute: RuTelefonRoute,
   RuTermsRoute: RuTermsRoute,
   RuToolsRoute: RuToolsRouteWithChildren,
   RuToolsLegalRoute: RuToolsLegalRoute,
@@ -6868,11 +7093,10 @@ const RuRouteChildren: RuRouteChildren = {
   RuVideoRoute: RuVideoRoute,
   RuVoiceRoute: RuVoiceRoute,
   RuWifiRoute: RuWifiRoute,
-  RuTelefonRoute: RuTelefonRoute,
-  RuBuilderRoute: RuBuilderRoute,
   RuWorkspaceRoute: RuWorkspaceRoute,
   RuXetaRoute: RuXetaRouteWithChildren,
   RuZipRoute: RuZipRoute,
+  RuErebDiliFeilRoute: RuErebDiliFeilRouteWithChildren,
   RuImageToolRoute: RuImageToolRoute,
   RuLearnLogicRoute: RuLearnLogicRoute,
   RuPdfToolRoute: RuPdfToolRoute,
@@ -7002,9 +7226,22 @@ const TrXetaRouteChildren: TrXetaRouteChildren = {
 const TrXetaRouteWithChildren =
   TrXetaRoute._addFileChildren(TrXetaRouteChildren)
 
+interface TrErebDiliFeilRouteChildren {
+  TrErebDiliFeilSlugRoute: typeof TrErebDiliFeilSlugRoute
+}
+
+const TrErebDiliFeilRouteChildren: TrErebDiliFeilRouteChildren = {
+  TrErebDiliFeilSlugRoute: TrErebDiliFeilSlugRoute,
+}
+
+const TrErebDiliFeilRouteWithChildren = TrErebDiliFeilRoute._addFileChildren(
+  TrErebDiliFeilRouteChildren,
+)
+
 interface TrRouteChildren {
   TrAboutRoute: typeof TrAboutRoute
   TrAppsRoute: typeof TrAppsRouteWithChildren
+  TrBuilderRoute: typeof TrBuilderRoute
   TrContactRoute: typeof TrContactRoute
   TrDoctorRoute: typeof TrDoctorRoute
   TrEraseRoute: typeof TrEraseRoute
@@ -7033,6 +7270,7 @@ interface TrRouteChildren {
   TrSozRoute: typeof TrSozRouteWithChildren
   TrSozSayiRoute: typeof TrSozSayiRoute
   TrStudioRoute: typeof TrStudioRoute
+  TrTelefonRoute: typeof TrTelefonRoute
   TrTermsRoute: typeof TrTermsRoute
   TrToolsRoute: typeof TrToolsRouteWithChildren
   TrToolsLegalRoute: typeof TrToolsLegalRoute
@@ -7042,11 +7280,10 @@ interface TrRouteChildren {
   TrVideoRoute: typeof TrVideoRoute
   TrVoiceRoute: typeof TrVoiceRoute
   TrWifiRoute: typeof TrWifiRoute
-  TrTelefonRoute: typeof TrTelefonRoute
-  TrBuilderRoute: typeof TrBuilderRoute
   TrWorkspaceRoute: typeof TrWorkspaceRoute
   TrXetaRoute: typeof TrXetaRouteWithChildren
   TrZipRoute: typeof TrZipRoute
+  TrErebDiliFeilRoute: typeof TrErebDiliFeilRouteWithChildren
   TrImageToolRoute: typeof TrImageToolRoute
   TrLearnLogicRoute: typeof TrLearnLogicRoute
   TrPdfToolRoute: typeof TrPdfToolRoute
@@ -7058,6 +7295,7 @@ interface TrRouteChildren {
 const TrRouteChildren: TrRouteChildren = {
   TrAboutRoute: TrAboutRoute,
   TrAppsRoute: TrAppsRouteWithChildren,
+  TrBuilderRoute: TrBuilderRoute,
   TrContactRoute: TrContactRoute,
   TrDoctorRoute: TrDoctorRoute,
   TrEraseRoute: TrEraseRoute,
@@ -7086,6 +7324,7 @@ const TrRouteChildren: TrRouteChildren = {
   TrSozRoute: TrSozRouteWithChildren,
   TrSozSayiRoute: TrSozSayiRoute,
   TrStudioRoute: TrStudioRoute,
+  TrTelefonRoute: TrTelefonRoute,
   TrTermsRoute: TrTermsRoute,
   TrToolsRoute: TrToolsRouteWithChildren,
   TrToolsLegalRoute: TrToolsLegalRoute,
@@ -7095,11 +7334,10 @@ const TrRouteChildren: TrRouteChildren = {
   TrVideoRoute: TrVideoRoute,
   TrVoiceRoute: TrVoiceRoute,
   TrWifiRoute: TrWifiRoute,
-  TrTelefonRoute: TrTelefonRoute,
-  TrBuilderRoute: TrBuilderRoute,
   TrWorkspaceRoute: TrWorkspaceRoute,
   TrXetaRoute: TrXetaRouteWithChildren,
   TrZipRoute: TrZipRoute,
+  TrErebDiliFeilRoute: TrErebDiliFeilRouteWithChildren,
   TrImageToolRoute: TrImageToolRoute,
   TrLearnLogicRoute: TrLearnLogicRoute,
   TrPdfToolRoute: TrPdfToolRoute,
@@ -7149,6 +7387,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ArRoute: ArRouteWithChildren,
+  BuilderRoute: BuilderRoute,
   ContactRoute: ContactRoute,
   DoctorRoute: DoctorRoute,
   EnRoute: EnRouteWithChildren,
@@ -7181,6 +7420,7 @@ const rootRouteChildren: RootRouteChildren = {
   SozRoute: SozRouteWithChildren,
   SozSayiRoute: SozSayiRoute,
   StudioRoute: StudioRoute,
+  TelefonRoute: TelefonRoute,
   TermsRoute: TermsRoute,
   ToolsRoute: ToolsRouteWithChildren,
   ToolsLegalRoute: ToolsLegalRoute,
@@ -7193,8 +7433,6 @@ const rootRouteChildren: RootRouteChildren = {
   VoiceRoute: VoiceRoute,
   WhyRoute: WhyRoute,
   WifiRoute: WifiRoute,
-  TelefonRoute: TelefonRoute,
-  BuilderRoute: BuilderRoute,
   WorkspaceRoute: WorkspaceRoute,
   XetaRoute: XetaRouteWithChildren,
   ZipRoute: ZipRoute,

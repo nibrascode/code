@@ -109,12 +109,16 @@ function SeoLinks() {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
   const searchStr = useRouterState({ select: (state) => state.location.searchStr });
   const path = pathname.length > 1 ? pathname.replace(/\/$/, "") : "/";
-  if (path === "/ereb-dili/feil" || path.startsWith("/ereb-dili/feil/")) {
+  const verbM = path.match(/^(?:\/(en|tr|ar|ru))?(\/ereb-dili\/feil(?:\/[^/]+)?)$/);
+  if (verbM) {
+    const rest = verbM[2];
     return (
       <>
         <link rel="canonical" href={`${SITE}${path}`} />
-        <link rel="alternate" {...{ hreflang: "az" }} href={`${SITE}${path}`} />
-        <link rel="alternate" {...{ hreflang: "x-default" }} href={`${SITE}${path}`} />
+        {(["az", "en", "tr", "ar", "ru"] as const).map((code) => (
+          <link key={code} rel="alternate" {...{ hreflang: code }} href={`${SITE}${code === "az" ? "" : `/${code}`}${rest}`} />
+        ))}
+        <link rel="alternate" {...{ hreflang: "x-default" }} href={`${SITE}${rest}`} />
       </>
     );
   }
