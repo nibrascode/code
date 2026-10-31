@@ -206,9 +206,9 @@ function segment(text, firstLen) {
   const segs = [];
   let prevEnd = 0;
   const qStarts = marks.map((mk, i) => {
-    const lo = i ? marks[i - 1].en : 0;
+    const lo = i ? marks[i - 1].en : -1;
     let k = lineAt(mk.st), qk = null;
-    const minK = lineAt(lo);
+    const minK = lineAt(Math.max(lo, 0));
     // geriyə: sual sətrini tap (ən çox 8 sətir)
     for (let j = k, n = 0; j >= minK && n < 8; j--, n++) {
       const t = lines[j].t.trim();
@@ -229,7 +229,8 @@ function segment(text, firstLen) {
       else break;
     }
     if (i === 0 && hk === minK && lines[hk].s < lo) {}
-    return { qs: Math.max(lines[qk].s, lo), hs: Math.max(lines[hk].s, lo), heads };
+    const safe = (st) => (st > lo ? st : lines[k].s > lo ? lines[k].s : mk.st);
+    return { qs: safe(lines[qk].s), hs: Math.min(safe(lines[hk].s), safe(lines[qk].s)), heads: lines[hk].s > lo ? heads : [] };
   });
   marks.forEach((mk, i) => {
     const q = qStarts[i];
@@ -242,7 +243,7 @@ function segment(text, firstLen) {
 function cleanQ(q) {
   let prev;
   do { prev = q; q = q.replace(/^\s*\(?[\d٠-٩]+\s*[)/\-–.]\s*/, "").replace(/^(?:و?سُ?ئِ?ل[^:：]{0,80}[:：]\s*(?:عن\s+)?|س[\d٠-٩]*\s*[:：/]\s*|السؤال\s*[:：]?\s*)/, "")
-    .replace(/^(?:(?:هذا |هذه )?(?:السائل|السائلة|المستمع|المستمعة)(?:[^:：،؟]{0,60}?(?:يقول|تقول|يسأل|تسأل))?\s*[:：]?\s*|(?:يقول|تقول)\s*[:：]?\s*)/, "").replace(/^(?:يا )?(?:سماحة|فضيلة) الشيخ[^،:]{0,40}[،:]\s*/, "").replace(/^ما\s*(?=حكم|الحكم)/, "").replace(/^(?:عن|هل)\s+/, "")
+    .replace(/^(?:(?:هذا |هذه )?(?:السائل|السائلة|المستمع|المستمعة)(?:[^:：،؟]{0,60}?(?:يقول|تقول|يسأل|تسأل))?\s*[:：]?\s*|(?:يقول|تقول)\s*[:：]?\s*)/, "").replace(/^(?:يا )?(?:سماحة|فضيلة) الشيخ[^،:]{0,40}[،:]\s*/, "").replace(/^(?:ما|ماذا)\s+(?:(?:هو|هي)\s+)?(?=\S)/, "").replace(/^(?:عن|هل)\s+/, "")
     .replace(/^(?:يا )?(?:سماحة|فضيلة) الشيخ[^،:]{0,40}[،:]\s*/, "")
     .replace(/\s*\([\d٠-٩]+\)/g, "").replace(/^ماحكم/, "حكم").replace(/\s+/g, " ").trim(); } while (q !== prev);
   return q;
