@@ -150,6 +150,36 @@ async function openPage(bookId, pageId) {
   return { bookId, pageId: s.pageId, title: c.title, label: c.label, text: cl.text, url: pageUrl(bookId, s.pageId), prevPageId: s.prev, nextPageId: s.next, truncated: cl.truncated || Boolean(more) };
 }
 
+// ---- Fətvanın tam cavabı: cavab işarəsindən sonrakı sualadək (lazım olsa növbəti səhifələrlə) ----
+const ANSWER_RE = /(?:^|\n|\s)(?:ج[\d٠-٩]*\s*[:：]|الجواب\s*[:：]|فأجاب(?:\s+(?:فضيلته|سماحته|رحمه الله(?: تعالى)?|الشيخ))*\s*(?:بقوله)?\s*[:：]?)/;
+const NEXTQ_RE = /\n\s*(?:\*\s*\*\s*\*|[\d٠-٩]+\s*[-–]\s*[\u0600-\u06ff][^\n]{0,120}\n|(?:[\d٠-٩]+\s*[/\-–]\s*)?(?:س[\d٠-٩]*\s*[:：]|السؤال\s*[:：]?|سئل\s+(?:فضيلة|سماحة|الشيخ)|يقول السائل|سؤال\s*[:：]|المستمع))/;
+function tidy(t) {
+  return t.split(/\n_{5,}[\s\S]*?(?=\n\n|$)/)[0]
+    .replace(/\s?\((?:[\d٠-٩]{1,3})\)(?=\s|[.,،]|$)/g, "")
+    .replace(/\[ص:?\s*[\d٠-٩]+\]/g, "")
+    .replace(/[ \t]+\n/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
+}
+async function fatwaFull(bookId, pageId) {
+  const first = await openPage(bookId, pageId);
+  const pageText = (p) => p.text.replace(/\s*…$/, "").split(/\n_{5,}/)[0];
+  let text = pageText(first);
+  const m = ANSWER_RE.exec(text);
+  let body = m ? text.slice(m.index + m[0].length) : text;
+  let ended = false;
+  const cut = (t) => { const q = NEXTQ_RE.exec(t); if (q) { ended = true; return t.slice(0, q.index); } return t; };
+  body = cut(body);
+  let next = first.nextPageId, pages = 1;
+  const until = Date.now() + 15000;
+  while (!ended && next && pages < 5 && until - Date.now() > 1500) {
+    let p;
+    try { p = await openPage(bookId, next); } catch { break; }
+    const piece = cut("\n" + pageText(p)).replace(/^\n+/, "");
+    if (piece.trim()) body = body.replace(/\s+$/, "") + (/[.!؟?:»)]\s*$/.test(body.trim()) ? "\n\n" : " ") + piece;
+    next = p.nextPageId; pages++;
+  }
+  return { bookId, pageId, title: first.title, label: first.label, url: first.url, answer: tidy(body.replace(/^[\s:：-]+/, "")), found: Boolean(m), pages };
+}
+
 // ---- Dorar (node:https — Vercel Node fetch-i Cloudflare tərəfindən 403 alır) ----
 const DORAR_HEADERS = { "User-Agent": UA, Accept: "application/json, text/javascript, */*;q=0.1", "Accept-Language": "ar,az;q=0.8,en;q=0.6", Referer: "https://nibrascode.com/" };
 function httpGet(url, headers, timeoutMs = 8000) {
@@ -283,7 +313,7 @@ export default async function handler(req, res) {
   const action = String(b.action || "");
   const original = clean(b.query).slice(0, MAXQ);
   const q = original;
-  if (action !== "hadith" && action !== "open" && !/[\u0600-\u06ff]/.test(q)) { res.status(400).json({ error: "arabic_only", message: "Only Arabic queries are accepted. يرجى كتابة السؤال باللغة العربية." }); return; }
+  if (action !== "hadith" && action !== "open" && action !== "fatwaFull" && !/[\u0600-\u06ff]/.test(q)) { res.status(400).json({ error: "arabic_only", message: "Only Arabic queries are accepted. يرجى كتابة السؤال باللغة العربية." }); return; }
   try {
     if (action === "fatwa" || action === "shamela") {
       if (q.length < 2) { res.status(400).json({ error: "query" }); return; }
@@ -294,6 +324,10 @@ export default async function handler(req, res) {
       if (q.length < 2) { res.status(400).json({ error: "query" }); return; }
       try { res.status(200).json({ kind: "dorar", query: q, original, items: await cached("d" + q, () => searchDorar(q)) }); }
       catch (e) { res.status(200).json({ kind: "dorar", query: q, items: [], error: e.message === "blocked" ? "blocked" : "unavailable" }); }
+    } else if (action === "fatwaFull") {
+      const bookId = int(Number(b.bookId)), pageId = int(Number(b.pageId));
+      if (!bookId || !pageId) { res.status(400).json({ error: "page" }); return; }
+      res.status(200).json(await cached(`f${bookId}:${pageId}`, () => fatwaFull(bookId, pageId)));
     } else if (action === "open") {
       const bookId = int(Number(b.bookId)), pageId = int(Number(b.pageId));
       if (!bookId || !pageId) { res.status(400).json({ error: "page" }); return; }
