@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type PointerEvent } from "react";
+import { useEffect, useRef, useState, type PointerEvent, type ReactNode } from "react";
 import type { Lang } from "@/lib/i18n";
 import { useI18n } from "@/lib/i18n-context";
 
@@ -23,7 +23,19 @@ type TestId =
   | "bt"
   | "gps"
   | "net"
-  | "battery";
+  | "battery"
+  | "charge"
+  | "storage"
+  | "screen"
+  | "device"
+  | "force"
+  | "stylus"
+  | "bio"
+  | "nfc"
+  | "keys"
+  | "light"
+  | "magnet"
+  | "near";
 
 type Copy = {
   title: string;
@@ -123,6 +135,18 @@ const COPY: Record<Lang, Copy> = {
       gps: "GPS",
       net: "Şəbəkə",
       battery: "Batareya",
+      charge: "Şarj",
+      storage: "Yaddaş",
+      screen: "Ekran ölçüsü",
+      device: "Prosessor",
+      force: "Basma gücü",
+      stylus: "Qələm",
+      bio: "Barmaq izi",
+      nfc: "NFC",
+      keys: "Düymələr",
+      light: "İşıq",
+      magnet: "Maqnit",
+      near: "Yaxınlıq",
     },
     colorHint: "Ekrana toxun, rəng dəyişsin. Ləkə və ya yanlış rəng görürsənsə, o sahəni yadda saxla.",
     deadHint: "Qara, ağ, qırmızı, yaşıl və göy ekrana bax. Bir nöqtə dəyişmirsə, o, ölü və ya ilişmiş piksel ola bilər. Səhifə pikseli özü görmür.",
@@ -211,6 +235,18 @@ const COPY: Record<Lang, Copy> = {
       gps: "GPS",
       net: "Network",
       battery: "Battery",
+      charge: "Charging",
+      storage: "Storage",
+      screen: "Screen size",
+      device: "Processor",
+      force: "Press force",
+      stylus: "Stylus",
+      bio: "Fingerprint",
+      nfc: "NFC",
+      keys: "Buttons",
+      light: "Light",
+      magnet: "Magnet",
+      near: "Proximity",
     },
     colorHint: "Tap the screen to change color. If a patch stays wrong, remember that spot.",
     deadHint: "Look at black, white, red, green and blue. A dot that never changes may be a dead or stuck pixel. The page cannot see pixels itself.",
@@ -299,6 +335,18 @@ const COPY: Record<Lang, Copy> = {
       gps: "GPS",
       net: "Ağ",
       battery: "Pil",
+      charge: "Şarj",
+      storage: "Depolama",
+      screen: "Ekran ölçüsü",
+      device: "İşlemci",
+      force: "Basış gücü",
+      stylus: "Kalem",
+      bio: "Parmak izi",
+      nfc: "NFC",
+      keys: "Tuşlar",
+      light: "Işık",
+      magnet: "Mıknatıs",
+      near: "Yakınlık",
     },
     colorHint: "Ekrana dokun, renk değişsin. Yanlış kalan leke varsa o yeri aklında tut.",
     deadHint: "Siyah, beyaz, kırmızı, yeşil ve maviye bak. Değişmeyen nokta ölü veya takılı piksel olabilir. Sayfa pikseli kendisi görmez.",
@@ -387,6 +435,18 @@ const COPY: Record<Lang, Copy> = {
       gps: "تحديد الموقع",
       net: "الشبكة",
       battery: "البطارية",
+      charge: "الشحن",
+      storage: "التخزين",
+      screen: "مقاس الشاشة",
+      device: "المعالج",
+      force: "قوة الضغط",
+      stylus: "القلم",
+      bio: "البصمة",
+      nfc: "NFC",
+      keys: "الأزرار",
+      light: "الضوء",
+      magnet: "المغناطيس",
+      near: "القرب",
     },
     colorHint: "المس الشاشة ليتغير اللون. إذا بقيت بقعة خاطئة فاحفظ مكانها.",
     deadHint: "انظر إلى الأسود والأبيض والأحمر والأخضر والأزرق. نقطة لا تتغير قد تكون بكسلًا ميتًا. الصفحة لا ترى البكسل بنفسها.",
@@ -475,6 +535,18 @@ const COPY: Record<Lang, Copy> = {
       gps: "GPS",
       net: "Сеть",
       battery: "Батарея",
+      charge: "Зарядка",
+      storage: "Память",
+      screen: "Размер экрана",
+      device: "Процессор",
+      force: "Сила нажатия",
+      stylus: "Стилус",
+      bio: "Отпечаток",
+      nfc: "NFC",
+      keys: "Кнопки",
+      light: "Свет",
+      magnet: "Магнит",
+      near: "Приближение",
     },
     colorHint: "Нажмите на экран, чтобы сменить цвет. Если пятно остаётся чужим, запомните место.",
     deadHint: "Смотрите чёрный, белый, красный, зелёный и синий. Точка, которая не меняется, может быть битым пикселем. Страница сама пиксели не видит.",
@@ -556,6 +628,18 @@ const ORDER: TestId[] = [
   "gps",
   "net",
   "battery",
+  "charge",
+  "storage",
+  "screen",
+  "device",
+  "force",
+  "stylus",
+  "bio",
+  "nfc",
+  "keys",
+  "light",
+  "magnet",
+  "near",
 ];
 
 const COLORS = ["#ffffff", "#000000", "#ff0000", "#00ff00", "#0000ff", "#808080", "#ffff00", "#00ffff", "#ff00ff"];
@@ -718,6 +802,7 @@ function TouchTest({ copy, onBack }: { copy: Copy; onBack: () => void }) {
 }
 
 function MultiTest({ copy, onBack }: { copy: Copy; onBack: () => void }) {
+  const { lang } = useI18n();
   const [now, setNow] = useState(0);
   const [max, setMax] = useState(0);
   const ids = useRef(new Set<number>());
@@ -738,6 +823,7 @@ function MultiTest({ copy, onBack }: { copy: Copy; onBack: () => void }) {
       <button type="button" className="phone-back" onClick={onBack}>{copy.back}</button>
       <strong>{copy.multiNow}: {now}</strong>
       <span>{copy.multiMax}: {max}</span>
+      <span>{capLabel[lang]}: {typeof navigator === "undefined" ? "—" : navigator.maxTouchPoints || "—"}</span>
     </div>
   );
 }
@@ -1206,6 +1292,404 @@ function BatteryTest({ copy, lang, onBack }: { copy: Copy; lang: Lang; onBack: (
   );
 }
 
+const capLabel: Record<Lang, string> = {
+  az: "Telefonun bildirdiyi hədd",
+  en: "Reported limit",
+  tr: "Telefonun bildirdiği sınır",
+  ar: "الحد الذي يبلغه الهاتف",
+  ru: "Предел по данным телефона",
+};
+
+const NOTE: Record<Lang, Record<"storage" | "screen" | "force" | "forceNo" | "stylus" | "stylusYes" | "stylusWait" | "bio" | "bioYes" | "bioNo" | "nfc" | "nfcYes" | "nfcNo" | "nfcRead" | "keys" | "keysWait" | "charge" | "device" | "light" | "magnet" | "near" | "used" | "quota" | "cores" | "ram" | "gpu" | "hz" | "timeLeft" | "timeDrain" | "mb", string>> = {
+  az: {
+    storage: "Bu, sayt üçün ayrılan yerdir. Telefonun bütün yaddaşı deyil.",
+    screen: "Ölçü, sıxlıq və bir saniyəlik kadr sayı. Yenilənmə dəqiq laboratoriya rəqəmi deyil.",
+    force: "Barmağı basıb saxla. Rəqəm dəyişmirsə, telefon səhifəyə basma gücünü vermir.",
+    forceNo: "Basma gücü gəlmədi.",
+    stylus: "Qələmi ekrana toxundur. Barmaq toxunuşu qələm sayılmır.",
+    stylusYes: "Qələm göründü.",
+    stylusWait: "Hələ qələm toxunuşu yoxdur.",
+    bio: "Bu, yalnız brauzerin barmaq izi və ya üz kilidi ola biləcəyini deməsidir. Sensor açılmır və hesab yazılmır.",
+    bioYes: "Platforma yoxlaması bu brauzerdə mümkün görünür.",
+    bioNo: "Platforma yoxlaması görünmür.",
+    nfc: "NFC çox brauzerdə səhifəyə bağlıdır. Düymə yalnız bu səhifə oxuya bilirsə işləyir.",
+    nfcYes: "NFC oxumaq üçün API var.",
+    nfcNo: "NFC API yoxdur.",
+    nfcRead: "Etiketi yaxınlaşdır",
+    keys: "Səs və güc düyməsi adətən səhifəyə çatmır. Çatan düymənin adı burada yazılır.",
+    keysWait: "Hələ düymə gəlməyib.",
+    charge: "Şarja tax və çıxar. Vaxt rəqəmi brauzer vermirsə «məlum deyil» yazılır.",
+    device: "Nüvə sayı və yaddaş brauzerin təxmini rəqəmidir. Video kartın adı da qısaldılmış ola bilər.",
+    light: "İşıq sensoru səhifəyə açıqdırsa lüks göstərilir.",
+    magnet: "Maqnit sensoru səhifəyə açıqdırsa üç ox göstərilir.",
+    near: "Yaxınlıq sensoru əksər telefonda səhifəyə bağlanır.",
+    used: "İşlənən",
+    quota: "Ayrılan",
+    cores: "Nüvə",
+    ram: "Yaddaş",
+    gpu: "Video kart",
+    hz: "təxmini kadr",
+    timeLeft: "Dolana qədər",
+    timeDrain: "Boşalana qədər",
+    mb: "MB",
+  },
+  en: {
+    storage: "This is space set aside for the site, not the whole phone storage.",
+    screen: "Size, density and frames in one second. The refresh figure is not a lab number.",
+    force: "Press and hold. If the number never changes, the phone is not giving pressure to the page.",
+    forceNo: "No press force arrived.",
+    stylus: "Touch the screen with a pen. A finger is not a stylus.",
+    stylusYes: "A stylus was seen.",
+    stylusWait: "No stylus touch yet.",
+    bio: "This only says the browser thinks a fingerprint or face check may exist. The sensor is not opened and nothing is saved.",
+    bioYes: "A platform check looks possible in this browser.",
+    bioNo: "No platform check is visible.",
+    nfc: "NFC is closed to the page in many browsers. The button works only if this page can read.",
+    nfcYes: "An NFC reading API is present.",
+    nfcNo: "No NFC API.",
+    nfcRead: "Hold a tag near",
+    keys: "Volume and power usually never reach the page. A key that does arrive is named here.",
+    keysWait: "No key yet.",
+    charge: "Plug the charger in and out. If the browser gives no time, it says unknown.",
+    device: "Core count and memory are the browser’s rough figures. The graphics name may be shortened.",
+    light: "Lux is shown only if the light sensor is open to the page.",
+    magnet: "Three axes are shown only if the magnet sensor is open to the page.",
+    near: "The proximity sensor is closed to the page on most phones.",
+    used: "Used",
+    quota: "Allowed",
+    cores: "Cores",
+    ram: "Memory",
+    gpu: "Graphics",
+    hz: "approx. frames",
+    timeLeft: "Until full",
+    timeDrain: "Until empty",
+    mb: "MB",
+  },
+  tr: {
+    storage: "Bu, site için ayrılan yerdir. Telefonun bütün deposu değildir.",
+    screen: "Ölçü, yoğunluk ve bir saniyedeki kare. Yenileme laboratuvar sayısı değildir.",
+    force: "Basılı tut. Sayı değişmiyorsa telefon basış gücünü sayfaya vermiyor.",
+    forceNo: "Basış gücü gelmedi.",
+    stylus: "Kalemi ekrana değdir. Parmak kalem sayılmaz.",
+    stylusYes: "Kalem göründü.",
+    stylusWait: "Henüz kalem dokunuşu yok.",
+    bio: "Bu yalnızca tarayıcının parmak izi veya yüz kontrolü olabileceğini söylemesidir. Sensör açılmaz, bir şey kaydedilmez.",
+    bioYes: "Platforma kontrolü bu tarayıcıda mümkün görünüyor.",
+    bioNo: "Platforma kontrolü görünmüyor.",
+    nfc: "NFC birçok tarayıcıda sayfaya kapalıdır. Düğme ancak bu sayfa okuyabilirse çalışır.",
+    nfcYes: "NFC okuma API’si var.",
+    nfcNo: "NFC API yok.",
+    nfcRead: "Etiketi yaklaştır",
+    keys: "Ses ve güç tuşu genelde sayfaya ulaşmaz. Ulaşan tuşun adı burada yazılır.",
+    keysWait: "Henüz tuş gelmedi.",
+    charge: "Şarjı tak ve çıkar. Tarayıcı süre vermezse «bilinmiyor» yazar.",
+    device: "Çekirdek ve bellek tarayıcının kaba sayısıdır. Ekran kartı adı kısaltılmış olabilir.",
+    light: "Işık sensörü sayfaya açıksa lüks gösterilir.",
+    magnet: "Mıknatıs sensörü sayfaya açıksa üç eksen gösterilir.",
+    near: "Yakınlık sensörü çoğu telefonda sayfaya kapalıdır.",
+    used: "Kullanılan",
+    quota: "Ayrılan",
+    cores: "Çekirdek",
+    ram: "Bellek",
+    gpu: "Ekran kartı",
+    hz: "yaklaşık kare",
+    timeLeft: "Dolana kadar",
+    timeDrain: "Boşalana kadar",
+    mb: "MB",
+  },
+  ar: {
+    storage: "هذه مساحة مخصصة للموقع، وليست تخزين الهاتف كله.",
+    screen: "المقاس والكثافة وعدد الإطارات في ثانية. رقم التحديث ليس قياس مختبر.",
+    force: "اضغط وأبقِ. إذا لم يتغير الرقم فالهاتف لا يعطي قوة الضغط للصفحة.",
+    forceNo: "لم تصل قوة الضغط.",
+    stylus: "المس الشاشة بالقلم. الإصبع ليس قلمًا.",
+    stylusYes: "ظهر القلم.",
+    stylusWait: "لا لمسة قلم بعد.",
+    bio: "هذا يعني فقط أن المتصفح يرى إمكانية فحص بالبصمة أو الوجه. لا يُفتح الحساس ولا يُحفظ شيء.",
+    bioYes: "يبدو فحص المنصة ممكنًا في هذا المتصفح.",
+    bioNo: "لا يظهر فحص منصة.",
+    nfc: "NFC مغلق أمام الصفحة في كثير من المتصفحات. الزر يعمل فقط إذا استطاعت هذه الصفحة القراءة.",
+    nfcYes: "واجهة قراءة NFC موجودة.",
+    nfcNo: "لا واجهة NFC.",
+    nfcRead: "قرّب البطاقة",
+    keys: "زر الصوت والطاقة غالبًا لا يصلان إلى الصفحة. الزر الذي يصل يُكتب اسمه هنا.",
+    keysWait: "لا زر بعد.",
+    charge: "أوصل الشاحن وافصله. إن لم يعطِ المتصفح وقتًا يُكتب «غير معروف».",
+    device: "عدد الأنوية والذاكرة رقم تقريبي من المتصفح. قد يكون اسم الرسوم مختصرًا.",
+    light: "تظهر اللوكس فقط إذا كان حساس الضوء مفتوحًا للصفحة.",
+    magnet: "تظهر المحاور الثلاثة فقط إذا كان حساس المغناطيس مفتوحًا للصفحة.",
+    near: "حساس القرب مغلق أمام الصفحة في أغلب الهواتف.",
+    used: "المستخدم",
+    quota: "المتاح",
+    cores: "الأنوية",
+    ram: "الذاكرة",
+    gpu: "الرسوم",
+    hz: "إطار تقريبي",
+    timeLeft: "حتى الامتلاء",
+    timeDrain: "حتى الفراغ",
+    mb: "MB",
+  },
+  ru: {
+    storage: "Это место, отведённое сайту, а не вся память телефона.",
+    screen: "Размер, плотность и кадры за секунду. Частота обновления — не лабораторная цифра.",
+    force: "Нажмите и держите. Если число не меняется, телефон не отдаёт силу нажатия странице.",
+    forceNo: "Сила нажатия не пришла.",
+    stylus: "Коснитесь экрана пером. Палец — не стилус.",
+    stylusYes: "Стилус увиден.",
+    stylusWait: "Касания стилусом ещё нет.",
+    bio: "Это лишь сообщение браузера, что проверка отпечатком или лицом может быть. Датчик не открывается и ничего не сохраняется.",
+    bioYes: "Проверка платформы в этом браузере выглядит возможной.",
+    bioNo: "Проверка платформы не видна.",
+    nfc: "NFC закрыт для страницы во многих браузерах. Кнопка работает, только если эта страница умеет читать.",
+    nfcYes: "API чтения NFC есть.",
+    nfcNo: "API NFC нет.",
+    nfcRead: "Поднесите метку",
+    keys: "Громкость и питание обычно не доходят до страницы. Имя дошедшей кнопки пишется здесь.",
+    keysWait: "Кнопки ещё не было.",
+    charge: "Подключите и отключите зарядку. Если браузер не дал время, будет «неизвестно».",
+    device: "Число ядер и память — грубые цифры браузера. Имя видеокарты может быть укорочено.",
+    light: "Люксы показываются, только если датчик света открыт странице.",
+    magnet: "Три оси показываются, только если магнитный датчик открыт странице.",
+    near: "Датчик приближения на большинстве телефонов закрыт для страницы.",
+    used: "Занято",
+    quota: "Отведено",
+    cores: "Ядра",
+    ram: "Память",
+    gpu: "Графика",
+    hz: "прибл. кадров",
+    timeLeft: "До полной",
+    timeDrain: "До пустой",
+    mb: "МБ",
+  },
+};
+
+function mb(bytes: number) {
+  return Math.round(bytes / (1024 * 1024));
+}
+
+function minutes(seconds: number, unknown: string) {
+  if (!Number.isFinite(seconds) || seconds < 0) return unknown;
+  return `${Math.round(seconds / 60)} min`;
+}
+
+function Shell({ copy, title, onBack, children }: { copy: Copy; title: string; onBack: () => void; children: ReactNode }) {
+  return (
+    <div className="phone-panel">
+      <button type="button" className="phone-back" onClick={onBack}>{copy.back}</button>
+      <h2>{title}</h2>
+      {children}
+    </div>
+  );
+}
+
+function StorageTest({ copy, lang, onBack }: { copy: Copy; lang: Lang; onBack: () => void }) {
+  const note = NOTE[lang];
+  const [text, setText] = useState(copy.missing);
+  useEffect(() => {
+    const storage = navigator.storage;
+    if (!storage?.estimate) return;
+    void storage.estimate().then((est) => {
+      const used = est.usage == null ? copy.unknown : `${mb(est.usage)} ${note.mb}`;
+      const quota = est.quota == null ? copy.unknown : `${mb(est.quota)} ${note.mb}`;
+      setText(`${note.used}: ${used} · ${note.quota}: ${quota}`);
+    }).catch(() => setText(copy.missing));
+  }, [copy.missing, copy.unknown, note.mb, note.quota, note.used]);
+  return <Shell copy={copy} title={copy.names.storage} onBack={onBack}><p>{note.storage}</p><p className="phone-readout">{text}</p></Shell>;
+}
+
+function ScreenTest({ copy, lang, onBack }: { copy: Copy; lang: Lang; onBack: () => void }) {
+  const note = NOTE[lang];
+  const [hz, setHz] = useState(0);
+  useEffect(() => {
+    let frames = 0;
+    let start = 0;
+    let id = 0;
+    const tick = (now: number) => {
+      if (!start) start = now;
+      frames += 1;
+      if (now - start < 1000) id = requestAnimationFrame(tick);
+      else setHz(frames);
+    };
+    id = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(id);
+  }, []);
+  const gamut = window.matchMedia("(color-gamut: p3)").matches ? "P3" : "sRGB";
+  return (
+    <Shell copy={copy} title={copy.names.screen} onBack={onBack}>
+      <p>{note.screen}</p>
+      <p className="phone-readout">
+        {screen.width}×{screen.height} · {window.devicePixelRatio}× · {screen.colorDepth} bit · {gamut}
+        {hz ? ` · ${hz} ${note.hz}` : ""}
+        {screen.orientation?.type ? ` · ${screen.orientation.type}` : ""}
+      </p>
+    </Shell>
+  );
+}
+
+function ForceTest({ copy, lang, onBack }: { copy: Copy; lang: Lang; onBack: () => void }) {
+  const note = NOTE[lang];
+  const [value, setValue] = useState(0);
+  const [top, setTop] = useState(0);
+  function read(event: PointerEvent<HTMLDivElement>) {
+    const pressure = event.pressure > 0 && event.pressure < 1 ? event.pressure : 0;
+    setValue(pressure);
+    setTop((old) => Math.max(old, pressure));
+  }
+  return (
+    <div className="phone-fill phone-multi" onPointerDown={read} onPointerMove={read}>
+      <button type="button" className="phone-back" onClick={onBack}>{copy.back}</button>
+      <p>{note.force}</p>
+      <strong>{Math.round(value * 100)}</strong>
+      <span>{copy.multiMax}: {Math.round(top * 100)}</span>
+      {top === 0 ? <span>{note.forceNo}</span> : null}
+    </div>
+  );
+}
+
+function StylusTest({ copy, lang, onBack }: { copy: Copy; lang: Lang; onBack: () => void }) {
+  const note = NOTE[lang];
+  const [kind, setKind] = useState("");
+  return (
+    <div className="phone-fill phone-multi" onPointerDown={(event) => setKind(event.pointerType)}>
+      <button type="button" className="phone-back" onClick={onBack}>{copy.back}</button>
+      <p>{note.stylus}</p>
+      <strong>{kind === "pen" ? note.stylusYes : kind || note.stylusWait}</strong>
+    </div>
+  );
+}
+
+function BioTest({ copy, lang, onBack }: { copy: Copy; lang: Lang; onBack: () => void }) {
+  const note = NOTE[lang];
+  const [text, setText] = useState("…");
+  useEffect(() => {
+    const pub = window.PublicKeyCredential;
+    if (!pub?.isUserVerifyingPlatformAuthenticatorAvailable) {
+      setText(copy.missing);
+      return;
+    }
+    void pub.isUserVerifyingPlatformAuthenticatorAvailable().then((yes) => setText(yes ? note.bioYes : note.bioNo)).catch(() => setText(copy.missing));
+  }, [copy.missing, note.bioNo, note.bioYes]);
+  return <Shell copy={copy} title={copy.names.bio} onBack={onBack}><p>{note.bio}</p><p>{text}</p></Shell>;
+}
+
+function NfcTest({ copy, lang, onBack }: { copy: Copy; lang: Lang; onBack: () => void }) {
+  const note = NOTE[lang];
+  const [text, setText] = useState("");
+  const has = typeof window !== "undefined" && "NDEFReader" in window;
+  async function readTag() {
+    const Ctor = (window as unknown as { NDEFReader?: new () => { scan: () => Promise<void> } }).NDEFReader;
+    if (!Ctor) return;
+    try {
+      const reader = new Ctor();
+      await reader.scan();
+      setText(note.nfcRead);
+    } catch {
+      setText(copy.denied);
+    }
+  }
+  return (
+    <Shell copy={copy} title={copy.names.nfc} onBack={onBack}>
+      <p>{note.nfc}</p>
+      <p>{has ? note.nfcYes : note.nfcNo}</p>
+      {has ? <button type="button" className="phone-action" onClick={() => void readTag()}>{note.nfcRead}</button> : null}
+      {text ? <p>{text}</p> : null}
+    </Shell>
+  );
+}
+
+function KeysTest({ copy, lang, onBack }: { copy: Copy; lang: Lang; onBack: () => void }) {
+  const note = NOTE[lang];
+  const [key, setKey] = useState("");
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => setKey(event.key);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+  return <Shell copy={copy} title={copy.names.keys} onBack={onBack}><p>{note.keys}</p><p className="phone-readout">{key || note.keysWait}</p></Shell>;
+}
+
+function ChargeTest({ copy, lang, onBack }: { copy: Copy; lang: Lang; onBack: () => void }) {
+  const note = NOTE[lang];
+  const [text, setText] = useState(copy.missing);
+  useEffect(() => {
+    const getter = (navigator as Navigator & { getBattery?: () => Promise<BatteryLike> }).getBattery;
+    if (!getter) return;
+    let live = true;
+    let battery: BatteryLike | null = null;
+    const paint = () => {
+      if (!battery) return;
+      setText(`${battery.charging ? copy.batYes : copy.batNo} · ${Math.round(battery.level * 100)}% · ${note.timeLeft}: ${minutes(battery.chargingTime, copy.unknown)} · ${note.timeDrain}: ${minutes(battery.dischargingTime, copy.unknown)}`);
+    };
+    void getter().then((bat) => {
+      if (!live) return;
+      battery = bat;
+      paint();
+      bat.addEventListener("chargingchange", paint);
+      bat.addEventListener("levelchange", paint);
+    }).catch(() => { if (live) setText(copy.missing); });
+    return () => {
+      live = false;
+      battery?.removeEventListener("chargingchange", paint);
+      battery?.removeEventListener("levelchange", paint);
+    };
+  }, [copy.batNo, copy.batYes, copy.missing, copy.unknown, note.timeDrain, note.timeLeft]);
+  return <Shell copy={copy} title={copy.names.charge} onBack={onBack}><p>{note.charge}</p><p className="phone-readout">{text}</p></Shell>;
+}
+
+function DeviceTest({ copy, lang, onBack }: { copy: Copy; lang: Lang; onBack: () => void }) {
+  const note = NOTE[lang];
+  const cores = navigator.hardwareConcurrency || copy.unknown;
+  const ram = (navigator as Navigator & { deviceMemory?: number }).deviceMemory;
+  let gpu = copy.unknown;
+  try {
+    const gl = document.createElement("canvas").getContext("webgl");
+    const info = gl?.getExtension("WEBGL_debug_renderer_info");
+    if (gl && info) gpu = gl.getParameter(info.UNMASKED_RENDERER_WEBGL) || copy.unknown;
+  } catch {
+    gpu = copy.unknown;
+  }
+  return (
+    <Shell copy={copy} title={copy.names.device} onBack={onBack}>
+      <p>{note.device}</p>
+      <ul className="phone-facts">
+        <li>{note.cores}: {cores}</li>
+        <li>{note.ram}: {ram ? `${ram} GB` : copy.unknown}</li>
+        <li>{note.gpu}: {gpu}</li>
+      </ul>
+    </Shell>
+  );
+}
+
+function NamedSensor({ copy, lang, kind, onBack }: { copy: Copy; lang: Lang; kind: "light" | "magnet" | "near"; onBack: () => void }) {
+  const note = NOTE[lang];
+  const [text, setText] = useState("…");
+  useEffect(() => {
+    const name = kind === "light" ? "AmbientLightSensor" : kind === "magnet" ? "Magnetometer" : "ProximitySensor";
+    const Ctor = (window as unknown as Record<string, new (opts?: { frequency: number }) => EventTarget & { start: () => void; stop: () => void; illuminance?: number; x?: number; y?: number; z?: number; distance?: number; near?: boolean }> )[name];
+    if (!Ctor) {
+      setText(copy.missing);
+      return;
+    }
+    let sensor: { stop: () => void } | null = null;
+    try {
+      const next = new Ctor({ frequency: 8 });
+      sensor = next;
+      next.addEventListener("reading", () => {
+        if (kind === "light") setText(`${next.illuminance ?? "—"} lx`);
+        else if (kind === "magnet") setText(`x ${next.x?.toFixed(1) ?? "—"}  y ${next.y?.toFixed(1) ?? "—"}  z ${next.z?.toFixed(1) ?? "—"}`);
+        else setText(next.near ? "near" : `${next.distance ?? "—"}`);
+      });
+      next.addEventListener("error", () => setText(copy.missing));
+      next.start();
+    } catch {
+      setText(copy.missing);
+    }
+    return () => sensor?.stop();
+  }, [copy.missing, kind]);
+  const hint = kind === "light" ? note.light : kind === "magnet" ? note.magnet : note.near;
+  return <Shell copy={copy} title={copy.names[kind]} onBack={onBack}><p>{hint}</p><p className="phone-readout">{text}</p></Shell>;
+}
+
 export function PhoneLab() {
   const { lang } = useI18n();
   const copy = COPY[lang];
@@ -1240,6 +1724,16 @@ export function PhoneLab() {
     if (mode === "bt") return <BtTest copy={copy} onBack={back} />;
     if (mode === "gps") return <GpsTest copy={copy} onBack={back} />;
     if (mode === "net") return <NetTest copy={copy} onBack={back} />;
+    if (mode === "charge") return <ChargeTest copy={copy} lang={lang} onBack={back} />;
+    if (mode === "storage") return <StorageTest copy={copy} lang={lang} onBack={back} />;
+    if (mode === "screen") return <ScreenTest copy={copy} lang={lang} onBack={back} />;
+    if (mode === "device") return <DeviceTest copy={copy} lang={lang} onBack={back} />;
+    if (mode === "force") return <ForceTest copy={copy} lang={lang} onBack={back} />;
+    if (mode === "stylus") return <StylusTest copy={copy} lang={lang} onBack={back} />;
+    if (mode === "bio") return <BioTest copy={copy} lang={lang} onBack={back} />;
+    if (mode === "nfc") return <NfcTest copy={copy} lang={lang} onBack={back} />;
+    if (mode === "keys") return <KeysTest copy={copy} lang={lang} onBack={back} />;
+    if (mode === "light" || mode === "magnet" || mode === "near") return <NamedSensor copy={copy} lang={lang} kind={mode} onBack={back} />;
     return <BatteryTest copy={copy} lang={lang} onBack={back} />;
   }
 
