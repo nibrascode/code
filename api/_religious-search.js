@@ -90,9 +90,9 @@ async function searchShamela(query, { cursor = null, seen = [], fatwa = false } 
   if (fatwa) {
     args.author_queries = ["عبد العزيز بن باز", "محمد بن صالح العثيمين"];
     args.book_queries = ["مجموع فتاوى ابن باز", "مجموع فتاوى ورسائل العثيمين", "فتاوى نور على الدرب"];
-    args.difficulty = "medium";
+    
   }
-  const found = await shamela("shamela_find", args, 12000);
+  const found = await shamela("shamela_find", args, 10000);
   const evidence = readSources(found.evidence?.sources);
   const seenSet = new Set(seen.map(String));
   const metas = [];
@@ -254,30 +254,23 @@ async function hadithFull(ref) {
   return { status: "fragment", text: match?.text || ref.text, sourceTitle: match?.source || ref.source || null, takhrij: match?.takhrij || null, url: link || `https://dorar.net/hadith/search?q=${encodeURIComponent(frag || ref.query)}` };
 }
 
-// Latın/kiril açar sözlərini ərəbcəyə çevirir (Şamilə/Dorar yalnız ərəbcə mətn axtarır). Yalnız tanınan sözlər dəyişir.
-const TERMS = [
-  [/^(namaz|namaz\w*|salah|salat|prayer|молитва|намаз\w*)$/i, "الصلاة"], [/^(destamaz|abdest|d[eə]stamaz\w*|wudu|omovenie|омовение|тəharət|taharet)$/i, "الوضوء"],
-  [/^(oruc\w*|oruç\w*|fasting|fast|ruze|пост|ураза)$/i, "الصيام"], [/^(zekat|zəkat\w*|zakat|закят)$/i, "الزكاة"], [/^(h[eəa]cc|hac|hajj|хадж)$/i, "الحج"],
-  [/^(umre|umrah|ümrə|умра)$/i, "العمرة"], [/^(cüm[əe]|cuma|cumə|jumuah|jumua|friday|джума)$/i, "صلاة الجمعة"], [/^(qüsl|qusl|gusl|ghusl|гусль)$/i, "الغسل"],
-  [/^(nikah|никах|marriage|evlilik)$/i, "النكاح"], [/^(talaq|talak|boşanma|divorce|развод)$/i, "الطلاق"], [/^(faiz|riba|sələm|usury|ростовщичество)$/i, "الربا"],
-  [/^(musiqi|müzik|music|музыка)$/i, "الغناء والمعازف"], [/^(şəkil|resim|photo|picture|фото)$/i, "التصوير"], [/^(niyy[əe]t|niyet|intention)$/i, "النية"],
-  [/^(dua|du'a|duа|молитва-дуа)$/i, "الدعاء"], [/^(tövh?id|tevhid|tawhid|таухид)$/i, "التوحيد"], [/^(şirk|shirk|ширк)$/i, "الشرك"], [/^(bid'?[əe]t|bidat|bidah)$/i, "البدعة"],
-  [/^(quran|qur'?an|kuran|коран)$/i, "القرآن"], [/^(sünn[əe]t|sunnah|сунна)$/i, "السنة"], [/^(cənazə|cenaze|janaza|джаназа)$/i, "صلاة الجنازة"], [/^(qurban|kurban|udhiyah)$/i, "الأضحية"],
-  [/^(hicab|hijab|tesettür|хиджаб)$/i, "الحجاب"], [/^(tərav[iı]h|teravih|tarawih|таравих)$/i, "صلاة التراويح"], [/^(vitr|witr|vitir)$/i, "صلاة الوتر"], [/^(sədəq[əe]|sadaka|sadaqah|садака)$/i, "الصدقة"],
-];
-function toArabic(q) {
-  if (/[\u0600-\u06ff]/.test(q)) return q;
-  const words = q.split(/\s+/).filter(Boolean);
-  const mapped = words.map((w) => TERMS.find(([re]) => re.test(w.replace(/[?.!,]/g, "")))?.[1]).filter(Boolean);
-  return mapped.length ? [...new Set(mapped)].join(" ") : q;
-}
-
 async function readBody(req) {
   if (req.body && typeof req.body === "object") return req.body;
   if (typeof req.body === "string") try { return JSON.parse(req.body); } catch { return {}; }
   const chunks = []; let n = 0;
   for await (const c of req) { n += c.length; if (n > 20000) break; chunks.push(c); }
   try { return JSON.parse(Buffer.concat(chunks).toString("utf8")); } catch { return {}; }
+}
+
+// Qısa ömürlü yaddaş keşi (yalnız funksiya instansiyasının RAM-ında, 10 dəq, ən çox 200 açar; bazaya yazılmır).
+const cache = new Map();
+async function cached(key, fn) {
+  const hit = cache.get(key);
+  if (hit && Date.now() - hit.t < 600000) return hit.v;
+  const v = await fn();
+  if (cache.size > 200) cache.delete(cache.keys().next().value);
+  cache.set(key, { t: Date.now(), v });
+  return v;
 }
 
 export default async function handler(req, res) {
@@ -289,20 +282,22 @@ export default async function handler(req, res) {
   const b = await readBody(req);
   const action = String(b.action || "");
   const original = clean(b.query).slice(0, MAXQ);
-  const q = action === "hadith" ? original : toArabic(original);
+  const q = original;
+  if (action !== "hadith" && action !== "open" && !/[\u0600-\u06ff]/.test(q)) { res.status(400).json({ error: "arabic_only", message: "Only Arabic queries are accepted. يرجى كتابة السؤال باللغة العربية." }); return; }
   try {
     if (action === "fatwa" || action === "shamela") {
       if (q.length < 2) { res.status(400).json({ error: "query" }); return; }
-      const r = await searchShamela(q, { cursor: typeof b.cursor === "string" ? b.cursor : null, seen: Array.isArray(b.seen) ? b.seen.slice(0, 300) : [], fatwa: action === "fatwa" });
+      const opts = { cursor: typeof b.cursor === "string" ? b.cursor : null, seen: Array.isArray(b.seen) ? b.seen.slice(0, 300) : [], fatwa: action === "fatwa" };
+      const r = await cached(JSON.stringify([action, q, opts.cursor, opts.seen]), () => searchShamela(q, opts));
       res.status(200).json({ kind: action, query: q, original, ...r });
     } else if (action === "dorar") {
       if (q.length < 2) { res.status(400).json({ error: "query" }); return; }
-      try { res.status(200).json({ kind: "dorar", query: q, original, items: await searchDorar(q) }); }
+      try { res.status(200).json({ kind: "dorar", query: q, original, items: await cached("d" + q, () => searchDorar(q)) }); }
       catch (e) { res.status(200).json({ kind: "dorar", query: q, items: [], error: e.message === "blocked" ? "blocked" : "unavailable" }); }
     } else if (action === "open") {
       const bookId = int(Number(b.bookId)), pageId = int(Number(b.pageId));
       if (!bookId || !pageId) { res.status(400).json({ error: "page" }); return; }
-      res.status(200).json(await openPage(bookId, pageId));
+      res.status(200).json(await cached(`o${bookId}:${pageId}`, () => openPage(bookId, pageId)));
     } else if (action === "hadith") {
       const ref = { query: q, text: clean(b.text).slice(0, 3000), source: clean(b.source).slice(0, 300), muhaddith: clean(b.muhaddith).slice(0, 300), page: clean(b.page).slice(0, 100) };
       if (!ref.text) { res.status(400).json({ error: "text" }); return; }
