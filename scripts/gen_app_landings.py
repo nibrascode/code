@@ -19,8 +19,8 @@ DIR = {"nibras-arabic": "nibrasarabic", "nibras-docs": "nibrasdocs", "nibras-pla
        "majmu-al-fatawa": "majmualfatawa", "nibras-nova": "nibrasnova"}
 ORDER = ["nibras-arabic", "nibras-pdf", "nibras-qr", "nibras-office", "majmu-al-fatawa", "nibras-scan", "nibras-note", "nibras-nova", "nibras-plans", "nibras-docs"]
 PRIV_PAGE = {"nibras-pdf", "nibras-note", "nibras-plans", "nibras-scan", "nibras-qr", "nibras-arabic", "nibras-docs", "nibras-nova"}
-# Extra facts not in play-facts.json: Nova build (versionName 1.0.0, minSdk 24 = Android 7.0, internal testing).
-EXTRA = {"nibras-nova": {"version": "1.0.0", "minAndroid": "7.0", "status": "test"},
+# Extra facts not in play-facts.json: Nova build (versionName 1.0.2, minSdk 24 = Android 7.0, internal testing).
+EXTRA = {"nibras-nova": {"version": "1.0.2", "minAndroid": "7.0", "status": "test"},
          # minSdk from each app's repo (nibrascode/pdfeditor 26, qr/scan/note/plans 24)
          "nibras-office": {"minAndroid": "8.0"}, "nibras-qr": {"minAndroid": "7.0"}, "nibras-scan": {"minAndroid": "7.0"},
          "nibras-note": {"minAndroid": "7.0"}, "nibras-plans": {"minAndroid": "7.0"}}
