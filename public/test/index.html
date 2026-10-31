@@ -238,7 +238,7 @@ function score(it,q){const t=akey(it.text),ws=akey(q).split(/\s+/).filter(w=>w.l
 async function api(body){const r=await fetch("/api/religious-search",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
  if(r.status===429)throw new Error("rate");if(r.status===400){const j=await r.json().catch(()=>({}));if(j.error==="arabic_only")throw new Error("arOnly")}const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.error||"err");return j}
 function scrollTo(e){requestAnimationFrame(()=>e.scrollIntoView({behavior:"smooth",block:"start"}))}
-function addUser(q){$("#hero")?.remove();const m=el("div","msg user");m.appendChild(el("div","bubble",q));chat.appendChild(m)}
+let lastUser=null;function addUser(q){$("#hero")?.remove();const m=el("div","msg user");lastUser=m;m.appendChild(el("div","bubble",q));chat.appendChild(m)}
 function addBot(){const m=el("div","msg bot"),b=el("div","bubble");m.appendChild(el("div","av","ن"));m.appendChild(b);chat.appendChild(m);const d=el("div","dots");d.innerHTML="<span></span><span></span><span></span>";d.setAttribute("role","status");d.setAttribute("aria-label",T("loading"));d.title=T("loading");b.appendChild(d);scrollTo(m);return b}
 function excerpt(t,q,max=320){const parts=t.split(/(?<=[.؟!:])\s+|\n+/).map(x=>x.trim()).filter(x=>x.length>8);if(!parts.length)return t.slice(0,max);
  let bi=0,bs=-1;parts.forEach((p,i)=>{const sc=score({text:p},q)-i*0.05;if(sc>bs){bs=sc;bi=i}});if(bs<=0)bi=0;let out=parts[bi];for(let i=bi+1;i<parts.length&&out.length+parts[i].length<max;i++)out+=" "+parts[i];
@@ -278,7 +278,7 @@ async function deep(b,q){const [sh,dr]=await Promise.allSettled([api({action:"sh
  function show(){const first=list.children.length;items.slice(shown,shown+4).forEach(x=>list.appendChild(x.k==="s"?shCard(x.i,q):drCard(x.i,q)));shown=Math.min(shown+4,items.length);if(shown>=items.length&&!state.more)w.remove();return list.children[first]}
  show()}
 async function ask(q){q=(q||"").trim();if(!q||busy)return;if(!hasAr(q)){$("#hint").textContent=T("arOnly");return}$("#hint").textContent="";busy=true;$("#send").disabled=true;addUser(q);const b=addBot();
- try{await (mode==="fatwa"?fast:deep)(b,q)}catch(e){b.appendChild(el("p","muted err",errText(e)))}finally{b.querySelector(".dots")?.remove();busy=false;$("#send").disabled=false;scrollTo(b.parentElement)}}
+ try{await (mode==="fatwa"?fast:deep)(b,q)}catch(e){b.appendChild(el("p","muted err",errText(e)))}finally{b.querySelector(".dots")?.remove();busy=false;$("#send").disabled=false;scrollTo(lastUser||b.parentElement)}}
 let vcur=null;async function openViewer(book,page){const v=$("#viewer");v.classList.add("on");$("#vtext").textContent="";$("#vt").textContent="…";$("#vlabel").textContent="";
  $("#vprev").disabled=$("#vnext").disabled=true;const d=el("div","dots");d.innerHTML="<span></span><span></span><span></span>";$("#vtext").appendChild(d);
  try{const r=await api({action:"open",bookId:book,pageId:page});vcur=r;$("#vt").textContent=r.title;$("#vlabel").textContent=r.label?T("volPage")+": "+r.label:"";$("#vtext").textContent=r.text+(r.truncated?"\n\n— "+T("trunc"):"");
