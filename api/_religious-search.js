@@ -180,6 +180,148 @@ async function fatwaFull(bookId, pageId) {
   return { bookId, pageId, title: first.title, label: first.label, url: first.url, answer: tidy(body.replace(/^[\s:：-]+/, "")), found: Boolean(m), pages };
 }
 
+// ---- Ən uyğun fətva: səhifələri sual/cavab vahidlərinə bölüb sualın özünə görə seçmək ----
+const DIAC = /[\u064b-\u065f\u0670\u0640\u06d6-\u06ed]/g;
+const nk = (v) => String(v || "").replace(DIAC, "").replace(/[إأآٱ]/g, "ا").replace(/ى/g, "ي").replace(/ة/g, "ه").replace(/[^\p{L}\p{N}]+/gu, " ").trim();
+const STOP = new Set(["ما", "من", "في", "علي", "على", "عن", "الي", "الى", "هل", "او", "و", "ثم", "مع", "هو", "هي", "ذلك", "هذا", "هذه", "التي", "الذي", "كيف", "لماذا", "متي", "يا", "ان", "قد", "لا", "به", "بها", "له", "لها"]);
+const stem = (w) => { let x = w.replace(/^(?:وال|فال|بال|كال|لل|ال)/, ""); if (x.length > 4) x = x.replace(/^[وفبل]/, ""); if (x.length > 4) x = x.replace(/(?:ات|ين|ون|ان|ه|ها)$/, ""); return x; };
+const words = (v) => nk(v).split(" ").filter((w) => w.length > 1 && !STOP.has(w));
+// Cavab işarələri (sətir başında və ya boşluqdan sonra).
+const ANS_G = /(?:^|\n)[ \t]*(?:ج[\d٠-٩]*\s*[:：/]|الجواب\s*(?:[:：]|\n)|فالجواب\s*[:：])|(?:^|\n|[\s.؟?])(?:فأجاب|أجاب)(?:[^:：\n؟?]{0,60})[:：]/g;
+// Sual başlanğıcı sətirləri.
+const QLINE = /^(?:\(?[\d٠-٩]+\s*[)/\-–.]\s*)?(?:و?سُ?ئِ?ل|س[\d٠-٩]*\s*[:：/]|السؤال|سؤال\s*[:：]|(?:هذا |هذه )?(?:السائل|السائله|السائلة|المستمع|المستمعة)|يقول(?: السائل)?|تقول|يسأل|تسأل|ما حكم|ما الحكم)/;
+const HEADLINE = /^(?:[\d٠-٩]+\s*[-–]\s*\S|(?:حكم|باب|فصل|مسألة)\s)/;
+const SEP = /^\s*(?:\*\s*){3}\s*$/;
+
+function segment(text, firstLen) {
+  const lines = []; let pos = 0;
+  for (const l of text.split("\n")) { lines.push({ s: pos, t: l }); pos += l.length + 1; }
+  const lineAt = (i) => { let k = 0; while (k + 1 < lines.length && lines[k + 1].s <= i) k++; return k; };
+  const marks = [];
+  ANS_G.lastIndex = 0; let m;
+  while ((m = ANS_G.exec(text))) {
+    const st = m.index + (m[0].length - m[0].replace(/^[\s.؟?]+/, "").length);
+    marks.push({ st, en: m.index + m[0].length });
+  }
+  const segs = [];
+  let prevEnd = 0;
+  const qStarts = marks.map((mk, i) => {
+    const lo = i ? marks[i - 1].en : 0;
+    let k = lineAt(mk.st), qk = null;
+    const minK = lineAt(lo);
+    // geriyə: sual sətrini tap (ən çox 8 sətir)
+    for (let j = k, n = 0; j >= minK && n < 8; j--, n++) {
+      const t = lines[j].t.trim();
+      if (j < k && SEP.test(t)) { qk = j + 1; break; }
+      if (QLINE.test(t) && (j > minK || i === 0 || lines[j].s >= lo)) qk = j;
+      else if (qk !== null && t && !HEADLINE.test(t)) break;
+    }
+    if (qk === null) { // marker-siz sual: cavab işarəsindən əvvəlki boş olmayan sətir
+      qk = k; if (!text.slice(lines[k].s, mk.st).trim()) { qk = k - 1; while (qk > minK && !lines[qk].t.trim()) qk--; }
+      if (qk < minK) qk = minK;
+    }
+    // başlıq sətirləri (sualdan dərhal əvvəl, qısa)
+    let hk = qk, heads = [];
+    for (let j = qk - 1, n = 0; j >= minK && n < 3; j--, n++) {
+      const t = lines[j].t.trim();
+      if (!t) { if (heads.length) break; continue; }
+      if (t.length < 110 && !/[.؟?:]$/.test(t) && (HEADLINE.test(t) || heads.length || /^(?:السؤال|الجواب)$/.test(lines[qk].t.trim()) || n === 0 && t.length < 80 && j > minK)) { heads.unshift(t); hk = j; }
+      else break;
+    }
+    if (i === 0 && hk === minK && lines[hk].s < lo) {}
+    return { qs: Math.max(lines[qk].s, lo), hs: Math.max(lines[hk].s, lo), heads };
+  });
+  marks.forEach((mk, i) => {
+    const q = qStarts[i];
+    const end = i + 1 < marks.length ? qStarts[i + 1].hs : text.length;
+    if (q.qs >= firstLen) return;
+    segs.push({ heading: q.heads.join(" ").replace(/^[\d٠-٩]+\s*[-–]\s*/, "").trim(), question: text.slice(q.qs, mk.st).trim(), answer: text.slice(mk.en, end), open: i + 1 >= marks.length });
+  });
+  return segs;
+}
+function cleanQ(q) {
+  let prev;
+  do { prev = q; q = q.replace(/^\s*\(?[\d٠-٩]+\s*[)/\-–.]\s*/, "").replace(/^(?:و?سُ?ئِ?ل[^:：]{0,80}[:：]\s*(?:عن\s+)?|س[\d٠-٩]*\s*[:：/]\s*|السؤال\s*[:：]?\s*)/, "")
+    .replace(/^(?:(?:هذا |هذه )?(?:السائل|السائلة|المستمع|المستمعة)(?:[^:：،؟]{0,60}?(?:يقول|تقول|يسأل|تسأل))?\s*[:：]?\s*|(?:يقول|تقول)\s*[:：]?\s*)/, "").replace(/^(?:يا )?(?:سماحة|فضيلة) الشيخ[^،:]{0,40}[،:]\s*/, "").replace(/^ما\s*(?=حكم|الحكم)/, "").replace(/^(?:عن|هل)\s+/, "")
+    .replace(/^(?:يا )?(?:سماحة|فضيلة) الشيخ[^،:]{0,40}[،:]\s*/, "")
+    .replace(/\s*\([\d٠-٩]+\)/g, "").replace(/^ماحكم/, "حكم").replace(/\s+/g, " ").trim(); } while (q !== prev);
+  return q;
+}
+function makeTitle(seg, query) {
+  if (seg.heading && seg.heading.length >= 6 && seg.heading.length <= 90) return seg.heading.replace(/\s*\([\d٠-٩]+\)\s*$/, "");
+  let q = cleanQ(seg.question).split(/[؟?]/)[0].replace(/[،,:]\s*$/, "").trim();
+  const ws = q.split(" ");
+  if (q && ws.length <= 9) return q.replace(/[،,]\s*(?:نرجو|آمل|أفيدونا|أفتونا|جزاكم)[^،]*$/, "");
+  const m = /(?:ما|عن)\s+(حكم\s+[^،؟?.]{3,60})/.exec(q);
+  if (m) return m[1].split(" ").slice(0, 8).join(" ");
+  return q ? ws.slice(0, 8).join(" ") + " …" : query;
+}
+function scoreSeg(seg, qw, qphrase, rank) {
+  const head = nk(seg.heading + " " + cleanQ(seg.question)), hw = head.split(" ").filter(Boolean), hs = new Set(hw.map(stem));
+  const aw = new Set(words(seg.answer.slice(0, 600)).map(stem));
+  let s = 0;
+  for (const w of qw) { const st = stem(w); if (hs.has(st) || head.includes(w)) s += 3; else if (aw.has(st)) s += 0.7; }
+  if (qphrase.length > 3 && head.includes(qphrase)) s += 6;
+  const core = qw.filter((w) => w !== "حكم");
+  if (core.length && core.every((w) => hs.has(stem(w)) || head.includes(w))) s += 3;
+  const hit = hw.filter((w) => qw.some((x) => stem(x) === stem(w) || x === w)).length;
+  s += 5 * (hit / Math.max(hw.length, qw.length, 1));
+  s -= Math.max(0, hw.length - qw.length - 3) * 0.15;
+  if (!seg.question.trim()) s -= 3;
+  if (seg.answer.trim().length < 40) s -= 4;
+  return s - rank * 0.25;
+}
+function finishAnswer(t) {
+  return tidy(t.replace(/^[\s:：\-–]+/, "").replace(/^-?\s*(?:رحمه الله(?: تعالى)?|جزاه الله خيرا?ً?|حفظه الله)\s*-?\s*(?:قائلا?ً?|بقوله)?\s*[:：]\s*/, "").replace(/\n\s*(?:\*\s*){3}[\s\S]*$/, ""))
+    .replace(/\n[^\n]{0,80}$/, (l) => (HEADLINE.test(l.trim()) && !/[.]$/.test(l.trim()) ? "" : l)).trim();
+}
+const joinP = (a, b) => a.replace(/\s+$/, "") + (/[.!؟?:»)\]]\s*$/.test(a) ? "\n" : " ") + b;
+const pageBody = (p) => p.text.replace(/\s*…$/, "").split(/\n_{5,}/)[0].replace(/\n\s*(?:\(?[\d٠-٩]+\)?\s*)$/, "");
+async function fatwaBest(query) {
+  const r = await searchShamela(query, { fatwa: true });
+  const qw = words(query), qphrase = nk(query).split(" ").filter((w) => !STOP.has(w)).join(" ");
+  const cands = r.items.slice(0, 5);
+  const opened = await Promise.all(cands.map(async (it, rank) => {
+    try {
+      const a = await openPage(it.bookId, it.pageId);
+      let b = null;
+      if (a.nextPageId) try { b = await openPage(it.bookId, a.nextPageId); } catch {}
+      return { it, rank, a, b };
+    } catch { return null; }
+  }));
+  let best = null;
+  for (const o of opened.filter(Boolean)) {
+    const t1 = pageBody(o.a), text = o.b ? joinP(t1, pageBody(o.b)) : t1;
+    for (const seg of segment(text, t1.length)) {
+      const sc = scoreSeg(seg, qw, qphrase, o.rank);
+      if (!best || sc > best.sc) best = { sc, seg, o };
+    }
+  }
+  if (!best) {
+    const it = cands[0];
+    if (!it) return { found: false };
+    const f = await fatwaFull(it.bookId, it.pageId);
+    return { ...f, heading: query, item: it };
+  }
+  let { seg, o } = best;
+  let window = o.b ? joinP(pageBody(o.a), pageBody(o.b)) : pageBody(o.a), next = o.b?.nextPageId, pages = o.b ? 2 : 1;
+  const qi = window.indexOf(seg.question);
+  const until = Date.now() + 15000;
+  while (seg.open && o.b && next && pages < 8 && until - Date.now() > 1500) {
+    let p; try { p = await openPage(o.it.bookId, next); } catch { break; }
+    const pb = pageBody(p), first = pb.split("\n")[0].trim();
+    if (/[.!؟?»)]\s*$/.test(window.trim()) && first.length < 90 && !/[.،,:؟?]$/.test(first) && (HEADLINE.test(first) || /^[\d٠-٩]+\s*[)/\-–.]/.test(first) || QLINE.test(first) || pb.split("\n").length > 1)) break;
+    window = joinP(window, pb); next = p.nextPageId; pages++;
+    const again = segment(window, window.length).find((x) => x.question === seg.question && window.indexOf(x.question) === qi);
+    if (!again) break;
+    seg = again;
+    if (/\n\s*(?:\*\s*){3}/.test(seg.answer)) break;
+  }
+  const answer = seg.answer;
+  const it = o.it;
+  return { found: true, bookId: it.bookId, pageId: it.pageId, title: o.a.title, label: o.a.label, url: o.a.url, heading: makeTitle(seg, query), question: cleanQ(seg.question), answer: finishAnswer(answer), item: it, score: Math.round(best.sc * 10) / 10 };
+}
+
 // ---- Dorar (node:https — Vercel Node fetch-i Cloudflare tərəfindən 403 alır) ----
 const DORAR_HEADERS = { "User-Agent": UA, Accept: "application/json, text/javascript, */*;q=0.1", "Accept-Language": "ar,az;q=0.8,en;q=0.6", Referer: "https://nibrascode.com/" };
 function httpGet(url, headers, timeoutMs = 8000) {
@@ -324,6 +466,9 @@ export default async function handler(req, res) {
       if (q.length < 2) { res.status(400).json({ error: "query" }); return; }
       try { res.status(200).json({ kind: "dorar", query: q, original, items: await cached("d" + q, () => searchDorar(q)) }); }
       catch (e) { res.status(200).json({ kind: "dorar", query: q, items: [], error: e.message === "blocked" ? "blocked" : "unavailable" }); }
+    } else if (action === "fatwaBest") {
+      if (q.length < 2) { res.status(400).json({ error: "query" }); return; }
+      res.status(200).json(await cached("b" + q, () => fatwaBest(q)));
     } else if (action === "fatwaFull") {
       const bookId = int(Number(b.bookId)), pageId = int(Number(b.pageId));
       if (!bookId || !pageId) { res.status(400).json({ error: "page" }); return; }
@@ -341,3 +486,5 @@ export default async function handler(req, res) {
     res.status(502).json({ error: "unavailable" });
   }
 }
+
+export { fatwaBest, segment, openPage, scoreSeg, words, nk, pageBody, searchShamela };

@@ -160,6 +160,8 @@ textarea{color:#2a2116}textarea::placeholder{color:#a8977a}
 .spanel dl{display:grid;grid-template-columns:auto 1fr;gap:3px 10px;margin:0 0 8px;font:13px "Noto Naskh Arabic",Inter,sans-serif}.spanel dt{color:#8a7656}.spanel dd{margin:0;color:#2a2116}
 .spanel .sbody{font-size:17px;line-height:1.9;max-height:16em;overflow:auto;border-top:1px dashed #e3d6b8;padding-top:8px;white-space:pre-wrap}
 .sacts{display:flex;gap:12px;margin-top:8px;font-size:12.5px}.sacts a,.sacts .lb{color:#9a6b1f;text-decoration:none;font-size:12.5px}
+.card .ttl{margin:0 0 10px;padding:0 0 8px;border-bottom:1px solid #eadfc6;color:#5a3a12;font:700 18px/1.6 "Noto Naskh Arabic",Amiri,serif;direction:rtl;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.card .ttl::before{content:"";display:inline-block;width:4px;height:1em;background:#c9a55a;border-radius:2px;margin-inline-end:8px;vertical-align:-2px}
 </style>
 </head>
 <body>
@@ -256,17 +258,17 @@ function drChip(it,q){return {label:(it.source||"الدرر")+(it.page?" · "+it
 
 function lbtn(txt,fn){const b=el("button","lb",txt);b.type="button";b.onclick=fn;return b}
 function textBlock(full,short){const tx=el("div","ar",short);const box=el("div");box.appendChild(tx);if(short!==full){const m=lbtn(T("cont"),()=>{tx.textContent=full;m.remove()});m.classList.add("more");box.appendChild(m)}return box}
-function shCard(it,q){const c=el("div","card"),body=it.fatwa?answerOnly(it.text).text:it.text;c.appendChild(textBlock(body,excerpt(body,q)));
+function shHead(it){const l=(it.text||"").split("\n")[0].trim();return l.length>3&&l.length<90&&!/[.،,:؟?]$/.test(l)?l.replace(/^[\d٠-٩]+\s*[-–]\s*/,""):it.title}
+function shCard(it,q){const c=el("div","card"),body=it.fatwa?answerOnly(it.text).text:it.text;c.appendChild(el("h3","ttl",shHead(it)));c.appendChild(textBlock(body,excerpt(body,q)));
  c.appendChild(chipRow(c,[shChip(it)]));return c}
-function drCard(it,q){const c=el("div","card"),ex=el("div");c.appendChild(textBlock(it.text,it.text.length>360?it.text.slice(0,340).replace(/\s+\S*$/,"")+" …":it.text));
+function drCard(it,q){const c=el("div","card"),ex=el("div");c.appendChild(el("h3","ttl",(it.source||"الدرر السنية")+(it.narrator?" — "+it.narrator:"")));c.appendChild(textBlock(it.text,it.text.length>360?it.text.slice(0,340).replace(/\s+\S*$/,"")+" …":it.text));
  const full=lbtn(T("full"),async()=>{full.disabled=true;try{const r=await api({action:"hadith",query:q,text:it.text,source:it.source,muhaddith:it.muhaddith,page:it.page});ex.textContent="";const t=el("div","ar",r.text);t.style.marginTop="8px";ex.appendChild(t);if(r.url)ex.appendChild(srcLine([r.status==="fragment"?T("frag"):r.sourceTitle],[link(r.url,T("src")+" ↗")]));full.remove()}catch(e){full.disabled=false}});
  c.appendChild(ex);const row=chipRow(c,[drChip(it,q)]);row.appendChild(full);c.appendChild(row);return c}
 function errText(e){return T(e.message==="rate"?"rate":e.message==="arOnly"?"arOnly":"err")}
-async function fast(b,q){const r=await api({action:"fatwa",query:q});if(!r.items.length){b.appendChild(el("p","muted",T("noRes")));return}
- const best=[...r.items].sort((x,y)=>fscore(y,q)-fscore(x,q))[0];let full=null;try{full=await api({action:"fatwaFull",bookId:best.bookId,pageId:best.pageId})}catch(e){}
- const text=(full&&full.answer)||answerOnly(best.text).text;const c=el("div","card"),tx=el("div","ar");
- text.split(/\n+/).map(x=>x.trim()).filter(Boolean).forEach(pp=>tx.appendChild(el("p",null,pp)));c.appendChild(tx);
- c.appendChild(chipRow(c,[shChip(best)]));b.appendChild(c)}
+async function fast(b,q){const r=await api({action:"fatwaBest",query:q});if(!r||!r.answer){b.appendChild(el("p","muted",T("noRes")));return}
+ const c=el("div","card");if(r.heading)c.appendChild(el("h3","ttl",r.heading));const tx=el("div","ar");
+ r.answer.split(/\n+/).map(x=>x.trim()).filter(Boolean).forEach(pp=>tx.appendChild(el("p",null,pp)));c.appendChild(tx);
+ const it=r.item||{bookId:r.bookId,pageId:r.pageId,title:r.title,label:r.label,url:r.url};c.appendChild(chipRow(c,[shChip(it)]));b.appendChild(c)}
 
 async function deep(b,q){const [sh,dr]=await Promise.allSettled([api({action:"shamela",query:q}),api({action:"dorar",query:q})]);
  if(sh.status==="rejected"&&dr.status==="rejected"){b.appendChild(el("p","muted err",errText(sh.reason)));return}
