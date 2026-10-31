@@ -515,12 +515,13 @@ const EXTRA: Record<Lang, {
   step2: string;
   step3: string;
   addPart: string;
+  touch: string;
 }> = {
-  az: { pages: "Səhifələr", newPage: "Yeni səhifə", pageName: "Səhifənin adı", delPage: "Səhifəni sil", layers: "Laylar", undo: "Geri al", duplicate: "Kopyala", tone: "Fon", plain: "Ağ", soft: "Yumşaq", dark: "Tünd", size: "Ölçü", space: "Boşluq", color: "Rəng", phone: "Telefon", tablet: "Planşet", desk: "Masaüstü", saved: "Dəyişiklik bu telefonda qalır. Serverə getmir. Bir neçə səhifə bir HTML faylında endirilir.", home: "Ana", colHint: "İki tərəfi || ilə ayır.", zip: "ZIP", step1: "1. Hazır nümunə seç", step2: "2. Öz yazını yaz", step3: "3. Faylı endir", addPart: "Hissə əlavə et" },
-  en: { pages: "Pages", newPage: "New page", pageName: "Page name", delPage: "Delete page", layers: "Layers", undo: "Undo", duplicate: "Duplicate", tone: "Background", plain: "White", soft: "Soft", dark: "Dark", size: "Size", space: "Space", color: "Color", phone: "Phone", tablet: "Tablet", desk: "Desktop", saved: "Changes stay on this phone. They are not sent to a server. Several pages download as one HTML file.", home: "Home", colHint: "Split the two sides with ||.", zip: "ZIP", step1: "1. Pick a sample", step2: "2. Write your own text", step3: "3. Download the file", addPart: "Add a part" },
-  tr: { pages: "Sayfalar", newPage: "Yeni sayfa", pageName: "Sayfanın adı", delPage: "Sayfayı sil", layers: "Katmanlar", undo: "Geri al", duplicate: "Kopyala", tone: "Zemin", plain: "Beyaz", soft: "Yumuşak", dark: "Koyu", size: "Ölçü", space: "Boşluk", color: "Renk", phone: "Telefon", tablet: "Tablet", desk: "Masaüstü", saved: "Değişiklik bu telefonda kalır. Sunucuya gitmez. Birkaç sayfa tek HTML dosyasında iner.", home: "Ana", colHint: "İki tarafı || ile ayır.", zip: "ZIP", step1: "1. Hazır örnek seç", step2: "2. Kendi yazını yaz", step3: "3. Dosyayı indir", addPart: "Bölüm ekle" },
-  ar: { pages: "صفحات", newPage: "صفحة جديدة", pageName: "اسم الصفحة", delPage: "احذف الصفحة", layers: "طبقات", undo: "تراجع", duplicate: "انسخ", tone: "الخلفية", plain: "أبيض", soft: "ناعم", dark: "داكن", size: "المقاس", space: "الفراغ", color: "اللون", phone: "هاتف", tablet: "جهاز لوحي", desk: "مكتب", saved: "تبقى التغييرات على هذا الهاتف ولا تُرسل إلى خادم. عدة صفحات تنزل في ملف HTML واحد.", home: "الرئيسية", colHint: "افصل الجانبين بـ ||.", zip: "ZIP", step1: "1. اختر نموذجاً", step2: "2. اكتب نصك", step3: "3. نزّل الملف", addPart: "أضف قسماً" },
-  ru: { pages: "Страницы", newPage: "Новая страница", pageName: "Имя страницы", delPage: "Удалить страницу", layers: "Слои", undo: "Назад", duplicate: "Копия", tone: "Фон", plain: "Белый", soft: "Мягкий", dark: "Тёмный", size: "Размер", space: "Отступ", color: "Цвет", phone: "Телефон", tablet: "Планшет", desk: "Компьютер", saved: "Изменения остаются на этом телефоне и не уходят на сервер. Несколько страниц скачиваются одним HTML-файлом.", home: "Главная", colHint: "Две стороны разделите через ||.", zip: "ZIP", step1: "1. Выберите образец", step2: "2. Напишите свой текст", step3: "3. Скачайте файл", addPart: "Добавить часть" },
+  az: { pages: "Səhifələr", newPage: "Yeni səhifə", pageName: "Səhifənin adı", delPage: "Səhifəni sil", layers: "Laylar", undo: "Geri al", duplicate: "Kopyala", tone: "Fon", plain: "Ağ", soft: "Yumşaq", dark: "Tünd", size: "Ölçü", space: "Boşluq", color: "Rəng", phone: "Telefon", tablet: "Planşet", desk: "Masaüstü", saved: "Dəyişiklik bu telefonda qalır. Serverə getmir. Bir neçə səhifə bir HTML faylında endirilir.", home: "Ana", colHint: "İki tərəfi || ilə ayır.", zip: "ZIP", step1: "1. Hazır nümunə seç", step2: "2. Öz yazını yaz", step3: "3. Faylı endir", addPart: "Hissə əlavə et", touch: "Ekranda hissəyə toxun. Yazısı burada dəyişir." },
+  en: { pages: "Pages", newPage: "New page", pageName: "Page name", delPage: "Delete page", layers: "Layers", undo: "Undo", duplicate: "Duplicate", tone: "Background", plain: "White", soft: "Soft", dark: "Dark", size: "Size", space: "Space", color: "Color", phone: "Phone", tablet: "Tablet", desk: "Desktop", saved: "Changes stay on this phone. They are not sent to a server. Several pages download as one HTML file.", home: "Home", colHint: "Split the two sides with ||.", zip: "ZIP", step1: "1. Pick a sample", step2: "2. Write your own text", step3: "3. Download the file", addPart: "Add a part", touch: "Tap a part on the screen. Its text changes here." },
+  tr: { pages: "Sayfalar", newPage: "Yeni sayfa", pageName: "Sayfanın adı", delPage: "Sayfayı sil", layers: "Katmanlar", undo: "Geri al", duplicate: "Kopyala", tone: "Zemin", plain: "Beyaz", soft: "Yumuşak", dark: "Koyu", size: "Ölçü", space: "Boşluk", color: "Renk", phone: "Telefon", tablet: "Tablet", desk: "Masaüstü", saved: "Değişiklik bu telefonda kalır. Sunucuya gitmez. Birkaç sayfa tek HTML dosyasında iner.", home: "Ana", colHint: "İki tarafı || ile ayır.", zip: "ZIP", step1: "1. Hazır örnek seç", step2: "2. Kendi yazını yaz", step3: "3. Dosyayı indir", addPart: "Bölüm ekle", touch: "Ekranda bir bölüme dokun. Yazısı burada değişir." },
+  ar: { pages: "صفحات", newPage: "صفحة جديدة", pageName: "اسم الصفحة", delPage: "احذف الصفحة", layers: "طبقات", undo: "تراجع", duplicate: "انسخ", tone: "الخلفية", plain: "أبيض", soft: "ناعم", dark: "داكن", size: "المقاس", space: "الفراغ", color: "اللون", phone: "هاتف", tablet: "جهاز لوحي", desk: "مكتب", saved: "تبقى التغييرات على هذا الهاتف ولا تُرسل إلى خادم. عدة صفحات تنزل في ملف HTML واحد.", home: "الرئيسية", colHint: "افصل الجانبين بـ ||.", zip: "ZIP", step1: "1. اختر نموذجاً", step2: "2. اكتب نصك", step3: "3. نزّل الملف", addPart: "أضف قسماً", touch: "المس قسماً على الشاشة. يتغير نصه هنا." },
+  ru: { pages: "Страницы", newPage: "Новая страница", pageName: "Имя страницы", delPage: "Удалить страницу", layers: "Слои", undo: "Назад", duplicate: "Копия", tone: "Фон", plain: "Белый", soft: "Мягкий", dark: "Тёмный", size: "Размер", space: "Отступ", color: "Цвет", phone: "Телефон", tablet: "Планшет", desk: "Компьютер", saved: "Изменения остаются на этом телефоне и не уходят на сервер. Несколько страниц скачиваются одним HTML-файлом.", home: "Главная", colHint: "Две стороны разделите через ||.", zip: "ZIP", step1: "1. Выберите образец", step2: "2. Напишите свой текст", step3: "3. Скачайте файл", addPart: "Добавить часть", touch: "Нажмите часть на экране. Текст меняется здесь." },
 };
 
 function freshSite(lang: Lang): SitePage[] {
@@ -699,100 +700,85 @@ export function BuilderPage() {
 
   return (
     <main className="nb">
-      <div className="nb-simple">
-        <header className="nb-intro">
-          <h1>{copy.name}</h1>
-          <p>{copy.lead}</p>
-        </header>
-        <div className="nb-steps">
-          <div>
-            <section className="nb-card">
-              <h2>{extra.step1}</h2>
-              <div className="nb-tpls">
-                {copy.tpls.map((tpl) => (
-                  <button key={tpl.id} type="button" onClick={() => load(tpl.id)}>{tpl.name}</button>
-                ))}
-              </div>
-            </section>
-            <section className="nb-card">
-              <h2>{extra.step2}</h2>
-              <label>{copy.siteName}
-                <input value={site} onChange={(event) => setSite(event.target.value)} />
-              </label>
-              <div className="nb-pages">
-                {pages.map((item) => (
-                  <button key={item.id} type="button" className={item.id === page?.id ? "is-on" : ""} onClick={() => setPageId(item.id)}>{item.name}</button>
-                ))}
-                <button type="button" onClick={addPage}>+ {extra.newPage}</button>
-              </div>
-              {page ? (
-                <label>{extra.pageName}
-                  <input value={page.name} onChange={(event) => write(pages.map((item) => (item.id === page.id ? { ...item, name: event.target.value } : item)))} />
-                </label>
-              ) : null}
-              {blocks.map((block, index) => (
-                <div key={block.id} className="nb-part">
-                  <b>{index + 1}. {copy.kinds[block.kind]}</b>
-                  <label>{copy.title}
-                    <input value={block.title} onChange={(event) => patch(block.id, { title: event.target.value })} />
-                  </label>
-                  <label>{copy.body}
-                    <textarea value={block.body} onChange={(event) => patch(block.id, { body: event.target.value })} />
-                  </label>
-                  {block.kind === "hero" || block.kind === "cta" || block.kind === "footer" ? (
-                    <>
-                      <label>{copy.button}<input value={block.button} onChange={(event) => patch(block.id, { button: event.target.value })} /></label>
-                      <label>{copy.link}<input value={block.href} onChange={(event) => patch(block.id, { href: event.target.value })} /></label>
-                    </>
-                  ) : null}
-                  <span className="nb-row">
-                    <button type="button" onClick={() => shift(block.id, -1)}>{copy.up}</button>
-                    <button type="button" onClick={() => shift(block.id, 1)}>{copy.down}</button>
-                    <button type="button" onClick={() => setBlocks(blocks.filter((item) => item.id !== block.id))}>{copy.remove}</button>
-                  </span>
-                </div>
-              ))}
-              <label>{extra.addPart}
-                <select value="" onChange={(event) => { if (event.target.value) insert(event.target.value as Kind, blocks.length); }}>
-                  <option value="">{extra.addPart}</option>
-                  {KINDS.map((kind) => <option key={kind} value={kind}>{copy.kinds[kind]}</option>)}
-                </select>
-              </label>
-              <label>{extra.color}
-                <span className="nb-swatches">
-                  {COLORS.map((color) => (
-                    <button key={color} type="button" style={{ background: color }} aria-label={color} onClick={() => setAccent(color)} />
-                  ))}
-                </span>
-              </label>
-              {pages.length > 1 && page ? (
-                <button type="button" className="nb-quiet" onClick={() => {
-                  const next = pages.filter((item) => item.id !== page.id);
-                  write(next, next[0]?.id);
-                }}>{extra.delPage}</button>
-              ) : null}
-            </section>
+      <div className="nb-app">
+        <aside className="nb-side">
+          <h2>{extra.step1}</h2>
+          <div className="nb-list">
+            {copy.tpls.map((tpl) => (
+              <button key={tpl.id} type="button" onClick={() => load(tpl.id)}>{tpl.name}</button>
+            ))}
           </div>
-          <aside className="nb-card nb-look">
-            <h2>{extra.step3}</h2>
+          <h2>{extra.pages}</h2>
+          <div className="nb-list">
+            {pages.map((item) => (
+              <button key={item.id} type="button" className={item.id === page?.id ? "is-on" : ""} onClick={() => { setPageId(item.id); setSelected(null); }}>{item.name}</button>
+            ))}
+            <button type="button" onClick={addPage}>+ {extra.newPage}</button>
+          </div>
+          {page ? (
+            <label>{extra.pageName}
+              <input value={page.name} onChange={(event) => write(pages.map((item) => (item.id === page.id ? { ...item, name: event.target.value } : item)))} />
+            </label>
+          ) : null}
+          {pages.length > 1 && page ? (
+            <button type="button" className="nb-quiet" onClick={() => { const next = pages.filter((item) => item.id !== page.id); write(next, next[0]?.id); setSelected(null); }}>{extra.delPage}</button>
+          ) : null}
+          <h2>{extra.addPart}</h2>
+          <div className="nb-list">
+            {KINDS.map((kind) => (
+              <button key={kind} type="button" onClick={() => insert(kind, blocks.length)}>{copy.kinds[kind]}</button>
+            ))}
+          </div>
+          <h2>{extra.color}</h2>
+          <span className="nb-swatches">
+            {COLORS.map((color) => (
+              <button key={color} type="button" className={accent === color ? "is-on" : ""} style={{ background: color }} aria-label={color} onClick={() => setAccent(color)} />
+            ))}
+          </span>
+          {current ? (
+            <div className="nb-edit">
+              <h2>{copy.kinds[current.kind]}</h2>
+              <label>{copy.title}<input value={current.title} onChange={(event) => patch(current.id, { title: event.target.value })} /></label>
+              <label>{copy.body}<textarea value={current.body} onChange={(event) => patch(current.id, { body: event.target.value })} /></label>
+              {current.kind === "hero" || current.kind === "cta" || current.kind === "footer" ? (
+                <>
+                  <label>{copy.button}<input value={current.button} onChange={(event) => patch(current.id, { button: event.target.value })} /></label>
+                  <label>{copy.link}<input value={current.href} onChange={(event) => patch(current.id, { href: event.target.value })} /></label>
+                </>
+              ) : null}
+              <span className="nb-row">
+                <button type="button" onClick={() => shift(current.id, -1)}>{copy.up}</button>
+                <button type="button" onClick={() => shift(current.id, 1)}>{copy.down}</button>
+                <button type="button" onClick={() => { setBlocks(blocks.filter((item) => item.id !== current.id)); setSelected(null); }}>{copy.remove}</button>
+              </span>
+            </div>
+          ) : <p className="nb-note">{extra.touch}</p>}
+        </aside>
+        <section className="nb-screen">
+          <div className="nb-bar">
+            <label>{copy.siteName}<input value={site} onChange={(event) => setSite(event.target.value)} /></label>
+            <button type="button" onClick={undo}>{extra.undo}</button>
+            <button type="button" onClick={download}>{copy.download}</button>
+            <button type="button" className="nb-go" onClick={() => void downloadZip()}>{extra.zip}</button>
+          </div>
+          <div className="nb-stage">
             <div className="nb-canvas">
               {blocks.map((block) => {
                 const look = box(block, accent);
                 return (
-                  <article key={block.id} style={{ textAlign: block.align, background: look.bg === "transparent" ? "#fff" : look.bg, color: look.color, padding: look.pad }}>
+                  <article
+                    key={block.id}
+                    className={block.id === selected ? "is-on" : ""}
+                    style={{ textAlign: block.align, background: look.bg === "transparent" ? "#fff" : look.bg, color: look.color, padding: look.pad }}
+                    onClick={() => setSelected(block.id)}
+                  >
                     <BlockView block={block} accent={accent} size={look.size} />
                   </article>
                 );
               })}
             </div>
-            <div className="nb-row">
-              <button type="button" className="nb-go" onClick={download}>{copy.download}</button>
-              <button type="button" onClick={() => void downloadZip()}>{extra.zip}</button>
-              <button type="button" onClick={undo}>{extra.undo}</button>
-            </div>
-            <p className="nb-note">{copy.note}</p>
-          </aside>
-        </div>
+          </div>
+        </section>
       </div>
     </main>
   );
