@@ -3,8 +3,10 @@
 import { createHash, timingSafeEqual } from "node:crypto";
 import { cleanEvent, recordEvent, readDays, storageConfig, TYPES } from "./_stats.js";
 import { watch5xx } from "./_ops.js";
+import presenceApi from "./_presence-api.js";
+import chatsApi from "./_chats-api.js";
 
-export const config = { maxDuration: 10 };
+export const config = { maxDuration: 15 };
 
 function sameKey(given, secret) {
   const a = createHash("sha256").update(String(given || "")).digest();
@@ -87,4 +89,11 @@ async function handler(req, res) {
     res.status(200).json({ ok: false, error: "Server xətası" });
   }
 }
-export default watch5xx("stats", handler);
+// /api/presence, /api/chats -> /api/stats?__fn=... (Hobby 12 funksiya limiti)
+const statsHandler = watch5xx("stats", handler);
+export default function route(req, res) {
+  const fn = req.query?.__fn;
+  if (fn === "presence") return presenceApi(req, res);
+  if (fn === "chats") return chatsApi(req, res);
+  return statsHandler(req, res);
+}

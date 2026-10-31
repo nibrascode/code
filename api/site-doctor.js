@@ -1,5 +1,6 @@
-import { publicUrl, parsePage, readRobots, readSitemap } from "./seo-check.js";
+import { publicUrl, parsePage, readRobots, readSitemap } from "./_seo-check.js";
 import { watch5xx } from "./_ops.js";
+import seoCheck from "./_seo-check.js";
 
 export const config = { maxDuration: 30 };
 
@@ -308,4 +309,10 @@ async function handler(req, res) {
     send(res, 400, { ok: false, error: "bad-url" });
   }
 }
-export default watch5xx("site-doctor", handler);
+// /api/seo-check -> /api/site-doctor?__seo=1 (Hobby 12 funksiya limiti)
+function route(req, res) {
+  if (req.query?.__seo) return seoCheck(req, res);
+  return docHandler(req, res);
+}
+const docHandler = watch5xx("site-doctor", handler);
+export default route;

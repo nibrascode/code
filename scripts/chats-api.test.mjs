@@ -1,7 +1,7 @@
 // /api/chats (Supabase PostgREST) testi: cihaz izolyasiyası, ölçü limitləri, env yoxdursa yumşaq davranış.
 import test from "node:test";
 import assert from "node:assert/strict";
-import handler from "../api/chats.js";
+import handler from "../api/_chats-api.js";
 import { handleChats, supaConfig, cleanMessages, cleanTitle } from "../api/_chats.js";
 
 const ENV = { SUPABASE_URL: "https://abc.supabase.co/", SUPABASE_SERVICE_ROLE_KEY: "srv-secret" };
