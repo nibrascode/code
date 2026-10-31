@@ -1,6 +1,7 @@
 import type React from "react";
 import { useMemo, useState } from "react";
 import { Copy, Wrench } from "lucide-react";
+import { encode } from "uqr";
 import { useI18n } from "@/lib/i18n-context";
 import type { Lang } from "@/lib/i18n";
 
@@ -12,6 +13,18 @@ const C = {
   copy: L("Kopyala", "Copy", "Kopyala", "نسخ", "Копировать"),
   copied: L("Kopyalandı", "Copied", "Kopyalandı", "تم النسخ", "Скопировано"),
   local: L("Brauzerdə işləyir, heç nə serverə getmir.", "Runs in your browser; nothing is sent to a server.", "Tarayıcıda çalışır; hiçbir şey sunucuya gitmez.", "يعمل في المتصفح ولا يُرسل شيء إلى خادم.", "Работает в браузере, ничего не уходит на сервер."),
+  pwT: L("Şifrə generatoru (crypto)", "Password generator (crypto)", "Şifre üreteci (crypto)", "مولّد كلمات المرور (crypto)", "Генератор паролей (crypto)"),
+  len: L("Uzunluq", "Length", "Uzunluk", "الطول", "Длина"),
+  lower: L("kiçik hərf", "lowercase", "küçük harf", "أحرف صغيرة", "строчные"),
+  upper: L("böyük hərf", "uppercase", "büyük harf", "أحرف كبيرة", "заглавные"),
+  digits: L("rəqəm", "digits", "rakam", "أرقام", "цифры"),
+  symbols: L("simvol", "symbols", "sembol", "رموز", "символы"),
+  gen: L("Yeni şifrə", "New password", "Yeni şifre", "كلمة مرور جديدة", "Новый пароль"),
+  noset: L("Ən azı bir dəst seçin.", "Choose at least one set.", "En az bir set seçin.", "اختر مجموعة واحدة على الأقل.", "Выберите хотя бы один набор."),
+  qrT: L("QR kod → PNG", "QR code → PNG", "QR kod → PNG", "رمز QR ← PNG", "QR-код → PNG"),
+  qrText: L("Mətn və ya URL", "Text or URL", "Metin veya URL", "نص أو رابط", "Текст или URL"),
+  dl: L("PNG yüklə", "Download PNG", "PNG indir", "تنزيل PNG", "Скачать PNG"),
+  qrErr: L("Mətn boşdur və ya çox uzundur.", "Text is empty or too long.", "Metin boş veya çok uzun.", "النص فارغ أو طويل جداً.", "Текст пустой или слишком длинный."),
   rsyncT: L("rsync əmr generatoru", "rsync command generator", "rsync komut üreteci", "مولّد أوامر rsync", "Генератор команд rsync"),
   src: L("Mənbə", "Source", "Kaynak", "المصدر", "Источник"),
   dst: L("Hədəf", "Destination", "Hedef", "الوجهة", "Назначение"),
@@ -233,6 +246,72 @@ function Ssh({ lang }: { lang: Lang }) {
   );
 }
 
+const PW_SETS = { lower: "abcdefghijklmnopqrstuvwxyz", upper: "ABCDEFGHIJKLMNOPQRSTUVWXYZ", digits: "0123456789", symbols: "!@#$%^&*()-_=+[]{};:,.?" } as const;
+type PwKey = keyof typeof PW_SETS;
+function randomIndex(max: number) {
+  const limit = Math.floor(0x100000000 / max) * max;
+  const buf = new Uint32Array(1);
+  do { crypto.getRandomValues(buf); } while (buf[0] >= limit);
+  return buf[0] % max;
+}
+function makePassword(len: number, keys: PwKey[]) {
+  const pool = keys.map((k) => PW_SETS[k]).join("");
+  if (!pool) return "";
+  const out = keys.map((k) => PW_SETS[k][randomIndex(PW_SETS[k].length)]);
+  while (out.length < len) out.push(pool[randomIndex(pool.length)]);
+  for (let i = out.length - 1; i > 0; i--) { const j = randomIndex(i + 1); [out[i], out[j]] = [out[j], out[i]]; }
+  return out.slice(0, len).join("");
+}
+
+function Password({ lang }: { lang: Lang }) {
+  const [len, setLen] = useState(16);
+  const [on, setOn] = useState<Record<PwKey, boolean>>({ lower: true, upper: true, digits: true, symbols: true });
+  const [pw, setPw] = useState("");
+  const keys = (Object.keys(PW_SETS) as PwKey[]).filter((k) => on[k]);
+  const run = () => setPw(keys.length ? makePassword(len, keys) : "");
+  return (
+    <>
+      <label className="text-sm">{C.len[lang]}: {len}<input type="range" min={8} max={64} value={len} onChange={(e) => setLen(+e.target.value)} className="w-full" /></label>
+      <div className="mt-2 flex flex-wrap gap-3 text-sm">
+        {(Object.keys(PW_SETS) as PwKey[]).map((k) => (
+          <label key={k}><input type="checkbox" checked={on[k]} onChange={(e) => setOn({ ...on, [k]: e.target.checked })} className="me-1" />{C[k][lang]}</label>
+        ))}
+      </div>
+      <button type="button" className="mt-2 rounded-xl bg-primary px-3 py-1.5 text-sm font-semibold text-white" onClick={run}>{C.gen[lang]}</button>
+      {keys.length ? null : <p className="mt-2 text-sm">{C.noset[lang]}</p>}
+      {pw ? <Out text={pw} lang={lang} /> : null}
+    </>
+  );
+}
+
+function QrTool({ lang }: { lang: Lang }) {
+  const [text, setText] = useState("https://nibrascode.com");
+  const [url, setUrl] = useState("");
+  const [err, setErr] = useState("");
+  const run = () => {
+    setErr(""); setUrl("");
+    const v = text.trim();
+    if (!v || v.length > 2000) { setErr(C.qrErr[lang]); return; }
+    try {
+      const q = encode(v, { ecc: "M", border: 4 });
+      const n = q.size; const size = 512; const cell = Math.max(1, Math.floor(size / n)); const off = Math.floor((size - cell * n) / 2);
+      const cv = document.createElement("canvas"); cv.width = cv.height = size;
+      const ctx = cv.getContext("2d"); if (!ctx) return;
+      ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, size, size); ctx.fillStyle = "#000000";
+      q.data.forEach((row, y) => row.forEach((d, x) => { if (d) ctx.fillRect(off + x * cell, off + y * cell, cell, cell); }));
+      setUrl(cv.toDataURL("image/png"));
+    } catch { setErr(C.qrErr[lang]); }
+  };
+  return (
+    <>
+      <label className="text-sm">{C.qrText[lang]}<input className={field} value={text} onChange={(e) => setText(e.target.value)} dir="ltr" /></label>
+      <button type="button" className="mt-2 rounded-xl bg-primary px-3 py-1.5 text-sm font-semibold text-white" onClick={run}>QR</button>
+      {err ? <p className="mt-2 text-sm">{err}</p> : null}
+      {url ? <div className="mt-3"><img src={url} alt="QR" width={192} height={192} className="rounded bg-white" /><a href={url} download="qr-code.png" className="mt-2 inline-block rounded-xl border border-white/15 px-3 py-1.5 text-sm">{C.dl[lang]}</a></div> : null}
+    </>
+  );
+}
+
 const TOOLS: Record<string, { title: keyof typeof C; C: (p: { lang: Lang }) => React.ReactElement }> = {
   rsync: { title: "rsyncT", C: Rsync },
   linux: { title: "chmodT", C: Chmod },
@@ -241,6 +320,8 @@ const TOOLS: Record<string, { title: keyof typeof C; C: (p: { lang: Lang }) => R
   cron: { title: "cronT", C: Cron },
   json: { title: "jsonT", C: Json },
   ssh: { title: "sshT", C: Ssh },
+  "password-generator": { title: "pwT", C: Password },
+  "javascript-qr-code-generator": { title: "qrT", C: QrTool },
 };
 
 export const hasMicroTool = (slug?: string) => !!slug && slug in TOOLS;

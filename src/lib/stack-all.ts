@@ -14,5 +14,6 @@ import { STACK_PLAIN } from "@/lib/stack-plain";
 import { STACK_SEARCH } from "@/lib/stack-search";
 import { STACK_TOOLS } from "@/lib/stack-tools";
 import { STACK_TRIO } from "@/lib/stack-trio";
+import { STACK_WEB_TOOLS } from "@/lib/stack-web-tools";
 
-export const ALL_STACK = [...INSTALL_PAGES, ...STACK_PAGES, ...STACK_REST, ...STACK_EXTRA, ...STACK_TOOLS, ...STACK_OPS, ...STACK_NET, ...STACK_MORE, ...STACK_NEXT, ...STACK_BIT, ...STACK_ADD, ...STACK_FEW, ...STACK_AGAIN, ...STACK_TRIO, ...STACK_PLAIN, ...STACK_SEARCH];
+export const ALL_STACK = [...INSTALL_PAGES, ...STACK_PAGES, ...STACK_REST, ...STACK_EXTRA, ...STACK_TOOLS, ...STACK_OPS, ...STACK_NET, ...STACK_MORE, ...STACK_NEXT, ...STACK_BIT, ...STACK_ADD, ...STACK_FEW, ...STACK_AGAIN, ...STACK_TRIO, ...STACK_PLAIN, ...STACK_SEARCH, ...STACK_WEB_TOOLS];
