@@ -696,22 +696,26 @@ export function BuilderPage() {
   return (
     <main className="nb">
       <header className="nb-top">
-        <strong>{copy.name}</strong>
-        <label>
-          {copy.siteName}
+        <div className="nb-brand">
+          <strong>{copy.name}</strong>
+          <span>{copy.lead}</span>
+        </div>
+        <label className="nb-name">
+          <span>{copy.siteName}</span>
           <input value={site} onChange={(event) => setSite(event.target.value)} />
         </label>
-        <span className="nb-row">
-          {(["phone", "tablet", "desk"] as const).map((key) => (
-            <button key={key} type="button" className={device === key ? "is-on" : ""} onClick={() => setDevice(key)}>{extra[key]}</button>
-          ))}
-        </span>
-        <button type="button" onClick={undo}>{extra.undo}</button>
-        <button type="button" onClick={() => setPreview((on) => !on)}>{preview ? copy.edit : copy.preview}</button>
-        <button type="button" className="nb-go" onClick={download}>{copy.download}</button>
-        <button type="button" onClick={() => void downloadZip()}>{extra.zip}</button>
+        <div className="nb-tools">
+          <span className="nb-seg">
+            {(["phone", "tablet", "desk"] as const).map((key) => (
+              <button key={key} type="button" className={device === key ? "is-on" : ""} onClick={() => setDevice(key)}>{extra[key]}</button>
+            ))}
+          </span>
+          <button type="button" onClick={undo}>{extra.undo}</button>
+          <button type="button" onClick={() => setPreview((on) => !on)}>{preview ? copy.edit : copy.preview}</button>
+          <button type="button" onClick={download}>{copy.download}</button>
+          <button type="button" className="nb-go" onClick={() => void downloadZip()}>{extra.zip}</button>
+        </div>
       </header>
-      <p className="nb-lead">{copy.lead}</p>
       <div className={preview ? "nb-frame is-preview" : "nb-frame"}>
         <aside className="nb-side nb-left">
           <h2>{extra.pages}</h2>
