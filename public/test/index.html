@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Nibras — المساعد الشرعي (test)</title>
+<title>Nibras</title>
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#0f1012">
 <link rel="icon" href="/favicon.svg">
@@ -72,8 +72,8 @@ textarea::placeholder{color:var(--mute)}
 <body>
 <header>
   <div class="logo">ن</div><h1 data-i="title"></h1><span class="sp"></span>
-  <button class="hbtn" id="theme" type="button" aria-label="Theme">◐</button>
-  <select id="lang" aria-label="Language"><option value="az">AZ</option><option value="en">EN</option><option value="tr">TR</option><option value="ru">RU</option><option value="ar">AR</option></select>
+  <button class="hbtn" id="theme" type="button" aria-label="" title="">◐</button>
+  <select id="lang"><option value="az">AZ</option><option value="en">EN</option><option value="tr">TR</option><option value="ru">RU</option><option value="ar">AR</option></select>
 </header>
 <main id="main"><div class="wrap" id="chat">
   <div class="hero" id="hero">
@@ -86,46 +86,48 @@ textarea::placeholder{color:var(--mute)}
   <form class="composer" id="f">
     <textarea id="q" rows="1" maxlength="300" dir="rtl" lang="ar" placeholder="اكتب سؤالك بالعربية…"></textarea>
     <div class="crow">
-      <div class="pills" role="radiogroup" aria-label="mode">
-        <button class="pill on" data-m="fatwa" type="button" role="radio">فتاوى ابن باز وابن عثيمين</button>
-        <button class="pill" data-m="library" type="button" role="radio">الشاملة + الدرر</button>
+      <div class="pills" role="radiogroup">
+        <button class="pill on" data-m="fatwa" type="button" role="radio" data-i="p1">فتاوى ابن باز وابن عثيمين</button>
+        <button class="pill" data-m="library" type="button" role="radio" data-i="p2">الشاملة + الدرر</button>
       </div><span class="sp"></span>
-      <button class="send" id="send" aria-label="Send">↑</button>
+      <button class="send" id="send" aria-label="">↑</button>
     </div>
   </form>
   <div class="hint" id="hint" role="alert"></div>
   <div class="disc" data-i="disc"></div>
 </footer>
 <div class="viewer" id="viewer"><div class="vbox">
-  <div class="vhead"><button class="btn" id="vclose">✕</button><a class="btn" id="vlink" target="_blank" rel="noopener">shamela.ws ↗</a><span class="t" id="vt"></span></div>
+  <div class="vhead"><button class="btn" id="vclose">✕</button><a class="btn" id="vlink" target="_blank" rel="noopener"></a><span class="t" id="vt"></span></div>
   <div class="vbody"><div class="ar" id="vtext"></div></div>
   <div class="vfoot"><button class="btn" id="vprev"></button><span class="note" id="vlabel"></span><button class="btn" id="vnext"></button></div>
 </div></div>
 <script>
 const I={
-az:{title:"Nibras Dini AI",sub:"Yalnız real mənbələrdən cavab",heroT:"Sualınızı ərəbcə yazın",brief:"Qısa cavab",arOnly:"Zəhmət olmasa sualı ərəbcə yazın.",ans:"Ən uyğun fətva",others:"Digər fətvalar",heroP:"Fətva rejimi yalnız Şeyx İbn Baz və Şeyx İbn Useymin fətvalarından, Kitabxana rejimi isə Məktəbətuş-Şamilə və Dorar hədis bazasından real mətnləri göstərir. Heç bir cavab uydurulmur.",m1:"Fətvalar",m1s:"İbn Baz · İbn Useymin",m2:"Kitabxana",m2s:"Şamilə · Dorar hədis",ph1:"Fətva sualı yazın (məs. namaz, صلاة الجماعة)…",ph2:"Kitablarda və hədislərdə axtarın (məs. إنما الأعمال بالنيات)…",disc:"Nəticələr canlı olaraq mənbələrdən gətirilir, heç nə saxlanmır. Ərəbcə açar sözlər daha dəqiq nəticə verir.",
+az:{docTitle:"Nibras — Dini AI axtarış",themeT:"Açıq/tünd rejim",langL:"Dil",send:"Göndər",modeL:"Axtarış rejimi",closeL:"Bağla",loading:"Axtarılır…",p1:"İbn Baz və İbn Useymin fətvaları",p2:"Şamilə + Dorar",ph:"Sualınızı ərəbcə yazın…",shSec:"Şamilə kitabxanası",drSec:"Dorar hədis bazası",narrator:"Ravi",muhaddith:"Mühəddis",source:"Mənbə",pageNo:"Səhifə/nömrə",takhrij:"Təxric",book:"Kitab",volPage:"Cild/səhifə",author:"Müəllif",langNames:["Azərbaycanca", "İngiliscə", "Türkcə", "Rusca", "Ərəbcə"],title:"Nibras Dini AI",sub:"Yalnız real mənbələrdən cavab",heroT:"Sualınızı ərəbcə yazın",brief:"Qısa cavab",arOnly:"Zəhmət olmasa sualı ərəbcə yazın.",ans:"Ən uyğun fətva",others:"Digər fətvalar",heroP:"Fətva rejimi yalnız Şeyx İbn Baz və Şeyx İbn Useymin fətvalarından, Kitabxana rejimi isə Məktəbətuş-Şamilə və Dorar hədis bazasından real mətnləri göstərir. Heç bir cavab uydurulmur.",m1:"Fətvalar",m1s:"İbn Baz · İbn Useymin",m2:"Kitabxana",m2s:"Şamilə · Dorar hədis",ph1:"Fətva sualı yazın (məs. namaz, صلاة الجماعة)…",ph2:"Kitablarda və hədislərdə axtarın (məs. إنما الأعمال بالنيات)…",disc:"Nəticələr canlı olaraq mənbələrdən gətirilir, heç nə saxlanmır. Ərəbcə açar sözlər daha dəqiq nəticə verir.",
 fatIntro:(q,n,a)=>n?`«${q}» üzrə İbn Baz və İbn Useymin fətvalarından ${n} nəticə${a?` (axtarış: ${a})`:""}:`:`«${q}» üzrə bu iki şeyxin fətvalarında nəticə tapılmadı. Ərəbcə açar sözlə yoxlayın (məs. «صلاة الجماعة»).`,
 shIntro:(q,n,a)=>n?`Şamilə kitabxanasında «${q}» üzrə ${n} nəticə${a?` (axtarış: ${a})`:""}:`:`Şamilədə «${q}» üzrə nəticə tapılmadı.`,
 drIntro:(n)=>n?`Dorar hədis bazasında ${n} hədis:`:"Dorar-da hədis tapılmadı.",drErr:"Dorar hal-hazırda cavab vermir. Bir az sonra yenidən yoxlayın.",err:"Mənbə hazırda cavab vermir. Bir az sonra yenidən cəhd edin.",rate:"Çox sorğu göndərildi, bir dəqiqə gözləyin.",
 more:"Daha çox",cont:"Davamı",page:"Tam səhifə",src:"Mənbə",fullOk:"Tam mətn",origin:"Əsl mənbədəki mətn",frag:"Tam mətn tapılmadı — yalnız mövcud parça göstərilir.",prev:"‹ Əvvəlki səhifə",next:"Növbəti səhifə ›",trunc:"Səhifə uzundur — qalanı mənbədə.",fatwaOf:"Fətva",chips:["حكم صلاة الجماعة", "هل يجوز الجمع بين الصلاتين للمطر", "حكم صيام يوم الجمعة منفردا", "إنما الأعمال بالنيات"]},
-en:{title:"Nibras Religious AI",sub:"Answers only from real sources",heroT:"Ask in Arabic",brief:"Short answer",arOnly:"Please write your question in Arabic.",ans:"Best-matching fatwa",others:"Other fatwas",heroP:"Fatwa mode shows only fatwas of Shaykh Ibn Baz and Shaykh Ibn Uthaymeen; Library mode searches al-Maktaba al-Shamela and the Dorar hadith database. Nothing is invented.",m1:"Fatwas",m1s:"Ibn Baz · Ibn Uthaymeen",m2:"Library",m2s:"Shamela · Dorar hadith",ph1:"Ask a fatwa question (e.g. prayer, صلاة الجماعة)…",ph2:"Search books and hadith (e.g. إنما الأعمال بالنيات)…",disc:"Results are fetched live from the sources; nothing is stored. Arabic keywords give more precise results.",
+en:{docTitle:"Nibras — Religious AI search",themeT:"Light/dark mode",langL:"Language",send:"Send",modeL:"Search mode",closeL:"Close",loading:"Searching…",p1:"Ibn Baz & Ibn Uthaymeen fatwas",p2:"Shamela + Dorar",ph:"Write your question in Arabic…",shSec:"Shamela library",drSec:"Dorar hadith database",narrator:"Narrator",muhaddith:"Muhaddith",source:"Source",pageNo:"Page/number",takhrij:"Takhrij",book:"Book",volPage:"Vol./page",author:"Author",langNames:["Azerbaijani", "English", "Turkish", "Russian", "Arabic"],title:"Nibras Religious AI",sub:"Answers only from real sources",heroT:"Ask in Arabic",brief:"Short answer",arOnly:"Please write your question in Arabic.",ans:"Best-matching fatwa",others:"Other fatwas",heroP:"Fatwa mode shows only fatwas of Shaykh Ibn Baz and Shaykh Ibn Uthaymeen; Library mode searches al-Maktaba al-Shamela and the Dorar hadith database. Nothing is invented.",m1:"Fatwas",m1s:"Ibn Baz · Ibn Uthaymeen",m2:"Library",m2s:"Shamela · Dorar hadith",ph1:"Ask a fatwa question (e.g. prayer, صلاة الجماعة)…",ph2:"Search books and hadith (e.g. إنما الأعمال بالنيات)…",disc:"Results are fetched live from the sources; nothing is stored. Arabic keywords give more precise results.",
 fatIntro:(q,n,a)=>n?`${n} results from the fatwas of Ibn Baz and Ibn Uthaymeen for “${q}”${a?` (searched: ${a})`:""}:`:`No fatwas found for “${q}”. Try Arabic keywords.`,shIntro:(q,n,a)=>n?`${n} results in Shamela for “${q}”${a?` (searched: ${a})`:""}:`:`No Shamela results for “${q}”.`,drIntro:(n)=>n?`${n} hadiths from Dorar:`:"No hadith found in Dorar.",drErr:"Dorar is not responding right now.",err:"The source is not responding. Try again shortly.",rate:"Too many requests, please wait a minute.",
 more:"Show more",cont:"Continue",page:"Full page",src:"Source",fullOk:"Full text",origin:"Text from the original source",frag:"Full text not found — showing the available fragment.",prev:"‹ Previous page",next:"Next page ›",trunc:"Long page — rest at the source.",fatwaOf:"Fatwa",chips:["حكم صلاة الجماعة", "هل يجوز الجمع بين الصلاتين للمطر", "حكم صيام يوم الجمعة منفردا", "إنما الأعمال بالنيات"]},
-tr:{title:"Nibras Dini YZ",sub:"Sadece gerçek kaynaklardan",heroT:"Sorunuzu Arapça yazın",brief:"Kısa cevap",arOnly:"Lütfen sorunuzu Arapça yazın.",ans:"En uygun fetva",others:"Diğer fetvalar",heroP:"Fetva modu yalnızca Şeyh İbn Baz ve Şeyh İbn Useymin fetvalarını, Kütüphane modu ise Mektebetü'ş-Şamile ve Dorar hadis veritabanını arar. Hiçbir cevap uydurulmaz.",m1:"Fetvalar",m1s:"İbn Baz · İbn Useymin",m2:"Kütüphane",m2s:"Şamile · Dorar hadis",ph1:"Fetva sorusu yazın (ör. namaz, صلاة الجماعة)…",ph2:"Kitap ve hadislerde arayın…",disc:"Sonuçlar canlı olarak kaynaklardan gelir, hiçbir şey saklanmaz. Arapça anahtar kelimeler daha isabetlidir.",
+tr:{docTitle:"Nibras — Dini YZ arama",themeT:"Açık/koyu mod",langL:"Dil",send:"Gönder",modeL:"Arama modu",closeL:"Kapat",loading:"Aranıyor…",p1:"İbn Baz ve İbn Useymin fetvaları",p2:"Şamile + Dorar",ph:"Sorunuzu Arapça yazın…",shSec:"Şamile kütüphanesi",drSec:"Dorar hadis veritabanı",narrator:"Ravi",muhaddith:"Muhaddis",source:"Kaynak",pageNo:"Sayfa/numara",takhrij:"Tahric",book:"Kitap",volPage:"Cilt/sayfa",author:"Yazar",langNames:["Azerice", "İngilizce", "Türkçe", "Rusça", "Arapça"],title:"Nibras Dini YZ",sub:"Sadece gerçek kaynaklardan",heroT:"Sorunuzu Arapça yazın",brief:"Kısa cevap",arOnly:"Lütfen sorunuzu Arapça yazın.",ans:"En uygun fetva",others:"Diğer fetvalar",heroP:"Fetva modu yalnızca Şeyh İbn Baz ve Şeyh İbn Useymin fetvalarını, Kütüphane modu ise Mektebetü'ş-Şamile ve Dorar hadis veritabanını arar. Hiçbir cevap uydurulmaz.",m1:"Fetvalar",m1s:"İbn Baz · İbn Useymin",m2:"Kütüphane",m2s:"Şamile · Dorar hadis",ph1:"Fetva sorusu yazın (ör. namaz, صلاة الجماعة)…",ph2:"Kitap ve hadislerde arayın…",disc:"Sonuçlar canlı olarak kaynaklardan gelir, hiçbir şey saklanmaz. Arapça anahtar kelimeler daha isabetlidir.",
 fatIntro:(q,n,a)=>n?`“${q}” için İbn Baz ve İbn Useymin fetvalarından ${n} sonuç${a?` (arama: ${a})`:""}:`:`“${q}” için fetva bulunamadı. Arapça deneyin.`,shIntro:(q,n,a)=>n?`Şamile'de “${q}” için ${n} sonuç${a?` (arama: ${a})`:""}:`:`Şamile'de sonuç yok.`,drIntro:(n)=>n?`Dorar'dan ${n} hadis:`:"Dorar'da hadis bulunamadı.",drErr:"Dorar şu an yanıt vermiyor.",err:"Kaynak şu an yanıt vermiyor.",rate:"Çok fazla istek, bir dakika bekleyin.",
 more:"Daha fazla",cont:"Devamı",page:"Tam sayfa",src:"Kaynak",fullOk:"Tam metin",origin:"Asıl kaynaktaki metin",frag:"Tam metin bulunamadı — mevcut parça gösteriliyor.",prev:"‹ Önceki sayfa",next:"Sonraki sayfa ›",trunc:"Uzun sayfa — devamı kaynakta.",fatwaOf:"Fetva",chips:["حكم صلاة الجماعة", "هل يجوز الجمع بين الصلاتين للمطر", "حكم صيام يوم الجمعة منفردا", "إنما الأعمال بالنيات"]},
-ru:{title:"Nibras — религиозный ИИ",sub:"Ответы только из источников",heroT:"Задайте вопрос на арабском",brief:"Краткий ответ",arOnly:"Пожалуйста, напишите вопрос на арабском.",ans:"Наиболее подходящая фетва",others:"Другие фетвы",heroP:"Режим фетв показывает только фетвы шейха Ибн База и шейха Ибн Усеймина; режим библиотеки ищет в аль-Мактаба аш-Шамиля и базе хадисов Дорар. Ничего не выдумывается.",m1:"Фетвы",m1s:"Ибн Баз · Ибн Усеймин",m2:"Библиотека",m2s:"Шамиля · Дорар",ph1:"Вопрос о фетве (напр. намаз, صلاة الجماعة)…",ph2:"Поиск по книгам и хадисам…",disc:"Результаты загружаются из источников в реальном времени, ничего не сохраняется. Арабские слова дают более точный результат.",
+ru:{docTitle:"Nibras — религиозный ИИ-поиск",themeT:"Светлая/тёмная тема",langL:"Язык",send:"Отправить",modeL:"Режим поиска",closeL:"Закрыть",loading:"Идёт поиск…",p1:"Фетвы Ибн База и Ибн Усеймина",p2:"Шамиля + Дорар",ph:"Напишите вопрос на арабском…",shSec:"Библиотека Шамиля",drSec:"База хадисов Дорар",narrator:"Передатчик",muhaddith:"Мухаддис",source:"Источник",pageNo:"Стр./номер",takhrij:"Тахридж",book:"Книга",volPage:"Том/стр.",author:"Автор",langNames:["Азербайджанский", "Английский", "Турецкий", "Русский", "Арабский"],title:"Nibras — религиозный ИИ",sub:"Ответы только из источников",heroT:"Задайте вопрос на арабском",brief:"Краткий ответ",arOnly:"Пожалуйста, напишите вопрос на арабском.",ans:"Наиболее подходящая фетва",others:"Другие фетвы",heroP:"Режим фетв показывает только фетвы шейха Ибн База и шейха Ибн Усеймина; режим библиотеки ищет в аль-Мактаба аш-Шамиля и базе хадисов Дорар. Ничего не выдумывается.",m1:"Фетвы",m1s:"Ибн Баз · Ибн Усеймин",m2:"Библиотека",m2s:"Шамиля · Дорар",ph1:"Вопрос о фетве (напр. намаз, صلاة الجماعة)…",ph2:"Поиск по книгам и хадисам…",disc:"Результаты загружаются из источников в реальном времени, ничего не сохраняется. Арабские слова дают более точный результат.",
 fatIntro:(q,n,a)=>n?`${n} результатов из фетв Ибн База и Ибн Усеймина по «${q}»${a?` (поиск: ${a})`:""}:`:`По «${q}» фетв не найдено. Попробуйте на арабском.`,shIntro:(q,n,a)=>n?`${n} результатов в Шамиле по «${q}»${a?` (поиск: ${a})`:""}:`:`В Шамиле ничего не найдено.`,drIntro:(n)=>n?`${n} хадисов из Дорар:`:"В Дорар хадисов не найдено.",drErr:"Дорар сейчас не отвечает.",err:"Источник не отвечает. Повторите позже.",rate:"Слишком много запросов, подождите минуту.",
 more:"Ещё",cont:"Полностью",page:"Вся страница",src:"Источник",fullOk:"Полный текст",origin:"Текст из первоисточника",frag:"Полный текст не найден — показан фрагмент.",prev:"‹ Предыдущая",next:"Следующая ›",trunc:"Страница длинная — продолжение в источнике.",fatwaOf:"Фетва",chips:["حكم صلاة الجماعة", "هل يجوز الجمع بين الصلاتين للمطر", "حكم صيام يوم الجمعة منفردا", "إنما الأعمال بالنيات"]},
-ar:{title:"نبراس — المساعد الشرعي",sub:"إجابات من المصادر فقط",heroT:"اكتب سؤالك بالعربية",brief:"الخلاصة",arOnly:"يرجى كتابة السؤال باللغة العربية.",ans:"أقرب فتوى",others:"فتاوى أخرى",heroP:"وضع الفتاوى يعرض فتاوى الشيخ ابن باز والشيخ ابن عثيمين فقط، ووضع المكتبة يبحث في المكتبة الشاملة والدرر السنية. لا يُختلق أي جواب.",m1:"الفتاوى",m1s:"ابن باز · ابن عثيمين",m2:"المكتبة",m2s:"الشاملة · الدرر السنية",ph1:"اكتب سؤالك (مثلاً: صلاة الجماعة)…",ph2:"ابحث في الكتب والأحاديث…",disc:"تُجلب النتائج مباشرة من المصادر ولا يُحفظ شيء.",
+ar:{docTitle:"نبراس — المساعد الشرعي",themeT:"الوضع الفاتح/الداكن",langL:"اللغة",send:"إرسال",modeL:"وضع البحث",closeL:"إغلاق",loading:"جارٍ البحث…",p1:"فتاوى ابن باز وابن عثيمين",p2:"الشاملة + الدرر",ph:"اكتب سؤالك بالعربية…",shSec:"المكتبة الشاملة",drSec:"الدرر السنية",narrator:"الراوي",muhaddith:"المحدث",source:"المصدر",pageNo:"الصفحة أو الرقم",takhrij:"التخريج",book:"الكتاب",volPage:"الجزء/الصفحة",author:"المؤلف",langNames:["الأذربيجانية", "الإنجليزية", "التركية", "الروسية", "العربية"],title:"نبراس — المساعد الشرعي",sub:"إجابات من المصادر فقط",heroT:"اكتب سؤالك بالعربية",brief:"الخلاصة",arOnly:"يرجى كتابة السؤال باللغة العربية.",ans:"أقرب فتوى",others:"فتاوى أخرى",heroP:"وضع الفتاوى يعرض فتاوى الشيخ ابن باز والشيخ ابن عثيمين فقط، ووضع المكتبة يبحث في المكتبة الشاملة والدرر السنية. لا يُختلق أي جواب.",m1:"الفتاوى",m1s:"ابن باز · ابن عثيمين",m2:"المكتبة",m2s:"الشاملة · الدرر السنية",ph1:"اكتب سؤالك (مثلاً: صلاة الجماعة)…",ph2:"ابحث في الكتب والأحاديث…",disc:"تُجلب النتائج مباشرة من المصادر ولا يُحفظ شيء.",
 fatIntro:(q,n)=>n?`${n} نتائج من فتاوى ابن باز وابن عثيمين في «${q}»:`:`لم توجد فتاوى في «${q}».`,shIntro:(q,n)=>n?`${n} نتائج في المكتبة الشاملة عن «${q}»:`:`لا نتائج في الشاملة.`,drIntro:(n)=>n?`${n} حديثًا من الدرر السنية:`:"لم يوجد حديث في الدرر.",drErr:"الدرر لا يستجيب الآن.",err:"المصدر لا يستجيب الآن.",rate:"طلبات كثيرة، انتظر دقيقة.",
-more:"المزيد",cont:"تتمة",page:"الصفحة كاملة",src:"المصدر",fullOk:"النص الكامل",origin:"النص من الأصل",frag:"لم يوجد النص الكامل — هذا الجزء المتاح.",prev:"› الصفحة السابقة",next:"الصفحة التالية ‹",trunc:"الصفحة طويلة — البقية في المصدر.",fatwaOf:"فتوى",chips:["حكم صلاة الجماعة", "هل يجوز الجمع بين الصلاتين للمطر", "حكم صيام يوم الجمعة منفردا", "إنما الأعمال بالنيات"]}};
+more:"عرض المزيد",cont:"اقرأ المزيد",page:"الصفحة كاملة",src:"المصدر",fullOk:"النص الكامل",origin:"النص من الأصل",frag:"لم يوجد النص الكامل — هذا الجزء المتاح.",prev:"السابق",next:"التالي",trunc:"الصفحة طويلة — البقية في المصدر.",fatwaOf:"فتوى",chips:["حكم صلاة الجماعة", "هل يجوز الجمع بين الصلاتين للمطر", "حكم صيام يوم الجمعة منفردا", "إنما الأعمال بالنيات"]}};
 let lang=(new URLSearchParams(location.search).get("lang")||localStorage.getItem("nt-lang")||"az");if(!I[lang])lang="az";
 let mode="fatwa",busy=false;const $=s=>document.querySelector(s),chat=$("#chat"),main=$("#main");
 const T=k=>I[lang][k];
 function el(tag,cls,txt){const e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e}
 function applyLang(){document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";$("#lang").value=lang;
- document.querySelectorAll("[data-i]").forEach(e=>e.textContent=T(e.dataset.i));
+ document.querySelectorAll("[data-i]").forEach(e=>e.textContent=T(e.dataset.i));document.title=T("docTitle");
+ $("#theme").title=$("#theme").ariaLabel=T("themeT");$("#lang").title=$("#lang").ariaLabel=T("langL");$("#send").ariaLabel=T("send");$(".pills").ariaLabel=T("modeL");$("#vclose").ariaLabel=$("#vclose").title=T("closeL");
+ $("#q").placeholder=T("ph");$("#vlink").textContent=T("src")+" ↗";[...$("#lang").options].forEach((o,i)=>o.textContent=T("langNames")[i]);
  const c=$("#chips");if(c){c.innerHTML="";T("chips").forEach(x=>{const b=el("button","chip",x);b.type="button";b.onclick=()=>ask(x);c.appendChild(b)})}
  $("#vprev").textContent=T("prev");$("#vnext").textContent=T("next")}
 $("#lang").onchange=e=>{lang=e.target.value;localStorage.setItem("nt-lang",lang);applyLang()};
@@ -141,18 +143,18 @@ async function api(body){const r=await fetch("/api/religious-search",{method:"PO
  if(r.status===429)throw new Error("rate");if(r.status===400){const j=await r.json().catch(()=>({}));if(j.error==="arabic_only")throw new Error("arOnly")}const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.error||"err");return j}
 function scrollTo(e){requestAnimationFrame(()=>e.scrollIntoView({behavior:"smooth",block:"start"}))}
 function addUser(q){$("#hero")?.remove();const m=el("div","msg user");m.appendChild(el("div","bubble",q));chat.appendChild(m)}
-function addBot(){const m=el("div","msg bot"),b=el("div","bubble");m.appendChild(el("div","av","ن"));m.appendChild(b);chat.appendChild(m);const d=el("div","dots");d.innerHTML="<span></span><span></span><span></span>";b.appendChild(d);scrollTo(m);return b}
+function addBot(){const m=el("div","msg bot"),b=el("div","bubble");m.appendChild(el("div","av","ن"));m.appendChild(b);chat.appendChild(m);const d=el("div","dots");d.innerHTML="<span></span><span></span><span></span>";d.setAttribute("role","status");d.setAttribute("aria-label",T("loading"));d.title=T("loading");b.appendChild(d);scrollTo(m);return b}
 function excerpt(t,q,max=320){const parts=t.split(/(?<=[.؟!:])\s+|\n+/).map(x=>x.trim()).filter(x=>x.length>8);if(!parts.length)return t.slice(0,max);
  let bi=0,bs=-1;parts.forEach((p,i)=>{const sc=score({text:p},q)-i*0.05;if(sc>bs){bs=sc;bi=i}});if(bs<=0)bi=0;let out=parts[bi];for(let i=bi+1;i<parts.length&&out.length+parts[i].length<max;i++)out+=" "+parts[i];
  return out.length>max+80?out.slice(0,max).replace(/\s+\S*$/,"")+" …":out}
 function fatwaCard(it,main,q){const c=el("div","card"),a0=answerOnly(it.text);
  const short=main?excerpt(a0.text,q):a0.text;const tx=el("div","ar",short);c.appendChild(tx);if(!main&&a0.text.length>350)tx.classList.add("clamp");
  if(main&&short!==a0.text){const m=el("button","btn p",T("cont"));m.style.marginTop="8px";m.onclick=()=>{tx.textContent=a0.text;m.remove()};c.appendChild(m)}
- const meta=el("div","meta");meta.style.marginTop="10px";meta.style.marginBottom="0";meta.appendChild(el("span","tag g",it.author));meta.appendChild(el("span",null,it.title+(it.label?" ("+it.label+")":"")));c.appendChild(meta);
+ const meta=el("div","meta");meta.style.marginTop="10px";meta.style.marginBottom="0";meta.appendChild(el("span","tag g",it.author));meta.appendChild(el("span",null,T("book")+": "+it.title+(it.label?" · "+T("volPage")+": "+it.label:"")));c.appendChild(meta);
  const a=el("div","acts");if(!main&&a0.text.length>350){const m=el("button","btn",T("cont"));m.onclick=()=>{tx.classList.remove("clamp");m.remove()};a.appendChild(m)}
  const p=el("button","btn",T("page"));p.onclick=()=>openViewer(it.bookId,it.pageId);a.appendChild(p);const l=el("a","btn",T("src")+" ↗");l.href=it.url;l.target="_blank";l.rel="noopener";a.appendChild(l);c.appendChild(a);return c}
 function shamelaCard(it,fatwa){if(fatwa)return fatwaCard(it,false,"");const c=el("div","card"),meta=el("div","meta");
- meta.appendChild(el("span","t",it.title));if(it.author)meta.appendChild(el("span","tag"+(fatwa?" g":""),it.author));if(it.label)meta.appendChild(el("span",null,it.label));c.appendChild(meta);
+ meta.appendChild(el("span","t",it.title));if(it.author)meta.appendChild(el("span","tag"+(fatwa?" g":""),it.author));if(it.label)meta.appendChild(el("span",null,T("volPage")+": "+it.label));c.appendChild(meta);
  const tx=el("div","ar",it.text);c.appendChild(tx);if(it.text.length>350)tx.classList.add("clamp");
  const a=el("div","acts");
  if(it.text.length>350){const m=el("button","btn",T("cont"));m.onclick=()=>{tx.classList.remove("clamp");m.remove()};a.appendChild(m)}
@@ -161,14 +163,14 @@ function shamelaCard(it,fatwa){if(fatwa)return fatwaCard(it,false,"");const c=el
 function dorarCard(it,query){const c=el("div","card"),meta=el("div","meta");
  if(it.grading)meta.appendChild(el("span","tag g",it.grading));if(it.source)meta.appendChild(el("span","t",it.source));c.appendChild(meta);
  c.appendChild(el("div","ar",it.text));const info=el("div","info");
- [["الراوي",it.narrator],["المحدث",it.muhaddith],["المصدر",it.source],["الصفحة أو الرقم",it.page]].forEach(([k,v])=>{if(!v)return;const d=el("div");d.appendChild(el("b",null,k+": "));d.appendChild(document.createTextNode(v));info.appendChild(d)});c.appendChild(info);
+ [[T("narrator"),it.narrator],[T("muhaddith"),it.muhaddith],[T("source"),it.source],[T("pageNo"),it.page]].forEach(([k,v])=>{if(!v)return;const d=el("div");d.appendChild(el("b",null,k+": "));d.appendChild(document.createTextNode(v));info.appendChild(d)});c.appendChild(info);
  const a=el("div","acts"),b=el("button","btn p",T("cont"));b.onclick=async()=>{b.disabled=true;const box=el("div","full");box.appendChild(el("div","dots")).innerHTML="<span></span><span></span><span></span>";c.appendChild(box);
   try{const r=await api({action:"hadith",query,text:it.text,source:it.source,muhaddith:it.muhaddith,page:it.page});box.innerHTML="";
    box.appendChild(el("div","note",r.status==="full"?T("fullOk"):r.status==="fragment"?T("frag"):T("origin")+(r.sourceTitle?" — "+r.sourceTitle:"")));
-   box.appendChild(el("div","ar",r.text));if(r.takhrij){const t=el("div","info");t.appendChild(el("div",null,"التخريج: "+r.takhrij));box.appendChild(t)}
+   box.appendChild(el("div","ar",r.text));if(r.takhrij){const t=el("div","info");t.appendChild(el("div",null,T("takhrij")+": "+r.takhrij));box.appendChild(t)}
    if(r.url){const l=el("a","btn",T("src")+" ↗");l.href=r.url;l.target="_blank";l.rel="noopener";const w=el("div","acts");w.appendChild(l);box.appendChild(w)}b.remove()}
   catch(e){box.innerHTML="";box.appendChild(el("div","note err",T(e.message==="rate"?"rate":e.message==="arOnly"?"arOnly":"err")));b.disabled=false}};
- a.appendChild(b);const l=el("a","btn","dorar.net ↗");l.href="https://dorar.net/hadith/search?q="+encodeURIComponent(query);l.target="_blank";l.rel="noopener";a.appendChild(l);c.appendChild(a);return c}
+ a.appendChild(b);const l=el("a","btn",T("drSec")+" ↗");l.href="https://dorar.net/hadith/search?q="+encodeURIComponent(query);l.target="_blank";l.rel="noopener";a.appendChild(l);c.appendChild(a);return c}
 function revealGroup(list,items,make,step){let shown=0;const more=el("button","btn",T("more"));const w=el("div","acts");w.appendChild(more);
  const show=()=>{const first=list.children.length;items.slice(shown,shown+step).forEach(i=>list.appendChild(make(i)));shown+=step;if(shown>=items.length)w.remove();return list.children[first]};
  more.onclick=()=>{const f=show();if(f)scrollTo(f)};show();return w}
@@ -176,14 +178,14 @@ async function shamelaBlock(b,q,fatwa){const r=await api({action:fatwa?"fatwa":"
  b.appendChild(el("p","intro",T(fatwa?"fatIntro":"shIntro")(r.original||q,r.items.length,"")));
  const list=el("div");
  if(fatwa&&r.items.length){const sorted=[...r.items].sort((x,y)=>score(y,q)-score(x,q));b.appendChild(el("div","sec",T("ans")));b.appendChild(fatwaCard(sorted[0],true,q));if(sorted.length>1)b.appendChild(el("div","sec",T("others")));b.appendChild(list);sorted.slice(1).forEach(i=>list.appendChild(fatwaCard(i,false,q)))}
- else{if(!fatwa&&r.items.length){const best=[...r.items].sort((x,y)=>score(y,q)-score(x,q))[0];const c=el("div","card");c.appendChild(el("div","ar",excerpt(best.text,q)));const m=el("div","meta");m.style.margin="8px 0 0";m.appendChild(el("span","tag",best.author||""));m.appendChild(el("span",null,best.title+(best.label?" ("+best.label+")":"")));c.appendChild(m);b.appendChild(el("div","sec",T("brief")));b.appendChild(c)}
-  if(!fatwa)b.appendChild(el("div","sec","الشاملة"));b.appendChild(list);r.items.forEach(i=>list.appendChild(shamelaCard(i,fatwa)))}
+ else{if(!fatwa&&r.items.length){const best=[...r.items].sort((x,y)=>score(y,q)-score(x,q))[0];const c=el("div","card");c.appendChild(el("div","ar",excerpt(best.text,q)));const m=el("div","meta");m.style.margin="8px 0 0";m.appendChild(el("span","tag",best.author||""));m.appendChild(el("span",null,T("book")+": "+best.title+(best.label?" · "+T("volPage")+": "+best.label:"")));c.appendChild(m);b.appendChild(el("div","sec",T("brief")));b.appendChild(c)}
+  if(!fatwa)b.appendChild(el("div","sec",T("shSec")));b.appendChild(list);r.items.forEach(i=>list.appendChild(shamelaCard(i,fatwa)))}
  if(r.hasMore){let state={cursor:r.cursor,seen:r.seen};const w=el("div","acts"),m=el("button","btn",T("more"));w.appendChild(m);b.appendChild(w);
   m.onclick=async()=>{m.disabled=true;try{const n=await api({action:fatwa?"fatwa":"shamela",query:r.query,cursor:state.cursor,seen:state.seen});const first=list.children.length;
    n.items.forEach(i=>list.appendChild(shamelaCard(i,fatwa)));state={cursor:n.cursor,seen:n.seen};if(list.children[first])scrollTo(list.children[first]);if(!n.hasMore||!n.items.length)w.remove();else m.disabled=false}catch(e){m.disabled=false}}}}
 async function dorarBlock(b,q){const r=await api({action:"dorar",query:q});
  if(r.error){b.appendChild(el("p","intro err",T("drErr")));return}
- b.appendChild(el("div","sec","الدرر السنية"));b.appendChild(el("p","intro",T("drIntro")(r.items.length)));const list=el("div");b.appendChild(list);
+ b.appendChild(el("div","sec",T("drSec")));b.appendChild(el("p","intro",T("drIntro")(r.items.length)));const list=el("div");b.appendChild(list);
  if(r.items.length)b.appendChild(revealGroup(list,r.items,i=>dorarCard(i,r.query),3))}
 async function ask(q){q=(q||"").trim();if(!q||busy)return;
  if(!hasAr(q)){$("#hint").textContent=T("arOnly");return}$("#hint").textContent="";busy=true;addUser(q);const b=addBot();
@@ -195,7 +197,7 @@ async function ask(q){q=(q||"").trim();if(!q||busy)return;
  finally{b.querySelector(".dots")?.remove();busy=false;scrollTo(b.parentElement)}}
 let vcur=null;async function openViewer(book,page){const v=$("#viewer");v.classList.add("on");$("#vtext").textContent="";$("#vt").textContent="…";$("#vlabel").textContent="";
  $("#vprev").disabled=$("#vnext").disabled=true;const d=el("div","dots");d.innerHTML="<span></span><span></span><span></span>";$("#vtext").appendChild(d);
- try{const r=await api({action:"open",bookId:book,pageId:page});vcur=r;$("#vt").textContent=r.title;$("#vlabel").textContent=r.label||"";$("#vtext").textContent=r.text+(r.truncated?"\n\n— "+T("trunc"):"");
+ try{const r=await api({action:"open",bookId:book,pageId:page});vcur=r;$("#vt").textContent=r.title;$("#vlabel").textContent=r.label?T("volPage")+": "+r.label:"";$("#vtext").textContent=r.text+(r.truncated?"\n\n— "+T("trunc"):"");
   $("#vlink").href=r.url;$("#vprev").disabled=!r.prevPageId;$("#vnext").disabled=!r.nextPageId;document.querySelector(".vbody").scrollTop=0}
  catch(e){$("#vtext").textContent=T(e.message==="rate"?"rate":e.message==="arOnly"?"arOnly":"err")}}
 $("#vprev").onclick=()=>vcur?.prevPageId&&openViewer(vcur.bookId,vcur.prevPageId);$("#vnext").onclick=()=>vcur?.nextPageId&&openViewer(vcur.bookId,vcur.nextPageId);
