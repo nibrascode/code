@@ -528,14 +528,34 @@
           "value": "noindex"
         }
       ]
+    },
+    {
+      "source": "/test(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
     }
   ],
   "functions": {
     "api/chat.js": {
       "maxDuration": 300
+    },
+    "api/religious-search.js": {
+      "maxDuration": 60
     }
   },
   "rewrites": [
+    {
+      "source": "/test",
+      "destination": "/test/index.html"
+    },
+    {
+      "source": "/test/",
+      "destination": "/test/index.html"
+    },
     {
       "source": "/nibrasnova/",
       "destination": "/nibrasnova/index.html"

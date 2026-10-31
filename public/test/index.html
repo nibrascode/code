@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="az" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Nibras — Dini AI axtarış (test)</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="İbn Baz və İbn Useymin fətvaları, Şamilə kitabxanası və Dorar hədis axtarışı — yalnız real mənbə mətnləri.">
+<link rel="icon" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b1210;--panel:#111c19;--card:#15231f;--line:#24362f;--text:#e8efe9;--mute:#93a69c;--accent:#2fbf8a;--gold:#d8b45a;--accent2:#1e8f68}
+*{box-sizing:border-box}html,body{margin:0;height:100%}
+body{background:radial-gradient(1200px 600px at 80% -10%,#173a2e 0,transparent 60%),radial-gradient(900px 500px at -10% 110%,#2a2412 0,transparent 55%),var(--bg);color:var(--text);font:15px/1.6 Inter,system-ui,sans-serif;display:flex;flex-direction:column}
+a{color:var(--accent)}
+header{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line);background:rgba(11,18,16,.8);backdrop-filter:blur(10px);position:sticky;top:0;z-index:5}
+.logo{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--gold));display:grid;place-items:center;font:700 20px Amiri,serif;color:#0b1210}
+header h1{font-size:16px;margin:0;line-height:1.2}header small{color:var(--mute);font-size:12px}
+.sp{flex:1}select{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:6px 8px;font:inherit;font-size:13px}
+.badge{font-size:11px;color:var(--gold);border:1px solid #5a4a22;border-radius:99px;padding:2px 8px}
+main{flex:1;overflow:auto;padding:16px 12px 8px}
+.wrap{max-width:860px;margin:0 auto}
+.hero{text-align:center;padding:28px 8px 10px}.hero .b{font:700 30px Amiri,serif;color:var(--gold)}
+.hero h2{margin:6px 0 6px;font-size:22px}.hero p{color:var(--mute);margin:0 auto;max-width:560px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:16px 0}
+.chip{background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:99px;padding:6px 12px;cursor:pointer;font:inherit;font-size:13px}.chip:hover{border-color:var(--accent)}
+.msg{margin:14px 0;display:flex}.msg.user{justify-content:flex-end}
+.bubble{max-width:85%;padding:10px 14px;border-radius:16px;background:var(--panel);border:1px solid var(--line)}
+.user .bubble{background:linear-gradient(135deg,var(--accent2),#176e51);border:0;color:#fff;border-bottom-right-radius:4px}
+[dir=rtl] .user .bubble{border-bottom-right-radius:16px;border-bottom-left-radius:4px}
+.bot .bubble{max-width:100%;width:100%;background:transparent;border:0;padding:0}
+.intro{color:var(--mute);margin:0 0 10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin:10px 0}
+.card .meta{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;font-size:12.5px;color:var(--mute);margin-bottom:8px}
+.card .t{font-weight:600;color:var(--text);font-size:14px}
+.tag{font-size:11px;border-radius:99px;padding:1px 8px;background:#1d3a2f;color:#8fe3be}.tag.g{background:#3a321b;color:#ecd08a}
+.ar{font:400 19px/2 Amiri,serif;direction:rtl;text-align:right;white-space:pre-wrap;word-wrap:break-word}
+.ar.clamp{max-height:16em;overflow:hidden;-webkit-mask-image:linear-gradient(#000 70%,transparent)}
+.info{font-size:13px;color:var(--mute);direction:rtl;text-align:right;margin-top:8px;display:grid;gap:2px}.info b{color:#cfe0d6;font-weight:600}
+.acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.btn{background:transparent;border:1px solid var(--line);color:var(--text);border-radius:9px;padding:6px 11px;font:inherit;font-size:13px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{border-color:var(--accent)}.btn.p{background:var(--accent);color:#06150f;border-color:var(--accent);font-weight:600}
+.btn:disabled{opacity:.5;cursor:default}
+.full{border-top:1px dashed var(--line);margin-top:10px;padding-top:10px}
+.note{font-size:12.5px;color:var(--mute);margin-top:6px}
+.err{color:#ffb4a8}
+.dots span{display:inline-block;width:7px;height:7px;margin:0 2px;border-radius:50%;background:var(--accent);animation:b 1s infinite}.dots span:nth-child(2){animation-delay:.15s}.dots span:nth-child(3){animation-delay:.3s}
+@keyframes b{0%,80%,100%{opacity:.25}40%{opacity:1}}
+footer{padding:10px 12px calc(10px + env(safe-area-inset-bottom));border-top:1px solid var(--line);background:rgba(11,18,16,.92)}
+.modes{display:flex;gap:6px;max-width:860px;margin:0 auto 8px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:4px}
+.mode{flex:1;border:0;background:transparent;color:var(--mute);padding:8px 6px;border-radius:9px;font:inherit;font-size:13px;cursor:pointer;line-height:1.25}
+.mode b{display:block;color:inherit;font-size:13.5px}.mode small{font-size:11px;opacity:.85}
+.mode.on{background:linear-gradient(135deg,#1c4a39,#16362b);color:#fff;box-shadow:inset 0 0 0 1px #2f6b54}
+form{display:flex;gap:8px;max-width:860px;margin:0 auto}
+textarea{flex:1;resize:none;background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:12px;padding:11px 13px;font:inherit;min-height:46px;max-height:140px}
+textarea:focus{outline:none;border-color:var(--accent)}
+.send{width:48px;border-radius:12px;border:0;background:var(--accent);color:#06150f;font-size:20px;cursor:pointer}
+.disc{max-width:860px;margin:6px auto 0;font-size:11.5px;color:var(--mute);text-align:center}
+.viewer{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;z-index:20;padding:16px}
+.viewer.on{display:flex;align-items:center;justify-content:center}
+.vbox{background:var(--panel);border:1px solid var(--line);border-radius:16px;width:min(860px,100%);max-height:100%;display:flex;flex-direction:column}
+.vhead{display:flex;gap:8px;align-items:center;padding:12px 14px;border-bottom:1px solid var(--line)}.vhead .t{flex:1;font-weight:600;font-size:14px}
+.vbody{overflow:auto;padding:16px}.vfoot{display:flex;gap:8px;justify-content:space-between;padding:10px 14px;border-top:1px solid var(--line)}
+@media (max-width:560px){header h1{font-size:14px}.badge{display:none}.ar{font-size:18px}.hero h2{font-size:19px}.mode small{display:none}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">ن</div>
+  <div><h1 data-i="title"></h1><small data-i="sub"></small></div>
+  <span class="sp"></span><span class="badge">TEST</span>
+  <select id="lang" aria-label="Language"><option value="az">AZ</option><option value="en">EN</option><option value="tr">TR</option><option value="ru">RU</option><option value="ar">AR</option></select>
+</header>
+<main id="main"><div class="wrap" id="chat">
+  <div class="hero" id="hero">
+    <div class="b">بسم الله الرحمن الرحيم</div>
+    <h2 data-i="heroT"></h2><p data-i="heroP"></p>
+    <div class="chips" id="chips"></div>
+  </div>
+</div></main>
+<footer>
+  <div class="modes" role="tablist">
+    <button class="mode on" data-m="fatwa" type="button"><b data-i="m1"></b><small data-i="m1s"></small></button>
+    <button class="mode" data-m="library" type="button"><b data-i="m2"></b><small data-i="m2s"></small></button>
+  </div>
+  <form id="f"><textarea id="q" rows="1" maxlength="300"></textarea><button class="send" aria-label="Send">➤</button></form>
+  <div class="disc" data-i="disc"></div>
+</footer>
+<div class="viewer" id="viewer"><div class="vbox">
+  <div class="vhead"><span class="t" id="vt"></span><a class="btn" id="vlink" target="_blank" rel="noopener">shamela.ws ↗</a><button class="btn" id="vclose">✕</button></div>
+  <div class="vbody"><div class="ar" id="vtext"></div></div>
+  <div class="vfoot"><button class="btn" id="vprev"></button><span class="note" id="vlabel"></span><button class="btn" id="vnext"></button></div>
+</div></div>
+<script>
+const I={
+az:{title:"Nibras Dini AI",sub:"Yalnız real mənbələrdən cavab",heroT:"Sualınızı yazın — mənbələrdən axtaraq",heroP:"Fətva rejimi yalnız Şeyx İbn Baz və Şeyx İbn Useymin fətvalarından, Kitabxana rejimi isə Məktəbətuş-Şamilə və Dorar hədis bazasından real mətnləri göstərir. Heç bir cavab uydurulmur.",m1:"Fətvalar",m1s:"İbn Baz · İbn Useymin",m2:"Kitabxana",m2s:"Şamilə · Dorar hədis",ph1:"Fətva sualı yazın (məs. namaz, صلاة الجماعة)…",ph2:"Kitablarda və hədislərdə axtarın (məs. إنما الأعمال بالنيات)…",disc:"Nəticələr canlı olaraq mənbələrdən gətirilir, heç nə saxlanmır. Ərəbcə açar sözlər daha dəqiq nəticə verir.",
+fatIntro:(q,n,a)=>n?`«${q}» üzrə İbn Baz və İbn Useymin fətvalarından ${n} nəticə${a?` (axtarış: ${a})`:""}:`:`«${q}» üzrə bu iki şeyxin fətvalarında nəticə tapılmadı. Ərəbcə açar sözlə yoxlayın (məs. «صلاة الجماعة»).`,
+shIntro:(q,n,a)=>n?`Şamilə kitabxanasında «${q}» üzrə ${n} nəticə${a?` (axtarış: ${a})`:""}:`:`Şamilədə «${q}» üzrə nəticə tapılmadı.`,
+drIntro:(n)=>n?`Dorar hədis bazasında ${n} hədis:`:"Dorar-da hədis tapılmadı.",drErr:"Dorar hal-hazırda cavab vermir. Bir az sonra yenidən yoxlayın.",err:"Mənbə hazırda cavab vermir. Bir az sonra yenidən cəhd edin.",rate:"Çox sorğu göndərildi, bir dəqiqə gözləyin.",
+more:"Daha çox",cont:"Davamı",page:"Tam səhifə",src:"Mənbə",fullOk:"Tam mətn",origin:"Əsl mənbədəki mətn",frag:"Tam mətn tapılmadı — yalnız mövcud parça göstərilir.",prev:"‹ Əvvəlki səhifə",next:"Növbəti səhifə ›",trunc:"Səhifə uzundur — qalanı mənbədə.",fatwaOf:"Fətva",chips:["namaz","صلاة الجماعة","oruc","الزكاة","إنما الأعمال بالنيات"]},
+en:{title:"Nibras Religious AI",sub:"Answers only from real sources",heroT:"Ask — we search the sources",heroP:"Fatwa mode shows only fatwas of Shaykh Ibn Baz and Shaykh Ibn Uthaymeen; Library mode searches al-Maktaba al-Shamela and the Dorar hadith database. Nothing is invented.",m1:"Fatwas",m1s:"Ibn Baz · Ibn Uthaymeen",m2:"Library",m2s:"Shamela · Dorar hadith",ph1:"Ask a fatwa question (e.g. prayer, صلاة الجماعة)…",ph2:"Search books and hadith (e.g. إنما الأعمال بالنيات)…",disc:"Results are fetched live from the sources; nothing is stored. Arabic keywords give more precise results.",
+fatIntro:(q,n,a)=>n?`${n} results from the fatwas of Ibn Baz and Ibn Uthaymeen for “${q}”${a?` (searched: ${a})`:""}:`:`No fatwas found for “${q}”. Try Arabic keywords.`,shIntro:(q,n,a)=>n?`${n} results in Shamela for “${q}”${a?` (searched: ${a})`:""}:`:`No Shamela results for “${q}”.`,drIntro:(n)=>n?`${n} hadiths from Dorar:`:"No hadith found in Dorar.",drErr:"Dorar is not responding right now.",err:"The source is not responding. Try again shortly.",rate:"Too many requests, please wait a minute.",
+more:"Show more",cont:"Continue",page:"Full page",src:"Source",fullOk:"Full text",origin:"Text from the original source",frag:"Full text not found — showing the available fragment.",prev:"‹ Previous page",next:"Next page ›",trunc:"Long page — rest at the source.",fatwaOf:"Fatwa",chips:["prayer","صلاة الجماعة","fasting","الزكاة","إنما الأعمال بالنيات"]},
+tr:{title:"Nibras Dini YZ",sub:"Sadece gerçek kaynaklardan",heroT:"Sorunuzu yazın — kaynaklarda arayalım",heroP:"Fetva modu yalnızca Şeyh İbn Baz ve Şeyh İbn Useymin fetvalarını, Kütüphane modu ise Mektebetü'ş-Şamile ve Dorar hadis veritabanını arar. Hiçbir cevap uydurulmaz.",m1:"Fetvalar",m1s:"İbn Baz · İbn Useymin",m2:"Kütüphane",m2s:"Şamile · Dorar hadis",ph1:"Fetva sorusu yazın (ör. namaz, صلاة الجماعة)…",ph2:"Kitap ve hadislerde arayın…",disc:"Sonuçlar canlı olarak kaynaklardan gelir, hiçbir şey saklanmaz. Arapça anahtar kelimeler daha isabetlidir.",
+fatIntro:(q,n,a)=>n?`“${q}” için İbn Baz ve İbn Useymin fetvalarından ${n} sonuç${a?` (arama: ${a})`:""}:`:`“${q}” için fetva bulunamadı. Arapça deneyin.`,shIntro:(q,n,a)=>n?`Şamile'de “${q}” için ${n} sonuç${a?` (arama: ${a})`:""}:`:`Şamile'de sonuç yok.`,drIntro:(n)=>n?`Dorar'dan ${n} hadis:`:"Dorar'da hadis bulunamadı.",drErr:"Dorar şu an yanıt vermiyor.",err:"Kaynak şu an yanıt vermiyor.",rate:"Çok fazla istek, bir dakika bekleyin.",
+more:"Daha fazla",cont:"Devamı",page:"Tam sayfa",src:"Kaynak",fullOk:"Tam metin",origin:"Asıl kaynaktaki metin",frag:"Tam metin bulunamadı — mevcut parça gösteriliyor.",prev:"‹ Önceki sayfa",next:"Sonraki sayfa ›",trunc:"Uzun sayfa — devamı kaynakta.",fatwaOf:"Fetva",chips:["namaz","صلاة الجماعة","oruç","الزكاة","إنما الأعمال بالنيات"]},
+ru:{title:"Nibras — религиозный ИИ",sub:"Ответы только из источников",heroT:"Задайте вопрос — мы найдём в источниках",heroP:"Режим фетв показывает только фетвы шейха Ибн База и шейха Ибн Усеймина; режим библиотеки ищет в аль-Мактаба аш-Шамиля и базе хадисов Дорар. Ничего не выдумывается.",m1:"Фетвы",m1s:"Ибн Баз · Ибн Усеймин",m2:"Библиотека",m2s:"Шамиля · Дорар",ph1:"Вопрос о фетве (напр. намаз, صلاة الجماعة)…",ph2:"Поиск по книгам и хадисам…",disc:"Результаты загружаются из источников в реальном времени, ничего не сохраняется. Арабские слова дают более точный результат.",
+fatIntro:(q,n,a)=>n?`${n} результатов из фетв Ибн База и Ибн Усеймина по «${q}»${a?` (поиск: ${a})`:""}:`:`По «${q}» фетв не найдено. Попробуйте на арабском.`,shIntro:(q,n,a)=>n?`${n} результатов в Шамиле по «${q}»${a?` (поиск: ${a})`:""}:`:`В Шамиле ничего не найдено.`,drIntro:(n)=>n?`${n} хадисов из Дорар:`:"В Дорар хадисов не найдено.",drErr:"Дорар сейчас не отвечает.",err:"Источник не отвечает. Повторите позже.",rate:"Слишком много запросов, подождите минуту.",
+more:"Ещё",cont:"Полностью",page:"Вся страница",src:"Источник",fullOk:"Полный текст",origin:"Текст из первоисточника",frag:"Полный текст не найден — показан фрагмент.",prev:"‹ Предыдущая",next:"Следующая ›",trunc:"Страница длинная — продолжение в источнике.",fatwaOf:"Фетва",chips:["намаз","صلاة الجماعة","пост","الزكاة","إنما الأعمال بالنيات"]},
+ar:{title:"نبراس — المساعد الشرعي",sub:"إجابات من المصادر فقط",heroT:"اكتب سؤالك — نبحث في المصادر",heroP:"وضع الفتاوى يعرض فتاوى الشيخ ابن باز والشيخ ابن عثيمين فقط، ووضع المكتبة يبحث في المكتبة الشاملة والدرر السنية. لا يُختلق أي جواب.",m1:"الفتاوى",m1s:"ابن باز · ابن عثيمين",m2:"المكتبة",m2s:"الشاملة · الدرر السنية",ph1:"اكتب سؤالك (مثلاً: صلاة الجماعة)…",ph2:"ابحث في الكتب والأحاديث…",disc:"تُجلب النتائج مباشرة من المصادر ولا يُحفظ شيء.",
+fatIntro:(q,n)=>n?`${n} نتائج من فتاوى ابن باز وابن عثيمين في «${q}»:`:`لم توجد فتاوى في «${q}».`,shIntro:(q,n)=>n?`${n} نتائج في المكتبة الشاملة عن «${q}»:`:`لا نتائج في الشاملة.`,drIntro:(n)=>n?`${n} حديثًا من الدرر السنية:`:"لم يوجد حديث في الدرر.",drErr:"الدرر لا يستجيب الآن.",err:"المصدر لا يستجيب الآن.",rate:"طلبات كثيرة، انتظر دقيقة.",
+more:"المزيد",cont:"تتمة",page:"الصفحة كاملة",src:"المصدر",fullOk:"النص الكامل",origin:"النص من الأصل",frag:"لم يوجد النص الكامل — هذا الجزء المتاح.",prev:"› الصفحة السابقة",next:"الصفحة التالية ‹",trunc:"الصفحة طويلة — البقية في المصدر.",fatwaOf:"فتوى",chips:["صلاة الجماعة","صيام الست من شوال","الزكاة","إنما الأعمال بالنيات"]}};
+let lang=(new URLSearchParams(location.search).get("lang")||localStorage.getItem("nt-lang")||"az");if(!I[lang])lang="az";
+let mode="fatwa",busy=false;const $=s=>document.querySelector(s),chat=$("#chat"),main=$("#main");
+const T=k=>I[lang][k];
+function el(tag,cls,txt){const e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e}
+function applyLang(){document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";$("#lang").value=lang;
+ document.querySelectorAll("[data-i]").forEach(e=>e.textContent=T(e.dataset.i));$("#q").placeholder=T(mode==="fatwa"?"ph1":"ph2");
+ const c=$("#chips");if(c){c.innerHTML="";T("chips").forEach(x=>{const b=el("button","chip",x);b.type="button";b.onclick=()=>ask(x);c.appendChild(b)})}
+ $("#vprev").textContent=T("prev");$("#vnext").textContent=T("next")}
+$("#lang").onchange=e=>{lang=e.target.value;localStorage.setItem("nt-lang",lang);applyLang()};
+document.querySelectorAll(".mode").forEach(b=>b.onclick=()=>{mode=b.dataset.m;document.querySelectorAll(".mode").forEach(x=>x.classList.toggle("on",x===b));applyLang();$("#q").focus()});
+async function api(body){const r=await fetch("/api/religious-search",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
+ if(r.status===429)throw new Error("rate");const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.error||"err");return j}
+function scrollTo(e){requestAnimationFrame(()=>e.scrollIntoView({behavior:"smooth",block:"start"}))}
+function addUser(q){$("#hero")?.remove();const m=el("div","msg user");m.appendChild(el("div","bubble",q));chat.appendChild(m)}
+function addBot(){const m=el("div","msg bot"),b=el("div","bubble");m.appendChild(b);chat.appendChild(m);const d=el("div","dots");d.innerHTML="<span></span><span></span><span></span>";b.appendChild(d);scrollTo(m);return b}
+function shamelaCard(it,fatwa){const c=el("div","card"),meta=el("div","meta");
+ meta.appendChild(el("span","t",it.title));if(it.author)meta.appendChild(el("span","tag"+(fatwa?" g":""),it.author));if(it.label)meta.appendChild(el("span",null,it.label));c.appendChild(meta);
+ const tx=el("div","ar",it.text);c.appendChild(tx);if(it.text.length>700)tx.classList.add("clamp");
+ const a=el("div","acts");
+ if(it.text.length>700){const m=el("button","btn",T("cont"));m.onclick=()=>{tx.classList.remove("clamp");m.remove()};a.appendChild(m)}
+ const p=el("button","btn p",T("page"));p.onclick=()=>openViewer(it.bookId,it.pageId);a.appendChild(p);
+ const l=el("a","btn",T("src")+" ↗");l.href=it.url;l.target="_blank";l.rel="noopener";a.appendChild(l);c.appendChild(a);return c}
+function dorarCard(it,query){const c=el("div","card"),meta=el("div","meta");
+ if(it.grading)meta.appendChild(el("span","tag g",it.grading));if(it.source)meta.appendChild(el("span","t",it.source));c.appendChild(meta);
+ c.appendChild(el("div","ar",it.text));const info=el("div","info");
+ [["الراوي",it.narrator],["المحدث",it.muhaddith],["المصدر",it.source],["الصفحة أو الرقم",it.page]].forEach(([k,v])=>{if(!v)return;const d=el("div");d.appendChild(el("b",null,k+": "));d.appendChild(document.createTextNode(v));info.appendChild(d)});c.appendChild(info);
+ const a=el("div","acts"),b=el("button","btn p",T("cont"));b.onclick=async()=>{b.disabled=true;const box=el("div","full");box.appendChild(el("div","dots")).innerHTML="<span></span><span></span><span></span>";c.appendChild(box);
+  try{const r=await api({action:"hadith",query,text:it.text,source:it.source,muhaddith:it.muhaddith,page:it.page});box.innerHTML="";
+   box.appendChild(el("div","note",r.status==="full"?T("fullOk"):r.status==="fragment"?T("frag"):T("origin")+(r.sourceTitle?" — "+r.sourceTitle:"")));
+   box.appendChild(el("div","ar",r.text));if(r.takhrij){const t=el("div","info");t.appendChild(el("div",null,"التخريج: "+r.takhrij));box.appendChild(t)}
+   if(r.url){const l=el("a","btn",T("src")+" ↗");l.href=r.url;l.target="_blank";l.rel="noopener";const w=el("div","acts");w.appendChild(l);box.appendChild(w)}b.remove()}
+  catch(e){box.innerHTML="";box.appendChild(el("div","note err",T(e.message==="rate"?"rate":"err")));b.disabled=false}};
+ a.appendChild(b);const l=el("a","btn","dorar.net ↗");l.href="https://dorar.net/hadith/search?q="+encodeURIComponent(query);l.target="_blank";l.rel="noopener";a.appendChild(l);c.appendChild(a);return c}
+function revealGroup(list,items,make,step){let shown=0;const more=el("button","btn",T("more"));const w=el("div","acts");w.appendChild(more);
+ const show=()=>{const first=list.children.length;items.slice(shown,shown+step).forEach(i=>list.appendChild(make(i)));shown+=step;if(shown>=items.length)w.remove();return list.children[first]};
+ more.onclick=()=>{const f=show();if(f)scrollTo(f)};show();return w}
+async function shamelaBlock(b,q,fatwa){const r=await api({action:fatwa?"fatwa":"shamela",query:q});
+ b.appendChild(el("p","intro",T(fatwa?"fatIntro":"shIntro")(r.original||q,r.items.length,r.query!==r.original?r.query:"")));
+ const list=el("div");b.appendChild(list);r.items.forEach(i=>list.appendChild(shamelaCard(i,fatwa)));
+ if(r.hasMore){let state={cursor:r.cursor,seen:r.seen};const w=el("div","acts"),m=el("button","btn",T("more"));w.appendChild(m);b.appendChild(w);
+  m.onclick=async()=>{m.disabled=true;try{const n=await api({action:fatwa?"fatwa":"shamela",query:r.query,cursor:state.cursor,seen:state.seen});const first=list.children.length;
+   n.items.forEach(i=>list.appendChild(shamelaCard(i,fatwa)));state={cursor:n.cursor,seen:n.seen};if(list.children[first])scrollTo(list.children[first]);if(!n.hasMore||!n.items.length)w.remove();else m.disabled=false}catch(e){m.disabled=false}}}}
+async function dorarBlock(b,q){const r=await api({action:"dorar",query:q});
+ if(r.error){b.appendChild(el("p","intro err",T("drErr")));return}
+ b.appendChild(el("p","intro",T("drIntro")(r.items.length)));const list=el("div");b.appendChild(list);
+ if(r.items.length)b.appendChild(revealGroup(list,r.items,i=>dorarCard(i,r.query),5))}
+async function ask(q){q=(q||"").trim();if(!q||busy)return;busy=true;addUser(q);const b=addBot();
+ try{if(mode==="fatwa"){await shamelaBlock(b,q,true)}else{const sh=el("div"),dr=el("div");
+   const p1=shamelaBlock(sh,q,false).catch(e=>sh.appendChild(el("p","intro err",T(e.message==="rate"?"rate":"err"))));
+   const p2=dorarBlock(dr,q).catch(e=>dr.appendChild(el("p","intro err",T(e.message==="rate"?"rate":"drErr"))));
+   await Promise.all([p1,p2]);b.appendChild(sh);b.appendChild(dr)}}
+ catch(e){b.appendChild(el("p","intro err",T(e.message==="rate"?"rate":"err")))}
+ finally{b.querySelector(".dots")?.remove();busy=false;scrollTo(b.parentElement)}}
+let vcur=null;async function openViewer(book,page){const v=$("#viewer");v.classList.add("on");$("#vtext").textContent="";$("#vt").textContent="…";$("#vlabel").textContent="";
+ $("#vprev").disabled=$("#vnext").disabled=true;const d=el("div","dots");d.innerHTML="<span></span><span></span><span></span>";$("#vtext").appendChild(d);
+ try{const r=await api({action:"open",bookId:book,pageId:page});vcur=r;$("#vt").textContent=r.title;$("#vlabel").textContent=r.label||"";$("#vtext").textContent=r.text+(r.truncated?"\n\n— "+T("trunc"):"");
+  $("#vlink").href=r.url;$("#vprev").disabled=!r.prevPageId;$("#vnext").disabled=!r.nextPageId;document.querySelector(".vbody").scrollTop=0}
+ catch(e){$("#vtext").textContent=T(e.message==="rate"?"rate":"err")}}
+$("#vprev").onclick=()=>vcur?.prevPageId&&openViewer(vcur.bookId,vcur.prevPageId);$("#vnext").onclick=()=>vcur?.nextPageId&&openViewer(vcur.bookId,vcur.nextPageId);
+$("#vclose").onclick=()=>$("#viewer").classList.remove("on");$("#viewer").onclick=e=>{if(e.target.id==="viewer")$("#viewer").classList.remove("on")};
+document.addEventListener("keydown",e=>{if(e.key==="Escape")$("#viewer").classList.remove("on")});
+const qa=$("#q");qa.addEventListener("input",()=>{qa.style.height="auto";qa.style.height=Math.min(qa.scrollHeight,140)+"px"});
+qa.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();$("#f").requestSubmit()}});
+$("#f").onsubmit=e=>{e.preventDefault();const v=qa.value;qa.value="";qa.style.height="auto";ask(v)};
+applyLang();
+</script>
+</body>
+</html>
