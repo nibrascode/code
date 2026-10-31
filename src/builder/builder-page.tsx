@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState, type DragEvent } from "react";
 import type { Lang } from "@/lib/i18n";
-import { useI18n } from "@/lib/i18n-context";
+import { filesToZip } from "@/workspace/files";
 
 type Kind = "hero" | "text" | "stats" | "cards" | "cta" | "columns" | "footer";
 type Align = "start" | "center";
@@ -430,11 +430,13 @@ function blockHtml(block: Block, accent: string) {
   return `<section style="${style}">${block.title ? `<h2 style="font-size:${look.size}">${esc(block.title)}</h2>` : ""}<p>${esc(block.body)}</p></section>`;
 }
 
-function siteHtml(title: string, pages: SitePage[], lang: Lang, accent: string) {
+function siteHtml(title: string, pages: SitePage[], lang: Lang, accent: string, fileNav?: { href: string; label: string }[]) {
   const paint = safeColor(accent, "#5b4dff");
-  const nav = pages.length > 1
-    ? `<nav class="bar">${pages.map((page) => `<button type="button" data-go="${esc(page.id)}">${esc(page.name)}</button>`).join("")}</nav>`
-    : "";
+  const nav = fileNav && fileNav.length > 1
+    ? `<nav class="bar">${fileNav.map((link) => `<a href="${esc(link.href)}">${esc(link.label)}</a>`).join("")}</nav>`
+    : pages.length > 1
+      ? `<nav class="bar">${pages.map((page) => `<button type="button" data-go="${esc(page.id)}">${esc(page.name)}</button>`).join("")}</nav>`
+      : "";
   const screens = pages.map((page) => `<div class="screen" data-screen="${esc(page.id)}">${page.blocks.map((block) => blockHtml(block, paint)).join("\n")}</div>`).join("\n");
   const first = pages[0]?.id ?? "p1";
   return `<!DOCTYPE html>
@@ -450,7 +452,7 @@ h1{line-height:1.15;margin:0 0 12px}
 h2{margin:0 0 10px}
 p{line-height:1.5;white-space:pre-wrap}
 .bar{display:flex;gap:8px;justify-content:center;padding:14px;background:#fff;position:sticky;top:0}
-.bar button{border:0;background:${paint};color:#fff;border-radius:999px;padding:8px 14px;cursor:pointer}
+.bar button,.bar a{border:0;background:${paint};color:#fff;border-radius:999px;padding:8px 14px;cursor:pointer;text-decoration:none}
 .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:20px;align-items:center}
 .card{min-height:180px;border-radius:24px;background:linear-gradient(145deg,${paint},#7fd3ff)}
 img{width:100%;border-radius:24px;display:block}
@@ -507,12 +509,13 @@ const EXTRA: Record<Lang, {
   saved: string;
   home: string;
   colHint: string;
+  zip: string;
 }> = {
-  az: { pages: "Səhifələr", newPage: "Yeni səhifə", pageName: "Səhifənin adı", delPage: "Səhifəni sil", layers: "Laylar", undo: "Geri al", duplicate: "Kopyala", tone: "Fon", plain: "Ağ", soft: "Yumşaq", dark: "Tünd", size: "Ölçü", space: "Boşluq", color: "Rəng", phone: "Telefon", tablet: "Planşet", desk: "Masaüstü", saved: "Dəyişiklik bu telefonda qalır. Serverə getmir. Bir neçə səhifə bir HTML faylında endirilir.", home: "Ana", colHint: "İki tərəfi || ilə ayır." },
-  en: { pages: "Pages", newPage: "New page", pageName: "Page name", delPage: "Delete page", layers: "Layers", undo: "Undo", duplicate: "Duplicate", tone: "Background", plain: "White", soft: "Soft", dark: "Dark", size: "Size", space: "Space", color: "Color", phone: "Phone", tablet: "Tablet", desk: "Desktop", saved: "Changes stay on this phone. They are not sent to a server. Several pages download as one HTML file.", home: "Home", colHint: "Split the two sides with ||." },
-  tr: { pages: "Sayfalar", newPage: "Yeni sayfa", pageName: "Sayfanın adı", delPage: "Sayfayı sil", layers: "Katmanlar", undo: "Geri al", duplicate: "Kopyala", tone: "Zemin", plain: "Beyaz", soft: "Yumuşak", dark: "Koyu", size: "Ölçü", space: "Boşluk", color: "Renk", phone: "Telefon", tablet: "Tablet", desk: "Masaüstü", saved: "Değişiklik bu telefonda kalır. Sunucuya gitmez. Birkaç sayfa tek HTML dosyasında iner.", home: "Ana", colHint: "İki tarafı || ile ayır." },
-  ar: { pages: "صفحات", newPage: "صفحة جديدة", pageName: "اسم الصفحة", delPage: "احذف الصفحة", layers: "طبقات", undo: "تراجع", duplicate: "انسخ", tone: "الخلفية", plain: "أبيض", soft: "ناعم", dark: "داكن", size: "المقاس", space: "الفراغ", color: "اللون", phone: "هاتف", tablet: "جهاز لوحي", desk: "مكتب", saved: "تبقى التغييرات على هذا الهاتف ولا تُرسل إلى خادم. عدة صفحات تنزل في ملف HTML واحد.", home: "الرئيسية", colHint: "افصل الجانبين بـ ||." },
-  ru: { pages: "Страницы", newPage: "Новая страница", pageName: "Имя страницы", delPage: "Удалить страницу", layers: "Слои", undo: "Назад", duplicate: "Копия", tone: "Фон", plain: "Белый", soft: "Мягкий", dark: "Тёмный", size: "Размер", space: "Отступ", color: "Цвет", phone: "Телефон", tablet: "Планшет", desk: "Компьютер", saved: "Изменения остаются на этом телефоне и не уходят на сервер. Несколько страниц скачиваются одним HTML-файлом.", home: "Главная", colHint: "Две стороны разделите через ||." },
+  az: { pages: "Səhifələr", newPage: "Yeni səhifə", pageName: "Səhifənin adı", delPage: "Səhifəni sil", layers: "Laylar", undo: "Geri al", duplicate: "Kopyala", tone: "Fon", plain: "Ağ", soft: "Yumşaq", dark: "Tünd", size: "Ölçü", space: "Boşluq", color: "Rəng", phone: "Telefon", tablet: "Planşet", desk: "Masaüstü", saved: "Dəyişiklik bu telefonda qalır. Serverə getmir. Bir neçə səhifə bir HTML faylında endirilir.", home: "Ana", colHint: "İki tərəfi || ilə ayır.", zip: "ZIP" },
+  en: { pages: "Pages", newPage: "New page", pageName: "Page name", delPage: "Delete page", layers: "Layers", undo: "Undo", duplicate: "Duplicate", tone: "Background", plain: "White", soft: "Soft", dark: "Dark", size: "Size", space: "Space", color: "Color", phone: "Phone", tablet: "Tablet", desk: "Desktop", saved: "Changes stay on this phone. They are not sent to a server. Several pages download as one HTML file.", home: "Home", colHint: "Split the two sides with ||.", zip: "ZIP" },
+  tr: { pages: "Sayfalar", newPage: "Yeni sayfa", pageName: "Sayfanın adı", delPage: "Sayfayı sil", layers: "Katmanlar", undo: "Geri al", duplicate: "Kopyala", tone: "Zemin", plain: "Beyaz", soft: "Yumuşak", dark: "Koyu", size: "Ölçü", space: "Boşluk", color: "Renk", phone: "Telefon", tablet: "Tablet", desk: "Masaüstü", saved: "Değişiklik bu telefonda kalır. Sunucuya gitmez. Birkaç sayfa tek HTML dosyasında iner.", home: "Ana", colHint: "İki tarafı || ile ayır.", zip: "ZIP" },
+  ar: { pages: "صفحات", newPage: "صفحة جديدة", pageName: "اسم الصفحة", delPage: "احذف الصفحة", layers: "طبقات", undo: "تراجع", duplicate: "انسخ", tone: "الخلفية", plain: "أبيض", soft: "ناعم", dark: "داكن", size: "المقاس", space: "الفراغ", color: "اللون", phone: "هاتف", tablet: "جهاز لوحي", desk: "مكتب", saved: "تبقى التغييرات على هذا الهاتف ولا تُرسل إلى خادم. عدة صفحات تنزل في ملف HTML واحد.", home: "الرئيسية", colHint: "افصل الجانبين بـ ||.", zip: "ZIP" },
+  ru: { pages: "Страницы", newPage: "Новая страница", pageName: "Имя страницы", delPage: "Удалить страницу", layers: "Слои", undo: "Назад", duplicate: "Копия", tone: "Фон", plain: "Белый", soft: "Мягкий", dark: "Тёмный", size: "Размер", space: "Отступ", color: "Цвет", phone: "Телефон", tablet: "Планшет", desk: "Компьютер", saved: "Изменения остаются на этом телефоне и не уходят на сервер. Несколько страниц скачиваются одним HTML-файлом.", home: "Главная", colHint: "Две стороны разделите через ||.", zip: "ZIP" },
 };
 
 function freshSite(lang: Lang): SitePage[] {
@@ -653,15 +656,30 @@ export function BuilderPage() {
     if (!prev.some((item) => item.id === pageId)) setPageId(prev[0]?.id ?? "");
   }
 
-  function download() {
-    const html = siteHtml(site, pages, lang, accent);
-    const blob = new Blob([html], { type: "text/html" });
+  function saveFile(blob: Blob, name: string) {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = "nibras-sayt.html";
+    link.download = name;
     link.click();
     URL.revokeObjectURL(url);
+  }
+
+  function download() {
+    saveFile(new Blob([siteHtml(site, pages, lang, accent)], { type: "text/html" }), "nibras-sayt.html");
+  }
+
+  async function downloadZip() {
+    const names = pages.map((_, index) => (index === 0 ? "index.html" : `sehife-${index + 1}.html`));
+    const fileNav = pages.map((item, index) => ({ href: names[index], label: item.name }));
+    const files = [
+      { name: "index.html", content: siteHtml(site, pages, lang, accent) },
+      ...pages.slice(1).map((item, index) => ({
+        name: names[index + 1],
+        content: siteHtml(item.name, [item], lang, accent, fileNav),
+      })),
+    ];
+    saveFile(await filesToZip(files), "nibras-sayt.zip");
   }
 
   function onDragStart(event: DragEvent, payload: string) {
@@ -690,6 +708,7 @@ export function BuilderPage() {
         <button type="button" onClick={undo}>{extra.undo}</button>
         <button type="button" onClick={() => setPreview((on) => !on)}>{preview ? copy.edit : copy.preview}</button>
         <button type="button" className="nb-go" onClick={download}>{copy.download}</button>
+        <button type="button" onClick={() => void downloadZip()}>{extra.zip}</button>
       </header>
       <p className="nb-lead">{copy.lead}</p>
       <div className={preview ? "nb-frame is-preview" : "nb-frame"}>
