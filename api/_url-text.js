@@ -1,8 +1,8 @@
+// Served at /api/url-text (rewritten to /api/qr?urltext=1 — Hobby plan 12-function limit).
 // URL → readable text for the "URL to PDF" tool. Fetches one public HTML page
 // server-side and returns its title + main text. No JS execution, no images/CSS.
 import dns from "node:dns/promises";
 import net from "node:net";
-import { watch5xx } from "./_ops.js";
 
 const MAX_BYTES = 3 * 1024 * 1024;
 const TIMEOUT = 10000;
@@ -54,7 +54,7 @@ export function htmlToText(html) {
   return { title, text };
 }
 
-async function handler(req, res) {
+export async function urlTextHandler(req, res) {
   const raw = String(req.query?.url ?? "").trim().slice(0, 2000);
   let u = await safeUrl(raw);
   if (!u) { res.status(400).json({ error: "bad-url" }); return; }
@@ -84,4 +84,3 @@ async function handler(req, res) {
   res.status(200).json({ url: u.href, title: out.title.slice(0, 300), text: out.text.slice(0, 400000) });
 }
 
-export default watch5xx("url-text", handler);

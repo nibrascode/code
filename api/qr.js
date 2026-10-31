@@ -1,5 +1,6 @@
 import QRCode from "qrcode";
 import { watch5xx } from "./_ops.js";
+import { urlTextHandler } from "./_url-text.js";
 
 function textOf(req) {
   const direct = req.query?.text;
@@ -13,6 +14,7 @@ function textOf(req) {
 }
 
 async function handler(req, res) {
+  if (req.query?.urltext) return urlTextHandler(req, res);
   const text = textOf(req).slice(0, 500);
   if (!text) {
     res.status(400).end("text");

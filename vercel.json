@@ -554,6 +554,10 @@
       "destination": "/test/index.html"
     },
     {
+      "source": "/api/url-text",
+      "destination": "/api/qr?urltext=1"
+    },
+    {
       "source": "/api/religious-search",
       "destination": "/api/error-help?religious=1"
     },
