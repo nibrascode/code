@@ -285,7 +285,7 @@ async function fatwaBest(query) {
     try {
       const a = await openPage(it.bookId, it.pageId);
       let b = null;
-      if (a.nextPageId) try { b = await openPage(it.bookId, a.nextPageId); } catch {}
+      if (a.nextPageId) for (let k = 0; k < 2 && !b; k++) try { b = await openPage(it.bookId, a.nextPageId); } catch {}
       return { it, rank, a, b };
     } catch { return null; }
   }));
@@ -304,11 +304,11 @@ async function fatwaBest(query) {
     return { ...f, heading: query, item: it };
   }
   let { seg, o } = best;
-  let window = o.b ? joinP(pageBody(o.a), pageBody(o.b)) : pageBody(o.a), next = o.b?.nextPageId, pages = o.b ? 2 : 1;
+  let window = o.b ? joinP(pageBody(o.a), pageBody(o.b)) : pageBody(o.a), next = o.b ? o.b.nextPageId : o.a.nextPageId, pages = o.b ? 2 : 1;
   const qi = window.indexOf(seg.question);
   const until = Date.now() + 15000;
-  while (seg.open && o.b && next && pages < 8 && until - Date.now() > 1500) {
-    let p; try { p = await openPage(o.it.bookId, next); } catch { break; }
+  while (seg.open && next && pages < 8 && until - Date.now() > 1500) {
+    let p; try { p = await openPage(o.it.bookId, next); } catch { try { p = await openPage(o.it.bookId, next); } catch { break; } }
     const pb = pageBody(p), first = pb.split("\n")[0].trim();
     if (/[.!؟?»)]\s*$/.test(window.trim()) && first.length < 90 && !/[.،,:؟?]$/.test(first) && (HEADLINE.test(first) || /^[\d٠-٩]+\s*[)/\-–.]/.test(first) || QLINE.test(first) || pb.split("\n").length > 1)) break;
     window = joinP(window, pb); next = p.nextPageId; pages++;
