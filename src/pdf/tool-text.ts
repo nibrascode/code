@@ -1,8 +1,13 @@
 // Tool names and one-line descriptions, taken from the Nibras PDF app (5 languages).
-export const TOOL_IDS = ["write-pdf","merge","split","compress","image-pdf","pdf-image","rotate","protect","watermark","pages","scan","sign","ocr","pdf-ocr","pdf-word","preview","batch","extract-pages","word-pdf","page-numbers","unlock","crop","grayscale","excel-pdf","redact","invoice","pdf-excel","ppt-pdf","pdf-ppt"] as const;
+export const TOOL_IDS = ["write-pdf","merge","split","compress","image-pdf","pdf-image","rotate","protect","watermark","pages","scan","sign","ocr","pdf-ocr","pdf-word","preview","batch","extract-pages","word-pdf","page-numbers","unlock","crop","grayscale","excel-pdf","redact","invoice","pdf-excel","ppt-pdf","pdf-ppt","flatten","metadata","compare","excel-csv","csv-excel"] as const;
 export type ToolId = (typeof TOOL_IDS)[number];
 export const TOOL_TEXT: Record<"az" | "en" | "tr" | "ar" | "ru", Record<ToolId, { title: string; description: string }>> = {
   "az": {
+    "flatten": { "title": "PDF-i sabitlə (flatten)", "description": "Form sahələrini dəyişməz et" },
+    "metadata": { "title": "PDF xassələri (metadata)", "description": "Başlıq, müəllif və açar sözlərə bax və dəyiş" },
+    "compare": { "title": "PDF-ləri müqayisə et", "description": "İki PDF-in mətn fərqini tap" },
+    "excel-csv": { "title": "Excel-dən CSV", "description": "XLSX vərəqini CSV faylına çevir" },
+    "csv-excel": { "title": "CSV-dən Excel", "description": "CSV cədvəlini XLSX et" },
     "pdf-excel": { "title": "PDF-dən Excel", "description": "PDF cədvəlini XLSX faylına çevir" },
     "pdf-ppt": { "title": "PDF-dən PowerPoint", "description": "PDF səhifələrini PPTX slaydlarına çevir" },
     "ppt-pdf": { "title": "PowerPoint-dən PDF", "description": "PPTX slaydlarını PDF et" },
@@ -112,6 +117,11 @@ export const TOOL_TEXT: Record<"az" | "en" | "tr" | "ar" | "ru", Record<ToolId, 
     }
   },
   "en": {
+    "flatten": { "title": "Flatten PDF", "description": "Make form fields fixed and uneditable" },
+    "metadata": { "title": "PDF metadata", "description": "View and edit title, author and keywords" },
+    "compare": { "title": "Compare PDFs", "description": "Find text differences between two PDFs" },
+    "excel-csv": { "title": "Excel to CSV", "description": "Turn an XLSX sheet into a CSV file" },
+    "csv-excel": { "title": "CSV to Excel", "description": "Turn a CSV table into XLSX" },
     "pdf-excel": { "title": "PDF to Excel", "description": "Turn PDF tables into an XLSX file" },
     "pdf-ppt": { "title": "PDF to PowerPoint", "description": "Turn PDF pages into PPTX slides" },
     "ppt-pdf": { "title": "PowerPoint to PDF", "description": "Turn PPTX slides into a PDF" },
@@ -221,6 +231,11 @@ export const TOOL_TEXT: Record<"az" | "en" | "tr" | "ar" | "ru", Record<ToolId, 
     }
   },
   "tr": {
+    "flatten": { "title": "PDF düzleştir", "description": "Form alanlarını sabit ve düzenlenemez yap" },
+    "metadata": { "title": "PDF meta verisi", "description": "Başlık, yazar ve anahtar kelimeleri gör ve değiştir" },
+    "compare": { "title": "PDF karşılaştır", "description": "İki PDF arasındaki metin farkını bul" },
+    "excel-csv": { "title": "Excel'den CSV", "description": "XLSX sayfasını CSV dosyasına çevir" },
+    "csv-excel": { "title": "CSV'den Excel", "description": "CSV tablosunu XLSX yap" },
     "pdf-excel": { "title": "PDF'ten Excel", "description": "PDF tablolarını XLSX dosyasına çevirin" },
     "pdf-ppt": { "title": "PDF'ten PowerPoint", "description": "PDF sayfalarını PPTX slaytlarına çevirin" },
     "ppt-pdf": { "title": "PowerPoint'ten PDF", "description": "PPTX slaytlarını PDF yapın" },
@@ -330,6 +345,11 @@ export const TOOL_TEXT: Record<"az" | "en" | "tr" | "ar" | "ru", Record<ToolId, 
     }
   },
   "ru": {
+    "flatten": { "title": "Сделать PDF плоским", "description": "Закрепить поля форм без возможности правки" },
+    "metadata": { "title": "Метаданные PDF", "description": "Просмотр и правка заголовка, автора и ключевых слов" },
+    "compare": { "title": "Сравнить PDF", "description": "Найти различия текста двух PDF" },
+    "excel-csv": { "title": "Excel в CSV", "description": "Перевести лист XLSX в файл CSV" },
+    "csv-excel": { "title": "CSV в Excel", "description": "Перевести таблицу CSV в XLSX" },
     "pdf-excel": { "title": "PDF в Excel", "description": "Превратите таблицы PDF в файл XLSX" },
     "pdf-ppt": { "title": "PDF в PowerPoint", "description": "Превратите страницы PDF в слайды PPTX" },
     "ppt-pdf": { "title": "PowerPoint в PDF", "description": "Превратите слайды PPTX в PDF" },
@@ -439,6 +459,11 @@ export const TOOL_TEXT: Record<"az" | "en" | "tr" | "ar" | "ru", Record<ToolId, 
     }
   },
   "ar": {
+    "flatten": { "title": "تسطيح PDF", "description": "اجعل حقول النماذج ثابتة وغير قابلة للتعديل" },
+    "metadata": { "title": "بيانات PDF الوصفية", "description": "اعرض العنوان والمؤلف والكلمات المفتاحية وعدّلها" },
+    "compare": { "title": "مقارنة ملفات PDF", "description": "اعثر على فروق النص بين ملفي PDF" },
+    "excel-csv": { "title": "من Excel إلى CSV", "description": "حوّل ورقة XLSX إلى ملف CSV" },
+    "csv-excel": { "title": "من CSV إلى Excel", "description": "حوّل جدول CSV إلى XLSX" },
     "pdf-excel": { "title": "من PDF إلى Excel", "description": "حوّل جداول PDF إلى ملف XLSX" },
     "pdf-ppt": { "title": "من PDF إلى PowerPoint", "description": "حوّل صفحات PDF إلى شرائح PPTX" },
     "ppt-pdf": { "title": "من PowerPoint إلى PDF", "description": "حوّل شرائح PPTX إلى PDF" },

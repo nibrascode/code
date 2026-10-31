@@ -59,6 +59,11 @@ const NEXT: Partial<Record<ToolId, ToolId[]>> = {
   "ppt-pdf": ["word-pdf", "compress", "merge"],
   redact: ["protect", "sign", "watermark"],
   invoice: ["sign", "protect", "merge"],
+  flatten: ["sign", "protect", "compress"],
+  metadata: ["protect", "compress", "page-numbers"],
+  compare: ["pdf-word", "pdf-ocr", "merge"],
+  "excel-csv": ["csv-excel", "excel-pdf", "pdf-excel"],
+  "csv-excel": ["excel-csv", "excel-pdf", "pdf-excel"],
 };
 
 export function PdfPage({ tool }: { tool: ToolId | null }) {

@@ -5,7 +5,8 @@ import { useNavigate } from "@tanstack/react-router";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowLeft, ArrowRight, Camera, Check, FileText, FileType2, Files, Image as ImageIcon, Layers, Lock, Minimize2,
-  PenLine, RotateCw, ScanText, Scissors, Droplet, ListOrdered, Eye, FilePlus2, FileOutput, FileImage, ScanLine, X, Hash, Unlock, Crop, Contrast, Table2, EyeOff, Receipt, Sheet, Presentation } from "lucide-react";
+  PenLine, RotateCw, ScanText, Scissors, Droplet, ListOrdered, Eye, FilePlus2, FileOutput, FileImage, ScanLine, X, Hash, Unlock, Crop, Contrast, Table2, EyeOff, Receipt, Sheet, Presentation, Layers2, Info, GitCompare, FileSpreadsheet } from "lucide-react";
+import { isMoreTool, MoreOptions, runMore } from "./more";
 import { zipSync } from "fflate";
 import type { Lang } from "@/lib/i18n";
 import { COPY, type Dict } from "./copy";
@@ -27,6 +28,7 @@ const ICONS: Record<ToolId, typeof FileText> = {
   rotate: RotateCw, protect: Lock, watermark: Droplet, pages: ListOrdered, scan: ScanLine, sign: PenLine, ocr: ScanText,
   "pdf-ocr": FileType2, "pdf-word": FileOutput, preview: Eye, batch: Layers, "extract-pages": Check, "word-pdf": FilePlus2, "page-numbers": Hash,
   unlock: Unlock, crop: Crop, grayscale: Contrast, "excel-pdf": Table2, redact: EyeOff, invoice: Receipt, "pdf-excel": Sheet, "ppt-pdf": Presentation, "pdf-ppt": Presentation,
+  flatten: Layers2, metadata: Info, compare: GitCompare, "excel-csv": FileSpreadsheet, "csv-excel": FileSpreadsheet,
 };
 
 type Kind = "pdf" | "pdfs" | "images" | "docx" | "sheet" | "pptx" | "none";
@@ -35,6 +37,7 @@ const KIND: Record<ToolId, Kind> = {
   protect: "pdf", watermark: "pdf", pages: "pdf", scan: "images", sign: "pdf", ocr: "images", "pdf-ocr": "pdf", "pdf-word": "pdf",
   preview: "pdf", batch: "pdfs", "extract-pages": "pdf", "word-pdf": "docx", "page-numbers": "pdf",
   unlock: "pdf", crop: "pdf", grayscale: "pdf", "excel-pdf": "sheet", redact: "pdf", invoice: "none", "pdf-excel": "pdf", "ppt-pdf": "pptx", "pdf-ppt": "pdf",
+  flatten: "pdf", metadata: "pdf", compare: "pdfs", "excel-csv": "sheet", "csv-excel": "sheet",
 };
 
 type Item = { id: number; file: File; name: string; bytes?: Uint8Array; pages?: number; locked?: boolean; wasLocked?: boolean; bad?: boolean };
@@ -47,8 +50,8 @@ const WM_POS: { id: WatermarkPosition; s: string }[] = [
 ];
 
 const GROUPS: { id: string; tools: ToolId[]; label: Record<Lang, string> }[] = [
-  { id: "organize", tools: ["merge", "split", "pages", "extract-pages", "rotate", "page-numbers", "crop", "batch"], label: { az: "Səhifələri idarə et", en: "Organize", tr: "Sayfaları düzenle", ar: "تنظيم الصفحات", ru: "Страницы и файлы" } },
-  { id: "convert", tools: ["pdf-image", "pdf-word", "word-pdf", "pdf-excel", "excel-pdf", "ppt-pdf", "pdf-ppt", "pdf-ocr", "ocr", "grayscale", "preview"], label: { az: "Çevir və oxu", en: "Convert & read", tr: "Dönüştür ve oku", ar: "تحويل وقراءة", ru: "Конвертация и чтение" } },
+  { id: "organize", tools: ["merge", "split", "pages", "extract-pages", "rotate", "page-numbers", "crop", "flatten", "batch"], label: { az: "Səhifələri idarə et", en: "Organize", tr: "Sayfaları düzenle", ar: "تنظيم الصفحات", ru: "Страницы и файлы" } },
+  { id: "convert", tools: ["pdf-image", "pdf-word", "word-pdf", "pdf-excel", "excel-pdf", "ppt-pdf", "pdf-ppt", "excel-csv", "csv-excel", "pdf-ocr", "ocr", "grayscale", "compare", "metadata", "preview"], label: { az: "Çevir və oxu", en: "Convert & read", tr: "Dönüştür ve oku", ar: "تحويل وقراءة", ru: "Конвертация и чтение" } },
   { id: "create", tools: ["write-pdf", "image-pdf", "scan", "invoice"], label: { az: "Hazırla", en: "Create", tr: "Oluştur", ar: "إنشاء", ru: "Создание" } },
   { id: "secure", tools: ["compress", "protect", "unlock", "redact", "watermark", "sign"], label: { az: "Optimallaşdır və qoru", en: "Optimize & protect", tr: "Optimize et ve koru", ar: "تحسين وحماية", ru: "Сжатие и защита" } },
 ];
@@ -534,6 +537,12 @@ function Workspace({ tool, lang, t, title, desc }: { tool: ToolId; lang: Lang; t
         case "preview":
           need();
           break;
+        case "flatten": case "metadata": case "compare": case "excel-csv": case "csv-excel": {
+          if (tool === "compare") need(2); else if (kind === "pdf") need();
+          if (kind === "sheet" && !sheets?.length) throw new Error(t.errNoFile);
+          if (isMoreTool(tool)) res.push(...(await runMore(tool, lang, items, sheets, progress(t.working))));
+          break;
+        }
         case "unlock": case "crop": case "grayscale": case "excel-pdf": case "redact": case "invoice": {
           if (kind === "pdf") need();
           const o = await runExtra(tool, lang, xs, f, sheets, progress(t.working), t.errNoFile, t.errBadRange);
@@ -695,6 +704,7 @@ function Workspace({ tool, lang, t, title, desc }: { tool: ToolId; lang: Lang; t
             <div><Label>{t.mode}</Label><Seg name="rotation" value={String(rot)} onChange={(v) => setRot(Number(v))} options={[{ id: "270", label: t.rotLeft }, { id: "90", label: t.rotRight }, { id: "180", label: t.rot180 }]} /></div>
           ) : null}
           <ExtraOptions tool={tool} lang={lang} x={xs} setX={setXs} pdf={firstBytes} pages={first?.pages ?? 0} sheets={sheets} t={t} />
+          <MoreOptions tool={tool} lang={lang} pdf={firstBytes} sheetCount={sheets?.length ?? 0} />
           {tool === "page-numbers" ? (() => {
             const nt = NUM_T[lang];
             const total = first?.pages ?? 0;

@@ -52,6 +52,41 @@ const FAQ_TITLE: Record<Lang, string> = {
 };
 
 const INTENT: Partial<Record<ToolId, Record<Lang, { title: string; h1: string; description: string }>>> = {
+  "flatten": {
+    az: { title: "PDF-i sabitlə (flatten) — pulsuz", h1: "PDF form sahələrini sabitlə", description: "Doldurulmuş formu dəyişməz PDF et; fayl serverə getmir" },
+    en: { title: "Flatten PDF — free", h1: "Flatten a PDF form", description: "Make filled form fields permanent; the file stays in your browser" },
+    tr: { title: "PDF düzleştir — ücretsiz", h1: "PDF formunu düzleştir", description: "Doldurulmuş formu düzenlenemez yapın; dosya tarayıcıda kalır" },
+    ar: { title: "تسطيح PDF — مجاناً", h1: "تسطيح نموذج PDF", description: "اجعل حقول النموذج المعبأة ثابتة؛ يبقى الملف في متصفحك" },
+    ru: { title: "Сделать PDF плоским — бесплатно", h1: "Закрепить форму PDF", description: "Сделайте заполненные поля неизменяемыми; файл остаётся в браузере" },
+  },
+  "metadata": {
+    az: { title: "PDF metadata dəyiş — pulsuz", h1: "PDF xassələrinə bax və dəyiş", description: "Başlıq, müəllif, mövzu və açar sözləri brauzerdə dəyiş" },
+    en: { title: "Edit PDF metadata — free", h1: "View and edit PDF metadata", description: "Change title, author, subject and keywords in your browser" },
+    tr: { title: "PDF meta verisi düzenle — ücretsiz", h1: "PDF meta verisini gör ve düzenle", description: "Başlık, yazar, konu ve anahtar kelimeleri tarayıcıda değiştirin" },
+    ar: { title: "تعديل بيانات PDF الوصفية — مجاناً", h1: "عرض وتعديل بيانات PDF", description: "غيّر العنوان والمؤلف والموضوع والكلمات المفتاحية في المتصفح" },
+    ru: { title: "Редактировать метаданные PDF — бесплатно", h1: "Метаданные PDF", description: "Меняйте заголовок, автора, тему и ключевые слова в браузере" },
+  },
+  "compare": {
+    az: { title: "PDF müqayisə et — pulsuz", h1: "İki PDF-i müqayisə et", description: "İki PDF-in mətnindəki əlavə və silinən sətirləri tap" },
+    en: { title: "Compare PDF files — free", h1: "Compare two PDFs", description: "See added and removed lines between two PDFs' text" },
+    tr: { title: "PDF karşılaştır — ücretsiz", h1: "İki PDF'i karşılaştır", description: "İki PDF metnindeki eklenen ve silinen satırları görün" },
+    ar: { title: "مقارنة PDF — مجاناً", h1: "قارن ملفي PDF", description: "اعرف الأسطر المضافة والمحذوفة بين نصي ملفين" },
+    ru: { title: "Сравнить PDF — бесплатно", h1: "Сравнить два PDF", description: "Найдите добавленные и удалённые строки в тексте двух PDF" },
+  },
+  "excel-csv": {
+    az: { title: "Excel-dən CSV — pulsuz", h1: "XLSX-i CSV-yə çevir", description: "Hər vərəq UTF-8 CSV olur; fayl serverə getmir" },
+    en: { title: "Excel to CSV — free", h1: "Convert XLSX to CSV", description: "Each sheet becomes a UTF-8 CSV; the file stays in your browser" },
+    tr: { title: "Excel'den CSV — ücretsiz", h1: "XLSX'i CSV'ye dönüştür", description: "Her sayfa UTF-8 CSV olur; dosya tarayıcıda kalır" },
+    ar: { title: "من Excel إلى CSV — مجاناً", h1: "تحويل XLSX إلى CSV", description: "كل ورقة تصبح CSV بترميز UTF-8؛ يبقى الملف في متصفحك" },
+    ru: { title: "Excel в CSV — бесплатно", h1: "Конвертировать XLSX в CSV", description: "Каждый лист — CSV в UTF-8; файл остаётся в браузере" },
+  },
+  "csv-excel": {
+    az: { title: "CSV-dən Excel — pulsuz", h1: "CSV-ni XLSX-ə çevir", description: "CSV cədvəlini Excel faylına çevir; fayl serverə getmir" },
+    en: { title: "CSV to Excel — free", h1: "Convert CSV to XLSX", description: "Turn a CSV table into an Excel file in your browser" },
+    tr: { title: "CSV'den Excel — ücretsiz", h1: "CSV'yi XLSX'e dönüştür", description: "CSV tablosunu tarayıcıda Excel dosyasına çevirin" },
+    ar: { title: "من CSV إلى Excel — مجاناً", h1: "تحويل CSV إلى XLSX", description: "حوّل جدول CSV إلى ملف Excel في المتصفح" },
+    ru: { title: "CSV в Excel — бесплатно", h1: "Конвертировать CSV в XLSX", description: "Превратите таблицу CSV в файл Excel в браузере" },
+  },
   "unlock": {
     az: { title: "PDF parolunu aç — pulsuz", h1: "PDF parolunu aç", description: "Parolu bilirsinizsə, PDF-in parolsuz nüsxəsini yükləyin" },
     en: { title: "Unlock PDF — free", h1: "Unlock a PDF", description: "If you know the password, download a copy without it" },
