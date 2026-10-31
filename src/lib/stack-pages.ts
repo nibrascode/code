@@ -57,6 +57,12 @@ function titles(name: string) {
   };
 }
 
+type CodePart = {
+  lead: Record<Lang, string>;
+  code: string;
+  after: Record<Lang, readonly string[]>;
+};
+
 type Copy = {
   what: Record<Lang, string>;
   uses: Record<Lang, string>;
@@ -67,7 +73,9 @@ type Copy = {
   ideas: Record<Lang, string>;
   ideaList: Record<Lang, readonly string[]>;
   sample: Record<Lang, string>;
-  code: string;
+  code?: string;
+  codeAfter?: Record<Lang, readonly string[]>;
+  codeParts?: readonly CodePart[];
   faq: Record<Lang, readonly string[]>;
 };
 
@@ -89,7 +97,14 @@ export function topic(
       { id: "hard", title: head.hard[lang], blocks: [{ paragraphs: [copy.hard[lang]] }] },
       { id: "balance", title: head.balance[lang], blocks: [{ paragraphs: [copy.balance[lang]] }] },
       { id: "ideas", title: head.ideas[lang], blocks: [{ paragraphs: [copy.ideas[lang]], list: copy.ideaList[lang] }] },
-      { id: "sample", title: head.sample[lang], blocks: [{ paragraphs: [copy.sample[lang]], code: copy.code }] },
+      { id: "sample", title: head.sample[lang], blocks: copy.codeParts
+          ? copy.codeParts.map((part, i) => ({
+              paragraphs: i === 0 ? [copy.sample[lang], part.lead[lang]] : [part.lead[lang]],
+              code: part.code,
+              after: part.after[lang],
+            }))
+          : [{ paragraphs: [copy.sample[lang]], code: copy.code, after: copy.codeAfter?.[lang] }],
+      },
       { id: "faq", title: head.faq[lang], blocks: [{ list: copy.faq[lang] }] },
     ];
   }

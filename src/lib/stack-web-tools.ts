@@ -90,28 +90,101 @@ export const STACK_WEB_TOOLS: readonly StackPage[] = [
         "دالة تأخذ فهرساً عشوائياً بلا انحياز، والحلقة التي تبني كلمة المرور:",
         "Функция, берущая случайный индекс без смещения, и цикл, собирающий пароль:",
       ),
-      code: `function randomIndex(max) {
-  // largest multiple of max below 2^32 -> no modulo bias
+      codeParts: [
+        {
+          lead: t(
+            "1. Meylsiz təsadüfi indeks:",
+            "1. A random index without bias:",
+            "1. Yanlılıksız rastgele indeks:",
+            "1. فهرس عشوائي بلا انحياز:",
+            "1. Случайный индекс без смещения:",
+          ),
+          code: `function randomIndex(max) {
   const limit = Math.floor(0x100000000 / max) * max;
   const buf = new Uint32Array(1);
   do { crypto.getRandomValues(buf); } while (buf[0] >= limit);
   return buf[0] % max;
-}
-
-const SETS = {
+}`,
+          after: lines(
+            ["Bu funksiya 0 ilə max-1 arası təsadüfi indeks verir.", "limit — 2^32-dən kiçik, max-a tam bölünən ən böyük ədəddir.", "crypto.getRandomValues buf-a kriptoqrafik təsadüfi ədəd yazır.", "Ədəd limit-dən böyükdürsə atılır və yenisi götürülür. Belə olanda heç bir indeks digərindən tez-tez çıxmır.", "Sonda % max ədədi 0…max-1 aralığına salır."],
+            ["This function returns a random index from 0 to max-1.", "limit is the largest number below 2^32 that max divides evenly.", "crypto.getRandomValues writes a cryptographic random number into buf.", "If the number is at or above limit, it is thrown away and a new one is taken. That way no index comes up more often than another.", "At the end, % max puts the number in the 0…max-1 range."],
+            ["Bu fonksiyon 0 ile max-1 arası rastgele bir indeks döndürür.", "limit, 2^32'den küçük ve max'a tam bölünen en büyük sayıdır.", "crypto.getRandomValues buf'a kriptografik rastgele sayı yazar.", "Sayı limit'e eşit veya büyükse atılır ve yenisi alınır. Böylece hiçbir indeks diğerinden sık çıkmaz.", "Sonda % max sayıyı 0…max-1 aralığına sokar."],
+            ["هذه الدالة تعيد فهرساً عشوائياً من 0 إلى max-1.", "limit هو أكبر عدد أقل من 2^32 يقبل القسمة على max.", "crypto.getRandomValues يكتب عدداً عشوائياً تشفيرياً في buf.", "إذا كان العدد أكبر من limit أو يساويه يُرمى ويؤخذ غيره. هكذا لا يظهر فهرس أكثر من غيره.", "في النهاية % max يضع العدد بين 0 و max-1."],
+            ["Эта функция возвращает случайный индекс от 0 до max-1.", "limit — самое большое число меньше 2^32, которое делится на max без остатка.", "crypto.getRandomValues записывает в buf криптографическое случайное число.", "Если число больше или равно limit, оно отбрасывается и берётся новое. Так ни один индекс не выпадает чаще других.", "В конце % max переводит число в диапазон 0…max-1."],
+          ),
+        },
+        {
+          lead: t(
+            "2. Simvol dəstləri:",
+            "2. Character sets:",
+            "2. Karakter setleri:",
+            "2. مجموعات الأحرف:",
+            "2. Наборы символов:",
+          ),
+          code: `const SETS = {
   lower: "abcdefghijklmnopqrstuvwxyz",
   upper: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
   digits: "0123456789",
   symbols: "!@#$%^&*()-_=+[]{};:,.?",
-};
-
-function makePassword(length, chosen) {
+};`,
+          after: lines(
+            ["Bu obyekt dörd simvol hovuzu saxlayır: kiçik hərf, böyük hərf, rəqəm, simvol.", "İstifadəçi checkbox ilə hansını seçirsə, şifrə yalnız o hovuzlardan götürülür.", "Hovuz böyüdükcə hər simvolun ehtimalı çoxalır və şifrəni tapmaq çətinləşir."],
+            ["This object holds four character pools: lowercase, uppercase, digits, symbols.", "Whichever ones the user ticks, the password is drawn only from those pools.", "A bigger pool gives each character more options, so the password is harder to guess."],
+            ["Bu nesne dört karakter havuzu tutar: küçük harf, büyük harf, rakam, sembol.", "Kullanıcı hangi kutuları işaretlerse şifre yalnızca o havuzlardan alınır.", "Havuz büyüdükçe her karakterin seçeneği artar ve şifreyi tahmin etmek zorlaşır."],
+            ["هذا الكائن يحفظ أربع مجموعات: أحرف صغيرة، كبيرة، أرقام، رموز.", "ما يختاره المستخدم بمربعات الاختيار هو فقط ما تُؤخذ منه كلمة المرور.", "كلما كبرت المجموعة زادت خيارات كل حرف وصعب تخمين كلمة المرور."],
+            ["Этот объект хранит четыре набора: строчные, заглавные, цифры, символы.", "Пароль берётся только из тех наборов, которые пользователь отметил.", "Чем больше набор, тем больше вариантов у каждого символа и тем труднее угадать пароль."],
+          ),
+        },
+        {
+          lead: t(
+            "3. Şifrəni yığan dövr:",
+            "3. The loop that builds the password:",
+            "3. Şifreyi dizen döngü:",
+            "3. الحلقة التي تبني كلمة المرور:",
+            "3. Цикл, собирающий пароль:",
+          ),
+          code: `function makePassword(length, chosen) {
   const pool = chosen.map((k) => SETS[k]).join("");
   if (!pool) throw new Error("Choose at least one set");
   let out = "";
   for (let i = 0; i < length; i++) out += pool[randomIndex(pool.length)];
   return out;
 }`,
+          after: lines(
+            ["chosen — seçilmiş dəstlərin adlarıdır, məsələn [\"lower\", \"digits\"]. pool onların simvollarını bir sətirdə birləşdirir.", "Heç nə seçilməyibsə funksiya xəta verir və boş şifrə çıxmır.", "Dövr length dəfə işləyir. Hər dəfə randomIndex hovuzdan bir simvol seçir və out-un sonuna əlavə edir.", "Nəticə: ekranda göstərilən hazır şifrə sətri, məsələn k7#Qm2…"],
+            ["chosen is the list of picked set names, for example [\"lower\", \"digits\"]. pool joins their characters into one string.", "If nothing is picked, the function throws an error instead of returning an empty password.", "The loop runs length times. Each time randomIndex picks one character from the pool and adds it to the end of out.", "Result: the finished password string shown on screen, for example k7#Qm2…"],
+            ["chosen, seçilen set adlarıdır, örneğin [\"lower\", \"digits\"]. pool bunların karakterlerini tek bir metinde birleştirir.", "Hiçbir şey seçilmezse fonksiyon hata verir, boş şifre dönmez.", "Döngü length kez çalışır. Her seferinde randomIndex havuzdan bir karakter seçer ve out'un sonuna ekler.", "Sonuç: ekranda gösterilen hazır şifre metni, örneğin k7#Qm2…"],
+            ["chosen هي أسماء المجموعات المختارة، مثل [\"lower\", \"digits\"]. pool يجمع أحرفها في نص واحد.", "إذا لم يُختر شيء ترمي الدالة خطأ بدل إعادة كلمة مرور فارغة.", "الحلقة تعمل length مرة. في كل مرة يختار randomIndex حرفاً من المجموعة ويضيفه إلى نهاية out.", "النتيجة: نص كلمة المرور الجاهز الذي يظهر على الشاشة، مثل k7#Qm2…"],
+            ["chosen — имена выбранных наборов, например [\"lower\", \"digits\"]. pool склеивает их символы в одну строку.", "Если ничего не выбрано, функция бросает ошибку, а не возвращает пустой пароль.", "Цикл выполняется length раз. Каждый раз randomIndex берёт один символ из набора и добавляет его в конец out.", "Результат: готовая строка пароля на экране, например k7#Qm2…"],
+          ),
+        },
+        {
+          lead: t(
+            "4. Hər dəstdən ən az bir simvol və qarışdırma:",
+            "4. At least one character from each set, then a shuffle:",
+            "4. Her setten en az bir karakter ve karıştırma:",
+            "4. حرف واحد على الأقل من كل مجموعة ثم الخلط:",
+            "4. Хотя бы один символ из каждого набора и перемешивание:",
+          ),
+          code: `function makeStrongPassword(length, chosen) {
+  const chars = chosen.map((k) => SETS[k][randomIndex(SETS[k].length)]);
+  const pool = chosen.map((k) => SETS[k]).join("");
+  while (chars.length < length) chars.push(pool[randomIndex(pool.length)]);
+  for (let i = chars.length - 1; i > 0; i--) {
+    const j = randomIndex(i + 1);
+    [chars[i], chars[j]] = [chars[j], chars[i]];
+  }
+  return chars.join("");
+}`,
+          after: lines(
+            ["Birinci sətir hər seçilmiş dəstdən bir məcburi simvol götürür. Belə ki rəqəm seçilibsə, şifrədə mütləq rəqəm olur.", "while qalan yerləri ümumi hovuzdan doldurur.", "for dövrü Fisher–Yates qarışdırmasıdır: məcburi simvollar həmişə əvvəldə qalmasın deyə yerləri təsadüfi dəyişir.", "Nəticə: hər seçilmiş növü olan, lakin sırası təxmin edilməyən şifrə."],
+            ["The first line takes one required character from each picked set. So if digits are picked, the password always has a digit.", "while fills the remaining places from the combined pool.", "The for loop is a Fisher–Yates shuffle: it swaps places at random so the required characters do not always sit at the start.", "Result: a password with every picked type, in an order nobody can guess."],
+            ["İlk satır her seçilen setten bir zorunlu karakter alır. Rakam seçildiyse şifrede mutlaka rakam olur.", "while kalan yerleri ortak havuzdan doldurur.", "for döngüsü Fisher–Yates karıştırmasıdır: zorunlu karakterler hep başta kalmasın diye yerleri rastgele değiştirir.", "Sonuç: seçilen her türü içeren ama sırası tahmin edilemeyen bir şifre."],
+            ["السطر الأول يأخذ حرفاً إلزامياً من كل مجموعة مختارة. فإذا اختيرت الأرقام فستحتوي كلمة المرور رقماً دائماً.", "while يملأ الأماكن الباقية من المجموعة المشتركة.", "حلقة for هي خلط Fisher–Yates: تبدّل الأماكن عشوائياً كي لا تبقى الأحرف الإلزامية في البداية دائماً.", "النتيجة: كلمة مرور فيها كل نوع مختار، بترتيب لا يمكن تخمينه."],
+            ["Первая строка берёт по одному обязательному символу из каждого выбранного набора. Если выбраны цифры, в пароле точно будет цифра.", "while заполняет остальные места из общего набора.", "Цикл for — перемешивание Фишера–Йейтса: он случайно меняет места, чтобы обязательные символы не стояли всегда в начале.", "Результат: пароль со всеми выбранными типами в непредсказуемом порядке."],
+          ),
+        },
+      ],
       faq: lines(
         ["Math.random ilə olmaz? Şifrə üçün olmaz. Onun nəticəsi kriptoqrafik deyil və proqnozlaşdırıla bilər.", "Şifrə serverə gedir? Xeyr. Hamısı brauzerdə hesablanır və heç yerdə saxlanmır.", "Neçə simvol yaxşıdır? Ən azı 16. Uzunluq simvol növündən daha çox kömək edir.", "Hazır alət haradadır? nibrascode.com/tools/password səhifəsində."],
         ["Can I use Math.random? Not for passwords. Its output is not cryptographic and can be predicted.", "Is the password sent to a server? No. It is computed in the browser and stored nowhere.", "How many characters is good? At least 16. Length helps more than character types.", "Where is the finished tool? On nibrascode.com/tools/password."],
@@ -209,29 +282,90 @@ function makePassword(length, chosen) {
         "استدعاء المكتبة والرسم على canvas ووضع رابط PNG:",
         "Вызов библиотеки, рисование на canvas и ссылка на PNG:",
       ),
-      code: `// <script src="lib/qrcode-generator.js"></script> loads window.qrcode
-const QUIET_ZONE = 4;
-
-function drawQrCode(canvas, text, size, fg, bg) {
-  const qr = qrcode(0, "M");      // 0 = auto version, M = ~15% recovery
-  qr.addData(text, "Byte");
-  qr.make();
-  const modules = qr.getModuleCount();
-  const cell = Math.floor(size / (modules + QUIET_ZONE * 2));
-  if (cell < 1) throw new Error("Choose a larger size for this much text.");
-  canvas.width = canvas.height = size;
-  const ctx = canvas.getContext("2d");
-  ctx.fillStyle = bg;
-  ctx.fillRect(0, 0, size, size);
-  const offset = Math.floor((size - cell * modules) / 2);
-  ctx.fillStyle = fg;
-  for (let r = 0; r < modules; r++)
-    for (let c = 0; c < modules; c++)
-      if (qr.isDark(r, c)) ctx.fillRect(offset + c * cell, offset + r * cell, cell, cell);
-}
-
-drawQrCode(canvas, "https://nibrascode.com", 256, "#000000", "#ffffff");
-downloadLink.href = canvas.toDataURL("image/png");`,
+      codeParts: [
+        {
+          lead: t(
+            "1. Mətni QR matrisinə çevirmək:",
+            "1. Turning text into a QR matrix:",
+            "1. Metni QR matrisine çevirmek:",
+            "1. تحويل النص إلى مصفوفة QR:",
+            "1. Превращаем текст в матрицу QR:",
+          ),
+          code: `// <script src="lib/qrcode-generator.js"></script> loads window.qrcode
+const qr = qrcode(0, "M");
+qr.addData(text, "Byte");
+qr.make();
+const modules = qr.getModuleCount();`,
+          after: lines(
+            ["qrcode(0, \"M\") boş QR obyekti yaradır: 0 — versiyanı (ölçünü) kitabxana özü seçir, M — ~15% xəta düzəltmə.", "addData mətni UTF-8 bayt kimi əlavə edir, make() isə tam modul matrisini qurur.", "modules — bir tərəfdəki kvadrat sayıdır, məsələn qısa link üçün 25. Hələ ekranda heç nə yoxdur, yalnız qara/ağ cədvəl var."],
+            ["qrcode(0, \"M\") makes an empty QR object: 0 means the library picks the version (size) itself, M means ~15% error correction.", "addData adds the text as UTF-8 bytes, and make() builds the full module matrix.", "modules is the number of squares on one side, for example 25 for a short link. Nothing is on screen yet; there is only a grid of dark and light."],
+            ["qrcode(0, \"M\") boş bir QR nesnesi oluşturur: 0, sürümü (boyutu) kütüphanenin seçmesi; M, ~%15 hata düzeltme demektir.", "addData metni UTF-8 bayt olarak ekler, make() tam modül matrisini kurar.", "modules bir kenardaki kare sayısıdır, örneğin kısa bir link için 25. Ekranda henüz bir şey yok, sadece koyu/açık bir tablo var."],
+            ["qrcode(0, \"M\") يُنشئ كائن QR فارغاً: 0 يعني أن المكتبة تختار الإصدار (الحجم)، وM تعني تصحيح أخطاء ~15%.", "addData يضيف النص كبايتات UTF-8، وmake() يبني مصفوفة الوحدات كاملة.", "modules هو عدد المربعات في ضلع واحد، مثلاً 25 لرابط قصير. لا شيء على الشاشة بعد، فقط جدول داكن وفاتح."],
+            ["qrcode(0, \"M\") создаёт пустой объект QR: 0 — версию (размер) выбирает библиотека, M — ~15% коррекции ошибок.", "addData добавляет текст как байты UTF-8, а make() строит всю матрицу модулей.", "modules — число квадратов на одной стороне, например 25 для короткой ссылки. На экране пока ничего нет, есть только таблица тёмных и светлых клеток."],
+          ),
+        },
+        {
+          lead: t(
+            "2. Modulun piksel ölçüsü və quiet zone:",
+            "2. Module pixel size and the quiet zone:",
+            "2. Modülün piksel boyutu ve sessiz bölge:",
+            "2. حجم الوحدة بالبكسل والمنطقة الهادئة:",
+            "2. Размер модуля в пикселях и тихая зона:",
+          ),
+          code: `const QUIET_ZONE = 4;
+const cell = Math.floor(size / (modules + QUIET_ZONE * 2));
+if (cell < 1) throw new Error("Choose a larger size for this much text.");
+const offset = Math.floor((size - cell * modules) / 2);`,
+          after: lines(
+            ["QUIET_ZONE — kodun ətrafında 4 modul boş kənar. Skaner kodu bu boşluqla tapır.", "cell — bir kvadratın neçə piksel olacağıdır: seçilmiş ölçü (məsələn 256 px) modul sayı + kənarlara bölünür.", "cell 1-dən kiçikdirsə, kod bu ölçüyə sığmır. Kəsilmiş QR çəkmək əvəzinə istifadəçiyə «böyük ölçü seç» deyilir.", "offset kodu canvas-ın ortasına qoyur."],
+            ["QUIET_ZONE is a blank border of 4 modules around the code. Scanners use this gap to find the code.", "cell is how many pixels one square gets: the chosen size (for example 256 px) divided by modules plus the borders.", "If cell is below 1, the code does not fit this size. Instead of drawing a clipped QR, the user is told to choose a larger size.", "offset puts the code in the middle of the canvas."],
+            ["QUIET_ZONE, kodun çevresinde 4 modüllük boş kenardır. Tarayıcı kodu bu boşlukla bulur.", "cell, bir karenin kaç piksel olacağıdır: seçilen boyut (örneğin 256 px), modül sayısı + kenarlara bölünür.", "cell 1'den küçükse kod bu boyuta sığmaz. Kesik bir QR çizmek yerine kullanıcıya «daha büyük boyut seç» denir.", "offset kodu canvas'ın ortasına yerleştirir."],
+            ["QUIET_ZONE حافة فارغة بعرض 4 وحدات حول الرمز. الماسح يجد الرمز بهذه المسافة.", "cell هو عدد بكسلات المربع الواحد: الحجم المختار (مثلاً 256 px) مقسوماً على الوحدات مع الحواف.", "إذا كان cell أقل من 1 فالرمز لا يتسع لهذا الحجم. بدل رسم QR مقصوص يُطلب من المستخدم اختيار حجم أكبر.", "offset يضع الرمز في وسط canvas."],
+            ["QUIET_ZONE — пустая рамка в 4 модуля вокруг кода. По этому промежутку сканер находит код.", "cell — сколько пикселей получает один квадрат: выбранный размер (например 256 px) делится на модули плюс рамку.", "Если cell меньше 1, код не помещается в этот размер. Вместо обрезанного QR пользователю предлагают выбрать размер больше.", "offset ставит код в центр canvas."],
+          ),
+        },
+        {
+          lead: t(
+            "3. Matrisi canvas-a çəkmək:",
+            "3. Drawing the matrix on the canvas:",
+            "3. Matrisi canvas'a çizmek:",
+            "3. رسم المصفوفة على canvas:",
+            "3. Рисуем матрицу на canvas:",
+          ),
+          code: `canvas.width = canvas.height = size;
+const ctx = canvas.getContext("2d");
+ctx.fillStyle = bg;
+ctx.fillRect(0, 0, size, size);
+ctx.fillStyle = fg;
+for (let r = 0; r < modules; r++)
+  for (let c = 0; c < modules; c++)
+    if (qr.isDark(r, c)) ctx.fillRect(offset + c * cell, offset + r * cell, cell, cell);`,
+          after: lines(
+            ["Əvvəl bütün canvas arxa fon rəngi (bg) ilə doldurulur — bu, ağ kvadrat və quiet zone olur.", "İki dövr hər sətir və sütunu gəzir. isDark(r, c) true olanda həmin yerə ön rəngdə (fg) bir kvadrat çəkilir.", "Nəticə: ekranda görünən QR kod — üç künc kvadratı və ortadakı nöqtələr."],
+            ["First the whole canvas is filled with the background color (bg); this becomes the light square and the quiet zone.", "Two loops walk every row and column. When isDark(r, c) is true, one square in the foreground color (fg) is drawn there.", "Result: the QR code you see on screen, with three corner squares and the dots in between."],
+            ["Önce tüm canvas arka plan rengiyle (bg) doldurulur; bu açık kare ve sessiz bölge olur.", "İki döngü her satır ve sütunu gezer. isDark(r, c) true olunca oraya ön renkte (fg) bir kare çizilir.", "Sonuç: ekranda görünen QR kod; üç köşe karesi ve aradaki noktalar."],
+            ["أولاً يُملأ canvas كله بلون الخلفية (bg)، فيصبح المربع الفاتح والمنطقة الهادئة.", "حلقتان تمرّان على كل صف وعمود. عندما يكون isDark(r, c) صحيحاً يُرسم مربع بلون المقدمة (fg) هناك.", "النتيجة: رمز QR الظاهر على الشاشة، بثلاثة مربعات في الزوايا والنقاط بينها."],
+            ["Сначала весь canvas заливается цветом фона (bg) — это светлый квадрат и тихая зона.", "Два цикла проходят по каждой строке и столбцу. Когда isDark(r, c) равно true, там рисуется квадрат цветом переднего плана (fg).", "Результат: QR-код на экране — три угловых квадрата и точки между ними."],
+          ),
+        },
+        {
+          lead: t(
+            "4. PNG yükləmə linki:",
+            "4. The PNG download link:",
+            "4. PNG indirme linki:",
+            "4. رابط تنزيل PNG:",
+            "4. Ссылка на скачивание PNG:",
+          ),
+          code: `downloadLink.href = canvas.toDataURL("image/png");`,
+          after: lines(
+            ["toDataURL canvas-dakı şəkli PNG faylına çevirir və onu linkə qoyur.", "«Download PNG» basılanda brauzer bu faylı yükləyir. Fayl ekrandakı preview ilə eyni ölçü və rəngdədir, çünki eyni canvas-dan gəlir.", "Ümumi yol: mətn → matris → canvas → PNG."],
+            ["toDataURL turns the picture on the canvas into a PNG file and puts it in the link.", "When you click Download PNG, the browser saves that file. It has the same size and colors as the preview, because it comes from the same canvas.", "The whole path: text → matrix → canvas → PNG."],
+            ["toDataURL canvas'taki resmi PNG dosyasına çevirir ve linke koyar.", "«Download PNG»'ye basınca tarayıcı bu dosyayı indirir. Dosya önizlemeyle aynı boyut ve renktedir, çünkü aynı canvas'tan gelir.", "Tüm yol: metin → matris → canvas → PNG."],
+            ["toDataURL يحوّل صورة canvas إلى ملف PNG ويضعه في الرابط.", "عند الضغط على Download PNG يحفظ المتصفح هذا الملف. له نفس حجم وألوان المعاينة لأنه من نفس canvas.", "المسار كله: نص → مصفوفة → canvas → PNG."],
+            ["toDataURL превращает картинку на canvas в файл PNG и кладёт его в ссылку.", "При нажатии Download PNG браузер сохраняет этот файл. Он того же размера и цвета, что и превью, потому что взят с того же canvas.", "Весь путь: текст → матрица → canvas → PNG."],
+          ),
+        },
+      ],
       faq: lines(
         ["QR kod pulsuzdur? Bəli. Standart açıqdır, kitabxana MIT lisenziyalıdır.", "İnternet lazımdır? Səhifə və lokal kitabxana bir dəfə yükləndikdən sonra yox.", "Mətn serverə gedir? Xeyr. Kodlama brauzerdə olur, fetch, cookie və analitika yoxdur.", "QR skan olunursa sayt təhlükəsizdir? Xeyr. QR sadəcə mətndir, domeni özün yoxla.", "Tam alət haradadır? nibrascode.com/qr səhifəsində."],
         ["Are QR codes free? Yes. The standard is open and the library is MIT licensed.", "Do I need the internet? Not after the page and the local library have loaded once.", "Is the text sent to a server? No. Encoding happens in the browser; no fetch, cookies or analytics.", "If a QR scans, is the site safe? No. A QR is only text; check the domain yourself.", "Where is the full tool? On nibrascode.com/qr."],
