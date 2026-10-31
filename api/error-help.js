@@ -2,6 +2,7 @@
 import { askProvider, aiConfig, configuredProviders } from "./_ai.js";
 import { langDirective } from "./_lang.js";
 import { watch5xx } from "./_ops.js";
+import religiousSearch from "./_religious-search.js";
 
 export const config = { maxDuration: 45 };
 
@@ -47,6 +48,8 @@ export function parseAnswer(text) {
 }
 
 async function handler(req, res) {
+  // /api/religious-search (vercel.json rewrite) — /test səhifəsinin axtarışı; ayrıca funksiya limiti aşılmasın deyə burada.
+  if (/[?&]religious=1/.test(req.url || "") || req.query?.religious === "1") return religiousSearch(req, res);
   if (req.method !== "POST") return res.status(405).json({ ok: false, error: "method" });
   let body = req.body;
   if (typeof body === "string") { try { body = JSON.parse(body); } catch { body = {}; } }

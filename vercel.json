@@ -542,9 +542,6 @@
   "functions": {
     "api/chat.js": {
       "maxDuration": 300
-    },
-    "api/religious-search.js": {
-      "maxDuration": 60
     }
   },
   "rewrites": [
@@ -555,6 +552,10 @@
     {
       "source": "/test/",
       "destination": "/test/index.html"
+    },
+    {
+      "source": "/api/religious-search",
+      "destination": "/api/error-help?religious=1"
     },
     {
       "source": "/nibrasnova/",
