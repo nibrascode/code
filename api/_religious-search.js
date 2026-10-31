@@ -92,7 +92,7 @@ async function searchShamela(query, { cursor = null, seen = [], fatwa = false } 
     args.book_queries = ["مجموع فتاوى ابن باز", "مجموع فتاوى ورسائل العثيمين", "فتاوى نور على الدرب"];
     
   }
-  const found = await shamela("shamela_find", args, 10000);
+  const found = await shamela("shamela_find", args, fatwa ? 8000 : 15000);
   const evidence = readSources(found.evidence?.sources);
   const seenSet = new Set(seen.map(String));
   const metas = [];
