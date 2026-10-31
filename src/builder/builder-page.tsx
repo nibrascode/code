@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState, type DragEvent } from "react";
 import type { Lang } from "@/lib/i18n";
+import { useI18n } from "@/lib/i18n-context";
 import { filesToZip } from "@/workspace/files";
 
 type Kind = "hero" | "text" | "stats" | "cards" | "cta" | "columns" | "footer";
