@@ -1,4 +1,4 @@
-// Options and runners for: flatten, metadata, compare, excel-csv, csv-excel (browser-only) and url-pdf (page text fetched via /api/url-text, PDF built in the browser).
+// Options and runners for: flatten, metadata, compare, excel-csv, csv-excel (browser-only) and url-pdf (page text + optional JPEG/PNG images fetched via /api/url-text, PDF built in the browser; no layout).
 import { useEffect, useState } from "react";
 import type { Lang } from "@/lib/i18n";
 import * as eng from "./lib/engine";
@@ -54,26 +54,31 @@ export function diffLines(a: string[], b: string[]) {
   return { onlyA, onlyB };
 }
 
-type U = Record<"label" | "ph" | "works" | "limits" | "bad" | "fetch" | "empty" | "type" | "size" | "status" | "done", string>;
+type U = Record<"label" | "ph" | "works" | "limits" | "imgs" | "imgNote" | "print" | "imgDone" | "bad" | "fetch" | "empty" | "type" | "size" | "status" | "done", string>;
 const UW: Record<Lang, U> = {
-  az: { label: "Səhifə linki", ph: "https://...", works: "İşləyir: açıq (girişsiz) məqalə, blog, xəbər, sənəd səhifələri. Səhifənin əsas mətni başlıq və siyahılarla birlikdə PDF olur.", limits: "İşləmir: şəkillər, rənglər və dizayn köçmür; JavaScript ilə yüklənən saytlar (SPA), giriş tələb edən və ya botları bloklayan səhifələr boş gələ bilər. Link Nibras serverindən açılır (yalnız ictimai ünvanlar).", bad: "Link düzgün deyil və ya ictimai ünvan deyil.", fetch: "Səhifə açılmadı (sayt cavab vermədi və ya bloklayır).", empty: "Səhifədə oxunan mətn tapılmadı (çox güman ki, JavaScript ilə yüklənir).", type: "Bu link HTML səhifə deyil.", size: "Səhifə çox böyükdür (3 MB-dan çox).", status: "Sayt xəta qaytardı", done: "simvol mətn · şəkil və dizayn yoxdur" },
-  en: { label: "Page link", ph: "https://...", works: "Works: public (no login) articles, blogs, news and docs pages. The page's main text, with headings and lists, becomes a PDF.", limits: "Doesn't work: images, colours and layout are not kept; JavaScript-rendered sites (SPAs), pages behind a login or that block bots may come back empty. The link is opened from the Nibras server (public addresses only).", bad: "The link is invalid or not a public address.", fetch: "The page could not be opened (the site did not respond or blocks us).", empty: "No readable text found on the page (it is probably rendered with JavaScript).", type: "This link is not an HTML page.", size: "The page is too large (over 3 MB).", status: "The site returned an error", done: "characters of text · no images or layout" },
-  tr: { label: "Sayfa bağlantısı", ph: "https://...", works: "Çalışır: herkese açık (girişsiz) makale, blog, haber ve doküman sayfaları. Sayfanın ana metni başlık ve listelerle PDF olur.", limits: "Çalışmaz: görseller, renkler ve tasarım aktarılmaz; JavaScript ile yüklenen siteler (SPA), giriş isteyen veya botları engelleyen sayfalar boş gelebilir. Bağlantı Nibras sunucusundan açılır (yalnızca herkese açık adresler).", bad: "Bağlantı geçersiz veya herkese açık bir adres değil.", fetch: "Sayfa açılamadı (site yanıt vermedi veya engelliyor).", empty: "Sayfada okunabilir metin yok (büyük olasılıkla JavaScript ile yükleniyor).", type: "Bu bağlantı bir HTML sayfası değil.", size: "Sayfa çok büyük (3 MB üstü).", status: "Site hata döndürdü", done: "karakter metin · görsel ve tasarım yok" },
-  ar: { label: "رابط الصفحة", ph: "https://...", works: "يعمل مع: صفحات المقالات والمدونات والأخبار والتوثيق العامة (بلا تسجيل دخول). يصبح النص الرئيسي مع العناوين والقوائم ملف PDF.", limits: "لا يعمل مع: الصور والألوان والتنسيق لا تُنقل؛ المواقع التي تُبنى بـ JavaScript والصفحات التي تتطلب تسجيل الدخول أو تحجب الروبوتات قد تعود فارغة. يُفتح الرابط من خادم نبراس (العناوين العامة فقط).", bad: "الرابط غير صالح أو ليس عنواناً عاماً.", fetch: "تعذّر فتح الصفحة (الموقع لم يستجب أو يحجبنا).", empty: "لم يُعثر على نص مقروء (غالباً تُبنى الصفحة بـ JavaScript).", type: "هذا الرابط ليس صفحة HTML.", size: "الصفحة كبيرة جداً (أكثر من 3 ميغابايت).", status: "أعاد الموقع خطأ", done: "حرفاً من النص · بلا صور أو تنسيق" },
-  ru: { label: "Ссылка на страницу", ph: "https://...", works: "Работает: открытые (без входа) статьи, блоги, новости и документация. Основной текст страницы с заголовками и списками становится PDF.", limits: "Не работает: картинки, цвета и вёрстка не сохраняются; сайты на JavaScript (SPA), страницы за логином или блокирующие ботов могут вернуться пустыми. Ссылка открывается с сервера Nibras (только публичные адреса).", bad: "Ссылка неверна или это не публичный адрес.", fetch: "Не удалось открыть страницу (сайт не ответил или блокирует).", empty: "На странице нет читаемого текста (вероятно, она строится на JavaScript).", type: "Эта ссылка не HTML-страница.", size: "Страница слишком большая (более 3 МБ).", status: "Сайт вернул ошибку", done: "символов текста · без картинок и вёрстки" },
+  az: { imgs: "Şəkilləri də əlavə et (JPEG/PNG, 8-ə qədər)", imgNote: "Şəkillər mətndən sonra, ayrıca səhifələrdə gəlir — orijinal yerində yox.", print: "Dəqiq dizayn lazımdırsa: səhifəni öz brauzerində aç → Çap (Ctrl+P) → «PDF kimi saxla». Bunu server tərəfdə etmək ödənişli brauzer xidməti tələb edir.", imgDone: "şəkil", label: "Səhifə linki", ph: "https://...", works: "İşləyir: açıq (girişsiz) məqalə, blog, xəbər, sənəd səhifələri. Səhifənin əsas mətni başlıq və siyahılarla birlikdə PDF olur.", limits: "İşləmir: rənglər və dizayn (layout) köçmür; JavaScript ilə yüklənən saytlar (SPA), giriş tələb edən və ya botları bloklayan səhifələr boş gələ bilər. Link Nibras serverindən açılır (yalnız ictimai ünvanlar).", bad: "Link düzgün deyil və ya ictimai ünvan deyil.", fetch: "Səhifə açılmadı (sayt cavab vermədi və ya bloklayır).", empty: "Səhifədə oxunan mətn tapılmadı (çox güman ki, JavaScript ilə yüklənir).", type: "Bu link HTML səhifə deyil.", size: "Səhifə çox böyükdür (3 MB-dan çox).", status: "Sayt xəta qaytardı", done: "simvol mətn · dizayn yoxdur" },
+  en: { imgs: "Also add images (JPEG/PNG, up to 8)", imgNote: "Images come after the text on their own pages — not in their original position.", print: "Need the exact design? Open the page in your own browser → Print (Ctrl+P) → \"Save as PDF\". Doing that on the server needs a paid headless-browser service.", imgDone: "images", label: "Page link", ph: "https://...", works: "Works: public (no login) articles, blogs, news and docs pages. The page's main text, with headings and lists, becomes a PDF.", limits: "Doesn't work: colours and layout are not kept; JavaScript-rendered sites (SPAs), pages behind a login or that block bots may come back empty. The link is opened from the Nibras server (public addresses only).", bad: "The link is invalid or not a public address.", fetch: "The page could not be opened (the site did not respond or blocks us).", empty: "No readable text found on the page (it is probably rendered with JavaScript).", type: "This link is not an HTML page.", size: "The page is too large (over 3 MB).", status: "The site returned an error", done: "characters of text · no layout" },
+  tr: { imgs: "Görselleri de ekle (JPEG/PNG, en fazla 8)", imgNote: "Görseller metinden sonra ayrı sayfalarda gelir — orijinal yerlerinde değil.", print: "Tam tasarım mı lazım? Sayfayı kendi tarayıcında aç → Yazdır (Ctrl+P) → \"PDF olarak kaydet\". Bunu sunucuda yapmak ücretli bir tarayıcı hizmeti gerektirir.", imgDone: "görsel", label: "Sayfa bağlantısı", ph: "https://...", works: "Çalışır: herkese açık (girişsiz) makale, blog, haber ve doküman sayfaları. Sayfanın ana metni başlık ve listelerle PDF olur.", limits: "Çalışmaz: renkler ve tasarım (düzen) aktarılmaz; JavaScript ile yüklenen siteler (SPA), giriş isteyen veya botları engelleyen sayfalar boş gelebilir. Bağlantı Nibras sunucusundan açılır (yalnızca herkese açık adresler).", bad: "Bağlantı geçersiz veya herkese açık bir adres değil.", fetch: "Sayfa açılamadı (site yanıt vermedi veya engelliyor).", empty: "Sayfada okunabilir metin yok (büyük olasılıkla JavaScript ile yükleniyor).", type: "Bu bağlantı bir HTML sayfası değil.", size: "Sayfa çok büyük (3 MB üstü).", status: "Site hata döndürdü", done: "karakter metin · tasarım yok" },
+  ar: { imgs: "أضف الصور أيضاً (JPEG/PNG، حتى 8)", imgNote: "تأتي الصور بعد النص في صفحات مستقلة — وليس في مكانها الأصلي.", print: "تحتاج التصميم الدقيق؟ افتح الصفحة في متصفحك ← طباعة (Ctrl+P) ← «حفظ كـ PDF». فعل ذلك على الخادم يتطلب خدمة متصفح مدفوعة.", imgDone: "صور", label: "رابط الصفحة", ph: "https://...", works: "يعمل مع: صفحات المقالات والمدونات والأخبار والتوثيق العامة (بلا تسجيل دخول). يصبح النص الرئيسي مع العناوين والقوائم ملف PDF.", limits: "لا يعمل مع: الألوان والتنسيق لا تُنقل؛ المواقع التي تُبنى بـ JavaScript والصفحات التي تتطلب تسجيل الدخول أو تحجب الروبوتات قد تعود فارغة. يُفتح الرابط من خادم نبراس (العناوين العامة فقط).", bad: "الرابط غير صالح أو ليس عنواناً عاماً.", fetch: "تعذّر فتح الصفحة (الموقع لم يستجب أو يحجبنا).", empty: "لم يُعثر على نص مقروء (غالباً تُبنى الصفحة بـ JavaScript).", type: "هذا الرابط ليس صفحة HTML.", size: "الصفحة كبيرة جداً (أكثر من 3 ميغابايت).", status: "أعاد الموقع خطأ", done: "حرفاً من النص · بلا تنسيق" },
+  ru: { imgs: "Добавить и картинки (JPEG/PNG, до 8)", imgNote: "Картинки идут после текста на отдельных страницах — не на своих местах.", print: "Нужен точный дизайн? Откройте страницу в своём браузере → Печать (Ctrl+P) → «Сохранить как PDF». На сервере это требует платного сервиса headless-браузера.", imgDone: "картинок", label: "Ссылка на страницу", ph: "https://...", works: "Работает: открытые (без входа) статьи, блоги, новости и документация. Основной текст страницы с заголовками и списками становится PDF.", limits: "Не работает: цвета и вёрстка не сохраняются; сайты на JavaScript (SPA), страницы за логином или блокирующие ботов могут вернуться пустыми. Ссылка открывается с сервера Nibras (только публичные адреса).", bad: "Ссылка неверна или это не публичный адрес.", fetch: "Не удалось открыть страницу (сайт не ответил или блокирует).", empty: "На странице нет читаемого текста (вероятно, она строится на JavaScript).", type: "Эта ссылка не HTML-страница.", size: "Страница слишком большая (более 3 МБ).", status: "Сайт вернул ошибку", done: "символов текста · без вёрстки" },
 };
 const uw = (l: Lang) => UW[l] ?? UW.en;
 let urlDraft = "";
+let urlImages = true;
 export class UrlError extends Error {}
 
 function UrlOptions({ lang }: { lang: Lang }) {
   const w = uw(lang);
   const [v, setV] = useState(urlDraft);
+  const [img, setImg] = useState(urlImages);
   return (
     <div className="space-y-3">
       <div><Label>{w.label}</Label><input className={field} type="url" inputMode="url" dir="ltr" placeholder={w.ph} value={v} onChange={(e) => { urlDraft = e.target.value; setV(e.target.value); }} data-testid="url-input" /></div>
+      <label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={img} onChange={(e) => { urlImages = e.target.checked; setImg(e.target.checked); }} data-testid="url-images" />{w.imgs}</label>
       <p className="text-xs text-muted">✓ {w.works}</p>
+      <p className="text-xs text-muted">✓ {w.imgNote}</p>
       <p className="text-xs text-muted">✗ {w.limits}</p>
+      <p className="text-xs text-muted">ⓘ {w.print}</p>
     </div>
   );
 }
@@ -132,17 +137,34 @@ export async function runMore(tool: MoreTool, lang: Lang, files: F[], sheets: { 
     if (raw && !/^https?:\/\//i.test(raw)) raw = `https://${raw}`;
     try { new URL(raw); } catch { throw new UrlError(u.bad); }
     progress(0, 1);
-    const r = await fetch(`/api/url-text?url=${encodeURIComponent(raw)}`);
-    const j = (await r.json().catch(() => ({}))) as { title?: string; text?: string; url?: string; error?: string; status?: number };
+    const r = await fetch(`/api/url-text?url=${encodeURIComponent(raw)}${urlImages ? "&images=1" : ""}`);
+    const j = (await r.json().catch(() => ({}))) as { title?: string; text?: string; url?: string; error?: string; status?: number; images?: { type: "jpg" | "png"; data: string; alt: string }[] };
     if (!r.ok || !j.text) {
       const e = j.error;
       throw new UrlError(e === "bad-url" ? u.bad : e === "empty" ? u.empty : e === "type" ? u.type : e === "size" ? u.size : e === "status" ? `${u.status}${j.status ? ` (${j.status})` : ""}.` : u.fetch);
     }
     const title = (j.title || new URL(j.url || raw).hostname).slice(0, 200);
-    const bytes = await eng.textToPdf(`${j.url || raw}\n\n${j.text}`, { size: "a4", fontSize: 11, align: "left", bold: false, margin: 48, pageNumbers: true, title });
+    let bytes = await eng.textToPdf(`${j.url || raw}\n\n${j.text}`, { size: "a4", fontSize: 11, align: "left", bold: false, margin: 48, pageNumbers: true, title });
+    let nImg = 0;
+    if (j.images?.length) {
+      const { PDFDocument } = await lib();
+      const d = await PDFDocument.load(bytes);
+      for (const im of j.images) {
+        try {
+          const raw8 = Uint8Array.from(atob(im.data), (c) => c.charCodeAt(0));
+          const e = im.type === "png" ? await d.embedPng(raw8) : await d.embedJpg(raw8);
+          const W = 595.28, H = 841.89, M = 48;
+          const k = Math.min((W - 2 * M) / e.width, (H - 2 * M) / e.height, 1);
+          const pg = d.addPage([W, H]);
+          pg.drawImage(e, { x: (W - e.width * k) / 2, y: H - M - e.height * k, width: e.width * k, height: e.height * k });
+          nImg++;
+        } catch { /* skip unreadable image */ }
+      }
+      if (nImg) bytes = await d.save();
+    }
     progress(1, 1);
     const host = new URL(j.url || raw).hostname.replace(/^www\./, "").replace(/[^\w.-]+/g, "-") || "page";
-    return [pdfOut(`${host}.pdf`, bytes, `${j.text.length} ${u.done}`)];
+    return [pdfOut(`${host}.pdf`, bytes, `${j.text.length} ${u.done}${nImg ? ` · ${nImg} ${u.imgDone}` : ""}`)];
   }
   const f = files[0];
   if (tool === "flatten") {

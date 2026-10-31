@@ -88,11 +88,11 @@ const INTENT: Partial<Record<ToolId, Record<Lang, { title: string; h1: string; d
     ru: { title: "CSV в Excel — бесплатно", h1: "Конвертировать CSV в XLSX", description: "Превратите таблицу CSV в файл Excel в браузере" },
   },
   "url-pdf": {
-    az: { title: "URL-dən PDF — pulsuz", h1: "Veb səhifəni PDF et (mətn)", description: "Linki yazın: səhifənin əsas mətni PDF olur. Şəkil və dizayn köçmür" },
-    en: { title: "URL to PDF — free", h1: "Save a web page as PDF (text)", description: "Paste a link: the page's main text becomes a PDF. Images and layout are not kept" },
-    tr: { title: "URL'den PDF — ücretsiz", h1: "Web sayfasını PDF yap (metin)", description: "Bağlantıyı yapıştırın: sayfanın ana metni PDF olur. Görsel ve tasarım aktarılmaz" },
-    ar: { title: "من رابط إلى PDF — مجاناً", h1: "حفظ صفحة ويب كـ PDF (نص)", description: "الصق الرابط: يصبح النص الرئيسي للصفحة ملف PDF. لا تُنقل الصور والتنسيق" },
-    ru: { title: "URL в PDF — бесплатно", h1: "Сохранить веб-страницу в PDF (текст)", description: "Вставьте ссылку: основной текст страницы станет PDF. Картинки и вёрстка не сохраняются" },
+    az: { title: "URL-dən PDF — pulsuz", h1: "Veb səhifəni PDF et (mətn + şəkil)", description: "Linki yazın: səhifənin əsas mətni PDF olur. Şəkillər (JPEG/PNG) ayrıca səhifədə; dizayn köçmür" },
+    en: { title: "URL to PDF — free", h1: "Save a web page as PDF (text + images)", description: "Paste a link: the page's main text becomes a PDF. Images (JPEG/PNG) on separate pages; layout is not kept" },
+    tr: { title: "URL'den PDF — ücretsiz", h1: "Web sayfasını PDF yap (metin + görsel)", description: "Bağlantıyı yapıştırın: sayfanın ana metni PDF olur. Görseller (JPEG/PNG) ayrı sayfada; tasarım aktarılmaz" },
+    ar: { title: "من رابط إلى PDF — مجاناً", h1: "حفظ صفحة ويب كـ PDF (نص + صور)", description: "الصق الرابط: يصبح النص الرئيسي للصفحة ملف PDF. الصور (JPEG/PNG) في صفحات مستقلة؛ لا يُنقل التنسيق" },
+    ru: { title: "URL в PDF — бесплатно", h1: "Сохранить веб-страницу в PDF (текст + картинки)", description: "Вставьте ссылку: основной текст страницы станет PDF. Картинки (JPEG/PNG) на отдельных страницах; вёрстка не сохраняется" },
   },
   "unlock": {
     az: { title: "PDF parolunu aç — pulsuz", h1: "PDF parolunu aç", description: "Parolu bilirsinizsə, PDF-in parolsuz nüsxəsini yükləyin" },
