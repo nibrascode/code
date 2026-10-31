@@ -911,6 +911,13 @@ const PAGES: Record<string, Copy> = {
     ar: { title: "رمز QR لـ Wi-Fi — مجاناً", description: "اصنع رمز QR من اسم الشبكة وكلمة المرور. يمسحه الضيف ويتصل. لا تُرفع كلمة المرور." },
     ru: { title: "Wi-Fi QR — бесплатно", description: "Сделайте QR-код из имени сети и пароля. Гость сканирует и подключается. Пароль не загружается." },
   },
+  "/telefon": {
+    az: { title: "Telefon yoxlaması — ekran, sensor, kamera, batareya", description: "Telefonda ekran rəngi, ölü piksel, toxunma, kamera, mikrofon, sensor və şəbəkəni brauzerdə yoxla. Batareya faizi sistem verirsə görünür. Tutum laboratoriya ölçümü deyil." },
+    en: { title: "Phone check — screen, sensors, camera, battery", description: "Check screen color, dead pixels, touch, camera, microphone, sensors and network in the browser. Battery level shows only if the system provides it. Capacity is not a lab measurement." },
+    tr: { title: "Telefon yoklaması — ekran, sensör, kamera, pil", description: "Ekran rengi, ölü piksel, dokunma, kamera, mikrofon, sensör ve ağı tarayıcıda yokla. Pil yüzdesi sistem verirse görünür. Kapasite laboratuvar ölçümü değildir." },
+    ar: { title: "فحص الهاتف — الشاشة والحساسات والكاميرا والبطارية", description: "افحص لون الشاشة والبكسل الميت واللمس والكاميرا والميكروفون والحساسات والشبكة في المتصفح. تظهر نسبة البطارية إن أعطاها النظام. السعة ليست قياس مختبر." },
+    ru: { title: "Проверка телефона — экран, датчики, камера, батарея", description: "Проверьте цвет экрана, битые пиксели, касание, камеру, микрофон, датчики и сеть в браузере. Процент батареи виден, только если его даёт система. Ёмкость — не лабораторное измерение." },
+  },
   "/seo": {
     az: { title: "Nibras SEO Check — bir səhifəni yoxla", description: "Title, description, canonical, robots.txt və sitemap. Bir ünvan yoxlanır, başqa səhifələr açılmır." },
     en: { title: "Nibras SEO Check — check one page", description: "Title, description, canonical, robots.txt and sitemap. One address is checked. Other pages are not opened." },
