@@ -1,4 +1,4 @@
-// Options and runners for: flatten, metadata, compare, excel-csv, csv-excel. All run in the browser.
+// Options and runners for: flatten, metadata, compare, excel-csv, csv-excel (browser-only) and url-pdf (page text fetched via /api/url-text, PDF built in the browser).
 import { useEffect, useState } from "react";
 import type { Lang } from "@/lib/i18n";
 import * as eng from "./lib/engine";
@@ -6,7 +6,7 @@ import { sheetsToXlsx } from "./lib/office";
 import { field, Label } from "./ui";
 import type { Out } from "./ui";
 
-export const MORE_TOOLS = ["flatten", "metadata", "compare", "excel-csv", "csv-excel"] as const;
+export const MORE_TOOLS = ["flatten", "metadata", "compare", "excel-csv", "csv-excel", "url-pdf"] as const;
 export type MoreTool = (typeof MORE_TOOLS)[number];
 export const isMoreTool = (t: string): t is MoreTool => (MORE_TOOLS as readonly string[]).includes(t);
 
@@ -24,7 +24,7 @@ const W: Record<Lang, S> = {
 };
 const mw = (l: Lang) => W[l] ?? W.en;
 
-export const moreKind = (t: MoreTool) => (t === "compare" ? "pdfs" : t === "excel-csv" || t === "csv-excel" ? "sheet" : "pdf") as "pdf" | "pdfs" | "sheet";
+export const moreKind = (t: MoreTool) => (t === "compare" ? "pdfs" : t === "excel-csv" || t === "csv-excel" ? "sheet" : t === "url-pdf" ? "none" : "pdf") as "pdf" | "pdfs" | "sheet" | "none";
 
 async function lib() { return (await eng.getEngine()).lib; }
 
@@ -54,6 +54,30 @@ export function diffLines(a: string[], b: string[]) {
   return { onlyA, onlyB };
 }
 
+type U = Record<"label" | "ph" | "works" | "limits" | "bad" | "fetch" | "empty" | "type" | "size" | "status" | "done", string>;
+const UW: Record<Lang, U> = {
+  az: { label: "Səhifə linki", ph: "https://...", works: "İşləyir: açıq (girişsiz) məqalə, blog, xəbər, sənəd səhifələri. Səhifənin əsas mətni başlıq və siyahılarla birlikdə PDF olur.", limits: "İşləmir: şəkillər, rənglər və dizayn köçmür; JavaScript ilə yüklənən saytlar (SPA), giriş tələb edən və ya botları bloklayan səhifələr boş gələ bilər. Link Nibras serverindən açılır (yalnız ictimai ünvanlar).", bad: "Link düzgün deyil və ya ictimai ünvan deyil.", fetch: "Səhifə açılmadı (sayt cavab vermədi və ya bloklayır).", empty: "Səhifədə oxunan mətn tapılmadı (çox güman ki, JavaScript ilə yüklənir).", type: "Bu link HTML səhifə deyil.", size: "Səhifə çox böyükdür (3 MB-dan çox).", status: "Sayt xəta qaytardı", done: "simvol mətn · şəkil və dizayn yoxdur" },
+  en: { label: "Page link", ph: "https://...", works: "Works: public (no login) articles, blogs, news and docs pages. The page's main text, with headings and lists, becomes a PDF.", limits: "Doesn't work: images, colours and layout are not kept; JavaScript-rendered sites (SPAs), pages behind a login or that block bots may come back empty. The link is opened from the Nibras server (public addresses only).", bad: "The link is invalid or not a public address.", fetch: "The page could not be opened (the site did not respond or blocks us).", empty: "No readable text found on the page (it is probably rendered with JavaScript).", type: "This link is not an HTML page.", size: "The page is too large (over 3 MB).", status: "The site returned an error", done: "characters of text · no images or layout" },
+  tr: { label: "Sayfa bağlantısı", ph: "https://...", works: "Çalışır: herkese açık (girişsiz) makale, blog, haber ve doküman sayfaları. Sayfanın ana metni başlık ve listelerle PDF olur.", limits: "Çalışmaz: görseller, renkler ve tasarım aktarılmaz; JavaScript ile yüklenen siteler (SPA), giriş isteyen veya botları engelleyen sayfalar boş gelebilir. Bağlantı Nibras sunucusundan açılır (yalnızca herkese açık adresler).", bad: "Bağlantı geçersiz veya herkese açık bir adres değil.", fetch: "Sayfa açılamadı (site yanıt vermedi veya engelliyor).", empty: "Sayfada okunabilir metin yok (büyük olasılıkla JavaScript ile yükleniyor).", type: "Bu bağlantı bir HTML sayfası değil.", size: "Sayfa çok büyük (3 MB üstü).", status: "Site hata döndürdü", done: "karakter metin · görsel ve tasarım yok" },
+  ar: { label: "رابط الصفحة", ph: "https://...", works: "يعمل مع: صفحات المقالات والمدونات والأخبار والتوثيق العامة (بلا تسجيل دخول). يصبح النص الرئيسي مع العناوين والقوائم ملف PDF.", limits: "لا يعمل مع: الصور والألوان والتنسيق لا تُنقل؛ المواقع التي تُبنى بـ JavaScript والصفحات التي تتطلب تسجيل الدخول أو تحجب الروبوتات قد تعود فارغة. يُفتح الرابط من خادم نبراس (العناوين العامة فقط).", bad: "الرابط غير صالح أو ليس عنواناً عاماً.", fetch: "تعذّر فتح الصفحة (الموقع لم يستجب أو يحجبنا).", empty: "لم يُعثر على نص مقروء (غالباً تُبنى الصفحة بـ JavaScript).", type: "هذا الرابط ليس صفحة HTML.", size: "الصفحة كبيرة جداً (أكثر من 3 ميغابايت).", status: "أعاد الموقع خطأ", done: "حرفاً من النص · بلا صور أو تنسيق" },
+  ru: { label: "Ссылка на страницу", ph: "https://...", works: "Работает: открытые (без входа) статьи, блоги, новости и документация. Основной текст страницы с заголовками и списками становится PDF.", limits: "Не работает: картинки, цвета и вёрстка не сохраняются; сайты на JavaScript (SPA), страницы за логином или блокирующие ботов могут вернуться пустыми. Ссылка открывается с сервера Nibras (только публичные адреса).", bad: "Ссылка неверна или это не публичный адрес.", fetch: "Не удалось открыть страницу (сайт не ответил или блокирует).", empty: "На странице нет читаемого текста (вероятно, она строится на JavaScript).", type: "Эта ссылка не HTML-страница.", size: "Страница слишком большая (более 3 МБ).", status: "Сайт вернул ошибку", done: "символов текста · без картинок и вёрстки" },
+};
+const uw = (l: Lang) => UW[l] ?? UW.en;
+let urlDraft = "";
+export class UrlError extends Error {}
+
+function UrlOptions({ lang }: { lang: Lang }) {
+  const w = uw(lang);
+  const [v, setV] = useState(urlDraft);
+  return (
+    <div className="space-y-3">
+      <div><Label>{w.label}</Label><input className={field} type="url" inputMode="url" dir="ltr" placeholder={w.ph} value={v} onChange={(e) => { urlDraft = e.target.value; setV(e.target.value); }} data-testid="url-input" /></div>
+      <p className="text-xs text-muted">✓ {w.works}</p>
+      <p className="text-xs text-muted">✗ {w.limits}</p>
+    </div>
+  );
+}
+
 export function MoreOptions({ tool, lang, pdf, sheetCount }: { tool: string; lang: Lang; pdf: Uint8Array | null; sheetCount: number }) {
   const w = mw(lang);
   const [m, setM] = useState<Meta>(metaDraft);
@@ -64,6 +88,7 @@ export function MoreOptions({ tool, lang, pdf, sheetCount }: { tool: string; lan
     readMeta(pdf).then((r) => { if (!live) return; metaDraft = r.meta; setM(r.meta); setInfo(r); }).catch(() => setInfo(null));
     return () => { live = false; };
   }, [tool, pdf]);
+  if (tool === "url-pdf") return <UrlOptions lang={lang} />;
   if (tool === "flatten") return <p className="text-sm text-muted">{w.flatNote}</p>;
   if (tool === "compare") return <p className="text-sm text-muted">{w.cmpNote}</p>;
   if (tool === "excel-csv") return <p className="text-sm text-muted">{w.csvNote}{sheetCount > 1 ? ` (${sheetCount})` : ""}</p>;
@@ -100,6 +125,24 @@ export async function runMore(tool: MoreTool, lang: Lang, files: F[], sheets: { 
     const list = (sheets ?? []).filter((s) => s.rows.length);
     const bytes = await sheetsToXlsx(list.map((s, i) => ({ name: list.length > 1 ? s.name.slice(0, 28) || `Sheet${i + 1}` : "Sheet1", rows: s.rows })));
     return [{ name: `${base(files[0]?.name ?? "table")}.xlsx`, blob: new Blob([bytes as BlobPart], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" }), kind: "xlsx", note: w.xlsxNote }];
+  }
+  if (tool === "url-pdf") {
+    const u = uw(lang);
+    let raw = urlDraft.trim();
+    if (raw && !/^https?:\/\//i.test(raw)) raw = `https://${raw}`;
+    try { new URL(raw); } catch { throw new UrlError(u.bad); }
+    progress(0, 1);
+    const r = await fetch(`/api/url-text?url=${encodeURIComponent(raw)}`);
+    const j = (await r.json().catch(() => ({}))) as { title?: string; text?: string; url?: string; error?: string; status?: number };
+    if (!r.ok || !j.text) {
+      const e = j.error;
+      throw new UrlError(e === "bad-url" ? u.bad : e === "empty" ? u.empty : e === "type" ? u.type : e === "size" ? u.size : e === "status" ? `${u.status}${j.status ? ` (${j.status})` : ""}.` : u.fetch);
+    }
+    const title = (j.title || new URL(j.url || raw).hostname).slice(0, 200);
+    const bytes = await eng.textToPdf(`${j.url || raw}\n\n${j.text}`, { size: "a4", fontSize: 11, align: "left", bold: false, margin: 48, pageNumbers: true, title });
+    progress(1, 1);
+    const host = new URL(j.url || raw).hostname.replace(/^www\./, "").replace(/[^\w.-]+/g, "-") || "page";
+    return [pdfOut(`${host}.pdf`, bytes, `${j.text.length} ${u.done}`)];
   }
   const f = files[0];
   if (tool === "flatten") {

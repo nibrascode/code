@@ -64,6 +64,7 @@ const NEXT: Partial<Record<ToolId, ToolId[]>> = {
   compare: ["pdf-word", "pdf-ocr", "merge"],
   "excel-csv": ["csv-excel", "excel-pdf", "pdf-excel"],
   "csv-excel": ["excel-csv", "excel-pdf", "pdf-excel"],
+  "url-pdf": ["write-pdf", "compress", "merge"],
 };
 
 export function PdfPage({ tool }: { tool: ToolId | null }) {
