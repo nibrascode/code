@@ -83,6 +83,8 @@ export const LIBRARY: Record<LibrarySection, { title: TKey; topics: readonly Lib
       { slug: "postgresql", label: "prog_postgresql" },
       { slug: "markdown", label: "prog_markdown" },
       { slug: "rsync", label: "prog_rsync" },
+      { slug: "password-generator", label: "prog_password_js" },
+      { slug: "javascript-qr-code-generator", label: "prog_qr_js" },
       { slug: "git-github", label: "prog_git_github" },
       { slug: "api", label: "prog_api" },
       { slug: "python-javascript", label: "prog_python_js" },

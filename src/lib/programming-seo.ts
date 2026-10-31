@@ -316,6 +316,20 @@ export const PROGRAMMING_SEO: Record<string, Record<"az" | "en" | "tr" | "ar" | 
     ar: { title: "ما هو Redis؟ — Nibras Code", description: "Redis خادم يحفظ المفتاح والقيمة في الذاكرة. ليس قاعدة جداول. هو لإرجاع الجواب بسرعة.", keywords: "ما هو Redis, ذاكرة Redis, مفتاح" },
     ru: { title: "Что такое Redis? — Nibras Code", description: "Redis — сервер, который хранит ключ и значение в памяти. Это не база с таблицами. Он нужен, чтобы быстро вернуть ответ.", keywords: "что такое Redis, кэш Redis, ключ" },
   },
+  "password-generator": {
+    az: { title: "JavaScript ilə şifrə generatoru: dərs — Nibras Code", description: "crypto.getRandomValues ilə brauzerdə təhlükəsiz şifrə: simvol dəstləri, uzunluq, rejection sampling, kopyalama və məxfilik.", keywords: "şifrə generatoru JavaScript, crypto.getRandomValues, təsadüfi şifrə" },
+    en: { title: "Password generator in JavaScript: a lesson — Nibras Code", description: "A safe password in the browser with crypto.getRandomValues: character sets, length, rejection sampling, copy and privacy.", keywords: "password generator JavaScript, crypto.getRandomValues, random password" },
+    tr: { title: "JavaScript ile şifre üreteci: ders — Nibras Code", description: "Tarayıcıda crypto.getRandomValues ile güvenli şifre: karakter setleri, uzunluk, rejection sampling, kopyalama ve gizlilik.", keywords: "şifre üreteci JavaScript, crypto.getRandomValues, rastgele şifre" },
+    ar: { title: "مولّد كلمات المرور بـ JavaScript: درس — Nibras Code", description: "كلمة مرور آمنة في المتصفح بـ crypto.getRandomValues: مجموعات الأحرف والطول وrejection sampling والنسخ والخصوصية.", keywords: "مولد كلمات مرور JavaScript, crypto.getRandomValues" },
+    ru: { title: "Генератор паролей на JavaScript: урок — Nibras Code", description: "Надёжный пароль в браузере через crypto.getRandomValues: наборы символов, длина, rejection sampling, копирование и приватность.", keywords: "генератор паролей JavaScript, crypto.getRandomValues, случайный пароль" },
+  },
+  "javascript-qr-code-generator": {
+    az: { title: "HTML, CSS və JavaScript ilə QR kod generatoru: dərs — Nibras Code", description: "QR kod nədir, qrcode-generator (MIT), canvas-a çəkmək, sakit zona, ölçü və rəng, PNG yükləmə, oflayn iş və təhlükəsiz skan.", keywords: "QR kod generatoru JavaScript, qrcode-generator, canvas PNG" },
+    en: { title: "QR code generator with HTML, CSS and JavaScript: a lesson — Nibras Code", description: "What a QR code is, the qrcode-generator library (MIT), canvas drawing, quiet zone, size and colors, PNG download, offline use and safe scanning.", keywords: "QR code generator JavaScript, qrcode-generator, canvas PNG" },
+    tr: { title: "HTML, CSS ve JavaScript ile QR kod üreteci: ders — Nibras Code", description: "QR kod nedir, qrcode-generator (MIT), canvas çizimi, sessiz bölge, boyut ve renk, PNG indirme, çevrimdışı kullanım ve güvenli tarama.", keywords: "QR kod üreteci JavaScript, qrcode-generator, canvas PNG" },
+    ar: { title: "مولّد رموز QR بـ HTML وCSS وJavaScript: درس — Nibras Code", description: "ما رمز QR، مكتبة qrcode-generator (MIT)، الرسم على canvas، المنطقة الهادئة، الحجم والألوان، تنزيل PNG، العمل دون اتصال والمسح الآمن.", keywords: "مولد QR JavaScript, qrcode-generator" },
+    ru: { title: "Генератор QR-кодов на HTML, CSS и JavaScript: урок — Nibras Code", description: "Что такое QR-код, библиотека qrcode-generator (MIT), рисование на canvas, тихая зона, размер и цвета, скачивание PNG, офлайн и безопасное сканирование.", keywords: "генератор QR JavaScript, qrcode-generator, canvas PNG" },
+  },
   "rsync": {
     az: { title: "rsync nədir? — Nibras Code", description: "rsync faylı bir yerdən başqa yerə köçürən əmrdir. Artıq eyni olanı yenidən göndərməməyə çalışır. cp bütün faylı hər dəfə kopyalayır.", keywords: "rsync nədir, fayl köçürmə, ehtiyat nüsxə, cp" },
     en: { title: "What is rsync? — Nibras Code", description: "rsync is a command that copies a file from one place to another. It tries not to send again what is already the same. cp copies the whole file every time.", keywords: "what is rsync, file copy, backup, cp" },
