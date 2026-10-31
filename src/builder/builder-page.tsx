@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type DragEvent } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Lang } from "@/lib/i18n";
 import { useI18n } from "@/lib/i18n-context";
 import { filesToZip } from "@/workspace/files";
@@ -551,116 +551,285 @@ function readSaved(): { name: string; pages: SitePage[]; pageId: string; accent:
   }
 }
 
+type Trade = "workshop" | "cafe" | "usta" | "shop";
+type Job = { trade: Trade; name: string; work: string; city: string; phone: string; price: string };
+type Fill = { name: string; work: string; city: string; phone: string; price: string };
+
+const TRADES: Trade[] = ["workshop", "cafe", "usta", "shop"];
+const INK: Record<Trade, string> = { workshop: "#6b4423", cafe: "#7a3e2e", usta: "#1d4f3e", shop: "#1e3a5f" };
+const JOB_KEY = "nibras-builder-job";
+
+const FORM: Record<Lang, {
+  pick: string;
+  name: string;
+  work: string;
+  city: string;
+  phone: string;
+  price: string;
+  call: string;
+  sample: string;
+  hours: string;
+  trades: Record<Trade, string>;
+  points: Record<Trade, [string, string, string]>;
+}> = {
+  az: {
+    pick: "Hazır iş seç",
+    name: "İşin adı",
+    work: "Nə iş görür",
+    city: "Şəhər",
+    phone: "Telefon",
+    price: "Qiymət",
+    call: "Zəng et",
+    sample: "050 000 00 00 nümunədir. Öz nömrəni yaz.",
+    hours: "Hər gün",
+    trades: { workshop: "Emalatxana", cafe: "Kafe", usta: "Usta", shop: "Mağaza" },
+    points: {
+      workshop: ["Açar eyni gündə", "Qıfıl dəyişmə", "Xırda təmir"],
+      cafe: ["Çay və qəhvə", "Səhər yeməyi", "Yerində oturma"],
+      usta: ["Su kranı", "Qapı və pəncərə", "Evə gəlmə"],
+      shop: ["Gündəlik ərzaq", "Su və çörək", "Yaxın məhəllə"],
+    },
+  },
+  en: {
+    pick: "Pick a ready trade",
+    name: "Business name",
+    work: "What you do",
+    city: "City",
+    phone: "Phone",
+    price: "Price",
+    call: "Call",
+    sample: "050 000 00 00 is a sample. Write your own number.",
+    hours: "Every day",
+    trades: { workshop: "Workshop", cafe: "Cafe", usta: "Repair", shop: "Shop" },
+    points: {
+      workshop: ["Keys the same day", "Lock change", "Small repairs"],
+      cafe: ["Tea and coffee", "Breakfast", "Sit inside"],
+      usta: ["Taps", "Doors and windows", "Home visit"],
+      shop: ["Daily food", "Water and bread", "The nearby street"],
+    },
+  },
+  tr: {
+    pick: "Hazır iş seç",
+    name: "İşin adı",
+    work: "Ne iş yapar",
+    city: "Şehir",
+    phone: "Telefon",
+    price: "Fiyat",
+    call: "Ara",
+    sample: "050 000 00 00 örnektir. Kendi numaranı yaz.",
+    hours: "Her gün",
+    trades: { workshop: "Atölye", cafe: "Kafe", usta: "Usta", shop: "Mağaza" },
+    points: {
+      workshop: ["Anahtar aynı gün", "Kilit değişimi", "Ufak tamir"],
+      cafe: ["Çay ve kahve", "Sabah yemeği", "İçeride oturma"],
+      usta: ["Musluk", "Kapı ve pencere", "Eve geliş"],
+      shop: ["Günlük gıda", "Su ve ekmek", "Yakın mahalle"],
+    },
+  },
+  ar: {
+    pick: "اختر عملاً جاهزاً",
+    name: "اسم العمل",
+    work: "ماذا يعمل",
+    city: "المدينة",
+    phone: "الهاتف",
+    price: "السعر",
+    call: "اتصل",
+    sample: "050 000 00 00 مثال. اكتب رقمك.",
+    hours: "كل يوم",
+    trades: { workshop: "ورشة", cafe: "مقهى", usta: "حرفي", shop: "متجر" },
+    points: {
+      workshop: ["مفتاح في اليوم نفسه", "تبديل القفل", "إصلاح صغير"],
+      cafe: ["شاي وقهوة", "فطور", "جلوس في الداخل"],
+      usta: ["حنفية", "باب ونافذة", "زيارة المنزل"],
+      shop: ["غذاء يومي", "ماء وخبز", "الحي القريب"],
+    },
+  },
+  ru: {
+    pick: "Выберите готовое дело",
+    name: "Название",
+    work: "Чем занимается",
+    city: "Город",
+    phone: "Телефон",
+    price: "Цена",
+    call: "Позвонить",
+    sample: "050 000 00 00 — образец. Напишите свой номер.",
+    hours: "Каждый день",
+    trades: { workshop: "Мастерская", cafe: "Кафе", usta: "Мастер", shop: "Магазин" },
+    points: {
+      workshop: ["Ключ в тот же день", "Замена замка", "Мелкий ремонт"],
+      cafe: ["Чай и кофе", "Завтрак", "Место внутри"],
+      usta: ["Кран", "Дверь и окно", "Выезд на дом"],
+      shop: ["Еда на день", "Вода и хлеб", "Ближний квартал"],
+    },
+  },
+};
+
+const SAMPLE: Record<Lang, Record<Trade, Fill>> = {
+  az: {
+    workshop: { name: "Köhnə Darvaza", work: "Açar, qıfıl və xırda təmir", city: "Bakı", phone: "050 000 00 00", price: "Baxışdan sonra deyilir" },
+    cafe: { name: "Həyət Kafe", work: "Çay, qəhvə və ev yeməyi", city: "Gəncə", phone: "050 000 00 00", price: "Çay 1 AZN-dən" },
+    usta: { name: "Usta Elçin", work: "Ev təmiri və su kranı", city: "Sumqayıt", phone: "050 000 00 00", price: "Çağırış 20 AZN-dən" },
+    shop: { name: "Qapıönü Market", work: "Gündəlik ərzaq və su", city: "Bakı", phone: "050 000 00 00", price: "Su 0.50 AZN" },
+  },
+  en: {
+    workshop: { name: "Old Gate", work: "Keys, locks and small repairs", city: "Baku", phone: "050 000 00 00", price: "Told after a look" },
+    cafe: { name: "Yard Cafe", work: "Tea, coffee and home food", city: "Ganja", phone: "050 000 00 00", price: "Tea from 1 AZN" },
+    usta: { name: "Repair Elchin", work: "Home repair and taps", city: "Sumqayit", phone: "050 000 00 00", price: "Visit from 20 AZN" },
+    shop: { name: "Doorstep Market", work: "Daily food and water", city: "Baku", phone: "050 000 00 00", price: "Water 0.50 AZN" },
+  },
+  tr: {
+    workshop: { name: "Eski Kapı", work: "Anahtar, kilit ve ufak tamir", city: "Bakü", phone: "050 000 00 00", price: "Bakıştan sonra söylenir" },
+    cafe: { name: "Avlu Kafe", work: "Çay, kahve ve ev yemeği", city: "Gence", phone: "050 000 00 00", price: "Çay 1 AZN'den" },
+    usta: { name: "Usta Elçin", work: "Ev tamiri ve musluk", city: "Sumgayıt", phone: "050 000 00 00", price: "Geliş 20 AZN'den" },
+    shop: { name: "Kapı Önü Market", work: "Günlük gıda ve su", city: "Bakü", phone: "050 000 00 00", price: "Su 0.50 AZN" },
+  },
+  ar: {
+    workshop: { name: "البوابة القديمة", work: "مفاتيح وأقفال وإصلاح صغير", city: "باكو", phone: "050 000 00 00", price: "يُقال بعد النظر" },
+    cafe: { name: "مقهى الباحة", work: "شاي وقهوة وطعام بيت", city: "كنجه", phone: "050 000 00 00", price: "الشاي من 1 AZN" },
+    usta: { name: "الحرفي إلشين", work: "إصلاح البيت والحنفية", city: "سومقايت", phone: "050 000 00 00", price: "الزيارة من 20 AZN" },
+    shop: { name: "سوق الباب", work: "غذاء يومي وماء", city: "باكو", phone: "050 000 00 00", price: "الماء 0.50 AZN" },
+  },
+  ru: {
+    workshop: { name: "Старые ворота", work: "Ключи, замки и мелкий ремонт", city: "Баку", phone: "050 000 00 00", price: "Скажем после осмотра" },
+    cafe: { name: "Кафе во дворе", work: "Чай, кофе и домашняя еда", city: "Гянджа", phone: "050 000 00 00", price: "Чай от 1 AZN" },
+    usta: { name: "Мастер Эльчин", work: "Ремонт дома и краны", city: "Сумгаит", phone: "050 000 00 00", price: "Выезд от 20 AZN" },
+    shop: { name: "Лавка у двери", work: "Еда на день и вода", city: "Баку", phone: "050 000 00 00", price: "Вода 0.50 AZN" },
+  },
+};
+
+function freshJob(lang: Lang, trade: Trade = "workshop"): Job {
+  return { trade, ...SAMPLE[lang][trade] };
+}
+
+function readJob(lang: Lang): Job | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const data = JSON.parse(localStorage.getItem(JOB_KEY) || "") as Partial<Job>;
+    if (!data || !TRADES.includes(data.trade as Trade)) return null;
+    const base = freshJob(lang, data.trade as Trade);
+    return {
+      trade: data.trade as Trade,
+      name: typeof data.name === "string" ? data.name : base.name,
+      work: typeof data.work === "string" ? data.work : base.work,
+      city: typeof data.city === "string" ? data.city : base.city,
+      phone: typeof data.phone === "string" ? data.phone : base.phone,
+      price: typeof data.price === "string" ? data.price : base.price,
+    };
+  } catch {
+    return null;
+  }
+}
+
+function telHref(phone: string) {
+  const digits = phone.replace(/[^\d+]/g, "");
+  return digits ? `tel:${digits}` : "#";
+}
+
+function jobHtml(job: Job, lang: Lang) {
+  const form = FORM[lang];
+  const ink = INK[job.trade];
+  const points = form.points[job.trade].map((item) => `<li>${esc(item)}</li>`).join("");
+  return `<!DOCTYPE html>
+<html lang="${lang}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${esc(job.name || form.trades[job.trade])}</title>
+<style>
+body{margin:0;font-family:Georgia,serif;color:#1c1917;background:#f6f3ee}
+header,main,footer{max-width:720px;margin:0 auto;padding:28px 20px}
+header{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+h1{font-size:1.7rem;margin:0}
+.work{font-size:1.35rem;line-height:1.3;margin:0 0 8px}
+.price{margin:0 0 16px}
+a{display:inline-block;background:${ink};color:#fff;text-decoration:none;padding:10px 16px;border-radius:6px}
+ul{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0;list-style:none}
+li{background:#fff;border:1px solid #e7e0d6;padding:14px}
+footer{border-top:1px solid #e7e0d6}
+@media(max-width:700px){ul{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><h1>${esc(job.name)}</h1><span>${esc(job.city)}</span></header>
+<main>
+<p class="work">${esc(job.work)}</p>
+<p class="price">${esc(job.price)}</p>
+<a href="${esc(telHref(job.phone))}">${esc(form.call)}</a>
+<ul>${points}</ul>
+</main>
+<footer><b>${esc(job.city)}</b><p>${esc(job.phone)}</p><p>${esc(form.hours)}</p></footer>
+</body>
+</html>`;
+}
+
+function Sheet({ job, lang }: { job: Job; lang: Lang }) {
+  const form = FORM[lang];
+  const ink = INK[job.trade];
+  return (
+    <div className="nb-sheet">
+      <header>
+        <h3>{job.name}</h3>
+        <span>{job.city}</span>
+      </header>
+      <p className="nb-work">{job.work}</p>
+      <p className="nb-price">{job.price}</p>
+      <span className="nb-btn" style={{ background: ink }}>{form.call}</span>
+      <ul>
+        {form.points[job.trade].map((item) => <li key={item}>{item}</li>)}
+      </ul>
+      <footer>
+        <b>{job.city}</b>
+        <span>{job.phone}</span>
+        <small>{form.hours}</small>
+      </footer>
+    </div>
+  );
+}
+
 export function BuilderPage() {
   const { lang } = useI18n();
-  const copy = COPY[lang];
-  const extra = EXTRA[lang];
-  const [site, setSite] = useState(copy.name);
-  const [pages, setPages] = useState<SitePage[]>(() => freshSite(lang));
-  const [pageId, setPageId] = useState("home");
-  const [accent, setAccent] = useState("#5b4dff");
-  const [selected, setSelected] = useState<string | null>(null);
-  const [preview, setPreview] = useState(false);
-  const [tab, setTab] = useState<"design" | "layers">("design");
-  const [device, setDevice] = useState<"desk" | "tablet" | "phone">("desk");
-  const [open, setOpen] = useState<"pages" | "look" | "blocks" | "write">("pages");
+  const form = FORM[lang];
+  const [job, setJob] = useState<Job>(() => freshJob(lang));
   const [ready, setReady] = useState(false);
-  const history = useRef<SitePage[][]>([]);
+  const history = useRef<Job[]>([]);
   const lastPush = useRef(0);
-  const page = pages.find((item) => item.id === pageId) ?? pages[0];
-  const blocks = page?.blocks ?? [];
-  const current = useMemo(() => blocks.find((block) => block.id === selected) ?? null, [blocks, selected]);
 
   useEffect(() => {
-    const saved = readSaved();
-    if (saved) {
-      setSite(saved.name);
-      setPages(saved.pages);
-      setPageId(saved.pageId);
-      setAccent(saved.accent);
-    } else {
-      const next = freshSite(lang);
-      setPages(next);
-      setPageId(next[0].id);
-      setSite(COPY[lang].name);
-    }
+    const saved = readJob(lang);
+    setJob(saved ?? freshJob(lang));
     setReady(true);
   }, [lang]);
 
   useEffect(() => {
-    if (!ready || !pageId) return;
-    localStorage.setItem(STORE, JSON.stringify({ name: site, pages, pageId, accent }));
-  }, [ready, site, pages, pageId, accent]);
+    if (!ready) return;
+    localStorage.setItem(JOB_KEY, JSON.stringify(job));
+  }, [ready, job]);
 
-  function remember() {
+  function remember(prev: Job) {
     const now = Date.now();
     if (now - lastPush.current < 700) return;
-    history.current.push(pages.map((item) => ({ ...item, blocks: item.blocks.map((block) => ({ ...block })) })));
+    history.current.push(prev);
     if (history.current.length > 30) history.current.shift();
     lastPush.current = now;
   }
 
-  function write(pageNext: SitePage[], id = page?.id) {
-    remember();
-    setPages(pageNext);
-    if (id) setPageId(id);
+  function patch(part: Partial<Job>) {
+    setJob((prev) => {
+      remember(prev);
+      return { ...prev, ...part };
+    });
   }
 
-  function setBlocks(next: Block[]) {
-    if (!page) return;
-    write(pages.map((item) => (item.id === page.id ? { ...item, blocks: next } : item)));
-  }
-
-  function load(id: string) {
-    const rows = SEED[lang][id] ?? SEED[lang].landing;
-    const next = withIds(rows);
-    setBlocks(next);
-    setSelected(next[0]?.id ?? null);
-  }
-
-  function insert(kind: Kind, index: number) {
-    const block = { ...blank(kind), id: nid("b") };
-    const next = blocks.slice();
-    next.splice(index, 0, block);
-    setBlocks(next);
-    setSelected(block.id);
-  }
-
-  function move(id: string, index: number) {
-    const from = blocks.findIndex((block) => block.id === id);
-    if (from < 0) return;
-    const next = blocks.slice();
-    const [item] = next.splice(from, 1);
-    const target = index > from ? index - 1 : index;
-    next.splice(Math.max(0, Math.min(target, next.length)), 0, item);
-    setBlocks(next);
-  }
-
-  function patch(id: string, part: Partial<Block>) {
-    setBlocks(blocks.map((block) => (block.id === id ? { ...block, ...part } : block)));
-  }
-
-  function shift(id: string, dir: -1 | 1) {
-    const from = blocks.findIndex((block) => block.id === id);
-    const to = from + dir;
-    if (from < 0 || to < 0 || to >= blocks.length) return;
-    const next = blocks.slice();
-    const [item] = next.splice(from, 1);
-    next.splice(to, 0, item);
-    setBlocks(next);
-  }
-
-  function addPage() {
-    const item: SitePage = { id: nid("p"), name: `${extra.newPage} ${pages.length + 1}`, blocks: withIds(SEED[lang].contact) };
-    write([...pages, item], item.id);
-    setSelected(item.blocks[0]?.id ?? null);
+  function pick(trade: Trade) {
+    setJob((prev) => {
+      remember(prev);
+      return freshJob(lang, trade);
+    });
   }
 
   function undo() {
     const prev = history.current.pop();
-    if (!prev) return;
-    setPages(prev);
-    if (!prev.some((item) => item.id === pageId)) setPageId(prev[0]?.id ?? "");
+    if (prev) setJob(prev);
   }
 
   function saveFile(blob: Blob, name: string) {
@@ -673,186 +842,46 @@ export function BuilderPage() {
   }
 
   function download() {
-    saveFile(new Blob([siteHtml(site, pages, lang, accent)], { type: "text/html" }), "nibras-sayt.html");
+    saveFile(new Blob([jobHtml(job, lang)], { type: "text/html" }), "nibras-sayt.html");
   }
 
   async function downloadZip() {
-    const names = pages.map((_, index) => (index === 0 ? "index.html" : `sehife-${index + 1}.html`));
-    const fileNav = pages.map((item, index) => ({ href: names[index], label: item.name }));
-    const files = [
-      { name: "index.html", content: siteHtml(site, pages, lang, accent) },
-      ...pages.slice(1).map((item, index) => ({
-        name: names[index + 1],
-        content: siteHtml(item.name, [item], lang, accent, fileNav),
-      })),
-    ];
-    saveFile(await filesToZip(files), "nibras-sayt.zip");
-  }
-
-  function onDragStart(event: DragEvent, payload: string) {
-    event.dataTransfer.setData("text/plain", payload);
-    event.dataTransfer.effectAllowed = "copyMove";
-  }
-
-  function take(event: DragEvent) {
-    event.preventDefault();
-    return event.dataTransfer.getData("text/plain");
+    saveFile(await filesToZip([{ name: "index.html", content: jobHtml(job, lang) }]), "nibras-sayt.zip");
   }
 
   return (
     <main className="nb">
       <div className="nb-app">
         <aside className="nb-side">
-          <div className="nb-brand">
-            <strong>Nibras</strong>
-            <span>{copy.name}</span>
+          <div className="nb-brand"><strong>Nibras</strong></div>
+          <p className="nb-kicker">{form.pick}</p>
+          <div className="nb-list">
+            {TRADES.map((trade) => (
+              <button key={trade} type="button" className={job.trade === trade ? "is-on" : ""} onClick={() => pick(trade)}>{form.trades[trade]}</button>
+            ))}
           </div>
-          <label className="nb-id">{copy.siteName}
-            <input value={site} onChange={(event) => setSite(event.target.value)} />
-          </label>
-          <button type="button" className={open === "pages" ? "nb-acc is-on" : "nb-acc"} onClick={() => setOpen("pages")}>{extra.pages}</button>
-          {open === "pages" ? (
-            <div className="nb-panel">
-              <div className="nb-list">
-                {pages.map((item) => (
-                  <button key={item.id} type="button" className={item.id === page?.id ? "is-on" : ""} onClick={() => { setPageId(item.id); setSelected(null); }}>{item.name}</button>
-                ))}
-                <button type="button" onClick={addPage}>+ {extra.newPage}</button>
-              </div>
-              {page ? (
-                <label>{extra.pageName}
-                  <input value={page.name} onChange={(event) => write(pages.map((item) => (item.id === page.id ? { ...item, name: event.target.value } : item)))} />
-                </label>
-              ) : null}
-              {pages.length > 1 && page ? (
-                <button type="button" className="nb-quiet" onClick={() => { const next = pages.filter((item) => item.id !== page.id); write(next, next[0]?.id); setSelected(null); }}>{extra.delPage}</button>
-              ) : null}
-            </div>
-          ) : null}
-          <button type="button" className={open === "look" ? "nb-acc is-on" : "nb-acc"} onClick={() => setOpen("look")}>{copy.templates}</button>
-          {open === "look" ? (
-            <div className="nb-panel">
-              <div className="nb-list">
-                {copy.tpls.map((tpl) => (
-                  <button key={tpl.id} type="button" onClick={() => load(tpl.id)}>{tpl.name}</button>
-                ))}
-              </div>
-              <p className="nb-kicker">{extra.color}</p>
-              <span className="nb-swatches">
-                {COLORS.map((color) => (
-                  <button key={color} type="button" className={accent === color ? "is-on" : ""} style={{ background: color }} aria-label={color} onClick={() => setAccent(color)} />
-                ))}
-              </span>
-            </div>
-          ) : null}
-          <button type="button" className={open === "blocks" ? "nb-acc is-on" : "nb-acc"} onClick={() => setOpen("blocks")}>{extra.addPart}</button>
-          {open === "blocks" ? (
-            <div className="nb-panel">
-              <div className="nb-list">
-                {KINDS.map((kind) => (
-                  <button key={kind} type="button" onClick={() => { insert(kind, blocks.length); setOpen("write"); }}>{copy.kinds[kind]}</button>
-                ))}
-              </div>
-            </div>
-          ) : null}
-          <button type="button" className={open === "write" ? "nb-acc is-on" : "nb-acc"} onClick={() => setOpen("write")}>{copy.design}</button>
-          {open === "write" ? (
-            <div className="nb-panel">
-              {current ? (
-                <>
-                  <p className="nb-kicker">{copy.kinds[current.kind]}</p>
-                  <label>{copy.title}<input value={current.title} onChange={(event) => patch(current.id, { title: event.target.value })} /></label>
-                  <label>{copy.body}<textarea value={current.body} onChange={(event) => patch(current.id, { body: event.target.value })} /></label>
-                  {current.kind === "hero" || current.kind === "cta" || current.kind === "footer" ? (
-                    <>
-                      <label>{copy.button}<input value={current.button} onChange={(event) => patch(current.id, { button: event.target.value })} /></label>
-                      <label>{copy.link}<input value={current.href} onChange={(event) => patch(current.id, { href: event.target.value })} /></label>
-                    </>
-                  ) : null}
-                  <span className="nb-row">
-                    <button type="button" onClick={() => shift(current.id, -1)}>{copy.up}</button>
-                    <button type="button" onClick={() => shift(current.id, 1)}>{copy.down}</button>
-                    <button type="button" onClick={() => { setBlocks(blocks.filter((item) => item.id !== current.id)); setSelected(null); }}>{copy.remove}</button>
-                  </span>
-                </>
-              ) : <p className="nb-note">{extra.touch}</p>}
-            </div>
-          ) : null}
+          <label>{form.name}<input value={job.name} onChange={(event) => patch({ name: event.target.value })} /></label>
+          <label>{form.work}<input value={job.work} onChange={(event) => patch({ work: event.target.value })} /></label>
+          <label>{form.city}<input value={job.city} onChange={(event) => patch({ city: event.target.value })} /></label>
+          <label>{form.phone}<input value={job.phone} onChange={(event) => patch({ phone: event.target.value })} /></label>
+          <p className="nb-note">{form.sample}</p>
+          <label>{form.price}<input value={job.price} onChange={(event) => patch({ price: event.target.value })} /></label>
         </aside>
         <section className="nb-screen">
           <div className="nb-stage">
             <div className="nb-browser">
               <div className="nb-chrome">
                 <i /><i /><i />
-                <span>{site || copy.name}</span>
-                <button type="button" onClick={undo}>{extra.undo}</button>
-                <button type="button" onClick={download}>{copy.download}</button>
-                <button type="button" className="nb-go" onClick={() => void downloadZip()}>{extra.zip}</button>
+                <span>{job.name}</span>
+                <button type="button" onClick={undo}>{EXTRA[lang].undo}</button>
+                <button type="button" onClick={download}>{COPY[lang].download}</button>
+                <button type="button" className="nb-go" onClick={() => void downloadZip()}>{EXTRA[lang].zip}</button>
               </div>
-              <div className="nb-canvas">
-                {blocks.map((block) => {
-                  const look = box(block, accent);
-                  return (
-                    <article
-                      key={block.id}
-                      className={block.id === selected ? "is-on" : ""}
-                      style={{ textAlign: block.align, background: look.bg === "transparent" ? "#fff" : look.bg, color: look.color, padding: look.pad }}
-                      onClick={() => { setSelected(block.id); setOpen("write"); }}
-                    >
-                      <BlockView block={block} accent={accent} size={look.size} />
-                    </article>
-                  );
-                })}
-              </div>
+              <Sheet job={job} lang={lang} />
             </div>
           </div>
         </section>
       </div>
     </main>
-  );
-}
-function BlockView({ block, accent, size }: { block: Block; accent: string; size: string }) {
-  if (block.kind === "hero") {
-    const image = safeImage(block.image);
-    return (
-      <div className="nb-hero">
-        <div>
-          <h3 style={{ fontSize: size }}>{block.title}</h3>
-          <p>{block.body}</p>
-          {block.button ? <span className="nb-btn" style={{ background: accent }}>{block.button}</span> : null}
-        </div>
-        {image ? <img src={image} alt="" /> : <i style={{ background: `linear-gradient(145deg, ${accent}, #7fd3ff)` }} />}
-      </div>
-    );
-  }
-  if (block.kind === "stats" || block.kind === "cards") {
-    return (
-      <div>
-        <h3>{block.title}</h3>
-        <div className="nb-grid">
-          {lines(block.body).map((line) => {
-            const item = pair(line);
-            return <div key={line}><b>{item.a}</b><span>{item.b}</span></div>;
-          })}
-        </div>
-      </div>
-    );
-  }
-  if (block.kind === "columns") {
-    return (
-      <div>
-        {block.title ? <h3>{block.title}</h3> : null}
-        <div className="nb-cols">
-          {block.body.split("||").map((half, index) => <p key={index}>{half.trim()}</p>)}
-        </div>
-      </div>
-    );
-  }
-  return (
-    <div>
-      {block.title ? <h3 style={{ fontSize: block.kind === "text" ? size : undefined }}>{block.title}</h3> : null}
-      <p>{block.body}</p>
-      {block.button ? <span className="nb-btn" style={{ background: accent }}>{block.button}</span> : null}
-    </div>
   );
 }

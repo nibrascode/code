@@ -11997,25 +11997,18 @@ html[lang="ar"] .why-lead.topic-body,
 .nb-chrome span { flex: 1; margin-left: 8px; color: #50575e; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .nb-chrome button { height: 28px; padding: 0 10px; border: 1px solid #2271b1; border-radius: 2px; background: #f6f7f7; color: #2271b1; cursor: pointer; font: 12px/1 system-ui, sans-serif; }
 .nb-go { background: #2271b1 !important; color: #fff !important; }
-.nb-canvas article { border: 1px solid transparent; cursor: pointer; }
-.nb-canvas article.is-on { border-color: #2271b1; box-shadow: inset 0 0 0 1px #2271b1; }
-.nb-canvas h3 { margin: 0 0 6px; }
-.nb-canvas p { margin: 0; line-height: 1.5; }
-.nb-hero { display: grid; grid-template-columns: 1.2fr .8fr; gap: 16px; align-items: center; }
-.nb-hero i, .nb-hero img { min-height: 150px; border-radius: 2px; background: #dcdcde; width: 100%; object-fit: cover; }
-.nb-btn { display: inline-block; margin-top: 10px; color: #fff; border-radius: 2px; padding: 8px 14px; }
-.nb-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-.nb-grid div { background: #f6f7f7; border: 1px solid #dcdcde; padding: 12px; }
-.nb-grid b, .nb-grid span { display: block; }
-.nb-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.nb-sheet { padding: 36px 32px 48px; color: #1c1917; font-family: Georgia, serif; }
+.nb-sheet header { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+.nb-sheet h3 { margin: 0; font-size: 1.8rem; }
+.nb-work { font-size: 1.35rem; line-height: 1.3; margin: 18px 0 6px; }
+.nb-price { margin: 0 0 16px; }
+.nb-btn { display: inline-block; color: #fff; border-radius: 2px; padding: 10px 16px; }
+.nb-sheet ul { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 22px 0 0; padding: 0; list-style: none; }
+.nb-sheet li { background: #f6f3ee; border: 1px solid #e7e0d6; padding: 14px; }
+.nb-sheet footer { display: grid; gap: 4px; margin-top: 28px; padding-top: 16px; border-top: 1px solid #e7e0d6; }
 @media (max-width: 800px) {
   .nb-app { grid-template-columns: 1fr; height: auto; }
   .nb-stage { min-height: 70vh; padding: 12px; }
-  .nb-hero, .nb-grid, .nb-cols { grid-template-columns: 1fr; }
-}
-  .nb-side { border-right: 0; border-bottom: 1px solid #e4e7ee; }
-  .nb-stage { min-height: 70vh; }
-  .nb-hero, .nb-grid, .nb-cols { grid-template-columns: 1fr; }
-}
+  .nb-sheet ul { grid-template-columns: 1fr; }
 }
 
