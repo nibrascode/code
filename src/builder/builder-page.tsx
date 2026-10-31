@@ -1,9 +1,11 @@
-import { useMemo, useState, type DragEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type DragEvent } from "react";
 import type { Lang } from "@/lib/i18n";
 import { useI18n } from "@/lib/i18n-context";
 
-type Kind = "hero" | "text" | "stats" | "cards" | "cta";
+type Kind = "hero" | "text" | "stats" | "cards" | "cta" | "columns" | "footer";
 type Align = "start" | "center";
+type Tone = "plain" | "soft" | "dark";
+type Step = "s" | "m" | "l";
 
 type Block = {
   id: string;
@@ -14,7 +16,13 @@ type Block = {
   button: string;
   href: string;
   image: string;
+  tone?: Tone;
+  size?: Step;
+  pad?: Step;
+  color?: string;
 };
+
+type SitePage = { id: string; name: string; blocks: Block[] };
 
 type Copy = {
   name: string;
@@ -71,7 +79,7 @@ const COPY: Record<Lang, Copy> = {
     link: "Keçid",
     image: "Şəkil ünvanı",
     imageHint: "Boş qalsa rəngli kart qalır.",
-    kinds: { hero: "Açılış", text: "Mətn", stats: "Rəqəmlər", cards: "Kartlar", cta: "Düymə bloku" },
+    kinds: { hero: "Açılış", text: "Mətn", stats: "Rəqəmlər", cards: "Kartlar", cta: "Düymə bloku", columns: "İki sütun", footer: "Alt hissə" },
     tpls: [
       { id: "landing", name: "Açılış" },
       { id: "services", name: "Xidmətlər" },
@@ -104,7 +112,7 @@ const COPY: Record<Lang, Copy> = {
     link: "Link",
     image: "Image address",
     imageHint: "Leave it empty to keep the color card.",
-    kinds: { hero: "Hero", text: "Text", stats: "Numbers", cards: "Cards", cta: "Button block" },
+    kinds: { hero: "Hero", text: "Text", stats: "Numbers", cards: "Cards", cta: "Button block", columns: "Two columns", footer: "Footer" },
     tpls: [
       { id: "landing", name: "Landing" },
       { id: "services", name: "Services" },
@@ -137,7 +145,7 @@ const COPY: Record<Lang, Copy> = {
     link: "Bağlantı",
     image: "Resim adresi",
     imageHint: "Boş kalırsa renkli kart durur.",
-    kinds: { hero: "Açılış", text: "Metin", stats: "Sayılar", cards: "Kartlar", cta: "Düğme bloğu" },
+    kinds: { hero: "Açılış", text: "Metin", stats: "Sayılar", cards: "Kartlar", cta: "Düğme bloğu", columns: "İki sütun", footer: "Alt kısım" },
     tpls: [
       { id: "landing", name: "Açılış" },
       { id: "services", name: "Hizmetler" },
@@ -170,7 +178,7 @@ const COPY: Record<Lang, Copy> = {
     link: "الرابط",
     image: "عنوان الصورة",
     imageHint: "إن تركته فارغاً تبقى البطاقة الملونة.",
-    kinds: { hero: "افتتاح", text: "نص", stats: "أرقام", cards: "بطاقات", cta: "بلوك زر" },
+    kinds: { hero: "افتتاح", text: "نص", stats: "أرقام", cards: "بطاقات", cta: "بلوك زر", columns: "عمودان", footer: "التذييل" },
     tpls: [
       { id: "landing", name: "افتتاح" },
       { id: "services", name: "خدمات" },
@@ -203,7 +211,7 @@ const COPY: Record<Lang, Copy> = {
     link: "Ссылка",
     image: "Адрес картинки",
     imageHint: "Если пусто, остаётся цветная карточка.",
-    kinds: { hero: "Шапка", text: "Текст", stats: "Цифры", cards: "Карточки", cta: "Блок кнопки" },
+    kinds: { hero: "Шапка", text: "Текст", stats: "Цифры", cards: "Карточки", cta: "Блок кнопки", columns: "Две колонки", footer: "Подвал" },
     tpls: [
       { id: "landing", name: "Главная" },
       { id: "services", name: "Услуги" },
@@ -331,16 +339,21 @@ const SEED: Record<Lang, Record<string, Omit<Block, "id">[]>> = {
   },
 };
 
-let seq = 1;
+function nid(prefix: string) {
+  return prefix + Math.random().toString(36).slice(2, 8);
+}
+
 function withIds(rows: Omit<Block, "id">[]): Block[] {
-  return rows.map((row) => ({ ...row, id: `b${seq++}` }));
+  return rows.map((row) => ({ ...row, id: nid("b") }));
 }
 
 function blank(kind: Kind): Omit<Block, "id"> {
-  if (kind === "stats") return { kind, align: "center", title: "1 | 2 | 3", body: "1 | a\n2 | b\n3 | c", button: "", href: "", image: "" };
+  if (kind === "stats") return { kind, align: "center", title: "", body: "1 | a\n2 | b\n3 | c", button: "", href: "", image: "" };
   if (kind === "cards") return { kind, align: "start", title: "", body: "A | ...\nB | ...", button: "", href: "", image: "" };
   if (kind === "cta") return { kind, align: "center", title: "", body: "", button: "OK", href: "#", image: "" };
   if (kind === "text") return { kind, align: "start", title: "", body: "", button: "", href: "", image: "" };
+  if (kind === "columns") return { kind, align: "start", title: "", body: "Sol | Qisa setir || Sag | Qisa setir", button: "", href: "", image: "" };
+  if (kind === "footer") return { kind, align: "center", title: "", body: "", button: "", href: "", image: "", tone: "dark" };
   return { kind, align: "start", title: "", body: "", button: "", href: "#", image: "" };
 }
 
@@ -349,12 +362,17 @@ function lines(body: string) {
 }
 
 function pair(line: string) {
-  const [a, b] = line.split("|");
-  return { a: (a ?? "").trim(), b: (b ?? "").trim() };
+  const cut = line.split("|");
+  return { a: (cut[0] ?? "").trim(), b: (cut.slice(1).join("|") ?? "").trim() };
 }
 
 function esc(value: string) {
-  return value.replace(/[&<>"']/g, (ch) => ({ "&": "&", "<": "<", ">": ">", '"': """, "'": "&#39;" })[ch] ?? ch);
+  return value
+    .replaceAll("&", "\u0026amp;")
+    .replaceAll("<", "\u0026lt;")
+    .replaceAll(">", "\u0026gt;")
+    .replaceAll('"', "\u0026quot;")
+    .replaceAll("'", "\u0026#39;");
 }
 
 function safeHref(value: string) {
@@ -369,37 +387,56 @@ function safeImage(value: string) {
   return "";
 }
 
-function blockHtml(block: Block) {
-  const align = block.align === "center" ? "center" : "left";
-  if (block.kind === "hero") {
-    const img = safeImage(block.image);
-    const media = img
-      ? `<img src="${esc(img)}" alt="">`
-      : `<div class="card"></div>`;
-    return `<section class="hero" style="text-align:${align}"><div><h1>${esc(block.title)}</h1><p>${esc(block.body)}</p>${block.button ? `<a class="btn" href="${esc(safeHref(block.href))}">${esc(block.button)}</a>` : ""}</div>${media}</section>`;
-  }
-  if (block.kind === "stats") {
-    const cells = lines(block.body).map((line) => {
-      const item = pair(line);
-      return `<div><b>${esc(item.a)}</b><span>${esc(item.b)}</span></div>`;
-    }).join("");
-    return `<section style="text-align:${align}"><h2>${esc(block.title)}</h2><div class="stats">${cells}</div></section>`;
-  }
-  if (block.kind === "cards") {
-    const cells = lines(block.body).map((line) => {
-      const item = pair(line);
-      return `<article><b>${esc(item.a)}</b><p>${esc(item.b)}</p></article>`;
-    }).join("");
-    return `<section style="text-align:${align}"><h2>${esc(block.title)}</h2><div class="cards">${cells}</div></section>`;
-  }
-  if (block.kind === "cta") {
-    return `<section class="cta" style="text-align:${align}"><h2>${esc(block.title)}</h2><p>${esc(block.body)}</p>${block.button ? `<a class="btn" href="${esc(safeHref(block.href))}">${esc(block.button)}</a>` : ""}</section>`;
-  }
-  return `<section style="text-align:${align}">${block.title ? `<h2>${esc(block.title)}</h2>` : ""}<p>${esc(block.body)}</p></section>`;
+function safeColor(value: string | undefined, fallback: string) {
+  return value && /^#[0-9a-fA-F]{6}$/.test(value) ? value : fallback;
 }
 
-function pageHtml(title: string, blocks: Block[], lang: Lang) {
-  const body = blocks.map(blockHtml).join("\n");
+function box(block: Block, accent: string) {
+  const pad = block.pad === "l" ? "48px 22px" : block.pad === "s" ? "12px 16px" : "28px 20px";
+  const bg = block.tone === "dark" ? "#172033" : block.tone === "soft" ? "#eef2ff" : "transparent";
+  const color = block.tone === "dark" ? "#f8fafc" : "#1c2434";
+  const size = block.size === "l" ? "2.7rem" : block.size === "s" ? "1.55rem" : "2.15rem";
+  return { pad, bg, color, size, accent: safeColor(block.color, accent) };
+}
+
+function blockHtml(block: Block, accent: string) {
+  const look = box(block, accent);
+  const align = block.align === "center" ? "center" : "left";
+  const style = `text-align:${align};padding:${look.pad};background:${look.bg};color:${look.color}`;
+  if (block.kind === "hero") {
+    const img = safeImage(block.image);
+    const media = img ? `<img src="${esc(img)}" alt="">` : `<div class="card"></div>`;
+    const button = block.button ? `<a class="btn" style="background:${look.accent}" href="${esc(safeHref(block.href))}">${esc(block.button)}</a>` : "";
+    return `<section class="hero" style="${style}"><div><h1 style="font-size:${look.size}">${esc(block.title)}</h1><p>${esc(block.body)}</p>${button}</div>${media}</section>`;
+  }
+  if (block.kind === "stats" || block.kind === "cards") {
+    const cells = lines(block.body).map((line) => {
+      const item = pair(line);
+      const tag = block.kind === "cards" ? "article" : "div";
+      return `<${tag}><b>${esc(item.a)}</b><span>${esc(item.b)}</span></${tag}>`;
+    }).join("");
+    const klass = block.kind === "cards" ? "cards" : "stats";
+    return `<section style="${style}"><h2>${esc(block.title)}</h2><div class="${klass}">${cells}</div></section>`;
+  }
+  if (block.kind === "columns") {
+    const halves = block.body.split("||");
+    const cells = halves.map((half) => `<div><p>${esc(half.trim())}</p></div>`).join("");
+    return `<section style="${style}">${block.title ? `<h2>${esc(block.title)}</h2>` : ""}<div class="cols">${cells}</div></section>`;
+  }
+  if (block.kind === "cta" || block.kind === "footer") {
+    const button = block.button ? `<a class="btn" style="background:${look.accent}" href="${esc(safeHref(block.href))}">${esc(block.button)}</a>` : "";
+    return `<section class="${block.kind}" style="${style}"><h2>${esc(block.title)}</h2><p>${esc(block.body)}</p>${button}</section>`;
+  }
+  return `<section style="${style}">${block.title ? `<h2 style="font-size:${look.size}">${esc(block.title)}</h2>` : ""}<p>${esc(block.body)}</p></section>`;
+}
+
+function siteHtml(title: string, pages: SitePage[], lang: Lang, accent: string) {
+  const paint = safeColor(accent, "#5b4dff");
+  const nav = pages.length > 1
+    ? `<nav class="bar">${pages.map((page) => `<button type="button" data-go="${esc(page.id)}">${esc(page.name)}</button>`).join("")}</nav>`
+    : "";
+  const screens = pages.map((page) => `<div class="screen" data-screen="${esc(page.id)}">${page.blocks.map((block) => blockHtml(block, paint)).join("\n")}</div>`).join("\n");
+  const first = pages[0]?.id ?? "p1";
   return `<!DOCTYPE html>
 <html lang="${lang}">
 <head>
@@ -408,36 +445,161 @@ function pageHtml(title: string, blocks: Block[], lang: Lang) {
 <title>${esc(title || "Nibras")}</title>
 <style>
 body{margin:0;font-family:Georgia,serif;color:#1c2434;background:#f6f7fb}
-section{max-width:880px;margin:0 auto;padding:28px 20px}
-h1{font-size:2.2rem;line-height:1.15;margin:0 0 12px}
+section{max-width:880px;margin:0 auto}
+h1{line-height:1.15;margin:0 0 12px}
 h2{margin:0 0 10px}
-p{line-height:1.5}
+p{line-height:1.5;white-space:pre-wrap}
+.bar{display:flex;gap:8px;justify-content:center;padding:14px;background:#fff;position:sticky;top:0}
+.bar button{border:0;background:${paint};color:#fff;border-radius:999px;padding:8px 14px;cursor:pointer}
 .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:20px;align-items:center}
-.card{min-height:180px;border-radius:24px;background:linear-gradient(145deg,#6d5efc,#7fd3ff)}
+.card{min-height:180px;border-radius:24px;background:linear-gradient(145deg,${paint},#7fd3ff)}
 img{width:100%;border-radius:24px;display:block}
-.btn{display:inline-block;margin-top:12px;background:#5b4dff;color:#fff;text-decoration:none;padding:10px 16px;border-radius:10px}
+.btn{display:inline-block;margin-top:12px;color:#fff;text-decoration:none;padding:10px 16px;border-radius:10px}
 .stats,.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.stats div,.cards article{background:#fff;border-radius:16px;padding:14px}
-.cta{background:#fff;border-radius:20px}
-@media(max-width:700px){.hero,.stats,.cards{grid-template-columns:1fr}}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.stats div,.cards article,.cols div{background:#fff;border-radius:16px;padding:14px}
+.footer{border-top:1px solid #e2e8f0}
+@media(max-width:700px){.hero,.stats,.cards,.cols{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-${body}
+${nav}
+${screens}
+<script>
+function show(id){
+  document.querySelectorAll("[data-screen]").forEach(function(node){
+    node.hidden = node.getAttribute("data-screen") !== id;
+  });
+}
+document.addEventListener("click", function(event){
+  var node = event.target && event.target.closest ? event.target.closest("[data-go]") : null;
+  if (!node) return;
+  show(node.getAttribute("data-go"));
+});
+show(${JSON.stringify(first)});
+<\/script>
 </body>
 </html>`;
 }
 
-const KINDS: Kind[] = ["hero", "text", "stats", "cards", "cta"];
+const KINDS: Kind[] = ["hero", "text", "stats", "cards", "columns", "cta", "footer"];
+const COLORS = ["#5b4dff", "#0f766e", "#b45309", "#be123c", "#111827"];
+const STORE = "nibras-builder-v2";
+
+const EXTRA: Record<Lang, {
+  pages: string;
+  newPage: string;
+  pageName: string;
+  delPage: string;
+  layers: string;
+  undo: string;
+  duplicate: string;
+  tone: string;
+  plain: string;
+  soft: string;
+  dark: string;
+  size: string;
+  space: string;
+  color: string;
+  phone: string;
+  tablet: string;
+  desk: string;
+  saved: string;
+  home: string;
+  colHint: string;
+}> = {
+  az: { pages: "Səhifələr", newPage: "Yeni səhifə", pageName: "Səhifənin adı", delPage: "Səhifəni sil", layers: "Laylar", undo: "Geri al", duplicate: "Kopyala", tone: "Fon", plain: "Ağ", soft: "Yumşaq", dark: "Tünd", size: "Ölçü", space: "Boşluq", color: "Rəng", phone: "Telefon", tablet: "Planşet", desk: "Masaüstü", saved: "Dəyişiklik bu telefonda qalır. Serverə getmir. Bir neçə səhifə bir HTML faylında endirilir.", home: "Ana", colHint: "İki tərəfi || ilə ayır." },
+  en: { pages: "Pages", newPage: "New page", pageName: "Page name", delPage: "Delete page", layers: "Layers", undo: "Undo", duplicate: "Duplicate", tone: "Background", plain: "White", soft: "Soft", dark: "Dark", size: "Size", space: "Space", color: "Color", phone: "Phone", tablet: "Tablet", desk: "Desktop", saved: "Changes stay on this phone. They are not sent to a server. Several pages download as one HTML file.", home: "Home", colHint: "Split the two sides with ||." },
+  tr: { pages: "Sayfalar", newPage: "Yeni sayfa", pageName: "Sayfanın adı", delPage: "Sayfayı sil", layers: "Katmanlar", undo: "Geri al", duplicate: "Kopyala", tone: "Zemin", plain: "Beyaz", soft: "Yumuşak", dark: "Koyu", size: "Ölçü", space: "Boşluk", color: "Renk", phone: "Telefon", tablet: "Tablet", desk: "Masaüstü", saved: "Değişiklik bu telefonda kalır. Sunucuya gitmez. Birkaç sayfa tek HTML dosyasında iner.", home: "Ana", colHint: "İki tarafı || ile ayır." },
+  ar: { pages: "صفحات", newPage: "صفحة جديدة", pageName: "اسم الصفحة", delPage: "احذف الصفحة", layers: "طبقات", undo: "تراجع", duplicate: "انسخ", tone: "الخلفية", plain: "أبيض", soft: "ناعم", dark: "داكن", size: "المقاس", space: "الفراغ", color: "اللون", phone: "هاتف", tablet: "جهاز لوحي", desk: "مكتب", saved: "تبقى التغييرات على هذا الهاتف ولا تُرسل إلى خادم. عدة صفحات تنزل في ملف HTML واحد.", home: "الرئيسية", colHint: "افصل الجانبين بـ ||." },
+  ru: { pages: "Страницы", newPage: "Новая страница", pageName: "Имя страницы", delPage: "Удалить страницу", layers: "Слои", undo: "Назад", duplicate: "Копия", tone: "Фон", plain: "Белый", soft: "Мягкий", dark: "Тёмный", size: "Размер", space: "Отступ", color: "Цвет", phone: "Телефон", tablet: "Планшет", desk: "Компьютер", saved: "Изменения остаются на этом телефоне и не уходят на сервер. Несколько страниц скачиваются одним HTML-файлом.", home: "Главная", colHint: "Две стороны разделите через ||." },
+};
+
+function freshSite(lang: Lang): SitePage[] {
+  return [{
+    id: "home",
+    name: EXTRA[lang].home,
+    blocks: SEED[lang].landing.map((row, index) => ({ ...row, id: `home-${index}` })),
+  }];
+}
+
+function readSaved(): { name: string; pages: SitePage[]; pageId: string; accent: string } | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = localStorage.getItem(STORE);
+    if (!raw) return null;
+    const data = JSON.parse(raw) as { name?: string; pages?: SitePage[]; pageId?: string; accent?: string };
+    if (!Array.isArray(data.pages) || data.pages.length === 0) return null;
+    if (!data.pages.every((page) => page && Array.isArray(page.blocks) && typeof page.id === "string")) return null;
+    return {
+      name: typeof data.name === "string" ? data.name : "Nibras",
+      pages: data.pages,
+      pageId: data.pages.some((page) => page.id === data.pageId) ? data.pageId! : data.pages[0].id,
+      accent: safeColor(data.accent, "#5b4dff"),
+    };
+  } catch {
+    return null;
+  }
+}
 
 export function BuilderPage() {
   const { lang } = useI18n();
   const copy = COPY[lang];
+  const extra = EXTRA[lang];
   const [site, setSite] = useState(copy.name);
-  const [blocks, setBlocks] = useState<Block[]>(() => withIds(SEED[lang].landing));
+  const [pages, setPages] = useState<SitePage[]>(() => freshSite(lang));
+  const [pageId, setPageId] = useState("home");
+  const [accent, setAccent] = useState("#5b4dff");
   const [selected, setSelected] = useState<string | null>(null);
   const [preview, setPreview] = useState(false);
+  const [tab, setTab] = useState<"design" | "layers">("design");
+  const [device, setDevice] = useState<"desk" | "tablet" | "phone">("desk");
+  const [ready, setReady] = useState(false);
+  const history = useRef<SitePage[][]>([]);
+  const lastPush = useRef(0);
+  const page = pages.find((item) => item.id === pageId) ?? pages[0];
+  const blocks = page?.blocks ?? [];
   const current = useMemo(() => blocks.find((block) => block.id === selected) ?? null, [blocks, selected]);
+
+  useEffect(() => {
+    const saved = readSaved();
+    if (saved) {
+      setSite(saved.name);
+      setPages(saved.pages);
+      setPageId(saved.pageId);
+      setAccent(saved.accent);
+    } else {
+      const next = freshSite(lang);
+      setPages(next);
+      setPageId(next[0].id);
+      setSite(COPY[lang].name);
+    }
+    setReady(true);
+  }, [lang]);
+
+  useEffect(() => {
+    if (!ready || !pageId) return;
+    localStorage.setItem(STORE, JSON.stringify({ name: site, pages, pageId, accent }));
+  }, [ready, site, pages, pageId, accent]);
+
+  function remember() {
+    const now = Date.now();
+    if (now - lastPush.current < 700) return;
+    history.current.push(pages.map((item) => ({ ...item, blocks: item.blocks.map((block) => ({ ...block })) })));
+    if (history.current.length > 30) history.current.shift();
+    lastPush.current = now;
+  }
+
+  function write(pageNext: SitePage[], id = page?.id) {
+    remember();
+    setPages(pageNext);
+    if (id) setPageId(id);
+  }
+
+  function setBlocks(next: Block[]) {
+    if (!page) return;
+    write(pages.map((item) => (item.id === page.id ? { ...item, blocks: next } : item)));
+  }
 
   function load(id: string) {
     const rows = SEED[lang][id] ?? SEED[lang].landing;
@@ -447,45 +609,52 @@ export function BuilderPage() {
   }
 
   function insert(kind: Kind, index: number) {
-    const block = { ...blank(kind), id: `b${seq++}` };
-    setBlocks((old) => {
-      const next = old.slice();
-      next.splice(index, 0, block);
-      return next;
-    });
+    const block = { ...blank(kind), id: nid("b") };
+    const next = blocks.slice();
+    next.splice(index, 0, block);
+    setBlocks(next);
     setSelected(block.id);
   }
 
   function move(id: string, index: number) {
-    setBlocks((old) => {
-      const from = old.findIndex((block) => block.id === id);
-      if (from < 0) return old;
-      const next = old.slice();
-      const [item] = next.splice(from, 1);
-      const target = index > from ? index - 1 : index;
-      next.splice(Math.max(0, Math.min(target, next.length)), 0, item);
-      return next;
-    });
+    const from = blocks.findIndex((block) => block.id === id);
+    if (from < 0) return;
+    const next = blocks.slice();
+    const [item] = next.splice(from, 1);
+    const target = index > from ? index - 1 : index;
+    next.splice(Math.max(0, Math.min(target, next.length)), 0, item);
+    setBlocks(next);
   }
 
   function patch(id: string, part: Partial<Block>) {
-    setBlocks((old) => old.map((block) => (block.id === id ? { ...block, ...part } : block)));
+    setBlocks(blocks.map((block) => (block.id === id ? { ...block, ...part } : block)));
   }
 
   function shift(id: string, dir: -1 | 1) {
-    setBlocks((old) => {
-      const from = old.findIndex((block) => block.id === id);
-      const to = from + dir;
-      if (from < 0 || to < 0 || to >= old.length) return old;
-      const next = old.slice();
-      const [item] = next.splice(from, 1);
-      next.splice(to, 0, item);
-      return next;
-    });
+    const from = blocks.findIndex((block) => block.id === id);
+    const to = from + dir;
+    if (from < 0 || to < 0 || to >= blocks.length) return;
+    const next = blocks.slice();
+    const [item] = next.splice(from, 1);
+    next.splice(to, 0, item);
+    setBlocks(next);
+  }
+
+  function addPage() {
+    const item: SitePage = { id: nid("p"), name: `${extra.newPage} ${pages.length + 1}`, blocks: withIds(SEED[lang].contact) };
+    write([...pages, item], item.id);
+    setSelected(item.blocks[0]?.id ?? null);
+  }
+
+  function undo() {
+    const prev = history.current.pop();
+    if (!prev) return;
+    setPages(prev);
+    if (!prev.some((item) => item.id === pageId)) setPageId(prev[0]?.id ?? "");
   }
 
   function download() {
-    const html = pageHtml(site, blocks, lang);
+    const html = siteHtml(site, pages, lang, accent);
     const blob = new Blob([html], { type: "text/html" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
@@ -513,12 +682,37 @@ export function BuilderPage() {
           {copy.siteName}
           <input value={site} onChange={(event) => setSite(event.target.value)} />
         </label>
+        <span className="nb-row">
+          {(["phone", "tablet", "desk"] as const).map((key) => (
+            <button key={key} type="button" className={device === key ? "is-on" : ""} onClick={() => setDevice(key)}>{extra[key]}</button>
+          ))}
+        </span>
+        <button type="button" onClick={undo}>{extra.undo}</button>
         <button type="button" onClick={() => setPreview((on) => !on)}>{preview ? copy.edit : copy.preview}</button>
         <button type="button" className="nb-go" onClick={download}>{copy.download}</button>
       </header>
       <p className="nb-lead">{copy.lead}</p>
       <div className={preview ? "nb-frame is-preview" : "nb-frame"}>
         <aside className="nb-side nb-left">
+          <h2>{extra.pages}</h2>
+          <div className="nb-picks">
+            {pages.map((item) => (
+              <button key={item.id} type="button" className={item.id === page?.id ? "is-on" : ""} onClick={() => { setPageId(item.id); setSelected(null); }}>{item.name}</button>
+            ))}
+            <button type="button" onClick={addPage}>{extra.newPage}</button>
+          </div>
+          {page ? (
+            <label className="nb-mini">{extra.pageName}
+              <input value={page.name} onChange={(event) => write(pages.map((item) => (item.id === page.id ? { ...item, name: event.target.value } : item)))} />
+            </label>
+          ) : null}
+          {pages.length > 1 && page ? (
+            <button type="button" onClick={() => {
+              const next = pages.filter((item) => item.id !== page.id);
+              write(next, next[0]?.id);
+              setSelected(null);
+            }}>{extra.delPage}</button>
+          ) : null}
           <h2>{copy.templates}</h2>
           <div className="nb-picks">
             {copy.tpls.map((tpl) => (
@@ -528,62 +722,110 @@ export function BuilderPage() {
           <h2>{copy.blocks}</h2>
           <div className="nb-picks">
             {KINDS.map((kind) => (
-              <button
-                key={kind}
-                type="button"
-                draggable
-                onDragStart={(event) => onDragStart(event, `add:${kind}`)}
-                onClick={() => insert(kind, blocks.length)}
-              >
+              <button key={kind} type="button" draggable onDragStart={(event) => onDragStart(event, `add:${kind}`)} onClick={() => insert(kind, blocks.length)}>
                 {copy.kinds[kind]}
               </button>
             ))}
           </div>
         </aside>
-        <section
-          className="nb-canvas"
-          onDragOver={(event) => event.preventDefault()}
-          onDrop={(event) => {
-            const data = take(event);
-            if (data.startsWith("add:")) insert(data.slice(4) as Kind, blocks.length);
-            if (data.startsWith("move:")) move(data.slice(5), blocks.length);
-          }}
-        >
-          {blocks.length === 0 ? <p className="nb-empty">{copy.empty}</p> : null}
-          {blocks.map((block, index) => (
-            <article
-              key={block.id}
-              className={block.id === selected ? "is-on" : ""}
-              style={{ textAlign: block.align }}
-              draggable
-              onDragStart={(event) => onDragStart(event, `move:${block.id}`)}
-              onDragOver={(event) => event.preventDefault()}
-              onDrop={(event) => {
-                event.stopPropagation();
-                const data = take(event);
-                if (data.startsWith("add:")) insert(data.slice(4) as Kind, index);
-                if (data.startsWith("move:")) move(data.slice(5), index);
-              }}
-              onClick={() => setSelected(block.id)}
-            >
-              <BlockView block={block} />
-            </article>
-          ))}
+        <section className={`nb-stage is-${device}`}>
+          <div
+            className="nb-canvas"
+            onDragOver={(event) => event.preventDefault()}
+            onDrop={(event) => {
+              const data = take(event);
+              if (data.startsWith("add:")) insert(data.slice(4) as Kind, blocks.length);
+              if (data.startsWith("move:")) move(data.slice(5), blocks.length);
+            }}
+          >
+            {pages.length > 1 ? (
+              <div className="nb-pagenav">
+                {pages.map((item) => (
+                  <button key={item.id} type="button" className={item.id === page?.id ? "is-on" : ""} onClick={() => setPageId(item.id)}>{item.name}</button>
+                ))}
+              </div>
+            ) : null}
+            {blocks.length === 0 ? <p className="nb-empty">{copy.empty}</p> : null}
+            {blocks.map((block, index) => {
+              const look = box(block, accent);
+              return (
+                <article
+                  key={block.id}
+                  className={block.id === selected ? "is-on" : ""}
+                  style={{ textAlign: block.align, background: look.bg === "transparent" ? "#fff" : look.bg, color: look.color, padding: look.pad }}
+                  draggable
+                  onDragStart={(event) => onDragStart(event, `move:${block.id}`)}
+                  onDragOver={(event) => event.preventDefault()}
+                  onDrop={(event) => {
+                    event.stopPropagation();
+                    const data = take(event);
+                    if (data.startsWith("add:")) insert(data.slice(4) as Kind, index);
+                    if (data.startsWith("move:")) move(data.slice(5), index);
+                  }}
+                  onClick={() => setSelected(block.id)}
+                >
+                  <BlockView block={block} accent={look.accent} size={look.size} />
+                </article>
+              );
+            })}
+          </div>
         </section>
         <aside className="nb-side nb-right">
-          <h2>{copy.design}</h2>
-          {current ? (
+          <div className="nb-tabs">
+            <button type="button" className={tab === "design" ? "is-on" : ""} onClick={() => setTab("design")}>{copy.design}</button>
+            <button type="button" className={tab === "layers" ? "is-on" : ""} onClick={() => setTab("layers")}>{extra.layers}</button>
+          </div>
+          {tab === "layers" ? (
+            <ol className="nb-layers">
+              {blocks.map((block) => (
+                <li key={block.id}>
+                  <button type="button" className={block.id === selected ? "is-on" : ""} onClick={() => { setSelected(block.id); setTab("design"); }}>
+                    {copy.kinds[block.kind]}{block.title ? ` · ${block.title}` : ""}
+                  </button>
+                </li>
+              ))}
+            </ol>
+          ) : current ? (
             <form className="nb-form" onSubmit={(event) => event.preventDefault()}>
               <p>{copy.kinds[current.kind]}</p>
               <label>{copy.align}
-                <span>
+                <span className="nb-row">
                   <button type="button" onClick={() => patch(current.id, { align: "start" })}>{copy.left}</button>
                   <button type="button" onClick={() => patch(current.id, { align: "center" })}>{copy.center}</button>
                 </span>
               </label>
+              <label>{extra.tone}
+                <span className="nb-row">
+                  <button type="button" onClick={() => patch(current.id, { tone: "plain" })}>{extra.plain}</button>
+                  <button type="button" onClick={() => patch(current.id, { tone: "soft" })}>{extra.soft}</button>
+                  <button type="button" onClick={() => patch(current.id, { tone: "dark" })}>{extra.dark}</button>
+                </span>
+              </label>
+              <label>{extra.size}
+                <span className="nb-row">
+                  {(["s", "m", "l"] as const).map((step) => (
+                    <button key={step} type="button" onClick={() => patch(current.id, { size: step })}>{step.toUpperCase()}</button>
+                  ))}
+                </span>
+              </label>
+              <label>{extra.space}
+                <span className="nb-row">
+                  {(["s", "m", "l"] as const).map((step) => (
+                    <button key={step} type="button" onClick={() => patch(current.id, { pad: step })}>{step.toUpperCase()}</button>
+                  ))}
+                </span>
+              </label>
+              <label>{extra.color}
+                <span className="nb-swatches">
+                  {COLORS.map((color) => (
+                    <button key={color} type="button" style={{ background: color }} aria-label={color} onClick={() => { patch(current.id, { color }); setAccent(color); }} />
+                  ))}
+                </span>
+              </label>
               <label>{copy.title}<input value={current.title} onChange={(event) => patch(current.id, { title: event.target.value })} /></label>
               <label>{copy.body}<textarea value={current.body} onChange={(event) => patch(current.id, { body: event.target.value })} /></label>
-              {current.kind === "hero" || current.kind === "cta" ? (
+              {current.kind === "columns" ? <small>{extra.colHint}</small> : null}
+              {current.kind === "hero" || current.kind === "cta" || current.kind === "footer" ? (
                 <>
                   <label>{copy.button}<input value={current.button} onChange={(event) => patch(current.id, { button: event.target.value })} /></label>
                   <label>{copy.link}<input value={current.href} onChange={(event) => patch(current.id, { href: event.target.value })} /></label>
@@ -595,32 +837,40 @@ export function BuilderPage() {
               <span className="nb-row">
                 <button type="button" onClick={() => shift(current.id, -1)}>{copy.up}</button>
                 <button type="button" onClick={() => shift(current.id, 1)}>{copy.down}</button>
-                <button type="button" onClick={() => { setBlocks((old) => old.filter((block) => block.id !== current.id)); setSelected(null); }}>{copy.remove}</button>
+                <button type="button" onClick={() => {
+                  const copyBlock = { ...current, id: nid("b") };
+                  const index = blocks.findIndex((block) => block.id === current.id);
+                  const next = blocks.slice();
+                  next.splice(index + 1, 0, copyBlock);
+                  setBlocks(next);
+                  setSelected(copyBlock.id);
+                }}>{extra.duplicate}</button>
+                <button type="button" onClick={() => { setBlocks(blocks.filter((block) => block.id !== current.id)); setSelected(null); }}>{copy.remove}</button>
               </span>
             </form>
           ) : <p>{copy.empty}</p>}
-          <p className="nb-note">{copy.note}</p>
+          <p className="nb-note">{copy.note} {extra.saved}</p>
         </aside>
       </div>
     </main>
   );
 }
 
-function BlockView({ block }: { block: Block }) {
+function BlockView({ block, accent, size }: { block: Block; accent: string; size: string }) {
   if (block.kind === "hero") {
     const image = safeImage(block.image);
     return (
       <div className="nb-hero">
         <div>
-          <h3>{block.title}</h3>
+          <h3 style={{ fontSize: size }}>{block.title}</h3>
           <p>{block.body}</p>
-          {block.button ? <span className="nb-btn">{block.button}</span> : null}
+          {block.button ? <span className="nb-btn" style={{ background: accent }}>{block.button}</span> : null}
         </div>
-        {image ? <img src={image} alt="" /> : <i />}
+        {image ? <img src={image} alt="" /> : <i style={{ background: `linear-gradient(145deg, ${accent}, #7fd3ff)` }} />}
       </div>
     );
   }
-  if (block.kind === "stats") {
+  if (block.kind === "stats" || block.kind === "cards") {
     return (
       <div>
         <h3>{block.title}</h3>
@@ -633,32 +883,21 @@ function BlockView({ block }: { block: Block }) {
       </div>
     );
   }
-  if (block.kind === "cards") {
+  if (block.kind === "columns") {
     return (
       <div>
-        <h3>{block.title}</h3>
-        <div className="nb-grid">
-          {lines(block.body).map((line) => {
-            const item = pair(line);
-            return <div key={line}><b>{item.a}</b><span>{item.b}</span></div>;
-          })}
+        {block.title ? <h3>{block.title}</h3> : null}
+        <div className="nb-cols">
+          {block.body.split("||").map((half, index) => <p key={index}>{half.trim()}</p>)}
         </div>
-      </div>
-    );
-  }
-  if (block.kind === "cta") {
-    return (
-      <div>
-        <h3>{block.title}</h3>
-        <p>{block.body}</p>
-        {block.button ? <span className="nb-btn">{block.button}</span> : null}
       </div>
     );
   }
   return (
     <div>
-      {block.title ? <h3>{block.title}</h3> : null}
+      {block.title ? <h3 style={{ fontSize: block.kind === "text" ? size : undefined }}>{block.title}</h3> : null}
       <p>{block.body}</p>
+      {block.button ? <span className="nb-btn" style={{ background: accent }}>{block.button}</span> : null}
     </div>
   );
 }
