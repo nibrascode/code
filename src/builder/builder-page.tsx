@@ -786,6 +786,14 @@ function Sheet({ job, lang }: { job: Job; lang: Lang }) {
   );
 }
 
+function TradeIcon({ trade }: { trade: Trade }) {
+  const pen = { width: 22, height: 22, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.7, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
+  if (trade === "workshop") return <svg {...pen}><path d="M14 5l5 5" /><path d="M3 21l9-9" /><path d="M13 6l5 5-8 8H5v-5z" /></svg>;
+  if (trade === "cafe") return <svg {...pen}><path d="M5 8h11v6a5 5 0 0 1-5 5H10a5 5 0 0 1-5-5V8z" /><path d="M16 9h2.5a2.5 2.5 0 0 1 0 5H16" /><path d="M7 21h10" /></svg>;
+  if (trade === "usta") return <svg {...pen}><path d="M14 7l3-3 3 3-3 3" /><path d="M14 7L5 16l3 3 9-9" /><path d="M5 19l-1 2" /></svg>;
+  return <svg {...pen}><path d="M4 10l8-6 8 6" /><path d="M6 10v9h12v-9" /><path d="M4 14h16" /><path d="M10 19v-4h4v4" /></svg>;
+}
+
 export function BuilderPage() {
   const { lang } = useI18n();
   const form = FORM[lang];
@@ -854,18 +862,27 @@ export function BuilderPage() {
       <div className="nb-app">
         <aside className="nb-side">
           <div className="nb-brand"><strong>Nibras</strong></div>
-          <p className="nb-kicker">{form.pick}</p>
-          <div className="nb-list">
+          <div className="nb-icons" aria-label={form.pick}>
             {TRADES.map((trade) => (
-              <button key={trade} type="button" className={job.trade === trade ? "is-on" : ""} onClick={() => pick(trade)}>{form.trades[trade]}</button>
+              <button key={trade} type="button" className={job.trade === trade ? "is-on" : ""} onClick={() => pick(trade)}>
+                <TradeIcon trade={trade} />
+                <span>{form.trades[trade]}</span>
+              </button>
             ))}
           </div>
-          <label>{form.name}<input value={job.name} onChange={(event) => patch({ name: event.target.value })} /></label>
-          <label>{form.work}<input value={job.work} onChange={(event) => patch({ work: event.target.value })} /></label>
-          <label>{form.city}<input value={job.city} onChange={(event) => patch({ city: event.target.value })} /></label>
-          <label>{form.phone}<input value={job.phone} onChange={(event) => patch({ phone: event.target.value })} /></label>
-          <p className="nb-note">{form.sample}</p>
-          <label>{form.price}<input value={job.price} onChange={(event) => patch({ price: event.target.value })} /></label>
+          <div className="nb-fields">
+            <label>{form.name}<input value={job.name} onChange={(event) => patch({ name: event.target.value })} /></label>
+            <label>{form.work}<input value={job.work} onChange={(event) => patch({ work: event.target.value })} /></label>
+            <label>{form.city}<input value={job.city} onChange={(event) => patch({ city: event.target.value })} /></label>
+            <label>{form.phone}<input value={job.phone} onChange={(event) => patch({ phone: event.target.value })} /></label>
+            <p className="nb-note">{form.sample}</p>
+            <label>{form.price}<input value={job.price} onChange={(event) => patch({ price: event.target.value })} /></label>
+          </div>
+          <div className="nb-actions">
+            <button type="button" onClick={undo}>{EXTRA[lang].undo}</button>
+            <button type="button" onClick={download}>{COPY[lang].download}</button>
+            <button type="button" className="nb-go" onClick={() => void downloadZip()}>{EXTRA[lang].zip}</button>
+          </div>
         </aside>
         <section className="nb-screen">
           <div className="nb-stage">
@@ -873,9 +890,6 @@ export function BuilderPage() {
               <div className="nb-chrome">
                 <i /><i /><i />
                 <span>{job.name}</span>
-                <button type="button" onClick={undo}>{EXTRA[lang].undo}</button>
-                <button type="button" onClick={download}>{COPY[lang].download}</button>
-                <button type="button" className="nb-go" onClick={() => void downloadZip()}>{EXTRA[lang].zip}</button>
               </div>
               <Sheet job={job} lang={lang} />
             </div>
