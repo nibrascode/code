@@ -918,6 +918,13 @@ const PAGES: Record<string, Copy> = {
     ar: { title: "فحص الهاتف — الشاشة والحساسات والكاميرا والبطارية", description: "افحص لون الشاشة والبكسل الميت واللمس والكاميرا والميكروفون والحساسات والشبكة في المتصفح. تظهر نسبة البطارية إن أعطاها النظام. السعة ليست قياس مختبر." },
     ru: { title: "Проверка телефона — экран, датчики, камера, батарея", description: "Проверьте цвет экрана, битые пиксели, касание, камеру, микрофон, датчики и сеть в браузере. Процент батареи виден, только если его даёт система. Ёмкость — не лабораторное измерение." },
   },
+  "/builder": {
+    az: { title: "Nibras Builder — kod yazmadan sadə sayt", description: "Hazır şablon seç, bloku sürüşdür, yazını dəyiş və səhifəni bir HTML faylı kimi endir. Hostinq və hesab yoxdur." },
+    en: { title: "Nibras Builder — a simple site without code", description: "Pick a template, drag a block, change the words and download the page as one HTML file. No hosting and no account." },
+    tr: { title: "Nibras Builder — kod yazmadan sade site", description: "Şablon seç, bloğu sürükle, yazıyı değiştir ve sayfayı tek HTML dosyası olarak indir. Barındırma ve hesap yoktur." },
+    ar: { title: "Nibras Builder — موقع بسيط بلا كود", description: "اختر قالباً واسحب بلوكاً وغيّر الكلام ونزّل الصفحة ملف HTML واحداً. لا استضافة ولا حساب." },
+    ru: { title: "Nibras Builder — простой сайт без кода", description: "Выберите шаблон, перетащите блок, смените текст и скачайте страницу одним HTML-файлом. Хостинга и аккаунта нет." },
+  },
   "/seo": {
     az: { title: "Nibras SEO Check — bir səhifəni yoxla", description: "Title, description, canonical, robots.txt və sitemap. Bir ünvan yoxlanır, başqa səhifələr açılmır." },
     en: { title: "Nibras SEO Check — check one page", description: "Title, description, canonical, robots.txt and sitemap. One address is checked. Other pages are not opened." },

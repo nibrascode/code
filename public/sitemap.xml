@@ -30073,6 +30073,7 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/nibrasdocs/"/>
   </url>
   <!-- landings:end -->
+  <url>
     <loc>https://nibrascode.com/telefon</loc>
     <lastmod>2026-10-31</lastmod>
     <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/telefon"/>
@@ -30121,5 +30122,55 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/telefon"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/telefon"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/telefon"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/builder</loc>
+    <lastmod>2026-10-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/builder"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/builder"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/builder"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/builder"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/builder"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/builder"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/en/builder</loc>
+    <lastmod>2026-10-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/builder"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/builder"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/builder"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/builder"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/builder"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/builder"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/tr/builder</loc>
+    <lastmod>2026-10-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/builder"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/builder"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/builder"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/builder"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/builder"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/builder"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/ar/builder</loc>
+    <lastmod>2026-10-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/builder"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/builder"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/builder"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/builder"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/builder"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/builder"/>
+  </url>
+  <url>
+    <loc>https://nibrascode.com/ru/builder</loc>
+    <lastmod>2026-10-31</lastmod>
+    <xhtml:link rel="alternate" hreflang="az" href="https://nibrascode.com/builder"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nibrascode.com/en/builder"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://nibrascode.com/tr/builder"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://nibrascode.com/ar/builder"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://nibrascode.com/ru/builder"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nibrascode.com/builder"/>
   </url>
 </urlset>

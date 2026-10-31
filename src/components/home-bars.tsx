@@ -21,6 +21,7 @@ export const BAR = {
   image: { az: "Şəkil sıx", en: "Compress photo", tr: "Foto sıkıştır", ar: "ضغط الصورة", ru: "Сжать фото" },
   calc: { az: "Hesabla", en: "Calculate", tr: "Hesapla", ar: "احسب", ru: "Посчитай" },
   phone: { az: "Telefon", en: "Phone", tr: "Telefon", ar: "الهاتف", ru: "Телефон" },
+  builder: { az: "Sayt qur", en: "Build a site", tr: "Site kur", ar: "ابنِ موقعاً", ru: "Собрать сайт" },
   seo: { az: "SEO yoxla", en: "Check SEO", tr: "SEO bak", ar: "فحص SEO", ru: "Проверить SEO" },
   flow: { az: "Plan hazırla", en: "Make a plan", tr: "Plan hazırla", ar: "جهّز خطة", ru: "Собрать план" },
   logic: { az: "Sual qur", en: "Build questions", tr: "Soru kur", ar: "ابنِ أسئلة", ru: "Собрать вопросы" },
@@ -130,6 +131,16 @@ export function barItems(lang: Lang): Record<BarGroup, ReactElement[]> {
                 </svg>
                 <span className="nx-qr-text">
                   <b>{BAR.phone[lang]}</b>
+                </span>
+              </a>,
+              <a key="/builder" className="nx-ai-bar nx-qr-bar" href={localeHref(lang, "/builder")}>
+                <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="3" y="4" width="7" height="6" rx="1.2" fill="none" stroke="currentColor" strokeWidth="1.6" />
+                  <rect x="12" y="4" width="9" height="16" rx="1.4" fill="none" stroke="currentColor" strokeWidth="1.6" />
+                  <rect x="3" y="12" width="7" height="8" rx="1.2" fill="none" stroke="currentColor" strokeWidth="1.6" />
+                </svg>
+                <span className="nx-qr-text">
+                  <b>{BAR.builder[lang]}</b>
                 </span>
               </a>,
               <a key="/flow" className="nx-ai-bar nx-qr-bar" href={localeHref(lang, "/flow")} data-testid="home-flow">

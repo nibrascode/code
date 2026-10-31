@@ -57,6 +57,7 @@ import { Route as VoiceRouteImport } from './routes/voice'
 import { Route as WhyRouteImport } from './routes/why'
 import { Route as WifiRouteImport } from './routes/wifi'
 import { Route as TelefonRouteImport } from './routes/telefon'
+import { Route as BuilderRouteImport } from './routes/builder'
 import { Route as WorkspaceRouteImport } from './routes/workspace'
 import { Route as XetaRouteImport } from './routes/xeta'
 import { Route as ZipRouteImport } from './routes/zip'
@@ -102,6 +103,7 @@ import { Route as ArVideoRouteImport } from './routes/ar.video'
 import { Route as ArVoiceRouteImport } from './routes/ar.voice'
 import { Route as ArWifiRouteImport } from './routes/ar.wifi'
 import { Route as ArTelefonRouteImport } from './routes/ar.telefon'
+import { Route as ArBuilderRouteImport } from './routes/ar.builder'
 import { Route as ArWorkspaceRouteImport } from './routes/ar.workspace'
 import { Route as ArXetaRouteImport } from './routes/ar.xeta'
 import { Route as ArZipRouteImport } from './routes/ar.zip'
@@ -145,6 +147,7 @@ import { Route as EnVideoRouteImport } from './routes/en.video'
 import { Route as EnVoiceRouteImport } from './routes/en.voice'
 import { Route as EnWifiRouteImport } from './routes/en.wifi'
 import { Route as EnTelefonRouteImport } from './routes/en.telefon'
+import { Route as EnBuilderRouteImport } from './routes/en.builder'
 import { Route as EnWorkspaceRouteImport } from './routes/en.workspace'
 import { Route as EnXetaRouteImport } from './routes/en.xeta'
 import { Route as EnZipRouteImport } from './routes/en.zip'
@@ -211,6 +214,7 @@ import { Route as RuVideoRouteImport } from './routes/ru.video'
 import { Route as RuVoiceRouteImport } from './routes/ru.voice'
 import { Route as RuWifiRouteImport } from './routes/ru.wifi'
 import { Route as RuTelefonRouteImport } from './routes/ru.telefon'
+import { Route as RuBuilderRouteImport } from './routes/ru.builder'
 import { Route as RuWorkspaceRouteImport } from './routes/ru.workspace'
 import { Route as RuXetaRouteImport } from './routes/ru.xeta'
 import { Route as RuZipRouteImport } from './routes/ru.zip'
@@ -256,6 +260,7 @@ import { Route as TrVideoRouteImport } from './routes/tr.video'
 import { Route as TrVoiceRouteImport } from './routes/tr.voice'
 import { Route as TrWifiRouteImport } from './routes/tr.wifi'
 import { Route as TrTelefonRouteImport } from './routes/tr.telefon'
+import { Route as TrBuilderRouteImport } from './routes/tr.builder'
 import { Route as TrWorkspaceRouteImport } from './routes/tr.workspace'
 import { Route as TrXetaRouteImport } from './routes/tr.xeta'
 import { Route as TrZipRouteImport } from './routes/tr.zip'
@@ -567,6 +572,11 @@ const TelefonRoute = TelefonRouteImport.update({
   path: '/telefon',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BuilderRoute = BuilderRouteImport.update({
+  id: '/builder',
+  path: '/builder',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WorkspaceRoute = WorkspaceRouteImport.update({
   id: '/workspace',
   path: '/workspace',
@@ -792,6 +802,11 @@ const ArTelefonRoute = ArTelefonRouteImport.update({
   path: '/telefon',
   getParentRoute: () => ArRoute,
 } as any)
+const ArBuilderRoute = ArBuilderRouteImport.update({
+  id: '/builder',
+  path: '/builder',
+  getParentRoute: () => ArRoute,
+} as any)
 const ArWorkspaceRoute = ArWorkspaceRouteImport.update({
   id: '/workspace',
   path: '/workspace',
@@ -1005,6 +1020,11 @@ const EnWifiRoute = EnWifiRouteImport.update({
 const EnTelefonRoute = EnTelefonRouteImport.update({
   id: '/telefon',
   path: '/telefon',
+  getParentRoute: () => EnRoute,
+} as any)
+const EnBuilderRoute = EnBuilderRouteImport.update({
+  id: '/builder',
+  path: '/builder',
   getParentRoute: () => EnRoute,
 } as any)
 const EnWorkspaceRoute = EnWorkspaceRouteImport.update({
@@ -1337,6 +1357,11 @@ const RuTelefonRoute = RuTelefonRouteImport.update({
   path: '/telefon',
   getParentRoute: () => RuRoute,
 } as any)
+const RuBuilderRoute = RuBuilderRouteImport.update({
+  id: '/builder',
+  path: '/builder',
+  getParentRoute: () => RuRoute,
+} as any)
 const RuWorkspaceRoute = RuWorkspaceRouteImport.update({
   id: '/workspace',
   path: '/workspace',
@@ -1560,6 +1585,11 @@ const TrWifiRoute = TrWifiRouteImport.update({
 const TrTelefonRoute = TrTelefonRouteImport.update({
   id: '/telefon',
   path: '/telefon',
+  getParentRoute: () => TrRoute,
+} as any)
+const TrBuilderRoute = TrBuilderRouteImport.update({
+  id: '/builder',
+  path: '/builder',
   getParentRoute: () => TrRoute,
 } as any)
 const TrWorkspaceRoute = TrWorkspaceRouteImport.update({
@@ -1963,6 +1993,7 @@ export interface FileRoutesByFullPath {
   '/why': typeof WhyRoute
   '/wifi': typeof WifiRoute
   '/telefon': typeof TelefonRoute
+  '/builder': typeof BuilderRoute
   '/workspace': typeof WorkspaceRoute
   '/xeta': typeof XetaRouteWithChildren
   '/zip': typeof ZipRoute
@@ -2008,6 +2039,7 @@ export interface FileRoutesByFullPath {
   '/ar/voice': typeof ArVoiceRoute
   '/ar/wifi': typeof ArWifiRoute
   '/ar/telefon': typeof ArTelefonRoute
+  '/ar/builder': typeof ArBuilderRoute
   '/ar/workspace': typeof ArWorkspaceRoute
   '/ar/xeta': typeof ArXetaRouteWithChildren
   '/ar/zip': typeof ArZipRoute
@@ -2051,6 +2083,7 @@ export interface FileRoutesByFullPath {
   '/en/voice': typeof EnVoiceRoute
   '/en/wifi': typeof EnWifiRoute
   '/en/telefon': typeof EnTelefonRoute
+  '/en/builder': typeof EnBuilderRoute
   '/en/workspace': typeof EnWorkspaceRoute
   '/en/xeta': typeof EnXetaRouteWithChildren
   '/en/zip': typeof EnZipRoute
@@ -2113,6 +2146,7 @@ export interface FileRoutesByFullPath {
   '/ru/voice': typeof RuVoiceRoute
   '/ru/wifi': typeof RuWifiRoute
   '/ru/telefon': typeof RuTelefonRoute
+  '/ru/builder': typeof RuBuilderRoute
   '/ru/workspace': typeof RuWorkspaceRoute
   '/ru/xeta': typeof RuXetaRouteWithChildren
   '/ru/zip': typeof RuZipRoute
@@ -2158,6 +2192,7 @@ export interface FileRoutesByFullPath {
   '/tr/voice': typeof TrVoiceRoute
   '/tr/wifi': typeof TrWifiRoute
   '/tr/telefon': typeof TrTelefonRoute
+  '/tr/builder': typeof TrBuilderRoute
   '/tr/workspace': typeof TrWorkspaceRoute
   '/tr/xeta': typeof TrXetaRouteWithChildren
   '/tr/zip': typeof TrZipRoute
@@ -2282,6 +2317,7 @@ export interface FileRoutesByTo {
   '/why': typeof WhyRoute
   '/wifi': typeof WifiRoute
   '/telefon': typeof TelefonRoute
+  '/builder': typeof BuilderRoute
   '/workspace': typeof WorkspaceRoute
   '/xeta': typeof XetaRouteWithChildren
   '/zip': typeof ZipRoute
@@ -2326,6 +2362,7 @@ export interface FileRoutesByTo {
   '/ar/voice': typeof ArVoiceRoute
   '/ar/wifi': typeof ArWifiRoute
   '/ar/telefon': typeof ArTelefonRoute
+  '/ar/builder': typeof ArBuilderRoute
   '/ar/workspace': typeof ArWorkspaceRoute
   '/ar/xeta': typeof ArXetaRouteWithChildren
   '/ar/zip': typeof ArZipRoute
@@ -2369,6 +2406,7 @@ export interface FileRoutesByTo {
   '/en/voice': typeof EnVoiceRoute
   '/en/wifi': typeof EnWifiRoute
   '/en/telefon': typeof EnTelefonRoute
+  '/en/builder': typeof EnBuilderRoute
   '/en/workspace': typeof EnWorkspaceRoute
   '/en/xeta': typeof EnXetaRouteWithChildren
   '/en/zip': typeof EnZipRoute
@@ -2431,6 +2469,7 @@ export interface FileRoutesByTo {
   '/ru/voice': typeof RuVoiceRoute
   '/ru/wifi': typeof RuWifiRoute
   '/ru/telefon': typeof RuTelefonRoute
+  '/ru/builder': typeof RuBuilderRoute
   '/ru/workspace': typeof RuWorkspaceRoute
   '/ru/xeta': typeof RuXetaRouteWithChildren
   '/ru/zip': typeof RuZipRoute
@@ -2476,6 +2515,7 @@ export interface FileRoutesByTo {
   '/tr/voice': typeof TrVoiceRoute
   '/tr/wifi': typeof TrWifiRoute
   '/tr/telefon': typeof TrTelefonRoute
+  '/tr/builder': typeof TrBuilderRoute
   '/tr/workspace': typeof TrWorkspaceRoute
   '/tr/xeta': typeof TrXetaRouteWithChildren
   '/tr/zip': typeof TrZipRoute
@@ -2601,6 +2641,7 @@ export interface FileRoutesById {
   '/why': typeof WhyRoute
   '/wifi': typeof WifiRoute
   '/telefon': typeof TelefonRoute
+  '/builder': typeof BuilderRoute
   '/workspace': typeof WorkspaceRoute
   '/xeta': typeof XetaRouteWithChildren
   '/zip': typeof ZipRoute
@@ -2646,6 +2687,7 @@ export interface FileRoutesById {
   '/ar/voice': typeof ArVoiceRoute
   '/ar/wifi': typeof ArWifiRoute
   '/ar/telefon': typeof ArTelefonRoute
+  '/ar/builder': typeof ArBuilderRoute
   '/ar/workspace': typeof ArWorkspaceRoute
   '/ar/xeta': typeof ArXetaRouteWithChildren
   '/ar/zip': typeof ArZipRoute
@@ -2689,6 +2731,7 @@ export interface FileRoutesById {
   '/en/voice': typeof EnVoiceRoute
   '/en/wifi': typeof EnWifiRoute
   '/en/telefon': typeof EnTelefonRoute
+  '/en/builder': typeof EnBuilderRoute
   '/en/workspace': typeof EnWorkspaceRoute
   '/en/xeta': typeof EnXetaRouteWithChildren
   '/en/zip': typeof EnZipRoute
@@ -2751,6 +2794,7 @@ export interface FileRoutesById {
   '/ru/voice': typeof RuVoiceRoute
   '/ru/wifi': typeof RuWifiRoute
   '/ru/telefon': typeof RuTelefonRoute
+  '/ru/builder': typeof RuBuilderRoute
   '/ru/workspace': typeof RuWorkspaceRoute
   '/ru/xeta': typeof RuXetaRouteWithChildren
   '/ru/zip': typeof RuZipRoute
@@ -2796,6 +2840,7 @@ export interface FileRoutesById {
   '/tr/voice': typeof TrVoiceRoute
   '/tr/wifi': typeof TrWifiRoute
   '/tr/telefon': typeof TrTelefonRoute
+  '/tr/builder': typeof TrBuilderRoute
   '/tr/workspace': typeof TrWorkspaceRoute
   '/tr/xeta': typeof TrXetaRouteWithChildren
   '/tr/zip': typeof TrZipRoute
@@ -3864,6 +3909,7 @@ export interface RootRouteChildren {
   WhyRoute: typeof WhyRoute
   WifiRoute: typeof WifiRoute
   TelefonRoute: typeof TelefonRoute
+  BuilderRoute: typeof BuilderRoute
   WorkspaceRoute: typeof WorkspaceRoute
   XetaRoute: typeof XetaRouteWithChildren
   ZipRoute: typeof ZipRoute
@@ -4222,6 +4268,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TelefonRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/builder': {
+      id: '/builder'
+      path: '/builder'
+      fullPath: '/builder'
+      preLoaderRoute: typeof BuilderRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/workspace': {
       id: '/workspace'
       path: '/workspace'
@@ -4537,6 +4590,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArTelefonRouteImport
       parentRoute: typeof ArRoute
     }
+    '/ar/builder': {
+      id: '/ar/builder'
+      path: '/builder'
+      fullPath: '/ar/builder'
+      preLoaderRoute: typeof ArBuilderRouteImport
+      parentRoute: typeof ArRoute
+    }
     '/ar/workspace': {
       id: '/ar/workspace'
       path: '/workspace'
@@ -4836,6 +4896,13 @@ declare module '@tanstack/react-router' {
       path: '/telefon'
       fullPath: '/en/telefon'
       preLoaderRoute: typeof EnTelefonRouteImport
+      parentRoute: typeof EnRoute
+    }
+    '/en/builder': {
+      id: '/en/builder'
+      path: '/builder'
+      fullPath: '/en/builder'
+      preLoaderRoute: typeof EnBuilderRouteImport
       parentRoute: typeof EnRoute
     }
     '/en/workspace': {
@@ -5300,6 +5367,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RuTelefonRouteImport
       parentRoute: typeof RuRoute
     }
+    '/ru/builder': {
+      id: '/ru/builder'
+      path: '/builder'
+      fullPath: '/ru/builder'
+      preLoaderRoute: typeof RuBuilderRouteImport
+      parentRoute: typeof RuRoute
+    }
     '/ru/workspace': {
       id: '/ru/workspace'
       path: '/workspace'
@@ -5613,6 +5687,13 @@ declare module '@tanstack/react-router' {
       path: '/telefon'
       fullPath: '/tr/telefon'
       preLoaderRoute: typeof TrTelefonRouteImport
+      parentRoute: typeof TrRoute
+    }
+    '/tr/builder': {
+      id: '/tr/builder'
+      path: '/builder'
+      fullPath: '/tr/builder'
+      preLoaderRoute: typeof TrBuilderRouteImport
       parentRoute: typeof TrRoute
     }
     '/tr/workspace': {
@@ -6247,6 +6328,7 @@ interface ArRouteChildren {
   ArVoiceRoute: typeof ArVoiceRoute
   ArWifiRoute: typeof ArWifiRoute
   ArTelefonRoute: typeof ArTelefonRoute
+  ArBuilderRoute: typeof ArBuilderRoute
   ArWorkspaceRoute: typeof ArWorkspaceRoute
   ArXetaRoute: typeof ArXetaRouteWithChildren
   ArZipRoute: typeof ArZipRoute
@@ -6299,6 +6381,7 @@ const ArRouteChildren: ArRouteChildren = {
   ArVoiceRoute: ArVoiceRoute,
   ArWifiRoute: ArWifiRoute,
   ArTelefonRoute: ArTelefonRoute,
+  ArBuilderRoute: ArBuilderRoute,
   ArWorkspaceRoute: ArWorkspaceRoute,
   ArXetaRoute: ArXetaRouteWithChildren,
   ArZipRoute: ArZipRoute,
@@ -6451,6 +6534,7 @@ interface EnRouteChildren {
   EnVoiceRoute: typeof EnVoiceRoute
   EnWifiRoute: typeof EnWifiRoute
   EnTelefonRoute: typeof EnTelefonRoute
+  EnBuilderRoute: typeof EnBuilderRoute
   EnWorkspaceRoute: typeof EnWorkspaceRoute
   EnXetaRoute: typeof EnXetaRouteWithChildren
   EnZipRoute: typeof EnZipRoute
@@ -6503,6 +6587,7 @@ const EnRouteChildren: EnRouteChildren = {
   EnVoiceRoute: EnVoiceRoute,
   EnWifiRoute: EnWifiRoute,
   EnTelefonRoute: EnTelefonRoute,
+  EnBuilderRoute: EnBuilderRoute,
   EnWorkspaceRoute: EnWorkspaceRoute,
   EnXetaRoute: EnXetaRouteWithChildren,
   EnZipRoute: EnZipRoute,
@@ -6730,6 +6815,7 @@ interface RuRouteChildren {
   RuVoiceRoute: typeof RuVoiceRoute
   RuWifiRoute: typeof RuWifiRoute
   RuTelefonRoute: typeof RuTelefonRoute
+  RuBuilderRoute: typeof RuBuilderRoute
   RuWorkspaceRoute: typeof RuWorkspaceRoute
   RuXetaRoute: typeof RuXetaRouteWithChildren
   RuZipRoute: typeof RuZipRoute
@@ -6783,6 +6869,7 @@ const RuRouteChildren: RuRouteChildren = {
   RuVoiceRoute: RuVoiceRoute,
   RuWifiRoute: RuWifiRoute,
   RuTelefonRoute: RuTelefonRoute,
+  RuBuilderRoute: RuBuilderRoute,
   RuWorkspaceRoute: RuWorkspaceRoute,
   RuXetaRoute: RuXetaRouteWithChildren,
   RuZipRoute: RuZipRoute,
@@ -6956,6 +7043,7 @@ interface TrRouteChildren {
   TrVoiceRoute: typeof TrVoiceRoute
   TrWifiRoute: typeof TrWifiRoute
   TrTelefonRoute: typeof TrTelefonRoute
+  TrBuilderRoute: typeof TrBuilderRoute
   TrWorkspaceRoute: typeof TrWorkspaceRoute
   TrXetaRoute: typeof TrXetaRouteWithChildren
   TrZipRoute: typeof TrZipRoute
@@ -7008,6 +7096,7 @@ const TrRouteChildren: TrRouteChildren = {
   TrVoiceRoute: TrVoiceRoute,
   TrWifiRoute: TrWifiRoute,
   TrTelefonRoute: TrTelefonRoute,
+  TrBuilderRoute: TrBuilderRoute,
   TrWorkspaceRoute: TrWorkspaceRoute,
   TrXetaRoute: TrXetaRouteWithChildren,
   TrZipRoute: TrZipRoute,
@@ -7105,6 +7194,7 @@ const rootRouteChildren: RootRouteChildren = {
   WhyRoute: WhyRoute,
   WifiRoute: WifiRoute,
   TelefonRoute: TelefonRoute,
+  BuilderRoute: BuilderRoute,
   WorkspaceRoute: WorkspaceRoute,
   XetaRoute: XetaRouteWithChildren,
   ZipRoute: ZipRoute,
