@@ -1097,6 +1097,17 @@ const INSTALL_LINK: Record<string, { slug: string; label: TKey }> = {
   sql: { slug: "sql-qurasdir", label: "prog_sql_setup" },
 };
 
+const LIVE_TOOL: Record<string, { path: string; label: Record<Lang, string> }> = {
+  "password-generator": {
+    path: "/tools/password",
+    label: { az: "Hazır aləti sına: Şifrə generatoru →", en: "Try the live tool: Password generator →", tr: "Hazır aracı dene: Şifre üreteci →", ar: "جرّب الأداة الجاهزة: مولّد كلمات المرور ←", ru: "Попробуйте готовый инструмент: генератор паролей →" },
+  },
+  "javascript-qr-code-generator": {
+    path: "/qr",
+    label: { az: "Hazır aləti sına: QR kod generatoru →", en: "Try the live tool: QR code generator →", tr: "Hazır aracı dene: QR kod üreteci →", ar: "جرّب الأداة الجاهزة: مولّد رموز QR ←", ru: "Попробуйте готовый инструмент: генератор QR-кодов →" },
+  },
+};
+
 const INSTALL_BACK: Record<string, { slug: string; label: TKey }> = {
   "python-qurasdir": { slug: "python", label: "prog_python" },
   "node-qurasdir": { slug: "nodejs", label: "prog_node" },
@@ -1310,6 +1321,11 @@ export function ProgrammingArticle({
       {related ? (
         <p className="prog-try">
           <a href={programmingLocalePath(lang, related.slug)}>{t(related.label)}</a>
+        </p>
+      ) : null}
+      {slug && LIVE_TOOL[slug] ? (
+        <p className="prog-try">
+          <a href={localeHref(lang, LIVE_TOOL[slug].path)}>{LIVE_TOOL[slug].label[lang]}</a>
         </p>
       ) : null}
       {slug && INSTALL_BACK[slug] ? (
