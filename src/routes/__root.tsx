@@ -40,6 +40,7 @@ import { paketFromPath, paketPath } from "@/lib/paket";
 import { toolFromPath, toolPath, toolsFromPath, toolsPath } from "@/lib/tools";
 import { loadPathGuide } from "@/lib/guides";
 import { GuideSection } from "@/components/guide-section";
+import { groupFromPath, groupLocalePath } from "@/lib/group-path";
 
 export const Route = createRootRoute({
   beforeLoad: ({ location }) => ({
@@ -119,6 +120,18 @@ function SeoLinks() {
           <link key={code} rel="alternate" {...{ hreflang: code }} href={`${SITE}${code === "az" ? "" : `/${code}`}${rest}`} />
         ))}
         <link rel="alternate" {...{ hreflang: "x-default" }} href={`${SITE}${rest}`} />
+      </>
+    );
+  }
+  const grp = groupFromPath(path);
+  if (grp) {
+    return (
+      <>
+        <link rel="canonical" href={`${SITE}${groupLocalePath(grp.lang, grp.group)}`} />
+        {(["az", "en", "tr", "ar", "ru"] as const).map((code) => (
+          <link key={code} rel="alternate" {...{ hreflang: code }} href={`${SITE}${groupLocalePath(code, grp.group)}`} />
+        ))}
+        <link rel="alternate" {...{ hreflang: "x-default" }} href={`${SITE}${groupLocalePath("az", grp.group)}`} />
       </>
     );
   }
