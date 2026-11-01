@@ -126,6 +126,9 @@ const DRIFT = DRIFT_KINDS.map((id, kind) => ({
   size: kind % 3 === 0 ? 22 : 28,
 }));
 
+const DRIFT_PIN = DRIFT[DRIFT.length - 1];
+const DRIFT_HERO = DRIFT.slice(0, -1);
+
 function HomeDrift() {
   const root = useRef<HTMLDivElement>(null);
   const nodes = useRef<(HTMLSpanElement | null)[]>([]);
@@ -136,7 +139,7 @@ function HomeDrift() {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const width = () => box.clientWidth || window.innerWidth;
     const height = () => box.clientHeight || window.innerHeight;
-    const parts = DRIFT.map((item, index) => {
+    const parts = DRIFT_HERO.map((item, index) => {
       const w = width();
       const h = height();
       const r = item.size / 2;
@@ -256,7 +259,7 @@ function HomeDrift() {
 
   return (
     <div className="nx-drift" aria-hidden="true" ref={root}>
-      {DRIFT.map((item, index) => (
+      {DRIFT_HERO.map((item, index) => (
         <span
           key={`${item.id}-${index}`}
           ref={(node) => {
@@ -382,6 +385,9 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
 
       <section className="nx-apps" id="apps">
         <p className="nx-kicker">{t("nx_apps_k")}</p>{" "}
+        <span className={`nx-drift-pin is-${DRIFT_PIN.id}`} aria-hidden="true">
+          {DRIFT_PIN.id === "ios" ? <IosMark /> : <TechMark id={DRIFT_PIN.id} />}
+        </span>
         <div className="nx-grid">
           {cards.map(({ card, live }) => {
             const badge = appStatusLabel(card.slug, lang);
