@@ -12115,3 +12115,9 @@ select.lang-pick option:checked, select.nxa-langpick option:checked { background
 .nx-bar-group--studio::before { background: conic-gradient(from var(--ai-spin), transparent 0deg, transparent 250deg, #d4c4ff 300deg, #8b6cf0 328deg, transparent 360deg); }
 .nx-bar-group--learn::before { background: conic-gradient(from var(--ai-spin), transparent 0deg, transparent 250deg, #9aefd4 300deg, #3cb89a 328deg, transparent 360deg); }
 @media (prefers-reduced-motion: reduce) { .nx-bar-group::before { animation: none; } }
+/* Mobil başlıq: «Nibras Code» brendi menyu ilə üst-üstə düşməsin */
+@media (max-width: 640px) {
+  .nx-nav { flex-wrap: wrap; row-gap: 6px; column-gap: 10px; min-height: 0; padding-top: 8px; }
+  .nx-nav > .nx-brand { flex: 0 0 auto; white-space: nowrap; }
+  .nx-nav > .nx-links { flex: 1 1 100%; justify-content: flex-start; flex-wrap: wrap; row-gap: 4px; gap: 4px 14px; }
+}
