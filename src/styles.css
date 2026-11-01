@@ -7405,7 +7405,7 @@ body.is-planner .site-backdrop {
 }
 .nx-bar-group-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
 }
 .nx-bar-group-grid > a {
@@ -11857,7 +11857,7 @@ html[lang="ar"] .why-lead.topic-body,
 .nx-group-page .nx-bars--full { max-width: 38rem; }
 .nx-group-page .nx-bars--full .nx-bar-group-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
 }
 
