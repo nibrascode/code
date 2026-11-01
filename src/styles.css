@@ -12087,3 +12087,31 @@ select.lang-pick option:checked, select.nxa-langpick option:checked { background
   text-transform: none;
   max-width: 38rem;
 }
+
+/* Fırlanan işıq: alət linklərində yox, yalnız bölmə kartının (Alətlər/Studio/Öyrənmə) ətrafında */
+.nx-bar-group .nx-bar-group-grid > a::before,
+.nx-bar-group .nx-bar-group-grid > a::after,
+.nx-bar-group .nx-bar-group-grid > .nx-qr-bar::before,
+.nx-bar-group .nx-bar-group-grid > .nx-qr-bar::after {
+  content: none !important;
+  display: none !important;
+  animation: none !important;
+}
+.nx-bar-group { position: relative; }
+.nx-bar-group::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  background: conic-gradient(from var(--ai-spin), transparent 0deg, transparent 250deg, #7ee7ff 300deg, #3b82ff 328deg, transparent 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  animation: ai-spin 4s linear infinite;
+}
+.nx-bar-group--studio::before { background: conic-gradient(from var(--ai-spin), transparent 0deg, transparent 250deg, #d4c4ff 300deg, #8b6cf0 328deg, transparent 360deg); }
+.nx-bar-group--learn::before { background: conic-gradient(from var(--ai-spin), transparent 0deg, transparent 250deg, #9aefd4 300deg, #3cb89a 328deg, transparent 360deg); }
+@media (prefers-reduced-motion: reduce) { .nx-bar-group::before { animation: none; } }
