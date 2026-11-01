@@ -12163,3 +12163,27 @@ select.lang-pick option:checked, select.nxa-langpick option:checked { background
 .nx-drift-pin svg { width: 100%; height: 100%; }
 @keyframes nx-pin-bob { 50% { transform: translateY(-6px); } }
 @media (prefers-reduced-motion: reduce) { .nx-drift-pin { animation: none; } }
+
+/* Home layout C (compact): featured AI + list rows + square tiles, all items */
+.nx-c{margin:0 0 14px!important;padding:0!important;border:0!important;box-shadow:none!important;background:none!important;animation:none!important}
+.nx-c::before,.nx-c::after{display:none!important}
+.nx-c .nx-bar-group-title{font-size:13px!important;letter-spacing:.06em;text-transform:uppercase;opacity:.75;margin:0 0 6px!important;padding:0!important}
+.nx-c--list .nx-bar-group-grid{display:grid!important;grid-template-columns:1fr!important;gap:4px!important}
+@media(min-width:720px){.nx-c--list .nx-bar-group-grid{grid-template-columns:1fr 1fr!important}}
+@media(min-width:1100px){.nx-c--list .nx-bar-group-grid{grid-template-columns:repeat(3,1fr)!important}}
+.nx-c--list .nx-bar-group-grid>a{display:flex!important;flex-direction:row!important;align-items:center!important;gap:10px!important;min-height:0!important;height:40px!important;padding:0 12px!important;margin:0!important;width:auto!important;border-radius:10px!important;background:rgba(255,255,255,.035)!important;border:1px solid rgba(120,160,255,.12)!important;box-shadow:none!important;animation:none!important;font-size:14px!important;text-align:start!important;justify-content:flex-start!important}
+.nx-c--list .nx-bar-group-grid>a::before{display:none!important}
+.nx-c--list .nx-bar-group-grid>a::after{content:"›"!important;display:block!important;position:static!important;margin-inline-start:auto!important;opacity:.5;font-size:18px;line-height:1;background:none!important;border:0!important;width:auto!important;height:auto!important;animation:none!important}
+.nx-c--list .nx-bar-group-grid>a svg,.nx-c--list .nx-bar-group-grid>a img{width:20px!important;height:20px!important;flex:0 0 20px!important;margin:0!important}
+.nx-c--list .nx-bar-group-grid>a .nx-qr-text{display:flex;flex-direction:column;line-height:1.15;font-size:14px}
+.nx-c--list .nx-bar-group-grid>a .nx-qr-text>*:not(:first-child){font-size:11px;opacity:.6}
+/* featured Nibras AI */
+.nx-c--list .nx-bar-group-grid>a:first-child{grid-column:1/-1!important;height:56px!important;background:linear-gradient(120deg,rgba(70,110,255,.22),rgba(40,200,255,.08))!important;border-color:rgba(120,170,255,.3)!important;font-size:16px!important;font-weight:600}
+.nx-c--list .nx-bar-group-grid>a:first-child img{width:34px!important;height:30px!important;flex-basis:34px!important}
+/* tiles (Studio + Learn): horizontal scroll */
+.nx-c--tiles .nx-bar-group-grid{display:flex!important;flex-wrap:nowrap!important;gap:8px!important;overflow-x:auto!important;scroll-snap-type:x proximity;padding-bottom:4px!important;scrollbar-width:thin;grid-template-columns:none!important}
+.nx-c--tiles .nx-bar-group-grid>a{flex:0 0 84px!important;width:84px!important;height:76px!important;min-height:0!important;margin:0!important;padding:8px 4px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:6px!important;border-radius:12px!important;background:rgba(255,255,255,.035)!important;border:1px solid rgba(120,160,255,.12)!important;box-shadow:none!important;animation:none!important;font-size:11.5px!important;line-height:1.15!important;text-align:center!important;scroll-snap-align:start}
+.nx-c--tiles .nx-bar-group-grid>a::before,.nx-c--tiles .nx-bar-group-grid>a::after{display:none!important}
+.nx-c--tiles .nx-bar-group-grid>a svg{width:22px!important;height:22px!important;margin:0!important}
+.nx-c--tiles .nx-bar-group-grid>a span{overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.nx-c--tiles .nx-ext{display:none!important}
