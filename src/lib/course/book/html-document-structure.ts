@@ -9,7 +9,7 @@ export default [
       "Есть элементы, делящие страницу на осмысленные части: <header> — шапка или область логотипа, <nav> — основная навигация, <main> — главное содержимое (один на странице), <article> — самостоятельный материал, <section> — тематический блок, <aside> — боковая информация, <footer> — подвал."),
     C(`<body>
   <header><h1>My Blog</h1></header>
-  <nav><a href="/">Home</a> <a href="/posts">Posts</a></nav>
+  <nav><a href="/">Home</a> <a href="#posts">Posts</a></nav>
   <main>
     <article>
       <h2>First post</h2>

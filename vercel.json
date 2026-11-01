@@ -12,6 +12,41 @@
       "permanent": true
     },
     {
+      "source": "/audio",
+      "destination": "/voice",
+      "permanent": false
+    },
+    {
+      "source": "/audio/:path*",
+      "destination": "/voice",
+      "permanent": false
+    },
+    {
+      "source": "/ereb-dili",
+      "destination": "/ereb-dili/feil",
+      "permanent": false
+    },
+    {
+      "source": "/en/ereb-dili",
+      "destination": "/en/ereb-dili/feil",
+      "permanent": false
+    },
+    {
+      "source": "/tr/ereb-dili",
+      "destination": "/tr/ereb-dili/feil",
+      "permanent": false
+    },
+    {
+      "source": "/ar/ereb-dili",
+      "destination": "/ar/ereb-dili/feil",
+      "permanent": false
+    },
+    {
+      "source": "/ru/ereb-dili",
+      "destination": "/ru/ereb-dili/feil",
+      "permanent": false
+    },
+    {
       "source": "/en/hamisi/aletler",
       "destination": "/en/all/tools",
       "permanent": true
@@ -576,18 +611,6 @@
     {
       "source": "/nibrasnova/",
       "destination": "/nibrasnova/index.html"
-    },
-    {
-      "source": "/audio",
-      "destination": "https://audio-nibrascode-1188.vercel.app/audio/"
-    },
-    {
-      "source": "/audio/",
-      "destination": "https://audio-nibrascode-1188.vercel.app/audio/"
-    },
-    {
-      "source": "/audio/:path*",
-      "destination": "https://audio-nibrascode-1188.vercel.app/audio/:path*"
     }
   ]
 }

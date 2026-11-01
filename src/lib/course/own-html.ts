@@ -136,7 +136,7 @@ export const OWN_HTML: OwnPageContent = {
       title: t("Tipik səhifə quruluşu", "Typical page layout", "Tipik sayfa düzeni", "بنية الصفحة المعتادة", "Типичная структура страницы"),
       blocks: [
         {
-          code: '<body>\n  <header>\n    <h1>My site</h1>\n    <nav><a href="/">Home</a> <a href="/blog">Blog</a></nav>\n  </header>\n  <main>\n    <article>\n      <h2>Post title</h2>\n      <p>…</p>\n    </article>\n    <aside>Related links</aside>\n  </main>\n  <footer>© 2026</footer>\n</body>',
+          code: '<body>\n  <header>\n    <h1>My site</h1>\n    <nav><a href="/">Home</a> <a href="#blog">Blog</a></nav>\n  </header>\n  <main>\n    <article>\n      <h2>Post title</h2>\n      <p>…</p>\n    </article>\n    <aside>Related links</aside>\n  </main>\n  <footer>© 2026</footer>\n</body>',
         },
         {
           list: [

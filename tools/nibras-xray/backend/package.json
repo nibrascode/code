@@ -1,0 +1,3 @@
+{ "name": "nibras-xray-worker", "private": true, "version": "1.0.0",
+  "description": "Node helper for app/services/jsts_analyzer.py (run: npm install)",
+  "dependencies": { "@babel/parser": "^7.24.4" } }
