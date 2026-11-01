@@ -12033,11 +12033,11 @@ select option:checked { background-color: #2f6bff; color: #ffffff; }
 select.lang-pick option, select.nxa-langpick option { background-color: #0f172a; color: #f1f5f9; }
 select.lang-pick option:checked, select.nxa-langpick option:checked { background-color: #2f6bff; color: #fff; }
 
-/* Alətlər / Studio / Öyrənmə: fonsuz sətir — balaca ikon + ad, hər ekranda 4 sütun */
+/* Alətlər / Studio / Öyrənmə: fonsuz sətir — balaca ikon + ad, hər ekranda 3 sütun */
 .nx-bar-group .nx-bar-group-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-  gap: 6px 10px;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 14px 18px;
 }
 .nx-bar-group .nx-bar-group-grid > a,
 .nx-bar-group .nx-bar-group-grid > .nx-qr-bar {
@@ -12045,10 +12045,10 @@ select.lang-pick option:checked, select.nxa-langpick option:checked { background
   flex-direction: row !important;
   align-items: center;
   justify-content: flex-start;
-  gap: 6px;
+  gap: 8px;
   min-height: 0 !important;
   height: auto !important;
-  padding: 4px 2px !important;
+  padding: 6px 2px !important;
   background: none !important;
   background-image: none !important;
   border: 0 !important;
@@ -12062,16 +12062,20 @@ select.lang-pick option:checked, select.nxa-langpick option:checked { background
 .nx-bar-group .nx-bar-group-grid > a > img,
 .nx-bar-group .nx-bar-group-grid > a > svg {
   flex: 0 0 auto;
-  width: 20px !important;
-  height: 20px !important;
+  width: 22px !important;
+  height: 22px !important;
 }
 .nx-bar-group .nx-bar-group-grid > a > span,
 .nx-bar-group .nx-bar-group-grid > a > span b {
-  font-size: 12px;
-  line-height: 1.2;
+  font-size: 14px;
+  line-height: 1.25;
   text-align: left;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: ellipsis;
 }
 .nx-bar-group .nx-bar-group-grid > a > span { min-width: 0; }
 
