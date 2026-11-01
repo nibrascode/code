@@ -32,14 +32,20 @@ const url = (l) => `${BASE}${l === "az" ? "" : "/" + l}/xray`;
 const esc = (s) => s.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
 
 let src = readFileSync(SRC, "utf8");
-// @babel/parser's CDN file is CommonJS and never defined window.babelParser; load the ESM build instead.
-src = src.replace(/\s*<script src="https:\/\/cdn\.jsdelivr\.net\/npm\/@babel\/parser@[^"]+"><\/script>/,
-  `\n  <script type="module">import * as p from "https://esm.sh/@babel/parser@7.24.4";window.babelParser=p;const b=document.getElementById("engineStatusBadge");if(b)b.textContent="Browser: @babel/parser (JS/TS) · heuristic (Python, other)";</script>`);
+// Self-hosted assets (site CSP only allows 'self' scripts): replace every CDN tag + the Tailwind runtime config.
+src = src.replace(/<script src="https:\/\/cdn\.tailwindcss\.com[^"]*"><\/script>/, `<link rel="stylesheet" href="/xray/assets/xray.css" />`)
+  .replace(/<script src="https:\/\/cdnjs[^"]*cytoscape[^"]*"><\/script>/, `<script src="/xray/assets/cytoscape.min.js"></script>`)
+  .replace(/<script src="https:\/\/cdnjs[^"]*jszip[^"]*"><\/script>/, `<script src="/xray/assets/jszip.min.js"></script>`)
+  .replace(/<script src="https:\/\/cdn\.jsdelivr\.net\/npm\/chart\.js[^"]*"><\/script>/, `<script src="/xray/assets/chart.umd.js"></script>`)
+  .replace(/<script src="https:\/\/cdnjs[^"]*three[^"]*"><\/script>/, `<script src="/xray/assets/three.min.js"></script>`)
+  .replace(/<script src="https:\/\/cdn\.jsdelivr\.net\/npm\/@babel\/parser@[^"]+"><\/script>/,
+    `<script src="/xray/assets/babel-parser.min.js"></script>\n  <script>document.addEventListener("DOMContentLoaded",()=>{const b=document.getElementById("engineStatusBadge");if(b&&window.babelParser)b.textContent="Browser: @babel/parser (JS/TS) · heuristic (Python, other)";});</script>`)
+  .replace(/\s*<script>\s*tailwind\.config = \{[\s\S]*?\};\s*<\/script>/, "");
 // Honest default badge (updated once the parser loads).
 src = src.replace(">AST Engine: @babel/parser + Python AST<", ">Browser engine: heuristic (loading @babel/parser…)<");
 // Privacy hard-lock: the browser itself blocks any fetch/XHR/beacon/WebSocket except the public GitHub GET import,
 // and blocks form posts. Scripts may load from the library CDNs only (no user data is sent to them).
-const CSP = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src https://api.github.com https://raw.githubusercontent.com https://esm.sh; worker-src 'self' blob:; frame-src 'self' blob:; form-action 'none'; base-uri 'self'";
+const CSP = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src https://api.github.com https://raw.githubusercontent.com; worker-src 'self' blob:; frame-src 'self' blob:; form-action 'none'; base-uri 'self'";
 
 for (const l of LANGS) {
   const t = T[l];

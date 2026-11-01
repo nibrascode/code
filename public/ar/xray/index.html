@@ -15,31 +15,19 @@
   <meta property="og:title" content="Nibras X-Ray — تحليل الكود وخريطة البنية | Nibras Code" />
   <meta property="og:description" content="حلّل ملف ZIP لمشروع JS/TS/Python في المتصفح: مخطط الاعتماديات، الأخطاء، المخاطر الأمنية، التعقيد. يبقى الكود على جهازك." />
   <meta property="og:url" content="https://nibrascode.com/ar/xray" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src https://api.github.com https://raw.githubusercontent.com https://esm.sh; worker-src 'self' blob:; frame-src 'self' blob:; form-action 'none'; base-uri 'self'" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src https://api.github.com https://raw.githubusercontent.com; worker-src 'self' blob:; frame-src 'self' blob:; form-action 'none'; base-uri 'self'" />
   <meta name="referrer" content="no-referrer" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.28.1/cytoscape.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-  <script type="module">import * as p from "https://esm.sh/@babel/parser@7.24.4";window.babelParser=p;const b=document.getElementById("engineStatusBadge");if(b)b.textContent="Browser: @babel/parser (JS/TS) · heuristic (Python, other)";</script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <link rel="stylesheet" href="/xray/assets/xray.css" />
+  <script src="/xray/assets/cytoscape.min.js"></script>
+  <script src="/xray/assets/jszip.min.js"></script>
+  <script src="/xray/assets/chart.umd.js"></script>
+  <script src="/xray/assets/babel-parser.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded",()=>{const b=document.getElementById("engineStatusBadge");if(b&&window.babelParser)b.textContent="Browser: @babel/parser (JS/TS) · heuristic (Python, other)";});</script>
+  <script src="/xray/assets/three.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'system-ui', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace']
-          }
-        }
-      }
-    };
-  </script>
   <style>
     body { font-family: 'Inter', system-ui, sans-serif; }
     code, pre, .font-mono { font-family: 'JetBrains Mono', monospace; }
