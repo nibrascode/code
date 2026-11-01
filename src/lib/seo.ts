@@ -44,7 +44,7 @@ function seoLeaf(az: string, en: string, ar: string, ru: string, tr?: string): C
   return copy;
 }
 
-const PAGES: Record<string, Copy> = {
+export const PAGES: Record<string, Copy> = {
   "/": {
     az: {
       title: "Nibras Code — pulsuz PDF, QR alətləri və tətbiqlər",

@@ -1,14 +1,158 @@
 {
   "name": "Nibras Code tools catalog",
   "publisher": "Nibras Code",
+  "author": "Mahir Aliyev",
   "url": "https://nibrascode.com",
   "contact": "nibrascode@gmail.com",
-  "updated": "2026-11-01",
-  "count": 45,
+  "updated": "2026-11-02",
+  "version": 2,
+  "count": 85,
+  "languages": [
+    "az",
+    "en",
+    "tr",
+    "ar",
+    "ru"
+  ],
   "note": "clientSide:true means files are processed in the user's browser and are not uploaded to a server.",
+  "privacyNote": "PDF, QR, image, video, audio, ZIP, background removal and most studio tools run in the browser (clientSide:true). Nibras AI and Error Help send the text you type to an AI service; SEO Check and Site Doctor fetch the address you enter on the server (clientSide:false, see dataHandling). Apps are Android apps (platform:android).",
+  "links": {
+    "self": "https://nibrascode.com/tools.json",
+    "llms": "https://nibrascode.com/llms.txt",
+    "llmsFull": "https://nibrascode.com/llms-full.txt",
+    "llmsByLang": {
+      "az": "https://nibrascode.com/llms-az.txt",
+      "en": "https://nibrascode.com/llms-en.txt",
+      "tr": "https://nibrascode.com/llms-tr.txt",
+      "ar": "https://nibrascode.com/llms-ar.txt",
+      "ru": "https://nibrascode.com/llms-ru.txt"
+    },
+    "llmsFullByLang": {
+      "az": "https://nibrascode.com/llms-full-az.txt",
+      "en": "https://nibrascode.com/llms-full-en.txt",
+      "tr": "https://nibrascode.com/llms-full-tr.txt",
+      "ar": "https://nibrascode.com/llms-full-ar.txt",
+      "ru": "https://nibrascode.com/llms-full-ru.txt"
+    },
+    "robots": "https://nibrascode.com/robots.txt",
+    "sitemap": "https://nibrascode.com/sitemap.xml",
+    "home": {
+      "az": "https://nibrascode.com/",
+      "en": "https://nibrascode.com/en",
+      "tr": "https://nibrascode.com/tr",
+      "ar": "https://nibrascode.com/ar",
+      "ru": "https://nibrascode.com/ru"
+    }
+  },
+  "categories": {
+    "ai": 1,
+    "pdf": 36,
+    "qr": 3,
+    "media": 10,
+    "image": 5,
+    "utility": 7,
+    "studio": 11,
+    "learn": 3,
+    "app": 9
+  },
   "tools": [
     {
+      "id": "nibras-ai",
+      "category": "ai",
+      "name": "Nibras AI",
+      "names": {
+        "az": "Nibras AI",
+        "en": "Nibras AI",
+        "tr": "Nibras AI",
+        "ar": "Nibras AI",
+        "ru": "Nibras AI"
+      },
+      "description": "Nibras Code's assistant: ask a question, write code and make an image.",
+      "descriptions": {
+        "az": "Nibras Code-un köməkçisi: sual ver, kod yaz və şəkil hazırla.",
+        "en": "Nibras Code's assistant: ask a question, write code and make an image.",
+        "tr": "Nibras Code'un yardımcısı: soru sor, kod yaz ve görsel hazırla.",
+        "ar": "مساعد Nibras Code: اطرح سؤالاً واكتب كوداً وأعدّ صورة.",
+        "ru": "Помощник Nibras Code: задайте вопрос, напишите код и сделайте изображение."
+      },
+      "audience": {
+        "az": "Sual, kod və ya şəkil üçün köməkçi axtaranlar",
+        "en": "Anyone who wants help with a question, code or an image",
+        "tr": "Soru, kod veya görsel için yardımcı arayanlar",
+        "ar": "كل من يريد مساعدة في سؤال أو كود أو صورة",
+        "ru": "Все, кому нужна помощь с вопросом, кодом или изображением"
+      },
+      "url": "https://nibrascode.com/ai",
+      "urls": {
+        "az": "https://nibrascode.com/ai",
+        "en": "https://nibrascode.com/ai",
+        "tr": "https://nibrascode.com/ai",
+        "ar": "https://nibrascode.com/ai",
+        "ru": "https://nibrascode.com/ai"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "clientSide": false,
+      "dataHandling": "Your message text is sent to an AI service to generate the answer."
+    },
+    {
+      "id": "pdf",
+      "category": "pdf",
+      "name": "Nibras PDF",
+      "names": {
+        "az": "Nibras PDF",
+        "en": "Nibras PDF",
+        "tr": "Nibras PDF",
+        "ar": "Nibras PDF",
+        "ru": "Nibras PDF"
+      },
+      "description": "35 PDF tools in your browser: merge, split, compress, images to PDF, PDF to image and Word, OCR, password, watermark, signature.",
+      "descriptions": {
+        "az": "Brauzerdə 35 PDF aləti: birləşdir, böl, sıxışdır, şəkildən PDF, PDF-dən şəkil və Word, OCR, parol, watermark, imza.",
+        "en": "35 PDF tools in your browser: merge, split, compress, images to PDF, PDF to image and Word, OCR, password, watermark, signature.",
+        "tr": "Tarayıcıda 35 PDF aracı: birleştir, böl, sıkıştır, görselden PDF, PDF'den görsel ve Word, OCR, parola, filigran, imza.",
+        "ar": "35 أداة PDF في المتصفح: دمج وتقسيم وضغط وتحويل الصور وWord وOCR وكلمة مرور وعلامة مائية وتوقيع.",
+        "ru": "35 PDF-инструментов в браузере: объединение, разделение, сжатие, изображения и Word, OCR, пароль, водяной знак, подпись."
+      },
+      "audience": {
+        "az": "Sənədlə işləyən tələbə, ofis işçisi və sahibkarlar",
+        "en": "Students, office workers and small businesses working with documents",
+        "tr": "Belgeyle çalışan öğrenciler, ofis çalışanları ve işletmeler",
+        "ar": "الطلاب وموظفو المكاتب وأصحاب الأعمال الذين يعملون بالمستندات",
+        "ru": "Студенты, офисные работники и малый бизнес, работающие с документами"
+      },
+      "url": "https://nibrascode.com/en/pdf",
+      "urls": {
+        "az": "https://nibrascode.com/pdf",
+        "en": "https://nibrascode.com/en/pdf",
+        "tr": "https://nibrascode.com/tr/pdf",
+        "ar": "https://nibrascode.com/ar/pdf",
+        "ru": "https://nibrascode.com/ru/pdf"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "clientSide": true,
+      "toolCount": 35
+    },
+    {
       "id": "pdf-write-pdf",
+      "category": "pdf",
       "name": "Simple PDF editor",
       "names": {
         "az": "Sadə PDF düzəlt",
@@ -17,8 +161,21 @@
         "ar": "محرر PDF البسيط",
         "ru": "Простой редактор PDF"
       },
-      "description": "Type or pick a template: application letter, simple CV, explanatory note, price quote",
-      "category": "pdf",
+      "description": "Type or pick a template: application letter, simple CV, explanatory note, price quote.",
+      "descriptions": {
+        "az": "Yazın və ya hazır şablon seçin: ərizə nümunəsi, sadə CV, izahnamə, qiymət təklifi.",
+        "en": "Type or pick a template: application letter, simple CV, explanatory note, price quote.",
+        "tr": "Yazın veya şablon seçin: dilekçe, basit CV, açıklama yazısı, fiyat teklifi.",
+        "ar": "اكتب أو اختر قالباً: طلب، سيرة ذاتية، مذكرة توضيحية، عرض سعر.",
+        "ru": "Пишите или выберите шаблон: заявление, резюме, объяснительная, коммерческое предложение."
+      },
+      "audience": {
+        "az": "Sənədlə işləyən tələbə, ofis işçisi və sahibkarlar",
+        "en": "Students, office workers and small businesses working with documents",
+        "tr": "Belgeyle çalışan öğrenciler, ofis çalışanları ve işletmeler",
+        "ar": "الطلاب وموظفو المكاتب وأصحاب الأعمال الذين يعملون بالمستندات",
+        "ru": "Студенты, офисные работники и малый бизнес, работающие с документами"
+      },
       "url": "https://nibrascode.com/en/pdf/write-pdf",
       "urls": {
         "az": "https://nibrascode.com/pdf/write-pdf",
@@ -34,13 +191,14 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
     },
     {
       "id": "pdf-merge",
+      "category": "pdf",
       "name": "Merge",
       "names": {
         "az": "Birləşdir",
@@ -49,8 +207,21 @@
         "ar": "دمج",
         "ru": "Объединить"
       },
-      "description": "Combine multiple PDFs into one file",
-      "category": "pdf",
+      "description": "Combine multiple PDFs into one file.",
+      "descriptions": {
+        "az": "Bir neçə PDF-i bir faylda topla.",
+        "en": "Combine multiple PDFs into one file.",
+        "tr": "Birden fazla PDF'yi tek dosyada topla.",
+        "ar": "جمع عدة ملفات PDF في ملف واحد.",
+        "ru": "Объединить несколько PDF в один файл."
+      },
+      "audience": {
+        "az": "Sənədlə işləyən tələbə, ofis işçisi və sahibkarlar",
+        "en": "Students, office workers and small businesses working with documents",
+        "tr": "Belgeyle çalışan öğrenciler, ofis çalışanları ve işletmeler",
+        "ar": "الطلاب وموظفو المكاتب وأصحاب الأعمال الذين يعملون بالمستندات",
+        "ru": "Студенты, офисные работники и малый бизнес, работающие с документами"
+      },
       "url": "https://nibrascode.com/en/pdf/merge",
       "urls": {
         "az": "https://nibrascode.com/pdf/merge",
@@ -66,13 +237,14 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
     },
     {
       "id": "pdf-split",
+      "category": "pdf",
       "name": "Split",
       "names": {
         "az": "Böl",
@@ -81,8 +253,21 @@
         "ar": "تقسيم",
         "ru": "Разделить"
       },
-      "description": "Separate pages into individual files",
-      "category": "pdf",
+      "description": "Separate pages into individual files.",
+      "descriptions": {
+        "az": "Səhifələri ayrıca fayllara ayır.",
+        "en": "Separate pages into individual files.",
+        "tr": "Sayfaları ayrı dosyalara ayır.",
+        "ar": "فصل الصفحات إلى ملفات منفصلة.",
+        "ru": "Разделить страницы на отдельные файлы."
+      },
+      "audience": {
+        "az": "Sənədlə işləyən tələbə, ofis işçisi və sahibkarlar",
+        "en": "Students, office workers and small businesses working with documents",
+        "tr": "Belgeyle çalışan öğrenciler, ofis çalışanları ve işletmeler",
+        "ar": "الطلاب وموظفو المكاتب وأصحاب الأعمال الذين يعملون بالمستندات",
+        "ru": "Студенты, офисные работники и малый бизнес, работающие с документами"
+      },
       "url": "https://nibrascode.com/en/pdf/split",
       "urls": {
         "az": "https://nibrascode.com/pdf/split",
@@ -98,13 +283,14 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
     },
     {
       "id": "pdf-compress",
+      "category": "pdf",
       "name": "Compress",
       "names": {
         "az": "Sıxışdır",
@@ -113,8 +299,21 @@
         "ar": "ضغط",
         "ru": "Сжать"
       },
-      "description": "Reduce the file size",
-      "category": "pdf",
+      "description": "Reduce the file size.",
+      "descriptions": {
+        "az": "Fayl ölçüsünü kiçilt.",
+        "en": "Reduce the file size.",
+        "tr": "Dosya boyutunu küçült.",
+        "ar": "تقليل حجم الملف.",
+        "ru": "Уменьшить размер файла."
+      },
+      "audience": {
+        "az": "Sənədlə işləyən tələbə, ofis işçisi və sahibkarlar",
+        "en": "Students, office workers and small businesses working with documents",
+        "tr": "Belgeyle çalışan öğrenciler, ofis çalışanları ve işletmeler",
+        "ar": "الطلاب وموظفو المكاتب وأصحاب الأعمال الذين يعملون بالمستندات",
+        "ru": "Студенты, офисные работники и малый бизнес, работающие с документами"
+      },
       "url": "https://nibrascode.com/en/pdf/compress",
       "urls": {
         "az": "https://nibrascode.com/pdf/compress",
@@ -130,13 +329,14 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
     },
     {
       "id": "pdf-image-pdf",
+      "category": "pdf",
       "name": "Image to PDF",
       "names": {
         "az": "Şəkildən PDF",
@@ -145,8 +345,21 @@
         "ar": "صورة إلى PDF",
         "ru": "Изображение в PDF"
       },
-      "description": "Add one or more images to a PDF document",
-      "category": "pdf",
+      "description": "Add one or more images to a PDF document.",
+      "descriptions": {
+        "az": "Şəkilləri PDF sənədinə çevir.",
+        "en": "Add one or more images to a PDF document.",
+        "tr": "Bir veya daha fazla görüntüyü PDF belgesine ekle.",
+        "ar": "إضافة صورة أو عدة صور إلى مستند PDF.",
+        "ru": "Добавить одно или несколько изображений в PDF."
+      },
+      "audience": {
+        "az": "Sənədlə işləyən tələbə, ofis işçisi və sahibkarlar",
+        "en": "Students, office workers and small businesses working with documents",
+        "tr": "Belgeyle çalışan öğrenciler, ofis çalışanları ve işletmeler",
+        "ar": "الطلاب وموظفو المكاتب وأصحاب الأعمال الذين يعملون بالمستندات",
+        "ru": "Студенты, офисные работники и малый бизнес, работающие с документами"
+      },
       "url": "https://nibrascode.com/en/pdf/image-pdf",
       "urls": {
         "az": "https://nibrascode.com/pdf/image-pdf",
@@ -162,13 +375,14 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
     },
     {
       "id": "pdf-pdf-image",
+      "category": "pdf",
       "name": "PDF to image",
       "names": {
         "az": "PDF-dən şəkil",
@@ -177,8 +391,21 @@
         "ar": "PDF إلى صورة",
         "ru": "PDF в изображение"
       },
-      "description": "Save pages as images",
-      "category": "pdf",
+      "description": "Save pages as images.",
+      "descriptions": {
+        "az": "Səhifələri şəkil kimi saxla.",
+        "en": "Save pages as images.",
+        "tr": "Sayfaları görüntü olarak kaydet.",
+        "ar": "حفظ الصفحات كصور.",
+        "ru": "Сохранить страницы как изображения."
+      },
+      "audience": {
+        "az": "Sənədlə işləyən tələbə, ofis işçisi və sahibkarlar",
+        "en": "Students, office workers and small businesses working with documents",
+        "tr": "Belgeyle çalışan öğrenciler, ofis çalışanları ve işletmeler",
+        "ar": "الطلاب وموظفو المكاتب وأصحاب الأعمال الذين يعملون بالمستندات",
+        "ru": "Студенты, офисные работники и малый бизнес, работающие с документами"
+      },
       "url": "https://nibrascode.com/en/pdf/pdf-image",
       "urls": {
         "az": "https://nibrascode.com/pdf/pdf-image",
@@ -194,13 +421,14 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
     },
     {
       "id": "pdf-rotate",
+      "category": "pdf",
       "name": "Rotate",
       "names": {
         "az": "Dönüştür",
@@ -209,8 +437,21 @@
         "ar": "تدوير",
         "ru": "Повернуть"
       },
-      "description": "Turn the PDF left or right",
-      "category": "pdf",
+      "description": "Turn the PDF left or right.",
+      "descriptions": {
+        "az": "PDF-i sola və ya sağa çevir.",
+        "en": "Turn the PDF left or right.",
+        "tr": "PDF’yi sola veya sağa çevir.",
+        "ar": "تدوير PDF إلى اليسار أو اليمين.",
+        "ru": "Повернуть PDF влево или вправо."
+      },
+      "audience": {
+        "az": "Sənədlə işləyən tələbə, ofis işçisi və sahibkarlar",
+        "en": "Students, office workers and small businesses working with documents",
+        "tr": "Belgeyle çalışan öğrenciler, ofis çalışanları ve işletmeler",
+        "ar": "الطلاب وموظفو المكاتب وأصحاب الأعمال الذين يعملون بالمستندات",
+        "ru": "Студенты, офисные работники и малый бизнес, работающие с документами"
+      },
       "url": "https://nibrascode.com/en/pdf/rotate",
       "urls": {
         "az": "https://nibrascode.com/pdf/rotate",
@@ -226,13 +467,14 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
     },
     {
       "id": "pdf-protect",
+      "category": "pdf",
       "name": "Protect",
       "names": {
         "az": "Qoru",
@@ -241,8 +483,21 @@
         "ar": "حماية",
         "ru": "Защитить"
       },
-      "description": "Secure with a password",
-      "category": "pdf",
+      "description": "Secure with a password.",
+      "descriptions": {
+        "az": "Parol ilə təhlükəsizləşdir.",
+        "en": "Secure with a password.",
+        "tr": "Parola ile güvene al.",
+        "ar": "تأمين الملف بكلمة مرور.",
+        "ru": "Защитить паролем."
+      },
+      "audience": {
+        "az": "Sənədlə işləyən tələbə, ofis işçisi və sahibkarlar",
+        "en": "Students, office workers and small businesses working with documents",
+        "tr": "Belgeyle çalışan öğrenciler, ofis çalışanları ve işletmeler",
+        "ar": "الطلاب وموظفو المكاتب وأصحاب الأعمال الذين يعملون بالمستندات",
+        "ru": "Студенты, офисные работники и малый бизнес, работающие с документами"
+      },
       "url": "https://nibrascode.com/en/pdf/protect",
       "urls": {
         "az": "https://nibrascode.com/pdf/protect",
@@ -258,13 +513,14 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
     },
     {
       "id": "pdf-watermark",
+      "category": "pdf",
       "name": "Watermark",
       "names": {
         "az": "Su nişanı",
@@ -273,8 +529,21 @@
         "ar": "علامة مائية",
         "ru": "Водяной знак"
       },
-      "description": "Add text or a mark to the document",
-      "category": "pdf",
+      "description": "Add text or a mark to the document.",
+      "descriptions": {
+        "az": "Sənədə yazı və ya nişan əlavə et.",
+        "en": "Add text or a mark to the document.",
+        "tr": "Belgeye metin veya işaret ekle.",
+        "ar": "إضافة نص أو علامة إلى المستند.",
+        "ru": "Добавить текст или знак в документ."
+      },
+      "audience": {
+        "az": "Sənədlə işləyən tələbə, ofis işçisi və sahibkarlar",
+        "en": "Students, office workers and small businesses working with documents",
+        "tr": "Belgeyle çalışan öğrenciler, ofis çalışanları ve işletmeler",
+        "ar": "الطلاب وموظفو المكاتب وأصحاب الأعمال الذين يعملون بالمستندات",
+        "ru": "Студенты, офисные работники и малый бизнес, работающие с документами"
+      },
       "url": "https://nibrascode.com/en/pdf/watermark",
       "urls": {
         "az": "https://nibrascode.com/pdf/watermark",
@@ -290,13 +559,14 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
     },
     {
       "id": "pdf-pages",
+      "category": "pdf",
       "name": "Manage pages",
       "names": {
         "az": "Səhifələri idarə et",
@@ -305,8 +575,21 @@
         "ar": "إدارة الصفحات",
         "ru": "Управление страницами"
       },
-      "description": "Delete pages and change their order",
-      "category": "pdf",
+      "description": "Delete pages and change their order.",
+      "descriptions": {
+        "az": "Səhifələri sil və sırasını dəyiş.",
+        "en": "Delete pages and change their order.",
+        "tr": "Sayfaları silin ve sırasını değiştirin.",
+        "ar": "حذف الصفحات وتغيير ترتيبها.",
+        "ru": "Удалять страницы и менять порядок."
+      },
+      "audience": {
+        "az": "Sənədlə işləyən tələbə, ofis işçisi və sahibkarlar",
+        "en": "Students, office workers and small businesses working with documents",
+        "tr": "Belgeyle çalışan öğrenciler, ofis çalışanları ve işletmeler",
+        "ar": "الطلاب وموظفو المكاتب وأصحاب الأعمال الذين يعملون بالمستندات",
+        "ru": "Студенты, офисные работники и малый бизнес, работающие с документами"
+      },
       "url": "https://nibrascode.com/en/pdf/pages",
       "urls": {
         "az": "https://nibrascode.com/pdf/pages",
@@ -322,13 +605,14 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
     },
     {
       "id": "pdf-scan",
+      "category": "pdf",
       "name": "Scan",
       "names": {
         "az": "Skan et",
@@ -337,8 +621,21 @@
         "ar": "مسح",
         "ru": "Сканировать"
       },
-      "description": "Turn a document into a PDF with the camera",
-      "category": "pdf",
+      "description": "Turn a document into a PDF with the camera.",
+      "descriptions": {
+        "az": "Kamera ilə sənədi PDF-ə çevir.",
+        "en": "Turn a document into a PDF with the camera.",
+        "tr": "Kamera ile belgeyi PDF'e dönüştür.",
+        "ar": "تحويل المستند إلى PDF باستخدام الكاميرا.",
+        "ru": "Преобразовать документ в PDF камерой."
+      },
+      "audience": {
+        "az": "Sənədlə işləyən tələbə, ofis işçisi və sahibkarlar",
+        "en": "Students, office workers and small businesses working with documents",
+        "tr": "Belgeyle çalışan öğrenciler, ofis çalışanları ve işletmeler",
+        "ar": "الطلاب وموظفو المكاتب وأصحاب الأعمال الذين يعملون بالمستندات",
+        "ru": "Студенты, офисные работники и малый бизнес, работающие с документами"
+      },
       "url": "https://nibrascode.com/en/pdf/scan",
       "urls": {
         "az": "https://nibrascode.com/pdf/scan",
@@ -354,13 +651,14 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
     },
     {
       "id": "pdf-sign",
+      "category": "pdf",
       "name": "Add signature",
       "names": {
         "az": "İmza əlavə et",
@@ -369,8 +667,21 @@
         "ar": "إضافة توقيع",
         "ru": "Добавить подпись"
       },
-      "description": "Place an electronic signature on a PDF",
-      "category": "pdf",
+      "description": "Place an electronic signature on a PDF.",
+      "descriptions": {
+        "az": "PDF-ə elektron imza yerləşdir.",
+        "en": "Place an electronic signature on a PDF.",
+        "tr": "PDF'e elektronik imza yerleştir.",
+        "ar": "وضع توقيع إلكتروني على ملف PDF.",
+        "ru": "Разместить электронную подпись в PDF."
+      },
+      "audience": {
+        "az": "Sənədlə işləyən tələbə, ofis işçisi və sahibkarlar",
+        "en": "Students, office workers and small businesses working with documents",
+        "tr": "Belgeyle çalışan öğrenciler, ofis çalışanları ve işletmeler",
+        "ar": "الطلاب وموظفو المكاتب وأصحاب الأعمال الذين يعملون بالمستندات",
+        "ru": "Студенты, офисные работники и малый бизнес, работающие с документами"
+      },
       "url": "https://nibrascode.com/en/pdf/sign",
       "urls": {
         "az": "https://nibrascode.com/pdf/sign",
@@ -386,13 +697,14 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
     },
     {
       "id": "pdf-ocr",
+      "category": "pdf",
       "name": "Recognize text",
       "names": {
         "az": "Mətni tanı",
@@ -401,8 +713,21 @@
         "ar": "التعرف على النص",
         "ru": "Распознать текст"
       },
-      "description": "Extract text from an image on-device",
-      "category": "pdf",
+      "description": "Extract text from an image on-device.",
+      "descriptions": {
+        "az": "Şəkildən mətni cihazda çıxar.",
+        "en": "Extract text from an image on-device.",
+        "tr": "Görüntüden metni cihazda çıkar.",
+        "ar": "استخراج النص من صورة على الجهاز.",
+        "ru": "Извлечь текст с изображения на устройстве."
+      },
+      "audience": {
+        "az": "Sənədlə işləyən tələbə, ofis işçisi və sahibkarlar",
+        "en": "Students, office workers and small businesses working with documents",
+        "tr": "Belgeyle çalışan öğrenciler, ofis çalışanları ve işletmeler",
+        "ar": "الطلاب وموظفو المكاتب وأصحاب الأعمال الذين يعملون بالمستندات",
+        "ru": "Студенты, офисные работники и малый бизнес, работающие с документами"
+      },
       "url": "https://nibrascode.com/en/pdf/ocr",
       "urls": {
         "az": "https://nibrascode.com/pdf/ocr",
@@ -418,13 +743,14 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
     },
     {
       "id": "pdf-pdf-ocr",
+      "category": "pdf",
       "name": "OCR PDF",
       "names": {
         "az": "PDF-dən mətn çıxar",
@@ -433,8 +759,21 @@
         "ar": "استخراج النص من PDF",
         "ru": "OCR PDF"
       },
-      "description": "Recognize text from PDF pages on-device",
-      "category": "pdf",
+      "description": "Recognize text from PDF pages on-device.",
+      "descriptions": {
+        "az": "PDF səhifələrindəki mətni cihazda tanı.",
+        "en": "Recognize text from PDF pages on-device.",
+        "tr": "PDF sayfalarındaki metni cihazda tanı.",
+        "ar": "التعرف على النص في صفحات PDF على الجهاز.",
+        "ru": "Распознать текст на страницах PDF на устройстве."
+      },
+      "audience": {
+        "az": "Sənədlə işləyən tələbə, ofis işçisi və sahibkarlar",
+        "en": "Students, office workers and small businesses working with documents",
+        "tr": "Belgeyle çalışan öğrenciler, ofis çalışanları ve işletmeler",
+        "ar": "الطلاب وموظفو المكاتب وأصحاب الأعمال الذين يعملون بالمستندات",
+        "ru": "Студенты, офисные работники и малый бизнес, работающие с документами"
+      },
       "url": "https://nibrascode.com/en/pdf/pdf-ocr",
       "urls": {
         "az": "https://nibrascode.com/pdf/pdf-ocr",
@@ -450,13 +789,14 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
     },
     {
       "id": "pdf-pdf-word",
+      "category": "pdf",
       "name": "Convert PDF to Word",
       "names": {
         "az": "PDF-dən Word",
@@ -465,8 +805,21 @@
         "ar": "تحويل PDF إلى Word",
         "ru": "Конвертировать PDF в Word"
       },
-      "description": "Save PDF text as a DOCX file",
-      "category": "pdf",
+      "description": "Save PDF text as a DOCX file.",
+      "descriptions": {
+        "az": "Məzmunu redaktə etmək üçün.",
+        "en": "Save PDF text as a DOCX file.",
+        "tr": "PDF metnini DOCX dosyası olarak kaydet.",
+        "ar": "حفظ نص PDF كملف DOCX.",
+        "ru": "Сохранить текст PDF как файл DOCX."
+      },
+      "audience": {
+        "az": "Sənədlə işləyən tələbə, ofis işçisi və sahibkarlar",
+        "en": "Students, office workers and small businesses working with documents",
+        "tr": "Belgeyle çalışan öğrenciler, ofis çalışanları ve işletmeler",
+        "ar": "الطلاب وموظفو المكاتب وأصحاب الأعمال الذين يعملون بالمستندات",
+        "ru": "Студенты, офисные работники и малый бизнес, работающие с документами"
+      },
       "url": "https://nibrascode.com/en/pdf/pdf-word",
       "urls": {
         "az": "https://nibrascode.com/pdf/pdf-word",
@@ -482,13 +835,14 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
     },
     {
       "id": "pdf-preview",
+      "category": "pdf",
       "name": "PDF preview",
       "names": {
         "az": "PDF önizləmə",
@@ -497,8 +851,21 @@
         "ar": "معاينة PDF",
         "ru": "Предпросмотр PDF"
       },
-      "description": "View and zoom pages",
-      "category": "pdf",
+      "description": "View and zoom pages.",
+      "descriptions": {
+        "az": "Səhifələrə bax və böyüt.",
+        "en": "View and zoom pages.",
+        "tr": "Sayfaları görüntüle ve yakınlaştır.",
+        "ar": "عرض الصفحات وتكبيرها.",
+        "ru": "Просматривать и увеличивать страницы."
+      },
+      "audience": {
+        "az": "Sənədlə işləyən tələbə, ofis işçisi və sahibkarlar",
+        "en": "Students, office workers and small businesses working with documents",
+        "tr": "Belgeyle çalışan öğrenciler, ofis çalışanları ve işletmeler",
+        "ar": "الطلاب وموظفو المكاتب وأصحاب الأعمال الذين يعملون بالمستندات",
+        "ru": "Студенты, офисные работники и малый бизнес, работающие с документами"
+      },
       "url": "https://nibrascode.com/en/pdf/preview",
       "urls": {
         "az": "https://nibrascode.com/pdf/preview",
@@ -514,13 +881,14 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
     },
     {
       "id": "pdf-batch",
+      "category": "pdf",
       "name": "Batch processing",
       "names": {
         "az": "Toplu əməliyyatlar",
@@ -529,8 +897,21 @@
         "ar": "معالجة مجمعة",
         "ru": "Пакетная обработка"
       },
-      "description": "Process several PDFs at once",
-      "category": "pdf",
+      "description": "Process several PDFs at once.",
+      "descriptions": {
+        "az": "Bir neçə PDF-i eyni anda emal et.",
+        "en": "Process several PDFs at once.",
+        "tr": "Birden fazla PDF'yi aynı anda işle.",
+        "ar": "معالجة عدة ملفات PDF دفعة واحدة.",
+        "ru": "Обработать несколько PDF одновременно."
+      },
+      "audience": {
+        "az": "Sənədlə işləyən tələbə, ofis işçisi və sahibkarlar",
+        "en": "Students, office workers and small businesses working with documents",
+        "tr": "Belgeyle çalışan öğrenciler, ofis çalışanları ve işletmeler",
+        "ar": "الطلاب وموظفو المكاتب وأصحاب الأعمال الذين يعملون بالمستندات",
+        "ru": "Студенты, офисные работники и малый бизнес, работающие с документами"
+      },
       "url": "https://nibrascode.com/en/pdf/batch",
       "urls": {
         "az": "https://nibrascode.com/pdf/batch",
@@ -546,13 +927,14 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
     },
     {
       "id": "pdf-extract-pages",
+      "category": "pdf",
       "name": "Select and extract pages",
       "names": {
         "az": "Səhifə seç və çıxar",
@@ -561,8 +943,21 @@
         "ar": "تحديد واستخراج الصفحات",
         "ru": "Выбрать и извлечь страницы"
       },
-      "description": "Create a new PDF from selected pages",
-      "category": "pdf",
+      "description": "Create a new PDF from selected pages.",
+      "descriptions": {
+        "az": "Seçilmiş səhifələrdən yeni PDF hazırla.",
+        "en": "Create a new PDF from selected pages.",
+        "tr": "Seçilen sayfalardan yeni PDF oluştur.",
+        "ar": "إنشاء ملف PDF جديد من الصفحات المحددة.",
+        "ru": "Создать новый PDF из выбранных страниц."
+      },
+      "audience": {
+        "az": "Sənədlə işləyən tələbə, ofis işçisi və sahibkarlar",
+        "en": "Students, office workers and small businesses working with documents",
+        "tr": "Belgeyle çalışan öğrenciler, ofis çalışanları ve işletmeler",
+        "ar": "الطلاب وموظفو المكاتب وأصحاب الأعمال الذين يعملون بالمستندات",
+        "ru": "Студенты, офисные работники и малый бизнес, работающие с документами"
+      },
       "url": "https://nibrascode.com/en/pdf/extract-pages",
       "urls": {
         "az": "https://nibrascode.com/pdf/extract-pages",
@@ -578,13 +973,14 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
     },
     {
       "id": "pdf-word-pdf",
+      "category": "pdf",
       "name": "Word to PDF",
       "names": {
         "az": "Word-dan PDF",
@@ -593,8 +989,21 @@
         "ar": "من وورد إلى PDF",
         "ru": "Word в PDF"
       },
-      "description": "Convert a DOCX file into a PDF",
-      "category": "pdf",
+      "description": "Convert a DOCX file into a PDF.",
+      "descriptions": {
+        "az": "DOCX faylını PDF sənədinə çevir.",
+        "en": "Convert a DOCX file into a PDF.",
+        "tr": "DOCX dosyasını PDF belgesine çevir.",
+        "ar": "تحويل ملف DOCX إلى PDF.",
+        "ru": "Преобразовать DOCX в PDF."
+      },
+      "audience": {
+        "az": "Sənədlə işləyən tələbə, ofis işçisi və sahibkarlar",
+        "en": "Students, office workers and small businesses working with documents",
+        "tr": "Belgeyle çalışan öğrenciler, ofis çalışanları ve işletmeler",
+        "ar": "الطلاب وموظفو المكاتب وأصحاب الأعمال الذين يعملون بالمستندات",
+        "ru": "Студенты, офисные работники и малый бизнес, работающие с документами"
+      },
       "url": "https://nibrascode.com/en/pdf/word-pdf",
       "urls": {
         "az": "https://nibrascode.com/pdf/word-pdf",
@@ -610,13 +1019,14 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
     },
     {
       "id": "pdf-page-numbers",
+      "category": "pdf",
       "name": "Add page numbers",
       "names": {
         "az": "Səhifə nömrəsi qoy",
@@ -625,8 +1035,21 @@
         "ar": "ترقيم الصفحات",
         "ru": "Номера страниц"
       },
-      "description": "Put page numbers on an existing PDF",
-      "category": "pdf",
+      "description": "Put page numbers on an existing PDF.",
+      "descriptions": {
+        "az": "Hazır PDF-ə səhifə nömrələri əlavə et.",
+        "en": "Put page numbers on an existing PDF.",
+        "tr": "Hazır PDF'e sayfa numarası ekle.",
+        "ar": "أضف أرقام الصفحات إلى ملف PDF جاهز.",
+        "ru": "Добавьте номера страниц в готовый PDF."
+      },
+      "audience": {
+        "az": "Sənədlə işləyən tələbə, ofis işçisi və sahibkarlar",
+        "en": "Students, office workers and small businesses working with documents",
+        "tr": "Belgeyle çalışan öğrenciler, ofis çalışanları ve işletmeler",
+        "ar": "الطلاب وموظفو المكاتب وأصحاب الأعمال الذين يعملون بالمستندات",
+        "ru": "Студенты, офисные работники и малый бизнес, работающие с документами"
+      },
       "url": "https://nibrascode.com/en/pdf/page-numbers",
       "urls": {
         "az": "https://nibrascode.com/pdf/page-numbers",
@@ -642,13 +1065,14 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
     },
     {
       "id": "pdf-unlock",
+      "category": "pdf",
       "name": "Unlock PDF",
       "names": {
         "az": "PDF parolunu aç",
@@ -657,8 +1081,21 @@
         "ar": "إزالة كلمة مرور PDF",
         "ru": "Снять пароль с PDF"
       },
-      "description": "Remove the password from a PDF you can open",
-      "category": "pdf",
+      "description": "Remove the password from a PDF you can open.",
+      "descriptions": {
+        "az": "Parolu bildiyiniz PDF-dən parolu götür.",
+        "en": "Remove the password from a PDF you can open.",
+        "tr": "Bildiğiniz parolayı PDF'ten kaldırın.",
+        "ar": "أزل كلمة المرور من ملف PDF تعرف كلمته.",
+        "ru": "Уберите пароль из PDF, который вы можете открыть."
+      },
+      "audience": {
+        "az": "Sənədlə işləyən tələbə, ofis işçisi və sahibkarlar",
+        "en": "Students, office workers and small businesses working with documents",
+        "tr": "Belgeyle çalışan öğrenciler, ofis çalışanları ve işletmeler",
+        "ar": "الطلاب وموظفو المكاتب وأصحاب الأعمال الذين يعملون بالمستندات",
+        "ru": "Студенты, офисные работники и малый бизнес, работающие с документами"
+      },
       "url": "https://nibrascode.com/en/pdf/unlock",
       "urls": {
         "az": "https://nibrascode.com/pdf/unlock",
@@ -674,13 +1111,14 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
     },
     {
       "id": "pdf-crop",
+      "category": "pdf",
       "name": "Crop PDF",
       "names": {
         "az": "PDF-i kəs",
@@ -689,8 +1127,21 @@
         "ar": "قص PDF",
         "ru": "Обрезать PDF"
       },
-      "description": "Trim the edges of PDF pages",
-      "category": "pdf",
+      "description": "Trim the edges of PDF pages.",
+      "descriptions": {
+        "az": "Səhifə kənarlarını kəsib götür.",
+        "en": "Trim the edges of PDF pages.",
+        "tr": "Sayfa kenarlarını kırpın.",
+        "ar": "قصّ حواف صفحات PDF.",
+        "ru": "Обрежьте поля страниц PDF."
+      },
+      "audience": {
+        "az": "Sənədlə işləyən tələbə, ofis işçisi və sahibkarlar",
+        "en": "Students, office workers and small businesses working with documents",
+        "tr": "Belgeyle çalışan öğrenciler, ofis çalışanları ve işletmeler",
+        "ar": "الطلاب وموظفو المكاتب وأصحاب الأعمال الذين يعملون بالمستندات",
+        "ru": "Студенты, офисные работники и малый бизнес, работающие с документами"
+      },
       "url": "https://nibrascode.com/en/pdf/crop",
       "urls": {
         "az": "https://nibrascode.com/pdf/crop",
@@ -706,13 +1157,14 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
     },
     {
       "id": "pdf-grayscale",
+      "category": "pdf",
       "name": "Grayscale PDF",
       "names": {
         "az": "PDF-i boz et",
@@ -721,8 +1173,21 @@
         "ar": "PDF بالأبيض والأسود",
         "ru": "PDF в оттенки серого"
       },
-      "description": "Turn a color PDF into black and white",
-      "category": "pdf",
+      "description": "Turn a color PDF into black and white.",
+      "descriptions": {
+        "az": "Rəngli PDF-i ağ-qara (boz) et.",
+        "en": "Turn a color PDF into black and white.",
+        "tr": "Renkli PDF'i siyah beyaz yapın.",
+        "ar": "حوّل PDF الملوّن إلى رمادي.",
+        "ru": "Сделайте цветной PDF чёрно-белым."
+      },
+      "audience": {
+        "az": "Sənədlə işləyən tələbə, ofis işçisi və sahibkarlar",
+        "en": "Students, office workers and small businesses working with documents",
+        "tr": "Belgeyle çalışan öğrenciler, ofis çalışanları ve işletmeler",
+        "ar": "الطلاب وموظفو المكاتب وأصحاب الأعمال الذين يعملون بالمستندات",
+        "ru": "Студенты, офисные работники и малый бизнес, работающие с документами"
+      },
       "url": "https://nibrascode.com/en/pdf/grayscale",
       "urls": {
         "az": "https://nibrascode.com/pdf/grayscale",
@@ -738,13 +1203,14 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
     },
     {
       "id": "pdf-excel-pdf",
+      "category": "pdf",
       "name": "Excel/CSV to PDF",
       "names": {
         "az": "Excel/CSV-dən PDF",
@@ -753,8 +1219,21 @@
         "ar": "من Excel/CSV إلى PDF",
         "ru": "Excel/CSV в PDF"
       },
-      "description": "Turn an XLSX or CSV table into a PDF",
-      "category": "pdf",
+      "description": "Turn an XLSX or CSV table into a PDF.",
+      "descriptions": {
+        "az": "XLSX və ya CSV cədvəlini PDF et.",
+        "en": "Turn an XLSX or CSV table into a PDF.",
+        "tr": "XLSX veya CSV tablosunu PDF yapın.",
+        "ar": "حوّل جدول XLSX أو CSV إلى PDF.",
+        "ru": "Превратите таблицу XLSX или CSV в PDF."
+      },
+      "audience": {
+        "az": "Sənədlə işləyən tələbə, ofis işçisi və sahibkarlar",
+        "en": "Students, office workers and small businesses working with documents",
+        "tr": "Belgeyle çalışan öğrenciler, ofis çalışanları ve işletmeler",
+        "ar": "الطلاب وموظفو المكاتب وأصحاب الأعمال الذين يعملون بالمستندات",
+        "ru": "Студенты, офисные работники и малый бизнес, работающие с документами"
+      },
       "url": "https://nibrascode.com/en/pdf/excel-pdf",
       "urls": {
         "az": "https://nibrascode.com/pdf/excel-pdf",
@@ -770,13 +1249,14 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
     },
     {
       "id": "pdf-redact",
+      "category": "pdf",
       "name": "Redact PDF",
       "names": {
         "az": "PDF-də məlumatı gizlət",
@@ -785,8 +1265,21 @@
         "ar": "إخفاء معلومات في PDF",
         "ru": "Скрыть данные в PDF"
       },
-      "description": "Cover chosen areas with black boxes",
-      "category": "pdf",
+      "description": "Cover chosen areas with black boxes.",
+      "descriptions": {
+        "az": "Seçdiyiniz yerləri qara qutu ilə ört.",
+        "en": "Cover chosen areas with black boxes.",
+        "tr": "Seçtiğiniz alanları siyah kutuyla örtün.",
+        "ar": "غطِّ المناطق المختارة بمربعات سوداء.",
+        "ru": "Закройте выбранные места чёрными блоками."
+      },
+      "audience": {
+        "az": "Sənədlə işləyən tələbə, ofis işçisi və sahibkarlar",
+        "en": "Students, office workers and small businesses working with documents",
+        "tr": "Belgeyle çalışan öğrenciler, ofis çalışanları ve işletmeler",
+        "ar": "الطلاب وموظفو المكاتب وأصحاب الأعمال الذين يعملون بالمستندات",
+        "ru": "Студенты, офисные работники и малый бизнес, работающие с документами"
+      },
       "url": "https://nibrascode.com/en/pdf/redact",
       "urls": {
         "az": "https://nibrascode.com/pdf/redact",
@@ -802,13 +1295,14 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
     },
     {
       "id": "pdf-invoice",
+      "category": "pdf",
       "name": "Invoice PDF",
       "names": {
         "az": "Hesab-faktura PDF",
@@ -817,8 +1311,21 @@
         "ar": "فاتورة PDF",
         "ru": "Счёт в PDF"
       },
-      "description": "Make a simple invoice from seller, buyer and items",
-      "category": "pdf",
+      "description": "Make a simple invoice from seller, buyer and items.",
+      "descriptions": {
+        "az": "Satıcı, alıcı və mallardan sadə faktura hazırla.",
+        "en": "Make a simple invoice from seller, buyer and items.",
+        "tr": "Satıcı, alıcı ve kalemlerden basit fatura hazırlayın.",
+        "ar": "أعدّ فاتورة بسيطة من البائع والمشتري والبنود.",
+        "ru": "Простой счёт: продавец, покупатель, позиции."
+      },
+      "audience": {
+        "az": "Sənədlə işləyən tələbə, ofis işçisi və sahibkarlar",
+        "en": "Students, office workers and small businesses working with documents",
+        "tr": "Belgeyle çalışan öğrenciler, ofis çalışanları ve işletmeler",
+        "ar": "الطلاب وموظفو المكاتب وأصحاب الأعمال الذين يعملون بالمستندات",
+        "ru": "Студенты, офисные работники и малый бизнес, работающие с документами"
+      },
       "url": "https://nibrascode.com/en/pdf/invoice",
       "urls": {
         "az": "https://nibrascode.com/pdf/invoice",
@@ -834,13 +1341,14 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
     },
     {
       "id": "pdf-pdf-excel",
+      "category": "pdf",
       "name": "PDF to Excel",
       "names": {
         "az": "PDF-dən Excel",
@@ -849,8 +1357,21 @@
         "ar": "من PDF إلى Excel",
         "ru": "PDF в Excel"
       },
-      "description": "Turn PDF tables into an XLSX file",
-      "category": "pdf",
+      "description": "Turn PDF tables into an XLSX file.",
+      "descriptions": {
+        "az": "PDF cədvəlini XLSX faylına çevir.",
+        "en": "Turn PDF tables into an XLSX file.",
+        "tr": "PDF tablolarını XLSX dosyasına çevirin.",
+        "ar": "حوّل جداول PDF إلى ملف XLSX.",
+        "ru": "Превратите таблицы PDF в файл XLSX."
+      },
+      "audience": {
+        "az": "Sənədlə işləyən tələbə, ofis işçisi və sahibkarlar",
+        "en": "Students, office workers and small businesses working with documents",
+        "tr": "Belgeyle çalışan öğrenciler, ofis çalışanları ve işletmeler",
+        "ar": "الطلاب وموظفو المكاتب وأصحاب الأعمال الذين يعملون بالمستندات",
+        "ru": "Студенты, офисные работники и малый бизнес, работающие с документами"
+      },
       "url": "https://nibrascode.com/en/pdf/pdf-excel",
       "urls": {
         "az": "https://nibrascode.com/pdf/pdf-excel",
@@ -866,13 +1387,14 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
     },
     {
       "id": "pdf-ppt-pdf",
+      "category": "pdf",
       "name": "PowerPoint to PDF",
       "names": {
         "az": "PowerPoint-dən PDF",
@@ -881,8 +1403,21 @@
         "ar": "من PowerPoint إلى PDF",
         "ru": "PowerPoint в PDF"
       },
-      "description": "Turn PPTX slides into a PDF",
-      "category": "pdf",
+      "description": "Turn PPTX slides into a PDF.",
+      "descriptions": {
+        "az": "PPTX slaydlarını PDF et.",
+        "en": "Turn PPTX slides into a PDF.",
+        "tr": "PPTX slaytlarını PDF yapın.",
+        "ar": "حوّل شرائح PPTX إلى PDF.",
+        "ru": "Превратите слайды PPTX в PDF."
+      },
+      "audience": {
+        "az": "Sənədlə işləyən tələbə, ofis işçisi və sahibkarlar",
+        "en": "Students, office workers and small businesses working with documents",
+        "tr": "Belgeyle çalışan öğrenciler, ofis çalışanları ve işletmeler",
+        "ar": "الطلاب وموظفو المكاتب وأصحاب الأعمال الذين يعملون بالمستندات",
+        "ru": "Студенты, офисные работники и малый бизнес, работающие с документами"
+      },
       "url": "https://nibrascode.com/en/pdf/ppt-pdf",
       "urls": {
         "az": "https://nibrascode.com/pdf/ppt-pdf",
@@ -898,13 +1433,14 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
     },
     {
       "id": "pdf-pdf-ppt",
+      "category": "pdf",
       "name": "PDF to PowerPoint",
       "names": {
         "az": "PDF-dən PowerPoint",
@@ -913,8 +1449,21 @@
         "ar": "من PDF إلى PowerPoint",
         "ru": "PDF в PowerPoint"
       },
-      "description": "Turn PDF pages into PPTX slides",
-      "category": "pdf",
+      "description": "Turn PDF pages into PPTX slides.",
+      "descriptions": {
+        "az": "PDF səhifələrini PPTX slaydlarına çevir.",
+        "en": "Turn PDF pages into PPTX slides.",
+        "tr": "PDF sayfalarını PPTX slaytlarına çevirin.",
+        "ar": "حوّل صفحات PDF إلى شرائح PPTX.",
+        "ru": "Превратите страницы PDF в слайды PPTX."
+      },
+      "audience": {
+        "az": "Sənədlə işləyən tələbə, ofis işçisi və sahibkarlar",
+        "en": "Students, office workers and small businesses working with documents",
+        "tr": "Belgeyle çalışan öğrenciler, ofis çalışanları ve işletmeler",
+        "ar": "الطلاب وموظفو المكاتب وأصحاب الأعمال الذين يعملون بالمستندات",
+        "ru": "Студенты, офисные работники и малый бизнес, работающие с документами"
+      },
       "url": "https://nibrascode.com/en/pdf/pdf-ppt",
       "urls": {
         "az": "https://nibrascode.com/pdf/pdf-ppt",
@@ -930,13 +1479,14 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
     },
     {
       "id": "pdf-flatten",
+      "category": "pdf",
       "name": "Flatten PDF",
       "names": {
         "az": "PDF-i sabitlə (flatten)",
@@ -945,8 +1495,21 @@
         "ar": "تسطيح PDF",
         "ru": "Сделать PDF плоским"
       },
-      "description": "Make form fields fixed and uneditable",
-      "category": "pdf",
+      "description": "Make form fields fixed and uneditable.",
+      "descriptions": {
+        "az": "Form sahələrini dəyişməz et.",
+        "en": "Make form fields fixed and uneditable.",
+        "tr": "Form alanlarını sabit ve düzenlenemez yap.",
+        "ar": "اجعل حقول النماذج ثابتة وغير قابلة للتعديل.",
+        "ru": "Закрепить поля форм без возможности правки."
+      },
+      "audience": {
+        "az": "Sənədlə işləyən tələbə, ofis işçisi və sahibkarlar",
+        "en": "Students, office workers and small businesses working with documents",
+        "tr": "Belgeyle çalışan öğrenciler, ofis çalışanları ve işletmeler",
+        "ar": "الطلاب وموظفو المكاتب وأصحاب الأعمال الذين يعملون بالمستندات",
+        "ru": "Студенты, офисные работники и малый бизнес, работающие с документами"
+      },
       "url": "https://nibrascode.com/en/pdf/flatten",
       "urls": {
         "az": "https://nibrascode.com/pdf/flatten",
@@ -962,13 +1525,14 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
     },
     {
       "id": "pdf-metadata",
+      "category": "pdf",
       "name": "PDF metadata",
       "names": {
         "az": "PDF xassələri (metadata)",
@@ -977,8 +1541,21 @@
         "ar": "بيانات PDF الوصفية",
         "ru": "Метаданные PDF"
       },
-      "description": "View and edit title, author and keywords",
-      "category": "pdf",
+      "description": "View and edit title, author and keywords.",
+      "descriptions": {
+        "az": "Başlıq, müəllif və açar sözlərə bax və dəyiş.",
+        "en": "View and edit title, author and keywords.",
+        "tr": "Başlık, yazar ve anahtar kelimeleri gör ve değiştir.",
+        "ar": "اعرض العنوان والمؤلف والكلمات المفتاحية وعدّلها.",
+        "ru": "Просмотр и правка заголовка, автора и ключевых слов."
+      },
+      "audience": {
+        "az": "Sənədlə işləyən tələbə, ofis işçisi və sahibkarlar",
+        "en": "Students, office workers and small businesses working with documents",
+        "tr": "Belgeyle çalışan öğrenciler, ofis çalışanları ve işletmeler",
+        "ar": "الطلاب وموظفو المكاتب وأصحاب الأعمال الذين يعملون بالمستندات",
+        "ru": "Студенты, офисные работники и малый бизнес, работающие с документами"
+      },
       "url": "https://nibrascode.com/en/pdf/metadata",
       "urls": {
         "az": "https://nibrascode.com/pdf/metadata",
@@ -994,13 +1571,14 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
     },
     {
       "id": "pdf-compare",
+      "category": "pdf",
       "name": "Compare PDFs",
       "names": {
         "az": "PDF-ləri müqayisə et",
@@ -1009,8 +1587,21 @@
         "ar": "مقارنة ملفات PDF",
         "ru": "Сравнить PDF"
       },
-      "description": "Find text differences between two PDFs",
-      "category": "pdf",
+      "description": "Find text differences between two PDFs.",
+      "descriptions": {
+        "az": "İki PDF-in mətn fərqini tap.",
+        "en": "Find text differences between two PDFs.",
+        "tr": "İki PDF arasındaki metin farkını bul.",
+        "ar": "اعثر على فروق النص بين ملفي PDF.",
+        "ru": "Найти различия текста двух PDF."
+      },
+      "audience": {
+        "az": "Sənədlə işləyən tələbə, ofis işçisi və sahibkarlar",
+        "en": "Students, office workers and small businesses working with documents",
+        "tr": "Belgeyle çalışan öğrenciler, ofis çalışanları ve işletmeler",
+        "ar": "الطلاب وموظفو المكاتب وأصحاب الأعمال الذين يعملون بالمستندات",
+        "ru": "Студенты, офисные работники и малый бизнес, работающие с документами"
+      },
       "url": "https://nibrascode.com/en/pdf/compare",
       "urls": {
         "az": "https://nibrascode.com/pdf/compare",
@@ -1026,13 +1617,14 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
     },
     {
       "id": "pdf-excel-csv",
+      "category": "pdf",
       "name": "Excel to CSV",
       "names": {
         "az": "Excel-dən CSV",
@@ -1041,8 +1633,21 @@
         "ar": "من Excel إلى CSV",
         "ru": "Excel в CSV"
       },
-      "description": "Turn an XLSX sheet into a CSV file",
-      "category": "pdf",
+      "description": "Turn an XLSX sheet into a CSV file.",
+      "descriptions": {
+        "az": "XLSX vərəqini CSV faylına çevir.",
+        "en": "Turn an XLSX sheet into a CSV file.",
+        "tr": "XLSX sayfasını CSV dosyasına çevir.",
+        "ar": "حوّل ورقة XLSX إلى ملف CSV.",
+        "ru": "Перевести лист XLSX в файл CSV."
+      },
+      "audience": {
+        "az": "Sənədlə işləyən tələbə, ofis işçisi və sahibkarlar",
+        "en": "Students, office workers and small businesses working with documents",
+        "tr": "Belgeyle çalışan öğrenciler, ofis çalışanları ve işletmeler",
+        "ar": "الطلاب وموظفو المكاتب وأصحاب الأعمال الذين يعملون بالمستندات",
+        "ru": "Студенты, офисные работники и малый бизнес, работающие с документами"
+      },
       "url": "https://nibrascode.com/en/pdf/excel-csv",
       "urls": {
         "az": "https://nibrascode.com/pdf/excel-csv",
@@ -1058,13 +1663,14 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
     },
     {
       "id": "pdf-csv-excel",
+      "category": "pdf",
       "name": "CSV to Excel",
       "names": {
         "az": "CSV-dən Excel",
@@ -1073,8 +1679,21 @@
         "ar": "من CSV إلى Excel",
         "ru": "CSV в Excel"
       },
-      "description": "Turn a CSV table into XLSX",
-      "category": "pdf",
+      "description": "Turn a CSV table into XLSX.",
+      "descriptions": {
+        "az": "CSV cədvəlini XLSX et.",
+        "en": "Turn a CSV table into XLSX.",
+        "tr": "CSV tablosunu XLSX yap.",
+        "ar": "حوّل جدول CSV إلى XLSX.",
+        "ru": "Перевести таблицу CSV в XLSX."
+      },
+      "audience": {
+        "az": "Sənədlə işləyən tələbə, ofis işçisi və sahibkarlar",
+        "en": "Students, office workers and small businesses working with documents",
+        "tr": "Belgeyle çalışan öğrenciler, ofis çalışanları ve işletmeler",
+        "ar": "الطلاب وموظفو المكاتب وأصحاب الأعمال الذين يعملون بالمستندات",
+        "ru": "Студенты, офисные работники и малый бизнес, работающие с документами"
+      },
       "url": "https://nibrascode.com/en/pdf/csv-excel",
       "urls": {
         "az": "https://nibrascode.com/pdf/csv-excel",
@@ -1090,13 +1709,14 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
     },
     {
       "id": "pdf-url-pdf",
+      "category": "pdf",
       "name": "URL to PDF",
       "names": {
         "az": "URL-dən PDF",
@@ -1105,8 +1725,21 @@
         "ar": "من رابط إلى PDF",
         "ru": "URL в PDF"
       },
-      "description": "Save a web page's text and images as PDF",
-      "category": "pdf",
+      "description": "Save a web page's text and images as PDF.",
+      "descriptions": {
+        "az": "Veb səhifənin mətnini və şəkillərini PDF et.",
+        "en": "Save a web page's text and images as PDF.",
+        "tr": "Web sayfasının metnini ve görsellerini PDF yap.",
+        "ar": "احفظ نص صفحة ويب وصورها كملف PDF.",
+        "ru": "Сохранить текст и картинки веб-страницы в PDF."
+      },
+      "audience": {
+        "az": "Sənədlə işləyən tələbə, ofis işçisi və sahibkarlar",
+        "en": "Students, office workers and small businesses working with documents",
+        "tr": "Belgeyle çalışan öğrenciler, ofis çalışanları ve işletmeler",
+        "ar": "الطلاب وموظفو المكاتب وأصحاب الأعمال الذين يعملون بالمستندات",
+        "ru": "Студенты, офисные работники и малый бизнес, работающие с документами"
+      },
       "url": "https://nibrascode.com/en/pdf/url-pdf",
       "urls": {
         "az": "https://nibrascode.com/pdf/url-pdf",
@@ -1122,16 +1755,37 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
     },
     {
       "id": "qr",
-      "name": "Nibras QR — QR code maker & scanner",
-      "description": "Create QR codes for URL, Wi-Fi, vCard, WhatsApp, SMS and events with colors and logo; scan QR codes with the camera.",
       "category": "qr",
+      "name": "Nibras QR",
+      "names": {
+        "az": "Nibras QR",
+        "en": "Nibras QR",
+        "tr": "Nibras QR",
+        "ar": "Nibras QR",
+        "ru": "Nibras QR"
+      },
+      "description": "Free online QR code generator: links, Wi-Fi, business cards, WhatsApp and more.",
+      "descriptions": {
+        "az": "Pulsuz onlayn QR kod generatoru: link, Wi-Fi, vizit kartı, WhatsApp və daha çox.",
+        "en": "Free online QR code generator: links, Wi-Fi, business cards, WhatsApp and more.",
+        "tr": "Ücretsiz çevrimiçi QR kod oluşturucu: link, Wi-Fi, kartvizit, WhatsApp ve daha fazlası.",
+        "ar": "مولّد رموز QR مجاني: روابط وWi-Fi وبطاقات عمل وواتساب وغيرها.",
+        "ru": "Бесплатный онлайн-генератор QR-кодов: ссылки, Wi-Fi, визитки, WhatsApp и другое."
+      },
+      "audience": {
+        "az": "Kafe, mağaza, tədbir və vizit kartı üçün QR lazım olanlar",
+        "en": "Cafes, shops, events and anyone sharing a link, Wi-Fi or contact",
+        "tr": "Kafe, mağaza, etkinlik ve link, Wi-Fi veya kişi paylaşanlar",
+        "ar": "المقاهي والمتاجر والفعاليات ومن يشارك رابطاً أو Wi-Fi أو جهة اتصال",
+        "ru": "Кафе, магазины, мероприятия и все, кто делится ссылкой, Wi-Fi или контактом"
+      },
       "url": "https://nibrascode.com/en/qr",
       "urls": {
         "az": "https://nibrascode.com/qr",
@@ -1147,16 +1801,37 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
     },
     {
       "id": "wifi-qr",
-      "name": "Wi-Fi QR code",
-      "description": "Make a QR code that joins a Wi-Fi network.",
       "category": "qr",
+      "name": "Wi-Fi QR code",
+      "names": {
+        "az": "Wi-Fi QR",
+        "en": "Wi-Fi QR code",
+        "tr": "Wi-Fi QR",
+        "ar": "رمز QR لـ Wi-Fi",
+        "ru": "Wi-Fi QR"
+      },
+      "description": "Make a QR code from a network name and password.",
+      "descriptions": {
+        "az": "Şəbəkə adı və şifrədən QR kod hazırla. Qonaq skan edib qoşulsun.",
+        "en": "Make a QR code from a network name and password.",
+        "tr": "Ağ adı ve şifreden QR kod yap. Konuk tarayıp bağlansın.",
+        "ar": "اصنع رمز QR من اسم الشبكة وكلمة المرور. يمسحه الضيف ويتصل.",
+        "ru": "Сделайте QR-код из имени сети и пароля. Гость сканирует и подключается."
+      },
+      "audience": {
+        "az": "Kafe, mağaza, tədbir və vizit kartı üçün QR lazım olanlar",
+        "en": "Cafes, shops, events and anyone sharing a link, Wi-Fi or contact",
+        "tr": "Kafe, mağaza, etkinlik ve link, Wi-Fi veya kişi paylaşanlar",
+        "ar": "المقاهي والمتاجر والفعاليات ومن يشارك رابطاً أو Wi-Fi أو جهة اتصال",
+        "ru": "Кафе, магазины, мероприятия и все, кто делится ссылкой, Wi-Fi или контактом"
+      },
       "url": "https://nibrascode.com/en/wifi",
       "urls": {
         "az": "https://nibrascode.com/wifi",
@@ -1172,16 +1847,37 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
     },
     {
       "id": "vcard-qr",
-      "name": "Business card (vCard) QR",
-      "description": "Make a contact card QR code.",
       "category": "qr",
+      "name": "Contact QR code (vCard)",
+      "names": {
+        "az": "Vizit kartı QR (vCard) hazırla",
+        "en": "Contact QR code (vCard)",
+        "tr": "Kartvizit QR (vCard)",
+        "ar": "رمز QR لبطاقة الاتصال (vCard)",
+        "ru": "QR-визитка (vCard)"
+      },
+      "description": "Make a vCard QR code from name, phone, email and company.",
+      "descriptions": {
+        "az": "Ad, telefon, email və şirkətdən vCard QR kodu hazırla.",
+        "en": "Make a vCard QR code from name, phone, email and company.",
+        "tr": "Ad, telefon, e-posta ve şirketten vCard QR kod hazırlayın.",
+        "ar": "أعدّ رمز vCard QR من الاسم والهاتف والبريد والشركة.",
+        "ru": "Сделайте vCard QR-код из имени, телефона, email и компании."
+      },
+      "audience": {
+        "az": "Kafe, mağaza, tədbir və vizit kartı üçün QR lazım olanlar",
+        "en": "Cafes, shops, events and anyone sharing a link, Wi-Fi or contact",
+        "tr": "Kafe, mağaza, etkinlik ve link, Wi-Fi veya kişi paylaşanlar",
+        "ar": "المقاهي والمتاجر والفعاليات ومن يشارك رابطاً أو Wi-Fi أو جهة اتصال",
+        "ru": "Кафе, магазины, мероприятия и все, кто делится ссылкой, Wi-Fi или контактом"
+      },
       "url": "https://nibrascode.com/en/vcard",
       "urls": {
         "az": "https://nibrascode.com/vcard",
@@ -1197,91 +1893,37 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
-    },
-    {
-      "id": "image-compress",
-      "name": "Compress image",
-      "description": "Compress, resize and convert photos in the browser.",
-      "category": "image",
-      "url": "https://nibrascode.com/en/image",
-      "urls": {
-        "az": "https://nibrascode.com/image",
-        "en": "https://nibrascode.com/en/image",
-        "tr": "https://nibrascode.com/tr/image",
-        "ar": "https://nibrascode.com/ar/image",
-        "ru": "https://nibrascode.com/ru/image"
-      },
-      "languages": [
-        "az",
-        "en",
-        "tr",
-        "ar",
-        "ru"
-      ],
-      "clientSide": true,
-      "free": true,
-      "account": false,
-      "ads": false
-    },
-    {
-      "id": "background-remove",
-      "name": "Remove background",
-      "description": "Remove the background of a photo on your device.",
-      "category": "image",
-      "url": "https://nibrascode.com/en/erase",
-      "urls": {
-        "az": "https://nibrascode.com/erase",
-        "en": "https://nibrascode.com/en/erase",
-        "tr": "https://nibrascode.com/tr/erase",
-        "ar": "https://nibrascode.com/ar/erase",
-        "ru": "https://nibrascode.com/ru/erase"
-      },
-      "languages": [
-        "az",
-        "en",
-        "tr",
-        "ar",
-        "ru"
-      ],
-      "clientSide": true,
-      "free": true,
-      "account": false,
-      "ads": false
-    },
-    {
-      "id": "video",
-      "name": "Video cut",
-      "description": "Trim and edit short videos in the browser.",
-      "category": "media",
-      "url": "https://nibrascode.com/en/video",
-      "urls": {
-        "az": "https://nibrascode.com/video",
-        "en": "https://nibrascode.com/en/video",
-        "tr": "https://nibrascode.com/tr/video",
-        "ar": "https://nibrascode.com/ar/video",
-        "ru": "https://nibrascode.com/ru/video"
-      },
-      "languages": [
-        "az",
-        "en",
-        "tr",
-        "ar",
-        "ru"
-      ],
-      "clientSide": true,
-      "free": true,
-      "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
     },
     {
       "id": "voice",
-      "name": "Record audio",
-      "description": "Record audio in the browser.",
       "category": "media",
+      "name": "Record audio",
+      "names": {
+        "az": "Səs yaz",
+        "en": "Record audio",
+        "tr": "Ses kaydet",
+        "ar": "سجّل الصوت",
+        "ru": "Записать звук"
+      },
+      "description": "Record audio with your microphone in the browser and download the file.",
+      "descriptions": {
+        "az": "Brauzerdə mikrofonla səs yaz və faylı endir.",
+        "en": "Record audio with your microphone in the browser and download the file.",
+        "tr": "Tarayıcıda mikrofonla ses kaydet ve dosyayı indir.",
+        "ar": "سجّل الصوت بالميكروفون في المتصفح ونزّل الملف.",
+        "ru": "Запишите звук с микрофона в браузере и скачайте файл."
+      },
+      "audience": {
+        "az": "Qısa video və ya səs yazısı hazırlayanlar",
+        "en": "People making short videos or voice recordings",
+        "tr": "Kısa video veya ses kaydı hazırlayanlar",
+        "ar": "من يعدّ مقاطع فيديو قصيرة أو تسجيلات صوتية",
+        "ru": "Те, кто делает короткие видео или аудиозаписи"
+      },
       "url": "https://nibrascode.com/en/voice",
       "urls": {
         "az": "https://nibrascode.com/voice",
@@ -1297,23 +1939,44 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
     },
     {
-      "id": "calc",
-      "name": "Calculators",
-      "description": "Everyday calculators.",
-      "category": "utility",
-      "url": "https://nibrascode.com/en/calc",
+      "id": "video",
+      "category": "media",
+      "name": "Video tools",
+      "names": {
+        "az": "Video alətləri",
+        "en": "Video tools",
+        "tr": "Video araçları",
+        "ar": "أدوات الفيديو",
+        "ru": "Видео-инструменты"
+      },
+      "description": "Trim video, convert to MP4/WebM/GIF, merge clips, extract audio as MP3.",
+      "descriptions": {
+        "az": "Videonu kəs, MP4/WebM/GIF-ə çevir, birləşdir, səsini MP3 kimi çıxar.",
+        "en": "Trim video, convert to MP4/WebM/GIF, merge clips, extract audio as MP3.",
+        "tr": "Video kes, MP4/WebM/GIF'e dönüştür, birleştir, sesi MP3 olarak çıkar.",
+        "ar": "قصّ الفيديو، حوّله إلى MP4/WebM/GIF، ادمج المقاطع، واستخرج الصوت MP3.",
+        "ru": "Обрезать видео, конвертировать в MP4/WebM/GIF, склеить клипы, извлечь звук в MP3."
+      },
+      "audience": {
+        "az": "Qısa video və ya səs yazısı hazırlayanlar",
+        "en": "People making short videos or voice recordings",
+        "tr": "Kısa video veya ses kaydı hazırlayanlar",
+        "ar": "من يعدّ مقاطع فيديو قصيرة أو تسجيلات صوتية",
+        "ru": "Те, кто делает короткие видео или аудиозаписи"
+      },
+      "url": "https://nibrascode.com/en/video",
       "urls": {
-        "az": "https://nibrascode.com/calc",
-        "en": "https://nibrascode.com/en/calc",
-        "tr": "https://nibrascode.com/tr/calc",
-        "ar": "https://nibrascode.com/ar/calc",
-        "ru": "https://nibrascode.com/ru/calc"
+        "az": "https://nibrascode.com/video",
+        "en": "https://nibrascode.com/en/video",
+        "tr": "https://nibrascode.com/tr/video",
+        "ar": "https://nibrascode.com/ar/video",
+        "ru": "https://nibrascode.com/ru/video"
       },
       "languages": [
         "az",
@@ -1322,16 +1985,819 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
+    },
+    {
+      "id": "video-trim",
+      "category": "media",
+      "name": "Trim video online",
+      "names": {
+        "az": "Video kəs",
+        "en": "Trim video online",
+        "tr": "Video kes",
+        "ar": "قص الفيديو أونلاين",
+        "ru": "Обрезать видео онлайн"
+      },
+      "description": "Cut the part of a video you need by start and end time.",
+      "descriptions": {
+        "az": "Videonun lazım olan hissəsini başlanğıc və son vaxtla kəs.",
+        "en": "Cut the part of a video you need by start and end time.",
+        "tr": "Videonun gereken kısmını başlangıç ve bitiş zamanıyla kesin.",
+        "ar": "اقطع الجزء الذي تحتاجه من الفيديو بوقت البداية والنهاية.",
+        "ru": "Вырежьте нужную часть видео по времени начала и конца."
+      },
+      "audience": {
+        "az": "Qısa video və ya səs yazısı hazırlayanlar",
+        "en": "People making short videos or voice recordings",
+        "tr": "Kısa video veya ses kaydı hazırlayanlar",
+        "ar": "من يعدّ مقاطع فيديو قصيرة أو تسجيلات صوتية",
+        "ru": "Те, кто делает короткие видео или аудиозаписи"
+      },
+      "url": "https://nibrascode.com/en/video/trim",
+      "urls": {
+        "az": "https://nibrascode.com/video/trim",
+        "en": "https://nibrascode.com/en/video/trim",
+        "tr": "https://nibrascode.com/tr/video/trim",
+        "ar": "https://nibrascode.com/ar/video/trim",
+        "ru": "https://nibrascode.com/ru/video/trim"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "clientSide": true
+    },
+    {
+      "id": "video-convert",
+      "category": "media",
+      "name": "Convert video: MP4, WebM, GIF",
+      "names": {
+        "az": "Video çevir: MP4, WebM, GIF",
+        "en": "Convert video: MP4, WebM, GIF",
+        "tr": "Video dönüştür: MP4, WebM, GIF",
+        "ar": "تحويل الفيديو: MP4 وWebM وGIF",
+        "ru": "Конвертировать видео: MP4, WebM, GIF"
+      },
+      "description": "Convert MOV, MKV, AVI or WebM to MP4, WebM or an animated GIF.",
+      "descriptions": {
+        "az": "MOV, MKV, AVI, WebM videonu MP4, WebM və ya GIF-ə çevir.",
+        "en": "Convert MOV, MKV, AVI or WebM to MP4, WebM or an animated GIF.",
+        "tr": "MOV, MKV, AVI, WebM videoyu MP4, WebM veya GIF'e dönüştürün.",
+        "ar": "حوّل فيديو MOV أو MKV أو AVI أو WebM إلى MP4 أو WebM أو GIF متحرك.",
+        "ru": "Переведите MOV, MKV, AVI или WebM в MP4, WebM или GIF-анимацию."
+      },
+      "audience": {
+        "az": "Qısa video və ya səs yazısı hazırlayanlar",
+        "en": "People making short videos or voice recordings",
+        "tr": "Kısa video veya ses kaydı hazırlayanlar",
+        "ar": "من يعدّ مقاطع فيديو قصيرة أو تسجيلات صوتية",
+        "ru": "Те, кто делает короткие видео или аудиозаписи"
+      },
+      "url": "https://nibrascode.com/en/video/convert",
+      "urls": {
+        "az": "https://nibrascode.com/video/convert",
+        "en": "https://nibrascode.com/en/video/convert",
+        "tr": "https://nibrascode.com/tr/video/convert",
+        "ar": "https://nibrascode.com/ar/video/convert",
+        "ru": "https://nibrascode.com/ru/video/convert"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "clientSide": true
+    },
+    {
+      "id": "video-merge",
+      "category": "media",
+      "name": "Merge videos online",
+      "names": {
+        "az": "Videoları birləşdir",
+        "en": "Merge videos online",
+        "tr": "Videoları birleştir",
+        "ar": "دمج الفيديوهات أونلاين",
+        "ru": "Склеить видео онлайн"
+      },
+      "description": "Join several videos one after another into a single MP4.",
+      "descriptions": {
+        "az": "Bir neçə videonu ardıcıl bir MP4 faylında birləşdir.",
+        "en": "Join several videos one after another into a single MP4.",
+        "tr": "Birkaç videoyu art arda tek MP4 dosyasında birleştirin.",
+        "ar": "ادمج عدة فيديوهات واحداً تلو الآخر في ملف MP4 واحد.",
+        "ru": "Соедините несколько видео подряд в один MP4. Меняйте порядок."
+      },
+      "audience": {
+        "az": "Qısa video və ya səs yazısı hazırlayanlar",
+        "en": "People making short videos or voice recordings",
+        "tr": "Kısa video veya ses kaydı hazırlayanlar",
+        "ar": "من يعدّ مقاطع فيديو قصيرة أو تسجيلات صوتية",
+        "ru": "Те, кто делает короткие видео или аудиозаписи"
+      },
+      "url": "https://nibrascode.com/en/video/merge",
+      "urls": {
+        "az": "https://nibrascode.com/video/merge",
+        "en": "https://nibrascode.com/en/video/merge",
+        "tr": "https://nibrascode.com/tr/video/merge",
+        "ar": "https://nibrascode.com/ar/video/merge",
+        "ru": "https://nibrascode.com/ru/video/merge"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "clientSide": true
+    },
+    {
+      "id": "video-audio",
+      "category": "media",
+      "name": "Extract audio from video: MP3, M4A, WAV",
+      "names": {
+        "az": "Videodan səs çıxar: MP3, M4A, WAV",
+        "en": "Extract audio from video: MP3, M4A, WAV",
+        "tr": "Videodan ses çıkar: MP3, M4A, WAV",
+        "ar": "استخراج الصوت من الفيديو: MP3 وM4A وWAV",
+        "ru": "Извлечь звук из видео: MP3, M4A, WAV"
+      },
+      "description": "Pull the sound out of a video as MP3, M4A or WAV.",
+      "descriptions": {
+        "az": "Videonun səsini MP3, M4A və ya WAV faylı kimi çıxar.",
+        "en": "Pull the sound out of a video as MP3, M4A or WAV.",
+        "tr": "Videonun sesini MP3, M4A veya WAV dosyası olarak çıkarın.",
+        "ar": "استخرج صوت الفيديو كملف MP3 أو M4A أو WAV. الفيديو يبقى في المتصفح.",
+        "ru": "Сохраните звук из видео как MP3, M4A или WAV."
+      },
+      "audience": {
+        "az": "Qısa video və ya səs yazısı hazırlayanlar",
+        "en": "People making short videos or voice recordings",
+        "tr": "Kısa video veya ses kaydı hazırlayanlar",
+        "ar": "من يعدّ مقاطع فيديو قصيرة أو تسجيلات صوتية",
+        "ru": "Те, кто делает короткие видео или аудиозаписи"
+      },
+      "url": "https://nibrascode.com/en/video/audio",
+      "urls": {
+        "az": "https://nibrascode.com/video/audio",
+        "en": "https://nibrascode.com/en/video/audio",
+        "tr": "https://nibrascode.com/tr/video/audio",
+        "ar": "https://nibrascode.com/ar/video/audio",
+        "ru": "https://nibrascode.com/ru/video/audio"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "clientSide": true
+    },
+    {
+      "id": "video-compress",
+      "category": "media",
+      "name": "Compress video",
+      "names": {
+        "az": "Video sıx",
+        "en": "Compress video",
+        "tr": "Video sıkıştır",
+        "ar": "ضغط الفيديو",
+        "ru": "Сжать видео"
+      },
+      "description": "Make a video smaller while keeping it sharp: light, medium or strong compression, 1080p/720p/480p and a target size (8, 16, 25, 50 MB) for WhatsApp, Discord or email.",
+      "descriptions": {
+        "az": "Videonun ölçüsünü keyfiyyəti qoruyaraq kiçilt: yüngül, orta, güclü sıxma, 1080p/720p/480p və hədəf ölçü (8, 16, 25, 50 MB).",
+        "en": "Make a video smaller while keeping it sharp: light, medium or strong compression, 1080p/720p/480p and a target size (8, 16, 25, 50 MB) for WhatsApp, Discord or email.",
+        "tr": "Videoyu netliği koruyarak küçültün: hafif, orta, güçlü sıkıştırma, 1080p/720p/480p ve hedef boyut (8, 16, 25, 50 MB).",
+        "ar": "صغّر حجم الفيديو مع الحفاظ على الوضوح: ضغط خفيف أو متوسط أو قوي، ودقة 1080p/720p/480p، وحجم مستهدف (8، 16، 25، 50 ميغابايت) لواتساب والبريد.",
+        "ru": "Уменьшите видео без заметной потери качества: слабое, среднее, сильное сжатие, 1080p/720p/480p и целевой размер (8, 16, 25, 50 МБ) для WhatsApp и почты."
+      },
+      "audience": {
+        "az": "Qısa video və ya səs yazısı hazırlayanlar",
+        "en": "People making short videos or voice recordings",
+        "tr": "Kısa video veya ses kaydı hazırlayanlar",
+        "ar": "من يعدّ مقاطع فيديو قصيرة أو تسجيلات صوتية",
+        "ru": "Те, кто делает короткие видео или аудиозаписи"
+      },
+      "url": "https://nibrascode.com/en/video/compress",
+      "urls": {
+        "az": "https://nibrascode.com/video/compress",
+        "en": "https://nibrascode.com/en/video/compress",
+        "tr": "https://nibrascode.com/tr/video/compress",
+        "ar": "https://nibrascode.com/ar/video/compress",
+        "ru": "https://nibrascode.com/ru/video/compress"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "clientSide": true
+    },
+    {
+      "id": "video-crop",
+      "category": "media",
+      "name": "Crop video: 9:16, 1:1, 16:9",
+      "names": {
+        "az": "Video çərçivəsini kəs: 9:16, 1:1, 16:9",
+        "en": "Crop video: 9:16, 1:1, 16:9",
+        "tr": "Video kırp: 9:16, 1:1, 16:9",
+        "ar": "اقتصاص الفيديو: 9:16 و1:1 و16:9",
+        "ru": "Кадрировать видео: 9:16, 1:1, 16:9"
+      },
+      "description": "Crop the edges of a video to 9:16, 1:1, 4:5 or 16:9 for Reels, TikTok, Instagram or YouTube.",
+      "descriptions": {
+        "az": "Videonun kənarlarını kəsib Reels, TikTok, Instagram üçün 9:16, 1:1, 4:5 və ya 16:9 nisbətinə gətir.",
+        "en": "Crop the edges of a video to 9:16, 1:1, 4:5 or 16:9 for Reels, TikTok, Instagram or YouTube.",
+        "tr": "Videonun kenarlarını Reels, TikTok, Instagram için 9:16, 1:1, 4:5 veya 16:9 orana kırpın.",
+        "ar": "اقتصص حواف الفيديو إلى 9:16 أو 1:1 أو 4:5 أو 16:9 لريلز وتيك توك وإنستغرام.",
+        "ru": "Обрежьте края видео до 9:16, 1:1, 4:5 или 16:9 для Reels, TikTok, Instagram."
+      },
+      "audience": {
+        "az": "Qısa video və ya səs yazısı hazırlayanlar",
+        "en": "People making short videos or voice recordings",
+        "tr": "Kısa video veya ses kaydı hazırlayanlar",
+        "ar": "من يعدّ مقاطع فيديو قصيرة أو تسجيلات صوتية",
+        "ru": "Те, кто делает короткие видео или аудиозаписи"
+      },
+      "url": "https://nibrascode.com/en/video/crop",
+      "urls": {
+        "az": "https://nibrascode.com/video/crop",
+        "en": "https://nibrascode.com/en/video/crop",
+        "tr": "https://nibrascode.com/tr/video/crop",
+        "ar": "https://nibrascode.com/ar/video/crop",
+        "ru": "https://nibrascode.com/ru/video/crop"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "clientSide": true
+    },
+    {
+      "id": "video-resize",
+      "category": "media",
+      "name": "Resize video: 1080p, 720p, 9:16",
+      "names": {
+        "az": "Video ölçüsünü dəyiş: 1080p, 720p, 9:16",
+        "en": "Resize video: 1080p, 720p, 9:16",
+        "tr": "Video boyutunu değiştir: 1080p, 720p, 9:16",
+        "ar": "تغيير حجم الفيديو: 1080p و720p و9:16",
+        "ru": "Изменить размер видео: 1080p, 720p, 9:16"
+      },
+      "description": "Resize a video to 1080p, 720p, 480p, 9:16 (Reels/TikTok), 1:1 or 4:5.",
+      "descriptions": {
+        "az": "Videonu 1080p, 720p, 480p, 9:16 (Reels/TikTok), 1:1 və ya 4:5 ölçüsünə gətir.",
+        "en": "Resize a video to 1080p, 720p, 480p, 9:16 (Reels/TikTok), 1:1 or 4:5.",
+        "tr": "Videoyu 1080p, 720p, 480p, 9:16 (Reels/TikTok), 1:1 veya 4:5 boyuta getirin.",
+        "ar": "غيّر مقاس الفيديو إلى 1080p أو 720p أو 480p أو 9:16 (ريلز/تيك توك) أو 1:1 أو 4:5.",
+        "ru": "Приведите видео к 1080p, 720p, 480p, 9:16 (Reels/TikTok), 1:1 или 4:5."
+      },
+      "audience": {
+        "az": "Qısa video və ya səs yazısı hazırlayanlar",
+        "en": "People making short videos or voice recordings",
+        "tr": "Kısa video veya ses kaydı hazırlayanlar",
+        "ar": "من يعدّ مقاطع فيديو قصيرة أو تسجيلات صوتية",
+        "ru": "Те, кто делает короткие видео или аудиозаписи"
+      },
+      "url": "https://nibrascode.com/en/video/resize",
+      "urls": {
+        "az": "https://nibrascode.com/video/resize",
+        "en": "https://nibrascode.com/en/video/resize",
+        "tr": "https://nibrascode.com/tr/video/resize",
+        "ar": "https://nibrascode.com/ar/video/resize",
+        "ru": "https://nibrascode.com/ru/video/resize"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "clientSide": true
+    },
+    {
+      "id": "video-mute",
+      "category": "media",
+      "name": "Mute video",
+      "names": {
+        "az": "Videonun səsini sil",
+        "en": "Mute video",
+        "tr": "Videonun sesini kaldır",
+        "ar": "كتم صوت الفيديو",
+        "ru": "Убрать звук из видео"
+      },
+      "description": "Remove all sound from a video without touching the picture (no re-encode, takes seconds).",
+      "descriptions": {
+        "az": "Videodan səsi tamamilə sil, görüntü keyfiyyəti dəyişmir (yenidən kodlaşdırmadan, saniyələrə).",
+        "en": "Remove all sound from a video without touching the picture (no re-encode, takes seconds).",
+        "tr": "Videodan sesi tamamen kaldırın, görüntü değişmez (yeniden kodlamasız, saniyeler içinde).",
+        "ar": "أزل الصوت من الفيديو دون المساس بالصورة (بلا إعادة ترميز، في ثوانٍ).",
+        "ru": "Удалите звук из видео, не трогая картинку (без перекодирования, за секунды)."
+      },
+      "audience": {
+        "az": "Qısa video və ya səs yazısı hazırlayanlar",
+        "en": "People making short videos or voice recordings",
+        "tr": "Kısa video veya ses kaydı hazırlayanlar",
+        "ar": "من يعدّ مقاطع فيديو قصيرة أو تسجيلات صوتية",
+        "ru": "Те, кто делает короткие видео или аудиозаписи"
+      },
+      "url": "https://nibrascode.com/en/video/mute",
+      "urls": {
+        "az": "https://nibrascode.com/video/mute",
+        "en": "https://nibrascode.com/en/video/mute",
+        "tr": "https://nibrascode.com/tr/video/mute",
+        "ar": "https://nibrascode.com/ar/video/mute",
+        "ru": "https://nibrascode.com/ru/video/mute"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "clientSide": true
+    },
+    {
+      "id": "background-remove",
+      "category": "image",
+      "name": "Remove image background",
+      "names": {
+        "az": "Şəkil fon sil",
+        "en": "Remove image background",
+        "tr": "Fotoğraf arka plan sil",
+        "ar": "حذف خلفية الصورة",
+        "ru": "Удалить фон фото"
+      },
+      "description": "Remove a photo background and download a transparent PNG.",
+      "descriptions": {
+        "az": "Şəkil fonunu sil, şəffaf PNG yüklə. Pulsuz, hesabsız, şəkil brauzerdən çıxmır.",
+        "en": "Remove a photo background and download a transparent PNG.",
+        "tr": "Fotoğrafın arka planını sil, şeffaf PNG indir.",
+        "ar": "احذف خلفية الصورة ونزّل PNG شفافاً. مجاناً وبلا حساب، والصورة تبقى في المتصفح.",
+        "ru": "Уберите фон фото и скачайте прозрачный PNG. Бесплатно, без аккаунта, фото остаётся в браузере."
+      },
+      "audience": {
+        "az": "Sayt, sosial şəbəkə və ya sənəd üçün şəkil hazırlayanlar",
+        "en": "Anyone preparing photos for a site, social media or a document",
+        "tr": "Site, sosyal medya veya belge için fotoğraf hazırlayanlar",
+        "ar": "كل من يجهّز صوراً لموقع أو لوسائل التواصل أو لمستند",
+        "ru": "Все, кто готовит фото для сайта, соцсетей или документа"
+      },
+      "url": "https://nibrascode.com/en/erase",
+      "urls": {
+        "az": "https://nibrascode.com/erase",
+        "en": "https://nibrascode.com/en/erase",
+        "tr": "https://nibrascode.com/tr/erase",
+        "ar": "https://nibrascode.com/ar/erase",
+        "ru": "https://nibrascode.com/ru/erase"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "clientSide": true
+    },
+    {
+      "id": "image-compress",
+      "category": "image",
+      "name": "Compress photo",
+      "names": {
+        "az": "Şəkil sıx",
+        "en": "Compress photo",
+        "tr": "Fotoğraf sıkıştır",
+        "ar": "ضغط الصورة",
+        "ru": "Сжать фото"
+      },
+      "description": "Make a photo smaller. JPG, PNG and WebP. Free, no account, the photo stays in your browser.",
+      "descriptions": {
+        "az": "Şəkilin ölçüsünü kiçilt. JPG, PNG və WebP. Pulsuz, hesabsız, şəkil brauzerdən çıxmır.",
+        "en": "Make a photo smaller. JPG, PNG and WebP. Free, no account, the photo stays in your browser.",
+        "tr": "Fotoğrafın boyutunu küçült. JPG, PNG ve WebP.",
+        "ar": "صغّر حجم الصورة. JPG وPNG وWebP. مجاناً وبلا حساب، والصورة تبقى في المتصفح.",
+        "ru": "Уменьшите размер фото. JPG, PNG и WebP. Бесплатно, без аккаунта, фото остаётся в браузере."
+      },
+      "audience": {
+        "az": "Sayt, sosial şəbəkə və ya sənəd üçün şəkil hazırlayanlar",
+        "en": "Anyone preparing photos for a site, social media or a document",
+        "tr": "Site, sosyal medya veya belge için fotoğraf hazırlayanlar",
+        "ar": "كل من يجهّز صوراً لموقع أو لوسائل التواصل أو لمستند",
+        "ru": "Все, кто готовит фото для сайта, соцсетей или документа"
+      },
+      "url": "https://nibrascode.com/en/image",
+      "urls": {
+        "az": "https://nibrascode.com/image",
+        "en": "https://nibrascode.com/en/image",
+        "tr": "https://nibrascode.com/tr/image",
+        "ar": "https://nibrascode.com/ar/image",
+        "ru": "https://nibrascode.com/ru/image"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "clientSide": true
+    },
+    {
+      "id": "image-resize",
+      "category": "image",
+      "name": "Resize image",
+      "names": {
+        "az": "Şəkil ölçüsünü dəyiş",
+        "en": "Resize image",
+        "tr": "Fotoğraf boyutunu değiştir",
+        "ar": "تغيير حجم الصورة",
+        "ru": "Изменить размер фото"
+      },
+      "description": "Change a photo's width and height in pixels or percent.",
+      "descriptions": {
+        "az": "Şəklin enini və hündürlüyünü piksel və ya faizlə dəyiş.",
+        "en": "Change a photo's width and height in pixels or percent.",
+        "tr": "Fotoğrafın genişlik ve yüksekliğini piksel veya yüzdeyle değiştirin.",
+        "ar": "غيّر عرض الصورة وارتفاعها بالبكسل أو بالنسبة مع الحفاظ على التناسب.",
+        "ru": "Измените ширину и высоту фото в пикселях или процентах с сохранением пропорций."
+      },
+      "audience": {
+        "az": "Sayt, sosial şəbəkə və ya sənəd üçün şəkil hazırlayanlar",
+        "en": "Anyone preparing photos for a site, social media or a document",
+        "tr": "Site, sosyal medya veya belge için fotoğraf hazırlayanlar",
+        "ar": "كل من يجهّز صوراً لموقع أو لوسائل التواصل أو لمستند",
+        "ru": "Все, кто готовит фото для сайта, соцсетей или документа"
+      },
+      "url": "https://nibrascode.com/en/image/resize",
+      "urls": {
+        "az": "https://nibrascode.com/image/resize",
+        "en": "https://nibrascode.com/en/image/resize",
+        "tr": "https://nibrascode.com/tr/image/resize",
+        "ar": "https://nibrascode.com/ar/image/resize",
+        "ru": "https://nibrascode.com/ru/image/resize"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "clientSide": true
+    },
+    {
+      "id": "image-convert",
+      "category": "image",
+      "name": "Convert image: PNG, JPG, WebP",
+      "names": {
+        "az": "Şəkil formatını çevir: PNG, JPG, WebP",
+        "en": "Convert image: PNG, JPG, WebP",
+        "tr": "Görsel dönüştür: PNG, JPG, WebP",
+        "ar": "تحويل صيغة الصورة: PNG وJPG وWebP",
+        "ru": "Конвертировать фото: PNG, JPG, WebP"
+      },
+      "description": "Convert PNG to JPG, JPG to WebP and back. Several photos at once.",
+      "descriptions": {
+        "az": "PNG-ni JPG-yə, JPG-ni WebP-yə və əksinə çevir.",
+        "en": "Convert PNG to JPG, JPG to WebP and back. Several photos at once.",
+        "tr": "PNG'yi JPG'ye, JPG'yi WebP'ye ve tersine çevirin.",
+        "ar": "حوّل PNG إلى JPG وJPG إلى WebP والعكس. عدة صور معاً.",
+        "ru": "PNG в JPG, JPG в WebP и обратно. Несколько фото сразу."
+      },
+      "audience": {
+        "az": "Sayt, sosial şəbəkə və ya sənəd üçün şəkil hazırlayanlar",
+        "en": "Anyone preparing photos for a site, social media or a document",
+        "tr": "Site, sosyal medya veya belge için fotoğraf hazırlayanlar",
+        "ar": "كل من يجهّز صوراً لموقع أو لوسائل التواصل أو لمستند",
+        "ru": "Все, кто готовит фото для сайта, соцсетей или документа"
+      },
+      "url": "https://nibrascode.com/en/image/convert",
+      "urls": {
+        "az": "https://nibrascode.com/image/convert",
+        "en": "https://nibrascode.com/en/image/convert",
+        "tr": "https://nibrascode.com/tr/image/convert",
+        "ar": "https://nibrascode.com/ar/image/convert",
+        "ru": "https://nibrascode.com/ru/image/convert"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "clientSide": true
+    },
+    {
+      "id": "image-edit",
+      "category": "image",
+      "name": "Crop, rotate, flip image",
+      "names": {
+        "az": "Şəkli kəs, döndər, çevir",
+        "en": "Crop, rotate, flip image",
+        "tr": "Fotoğraf kırp, döndür, çevir",
+        "ar": "قص الصورة وتدويرها وقلبها",
+        "ru": "Обрезать, повернуть, отразить фото"
+      },
+      "description": "Crop a photo (square, 16:9, free), rotate by 90° or flip it like a mirror.",
+      "descriptions": {
+        "az": "Şəkli kəs (kvadrat, 16:9, sərbəst), 90° döndər və ya güzgü kimi çevir.",
+        "en": "Crop a photo (square, 16:9, free), rotate by 90° or flip it like a mirror.",
+        "tr": "Fotoğrafı kırpın (kare, 16:9, serbest), 90° döndürün veya ayna gibi çevirin.",
+        "ar": "قصّ الصورة (مربع، 16:9، حر)، أو دوّرها 90° أو اقلبها كالمرآة.",
+        "ru": "Обрежьте фото (квадрат, 16:9, свободно), поверните на 90° или отразите."
+      },
+      "audience": {
+        "az": "Sayt, sosial şəbəkə və ya sənəd üçün şəkil hazırlayanlar",
+        "en": "Anyone preparing photos for a site, social media or a document",
+        "tr": "Site, sosyal medya veya belge için fotoğraf hazırlayanlar",
+        "ar": "كل من يجهّز صوراً لموقع أو لوسائل التواصل أو لمستند",
+        "ru": "Все, кто готовит фото для сайта, соцсетей или документа"
+      },
+      "url": "https://nibrascode.com/en/image/edit",
+      "urls": {
+        "az": "https://nibrascode.com/image/edit",
+        "en": "https://nibrascode.com/en/image/edit",
+        "tr": "https://nibrascode.com/tr/image/edit",
+        "ar": "https://nibrascode.com/ar/image/edit",
+        "ru": "https://nibrascode.com/ru/image/edit"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "clientSide": true
+    },
+    {
+      "id": "calc",
+      "category": "utility",
+      "name": "Calculate",
+      "names": {
+        "az": "Hesabla",
+        "en": "Calculate",
+        "tr": "Hesapla",
+        "ar": "احسب",
+        "ru": "Посчитай"
+      },
+      "description": "Calculators for everyday calculations.",
+      "descriptions": {
+        "az": "Gündəlik hesablamalar üçün kalkulyatorlar.",
+        "en": "Calculators for everyday calculations.",
+        "tr": "Günlük hesaplamalar için hesap makineleri.",
+        "ar": "آلات حاسبة للحسابات اليومية.",
+        "ru": "Калькуляторы для повседневных расчётов."
+      },
+      "audience": {
+        "az": "Gündəlik hesab, arxiv və ya cihaz yoxlaması lazım olanlar",
+        "en": "Everyday users needing a quick calculation, archive or device check",
+        "tr": "Günlük hesap, arşiv veya cihaz kontrolü gerekenler",
+        "ar": "المستخدمون الذين يحتاجون حساباً سريعاً أو أرشيفاً أو فحص جهاز",
+        "ru": "Все, кому нужен быстрый расчёт, архив или проверка устройства"
+      },
+      "url": "https://nibrascode.com/calc",
+      "urls": {
+        "az": "https://nibrascode.com/calc",
+        "en": "https://nibrascode.com/calc",
+        "tr": "https://nibrascode.com/calc",
+        "ar": "https://nibrascode.com/calc",
+        "ru": "https://nibrascode.com/calc"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "clientSide": true
+    },
+    {
+      "id": "percent",
+      "category": "utility",
+      "name": "Calculate a percent",
+      "names": {
+        "az": "Faiz hesabla",
+        "en": "Calculate a percent",
+        "tr": "Yüzde hesapla",
+        "ar": "احسب النسبة",
+        "ru": "Посчитать процент"
+      },
+      "description": "Find a percent of a number and what percent one number is of another.",
+      "descriptions": {
+        "az": "Faizin nəticəsini və bir ədədin neçə faiz olduğunu hesabla.",
+        "en": "Find a percent of a number and what percent one number is of another.",
+        "tr": "Yüzdenin sonucunu ve bir sayının yüzde kaç olduğunu hesapla.",
+        "ar": "احسب ناتج النسبة وكم بالمئة عدد من آخر. بلا حساب.",
+        "ru": "Найдите процент от числа и сколько процентов одно число от другого."
+      },
+      "audience": {
+        "az": "Gündəlik hesab, arxiv və ya cihaz yoxlaması lazım olanlar",
+        "en": "Everyday users needing a quick calculation, archive or device check",
+        "tr": "Günlük hesap, arşiv veya cihaz kontrolü gerekenler",
+        "ar": "المستخدمون الذين يحتاجون حساباً سريعاً أو أرشيفاً أو فحص جهاز",
+        "ru": "Все, кому нужен быстрый расчёт, архив или проверка устройства"
+      },
+      "url": "https://nibrascode.com/en/faiz",
+      "urls": {
+        "az": "https://nibrascode.com/faiz",
+        "en": "https://nibrascode.com/en/faiz",
+        "tr": "https://nibrascode.com/tr/faiz",
+        "ar": "https://nibrascode.com/ar/faiz",
+        "ru": "https://nibrascode.com/ru/faiz"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "clientSide": true
+    },
+    {
+      "id": "word-count",
+      "category": "utility",
+      "name": "Word count",
+      "names": {
+        "az": "Söz sayı",
+        "en": "Word count",
+        "tr": "Söz sayısı",
+        "ar": "عدد الكلمات",
+        "ru": "Количество слов"
+      },
+      "description": "Count words, letters and lines. Free, the text stays in your browser.",
+      "descriptions": {
+        "az": "Mətndə söz, hərf və sətir say. Pulsuz, mətn brauzerdən çıxmır.",
+        "en": "Count words, letters and lines. Free, the text stays in your browser.",
+        "tr": "Metindeki söz, harf ve satırı say. Ücretsiz, metin tarayıcıdan çıkmaz.",
+        "ar": "عدّ الكلمات والحروف والأسطر. مجاناً، والنص يبقى في المتصفح.",
+        "ru": "Посчитайте слова, буквы и строки. Бесплатно, текст остаётся в браузере."
+      },
+      "audience": {
+        "az": "Gündəlik hesab, arxiv və ya cihaz yoxlaması lazım olanlar",
+        "en": "Everyday users needing a quick calculation, archive or device check",
+        "tr": "Günlük hesap, arşiv veya cihaz kontrolü gerekenler",
+        "ar": "المستخدمون الذين يحتاجون حساباً سريعاً أو أرشيفاً أو فحص جهاز",
+        "ru": "Все, кому нужен быстрый расчёт, архив или проверка устройства"
+      },
+      "url": "https://nibrascode.com/en/soz-sayi",
+      "urls": {
+        "az": "https://nibrascode.com/soz-sayi",
+        "en": "https://nibrascode.com/en/soz-sayi",
+        "tr": "https://nibrascode.com/tr/soz-sayi",
+        "ar": "https://nibrascode.com/ar/soz-sayi",
+        "ru": "https://nibrascode.com/ru/soz-sayi"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "clientSide": true
+    },
+    {
+      "id": "phone-check",
+      "category": "utility",
+      "name": "Phone check",
+      "names": {
+        "az": "Telefon yoxlaması",
+        "en": "Phone check",
+        "tr": "Telefon yoklaması",
+        "ar": "فحص الهاتف",
+        "ru": "Проверка телефона"
+      },
+      "description": "Check screen color, dead pixels, touch, camera, microphone, sensors and network in the browser.",
+      "descriptions": {
+        "az": "Telefonda ekran rəngi, ölü piksel, toxunma, kamera, mikrofon, sensor və şəbəkəni brauzerdə yoxla.",
+        "en": "Check screen color, dead pixels, touch, camera, microphone, sensors and network in the browser.",
+        "tr": "Ekran rengi, ölü piksel, dokunma, kamera, mikrofon, sensör ve ağı tarayıcıda yokla.",
+        "ar": "افحص لون الشاشة والبكسل الميت واللمس والكاميرا والميكروفون والحساسات والشبكة في المتصفح.",
+        "ru": "Проверьте цвет экрана, битые пиксели, касание, камеру, микрофон, датчики и сеть в браузере."
+      },
+      "audience": {
+        "az": "Gündəlik hesab, arxiv və ya cihaz yoxlaması lazım olanlar",
+        "en": "Everyday users needing a quick calculation, archive or device check",
+        "tr": "Günlük hesap, arşiv veya cihaz kontrolü gerekenler",
+        "ar": "المستخدمون الذين يحتاجون حساباً سريعاً أو أرشيفاً أو فحص جهاز",
+        "ru": "Все, кому нужен быстрый расчёт, архив или проверка устройства"
+      },
+      "url": "https://nibrascode.com/en/telefon",
+      "urls": {
+        "az": "https://nibrascode.com/telefon",
+        "en": "https://nibrascode.com/en/telefon",
+        "tr": "https://nibrascode.com/tr/telefon",
+        "ar": "https://nibrascode.com/ar/telefon",
+        "ru": "https://nibrascode.com/ru/telefon"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "clientSide": true
     },
     {
       "id": "zip",
-      "name": "ZIP",
-      "description": "Create and open ZIP archives in the browser.",
       "category": "utility",
+      "name": "Zip and unzip files",
+      "names": {
+        "az": "ZIP sıx və aç",
+        "en": "Zip and unzip files",
+        "tr": "ZIP sıkıştır ve aç",
+        "ar": "ضغط وفك ZIP",
+        "ru": "Сжать и распаковать ZIP"
+      },
+      "description": "Put files into one ZIP or open a ZIP and download the files inside.",
+      "descriptions": {
+        "az": "Faylları bir ZIP-ə yığ və ya ZIP-i aç, içindəki faylları ayrıca yüklə.",
+        "en": "Put files into one ZIP or open a ZIP and download the files inside.",
+        "tr": "Dosyaları tek ZIP'e toplayın veya ZIP'i açıp içindekileri indirin.",
+        "ar": "اجمع الملفات في ZIP واحد أو افتح ZIP ونزّل ما بداخله.",
+        "ru": "Соберите файлы в один ZIP или откройте ZIP и скачайте файлы из него."
+      },
+      "audience": {
+        "az": "Gündəlik hesab, arxiv və ya cihaz yoxlaması lazım olanlar",
+        "en": "Everyday users needing a quick calculation, archive or device check",
+        "tr": "Günlük hesap, arşiv veya cihaz kontrolü gerekenler",
+        "ar": "المستخدمون الذين يحتاجون حساباً سريعاً أو أرشيفاً أو فحص جهاز",
+        "ru": "Все, кому нужен быстрый расчёт, архив или проверка устройства"
+      },
       "url": "https://nibrascode.com/en/zip",
       "urls": {
         "az": "https://nibrascode.com/zip",
@@ -1347,23 +2813,44 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
     },
     {
-      "id": "xray",
-      "name": "3D Code X-Ray",
-      "description": "Analyze code structure in 3D entirely in the browser; code is never uploaded.",
-      "category": "developer",
-      "url": "https://nibrascode.com/en/xray",
+      "id": "filecheck",
+      "category": "utility",
+      "name": "Nibras File Check",
+      "names": {
+        "az": "Nibras File Check",
+        "en": "Nibras File Check",
+        "tr": "Nibras File Check",
+        "ar": "Nibras File Check",
+        "ru": "Nibras File Check"
+      },
+      "description": "Find a file's real type from its magic bytes, spot extension mismatches, compute SHA-256/SHA-1/SHA-512, verify checksums and compare two files.",
+      "descriptions": {
+        "az": "Faylın əsl tipini magic baytlarla tap, uzantı uyğunsuzluğunu gör, SHA-256/SHA-1/SHA-512 hesabla, checksum yoxla, iki faylı müqayisə et.",
+        "en": "Find a file's real type from its magic bytes, spot extension mismatches, compute SHA-256/SHA-1/SHA-512, verify checksums and compare two files.",
+        "tr": "Dosyanın gerçek türünü sihirli baytlardan bulun, uzantı uyumsuzluğunu görün, SHA-256/SHA-1/SHA-512 hesaplayın, sağlama doğrulayın, iki dosyayı karşılaştırın.",
+        "ar": "اعرف النوع الحقيقي للملف من بايتاته السحرية، واكتشف عدم تطابق الامتداد، واحسب SHA-256/SHA-1/SHA-512، وتحقق من المجاميع وقارن ملفين.",
+        "ru": "Определите настоящий тип файла по сигнатуре, найдите несовпадение расширения, посчитайте SHA-256/SHA-1/SHA-512, проверьте сумму и сравните два файла."
+      },
+      "audience": {
+        "az": "Gündəlik hesab, arxiv və ya cihaz yoxlaması lazım olanlar",
+        "en": "Everyday users needing a quick calculation, archive or device check",
+        "tr": "Günlük hesap, arşiv veya cihaz kontrolü gerekenler",
+        "ar": "المستخدمون الذين يحتاجون حساباً سريعاً أو أرشيفاً أو فحص جهاز",
+        "ru": "Все, кому нужен быстрый расчёт, архив или проверка устройства"
+      },
+      "url": "https://nibrascode.com/en/filecheck",
       "urls": {
-        "az": "https://nibrascode.com/xray",
-        "en": "https://nibrascode.com/en/xray",
-        "tr": "https://nibrascode.com/tr/xray",
-        "ar": "https://nibrascode.com/ar/xray",
-        "ru": "https://nibrascode.com/ru/xray"
+        "az": "https://nibrascode.com/filecheck",
+        "en": "https://nibrascode.com/en/filecheck",
+        "tr": "https://nibrascode.com/tr/filecheck",
+        "ar": "https://nibrascode.com/ar/filecheck",
+        "ru": "https://nibrascode.com/ru/filecheck"
       },
       "languages": [
         "az",
@@ -1372,10 +2859,1126 @@
         "ar",
         "ru"
       ],
-      "clientSide": true,
       "free": true,
       "account": false,
-      "ads": false
+      "ads": false,
+      "clientSide": true
+    },
+    {
+      "id": "builder",
+      "category": "studio",
+      "name": "Nibras Builder",
+      "names": {
+        "az": "Nibras Builder",
+        "en": "Nibras Builder",
+        "tr": "Nibras Builder",
+        "ar": "Nibras Builder",
+        "ru": "Nibras Builder"
+      },
+      "description": "Write the name, work, city, phone and price for a workshop, cafe, repair or shop.",
+      "descriptions": {
+        "az": "Emalatxana, kafe, usta və ya mağaza üçün adı, işi, şəhəri, telefonu və qiyməti yaz.",
+        "en": "Write the name, work, city, phone and price for a workshop, cafe, repair or shop.",
+        "tr": "Atölye, kafe, usta veya mağaza için ad, iş, şehir, telefon ve fiyat yaz.",
+        "ar": "اكتب الاسم والعمل والمدينة والهاتف والسعر لورشة أو مقهى أو حرفي أو متجر.",
+        "ru": "Впишите имя, работу, город, телефон и цену для мастерской, кафе, мастера или магазина."
+      },
+      "audience": {
+        "az": "Proqramçılar, sayt sahibləri və kod öyrənənlər",
+        "en": "Developers, site owners and people learning to code",
+        "tr": "Geliştiriciler, site sahipleri ve kod öğrenenler",
+        "ar": "المطورون وأصحاب المواقع ومتعلمو البرمجة",
+        "ru": "Разработчики, владельцы сайтов и те, кто учится программировать"
+      },
+      "url": "https://nibrascode.com/en/builder",
+      "urls": {
+        "az": "https://nibrascode.com/builder",
+        "en": "https://nibrascode.com/en/builder",
+        "tr": "https://nibrascode.com/tr/builder",
+        "ar": "https://nibrascode.com/ar/builder",
+        "ru": "https://nibrascode.com/ru/builder"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "clientSide": true
+    },
+    {
+      "id": "seo-check",
+      "category": "studio",
+      "name": "Nibras SEO Check",
+      "names": {
+        "az": "Nibras SEO Check",
+        "en": "Nibras SEO Check",
+        "tr": "Nibras SEO Check",
+        "ar": "Nibras SEO Check",
+        "ru": "Nibras SEO Check"
+      },
+      "description": "Title, description, canonical, robots.txt and sitemap.",
+      "descriptions": {
+        "az": "Title, description, canonical, robots.txt və sitemap.",
+        "en": "Title, description, canonical, robots.txt and sitemap.",
+        "tr": "Title, description, canonical, robots.txt ve sitemap.",
+        "ar": "العنوان والوصف والرابط الأساسي وrobots.txt وsitemap.",
+        "ru": "Title, description, canonical, robots.txt и sitemap."
+      },
+      "audience": {
+        "az": "Proqramçılar, sayt sahibləri və kod öyrənənlər",
+        "en": "Developers, site owners and people learning to code",
+        "tr": "Geliştiriciler, site sahipleri ve kod öğrenenler",
+        "ar": "المطورون وأصحاب المواقع ومتعلمو البرمجة",
+        "ru": "Разработчики, владельцы сайтов и те, кто учится программировать"
+      },
+      "url": "https://nibrascode.com/en/seo",
+      "urls": {
+        "az": "https://nibrascode.com/seo",
+        "en": "https://nibrascode.com/en/seo",
+        "tr": "https://nibrascode.com/tr/seo",
+        "ar": "https://nibrascode.com/ar/seo",
+        "ru": "https://nibrascode.com/ru/seo"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "clientSide": false,
+      "dataHandling": "The page address you enter is fetched by the Nibras Code server to read its tags, robots.txt and sitemap."
+    },
+    {
+      "id": "flow",
+      "category": "studio",
+      "name": "Nibras Flow",
+      "names": {
+        "az": "Nibras Flow",
+        "en": "Nibras Flow",
+        "tr": "Nibras Flow",
+        "ar": "Nibras Flow",
+        "ru": "Nibras Flow"
+      },
+      "description": "Write the idea. The page map, folders, work order, and starter file names are built on this page.",
+      "descriptions": {
+        "az": "İdeyanı yaz. Səhifə xəritəsi, qovluq, iş sırası və başlanğıc fayl adları bu səhifədə qurulur.",
+        "en": "Write the idea. The page map, folders, work order, and starter file names are built on this page.",
+        "tr": "Fikri yaz. Sayfa haritası, klasör, iş sırası ve başlangıç dosya adları bu sayfada kurulur.",
+        "ar": "اكتب الفكرة. تُبنى خريطة الصفحات والمجلدات وترتيب العمل وأسماء الملفات هنا.",
+        "ru": "Напишите идею. Карта страниц, папки, порядок работы и имена начальных файлов собираются на этой странице."
+      },
+      "audience": {
+        "az": "Proqramçılar, sayt sahibləri və kod öyrənənlər",
+        "en": "Developers, site owners and people learning to code",
+        "tr": "Geliştiriciler, site sahipleri ve kod öğrenenler",
+        "ar": "المطورون وأصحاب المواقع ومتعلمو البرمجة",
+        "ru": "Разработчики, владельцы сайтов и те, кто учится программировать"
+      },
+      "url": "https://nibrascode.com/en/flow",
+      "urls": {
+        "az": "https://nibrascode.com/flow",
+        "en": "https://nibrascode.com/en/flow",
+        "tr": "https://nibrascode.com/tr/flow",
+        "ar": "https://nibrascode.com/ar/flow",
+        "ru": "https://nibrascode.com/ru/flow"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "clientSide": true
+    },
+    {
+      "id": "logic",
+      "category": "studio",
+      "name": "Nibras Logic",
+      "names": {
+        "az": "Nibras Logic",
+        "en": "Nibras Logic",
+        "tr": "Nibras Logic",
+        "ar": "Nibras Logic",
+        "ru": "Nibras Logic"
+      },
+      "description": "Build a question and answer path without code.",
+      "descriptions": {
+        "az": "Kod yazmadan sual-cavab yolu qur. Cavab növbəti suala və ya sona gedir.",
+        "en": "Build a question and answer path without code.",
+        "tr": "Kod yazmadan soru-cevap yolu kur. Cevap sonraki soruya ya da sona gider.",
+        "ar": "ابنِ طريق سؤال وجواب بلا كود. الجواب يذهب إلى السؤال التالي أو إلى النهاية.",
+        "ru": "Соберите путь вопросов и ответов без кода. Ответ ведёт к следующему вопросу или к концу."
+      },
+      "audience": {
+        "az": "Proqramçılar, sayt sahibləri və kod öyrənənlər",
+        "en": "Developers, site owners and people learning to code",
+        "tr": "Geliştiriciler, site sahipleri ve kod öğrenenler",
+        "ar": "المطورون وأصحاب المواقع ومتعلمو البرمجة",
+        "ru": "Разработчики, владельцы сайтов и те, кто учится программировать"
+      },
+      "url": "https://nibrascode.com/en/logic",
+      "urls": {
+        "az": "https://nibrascode.com/logic",
+        "en": "https://nibrascode.com/en/logic",
+        "tr": "https://nibrascode.com/tr/logic",
+        "ar": "https://nibrascode.com/ar/logic",
+        "ru": "https://nibrascode.com/ru/logic"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "clientSide": true
+    },
+    {
+      "id": "studio",
+      "category": "studio",
+      "name": "Code Studio",
+      "names": {
+        "az": "Code Studio",
+        "en": "Code Studio",
+        "tr": "Code Studio",
+        "ar": "Code Studio",
+        "ru": "Code Studio"
+      },
+      "description": "Write HTML, CSS and JavaScript: files and folders, syntax highlighting, live preview in a phone frame.",
+      "descriptions": {
+        "az": "HTML, CSS və JavaScript yaz: fayllar və qovluqlar, rəngli kod, telefon çərçivəsində canlı önizləmə.",
+        "en": "Write HTML, CSS and JavaScript: files and folders, syntax highlighting, live preview in a phone frame.",
+        "tr": "HTML, CSS ve JavaScript yazın: dosyalar ve klasörler, renkli kod, telefon çerçevesinde canlı önizleme.",
+        "ar": "اكتب HTML وCSS وJavaScript: ملفات ومجلدات وتلوين للكود ومعاينة حيّة داخل إطار هاتف.",
+        "ru": "Пишите HTML, CSS и JavaScript: файлы и папки, подсветка, живой просмотр в рамке телефона."
+      },
+      "audience": {
+        "az": "Proqramçılar, sayt sahibləri və kod öyrənənlər",
+        "en": "Developers, site owners and people learning to code",
+        "tr": "Geliştiriciler, site sahipleri ve kod öğrenenler",
+        "ar": "المطورون وأصحاب المواقع ومتعلمو البرمجة",
+        "ru": "Разработчики, владельцы сайтов и те, кто учится программировать"
+      },
+      "url": "https://nibrascode.com/en/studio",
+      "urls": {
+        "az": "https://nibrascode.com/studio",
+        "en": "https://nibrascode.com/en/studio",
+        "tr": "https://nibrascode.com/tr/studio",
+        "ar": "https://nibrascode.com/ar/studio",
+        "ru": "https://nibrascode.com/ru/studio"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "clientSide": true
+    },
+    {
+      "id": "xray",
+      "category": "studio",
+      "name": "3D Code X-Ray",
+      "names": {
+        "az": "3D Kod Rentgeni",
+        "en": "3D Code X-Ray",
+        "tr": "3D Kod Röntgeni",
+        "ar": "أشعة الكود ثلاثية الأبعاد",
+        "ru": "3D-рентген кода"
+      },
+      "description": "Analyze code structure in 3D in the browser; code is never uploaded.",
+      "descriptions": {
+        "az": "Kodun strukturunu brauzerdə 3D-də təhlil et; kod yüklənmir.",
+        "en": "Analyze code structure in 3D in the browser; code is never uploaded.",
+        "tr": "Kod yapısını tarayıcıda 3D olarak analiz et; kod yüklenmez.",
+        "ar": "حلّل بنية الكود ثلاثياً في المتصفح؛ لا يُرفع الكود.",
+        "ru": "Анализируйте структуру кода в 3D в браузере; код не загружается."
+      },
+      "audience": {
+        "az": "Proqramçılar, sayt sahibləri və kod öyrənənlər",
+        "en": "Developers, site owners and people learning to code",
+        "tr": "Geliştiriciler, site sahipleri ve kod öğrenenler",
+        "ar": "المطورون وأصحاب المواقع ومتعلمو البرمجة",
+        "ru": "Разработчики, владельцы сайтов и те, кто учится программировать"
+      },
+      "url": "https://nibrascode.com/xray",
+      "urls": {
+        "az": "https://nibrascode.com/xray",
+        "en": "https://nibrascode.com/xray",
+        "tr": "https://nibrascode.com/xray",
+        "ar": "https://nibrascode.com/xray",
+        "ru": "https://nibrascode.com/xray"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "clientSide": true
+    },
+    {
+      "id": "workspace",
+      "category": "studio",
+      "name": "Nibras Workspace",
+      "names": {
+        "az": "Nibras Workspace",
+        "en": "Nibras Workspace",
+        "tr": "Nibras Workspace",
+        "ar": "Nibras Workspace",
+        "ru": "Nibras Workspace"
+      },
+      "description": "Open a PDF, extract text, make questions, save as Word/PDF.",
+      "descriptions": {
+        "az": "PDF aç, mətni çıxar, mətndən sual hazırla, Word/PDF kimi saxla.",
+        "en": "Open a PDF, extract text, make questions, save as Word/PDF.",
+        "tr": "PDF aç, metni çıkar, soru hazırla, Word/PDF olarak kaydet.",
+        "ar": "افتح PDF واستخرج النص وأنشئ أسئلة واحفظها Word/PDF.",
+        "ru": "Откройте PDF, извлеките текст, составьте вопросы, сохраните в Word/PDF."
+      },
+      "audience": {
+        "az": "Proqramçılar, sayt sahibləri və kod öyrənənlər",
+        "en": "Developers, site owners and people learning to code",
+        "tr": "Geliştiriciler, site sahipleri ve kod öğrenenler",
+        "ar": "المطورون وأصحاب المواقع ومتعلمو البرمجة",
+        "ru": "Разработчики, владельцы сайтов и те, кто учится программировать"
+      },
+      "url": "https://nibrascode.com/en/workspace",
+      "urls": {
+        "az": "https://nibrascode.com/workspace",
+        "en": "https://nibrascode.com/en/workspace",
+        "tr": "https://nibrascode.com/tr/workspace",
+        "ar": "https://nibrascode.com/ar/workspace",
+        "ru": "https://nibrascode.com/ru/workspace"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "clientSide": true
+    },
+    {
+      "id": "doctor",
+      "category": "studio",
+      "name": "Nibras Site Doctor",
+      "names": {
+        "az": "Nibras Site Doctor",
+        "en": "Nibras Site Doctor",
+        "tr": "Nibras Site Doctor",
+        "ar": "Nibras Site Doctor",
+        "ru": "Nibras Site Doctor"
+      },
+      "description": "Enter a URL: titles, meta descriptions, broken links, mobile-friendliness and speed, with concrete fix steps for each issue.",
+      "descriptions": {
+        "az": "Sayt ünvanını yazın: başlıq, meta təsvir, qırıq keçidlər, mobil uyğunluq və sürət.",
+        "en": "Enter a URL: titles, meta descriptions, broken links, mobile-friendliness and speed, with concrete fix steps for each issue.",
+        "tr": "Adres girin: başlık, açıklama, kırık bağlantılar, mobil uyum ve hız; her sorun için düzeltme adımları.",
+        "ar": "أدخل العنوان: العناوين والأوصاف والروابط المعطلة وملاءمة الجوال والسرعة مع خطوات إصلاح.",
+        "ru": "Введите адрес: заголовки, описания, битые ссылки, мобильность и скорость — с шагами исправления."
+      },
+      "audience": {
+        "az": "Proqramçılar, sayt sahibləri və kod öyrənənlər",
+        "en": "Developers, site owners and people learning to code",
+        "tr": "Geliştiriciler, site sahipleri ve kod öğrenenler",
+        "ar": "المطورون وأصحاب المواقع ومتعلمو البرمجة",
+        "ru": "Разработчики, владельцы сайтов и те, кто учится программировать"
+      },
+      "url": "https://nibrascode.com/en/doctor",
+      "urls": {
+        "az": "https://nibrascode.com/doctor",
+        "en": "https://nibrascode.com/en/doctor",
+        "tr": "https://nibrascode.com/tr/doctor",
+        "ar": "https://nibrascode.com/ar/doctor",
+        "ru": "https://nibrascode.com/ru/doctor"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "clientSide": false,
+      "dataHandling": "The site address you enter is fetched by the Nibras Code server to check its pages."
+    },
+    {
+      "id": "error-help",
+      "category": "studio",
+      "name": "Nibras Error Help",
+      "names": {
+        "az": "Nibras Error Help",
+        "en": "Nibras Error Help",
+        "tr": "Nibras Error Help",
+        "ar": "Nibras Error Help",
+        "ru": "Nibras Error Help"
+      },
+      "description": "Paste an error: its meaning, likely causes, what to check and a simple example.",
+      "descriptions": {
+        "az": "Xəta mesajını yapışdırın: mənası, mümkün səbəblər, yoxlanılacaq addımlar və sadə nümunə.",
+        "en": "Paste an error: its meaning, likely causes, what to check and a simple example.",
+        "tr": "Hata mesajını yapıştırın: anlamı, olası nedenler, kontrol adımları ve basit örnek.",
+        "ar": "الصق رسالة الخطأ: المعنى والأسباب المحتملة وما يجب فحصه ومثال بسيط.",
+        "ru": "Вставьте ошибку: значение, возможные причины, что проверить и простой пример."
+      },
+      "audience": {
+        "az": "Proqramçılar, sayt sahibləri və kod öyrənənlər",
+        "en": "Developers, site owners and people learning to code",
+        "tr": "Geliştiriciler, site sahipleri ve kod öğrenenler",
+        "ar": "المطورون وأصحاب المواقع ومتعلمو البرمجة",
+        "ru": "Разработчики, владельцы сайтов и те, кто учится программировать"
+      },
+      "url": "https://nibrascode.com/en/error-help",
+      "urls": {
+        "az": "https://nibrascode.com/error-help",
+        "en": "https://nibrascode.com/en/error-help",
+        "tr": "https://nibrascode.com/tr/error-help",
+        "ar": "https://nibrascode.com/ar/error-help",
+        "ru": "https://nibrascode.com/ru/error-help"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "clientSide": false,
+      "dataHandling": "The error text you paste is sent to an AI service for an explanation."
+    },
+    {
+      "id": "mirror",
+      "category": "studio",
+      "name": "Nibras Site Mirror",
+      "names": {
+        "az": "Nibras Site Mirror",
+        "en": "Nibras Site Mirror",
+        "tr": "Nibras Site Mirror",
+        "ar": "Nibras Site Mirror",
+        "ru": "Nibras Site Mirror"
+      },
+      "description": "Paste a sitemap XML and see your site as a tree: deep pages, duplicate URLs, gaps and long links.",
+      "descriptions": {
+        "az": "Sitemap XML yapışdır və saytının ağac xəritəsini gör: dərin səhifələr, təkrar URL-lər, boşluqlar, uzun linklər.",
+        "en": "Paste a sitemap XML and see your site as a tree: deep pages, duplicate URLs, gaps and long links.",
+        "tr": "Sitemap XML yapıştırın, sitenizi ağaç olarak görün: derin sayfalar, yinelenen URL'ler, boşluklar.",
+        "ar": "الصق XML لخريطة الموقع وشاهد موقعك كشجرة: صفحات عميقة وروابط مكررة وفجوات.",
+        "ru": "Вставьте sitemap XML и увидьте сайт деревом: глубокие страницы, дубли URL, пробелы."
+      },
+      "audience": {
+        "az": "Proqramçılar, sayt sahibləri və kod öyrənənlər",
+        "en": "Developers, site owners and people learning to code",
+        "tr": "Geliştiriciler, site sahipleri ve kod öğrenenler",
+        "ar": "المطورون وأصحاب المواقع ومتعلمو البرمجة",
+        "ru": "Разработчики, владельцы сайтов и те, кто учится программировать"
+      },
+      "url": "https://nibrascode.com/en/mirror",
+      "urls": {
+        "az": "https://nibrascode.com/mirror",
+        "en": "https://nibrascode.com/en/mirror",
+        "tr": "https://nibrascode.com/tr/mirror",
+        "ar": "https://nibrascode.com/ar/mirror",
+        "ru": "https://nibrascode.com/ru/mirror"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "clientSide": true
+    },
+    {
+      "id": "shortcuts",
+      "category": "learn",
+      "name": "Nibras Shortcuts",
+      "names": {
+        "az": "Nibras Shortcuts",
+        "en": "Nibras Shortcuts",
+        "tr": "Nibras Shortcuts",
+        "ar": "Nibras Shortcuts",
+        "ru": "Nibras Shortcuts"
+      },
+      "description": "Learn keyboard shortcuts with a key heatmap, real-keyboard practice, speed and accuracy stats, spaced repetition and your own collections.",
+      "descriptions": {
+        "az": "Klaviatura qısayollarını istilik xəritəsi, real klaviatura ilə məşq, sürət/dəqiqlik statistikası və aralıqlı təkrarla öyrən.",
+        "en": "Learn keyboard shortcuts with a key heatmap, real-keyboard practice, speed and accuracy stats, spaced repetition and your own collections.",
+        "tr": "Klavye kısayollarını ısı haritası, gerçek klavyeyle alıştırma, hız/doğruluk istatistiği ve aralıklı tekrarla öğrenin.",
+        "ar": "تعلّم اختصارات لوحة المفاتيح بخريطة حرارية وتدريب بلوحة مفاتيح حقيقية وإحصاءات السرعة والدقة والتكرار المتباعد.",
+        "ru": "Учите горячие клавиши: тепловая карта, тренировка на настоящей клавиатуре, статистика скорости и точности, интервальное повторение."
+      },
+      "audience": {
+        "az": "Proqramlaşdırma və məntiq öyrənən tələbələr",
+        "en": "Students learning programming and logic",
+        "tr": "Programlama ve mantık öğrenen öğrenciler",
+        "ar": "الطلاب الذين يتعلمون البرمجة والمنطق",
+        "ru": "Студенты, изучающие программирование и логику"
+      },
+      "url": "https://nibrascode.com/en/shortcuts",
+      "urls": {
+        "az": "https://nibrascode.com/shortcuts",
+        "en": "https://nibrascode.com/en/shortcuts",
+        "tr": "https://nibrascode.com/tr/shortcuts",
+        "ar": "https://nibrascode.com/ar/shortcuts",
+        "ru": "https://nibrascode.com/ru/shortcuts"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "clientSide": true
+    },
+    {
+      "id": "schema",
+      "category": "studio",
+      "name": "Nibras Schema",
+      "names": {
+        "az": "Nibras Schema",
+        "en": "Nibras Schema",
+        "tr": "Nibras Schema",
+        "ar": "Nibras Schema",
+        "ru": "Nibras Schema"
+      },
+      "description": "Design tables as text or on a visual canvas: PK, FK, unique, not null, defaults and 1-1, 1-n, n-n relations.",
+      "descriptions": {
+        "az": "Cədvəlləri mətnlə və ya vizual lövhədə qur: PK, FK, unique, əlaqələr 1-1, 1-n, n-n.",
+        "en": "Design tables as text or on a visual canvas: PK, FK, unique, not null, defaults and 1-1, 1-n, n-n relations.",
+        "tr": "Tabloları metinle veya görsel tuvalde tasarlayın: PK, FK, unique, ilişkiler 1-1, 1-n, n-n.",
+        "ar": "صمّم الجداول نصاً أو على لوحة مرئية: PK وFK وunique وعلاقات 1-1 و1-n وn-n.",
+        "ru": "Проектируйте таблицы текстом или на холсте: PK, FK, unique, связи 1-1, 1-n, n-n."
+      },
+      "audience": {
+        "az": "Proqramçılar, sayt sahibləri və kod öyrənənlər",
+        "en": "Developers, site owners and people learning to code",
+        "tr": "Geliştiriciler, site sahipleri ve kod öğrenenler",
+        "ar": "المطورون وأصحاب المواقع ومتعلمو البرمجة",
+        "ru": "Разработчики, владельцы сайтов и те, кто учится программировать"
+      },
+      "url": "https://nibrascode.com/en/schema",
+      "urls": {
+        "az": "https://nibrascode.com/schema",
+        "en": "https://nibrascode.com/en/schema",
+        "tr": "https://nibrascode.com/tr/schema",
+        "ar": "https://nibrascode.com/ar/schema",
+        "ru": "https://nibrascode.com/ru/schema"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "clientSide": true
+    },
+    {
+      "id": "learn",
+      "category": "learn",
+      "name": "Nibras Learn",
+      "names": {
+        "az": "Nibras Learn",
+        "en": "Nibras Learn",
+        "tr": "Nibras Learn",
+        "ar": "Nibras Learn",
+        "ru": "Nibras Learn"
+      },
+      "description": "Pick a PDF: questions per topic, tests, flashcards, spaced review of mistakes and progress stats.",
+      "descriptions": {
+        "az": "PDF seçin: mövzular üzrə suallar, testlər, yaddaş kartları, səhvlərin təkrarı və irəliləyiş statistikası.",
+        "en": "Pick a PDF: questions per topic, tests, flashcards, spaced review of mistakes and progress stats.",
+        "tr": "PDF seçin: konu bazında sorular, testler, kartlar, yanlışların tekrarı ve ilerleme istatistiği.",
+        "ar": "اختر ملف PDF: أسئلة لكل موضوع واختبارات وبطاقات ومراجعة الأخطاء وإحصاءات التقدم.",
+        "ru": "Выберите PDF: вопросы по темам, тесты, карточки, повтор ошибок и статистика прогресса."
+      },
+      "audience": {
+        "az": "Proqramlaşdırma və məntiq öyrənən tələbələr",
+        "en": "Students learning programming and logic",
+        "tr": "Programlama ve mantık öğrenen öğrenciler",
+        "ar": "الطلاب الذين يتعلمون البرمجة والمنطق",
+        "ru": "Студенты, изучающие программирование и логику"
+      },
+      "url": "https://nibrascode.com/en/learn",
+      "urls": {
+        "az": "https://nibrascode.com/learn",
+        "en": "https://nibrascode.com/en/learn",
+        "tr": "https://nibrascode.com/tr/learn",
+        "ar": "https://nibrascode.com/ar/learn",
+        "ru": "https://nibrascode.com/ru/learn"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "clientSide": true
+    },
+    {
+      "id": "logic-lab",
+      "category": "learn",
+      "name": "Nibras Logic Lab",
+      "names": {
+        "az": "Nibras Logic Lab",
+        "en": "Nibras Logic Lab",
+        "tr": "Nibras Logic Lab",
+        "ar": "Nibras Logic Lab",
+        "ru": "Nibras Logic Lab"
+      },
+      "description": "Build circuits from AND, OR, NOT, NAND, XOR, NOR and XNOR gates with live signals, truth table, Boolean expression and challenges.",
+      "descriptions": {
+        "az": "AND, OR, NOT, NAND, XOR, NOR, XNOR qapılarından sxem qur, canlı siqnal, həqiqət cədvəli, Boolean ifadə və tapşırıqlar.",
+        "en": "Build circuits from AND, OR, NOT, NAND, XOR, NOR and XNOR gates with live signals, truth table, Boolean expression and challenges.",
+        "tr": "AND, OR, NOT, NAND, XOR, NOR, XNOR kapılarıyla devre kurun; canlı sinyal, doğruluk tablosu, Boole ifadesi ve görevler.",
+        "ar": "ابنِ دوائر من بوابات AND وOR وNOT وNAND وXOR وNOR وXNOR مع إشارات حيّة وجدول حقيقة وتعبير منطقي وتحديات.",
+        "ru": "Собирайте схемы из AND, OR, NOT, NAND, XOR, NOR и XNOR: живые сигналы, таблица истинности, булево выражение и задания."
+      },
+      "audience": {
+        "az": "Proqramlaşdırma və məntiq öyrənən tələbələr",
+        "en": "Students learning programming and logic",
+        "tr": "Programlama ve mantık öğrenen öğrenciler",
+        "ar": "الطلاب الذين يتعلمون البرمجة والمنطق",
+        "ru": "Студенты, изучающие программирование и логику"
+      },
+      "url": "https://nibrascode.com/en/learn/logic",
+      "urls": {
+        "az": "https://nibrascode.com/learn/logic",
+        "en": "https://nibrascode.com/en/learn/logic",
+        "tr": "https://nibrascode.com/tr/learn/logic",
+        "ar": "https://nibrascode.com/ar/learn/logic",
+        "ru": "https://nibrascode.com/ru/learn/logic"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "clientSide": true
+    },
+    {
+      "id": "planner",
+      "category": "utility",
+      "name": "Nibras Planner",
+      "names": {
+        "az": "Nibras Planner",
+        "en": "Nibras Planner",
+        "tr": "Nibras Planner",
+        "ar": "Nibras Planner",
+        "ru": "Nibras Planner"
+      },
+      "description": "Enter the house size and see brick, cement, paint and tile quantities, the estimate, a live 3D drawing and the floor plan.",
+      "descriptions": {
+        "az": "Evin ölçülərini yaz — kərpic, sement, boya və kafelin sayını, qiymətini, 3D çertyoju və mənzil planını bir anda gör.",
+        "en": "Enter the house size and see brick, cement, paint and tile quantities, the estimate, a live 3D drawing and the floor plan.",
+        "tr": "Ev ölçülerini yaz — tuğla, çimento, boya ve fayans miktarını, maliyeti, 3D çizimi ve daire planını bir arada gör.",
+        "ar": "اكتب مقاسات البيت وشاهد كمية الطوب والإسمنت والدهان والبلاط والتكلفة والمخطط ثلاثي الأبعاد ومخطط الشقة.",
+        "ru": "Введите размеры дома и сразу увидьте количество кирпича, цемента, краски и плитки, смету, 3D-чертёж и план."
+      },
+      "audience": {
+        "az": "Gündəlik hesab, arxiv və ya cihaz yoxlaması lazım olanlar",
+        "en": "Everyday users needing a quick calculation, archive or device check",
+        "tr": "Günlük hesap, arşiv veya cihaz kontrolü gerekenler",
+        "ar": "المستخدمون الذين يحتاجون حساباً سريعاً أو أرشيفاً أو فحص جهاز",
+        "ru": "Все, кому нужен быстрый расчёт, архив или проверка устройства"
+      },
+      "url": "https://nibrascode.com/en/planner",
+      "urls": {
+        "az": "https://nibrascode.com/planner",
+        "en": "https://nibrascode.com/en/planner",
+        "tr": "https://nibrascode.com/tr/planner",
+        "ar": "https://nibrascode.com/ar/planner",
+        "ru": "https://nibrascode.com/ru/planner"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "clientSide": true
+    },
+    {
+      "id": "app-nibras-arabic",
+      "category": "app",
+      "name": "Nibras Arabic",
+      "names": {
+        "az": "Nibras Arabic",
+        "en": "Nibras Arabic",
+        "tr": "Nibras Arabic",
+        "ar": "Nibras Arabic",
+        "ru": "Nibras Arabic"
+      },
+      "description": "Nibras Arabic helps someone who knows Azerbaijani learn Arabic more easily.",
+      "descriptions": {
+        "az": "Nibras Arabic Azərbaycan dilini bilən birinin ərəb dilini daha asan öyrənməsi üçündür.",
+        "en": "Nibras Arabic helps someone who knows Azerbaijani learn Arabic more easily.",
+        "tr": "Nibras Arabic, Azerbaycan Türkçesini bilen birinin Arapçayı daha kolay öğrenmesi içindir.",
+        "ar": "Nibras Arabic لمن يعرف الأذربيجانية ليتعلّم العربية بسهولة أكبر.",
+        "ru": "Nibras Arabic помогает знающему азербайджанский учить арабский легче."
+      },
+      "audience": {
+        "az": "Android telefon istifadəçiləri",
+        "en": "Android phone users",
+        "tr": "Android telefon kullanıcıları",
+        "ar": "مستخدمو هواتف Android",
+        "ru": "Пользователи Android-телефонов"
+      },
+      "url": "https://nibrascode.com/en/apps/nibras-arabic",
+      "urls": {
+        "az": "https://nibrascode.com/apps/nibras-arabic",
+        "en": "https://nibrascode.com/en/apps/nibras-arabic",
+        "tr": "https://nibrascode.com/tr/apps/nibras-arabic",
+        "ar": "https://nibrascode.com/ar/apps/nibras-arabic",
+        "ru": "https://nibrascode.com/ru/apps/nibras-arabic"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "platform": "android",
+      "stores": {
+        "googlePlay": "https://play.google.com/store/apps/details?id=com.nibrasarabic.app"
+      }
+    },
+    {
+      "id": "app-nibras-pdf",
+      "category": "app",
+      "name": "Nibras PDF",
+      "names": {
+        "az": "Nibras PDF",
+        "en": "Nibras PDF",
+        "tr": "Nibras PDF",
+        "ar": "Nibras PDF",
+        "ru": "Nibras PDF"
+      },
+      "description": "Nibras PDF is an Android app for working with PDFs and images on your phone.",
+      "descriptions": {
+        "az": "Nibras PDF telefonunuzda PDF və şəkillərlə işləmək üçün Android tətbiqidir.",
+        "en": "Nibras PDF is an Android app for working with PDFs and images on your phone.",
+        "tr": "Nibras PDF, telefonda PDF ve görsellerle çalışmak için bir Android uygulamasıdır.",
+        "ar": "Nibras PDF تطبيق أندرويد للعمل مع ملفات PDF والصور على هاتفك.",
+        "ru": "Nibras PDF — приложение для Android, чтобы работать с PDF и изображениями на телефоне."
+      },
+      "audience": {
+        "az": "Android telefon istifadəçiləri",
+        "en": "Android phone users",
+        "tr": "Android telefon kullanıcıları",
+        "ar": "مستخدمو هواتف Android",
+        "ru": "Пользователи Android-телефонов"
+      },
+      "url": "https://nibrascode.com/en/apps/nibras-pdf",
+      "urls": {
+        "az": "https://nibrascode.com/apps/nibras-pdf",
+        "en": "https://nibrascode.com/en/apps/nibras-pdf",
+        "tr": "https://nibrascode.com/tr/apps/nibras-pdf",
+        "ar": "https://nibrascode.com/ar/apps/nibras-pdf",
+        "ru": "https://nibrascode.com/ru/apps/nibras-pdf"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "platform": "android",
+      "stores": {
+        "googlePlay": "https://play.google.com/store/apps/details?id=com.nibras.pdf"
+      }
+    },
+    {
+      "id": "app-nibras-docs",
+      "category": "app",
+      "name": "Nibras Docs",
+      "names": {
+        "az": "Nibras Docs",
+        "en": "Nibras Docs",
+        "tr": "Nibras Docs",
+        "ar": "Nibras Docs",
+        "ru": "Nibras Docs"
+      },
+      "description": "Nibras Docs is an Android app for calm work with documents.",
+      "descriptions": {
+        "az": "Nibras Docs sənədlərlə sakit işləmək üçün Android tətbiqidir.",
+        "en": "Nibras Docs is an Android app for calm work with documents.",
+        "tr": "Nibras Docs, belgelerle sakin çalışmak için bir Android uygulamasıdır.",
+        "ar": "Nibras Docs تطبيق أندرويد للعمل الهادئ مع المستندات.",
+        "ru": "Nibras Docs — приложение для Android для спокойной работы с документами."
+      },
+      "audience": {
+        "az": "Android telefon istifadəçiləri",
+        "en": "Android phone users",
+        "tr": "Android telefon kullanıcıları",
+        "ar": "مستخدمو هواتف Android",
+        "ru": "Пользователи Android-телефонов"
+      },
+      "url": "https://nibrascode.com/en/apps/nibras-docs",
+      "urls": {
+        "az": "https://nibrascode.com/apps/nibras-docs",
+        "en": "https://nibrascode.com/en/apps/nibras-docs",
+        "tr": "https://nibrascode.com/tr/apps/nibras-docs",
+        "ar": "https://nibrascode.com/ar/apps/nibras-docs",
+        "ru": "https://nibrascode.com/ru/apps/nibras-docs"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "platform": "android"
+    },
+    {
+      "id": "app-nibras-plans",
+      "category": "app",
+      "name": "Nibras Plans",
+      "names": {
+        "az": "Nibras Plans",
+        "en": "Nibras Plans",
+        "tr": "Nibras Plans",
+        "ar": "Nibras Plans",
+        "ru": "Nibras Plans"
+      },
+      "description": "Nibras Plans is an Android app that keeps plans, spreadsheets, and reports simple.",
+      "descriptions": {
+        "az": "Nibras Plans planları, cədvəlləri və hesabatları sadə saxlayan Android tətbiqidir.",
+        "en": "Nibras Plans is an Android app that keeps plans, spreadsheets, and reports simple.",
+        "tr": "Nibras Plans, planları, tabloları ve raporları sade tutan bir Android uygulamasıdır.",
+        "ar": "Nibras Plans تطبيق أندرويد يُبقي الخطط والجداول والتقارير بسيطة.",
+        "ru": "Nibras Plans — приложение для Android, которое держит планы, таблицы и отчёты простыми."
+      },
+      "audience": {
+        "az": "Android telefon istifadəçiləri",
+        "en": "Android phone users",
+        "tr": "Android telefon kullanıcıları",
+        "ar": "مستخدمو هواتف Android",
+        "ru": "Пользователи Android-телефонов"
+      },
+      "url": "https://nibrascode.com/en/apps/nibras-plans",
+      "urls": {
+        "az": "https://nibrascode.com/apps/nibras-plans",
+        "en": "https://nibrascode.com/en/apps/nibras-plans",
+        "tr": "https://nibrascode.com/tr/apps/nibras-plans",
+        "ar": "https://nibrascode.com/ar/apps/nibras-plans",
+        "ru": "https://nibrascode.com/ru/apps/nibras-plans"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "platform": "android"
+    },
+    {
+      "id": "app-nibras-note",
+      "category": "app",
+      "name": "Nibras Note",
+      "names": {
+        "az": "Nibras Note",
+        "en": "Nibras Note",
+        "tr": "Nibras Note",
+        "ar": "Nibras Note",
+        "ru": "Nibras Note"
+      },
+      "description": "Nibras Note is an Android notebook for typing, pen drawing, and images.",
+      "descriptions": {
+        "az": "Nibras Note mətn yazmaq, qələmlə çəkmək və şəkil əlavə etmək üçün Android dəftəridir.",
+        "en": "Nibras Note is an Android notebook for typing, pen drawing, and images.",
+        "tr": "Nibras Note is an Android notebook for typing, pen drawing, and images.",
+        "ar": "Nibras Note دفتر Android للكتابة والرسم بالقلم وإضافة الصور.",
+        "ru": "Nibras Note — блокнот для Android: текст, перо и фото."
+      },
+      "audience": {
+        "az": "Android telefon istifadəçiləri",
+        "en": "Android phone users",
+        "tr": "Android telefon kullanıcıları",
+        "ar": "مستخدمو هواتف Android",
+        "ru": "Пользователи Android-телефонов"
+      },
+      "url": "https://nibrascode.com/en/apps/nibras-note",
+      "urls": {
+        "az": "https://nibrascode.com/apps/nibras-note",
+        "en": "https://nibrascode.com/en/apps/nibras-note",
+        "tr": "https://nibrascode.com/tr/apps/nibras-note",
+        "ar": "https://nibrascode.com/ar/apps/nibras-note",
+        "ru": "https://nibrascode.com/ru/apps/nibras-note"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "platform": "android"
+    },
+    {
+      "id": "app-nibras-scan",
+      "category": "app",
+      "name": "Nibras Scan",
+      "names": {
+        "az": "Nibras Scan",
+        "en": "Nibras Scan",
+        "tr": "Nibras Scan",
+        "ar": "Nibras Scan",
+        "ru": "Nibras Scan"
+      },
+      "description": "Nibras Scan is an Android document scanner that turns paper into clear PDFs with your camera.",
+      "descriptions": {
+        "az": "Nibras Scan kağız sənədi kamera ilə aydın PDF-ə çevirən Android skaneridir.",
+        "en": "Nibras Scan is an Android document scanner that turns paper into clear PDFs with your camera.",
+        "tr": "Nibras Scan is an Android document scanner that turns paper into clear PDFs with your camera.",
+        "ar": "Nibras Scan ماسح مستندات لـ Android يحوّل الورق إلى PDF واضح بالكاميرا.",
+        "ru": "Nibras Scan — сканер документов для Android: бумага в чёткий PDF камерой."
+      },
+      "audience": {
+        "az": "Android telefon istifadəçiləri",
+        "en": "Android phone users",
+        "tr": "Android telefon kullanıcıları",
+        "ar": "مستخدمو هواتف Android",
+        "ru": "Пользователи Android-телефонов"
+      },
+      "url": "https://nibrascode.com/en/apps/nibras-scan",
+      "urls": {
+        "az": "https://nibrascode.com/apps/nibras-scan",
+        "en": "https://nibrascode.com/en/apps/nibras-scan",
+        "tr": "https://nibrascode.com/tr/apps/nibras-scan",
+        "ar": "https://nibrascode.com/ar/apps/nibras-scan",
+        "ru": "https://nibrascode.com/ru/apps/nibras-scan"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "platform": "android"
+    },
+    {
+      "id": "app-nibras-office",
+      "category": "app",
+      "name": "Nibras Office",
+      "names": {
+        "az": "Nibras Office",
+        "en": "Nibras Office",
+        "tr": "Nibras Office",
+        "ar": "Nibras Office",
+        "ru": "Nibras Office"
+      },
+      "description": "Nibras Office is an offline PDF editor for Android: pen, highlighter, shapes, signature, page organizing, search, OCR, password, print and share.",
+      "descriptions": {
+        "az": "Nibras Office Android üçün oflayn PDF redaktorudur: qələm, marker, fiqurlar, imza, səhifələri düzənləmək, axtarış, OCR, şifrə, çap və paylaşım.",
+        "en": "Nibras Office is an offline PDF editor for Android: pen, highlighter, shapes, signature, page organizing, search, OCR, password, print and share.",
+        "tr": "Nibras Office, Android için çevrimdışı PDF düzenleyicidir: kalem, fosforlu kalem, şekiller, imza, sayfa düzenleme, arama, OCR, şifre, yazdırma ve paylaşma.",
+        "ar": "Nibras Office محرر PDF لأندرويد يعمل دون إنترنت: قلم وتظليل وأشكال وتوقيع وتنظيم الصفحات وبحث وOCR وكلمة مرور وطباعة ومشاركة.",
+        "ru": "Nibras Office — офлайн-редактор PDF для Android: ручка, маркер, фигуры, подпись, упорядочивание страниц, поиск, OCR, пароль, печать и отправка."
+      },
+      "audience": {
+        "az": "Android telefon istifadəçiləri",
+        "en": "Android phone users",
+        "tr": "Android telefon kullanıcıları",
+        "ar": "مستخدمو هواتف Android",
+        "ru": "Пользователи Android-телефонов"
+      },
+      "url": "https://nibrascode.com/en/apps/nibras-office",
+      "urls": {
+        "az": "https://nibrascode.com/apps/nibras-office",
+        "en": "https://nibrascode.com/en/apps/nibras-office",
+        "tr": "https://nibrascode.com/tr/apps/nibras-office",
+        "ar": "https://nibrascode.com/ar/apps/nibras-office",
+        "ru": "https://nibrascode.com/ru/apps/nibras-office"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "platform": "android"
+    },
+    {
+      "id": "app-majmu-al-fatawa",
+      "category": "app",
+      "name": "Majmu' al-Fatawa",
+      "names": {
+        "az": "Məcmu' əl-Fətava",
+        "en": "Majmu' al-Fatawa",
+        "tr": "Mecmû'u'l-Fetâvâ",
+        "ar": "مجموع الفتاوى",
+        "ru": "Маджму аль-Фатава"
+      },
+      "description": "Ibn Taymiyyah's Majmu' al-Fatawa in 35 volumes with the printed edition's page numbers, fully offline.",
+      "descriptions": {
+        "az": "İbn Teymiyyənin «Məcmu' əl-Fətava» əsəri 35 cildlə, çap nəşrinin səhifə nömrələri ilə, internetsiz.",
+        "en": "Ibn Taymiyyah's Majmu' al-Fatawa in 35 volumes with the printed edition's page numbers, fully offline.",
+        "tr": "İbn Teymiyye'nin Mecmû'u'l-Fetâvâ'sı 35 cilt, basılı baskının sayfa numaralarıyla, tamamen çevrimdışı.",
+        "ar": "مجموع فتاوى شيخ الإسلام ابن تيمية في 35 مجلدًا مع ترقيم الطبعة المطبوعة، يعمل دون إنترنت.",
+        "ru": "«Маджму аль-Фатава» Ибн Таймии в 35 томах с нумерацией печатного издания, полностью офлайн."
+      },
+      "audience": {
+        "az": "Android telefon istifadəçiləri",
+        "en": "Android phone users",
+        "tr": "Android telefon kullanıcıları",
+        "ar": "مستخدمو هواتف Android",
+        "ru": "Пользователи Android-телефонов"
+      },
+      "url": "https://nibrascode.com/en/apps/majmu-al-fatawa",
+      "urls": {
+        "az": "https://nibrascode.com/apps/majmu-al-fatawa",
+        "en": "https://nibrascode.com/en/apps/majmu-al-fatawa",
+        "tr": "https://nibrascode.com/tr/apps/majmu-al-fatawa",
+        "ar": "https://nibrascode.com/ar/apps/majmu-al-fatawa",
+        "ru": "https://nibrascode.com/ru/apps/majmu-al-fatawa"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "platform": "android"
+    },
+    {
+      "id": "app-nibras-qr",
+      "category": "app",
+      "name": "Nibras QR",
+      "names": {
+        "az": "Nibras QR",
+        "en": "Nibras QR",
+        "tr": "Nibras QR",
+        "ar": "Nibras QR",
+        "ru": "Nibras QR"
+      },
+      "description": "Nibras QR is an Android app for QR codes and barcodes: 11 QR types, logo and frame designs, templates and a smart, safe scanner.",
+      "descriptions": {
+        "az": "Nibras QR QR kod və barkodlar üçün Android tətbiqidir: 11 növ QR, loqo və çərçivəli dizayn, şablonlar, ağıllı və təhlükəsiz skaner.",
+        "en": "Nibras QR is an Android app for QR codes and barcodes: 11 QR types, logo and frame designs, templates and a smart, safe scanner.",
+        "tr": "Nibras QR, QR kod ve barkodlar için bir Android uygulamasıdır: 11 QR türü, logo ve çerçeveli tasarım, şablonlar, akıllı ve güvenli tarayıcı.",
+        "ar": "Nibras QR تطبيق أندرويد لرموز QR والباركود: 11 نوعاً، تصاميم بشعار وإطار، قوالب وماسح ذكي وآمن.",
+        "ru": "Nibras QR — Android-приложение для QR-кодов и штрихкодов: 11 типов, дизайн с логотипом и рамкой, шаблоны и умный безопасный сканер."
+      },
+      "audience": {
+        "az": "Android telefon istifadəçiləri",
+        "en": "Android phone users",
+        "tr": "Android telefon kullanıcıları",
+        "ar": "مستخدمو هواتف Android",
+        "ru": "Пользователи Android-телефонов"
+      },
+      "url": "https://nibrascode.com/en/apps/nibras-qr",
+      "urls": {
+        "az": "https://nibrascode.com/apps/nibras-qr",
+        "en": "https://nibrascode.com/en/apps/nibras-qr",
+        "tr": "https://nibrascode.com/tr/apps/nibras-qr",
+        "ar": "https://nibrascode.com/ar/apps/nibras-qr",
+        "ru": "https://nibrascode.com/ru/apps/nibras-qr"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "free": true,
+      "account": false,
+      "ads": false,
+      "platform": "android",
+      "stores": {
+        "googlePlay": "https://play.google.com/store/apps/details?id=com.nibras.qr"
+      }
     }
   ]
 }
