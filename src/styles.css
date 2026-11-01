@@ -1684,7 +1684,8 @@ html[dir="rtl"] .rtl-flip {
 }
 
 .lang-pick option {
-  color: #10131c;
+  background-color: #0f172a;
+  color: #f1f5f9;
   font-weight: 650;
 }
 
@@ -12027,3 +12028,7 @@ select option, select optgroup { background-color: #0f172a; color: #f1f5f9; }
 select option:checked { background-color: #2f6bff; color: #ffffff; }
 .lang-pick option { background-color: #0f172a !important; color: #f8fafc !important; }
 .lang-pick option:checked, .lang-pick option:hover { background-color: #2f6bff !important; color: #fff !important; }
+
+/* Language pickers: guaranteed contrast in the opened native list. */
+select.lang-pick option, select.nxa-langpick option { background-color: #0f172a; color: #f1f5f9; }
+select.lang-pick option:checked, select.nxa-langpick option:checked { background-color: #2f6bff; color: #fff; }

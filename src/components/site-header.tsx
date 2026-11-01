@@ -32,25 +32,25 @@ export function SiteHeader() {
           <div className="header-links">
             <a href={localeHref(lang, "/apps")} className="back-link">
               {t("b_nav_apps")}
-            </a>
+            </a>{" "}
             <a href={localeHref(lang, "/studio")} className="back-link" data-testid="nav-studio">
               Studio
-            </a>
+            </a>{" "}
             <a href={localeHref(lang, "/workspace")} className="back-link">
               Workspace
-            </a>
+            </a>{" "}
             <a href={localeHref(lang, "/learn")} className="back-link">
               Learn
-            </a>
+            </a>{" "}
             <a href={localeHref(lang, "/doctor")} className="back-link">
               Site Doctor
-            </a>
+            </a>{" "}
             <a href="/qr" className="back-link qr-nav-link">
               {t("nav_qr")}
-            </a>
+            </a>{" "}
             <Link to="/unutma" className="back-link">
               {t("remind_btn")}
-            </Link>
+            </Link>{" "}
             <a href={localeHref(lang, "/contact")} className="back-link">
               {t("nx_nav_contact")}
             </a>
@@ -60,7 +60,7 @@ export function SiteHeader() {
                 {t("b_nav_home")}
               </Link>
             ) : null}
-          </div>
+          </div>{" "}
           <LanguageSwitch />
         </div>
       </div>
@@ -75,13 +75,13 @@ export function SiteFooter() {
       <nav className="footer-panels" aria-label="Nibras Code">
         <a className="footer-faq" href={localeHref(lang, "/services")}>
           {SERVICES_LABEL[lang]}
-        </a>
-        <NavMenu section="resources" />
-        <NavMenu section="guides" />
-        <NavMenu section="programming" />
+        </a>{" "}
+        <NavMenu section="resources" />{" "}
+        <NavMenu section="guides" />{" "}
+        <NavMenu section="programming" />{" "}
         <a className="footer-faq" href={faqPath(lang)}>
           {t("faq_nav")}
-        </a>
+        </a>{" "}
         <a className="footer-faq" href={gamePath(lang)}>
           {lang === "ar" ? "ألعاب" : lang === "ru" ? "Игры" : lang === "en" ? "Games" : "Oyunlar"}
         </a>
@@ -114,7 +114,7 @@ export function SocialIcons() {
           <path fill="#c62828" d="M3 12.3V16.2l10 7.5V11.2L9.9 8.9A4.3 4.3 0 0 0 7.3 8C4.9 8 3 9.9 3 12.3z" />
           <path fill="#fbc02d" d="M45 12.3V16.2l-10 7.5V11.2l3.1-2.3A4.3 4.3 0 0 1 40.7 8C43.1 8 45 9.9 45 12.3z" />
         </svg>
-      </a>
+      </a>{" "}
       <a href="https://www.youtube.com/@NibrasCode" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path fill="#FF0033" d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8z" />
@@ -132,10 +132,10 @@ export function SiteLegal() {
     <div className="site-legal">
       <SocialIcons />
       <nav aria-label={copy.contact}>
-        <a href={localeHref(lang, "/about")}>{copy.about}</a>
-        <a href={localeHref(lang, "/contact")}>{copy.contact}</a>
-        <a href={localeHref(lang, "/privacy")}>{copy.privacy}</a>
-        <a href={localeHref(lang, "/terms")}>{copy.terms}</a>
+        <a href={localeHref(lang, "/about")}>{copy.about}</a>{" "}
+        <a href={localeHref(lang, "/contact")}>{copy.contact}</a>{" "}
+        <a href={localeHref(lang, "/privacy")}>{copy.privacy}</a>{" "}
+        <a href={localeHref(lang, "/terms")}>{copy.terms}</a>{" "}
         <a href={localeHref(lang, "/trust")}>{copy.trust}</a>
       </nav>
     </div>

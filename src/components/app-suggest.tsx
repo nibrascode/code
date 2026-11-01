@@ -32,7 +32,7 @@ export function AppSuggest() {
     <aside className="app-suggest">
       <a href={localeHref(lang, `/apps/${card.slug}`)}>
         <img src={card.icon} alt="" width={34} height={34} loading="lazy" decoding="async" />
-        <b>{card.name}</b>
+        <b>{card.name}</b>{" "}
         <small>{LABEL[lang]}</small>
         <svg className="suggest-bot" viewBox="0 0 16 18" aria-hidden="true">
           <circle cx="8" cy="1.15" r="1.05" fill="#c9b6ff" />
