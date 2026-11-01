@@ -22,12 +22,22 @@
       "permanent": true
     },
     {
+      "source": "/nibraspdf/:lang(en|tr|ar|ru)/",
+      "destination": "/:lang/apps/nibras-pdf",
+      "permanent": true
+    },
+    {
       "source": "/nibraspdf/:file(index.html)?",
       "destination": "/apps/nibras-pdf",
       "permanent": true
     },
     {
       "source": "/nibraspdf",
+      "destination": "/apps/nibras-pdf",
+      "permanent": true
+    },
+    {
+      "source": "/nibraspdf/",
       "destination": "/apps/nibras-pdf",
       "permanent": true
     },
@@ -42,12 +52,22 @@
       "permanent": true
     },
     {
+      "source": "/nibrasplans/:lang(en|tr|ar|ru)/",
+      "destination": "/:lang/apps/nibras-plans",
+      "permanent": true
+    },
+    {
       "source": "/nibrasplans/:file(index.html)?",
       "destination": "/apps/nibras-plans",
       "permanent": true
     },
     {
       "source": "/nibrasplans",
+      "destination": "/apps/nibras-plans",
+      "permanent": true
+    },
+    {
+      "source": "/nibrasplans/",
       "destination": "/apps/nibras-plans",
       "permanent": true
     },
@@ -62,12 +82,22 @@
       "permanent": true
     },
     {
+      "source": "/nibrasoffice/:lang(en|tr|ar|ru)/",
+      "destination": "/:lang/apps/nibras-office",
+      "permanent": true
+    },
+    {
       "source": "/nibrasoffice/:file(index.html)?",
       "destination": "/apps/nibras-office",
       "permanent": true
     },
     {
       "source": "/nibrasoffice",
+      "destination": "/apps/nibras-office",
+      "permanent": true
+    },
+    {
+      "source": "/nibrasoffice/",
       "destination": "/apps/nibras-office",
       "permanent": true
     },
@@ -82,12 +112,22 @@
       "permanent": true
     },
     {
+      "source": "/nibrasnote/:lang(en|tr|ar|ru)/",
+      "destination": "/:lang/apps/nibras-note",
+      "permanent": true
+    },
+    {
       "source": "/nibrasnote/:file(index.html)?",
       "destination": "/apps/nibras-note",
       "permanent": true
     },
     {
       "source": "/nibrasnote",
+      "destination": "/apps/nibras-note",
+      "permanent": true
+    },
+    {
+      "source": "/nibrasnote/",
       "destination": "/apps/nibras-note",
       "permanent": true
     },
@@ -102,12 +142,22 @@
       "permanent": true
     },
     {
+      "source": "/nibrasarabic/:lang(en|tr|ar|ru)/",
+      "destination": "/:lang/apps/nibras-arabic",
+      "permanent": true
+    },
+    {
       "source": "/nibrasarabic/:file(index.html)?",
       "destination": "/apps/nibras-arabic",
       "permanent": true
     },
     {
       "source": "/nibrasarabic",
+      "destination": "/apps/nibras-arabic",
+      "permanent": true
+    },
+    {
+      "source": "/nibrasarabic/",
       "destination": "/apps/nibras-arabic",
       "permanent": true
     },
@@ -122,12 +172,22 @@
       "permanent": true
     },
     {
+      "source": "/nibrasdocs/:lang(en|tr|ar|ru)/",
+      "destination": "/:lang/apps/nibras-docs",
+      "permanent": true
+    },
+    {
       "source": "/nibrasdocs/:file(index.html)?",
       "destination": "/apps/nibras-docs",
       "permanent": true
     },
     {
       "source": "/nibrasdocs",
+      "destination": "/apps/nibras-docs",
+      "permanent": true
+    },
+    {
+      "source": "/nibrasdocs/",
       "destination": "/apps/nibras-docs",
       "permanent": true
     },
@@ -142,12 +202,22 @@
       "permanent": true
     },
     {
+      "source": "/nibrasqr/:lang(en|tr|ar|ru)/",
+      "destination": "/:lang/apps/nibras-qr",
+      "permanent": true
+    },
+    {
       "source": "/nibrasqr/:file(index.html)?",
       "destination": "/apps/nibras-qr",
       "permanent": true
     },
     {
       "source": "/nibrasqr",
+      "destination": "/apps/nibras-qr",
+      "permanent": true
+    },
+    {
+      "source": "/nibrasqr/",
       "destination": "/apps/nibras-qr",
       "permanent": true
     },
@@ -162,12 +232,22 @@
       "permanent": true
     },
     {
+      "source": "/nibrasscan/:lang(en|tr|ar|ru)/",
+      "destination": "/:lang/apps/nibras-scan",
+      "permanent": true
+    },
+    {
       "source": "/nibrasscan/:file(index.html)?",
       "destination": "/apps/nibras-scan",
       "permanent": true
     },
     {
       "source": "/nibrasscan",
+      "destination": "/apps/nibras-scan",
+      "permanent": true
+    },
+    {
+      "source": "/nibrasscan/",
       "destination": "/apps/nibras-scan",
       "permanent": true
     },
@@ -308,6 +388,11 @@
     },
     {
       "source": "/nibras-ai.html",
+      "destination": "/ai",
+      "permanent": true
+    },
+    {
+      "source": "/nibras-ai.html/",
       "destination": "/ai",
       "permanent": true
     },
@@ -628,7 +713,17 @@
       "permanent": false
     },
     {
+      "source": "/nibrasnova/",
+      "destination": "/nibrasnova/",
+      "permanent": false
+    },
+    {
       "source": "/nibras-nova",
+      "destination": "/nibrasnova/",
+      "permanent": false
+    },
+    {
+      "source": "/nibras-nova/",
       "destination": "/nibrasnova/",
       "permanent": false
     }
