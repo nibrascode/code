@@ -278,7 +278,7 @@ export function barItems(lang: Lang): Record<BarGroup, ReactElement[]> {
 export function BarGroupView({ lang, group, full = false }: { lang: Lang; group: BarGroup; full?: boolean }) {
   const all = barItems(lang)[group];
   const shown = all;
-  const lay = group === "g1" ? "list" : "tiles";
+  const lay = "list";
   return (
     <div className={`nx-bar-group nx-bar-group--${GROUP_CLASS[group]}${full ? "" : ` nx-c nx-c--${lay}`}`}>
       {full ? null : <><h2 className="nx-bar-group-title">{BAR_GROUPS[group][lang]}</h2>{" "}</>}
