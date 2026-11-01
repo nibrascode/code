@@ -2,6 +2,14 @@
 
 > Long-form companion to https://nibrascode.com/llms.txt. Free, ad-free, no-account browser tools (PDF, QR, image) and Android apps by Mahir Aliyev, in Azerbaijani, English, Turkish, Arabic and Russian. Files in browser tools are processed on the user's device and are not uploaded.
 
+## Languages / Dillər / Diller / اللغات / Языки
+- Azərbaycan dili (az): https://nibrascode.com/llms-full-az.txt
+- English (en): https://nibrascode.com/llms-full-en.txt
+- Türkçe (tr): https://nibrascode.com/llms-full-tr.txt
+- العربية (ar): https://nibrascode.com/llms-full-ar.txt
+- Русский (ru): https://nibrascode.com/llms-full-ru.txt
+- Short versions: https://nibrascode.com/llms-az.txt · https://nibrascode.com/llms-en.txt · https://nibrascode.com/llms-tr.txt · https://nibrascode.com/llms-ar.txt · https://nibrascode.com/llms-ru.txt
+
 Machine-readable catalog: https://nibrascode.com/tools.json
 
 ## Measurable facts

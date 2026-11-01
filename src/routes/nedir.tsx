@@ -121,7 +121,7 @@ export function NedirPage() {
                 <a href={localeHref(lang, href)}>{label}</a> ·{" "}
               </span>
             ))}
-            <a href="/llms.txt">llms.txt</a>
+            <a href="/llms.txt">llms.txt</a> · <a href={`/llms-${lang}.txt`}>{`llms-${lang}.txt`}</a>
           </p>
         </InfoCard>
         <InfoCard icon={Mail}>

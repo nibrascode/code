@@ -67,5 +67,13 @@
 - FAQ: https://nibrascode.com/faq (English: https://nibrascode.com/en/faq)
 - What is Nibras Code: https://nibrascode.com/nedir (English: https://nibrascode.com/en/nedir)
 
-## Other languages
+## Other languages (site)
 - English: https://nibrascode.com/en · Turkish: https://nibrascode.com/tr · Arabic: https://nibrascode.com/ar · Russian: https://nibrascode.com/ru
+
+## Languages / Dillər / Diller / اللغات / Языки
+- Azərbaycan dili (az): https://nibrascode.com/llms-az.txt
+- English (en): https://nibrascode.com/llms-en.txt
+- Türkçe (tr): https://nibrascode.com/llms-tr.txt
+- العربية (ar): https://nibrascode.com/llms-ar.txt
+- Русский (ru): https://nibrascode.com/llms-ru.txt
+- Condensed full maps: https://nibrascode.com/llms-full-az.txt · https://nibrascode.com/llms-full-en.txt · https://nibrascode.com/llms-full-tr.txt · https://nibrascode.com/llms-full-ar.txt · https://nibrascode.com/llms-full-ru.txt

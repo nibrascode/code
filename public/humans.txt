@@ -11,3 +11,4 @@ Principles: free, no ads, no account; browser tools process files on your device
 Standards: HTML5, CSS3, TypeScript, React, TanStack Router, Vite
 Hosting: Vercel
 AI map: https://nibrascode.com/llms.txt
+AI map by language: https://nibrascode.com/llms-az.txt · https://nibrascode.com/llms-en.txt · https://nibrascode.com/llms-tr.txt · https://nibrascode.com/llms-ar.txt · https://nibrascode.com/llms-ru.txt
