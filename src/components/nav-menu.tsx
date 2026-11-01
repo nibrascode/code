@@ -51,7 +51,7 @@ export function NavMenu({ section }: { section: LibrarySection }) {
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
-      <a href={localeHref(lang, path)}>{t(page.title)}</a>
+      <a href={localeHref(lang, path)}>{t(page.title)}</a>{" "}
       <button type="button" aria-expanded={open} aria-label={t(page.title)} onClick={() => setOpen((value) => !value)}>
         <ChevronDown className={cn("nav-chev", open && "is-open")} />
       </button>
@@ -76,12 +76,12 @@ export function NavMenu({ section }: { section: LibrarySection }) {
           })}
           {section === "programming" ? (
             <>
-              <a href={searchPath(lang, "soz")}>{SEARCH.soz.heading[lang]}</a>
-              <a href={searchPath(lang, "xeta")}>{SEARCH.xeta.heading[lang]}</a>
-              <a href={searchPath(lang, "movzu")}>{SEARCH.movzu.heading[lang]}</a>
-              <a href={searchPath(lang, "nece")}>{SEARCH.nece.heading[lang]}</a>
-              <a href={paketPath(lang)}>{PAKET.heading[lang]}</a>
-              <a href={comparePath(lang)}>{COMPARE.heading[lang]}</a>
+              <a href={searchPath(lang, "soz")}>{SEARCH.soz.heading[lang]}</a>{" "}
+              <a href={searchPath(lang, "xeta")}>{SEARCH.xeta.heading[lang]}</a>{" "}
+              <a href={searchPath(lang, "movzu")}>{SEARCH.movzu.heading[lang]}</a>{" "}
+              <a href={searchPath(lang, "nece")}>{SEARCH.nece.heading[lang]}</a>{" "}
+              <a href={paketPath(lang)}>{PAKET.heading[lang]}</a>{" "}
+              <a href={comparePath(lang)}>{COMPARE.heading[lang]}</a>{" "}
               <a href={programmingLocalePath(lang, CODE_SAMPLE_HUB)}>{t("code_samples")}</a>
             </>
           ) : null}

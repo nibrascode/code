@@ -39,16 +39,16 @@ export function FaqView({ page }: { page: FaqCopy }) {
       <p className="eyebrow">
         <i />
         Nibras Code
-      </p>
-      <h1>{page.heading}</h1>
-      <p className="why-lead">{page.intro}</p>
+      </p>{" "}
+      <h1>{page.heading}</h1>{" "}
+      <p className="why-lead">{page.intro}</p>{" "}
       <nav className="faq-links" aria-label={page.heading}>
         {page.links.map((link) => (
           <a key={link.href} href={link.href}>
             {link.label}
           </a>
         ))}
-      </nav>
+      </nav>{" "}
       <div className="prog-sections">
         {page.items.map((item) => (
           <details key={item.id} id={item.id} className="prog-fold">
@@ -60,7 +60,7 @@ export function FaqView({ page }: { page: FaqCopy }) {
             </div>
           </details>
         ))}
-      </div>
+      </div>{" "}
       <WhyTable lang={page.lang} />
     </main>
   );
@@ -75,11 +75,11 @@ export function FaqTopic({ page, item }: { page: FaqCopy; item: FaqItem }) {
       <p className="eyebrow">
         <i />
         <a href={page.path}>{page.heading}</a>
-      </p>
-      <h1>{item.q}</h1>
+      </p>{" "}
+      <h1>{item.q}</h1>{" "}
       <div className="why-lead">
         <FaqBody item={item} />
-      </div>
+      </div>{" "}
       <nav className="faq-links" aria-label={page.heading}>
         {related ? (
           <a href={related} {...(related.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
@@ -91,7 +91,7 @@ export function FaqTopic({ page, item }: { page: FaqCopy; item: FaqItem }) {
             {link.label}
           </a>
         ))}
-      </nav>
+      </nav>{" "}
       <InfoCards>
         {others.map((entry) => (
           <InfoCard key={entry.id} icon={HelpCircle} title={entry.q} href={faqTopicPath(page.lang, faqSlug(entry.id))} />

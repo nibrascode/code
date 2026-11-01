@@ -99,11 +99,11 @@ export function SiteFooter() {
         <a className="footer-faq" href={gamePath(lang)}>
           {lang === "ar" ? "ألعاب" : lang === "ru" ? "Игры" : lang === "en" ? "Games" : "Oyunlar"}
         </a>
-      </nav>
+      </nav>{" "}
       <div className="footer-end">
-        <span className="footer-domain">{t("footer_domain")}</span>
+        <span className="footer-domain">{t("footer_domain")}</span>{" "}
         <span className="footer-year">©2026</span>
-      </div>
+      </div>{" "}
       <SiteLegal />
     </footer>
   );
@@ -144,7 +144,7 @@ export function SiteLegal() {
   const copy = LEGAL[lang];
   return (
     <div className="site-legal">
-      <SocialIcons />
+      <SocialIcons />{" "}
       <nav aria-label={copy.contact}>
         <a href={localeHref(lang, "/about")}>{copy.about}</a>{" "}
         <a href={localeHref(lang, "/contact")}>{copy.contact}</a>{" "}

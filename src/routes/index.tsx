@@ -1,6 +1,6 @@
 import { DeviceCheck } from "@/components/device-check";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { ArrowUpRight, BadgeCheck, RefreshCw, Shield, Zap } from "lucide-react";
 import { AppSuggest } from "@/components/app-suggest";
 import { TechMark } from "@/components/tech-marquee";
@@ -304,46 +304,46 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
     <main className="nx">
       <header className="nx-nav">
         <Link to={homePath(lang)} className="nx-brand" aria-label="Nibras Code">
-          <Logo />
+          <Logo />{" "}
           <span>
             Nibras <em>Code</em>
           </span>
-        </Link>
+        </Link>{" "}
         <nav className="nx-links">
-          <a href={groupLocalePath(lang, "g1")} data-testid="home-nav-tools">{BAR_GROUPS.g1[lang]}</a>
-          <a href={localeHref(lang, "/about")}>{t("nav_about")}</a>
-          <a href={localeHref(lang, "/unutma")}>{t("remind_btn")}</a>
-          <a href={localeHref(lang, "/contact")}>{t("nx_nav_contact")}</a>
+          <a href={groupLocalePath(lang, "g1")} data-testid="home-nav-tools">{BAR_GROUPS.g1[lang]}</a>{" "}
+          <a href={localeHref(lang, "/about")}>{t("nav_about")}</a>{" "}
+          <a href={localeHref(lang, "/unutma")}>{t("remind_btn")}</a>{" "}
+          <a href={localeHref(lang, "/contact")}>{t("nx_nav_contact")}</a>{" "}
           <LanguageSwitch />
         </nav>
       </header>
 
       <section className="nx-hero">
-        <HomeDrift />
+        <HomeDrift />{" "}
         <div className="nx-hero-copy">
-          <h1 className="nx-kicker">{t("nx_kicker")}</h1>
-          <p>{t("nx_lead")}</p>
-          <p>{t("nx_no_ads")}</p>
+          <h1 className="nx-kicker">{t("nx_kicker")}</h1>{" "}
+          <p>{t("nx_lead")}</p>{" "}
+          <p>{t("nx_no_ads")}</p>{" "}
           <div className="nx-actions">
             <a className="nx-cta" href={localeHref(lang, "/apps")}>
               {t("b_hero_cta")}
               <ArrowUpRight className="size-4" />
-            </a>
+            </a>{" "}
             <a href={localeHref(lang, "/services")} className="nx-ghost">
               {SERVICES_LABEL[lang]}
               <ArrowUpRight className="size-4" />
-            </a>
+            </a>{" "}
             <a href={localeHref(lang, "/about")} className="nx-ghost">
               {t("nav_about")}
               <ArrowUpRight className="size-4" />
             </a>
-          </div>
+          </div>{" "}
           <div className="nx-bars">
-            <BarGroupView lang={lang} group="g1" />
-            <BarGroupView lang={lang} group="g2" />
+            <BarGroupView lang={lang} group="g1" />{" "}
+            <BarGroupView lang={lang} group="g2" />{" "}
             <BarGroupView lang={lang} group="g3" />
           </div>
-        </div>
+        </div>{" "}
         <div className="nx-stage">
           <HeroMark />
         </div>
@@ -362,9 +362,9 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
               <i className="is-gold" />
               <i />
               <i className="is-green" />
-            </span>
+            </span>{" "}
             <span>
-              <em className="nx-status">{GAME_VERSION}</em>
+              <em className="nx-status">{GAME_VERSION}</em>{" "}
               <b>{GAME_COPY.heading[lang]}</b>
             </span>
           </span>
@@ -381,7 +381,7 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
       </section>
 
       <section className="nx-apps" id="apps">
-        <p className="nx-kicker">{t("nx_apps_k")}</p>
+        <p className="nx-kicker">{t("nx_apps_k")}</p>{" "}
         <div className="nx-grid">
           {cards.map(({ card, live }) => {
             const badge = appStatusLabel(card.slug, lang);
@@ -394,31 +394,30 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
                   <span className="nx-card-top">
                     <span className="nx-ico">
                       <img src={live?.icon_url || card.icon} alt="" width={52} height={52} loading="lazy" decoding="async" />
-                    </span>
+                    </span>{" "}
                     <span>
-                      {badge ? <em className="nx-status">{badge}</em> : null}
+                      {badge ? <><em className="nx-status">{badge}</em>{" "}</> : null}
                       <b>{card.name}</b>
                     </span>
-                  </span>
+                  </span>{" "}
                   <span className="nx-chips">
                     {card.chips.map((chip) => (
-                      <em key={chip}>{t(chip)}</em>
+                      <Fragment key={chip}><em>{t(chip)}</em>{" "}</Fragment>
                     ))}
-                  </span>
+                  </span>{" "}
                   <ArrowUpRight className="nx-go" />
-                </a>
+                </a>{" "}
                 {stores.length ? (
                   <span className="nx-card-stores">
                     {stores.map((store) => (
-                      <a
-                        key={store.id}
+                      <Fragment key={store.id}><a
                         className={`nx-store-btn nx-store-${store.id}`}
                         href={store.href}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
                         {store.label}
-                      </a>
+                      </a>{" "}</Fragment>
                     ))}
                   </span>
                 ) : null}
@@ -426,35 +425,35 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
             );
           })}
           {extras.map((row) => (
-            <a key={row.slug} href={localeHref(lang, `/apps/${row.slug}`)} className="nx-card">
+            <Fragment key={row.slug}><a href={localeHref(lang, `/apps/${row.slug}`)} className="nx-card">
               <span className="nx-card-top">
                 <span className="nx-ico">
                   <img src={row.icon_url || "/nibras-icon.webp"} alt="" width={52} height={52} loading="lazy" decoding="async" />
-                </span>
+                </span>{" "}
                 <span>
                   {statusText(row.status, null, labels) ? (
-                    <em className="nx-status">{statusText(row.status, null, labels)}</em>
+                    <><em className="nx-status">{statusText(row.status, null, labels)}</em>{" "}</>
                   ) : null}
                   <b>{row.name}</b>
                 </span>
-              </span>
+              </span>{" "}
               <ArrowUpRight className="nx-go" />
-            </a>
+            </a>{" "}</Fragment>
           ))}
         </div>
       </section>
 
       <section className="nx-apps">
-        <p className="nx-kicker">{APK_HELP[lang]}</p>
+        <p className="nx-kicker">{APK_HELP[lang]}</p>{" "}
         <DeviceCheck lang={lang} />
         <nav className="faq-links" aria-label={APK_HELP[lang]}>
           {XETA_LINKS.map((slug) => {
             const item = SEARCH.xeta.items.find((entry) => entry.slug === slug);
             if (!item) return null;
             return (
-              <a key={slug} href={searchTopicPath(lang, "xeta", slug)}>
+              <Fragment key={slug}><a href={searchTopicPath(lang, "xeta", slug)}>
                 {item.piece[lang].title}
-              </a>
+              </a>{" "}</Fragment>
             );
           })}
         </nav>
@@ -463,45 +462,45 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
       <section className="nx-split">
         <div className="nx-why">
           <div>
-            <p className="nx-kicker">{t("nx_why_k")}</p>
+            <p className="nx-kicker">{t("nx_why_k")}</p>{" "}
             <h2>
-              {t("nx_why_a")}
+              {t("nx_why_a")}{" "}
               <span>{t("nx_why_b")}</span>
-            </h2>
-            <p>{t("nx_why_p")}</p>
+            </h2>{" "}
+            <p>{t("nx_why_p")}</p>{" "}
             <a className="nx-cta" href={localeHref(lang, "/apps")}>
               {t("b_hero_cta")}
               <ArrowUpRight className="size-4" />
             </a>
-          </div>
+          </div>{" "}
           <ul>
             <li>
-              <Zap />
-              <b>{t("nx_w1t")}</b>
+              <Zap />{" "}
+              <b>{t("nx_w1t")}</b>{" "}
               <span>{t("nx_w1d")}</span>
-            </li>
+            </li>{" "}
             <li>
-              <Shield />
-              <b>{t("nx_w2t")}</b>
+              <Shield />{" "}
+              <b>{t("nx_w2t")}</b>{" "}
               <span>{t("nx_w2d")}</span>
-            </li>
+            </li>{" "}
             <li>
-              <BadgeCheck />
-              <b>{t("nx_w3t")}</b>
+              <BadgeCheck />{" "}
+              <b>{t("nx_w3t")}</b>{" "}
               <span>{t("nx_w3d")}</span>
-            </li>
+            </li>{" "}
             <li>
-              <RefreshCw />
-              <b>{t("nx_w4t")}</b>
+              <RefreshCw />{" "}
+              <b>{t("nx_w4t")}</b>{" "}
               <span>{t("nx_w4d")}</span>
             </li>
           </ul>
-        </div>
+        </div>{" "}
         <aside className="nx-who">
-          <p className="nx-kicker">{t("nx_who_k")}</p>
-          <p>{t("nx_who_1")}</p>
-          <p>{t("nx_who_2")}</p>
-          <p>{t("nx_who_3")}</p>
+          <p className="nx-kicker">{t("nx_who_k")}</p>{" "}
+          <p>{t("nx_who_1")}</p>{" "}
+          <p>{t("nx_who_2")}</p>{" "}
+          <p>{t("nx_who_3")}</p>{" "}
           <p className="nx-verse" lang="ar" dir="rtl">
             {t("remind_verse")}
           </p>
@@ -510,24 +509,24 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
 
       <footer className="nx-foot">
         <nav className="nx-foot-extra">
-          <NavMenu section="resources" />
+          <NavMenu section="resources" />{" "}
           <NavMenu section="guides" />
           <a className="footer-faq" href={searchPath(lang, "movzu")}>
             {SEARCH.movzu.heading[lang]}
-          </a>
+          </a>{" "}
           <a className="footer-faq" href={faqPath(lang)}>
             {t("faq_nav")}
-          </a>
+          </a>{" "}
           <a className="footer-faq" href={gamePath(lang)}>
             {lang === "ar" ? "ألعاب" : lang === "ru" ? "Игры" : lang === "en" ? "Games" : "Oyunlar"}
-          </a>
-          <NavMenu section="programming" />
+          </a>{" "}
+          <NavMenu section="programming" />{" "}
           <a className="footer-faq" href={localeHref(lang, "/unknown")}>
             {BAR.unknown[lang]}
           </a>
-        </nav>
-        <AppSuggest />
-        <SiteLegal />
+        </nav>{" "}
+        <AppSuggest />{" "}
+        <SiteLegal />{" "}
         <p className="nx-copy">© 2026 Nibras Code. {t("nx_rights")}</p>
       </footer>
     </main>
