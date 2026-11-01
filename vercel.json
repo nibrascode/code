@@ -572,6 +572,15 @@
           "value": "noindex, nofollow"
         }
       ]
+    },
+    {
+      "source": "/((?!assets/|api/|_build/)(?!.*\\.[A-Za-z0-9]{1,8}$).*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        }
+      ]
     }
   ],
   "functions": {
