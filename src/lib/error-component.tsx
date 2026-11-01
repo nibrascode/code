@@ -25,6 +25,19 @@ export function AppErrorComponent({ error }: ErrorComponentProps) {
     window.location.reload();
   }, [message]);
 
+  useEffect(() => {
+    // Keep crawlers from indexing the error screen as page content.
+    const m = document.createElement("meta");
+    m.name = "robots";
+    m.content = "noindex, nosnippet";
+    document.head.appendChild(m);
+    return () => m.remove();
+  }, []);
+
+  if (CHUNK_ERROR.test(message)) {
+    return <main data-nosnippet="" aria-busy="true" className="min-h-screen bg-zinc-950" />;
+  }
+
   return (
     <main
       data-nosnippet=""
@@ -38,7 +51,7 @@ export function AppErrorComponent({ error }: ErrorComponentProps) {
       </span>
       <h1 className="text-lg font-semibold">Something went wrong</h1>
       <p className="max-w-md text-sm break-words text-zinc-500 dark:text-zinc-400">
-        {CHUNK_ERROR.test(message) ? "A new version is available. Reload the page." : message}
+        {message.length > 140 ? FALLBACK_MESSAGE : message}
       </p>
       <button
         type="button"

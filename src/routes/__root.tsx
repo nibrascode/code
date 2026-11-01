@@ -77,7 +77,7 @@ export const Route = createRootRoute({
         },
         {
           children:
-            "addEventListener('vite:preloadError',function(e){try{var k='nx-preload-reload',t=+sessionStorage.getItem(k)||0;if(Date.now()-t<30000)return;sessionStorage.setItem(k,String(Date.now()));e.preventDefault();location.reload();}catch(_){}});if('serviceWorker'in navigator)addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){});});",
+            "addEventListener('vite:preloadError',function(e){try{var k='nx-preload-reload',t=+sessionStorage.getItem(k)||0;if(Date.now()-t<30000)return;sessionStorage.setItem(k,String(Date.now()));e.preventDefault();location.reload();}catch(_){}});var nxR=/dynamically imported module|Importing a module script failed/i,nxF=function(m){try{if(!nxR.test(m||''))return;var k='nx-preload-reload',t=+sessionStorage.getItem(k)||0;if(Date.now()-t<30000)return;sessionStorage.setItem(k,String(Date.now()));location.reload();}catch(_){}};addEventListener('unhandledrejection',function(e){nxF(e.reason&&e.reason.message||String(e.reason))});addEventListener('error',function(e){nxF(e.message)});if('serviceWorker'in navigator)addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){});});",
         },
         ...seo.scripts,
       ],
