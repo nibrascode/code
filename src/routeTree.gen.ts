@@ -164,6 +164,7 @@ import { Route as NeceSlugRouteImport } from './routes/nece.$slug'
 import { Route as OyunSlugRouteImport } from './routes/oyun.$slug'
 import { Route as PdfToolRouteImport } from './routes/pdf_.$tool'
 import { Route as PrivacySlugRouteImport } from './routes/privacy/$slug'
+import { Route as PrivacyMushafukRouteImport } from './routes/privacy.mushafuk'
 import { Route as PrivacyNibrasNoteRouteImport } from './routes/privacy.nibras-note'
 import { Route as PrivacyNibrasNovaRouteImport } from './routes/privacy.nibras-nova'
 import { Route as PrivacyNibrasPdfRouteImport } from './routes/privacy.nibras-pdf'
@@ -1113,6 +1114,11 @@ const PdfToolRoute = PdfToolRouteImport.update({
 const PrivacySlugRoute = PrivacySlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
+  getParentRoute: () => PrivacyRoute,
+} as any)
+const PrivacyMushafukRoute = PrivacyMushafukRouteImport.update({
+  id: '/mushafuk',
+  path: '/mushafuk',
   getParentRoute: () => PrivacyRoute,
 } as any)
 const PrivacyNibrasNoteRoute = PrivacyNibrasNoteRouteImport.update({
@@ -2147,6 +2153,7 @@ export interface FileRoutesByFullPath {
   '/oyun/$slug': typeof OyunSlugRoute
   '/pdf/$tool': typeof PdfToolRoute
   '/privacy/$slug': typeof PrivacySlugRoute
+  '/privacy/mushafuk': typeof PrivacyMushafukRoute
   '/privacy/nibras-note': typeof PrivacyNibrasNoteRoute
   '/privacy/nibras-nova': typeof PrivacyNibrasNovaRoute
   '/privacy/nibras-pdf': typeof PrivacyNibrasPdfRoute
@@ -2478,6 +2485,7 @@ export interface FileRoutesByTo {
   '/oyun/$slug': typeof OyunSlugRoute
   '/pdf/$tool': typeof PdfToolRoute
   '/privacy/$slug': typeof PrivacySlugRoute
+  '/privacy/mushafuk': typeof PrivacyMushafukRoute
   '/privacy/nibras-note': typeof PrivacyNibrasNoteRoute
   '/privacy/nibras-nova': typeof PrivacyNibrasNovaRoute
   '/privacy/nibras-pdf': typeof PrivacyNibrasPdfRoute
@@ -2811,6 +2819,7 @@ export interface FileRoutesById {
   '/oyun/$slug': typeof OyunSlugRoute
   '/pdf_/$tool': typeof PdfToolRoute
   '/privacy/$slug': typeof PrivacySlugRoute
+  '/privacy/mushafuk': typeof PrivacyMushafukRoute
   '/privacy/nibras-note': typeof PrivacyNibrasNoteRoute
   '/privacy/nibras-nova': typeof PrivacyNibrasNovaRoute
   '/privacy/nibras-pdf': typeof PrivacyNibrasPdfRoute
@@ -3145,6 +3154,7 @@ export interface FileRouteTypes {
     | '/oyun/$slug'
     | '/pdf/$tool'
     | '/privacy/$slug'
+    | '/privacy/mushafuk'
     | '/privacy/nibras-note'
     | '/privacy/nibras-nova'
     | '/privacy/nibras-pdf'
@@ -3476,6 +3486,7 @@ export interface FileRouteTypes {
     | '/oyun/$slug'
     | '/pdf/$tool'
     | '/privacy/$slug'
+    | '/privacy/mushafuk'
     | '/privacy/nibras-note'
     | '/privacy/nibras-nova'
     | '/privacy/nibras-pdf'
@@ -3808,6 +3819,7 @@ export interface FileRouteTypes {
     | '/oyun/$slug'
     | '/pdf_/$tool'
     | '/privacy/$slug'
+    | '/privacy/mushafuk'
     | '/privacy/nibras-note'
     | '/privacy/nibras-nova'
     | '/privacy/nibras-pdf'
@@ -5141,6 +5153,13 @@ declare module '@tanstack/react-router' {
       path: '/$slug'
       fullPath: '/privacy/$slug'
       preLoaderRoute: typeof PrivacySlugRouteImport
+      parentRoute: typeof PrivacyRoute
+    }
+    '/privacy/mushafuk': {
+      id: '/privacy/mushafuk'
+      path: '/mushafuk'
+      fullPath: '/privacy/mushafuk'
+      preLoaderRoute: typeof PrivacyMushafukRouteImport
       parentRoute: typeof PrivacyRoute
     }
     '/privacy/nibras-note': {
@@ -6865,6 +6884,7 @@ const OyunRouteWithChildren = OyunRoute._addFileChildren(OyunRouteChildren)
 
 interface PrivacyRouteChildren {
   PrivacySlugRoute: typeof PrivacySlugRoute
+  PrivacyMushafukRoute: typeof PrivacyMushafukRoute
   PrivacyNibrasNoteRoute: typeof PrivacyNibrasNoteRoute
   PrivacyNibrasNovaRoute: typeof PrivacyNibrasNovaRoute
   PrivacyNibrasPdfRoute: typeof PrivacyNibrasPdfRoute
@@ -6875,6 +6895,7 @@ interface PrivacyRouteChildren {
 
 const PrivacyRouteChildren: PrivacyRouteChildren = {
   PrivacySlugRoute: PrivacySlugRoute,
+  PrivacyMushafukRoute: PrivacyMushafukRoute,
   PrivacyNibrasNoteRoute: PrivacyNibrasNoteRoute,
   PrivacyNibrasNovaRoute: PrivacyNibrasNovaRoute,
   PrivacyNibrasPdfRoute: PrivacyNibrasPdfRoute,

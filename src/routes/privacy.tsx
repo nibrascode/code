@@ -138,6 +138,7 @@ const APPS = [
   ["nibras-nova", "Nibras Nova"],
   ["nibras-docs", "Nibras Docs"],
   ["nibras-plans", "Nibras Plans"],
+  ["mushafuk", "Mushafuk"],
 ] as const;
 
 export const Route = createFileRoute("/privacy")({
