@@ -1,0 +1,334 @@
+# Nibras Code — full text map (llms-full.txt)
+
+> Long-form companion to https://nibrascode.com/llms.txt. Free, ad-free, no-account browser tools (PDF, QR, image) and Android apps by Mahir Aliyev, in Azerbaijani, English, Turkish, Arabic and Russian. Files in browser tools are processed on the user's device and are not uploaded.
+
+Machine-readable catalog: https://nibrascode.com/tools.json
+
+## Measurable facts
+- Web PDF tools: 35
+- Languages: 5 (az, en, tr, ar, ru)
+- Ads: 0 · Account required: no · Bytes uploaded by PDF/QR/image tools: 0
+- Nibras PDF Android app: 18 tools (Google Play: com.nibras.pdf)
+- Nibras Arabic Android app: v1.2.1, Android 7.0+, offline (Google Play: com.nibrasarabic.app)
+
+## PDF tools (35)
+
+### Simple PDF editor — https://nibrascode.com/en/pdf/write-pdf
+Type or pick a template: application letter, simple CV, explanatory note, price quote. Azerbaijani: «Sadə PDF düzəlt» https://nibrascode.com/pdf/write-pdf
+The simple PDF editor web page is the web version of a tool from the Nibras PDF Android app, available at nibrascode.com/pdf. It is completely free, requires no account, and processes all files directly in your browser so they never leave your device.
+This approach ensures maximum privacy and convenience for everyday document tasks. By handling everything locally on your hardware, you can quickly modify your files without uploading them to external servers, making it ideal for both personal and work documents.
+- Q: Is this PDF tool free to use? A: Yes, the tool is entirely free and available to anyone visiting the webpage without any charges.
+- Q: Do I need to create an account? A: No account or registration is required to access and use the editor on the website.
+- Q: Where are my files processed? A: All files are processed locally in your browser, meaning they never leave your device and remain completely private.
+
+### Merge — https://nibrascode.com/en/pdf/merge
+Combine multiple PDFs into one file. Azerbaijani: «Birləşdir» https://nibrascode.com/pdf/merge
+Merge (PDF tool) is a free web utility available on nibrascode.com. It is the web version of a tool from the Nibras PDF Android app, designed to combine multiple documents into a single file directly in your browser. The service requires no account and operates entirely offline in terms of file transmission, ensuring your documents remain private.
+People need this functionality when they manage fragmented paperwork, invoices, or scanned pages that must be presented or stored as a unified document. Conceptually, the tool reads the input files locally via browser scripts and concatenates their internal structural data sequentially into a single output file without sending anything to external servers.
+- Q: Is this tool completely free to use? A: Yes, the service is entirely free of charge with no hidden costs, subscriptions, or premium tiers required for basic operations.
+- Q: Are my files secure during processing? A: Yes, all processing occurs locally within your browser. Your files never leave your device, ensuring complete privacy and data security.
+- Q: Do I need to create an account? A: No account or registration is required. You can access and use the tool immediately without providing any personal information.
+
+### Split — https://nibrascode.com/en/pdf/split
+Separate pages into individual files. Azerbaijani: «Böl» https://nibrascode.com/pdf/split
+The Split tool is a web-based utility designed to separate pages of PDF documents into individual files. As the web version of the Nibras PDF Android app, it is available at nibrascode.com/pdf. The service is entirely free and does not require a user account. All processing occurs locally within your browser, ensuring that your files never leave your device.
+This tool is useful when you need to extract specific pages from a large document or organize content into smaller segments. Whether you are isolating a single page from a report or breaking down a long document, the tool processes the structure of the file to generate independent pages. This local approach ensures privacy while maintaining a straightforward workflow for document management.
+- Q: Are files uploaded to a server? A: No, all processing happens directly in your browser. Your files never leave your device and are not transmitted over the internet to any server, ensuring your data remains private and secure at all times.
+- Q: Do I need an account to use this? A: No, you do not need to create an account or sign in to use this tool. You can access the website and start processing your PDF files immediately without any registration requirements.
+- Q: Is this service free? A: Yes, this tool is completely free to use. As a web version of the Nibras PDF Android app, it provides all its features without any costs or hidden fees for the user.
+
+### Compress — https://nibrascode.com/en/pdf/compress
+Reduce the file size. Azerbaijani: «Sıxışdır» https://nibrascode.com/pdf/compress
+This tool is a web-based utility designed to reduce the file size of PDF documents. It serves as the web version of the functionality found in the Nibras PDF Android app and is available at nibrascode.com/pdf. The service is entirely free, requires no user account, and ensures that all processing occurs locally within the web browser.
+Users often need to reduce file sizes to meet email attachment limits or to save storage space on their devices. The tool optimizes the internal structure of the document to decrease its footprint. Since files do not leave the device during processing, this method ensures privacy and allows for efficient document management without external server dependencies.
+- Q: Are my files uploaded to a server? A: No, all processing happens directly in your browser. Your files never leave your device, ensuring that your data remains private and secure throughout the entire compression process.
+- Q: Do I need an account to use this tool? A: No, there is no account required to use this service. You can access the tool on the website and begin processing your documents immediately without any registration.
+- Q: Is this service free to use? A: Yes, this tool is provided completely free of charge at nibrascode.com. There are no hidden fees or subscriptions required to reduce the size of your PDF files.
+
+### Image to PDF — https://nibrascode.com/en/pdf/image-pdf
+Add one or more images to a PDF document. Azerbaijani: «Şəkildən PDF» https://nibrascode.com/pdf/image-pdf
+Image to PDF (PDF tool) is the web version of a utility from the Nibras PDF Android app, available on nibrascode.com/pdf. It is completely free and requires no account creation. All files are processed locally in your web browser and never leave your device, ensuring total privacy.
+Users need this tool when they want to combine multiple visual files into a single document. The underlying concept relies on client-side processing, meaning computations occur directly on your hardware without uploading data to external servers, which keeps the workflow secure and private.
+- Q: Is this tool free to use? A: Yes, the service is completely free with no hidden charges or subscriptions required.
+- Q: Do I need to create an account? A: No registration or user account is needed to access and use this tool.
+- Q: Are my files secure? A: Yes, all processing occurs entirely within your browser, meaning your files never leave your device.
+
+### PDF to image — https://nibrascode.com/en/pdf/pdf-image
+Save pages as images. Azerbaijani: «PDF-dən şəkil» https://nibrascode.com/pdf/pdf-image
+This tool converts PDF document pages into digital image files. It is the web version of the Nibras PDF Android app, available on nibrascode.com for free without requiring an account. All processing occurs directly within your browser, ensuring that your files remain on your device and do not leave it, which guarantees data privacy.
+Users need this utility when they wish to save specific PDF pages as standard image formats for easier sharing or editing. This approach allows for the integration of document content into various platforms that do not support native PDF viewing. Technically, each PDF page is rendered from vector data into a pixel-based representation, resulting in independent visual files that preserve the original layout.
+- Q: Are my files uploaded to a server? A: No, all processing happens directly within your browser. Your files do not leave your device and are not transmitted to any server, ensuring complete data security and privacy.
+- Q: Do I need to create an account to use this? A: No, there is no need to register or create an account. The tool is completely free and ready for immediate use; simply upload your file and retrieve the results.
+- Q: How is the quality of the converted images? A: Images are generated to match the original appearance of the PDF pages. The resulting digital visuals ensure a clear and accurate representation of the text and graphics.
+
+### Rotate — https://nibrascode.com/en/pdf/rotate
+Turn the PDF left or right. Azerbaijani: «Dönüştür» https://nibrascode.com/pdf/rotate
+Rotate (PDF tool) is the web version of the utility from the Nibras PDF Android app. This tool allows you to turn PDF documents left or right as needed. The service is completely free and requires no account. Files are processed locally within your browser and never leave your device.
+People typically need this tool when scanned documents or images are oriented incorrectly. Adjusting the rotation is essential for making documents readable and properly aligned. This technology ensures your privacy by handling all processing tasks directly on your device, avoiding the need to upload sensitive files to an external server.
+- Q: Are my files uploaded to a server? A: No, all processing happens locally in your browser. Your files never leave your device, ensuring complete privacy and security during the entire operation.
+- Q: Is this service free to use? A: Yes, this tool is completely free. There are no hidden fees, subscriptions, or payments required to access any of its functions.
+- Q: Do I need to create an account? A: No, you do not need to register or create an account. You can use the tool immediately without providing any personal information.
+
+### Protect — https://nibrascode.com/en/pdf/protect
+Secure with a password. Azerbaijani: «Qoru» https://nibrascode.com/pdf/protect
+Protect (PDF tool) is a free web utility available on nibrascode.com. It serves as the web-based version of a feature from the Nibras PDF Android app, hosted at nibrascode.com/pdf. The application operates entirely within your browser, ensuring complete privacy as your documents are processed locally and never leave your device.
+People use this tool when they need to secure sensitive documents against unauthorized access. The underlying concept relies on applying encryption and password protection directly within the client-side environment. Because the processing occurs locally, your files remain under your control throughout the entire procedure without external transmission.
+- Q: Is this web tool free to use? A: Yes, this utility is completely free and requires no payment or subscription.
+- Q: Are my files uploaded to an external server? A: No, all file processing happens directly inside your browser, meaning your files never leave your device.
+- Q: Do I need to create an account? A: No registration or account is required to use this tool.
+
+### Watermark — https://nibrascode.com/en/pdf/watermark
+Add text or a mark to the document. Azerbaijani: «Su nişanı» https://nibrascode.com/pdf/watermark
+Watermark (PDF tool) is a web-based utility designed to add text or marks to your documents. It serves as the web version of the tool found in the Nibras PDF Android app and is available at nibrascode.com/pdf. The service is free, requires no user account, and processes all files directly within your browser, ensuring that documents never leave your device.
+Users require this tool to protect their intellectual property or to clearly label the status of their documents. Adding a mark helps verify authenticity or denote confidentiality. By using this tool, you can manage your document security and presentation directly from your browser without the need for external software or cloud-based processing, maintaining complete control over your data.
+- Q: Are my files uploaded to a server? A: No, all processing happens locally in your browser. Your files remain on your device and are never transmitted to any external server.
+- Q: Do I need an account to use this? A: No, you do not need to create an account or sign in to use this tool. It is free and accessible to everyone.
+- Q: What is the origin of this tool? A: This is the web version of the PDF tool included in the Nibras PDF Android app, providing the same functionality directly in your web browser.
+
+### Manage pages — https://nibrascode.com/en/pdf/pages
+Delete pages and change their order. Azerbaijani: «Səhifələri idarə et» https://nibrascode.com/pdf/pages
+The page management tool is a browser-based online utility designed to delete specific pages and rearrange their order within PDF documents. As the web version of a tool from the Nibras PDF Android app, it is provided for free on nibrascode.com/pdf. No account is required, and all files are processed entirely within the browser without leaving the user's device.
+This technology performs document processing locally on your device. Files are never uploaded to any external servers, ensuring complete privacy and security for sensitive data. Users can easily organize complex PDF structures, remove unwanted sheets, and adjust the sequence of pages entirely offline within the web interface.
+- Q: Do I need to pay to use this tool? A: No, this tool is completely free to use without any hidden charges.
+- Q: Are my files uploaded to an external server? A: No, all processing happens entirely inside your browser and files never leave your device.
+- Q: Is an account required to manage PDF pages? A: No registration or user account is needed to access and use this feature.
+
+### Scan — https://nibrascode.com/en/pdf/scan
+Turn a document into a PDF with the camera. Azerbaijani: «Skan et» https://nibrascode.com/pdf/scan
+Scan (PDF tool) is the web version of a tool from the Nibras PDF Android app, available on nibrascode.com/pdf. It allows users to turn physical documents into PDF files using the camera directly within the web browser. The service is entirely free and does not require any account creation or registration.
+All file processing is performed locally inside the browser, meaning your files are processed on your device and do not leave it. This ensures privacy and security for your documents. People need this tool whenever they need to digitize paper documents quickly and securely without installing extra desktop software.
+- Q: Is this PDF tool completely free to use? A: Yes, the service is entirely free to use on nibrascode.com with no hidden charges or premium restrictions.
+- Q: Do my files leave my device during processing? A: No, all files are processed locally in your browser, meaning they never leave your device and remain completely private.
+- Q: Do I need to create an account to use this tool? A: No account or registration is required to access and use the tool on the website.
+
+### Add signature — https://nibrascode.com/en/pdf/sign
+Place an electronic signature on a PDF. Azerbaijani: «İmza əlavə et» https://nibrascode.com/pdf/sign
+This tool is the web version of a feature from the Nibras PDF Android app, hosted on nibrascode.com/pdf. It allows users to place an electronic signature on a PDF document. The service is entirely free, requires no user account, and processes files directly in the browser.
+The underlying technology ensures that all file processing happens locally on your hardware. Because files do not leave the device, privacy is maintained during the signing process, making it useful when you need to sign digital documents without uploading them to external servers.
+- Q: Is this service free to use? A: Yes, this tool is completely free with no hidden charges or subscription requirements.
+- Q: Do I need to create an account? A: No account or registration is required to access and use the signing tool.
+- Q: Are my files secure during processing? A: Yes, files are processed directly in your browser and never leave your device.
+
+### Recognize text — https://nibrascode.com/en/pdf/ocr
+Extract text from an image on-device. Azerbaijani: «Mətni tanı» https://nibrascode.com/pdf/ocr
+This tool is a web-based utility designed to extract text from images. As the web version of a feature from the Nibras PDF Android app, it is available at nibrascode.com/pdf. The service is free, requires no account, and ensures privacy because all files are processed locally within your browser, meaning they never leave your device.
+People use this tool when they need to convert printed documents or handwritten notes into editable digital text. Because the technology operates entirely on-device, it provides a secure and efficient way to digitize information without relying on external servers. It is a practical solution for extracting text from images quickly and reliably.
+- Q: Is my data secure? A: Yes, all processing happens directly in your browser. Your files never leave your device and are not uploaded to any server, ensuring your data remains private and secure at all times.
+- Q: Is there a fee for this service? A: No, this tool is completely free to use. There are no subscriptions, hidden costs, or requirements to create an account to access the features.
+- Q: Do I need an internet connection? A: Since the tool runs locally in your browser, you do not need an active internet connection to process your files. You can perform extractions offline securely.
+
+### OCR PDF — https://nibrascode.com/en/pdf/pdf-ocr
+Recognize text from PDF pages on-device. Azerbaijani: «PDF-dən mətn çıxar» https://nibrascode.com/pdf/pdf-ocr
+OCR PDF (PDF tool) is a free web utility available on nibrascode.com and serves as the web version of a tool from the Nibras PDF Android app. It is designed to recognize text from PDF pages directly on your device. The service requires no account and operates entirely without server uploads for document processing.
+This utility is necessary when you need to extract readable text from scanned documents, images, or non-searchable PDF files. The underlying concept relies on optical character recognition, analyzing page pixels within the browser to identify letter shapes and convert them into editable digital text. Because processing happens locally, your files never leave your device.
+- Q: Is this PDF tool completely free to use? A: Yes, the tool is entirely free to use directly in your web browser without hidden costs.
+- Q: Are my files uploaded to any external server during processing? A: No, all files are processed locally in your browser and never leave your device, ensuring total privacy.
+- Q: Do I need to register or create an account to use this service? A: No account or registration is required to access and use the OCR PDF tool on the website.
+
+### Convert PDF to Word — https://nibrascode.com/en/pdf/pdf-word
+Save PDF text as a DOCX file. Azerbaijani: «PDF-dən Word» https://nibrascode.com/pdf/pdf-word
+This free web tool allows you to save PDF text directly as a DOCX file. It is the web version of a tool from the Nibras PDF Android app, available freely on nibrascode.com/pdf without requiring any account.
+People need this functionality when they have locked or static document text that requires editing in a standard word processor. The underlying process runs entirely within the web browser, ensuring that files are processed locally and do not leave the device.
+- Q: Is this tool free to use? A: Yes, this web tool is completely free with no hidden charges.
+- Q: Do I need to create an account? A: No account or registration is required to use this service.
+- Q: Are my files secure? A: Yes, all files are processed locally in your browser and never leave your device.
+
+### PDF preview — https://nibrascode.com/en/pdf/preview
+View and zoom pages. Azerbaijani: «PDF önizləmə» https://nibrascode.com/pdf/preview
+This PDF preview tool is the web version of the Nibras PDF Android app, designed to let you view documents directly in your browser. It is a completely free utility that requires no account or registration. The tool focuses on providing a straightforward way to access your PDF content without any external dependencies.
+Users need this tool when they want to quickly inspect a document or examine specific details within a file. Because all processing happens locally within your browser, your files never leave your device. This ensures that your documents remain private and secure while you browse through pages or zoom in for a closer look.
+- Q: Are my files uploaded to a server? A: No, all processing occurs directly in your browser. Your files never leave your device and are not sent to any server, ensuring your data remains completely private and secure.
+- Q: Do I need an account to use this? A: No, you do not need an account or registration to use this tool. You can simply visit the website and start viewing your files immediately without any barriers.
+- Q: What features are available? A: This tool allows you to view PDF pages and zoom in for a better look. As the web version of the Nibras PDF Android app, it provides a reliable and simple viewing experience.
+
+### Batch processing — https://nibrascode.com/en/pdf/batch
+Process several PDFs at once. Azerbaijani: «Toplu əməliyyatlar» https://nibrascode.com/pdf/batch
+Batch processing (PDF tool) is a free web utility available on nibrascode.com, serving as the browser version of a tool from the Nibras PDF Android app. It allows users to process several PDFs at once directly within the browser interface. The service operates completely without requiring any user account or registration.
+This tool is needed when dealing with numerous documents simultaneously and you want to avoid processing each file individually. The underlying concept relies on client-side processing, meaning all operations run locally in your web browser so that files remain securely on your device at all times.
+- Q: Is this web tool free to use? A: Yes, the tool is entirely free to use on the website without any hidden charges.
+- Q: Are my files uploaded to an external server? A: No, files are processed locally in your browser and do not leave your device.
+- Q: Do I need to create an account to use this? A: No account or registration is required to access and use this PDF tool.
+
+### Select and extract pages — https://nibrascode.com/en/pdf/extract-pages
+Create a new PDF from selected pages. Azerbaijani: «Səhifə seç və çıxar» https://nibrascode.com/pdf/extract-pages
+This tool is a web‑based PDF editor that runs directly in your browser. Users upload a PDF from their device, select the pages they need, and the tool creates a new PDF containing only those pages. It is the online version of the Nibras PDF Android app and is available for free at nibrascode.com/pdf.
+All processing happens locally in the browser, so no data leaves the device and no account is required. This ensures privacy and security while allowing users to quickly extract the exact pages they need for further use.
+- Q: Can the tool be used offline? A: Since the processing occurs in the browser, an internet connection is needed to load the page, but no data is sent to a server.
+- Q: Is there a size limit for the PDF I can process? A: The tool works within the memory limits of the browser, but no explicit size restriction is published.
+- Q: Does the new PDF keep the original formatting? A: The output PDF contains only the selected pages and retains the original layout and quality.
+
+### Word to PDF — https://nibrascode.com/en/pdf/word-pdf
+Convert a DOCX file into a PDF. Azerbaijani: «Word-dan PDF» https://nibrascode.com/pdf/word-pdf
+Word to PDF is the web version of the tool from the Nibras PDF Android app, available at nibrascode.com/pdf. It lets users convert a DOCX file into a PDF without needing an account, and all processing happens in the browser.
+Because the conversion runs locally, files never leave the device, preserving privacy. This makes it useful for anyone who needs a quick, offline‑friendly way to produce PDF documents from Word files.
+- Q: Will the formatting be preserved during conversion? A: The service keeps basic text formatting, but complex layout features may appear slightly different in the resulting PDF.
+- Q: How is my file kept private? A: All conversion occurs in the browser, so the file never uploads to a server, ensuring it stays on your device.
+- Q: Do I need an internet connection to use the tool? A: An active connection is required to load the page and download the result, although the actual conversion is performed locally.
+
+### Add page numbers — https://nibrascode.com/en/pdf/page-numbers
+Put page numbers on an existing PDF. Azerbaijani: «Səhifə nömrəsi qoy» https://nibrascode.com/pdf/page-numbers
+
+### Unlock PDF — https://nibrascode.com/en/pdf/unlock
+Remove the password from a PDF you can open. Azerbaijani: «PDF parolunu aç» https://nibrascode.com/pdf/unlock
+
+### Crop PDF — https://nibrascode.com/en/pdf/crop
+Trim the edges of PDF pages. Azerbaijani: «PDF-i kəs» https://nibrascode.com/pdf/crop
+
+### Grayscale PDF — https://nibrascode.com/en/pdf/grayscale
+Turn a color PDF into black and white. Azerbaijani: «PDF-i boz et» https://nibrascode.com/pdf/grayscale
+
+### Excel/CSV to PDF — https://nibrascode.com/en/pdf/excel-pdf
+Turn an XLSX or CSV table into a PDF. Azerbaijani: «Excel/CSV-dən PDF» https://nibrascode.com/pdf/excel-pdf
+
+### Redact PDF — https://nibrascode.com/en/pdf/redact
+Cover chosen areas with black boxes. Azerbaijani: «PDF-də məlumatı gizlət» https://nibrascode.com/pdf/redact
+
+### Invoice PDF — https://nibrascode.com/en/pdf/invoice
+Make a simple invoice from seller, buyer and items. Azerbaijani: «Hesab-faktura PDF» https://nibrascode.com/pdf/invoice
+
+### PDF to Excel — https://nibrascode.com/en/pdf/pdf-excel
+Turn PDF tables into an XLSX file. Azerbaijani: «PDF-dən Excel» https://nibrascode.com/pdf/pdf-excel
+
+### PowerPoint to PDF — https://nibrascode.com/en/pdf/ppt-pdf
+Turn PPTX slides into a PDF. Azerbaijani: «PowerPoint-dən PDF» https://nibrascode.com/pdf/ppt-pdf
+
+### PDF to PowerPoint — https://nibrascode.com/en/pdf/pdf-ppt
+Turn PDF pages into PPTX slides. Azerbaijani: «PDF-dən PowerPoint» https://nibrascode.com/pdf/pdf-ppt
+
+### Flatten PDF — https://nibrascode.com/en/pdf/flatten
+Make form fields fixed and uneditable. Azerbaijani: «PDF-i sabitlə (flatten)» https://nibrascode.com/pdf/flatten
+
+### PDF metadata — https://nibrascode.com/en/pdf/metadata
+View and edit title, author and keywords. Azerbaijani: «PDF xassələri (metadata)» https://nibrascode.com/pdf/metadata
+
+### Compare PDFs — https://nibrascode.com/en/pdf/compare
+Find text differences between two PDFs. Azerbaijani: «PDF-ləri müqayisə et» https://nibrascode.com/pdf/compare
+
+### Excel to CSV — https://nibrascode.com/en/pdf/excel-csv
+Turn an XLSX sheet into a CSV file. Azerbaijani: «Excel-dən CSV» https://nibrascode.com/pdf/excel-csv
+
+### CSV to Excel — https://nibrascode.com/en/pdf/csv-excel
+Turn a CSV table into XLSX. Azerbaijani: «CSV-dən Excel» https://nibrascode.com/pdf/csv-excel
+
+### URL to PDF — https://nibrascode.com/en/pdf/url-pdf
+Save a web page's text and images as PDF. Azerbaijani: «URL-dən PDF» https://nibrascode.com/pdf/url-pdf
+
+## Other browser tools
+- Nibras QR — QR code maker & scanner: https://nibrascode.com/en/qr — Create QR codes for URL, Wi-Fi, vCard, WhatsApp, SMS and events with colors and logo; scan QR codes with the camera.
+- Wi-Fi QR code: https://nibrascode.com/en/wifi — Make a QR code that joins a Wi-Fi network.
+- Business card (vCard) QR: https://nibrascode.com/en/vcard — Make a contact card QR code.
+- Compress image: https://nibrascode.com/en/image — Compress, resize and convert photos in the browser.
+- Remove background: https://nibrascode.com/en/erase — Remove the background of a photo on your device.
+- Video cut: https://nibrascode.com/en/video — Trim and edit short videos in the browser.
+- Record audio: https://nibrascode.com/en/voice — Record audio in the browser.
+- Calculators: https://nibrascode.com/en/calc — Everyday calculators.
+- ZIP: https://nibrascode.com/en/zip — Create and open ZIP archives in the browser.
+- 3D Code X-Ray: https://nibrascode.com/en/xray — Analyze code structure in 3D entirely in the browser; code is never uploaded.
+
+## Code & text tools
+- area: The tool converts numbers between square meters and square feet. Users enter a numeric value, and the application applies the exact conversion factor of 1 m² = 10.7639 ft², so 10 m² becomes approximately 107.64 ft².
+- base: This tool converts a decimal number into its binary and hexadecimal representations. The user enters a decimal value, and the tool displays the binary form like 101010 and the hex form like 2a. Both formats are fundamental in computing, programming, and digital design.
+- base64: Base64 is a text encoding scheme that converts characters into a set of 64 symbols. It does not encrypt data, it merely represents the original text in a different form, making it suitable for transport and storage.
+- binary: This tool converts text into binary code and binary code back into readable text. The entire process occurs locally within your browser, ensuring that no data is uploaded to a server. The tool does not modify any files; it simply displays the processed output on the screen, which you can then copy or download as a file.
+- blank: This tool runs in the web browser and removes empty lines from a block of text. An empty line is a line that contains no characters; the tool deletes such lines while leaving all other text unchanged. It does not modify any file, it only eliminates the gaps in the displayed text.
+- case: The "Letter case" tool on nibrascode.com is a browser-based page that displays input text simultaneously in upper case, lower case, camelCase, snake_case, and slug formats. Operating without modifying any actual files, this utility instantly presents every available form on one screen, allowing you to copy or download the exact variation you need.
+- chars: The Character Count tool on nibrascode.com is a browser‑based utility that shows the number of characters in the entered text and indicates whether it stays within the 160‑character limit commonly used for meta descriptions. It helps users ensure their descriptions are the correct length for search engine guidelines.
+- chmod: This free browser-based tool on nibrascode.com converts file permission codes between numeric and symbolic formats. It accurately translates values like 755 into rwxr-xr-x and vice versa. All processing happens locally in your browser, no input is uploaded to a server, and the service is completely free without requiring any sign-up.
+- color: The Color code tool on nibrascode.com is a browser-based utility that converts HEX, RGB, and HSL color codes into each other. It is free, requires no sign-up, and processes everything locally in the browser without uploading input to any server. Results can be easily copied or downloaded as a file.
+- contrast: This browser-based tool calculates the contrast ratio between two colors to determine if text is readable. It analyzes the provided color values without altering them. The entire calculation process occurs locally within your browser, ensuring that no input data is uploaded to a server. This provides a private and efficient way to check color accessibility.
+- count: The Word count tool on nibrascode.com displays how many words, characters, characters without spaces, and lines are present in a given text. Users paste any length of text into the input area, the tool automatically performs the calculations, and the results appear on the screen. An empty input yields zero for all counters, and the outcome can be copied or saved as a file.
+- cron: Cron explainer is a browser‑based tool hosted on nibrascode.com that converts a cron line into plain English. Users enter the five fields – minute, hour, day, month, weekday – and receive a readable description of the schedule. It is useful for developers, system administrators, or anyone who needs to understand a cron expression quickly.
+- css-min: This free browser-based tool on nibrascode.com removes all spaces and comments from your CSS code. The processing happens entirely within your web browser, meaning no input data is uploaded to any server, and no sign-up is required. As a result, the code is shortened while keeping each rule on a single line.
+- css: CSS formatter is a browser‑based tool that makes CSS code easier to read. It places each rule on its own line and indents the content inside braces, improving visual structure without altering the stylesheet logic.
+- cssvar: This tool converts a color code into a CSS variable line. For example, #1d4ed8 becomes --reng: #1d4ed8;. The process happens entirely in your browser, so no data is uploaded to a server. You can copy the result or download it as a file for later use.
+- csv: This tool converts a JSON list into a CSV table and a CSV table into a JSON list. All processing occurs in the browser; no data is uploaded to a server.
+- days: This free browser-based tool on nibrascode.com shows the days between two dates. It operates entirely within your browser without requiring any sign-up, and input data is never uploaded to a server. The page does not keep a calendar and performs straightforward calculations based on user input. Results can be easily copied to the clipboard or downloaded as a file.
+- diff: The Text Difference tool on nibrascode.com performs a line-by-line comparison between two text inputs. The entire process occurs within your browser, ensuring that no data is uploaded to a server or stored. By analyzing the provided texts, the tool identifies discrepancies, displaying only the lines that have been modified, added, or removed during the comparison process.
+- discount: The Discount tool on nibrascode.com calculates a price reduction based on a percentage. Users enter the original amount and the discount percent, and the tool instantly shows the reduced amount with two decimal places. It is useful for quick calculations during shopping, invoicing, or budgeting when a percentage discount needs to be applied.
+- domain: This tool extracts the domain name from a URL. By entering any web address, it displays only the domain part (e.g., nibrascode.com). The tool runs entirely in the browser, with no server upload and no sign‑up required.
+- email: This free browser-based tool on nibrascode.com checks whether an entered email address contains the @ symbol and a dot. It does not send any emails, and the input is processed entirely within your browser without being uploaded to a server. No sign-up is required to use this utility.
+- escape: The JSON escape tool runs in a web browser and allows users to hide special characters for safe inclusion in a JSON string. It converts double quotes and backslashes into \" and \\\\, ensuring the JSON format remains valid.
+- freq: The Word Frequency tool runs completely in the browser and counts how many times each word appears in the text you provide. The output list is sorted by frequency, with the most common word displayed at the top.
+- gradient: The CSS gradient tool creates a linear‑gradient line between two colors. The gradient runs from left to right and can be applied to any HTML element’s background. Users enter two color codes (for example, #111111 and #ffffff) and copy the resulting CSS rule directly into their stylesheet.
+- hash: This tool generates a SHA‑1 hash from text. The hash is a fixed 40‑character code that remains the same for identical input; changing one letter produces a completely different code.
+- hex: Hex text is a browser‑based conversion tool that turns ordinary characters into their hexadecimal (hex) representation and back again. The user types text, the tool maps each character to its ASCII code expressed in hex, and displays the result instantly without leaving the page.
+- htaccess: This browser-based tool helps generate a permanent redirection line for the .htaccess file of a website. The service is completely free, requires no sign-up, and all processing takes place directly in the browser. Your input is not uploaded to a server, and you can either copy the result or download it as a file.
+- html-min: The HTML minifier is a web-based tool designed to optimize HTML code structure. It automatically removes unnecessary whitespace, line breaks, and comments from your HTML files. This process reduces the overall file size while maintaining the original functionality of the code. All processing occurs locally within your browser, ensuring that your data is never uploaded to any external server.
+- html: The tool encodes HTML characters so that they appear as plain text on a page. For example, <p> becomes <p>, allowing the code to be displayed without being interpreted by the browser. It is useful when you need to share or review raw HTML.
+- htmlfmt: This tool formats HTML code by breaking it into lines. Each tag is placed on its own line, such as separating p and b tags. The process occurs entirely within your browser, so no data is uploaded to a server. It is a free service that does not require sign-up or account creation.
+- htmlmd: The HTML to Markdown converter turns simple HTML snippets into Markdown syntax. It recognises headings, bold text and links, so tags like <h1>‑<h6>, <strong>/<b> and <a> are processed while other markup is left untouched. Users who need a lightweight, readable format for existing HTML content can use this tool.
+- ip: The "Check an IPv4" tool validates a string to see whether it conforms to the IPv4 address format. An IPv4 address consists of four decimal numbers separated by dots, each number ranging from 0 to 255. The tool parses the input, splits it into four parts, and verifies that each part is a valid integer within the allowed range.
+- join: This browser-based tool allows you to merge multiple lines of text into a single line separated by commas. When you input a list of items, the tool processes them locally within your web browser. This ensures that your data remains private, as no information is uploaded to a server or saved after the session ends.
+- js-min: The JavaScript minifier on nibrascode.com is a browser‑based tool that removes all spaces and comments from JavaScript code, outputting a single‑line script. It is useful when developers need to reduce file size and improve load times without altering functionality.
+- js: The JavaScript formatter on nibrascode.com is a browser-based tool that makes JavaScript code easier to read. It breaks JavaScript onto lines, placing a brace and a semicolon at the start of a new line. For example, entering "function a(){return 1;}" puts the brace on its own line.
+- json-min: The JSON minifier is a browser‑based tool hosted on nibrascode.com. It removes all whitespace, line breaks, and indentation from a JSON string, collapsing the data onto a single line. This reduces file size and makes transmission over networks more efficient, which is useful when receiving API responses or storing JSON in a compact form.
+- json: The JSON formatter on nibrascode.com takes a JSON string and expands it onto separate lines, making each key‑value pair easy to read. It works entirely in the browser, so no data is sent to a server and no registration is required.
+- jsoncsv: This free browser-based tool on nibrascode.com converts a JSON list into a CSV table. Processing happens entirely within your browser, meaning your input is never uploaded to any server and no sign-up is required. For example, an object with name and age properties outputs name and age on the first header line, followed by the corresponding values on the second line.
+- jsonyaml: The JSON to YAML converter creates a YAML representation from a JSON input. It places each key and its value on separate lines, following the standard YAML syntax.
+- jwt: This tool reads JSON Web Token (JWT) data directly in the browser. It is important to note that this is not encryption; it simply reads the header and the payload of a JWT. The signature is not checked, and the token is never sent anywhere. The page does not require a password or a secret key.
+- keys: JSON keys is a simple tool that lists the key names of a JSON object. When you paste JSON text, only the keys are displayed on separate lines; the values are omitted. This helps quickly understand the structure and choose correct keys during coding.
+- leap: This tool simply evaluates a given year and reports whether it is a leap year. Leap years occur every four years, except for century years that are not divisible by 400. The page does not modify any calendar; it only performs the calculation.
+- length: The Centimeter tool provides quick conversion between centimeters and inches. It is useful for anyone dealing with length measurements, such as engineers, tailors, or hobbyists who need to switch between metric and imperial units. The conversion runs entirely in the browser, so no data leaves the user's device.
+- lines: The line numbers feature places a sequential number at the start of each line in a text block. This makes it easy to reference specific lines when reviewing or editing code or documentation.
+- link: This tool is a browser-based utility designed to verify the structure of web addresses. It checks whether a provided link starts with 'http' and ensures there are no spaces within the address. The tool does not open any websites, and all processing occurs locally within your browser, ensuring that your input is never uploaded to a server.
+- lorem: Lorem Ipsum is a block of meaningless Latin‑style text used to fill empty areas in web page designs. It helps designers see how typography, spacing and layout look without distracting content. The words carry no meaning, so the focus stays on visual aspects rather than reading.
+- markdown: Markdown to HTML is a free, browser-based tool on nibrascode.com that converts simple Markdown text into HTML. It recognizes headings, bold text, and links, producing basic HTML output.
+- md5: MD5 is a tool that generates an MD5 hash from a given text. It is not encryption; the same input always produces the same 32‑character hexadecimal string, while any change in the text results in a completely different hash.
+- meta: Meta is a browser‑based utility that generates the title and Open Graph meta tags needed for a page’s <head> section. Users provide a title and a description, and the tool outputs correctly formatted meta tags, ensuring that social platforms display the intended headline and summary.
+- mime: The MIME tool on nibrascode.com is a free browser-based utility designed to show the MIME code corresponding to a file ending. All processing happens entirely within the user's browser, meaning inputs are never uploaded to a server and no sign-up is required. The resulting code can be easily copied to the clipboard or downloaded as a file.
+- morse: This browser-based tool on nibrascode.com allows you to convert text into Morse code and Morse code back into text. It is a free utility that requires no sign-up. All processing occurs locally within your browser, ensuring that your input is not uploaded to any server or stored externally, maintaining your privacy during the conversion process.
+- name: The Random name page is a browser-based tool that writes a random first and last name from a fixed list. Each press gives another name. These names are samples and do not represent real people. The page is completely free and requires no sign-up.
+- number: This free browser-based tool on nibrascode.com picks a random whole number between the two values you provide. Each press can give another number within that specified range. The page does not keep a list and only shows one number at a time. All processing happens locally in your browser, and your input is never uploaded to a server.
+- palette: This browser-based tool generates a lighter and a darker variant from a single input color. By entering a specific color code, the tool calculates and displays three distinct codes: the original color, its lighter version, and its darker version. The entire processing occurs locally within your web browser, ensuring that no data is uploaded to any server.
+- password: This tool is a free, browser‑based password generator. Each time you press the generate button it produces a random string composed of letters, digits and symbols. You can set the desired length, for example a length of 16 yields a 16‑character password. The password is never sent to a server and is not stored, so you must copy it yourself or download it as a file.
+- percent: This tool is a browser-based web service designed to perform percentage calculations. Users can determine the specific percentage of a number or calculate the ratio between two values. For example, entering 15 and 200 yields 30, which is 15 percent of 200, while entering 80 and 100 provides the result of 80% to show the ratio.
+- php: The Nibrascode PHP formatter is a browser-based tool designed to improve the readability of PHP code. It automatically breaks PHP code into lines and ensures that every brace is placed on its own line. All processing occurs locally within your web browser, ensuring that your input code is never uploaded to any server.
+- prefix: Add to lines is a browser tool that places a chosen piece of text at the beginning of every line in a block of input. Users paste the original lines in the first box and the text to prepend in the second box, then the tool generates a new set of lines without altering any file.
+- pxrem: The px and rem converter is a browser‑based tool that helps web designers convert pixel values to rem units and vice versa. It is useful when creating responsive layouts that rely on relative sizing.
+- python: Python formatter is a free, browser-based tool hosted on nibrascode.com. It removes trailing spaces from Python lines and converts tabs into four spaces. Users can copy the cleaned code or download it as a file, all without uploading anything to a server.
+- qr: A QR code is a two‑dimensional matrix that encodes text or an address. On nibrascode.com the code is generated entirely in your browser, with no data sent to a server.
+- query: The Query string tool extracts the query part from a URL. Everything after the "?" character is split into separate lines, showing only the key‑value pairs of the query. It provides a quick way to view and isolate query parameters from any web address.
+- radius: The CSS radius tool converts a numeric input into a border-radius declaration. For example, entering 12 produces border-radius: 12px;, which rounds the corners of buttons, cards, or any other element that uses CSS borders.
+- read: Reading time is a web tool that displays the word count of a text and estimates how long it will take to read. It assumes a reading speed of 200 words per minute, rounding up to the next whole minute.
+- regex: Regex is a tool that searches for patterns within text. For example, pattern a+ on text baac returns aa. A dot matches any character, and a star indicates repetition.
+- replace: The Find and Replace tool on nibrascode.com lets you substitute any word in a block of text with another word. You type the original text in the first box, enter the old word and the new word in the second box using the format old=>new, and the tool produces the modified text instantly.
+- robots: The robots.txt file is a text document located in a website's root directory that instructs search engine crawlers on which pages to index. This tool allows you to generate these rules efficiently. If you leave the file empty, all pages remain open, allowing search engine bots to crawl the entire site without any restrictions.
+- roman: This tool converts numbers between 1 and 3999 to Roman numerals and back. Users need it when working with historical dates, academic exercises, or any documentation that uses Roman numeral notation.
+- sha256: SHA‑256 (Secure Hash Algorithm 256) is a cryptographic function that converts any text into a fixed‑size 256‑bit hash represented as a 64‑character hexadecimal string. The algorithm is deterministic: the same input always yields the same output, while a tiny change in the input produces a completely different hash. It is a one‑way operation, not encryption.
+- shadow: This is a browser-based CSS shadow generator. It creates a box-shadow line based on numerical inputs provided by the user. When you enter the values, the tool immediately generates the corresponding CSS code. The entire process occurs locally within your browser, ensuring no data is uploaded to a server, and no sign-up is required.
+- sitemap: This browser-based tool generates a sitemap.xml file from a provided list of web page addresses. You input your URLs, ensuring each address is on its own line, and the tool formats them into a standard XML structure. The entire process occurs locally within your browser, ensuring that your input data is never uploaded to any server.
+- slug: The Slug tool converts a page title into a simple, readable address. Spaces become hyphens, capital letters turn into lowercase, and Azerbaijani special characters (ə, ö, ü, ş, ç, ğ) are replaced with their Latin equivalents. For example, “Mənim ilk səhifəm” becomes “menim-ilk-sehifem”.
+- sort: This browser-based tool is designed to sort text lines in alphabetical order. When you input text, the system automatically organizes the lines and removes any empty lines found in the input. The entire process occurs locally within your browser, ensuring that no data is uploaded to a server and your original files remain unchanged.
+- speed: Speed is a simple browser tool that converts a numeric value between kilometers per hour and miles per hour. Users enter a number and the tool instantly displays the equivalent value in the other unit, which is useful when dealing with speed limits or performance data from different regions.
+- split: This tool divides a total amount by a specified number of people, showing how much each person should pay. The second input defaults to 2 when left empty, so the split is calculated for two participants.
+- sql-min: This tool minifies SQL queries by removing extra spaces and comments. It operates entirely within your browser, ensuring no data is uploaded to a server. The service is free and requires no sign-up. You can copy the result or download it as a file for immediate use.
+- sql: This free browser-based tool on nibrascode.com formats SQL sentences to make them readable. The processing happens entirely within your browser without uploading your input to a server, and no sign-up is required. The page does not connect to any database and does not execute queries; it only formats the text. You can copy the resulting output or download it as a file.
+- strength: The password strength tool on nibrascode.com is a free browser-based utility that checks whether a password is short, repeated, or weak. People use this page when they need to evaluate their security choices and ensure their codes meet basic complexity requirements before using them online. The page operates entirely locally without requiring any sign-up.
+- strip: This browser-based tool is designed to extract text from HTML code by removing all HTML tags. It isolates the visible text while discarding elements like image URLs and hyperlink paths. The process ensures that only the readable content remains, providing a clean output. No registration is required, and all operations are performed locally within your web browser.
+- table: This tool converts comma‑separated text into an HTML table. The first line becomes the table header, while each subsequent line forms a data row. The generated HTML can be copied and placed into any web page.
+- temp: The Temperature tool on nibrascode.com converts numbers between Celsius and Fahrenheit. It works entirely in the browser, so no data is sent to a server and the conversion is performed locally.
+- text: This browser-based tool on nibrascode.com builds text from short random words. It is designed to provide enough content for testing layouts or interface elements. The generated words have no meaning and do not form real sentences. By adjusting the count, you can control the length of the paragraph, making it a simple utility for developers and designers who need placeholders.
+- tip: The Tip tool adds a percentage-based tip to a given amount. Users enter the base amount in the first field and the percent in the second; if the percent field is left empty, a default of 10% is applied. The result shows the tip amount calculated from the entered values.
+- trim: This free browser-based tool on nibrascode.com is designed to clean extra spaces from text. It removes unnecessary spaces at the start, at the end, and between words. For example, the phrase "Salam dünya" written with two spaces stays with one space. The lines themselves stay intact, and only the extra space goes away.
+- unique: This browser-based tool allows you to remove duplicate lines from any text list. It ensures that each unique line remains, while any subsequent repetitions are deleted. The processing happens entirely within your web browser, meaning no data is uploaded to a server, and no sign-up is required to use this utility.
+- unix: This free browser-based tool on nibrascode.com requires no sign-up. All processing happens entirely within your web browser, ensuring that your input is never uploaded to any server. Once the conversion is complete, you can easily copy the result to your clipboard or download it directly as a file.
+- url: URL code is a browser‑based tool that encodes spaces and special characters in an address as %20, %3F, %22, etc. The encoding makes the URL safe to use, and the same tool can decode the string back to its original form.
+- utm: The UTM tool appends two parameters – utm_source and utm_campaign – to any URL, allowing the source and campaign of traffic to be tracked. It is useful for marketers and analysts who need to measure where visitors come from and which promotion generated them.
+- uuid: A UUID (Universally Unique Identifier) is a 128‑bit random identifier displayed as 36 characters in the 8‑4‑4‑4‑12 format. Each click generates a new UUID, and the probability of generating the same value twice is practically zero. UUIDs are commonly used to uniquely label objects, files, or sessions in software systems.
+- vat: The VAT tool on nibrascode.com is a browser‑based calculator that adds value‑added tax to a given amount. Users enter the base amount and the tax percentage (default 18 % if left blank), and the tool returns both the tax amount and the total.
+- weekday: The Weekday tool on nibrascode.com displays the name of the weekday for a given date. It runs entirely in the browser, does not send any data to a server, and shows the result directly on the page after the user enters a date in YYYY‑MM‑DD format.
+- weight: This is a browser-based tool that converts weight between kilograms and pounds. It does not store any data; all calculations happen locally in your browser without uploading input to a server. You can copy the result or download it as a file for your records.
+- words: This tool converts a numeric input into its word representation. It handles numbers up to slightly above one thousand. It is useful for documents, reports, and educational materials where numbers need to be expressed in words.
+- xml-min: The XML minifier on nibrascode.com is a free, browser-based tool that removes spaces and comments from XML documents. It produces a single-line, compact version of the input, reducing file size without altering the underlying structure.
+- xml: The XML formatter on nibrascode.com is a browser‑based tool that makes XML text easier to read. It places each tag on its own line and indents nested tags, revealing the document structure clearly. This is useful for developers, data analysts, or anyone who works with large or complex XML files and needs a quick visual overview.
+- yaml: The YAML formatter on nibrascode.com is a browser-based utility designed to clean up text documents. This tool removes trailing spaces at the end of YAML lines and converts tab characters into two spaces. The entire process occurs locally within your browser, ensuring that no data is uploaded to a server and no sign-up is required to use the service.
+- yamljson: The YAML to JSON tool converts data written in YAML format into JSON format. This conversion transforms YAML’s readable, structured syntax into JSON’s widely used, machine-friendly representation.
+
+## Nibras Arabic (learning Arabic for Azerbaijani speakers)
+Android app, offline, ad-free, version 1.2.1. Alphabet with letter forms and touch handwriting practice, verbs with past/present/imperative forms and audio, vocabulary, dialogues, quizzes and spaced-repetition flashcards. App page: https://nibrascode.com/apps/nibras-arabic · Google Play: https://play.google.com/store/apps/details?id=com.nibrasarabic.app
+
+## Guides
+- How-to guides: https://nibrascode.com/nece
+- Error guides (APK install, letter Ə encoding, Android developer): https://nibrascode.com/xeta
+- FAQ: https://nibrascode.com/faq · What is Nibras Code: https://nibrascode.com/nedir
+- Contact: nibrascode@gmail.com

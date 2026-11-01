@@ -9,7 +9,8 @@ import { NavMenu } from "@/components/nav-menu";
 import { SiteLegal } from "@/components/site-header";
 import { SERVICES_LABEL } from "@/components/services-page";
 import { HeroMark } from "@/components/hero-mark";
-import { BAR, BarGroupView } from "@/components/home-bars";
+import { BAR, BAR_GROUPS, BarGroupView } from "@/components/home-bars";
+import { groupLocalePath } from "@/lib/group-path";
 import { faqPath } from "@/lib/faq";
 import { homePath, localeHref } from "@/lib/locale-path";
 import { SEARCH, searchPath, searchTopicPath } from "@/lib/search-pages";
@@ -309,6 +310,7 @@ export function HomeView({ apps }: { apps: StudioAppRow[] }) {
           </span>
         </Link>
         <nav className="nx-links">
+          <a href={groupLocalePath(lang, "g1")} data-testid="home-nav-tools">{BAR_GROUPS.g1[lang]}</a>
           <a href={localeHref(lang, "/about")}>{t("nav_about")}</a>
           <a href={localeHref(lang, "/unutma")}>{t("remind_btn")}</a>
           <a href={localeHref(lang, "/contact")}>{t("nx_nav_contact")}</a>

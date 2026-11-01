@@ -1,6 +1,21 @@
 import { DeviceCheck } from "@/components/device-check";
 import { ApkDiagnose } from "@/components/apk-diagnose";
 
+const RELATED_HEAD: Record<Lang, string> = { az: "Əlaqəli bələdçilər", en: "Related guides", tr: "İlgili rehberler", ar: "أدلة ذات صلة", ru: "Похожие руководства" };
+type ClusterId = "letter" | "phone" | "dev" | "ai" | "other";
+const CLUSTERS: { id: ClusterId; label: Record<Lang, string> }[] = [
+  { id: "letter", label: { az: "Ə hərfi və kodlaşdırma", en: "Letter Ə & encoding", tr: "Ə harfi ve kodlama", ar: "حرف Ə والترميز", ru: "Буква Ə и кодировка" } },
+  { id: "phone", label: { az: "Telefona quraşdırma", en: "Installing on a phone", tr: "Telefona kurulum", ar: "التثبيت على الهاتف", ru: "Установка на телефон" } },
+  { id: "dev", label: { az: "Android developer", en: "Android developer", tr: "Android geliştirici", ar: "مطوّر Android", ru: "Android-разработчик" } },
+  { id: "ai", label: { az: "Süni intellekt", en: "AI", tr: "Yapay zekâ", ar: "الذكاء الاصطناعي", ru: "ИИ" } },
+];
+function clusterOf(slug: string): ClusterId {
+  if (/(^e-|-e$|herf|excel|emr|json-e|html-e|utf|encoding|ps-skript|voen)/.test(slug)) return "letter";
+  if (/(qurulmur|parse|zedelenib|play-protect|etibarsiz|yaddas|telefon|kohne-versiya|xapk|imza-uygun)/.test(slug)) return "phone";
+  if (/(keystore|paket-adi|gradle|sdk|build|play-console|manifest|dex|kotlin|android)/.test(slug)) return "dev";
+  if (/(chatgpt|gemini|claude|prompt|ai-|gpt)/.test(slug)) return "ai";
+  return "other";
+}
 const APK_DX = new Set(["apk-qurulmur", "parse-error", "imza-uygun-deyil", "apk-fayli-zedelenib", "play-protect-bloklayir", "paket-etibarsizdir", "telefon-uygun-deyil", "kohne-versiya-qurulmur", "xapk-qurulmur"]);
 import { AlertTriangle, BookOpen, Code2, FileText, Info, ListChecks, Search, ShieldCheck, User, Wrench } from "lucide-react";
 import { InfoCard, InfoCards } from "@/components/info-card";
@@ -264,11 +279,35 @@ export function SearchTopic({
           </InfoCards>
         </>
       ) : null}
-      <InfoCards>
-        {others.map((entry) => (
-          <InfoCard key={entry.slug} icon={FileText} title={entry.piece[lang].title} href={searchTopicPath(lang, kind, entry.slug)} />
-        ))}
-      </InfoCards>
+      {(() => {
+        // 75 linkin hamısı əvəzinə: eyni mövzu klasterindən 6 əlaqəli səhifə + klaster başlıqları
+        const mine = clusterOf(slug);
+        const related = [
+          ...others.filter((entry) => clusterOf(entry.slug) === mine),
+          ...others.filter((entry) => clusterOf(entry.slug) !== mine),
+        ].slice(0, 6);
+        return (
+          <>
+            <h2 className="info-section-title">{RELATED_HEAD[lang]}</h2>
+            <InfoCards>
+              {related.map((entry) => (
+                <InfoCard key={entry.slug} icon={FileText} title={entry.piece[lang].title} href={searchTopicPath(lang, kind, entry.slug)} />
+              ))}
+            </InfoCards>
+            <nav className="faq-links" aria-label={RELATED_HEAD[lang]}>
+              {CLUSTERS.filter((c) => c.id !== mine)
+                .map((c) => ({ c, first: others.find((entry) => clusterOf(entry.slug) === c.id) }))
+                .filter((x) => x.first)
+                .map(({ c, first }) => (
+                  <a key={c.id} href={searchTopicPath(lang, kind, first!.slug)}>
+                    {c.label[lang]}
+                  </a>
+                ))}
+              <a href={searchPath(lang, kind)}>{section.heading[lang]}</a>
+            </nav>
+          </>
+        );
+      })()}
     </main>
   );
 }

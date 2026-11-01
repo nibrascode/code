@@ -12032,3 +12032,48 @@ select option:checked { background-color: #2f6bff; color: #ffffff; }
 /* Language pickers: guaranteed contrast in the opened native list. */
 select.lang-pick option, select.nxa-langpick option { background-color: #0f172a; color: #f1f5f9; }
 select.lang-pick option:checked, select.nxa-langpick option:checked { background-color: #2f6bff; color: #fff; }
+
+/* Ana səhifə alətlər: kompakt üfüqi kartlar — solda ikon, yanında ad; mobil 2, md+ 4 sütun, 8 kart */
+.nx-bar-group--tools .nx-bar-group-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+@media (min-width: 768px) {
+  .nx-bar-group--tools .nx-bar-group-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+.nx-bar-group--tools .nx-bar-group-grid > a,
+.nx-bar-group--tools .nx-bar-group-grid > .nx-qr-bar {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  min-height: 46px;
+  padding: 6px 10px 6px 6px;
+  text-align: left;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.nx-bar-group--tools .nx-bar-group-grid > a:hover {
+  transform: translateY(-1px);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, #5b8def 55%, transparent);
+}
+.nx-bar-group--tools .nx-bar-group-grid > a > img,
+.nx-bar-group--tools .nx-bar-group-grid > a > svg {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+}
+.nx-bar-group--tools .nx-bar-group-grid > a > span,
+.nx-bar-group--tools .nx-bar-group-grid > a > span b {
+  font-size: 13px;
+  line-height: 1.2;
+  text-align: left;
+}
+
+/* Ana səhifə H1: aydın başlıq (kicker kimi kiçik deyil) */
+.nx-hero-copy h1.nx-kicker {
+  font-size: clamp(1.35rem, 2.6vw, 2rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  text-transform: none;
+  max-width: 38rem;
+}

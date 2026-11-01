@@ -755,7 +755,7 @@ with open("metn.json", "w", encoding="utf-8") as fayl:
         "В JSON буква ə становится \\u0259",
       ),
       L(
-        "Bu, pozulma deyil. `json.dumps` susmaya görə `ə` hərfinı `\\u0259` yazır. Bu, eyni hərfin kodudur. Proqram faylı oxuyanda yenidən `ə` alır.\n\nHərfi faylda özün görmək istəyirsənsə, `ensure_ascii=False` yaz və faylı `utf-8` saxla. `cp1254` yazma. O cədvəldə ə yoxdur.\n\nHamısını bir anda dəyişmə.",
+        "Bu, pozulma deyil. `json.dumps` susmaya görə `ə` hərfini `\\u0259` yazır. Bu, eyni hərfin kodudur. Proqram faylı oxuyanda yenidən `ə` alır.\n\nHərfi faylda özün görmək istəyirsənsə, `ensure_ascii=False` yaz və faylı `utf-8` saxla. `cp1254` yazma. O cədvəldə ə yoxdur.\n\nHamısını bir anda dəyişmə.",
         "This is not corruption. By default `json.dumps` writes the letter `ə` as `\\u0259`. That is the code of the same letter. When a program reads the file, it gets `ə` again.\n\nIf you want to see the letter in the file, write `ensure_ascii=False` and save the file as `utf-8`. Do not write `cp1254`. That table has no ə.\n\nDo not change everything at once.",
         "Bu, bozulma değildir. `json.dumps` varsayılan olarak `ə` harfini `\\u0259` yazar. Bu, aynı harfin kodudur. Program dosyayı okuyunca yeniden `ə` alır.\n\nHarfi dosyada kendin görmek istiyorsan `ensure_ascii=False` yaz ve dosyayı `utf-8` kaydet. `cp1254` yazma. O tabloda ə yoktur.\n\nHepsini bir anda değiştirme.",
         "هذا ليس فسادًا. `json.dumps` يكتب حرف `ə` افتراضيًا `\\u0259`. هذا رمز الحرف نفسه. حين يقرأ البرنامج الملف يأخذ `ə` من جديد.\n\nإذا أردت أن ترى الحرف في الملف فاكتب `ensure_ascii=False` واحفظ الملف `utf-8`. لا تكتب `cp1254`. ذلك الجدول لا يحتوي ə.\n\nلا تغيّر كل شيء دفعة واحدة.",

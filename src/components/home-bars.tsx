@@ -45,6 +45,8 @@ export const GROUP_SLUG: Record<BarGroup, string> = { g1: "aletler", g2: "studio
 export const GROUP_CLASS: Record<BarGroup, string> = { g1: "tools", g2: "studio", g3: "learn" };
 export const MORE: Record<Lang, string> = { az: "Daha çox", en: "More", tr: "Daha fazla", ar: "المزيد", ru: "Ещё" };
 export const HOME_LIMIT = 4;
+/** Tools group shows 8 cards on the homepage (icon + name, 4 per row). */
+export const HOME_LIMITS: Record<"g1" | "g2" | "g3", number> = { g1: 8, g2: HOME_LIMIT, g3: HOME_LIMIT };
 
 export function groupPath(lang: Lang, group: BarGroup) {
   return groupLocalePath(lang, group);
@@ -274,12 +276,12 @@ export function barItems(lang: Lang): Record<BarGroup, ReactElement[]> {
 
 export function BarGroupView({ lang, group, full = false }: { lang: Lang; group: BarGroup; full?: boolean }) {
   const all = barItems(lang)[group];
-  const shown = full ? all : all.slice(0, HOME_LIMIT);
+  const shown = full ? all : all.slice(0, HOME_LIMITS[group]);
   return (
     <div className={`nx-bar-group nx-bar-group--${GROUP_CLASS[group]}`}>
       {full ? null : <h2 className="nx-bar-group-title">{BAR_GROUPS[group][lang]}</h2>}
       <div className="nx-bar-group-grid">{shown}</div>
-      {!full && all.length > HOME_LIMIT ? (
+      {!full && all.length > HOME_LIMITS[group] ? (
         <a className="nx-more-link" href={groupPath(lang, group)}>
           {MORE[lang]}
           <span className="nx-more-link-arrow" aria-hidden="true">→</span>

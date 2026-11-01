@@ -1,3 +1,4 @@
+import { AnswerBlocks, FactsLine } from "@/components/answer-blocks";
 import { lazy, Suspense, useEffect, useState } from "react";
 import { Cpu, Globe2, ShieldCheck, Sparkles } from "lucide-react";
 import { useI18n } from "@/lib/i18n-context";
@@ -15,11 +16,11 @@ const PdfTool = lazy(() => import("./pdf-tool").then((m) => ({ default: m.PdfToo
 const LANG_NAME: Record<Lang, string> = { az: "Azərbaycanca", en: "English", tr: "Türkçe", ar: "العربية", ru: "Русский" };
 const ALL_TOOLS: Record<Lang, string> = { az: "Hamısı", en: "All tools", tr: "Hepsi", ar: "الكل", ru: "Все" };
 const BADGES: Record<Lang, [string, string, string]> = {
-  az: ["28 alət", "5 dil", "Cihazda emal"],
-  en: ["28 tools", "5 languages", "On-device"],
-  tr: ["28 araç", "5 dil", "Cihazda işlenir"],
-  ar: ["28 أداة", "5 لغات", "على جهازك"],
-  ru: ["28 инструментов", "5 языков", "На устройстве"],
+  az: ["35 alət", "5 dil", "Cihazda emal"],
+  en: ["35 tools", "5 languages", "On-device"],
+  tr: ["35 araç", "5 dil", "Cihazda işlenir"],
+  ar: ["35 أداة", "5 لغات", "على جهازك"],
+  ru: ["35 инструментов", "5 языков", "На устройстве"],
 };
 const ASK_AI: Record<Lang, string> = {
   az: "Nibras AI ilə PDF-i danışıqla idarə et",
@@ -107,6 +108,7 @@ export function PdfPage({ tool }: { tool: ToolId | null }) {
           <span className="pdf-badge"><ShieldCheck className="size-3.5" />{badges[2]}</span>
           <a href={localeHref(lang, "/ai")} className="pdf-badge transition hover:text-fg"><Cpu className="size-3.5" />{ASK_AI[lang]}</a>
         </div>
+        <FactsLine kind="pdf" lang={lang} />
       </header>
       {mounted ? (
         <Suspense fallback={<Skeleton />}>
@@ -120,6 +122,7 @@ export function PdfPage({ tool }: { tool: ToolId | null }) {
         </nav>
       )}
       <PageAssistant topic="pdf" />
+      {tool === "merge" ? <AnswerBlocks id="pdf-merge" lang={lang} /> : null}
       {tool && seo ? (
         <>
           <section className="pdf-surface mt-8 p-5 md:p-6" aria-labelledby="pdf-how">

@@ -25,7 +25,11 @@ export function AppSuggest() {
   const { lang } = useI18n();
   const here = stripLocalePrefix(pathname).path;
   if (pathname.startsWith("/nx-studio")) return null;
-  const card = CARDS.find((item) => !here.startsWith(`/apps/${item.slug}`));
+  // Mövzuya uyğun tövsiyə: PDF/sənəd/şəkil səhifələrində Nibras PDF, ərəb dili səhifələrində Nibras Arabic.
+  const PDF_CTX = /^\/(pdf|resurslar\/pdf|resources\/pdf|guides\/pdf|image|erase|scan|faq\/nibras-pdf|nece\/.*pdf|movzu\/.*pdf)/;
+  const preferred = PDF_CTX.test(here) || /pdf/i.test(here) ? "nibras-pdf" : null;
+  const pool = preferred ? [...CARDS].sort((a, b) => (a.slug === preferred ? -1 : b.slug === preferred ? 1 : 0)) : CARDS;
+  const card = pool.find((item) => !here.startsWith(`/apps/${item.slug}`));
   if (!card) return null;
 
   return (

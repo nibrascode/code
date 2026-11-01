@@ -1,3 +1,4 @@
+import { AnswerBlocks } from "@/components/answer-blocks";
 import { notFound } from "@tanstack/react-router";
 import { HelpCircle, Info, ShieldCheck } from "lucide-react";
 import { groupKeyFromSlug, groupLocalePath } from "@/lib/group-path";
@@ -157,6 +158,7 @@ export function GroupPage({ lang, group }: { lang: Lang; group: BarGroup }) {
       <div className="nx-bars nx-bars--full">
         <BarGroupView lang={lang} group={group} full />
       </div>
+      {group === "g2" ? <AnswerBlocks id="studio" lang={lang} /> : null}
       <h2 className="info-section-title">{HOW_T[lang]}</h2>
       <Sentences text={HOW[lang]} icon={Info} />
       <h2 className="info-section-title">{FAQ_T[lang]}</h2>

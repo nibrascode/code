@@ -1,5 +1,6 @@
 import { LayoutGrid, Link2, Mail, ShieldCheck, User } from "lucide-react";
 import { InfoCard, InfoCards } from "@/components/info-card";
+import { WhyTable } from "@/components/why-table";
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { localeHref } from "@/lib/locale-path";
 import { readLang } from "@/lib/seo";
@@ -127,6 +128,7 @@ export function NedirPage() {
           <p>{c.contact}</p>
         </InfoCard>
       </InfoCards>
+      <WhyTable lang={lang} />
     </main>
   );
 }

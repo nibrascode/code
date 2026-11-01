@@ -1,0 +1,40 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Nibras Code public API (Nibras QR, Site Doctor)",
+    "version": "1.0.0",
+    "description": "Two small public endpoints used by nibrascode.com. Free, no key. Please be gentle: Site Doctor allows one check per IP every 15 seconds.",
+    "contact": { "name": "Nibras Code", "email": "nibrascode@gmail.com", "url": "https://nibrascode.com/contact" }
+  },
+  "servers": [{ "url": "https://nibrascode.com" }],
+  "paths": {
+    "/api/qr": {
+      "get": {
+        "operationId": "makeQrPng",
+        "summary": "Make a QR code PNG (512px) from text or a URL",
+        "parameters": [
+          { "name": "text", "in": "query", "required": true, "description": "Text or URL to encode (max 500 characters).", "schema": { "type": "string", "maxLength": 500 } }
+        ],
+        "responses": {
+          "200": { "description": "QR code image", "content": { "image/png": { "schema": { "type": "string", "format": "binary" } } } },
+          "400": { "description": "Missing text" }
+        }
+      }
+    },
+    "/api/site-doctor": {
+      "post": {
+        "operationId": "checkSite",
+        "summary": "Technical and SEO check of a public website URL (Nibras Site Doctor)",
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "type": "object", "required": ["url"], "properties": { "url": { "type": "string", "description": "Public http(s) URL to check" } } } } }
+        },
+        "responses": {
+          "200": { "description": "JSON report (status, redirects, headers, meta tags, robots.txt, sitemap, links, assets)", "content": { "application/json": { "schema": { "type": "object" } } } },
+          "429": { "description": "Too many requests (one check per 15 seconds per IP)" }
+        }
+      }
+    }
+  },
+  "externalDocs": { "description": "Browser versions: https://nibrascode.com/qr and https://nibrascode.com/doctor", "url": "https://nibrascode.com/llms.txt" }
+}

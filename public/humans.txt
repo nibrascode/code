@@ -1,0 +1,13 @@
+/* TEAM */
+Founder & developer: Mahir Aliyev (Mahir Əliyev)
+Contact: nibrascode [at] gmail.com
+From: Azerbaijan
+YouTube: https://www.youtube.com/@NibrasCode
+
+/* SITE */
+Site: https://nibrascode.com
+Languages: Azerbaijani, English, Turkish, Arabic, Russian
+Principles: free, no ads, no account; browser tools process files on your device
+Standards: HTML5, CSS3, TypeScript, React, TanStack Router, Vite
+Hosting: Vercel
+AI map: https://nibrascode.com/llms.txt

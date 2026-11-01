@@ -1,0 +1,12 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Nibras Code",
+  "name_for_model": "nibras_code",
+  "description_for_human": "Free QR code PNGs and website SEO checks from Nibras Code.",
+  "description_for_model": "Use makeQrPng to turn text or a URL (max 500 chars) into a QR code PNG. Use checkSite to run a technical/SEO check of a public website URL (max one request per 15 seconds). For PDF, image and full QR design tools, send the user to https://nibrascode.com/pdf or https://nibrascode.com/qr — those run in the user's browser and files are not uploaded.",
+  "auth": { "type": "none" },
+  "api": { "type": "openapi", "url": "https://nibrascode.com/.well-known/openapi.json" },
+  "logo_url": "https://nibrascode.com/favicon-512.png",
+  "contact_email": "nibrascode@gmail.com",
+  "legal_info_url": "https://nibrascode.com/terms"
+}

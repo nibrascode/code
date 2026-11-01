@@ -186,7 +186,7 @@ with open("sohbet.csv", "w", newline="", encoding="utf-8-sig") as fayl:
       {
         az: [
           "Söhbəti mediasız ixrac et. Çıxan `.txt` faylını UTF-8 kimi oxu.",
-          "CSV-ni `encoding=\"utf-8-sig\"` ilə yaz. Excel onda `ə` hərfinı görür.",
+          "CSV-ni `encoding=\"utf-8-sig\"` ilə yaz. Excel onda `ə` hərfini görür.",
           "Sətir `tarix - ad: mesaj` formasındadır. Tarixdə nöqtə və ya kəsir ola bilər. Onu tarixə çevirmə, mətn saxla.",
           "Media sətri və sistem sətri `:` daşımır. Kod onları keçir.",
           "`.txt` faylını Excel-ə sürükləmə. Hərf orada pozulur.",
@@ -318,10 +318,10 @@ baglanti = pymysql.connect(
       {
         az: [
           "Bazanı belə aç: `CREATE DATABASE magaza CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci`.",
-          "Python-da `charset=\"utf8mb4\"` yaz. `charset=\"latin1\"` və boş charset `ə` hərfinı `?` edir.",
+          "Python-da `charset=\"utf8mb4\"` yaz. `charset=\"latin1\"` və boş charset `ə` hərfini `?` edir.",
           "Köhnə sütun `latin1`-dirsə, əvvəl mətni ixrac et, sonra sütunu `utf8mb4` elə. Əks ardıcıllıq `?` saxlayır.",
           "`SET NAMES utf8mb4` bağlantı üçündür. Artıq yazılmış `?` simvolunu dəyişmir.",
-          "Sıralama üçün MySQL 8-də `utf8mb4_az_0900_ai_ci` var. Adında `az` olan cədvəl `ə` hərfinı `e` ilə bir saymır.",
+          "Sıralama üçün MySQL 8-də `utf8mb4_az_0900_ai_ci` var. Adında `az` olan cədvəl `ə` hərfini `e` ilə bir saymır.",
         ],
         en: [
           "Open the database like this: `CREATE DATABASE magaza CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci`.",
@@ -452,7 +452,7 @@ Files.write(Path.of("metn.csv"), fayl);
       ),
       {
         az: [
-          "CSV-ni yuxarıdakı üç baytla yaz. Excel `ə` hərfinı görür.",
+          "CSV-ni yuxarıdakı üç baytla yaz. Excel `ə` hərfini görür.",
           "`new FileWriter(\"metn.csv\")` yazma. Cədvəli özü seçir və `ə` itib.",
           "`Cp1254` və `windows-1254` hərfı saxlamır. UTF-8-dən başqa cədvəl seçmə.",
           "`Files.writeString` BOM qoymur. Brauzer üçün bəsdir, Excel üçün yox.",
@@ -518,7 +518,7 @@ echo "Azərbaycan";
       {
         az: [
           "Hər səhifənin əvvəlində `header(\"Content-Type: text/html; charset=utf-8\")` olsun.",
-          "PDO sətrində `charset=utf8mb4` yaz. `charset` olmayan DSN `ə` hərfinı `?` edə bilər.",
+          "PDO sətrində `charset=utf8mb4` yaz. `charset` olmayan DSN `ə` hərfini `?` edə bilər.",
           "`mysqli` işlədirsən, bağlantıdan sonra `mysqli_set_charset($baglanti, \"utf8mb4\")` çağır.",
           "`.php` faylını UTF-8 saxla. Redaktor ANSI seçibsə, hərf fayla düşməmiş olur.",
           "Cədvəldə hərf artıq `?` olubsa, başlığı dəyişmək onu qaytarmır. Sətri yenidən yaz.",
@@ -623,7 +623,7 @@ segno.make("Azərbaycan", encoding="utf-8").save("kod.png", scale=8)
 `,
     piece: piece(
       L(
-        "QR kod ə hərfinı qəbul etmir",
+        "QR kod ə hərfini qəbul etmir",
         "A QR code will not take the letter ə",
         "QR kod ə harfini kabul etmiyor",
         "رمز QR لا يقبل حرف ə",

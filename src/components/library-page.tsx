@@ -1229,7 +1229,7 @@ const JAVA_SCHWA: Record<Lang, string> = {
 };
 
 const QR_SCHWA: Record<Lang, string> = {
-  az: "QR kod ə hərfinı qəbul etmirsə",
+  az: "QR kod ə hərfini qəbul etmirsə",
   en: "If a QR code will not take ə",
   tr: "QR kod ə harfini kabul etmiyorsa",
   ar: "إذا لم يقبل رمز QR حرف ə",

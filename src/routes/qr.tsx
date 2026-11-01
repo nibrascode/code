@@ -4,6 +4,8 @@ import { useI18n } from "@/qr/lib/i18n";
 import { localeHref } from "@/lib/locale-path";
 import { PageAssistant } from "@/components/page-assistant";
 import { PhoneReceive } from "@/components/phone-receive";
+import { FactsLine } from "@/components/answer-blocks";
+import type { Lang } from "@/lib/i18n";
 
 // The whole tool (generator, designer, exports) is its own chunk.
 const QrTool = lazy(() => import("@/qr/components/qr-tool").then((m) => ({ default: m.QrTool })));
@@ -23,6 +25,7 @@ export function QrRoutePage() {
         <div className="min-w-0 flex-1 basis-56">
           <h1 className="font-display text-2xl font-bold tracking-tight md:text-3xl">{w.title}</h1>
           <p className="mt-1 text-sm text-muted">{w.lead}</p>
+          <FactsLine kind="qr" lang={lang as Lang} />
         </div>
         <nav className="flex w-full gap-4 text-sm text-muted sm:w-auto">
           <a href={localeHref(lang, "/apps/nibras-qr")} className="hover:text-fg">

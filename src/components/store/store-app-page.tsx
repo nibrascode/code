@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, ChevronDown, Download, ExternalLink, Lock, ShieldCheck, Sparkles, X } from "lucide-react";
 import type { Lang } from "@/lib/i18n";
-import { STUDIO_APPS, appStatusLabel, appStoreLinks, statusStoreLinks, type StudioApp } from "@/lib/apps";
+import { STUDIO_APPS, appStatus, appStatusLabel, appStoreLinks, statusStoreLinks, type StudioApp } from "@/lib/apps";
 import { effectiveApp, playListed, pick, shotsFor } from "@/lib/app-store";
 import { NIBRAS_PDF_ABOUT } from "@/lib/nibras-pdf-about";
 import { useI18n } from "@/lib/i18n-context";
+import { AnswerBlocks } from "@/components/answer-blocks";
 import { localeHref } from "@/lib/locale-path";
 import { countDownload } from "@/components/visit-meter";
 import type { StudioAppRow } from "@/lib/studio";
@@ -342,6 +343,7 @@ export function StoreAppPage({ app: rawApp, live }: { app: StudioApp; live?: Stu
         </dl>
       </section>
 
+      {app.slug === "nibras-arabic" ? <AnswerBlocks id="nibras-arabic" lang={lang} /> : null}
       <section className="ns-sec">
         <h2>{l.similar}</h2>
         <div className="ns-similar">
@@ -349,7 +351,7 @@ export function StoreAppPage({ app: rawApp, live }: { app: StudioApp; live?: Stu
             <a key={a.slug} href={localeHref(lang, `/apps/${a.slug}`)}>
               <img src={iconWebp(a.icon)} alt="" width={64} height={64} loading="lazy" decoding="async" />
               <b dir="auto">{a.name}</b>
-              <span>{effectiveApp(a).facts.soon ? l.soon : l.free}</span>
+              <span>{appStatus(a.slug) === "ready" || appStatus(a.slug) === "beta" ? (effectiveApp(a).facts.soon ? l.soon : l.free) : appStatusLabel(a.slug, lang)}</span>
             </a>
           ))}
         </div>

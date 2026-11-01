@@ -1,26 +1,37 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { useRouterState } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
 import { LanguageSwitch } from "@/components/language-switch";
 import { NavMenu } from "@/components/nav-menu";
 import { faqPath } from "@/lib/faq";
 import { gamePath } from "@/lib/games";
 import { useI18n } from "@/lib/i18n-context";
-import { localeHref } from "@/lib/locale-path";
+import { homePath, localeHref } from "@/lib/locale-path";
+import { groupLocalePath as groupPath } from "@/lib/group-path";
 import { SERVICES_LABEL } from "@/components/services-page";
 import type { Lang } from "@/lib/i18n";
+
+const NAV: Record<Lang, { tools: string; workspace: string; learn: string; doctor: string }> = {
+  az: { tools: "Alətlər", workspace: "İş sahəsi", learn: "Dərslər", doctor: "Sayt yoxla" },
+  en: { tools: "Tools", workspace: "Workspace", learn: "Learn", doctor: "Site Doctor" },
+  tr: { tools: "Araçlar", workspace: "Çalışma alanı", learn: "Dersler", doctor: "Site kontrolü" },
+  ar: { tools: "الأدوات", workspace: "مساحة العمل", learn: "الدروس", doctor: "فحص الموقع" },
+  ru: { tools: "Инструменты", workspace: "Рабочая область", learn: "Уроки", doctor: "Проверка сайта" },
+};
 
 export function SiteHeader() {
   const { t, lang } = useI18n();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const isHome = pathname === "/";
+  const home = homePath(lang);
+  const isHome = pathname === "/" || pathname === home || pathname === `${home}/`;
+  const nav = NAV[lang];
 
   return (
     <header className="site-header is-scrolled">
       <div className="site-header-inner">
         <div className="brand-cluster">
-          <Link to="/" className="brand-mark" aria-label="Nibras Code">
+          <a href={home} className="brand-mark" aria-label="Nibras Code">
             <img src="/nibras-icon.png" alt="Nibras Code" className="brand-icon" />
-          </Link>
+          </a>
           {isHome ? (
             <a href={localeHref(lang, "/about")} className="nav-link about-link">
               {t("nav_about")}
@@ -30,6 +41,9 @@ export function SiteHeader() {
 
         <div className="header-actions">
           <div className="header-links">
+            <a href={groupPath(lang, "g1")} className="back-link" data-testid="nav-tools">
+              {nav.tools}
+            </a>{" "}
             <a href={localeHref(lang, "/apps")} className="back-link">
               {t("b_nav_apps")}
             </a>{" "}
@@ -37,28 +51,28 @@ export function SiteHeader() {
               Studio
             </a>{" "}
             <a href={localeHref(lang, "/workspace")} className="back-link">
-              Workspace
+              {nav.workspace}
             </a>{" "}
             <a href={localeHref(lang, "/learn")} className="back-link">
-              Learn
+              {nav.learn}
             </a>{" "}
             <a href={localeHref(lang, "/doctor")} className="back-link">
-              Site Doctor
+              {nav.doctor}
             </a>{" "}
-            <a href="/qr" className="back-link qr-nav-link">
+            <a href={localeHref(lang, "/qr")} className="back-link qr-nav-link">
               {t("nav_qr")}
             </a>{" "}
-            <Link to="/unutma" className="back-link">
+            <a href={localeHref(lang, "/unutma")} className="back-link">
               {t("remind_btn")}
-            </Link>{" "}
+            </a>{" "}
             <a href={localeHref(lang, "/contact")} className="back-link">
               {t("nx_nav_contact")}
             </a>
             {!isHome ? (
-              <Link to="/" className="back-link">
+              <a href={home} className="back-link">
                 <ArrowLeft className="rtl-flip size-3.5" />
                 {t("b_nav_home")}
-              </Link>
+              </a>
             ) : null}
           </div>{" "}
           <LanguageSwitch />

@@ -956,23 +956,23 @@ const PAGES: Record<string, Copy> = {
   "/pdf": {
     az: {
       title: "Nibras PDF — PDF birləşdir, böl, sıxışdır, imzala (pulsuz)",
-      description: "Brauzerdə 26 PDF aləti: birləşdir, böl, sıxışdır, şəkildən PDF, PDF-dən şəkil və Word, OCR, parol, watermark, imza. Pulsuz, hesabsız, fayllar yüklənmir.",
+      description: "Brauzerdə 35 PDF aləti: birləşdir, böl, sıxışdır, şəkildən PDF, PDF-dən şəkil və Word, OCR, parol, watermark, imza. Pulsuz, hesabsız, fayllar yüklənmir.",
     },
     en: {
       title: "Nibras PDF — merge, split, compress, sign PDF (free)",
-      description: "26 PDF tools in your browser: merge, split, compress, images to PDF, PDF to image and Word, OCR, password, watermark, signature. Free, no account, files stay on your device.",
+      description: "35 PDF tools in your browser: merge, split, compress, images to PDF, PDF to image and Word, OCR, password, watermark, signature. Free, no account, files stay on your device.",
     },
     tr: {
       title: "Nibras PDF — PDF birleştir, böl, sıkıştır, imzala (ücretsiz)",
-      description: "Tarayıcıda 26 PDF aracı: birleştir, böl, sıkıştır, görselden PDF, PDF'den görsel ve Word, OCR, parola, filigran, imza. Ücretsiz, hesapsız, dosyalar yüklenmez.",
+      description: "Tarayıcıda 35 PDF aracı: birleştir, böl, sıkıştır, görselden PDF, PDF'den görsel ve Word, OCR, parola, filigran, imza. Ücretsiz, hesapsız, dosyalar yüklenmez.",
     },
     ar: {
       title: "Nibras PDF — دمج وتقسيم وضغط وتوقيع PDF مجاناً",
-      description: "26 أداة PDF في المتصفح: دمج وتقسيم وضغط وتحويل الصور وWord وOCR وكلمة مرور وعلامة مائية وتوقيع. مجاناً وبلا حساب وتبقى الملفات على جهازك.",
+      description: "35 أداة PDF في المتصفح: دمج وتقسيم وضغط وتحويل الصور وWord وOCR وكلمة مرور وعلامة مائية وتوقيع. مجاناً وبلا حساب وتبقى الملفات على جهازك.",
     },
     ru: {
       title: "Nibras PDF — объединить, разделить, сжать, подписать PDF бесплатно",
-      description: "26 PDF-инструментов в браузере: объединение, разделение, сжатие, изображения и Word, OCR, пароль, водяной знак, подпись. Бесплатно, без аккаунта, файлы остаются на устройстве.",
+      description: "35 PDF-инструментов в браузере: объединение, разделение, сжатие, изображения и Word, OCR, пароль, водяной знак, подпись. Бесплатно, без аккаунта, файлы остаются на устройстве.",
     },
   },
   "/qr": {
@@ -1388,8 +1388,25 @@ function jsonLd(path: string, lang: Lang, copy: PageSeo, url: string) {
   const searched = searchTopicFromPath(path);
   if (searched) {
     const answer = [searched.piece.lead, ...searched.piece.points, searched.piece.note, searched.item.code].filter(Boolean).join(" ");
-    return {
-      "@context": "https://schema.org",
+    const strip = (v: string) => v.replace(/`/g, "").replace(/\*\*/g, "");
+    // «Necə» bələdçiləri addım-addımdır: səhifədəki real addımlardan HowTo da əlavə olunur.
+    const howTo =
+      searched.kind === "nece" && searched.piece.points.length >= 2
+        ? {
+            "@type": "HowTo",
+            name: searched.piece.title,
+            description: strip(searched.piece.lead.split("\n\n")[0]),
+            inLanguage: searched.lang,
+            url,
+            step: searched.piece.points.map((point, index) => ({
+              "@type": "HowToStep",
+              position: index + 1,
+              name: strip(point).slice(0, 110),
+              text: strip(point),
+            })),
+          }
+        : null;
+    const faqLd = {
       "@type": "FAQPage",
       name: searched.piece.title,
       description: searched.piece.lead.split("\n\n")[0],
@@ -1401,6 +1418,7 @@ function jsonLd(path: string, lang: Lang, copy: PageSeo, url: string) {
       ],
       publisher: org,
     };
+    return howTo ? { "@context": "https://schema.org", "@graph": [faqLd, howTo] } : { "@context": "https://schema.org", ...faqLd };
   }
 
   const compared = compareTopicFromPath(path);
@@ -1523,6 +1541,49 @@ function jsonLd(path: string, lang: Lang, copy: PageSeo, url: string) {
           sameAs: ["https://www.youtube.com/@NibrasCode"],
           description: copy.description,
           founder: { "@type": "Person", name: "Mahir Əliyev", url: `${SITE}/about` },
+          knowsLanguage: ["az", "en", "tr", "ar", "ru"],
+        },
+        {
+          "@type": "WebApplication",
+          "@id": `${SITE}/#tools`,
+          name: "Nibras Code Online Tools (PDF, QR, Studio IDE)",
+          url: SITE,
+          applicationCategory: "UtilitiesApplication",
+          operatingSystem: "Web browser, Android",
+          inLanguage: ["az", "en", "tr", "ar", "ru"],
+          isAccessibleForFree: true,
+          offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+          provider: { "@id": `${SITE}/#org` },
+          featureList: [
+            "Client-side PDF merge, split, compress, sign and OCR without server upload",
+            "QR code generator for URL, Wi-Fi, vCard and WhatsApp",
+            "Image compression and background removal in the browser",
+            "Browser IDE for Python, JavaScript, TypeScript, C, C++, Go, Rust, SQL and R",
+            "Web-to-APK builder (APK Studio)",
+          ],
+        },
+        {
+          "@type": "FAQPage",
+          "@id": `${SITE}/#faq`,
+          inLanguage: "az",
+          mainEntity: [
+            {
+              "@type": "Question",
+              name: "Azərbaycan dilində reklamsız və pulsuz PDF və QR alətləri harada var?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Nibras Code (nibrascode.com) saytında PDF birləşdirmə, bölmə, sıxışdırma, imzalama və QR kod hazırlama alətləri pulsuz, reklamsız və qeydiyyatsız işləyir. Fayllar brauzerdə emal olunur, serverə yüklənmir.",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "Azərbaycan dilində ərəb dilini öyrənmək üçün hansı mobil tətbiq tövsiyə olunur?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Nibras Arabic (nibrascode.com/apps/nibras-arabic) Azərbaycan dilində danışanlar üçün ərəb dili tətbiqidir: oflayn işləyir, reklamsızdır, feillər, sözlər, dialoqlar, flash-kartlar və əlifba yazı məşqi var. Android üçün Google Play-dədir.",
+              },
+            },
+          ],
         },
         {
           "@type": "SoftwareApplication",

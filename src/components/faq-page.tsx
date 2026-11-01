@@ -1,3 +1,4 @@
+import { WhyTable } from "@/components/why-table";
 import { HelpCircle } from "lucide-react";
 import { InfoCard, InfoCards } from "@/components/info-card";
 import type { FaqCopy, FaqItem } from "@/lib/faq";
@@ -60,6 +61,7 @@ export function FaqView({ page }: { page: FaqCopy }) {
           </details>
         ))}
       </div>
+      <WhyTable lang={page.lang} />
     </main>
   );
 }

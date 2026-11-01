@@ -34,28 +34,28 @@ const LINKS: Record<Lang, readonly FaqLink[]> = {
   en: [
     { href: "/en/apps", label: "Apps" },
     { href: "/en/tools", label: "Services" },
-    { href: "/qr", label: "QR" },
+    { href: "/en/qr", label: "QR" },
     { href: "/en/programming", label: "Programming" },
     { href: "/en/contact", label: "Contact" },
   ],
   tr: [
     { href: "/tr/apps", label: "Uygulamalar" },
     { href: "/tr/tools", label: "Hizmetler" },
-    { href: "/qr", label: "QR" },
+    { href: "/tr/qr", label: "QR" },
     { href: "/tr/programming", label: "Programlama" },
     { href: "/tr/contact", label: "İletişim" },
   ],
   ar: [
     { href: "/ar/apps", label: "التطبيقات" },
     { href: "/ar/tools", label: "الخدمات" },
-    { href: "/qr", label: "QR" },
+    { href: "/ar/qr", label: "QR" },
     { href: "/ar/programming", label: "البرمجة" },
     { href: "/ar/contact", label: "تواصل" },
   ],
   ru: [
     { href: "/ru/apps", label: "Приложения" },
     { href: "/ru/tools", label: "Сервисы" },
-    { href: "/qr", label: "QR" },
+    { href: "/ru/qr", label: "QR" },
     { href: "/ru/programming", label: "Программирование" },
     { href: "/ru/contact", label: "Контакт" },
   ],
@@ -104,7 +104,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "arabic",
         q: "Nibras Arabic nədir?",
-        a: "Nibras Arabic Azərbaycan dilini bilən birinin ərəb dilini daha asan öyrənməsi üçün nəzərdə tutulub. Tətbiqin adı Nibras Arabic, şüarı isə «Ərəb dili - daha yaxın»dır. Versiya v1.1.0. Öyrənilən məlumatlar cihazda saxlanılır.",
+        a: "Nibras Arabic Azərbaycan dilini bilən birinin ərəb dilini daha asan öyrənməsi üçün nəzərdə tutulub. Tətbiqin adı Nibras Arabic, şüarı isə «Ərəb dili - daha yaxın»dır. Versiya v1.2.1. Öyrənilən məlumatlar cihazda saxlanılır.",
         points: [
           "Üst paneldə Ayarlar və gecə/gündüz rejimi var.",
           "Sürətli statistika: öyrənmə seriyası, öyrənilən söz sayı (məsələn 12 / 5100), səviyyə (məsələn Başlanğıc) və gündəlik hədəf (məsələn 50 XP, təxminən 15 dəqiqə).",
@@ -255,7 +255,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "arabic",
         q: "What is Nibras Arabic?",
-        a: "Nibras Arabic is made so someone who already knows Azerbaijani can learn Arabic more easily. The app name stays Nibras Arabic. The slogan is «Ərəb dili - daha yaxın» — Arabic, a little closer. Version v1.1.0. What you learn is saved on the device.",
+        a: "Nibras Arabic is made so someone who already knows Azerbaijani can learn Arabic more easily. The app name stays Nibras Arabic. The slogan is «Ərəb dili - daha yaxın» — Arabic, a little closer. Version v1.2.1. What you learn is saved on the device.",
         points: [
           "The top bar has Settings and a day/night switch.",
           "Quick stats: learning streak, words learned (for example 12 / 5100), level (for example Beginner), and a daily goal (for example 50 XP, about 15 minutes).",
@@ -406,7 +406,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "arabic",
         q: "Nibras Arabic nedir?",
-        a: "Nibras Arabic, Azerbaycan Türkçesini bilen birinin Arapçayı daha kolay öğrenmesi için tasarlanmıştır. Uygulama adı Nibras Arabic olarak kalır. Sloganı «Ərəb dili - daha yaxın»dır: Arapça, biraz daha yakın. Sürüm v1.1.0. Öğrenilen bilgiler cihazda saklanır.",
+        a: "Nibras Arabic, Azerbaycan Türkçesini bilen birinin Arapçayı daha kolay öğrenmesi için tasarlanmıştır. Uygulama adı Nibras Arabic olarak kalır. Sloganı «Ərəb dili - daha yaxın»dır: Arapça, biraz daha yakın. Sürüm v1.2.1. Öğrenilen bilgiler cihazda saklanır.",
         points: [
           "Üst barda Ayarlar ve gece/gündüz geçişi vardır.",
           "Hızlı istatistik: öğrenme serisi, öğrenilen sözcük sayısı (örneğin 12 / 5100), seviye (örneğin Başlangıç) ve günlük hedef (örneğin 50 XP, yaklaşık 15 dakika).",
@@ -557,7 +557,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "arabic",
         q: "ما هو Nibras Arabic؟",
-        a: "Nibras Arabic مُعدّ لمن يعرف الأذربيجانية ليتعلّم العربية بسهولة أكبر. يبقى اسم التطبيق Nibras Arabic. شعاره «Ərəb dili - daha yaxın»، أي العربية أقرب. الإصدار v1.1.0. تُحفظ بيانات التعلّم على الجهاز.",
+        a: "Nibras Arabic مُعدّ لمن يعرف الأذربيجانية ليتعلّم العربية بسهولة أكبر. يبقى اسم التطبيق Nibras Arabic. شعاره «Ərəb dili - daha yaxın»، أي العربية أقرب. الإصدار v1.2.1. تُحفظ بيانات التعلّم على الجهاز.",
         points: [
           "في الشريط العلوي زر الإعدادات ومفتاح وضع الليل والنهار.",
           "إحصاء سريع: سلسلة التعلّم، وعدد الكلمات المتعلَّمة (مثل 12 / 5100)، والمستوى (مثل مبتدئ)، والهدف اليومي (مثل 50 XP، نحو 15 دقيقة).",
@@ -708,7 +708,7 @@ export const FAQ: Record<Lang, FaqCopy> = {
       {
         id: "arabic",
         q: "Что такое Nibras Arabic?",
-        a: "Nibras Arabic сделан для того, кто уже знает азербайджанский и хочет учить арабский легче. Название приложения остаётся Nibras Arabic. Девиз: «Ərəb dili - daha yaxın» — арабский ближе. Версия v1.1.0. Данные обучения хранятся на устройстве.",
+        a: "Nibras Arabic сделан для того, кто уже знает азербайджанский и хочет учить арабский легче. Название приложения остаётся Nibras Arabic. Девиз: «Ərəb dili - daha yaxın» — арабский ближе. Версия v1.2.1. Данные обучения хранятся на устройстве.",
         points: [
           "На верхней панели есть Настройки и переключатель дня и ночи.",
           "Краткая статистика: серия обучения, число выученных слов (например 12 / 5100), уровень (например Начальный) и дневная цель (например 50 XP, около 15 минут).",

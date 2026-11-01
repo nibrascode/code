@@ -1,0 +1,1381 @@
+{
+  "name": "Nibras Code tools catalog",
+  "publisher": "Nibras Code",
+  "url": "https://nibrascode.com",
+  "contact": "nibrascode@gmail.com",
+  "updated": "2026-11-01",
+  "count": 45,
+  "note": "clientSide:true means files are processed in the user's browser and are not uploaded to a server.",
+  "tools": [
+    {
+      "id": "pdf-write-pdf",
+      "name": "Simple PDF editor",
+      "names": {
+        "az": "Sadə PDF düzəlt",
+        "en": "Simple PDF editor",
+        "tr": "Basit PDF düzenle",
+        "ar": "محرر PDF البسيط",
+        "ru": "Простой редактор PDF"
+      },
+      "description": "Type or pick a template: application letter, simple CV, explanatory note, price quote",
+      "category": "pdf",
+      "url": "https://nibrascode.com/en/pdf/write-pdf",
+      "urls": {
+        "az": "https://nibrascode.com/pdf/write-pdf",
+        "en": "https://nibrascode.com/en/pdf/write-pdf",
+        "tr": "https://nibrascode.com/tr/pdf/write-pdf",
+        "ar": "https://nibrascode.com/ar/pdf/write-pdf",
+        "ru": "https://nibrascode.com/ru/pdf/write-pdf"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "pdf-merge",
+      "name": "Merge",
+      "names": {
+        "az": "Birləşdir",
+        "en": "Merge",
+        "tr": "Birleştir",
+        "ar": "دمج",
+        "ru": "Объединить"
+      },
+      "description": "Combine multiple PDFs into one file",
+      "category": "pdf",
+      "url": "https://nibrascode.com/en/pdf/merge",
+      "urls": {
+        "az": "https://nibrascode.com/pdf/merge",
+        "en": "https://nibrascode.com/en/pdf/merge",
+        "tr": "https://nibrascode.com/tr/pdf/merge",
+        "ar": "https://nibrascode.com/ar/pdf/merge",
+        "ru": "https://nibrascode.com/ru/pdf/merge"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "pdf-split",
+      "name": "Split",
+      "names": {
+        "az": "Böl",
+        "en": "Split",
+        "tr": "Böl",
+        "ar": "تقسيم",
+        "ru": "Разделить"
+      },
+      "description": "Separate pages into individual files",
+      "category": "pdf",
+      "url": "https://nibrascode.com/en/pdf/split",
+      "urls": {
+        "az": "https://nibrascode.com/pdf/split",
+        "en": "https://nibrascode.com/en/pdf/split",
+        "tr": "https://nibrascode.com/tr/pdf/split",
+        "ar": "https://nibrascode.com/ar/pdf/split",
+        "ru": "https://nibrascode.com/ru/pdf/split"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "pdf-compress",
+      "name": "Compress",
+      "names": {
+        "az": "Sıxışdır",
+        "en": "Compress",
+        "tr": "Sıkıştır",
+        "ar": "ضغط",
+        "ru": "Сжать"
+      },
+      "description": "Reduce the file size",
+      "category": "pdf",
+      "url": "https://nibrascode.com/en/pdf/compress",
+      "urls": {
+        "az": "https://nibrascode.com/pdf/compress",
+        "en": "https://nibrascode.com/en/pdf/compress",
+        "tr": "https://nibrascode.com/tr/pdf/compress",
+        "ar": "https://nibrascode.com/ar/pdf/compress",
+        "ru": "https://nibrascode.com/ru/pdf/compress"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "pdf-image-pdf",
+      "name": "Image to PDF",
+      "names": {
+        "az": "Şəkildən PDF",
+        "en": "Image to PDF",
+        "tr": "Görüntüden PDF",
+        "ar": "صورة إلى PDF",
+        "ru": "Изображение в PDF"
+      },
+      "description": "Add one or more images to a PDF document",
+      "category": "pdf",
+      "url": "https://nibrascode.com/en/pdf/image-pdf",
+      "urls": {
+        "az": "https://nibrascode.com/pdf/image-pdf",
+        "en": "https://nibrascode.com/en/pdf/image-pdf",
+        "tr": "https://nibrascode.com/tr/pdf/image-pdf",
+        "ar": "https://nibrascode.com/ar/pdf/image-pdf",
+        "ru": "https://nibrascode.com/ru/pdf/image-pdf"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "pdf-pdf-image",
+      "name": "PDF to image",
+      "names": {
+        "az": "PDF-dən şəkil",
+        "en": "PDF to image",
+        "tr": "PDF'den görüntü",
+        "ar": "PDF إلى صورة",
+        "ru": "PDF в изображение"
+      },
+      "description": "Save pages as images",
+      "category": "pdf",
+      "url": "https://nibrascode.com/en/pdf/pdf-image",
+      "urls": {
+        "az": "https://nibrascode.com/pdf/pdf-image",
+        "en": "https://nibrascode.com/en/pdf/pdf-image",
+        "tr": "https://nibrascode.com/tr/pdf/pdf-image",
+        "ar": "https://nibrascode.com/ar/pdf/pdf-image",
+        "ru": "https://nibrascode.com/ru/pdf/pdf-image"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "pdf-rotate",
+      "name": "Rotate",
+      "names": {
+        "az": "Dönüştür",
+        "en": "Rotate",
+        "tr": "Döndür",
+        "ar": "تدوير",
+        "ru": "Повернуть"
+      },
+      "description": "Turn the PDF left or right",
+      "category": "pdf",
+      "url": "https://nibrascode.com/en/pdf/rotate",
+      "urls": {
+        "az": "https://nibrascode.com/pdf/rotate",
+        "en": "https://nibrascode.com/en/pdf/rotate",
+        "tr": "https://nibrascode.com/tr/pdf/rotate",
+        "ar": "https://nibrascode.com/ar/pdf/rotate",
+        "ru": "https://nibrascode.com/ru/pdf/rotate"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "pdf-protect",
+      "name": "Protect",
+      "names": {
+        "az": "Qoru",
+        "en": "Protect",
+        "tr": "Koru",
+        "ar": "حماية",
+        "ru": "Защитить"
+      },
+      "description": "Secure with a password",
+      "category": "pdf",
+      "url": "https://nibrascode.com/en/pdf/protect",
+      "urls": {
+        "az": "https://nibrascode.com/pdf/protect",
+        "en": "https://nibrascode.com/en/pdf/protect",
+        "tr": "https://nibrascode.com/tr/pdf/protect",
+        "ar": "https://nibrascode.com/ar/pdf/protect",
+        "ru": "https://nibrascode.com/ru/pdf/protect"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "pdf-watermark",
+      "name": "Watermark",
+      "names": {
+        "az": "Su nişanı",
+        "en": "Watermark",
+        "tr": "Filigran",
+        "ar": "علامة مائية",
+        "ru": "Водяной знак"
+      },
+      "description": "Add text or a mark to the document",
+      "category": "pdf",
+      "url": "https://nibrascode.com/en/pdf/watermark",
+      "urls": {
+        "az": "https://nibrascode.com/pdf/watermark",
+        "en": "https://nibrascode.com/en/pdf/watermark",
+        "tr": "https://nibrascode.com/tr/pdf/watermark",
+        "ar": "https://nibrascode.com/ar/pdf/watermark",
+        "ru": "https://nibrascode.com/ru/pdf/watermark"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "pdf-pages",
+      "name": "Manage pages",
+      "names": {
+        "az": "Səhifələri idarə et",
+        "en": "Manage pages",
+        "tr": "Sayfaları yönet",
+        "ar": "إدارة الصفحات",
+        "ru": "Управление страницами"
+      },
+      "description": "Delete pages and change their order",
+      "category": "pdf",
+      "url": "https://nibrascode.com/en/pdf/pages",
+      "urls": {
+        "az": "https://nibrascode.com/pdf/pages",
+        "en": "https://nibrascode.com/en/pdf/pages",
+        "tr": "https://nibrascode.com/tr/pdf/pages",
+        "ar": "https://nibrascode.com/ar/pdf/pages",
+        "ru": "https://nibrascode.com/ru/pdf/pages"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "pdf-scan",
+      "name": "Scan",
+      "names": {
+        "az": "Skan et",
+        "en": "Scan",
+        "tr": "Tara",
+        "ar": "مسح",
+        "ru": "Сканировать"
+      },
+      "description": "Turn a document into a PDF with the camera",
+      "category": "pdf",
+      "url": "https://nibrascode.com/en/pdf/scan",
+      "urls": {
+        "az": "https://nibrascode.com/pdf/scan",
+        "en": "https://nibrascode.com/en/pdf/scan",
+        "tr": "https://nibrascode.com/tr/pdf/scan",
+        "ar": "https://nibrascode.com/ar/pdf/scan",
+        "ru": "https://nibrascode.com/ru/pdf/scan"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "pdf-sign",
+      "name": "Add signature",
+      "names": {
+        "az": "İmza əlavə et",
+        "en": "Add signature",
+        "tr": "İmza ekle",
+        "ar": "إضافة توقيع",
+        "ru": "Добавить подпись"
+      },
+      "description": "Place an electronic signature on a PDF",
+      "category": "pdf",
+      "url": "https://nibrascode.com/en/pdf/sign",
+      "urls": {
+        "az": "https://nibrascode.com/pdf/sign",
+        "en": "https://nibrascode.com/en/pdf/sign",
+        "tr": "https://nibrascode.com/tr/pdf/sign",
+        "ar": "https://nibrascode.com/ar/pdf/sign",
+        "ru": "https://nibrascode.com/ru/pdf/sign"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "pdf-ocr",
+      "name": "Recognize text",
+      "names": {
+        "az": "Mətni tanı",
+        "en": "Recognize text",
+        "tr": "Metni tanı",
+        "ar": "التعرف على النص",
+        "ru": "Распознать текст"
+      },
+      "description": "Extract text from an image on-device",
+      "category": "pdf",
+      "url": "https://nibrascode.com/en/pdf/ocr",
+      "urls": {
+        "az": "https://nibrascode.com/pdf/ocr",
+        "en": "https://nibrascode.com/en/pdf/ocr",
+        "tr": "https://nibrascode.com/tr/pdf/ocr",
+        "ar": "https://nibrascode.com/ar/pdf/ocr",
+        "ru": "https://nibrascode.com/ru/pdf/ocr"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "pdf-pdf-ocr",
+      "name": "OCR PDF",
+      "names": {
+        "az": "PDF-dən mətn çıxar",
+        "en": "OCR PDF",
+        "tr": "PDF’den metin çıkar",
+        "ar": "استخراج النص من PDF",
+        "ru": "OCR PDF"
+      },
+      "description": "Recognize text from PDF pages on-device",
+      "category": "pdf",
+      "url": "https://nibrascode.com/en/pdf/pdf-ocr",
+      "urls": {
+        "az": "https://nibrascode.com/pdf/pdf-ocr",
+        "en": "https://nibrascode.com/en/pdf/pdf-ocr",
+        "tr": "https://nibrascode.com/tr/pdf/pdf-ocr",
+        "ar": "https://nibrascode.com/ar/pdf/pdf-ocr",
+        "ru": "https://nibrascode.com/ru/pdf/pdf-ocr"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "pdf-pdf-word",
+      "name": "Convert PDF to Word",
+      "names": {
+        "az": "PDF-dən Word",
+        "en": "Convert PDF to Word",
+        "tr": "PDF’yi Word’e çevir",
+        "ar": "تحويل PDF إلى Word",
+        "ru": "Конвертировать PDF в Word"
+      },
+      "description": "Save PDF text as a DOCX file",
+      "category": "pdf",
+      "url": "https://nibrascode.com/en/pdf/pdf-word",
+      "urls": {
+        "az": "https://nibrascode.com/pdf/pdf-word",
+        "en": "https://nibrascode.com/en/pdf/pdf-word",
+        "tr": "https://nibrascode.com/tr/pdf/pdf-word",
+        "ar": "https://nibrascode.com/ar/pdf/pdf-word",
+        "ru": "https://nibrascode.com/ru/pdf/pdf-word"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "pdf-preview",
+      "name": "PDF preview",
+      "names": {
+        "az": "PDF önizləmə",
+        "en": "PDF preview",
+        "tr": "PDF önizleme",
+        "ar": "معاينة PDF",
+        "ru": "Предпросмотр PDF"
+      },
+      "description": "View and zoom pages",
+      "category": "pdf",
+      "url": "https://nibrascode.com/en/pdf/preview",
+      "urls": {
+        "az": "https://nibrascode.com/pdf/preview",
+        "en": "https://nibrascode.com/en/pdf/preview",
+        "tr": "https://nibrascode.com/tr/pdf/preview",
+        "ar": "https://nibrascode.com/ar/pdf/preview",
+        "ru": "https://nibrascode.com/ru/pdf/preview"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "pdf-batch",
+      "name": "Batch processing",
+      "names": {
+        "az": "Toplu əməliyyatlar",
+        "en": "Batch processing",
+        "tr": "Toplu işlem",
+        "ar": "معالجة مجمعة",
+        "ru": "Пакетная обработка"
+      },
+      "description": "Process several PDFs at once",
+      "category": "pdf",
+      "url": "https://nibrascode.com/en/pdf/batch",
+      "urls": {
+        "az": "https://nibrascode.com/pdf/batch",
+        "en": "https://nibrascode.com/en/pdf/batch",
+        "tr": "https://nibrascode.com/tr/pdf/batch",
+        "ar": "https://nibrascode.com/ar/pdf/batch",
+        "ru": "https://nibrascode.com/ru/pdf/batch"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "pdf-extract-pages",
+      "name": "Select and extract pages",
+      "names": {
+        "az": "Səhifə seç və çıxar",
+        "en": "Select and extract pages",
+        "tr": "Sayfa seç ve çıkar",
+        "ar": "تحديد واستخراج الصفحات",
+        "ru": "Выбрать и извлечь страницы"
+      },
+      "description": "Create a new PDF from selected pages",
+      "category": "pdf",
+      "url": "https://nibrascode.com/en/pdf/extract-pages",
+      "urls": {
+        "az": "https://nibrascode.com/pdf/extract-pages",
+        "en": "https://nibrascode.com/en/pdf/extract-pages",
+        "tr": "https://nibrascode.com/tr/pdf/extract-pages",
+        "ar": "https://nibrascode.com/ar/pdf/extract-pages",
+        "ru": "https://nibrascode.com/ru/pdf/extract-pages"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "pdf-word-pdf",
+      "name": "Word to PDF",
+      "names": {
+        "az": "Word-dan PDF",
+        "en": "Word to PDF",
+        "tr": "Word’den PDF",
+        "ar": "من وورد إلى PDF",
+        "ru": "Word в PDF"
+      },
+      "description": "Convert a DOCX file into a PDF",
+      "category": "pdf",
+      "url": "https://nibrascode.com/en/pdf/word-pdf",
+      "urls": {
+        "az": "https://nibrascode.com/pdf/word-pdf",
+        "en": "https://nibrascode.com/en/pdf/word-pdf",
+        "tr": "https://nibrascode.com/tr/pdf/word-pdf",
+        "ar": "https://nibrascode.com/ar/pdf/word-pdf",
+        "ru": "https://nibrascode.com/ru/pdf/word-pdf"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "pdf-page-numbers",
+      "name": "Add page numbers",
+      "names": {
+        "az": "Səhifə nömrəsi qoy",
+        "en": "Add page numbers",
+        "tr": "Sayfa numarası ekle",
+        "ar": "ترقيم الصفحات",
+        "ru": "Номера страниц"
+      },
+      "description": "Put page numbers on an existing PDF",
+      "category": "pdf",
+      "url": "https://nibrascode.com/en/pdf/page-numbers",
+      "urls": {
+        "az": "https://nibrascode.com/pdf/page-numbers",
+        "en": "https://nibrascode.com/en/pdf/page-numbers",
+        "tr": "https://nibrascode.com/tr/pdf/page-numbers",
+        "ar": "https://nibrascode.com/ar/pdf/page-numbers",
+        "ru": "https://nibrascode.com/ru/pdf/page-numbers"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "pdf-unlock",
+      "name": "Unlock PDF",
+      "names": {
+        "az": "PDF parolunu aç",
+        "en": "Unlock PDF",
+        "tr": "PDF parolasını kaldır",
+        "ar": "إزالة كلمة مرور PDF",
+        "ru": "Снять пароль с PDF"
+      },
+      "description": "Remove the password from a PDF you can open",
+      "category": "pdf",
+      "url": "https://nibrascode.com/en/pdf/unlock",
+      "urls": {
+        "az": "https://nibrascode.com/pdf/unlock",
+        "en": "https://nibrascode.com/en/pdf/unlock",
+        "tr": "https://nibrascode.com/tr/pdf/unlock",
+        "ar": "https://nibrascode.com/ar/pdf/unlock",
+        "ru": "https://nibrascode.com/ru/pdf/unlock"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "pdf-crop",
+      "name": "Crop PDF",
+      "names": {
+        "az": "PDF-i kəs",
+        "en": "Crop PDF",
+        "tr": "PDF kırp",
+        "ar": "قص PDF",
+        "ru": "Обрезать PDF"
+      },
+      "description": "Trim the edges of PDF pages",
+      "category": "pdf",
+      "url": "https://nibrascode.com/en/pdf/crop",
+      "urls": {
+        "az": "https://nibrascode.com/pdf/crop",
+        "en": "https://nibrascode.com/en/pdf/crop",
+        "tr": "https://nibrascode.com/tr/pdf/crop",
+        "ar": "https://nibrascode.com/ar/pdf/crop",
+        "ru": "https://nibrascode.com/ru/pdf/crop"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "pdf-grayscale",
+      "name": "Grayscale PDF",
+      "names": {
+        "az": "PDF-i boz et",
+        "en": "Grayscale PDF",
+        "tr": "PDF'i gri yap",
+        "ar": "PDF بالأبيض والأسود",
+        "ru": "PDF в оттенки серого"
+      },
+      "description": "Turn a color PDF into black and white",
+      "category": "pdf",
+      "url": "https://nibrascode.com/en/pdf/grayscale",
+      "urls": {
+        "az": "https://nibrascode.com/pdf/grayscale",
+        "en": "https://nibrascode.com/en/pdf/grayscale",
+        "tr": "https://nibrascode.com/tr/pdf/grayscale",
+        "ar": "https://nibrascode.com/ar/pdf/grayscale",
+        "ru": "https://nibrascode.com/ru/pdf/grayscale"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "pdf-excel-pdf",
+      "name": "Excel/CSV to PDF",
+      "names": {
+        "az": "Excel/CSV-dən PDF",
+        "en": "Excel/CSV to PDF",
+        "tr": "Excel/CSV'den PDF",
+        "ar": "من Excel/CSV إلى PDF",
+        "ru": "Excel/CSV в PDF"
+      },
+      "description": "Turn an XLSX or CSV table into a PDF",
+      "category": "pdf",
+      "url": "https://nibrascode.com/en/pdf/excel-pdf",
+      "urls": {
+        "az": "https://nibrascode.com/pdf/excel-pdf",
+        "en": "https://nibrascode.com/en/pdf/excel-pdf",
+        "tr": "https://nibrascode.com/tr/pdf/excel-pdf",
+        "ar": "https://nibrascode.com/ar/pdf/excel-pdf",
+        "ru": "https://nibrascode.com/ru/pdf/excel-pdf"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "pdf-redact",
+      "name": "Redact PDF",
+      "names": {
+        "az": "PDF-də məlumatı gizlət",
+        "en": "Redact PDF",
+        "tr": "PDF'te bilgiyi gizle",
+        "ar": "إخفاء معلومات في PDF",
+        "ru": "Скрыть данные в PDF"
+      },
+      "description": "Cover chosen areas with black boxes",
+      "category": "pdf",
+      "url": "https://nibrascode.com/en/pdf/redact",
+      "urls": {
+        "az": "https://nibrascode.com/pdf/redact",
+        "en": "https://nibrascode.com/en/pdf/redact",
+        "tr": "https://nibrascode.com/tr/pdf/redact",
+        "ar": "https://nibrascode.com/ar/pdf/redact",
+        "ru": "https://nibrascode.com/ru/pdf/redact"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "pdf-invoice",
+      "name": "Invoice PDF",
+      "names": {
+        "az": "Hesab-faktura PDF",
+        "en": "Invoice PDF",
+        "tr": "Fatura PDF",
+        "ar": "فاتورة PDF",
+        "ru": "Счёт в PDF"
+      },
+      "description": "Make a simple invoice from seller, buyer and items",
+      "category": "pdf",
+      "url": "https://nibrascode.com/en/pdf/invoice",
+      "urls": {
+        "az": "https://nibrascode.com/pdf/invoice",
+        "en": "https://nibrascode.com/en/pdf/invoice",
+        "tr": "https://nibrascode.com/tr/pdf/invoice",
+        "ar": "https://nibrascode.com/ar/pdf/invoice",
+        "ru": "https://nibrascode.com/ru/pdf/invoice"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "pdf-pdf-excel",
+      "name": "PDF to Excel",
+      "names": {
+        "az": "PDF-dən Excel",
+        "en": "PDF to Excel",
+        "tr": "PDF'ten Excel",
+        "ar": "من PDF إلى Excel",
+        "ru": "PDF в Excel"
+      },
+      "description": "Turn PDF tables into an XLSX file",
+      "category": "pdf",
+      "url": "https://nibrascode.com/en/pdf/pdf-excel",
+      "urls": {
+        "az": "https://nibrascode.com/pdf/pdf-excel",
+        "en": "https://nibrascode.com/en/pdf/pdf-excel",
+        "tr": "https://nibrascode.com/tr/pdf/pdf-excel",
+        "ar": "https://nibrascode.com/ar/pdf/pdf-excel",
+        "ru": "https://nibrascode.com/ru/pdf/pdf-excel"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "pdf-ppt-pdf",
+      "name": "PowerPoint to PDF",
+      "names": {
+        "az": "PowerPoint-dən PDF",
+        "en": "PowerPoint to PDF",
+        "tr": "PowerPoint'ten PDF",
+        "ar": "من PowerPoint إلى PDF",
+        "ru": "PowerPoint в PDF"
+      },
+      "description": "Turn PPTX slides into a PDF",
+      "category": "pdf",
+      "url": "https://nibrascode.com/en/pdf/ppt-pdf",
+      "urls": {
+        "az": "https://nibrascode.com/pdf/ppt-pdf",
+        "en": "https://nibrascode.com/en/pdf/ppt-pdf",
+        "tr": "https://nibrascode.com/tr/pdf/ppt-pdf",
+        "ar": "https://nibrascode.com/ar/pdf/ppt-pdf",
+        "ru": "https://nibrascode.com/ru/pdf/ppt-pdf"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "pdf-pdf-ppt",
+      "name": "PDF to PowerPoint",
+      "names": {
+        "az": "PDF-dən PowerPoint",
+        "en": "PDF to PowerPoint",
+        "tr": "PDF'ten PowerPoint",
+        "ar": "من PDF إلى PowerPoint",
+        "ru": "PDF в PowerPoint"
+      },
+      "description": "Turn PDF pages into PPTX slides",
+      "category": "pdf",
+      "url": "https://nibrascode.com/en/pdf/pdf-ppt",
+      "urls": {
+        "az": "https://nibrascode.com/pdf/pdf-ppt",
+        "en": "https://nibrascode.com/en/pdf/pdf-ppt",
+        "tr": "https://nibrascode.com/tr/pdf/pdf-ppt",
+        "ar": "https://nibrascode.com/ar/pdf/pdf-ppt",
+        "ru": "https://nibrascode.com/ru/pdf/pdf-ppt"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "pdf-flatten",
+      "name": "Flatten PDF",
+      "names": {
+        "az": "PDF-i sabitlə (flatten)",
+        "en": "Flatten PDF",
+        "tr": "PDF düzleştir",
+        "ar": "تسطيح PDF",
+        "ru": "Сделать PDF плоским"
+      },
+      "description": "Make form fields fixed and uneditable",
+      "category": "pdf",
+      "url": "https://nibrascode.com/en/pdf/flatten",
+      "urls": {
+        "az": "https://nibrascode.com/pdf/flatten",
+        "en": "https://nibrascode.com/en/pdf/flatten",
+        "tr": "https://nibrascode.com/tr/pdf/flatten",
+        "ar": "https://nibrascode.com/ar/pdf/flatten",
+        "ru": "https://nibrascode.com/ru/pdf/flatten"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "pdf-metadata",
+      "name": "PDF metadata",
+      "names": {
+        "az": "PDF xassələri (metadata)",
+        "en": "PDF metadata",
+        "tr": "PDF meta verisi",
+        "ar": "بيانات PDF الوصفية",
+        "ru": "Метаданные PDF"
+      },
+      "description": "View and edit title, author and keywords",
+      "category": "pdf",
+      "url": "https://nibrascode.com/en/pdf/metadata",
+      "urls": {
+        "az": "https://nibrascode.com/pdf/metadata",
+        "en": "https://nibrascode.com/en/pdf/metadata",
+        "tr": "https://nibrascode.com/tr/pdf/metadata",
+        "ar": "https://nibrascode.com/ar/pdf/metadata",
+        "ru": "https://nibrascode.com/ru/pdf/metadata"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "pdf-compare",
+      "name": "Compare PDFs",
+      "names": {
+        "az": "PDF-ləri müqayisə et",
+        "en": "Compare PDFs",
+        "tr": "PDF karşılaştır",
+        "ar": "مقارنة ملفات PDF",
+        "ru": "Сравнить PDF"
+      },
+      "description": "Find text differences between two PDFs",
+      "category": "pdf",
+      "url": "https://nibrascode.com/en/pdf/compare",
+      "urls": {
+        "az": "https://nibrascode.com/pdf/compare",
+        "en": "https://nibrascode.com/en/pdf/compare",
+        "tr": "https://nibrascode.com/tr/pdf/compare",
+        "ar": "https://nibrascode.com/ar/pdf/compare",
+        "ru": "https://nibrascode.com/ru/pdf/compare"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "pdf-excel-csv",
+      "name": "Excel to CSV",
+      "names": {
+        "az": "Excel-dən CSV",
+        "en": "Excel to CSV",
+        "tr": "Excel'den CSV",
+        "ar": "من Excel إلى CSV",
+        "ru": "Excel в CSV"
+      },
+      "description": "Turn an XLSX sheet into a CSV file",
+      "category": "pdf",
+      "url": "https://nibrascode.com/en/pdf/excel-csv",
+      "urls": {
+        "az": "https://nibrascode.com/pdf/excel-csv",
+        "en": "https://nibrascode.com/en/pdf/excel-csv",
+        "tr": "https://nibrascode.com/tr/pdf/excel-csv",
+        "ar": "https://nibrascode.com/ar/pdf/excel-csv",
+        "ru": "https://nibrascode.com/ru/pdf/excel-csv"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "pdf-csv-excel",
+      "name": "CSV to Excel",
+      "names": {
+        "az": "CSV-dən Excel",
+        "en": "CSV to Excel",
+        "tr": "CSV'den Excel",
+        "ar": "من CSV إلى Excel",
+        "ru": "CSV в Excel"
+      },
+      "description": "Turn a CSV table into XLSX",
+      "category": "pdf",
+      "url": "https://nibrascode.com/en/pdf/csv-excel",
+      "urls": {
+        "az": "https://nibrascode.com/pdf/csv-excel",
+        "en": "https://nibrascode.com/en/pdf/csv-excel",
+        "tr": "https://nibrascode.com/tr/pdf/csv-excel",
+        "ar": "https://nibrascode.com/ar/pdf/csv-excel",
+        "ru": "https://nibrascode.com/ru/pdf/csv-excel"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "pdf-url-pdf",
+      "name": "URL to PDF",
+      "names": {
+        "az": "URL-dən PDF",
+        "en": "URL to PDF",
+        "tr": "URL'den PDF",
+        "ar": "من رابط إلى PDF",
+        "ru": "URL в PDF"
+      },
+      "description": "Save a web page's text and images as PDF",
+      "category": "pdf",
+      "url": "https://nibrascode.com/en/pdf/url-pdf",
+      "urls": {
+        "az": "https://nibrascode.com/pdf/url-pdf",
+        "en": "https://nibrascode.com/en/pdf/url-pdf",
+        "tr": "https://nibrascode.com/tr/pdf/url-pdf",
+        "ar": "https://nibrascode.com/ar/pdf/url-pdf",
+        "ru": "https://nibrascode.com/ru/pdf/url-pdf"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "qr",
+      "name": "Nibras QR — QR code maker & scanner",
+      "description": "Create QR codes for URL, Wi-Fi, vCard, WhatsApp, SMS and events with colors and logo; scan QR codes with the camera.",
+      "category": "qr",
+      "url": "https://nibrascode.com/en/qr",
+      "urls": {
+        "az": "https://nibrascode.com/qr",
+        "en": "https://nibrascode.com/en/qr",
+        "tr": "https://nibrascode.com/tr/qr",
+        "ar": "https://nibrascode.com/ar/qr",
+        "ru": "https://nibrascode.com/ru/qr"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "wifi-qr",
+      "name": "Wi-Fi QR code",
+      "description": "Make a QR code that joins a Wi-Fi network.",
+      "category": "qr",
+      "url": "https://nibrascode.com/en/wifi",
+      "urls": {
+        "az": "https://nibrascode.com/wifi",
+        "en": "https://nibrascode.com/en/wifi",
+        "tr": "https://nibrascode.com/tr/wifi",
+        "ar": "https://nibrascode.com/ar/wifi",
+        "ru": "https://nibrascode.com/ru/wifi"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "vcard-qr",
+      "name": "Business card (vCard) QR",
+      "description": "Make a contact card QR code.",
+      "category": "qr",
+      "url": "https://nibrascode.com/en/vcard",
+      "urls": {
+        "az": "https://nibrascode.com/vcard",
+        "en": "https://nibrascode.com/en/vcard",
+        "tr": "https://nibrascode.com/tr/vcard",
+        "ar": "https://nibrascode.com/ar/vcard",
+        "ru": "https://nibrascode.com/ru/vcard"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "image-compress",
+      "name": "Compress image",
+      "description": "Compress, resize and convert photos in the browser.",
+      "category": "image",
+      "url": "https://nibrascode.com/en/image",
+      "urls": {
+        "az": "https://nibrascode.com/image",
+        "en": "https://nibrascode.com/en/image",
+        "tr": "https://nibrascode.com/tr/image",
+        "ar": "https://nibrascode.com/ar/image",
+        "ru": "https://nibrascode.com/ru/image"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "background-remove",
+      "name": "Remove background",
+      "description": "Remove the background of a photo on your device.",
+      "category": "image",
+      "url": "https://nibrascode.com/en/erase",
+      "urls": {
+        "az": "https://nibrascode.com/erase",
+        "en": "https://nibrascode.com/en/erase",
+        "tr": "https://nibrascode.com/tr/erase",
+        "ar": "https://nibrascode.com/ar/erase",
+        "ru": "https://nibrascode.com/ru/erase"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "video",
+      "name": "Video cut",
+      "description": "Trim and edit short videos in the browser.",
+      "category": "media",
+      "url": "https://nibrascode.com/en/video",
+      "urls": {
+        "az": "https://nibrascode.com/video",
+        "en": "https://nibrascode.com/en/video",
+        "tr": "https://nibrascode.com/tr/video",
+        "ar": "https://nibrascode.com/ar/video",
+        "ru": "https://nibrascode.com/ru/video"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "voice",
+      "name": "Record audio",
+      "description": "Record audio in the browser.",
+      "category": "media",
+      "url": "https://nibrascode.com/en/voice",
+      "urls": {
+        "az": "https://nibrascode.com/voice",
+        "en": "https://nibrascode.com/en/voice",
+        "tr": "https://nibrascode.com/tr/voice",
+        "ar": "https://nibrascode.com/ar/voice",
+        "ru": "https://nibrascode.com/ru/voice"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "calc",
+      "name": "Calculators",
+      "description": "Everyday calculators.",
+      "category": "utility",
+      "url": "https://nibrascode.com/en/calc",
+      "urls": {
+        "az": "https://nibrascode.com/calc",
+        "en": "https://nibrascode.com/en/calc",
+        "tr": "https://nibrascode.com/tr/calc",
+        "ar": "https://nibrascode.com/ar/calc",
+        "ru": "https://nibrascode.com/ru/calc"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "zip",
+      "name": "ZIP",
+      "description": "Create and open ZIP archives in the browser.",
+      "category": "utility",
+      "url": "https://nibrascode.com/en/zip",
+      "urls": {
+        "az": "https://nibrascode.com/zip",
+        "en": "https://nibrascode.com/en/zip",
+        "tr": "https://nibrascode.com/tr/zip",
+        "ar": "https://nibrascode.com/ar/zip",
+        "ru": "https://nibrascode.com/ru/zip"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    },
+    {
+      "id": "xray",
+      "name": "3D Code X-Ray",
+      "description": "Analyze code structure in 3D entirely in the browser; code is never uploaded.",
+      "category": "developer",
+      "url": "https://nibrascode.com/en/xray",
+      "urls": {
+        "az": "https://nibrascode.com/xray",
+        "en": "https://nibrascode.com/en/xray",
+        "tr": "https://nibrascode.com/tr/xray",
+        "ar": "https://nibrascode.com/ar/xray",
+        "ru": "https://nibrascode.com/ru/xray"
+      },
+      "languages": [
+        "az",
+        "en",
+        "tr",
+        "ar",
+        "ru"
+      ],
+      "clientSide": true,
+      "free": true,
+      "account": false,
+      "ads": false
+    }
+  ]
+}
