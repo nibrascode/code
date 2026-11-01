@@ -46,7 +46,7 @@ export const GROUP_CLASS: Record<BarGroup, string> = { g1: "tools", g2: "studio"
 export const MORE: Record<Lang, string> = { az: "Daha çox", en: "More", tr: "Daha fazla", ar: "المزيد", ru: "Ещё" };
 export const HOME_LIMIT = 4;
 /** Tools group shows 8 cards on the homepage (icon + name, 4 per row). */
-export const HOME_LIMITS: Record<"g1" | "g2" | "g3", number> = { g1: 8, g2: HOME_LIMIT, g3: HOME_LIMIT };
+export const HOME_LIMITS: Record<"g1" | "g2" | "g3", number> = { g1: 8, g2: 8, g3: 8 };
 
 export function groupPath(lang: Lang, group: BarGroup) {
   return groupLocalePath(lang, group);

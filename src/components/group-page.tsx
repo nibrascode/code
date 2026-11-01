@@ -158,6 +158,11 @@ export function GroupPage({ lang, group }: { lang: Lang; group: BarGroup }) {
       <div className="nx-bars nx-bars--full">
         <BarGroupView lang={lang} group={group} full />
       </div>
+      {group !== "g1" ? (
+        <div className="nx-bars nx-bars--tools-strip" data-testid="group-tools-strip">
+          <BarGroupView lang={lang} group="g1" />
+        </div>
+      ) : null}
       {group === "g2" ? <AnswerBlocks id="studio" lang={lang} /> : null}
       <h2 className="info-section-title">{HOW_T[lang]}</h2>
       <Sentences text={HOW[lang]} icon={Info} />
