@@ -713,11 +713,6 @@
       "permanent": false
     },
     {
-      "source": "/nibrasnova/",
-      "destination": "/nibrasnova/",
-      "permanent": false
-    },
-    {
       "source": "/nibras-nova",
       "destination": "/nibrasnova/",
       "permanent": false
