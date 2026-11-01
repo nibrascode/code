@@ -27,6 +27,7 @@ export const BAR = {
   logic: { az: "Sual qur", en: "Build questions", tr: "Soru kur", ar: "ابنِ أسئلة", ru: "Собрать вопросы" },
   unknown: { az: "Sirr", en: "Secret", tr: "Sır", ar: "سر", ru: "Тайна" },
   studio: { az: "Studio paneli", en: "Studio panel", tr: "Studio paneli", ar: "لوحة Studio", ru: "Панель Studio" },
+  xray: { az: "3D Kod Rentgeni", en: "3D Code X-Ray", tr: "3D Kod Röntgeni", ar: "أشعة الكود ثلاثية الأبعاد", ru: "3D-рентген кода" },
   learn: { az: "Dərslər", en: "Lessons", tr: "Dersler", ar: "الدروس", ru: "Уроки" },
   doctor: { az: "Sayt yoxla", en: "Site Doctor", tr: "Site kontrolü", ar: "فحص الموقع", ru: "Проверка сайта" },
   errorHelp: { az: "Xəta yardımı", en: "Error Help", tr: "Hata yardımı", ar: "مساعدة الأخطاء", ru: "Помощь с ошибками" },
@@ -200,6 +201,12 @@ export function barItems(lang: Lang): Record<BarGroup, ReactElement[]> {
                   <path d="M8.5 7 3.5 12l5 5M15.5 7l5 5-5 5M13.5 4.5l-3 15" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
                 <span>{BAR.studio[lang]}</span>
+              </a>,
+              <a key="/xray" className="nx-apk-bar nx-studio-bar" href={localeHref(lang, "/xray")} data-testid="home-xray">
+                <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 3 20 7.5v9L12 21l-8-4.5v-9L12 3Zm0 0v18M4 7.5l8 4.5 8-4.5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+                </svg>
+                <span>{BAR.xray[lang]}</span>
               </a>,
               <a key="/workspace" className="nx-apk-bar" href={localeHref(lang, "/workspace")} data-testid="home-workspace">
                 <svg className="nx-apk" viewBox="0 0 24 24" aria-hidden="true">

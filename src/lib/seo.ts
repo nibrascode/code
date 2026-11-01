@@ -1463,6 +1463,15 @@ function jsonLd(path: string, lang: Lang, copy: PageSeo, url: string) {
       name: names[path] ?? "Nibras Code",
       applicationCategory: categories[path] ?? "UtilitiesApplication",
       operatingSystem: "Android",
+      isAccessibleForFree: true,
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+      ...(({
+        "/apps/nibras-pdf": "https://play.google.com/store/apps/details?id=com.nibras.pdf",
+        "/apps/nibras-qr": "https://play.google.com/store/apps/details?id=com.nibras.qr",
+        "/apps/nibras-arabic": "https://play.google.com/store/apps/details?id=com.nibrasarabic.app",
+      } as Record<string, string>)[path]
+        ? { downloadUrl: ({ "/apps/nibras-pdf": "https://play.google.com/store/apps/details?id=com.nibras.pdf", "/apps/nibras-qr": "https://play.google.com/store/apps/details?id=com.nibras.qr", "/apps/nibras-arabic": "https://play.google.com/store/apps/details?id=com.nibrasarabic.app" } as Record<string, string>)[path] }
+        : {}),
       description: copy.description,
       featureList: copy.features,
       inLanguage: lang,

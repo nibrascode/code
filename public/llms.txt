@@ -10,6 +10,15 @@
 - Price: tools and Nibras AI are free. No account is required for the tools.
 - Reviews: the site shows no invented stars, ratings, testimonials or download counts.
 
+## Products
+- [Nibras Arabic](https://nibrascode.com/apps/nibras-arabic): free Android app for learning Arabic (letters, words, verbs).
+- [Nibras PDF](https://nibrascode.com/apps/nibras-pdf): free Android PDF app with 18 tools; files stay on the device. Web version: https://nibrascode.com/pdf
+- [Nibras Office](https://nibrascode.com/apps/nibras-office): office documents app by Nibras Code.
+- [Nibras QR](https://nibrascode.com/apps/nibras-qr): free Android QR scanner and maker. Web version: https://nibrascode.com/qr
+- [Nibras AI](https://nibrascode.com/ai): free AI assistant for questions, code and images (text is sent to a server).
+- [Nibras Dev / Studio](https://nibrascode.com/studio): write code in the browser (https://dev.nibrascode.com) and build an APK (https://studio.nibrascode.com).
+- [Nibras X-Ray](https://nibrascode.com/xray): 3D code X-ray; analyzes code structure and issues entirely in the browser, code is never uploaded.
+
 ## Privacy model
 - PDF, image, QR, vCard, Wi-Fi QR and ZIP tools run in the user's browser. Files are not uploaded to a server.
 - Nibras AI: text the user sends goes to a server to produce an answer.

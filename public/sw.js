@@ -1,8 +1,8 @@
 /* Nibras Code offline support: browser tools keep working without internet. */
-const V = "nx-v1";
+const V = "nx-v2";
 const PAGES = "nx-pages-" + V;
 const STATIC = "nx-static-" + V;
-const CORE = ["/", "/image", "/pdf", "/video", "/qr", "/erase", "/zip", "/manifest.webmanifest", "/favicon-192.png"];
+const CORE = ["/", "/image", "/pdf", "/video", "/qr", "/wifi", "/vcard", "/erase", "/zip", "/pdf/merge", "/pdf/compress", "/en/pdf", "/en/qr", "/manifest.webmanifest", "/favicon-192.png"];
 
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(PAGES).then((c) => Promise.all(CORE.map((u) => c.add(u).catch(() => {})))).then(() => self.skipWaiting()));
@@ -24,7 +24,7 @@ self.addEventListener("fetch", (e) => {
   if (req.method !== "GET") return;
   const url = new URL(req.url);
   if (url.origin !== location.origin) return;
-  if (url.pathname.startsWith("/api/") || url.pathname.startsWith("/audio") || url.pathname === "/sw.js") return;
+  if (url.pathname.startsWith("/api/") || url.pathname.startsWith("/audio") || url.pathname === "/sw.js" || /^\/([a-z]{2}\/)?xray(\/|$)/.test(url.pathname)) return;
 
   if (req.mode === "navigate") {
     e.respondWith(
