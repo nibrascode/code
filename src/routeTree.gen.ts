@@ -22,6 +22,7 @@ import { Route as FaizRouteImport } from './routes/faiz'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as FilecheckRouteImport } from './routes/filecheck'
 import { Route as FlowRouteImport } from './routes/flow'
+import { Route as HicriRouteImport } from './routes/hicri'
 import { Route as ImageRouteImport } from './routes/image'
 import { Route as LearnRouteImport } from './routes/learn'
 import { Route as LogicRouteImport } from './routes/logic'
@@ -74,6 +75,7 @@ import { Route as ArFaizRouteImport } from './routes/ar.faiz'
 import { Route as ArFaqRouteImport } from './routes/ar.faq'
 import { Route as ArFilecheckRouteImport } from './routes/ar.filecheck'
 import { Route as ArFlowRouteImport } from './routes/ar.flow'
+import { Route as ArHicriRouteImport } from './routes/ar.hicri'
 import { Route as ArImageRouteImport } from './routes/ar.image'
 import { Route as ArLearnRouteImport } from './routes/ar.learn'
 import { Route as ArLogicRouteImport } from './routes/ar.logic'
@@ -118,6 +120,7 @@ import { Route as EnFaizRouteImport } from './routes/en.faiz'
 import { Route as EnFaqRouteImport } from './routes/en.faq'
 import { Route as EnFilecheckRouteImport } from './routes/en.filecheck'
 import { Route as EnFlowRouteImport } from './routes/en.flow'
+import { Route as EnHicriRouteImport } from './routes/en.hicri'
 import { Route as EnImageRouteImport } from './routes/en.image'
 import { Route as EnLearnRouteImport } from './routes/en.learn'
 import { Route as EnLogicRouteImport } from './routes/en.logic'
@@ -186,6 +189,7 @@ import { Route as RuFaizRouteImport } from './routes/ru.faiz'
 import { Route as RuFaqRouteImport } from './routes/ru.faq'
 import { Route as RuFilecheckRouteImport } from './routes/ru.filecheck'
 import { Route as RuFlowRouteImport } from './routes/ru.flow'
+import { Route as RuHicriRouteImport } from './routes/ru.hicri'
 import { Route as RuImageRouteImport } from './routes/ru.image'
 import { Route as RuLearnRouteImport } from './routes/ru.learn'
 import { Route as RuLogicRouteImport } from './routes/ru.logic'
@@ -232,6 +236,7 @@ import { Route as TrFaizRouteImport } from './routes/tr.faiz'
 import { Route as TrFaqRouteImport } from './routes/tr.faq'
 import { Route as TrFilecheckRouteImport } from './routes/tr.filecheck'
 import { Route as TrFlowRouteImport } from './routes/tr.flow'
+import { Route as TrHicriRouteImport } from './routes/tr.hicri'
 import { Route as TrImageRouteImport } from './routes/tr.image'
 import { Route as TrLearnRouteImport } from './routes/tr.learn'
 import { Route as TrLogicRouteImport } from './routes/tr.logic'
@@ -404,6 +409,11 @@ const FilecheckRoute = FilecheckRouteImport.update({
 const FlowRoute = FlowRouteImport.update({
   id: '/flow',
   path: '/flow',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HicriRoute = HicriRouteImport.update({
+  id: '/hicri',
+  path: '/hicri',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ImageRoute = ImageRouteImport.update({
@@ -666,6 +676,11 @@ const ArFlowRoute = ArFlowRouteImport.update({
   path: '/flow',
   getParentRoute: () => ArRoute,
 } as any)
+const ArHicriRoute = ArHicriRouteImport.update({
+  id: '/hicri',
+  path: '/hicri',
+  getParentRoute: () => ArRoute,
+} as any)
 const ArImageRoute = ArImageRouteImport.update({
   id: '/image',
   path: '/image',
@@ -884,6 +899,11 @@ const EnFilecheckRoute = EnFilecheckRouteImport.update({
 const EnFlowRoute = EnFlowRouteImport.update({
   id: '/flow',
   path: '/flow',
+  getParentRoute: () => EnRoute,
+} as any)
+const EnHicriRoute = EnHicriRouteImport.update({
+  id: '/hicri',
+  path: '/hicri',
   getParentRoute: () => EnRoute,
 } as any)
 const EnImageRoute = EnImageRouteImport.update({
@@ -1226,6 +1246,11 @@ const RuFlowRoute = RuFlowRouteImport.update({
   path: '/flow',
   getParentRoute: () => RuRoute,
 } as any)
+const RuHicriRoute = RuHicriRouteImport.update({
+  id: '/hicri',
+  path: '/hicri',
+  getParentRoute: () => RuRoute,
+} as any)
 const RuImageRoute = RuImageRouteImport.update({
   id: '/image',
   path: '/image',
@@ -1454,6 +1479,11 @@ const TrFilecheckRoute = TrFilecheckRouteImport.update({
 const TrFlowRoute = TrFlowRouteImport.update({
   id: '/flow',
   path: '/flow',
+  getParentRoute: () => TrRoute,
+} as any)
+const TrHicriRoute = TrHicriRouteImport.update({
+  id: '/hicri',
+  path: '/hicri',
   getParentRoute: () => TrRoute,
 } as any)
 const TrImageRoute = TrImageRouteImport.update({
@@ -2012,6 +2042,7 @@ export interface FileRoutesByFullPath {
   '/faq': typeof FaqRouteWithChildren
   '/filecheck': typeof FilecheckRoute
   '/flow': typeof FlowRoute
+  '/hicri': typeof HicriRoute
   '/image': typeof ImageRoute
   '/learn': typeof LearnRoute
   '/logic': typeof LogicRoute
@@ -2064,6 +2095,7 @@ export interface FileRoutesByFullPath {
   '/ar/faq': typeof ArFaqRouteWithChildren
   '/ar/filecheck': typeof ArFilecheckRoute
   '/ar/flow': typeof ArFlowRoute
+  '/ar/hicri': typeof ArHicriRoute
   '/ar/image': typeof ArImageRoute
   '/ar/learn': typeof ArLearnRoute
   '/ar/logic': typeof ArLogicRoute
@@ -2108,6 +2140,7 @@ export interface FileRoutesByFullPath {
   '/en/faq': typeof EnFaqRouteWithChildren
   '/en/filecheck': typeof EnFilecheckRoute
   '/en/flow': typeof EnFlowRoute
+  '/en/hicri': typeof EnHicriRoute
   '/en/image': typeof EnImageRoute
   '/en/learn': typeof EnLearnRoute
   '/en/logic': typeof EnLogicRoute
@@ -2172,6 +2205,7 @@ export interface FileRoutesByFullPath {
   '/ru/faq': typeof RuFaqRouteWithChildren
   '/ru/filecheck': typeof RuFilecheckRoute
   '/ru/flow': typeof RuFlowRoute
+  '/ru/hicri': typeof RuHicriRoute
   '/ru/image': typeof RuImageRoute
   '/ru/learn': typeof RuLearnRoute
   '/ru/logic': typeof RuLogicRoute
@@ -2218,6 +2252,7 @@ export interface FileRoutesByFullPath {
   '/tr/faq': typeof TrFaqRouteWithChildren
   '/tr/filecheck': typeof TrFilecheckRoute
   '/tr/flow': typeof TrFlowRoute
+  '/tr/hicri': typeof TrHicriRoute
   '/tr/image': typeof TrImageRoute
   '/tr/learn': typeof TrLearnRoute
   '/tr/logic': typeof TrLogicRoute
@@ -2345,6 +2380,7 @@ export interface FileRoutesByTo {
   '/faq': typeof FaqRouteWithChildren
   '/filecheck': typeof FilecheckRoute
   '/flow': typeof FlowRoute
+  '/hicri': typeof HicriRoute
   '/image': typeof ImageRoute
   '/learn': typeof LearnRoute
   '/logic': typeof LogicRoute
@@ -2396,6 +2432,7 @@ export interface FileRoutesByTo {
   '/ar/faq': typeof ArFaqRouteWithChildren
   '/ar/filecheck': typeof ArFilecheckRoute
   '/ar/flow': typeof ArFlowRoute
+  '/ar/hicri': typeof ArHicriRoute
   '/ar/image': typeof ArImageRoute
   '/ar/learn': typeof ArLearnRoute
   '/ar/logic': typeof ArLogicRoute
@@ -2440,6 +2477,7 @@ export interface FileRoutesByTo {
   '/en/faq': typeof EnFaqRouteWithChildren
   '/en/filecheck': typeof EnFilecheckRoute
   '/en/flow': typeof EnFlowRoute
+  '/en/hicri': typeof EnHicriRoute
   '/en/image': typeof EnImageRoute
   '/en/learn': typeof EnLearnRoute
   '/en/logic': typeof EnLogicRoute
@@ -2504,6 +2542,7 @@ export interface FileRoutesByTo {
   '/ru/faq': typeof RuFaqRouteWithChildren
   '/ru/filecheck': typeof RuFilecheckRoute
   '/ru/flow': typeof RuFlowRoute
+  '/ru/hicri': typeof RuHicriRoute
   '/ru/image': typeof RuImageRoute
   '/ru/learn': typeof RuLearnRoute
   '/ru/logic': typeof RuLogicRoute
@@ -2550,6 +2589,7 @@ export interface FileRoutesByTo {
   '/tr/faq': typeof TrFaqRouteWithChildren
   '/tr/filecheck': typeof TrFilecheckRoute
   '/tr/flow': typeof TrFlowRoute
+  '/tr/hicri': typeof TrHicriRoute
   '/tr/image': typeof TrImageRoute
   '/tr/learn': typeof TrLearnRoute
   '/tr/logic': typeof TrLogicRoute
@@ -2678,6 +2718,7 @@ export interface FileRoutesById {
   '/faq': typeof FaqRouteWithChildren
   '/filecheck': typeof FilecheckRoute
   '/flow': typeof FlowRoute
+  '/hicri': typeof HicriRoute
   '/image': typeof ImageRoute
   '/learn': typeof LearnRoute
   '/logic': typeof LogicRoute
@@ -2730,6 +2771,7 @@ export interface FileRoutesById {
   '/ar/faq': typeof ArFaqRouteWithChildren
   '/ar/filecheck': typeof ArFilecheckRoute
   '/ar/flow': typeof ArFlowRoute
+  '/ar/hicri': typeof ArHicriRoute
   '/ar/image': typeof ArImageRoute
   '/ar/learn': typeof ArLearnRoute
   '/ar/logic': typeof ArLogicRoute
@@ -2774,6 +2816,7 @@ export interface FileRoutesById {
   '/en/faq': typeof EnFaqRouteWithChildren
   '/en/filecheck': typeof EnFilecheckRoute
   '/en/flow': typeof EnFlowRoute
+  '/en/hicri': typeof EnHicriRoute
   '/en/image': typeof EnImageRoute
   '/en/learn': typeof EnLearnRoute
   '/en/logic': typeof EnLogicRoute
@@ -2838,6 +2881,7 @@ export interface FileRoutesById {
   '/ru/faq': typeof RuFaqRouteWithChildren
   '/ru/filecheck': typeof RuFilecheckRoute
   '/ru/flow': typeof RuFlowRoute
+  '/ru/hicri': typeof RuHicriRoute
   '/ru/image': typeof RuImageRoute
   '/ru/learn': typeof RuLearnRoute
   '/ru/logic': typeof RuLogicRoute
@@ -2884,6 +2928,7 @@ export interface FileRoutesById {
   '/tr/faq': typeof TrFaqRouteWithChildren
   '/tr/filecheck': typeof TrFilecheckRoute
   '/tr/flow': typeof TrFlowRoute
+  '/tr/hicri': typeof TrHicriRoute
   '/tr/image': typeof TrImageRoute
   '/tr/learn': typeof TrLearnRoute
   '/tr/logic': typeof TrLogicRoute
@@ -3013,6 +3058,7 @@ export interface FileRouteTypes {
     | '/faq'
     | '/filecheck'
     | '/flow'
+    | '/hicri'
     | '/image'
     | '/learn'
     | '/logic'
@@ -3065,6 +3111,7 @@ export interface FileRouteTypes {
     | '/ar/faq'
     | '/ar/filecheck'
     | '/ar/flow'
+    | '/ar/hicri'
     | '/ar/image'
     | '/ar/learn'
     | '/ar/logic'
@@ -3109,6 +3156,7 @@ export interface FileRouteTypes {
     | '/en/faq'
     | '/en/filecheck'
     | '/en/flow'
+    | '/en/hicri'
     | '/en/image'
     | '/en/learn'
     | '/en/logic'
@@ -3173,6 +3221,7 @@ export interface FileRouteTypes {
     | '/ru/faq'
     | '/ru/filecheck'
     | '/ru/flow'
+    | '/ru/hicri'
     | '/ru/image'
     | '/ru/learn'
     | '/ru/logic'
@@ -3219,6 +3268,7 @@ export interface FileRouteTypes {
     | '/tr/faq'
     | '/tr/filecheck'
     | '/tr/flow'
+    | '/tr/hicri'
     | '/tr/image'
     | '/tr/learn'
     | '/tr/logic'
@@ -3346,6 +3396,7 @@ export interface FileRouteTypes {
     | '/faq'
     | '/filecheck'
     | '/flow'
+    | '/hicri'
     | '/image'
     | '/learn'
     | '/logic'
@@ -3397,6 +3448,7 @@ export interface FileRouteTypes {
     | '/ar/faq'
     | '/ar/filecheck'
     | '/ar/flow'
+    | '/ar/hicri'
     | '/ar/image'
     | '/ar/learn'
     | '/ar/logic'
@@ -3441,6 +3493,7 @@ export interface FileRouteTypes {
     | '/en/faq'
     | '/en/filecheck'
     | '/en/flow'
+    | '/en/hicri'
     | '/en/image'
     | '/en/learn'
     | '/en/logic'
@@ -3505,6 +3558,7 @@ export interface FileRouteTypes {
     | '/ru/faq'
     | '/ru/filecheck'
     | '/ru/flow'
+    | '/ru/hicri'
     | '/ru/image'
     | '/ru/learn'
     | '/ru/logic'
@@ -3551,6 +3605,7 @@ export interface FileRouteTypes {
     | '/tr/faq'
     | '/tr/filecheck'
     | '/tr/flow'
+    | '/tr/hicri'
     | '/tr/image'
     | '/tr/learn'
     | '/tr/logic'
@@ -3678,6 +3733,7 @@ export interface FileRouteTypes {
     | '/faq'
     | '/filecheck'
     | '/flow'
+    | '/hicri'
     | '/image'
     | '/learn'
     | '/logic'
@@ -3730,6 +3786,7 @@ export interface FileRouteTypes {
     | '/ar/faq'
     | '/ar/filecheck'
     | '/ar/flow'
+    | '/ar/hicri'
     | '/ar/image'
     | '/ar/learn'
     | '/ar/logic'
@@ -3774,6 +3831,7 @@ export interface FileRouteTypes {
     | '/en/faq'
     | '/en/filecheck'
     | '/en/flow'
+    | '/en/hicri'
     | '/en/image'
     | '/en/learn'
     | '/en/logic'
@@ -3838,6 +3896,7 @@ export interface FileRouteTypes {
     | '/ru/faq'
     | '/ru/filecheck'
     | '/ru/flow'
+    | '/ru/hicri'
     | '/ru/image'
     | '/ru/learn'
     | '/ru/logic'
@@ -3884,6 +3943,7 @@ export interface FileRouteTypes {
     | '/tr/faq'
     | '/tr/filecheck'
     | '/tr/flow'
+    | '/tr/hicri'
     | '/tr/image'
     | '/tr/learn'
     | '/tr/logic'
@@ -4012,6 +4072,7 @@ export interface RootRouteChildren {
   FaqRoute: typeof FaqRouteWithChildren
   FilecheckRoute: typeof FilecheckRoute
   FlowRoute: typeof FlowRoute
+  HicriRoute: typeof HicriRoute
   ImageRoute: typeof ImageRoute
   LearnRoute: typeof LearnRoute
   LogicRoute: typeof LogicRoute
@@ -4159,6 +4220,13 @@ declare module '@tanstack/react-router' {
       path: '/flow'
       fullPath: '/flow'
       preLoaderRoute: typeof FlowRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hicri': {
+      id: '/hicri'
+      path: '/hicri'
+      fullPath: '/hicri'
+      preLoaderRoute: typeof HicriRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/image': {
@@ -4525,6 +4593,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArFlowRouteImport
       parentRoute: typeof ArRoute
     }
+    '/ar/hicri': {
+      id: '/ar/hicri'
+      path: '/hicri'
+      fullPath: '/ar/hicri'
+      preLoaderRoute: typeof ArHicriRouteImport
+      parentRoute: typeof ArRoute
+    }
     '/ar/image': {
       id: '/ar/image'
       path: '/image'
@@ -4831,6 +4906,13 @@ declare module '@tanstack/react-router' {
       path: '/flow'
       fullPath: '/en/flow'
       preLoaderRoute: typeof EnFlowRouteImport
+      parentRoute: typeof EnRoute
+    }
+    '/en/hicri': {
+      id: '/en/hicri'
+      path: '/hicri'
+      fullPath: '/en/hicri'
+      preLoaderRoute: typeof EnHicriRouteImport
       parentRoute: typeof EnRoute
     }
     '/en/image': {
@@ -5309,6 +5391,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RuFlowRouteImport
       parentRoute: typeof RuRoute
     }
+    '/ru/hicri': {
+      id: '/ru/hicri'
+      path: '/hicri'
+      fullPath: '/ru/hicri'
+      preLoaderRoute: typeof RuHicriRouteImport
+      parentRoute: typeof RuRoute
+    }
     '/ru/image': {
       id: '/ru/image'
       path: '/image'
@@ -5629,6 +5718,13 @@ declare module '@tanstack/react-router' {
       path: '/flow'
       fullPath: '/tr/flow'
       preLoaderRoute: typeof TrFlowRouteImport
+      parentRoute: typeof TrRoute
+    }
+    '/tr/hicri': {
+      id: '/tr/hicri'
+      path: '/hicri'
+      fullPath: '/tr/hicri'
+      preLoaderRoute: typeof TrHicriRouteImport
       parentRoute: typeof TrRoute
     }
     '/tr/image': {
@@ -6512,6 +6608,7 @@ interface ArRouteChildren {
   ArFaqRoute: typeof ArFaqRouteWithChildren
   ArFilecheckRoute: typeof ArFilecheckRoute
   ArFlowRoute: typeof ArFlowRoute
+  ArHicriRoute: typeof ArHicriRoute
   ArImageRoute: typeof ArImageRoute
   ArLearnRoute: typeof ArLearnRoute
   ArLogicRoute: typeof ArLogicRoute
@@ -6566,6 +6663,7 @@ const ArRouteChildren: ArRouteChildren = {
   ArFaqRoute: ArFaqRouteWithChildren,
   ArFilecheckRoute: ArFilecheckRoute,
   ArFlowRoute: ArFlowRoute,
+  ArHicriRoute: ArHicriRoute,
   ArImageRoute: ArImageRoute,
   ArLearnRoute: ArLearnRoute,
   ArLogicRoute: ArLogicRoute,
@@ -6732,6 +6830,7 @@ interface EnRouteChildren {
   EnFaqRoute: typeof EnFaqRouteWithChildren
   EnFilecheckRoute: typeof EnFilecheckRoute
   EnFlowRoute: typeof EnFlowRoute
+  EnHicriRoute: typeof EnHicriRoute
   EnImageRoute: typeof EnImageRoute
   EnLearnRoute: typeof EnLearnRoute
   EnLogicRoute: typeof EnLogicRoute
@@ -6786,6 +6885,7 @@ const EnRouteChildren: EnRouteChildren = {
   EnFaqRoute: EnFaqRouteWithChildren,
   EnFilecheckRoute: EnFilecheckRoute,
   EnFlowRoute: EnFlowRoute,
+  EnHicriRoute: EnHicriRoute,
   EnImageRoute: EnImageRoute,
   EnLearnRoute: EnLearnRoute,
   EnLogicRoute: EnLogicRoute,
@@ -7029,6 +7129,7 @@ interface RuRouteChildren {
   RuFaqRoute: typeof RuFaqRouteWithChildren
   RuFilecheckRoute: typeof RuFilecheckRoute
   RuFlowRoute: typeof RuFlowRoute
+  RuHicriRoute: typeof RuHicriRoute
   RuImageRoute: typeof RuImageRoute
   RuLearnRoute: typeof RuLearnRoute
   RuLogicRoute: typeof RuLogicRoute
@@ -7084,6 +7185,7 @@ const RuRouteChildren: RuRouteChildren = {
   RuFaqRoute: RuFaqRouteWithChildren,
   RuFilecheckRoute: RuFilecheckRoute,
   RuFlowRoute: RuFlowRoute,
+  RuHicriRoute: RuHicriRoute,
   RuImageRoute: RuImageRoute,
   RuLearnRoute: RuLearnRoute,
   RuLogicRoute: RuLogicRoute,
@@ -7271,6 +7373,7 @@ interface TrRouteChildren {
   TrFaqRoute: typeof TrFaqRouteWithChildren
   TrFilecheckRoute: typeof TrFilecheckRoute
   TrFlowRoute: typeof TrFlowRoute
+  TrHicriRoute: typeof TrHicriRoute
   TrImageRoute: typeof TrImageRoute
   TrLearnRoute: typeof TrLearnRoute
   TrLogicRoute: typeof TrLogicRoute
@@ -7325,6 +7428,7 @@ const TrRouteChildren: TrRouteChildren = {
   TrFaqRoute: TrFaqRouteWithChildren,
   TrFilecheckRoute: TrFilecheckRoute,
   TrFlowRoute: TrFlowRoute,
+  TrHicriRoute: TrHicriRoute,
   TrImageRoute: TrImageRoute,
   TrLearnRoute: TrLearnRoute,
   TrLogicRoute: TrLogicRoute,
@@ -7418,6 +7522,7 @@ const rootRouteChildren: RootRouteChildren = {
   FaqRoute: FaqRouteWithChildren,
   FilecheckRoute: FilecheckRoute,
   FlowRoute: FlowRoute,
+  HicriRoute: HicriRoute,
   ImageRoute: ImageRoute,
   LearnRoute: LearnRoute,
   LogicRoute: LogicRoute,

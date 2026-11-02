@@ -10,3 +10,12 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 
 ## audiobuffer-to-wav (MIT)
 `src/voice/recorder.tsx` (/voice recorder, WAV export) uses audiobuffer-to-wav — https://github.com/Jam3/audiobuffer-to-wav — Copyright (c) 2015 Jam3, MIT License.
+
+## @jsquash/avif (Apache-2.0)
+https://github.com/jamsinclair/jSquash — AVIF encoder (libavif/aom codecs from Squoosh, Apache-2.0 / BSD-2-Clause). Used on /image for client-side AVIF compression; loaded only when AVIF is chosen.
+
+## Hijri date (/hicri)
+No third-party library: uses the browser's built-in Intl `islamic-umalqura` calendar (moment-hijri was not needed).
+
+## ffmpeg.wasm core — licence note
+`@ffmpeg/ffmpeg` / `@ffmpeg/util` wrappers are MIT. The bundled `public/ffmpeg/ffmpeg-core.wasm` (@ffmpeg/core 0.12) is configured with `--enable-gpl --enable-libx264 --enable-libx265`, so that binary is GPL-licensed. An LGPL-only rebuild (without x264/x265, `--enable-gpl` removed) needs an Emscripten build and is planned; until then the core is served unmodified as a separate file and its source is at https://github.com/ffmpegwasm/ffmpeg.wasm.

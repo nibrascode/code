@@ -45,7 +45,7 @@ export function ImagePage() {
   const faq = SEARCH_FAQ["/image"];
   const x = EXTRA[lang] ?? EXTRA.en;
   const [quality, setQuality] = useState(0.75);
-  const [fmt, setFmt] = useState<"image/jpeg" | "image/webp">("image/jpeg");
+  const [fmt, setFmt] = useState<"image/jpeg" | "image/webp" | "image/avif">("image/jpeg");
   const [max, setMax] = useState(2400);
   const [target, setTarget] = useState(0);
   const [files, setFiles] = useState<File[]>([]);
@@ -69,7 +69,12 @@ export function ImagePage() {
             if (fmt === "image/jpeg") { ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, c.width, c.height); }
             ctx.imageSmoothingQuality = "high";
             ctx.drawImage(bmp, 0, 0, c.width, c.height);
-            const out = await new Promise<Blob>((ok, no) => c.toBlob((bb) => (bb ? ok(bb) : no(new Error("enc"))), fmt, q));
+            let out: Blob;
+            if (fmt === "image/avif") {
+              const { default: encodeAvif } = await import("@jsquash/avif/encode");
+              const buf = await encodeAvif(ctx.getImageData(0, 0, c.width, c.height), { quality: Math.round(q * 100), speed: 8 });
+              out = new Blob([buf], { type: "image/avif" });
+            } else out = await new Promise<Blob>((ok, no) => c.toBlob((bb) => (bb ? ok(bb) : no(new Error("enc"))), fmt, q));
             c.width = c.height = 0;
             return out;
           };
@@ -87,7 +92,7 @@ export function ImagePage() {
           } else blob = await enc(scale, quality);
           bmp.close();
           if (blob.size >= f.size && f.type === fmt && !target) blob = f;
-          const ext = fmt === "image/webp" ? "webp" : "jpg";
+          const ext = fmt === "image/webp" ? "webp" : fmt === "image/avif" ? "avif" : "jpg";
           let name = `${f.name.replace(/\.[^.]+$/, "") || "image"}-sixilmis.${ext}`;
           for (let n = 2; res.some((r) => r.name === name); n++) name = name.replace(/(-\d+)?\.(\w+)$/, `-${n}.$2`);
           res.push({ name, blob, url: URL.createObjectURL(blob), before: f.size });
@@ -125,7 +130,7 @@ export function ImagePage() {
       </label>
       <div className="mb-4 space-y-3 rounded-2xl border border-white/10 bg-white/[0.03] p-3">
         <div className="flex flex-wrap items-center gap-2 text-sm"><span className="w-24 shrink-0">{x.format}</span>
-          {([["image/jpeg", "JPG"], ["image/webp", "WebP"]] as const).map(([v, l]) => <button key={v} type="button" className={chip(fmt === v)} onClick={() => setFmt(v)}>{l}</button>)}</div>
+          {([["image/jpeg", "JPG"], ["image/webp", "WebP"], ["image/avif", "AVIF"]] as const).map(([v, l]) => <button key={v} type="button" className={chip(fmt === v)} onClick={() => setFmt(v)}>{l}</button>)}</div>
         <div className="flex flex-wrap items-center gap-2 text-sm"><span className="w-24 shrink-0">{x.max}</span>
           {([[0, x.orig], [2400, "2400"], [1920, "1920"], [1280, "1280"], [800, "800"]] as const).map(([v, l]) => <button key={v} type="button" className={chip(max === v)} onClick={() => setMax(v)}>{l}</button>)}</div>
         <div className="flex flex-wrap items-center gap-2 text-sm"><span className="w-24 shrink-0">{x.target}</span>
