@@ -12,6 +12,7 @@ export const BAR_GROUPS: Record<"g1" | "g2" | "g3", Record<Lang, string>> = {
 };
 
 export const BAR = {
+  ai: { az: "Nibras AI", en: "Nibras AI", tr: "Nibras AI", ar: "Nibras AI", ru: "Nibras AI" },
   dev: { az: "Kod yaz", en: "Write code", tr: "Kod yaz", ar: "اكتب كوداً", ru: "Пиши код" },
   apk: { az: "APK hazırla", en: "Make an APK", tr: "APK hazırla", ar: "اصنع APK", ru: "Собрать APK" },
   pdf: { az: "PDF hazırla", en: "Make a PDF", tr: "PDF hazırla", ar: "جهّز PDF", ru: "Сделать PDF" },
@@ -57,9 +58,14 @@ export function groupPath(lang: Lang, group: BarGroup) {
 export function barItems(lang: Lang): Record<BarGroup, ReactElement[]> {
   return {
     g1: [
-              <a key="/ai" className="nx-ai-bar" href={localeHref(lang, "/ai")}>
-                <img src="/nibras-ai.webp" alt="" width={40} height={36} decoding="async" />
-                <span>Nibras AI</span>
+              <a key="/ai" className="nx-ai-bar nx-qr-bar" href={localeHref(lang, "/ai")}>
+                <svg className="nx-job nx-job-ai" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M5 5.5h14a1.5 1.5 0 0 1 1.5 1.5v8.5A1.5 1.5 0 0 1 19 17h-8l-4.5 3.5V17H5a1.5 1.5 0 0 1-1.5-1.5V7A1.5 1.5 0 0 1 5 5.5Z" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+                  <path d="M12 8.2l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9Z" fill="currentColor" />
+                </svg>{" "}
+                <span className="nx-qr-text">
+                  <b>{BAR.ai[lang]}</b>
+                </span>
               </a>,
               <a key="/pdf" className="nx-ai-bar nx-qr-bar" href={localeHref(lang, "/pdf")}>
                 <svg className="nx-job nx-job-pdf" viewBox="0 0 24 24" aria-hidden="true">

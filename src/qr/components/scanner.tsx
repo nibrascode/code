@@ -9,6 +9,7 @@ import { cn } from "@/qr/lib/utils";
 import { downloadBlob } from "@/qr/lib/render";
 import { classify, urlWarnings, type UrlWarning } from "@/qr/lib/scan-intel";
 import { LIMITS } from "@/qr/lib/local";
+import { zxingDecode } from "@/qr/lib/zxing";
 
 type Hit = { text: string; at: number };
 
@@ -35,6 +36,15 @@ function decodeCanvas(canvas: HTMLCanvasElement): string | null {
   return code?.data ?? null;
 }
 
+/** jsQR first (fast, QR-only); zxing-wasm fallback for 1D/Data Matrix/PDF417/Aztec. */
+async function decodeCanvasAll(canvas: HTMLCanvasElement): Promise<string | null> {
+  const quick = decodeCanvas(canvas);
+  if (quick) return quick;
+  const ctx = canvas.getContext("2d", { willReadFrequently: true });
+  if (!ctx || !canvas.width || !canvas.height) return null;
+  return zxingDecode(ctx.getImageData(0, 0, canvas.width, canvas.height));
+}
+
 export function Scanner({ pro = false }: { pro?: boolean }) {
   const maxHistory = pro ? LIMITS.pro.history : LIMITS.free.history;
   const { t, m, w } = useI18n();
@@ -45,6 +55,8 @@ export function Scanner({ pro = false }: { pro?: boolean }) {
   const [history, setHistory] = useState<Hit[]>([]);
   const [error, setError] = useState<string | null>(null);
   const raf = useRef<number>(0);
+  const frame = useRef(0);
+  const zxBusy = useRef(false);
   const streamRef = useRef<MediaStream | null>(null);
 
   useEffect(() => {
@@ -78,6 +90,19 @@ export function Scanner({ pro = false }: { pro?: boolean }) {
         pushHit(text);
         stop();
         return;
+      }
+      // Every ~8th frame try zxing-wasm for non-QR codes (non-blocking).
+      frame.current = (frame.current + 1) % 8;
+      if (frame.current === 0 && !zxBusy.current && streamRef.current) {
+        zxBusy.current = true;
+        const data = canvas.getContext("2d", { willReadFrequently: true })?.getImageData(0, 0, canvas.width, canvas.height);
+        void (data ? zxingDecode(data) : Promise.resolve(null)).then((hit) => {
+          zxBusy.current = false;
+          if (hit && streamRef.current) {
+            pushHit(hit);
+            stop();
+          }
+        });
       }
     }
     raf.current = requestAnimationFrame(loop);
@@ -135,7 +160,7 @@ export function Scanner({ pro = false }: { pro?: boolean }) {
       canvas.height = img.height;
       const ctx = canvas.getContext("2d");
       ctx?.drawImage(img, 0, 0);
-      const text = decodeCanvas(canvas);
+      const text = await decodeCanvasAll(canvas);
       if (text) pushHit(text);
       else toast.error(t.scan.empty);
     } finally {

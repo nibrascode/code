@@ -3,6 +3,7 @@ import { Copy, Mic, Square, Trash2 } from "lucide-react";
 import type { Lang } from "@/lib/i18n";
 import { localeHref } from "@/lib/locale-path";
 import { ExternalLink } from "lucide-react";
+import { Recorder } from "./recorder";
 
 type L = Record<Lang, string>;
 const T = (az: string, en: string, tr: string, ar: string, ru: string): L => ({ az, en, tr, ar, ru });
@@ -304,6 +305,8 @@ export function VoicePage({ lang }: { lang: Lang }) {
           <p className="mt-2 break-all text-xs text-muted" dir="ltr">{absUrl}</p>
         </div>
       ) : null}
+
+      <Recorder lang={lang} />
 
       <p className="mt-6 text-xs leading-relaxed text-muted">{t("privacy")}</p>
     </main>

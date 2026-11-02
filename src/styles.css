@@ -7530,6 +7530,7 @@ body.is-planner .site-backdrop {
 }
 .nx-job-pdf { color: #ffc1c1; background: rgb(72 22 30 / 0.95); }
 .nx-job-qr { color: #c5dcff; background: rgb(16 36 72 / 0.95); }
+.nx-job-ai { color: #d9c8ff; background: rgb(44 26 78 / 0.95); }
 .nx-job-erase { color: #ffe0a8; background: rgb(64 40 12 / 0.95); }
 .nx-job-image { color: #e0d0ff; background: rgb(36 24 68 / 0.95); }
 .nx-bar-group-grid > .nx-qr-bar > .nx-qr-text {
