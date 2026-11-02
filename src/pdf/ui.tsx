@@ -5,7 +5,7 @@ import type { ReactNode } from "react";
 import type { Dict } from "./copy";
 import { closePdf, openPdf, renderPageToCanvas } from "./lib/pdfjs";
 
-export type Out = { name: string; blob: Blob; kind: "pdf" | "image" | "zip" | "docx" | "xlsx" | "text"; text?: string; note?: string; extra?: { label: string; name: string; blob: Blob }[] };
+export type Out = { name: string; blob: Blob; kind: "pdf" | "image" | "zip" | "docx" | "xlsx" | "text"; text?: string; note?: string; diff?: { result: import("./lib/wordDiff").DiffResult; nameA: string; nameB: string }; extra?: { label: string; name: string; blob: Blob }[] };
 
 export const btn =
   "inline-flex items-center justify-center gap-2 rounded-xl border border-[var(--pdf-edge,var(--color-border))] bg-[var(--pdf-glass,transparent)] px-4 py-2 text-sm font-medium text-fg transition duration-200 hover:-translate-y-px hover:bg-[var(--pdf-glass-hi,transparent)] active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-50";
@@ -232,7 +232,7 @@ export function ResultCard({ out, t, onOpen }: { out: Out; t: Dict; onOpen?: () 
         <div className="truncate text-sm font-semibold" title={out.name}>{out.name}</div>
         <div className="text-xs text-muted">{fmtSize(out.blob.size)}</div>
         {out.note ? <div className="mt-1 text-xs text-amber-200/90">{out.note}</div> : null}
-        {out.kind === "text" ? (
+        {out.kind === "text" && !out.diff ? (
           <textarea readOnly value={out.text} dir="auto" className={`${field} mt-2 h-40 font-mono`} data-testid="result-text" />
         ) : null}
         <div className="mt-2 flex flex-wrap gap-2">

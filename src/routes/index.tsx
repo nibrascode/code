@@ -34,14 +34,6 @@ const APK_HELP: Record<Lang, string> = { az: "APK qurulmur? Həll yolları", en:
 
 const SOON_SLUGS = new Set(["nibras-qr", "nibras-docs", "nibras-plans", "nibras-note", "nibras-scan", "nibras-nova"]);
 
-const STATUS: Partial<Record<"nibras-arabic" | "nibras-pdf" | "nibras-qr" | "nibras-plans" | "nibras-docs" | "nibras-office" | "nibras-note" | "nibras-scan" | "nibras-nova", TKey>> = {
-  "nibras-qr": "soon",
-  "nibras-plans": "soon",
-  "nibras-docs": "soon",
-  "nibras-note": "soon",
-  "nibras-nova": "soon",
-  "nibras-scan": "soon",
-};
 
 const CARDS: {
   slug: "nibras-arabic" | "nibras-pdf" | "nibras-qr" | "nibras-docs" | "nibras-plans" | "nibras-office" | "nibras-note" | "nibras-scan" | "nibras-nova";

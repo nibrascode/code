@@ -20,13 +20,17 @@ export function GuideSection({ guide, lang, game = false }: { guide: Guide | nul
           </ol>
         </>
       ) : null}
-      <h2>{game ? head.usesGame : head.uses}</h2>
-      <ul>
-        {guide.uses.map((s) => (
-          <li key={s}>{s}</li>
-        ))}
-      </ul>
-      <h2>{head.faq}</h2>
+      {guide.uses.length ? (
+        <>
+          <h2>{game ? head.usesGame : head.uses}</h2>
+          <ul>
+            {guide.uses.map((s) => (
+              <li key={s}>{s}</li>
+            ))}
+          </ul>
+        </>
+      ) : null}
+      {guide.faq.length ? <h2>{head.faq}</h2> : null}
       {guide.faq.map(([q, a]) => (
         <details key={q} open>
           <summary>

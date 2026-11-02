@@ -6,9 +6,9 @@ import { toolsPath, TOOLS_PAGE } from "@/lib/tools";
 import type { Lang } from "@/lib/i18n";
 
 export const BAR_GROUPS: Record<"g1" | "g2" | "g3", Record<Lang, string>> = {
-  g1: { az: "Alətlər", en: "Tools", tr: "Araçlar", ru: "Инструменты", ar: "أدوات" },
-  g2: { az: "Studio", en: "Studio", tr: "Studio", ru: "Студия", ar: "الاستوديو" },
-  g3: { az: "Öyrənmə", en: "Learn", tr: "Öğrenme", ru: "Обучение", ar: "التعلّم" },
+  g1: { az: "Onlayn alətlər", en: "Online tools", tr: "Çevrimiçi araçlar", ru: "Онлайн-инструменты", ar: "أدوات أونلاين" },
+  g2: { az: "Studio · Proqramlaşdırma", en: "Studio · Dev tools", tr: "Studio · Geliştirici", ru: "Студия · Разработка", ar: "الاستوديو · البرمجة" },
+  g3: { az: "Öyrənmə · AI", en: "Learn · AI", tr: "Öğrenme · AI", ru: "Обучение · AI", ar: "التعلّم · AI" },
 };
 
 export const BAR = {

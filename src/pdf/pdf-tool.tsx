@@ -6,6 +6,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowLeft, ArrowRight, Camera, Check, FileText, FileType2, Files, Image as ImageIcon, Layers, Lock, Minimize2,
   PenLine, RotateCw, ScanText, Scissors, Droplet, ListOrdered, Eye, FilePlus2, FileOutput, FileImage, ScanLine, X, Hash, Unlock, Crop, Contrast, Table2, EyeOff, Receipt, Sheet, Presentation, Layers2, Info, GitCompare, FileSpreadsheet, Globe } from "lucide-react";
+import { CompareView } from "./compare-view";
 import { isMoreTool, MoreOptions, runMore, UrlError } from "./more";
 import { zipSync } from "fflate";
 import type { Lang } from "@/lib/i18n";
@@ -254,7 +255,7 @@ function Workspace({ tool, lang, t, title, desc }: { tool: ToolId; lang: Lang; t
     openOut.blob.arrayBuffer().then((b) => setOpenBytes(new Uint8Array(b)));
   }, [openOut]);
 
-  const accept = kind === "pptx" ? ".pptx,application/vnd.openxmlformats-officedocument.presentationml.presentation" : kind === "sheet" ? EXTRA_ACCEPT : kind === "images" ? "image/*" : kind === "docx" ? ".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document" : "application/pdf,.pdf";
+  const accept = kind === "pptx" ? ".pptx,application/vnd.openxmlformats-officedocument.presentationml.presentation" : kind === "sheet" ? EXTRA_ACCEPT : kind === "images" ? "image/*" : kind === "docx" ? ".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document" : tool === "compare" ? "application/pdf,.pdf,.docx,.txt,text/plain,application/vnd.openxmlformats-officedocument.wordprocessingml.document" : "application/pdf,.pdf";
   const multiple = kind === "pdfs" || kind === "images";
 
   const addFiles = useCallback(async (files: File[]) => {
@@ -274,6 +275,8 @@ function Workspace({ tool, lang, t, title, desc }: { tool: ToolId; lang: Lang; t
       } else if (kind === "docx") {
         if (!/\.docx$/i.test(file.name)) { setErr(t.errNotDocx); continue; }
         item.bytes = new Uint8Array(await file.arrayBuffer());
+      } else if (tool === "compare" && /\.(docx|txt)$/i.test(file.name)) {
+        item.bytes = new Uint8Array(await file.arrayBuffer());
       } else {
         if (!/\.pdf$/i.test(file.name) && file.type !== "application/pdf") { setErr(t.errNotPdf); continue; }
         item.bytes = new Uint8Array(await file.arrayBuffer());
@@ -287,7 +290,7 @@ function Workspace({ tool, lang, t, title, desc }: { tool: ToolId; lang: Lang; t
       made.push(item);
     }
     setItems((cur) => (multiple ? [...cur, ...made] : made));
-  }, [kind, multiple, t, lang]);
+  }, [kind, multiple, t, lang, tool]);
   useEffect(() => {
     if (kind !== "images") return;
     const h = takeHandOff();
@@ -626,7 +629,7 @@ function Workspace({ tool, lang, t, title, desc }: { tool: ToolId; lang: Lang; t
         <FileDrop
           accept={accept}
           multiple={multiple}
-          label={items.length && multiple ? t.add : kind === "images" ? t.pickImages : kind === "pdfs" ? t.pickPdfs : kind === "docx" ? t.pickDocx : kind === "pptx" ? ox.pickPptx : kind === "sheet" ? (lang === "az" ? "XLSX və ya CSV seçin" : lang === "tr" ? "XLSX veya CSV seçin" : lang === "ar" ? "اختر XLSX أو CSV" : lang === "ru" ? "Выберите XLSX или CSV" : "Choose an XLSX or CSV") : t.pickPdf}
+          label={items.length && multiple ? t.add : tool === "compare" ? (lang === "az" ? "2 fayl seçin (PDF, DOCX, TXT)" : lang === "tr" ? "2 dosya seçin (PDF, DOCX, TXT)" : lang === "ar" ? "اختر ملفين (PDF أو DOCX أو TXT)" : lang === "ru" ? "Выберите 2 файла (PDF, DOCX, TXT)" : "Choose 2 files (PDF, DOCX, TXT)") : kind === "images" ? t.pickImages : kind === "pdfs" ? t.pickPdfs : kind === "docx" ? t.pickDocx : kind === "pptx" ? ox.pickPptx : kind === "sheet" ? (lang === "az" ? "XLSX və ya CSV seçin" : lang === "tr" ? "XLSX veya CSV seçin" : lang === "ar" ? "اختر XLSX أو CSV" : lang === "ru" ? "Выберите XLSX или CSV" : "Choose an XLSX or CSV") : t.pickPdf}
           hint={t.dropHint}
           onFiles={addFiles}
           compact={items.length > 0}
@@ -942,6 +945,7 @@ function Workspace({ tool, lang, t, title, desc }: { tool: ToolId; lang: Lang; t
       {outs.length ? (
         <div className={`${card} space-y-3`} data-testid="results">
           <div className="flex items-center gap-2 font-semibold text-emerald-300"><Check className="size-4" />{t.done}</div>
+          {outs.map((o, i) => (o.diff ? <CompareView key={`cv${i}`} result={o.diff.result} nameA={o.diff.nameA} nameB={o.diff.nameB} lang={lang} /> : null))}
           {outs.map((o, i) => <ResultCard key={i} out={o} t={t} onOpen={() => setOpenOut(o)} />)}
         </div>
       ) : null}

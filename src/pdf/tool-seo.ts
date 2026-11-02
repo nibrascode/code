@@ -67,11 +67,11 @@ const INTENT: Partial<Record<ToolId, Record<Lang, { title: string; h1: string; d
     ru: { title: "Редактировать метаданные PDF — бесплатно", h1: "Метаданные PDF", description: "Меняйте заголовок, автора, тему и ключевые слова в браузере" },
   },
   "compare": {
-    az: { title: "PDF müqayisə et — pulsuz", h1: "İki PDF-i müqayisə et", description: "İki PDF-in mətnindəki əlavə və silinən sətirləri tap" },
-    en: { title: "Compare PDF files — free", h1: "Compare two PDFs", description: "See added and removed lines between two PDFs' text" },
-    tr: { title: "PDF karşılaştır — ücretsiz", h1: "İki PDF'i karşılaştır", description: "İki PDF metnindeki eklenen ve silinen satırları görün" },
-    ar: { title: "مقارنة PDF — مجاناً", h1: "قارن ملفي PDF", description: "اعرف الأسطر المضافة والمحذوفة بين نصي ملفين" },
-    ru: { title: "Сравнить PDF — бесплатно", h1: "Сравнить два PDF", description: "Найдите добавленные и удалённые строки в тексте двух PDF" },
+    az: { title: "PDF, DOCX, TXT müqayisə et — pulsuz", h1: "İki sənədi söz-söz müqayisə et", description: "PDF, DOCX və ya TXT: silinən qırmızı, əlavə yaşıl, yan-yana. Fayl brauzerdə qalır" },
+    en: { title: "Compare PDF, DOCX & TXT — free", h1: "Compare two documents word by word", description: "PDF, DOCX or TXT side by side: removed in red, added in green. Files stay in your browser" },
+    tr: { title: "PDF, DOCX, TXT karşılaştır — ücretsiz", h1: "İki belgeyi kelime kelime karşılaştır", description: "PDF, DOCX veya TXT yan yana: silinen kırmızı, eklenen yeşil. Dosya tarayıcıda kalır" },
+    ar: { title: "مقارنة PDF وDOCX وTXT — مجاناً", h1: "قارن مستندين كلمةً بكلمة", description: "جنباً إلى جنب: المحذوف بالأحمر والمضاف بالأخضر. تبقى الملفات في متصفحك" },
+    ru: { title: "Сравнить PDF, DOCX и TXT — бесплатно", h1: "Сравнить два документа по словам", description: "Рядом: удалённое красным, добавленное зелёным. Файлы остаются в браузере" },
   },
   "excel-csv": {
     az: { title: "Excel-dən CSV — pulsuz", h1: "XLSX-i CSV-yə çevir", description: "Hər vərəq UTF-8 CSV olur; fayl serverə getmir" },

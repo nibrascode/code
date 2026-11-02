@@ -3,7 +3,6 @@ import { ArrowUpRight } from "lucide-react";
 import { STUDIO_APPS, appStatusLabel, statusStoreLinks, type AppSlug } from "@/lib/apps";
 import { effectiveApp, playListed } from "@/lib/app-store";
 import { useI18n } from "@/lib/i18n-context";
-import type { TKey } from "@/lib/i18n";
 import { localeHref } from "@/lib/locale-path";
 import { readLang } from "@/lib/seo";
 import { statusText, type StudioAppRow } from "@/lib/studio";
@@ -21,13 +20,6 @@ export const Route = createFileRoute("/apps/")({
 
 const ORDER: AppSlug[] = ["nibras-arabic", "nibras-docs", "nibras-office", "nibras-pdf", "nibras-qr", "majmu-al-fatawa", "nibras-scan", "nibras-note", "nibras-nova", "nibras-plans"];
 
-const STATUS: Partial<Record<AppSlug, TKey>> = {
-  "nibras-plans": "soon",
-  "nibras-note": "soon",
-  "nibras-nova": "soon",
-  "nibras-scan": "soon",
-  "majmu-al-fatawa": "soon",
-};
 
 export function AppsIndex({ apps }: { apps: readonly StudioAppRow[] | null | undefined }) {
   const { t, lang } = useI18n();
