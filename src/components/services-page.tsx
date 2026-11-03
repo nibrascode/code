@@ -6,6 +6,7 @@ import type { Lang } from "@/lib/i18n";
 import { localeHref } from "@/lib/locale-path";
 import { TOOL_GROUPS, TOOLS, toolPath, toolsPath } from "@/lib/tools";
 import { VOICE_TITLE } from "@/voice/voice-page";
+import { AUDIO_TITLE } from "@/voice/audio-page";
 import { TOOL_IDS, TOOL_TEXT } from "@/pdf/tool-text";
 import { VIDEO_KIT } from "@/kit/video-meta";
 
@@ -86,6 +87,7 @@ const CATS: Cat[] = [
   {
     id: "audio", sub: T("Səs yaz, montaj et, birləşdir — oflayn studio", "Record, edit, join — offline studio", "Kaydet, düzenle, birleştir — çevrimdışı stüdyo", "سجّل وحرّر وادمج — استوديو دون اتصال", "Запись, монтаж, склейка — офлайн-студия"), icon: <Headphones size={22} />, title: T("Səs", "Audio", "Ses", "الصوت", "Аудио"),
     items: (lang) => [
+      { href: localeHref(lang, "/audio"), label: AUDIO_TITLE[lang] },
       { href: localeHref(lang, "/voice"), label: VOICE_TITLE[lang] },
       { href: localeHref(lang, "/video/audio"), label: VIDEO_KIT["/video/audio"][lang].h1 },
     ],

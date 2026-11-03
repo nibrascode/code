@@ -5,6 +5,7 @@ import type { Lang } from "@/lib/i18n";
 
 type L = Record<Lang, string>;
 const T = (az: string, en: string, tr: string, ar: string, ru: string): L => ({ az, en, tr, ar, ru });
+export const RECORDER_TEXT = { get title() { return S.title; }, get lead() { return S.lead; } };
 const S = {
   title: T("Səs yazıcı və redaktor", "Voice recorder & editor", "Ses kaydedici ve editör", "مسجّل ومحرّر الصوت", "Диктофон и редактор"),
   lead: T("Yaz və ya bir neçə fayl yüklə; yaxınlaşdır, kəs, köçür, yapışdır, toplu normallaşdır və WAV yüklə. Səs cihazdan çıxmır.", "Record or load several files; zoom, cut, copy, paste, batch-normalize and export WAV. Audio never leaves your device.", "Kaydet veya birden çok dosya yükle; yakınlaştır, kes, kopyala, yapıştır, toplu normalleştir ve WAV indir. Ses cihazdan çıkmaz.", "سجّل أو حمّل عدة ملفات؛ كبّر، قصّ، انسخ، ألصق، سوِّ المستوى دفعةً واحدة ونزّل WAV. الصوت لا يغادر جهازك.", "Запишите или загрузите несколько файлов; масштаб, вырезать, копировать, вставить, пакетная нормализация и WAV. Звук не покидает устройство."),

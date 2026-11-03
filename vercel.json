@@ -252,16 +252,6 @@
       "permanent": true
     },
     {
-      "source": "/audio",
-      "destination": "/voice",
-      "permanent": false
-    },
-    {
-      "source": "/audio/:path*",
-      "destination": "/voice",
-      "permanent": false
-    },
-    {
       "source": "/ereb-dili",
       "destination": "/ereb-dili/feil",
       "permanent": false

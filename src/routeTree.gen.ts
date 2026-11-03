@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as ArRouteImport } from './routes/ar'
+import { Route as AudioRouteImport } from './routes/audio'
 import { Route as BuilderRouteImport } from './routes/builder'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DoctorRouteImport } from './routes/doctor'
@@ -66,6 +67,7 @@ import { Route as AppsIndexRouteImport } from './routes/apps/index'
 import { Route as AppsSlugRouteImport } from './routes/apps/$slug'
 import { Route as ArAboutRouteImport } from './routes/ar.about'
 import { Route as ArAppsRouteImport } from './routes/ar.apps'
+import { Route as ArAudioRouteImport } from './routes/ar.audio'
 import { Route as ArBuilderRouteImport } from './routes/ar.builder'
 import { Route as ArContactRouteImport } from './routes/ar.contact'
 import { Route as ArDoctorRouteImport } from './routes/ar.doctor'
@@ -111,6 +113,7 @@ import { Route as ArXetaRouteImport } from './routes/ar.xeta'
 import { Route as ArZipRouteImport } from './routes/ar.zip'
 import { Route as EnAboutRouteImport } from './routes/en.about'
 import { Route as EnAppsRouteImport } from './routes/en.apps'
+import { Route as EnAudioRouteImport } from './routes/en.audio'
 import { Route as EnBuilderRouteImport } from './routes/en.builder'
 import { Route as EnContactRouteImport } from './routes/en.contact'
 import { Route as EnDoctorRouteImport } from './routes/en.doctor'
@@ -180,6 +183,7 @@ import { Route as ResourcesTopicRouteRouteImport } from './routes/resources/$top
 import { Route as ResurslarSlugRouteImport } from './routes/resurslar/$slug'
 import { Route as RuAboutRouteImport } from './routes/ru.about'
 import { Route as RuAppsRouteImport } from './routes/ru.apps'
+import { Route as RuAudioRouteImport } from './routes/ru.audio'
 import { Route as RuBuilderRouteImport } from './routes/ru.builder'
 import { Route as RuContactRouteImport } from './routes/ru.contact'
 import { Route as RuDoctorRouteImport } from './routes/ru.doctor'
@@ -227,6 +231,7 @@ import { Route as SozSlugRouteImport } from './routes/soz.$slug'
 import { Route as ToolsSlugRouteImport } from './routes/tools.$slug'
 import { Route as TrAboutRouteImport } from './routes/tr.about'
 import { Route as TrAppsRouteImport } from './routes/tr.apps'
+import { Route as TrAudioRouteImport } from './routes/tr.audio'
 import { Route as TrBuilderRouteImport } from './routes/tr.builder'
 import { Route as TrContactRouteImport } from './routes/tr.contact'
 import { Route as TrDoctorRouteImport } from './routes/tr.doctor'
@@ -359,6 +364,11 @@ const AboutRoute = AboutRouteImport.update({
 const ArRoute = ArRouteImport.update({
   id: '/ar',
   path: '/ar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AudioRoute = AudioRouteImport.update({
+  id: '/audio',
+  path: '/audio',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BuilderRoute = BuilderRouteImport.update({
@@ -631,6 +641,11 @@ const ArAppsRoute = ArAppsRouteImport.update({
   path: '/apps',
   getParentRoute: () => ArRoute,
 } as any)
+const ArAudioRoute = ArAudioRouteImport.update({
+  id: '/audio',
+  path: '/audio',
+  getParentRoute: () => ArRoute,
+} as any)
 const ArBuilderRoute = ArBuilderRouteImport.update({
   id: '/builder',
   path: '/builder',
@@ -854,6 +869,11 @@ const EnAboutRoute = EnAboutRouteImport.update({
 const EnAppsRoute = EnAppsRouteImport.update({
   id: '/apps',
   path: '/apps',
+  getParentRoute: () => EnRoute,
+} as any)
+const EnAudioRoute = EnAudioRouteImport.update({
+  id: '/audio',
+  path: '/audio',
   getParentRoute: () => EnRoute,
 } as any)
 const EnBuilderRoute = EnBuilderRouteImport.update({
@@ -1201,6 +1221,11 @@ const RuAppsRoute = RuAppsRouteImport.update({
   path: '/apps',
   getParentRoute: () => RuRoute,
 } as any)
+const RuAudioRoute = RuAudioRouteImport.update({
+  id: '/audio',
+  path: '/audio',
+  getParentRoute: () => RuRoute,
+} as any)
 const RuBuilderRoute = RuBuilderRouteImport.update({
   id: '/builder',
   path: '/builder',
@@ -1434,6 +1459,11 @@ const TrAboutRoute = TrAboutRouteImport.update({
 const TrAppsRoute = TrAppsRouteImport.update({
   id: '/apps',
   path: '/apps',
+  getParentRoute: () => TrRoute,
+} as any)
+const TrAudioRoute = TrAudioRouteImport.update({
+  id: '/audio',
+  path: '/audio',
   getParentRoute: () => TrRoute,
 } as any)
 const TrBuilderRoute = TrBuilderRouteImport.update({
@@ -2032,6 +2062,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/ar': typeof ArRouteWithChildren
+  '/audio': typeof AudioRoute
   '/builder': typeof BuilderRoute
   '/contact': typeof ContactRoute
   '/doctor': typeof DoctorRoute
@@ -2086,6 +2117,7 @@ export interface FileRoutesByFullPath {
   '/apps/$slug': typeof AppsSlugRoute
   '/ar/about': typeof ArAboutRoute
   '/ar/apps': typeof ArAppsRouteWithChildren
+  '/ar/audio': typeof ArAudioRoute
   '/ar/builder': typeof ArBuilderRoute
   '/ar/contact': typeof ArContactRoute
   '/ar/doctor': typeof ArDoctorRoute
@@ -2131,6 +2163,7 @@ export interface FileRoutesByFullPath {
   '/ar/zip': typeof ArZipRoute
   '/en/about': typeof EnAboutRoute
   '/en/apps': typeof EnAppsRouteWithChildren
+  '/en/audio': typeof EnAudioRoute
   '/en/builder': typeof EnBuilderRoute
   '/en/contact': typeof EnContactRoute
   '/en/doctor': typeof EnDoctorRoute
@@ -2196,6 +2229,7 @@ export interface FileRoutesByFullPath {
   '/resurslar/$slug': typeof ResurslarSlugRoute
   '/ru/about': typeof RuAboutRoute
   '/ru/apps': typeof RuAppsRouteWithChildren
+  '/ru/audio': typeof RuAudioRoute
   '/ru/builder': typeof RuBuilderRoute
   '/ru/contact': typeof RuContactRoute
   '/ru/doctor': typeof RuDoctorRoute
@@ -2243,6 +2277,7 @@ export interface FileRoutesByFullPath {
   '/tools/$slug': typeof ToolsSlugRoute
   '/tr/about': typeof TrAboutRoute
   '/tr/apps': typeof TrAppsRouteWithChildren
+  '/tr/audio': typeof TrAudioRoute
   '/tr/builder': typeof TrBuilderRoute
   '/tr/contact': typeof TrContactRoute
   '/tr/doctor': typeof TrDoctorRoute
@@ -2370,6 +2405,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/ar': typeof ArRouteWithChildren
+  '/audio': typeof AudioRoute
   '/builder': typeof BuilderRoute
   '/contact': typeof ContactRoute
   '/doctor': typeof DoctorRoute
@@ -2423,6 +2459,7 @@ export interface FileRoutesByTo {
   '/apps/$slug': typeof AppsSlugRoute
   '/ar/about': typeof ArAboutRoute
   '/ar/apps': typeof ArAppsRouteWithChildren
+  '/ar/audio': typeof ArAudioRoute
   '/ar/builder': typeof ArBuilderRoute
   '/ar/contact': typeof ArContactRoute
   '/ar/doctor': typeof ArDoctorRoute
@@ -2468,6 +2505,7 @@ export interface FileRoutesByTo {
   '/ar/zip': typeof ArZipRoute
   '/en/about': typeof EnAboutRoute
   '/en/apps': typeof EnAppsRouteWithChildren
+  '/en/audio': typeof EnAudioRoute
   '/en/builder': typeof EnBuilderRoute
   '/en/contact': typeof EnContactRoute
   '/en/doctor': typeof EnDoctorRoute
@@ -2533,6 +2571,7 @@ export interface FileRoutesByTo {
   '/resurslar/$slug': typeof ResurslarSlugRoute
   '/ru/about': typeof RuAboutRoute
   '/ru/apps': typeof RuAppsRouteWithChildren
+  '/ru/audio': typeof RuAudioRoute
   '/ru/builder': typeof RuBuilderRoute
   '/ru/contact': typeof RuContactRoute
   '/ru/doctor': typeof RuDoctorRoute
@@ -2580,6 +2619,7 @@ export interface FileRoutesByTo {
   '/tools/$slug': typeof ToolsSlugRoute
   '/tr/about': typeof TrAboutRoute
   '/tr/apps': typeof TrAppsRouteWithChildren
+  '/tr/audio': typeof TrAudioRoute
   '/tr/builder': typeof TrBuilderRoute
   '/tr/contact': typeof TrContactRoute
   '/tr/doctor': typeof TrDoctorRoute
@@ -2708,6 +2748,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/ar': typeof ArRouteWithChildren
+  '/audio': typeof AudioRoute
   '/builder': typeof BuilderRoute
   '/contact': typeof ContactRoute
   '/doctor': typeof DoctorRoute
@@ -2762,6 +2803,7 @@ export interface FileRoutesById {
   '/apps/$slug': typeof AppsSlugRoute
   '/ar/about': typeof ArAboutRoute
   '/ar/apps': typeof ArAppsRouteWithChildren
+  '/ar/audio': typeof ArAudioRoute
   '/ar/builder': typeof ArBuilderRoute
   '/ar/contact': typeof ArContactRoute
   '/ar/doctor': typeof ArDoctorRoute
@@ -2807,6 +2849,7 @@ export interface FileRoutesById {
   '/ar/zip': typeof ArZipRoute
   '/en/about': typeof EnAboutRoute
   '/en/apps': typeof EnAppsRouteWithChildren
+  '/en/audio': typeof EnAudioRoute
   '/en/builder': typeof EnBuilderRoute
   '/en/contact': typeof EnContactRoute
   '/en/doctor': typeof EnDoctorRoute
@@ -2872,6 +2915,7 @@ export interface FileRoutesById {
   '/resurslar/$slug': typeof ResurslarSlugRoute
   '/ru/about': typeof RuAboutRoute
   '/ru/apps': typeof RuAppsRouteWithChildren
+  '/ru/audio': typeof RuAudioRoute
   '/ru/builder': typeof RuBuilderRoute
   '/ru/contact': typeof RuContactRoute
   '/ru/doctor': typeof RuDoctorRoute
@@ -2919,6 +2963,7 @@ export interface FileRoutesById {
   '/tools/$slug': typeof ToolsSlugRoute
   '/tr/about': typeof TrAboutRoute
   '/tr/apps': typeof TrAppsRouteWithChildren
+  '/tr/audio': typeof TrAudioRoute
   '/tr/builder': typeof TrBuilderRoute
   '/tr/contact': typeof TrContactRoute
   '/tr/doctor': typeof TrDoctorRoute
@@ -3048,6 +3093,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/ar'
+    | '/audio'
     | '/builder'
     | '/contact'
     | '/doctor'
@@ -3102,6 +3148,7 @@ export interface FileRouteTypes {
     | '/apps/$slug'
     | '/ar/about'
     | '/ar/apps'
+    | '/ar/audio'
     | '/ar/builder'
     | '/ar/contact'
     | '/ar/doctor'
@@ -3147,6 +3194,7 @@ export interface FileRouteTypes {
     | '/ar/zip'
     | '/en/about'
     | '/en/apps'
+    | '/en/audio'
     | '/en/builder'
     | '/en/contact'
     | '/en/doctor'
@@ -3212,6 +3260,7 @@ export interface FileRouteTypes {
     | '/resurslar/$slug'
     | '/ru/about'
     | '/ru/apps'
+    | '/ru/audio'
     | '/ru/builder'
     | '/ru/contact'
     | '/ru/doctor'
@@ -3259,6 +3308,7 @@ export interface FileRouteTypes {
     | '/tools/$slug'
     | '/tr/about'
     | '/tr/apps'
+    | '/tr/audio'
     | '/tr/builder'
     | '/tr/contact'
     | '/tr/doctor'
@@ -3386,6 +3436,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/ar'
+    | '/audio'
     | '/builder'
     | '/contact'
     | '/doctor'
@@ -3439,6 +3490,7 @@ export interface FileRouteTypes {
     | '/apps/$slug'
     | '/ar/about'
     | '/ar/apps'
+    | '/ar/audio'
     | '/ar/builder'
     | '/ar/contact'
     | '/ar/doctor'
@@ -3484,6 +3536,7 @@ export interface FileRouteTypes {
     | '/ar/zip'
     | '/en/about'
     | '/en/apps'
+    | '/en/audio'
     | '/en/builder'
     | '/en/contact'
     | '/en/doctor'
@@ -3549,6 +3602,7 @@ export interface FileRouteTypes {
     | '/resurslar/$slug'
     | '/ru/about'
     | '/ru/apps'
+    | '/ru/audio'
     | '/ru/builder'
     | '/ru/contact'
     | '/ru/doctor'
@@ -3596,6 +3650,7 @@ export interface FileRouteTypes {
     | '/tools/$slug'
     | '/tr/about'
     | '/tr/apps'
+    | '/tr/audio'
     | '/tr/builder'
     | '/tr/contact'
     | '/tr/doctor'
@@ -3723,6 +3778,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/ar'
+    | '/audio'
     | '/builder'
     | '/contact'
     | '/doctor'
@@ -3777,6 +3833,7 @@ export interface FileRouteTypes {
     | '/apps/$slug'
     | '/ar/about'
     | '/ar/apps'
+    | '/ar/audio'
     | '/ar/builder'
     | '/ar/contact'
     | '/ar/doctor'
@@ -3822,6 +3879,7 @@ export interface FileRouteTypes {
     | '/ar/zip'
     | '/en/about'
     | '/en/apps'
+    | '/en/audio'
     | '/en/builder'
     | '/en/contact'
     | '/en/doctor'
@@ -3887,6 +3945,7 @@ export interface FileRouteTypes {
     | '/resurslar/$slug'
     | '/ru/about'
     | '/ru/apps'
+    | '/ru/audio'
     | '/ru/builder'
     | '/ru/contact'
     | '/ru/doctor'
@@ -3934,6 +3993,7 @@ export interface FileRouteTypes {
     | '/tools/$slug'
     | '/tr/about'
     | '/tr/apps'
+    | '/tr/audio'
     | '/tr/builder'
     | '/tr/contact'
     | '/tr/doctor'
@@ -4062,6 +4122,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ArRoute: typeof ArRouteWithChildren
+  AudioRoute: typeof AudioRoute
   BuilderRoute: typeof BuilderRoute
   ContactRoute: typeof ContactRoute
   DoctorRoute: typeof DoctorRoute
@@ -4150,6 +4211,13 @@ declare module '@tanstack/react-router' {
       path: '/ar'
       fullPath: '/ar'
       preLoaderRoute: typeof ArRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/audio': {
+      id: '/audio'
+      path: '/audio'
+      fullPath: '/audio'
+      preLoaderRoute: typeof AudioRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/builder': {
@@ -4530,6 +4598,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArAppsRouteImport
       parentRoute: typeof ArRoute
     }
+    '/ar/audio': {
+      id: '/ar/audio'
+      path: '/audio'
+      fullPath: '/ar/audio'
+      preLoaderRoute: typeof ArAudioRouteImport
+      parentRoute: typeof ArRoute
+    }
     '/ar/builder': {
       id: '/ar/builder'
       path: '/builder'
@@ -4843,6 +4918,13 @@ declare module '@tanstack/react-router' {
       path: '/apps'
       fullPath: '/en/apps'
       preLoaderRoute: typeof EnAppsRouteImport
+      parentRoute: typeof EnRoute
+    }
+    '/en/audio': {
+      id: '/en/audio'
+      path: '/audio'
+      fullPath: '/en/audio'
+      preLoaderRoute: typeof EnAudioRouteImport
       parentRoute: typeof EnRoute
     }
     '/en/builder': {
@@ -5328,6 +5410,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RuAppsRouteImport
       parentRoute: typeof RuRoute
     }
+    '/ru/audio': {
+      id: '/ru/audio'
+      path: '/audio'
+      fullPath: '/ru/audio'
+      preLoaderRoute: typeof RuAudioRouteImport
+      parentRoute: typeof RuRoute
+    }
     '/ru/builder': {
       id: '/ru/builder'
       path: '/builder'
@@ -5655,6 +5744,13 @@ declare module '@tanstack/react-router' {
       path: '/apps'
       fullPath: '/tr/apps'
       preLoaderRoute: typeof TrAppsRouteImport
+      parentRoute: typeof TrRoute
+    }
+    '/tr/audio': {
+      id: '/tr/audio'
+      path: '/audio'
+      fullPath: '/tr/audio'
+      preLoaderRoute: typeof TrAudioRouteImport
       parentRoute: typeof TrRoute
     }
     '/tr/builder': {
@@ -6599,6 +6695,7 @@ const ArErebDiliFeilRouteWithChildren = ArErebDiliFeilRoute._addFileChildren(
 interface ArRouteChildren {
   ArAboutRoute: typeof ArAboutRoute
   ArAppsRoute: typeof ArAppsRouteWithChildren
+  ArAudioRoute: typeof ArAudioRoute
   ArBuilderRoute: typeof ArBuilderRoute
   ArContactRoute: typeof ArContactRoute
   ArDoctorRoute: typeof ArDoctorRoute
@@ -6654,6 +6751,7 @@ interface ArRouteChildren {
 const ArRouteChildren: ArRouteChildren = {
   ArAboutRoute: ArAboutRoute,
   ArAppsRoute: ArAppsRouteWithChildren,
+  ArAudioRoute: ArAudioRoute,
   ArBuilderRoute: ArBuilderRoute,
   ArContactRoute: ArContactRoute,
   ArDoctorRoute: ArDoctorRoute,
@@ -6821,6 +6919,7 @@ const EnErebDiliFeilRouteWithChildren = EnErebDiliFeilRoute._addFileChildren(
 interface EnRouteChildren {
   EnAboutRoute: typeof EnAboutRoute
   EnAppsRoute: typeof EnAppsRouteWithChildren
+  EnAudioRoute: typeof EnAudioRoute
   EnBuilderRoute: typeof EnBuilderRoute
   EnContactRoute: typeof EnContactRoute
   EnDoctorRoute: typeof EnDoctorRoute
@@ -6876,6 +6975,7 @@ interface EnRouteChildren {
 const EnRouteChildren: EnRouteChildren = {
   EnAboutRoute: EnAboutRoute,
   EnAppsRoute: EnAppsRouteWithChildren,
+  EnAudioRoute: EnAudioRoute,
   EnBuilderRoute: EnBuilderRoute,
   EnContactRoute: EnContactRoute,
   EnDoctorRoute: EnDoctorRoute,
@@ -7120,6 +7220,7 @@ const RuErebDiliFeilRouteWithChildren = RuErebDiliFeilRoute._addFileChildren(
 interface RuRouteChildren {
   RuAboutRoute: typeof RuAboutRoute
   RuAppsRoute: typeof RuAppsRouteWithChildren
+  RuAudioRoute: typeof RuAudioRoute
   RuBuilderRoute: typeof RuBuilderRoute
   RuContactRoute: typeof RuContactRoute
   RuDoctorRoute: typeof RuDoctorRoute
@@ -7176,6 +7277,7 @@ interface RuRouteChildren {
 const RuRouteChildren: RuRouteChildren = {
   RuAboutRoute: RuAboutRoute,
   RuAppsRoute: RuAppsRouteWithChildren,
+  RuAudioRoute: RuAudioRoute,
   RuBuilderRoute: RuBuilderRoute,
   RuContactRoute: RuContactRoute,
   RuDoctorRoute: RuDoctorRoute,
@@ -7364,6 +7466,7 @@ const TrErebDiliFeilRouteWithChildren = TrErebDiliFeilRoute._addFileChildren(
 interface TrRouteChildren {
   TrAboutRoute: typeof TrAboutRoute
   TrAppsRoute: typeof TrAppsRouteWithChildren
+  TrAudioRoute: typeof TrAudioRoute
   TrBuilderRoute: typeof TrBuilderRoute
   TrContactRoute: typeof TrContactRoute
   TrDoctorRoute: typeof TrDoctorRoute
@@ -7419,6 +7522,7 @@ interface TrRouteChildren {
 const TrRouteChildren: TrRouteChildren = {
   TrAboutRoute: TrAboutRoute,
   TrAppsRoute: TrAppsRouteWithChildren,
+  TrAudioRoute: TrAudioRoute,
   TrBuilderRoute: TrBuilderRoute,
   TrContactRoute: TrContactRoute,
   TrDoctorRoute: TrDoctorRoute,
@@ -7512,6 +7616,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ArRoute: ArRouteWithChildren,
+  AudioRoute: AudioRoute,
   BuilderRoute: BuilderRoute,
   ContactRoute: ContactRoute,
   DoctorRoute: DoctorRoute,

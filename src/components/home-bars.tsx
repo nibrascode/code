@@ -86,7 +86,7 @@ export function barItems(lang: Lang): Record<BarGroup, ReactElement[]> {
                   <b>{BAR.qr[lang]}</b>
                 </span>
               </a>,
-              <a key="/audio" className="nx-ai-bar nx-qr-bar" href={localeHref(lang, "/voice")}>
+              <a key="/audio" className="nx-ai-bar nx-qr-bar" href={localeHref(lang, "/audio")}>
                 <svg className="nx-job nx-job-audio" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M4 14v-2a8 8 0 0 1 16 0v2" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
                   <path d="M4 14h3v6H5.4A1.4 1.4 0 0 1 4 18.6zM20 14h-3v6h1.6a1.4 1.4 0 0 0 1.4-1.4z" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
