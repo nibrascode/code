@@ -16,7 +16,7 @@ export const BAR = {
   dev: { az: "Kod yaz", en: "Write code", tr: "Kod yaz", ar: "اكتب كوداً", ru: "Пиши код" },
   apk: { az: "APK hazırla", en: "Make an APK", tr: "APK hazırla", ar: "اصنع APK", ru: "Собрать APK" },
   pdf: { az: "PDF hazırla", en: "Make a PDF", tr: "PDF hazırla", ar: "جهّز PDF", ru: "Сделать PDF" },
-  audio: { az: "Səs yaz", en: "Record audio", tr: "Ses kaydet", ar: "سجّل الصوت", ru: "Записать звук" },
+  audio: { az: "Səs yazıcı və redaktor", en: "Audio recorder & editor", tr: "Ses kaydedici ve editör", ar: "مسجّل ومحرّر الصوت", ru: "Запись и редактор звука" },
   video: { az: "Video kəs", en: "Edit video", tr: "Video düzenle", ar: "حرّر الفيديو", ru: "Видео" },
   qr: { az: "QR hazırla", en: "Make a QR", tr: "QR hazırla", ar: "جهّز QR", ru: "Сделать QR" },
   erase: { az: "Fon sil", en: "Remove background", tr: "Arka plan sil", ar: "احذف الخلفية", ru: "Удалить фон" },
@@ -86,7 +86,7 @@ export function barItems(lang: Lang): Record<BarGroup, ReactElement[]> {
                   <b>{BAR.qr[lang]}</b>
                 </span>
               </a>,
-              <a key="/audio" className="nx-ai-bar nx-qr-bar" href={localeHref(lang, "/audio")}>
+              <a key="/audio" className="nx-ai-bar nx-qr-bar" data-testid="home-audio-editor" href={localeHref(lang, "/audio")}>
                 <svg className="nx-job nx-job-audio" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M4 14v-2a8 8 0 0 1 16 0v2" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
                   <path d="M4 14h3v6H5.4A1.4 1.4 0 0 1 4 18.6zM20 14h-3v6h1.6a1.4 1.4 0 0 0 1.4-1.4z" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
