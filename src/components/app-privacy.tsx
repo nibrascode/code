@@ -124,36 +124,35 @@ const PENDING: Record<string, Record<Lang, Policy>> = {
   "nibras-plans": pending("Nibras Plans"),
 };
 
+type PolicyTable = Partial<Record<Lang, { title: string; updated: string; paragraphs: readonly string[] }>>;
+
+function pickPolicy(table: PolicyTable | undefined, lang: Lang): Policy | undefined {
+  const row = table?.[lang] ?? table?.en;
+  if (!row) return undefined;
+  return { title: row.title, updated: row.updated, paragraphs: [...row.paragraphs] };
+}
+
 export function AppPrivacyView({ slug, rows }: { slug: string; rows: StudioPrivacyRow[] }) {
   const { lang } = useI18n();
   // Nibras PDF / QR / Docs ship policy with the code so the page always matches
   // the released app; studio rows apply to other apps.
   const codePolicy = slug === "nibras-pdf" || slug === "nibras-qr" || slug === "nibras-docs" || slug === "nibras-scan" || slug === "nibras-note" || slug === "nibras-nova" || slug === "nibras-plans" || slug === "mushafuk" || slug === "nibras-terminal";
   const live = codePolicy ? undefined : rows.find((row) => row.slug === slug && row.lang === lang);
+  const bundled: Record<string, PolicyTable> = {
+    "nibras-pdf": PDF_PRIVACY,
+    "nibras-scan": SCAN_PRIVACY,
+    "nibras-note": NOTE_PRIVACY,
+    "nibras-nova": NOVA_PRIVACY,
+    "nibras-plans": PLANS_PRIVACY,
+    mushafuk: MUSHAFUK_PRIVACY,
+    "nibras-terminal": TERMINAL_PRIVACY,
+    "nibras-docs": DOCS_PRIVACY,
+    "nibras-qr": { az: QR_PRIVACY.az, en: QR_PRIVACY.en },
+  };
   const fallback =
-    slug === "nibras-pdf"
-      ? PDF_PRIVACY[lang]
-      : slug === "nibras-scan"
-        ? SCAN_PRIVACY[lang]
-      : slug === "nibras-note"
-        ? NOTE_PRIVACY[lang]
-      : slug === "nibras-nova"
-        ? NOVA_PRIVACY[lang]
-      : slug === "nibras-plans"
-        ? PLANS_PRIVACY[lang]
-      : slug === "mushafuk"
-        ? MUSHAFUK_PRIVACY[lang]
-      : slug === "nibras-terminal"
-        ? TERMINAL_PRIVACY[lang]
-      : slug === "nibras-docs"
-        ? DOCS_PRIVACY[lang]
-        : slug === "nibras-qr"
-          ? lang === "az"
-            ? QR_PRIVACY.az
-            : QR_PRIVACY.en
-          : slug === "nibras-arabic"
-            ? ARABIC_PRIVACY
-            : (PENDING[slug]?.[lang] ?? null);
+    slug === "nibras-arabic"
+      ? ARABIC_PRIVACY
+      : (pickPolicy(bundled[slug], lang) ?? pickPolicy(PENDING[slug], lang) ?? null);
   const copy = live
     ? {
         title: live.title,
